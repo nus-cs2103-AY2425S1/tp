@@ -7,7 +7,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.sellsavvy.commons.util.ToStringBuilder;
+import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.tag.Tag;
 
@@ -78,6 +80,13 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns the order list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Order> getOrderUnmodifiableObservableList() {
+        return orders.asUnmodifiableObservableList();
     }
 
     /**
