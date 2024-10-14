@@ -40,8 +40,6 @@ public class AddTaskCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        requireNonNull(model);
-
         if (target.getZeroBased() >= model.getFilteredPersonList().size()) {
             throw new CommandException(MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }

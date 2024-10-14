@@ -133,17 +133,59 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person and tasks associated to that person from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
+* Deletes the person and task associated to that person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find john doe` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Adding a task : `addtask`
+
+Adds a task to a person in the address book.
+
+Format: `addtask INDEX d/DESCRIPTION`
+
+* Adds a task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `addtask 2 d/Eat paracetamol 1000mg` adds a task to the 2nd person in the address book.
+* `find John doe` followed by `addtask 1 d/Clear diapers` deletes the 1st person in the results of the `find` command.
+![Person List](images/PersonListExample.png)
+![Task List](images/TaskListExample.png)
+
+### Deleting a task : `deletetask`
+
+Deletes a task to a person in the address book.
+
+Format: `deletetask INDEX`
+
+* Deletes a task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `deletetask 1` deletes the 1st task in the task list.
+
+### Adding emergency contact : `emergency`
+
+Adds an emergency contact and details to a person in the address book.
+
+Format: `emergency INDEX n/EMERGENCY_CONTACT_NAME p/EMERGENCY_CONTACT_NUMBER`
+
+* Adds an emergency contact and details at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `emergency 1 n/tom tan p/91237171` adds an emergency contact `tom tan` with contact number `91237171` to 1st index in person list.
 
 ### Clearing all entries : `clear`
 
