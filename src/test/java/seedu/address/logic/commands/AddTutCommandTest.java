@@ -208,6 +208,16 @@ public class AddTutCommandTest {
         public void deleteStudent(Student target) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasTutorialClass(TutorialClass tutorialClass) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTutorial(TutorialClass tutorialClass) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -70,6 +70,10 @@ public class Tut {
                     .orElse(null); // Returns null if no student is found
     }
 
+    public TutorialClass getTutorialClass() {
+        return tutorialClass;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
