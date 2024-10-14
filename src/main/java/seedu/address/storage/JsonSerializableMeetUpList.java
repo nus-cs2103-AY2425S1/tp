@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.MeetUpList;
 import seedu.address.model.ReadOnlyMeetUpList;
+import seedu.address.model.meetup.MeetUp;
 
 /**
  * An Immutable MeetUpList that is serializable to JSON format.
@@ -17,16 +18,16 @@ import seedu.address.model.ReadOnlyMeetUpList;
 @JsonRootName(value = "meetuplist")
 class JsonSerializableMeetUpList {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_MEETUP = "Meet up list contains duplicate meet up(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedMeetUp> meetUps = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableMeetUpList} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableMeetUpList(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableMeetUpList(@JsonProperty("meetUps") List<JsonAdaptedMeetUp> meetUps) {
+        this.meetUps.addAll(meetUps);
     }
 
     /**
@@ -45,17 +46,17 @@ class JsonSerializableMeetUpList {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public MeetUpList toModelType() throws IllegalValueException {
-        return null;
-        // TODO
-        // MeetUpList addressBook = new MeetUpList();
-        // for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-        //     Person person = jsonAdaptedPerson.toModelType();
-        //     if (addressBook.hasPerson(person)) {
-        //         throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
-        //     }
-        //     addressBook.addPerson(person);
-        // }
-        // return addressBook;
+        MeetUpList meetUpList = new MeetUpList();
+        for (JsonAdaptedMeetUp jsonAdaptedMeetUp : meetUps) {
+            MeetUp meetUp = jsonAdaptedMeetUp.toModelType();
+
+            // TODO
+            // if (meetUpList.hasMeetUp(meetUp)) {
+            //     throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            // }
+            meetUpList.addMeetUp(meetUp);
+        }
+        return meetUpList;
     }
 
 }

@@ -8,9 +8,12 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.ModelManager;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
+import java.util.logging.Logger;
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
  * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
@@ -23,6 +26,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  * @see Person#isSamePerson(Person)
  */
 public class UniquePersonList implements Iterable<Person> {
+    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
