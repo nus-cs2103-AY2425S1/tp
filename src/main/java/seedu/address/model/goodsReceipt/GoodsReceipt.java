@@ -34,9 +34,6 @@ public class GoodsReceipt {
      * @param isDelivered A boolean indicating whether the goods have been delivered.
      * @param quantity The quantity of goods in this receipt.
      * @param price The price of the goods in this receipt.
-     * @throws NullPointerException If any of the required arguments (goods, quantity, procurementDate,
-     * arrivalDate, isDelivered) are null.
-     * @throws IllegalArgumentException If the procurement date is invalid.
      */
     public GoodsReceipt(Goods goods, Name supplierName, Date procurementDate, Date arrivalDate,
                         boolean isDelivered, int quantity, double price) {
