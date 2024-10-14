@@ -1,6 +1,11 @@
 package seedu.address.model.job;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Tag;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Represents a Job Listing in the address book.
@@ -9,20 +14,21 @@ public class Job {
     private final JobName name;
     private final JobCompany company;
     private final JobSalary salary;
-    private final JobRequirements requirements;
     private final JobDescription description;
+    private final Set<Tag> requirements = new HashSet<>();
 
     /**
      * TODO: Implement data validation
+     * TODO: What is meant by this ah ^^?
      * Every field has no validation for now.
      */
-    public Job(JobName name, JobCompany company, JobSalary salary, JobRequirements requirements,
-            JobDescription description) {
+    public Job(JobName name, JobCompany company, JobSalary salary,
+            JobDescription description, Set<Tag> requirements) {
         this.name = name;
         this.company = company;
         this.salary = salary;
-        this.requirements = requirements;
         this.description = description;
+        this.requirements.addAll(requirements);
     }
 
     public JobName getName() {
@@ -37,12 +43,16 @@ public class Job {
         return salary;
     }
 
-    public JobRequirements getRequirements() {
-        return requirements;
-    }
-
     public JobDescription getDescription() {
         return description;
+    }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getRequirements() {
+        return Collections.unmodifiableSet(requirements);
     }
 
     /** Returns true if both jobs have the same name and company. */
@@ -78,8 +88,8 @@ public class Job {
         return new ToStringBuilder(this).add("name", name)
                                         .add("company", company)
                                         .add("salary", salary)
-                                        .add("requirements", requirements)
                                         .add("description", description)
+                                        .add("requirements", requirements)
                                         .toString();
     }
 }
