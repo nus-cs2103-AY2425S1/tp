@@ -50,6 +50,7 @@ public class MarkAttendanceCommand extends Command {
         Person markedPerson = new Person(
                 personToMarkAttendance.getName(), personToMarkAttendance.getPhone(),
                 personToMarkAttendance.getEmail(), personToMarkAttendance.getAddress(),
+                personToMarkAttendance.getPayment(),
                 personToMarkAttendance.getTags());
 
         model.setPerson(personToMarkAttendance, markedPerson);
