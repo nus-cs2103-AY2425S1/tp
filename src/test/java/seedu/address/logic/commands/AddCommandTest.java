@@ -22,7 +22,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
