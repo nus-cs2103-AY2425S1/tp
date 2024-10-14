@@ -44,6 +44,19 @@ public class Claim {
     }
 
     /**
+     * Constructs a claim object based on claim id only. This constructor is used, usually during deletion of claims.
+     * The {@code isOpen} and {@code claimAmount} attributes are set to default values, but they are not relevant as
+     * claims are deleted solely based on the claim id.
+     *
+     * @param claimId     claim id obtained through official channels.
+     */
+    public Claim(String claimId) {
+        this.claimId = claimId;
+        this.isOpen = true;
+        this.claimAmount = 0;
+    }
+
+    /**
      * Checks if the claim id is valid based on preset notations.
      * Regular expression pattern:
      * ^ - start of the string

@@ -21,6 +21,8 @@ public class InsurancePlansManager {
             + "has not been added to this client: %2$s";
     public static final String DUPLICATE_CLAIM_ID_MESSAGE = "This claim with id: %1$s "
             + "has already been added to this client: %2$s";
+    public static final String CLAIM_NOT_DETECTED_MESSAGE = "This claim with id: %1$s "
+            + "has not been added to this client: %2$s";
 
     private final ArrayList<InsurancePlan> insurancePlans;
     private final HashSet<String> claimIds;
@@ -128,6 +130,34 @@ public class InsurancePlansManager {
                 p.claims.add(claim);
                 this.claimIds.add(claim.getClaimId());
             }
+        }
+    }
+
+    /**
+     * Deletes a claim from the insurance plan of the client.
+     *
+     * @param insurancePlan The insurance plan the claim is to be deleted from.
+     * @param claim         The claim that is to be deleted from the insurance plan.
+     */
+    public void deleteClaimFromInsurancePlan(InsurancePlan insurancePlan, Claim claim) {
+        for (InsurancePlan p : insurancePlans) {
+            if (p.equals(insurancePlan)) {
+                p.claims.remove(claim);
+                this.claimIds.remove(claim.getClaimId());
+            }
+        }
+    }
+
+    /**
+     * Checks if the claim being queried is already owned by the client.
+     *
+     * @param insurancePlan The insurance plan the claim is to be added to.
+     * @param claim         The claim to be checked if it exists under the insurance plan.
+     * @throws ClaimException if the claimId does not exist.
+     */
+    public void checkIfClaimOwned(InsurancePlan insurancePlan, Claim claim) throws ClaimException {
+        if (!this.claimIds.contains(claim.getClaimId())) {
+            throw new ClaimException(CLAIM_NOT_DETECTED_MESSAGE);
         }
     }
 
