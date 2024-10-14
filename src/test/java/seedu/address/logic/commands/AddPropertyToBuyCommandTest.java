@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -46,5 +47,30 @@ public class AddPropertyToBuyCommandTest {
 
         assertThrows(CommandException.class, () -> command.execute(model),
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals() {
+        Property differentProperty = new PropertyBuilder().withPostalCode("654321").build();
+        AddPropertyToBuyCommand commandWithSameValues = new AddPropertyToBuyCommand(indexWithoutProperty,
+                property);
+        AddPropertyToBuyCommand commandWithDifferentProperty = new AddPropertyToBuyCommand(indexWithoutProperty,
+                differentProperty);
+        AddPropertyToBuyCommand commandWithDifferentIndex = new AddPropertyToBuyCommand(indexWithProperty, property);
+
+        // same object -> returns true
+        assertEquals(commandWithSameValues, commandWithSameValues);
+
+        // same values -> returns true
+        assertEquals(commandWithSameValues, new AddPropertyToBuyCommand(indexWithoutProperty, property));
+
+        // different types -> returns false
+        assertNotEquals(commandWithSameValues, 1);
+
+        // null -> returns false
+        assertNotEquals(commandWithSameValues, null);
+
+        // different property -> returns false
+        assertNotEquals(commandWithSameValues, commandWithDifferentProperty);
     }
 }
