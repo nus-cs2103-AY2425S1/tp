@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.sellsavvy.commons.core.index.Index;
+import seedu.sellsavvy.commons.util.ToStringBuilder;
 import seedu.sellsavvy.logic.Messages;
 import seedu.sellsavvy.logic.commands.Command;
 import seedu.sellsavvy.logic.commands.CommandResult;
@@ -47,6 +48,28 @@ public class ListOrderCommand extends Command {
         Person selectedPerson = lastShownList.get(index.getZeroBased());
         model.updateSelectedPerson(selectedPerson);
         return new CommandResult(String.format(MESSAGE_LIST_ORDER_SUCCESS, selectedPerson.getName().fullName));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ListOrderCommand)) {
+            return false;
+        }
+
+        ListOrderCommand otherListOrderCommand = (ListOrderCommand) other;
+        return index.equals(otherListOrderCommand.index);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("index", index)
+                .toString();
     }
 
 }
