@@ -6,7 +6,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.meetup.*;
+import seedu.address.model.meetup.MeetUp;
+import seedu.address.model.meetup.MeetUpFrom;
+import seedu.address.model.meetup.MeetUpInfo;
+import seedu.address.model.meetup.MeetUpName;
+import seedu.address.model.meetup.MeetUpTo;
 
 /**
  * Jackson-friendly version of {@link MeetUp}.

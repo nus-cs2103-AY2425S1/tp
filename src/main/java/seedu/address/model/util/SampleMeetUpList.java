@@ -7,7 +7,11 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.MeetUpList;
 import seedu.address.model.ReadOnlyMeetUpList;
-import seedu.address.model.meetup.*;
+import seedu.address.model.meetup.MeetUp;
+import seedu.address.model.meetup.MeetUpFrom;
+import seedu.address.model.meetup.MeetUpInfo;
+import seedu.address.model.meetup.MeetUpName;
+import seedu.address.model.meetup.MeetUpTo;
 import seedu.address.model.tag.Tag;
 
 
