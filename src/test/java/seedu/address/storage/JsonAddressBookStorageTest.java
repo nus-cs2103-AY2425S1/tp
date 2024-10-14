@@ -86,7 +86,7 @@ public class JsonAddressBookStorageTest {
         assertEquals(original, new AddressBook(readBack));
 
         // Archive the file and read back to compare
-        jsonAddressBookStorage.saveAddressBook(original,filePath);
+        jsonAddressBookStorage.saveAddressBook(original, filePath);
         jsonAddressBookStorage.saveArchivedAddressBook(original, archivePath);
         ReadOnlyAddressBook readBackArchive = jsonAddressBookStorage.readAddressBook(archivePath).get();
         assertEquals(original, new AddressBook(readBackArchive));
