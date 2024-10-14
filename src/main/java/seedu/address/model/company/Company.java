@@ -1,20 +1,21 @@
-package seedu.address.model.person;
+package seedu.address.model.company;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Tag;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
- * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents a Company in the address book.
+ * Guarantees: details are present and not null, field values are validated,
+ * immutable.
  */
-public class Person {
+public class Company {
 
     // Identity fields
     private final Name name;
@@ -29,7 +30,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -56,7 +57,8 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable tag set, which throws
+     * {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
@@ -64,20 +66,20 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both company have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameCompany(Company otherCompany) {
+        if (otherCompany == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherCompany != null
+                && otherCompany.getName().equals(getName());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
+     * Returns true if both companies have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
     @Override
@@ -91,12 +93,12 @@ public class Person {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+        Company otherCompany = (Company) other;
+        return name.equals(otherCompany.name)
+                && phone.equals(otherCompany.phone)
+                && email.equals(otherCompany.email)
+                && address.equals(otherCompany.address)
+                && tags.equals(otherCompany.tags);
     }
 
     @Override
