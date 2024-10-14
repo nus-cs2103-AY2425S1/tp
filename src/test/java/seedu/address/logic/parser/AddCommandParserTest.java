@@ -102,7 +102,7 @@ public class AddCommandParserTest {
                 validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY
                         + ADDRESS_DESC_AMY + TELEGRAM_DESC_AMY
                         + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_GITHUB, PREFIX_ADDRESS,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_GITHUB,
                         PREFIX_EMAIL, PREFIX_PHONE, PREFIX_TELEGRAM));
 
         // invalid value followed by valid value
