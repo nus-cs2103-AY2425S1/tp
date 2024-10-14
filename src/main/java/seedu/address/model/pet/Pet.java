@@ -2,9 +2,13 @@ package seedu.address.model.pet;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Pet in the address book.
@@ -19,16 +23,20 @@ public class Pet {
     private final Age age;
     private final Sex sex;
 
+    // Data fields
+    private final Set<Tag> tags = new HashSet<>();
+
     /**
      * Every field must be present and not null.
      */
-    public Pet(Name name, Species species, Breed breed, Age age, Sex sex) {
+    public Pet(Name name, Species species, Breed breed, Age age, Sex sex, Set<Tag> modelTags) {
         requireAllNonNull(name, species, breed, age, sex);
         this.name = name;
         this.species = species;
         this.breed = breed;
         this.age = age;
         this.sex = sex;
+        this.tags.addAll(tags);
     }
 
     public Name getName() {
@@ -51,6 +59,13 @@ public class Pet {
         return sex;
     }
 
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
+    }
 
     /**
      * Returns true if both pets have the same ID.
@@ -81,11 +96,11 @@ public class Pet {
         }
 
         Pet otherPet = (Pet) other;
-        return name.equals(otherPet.name)
-                && species.equals(otherPet.species)
-                && breed.equals(otherPet.breed)
-                && age.equals(otherPet.age)
-                && sex.equals(otherPet.sex);
+        return name.equals(otherPet.getName())
+                && species.equals(otherPet.getSpecies())
+                && breed.equals(otherPet.getBreed())
+                && age.equals(otherPet.getAge())
+                && sex.equals(otherPet.getSex());
     }
 
     @Override

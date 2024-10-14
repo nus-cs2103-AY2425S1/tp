@@ -8,8 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.pet.exceptions.DuplicatePetException;
-import seedu.address.model.pet.exceptions.PetNotFoundException;
+import seedu.address.model.pet.exceptions.*;
 
 /**
  * A list of pets that enforces uniqueness between its elements and does not allow nulls.

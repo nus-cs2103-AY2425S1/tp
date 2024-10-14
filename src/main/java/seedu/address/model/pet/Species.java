@@ -13,7 +13,7 @@ public class Species {
             "Species should only contain alphabetic characters, should be a single word, and it should not be blank";
     public static final String VALIDATION_REGEX = "[a-zA-Z]+";
 
-    public final String species;
+    public final String value;
 
     /**
      * Constructs a {@code Species}.
@@ -23,7 +23,7 @@ public class Species {
     public Species(String species) {
         requireNonNull(species);
         checkArgument(isValidSpecies(species), MESSAGE_CONSTRAINTS);
-        this.species = species;
+        value = species;
     }
 
     /**
@@ -35,7 +35,7 @@ public class Species {
 
     @Override
     public String toString() {
-        return species;
+        return value;
     }
 
     @Override
@@ -50,12 +50,12 @@ public class Species {
         }
 
         Species otherSpecies = (Species) other;
-        return species.equals(otherSpecies.species);
+        return value.equals(otherSpecies.value);
     }
 
     @Override
     public int hashCode() {
-        return species.hashCode();
+        return value.hashCode();
     }
 
 }

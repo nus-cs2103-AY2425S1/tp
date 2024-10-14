@@ -13,7 +13,7 @@ public class Sex {
             "Pet sex should be either 'M' or 'F' (case insensitive for Male and Female)";
     public static final String VALIDATION_REGEX = "^[mMfF]$";
 
-    public final String sex;
+    public final String value;
 
     /**
      * Constructs a {@code Sex}.
@@ -23,7 +23,7 @@ public class Sex {
     public Sex(String sex) {
         requireNonNull(sex);
         checkArgument(isValidSex(sex), MESSAGE_CONSTRAINTS);
-        this.sex = sex;
+        value = sex;
     }
 
     /**
@@ -35,7 +35,7 @@ public class Sex {
 
     @Override
     public String toString() {
-        return sex;
+        return value;
     }
 
     @Override
@@ -50,12 +50,12 @@ public class Sex {
         }
 
         Sex otherSex = (Sex) other;
-        return sex.equals(otherSex.sex);
+        return value.equals(otherSex.value);
     }
 
     @Override
     public int hashCode() {
-        return sex.hashCode();
+        return value.hashCode();
     }
 
 }

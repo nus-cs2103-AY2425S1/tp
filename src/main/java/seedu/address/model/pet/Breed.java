@@ -11,9 +11,9 @@ public class Breed {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Breeds should only contain alphanumeric characters, spaces, or hyphens, and it should not be blank";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} \\-]*";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}[\\p{Alnum} \\-]*";
 
-    public final String breed;
+    public final String value;
 
     /**
      * Constructs a {@code Breed}.
@@ -23,7 +23,7 @@ public class Breed {
     public Breed(String breed) {
         requireNonNull(breed);
         checkArgument(isValidBreed(breed), MESSAGE_CONSTRAINTS);
-        this.breed = breed;
+        value = breed;
     }
 
     /**
@@ -35,7 +35,7 @@ public class Breed {
 
     @Override
     public String toString() {
-        return breed;
+        return value;
     }
 
     @Override
@@ -50,12 +50,12 @@ public class Breed {
         }
 
         Breed otherBreed = (Breed) other;
-        return breed.equals(otherBreed.breed);
+        return value.equals(otherBreed.value);
     }
 
     @Override
     public int hashCode() {
-        return breed.hashCode();
+        return value.hashCode();
     }
 
 }

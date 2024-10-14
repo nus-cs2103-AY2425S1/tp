@@ -10,8 +10,7 @@ import seedu.address.model.owner.Owner;
 import seedu.address.model.owner.UniqueOwnerList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.pet.Pet;
-import seedu.address.model.pet.UniquePetList;
+import seedu.address.model.pet.*;
 
 /**
  * Wraps all data at the address-book level

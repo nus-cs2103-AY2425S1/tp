@@ -10,12 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.pet.Age;
-import seedu.address.model.pet.Breed;
-import seedu.address.model.pet.Name;
-import seedu.address.model.pet.Pet;
-import seedu.address.model.pet.Sex;
-import seedu.address.model.pet.Species;
+import seedu.address.model.pet.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -53,7 +48,7 @@ class JsonAdaptedPet {
      * Converts a given {@code Pet} into this class for Jackson use.
      */
     public JsonAdaptedPet(Pet source) {
-        name = source.getName().fullName;
+        name = source.getName().name;
         species = source.getSpecies().value;
         breed = source.getBreed().value;
         age = source.getAge().value;
@@ -85,7 +80,7 @@ class JsonAdaptedPet {
         if (species == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Species.class.getSimpleName()));
         }
-        if (!Species.isValidPhone(species)) {
+        if (!Species.isValidSpecies(species)) {
             throw new IllegalValueException(Species.MESSAGE_CONSTRAINTS);
         }
         final Species modelSpecies = new Species(species);
@@ -93,7 +88,7 @@ class JsonAdaptedPet {
         if (breed == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Breed.class.getSimpleName()));
         }
-        if (!Breed.isValidEmail(breed)) {
+        if (!Breed.isValidBreed(breed)) {
             throw new IllegalValueException(Breed.MESSAGE_CONSTRAINTS);
         }
         final Breed modelBreed = new Breed(breed);
@@ -101,7 +96,7 @@ class JsonAdaptedPet {
         if (age == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Age.class.getSimpleName()));
         }
-        if (!Age.isValidAddress(age)) {
+        if (!Age.isValidAge(age)) {
             throw new IllegalValueException(Age.MESSAGE_CONSTRAINTS);
         }
         final Age modelAge = new Age(age);
@@ -109,7 +104,7 @@ class JsonAdaptedPet {
         if (sex == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Sex.class.getSimpleName()));
         }
-        if (!Sex.isValidAddress(sex)) {
+        if (!Sex.isValidSex(sex)) {
             throw new IllegalValueException(Sex.MESSAGE_CONSTRAINTS);
         }
         final Sex modelSex = new Sex(sex);

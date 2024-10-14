@@ -11,7 +11,7 @@ public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters, spaces, or hyphens, and it should not be blank";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} \\-]*";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}[\\p{Alnum} \\-]*";
 
     public final String name;
 
