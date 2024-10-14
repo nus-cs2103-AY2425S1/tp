@@ -49,6 +49,22 @@ public class UniqueSupplierList implements Iterable<Supplier> {
         internalList.add(toAdd);
     }
 
+    public void setSuppliers(UniqueSupplierList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
+    /**
+     * Replaces the contents of this list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setSuppliers(List<Supplier> suppliers) {
+        requireAllNonNull(suppliers);
+        if (!suppliersAreUnique(suppliers)) {
+            throw new DuplicateSupplierException();
+        }
+
+        internalList.setAll(suppliers);
+    }
     /**
      * Replaces the person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the list.
@@ -80,10 +96,6 @@ public class UniqueSupplierList implements Iterable<Supplier> {
         }
     }
 
-    public void setSuppliers(UniqueSupplierList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
 
     /**
      * Replaces the contents of this list with {@code persons}.

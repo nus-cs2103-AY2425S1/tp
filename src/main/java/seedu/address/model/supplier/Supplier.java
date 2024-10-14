@@ -55,6 +55,9 @@ public class Supplier {
     public Product getProduct() {
         return product;
     }
+    public SupplierStatus getSupplierStatus() {
+        return status;
+    }
 
     /**
      * Returns true if both persons have the same name.

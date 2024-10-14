@@ -125,10 +125,6 @@ public interface Model {
      */
     void updateFilteredDeliveryList(Predicate<Delivery> predicate);
 
-    /**
-     * Returns an unmodifiable view of the filtered supplier list
-     */
-    ObservableList<Supplier> getFilteredSupplierList();
 
     /**
      * Deletes the given supplier.
@@ -150,4 +146,8 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredSupplierList(Predicate<Supplier> predicate);
+    /**
+     * Returns an unmodifiable view of the filtered supplier list
+     */
+    ObservableList<Supplier> getFilteredSupplierList();
 }
