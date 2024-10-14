@@ -88,7 +88,7 @@ public class Person {
 
     public boolean isClash(Person otherPerson) {
         if (otherPerson == this) {
-            return true;
+            return false;
         }
 
         return otherPerson != null && otherPerson.getSchedule().equals(getSchedule());

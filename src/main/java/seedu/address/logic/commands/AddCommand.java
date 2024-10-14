@@ -67,11 +67,12 @@ public class AddCommand extends Command {
 
         model.addPerson(toAdd);
         long clashes = model.checkClashes(toAdd);
-        if (clashes == 0) {
+        if (clashes == 1) {
             return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
         } else {
             return new CommandResult(
-                    String.format(MESSAGE_SUCCESS + MESSAGE_HAS_CLASHES, Messages.format(toAdd), clashes)
+                    String.format(MESSAGE_SUCCESS, Messages.format(toAdd))
+                    + String.format(MESSAGE_HAS_CLASHES, clashes)
             );
         }
 

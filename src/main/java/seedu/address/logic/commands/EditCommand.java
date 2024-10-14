@@ -61,6 +61,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_HAS_CLASHES = "\n You have %d other students on the same schedule";
+
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -95,7 +97,16 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        long clashes = model.checkClashes(editedPerson);
+        if (clashes == 1) {
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        } else {
+            return new CommandResult(
+                    String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson))
+                            + String.format(MESSAGE_HAS_CLASHES, clashes)
+            );
+        }
+
     }
 
     /**
