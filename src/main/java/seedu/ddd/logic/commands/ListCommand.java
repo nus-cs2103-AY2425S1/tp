@@ -20,6 +20,8 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all contacts.\n";
+
     public static final String TAG_MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_TAG
             + " : All contacts that match any of "
             + "the specified tags (case-insensitive) will be displayed as a list with index numbers.\n"

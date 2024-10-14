@@ -12,8 +12,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
-    public static final Prefix PREFIX_CLIENT = new Prefix("-c");
-    public static final Prefix PREFIX_VENDOR = new Prefix("-v");
+    public static final Prefix PREFIX_CLIENT = new Prefix("client");
+    public static final Prefix PREFIX_VENDOR = new Prefix("vendor");
     public static final Prefix PREFIX_DATE = new Prefix("d/");
     public static final Prefix PREFIX_SERVICE = new Prefix("s/");
     public static final Prefix PREFIX_ID = new Prefix("id/");
