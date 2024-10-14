@@ -30,6 +30,9 @@ public class UniqueLessonList implements Iterable<Lesson> {
 
     /**
      * Returns true if the list contains an equivalent lesson as the given argument.
+     *
+     * @param toCheck The lesson to check for overlap in the list.
+     * @return True if a lesson in the list overlaps with the given lesson, false otherwise.
      */
     public boolean contains(Lesson toCheck) {
         requireNonNull(toCheck);
@@ -39,6 +42,10 @@ public class UniqueLessonList implements Iterable<Lesson> {
     /**
      * Adds a lesson to the list.
      * The lesson must not already exist in the list.
+     *
+     * @param toAdd The lesson to add.
+     * @throws NullPointerException if {@code toAdd} is null.
+     * @throws OverlappingLessonException if the lesson overlaps with an existing lesson in the list.
      */
     public void add(Lesson toAdd) {
         requireNonNull(toAdd);
@@ -49,8 +56,10 @@ public class UniqueLessonList implements Iterable<Lesson> {
     }
 
     /**
-     * Removes the equivalent lesson from the list.
-     * The lesson must exist in the list.
+     * Removes the lesson at the specified index from the list.
+     *
+     * @param index The index of the lesson to be removed.
+     * @throws LessonIndexOutOfRange if the index is invalid (less than 0 or greater than the size of the list).
      */
     public void remove(int index) {
         if (!isValidIndex(index)) {
@@ -60,6 +69,13 @@ public class UniqueLessonList implements Iterable<Lesson> {
         }
     }
 
+    /**
+     * Returns the lesson at the specified index in the list.
+     *
+     * @param index The index of the lesson to retrieve.
+     * @return The lesson at the specified index.
+     * @throws LessonIndexOutOfRange if the index is invalid (less than 0 or greater than or equal to the size of the list).
+     */
     public Lesson get(int index) {
         if (!isValidIndex(index)) {
             throw new LessonIndexOutOfRange();
@@ -68,13 +84,22 @@ public class UniqueLessonList implements Iterable<Lesson> {
         }
     }
 
+    /**
+     * Returns the number of lessons in the list.
+     *
+     * @return The number of lessons in the list.
+     */
     public int size() {
         return internalList.size();
     }
 
     /**
-     * Replaces the contents of the lesson list with {@code lessons}.
-     * {@code lessons} must not contain duplicate persons.
+     * Replaces the contents of the lesson list with the specified {@code lessons}.
+     * {@code lessons} must not contain duplicate lessons.
+     *
+     * @param lessons The list of lessons to replace the current list.
+     * @throws NullPointerException if {@code lessons} is null.
+     * @throws OverlappingLessonException if any lessons in the list overlap with each other.
      */
     public void setLessons(List<Lesson> lessons) {
         requireNonNull(lessons);
@@ -86,6 +111,10 @@ public class UniqueLessonList implements Iterable<Lesson> {
 
     /**
      * Checks if the index is valid.
+     *
+     * @param index The index to check.
+     * @return True if the index is within bounds (greater than or equal to 0 and less than the size of the
+     * list), false otherwise.
      */
     public boolean isValidIndex(int index) {
         // index is 0-based
@@ -94,6 +123,8 @@ public class UniqueLessonList implements Iterable<Lesson> {
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
+     *
+     * @return An unmodifiable {@code ObservableList} of lessons.
      */
     public ObservableList<Lesson> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
@@ -101,6 +132,9 @@ public class UniqueLessonList implements Iterable<Lesson> {
 
     /**
      * Returns true if {@code lessons} contains only non-overlapping lessons.
+     *
+     * @param lessons The list of lessons to check for uniqueness.
+     * @return True if all lessons in the list do not overlap with any other, false if any two lessons overlap.
      */
     public boolean lessonsAreUnique(List<Lesson> lessons) {
         for (int i = 0; i < lessons.size() - 1; i++) {
