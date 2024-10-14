@@ -1,36 +1,41 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.DeleteStudentCommand;
+import seedu.address.logic.commands.DeleteStudentFromGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.StudentNumber;
 
 /**
  * Parses input arguments and creates a new DeleteStudentCommand object
  */
-public class DeleteStudentCommandParser implements Parser<DeleteStudentCommand> {
-
+public class DeleteStudentFromGroupCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteStudentCommand
      * and returns a DeleteStudentCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DeleteStudentCommand parse(String args) throws ParseException {
+    public DeleteStudentFromGroupCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NUMBER);
+                ArgumentTokenizer.tokenize(args, PREFIX_GROUP_NAME, PREFIX_STUDENT_NUMBER);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_NUMBER)
+                || !arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteStudentFromGroupCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NUMBER);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_GROUP_NAME);
         StudentNumber studentNumber = ParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
-        return new DeleteStudentCommand(studentNumber);
+        GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
+        return new DeleteStudentFromGroupCommand(groupName, studentNumber);
     }
 
     /**

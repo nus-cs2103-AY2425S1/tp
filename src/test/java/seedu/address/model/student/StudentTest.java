@@ -89,7 +89,7 @@ public class StudentTest {
         String expected =
             Student.class.getCanonicalName() + "{name=" + ALICE.getName() + ", email=" + ALICE.getEmail()
                 + ", tags=" + ALICE.getTags() + ", student number=" + ALICE.getStudentNumber()
-                + ", group=" + ALICE.getGroup().orElse("") + "}";
+                + ", group=" + ALICE.getGroup().orElse(null) + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

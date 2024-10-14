@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.group.Group;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,7 +25,7 @@ public class Student {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-    private final Optional<String> group;
+    private final Optional<Group> group;
 
     /**
      * Every field must be present and not null.
@@ -41,7 +42,7 @@ public class Student {
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Email email, Set<Tag> tags, StudentNumber studentNumber, Optional<String> group) {
+    public Student(Name name, Email email, Set<Tag> tags, StudentNumber studentNumber, Optional<Group> group) {
         requireAllNonNull(name, email, tags, studentNumber, group);
         this.name = name;
         this.email = email;
@@ -62,9 +63,10 @@ public class Student {
         return studentNumber;
     }
 
-    public Optional<String> getGroup() {
+    public Optional<Group> getGroup() {
         return group;
     }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -87,6 +89,13 @@ public class Student {
             && otherStudent.getStudentNumber().equals(getStudentNumber())
             && otherStudent.getName().toString().toLowerCase().equals(getName().toString().toLowerCase());
 
+    }
+
+    /**
+     * Returns a copy of studnet which has no group
+     */
+    public Student removeGroup() {
+        return new Student(name, email, tags, studentNumber, Optional.empty());
     }
 
     /**
@@ -124,7 +133,7 @@ public class Student {
             .add("email", email)
             .add("tags", tags)
             .add("student number", studentNumber)
-            .add("group", group.orElse(""))
+            .add("group", group.orElse(null))
             .toString();
     }
 

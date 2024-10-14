@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.State;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
 
 /**
@@ -90,12 +91,6 @@ public interface Model {
     boolean hasGroup(Group group);
 
     /**
-     * Deletes the given group.
-     * The group must exist in the address book.
-     */
-    void deleteGroup(Group group);
-
-    /**
      * Adds the given group.
      * {@code group} must not already exist in the address book.
      */
@@ -133,4 +128,10 @@ public interface Model {
     void setStateGroups();
 
     State getState();
+
+    Group findGroup(GroupName groupName);
+
+    boolean containsGroupName(GroupName groupName);
+
+    void deleteStudentFromGroup(Group group, Student student);
 }

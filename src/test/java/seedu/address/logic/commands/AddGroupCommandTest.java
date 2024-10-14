@@ -46,7 +46,7 @@ public class AddGroupCommandTest {
         CommandResult commandResult = new AddGroupCommand(validGroup).execute(modelStub);
 
         assertEquals(String.format(AddGroupCommand.MESSAGE_SUCCESS, Messages.format(validGroup)),
-            commandResult.getFeedbackToUser());
+                commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validGroup), modelStub.groupsAdded);
     }
 
@@ -57,7 +57,7 @@ public class AddGroupCommandTest {
         ModelStub modelStub = new ModelStubWithGroup(validGroup);
 
         assertThrows(CommandException.class, AddGroupCommand.MESSAGE_DUPLICATE_GROUP, () ->
-            addGroupCommand.execute(modelStub));
+                addGroupCommand.execute(modelStub));
     }
 
     @Test
@@ -100,11 +100,6 @@ public class AddGroupCommandTest {
         @Override
         public boolean hasGroup(Group group) {
             throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteGroup(Group group) {
-
         }
 
         @Override
@@ -209,6 +204,21 @@ public class AddGroupCommandTest {
 
         @Override
         public State getState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Group findGroup(GroupName groupName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean containsGroupName(GroupName groupName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteStudentFromGroup(Group group, Student student) {
             throw new AssertionError("This method should not be called.");
         }
     }
