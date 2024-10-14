@@ -50,11 +50,11 @@ public class PersonUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         if (descriptor.getClientTypes().isPresent()) {
-            Set<ClientType> tags = descriptor.getClientTypes().get();
-            if (tags.isEmpty()) {
+            Set<ClientType> clientTypes = descriptor.getClientTypes().get();
+            if (clientTypes.isEmpty()) {
                 sb.append(PREFIX_CLIENT_TYPE);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_CLIENT_TYPE).append(s.clientTypeName).append(" "));
+                clientTypes.forEach(s -> sb.append(PREFIX_CLIENT_TYPE).append(s.clientTypeName).append(" "));
             }
         }
         return sb.toString();

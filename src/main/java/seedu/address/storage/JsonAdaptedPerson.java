@@ -36,13 +36,13 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("clientTypes") List<JsonAdaptedClientType> tags) {
+            @JsonProperty("clientTypes") List<JsonAdaptedClientType> clientTypes) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        if (tags != null) {
-            this.clientTypes.addAll(tags);
+        if (clientTypes != null) {
+            this.clientTypes.addAll(clientTypes);
         }
     }
 

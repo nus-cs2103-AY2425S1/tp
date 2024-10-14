@@ -17,7 +17,7 @@ public class ClientType {
     /**
      * Constructs a {@code ClientType}.
      *
-     * @param clientTypeName A valid tag name.
+     * @param clientTypeName A valid client type name.
      */
     public ClientType(String clientTypeName) {
         requireNonNull(clientTypeName);
@@ -26,7 +26,7 @@ public class ClientType {
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid client type name.
      */
     public static boolean isValidClientTypeName(String test) {
         return test.matches(VALIDATION_REGEX);

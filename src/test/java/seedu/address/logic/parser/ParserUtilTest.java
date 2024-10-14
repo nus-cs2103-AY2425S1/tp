@@ -166,9 +166,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseClientType_validValueWithWhitespace_returnsTrimmedClientType() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_CLIENT_TYPE_1 + WHITESPACE;
+        String clientTypeWithWhitespace = WHITESPACE + VALID_CLIENT_TYPE_1 + WHITESPACE;
         ClientType expectedClientType = new ClientType(VALID_CLIENT_TYPE_1);
-        assertEquals(expectedClientType, ParserUtil.parseClientType(tagWithWhitespace));
+        assertEquals(expectedClientType, ParserUtil.parseClientType(clientTypeWithWhitespace));
     }
 
     @Test
