@@ -54,17 +54,29 @@ class JsonSerializableAddressBook {
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
-                logger.warning(MESSAGE_DUPLICATE_PERSON + " The following person contact will be discarded:\n"
-                        + "Name: " + person.getName() + "\n" + "Phone: " + person.getPhone() + "\n"
-                        + "Email: " + person.getEmail() + "\n" + "Address: " + person.getAddress() + "\n"
-                        + "Tags: " + person.getTags());
-                continue;
-            }
-            addressBook.addPerson(person);
+            addPersonToAddressBook(jsonAdaptedPerson, addressBook);
         }
         return addressBook;
+    }
+
+    /**
+     * Adds a person to the address book.
+     *
+     * @param jsonAdaptedPerson
+     * @param addressBook
+     * @throws IllegalValueException
+     */
+    private void addPersonToAddressBook(JsonAdaptedPerson jsonAdaptedPerson, AddressBook addressBook)
+            throws IllegalValueException {
+        Person person = jsonAdaptedPerson.toModelType();
+        if (addressBook.hasPerson(person)) {
+            logger.warning(MESSAGE_DUPLICATE_PERSON + " The following person contact will be discarded:\n"
+                    + "Name: " + person.getName() + "\n" + "Phone: " + person.getPhone() + "\n" + "Email: "
+                    + person.getEmail() + "\n" + "Address: " + person.getAddress() + "\n" + "Tags: "
+                    + person.getTags());
+            return;
+        }
+        addressBook.addPerson(person);
     }
 
 }
