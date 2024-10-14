@@ -10,8 +10,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TelegramUsername;
 import seedu.address.model.role.Role;
-import seedu.address.model.role.RoleHandler;
-import seedu.address.model.role.exceptions.InvalidRoleException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -100,10 +98,7 @@ public class PersonBuilder {
         return this;
     }
 
-    //TODO: Add withRoles method ?
-    /**
-     * Adds roles based on a String array of role name Strings
-    */
+
     //    public PersonBuilder withRoles(String ... roles) {
     //        Set<Role> newRoles = new HashSet<>();
     //        for (String role : roles) {

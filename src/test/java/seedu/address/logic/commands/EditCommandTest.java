@@ -179,6 +179,32 @@ public class EditCommandTest {
     }
 
     @Test
+    public void equals_telegramUsernameField() {
+        EditPersonDescriptor descriptorWithTelegram = new EditPersonDescriptorBuilder()
+                .withTelegramUsername("username1").build();
+        EditPersonDescriptor sameDescriptorWithTelegram = new EditPersonDescriptorBuilder()
+                .withTelegramUsername("username1").build();
+        EditPersonDescriptor differentDescriptorWithTelegram = new EditPersonDescriptorBuilder()
+                .withTelegramUsername("username2").build();
+
+        // same values -> returns true
+        assertTrue(descriptorWithTelegram.equals(sameDescriptorWithTelegram));
+
+        // different values -> returns false
+        assertFalse(descriptorWithTelegram.equals(differentDescriptorWithTelegram));
+    }
+
+    @Test
+    public void equals_rolesField() {
+        EditPersonDescriptor descriptorWithRoles = new EditPersonDescriptorBuilder().withRoles("attendee").build();
+        EditPersonDescriptor sameDescriptorWithRoles = new EditPersonDescriptorBuilder().withRoles("attendee").build();
+        EditPersonDescriptor differentDescriptorWithRoles = new EditPersonDescriptorBuilder()
+               .withRoles("sponsor").build();
+
+        assertTrue(descriptorWithRoles.equals(sameDescriptorWithRoles));
+        assertFalse(descriptorWithRoles.equals(differentDescriptorWithRoles));
+    }
+    @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
