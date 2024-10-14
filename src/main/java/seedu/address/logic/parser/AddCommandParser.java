@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WORKEXP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIVERSITY;
 
 import java.util.Set;
@@ -20,6 +21,7 @@ import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.WorkExp;
 import seedu.address.model.person.University;
 import seedu.address.model.tag.Tag;
 
@@ -35,8 +37,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                        PREFIX_UNIVERSITY, PREFIX_MAJOR);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_WORKEXP, PREFIX_TAG, 
+                                          PREFIX_UNIVERSITY, PREFIX_MAJOR);
 
         // Check for required prefixes
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
@@ -44,23 +46,20 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        String nameString = argMultimap.getValue(PREFIX_NAME).orElse("");
-        if (nameString.trim().isEmpty() || !nameString.matches("[a-zA-Z0-9 ]+")) {
-            throw new ParseException("Names should only contain alphanumeric characters and spaces, and it should not "
-                    + "be blank");
-        }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_UNIVERSITY, PREFIX_MAJOR);
-        Name name = ParserUtil.parseName(nameString);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_WORKEXP, 
+                                                PREFIX_UNIVERSITY, PREFIX_MAJOR);
+
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        WorkExp workExp = ParserUtil.parseWorkExp(argMultimap.getValue(PREFIX_WORKEXP).orElse("Intern,Google,2024"));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         University university = ParserUtil.parseUniversity(argMultimap.getValue(PREFIX_UNIVERSITY).get());
         Major major = ParserUtil.parseMajor(argMultimap.getValue(PREFIX_MAJOR).get());
 
-        Person person = new Person(name, phone, email, address, tagList, university, major);
+        Person person = new Person(name, phone, email, address, workExp, tagList, university, major);
         return new AddCommand(person);
     }
 
@@ -72,3 +71,4 @@ public class AddCommandParser implements Parser<AddCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
+
