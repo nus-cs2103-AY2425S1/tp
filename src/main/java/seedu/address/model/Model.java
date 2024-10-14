@@ -108,5 +108,7 @@ public interface Model {
 
     String groupsString();
 
+    boolean hasGroupName(Group group);
+
     List<Group> updateFilteredGroupList(GroupContainsKeywordsPredicate groupName);
 }

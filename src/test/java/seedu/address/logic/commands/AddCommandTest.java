@@ -179,6 +179,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasGroupName(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public List<Group> updateFilteredGroupList(GroupContainsKeywordsPredicate groupPredicate) {
             throw new AssertionError("This method should not be called");
         }
