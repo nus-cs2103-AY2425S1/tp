@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -12,7 +13,7 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: non-optional details are present and not null, field values are validated, immutable.
  */
 public class Person {
 
@@ -28,7 +29,8 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * AB3 basic constructor.
+     * Basic constructor.
+     * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -37,21 +39,25 @@ public class Person {
         this.email = email;
         this.roomNumber = null;
         this.address = address;
-        this.emergencyContact = new EmergencyContact(new Name("Aiken"), new Phone("12345678"));
+        this.emergencyContact = null;
         this.tags.addAll(tags);
     }
 
     /**
-     * Overloaded constructor that includes roomnumber
+     * Overloaded constructor that includes optional parameters.
+     * Every field must be present and not null, except for optional parameters.
+     * Non-optional params: name, phone, email, address, and tags.
+     * Optional params: roomNumber and emergencyContact.
      */
-    public Person(Name name, Phone phone, Email email, RoomNumber roomNumber, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, RoomNumber roomNumber,
+                  Address address, EmergencyContact emergencyContact, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.roomNumber = roomNumber;
         this.address = address;
-        this.emergencyContact = new EmergencyContact(new Name("Aiken"), new Phone("12345678"));
+        this.emergencyContact = emergencyContact;
         this.tags.addAll(tags);
     }
 
@@ -67,15 +73,16 @@ public class Person {
         return email;
     }
 
-    public RoomNumber getRoomNumber() {
-        return roomNumber; }
+    public Optional<RoomNumber> getRoomNumber() {
+        return Optional.ofNullable(roomNumber);
+    }
 
     public Address getAddress() {
         return address;
     }
 
-    public EmergencyContact getEmergencyContact() {
-        return emergencyContact;
+    public Optional<EmergencyContact> getEmergencyContact() {
+        return Optional.ofNullable(emergencyContact);
     }
 
     /**
@@ -131,9 +138,9 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && (roomNumber == null ? otherPerson.roomNumber == null : roomNumber.equals(otherPerson.roomNumber))
+                && (Objects.equals(roomNumber, otherPerson.roomNumber))
                 && address.equals(otherPerson.address)
-                && emergencyContact.equals(otherPerson.emergencyContact)
+                && (Objects.equals(emergencyContact, otherPerson.emergencyContact))
                 && tags.equals(otherPerson.tags);
     }
 

@@ -1,14 +1,14 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents a Person's emergency contact in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: field values are validated, immutable.
+ * Note: all fields are optional.
  */
 public class EmergencyContact {
 
@@ -17,20 +17,19 @@ public class EmergencyContact {
     private final Phone phone;
 
     /**
-     * Every field must be present and not null.
+     * Note: All fields are optional and can be null.
      */
     public EmergencyContact(Name name, Phone phone) {
-        requireAllNonNull(name, phone);
         this.name = name;
         this.phone = phone;
     }
 
-    public Name getName() {
-        return name;
+    public Optional<Name> getName() {
+        return Optional.ofNullable(name);
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Optional<Phone> getPhone() {
+        return Optional.ofNullable(phone);
     }
 
     /**
@@ -47,8 +46,8 @@ public class EmergencyContact {
         }
 
         EmergencyContact otherEmergencyContact = (EmergencyContact) other;
-        return name.equals(otherEmergencyContact.name)
-                && phone.equals(otherEmergencyContact.phone);
+        return Objects.equals(name, otherEmergencyContact.name)
+                && Objects.equals(phone, otherEmergencyContact.phone);
     }
 
     @Override
