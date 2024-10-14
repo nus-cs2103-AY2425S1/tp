@@ -9,9 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,12 +23,9 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
+
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -76,38 +71,13 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
+        // Define the expected FindCommand
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        FindCommand expectedCommand = new FindCommand(new NameContainsKeywordsPredicate(keywords));
 
-        Person personMatchingFoo = new Person(
-                new Name("Foo"),
-                new Phone("12345678"),
-                new Email("foo@example.com"),
-                new Address("123 Foo Street"),
-                new HashSet<>(Arrays.asList(new Tag("friend")))
-        );
-
-        Person personMatchingBar = new Person(
-                new Name("Bar"),
-                new Phone("87654321"),
-                new Email("bar@example.com"),
-                new Address("456 Bar Avenue"),
-                new HashSet<>(Arrays.asList(new Tag("colleague")))
-        );
-
-        assertTrue(command.getPredicate().test(personMatchingFoo));
-        assertTrue(command.getPredicate().test(personMatchingBar));
-
-        Person personNonMatching = new Person(
-                new Name("Non Matching"),
-                new Phone("99999999"),
-                new Email("nonmatching@example.com"),
-                new Address("No Match"),
-                new HashSet<>(Arrays.asList(new Tag("stranger")))
-        );
-
-        assertFalse(command.getPredicate().test(personNonMatching));
+        // Check if the parsed command is an instance of FindCommand and matches the expected command
+        assertEquals(expectedCommand, parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + String.join(" ", keywords)));
     }
 
 

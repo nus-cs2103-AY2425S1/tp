@@ -42,11 +42,17 @@ public class FindCommandParser implements Parser<FindCommand> {
                 .filter(keyword -> !isNumeric(keyword))
                 .collect(Collectors.toList());
 
-        Predicate<Person> combinedPredicate = person ->
-                new NameContainsKeywordsPredicate(nameKeywords).test(person)
-                        || new PhoneContainsKeywordsPredicate(phoneKeywords).test(person);
-        return new FindCommand(combinedPredicate);
+        Predicate<Person> namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
+        Predicate<Person> phonePredicate = new PhoneContainsKeywordsPredicate(phoneKeywords);
 
+        // Return combined predicates explicitly, not as a lambda
+        if (!nameKeywords.isEmpty() && !phoneKeywords.isEmpty()) {
+            return new FindCommand(namePredicate.or(phonePredicate));
+        } else if (!nameKeywords.isEmpty()) {
+            return new FindCommand(namePredicate);
+        } else {
+            return new FindCommand(phonePredicate);
+        }
     }
 
     /**
