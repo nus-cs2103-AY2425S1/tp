@@ -60,7 +60,6 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-
         if (person.getSchedule().toString().isEmpty()) {
             schedule.setText(person.getSchedule().toString());
         } else {
@@ -74,21 +73,15 @@ public class PersonCard extends UiPart<Region> {
             note.setText("Notes: " + person.getSchedule().getNotes());
         }
         if (person.getReminder() != null && !person.getReminder().toString().isEmpty()) {
-            String formattedDateTime = LocalDateTime.parse(
-                            person.getReminder().getAppointmentDateTime(),
-                            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
+            String formattedDateTime = LocalDateTime.parse(person.getReminder().getAppointmentDateTime(),
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
                     .format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a"));
-
-            // Combine formatted date-time with the reminder time
-            reminder.setText(String.format("Reminder on %s, %s before",
-                    formattedDateTime,
+            reminder.setText(String.format("Reminder on %s, %s before", formattedDateTime,
                     person.getReminder().getReminderTime()));
         } else {
             reminder.setText("");
         }
-
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
+        person.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
