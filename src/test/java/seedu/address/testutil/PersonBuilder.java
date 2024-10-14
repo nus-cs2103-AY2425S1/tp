@@ -21,10 +21,13 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
+    public static final String DEFAULT_ECNAME = "Seedy Yee";
+
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Name ecName;
     private Set<Tag> tags;
 
     /**
@@ -35,6 +38,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        ecName = new Name(DEFAULT_ECNAME);
         tags = new HashSet<>();
     }
 
@@ -46,6 +50,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        ecName = personToCopy.getEcName();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -89,8 +94,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEcName(String ecName) {
+        this.ecName = new Name(ecName);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, ecName, tags);
     }
 
 }
