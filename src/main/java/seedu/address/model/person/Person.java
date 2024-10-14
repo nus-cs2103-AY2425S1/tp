@@ -23,21 +23,19 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Tutorial> tutorials = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, StudentId studentId, Phone phone, Email email, Address address, Set<Tag> tags,
+    public Person(Name name, StudentId studentId, Phone phone, Email email, Set<Tag> tags,
                   Set<Tutorial> tutorials) {
-        requireAllNonNull(name, studentId, phone, email, address, tags, tutorials);
+        requireAllNonNull(name, studentId, phone, email, tags, tutorials);
         this.name = name;
         this.studentId = studentId;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.tags.addAll(tags);
         this.tutorials.addAll(tutorials);
     }
