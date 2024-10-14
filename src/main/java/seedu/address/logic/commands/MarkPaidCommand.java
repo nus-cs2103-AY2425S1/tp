@@ -9,6 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 
 /**
@@ -45,7 +46,7 @@ public class MarkPaidCommand extends Command {
         Person personToMarkPayment = lastShownList.get(targetIndex.getZeroBased());
         Person markedPerson = new Person(personToMarkPayment.getName(), personToMarkPayment.getPhone(),
                 personToMarkPayment.getEmail(), personToMarkPayment.getAddress(),
-                personToMarkPayment.getPayment(), personToMarkPayment.getTags());
+                new Payment(true), personToMarkPayment.getTags());
 
         model.setPerson(personToMarkPayment, markedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
