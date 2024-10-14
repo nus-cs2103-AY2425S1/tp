@@ -27,7 +27,9 @@ public class LogCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DATE + "[date]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_LOG + "Likes to swim.";
+            + PREFIX_LOG + "Met for price negotiation."
+            + "Example: " + COMMAND_WORD + " 2 "
+            + PREFIX_DATE + LocalDate.now().toString() + "Offered discount";
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Log command not implemented yet";
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Date: %2$s, Message: %3$s";
     public static final String MESSAGE_ADD_HISTORY_SUCCESS = "Added history to Person: %1$s";
