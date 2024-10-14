@@ -152,6 +152,9 @@ public class ParserUtil {
     public static EventDescription parseEventDescription(String eventDescription) throws ParseException {
         requireNonNull(eventDescription);
         String trimmedEventDescription = eventDescription.trim();
+        if (!EventDescription.isValidDescription(trimmedEventDescription)) {
+            throw new ParseException(EventDescription.MESSAGE_CONSTRAINTS);
+        }
         return new EventDescription(trimmedEventDescription);
     }
 
@@ -173,7 +176,7 @@ public class ParserUtil {
             throw new ParseException(EventDuration.MESSAGE_CONSTRAINTS);
         }
         if (!EventDuration.isValidDuration(start, end)) {
-            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+            throw new ParseException(EventDuration.MESSAGE_CONSTRAINTS);
         }
         return new EventDuration(start, end);
     }

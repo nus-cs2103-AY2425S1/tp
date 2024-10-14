@@ -29,8 +29,10 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         ArgumentMultimap argMultiMap =
                 ArgumentTokenizer.tokenize(args, PREFIX_EVENT_NAME, PREFIX_EVENT_DESCRIPTION,
                         PREFIX_EVENT_START_DATE, PREFIX_EVENT_END_DATE);
+
         if (!arePrefixesPresent(argMultiMap, PREFIX_EVENT_NAME, PREFIX_EVENT_DESCRIPTION,
-                PREFIX_EVENT_START_DATE, PREFIX_EVENT_END_DATE)) {
+                PREFIX_EVENT_START_DATE, PREFIX_EVENT_END_DATE)
+                || !argMultiMap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         }
 
@@ -42,7 +44,9 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         EventDuration eventDuration = ParserUtil.parseEventDuration(
                 argMultiMap.getValue(PREFIX_EVENT_START_DATE).get(),
                 argMultiMap.getValue(PREFIX_EVENT_END_DATE).get());
+
         Event event = new Event(eventName, eventDescription, eventDuration);
+
         return new AddEventCommand(event);
     }
 
