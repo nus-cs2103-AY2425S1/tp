@@ -104,6 +104,12 @@ public class Schedule {
 
         return start.isBefore(end);
     }
+
+    public boolean isClash(Schedule otherSchedule) {
+        return dayValue == otherSchedule.dayValue
+                && startTimeValue.isBefore(otherSchedule.endTimeValue)
+                && otherSchedule.startTimeValue.isBefore(endTimeValue);
+    }
     @Override
     public String toString() {
         return dayValue + " " + startTimeValue + " - " + endTimeValue;

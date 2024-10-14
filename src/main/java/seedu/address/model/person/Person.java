@@ -96,7 +96,7 @@ public class Person {
             return false;
         }
 
-        return otherPerson != null && otherPerson.getSchedule().equals(getSchedule());
+        return otherPerson != null && getSchedule().isClash(otherPerson.getSchedule());
     }
 
     /**

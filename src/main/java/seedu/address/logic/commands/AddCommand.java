@@ -70,7 +70,7 @@ public class AddCommand extends Command {
 
         model.addPerson(toAdd);
         long clashes = model.checkClashes(toAdd);
-        if (clashes == 1) {
+        if (clashes == 0) {
             return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
         } else {
             return new CommandResult(

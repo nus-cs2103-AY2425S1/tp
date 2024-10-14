@@ -101,7 +101,7 @@ public class EditCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         long clashes = model.checkClashes(editedPerson);
-        if (clashes == 1) {
+        if (clashes == 0) {
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
         } else {
             return new CommandResult(
