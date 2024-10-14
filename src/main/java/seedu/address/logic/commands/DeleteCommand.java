@@ -96,7 +96,6 @@ public class DeleteCommand extends Command {
         if (targetName != null) {
             return String.format("DeleteCommand[targetName=%s]", targetName);
         } else {
-            assert targetIndex != null;
             return String.format("DeleteCommand[targetIndex=%d]", targetIndex.getOneBased());
         }
     }
