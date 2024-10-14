@@ -153,6 +153,8 @@ public interface Model {
 
     void setStateGroups();
 
+    void setStateGroupTask();
+
     State getState();
 
     Group findGroup(GroupName groupName);
