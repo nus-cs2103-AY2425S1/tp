@@ -10,7 +10,7 @@ import static java.util.Objects.requireNonNull;
 public class Remark {
 
     public static final String MESSAGE_CONSTRAINTS = "Remark must contain only ASCII characters.";
-    public static final String VALIDATION_REGEX = "^[\\\\x00-\\\\x7F]+$";
+    public static final String VALIDATION_REGEX = "^[\\x00-\\x7F]+$";
     public final String value;
 
     /**
