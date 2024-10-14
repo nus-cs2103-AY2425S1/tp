@@ -1,15 +1,18 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.event.Event;
 import seedu.address.model.vendor.UniqueVendorList;
 import seedu.address.model.vendor.Vendor;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.tag.Tag;
 
 /**
  * Wraps all data at the address-book level
@@ -18,7 +21,7 @@ import seedu.address.model.tag.Tag;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueVendorList vendors;
-    private final UniqueTagList tags;
+    private final Set<Pair<Vendor, Event>> associations;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -29,6 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         vendors = new UniqueVendorList();
+        associations = new HashSet<>();
     }
 
     public AddressBook() {}
@@ -99,9 +103,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// assign operations
 
-    public void addTag(Tag tag) {
-        requireNonNull(tag);
-        tags.add(tag);
+    public void assignVendorToEvent(Vendor vendor, Event event) {
+        requireAllNonNull(vendor, event);
+        associations.add(new Pair<>(vendor, event));
     }
 
     //// util methods

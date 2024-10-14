@@ -1,34 +1,35 @@
 package seedu.address.model.tag;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
-import java.util.Objects;
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.event.Event;
-import seedu.address.model.vendor.Vendor;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Tag representing Vendors and Events in the address book.
- * Guarantees: unique for each pair of vendor and event, vendor and event
- * are not null, immutable.
+ * Represents a Tag in the address book.
+ * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
-    public final Vendor vendor;
-    public final Event event;
+    public final String tagName;
 
     /**
      * Constructs a {@code Tag}.
      *
-     * @param vendor A valid vendor.
-     * @param event A valid event.
+     * @param tagName A valid tag name.
      */
-    public Tag(Vendor vendor, Event event) {
-        requireAllNonNull(vendor, event);
-        this.vendor = vendor;
-        this.event = event;
+    public Tag(String tagName) {
+        requireNonNull(tagName);
+        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
+        this.tagName = tagName;
+    }
+
+    /**
+     * Returns true if a given string is a valid tag name.
+     */
+    public static boolean isValidTagName(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
@@ -43,20 +44,19 @@ public class Tag {
         }
 
         Tag otherTag = (Tag) other;
-        return vendor.equals(otherTag.vendor)
-                && event.equals(otherTag.event);
+        return tagName.equals(otherTag.tagName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(vendor, event);
+        return tagName.hashCode();
     }
 
-    @Override
+    /**
+     * Format state as text for viewing.
+     */
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("vendor", vendor)
-                .add("event", event)
-                .toString();
+        return '[' + tagName + ']';
     }
+
 }
