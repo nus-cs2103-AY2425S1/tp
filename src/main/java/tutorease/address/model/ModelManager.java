@@ -181,4 +181,17 @@ public class ModelManager implements Model {
     public int getLessonScheduleSize() {
         return lessonSchedule.getSize();
     }
+
+    @Override
+    public void deleteStudentLesson(Person student) {
+        int currentIndex = 0;
+        while (currentIndex < this.getLessonScheduleSize()) {
+            Lesson lesson = this.getLesson(currentIndex);
+            if (student.equals(lesson.getStudent())) {
+                this.deleteLesson(currentIndex);
+            } else {
+                currentIndex++;
+            }
+        }
+    }
 }

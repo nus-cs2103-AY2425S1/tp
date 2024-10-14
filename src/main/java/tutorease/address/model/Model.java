@@ -115,4 +115,9 @@ public interface Model {
      * Returns size of lesson schedule.
      */
     int getLessonScheduleSize();
+
+    /**
+     * Deletes all the lessons of a particular student
+     */
+    void deleteStudentLesson(Person student);
 }
