@@ -1,12 +1,13 @@
 package seedu.address.model.student;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.tut.TutDate;
-
 /**
  * A class representing a collection of {@link TutDate} objects.
  * Provides methods to add dates, retrieve an unmodifiable list of dates, and to compare
@@ -22,6 +23,7 @@ public class PresentDates {
      * @param dates An {@link ArrayList} of {@link TutDate} objects.
      */
     public PresentDates(Set<TutDate> dates) {
+        requireNonNull(dates);
         this.dates = dates;
     }
 
@@ -31,6 +33,7 @@ public class PresentDates {
      * @param date The {@link TutDate} to be added.
      */
     public void add(TutDate date) {
+        requireNonNull(date);
         dates.add(date);
     }
 
@@ -44,6 +47,7 @@ public class PresentDates {
     }
 
     public void setAttendance(TutDate tutDate) {
+        requireNonNull(tutDate);
         dates.add(tutDate);
     }
 

@@ -65,6 +65,8 @@ public class Tut {
     }
 
     public boolean setAttendance(Date date, StudentId target) {
+        requireNonNull(date);
+        requireNonNull(target);
         if (tutDates.containsKey(date)) {
             return students.stream()
                     .filter(s -> s.getStudentId().equals(target))

@@ -11,13 +11,18 @@ import static seedu.address.testutil.TypicalStudents.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.TutorialClass;
+import seedu.address.model.tut.Tut;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.TypicalStudents;
 
 public class ModelManagerTest {
 

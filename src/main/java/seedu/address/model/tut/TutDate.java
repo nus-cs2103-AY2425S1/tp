@@ -1,12 +1,13 @@
 package seedu.address.model.tut;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.student.Student;
-
 /**
  * A class representing a tutorial date. Each {@code TutDate} object holds a specific {@link Date}
  * and a list of {@link Student} objects who are associated with that date.
@@ -24,11 +25,18 @@ public class TutDate {
      * @param date The date associated with the {@code TutDate}.
      */
     public TutDate(Date date) {
+        requireNonNull(date);
         this.date = date;
         this.students = new HashSet<>();
     }
 
+    /**
+     * Add student to the hash set.
+     *
+     * @param student The student supposed to be added.
+     */
     public void add(Student student) {
+        requireNonNull(student);
         students.add(student);
     }
 
