@@ -78,14 +78,15 @@ public class UntagCommand extends Command {
             throw new CommandException(MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
         }
 
-        if (tagsToRemove.isEmpty()) {
-            throw new CommandException(MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
-        }
-
         if (!updatedTags.containsAll(tagsToRemove)) {
             throw new CommandException(MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
         }
+
         updatedTags.removeAll(tagsToRemove);
+
+        for (Tag tag : tagsToRemove) {
+            tag.decreaseTaggedCount();
+        }
 
         Person editedPerson = new Person(
                 personToEdit.getName(),

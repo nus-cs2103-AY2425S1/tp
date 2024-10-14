@@ -77,6 +77,10 @@ public class TagCommand extends Command {
             }
         }
 
+        for (Tag tag : tagsToAdd) {
+            tag.increaseTaggedCount();
+        }
+
         Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
         updatedTags.addAll(tagsToAdd);
 

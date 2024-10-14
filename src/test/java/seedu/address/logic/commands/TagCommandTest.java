@@ -14,7 +14,11 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagName;
 
@@ -53,10 +57,10 @@ public class TagCommandTest {
     @Test
     public void execute_validMultipleTagsUnfilteredList_success() {
         Person personWithTags = new Person(
-                new seedu.address.model.person.Name("Test Person"),
-                new seedu.address.model.person.Phone("99999999"),
-                new seedu.address.model.person.Email("test@example.com"),
-                new seedu.address.model.person.Address("123, Test Street"),
+                new Name("Test Person"),
+                new Phone("99999999"),
+                new Email("test@example.com"),
+                new Address("123, Test Street"),
                 new HashSet<>(Arrays.asList(new Tag(new TagName("family"))))
         );
         model.addTag(new Tag(new TagName("family")));

@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -12,6 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.parser.UntagCommandParser;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -92,11 +96,15 @@ public class UntagCommandTest {
 
     @Test
     public void execute_noTagsSpecified_failure() {
-        // No tags specified to remove
-        HashSet<Tag> emptyTagsToRemove = new HashSet<>(Arrays.asList());
-        UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, emptyTagsToRemove);
-        String expectedMessage = Messages.MESSAGE_TAG_NOT_FOUND_IN_CONTACT;
-        CommandTestUtil.assertCommandFailure(untagCommand, model, expectedMessage);
+        // No tags specified (input is "untag 1")
+        String userInput = "1"; // Only index is provided, no tags
+        UntagCommandParser parser = new UntagCommandParser();
+
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE);
+        assertThrows(ParseException.class, expectedMessage, () -> {
+            parser.parse(userInput);
+        });
+
     }
 
 
