@@ -63,7 +63,8 @@ public class UpdatePersonDescriptorTest {
                 + updatePersonDescriptor.getAddress().orElse(null) + ", note="
                 + updatePersonDescriptor.getNote().orElse(null) + ", level="
                 + updatePersonDescriptor.getLevel().orElse(null) + ", subjects="
-                + updatePersonDescriptor.getSubjects().orElse(null) + "}";
+                + updatePersonDescriptor.getSubjects().orElse(null) + ", task list="
+                + updatePersonDescriptor.getTaskList().orElse(null) + "}";
         assertEquals(expected, updatePersonDescriptor.toString());
     }
 }

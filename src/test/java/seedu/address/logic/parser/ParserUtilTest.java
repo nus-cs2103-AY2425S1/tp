@@ -18,18 +18,25 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
+import seedu.address.model.person.task.Task;
+import seedu.address.model.person.task.TaskDeadline;
+import seedu.address.model.person.task.TaskDescription;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_SUBJECT = "subj";
+    private static final String INVALID_TASK_DESCRIPTION = " ";
+    private static final String INVALID_TASK_DEADLINE = "tomorrow";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_SUBJECT_1 = "MATH";
     private static final String VALID_SUBJECT_2 = "ENGLISH";
+    private static final String VALID_TASK_DESCRIPTION = "Mark work";
+    private static final String VALID_TASK_DEADLINE = "2024-01-01";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -168,5 +175,65 @@ public class ParserUtilTest {
                 Arrays.asList(new Subject(VALID_SUBJECT_1), new Subject(VALID_SUBJECT_2)));
 
         assertEquals(expectedSubjectSet, actualSubjectSet);
+    }
+
+    @Test
+    public void parseTaskDescription_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTaskDescription((String) null));
+    }
+
+    @Test
+    public void parseTaskDescription_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTaskDescription(INVALID_TASK_DESCRIPTION));
+    }
+
+    @Test
+    public void parseTaskDescription_validValueWithoutWhitespace_returnsTaskDescription() throws Exception {
+        TaskDescription expectedTaskDescription = new TaskDescription(VALID_TASK_DESCRIPTION);
+        assertEquals(expectedTaskDescription, ParserUtil.parseTaskDescription(VALID_TASK_DESCRIPTION));
+    }
+
+    @Test
+    public void parseTaskDescription_validValueWithWhitespace_returnsTrimmedTaskDescription() throws Exception {
+        String taskDescriptionWithWhitespace = WHITESPACE + VALID_TASK_DESCRIPTION + WHITESPACE;
+        TaskDescription expectedTaskDescription = new TaskDescription(VALID_TASK_DESCRIPTION);
+        assertEquals(expectedTaskDescription, ParserUtil.parseTaskDescription(taskDescriptionWithWhitespace));
+    }
+
+    @Test
+    public void parseTaskDeadline_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTaskDeadline((String) null));
+    }
+
+    @Test
+    public void parseTaskDeadline_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTaskDeadline(INVALID_TASK_DEADLINE));
+    }
+
+    @Test
+    public void parseTaskDeadline_validValueWithoutWhitespace_returnsTaskDeadline() throws Exception {
+        TaskDeadline expectedTaskDeadline = new TaskDeadline(VALID_TASK_DEADLINE);
+        assertEquals(expectedTaskDeadline, ParserUtil.parseTaskDeadline(VALID_TASK_DEADLINE));
+    }
+
+    @Test
+    public void parseTaskDeadline_validValueWithWhitespace_returnsTrimmedTaskDeadline() throws Exception {
+        String taskDeadlineWithWhitespace = WHITESPACE + VALID_TASK_DEADLINE + WHITESPACE;
+        TaskDeadline expectedTaskDeadline = new TaskDeadline(VALID_TASK_DEADLINE);
+        assertEquals(expectedTaskDeadline, ParserUtil.parseTaskDeadline(taskDeadlineWithWhitespace));
+    }
+
+    @Test
+    public void parseTask_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTask(null, null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTask(VALID_TASK_DESCRIPTION, null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTask(null, VALID_TASK_DEADLINE));
+    }
+
+    @Test
+    public void parseTask_validValue_returnsTask() throws Exception {
+        Task expectedTask = new Task(new TaskDescription(VALID_TASK_DESCRIPTION),
+                new TaskDeadline(VALID_TASK_DEADLINE));
+        assertEquals(expectedTask, ParserUtil.parseTask(VALID_TASK_DESCRIPTION, VALID_TASK_DEADLINE));
     }
 }
