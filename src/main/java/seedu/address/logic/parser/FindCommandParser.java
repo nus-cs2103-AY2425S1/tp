@@ -4,9 +4,11 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.person.Person;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
@@ -39,16 +41,11 @@ public class FindCommandParser implements Parser<FindCommand> {
                 .filter(keyword -> !isNumeric(keyword)) // Only keep non-numeric keywords ie names
                 .collect(Collectors.toList());
 
-        NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
-        PhoneContainsKeywordsPredicate phonePredicate = new PhoneContainsKeywordsPredicate(phoneKeywords);
+        Predicate<Person> namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
+        Predicate<Person> phonePredicate = new PhoneContainsKeywordsPredicate(phoneKeywords);
 
-        if (!nameKeywords.isEmpty() && !phoneKeywords.isEmpty()) {
-            return new FindCommand(namePredicate.and(phonePredicate));
-        } else if (!nameKeywords.isEmpty()) {
-            return new FindCommand(namePredicate);
-        } else {
-            return new FindCommand(phonePredicate);
-        }
+        Predicate<Person> combinedPredicate = namePredicate.or(phonePredicate);
+        return new FindCommand(combinedPredicate);
     }
 
     /**
