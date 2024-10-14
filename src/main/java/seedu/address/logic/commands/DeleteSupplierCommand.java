@@ -12,11 +12,11 @@ import seedu.address.model.supplier.Supplier;
  * Deletes a supplier identified using it's displayed index from the address book.
  */
 public class DeleteSupplierCommand extends Command {
-    public static final String COMMAND_WORD = "delete -s";
+    public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the supplier identified by the index number used in the displayed supplier list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_WORD + " -s 1";
     public static final String MESSAGE_DELETE_SUPPLIER_SUCCESS = "Supplier index %1$s has been deleted successfully";
     private final Index targetIndex;
     public DeleteSupplierCommand(Index targetIndex) {

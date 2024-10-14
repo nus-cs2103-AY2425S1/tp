@@ -21,13 +21,18 @@ public class MarkSupplierCommandParser implements Parser<MarkSupplierCommand> {
     public MarkSupplierCommand parse(String args) throws ParseException {
         requireNonNull(args);
         Index index;
+        SupplierStatus status;
         try {
-            index = ParserUtil.parseIndex(args.trim().split("\\s+")[0]);
+            String[] parts = args.trim().split("\\s+", 2);
+            index = ParserUtil.parseIndex(parts[0]);
+            status = ParserUtil.parseSupplierStatus(parts[1]);
         } catch (IllegalValueException ive) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkSupplierCommand.MESSAGE_USAGE), ive);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkSupplierCommand.MESSAGE_USAGE));
         }
-        SupplierStatus status = ParserUtil.parseSupplierStatus(args.trim().split("\\s+")[1]);
         return new MarkSupplierCommand(index, status);
     }
 }

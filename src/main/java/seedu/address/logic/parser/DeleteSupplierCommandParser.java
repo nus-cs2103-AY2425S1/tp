@@ -17,7 +17,14 @@ public class DeleteSupplierCommandParser implements Parser<DeleteSupplierCommand
      */
     public DeleteSupplierCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
+            String trimmedArgs = args.trim();
+            if (!trimmedArgs.startsWith("-s")) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteSupplierCommand.MESSAGE_USAGE));
+            }
+            // Extract the index after the "-s"
+            String indexStr = trimmedArgs.substring(2).trim();
+            Index index = ParserUtil.parseIndex(indexStr);
             return new DeleteSupplierCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(

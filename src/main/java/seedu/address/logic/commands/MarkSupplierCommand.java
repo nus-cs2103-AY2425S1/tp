@@ -17,12 +17,12 @@ import seedu.address.model.supplier.SupplierStatus;
  */
 public class MarkSupplierCommand extends Command {
 
-    public static final String COMMAND_WORD = "mark -m";
+    public static final String COMMAND_WORD = "mark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the status of the supplier identified by the index number used in the displayed supplier list.\n"
             + "Parameters: INDEX (must be a positive integer) STATUS (active, inactive)\n"
-            + "Example: " + COMMAND_WORD + " 1 active";
+            + "Example: " + COMMAND_WORD + " -s 1 active";
 
     public static final String MESSAGE_MARK_SUPPLIER_SUCCESS = "Marked Supplier: %1$s as %2$s";
 

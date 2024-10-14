@@ -12,14 +12,12 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.DeleteSupplierCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkDeliveryCommand;
-import seedu.address.logic.commands.MarkSupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -65,12 +63,11 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             if (arguments.trim().startsWith("-d")) {
                 return new DeleteDeliveryCommandParser().parse(arguments.trim());
+            } else if (arguments.trim().startsWith("-s")) {
+                return new DeleteSupplierCommandParser().parse(arguments.trim());
             } else {
                 return new DeleteCommandParser().parse(arguments.trim());
             }
-
-        case DeleteSupplierCommand.COMMAND_WORD:
-            return new DeleteSupplierCommandParser().parse(arguments.trim());
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -82,10 +79,14 @@ public class AddressBookParser {
             return new ListCommand();
 
         case MarkDeliveryCommand.COMMAND_WORD:
-            return new MarkDeliveryCommandParser().parse(arguments.trim());
-
-        case MarkSupplierCommand.COMMAND_WORD:
-            return new MarkSupplierCommandParser().parse(arguments.trim());
+            if (arguments.trim().startsWith("-d")) {
+                return new MarkDeliveryCommandParser().parse(arguments.trim());
+            } else if (arguments.trim().startsWith("-s")) {
+                return new MarkSupplierCommandParser().parse(arguments.trim());
+            } else {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkDeliveryCommand.MESSAGE_USAGE));
+            }
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
