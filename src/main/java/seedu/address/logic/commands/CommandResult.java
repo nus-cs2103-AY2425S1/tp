@@ -20,6 +20,11 @@ public class CommandResult {
     private final boolean exit;
 
     /**
+     * If command type, indicates whether the details panel should be cleared after execution.
+     */
+    private boolean clearDetailsPanel;
+
+    /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
@@ -46,6 +51,24 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    /**
+     * Gets the value of clearDetailsPanel.
+     *
+     * @return true if the details panel should be cleared; false otherwise.
+     */
+    public boolean isClearDetailsPanel() {
+        return this.clearDetailsPanel;
+    }
+
+    /**
+     * Sets the value of clearDetailsPanel.
+     *
+     * @param clearDetailsPanel true to clear the details panel; false to retain its contents.
+     */
+    public void setClearDetailsPanel(boolean clearDetailsPanel) {
+        this.clearDetailsPanel = clearDetailsPanel;
     }
 
     @Override
