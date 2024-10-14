@@ -1,10 +1,10 @@
 package seedu.address.model.volunteer;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Event's time in the address book.

@@ -1,4 +1,13 @@
-package seedu.address.logic.commands.volunteerCommands;
+package seedu.address.logic.commands.volunteercommands;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.AddressBookParser.VOLUNTEER_COMMAND_INDICATOR;
+import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_AVAILABLE_DATE;
+import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_START_TIME;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
@@ -7,23 +16,13 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.volunteer.Volunteer;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_AVAILABLE_DATE;
-import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_END_TIME;
-import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_START_TIME;
-import static seedu.address.logic.parser.AddressBookParser.VOLUNTEER_COMMAND_INDICATOR;
-
-
+/**
+ * Adds a volunteer to the system.
+ */
 public class VolunteerAddCommand extends Command {
     public static final String COMMAND_WORD = "new";
     private static final String MESSAGE_DUPLICATE_VOLUNTEER = "This volunteer already exists!";
     private static final String MESSAGE_SUCCESS = "Volunteer added successfully!";
-
-    private final Volunteer toAdd;
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a volunteer to the system. "
             + "Parameters: "
             + "type/volunteer "
@@ -41,8 +40,19 @@ public class VolunteerAddCommand extends Command {
             + VOLUNTEER_PREFIX_START_TIME + "11:00 "
             + VOLUNTEER_PREFIX_END_TIME + "12:00 ";
 
+    /**
+     * Creates a {@code VolunteerAddCommand} to add the specified {@code Volunteer}.
+     *
+     * @param volunteer The volunteer to be added.
+     */
+    private final Volunteer toAdd;
     // Example: /v new n/John Doe p/98765432 em/johndoe@example.com d/2024-10-15 s/09:00 ee/17:00
 
+    /**
+     * Constructs a {@code VolunteerAddCommand} that adds the specified {@code Volunteer} to the system.
+     *
+     * @param volunteer The volunteer to be added. Must not be null.
+     */
     public VolunteerAddCommand(Volunteer volunteer) {
         requireNonNull(volunteer);
         this.toAdd = volunteer;

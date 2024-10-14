@@ -1,19 +1,22 @@
-package seedu.address.logic.parser.eventCommandParser;
+package seedu.address.logic.parser.eventcommandparser;
 
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.eventCommands.EventAddCommand;
-import seedu.address.logic.parser.AddressBookParser;
-import seedu.address.logic.parser.exceptions.ParseException;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.eventcommands.EventAddCommand;
+import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses user input for event-related commands.
+ */
 public class EventCommandParser {
     /**
      * Used for initial separation of command word and args.
@@ -21,6 +24,13 @@ public class EventCommandParser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
+    /**
+     * Parses the given user input and returns the appropriate command.
+     *
+     * @param userInput The full user input string to parse.
+     * @return The corresponding command to execute.
+     * @throws ParseException If the input does not match the expected format.
+     */
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {

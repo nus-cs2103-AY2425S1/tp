@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Person;
 import seedu.address.model.volunteer.Volunteer;
 
 /**

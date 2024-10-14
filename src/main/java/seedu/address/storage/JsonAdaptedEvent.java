@@ -1,5 +1,8 @@
 package seedu.address.storage;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Description;
@@ -7,15 +10,6 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
 import seedu.address.model.event.Time;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Jackson-friendly version of {@link Event}.
@@ -37,7 +31,8 @@ class JsonAdaptedEvent {
     @JsonCreator
     public JsonAdaptedEvent(@JsonProperty("eventName") String eventName, @JsonProperty("date") String date,
                             @JsonProperty("startTime") String startTime, @JsonProperty("endTime") String endTime,
-                            @JsonProperty("location") String location, @JsonProperty("description") String description) {
+                            @JsonProperty("location") String location,
+                            @JsonProperty("description") String description) {
         this.eventName = eventName;
         this.date = date;
         this.startTime = startTime;
@@ -70,7 +65,8 @@ class JsonAdaptedEvent {
     public Event toModelType() throws IllegalValueException {
 
         if (eventName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    EventName.class.getSimpleName()));
         }
         if (!EventName.isValidName(eventName)) {
             throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);
@@ -78,7 +74,8 @@ class JsonAdaptedEvent {
         final EventName modelEventName = new EventName(eventName);
 
         if (location == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Location.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Location.class.getSimpleName()));
         }
         if (!Location.isValidLocation(location)) {
             throw new IllegalValueException(Location.MESSAGE_CONSTRAINTS);
@@ -110,7 +107,8 @@ class JsonAdaptedEvent {
         final Time modelEndTime = new Time(endTime);
 
         if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Description.class.getSimpleName()));
         }
         if (!Description.isValidDescription(description)) {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
