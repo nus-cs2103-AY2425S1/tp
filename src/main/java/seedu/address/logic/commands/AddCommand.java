@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OWED_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
@@ -32,6 +33,7 @@ public class AddCommand extends Command {
             + PREFIX_SCHEDULE + "SCHEDULE "
             + PREFIX_SUBJECT + "SUBJECT "
             + PREFIX_RATE + "FEE "
+            + "[" + PREFIX_PAID + "PAID] "
             + "[" + PREFIX_OWED_AMOUNT + "OWED] "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -41,6 +43,7 @@ public class AddCommand extends Command {
             + PREFIX_SCHEDULE + "Sunday-1000-1200 "
             + PREFIX_SUBJECT + "Biology "
             + PREFIX_RATE + "3000 "
+            + PREFIX_PAID + "6000 "
             + PREFIX_OWED_AMOUNT + "3000 ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
