@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Date;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -20,15 +21,15 @@ public class DateCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test
     public void execute() {
-        final String date = "Some date";
+        final Date date = new Date("Some date");
         assertCommandFailure(new DateCommand(INDEX_FIRST_PERSON, date), model,
                 String.format(MESSAGE_ARGUMENTS, INDEX_FIRST_PERSON.getOneBased(), date));
     }
     @Test
     public void equals() {
-        final DateCommand standardCommand = new DateCommand(INDEX_FIRST_PERSON, VALID_DATE_AMY);
+        final DateCommand standardCommand = new DateCommand(INDEX_FIRST_PERSON, new Date(VALID_DATE_AMY));
         // same values -> returns true
-        DateCommand commandWithSameValues = new DateCommand(INDEX_FIRST_PERSON, VALID_DATE_AMY);
+        DateCommand commandWithSameValues = new DateCommand(INDEX_FIRST_PERSON, new Date(VALID_DATE_AMY));
         assertTrue(standardCommand.equals(commandWithSameValues));
         // same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
@@ -37,8 +38,8 @@ public class DateCommandTest {
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
         // different index -> returns false
-        assertFalse(standardCommand.equals(new DateCommand(INDEX_SECOND_PERSON, VALID_DATE_AMY)));
+        assertFalse(standardCommand.equals(new DateCommand(INDEX_SECOND_PERSON, new Date(VALID_DATE_AMY))));
         // different date -> returns false
-        assertFalse(standardCommand.equals(new DateCommand(INDEX_FIRST_PERSON, VALID_DATE_BOB)));
+        assertFalse(standardCommand.equals(new DateCommand(INDEX_FIRST_PERSON, new Date(VALID_DATE_BOB))));
     }
 }

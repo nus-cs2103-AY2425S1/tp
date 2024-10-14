@@ -1,12 +1,16 @@
 package seedu.address.logic.parser;
+
+import org.junit.jupiter.api.Test;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.DateCommand;
+import seedu.address.model.person.Date;
+
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DateCommand;
+
 
 public class DateCommandParserTest {
     private DateCommandParser parser = new DateCommandParser();
@@ -16,11 +20,11 @@ public class DateCommandParserTest {
         // have date
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_DATE + nonEmptyDate;
-        DateCommand expectedCommand = new DateCommand(INDEX_FIRST_PERSON, nonEmptyDate);
+        DateCommand expectedCommand = new DateCommand(INDEX_FIRST_PERSON, new Date(nonEmptyDate));
         assertParseSuccess(parser, userInput, expectedCommand);
-        // no remark
+        // no date
         userInput = targetIndex.getOneBased() + " " + PREFIX_DATE;
-        expectedCommand = new DateCommand(INDEX_FIRST_PERSON, "");
+        expectedCommand = new DateCommand(INDEX_FIRST_PERSON, new Date(""));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
     @Test

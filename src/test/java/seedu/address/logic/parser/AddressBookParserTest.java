@@ -9,7 +9,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +19,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Date;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -85,9 +85,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_date() throws Exception {
-        final String date = "Some date.";
+        final Date date = new Date("Some date.");
         DateCommand command = (DateCommand) parser.parseCommand(DateCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_DATE + date);
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_DATE + date.value);
         assertEquals(new DateCommand(INDEX_FIRST_PERSON, date), command);
     }
 
