@@ -3,12 +3,12 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import seedu.address.logic.Messages;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupName;
 import seedu.address.model.group.GroupContainsKeywordsPredicate;
+import seedu.address.model.group.GroupName;
 
 /**
  * Deletes a group identified by its name from the address book.
@@ -36,7 +36,8 @@ public class DeleteGroupCommand extends Command {
         requireNonNull(model);
 
         // Use the predicate to search for groups by name
-        GroupContainsKeywordsPredicate groupPredicate = new GroupContainsKeywordsPredicate(List.of(groupName.groupName));
+        GroupContainsKeywordsPredicate groupPredicate =
+                new GroupContainsKeywordsPredicate(List.of(groupName.groupName));
         List<Group> matchingGroups = model.updateFilteredGroupList(groupPredicate);
 
         if (matchingGroups.isEmpty()) {
