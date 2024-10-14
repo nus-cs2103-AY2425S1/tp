@@ -27,7 +27,7 @@ public class ClientStatus {
     public ClientStatus(String status) {
         requireNonNull(status);
         checkArgument(isValidClientStatus(status), MESSAGE_CONSTRAINTS);
-        value = status.toLowerCase();
+        value = parseStatus(status);
     }
 
     /**
@@ -36,6 +36,25 @@ public class ClientStatus {
     public static boolean isValidClientStatus(String test) {
         return test.equalsIgnoreCase(ACTIVE) || test.equalsIgnoreCase(UNRESPONSIVE)
                 || test.equalsIgnoreCase(POTENTIAL) || test.equalsIgnoreCase(OLD);
+    }
+
+    /**
+     * Parses the status into the relevant client status string
+     * @param status The client status string
+     * @return The client's client status as string
+     */
+    private static String parseStatus(String status) {
+        switch (status.toLowerCase()) {
+        case ACTIVE:
+            return ACTIVE;
+        case UNRESPONSIVE:
+            return UNRESPONSIVE;
+        case OLD:
+            return OLD;
+        case POTENTIAL:
+            return POTENTIAL;
+        }
+        return status;
     }
 
     @Override
