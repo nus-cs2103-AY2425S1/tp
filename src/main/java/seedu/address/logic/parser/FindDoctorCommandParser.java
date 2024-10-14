@@ -8,7 +8,6 @@ import java.util.Arrays;
 import seedu.address.logic.commands.FindDoctorCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.doctor.FindDoctorPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindDoctorCommand object
