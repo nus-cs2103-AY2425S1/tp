@@ -13,7 +13,6 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Date;
-import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Eta;
 import seedu.address.model.delivery.Time;
 import seedu.address.model.person.Address;
@@ -134,24 +133,12 @@ public class ParserUtil {
         return tagSet;
     }
 
-    public static Time parseTime(String time) throws ParseException {
-        requireNonNull(time);
-        String trimmedTime = time.trim();
-        if (!Time.isValidTime(trimmedTime)) {
-            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
-        }
-        return new Time(trimmedTime);
-    }
-
-    public static Date parseDate(String date) throws ParseException {
-        requireNonNull(date);
-        String trimmedDate = date.trim();
-        if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
-        }
-        return new Date(trimmedDate);
-    }
-
+    /**
+     * Parses a {@code String eta} into an {@code Eta}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code eta} is invalid.
+     */
     public static Eta parseEta(String eta) throws ParseException {
         requireNonNull(eta);
         String trimmedEta = eta.trim();
@@ -161,6 +148,12 @@ public class ParserUtil {
         return new Eta(trimmedEta);
     }
 
+    /**
+     * Parses a {@code String cost} into an {@code Cost}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code cost} is invalid.
+     */
     public static Cost parseCost(String cost) throws ParseException {
         requireNonNull(cost);
         String trimmedCost = cost.trim();

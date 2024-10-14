@@ -9,10 +9,8 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryList;
-import seedu.address.model.delivery.Eta;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -41,10 +39,6 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        /* deliveryList.add(new Delivery(this.address, new Cost("$50"), new Eta("2024-10-31")));
-        deliveryList.add(new Delivery(this.address, new Cost("$50"), new Eta("2024-10-31")));
-        deliveryList.add(new Delivery(this.address, new Cost("$50"), new Eta("2024-10-31")));
-        deliveryList.add(new Delivery(this.address, new Cost("$50"), new Eta("2024-10-31")));*/
     }
 
     public Name getName() {

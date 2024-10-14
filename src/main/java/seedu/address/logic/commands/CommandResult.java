@@ -32,11 +32,14 @@ public class CommandResult {
 
     private DeliveryAction deliveryAction = DeliveryAction.NONE;
 
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
     public CommandResult(String feedbackToUser, DeliveryAction deliveryAction) {
         this.feedbackToUser = feedbackToUser;
         this.person = null;
         this.isShowHelp = false;
-        this.isExit = false ;
+        this.isExit = false;
         this.isInspect = false;
         this.isList = false;
         this.deliveryAction = deliveryAction;

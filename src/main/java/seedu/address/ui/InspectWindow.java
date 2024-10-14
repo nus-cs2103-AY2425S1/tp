@@ -30,9 +30,9 @@ public class InspectWindow extends UiPart<Stage> {
 
     private static final String FXML = "InspectWindow.fxml";
 
-    private final Logger logger = LogsCenter.getLogger(getClass());
-
     private static Person person;
+
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
     private Logic logic;
