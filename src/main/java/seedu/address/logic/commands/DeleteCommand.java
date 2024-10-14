@@ -25,8 +25,8 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "The person name provided is invalid.";
-    public static final String MESSAGE_INVALID_INDEX = "The person index provided is invalid.";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "The person's name provided is invalid";
+    public static final String MESSAGE_INVALID_INDEX = "The person index provided is invalid";
 
     private final Name targetName;
     private final Index targetIndex;

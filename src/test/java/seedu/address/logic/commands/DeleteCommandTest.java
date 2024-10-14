@@ -16,6 +16,9 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.commons.core.index.Index;
+
+import java.util.Optional;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -26,12 +29,12 @@ public class DeleteCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validNameUnfilteredList_success() {
+    public void execute_validIndex_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Name targetName = personToDelete.getName();
-        DeleteCommand deleteCommand = new DeleteCommand(targetName);
+        Index targetIndex = INDEX_FIRST_PERSON;
+        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, targetName);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
@@ -40,11 +43,11 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidNameUnfilteredList_throwsCommandException() {
-        Name invalidName = new Name("Nonexistent Name");
-        DeleteCommand deleteCommand = new DeleteCommand(invalidName);
+    public void execute_invalidIndex_throwsCommandException() {
+        Index invalidIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        DeleteCommand deleteCommand = new DeleteCommand(invalidIndex);
 
-        assertCommandFailure(deleteCommand, model, String.format(DeleteCommand.MESSAGE_PERSON_NOT_FOUND, invalidName));
+        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_INVALID_INDEX);
     }
 
     @Test
@@ -78,6 +81,7 @@ public class DeleteCommandTest {
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(new Name("Alice"));
         DeleteCommand deleteSecondCommand = new DeleteCommand(new Name("Bob"));
+        DeleteCommand deleteThirdCommand = new DeleteCommand(Index.fromOneBased(1));
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
@@ -94,6 +98,9 @@ public class DeleteCommandTest {
 
         // different person -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+
+        // different index -> returns false
+        assertFalse(deleteFirstCommand.equals(deleteThirdCommand));
     }
 
     @Test
