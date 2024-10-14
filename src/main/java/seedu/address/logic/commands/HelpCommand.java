@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import seedu.address.model.Model;
 
-import java.util.Objects;
-
 /**
  * Format full help instructions for every command for display.
  */
@@ -29,7 +27,7 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        if (Objects.equals(usage, "")) {
+        if (usage.isEmpty()) {
             return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
         } else {
             return new CommandResult(usage, false, false);
