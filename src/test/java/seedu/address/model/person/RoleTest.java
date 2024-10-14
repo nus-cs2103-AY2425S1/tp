@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -7,8 +8,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
+
+import com.fasterxml.jackson.databind.Module;
 
 public class RoleTest {
     @Test
@@ -75,6 +79,71 @@ public class RoleTest {
         assertEquals(RoleType.TUTOR, Role.roleTypeStringToEnum("ta"));
         assertEquals(RoleType.PROFESSOR, Role.roleTypeStringToEnum("professor"));
         assertEquals(RoleType.PROFESSOR, Role.roleTypeStringToEnum("prof"));
+    }
+
+    @Test
+    public void getFilteredModuleCodes_null_throwsNullPointerException() {
+        HashMap<ModuleCode, RoleType> roles = new HashMap<>();
+        roles.put(new ModuleCode("CS1101S"), RoleType.TUTOR);
+        Role role = new Role(roles);
+        assertThrows(NullPointerException.class, () -> {
+            role.getFilteredModuleCodes(null);
+        });
+    }
+
+    @Test
+    public void getFilteredModuleCodes_validRoleTypeAndOneMatch() {
+        HashMap<ModuleCode, RoleType> roles = new HashMap<>();
+        roles.put(new ModuleCode("CS1101S"), RoleType.TUTOR);
+        Role role = new Role(roles);
+        assertArrayEquals(Stream.of(new ModuleCode("CS1101S")).toArray(ModuleCode[]::new),
+                role.getFilteredModuleCodes(RoleType.TUTOR).toArray(ModuleCode[]::new));
+    }
+
+    @Test
+    public void getFilteredModuleCodes_validRoleTypeAndMultipleMatches() {
+        HashMap<ModuleCode, RoleType> roles = new HashMap<>();
+        roles.put(new ModuleCode("CS1101S"), RoleType.TUTOR);
+        roles.put(new ModuleCode("MA1522"), RoleType.TUTOR);
+        roles.put(new ModuleCode("CS3230"), RoleType.TUTOR);
+        Role role = new Role(roles);
+        assertArrayEquals(Stream.of(new ModuleCode("MA1522"),
+                        new ModuleCode("CS3230"),
+                        new ModuleCode("CS1101S")).toArray(ModuleCode[]::new),
+                role.getFilteredModuleCodes(RoleType.TUTOR).toArray(ModuleCode[]::new));
+    }
+
+    @Test
+    public void getFilteredModuleCodes_validRoleTypeButNoMatches_emptyStream() {
+        HashMap<ModuleCode, RoleType> roles = new HashMap<>();
+        roles.put(new ModuleCode("CS1101S"), RoleType.TUTOR);
+        Role role = new Role(roles);
+        assertTrue(role.getFilteredModuleCodes(RoleType.STUDENT).findAny().isEmpty());
+    }
+
+    @Test
+    public void getModuleCodeString_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> {
+            Role.getModuleCodeString(null);
+        });
+    }
+
+    @Test
+    public void getModuleCodeString_emptyStream_emptyString() {
+        assertTrue(Role.getModuleCodeString(Stream.of()).isEmpty());
+    }
+
+    @Test
+    public void getModuleCodeString_streamWithOneModuleCode() {
+        Stream<ModuleCode> moduleCodes = Stream.of(new ModuleCode("CS1101S"));
+        assertEquals("CS1101S", Role.getModuleCodeString(moduleCodes));
+    }
+
+    @Test
+    public void getModuleCodeString_streamWithMultipleModuleCodes() {
+        Stream<ModuleCode> moduleCodes = Stream.of(new ModuleCode("CS1101S"),
+                new ModuleCode("MA1522"), new ModuleCode("CS3230"), new ModuleCode("IS1108"));
+        assertEquals("CS1101S, MA1522, CS3230, IS1108", Role.getModuleCodeString(moduleCodes));
     }
 
     @Test
