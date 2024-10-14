@@ -27,7 +27,8 @@ public class UnmarkCommand extends Command {
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Tutorial: %2$s";
 
-    public static final String MESSAGE_UNMARK_SUCCESS = "Removed tutorial from Person: %1$s";
+    public static final String MESSAGE_UNMARK_SUCCESS = "Marked absent from Tutorial %s for Person: %s";
+    public static final String MESSAGE_UNMARK_UNNECESSARY = "Person: %2$s is already marked absent from Tutorial %1$s";
 
     private final Index index;
     private final Tutorial tutorial;
@@ -51,7 +52,11 @@ public class UnmarkCommand extends Command {
 
         Person personToEdit = currDisplayedList.get(index.getZeroBased());
         Set<Tutorial> newTutorials = new HashSet<>(personToEdit.getTutorials());
-        newTutorials.remove(tutorial);
+        if (!newTutorials.remove(tutorial)) {
+            throw new CommandException(
+                    String.format(MESSAGE_UNMARK_UNNECESSARY, tutorial.tutorial, Messages.format(personToEdit)));
+        };
+
         Person editedPerson = new Person(
                 personToEdit.getName(),
                 personToEdit.getStudentId(),
@@ -72,7 +77,7 @@ public class UnmarkCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        return String.format(MESSAGE_UNMARK_SUCCESS, Messages.format(personToEdit));
+        return String.format(MESSAGE_UNMARK_SUCCESS, tutorial.tutorial, Messages.format(personToEdit));
     }
 
     @Override
