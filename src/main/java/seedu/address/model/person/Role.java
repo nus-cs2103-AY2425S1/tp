@@ -102,6 +102,7 @@ public class Role {
      * @return A Stream of ModuleCode that are linked to a specific RoleType
      */
     public Stream<ModuleCode> getFilteredModuleCodes(RoleType roleType) {
+        requireNonNull(roleType);
         return this.roles.entrySet().stream()
                 .filter(entry -> entry.getValue().equals(roleType))
                 .map(Map.Entry::getKey);
@@ -115,6 +116,7 @@ public class Role {
      * @return comma separated String representation of a list of ModuleCode
      */
     public String getModuleCodeString(Stream<ModuleCode> moduleCodeStream) {
+        requireNonNull(moduleCodeStream);
         String[] moduleCodeStringArray = moduleCodeStream
                 .map(ModuleCode::toString)
                 .toArray(String[]::new);
