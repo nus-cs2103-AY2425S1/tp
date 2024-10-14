@@ -8,6 +8,8 @@ public enum Status {
     PENDING,
     COMPLETED;
 
+    public static final String MESSAGE_CONSTRAINTS = "Status has to be either PENDING or COMPLETED";
+
     /**
      * Returns true if a given string is a valid Status.
      */
