@@ -18,9 +18,9 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.PersonFulfilsPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for ViewCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for ViewPersonCommand.
  */
-public class ViewCommandTest {
+public class ViewPersonCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -35,7 +35,7 @@ public class ViewCommandTest {
     public void execute_zeroKeywords_showsEverything() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
         PersonFulfilsPredicate predicate = preparePredicate("");
-        ViewCommand command = new ViewCommand(predicate);
+        ViewPersonCommand command = new ViewPersonCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -44,7 +44,7 @@ public class ViewCommandTest {
     public void execute_invalidKeyword_noPersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         PersonFulfilsPredicate predicate = preparePredicate("hello");
-        ViewCommand command = new ViewCommand(predicate);
+        ViewPersonCommand command = new ViewPersonCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
@@ -55,14 +55,14 @@ public class ViewCommandTest {
         PersonFulfilsPredicate firstPredicate = new PersonFulfilsPredicate("");
         PersonFulfilsPredicate secondPredicate = new PersonFulfilsPredicate("buyer");
 
-        ViewCommand viewFirstCommand = new ViewCommand(firstPredicate);
-        ViewCommand viewSecondCommand = new ViewCommand(secondPredicate);
+        ViewPersonCommand viewFirstCommand = new ViewPersonCommand(firstPredicate);
+        ViewPersonCommand viewSecondCommand = new ViewPersonCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(viewFirstCommand.equals(viewFirstCommand));
 
         // same values -> returns true
-        ViewCommand viewFirstCommandCopy = new ViewCommand(firstPredicate);
+        ViewPersonCommand viewFirstCommandCopy = new ViewPersonCommand(firstPredicate);
         assertTrue(viewFirstCommand.equals(viewFirstCommandCopy));
 
         // different types -> returns false
@@ -78,9 +78,9 @@ public class ViewCommandTest {
     @Test
     public void toStringMethod() {
         PersonFulfilsPredicate predicate = new PersonFulfilsPredicate("buyer");
-        ViewCommand viewCommand = new ViewCommand(predicate);
-        String expected = ViewCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, viewCommand.toString());
+        ViewPersonCommand viewPersonCommand = new ViewPersonCommand(predicate);
+        String expected = ViewPersonCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        assertEquals(expected, viewPersonCommand.toString());
     }
 
     /**
