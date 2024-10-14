@@ -96,6 +96,10 @@ public class Role {
     /**
      * Get the String representation of a Person's Role for a specific
      * role type.
+     * For example, if a Person takes up roles of CS1101S Tutor, MA1522 Tutor,
+     * CS2106 Student, CS3230 Student, and I call getRoleDescription(RoleType.Tutor).
+     * I will get the description of the Tutor roles taken by this person like this:
+     * "Tutor of: CS1101S, MA1522"
      *
      * @param roleType Type of role to search and display.
      * @return String representation of the roles with the specified type.
