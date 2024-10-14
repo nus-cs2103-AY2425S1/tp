@@ -5,7 +5,7 @@
 ![Ui](docs/images/Ui.png)
 
 ---
-[CS2103-F13-1] SpleetWaise
+# [CS2103-F13-1] SpleetWaise
 
 > SpleetWaise simplifies expense tracking for students, making it easy to split
 > and manage shared costs. By offering a seamless solution to track who owes what,
