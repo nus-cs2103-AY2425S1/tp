@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
 /**
  * Changes or adds the notes of an existing person in BizBook.
  */
-public class NotesCommand extends Command {
+public class AddNotesCommand extends Command {
 
     public static final String COMMAND_WORD = "notes";
 
@@ -33,7 +33,6 @@ public class NotesCommand extends Command {
 
     public static final String MESSAGE_ADD_NOTES_SUCCESS = "Added notes to Person: %1$s";
     public static final String MESSAGE_DELETE_NOTES_SUCCESS = "Removed notes from Person: %1$s";
-    public static final String DELETE_COMMAND_KEYWORD = "delete";
 
     private final Index index;
     private final String note;
@@ -43,7 +42,7 @@ public class NotesCommand extends Command {
      * @param index of the person in the filtered person list to edit the notes
      * @param note of the person to be updated to
      */
-    public NotesCommand(Index index, String note) {
+    public AddNotesCommand(Index index, String note) {
         requireAllNonNull(index, note);
 
         this.index = index;
@@ -63,12 +62,6 @@ public class NotesCommand extends Command {
         // Update notes with new note
         Notes notesToEdit = personToEdit.getNotes();
         notesToEdit.add(note);
-
-        if (note.equalsIgnoreCase(DELETE_COMMAND_KEYWORD)) {
-            notesToEdit.clear();
-        } else {
-            notesToEdit.add(note);
-        }
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
