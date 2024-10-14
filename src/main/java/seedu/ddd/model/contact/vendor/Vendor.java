@@ -8,6 +8,7 @@ import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.Email;
+import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.tag.Tag;
@@ -28,14 +29,28 @@ public class Vendor extends Contact {
      * @param service A valid service.
      * @param tags    A set of tags associated with the client.
      */
-    public Vendor(Name name, Phone phone, Email email, Address address, Service service, Set<Tag> tags) {
-        super(name, phone, email, address, tags);
+    public Vendor(Name name, Phone phone, Email email, Address address, Service service, Set<Tag> tags, Id id) {
+        super(name, phone, email, address, tags, id);
         CollectionUtil.requireAllNonNull(service);
         this.service = service;
     }
 
     public Service getService() {
         return service;
+    }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Vendor)) {
+            return false;
+        }
+
+        Vendor otherVendor = (Vendor) other;
+        return super.equals(otherVendor) && service.equals(otherVendor.service);
     }
 
     @Override

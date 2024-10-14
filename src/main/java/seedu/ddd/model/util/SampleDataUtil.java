@@ -11,6 +11,7 @@ import seedu.ddd.model.contact.client.Date;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.Email;
+import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.vendor.Service;
@@ -25,10 +26,10 @@ public class SampleDataUtil {
         return new Contact[] {
             new Client(new Name("A"), new Phone("12345678"), new Email("a@a.com"), new Address("A"),
                 new Date("01 Jan 2000"),
-                getTagSet("another")),
+                getTagSet("another"), new Id(0)),
             new Vendor(new Name("B"), new Phone("12345678"), new Email("b@b.com"), new Address("B"),
                 new Service("Catering"),
-                getTagSet("test")),
+                getTagSet("test"), new Id(1)),
         };
     }
 
