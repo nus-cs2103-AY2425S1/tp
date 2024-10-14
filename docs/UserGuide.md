@@ -172,6 +172,21 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
+### Marking whether a person is a VIP : `vip`
+
+Marks the specified person from the address book as a VIP or removes said label.
+
+Format: `vip INDEX v/IS_VIP`
+
+* Affects the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* IS_VIP should either be `true` or `false`, corresponding to whether you intend to mark the target as a VIP or remove such a mark.
+
+Examples:
+* `list` followed by `vip 2 v/true` marks the 2nd person in the address book as a VIP.
+* `find Betsy` followed by `vip 1 v/false` removes VIP status from the 1st person in the results of the `find` command.
+
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
@@ -202,4 +217,5 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
+**Vip**    | `vip INDEX v/IS_VIP`<br> e.g., `vip 3 v/true`
 **Help**   | `help`
