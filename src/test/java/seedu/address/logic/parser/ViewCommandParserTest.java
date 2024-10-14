@@ -9,7 +9,6 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ViewCommand;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.NameMatchesNamePredicate;
 
 public class ViewCommandParserTest {
