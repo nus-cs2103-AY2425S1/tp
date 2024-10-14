@@ -5,10 +5,11 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.model.MeetUpList;
 import seedu.address.model.ReadOnlyMeetUpList;
 import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.MeetUpList;
+
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -22,11 +23,11 @@ public class SampleMeetUpList {
     }
 
     public static ReadOnlyMeetUpList getSampleMeetUpList() {
-        MeetUpList sampleMUL = new MeetUpList();
+        MeetUpList sampleMul = new MeetUpList();
         for (MeetUp sampleMeetUp : getSampleMeetUps()) {
-            sampleMUL.addMeetUp(sampleMeetUp);
+            sampleMul.addMeetUp(sampleMeetUp);
         }
-        return sampleMUL;
+        return sampleMul;
     }
 
     /**

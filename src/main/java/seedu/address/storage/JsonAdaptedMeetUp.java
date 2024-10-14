@@ -58,7 +58,8 @@ class JsonAdaptedMeetUp {
         // final Name modelName = new Name(name);
 
         // if (phone == null) {
-        //     throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        //     throw new IllegalValueException(
+        // String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         // }
         // if (!Phone.isValidPhone(phone)) {
         //     throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
@@ -66,7 +67,8 @@ class JsonAdaptedMeetUp {
         // final Phone modelPhone = new Phone(phone);
 
         // if (email == null) {
-        //     throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        //     throw new IllegalValueException(
+        // String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         // }
         // if (!Email.isValidEmail(email)) {
         //     throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);

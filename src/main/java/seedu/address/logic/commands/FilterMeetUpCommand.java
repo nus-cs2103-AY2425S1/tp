@@ -2,10 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.meetup.MeetUpContainsDate;
 
-import seedu.address.logic.Messages;
 
 /**
  * Finds and lists all meetings in address book whose date is the same as the given date.

@@ -16,8 +16,8 @@ import seedu.address.model.person.Person;
 /**
  * TODO JAVADOC + ENTIRE DOCUMENTATION
  * A list of meet ups that enforces uniqueness between its elements and does not allow nulls.
- * A meet ups is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
+ * A meet ups is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating
+ * of persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
  * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
  * as to ensure that the person with exactly the same fields will be removed.
  *
@@ -90,7 +90,7 @@ public class UniqueMeetUpList implements Iterable<MeetUp> {
         }
     }
 
-    public void setMeetUp(UniqueMeetUpList replacement) {
+    public void setMeetUps(UniqueMeetUpList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }

@@ -85,7 +85,7 @@ public class StorageManager implements Storage {
     public Path getMeetUpListFilePath() {
         return meetUpListStorage.getMeetUpListFilePath();
     }
-    
+
     @Override
     public Optional<ReadOnlyMeetUpList> readMeetUpList() throws DataLoadingException {
         return readMeetUpList(meetUpListStorage.getMeetUpListFilePath());
@@ -102,7 +102,7 @@ public class StorageManager implements Storage {
         saveMeetUpList(meetUpList, meetUpListStorage.getMeetUpListFilePath());
     }
 
-    @Override 
+    @Override
     public void saveMeetUpList(ReadOnlyMeetUpList meetUpList, Path filePath) throws IOException {
         logger.fine("Attempting to read data from file: " + filePath);
         meetUpListStorage.saveMeetUpList(meetUpList, filePath);

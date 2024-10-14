@@ -85,7 +85,7 @@ public class MeetUpList implements ReadOnlyMeetUpList {
      * {@code target} must exist in the meet up list.
      * The meetUp identity of {@code editedmeetUp} must not be the same as another existing meetUp in the meet up list.
      */
-    public void setMeetUps(MeetUp target, MeetUp editedMeetUp) {
+    public void setMeetUp(MeetUp target, MeetUp editedMeetUp) {
         requireNonNull(editedMeetUp);
 
         meetUps.setMeetUp(target, editedMeetUp);

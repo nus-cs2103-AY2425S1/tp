@@ -17,7 +17,7 @@ public interface MeetUpListStorage {
      */
     Path getMeetUpListFilePath();
 
-    /**ƒ
+    /**
      * Returns MeetUp data as a {@link ReadOnlyMeetUpList}.
      * Returns {@code Optional.empty()} if storage file is not found.
      *
@@ -32,7 +32,7 @@ public interface MeetUpListStorage {
 
     /**
      * Saves the given {@link ReadOnlyMeetUpList} to the storage.
-     * @param MeetUpList cannot be null.
+     * @param meetUpList cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
     void saveMeetUpList(ReadOnlyMeetUpList meetUpList) throws IOException;

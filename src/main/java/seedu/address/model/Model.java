@@ -106,7 +106,7 @@ public interface Model {
 
     /** Returns the MeetUpList */
     ReadOnlyMeetUpList getMeetUpList();
-    
+
     /** Returns an unmodifiable view of the filtered meetup list */
     ObservableList<MeetUp> getFilteredMeetUpList();
 

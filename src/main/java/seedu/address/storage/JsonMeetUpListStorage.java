@@ -60,8 +60,8 @@ public class JsonMeetUpListStorage implements MeetUpListStorage {
     }
 
     @Override
-    public void saveMeetUpList(ReadOnlyMeetUpList MeetUpList) throws IOException {
-        saveMeetUpList(MeetUpList, filePath);
+    public void saveMeetUpList(ReadOnlyMeetUpList meetUpList) throws IOException {
+        saveMeetUpList(meetUpList, filePath);
     }
 
     /**
@@ -69,12 +69,12 @@ public class JsonMeetUpListStorage implements MeetUpListStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveMeetUpList(ReadOnlyMeetUpList MeetUpList, Path filePath) throws IOException {
-        requireNonNull(MeetUpList);
+    public void saveMeetUpList(ReadOnlyMeetUpList meetUpList, Path filePath) throws IOException {
+        requireNonNull(meetUpList);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableMeetUpList(MeetUpList), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableMeetUpList(meetUpList), filePath);
     }
 
 }
