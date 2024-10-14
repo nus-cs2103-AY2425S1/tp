@@ -5,9 +5,7 @@ import static careconnect.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static careconnect.testutil.Assert.assertThrows;
 import static careconnect.testutil.TypicalPersons.ALICE;
 import static careconnect.testutil.TypicalPersons.BOB;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -40,12 +38,30 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void list_sortedLexicographically_returnsTrue() {
+        uniquePersonList.add(BOB);
+        uniquePersonList.add(ALICE);
+        assertTrue(uniquePersonList.iterator().next().equals(ALICE));
+    }
+
+    @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniquePersonList.contains(editedAlice));
     }
+
+    public void editedList_sortedLexicographically_returnsTrue() {
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+        Person editedAlice =
+                new PersonBuilder(ALICE).withName("Darcy").withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(uniquePersonList.contains(editedAlice));
+        assertTrue(uniquePersonList.iterator().next().equals(BOB));
+    }
+
 
     @Test
     public void add_nullPerson_throwsNullPointerException() {
@@ -160,6 +176,15 @@ public class UniquePersonListTest {
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Person> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
+    }
+
+    @Test
+    public void setPersons_list_sortsListLexicographically() {
+        uniquePersonList.add(ALICE);
+        List<Person> personList = Arrays.asList(BOB, ALICE);
+        uniquePersonList.setPersons(personList);
+
+        assertEquals(ALICE, uniquePersonList.iterator().next());
     }
 
     @Test
