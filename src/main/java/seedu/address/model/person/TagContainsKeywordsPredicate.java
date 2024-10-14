@@ -20,9 +20,10 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         //@@author tayxuenye-reused
-        //Written by ChatGPT
+        // Written by ChatGPT
         return person.getTags().stream()
-                .anyMatch(tagsToMatch::contains);
+                .anyMatch(personTag ->
+                        tagsToMatch.stream().anyMatch(tag -> tag.tagName.equalsIgnoreCase(personTag.tagName)));
         //@@author
     }
 
