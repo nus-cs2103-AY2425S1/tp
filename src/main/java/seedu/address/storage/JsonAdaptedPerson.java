@@ -37,7 +37,7 @@ class JsonAdaptedPerson {
     private final String dateOfBirth;
     private final String gender;
     private final String nric;
-    private final String medCon;
+    private final List<JsonAdaptedMedCon> medCons = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String priority;
     private final List<JsonAdaptedAppointment> appointments = new ArrayList<>();
@@ -54,7 +54,7 @@ class JsonAdaptedPerson {
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("priority") String priority,
             @JsonProperty("appointments") List<JsonAdaptedAppointment> appointments,
-            @JsonProperty("medCon") String medCon) {
+            @JsonProperty("medCons") List<JsonAdaptedMedCon> medCons) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -63,7 +63,9 @@ class JsonAdaptedPerson {
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.nric = nric;
-        this.medCon = medCon;
+        if (medCons != null) {
+            this.medCons.addAll(medCons);
+        }
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -83,7 +85,10 @@ class JsonAdaptedPerson {
         dateOfBirth = source.getDateOfBirth().value;
         gender = source.getGender().value;
         nric = source.getNric().value;
-        medCon = source.getMedCon().value;
+        medCons.addAll(source.getMedCons()
+                .stream()
+                .map(JsonAdaptedMedCon::new)
+                .toList());
         priority = source.getPriority().priority;
         tags.addAll(source.getTags()
                           .stream()
@@ -103,6 +108,7 @@ class JsonAdaptedPerson {
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         final List<Appointment> personAppointments = new ArrayList<>();
+        final List<MedCon> personMedCons = new ArrayList<>();
 
         for (JsonAdaptedAppointment appointment : appointments) {
             personAppointments.add(appointment.toModelType());
@@ -110,6 +116,10 @@ class JsonAdaptedPerson {
 
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+
+        for (JsonAdaptedMedCon medCon : medCons) {
+            personMedCons.add(medCon.toModelType());
         }
 
         if (name == null) {
@@ -173,20 +183,19 @@ class JsonAdaptedPerson {
         final Nric modelNric = new Nric(nric);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
         if (priority == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Priority.class.getSimpleName()));
         }
         final Priority modelPriority = new Priority(priority);
+
         final Set<Appointment> modelAppointments = new HashSet<>(personAppointments);
 
-        if (medCon == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, MedCon.class.getSimpleName()));
-        }
-        final MedCon modelMedCon = new MedCon(medCon);
+        final Set<MedCon> modelMedCons = new HashSet<>(personMedCons);
 
         return new Person(modelName, modelPhone, modelEmail, modelNric, modelAddress, modelDateOfBirth,
-                modelGender, modelTags, modelPriority, modelAppointments, modelMedCon);
+                modelGender, modelTags, modelPriority, modelAppointments, modelMedCons);
 
     }
 

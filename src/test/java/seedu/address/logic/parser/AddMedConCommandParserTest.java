@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_LENGTH;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEDCON_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NRIC_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.MEDCON_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.MEDCON_DESC_BOB;
@@ -14,6 +16,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddMedConCommand;
@@ -25,22 +31,34 @@ public class AddMedConCommandParserTest {
 
     @Test
     public void parse_allFieldsValid_success() {
-        // For Amy with MedCon
-        AddMedConCommand expectedCommandForAmy = new AddMedConCommand(new Nric(VALID_NRIC_AMY),
-                new MedCon(VALID_MEDCON_AMY));
+        // For Amy with one MedCon
+        Set<MedCon> medConsAmy = new HashSet<>();
+        medConsAmy.add(new MedCon(VALID_MEDCON_AMY));
+        AddMedConCommand expectedCommandForAmy = new AddMedConCommand(new Nric(VALID_NRIC_AMY), medConsAmy);
         assertParseSuccess(parser, NRIC_DESC_AMY + MEDCON_DESC_AMY, expectedCommandForAmy);
 
-        // For Bob with MedCon
-        AddMedConCommand expectedCommandForBob = new AddMedConCommand(new Nric(VALID_NRIC_BOB),
-                new MedCon(VALID_MEDCON_BOB));
+        // For Bob with one MedCon
+        Set<MedCon> medConsBob = new HashSet<>();
+        medConsBob.add(new MedCon(VALID_MEDCON_BOB));
+        AddMedConCommand expectedCommandForBob = new AddMedConCommand(new Nric(VALID_NRIC_BOB), medConsBob);
         assertParseSuccess(parser, NRIC_DESC_BOB + MEDCON_DESC_BOB, expectedCommandForBob);
 
+        // For Amy with multiple MedCons
+        Set<MedCon> multipleMedConsAmy = new HashSet<>();
+        multipleMedConsAmy.add(new MedCon(VALID_MEDCON_AMY));
+        multipleMedConsAmy.add(new MedCon(VALID_MEDCON_BOB));
+        AddMedConCommand expectedCommandForAmyMultiple = new AddMedConCommand(new Nric(VALID_NRIC_AMY),
+                multipleMedConsAmy);
+        assertParseSuccess(parser, NRIC_DESC_AMY + MEDCON_DESC_AMY + MEDCON_DESC_BOB,
+                expectedCommandForAmyMultiple);
+
         // For Amy without MedCon (MedCon is optional)
-        AddMedConCommand expectedCommandForAmyNoMedCon = new AddMedConCommand(new Nric(VALID_NRIC_AMY), new MedCon(""));
+        Set<MedCon> noMedCons = Collections.emptySet();
+        AddMedConCommand expectedCommandForAmyNoMedCon = new AddMedConCommand(new Nric(VALID_NRIC_AMY), noMedCons);
         assertParseSuccess(parser, NRIC_DESC_AMY, expectedCommandForAmyNoMedCon);
 
         // For Bob without MedCon (MedCon is optional)
-        AddMedConCommand expectedCommandForBobNoMedCon = new AddMedConCommand(new Nric(VALID_NRIC_BOB), new MedCon(""));
+        AddMedConCommand expectedCommandForBobNoMedCon = new AddMedConCommand(new Nric(VALID_NRIC_BOB), noMedCons);
         assertParseSuccess(parser, NRIC_DESC_BOB, expectedCommandForBobNoMedCon);
     }
 
@@ -65,5 +83,15 @@ public class AddMedConCommandParserTest {
         assertParseFailure(parser, MEDCON_DESC_AMY, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddMedConCommand.MESSAGE_USAGE));
     }
+
+
+    @Test
+    public void parse_medConLengthGreaterThan45Characters_failure() {
+        // Medical condition exceeds 45 characters
+        String input = NRIC_DESC_AMY + INVALID_MEDCON_DESC;
+
+        assertParseFailure(parser, input, MESSAGE_CONSTRAINTS_LENGTH);
+    }
+
 }
 

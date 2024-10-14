@@ -107,6 +107,8 @@ public class CommandTestUtil {
     public static final String INVALID_DOB_VALUE_DESC = " " + PREFIX_DOB + LocalDate.now().plusDays(2)
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); // DOB in future
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "X"; // 'X' not allowed for gender
+    public static final String INVALID_MEDCON_DESC = " " + PREFIX_MEDCON
+            + "Pneumonoultramicroscopicsilicovolcanoconiosisdeeznutz"; // longer than 45 characters
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
@@ -160,6 +162,7 @@ public class CommandTestUtil {
                                                                         + VALID_APPOINTMENT_DATE_PHYSIO + " "
                                                                         + PREFIX_TIMEPERIOD
                                                                         + INVALID_APPOINTMENT_TIMEPERIOD_ORDER;
+    public static final String INVALID_MEDCON = "Pneumonoultramicroscopicsilicovolcanoconiosisdeeznutz";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

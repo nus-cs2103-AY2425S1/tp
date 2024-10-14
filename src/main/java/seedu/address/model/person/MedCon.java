@@ -26,7 +26,7 @@ public class MedCon {
      *
      * @return The medical condition of the patient
      */
-    public String getMedcon() {
+    public String getMedCon() {
         return value;
     }
 
