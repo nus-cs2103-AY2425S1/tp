@@ -1,6 +1,8 @@
 package seedu.sellsavvy.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.ADDRESS_DESC_AMY;
@@ -85,6 +87,14 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getSelectedPerson_inner_content_is_null_initially() {
+        assertNotNull(logic.getSelectedPerson());
+        //ensures that when first initiated no person's order will be displayed
+        assertNull(logic.getSelectedPerson().get());
+
     }
 
     /**

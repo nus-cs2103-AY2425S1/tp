@@ -2,6 +2,8 @@ package seedu.sellsavvy.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
@@ -91,6 +93,21 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getSelectedPerson_inner_content_is_null_initially() {
+        assertNotNull(modelManager.getSelectedPerson());
+        //ensures that when first initiated no person's order will be displayed
+        assertNull(modelManager.getSelectedPerson().get());
+    }
+
+    @Test
+    public void updateSelectedPerson_updateSuccessfully() {
+        modelManager.updateSelectedPerson(ALICE);
+        assertEquals(modelManager.getSelectedPerson().get(), ALICE);
+        modelManager.updateSelectedPerson(null);
+        assertNull(modelManager.getSelectedPerson().get());
     }
 
     @Test
