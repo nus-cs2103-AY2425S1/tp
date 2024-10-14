@@ -90,7 +90,7 @@ public class JsonAddressBookStorageTest {
         jsonAddressBookStorage.saveArchivedAddressBook(original, archivePath);
         ReadOnlyAddressBook readBackArchive = jsonAddressBookStorage.readAddressBook(archivePath).get();
         assertEquals(original, new AddressBook(readBackArchive));
-
+        assertEquals(archivePath, jsonAddressBookStorage.getArchivedAddressBookFilePath());
     }
 
     @Test

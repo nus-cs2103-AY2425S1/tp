@@ -101,7 +101,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
     @Override
     public void saveArchivedAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+        saveAddressBook(addressBook, archivePath);
     }
 
     /**
