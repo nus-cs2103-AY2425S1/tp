@@ -50,7 +50,8 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
-
+        
+        logger.info("meetup list is now" + model.getMeetUpList());
         try {
             storage.saveAddressBook(model.getAddressBook());
             storage.saveMeetUpList(model.getMeetUpList());

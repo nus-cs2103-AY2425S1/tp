@@ -3,9 +3,12 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.LogicManager;
 import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.meetup.UniqueMeetUpList;
 
@@ -14,7 +17,7 @@ import seedu.address.model.meetup.UniqueMeetUpList;
  * Duplicates are not allowed (by .isSameMeetUp comparison)
  */
 public class MeetUpList implements ReadOnlyMeetUpList {
-
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
     private final UniqueMeetUpList meetUps;
 
     /*
@@ -35,6 +38,7 @@ public class MeetUpList implements ReadOnlyMeetUpList {
      */
     public MeetUpList(ReadOnlyMeetUpList toBeCopied) {
         this();
+        logger.info("the tobecopied is" + toBeCopied);
         resetData(toBeCopied);
     }
 
@@ -46,6 +50,7 @@ public class MeetUpList implements ReadOnlyMeetUpList {
      */
     public void setMeetUps(List<MeetUp> meetUps) {
         this.meetUps.setMeetUps(meetUps);
+        logger.info("set meetups to " + this.meetUps);
     }
 
     /**
@@ -53,7 +58,7 @@ public class MeetUpList implements ReadOnlyMeetUpList {
      */
     public void resetData(ReadOnlyMeetUpList newData) {
         requireNonNull(newData);
-
+        logger.info("newdata is" + newData.getMeetUpList());
         setMeetUps(newData.getMeetUpList());
     }
 

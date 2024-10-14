@@ -37,6 +37,8 @@ public class ModelManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs
                 + "and meet up list " + meetUpList);
 
+        logger.info("initial meet up list contains " + meetUpList);
+
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.meetUpList = new MeetUpList(meetUpList);

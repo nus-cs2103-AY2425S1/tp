@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyMeetUpList;
@@ -50,14 +51,12 @@ public class JsonMeetUpListStorage implements MeetUpListStorage {
             return Optional.empty();
         }
 
-        // TODO
-        return null;
-        // try {
-        //     return Optional.of(jsonMeetUpList.get().toModelType());
-        // } catch (IllegalValueException ive) {
-        //     logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
-        //     throw new DataLoadingException(ive);
-        // }
+        try {
+            return Optional.of(jsonMeetUpList.get().toModelType());
+        } catch (IllegalValueException ive) {
+            logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
+            throw new DataLoadingException(ive);
+        }
     }
 
     @Override

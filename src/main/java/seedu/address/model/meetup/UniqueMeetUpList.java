@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,11 +13,10 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
 
-import java.util.logging.Logger;
-
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
+ * TODO JAVADOC + ENTIRE DOCUMENTATION
+ * A list of meet ups that enforces uniqueness between its elements and does not allow nulls.
+ * A meet ups is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
  * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
  * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
  * as to ensure that the person with exactly the same fields will be removed.
@@ -61,19 +61,20 @@ public class UniqueMeetUpList implements Iterable<MeetUp> {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
      */
     public void setMeetUp(MeetUp target, MeetUp editedPerson) {
-        // TODO
-        // requireAllNonNull(target, editedPerson);
+        requireAllNonNull(target, editedPerson);
 
-        // int index = internalList.indexOf(target);
-        // if (index == -1) {
-        //     throw new PersonNotFoundException();
-        // }
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            // TODO
+            return;
+            // throw new PersonNotFoundException();
+        }
 
         // if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
         //     throw new DuplicatePersonException();
         // }
 
-        // internalList.set(index, editedPerson);
+        internalList.set(index, editedPerson);
     }
 
     /**
@@ -81,17 +82,17 @@ public class UniqueMeetUpList implements Iterable<MeetUp> {
      * The person must exist in the list.
      */
     public void remove(MeetUp toRemove) {
-        // TODO
-        // requireNonNull(toRemove);
-        // if (!internalList.remove(toRemove)) {
-        //     throw new PersonNotFoundException();
-        // }
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            // TODO
+            //throw new PersonNotFoundException();
+            return;
+        }
     }
 
     public void setMeetUp(UniqueMeetUpList replacement) {
-        // TODO
-        // requireNonNull(replacement);
-        // internalList.setAll(replacement.internalList);
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
     }
 
     /**
@@ -99,13 +100,12 @@ public class UniqueMeetUpList implements Iterable<MeetUp> {
      * {@code persons} must not contain duplicate persons.
      */
     public void setMeetUps(List<MeetUp> meetUps) {
-        // TODO
-        // requireAllNonNull(meetUps);
+        requireAllNonNull(meetUps);
         // if (!meetUpsAreUnique(meetUps)) {
         //     throw new DuplicatePersonException();
         // }
 
-        // internalList.setAll(meetUps);
+        internalList.setAll(meetUps);
     }
 
     /**
