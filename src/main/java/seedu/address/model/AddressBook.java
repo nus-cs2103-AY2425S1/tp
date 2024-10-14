@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.owner.Owner;
+import seedu.address.model.owner.UniqueOwnerList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.pet.Pet;
@@ -18,6 +20,7 @@ import seedu.address.model.pet.UniquePetList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueOwnerList owners;
     private final UniquePetList pets;
 
     /*
@@ -27,12 +30,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
      */
+
     {
         persons = new UniquePersonList();
+        owners = new UniqueOwnerList();
         pets = new UniquePetList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -53,6 +59,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the owner list with {@code owners}.
+     * {@code owners} must not contain duplicate owners.
+     */
+    public void setOwners(List<Owner> owners) {
+        this.owners.setOwners(owners);
+    }
+
+
+    /**
      * Replaces the contents of the pet list with {@code pets}.
      * {@code pets} must not contain duplicate pets.
      */
@@ -67,6 +82,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setOwners(newData.getOwnerList());
         setPets(newData.getPetList());
     }
 
@@ -106,6 +122,44 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removePerson(Person key) {
         persons.remove(key);
     }
+
+    //// owner-level operations
+
+    /**
+     * Returns true if an owner with the same identity as {@code owner} exists in the address book.
+     */
+    public boolean hasOwner(Owner owner) {
+        requireNonNull(owner);
+        return owners.contains(owner);
+    }
+
+    /**
+     * Adds an owner to the address book.
+     * The owner must not already exist in the address book.
+     */
+    public void addOwner(Owner o) {
+        owners.add(o);
+    }
+
+    /**
+     * Replaces the given owner {@code target} in the list with {@code editedOwner}.
+     * {@code target} must exist in the address book.
+     * The owner identity of {@code editedOwner} must not be the same as another existing owner in the address book.
+     */
+    public void setOwner(Owner target, Owner editedOwner) {
+        requireNonNull(editedOwner);
+
+        owners.setOwner(target, editedOwner);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeOwner(Owner key) {
+        owners.remove(key);
+    }
+
 
     //// pet-level operations
 
@@ -149,14 +203,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", persons)
-                .add("pets", pets)
-                .toString();
+            .add("persons", persons)
+            .add("owners", owners).add("pets", pets)
+            .toString();
     }
 
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Owner> getOwnerList() {
+        return owners.asUnmodifiableObservableList();
     }
 
     @Override
@@ -176,7 +235,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons) && pets.equals(otherAddressBook.pets);
+        return persons.equals(otherAddressBook.persons) && owners.equals(otherAddressBook.owners)
+                && pets.equals(otherAddressBook.pets);
     }
 
     @Override
