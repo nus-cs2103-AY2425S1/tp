@@ -59,7 +59,21 @@ public class PersonCard extends UiPart<Region> {
         job.setText(person.getJob().value);
         income.setText(person.getIncome().toString());
         remark.setText(person.getRemark().value);
-        tags.getChildren().add(new Label(person.getTier().tagName.toString()));
+
+        // Create a label for the tier tag
+        Label tierLabel = new Label(person.getTier().tagName.toString());
+
+        // Apply a different style class based on the tier value
+        String tier = person.getTier().tagName.toString().toUpperCase();
+        switch (tier) {
+        case "GOLD" -> tierLabel.getStyleClass().add("gold-tier");
+        case "SILVER" -> tierLabel.getStyleClass().add("silver-tier");
+        case "BRONZE" -> tierLabel.getStyleClass().add("bronze-tier");
+        case "REJECT" -> tierLabel.getStyleClass().add("reject-tier");
+        default -> tierLabel.getStyleClass().add("no-tier");
+        }
+        // Add the label to the FlowPane
+        tags.getChildren().add(tierLabel);
     }
 
 }
