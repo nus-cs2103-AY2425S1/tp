@@ -74,7 +74,7 @@ public class UnpaidCommand extends Command {
         Boolean updatedHasNotPaid = false;
 
         return new Person(personToPay.getName(), personToPay.getPhone(), personToPay.getEmail(),
-                personToPay.getAddress(), personToPay.getTags(), updatedHasNotPaid);
+                personToPay.getAddress(), personToPay.getBirthday(), personToPay.getTags(), updatedHasNotPaid);
     }
 
     @Override

@@ -36,7 +36,7 @@ public class UnpaidCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Person editedPerson = new Person(personToMarkUnpaid.getName(), personToMarkUnpaid.getPhone(),
                 personToMarkUnpaid.getEmail(), personToMarkUnpaid.getAddress(),
-                personToMarkUnpaid.getTags(), false);
+                personToMarkUnpaid.getBirthday(), personToMarkUnpaid.getTags(), false);
 
         expectedModel.setPerson(personToMarkUnpaid, editedPerson);
 
@@ -69,7 +69,7 @@ public class UnpaidCommandTest {
 
         Person editedPerson = new Person(personToMarkUnpaid.getName(), personToMarkUnpaid.getPhone(),
                 personToMarkUnpaid.getEmail(), personToMarkUnpaid.getAddress(),
-                personToMarkUnpaid.getTags(), false);
+                personToMarkUnpaid.getBirthday(), personToMarkUnpaid.getTags(), false);
         expectedModel.setPerson(personToMarkUnpaid, editedPerson);
 
         assertCommandSuccess(unpaidCommand, model, expectedMessage, expectedModel);
