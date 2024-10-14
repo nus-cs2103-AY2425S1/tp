@@ -22,7 +22,8 @@ public class NotesCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the notes of the person identified "
             + "by the index number used in the last person listing. "
-            + "New note will be appended to the notes currently stored.\n"
+            + "New note will be appended to the notes currently stored." +
+            " To delete notes of a person, input 'delete' after n/ instead of a note\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "n/ [NOTES]\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -32,6 +33,7 @@ public class NotesCommand extends Command {
 
     public static final String MESSAGE_ADD_NOTES_SUCCESS = "Added notes to Person: %1$s";
     public static final String MESSAGE_DELETE_NOTES_SUCCESS = "Removed notes from Person: %1$s";
+    public static final String DELETE_COMMAND_KEYWORD = "delete";
 
     private final Index index;
     private final String note;
@@ -62,6 +64,12 @@ public class NotesCommand extends Command {
         Notes notesToEdit = personToEdit.getNotes();
         notesToEdit.add(note);
 
+        if (note.equalsIgnoreCase(DELETE_COMMAND_KEYWORD)) {
+            notesToEdit.clear();
+        } else {
+            notesToEdit.add(note);
+        }
+
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), notesToEdit);
@@ -83,12 +91,3 @@ public class NotesCommand extends Command {
     }
 
 }
-
-
-
-
-
-
-
-
-

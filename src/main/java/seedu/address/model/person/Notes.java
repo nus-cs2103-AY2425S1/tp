@@ -70,5 +70,10 @@ public class Notes {
         return notes == null || notes.isEmpty();
     }
 
-
+    /**
+     * Clears all notes if called
+     */
+    public void clear() {
+        notes.clear();
+    }
 }
