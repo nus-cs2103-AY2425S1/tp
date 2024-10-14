@@ -28,7 +28,8 @@ public class MarkCommand extends Command {
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Tutorial: %2$s";
 
     public static final String MESSAGE_MARK_SUCCESS = "Marked present in Tutorial: %2$s for Person: %1$s";
-    public static final String MESSAGE_MARK_UNNECESSARY = "Person: %1$s is already marked as present for Tutorial: %2$s";
+    public static final String MESSAGE_MARK_UNNECESSARY =
+            "Person: %1$s is already marked as present for Tutorial: %2$s";
 
     private final Index index;
     private final Tutorial tutorial;
@@ -55,7 +56,7 @@ public class MarkCommand extends Command {
         if (!newTutorials.add(tutorial)) {
             throw new CommandException(
                     String.format(MESSAGE_MARK_UNNECESSARY, Messages.format(personToEdit), tutorial.tutorial));
-        };
+        }
 
         Person editedPerson = new Person(
                 personToEdit.getName(),

@@ -55,6 +55,24 @@ public class MarkCommandTest {
         assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
+    /**
+     * Mark a person using index outside the displayed list.
+     */
+    @Test
+    public void execute_tutorialAlreadyMarked_failure() {
+        // Execute mark twice
+        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, new Tutorial("1"));
+        try {
+            markCommand.execute(model);
+            markCommand.execute(model);
+        } catch (CommandException e) {
+            assertCommandFailure(markCommand, model,
+                    String.format(MarkCommand.MESSAGE_MARK_UNNECESSARY,
+                            Messages.format(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased())),
+                            new Tutorial("1").tutorial));
+        }
+    }
+
     @Test
     public void execute_success() {
         Tutorial tutorialToBeAdded = new Tutorial("1");
@@ -84,8 +102,10 @@ public class MarkCommandTest {
 
         // Check model is updated with new person attribute
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        String expectedMessage = String.format(MarkCommand.MESSAGE_ADD_MARK_SUCCESS, Messages.format(editedPerson));
-        assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
+        String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_SUCCESS, Messages.format(editedPerson),
+                tutorialToBeAdded.tutorial);
+        Model typicalModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        assertCommandSuccess(markCommand, typicalModel, expectedMessage, expectedModel);
     }
 
     @Test
