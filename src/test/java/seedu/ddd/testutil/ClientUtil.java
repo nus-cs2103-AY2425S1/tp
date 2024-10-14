@@ -23,13 +23,13 @@ public class ClientUtil {
      * Returns an add command string for adding the {@code contact}.
      */
     public static String getAddContactCommand(Client client) {
-        return AddContactCommand.COMMAND_WORD + " client " + getPersonDetails(client);
+        return AddContactCommand.COMMAND_WORD + " client " + getClientDetails(client);
     }
 
     /**
      * Returns the part of command string for the given {@code contact}'s details.
      */
-    public static String getPersonDetails(Client client) {
+    public static String getClientDetails(Client client) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + client.getName().fullName + " ");
         sb.append(PREFIX_PHONE + client.getPhone().value + " ");
@@ -45,7 +45,7 @@ public class ClientUtil {
     /**
      * Returns the part of command string for the given {@code EditContactDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditContactDescriptor descriptor) {
+    public static String getEditClientDescriptorDetails(EditContactDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

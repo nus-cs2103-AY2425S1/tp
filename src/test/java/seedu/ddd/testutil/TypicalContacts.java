@@ -18,6 +18,7 @@ import java.util.List;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.vendor.Vendor;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -28,19 +29,22 @@ public class TypicalContacts {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends").build();
-    public static final Client BENSON = new ClientBuilder().withName("Benson Meier")
+    public static final Vendor BENSON = new VendorBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
+            .withService("flower provider")
             .withTags("owesMoney", "friends").build();
     public static final Client CARL = new ClientBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();
-    public static final Client DANIEL = new ClientBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
+    public static final Vendor DANIEL = new VendorBuilder().withName("Daniel Meier").withPhone("87652533")
+            .withEmail("cornelia@example.com").withAddress("10th street")
+            .withService("Photography")
+            .withTags("friends").build();
     public static final Client ELLE = new ClientBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").build();
     public static final Client FIONA = new ClientBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo").build();
-    public static final Client GEORGE = new ClientBuilder().withName("George Best").withPhone("9482442")
+    public static final Vendor GEORGE = new VendorBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").build();
 
     // Manually added

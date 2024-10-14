@@ -19,13 +19,13 @@ public class VendorUtil {
      * Returns an add command string for adding the {@code contact}.
      */
     public static String getAddContactCommand(Vendor vendor) {
-        return AddContactCommand.COMMAND_WORD + " vendor " + getPersonDetails(vendor);
+        return AddContactCommand.COMMAND_WORD + " vendor " + getVendorDetails(vendor);
     }
 
     /**
      * Returns the part of command string for the given {@code contact}'s details.
      */
-    public static String getPersonDetails(Vendor vendor) {
+    public static String getVendorDetails(Vendor vendor) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + vendor.getName().fullName + " ");
         sb.append(PREFIX_PHONE + vendor.getPhone().value + " ");
