@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class ClientStatus {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Client status must be either “active”, “unresponsive”, “potential”, or “old”(case sensitive).";
+            "Client status must be either “active”, “unresponsive”, “potential”, or “old”(case insensitive).";
 
     private static final String ACTIVE = "active";
     private static final String OLD = "old";
@@ -27,35 +27,15 @@ public class ClientStatus {
     public ClientStatus(String status) {
         requireNonNull(status);
         checkArgument(isValidClientStatus(status), MESSAGE_CONSTRAINTS);
-        value = parseStatus(status);
+        value = status.toLowerCase();
     }
 
     /**
      * Returns true if the given string is a valid client status.
      */
     public static boolean isValidClientStatus(String test) {
-        return test.equals(ACTIVE) || test.equals(UNRESPONSIVE)
-                || test.equals(POTENTIAL) || test.equals(OLD);
-    }
-
-    /**
-     * Parses the status into the relevant client status string
-     * @param status The client status string
-     * @return The client's client status as string
-     */
-    private static String parseStatus(String status) {
-        switch (status) {
-        case ACTIVE:
-            return ACTIVE;
-        case UNRESPONSIVE:
-            return UNRESPONSIVE;
-        case OLD:
-            return OLD;
-        case POTENTIAL:
-            return POTENTIAL;
-        default:
-            return status;
-        }
+        return test.equalsIgnoreCase(ACTIVE) || test.equalsIgnoreCase(UNRESPONSIVE)
+                || test.equalsIgnoreCase(POTENTIAL) || test.equalsIgnoreCase(OLD);
     }
 
     @Override
