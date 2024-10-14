@@ -19,7 +19,7 @@ public class ListOrderCommandParserTest {
     private ListOrderCommandParser parser = new ListOrderCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
+    public void parse_validArgs_returnsListOrderCommand() {
         assertParseSuccess(parser, "1", new ListOrderCommand(INDEX_FIRST_PERSON));
     }
 
