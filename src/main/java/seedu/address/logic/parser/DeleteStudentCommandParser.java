@@ -17,14 +17,15 @@ public class DeleteStudentCommandParser implements Parser<DeleteStudentCommand> 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteStudentCommand
      * and returns a DeleteStudentCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteStudentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NUMBER);
+            ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NUMBER);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_NUMBER)
-                || !argMultimap.getPreamble().isEmpty()) {
+            || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentCommand.MESSAGE_USAGE));
         }
 

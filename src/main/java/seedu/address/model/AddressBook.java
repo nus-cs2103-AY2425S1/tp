@@ -119,11 +119,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+
      * Returns true if a group with the same group name as {@code groupName} exists in the address book.
      */
     public boolean containsGroupName(GroupName groupName) {
         requireNonNull(groupName);
         return groups.containsGroupWithName(groupName);
+      
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeGroup(Group key) {
+        groups.remove(key);
     }
 
     /**
