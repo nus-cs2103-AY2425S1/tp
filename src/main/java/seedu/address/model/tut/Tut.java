@@ -9,7 +9,7 @@ import java.util.List;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialClass;
-
+import seedu.address.model.tut.exceptions.TutDateNotFoundException;
 
 /**
  * Represents a Tutorial in the address book.
@@ -31,6 +31,8 @@ public class Tut {
     // TODO: Insert TutDate
     private final String tutName;
     private final TutorialClass tutorialClass;
+    private List<TutDate> tutDates = new ArrayList<>();
+
     /**
      * Constructs a {@code Tut}.
      *
@@ -69,6 +71,37 @@ public class Tut {
                     .findFirst()
                     .orElse(null); // Returns null if no student is found
     }
+    public boolean tutorialDateInList(TutDate tutorialDate) {
+        return tutDates.contains(tutorialDate);
+    }
+    public void addTutorialDate(TutDate tutorialDate) {
+        tutDates.add(tutorialDate);
+    }
+    public TutDate getTutorialDate(Integer id) {
+        return tutDates.get(id);
+    }
+    public boolean isValidTutorialDate(TutDate tutorialDate) {
+        return tutorialDate.isValid();
+    }
+
+    /**
+     *  Marks the attendance for the student for the particular tutorialDate
+     */
+    public void markAttendance(Student student, TutDate tutorialDate) throws TutDateNotFoundException {
+        if (!isValidTutorialDate(tutorialDate)) {
+            throw new TutDateNotFoundException();
+        }
+        if (!studentInList(student)) {
+            add(student);
+        }
+        if (!tutorialDateInList(tutorialDate)) {
+            addTutorialDate(tutorialDate);
+        }
+        tutorialDate.add(student);
+    }
+    private boolean studentInList(Student student) {
+        return students.contains(student);
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -83,6 +116,7 @@ public class Tut {
 
         Tut otherTutorial = (Tut) other;
         return tutorialClass.equals(otherTutorial.tutorialClass)
+                && tutDates.equals(otherTutorial.tutDates)
                 && tutName.equals(otherTutorial.tutName)
                 && students.equals(otherTutorial.students);
     }

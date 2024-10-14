@@ -44,4 +44,8 @@ public class TutDate {
     public String toString() {
         return date.toString();
     }
+
+    public boolean isValid() {
+        return !(date == null);
+    }
 }
