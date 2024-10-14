@@ -5,9 +5,9 @@ import static careconnect.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static careconnect.testutil.Assert.assertThrows;
 import static careconnect.testutil.TypicalPersons.ALICE;
 import static careconnect.testutil.TypicalPersons.BOB;
-//CHECKSTYLE.OFF: AvoidStarImport
-import static org.junit.jupiter.api.Assertions.*;
-//CHECKSTYLE.ON: AvoidStarImport
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -43,7 +43,7 @@ public class UniquePersonListTest {
     public void list_sortedLexicographically_returnsTrue() {
         uniquePersonList.add(BOB);
         uniquePersonList.add(ALICE);
-        assertTrue(uniquePersonList.iterator().next().equals(ALICE));
+        assertEquals(uniquePersonList.iterator().next(), ALICE);
     }
 
     @Test
@@ -59,9 +59,9 @@ public class UniquePersonListTest {
         uniquePersonList.add(BOB);
         Person editedAlice =
                 new PersonBuilder(ALICE).withName("Darcy").withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+                        .build();
         assertTrue(uniquePersonList.contains(editedAlice));
-        assertTrue(uniquePersonList.iterator().next().equals(BOB));
+        assertEquals(uniquePersonList.iterator().next(), BOB);
     }
 
 
@@ -192,7 +192,7 @@ public class UniquePersonListTest {
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-            -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+                -> uniquePersonList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test
