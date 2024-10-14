@@ -11,13 +11,9 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.ddd.commons.exceptions.IllegalValueException;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.ReadOnlyAddressBook;
-<<<<<<< HEAD
-import seedu.ddd.model.person.Client;
-import seedu.ddd.model.person.Contact;
-import seedu.ddd.model.person.Vendor;
-=======
+import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
->>>>>>> master
+import seedu.ddd.model.contact.vendor.Vendor;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
