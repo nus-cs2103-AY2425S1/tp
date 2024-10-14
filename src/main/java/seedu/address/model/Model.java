@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
 
 /**
@@ -92,8 +92,8 @@ public interface Model {
 
     /**
      * Assigns the vendor corresponding to the id to the event specified by its id.
-     * @throws VendorAlreadyAssignedException if {@code Tag} already exists.
+     * @throws VendorAlreadyAssignedException if {@code Pair<Vendor, Event>} already exists in the associations set.
      */
-    void addTag(Tag tag);
+    void assignVendorToEvent(Vendor vendor, Event event);
 }
 

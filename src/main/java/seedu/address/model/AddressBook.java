@@ -105,7 +105,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public void assignVendorToEvent(Vendor vendor, Event event) {
         requireAllNonNull(vendor, event);
-        associations.add(new Pair<>(vendor, event));
+        Pair<Vendor, Event> pair = new Pair<>(vendor, event);
+        if (associations.contains(pair)) {
+        }
+        associations.add(pair);
     }
 
     //// util methods
