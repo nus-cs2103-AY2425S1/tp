@@ -23,7 +23,7 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-
+    private final String personId;
     private final String name;
     private final String phone;
     private final String email;
@@ -34,9 +34,10 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedPerson(@JsonProperty("personId") String personId, @JsonProperty("name") String name,
+                             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+                             @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+        this.personId = personId;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -45,11 +46,11 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
     }
-
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
+        personId = String.valueOf(source.getPersonId());
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -58,7 +59,17 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
     }
-
+    /**
+     * Checks if a given string is a positive int value
+     */
+    public static boolean isPositiveInteger(String str) {
+        try {
+            int number = Integer.parseInt(str);
+            return number >= 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
      *
@@ -68,6 +79,10 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+        if (personId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Integer.class.getSimpleName()));
         }
 
         if (name == null) {
