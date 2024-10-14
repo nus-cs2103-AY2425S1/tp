@@ -158,7 +158,7 @@ public class Person {
                 .add("email", email)
                 .add("room number", roomNumber)
                 .add("address", address)
-                .add("emergencyContact", emergencyContact)
+                .add("emergency contact", emergencyContact)
                 .add("tags", tags)
                 .toString();
     }

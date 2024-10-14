@@ -104,7 +104,7 @@ public class PersonTest {
                 + ", email=" + ALICE.getEmail()
                 + ", room number=" + ALICE.getRoomNumber().orElse(null)
                 + ", address=" + ALICE.getAddress()
-                + ", emergencyContact=" + ALICE.getEmergencyContact().orElse(null)
+                + ", emergency contact=" + ALICE.getEmergencyContact().orElse(null)
                 + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
