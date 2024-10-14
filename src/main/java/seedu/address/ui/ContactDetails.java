@@ -36,6 +36,9 @@ public class ContactDetails extends UiPart<Region> {
     private Label address;
 
     @FXML
+    private Label notes;
+
+    @FXML
     private VBox notesList;
 
     /**
@@ -71,6 +74,7 @@ public class ContactDetails extends UiPart<Region> {
         phoneNo.setText("Mobile: ");
         email.setText("Email: ");
         address.setText("Address: ");
+        notes.setText("Notes: ");
         notesList.getChildren().clear();
     }
 
@@ -78,7 +82,7 @@ public class ContactDetails extends UiPart<Region> {
      * Adds the contact details of the person into the panel.
      */
     private void setPanelInformation() {
-        // Update with new person details
+        // Update with new person details if person is not null
         if (person != null) {
             logger.info("Displayig info of " + person.toString());
 

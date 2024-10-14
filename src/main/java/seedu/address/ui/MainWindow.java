@@ -146,6 +146,14 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Updates the contact details panel for the seleted contact.
+     */
+    public void handlePanelUpdate() {
+        contactDetailsPanel.setPerson(logic.getFocusedPerson());
+        contactDetailsPanel.updatePanel();
+    }
+
+    /**
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
@@ -185,7 +193,7 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isUpdatePanel()) {
-                contactDetailsPanel.updatePanel();
+                handlePanelUpdate();
             }
 
             if (commandResult.isShowHelp()) {
