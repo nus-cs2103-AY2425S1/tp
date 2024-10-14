@@ -81,7 +81,7 @@ public class Claim {
     /**
      * Returns the {@code claimStatus} of this claim object.
      */
-    public boolean getOpen() {
+    public boolean getClaimStatus() {
         return this.isOpen;
     }
 

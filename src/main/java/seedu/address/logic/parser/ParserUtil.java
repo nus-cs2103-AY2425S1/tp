@@ -23,6 +23,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_UNPARSABLE_INSURANCE_ID = "Insurance ID must be a positive integer.";
+    public static final String MESSAGE_INVALID_CENTS = "The claim amount can only contain up to 2 digits of cents.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -153,7 +154,13 @@ public class ParserUtil {
         requireNonNull(claimAmount);
         int claimAmountInt;
         try {
-            claimAmountInt = Integer.parseInt(claimAmount.trim());
+            int centsInADollar = 100;
+            int claimAmountDollars = Integer.parseInt(claimAmount.trim().split("\\.")[0]);
+            if (claimAmount.trim().split("\\.")[1].length() > 2) {
+                throw new ParseException(MESSAGE_INVALID_CENTS);
+            }
+            int claimAmountCents = Integer.parseInt(claimAmount.trim().split("\\.")[1]);
+            claimAmountInt = claimAmountDollars * centsInADollar + claimAmountCents;
         } catch (NumberFormatException e) {
             throw new ParseException(Claim.INVALID_CLAIM_AMOUNT);
         }

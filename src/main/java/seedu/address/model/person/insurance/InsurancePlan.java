@@ -19,7 +19,7 @@ public abstract class InsurancePlan {
     protected ArrayList<Claim> claims;
 
     InsurancePlan() {
-        claims = new ArrayList<>();
+        claims = new ArrayList<Claim>();
     }
 
     /**

@@ -56,7 +56,9 @@ public class Messages {
      */
     public static String formatClaimAmount(int claimAmount) {
         int centsInADollar = 100;
-        return String.format("$%d.%02d", claimAmount / centsInADollar, claimAmount % centsInADollar);
+        int claimAmountDollarsPart = claimAmount / centsInADollar;
+        int claimAmountCentsPart = claimAmount % centsInADollar;
+        return String.format("$%d.%02d", claimAmountDollarsPart, claimAmountCentsPart);
     }
 
 }

@@ -29,8 +29,8 @@ public class InsurancePlansManager {
      * Constructs an empty InsurancePlans list.
      */
     public InsurancePlansManager() {
-        this.insurancePlans = new ArrayList<>();
-        this.claimIds = new HashSet<>();
+        this.insurancePlans = new ArrayList<InsurancePlan>();
+        this.claimIds = new HashSet<String>();
     }
 
     /**
@@ -142,7 +142,7 @@ public class InsurancePlansManager {
                         .append("|")
                         .append(c.getClaimId())
                         .append("|")
-                        .append(c.getOpen())
+                        .append(c.getClaimStatus())
                         .append("|")
                         .append(c.getClaimAmount())
                         .append(",");
@@ -152,7 +152,7 @@ public class InsurancePlansManager {
         if (!claimsStringBuilder.isEmpty()) {
             claimsStringBuilder.deleteCharAt(claimsStringBuilder.length() - 1);
         } else {
-            claimsStringBuilder.append("No claims yet.");
+            claimsStringBuilder.append("No claims yet");
         }
 
         return claimsStringBuilder.toString();
@@ -165,13 +165,13 @@ public class InsurancePlansManager {
      * @throws ParseException if there is an error parsing the data from the JSON file.
      */
     public void addAllClaimsFromJson(String claimsJson) throws ParseException {
-        String[] claimsString = claimsJson.split(",");
+        String[] claimsStringArray = claimsJson.split(",");
 
-        if (Objects.equals(claimsString[0], "No claims yet.")) {
+        if (claimsStringArray[0].equals("No claims yet")) {
             return;
         }
 
-        for (String claim : claimsString) {
+        for (String claim : claimsStringArray) {
             String[] claimAttributes = claim.split("\\|");
 
             InsurancePlan insurancePlan = createInsurancePlan(claimAttributes[0]);
@@ -194,7 +194,7 @@ public class InsurancePlansManager {
         int count = 0;
         for (InsurancePlan p : this.insurancePlans) {
             for (Claim c : p.claims) {
-                if (c.getOpen()) {
+                if (c.getClaimStatus()) {
                     count++;
                 }
             }
