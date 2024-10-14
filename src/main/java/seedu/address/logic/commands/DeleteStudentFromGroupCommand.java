@@ -21,12 +21,12 @@ import seedu.address.model.student.StudentNumber;
  */
 public class DeleteStudentFromGroupCommand extends Command {
     public static final String COMMAND_WORD = "delete_student_grp";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the student identified from the target group by the student number used.\n"
-            + "Parameters: GROUP_NAME (must only contain alphanumeric characters and spaces); \n"
-            + "STUDENT_NUMBER (must be a string starting with 'A', followed by 7 numeric figures, "
-            + "and ended with a capital letter')\n"
+            + "Parameter: GROUP_NAME (must only contain alphanumeric characters and spaces, "
+            + "and it should not be blank)\n"
+            + "Parameter: STUDENT_NUMBER (must be a string starting with 'A0', followed by 6 numeric figures, "
+            + "and ends with a capital letter')\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_GROUP_NAME + "Team 5" + " "
             + PREFIX_STUDENT_NUMBER + " " + "A0123456B";
 
@@ -88,8 +88,8 @@ public class DeleteStudentFromGroupCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetStudentNumber", targetStudentNo)
                 .add("targetGroupName", targetGroupName)
+                .add("targetStudentNumber", targetStudentNo)
                 .toString();
     }
 }
