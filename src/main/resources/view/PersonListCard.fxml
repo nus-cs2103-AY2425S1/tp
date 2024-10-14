@@ -31,7 +31,6 @@
       <FlowPane fx:id="tutorials" />
       <Label fx:id="studentId" styleClass="cell_small_label" text="\$studentId" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
     </VBox>
   </GridPane>

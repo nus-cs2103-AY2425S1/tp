@@ -77,7 +77,6 @@ public class MarkCommandTest {
                 personToEdit.getStudentId(),
                 personToEdit.getPhone(),
                 personToEdit.getEmail(),
-                personToEdit.getAddress(),
                 personToEdit.getTags(),
                 newTutorials
         );

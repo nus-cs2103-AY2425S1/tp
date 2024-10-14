@@ -56,10 +56,6 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -109,7 +105,6 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && studentId.equals(otherPerson.studentId)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
                 && tutorials.equals(otherPerson.tutorials);
     }
@@ -117,7 +112,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, studentId, phone, email, address, tags, tutorials);
+        return Objects.hash(name, studentId, phone, email, tags, tutorials);
     }
 
     @Override
@@ -127,7 +122,6 @@ public class Person {
                 .add("studentID", studentId)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
                 .add("tags", tags)
                 .add("tutorials", tutorials) // Text Representation, should update to GUI in the future
                 .toString();
