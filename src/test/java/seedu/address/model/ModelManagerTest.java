@@ -160,8 +160,8 @@ public class ModelManagerTest {
     public void getFilteredPropertyList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPropertyList().remove(0));
     }
-    // ==================== Equality Tests ====================
 
+    // ==================== Equality Tests ====================
     @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
