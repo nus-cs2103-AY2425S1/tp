@@ -51,6 +51,9 @@ public class FindCommand extends Command {
         return predicate.equals(otherFindCommand.predicate);
     }
 
+    public Predicate<Person> getPredicate() {
+        return predicate;
+    }
     @Override
     public String toString() {
         return new ToStringBuilder(this)

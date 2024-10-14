@@ -5,12 +5,14 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.CombinedPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+
 
 /**
  * Parses input arguments and creates a new FindCommand object.
@@ -40,15 +42,11 @@ public class FindCommandParser implements Parser<FindCommand> {
                 .filter(keyword -> !isNumeric(keyword))
                 .collect(Collectors.toList());
 
-        if (!nameKeywords.isEmpty() && phoneKeywords.isEmpty()) {
-            return new FindCommand(new NameContainsKeywordsPredicate(nameKeywords));
-        } else if (nameKeywords.isEmpty() && !phoneKeywords.isEmpty()) {
-            return new FindCommand(new PhoneContainsKeywordsPredicate(phoneKeywords));
-        } else {
-            return new FindCommand(new CombinedPredicate(
-                    new NameContainsKeywordsPredicate(nameKeywords),
-                    new PhoneContainsKeywordsPredicate(phoneKeywords)));
-        }
+        Predicate<Person> combinedPredicate = person ->
+                new NameContainsKeywordsPredicate(nameKeywords).test(person)
+                        || new PhoneContainsKeywordsPredicate(phoneKeywords).test(person);
+        return new FindCommand(combinedPredicate);
+
     }
 
     /**

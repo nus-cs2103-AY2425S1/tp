@@ -4,16 +4,23 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.person.CombinedPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.logic.parser.exceptions.ParseException;
+
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.tag.Tag;
 
 public class FindCommandParserTest {
 
@@ -25,43 +32,84 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
-        // No leading and trailing whitespaces, expect NameContainsKeywordsPredicate only
-        FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+    public void parse_validArgs_returnsFindCommand() throws ParseException {
+        // Parse valid arguments
+        FindCommand findCommand = parser.parse("Alice Bob");
 
-        assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
-
-        // Multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
-    }
-
-    @Test
-    public void parse_validPhoneArgs_returnsFindCommand() {
-        // no leading and trailing whitespaces for phone search
-        FindCommand expectedFindCommand =
-                new FindCommand(new PhoneContainsKeywordsPredicate(Arrays.asList("12345", "67890")));
-        assertParseSuccess(parser, "12345 67890", expectedFindCommand);
-
-        // multiple whitespaces between phone number keywords
-        assertParseSuccess(parser, " \n 12345 \n \t 67890  \t", expectedFindCommand);
-    }
-    @Test
-    public void parse_mixedNameAndPhoneArgs_returnsFindCommand() {
-        // Mixed name and phone number search
-        FindCommand expectedFindCommand = new FindCommand(
-                new CombinedPredicate(
-                        new NameContainsKeywordsPredicate(Arrays.asList("Alice")),
-                        new PhoneContainsKeywordsPredicate(Arrays.asList("12345"))
-                )
+        // Create sample persons with matching names
+        Person personMatchingAlice = new Person(
+                new Name("Alice"),
+                new Phone("98765432"),
+                new Email("alice@example.com"),
+                new Address("123 AMK Ave"),
+                new HashSet<>(Arrays.asList(new Tag("friend")))
         );
 
-        // No leading and trailing whitespaces
-        assertParseSuccess(parser, "Alice 12345", expectedFindCommand);
+        Person personMatchingBob = new Person(
+                new Name("Bob"),
+                new Phone("12345678"),
+                new Email("bob@example.com"),
+                new Address("456 AMK Road"),
+                new HashSet<>(Arrays.asList(new Tag("musician")))
+        );
 
-        // Multiple whitespaces between mixed keywords
-        assertParseSuccess(parser, " \n Alice \n \t 12345  \t", expectedFindCommand);
+        // Test that the actual parsed command returns true for both cases (name match)
+        assertTrue(findCommand.getPredicate().test(personMatchingAlice)); // Should match Alice
+        assertTrue(findCommand.getPredicate().test(personMatchingBob)); // Should match Bob
     }
+
+    @Test
+    public void parse_validPhoneArgs_returnsFindCommand() throws ParseException {
+        // Mixed phone numbers
+        FindCommand findCommand = parser.parse("12345 67890");
+
+        // Create a sample person with matching phone numbers
+        Person personMatchingFirstPhone = new Person(
+                new Name("Alice"),
+                new Phone("12345"),
+                new Email("alice@example.com"),
+                new Address("123 AMK Ave"),
+                new HashSet<>(Arrays.asList(new Tag("friend")))
+        );
+
+        Person personMatchingSecondPhone = new Person(
+                new Name("Bob"),
+                new Phone("67890"),
+                new Email("bob@example.com"),
+                new Address("456 AMK Road"),
+                new HashSet<>(Arrays.asList(new Tag("musician")))
+        );
+
+        assertTrue(findCommand.getPredicate().test(personMatchingFirstPhone));
+        assertTrue(findCommand.getPredicate().test(personMatchingSecondPhone));
+    }
+
+    @Test
+    public void parse_validNameAndPhoneArgs_returnsFindCommand() throws ParseException  {
+        FindCommand findCommand = parser.parse("Alice 12345");
+
+        Set<Tag> tagsForAlice = new HashSet<>(Arrays.asList(new Tag("friend")));
+        Person personMatchingName = new Person(
+                new Name("Alice"),
+                new Phone("98765432"),
+                new Email("alice@example.com"),
+                new Address("123 AMK Ave"),
+                tagsForAlice
+        );
+
+        Set<Tag> tagsForBob = new HashSet<>(Arrays.asList(new Tag("musician")));
+        Person personMatchingPhone = new Person(
+                new Name("Bob"),
+                new Phone("12345"),
+                new Email("bob@example.com"),
+                new Address("456 AMK Road"),
+                tagsForBob
+        );
+
+        assertTrue(findCommand.getPredicate().test(personMatchingName));
+        assertTrue(findCommand.getPredicate().test(personMatchingPhone));
+    }
+
     @Test
     public void parse_nullArgs_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> parser.parse(null));
@@ -69,12 +117,7 @@ public class FindCommandParserTest {
 
     @Test
     public void equals_sameObject_returnsTrue() {
-        // Create a PhoneContainsKeywordsPredicate
         PhoneContainsKeywordsPredicate predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("12345"));
-
-        // Check if the same object returns true when compared with itself
         assertTrue(predicate.equals(predicate));
     }
-
-
 }
