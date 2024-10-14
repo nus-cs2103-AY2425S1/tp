@@ -46,7 +46,7 @@ import seedu.ddd.model.tag.Tag;
 import seedu.ddd.testutil.ClientBuilder;
 
 public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+    private AddContactCommandParser parser = new AddContactCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
