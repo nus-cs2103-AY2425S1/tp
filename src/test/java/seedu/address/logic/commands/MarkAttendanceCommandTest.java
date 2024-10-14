@@ -37,7 +37,7 @@ public class MarkAttendanceCommandTest {
                 personToMarkAttendance.getPayment(), personToMarkAttendance.getTags());
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(MarkAttendanceCommand.MESSAGE_MARK_ATTENDANCE_PERSON_SUCCESS,
+        String expectedMessage = String.format(MarkAttendanceCommand.MESSAGE_MARK_ATTENDANCE_SUCCESS,
                 Messages.format(personToMarkAttendance));
 
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -64,7 +64,7 @@ public class MarkAttendanceCommandTest {
                 personToMarkAttendance.getPayment(), personToMarkAttendance.getTags());
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(MarkAttendanceCommand.MESSAGE_MARK_ATTENDANCE_PERSON_SUCCESS,
+        String expectedMessage = String.format(MarkAttendanceCommand.MESSAGE_MARK_ATTENDANCE_SUCCESS,
                 Messages.format(markedPerson));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

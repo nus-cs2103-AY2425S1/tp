@@ -25,7 +25,7 @@ public class MarkAttendanceCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_MARK_ATTENDANCE_PERSON_SUCCESS = "Marked attendance of person: %1$s";
+    public static final String MESSAGE_MARK_ATTENDANCE_SUCCESS = "Marked attendance of person: %1$s";
 
     private final Index targetIndex;
 
@@ -56,7 +56,7 @@ public class MarkAttendanceCommand extends Command {
         model.setPerson(personToMarkAttendance, markedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_PERSON_SUCCESS,
+        return new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_SUCCESS,
                 Messages.format(personToMarkAttendance)));
     }
 
