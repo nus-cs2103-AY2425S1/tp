@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_NAME_DISPLAYED;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_REMINDER_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER;
@@ -30,7 +30,7 @@ public class ReminderCommandParser implements Parser<ReminderCommand> {
 
         // Check for missing name, date, or reminder
         if (name.isEmpty()) {
-            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
+            throw new ParseException(MESSAGE_INVALID_NAME_DISPLAYED);
         }
         if (reminderTime.isEmpty()) {
             throw new ParseException(MESSAGE_INVALID_REMINDER_FORMAT);
