@@ -14,6 +14,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BETTY;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CARL;
 
 import java.util.Objects;
 
@@ -36,6 +37,20 @@ public class PersonTest {
         Person person = new Person(BETTY.getName(), BETTY.getPhone(), BETTY.getEmail(), BETTY.getTags());
         assertNotNull(person, "The person object should not be null");
         assertEquals(betty, person);
+    }
+
+    @Test
+    public void testHasAddressWithoutAddress() {
+        Person betty = new PersonBuilder(BETTY).buildEmptyAddressPerson();
+
+        assertFalse(betty.hasAddress());
+    }
+
+    @Test
+    public void testHasAddressWithAddress() {
+        Person carl = new PersonBuilder(CARL).build();
+
+        assertTrue(carl.hasAddress());
     }
 
     @Test
