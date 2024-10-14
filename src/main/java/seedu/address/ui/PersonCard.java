@@ -43,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label schedule;
     @FXML
+    private Label note;
+    @FXML
     private Label reminder;
     @FXML
     private FlowPane tags;
@@ -58,13 +60,17 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        if (person.getSchedule().toString().isEmpty()) {
-            schedule.setText(person.getSchedule().toString());
-        } else {
-            schedule.setText(
-                    LocalDateTime.parse(person.getSchedule().toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
-                            .format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a")));
-        }
+
+        setDateField(person);
+        setNoteField(person);
+        setReminderField(person);
+
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    private void setReminderField(Person person) {
         if (person.getReminder() != null && !person.getReminder().toString().isEmpty()) {
             String formattedDateTime = LocalDateTime.parse(
                             person.getReminder().getAppointmentDateTime(),
@@ -78,9 +84,23 @@ public class PersonCard extends UiPart<Region> {
         } else {
             reminder.setText("");
         }
+    }
 
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    private void setNoteField(Person person) {
+        if (person.getSchedule().getNotes() == null) {
+            note.setText("");
+        } else {
+            note.setText("Notes: " + person.getSchedule().getNotes());
+        }
+    }
+
+    private void setDateField(Person person) {
+        if (person.getSchedule().toString().isEmpty()) {
+            schedule.setText(person.getSchedule().toString());
+        } else {
+            schedule.setText(
+                    LocalDateTime.parse(person.getSchedule().toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
+                            .format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a")));
+        }
     }
 }

@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 public class Schedule {
 
     public final String dateTime;
+    private final String notes;
 
     /**
      * Constructs a {@code Schedule} object with the given date and time.
@@ -16,9 +17,14 @@ public class Schedule {
      * @param dateTime The date and time of the scheduled appointment.
      * @throws NullPointerException if the {@code dateTime} is null.
      */
-    public Schedule(String dateTime) {
+    public Schedule(String dateTime, String notes) {
         requireNonNull(dateTime);
         this.dateTime = dateTime;
+        this.notes = notes;
+    }
+
+    public String getNotes() {
+        return notes;
     }
 
     @Override
