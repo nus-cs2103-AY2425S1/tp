@@ -24,6 +24,7 @@ import seedu.ddd.model.person.Address;
 import seedu.ddd.model.person.Client;
 import seedu.ddd.model.person.Contact;
 import seedu.ddd.model.person.Email;
+import seedu.ddd.model.person.Id;
 import seedu.ddd.model.person.Name;
 import seedu.ddd.model.person.Phone;
 import seedu.ddd.model.person.Vendor;
@@ -101,11 +102,12 @@ public class EditCommand extends Command {
         Email updatedEmail = editContactDescriptor.getEmail().orElse(contactToEdit.getEmail());
         Address updatedAddress = editContactDescriptor.getAddress().orElse(contactToEdit.getAddress());
         Set<Tag> updatedTags = editContactDescriptor.getTags().orElse(contactToEdit.getTags());
+        Id updatedId = editContactDescriptor.getId().orElse(contactToEdit.getId());
 
         // TODO: update this for Client and Vendor specific edits
         return contactToEdit instanceof Client
-            ? new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, null, updatedTags)
-            : new Vendor(updatedName, updatedPhone, updatedEmail, updatedAddress, null, updatedTags);
+            ? new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, null, updatedTags, updatedId)
+            : new Vendor(updatedName, updatedPhone, updatedEmail, updatedAddress, null, updatedTags, updatedId);
     }
 
     @Override
@@ -142,6 +144,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Id id;
 
         // TODO: add more fields / add support for Client and Vendor
 
@@ -157,6 +160,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setId(toCopy.id);
         }
 
         /**
@@ -215,6 +219,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setId(Id id) {
+            this.id = id;
+        }
+
+        public Optional<Id> getId() {
+            return Optional.ofNullable(id);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -231,7 +243,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditContactDescriptor.phone)
                     && Objects.equals(email, otherEditContactDescriptor.email)
                     && Objects.equals(address, otherEditContactDescriptor.address)
-                    && Objects.equals(tags, otherEditContactDescriptor.tags);
+                    && Objects.equals(tags, otherEditContactDescriptor.tags)
+                    && Objects.equals(id, otherEditContactDescriptor.id);
         }
 
         @Override
