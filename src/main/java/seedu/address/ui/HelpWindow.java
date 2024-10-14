@@ -19,7 +19,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "Example: add n/John Doe p/12345678 t/Student\n"
             + "Items in the [square brackets] are optional and can be input in any order!";
     private static final String HELP_EDIT_COMMAND = "Edit Command \n"
-            + "Format: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/remark]\n"
+            + "Format: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARK]\n"
             + "Example: edit 1 p/87654321"
             + "INDEX is the index of the customer displayed. Items in the [square brackets] are optional "
             + "and can be input in any order!";
