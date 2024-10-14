@@ -16,6 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonDescriptor;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -43,24 +44,24 @@ public class AddPersonCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder().build();
+        PersonDescriptor validPerson = new PersonBuilder().buildDescriptor();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getAppointmentBook(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
+        int id = expectedModel.addPerson(validPerson);
 
         // Verify personId increments correctly
-        assertEquals(1, validPerson.getPersonId());
+        assertEquals(1, id);
 
         assertCommandSuccess(new AddPersonCommand(validPerson), model,
-                String.format(AddPersonCommand.MESSAGE_SUCCESS, Messages.formatPerson(validPerson)),
-                expectedModel);
+            String.format(AddPersonCommand.MESSAGE_SUCCESS, Messages.formatPerson(validPerson)),
+            expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddPersonCommand(personInList), model,
-                AddPersonCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(new AddPersonCommand(personInList.getPersonDescriptor()), model,
+            AddPersonCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
 }

@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,6 +31,19 @@ public class Person {
         this.personId = 0;
     }
 
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, int personId) {
+        requireAllNonNull(name, phone, email, address, tags, personId);
+        this.personDescriptor = new PersonDescriptor(
+                name, phone, email, address, tags
+        );
+
+        // Increment the static counter and assign a unique ID to the person
+        this.personId = personId;
+    }
+
 
     /**
      * Builds a person given a personId and a personDescriptor.
@@ -39,6 +53,10 @@ public class Person {
     public Person(int personId, PersonDescriptor personDescriptor) {
         this.personId = personId;
         this.personDescriptor = personDescriptor;
+    }
+
+    public PersonDescriptor getPersonDescriptor() {
+        return personDescriptor;
     }
 
     public int getPersonId() {
@@ -78,6 +96,15 @@ public class Person {
     }
 
     /**
+     * Returns true if both persons have the same name.
+     * This defines a weaker notion of equality between two persons.
+     */
+    public boolean isSamePerson(PersonDescriptor otherPerson) {
+        return personDescriptor.isSamePerson(otherPerson);
+    }
+
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -103,7 +130,15 @@ public class Person {
 
     @Override
     public String toString() {
-        return personDescriptor.toString();
+        // return personDescriptor.toString();
+        return new ToStringBuilder(this)
+                .add("personId", personId)
+                .add("name", getName())
+                .add("phone", getPhone())
+                .add("email", getEmail())
+                .add("address", getAddress())
+                .add("tags", getTags())
+                .toString();
     }
 
 }

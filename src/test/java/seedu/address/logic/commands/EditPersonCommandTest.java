@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
@@ -34,7 +34,7 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class EditPersonCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalAppointmentBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalAppointmentBook(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -43,12 +43,12 @@ public class EditPersonCommandTest {
         EditCommand editCommand = new EditPersonCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(
-                EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.formatPerson(editedPerson));
+            EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.formatPerson(editedPerson));
 
         Model expectedModel = new ModelManager(
-                new AddressBook(model.getAddressBook()),
-                getTypicalAppointmentBook(),
-                new UserPrefs());
+            new AddressBook(model.getAddressBook()),
+            getTypicalAppointmentBook(),
+            new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -61,19 +61,19 @@ public class EditPersonCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+            .withTags(VALID_TAG_HUSBAND).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+            .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditPersonCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(
-                EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.formatPerson(editedPerson));
+            EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.formatPerson(editedPerson));
 
         Model expectedModel = new ModelManager(
-                new AddressBook(model.getAddressBook()),
-                getTypicalAppointmentBook(),
-                new UserPrefs());
+            new AddressBook(model.getAddressBook()),
+            getTypicalAppointmentBook(),
+            new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -85,12 +85,12 @@ public class EditPersonCommandTest {
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(
-                EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.formatPerson(editedPerson));
+            EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.formatPerson(editedPerson));
 
         Model expectedModel = new ModelManager(
-                new AddressBook(model.getAddressBook()),
-                getTypicalAppointmentBook(),
-                new UserPrefs());
+            new AddressBook(model.getAddressBook()),
+            getTypicalAppointmentBook(),
+            new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -102,15 +102,15 @@ public class EditPersonCommandTest {
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editPersonCommand = new EditPersonCommand(INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+            new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(
-                EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.formatPerson(editedPerson));
+            EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.formatPerson(editedPerson));
 
         Model expectedModel = new ModelManager(
-                new AddressBook(model.getAddressBook()),
-                getTypicalAppointmentBook(),
-                new UserPrefs());
+            new AddressBook(model.getAddressBook()),
+            getTypicalAppointmentBook(),
+            new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editPersonCommand, model, expectedMessage, expectedModel);
@@ -132,7 +132,7 @@ public class EditPersonCommandTest {
         // edit person in filtered list into a duplicate in address book
         Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditPersonCommand(INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder(personInList).build());
+            new EditPersonDescriptorBuilder(personInList).build());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
@@ -158,7 +158,7 @@ public class EditPersonCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
         EditCommand editCommand = new EditPersonCommand(outOfBoundIndex,
-                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+            new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -170,22 +170,22 @@ public class EditPersonCommandTest {
         // same values -> returns true
         EditPersonDescriptor copyDescriptor = new EditPersonDescriptor(DESC_AMY);
         EditCommand commandWithSameValues = new EditPersonCommand(INDEX_FIRST_PERSON, copyDescriptor);
-        assertTrue(standardCommand.equals(commandWithSameValues));
+        assertEquals(standardCommand, commandWithSameValues);
 
         // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
+        assertEquals(standardCommand, standardCommand);
 
         // null -> returns false
-        assertFalse(standardCommand.equals(null));
+        assertNotEquals(null, standardCommand);
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearPersonCommand()));
+        assertNotEquals(standardCommand, new ClearPersonCommand());
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditPersonCommand(INDEX_SECOND_PERSON, DESC_AMY)));
+        assertNotEquals(standardCommand, new EditPersonCommand(INDEX_SECOND_PERSON, DESC_AMY));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditPersonCommand(INDEX_FIRST_PERSON, DESC_BOB)));
+        assertNotEquals(standardCommand, new EditPersonCommand(INDEX_FIRST_PERSON, DESC_BOB));
     }
 
     @Test
@@ -194,7 +194,7 @@ public class EditPersonCommandTest {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditPersonCommand editPersonCommand = new EditPersonCommand(index, editPersonDescriptor);
         String expected = EditPersonCommand.class.getCanonicalName() + "{index=" + index + ", editPersonDescriptor="
-                + editPersonDescriptor + "}";
+            + editPersonDescriptor + "}";
         assertEquals(expected, editPersonCommand.toString());
     }
 

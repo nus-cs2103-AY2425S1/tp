@@ -14,7 +14,7 @@ public class AppointmentBuilder {
 
     public static final String DEFAULT_APPOINTMENT_TYPE = "Health Checkup";
     public static final LocalDateTime DEFAULT_APPOINTMENT_DATE_TIME =
-            LocalDateTime.of(2024, 10, 15, 10, 30);
+        LocalDateTime.of(2024, 10, 15, 10, 30);
     public static final int DEFAULT_PERSON_ID = 1;
     public static final String DEFAULT_MEDICINE = "Panadol";
     public static final String DEFAULT_SICKNESS = "Flu";

@@ -19,6 +19,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonDescriptor;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -97,8 +98,8 @@ public class EditPersonCommand extends EditCommand {
 
     @Override
     protected String formatEntity(Object entity) {
-        assert entity instanceof Person;
-        return Messages.formatPerson((Person) entity);
+        assert entity instanceof PersonDescriptor;
+        return Messages.formatPerson((PersonDescriptor) entity);
     }
     @Override
     public String toString() {

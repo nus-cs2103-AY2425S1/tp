@@ -2,14 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -25,6 +24,7 @@ import seedu.address.model.ReadOnlyAppointmentBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonDescriptor;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddPersonCommandTest {
@@ -37,47 +37,48 @@ public class AddPersonCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+        PersonDescriptor validPersonDescriptor = new PersonBuilder().buildDescriptor();
 
-        CommandResult commandResult = new AddPersonCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddPersonCommand(validPersonDescriptor).execute(modelStub);
 
-        assertEquals(String.format(AddPersonCommand.MESSAGE_SUCCESS, Messages.formatPerson(validPerson)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(String.format(AddPersonCommand.MESSAGE_SUCCESS, Messages.formatPerson(validPersonDescriptor)),
+            commandResult.getFeedbackToUser());
+        assertEquals(List.of(validPersonDescriptor), modelStub.personsAdded);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
+        PersonDescriptor validPersonDescriptor = new PersonBuilder().buildDescriptor();
         Person validPerson = new PersonBuilder().build();
-        AddPersonCommand addPersonCommand = new AddPersonCommand(validPerson);
+        AddPersonCommand addPersonCommand = new AddPersonCommand(validPersonDescriptor);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class,
-                AddPersonCommand.MESSAGE_DUPLICATE_PERSON, () -> addPersonCommand.execute(modelStub));
+            AddPersonCommand.MESSAGE_DUPLICATE_PERSON, () -> addPersonCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        PersonDescriptor alice = new PersonBuilder().withName("Alice").buildDescriptor();
+        PersonDescriptor bob = new PersonBuilder().withName("Bob").buildDescriptor();
         AddPersonCommand addAliceCommand = new AddPersonCommand(alice);
         AddPersonCommand addBobCommand = new AddPersonCommand(bob);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertEquals(addAliceCommand, addAliceCommand);
 
         // same values -> returns true
         AddPersonCommand addAliceCommandCopy = new AddPersonCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        assertEquals(addAliceCommand, addAliceCommandCopy);
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertNotEquals(1, addAliceCommand);
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertNotEquals(null, addAliceCommand);
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertNotEquals(addAliceCommand, addBobCommand);
     }
 
     @Test
@@ -122,7 +123,7 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public void addPerson(Person person) {
+        public int addPerson(PersonDescriptor person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -138,6 +139,11 @@ public class AddPersonCommandTest {
 
         @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPerson(PersonDescriptor person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -224,7 +230,7 @@ public class AddPersonCommandTest {
      * A Model stub that always accept the person being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+        final ArrayList<PersonDescriptor> personsAdded = new ArrayList<>();
 
         @Override
         public boolean hasPerson(Person person) {
@@ -233,9 +239,12 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public void addPerson(Person person) {
+        public int addPerson(PersonDescriptor person) {
             requireNonNull(person);
             personsAdded.add(person);
+
+            // Todo: implement proper test stub
+            return 0;
         }
 
         @Override

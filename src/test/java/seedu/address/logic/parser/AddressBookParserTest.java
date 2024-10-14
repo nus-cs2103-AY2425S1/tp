@@ -26,6 +26,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonDescriptor;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -36,7 +37,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addPerson() throws Exception {
-        Person person = new PersonBuilder().build();
+        PersonDescriptor person = new PersonBuilder().buildDescriptor();
         AddPersonCommand command = (AddPersonCommand) parser.parseCommand(PersonUtil.getAddPersonCommand(person));
         assertEquals(new AddPersonCommand(person), command);
     }
@@ -44,9 +45,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_clearPersonCommand() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD
-                +
-                " "
-                + ParserUtil.PERSON_ENTITY_STRING) instanceof ClearCommand);
+            +
+            " "
+            + ParserUtil.PERSON_ENTITY_STRING) instanceof ClearCommand);
         /* ToDo: Make this work
              assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD +
                 " " + ParserUtil.PERSON_ENTITY_STRING + " 3") instanceof ClearCommand);
@@ -56,7 +57,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeletePersonCommand command = (DeletePersonCommand) parser.parseCommand(
-                DeletePersonCommand.COMMAND_WORD + " " + PERSON_ENTITY_STRING + INDEX_FIRST_PERSON.getOneBased());
+            DeletePersonCommand.COMMAND_WORD + " " + PERSON_ENTITY_STRING + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeletePersonCommand(INDEX_FIRST_PERSON), command);
     }
 
@@ -65,7 +66,7 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditPersonCommand command = (EditPersonCommand) parser.parseCommand(
-                EditPersonCommand.COMMAND_WORD + " "
+            EditPersonCommand.COMMAND_WORD + " "
                 + PERSON_ENTITY_STRING + INDEX_FIRST_PERSON.getOneBased() + " "
                 + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditPersonCommand(INDEX_FIRST_PERSON, descriptor), command);
@@ -81,7 +82,7 @@ public class AddressBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + PERSON_ENTITY_STRING + " " + "foo bar baz");
+            FindCommand.COMMAND_WORD + " " + PERSON_ENTITY_STRING + " " + "foo bar baz");
         assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -94,7 +95,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " "
-                + ParserUtil.PERSON_ENTITY_STRING) instanceof ListCommand);
+            + ParserUtil.PERSON_ENTITY_STRING) instanceof ListCommand);
         // TODO: assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 

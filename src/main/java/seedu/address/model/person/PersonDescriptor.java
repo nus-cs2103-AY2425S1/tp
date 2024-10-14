@@ -75,6 +75,15 @@ public class PersonDescriptor {
     }
 
     /**
+     * Returns true if both persons have the same name.
+     * This defines a weaker notion of equality between two persons.
+     */
+    public boolean isSamePerson(Person otherPerson) {
+        return otherPerson != null
+                && otherPerson.getName().equals(getName());
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */

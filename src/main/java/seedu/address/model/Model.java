@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonDescriptor;
 
 /**
  * The API of the Model component.
@@ -60,6 +61,11 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    boolean hasPerson(PersonDescriptor personDescriptor);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -69,7 +75,7 @@ public interface Model {
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
-    void addPerson(Person person);
+    int addPerson(PersonDescriptor personDescriptor);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
