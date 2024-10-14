@@ -33,6 +33,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_STUDENT_NUMBER_AMY = "A0234567J";
     public static final String VALID_STUDENT_NUMBER_BOB = "A0224466H";
+
     public static final String TEAM_ONE = "Team1";
     public static final String TEAM_TWO = "Team2";
     public static final String TEAM_THREE = "Team3";

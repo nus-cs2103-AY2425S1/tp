@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.student.Student;
+import seedu.address.model.task.Task;
 
 /**
  * Represents a Group in the address book.
@@ -20,6 +21,7 @@ public class Group {
     private static final int MAXIMUM_STUDENTS_IN_GROUP = 5;
     private final GroupName groupName;
     private final Set<Student> students = new HashSet<>();
+    private final Set<Task> tasks = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -46,6 +48,10 @@ public class Group {
         return Collections.unmodifiableSet(students);
     }
 
+    public Set<Task> getTasks() {
+        return Collections.unmodifiableSet(tasks);
+    }
+
     /**
      * Adds a given student into the {@code group} object.
      * There can be a maximum of 5 students in each group.
@@ -55,6 +61,15 @@ public class Group {
         if (students.size() < MAXIMUM_STUDENTS_IN_GROUP) {
             students.add(student);
         }
+    }
+
+    /**
+     * Adds a given task into the {@code group} object.
+     * There can be a maximum of 5 students in each group.
+     * @param task  The {@code task} object to be added.
+     */
+    public void addTask(Task task) {
+        tasks.add(task);
     }
 
     public void delete(Student student) {

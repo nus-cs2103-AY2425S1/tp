@@ -57,5 +57,7 @@ public interface Logic {
 
     void setStateGroups();
 
+    void setStateGroupTask();
+
     State getState();
 }

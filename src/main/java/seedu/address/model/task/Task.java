@@ -23,6 +23,15 @@ public class Task {
         this.status = Status.PENDING;
     }
 
+    /**
+     * Every field must be present and not null.
+     */
+    public Task(TaskName name, Deadline deadline, Status status) {
+        this.name = name;
+        this.deadline = deadline;
+        this.status = status;
+    }
+
     public TaskName getTaskName() {
         return name;
     }

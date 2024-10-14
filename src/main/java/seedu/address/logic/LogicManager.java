@@ -104,6 +104,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public void setStateGroupTask() {
+        this.model.setStateGroupTask();
+    }
+
+    @Override
     public State getState() {
         return this.model.getState();
     }
