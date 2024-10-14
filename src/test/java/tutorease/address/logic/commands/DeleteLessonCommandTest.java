@@ -110,8 +110,8 @@ public class DeleteLessonCommandTest {
         modelStub.addLesson(lesson);
         assertTrue(modelStub.hasLessons(lesson));
 
-        CommandException thrown = Assertions.assertThrows(CommandException.class,
-                () -> deleteLessonCommand.execute(modelStub));
+        CommandException thrown = Assertions.assertThrows(
+                CommandException.class, () -> deleteLessonCommand.execute(modelStub));
         assertEquals(DeleteLessonCommand.MESSAGE_INVALID_INDEX, thrown.getMessage());
     }
 
