@@ -30,5 +30,8 @@ public class FilterPaidCommandParserTest {
         FilterPaidCommand expectedCommand = new FilterPaidCommand(new StudentHasPaidPredicate(true));
         assertParseSuccess(parser, "true", expectedCommand);
         assertParseSuccess(parser, " true    ", expectedCommand);
+        expectedCommand = new FilterPaidCommand(new StudentHasPaidPredicate(false));
+        assertParseSuccess(parser, "false", expectedCommand);
+        assertParseSuccess(parser, "     false ", expectedCommand);
     }
 }
