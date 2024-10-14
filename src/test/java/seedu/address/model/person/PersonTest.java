@@ -17,6 +17,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.CARL;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -34,7 +35,9 @@ public class PersonTest {
     public void testPersonConstructorWithoutAddress() {
         Person betty = new PersonBuilder(BETTY).buildEmptyAddressPerson();
 
-        Person person = new Person(BETTY.getName(), BETTY.getPhone(), BETTY.getEmail(), BETTY.getTags());
+        Person person = new Person(BETTY.getName(), BETTY.getPhone(), BETTY.getEmail(),
+                Optional.empty(), BETTY.getTags());
+
         assertNotNull(person, "The person object should not be null");
         assertEquals(betty, person);
     }
