@@ -5,6 +5,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import java.util.Arrays;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindEmployeeCommand;
+import seedu.address.logic.commands.FindPotentialCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
@@ -26,8 +28,15 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
+        String typeOfPerson = nameKeywords[0];
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        if (typeOfPerson.equals(FindEmployeeCommand.ARGUMENT_WORD)) {
+            return new FindEmployeeCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        } else if (typeOfPerson.equals(FindPotentialCommand.ARGUMENT_WORD)) {
+            return new FindPotentialCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        } else {
+            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        }
     }
 
 }

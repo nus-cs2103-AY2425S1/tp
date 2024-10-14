@@ -50,6 +50,16 @@ public class TypicalPersons {
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").withIsEmployee(false).build();
 
+    // Potentials
+    public static final Person JEVAN = new PersonBuilder().withName("Jevan Lim").withPhone("12345678")
+            .withEmail("jevan@example.com").withAddress("hougang ave").withIsEmployee(false).build();
+
+    public static final Person KEVIN = new PersonBuilder().withName("Kevin Lee").withPhone("87654321")
+            .withEmail("kevin@example.com").withAddress("sengkang street").withIsEmployee(false).build();
+
+    public static final Person LILY = new PersonBuilder().withName("Lily B").withPhone("12348765")
+            .withEmail("lily@example.com").withAddress("punggol cove").withIsEmployee(false).build();
+
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withDepartment(VALID_DEPARTMENT_AMY)
@@ -74,6 +84,6 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, HOON, IDA, AMY, BOB));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, HOON, IDA, AMY, BOB, JEVAN, KEVIN, LILY));
     }
 }

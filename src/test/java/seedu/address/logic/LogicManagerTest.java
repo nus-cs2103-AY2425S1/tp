@@ -62,8 +62,14 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+    public void execute_commandExecutionPotentialHireError_throwsCommandException() {
+        String deleteCommand = "delete ph 9";
+        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_commandExecutionEmployeeError_throwsCommandException() {
+        String deleteCommand = "delete e 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
@@ -170,7 +176,7 @@ public class LogicManagerTest {
         // Triggers the saveAddressBook method by executing an add command
         String employeeCommand = EmployeeCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + DEPARTMENT_DESC_AMY + ROLE_DESC_AMY + CONTRACT_END_DATE_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).build();
+        Person expectedPerson = new PersonBuilder(AMY).withIsEmployee(true).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(employeeCommand, CommandException.class, expectedMessage, expectedModel);
