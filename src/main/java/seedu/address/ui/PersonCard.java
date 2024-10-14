@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Role;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -56,11 +57,36 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         person.getRoles().stream()
                 .sorted(Comparator.comparing(tag -> tag.roleName))
-                .forEach(tag -> roles.getChildren().add(new Label(tag.roleName)));
+                .forEach(role -> roles.getChildren().add(getRoleLabel(role)));
 
         String nicknameObtained = person.getNickname().value;
         if (!nicknameObtained.isEmpty()) {
             nickname.getChildren().add(new Label(nicknameObtained));
         }
+    }
+
+    /**
+     * Gets role label with id that corresponds to its role name.
+     *
+     * @param role Role object.
+     * @return Label of the role.
+     */
+    private Label getRoleLabel(Role role) {
+        assert Role.isValidRoleName(role.roleName);
+
+        Label label = new Label(role.roleName);
+        String id = switch (role.roleName) {
+        case "President" -> "president";
+        case "Vice President" -> "vice-president";
+        case "Admin" -> "admin";
+        case "Marketing" -> "marketing";
+        case "Events (internal)" -> "events-internal";
+        case "Events (external)" -> "events-external";
+        case "External Relations" -> "external-relations";
+        default -> null;
+        };
+
+        label.setId(id);
+        return label;
     }
 }
