@@ -77,37 +77,45 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(new Name("Alice"));
-        DeleteCommand deleteSecondCommand = new DeleteCommand(new Name("Bob"));
-        DeleteCommand deleteThirdCommand = new DeleteCommand(Index.fromOneBased(1));
+        DeleteCommand deleteNameCommand = new DeleteCommand(new Name("Alice"));
+        DeleteCommand deleteNameCommandCopy = new DeleteCommand(new Name("Alice"));
+        DeleteCommand deleteIndexCommand = new DeleteCommand(Index.fromOneBased(1));
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertTrue(deleteNameCommand.equals(deleteNameCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(new Name("Alice"));
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+        assertTrue(deleteNameCommand.equals(deleteNameCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertFalse(deleteNameCommand.equals(1));
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertFalse(deleteNameCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        // different names -> returns false
+        assertFalse(deleteNameCommand.equals(deleteIndexCommand));
 
         // different index -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteThirdCommand));
+        assertFalse(deleteIndexCommand.equals(deleteNameCommand));
     }
+
 
     @Test
     public void toStringMethod() {
+        // Testing with name
         Name targetName = new Name("John Doe");
-        DeleteCommand deleteCommand = new DeleteCommand(targetName);
-        String expected = String.format("DeleteCommand[targetName=%s]", targetName);
-        assertEquals(expected, deleteCommand.toString());
+        DeleteCommand deleteCommandByName = new DeleteCommand(targetName);
+        String expectedNameString = String.format("DeleteCommand[targetName=%s]", targetName);
+        assertEquals(expectedNameString, deleteCommandByName.toString());
+
+        // Testing with index
+        Index targetIndex = Index.fromOneBased(1);
+        DeleteCommand deleteCommandByIndex = new DeleteCommand(targetIndex);
+        String expectedIndexString = String.format("DeleteCommand[targetIndex=%d]", targetIndex.getOneBased());
+        assertEquals(expectedIndexString, deleteCommandByIndex.toString());
     }
+
 
     /**
      * Updates {@code model}'s filtered list to show no one.
