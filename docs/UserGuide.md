@@ -4,9 +4,10 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# Client Grid User guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+ClientGrid is an **address book** designed for real estate agents to efficiently manage client contacts, including buyers and sellers. It provides a streamlined way to organize client data and monitor the buying or selling process while maintaining core address book functionality.
+
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -32,7 +33,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `deletebuyer p/81234567` : Deletes the buyer with contact number 81234567.
 
    * `clear` : Deletes all contacts.
 
@@ -131,20 +132,35 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a buyer : `deletebuyer`
 
-Deletes the specified person from the address book.
+Deletes the specified buyer from the client book.
 
-Format: `delete INDEX`
+Format: `deletebuyer p/PHONE_NUMBER`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the buyer with the specified `PHONE_NUMBER`.
+* The `PHONE_NUMBER` must be 8 digits long.
+* The `PHONE_NUMBER` must be greater than 0. 
+
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `deletebuyer p/94351253` deletes the buyer with phone number `94351253` from the client book.
+  ![result for 'deletebuyer p/94351253'](images/deletebuyer.png)
 
+### Deleting a seller : `deleteseller`
+
+Deletes the specified seller from the client book.
+
+Format: `deleteseller p/PHONE_NUMBER`
+
+* Deletes the seller with the specified `PHONE_NUMBER`.
+* The `PHONE_NUMBER` must be 8 digits long.
+* The `PHONE_NUMBER` must be greater than 0.
+
+Examples:
+* `deleteseller p/98765432` deletes the seller with phone number `98765432` from the client book.
+
+    ![result for 'deleteseller p/98765432'](images/deleteseller.png)
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
