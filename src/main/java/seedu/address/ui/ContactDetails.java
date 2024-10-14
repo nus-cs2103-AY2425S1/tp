@@ -24,6 +24,18 @@ public class ContactDetails extends UiPart<Region> {
     private HBox contactDetailPlane;
 
     @FXML
+    private Label name;
+
+    @FXML
+    private Label phoneNo;
+
+    @FXML
+    private Label email;
+
+    @FXML
+    private Label address;
+
+    @FXML
     private VBox notesList;
 
     /**
@@ -55,6 +67,10 @@ public class ContactDetails extends UiPart<Region> {
      */
     private void clearPanel() {
         // Clear existing labels
+        name.setText("");
+        phoneNo.setText("Mobile: ");
+        email.setText("Email: ");
+        address.setText("Address: ");
         notesList.getChildren().clear();
     }
 
@@ -64,15 +80,12 @@ public class ContactDetails extends UiPart<Region> {
     private void setPanelInformation() {
         // Update with new person details
         if (person != null) {
-            logger.info(person.toString());
-            Label notes = new Label("Notes:");
-            notes.setId("notes-label");
-            notesList.getChildren().add(notes);
+            logger.info("Displayig info of " + person.toString());
 
-            // Use name as placeholder (update after Notes backend is done)
-            Label nameLabel = new Label(person.getName().toString());
-            nameLabel.setId("notes-label");
-            notesList.getChildren().add(nameLabel);
+            name.setText(name.getText() + person.getName().fullName);
+            phoneNo.setText(phoneNo.getText() + person.getPhone().toString());
+            email.setText(email.getText() + person.getEmail().toString());
+            address.setText(address.getText() + person.getAddress().toString());
         }
     }
 

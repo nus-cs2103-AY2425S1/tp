@@ -7,6 +7,12 @@
 
 <HBox fx:id="contactDetailPlane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
-    <VBox fx:id="notesList" />
+    <VBox fx:id="contactDetailsBox">
+      <Label fx:id="name" styleClass="label-header" />
+      <Label fx:id="phoneNo" text="Mobile: " />
+      <Label fx:id="email" text="Email: " />
+      <Label fx:id="address" text="Address: " />
+      <VBox fx:id="notesList" />
+    </VBox>
   </GridPane>
 </HBox>
