@@ -7,11 +7,18 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
+import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.DeliveryAction;
+import seedu.address.ui.InspectWindow;
 
 /**
  * Adds a person to the address book.
@@ -35,12 +42,15 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_SUCCESS_PERSON = "New person added: %1$s";
+    public static final String MESSAGE_SUCCESS_DELIVERY = "New delivery added to: ";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     public static final String MESSAGE_DUPLICATE_PHONE = "\nWarning! There is a person with the same phone number";
     public static final String MESSAGE_DUPLICATE_EMAIL = "\nWarning! There is a person with the same email";
 
+    private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
     private final Person toAdd;
+    private final Delivery deliveryToAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -48,29 +58,50 @@ public class AddCommand extends Command {
     public AddCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
+        deliveryToAdd = null;
+    }
+
+    /**
+     * Creates an AddCommand to add the specified {@code Delivery}
+     */
+    public AddCommand(Delivery delivery) {
+        requireNonNull(delivery);
+        deliveryToAdd = delivery;
+        toAdd = null;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        //Checks if name already exist
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
+        if (!AddressBookParser.getInspect()) {
+            requireNonNull(model);
+            //Checks if name already exist
+            if (model.hasPerson(toAdd)) {
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            }
 
-        boolean hasPhone = model.hasPhone(toAdd);
-        boolean hasEmail = model.hasEmail(toAdd);
-        String warning = "";
-        //Check if phone number duplicate
-        if (hasPhone) {
-            warning += MESSAGE_DUPLICATE_PHONE;
+            boolean hasPhone = model.hasPhone(toAdd);
+            boolean hasEmail = model.hasEmail(toAdd);
+            String warning = "";
+            //Check if phone number duplicate
+            if (hasPhone) {
+                warning += MESSAGE_DUPLICATE_PHONE;
+            }
+            //Check if email duplicate
+            if (hasEmail) {
+                warning += MESSAGE_DUPLICATE_EMAIL;
+            }
+            model.addPerson(toAdd);
+            return new CommandResult(String.format(MESSAGE_SUCCESS_PERSON + warning, Messages.format(toAdd)));
+        } else {
+            requireNonNull(model);
+
+            // Not sure if we need to use model, because 'addDelivery' in Model requires the inspected person,
+            // but we can get the inspected person with this method. And if we have the inspected person here,
+            // we can directly add delivery to their delivery list.
+            Person inspectedPerson = InspectWindow.getInspectedPerson();
+            inspectedPerson.addDelivery(this.deliveryToAdd);
+            return new CommandResult(MESSAGE_SUCCESS_DELIVERY + inspectedPerson.getName(), DeliveryAction.ADD);
         }
-        //Check if email duplicate
-        if (hasEmail) {
-            warning += MESSAGE_DUPLICATE_EMAIL;
-        }
-        model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS + warning, Messages.format(toAdd)));
     }
 
     @Override

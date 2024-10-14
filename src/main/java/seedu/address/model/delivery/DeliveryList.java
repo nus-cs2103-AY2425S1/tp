@@ -12,7 +12,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of deliveries that does not allow nulls.
- *
+ * <p>
  * Supports a minimal set of list operations.
  */
 public class DeliveryList {
@@ -40,7 +40,7 @@ public class DeliveryList {
      * Replaces the delivery {@code target} in the list with {@code editedDelivery}.
      * {@code target} must exist in the list.
      */
-    public void setDelivery(Delivery target, Delivery editedDelivery) {
+    public void setDelivery(Delivery target, Delivery editedDelivery) throws DeliveryNotFoundException {
         requireAllNonNull(target, editedDelivery);
 
         int index = internalList.indexOf(target);
@@ -55,7 +55,7 @@ public class DeliveryList {
      * Removes the equivalent delivery from the list.
      * The delivery must exist in the list.
      */
-    public void remove(Delivery toRemove) {
+    public void remove(Delivery toRemove) throws PersonNotFoundException {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();

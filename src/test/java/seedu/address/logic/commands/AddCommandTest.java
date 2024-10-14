@@ -30,7 +30,8 @@ public class AddCommandTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddCommand((Person) null));
+        assertThrows(NullPointerException.class, () -> new AddCommand((Delivery) null));
     }
 
     @Test
@@ -40,7 +41,7 @@ public class AddCommandTest {
 
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS_PERSON, Messages.format(validPerson)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
@@ -54,7 +55,7 @@ public class AddCommandTest {
         Person duplicatePhonePerson = new PersonBuilder().withName("new").withEmail("new@gmail.com").build();
         String resultMessage = new AddCommand(duplicatePhonePerson).execute(modelStub).getFeedbackToUser();
         assertTrue(resultMessage.contains(
-            String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(duplicatePhonePerson))
+            String.format(AddCommand.MESSAGE_SUCCESS_PERSON, Messages.format(duplicatePhonePerson))
         ));
         assertTrue(resultMessage.contains(AddCommand.MESSAGE_DUPLICATE_PHONE));
         assertFalse(resultMessage.contains(AddCommand.MESSAGE_DUPLICATE_EMAIL));
@@ -69,7 +70,7 @@ public class AddCommandTest {
         Person duplicateEmailPerson = new PersonBuilder().withName("new").withPhone("12345678").build();
         String resultMessage = new AddCommand(duplicateEmailPerson).execute(modelStub).getFeedbackToUser();
         assertTrue(resultMessage.contains(
-            String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(duplicateEmailPerson))
+            String.format(AddCommand.MESSAGE_SUCCESS_PERSON, Messages.format(duplicateEmailPerson))
         ));
         assertFalse(resultMessage.contains(AddCommand.MESSAGE_DUPLICATE_PHONE));
         assertTrue(resultMessage.contains(AddCommand.MESSAGE_DUPLICATE_EMAIL));
@@ -85,7 +86,7 @@ public class AddCommandTest {
         String resultMessage = new AddCommand(duplicatePhonePerson).execute(modelStub).getFeedbackToUser();
         //Assert success and warning messages exist
         assertTrue(resultMessage.contains(
-            String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(duplicatePhonePerson))
+            String.format(AddCommand.MESSAGE_SUCCESS_PERSON, Messages.format(duplicatePhonePerson))
         ));
         assertTrue(resultMessage.contains(AddCommand.MESSAGE_DUPLICATE_PHONE));
         assertTrue(resultMessage.contains(AddCommand.MESSAGE_DUPLICATE_EMAIL));

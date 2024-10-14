@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.DeliveryAction;
 
 /**
  * Represents the result of a command execution.
@@ -17,7 +18,7 @@ public class CommandResult {
     /** Help information should be shown to the user. */
     private final boolean isShowHelp;
 
-    /** The person o inspect (only if isInspect else null) **/
+    /** The person to inspect (only if isInspect else null) **/
     private final Person person;
 
     /** The application should exit. */
@@ -28,6 +29,21 @@ public class CommandResult {
 
     /** Main page should be showed **/
     private final boolean isList;
+
+    private DeliveryAction deliveryAction = DeliveryAction.NONE;
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, DeliveryAction deliveryAction) {
+        this.feedbackToUser = feedbackToUser;
+        this.person = null;
+        this.isShowHelp = false;
+        this.isExit = false;
+        this.isInspect = false;
+        this.isList = false;
+        this.deliveryAction = deliveryAction;
+    }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -86,6 +102,14 @@ public class CommandResult {
 
     public boolean isList() {
         return isList;
+    }
+
+    public boolean isDeliveryAdded() {
+        return this.deliveryAction == DeliveryAction.ADD;
+    }
+
+    public boolean isDeliveryDeleted() {
+        return this.deliveryAction == DeliveryAction.DELETE;
     }
 
     @Override
