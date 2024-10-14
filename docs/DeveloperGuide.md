@@ -103,7 +103,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a student).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -176,11 +176,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -190,7 +190,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -246,7 +246,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -338,7 +338,7 @@ unless specified otherwise)
 
 * 1a. The student name is invalid.
     * 1a1. TAchy shows an error message.
-  
+
       Use case ends.
 
 * 1b. The student name already exists.
@@ -478,7 +478,7 @@ unless specified otherwise)
     * 1a1. TAchy shows an error message.
 
       Use case ends.
-  
+
 * 1b. The student is not found.
     * 1b1. TAchy shows an error message.
 
@@ -504,7 +504,7 @@ unless specified otherwise)
 **MSS**
 
 1. TA requests to list all assignments.
-2. TAchy displays the list of assignments. 
+2. TAchy displays the list of assignments.
 3. TA requests to view submission status for an assignment by index.
 4. TAchy displays the list of submissions for the selected assignment.
 
@@ -516,12 +516,12 @@ unless specified otherwise)
     * 1a1. TAchy displays a "no assignments found" message.
 
       Use case ends.
-  
+
 * 3a. The assignment index is invalid.
     * 3a1. TAchy shows an error message.
 
       Use case ends.
-  
+
 * 4a. No submissions are found for the assignment.
     * 4a1. TAchy displays a "no submissions found" message.
 
@@ -591,7 +591,7 @@ unless specified otherwise)
     * 1a1. TAchy displays a "no students" message.
 
       Use case ends.
-    * 
+    *
 * 3a. The student index is invalid.
     * 3a1. TAchy shows an error message.
 
@@ -624,7 +624,7 @@ unless specified otherwise)
 
       Use case ends.
 
-   
+
 ---
 
 **Use case: Link scanned PDF to a student**
@@ -750,12 +750,12 @@ unless specified otherwise)
     * 1a1. TAchy displays a "no classes found" message.
 
       Use case ends.
-  
+
 * 3a. The class index is invalid.
     * 3a1. TAchy shows an error message.
 
       Use case ends.
-  
+
 * 5a. The student index is invalid.
     * 5a1. TAchy shows an error message.
 
@@ -792,11 +792,11 @@ unless specified otherwise)
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 - Business/domain rules: Each student must be uniquely identifiable by their student ID, Assignments must have deadlines that  cannot be set on a date that has passed, Each class should not exceed 50 students, Assignments must be submitted by students up to the deadline set by the TA
-- Constraints: The system must be backward compatible with data produced by earlier versions of the system, The total project cost should be $0, The project is offered as a free service, TAs are only allowed to store up to 5 GB of data 
+- Constraints: The system must be backward compatible with data produced by earlier versions of the system, The total project cost should be $0, The project is offered as a free service, TAs are only allowed to store up to 5 GB of data
 - Technical requirements: The system should work on both 32-bit and 64-bit environment, The system should be compatible with Windows, macOS and Linux operating systems.
 - Performance requirements: The system should respond to user inputs within five seconds, The system should be able to handle a large number of students, classes, and assignments without degradation in performance, Data retrieval should not take longer than 2 seconds.
 - Quality requirements: The system should be usable by a novice who has never used AB3 before, The system should have clear user documentation to guide users through its features, Intuitive error messages will be displayed to the user so that they know what is the correct method of using the system
@@ -808,7 +808,7 @@ unless specified otherwise)
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **TA** : Abbreviation of Teaching Assistant, a person responsible for assisting instructors in managing courses
+* **TA** : Abbreviation of Teaching Assistant, a student responsible for assisting instructors in managing courses
 * **Class**: A group of students taking the same course assigned to a specific tutorial, sectional, laboratory or recitation which a TA is responsible for.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -841,17 +841,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a student
 
-1. Deleting a person while all persons are being shown
+1. Deleting a student while all students are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
