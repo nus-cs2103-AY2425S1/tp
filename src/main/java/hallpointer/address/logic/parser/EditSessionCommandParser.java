@@ -42,7 +42,8 @@ public class EditSessionCommandParser implements Parser<EditSessionCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSessionCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            EditSessionCommand.MESSAGE_USAGE), pe);
         }
 
         EditSessionDescriptor editSessionDescriptor = new EditSessionDescriptor();

@@ -114,7 +114,4 @@ public class Session {
                 .toString();
     }
 
-    public Object getDate() {
-        return this.date;
-    }
 }

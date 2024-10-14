@@ -114,14 +114,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedMember);
         addressBook.setMember(target, editedMember);
     }
-
-    @Override
-    public void addSession(Session session) {
-        addressBook.addSession(session);
-        updateFilteredMemberList(PREDICATE_SHOW_ALL_SESSIONS); // This predicate shows all sessions
-    }
-
-
     //=========== Filtered Member List Accessors =============================================================
 
     /**
@@ -140,6 +132,7 @@ public class ModelManager implements Model {
     }
 
     //=========== Session ================================================================================
+
     /**
      * Returns true if a session with the same identity as {@code session} exists in the address book.
      *
@@ -164,6 +157,7 @@ public class ModelManager implements Model {
 
     /**
      * Removes the given session {@code target} in the list.
+     *
      * @param target session to be deleted
      */
     @Override
@@ -177,7 +171,7 @@ public class ModelManager implements Model {
      * The session identity of {@code editedSession} must not be the same as
      * another existing session in the address book.
      *
-     * @param target The session to replace.
+     * @param target        The session to replace.
      * @param editedSession The new session.
      */
     @Override
@@ -191,6 +185,8 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Session> getSessionList() {
         return addressBook.getSessionList();
+    }
+
     /**
      * Updates the filtered session list based on the given predicate.
      *

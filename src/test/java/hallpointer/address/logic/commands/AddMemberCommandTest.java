@@ -163,7 +163,6 @@ public class AddMemberCommandTest {
         @Override
         public void addSession(Session session) {
             throw new AssertionError("This method should not be called");
-
         }
 
         @Override
@@ -177,11 +176,6 @@ public class AddMemberCommandTest {
         }
         @Override
         public boolean hasSession(Session session) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addSession(Session session) {
             throw new AssertionError("This method should not be called.");
         }
 

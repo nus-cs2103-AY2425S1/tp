@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameMember comparison)
  */
+@SuppressWarnings("checkstyle:Regexp")
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueMemberList members;
@@ -32,7 +33,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         sessions = new UniqueSessionList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Creates an AddressBook using the Members in the {@code toBeCopied}
@@ -55,10 +57,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public void setSessions(List<Session> sessions) {
         this.sessions.setSessions(sessions);
-    }
-
-    public ObservableList<Session> getSessionList() {
-        return sessions.asUnmodifiableObservableList();
     }
 
     /**
@@ -122,13 +120,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         return members.asUnmodifiableObservableList();
     }
 
-    /**
-     * Returns true if a session with the same identity as {@code session} exists in the address book.
-     *
-     * @param session The session to check.
-     * @return True if the session exists, false otherwise.
-     */
+
     //=========== Session ================================================================================
+
+    /**
+     * Checks if the given session exists in the list of sessions.
+     *
+     * @param session The session to check for existence.
+     * @return {@code true} if the session exists in the list, otherwise {@code false}.
+     * @throws NullPointerException If the session is null.
+     */
     public boolean hasSession(Session session) {
         requireNonNull(session);
         return sessions.contains(session);
@@ -162,7 +163,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The session identity of {@code editedSession} must not be the same as another
      * existing session in the address book.
      *
-     * @param target The session to replace.
+     * @param target        The session to replace.
      * @param editedSession The new session.
      */
     public void setSession(Session target, Session editedSession) {
@@ -200,26 +201,4 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return members.hashCode();
     }
-
-    /**
-     * Adds a session to the list of sessions.
-     *
-     * @param session The session to be added.
-     */
-    public void addSession(Session session) {
-        sessions.add(session);
-    }
-
-    /**
-     * Checks if the given session exists in the list of sessions.
-     *
-     * @param session The session to check for existence.
-     * @return {@code true} if the session exists in the list, otherwise {@code false}.
-     * @throws NullPointerException If the session is null.
-     */
-    public boolean hasSessions(Session session) {
-        requireNonNull(session);
-        return sessions.contains(session);
-    }
-
 }
