@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import tutorease.address.commons.core.index.Index;
-import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.Model;
 import tutorease.address.model.ModelManager;
@@ -57,7 +56,7 @@ public class DeleteLessonCommandIntegrationTest {
                 expectedModel);
     }
     @Test
-    public void execute_deleteLesson_invalidIndex_throwsCommandException() throws ParseException {
+    public void execute_invalidIndex_throwsCommandException() throws ParseException {
         Model expectedModel = new ModelManager(model.getTutorEase(), new UserPrefs(), model.getLessonSchedule());
         Lesson validLesson = new LessonBuilder().withName(validPerson)
                 .withStartDateTime(startDateTime)
