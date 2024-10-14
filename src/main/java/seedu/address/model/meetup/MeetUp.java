@@ -30,7 +30,6 @@ public class MeetUp { //TODO
         this.to = to;
     }
 
-
     /**
      * Returns true if both meetups have the same identity and data fields.
      * This defines a stronger notion of equality between two meetUps.
