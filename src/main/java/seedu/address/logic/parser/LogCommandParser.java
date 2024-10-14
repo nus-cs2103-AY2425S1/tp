@@ -57,6 +57,7 @@ public class LogCommandParser implements Parser<LogCommand> {
             return new LogCommand(index, logMessage);
         }
 
+
         return new LogCommand(index, date, logMessage);
     }
 }

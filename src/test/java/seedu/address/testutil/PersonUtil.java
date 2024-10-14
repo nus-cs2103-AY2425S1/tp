@@ -44,6 +44,9 @@ public class PersonUtil {
 
     /**
      * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * ! this test utility method is modified to default the dateOfCreation of person testing object to
+     * LocalDate.now(), and will only be used to test against person object that has dateOfCreation set
+     * to LocalDate.now() as per in the test class.
      */
     public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();

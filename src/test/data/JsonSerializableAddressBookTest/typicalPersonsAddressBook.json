@@ -1,53 +1,126 @@
 {
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
-  "persons" : [ {
-    "name" : "Alice Pauline",
-    "phone" : "94351253",
-    "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "remark" : "",
-    "tags" : [ "friends" ]
-  }, {
-    "name" : "Benson Meier",
-    "phone" : "98765432",
-    "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "remark" : "",
-    "tags" : [ "owesMoney", "friends" ]
-  }, {
-    "name" : "Carl Kurz",
-    "phone" : "95352563",
-    "email" : "heinz@example.com",
-    "address" : "wall street",
-    "remark" : "",
-    "tags" : [ ]
-  }, {
-    "name" : "Daniel Meier",
-    "phone" : "87652533",
-    "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "remark" : "",
-    "tags" : [ "friends" ]
-  }, {
-    "name" : "Elle Meyer",
-    "phone" : "9482224",
-    "email" : "werner@example.com",
-    "address" : "michegan ave",
-    "remark" : "",
-    "tags" : [ ]
-  }, {
-    "name" : "Fiona Kunz",
-    "phone" : "9482427",
-    "email" : "lydia@example.com",
-    "address" : "little tokyo",
-    "remark" : "",
-    "tags" : [ ]
-  }, {
-    "name" : "George Best",
-    "phone" : "9482442",
-    "email" : "anna@example.com",
-    "address" : "4th street",
-    "remark" : "",
-    "tags" : [ ]
-  } ]
+  "persons" : [
+    {
+      "name" : "Alice Pauline",
+      "phone" : "94351253",
+      "email" : "alice@example.com",
+      "address" : "123, Jurong West Ave 6, #08-111",
+      "remark" : "",
+      "tags" : [ "friends" ],
+      "dateOfCreation" : "2024-01-12",
+      "history" : [
+        {
+          "date" : "2024-01-12",
+          "activities" : [ "Created" ]
+        },
+        {
+          "date" : "2024-10-10",
+          "activities" : [ "Attended seminar" ]
+        },
+        {
+          "date" : "2024-10-11",
+          "activities" : [ "Met with client" ]
+        }
+      ]
+    },
+    {
+      "name" : "Benson Meier",
+      "phone" : "98765432",
+      "email" : "johnd@example.com",
+      "address" : "311, Clementi Ave 2, #02-25",
+      "remark" : "",
+      "tags" : [ "owesMoney", "friends" ],
+      "dateOfCreation" : "2022-09-19",
+      "history" : [
+        {
+          "date" : "2022-09-19",
+          "activities" : [ "Created" ]
+        },
+        {
+          "date" : "2024-09-25",
+          "activities" : [ "Completed project A" ]
+        },
+        {
+          "date" : "2024-10-01",
+          "activities" : [ "Attended team meeting" ]
+        }
+      ]
+    },
+    {
+      "name" : "Carl Kurz",
+      "phone" : "95352563",
+      "email" : "heinz@example.com",
+      "address" : "wall street",
+      "remark" : "",
+      "tags" : [ ],
+      "dateOfCreation" : "2021-09-10",
+      "history" : [
+        {
+          "date" : "2021-09-10",
+          "activities" : [ "Created" ]
+        }
+      ]
+    },
+    {
+      "name" : "Daniel Meier",
+      "phone" : "87652533",
+      "email" : "cornelia@example.com",
+      "address" : "10th street",
+      "remark" : "",
+      "tags" : [ "friends" ],
+      "dateOfCreation" : "2012-02-19",
+      "history" : [
+        {
+          "date" : "2012-02-19",
+          "activities" : [ "Created" ]
+        }
+      ]
+    },
+    {
+      "name" : "Elle Meyer",
+      "phone" : "9482224",
+      "email" : "werner@example.com",
+      "address" : "michegan ave",
+      "remark" : "",
+      "tags" : [ ],
+      "dateOfCreation" : "2024-02-20",
+      "history" : [
+        {
+          "date" : "2024-02-20",
+          "activities" : [ "Created" ]
+        }
+      ]
+    },
+    {
+      "name" : "Fiona Kunz",
+      "phone" : "9482427",
+      "email" : "lydia@example.com",
+      "address" : "little tokyo",
+      "remark" : "",
+      "tags" : [ ],
+      "dateOfCreation" : "2018-01-29",
+      "history" : [
+        {
+          "date" : "2018-01-29",
+          "activities" : [ "Created" ]
+        }
+      ]
+    },
+    {
+      "name" : "George Best",
+      "phone" : "9482442",
+      "email" : "anna@example.com",
+      "address" : "4th street",
+      "remark" : "",
+      "tags" : [ ],
+      "dateOfCreation" : "2019-12-11",
+      "history" : [
+        {
+          "date" : "2019-12-11",
+          "activities" : [ "Created" ]
+        }
+      ]
+    }
+  ]
 }

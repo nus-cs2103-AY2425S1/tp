@@ -135,7 +135,7 @@ class JsonAdaptedPerson {
         LocalDate creationDateForChronicleCheck = LocalDate.parse(dateOfCreation);
         boolean hasEntryInTheFuture;
         Stream<Boolean> isBeforeStream = historyEntries.stream()
-                .map(e -> e.toDate().isBefore(creationDateForChronicleCheck));
+                .map(e -> e.toDate().isBefore(creationDateForChronicleCheck) || e.toDate().isAfter(LocalDate.now()));
         hasEntryInTheFuture = isBeforeStream.reduce(false, (a, b) -> a || b);
         if (hasEntryInTheFuture) {
             throw new IllegalValueException(INVALID_HISTORY_DATE);
