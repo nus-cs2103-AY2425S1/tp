@@ -9,6 +9,14 @@ public class CombinedPredicate implements Predicate<Person> {
     private final Predicate<Person> namePredicate;
     private final Predicate<Person> phonePredicate;
 
+    /**
+     * Constructs a {@code CombinedPredicate} that combines a name predicate and a phone predicate.
+     * The combined predicate will return {@code true} if either the name predicate or the phone predicate
+     * returns {@code true}.
+     *
+     * @param namePredicate A predicate that tests if a person's name matches any of the specified keywords.
+     * @param phonePredicate A predicate that tests if a person's phone number matches any of the specified keywords.
+     */
     public CombinedPredicate(Predicate<Person> namePredicate, Predicate<Person> phonePredicate) {
         this.namePredicate = namePredicate;
         this.phonePredicate = phonePredicate;

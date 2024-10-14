@@ -29,9 +29,8 @@ public class PhoneContainsKeywordsPredicate implements Predicate<Person> {
         return keywords.isEmpty()
             ? false
             : keywords.stream()
-                .anyMatch(keyword -> person.getPhone().value.contains(keyword));  // Exact match
+                .anyMatch(keyword -> person.getPhone().value.contains(keyword));
     }
-
 
     /**
      * Compares this {@code PhoneContainsKeywordsPredicate} to another object.
