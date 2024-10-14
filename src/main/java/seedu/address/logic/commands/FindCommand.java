@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.person.TraitContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -23,16 +25,20 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_FIND_PERSON_UNSUCCESSFUL = "No contacts found.";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final TraitContainsKeywordsPredicate<?> predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(TraitContainsKeywordsPredicate<?> predicate) {
         this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        if (predicate instanceof NameContainsKeywordsPredicate namePredicate) {
+            model.updateFilteredPersonList(namePredicate);
+        } else if (predicate instanceof TagContainsKeywordsPredicate tagPredicate) {
+            model.updateFilteredPersonListByTag(tagPredicate);
+        }
 
         if (!model.getFilteredPersonList().isEmpty()) {
             return new CommandResult(String.format(MESSAGE_FIND_PERSON_SUCCESS, predicate.getDisplayString()));
@@ -48,11 +54,10 @@ public class FindCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof FindCommand otherFindCommand)) {
             return false;
         }
 
-        FindCommand otherFindCommand = (FindCommand) other;
         return predicate.equals(otherFindCommand.predicate);
     }
 
