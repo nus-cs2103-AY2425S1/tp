@@ -26,8 +26,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */
-    {
+     */ {
         students = new UniqueStudentList();
         groups = new UniqueGroupList();
     }
@@ -115,6 +114,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasGroup(Group group) {
         requireNonNull(group);
         return groups.contains(group);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeGroup(Group key) {
+        groups.remove(key);
     }
 
     /**

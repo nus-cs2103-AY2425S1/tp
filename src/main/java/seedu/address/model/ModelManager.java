@@ -139,6 +139,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteGroup(Group group){
+        addressBook.removeGroup(group);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
     public void addGroup(Group group) {
         addressBook.addGroup(group);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
