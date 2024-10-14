@@ -367,13 +367,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### Use case: Add a piano piece to a student
+#### Use case: Assign piano piece to a student
 
 **MSS**
 
-1. User enters command to add a piano piece to a student.
-2. KeyContacts parses the piano piece details from the user's command.
-3. KeyContacts adds the piano piece to the student's record and notifies the user.
+1. User enters command to assign piano pieces to a student.
+2. KeyContacts parses the piano pieces' details from the user's command.
+3. KeyContacts assigns the piano pieces to the student's record and notifies the user.
 
    Use case ends.
 
@@ -491,23 +491,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. KeyContacts displays the dialog box with a link to the user guide.
 
    Use case ends.
-
-#### Use case: Assign a piano piece to a student
-
-**MSS**
-
-1. User enters command to assign a piano piece to a student.
-2. KeyContacts parses the user's command.
-3. KeyContacts assigns the pieces to the student and notifies the user. 
-
-    Use case ends.
-
-**Extensions**
-* 2a. KeyContacts detects an error in the entered data.
-  * 2a1. KeyContacts requests for the correct data.
-  * 2a2. User enters new data.
-  * Steps 2a1-2a2 are repeated until the data entered are correct.
-  * Use case resumes from step 3.
 
 ### Non-Functional Requirements
 
