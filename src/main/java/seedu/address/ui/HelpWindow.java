@@ -32,7 +32,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "Example: list";
     private static final String HELP_FIND_COMMAND = "Find Command\n"
             + "Format: find KEYWORDS [MORE_KEYWORDS]\n"
-            + "Example: find John"
+            + "Example: find John\n"
             + "Only names can be searched; Only full words will be matched. "
             + "The command is case insensitive. When more than one keyword is used,"
             + " persons matching at least one keyword will be returned.";
