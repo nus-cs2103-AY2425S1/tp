@@ -30,14 +30,15 @@ public class Person {
     private final Priority priority;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Appointment> appointments = new HashSet<>();
-    private final MedCon medCon;
+    private final Set<MedCon> medCons = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Nric nric, Address address, DateOfBirth dateOfBirth,
-                  Gender gender, Set<Tag> tags, Priority priority, Set<Appointment> appointments, MedCon medCon) {
-        requireAllNonNull(name, phone, email, nric, address, dateOfBirth, gender, tags, priority, appointments, medCon);
+                  Gender gender, Set<Tag> tags, Priority priority, Set<Appointment> appointments, Set<MedCon> medCons) {
+        requireAllNonNull(name, phone, email, nric, address, dateOfBirth, gender, tags, priority, appointments,
+                medCons);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -48,7 +49,7 @@ public class Person {
         this.tags.addAll(tags);
         this.priority = priority;
         this.appointments.addAll(appointments);
-        this.medCon = medCon;
+        this.medCons.addAll(medCons);
     }
 
     public Priority getPriority() {
@@ -98,8 +99,12 @@ public class Person {
         return Collections.unmodifiableSet(appointments);
     }
 
-    public MedCon getMedCon() {
-        return medCon;
+    /**
+     * Returns an immutable set of medical conditions, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<MedCon> getMedCons() {
+        return Collections.unmodifiableSet(medCons);
     }
 
     /**
@@ -140,7 +145,7 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
                 && appointments.equals(otherPerson.appointments)
-                && medCon.equals(otherPerson.medCon)
+                && medCons.equals(otherPerson.medCons)
                 && priority.equals(otherPerson.priority);
     }
 
@@ -148,7 +153,7 @@ public class Person {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, nric, dateOfBirth, gender, address, tags, priority, appointments,
-                medCon);
+                medCons);
     }
 
     @Override
@@ -164,7 +169,7 @@ public class Person {
                 .add("tags", tags)
                 .add("priority", priority)
                 .add("appointments", appointments)
-                .add("medical conditions", medCon)
+                .add("medical conditions", medCons)
                 .toString();
     }
 

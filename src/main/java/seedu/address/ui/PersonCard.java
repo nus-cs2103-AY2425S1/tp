@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.MedCon;
 import seedu.address.model.person.Person;
 
 /**
@@ -52,7 +53,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane appointments;
     @FXML
-    private Label medCon;
+    private FlowPane medCons;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -68,14 +69,16 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        medCon.setText(person.getMedCon().value);
+        person.getMedCons().stream()
+                .sorted(Comparator.comparing(MedCon::toString))
+                .forEach(medCon -> medCons.getChildren().add(new Label(medCon.toString())));
         priority.setText(person.getPriority().priority);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         person.getAppointments()
-              .stream()
-              .sorted(Comparator.comparing(Appointment::getAppointmentStartDateTime))
-              .forEach(appointment -> appointments.getChildren().add(new Label(appointment.toString())));
+                .stream()
+                .sorted(Comparator.comparing(Appointment::getAppointmentStartDateTime))
+                .forEach(appointment -> appointments.getChildren().add(new Label(appointment.toString())));
     }
 }

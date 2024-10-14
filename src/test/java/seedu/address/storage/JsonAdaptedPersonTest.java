@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEDCON;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -51,7 +52,9 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedAppointment> VALID_APPOINTMENTS = BENSON.getAppointments().stream()
                                                                                  .map(JsonAdaptedAppointment::new)
                                                                                  .collect(Collectors.toList());
-    private static final String VALID_MEDCON = BENSON.getMedCon().toString();
+    private static final List<JsonAdaptedMedCon> VALID_MEDCON = BENSON.getMedCons().stream()
+                                                                      .map(JsonAdaptedMedCon::new)
+                                                                      .collect(Collectors.toList());
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
@@ -231,5 +234,18 @@ public class JsonAdaptedPersonTest {
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Priority.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
+
+    @Test
+    public void toModelType_invalidMedCons_throwsIllegalValueException() {
+        List<JsonAdaptedMedCon> invalidMedCons = new ArrayList<>(VALID_MEDCON);
+        invalidMedCons.add(new JsonAdaptedMedCon(INVALID_MEDCON));
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_ADDRESS,
+                        VALID_DATE_OF_BIRTH, VALID_GENDER, VALID_TAGS, VALID_PRIORITY, VALID_APPOINTMENTS,
+                        invalidMedCons);
+        assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+
 
 }
