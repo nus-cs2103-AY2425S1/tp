@@ -17,6 +17,8 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.Observable;
+import javafx.beans.property.BooleanProperty;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
@@ -202,5 +204,23 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, new PropertyBook(),
                 clientBook)));
+    }
+
+    @Test
+    public void getIsDisplayClientsProperty_returnsBooleanPropertyType() {
+        // Call the method
+        BooleanProperty result = modelManager.getIsDisplayClientsProperty();
+
+        // Assert that the result is an instance of BooleanProperty
+        assertTrue(result instanceof BooleanProperty, "Expected result to be an instance of BooleanProperty");
+    }
+
+    @Test
+    public void getIsDisplayClientsProperty_isObservable() {
+        // Call the method
+        BooleanProperty result = modelManager.getIsDisplayClientsProperty();
+
+        // Assert that the result is an instance of Observable
+        assertTrue(result instanceof Observable, "Expected result to be an instance of Observable");
     }
 }
