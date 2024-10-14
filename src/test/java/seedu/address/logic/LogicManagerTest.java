@@ -69,7 +69,8 @@
 //     @Test
 //     public void execute_validCommand_success() throws Exception {
 //         String viewCommand = ViewPersonCommand.COMMAND_WORD;
-//         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size());
+//         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 
+//              model.getFilteredPersonList().size());
 //         assertCommandSuccess(viewCommand, expectedMessage, model);
 //     }
 
