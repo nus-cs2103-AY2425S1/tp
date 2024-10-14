@@ -180,7 +180,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void deleteTutorial(TutorialClass tutorialClass) {
         requireNonNull(tutorialClass);
-        System.out.println("Test");
         this.tutorials.removeIf(id -> id.getTutorialClass().equals(tutorialClass));
     }
 
