@@ -41,13 +41,10 @@ public class FindCommandParser implements Parser<FindCommand> {
                 .collect(Collectors.toList());
 
         if (!nameKeywords.isEmpty() && phoneKeywords.isEmpty()) {
-            // Only name keywords present
             return new FindCommand(new NameContainsKeywordsPredicate(nameKeywords));
         } else if (nameKeywords.isEmpty() && !phoneKeywords.isEmpty()) {
-            // Only phone keywords present
             return new FindCommand(new PhoneContainsKeywordsPredicate(phoneKeywords));
         } else {
-            // Both name and phone keywords present
             return new FindCommand(new CombinedPredicate(
                     new NameContainsKeywordsPredicate(nameKeywords),
                     new PhoneContainsKeywordsPredicate(phoneKeywords)));
