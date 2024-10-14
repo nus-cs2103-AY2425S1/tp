@@ -129,8 +129,8 @@ public class Person {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("id", id)
                 .add("name", name)
+                .add("id", id)
                 /*
                 .add("ward", ward)
                 .add("diagnosis", diagnosis)
