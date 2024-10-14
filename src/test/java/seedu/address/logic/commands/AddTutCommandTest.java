@@ -25,6 +25,7 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
 
 public class AddTutCommandTest {
@@ -59,7 +60,7 @@ public class AddTutCommandTest {
     @Test
     public void equals() {
         Tut tutSample1 = TUT_SAMPLE;
-        Tut tutSample2 = new Tut("CS2040S", 2); // Different tutorial
+        Tut tutSample2 = new Tut("CS2040S", new TutorialClass("1001")); // Different tutorial
 
         AddTutCommand addTutSample1Command = new AddTutCommand(tutSample1);
         AddTutCommand addTutSample2Command = new AddTutCommand(tutSample2);

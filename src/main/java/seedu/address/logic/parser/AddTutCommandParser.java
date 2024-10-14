@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddTutCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
 
 /**
@@ -30,7 +31,7 @@ public class AddTutCommandParser implements Parser<AddTutCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUT_NAME, PREFIX_TUT_ID);
         Name name = ParserUtil.parseTutName(argMultimap.getValue(PREFIX_TUT_NAME).get());
-        int id = ParserUtil.parseTutIndex(argMultimap.getValue(PREFIX_TUT_ID).get());
+        TutorialClass id = ParserUtil.parseTutIndex(argMultimap.getValue(PREFIX_TUT_ID).get());
 
         Tut tutorial = new Tut(name.toString(), id);
 

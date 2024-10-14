@@ -188,11 +188,11 @@ public class ParserUtil {
      * @return an integer id of the tutorial.
      * @throws ParseException if the id is invalid.
      */
-    public static int parseTutIndex(String id) throws ParseException {
+    public static TutorialClass parseTutIndex(String id) throws ParseException {
         requireNonNull(id);
         String trimmedId = id.trim();
         checkArgument(checkUsingIsDigitMethod(trimmedId), Tut.MESSAGE_ID_CONSTRAINTS);
-        return Integer.parseInt(trimmedId);
+        return new TutorialClass(trimmedId);
     }
 
     static boolean checkUsingIsDigitMethod(String input) {

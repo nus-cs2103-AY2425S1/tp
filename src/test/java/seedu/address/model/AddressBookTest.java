@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TutUtil.TUT_01;
+import static seedu.address.testutil.TutUtil.TUTORIAL_CLASS;
 import static seedu.address.testutil.TutUtil.TUT_NAME;
 import static seedu.address.testutil.TutUtil.TUT_SAMPLE;
 import static seedu.address.testutil.TypicalStudents.ALICE;
@@ -116,7 +116,7 @@ public class AddressBookTest {
     @Test
     public void getTutorialList_addStudent() {
         List<Tut> expectedTutorial = new ArrayList<>();
-        Tut tutSample2 = new Tut(TUT_NAME, TUT_01);
+        Tut tutSample2 = new Tut(TUT_NAME, TUTORIAL_CLASS);
         TUT_SAMPLE.add(ALICE);
         tutSample2.add(ALICE);
         expectedTutorial.add(TUT_SAMPLE);
@@ -129,7 +129,7 @@ public class AddressBookTest {
         addressBook.resetData(getTypicalAddressBook());
         AddressBook addressBookSample = getTypicalAddressBook();
         List<Tut> expectedTutorial = new ArrayList<>();
-        Tut tutSample2 = new Tut(TUT_NAME, TUT_01);
+        Tut tutSample2 = new Tut(TUT_NAME, TUTORIAL_CLASS);
         TUT_SAMPLE.add(ALICE);
         tutSample2.add(ALICE);
         expectedTutorial.add(TUT_SAMPLE);
@@ -163,7 +163,7 @@ public class AddressBookTest {
         addressBook.addStudent(ALICE);
 
         // Create a new tutorial not in the address book
-        Tut nonExistentTutorial = new Tut(TUT_NAME, TUT_01);
+        Tut nonExistentTutorial = new Tut(TUT_NAME, TUTORIAL_CLASS);
 
         // Expect TutNoFoundException when trying to assign ALICE to a non-existent tutorial
         assertThrows(TutNoFoundException.class, () -> addressBook.assignStudent(ALICE, nonExistentTutorial));

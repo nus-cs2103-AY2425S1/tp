@@ -73,7 +73,7 @@ public class CommandTestUtil {
 
     // New constants for testing tutorials
     public static final String VALID_TUT_NAME = "CS2103T";
-    public static final String VALID_TUT_ID = "1";
+    public static final String VALID_TUT_ID = "1001";
 
     public static final String TUT_NAME_DESC = " " + CliSyntax.PREFIX_TUT_NAME + VALID_TUT_NAME;
     public static final String TUT_ID_DESC = " " + CliSyntax.PREFIX_ID + VALID_TUT_ID;
