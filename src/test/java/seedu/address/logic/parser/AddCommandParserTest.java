@@ -39,7 +39,8 @@ public class AddCommandParserTest {
         Person expectedPerson = new PersonBuilder(BOB).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + ID_DESC_BOB + WARD_DESC_BOB, new AddCommand(expectedPerson));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + ID_DESC_BOB + WARD_DESC_BOB,
+                new AddCommand(expectedPerson));
 
         /*
         // multiple tags - all accepted

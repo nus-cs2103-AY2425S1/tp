@@ -55,8 +55,10 @@ public class TypicalPersons {
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withId("P28349").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withId(VALID_ID_AMY).withWard(VALID_WARD_AMY).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withId(VALID_ID_BOB).withWard(VALID_WARD_BOB).build();
+    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withId(VALID_ID_AMY)
+            .withWard(VALID_WARD_AMY).build();
+    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withId(VALID_ID_BOB)
+            .withWard(VALID_WARD_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

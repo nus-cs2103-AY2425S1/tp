@@ -80,8 +80,10 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).withId(VALID_ID_AMY).withWard(VALID_WARD_AMY).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).withId(VALID_ID_BOB).withWard(VALID_WARD_BOB).build();
+        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).withId(VALID_ID_AMY)
+                .withWard(VALID_WARD_AMY).build();
+        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).withId(VALID_ID_BOB)
+                .withWard(VALID_WARD_BOB).build();
     }
 
     /**

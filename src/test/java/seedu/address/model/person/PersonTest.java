@@ -102,8 +102,8 @@ public class PersonTest {
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
 
          */
-        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", id=" + ALICE.getId() +
-                ", ward=" + ALICE.getWard() + "}";
+        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", id=" + ALICE.getId()
+                + ", ward=" + ALICE.getWard() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
