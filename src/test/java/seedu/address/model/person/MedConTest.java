@@ -13,6 +13,24 @@ public class MedConTest {
     }
 
     @Test
+    public void compareTo_lessThan_returnsNegative() {
+        MedCon medCon1 = new MedCon("Asthma");
+        MedCon medCon2 = new MedCon("Diabetes");
+
+        assertTrue(medCon1.compareTo(medCon2) < 0,
+                "Expected compareTo to return a negative value for 'Asthma' < 'Diabetes'");
+    }
+
+    @Test
+    public void compareTo_greaterThan_returnsPositive() {
+        MedCon medCon1 = new MedCon("Hypertension");
+        MedCon medCon2 = new MedCon("Asthma");
+
+        assertTrue(medCon1.compareTo(medCon2) > 0,
+                "Expected compareTo to return a positive value for 'Hypertension' > 'Asthma'");
+    }
+
+    @Test
     public void equals() {
         MedCon medCon = new MedCon("Diabetes");
 
