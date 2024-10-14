@@ -101,7 +101,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getAddTags().orElse(personToEdit.getTags());
+        Set<Tag> updatedTags = editPersonDescriptor.computeTags(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
@@ -219,6 +219,24 @@ public class EditCommand extends Command {
 
         public Optional<Set<Tag>> getDeleteTags() {
             return (deleteTags != null) ? Optional.of(Collections.unmodifiableSet(deleteTags)) : Optional.empty();
+        }
+
+        /**
+         * Computes the updated set of tags for {@code personToEdit} with given tag list,
+         * and returns an unmodifiable tag set.
+         */
+        public Set<Tag> computeTags(Set<Tag> tags) {
+            Optional<Set<Tag>> addTags = getAddTags();
+            if (addTags.isPresent() && addTags.get().isEmpty()) {
+                // empty add tags set, which means to remove all tags
+                return Collections.emptySet();
+            }
+
+            Set<Tag> newTags = new HashSet<>(tags);
+            addTags.ifPresent(newTags::addAll);
+            getDeleteTags().ifPresent(newTags::removeAll);
+
+            return Collections.unmodifiableSet(newTags);
         }
 
         @Override
