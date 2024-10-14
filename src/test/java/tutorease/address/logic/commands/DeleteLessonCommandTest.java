@@ -4,11 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static tutorease.address.logic.commands.CommandTestUtil.VALID_DURATION;
-import static tutorease.address.logic.commands.CommandTestUtil.VALID_LOCATION_INDEX;
-import static tutorease.address.logic.commands.CommandTestUtil.VALID_START_DATE;
 import static tutorease.address.testutil.Assert.assertThrows;
-import static tutorease.address.testutil.TypicalPersons.getTypicalPersons;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -27,18 +23,11 @@ import tutorease.address.model.Model;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.ReadOnlyUserPrefs;
 import tutorease.address.model.TutorEase;
-import tutorease.address.model.lesson.EndDateTime;
 import tutorease.address.model.lesson.Lesson;
-import tutorease.address.model.lesson.LocationIndex;
-import tutorease.address.model.lesson.StartDateTime;
 import tutorease.address.model.person.Person;
+import tutorease.address.testutil.LessonBuilder;
 
 public class DeleteLessonCommandTest {
-
-    private Person person = getTypicalPersons().get(0);
-    private LocationIndex locationIndex = new LocationIndex(VALID_LOCATION_INDEX);
-    private StartDateTime startDateTime = StartDateTime.createStartDateTime(VALID_START_DATE);
-    private EndDateTime endDateTime = EndDateTime.createEndDateTime(startDateTime, VALID_DURATION);
 
     public DeleteLessonCommandTest() throws ParseException {
     }
@@ -86,9 +75,10 @@ public class DeleteLessonCommandTest {
     }
 
     @Test
-    public void execute_validIndex_success() throws CommandException {
+    public void execute_validIndex_success() throws CommandException, ParseException {
         ModelStubAcceptingLessonDeleted modelStub = new ModelStubAcceptingLessonDeleted();
-        Lesson lesson = new Lesson(person, locationIndex, startDateTime, endDateTime);
+        LessonBuilder lessonBuilder = new LessonBuilder();
+        Lesson lesson = lessonBuilder.build();
         Index index = Index.fromZeroBased(0);
         DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(index);
 
@@ -101,9 +91,10 @@ public class DeleteLessonCommandTest {
     }
 
     @Test
-    public void execute_invalidIndex_throwsCommandException() {
+    public void execute_invalidIndex_throwsCommandException() throws ParseException {
         ModelStubAcceptingLessonDeleted modelStub = new ModelStubAcceptingLessonDeleted();
-        Lesson lesson = new Lesson(person, locationIndex, startDateTime, endDateTime);
+        LessonBuilder lessonBuilder = new LessonBuilder();
+        Lesson lesson = lessonBuilder.build();
         Index index = Index.fromZeroBased(10);
         DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(index);
 
