@@ -13,7 +13,7 @@ import java.util.stream.Stream;
  */
 public class ModuleRoleMap {
     /* Constraints message for role type. */
-    public static final String MESSAGE_MODULECODE_CONSTRAINTS =
+    public static final String MESSAGE_ROLETYPE_CONSTRAINTS =
             "Role consists of two parts, module code and role type.\n"
             + "Role type can be blank, and or any of the following values(case insensitive) for each role type:\n"
             + "1. Student: student or leave blank\n"
@@ -21,7 +21,7 @@ public class ModuleRoleMap {
             + "3. Professor: professor or prof";
 
     /*  Constraints message for module code. */
-    public static final String MESSAGE_ROLETYPE_CONSTRAINTS =
+    public static final String MESSAGE_MODULECODE_CONSTRAINTS =
             "Module code can take on any values, and should not be blank";
 
     /*
