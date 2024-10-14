@@ -35,17 +35,11 @@ public class Messages {
      * Formats the {@code student} for display to the user.
      */
     public static String format(Student student) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(student.getName())
-                .append("; Phone: ")
-                .append(student.getPhone())
-                .append("; Email: ")
-                .append(student.getEmail())
-                .append("; Address: ")
-                .append(student.getAddress())
-                .append("; Tags: ");
-        student.getTags().forEach(builder::append);
-        return builder.toString();
+        return student.getName() +
+                "; Student ID: " +
+                student.getStudentId() +
+                "; Tutorial Class: " +
+                student.getTutorialClass();
     }
 
 }

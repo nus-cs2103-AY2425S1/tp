@@ -15,6 +15,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.TutorialClass;
+
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 
@@ -38,14 +41,8 @@ public class JsonAdaptedStudentTest {
             new JsonAdaptedPresentDates(INVALID_TUT_DATES);
 
     private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_PHONE = BENSON.getPhone().toString();
-    private static final String VALID_EMAIL = BENSON.getEmail().toString();
-    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final String VALID_STUDENT_ID = "1001";
     private static final String VALID_TUTORIAL_CLASS = "1001";
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
-            .map(JsonAdaptedTag::new)
-            .collect(Collectors.toList());
     private static final JsonAdaptedPresentDates VALID_PRESENT_DATES =
             new JsonAdaptedPresentDates(BENSON.getPresentDates());
 
@@ -60,97 +57,50 @@ public class JsonAdaptedStudentTest {
         // Assuming that the Name class does not allow names with special characters
         final String invalidName = "Rachel@123"; // This should be invalid if special characters are not allowed
         JsonAdaptedStudent student = new JsonAdaptedStudent(
-                invalidName, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_PRESENT_DATES, VALID_STUDENT_ID, VALID_TUTORIAL_CLASS, VALID_TAGS);
+                invalidName,
+                VALID_PRESENT_DATES, VALID_STUDENT_ID, VALID_TUTORIAL_CLASS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedStudent student = new JsonAdaptedStudent(null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_PRESENT_DATES, VALID_STUDENT_ID, VALID_TUTORIAL_CLASS, VALID_TAGS);
+        JsonAdaptedStudent student = new JsonAdaptedStudent(null,
+                VALID_PRESENT_DATES, VALID_STUDENT_ID, VALID_TUTORIAL_CLASS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
     @Test
-    public void toModelType_invalidPhone_throwsIllegalValueException() {
-        JsonAdaptedStudent student =
-                new JsonAdaptedStudent(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_PRESENT_DATES, VALID_STUDENT_ID, VALID_TUTORIAL_CLASS, VALID_TAGS);
-        String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
+    public void toModelType_invalidStudentId_throwsIllegalValueException() {
+        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME,
+                VALID_PRESENT_DATES, INVALID_STUDENT_ID, VALID_TUTORIAL_CLASS);
+        String expectedMessage = StudentId.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
     @Test
-    public void toModelType_nullPhone_throwsIllegalValueException() {
-        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS,
-                VALID_PRESENT_DATES, VALID_STUDENT_ID, VALID_TUTORIAL_CLASS, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
+    public void toModelType_nullStudentId_throwsIllegalValueException() {
+        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME,
+                VALID_PRESENT_DATES, null, VALID_TUTORIAL_CLASS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentId.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
     @Test
-    public void toModelType_invalidEmail_throwsIllegalValueException() {
-        JsonAdaptedStudent student =
-                new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS,
-                        VALID_PRESENT_DATES, VALID_STUDENT_ID, VALID_TUTORIAL_CLASS, VALID_TAGS);
-        String expectedMessage = Email.MESSAGE_CONSTRAINTS;
+    public void toModelType_invalidTutorialClass_throwsIllegalValueException() {
+        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME,
+                VALID_PRESENT_DATES, VALID_STUDENT_ID, INVALID_TUTORIAL_CLASS);
+        String expectedMessage = TutorialClass.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
     @Test
-    public void toModelType_nullEmail_throwsIllegalValueException() {
-        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, null, VALID_ADDRESS,
-                VALID_PRESENT_DATES, VALID_STUDENT_ID, VALID_TUTORIAL_CLASS, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
+    public void toModelType_nullTutorialClass_throwsIllegalValueException() {
+        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME,
+                VALID_PRESENT_DATES, VALID_STUDENT_ID, null);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, TutorialClass.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
-    @Test
-    public void toModelType_invalidAddress_throwsIllegalValueException() {
-        JsonAdaptedStudent student =
-                new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS,
-                        VALID_PRESENT_DATES, VALID_STUDENT_ID, VALID_TUTORIAL_CLASS, VALID_TAGS);
-        String expectedMessage = Address.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
-    }
-
-    @Test
-    public void toModelType_nullAddress_throwsIllegalValueException() {
-        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, null,
-                VALID_PRESENT_DATES, VALID_STUDENT_ID, VALID_TUTORIAL_CLASS, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
-    }
-
-    @Test
-    public void toModelType_invalidTags_throwsIllegalValueException() {
-        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
-        invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
-        JsonAdaptedStudent student =
-                new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_PRESENT_DATES, VALID_STUDENT_ID, VALID_TUTORIAL_CLASS, invalidTags);
-        assertThrows(IllegalValueException.class, student::toModelType);
-    }
-
-    // Add new tests for invalid and null StudentId and TutorialClass
-
-    @Test
-    public void toModelType_invalidPresentDates_throwsIllegalValueException() {
-        JsonAdaptedStudent student =
-                new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        INVALID_PRESENT_DATES, VALID_STUDENT_ID, VALID_TUTORIAL_CLASS, VALID_TAGS);
-        assertThrows(IllegalValueException.class, student::toModelType);
-    }
-
-    @Test
-    public void toModelType_nullPresentDates_returnsStudentWithEmptyPresentDates() throws Exception {
-        JsonAdaptedStudent student =
-                new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        null, VALID_STUDENT_ID, VALID_TUTORIAL_CLASS, VALID_TAGS);
-        Student modelStudent = student.toModelType();
-        assertEquals(0, modelStudent.getPresentDates().getList().size());
-    }
 }
