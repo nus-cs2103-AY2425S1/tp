@@ -1,13 +1,6 @@
 package seedu.address.ui;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.logging.Logger;
-
-import org.commonmark.node.Node;
-import org.commonmark.parser.Parser;
-import org.commonmark.renderer.html.HtmlRenderer;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -62,22 +55,8 @@ public class HelpWindow extends UiPart<Stage> {
      * Loads and renders the user guide.
      */
     private void loadUserGuide() {
-        try {
-            // Read the markdown content from a file
-            String markdown = new String(Files.readAllBytes(Paths.get(USER_GUIDE_PATH)));
-
-            // Convert Markdown to HTML using commonmark
-            Parser parser = Parser.builder().build();
-            Node document = parser.parse(markdown);
-            HtmlRenderer renderer = HtmlRenderer.builder().build();
-            String htmlContent = renderer.render(document);
-
-            // Load the generated HTML into the WebView
-            WebEngine webEngine = helpContent.getEngine();
-            webEngine.loadContent(htmlContent);
-        } catch (IOException e) {
-            logger.severe("Error reading user guide: " + e.getMessage());
-        }
+        WebEngine webEngine = helpContent.getEngine();
+        webEngine.load(USERGUIDE_URL);
     }
 
     /**

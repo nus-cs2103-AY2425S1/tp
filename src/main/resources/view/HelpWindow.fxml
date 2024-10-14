@@ -42,7 +42,7 @@
             <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
           </padding>
         </HBox>
-        <WebView fx:id="helpContent" prefHeight="500" prefWidth="600" />
+        <WebView fx:id="helpContent" prefHeight="700" prefWidth="800" />
       </VBox>
 
     </Scene>
