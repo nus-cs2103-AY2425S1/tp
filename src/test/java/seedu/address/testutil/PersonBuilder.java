@@ -102,8 +102,24 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code RoomNumber} of the {@code Person} that we are building to null.
+     */
+    public PersonBuilder withNoRoomNumber() {
+        this.roomNumber = null;
+        return this;
+    }
+
+    /**
+     * Builds a person using AB3 constructor if roomNumber is not null,
+     * else uses overloaded constructor to build person
+     */
     public Person build() {
-        return new Person(name, phone, email, roomNumber, address, tags);
+        if (roomNumber != null) {
+            return new Person(name, phone, email, roomNumber, address, tags);
+        } else {
+            return new Person(name, phone, email, address, tags);
+        }
     }
 
 }

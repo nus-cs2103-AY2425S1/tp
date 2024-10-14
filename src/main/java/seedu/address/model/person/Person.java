@@ -28,7 +28,21 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * AB3 basic constructor.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.roomNumber = null;
+        this.address = address;
+        this.emergencyContact = new EmergencyContact(new Name("Aiken"), new Phone("12345678"));
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Overloaded constructor that includes roomnumber
      */
     public Person(Name name, Phone phone, Email email, RoomNumber roomNumber, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -53,7 +67,8 @@ public class Person {
         return email;
     }
 
-    public RoomNumber getRoomNumber() { return roomNumber; }
+    public RoomNumber getRoomNumber() {
+        return roomNumber; }
 
     public Address getAddress() {
         return address;
@@ -116,7 +131,7 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && roomNumber.equals(otherPerson.roomNumber)
+                && (roomNumber == null ? otherPerson.roomNumber == null : roomNumber.equals(otherPerson.roomNumber))
                 && address.equals(otherPerson.address)
                 && emergencyContact.equals(otherPerson.emergencyContact)
                 && tags.equals(otherPerson.tags);
