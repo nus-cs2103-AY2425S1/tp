@@ -41,13 +41,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    Label schedule;
+    private Label schedule;
     @FXML
-    Label note;
+    private Label note;
     @FXML
-    Label reminder;
+    private Label reminder;
     @FXML
-    FlowPane tags;
+    private FlowPane tags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -69,6 +69,19 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
+
+    public Label getSchedule() {
+        return schedule;
+    }
+
+    public Label getNote() {
+        return note;
+    }
+
+    public Label getReminder() {
+        return reminder;
+    }
+
 
     /**
      * Sets the text for the reminder field.

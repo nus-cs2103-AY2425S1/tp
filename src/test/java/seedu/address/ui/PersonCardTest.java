@@ -6,11 +6,11 @@ import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import javafx.application.Platform;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javafx.application.Platform;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -42,13 +42,13 @@ public class PersonCardTest {
     @Test
     public void testSetNoteField_withNotes() {
         PersonCard personCard = new PersonCard(personWithValidSchedule, 1);
-        assertEquals("Notes: Meeting notes", personCard.note.getText());
+        assertEquals("Notes: Meeting notes", personCard.getNote().getText());
     }
 
     @Test
     public void testSetNoteField_noNotes() {
         PersonCard personCard = new PersonCard(personWithNoSchedule, 2);
-        assertEquals("", personCard.note.getText());
+        assertEquals("", personCard.getNote().getText());
     }
 
     @Test
@@ -58,13 +58,13 @@ public class PersonCardTest {
                         DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
                 .format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a"));
 
-        assertEquals(expectedFormattedDate, personCard.schedule.getText());
+        assertEquals(expectedFormattedDate, personCard.getSchedule().getText());
     }
 
     @Test
     public void testSetDateField_noSchedule() {
         PersonCard personCard = new PersonCard(personWithNoSchedule, 2);
-        assertEquals("", personCard.schedule.getText());
+        assertEquals("", personCard.getSchedule().getText());
     }
 
     @Test
@@ -74,6 +74,7 @@ public class PersonCardTest {
                         DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
                 .format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a"));
 
-        assertEquals(String.format("Reminder on %s, 1 day before", expectedFormattedDate), personCard.reminder.getText());
+        assertEquals(String.format("Reminder on %s, 1 day before", expectedFormattedDate),
+                personCard.getReminder().getText());
     }
 }
