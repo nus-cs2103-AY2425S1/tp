@@ -82,9 +82,7 @@ public interface Model {
      */
     void setMember(Member target, Member editedMember);
 
-    /**
-     * Returns an unmodifiable view of the filtered member list
-     */
+    /** Returns an unmodifiable view of the filtered member list */
     ObservableList<Member> getFilteredMemberList();
 
     /**
@@ -108,7 +106,6 @@ public interface Model {
     void deleteSession(Session sessionToDelete);
 
     void setSession(Session target, Session editedSession);
-
 
     List<Session> getSessionList();
 }

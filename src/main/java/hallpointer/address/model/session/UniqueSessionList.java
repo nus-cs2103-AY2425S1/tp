@@ -8,11 +8,13 @@ import java.util.List;
 
 import hallpointer.address.model.member.exceptions.DuplicateSessionException;
 import hallpointer.address.model.member.exceptions.SessionNotFoundException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
  * A list of sessions that enforces uniqueness between its elements and does not allow nulls.
+<<<<<<< HEAD
  * A session is considered unique by comparing using {@code Session#isSameSession(Session)}.
  * As such, adding and updating of sessions uses Session#isSameSession(Session) for equality
  * to ensure that the session being added or updated is
@@ -20,6 +22,22 @@ import javafx.collections.ObservableList;
  * However, the removal of a session uses Session#equals(Object)
  * to ensure that the session with exactly the same fields will be removed.
  * <p>
+=======
+<<<<<<< HEAD
+ * A session is considered unique by comparing using {@code Session#isSameSession(Session)}. As such, adding and updating of
+ * sessions uses Session#isSameSession(Session) for equality so as to ensure that the session being added or updated is
+ * unique in terms of identity in the UniqueSessionList. However, the removal of a session uses Session#equals(Object) so
+ * as to ensure that the session with exactly the same fields will be removed.
+=======
+ * A session is considered unique by comparing using {@code Session#isSameSession(Session)}.
+ * As such, adding and updating of sessions uses Session#isSameSession(Session) for equality
+ * to ensure that the session being added or updated
+ * is unique in terms of identity in the UniqueSessionList.
+ * However, the removal of a session uses Session#equals(Object)
+ * to ensure that the session with exactly the same fields will be removed.
+>>>>>>> 141a67badf93febea1d6e16fda230d8b12a88418
+ *
+>>>>>>> master
  * Supports a minimal set of list operations.
  *
  * @see Session#isSameSession(Session)
@@ -142,12 +160,11 @@ public class UniqueSessionList implements Iterable<Session> {
     private boolean sessionsAreUnique(List<Session> sessions) {
         for (int i = 0; i < sessions.size() - 1; i++) {
             for (int j = i + 1; j < sessions.size(); j++) {
-                if (sessions.get(i).equals(sessions.get(j))) {
+                if (sessions.get(i).isSameSession(sessions.get(j))) {
                     return false;
                 }
             }
         }
         return true;
     }
-
 }
