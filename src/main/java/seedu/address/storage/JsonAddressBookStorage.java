@@ -20,7 +20,7 @@ import seedu.address.model.ReadOnlyAddressBook;
  */
 public class JsonAddressBookStorage implements AddressBookStorage {
 
-    private static final Path DEFAULT_ARCHIVEPATH = Paths.get("archive", "archiveaddressbook.json");
+    private static final Path DEFAULT_ARCHIVEPATH = Paths.get("archived", "archiveaddressbook.json");
     private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
 
     private Path filePath;
