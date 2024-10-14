@@ -26,7 +26,7 @@ public class TagCommandParser {
         ArgumentMultimap argMultiMap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_SUBJECT, PREFIX_LEVEL);
 
-        argMultiMap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_SUBJECT, PREFIX_LEVEL);
+        argMultiMap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_LEVEL);
 
         Name personToTag;
         if (argMultiMap.getValue(PREFIX_NAME).isPresent()) {
