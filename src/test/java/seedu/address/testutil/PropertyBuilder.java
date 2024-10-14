@@ -17,7 +17,7 @@ public class PropertyBuilder {
 
     public static final String DEFAULT_POSTAL_CODE = "123456";
     public static final String DEFAULT_UNIT_NUMBER = "10-01";
-    public static final String DEFAULT_PRICE = "1.5M";
+    public static final String DEFAULT_PRICE = "1500000";
 
     private PostalCode postalCode;
     private UnitNumber unitNumber;
