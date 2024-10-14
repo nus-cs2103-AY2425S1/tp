@@ -7,7 +7,7 @@ import static java.util.Objects.requireNonNull;
  *
  * Guarantees: The priority is immutable and always valid.
  */
-public class MedCon {
+public class MedCon implements Comparable<MedCon> {
 
     public final String value;
 
@@ -45,5 +45,10 @@ public class MedCon {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(MedCon other) {
+        return this.value.compareTo(other.value);
     }
 }
