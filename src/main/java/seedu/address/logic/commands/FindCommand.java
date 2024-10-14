@@ -1,35 +1,62 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+
+import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all contacts whose entries contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Parameters: "
+            + PREFIX_NAME + "NAME KEYWORD(s) "
+            + PREFIX_PHONE + "PHONE KEYWORD(s) "
+            + PREFIX_ADDRESS + "ADDRESS KEYWORD(s)\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice bob charlie\n"
+            + COMMAND_WORD + " " + PREFIX_ADDRESS + "blk 40_blk 50_blk 60\n"
+            + COMMAND_WORD + " " + PREFIX_PHONE + "9243 9312";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final Predicate<Person> combinedPredicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
+    public FindCommand(NameContainsKeywordsPredicate namePredicate,
+                       PhoneContainsKeywordsPredicate phonePredicate,
+                       AddressContainsKeywordsPredicate addressPredicate) {
+        Predicate<Person> basePredicate = person -> true;
+
+        if (namePredicate != null) {
+            basePredicate = basePredicate.and(namePredicate);
+        }
+        if (phonePredicate != null) {
+            basePredicate = basePredicate.and(phonePredicate);
+        }
+        if (addressPredicate != null) {
+            basePredicate = basePredicate.and(addressPredicate);
+        }
+
+        this.combinedPredicate = basePredicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredPersonList(combinedPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -46,13 +73,13 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        return combinedPredicate.equals(otherFindCommand.combinedPredicate);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
+                .add("combinedPredicate", combinedPredicate)
                 .toString();
     }
 }
