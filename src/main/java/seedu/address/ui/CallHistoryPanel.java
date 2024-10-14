@@ -5,14 +5,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.Region;
 import seedu.address.model.contactrecord.ContactRecord;
 import seedu.address.model.contactrecord.ContactRecordList;
 
 /**
  * Panel containing the list of call history.
  */
-public class CallHistoryPanel extends UiPart<VBox> {
+public class CallHistoryPanel extends UiPart<Region> {
     private static final String FXML = "CallHistoryPanel.fxml";
 
     @FXML
