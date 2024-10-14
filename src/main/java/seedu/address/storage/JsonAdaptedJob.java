@@ -10,6 +10,14 @@ import seedu.address.model.job.JobDescription;
 import seedu.address.model.job.JobName;
 import seedu.address.model.job.JobRequirements;
 import seedu.address.model.job.JobSalary;
+import seedu.address.model.skill.Skill;
+import seedu.address.model.tag.Tag;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Jackson-friendly version of {@link Job}.
@@ -21,21 +29,23 @@ class JsonAdaptedJob {
     private final String name;
     private final String company;
     private final String salary;
-    private final String requirements;
     private final String description;
+    private final List<JsonAdaptedTag> requirements = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedJob} with the given job details.
      */
     @JsonCreator
-    public JsonAdaptedJob(@JsonProperty("name") String name, @JsonProperty("company") String company, @JsonProperty(
-            "salary") String salary, @JsonProperty("requirements") String requirements,
-            @JsonProperty("description") String description) {
+    public JsonAdaptedJob(@JsonProperty("name") String name, @JsonProperty("company") String company,
+            @JsonProperty("salary") String salary, @JsonProperty("description") String description,
+            @JsonProperty("requirements") List<JsonAdaptedTag> requirements) {
         this.name = name;
         this.company = company;
         this.salary = salary;
-        this.requirements = requirements;
         this.description = description;
+        if (requirements != null) {
+            this.requirements.addAll(requirements);
+        }
     }
 
     /**
@@ -45,8 +55,10 @@ class JsonAdaptedJob {
         name = source.getName().value;
         company = source.getCompany().value;
         salary = String.valueOf(source.getSalary().value);
-        requirements = source.getRequirements().value;
         description = source.getDescription().value;
+        requirements.addAll(source.getRequirements().stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -57,13 +69,19 @@ class JsonAdaptedJob {
     public Job toModelType() throws IllegalValueException {
 
         // TODO: Input validation
+
+        List<Tag> jobRequirements = new ArrayList<>();
+        for (JsonAdaptedTag requirement : requirements) {
+            jobRequirements.add(requirement.toModelType());
+        }
         JobName modelJobName = new JobName(name);
         JobCompany modelJobCompany = new JobCompany(company);
         JobSalary modelJobSalary = new JobSalary(salary);
-        JobRequirements modelJobRequirements = new JobRequirements(requirements);
         JobDescription modelJobDescription = new JobDescription(description);
 
-        return new Job(modelJobName, modelJobCompany, modelJobSalary, modelJobRequirements, modelJobDescription);
+        Set<Tag> modelJobRequirements = new HashSet<>(jobRequirements);
+
+        return new Job(modelJobName, modelJobCompany, modelJobSalary, modelJobDescription, modelJobRequirements);
     }
 
 }
