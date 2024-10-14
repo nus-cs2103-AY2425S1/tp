@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_NAME_FORMAT;
 
 import java.util.Arrays;
 
@@ -23,6 +24,13 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        boolean isMoreThanHundredChar = trimmedArgs.length() > 100;
+        boolean isAlphabetic = trimmedArgs.matches("[a-zA-Z\\s]+");
+
+        if (isMoreThanHundredChar || !isAlphabetic) {
+            throw new ParseException(MESSAGE_INVALID_NAME_FORMAT);
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");

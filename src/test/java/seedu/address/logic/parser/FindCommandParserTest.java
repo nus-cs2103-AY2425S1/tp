@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_NAME_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -18,6 +19,20 @@ public class FindCommandParserTest {
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_nonAlphabeticArg_throwsParseException() {
+        assertParseFailure(parser, "Alice1", String.format(MESSAGE_INVALID_NAME_FORMAT));
+    }
+
+    @Test
+    public void parse_inputLengthOverHundred_throwsParseException() {
+        String input = String.copyValueOf(new char[101]).replace('\0', 'a');
+
+        System.out.println(input);
+
+        assertParseFailure(parser, input, String.format(MESSAGE_INVALID_NAME_FORMAT));
     }
 
     @Test
