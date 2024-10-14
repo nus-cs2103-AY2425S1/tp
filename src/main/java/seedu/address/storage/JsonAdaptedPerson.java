@@ -51,7 +51,7 @@ class JsonAdaptedPerson {
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details, treating isVip as false.
      */
-    public JsonAdaptedPerson(String name, String phone, String email,  String address, List<JsonAdaptedTag> tags) {
+    public JsonAdaptedPerson(String name, String phone, String email, String address, List<JsonAdaptedTag> tags) {
         this(name, phone, email, address, tags, false);
     }
 
