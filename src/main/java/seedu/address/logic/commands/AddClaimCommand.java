@@ -80,8 +80,8 @@ public class AddClaimCommand extends Command {
             Claim claimToBeAdded = new Claim(claimID, claimAmount);
             clientToEditInsurancePlansManager.addClaimToInsurancePlan(planToBeUsed, claimToBeAdded);
 
-            Client clientWithAddedInsurancePlan = lastShownList.get(index.getZeroBased());
-            model.setClient(clientToEdit, clientWithAddedInsurancePlan);
+            Client clientWithAddedClaim = lastShownList.get(index.getZeroBased());
+            model.setClient(clientToEdit, clientWithAddedClaim);
             model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
             return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(clientToEdit), planToBeUsed,
