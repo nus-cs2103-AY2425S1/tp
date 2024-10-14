@@ -104,8 +104,8 @@ public class AddPropertyToBuyParserTest {
     //    @Test
     //    public void parse_invalidValue_failure() {
     //        // invalid postal code
-    //        assertParseFailure(parser, PREAMBLE_INDEX + HOUSING_TYPE_DESC_HDB + BUYING_PRICE_DESC_1650000 +
-    //                " pc/56751" + UNIT_NUMBER_DESC_03_11 + TAG_DESC_NEAR_MRT,
+    //        assertParseFailure(parser, PREAMBLE_INDEX + HOUSING_TYPE_DESC_HDB + BUYING_PRICE_DESC_1650000
+    //        + " pc/56751" + UNIT_NUMBER_DESC_03_11 + TAG_DESC_NEAR_MRT,
     //                PostalCode.MESSAGE_CONSTRAINTS);
     //
     //        // invalid unit number
