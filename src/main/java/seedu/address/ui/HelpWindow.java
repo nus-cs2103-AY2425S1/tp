@@ -5,8 +5,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
+import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -15,17 +14,60 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    private static final String HELP_INTRO = "Below are some basic instructions to get started using PROperty!";
+    private static final String HELP_ADD_COMMAND = "Add Command \n" +
+            "Format: add n/NAME p/NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARK]\n" +
+            "Example: add n/John Doe p/12345678 t/Student\n" +
+            "Items in the [square brackets] are optional and can be input in any order!";
+    private static final String HELP_EDIT_COMMAND = "Edit Command \n" +
+            "Format: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/remark]\n" +
+            "Example: edit 1 p/87654321" +
+            "INDEX is the index of the customer displayed. Items in the [square brackets] are optional " +
+            "and can be input in any order!";
+    private static final String HELP_DELETE_COMMAND = "Delete Command\n" +
+            "Format: delete INDEX\n" +
+            "Example: delete 1\n" +
+            "INDEX is the index of the customer displayed.";
+    private static final String HELP_LIST_COMMAND = "List Command\n" +
+            "Format: list\n" +
+            "Example: list";
+    private static final String HELP_FIND_COMMAND = "Find Command\n" +
+            "Format: find KEYWORDS [MORE_KEYWORDS]\n" +
+            "Example: find John" +
+            "Only names can be searched; Only full words will be matched. " +
+            "The command is case insensitive. When more than one keyword is used," +
+            " persons matching at least one keyword will be returned.";
+    private static final String HELP_MORE_INFORMATION = "For more detailed information, " +
+            "visit the PROperty User Guide at: https://ay2425s1-cs2103t-f15-3.github.io/tp/UserGuide.html";
+
+
+    private static final String HELP_MESSAGE = HELP_INTRO
+            + "\n\n"
+            + HELP_ADD_COMMAND
+            + "\n\n"
+            + HELP_EDIT_COMMAND
+            + "\n\n"
+            + HELP_DELETE_COMMAND
+            + "\n\n"
+            + HELP_LIST_COMMAND
+            + "\n\n"
+            + HELP_FIND_COMMAND
+            + "\n\n"
+            + HELP_MORE_INFORMATION;
+
+    private static final double DEFAULT_WIDTH = 800;
+    private static final double DEFAULT_HEIGHT = 600;
+    private static final double MIN_WIDTH = 800;
+    private static final double MIN_HEIGHT = 600;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML
-    private Button copyButton;
+    private Label helpMessage;
 
     @FXML
-    private Label helpMessage;
+    private ScrollPane scrollPane;
 
     /**
      * Creates a new HelpWindow.
@@ -35,6 +77,8 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        setWindowDefaultSize(root);
+
     }
 
     /**
@@ -42,6 +86,16 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow() {
         this(new Stage());
+    }
+
+    /**
+     * Sets the default size of the window.
+     */
+    private void setWindowDefaultSize(Stage root) {
+        root.setWidth(DEFAULT_WIDTH);
+        root.setHeight(DEFAULT_HEIGHT);
+        root.setMinWidth(MIN_WIDTH);
+        root.setMinHeight(MIN_HEIGHT);
     }
 
     /**
@@ -87,16 +141,5 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
-    }
-
-    /**
-     * Copies the URL to the user guide to the clipboard.
-     */
-    @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
     }
 }
