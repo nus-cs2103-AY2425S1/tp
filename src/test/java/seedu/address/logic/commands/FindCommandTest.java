@@ -121,7 +121,6 @@ public class FindCommandTest {
     }
     @Test
     public void execute_nullPhonePredicate_throwsNullPointerException() {
-        // Create a FindCommand with a null predicate, expect a NullPointerException
         assertThrows(NullPointerException.class, () -> new FindCommand(null));
     }
 

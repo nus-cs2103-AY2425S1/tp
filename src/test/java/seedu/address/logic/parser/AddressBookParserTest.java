@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -23,7 +22,6 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -71,11 +69,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        // Define the expected FindCommand
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand expectedCommand = new FindCommand(new NameContainsKeywordsPredicate(keywords));
 
-        // Check if the parsed command is an instance of FindCommand and matches the expected command
         assertEquals(expectedCommand, parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + String.join(" ", keywords)));
     }
