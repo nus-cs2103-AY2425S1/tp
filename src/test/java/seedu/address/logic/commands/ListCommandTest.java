@@ -6,8 +6,6 @@ import static seedu.address.testutil.TypicalClients.getTypicalClientBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalProperty.getTypicalPropertyBook;
 
-import java.util.Arrays;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +13,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -32,55 +29,67 @@ public class ListCommandTest {
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getPropertyBook(),
                 model.getClientBook());
     }
-
-
     @Test
-    public void testEnumValues() {
-        assertEquals(4, ListCommand.Key.values().length);
-        assertTrue(Arrays.asList(ListCommand.Key.values()).contains(ListCommand.Key.BUYERS));
-        assertTrue(Arrays.asList(ListCommand.Key.values()).contains(ListCommand.Key.SELLERS));
-        assertTrue(Arrays.asList(ListCommand.Key.values()).contains(ListCommand.Key.CLIENTS));
-        assertTrue(Arrays.asList(ListCommand.Key.values()).contains(ListCommand.Key.PROPERTIES));
+    public void listBuyersCommandGeneration() {
+        Command command = new ListBuyersCommand();
+
+        // Check if command is an instance of ListBuyersCommand
+        assertTrue(command instanceof ListBuyersCommand, "The command should be an instance of ListBuyersCommand");
     }
 
-    //TODO: Update test to reflect new ListCommand @apollo-tan
-
     @Test
-    public void listCommandGeneration() {
-        Command command = new ListCommand(ListCommand.Key.BUYERS);
+    public void listSellersCommandGeneration() {
+        Command command = new ListSellersCommand();
 
-        // Check if command is an instance of ListCommand
-        assertTrue(command instanceof ListCommand, "The command should be an instance of ListCommand");
+        // Check if command is an instance of ListSellersCommand
+        assertTrue(command instanceof ListSellersCommand, "The command should be an instance of ListSellersCommand");
     }
 
-    // TODO: Add more robust testing
+    @Test
+    public void listClientsCommandGeneration() {
+        Command command = new ListClientsCommand();
+
+        // Check if command is an instance of ListClientsCommand
+        assertTrue(command instanceof ListClientsCommand, "The command should be an instance of ListClientsCommand");
+    }
+
+    @Test
+    public void listPropertiesCommandGeneration() {
+        Command command = new ListPropertiesCommand();
+
+        // Check if command is an instance of ListPropertiesCommand
+        assertTrue(command instanceof ListPropertiesCommand, "The command should be an instance of ListPropertiesCommand");
+    }
+
+
     @Test
     public void testExecuteBuyers() throws CommandException {
-        Command command = new ListCommand(ListCommand.Key.BUYERS);
+        Command command = new ListBuyersCommand();
         CommandResult result = command.execute(this.model);
         assertEquals(result.getFeedbackToUser(), "Listed all buyers");
     }
 
     @Test
     public void testExecuteSellers() throws CommandException {
-        Command command = new ListCommand(ListCommand.Key.SELLERS);
+        Command command = new ListSellersCommand();
         CommandResult result = command.execute(this.model);
         assertEquals(result.getFeedbackToUser(), "Listed all sellers");
     }
 
     @Test
     public void testExecuteClients() throws CommandException {
-        Command command = new ListCommand(ListCommand.Key.CLIENTS);
+        Command command = new ListClientsCommand();
         CommandResult result = command.execute(this.model);
         assertEquals(result.getFeedbackToUser(), "Listed all clients");
     }
 
     @Test
     public void testExecuteProperties() throws CommandException {
-        Command command = new ListCommand(ListCommand.Key.PROPERTIES);
+        Command command = new ListPropertiesCommand();
         CommandResult result = command.execute(this.model);
         assertEquals(result.getFeedbackToUser(), "Listed all properties");
     }
+
 
 
     //    @Test

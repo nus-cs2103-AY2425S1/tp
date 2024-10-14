@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
+import javafx.beans.property.BooleanProperty;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -236,6 +237,26 @@ public class AddCommandTest {
         public void addProperty(Property property) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ObservableList<Property> getFilteredPropertyList() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public BooleanProperty getIsDisplayClientsProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDisplayClients() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDisplayProperties() {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
