@@ -92,8 +92,8 @@ public class EditCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        /*
         Id updatedId = editPersonDescriptor.getId().orElse(personToEdit.getId());
+        /*
         Ward updatedWard = editPersonDescriptor.getWard().orElse(personToEdit.getWard());
         Diagnosis updatedDiagnosis = editPersonDescriptor.getDiagnosis().orElse(personToEdit.getDiagnosis());
         Medication updatedMedication = editPersonDescriptor.getMedication().orElse(personToEdit.getMedication());
@@ -104,7 +104,7 @@ public class EditCommand extends Command {
 
          */
 
-        return new Person(updatedName);
+        return new Person(updatedName, updatedId);
     }
 
     @Override
@@ -303,10 +303,10 @@ public class EditCommand extends Command {
             return new ToStringBuilder(this)
                     .add("id", id)
                     .add("name", name)
+                    /*
                     .add("ward", ward)
                     .add("diagnosis", diagnosis)
                     .add("medication", medication)
-                    /*
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
