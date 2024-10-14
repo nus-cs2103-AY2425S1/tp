@@ -3,6 +3,7 @@ package seedu.sellsavvy.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.sellsavvy.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
+import static seedu.sellsavvy.testutil.TypicalOrders.BLOCKS;
 import static seedu.sellsavvy.testutil.TypicalPersons.BENSON;
 
 import java.util.ArrayList;
@@ -118,6 +119,19 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                         VALID_ADDRESS, invalidTags, VALID_ORDER_LIST);
+        assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidOrderList_throwsIllegalValueException() {
+        List<JsonAdaptedOrder> invalidOrderList = new ArrayList<>(VALID_ORDER_LIST);
+        final String item = BLOCKS.getItem().toString();
+        final String count = "0";
+        final String date = BLOCKS.getDate().toString();
+        invalidOrderList.add(new JsonAdaptedOrder(item, count, date));
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                        VALID_ADDRESS, VALID_TAGS, invalidOrderList);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 
