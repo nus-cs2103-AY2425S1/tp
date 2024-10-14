@@ -10,15 +10,15 @@ import seedu.address.commons.util.ToStringBuilder;
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
 public class NameMatchesNamePredicate implements Predicate<Person> {
-    private final List<String> keyword;
+    private final List<String> keywords;
 
-    public NameMatchesNamePredicate(List<String> name) {
-        this.keyword = name;
+    public NameMatchesNamePredicate(List<String> names) {
+        this.keywords = names;
     }
 
     @Override
     public boolean test(Person person) {
-        return keyword.stream()
+        return keywords.stream()
                 .anyMatch(name -> {
                     if (name.contains(" ")) {
                         return person.getName().fullName.equalsIgnoreCase(name);
@@ -40,11 +40,11 @@ public class NameMatchesNamePredicate implements Predicate<Person> {
         }
 
         NameMatchesNamePredicate otherNameMatchesNamePredicate = (NameMatchesNamePredicate) other;
-        return keyword.equals(otherNameMatchesNamePredicate.keyword);
+        return keywords.equals(otherNameMatchesNamePredicate.keywords);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keywords", keyword).toString();
+        return new ToStringBuilder(this).add("keywords", keywords).toString();
     }
 }
