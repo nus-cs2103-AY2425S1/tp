@@ -10,7 +10,10 @@ import seedu.address.model.goods.Goods;
 import seedu.address.model.person.Name;
 
 
-
+/**
+ * The {@code GoodsReceipt} class represents the receipt of goods from a supplier
+ * Garauntees: Immutable;
+ */
 public class GoodsReceipt {
 
     private final Goods goods;
@@ -21,7 +24,20 @@ public class GoodsReceipt {
     private final int quantity;
     private final double price;
 
-
+    /**
+     * Constructs a {@code GoodsReceipt}.
+     *
+     * @param goods The goods associated with this receipt.
+     * @param supplierName The name of the supplier.
+     * @param procurementDate The date when the goods were procured.
+     * @param arrivalDate The date when the goods are expected to or have arrived.
+     * @param isDelivered A boolean indicating whether the goods have been delivered.
+     * @param quantity The quantity of goods in this receipt.
+     * @param price The price of the goods in this receipt.
+     * @throws NullPointerException If any of the required arguments (goods, quantity, procurementDate,
+     * arrivalDate, isDelivered) are null.
+     * @throws IllegalArgumentException If the procurement date is invalid.
+     */
     public GoodsReceipt(Goods goods, Name supplierName, Date procurementDate, Date arrivalDate,
                         boolean isDelivered, int quantity, double price) {
         requireAllNonNull(goods, quantity, procurementDate, arrivalDate, isDelivered);
@@ -61,8 +77,8 @@ public class GoodsReceipt {
      * Return a new goods object with the new delivery status.
      */
     public GoodsReceipt markAsDelivered() {
-        return new GoodsReceipt(this.goods, this.supplierName, this.procurementDate, this.arrivalDate, true
-                ,this.quantity, this.price);
+        return new GoodsReceipt(this.goods, this.supplierName, this.procurementDate, this.arrivalDate, true,
+                this.quantity, this.price);
     }
 
     /**
