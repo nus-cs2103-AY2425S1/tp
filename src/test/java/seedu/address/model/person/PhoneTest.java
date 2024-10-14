@@ -30,6 +30,7 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
+        assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits without country code
         assertFalse(Phone.isValidPhone("+ 90111234")); // indicates empty country code
         assertFalse(Phone.isValidPhone("+53  90111234")); // indicates empty area code
 
