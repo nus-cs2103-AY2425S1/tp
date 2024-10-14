@@ -32,6 +32,19 @@ public abstract class InsurancePlan {
     }
 
     /**
+     * Removes a claim from the insurance plan's list of claims, if a claim with the same claim id exists.
+     *
+     * @param claim The claim to be removed.
+     */
+    public void removeClaim(Claim claim) {
+        for (Claim c : claims) {
+            if (c.getClaimId().equals(claim.getClaimId())) {
+                claims.remove(c);
+            }
+        }
+    }
+
+    /**
      * Returns a string representation of the insurance plan.
      *
      * @return a string that represents the insurance plan

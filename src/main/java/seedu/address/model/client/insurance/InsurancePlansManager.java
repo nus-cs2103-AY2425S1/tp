@@ -142,8 +142,7 @@ public class InsurancePlansManager {
     public void deleteClaimFromInsurancePlan(InsurancePlan insurancePlan, Claim claim) {
         for (InsurancePlan p : insurancePlans) {
             if (p.equals(insurancePlan)) {
-                p.claims.remove(claim);
-                this.claimIds.remove(claim.getClaimId());
+                p.removeClaim(claim);
             }
         }
     }

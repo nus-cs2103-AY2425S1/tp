@@ -90,18 +90,4 @@ public class DeleteClaimCommand extends Command {
             throw new CommandException(String.format(e.getMessage(), insuranceId, Messages.format(clientToEdit)));
         }
     }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof DeleteClaimCommand e)) {
-            return false;
-        }
-
-        return index.equals(e.index) && insuranceId == e.insuranceId && claimID.equals(e.claimID);
-    }
 }
