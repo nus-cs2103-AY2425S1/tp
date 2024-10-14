@@ -43,7 +43,7 @@ public class ModelManager implements Model {
         this(new AddressBook(), new UserPrefs());
     }
 
-    // =========== UserPrefs ==================================================================================
+    //=========== UserPrefs ==================================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -78,7 +78,7 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    // =========== AddressBook ================================================================================
+    //=========== AddressBook ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -131,7 +131,7 @@ public class ModelManager implements Model {
         updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
-    // =========== Filtered Vendor List Accessors =============================================================
+    //=========== Filtered Vendor List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Vendor} backed by the
@@ -149,7 +149,7 @@ public class ModelManager implements Model {
         filteredVendors.setPredicate(predicate);
     }
 
-    // =========== Filtered Event List Accessors =============================================================
+    //=========== Filtered Event List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Event} backed by the
