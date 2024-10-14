@@ -13,8 +13,7 @@ title: SpleetWaise
 seamless solution to track who owes what, it eliminates the stress and confusion that often come with shared expenses,
 ensuring clarity and peace of mind for students who use SpleetWaise.
 
-- If you are interested in using SpleetWaise, head over to the [_Quick Start_ section of the **User Guide
-  **](UserGuide.html#quick-start).
+- If you are interested in using SpleetWaise, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 - If you are interested about developing SpleetWaise, the [**Developer Guide**](DeveloperGuide.html) is a good place to
   start.
 
