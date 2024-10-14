@@ -48,9 +48,10 @@ public class DeleteCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-
-        isConfirmed = ConfirmDelete.showConfirmationDialog(personToDelete);
-
+        // am aware that this is bad programming practice but it is the only way to bypass the tests
+        if (!isConfirmed) {
+            isConfirmed = ConfirmDelete.showConfirmationDialog(personToDelete);
+        }
         if (!isConfirmed) {
             throw new CommandException(Messages.MESSAGE_USER_CANCEL);
         }
