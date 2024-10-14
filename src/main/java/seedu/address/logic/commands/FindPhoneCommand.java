@@ -24,7 +24,6 @@ public class FindPhoneCommand extends FindCommand {
      * @param predicate Keywords used to filter contacts by their phone number.
      */
     public FindPhoneCommand(PhoneContainsKeywordsPredicate predicate) {
-        super();
         this.predicate = predicate;
     }
 

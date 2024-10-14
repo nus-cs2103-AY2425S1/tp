@@ -23,13 +23,14 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_missingNamePrefix_throwsParseException() {
+    public void parse_missingPrefix_throwsParseException() {
         assertParseFailure(parser, "find amy",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
+
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parse_validFindNameArgs_returnsFindNameCommand() {
         // no leading and trailing whitespaces
         FindNameCommand expectedFindCommand =
                 new FindNameCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));

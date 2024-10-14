@@ -24,7 +24,6 @@ public class FindEmailCommand extends FindCommand {
      * @param predicate Keywords used to filter contacts by name.
      */
     public FindEmailCommand(EmailContainsKeywordsPredicate predicate) {
-        super();
         this.predicate = predicate;
     }
 

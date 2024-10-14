@@ -40,7 +40,6 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
-
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
@@ -55,24 +54,36 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (hasNamePrefix) {
             String nameInput = argMultimap.getValue(PREFIX_NAME).get().trim(); // Get the actual name input
+            if (nameInput.isEmpty()) {
+                throw new ParseException("Name cannot be empty!");
+            }
             List<String> nameKeywords = Arrays.asList(nameInput.split("\\s+"));
             return new FindNameCommand(new NameContainsKeywordsPredicate(nameKeywords));
         }
 
         if (hasPhonePrefix) {
             String phoneNumberInput = argMultimap.getValue(PREFIX_PHONE).get().trim(); // Get the actual phone input
+            if (phoneNumberInput.isEmpty()) {
+                throw new ParseException("Phone number cannot be empty!");
+            }
             List<String> phoneKeywords = Arrays.asList(phoneNumberInput.split("\\s+"));
             return new FindPhoneCommand(new PhoneContainsKeywordsPredicate(phoneKeywords));
         }
 
         if (hasEmailPrefix) {
             String emailInput = argMultimap.getValue(PREFIX_EMAIL).get().trim(); // Get the actual email input
+            if (emailInput.isEmpty()) {
+                throw new ParseException("Email address cannot be empty!");
+            }
             List<String> emailKeywords = Arrays.asList(emailInput.split("\\s+"));
             return new FindEmailCommand(new EmailContainsKeywordsPredicate(emailKeywords));
         }
 
         if (hasAddressPrefix) {
             String addressInput = argMultimap.getValue(PREFIX_ADDRESS).get().trim(); // Get the actual address input
+            if (addressInput.isEmpty()) {
+                throw new ParseException("Address cannot be empty!");
+            }
             List<String> addressKeywords = Arrays.asList(addressInput.split("\\s+"));
             return new FindAddressCommand(new AddressContainsKeywordsPredicate(addressKeywords));
         }
