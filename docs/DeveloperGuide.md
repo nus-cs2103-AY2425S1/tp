@@ -319,7 +319,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user             | track whether each student has paid for the month              | collect my fees on time                      |
 | `*`      | user             | keep track of how much each student should pay for lessons     | manage fees easier                           |
 | `*`      | user             | write down miscellaneous notes for each student                | recall them before each lesson               |
-| `*`      | user             | add tags to my students                                        | identify them easily                         |
 | `*`      | user             | view a summary of my income for the month                      | track my earnings                            |
 | `*`      | user             | track attendance for each student                              | see how consistent they are with lessons     |
 | `*`      | user             | track the progress of each student on their assigned pieces    | monitor their improvement                    |

@@ -43,8 +43,7 @@ public class Messages {
                 .append("; Address: ")
                 .append(student.getAddress())
                 .append("; Grade Level: ")
-                .append(student.getGradeLevel())
-                .append("; Tags: ");
+                .append(student.getGradeLevel());
         return builder.toString();
     }
 
