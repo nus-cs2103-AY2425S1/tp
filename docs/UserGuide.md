@@ -130,19 +130,22 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [KEYWORD] [MORE_KEYWORDS] || [p/PHONE]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Persons matching at least one keyword (or parts of it) will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Persons matching the phone number (or parts of it) will be returned
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find p/88` returns `John Doo` (with phone number `88765432`) <br>
+  ![result for 'find alex david'](images/find88.png)
 
 ### Deleting a person : `delete`
 
