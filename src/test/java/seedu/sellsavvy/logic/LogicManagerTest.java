@@ -94,7 +94,6 @@ public class LogicManagerTest {
         assertNotNull(logic.getSelectedPerson());
         //ensures that when first initiated no person's order will be displayed
         assertNull(logic.getSelectedPerson().get());
-
     }
 
     /**
