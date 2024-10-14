@@ -45,7 +45,7 @@ public class TagCommandParser {
 
         if (argMultiMap.getValue(PREFIX_LEVEL).isPresent()) {
             editPersonTags.setLevel(
-                    ParserUtil.parseSchoolLevel(
+                    ParserUtil.parseLevel(
                             argMultiMap.getValue(PREFIX_LEVEL).get()
                     ));
         }
