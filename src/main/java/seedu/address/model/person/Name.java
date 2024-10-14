@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters, spaces and hyphens. " +
+            "Names should only contain alphanumeric characters, spaces and hyphens.\n" +
                     "Only 1 space or hyphen is allowed between each alphanumeric character. It should not be blank.";
 
     /*
