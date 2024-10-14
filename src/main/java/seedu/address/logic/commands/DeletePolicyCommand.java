@@ -58,8 +58,7 @@ public class DeletePolicyCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         PolicyMap editedPolicy = editPolicy(policyTypes, personToEdit.getPolicies());
 
-        Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), editedPolicy);
 
         model.setPerson(personToEdit, editedPerson);
