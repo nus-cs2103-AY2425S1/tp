@@ -1,4 +1,4 @@
-package seedu.address.model.internship;
+package seedu.address.model.internshipapplication;
 
 import java.util.List;
 import java.util.function.Predicate;

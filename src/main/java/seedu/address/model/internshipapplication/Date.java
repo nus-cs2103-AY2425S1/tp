@@ -1,11 +1,10 @@
-package seedu.address.model.internship;
+package seedu.address.model.internshipapplication;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import seedu.address.logic.validator.DateValidator;
 

@@ -1,4 +1,4 @@
-package seedu.address.model.internship;
+package seedu.address.model.internshipapplication;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;

@@ -10,7 +10,7 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.internship.Person;
+import seedu.address.model.internshipapplication.Person;
 import seedu.address.model.tag.Tag;
 
 /**

@@ -11,7 +11,7 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
-import seedu.address.model.internship.InternshipApplication;
+import seedu.address.model.internshipapplication.InternshipApplication;
 
 /**
  * The manager of the UI component.

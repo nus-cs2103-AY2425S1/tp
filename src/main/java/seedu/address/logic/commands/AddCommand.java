@@ -10,7 +10,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.internship.InternshipApplication;
+import seedu.address.model.internshipapplication.InternshipApplication;
 
 /**
  * Adds a person to the address book.

@@ -1,4 +1,4 @@
-package seedu.address.model.internship;
+package seedu.address.model.internshipapplication;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

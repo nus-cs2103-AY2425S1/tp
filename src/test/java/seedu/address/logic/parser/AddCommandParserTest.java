@@ -37,11 +37,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.internship.Address;
-import seedu.address.model.internship.Email;
-import seedu.address.model.internship.Name;
-import seedu.address.model.internship.Person;
-import seedu.address.model.internship.Phone;
+import seedu.address.model.internshipapplication.Address;
+import seedu.address.model.internshipapplication.Email;
+import seedu.address.model.internshipapplication.Name;
+import seedu.address.model.internshipapplication.Person;
+import seedu.address.model.internshipapplication.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 

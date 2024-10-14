@@ -15,7 +15,7 @@ import seedu.address.logic.validator.DateValidator;
 import seedu.address.logic.validator.EmailValidator;
 import seedu.address.logic.validator.NameValidator;
 import seedu.address.logic.validator.RoleValidator;
-import seedu.address.model.internship.*;
+import seedu.address.model.internshipapplication.*;
 import seedu.address.model.tag.Tag;
 
 /**
