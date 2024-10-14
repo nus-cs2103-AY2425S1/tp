@@ -63,6 +63,11 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+
+    testImplementation "org.testfx:testfx-core:4.0.18"
+    testImplementation "org.testfx:testfx-junit5:4.0.18"
+    testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.1'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.13.2'
 }
 
 shadowJar {
