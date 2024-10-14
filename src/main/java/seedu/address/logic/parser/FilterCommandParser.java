@@ -17,7 +17,6 @@ import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.predicates.AddressContainsSubstringPredicate;
 import seedu.address.model.person.predicates.EmailContainsSubstringPredicate;
-import seedu.address.model.person.predicates.IncomeContainsSubstringPredicate;
 import seedu.address.model.person.predicates.JobContainsSubstringPredicate;
 import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
 import seedu.address.model.person.predicates.PhoneContainsSubstringPredicate;
@@ -62,11 +61,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             String substring = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()).value;
             return new FilterCommand(new AddressContainsSubstringPredicate(substring));
-        }
-        if (argMultimap.getValue(PREFIX_INCOME).isPresent()) {
-            String substring = String.valueOf(ParserUtil.parseIncome(argMultimap
-                    .getValue(PREFIX_INCOME).get()).value);
-            return new FilterCommand(new IncomeContainsSubstringPredicate(substring));
         }
         if (argMultimap.getValue(PREFIX_JOB).isPresent()) {
             String substring = ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get()).value;
