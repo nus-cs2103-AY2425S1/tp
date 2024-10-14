@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POSTALCODE_ADMIRALTY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_ADMIRALTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -28,6 +30,7 @@ import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteBuyerCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeletePropertyCommand;
 import seedu.address.logic.commands.DeleteSellerCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -41,7 +44,9 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.property.PostalCode;
 import seedu.address.model.property.Property;
+import seedu.address.model.property.Unit;
 import seedu.address.testutil.ClientBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -137,6 +142,17 @@ public class AddressBookParserTest {
 
         assertEquals(new AddPropertyCommand(property), command);
     }
+
+    @Test
+    public void parseCommand_deleteProperty() throws Exception {
+        DeletePropertyCommand command = (DeletePropertyCommand) parser.parseCommand(
+                DeletePropertyCommand.COMMAND_WORD + " " + PREFIX_POSTALCODE + VALID_POSTALCODE_ADMIRALTY
+                        + " " + PREFIX_UNITNUMBER + VALID_UNIT_ADMIRALTY);
+        PostalCode postalCode = new PostalCode(VALID_POSTALCODE_ADMIRALTY);
+        Unit unitNumber = new Unit(VALID_UNIT_ADMIRALTY);
+        assertEquals(new DeletePropertyCommand(postalCode, unitNumber), command);
+    }
+
 
     @Test
     public void parseCommand_find() throws Exception {

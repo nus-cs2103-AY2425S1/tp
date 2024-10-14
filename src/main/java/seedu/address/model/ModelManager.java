@@ -246,7 +246,7 @@ public class ModelManager implements Model {
             JsonPropertyBookStorage jsonPropertyBookStorage = new JsonPropertyBookStorage(propertyBookFilePath);
             jsonPropertyBookStorage.savePropertyBook(propertyBook);
         } catch (IOException e) {
-            System.out.println("Error while saving ClientBook: " + e.getMessage());
+            System.out.println("Error while saving PropertyBook: " + e.getMessage());
         }
     }
 

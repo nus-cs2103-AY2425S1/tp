@@ -57,7 +57,25 @@ public class DeletePropertyCommandTest {
     }
 
     @Test
-    public void execute_propertyNotFound_throwsCommandException() {
+    public void execute_postalCodeNotFound_throwsCommandException() {
+        PostalCode notFoundPostalCode = new PostalCode(VALID_NOTFOUND_POSTALCODE_CLEMENTI);
+        Unit unit = new Unit(VALID_UNIT_ADMIRALTY);
+        DeletePropertyCommand deletePropertyCommand = new DeletePropertyCommand(notFoundPostalCode, unit);
+        assertCommandFailure(deletePropertyCommand, model,
+                String.format("Property not found. ", notFoundPostalCode, unit));
+    }
+
+    @Test
+    public void execute_unitNumberNotFound_throwsCommandException() {
+        PostalCode postalCode = new PostalCode(VALID_POSTALCODE_ADMIRALTY);
+        Unit notFoundUnit = new Unit(VALID_NOTFOUND_UNIT_CLEMENTI);
+        DeletePropertyCommand deletePropertyCommand = new DeletePropertyCommand(postalCode, notFoundUnit);
+        assertCommandFailure(deletePropertyCommand, model,
+                String.format("Property not found. ", postalCode, notFoundUnit));
+    }
+
+    @Test
+    public void execute_postalCodeAndUnitNumberNotFound_throwsCommandException() {
         PostalCode notFoundPostalCode = new PostalCode(VALID_NOTFOUND_POSTALCODE_CLEMENTI);
         Unit notFoundUnit = new Unit(VALID_NOTFOUND_UNIT_CLEMENTI);
         DeletePropertyCommand deletePropertyCommand = new DeletePropertyCommand(notFoundPostalCode, notFoundUnit);
