@@ -42,6 +42,9 @@ public class DeletePolicyCommandParserTest {
         // no index
         assertParseFailure(parser, POLICY_TYPE_DESC_HEALTH, expectedMessage);
 
+        // negative index
+        assertParseFailure(parser, "-1 pt/life", expectedMessage);
+
         // no policies
         assertParseFailure(parser, String.valueOf(INDEX_FIRST_PERSON.getOneBased()), expectedMessage);
     }

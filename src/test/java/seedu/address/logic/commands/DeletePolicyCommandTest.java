@@ -13,9 +13,12 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 import seedu.address.model.policy.EducationPolicy;
 import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.LifePolicy;
@@ -29,6 +32,11 @@ public class DeletePolicyCommandTest {
     private final HealthPolicy health = new HealthPolicy();
     private final EducationPolicy education = new EducationPolicy();
 
+//    @Test
+//    public void execute_deletePolicyUnfilteredList_success() {
+//        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+//
+//    }
     @Test
     public void constructor_nullInputs_throwsNullPointerException() {
         final Set<PolicyType> policyTypes = new HashSet<>();
@@ -44,7 +52,14 @@ public class DeletePolicyCommandTest {
 
         assertCommandFailure(new DeletePolicyCommand(INDEX_FIRST_PERSON, policyTypes), model, "Policy not found.");
     }
-
+    @Test
+    public void execute_invalidPersonIndexUnfilteredList_failure() {
+        final Set<PolicyType> policyTypes = new HashSet<>();
+        policyTypes.add(PolicyType.LIFE);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        DeletePolicyCommand command = new DeletePolicyCommand(outOfBoundIndex, policyTypes);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
     @Test
     public void equals() {
         final Set<PolicyType> policyTypes = new HashSet<>();
