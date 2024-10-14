@@ -19,6 +19,7 @@ public class TypicalAssignments {
             LocalDateTime.of(2000, 10, 10, 20, 20));
 
 
+
     public static AssignmentList getTypicalAssignmentList() {
         AssignmentList assignmentList = new AssignmentList();
         assignmentList.addAssignment(ASSIGNMENT_1);
