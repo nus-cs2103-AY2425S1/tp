@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
@@ -24,7 +26,7 @@ public class PersonBuilder {
     private Email email;
     private Set<Tag> tags;
     private StudentNumber studentNumber;
-    private Optional<String> group;
+    private Optional<Group> group;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -68,7 +70,9 @@ public class PersonBuilder {
      * Sets the {@code String} group name of the {@code Student} that we are building.
      */
     public PersonBuilder withGroup(String group) {
-        this.group = Optional.of(group);
+        GroupName groupName = new GroupName(group);
+        Group newGroup = new Group(groupName);
+        this.group = Optional.of(newGroup);
         return this;
     }
 

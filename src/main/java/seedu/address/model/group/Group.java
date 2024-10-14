@@ -57,6 +57,10 @@ public class Group {
         }
     }
 
+    public void delete(Student student) {
+        students.remove(student);
+    }
+
     /**
      * Returns true if both groups have the same name.
      * This defines a weaker notion of equality between two persons.

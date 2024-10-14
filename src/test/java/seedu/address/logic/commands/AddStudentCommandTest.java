@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.State;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -23,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.PersonBuilder;
 
@@ -178,6 +180,41 @@ public class AddStudentCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Student> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredGroupList(Predicate<Group> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setStateStudents() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setStateGroups() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public State getState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Group findGroup(GroupName groupName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean containsGroupName(GroupName groupName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteStudentFromGroup(Group group, Student student) {
             throw new AssertionError("This method should not be called.");
         }
     }

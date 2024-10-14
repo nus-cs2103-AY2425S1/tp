@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.State;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
 
 /**
@@ -127,4 +128,10 @@ public interface Model {
     void setStateGroups();
 
     State getState();
+
+    Group findGroup(GroupName groupName);
+
+    boolean containsGroupName(GroupName groupName);
+
+    void deleteStudentFromGroup(Group group, Student student);
 }
