@@ -1,8 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.assignment.AssignmentList;
+import seedu.address.testutil.TypicalAssignments;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListAssignmentCommand.
@@ -19,22 +17,20 @@ import seedu.address.model.assignment.AssignmentList;
 public class ListAssignmentCommandTest {
 
     private Model model;
-    private Model expectedModel;
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new AssignmentList());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new AssignmentList());
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+                TypicalAssignments.getTypicalAssignmentList());
     }
 
     @Test
-    public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    public void execute_listAssignment_showsCorrectAssignmentList() {
+        CommandResult commandResult = new ListAssignmentCommand().execute(model);
+        String expectedMessage = "All current assignments: \n"
+                + "1. Assignment 1 due on 10 Oct 2024 23:59 (5 students have completed!)\n"
+                + "2. Assignment 2 due on 10 Oct 2024 23:59 (4 students have completed!)\n";
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
     }
 
-    @Test
-    public void execute_listIsFiltered_showsEverything() {
-        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
-    }
 }
