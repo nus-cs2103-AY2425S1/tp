@@ -10,14 +10,14 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.internshipapplication.InternshipApplication;
 
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class AddCommand extends Command<InternshipApplication> {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "/a";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an internship application to the address book. "
             + "Parameters: "
@@ -35,25 +35,25 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON =
             "This internship application already exists in the address book";
 
-    private final Person toAdd;
+    private final InternshipApplication toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(InternshipApplication internship) {
+        requireNonNull(internship);
+        toAdd = internship;
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model<InternshipApplication> model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasItem(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
+        model.addItem(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

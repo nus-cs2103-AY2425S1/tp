@@ -5,12 +5,13 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.model.HireMeComparable;
 import seedu.address.model.ReadOnlyAddressBook;
 
 /**
  * Represents a storage for {@link seedu.address.model.AddressBook}.
  */
-public interface AddressBookStorage {
+public interface AddressBookStorage<T extends HireMeComparable<T>> {
 
     /**
      * Returns the file path of the data file.
@@ -23,23 +24,23 @@ public interface AddressBookStorage {
      *
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;
+    Optional<ReadOnlyAddressBook<T>> readAddressBook() throws DataLoadingException;
 
     /**
      * @see #getAddressBookFilePath()
      */
-    Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException;
+    Optional<ReadOnlyAddressBook<T>> readAddressBook(Path filePath) throws DataLoadingException;
 
     /**
      * Saves the given {@link ReadOnlyAddressBook} to the storage.
      * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveAddressBook(ReadOnlyAddressBook<T> addressBook) throws IOException;
 
     /**
      * @see #saveAddressBook(ReadOnlyAddressBook)
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
+    void saveAddressBook(ReadOnlyAddressBook<T> addressBook, Path filePath) throws IOException;
 
 }

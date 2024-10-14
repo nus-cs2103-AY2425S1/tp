@@ -11,33 +11,32 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+
 
 /**
  * Represents the in-memory model of the address book data.
  */
-public class ModelManager implements Model {
+public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
-    private final AddressBook addressBook;
+    private final AddressBook<T> addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<T> filtered;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook<T> addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.addressBook = new AddressBook<>(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filtered = new FilteredList<>(this.addressBook.getList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook<>(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -78,37 +77,39 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
+    public void setAddressBook(ReadOnlyAddressBook<T> addressBook) {
         this.addressBook.resetData(addressBook);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyAddressBook<T> getAddressBook() {
         return addressBook;
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasItem(T item) {
+        requireNonNull(item);
+        return addressBook.hasItem(item);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteItem(T target) {
+        addressBook.removeItem(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addItem(T item) {
+        addressBook.addItem(item);
+        @SuppressWarnings("unchecked")
+        Predicate<T> showAll = (Predicate<T>) PREDICATE_SHOW_ALL;
+        updateFilteredList(showAll);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setItem(T target, T edited) {
+        requireAllNonNull(target, edited);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setItem(target, edited);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -118,14 +119,14 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<T> getFilteredList() {
+        return filtered;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredList(Predicate<T> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filtered.setPredicate(predicate);
     }
 
     @Override
@@ -135,14 +136,13 @@ public class ModelManager implements Model {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ModelManager)) {
+        if (!(other instanceof ModelManager<?> otherModelManager)) {
             return false;
         }
 
-        ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filtered.equals(otherModelManager.filtered);
     }
 
 }
