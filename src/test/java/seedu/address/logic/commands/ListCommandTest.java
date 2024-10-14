@@ -29,12 +29,14 @@ public class ListCommandTest {
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getPropertyBook(),
                 model.getClientBook());
     }
+
     @Test
     public void listBuyersCommandGeneration() {
         Command command = new ListBuyersCommand();
 
         // Check if command is an instance of ListBuyersCommand
-        assertTrue(command instanceof ListBuyersCommand, "The command should be an instance of ListBuyersCommand");
+        assertTrue(command instanceof ListBuyersCommand,
+                "Command should be an instance of ListBuyersCommand");
     }
 
     @Test
@@ -42,7 +44,8 @@ public class ListCommandTest {
         Command command = new ListSellersCommand();
 
         // Check if command is an instance of ListSellersCommand
-        assertTrue(command instanceof ListSellersCommand, "The command should be an instance of ListSellersCommand");
+        assertTrue(command instanceof ListSellersCommand,
+                "Command should be an instance of ListSellersCommand");
     }
 
     @Test
@@ -50,7 +53,8 @@ public class ListCommandTest {
         Command command = new ListClientsCommand();
 
         // Check if command is an instance of ListClientsCommand
-        assertTrue(command instanceof ListClientsCommand, "The command should be an instance of ListClientsCommand");
+        assertTrue(command instanceof ListClientsCommand,
+                "Command should be an instance of ListClientsCommand");
     }
 
     @Test
@@ -58,9 +62,9 @@ public class ListCommandTest {
         Command command = new ListPropertiesCommand();
 
         // Check if command is an instance of ListPropertiesCommand
-        assertTrue(command instanceof ListPropertiesCommand, "The command should be an instance of ListPropertiesCommand");
+        assertTrue(command instanceof ListPropertiesCommand,
+                "Command should be an instance of ListPropertiesCommand");
     }
-
 
     @Test
     public void testExecuteBuyers() throws CommandException {
@@ -89,7 +93,6 @@ public class ListCommandTest {
         CommandResult result = command.execute(this.model);
         assertEquals(result.getFeedbackToUser(), "Listed all properties");
     }
-
 
 
     //    @Test
