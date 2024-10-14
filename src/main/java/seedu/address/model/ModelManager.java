@@ -18,6 +18,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonAttendance;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -194,6 +195,17 @@ public class ModelManager implements Model {
         }
         return null; // Return null if no matching student is found
 
+    }
+
+    @Override
+    public Student getStudentByNumber(StudentNumber studentNumber) {
+        for (Student student : getAddressBook().getStudentList()) {
+            if (student.getStudentNumber().equals(studentNumber)) {
+                return student;
+            }
+        }
+        return null; // Return null if no matching student is found
+Add DeleteStudentCommand functionality and implement getStudentByNumber
     }
 
     @Override

@@ -7,6 +7,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 
 /**
  * The API of the Model component.
@@ -91,7 +92,7 @@ public interface Model {
 
     //=========== Student ================================================================================
 
-
+    Student getStudentByNumber(StudentNumber studentNumber);
 
     Student getStudentByName(Name name);
 
@@ -104,7 +105,6 @@ public interface Model {
      * Deletes the given student.
      * The student must exist in the address book.
      */
-
     void deleteStudent(Student target);
 
     /**
@@ -133,7 +133,6 @@ public interface Model {
      */
 
     void updateFilteredStudentList(Predicate<Student> predicate);
-
 
 
 
