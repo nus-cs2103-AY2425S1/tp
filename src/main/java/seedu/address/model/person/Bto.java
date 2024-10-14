@@ -32,6 +32,17 @@ public class Bto extends Property {
     }
 
     @Override
+    public boolean equals(Object otherBto) {
+        if (!super.equals(otherBto)) {
+            return false;  // Check the parent class's equality (postalCode)
+        }
+        if (!(otherBto instanceof Bto)) {
+            return false;  // Ensure `other` is an instance of the same subclass
+        }
+        return true;
+    }
+
+    @Override
     public String toString() {
         return super.toString();
     }

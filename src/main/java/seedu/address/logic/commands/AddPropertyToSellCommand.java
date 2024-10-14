@@ -65,18 +65,13 @@ public class AddPropertyToSellCommand extends Command {
 
         Person personToEdit = lastShownList.get(personIndex.getZeroBased());
 
-        /*if (personToEdit.containsSellProperty(propertyToSellToBeAdded)) {
+        if (personToEdit.containsSellProperty(propertyToSellToBeAdded)) {
             throw new CommandException(MESSAGE_DUPLICATE_PROPERTY);
         } else {
             personToEdit.addSellProperty(propertyToSellToBeAdded);
-        }*/
-        /*if (model.hasSellProperty(personIndex, propertyToSellToBeAdded)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PROPERTY);
         }
 
-        model.addSellProperty(personIndex, propertyToSellToBeAdded);*/
         return new CommandResult(String.format(MESSAGE_SUCCESS, propertyToSellToBeAdded));
-        //return new CommandResult("Hello from AddPropertyToSellCommand");
     }
 
     @Override

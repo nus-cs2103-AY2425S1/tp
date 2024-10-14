@@ -26,6 +26,17 @@ public class Hdb extends Property {
     }
 
     @Override
+    public boolean equals(Object otherHdb) {
+        if (!super.equals(otherHdb)) {
+            return false;
+        }
+        if (!(otherHdb instanceof Bto)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public String toString() {
         return super.toString();
     }

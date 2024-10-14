@@ -32,6 +32,17 @@ public class Apartment extends Property {
     }
 
     @Override
+    public boolean equals(Object otherApartment) {
+        if (!super.equals(otherApartment)) {
+            return false;  // Check the parent class's equality (postalCode)
+        }
+        if (!(otherApartment instanceof Bto)) {
+            return false;  // Ensure `other` is an instance of the same subclass
+        }
+        return true;
+    }
+
+    @Override
     public String toString() {
         return super.toString();
     }

@@ -45,7 +45,6 @@ public class AddPropertyToSellParser implements Parser<AddPropertyToSellCommand>
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            System.out.println("REACHED 1");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddPropertyToSellCommand.MESSAGE_USAGE), pe);
         }
@@ -54,7 +53,6 @@ public class AddPropertyToSellParser implements Parser<AddPropertyToSellCommand>
         // || !argMultimap.getPreamble().isEmpty()
         if (!arePrefixesPresent(argMultimap, PREFIX_HOUSING_TYPE, PREFIX_SELLING_PRICE,
                 PREFIX_POSTAL_CODE, PREFIX_UNIT_NUMBER)) {
-            System.out.println("REACHED 2");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddPropertyToSellCommand.MESSAGE_USAGE));
         }

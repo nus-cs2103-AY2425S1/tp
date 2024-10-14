@@ -84,7 +84,7 @@ public abstract class Property {
         }
 
         Property otherProperty = (Property) other;
-        return postalCode.equals(otherProperty.postalCode);
+        return postalCode.equals(otherProperty.postalCode) && unitNumber.equals(otherProperty.unitNumber);
     }
 
     @Override
