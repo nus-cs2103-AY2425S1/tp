@@ -41,9 +41,13 @@ public class Messages {
                 .append(person.getTelegramHandle())
                 .append("; Email: ")
                 .append(person.getEmail())
-                .append("; StudentStatus: ")
-                .append(person.getStudentStatus())
-                .append("; Nickname: ");
+                .append("; Student Status: ")
+                .append(person.getStudentStatus());
+        if (!person.getNickname().isEmpty()) {
+            builder.append("; Nickname: ");
+            builder.append(person.getNickname());
+        }
+        builder.append("; Roles: ");
         person.getRoles().forEach(builder::append);
         return builder.toString();
     }
