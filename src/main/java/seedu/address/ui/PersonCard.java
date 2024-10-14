@@ -70,19 +70,6 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
-    public Label getSchedule() {
-        return schedule;
-    }
-
-    public Label getNote() {
-        return note;
-    }
-
-    public Label getReminder() {
-        return reminder;
-    }
-
-
     /**
      * Sets the text for the reminder field.
      * @param person

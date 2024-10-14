@@ -30,6 +30,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
+   
+   * `schedule John Doe d/2024-10-14 1200 note/First appointment`: Schedules an appointment for John Doe on October 14, 2024, at 12pm with the given note.
 
    * `clear` : Deletes all contacts.
 
@@ -85,6 +87,21 @@ A person can have any number of tags (including 0)
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
+### Scheduling an appointment: `schedule`
+
+Schedules an appointment for a client in the address book.
+
+Format: `schedule NAME d/DATE_AND_TIME [note/NOTES]`
+
+* The given date must fall on a weekday.
+* The given time must be on the hour between 0900 and 1700.
+* Format for the date and time must be in yyyy-MM-dd HHmm.
+* The field for notes is optional.
+
+Examples:
+* `schedule John Doe d/2024-10-14 1200`
+* `schedule Betsy Crowe d/2024-10-14 1300 note/first appointment`
 
 ### Listing all persons : `list`
 
@@ -193,6 +210,7 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Schedule** | `schedule NAME d/DATE_AND_TIME [note/NOTES]`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
