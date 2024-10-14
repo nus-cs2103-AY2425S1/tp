@@ -16,6 +16,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
+import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
@@ -121,6 +122,17 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedStudent);
         addressBook.setStudent(target, editedStudent);
     }
+    @Override
+    public void addTutorial(Tut tutorial) {
+        requireNonNull(tutorial);
+        addressBook.addTutorial(tutorial);
+    }
+
+    @Override
+    public boolean hasTutorial(Tut tutorial) {
+        requireNonNull(tutorial);
+        return addressBook.hasTutorial(tutorial);
+    }
 
     @Override
     public boolean setStudentAttendance(StudentId target, TutorialClass tut, Date date) {
@@ -148,7 +160,34 @@ public class ModelManager implements Model {
 
     @Override
     public void addAssignment(Assignment assignment) {
+        requireNonNull(assignment);
+
         assignmentList.addAssignment(assignment);
+    }
+
+    @Override
+    public void deleteAssignment(Assignment assignment) {
+        assignmentList.deleteAssignment(assignment);
+    }
+
+    @Override
+    public String checkAssignment(Assignment assignment) throws AssignmentNotFoundException {
+        requireNonNull(assignment);
+
+        return assignmentList.getStatus(assignment, addressBook.getStudentList());
+    }
+
+    @Override
+    public void setAssignmentStatus(Assignment assignment, Student targetStudent, boolean newStatus)
+            throws AssignmentNotFoundException {
+        requireAllNonNull(targetStudent, newStatus);
+
+        assignmentList.setStatus(assignment, targetStudent, newStatus);
+    }
+
+    @Override
+    public String listAssignments() {
+        return assignmentList.toString();
     }
 
     //=========== Filtered Student List Accessors =============================================================

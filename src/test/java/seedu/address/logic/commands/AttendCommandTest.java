@@ -24,6 +24,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
+import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
@@ -174,6 +175,16 @@ public class AttendCommandTest {
         }
 
         @Override
+        public boolean hasTutorial(Tut tutorial) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTutorial(Tut tutorial) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -199,12 +210,32 @@ public class AttendCommandTest {
         }
 
         @Override
+        public String listAssignments() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addAssignment(Assignment assignment) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean hasAssignment(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAssignment(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public String checkAssignment(Assignment assignment) throws AssignmentNotFoundException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAssignmentStatus(Assignment assignment, Student targetStudent, boolean newStatus)
+                throws AssignmentNotFoundException {
             throw new AssertionError("This method should not be called.");
         }
 

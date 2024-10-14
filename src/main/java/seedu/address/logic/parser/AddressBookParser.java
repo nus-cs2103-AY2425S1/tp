@@ -10,15 +10,21 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddAssignmentCommand;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddTutCommand;
 import seedu.address.logic.commands.AttendCommand;
+import seedu.address.logic.commands.CheckAssignmentCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteAssignmentCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListAssignmentCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MarkAssignmentCommand;
+import seedu.address.logic.commands.UnmarkAssignmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -57,7 +63,8 @@ public class AddressBookParser {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
-
+        case AddTutCommand.COMMAND_WORD:
+            return new AddTutCommandParser().parse(arguments);
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
@@ -84,6 +91,21 @@ public class AddressBookParser {
 
         case AttendCommand.COMMAND_WORD:
             return new AttendCommandParser().parse(arguments);
+
+        case DeleteAssignmentCommand.COMMAND_WORD:
+            return new DeleteAssignmentCommandParser().parse(arguments);
+
+        case CheckAssignmentCommand.COMMAND_WORD:
+            return new CheckAssignmentCommandParser().parse(arguments);
+
+        case MarkAssignmentCommand.COMMAND_WORD:
+            return new MarkAssignmentCommandParser().parse(arguments);
+
+        case UnmarkAssignmentCommand.COMMAND_WORD:
+            return new UnmarkAssignmentCommandParser().parse(arguments);
+
+        case ListAssignmentCommand.COMMAND_WORD:
+            return new ListAssignmentCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

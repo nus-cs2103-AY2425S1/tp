@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalStudents.ALICE;
+import static seedu.address.testutil.TutUtil.TUT_SAMPLE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -30,65 +29,66 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
-import seedu.address.testutil.StudentBuilder;
 
-public class AddCommandTest {
+public class AddTutCommandTest {
 
     @Test
-    public void constructor_nullStudent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullTut_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddTutCommand(null));
     }
 
     @Test
-    public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
-        Student validStudent = new StudentBuilder().build();
+    public void execute_tutAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingTutAdded modelStub = new ModelStubAcceptingTutAdded();
+        Tut validTut = TUT_SAMPLE;
 
-        CommandResult commandResult = new AddCommand(validStudent).execute(modelStub);
+        CommandResult commandResult = new AddTutCommand(validTut).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validStudent)),
+        assertEquals(String.format(AddTutCommand.MESSAGE_SUCCESS, validTut),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validStudent), modelStub.studentsAdded);
+        assertEquals(Arrays.asList(validTut), modelStub.tutorialsAdded);
     }
 
     @Test
-    public void execute_duplicateStudent_throwsCommandException() {
-        Student validStudent = new StudentBuilder().build();
-        AddCommand addCommand = new AddCommand(validStudent);
-        ModelStub modelStub = new ModelStubWithStudent(validStudent);
+    public void execute_duplicateTut_throwsCommandException() {
+        Tut validTut = TUT_SAMPLE;
+        AddTutCommand addTutCommand = new AddTutCommand(validTut);
+        ModelStub modelStub = new ModelStubWithTut(validTut);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_STUDENT, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                     AddTutCommand.MESSAGE_DUPLICATE_TUTORIAL, () -> addTutCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Student alice = new StudentBuilder().withName("Alice").build();
-        Student bob = new StudentBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Tut tutSample1 = TUT_SAMPLE;
+        Tut tutSample2 = new Tut("CS2040S", new TutorialClass("1001")); // Different tutorial
+
+        AddTutCommand addTutSample1Command = new AddTutCommand(tutSample1);
+        AddTutCommand addTutSample2Command = new AddTutCommand(tutSample2);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addTutSample1Command.equals(addTutSample1Command));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddTutCommand addTutSample1CommandCopy = new AddTutCommand(tutSample1);
+        assertTrue(addTutSample1Command.equals(addTutSample1CommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addTutSample1Command.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addTutSample1Command.equals(null));
 
-        // different student -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different tutorial -> returns false
+        assertFalse(addTutSample1Command.equals(addTutSample2Command));
     }
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        AddTutCommand addTutCommand = new AddTutCommand(TUT_SAMPLE);
+        String expected = AddTutCommand.class.getCanonicalName() + "{toAdd=" + TUT_SAMPLE + "}";
+        assertEquals(expected, addTutCommand.toString());
     }
 
     /**
@@ -126,12 +126,78 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setAddressBook(ReadOnlyAddressBook addressBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addStudent(Student student) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setStudent(Student target, Student editedStudent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Student> getFilteredStudentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean setStudentAttendance(StudentId studentId, TutorialClass tutorialClass, Date date) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredStudentList(Predicate<Student> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasTutorial(Tut tutorial) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTutorial(Tut tutorial) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public AssignmentList getAssignmentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAssignment(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAssignment(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAssignment(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String checkAssignment(Assignment assignment) throws AssignmentNotFoundException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAssignmentStatus(Assignment assignment, Student targetStudent, boolean newStatus)
+                throws AssignmentNotFoundException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String listAssignments() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -142,114 +208,48 @@ public class AddCommandTest {
 
         @Override
         public boolean hasStudent(Student student) {
-            throw new AssertionError("This method should not be called.");
+            return false;
         }
 
         @Override
         public void deleteStudent(Student target) {
             throw new AssertionError("This method should not be called.");
         }
+    }
 
-        @Override
-        public void setStudent(Student target, Student editedStudent) {
-            throw new AssertionError("This method should not be called.");
+    /**
+     * A Model stub that contains a single tutorial.
+     */
+    private class ModelStubWithTut extends ModelStub {
+        private final Tut tutorial;
+
+        ModelStubWithTut(Tut tutorial) {
+            this.tutorial = tutorial;
         }
 
         @Override
-        public boolean setStudentAttendance(StudentId target, TutorialClass tut, Date date) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addAssignment(Assignment assignment) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public String checkAssignment(Assignment assignment) throws AssignmentNotFoundException {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasAssignment(Assignment assignment) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public AssignmentList getAssignmentList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Student> getFilteredStudentList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredStudentList(Predicate<Student> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-
         public boolean hasTutorial(Tut tutorial) {
-            return false;
-        }
-
-        @Override
-        public void addTutorial(Tut toAdd) {
-        }
-        public void deleteAssignment(Assignment assignment) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAssignmentStatus(Assignment assignment, Student student, boolean status)
-                throws AssignmentNotFoundException {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public String listAssignments() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-    }
-
-    /**
-     * A Model stub that contains a single student.
-     */
-    private class ModelStubWithStudent extends ModelStub {
-        private final Student student;
-
-        ModelStubWithStudent(Student student) {
-            requireNonNull(student);
-            this.student = student;
-        }
-
-        @Override
-        public boolean hasStudent(Student student) {
-            requireNonNull(student);
-            return this.student.isSameStudent(student);
+            requireNonNull(tutorial);
+            return this.tutorial.equals(tutorial);
         }
     }
 
     /**
-     * A Model stub that always accepts the student being added.
+     * A Model stub that always accepts the tutorial being added.
      */
-    private class ModelStubAcceptingStudentAdded extends ModelStub {
-        final ArrayList<Student> studentsAdded = new ArrayList<>();
+    private class ModelStubAcceptingTutAdded extends ModelStub {
+        final ArrayList<Tut> tutorialsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasStudent(Student student) {
-            requireNonNull(student);
-            return studentsAdded.stream().anyMatch(student::isSameStudent);
+        public boolean hasTutorial(Tut tutorial) {
+            requireNonNull(tutorial);
+            return tutorialsAdded.stream().anyMatch(tutorial::equals);
         }
 
         @Override
-        public void addStudent(Student student) {
-            requireNonNull(student);
-            studentsAdded.add(student);
+        public void addTutorial(Tut tutorial) {
+            requireNonNull(tutorial);
+            tutorialsAdded.add(tutorial);
         }
 
         @Override
