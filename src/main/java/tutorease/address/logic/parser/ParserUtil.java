@@ -17,6 +17,7 @@ import tutorease.address.model.person.Address;
 import tutorease.address.model.person.Email;
 import tutorease.address.model.person.Name;
 import tutorease.address.model.person.Phone;
+import tutorease.address.model.person.Role;
 import tutorease.address.model.tag.Tag;
 
 /**
@@ -83,6 +84,20 @@ public class ParserUtil {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
+    }
+    /**
+     * Parses a {@code String role} into an {@code Role}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static Role parseRole(String role) throws ParseException {
+        requireNonNull(role);
+        String trimmedRole = role.trim();
+        if (!Email.isValidEmail(trimmedRole)) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
+        return new Role(trimmedRole);
     }
 
     /**
@@ -189,4 +204,6 @@ public class ParserUtil {
         }
         return EndDateTime.createEndDateTime(startDateTime, hoursToAdd);
     }
+
+
 }

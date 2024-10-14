@@ -57,7 +57,7 @@ public class Person {
         return address;
     }
 
-    public Role getRemark() {
+    public Role getRole() {
         return role;
     }
 
@@ -123,5 +123,4 @@ public class Person {
                 .add("role", role)
                 .toString();
     }
-
 }
