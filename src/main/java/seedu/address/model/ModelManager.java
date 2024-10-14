@@ -10,6 +10,8 @@ import java.util.function.Predicate;
 import java.util.logging.Filter;
 import java.util.logging.Logger;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -36,6 +38,8 @@ public class ModelManager implements Model {
     private final FilteredList<Client> filteredClients;
 
     private Path clientBookFilePath = Paths.get("data" , "clientbook.json");
+
+    private final BooleanProperty isDisplayClients = new SimpleBooleanProperty(true);
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -257,5 +261,20 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Property> getFilteredPropertyList() {
         return filteredProperties;
+    }
+
+    //=========== Managing UI  ==================================================================================
+    @Override
+    public BooleanProperty getIsDisplayClientsProperty() {
+        return isDisplayClients;
+    }
+    @Override
+    public void setDisplayClients() {
+        isDisplayClients.set(true);
+    }
+
+    @Override
+    public void setDisplayProperties() {
+        isDisplayClients.set(false);
     }
 }

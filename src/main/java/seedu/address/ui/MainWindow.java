@@ -48,7 +48,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
-    private StackPane clientListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -84,6 +84,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -119,8 +120,18 @@ public class MainWindow extends UiPart<Stage> {
         // TODO: Modify to support both clientListPanel and propertyListPanel
         clientListPanel = new ClientListPanel(logic.getFilteredClientList());
         propertyListPanel = new PropertyListPanel(logic.getFilteredPropertyList());
-        clientListPanelPlaceholder.getChildren().add(propertyListPanel.getRoot());
-//        clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
+
+        // Initialise clientListPanel to display Clients
+        listPanelPlaceholder.getChildren().setAll(clientListPanel.getRoot());
+
+        // Add listener to modify display appropriately
+        logic.getIsDisplayClientsProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                listPanelPlaceholder.getChildren().setAll(clientListPanel.getRoot());
+            } else {
+                listPanelPlaceholder.getChildren().setAll(propertyListPanel.getRoot());
+            }
+        });
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

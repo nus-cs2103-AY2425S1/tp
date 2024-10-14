@@ -70,26 +70,25 @@ public class ListCommand extends Command {
         case BUYERS:
             // Logic to list buyers
             model.updateFilteredClientList(Client::isBuyer);
+            model.setDisplayClients();
             System.out.println("Listing all buyers");
             break;
         case SELLERS:
             // Logic to list sellers
             model.updateFilteredClientList(Client::isSeller);
+            model.setDisplayClients();
             System.out.println("Listing all sellers");
             break;
         case CLIENTS:
             // Logic to list clients (i.e. buyers and sellers)
             model.updateFilteredClientList(client -> true);
+            model.setDisplayClients();
             System.out.println("Listing all clients");
             break;
         case PROPERTIES:
             // Logic to list properties
+            model.setDisplayProperties();
             System.out.println("Listing all properties");
-            // TODO: Remove this @apollo-tan
-            for (Property property : model.getFilteredPropertyList()) {
-                System.out.println(property.toString());
-            }
-
             break;
         default:
             throw new AssertionError("Unexpected key: " + key);

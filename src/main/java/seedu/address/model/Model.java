@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
@@ -166,4 +167,8 @@ public interface Model {
     void addProperty(Property property);
 
     ObservableList<Property> getFilteredPropertyList();
+
+    BooleanProperty getIsDisplayClientsProperty();
+    void setDisplayClients();
+    void setDisplayProperties();
 }

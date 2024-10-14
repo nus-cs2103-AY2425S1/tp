@@ -33,7 +33,7 @@ public class PropertyCard extends UiPart<Region> {
         super(FXML);
         this.property = property;
         id.setText(displayedIndex + ". ");
-        postalCode.setText(displayedIndex + ". " + property.getPostalCode().value);
+        postalCode.setText(property.getPostalCode().value);
         unit.setText(property.getUnit().value);
     }
 
