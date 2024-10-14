@@ -10,7 +10,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIT_NUMBER;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddPropertyToBuyCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Apartment;
 import seedu.address.model.person.Bto;
@@ -39,24 +41,32 @@ public class AddPropertyToBuyParser implements Parser<AddPropertyToBuyCommand> {
                         PREFIX_POSTAL_CODE, PREFIX_UNIT_NUMBER, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_HOUSING_TYPE, PREFIX_BUYING_PRICE,
-                PREFIX_POSTAL_CODE, PREFIX_UNIT_NUMBER)
-                || !argMultimap.getPreamble().isEmpty()) {
+                PREFIX_POSTAL_CODE, PREFIX_UNIT_NUMBER)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    "not implemented yet: AddPropertyToBuyCommand.MESSAGE_USAGE"));
+                    AddPropertyToBuyCommand.MESSAGE_USAGE));
+        }
+
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddPropertyToBuyCommand.MESSAGE_USAGE), pe);
         }
 
         // Create a new Property object here and pass it to AddPropertyToBuyCommand(Property property);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_HOUSING_TYPE,
                 PREFIX_BUYING_PRICE, PREFIX_POSTAL_CODE, PREFIX_UNIT_NUMBER);
         HousingType housingType = ParserUtil.parseHousingType(argMultimap.getValue(PREFIX_HOUSING_TYPE).get());
-        Price sellingPrice = ParserUtil.parseSellingPrice(argMultimap.getValue(PREFIX_BUYING_PRICE).get());
+        Price buyingPrice = ParserUtil.parseSellingPrice(argMultimap.getValue(PREFIX_BUYING_PRICE).get());
         PostalCode postalCode = ParserUtil.parsePostalCode(argMultimap.getValue(PREFIX_POSTAL_CODE).get());
         UnitNumber unitNumber = ParserUtil.parseUnitNumber(argMultimap.getValue(PREFIX_UNIT_NUMBER).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Property property = getSpecificPropertyObject(housingType, sellingPrice, postalCode, unitNumber, tagList);
+        Property property = getSpecificPropertyObject(housingType, buyingPrice, postalCode, unitNumber, tagList);
 
-        return new AddPropertyToBuyCommand(); // add property argument
+        return new AddPropertyToBuyCommand(index, property);
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
