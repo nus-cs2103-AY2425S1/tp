@@ -55,7 +55,7 @@ public class DeleteLessonCommandIntegrationTest {
                 String.format(DeleteLessonCommand.MESSAGE_SUCCESS, validLesson),
                 expectedModel);
     }
-    
+
     @Test
     public void execute_invalidIndex_throwsCommandException() throws ParseException {
         Model expectedModel = new ModelManager(model.getTutorEase(), new UserPrefs(), model.getLessonSchedule());
