@@ -15,8 +15,6 @@ public class FindAddressCommand extends FindCommand {
     public static final String MESSAGE_FIND_ADDRESS_PERSON_SUCCESS = "Search for address containing \"%s\" "
             + " was successful. Showing results:";
 
-    public static final String MESSAGE_FIND_ADDRESS_PERSON_UNSUCCESSFUL = "No contacts found.";
-
     private final AddressContainsKeywordsPredicate predicate;
 
     /**
@@ -38,7 +36,7 @@ public class FindAddressCommand extends FindCommand {
         if (!model.getFilteredPersonList().isEmpty()) {
             return new CommandResult(String.format(MESSAGE_FIND_ADDRESS_PERSON_SUCCESS, predicate.getDisplayString()));
         } else {
-            return new CommandResult(MESSAGE_FIND_ADDRESS_PERSON_UNSUCCESSFUL);
+            return new CommandResult(MESSAGE_FIND_PERSON_UNSUCCESSFUL);
         }
     }
 

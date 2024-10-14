@@ -14,8 +14,6 @@ public abstract class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    public static final String MESSAGE_FIND_PERSON_SUCCESS = "Search for \"%s\" was successful. Showing results:";
-
     public static final String MESSAGE_FIND_PERSON_UNSUCCESSFUL = "No contacts found.";
 
 
