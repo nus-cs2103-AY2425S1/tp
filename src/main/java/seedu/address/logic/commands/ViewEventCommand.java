@@ -15,7 +15,7 @@ public class ViewEventCommand extends ViewCommand {
     public static final String COMMAND_FIELD = "event";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the event whose name is "
-            + "the specified keywords (case-sensitive) and displays it.\n"
+            + "the specified keywords (case-insensitive) and displays it.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_FIELD + " Awards show";
 
