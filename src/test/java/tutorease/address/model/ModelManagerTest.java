@@ -15,7 +15,10 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import tutorease.address.commons.core.GuiSettings;
+import tutorease.address.logic.parser.exceptions.ParseException;
+import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.NameContainsKeywordsPredicate;
+import tutorease.address.testutil.LessonBuilder;
 import tutorease.address.testutil.TutorEaseBuilder;
 
 public class ModelManagerTest {
@@ -91,6 +94,37 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void deleteLesson_success() throws ParseException {
+        LessonSchedule lessonSchedule = modelManager.getLessonSchedule();
+        LessonBuilder lessonBuilder = new LessonBuilder();
+        Lesson lesson = lessonBuilder.build();
+        lessonSchedule.addLesson(lesson);
+        assertTrue(lessonSchedule.hasLesson(lesson));
+        lessonSchedule.deleteLesson(0);
+        assertFalse(lessonSchedule.hasLesson(lesson));
+    }
+
+    @Test
+    public void getLesson_success() throws ParseException {
+        LessonSchedule lessonSchedule = modelManager.getLessonSchedule();
+        LessonBuilder lessonBuilder = new LessonBuilder();
+        Lesson lesson = lessonBuilder.build();
+        lessonSchedule.addLesson(lesson);
+        assertTrue(lessonSchedule.hasLesson(lesson));
+        assertEquals(lesson, lessonSchedule.getLesson(0));
+    }
+
+    @Test
+    public void getLessonScheduleSize_success() throws ParseException {
+        LessonSchedule lessonSchedule = modelManager.getLessonSchedule();
+        LessonBuilder lessonBuilder = new LessonBuilder();
+        Lesson lesson = lessonBuilder.build();
+        assertEquals(0, modelManager.getLessonScheduleSize());
+        lessonSchedule.addLesson(lesson);
+        assertEquals(1, modelManager.getLessonScheduleSize());
     }
 
     @Test
