@@ -11,25 +11,25 @@
 <?import javafx.scene.layout.StackPane?>
 
 <?import javafx.scene.control.TextField?>
-<fx:root resizable="false" title="Import" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root resizable="false" title="Export" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/help_icon.png" />
     </icons>
     <scene>
         <Scene>
             <stylesheets>
-                <URL value="@ImportWindow.css" />
+                <URL value="@ExportWindow.css" />
             </stylesheets>
 
-            <HBox alignment="CENTER" fx:id="importMessageContainer" >
+            <HBox alignment="CENTER" fx:id="importMessageContainer">
                 <children>
-                    <Label fx:id="importMessage" text="Label">
+                    <Label fx:id="exportMessage" text="Label">
                         <HBox.margin>
                             <Insets right="5.0" />
                         </HBox.margin>
                     </Label>
                     <StackPane fx:id="fileDirectoryContainer">
-                        <TextField fx:id="inputDir" onAction="#importCsv" promptText="Choose Directory">
+                        <TextField fx:id="inputDir" onAction="#exportCsv" promptText="Choose Directory">
                             <HBox.margin>
                                 <Insets right="5.0" />
                             </HBox.margin>
