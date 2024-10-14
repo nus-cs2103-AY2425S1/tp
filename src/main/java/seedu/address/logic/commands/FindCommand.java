@@ -25,7 +25,8 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters persons in the address book according to the "
-            + "following parameters. A combination of them can be used. Note that to specify multiple addresses, the "
+            + "given parameters. Matching is case-insensitive. A combination of the following parameters can be used. "
+            + "Note that to specify multiple addresses, the "
             + "prefix \"" + PREFIX_ADDRESS + "\" should be used for each new address.\n"
             + "Parameters: "
             + PREFIX_NAME + "START OF NAME "
@@ -33,7 +34,8 @@ public class FindCommand extends Command {
             + PREFIX_PRIORITY + "PRIORITY\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Jo "
-            + PREFIX_ADDRESS + "Clementi ";
+            + PREFIX_ADDRESS + "Clementi "
+            + PREFIX_PRIORITY + "HIGH";
 
     private final List<String> names;
     private final List<String> addresses;

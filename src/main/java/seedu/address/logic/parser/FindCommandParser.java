@@ -16,6 +16,9 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Priority;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -28,14 +31,19 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
+        // Check if no filters are given
+        if (args.trim().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
                         args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_PRIORITY, PREFIX_REMARK, PREFIX_TAG);
+
         // Check for filtering by invalid prefixes
         if (hasPrefixes(argMultimap, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_REMARK, PREFIX_TAG)
                 || !argMultimap.getPreamble().isEmpty()) {
-            System.out.println("Invalid use here");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
@@ -43,13 +51,23 @@ public class FindCommandParser implements Parser<FindCommand> {
         List<String> addresses = argMultimap.getAllValues(PREFIX_ADDRESS);
         List<String> priorities = argMultimap.getAllValues(PREFIX_PRIORITY);
 
-        if (!names.isEmpty()) {
-            names = splitStrings(names);
+        names = splitStrings(names);
+        if (!areValidKeywords(names, Name.VALIDATION_REGEX)) {
+            throw new ParseException("Name keyword was invalid! " + Name.MESSAGE_CONSTRAINTS + "\n"
+                    + FindCommand.MESSAGE_USAGE);
         }
 
-        if (!priorities.isEmpty()) {
-            priorities = splitStrings(priorities);
+        if (!areValidKeywords(addresses, Address.VALIDATION_REGEX)) {
+            throw new ParseException("Address keyword was invalid!" + Address.MESSAGE_CONSTRAINTS + "\n"
+                    + FindCommand.MESSAGE_USAGE);
         }
+
+        priorities = splitStrings(priorities);
+        if (!areValidPriorities(priorities)) {
+            throw new ParseException("Invalid priority given! " + Priority.MESSAGE_CONSTRAINTS + "\n"
+                    + FindCommand.MESSAGE_USAGE);
+        }
+
 
         return new FindCommand(names, addresses, priorities);
     }
@@ -70,11 +88,43 @@ public class FindCommandParser implements Parser<FindCommand> {
     private List<String> splitStrings(List<String> list) {
         List<String> newList = new ArrayList<>();
 
-        for (int i = 0; i < list.size(); i++) {
-            String currentString = list.get(i);
+        for (String currentString : list) {
             String[] separatedStrings = currentString.split("\\s+");
             newList.addAll(Arrays.asList(separatedStrings));
         }
         return newList;
+    }
+
+    /**
+     * Checks if the keywords in the given list follow the format of their corresponding field.
+     *
+     * @param keywords Keywords given by the user to filter a parameter by.
+     * @param validFormat The format that the keyword needs to adhere to.
+     * @return True if all keywords are valid according to the validFormat.
+     */
+    private boolean areValidKeywords(List<String> keywords, String validFormat) {
+        for (String keyword : keywords) {
+            if (!keyword.matches(validFormat)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Check for exact matching of priorities since it is an enum.
+     *
+     * @param priorities List of priorities given to filter the address book by.
+     * @return True if all priorities correspond to available priorities.
+     */
+    private boolean areValidPriorities(List<String> priorities) {
+        for (String priority : priorities) {
+            try {
+                ParserUtil.parsePriority(priority);
+            } catch (ParseException pe) {
+                return false;
+            }
+        }
+        return true;
     }
 }
