@@ -20,12 +20,17 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * and returns a DeleteCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-
-
     public DeleteCommand parse(String args) throws ParseException {
         try {
             String[] arr = args.split(",");
             int size = arr.length;
+            for (int i = 0; i < size; i++) {
+                if (!DeleteCommandParser.isNumber(arr[i].trim())) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                }
+            }
+
             int[] temp = new int[size];
             Index[] index = new Index[size];
 
@@ -44,6 +49,10 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
         }
+    }
+
+    public static boolean isNumber(String str) {
+        return str.matches("-?\\d+");
     }
 
 }
