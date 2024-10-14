@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -94,6 +95,7 @@ public class AddressBookTest {
     @Test
     public void hasPhone_personWithSamePhoneInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
+        addressBook.addPerson(BOB);
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertTrue(addressBook.hasPhone(editedAlice));
     }
@@ -112,6 +114,7 @@ public class AddressBookTest {
     @Test
     public void hasEmail_personWithSameEmailInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
+        addressBook.addPerson(BOB);
         Person editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertTrue(addressBook.hasEmail(editedAlice));
     }
