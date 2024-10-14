@@ -321,9 +321,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  Physiotherapist requests to schedule a new appointment for client
-2.  PhysioPal prompts for date and time
-3.  Physiotherapist provides date and time
-4.  PhysioPal creates appointment for client
+2.  PhysioPal creates appointment for client
 
     Use case ends.
 

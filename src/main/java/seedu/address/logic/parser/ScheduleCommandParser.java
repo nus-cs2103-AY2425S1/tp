@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -26,12 +27,13 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
     @Override
     public ScheduleCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_NOTE);
         try {
             String name = argMultimap.getPreamble();
             String date = argMultimap.getValue(PREFIX_DATE).orElse("");
             LocalDateTime dateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-            return new ScheduleCommand(name, new Schedule(date));
+            String note = argMultimap.getValue(PREFIX_NOTE).orElse("");
+            return new ScheduleCommand(name, new Schedule(date, note.trim()));
         } catch (DateTimeParseException e) {
             throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
         }
