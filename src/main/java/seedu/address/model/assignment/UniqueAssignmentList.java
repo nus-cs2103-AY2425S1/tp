@@ -133,7 +133,7 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code students} contains only unique students.
      */
     private boolean assignmentsAreUnique(List<Assignment> assignments) {
         for (int i = 0; i < assignments.size() - 1; i++) {
