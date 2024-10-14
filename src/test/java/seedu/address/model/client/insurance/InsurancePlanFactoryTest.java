@@ -6,7 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.client.exceptions.InsurancePlanException;
 
 class InsurancePlanFactoryTest {
 
@@ -16,7 +16,7 @@ class InsurancePlanFactoryTest {
             InsurancePlan insurancePlan = InsurancePlanFactory.createInsurancePlan(0);
             BasicPlan basicPlan = new BasicPlan();
             assertEquals(insurancePlan, basicPlan);
-        } catch (ParseException e) {
+        } catch (InsurancePlanException e) {
             fail();
         }
     }
@@ -26,7 +26,7 @@ class InsurancePlanFactoryTest {
         try {
             InsurancePlan insurancePlan = InsurancePlanFactory.createInsurancePlan(-1);
             fail();
-        } catch (ParseException e) {
+        } catch (InsurancePlanException e) {
             assertEquals(e.getMessage(), InsurancePlanFactory.INVALID_PLAN_ID_MESSAGE);
         }
     }
@@ -37,7 +37,7 @@ class InsurancePlanFactoryTest {
             InsurancePlan insurancePlan = InsurancePlanFactory.createInsurancePlan("Basic Insurance Plan");
             BasicPlan basicPlan = new BasicPlan();
             assertEquals(insurancePlan, basicPlan);
-        } catch (ParseException e) {
+        } catch (InsurancePlanException e) {
             fail();
         }
     }
@@ -47,7 +47,7 @@ class InsurancePlanFactoryTest {
         try {
             InsurancePlan insurancePlan = InsurancePlanFactory.createInsurancePlan("Invalid String");
             fail();
-        } catch (ParseException e) {
+        } catch (InsurancePlanException e) {
             assertEquals(e.getMessage(), InsurancePlanFactory.INVALID_PLAN_NAME_MESSAGE);
         }
     }
@@ -57,7 +57,7 @@ class InsurancePlanFactoryTest {
         try {
             InsurancePlan insurancePlan = InsurancePlanFactory.createInsurancePlan("");
             fail();
-        } catch (ParseException e) {
+        } catch (InsurancePlanException e) {
             assertEquals(e.getMessage(), InsurancePlanFactory.INVALID_PLAN_NAME_MESSAGE);
         }
     }

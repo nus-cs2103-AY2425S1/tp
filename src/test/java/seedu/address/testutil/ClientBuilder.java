@@ -3,12 +3,13 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.exceptions.ClaimException;
+import seedu.address.model.client.exceptions.InsurancePlanException;
 import seedu.address.model.client.insurance.InsurancePlansManager;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -100,7 +101,7 @@ public class ClientBuilder {
     public ClientBuilder withInsurancePlansManager(String insurancePlansString) {
         try {
             this.insurancePlansManager = new InsurancePlansManager(insurancePlansString);
-        } catch (ParseException e) {
+        } catch (InsurancePlanException e) {
             throw new RuntimeException(e);
         }
         return this;
@@ -114,7 +115,7 @@ public class ClientBuilder {
         assert this.insurancePlansManager != null;
         try {
             this.insurancePlansManager.addAllClaimsFromJson(claimsString);
-        } catch (ParseException e) {
+        } catch (ClaimException | InsurancePlanException e) {
             throw new RuntimeException(e);
         }
         return this;

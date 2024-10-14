@@ -10,9 +10,9 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.exceptions.InsurancePlanException;
 import seedu.address.model.client.insurance.InsurancePlan;
 import seedu.address.model.client.insurance.InsurancePlanFactory;
 import seedu.address.model.client.insurance.InsurancePlansManager;
@@ -33,19 +33,19 @@ public class AddInsuranceCommand extends Command {
     public static final String MESSAGE_ADD_INSURANCE_PLAN_SUCCESS = "Added Insurance Plan: %1$s, to Client: %2$s";
 
     private final Index index;
-    private final int insuranceID;
+    private final int insuranceId;
 
     /**
      * Constructs an AddInsuranceCommand Object with an Index Object and an integer for insuranceId.
      *
      * @param index       of the client in the filtered client list to add the insurance plan to.
-     * @param insuranceID of insurance plan to be added to the client.
+     * @param insuranceId of insurance plan to be added to the client.
      */
-    public AddInsuranceCommand(Index index, int insuranceID) {
-        requireAllNonNull(index, insuranceID);
+    public AddInsuranceCommand(Index index, int insuranceId) {
+        requireAllNonNull(index, insuranceId);
 
         this.index = index;
-        this.insuranceID = insuranceID;
+        this.insuranceId = insuranceId;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class AddInsuranceCommand extends Command {
         Client clientToEdit = lastShownList.get(index.getZeroBased());
 
         try {
-            InsurancePlan planToBeAdded = InsurancePlanFactory.createInsurancePlan(insuranceID);
+            InsurancePlan planToBeAdded = InsurancePlanFactory.createInsurancePlan(insuranceId);
 
             InsurancePlansManager clientToEditInsurancePlansManager = clientToEdit.getInsurancePlansManager();
             clientToEditInsurancePlansManager.checkIfPlanNotOwned(planToBeAdded);
@@ -72,9 +72,9 @@ public class AddInsuranceCommand extends Command {
 
             return new CommandResult(String.format(MESSAGE_ADD_INSURANCE_PLAN_SUCCESS,
                     planToBeAdded, Messages.format(clientWithAddedInsurancePlan)));
-        } catch (ParseException e) {
+        } catch (InsurancePlanException e) {
             throw new CommandException(
-                    String.format(e.getMessage(), insuranceID, Messages.format(clientToEdit)));
+                    String.format(e.getMessage(), insuranceId, Messages.format(clientToEdit)));
         }
     }
 
@@ -89,6 +89,6 @@ public class AddInsuranceCommand extends Command {
             return false;
         }
 
-        return index.equals(e.index) && insuranceID == e.insuranceID;
+        return index.equals(e.index) && insuranceId == e.insuranceId;
     }
 }

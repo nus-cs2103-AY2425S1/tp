@@ -5,7 +5,8 @@ import static seedu.address.model.client.insurance.InsurancePlanFactory.createIn
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.client.exceptions.ClaimException;
+import seedu.address.model.client.exceptions.InsurancePlanException;
 import seedu.address.model.client.insurance.claim.Claim;
 
 /**
@@ -37,10 +38,10 @@ public class InsurancePlansManager {
      *
      * @param insurancePlansString the string representing saved insurance plans. If no insurance plans have been
      *                             added, it should be "No added plans".
-     * @throws ParseException if the string cannot be parsed into valid insurance plans.
-     * @throws AssertionError if the insurancePlansString is an empty string or contains only whitespace.
+     * @throws InsurancePlanException if the string cannot be parsed into valid insurance plans.
+     * @throws AssertionError         if the insurancePlansString is an empty string or contains only whitespace.
      */
-    public InsurancePlansManager(String insurancePlansString) throws ParseException {
+    public InsurancePlansManager(String insurancePlansString) throws InsurancePlanException {
         this();
         assert !insurancePlansString.trim().isEmpty() : "Saved insurance plans string must not be an empty string. "
                 + "If no insurance plans have been added, it will be \"No added plans\" ";
@@ -83,30 +84,30 @@ public class InsurancePlansManager {
      * Checks if the plan being queried is already owned by the client.
      *
      * @param plan Insurance plan to be checked.
-     * @throws ParseException if the plan is not owned by the client.
+     * @throws InsurancePlanException if the plan is not owned by the client.
      */
-    public void checkIfPlanOwned(InsurancePlan plan) throws ParseException {
+    public void checkIfPlanOwned(InsurancePlan plan) throws InsurancePlanException {
         for (InsurancePlan p : insurancePlans) {
             if (p.equals(plan)) {
                 return;
             }
         }
-        throw new ParseException(PLAN_NOT_DETECTED_MESSAGE);
+        throw new InsurancePlanException(PLAN_NOT_DETECTED_MESSAGE);
     }
 
     /**
      * Checks if the plan being queried is not owned yet by the client.
      *
      * @param plan Insurance plan to be checked.
-     * @throws ParseException if the plan is owned by the client.
+     * @throws InsurancePlanException if the plan is owned by the client.
      */
-    public void checkIfPlanNotOwned(InsurancePlan plan) throws ParseException {
+    public void checkIfPlanNotOwned(InsurancePlan plan) throws InsurancePlanException {
         if (insurancePlans.isEmpty()) {
             return;
         }
         for (InsurancePlan p : insurancePlans) {
             if (p.equals(plan)) {
-                throw new ParseException(DUPLICATE_PLAN_DETECTED_MESSAGE);
+                throw new InsurancePlanException(DUPLICATE_PLAN_DETECTED_MESSAGE);
             }
         }
     }
@@ -116,11 +117,11 @@ public class InsurancePlansManager {
      *
      * @param insurancePlan The insurance plan the claim is to be added to.
      * @param claim         The claim that is to be added to the insurance plan.
-     * @throws ParseException if the claimId already exists.
+     * @throws ClaimException if the claimId already exists.
      */
-    public void addClaimToInsurancePlan(InsurancePlan insurancePlan, Claim claim) throws ParseException {
+    public void addClaimToInsurancePlan(InsurancePlan insurancePlan, Claim claim) throws ClaimException {
         if (this.claimIds.contains(claim.getClaimId())) {
-            throw new ParseException(DUPLICATE_CLAIM_ID_MESSAGE);
+            throw new ClaimException(DUPLICATE_CLAIM_ID_MESSAGE);
         }
         for (InsurancePlan p : insurancePlans) {
             if (p.equals(insurancePlan)) {
@@ -161,9 +162,9 @@ public class InsurancePlansManager {
      * Adds all the claims string from JSON file into their respective insurance plans.
      *
      * @param claimsJson String obtained from JSON file of all the claims.
-     * @throws ParseException if there is an error parsing the data from the JSON file.
+     * @throws InsurancePlanException if there is an error parsing the data from the JSON file.
      */
-    public void addAllClaimsFromJson(String claimsJson) throws ParseException {
+    public void addAllClaimsFromJson(String claimsJson) throws InsurancePlanException, ClaimException {
         String[] claimsStringArray = claimsJson.split(",");
 
         if (claimsStringArray[0].equals("No claims yet")) {
