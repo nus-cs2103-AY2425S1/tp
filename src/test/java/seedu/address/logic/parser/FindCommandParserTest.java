@@ -57,10 +57,8 @@ public class FindCommandParserTest {
     }
     @Test
     public void parse_validPhoneArgs_returnsFindCommand() throws ParseException {
-        // Mixed phone numbers
         FindCommand findCommand = parser.parse("12345 67890");
 
-        // Create a sample person with matching phone numbers
         Person personMatchingFirstPhone = new Person(
                 new Name("Alice"),
                 new Phone("12345"),
@@ -81,7 +79,7 @@ public class FindCommandParserTest {
         assertTrue(findCommand.getPredicate().test(personMatchingSecondPhone));
     }
     @Test
-    public void parse_validNameAndPhoneArgs_returnsFindCommand() throws ParseException  {
+    public void parse_validNameAndPhoneArgs_returnsFindCommand() throws ParseException {
         FindCommand findCommand = parser.parse("Alice 12345");
         Set<Tag> tagsForAlice = new HashSet<>(Arrays.asList(new Tag("friend")));
         Person personMatchingName = new Person(
