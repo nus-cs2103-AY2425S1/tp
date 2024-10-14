@@ -1,16 +1,19 @@
 package tutorease.address.ui;
 
 import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.Region;
 import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.model.lesson.Lesson;
 
 /**
  * Panel containing the list of lessons.
  */
-public class LessonListPanel {
+public class LessonListPanel extends UiPart<Region> {
     private static final String FXML = "LessonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(LessonListPanel.class);
 
@@ -38,7 +41,8 @@ public class LessonListPanel {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new LessonCard(lesson, getIndex() + 1).getRoot());
+                setGraphic(new LessonCard(lesson).getRoot());
             }
         }
+    }
 }
