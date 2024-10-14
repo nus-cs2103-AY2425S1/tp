@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.Model;
+import seedu.address.model.client.Client;
 
 /**
  * Lists all persons in the address book to the user.
@@ -28,6 +29,7 @@ public class ListCommand extends Command {
         PROPERTIES;
     }
 
+    /* For parsing */
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all existing properties, sellers, buyers, "
@@ -66,14 +68,17 @@ public class ListCommand extends Command {
         switch (key) {
         case BUYERS:
             // Logic to list buyers
+            model.updateFilteredClientList(Client::isBuyer);
             System.out.println("Listing all buyers");
             break;
         case SELLERS:
             // Logic to list sellers
+            model.updateFilteredClientList(Client::isSeller);
             System.out.println("Listing all sellers");
             break;
         case CLIENTS:
-            // Logic to list clients
+            // Logic to list clients (i.e. buyers and sellers)
+            model.updateFilteredClientList(client -> true);
             System.out.println("Listing all clients");
             break;
         case PROPERTIES:
