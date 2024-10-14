@@ -91,12 +91,6 @@ public interface Model {
     boolean hasGroup(Group group);
 
     /**
-     * Deletes the given group.
-     * The group must exist in the address book.
-     */
-    void deleteGroup(Group group);
-
-    /**
      * Adds the given group.
      * {@code group} must not already exist in the address book.
      */

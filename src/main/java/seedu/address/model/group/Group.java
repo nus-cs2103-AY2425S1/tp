@@ -47,17 +47,9 @@ public class Group {
     }
 
     /**
-     * Returns true if group has students.
-     */
-    public boolean hasStudents() {
-        return !students.isEmpty();
-    }
-
-    /**
      * Adds a given student into the {@code group} object.
      * There can be a maximum of 5 students in each group.
-     *
-     * @param student The {@code student} object to be added.
+     * @param student  The {@code student} object to be added.
      */
     public void add(Student student) {
         if (students.size() < MAXIMUM_STUDENTS_IN_GROUP) {
@@ -79,7 +71,7 @@ public class Group {
         }
 
         return otherGroup != null
-            && otherGroup.getGroupName().equals(getGroupName());
+                && otherGroup.getGroupName().equals(getGroupName());
     }
 
     /**
@@ -99,7 +91,7 @@ public class Group {
 
         Group otherStudent = (Group) other;
         return groupName.equals(otherStudent.groupName)
-            && students.equals(otherStudent.students);
+                && students.equals(otherStudent.students);
     }
 
     @Override
@@ -111,8 +103,8 @@ public class Group {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("groupname", groupName)
-            .add("students", students)
-            .toString();
+                .add("groupname", groupName)
+                .add("students", students)
+                .toString();
     }
 }

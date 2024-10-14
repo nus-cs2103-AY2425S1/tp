@@ -7,8 +7,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.group.exceptions.DuplicateGroupException;
-import seedu.address.model.group.exceptions.GroupNotFoundException;
+import seedu.address.model.student.exceptions.DuplicatePersonException;
+import seedu.address.model.student.exceptions.PersonNotFoundException;
 
 public class UniqueGroupListTest {
 
@@ -39,7 +39,7 @@ public class UniqueGroupListTest {
     @Test
     public void add_duplicateGroup_throwsDuplicateGroupException() {
         uniqueGroupList.add(DUMMY_GROUP);
-        assertThrows(DuplicateGroupException.class, () -> uniqueGroupList.add(DUMMY_GROUP));
+        assertThrows(DuplicatePersonException.class, () -> uniqueGroupList.add(DUMMY_GROUP));
     }
 
     @Test
@@ -54,7 +54,7 @@ public class UniqueGroupListTest {
 
     @Test
     public void setGroup_targetGroupNotInList_throwsGroupNotFoundException() {
-        assertThrows(GroupNotFoundException.class, () -> uniqueGroupList.setGroup(DUMMY_GROUP, DUMMY_GROUP));
+        assertThrows(PersonNotFoundException.class, () -> uniqueGroupList.setGroup(DUMMY_GROUP, DUMMY_GROUP));
     }
 
     @Test
@@ -64,7 +64,7 @@ public class UniqueGroupListTest {
 
     @Test
     public void remove_groupDoesNotExist_throwsGroupNotFoundException() {
-        assertThrows(GroupNotFoundException.class, () -> uniqueGroupList.remove(DUMMY_GROUP));
+        assertThrows(PersonNotFoundException.class, () -> uniqueGroupList.remove(DUMMY_GROUP));
     }
 
     @Test
@@ -83,7 +83,7 @@ public class UniqueGroupListTest {
     @Test
     public void setGroup_listWithDuplicateGroup_throwsDuplicatePersonException() {
         uniqueGroupList.add(DUMMY_GROUP);
-        assertThrows(DuplicateGroupException.class, () -> uniqueGroupList.setGroup(DUMMY_GROUP, DUMMY_GROUP));
+        assertThrows(DuplicatePersonException.class, () -> uniqueGroupList.setGroup(DUMMY_GROUP, DUMMY_GROUP));
     }
 
     @Test

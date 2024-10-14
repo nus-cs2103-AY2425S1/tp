@@ -50,8 +50,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setStateStudents() {
-        this.userPrefs.setStateStudents();
-        ;
+        this.userPrefs.setStateStudents();;
     }
 
     @Override
@@ -142,12 +141,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteGroup(Group group) {
-        addressBook.removeGroup(group);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
-    }
-
-    @Override
     public void addGroup(Group group) {
         addressBook.addGroup(group);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
@@ -224,9 +217,9 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-            && userPrefs.equals(otherModelManager.userPrefs)
-            && filteredStudents.equals(otherModelManager.filteredStudents)
-            && filteredGroups.equals(otherModelManager.filteredGroups);
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredStudents.equals(otherModelManager.filteredStudents)
+                && filteredGroups.equals(otherModelManager.filteredGroups);
     }
 
 }

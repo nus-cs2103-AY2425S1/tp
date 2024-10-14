@@ -1,9 +1,0 @@
-diff a/src/main/java/seedu/address/logic/Messages.java b/src/main/java/seedu/address/logic/Messages.java	(rejected hunks)
-@@ -20,7 +20,6 @@
-     public static final String MESSAGE_DUPLICATE_FIELDS =
-                 "Multiple values specified for the following single-valued field(s): ";
-     public static final String MESSAGE_STUDENT_NO_NOT_FOUND = "The student number provided is not found";
--    public static final String MESSAGE_GROUP_NOT_FOUND = "The group name provided is not found";
-     public static final String MESSAGE_GROUP_NAME_NOT_FOUND = "The group name provided is not found";
- 
-     /**

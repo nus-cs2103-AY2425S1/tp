@@ -99,7 +99,7 @@ public class PersonBuilder {
      */
     public Student build() {
         return group.isPresent()
-            ? new Student(name, email, tags, studentNumber, group) : new Student(name, email, tags, studentNumber);
+                ? new Student(name, email, tags, studentNumber, group) : new Student(name, email, tags, studentNumber);
     }
 
 }
