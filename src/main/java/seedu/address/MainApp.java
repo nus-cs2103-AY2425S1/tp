@@ -16,21 +16,25 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.MeetUpList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyMeetUpList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.util.SampleMeetUpList;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonMeetUpListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.MeetUpListStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
-
 /**
  * Runs the application.
  */
@@ -58,7 +62,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        MeetUpListStorage meetUpListStorage = new JsonMeetUpListStorage(userPrefs.getMeetUpListFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, meetUpListStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -74,9 +79,12 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using meetUp file : " + storage.getMeetUpListFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
+        Optional<ReadOnlyMeetUpList> meetUpListOptional;
         ReadOnlyAddressBook initialData;
+        ReadOnlyMeetUpList initialMeetUpList;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -90,7 +98,21 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        try {
+            meetUpListOptional = storage.readMeetUpList();
+            if (!meetUpListOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getMeetUpListFilePath()
+                        + " populated with a sample MeetUpList.");
+            }
+            initialMeetUpList = meetUpListOptional.orElseGet(SampleMeetUpList::getSampleMeetUpList);
+            logger.info("initiala list is" + initialMeetUpList);
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getMeetUpListFilePath() + " could not be loaded."
+                    + " Will be starting with an empty MeetUpList.");
+            initialMeetUpList = new MeetUpList();
+        }
+
+        return new ModelManager(initialData, userPrefs, initialMeetUpList);
     }
 
     private void initLogging(Config config) {

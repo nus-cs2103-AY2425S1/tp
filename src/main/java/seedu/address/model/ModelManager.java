@@ -22,26 +22,33 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final MeetUpList meetUpList;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final FilteredList<MeetUp> filteredMeetUps = null; // TODO
+    private final FilteredList<MeetUp> filteredMeetUps;
     private final FilteredList<Schedule> filteredSchedules = null; //TODO
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlyMeetUpList meetUpList) {
+        requireAllNonNull(addressBook, userPrefs, meetUpList);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs
+                + "and meet up list " + meetUpList);
+
+        logger.info("initial meet up list contains " + meetUpList);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.meetUpList = new MeetUpList(meetUpList);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredMeetUps = new FilteredList<>(this.meetUpList.getMeetUpList());
+
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new MeetUpList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -161,11 +168,40 @@ public class ModelManager implements Model {
         return;
 =======
     //=========== Filtered MeetUp List Accessors =============================================================
+    public Path getMeetUpListFilePath() {
+        return userPrefs.getMeetUpListFilePath();
+    }
+
+    public void setMeetUpListFilePath(Path meetUpListFilePath) {
+        requireNonNull(meetUpListFilePath);
+        userPrefs.setMeetUpListFilePath(meetUpListFilePath);
+    }
+
+    public void setMeetUpList(ReadOnlyMeetUpList meetUpList) {
+        this.meetUpList.resetData(meetUpList);
+    }
+
+    /** Returns the MeetUpList */
+    public ReadOnlyMeetUpList getMeetUpList() {
+        return meetUpList;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<MeetUp> getFilteredMeetUpList() {
+        return filteredMeetUps;
+    }
     @Override
     public void updateFilteredMeetUpList(Predicate<MeetUp> predicate) {
         requireNonNull(predicate);
         filteredMeetUps.setPredicate(predicate);
+<<<<<<< HEAD
         // TODO
 >>>>>>> da45caa56c61434831d7cc3d1288d4aeed9daae7
+=======
+>>>>>>> 92c76a474c2477b310b3901bcc1b59c0393826c7
     }
 }

@@ -14,6 +14,7 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<MeetUp> PREDICATE_SHOW_ALL_MEETUPS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -85,6 +86,29 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    // ============================ MeetUp Model - To be refactored ==========================
+
+    /**
+     * Returns the user prefs' meet up list file path.
+     */
+    Path getMeetUpListFilePath();
+
+    /**
+     * Sets the user prefs' meet up list file path.
+     */
+    void setMeetUpListFilePath(Path meetUpListFilePath);
+
+    /**
+     * Replaces meet up list data with the data in {@code meetUpList}.
+     */
+    void setMeetUpList(ReadOnlyMeetUpList meetUpList);
+
+    /** Returns the MeetUpList */
+    ReadOnlyMeetUpList getMeetUpList();
+
+    /** Returns an unmodifiable view of the filtered meetup list */
+    ObservableList<MeetUp> getFilteredMeetUpList();
 
     /**
 <<<<<<< HEAD
