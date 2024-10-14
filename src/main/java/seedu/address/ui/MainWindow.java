@@ -190,8 +190,10 @@ public class MainWindow extends UiPart<Stage> {
 
     public void setTabToEvents(CommandResult commandResult) {
         if (commandResult.isShowDetails()) {
+            eventListPanel.setDetailedView();
             tabPanePlaceholder.getSelectionModel().select(1);
         } else {
+            eventListPanel.setSimplifiedView();
             tabPanePlaceholder.getSelectionModel().select(1);
         }
     }

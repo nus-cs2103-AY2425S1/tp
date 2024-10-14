@@ -31,10 +31,16 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.setCellFactory(listView -> new SimplifiedPersonListViewCell());
     }
 
+    /**
+     * Changes the view of the person list to a simplified view.
+     */
     public void setSimplifiedView() {
         personListView.setCellFactory(listView -> new SimplifiedPersonListViewCell());
     }
 
+    /**
+     * Changes the view of the person list to a detailed view.
+     */
     public void setDetailedView() {
         personListView.setCellFactory(listView -> new PersonListViewCell());
     }
