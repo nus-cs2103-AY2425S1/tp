@@ -3,6 +3,7 @@ package seedu.sellsavvy.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.person.Address;
 import seedu.sellsavvy.model.person.Email;
@@ -27,7 +28,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
-    private OrderList orders; //TODO: withOrders() method for creating orders on Person creation
+    private OrderList orders;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -90,6 +91,18 @@ public class PersonBuilder {
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code OrderList} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withOrders(Order... orders) {
+        OrderList orderList = new OrderList();
+        for (Order order: orders) {
+            orderList.add(order);
+        }
+        this.orders = orderList;
         return this;
     }
 

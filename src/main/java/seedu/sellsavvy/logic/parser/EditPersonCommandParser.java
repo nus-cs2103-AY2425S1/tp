@@ -20,7 +20,7 @@ import seedu.sellsavvy.logic.parser.exceptions.ParseException;
 import seedu.sellsavvy.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new EditPersonCommand object
+ * Parses input arguments and creates a new EditPersonCommand object.
  */
 public class EditPersonCommandParser implements Parser<EditPersonCommand> {
 

@@ -127,4 +127,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
+
+    /**
+     * Creates a copy of all data in this {@code AddressBook}.
+     */
+    public AddressBook createCopy() {
+        AddressBook newAddressBook = new AddressBook();
+        newAddressBook.setPersons(persons.copyPersons().asUnmodifiableObservableList());
+        return newAddressBook;
+    }
 }
