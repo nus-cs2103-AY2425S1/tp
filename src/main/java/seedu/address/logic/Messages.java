@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonDescriptor;
 
 /**
  * Container for user visible messages.
@@ -35,6 +36,13 @@ public class Messages {
      * Formats the {@code person} for display to the user.
      */
     public static String formatPerson(Person person) {
+        return formatPerson(person.getPersonDescriptor());
+    }
+
+    /**
+     * Formats the {@code person} for display to the user.
+     */
+    public static String formatPerson(PersonDescriptor person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
                 .append("; Phone: ")
