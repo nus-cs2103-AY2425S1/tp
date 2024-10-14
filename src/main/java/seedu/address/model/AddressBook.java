@@ -1,17 +1,16 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.volunteer.UniqueVolunteerList;
 import seedu.address.model.volunteer.Volunteer;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Wraps all data at the address-book level
@@ -98,7 +97,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given volunteer {@code target} in the list with {@code editedVolunteer}.
      * {@code target} must exist in the volunteer book.
-     * The volunteer identity of {@code editedVolunteer} must not be the same as another existing volunteer in the volunteer book.
+     * The volunteer identity of {@code editedVolunteer} must not be the same as another
+     * existing volunteer in the volunteer book.
      */
     public void setVolunteer(Volunteer target, Volunteer editedVolunteer) {
         requireNonNull(editedVolunteer);
@@ -137,8 +137,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The event identity of {@code editedEvent} must not be the same as another existing event in the address book.
      *
      * NOTE: This method is used for editing events, which is NOT SUPPORTED YET
+     * Wei Kiat Note: Renamed this due to style errors
      */
-    public void setEvents(Event target, Event editedEvent) {
+    public void setEventsTbd(Event target, Event editedEvent) {
         requireNonNull(editedEvent);
 
         events.setEvent(target, editedEvent);
@@ -152,9 +153,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         events.remove(key);
 
     }
-
     //// util methods
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)

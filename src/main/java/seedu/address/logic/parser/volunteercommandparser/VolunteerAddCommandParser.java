@@ -1,6 +1,16 @@
-package seedu.address.logic.parser.volunteerCommandParser;
+package seedu.address.logic.parser.volunteercommandparser;
 
-import seedu.address.logic.commands.volunteerCommands.VolunteerAddCommand;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_AVAILABLE_DATE;
+import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_START_TIME;
+
+import java.util.stream.Stream;
+
+import seedu.address.logic.commands.volunteercommands.VolunteerAddCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Prefix;
@@ -12,16 +22,6 @@ import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
 import seedu.address.model.volunteer.Time;
 import seedu.address.model.volunteer.Volunteer;
-
-import java.util.stream.Stream;
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_AVAILABLE_DATE;
-import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_END_TIME;
-import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_START_TIME;
 
 public class VolunteerAddCommandParser {
     /**
