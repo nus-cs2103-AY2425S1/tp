@@ -31,7 +31,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             throw new ParseException(MESSAGE_MISSING_INDEX);
         }
 
-
         String entityType = splitArgs[0]; // either "contact, "job" or "company"
         String indexString = splitArgs[1];
 
