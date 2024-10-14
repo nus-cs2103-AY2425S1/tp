@@ -29,6 +29,7 @@ public class Client extends Contact {
      * @param address A valid address.
      * @param date    A valid date.
      * @param tags    A set of tags associated with the client.
+     * @param id      A valid id.
      */
     public Client(Name name, Phone phone, Email email, Address address, Date date, Set<Tag> tags, Id id) {
         super(name, phone, email, address, tags, id);
@@ -68,6 +69,7 @@ public class Client extends Contact {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("id", this.getId())
                 .add("name", this.getName())
                 .add("phone", this.getPhone())
                 .add("email", this.getEmail())
