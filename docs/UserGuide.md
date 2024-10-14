@@ -113,7 +113,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Hiring a person by name: `hire`
+### Hiring a person by name and job: `hire`
 
 Changes an existing person's status to "Hired" in the address book.
 
@@ -128,7 +128,7 @@ Format: `hire n/NAME j/JOB`
   `Software Engineer`
 
 
-### Rejecting a person by name: `reject`
+### Rejecting a person by name and job: `reject`
 
 Changes an existing person's status to "Rejected" in the address book.
 
@@ -137,6 +137,19 @@ Format: `reject n/NAME j/JOB`
 * Changes the person's status to `Rejected`
 * Both the name of the person and the job that he/she is applying for must be provided.
 * Existing status will be updated to the `Rejected` status.
+* The search is case-insensitive for both name and job. e.g `hans` will match `Hans` and `software engineer` will match
+  `Software Engineer`
+* Only full words will be matched e.g. `Han` will not match `Hans` and `software engineers` will not match
+  `Software Engineer`
+
+### View a person's status by name and job: `view`
+
+Changes an existing person's status to "Rejected" in the address book.
+
+Format: `view n/NAME j/JOB`
+
+* Views the person's status (Hired / Rejected / Pending)
+* Both the name of the person and the job that he/she is applying for must be provided.
 * The search is case-insensitive for both name and job. e.g `hans` will match `Hans` and `software engineer` will match
   `Software Engineer`
 * Only full words will be matched e.g. `Han` will not match `Hans` and `software engineers` will not match
