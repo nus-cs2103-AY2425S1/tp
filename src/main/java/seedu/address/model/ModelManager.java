@@ -173,6 +173,7 @@ public class ModelManager implements Model {
         requireNonNull(group);
         requireNonNull(student);
         addressBook.deleteStudentFromGroup(group, student);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Student List Accessors =============================================================
