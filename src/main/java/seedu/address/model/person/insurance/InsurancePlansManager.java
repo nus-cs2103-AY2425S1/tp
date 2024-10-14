@@ -4,7 +4,6 @@ import static seedu.address.model.person.insurance.InsurancePlanFactory.createIn
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Objects;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.insurance.claim.Claim;
