@@ -13,7 +13,12 @@ import java.util.Set;
 import seedu.ddd.logic.commands.ListCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.Model;
-import seedu.ddd.model.contact.common.*;
+import seedu.ddd.model.contact.common.ClientTypePredicate;
+import seedu.ddd.model.contact.common.ContactContainsTagPredicate;
+import seedu.ddd.model.contact.common.ContactIdPredicate;
+import seedu.ddd.model.contact.common.Id;
+import seedu.ddd.model.contact.common.NameContainsKeywordsPredicate;
+import seedu.ddd.model.contact.common.VendorTypePredicate;
 import seedu.ddd.model.tag.Tag;
 
 /**
