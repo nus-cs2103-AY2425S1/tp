@@ -15,29 +15,33 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final String HELP_INTRO = "Below are some basic instructions to get started using PROperty!";
     private static final String HELP_ADD_COMMAND = "Add Command \n"
-            + "Format: add n/NAME p/NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARK]\n"
-            + "Example: add n/John Doe p/12345678 t/Student\n"
-            + "Items in the [square brackets] are optional and can be input in any order!";
+            + "- Format: add n/NAME p/NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARK]\n"
+            + "- Example: add n/John Doe p/12345678 t/Student\n"
+            + "- Items in the [square brackets] are optional and can be input in any order!";
     private static final String HELP_EDIT_COMMAND = "Edit Command \n"
-            + "Format: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARK]\n"
-            + "Example: edit 1 p/87654321"
-            + "INDEX is the index of the customer displayed. Items in the [square brackets] are optional "
-            + "and can be input in any order!";
+            + "- Format: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARK]\n"
+            + "- Example: edit 1 p/87654321"
+            + "- INDEX is the index of the customer displayed. Items in the [square brackets] are optional "
+            + "- and can be input in any order!";
     private static final String HELP_DELETE_COMMAND = "Delete Command\n"
-            + "Format: delete INDEX\n"
-            + "Example: delete 1\n"
-            + "INDEX is the index of the customer displayed.";
+            + "- Format: delete INDEX\n"
+            + "- Example: delete 1\n"
+            + "- INDEX is the index of the customer displayed.";
     private static final String HELP_LIST_COMMAND = "List Command\n"
-            + "Format: list\n"
-            + "Example: list";
+            + "- Format: list\n"
+            + "- Example: list";
     private static final String HELP_FIND_COMMAND = "Find Command\n"
-            + "Format: find KEYWORDS [MORE_KEYWORDS]\n"
-            + "Example: find John\n"
-            + "Only names can be searched; Only full words will be matched. "
+            + "- Format: find KEYWORDS [MORE_KEYWORDS]\n"
+            + "- Example: find John Doe\n"
+            + "- Only names can be searched; Only full words will be matched. "
             + "The command is case insensitive. When more than one keyword is used,"
             + " persons matching at least one keyword will be returned.";
+    private static final String HELP_FINDTAG_COMMAND = "Findtag Command\n"
+            + "- Format: findtag TAG [MORE_TAGS]\n"
+            + "- Example: findtag HDB Condo\n"
+            + "- Items in the [square brackets] are optional.";
     private static final String HELP_MORE_INFORMATION = "For more detailed information, "
-            + "visit the PROperty User Guide at: https://ay2425s1-cs2103t-f15-3.github.io/tp/UserGuide.html";
+            + "- visit the PROperty User Guide at: https://ay2425s1-cs2103t-f15-3.github.io/tp/UserGuide.html";
 
 
     private static final String HELP_MESSAGE = HELP_INTRO
@@ -52,12 +56,14 @@ public class HelpWindow extends UiPart<Stage> {
             + "\n\n"
             + HELP_FIND_COMMAND
             + "\n\n"
+            + HELP_FINDTAG_COMMAND
+            + "\n\n"
             + HELP_MORE_INFORMATION;
 
     private static final double DEFAULT_WIDTH = 800;
-    private static final double DEFAULT_HEIGHT = 550;
+    private static final double DEFAULT_HEIGHT = 650;
     private static final double MIN_WIDTH = 800;
-    private static final double MIN_HEIGHT = 550;
+    private static final double MIN_HEIGHT = 650;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
