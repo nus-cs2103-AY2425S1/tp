@@ -7,7 +7,7 @@ import seedu.sellsavvy.logic.commands.ordercommands.ListOrderCommand;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DeletePersonCommand object
+ * Parses input arguments and creates a new ListOrderCommand object
  */
 public class ListOrderCommandParser implements Parser<ListOrderCommand> {
 
