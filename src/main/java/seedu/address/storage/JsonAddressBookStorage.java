@@ -26,11 +26,20 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     private Path filePath;
     private Path archivePath;
 
+    /**
+     * Create a  JsonAddressBookStorage with file Path and default archive path
+     * @param filePath the file path.
+     * */
     public JsonAddressBookStorage(Path filePath) {
         this.filePath = filePath;
         this.archivePath = DEFAULT_ARCHIVEPATH;
     }
 
+    /**
+     * Create a JsonAddressBookStorage with file path and archive path
+     * @param filePath the file path.
+     * @param archivePath  the archive path.
+     * */
     public JsonAddressBookStorage(Path filePath, Path archivePath) {
         this.filePath = filePath;
         this.archivePath = archivePath;
