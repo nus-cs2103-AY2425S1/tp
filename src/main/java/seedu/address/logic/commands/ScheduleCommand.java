@@ -35,7 +35,7 @@ public class ScheduleCommand extends Command {
             + PREFIX_START_TIME + "09-10-2024 09:00 "
             + PREFIX_END_TIME + "09-10-2024 10:00 ";
 
-    public static final String MESSAGE_SUCCESS = "New meeting added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New meeting with %1$s added: %2$s";
 
     private final Meeting toAdd;
     private final Index index;
@@ -63,8 +63,9 @@ public class ScheduleCommand extends Command {
 
         Person personToScheduleMeetingWith = lastShownList.get(index.getZeroBased());
 
-        model.addMeeting(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        model.addMeeting(personToScheduleMeetingWith, toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, personToScheduleMeetingWith.getName(),
+                Messages.format(toAdd)));
     }
 
     @Override

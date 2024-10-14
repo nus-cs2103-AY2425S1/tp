@@ -112,8 +112,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
-    public void addMeeting(Meeting m) {
-        meetings.addMeeting(m);
+    public void addMeeting(Person p, Meeting m) {
+        p.getMeetings().addMeeting(m);
     }
 
     @Override
