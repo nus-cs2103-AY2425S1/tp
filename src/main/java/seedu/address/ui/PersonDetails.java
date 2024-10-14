@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -26,6 +25,7 @@ public class PersonDetails extends UiPart<Region> {
      */
     public PersonDetails() {
         super(FXML);
+
     }
 
     /**
@@ -39,14 +39,13 @@ public class PersonDetails extends UiPart<Region> {
         if (person != null) {
             logger.info(person.toString());
             Label notes = new Label("Notes:");
-            notes.setStyle("-fx-text-fill: white;");
+            notes.setId("notes-label");
             personNotes.getChildren().add(notes);
+
             // Use name as placeholder (update after Notes backend is done)
             Label nameLabel = new Label(person.getName().toString());
-            nameLabel.setStyle("-fx-text-fill: white;");
+            nameLabel.setId("notes-label");
             personNotes.getChildren().add(nameLabel);
         }
     }
-
-
 }

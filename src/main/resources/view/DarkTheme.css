@@ -360,3 +360,7 @@
     -fx-background-radius: 5;
     -fx-font-size: 11;
 }
+/* Details Panel */
+#notes-label {
+    -fx-text-fill: white;
+}
