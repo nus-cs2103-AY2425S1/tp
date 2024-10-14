@@ -68,7 +68,7 @@ class JsonSerializableAddressBook {
         }
         for (JsonAdaptedSession jsonAdaptedSession : sessions) {
             Session session = jsonAdaptedSession.toModelType();
-            if (addressBook.hasSessions(session)) {
+            if (addressBook.hasSession(session)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_SESSION);
             }
             addressBook.addSession(session);
