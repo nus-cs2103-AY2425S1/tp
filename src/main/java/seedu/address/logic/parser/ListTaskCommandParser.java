@@ -25,17 +25,19 @@ public class ListTaskCommandParser implements Parser<ListTaskCommand> {
     public ListTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_GROUP_NAME);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME) && argMultimap.getPreamble().isEmpty()) {
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_GROUP_NAME);
+            GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
+            Group group = new Group(groupName);
+            return new ListTaskCommand(group);
+        } else if (args.trim().equals("")) {
+            return new ListTaskCommand();
+        } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListTaskCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_GROUP_NAME);
-        GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
-        Group group = new Group(groupName);
 
-        return new ListTaskCommand(group);
+
     }
 
     /**

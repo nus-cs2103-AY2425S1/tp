@@ -38,6 +38,13 @@ public class ListTaskCommand extends Command {
         this.groupOptional = Optional.<Group>of(group);
     }
 
+    /**
+     * Creates an ListTaskCommand to add the specified {@code Task}
+     */
+    public ListTaskCommand() {
+        this.groupOptional = Optional.empty();
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

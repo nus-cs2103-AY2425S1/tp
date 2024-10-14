@@ -23,7 +23,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.group.exception.GroupNotFoundException;
+import seedu.address.model.student.exceptions.PersonNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.testutil.PersonBuilder;
