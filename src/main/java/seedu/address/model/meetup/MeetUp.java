@@ -8,7 +8,7 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents a Meetup in the address book.
+ * Represents a MeetUp in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class MeetUp { //TODO
