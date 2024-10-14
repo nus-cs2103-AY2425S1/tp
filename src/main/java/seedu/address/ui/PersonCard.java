@@ -41,13 +41,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label schedule;
+    Label schedule;
     @FXML
-    private Label note;
+    Label note;
     @FXML
-    private Label reminder;
+    Label reminder;
     @FXML
-    private FlowPane tags;
+    FlowPane tags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
