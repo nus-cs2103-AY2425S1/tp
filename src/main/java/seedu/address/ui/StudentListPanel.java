@@ -27,13 +27,13 @@ public class StudentListPanel extends UiPart<Region> {
     public StudentListPanel(ObservableList<Student> studentList) {
         super(FXML);
         personListView.setItems(studentList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        personListView.setCellFactory(listView -> new StudentListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Student} using a {@code PersonCard}.
      */
-    class PersonListViewCell extends ListCell<Student> {
+    class StudentListViewCell extends ListCell<Student> {
         @Override
         protected void updateItem(Student student, boolean empty) {
             super.updateItem(student, empty);
