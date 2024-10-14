@@ -19,12 +19,13 @@ public class AddPropertyToBuyCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final Property property = new PropertyBuilder().build();
-    private final Index validIndex = Index.fromZeroBased(0);
-    private final Index invalidIndex = Index.fromZeroBased(-1);
+    private final Index indexWithProperty = Index.fromZeroBased(7);
+    private final Index indexWithoutProperty = Index.fromZeroBased(0);
+    private final Index invalidIndex = Index.fromZeroBased(1000);
 
     @Test
     public void execute_validModel_success() throws Exception {
-        AddPropertyToBuyCommand command = new AddPropertyToBuyCommand(validIndex, property);
+        AddPropertyToBuyCommand command = new AddPropertyToBuyCommand(indexWithoutProperty, property);
 
         CommandResult result = command.execute(model);
 
@@ -33,11 +34,9 @@ public class AddPropertyToBuyCommandTest {
 
     @Test
     public void execute_duplicateProperty_throwsCommandException() throws Exception {
-        AddPropertyToBuyCommand command1 = new AddPropertyToBuyCommand(validIndex, property);
-        command1.execute(model);
-        AddPropertyToBuyCommand command2 = new AddPropertyToBuyCommand(validIndex, property);
+        AddPropertyToBuyCommand command = new AddPropertyToBuyCommand(indexWithProperty, property);
 
-        assertThrows(CommandException.class, () -> command2.execute(model),
+        assertThrows(CommandException.class, () -> command.execute(model),
                 AddPropertyToBuyCommand.MESSAGE_DUPLICATE_PROPERTY);
     }
 
