@@ -1,5 +1,11 @@
 package seedu.ddd.testutil;
 
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_SERVICE;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,12 +23,13 @@ import seedu.ddd.model.util.SampleDataUtil;
  * A utility class to help with building Vendor objects.
  */
 public class VendorBuilder {
-    public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_SERVICE = "Catering";
+    public static final String DEFAULT_NAME = VALID_NAME_BOB;
+    public static final String DEFAULT_PHONE = VALID_PHONE_BOB;
+    public static final String DEFAULT_EMAIL = VALID_EMAIL_BOB;
+    public static final String DEFAULT_ADDRESS = VALID_ADDRESS_BOB;
+    public static final String DEFAULT_SERVICE = VALID_SERVICE;
     public static final int DEFAULT_ID = 0;
+
     private Name name;
     private Phone phone;
     private Email email;

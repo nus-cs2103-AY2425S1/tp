@@ -28,16 +28,6 @@ import seedu.ddd.model.tag.Tag;
  */
 public class EditCommandParser implements Parser<EditCommand> {
 
-    private static final Prefix[] PREFIXES = new Prefix[] {
-        PREFIX_NAME,
-        PREFIX_PHONE,
-        PREFIX_EMAIL,
-        PREFIX_ADDRESS,
-        PREFIX_DATE,
-        PREFIX_SERVICE,
-        PREFIX_TAG,
-    };
-
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -45,7 +35,8 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, EditCommandParser.PREFIXES);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_DATE, PREFIX_SERVICE, PREFIX_TAG);
 
         Index index;
 
@@ -57,7 +48,8 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         // Should not contain duplicates prefixes.
         // Should either specify date for client or service for vendor.
-        argMultimap.verifyNoDuplicatePrefixesFor(EditCommandParser.PREFIXES);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_DATE,
+                PREFIX_SERVICE);
         argMultimap.verifyNoExclusivePrefixesFor(PREFIX_DATE, PREFIX_SERVICE);
 
         EditContactDescriptor editContactDescriptor = parseArgumentMultimap(argMultimap);
@@ -80,7 +72,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     private EditContactDescriptor parseArgumentMultimap(ArgumentMultimap argMultimap) throws ParseException {
-        EditContactDescriptor editContactDescriptor = new EditCommand.EditContactDescriptor();
+        EditContactDescriptor editContactDescriptor = new EditContactDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editContactDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }

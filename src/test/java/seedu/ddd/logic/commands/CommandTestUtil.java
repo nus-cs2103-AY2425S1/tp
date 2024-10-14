@@ -1,25 +1,32 @@
 package seedu.ddd.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.ddd.testutil.Assert.assertThrows;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import seedu.ddd.commons.core.index.Index;
+import seedu.ddd.logic.commands.EditCommand.EditClientDescriptor;
+import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
+import seedu.ddd.logic.commands.EditCommand.EditVendorDescriptor;
 import seedu.ddd.logic.commands.exceptions.CommandException;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.NameContainsKeywordsPredicate;
+import static seedu.ddd.testutil.Assert.assertThrows;
 import seedu.ddd.testutil.EditClientDescriptorBuilder;
+import seedu.ddd.testutil.EditContactDescriptorBuilder;
+import seedu.ddd.testutil.EditVendorDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -34,6 +41,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_DATE = "2000-01-01";
+    public static final String VALID_SERVICE = "Catering";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -43,6 +52,8 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String DATE_DESC_AMY = " " + PREFIX_DATE + VALID_DATE;
+    public static final String SERVICE_DESC_BOB = " " + PREFIX_SERVICE + VALID_SERVICE;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
@@ -57,16 +68,20 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditContactDescriptor DESC_AMY;
-    public static final EditCommand.EditContactDescriptor DESC_BOB;
+    public static final EditContactDescriptor DESC_CONTACT_AMY;
+    public static final EditClientDescriptor DESC_CLIENT_AMY;
+    public static final EditVendorDescriptor DESC_VENDOR_BOB;
 
     static {
-        DESC_AMY = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_CONTACT_AMY = new EditContactDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditClientDescriptorBuilder().withName(VALID_NAME_BOB)
+        DESC_CLIENT_AMY = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withDate(VALID_DATE).withTags(VALID_TAG_FRIEND).build();
+        DESC_VENDOR_BOB = new EditVendorDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withService(VALID_SERVICE).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**
@@ -99,7 +114,7 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * - the address book, filtered contact list and selected contact in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
@@ -112,10 +127,10 @@ public class CommandTestUtil {
         assertEquals(expectedFilteredList, actualModel.getFilteredContactList());
     }
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the contact at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showContactAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredContactList().size());
 
         Contact contact = model.getFilteredContactList().get(targetIndex.getZeroBased());

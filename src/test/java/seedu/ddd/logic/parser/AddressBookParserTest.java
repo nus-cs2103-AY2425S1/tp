@@ -1,34 +1,33 @@
 package seedu.ddd.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.ddd.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.ddd.testutil.Assert.assertThrows;
-import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
-//import seedu.ddd.logic.commands.AddContactCommand;
+import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.ddd.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import seedu.ddd.logic.commands.ClearCommand;
 import seedu.ddd.logic.commands.DeleteCommand;
 import seedu.ddd.logic.commands.EditCommand;
+import seedu.ddd.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.ddd.logic.commands.ExitCommand;
 import seedu.ddd.logic.commands.FindCommand;
 import seedu.ddd.logic.commands.HelpCommand;
 import seedu.ddd.logic.commands.ListCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
-import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.NameContainsKeywordsPredicate;
+import static seedu.ddd.testutil.Assert.assertThrows;
 import seedu.ddd.testutil.ClientBuilder;
-import seedu.ddd.testutil.ClientUtil;
-import seedu.ddd.testutil.EditClientDescriptorBuilder;
+import seedu.ddd.testutil.ContactUtil;
+import seedu.ddd.testutil.EditContactDescriptorBuilder;
+import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 
 public class AddressBookParserTest {
     private final AddressBookParser parser = new AddressBookParser();
@@ -56,9 +55,11 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         Contact contact = new ClientBuilder().build();
-        EditContactDescriptor descriptor = new EditClientDescriptorBuilder((Client) contact).build();
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder(contact).build();
+        // EditCommand does not take an id parameter, so id is null in EditCommandDescriptor
+        descriptor.setId(null);
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_CONTACT.getOneBased() + " " + ClientUtil.getEditClientDescriptorDetails(descriptor));
+                + INDEX_FIRST_CONTACT.getOneBased() + " " + ContactUtil.getEditContactDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_CONTACT, descriptor), command);
     }
 

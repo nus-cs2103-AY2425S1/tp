@@ -122,6 +122,15 @@ public class UniqueContactList implements Iterable<Contact> {
         }
 
         UniqueContactList otherUniqueContactList = (UniqueContactList) other;
+        // Set<Id> ids = internalList.stream().map(contact -> contact.getId()).collect(Collectors.toSet());
+        // int matchedIdsCount = 0;
+        // for (Contact contact : otherUniqueContactList) {
+        //     if (!ids.contains(contact.getId())) {
+        //         return false;
+        //     }
+        //     matchedIdsCount++;
+        // }
+        // return matchedIdsCount == ids.size();
         return internalList.equals(otherUniqueContactList.internalList);
     }
 

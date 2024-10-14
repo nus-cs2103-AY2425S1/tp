@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import seedu.ddd.commons.util.AppUtil;
-import seedu.ddd.model.contact.vendor.Service;
 
 /**
  * Represents a Client's Date in the address book.
@@ -54,7 +53,7 @@ public class Date {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Service)) {
+        if (!(other instanceof Date)) {
             return false;
         }
 

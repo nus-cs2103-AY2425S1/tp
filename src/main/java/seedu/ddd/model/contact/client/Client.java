@@ -20,6 +20,7 @@ import seedu.ddd.model.tag.Tag;
  */
 public class Client extends Contact {
     private Date date;
+
     /**
      * Constructs a {@code Client}.
      *
@@ -44,6 +45,7 @@ public class Client extends Contact {
     public Date getDate() {
         return date;
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -74,6 +76,7 @@ public class Client extends Contact {
                 .add("address", this.getAddress())
                 .add("date", this.date)
                 .add("tags", this.getTags())
+                .add("id", this.getId())
                 .toString();
     }
 

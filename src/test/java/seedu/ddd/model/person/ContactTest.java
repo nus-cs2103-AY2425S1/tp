@@ -2,6 +2,7 @@ package seedu.ddd.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.testutil.ClientBuilder;
+import seedu.ddd.testutil.VendorBuilder;
 
 public class ContactTest {
 
@@ -42,14 +44,15 @@ public class ContactTest {
         assertFalse(ALICE.isSameContact(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
-        Contact editedBob = new ClientBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+        Contact editedBob = new VendorBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertFalse(BOB.isSameContact(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new ClientBuilder(BOB).withName(nameWithTrailingSpaces).build();
+        editedBob = new VendorBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSameContact(editedBob));
     }
+
     /*
     @Test
     public void equals() {

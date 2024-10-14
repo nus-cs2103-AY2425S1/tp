@@ -1,6 +1,7 @@
 package seedu.ddd.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -30,6 +31,7 @@ import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
+import seedu.ddd.model.contact.exceptions.DuplicateContactException;
 import seedu.ddd.model.contact.vendor.Service;
 import seedu.ddd.model.contact.vendor.Vendor;
 import seedu.ddd.model.tag.Tag;
@@ -97,8 +99,12 @@ public class EditCommand extends Command {
         if (!contactToEdit.isSameContact(contactToEdit) && model.hasContact(editedContact)) {
             throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
-
-        model.setContact(contactToEdit, editedContact);
+        
+        try {
+            model.setContact(contactToEdit, editedContact);
+        } catch (DuplicateContactException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
+        }
         model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
         return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact)));
     }
@@ -212,7 +218,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, id);
         }
 
         public void setName(Name name) {
@@ -307,6 +313,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("id", id)
                     .toString();
         }
     }
@@ -334,7 +341,7 @@ public class EditCommand extends Command {
             return super.isAnyFieldEdited() || date != null;
         }
 
-        public final void setDate(Date date) {
+        public void setDate(Date date) {
             this.date = date;
         }
 
@@ -343,7 +350,7 @@ public class EditCommand extends Command {
         }
 
         @Override
-        public EditContactDescriptor copy() {
+        public EditClientDescriptor copy() {
             EditClientDescriptor copied = new EditClientDescriptor(this);
             copied.setDate(date);
             return copied;
@@ -364,9 +371,10 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditClientDescriptor.name)
                     && Objects.equals(phone, otherEditClientDescriptor.phone)
                     && Objects.equals(email, otherEditClientDescriptor.email)
-                    && Objects.equals(date, otherEditClientDescriptor.date)
                     && Objects.equals(address, otherEditClientDescriptor.address)
-                    && Objects.equals(tags, otherEditClientDescriptor.tags);
+                    && Objects.equals(date, otherEditClientDescriptor.date)
+                    && Objects.equals(tags, otherEditClientDescriptor.tags)
+                    && Objects.equals(id, otherEditClientDescriptor.id);
         }
 
         @Override
@@ -378,6 +386,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("date", date)
                     .add("tags", tags)
+                    .add("id", id)
                     .toString();
         }
     }
@@ -414,7 +423,7 @@ public class EditCommand extends Command {
         }
 
         @Override
-        public EditContactDescriptor copy() {
+        public EditVendorDescriptor copy() {
             EditVendorDescriptor copied = new EditVendorDescriptor(this);
             copied.setService(service);
             return copied;
@@ -437,7 +446,8 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditVendorDescriptor.email)
                     && Objects.equals(service, otherEditVendorDescriptor.service)
                     && Objects.equals(address, otherEditVendorDescriptor.address)
-                    && Objects.equals(tags, otherEditVendorDescriptor.tags);
+                    && Objects.equals(tags, otherEditVendorDescriptor.tags)
+                    && Objects.equals(id, otherEditVendorDescriptor.id);
         }
 
         @Override
@@ -449,6 +459,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("service", service)
                     .add("tags", tags)
+                    .add("id", id)
                     .toString();
         }
     }

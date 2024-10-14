@@ -1,5 +1,11 @@
 package seedu.ddd.testutil;
 
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_DATE;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,12 +24,11 @@ import seedu.ddd.model.util.SampleDataUtil;
  */
 public class ClientBuilder {
 
-    public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_DATE = "01 Jan 2000";
-
+    public static final String DEFAULT_NAME = VALID_NAME_AMY;
+    public static final String DEFAULT_PHONE = VALID_PHONE_AMY;
+    public static final String DEFAULT_EMAIL = VALID_EMAIL_AMY;
+    public static final String DEFAULT_ADDRESS = VALID_ADDRESS_AMY;
+    public static final String DEFAULT_DATE = VALID_DATE;
     public static final int DEFAULT_ID = 0;
 
     private Name name;
@@ -48,15 +53,16 @@ public class ClientBuilder {
     }
 
     /**
-     * Initializes the ClientBuilder with the data of {@code contactToCopy}.
+     * Initializes the ClientBuilder with the data of {@code clientToCopy}.
      */
-    public ClientBuilder(Client contactToCopy) {
-        name = contactToCopy.getName();
-        phone = contactToCopy.getPhone();
-        email = contactToCopy.getEmail();
-        address = contactToCopy.getAddress();
-        date = new Date(DEFAULT_DATE);
-        tags = new HashSet<>(contactToCopy.getTags());
+    public ClientBuilder(Client clientToCopy) {
+        name = clientToCopy.getName();
+        phone = clientToCopy.getPhone();
+        email = clientToCopy.getEmail();
+        address = clientToCopy.getAddress();
+        date = clientToCopy.getDate();
+        tags = new HashSet<>(clientToCopy.getTags());
+        id = clientToCopy.getId();
     }
 
     /**
@@ -114,6 +120,7 @@ public class ClientBuilder {
         this.id = new Id(id);
         return this;
     }
+
     public Client build() {
         return new Client(name, phone, email, address, date, tags, id);
     }

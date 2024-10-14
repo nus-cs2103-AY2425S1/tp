@@ -69,6 +69,7 @@ public class Vendor extends Contact {
                 .add("address", this.getAddress())
                 .add("service", this.service)
                 .add("tags", this.getTags())
+                .add("id", this.getId())
                 .toString();
     }
 

@@ -3,21 +3,20 @@ package seedu.ddd.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.ddd.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.ddd.testutil.TypicalContacts.getTypicalAddressBook;
-import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
-import static seedu.ddd.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.commons.core.index.Index;
 import seedu.ddd.logic.Messages;
+import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.ddd.logic.commands.CommandTestUtil.showContactAtIndex;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ModelManager;
 import seedu.ddd.model.UserPrefs;
 import seedu.ddd.model.contact.common.Contact;
+import static seedu.ddd.testutil.TypicalContacts.getTypicalAddressBook;
+import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
+import static seedu.ddd.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -46,12 +45,12 @@ public class DeleteCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredContactList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_CONTACT);
+        showContactAtIndex(model, INDEX_FIRST_CONTACT);
 
         Contact contactToDelete = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CONTACT);
@@ -68,7 +67,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_CONTACT);
+        showContactAtIndex(model, INDEX_FIRST_CONTACT);
 
         Index outOfBoundIndex = INDEX_SECOND_CONTACT;
         // ensures that outOfBoundIndex is still in bounds of address book list
@@ -76,7 +75,7 @@ public class DeleteCommandTest {
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
     }
 
     @Test
