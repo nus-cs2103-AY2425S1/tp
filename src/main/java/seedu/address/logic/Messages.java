@@ -20,6 +20,9 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
+    // MeetUp Strings
+    public static final String MESSAGE_MEETUPS_LISTED_OVERVIEW = "%1$d persons listed!";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
