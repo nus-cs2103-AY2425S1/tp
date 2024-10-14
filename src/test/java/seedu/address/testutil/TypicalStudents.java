@@ -30,7 +30,7 @@ import seedu.address.model.tut.TutDate;
 public class TypicalStudents {
 
     // Date formatter
-    private static final String DATE_FORMAT = "dd/MM/yyyy";
+    private static final String DATE_FORMAT = "yyyy/MM/dd";
     private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT);
 
     // Create sample Dates
@@ -39,8 +39,8 @@ public class TypicalStudents {
 
     static {
         try {
-            DATE1 = DATE_FORMATTER.parse("12/10/2023");
-            DATE2 = DATE_FORMATTER.parse("19/10/2023");
+            DATE1 = DATE_FORMATTER.parse("2023/10/12");
+            DATE2 = DATE_FORMATTER.parse("2023/10/19");
         } catch (ParseException e) {
             throw new RuntimeException("Error parsing dates in TypicalStudents", e);
         }

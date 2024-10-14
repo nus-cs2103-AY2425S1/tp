@@ -20,7 +20,7 @@ import seedu.address.model.tut.TutDate;
 class JsonAdaptedTutDate {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "TutDate's %s field is missing!";
-    public static final String DATE_FORMAT = "dd/MM/yyyy";
+    public static final String DATE_FORMAT = "yyyy/MM/dd";
 
     private final String date;
     private final Set<JsonAdaptedStudent> students = new HashSet<>();
