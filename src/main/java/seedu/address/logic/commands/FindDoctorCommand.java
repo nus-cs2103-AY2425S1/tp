@@ -15,7 +15,6 @@ import seedu.address.model.doctor.FindDoctorPredicate;
  */
 public class FindDoctorCommand extends Command {
     public static final String COMMAND_WORD = "find-doctor";
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "find-doctor command not implemented yet";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all doctors whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
