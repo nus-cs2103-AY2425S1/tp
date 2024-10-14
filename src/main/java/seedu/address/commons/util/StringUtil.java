@@ -13,6 +13,22 @@ import java.util.function.Predicate;
  */
 public class StringUtil {
 
+    private record SearchPair(String sentence, String word) {
+    }
+
+    private static SearchPair prepareSearch(String sentence, String word) {
+        requireNonNull(sentence);
+        requireNonNull(word);
+
+        String preppedWord = word.trim();
+        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
+
+        String preppedSentence = sentence;
+
+        return new SearchPair(preppedSentence, preppedWord);
+    }
+
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.
@@ -25,14 +41,9 @@ public class StringUtil {
      * @param word cannot be null, cannot be empty, must be a single word
      */
     public static boolean containsWordIgnoreCase(String sentence, String word) {
-        requireNonNull(sentence);
-        requireNonNull(word);
-
-        String preppedWord = word.trim();
-        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
-        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
-
-        String preppedSentence = sentence;
+        SearchPair searchPair = prepareSearch(sentence, word);
+        String preppedSentence = searchPair.sentence;
+        String preppedWord = searchPair.word;
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
         Predicate<String> containsKeywordIgnoringCase =
@@ -40,6 +51,48 @@ public class StringUtil {
 
         return Arrays.stream(wordsInPreppedSentence)
                 .anyMatch(containsKeywordIgnoringCase);
+    }
+
+    /**
+     * Returns true if the {@code sentence} contains all characters of the {@code word}.
+     *   Ignores case, but a full word match is required.
+     *   <br>examples:<pre>
+     *       containsCharactersInWordIgnoreCase("ABc def", "abc") == true
+     *       containsCharactersInWordIgnoreCase("ABc def", "ac") == true
+     *       containsCharactersInWordIgnoreCase("ABc def", "af") == false
+     *       </pre>
+     * @param sentence cannot be null
+     * @param word cannot be null, cannot be empty, must be a single word
+     */
+    public static boolean containsCharactersInWordIgnoreCase(String sentence, String word) {
+        SearchPair searchPair = prepareSearch(sentence, word);
+        String preppedSentence = searchPair.sentence;
+        String preppedWord = searchPair.word;
+        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+
+        int preppedWordLength = preppedWord.length();
+        Predicate<String> containsCharactersInKeywordIgnoringCase =
+                seq -> {
+                    int matchCnt = 0;
+                    int cIdx = 0;
+                    seq = seq.toUpperCase();
+                    String wrd = preppedWord.toUpperCase();
+                    for (int i = 0; i < seq.length(); i++) {
+                        char s = seq.charAt(i);
+                        if (cIdx >= preppedWordLength) {
+                            break;
+                        }
+                        char c = wrd.charAt(cIdx);
+                        if (s == c) {
+                            matchCnt++;
+                            cIdx++;
+                        }
+                    }
+                    return matchCnt == preppedWordLength;
+                };
+
+        return Arrays.stream(wordsInPreppedSentence)
+                .anyMatch(containsCharactersInKeywordIgnoringCase);
     }
 
     /**
@@ -68,5 +121,11 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(containsCharactersInWordIgnoreCase("ABc def", "abc"));
+        System.out.println(containsCharactersInWordIgnoreCase("gareth", "ah"));
+        System.out.println(containsCharactersInWordIgnoreCase("AaaaBc def", "aabc"));
     }
 }
