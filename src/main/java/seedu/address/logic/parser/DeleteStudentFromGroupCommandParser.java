@@ -27,7 +27,8 @@ public class DeleteStudentFromGroupCommandParser {
         if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_NUMBER)
                 || !arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentFromGroupCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteStudentFromGroupCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NUMBER);

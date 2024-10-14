@@ -66,7 +66,8 @@ public class DeleteStudentFromGroupCommand extends Command {
         }
 
         model.deleteStudentFromGroup(targetGroup, studentToBeDeleted);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(studentToBeDeleted), targetGroup));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(studentToBeDeleted), targetGroup));
     }
 
     @Override

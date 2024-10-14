@@ -342,7 +342,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: 
+**Value proposition**:
 
 * Manage contacts faster than a typical mouse/GUI driven app
 * Helps to track the following:
@@ -665,7 +665,7 @@ Use case ends.
     * 1a1.  T_Assistant shows an error message.
 
       Use case ends.
-  
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
