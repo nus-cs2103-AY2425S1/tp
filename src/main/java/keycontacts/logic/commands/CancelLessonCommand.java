@@ -4,10 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_DATE;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
 
-import java.time.LocalDate;
-
 import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
+import keycontacts.model.lesson.Date;
 import keycontacts.model.lesson.Time;
 
 /**
@@ -24,22 +23,23 @@ public class CancelLessonCommand extends Command {
             + "Example: " + COMMAND_WORD + PREFIX_DATE + "06-07-2022 " + PREFIX_START_TIME + "12:00";
 
     private final Time startTime;
-    private final LocalDate date;
+    private final Date date;
 
     /**
      * @param date of the lesson to be cancelled
      * @param startTime of the lesson to be cancelled
      */
-    public CancelLessonCommand(LocalDate date, Time startTime) {
-        requireNonNull(startTime);
+    public CancelLessonCommand(Date date, Time startTime) {
         requireNonNull(date);
+        requireNonNull(startTime);
 
-        this.startTime = startTime;
         this.date = date;
+        this.startTime = startTime;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
         return new CommandResult(""); //placeholder
     }
 

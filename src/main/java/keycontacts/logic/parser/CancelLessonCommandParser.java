@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 import keycontacts.logic.commands.CancelLessonCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
+import keycontacts.model.lesson.Date;
 import keycontacts.model.lesson.Time;
 
 
@@ -34,7 +35,7 @@ public class CancelLessonCommandParser implements Parser<CancelLessonCommand> {
             }
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE, PREFIX_START_TIME);
 
-            LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+            Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
             Time startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
             return new CancelLessonCommand(date, startTime);
         } catch (ParseException e) {

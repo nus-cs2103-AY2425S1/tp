@@ -2,8 +2,6 @@ package keycontacts.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +9,7 @@ import java.util.Set;
 import keycontacts.commons.core.index.Index;
 import keycontacts.commons.util.StringUtil;
 import keycontacts.logic.parser.exceptions.ParseException;
+import keycontacts.model.lesson.Date;
 import keycontacts.model.lesson.Day;
 import keycontacts.model.lesson.Time;
 import keycontacts.model.pianopiece.PianoPiece;
@@ -161,12 +160,12 @@ public class ParserUtil {
     /**
      * Parses {@code String date} into a {@code LocalDate}.
      */
-    public static LocalDate parseDate(String date) throws ParseException {
+    public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
-        try {
-            return LocalDate.parse(date); //TODO: need to refactor LocalDate into new Date wrapper class
-        } catch (DateTimeParseException e) {
-            throw new ParseException(e.getMessage());
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
+        return new Date(trimmedDate);
     }
 }
