@@ -167,7 +167,7 @@ public class MainWindow extends UiPart<Stage> {
         logger.info("Changing UI...");
 
         InspectWindow inspectWindow;
-        inspectWindow = new InspectWindow(primaryStage, logic);
+        inspectWindow = new InspectWindow(primaryStage, logic, commandResult.getPerson());
         inspectWindow.show();
         inspectWindow.fillInnerParts();
         inspectWindow.getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
