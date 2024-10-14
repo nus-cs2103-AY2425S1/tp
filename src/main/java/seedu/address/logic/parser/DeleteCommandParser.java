@@ -20,6 +20,12 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
 
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
+
+
         try {
             Index index = ParserUtil.parseIndex(trimmedArgs);
             return new DeleteCommand(index);
@@ -29,6 +35,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 Name name = ParserUtil.parseName(trimmedArgs);
                 return new DeleteCommand(name);
             } catch (ParseException pe2) {
+
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe2);
             }
