@@ -30,6 +30,7 @@ public class DeleteCommand extends Command {
 
     private final Name targetName;
     private final Index targetIndex;
+
     /**
      * @param targetName of the person to be deleted in the list
      */
@@ -37,6 +38,7 @@ public class DeleteCommand extends Command {
         this.targetName = targetName;
         this.targetIndex = null;
     }
+
     /**
      * @param targetIndex of the index of the person to be deleted in the list
      */
@@ -83,6 +85,8 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
+
+
         return (targetName != null && targetName.equals(otherDeleteCommand.targetName))
                 || (targetIndex != null && targetIndex.equals(otherDeleteCommand.targetIndex));
     }
