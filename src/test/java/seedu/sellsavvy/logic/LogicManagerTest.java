@@ -90,7 +90,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getSelectedPerson_inner_content_is_null_initially() {
+    public void getSelectedPerson_innerContent_isNullInitially() {
         assertNotNull(logic.getSelectedPerson());
         //ensures that when first initiated no person's order will be displayed
         assertNull(logic.getSelectedPerson().get());

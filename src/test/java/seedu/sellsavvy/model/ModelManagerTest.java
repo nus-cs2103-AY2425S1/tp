@@ -96,7 +96,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getSelectedPerson_inner_content_is_null_initially() {
+    public void getSelectedPerson_innerContent_isNullInitially() {
         assertNotNull(modelManager.getSelectedPerson());
         //ensures that when first initiated no person's order will be displayed
         assertNull(modelManager.getSelectedPerson().get());
