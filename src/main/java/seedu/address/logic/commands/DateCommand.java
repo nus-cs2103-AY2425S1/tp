@@ -9,18 +9,19 @@ import seedu.address.logic.commands.exceptions.CommandException;
 public class DateCommand extends Command {
     public static final String COMMAND_WORD = "date";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the appointment date of the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Edits the appointment date of the person identified "
             + "by the index number used in the last person listing. "
             + "Existing date will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_DATE + "[DATE]\n"
+            + "r/ [DATE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DATE + "12 October 2024";
+            + "r/ 12 October 2024";
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Date command not implemented yet";
 
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        return new CommandResult("Hello from date");
+        throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
     }
 }
