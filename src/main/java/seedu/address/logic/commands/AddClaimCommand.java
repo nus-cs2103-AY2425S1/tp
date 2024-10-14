@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSURANCE_ID;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
 import java.util.List;
 
@@ -13,14 +13,14 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.insurance.InsurancePlan;
-import seedu.address.model.person.insurance.InsurancePlanFactory;
-import seedu.address.model.person.insurance.InsurancePlansManager;
-import seedu.address.model.person.insurance.claim.Claim;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.insurance.InsurancePlan;
+import seedu.address.model.client.insurance.InsurancePlanFactory;
+import seedu.address.model.client.insurance.InsurancePlansManager;
+import seedu.address.model.client.insurance.claim.Claim;
 
 /**
- * Adds a claim to an existing person with existing Insurance Plan in the address book.
+ * Adds a claim to an existing client with existing Insurance Plan in the address book.
  */
 public class AddClaimCommand extends Command {
     public static final String COMMAND_WORD = "addClaim";
@@ -47,7 +47,7 @@ public class AddClaimCommand extends Command {
     /**
      * Constructs an AddClaimCommand object with the values passed in by the user.
      *
-     * @param index       of the person in the filtered person list to add the insurance plan to.
+     * @param index       of the client in the filtered client list to add the insurance plan to.
      * @param insuranceId of insurance plan the claim is to be added to.
      * @param claimID     the claimID received when a claim is created through official channels.
      * @param claimAmount the amount that is being claimed through this claim in cents.
@@ -62,31 +62,31 @@ public class AddClaimCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Client> lastShownList = model.getFilteredClientList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Client clientToEdit = lastShownList.get(index.getZeroBased());
 
         try {
             InsurancePlan planToBeUsed = InsurancePlanFactory.createInsurancePlan(insuranceId);
 
-            InsurancePlansManager personToEditInsurancePlansManager = personToEdit.getInsurancePlansManager();
+            InsurancePlansManager personToEditInsurancePlansManager = clientToEdit.getInsurancePlansManager();
             personToEditInsurancePlansManager.checkIfPlanOwned(planToBeUsed);
 
             Claim claimToBeAdded = new Claim(claimID, claimAmount);
             personToEditInsurancePlansManager.addClaimToInsurancePlan(planToBeUsed, claimToBeAdded);
 
-            Person personWithAddedInsurancePlan = lastShownList.get(index.getZeroBased());
-            model.setPerson(personToEdit, personWithAddedInsurancePlan);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            Client personWithAddedInsurancePlan = lastShownList.get(index.getZeroBased());
+            model.setClient(clientToEdit, personWithAddedInsurancePlan);
+            model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
-            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToEdit), planToBeUsed,
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(clientToEdit), planToBeUsed,
                     claimID, Messages.formatClaimAmount(claimAmount)));
         } catch (ParseException e) {
-            throw new CommandException(String.format(e.getMessage(), claimID, Messages.format(personToEdit)));
+            throw new CommandException(String.format(e.getMessage(), claimID, Messages.format(clientToEdit)));
         }
     }
 }

@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSURANCE_ID;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
 import java.util.List;
 
@@ -11,13 +11,13 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.insurance.InsurancePlan;
-import seedu.address.model.person.insurance.InsurancePlanFactory;
-import seedu.address.model.person.insurance.InsurancePlansManager;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.insurance.InsurancePlan;
+import seedu.address.model.client.insurance.InsurancePlanFactory;
+import seedu.address.model.client.insurance.InsurancePlansManager;
 
 /**
- * Removes an InsurancePlan from an existing person in the address book.
+ * Removes an InsurancePlan from an existing client in the address book.
  */
 public class DeleteInsuranceCommand extends Command {
     public static final String COMMAND_WORD = "deleteInsurance";
@@ -37,8 +37,8 @@ public class DeleteInsuranceCommand extends Command {
     private final int insuranceID;
 
     /**
-     * @param index of the person in the filtered person list remove the insurance plan from
-     * @param insuranceID of the person to be updated to
+     * @param index of the client in the filtered client list remove the insurance plan from
+     * @param insuranceID of the client to be updated to
      */
     public DeleteInsuranceCommand(Index index, int insuranceID) {
         requireAllNonNull(index, insuranceID);
@@ -49,31 +49,31 @@ public class DeleteInsuranceCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Client> lastShownList = model.getFilteredClientList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Client clientToEdit = lastShownList.get(index.getZeroBased());
 
         try {
             InsurancePlan planToBeDeleted = InsurancePlanFactory.createInsurancePlan(insuranceID);
 
-            InsurancePlansManager personToEditInsurancePlansManager = personToEdit.getInsurancePlansManager();
-            personToEditInsurancePlansManager.checkIfPlanOwned(planToBeDeleted);
-            personToEditInsurancePlansManager.deletePlan(planToBeDeleted);
+            InsurancePlansManager clientToEditInsurancePlansManager = clientToEdit.getInsurancePlansManager();
+            clientToEditInsurancePlansManager.checkIfPlanOwned(planToBeDeleted);
+            clientToEditInsurancePlansManager.deletePlan(planToBeDeleted);
 
-            Person personWithDeletedInsurancePlan = lastShownList.get(index.getZeroBased());
+            Client clientWithDeletedInsurancePlan = lastShownList.get(index.getZeroBased());
 
-            model.setPerson(personToEdit, personWithDeletedInsurancePlan);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            model.setClient(clientToEdit, clientWithDeletedInsurancePlan);
+            model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
             return new CommandResult(String.format(MESSAGE_DELETE_INSURANCE_PLAN_SUCCESS,
-                    planToBeDeleted, Messages.format(personWithDeletedInsurancePlan)));
+                    planToBeDeleted, Messages.format(clientWithDeletedInsurancePlan)));
         } catch (ParseException e) {
             throw new CommandException(
-                    String.format(e.getMessage(), insuranceID, Messages.format(personToEdit)));
+                    String.format(e.getMessage(), insuranceID, Messages.format(clientToEdit)));
         }
     }
 
