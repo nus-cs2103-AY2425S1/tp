@@ -17,5 +17,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_LOCATION_INDEX = new Prefix("li/");
     public static final Prefix PREFIX_START_DATE = new Prefix("d/");
     public static final Prefix PREFIX_DURATION = new Prefix("h/");
-    public static final Prefix PREFIX_ROLE = new Prefix("r/");
+    public static final Prefix PREFIX_ROLE = new Prefix("/r");
 }
