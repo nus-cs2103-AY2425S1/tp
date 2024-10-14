@@ -19,12 +19,14 @@ import java.util.stream.Stream;
 
 import seedu.ddd.logic.commands.AddContactCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
+import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.person.Address;
 import seedu.ddd.model.person.Client;
 import seedu.ddd.model.person.Contact;
 import seedu.ddd.model.person.ContactType;
 import seedu.ddd.model.person.Date;
 import seedu.ddd.model.person.Email;
+import seedu.ddd.model.person.Id;
 import seedu.ddd.model.person.Name;
 import seedu.ddd.model.person.Phone;
 import seedu.ddd.model.person.Service;
@@ -81,19 +83,18 @@ public class AddContactCommandParser implements Parser<AddContactCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Id id = new Id(AddressBook.getNextId());
 
         Contact contact;
 
         if (contactType == VENDOR) {
             Service service = ParserUtil.parseService(argMultimap.getValue(PREFIX_SERVICE).get());
-            contact = new Vendor(name, phone, email, address, service, tagList);
-        } else if (contactType == CLIENT) {
-            Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-            contact = new Client(name, phone, email, address, date, tagList);
+            contact = new Vendor(name, phone, email, address, service, tagList, id);
         } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_CONTACT_TYPE, contactTypeString));
+            Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+            contact = new Client(name, phone, email, address, date, tagList, id);
         }
-
+        AddressBook.incrementNextId();
         return new AddContactCommand(contact);
     }
 

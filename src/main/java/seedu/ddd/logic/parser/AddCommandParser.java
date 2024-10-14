@@ -17,6 +17,7 @@ import seedu.ddd.model.person.Client;
 import seedu.ddd.model.person.Contact;
 import seedu.ddd.model.person.Date;
 import seedu.ddd.model.person.Email;
+import seedu.ddd.model.person.Id;
 import seedu.ddd.model.person.Name;
 import seedu.ddd.model.person.Phone;
 import seedu.ddd.model.tag.Tag;
@@ -48,7 +49,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         // TODO: update this to work with Client and Vendor
-        Contact contact = new Client(name, phone, email, address, new Date("01 Jan 2000"), tagList);
+        Contact contact = new Client(name, phone, email, address, new Date("01 Jan 2000"), tagList, new Id(0));
         return new AddCommand(contact);
     }
 
