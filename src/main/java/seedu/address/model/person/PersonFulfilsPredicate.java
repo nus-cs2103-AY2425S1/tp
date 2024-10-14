@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.ToStringBuilder;
+
 /**
  * Tests that a {@code Person}'s {@code PersonType} matches the given keyword.
  */
@@ -35,4 +37,8 @@ public class PersonFulfilsPredicate implements Predicate<Person> {
         return keyword.equals(otherPredicate.keyword);
     }
 
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).add("personType", keyword).toString();
+    }
 }
