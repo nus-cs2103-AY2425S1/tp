@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
