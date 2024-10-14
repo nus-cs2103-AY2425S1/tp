@@ -2,7 +2,7 @@ package seedu.address.model.person;
 
 /**
  * Represents a Person's attendance in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidAttendance(String)}
  */
 public class Attendance {
 
