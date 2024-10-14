@@ -103,20 +103,28 @@ public class PersonBuilder {
     //TODO: Add withRoles method ?
     /**
      * Adds roles based on a String array of role name Strings
+    */
+    //    public PersonBuilder withRoles(String ... roles) {
+    //        Set<Role> newRoles = new HashSet<>();
+    //        for (String role : roles) {
+    //            try {
+    //                Role nextRole = RoleHandler.getRole(role);
+    //                newRoles.add(nextRole);
+    //                this.roles = newRoles;
+    //            } catch (InvalidRoleException e) {
+    //                //TODO: Handle this exception
+    //                continue;
+    //            }
+    //        }
+    //
+    //        return this;
+    //    }
+
+    /**
+     * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withRoles(String ... roles) {
-        Set<Role> newRoles = new HashSet<>();
-        for (String role : roles) {
-            try {
-                Role nextRole = RoleHandler.getRole(role);
-                newRoles.add(nextRole);
-                this.roles = newRoles;
-            } catch (InvalidRoleException e) {
-                //TODO: Handle this exception
-                continue;
-            }
-        }
-
+        this.roles = SampleDataUtil.getRoleSet(roles);
         return this;
     }
 

@@ -47,20 +47,20 @@ public class Person implements Comparable<Person> {
     /**
      * Constructor that takes in a variable number of roles(optional field)
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                    TelegramUsername telegramUsername, Role... roles) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.telegramUsername = telegramUsername;
-        for (Role role : roles) {
-            this.roles.add(role);
-        }
-
-    }
+    //    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+    //                    TelegramUsername telegramUsername, Role... roles) {
+    //        requireAllNonNull(name, phone, email, address, tags);
+    //        this.name = name;
+    //        this.phone = phone;
+    //        this.email = email;
+    //        this.address = address;
+    //        this.tags.addAll(tags);
+    //        this.telegramUsername = telegramUsername;
+    //        for (Role role : roles) {
+    //            this.roles.add(role);
+    //        }
+    //
+    //    }
 
 
     public Name getName() {

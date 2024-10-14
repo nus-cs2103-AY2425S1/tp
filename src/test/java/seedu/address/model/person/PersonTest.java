@@ -54,6 +54,13 @@ public class PersonTest {
     }
 
     @Test
+    public void isSamePerson_differentConstructor() {
+        Person person = new PersonBuilder().build();
+        Person personCopy = new PersonBuilder(person).build();
+        assertTrue(person.isSamePerson(personCopy));
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         Person aliceCopy = new PersonBuilder(ALICE).build();
