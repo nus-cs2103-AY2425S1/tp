@@ -51,7 +51,7 @@ public class AddJobCommandParser implements Parser<AddJobCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_COMPANY,
-                    PREFIX_SALARY, PREFIX_REQUIREMENTS, PREFIX_DESCRIPTION);
+                    PREFIX_SALARY, PREFIX_DESCRIPTION);
         JobName name = ParserUtil.parseJobName(argMultimap.getValue(PREFIX_NAME).get());
         JobCompany company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
         JobSalary salary = ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get());
