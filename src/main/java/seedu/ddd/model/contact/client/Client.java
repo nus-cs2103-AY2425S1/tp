@@ -9,6 +9,7 @@ import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.Email;
+import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.tag.Tag;
@@ -29,8 +30,8 @@ public class Client extends Contact {
      * @param date    A valid date.
      * @param tags    A set of tags associated with the client.
      */
-    public Client(Name name, Phone phone, Email email, Address address, Date date, Set<Tag> tags) {
-        super(name, phone, email, address, tags);
+    public Client(Name name, Phone phone, Email email, Address address, Date date, Set<Tag> tags, Id id) {
+        super(name, phone, email, address, tags, id);
         requireAllNonNull(date);
         this.date = date;
     }
@@ -43,8 +44,20 @@ public class Client extends Contact {
     public Date getDate() {
         return date;
     }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
 
+        // instanceof handles nulls
+        if (!(other instanceof Client)) {
+            return false;
+        }
 
+        Client otherClient = (Client) other;
+        return super.equals(otherClient) && date.equals(otherClient.date);
+    }
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own

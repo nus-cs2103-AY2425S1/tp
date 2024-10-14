@@ -50,7 +50,7 @@ public class VendorCard extends UiPart<Region> {
         super(FXML);
         this.vendor = vendor;
         id.setText(displayedIndex + ". ");
-        name.setText(String.format("%s (Vendor)", vendor.getName().fullName));
+        name.setText(String.format("%s (Vendor) #%d", vendor.getName().fullName, vendor.getId().id));
         phone.setText(vendor.getPhone().value);
         email.setText(vendor.getEmail().value);
         address.setText(vendor.getAddress().value);
