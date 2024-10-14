@@ -18,7 +18,7 @@ public class StudentHasPaidPredicate implements Predicate<Person> {
     //TODO Implement test
     @Override
     public boolean test(Person person) {
-        throw new UnsupportedOperationException(MESSAGE_NOT_IMPLEMENTED_YET);
+        return this.hasPaid == person.getPayment().hasPaid;
     }
 
     @Override

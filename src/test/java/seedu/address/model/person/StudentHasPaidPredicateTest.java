@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.testutil.PersonBuilder;
 
 public class StudentHasPaidPredicateTest {
     @Test
@@ -32,6 +33,18 @@ public class StudentHasPaidPredicateTest {
 
         // different value -> returns false
         assertFalse(predicateHasPaid.equals(predicateHasNotPaid));
+    }
+
+    @Test
+    public void test_studentHasPaid_returnsTrue() {
+        StudentHasPaidPredicate predicate = new StudentHasPaidPredicate(true);
+        assertTrue(predicate.test(new PersonBuilder().withPayment(true).build()));
+    }
+
+    @Test
+    public void test_studentHasPaid_returnsFalse() {
+        StudentHasPaidPredicate predicate = new StudentHasPaidPredicate(false);
+        assertTrue(predicate.test(new PersonBuilder().withPayment(false).build()));
     }
 
     @Test
