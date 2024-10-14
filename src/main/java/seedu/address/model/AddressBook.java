@@ -2,12 +2,16 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tag.Tag;
 
 /**
  * Wraps all data at the address-book level
@@ -92,6 +96,29 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Returns a HashMap of the currently used Tags and their occurences
+     * @return
+     */
+    public HashMap<Tag, Integer> findTagOccurences() {
+        HashMap<Tag, Integer> result = new HashMap<>();
+        Iterator<Person> iterator = persons.iterator();
+        while (iterator.hasNext()) {
+            Person p = iterator.next();
+            Set<Tag> tagSet = p.getTags();
+            for (Tag t : tagSet) {
+                if (result.containsKey(t)) {
+                    Integer i = result.get(t);
+                    result.replace(t, i + 1);
+                } else {
+                    result.put(t, 0);
+                }
+            }
+        }
+
+        return result;
     }
 
     //// util methods
