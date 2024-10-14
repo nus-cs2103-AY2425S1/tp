@@ -156,8 +156,8 @@ Format: `listOrder INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `listOrder 2` lists all orders under the 2nd person in the address book.
-* `find Betsy` followed by `listOrder 1` lists all order under the 1st person in the results of the `find` command.
+* `list` followed by `listOrder 2` lists all orders of the 2nd person in the address book.
+* `find Betsy` followed by `listOrder 1` lists all orders of the 1st person from the list of persons found with "Betsy".
 
 ### Clearing all entries : `clear`
 
@@ -210,7 +210,7 @@ _Details coming soon ..._
 
 Action                | Format, Examples
 ----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add person**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add a person**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**             | `clear`
 **Delete person**     | `delete INDEX`<br> e.g., `delete 3`
 **Edit person**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
