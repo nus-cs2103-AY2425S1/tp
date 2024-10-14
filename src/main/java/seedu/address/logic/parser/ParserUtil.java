@@ -140,6 +140,8 @@ public class ParserUtil {
         } catch (IllegalArgumentException e) {
             throw new ParseException(SupplierStatus.MESSAGE_CONSTRAINTS);
         }
+    }
+    
     /**
      * Parses a {@code String dd-MM-yyyy HH:mm } into a {@code Time}.
      * Leading and trailing whitespaces will be trimmed.
