@@ -53,7 +53,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         DateOfCreation dateOfCreation = new DateOfCreation(LocalDate.now());
-        History history = new History(dateOfCreation.getDateOfCreation());
+        History history = History.addActivity(new History(dateOfCreation.getDateOfCreation()),
+                dateOfCreation.getDateOfCreation(), "Created");
         Person person = new Person(name, phone, email, address, remark, tagList, dateOfCreation, history);
 
         return new AddCommand(person);

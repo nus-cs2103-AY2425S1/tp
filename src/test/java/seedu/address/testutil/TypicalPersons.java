@@ -34,6 +34,7 @@ public class TypicalPersons {
             .withTags("friends")
             .withRemark("")
             .withDateOfCreation("2024-01-12")
+            .withHistory(LocalDate.of(2024, 1, 12), "Created")
             .withHistory(LocalDate.of(2024, 10, 10), "Attended seminar")
             .withHistory(LocalDate.of(2024, 10, 11), "Met with client")
             .build();
@@ -44,6 +45,7 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends")
             .withRemark("")
             .withDateOfCreation("2022-09-19")
+            .withHistory(LocalDate.of(2022, 9, 19), "Created")
             .withHistory(LocalDate.of(2024, 9, 25), "Completed project A")
             .withHistory(LocalDate.of(2024, 10, 1), "Attended team meeting")
             .build();
@@ -51,38 +53,52 @@ public class TypicalPersons {
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
             .withRemark("")
-            .withDateOfCreation("2021-09-10").build();
+            .withDateOfCreation("2021-09-10")
+            .withHistory(LocalDate.of(2021, 9, 10), "Created")
+            .build();
 
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
             .withRemark("")
-            .withDateOfCreation("2012-02-19").build();
+            .withDateOfCreation("2012-02-19")
+            .withHistory(LocalDate.of(2012, 2, 19), "Created")
+            .build();
 
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave")
             .withRemark("")
-            .withDateOfCreation("2024-02-20").build();
+            .withDateOfCreation("2024-02-20")
+            .withHistory(LocalDate.of(2024, 2, 20), "Created")
+            .build();
 
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo")
             .withRemark("")
-            .withDateOfCreation("2018-01-29").build();
+            .withDateOfCreation("2018-01-29")
+            .withHistory(LocalDate.of(2018, 1, 29), "Created")
+            .build();
 
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
             .withRemark("")
-            .withDateOfCreation("2019-12-11").build();
+            .withDateOfCreation("2019-12-11")
+            .withHistory(LocalDate.of(2019, 12, 11), "Created")
+            .build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@example.com").withAddress("little india")
             .withRemark("")
-            .withDateOfCreation("2021-03-31").build();
+            .withDateOfCreation("2021-03-31")
+            .withHistory(LocalDate.of(2021, 3, 31), "Created")
+            .build();
 
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave")
             .withRemark("")
-            .withDateOfCreation("2012-02-19").build();
+            .withDateOfCreation("2012-02-19")
+            .withHistory(LocalDate.of(2012, 2, 19), "Created")
+            .build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
