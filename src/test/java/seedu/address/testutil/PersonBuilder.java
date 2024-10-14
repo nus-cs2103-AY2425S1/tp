@@ -23,7 +23,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_POSTAL_CODE = "123456";
+    public static final String DEFAULT_POSTAL_CODE = "654321";
 
     private Name name;
     private Phone phone;
@@ -99,6 +99,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code PostalCode} of the {@code Person} that we are building.
+     */
     public PersonBuilder withPostalCode(String postalCode) {
         this.postalCode = new PostalCode(postalCode);
         return this;
