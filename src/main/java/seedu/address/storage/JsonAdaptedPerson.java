@@ -31,6 +31,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String schedule;
+    private final String note;
     private final String reminderAppointment;
     private final String reminderTime;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -41,13 +42,15 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
              @JsonProperty("email") String email, @JsonProperty("address") String address,
-             @JsonProperty("schedule") String schedule, @JsonProperty("reminderAppointment") String reminderAppointment,
+             @JsonProperty("schedule") String schedule, @JsonProperty("note") String note,
+             @JsonProperty("reminderAppointment") String reminderAppointment,
             @JsonProperty("reminderTime") String reminderTime, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.schedule = schedule;
+        this.note = note;
         this.reminderAppointment = reminderAppointment;
         this.reminderTime = reminderTime;
         if (tags != null) {
@@ -64,6 +67,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         schedule = source.getSchedule().dateTime;
+        note = source.getSchedule().getNotes();
         reminderAppointment = source.getReminder().appointmentDateTime;
         reminderTime = source.getReminder().reminderTime;
         tags.addAll(source.getTags().stream()
@@ -118,7 +122,8 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Schedule.class.getSimpleName()));
         }
-        final Schedule modelSchedule = new Schedule(schedule);
+
+        final Schedule modelSchedule = new Schedule(schedule, note);
 
         if (reminderAppointment == null || reminderTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

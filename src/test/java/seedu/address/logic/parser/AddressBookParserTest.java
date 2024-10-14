@@ -96,7 +96,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_schedule() throws Exception {
         String dateTime = "2024-10-04 1000";
-        ScheduleCommand expectedCommand = new ScheduleCommand("Jane", new Schedule(dateTime));
+        ScheduleCommand expectedCommand = new ScheduleCommand("Jane", new Schedule(dateTime, ""));
 
         ScheduleCommand actualCommand = (ScheduleCommand) parser.parseCommand(
                 ScheduleCommand.COMMAND_WORD + " Jane" + " d/" + dateTime);
