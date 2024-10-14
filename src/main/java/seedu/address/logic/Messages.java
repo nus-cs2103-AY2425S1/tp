@@ -1,6 +1,8 @@
 package seedu.address.logic;
 
+import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -55,6 +57,16 @@ public class Messages {
                 .append(person.getOwedAmount());
 
         return builder.toString();
+    }
+
+    public static String listFormat(List<Person> persons, Function<Person, String> formatter) {
+        StringBuilder result = new StringBuilder();
+
+        for (Person person : persons) {
+            result.append(formatter.apply(person) + "\n");
+        }
+
+        return result.toString();
     }
 
 }

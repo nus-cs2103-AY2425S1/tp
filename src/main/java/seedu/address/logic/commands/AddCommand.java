@@ -17,6 +17,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
+import java.util.List;
+
 /**
  * Adds a person to the address book.
  */
@@ -48,7 +50,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-    public static final String MESSAGE_HAS_CLASHES = "\n You have %d other students on the same schedule";
+    public static final String MESSAGE_HAS_CLASHES = "\n You have %d other students with clashing schedule:\n%s";
 
     private final Person toAdd;
 
@@ -70,12 +72,17 @@ public class AddCommand extends Command {
 
         model.addPerson(toAdd);
         long clashes = model.checkClashes(toAdd);
+        List<Person> clashingPersons = model.getClashingPersons(toAdd);
         if (clashes == 0) {
             return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
         } else {
             return new CommandResult(
                     String.format(MESSAGE_SUCCESS, Messages.format(toAdd))
-                    + String.format(MESSAGE_HAS_CLASHES, clashes)
+                    + String.format(
+                            MESSAGE_HAS_CLASHES,
+                            clashes,
+                            Messages.listFormat(clashingPersons, person -> person.getName().toString())
+                    )
             );
         }
 

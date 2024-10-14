@@ -72,6 +72,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.countClash(person);
     }
 
+    public List<Person> getClashingPersons(Person person) {
+        requireNonNull(person);
+        return persons.getClashes(person);
+    }
+
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
