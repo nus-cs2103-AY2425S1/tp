@@ -30,26 +30,16 @@ public class ReminderCommandParser implements Parser<ReminderCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_REMINDER);
         String name = argMultimap.getPreamble();
-        String appointmentDate = argMultimap.getValue(PREFIX_DATE).orElse("");
         String reminderTime = argMultimap.getValue(PREFIX_REMINDER).orElse("");
 
         // Check for missing name, date, or reminder
         if (name.isEmpty()) {
             throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
         }
-        if (appointmentDate.isEmpty()) {
-            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
-        }
         if (reminderTime.isEmpty()) {
             throw new ParseException(MESSAGE_INVALID_REMINDER_FORMAT);
         }
 
-        // Validate the date format
-        try {
-            LocalDateTime.parse(appointmentDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-        } catch (DateTimeParseException e) {
-            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
-        }
-        return new ReminderCommand(name, appointmentDate, reminderTime);
+        return new ReminderCommand(name, reminderTime);
     }
 }
