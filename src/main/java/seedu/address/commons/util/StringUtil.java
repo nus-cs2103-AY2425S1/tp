@@ -13,9 +13,22 @@ import java.util.function.Predicate;
  */
 public class StringUtil {
 
+    /**
+     * Represents a pair of {@code sentence} and {@code word} for searching.
+     */
     private record SearchPair(String sentence, String word) {
     }
 
+    /**
+     * Prepares the {@code sentence} and {@code word} for searching.
+     *   Trims the {@code word} and checks if it is empty or contains multiple words.
+     *   <br>examples:<pre>
+     *       prepareSearch("ABc def  ", "abc") == SearchPair("ABc def", "abc")
+     *       prepareSearch("ABc def", "DEF") == SearchPair("ABc def", "DEF")
+     *       </pre>
+     * @param sentence cannot be null
+     * @param word cannot be null, cannot be empty, must be a single word
+     */
     private static SearchPair prepareSearch(String sentence, String word) {
         requireNonNull(sentence);
         requireNonNull(word);
