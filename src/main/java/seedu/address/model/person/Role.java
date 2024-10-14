@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 /**
  * Represents the roles taken by a person in NUS.
@@ -94,6 +95,33 @@ public class Role {
     }
 
     /**
+     * Gets a filtered stream of ModuleCode objects based on the given RoleType Enum Value.
+     * Provides a easier way to query, search and manipulate modules.
+     *
+     * @param roleType RoleType enum value used to filter the ModuleCode
+     * @return A Stream of ModuleCode that are linked to a specific RoleType
+     */
+    public Stream<ModuleCode> getFilteredModuleCodes(RoleType roleType) {
+        return this.roles.entrySet().stream()
+                .filter(entry -> entry.getValue().equals(roleType))
+                .map(Map.Entry::getKey);
+    }
+
+    /**
+     * Gets the comma separated String representation of a list of moduleCodes based on
+     * the filtered Stream of ModuleCode.
+     *
+     * @param moduleCodeStream filtered Stream of module codes.
+     * @return comma separated String representation of a list of ModuleCode
+     */
+    public String getModuleCodeString(Stream<ModuleCode> moduleCodeStream) {
+        String[] moduleCodeStringArray = moduleCodeStream
+                .map(ModuleCode::toString)
+                .toArray(String[]::new);
+        return String.join(", ", moduleCodeStringArray);
+    }
+
+    /**
      * Get the String representation of a Person's Role for a specific
      * role type.
      * For example, if a Person takes up roles of CS1101S Tutor, MA1522 Tutor,
@@ -106,17 +134,18 @@ public class Role {
      */
     public String getRoleDescription(RoleType roleType) {
         requireNonNull(roleType);
-        String prefix = roleType.toString() + " of: ";
+
+        // Define prefix for String construction and matching
+        String prefix = roleType + " of: ";
         StringBuilder description = new StringBuilder(prefix);
-        this.roles.entrySet().stream()
-                .filter(role -> role.getValue().equals(roleType))
-                .map(Map.Entry::getKey)
-                .forEach(module -> description
-                        .append(module.toString())
-                        .append(", "));
+
+        // Get comma separated String of ModuleCodes based on the given RoleType
+        Stream<ModuleCode> filteredStream = getFilteredModuleCodes(roleType);
+        description.append(getModuleCodeString(filteredStream));
+
         return description.toString().endsWith(prefix)
                 ? ""
-                : description.substring(0, description.length() - 2);
+                : description.toString();
     }
 
     @Override
