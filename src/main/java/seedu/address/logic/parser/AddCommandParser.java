@@ -48,15 +48,15 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        RoomNumber roomNumber = null;
+        if (argMultimap.getValue(PREFIX_ROOM_NUMBER).isPresent()) {
+            roomNumber = ParserUtil.parseRoomNumber(argMultimap.getValue(PREFIX_ROOM_NUMBER).get());
+        }
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
-
-        // if room number is provided, use overloaded person constructor
-        if (arePrefixesPresent(argMultimap, PREFIX_ROOM_NUMBER)) {
-            RoomNumber roomNumber = ParserUtil.parseRoomNumber(argMultimap.getValue(PREFIX_ROOM_NUMBER).get());
-            person = new Person(name, phone, email, roomNumber, address, tagList);
-        }
+        // Allow setting optional parameter roomNumber in add command
+        // Do not allow setting optional parameter emergencyContact in add command
+        Person person = new Person(name, phone, email, roomNumber, address, null, tagList);
 
         return new AddCommand(person);
     }
