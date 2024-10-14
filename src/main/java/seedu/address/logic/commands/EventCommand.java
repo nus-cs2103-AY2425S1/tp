@@ -17,10 +17,13 @@ public class EventCommand extends Command {
 
     public static final String COMMAND_WORD = "event";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the address book.\n"
             + "Parameters: "
             + PREFIX_NAME + "EVENT NAME "
-            + PREFIX_DATE + "DATE ";
+            + PREFIX_DATE + "DATE (yyyy-mm-dd) \n"
+            + "Example: "
+            + PREFIX_NAME + "New Year's Party "
+            + PREFIX_DATE + "2025-01-01";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
