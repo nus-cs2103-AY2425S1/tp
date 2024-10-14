@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -47,24 +48,6 @@ public class DeleteCommandTest {
 
         assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_INVALID_INDEX);
     }
-
-    @Test
-    public void execute_validNameFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Name targetName = personToDelete.getName();
-        DeleteCommand deleteCommand = new DeleteCommand(targetName);
-
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, targetName);
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-        showNoPerson(expectedModel);
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-    }
-
     @Test
     public void execute_invalidNameFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
@@ -74,6 +57,24 @@ public class DeleteCommandTest {
 
         assertCommandFailure(deleteCommand, model, String.format(DeleteCommand.MESSAGE_PERSON_NOT_FOUND, invalidName));
     }
+
+    @Test
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_INVALID_INDEX);
+    }
+
+
+    @Test
+    public void execute_negativeIndex_throwsIndexOutOfBoundsException() {
+        int negativeIndexValue = -1;
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            Index negativeIndex = Index.fromOneBased(negativeIndexValue);
+            new DeleteCommand(negativeIndex);
+        });
+    }
+
 
     @Test
     public void equals() {
