@@ -47,7 +47,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         this.internalList.add(toAdd);
-        this.internalList.sort((p1, p2) -> p1.getName().toString().compareTo(p2.getName().toString()));
+        this.sortListLexographically();
     }
 
     /**
