@@ -33,4 +33,10 @@ public class ListAssignmentCommandTest {
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());
     }
 
+    @Test
+    public void equals() {
+        ListAssignmentCommand listAssignmentCommand = new ListAssignmentCommand();
+        ListAssignmentCommand listAssignmentCommandCopy = new ListAssignmentCommand();
+        assertEquals(listAssignmentCommand, listAssignmentCommandCopy);
+    }
 }
