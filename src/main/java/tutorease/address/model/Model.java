@@ -100,4 +100,19 @@ public interface Model {
      * Returns true if a lesson with the same identity as {@code lesson} overlaps in the lesson schedule.
      */
     boolean hasLessons(Lesson lesson);
+
+    /**
+     * Deletes the lesson at the given index.
+     */
+    void deleteLesson(int index);
+
+    /**
+     * Returns lesson at the specified index.
+     */
+    Lesson getLesson(int index);
+
+    /**
+     * Returns size of lesson schedule.
+     */
+    int getLessonScheduleSize();
 }

@@ -54,6 +54,18 @@ public class LessonSchedule {
         lessons.add(lesson);
     }
 
+    public void deleteLesson(int index) {
+        lessons.remove(index);
+    }
+
+    public Lesson getLesson(int index) {
+        return lessons.get(index);
+    }
+
+    public int getSize() {
+        return lessons.size();
+    }
+
     /**
      * Replaces the contents of this lesson schedule with {@code newData}.
      */

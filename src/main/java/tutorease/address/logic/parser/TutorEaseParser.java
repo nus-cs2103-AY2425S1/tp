@@ -8,7 +8,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import tutorease.address.commons.core.LogsCenter;
-import tutorease.address.logic.commands.AddCommand;
 import tutorease.address.logic.commands.ClearCommand;
 import tutorease.address.logic.commands.Command;
 import tutorease.address.logic.commands.EditCommand;
@@ -51,9 +50,8 @@ public class TutorEaseParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
         switch (commandWord) {
-
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case ContactCommandParser.COMMAND_WORD:
+            return new ContactCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -66,9 +64,6 @@ public class TutorEaseParser {
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
-
-        case ContactCommandParser.COMMAND_WORD:
-            return new ContactCommandParser().parse(arguments);
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();

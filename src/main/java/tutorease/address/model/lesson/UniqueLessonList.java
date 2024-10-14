@@ -56,12 +56,24 @@ public class UniqueLessonList implements Iterable<Lesson> {
         if (!isValidIndex(index)) {
             throw new LessonIndexOutOfRange();
         } else {
-            internalList.remove(index - 1);
+            internalList.remove(index);
         }
     }
 
+    public Lesson get(int index) {
+        if (!isValidIndex(index)) {
+            throw new LessonIndexOutOfRange();
+        } else {
+            return internalList.get(index);
+        }
+    }
+
+    public int size() {
+        return internalList.size();
+    }
+
     /**
-     * replaces the contents of the lesson list with {@code lessons}.
+     * Replaces the contents of the lesson list with {@code lessons}.
      * {@code lessons} must not contain duplicate persons.
      */
     public void setLessons(List<Lesson> lessons) {
@@ -76,8 +88,8 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * Checks if the index is valid.
      */
     public boolean isValidIndex(int index) {
-        // index is 1-based
-        return index >= 1 && index - 1 < internalList.size();
+        // index is 0-based
+        return index >= 0 && index < internalList.size();
     }
 
     /**

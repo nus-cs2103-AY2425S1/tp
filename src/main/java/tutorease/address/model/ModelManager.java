@@ -162,8 +162,23 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteLesson(int index) {
+        lessonSchedule.deleteLesson(index);
+    }
+
+    @Override
+    public Lesson getLesson(int index) {
+        return lessonSchedule.getLesson(index);
+    }
+
+    @Override
     public boolean hasLessons(Lesson lesson) {
         requireNonNull(lesson);
         return lessonSchedule.hasLesson(lesson);
+    }
+
+    @Override
+    public int getLessonScheduleSize() {
+        return lessonSchedule.getSize();
     }
 }
