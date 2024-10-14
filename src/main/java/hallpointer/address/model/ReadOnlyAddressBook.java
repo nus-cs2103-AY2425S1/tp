@@ -1,6 +1,7 @@
 package hallpointer.address.model;
 
 import hallpointer.address.model.member.Member;
+import hallpointer.address.model.session.Session;
 import javafx.collections.ObservableList;
 
 /**
@@ -13,5 +14,7 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate members.
      */
     ObservableList<Member> getMemberList();
+
+    ObservableList<Session> getSessionList();
 
 }

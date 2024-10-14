@@ -78,6 +78,8 @@ public interface Model {
      */
     void setMember(Member target, Member editedMember);
 
+    void addSession(Session session);
+
     /** Returns an unmodifiable view of the filtered member list */
     ObservableList<Member> getFilteredMemberList();
 

@@ -52,6 +52,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.members.setMembers(members);
     }
 
+
+    public void setSessions(List<Session> sessions) {
+        this.sessions.setSessions(sessions);
+    }
+
+    public ObservableList<Session> getSessionList() {
+        return sessions.asUnmodifiableObservableList();
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -59,6 +68,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setMembers(newData.getMemberList());
+        setSessions(newData.getSessionList());
     }
 
     //// member-level operations
@@ -190,5 +200,25 @@ public class AddressBook implements ReadOnlyAddressBook {
         return members.hashCode();
     }
 
+    /**
+     * Adds a session to the list of sessions.
+     *
+     * @param session The session to be added.
+     */
+    public void addSession(Session session) {
+        sessions.add(session);
+    }
+
+    /**
+     * Checks if the given session exists in the list of sessions.
+     *
+     * @param session The session to check for existence.
+     * @return {@code true} if the session exists in the list, otherwise {@code false}.
+     * @throws NullPointerException If the session is null.
+     */
+    public boolean hasSessions(Session session) {
+        requireNonNull(session);
+        return sessions.contains(session);
+    }
 
 }
