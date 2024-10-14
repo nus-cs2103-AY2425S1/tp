@@ -22,9 +22,9 @@ import seedu.sellsavvy.model.order.Order;
 public class AddOrderCommandParser implements Parser<AddOrderCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddOrderCommand
+     * Parses the given {@code String} of arguments in the context of the AddOrderCommand.
      * and returns an AddOrderCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     @Override
     public AddOrderCommand parse(String args) throws ParseException {
@@ -57,7 +57,7 @@ public class AddOrderCommandParser implements Parser<AddOrderCommand> {
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given.
      * {@code ArgumentMultimap}.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

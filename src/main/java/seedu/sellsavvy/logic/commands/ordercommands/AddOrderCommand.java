@@ -30,14 +30,14 @@ public class AddOrderCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_ITEM + "ITEM "
             + PREFIX_DATE + "DELIVERY_BY "
-            + PREFIX_COUNT + "ITEM_COUNT\n"
+            + PREFIX_COUNT + "QUANTITY\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ITEM + "Lamp "
             + PREFIX_DATE + "20-12-2024 "
             + PREFIX_COUNT + "2";
 
-    public static final String MESSAGE_SUCCESS = "New Order added for %1$s: %2$s";
-    public static final String MESSAGE_DUPLICATE_WARNING = "Note: "
+    public static final String MESSAGE_SUCCESS = "New order added for %1$s: %2$s";
+    public static final String MESSAGE_DUPLICATE_ORDER_WARNING = "Note: "
             + "This customer already has an order for this item"
             + ", verify if this is a mistake\n";
 
@@ -67,7 +67,7 @@ public class AddOrderCommand extends Command {
 
         Person personToAddUnder = lastShownList.get(index.getZeroBased());
         OrderList orderList = personToAddUnder.getOrderList();
-        String feedbackToUser = orderList.contains(toAdd) ? MESSAGE_DUPLICATE_WARNING : "";
+        String feedbackToUser = orderList.contains(toAdd) ? MESSAGE_DUPLICATE_ORDER_WARNING : "";
         orderList.add(toAdd);
 
         return new CommandResult(feedbackToUser + String.format(MESSAGE_SUCCESS,

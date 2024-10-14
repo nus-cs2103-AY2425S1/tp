@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-import static seedu.sellsavvy.logic.commands.ordercommands.AddOrderCommand.MESSAGE_DUPLICATE_WARNING;
+import static seedu.sellsavvy.logic.commands.ordercommands.AddOrderCommand.MESSAGE_DUPLICATE_ORDER_WARNING;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.showPersonAtIndex;
@@ -66,7 +66,7 @@ public class AddOrderCommandTest {
             Model expectedModel = model.createCopy();
             Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
             personToAddUnder.getOrderList().add(ABACUS);
-            String expectedMessage = String.format(MESSAGE_DUPLICATE_WARNING + AddOrderCommand.MESSAGE_SUCCESS,
+            String expectedMessage = String.format(MESSAGE_DUPLICATE_ORDER_WARNING + AddOrderCommand.MESSAGE_SUCCESS,
                     personToAddUnder.getName(), Messages.format(ABACUS));
 
             assertCommandSuccess(addOrderCommand, model, expectedMessage, expectedModel);
