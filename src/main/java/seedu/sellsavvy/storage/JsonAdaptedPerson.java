@@ -40,16 +40,16 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("orderList") List<JsonAdaptedOrder> orderList) {
+            @JsonProperty("orders") List<JsonAdaptedOrder> orderList) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        if (orderList != null) {
-            this.orderList.addAll(orderList);
-        }
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (orderList != null) {
+            this.orderList.addAll(orderList);
         }
     }
 
