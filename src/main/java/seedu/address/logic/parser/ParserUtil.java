@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Optional;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -159,33 +159,37 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String>} policy into a {@code PolicyType}.
      *
-     * @param policy The optional string representing the policy type.
+     * @param policies The List of string representing the policy type.
      *               The policy string will be trimmed and converted to lowercase
      *               for comparison with predefined {@code PolicyType} values.
      * @return The {@code PolicyType} corresponding to the given policy string.
      * @throws ParseException If the given {@code policy} is empty or does not match
      *                        any valid {@code PolicyType}.
      */
-    public static PolicyType parsePolicyType(Optional<String> policy) throws ParseException {
-        requireNonNull(policy);
-        if (policy.isEmpty()) {
+    public static Set<PolicyType> parsePolicyType(List<String> policies) throws ParseException {
+        requireNonNull(policies);
+        if (policies.isEmpty()) {
             throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
         }
-        final String lowerCaseTrimmedPolicy = policy.get().trim().toLowerCase();
+
         String life = PolicyType.LIFE.toString().toLowerCase();
         String health = PolicyType.HEALTH.toString().toLowerCase();
         String education = PolicyType.EDUCATION.toString().toLowerCase();
 
-        // Cannot use switch cases here because life, health and education are dynamic variables.
-        if (lowerCaseTrimmedPolicy.equals(life)) {
-            return PolicyType.LIFE;
-        } else if (lowerCaseTrimmedPolicy.equals(health)) {
-            return PolicyType.HEALTH;
-        } else if (lowerCaseTrimmedPolicy.equals(education)) {
-            return PolicyType.EDUCATION;
-        } else {
-            throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
+        final Set<PolicyType> policyTypes = new HashSet<>();
+        for (String policy : policies) {
+            final String lowerCaseTrimmedPolicy = policy.trim().toLowerCase();
+            if (lowerCaseTrimmedPolicy.equals(life)) {
+                policyTypes.add(PolicyType.LIFE);
+            } else if (lowerCaseTrimmedPolicy.equals(health)) {
+                policyTypes.add(PolicyType.HEALTH);
+            } else if (lowerCaseTrimmedPolicy.equals(education)) {
+                policyTypes.add(PolicyType.EDUCATION);
+            } else {
+                throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
+            }
         }
+        return policyTypes;
     }
 
     /**

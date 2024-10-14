@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -29,19 +30,19 @@ public class DeletePolicyCommand extends Command {
             + "pt/life";
     public static final String POLICY_DELETE_PERSON_SUCCESS = "Deleted Policy: %1$s";
     private final Index index;
-    private final PolicyType policyType;
+    private final Set<PolicyType> policyTypes;
 
     /**
      * Creates a DeletePolicyCommand to delete the specified {@code PolicyMap} from the client.
      *
      * @param index of the client in the filtered client list to delete policy.
-     * @param policyType the set of policies to be deleted.
+     * @param policyTypes the set of policies to be deleted.
      */
-    public DeletePolicyCommand(Index index, PolicyType policyType) {
-        requireAllNonNull(index, policyType);
+    public DeletePolicyCommand(Index index, Set<PolicyType> policyTypes) {
+        requireAllNonNull(index, policyTypes);
 
         this.index = index;
-        this.policyType = policyType;
+        this.policyTypes = policyTypes;
     }
 
     @Override
@@ -56,7 +57,7 @@ public class DeletePolicyCommand extends Command {
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), personToEdit.getPolicies());
-        if (!editedPerson.removePolicy(policyType)) {
+        if (!editedPerson.removePolicy(policyTypes)) {
             throw new CommandException(MESSAGE_POLICY_NOT_FOUND);
         }
         model.setPerson(personToEdit, editedPerson);
@@ -79,6 +80,6 @@ public class DeletePolicyCommand extends Command {
 
         DeletePolicyCommand dpc = (DeletePolicyCommand) other;
         return index.equals(dpc.index)
-                && policyType.equals(dpc.policyType);
+                && policyTypes.equals(dpc.policyTypes);
     }
 }

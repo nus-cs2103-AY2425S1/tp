@@ -9,7 +9,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -124,8 +126,9 @@ public class AddressBookParserTest {
         DeletePolicyCommand command = (DeletePolicyCommand) parser.parseCommand(
                 DeletePolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
                         + " " + PREFIX_POLICY_TYPE + "life");
-        final PolicyType policyType = PolicyType.LIFE;
-        assertEquals(new DeletePolicyCommand(INDEX_FIRST_PERSON, policyType), command);
+        final Set<PolicyType> policyTypes = new HashSet<>();
+        policyTypes.add(PolicyType.LIFE);
+        assertEquals(new DeletePolicyCommand(INDEX_FIRST_PERSON, policyTypes), command);
     }
 
     @Test

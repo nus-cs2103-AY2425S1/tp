@@ -85,9 +85,25 @@ public class Person {
     public boolean addPolicy(Policy policy) {
         return policies.add(policy);
     }
-
-    public boolean removePolicy(PolicyType type) {
-        return policies.delete(type);
+    /**
+     * Removes policies of the specified types from the policy set.
+     * <p>
+     * This method attempts to delete each policy type in the provided {@code policyTypes} set.
+     * If any deletion fails, the method stops and returns {@code false}. If all policies
+     * are successfully deleted, it returns {@code true}.
+     * </p>
+     *
+     * @param policyTypes the set of {@code PolicyType} that should be removed
+     * @return {@code true} if all policies were successfully removed;
+     *         {@code false} if any removal failed
+     */
+    public boolean removePolicy(Set<PolicyType> policyTypes) {
+        for (PolicyType type : policyTypes) {
+            if (!policies.delete(type)) {
+                return false;
+            }
+        }
+        return true;
     }
     /**
      * Returns true if both persons have the same name.
