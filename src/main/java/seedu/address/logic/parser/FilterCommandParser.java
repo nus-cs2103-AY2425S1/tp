@@ -64,14 +64,16 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             return new FilterCommand(new AddressContainsSubstringPredicate(substring));
         }
         if (argMultimap.getValue(PREFIX_INCOME).isPresent()) {
-            String substring = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()).value;
+            String substring = String.valueOf(ParserUtil.parseIncome(argMultimap
+                    .getValue(PREFIX_INCOME).get()).value);
             return new FilterCommand(new IncomeContainsSubstringPredicate(substring));
-        }        if (argMultimap.getValue(PREFIX_JOB).isPresent()) {
-            String substring = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()).value;
+        }
+        if (argMultimap.getValue(PREFIX_JOB).isPresent()) {
+            String substring = ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get()).value;
             return new FilterCommand(new JobContainsSubstringPredicate(substring));
         }
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
-            String substring = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_REMARK).get()).value;
+            String substring = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get()).value;
             return new FilterCommand(new RemarkContainsSubstringPredicate(substring));
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
