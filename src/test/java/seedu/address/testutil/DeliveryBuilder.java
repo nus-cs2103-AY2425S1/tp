@@ -4,6 +4,7 @@ import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Quantity;
 import seedu.address.model.delivery.Status;
+import seedu.address.model.delivery.SupplierIndex;
 import seedu.address.model.delivery.Time;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
@@ -24,6 +25,7 @@ public class DeliveryBuilder {
     private Time deliveryTime;
     private Cost cost;
     private Quantity quantity;
+    private SupplierIndex supplierIndex = new SupplierIndex("1");
 
     /**
      * Creates a {@code DeliveryBuilder} with the default details.
@@ -100,6 +102,10 @@ public class DeliveryBuilder {
 
     public Delivery build() {
         return new Delivery(product, sender, status, deliveryTime, cost, quantity);
+    }
+
+    public Delivery buildWithNullSender() {
+        return new Delivery(product, null, status, deliveryTime, cost, quantity, supplierIndex);
     }
 
 }
