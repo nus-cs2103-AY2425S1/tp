@@ -5,9 +5,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.property.PostalCode;
+import seedu.address.model.property.Property;
 import seedu.address.model.property.Unit;
 
 /**
@@ -15,7 +17,7 @@ import seedu.address.model.property.Unit;
  */
 public class DeletePropertyCommand extends Command {
 
-    public static final String COMMAND_WORD = "deleteunit";
+    public static final String COMMAND_WORD = "deleteproperty";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the property unit identified by its postal code and unit number.\n"
@@ -46,7 +48,16 @@ public class DeletePropertyCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        return new CommandResult(MESSAGE_DELETE_PROPERTY_SUCCESS);
+
+        Property propertyToDelete = model.getFilteredPropertyList().stream()
+                .filter(property -> property.getPostalCode().equals(postalCode)
+                        && property.getUnit().equals(unitNumber))
+                .findFirst().orElseThrow(() ->
+                        new CommandException(String.format("Property not found. ", postalCode,
+                                unitNumber)));
+
+        model.deleteProperty(propertyToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PROPERTY_SUCCESS, Messages.format(propertyToDelete)));
     }
     @Override
     public boolean equals(Object other) {

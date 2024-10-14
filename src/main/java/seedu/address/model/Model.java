@@ -161,12 +161,25 @@ public interface Model {
     boolean hasProperty(Property property);
 
     /**
+     * Deletes the given property.
+     * {@code property} must exist in the address book.
+     */
+    void deleteProperty(Property property);
+
+    /**
      * Adds the given property.
      * {@code property} must not already exist in the address book.
      */
     void addProperty(Property property);
 
+    /** Returns an unmodifiable view of the filtered property list */
     ObservableList<Property> getFilteredPropertyList();
+
+    /**
+     * Updates the filter of the filtered property list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredPropertyList(Predicate<Property> predicate);
 
     BooleanProperty getIsDisplayClientsProperty();
     void setDisplayClients();

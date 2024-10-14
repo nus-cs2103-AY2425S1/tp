@@ -234,6 +234,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteProperty(Property property) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addProperty(Property property) {
             throw new AssertionError("This method should not be called.");
         }
@@ -242,6 +247,12 @@ public class AddCommandTest {
         public ObservableList<Property> getFilteredPropertyList() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateFilteredPropertyList(Predicate<Property> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public BooleanProperty getIsDisplayClientsProperty() {
             throw new AssertionError("This method should not be called.");

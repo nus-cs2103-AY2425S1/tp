@@ -19,8 +19,8 @@ public class TypicalProperty {
      */
     public static PropertyBook getTypicalPropertyBook() {
         PropertyBook ab = new PropertyBook();
-        for (Property person : getTypicalProperties()) {
-            ab.addProperty(person);
+        for (Property property : getTypicalProperties()) {
+            ab.addProperty(property);
         }
         return ab;
     }

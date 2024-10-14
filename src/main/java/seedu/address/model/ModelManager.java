@@ -19,6 +19,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.person.Person;
 import seedu.address.model.property.Property;
 import seedu.address.storage.JsonClientBookStorage;
+import seedu.address.storage.JsonPropertyBookStorage;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -37,6 +38,7 @@ public class ModelManager implements Model {
     private final FilteredList<Client> filteredClients;
 
     private Path clientBookFilePath = Paths.get("data" , "clientbook.json");
+    private Path propertyBookFilePath = Paths.get("data" , "propertybook.json");
 
     private final BooleanProperty isDisplayClients = new SimpleBooleanProperty(true);
 
@@ -242,6 +244,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteProperty(Property target) {
+        propertyBook.removeProperty(target);
+        try {
+            JsonPropertyBookStorage jsonPropertyBookStorage = new JsonPropertyBookStorage(propertyBookFilePath);
+            jsonPropertyBookStorage.savePropertyBook(propertyBook);
+        } catch (IOException e) {
+            System.out.println("Error while saving PropertyBook: " + e.getMessage());
+        }
+    }
+
+    @Override
     public void addProperty(Property property) {
         propertyBook.addProperty(property);
     }
@@ -257,9 +270,20 @@ public class ModelManager implements Model {
         return propertyBook;
     }
 
+    //=========== Filtered Property List Accessors =============================================================
+    /**
+     * Returns an unmodifiable view of the list of {@code Property} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
     @Override
     public ObservableList<Property> getFilteredPropertyList() {
         return filteredProperties;
+    }
+
+    @Override
+    public void updateFilteredPropertyList(Predicate<Property> predicate) {
+        requireNonNull(predicate);
+        filteredProperties.setPredicate(predicate);
     }
 
     //=========== Managing UI  ==================================================================================
