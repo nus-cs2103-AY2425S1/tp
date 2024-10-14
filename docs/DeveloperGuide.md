@@ -233,7 +233,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-
+  
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -291,100 +291,948 @@ Moreover, they can keep track of house visits via an events management system.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-
-| Priority | As a …​                                    | I want to …​                                  | So that I can…​                                                          |
-|----------|--------------------------------------------|-----------------------------------------------|--------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions                        | refer to instructions when I forget how to use the App                   |
-| `* * *`  | user                                       | add a contact with their information          | I can view them later                                                    |
-| `* * *`  | user                                       | delete a person                               | remove entries that I no longer need                                     |
-| `* * *`  | user                                       | use a search bar to find my contact           | locate details of persons without having to go through the entire list   |
-| `* * *`  | user                                       | edit current contact details                  | keep details of persons updated                                          |
-| `* * *`  | user                                       | search via tags                               | filter by different groups of people                                     |
-| `* * *`  | user                                       | partially fill contacts                       | add people that do not want to give me their full information            |
-| `* * *`  | user                                       | find contacts using their names               | I can view their contact details easily                                  |
-| `* *`    | user                                       | hide private contact details                  | minimize chance of someone else seeing them by accident                  |
-| `* *`    | user                                       | keep track of client preferences              | use tags to categorize clients based on their interests                  |
-| `* *`    | user                                       | set reminders linked to contacts              | follow up with clients on time                                           |
-| `* *`    | user                                       | have an undo feature                          | prevent accidental loss of information when editing or deleting contacts |
-| `* *`    | new user                                   | see a guide on features                       | understand how to use the application                                    |
-| `* *`    | beginner                                   | see a help function for commands              | find guidance on command usage                                           |
-| `* *`    | user                                       | suggest commands to user with auto-complete   | save time typing full commands                                           |
-| `* *`    | user                                       | find commands by typing part of them          | remember commands more easily                                            |
-| `* *`    | user                                       | press [TAB] for attribute suggestions         | streamline command entry                                                 |
-| `* *`    | user                                       | see multiple attributes in command box        | know available commands without help guide                               |
-| `* *`    | user                                       | press [TAB] for value suggestions             | simplify command input                                                   |
-| `* *`    | user                                       | have colour highlighting for attributes       | spot different attributes easily                                                                         |
-| `* *`    | user                                       | see different colours for attributes          | improve organization of information                                      |
-| `* *`    | user                                       | see clear error messages                      | quickly identify input issues                                            |
-| `* *`    | user                                       | see exact reason for errors                   | input corrections efficiently                                            |
-| `* *`    | user with many contacts                    | tag certain contacts to show at the top       | easily access important contacts                                         |
-| `* *`    | user with a busy schedule                  | set reminders and see upcoming events         | stay on track with responsibilities                                      |
-| `* *`    | forgetful user                             | quickly reuse last searches                   | trace back activity efficiently                                          |
-| `* *`    | new user                                   | explore all features with a guide             | familiarize with functionalities                                         |
-| `* *`    | user with many things to remember          | add remarks/notes to users                    | recall important details for contacts                                    |
-| `* *`    | user with different friend groups          | manage all my tags                            | better organize contacts                                                 |
-| `* *`    | user who likes to categorise everything    | choose different colours for tags             | visually distinguish categories                                          |
-| `* *`    | impatient user                             | find and sort multiple tags at once           | speed up the searching process                                           |
-| `* *`    | user                                       | sort contacts in different ways               | view contacts flexibly                                                   |
-| `* *`    | user                                       | add and customize my own tags                 | personalize the address book                                             |
-| `* *`    | user                                       | link property listings to specific contacts   | market units effectively to the right clients                            |
-| `* *`    | user                                       | hide private contact details                  | minimize chance of someone else seeing them by accident                  |
-| `*`      | user with many persons in the address book | sort persons by name                          | locate a person easily                                                   |
-
-*{More to be added}*
+| Priority | As a …​                                 | I want to …​                                                | So that I can…​                                               |
+| -------- | --------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------- |
+| `* * *`  | new user                                | see usage instructions                                      | refer to instructions when I forget how to use the App        |
+| `* * *`  | user                                    | add a contact with their information                        | view them later                                               |
+| `* * *`  | user                                    | delete a person                                             | remove entries that I no longer need                          |
+| `* * *`  | user                                    | use a search bar to find my contact                         | locate details without going through the entire list          |
+| `* * *`  | user                                    | edit current contact details                                | keep the details updated                                      |
+| `* * *`  | user                                    | search via tags                                             | filter by different groups of people                          |
+| `* * *`  | user                                    | partially fill contacts                                     | add people who do not want to give full information           |
+| `* * *`  | user                                    | find contacts using their names                             | view their contact details easily                             |
+| `* * *`  | user with many things to remember       | add remarks/notes to some users                             | remember things when I look up their contacts                 |
+| `* *`    | user                                    | know some suggestions of types of tags                      | keep track of client preferences and interactions             |
+| `* *`    | user                                    | set reminders linked to contacts                            | follow up with clients on time                                |
+| `* *`    | user                                    | have an undo feature when editing or deleting a contact     | prevent accidental loss of information                        |
+| `* *`    | new user                                | see a guide on what features there are and how to use them  | know what to do with the application                          |
+| `* *`    | user                                    | press [TAB] to auto-complete commands                       | not waste time typing the full command                        |
+| `* *`    | user                                    | find commands by typing part of it                          | not have to remember exact commands                           |
+| `* *`    | user                                    | press [TAB] to auto-suggest attributes                      | not waste time typing full command                            |
+| `* *`    | user                                    | see multiple attributes in the command box                  | know available commands without referring to help guide       |
+| `* *`    | user                                    | press [TAB] to auto-suggest values                          | save time figuring out command types                          |
+| `* *`    | user                                    | have appropriate colour highlighting for each attribute     | see what I input more easily                                  |
+| `* *`    | user                                    | see different colours for each attribute                    | classify information more easily                              |
+| `* *`    | user                                    | see error messages clearly                                  | know what went wrong with my input                            |
+| `* *`    | user                                    | see the exact reason an error is caused                     | input the correct command without wasting time                |
+| `* *`    | user with many contacts                 | tag certain contacts to show at the top                     | find them easily with minimal steps                           |
+| `* *`    | user with a busy schedule               | set reminders and see upcoming events                       | remind myself and stay on track                               |
+| `* *`    | forgetful user                          | quickly reuse my last searches and view search history      | quickly trace back my activity                                |
+| `* *`    | new user                                | explore all features and follow a guide                     | be oriented to the functionalities                            |
+| `* *`    | user with many different friend groups  | manage all my tags                                          | better organize my contacts                                   |
+| `* *`    | user who likes to categorise everything | choose different colours for my tags                        | they don't all look the same                                  |
+| `* *`    | impatient user                          | find and sort multiple tags at once                         | not have to search for each tag slowly                        |
+| `* *`    | user                                    | sort my contacts in different ways                          | view contacts in different ways                               |
+| `* *`    | user                                    | add and customise my own tags                               | personalise my address book                                   |
+| `* *`    | user                                    | link property listings to specific contacts                 | know who to market units to quickly                           |
+| `*`      | user                                    | merge duplicate contacts                                    | keep my address book clean and organised                      |
+| `*`      | user                                    | export my contacts to a CSV file                            | back up or share my contact list                              |
+| `*`      | beginner                                | know some suggestions of types of tag                       | have an idea on how to sort my customers                      |
+| `*`      | user                                    | put my deleted contacts in a recycle bin                    | keep my contacts clean and restore them if it was an accident |
+| `*`      | user                                    | auto-complete or suggest commands if multiple are available | complete commands more easily                                 |
+| `*`      | user                                    | use "fuzzy searching" when using "find" command             | not need to remember the exact words                          |
+| `*`      | user with many social accounts          | save and link to contact social pages and media handles     | connect with clients on social media easily                   |
+| `*`      | user who changes devices often          | export and import contacts on different devices easily      | not save everything manually again when I change devices      |
+| `*`      | user with many groups of friends        | know who the contacts I have put a particular tag on        | organise events                                               |
+| `*`      | user with many hobbies                  | remove the tag for contacts easily                          | remove their tags if not useful anymore                       |
+| `*`      | user                                    | search up other contact information other than name         | find contacts based on other information                      |
+| `*`      | user with many contacts                 | find and search contact besides the name                    | find contacts more easily with different kinds of input       |
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a person**
 
 **MSS**
 
-1. User requests to list persons
+1. User requests to add a new person by providing the person's details.
 
-2. AddressBook shows a list of persons
+2. AddressBook validates the input details.
 
-3. User requests to delete a specific person in the list
+3. AddressBook adds the person to the contact list.
 
-4. AddressBook deletes the person
+4. AddressBook displays a confirmation that the person has been added.
    
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+- 2a. The input details are invalid or incomplete.
   
-  Use case ends.
-
-* 3a. The given index is invalid.
+  - 2a1. AddressBook shows an error message indicating the invalid fields.
   
-  * 3a1. AddressBook shows an error message.
+  - 2a2. AddressBook prompts the user to re-enter the details.
     
-    Use case resumes at step 2.
+    Use case resumes at step 1.
 
-**Use case: Find a person**
+- 2b. A person with the same details already exists.
+  
+  - 2b1. AddressBook informs the user that the person already exists.
+    
+    Use case ends.
+
+---
+
+**Use case: Edit a person's details**
 
 **MSS**
 
-1. User finds persons based off one or more keywords
+1. User requests to edit details of a specific person.
 
-2. AddressBook shows a list of persons with name matching keyword
+2. AddressBook displays the current details of the person.
 
+3. User updates the desired fields.
+
+4. AddressBook validates the new details.
+
+5. AddressBook saves the updated details.
+
+6. AddressBook confirms that the person's details have been updated.
+   
    Use case ends.
 
 **Extensions**
 
-* 2a. No persons were found.
-
-  * 2a1. AddressBook informs user nothing was found
-
+- 1a. The specified person does not exist.
+  
+  - 1a1. AddressBook shows an error message.
+    
     Use case ends.
 
-* 3a. The list of persons is empty
+- 4a. The new details are invalid.
+  
+  - 4a1. AddressBook shows an error message indicating the invalid fields.
+  
+  - 4a2. AddressBook prompts the user to re-enter the details.
+    
+    Use case resumes at step 3.
 
-  Use case ends.
+---
 
+**Use case: Add remarks/notes to a person**
+
+**MSS**
+
+1. User selects a person to add a remark/note.
+
+2. AddressBook displays an input field for the remark/note.
+
+3. User enters the remark/note.
+
+4. AddressBook saves the remark/note to the person's details.
+
+5. AddressBook confirms that the remark/note has been added.
+   
+   Use case ends.
+
+**Extensions**
+
+- 1a. The specified person does not exist.
+  
+  - 1a1. AddressBook shows an error message.
+    
+    Use case ends.
+
+- 3a. The remark/note is empty or exceeds character limits.
+  
+  - 3a1. AddressBook shows an error message.
+  
+  - 3a2. AddressBook prompts the user to re-enter the remark/note.
+    
+    Use case resumes at step 2.
+
+---
+
+**Use case: Search for persons by tags**
+
+**MSS**
+
+1. User requests to search for persons using one or more tags.
+
+2. AddressBook filters the contact list based on the specified tags.
+
+3. AddressBook displays a list of persons matching the tags.
+   
+   Use case ends.
+
+**Extensions**
+
+- 1a. No tags are specified.
+  
+  - 1a1. AddressBook shows an error message prompting for at least one tag.
+    
+    Use case resumes at step 1.
+
+- 2a. No persons match the specified tags.
+  
+  - 2a1. AddressBook informs the user that no matches were found.
+    
+    Use case ends.
+
+---
+
+**Use case: Manage tags**
+
+**MSS**
+
+1. User requests to view all existing tags.
+
+2. AddressBook displays a list of all tags.
+
+3. User selects an option to add, edit, or delete tags.
+
+4. AddressBook performs the selected action.
+
+5. AddressBook confirms that the tags have been updated.
+   
+   Use case ends.
+
+**Extensions**
+
+- 3a. User chooses to add a new tag.
+  
+  - 3a1. User provides the tag name and optional color.
+  
+  - 3a2. AddressBook adds the new tag.
+    
+    Use case resumes at step 5.
+
+- 3b. User chooses to edit an existing tag.
+  
+  - 3b1. User selects the tag to edit.
+  
+  - 3b2. User updates the tag's name or color.
+  
+  - 3b3. AddressBook saves the changes.
+    
+    Use case resumes at step 5.
+
+- 3c. User chooses to delete a tag.
+  
+  - 3c1. User selects the tag to delete.
+  
+  - 3c2. AddressBook removes the tag from all associated contacts.
+    
+    Use case resumes at step 5.
+
+- 3d. The tag name provided already exists (for add/edit).
+  
+  - 3d1. AddressBook shows an error message.
+    
+    Use case resumes at step 3.
+
+---
+
+**Use case: Set reminders linked to contacts**
+
+**MSS**
+
+1. User selects a contact to set a reminder for.
+
+2. AddressBook prompts the user to enter reminder details (date, time, message).
+
+3. User enters the reminder details.
+
+4. AddressBook saves the reminder linked to the contact.
+
+5. AddressBook confirms that the reminder has been set.
+   
+   Use case ends.
+
+**Extensions**
+
+- 1a. The specified contact does not exist.
+  
+  - 1a1. AddressBook shows an error message.
+    
+    Use case ends.
+
+- 3a. The reminder details are incomplete or invalid.
+  
+  - 3a1. AddressBook shows an error message indicating the issue.
+  
+  - 3a2. AddressBook prompts the user to re-enter the reminder details.
+    
+    Use case resumes at step 2.
+
+---
+
+**Use case: View upcoming reminders/events**
+
+**MSS**
+
+1. User requests to view upcoming reminders/events.
+
+2. AddressBook retrieves reminders/events sorted by date and time.
+
+3. AddressBook displays the list of upcoming reminders/events.
+   
+   Use case ends.
+
+**Extensions**
+
+- 2a. There are no upcoming reminders/events.
+  
+  - 2a1. AddressBook informs the user that there are no upcoming reminders/events.
+    
+    Use case ends.
+
+---
+
+**Use case: Undo an action**
+
+**MSS**
+
+1. User requests to undo the last action.
+
+2. AddressBook reverses the last action performed.
+
+3. AddressBook confirms that the action has been undone.
+   
+   Use case ends.
+
+**Extensions**
+
+- 1a. There is no action to undo.
+  
+  - 1a1. AddressBook informs the user that there is nothing to undo.
+    
+    Use case ends.
+
+- 2a. The last action cannot be undone (e.g., permanent changes).
+  
+  - 2a1. AddressBook informs the user that the action cannot be undone.
+    
+    Use case ends.
+
+---
+
+**Use case: View usage instructions**
+
+**MSS**
+
+1. User requests to view usage instructions.
+
+2. AddressBook displays the help guide with a list of available commands and features.
+   
+   Use case ends.
+
+**Extensions**
+
+- 2a. The help guide fails to load.
+  
+  - 2a1. AddressBook shows an error message.
+    
+    Use case ends.
+
+---
+
+**Use case: Auto-complete commands**
+
+**MSS**
+
+1. User begins typing a command.
+
+2. AddressBook suggests possible commands based on the input.
+
+3. User selects a suggested command or continues typing.
+
+4. AddressBook auto-completes the command.
+   
+   Use case ends.
+
+**Extensions**
+
+- 2a. No commands match the input.
+  
+  - 2a1. AddressBook does not provide suggestions.
+    
+    Use case ends.
+
+- 3a. User does not select a suggestion and enters an invalid command.
+  
+  - 3a1. AddressBook shows an error message.
+    
+    Use case ends.
+
+---
+
+**Use case: Highlight syntax and errors**
+
+**MSS**
+
+1. User types a command with attributes.
+
+2. AddressBook highlights different parts of the command (e.g., commands, attributes, values) in different colors.
+
+3. If there's a syntax error, AddressBook underlines or marks the error.
+
+4. AddressBook provides real-time feedback to the user.
+   
+   Use case ends.
+
+**Extensions**
+
+- 3a. The command has multiple errors.
+  
+  - 3a1. AddressBook highlights all errors.
+    
+    Use case ends.
+
+---
+
+**Use case: View error messages with exact causes**
+
+**MSS**
+
+1. User executes a command.
+
+2. AddressBook detects an error in the command.
+
+3. AddressBook displays an error message clearly indicating the cause.
+
+4. User reviews the error message and corrects the command.
+   
+   Use case ends.
+
+**Extensions**
+
+- 3a. Error message is too generic.
+  
+  - 3a1. User requests more details.
+  
+  - 3a2. AddressBook provides additional information about the error.
+    
+    Use case resumes at step 4.
+
+---
+
+**Use case: Sort contacts in different ways**
+
+**MSS**
+
+1. User requests to sort contacts by a specific attribute (e.g., name, date added, tag).
+
+2. AddressBook sorts the contact list based on the selected attribute.
+
+3. AddressBook displays the sorted list.
+   
+   Use case ends.
+
+**Extensions**
+
+- 1a. The specified attribute is invalid.
+  
+  - 1a1. AddressBook shows an error message.
+    
+    Use case ends.
+
+---
+
+**Use case: Reuse last searches and view search history**
+
+**MSS**
+
+1. User requests to view search history.
+
+2. AddressBook displays a list of recent searches.
+
+3. User selects a previous search to reuse.
+
+4. AddressBook performs the search and displays the results.
+   
+   Use case ends.
+
+**Extensions**
+
+- 2a. There is no search history.
+  
+  - 2a1. AddressBook informs the user that there is no search history.
+    
+    Use case ends.
+
+---
+
+**Use case: Customize tags with colors**
+
+**MSS**
+
+1. User selects a tag to customize.
+
+2. AddressBook prompts the user to choose a color.
+
+3. User selects a color for the tag.
+
+4. AddressBook updates the tag with the chosen color.
+
+5. AddressBook confirms that the tag has been updated.
+   
+   Use case ends.
+
+**Extensions**
+
+- 2a. The color selected is already in use by another tag.
+  
+  - 2a1. AddressBook warns the user about the duplicate color.
+  
+  - 2a2. User chooses to proceed or select a different color.
+    
+    Use case resumes at step 3.
+
+---
+
+**Use case: Set and view suggestions for tags**
+
+**MSS**
+
+1. User requests suggestions for types of tags.
+
+2. AddressBook analyzes existing contacts and interactions.
+
+3. AddressBook provides a list of suggested tags.
+
+4. User reviews and applies relevant tags to contacts.
+   
+   Use case ends.
+
+**Extensions**
+
+- 2a. AddressBook lacks sufficient data to provide suggestions.
+  
+  - 2a1. AddressBook informs the user and suggests manual tag creation.
+    
+    Use case ends.
+
+---
+
+**Use case: View a guide on application features**
+
+**MSS**
+
+1. New user requests to view a guide on application features.
+
+2. AddressBook displays a comprehensive guide detailing all features and how to use them.
+   
+   Use case ends.
+
+**Extensions**
+
+- 2a. The guide fails to load or is unavailable.
+  
+  - 2a1. AddressBook shows an error message.
+    
+    Use case ends.
+
+---
+
+**Use case: Explore all features**
+
+**MSS**
+
+1. User navigates through the application's feature tour.
+
+2. AddressBook guides the user step-by-step through each feature.
+
+3. User interacts with the features as they are presented.
+   
+   Use case ends.
+
+**Extensions**
+
+- 1a. User opts to skip the feature tour.
+  
+  - 1a1. AddressBook exits the tour.
+    
+    Use case ends.
+
+- 3a. User encounters an issue during the tour.
+  
+  - 3a1. AddressBook provides troubleshooting tips.
+    
+    Use case resumes at step 2.
+
+---
+
+**Use case: Find and sort multiple tags at once**
+
+**MSS**
+
+1. User requests to search for contacts using multiple tags.
+
+2. AddressBook filters contacts that match all specified tags.
+
+3. User requests to sort the filtered contacts by a chosen attribute.
+
+4. AddressBook sorts and displays the contacts.
+   
+   Use case ends.
+
+**Extensions**
+
+- 2a. No contacts match all the specified tags.
+  
+  - 2a1. AddressBook informs the user that no contacts were found.
+    
+    Use case ends.
+
+- 3a. The sorting attribute is invalid.
+  
+  - 3a1. AddressBook shows an error message.
+    
+    Use case ends.
+
+---
+
+**Use case: Press TAB to auto-suggest commands and attributes**
+
+**MSS**
+
+1. User begins typing a command or attribute.
+
+2. User presses the TAB key.
+
+3. AddressBook auto-completes or suggests possible commands/attributes.
+
+4. User selects a suggestion or continues typing.
+   
+   Use case ends.
+
+**Extensions**
+
+- 2a. Multiple suggestions are available.
+  
+  - 2a1. AddressBook displays a list of suggestions.
+  
+  - 2a2. User selects from the list.
+    
+    Use case resumes at step 4.
+
+- 2b. No suggestions are available.
+  
+  - 2b1. AddressBook does not auto-complete.
+    
+    Use case ends.
+
+---
+
+**Use case: See multiple attributes in the command box**
+
+**MSS**
+
+1. User initiates a command that requires multiple attributes.
+
+2. AddressBook displays placeholders or prompts for each required attribute.
+
+3. User fills in the attributes as guided.
+
+4. AddressBook executes the command with the provided attributes.
+   
+   Use case ends.
+
+**Extensions**
+
+- 2a. User skips an attribute.
+  
+  - 2a1. AddressBook prompts the user to fill in the missing attribute.
+    
+    Use case resumes at step 3.
+
+- 3a. An attribute value is invalid.
+  
+  - 3a1. AddressBook shows an error message indicating the invalid attribute.
+  
+  - 3a2. User corrects the attribute.
+    
+    Use case resumes at step 3.
+
+---
+
+**Use case: Have appropriate color highlighting for attributes**
+
+**MSS**
+
+1. User types a command with attributes in the command box.
+
+2. AddressBook highlights each attribute and its value in different colors.
+
+3. User easily identifies each part of the command.
+   
+   Use case ends.
+
+**Extensions**
+
+- 2a. The color scheme is not suitable for the user.
+  
+  - 2a1. User adjusts the color settings in preferences.
+    
+    Use case resumes at step 1.
+
+---
+
+**Use case: See error messages clearly**
+
+**MSS**
+
+1. User executes a command.
+
+2. AddressBook detects an error.
+
+3. AddressBook displays the error message prominently and clearly.
+
+4. User reads the error message and takes corrective action.
+   
+   Use case ends.
+
+**Extensions**
+
+- 3a. Error message overlaps with other interface elements.
+  
+  - 3a1. AddressBook adjusts the layout to ensure visibility.
+    
+    Use case resumes at step 3.
+
+---
+
+**Use case: Tag certain contacts to show at the top**
+
+**MSS**
+
+1. User selects contacts to prioritize.
+
+2. User tags them with a special tag (e.g., "Favorite").
+
+3. AddressBook adjusts the contact list to display tagged contacts at the top.
+   
+   Use case ends.
+
+**Extensions**
+
+- 2a. User wants to prioritize multiple tags.
+  
+  - 2a1. AddressBook allows setting priority levels for tags.
+    
+    Use case resumes at step 3.
+
+---
+
+**Use case: Manage multiple customer groups**
+
+**MSS**
+
+1. User creates tags for different customer groups.
+
+2. User assigns contacts to these tags.
+
+3. User filters or views contacts based on these tags.
+   
+   Use case ends.
+
+**Extensions**
+
+- 1a. User attempts to create a duplicate tag.
+  
+  - 1a1. AddressBook informs the user and prevents duplication.
+    
+    Use case resumes at step 1.
+
+- 2a. User wants to assign a contact to multiple groups.
+  
+  - 2a1. AddressBook allows multiple tags per contact.
+    
+    Use case resumes at step 3.
+
+---
+
+**Use case: Set and see upcoming appointments**
+
+**MSS**
+
+1. User adds appointments linked to contacts or tags.
+
+2. AddressBook saves the appointments with dates and times.
+
+3. User requests to view upcoming events.
+
+4. AddressBook displays events in chronological order.
+   
+   Use case ends.
+
+**Extensions**
+
+- 1a. Event details are incomplete.
+  
+  - 1a1. AddressBook prompts the user to complete all required fields.
+    
+    Use case resumes at step 1.
+
+- 3a. No upcoming events are scheduled.
+  
+  - 3a1. AddressBook informs the user.
+    
+    Use case ends.
+
+---
+
+**Use case: Find commands by typing part of it**
+
+**MSS**
+
+1. User types a partial command.
+
+2. AddressBook searches for commands matching the input.
+
+3. AddressBook suggests possible commands.
+
+4. User selects a command from the suggestions.
+   
+   Use case ends.
+
+**Extensions**
+
+- 2a. No commands match the partial input.
+  
+  - 2a1. AddressBook informs the user and suggests using the help guide.
+    
+    Use case ends.
+
+---
+
+**Use case: Press TAB to auto-suggest values**
+
+**MSS**
+
+1. User types a command requiring specific values (e.g., tag names).
+
+2. User presses TAB key.
+
+3. AddressBook suggests existing values that match the input.
+
+4. User selects a value from the suggestions.
+   
+   Use case ends.
+
+**Extensions**
+
+- 3a. No values match the input.
+  
+  - 3a1. AddressBook does not provide suggestions.
+    
+    Use case ends.
+
+---
+
+**Use case: Reuse last searches and view search history**
+
+**MSS**
+
+1. User accesses the search history feature.
+
+2. AddressBook displays a list of recent searches.
+
+3. User selects a previous search.
+
+4. AddressBook executes the search and displays results.
+   
+   Use case ends.
+
+**Extensions**
+
+- 2a. Search history is empty.
+  
+  - 2a1. AddressBook informs the user.
+    
+    Use case ends.
+
+---
+
+**Use case: Remove tags from contacts easily**
+
+**MSS**
+
+1. User selects a contact to modify tags.
+
+2. AddressBook displays current tags associated with the contact.
+
+3. User deselects or removes unwanted tags.
+
+4. AddressBook updates the contact's tag list.
+
+5. AddressBook confirms that the tags have been updated.
+   
+   Use case ends.
+
+**Extensions**
+
+- 2a. Contact has no tags.
+  
+  - 2a1. AddressBook informs the user.
+    
+    Use case ends.
+
+---
+
+**Use case: View multiple attributes in the command box**
+
+**MSS**
+
+1. User starts typing a command that accepts multiple attributes.
+
+2. AddressBook displays a dynamic template showing all possible attributes.
+
+3. User fills in the attributes as needed.
+
+4. AddressBook validates and executes the command.
+   
+   Use case ends.
+
+**Extensions**
+
+- 3a. User skips optional attributes.
+  
+  - 3a1. AddressBook proceeds with the provided attributes.
+    
+    Use case resumes at step 4.
+
+- 4a. Required attributes are missing.
+  
+  - 4a1. AddressBook shows an error message.
+  
+  - 4a2. User adds the missing attributes.
+    
+    Use case resumes at step 3.
+
+---
+
+**Use case: Set reminders and see upcoming events**
+
+**MSS**
+
+1. User sets a reminder or schedules an event linked to a contact.
+
+2. AddressBook saves the reminder/event details.
+
+3. User requests to view upcoming reminders/events.
+
+4. AddressBook displays a chronological list.
+   
+   Use case ends.
+
+**Extensions**
+
+- 2a. Reminder/event details are invalid.
+  
+  - 2a1. AddressBook shows an error message.
+  
+  - 2a2. User corrects the details.
+    
+    Use case resumes at step 1.
+
+- 3a. No upcoming reminders/events.
+  
+  - 3a1. AddressBook informs the user.
+    
+    Use case ends.
 
 ### Non-Functional Requirements
 
@@ -395,11 +1243,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Should reliably store contact information across different sessions with minimal chance of corruption
 6. Should not contain any vulnerabilities, protect user data and ensure system integrity
 7. Should be easy to maintain for developers to add new features and exensions in the future
+8. Should have good contrast between colours to allow people to read text and information more easily
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+- **Auto-complete**: A feature that predicts and completes the rest of a word or command as the user types, often activated by pressing the `TAB` key.
+
+- **Fuzzy Searching**: A search technique that finds approximate matches to the search terms, allowing users to find results without needing exact matches.
+
+- **Recycle Bin**: A temporary storage area for deleted contacts, allowing users to restore them if they were deleted accidentally.
+
+- **Reminder/Event**: A scheduled notification linked to a contact, alerting the user of upcoming tasks, appointments, or follow-ups.
+
+- **Social Media Handles**: Usernames or profile links associated with a person's social media accounts.
+
+- **Syntax Highlighting**: A feature that displays commands in different colors to differentiate between commands, attributes, and values for easier readability.
+
+- **Tag**: A label assigned to a contact to categorize or group contacts for better organization.
+
+- **Undo Feature**: A function that allows the user to reverse the last action taken, preventing accidental loss or changes to information.
+
+- **Attribute Placeholder**: A prompt or template shown in the command box that indicates where the user should input specific information in a command.
+
+- **Contact**: An entry in the AddressBook representing a person, including their personal and professional information.
+
+- **Reminder/Event List**: A chronological list displaying upcoming reminders or events set by the user.
+
+- **Search History**: A record of previous search queries entered by the user, allowing for quick reuse of past searches.
+
+- **Highlighting Errors**: Visual cues provided by the application (such as underlines or color changes) to indicate mistakes in command input.
+
+- **Attribute Placeholder**: A visual guide in the command box showing the required and optional attributes for a command.
+
+- **Priority Tagging**: The act of marking certain contacts to appear at the top of the contact list for quick access.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -425,7 +1301,7 @@ testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
    
    2. Re-launch the app by double-clicking the jar file.<br>
-
+      
        Expected: The most recent window size and location is retained.
 
 3. _{ more test cases …​ }_
@@ -433,7 +1309,7 @@ testers are expected to do more *exploratory* testing.
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
-
+   
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
    
    2. Test case: `delete 1`<br>
