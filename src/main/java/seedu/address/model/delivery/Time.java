@@ -4,28 +4,42 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a delivery's order time.
+ * Guarantees: is valid as declared in {@link #isValidTime(String)} (String)}
+ */
 public class Time {
-    protected static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
-    public final LocalTime time;
-
     public static final String MESSAGE_CONSTRAINTS =
-            "Time should follow the format <HHmm>";
+            "Incorrect time format. Expected format: hh:mm:ss";
+    public final LocalTime value;
 
+    /**
+     * Constructs a {@code Time}.
+     *
+     * @param time A valid time.
+     */
     public Time(String time) {
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
-        this.time = LocalTime.parse(time, formatter);
+        value = LocalTime.parse(time);
     }
 
+    /**
+     * Returns true if a given string is a valid time.
+     */
     public static boolean isValidTime(String test) {
         try {
-            LocalTime.parse(test, formatter);
-            return true;
+            LocalTime parsedTime = LocalTime.parse(test);
         } catch (DateTimeParseException e) {
             return false;
         }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Time Ordered: " + value;
     }
 }
