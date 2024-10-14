@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -19,16 +20,28 @@ import seedu.address.model.ReadOnlyAddressBook;
  */
 public class JsonAddressBookStorage implements AddressBookStorage {
 
+    private static final Path DEFAULT_ARCHIVEPATH = Paths.get("archive", "archiveaddressbook.json");
     private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
 
     private Path filePath;
+    private Path archivePath;
 
     public JsonAddressBookStorage(Path filePath) {
         this.filePath = filePath;
+        this.archivePath = DEFAULT_ARCHIVEPATH;
+    }
+
+    public JsonAddressBookStorage(Path filePath, Path archivePath) {
+        this.filePath = filePath;
+        this.archivePath = archivePath;
     }
 
     public Path getAddressBookFilePath() {
         return filePath;
+    }
+
+    public Path getArchivedAddressBookFilePath() {
+        return archivePath;
     }
 
     @Override
@@ -70,6 +83,24 @@ public class JsonAddressBookStorage implements AddressBookStorage {
      * @param filePath location of the data. Cannot be null.
      */
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        requireNonNull(addressBook);
+        requireNonNull(filePath);
+
+        FileUtil.createIfMissing(filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+    }
+
+    @Override
+    public void saveArchivedAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+        saveAddressBook(addressBook, filePath);
+    }
+
+    /**
+     * Similar to {@link #saveArchivedAddressBook(ReadOnlyAddressBook)}.
+     *
+     * @param filePath location of the data. Cannot be null.
+     */
+    public void saveArchivedAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 
