@@ -6,7 +6,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.logging.Filter;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;

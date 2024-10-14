@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -102,11 +101,11 @@ public interface Model {
      */
     boolean hasEvent(Event event);
 
-//    /**
-//     * Deletes the given event.
-//     * The event must exist in the address book.
-//     */
-//    void deleteEvent(Event target);
+    //    /**
+    //     * Deletes the given event.
+    //     * The event must exist in the address book.
+    //     */
+    //    void deleteEvent(Event target);
 
     /**
      * Adds the given event
@@ -114,17 +113,18 @@ public interface Model {
      */
     void addEvent(Event event);
 
-//    /**
-//     * Replaces the given event {@code target} with {@code editedEvent}.
-//     * {@code target} must exist in the address book.
-//     * The event identity of {@code editedEvent} must not be the same as another existing event in the address book.
-//     */
-//    void setEvent(Event target, Event editedEvent);
+    //    /**
+    //     * Replaces the given event {@code target} with {@code editedEvent}.
+    //     * {@code target} must exist in the address book.
+    //     * The event identity of {@code editedEvent} must not be the same as another existing event in the address
+    //     * book.
+    //     */
+    //    void setEvent(Event target, Event editedEvent);
 
-//    /**
-//     * Find all the events whose names are the same as the given argument.
-//     */
-//    List<Event> findEventsWithName(EventName eventName);
+    //    /**
+    //     * Find all the events whose names are the same as the given argument.
+    //     */
+    //    List<Event> findEventsWithName(EventName eventName);
 
     /**
      * Returns an unmodifiable view of the filtered event list.

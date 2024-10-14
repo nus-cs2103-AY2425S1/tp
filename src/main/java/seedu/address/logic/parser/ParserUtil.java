@@ -164,7 +164,8 @@ public class ParserUtil {
         requireAllNonNull(eventStartDate, eventEndDate);
         String trimmedEventStartDate = eventStartDate.trim();
         String trimmedEventEndDate = eventEndDate.trim();
-        LocalDate start, end;
+        LocalDate start;
+        LocalDate end;
         try {
             start = LocalDate.parse(trimmedEventStartDate);
             end = LocalDate.parse(trimmedEventEndDate);
