@@ -205,7 +205,7 @@ public class ModelManager implements Model {
             }
         }
         return null; // Return null if no matching student is found
-Add DeleteStudentCommand functionality and implement getStudentByNumber
+
     }
 
     @Override
