@@ -77,7 +77,7 @@ public class SampleDataUtil {
                         "As a software engineer, you will work on a specific project critical to Google’s needs with "
                         + "opportunities to switch teams and projects as you and our fast-paced business grow and "
                         + "evolve. "),
-                getRequirements("Go", "Kubernetes", "Docker", "5 YOE")
+                getRequirements("Go", "Kubernetes", "Docker", "5YOE")
         ), new Job(
                 new JobName("Software Engineering Manager II, YouTube"),
                 new JobCompany("YouTube"),
@@ -85,7 +85,7 @@ public class SampleDataUtil {
                 new JobDescription(
                         "As a Software Engineering Manager you manage your project goals, contribute to product "
                         + "strategy and help develop your team. "),
-                getRequirements("Leadership", "AGILE", "SDLC", "CI/CD")
+                getRequirements("Leadership", "AGILE", "SDLC", "CICD")
         ), new Job(
                 new JobName("Test Job"),
                 new JobCompany("Test Company"),
