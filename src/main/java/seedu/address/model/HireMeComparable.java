@@ -1,5 +1,5 @@
 package seedu.address.model;
 
-public interface AddressBookComparable<T> {
+public interface HireMeComparable<T> {
     boolean isSame(T other);
 }

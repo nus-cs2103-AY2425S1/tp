@@ -71,6 +71,7 @@ public class EditCommand extends Command<Internship> {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+
 //        Internship personToEdit = lastShownList.get(index.getZeroBased());
 //        Internship editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 //

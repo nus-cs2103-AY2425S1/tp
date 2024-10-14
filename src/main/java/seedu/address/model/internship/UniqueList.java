@@ -8,7 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.AddressBookComparable;
+import seedu.address.model.HireMeComparable;
 import seedu.address.model.internship.exceptions.DuplicatePersonException;
 import seedu.address.model.internship.exceptions.PersonNotFoundException;
 
@@ -23,7 +23,7 @@ import seedu.address.model.internship.exceptions.PersonNotFoundException;
  *
  * @see Person#isSamePerson(Person)
  */
-public class UniqueList<T extends AddressBookComparable<T>> implements Iterable<T> {
+public class UniqueList<T extends HireMeComparable<T>> implements Iterable<T> {
 
     private final ObservableList<T> internalList = FXCollections.observableArrayList();
     private final ObservableList<T> internalUnmodifiableList =

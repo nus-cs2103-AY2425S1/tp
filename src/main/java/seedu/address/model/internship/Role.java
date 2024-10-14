@@ -3,6 +3,8 @@ package seedu.address.model.internship;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.logic.validator.RoleValidator;
+
 /**
  * Represents an Internship's role in the internship book.
  * Guarantees: immutable; the role is valid as declared in {@link #validate(String)}.
@@ -30,7 +32,7 @@ public class Role {
      */
     public Role(String role) {
         requireNonNull(role);
-        checkArgument(Role.validate(role), MESSAGE_CONSTRAINTS);
+        checkArgument(RoleValidator.of().validate(role), MESSAGE_CONSTRAINTS);
         this.value = role;
     }
 
@@ -41,16 +43,6 @@ public class Role {
      */
     public String getValue() {
         return this.value;
-    }
-
-    /**
-     * Static validation method to check if a given string is a valid role.
-     *
-     * @param test the string to be validated.
-     * @return true if the string is a valid role, false otherwise.
-     */
-    public static boolean validate(String test) {
-        return test.matches(VALIDATION_REGEX);
     }
 
     /**

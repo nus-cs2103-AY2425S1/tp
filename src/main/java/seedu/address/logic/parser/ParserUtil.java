@@ -11,6 +11,10 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.validator.DateValidator;
+import seedu.address.logic.validator.EmailValidator;
+import seedu.address.logic.validator.NameValidator;
+import seedu.address.logic.validator.RoleValidator;
 import seedu.address.model.internship.*;
 import seedu.address.model.tag.Tag;
 
@@ -43,7 +47,7 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!Name.validate(trimmedName)) {
+        if (!NameValidator.of().validate(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
@@ -52,18 +56,18 @@ public class ParserUtil {
     public static Role parseRole(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-//        if (!Name.validate(trimmedName)) {
-//            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
-//        }
+        if (!RoleValidator.of().validate(trimmedName)) {
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+        }
         return new Role(trimmedName);
     }
 
     public static Date parseDate(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-//        if (!Name.validate(trimmedName)) {
-//            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
-//        }
+        if (!DateValidator.of().validate(trimmedName)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
         return new Date(LocalDate.parse(trimmedName, DateTimeFormatter.ofPattern("dd/MM/yy")));
     }
 
@@ -106,7 +110,7 @@ public class ParserUtil {
     public static Email parseEmail(String email) throws ParseException {
         requireNonNull(email);
         String trimmedEmail = email.trim();
-        if (!Email.validate(trimmedEmail)) {
+        if (!EmailValidator.of().validate(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);

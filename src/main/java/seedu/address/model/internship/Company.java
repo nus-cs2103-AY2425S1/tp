@@ -3,6 +3,9 @@ package seedu.address.model.internship;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.logic.validator.EmailValidator;
+import seedu.address.logic.validator.NameValidator;
+
 /**
  * Represents a Company in the internship book.
  * Guarantees: immutable; the email and name are valid as declared in their respective validation methods.
@@ -23,8 +26,8 @@ public class Company {
     public Company(Email email, Name name) {
         requireNonNull(email);
         requireNonNull(name);
-        checkArgument(email.validate(email.getValue()), Email.MESSAGE_CONSTRAINTS);
-        checkArgument(name.validate(name.getValue()), Name.MESSAGE_CONSTRAINTS);
+        checkArgument(EmailValidator.of().validate(email.getValue()), Email.MESSAGE_CONSTRAINTS);
+        checkArgument(NameValidator.of().validate(name.getValue()), Name.MESSAGE_CONSTRAINTS);
         this.email = email;
         this.name = name;
     }

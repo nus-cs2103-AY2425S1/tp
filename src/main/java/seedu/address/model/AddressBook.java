@@ -12,7 +12,7 @@ import seedu.address.model.internship.UniqueList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook<T extends AddressBookComparable<T>> implements ReadOnlyAddressBook<T> {
+public class AddressBook<T extends HireMeComparable<T>> implements ReadOnlyAddressBook<T> {
 
     private final UniqueList<T> items;
 

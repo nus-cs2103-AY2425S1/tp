@@ -16,7 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 /**
  * Represents the in-memory model of the address book data.
  */
-public class ModelManager<T extends AddressBookComparable<T>> implements Model<T> {
+public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private final AddressBook<T> addressBook;
     private final UserPrefs userPrefs;

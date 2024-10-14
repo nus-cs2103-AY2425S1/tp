@@ -13,7 +13,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.AddressBookComparable;
+import seedu.address.model.HireMeComparable;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.storage.Storage;
@@ -21,7 +21,7 @@ import seedu.address.storage.Storage;
 /**
  * The main LogicManager of the app.
  */
-public class LogicManager<T extends AddressBookComparable<T>> implements Logic<T> {
+public class LogicManager<T extends HireMeComparable<T>> implements Logic<T> {
     public static final String FILE_OPS_ERROR_FORMAT = "Could not save data due to the following error: %s";
 
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =

@@ -5,13 +5,13 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.AddressBookComparable;
+import seedu.address.model.HireMeComparable;
 
 /**
  * Represents an Internship in the network book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Internship implements AddressBookComparable<Internship> {
+public class Internship implements HireMeComparable<Internship> {
 
     // Identity fields
     private final Company company;

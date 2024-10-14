@@ -3,6 +3,8 @@ package seedu.address.model.internship;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.logic.validator.NameValidator;
+
 /**
  * Represents a Company's name in the internship book.
  * Guarantees: immutable; the name is valid as declared in {@link #validate(String)}.
@@ -29,7 +31,7 @@ public class Name {
      */
     public Name(String name) {
         requireNonNull(name);
-        checkArgument(Name.validate(name), MESSAGE_CONSTRAINTS);
+        checkArgument(NameValidator.of().validate(name), MESSAGE_CONSTRAINTS);
         this.value = name;
     }
 
@@ -42,15 +44,6 @@ public class Name {
         return this.value;
     }
 
-    /**
-     * Static validation method to check if a given string is a valid company name.
-     *
-     * @param test the string to be validated.
-     * @return true if the string is a valid company name, false otherwise.
-     */
-    public static boolean validate(String test) {
-        return test.matches(VALIDATION_REGEX);
-    }
 
     /**
      * Returns a string representation of the company name.

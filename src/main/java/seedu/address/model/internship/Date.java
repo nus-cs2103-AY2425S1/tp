@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import seedu.address.logic.validator.DateValidator;
+
 /**
  * Represents a Date in the internship book.
  * Guarantees: immutable; is valid as declared in {@link #validate(String)}.
@@ -14,7 +16,7 @@ import java.time.format.DateTimeParseException;
 public class Date {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Dates should be in the format 'yyyy-MM-dd' and must be valid.";
+            "Dates should be in the format 'dd/MM/yy' and must be valid.";
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -41,7 +43,7 @@ public class Date {
      */
     public Date(String dateString) {
         requireNonNull(dateString);
-        checkArgument(Date.validate(dateString), MESSAGE_CONSTRAINTS);
+        checkArgument(DateValidator.of().validate(dateString), MESSAGE_CONSTRAINTS);
         this.date = LocalDate.parse(dateString, FORMATTER);
     }
 
@@ -92,21 +94,5 @@ public class Date {
     @Override
     public int hashCode() {
         return date.hashCode();
-    }
-
-    /**
-     * Validates the given string as a date.
-     * The string must be in the format 'yyyy-MM-dd'.
-     *
-     * @param test the string to be validated.
-     * @return true if the string is a valid date, false otherwise.
-     */
-    public static boolean validate(String test) {
-        try {
-            LocalDate.parse(test, FORMATTER);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
     }
 }

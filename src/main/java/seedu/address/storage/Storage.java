@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.AddressBookComparable;
+import seedu.address.model.HireMeComparable;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
@@ -13,7 +13,7 @@ import seedu.address.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage<T extends AddressBookComparable<T>> extends AddressBookStorage<T>, UserPrefsStorage {
+public interface Storage<T extends HireMeComparable<T>> extends AddressBookStorage<T>, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;

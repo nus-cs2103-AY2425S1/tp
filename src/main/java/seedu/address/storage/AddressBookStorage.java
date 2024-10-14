@@ -5,13 +5,13 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.AddressBookComparable;
+import seedu.address.model.HireMeComparable;
 import seedu.address.model.ReadOnlyAddressBook;
 
 /**
  * Represents a storage for {@link seedu.address.model.AddressBook}.
  */
-public interface AddressBookStorage<T extends AddressBookComparable<T>> {
+public interface AddressBookStorage<T extends HireMeComparable<T>> {
 
     /**
      * Returns the file path of the data file.
