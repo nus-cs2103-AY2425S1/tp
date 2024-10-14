@@ -33,7 +33,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
             String date = argMultimap.getValue(PREFIX_DATE).orElse("");
             LocalDateTime dateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
             String note = argMultimap.getValue(PREFIX_NOTE).orElse("");
-            return new ScheduleCommand(name, new Schedule(date, note));
+            return new ScheduleCommand(name, new Schedule(date, note.trim()));
         } catch (DateTimeParseException e) {
             throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
         }

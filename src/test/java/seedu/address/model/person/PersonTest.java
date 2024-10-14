@@ -103,17 +103,17 @@ public class PersonTest {
 
         // Person with future appointment
         Person personWithFutureAppointment = new PersonBuilder()
-                .withSchedule(now.plusDays(1).format(formatter)).build();
+                .withSchedule(now.plusDays(1).format(formatter), "").build();
         assertTrue(personWithFutureAppointment.hasUpcomingAppointment(now));
 
         // Person with past appointment
         Person personWithPastAppointment = new PersonBuilder()
-                .withSchedule(now.minusDays(1).format(formatter)).build();
+                .withSchedule(now.minusDays(1).format(formatter), "").build();
         assertFalse(personWithPastAppointment.hasUpcomingAppointment(now));
 
         // Person with no appointment
         Person personWithNoAppointment = new PersonBuilder()
-                .withSchedule("").build();
+                .withSchedule("", "").build();
         assertFalse(personWithNoAppointment.hasUpcomingAppointment(now));
     }
 

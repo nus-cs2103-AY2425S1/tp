@@ -33,7 +33,7 @@ public class ScheduleCommand extends Command {
      * Constructs a ScheduleCommand to schedule an appointment for the specified person.
      *
      * @param name The name of the person.
-     * @param schedule The schedule date and time.
+     * @param schedule The schedule date and time and optional notes.
      */
     public ScheduleCommand(String name, Schedule schedule) {
         this.name = name;

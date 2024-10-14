@@ -70,6 +70,10 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
+    /**
+     * Sets the text for the reminder field.
+     * @param person
+     */
     private void setReminderField(Person person) {
         if (person.getReminder() != null && !person.getReminder().toString().isEmpty()) {
             String formattedDateTime = LocalDateTime.parse(
@@ -86,14 +90,22 @@ public class PersonCard extends UiPart<Region> {
         }
     }
 
+    /**
+     * Sets the text for the notes field.
+     * @param person
+     */
     private void setNoteField(Person person) {
-        if (person.getSchedule().getNotes() == null) {
+        if (person.getSchedule().getNotes() == null || person.getSchedule().getNotes().isEmpty()) {
             note.setText("");
         } else {
             note.setText("Notes: " + person.getSchedule().getNotes());
         }
     }
 
+    /**
+     * Sets the text for the date field.
+     * @param person
+     */
     private void setDateField(Person person) {
         if (person.getSchedule().toString().isEmpty()) {
             schedule.setText(person.getSchedule().toString());
