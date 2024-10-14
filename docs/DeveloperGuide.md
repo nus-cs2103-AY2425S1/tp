@@ -270,6 +270,7 @@ Home-based healthcare providers who
 * Can type fast
 * Prefers typing to mouse interactions
 * Is reasonably comfortable using CLI apps
+* Are based in Singapore
 
 
 **Value proposition**: Our patient management system empowers home-based healthcare providers to efficiently retrieve and analyze patient information, enabling them to provide personalized care and see their schedule for the day.
