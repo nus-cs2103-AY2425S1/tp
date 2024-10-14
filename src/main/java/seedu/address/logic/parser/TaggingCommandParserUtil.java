@@ -39,11 +39,6 @@ public class TaggingCommandParserUtil {
         }
         Set<Tag> tagValues = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        if (tagValues.isEmpty()) {
-            System.out.println("No tags provided, throwing exception");
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, messageUsage));
-        }
-
         return new Pair<>(index, new HashSet<>(tagValues));
     }
 
