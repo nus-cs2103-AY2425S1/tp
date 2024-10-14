@@ -115,7 +115,7 @@ public class Role {
      * @param moduleCodeStream filtered Stream of module codes.
      * @return comma separated String representation of a list of ModuleCode
      */
-    public String getModuleCodeString(Stream<ModuleCode> moduleCodeStream) {
+    public static String getModuleCodeString(Stream<ModuleCode> moduleCodeStream) {
         requireNonNull(moduleCodeStream);
         String[] moduleCodeStringArray = moduleCodeStream
                 .map(ModuleCode::toString)
