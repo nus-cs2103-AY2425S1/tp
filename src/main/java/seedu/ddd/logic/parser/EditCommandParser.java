@@ -3,9 +3,11 @@ package seedu.ddd.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -15,6 +17,9 @@ import java.util.Set;
 
 import seedu.ddd.commons.core.index.Index;
 import seedu.ddd.logic.commands.EditCommand;
+import seedu.ddd.logic.commands.EditCommand.EditClientDescriptor;
+import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
+import seedu.ddd.logic.commands.EditCommand.EditVendorDescriptor;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.tag.Tag;
 
@@ -23,6 +28,16 @@ import seedu.ddd.model.tag.Tag;
  */
 public class EditCommandParser implements Parser<EditCommand> {
 
+    private static final Prefix[] PREFIXES = new Prefix[] {
+        PREFIX_NAME,
+        PREFIX_PHONE,
+        PREFIX_EMAIL,
+        PREFIX_ADDRESS,
+        PREFIX_DATE,
+        PREFIX_SERVICE,
+        PREFIX_TAG,
+    };
+
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -30,8 +45,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, EditCommandParser.PREFIXES);
 
         Index index;
 
@@ -41,29 +55,13 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        // Should not contain duplicates prefixes.
+        // Should either specify date for client or service for vendor.
+        argMultimap.verifyNoDuplicatePrefixesFor(EditCommandParser.PREFIXES);
+        argMultimap.verifyNoExclusivePrefixesFor(PREFIX_DATE, PREFIX_SERVICE);
 
-        EditCommand.EditContactDescriptor editPersonDescriptor = new EditCommand.EditContactDescriptor();
-
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-        }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
-        }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
-
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
-        }
-
-        return new EditCommand(index, editPersonDescriptor);
+        EditContactDescriptor editContactDescriptor = parseArgumentMultimap(argMultimap);
+        return new EditCommand(index, editContactDescriptor);
     }
 
     /**
@@ -79,6 +77,40 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
+    }
+
+    private EditContactDescriptor parseArgumentMultimap(ArgumentMultimap argMultimap) throws ParseException {
+        EditContactDescriptor editContactDescriptor = new EditCommand.EditContactDescriptor();
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editContactDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            editContactDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            editContactDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        }
+        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            editContactDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        }
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editContactDescriptor::setTags);
+
+        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            EditClientDescriptor editClientDescriptor = new EditClientDescriptor(editContactDescriptor);
+            editClientDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+            editContactDescriptor = editClientDescriptor;
+        }
+        if (argMultimap.getValue(PREFIX_SERVICE).isPresent()) {
+            EditVendorDescriptor editVendorDescriptor = new EditVendorDescriptor(editContactDescriptor);
+            editVendorDescriptor.setService(ParserUtil.parseService(argMultimap.getValue(PREFIX_SERVICE).get()));
+            editContactDescriptor = editVendorDescriptor;
+        }
+
+        if (!editContactDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        }
+
+        return editContactDescriptor;
     }
 
 }
