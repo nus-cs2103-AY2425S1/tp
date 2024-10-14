@@ -1,0 +1,268 @@
+package seedu.address.logic.commands;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+
+import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.State;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
+import seedu.address.model.group.exception.GroupNotFoundException;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
+import seedu.address.testutil.PersonBuilder;
+
+
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for
+ * {@code DeleteStudentFromGroupCommand}.
+ */
+public class DeleteStudentFromGroupCommandTest {
+    private static final Group validGroup = new Group(new GroupName("Team 1"));
+    private static final Student validStudent = new PersonBuilder().build();
+    private Model model;
+    @BeforeEach
+    public void setUp() {
+        model = new ModelStubDeleteStudentFromGroup();
+    }
+    
+    @Test
+    public void execute_studentExistsInGroup_success() throws CommandException {
+        DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(validGroup.getGroupName(),
+                validStudent.getStudentNumber());
+        CommandResult commandResult = command.execute(model);
+
+        assertEquals(String.format(DeleteStudentFromGroupCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                validStudent, validGroup.getGroupName()), commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_studentDoesNotExistInGroup_throwsCommandException() {
+        DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(validGroup.getGroupName(), new StudentNumber("A0123456Q"));
+
+        assertThrows(CommandException.class, Messages.MESSAGE_STUDENT_NO_NOT_FOUND, () -> command.execute(model));
+    }
+
+    @Test
+    public void execute_groupDoesNotExist_throwsCommandException() {
+        DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(new GroupName("Team 5"),
+                validStudent.getStudentNumber());
+        assertThrows(CommandException.class, Messages.MESSAGE_GROUP_NAME_NOT_FOUND, () -> command.execute(model));
+    }
+
+    @Test
+    public void equals() {
+        GroupName teamOneName = new GroupName("Team 1");
+        GroupName teamTwoName = new GroupName("Team 2");
+        StudentNumber studentNumberOne = new StudentNumber("A0123456Z");
+        StudentNumber studentNumberTwo = new StudentNumber("A0654321Z");
+
+        DeleteStudentFromGroupCommand deleteStudentOneFromTeamOneCommand =
+                new DeleteStudentFromGroupCommand(teamOneName, studentNumberOne);
+        DeleteStudentFromGroupCommand deleteStudentTwoFromTeamOneCommand =
+                new DeleteStudentFromGroupCommand(teamOneName, studentNumberTwo);
+        DeleteStudentFromGroupCommand deleteStudentOneFromTeamTwoCommand =
+                new DeleteStudentFromGroupCommand(teamTwoName, studentNumberOne);
+
+        assertTrue(deleteStudentOneFromTeamOneCommand.equals(deleteStudentOneFromTeamOneCommand));
+        DeleteStudentFromGroupCommand deleteStudentOneFromTeamOneCommandCopy =
+                new DeleteStudentFromGroupCommand(teamOneName, studentNumberOne);
+        assertTrue(deleteStudentOneFromTeamOneCommand.equals(deleteStudentOneFromTeamOneCommandCopy));
+        assertFalse(deleteStudentOneFromTeamOneCommand.equals(1));
+        assertFalse(deleteStudentOneFromTeamOneCommand.equals(null));
+        assertFalse(deleteStudentOneFromTeamOneCommand.equals(deleteStudentTwoFromTeamOneCommand));
+        assertFalse(deleteStudentOneFromTeamOneCommand.equals(deleteStudentOneFromTeamTwoCommand));
+    }
+
+    private class ModelStub implements Model {
+
+        @Override
+        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyUserPrefs getUserPrefs() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public GuiSettings getGuiSettings() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setGuiSettings(GuiSettings guiSettings) {
+
+        }
+
+        @Override
+        public Path getAddressBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAddressBookFilePath(Path addressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAddressBook(ReadOnlyAddressBook addressBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPerson(Student student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deletePerson(Student target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPerson(Student student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPerson(Student target, Student editedStudent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setGroup(Group target, Group editedGroup) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPersonToGroup(Student student, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPersonInGroup(Student student, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Student getPersonByNumber(StudentNumber studentNumber) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Group getGroupByName(GroupName groupName) throws GroupNotFoundException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Student> getFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Group> getFilteredGroupList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<Student> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredGroupList(Predicate<Group> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setStateStudents() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setStateGroups() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public State getState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Group findGroup(GroupName groupName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean containsGroupName(GroupName groupName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteStudentFromGroup(Group group, Student student) {
+            throw new AssertionError("This method should not be called.");
+        }
+    }
+
+    private class ModelStubDeleteStudentFromGroup extends ModelStub {
+        private final Set<Group> groups = new HashSet<>();
+        private final Set<Student> students = new HashSet<>();
+
+        ModelStubDeleteStudentFromGroup() {
+            validGroup.add(validStudent);
+            groups.add(validGroup);
+            students.add(validStudent);
+        }
+
+        @Override
+        public boolean containsGroupName(GroupName groupName) {
+            return groups.stream().anyMatch(group -> group.getGroupName().equals(groupName));
+        }
+
+        @Override
+        public Group findGroup(GroupName groupName) {
+            return groups.stream().filter(group -> group.getGroupName().equals(groupName)).findFirst().orElseThrow();
+        }
+
+        @Override
+        public void deleteStudentFromGroup(Group group, Student student) {
+            group.delete(student);
+        }
+    }
+
+
+}
