@@ -55,6 +55,10 @@ public class EditPersonDescriptorTest {
         // different tags -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different dateOfLastVisit -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withDateOfLastVisit(VALID_EMAIL_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
     }
 
     @Test
@@ -65,7 +69,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
                 + editPersonDescriptor.getAddress().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + "}";
+                + editPersonDescriptor.getTags().orElse(null) + ", dateOfLastVisit="
+                + editPersonDescriptor.getDateOfLastVisit().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }
