@@ -7,6 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLING_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIT_NUMBER;
 
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -14,7 +16,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Property;
 
-import java.util.List;
 
 /**
  * Adds a property to the list of properties to sell for a specific contact.

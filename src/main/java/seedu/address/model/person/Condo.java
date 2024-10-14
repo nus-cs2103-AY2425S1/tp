@@ -27,10 +27,10 @@ public class Condo extends Property {
     @Override
     public boolean equals(Object otherCondo) {
         if (!super.equals(otherCondo)) {
-            return false;  // Check the parent class's equality (postalCode)
+            return false;
         }
         if (!(otherCondo instanceof Bto)) {
-            return false;  // Ensure `other` is an instance of the same subclass
+            return false;
         }
         return true;
     }
