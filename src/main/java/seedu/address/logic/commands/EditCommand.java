@@ -110,7 +110,7 @@ public class EditCommand extends Command {
                     + String.format(
                             MESSAGE_HAS_CLASHES,
                             clashes,
-                            Messages.ListFormat(
+                            Messages.listFormat(
                                     clashingPersons,
                                     person -> String.format(
                                             "Name: %s | Schedule: %s\n",

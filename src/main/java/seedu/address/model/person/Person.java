@@ -91,6 +91,11 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone());
     }
 
+    /**
+     * Determines whether there is a scheduling conflict between this person and another person.
+     * @param otherPerson The person to compare against for scheduling conflicts.
+     * @return true if there is a clash in schedules with the specified other person.
+     */
     public boolean isClash(Person otherPerson) {
         if (otherPerson == this) {
             return false;

@@ -11,13 +11,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
+import java.util.List;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-
-import java.util.List;
 
 /**
  * Adds a person to the address book.
@@ -70,6 +70,8 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        model.addPerson(toAdd);
+
         long clashes = model.checkClashes(toAdd);
         List<Person> clashingPersons = model.getClashingPersons(toAdd);
         if (clashes == 0) {
@@ -80,7 +82,7 @@ public class AddCommand extends Command {
                     + String.format(
                             MESSAGE_HAS_CLASHES,
                             clashes,
-                            Messages.ListFormat(
+                            Messages.listFormat(
                                     clashingPersons,
                                     person -> String.format(
                                             "Name: %s | Schedule: %s\n",

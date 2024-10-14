@@ -6,8 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -75,6 +78,42 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
+    }
+
+    @Test
+    public void countClashes_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.countClashes(null));
+    }
+
+    @Test
+    public void countClashes_noClashes_returnsZero() {
+        addressBook.addPerson(ALICE);
+        assertEquals(addressBook.countClashes(BOB), 0);
+    }
+
+    @Test
+    public void countClashes_someClashes_returnsCorrectCount() {
+        addressBook.addPerson(ALICE);
+        assertEquals(addressBook.countClashes(HOON), 1);
+    }
+
+    @Test
+    public void getClashingPersons_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.getClashingPersons(null));
+    }
+
+    @Test
+    public void getClashingPersons_noClashes_returnsEmptyList() {
+        addressBook.addPerson(ALICE);
+        assertEquals(addressBook.getClashingPersons(BOB), new ArrayList<>());
+    }
+
+    @Test
+    public void getClashingPersons_someClashes_returnsCorrectList() {
+        addressBook.addPerson(ALICE);
+        ArrayList<Person> testList = new ArrayList<>();
+        testList.add(ALICE);
+        assertEquals(addressBook.getClashingPersons(HOON), testList);
     }
 
     @Test

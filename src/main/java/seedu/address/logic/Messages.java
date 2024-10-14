@@ -59,7 +59,15 @@ public class Messages {
         return builder.toString();
     }
 
-    public static String ListFormat(List<Person> persons, Function<Person, String> formatter) {
+    /**
+     * Formats a list of persons into a single string representation based on the specified formatter function.
+     * @param persons A list of {@link Person} objects to be formatted.
+     * @param formatter A {@link Function} that takes a {@link Person} and returns a {@link String} representation
+     *                  of that person. This allows for custom formatting of each person in the list.
+     * @return A {@link String} that concatenates the formatted representations of all persons in the list.
+     *          If the input list is empty, an empty string will be returned.
+     */
+    public static String listFormat(List<Person> persons, Function<Person, String> formatter) {
         StringBuilder result = new StringBuilder();
 
         for (Person person : persons) {

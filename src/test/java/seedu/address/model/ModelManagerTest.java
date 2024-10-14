@@ -7,15 +7,19 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.HOON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -86,6 +90,42 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void countClashes_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.checkClashes(null));
+    }
+
+    @Test
+    public void checkClashes_noClashes_returnsZero() {
+        modelManager.addPerson(ALICE);
+        assertEquals(modelManager.checkClashes(BOB), 0);
+    }
+
+    @Test
+    public void checkClashes_someClashes_returnsCorrectCount() {
+        modelManager.addPerson(ALICE);
+        assertEquals(modelManager.checkClashes(HOON), 1);
+    }
+
+    @Test
+    public void getClashingPersons_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.getClashingPersons(null));
+    }
+
+    @Test
+    public void getClashingPersons_noClashes_returnsEmptyList() {
+        modelManager.addPerson(ALICE);
+        assertEquals(modelManager.getClashingPersons(BENSON), new ArrayList<>());
+    }
+
+    @Test
+    public void getClashingPersons_someClashes_returnsCorrectList() {
+        modelManager.addPerson(ALICE);
+        ArrayList<Person> testList = new ArrayList<>();
+        testList.add(ALICE);
+        assertEquals(modelManager.getClashingPersons(HOON), testList);
     }
 
     @Test
