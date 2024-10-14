@@ -9,7 +9,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.job.exceptions.DuplicateJobException;
-import seedu.address.model.person.exceptions.JobNotFoundException;
+import seedu.address.model.job.exceptions.JobNotFoundException;
 
 /**
  * A list of unique jobs.
