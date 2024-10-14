@@ -12,8 +12,8 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    /*
     private final Id id;
+    /*
     private final Ward ward;
     private final Diagnosis diagnosis;
     private final Medication medication;
@@ -26,22 +26,19 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name) {
+    public Person(Name name, Id id) {
         this.name = name;
-        /*
         this.id = id;
+        /*
         this.ward = ward;
         this.diagnosis = diagnosis;
         this.medication = medication;
          */
     }
 
-    /*
     public Id getId() {
         return id;
     }
-
-     */
 
     public Name getName() {
         return name;
@@ -111,41 +108,34 @@ public class Person {
         if (!(other instanceof Person)) {
             return false;
         }
-        /*
+
         Person otherPerson = (Person) other;
         return id.equals(otherPerson.id)
-                && name.equals(otherPerson.name)
+                && name.equals(otherPerson.name);
+        /*
                 && ward.equals(otherPerson.ward)
                 && diagnosis.equals(otherPerson.diagnosis)
                 && medication.equals(otherPerson.medication);
 
          */
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name);
+        return Objects.hash(name, id);
     }
-    /*
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("id", id)
                 .add("name", name)
+                .add("id", id)
+                /*
                 .add("ward", ward)
                 .add("diagnosis", diagnosis)
                 .add("medication", medication)
-                .toString();
-    }
-
-     */
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
+                */
                 .toString();
     }
 

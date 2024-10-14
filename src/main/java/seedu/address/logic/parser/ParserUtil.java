@@ -49,7 +49,7 @@ public class ParserUtil {
         requireNonNull(id);
         String trimmedId = id.trim();
         if (!Id.isValidId(trimmedId)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Id.MESSAGE_CONSTRAINTS);
         }
         return new Id(trimmedId);
     }
