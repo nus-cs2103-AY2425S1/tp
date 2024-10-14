@@ -33,6 +33,8 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ClientListPanel clientListPanel;
+
+    private PropertyListPanel propertyListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -114,8 +116,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        // TODO: Modify to support both clientListPanel and propertyListPanel
         clientListPanel = new ClientListPanel(logic.getFilteredClientList());
-        clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
+        propertyListPanel = new PropertyListPanel(logic.getFilteredPropertyList());
+        clientListPanelPlaceholder.getChildren().add(propertyListPanel.getRoot());
+//        clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
