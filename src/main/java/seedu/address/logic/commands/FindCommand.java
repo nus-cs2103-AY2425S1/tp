@@ -8,9 +8,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PhoneContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-
 
 /**
  * Finds and lists all persons in address book whose name or phone number contains any of the argument keywords.
@@ -51,18 +48,6 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-
-//        // Compare the predicates (which should be named classes like NameContainsKeywordsPredicate)
-//        if (predicate instanceof NameContainsKeywordsPredicate && otherFindCommand.predicate instanceof NameContainsKeywordsPredicate) {
-//            return predicate.equals(otherFindCommand.predicate);
-//        }
-//
-//        if (predicate instanceof PhoneContainsKeywordsPredicate && otherFindCommand.predicate instanceof PhoneContainsKeywordsPredicate) {
-//            return predicate.equals(otherFindCommand.predicate);
-//        }
-//
-//        // Return false if predicates are not the same type
-//        return false;
         return predicate.equals(otherFindCommand.predicate);
     }
 

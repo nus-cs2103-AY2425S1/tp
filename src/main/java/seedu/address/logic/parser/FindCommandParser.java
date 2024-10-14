@@ -4,12 +4,11 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.person.Person;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.CombinedPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 
@@ -34,18 +33,25 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         // Separate keywords into phone and name
         List<String> phoneKeywords = Arrays.stream(keywords)
-                .filter(this::isNumeric) // Names removed
+                .filter(this::isNumeric)
                 .collect(Collectors.toList());
 
         List<String> nameKeywords = Arrays.stream(keywords)
-                .filter(keyword -> !isNumeric(keyword)) // Only keep non-numeric keywords ie names
+                .filter(keyword -> !isNumeric(keyword))
                 .collect(Collectors.toList());
 
-        Predicate<Person> namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
-        Predicate<Person> phonePredicate = new PhoneContainsKeywordsPredicate(phoneKeywords);
-
-        Predicate<Person> combinedPredicate = namePredicate.or(phonePredicate);
-        return new FindCommand(combinedPredicate);
+        if (!nameKeywords.isEmpty() && phoneKeywords.isEmpty()) {
+            // Only name keywords present
+            return new FindCommand(new NameContainsKeywordsPredicate(nameKeywords));
+        } else if (nameKeywords.isEmpty() && !phoneKeywords.isEmpty()) {
+            // Only phone keywords present
+            return new FindCommand(new PhoneContainsKeywordsPredicate(phoneKeywords));
+        } else {
+            // Both name and phone keywords present
+            return new FindCommand(new CombinedPredicate(
+                    new NameContainsKeywordsPredicate(nameKeywords),
+                    new PhoneContainsKeywordsPredicate(phoneKeywords)));
+        }
     }
 
     /**

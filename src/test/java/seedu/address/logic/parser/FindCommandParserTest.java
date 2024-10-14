@@ -1,22 +1,16 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
-import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.CombinedPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
@@ -30,14 +24,16 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
-        // no leading and trailing whitespaces
+        // No leading and trailing whitespaces, expect NameContainsKeywordsPredicate only
         FindCommand expectedFindCommand =
                 new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
 
-        // multiple whitespaces between keywords
+        // Multiple whitespaces between keywords
         assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
     }
+
     @Test
     public void parse_validPhoneArgs_returnsFindCommand() {
         // no leading and trailing whitespaces for phone search
@@ -52,12 +48,17 @@ public class FindCommandParserTest {
     public void parse_mixedNameAndPhoneArgs_returnsFindCommand() {
         // Mixed name and phone number search
         FindCommand expectedFindCommand = new FindCommand(
-                new NameContainsKeywordsPredicate(Arrays.asList("Alice"))
-                        .or(new PhoneContainsKeywordsPredicate(Arrays.asList("12345")))
+                new CombinedPredicate(
+                        new NameContainsKeywordsPredicate(Arrays.asList("Alice")),
+                        new PhoneContainsKeywordsPredicate(Arrays.asList("12345"))
+                )
         );
+
+        // No leading and trailing whitespaces
         assertParseSuccess(parser, "Alice 12345", expectedFindCommand);
 
-        // multiple whitespaces between mixed keywords
+        // Multiple whitespaces between mixed keywords
         assertParseSuccess(parser, " \n Alice \n \t 12345  \t", expectedFindCommand);
     }
+
 }

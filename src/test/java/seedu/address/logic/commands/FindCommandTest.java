@@ -84,7 +84,7 @@ public class FindCommandTest {
     @Test
     public void execute_phoneNumberSearch_onePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        Predicate<Person> predicate = preparePredicate("94351253"); // ALICE's phone number
+        Predicate<Person> predicate = preparePredicate("94351253"); //ALICE's phone number
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -94,7 +94,7 @@ public class FindCommandTest {
     @Test
     public void execute_phoneNumberSearch_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        Predicate<Person> predicate = preparePredicate("94351253 98765432"); // ALICE and BENSON's phone numbers
+        Predicate<Person> predicate = preparePredicate("94351253 98765432"); //ALICE and BENSON's numbers
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -104,7 +104,7 @@ public class FindCommandTest {
     @Test
     public void execute_nameAndPhoneSearch_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        Predicate<Person> predicate = preparePredicate("Alice 98765432"); // ALICE by name, BOB by phone number
+        Predicate<Person> predicate = preparePredicate("Alice 98765432"); //ALICE by name,BENSON by number
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -138,12 +138,10 @@ public class FindCommandTest {
                 ? person -> false
                 : new PhoneContainsKeywordsPredicate(phoneKeywords);
 
-        return namePredicate.or(phonePredicate);  // Combined predicate for both name and phone number
+        return namePredicate.or(phonePredicate);
     }
 
     private boolean isNumeric(String str) {
         return str.matches("\\d+");
     }
-
-
 }

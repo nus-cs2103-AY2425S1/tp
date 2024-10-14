@@ -54,5 +54,4 @@ public class PhoneContainsKeywordsPredicate implements Predicate<Person> {
         PhoneContainsKeywordsPredicate otherPhoneContainsKeywordsPredicate = (PhoneContainsKeywordsPredicate) other;
         return keywords.equals(otherPhoneContainsKeywordsPredicate.keywords);
     }
-
 }
