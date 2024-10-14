@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -18,7 +19,7 @@ public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
 
-    public static final String MESSAGE_SUCCESS = "Exported file to /output/volunteers.csv and /output/events.csv successfully.";
+    public static final String MESSAGE_SUCCESS = "Exported file to /output/ successfully.";
     public static final String MESSAGE_DIRECTORY = "Failed to create output directory.";
     public static final String MESSAGE_CSV_WRITING = "An error occurred while writing the CSV file.";
     public static final String OUTPUT_DIRECTORY = "output";

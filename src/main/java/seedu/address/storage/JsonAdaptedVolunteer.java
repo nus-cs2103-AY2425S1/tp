@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.volunteer.Date;
 import seedu.address.model.volunteer.Email;
@@ -31,7 +32,7 @@ class JsonAdaptedVolunteer {
     public JsonAdaptedVolunteer(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("availableDate") String availableDate,
             @JsonProperty("startTimeAvailability") String startTime,
-            @JsonProperty("endTimeAvailability") String endTime ) {
+            @JsonProperty("endTimeAvailability") String endTime) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -106,7 +107,8 @@ class JsonAdaptedVolunteer {
         }
         final Time modelEndTimeAvailability = new Time(endTimeAvailability);
 
-        return new Volunteer(modelName, modelPhone, modelEmail, modelAvailableDate, modelStartTimeAvailability, modelEndTimeAvailability);
+        return new Volunteer(modelName, modelPhone, modelEmail, modelAvailableDate,
+                modelStartTimeAvailability, modelEndTimeAvailability);
     }
 
 }

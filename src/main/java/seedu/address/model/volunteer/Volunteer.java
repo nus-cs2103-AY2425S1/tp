@@ -1,8 +1,8 @@
 package seedu.address.model.volunteer;
 
-import java.util.Objects;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Objects;
 
 public class Volunteer {
 
@@ -16,10 +16,8 @@ public class Volunteer {
     private final Time startTimeAvailability;
     private final Time endTimeAvailability;
 
-
-
-    public Volunteer(Name name, Phone phone, Email email, Date availableDate
-                    , Time startTimeAvailability, Time endTimeAvailability) {
+    public Volunteer(Name name, Phone phone, Email email, Date availableDate,
+                     Time startTimeAvailability, Time endTimeAvailability) {
         requireAllNonNull(name, phone, email, availableDate, startTimeAvailability, endTimeAvailability);
         this.name = name;
         this.phone = phone;

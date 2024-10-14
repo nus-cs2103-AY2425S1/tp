@@ -17,8 +17,6 @@ import seedu.address.model.event.Event;
 
 
 public class EventAddCommand extends Command {
-    private static final String MESSAGE_DUPLICATE_EVENT = "This event already exists!";
-    private static final String MESSAGE_SUCCESS = "Event added succesfully!";
     public static final String COMMAND_WORD = "add";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the calander. "
             + "Parameters: "
@@ -35,6 +33,8 @@ public class EventAddCommand extends Command {
             + EVENT_PREFIX_START_TIME + "0000 "
             + EVENT_PREFIX_END_TIME + "2359 "
             + EVENT_PREFIX_DESCRIPTION + "Collecting unsold food from NTUC for distribution ";
+    private static final String MESSAGE_DUPLICATE_EVENT = "This event already exists!";
+    private static final String MESSAGE_SUCCESS = "Event added succesfully!";
     private final Event toAdd;
 
     public EventAddCommand(Event event) {
