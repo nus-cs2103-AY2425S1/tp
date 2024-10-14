@@ -4,6 +4,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+/**
+ * Represents a Volunteer in the system.
+ */
 public class Volunteer {
 
     // Identity fields
@@ -16,6 +19,16 @@ public class Volunteer {
     private final Time startTimeAvailability;
     private final Time endTimeAvailability;
 
+    /**
+     * Represents a Volunteer in the system.
+     *
+     * @param name The name of the volunteer.
+     * @param phone The phone number of the volunteer.
+     * @param email The email address of the volunteer.
+     * @param availableDate The date the volunteer is available.
+     * @param startTimeAvailability The start time of the volunteer's availability.
+     * @param endTimeAvailability The end time of the volunteer's availability.
+     */
     public Volunteer(Name name, Phone phone, Email email, Date availableDate,
                      Time startTimeAvailability, Time endTimeAvailability) {
         requireAllNonNull(name, phone, email, availableDate, startTimeAvailability, endTimeAvailability);
@@ -51,6 +64,13 @@ public class Volunteer {
         return endTimeAvailability;
     }
 
+    /**
+     * Returns true if both volunteers have the same name.
+     * This defines a weaker notion of equality between two volunteers.
+     *
+     * @param otherVolunteer The other volunteer to compare with.
+     * @return True if both volunteers have the same name.
+     */
     public boolean isSameVolunteer(Volunteer otherVolunteer) {
         if (otherVolunteer == this) {
             return true;

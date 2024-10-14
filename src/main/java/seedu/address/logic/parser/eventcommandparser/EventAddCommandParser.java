@@ -24,9 +24,18 @@ import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
 import seedu.address.model.event.Time;
 
-
+/**
+ * Parses input arguments and creates a new {@code EventAddCommand} object.
+ */
 public class EventAddCommandParser implements Parser<EventAddCommand> {
-
+    /**
+     * Parses the given {@code String} of arguments in the context of the {@code EventAddCommand}
+     * and returns an {@code EventAddCommand} object for execution.
+     *
+     * @param args The input arguments for creating a new event.
+     * @return A new {@code EventAddCommand} containing the parsed event data.
+     * @throws ParseException If the input arguments do not conform to the expected format.
+     */
     public EventAddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, EVENT_PREFIX_NAME, EVENT_PREFIX_LOCATION, EVENT_PREFIX_DATE,

@@ -17,6 +17,13 @@ public class VolunteerParserUtil {
 
     public static final String MESSAGE_CONSTRAINTS = "Volunteer parsing error";
 
+    /**
+     * Parses a given string as a {@code Name} and returns it after validation.
+     *
+     * @param name The name string to be parsed.
+     * @return A valid {@code Name} object.
+     * @throws ParseException If the given name does not conform to the name constraints.
+     */
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
@@ -26,6 +33,13 @@ public class VolunteerParserUtil {
         return new Name(trimmedName);
     }
 
+    /**
+     * Parses a given string as a {@code Phone} and returns it after validation.
+     *
+     * @param phone The phone number string to be parsed.
+     * @return A valid {@code Phone} object.
+     * @throws ParseException If the given phone number does not conform to the phone constraints.
+     */
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
@@ -35,6 +49,13 @@ public class VolunteerParserUtil {
         return new Phone(trimmedPhone);
     }
 
+    /**
+     * Parses a given string as a {@code Date} and returns it after validation.
+     *
+     * @param date The date string to be parsed.
+     * @return A valid {@code Date} object.
+     * @throws ParseException If the given date does not conform to the date constraints.
+     */
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
@@ -44,6 +65,13 @@ public class VolunteerParserUtil {
         return new Date(trimmedDate);
     }
 
+    /**
+     * Parses a given string as an {@code Email} and returns it after validation.
+     *
+     * @param email The email string to be parsed.
+     * @return A valid {@code Email} object.
+     * @throws ParseException If the given email does not conform to the email constraints.
+     */
     public static Email parseEmail(String email) throws ParseException {
         requireNonNull(email);
         String trimmedEmail = email.trim();
@@ -53,6 +81,13 @@ public class VolunteerParserUtil {
         return new Email(trimmedEmail);
     }
 
+    /**
+     * Parses a given string as a {@code Time} and returns it after validation.
+     *
+     * @param time The time string to be parsed.
+     * @return A valid {@code Time} object.
+     * @throws ParseException If the given time does not conform to the time constraints.
+     */
     public static Time parseTime(String time) throws ParseException {
         requireNonNull(time);
         String trimmedTime = time.trim();
@@ -61,5 +96,6 @@ public class VolunteerParserUtil {
         }
         return new Time(trimmedTime);
     }
+
 
 }

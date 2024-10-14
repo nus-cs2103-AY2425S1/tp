@@ -128,6 +128,13 @@ public class EventParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses a given string as an {@code EventName} and returns it after validation.
+     *
+     * @param name The event name string to be parsed.
+     * @return A valid {@code EventName} object.
+     * @throws ParseException If the given name does not conform to the event name constraints.
+     */
     public static EventName parseEventName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedEventName = name.trim();
@@ -137,6 +144,13 @@ public class EventParserUtil {
         return new EventName(trimmedEventName);
     }
 
+    /**
+     * Parses a given string as a {@code Location} and returns it after validation.
+     *
+     * @param location The location string to be parsed.
+     * @return A valid {@code Location} object.
+     * @throws ParseException If the given location does not conform to the location constraints.
+     */
     public static Location parseLocation(String location) throws ParseException {
         requireNonNull(location);
         String trimmedLocation = location.trim();
@@ -146,6 +160,13 @@ public class EventParserUtil {
         return new Location(trimmedLocation);
     }
 
+    /**
+     * Parses a given string as a {@code Date} and returns it after validation.
+     *
+     * @param date The date string to be parsed.
+     * @return A valid {@code Date} object.
+     * @throws ParseException If the given date does not conform to the date constraints.
+     */
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
@@ -155,6 +176,13 @@ public class EventParserUtil {
         return new Date(trimmedDate);
     }
 
+    /**
+     * Parses a given string as a {@code Time} and returns it after validation.
+     *
+     * @param time The time string to be parsed.
+     * @return A valid {@code Time} object.
+     * @throws ParseException If the given time does not conform to the time constraints.
+     */
     public static Time parseTime(String time) throws ParseException {
         requireNonNull(time);
         String trimmedTime = time.trim();
@@ -164,6 +192,13 @@ public class EventParserUtil {
         return new Time(trimmedTime);
     }
 
+    /**
+     * Parses a {@code String description} into a {@code Description} object.
+     *
+     * @param time The string representing the description.
+     * @return A {@code Description} object if the given string is valid.
+     * @throws ParseException if the given string is not a valid description.
+     */
     public static Description parseDescription(String time) throws ParseException {
         requireNonNull(time);
         String trimmedDescription = time.trim();

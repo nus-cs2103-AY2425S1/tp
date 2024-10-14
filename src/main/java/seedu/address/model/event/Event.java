@@ -34,6 +34,17 @@ public class Event {
         this.description = description;
     }
 
+    /**
+     * Constructs an {@code Event} object with the specified event name, location, date, start time, and end time.
+     *
+     * @param eventName The name of the event.
+     * @param location The location of the event.
+     * @param date The date of the event.
+     * @param startTime The start time of the event.
+     * @param endTime The end time of the event.
+     *
+     * @throws NullPointerException if any of the parameters are null.
+     */
     public Event(EventName eventName, Location location, Date date, Time startTime, Time endTime) {
         requireAllNonNull(eventName, location, date, startTime, endTime);
         this.eventName = eventName;

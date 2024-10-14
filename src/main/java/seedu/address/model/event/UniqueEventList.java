@@ -11,7 +11,10 @@ import javafx.collections.ObservableList;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 
-
+/**
+ * A list of events that enforces uniqueness between its elements and does not allow nulls.
+ * This list also supports being observed by listeners.
+ */
 public class UniqueEventList implements Iterable<Event> {
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
 

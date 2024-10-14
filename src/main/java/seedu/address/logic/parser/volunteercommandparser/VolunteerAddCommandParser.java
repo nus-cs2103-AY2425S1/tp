@@ -23,6 +23,9 @@ import seedu.address.model.volunteer.Phone;
 import seedu.address.model.volunteer.Time;
 import seedu.address.model.volunteer.Volunteer;
 
+/**
+ * Parses input arguments and creates a new VolunteerAddCommand object.
+ */
 public class VolunteerAddCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the VolunteerAddCommand

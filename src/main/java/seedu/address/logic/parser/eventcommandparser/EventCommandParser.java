@@ -14,7 +14,9 @@ import seedu.address.logic.commands.eventcommands.EventAddCommand;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-
+/**
+ * Parses user input for event-related commands.
+ */
 public class EventCommandParser {
     /**
      * Used for initial separation of command word and args.
@@ -22,6 +24,13 @@ public class EventCommandParser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
+    /**
+     * Parses the given user input and returns the appropriate command.
+     *
+     * @param userInput The full user input string to parse.
+     * @return The corresponding command to execute.
+     * @throws ParseException If the input does not match the expected format.
+     */
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {

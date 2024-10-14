@@ -15,7 +15,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 
-
+/**
+ * Adds an event to the calendar.
+ */
 public class EventAddCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the calander. "
@@ -37,6 +39,11 @@ public class EventAddCommand extends Command {
     private static final String MESSAGE_SUCCESS = "Event added succesfully!";
     private final Event toAdd;
 
+    /**
+     * Creates an EventAddCommand to add the specified {@code Event}.
+     *
+     * @param event The event to be added.
+     */
     public EventAddCommand(Event event) {
         requireNonNull(event);
         toAdd = event;

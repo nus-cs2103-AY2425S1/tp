@@ -16,6 +16,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.volunteer.Volunteer;
 
+/**
+ * Adds a volunteer to the system.
+ */
 public class VolunteerAddCommand extends Command {
     public static final String COMMAND_WORD = "new";
     private static final String MESSAGE_DUPLICATE_VOLUNTEER = "This volunteer already exists!";
@@ -37,9 +40,19 @@ public class VolunteerAddCommand extends Command {
             + VOLUNTEER_PREFIX_START_TIME + "11:00 "
             + VOLUNTEER_PREFIX_END_TIME + "12:00 ";
 
+    /**
+     * Creates a {@code VolunteerAddCommand} to add the specified {@code Volunteer}.
+     *
+     * @param volunteer The volunteer to be added.
+     */
     private final Volunteer toAdd;
     // Example: /v new n/John Doe p/98765432 em/johndoe@example.com d/2024-10-15 s/09:00 ee/17:00
 
+    /**
+     * Constructs a {@code VolunteerAddCommand} that adds the specified {@code Volunteer} to the system.
+     *
+     * @param volunteer The volunteer to be added. Must not be null.
+     */
     public VolunteerAddCommand(Volunteer volunteer) {
         requireNonNull(volunteer);
         this.toAdd = volunteer;
