@@ -1,8 +1,10 @@
 package seedu.address.storage;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -62,7 +64,10 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         remark = source.getRemark().value;
-        birthday = source.getBirthday().value;
+        birthday = Optional.ofNullable(source.getBirthday().value)
+                .filter(date -> !date.equals(LocalDate.MIN))
+                .map(LocalDate::toString)
+                .orElse("");
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));

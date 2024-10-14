@@ -111,7 +111,7 @@ public class AddressBookParserTest {
     public void parseCommand_birthday() throws Exception {
         final Birthday birthday = new Birthday("");
         BirthdayCommand command = (BirthdayCommand) parser.parseCommand(BirthdayCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_BIRTHDAY + birthday.value);
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_BIRTHDAY + birthday);
         assertEquals(new BirthdayCommand(INDEX_FIRST_PERSON, birthday), command);
     }
 

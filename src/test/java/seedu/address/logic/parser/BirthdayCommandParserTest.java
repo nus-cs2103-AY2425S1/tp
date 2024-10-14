@@ -14,7 +14,7 @@ import seedu.address.model.person.Birthday;
 
 public class BirthdayCommandParserTest {
     private BirthdayCommandParser parser = new BirthdayCommandParser();
-    private final String nonEmptyBirthday = "Some birthday.";
+    private final String nonEmptyBirthday = "1990-05-20";
     @Test
     public void parse_indexSpecified_success() {
         // have birthday

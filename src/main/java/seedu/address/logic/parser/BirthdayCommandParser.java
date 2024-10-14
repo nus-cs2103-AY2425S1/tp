@@ -27,7 +27,7 @@ public class BirthdayCommandParser implements Parser<BirthdayCommand> {
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BirthdayCommand.MESSAGE_USAGE), ive);
         }
-        String birthday = argMultimap.getValue(PREFIX_BIRTHDAY).orElse("");
+        String birthday = argMultimap.getValue(PREFIX_BIRTHDAY).get(); // Gives empty string if no birthday is specified
         return new BirthdayCommand(index, new Birthday(birthday));
     }
 }
