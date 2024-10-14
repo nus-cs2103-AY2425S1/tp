@@ -21,6 +21,7 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
+import seedu.address.model.person.task.TaskList;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -51,7 +52,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Note note = new Note("");
         Set<Subject> subjectList = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
-
+        TaskList taskList = new TaskList();
         Level level = null;
         if (argMultimap.getValue(PREFIX_LEVEL).isPresent()) {
             level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
@@ -59,7 +60,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             level = new Level("NONE");
         }
 
-        Person person = new Person(name, phone, emergencyContact, address, note, subjectList, level);
+        Person person = new Person(name, phone, emergencyContact, address, note, subjectList, level, taskList);
 
         return new AddCommand(person);
     }
