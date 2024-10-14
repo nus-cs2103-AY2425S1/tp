@@ -105,6 +105,53 @@ class ScheduleTest {
     }
 
     @Test
+    public void isClash_sameSchedule_returnsTrue() {
+        Schedule schedule = new Schedule("Monday-0900-1100"); // Monday
+        assertTrue(schedule.isClash(schedule), "A schedule should clash with itself.");
+    }
+
+    @Test
+    public void isClash_nullSchedule_returnsFalse() {
+        Schedule schedule = new Schedule("Monday-0900-1200"); // Monday
+        assertThrows(NullPointerException.class, () -> schedule.isClash(null));
+    }
+
+    @Test
+    public void isClash_noClash_returnsFalse() {
+        Schedule scheduleA = new Schedule("Monday-0900-1100"); // Monday
+        Schedule scheduleB = new Schedule("Monday-1100-1200"); // Monday, but starting after A ends
+        assertFalse(scheduleA.isClash(scheduleB), "Schedules should not clash when one starts after the other ends.");
+    }
+
+    @Test
+    public void isClash_exactOverlap_returnsTrue() {
+        Schedule scheduleA = new Schedule("Monday-0900-1100"); // Monday
+        Schedule scheduleB = new Schedule("Monday-0900-1100"); // Same time on Monday
+        assertTrue(scheduleA.isClash(scheduleB), "Schedules should clash when they overlap exactly.");
+    }
+
+    @Test
+    public void isClash_partialOverlap_returnsTrue() {
+        Schedule scheduleA = new Schedule("Monday-0900-1100"); // Monday
+        Schedule scheduleB = new Schedule("Monday-1000-1200"); // Monday, overlapping part
+        assertTrue(scheduleA.isClash(scheduleB), "Schedules should clash with partially overlapping times.");
+    }
+
+    @Test
+    public void isClash_differentDays_returnsFalse() {
+        Schedule scheduleA = new Schedule("Monday-0900-1100"); // Monday
+        Schedule scheduleB = new Schedule("Tuesday-1000-1200"); // Tuesday
+        assertFalse(scheduleA.isClash(scheduleB), "Schedules on different days should not clash.");
+    }
+
+    @Test
+    public void isClash_endBeforeStart_returnsFalse() {
+        Schedule scheduleA = new Schedule("Monday-0900-1000"); // Monday
+        Schedule scheduleB = new Schedule("Monday-1100-1200"); // Monday, starts after A ends
+        assertFalse(scheduleA.isClash(scheduleB), "Schedules that end before others start should not clash.");
+    }
+
+    @Test
     public void equals() {
         Schedule schedule = new Schedule("monday-1200-1300");
         Schedule sameSchedule = new Schedule("monDay-1200-1300");

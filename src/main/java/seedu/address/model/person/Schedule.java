@@ -111,10 +111,12 @@ public class Schedule {
      * @return True if this schedule clashes with the specified otherSchedule.
      */
     public boolean isClash(Schedule otherSchedule) {
+        requireNonNull(otherSchedule);
         return dayValue == otherSchedule.dayValue
                 && startTimeValue.isBefore(otherSchedule.endTimeValue)
                 && otherSchedule.startTimeValue.isBefore(endTimeValue);
     }
+
     @Override
     public String toString() {
         return dayValue + " " + startTimeValue + " - " + endTimeValue;
