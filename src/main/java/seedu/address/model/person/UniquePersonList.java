@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -95,6 +96,19 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    /**
+     * Sorts persons in the address book by their names alphabetically in ascending or descending order.
+     * @param order the sorting order, either "asc/ascending" for ascending or "desc/descending" for descending.
+     */
+    public void sortPersons(String order) {
+        requireNonNull(order);
+        Comparator<Person> comparator = Comparator.comparing(person -> person.getName().fullName);
+        if (order.equalsIgnoreCase("desc") || order.equalsIgnoreCase("descending")) {
+            comparator = comparator.reversed();
+        }
+        internalList.sort(comparator);
     }
 
     /**

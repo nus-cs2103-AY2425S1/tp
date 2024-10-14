@@ -122,6 +122,23 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public void savePersonToDelete(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkRestorable() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void makeNotRestorable() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public Person getLastDeletedPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
@@ -155,6 +172,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortFilteredPersonList(String order) {
             throw new AssertionError("This method should not be called.");
         }
     }
