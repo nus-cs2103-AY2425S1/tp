@@ -1,70 +1,68 @@
+
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Property;
+import seedu.address.testutil.PropertyBuilder;
 
 public class AddPropertyToSellCommandTest {
-
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Property property = new PropertyBuilder().build();
+    private final Index index = Index.fromZeroBased(7);
     @Test
-    public void execute() {
-        //assertCommandFailure(new AddPropertyToSellCommand(), model, AddPropertyToSellCommand.MESSAGE_NOT_IMPLEMENTED);
-        /*Property validProperty = new PropertyBuilder().build();
-        AddPropertyToSellCommand addPropertyCommand = new AddPropertyToSellCommand(validProperty);
-
-        String expectedMessage = String.format(AddPropertyToSellCommand.MESSAGE_SUCCESS, validProperty);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPropertyToSell(validProperty);
-
-        assertCommandSuccess(addPropertyCommand, model, expectedMessage, expectedModel);*/
-        assertEquals(1, 1);
+    public void constructor_nullProperty_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddPropertyToSellCommand(index, null));
     }
 
-    /*@Test
+    @Test
+    public void execute_propertyAcceptedByModel_addSuccessful() throws Exception {
+        AddPropertyToSellCommand addPropertyToSellCommand = new AddPropertyToSellCommand(index, property);
+
+        CommandResult commandResult = addPropertyToSellCommand.execute(model);
+
+        assertEquals(String.format(AddPropertyToSellCommand.MESSAGE_SUCCESS, property),
+                commandResult.getFeedbackToUser());
+    }
+
+    @Test
     public void execute_duplicateProperty_throwsCommandException() {
-        Property propertyInList = model.getAddressBook().getPersonList().get(0).getSellingProperties().get(0);
-        AddPropertyToSellCommand addPropertyCommand = new AddPropertyToSellCommand(propertyInList);
+        AddPropertyToSellCommand addPropertyToSellCommand = new AddPropertyToSellCommand(index, property);
 
-        assertCommandFailure(addPropertyCommand, model, AddPropertyToSellCommand.MESSAGE_DUPLICATE_PROPERTY);
-    }
-
-    @Test
-    public void execute_nullProperty_throwsNullPointerException() {
-        AddPropertyToSellCommand addPropertyCommand = new AddPropertyToSellCommand();
-
-        assertThrows(NullPointerException.class, () -> addPropertyCommand.execute(null));
-    }
-
-    @Test
-    public void execute_nullModel_throwsNullPointerException() {
-        Property validProperty = new PropertyBuilder().build();
-        AddPropertyToSellCommand addPropertyCommand = new AddPropertyToSellCommand(validProperty);
-
-        assertThrows(NullPointerException.class, () -> addPropertyCommand.execute(null));
+        assertCommandFailure(addPropertyToSellCommand, model, AddPropertyToSellCommand.MESSAGE_DUPLICATE_PROPERTY);
     }
 
     @Test
     public void equals() {
-        Property property1 = new PropertyBuilder().withHousingType("HDB").build();
-        Property property2 = new PropertyBuilder().withHousingType("Condo").build();
-        AddPropertyToSellCommand addProperty1Command = new AddPropertyToSellCommand(property1);
-        AddPropertyToSellCommand addProperty2Command = new AddPropertyToSellCommand(property2);
+        AddPropertyToSellCommand addPropertyToSellCommand = new AddPropertyToSellCommand(index, property);
 
         // same object -> returns true
-        assertTrue(addProperty1Command.equals(addProperty1Command));
+        assertTrue(addPropertyToSellCommand.equals(addPropertyToSellCommand));
 
         // same values -> returns true
-        AddPropertyToSellCommand addProperty1CommandCopy = new AddPropertyToSellCommand(property1);
-        assertTrue(addProperty1Command.equals(addProperty1CommandCopy));
+        AddPropertyToSellCommand addPropertyToSellCommandCopy = new AddPropertyToSellCommand(index, property);
+        assertTrue(addPropertyToSellCommand.equals(addPropertyToSellCommandCopy));
 
         // different types -> returns false
-        assertFalse(addProperty1Command.equals(1));
-    }*/
+        assertFalse(addPropertyToSellCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(addPropertyToSellCommand.equals(null));
+
+        // different property -> returns false
+        Property differentProperty = new PropertyBuilder().withPostalCode("654321").build();
+        AddPropertyToSellCommand addDifferentPropertyCommand = new AddPropertyToSellCommand(index, differentProperty);
+        assertFalse(addPropertyToSellCommand.equals(addDifferentPropertyCommand));
+    }
 }
