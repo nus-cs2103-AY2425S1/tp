@@ -30,7 +30,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         final boolean isEventDelete = arePrefixesPresent(argMultimap, PREFIX_EVENT);
         final boolean isVendorDelete = arePrefixesPresent(argMultimap, PREFIX_VENDOR);
 
-        // exactly one prefix should be present
+        // exactly one prefix should be present - checked using XOR (^)
         if (!(isVendorDelete ^ isEventDelete)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
