@@ -3,10 +3,10 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.List;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import javafx.util.Pair;
@@ -116,6 +116,11 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// assign operations
 
+    /**
+     * Assigns the given {@code vendor} in the list to {@code event}.
+     * {@code vendor} and {@code event} must exist in the address book.
+     * The association between {@code vendor} and {@code event} must not already exist.
+     */
     public void assignVendorToEvent(Vendor vendor, Event event) {
         requireAllNonNull(vendor, event);
         Pair<Vendor, Event> pair = new Pair<>(vendor, event);

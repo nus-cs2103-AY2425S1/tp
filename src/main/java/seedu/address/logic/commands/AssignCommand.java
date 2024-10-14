@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -55,7 +56,10 @@ public class AssignCommand extends Command {
         Event event = eventList.get(eventIndex.getZeroBased());
         model.assignVendorToEvent(vendor, event);
 
-        return new CommandResult(String.format(MESSAGE_ASSIGN_SUCCESS, vendorIndex.getOneBased(), eventIndex.getOneBased()));
+        return new CommandResult(
+                String.format(MESSAGE_ASSIGN_SUCCESS,
+                vendorIndex.getOneBased(),
+                eventIndex.getOneBased()));
     }
 }
 

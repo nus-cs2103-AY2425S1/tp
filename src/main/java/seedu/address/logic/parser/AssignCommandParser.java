@@ -2,8 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
 
 import java.util.stream.Stream;
 
@@ -22,7 +22,7 @@ public class AssignCommandParser implements Parser<AssignCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_VENDOR, PREFIX_EVENT);
 
         // Check if both vendor and event prefixes are present
-        if (!arePrefixesPresent(argMultimap, PREFIX_VENDOR, PREFIX_EVENT) 
+        if (!arePrefixesPresent(argMultimap, PREFIX_VENDOR, PREFIX_EVENT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
         }
