@@ -15,8 +15,17 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    // TODO: Remove hardcoding of message, find a way to pass in the help
+    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-t10-3.github.io/tp/UserGuide.html";
+    public static final String HELP_MESSAGE =
+            "Add a person: add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]\n"
+            + "Listing all persons: list\n"
+            + "Editing a person: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]\n"
+            + "Locating a person by name: find KEYWORD [MORE_KEYWORDS]\n"
+            + "Deleting a person: delete INDEX\n"
+            + "Clearing all entries: clear\n"
+            + "Exiting the program: exit\n"
+            + "Refer to the user guide for more details: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";

@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 /**
  * Helper functions for handling strings.
@@ -34,8 +35,11 @@ public class StringUtil {
         String preppedSentence = sentence;
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
+        Predicate<String> containsKeywordIgnoringCase =
+                namePart -> namePart.toUpperCase().contains(preppedWord.toUpperCase());
+
         return Arrays.stream(wordsInPreppedSentence)
-                .anyMatch(preppedWord::equalsIgnoreCase);
+                .anyMatch(containsKeywordIgnoringCase);
     }
 
     /**
