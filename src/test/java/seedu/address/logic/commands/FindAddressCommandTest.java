@@ -6,7 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.FindAddressCommand.MESSAGE_FIND_ADDRESS_PERSON_SUCCESS;
 import static seedu.address.logic.commands.FindCommand.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
-import static seedu.address.testutil.TypicalPersons.*;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -48,16 +52,6 @@ public class FindAddressCommandTest {
         // different person -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
-
-//    @Test
-//    public void execute_emptyString_noPersonFound() {
-//        String expectedMessage = MESSAGE_FIND_PERSON_UNSUCCESSFUL;
-//        AddressContainsKeywordsPredicate predicate = preparePredicate(" ");
-//        FindAddressCommand command = new FindAddressCommand(predicate);
-//        expectedModel.updateFilteredPersonList(predicate);
-//        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-//        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
-//    }
 
     @Test
     public void execute_fullMatch_singlePersonFound() {
@@ -121,7 +115,8 @@ public class FindAddressCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddressContainsKeywordsPredicate predicate = new AddressContainsKeywordsPredicate(Arrays.asList("34 Tanah Merah"));
+        AddressContainsKeywordsPredicate predicate =
+                new AddressContainsKeywordsPredicate(Arrays.asList("34 Tanah Merah"));
         FindAddressCommand findPhoneCommand = new FindAddressCommand(predicate);
         String expected = FindAddressCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findPhoneCommand.toString());
