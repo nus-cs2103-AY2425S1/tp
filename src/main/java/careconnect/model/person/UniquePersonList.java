@@ -39,13 +39,15 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Adds a person to the list.
      * The person must not already exist in the list.
+     * Sorts the list by name lexicographically.
      */
     public void add(Person toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicatePersonException();
         }
-        internalList.add(toAdd);
+        this.internalList.add(toAdd);
+        this.internalList.sort((p1, p2) -> p1.getName().toString().compareTo(p2.getName().toString()));
     }
 
     /**
@@ -66,6 +68,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.set(index, editedPerson);
+        this.sortListLexographically();
     }
 
     /**
@@ -82,6 +85,7 @@ public class UniquePersonList implements Iterable<Person> {
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        this.sortListLexographically();
     }
 
     /**
@@ -95,6 +99,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+        this.sortListLexographically();
     }
 
     /**
@@ -146,5 +151,12 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    /**
+     * Sorts the list by name lexicographically.
+     */
+    private void sortListLexographically() {
+        this.internalList.sort((p1, p2) -> p1.getName().toString().compareTo(p2.getName().toString()));
     }
 }
