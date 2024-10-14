@@ -13,7 +13,9 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.State;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -168,6 +170,16 @@ public class ModelManager implements Model {
     public void addPersonToGroup(Student student, Group group) {
         requireAllNonNull(student, group);
         addressBook.addStudentToGroup(student, group);
+    }
+
+    @Override
+    public Student getPersonByNumber(StudentNumber studentNumber) {
+        return addressBook.getStudentByNumber(studentNumber);
+    }
+
+    @Override
+    public Group getGroupByName(GroupName groupName) {
+        return addressBook.getGroupByName(groupName);
     }
 
     //=========== Filtered Student List Accessors =============================================================

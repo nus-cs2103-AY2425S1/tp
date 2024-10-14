@@ -4,12 +4,16 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
+import java.util.List;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 
 /**
  * Adds a student to a group.
@@ -26,34 +30,37 @@ public class AddStudentToGroupCommand extends Command {
             + PREFIX_STUDENT_NUMBER + "A02345678J "
             + PREFIX_GROUP_NAME + "Group 1";
 
-    public static final String MESSAGE_SUCCESS = "Student (%1$s) is added into the group (%2$s)";
+    public static final String MESSAGE_SUCCESS = "Added student: (%1$s) from (%2$s)";
 
     public static final String MESSAGE_DUPLICATE_STUDENT_IN_GROUP = "This student is already in the group";
 
-    private final Student toAdd;
+    private final StudentNumber toAdd;
 
-    private final Group toAddInto;
+    private final GroupName toAddInto;
 
     /**
      * Creates an AddStudentToGroupCommand to add the specified {@code Student} to the specified {@code Group}
      */
-    public AddStudentToGroupCommand(Student student, Group group) {
-        requireNonNull(student);
-        requireNonNull(group);
-        toAdd = student;
-        toAddInto = group;
+    public AddStudentToGroupCommand(StudentNumber studentNumber, GroupName groupName) {
+        requireNonNull(studentNumber);
+        requireNonNull(groupName);
+        toAdd = studentNumber;
+        toAddInto = groupName;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPersonInGroup(toAdd, toAddInto)) {
+        Student student = model.getPersonByNumber(toAdd);
+        Group group = model.getGroupByName(toAddInto);
+
+        if (model.hasPersonInGroup(student, group)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT_IN_GROUP);
         }
 
-        model.addPersonToGroup(toAdd, toAddInto);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd), Messages.format(toAddInto)));
+        model.addPersonToGroup(student, group);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(student), Messages.format(group)));
     }
 
     @Override

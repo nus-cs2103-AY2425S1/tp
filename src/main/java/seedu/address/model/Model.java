@@ -7,7 +7,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.State;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 
 /**
  * The API of the Model component.
@@ -110,17 +112,29 @@ public interface Model {
     void setGroup(Group target, Group editedGroup);
 
     /**
+     * Adds {@code student} to {@code group}.
+     * {@code student} and {@code group} must exist in the address book and the student
+     * shouldn't already be in the group.
+     */
+    void addPersonToGroup(Student student, Group group);
+
+    /**
      * Returns true if a student with the same identity as {@code student} exists in the group
      * with the same identity as {@code group}.
      */
     boolean hasPersonInGroup(Student student, Group group);
 
     /**
-     * Adds {@code student} to {@code group}.
-     * {@code student} and {@code group} must exist in the address book and the student
-     * shouldn't already be in the group.
+     * Returns a {@code Student} with the student number {@code studentNumber}.
+     * There must exist such a {@code Student} in the address book.
      */
-    void addPersonToGroup(Student student, Group group);
+    Student getPersonByNumber(StudentNumber studentNumber);
+
+    /**
+     * Returns a {@code Group} with the group name {@code groupName}.
+     * There must exist such a {@code Group} in the address book.
+     */
+    Group getGroupByName(GroupName groupName);
 
     /**
      * Returns an unmodifiable view of the filtered student list

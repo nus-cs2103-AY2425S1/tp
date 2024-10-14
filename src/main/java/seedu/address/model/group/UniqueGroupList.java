@@ -99,6 +99,19 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
+     * Returns the {@code Group} that matches the {@code groupName}.
+     * The {@code groupName} must exist in the list.
+     */
+    public Group getGroupByName(GroupName groupName) {
+        for (Group group : internalList) {
+            if (groupName.equals(group.getGroupName())) {
+                return group;
+            }
+        }
+        throw new GroupNotFoundException();
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Group> asUnmodifiableObservableList() {

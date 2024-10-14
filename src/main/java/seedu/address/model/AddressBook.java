@@ -7,8 +7,10 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.model.student.UniqueStudentList;
 
 /**
@@ -108,7 +110,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasStudentInGroup(Student student, Group group) {
         requireNonNull(student);
         requireNonNull(group);
-        return hasStudent(student) && hasGroup(group) && group.getStudents().contains(student);
+        return group.getStudents().contains(student);
     }
 
     /**
@@ -117,6 +119,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addStudentToGroup(Student student, Group group) {
         group.add(student);
+    }
+
+    public Student getStudentByNumber(StudentNumber studentNumber) {
+        return students.getStudentByNumber(studentNumber);
+    }
+
+    public Group getGroupByName(GroupName groupName) {
+        return groups.getGroupByName(groupName);
     }
 
     /**

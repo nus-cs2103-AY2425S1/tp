@@ -99,6 +99,19 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
+     * Returns the {@code Student} that matches the {@code studentNumber}.
+     * The {@code studentNumber} must exist in the list.
+     */
+    public Student getStudentByNumber(StudentNumber studentNumber) {
+        for (Student student : internalList) {
+            if (studentNumber.equals(student.getStudentNumber())) {
+                return student;
+            }
+        }
+        throw new PersonNotFoundException();
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Student> asUnmodifiableObservableList() {
