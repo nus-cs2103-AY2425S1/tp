@@ -7,6 +7,9 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
+/**
+ * Tests that a {@code Person}'s is a patient and {@code Name} matches any of the keywords given.
+ */
 public class FindPatientPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
