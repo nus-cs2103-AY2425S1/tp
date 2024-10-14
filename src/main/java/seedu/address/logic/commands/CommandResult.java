@@ -19,18 +19,17 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    /**
-     * If command type, indicates whether the details panel should be cleared after execution.
-     */
+    /** Indicates weather the contact details panel needs to be updated. */
     private boolean clearDetailsPanel;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean updatePanel) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.clearDetailsPanel = updatePanel;
     }
 
     /**
@@ -38,7 +37,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -60,15 +59,6 @@ public class CommandResult {
      */
     public boolean isClearDetailsPanel() {
         return this.clearDetailsPanel;
-    }
-
-    /**
-     * Sets the value of clearDetailsPanel.
-     *
-     * @param clearDetailsPanel true to clear the details panel; false to retain its contents.
-     */
-    public void setClearDetailsPanel(boolean clearDetailsPanel) {
-        this.clearDetailsPanel = clearDetailsPanel;
     }
 
     @Override

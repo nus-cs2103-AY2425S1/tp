@@ -84,7 +84,7 @@ public interface Model {
 
     /**
      * Sets the {@code person} in the contact to be focused on in the addressbook.
-     * 
+     *
      * @param index The index of the {@code Person} in the contact list.
      */
     void setFocusedPerson(Index index);

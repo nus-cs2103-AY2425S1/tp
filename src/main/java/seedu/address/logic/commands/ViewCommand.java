@@ -43,7 +43,8 @@ public class ViewCommand extends Command {
 
         model.setFocusedPerson(targetIndex);
 
-        return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, targetIndex.getOneBased()));
+        return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, targetIndex.getOneBased()),
+        false, false, true);
     }
 
     @Override

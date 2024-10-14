@@ -42,11 +42,11 @@
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
           <!-- Contact details panel -->
-          <VBox fx:id="personDetails" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
+          <VBox fx:id="contactDetails" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
-            <StackPane fx:id="focusedPersonPanelPlaceholder" VBox.vgrow="ALWAYS" />
+            <StackPane fx:id="contactDetailsPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
         </HBox>
 
