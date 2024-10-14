@@ -31,6 +31,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label role;
+    @FXML
     private Label id;
     @FXML
     private Label phone;
