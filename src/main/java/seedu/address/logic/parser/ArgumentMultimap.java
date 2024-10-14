@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import seedu.address.logic.Messages;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

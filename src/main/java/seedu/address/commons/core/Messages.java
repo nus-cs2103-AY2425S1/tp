@@ -1,4 +1,4 @@
-package seedu.address.logic;
+package seedu.address.commons.core;
 
 import java.util.Set;
 import java.util.stream.Collectors;
