@@ -3,6 +3,8 @@ package seedu.address.testutil;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.OwedAmount;
+import seedu.address.model.person.Paid;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rate;
@@ -21,6 +23,8 @@ public class PersonBuilder {
     public static final String DEFAULT_SCHEDULE = "Sunday-1800-1900";
     public static final String DEFAULT_SUBJECT = "Mathematics";
     public static final String DEFAULT_FEE = "300";
+    public static final String DEFAULT_PAID = "600";
+    public static final String DEFAULT_OWED_AMOUNT = "300";
 
     private Name name;
     private Phone phone;
@@ -29,6 +33,8 @@ public class PersonBuilder {
     private Schedule schedule;
     private Subject subject;
     private Rate rate;
+    private Paid paid;
+    private OwedAmount owedAmount;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -41,6 +47,8 @@ public class PersonBuilder {
         schedule = new Schedule(DEFAULT_SCHEDULE);
         subject = new Subject(DEFAULT_SUBJECT);
         rate = new Rate(DEFAULT_FEE);
+        paid = new Paid(DEFAULT_PAID);
+        owedAmount = new OwedAmount(DEFAULT_OWED_AMOUNT);
     }
 
     /**
@@ -54,6 +62,8 @@ public class PersonBuilder {
         schedule = personToCopy.getSchedule();
         subject = personToCopy.getSubject();
         rate = personToCopy.getRate();
+        paid = personToCopy.getPaid();
+        owedAmount = personToCopy.getOwedAmount();
     }
 
     /**
@@ -113,8 +123,24 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Paid} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPaid(String paid) {
+        this.paid = new Paid(paid);
+        return this;
+    }
+
+    /**
+     * Sets the {@code OwedAmount} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withOwedAmount(String owedAmount) {
+        this.owedAmount = new OwedAmount(owedAmount);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, schedule, subject, rate);
+        return new Person(name, phone, email, address, schedule, subject, rate, paid, owedAmount);
     }
 
 }

@@ -45,8 +45,14 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Schedule: ")
                 .append(person.getSchedule())
-                .append("; Rate: ")
-                .append(person.getRate());
+                .append("; Subject: ")
+                .append(person.getSubject())
+                .append("; Fee: ")
+                .append(person.getRate())
+                .append("; Paid: ")
+                .append(person.getPaid())
+                .append("; Owed: ")
+                .append(person.getOwedAmount());
 
         return builder.toString();
     }
