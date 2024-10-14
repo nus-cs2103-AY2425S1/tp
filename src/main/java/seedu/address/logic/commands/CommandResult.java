@@ -20,15 +20,19 @@ public class CommandResult {
     private final boolean exit;
     /** The application should show people list. */
     private final boolean showPeopleList;
+    /** The application should show details after a view command. */
+    private final boolean showDetails;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showPeopleList) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showPeopleList,
+                         boolean showDetails) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.showPeopleList = showPeopleList;
+        this.showDetails = showDetails;
     }
 
     /**
@@ -36,7 +40,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser, boolean showPeopleList) {
-        this(feedbackToUser, false, false, showPeopleList);
+        this(feedbackToUser, false, false, showPeopleList, false);
     }
 
     /**
@@ -44,7 +48,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, true);
+        this(feedbackToUser, false, false, true, false);
     }
 
     public String getFeedbackToUser() {
@@ -61,6 +65,9 @@ public class CommandResult {
 
     public boolean isShowPeopleList() {
         return showPeopleList;
+    }
+    public boolean isShowDetails() {
+        return showDetails;
     }
 
     @Override

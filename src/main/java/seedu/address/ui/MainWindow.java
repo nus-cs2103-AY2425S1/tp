@@ -170,8 +170,30 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    public EventListPanel getEventListPanel() {
+        return eventListPanel;
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    public void setTabToPeople(CommandResult commandResult) {
+        if (commandResult.isShowDetails()) {
+            personListPanel.setDetailedView();
+            tabPanePlaceholder.getSelectionModel().select(0);
+        } else {
+            personListPanel.setSimplifiedView();
+            tabPanePlaceholder.getSelectionModel().select(0);
+        }
+    }
+
+    public void setTabToEvents(CommandResult commandResult) {
+        if (commandResult.isShowDetails()) {
+            tabPanePlaceholder.getSelectionModel().select(1);
+        } else {
+            tabPanePlaceholder.getSelectionModel().select(1);
+        }
     }
 
     /**
@@ -195,10 +217,10 @@ public class MainWindow extends UiPart<Stage> {
                 return commandResult;
             }
 
-            if (commandResult.isShowPeopleList() && !tabPanePlaceholder.getTabs().get(0).isSelected()) {
-                tabPanePlaceholder.getSelectionModel().select(0);
-            } else if (!commandResult.isShowPeopleList() && !tabPanePlaceholder.getTabs().get(1).isSelected()) {
-                tabPanePlaceholder.getSelectionModel().select(1);
+            if (commandResult.isShowPeopleList()) {
+                setTabToPeople(commandResult);
+            } else {
+                setTabToEvents(commandResult);
             }
 
             return commandResult;
