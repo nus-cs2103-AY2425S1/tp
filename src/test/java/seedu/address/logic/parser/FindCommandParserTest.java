@@ -46,7 +46,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_InvalidArgsForName_failure() {
+    public void parse_invalidArgsForName_failure() {
         // Non-alphanumeric characters
         assertParseFailure(parser, " n/%*!",
                 String.format(Name.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE));
@@ -69,7 +69,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_InvalidArgsForAddress_failure() {
+    public void parse_invalidArgsForAddress_failure() {
         // Blank input
         assertParseFailure(parser, " a/",
                 String.format(Address.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE));
@@ -100,7 +100,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_InvalidArgsForPriority_failure() {
+    public void parse_invalidArgsForPriority_failure() {
         // Invalid priority value
         assertParseFailure(parser, " pri/MIDDLE",
                 String.format(Priority.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE));
@@ -111,7 +111,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_InvalidPrefixes_failure() {
+    public void parse_invalidPrefixes_failure() {
         // Prefix for phone number not allowed
         assertParseFailure(parser, " p/999",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
