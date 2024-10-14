@@ -3,20 +3,21 @@ package seedu.ddd.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.ddd.logic.commands.CommandTestUtil.showContactAtIndex;
+import static seedu.ddd.testutil.TypicalContacts.getTypicalAddressBook;
+import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
+import static seedu.ddd.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.commons.core.index.Index;
 import seedu.ddd.logic.Messages;
-import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.ddd.logic.commands.CommandTestUtil.showContactAtIndex;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ModelManager;
 import seedu.ddd.model.UserPrefs;
 import seedu.ddd.model.contact.common.Contact;
-import static seedu.ddd.testutil.TypicalContacts.getTypicalAddressBook;
-import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
-import static seedu.ddd.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for

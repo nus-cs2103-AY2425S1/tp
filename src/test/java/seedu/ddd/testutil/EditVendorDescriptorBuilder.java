@@ -1,14 +1,14 @@
 package seedu.ddd.testutil;
 
 import seedu.ddd.logic.commands.EditCommand.EditVendorDescriptor;
-import seedu.ddd.model.contact.vendor.Vendor;
 import seedu.ddd.model.contact.vendor.Service;
+import seedu.ddd.model.contact.vendor.Vendor;
 
 /**
  * A utility class to help with building EditVendorDescriptor objects.
  */
 public class EditVendorDescriptorBuilder extends EditContactDescriptorBuilder {
-    
+
     public EditVendorDescriptorBuilder() {
         descriptor = new EditVendorDescriptor();
     }
@@ -21,14 +21,15 @@ public class EditVendorDescriptorBuilder extends EditContactDescriptorBuilder {
      * Returns an {@code EditVendorDescriptor} with fields containing {@code vendor}'s details
      */
     public EditVendorDescriptorBuilder(Vendor vendor) {
-        descriptor = new EditVendorDescriptor();
-        descriptor.setName(vendor.getName());
-        descriptor.setPhone(vendor.getPhone());
-        descriptor.setEmail(vendor.getEmail());
-        descriptor.setAddress(vendor.getAddress());
-        ((EditVendorDescriptor) descriptor).setService(vendor.getService());
-        descriptor.setTags(vendor.getTags());
-        descriptor.setId(vendor.getId());
+        EditVendorDescriptor editVendorDescriptor = new EditVendorDescriptor();
+        editVendorDescriptor.setName(vendor.getName());
+        editVendorDescriptor.setPhone(vendor.getPhone());
+        editVendorDescriptor.setEmail(vendor.getEmail());
+        editVendorDescriptor.setAddress(vendor.getAddress());
+        editVendorDescriptor.setService(vendor.getService());
+        editVendorDescriptor.setTags(vendor.getTags());
+        editVendorDescriptor.setId(vendor.getId());
+        descriptor = editVendorDescriptor;
     }
 
     @Override
@@ -55,7 +56,8 @@ public class EditVendorDescriptorBuilder extends EditContactDescriptorBuilder {
      * Sets the {@code Date} of the {@code EditVendorDescriptor} that we are building.
      */
     public EditVendorDescriptorBuilder withService(String service) {
-        ((EditVendorDescriptor) descriptor).setService(new Service(service));
+        EditVendorDescriptor editVendorDescriptor = (EditVendorDescriptor) descriptor;
+        editVendorDescriptor.setService(new Service(service));
         return this;
     }
 

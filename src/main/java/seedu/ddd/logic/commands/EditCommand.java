@@ -1,7 +1,6 @@
 package seedu.ddd.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -99,7 +98,7 @@ public class EditCommand extends Command {
         if (!contactToEdit.isSameContact(contactToEdit) && model.hasContact(editedContact)) {
             throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
-        
+
         try {
             model.setContact(contactToEdit, editedContact);
         } catch (DuplicateContactException e) {
@@ -159,7 +158,8 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editContactDescriptor.getTags().orElse(contactToEdit.getTags());
         Id updatedId = editContactDescriptor.getId().orElse(contactToEdit.getId());
 
-        return new Vendor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedService, updatedTags, updatedId);
+        return new Vendor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedService,
+                updatedTags, updatedId);
     }
 
     @Override

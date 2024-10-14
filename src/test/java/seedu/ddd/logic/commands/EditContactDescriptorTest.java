@@ -3,8 +3,6 @@ package seedu.ddd.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Test;
-
 import static seedu.ddd.logic.commands.CommandTestUtil.DESC_CONTACT_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.DESC_VENDOR_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -12,6 +10,9 @@ import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+
+import org.junit.jupiter.api.Test;
+
 import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.ddd.testutil.EditContactDescriptorBuilder;
 
@@ -36,7 +37,8 @@ public class EditContactDescriptorTest {
         assertFalse(DESC_CONTACT_AMY.equals(DESC_VENDOR_BOB));
 
         // different name -> returns false
-        EditContactDescriptor editedAmy = new EditContactDescriptorBuilder(DESC_CONTACT_AMY).withName(VALID_NAME_BOB).build();
+        EditContactDescriptor editedAmy = new EditContactDescriptorBuilder(DESC_CONTACT_AMY)
+                .withName(VALID_NAME_BOB).build();
         assertFalse(DESC_CONTACT_AMY.equals(editedAmy));
 
         // different phone -> returns false

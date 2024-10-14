@@ -53,7 +53,8 @@ public class EditCommandTest {
         Index targetIndex = INDEX_FIRST_CONTACT;
         EditCommand editCommand = new EditCommand(targetIndex, editContactDescriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
+                Messages.format(editedContact));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setContact(model.getFilteredContactList().get(targetIndex.getZeroBased()), editedContact);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -67,7 +68,7 @@ public class EditCommandTest {
         expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setContact(model.getFilteredContactList().get(targetIndex.getZeroBased()), editedClient);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-        
+
         Vendor editedVendor = new VendorBuilder().build();
         EditVendorDescriptor editVendorDescriptor = new EditVendorDescriptorBuilder(editedVendor).build();
         targetIndex = Index.fromOneBased(model.getFilteredContactList().size());
@@ -93,7 +94,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(indexLastContact, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
-        Messages.format(editedContact));
+                Messages.format(editedContact));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setContact(lastContact, editedContact);
@@ -106,7 +107,8 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CONTACT, new EditContactDescriptor());
         Contact editedContact = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
+                Messages.format(editedContact));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
@@ -123,7 +125,7 @@ public class EditCommandTest {
                 new EditClientDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
-        Messages.format(editedContact));
+                Messages.format(editedContact));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setContact(model.getFilteredContactList().get(0), editedContact);
@@ -143,10 +145,12 @@ public class EditCommandTest {
     @Test
     public void execute_invalidParameter_failure() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CONTACT, new EditVendorDescriptorBuilder().build());
-        assertCommandFailure(editCommand, model, String.format(EditCommand.MESSAGE_EDIT_INVALID_PARAMETER, PREFIX_SERVICE));
+        assertCommandFailure(editCommand, model, String.format(
+                EditCommand.MESSAGE_EDIT_INVALID_PARAMETER, PREFIX_SERVICE));
 
         editCommand = new EditCommand(INDEX_SECOND_CONTACT, new EditClientDescriptorBuilder().build());
-        assertCommandFailure(editCommand, model, String.format(EditCommand.MESSAGE_EDIT_INVALID_PARAMETER, PREFIX_DATE));
+        assertCommandFailure(editCommand, model, String.format(
+                EditCommand.MESSAGE_EDIT_INVALID_PARAMETER, PREFIX_DATE));
     }
 
     @Test
@@ -207,7 +211,7 @@ public class EditCommandTest {
         EditCommand vendorCommand = new EditCommand(INDEX_FIRST_CONTACT, DESC_VENDOR_BOB);
         copyDescriptor = DESC_VENDOR_BOB.copy();
         commandWithSameValues = new EditCommand(INDEX_FIRST_CONTACT, copyDescriptor);
-        assertTrue(vendorCommand.equals(commandWithSameValues));        
+        assertTrue(vendorCommand.equals(commandWithSameValues));
     }
 
     @Test

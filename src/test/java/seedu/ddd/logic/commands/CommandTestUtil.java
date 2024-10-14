@@ -1,17 +1,7 @@
 package seedu.ddd.logic.commands;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import seedu.ddd.commons.core.index.Index;
-import seedu.ddd.logic.commands.EditCommand.EditClientDescriptor;
-import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
-import seedu.ddd.logic.commands.EditCommand.EditVendorDescriptor;
-import seedu.ddd.logic.commands.exceptions.CommandException;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -19,11 +9,21 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.ddd.testutil.Assert.assertThrows;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import seedu.ddd.commons.core.index.Index;
+import seedu.ddd.logic.commands.EditCommand.EditClientDescriptor;
+import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
+import seedu.ddd.logic.commands.EditCommand.EditVendorDescriptor;
+import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.NameContainsKeywordsPredicate;
-import static seedu.ddd.testutil.Assert.assertThrows;
 import seedu.ddd.testutil.EditClientDescriptorBuilder;
 import seedu.ddd.testutil.EditContactDescriptorBuilder;
 import seedu.ddd.testutil.EditVendorDescriptorBuilder;

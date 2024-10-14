@@ -9,6 +9,9 @@ import seedu.ddd.model.contact.client.Date;
  */
 public class EditClientDescriptorBuilder extends EditContactDescriptorBuilder {
 
+    /**
+     * Sets the descriptor to an {@code EditClientDescritor}.
+     */
     public EditClientDescriptorBuilder() {
         super();
         descriptor = new EditClientDescriptor();
@@ -22,14 +25,15 @@ public class EditClientDescriptorBuilder extends EditContactDescriptorBuilder {
      * Returns an {@code EditClientDescriptor} with fields containing {@code client}'s details
      */
     public EditClientDescriptorBuilder(Client client) {
-        descriptor = new EditClientDescriptor();
-        descriptor.setName(client.getName());
-        descriptor.setPhone(client.getPhone());
-        descriptor.setEmail(client.getEmail());
-        descriptor.setAddress(client.getAddress());
-        ((EditClientDescriptor) descriptor).setDate(client.getDate());
-        descriptor.setTags(client.getTags());
-        descriptor.setId(client.getId());
+        EditClientDescriptor editClientDescriptor = new EditClientDescriptor();
+        editClientDescriptor.setName(client.getName());
+        editClientDescriptor.setPhone(client.getPhone());
+        editClientDescriptor.setEmail(client.getEmail());
+        editClientDescriptor.setAddress(client.getAddress());
+        editClientDescriptor.setDate(client.getDate());
+        editClientDescriptor.setTags(client.getTags());
+        editClientDescriptor.setId(client.getId());
+        descriptor = editClientDescriptor;
     }
 
     @Override
@@ -56,7 +60,8 @@ public class EditClientDescriptorBuilder extends EditContactDescriptorBuilder {
      * Sets the {@code Date} of the {@code EditClientDescriptor} that we are building.
      */
     public EditClientDescriptorBuilder withDate(String date) {
-        ((EditClientDescriptor) descriptor).setDate(new Date(date));
+        EditClientDescriptor editClientDescriptor = (EditClientDescriptor) descriptor;
+        editClientDescriptor.setDate(new Date(date));
         return this;
     }
 

@@ -1,14 +1,5 @@
 package seedu.ddd.logic.parser;
 
-import org.junit.jupiter.api.Test;
-
-import seedu.ddd.commons.core.index.Index;
-import seedu.ddd.logic.Messages;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ddd.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
@@ -45,8 +36,11 @@ import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_THIRD_CONTACT;
 
+import org.junit.jupiter.api.Test;
+
+import seedu.ddd.commons.core.index.Index;
+import seedu.ddd.logic.Messages;
 import seedu.ddd.logic.commands.EditCommand;
-import seedu.ddd.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Email;
@@ -128,7 +122,7 @@ public class EditCommandParserTest {
 
         targetIndex = INDEX_FIRST_CONTACT;
         userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-        + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + DATE_DESC_AMY + TAG_DESC_FRIEND;
+            + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + DATE_DESC_AMY + TAG_DESC_FRIEND;
         descriptor = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withDate(VALID_DATE).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
