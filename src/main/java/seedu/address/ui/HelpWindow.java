@@ -56,9 +56,9 @@ public class HelpWindow extends UiPart<Stage> {
             + HELP_MORE_INFORMATION;
 
     private static final double DEFAULT_WIDTH = 800;
-    private static final double DEFAULT_HEIGHT = 600;
+    private static final double DEFAULT_HEIGHT = 520;
     private static final double MIN_WIDTH = 800;
-    private static final double MIN_HEIGHT = 600;
+    private static final double MIN_HEIGHT = 520;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
