@@ -102,6 +102,24 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a student with the same identity as {@code student} exists in the group
+     * with the same identity as {@code group}.
+     */
+    public boolean hasStudentInGroup(Student student, Group group) {
+        requireNonNull(student);
+        requireNonNull(group);
+        return hasStudent(student) && hasGroup(group) && group.getStudents().contains(student);
+    }
+
+    /**
+     * Adds {@code student} to {@code group}.
+     * {@code student} and {@code group} must exist in the address book.
+     */
+    public void addStudentToGroup(Student student, Group group) {
+        group.add(student);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */

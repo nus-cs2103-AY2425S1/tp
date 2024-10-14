@@ -110,6 +110,19 @@ public interface Model {
     void setGroup(Group target, Group editedGroup);
 
     /**
+     * Returns true if a student with the same identity as {@code student} exists in the group
+     * with the same identity as {@code group}.
+     */
+    boolean hasPersonInGroup(Student student, Group group);
+
+    /**
+     * Adds {@code student} to {@code group}.
+     * {@code student} and {@code group} must exist in the address book and the student
+     * shouldn't already be in the group.
+     */
+    void addPersonToGroup(Student student, Group group);
+
+    /**
      * Returns an unmodifiable view of the filtered student list
      */
     ObservableList<Student> getFilteredPersonList();

@@ -158,6 +158,17 @@ public class ModelManager implements Model {
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
+    @Override
+    public boolean hasPersonInGroup(Student student, Group group) {
+        requireAllNonNull(student, group);
+        return addressBook.hasStudentInGroup(student, group);
+    }
+
+    @Override
+    public void addPersonToGroup(Student student, Group group) {
+        requireAllNonNull(student, group);
+        addressBook.addStudentToGroup(student, group);
+    }
 
     //=========== Filtered Student List Accessors =============================================================
 
