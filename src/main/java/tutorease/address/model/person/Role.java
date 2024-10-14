@@ -36,6 +36,10 @@ public class Role {
                 || (other instanceof Role
                 && value.equals(((Role) other).value));
     }
+    // Validation method
+    public static boolean isValidRole(String role) {
+        return role != null && !role.isEmpty() && role.matches("[\\p{Alnum} ]+");
+    }
 
     @Override
     public int hashCode() {
