@@ -154,7 +154,7 @@ public class ParserUtil {
         }
         return subjectSet;
     }
-  
+
     /**
      * Parses a {@code String desc} into an {@code TaskDescription}.
      * Leading and trailing whitespaces will be trimmed.
