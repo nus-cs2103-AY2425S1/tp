@@ -3,15 +3,12 @@ package seedu.address.storage;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.student.Student;
 import seedu.address.model.tut.TutDate;
 
 /**
@@ -23,7 +20,6 @@ class JsonAdaptedTutDate {
     public static final String DATE_FORMAT = "yyyy/MM/dd";
 
     private final String date;
-    private final Set<JsonAdaptedStudent> students = new HashSet<>();
 
     /**
      * Constructs a {@code JsonAdaptedTutDate} with the given tut date details.
@@ -32,9 +28,6 @@ class JsonAdaptedTutDate {
     public JsonAdaptedTutDate(@JsonProperty("date") String date,
                               @JsonProperty("students") List<JsonAdaptedStudent> students) {
         this.date = date;
-        if (students != null) {
-            this.students.addAll(students);
-        }
     }
 
     /**
@@ -44,9 +37,6 @@ class JsonAdaptedTutDate {
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
         sdf.setLenient(false);
         this.date = sdf.format(source.getDate());
-        this.students.addAll(source.getStudents().stream()
-                .map(JsonAdaptedStudent::new)
-                .toList());
     }
 
     /**
@@ -69,17 +59,8 @@ class JsonAdaptedTutDate {
             throw new IllegalValueException(TutDate.MESSAGE_CONSTRAINTS);
         }
 
-        final Set<Student> modelStudents = new HashSet<>();
-        for (JsonAdaptedStudent jsonAdaptedStudent : students) {
-            modelStudents.add(jsonAdaptedStudent.toModelType());
-        }
 
-        TutDate tutDate = new TutDate(modelDate);
-        for (Student student : modelStudents) {
-            tutDate.add(student);
-        }
-
-        return tutDate;
+        return new TutDate(modelDate);
     }
 
 }
