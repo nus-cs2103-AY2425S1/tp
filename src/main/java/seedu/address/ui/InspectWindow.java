@@ -32,7 +32,7 @@ public class InspectWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private final Person person;
+    private static Person person;
 
     private Stage primaryStage;
     private Logic logic;
@@ -66,7 +66,8 @@ public class InspectWindow extends UiPart<Stage> {
     public InspectWindow(Stage primaryStage, Logic logic, Person person) {
         super(FXML, primaryStage);
 
-        this.person = person;
+        //this.person = person;
+        InspectWindow.person = person;
 
         // Set dependencies
         this.primaryStage = primaryStage;
@@ -128,15 +129,15 @@ public class InspectWindow extends UiPart<Stage> {
         VBox personInfoBox = new VBox();
         personInfoBox.setSpacing(10);
 
-        Label nameLabel = new Label("Name: " + person.getName());
-        Label phoneLabel = new Label("Phone: " + person.getPhone());
-        Label emailLabel = new Label("Email: " + person.getEmail());
-        Label addressLabel = new Label("Address: " + person.getAddress());
-        Label tagsLabel = new Label("Tags: " + person.getTags());
+        Label nameLabel = new Label("Name: " + InspectWindow.person.getName());
+        Label phoneLabel = new Label("Phone: " + InspectWindow.person.getPhone());
+        Label emailLabel = new Label("Email: " + InspectWindow.person.getEmail());
+        Label addressLabel = new Label("Address: " + InspectWindow.person.getAddress());
+        Label tagsLabel = new Label("Tags: " + InspectWindow.person.getTags());
 
         personInfoBox.getChildren().addAll(nameLabel, phoneLabel, emailLabel, addressLabel, tagsLabel);
 
-        DeliveryListPanel deliveryListPanel = new DeliveryListPanel(person.getDeliveryList());
+        DeliveryListPanel deliveryListPanel = new DeliveryListPanel(InspectWindow.person.getDeliveryList());
         VBox deliveryListBox = new VBox(deliveryListPanel.getRoot());
 
         splitLayout.getChildren().addAll(personInfoBox, deliveryListBox);
@@ -219,6 +220,8 @@ public class InspectWindow extends UiPart<Stage> {
             *  (i.e. window vs inspect).
             *  Thus, another boolean for 'isInspect' is tracked in AddressBookParser. These 2 booleans
             *  will always have the same value. */
+
+            // This commandResult should store the result after executing add.
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
@@ -229,6 +232,8 @@ public class InspectWindow extends UiPart<Stage> {
                 handleExit();
             } else if (commandResult.isList()) {
                 handleList(commandResult);
+            } else if (commandResult.isDeliveryAdded()) {
+                return commandResult;
             } else {
                 throw new CommandException("Not yet implemented");
             }
@@ -239,5 +244,9 @@ public class InspectWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    public static Person getInspectedPerson() {
+        return InspectWindow.person;
     }
 }

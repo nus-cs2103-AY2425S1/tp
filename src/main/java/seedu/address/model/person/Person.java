@@ -41,10 +41,10 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        /* deliveryList.add(new Delivery(this.address, new Cost("$50"), new Eta("2024-10-31")));
         deliveryList.add(new Delivery(this.address, new Cost("$50"), new Eta("2024-10-31")));
         deliveryList.add(new Delivery(this.address, new Cost("$50"), new Eta("2024-10-31")));
-        deliveryList.add(new Delivery(this.address, new Cost("$50"), new Eta("2024-10-31")));
-        deliveryList.add(new Delivery(this.address, new Cost("$50"), new Eta("2024-10-31")));
+        deliveryList.add(new Delivery(this.address, new Cost("$50"), new Eta("2024-10-31")));*/
     }
 
     public Name getName() {

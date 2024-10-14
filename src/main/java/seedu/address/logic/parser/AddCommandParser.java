@@ -54,16 +54,14 @@ public class AddCommandParser implements Parser<AddCommand> {
             return new AddCommand(person);
         } else {
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_TIME, PREFIX_DATE, PREFIX_ETA, PREFIX_ADDRESS, PREFIX_COST);
-            Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get()); // Time should be made optional.
-            Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+                    ArgumentTokenizer.tokenize(args, PREFIX_ETA, PREFIX_ADDRESS, PREFIX_COST);
             Eta eta = ParserUtil.parseEta(argMultimap.getValue(PREFIX_ETA).get());
             Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(
                     "nullAddress, S000000")
             );
             Cost cost = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get());
 
-            Delivery delivery = new Delivery(address, cost, date, eta, time);
+            Delivery delivery = new Delivery(address, cost, eta);
             return new AddCommand(delivery);
         }
     }

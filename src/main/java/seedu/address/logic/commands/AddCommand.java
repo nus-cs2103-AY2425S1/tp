@@ -17,8 +17,8 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Person;
-
-import java.util.logging.Logger;
+import seedu.address.model.util.DeliveryAction;
+import seedu.address.ui.InspectWindow;
 
 /**
  * Adds a person to the address book.
@@ -44,7 +44,8 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_SUCCESS_PERSON = "New person added: %1$s";
+    public static final String MESSAGE_SUCCESS_DELIVERY = "New delivery added to: ";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     public static final String MESSAGE_DUPLICATE_PHONE = "\nWarning! There is a person with the same phone number";
     public static final String MESSAGE_DUPLICATE_EMAIL = "\nWarning! There is a person with the same email";
@@ -87,10 +88,16 @@ public class AddCommand extends Command {
                 warning += MESSAGE_DUPLICATE_EMAIL;
             }
             model.addPerson(toAdd);
-            return new CommandResult(String.format(MESSAGE_SUCCESS + warning, Messages.format(toAdd)));
+            return new CommandResult(String.format(MESSAGE_SUCCESS_PERSON + warning, Messages.format(toAdd)));
         } else {
             requireNonNull(model);
-            throw new CommandException("Implement this after merging");
+
+            // Not sure if we need to use model, because 'addDelivery' in Model requires the inspected person,
+            // but we can get the inspected person with this method. And if we have the inspected person here,
+            // we can directly add delivery to their delivery list.
+            Person inspectedPerson = InspectWindow.getInspectedPerson();
+            inspectedPerson.addDelivery(this.deliveryToAdd);
+            return new CommandResult(MESSAGE_SUCCESS_DELIVERY + inspectedPerson.getName(), DeliveryAction.ADD);
         }
     }
 
