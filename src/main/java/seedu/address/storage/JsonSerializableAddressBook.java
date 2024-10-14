@@ -48,10 +48,8 @@ class JsonSerializableAddressBook {
 
     /**
      * Converts this address book into the model's {@code AddressBook} object.
-     *
-     * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
+    public AddressBook toModelType() {
         AddressBook addressBook = new AddressBook();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             addPersonToAddressBook(jsonAdaptedPerson, addressBook);
@@ -64,11 +62,19 @@ class JsonSerializableAddressBook {
      *
      * @param jsonAdaptedPerson
      * @param addressBook
-     * @throws IllegalValueException
      */
-    private void addPersonToAddressBook(JsonAdaptedPerson jsonAdaptedPerson, AddressBook addressBook)
-            throws IllegalValueException {
-        Person person = jsonAdaptedPerson.toModelType();
+    private void addPersonToAddressBook(JsonAdaptedPerson jsonAdaptedPerson, AddressBook addressBook) {
+        Person person;
+
+        try {
+            person = jsonAdaptedPerson.toModelType();
+        } catch (IllegalValueException ive) {
+            logger.warning(ive.getMessage() + " Person contact will be discarded.");
+            return;
+        }
+
+        assert person != null;
+
         if (addressBook.hasPerson(person)) {
             logger.warning(MESSAGE_DUPLICATE_PERSON + " The following person contact will be discarded:\n"
                     + "Name: " + person.getName() + "\n" + "Phone: " + person.getPhone() + "\n" + "Email: "
