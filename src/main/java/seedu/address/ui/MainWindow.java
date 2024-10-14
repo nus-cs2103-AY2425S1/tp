@@ -184,7 +184,7 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isClearDetailsPanel()) {
+            if (commandResult.isUpdatePanel()) {
                 contactDetailsPanel.updatePanel();
             }
 

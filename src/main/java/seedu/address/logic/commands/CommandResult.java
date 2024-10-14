@@ -20,7 +20,7 @@ public class CommandResult {
     private final boolean exit;
 
     /** Indicates weather the contact details panel needs to be updated. */
-    private boolean clearDetailsPanel;
+    private final boolean updatePanel;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -29,7 +29,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.clearDetailsPanel = updatePanel;
+        this.updatePanel = updatePanel;
     }
 
     /**
@@ -38,6 +38,14 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and other fields set to their default value excep updatePanel.
+     */
+    public CommandResult(String feedbackToUser, boolean updatePanel) {
+        this(feedbackToUser, false, false, updatePanel);
     }
 
     public String getFeedbackToUser() {
@@ -57,8 +65,8 @@ public class CommandResult {
      *
      * @return true if the details panel should be cleared; false otherwise.
      */
-    public boolean isClearDetailsPanel() {
-        return this.clearDetailsPanel;
+    public boolean isUpdatePanel() {
+        return this.updatePanel;
     }
 
     @Override
@@ -75,12 +83,13 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && updatePanel == otherCommandResult.updatePanel;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, updatePanel);
     }
 
     @Override
@@ -89,6 +98,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("updatePanel", updatePanel)
                 .toString();
     }
 
