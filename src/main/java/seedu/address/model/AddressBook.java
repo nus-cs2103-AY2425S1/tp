@@ -159,6 +159,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeJob(Job key) {
+        jobs.remove(key);
+    }
+
+    /**
      * Removes a company from this address book.
      *
      * @param key Company to be removed.
