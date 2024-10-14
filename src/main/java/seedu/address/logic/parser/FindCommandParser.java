@@ -13,16 +13,15 @@ import java.util.List;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindNameCommand;
+import seedu.address.logic.commands.FindPhoneCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
-
-
-
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -52,7 +51,13 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (hasNamePrefix) {
             String nameInput = argMultimap.getValue(PREFIX_NAME).get().trim(); // Get the actual name input
             List<String> nameKeywords = Arrays.asList(nameInput.split("\\s+"));
-            return new FindNameCommand(new NameContainsKeywordsPredicate((nameKeywords)));
+            return new FindNameCommand(new NameContainsKeywordsPredicate(nameKeywords));
+        }
+
+        if (hasPhonePrefix) {
+            String phoneNumberInput = argMultimap.getValue(PREFIX_PHONE).get().trim(); // Get the actual phone input
+            List<String> phoneKeywords = Arrays.asList(phoneNumberInput.split("\\s+"));
+            return new FindPhoneCommand(new PhoneContainsKeywordsPredicate(phoneKeywords));
         }
 
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
