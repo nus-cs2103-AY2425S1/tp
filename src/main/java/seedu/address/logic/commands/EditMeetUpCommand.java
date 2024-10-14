@@ -7,6 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MEETUPS;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -18,11 +22,6 @@ import seedu.address.model.meetup.MeetUpFrom;
 import seedu.address.model.meetup.MeetUpInfo;
 import seedu.address.model.meetup.MeetUpName;
 import seedu.address.model.meetup.MeetUpTo;
-
-
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 /**
  * Edits the details of an existing meetup in the address book.
@@ -83,15 +82,15 @@ public class EditMeetUpCommand extends Command {
      */
     private static MeetUp createEditedMeetUp(MeetUp meetUpToEdit,
                                                  EditMeetUpCommand.EditMeetUpDescriptor editMeetUpDescriptor) {
-            assert meetUpToEdit != null;
+        assert meetUpToEdit != null;
 
-            MeetUpName updatedName = editMeetUpDescriptor.getMeetUpName().orElse(meetUpToEdit.getName());
-            MeetUpInfo updatedInfo = editMeetUpDescriptor.getMeetUpInfo().orElse(meetUpToEdit.getInfo());
-            MeetUpFrom updatedFromTime = editMeetUpDescriptor.getMeetUpFrom().orElse(meetUpToEdit.getFrom());
-            MeetUpTo updatedToTime = editMeetUpDescriptor.getMeetUpTo().orElse(meetUpToEdit.getTo());
+        MeetUpName updatedName = editMeetUpDescriptor.getMeetUpName().orElse(meetUpToEdit.getName());
+        MeetUpInfo updatedInfo = editMeetUpDescriptor.getMeetUpInfo().orElse(meetUpToEdit.getInfo());
+        MeetUpFrom updatedFromTime = editMeetUpDescriptor.getMeetUpFrom().orElse(meetUpToEdit.getFrom());
+        MeetUpTo updatedToTime = editMeetUpDescriptor.getMeetUpTo().orElse(meetUpToEdit.getTo());
 
-            return new MeetUp(updatedName, updatedInfo, updatedFromTime, updatedToTime);
-        }
+        return new MeetUp(updatedName, updatedInfo, updatedFromTime, updatedToTime);
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -149,7 +148,9 @@ public class EditMeetUpCommand extends Command {
         }
 
         // This method should not be used yet.
-        public void setMeetUpName(MeetUpName name) { this.name = name;}
+        public void setMeetUpName(MeetUpName name) {
+            this.name = name;
+        }
 
         public Optional<MeetUpName> getMeetUpName() {
             return Optional.ofNullable(name);
@@ -163,7 +164,9 @@ public class EditMeetUpCommand extends Command {
             return Optional.ofNullable(info);
         }
 
-        public void setMeetUpFrom(MeetUpFrom from) { this.from = from; }
+        public void setMeetUpFrom(MeetUpFrom from) {
+            this.from = from;
+        }
 
         public Optional<MeetUpFrom> getMeetUpFrom() {
             return Optional.ofNullable(from);

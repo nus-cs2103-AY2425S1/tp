@@ -23,8 +23,8 @@ public class SampleMeetUpList {
         return new MeetUp[] {
             new MeetUp(new MeetUpName("Placeholder"), new MeetUpInfo("placeholder"),
                     new MeetUpFrom(LocalDateTime.now()), new MeetUpTo(LocalDateTime.now())),
-                new MeetUp(new MeetUpName("Placeholder2"), new MeetUpInfo("placeholder2"),
-                        new MeetUpFrom(LocalDateTime.now()), new MeetUpTo(LocalDateTime.now())),
+            new MeetUp(new MeetUpName("Placeholder2"), new MeetUpInfo("placeholder2"),
+                    new MeetUpFrom(LocalDateTime.now()), new MeetUpTo(LocalDateTime.now())),
         };
     }
 

@@ -11,11 +11,15 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.meetup.MeetUp;
 
+/**
+ * Deletes a meetup identified using it's displayed index from the meetup list.
+ */
 public class DeleteMeetUpCommand extends Command {
 
     public static final String COMMAND_WORD = "deletem";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the details of the meetup in the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes the details of the meetup in the address book. "
             + "Existing meetup will be deleted from the address book.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 ";
