@@ -6,7 +6,7 @@ title: User Guide
 AgentAssist is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AgentAssist can get your sales tasks done faster than traditional GUI apps.
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -74,7 +74,7 @@ Refer to the [Features](#features) section for details of each command.
 **Purpose:**  
 This feature ensures that any details you add to the app are saved automatically. When you close and reopen the app, all your data will still be there.
 
-**How it Works:**  
+**How it Works:**
 - **Command Format and Example:** Not applicable, as this process is automatic.
 
 #### Parameters
@@ -89,14 +89,16 @@ This feature ensures that any details you add to the app are saved automatically
 ### Feature 2: Add New Customer
 
 **Purpose:**  
-This feature allows you to enter and save detailed records for new customers. Each customer's record includes their name, contact number, email, occupation, and income.
+This feature allows you to enter and save detailed records for new customers. Each customer's record includes their
+name, contact number, email, occupation, and income. You can also enter the optional fields for credit card tier and
+remark here. Otherwise, new users are assigned a default value of "N.A".
 
-**How to Use It:**  
-- **Command Format:** 
+**How to Use It:**
+- **Command Format:**
 ```
 add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TAG>] [r/ <REMARK>]
  ```
-- **Example:** 
+- **Example:**
 ```
 add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999
 add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold r/ got anger issue
@@ -116,7 +118,7 @@ add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold
 
 #### What to Expect
 - **If Successful:** You'll see a message: "New person added: `<NAME>`; Phone: `<PHONE>`; Email: `<EMAIL>`; Address: `<ADDRESS>`; Job: `<JOB>`;  Income: `<INCOME>`; Tag: `<TAG>`; Remark: `<REMARK>`". It's noted that if "Tag" and "Remark" are not added, they will be defined as "N/A."
-- **If There is an Error:** 
+- **If There is an Error:**
   - "Please verify that your input is in the correct format. Include the following details: n/ `<NAME>` p/ `<PHONE>` e/ `<EMAIL>` a/ `<ADDRESS>` j/ `<JOBNAME>` i/ `<INCOME>` [t/ `<TAG>`] [r/ `<REMARK>`]."
 
 **Handling Duplicates:**  
@@ -129,12 +131,12 @@ If a customer with the same name, email, job, and income is already saved, you'l
 **Purpose:**  
 This feature allows you to remove records of customers who are no longer using your credit card services.
 
-**How to Use It:**  
-- **Command Format:** 
+**How to Use It:**
+- **Command Format:**
 ```
 del <INDEX>
 ```
-- **Example:** 
+- **Example:**
 ```
 del 69
 ```
@@ -146,7 +148,7 @@ del 69
 
 #### What to Expect
 - **If Successful:** You'll see a message: "Customer `<INDEX>` has been deleted."
-- **If There is an Error:** 
+- **If There is an Error:**
   - Invalid index: "No customer with `<INDEX>` exists. Please recheck the index."
 
 **Handling Duplicates:**  
@@ -156,40 +158,13 @@ Since customer INDEX are unique identifiers:
 
 ---
 
-### Feature 4: View Details of a Customer
+### Feature 4: Edit the existing customer
 
 **Purpose:**  
-Allows users to view detailed information about a specific customer.
-
-**How to Use It:**  
-- **Command Format:** 
-```
-view <INDEX>
-```
-- **Example:** 
-```
-view 69
-```
-
-#### Parameters
-| Parameter | Expected Format               | Explanation                                                                                                                                 |
-|-----------|-------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| INDEX        | Integer (0 to the last index) | The index must be a valid integer within the registered range (either the original list or any filtered list after using `filter` command). |
-
-#### What to Expect
-- **If Successful:** The details of the customer with the specified index will be displayed.
-- **If There is an Error:** 
-  - Invalid index: "No customer with `<INDEX>` exists. Please recheck the index."
-
-**Handling Duplicates:**  
-- There can be no duplicate customer index due to system constraints on index uniqueness.
-- While other information like name and address can be duplicated, each customer index is unique, ensuring you always retrieve the correct customer record.
----
-
-### Feature 5: Edit the existing customer
-
-**Purpose:**  
-This feature enables users to update the details of an existing customer, apart from the remark as of v1.1, in the database. It is designed to accommodate changes in a customer’s information such as contact details, address, job information, or any other relevant data.
+This feature enables users to update the details of an existing customer, apart from the remark as of v1.1,
+in the
+database. It is designed to accommodate changes in a customer’s information such as contact details, address, job
+information, or any other relevant data.
 
 **How to Use It:**
 - **Command Format:**
@@ -224,17 +199,18 @@ edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 100000000
 - No two customers can have the same index due to the uniqueness constraint on customer index.
 
 ---
-### Feature 6: Find a Customer by Details
+
+### Feature 5: Find a Customer by Details
 
 **Purpose:**  
 Enables users to search for and display all customers who match the specified details such as name, job, or index.
 
-**How to Use It:**  
-- **Command Format:** 
+**How to Use It:**
+- **Command Format:**
 ```
 filter <FLAG>/ <FLAG FIELD>
 ```
-- **Examples:** 
+- **Examples:**
 ```
 filter n/ <NAME> 
 e.g. filter n/ TAN LESHEW
@@ -250,26 +226,27 @@ e.g. filter j/ doctor
 | FLAG FIELD | Refer to `add` parameter constraints for format | Fields should be input as follows: n/<NAME>, p/<PHONE>, etc. Searches are case-insensitive. |
 
 #### What to Expect
-- **If Successful:** 
+- **If Successful:**
   - Message: "Here are all the customers that match your search: (List of customers)."
-- **If There is an Error:** 
+- **If There is an Error:**
   - "Please correct your input and ensure it matches the expected format. Refer to the guidelines for each parameter as specified."
 
-**Handling Duplicates:**  
+**Handling Duplicates:**
 - For `NAME` and `JOB` fields: Multiple customers can have the same names or jobs. The command will list all matching entries.
+
 ---
 
-### Feature 7: Save Remarks About Customers
+### Feature 6: Save Remarks About Customers
 
 **Purpose:**  
 Allows users to save specific notes or remarks about a customer, which can be viewed later to recall notable details.
 
-**How to Use It:**  
-- **Command Format:** 
+**How to Use It:**
+- **Command Format:**
 ```
 remark <INDEX> r/ <REMARK>
 ```
-- **Example:** 
+- **Example:**
 ```
 remark 55 r/ He is a problematic customer.
 ```
@@ -281,59 +258,28 @@ remark 55 r/ He is a problematic customer.
 | REMARK    | Any string                    | Remarks are case-insensitive and can include any textual information.                                                                       |
 
 #### What to Expect
-- **If Successful:** 
+- **If Successful:**
   - Message: "Remark has been added to Customer `<INDEX>`."
-- **If There is an Error:** 
+- **If There is an Error:**
   - Invalid index: "No customer with `<INDEX>` exists. Please input a valid index."
 
-**Handling Duplicates:**  
+**Handling Duplicates:**
 - Although customer index should be unique, in the rare case where duplicates are detected, the following error message will be shown:
   - "Sorry, it appears that multiple customers with index: `<INDEX>` exist. Please use the delete command to remove the duplicated customer index."
 
 ---
 
-### Feature 8: Add/Replace Credit Card Tier
-
-**Purpose:**  
-Allows users to assign or update the credit card tier for a customer. This is particularly useful for managing new, existing, or returning customers who may not have been assigned a credit card tier initially or who need their current tier updated.
-
-**How to Use It:**  
-- **Command Format:** 
-```
-tag <INDEX> t/ <TIER>
-```
-- **Example:** 
-```
-tag 69 t/ reject
-```
-
-#### Parameters
-| Parameter | Expected Format                       | Explanation                                                                                                                                 |
-|-----------|---------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| INDEX     | Integer (0 to the last index)         | The index must be a valid integer within the registered range (either the original list or any filtered list after using `filter` command). |
-| TIER      | String (gold, silver, bronze, reject) | Defines the specific credit card tier to be assigned or updated.                                                                            |
-
-#### What to Expect
-- **If Successful:** 
-  - Message: "Customer `<INDEX>` has been tagged with `<TIER>` tier."
-- **If There is an Error:** 
-  - "Unable to process the request. Please ensure the index is within the valid range and the tier is specified as either 'gold', 'silver', 'bronze', or 'reject'."
-
-**Handling Duplicates:**  
-- If a customer already has a tier assigned and a new `tag` command is issued, the existing tier will be updated to the new tier specified. This ensures that customers always have the most appropriate tier based on their current status or eligibility.
-
----
-### Feature 9: Help
+### Feature 7: Help
 
 **Purpose:**  
 This feature provides users with quick access to the user guide for the application, helping them understand how to use various features effectively.
 
-**How to Use It:**  
-- **Command Format:** 
+**How to Use It:**
+- **Command Format:**
 ```
 help
 ```
-- **Example:** 
+- **Example:**
 ```
 help
 ```
@@ -343,25 +289,25 @@ help
   - There are no parameters required for this command.
 
 #### What to Expect
-- **If Successful:** 
+- **If Successful:**
   - No immediate message is displayed in the command interface.
   - Opens up a dialog box that provides a link to the user guide markdown file, allowing users to easily access detailed instructions and information.
 
-**Handling Duplicates:**  
+**Handling Duplicates:**
 - N/A as this command does not involve processing or displaying data that could involve duplicates.
 
 ---
-### Feature 10: Exit
+### Feature 8: Exit
 
 **Purpose:**  
 Allows users to exit the application through a simple command, eliminating the need to use the window's close button or external controls.
 
-**How to Use It:**  
-- **Command Format:** 
+**How to Use It:**
+- **Command Format:**
 ```
 exit
 ```
-- **Example:** 
+- **Example:**
 ```
 exit
 ```
@@ -371,11 +317,11 @@ exit
   - No parameters are needed to execute this command.
 
 #### What to Expect
-- **If Successful:** 
+- **If Successful:**
   - The message "Terminating program…" is displayed.
   - The program will then exit after a short delay, effectively closing the application.
 
-**Handling Duplicates:**  
+**Handling Duplicates:**
 - N/A as this command is unique and does not process data that could involve duplicates.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -384,6 +330,10 @@ exit
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: How do I change the remarks or credit card tier of an existing customer?<br>
+**A**: Use the [`edit`](#feature-4-edit-the-existing-customer) command, and specify the corresponding `t/` and or `r/`
+flag to change these two fields.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -396,15 +346,13 @@ exit
 
 ## Command Summary
 
-| Action                          | Command Format                                                                                   | Example                                                                                               |
-|---------------------------------|--------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
-| **Save Data Automatically**     | *Automatic*                                                                                      | *No command required*                                                                                 |
+| Action                          | Command Format                                                                                   | Example                                                                                              |
+|---------------------------------|--------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
+| **Save Data Automatically**     | *Automatic*                                                                                      | *No command required*                                                                                |
 | **Add New Customer**            | `add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TAG>] [r/ <REMARK>]` | `add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold r/ got anger issue` |
-| **Remove Old Customer**         | `del <INDEX>`                                                                                    | `del 69`                                                                                              |
-| **View Details of a Customer**  | `view <INDEX>`                                                                                   | `view 69`                                                                                             |
-| **Edit Existing Customer**      | `edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TAG>]`      | `edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000`                   |
-| **Find a Customer by Details**  | `filter <FLAG>/ <FLAG FIELD>`                                                                    | `filter n/ TAN LESHEW`                                                                                |
-| **Save Remarks About Customers**| `remark <INDEX> r/ <REMARK>`                                                                     | `remark 55 r/ He is a problematic customer.`                                                          |
-| **Add/Replace Credit Card Tier**| `tag <INDEX> t/ <TIER>`                                                                          | `tag 69 t/ reject`                                                                                    |
-| **Help**                        | `help`                                                                                           | `help`                                                                                                |
-| **Exit**                        | `exit`                                                                                           | `exit`                                                                                                |
+| **Remove Old Customer**         | `del <INDEX>`                                                                                    | `del 69`      |
+| **Edit Existing Customer**      | `edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TAG>]`      | `edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000`                  |
+| **Find a Customer by Details**  | `filter <FLAG>/ <FLAG FIELD>`                                                                    | `filter n/ TAN LESHEW`                                                                               |
+| **Save Remarks About Customers**| `remark <INDEX> r/ <REMARK>`                                                                     | `remark 55 r/ He is a problematic customer.`                                                         |
+| **Help**                        | `help`                                                                                           | `help`                                                                                               |
+| **Exit**                        | `exit`                                                                                           | `exit`                                                                                               |
