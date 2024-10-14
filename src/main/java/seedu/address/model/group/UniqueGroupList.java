@@ -128,7 +128,7 @@ public class UniqueGroupList implements Iterable<Group> {
                 return group;
             }
         }
-        throw new GroupNotFoundException();
+        throw new PersonNotFoundException();
     }
 
     /**

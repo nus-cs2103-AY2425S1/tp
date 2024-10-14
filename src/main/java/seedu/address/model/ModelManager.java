@@ -16,6 +16,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
+import seedu.address.model.task.Task;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -57,6 +58,11 @@ public class ModelManager implements Model {
     @Override
     public void setStateGroups() {
         this.userPrefs.setStateGroups();
+    }
+
+    @Override
+    public void setStateGroupTask() {
+        this.userPrefs.setStateGroupTask();
     }
 
     @Override
