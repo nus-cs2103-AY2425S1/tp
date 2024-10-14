@@ -8,6 +8,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyMeetUpList;
 import seedu.address.model.person.Person;
 
 /**
@@ -42,6 +43,13 @@ public interface Logic {
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();
+
+    /**
+     * Returns the MeetUpList.
+     *
+     * @see seedu.address.model.Model#getMeetUpList()
+     */
+    ReadOnlyMeetUpList getMeetUpList();
 
     /**
      * Set the user prefs' GUI settings.
