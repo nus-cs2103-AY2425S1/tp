@@ -2,8 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 
 import java.util.stream.Stream;
 
@@ -19,10 +19,10 @@ public class AssignCommandParser implements Parser<AssignCommand> {
     @Override
     public AssignCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_VENDOR_ID, PREFIX_EVENT_ID);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_VENDOR, PREFIX_EVENT);
 
         // Check if both vendor and event prefixes are present
-        if (!arePrefixesPresent(argMultimap, PREFIX_VENDOR_ID, PREFIX_EVENT_ID) 
+        if (!arePrefixesPresent(argMultimap, PREFIX_VENDOR, PREFIX_EVENT) 
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
         }
@@ -30,7 +30,7 @@ public class AssignCommandParser implements Parser<AssignCommand> {
         // Parse vendor index using the Index class
         Index vendorIndex;
         try {
-            vendorIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_VENDOR_ID).get());
+            vendorIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_VENDOR).get());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE), pe);
         }
@@ -38,7 +38,7 @@ public class AssignCommandParser implements Parser<AssignCommand> {
         // Parse event index using the Index class
         Index eventIndex;
         try {
-            eventIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_EVENT_ID).get());
+            eventIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_EVENT).get());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE), pe);
         }
