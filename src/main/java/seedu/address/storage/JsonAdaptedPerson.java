@@ -87,6 +87,11 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
+        final List<Role> personRoles = new ArrayList<>();
+        for (JsonAdaptedRole role : roles) {
+            personRoles.add(role.toModelType());
+        }
+
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -122,18 +127,21 @@ class JsonAdaptedPerson {
         final TelegramUsername modelTelegramUsername = new TelegramUsername(telegramUsername);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        Role[] roles = new Role[this.roles.size()];
+        //        Role[] roles = new Role[this.roles.size()];
+        //
+        //        if (this.roles.size() != 0) {
+        //            for (int i = 0; i < this.roles.size(); i++) {
+        //                try {
+        //                    roles[i] = this.roles.get(i).toModelType();
+        //                } catch (IllegalValueException e) {
+        //                    throw new RuntimeException(e);
+        //                }
+        //            }
+        //        }
 
-        if (this.roles.size() != 0) {
-            for (int i = 0; i < this.roles.size(); i++) {
-                try {
-                    roles[i] = this.roles.get(i).toModelType();
-                } catch (seedu.address.model.role.exceptions.InvalidRoleException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelTelegramUsername, roles);
+        final Set<Role> modelRoles = new HashSet<>(personRoles);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+                modelTelegramUsername, modelRoles);
     }
 
 }

@@ -52,10 +52,15 @@ public class AddCommandParser implements Parser<AddCommand> {
         TelegramUsername telegramUsername = ParserUtil
                 .parseTele(argMultimap.getValue(PREFIX_TELEGRAM).orElse(null)); // null to represent input absent
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Set <Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
 
-        Person person = new Person(name, phone, email, address, tagList, telegramUsername,
-                roleList.toArray(new Role[0]));
+        //Set <Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
+
+        //Person person = new Person(name, phone, email, address, tagList, telegramUsername,
+        //        roleList.toArray(new Role[0]));
+
+        Set<Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
+
+        Person person = new Person(name, phone, email, address, tagList, telegramUsername, roleList);
 
         return new AddCommand(person);
     }

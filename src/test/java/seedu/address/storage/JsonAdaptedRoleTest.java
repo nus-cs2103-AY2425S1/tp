@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -8,6 +9,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.role.Role;
+import seedu.address.model.role.RoleHandler;
+
 
 
 
@@ -28,13 +34,33 @@ public class JsonAdaptedRoleTest {
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
 
+    private static final String VALID_ROLE_ATTENDEE = "attendee";
+    private static final String VALID_ROLE_SPONSOR = "sponsor";
+
     @Test
     public void jsonAdaptedRole_validRoleDetails_returnsRole() {
         assertDoesNotThrow(() -> new JsonAdaptedRole("attendee"));
     }
 
+    //    @Test
+    //    public void jsonAdaptedRole_invalidRole_throwsIllegalValueException() {
+    //        assertThrows(IllegalArgumentException.class, () -> new JsonAdaptedRole(INVALID_ROLE));
+    //
+    //    }
+
+
+
     @Test
-    public void jsonAdaptedRole_invalidRole_throwsIllegalValueException() {
-        assertThrows(IllegalArgumentException.class, () -> new JsonAdaptedRole(INVALID_ROLE));
+    public void toModelType_validRole_returnsRole() throws Exception {
+        JsonAdaptedRole adaptedRole = new JsonAdaptedRole(VALID_ROLE_ATTENDEE);
+        Role expectedRole = new RoleHandler().getRole(VALID_ROLE_ATTENDEE);
+        assertEquals(expectedRole, adaptedRole.toModelType());
+    }
+
+    @Test
+    public void toModelType_invalidRole_throwsIllegalValueException() {
+        JsonAdaptedRole adaptedRole = new JsonAdaptedRole(INVALID_ROLE);
+        String expectedMessage = RoleHandler.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, adaptedRole::toModelType);
     }
 }

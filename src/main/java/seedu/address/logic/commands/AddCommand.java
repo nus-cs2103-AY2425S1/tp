@@ -30,6 +30,7 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TELEGRAM + "TELEGRAM_USERNAME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_ROLE + "ROLE]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -38,6 +39,8 @@ public class AddCommand extends Command {
             + PREFIX_TELEGRAM + "johndoe "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney"
+            + PREFIX_ROLE + "sponsor"
+
             + PREFIX_ROLE + "attendee";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";

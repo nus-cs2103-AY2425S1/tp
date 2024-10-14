@@ -146,17 +146,6 @@ public class ParserUtil {
         return tagSet;
     }
 
-    /**
-     * Parses {@code Collection<String> roles} into a {@code Set<Role>}.
-     */
-    public static Set<Role> parseRoles(Collection<String> roles) throws ParseException {
-        requireNonNull(roles);
-        final Set<Role> roleSet = new HashSet<>();
-        for (String roleName : roles) {
-            roleSet.add(parseRole(roleName));
-        }
-        return roleSet;
-    }
 
     /**
      * Parses a {@code String role} into a {@code Role}.
@@ -174,5 +163,20 @@ public class ParserUtil {
         } catch (InvalidRoleException e) {
             throw new ParseException(RoleHandler.MESSAGE_CONSTRAINTS);
         }
+    }
+
+    /**
+     * Parses {@code Collection<String> roles} into a {@code Set<Role>}.
+     * @param roles Collection of roles to be parsed
+     * @return Set of roles to be added
+     * @throws ParseException if one of the roles is invalid
+     */
+    public static Set<Role> parseRoles(Collection<String> roles) throws ParseException {
+        requireNonNull(roles);
+        final Set<Role> roleSet = new HashSet<>();
+        for (String role : roles) {
+            roleSet.add(parseRole(role));
+        }
+        return roleSet;
     }
 }

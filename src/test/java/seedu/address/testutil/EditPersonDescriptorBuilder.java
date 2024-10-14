@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -103,15 +104,19 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withRoles(String... roles) {
-        Set<Role> roleSet = Stream.of(roles).map(str -> {
-            try {
-                return RoleHandler.getRole(str);
-            } catch (InvalidRoleException e) {
-                //TODO Change This
-                return null;
-            }
 
-        }).collect(Collectors.toSet());
+        RoleHandler rh = new RoleHandler();
+        Set<Role> roleSet = Stream.of(roles)
+                .map(role -> {
+                    try {
+                        return Optional.of(rh.getRole(role));
+                    } catch (InvalidRoleException e) {
+                        return Optional.<Role>empty();
+                    }
+                })
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toSet());
         descriptor.setRoles(roleSet);
         return this;
     }

@@ -26,15 +26,29 @@ public class Person implements Comparable<Person> {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
-    private final Set<Role> roles = new HashSet<>();
     private final TelegramUsername telegramUsername;
+    private final Set<Role> roles = new HashSet<>();
 
     /**
      * Every field must be present and not null
      */
-
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  TelegramUsername telegramUsername, Role... roles) {
+                  TelegramUsername telegramUsername, Set<Role> roles) {
+        requireAllNonNull(name, phone, email, address, tags, telegramUsername, roles);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.telegramUsername = telegramUsername;
+        this.roles.addAll(roles);
+    }
+
+    /**
+     * Constructor that takes in a variable number of roles(optional field)
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                    TelegramUsername telegramUsername, Role... roles) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -47,6 +61,7 @@ public class Person implements Comparable<Person> {
         }
 
     }
+
 
     public Name getName() {
         return name;
@@ -78,6 +93,14 @@ public class Person implements Comparable<Person> {
     }
 
     /**
+     * Returns an immutable role set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Role> getRoles() {
+        return Collections.unmodifiableSet(roles);
+    }
+
+    /**
      * Returns true if both persons have the same phone number or email.
      * This defines a weaker notion of equality between two persons.
      */
@@ -91,12 +114,6 @@ public class Person implements Comparable<Person> {
                 || otherPerson.getEmail().equals(getEmail()));
     }
 
-    /**
-     * Returns an immutable role set.
-     */
-    public Set<Role> getRoles() {
-        return Collections.unmodifiableSet(roles);
-    }
 
 
 
@@ -121,7 +138,6 @@ public class Person implements Comparable<Person> {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-
                 && telegramUsername.equals(otherPerson.telegramUsername)
                 && roles.equals(otherPerson.roles);
     }

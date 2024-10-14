@@ -133,13 +133,20 @@ public class PersonBuilder {
     }
 
 
-    /**
-     * Builds a Person object with the given fields.
-     */
-    public Person build() {
-        Role[] roleArray = roles.toArray(new Role[0]);
 
-        return new Person(name, phone, email, address, tags, telegramUsername, roleArray);
+    //    public Person build() {
+    //        Role[] roleArray = roles.toArray(new Role[0]);
+    //
+    //        return new Person(name, phone, email, address, tags, telegramUsername, roleArray);
+    //    }
+
+    //    public PersonBuilder withRoles(String ... roles) {
+    //        this.roles = SampleDataUtil.getRoleSet(roles);
+    //        return this;
+    //    }
+
+    public Person build() {
+        return new Person(name, phone, email, address, tags, telegramUsername, roles);
     }
 
 }

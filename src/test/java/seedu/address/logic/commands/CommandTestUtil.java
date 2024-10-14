@@ -40,8 +40,10 @@ public class CommandTestUtil {
     public static final String VALID_TELEGRAM_BOB = "bobby";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_ROLE_VENDOR = "vendor";
     public static final String VALID_ROLE_ATTENDEE = "attendee";
+    public static final String VALID_ROLE_SPONSOR = "sponsor";
+    public static final String VALID_ROLE_VENDOR = "vendor";
+    public static final String VALID_ROLE_VOLUNTEER = "volunteer";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -55,6 +57,10 @@ public class CommandTestUtil {
     public static final String TELEGRAM_DESC_BOB = " " + PREFIX_TELEGRAM + VALID_TELEGRAM_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String ROLE_DESC_ATTENDEE = " " + PREFIX_ROLE + VALID_ROLE_ATTENDEE;
+    public static final String ROLE_DESC_SPONSOR = " " + PREFIX_ROLE + VALID_ROLE_SPONSOR;
+    public static final String ROLE_DESC_VENDOR = " " + PREFIX_ROLE + VALID_ROLE_VENDOR;
+    public static final String ROLE_DESC_VOLUNTEER = " " + PREFIX_ROLE + VALID_ROLE_VOLUNTEER;
 
     public static final String ROLE_DESC_BOB = " " + PREFIX_ROLE + VALID_ROLE_VENDOR;
     public static final String ROLE_DESC_AMY = " " + PREFIX_ROLE + VALID_ROLE_ATTENDEE;
@@ -64,8 +70,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-
-    public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "seller"; // 'seller' not allowed in roles
+    public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "owner";
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
@@ -79,7 +84,7 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withTelegramUsername("bobby")
-                .withRoles(VALID_ROLE_VENDOR).build();
+                .withRoles(VALID_ROLE_SPONSOR).build();
     }
 
     /**

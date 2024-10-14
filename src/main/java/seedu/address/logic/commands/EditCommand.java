@@ -105,13 +105,17 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        TelegramUsername telegramUsername = editPersonDescriptor.getTelegramUsername()
+        TelegramUsername updatedTeleUsername = editPersonDescriptor.getTelegramUsername()
                 .orElse(personToEdit.getTelegramUsername());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Role[] updatedRoles = (editPersonDescriptor.getRoles().orElse(personToEdit.getRoles())).toArray(new Role[0]);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, telegramUsername,
-                updatedRoles);
+        //Role[] updatedRoles = (editPersonDescriptor.getRoles().orElse(personToEdit.getRoles())).toArray(new Role[0]);
+
+
+        Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(personToEdit.getRoles());
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedTags, updatedTeleUsername, updatedRoles);
     }
 
     @Override
@@ -245,6 +249,7 @@ public class EditCommand extends Command {
         public Optional<Set<Role>> getRoles() {
             return (roles != null) ? Optional.of(Collections.unmodifiableSet(roles)) : Optional.empty();
         }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
