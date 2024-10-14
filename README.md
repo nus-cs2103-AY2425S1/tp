@@ -21,7 +21,7 @@
 
 ---
 
-# Git Workflow
+## Git Workflow
 
 This project uses
 the [Feature Branch Flow](https://nus-cs2103-ay2425s1.github.io/website/se-book-adapted/chapters/revisionControl.html#feature-branch-flow)
