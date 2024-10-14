@@ -50,6 +50,17 @@ public class UniqueJobList implements Iterable<Job> {
     }
 
     /**
+     * Removes the equivalent job from the list.
+     * The job must exist in the list.
+     */
+    public void remove(Job toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new JobNotFoundException();
+        }
+    }
+
+    /**
      * Returns true if the list contains an equivalent jobs as the given argument.
      */
     public boolean contains(Job toCheck) {
@@ -106,12 +117,5 @@ public class UniqueJobList implements Iterable<Job> {
     @Override
     public String toString() {
         return internalList.toString();
-    }
-
-    public void remove(Job toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new JobNotFoundException();
-        }
     }
 }
