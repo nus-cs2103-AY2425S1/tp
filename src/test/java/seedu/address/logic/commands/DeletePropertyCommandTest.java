@@ -3,14 +3,26 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTFOUND_POSTALCODE_CLEMENTI;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTFOUND_UNIT_CLEMENTI;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSTALCODE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSTALCODE_BEDOK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_BEDOK;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalClients.getTypicalClientBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalProperty.getTypicalPropertyBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.property.PostalCode;
+import seedu.address.model.property.Property;
 import seedu.address.model.property.Unit;
 
 
@@ -19,6 +31,37 @@ import seedu.address.model.property.Unit;
  * {@code DeleteCommand}.
  */
 public class DeletePropertyCommandTest {
+
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalPropertyBook(),
+            getTypicalClientBook());
+
+    @Test
+    public void execute_validPostalCodeAndUnitNumber_success() {
+        Property propertyToDelete = model.getFilteredPropertyList().stream()
+                .filter(property -> property.getPostalCode().equals(VALID_POSTALCODE_ADMIRALTY)
+                        && property.getUnit().equals(VALID_UNIT_ADMIRALTY))
+                .findFirst().orElseThrow(() -> new AssertionError(String.format("Property not found. ",
+                        VALID_POSTALCODE_ADMIRALTY, VALID_UNIT_ADMIRALTY)));
+        DeletePropertyCommand deletePropertyCommand =
+                new DeletePropertyCommand(propertyToDelete.getPostalCode(), propertyToDelete.getUnit());
+
+        String expectedMessage = String.format(DeletePropertyCommand.MESSAGE_DELETE_PROPERTY_SUCCESS,
+                Messages.format(propertyToDelete));
+
+        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+                getTypicalPropertyBook(), getTypicalClientBook());
+
+        assertCommandSuccess(deletePropertyCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_propertyNotFound_throwsCommandException() {
+        PostalCode notFoundPostalCode = new PostalCode(VALID_NOTFOUND_POSTALCODE_CLEMENTI);
+        Unit notFoundUnit = new Unit(VALID_NOTFOUND_UNIT_CLEMENTI);
+        DeletePropertyCommand deletePropertyCommand = new DeletePropertyCommand(notFoundPostalCode, notFoundUnit);
+        assertCommandFailure(deletePropertyCommand, model,
+                String.format("Property not found. ", notFoundPostalCode, notFoundUnit));
+    }
 
     @Test
     public void equals() {
