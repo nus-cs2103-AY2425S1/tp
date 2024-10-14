@@ -157,6 +157,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String buyingPrice} into a {@code BuyingPrice}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code buyingPrice} is invalid.
+     */
+    public static Price parseBuyingPrice(String buyingPrice) throws ParseException {
+        requireNonNull(buyingPrice);
+        String trimmedBuyingPrice = buyingPrice.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedBuyingPrice)) {
+            throw new ParseException(Price.MESSAGE_CONSTRAINTS);
+        }
+        return new Price(trimmedBuyingPrice);
+    }
+
+    /**
      * Parses a {@code String postalCode} into a {@code PostalCode}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -166,7 +181,7 @@ public class ParserUtil {
         requireNonNull(postalCode);
         String trimmedPostalCode = postalCode.trim();
         if (!PostalCode.isValidPostalCode(trimmedPostalCode)) {
-            throw new ParseException("Postal code is not a non-zero unsigned integer.");
+            throw new ParseException(PostalCode.MESSAGE_CONSTRAINTS);
         }
         return new PostalCode(trimmedPostalCode);
     }
@@ -181,7 +196,7 @@ public class ParserUtil {
         requireNonNull(unitNumber);
         String trimmedUnitNumber = unitNumber.trim();
         if (!UnitNumber.isValidUnitNumber(trimmedUnitNumber)) {
-            throw new ParseException("Unit number is not a non-zero unsigned integer.");
+            throw new ParseException(UnitNumber.MESSAGE_CONSTRAINTS);
         }
         return new UnitNumber(trimmedUnitNumber);
     }

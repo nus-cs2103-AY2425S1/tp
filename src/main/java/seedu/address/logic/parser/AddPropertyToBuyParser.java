@@ -12,7 +12,6 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddPropertyToBuyCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Apartment;
 import seedu.address.model.person.Bto;
@@ -59,7 +58,7 @@ public class AddPropertyToBuyParser implements Parser<AddPropertyToBuyCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_HOUSING_TYPE,
                 PREFIX_BUYING_PRICE, PREFIX_POSTAL_CODE, PREFIX_UNIT_NUMBER);
         HousingType housingType = ParserUtil.parseHousingType(argMultimap.getValue(PREFIX_HOUSING_TYPE).get());
-        Price buyingPrice = ParserUtil.parseSellingPrice(argMultimap.getValue(PREFIX_BUYING_PRICE).get());
+        Price buyingPrice = ParserUtil.parseBuyingPrice(argMultimap.getValue(PREFIX_BUYING_PRICE).get());
         PostalCode postalCode = ParserUtil.parsePostalCode(argMultimap.getValue(PREFIX_POSTAL_CODE).get());
         UnitNumber unitNumber = ParserUtil.parseUnitNumber(argMultimap.getValue(PREFIX_UNIT_NUMBER).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
