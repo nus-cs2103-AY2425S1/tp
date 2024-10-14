@@ -53,19 +53,16 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         names = splitStrings(names);
         if (!areValidKeywords(names, Name.VALIDATION_REGEX)) {
-            throw new ParseException("Name keyword was invalid! " + Name.MESSAGE_CONSTRAINTS + "\n"
-                    + FindCommand.MESSAGE_USAGE);
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE);
         }
 
         if (!areValidKeywords(addresses, Address.VALIDATION_REGEX)) {
-            throw new ParseException("Address keyword was invalid!" + Address.MESSAGE_CONSTRAINTS + "\n"
-                    + FindCommand.MESSAGE_USAGE);
+            throw new ParseException(Address.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE);
         }
 
         priorities = splitStrings(priorities);
         if (!areValidPriorities(priorities)) {
-            throw new ParseException("Invalid priority given! " + Priority.MESSAGE_CONSTRAINTS + "\n"
-                    + FindCommand.MESSAGE_USAGE);
+            throw new ParseException(Priority.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE);
         }
 
 

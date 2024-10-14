@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -34,6 +35,20 @@ public class CommandParserTestUtil {
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
             assertEquals(expectedMessage, pe.getMessage());
+        }
+    }
+
+    /**
+     * Asserts that the parsing of {@code userInput} by {@code parser} is successful but the command created
+     * is not equal to the {@code expectedCommand}.
+     */
+    public static void assertIncorrectCommand(Parser<? extends Command> parser, String userInput,
+            Command expectedCommand) {
+        try {
+            Command command = parser.parse(userInput);
+            assertNotEquals(expectedCommand, command);
+        } catch (ParseException pe) {
+            throw new IllegalArgumentException("Invalid user input.", pe);
         }
     }
 }
