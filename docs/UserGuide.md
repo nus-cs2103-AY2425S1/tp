@@ -52,10 +52,10 @@ KeyContacts is a **desktop app for piano teachers to manager their students' inf
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `[n/NAME]` can be used as ` ` or `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[pn/PIECE]…​` can be used as ` ` (i.e. 0 times), `pn/Moonlight Sonata`, `pn/Moonlight Sonata pn/Ode to Joy` etc.
+* Items with `…`​ after them can be used multiple times.<br>
+  e.g. `pn/PIECE…​` can be used as `pn/Moonlight Sonata`, `pn/Moonlight Sonata pn/Ode to Joy` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.

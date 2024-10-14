@@ -12,7 +12,6 @@ import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.logic.commands.EditCommand.EditStudentDescriptor;
 import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.pianopiece.PianoPiece;
-import keycontacts.model.tag.Tag;
 
 /**
  * Represents a Student in the student directory.
@@ -20,34 +19,25 @@ import keycontacts.model.tag.Tag;
  */
 public class Student {
 
-    // Identity fields
+    // Data fields
     private final Name name;
     private final Phone phone;
-    private final Email email;
-
-    // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
     private final GradeLevel gradeLevel;
 
-    // A LinkedHashSet is used for piano pieces to maintain order of insertion
-    private final Set<PianoPiece> pianoPieces = new HashSet<>();
-
     // Associations
+    private final Set<PianoPiece> pianoPieces = new HashSet<>();
     private final RegularLesson regularLesson;
 
     /**
      * Constructor for a new student. Uses default associations.
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, GradeLevel gradeLevel) {
-        requireAllNonNull(name, phone, email, address, tags, gradeLevel);
+    public Student(Name name, Phone phone, Address address, GradeLevel gradeLevel) {
+        requireAllNonNull(name, phone, address, gradeLevel);
         this.name = name;
         this.phone = phone;
-        this.email = email;
         this.address = address;
-
-        this.tags.addAll(tags);
         this.gradeLevel = gradeLevel;
         this.regularLesson = null;
     }
@@ -56,17 +46,13 @@ public class Student {
      * Constructor for a new student with non-default student associations. Identity and data fields must be
      * present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, GradeLevel gradeLevel,
+    public Student(Name name, Phone phone, Address address, GradeLevel gradeLevel,
                    Set<PianoPiece> pianoPieces, RegularLesson regularLesson) {
-        requireAllNonNull(name, phone, email, address, tags, gradeLevel, pianoPieces);
+        requireAllNonNull(name, phone, address, gradeLevel, pianoPieces);
         this.name = name;
         this.phone = phone;
-        this.email = email;
         this.address = address;
-
-        this.tags.addAll(tags);
         this.gradeLevel = gradeLevel;
-
         this.pianoPieces.addAll(pianoPieces);
         this.regularLesson = regularLesson;
     }
@@ -79,20 +65,8 @@ public class Student {
         return phone;
     }
 
-    public Email getEmail() {
-        return email;
-    }
-
     public Address getAddress() {
         return address;
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
     }
 
     public GradeLevel getGradeLevel() {
@@ -132,19 +106,16 @@ public class Student {
     public Student withEditStudentDescriptor(EditStudentDescriptor editStudentDescriptor) {
         Name updatedName = editStudentDescriptor.getName().orElse(name);
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(phone);
-        Email updatedEmail = editStudentDescriptor.getEmail().orElse(email);
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(address);
-        Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(tags);
         GradeLevel updatedGradeLevel = editStudentDescriptor.getGradeLevel().orElse(this.gradeLevel);
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedGradeLevel, pianoPieces, regularLesson);
+        return new Student(updatedName, updatedPhone, updatedAddress, updatedGradeLevel, pianoPieces, regularLesson);
     }
 
     /**
      * Creates and returns a new {@code Student} with the updated {@code regularLesson}.
      */
     public Student withRegularLesson(RegularLesson regularLesson) {
-        return new Student(name, phone, email, address, tags, gradeLevel, pianoPieces, regularLesson);
+        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson);
     }
 
     /**
@@ -154,8 +125,7 @@ public class Student {
         Set<PianoPiece> updatedPianoPieces = new HashSet<>(pianoPieces);
         updatedPianoPieces.addAll(addedPianoPieces);
 
-        return new Student(name, phone, email, address, tags, gradeLevel, updatedPianoPieces,
-                           regularLesson);
+        return new Student(name, phone, address, gradeLevel, updatedPianoPieces, regularLesson);
     }
 
     /**
@@ -189,9 +159,7 @@ public class Student {
         Student otherStudent = (Student) other;
         return name.equals(otherStudent.name)
                 && phone.equals(otherStudent.phone)
-                && email.equals(otherStudent.email)
                 && address.equals(otherStudent.address)
-                && tags.equals(otherStudent.tags)
                 && gradeLevel.equals(otherStudent.gradeLevel)
                 && pianoPieces.equals(otherStudent.pianoPieces)
                 && getRegularLesson().equals(otherStudent.getRegularLesson());
@@ -200,8 +168,7 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, gradeLevel, pianoPieces,
-                            regularLesson);
+        return Objects.hash(name, phone, address, gradeLevel, pianoPieces, regularLesson);
     }
 
     @Override
@@ -209,9 +176,7 @@ public class Student {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
-                .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
                 .add("gradeLevel", gradeLevel)
                 .add("pianoPieces", pianoPieces)
                 .add("regularLesson", regularLesson)

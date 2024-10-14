@@ -4,7 +4,6 @@ import static keycontacts.logic.commands.CommandTestUtil.DESC_AMY;
 import static keycontacts.logic.commands.CommandTestUtil.DESC_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static keycontacts.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static keycontacts.logic.commands.CommandTestUtil.assertCommandFailure;
 import static keycontacts.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static keycontacts.logic.commands.CommandTestUtil.showStudentAtIndex;
@@ -25,7 +24,6 @@ import keycontacts.model.ModelManager;
 import keycontacts.model.StudentDirectory;
 import keycontacts.model.UserPrefs;
 import keycontacts.model.student.Student;
-import keycontacts.model.tag.Tag;
 import keycontacts.testutil.EditStudentDescriptorBuilder;
 import keycontacts.testutil.StudentBuilder;
 
@@ -51,9 +49,7 @@ public class EditCommandTest {
         Student expectedEditedStudent = new StudentBuilder(studentToEdit)
                 .withName(editedStudent.getName().toString())
                 .withPhone(editedStudent.getPhone().toString())
-                .withEmail(editedStudent.getEmail().toString())
                 .withAddress(editedStudent.getAddress().toString())
-                .withTags(editedStudent.getTags().stream().map(Tag::toString).toArray(String[]::new))
                 .withGradeLevel(editedStudent.getGradeLevel().toString()).build();
 
         expectedModel.setStudent(studentToEdit, expectedEditedStudent);
@@ -67,11 +63,10 @@ public class EditCommandTest {
         Student lastStudent = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
 
         StudentBuilder studentInList = new StudentBuilder(lastStudent);
-        Student editedStudent = studentInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        Student editedStudent = studentInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).build();
         EditCommand editCommand = new EditCommand(indexLastStudent, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS,

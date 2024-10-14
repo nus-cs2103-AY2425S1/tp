@@ -15,11 +15,9 @@ import keycontacts.model.lesson.Day;
 import keycontacts.model.lesson.Time;
 import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Address;
-import keycontacts.model.student.Email;
 import keycontacts.model.student.GradeLevel;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
-import keycontacts.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -87,18 +85,47 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String gradeLevel} into a {@code GradeLevel}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code gradeLevel} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+    public static GradeLevel parseGradeLevel(String gradeLevel) throws ParseException {
+        requireNonNull(gradeLevel);
+        String trimmedGradeLevel = gradeLevel.trim();
+        if (!GradeLevel.isValidGradeLevel(trimmedGradeLevel)) {
+            throw new ParseException(GradeLevel.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+
+        return new GradeLevel(trimmedGradeLevel);
+    }
+
+    /**
+     * Parses {@code Collection<String> pianoPieces} into a {@code Set<PianoPiece>}.
+     */
+    public static Set<PianoPiece> parsePianoPieces(Collection<String> pianoPieces) throws ParseException {
+        requireNonNull(pianoPieces);
+        final Set<PianoPiece> pianoPieceSet = new HashSet<>();
+        for (String pianoPieceName : pianoPieces) {
+            pianoPieceSet.add(parsePianoPiece(pianoPieceName));
+        }
+        return pianoPieceSet;
+    }
+
+
+    /**
+     * Parses a {@code String pianoPiece} into a {@code PianoPiece}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code pianoPiece} is invalid.
+     */
+    public static PianoPiece parsePianoPiece(String pianoPiece) throws ParseException {
+        requireNonNull(pianoPiece);
+        String trimmedPianoPiece = pianoPiece.trim();
+        if (!PianoPiece.isValidPianoPieceName(trimmedPianoPiece)) {
+            throw new ParseException(PianoPiece.MESSAGE_CONSTRAINTS);
+        }
+        return new PianoPiece(trimmedPianoPiece);
     }
 
     /**
@@ -129,76 +156,6 @@ public class ParserUtil {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS);
         }
         return new Time(trimmedTime);
-    }
-
-    /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code tag} is invalid.
-     */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-        }
-        return new Tag(trimmedTag);
-    }
-
-    /**
-     * Parses {@code Collection<String> pianoPieces} into a {@code Set<PianoPiece>}.
-     */
-    public static Set<PianoPiece> parsePianoPieces(Collection<String> pianoPieces) throws ParseException {
-        requireNonNull(pianoPieces);
-        final Set<PianoPiece> pianoPieceSet = new HashSet<>();
-        for (String pianoPieceName : pianoPieces) {
-            pianoPieceSet.add(parsePianoPiece(pianoPieceName));
-        }
-        return pianoPieceSet;
-    }
-
-    /**
-     * Parses a {@code String gradeLevel} into a {@code GradeLevel}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code gradeLevel} is invalid.
-     */
-    public static GradeLevel parseGradeLevel(String gradeLevel) throws ParseException {
-        requireNonNull(gradeLevel);
-        String trimmedGradeLevel = gradeLevel.trim();
-        if (!GradeLevel.isValidGradeLevel(trimmedGradeLevel)) {
-            throw new ParseException(GradeLevel.MESSAGE_CONSTRAINTS);
-        }
-
-        return new GradeLevel(trimmedGradeLevel);
-    }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-     */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
-        }
-        return tagSet;
-    }
-
-    /**
-     * Parses a {@code String pianoPiece} into a {@code PianoPiece}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code pianoPiece} is invalid.
-     */
-    public static PianoPiece parsePianoPiece(String pianoPiece) throws ParseException {
-        requireNonNull(pianoPiece);
-        String trimmedPianoPiece = pianoPiece.trim();
-        if (!PianoPiece.isValidPianoPieceName(trimmedPianoPiece)) {
-            throw new ParseException(PianoPiece.MESSAGE_CONSTRAINTS);
-        }
-        return new PianoPiece(trimmedPianoPiece);
     }
 
     /**

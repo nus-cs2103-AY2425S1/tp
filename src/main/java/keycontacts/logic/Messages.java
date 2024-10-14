@@ -40,15 +40,10 @@ public class Messages {
         builder.append(student.getName())
                 .append("; Phone: ")
                 .append(student.getPhone())
-                .append("; Email: ")
-                .append(student.getEmail())
                 .append("; Address: ")
                 .append(student.getAddress())
                 .append("; Grade Level: ")
-                .append(student.getGradeLevel())
-                .append("; Tags: ");
-        student.getTags().forEach(builder::append);
-
+                .append(student.getGradeLevel());
         return builder.toString();
     }
 

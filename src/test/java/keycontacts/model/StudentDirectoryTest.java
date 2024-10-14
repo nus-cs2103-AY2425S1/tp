@@ -1,7 +1,6 @@
 package keycontacts.model;
 
 import static keycontacts.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static keycontacts.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static keycontacts.testutil.Assert.assertThrows;
 import static keycontacts.testutil.TypicalStudents.ALICE;
 import static keycontacts.testutil.TypicalStudents.getTypicalStudentDirectory;
@@ -46,8 +45,7 @@ public class StudentDirectoryTest {
     @Test
     public void resetData_withDuplicateStudents_throwsDuplicateStudentException() {
         // Two students with the same identity fields
-        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
         StudentDirectoryStub newData = new StudentDirectoryStub(newStudents);
 
@@ -73,8 +71,7 @@ public class StudentDirectoryTest {
     @Test
     public void hasStudent_studentWithSameIdentityFieldsInStudentDirectory_returnsTrue() {
         studentDirectory.addStudent(ALICE);
-        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertTrue(studentDirectory.hasStudent(editedAlice));
     }
 
