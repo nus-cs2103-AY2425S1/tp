@@ -137,6 +137,29 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredClientList().remove(0));
     }
 
+    // ==================== PropertyBook Related Tests ====================
+    @Test
+    public void setPropertyBookFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setPropertyBookFilePath(null));
+    }
+
+    @Test
+    public void setPropertyBookFilePath_validPath_setsAddressBookFilePath() {
+        Path path = Paths.get("address/book/file/path");
+        modelManager.setPropertyBookFilePath(path);
+        assertEquals(path, modelManager.getPropertyBookFilePath());
+    }
+
+    @Test
+    public void hasProperty_propertyInAddressBook_returnsTrue() {
+        modelManager.addProperty(BEDOK);
+        assertTrue(modelManager.hasProperty(BEDOK));
+    }
+
+    @Test
+    public void getFilteredPropertyList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPropertyList().remove(0));
+    }
     // ==================== Equality Tests ====================
 
     @Test
@@ -179,23 +202,5 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, new PropertyBook(),
                 clientBook)));
-    }
-
-    @Test
-    public void setPropertyBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setPropertyBookFilePath(null));
-    }
-
-    @Test
-    public void setPropertyBookFilePath_validPath_setsAddressBookFilePath() {
-        Path path = Paths.get("address/book/file/path");
-        modelManager.setPropertyBookFilePath(path);
-        assertEquals(path, modelManager.getPropertyBookFilePath());
-    }
-
-    @Test
-    public void hasProperty_propertyInAddressBook_returnsTrue() {
-        modelManager.addProperty(BEDOK);
-        assertTrue(modelManager.hasProperty(BEDOK));
     }
 }

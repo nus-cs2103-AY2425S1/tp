@@ -17,6 +17,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.person.Person;
 import seedu.address.model.property.Property;
 import seedu.address.storage.JsonClientBookStorage;
+import seedu.address.storage.JsonPropertyBookStorage;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -32,8 +33,10 @@ public class ModelManager implements Model {
 
     // note that filteredClients may be removed if we decide not to keep the filtering feature
     private final FilteredList<Client> filteredClients;
+    private final FilteredList<Property> filteredProperty;
 
     private Path clientBookFilePath = Paths.get("data" , "clientbook.json");
+    private Path propertyBookFilePath = Paths.get("data" , "propertybook.json");
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -51,6 +54,7 @@ public class ModelManager implements Model {
         this.clientBook = new ClientBook(clientBook);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredClients = new FilteredList<>(this.clientBook.getClientList());
+        filteredProperty = new FilteredList<>(this.propertyBook.getPropertyList());
     }
 
     public ModelManager() {
@@ -236,6 +240,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteProperty(Property target) {
+        propertyBook.removeProperty(target);
+        try {
+            JsonPropertyBookStorage jsonPropertyBookStorage = new JsonPropertyBookStorage(propertyBookFilePath);
+            jsonPropertyBookStorage.savePropertyBook(propertyBook);
+        } catch (IOException e) {
+            System.out.println("Error while saving PropertyBook: " + e.getMessage());
+        }
+    }
+
+    @Override
     public void addProperty(Property property) {
         propertyBook.addProperty(property);
     }
@@ -249,5 +264,22 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyPropertyBook getPropertyBook() {
         return propertyBook;
+    }
+
+    //=========== Filtered Property List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Property> getFilteredPropertyList() {
+        return filteredProperty;
+    }
+
+    @Override
+    public void updateFilteredPropertyList(Predicate<Property> predicate) {
+        requireNonNull(predicate);
+        filteredProperty.setPredicate(predicate);
     }
 }
