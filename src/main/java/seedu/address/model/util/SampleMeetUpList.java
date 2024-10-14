@@ -18,7 +18,7 @@ public class SampleMeetUpList {
     public static MeetUp[] getSampleMeetUps() {
         return new MeetUp[] {
             new MeetUp("Placeholder", "placeholder", LocalDateTime.now(), LocalDateTime.now()),
-            new MeetUp("Placeholder", "placeholder", LocalDateTime.now(), LocalDateTime.now())
+            new MeetUp("Placeholder2", "placeholder2", LocalDateTime.now(), LocalDateTime.now())
         };
     }
 

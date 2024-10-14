@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -26,7 +27,7 @@ class JsonSerializableMeetUpList {
      * Constructs a {@code JsonSerializableMeetUpList} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableMeetUpList(@JsonProperty("meetUps") List<JsonAdaptedMeetUp> meetUps) {
+    public JsonSerializableMeetUpList(@JsonProperty("meetups") List<JsonAdaptedMeetUp> meetUps) {
         this.meetUps.addAll(meetUps);
     }
 
@@ -36,8 +37,7 @@ class JsonSerializableMeetUpList {
      * @param source future changes to this will not affect the created {@code JsonSerializableMeetUpList}.
      */
     public JsonSerializableMeetUpList(ReadOnlyMeetUpList source) {
-        // TODO
-        // persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        meetUps.addAll(source.getMeetUpList().stream().map(JsonAdaptedMeetUp::new).collect(Collectors.toList()));
     }
 
     /**

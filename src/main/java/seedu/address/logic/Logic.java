@@ -31,13 +31,6 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
-    /**
-     * Returns the MeetUpList.
-     *
-     * @see seedu.address.model.Model#getMeetUpList()
-     */
-    ReadOnlyMeetUpList getMeetUpList();
-
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
@@ -50,6 +43,13 @@ public interface Logic {
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();
+
+        /**
+     * Returns the MeetUpList.
+     *
+     * @see seedu.address.model.Model#getMeetUpList()
+     */
+    ReadOnlyMeetUpList getMeetUpList();
 
     /**
      * Set the user prefs' GUI settings.
