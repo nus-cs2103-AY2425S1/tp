@@ -45,10 +45,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonClientHubStorage addressBookStorage =
-                new JsonClientHubStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonClientHubStorage clientHubStorage =
+                new JsonClientHubStorage(temporaryFolder.resolve("clientHub.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(clientHubStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -149,8 +149,8 @@ public class LogicManagerTest {
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
-        JsonClientHubStorage addressBookStorage = new JsonClientHubStorage(prefPath) {
+        // Inject LogicManager with a ClientHubStorage that throws the IOException e when saving
+        JsonClientHubStorage clientHubStorage = new JsonClientHubStorage(prefPath) {
             @Override
             public void saveClientHub(ReadOnlyClientHub clientHub, Path filePath)
                     throws IOException {
@@ -160,11 +160,11 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(clientHubStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 
-        // Triggers the saveAddressBook method by executing an add command
+        // Triggers the saveClientHub method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         Person expectedPerson = new PersonBuilder(AMY).withClientTypes().build();

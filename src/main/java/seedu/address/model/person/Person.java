@@ -54,7 +54,7 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable client type set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<ClientType> getClientTypes() {

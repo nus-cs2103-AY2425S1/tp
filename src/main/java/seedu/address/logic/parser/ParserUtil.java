@@ -96,10 +96,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String clientType} into a {@code ClientType}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code clientType} is invalid.
      */
     public static ClientType parseClientType(String clientType) throws ParseException {
         requireNonNull(clientType);
@@ -111,14 +111,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> clientTypes} into a {@code Set<ClientType>}.
      */
-    public static Set<ClientType> parseClientTypes(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<ClientType> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseClientType(tagName));
+    public static Set<ClientType> parseClientTypes(Collection<String> clientTypes) throws ParseException {
+        requireNonNull(clientTypes);
+        final Set<ClientType> clientTypeSet = new HashSet<>();
+        for (String clientTypeName : clientTypes) {
+            clientTypeSet.add(parseClientType(clientTypeName));
         }
-        return tagSet;
+        return clientTypeSet;
     }
 }

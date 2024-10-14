@@ -85,7 +85,7 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
+        // different client types -> returns false
         editedAlice = new PersonBuilder(ALICE).withClientTypes(VALID_CLIENT_TYPE_B).build();
         assertFalse(ALICE.equals(editedAlice));
     }
