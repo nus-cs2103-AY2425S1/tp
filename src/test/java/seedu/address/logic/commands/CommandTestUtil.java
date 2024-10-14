@@ -35,9 +35,9 @@ public class CommandTestUtil {
     public static final String VALID_AGE_BOB = "50";
     public static final String VALID_GENDER_AMY = "F";
     public static final String VALID_GENDER_BOB = "M";
-    public static final String VALID_NRIC_AMY = "S1234567Z";
-    public static final String VALID_NRIC_BOB = "T9999999Z";
-    public static final String VALID_PHONE_AMY = "11111111";
+    public static final String VALID_NRIC_AMY = "S8374626E";
+    public static final String VALID_NRIC_BOB = "T8475728Z";
+    public static final String VALID_PHONE_AMY = "12345678";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";

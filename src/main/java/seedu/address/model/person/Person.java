@@ -90,8 +90,7 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getNric().equals(getNric());
+        return otherPerson != null && otherPerson.getNric().equals(getNric());
     }
 
     /**

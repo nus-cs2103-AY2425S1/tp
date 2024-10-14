@@ -22,7 +22,7 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_AGE = "32";
     public static final String DEFAULT_GENDER = "F";
-    public static final String DEFAULT_NRIC = "S1234567Z";
+    public static final String DEFAULT_NRIC = "S8374626E";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
