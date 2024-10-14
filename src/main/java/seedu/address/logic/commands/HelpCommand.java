@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import seedu.address.model.Model;
 
+import java.util.Objects;
+
 /**
  * Format full help instructions for every command for display.
  */
@@ -22,15 +24,30 @@ public class HelpCommand extends Command {
     }
 
     public HelpCommand() {
-        this.usage = null;
+        this.usage = "";
     }
 
     @Override
     public CommandResult execute(Model model) {
-        if (usage == null) {
+        if (Objects.equals(usage, "")) {
             return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
         } else {
             return new CommandResult(usage, false, false);
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof HelpCommand)) {
+            return false;
+        }
+
+        HelpCommand otherHelpCommand = (HelpCommand) other;
+        return usage.equals(otherHelpCommand.usage);
     }
 }
