@@ -170,32 +170,20 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public EventListPanel getEventListPanel() {
-        return eventListPanel;
-    }
-
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
 
-    public void setTabToPeople(CommandResult commandResult) {
-        if (commandResult.isShowDetails()) {
-            personListPanel.setDetailedView();
-            tabPanePlaceholder.getSelectionModel().select(0);
-        } else {
-            personListPanel.setSimplifiedView();
-            tabPanePlaceholder.getSelectionModel().select(0);
-        }
+    public EventListPanel getEventListPanel() {
+        return eventListPanel;
     }
 
-    public void setTabToEvents(CommandResult commandResult) {
-        if (commandResult.isShowDetails()) {
-            eventListPanel.setDetailedView();
-            tabPanePlaceholder.getSelectionModel().select(1);
-        } else {
-            eventListPanel.setSimplifiedView();
-            tabPanePlaceholder.getSelectionModel().select(1);
-        }
+    public void setPersonTab() {
+        tabPanePlaceholder.getSelectionModel().select(0);
+    }
+
+    public void setEventTab() {
+        tabPanePlaceholder.getSelectionModel().select(1);
     }
 
     /**
@@ -219,10 +207,10 @@ public class MainWindow extends UiPart<Stage> {
                 return commandResult;
             }
 
-            if (commandResult.isShowPeopleList()) {
-                setTabToPeople(commandResult);
-            } else {
-                setTabToEvents(commandResult);
+            if (commandResult.getTabChange() == CommandTabChange.PERSON) {
+                setPersonTab();
+            } else if (commandResult.getTabChange() == CommandTabChange.EVENT) {
+                setEventTab();
             }
 
             return commandResult;
