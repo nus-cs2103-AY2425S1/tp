@@ -147,11 +147,11 @@ Examples:
 
 ### Listing all orders under a Person : `listOrder`
 
-List all orders under the specified person from the address book.
+List all orders of a specified person from the address book.
 
 Format: `listOrder INDEX`
 
-* List all orders under the person at the specified `INDEX`.
+* List all orders of the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -210,11 +210,11 @@ _Details coming soon ..._
 
 Action                | Format, Examples
 ----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add a person**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add a person**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**             | `clear`
-**Delete person**     | `delete INDEX`<br> e.g., `delete 3`
-**Edit person**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find person**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List persons**      | `list`
+**Delete a person**   | `delete INDEX`<br> e.g., `delete 3`
+**Edit a person**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find person(s)**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List all persons**  | `list`
 **List all orders**   | `listOrder INDEX`<br> e.g., `listOrder 3`
 **Help**              | `help`
