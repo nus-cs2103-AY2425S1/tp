@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.State;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -45,7 +46,7 @@ public class AddGroupCommandTest {
         CommandResult commandResult = new AddGroupCommand(validGroup).execute(modelStub);
 
         assertEquals(String.format(AddGroupCommand.MESSAGE_SUCCESS, Messages.format(validGroup)),
-                commandResult.getFeedbackToUser());
+            commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validGroup), modelStub.groupsAdded);
     }
 
@@ -56,7 +57,7 @@ public class AddGroupCommandTest {
         ModelStub modelStub = new ModelStubWithGroup(validGroup);
 
         assertThrows(CommandException.class, AddGroupCommand.MESSAGE_DUPLICATE_GROUP, () ->
-                addGroupCommand.execute(modelStub));
+            addGroupCommand.execute(modelStub));
     }
 
     @Test
@@ -99,6 +100,11 @@ public class AddGroupCommandTest {
         @Override
         public boolean hasGroup(Group group) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteGroup(Group group) {
+
         }
 
         @Override
@@ -183,6 +189,26 @@ public class AddGroupCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Student> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredGroupList(Predicate<Group> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setStateStudents() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setStateGroups() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public State getState() {
             throw new AssertionError("This method should not be called.");
         }
     }
