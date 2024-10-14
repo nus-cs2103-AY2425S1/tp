@@ -112,8 +112,12 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
+    public Person buildEmployee() {
         return new Person(name, phone, email, address, department, role, contractEndDate, true);
+    }
+
+    public Person buildPotential() {
+        return new Person(name, phone, email, address, department, role, ContractEndDate.empty(), false);
     }
 
 }
