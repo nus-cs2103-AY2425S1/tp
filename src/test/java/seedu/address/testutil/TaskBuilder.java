@@ -1,12 +1,15 @@
 package seedu.address.testutil;
 
+import java.time.LocalDateTime;
+
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Status;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskName;
 
-import java.time.LocalDateTime;
-
+/**
+ * A utility class to help with building Task objects.
+ */
 public class TaskBuilder {
     public static final TaskName DEFAULT_TASK_NAME = new TaskName("Submit v1.3");
     public static final Deadline DEFAULT_DEADLINE = new Deadline(LocalDateTime.of(2024, 10, 14, 12, 0));
