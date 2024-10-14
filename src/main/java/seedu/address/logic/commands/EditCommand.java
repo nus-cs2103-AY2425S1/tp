@@ -138,6 +138,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> addTags;
+        private Set<Tag> deleteTags;
 
         public EditPersonDescriptor() {}
 
@@ -151,6 +152,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setAddTags(toCopy.addTags);
+            setDeleteTags(toCopy.deleteTags);
         }
 
         /**
@@ -207,6 +209,14 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getAddTags() {
             return (addTags != null) ? Optional.of(Collections.unmodifiableSet(addTags)) : Optional.empty();
+        }
+
+        public void setDeleteTags(Set<Tag> deleteTags) {
+            this.deleteTags = (deleteTags != null) ? new HashSet<>(deleteTags) : null;
+        }
+
+        public Optional<Set<Tag>> getDeleteTags() {
+            return (deleteTags != null) ? Optional.of(Collections.unmodifiableSet(deleteTags)) : Optional.empty();
         }
 
         @Override
