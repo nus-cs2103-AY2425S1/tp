@@ -1,4 +1,4 @@
-package seedu.ddd.model.person;
+package seedu.ddd.model.contact.common;
 
 import static java.util.Objects.requireNonNull;
 

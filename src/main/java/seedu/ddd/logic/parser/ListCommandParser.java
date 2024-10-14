@@ -8,7 +8,7 @@ import java.util.Set;
 import seedu.ddd.logic.commands.ListCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.Model;
-import seedu.ddd.model.person.ContactContainsTagPredicate;
+import seedu.ddd.model.contact.common.ContactContainsTagPredicate;
 import seedu.ddd.model.tag.Tag;
 
 /**

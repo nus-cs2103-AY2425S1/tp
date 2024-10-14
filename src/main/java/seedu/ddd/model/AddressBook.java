@@ -6,8 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.util.ToStringBuilder;
-import seedu.ddd.model.person.Contact;
-import seedu.ddd.model.person.UniqueContactList;
+import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.common.UniqueContactList;
 
 /**
  * Wraps all data at the address-book level

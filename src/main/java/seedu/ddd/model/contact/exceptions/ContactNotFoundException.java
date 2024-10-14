@@ -1,4 +1,4 @@
-package seedu.ddd.model.person.exceptions;
+package seedu.ddd.model.contact.exceptions;
 
 /**
  * Signals that the operation is unable to find the specified contact.

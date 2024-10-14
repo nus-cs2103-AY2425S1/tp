@@ -22,7 +22,7 @@ import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.ReadOnlyUserPrefs;
-import seedu.ddd.model.person.Contact;
+import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.testutil.ClientBuilder;
 
 public class AddCommandTest {

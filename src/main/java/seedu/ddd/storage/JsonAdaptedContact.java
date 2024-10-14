@@ -12,12 +12,14 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import seedu.ddd.commons.exceptions.IllegalValueException;
-import seedu.ddd.model.person.Address;
-import seedu.ddd.model.person.Contact;
-import seedu.ddd.model.person.Email;
-import seedu.ddd.model.person.Id;
-import seedu.ddd.model.person.Name;
-import seedu.ddd.model.person.Phone;
+import seedu.ddd.model.contact.client.Client;
+import seedu.ddd.model.contact.client.Date;
+import seedu.ddd.model.contact.common.Address;
+import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.common.Email;
+import seedu.ddd.model.contact.common.Id;
+import seedu.ddd.model.contact.common.Name;
+import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.tag.Tag;
 
 /**

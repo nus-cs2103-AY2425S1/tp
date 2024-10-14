@@ -1,4 +1,4 @@
-package seedu.ddd.model.person;
+package seedu.ddd.model.contact.common;
 
 import java.util.Set;
 import java.util.function.Predicate;

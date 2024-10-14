@@ -1,4 +1,4 @@
-package seedu.ddd.model.person;
+package seedu.ddd.model.contact.common;
 
 import static java.util.Objects.requireNonNull;
 
@@ -8,8 +8,8 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.util.CollectionUtil;
-import seedu.ddd.model.person.exceptions.ContactNotFoundException;
-import seedu.ddd.model.person.exceptions.DuplicateContactException;
+import seedu.ddd.model.contact.exceptions.ContactNotFoundException;
+import seedu.ddd.model.contact.exceptions.DuplicateContactException;
 
 /**
  * A list of contacts that enforces uniqueness between its elements and does not allow nulls.

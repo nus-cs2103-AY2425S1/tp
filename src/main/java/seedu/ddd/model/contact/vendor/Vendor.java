@@ -1,42 +1,42 @@
-package seedu.ddd.model.person;
-
-import static seedu.ddd.commons.util.CollectionUtil.requireAllNonNull;
+package seedu.ddd.model.contact.vendor;
 
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.ddd.commons.util.CollectionUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.model.contact.common.Address;
+import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.common.Email;
+import seedu.ddd.model.contact.common.Id;
+import seedu.ddd.model.contact.common.Name;
+import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.tag.Tag;
 
 /**
- * Represents a Client in the address book.
+ * Represents a Vendor in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Client extends Contact {
-    private Date date;
+public class Vendor extends Contact {
+    private Service service;
     /**
-     * Constructs a {@code Client}.
+     * Constructs a {@code Vendor}.
      *
      * @param name    A valid name.
      * @param phone   A valid phone number.
      * @param email   A valid email address.
      * @param address A valid address.
-     * @param date    A valid date.
+     * @param service A valid service.
      * @param tags    A set of tags associated with the client.
      */
-    public Client(Name name, Phone phone, Email email, Address address, Date date, Set<Tag> tags, Id id) {
+    public Vendor(Name name, Phone phone, Email email, Address address, Service service, Set<Tag> tags, Id id) {
         super(name, phone, email, address, tags, id);
-        requireAllNonNull(date);
-        this.date = date;
+        CollectionUtil.requireAllNonNull(service);
+        this.service = service;
     }
 
-    /**
-     * Returns the client's date.
-     *
-     * @return the date associated with the client.
-     */
-    public Date getDate() {
-        return date;
+    public Service getService() {
+        return service;
     }
     @Override
     public boolean equals(Object other) {
@@ -45,18 +45,19 @@ public class Client extends Contact {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Client)) {
+        if (!(other instanceof Vendor)) {
             return false;
         }
 
-        Client otherClient = (Client) other;
-        return super.equals(otherClient) && date.equals(otherClient.date);
+        Vendor otherVendor = (Vendor) other;
+        return super.equals(otherVendor) && service.equals(otherVendor.service);
     }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(this.getName(), this.getPhone(), this.getEmail(),
-                this.getAddress(), this.date, this.getTags());
+                this.getAddress(), this.service, this.getTags());
     }
 
     @Override
@@ -66,7 +67,7 @@ public class Client extends Contact {
                 .add("phone", this.getPhone())
                 .add("email", this.getEmail())
                 .add("address", this.getAddress())
-                .add("date", this.date)
+                .add("service", this.service)
                 .add("tags", this.getTags())
                 .toString();
     }

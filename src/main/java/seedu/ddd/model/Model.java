@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.core.GuiSettings;
-import seedu.ddd.model.person.Contact;
+import seedu.ddd.model.contact.common.Contact;
 
 /**
  * The API of the Model component.

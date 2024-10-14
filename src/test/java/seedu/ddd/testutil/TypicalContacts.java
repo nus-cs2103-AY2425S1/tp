@@ -16,8 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.ddd.model.AddressBook;
-import seedu.ddd.model.person.Client;
-import seedu.ddd.model.person.Contact;
+import seedu.ddd.model.contact.client.Client;
+import seedu.ddd.model.contact.common.Contact;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.

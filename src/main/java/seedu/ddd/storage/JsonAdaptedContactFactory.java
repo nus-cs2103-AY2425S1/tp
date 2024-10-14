@@ -1,8 +1,8 @@
 package seedu.ddd.storage;
 
-import seedu.ddd.model.person.Client;
-import seedu.ddd.model.person.Contact;
-import seedu.ddd.model.person.Vendor;
+import seedu.ddd.model.contact.client.Client;
+import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.vendor.Vendor;
 
 class JsonAdaptedContactFactory {
     public static JsonAdaptedContact create(Contact contact) {

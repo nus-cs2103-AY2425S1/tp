@@ -6,7 +6,7 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.function.Predicate;
 
 import seedu.ddd.model.Model;
-import seedu.ddd.model.person.Contact;
+import seedu.ddd.model.contact.common.Contact;
 
 // TODO change to take in vargs (take in /t) also
 

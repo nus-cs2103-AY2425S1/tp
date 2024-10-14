@@ -17,8 +17,8 @@ import seedu.ddd.commons.core.index.Index;
 import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.Model;
-import seedu.ddd.model.person.Contact;
-import seedu.ddd.model.person.NameContainsKeywordsPredicate;
+import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.common.NameContainsKeywordsPredicate;
 import seedu.ddd.testutil.EditClientDescriptorBuilder;
 
 /**

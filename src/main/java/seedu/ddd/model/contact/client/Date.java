@@ -1,4 +1,4 @@
-package seedu.ddd.model.person;
+package seedu.ddd.model.contact.client;
 
 import static java.util.Objects.requireNonNull;
 
@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import seedu.ddd.commons.util.AppUtil;
+import seedu.ddd.model.contact.vendor.Service;
 
 /**
  * Represents a Client's Date in the address book.

@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import seedu.ddd.commons.core.index.Index;
 import seedu.ddd.model.Model;
-import seedu.ddd.model.person.Contact;
+import seedu.ddd.model.contact.common.Contact;
 
 /**
  * A utility class for test cases.

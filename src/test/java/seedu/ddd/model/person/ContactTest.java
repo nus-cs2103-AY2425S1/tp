@@ -13,6 +13,7 @@ import static seedu.ddd.testutil.TypicalContacts.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.testutil.ClientBuilder;
 
 public class ContactTest {

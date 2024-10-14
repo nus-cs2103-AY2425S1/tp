@@ -1,4 +1,4 @@
-package seedu.ddd.model.person;
+package seedu.ddd.model.contact.common;
 
 /**
  * Represents the type of contact in the system.
