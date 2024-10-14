@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.types.common.TagContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book who has a tag with a name containing any of the argument keywords.

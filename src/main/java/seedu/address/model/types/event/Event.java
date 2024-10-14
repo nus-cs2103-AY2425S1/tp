@@ -1,4 +1,4 @@
-package seedu.address.model.event;
+package seedu.address.model.types.event;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -8,30 +8,33 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.types.common.Address;
+import seedu.address.model.types.common.Name;
+import seedu.address.model.types.common.Time;
 
 /**
- * Represents a Person in the address book.
+ * Represents an Event in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Event {
 
     // Identity fields
     private final Name name;
+    private final Time time;
+    private final Address location;
 
     // Data fields
-    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Event(Name name, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, address, tags);
+    public Event(Name name, Time time, Address location, Set<Tag> tags) {
+        requireAllNonNull(name, time, location, tags);
         this.name = name;
-        this.address = address;
+        this.time = time;
+        this.location = location;
         this.tags.addAll(tags);
     }
 
@@ -39,8 +42,12 @@ public class Event {
         return name;
     }
 
-    public Address getAddress() {
-        return address;
+    public Time getTime() {
+        return time;
+    }
+
+    public Address getLocation() {
+        return location;
     }
 
     /**
@@ -52,10 +59,10 @@ public class Event {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both events have the same name.
+     * This defines a weaker notion of equality between two events.
      */
-    public boolean isSamePerson(Event otherEvent) {
+    public boolean isSameEvent(Event otherEvent) {
         if (otherEvent == this) {
             return true;
         }
@@ -65,8 +72,8 @@ public class Event {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both events have the same identity and data fields.
+     * This defines a stronger notion of equality between two events.
      */
     @Override
     public boolean equals(Object other) {
@@ -81,21 +88,23 @@ public class Event {
 
         Event otherEvent = (Event) other;
         return name.equals(otherEvent.name)
-                && address.equals(otherEvent.address)
+                && time.equals(otherEvent.time)
+                && location.equals(otherEvent.location)
                 && tags.equals(otherEvent.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, address, tags);
+        return Objects.hash(name, time, location, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("address", address)
+                .add("time", time)
+                .add("location", location)
                 .add("tags", tags)
                 .toString();
     }
