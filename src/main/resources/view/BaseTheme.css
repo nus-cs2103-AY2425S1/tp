@@ -3,7 +3,7 @@
     // CSS variables need to be prefixed with '-fx' to be detected by the JavaFX runtime
 
     -fx-ll-background: #fff;
-    -fx-ll-background-grey: #F5F5F5;
+    -fx-ll-background-grey: #F8F8F8;
     -fx-ll-highlight: #F9F1FF;
 
     -fx-ll-text: #000;
@@ -18,6 +18,10 @@
     -fx-ll-stroke-light: #D3D3D3;
 
     -fx-ll-status-bar-bg: #8549B1;
+
+    // Event UI
+    -fx-ll-event-card-header: #DDB0FF;
+    -fx-ll-event-card-body: #FAE8FF;
 }
 
 .root-layout {
@@ -181,6 +185,22 @@
 
 .list-cell:filled:selected {
     -fx-background-color: -fx-ll-highlight;
+}
+
+// Unselected event card
+.list-cell:filled #cardPane.eventListCard .eventCard {
+    -fx-border-color: transparent transparent -fx-ll-stroke-dark transparent;
+    -fx-border-width: 1;
+    -fx-border-insets: 0 -15px 0 -15px;
+    -fx-background-color: white;
+    -fx-background-insets: -5px -15px 0 -15px;
+    -fx-background-radius: 16px 16px 0 0;
+}
+
+// Selected event card
+.list-cell:filled:selected #cardPane.eventListCard .eventCard {
+    -fx-background-color: -fx-ll-event-card-header;
+    -fx-border-color: transparent;
 }
 
 .list-cell:filled #cardPane {
