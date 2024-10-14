@@ -8,24 +8,34 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import seedu.ddd.commons.exceptions.IllegalValueException;
 import seedu.ddd.model.person.Address;
-import seedu.ddd.model.person.Client;
 import seedu.ddd.model.person.Contact;
-import seedu.ddd.model.person.Date;
 import seedu.ddd.model.person.Email;
+import seedu.ddd.model.person.Id;
 import seedu.ddd.model.person.Name;
 import seedu.ddd.model.person.Phone;
 import seedu.ddd.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Contact}.
+ * Annotation tells Jackson to check for the "type" in each JSON object to see whether it is a client or vendor
  */
-class JsonAdaptedContact {
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        property = "type"
+)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = JsonAdaptedClient.class, name = "client"),
+    @JsonSubTypes.Type(value = JsonAdaptedVendor.class, name = "vendor")
+})
+abstract class JsonAdaptedContact {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Contact's %s field is missing!";
+    private final int id;
     private final String name;
     private final String phone;
     private final String email;
@@ -36,9 +46,10 @@ class JsonAdaptedContact {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedContact(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedContact(@JsonProperty("id") int id, @JsonProperty("name") String name,
+        @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+        @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+        this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -49,9 +60,10 @@ class JsonAdaptedContact {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Contact} into this class for Jackson use.
      */
     public JsonAdaptedContact(Contact source) {
+        id = source.getId().id;
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -103,13 +115,11 @@ class JsonAdaptedContact {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
-
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Id modelId = new Id(id);
 
-        // TODO: update this to work with Client and Vendor
-        Client contact = new Client(modelName, modelPhone, modelEmail, modelAddress,
-                new Date("01 Jan 2000"), modelTags);
-        return contact;
+        return createContact(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelId);
     }
-
+    public abstract Contact createContact(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Id id)
+            throws IllegalValueException;
 }
