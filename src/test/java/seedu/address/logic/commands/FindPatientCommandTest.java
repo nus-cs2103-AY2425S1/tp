@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.patient.FindPatientPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -23,10 +24,10 @@ public class FindPatientCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        FindPatientPredicate firstPredicate =
+                new FindPatientPredicate(Collections.singletonList("first"));
+        FindPatientPredicate secondPredicate =
+                new FindPatientPredicate(Collections.singletonList("second"));
 
         FindPatientCommand findFirstCommand = new FindPatientCommand(firstPredicate);
         FindPatientCommand findSecondCommand = new FindPatientCommand(secondPredicate);
@@ -50,8 +51,8 @@ public class FindPatientCommandTest {
 
     @Test
     public void execute() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
+        FindPatientPredicate firstPredicate =
+                new FindPatientPredicate(Collections.singletonList("first"));
         assertCommandFailure(new FindPatientCommand(firstPredicate), model, MESSAGE_NOT_IMPLEMENTED_YET);
     }
 }
