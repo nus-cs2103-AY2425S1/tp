@@ -28,6 +28,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
@@ -49,10 +50,16 @@ public class EditCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
+
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+          String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
 
     private EditCommandParser parser = new EditCommandParser();
+
+    @Test
+    public void parse_nullArgs_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> parser.parse(null));
+    }
 
     @Test
     public void parse_missingParts_failure() {
@@ -94,18 +101,18 @@ public class EditCommandParserTest {
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
-                Name.MESSAGE_CONSTRAINTS);
+              Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HIGH_RISK
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_HIGH_RISK;
+              + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_HIGH_RISK;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_HIGH_RISK).build();
+              .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+              .withTags(VALID_TAG_HIGH_RISK).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -117,7 +124,7 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_AMY).build();
+              .withEmail(VALID_EMAIL_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -150,12 +157,55 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // tags
+        // tag
         userInput = targetIndex.getOneBased() + TAG_DESC_LOW_RISK;
         descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_LOW_RISK).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
+    @Test
+    public void parse_multipleTags_failure() {
+        // Multiple tags provided
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput = "edit " + targetIndex.getOneBased() + TAG_DESC_HIGH_RISK + TAG_DESC_LOW_RISK;
+        System.out.println(userInput);
+
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_emptyTags_failure() {
+        // Attempt to edit a person without providing a tag
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput = "edit " + targetIndex.getOneBased() + PREFIX_TAG; // Only name is edited
+        System.out.println(userInput);
+
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_validTagCases_success() {
+        // Tags with correct casing
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInputHigh = targetIndex.getOneBased() + " " + PREFIX_TAG + "High Risk";
+        EditPersonDescriptor descriptorHigh = new EditPersonDescriptorBuilder()
+              .withTags(VALID_TAG_HIGH_RISK).build();
+        EditCommand expectedCommandHigh = new EditCommand(targetIndex, descriptorHigh);
+        assertParseSuccess(parser, userInputHigh, expectedCommandHigh);
+
+        String userInputMedium = targetIndex.getOneBased() + " " + PREFIX_TAG + "Medium Risk";
+        EditPersonDescriptor descriptorMedium = new EditPersonDescriptorBuilder()
+              .withTags("Medium Risk").build();
+        EditCommand expectedCommandMedium = new EditCommand(targetIndex, descriptorMedium);
+        assertParseSuccess(parser, userInputMedium, expectedCommandMedium);
+
+        String userInputLow = targetIndex.getOneBased() + " " + PREFIX_TAG + "Low Risk";
+        EditPersonDescriptor descriptorLow = new EditPersonDescriptorBuilder()
+              .withTags(VALID_TAG_LOW_RISK).build();
+        EditCommand expectedCommandLow = new EditCommand(targetIndex, descriptorLow);
+        assertParseSuccess(parser, userInputLow, expectedCommandLow);
+    }
+
 
     @Test
     public void parse_multipleRepeatedFields_failure() {
@@ -175,17 +225,17 @@ public class EditCommandParserTest {
 
         // mulltiple valid fields repeated
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
-                + TAG_DESC_LOW_RISK + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_LOW_RISK
-                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HIGH_RISK;
+              + TAG_DESC_LOW_RISK + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_LOW_RISK
+              + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HIGH_RISK;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
+              Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
 
         // multiple invalid values
         userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
-                + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC;
+              + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
+              Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
     }
 }
