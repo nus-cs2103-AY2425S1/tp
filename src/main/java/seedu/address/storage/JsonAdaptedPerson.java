@@ -10,11 +10,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.log.Log;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,19 +22,22 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
+    private final String identityNumber;
     private final String phone;
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedLog> logs = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("idnetity number") String identityNumber,
+            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+            @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
+        this.identityNumber = identityNumber;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -51,12 +51,16 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
+        identityNumber = source.getIdentityNumber().identificationNumber;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        if (logs != null) {
+            this.logs.addAll(logs);
+        }
     }
 
     /**
@@ -70,6 +74,11 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
+        final List<Log> sessionLogs = new ArrayList<>();
+        for (JsonAdaptedLog log : logs) {
+            sessionLogs.add(log.toModelType());
+        }
+
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -77,6 +86,14 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
+
+        if (identityNumber == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, IdentityNumber.class.getSimpleName()));
+        }
+        if (!IdentityNumber.isValidIdentityNumber(identityNumber)) {
+            throw new IllegalValueException(IdentityNumber.MESSAGE_CONSTRAINTS);
+        }
+        final IdentityNumber modelIdentityNumber = new IdentityNumber(identityNumber);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
@@ -103,7 +120,8 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        final LogsList modelLogs = new LogsList(sessionLogs);
+        return new Person(modelName, modelIdentityNumber, modelPhone, modelEmail, modelAddress, modelTags, modelLogs);
     }
 
 }

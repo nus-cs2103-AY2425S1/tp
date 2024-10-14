@@ -4,9 +4,14 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.log.Log;
+import seedu.address.model.person.LogsList;
+import seedu.address.model.person.Person;
 
+import java.util.List;
 
 
 /**
@@ -32,9 +37,14 @@ public class DetailedViewCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        //TODO
-        //Refer to DeleteCommand to show how to read based on the last index.
-        return null;
+        LogsList lastShownLogsList = model.getLastShownLogsList();
+
+        if (targetIndex.getZeroBased() >= lastShownLogsList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Log detailedLogToView = lastShownLogsList.getDetailedLog(targetIndex.getZeroBased());
+        return new CommandResult(String.format(MESSAGE_DETAILED_VIEW_SUCCESS, detailedLogToView.toDetailedString()));
     }
 
     @Override

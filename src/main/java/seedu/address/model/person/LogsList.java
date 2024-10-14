@@ -1,6 +1,9 @@
 package seedu.address.model.person;
 
+import seedu.address.model.log.Log;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,24 +14,44 @@ public class LogsList {
     private final List<Log> logs;
 
     /**
-     * Constructs a {@code LogsList}.
+     * Constructs an empty LogList.
      */
     public LogsList() {
         this.logs = new ArrayList<>();
     }
 
     /**
-     * Adds a log to the list.
+     * Constructs a LogsList with the provided list of logs.
+     *
+     * @param logs The initial logs to populate the LogsList.
+     */
+    public LogsList(List<Log> logs) {
+        this.logs = new ArrayList<>(logs);
+    }
+
+
+    /**
+     * Adds a new log to the list.
+     *
+     * @param log The log to add.
      */
     public void addLog(Log log) {
+        Objects.requireNonNull(log);
         logs.add(log);
     }
 
     /**
-     * Returns the list of logs.
+     * Returns an unmodifiable list of logs, preserving the order they were added.
      */
-    public List<Log> getLogs() {
-        return new ArrayList<>(logs);
+    public Log getDetailedLog(int index) {
+        return logs.get(index);
+    }
+
+    /**
+     * Returns the number of logs in the list.
+     */
+    public int size() {
+        return logs.size();
     }
 
     /**

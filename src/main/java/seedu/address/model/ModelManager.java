@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.log.Log;
+import seedu.address.model.person.LogsList;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final LogsList logsList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.logsList = new LogsList();
     }
 
     public ModelManager() {
@@ -143,6 +147,15 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+    //=========== LogsList Accessors =============================================================
+    @Override
+    public LogsList getLastShownLogsList() {
+        return logsList;
+    }
+    public void detailView(Log log) {
+        requireNonNull(log);
+        log.toDetailedString(); // Modify this as necessary for your UI
     }
 
 }

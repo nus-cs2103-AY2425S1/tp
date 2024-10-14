@@ -21,11 +21,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -96,6 +92,7 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        IdentityNumber identityNumber = editPersonDescriptor.getIdentity().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
@@ -134,6 +131,7 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
+        private IdentityNumber identityNumber;
         private Phone phone;
         private Email email;
         private Address address;
@@ -147,6 +145,7 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
+            setIdentityNumber(toCopy.identityNumber);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
@@ -162,6 +161,14 @@ public class EditCommand extends Command {
 
         public void setName(Name name) {
             this.name = name;
+        }
+
+        public Optional<IdentityNumber> getIdentityNumber() {
+            return Optional.ofNullable(identityNumber);
+        }
+
+        public void setIdentityNumber(IdentityNumber identityNumber) {
+            this.identityNumber = identityNumber;
         }
 
         public Optional<Name> getName() {
@@ -232,6 +239,7 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
+                    .add("identity number", identityNumber)
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)

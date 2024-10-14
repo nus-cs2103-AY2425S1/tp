@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.log.Log;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -18,29 +19,36 @@ public class Person {
 
     // Identity fields
     private final Name name;
+    private final IdentityNumber identityNumber;
     private final Phone phone;
     private final Email email;
 
     // Data fields
     private final Address address;
-    private final LogsList logsList;
+    //private final LogsList logsList;
     private final Set<Tag> tags = new HashSet<>();
+    private final LogsList logsList;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, IdentityNumber identityNumber, Phone phone, Email email, Address address, Set<Tag> tags,
+                  LogsList logsList) {
+        requireAllNonNull(name, identityNumber, phone, email, address, tags, logsList);
         this.name = name;
+        this.identityNumber = identityNumber;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.logsList = new LogsList();
+        this.logsList = logsList;
     }
 
     public Name getName() {
         return name;
+    }
+    public IdentityNumber getIdentityNumber() {
+        return identityNumber;
     }
 
     public Phone getPhone() {
@@ -55,14 +63,6 @@ public class Person {
         return address;
     }
 
-    public LogsList getLogsList() {
-        return logsList;
-    }
-
-    public void addLogEntry(String entry) {
-        logsList.addLog(new Log(entry));
-    }
-
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -72,7 +72,21 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns an immutable view of the logs list.
+     */
+    public LogsList getLogsList() {
+        return logsList;
+    }
+
+    /**
+     * Adds a log to this person's log list.
+     */
+    public void addLog(Log log) {
+        logsList.addLog(log);
+    }
+
+    /**
+     * Returns true if both persons have the same Identity Number.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -81,7 +95,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getIdentityNumber().equals(getIdentityNumber());
     }
 
     /**
@@ -110,13 +124,14 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, logsList);
+        return Objects.hash(name, identityNumber, phone, email, address, tags, logsList);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
+                .add("identity number", identityNumber)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
