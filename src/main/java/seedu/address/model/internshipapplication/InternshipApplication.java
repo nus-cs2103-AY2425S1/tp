@@ -41,6 +41,24 @@ public class InternshipApplication implements HireMeComparable<InternshipApplica
     }
 
     /**
+     * Returns the company name.
+     *
+     * @return the company name object.
+     */
+    public Name getCompanyName() {
+        return company.getName();
+    }
+
+    /**
+     * Returns the company name value.
+     *
+     * @return the company name string.
+     */
+    public String getCompanyNameValue() {
+        return company.getNameValue();
+    }
+
+    /**
      * Returns the date of application.
      *
      * @return the date of application.

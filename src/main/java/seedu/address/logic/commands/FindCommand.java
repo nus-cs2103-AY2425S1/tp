@@ -5,20 +5,22 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.internshipapplication.InternshipApplication;
 import seedu.address.model.internshipapplication.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all internship applications in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindCommand extends Command {
+public class FindCommand extends Command<InternshipApplication> {
 
-    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = "/f";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds all internship applications whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Example: " + COMMAND_WORD + " google meta amazon";
 
     private final NameContainsKeywordsPredicate predicate;
 
@@ -27,7 +29,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model<InternshipApplication> model) {
         requireNonNull(model);
         model.updateFilteredList(predicate);
         return new CommandResult(

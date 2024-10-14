@@ -51,6 +51,15 @@ public class Company {
     }
 
     /**
+     * Returns the company's name value.
+     *
+     * @return the value of the name object.
+     */
+    public String getNameValue() {
+        return name.getValue();
+    }
+
+    /**
      * Returns the string representation of the company.
      *
      * @return a string that represents the company, including its email and name.
