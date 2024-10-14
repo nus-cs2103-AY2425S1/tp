@@ -63,7 +63,6 @@ public class FindDoctorCommandTest {
         assertEquals(Arrays.asList(), model.getFilteredPersonList());
     }
 
-    // TODO: Add test that only finds one doctor
     @Test
     public void execute_oneKeyword_onePersonFound() {
         String expectedMessage = String.format(MESSAGE_DOCTORS_LISTED_OVERVIEW, 1);
