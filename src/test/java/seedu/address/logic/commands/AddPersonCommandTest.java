@@ -161,10 +161,6 @@ public class AddPersonCommandTest {
         }
 
         @Override
-<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/AddCommandTest.java
-=======
-<<<<<<< HEAD
->>>>>>> master:src/test/java/seedu/address/logic/commands/AddPersonCommandTest.java
         public void editMeetUp(Person person, MeetUp edittedMeetUp) {
             return;
         }
@@ -172,16 +168,11 @@ public class AddPersonCommandTest {
         @Override
         public void deleteMeetUp(Person person) {
             return;
-<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/AddCommandTest.java
-          
+        }
+
+        @Override
         public void updateFilteredMeetUpList(Predicate<MeetUp> meetUp) {
             // TODO
-=======
-=======
-        public void updateFilteredMeetUpList(Predicate<MeetUp> meetUp) {
-            // TODO
->>>>>>> da45caa56c61434831d7cc3d1288d4aeed9daae7
->>>>>>> master:src/test/java/seedu/address/logic/commands/AddPersonCommandTest.java
         }
     }
 

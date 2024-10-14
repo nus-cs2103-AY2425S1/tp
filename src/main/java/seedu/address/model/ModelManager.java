@@ -149,34 +149,19 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
-<<<<<<< HEAD
     //=========== Filtered MeetUp List Accessors =============================================================
-=======
-<<<<<<< HEAD
-    //=========== Filtered Schedule List Accessors =============================================================
->>>>>>> master
     @Override
     public void editMeetUp(Person person, MeetUp editedMeetUp) {
         return;
     }
 
     @Override
-    public void deleteMeetUp(Person person) {
-        return;
-<<<<<<< HEAD
+    public void deleteMeetUp(Person person) { return; }
 
-=======
-=======
-    //=========== Filtered MeetUp List Accessors =============================================================
->>>>>>> master
     @Override
-    public void updateFilteredMeetUpList(Predicate<MeetUp> predicate) {
+    public void updateFilteredMeetUpList (Predicate < MeetUp > predicate) {
         requireNonNull(predicate);
         filteredMeetUps.setPredicate(predicate);
         // TODO
-<<<<<<< HEAD
-=======
->>>>>>> da45caa56c61434831d7cc3d1288d4aeed9daae7
->>>>>>> master
     }
 }
