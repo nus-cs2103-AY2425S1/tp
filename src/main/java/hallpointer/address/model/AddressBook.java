@@ -15,11 +15,11 @@ import javafx.collections.ObservableList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameMember comparison)
  */
+@SuppressWarnings("checkstyle:Regexp")
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueMemberList members;
     private final UniqueSessionList sessions;
-
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -33,7 +33,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         sessions = new UniqueSessionList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Creates an AddressBook using the Members in the {@code toBeCopied}
@@ -56,10 +57,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public void setSessions(List<Session> sessions) {
         this.sessions.setSessions(sessions);
-    }
-
-    public ObservableList<Session> getSessionList() {
-        return sessions.asUnmodifiableObservableList();
     }
 
     /**
@@ -123,6 +120,68 @@ public class AddressBook implements ReadOnlyAddressBook {
         return members.asUnmodifiableObservableList();
     }
 
+
+    //=========== Session ================================================================================
+
+    /**
+     * Checks if the given session exists in the list of sessions.
+     *
+     * @param session The session to check for existence.
+     * @return {@code true} if the session exists in the list, otherwise {@code false}.
+     * @throws NullPointerException If the session is null.
+     */
+    public boolean hasSession(Session session) {
+        requireNonNull(session);
+        return sessions.contains(session);
+    }
+
+    /**
+     * Adds the given session to the address book.
+     * {@code session} must not already exist in the address book.
+     *
+     * @param session The session to add.
+     */
+    public void addSession(Session session) {
+        requireNonNull(session);
+        sessions.add(session);
+    }
+
+    /**
+     * Deletes the given session from the address book.
+     * {@code session} must exist in the address book.
+     *
+     * @param session The session to delete.
+     */
+    public void deleteSession(Session session) {
+        requireNonNull(session);
+        sessions.remove(session);
+    }
+
+    /**
+     * Replaces the given session {@code target} with {@code editedSession}.
+     * {@code target} must exist in the address book.
+     * The session identity of {@code editedSession} must not be the same as another
+     * existing session in the address book.
+     *
+     * @param target        The session to replace.
+     * @param editedSession The new session.
+     */
+    public void setSession(Session target, Session editedSession) {
+        requireNonNull(target);
+        requireNonNull(editedSession);
+        sessions.setSession(target, editedSession);
+    }
+
+    /**
+     * Returns an unmodifiable view of the sessions list.
+     *
+     * @return The unmodifiable list of sessions.
+     */
+    public ObservableList<Session> getSessionList() {
+        return sessions.asUnmodifiableObservableList();
+    }
+
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -141,26 +200,5 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return members.hashCode();
-    }
-
-    /**
-     * Adds a session to the list of sessions.
-     *
-     * @param session The session to be added.
-     */
-    public void addSession(Session session) {
-        sessions.add(session);
-    }
-
-    /**
-     * Checks if the given session exists in the list of sessions.
-     *
-     * @param session The session to check for existence.
-     * @return {@code true} if the session exists in the list, otherwise {@code false}.
-     * @throws NullPointerException If the session is null.
-     */
-    public boolean hasSessions(Session session) {
-        requireNonNull(session);
-        return sessions.contains(session);
     }
 }

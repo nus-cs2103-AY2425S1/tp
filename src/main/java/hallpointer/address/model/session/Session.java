@@ -52,6 +52,13 @@ public class Session {
     }
 
     /**
+     * Returns the date of the session.
+     */
+    public Date getDate() {
+        return date;
+    }
+
+    /**
      * Updates the set of members in the session.
      *
      * @param newMembers New set of members.
@@ -107,7 +114,4 @@ public class Session {
                 .toString();
     }
 
-    public Object getDate() {
-        return this.date;
-    }
 }
