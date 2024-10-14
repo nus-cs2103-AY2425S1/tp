@@ -79,7 +79,7 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case DateCommand.COMMAND_WORD:
-            return new DateCommand();
+            return new DateCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
