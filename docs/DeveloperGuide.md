@@ -492,6 +492,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+#### Use case: Assign a piano piece to a student
+
+**MSS**
+
+1. User enters command to assign a piano piece to a student.
+2. KeyContacts parses the user's command.
+3. KeyContacts assigns the pieces to the student and notifies the user. 
+
+    Use case ends.
+
+**Extensions**
+* 2a. KeyContacts detects an error in the entered data.
+  * 2a1. KeyContacts requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
+
 ### Non-Functional Requirements
 
 1.  **Cross-Platform Compatibility**: Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
