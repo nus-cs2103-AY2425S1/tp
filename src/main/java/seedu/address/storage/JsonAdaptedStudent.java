@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -27,6 +28,7 @@ class JsonAdaptedStudent {
     private final String phone;
     private final String email;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedAssignment> assignments = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -34,12 +36,16 @@ class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email,
-                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                              @JsonProperty("assignments") List<JsonAdaptedAssignment> assignments) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (assignments != null) {
+            this.assignments.addAll(assignments);
         }
     }
 
@@ -53,6 +59,9 @@ class JsonAdaptedStudent {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        assignments.addAll(source.getAssignmentList().stream()
+                .map(JsonAdaptedAssignment::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -62,6 +71,7 @@ class JsonAdaptedStudent {
      */
     public Student toModelType() throws IllegalValueException {
         final List<Tag> studentTags = new ArrayList<>();
+        final List<Assignment> studentAssignments = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             studentTags.add(tag.toModelType());
         }
@@ -90,7 +100,14 @@ class JsonAdaptedStudent {
         }
         final Email modelEmail = new Email(email);
         final Set<Tag> modelTags = new HashSet<>(studentTags);
-        return new Student(modelName, modelPhone, modelEmail, modelTags);
-    }
+        Student student = new Student(modelName, modelPhone, modelEmail, modelTags);
 
+
+        // Deserialize and associate assignments with the student
+        for (JsonAdaptedAssignment jsonAssignment : assignments) {
+            Assignment assignment = jsonAssignment.toModelType(student);
+            student = student.addAssignment(assignment);
+        }
+        return student;
+    }
 }

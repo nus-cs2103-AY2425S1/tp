@@ -60,8 +60,8 @@ public class AddAssignmentCommand extends Command {
         if (studentToAddAssignmentTo.hasAssignment(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
-        Student edittedStudent = studentToAddAssignmentTo.addAssignment(toAdd);
-        model.setStudent(studentToAddAssignmentTo, edittedStudent);
+        Student editedStudent = studentToAddAssignmentTo.addAssignment(toAdd);
+        model.setStudent(studentToAddAssignmentTo, editedStudent);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

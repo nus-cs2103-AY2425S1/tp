@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.assignment.exceptions.ScoreExceedsMaxScoreException;
 import seedu.address.model.student.Student;
 
 /**
@@ -111,5 +112,17 @@ public class Assignment {
     public boolean getHasSubmitted() {
         return this.hasSubmitted;
     }
+    public Student getStudent() {
+        return this.student;
+    }
 
+    public void setScore(int score) {
+        if (score > this.getMaxScore()) {
+            throw new ScoreExceedsMaxScoreException();
+        }
+        this.score = score;
+    }
+    public void setHasSubmitted(boolean hasSubmitted) {
+        this.hasSubmitted = hasSubmitted;
+    }
 }
