@@ -4,12 +4,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALCLASS;
 
-import java.util.Set;
-
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.student.Student;
-import seedu.address.model.tag.Tag;
 
 /**
  * A utility class for Student.

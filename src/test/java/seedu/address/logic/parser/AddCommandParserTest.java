@@ -1,10 +1,22 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
-import static seedu.address.logic.commands.CommandTestUtil.*;
-
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENTID_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TUTORIALCLASS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.STUDENTID_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.STUDENTID_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.TUTORIALCLASS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TUTORIALCLASS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIALCLASS_BOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalStudents.AMY;
@@ -14,7 +26,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.student.*;;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.TutorialClass;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddCommandParserTest {

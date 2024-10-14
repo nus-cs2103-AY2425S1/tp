@@ -35,11 +35,11 @@ public class Messages {
      * Formats the {@code student} for display to the user.
      */
     public static String format(Student student) {
-        return student.getName() +
-                "; Student ID: " +
-                student.getStudentId() +
-                "; Tutorial Class: " +
-                student.getTutorialClass();
+        return student.getName()
+                + "; Student ID: "
+                + student.getStudentId()
+                + "; Tutorial Class: "
+                + student.getTutorialClass();
     }
 
 }

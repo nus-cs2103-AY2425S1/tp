@@ -1,19 +1,12 @@
 package seedu.address.testutil;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
-import seedu.address.model.student.Address;
-import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Phone;
 import seedu.address.model.student.PresentDates;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Student objects.

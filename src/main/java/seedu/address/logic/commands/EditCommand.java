@@ -95,14 +95,9 @@ public class EditCommand extends Command {
         assert studentToEdit != null;
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
-//        Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
-//        Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
-//        Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
         StudentId updatedStudentId = editStudentDescriptor.getStudentId().orElse(studentToEdit.getStudentId());
         TutorialClass updatedTutorialClass = editStudentDescriptor.getTutorialClass()
                 .orElse(studentToEdit.getTutorialClass());
-
-//        Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
         PresentDates updatedDates = editStudentDescriptor.getPresentDates().orElse(studentToEdit.getPresentDates());
 
         return new Student(updatedName, updatedStudentId, updatedTutorialClass, updatedDates);

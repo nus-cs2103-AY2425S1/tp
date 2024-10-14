@@ -7,28 +7,18 @@ import static seedu.address.testutil.TypicalStudents.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.student.Address;
-import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
 
-import seedu.address.model.student.Phone;
-import seedu.address.model.student.Student;
-
 public class JsonAdaptedStudentTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
-    private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_STUDENT_ID = "-1"; // Assuming negative IDs are invalid
     private static final String INVALID_TUTORIAL_CLASS = ""; // Assuming empty string is invalid
-    private static final String INVALID_TAG = "#friend";
     private static final String INVALID_DATE_STRING = "31/02/2023";
     private static final JsonAdaptedTutDate INVALID_TUT_DATE = new JsonAdaptedTutDate(INVALID_DATE_STRING,
             null);

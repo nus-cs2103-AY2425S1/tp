@@ -6,9 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIALCLASS_BOB;
-
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIALCLASS_BOB;
 
 import org.junit.jupiter.api.Test;
 
