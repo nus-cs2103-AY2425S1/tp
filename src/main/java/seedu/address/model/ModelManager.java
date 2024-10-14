@@ -159,10 +159,14 @@ public class ModelManager implements Model {
     //=========== MeetUp List ================================================================================
 
     @Override
-    public void setMeetUp(MeetUp target, MeetUp edittedMeetUp) { return; }
+    public void setMeetUp(MeetUp target, MeetUp edittedMeetUp) {
+        return;
+    }
 
     @Override
-    public void deleteMeetUp(MeetUp target) { return; }
+    public void deleteMeetUp(MeetUp target) {
+        return;
+    }
 
     //=========== Filtered MeetUp List Accessors =============================================================
     public Path getMeetUpListFilePath() {
@@ -193,10 +197,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredMeetUpList (Predicate < MeetUp > predicate) {
+    public void updateFilteredMeetUpList(Predicate <MeetUp> predicate) {
         requireNonNull(predicate);
         filteredMeetUps.setPredicate(predicate);
     }
-
 
 }
