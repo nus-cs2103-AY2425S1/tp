@@ -53,8 +53,9 @@ public class ClientStatus {
             return OLD;
         case POTENTIAL:
             return POTENTIAL;
+        default:
+            return status;
         }
-        return status;
     }
 
     @Override
