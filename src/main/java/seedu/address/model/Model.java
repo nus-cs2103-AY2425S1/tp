@@ -111,30 +111,19 @@ public interface Model {
     ObservableList<MeetUp> getFilteredMeetUpList();
 
     /**
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> master
      * Updates the given schedule's meetup in the schedule list.
      * The schedule must exist in the schedule list.
      */
-    void editMeetUp(Person target, MeetUp editedMeetUp);
+    void setMeetUp(MeetUp target, MeetUp editedMeetUp);
 
     /**
      * Deletes the given schedule in the schedule list
      */
-    void deleteMeetUp(Person target);
-<<<<<<< HEAD
+    void deleteMeetUp(MeetUp target);
 
-=======
-=======
->>>>>>> master
+    /*
      * Updates the filter of the meetup list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredMeetUpList(Predicate<MeetUp> predicate);
-<<<<<<< HEAD
-=======
->>>>>>> da45caa56c61434831d7cc3d1288d4aeed9daae7
->>>>>>> master
 }

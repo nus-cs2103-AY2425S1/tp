@@ -10,14 +10,14 @@ import java.time.format.DateTimeFormatter;
  */
 public class MeetUpTo {
 
-//    public static final String MESSAGE_CONSTRAINTS =
-//            "Time should only be in the format YYYY-MM-DD HH:mm";
-//
-//    /*
-//     * The time format must strictly follow the above format
-//     */
-//    public static final String VALIDATION_REGEX =
-//            "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]$";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Time should only be in the format YYYY-MM-DD HH:mm";
+
+    /*
+     * The time format must strictly follow the above format
+     */
+    public static final String VALIDATION_REGEX =
+            "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]$";
 
     public final LocalDateTime end;
 
@@ -28,18 +28,16 @@ public class MeetUpTo {
      */
     public MeetUpTo(LocalDateTime meetUpTo) {
         requireNonNull(meetUpTo);
-//        checkArgument(isValidMeetUpToTime(meetUpTo), MESSAGE_CONSTRAINTS);
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-//        this.end = LocalDateTime.parse(meetUpTo, formatter);
+
         this.end = meetUpTo;
     }
 
-//    /**
-//     * Returns true if a given string is a valid end timing.
-//     */
-//    public static boolean isValidMeetUpToTime(String test) {
-//        return test.matches(VALIDATION_REGEX);
-//    }
+    /**
+     * Returns true if a given string is a valid end timing.
+     */
+    public static boolean isValidMeetUpToTime(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
 
     @Override
     public String toString() {

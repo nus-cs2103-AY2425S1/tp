@@ -160,29 +160,11 @@
 //             throw new AssertionError("This method should not be called.");
 //         }
 
-<<<<<<< HEAD
-        @Override
-        public void editMeetUp(Person person, MeetUp edittedMeetUp) {
-            return;
-        }
-
-        @Override
-        public void deleteMeetUp(Person person) {
-            return;
-        }
-
-        @Override
-        public void updateFilteredMeetUpList(Predicate<MeetUp> meetUp) {
-            // TODO
-        }
-    }
-=======
 //         @Override
 //         public void updateFilteredMeetUpList(Predicate<MeetUp> meetUp) {
 //             // TODO
 //         }
 //     }
->>>>>>> 92c76a474c2477b310b3901bcc1b59c0393826c7
 
 //     /**
 //      * A Model stub that contains a single person.

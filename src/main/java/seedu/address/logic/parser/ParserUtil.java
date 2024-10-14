@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +11,10 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.meetup.MeetUpFrom;
+import seedu.address.model.meetup.MeetUpInfo;
+import seedu.address.model.meetup.MeetUpName;
+import seedu.address.model.meetup.MeetUpTo;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -137,4 +143,69 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String name} into a {@code MeetUpName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code meetUpName} is invalid.
+     */
+    public static MeetUpName parseMeetUpName(String meetUpName) throws ParseException {
+        requireNonNull(meetUpName);
+        String trimmedName = meetUpName.trim();
+        if (!MeetUpName.isValidMeetUpName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new MeetUpName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code MeetUpName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code meetUpInfo} is invalid.
+     */
+    public static MeetUpInfo parseMeetUpInfo(String meetUpInfo) throws ParseException {
+        requireNonNull(meetUpInfo);
+        String trimmedInfo = meetUpInfo.trim();
+        if (!MeetUpInfo.isValidMeetUpInfo(trimmedInfo)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new MeetUpInfo(trimmedInfo);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code MeetUpFrom}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code meetUpFrom} is invalid.
+     */
+    public static MeetUpFrom parseMeetUpFrom(String meetUpFrom) throws ParseException {
+        requireNonNull(meetUpFrom);
+        String trimmedFrom = meetUpFrom.trim();
+        if (!MeetUpFrom.isValidMeetUpFromTime(trimmedFrom)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime formattedTime = LocalDateTime.parse(meetUpFrom, formatter);
+        return new MeetUpFrom(formattedTime);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code MeetUpFrom}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code meetUpFrom} is invalid.
+     */
+    public static MeetUpTo parseMeetUpTo(String meetUpTo) throws ParseException {
+        requireNonNull(meetUpTo);
+        String trimmedTo = meetUpTo.trim();
+        if (!MeetUpTo.isValidMeetUpToTime(trimmedTo)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime formattedTime = LocalDateTime.parse(meetUpTo, formatter);
+        return new MeetUpTo(formattedTime);
+    }
+
 }
