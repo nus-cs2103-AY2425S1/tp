@@ -42,5 +42,17 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "tags" : [ ]
+  }, {
+    "name" : "Henry Meier",
+    "phone" : "8482424",
+    "email" : "henry@example.com",
+    "address" : "kent ridge",
+    "tags" : [ ],
+    "property" : {
+      "postalCode" : "123456",
+      "unitNumber" : "10-01",
+      "price" : "1.5M",
+      "tags" : [ ]
+    }
   } ]
 }
