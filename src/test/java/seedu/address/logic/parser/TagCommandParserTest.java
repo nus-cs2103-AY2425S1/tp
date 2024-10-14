@@ -39,12 +39,15 @@ public class TagCommandParserTest {
         assertParseFailure(parser, "a t/colleague", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 TagCommand.MESSAGE_USAGE));
 
+        // Index missing
+        assertParseFailure(parser, "t/colleague t/gym", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                TagCommand.MESSAGE_USAGE));
+
         // Missing tags (no tags specified)
         assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 TagCommand.MESSAGE_USAGE));
 
-        // Index missing
-        assertParseFailure(parser, "t/colleague t/gym", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                TagCommand.MESSAGE_USAGE));
+        // Tags not in alphanumeric and space format
+        assertParseFailure(parser, "1 t/colleague_", TagName.MESSAGE_CONSTRAINTS);
     }
 }

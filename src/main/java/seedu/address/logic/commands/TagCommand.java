@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_ADD_TAG_SUCCESS;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_TAG_NOT_FOUND;
@@ -41,6 +42,8 @@ public class TagCommand extends Command {
      * @param tagsToAdd The list of tags to be added.
      */
     public TagCommand(Index index, HashSet<Tag> tagsToAdd) {
+        requireNonNull(index);
+        requireNonNull(tagsToAdd);
         this.index = index;
         this.tagsToAdd = tagsToAdd;
     }

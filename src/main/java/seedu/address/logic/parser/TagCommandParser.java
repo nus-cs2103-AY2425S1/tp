@@ -1,19 +1,16 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
+import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagName;
 
 /**
  * Parses input arguments and creates a new TagCommand object.
@@ -32,27 +29,9 @@ public class TagCommandParser implements Parser<TagCommand> {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
+        Pair<Index, Set<Tag>> indexAndTags = TaggingCommandParserUtil.parseIndexAndTags(argMultimap,
+                TagCommand.MESSAGE_USAGE);
 
-        Index index;
-
-        try {
-            // Parse the index from the preamble
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE), ive);
-        }
-
-        List<String> tagValues = argMultimap.getAllValues(PREFIX_TAG);
-        if (tagValues.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
-        }
-
-        // Convert tag values to Tag objects
-        HashSet<Tag> tags = new HashSet<>(tagValues.stream()
-                .map(TagName::new) // Convert each string to a TagName object
-                .map(Tag::new)
-                .collect(Collectors.toList()));
-
-        return new TagCommand(index, tags);
+        return new TagCommand(indexAndTags.getKey(), new HashSet<>(indexAndTags.getValue()));
     }
 }
