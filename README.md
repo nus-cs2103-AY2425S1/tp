@@ -16,9 +16,12 @@ ensuring clarity and peace of mind for students who use SpleetWaise.
 
 ---
 
-* For the detailed documentation of this project, see the *
-  *[SpleetWaise Product Website](https://ay2425s1-cs2103-f13-1.github.io/tp/)
-  **.
+* For the detailed documentation of this project, see the [SpleetWaise Product Website](https://ay2425s1-cs2103-f13-1.github.io/tp/).
+
+---
+# Git Workflow
+
+This project uses the [Feature Branch Flow](https://nus-cs2103-ay2425s1.github.io/website/se-book-adapted/chapters/revisionControl.html#feature-branch-flow) with rules set to protect the `master` branch. PRs are mandatory and at least 1 member requires review.
 
 ## Acknowledgement
 
