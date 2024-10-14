@@ -29,7 +29,7 @@ public class GroupContainsKeywordsPredicate implements Predicate<Group> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.model.group.GroupContainsKeywordsPredicate)) {
+        if (!(other instanceof GroupContainsKeywordsPredicate)) {
             return false;
         }
 

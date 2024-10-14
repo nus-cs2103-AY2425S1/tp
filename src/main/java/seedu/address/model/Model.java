@@ -106,6 +106,8 @@ public interface Model {
      */
     void addGroup(Group group);
 
+    void deleteGroup(Group groupToDelete);
+
     String groupsString();
 
     List<Group> updateFilteredGroupList(GroupContainsKeywordsPredicate groupName);

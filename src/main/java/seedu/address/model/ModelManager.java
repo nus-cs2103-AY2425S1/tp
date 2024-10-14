@@ -155,6 +155,24 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Deletes the specified group from the list of groups.
+     *
+     * @param groupToDelete The group to be deleted.
+     * @throws NullPointerException if {@code groupToDelete} is null.
+     * @throws IllegalArgumentException if the group does not exist in the list.
+     */
+    @Override
+    public void deleteGroup(Group groupToDelete) {
+        requireNonNull(groupToDelete);
+
+        boolean isRemoved = groups.remove(groupToDelete);
+
+        if (!isRemoved) {
+            throw new IllegalArgumentException("Group not found: " + groupToDelete.getGroupName());
+        }
+    }
+
+    /**
      * Adds a group to the Model
      */
     @Override
