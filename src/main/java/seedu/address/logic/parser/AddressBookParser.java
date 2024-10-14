@@ -13,8 +13,8 @@ import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.AddStudentToGroupCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
+import seedu.address.logic.commands.DeleteStudentFromGroupCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -81,9 +81,6 @@ public class AddressBookParser {
         case AddGroupCommand.COMMAND_WORD:
             return new AddGroupCommandParser().parse(arguments);
 
-        case DeleteGroupCommand.COMMAND_WORD:
-            return new DeleteGroupCommandParser().parse(arguments);
-
         case ListStudentCommand.COMMAND_WORD:
             return new ListStudentCommandParser().parse(arguments);
 
@@ -92,6 +89,9 @@ public class AddressBookParser {
 
         case AddStudentToGroupCommand.COMMAND_WORD:
             return new AddStudentToGroupCommandParser().parse(arguments);
+            
+        case DeleteStudentFromGroupCommand.COMMAND_WORD:
+            return new DeleteStudentFromGroupCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

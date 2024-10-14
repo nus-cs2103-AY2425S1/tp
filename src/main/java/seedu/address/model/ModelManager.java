@@ -51,8 +51,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setStateStudents() {
-        this.userPrefs.setStateStudents();
-        ;
+        this.userPrefs.setStateStudents();;
     }
 
     @Override
@@ -64,6 +63,7 @@ public class ModelManager implements Model {
     public State getState() {
         return this.userPrefs.getState();
     }
+
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -142,12 +142,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteGroup(Group group) {
-        addressBook.removeGroup(group);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
-    }
-
-    @Override
     public void addGroup(Group group) {
         addressBook.addGroup(group);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
@@ -180,6 +174,29 @@ public class ModelManager implements Model {
     @Override
     public Group getGroupByName(GroupName groupName) {
         return addressBook.getGroupByName(groupName);
+    }
+  
+    /**
+     * Returns the group with the same group name as {@code groupName} exists in the address book
+     */
+    @Override
+    public Group findGroup(GroupName groupName) {
+        requireNonNull(groupName);
+        return addressBook.findGroupByName(groupName);
+    }
+
+    @Override
+    public boolean containsGroupName(GroupName groupName) {
+        requireNonNull(groupName);
+        return addressBook.containsGroupName(groupName);
+    }
+
+    @Override
+    public void deleteStudentFromGroup(Group group, Student student) {
+        requireNonNull(group);
+        requireNonNull(student);
+        addressBook.deleteStudentFromGroup(group, student);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Student List Accessors =============================================================
@@ -223,9 +240,9 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-            && userPrefs.equals(otherModelManager.userPrefs)
-            && filteredStudents.equals(otherModelManager.filteredStudents)
-            && filteredGroups.equals(otherModelManager.filteredGroups);
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredStudents.equals(otherModelManager.filteredStudents)
+                && filteredGroups.equals(otherModelManager.filteredGroups);
     }
 
 }

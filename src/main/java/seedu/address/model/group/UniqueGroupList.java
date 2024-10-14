@@ -8,16 +8,16 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.group.exceptions.DuplicateGroupException;
-import seedu.address.model.group.exceptions.GroupNotFoundException;
+import seedu.address.model.student.exceptions.DuplicatePersonException;
+import seedu.address.model.student.exceptions.PersonNotFoundException;
 
 /**
- * A list of groups that enforces uniqueness between its elements and does not allow nulls.
- * A group is considered unique by comparing using {@code Group#isSameGroup(Group)}. As such, adding and
+ * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A student is considered unique by comparing using {@code Student#isSamePerson(Student)}. As such, adding and
  * updating of
- * groups uses Group#isSameGroup(Group) for equality so as to ensure that the group being added or updated is
- * unique in terms of identity in the UniqueGroupList. However, the removal of a group uses Group#equals
- * (Object) so as to ensure that the group with exactly the same fields will be removed.
+ * persons uses Student#isSamePerson(Student) for equality so as to ensure that the student being added or updated is
+ * unique in terms of identity in the UniqueStudentList. However, the removal of a student uses Student#equals
+ * (Object) so as to ensure that the student with exactly the same fields will be removed.
  * <p>
  * Supports a minimal set of list operations.
  *
@@ -27,7 +27,7 @@ public class UniqueGroupList implements Iterable<Group> {
 
     private final ObservableList<Group> internalList = FXCollections.observableArrayList();
     private final ObservableList<Group> internalUnmodifiableList =
-        FXCollections.unmodifiableObservableList(internalList);
+            FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent group as the given argument.
@@ -44,7 +44,7 @@ public class UniqueGroupList implements Iterable<Group> {
     public void add(Group toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicateGroupException();
+            throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
     }
@@ -52,31 +52,31 @@ public class UniqueGroupList implements Iterable<Group> {
     /**
      * Replaces the group {@code target} in the list with {@code editedGroup}.
      * {@code target} must exist in the list.
-     * The group identity of {@code editedGroup} must not be the same as another existing group in the list.
+     * The group identity of {@code editedStudent} must not be the same as another existing student in the list.
      */
-    public void setGroup(Group target, Group editedGroup) {
-        requireAllNonNull(target, editedGroup);
+    public void setGroup(Group target, Group editedStudent) {
+        requireAllNonNull(target, editedStudent);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new GroupNotFoundException();
+            throw new PersonNotFoundException();
         }
 
-        if (target.isSameGroup(editedGroup) && contains(editedGroup)) {
-            throw new DuplicateGroupException();
+        if (target.isSameGroup(editedStudent) && contains(editedStudent)) {
+            throw new DuplicatePersonException();
         }
 
-        internalList.set(index, editedGroup);
+        internalList.set(index, editedStudent);
     }
 
     /**
-     * Removes the equivalent group from the list.
-     * The group must exist in the list.
+     * Removes the equivalent student from the list.
+     * The student must exist in the list.
      */
     public void remove(Group toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new GroupNotFoundException();
+            throw new PersonNotFoundException();
         }
     }
 
@@ -87,15 +87,35 @@ public class UniqueGroupList implements Iterable<Group> {
 
     /**
      * Replaces the contents of this list with {@code groups}.
-     * {@code groups} must not contain duplicate groups.
+     * {@code students} must not contain duplicate groups.
      */
-    public void setGroups(List<Group> groups) {
-        requireAllNonNull(groups);
-        if (!groupsAreUnique(groups)) {
-            throw new GroupNotFoundException();
+    public void setGroups(List<Group> students) {
+        requireAllNonNull(students);
+        if (!groupsAreUnique(students)) {
+            throw new DuplicatePersonException();
         }
 
-        internalList.setAll(groups);
+        internalList.setAll(students);
+    }
+
+    /**
+     * Finds the group with matching group name {@code groupName}
+     */
+    public Group findGroupByName(GroupName groupName) {
+        requireNonNull(groupName);
+        return internalList.stream()
+                .filter(group -> group.getGroupName().equals(groupName))
+                .findFirst()
+                .orElse(null);
+    }
+
+    /**
+     * Returns true if a group with the specified group name exists in the list.
+     */
+    public boolean containsGroupWithName(GroupName groupName) {
+        requireNonNull(groupName);
+        return internalList.stream()
+                .anyMatch(group -> group.getGroupName().equals(groupName));
     }
 
     /**

@@ -146,11 +146,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Returns true if a group with the same group name as {@code groupName} exists in the address book.
      */
-    public void removeGroup(Group key) {
-        groups.remove(key);
+    public boolean containsGroupName(GroupName groupName) {
+        requireNonNull(groupName);
+        return groups.containsGroupWithName(groupName);
     }
 
     /**
@@ -162,7 +162,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given student {@code target} in the list with {@code editedStudent}.
+     * Replaces the given group {@code target} in the list with {@code editedGroup}.
      * {@code target} must exist in the address book.
      * The student identity of {@code editedStudent} must not be the same as another existing student in the address
      * book.
@@ -171,6 +171,20 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedGroup);
 
         groups.setGroup(target, editedGroup);
+    }
+
+    public Group findGroupByName(GroupName groupName) {
+        return groups.findGroupByName(groupName);
+    }
+
+    /**
+     * deletes the student {@code student} from the given group {@code group}
+     */
+    public void deleteStudentFromGroup(Group group, Student student) {
+        requireNonNull(group);
+        requireNonNull(student);
+        group.delete(student);
+        students.setPerson(student, student.removeGroup());
     }
 
     //// util methods

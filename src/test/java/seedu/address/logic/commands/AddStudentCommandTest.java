@@ -44,7 +44,7 @@ public class AddStudentCommandTest {
         CommandResult commandResult = new AddStudentCommand(validStudent).execute(modelStub);
 
         assertEquals(String.format(AddStudentCommand.MESSAGE_SUCCESS, Messages.format(validStudent)),
-            commandResult.getFeedbackToUser());
+                commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validStudent), modelStub.personsAdded);
     }
 
@@ -55,7 +55,7 @@ public class AddStudentCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validStudent);
 
         assertThrows(CommandException.class, AddStudentCommand.MESSAGE_DUPLICATE_PERSON, () ->
-            addCommand.execute(modelStub));
+                addCommand.execute(modelStub));
     }
 
     @Test
@@ -226,6 +226,21 @@ public class AddStudentCommandTest {
 
         @Override
         public State getState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Group findGroup(GroupName groupName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean containsGroupName(GroupName groupName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteStudentFromGroup(Group group, Student student) {
             throw new AssertionError("This method should not be called.");
         }
     }
