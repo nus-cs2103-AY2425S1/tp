@@ -40,11 +40,12 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_WORKEXP, PREFIX_TAG, 
                                           PREFIX_UNIVERSITY, PREFIX_MAJOR);
 
+        // Check for required prefixes
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_UNIVERSITY, PREFIX_MAJOR)
-                || !argMultimap.getPreamble().isEmpty()) {
+                PREFIX_UNIVERSITY, PREFIX_MAJOR) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
+
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_WORKEXP, 
                                                 PREFIX_UNIVERSITY, PREFIX_MAJOR);
@@ -57,7 +58,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         University university = ParserUtil.parseUniversity(argMultimap.getValue(PREFIX_UNIVERSITY).get());
         Major major = ParserUtil.parseMajor(argMultimap.getValue(PREFIX_MAJOR).get());
-      
+
         Person person = new Person(name, phone, email, address, workExp, tagList, university, major);
         return new AddCommand(person);
     }

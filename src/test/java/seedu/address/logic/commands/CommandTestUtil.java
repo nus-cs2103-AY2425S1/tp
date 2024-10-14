@@ -75,7 +75,8 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_UNIVERSITY_DESC = " " + PREFIX_UNIVERSITY + "NTU%";
     // '%' not allowed in university
-    public static final String INVALID_MAJOR_DESC = " " + PREFIX_MAJOR + "1234"; // numbers not allowed in major
+    public static final String INVALID_MAJOR_DESC = " " + PREFIX_MAJOR + "Eng#ineering*";
+    // numbers not allowed in major
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
