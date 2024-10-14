@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.ui.CommandTabChange;
 
 /**
  * Represents the result of a command execution.
@@ -19,24 +20,16 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
     /** The application should show people list. */
-    private final boolean showPeopleList;
+    private final CommandTabChange tabChange;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showPeopleList) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, CommandTabChange tabChange) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.showPeopleList = showPeopleList;
-    }
-
-    /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser} and {@code showPeopleList},
-     * and other fields set to their default value.
-     */
-    public CommandResult(String feedbackToUser, boolean showPeopleList) {
-        this(feedbackToUser, false, false, showPeopleList);
+        this.tabChange = tabChange;
     }
 
     /**
@@ -44,7 +37,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, true);
+        this(feedbackToUser, false, false, CommandTabChange.NONE);
     }
 
     public String getFeedbackToUser() {
@@ -59,8 +52,8 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isShowPeopleList() {
-        return showPeopleList;
+    public CommandTabChange getTabChange() {
+        return tabChange;
     }
 
     @Override

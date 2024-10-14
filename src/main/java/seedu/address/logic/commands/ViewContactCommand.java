@@ -6,6 +6,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameMatchesKeywordsPredicate;
+import seedu.address.ui.CommandTabChange;
 
 /**
  * Views the specific information of a person in address book whose name is the argument keywords.
@@ -31,7 +32,8 @@ public class ViewContactCommand extends ViewCommand {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()), true);
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                false, false, CommandTabChange.PERSON);
     }
 
     @Override

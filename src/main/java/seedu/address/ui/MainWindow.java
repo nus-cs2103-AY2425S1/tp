@@ -174,6 +174,18 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    public EventListPanel getEventListPanel() {
+        return eventListPanel;
+    }
+
+    public void setPersonTab() {
+        tabPanePlaceholder.getSelectionModel().select(0);
+    }
+
+    public void setEventTab() {
+        tabPanePlaceholder.getSelectionModel().select(1);
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -195,10 +207,10 @@ public class MainWindow extends UiPart<Stage> {
                 return commandResult;
             }
 
-            if (commandResult.isShowPeopleList() && !tabPanePlaceholder.getTabs().get(0).isSelected()) {
-                tabPanePlaceholder.getSelectionModel().select(0);
-            } else if (!commandResult.isShowPeopleList() && !tabPanePlaceholder.getTabs().get(1).isSelected()) {
-                tabPanePlaceholder.getSelectionModel().select(1);
+            if (commandResult.getTabChange() == CommandTabChange.PERSON) {
+                setPersonTab();
+            } else if (commandResult.getTabChange() == CommandTabChange.EVENT) {
+                setEventTab();
             }
 
             return commandResult;
