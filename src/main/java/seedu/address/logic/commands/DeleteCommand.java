@@ -30,12 +30,16 @@ public class DeleteCommand extends Command {
 
     private final Name targetName;
     private final Index targetIndex;
-
+    /**
+     * @param targetName of the person to be deleted in the list
+     */
     public DeleteCommand(Name targetName) {
         this.targetName = targetName;
         this.targetIndex = null;
     }
-
+    /**
+     * @param targetIndex of the index of the person to be deleted in the list
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         this.targetName = null;
