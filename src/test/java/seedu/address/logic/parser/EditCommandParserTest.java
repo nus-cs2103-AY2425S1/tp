@@ -29,13 +29,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -72,7 +68,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // invalid id
-        assertParseFailure(parser, "invalid-id" + NAME_DESC_AMY, StudentId.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "invalid-id" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "12345678 some random string", MESSAGE_INVALID_FORMAT);
@@ -83,7 +79,9 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "12" + INVALID_STUDENTID_DESC, StudentId.MESSAGE_CONSTRAINTS); // invalid studentID
+        assertParseFailure(parser, "12" + INVALID_STUDENTID_DESC, MESSAGE_INVALID_FORMAT); // invalid studentID preamble
+        assertParseFailure(parser, "12345678"
+                + INVALID_STUDENTID_DESC, StudentId.MESSAGE_CONSTRAINTS); // invalid studentID
         assertParseFailure(parser, "12345678" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "12345678" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "12345678" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
@@ -95,8 +93,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "12345678" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "12345678" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
-                Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "12345678" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY
+                        + VALID_PHONE_AMY, Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -192,14 +190,5 @@ public class EditCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
     }
 
-    /*@Test
-    public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTag(VALID_TAG_STUDENT).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }*/
 }

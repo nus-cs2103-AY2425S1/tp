@@ -74,7 +74,7 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        Person personToEdit =  lastShownList.stream()
+        Person personToEdit = lastShownList.stream()
                 .filter(person -> person.getStudentId().equals(studentId))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_STUDENTID));;

@@ -17,7 +17,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.AddressBook;
@@ -129,11 +128,11 @@ public class EditCommandTest {
 
     @Test
     public void execute_invalidPersonIdUnfilteredList_failure() {
-        StudentId invalidStudentId = new StudentId("invalid-id-123");
+        StudentId invalidStudentId = new StudentId("99999999"); // id that doesn't exist in the address book
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(invalidStudentId, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_STUDENTID);
     }
 
     /**
@@ -143,7 +142,7 @@ public class EditCommandTest {
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        StudentId invalidStudentId = new StudentId("invalid-id-123");
+        StudentId invalidStudentId = new StudentId("99999999"); // id that doesn't exist in the address book
 
         EditCommand editCommand = new EditCommand(invalidStudentId,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
