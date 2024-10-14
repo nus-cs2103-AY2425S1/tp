@@ -2,21 +2,17 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -24,71 +20,52 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.student.Attendance;
 import seedu.address.model.student.Student;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.StudentBuilder;
 
-public class AddCommandTest {
+public class MarkAttendanceCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void execute_studentFound_success() throws Exception {
+        Student validStudent = new StudentBuilder().withName("John").build();
+        ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent);
+        modelStub.addStudent(validStudent);
+
+        Attendance attendance = new Attendance("present");
+        LocalDate date = LocalDate.of(2023, 10, 9);
+        MarkAttendanceCommand command = new MarkAttendanceCommand(new Name("John"), date, attendance);
+
+        CommandResult result = command.execute(modelStub);
+
+        assertEquals(String.format(MarkAttendanceCommand.MESSAGE_SUCCESS, validStudent.getName(), "present", date),
+                result.getFeedbackToUser());
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_studentNotFound_throwsCommandException() {
+        ModelStubWithNoStudent modelStub = new ModelStubWithNoStudent();
+        Attendance attendance = new Attendance("present");
+        LocalDate date = LocalDate.of(2023, 10, 9);
+        MarkAttendanceCommand command = new MarkAttendanceCommand(new Name("John"), date, attendance);
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
-
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertThrows(CommandException.class, "Student not found: John", () -> command.execute(modelStub));
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_invalidAttendanceStatus_throwsCommandException() {
+        ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
+        Student validStudent = new StudentBuilder().withName("John Doe").build();
+        modelStub.addStudent(validStudent);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(IllegalArgumentException.class, () -> new Attendance("unknown"));
     }
 
-    @Test
-    public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
 
-        // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
 
-        // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
 
-        // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
-    }
-
-    @Test
-    public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
-    }
-
-    /**
-     * A default model stub that have all of the methods failing.
-     */
     private class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -161,7 +138,6 @@ public class AddCommandTest {
         }
 
 
-
         @Override
         public Person getPersonByName(Name name) {
             return null;
@@ -206,39 +182,57 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single student.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithStudent extends ModelStub {
+        private final Student student;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithStudent(Student student) {
+            requireNonNull(student);
+            this.student = student;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public Student getStudentByName(Name name) {
+            requireNonNull(name);
+            if (this.student.getName().equals(name)) {
+                return this.student;
+            }
+            return null; // No student found with this name
         }
+
+        @Override
+        public boolean hasStudent(Student student) {
+            requireNonNull(student);
+            return this.student.isSamePerson(student);
+        }
+
+        @Override
+        public void addStudent(Student student) {
+            requireNonNull(student);
+        }
+
     }
 
+
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the student being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingStudentAdded extends ModelStub {
+        final ArrayList<Person> studentsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasStudent(Student student) {
+            requireNonNull(student);
+            // Student student = (Student) person;
+            return studentsAdded.stream().map(p -> (Student) p).anyMatch(student::isSameStudent);
         }
 
+
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addStudent(Student student) {
+            requireNonNull(student);
+            studentsAdded.add(student);
         }
 
         @Override
@@ -247,4 +241,15 @@ public class AddCommandTest {
         }
     }
 
+    private class ModelStubWithNoStudent extends ModelStub {
+        @Override
+        public Student getStudentByName(Name name) {
+            return null;
+        }
+
+        @Override
+        public boolean hasStudent(Student student) {
+            return false;
+        }
+    }
 }

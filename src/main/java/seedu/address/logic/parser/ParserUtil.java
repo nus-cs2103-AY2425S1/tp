@@ -13,10 +13,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PersonAttendance;
 import seedu.address.model.person.Phone;
+import seedu.address.model.student.Attendance;
+import seedu.address.model.student.StudentNumber;
+import seedu.address.model.student.TutorialGroup;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -125,6 +128,31 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String tutorialGroup} into a {@code TutorialGroup}.
+     */
+    public static TutorialGroup parseTutorialGroup(String tutorialGroup) throws ParseException {
+        requireNonNull(tutorialGroup);
+        String trimmedTutorialGroup = tutorialGroup.trim();
+        if (!TutorialGroup.isValidTutorialGroup(trimmedTutorialGroup)) {
+            throw new ParseException(TutorialGroup.MESSAGE_CONSTRAINTS);
+        }
+        return new TutorialGroup(trimmedTutorialGroup);
+    }
+
+    /**
+     * Parses a {@code String studentNumber} into a {@code StudentNumber}.
+     */
+    public static StudentNumber parseStudentNumber(String studentNumber) throws ParseException {
+        requireNonNull(studentNumber);
+        String trimmedStudentNumber = studentNumber.trim();
+        if (!StudentNumber.isValidStudentNumber(trimmedStudentNumber)) {
+            throw new ParseException(StudentNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new StudentNumber(trimmedStudentNumber);
+    }
+
     /**
      * Parses a {@code String date} into a {@code LocalDate} object.
      * The date is expected to be in the format 'YYYY-MM-DD'.
@@ -156,11 +184,9 @@ public class ParserUtil {
     public static Attendance parseAttendance(String status) throws ParseException {
         requireNonNull(status);
         String trimmedStatus = status.trim();
-        if (!Attendance.isValidAttendance(trimmedStatus)) {
+        if (!PersonAttendance.isValidAttendance(trimmedStatus)) {
             throw new ParseException("Invalid attendance status. It must be either 'present' or 'absent'.");
         }
         return new Attendance(trimmedStatus);
     }
-
-
 }
