@@ -47,6 +47,15 @@ public class MedCon implements Comparable<MedCon> {
         return value.hashCode();
     }
 
+    /**
+     * Compares this {@code MedCon} object with the specified {@code MedCon} object for order.
+     * Returns a negative integer, zero, or a positive integer if this {@code MedCon}
+     * is lexicographically less than, equal to, or greater than the specified {@code MedCon}.
+     *
+     * @param other the {@code MedCon} object to be compared.
+     * @return a negative integer, zero, or a positive integer as this {@code MedCon}
+     *         is less than, equal to, or greater than the specified {@code MedCon}.
+     */
     @Override
     public int compareTo(MedCon other) {
         return this.value.compareTo(other.value);

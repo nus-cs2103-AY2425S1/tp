@@ -59,6 +59,15 @@ public class Tag implements Comparable<Tag> {
         return '[' + tagName + ']';
     }
 
+    /**
+     * Compares this {@code Tag} object with the specified {@code Tag} object for order.
+     * Returns a negative integer, zero, or a positive integer if this {@code Tag}
+     * is lexicographically less than, equal to, or greater than the specified {@code Tag}.
+     *
+     * @param other the {@code Tag} object to be compared.
+     * @return a negative integer, zero, or a positive integer as this {@code Tag}
+     *         is less than, equal to, or greater than the specified {@code Tag}.
+     */
     @Override
     public int compareTo(Tag other) {
         return this.tagName.compareTo(other.tagName);
