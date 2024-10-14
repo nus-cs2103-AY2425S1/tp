@@ -27,6 +27,10 @@ This project uses
 the [Feature Branch Flow](https://nus-cs2103-ay2425s1.github.io/website/se-book-adapted/chapters/revisionControl.html#feature-branch-flow)
 with rules set to protect the `master` branch. PRs are mandatory and at least 1 member requires review.
 
+> Feature branches are branches being used to develop an individual story. They should be named "
+> {issue-number}-{summary}" where "{issue-number}" is the issue number corresponding to the feature you are implementing
+> and "{summary}" is a brief summary of the feature `formatted-like-this`.
+
 ## Acknowledgement
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
