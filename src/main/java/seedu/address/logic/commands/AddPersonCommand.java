@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonDescriptor;
 
 /**
  * Adds a person to the address book.
@@ -18,32 +18,33 @@ import seedu.address.model.person.Person;
 public class AddPersonCommand extends AddCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + "person"
-            + ": Adds a person to the address book. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " " + "person" + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+        + ": Adds a person to the address book. "
+        + "Parameters: "
+        + PREFIX_NAME + "NAME "
+        + PREFIX_PHONE + "PHONE "
+        + PREFIX_EMAIL + "EMAIL "
+        + PREFIX_ADDRESS + "ADDRESS "
+        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "Example: " + COMMAND_WORD + " " + "person" + " "
+        + PREFIX_NAME + "John Doe "
+        + PREFIX_PHONE + "98765432 "
+        + PREFIX_EMAIL + "johnd@example.com "
+        + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+        + PREFIX_TAG + "friends "
+        + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
-    private final Person toAdd;
+    private final PersonDescriptor toAdd;
+    private int personId;
 
     /**
      * Creates an AddPersonCommand to add the specified {@code Person}
      */
-    public AddPersonCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddPersonCommand(PersonDescriptor personDescriptor) {
+        requireNonNull(personDescriptor);
+        toAdd = personDescriptor;
     }
 
     @Override
@@ -53,7 +54,7 @@ public class AddPersonCommand extends AddCommand {
 
     @Override
     protected void addEntity(Model model) {
-        model.addPerson(toAdd);
+        personId = model.addPerson(toAdd);
     }
 
     @Override
@@ -78,18 +79,17 @@ public class AddPersonCommand extends AddCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddPersonCommand)) {
+        if (!(other instanceof AddPersonCommand otherAddPersonCommand)) {
             return false;
         }
 
-        AddPersonCommand otherAddPersonCommand = (AddPersonCommand) other;
         return toAdd.equals(otherAddPersonCommand.toAdd);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .toString();
+            .add("toAdd", toAdd)
+            .toString();
     }
 }

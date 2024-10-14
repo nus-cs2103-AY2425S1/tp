@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonDescriptor;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -34,7 +35,7 @@ public class ModelManager implements Model {
             ReadOnlyAppointmentBook appointmentBook,
             ReadOnlyUserPrefs userPrefs) {
 
-        requireAllNonNull(addressBook, appointmentBook, userPrefs);
+        // requireAllNonNull(addressBook, appointmentBook, userPrefs);
 
         logger.fine("Initializing with address book: "
                 + addressBook
@@ -44,10 +45,15 @@ public class ModelManager implements Model {
                 + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        this.appointmentBook = new AppointmentBook(appointmentBook);
+        // Todo:
+        this.appointmentBook = null;
+        // this.appointmentBook = new AppointmentBook(appointmentBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredAppointments = new FilteredList<>(this.appointmentBook.getAppointmentList());
+
+        // Todo:
+        filteredAppointments = null;
+        // filteredAppointments = new FilteredList<>(this.appointmentBook.getAppointmentList());
     }
 
     public ModelManager() {
@@ -108,14 +114,21 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasPerson(PersonDescriptor personDescriptor) {
+        requireNonNull(personDescriptor);
+        return addressBook.hasPerson(personDescriptor);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
+    public int addPerson(PersonDescriptor person) {
+        int id = addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return id;
     }
 
     @Override
