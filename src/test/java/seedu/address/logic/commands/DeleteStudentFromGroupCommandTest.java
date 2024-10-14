@@ -41,7 +41,7 @@ public class DeleteStudentFromGroupCommandTest {
     public void setUp() {
         model = new ModelStubDeleteStudentFromGroup();
     }
-    
+
     @Test
     public void execute_studentExistsInGroup_success() throws CommandException {
         DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(validGroup.getGroupName(),
