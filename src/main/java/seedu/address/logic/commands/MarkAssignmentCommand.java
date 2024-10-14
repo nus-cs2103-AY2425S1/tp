@@ -58,4 +58,16 @@ public class MarkAssignmentCommand extends Command {
         }
         return new CommandResult(SUCCESS_MESSAGE);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof MarkAssignmentCommand)) {
+            return false;
+        }
+        MarkAssignmentCommand e = (MarkAssignmentCommand) other;
+        return assignment.equals(e.assignment) && targetIndex == e.targetIndex;
+    }
 }

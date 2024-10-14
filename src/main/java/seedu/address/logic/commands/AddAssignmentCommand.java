@@ -31,6 +31,8 @@ public class AddAssignmentCommand extends Command {
      * @param assignment The assignment to be added.
      */
     public AddAssignmentCommand(Assignment assignment) {
+        requireNonNull(assignment);
+
         this.assignment = assignment;
     }
 
@@ -44,5 +46,17 @@ public class AddAssignmentCommand extends Command {
 
         model.addAssignment(assignment);
         return new CommandResult(SUCCESS_MESSAGE + "\n" + assignment.toString());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof AddAssignmentCommand)) {
+            return false;
+        }
+        AddAssignmentCommand e = (AddAssignmentCommand) other;
+        return assignment.equals(e.assignment);
     }
 }
