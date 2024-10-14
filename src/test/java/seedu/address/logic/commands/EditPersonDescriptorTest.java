@@ -47,7 +47,7 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different relationship -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withRelationship("Mother").build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withRelationship("Sister").build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
