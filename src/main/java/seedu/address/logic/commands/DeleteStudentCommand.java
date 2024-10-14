@@ -1,12 +1,12 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.student.StudentNumber.isValidStudentNumber;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.student.StudentNumber.isValidStudentNumber;
 
 /**
  * Deletes a student from the system based on the student number provided.
