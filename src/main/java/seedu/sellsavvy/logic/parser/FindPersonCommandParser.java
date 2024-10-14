@@ -9,7 +9,7 @@ import seedu.sellsavvy.logic.parser.exceptions.ParseException;
 import seedu.sellsavvy.model.person.NameContainsKeywordsPredicate;
 
 /**
- * Parses input arguments and creates a new FindPersonCommand object
+ * Parses input arguments and creates a new FindPersonCommand object.
  */
 public class FindPersonCommandParser implements Parser<FindPersonCommand> {
 

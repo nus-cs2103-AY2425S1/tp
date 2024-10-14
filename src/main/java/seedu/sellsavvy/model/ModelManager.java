@@ -111,6 +111,11 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public Model createCopy() {
+        return new ModelManager(addressBook.createCopy(), userPrefs);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
