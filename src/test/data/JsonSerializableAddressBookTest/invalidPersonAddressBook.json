@@ -1,6 +1,7 @@
 {
   "persons": [ {
     "name": "Hans Muster",
-    "id": "P123D5"
+    "id": "P123D5",
+    "ward" : "A1"
   } ]
 }

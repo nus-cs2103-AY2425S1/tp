@@ -14,6 +14,7 @@ public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_ID = "P12345";
+    public static final String DEFAULT_WARD = "A1";
     /*
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
@@ -38,8 +39,8 @@ public class PersonBuilder {
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         id = new Id(DEFAULT_ID);
+        ward = new Ward(DEFAULT_WARD);
         /*
-        ward = new Ward("temp");
         diagnosis = new Diagnosis("temp");
         medication = new Medication("temp");
         phone = new Phone(DEFAULT_PHONE);
@@ -55,6 +56,7 @@ public class PersonBuilder {
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
         id = personToCopy.getId();
+        ward = personToCopy.getWard();
         /*
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
@@ -77,6 +79,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withId(String id) {
         this.id = new Id(id);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Ward} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withWard(String ward) {
+        this.ward = new Ward(ward);
         return this;
     }
 
@@ -115,7 +125,7 @@ public class PersonBuilder {
     */
 
     public Person build() {
-        return new Person(name, id);
+        return new Person(name, id, ward);
     }
 
 }

@@ -1,9 +1,11 @@
 {
   "persons": [ {
     "name": "Alice Pauline",
-    "id": "P23456"
+    "id": "P23456",
+    "ward" : "A1"
   }, {
     "name": "Alice Pauline",
-    "id": "P12345"
+    "id": "P12345",
+    "ward" : "A1"
   } ]
 }

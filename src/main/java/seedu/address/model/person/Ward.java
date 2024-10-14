@@ -12,7 +12,7 @@ public class Ward {
             "WARD must be alphanumeric and have a specific format "
                     + "(e.g., A capital letter followed by a number) - A2.\n"
                     + "It should not include special characters or spaces (e.g., 'A 1' would be invalid).\n";
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]+$";
+    public static final String VALIDATION_REGEX = "^[A-Z]\\d$";
     public final String value;
 
     /**

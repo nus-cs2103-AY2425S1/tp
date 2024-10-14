@@ -10,6 +10,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Ward;
 //import seedu.address.model.person.Phone;
 //import seedu.address.model.tag.Tag;
 
@@ -49,6 +50,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withId(String id) {
         descriptor.setId(new Id(id));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Ward} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withWard(String ward) {
+        descriptor.setWard(new Ward(ward));
         return this;
     }
 

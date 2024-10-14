@@ -5,13 +5,18 @@ import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_WARD_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WARD_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.WARD_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.WARD_DESC_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WARD;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -23,6 +28,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Ward;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
@@ -33,7 +39,7 @@ public class AddCommandParserTest {
         Person expectedPerson = new PersonBuilder(BOB).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + ID_DESC_BOB, new AddCommand(expectedPerson));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + ID_DESC_BOB + WARD_DESC_BOB, new AddCommand(expectedPerson));
 
         /*
         // multiple tags - all accepted
@@ -48,7 +54,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
-        String validExpectedPersonString = NAME_DESC_BOB + ID_DESC_BOB;
+        String validExpectedPersonString = NAME_DESC_BOB + ID_DESC_BOB + WARD_DESC_BOB;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -56,6 +62,9 @@ public class AddCommandParserTest {
         // multiple id
         assertParseFailure(parser, ID_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ID));
+        // multiple ward
+        assertParseFailure(parser, WARD_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_WARD));
         /*
         // multiple phones
         assertParseFailure(parser, PHONE_DESC_AMY + validExpectedPersonString,
@@ -86,6 +95,9 @@ public class AddCommandParserTest {
         // invalid id
         assertParseFailure(parser, INVALID_ID_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ID));
+        // invalid ward
+        assertParseFailure(parser, INVALID_WARD_DESC + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_WARD));
         /*
         // invalid email
         assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedPersonString,
@@ -134,11 +146,15 @@ public class AddCommandParserTest {
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + ID_DESC_BOB,
+        assertParseFailure(parser, VALID_NAME_BOB + ID_DESC_BOB + WARD_DESC_BOB,
                 expectedMessage);
 
         // missing id prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_ID_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_ID_BOB + WARD_DESC_BOB,
+                expectedMessage);
+
+        // missing ward prefix
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + VALID_WARD_BOB,
                 expectedMessage);
         /*
 
@@ -163,10 +179,13 @@ public class AddCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + ID_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC + ID_DESC_BOB + WARD_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // invalid id
-        assertParseFailure(parser, NAME_DESC_BOB + INVALID_ID_DESC, Id.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_BOB + INVALID_ID_DESC + WARD_DESC_BOB, Id.MESSAGE_CONSTRAINTS);
+
+        // invalid ward
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + INVALID_WARD_DESC, Ward.MESSAGE_CONSTRAINTS);
 
         /*
         // invalid email
