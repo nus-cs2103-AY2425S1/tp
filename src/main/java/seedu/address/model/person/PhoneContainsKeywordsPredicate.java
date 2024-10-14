@@ -26,9 +26,7 @@ public class PhoneContainsKeywordsPredicate implements Predicate<Person> {
      */
     @Override
     public boolean test(Person person) {
-        return keywords.isEmpty()
-            ? false
-            : keywords.stream()
+        return keywords.stream()
                 .anyMatch(keyword -> person.getPhone().value.contains(keyword));
     }
 

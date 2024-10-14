@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -118,6 +120,12 @@ public class FindCommandTest {
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
     }
+    @Test
+    public void execute_nullPhonePredicate_throwsNullPointerException() {
+        // Create a FindCommand with a null predicate, expect a NullPointerException
+        assertThrows(NullPointerException.class, () -> new FindCommand(null));
+    }
+
 
     private Predicate<Person> preparePredicate(String userInput) {
         String[] keywords = userInput.split("\\s+");

@@ -41,9 +41,4 @@ public class CombinedPredicate implements Predicate<Person> {
         return namePredicate.equals(otherPredicate.namePredicate)
                 && phonePredicate.equals(otherPredicate.phonePredicate);
     }
-
-    @Override
-    public int hashCode() {
-        return namePredicate.hashCode() + phonePredicate.hashCode();
-    }
 }

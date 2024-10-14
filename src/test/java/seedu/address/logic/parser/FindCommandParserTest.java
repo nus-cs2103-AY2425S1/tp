@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -60,5 +62,19 @@ public class FindCommandParserTest {
         // Multiple whitespaces between mixed keywords
         assertParseSuccess(parser, " \n Alice \n \t 12345  \t", expectedFindCommand);
     }
+    @Test
+    public void parse_nullArgs_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> parser.parse(null));
+    }
+
+    @Test
+    public void equals_sameObject_returnsTrue() {
+        // Create a PhoneContainsKeywordsPredicate
+        PhoneContainsKeywordsPredicate predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("12345"));
+
+        // Check if the same object returns true when compared with itself
+        assertTrue(predicate.equals(predicate));
+    }
+
 
 }
