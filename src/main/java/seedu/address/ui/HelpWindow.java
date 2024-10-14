@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.awt.*;
+import java.net.URI;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -7,6 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -16,16 +21,47 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE =
+            "============================================================================================\n" +
+            "   H E L P   M E N U\n" +
+            "============================================================================================\n" +
+            "\n1. Add Student\n" +
+            "   - Purpose: Adds a student and their details to the address book.\n" +
+            "   - Command Format:\n" +
+            "       add id/ [STUDENT_ID] n/ [STUDENT_NAME] p/ [PHONE_NUMBER] a/ [ADDRESS] c/ [COURSE] t/ [TAGS]\n" +
+            "   - Example:\n" +
+            "       add id/ 12345678 n/ John Doe p/ 99999999 a/ 123 Jane Doe Road c/ Computer Science t/ Student\n" +
+            "\n2. Add a Student Grade\n" +
+            "   - Purpose: Adds a grade for a student in a module.\n" +
+            "   - Command Format:\n" +
+            "       grade id/ [STUDENT_ID] m/ [MODULE] g/ [GRADE]\n" +
+            "   - Example:\n" +
+            "       grade id/ 12345678 m/ CS2103T g/ A\n" +
+            "\n3. Edit Student\n" +
+            "   - Purpose: Edits a student's details except for tag and course.\n" +
+            "   - Command Format:\n" +
+            "       edit [STUDENT_ID] [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]\n" +
+            "   - Editable Fields:\n" +
+            "       n/ [STUDENT_NAME], p/ [PHONE_NUMBER], e/ [EMAIL], a/ [ADDRESS]\n" +
+            "   - Example:\n" +
+            "       edit 12345678 n/ Jane Doe p/ 88888888 e/ janedoe@gmail.com a/ 456 John Doe Road\n" +
+            "\n4. Delete Student\n" +
+            "   - Purpose: Removes a student from the address book.\n" +
+            "   - Command Format:\n" +
+            "       delete id/ [STUDENT_ID]\n" +
+            "   - Example:\n" +
+            "       delete id/ 12345678\n" +
+            "\n============================================================================================\n" +
+            "For more details, refer to the user guide:";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML
-    private Button copyButton;
+    private Label helpMessage;
 
     @FXML
-    private Label helpMessage;
+    private Text hyperlinkText;
 
     /**
      * Creates a new HelpWindow.
@@ -35,6 +71,24 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        hyperlinkText.setOnMouseClicked(this::openUserGuide);
+        hyperlinkText.setFill(Color.rgb(173, 216, 230));
+        hyperlinkText.setUnderline(true);
+    }
+
+    /**
+     * Opens the user guide in the default web browser when the hyperlink is clicked.
+     *
+     * @param event The mouse event triggered when the hyperlink is clicked.
+     * @throws Exception If there is an error while trying to open the user guide,
+     *                   such as an invalid URI or inability to access the browser.
+     */
+    private void openUserGuide(MouseEvent event) {
+        try {
+            Desktop.getDesktop().browse(new URI(USERGUIDE_URL));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -87,16 +141,5 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
-    }
-
-    /**
-     * Copies the URL to the user guide to the clipboard.
-     */
-    @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
     }
 }
