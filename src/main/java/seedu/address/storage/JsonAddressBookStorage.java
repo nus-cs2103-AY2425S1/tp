@@ -107,14 +107,14 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     /**
      * Similar to {@link #saveArchivedAddressBook(ReadOnlyAddressBook)}.
      *
-     * @param filePath location of the data. Cannot be null.
+     * @param archivePath location of the data. Cannot be null.
      */
-    public void saveArchivedAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveArchivedAddressBook(ReadOnlyAddressBook addressBook, Path archivePath) throws IOException {
         requireNonNull(addressBook);
-        requireNonNull(filePath);
+        requireNonNull(archivePath);
 
-        FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        FileUtil.createIfMissing(archivePath);
+        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), archivePath);
     }
 
 }
