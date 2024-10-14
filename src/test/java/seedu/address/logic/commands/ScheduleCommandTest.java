@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -31,11 +33,12 @@ public class ScheduleCommandTest {
     @Test
     public void execute_validSchedule_success() {
         Person personToSchedule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Schedule validSchedule = new Schedule("2024-10-04 1000");
+        Schedule validSchedule = new Schedule("2024-10-04 1000", "");
 
         ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), validSchedule);
 
-        Person scheduledPerson = new PersonBuilder(personToSchedule).withSchedule(validSchedule.dateTime).build();
+        Person scheduledPerson = new PersonBuilder(personToSchedule)
+                .withSchedule(validSchedule.dateTime, validSchedule.getNotes()).build();
 
         String expectedMessage = String.format(ScheduleCommand.MESSAGE_SUCCESS,
                 validSchedule, personToSchedule.getName());
@@ -49,7 +52,7 @@ public class ScheduleCommandTest {
     @Test
     public void execute_invalidTime_throwsCommandException() {
         Person personToSchedule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Schedule invalidSchedule = new Schedule("2024-10-05 1730"); // Outside working hours
+        Schedule invalidSchedule = new Schedule("2024-10-05 1730", ""); // Outside working hours
 
         ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), invalidSchedule);
 
@@ -59,10 +62,11 @@ public class ScheduleCommandTest {
     @Test
     public void execute_slotTaken_throwsCommandException() throws CommandException {
         Person personToSchedule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Schedule takenSchedule = new Schedule("2024-10-04 1000");
+        Schedule takenSchedule = new Schedule("2024-10-04 1000", "");
 
         // Schedule first person with the time slot
-        Person scheduledPerson = new PersonBuilder(personToSchedule).withSchedule(takenSchedule.dateTime).build();
+        Person scheduledPerson = new PersonBuilder(personToSchedule)
+                .withSchedule(takenSchedule.dateTime, takenSchedule.getNotes()).build();
         model.setPerson(personToSchedule, scheduledPerson);
 
         // Try to schedule another person with the same time slot
@@ -73,14 +77,15 @@ public class ScheduleCommandTest {
 
     @Test
     public void execute_personNotFound_throwsCommandException() {
-        ScheduleCommand command = new ScheduleCommand("Unknown Person", new Schedule("2024-10-05 1000"));
+        ScheduleCommand command = new ScheduleCommand("Unknown Person",
+                new Schedule("2024-10-05 1000", ""));
 
         assertCommandFailure(command, model, ScheduleCommand.MESSAGE_INVALID_NAME);
     }
     @Test
     public void execute_scheduleOnWeekend_throwsCommandException() {
         Person personToSchedule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Schedule weekendSchedule = new Schedule("2024-10-06 1000"); // Saturday
+        Schedule weekendSchedule = new Schedule("2024-10-06 1000", ""); // Saturday
 
         ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), weekendSchedule);
 
@@ -90,7 +95,7 @@ public class ScheduleCommandTest {
     @Test
     public void execute_scheduleBeforeWorkingHours_throwsCommandException() {
         Person personToSchedule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Schedule earlySchedule = new Schedule("2024-10-04 0800"); // Before 9 AM
+        Schedule earlySchedule = new Schedule("2024-10-04 0800", ""); // Before 9 AM
 
         ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), earlySchedule);
 
@@ -100,7 +105,7 @@ public class ScheduleCommandTest {
     @Test
     public void execute_scheduleAfterWorkingHours_throwsCommandException() {
         Person personToSchedule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Schedule lateSchedule = new Schedule("2024-10-04 1800"); // After 5 PM
+        Schedule lateSchedule = new Schedule("2024-10-04 1800", ""); // After 5 PM
 
         ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), lateSchedule);
 
@@ -110,11 +115,36 @@ public class ScheduleCommandTest {
     @Test
     public void execute_scheduleNotOnTheHour_throwsCommandException() {
         Person personToSchedule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Schedule notOnTheHourSchedule = new Schedule("2024-10-04 1015"); // Not on the hour
+        Schedule notOnTheHourSchedule = new Schedule("2024-10-04 1015", ""); // Not on the hour
 
         ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), notOnTheHourSchedule);
 
         assertCommandFailure(command, model, ScheduleCommand.MESSAGE_INVALID_TIME);
     }
 
+    @Test
+    public void equals() {
+        Schedule schedule1 = new Schedule("2024-10-04 1000", "Meeting with client");
+        Schedule schedule2 = new Schedule("2024-10-04 1000", "Meeting with client");
+        Schedule schedule3 = new Schedule("2024-10-05 1000", "Lunch with team");
+        Schedule schedule4 = new Schedule("2024-10-04 1100", "Meeting with client");
+
+        // same values -> returns true
+        assertTrue(schedule1.equals(schedule2));
+
+        // same object -> returns true
+        assertTrue(schedule1.equals(schedule1));
+
+        // null -> returns false
+        assertFalse(schedule1.equals(null));
+
+        // different types -> returns false
+        assertFalse(schedule1.equals(5));
+
+        // different dateTime -> returns false
+        assertFalse(schedule1.equals(schedule4));
+
+        // different notes -> returns false
+        assertFalse(schedule1.equals(schedule3));
+    }
 }

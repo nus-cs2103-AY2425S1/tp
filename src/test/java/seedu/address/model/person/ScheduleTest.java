@@ -10,22 +10,22 @@ public class ScheduleTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Schedule(null));
+        assertThrows(NullPointerException.class, () -> new Schedule(null, ""));
     }
 
     @Test
     public void toString_validDateTime_returnsString() {
         String validDateTime = "2024-10-04 1000";
-        Schedule schedule = new Schedule(validDateTime);
+        Schedule schedule = new Schedule(validDateTime, "");
         assertTrue(schedule.toString().equals(validDateTime));
     }
 
     @Test
     public void equals() {
-        Schedule schedule = new Schedule("2024-10-04 1000");
+        Schedule schedule = new Schedule("2024-10-04 1000", "");
 
         // same values -> returns true
-        assertTrue(schedule.equals(new Schedule("2024-10-04 1000")));
+        assertTrue(schedule.equals(new Schedule("2024-10-04 1000", "")));
 
         // same object -> returns true
         assertTrue(schedule.equals(schedule));
@@ -37,13 +37,13 @@ public class ScheduleTest {
         assertFalse(schedule.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(schedule.equals(new Schedule("2024-10-05 1000")));
+        assertFalse(schedule.equals(new Schedule("2024-10-05 1000", "")));
     }
 
     @Test
     public void hashCode_sameValues_sameHashCode() {
-        Schedule schedule1 = new Schedule("2024-10-04 1000");
-        Schedule schedule2 = new Schedule("2024-10-04 1000");
+        Schedule schedule1 = new Schedule("2024-10-04 1000", "");
+        Schedule schedule2 = new Schedule("2024-10-04 1000", "");
 
         // same schedule values should produce the same hash code
         assertTrue(schedule1.hashCode() == schedule2.hashCode());
@@ -51,8 +51,8 @@ public class ScheduleTest {
 
     @Test
     public void hashCode_differentValues_differentHashCode() {
-        Schedule schedule1 = new Schedule("2024-10-04 1000");
-        Schedule schedule2 = new Schedule("2024-10-05 1000");
+        Schedule schedule1 = new Schedule("2024-10-04 1000", "");
+        Schedule schedule2 = new Schedule("2024-10-05 1000", "");
 
         // different schedule values should produce different hash codes
         assertFalse(schedule1.hashCode() == schedule2.hashCode());

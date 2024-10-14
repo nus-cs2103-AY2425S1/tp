@@ -41,7 +41,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        schedule = new Schedule(DEFAULT_SCHEDULE);
+        schedule = new Schedule(DEFAULT_SCHEDULE, "");
         reminder = new Reminder(DEFAULT_SCHEDULE, DEFAULT_REMINDER);
         tags = new HashSet<>();
     }
@@ -102,8 +102,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code Schedule} of the {@code Person} that we are building.
      */
-    public PersonBuilder withSchedule(String dateTime) {
-        this.schedule = new Schedule(dateTime);
+    public PersonBuilder withSchedule(String dateTime, String note) {
+        this.schedule = new Schedule(dateTime, note);
         return this;
     }
 
