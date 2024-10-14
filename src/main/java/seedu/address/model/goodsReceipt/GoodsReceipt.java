@@ -1,10 +1,9 @@
 package seedu.address.model.goodsReceipt;
 
+import java.time.LocalDateTime;
+
 import seedu.address.model.goods.Goods;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-
-import java.time.LocalDateTime;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;

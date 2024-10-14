@@ -1,13 +1,7 @@
 package seedu.address.model.goods;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDateTime;
-
-import seedu.address.model.goodsReceipt.Date;
-import seedu.address.model.person.Name;
 
 /**
  * Represents goods.
