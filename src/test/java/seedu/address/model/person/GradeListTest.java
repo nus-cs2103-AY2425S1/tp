@@ -52,7 +52,7 @@ public class GradeListTest {
     @Test
     public void equals() {
         Grade firstGrade = new Grade("Midterm", 86.4F, 25.0F);
-        Grade secondGrade = new Grade("FInal", 86.4F, 25.0F);
+        Grade secondGrade = new Grade("Final", 86.4F, 25.0F);
         Grade thirdGrade = new Grade("Midterm", 86.5F, 25.0F);
         Grade fourthGrade = new Grade("Midterm", 86.4F, 25.0F);
 

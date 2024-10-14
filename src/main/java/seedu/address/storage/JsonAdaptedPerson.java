@@ -124,5 +124,4 @@ class JsonAdaptedPerson {
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelGradeList,
                           modelAttendancelist);
     }
-
 }
