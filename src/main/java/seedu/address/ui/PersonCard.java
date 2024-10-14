@@ -70,10 +70,12 @@ public class PersonCard extends UiPart<Region> {
         case "SILVER" -> tierLabel.getStyleClass().add("silver-tier");
         case "BRONZE" -> tierLabel.getStyleClass().add("bronze-tier");
         case "REJECT" -> tierLabel.getStyleClass().add("reject-tier");
-        default -> tierLabel.getStyleClass().add("no-tier");
+        default -> tierLabel = null;
         }
-        // Add the label to the FlowPane
-        tags.getChildren().add(tierLabel);
+        if (tierLabel != null) {
+            // Add the label to the FlowPane
+            tags.getChildren().add(tierLabel);
+        }
     }
 
 }
