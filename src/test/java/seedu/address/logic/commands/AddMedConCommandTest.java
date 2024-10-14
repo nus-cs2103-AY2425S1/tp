@@ -87,4 +87,30 @@ public class AddMedConCommandTest {
                 .orElseThrow(() -> new AssertionError("Person not found"));
         assertEquals(initialMedConSet, updatedAlice.getMedCons());
     }
+
+    @Test
+    public void execute_duplicateMedCon_throwsCommandException() {
+        // Setup data
+        Nric aliceNric = ALICE.getNric();
+        Set<MedCon> initialMedConSet = new HashSet<>();
+        initialMedConSet.add(new MedCon(VALID_MEDCON_AMY));
+
+        // Add initial medical condition
+        AddMedConCommand addMedConCommand = new AddMedConCommand(aliceNric, initialMedConSet);
+        try {
+            addMedConCommand.execute(model);
+        } catch (CommandException e) {
+            throw new AssertionError("Initial addMedConCommand should succeed.", e);
+        }
+
+        // Attempt to add the same medical condition again to trigger duplicate check
+        Set<MedCon> duplicateMedConSet = new HashSet<>();
+        duplicateMedConSet.add(new MedCon(VALID_MEDCON_AMY));
+        AddMedConCommand addDuplicateMedConCommand = new AddMedConCommand(aliceNric, duplicateMedConSet);
+
+        // Ensure CommandException is thrown for duplicate medical condition
+        assertThrows(CommandException.class, () -> addDuplicateMedConCommand.execute(model),
+                "Expected CommandException due to duplicate medical condition.");
+    }
+
 }

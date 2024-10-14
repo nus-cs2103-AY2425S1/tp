@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_LENGTH;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDCON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
@@ -42,7 +43,7 @@ public class AddMedConCommandParser implements Parser<AddMedConCommand> {
         Set<MedCon> medCons = new HashSet<>();
         for (String medConStr : argMultimap.getAllValues(PREFIX_MEDCON)) {
             if (medConStr.length() > 45) {
-                throw new ParseException("Medical condition length exceeds the limit of 45 characters");
+                throw new ParseException(MESSAGE_CONSTRAINTS_LENGTH);
             }
             medCons.add(new MedCon(medConStr));
         }
