@@ -6,7 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REQUIREMENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddJobCommand;
@@ -17,6 +19,8 @@ import seedu.address.model.job.JobDescription;
 import seedu.address.model.job.JobName;
 import seedu.address.model.job.JobRequirements;
 import seedu.address.model.job.JobSalary;
+import seedu.address.model.skill.Skill;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddJobCommand object
@@ -41,7 +45,7 @@ public class AddJobCommandParser implements Parser<AddJobCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_COMPANY,
                             PREFIX_SALARY, PREFIX_REQUIREMENTS, PREFIX_DESCRIPTION);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_COMPANY, PREFIX_SALARY)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_COMPANY, PREFIX_SALARY, PREFIX_DESCRIPTION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddJobCommand.MESSAGE_USAGE));
         }
@@ -51,8 +55,8 @@ public class AddJobCommandParser implements Parser<AddJobCommand> {
         JobName name = ParserUtil.parseJobName(argMultimap.getValue(PREFIX_NAME).get());
         JobCompany company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
         JobSalary salary = ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get());
-        JobRequirements requirements = ParserUtil.parseRequirements(argMultimap.getValue(PREFIX_REQUIREMENTS).get());
         JobDescription description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        Set<Tag> requirements = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_REQUIREMENTS));
 
         Job job = new Job(name, company, salary, description, requirements);
 
