@@ -31,6 +31,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
+   * `reminder John Doe r/1 hour` : Sets a reminder for John Doe 1 hour before his scheduled appointment.
+
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
@@ -85,6 +87,20 @@ A person can have any number of tags (including 0)
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
+### Setting a reminder: `reminder`
+
+Sets a reminder for a client before their appointment in the address book.
+
+Format: `reminder NAME r/REMINDER_TIME`
+
+* You can only set a reminder for a person who already has a scheduled appointment.
+* The reminder time must be a valid expression (e.g. "1 day", "2 hours").
+
+Examples:
+* `reminder John Doe r/10 days`
+* `reminder Betsy Crowe r/3 hours`
+
 
 ### Listing all persons : `list`
 
@@ -193,6 +209,7 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Reminder** | `reminder NAME r/REMINDER_TIME`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
