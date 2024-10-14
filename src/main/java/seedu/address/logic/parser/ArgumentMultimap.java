@@ -75,4 +75,16 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    public void print() {
+        for (Map.Entry<Prefix, List<String>> entry : argMultimap.entrySet()) {
+            Prefix prefix = entry.getKey();
+            List<String> values = entry.getValue();
+
+            System.out.println("Prefix: " + prefix.getPrefix() + ":");
+            for (String value : values) {
+                System.out.println("    - " + value);
+            }
+        }
+    }
 }

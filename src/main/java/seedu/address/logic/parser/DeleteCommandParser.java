@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
@@ -26,7 +28,10 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         String[] trimmedArgs = args.trim().split(" ");
+        System.out.println("Input is this:" + args);
         ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE);
+        System.out.println("Inside delete command");
+        argMultiMap.print();
 
         // Check if the arguments consist of a single word
         if (trimmedArgs.length == 1) {
@@ -35,10 +40,12 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 Index index = ParserUtil.parseIndex(args);
                 return new DeleteCommand(index);
             } catch (ParseException pe) { // cannot parse as index
+                System.out.println("C");
                 // If it is not an index, handle using parseOtherAttributes
                 return parseOtherAttributes(argMultiMap);
             }
         }
+        System.out.println("Entering parseOtherAttributes");
         return parseOtherAttributes(argMultiMap);
     }
 
@@ -52,6 +59,10 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         Optional<String> optionalName = argMultimap.getValue(PREFIX_NAME);
         Optional<String> optionalPhone = argMultimap.getValue(PREFIX_PHONE);
         Optional<String> optionalEmail = argMultimap.getValue(PREFIX_EMAIL);
+        System.out.println(optionalName);
+        System.out.println(optionalPhone);
+        System.out.println(optionalEmail);
+        System.out.println("Optionals have been initialised)");
         if (optionalName.isPresent() && optionalPhone.isPresent()) {
             // find using name and phone
             Name name = ParserUtil.parseName(optionalName.get());
