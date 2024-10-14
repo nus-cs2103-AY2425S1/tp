@@ -1,7 +1,10 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +12,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.EventDescription;
+import seedu.address.model.event.EventDuration;
+import seedu.address.model.event.EventName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -120,5 +126,54 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String eventName} into an {@code EventName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code eventName} is invalid.
+     */
+    public static EventName parseEventName(String eventName) throws ParseException {
+        requireNonNull(eventName);
+        String trimmedEventName = eventName.trim();
+        if (!EventName.isValidName(trimmedEventName)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+        }
+        return new EventName(trimmedEventName);
+    }
+
+    /**
+     * Parses a {@code String eventDescription} into an {@code EventDescription}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code eventDescription} is invalid.
+     */
+    public static EventDescription parseEventDescription(String eventDescription) throws ParseException {
+        requireNonNull(eventDescription);
+        String trimmedEventDescription = eventDescription.trim();
+        return new EventDescription(trimmedEventDescription);
+    }
+
+    /**
+     * Parses a {@code String eventStartDate and String eventEndDate} into an {@code EventDuration}.
+     *
+     * @throws ParseException if the given {@code eventStartDate} or {@code eventEndDate} is invalid.
+     */
+    public static EventDuration parseEventDuration(String eventStartDate, String eventEndDate) throws ParseException {
+        requireAllNonNull(eventStartDate, eventEndDate);
+        String trimmedEventStartDate = eventStartDate.trim();
+        String trimmedEventEndDate = eventEndDate.trim();
+        LocalDate start, end;
+        try {
+            start = LocalDate.parse(trimmedEventStartDate);
+            end = LocalDate.parse(trimmedEventEndDate);
+        } catch (DateTimeParseException exception) {
+            throw new ParseException(EventDuration.MESSAGE_CONSTRAINTS);
+        }
+        if (!EventDuration.isValidDuration(start, end)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+        }
+        return new EventDuration(start, end);
     }
 }
