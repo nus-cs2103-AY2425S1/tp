@@ -31,9 +31,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         String typeOfPerson = nameKeywords[0];
 
         if (typeOfPerson.equals(FindEmployeeCommand.ARGUMENT_WORD)) {
-            return new FindEmployeeCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            return new FindEmployeeCommand(new NameContainsKeywordsPredicate(Arrays.asList(
+                    Arrays.copyOfRange(nameKeywords, 1, nameKeywords.length))));
         } else if (typeOfPerson.equals(FindPotentialCommand.ARGUMENT_WORD)) {
-            return new FindPotentialCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            return new FindPotentialCommand(new NameContainsKeywordsPredicate(Arrays.asList(
+                    Arrays.copyOfRange(nameKeywords, 1, nameKeywords.length))));
         } else {
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         }
