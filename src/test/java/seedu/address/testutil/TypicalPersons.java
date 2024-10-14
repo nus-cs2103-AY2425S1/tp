@@ -84,6 +84,7 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, HOON, IDA, AMY, BOB, JEVAN, KEVIN, LILY));
+        return new ArrayList<>(Arrays.asList(
+                ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, HOON, IDA, AMY, BOB, JEVAN, KEVIN, LILY));
     }
 }

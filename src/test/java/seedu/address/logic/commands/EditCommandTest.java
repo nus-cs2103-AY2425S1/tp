@@ -55,7 +55,8 @@ public class EditCommandTest {
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson = personInList.withName(VALID_NAME_KENT).withPhone(VALID_PHONE_BOB).withIsEmployee(false).build();
+        Person editedPerson = personInList.withName(VALID_NAME_KENT)
+                .withPhone(VALID_PHONE_BOB).withIsEmployee(false).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_KENT)
                 .withPhone(VALID_PHONE_BOB).build();
