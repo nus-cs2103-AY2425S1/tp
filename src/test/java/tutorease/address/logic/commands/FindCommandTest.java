@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorease.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static tutorease.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorease.address.testutil.TypicalLessons.getTypicalLessons;
 import static tutorease.address.testutil.TypicalPersons.CARL;
 import static tutorease.address.testutil.TypicalPersons.ELLE;
 import static tutorease.address.testutil.TypicalPersons.FIONA;
@@ -24,8 +25,8 @@ import tutorease.address.model.person.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalTutorEase(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalTutorEase(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTutorEase(), new UserPrefs(), getTypicalLessons());
+    private Model expectedModel = new ModelManager(getTypicalTutorEase(), new UserPrefs(), getTypicalLessons());
 
     @Test
     public void equals() {

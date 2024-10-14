@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import tutorease.address.commons.exceptions.DataLoadingException;
+import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.ReadOnlyUserPrefs;
 import tutorease.address.model.UserPrefs;
@@ -12,7 +13,7 @@ import tutorease.address.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends TutorEaseStorage, UserPrefsStorage {
+public interface Storage extends TutorEaseStorage, UserPrefsStorage, LessonScheduleStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
@@ -27,6 +28,14 @@ public interface Storage extends TutorEaseStorage, UserPrefsStorage {
     Optional<ReadOnlyTutorEase> readTutorEase() throws DataLoadingException;
 
     @Override
-    void saveTutorEase(ReadOnlyTutorEase addressBook) throws IOException;
+    void saveTutorEase(ReadOnlyTutorEase tutorEase) throws IOException;
 
+    @Override
+    Path getLessonScheduleFilePath();
+
+    @Override
+    Optional<LessonSchedule> readLessonSchedule(ReadOnlyTutorEase tutorEase) throws DataLoadingException;
+
+    @Override
+    void saveLessonSchedule(LessonSchedule lessonSchedule) throws IOException;
 }

@@ -8,13 +8,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import tutorease.address.commons.core.LogsCenter;
-import tutorease.address.logic.commands.AddCommand;
 import tutorease.address.logic.commands.ClearCommand;
 import tutorease.address.logic.commands.Command;
 import tutorease.address.logic.commands.EditCommand;
 import tutorease.address.logic.commands.ExitCommand;
 import tutorease.address.logic.commands.FindCommand;
 import tutorease.address.logic.commands.HelpCommand;
+import tutorease.address.logic.commands.LessonCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -50,9 +50,8 @@ public class TutorEaseParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
         switch (commandWord) {
-
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case ContactCommandParser.COMMAND_WORD:
+            return new ContactCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -66,11 +65,11 @@ public class TutorEaseParser {
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
-        case ContactCommandParser.COMMAND_WORD:
-            return new ContactCommandParser().parse(arguments);
-
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case LessonCommand.COMMAND_WORD:
+            return new LessonCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

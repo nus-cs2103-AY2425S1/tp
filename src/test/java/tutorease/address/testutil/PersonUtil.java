@@ -8,7 +8,7 @@ import static tutorease.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import tutorease.address.logic.commands.AddCommand;
+import tutorease.address.logic.commands.AddContactCommand;
 import tutorease.address.logic.commands.EditCommand.EditPersonDescriptor;
 import tutorease.address.model.person.Person;
 import tutorease.address.model.tag.Tag;
@@ -21,8 +21,9 @@ public class PersonUtil {
     /**
      * Returns an add command string for adding the {@code person}.
      */
-    public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    public static String getAddContactCommand(Person person) {
+        return AddContactCommand.COMMAND_WORD + " " + AddContactCommand.SUB_COMMAND_WORD
+                + " " + getPersonDetails(person);
     }
 
     /**
