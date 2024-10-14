@@ -234,7 +234,7 @@ public class EditCommand extends Command {
 
             Set<Tag> newTags = new HashSet<>(tags);
             addTags.ifPresent(newTags::addAll);
-            getDeleteTags().ifPresent(newTags::removeAll);
+            getDeleteTags().ifPresent(newTags::removeAll); // ignores tag silently if tag to be deleted not found
 
             return Collections.unmodifiableSet(newTags);
         }
