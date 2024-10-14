@@ -19,6 +19,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
+    public static final String MESSAGE_CONCURRENT_RN_RA_FIELDS = "Both remark new and remark append fields are "
+            + "specified, please only use one.";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -48,7 +50,9 @@ public class Messages {
                 .append("; Income: ")
                 .append(person.getIncome())
                 .append("; Tier: ")
-                .append(person.getTier());
+                .append(person.getTier())
+                .append("; Remark: ")
+                .append(person.getRemark());
         return builder.toString();
     }
 

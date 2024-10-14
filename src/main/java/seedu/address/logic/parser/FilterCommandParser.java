@@ -5,8 +5,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
@@ -59,8 +59,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             String substring = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()).value;
             return new FilterCommand(new AddressContainsSubstringPredicate(substring));
         }
-        if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
-            String substring = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_REMARK).get()).value;
+        if (argMultimap.getValue(PREFIX_NEW_REMARK).isPresent()) {
+            String substring = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_NEW_REMARK).get()).value;
             return new FilterCommand(new RemarkContainsSubstringPredicate(substring));
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));

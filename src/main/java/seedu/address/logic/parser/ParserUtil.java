@@ -11,6 +11,7 @@ import seedu.address.model.person.Income;
 import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tier.Tier;
 
 /**
@@ -136,6 +137,22 @@ public class ParserUtil {
             throw new ParseException(Tier.MESSAGE_CONSTRAINTS);
         }
         return new Tier(trimmedTag);
+    }
+
+    /**
+     * Parses a {@code String remark} into a {@code Remark}.
+     * Leading and trailing whitespaces are trimmed.
+     *
+     * @throws ParseException if the given {@code remark} is invalid.
+     */
+    public static Remark parseNewRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        System.out.println(trimmedRemark);
+        return new Remark(trimmedRemark);
     }
 
 }

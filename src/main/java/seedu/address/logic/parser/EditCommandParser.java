@@ -3,14 +3,17 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPEND_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -29,7 +32,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_INCOME, PREFIX_JOB, PREFIX_TAG);
+                        PREFIX_INCOME, PREFIX_JOB, PREFIX_TAG, PREFIX_NEW_REMARK, PREFIX_APPEND_REMARK);
 
         Index index;
 
@@ -39,8 +42,14 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
+        if (ArgumentMultimap.isBothRemarkNewAndRemarkAppendPresent(argMultimap, PREFIX_NEW_REMARK,
+                PREFIX_APPEND_REMARK)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    Messages.MESSAGE_CONCURRENT_RN_RA_FIELDS + EditCommand.MESSAGE_USAGE));
+        }
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_INCOME, PREFIX_JOB);
+                PREFIX_INCOME, PREFIX_JOB, PREFIX_TAG, PREFIX_NEW_REMARK, PREFIX_APPEND_REMARK);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -65,6 +74,14 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
             editPersonDescriptor.setTier(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get()));
         }
+        if (argMultimap.getValue(PREFIX_NEW_REMARK).isPresent()) {
+            editPersonDescriptor.setNewRemark(ParserUtil.parseNewRemark(argMultimap.getValue(PREFIX_NEW_REMARK).get()));
+        }
+        if (argMultimap.getValue(PREFIX_APPEND_REMARK).isPresent()) {
+            editPersonDescriptor.setAppendedRemark(ParserUtil.parseNewRemark(
+                    argMultimap.getValue(PREFIX_APPEND_REMARK).get()));
+        }
+
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }

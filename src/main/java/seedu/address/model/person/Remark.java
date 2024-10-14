@@ -9,6 +9,9 @@ import static java.util.Objects.requireNonNull;
 
 public class Remark {
 
+    public static final String MESSAGE_CONSTRAINTS = "Remarks cannot be empty. They must at least consist of 1 "
+            + "character";
+
     public final String value;
 
     /**
@@ -41,4 +44,22 @@ public class Remark {
     public int hashCode() {
         return value.hashCode();
     }
+
+    public static boolean isValidRemark(String test) {
+        return test != null && !(test.isEmpty());
+    }
+
+    /**
+     * Constructs an {@code Remark}, with the concatenated values of all give {@code Remark remarks}.
+     *
+     * @param remarks Multiple remarks.
+     */
+    public static Remark combineRemarks(Remark... remarks) {
+        StringBuilder combinedValues = new StringBuilder();
+        for (Remark currentRemark: remarks) {
+            combinedValues.append(currentRemark.value + "\n");
+        }
+        return new Remark(combinedValues.toString());
+    }
+
 }
