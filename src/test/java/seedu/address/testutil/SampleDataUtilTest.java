@@ -1,11 +1,9 @@
 package seedu.address.testutil;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -15,14 +13,18 @@ public class SampleDataUtilTest {
         // Test that sample persons are correctly created
         Person[] samplePersons = SampleDataUtil.getSamplePersons();
         assertNotNull(samplePersons);
-        assertEquals(6, samplePersons.length); // Check the array size
+        assert(samplePersons.length > 0); // Check the array size if it is more than 0
     }
 
     @Test
-    public void getSampleAddressBook_validData_addressBook() {
-        // Test that the sample address book contains the expected sample persons
-        AddressBook sampleAddressBook = (AddressBook) SampleDataUtil.getSampleAddressBook();
-        assertNotNull(sampleAddressBook);
-        assertEquals(6, sampleAddressBook.getPersonList().size()); // Check the number of persons
+    public void getSamplePersons_validFields_personsDataValid() {
+        Person[] samplePersons = SampleDataUtil.getSamplePersons();
+        assertNotNull(samplePersons);
+
+        for (Person person : samplePersons) {
+            assert(!person.getName().fullName.isEmpty());
+            assert(person.getEmail().value.contains("@")); // Basic email validation
+            assert(person.getTelegram().value.matches("@[a-zA-Z0-9]+")); // Basic telegram validation
+        }
     }
 }

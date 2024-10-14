@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.Hyperlink?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
@@ -39,7 +38,7 @@
       <padding>
         <Insets top="5" right="15" bottom="5" left="5" />
       </padding>
-      <Hyperlink fx:id="telegram" styleClass="cell_small_label" />
+      <Label fx:id="telegram" styleClass="cell_small_label" text="\$telegram"/>
     </VBox>
   </GridPane>
 </HBox>

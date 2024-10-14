@@ -3,7 +3,6 @@ package seedu.address.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -44,7 +43,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Hyperlink telegram;
+    private Label telegram;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -57,6 +56,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        telegram.setText(person.getTelegram().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
@@ -65,37 +65,6 @@ public class PersonCard extends UiPart<Region> {
         } else {
             assignment.setText("No assignment available"); // Optional: for better user feedback
         }
-        /*
-        Adopted from ChatGPT.
-         */
-        // Set the telegram hyperlink
-        if (person.getTelegram() != null) {
-            telegram.setText(person.getTelegram().value);
-            telegram.setOnAction(event -> openTelegramLink(person.getTelegram().value));
-        } else {
-            telegram.setDisable(true); // Disable hyperlink if no Telegram ID
-        }
-
     }
 
-    // Adopted from GPT with the java.awt.Desktop.getDesktop().browse(...)
-    /**
-     * Opens the Telegram link in the default web browser.
-     */
-    private void openTelegramLink(String telegramId) {
-        // This is to remove the '@' when keying into the telegram link
-        char[] charArray = telegramId.toCharArray();
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 1; i < charArray.length; i++) {
-            sb.append(charArray[i]);
-        }
-
-        try {
-            String url = "https://t.me/" + sb.toString();
-            java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
