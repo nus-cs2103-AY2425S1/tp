@@ -46,9 +46,12 @@ public class FindCommandParser implements Parser<FindCommand> {
         System.out.println(Arrays.toString(addressKeywords));
 
         // Create the specific predicates, or pass null if no valid keywords were provided
-        NameContainsKeywordsPredicate namePredicate = nameKeywords != null ? new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)) : null;
-        PhoneContainsKeywordsPredicate phonePredicate = phoneKeywords != null ? new PhoneContainsKeywordsPredicate(Arrays.asList(phoneKeywords)) : null;
-        AddressContainsKeywordsPredicate addressPredicate = addressKeywords != null ? new AddressContainsKeywordsPredicate(Arrays.asList(addressKeywords)) : null;
+        NameContainsKeywordsPredicate namePredicate = nameKeywords != null
+                ? new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)) : null;
+        PhoneContainsKeywordsPredicate phonePredicate = phoneKeywords != null
+                ? new PhoneContainsKeywordsPredicate(Arrays.asList(phoneKeywords)) : null;
+        AddressContainsKeywordsPredicate addressPredicate = addressKeywords != null
+                ? new AddressContainsKeywordsPredicate(Arrays.asList(addressKeywords)) : null;
 
         return new FindCommand(namePredicate, phonePredicate, addressPredicate);
     }

@@ -35,6 +35,16 @@ public class FindCommand extends Command {
 
     private final Predicate<Person> combinedPredicate;
 
+    /**
+     * Constructs a FindCommand object with optional predicates for filtering by name, phone, and address.
+     * The command updates the filtered person list based on which predicates are present.
+     * @param namePredicate  The predicate used to filter persons by their name,
+     *                       or null if no name filtering is required.
+     * @param phonePredicate  The predicate used to filter persons by their phone,
+     *                        or null if no phone filtering is required.
+     * @param addressPredicate  The predicate used to filter persons by their address,
+     *                          or null if no address filtering is required.
+     */
     public FindCommand(NameContainsKeywordsPredicate namePredicate,
                        PhoneContainsKeywordsPredicate phonePredicate,
                        AddressContainsKeywordsPredicate addressPredicate) {
