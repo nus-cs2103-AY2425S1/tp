@@ -52,6 +52,10 @@ public class Tag {
         return tagName.hashCode();
     }
 
+    public String getTagName() {
+        return tagName;
+    }
+
     /**
      * Format state as text for viewing.
      */
