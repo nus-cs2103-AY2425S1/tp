@@ -72,7 +72,8 @@ Refer to the [Features](#features) section for details of each command.
 ### Feature 1: Ability to Save Current Data
 
 **Purpose:**  
-This feature ensures that any details you add to the app are saved automatically. When you close and reopen the app, all your data will still be there.
+This feature ensures that any details you add to the app are saved automatically. When you close and reopen the app, 
+all your data will still be there.
 
 **How it Works:**
 - **Command Format and Example:** Not applicable, as this process is automatic.
@@ -96,12 +97,12 @@ remark here. Otherwise, new users are assigned a default value of "N.A".
 **How to Use It:**
 - **Command Format:**
 ```
-add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TAG>] [r/ <REMARK>]
+add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TAG>] [rn/ <REMARK>]
  ```
 - **Example:**
 ```
 add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999
-add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold r/ got anger issue
+add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold rn/ got anger issue
 ```
 
 #### Parameters
@@ -119,7 +120,8 @@ add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold
 #### What to Expect
 - **If Successful:** You'll see a message: "New person added: `<NAME>`; Phone: `<PHONE>`; Email: `<EMAIL>`; Address: `<ADDRESS>`; Job: `<JOB>`;  Income: `<INCOME>`; Tag: `<TAG>`; Remark: `<REMARK>`". It's noted that if "Tag" and "Remark" are not added, they will be defined as "N/A."
 - **If There is an Error:**
-  - "Please verify that your input is in the correct format. Include the following details: n/ `<NAME>` p/ `<PHONE>` e/ `<EMAIL>` a/ `<ADDRESS>` j/ `<JOBNAME>` i/ `<INCOME>` [t/ `<TAG>`] [r/ `<REMARK>`]."
+  - "Please verify that your input is in the correct format. Include the following details: n/ `<NAME>` p/ `<PHONE>` 
+e/ `<EMAIL>` a/ `<ADDRESS>` j/ `<JOBNAME>` i/ `<INCOME>` [t/ `<TAG>`] [rn/ `<REMARK>`]."
 
 **Handling Duplicates:**  
 If a customer with the same name, email, job, and income is already saved, you'll get a message: "This customer is already saved as a contact."
@@ -169,11 +171,13 @@ information, or any other relevant data.
 **How to Use It:**
 - **Command Format:**
 ```
-edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TAG>]
+edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TAG>] [rn/ <NEW REMARK>] [ra/ 
+<REMARK TO BE APPENDED ONTO EXISTING ONE>]
 ```
+**Note that `rn/` and `ra/` cannot be used at the same time.**
 - **Examples:**
 ```
-edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000
+edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000 ra/ Specialist in eye care
 
 ```
 
@@ -346,13 +350,13 @@ flag to change these two fields.
 
 ## Command Summary
 
-| Action                          | Command Format                                                                                   | Example                                                                                              |
-|---------------------------------|--------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-| **Save Data Automatically**     | *Automatic*                                                                                      | *No command required*                                                                                |
-| **Add New Customer**            | `add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TAG>] [r/ <REMARK>]` | `add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold r/ got anger issue` |
-| **Remove Old Customer**         | `del <INDEX>`                                                                                    | `del 69`      |
-| **Edit Existing Customer**      | `edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TAG>]`      | `edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000`                  |
-| **Find a Customer by Details**  | `filter <FLAG>/ <FLAG FIELD>`                                                                    | `filter n/ TAN LESHEW`                                                                               |
-| **Save Remarks About Customers**| `remark <INDEX> r/ <REMARK>`                                                                     | `remark 55 r/ He is a problematic customer.`                                                         |
-| **Help**                        | `help`                                                                                           | `help`                                                                                               |
-| **Exit**                        | `exit`                                                                                           | `exit`                                                                                               |
+| Action                          | Command Format                                                                                                                                                | Example                                                                                                        |
+|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| **Save Data Automatically**     | *Automatic*                                                                                                                                                   | *No command required*                                                                                          |
+| **Add New Customer**            | `add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TAG>] [r/ <REMARK>]`                                                              | `add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold rn/ got anger issue`         |
+| **Remove Old Customer**         | `del <INDEX>`                                                                                                                                                 | `del 69`                                                                                                       |
+| **Edit Existing Customer**      | `edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TAG>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED ONTO EXISTING ONE]` | `edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000 ra/ Specialist in eye care` |
+| **Find a Customer by Details**  | `filter <FLAG>/ <FLAG FIELD>`                                                                                                                                 | `filter n/ TAN LESHEW`                                                                                         |
+| **Save Remarks About Customers**| `remark <INDEX> r/ <REMARK>`                                                                                                                                  | `remark 55 r/ He is a problematic customer.`                                                                   |
+| **Help**                        | `help`                                                                                                                                                        | `help`                                                                                                         |
+| **Exit**                        | `exit`                                                                                                                                                        | `exit`                                                                                                         |
