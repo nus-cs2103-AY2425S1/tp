@@ -10,6 +10,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
+import seedu.address.model.task.Task;
 
 /**
  * The API of the Model component.
@@ -20,6 +21,7 @@ public interface Model {
      */
     Predicate<Student> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
+    Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -141,6 +143,11 @@ public interface Model {
     ObservableList<Group> getFilteredGroupList();
 
     /**
+     * Returns an unmodifiable view of the filtered student list
+     */
+    ObservableList<Task> getFilteredTaskList();
+
+    /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.
@@ -149,11 +156,15 @@ public interface Model {
 
     void updateFilteredGroupList(Predicate<Group> predicate);
 
+    void updateFilteredTaskList(Predicate<Task> predicate);
+
     void setStateStudents();
 
     void setStateGroups();
 
     void setStateGroupTask();
+
+    void setStateTasks();
 
     State getState();
 
