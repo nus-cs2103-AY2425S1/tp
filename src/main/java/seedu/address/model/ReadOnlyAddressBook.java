@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.Student;
 
 /**
@@ -14,6 +13,4 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate students.
      */
     ObservableList<Student> getStudentList();
-
-    ObservableList<Assignment> getAssignmentList();
 }

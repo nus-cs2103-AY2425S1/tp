@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.Student;
 
 /**
@@ -110,17 +109,6 @@ public class ModelManager implements Model {
 
         addressBook.setStudent(target, editedStudent);
     }
-    @Override
-    public boolean hasAssignment(Assignment assignment) {
-        requireNonNull(assignment);
-        return addressBook.hasAssignment(assignment);
-    }
-    @Override
-    public void addAssignment(Assignment assignment) {
-        addressBook.addAssignment(assignment);
-        //will probably need to make some changes to keep track of duplicate assignments
-    }
-
     //=========== Filtered Student List Accessors =============================================================
 
     /**

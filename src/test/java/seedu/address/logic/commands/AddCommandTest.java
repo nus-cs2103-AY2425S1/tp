@@ -125,11 +125,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addAssignment(Assignment assignment) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -141,11 +136,6 @@ public class AddCommandTest {
 
         @Override
         public boolean hasStudent(Student student) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasAssignment(Assignment assignment) {
             throw new AssertionError("This method should not be called.");
         }
 

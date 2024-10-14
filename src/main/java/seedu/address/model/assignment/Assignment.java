@@ -6,7 +6,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.assignment.exceptions.AssignmentAlreadyAssignedStudentException;
 import seedu.address.model.student.Student;
 
 /**
@@ -31,22 +30,12 @@ public class Assignment {
     /**
      * Every field must be present and not null.
      */
-    public Assignment(AssignmentName name, int maxScore) {
+    public Assignment(Student student, AssignmentName name, int maxScore) {
+        requireNonNull(student);
         requireNonNull(name);
         this.assignmentName = name;
         checkArgument(isValidScore(maxScore), MESSAGE_CONSTRAINTS);
         this.maxScore = maxScore;
-    }
-
-    /**
-     * Assigns assignment to student.
-     */
-    public void assignStudent(Student student) {
-        requireNonNull(student);
-        if (this.student == null) {
-            this.student = student;
-        }
-        throw new AssignmentAlreadyAssignedStudentException();
     }
 
     /**
@@ -85,7 +74,8 @@ public class Assignment {
         }
 
         Assignment otherAssignment = (Assignment) other;
-        return assignmentName.equals(otherAssignment.assignmentName)
+        return student.equals(otherAssignment.student)
+                && assignmentName.equals(otherAssignment.assignmentName)
                && MIN_SCORE == otherAssignment.MIN_SCORE
                && maxScore == otherAssignment.maxScore
                && score == otherAssignment.score
@@ -101,6 +91,7 @@ public class Assignment {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("student", student)
                 .add("assignmentName", assignmentName)
                 .add("MIN_SCORE", MIN_SCORE)
                 .add("maxScore", maxScore)
@@ -113,6 +104,12 @@ public class Assignment {
     }
     public int getScore() {
         return this.score;
+    }
+    public int getMaxScore() {
+        return this.maxScore;
+    }
+    public boolean getHasSubmitted() {
+        return this.hasSubmitted;
     }
 
 }

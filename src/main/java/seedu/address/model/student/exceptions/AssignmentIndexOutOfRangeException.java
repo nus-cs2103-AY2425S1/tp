@@ -1,4 +1,7 @@
 package seedu.address.model.student.exceptions;
 
-public class AssignmentIndexOutOfRangeException {
+/**
+ * Signals that the assignment Index is out of bounds
+ */
+public class AssignmentIndexOutOfRangeException extends RuntimeException {
 }
