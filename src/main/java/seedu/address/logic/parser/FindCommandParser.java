@@ -51,17 +51,17 @@ public class FindCommandParser implements Parser<FindCommand> {
         List<String> addresses = argMultimap.getAllValues(PREFIX_ADDRESS);
         List<String> priorities = argMultimap.getAllValues(PREFIX_PRIORITY);
 
-        names = splitStrings(names);
+        names = splitCustomSeparatedStrings(names);
         if (!areValidKeywords(names, Name.VALIDATION_REGEX)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE);
         }
 
-        addresses = splitAddresses(addresses);
+        addresses = splitCustomSeparatedStrings(addresses);
         if (!areValidKeywords(addresses, Address.VALIDATION_REGEX)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE);
         }
 
-        priorities = splitStrings(priorities);
+        priorities = splitWhiteSpaceSeparatedStrings(priorities);
         if (!areValidPriorities(priorities)) {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE);
         }
@@ -78,11 +78,11 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
     /**
-     * Splits each string in {@code list} into multiple strings if there is whitespace between characters.
+     * Splits each string in {@code list} into its constituent strings separated by whitespace characters.
      *
      * @return New list of all strings without any whitespace.
      */
-    private List<String> splitStrings(List<String> list) {
+    private List<String> splitWhiteSpaceSeparatedStrings(List<String> list) {
         List<String> newList = new ArrayList<>();
 
         for (String currentString : list) {
@@ -93,23 +93,23 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
     /**
-     * Splits each string of addresses in {@code addressList} into the constituent addresses separated
-     * by the | symbol. Only use this for addresses since can have whitespace for a address filter.
+     * Splits each string in {@code list} into the constituent strings separated
+     * by the | symbol. Use this for filters that can have strings separated by whitespace like names or addresses.
      *
-     * @return New list of addresses to filter by.
+     * @return Correct list of strings to filter by.
      */
-    private List<String> splitAddresses(List<String> addressList) {
-        List<String> newAddressList = new ArrayList<>();
+    private List<String> splitCustomSeparatedStrings(List<String> list) {
+        List<String> newList = new ArrayList<>();
 
-        for (String currentAddress : addressList) {
-            String[] separatedAddresses = currentAddress.split("\\|", -1); // -1 limit keeps empty strings
+        for (String currentString : list) {
+            String[] separatedStrings = currentString.split("\\|", -1); // -1 limit keeps empty strings
 
-            for (int i = 0; i < separatedAddresses.length; i++) { // remove whitespace between subsequent addresses
-                String trimmedAddress = separatedAddresses[i].trim();
-                newAddressList.add(trimmedAddress);
+            for (int i = 0; i < separatedStrings.length; i++) { // remove whitespace between subsequent addresses
+                String trimmedAddress = separatedStrings[i].trim();
+                newList.add(trimmedAddress);
             }
         }
-        return newAddressList;
+        return newList;
     }
 
     /**

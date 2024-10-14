@@ -79,9 +79,8 @@ public class AddressBookParserTest {
         List<String> priorities = Arrays.asList("high", "medium");
 
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + PREFIX_NAME + String.join(" ", nameKeywords)
-                        + " " + PREFIX_ADDRESS + addressKeywords.get(0)
-                        + " " + PREFIX_ADDRESS + addressKeywords.get(1)
+                FindCommand.COMMAND_WORD + " " + PREFIX_NAME + String.join("|", nameKeywords)
+                        + " " + PREFIX_ADDRESS + String.join("|", addressKeywords)
                         + " " + PREFIX_PRIORITY + String.join(" ", priorities));
         assertEquals(new FindCommand(nameKeywords, addressKeywords, priorities), command);
     }

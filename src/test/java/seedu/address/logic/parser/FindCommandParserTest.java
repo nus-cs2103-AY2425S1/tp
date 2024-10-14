@@ -36,13 +36,13 @@ public class FindCommandParserTest {
                 new FindCommand(names, addresses, priorities);
 
         // No leading and trailing whitespaces
-        assertParseSuccess(parser, " n/Alice Bob", expectedFindCommand);
-
-        // Multiple whitespaces between keywords
-        assertParseSuccess(parser, " n/ \n Alice \n \t Bob  \t", expectedFindCommand);
-
-        // Multiple usage of name prefix allowed
         assertParseSuccess(parser, " n/Alice n/Bob", expectedFindCommand);
+
+        // Multiple whitespaces between successive prefixes
+        assertParseSuccess(parser, " n/ \n Alice \n \t n/ Bob  \t", expectedFindCommand);
+
+        // Multiple names specified using one prefix
+        assertParseSuccess(parser, " n/Alice | Bob", expectedFindCommand);
     }
 
     @Test
@@ -53,6 +53,16 @@ public class FindCommandParserTest {
 
         // Blank input
         assertParseFailure(parser, " n/",
+                String.format(Name.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE));
+
+        // Blank name when using | symbol
+        assertParseFailure(parser, " n/ | ",
+                String.format(Name.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE));
+
+        assertParseFailure(parser, " n/Alex | ",
+                String.format(Name.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE));
+
+        assertParseFailure(parser, " n/ | Alex ",
                 String.format(Name.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE));
     }
 
