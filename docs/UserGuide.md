@@ -157,7 +157,7 @@ Format: `listOrder INDEX`
 
 Examples:
 * `list` followed by `listOrder 2` lists all orders under the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` lists all order under the 1st person in the results of the `find` command.
+* `find Betsy` followed by `listOrder 1` lists all order under the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
