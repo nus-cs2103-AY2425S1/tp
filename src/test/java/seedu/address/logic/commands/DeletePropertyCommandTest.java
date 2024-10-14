@@ -37,9 +37,11 @@ public class DeletePropertyCommandTest {
 
     @Test
     public void execute_validPostalCodeAndUnitNumber_success() {
+        PostalCode postalCode = new PostalCode(VALID_POSTALCODE_ADMIRALTY);
+        Unit unit = new Unit(VALID_UNIT_ADMIRALTY);
         Property propertyToDelete = model.getFilteredPropertyList().stream()
-                .filter(property -> property.getPostalCode().equals(VALID_POSTALCODE_ADMIRALTY)
-                        && property.getUnit().equals(VALID_UNIT_ADMIRALTY))
+                .filter(property -> property.getPostalCode().equals(postalCode)
+                        && property.getUnit().equals(unit))
                 .findFirst().orElseThrow(() -> new AssertionError(String.format("Property not found. ",
                         VALID_POSTALCODE_ADMIRALTY, VALID_UNIT_ADMIRALTY)));
         DeletePropertyCommand deletePropertyCommand =

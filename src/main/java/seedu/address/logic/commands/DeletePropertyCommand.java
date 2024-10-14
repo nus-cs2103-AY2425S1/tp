@@ -53,7 +53,8 @@ public class DeletePropertyCommand extends Command {
                 .filter(property -> property.getPostalCode().equals(postalCode)
                         && property.getUnit().equals(unitNumber))
                 .findFirst().orElseThrow(() ->
-                        new CommandException(String.format("Property not found. ", postalCode, unitNumber)));
+                        new CommandException(String.format("Property not found. ", postalCode,
+                                unitNumber)));
 
         model.deleteProperty(propertyToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PROPERTY_SUCCESS, Messages.format(propertyToDelete)));
