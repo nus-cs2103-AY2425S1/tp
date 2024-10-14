@@ -37,7 +37,6 @@ public class FindCommandParser implements Parser<FindCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             System.out.println("Invalid use here");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-            // Note: Here, should return message not to use disallowed prefixes, and how to use allowed ones
         }
 
         List<String> names = argMultimap.getAllValues(PREFIX_NAME);
