@@ -48,6 +48,24 @@ public class DeleteCommandTest {
 
         assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_INVALID_INDEX);
     }
+
+    @Test
+    public void execute_validNameFilteredList_success() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Name targetName = personToDelete.getName();
+        DeleteCommand deleteCommand = new DeleteCommand(targetName);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, targetName);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+        showNoPerson(expectedModel);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
     @Test
     public void execute_invalidNameFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
@@ -57,7 +75,6 @@ public class DeleteCommandTest {
 
         assertCommandFailure(deleteCommand, model, String.format(DeleteCommand.MESSAGE_PERSON_NOT_FOUND, invalidName));
     }
-
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
@@ -74,8 +91,6 @@ public class DeleteCommandTest {
             new DeleteCommand(negativeIndex);
         });
     }
-
-
     @Test
     public void equals() {
         DeleteCommand deleteNameCommand = new DeleteCommand(new Name("Alice"));
