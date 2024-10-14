@@ -87,6 +87,7 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+<<<<<<< HEAD
      * Updates the given schedule's meetup in the schedule list.
      * The schedule must exist in the schedule list.
      */
@@ -96,4 +97,10 @@ public interface Model {
      * Deletes the given schedule in the schedule list
      */
     void deleteMeetUp(Person target);
+=======
+     * Updates the filter of the meetup list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredMeetUpList(Predicate<MeetUp> predicate);
+>>>>>>> da45caa56c61434831d7cc3d1288d4aeed9daae7
 }

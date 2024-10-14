@@ -24,6 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<MeetUp> filteredMeetUps = null; // TODO
     private final FilteredList<Schedule> filteredSchedules = null; //TODO
 
     /**
@@ -148,6 +149,7 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+<<<<<<< HEAD
     //=========== Filtered Schedule List Accessors =============================================================
     @Override
     public void editMeetUp(Person person, MeetUp editedMeetUp) {
@@ -157,5 +159,13 @@ public class ModelManager implements Model {
     @Override
     public void deleteMeetUp(Person person) {
         return;
+=======
+    //=========== Filtered MeetUp List Accessors =============================================================
+    @Override
+    public void updateFilteredMeetUpList(Predicate<MeetUp> predicate) {
+        requireNonNull(predicate);
+        filteredMeetUps.setPredicate(predicate);
+        // TODO
+>>>>>>> da45caa56c61434831d7cc3d1288d4aeed9daae7
     }
 }

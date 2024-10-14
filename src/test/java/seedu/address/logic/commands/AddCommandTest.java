@@ -160,6 +160,7 @@ public class AddCommandTest {
         }
 
         @Override
+<<<<<<< HEAD
         public void editMeetUp(Person person, MeetUp edittedMeetUp) {
             return;
         }
@@ -167,6 +168,10 @@ public class AddCommandTest {
         @Override
         public void deleteMeetUp(Person person) {
             return;
+=======
+        public void updateFilteredMeetUpList(Predicate<MeetUp> meetUp) {
+            // TODO
+>>>>>>> da45caa56c61434831d7cc3d1288d4aeed9daae7
         }
     }
 
