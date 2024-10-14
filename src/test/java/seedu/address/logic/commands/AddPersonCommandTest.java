@@ -26,11 +26,11 @@ import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
+public class AddPersonCommandTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddPersonCommand(null));
     }
 
     @Test
@@ -38,9 +38,9 @@ public class AddCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddPersonCommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(AddPersonCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
@@ -48,24 +48,25 @@ public class AddCommandTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
+        AddPersonCommand addPersonCommand = new AddPersonCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddPersonCommand.MESSAGE_DUPLICATE_PERSON, () -> addPersonCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        AddPersonCommand addAliceCommand = new AddPersonCommand(alice);
+        AddPersonCommand addBobCommand = new AddPersonCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        AddPersonCommand addAliceCommandCopy = new AddPersonCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -80,9 +81,9 @@ public class AddCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        AddPersonCommand addPersonCommand = new AddPersonCommand(ALICE);
+        String expected = AddPersonCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        assertEquals(expected, addPersonCommand.toString());
     }
 
     /**
@@ -160,6 +161,10 @@ public class AddCommandTest {
         }
 
         @Override
+<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/AddCommandTest.java
+=======
+<<<<<<< HEAD
+>>>>>>> master:src/test/java/seedu/address/logic/commands/AddPersonCommandTest.java
         public void editMeetUp(Person person, MeetUp edittedMeetUp) {
             return;
         }
@@ -167,9 +172,16 @@ public class AddCommandTest {
         @Override
         public void deleteMeetUp(Person person) {
             return;
+<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/AddCommandTest.java
           
         public void updateFilteredMeetUpList(Predicate<MeetUp> meetUp) {
             // TODO
+=======
+=======
+        public void updateFilteredMeetUpList(Predicate<MeetUp> meetUp) {
+            // TODO
+>>>>>>> da45caa56c61434831d7cc3d1288d4aeed9daae7
+>>>>>>> master:src/test/java/seedu/address/logic/commands/AddPersonCommandTest.java
         }
     }
 
