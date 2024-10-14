@@ -1,6 +1,8 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
@@ -8,6 +10,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Property;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -26,6 +29,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private List<Property> buyingProperties = new ArrayList<>();
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -89,8 +93,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code buyingProperties} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withBuyProperty(Property property) {
+        this.buyingProperties.add(property);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, tags, null, buyingProperties);
     }
 
 }
