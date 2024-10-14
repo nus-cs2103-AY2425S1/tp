@@ -141,7 +141,7 @@ class JsonAdaptedStudent {
         if (presentDates != null) {
             modelPresentDates = presentDates.toModelType();
         } else {
-            modelPresentDates = new PresentDates(new ArrayList<>());
+            modelPresentDates = new PresentDates(new HashSet<>());
         }
 
         return new Student(modelName, modelPhone, modelEmail, modelAddress,

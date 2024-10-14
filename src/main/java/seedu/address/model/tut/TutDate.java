@@ -1,9 +1,9 @@
 package seedu.address.model.tut;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import seedu.address.model.student.Student;
 
@@ -15,7 +15,7 @@ public class TutDate {
 
     public static final String MESSAGE_CONSTRAINTS = "Date should be in correct format (dd/mm/yyyy)!";
     private final Date date;
-    private final List<Student> students;
+    private final Set<Student> students;
 
     /**
      * Constructs a {@code TutDate} object with a specified {@link Date}.
@@ -25,7 +25,7 @@ public class TutDate {
      */
     public TutDate(Date date) {
         this.date = date;
-        this.students = new ArrayList<>();
+        this.students = new HashSet<>();
     }
 
     public void add(Student student) {
@@ -36,8 +36,8 @@ public class TutDate {
         return date;
     }
 
-    public List<Student> getStudents() {
-        return Collections.unmodifiableList(students);
+    public Set<Student> getStudents() {
+        return Collections.unmodifiableSet(students);
     }
 
     @Override

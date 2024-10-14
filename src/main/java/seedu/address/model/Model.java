@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Date;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -8,6 +9,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.TutorialClass;
 
 /**
  * The API of the Model component.
@@ -78,6 +81,8 @@ public interface Model {
      * existing student in the address book.
      */
     void setStudent(Student target, Student editedStudent);
+
+    boolean setStudentAttendance(StudentId target, TutorialClass tut, Date date);
 
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();

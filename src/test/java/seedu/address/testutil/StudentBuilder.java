@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,7 +23,7 @@ public class StudentBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final PresentDates DEFAULT_PRESENT_DATES = new PresentDates(new ArrayList<>());
+    public static final PresentDates DEFAULT_PRESENT_DATES = new PresentDates(new HashSet<>());
     public static final String DEFAULT_STUDENT_ID = "1001";
     public static final String DEFAULT_TUTORIAL_CLASS = "1001";
 

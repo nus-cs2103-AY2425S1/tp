@@ -3,6 +3,7 @@ package seedu.address.model.student;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.model.tut.TutDate;
 
@@ -13,14 +14,14 @@ import seedu.address.model.tut.TutDate;
  */
 public class PresentDates {
 
-    private final ArrayList<TutDate> dates;
+    private final Set<TutDate> dates;
 
     /**
      * Constructs a {@code PresentDates} object with an initial list of {@link TutDate} objects.
      *
      * @param dates An {@link ArrayList} of {@link TutDate} objects.
      */
-    public PresentDates(ArrayList<TutDate> dates) {
+    public PresentDates(Set<TutDate> dates) {
         this.dates = dates;
     }
 
@@ -38,8 +39,12 @@ public class PresentDates {
      *
      * @return A {@link List} of {@link TutDate} objects.
      */
-    public List<TutDate> getList() {
-        return Collections.unmodifiableList(dates);
+    public Set<TutDate> getList() {
+        return Collections.unmodifiableSet(dates);
+    }
+
+    public void setAttendance(TutDate tutDate) {
+        dates.add(tutDate);
     }
 
     /**
@@ -70,10 +75,9 @@ public class PresentDates {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof PresentDates)) {
+        if (!(other instanceof PresentDates otherDates)) {
             return false;
         }
-        PresentDates otherDates = (PresentDates) other;
         return dates.equals(otherDates.dates);
     }
 }

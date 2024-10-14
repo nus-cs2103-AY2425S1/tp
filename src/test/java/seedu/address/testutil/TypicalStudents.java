@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
@@ -51,7 +52,7 @@ public class TypicalStudents {
 
     // Create PresentDates for the students
     private static final PresentDates SAMPLE_PRESENT_DATES =
-            new PresentDates(new ArrayList<>(Arrays.asList(TUT_DATE1, TUT_DATE2)));
+            new PresentDates(new HashSet<>(Arrays.asList(TUT_DATE1, TUT_DATE2)));
 
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")

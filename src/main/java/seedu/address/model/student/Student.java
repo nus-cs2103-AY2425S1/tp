@@ -2,7 +2,6 @@ package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -10,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tut.TutDate;
 
 /**
  * Represents a Student in the address book.
@@ -27,7 +27,6 @@ public class Student {
     private final StudentId studentId;
     private final TutorialClass tutorialClass;
     private final Set<Tag> tags = new HashSet<>();
-
     private final PresentDates presentDates;
 
     /**
@@ -41,7 +40,7 @@ public class Student {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.presentDates = presentDates != null ? presentDates : new PresentDates(new ArrayList<>());
+        this.presentDates = presentDates != null ? presentDates : new PresentDates(new HashSet<>());
         this.studentId = studentId;
         this.tutorialClass = tutorialClass;
     }
@@ -95,6 +94,9 @@ public class Student {
                 && otherStudent.getName().equals(getName());
     }
 
+    public void setAttendance(TutDate tutDate) {
+        presentDates.setAttendance(tutDate);
+    }
     /**
      * Returns true if both students have the same identity and data fields.
      * This defines a stronger notion of equality between two students.

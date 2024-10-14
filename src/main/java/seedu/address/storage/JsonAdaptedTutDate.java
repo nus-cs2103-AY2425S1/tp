@@ -2,9 +2,10 @@ package seedu.address.storage;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,7 +23,7 @@ class JsonAdaptedTutDate {
     public static final String DATE_FORMAT = "dd/MM/yyyy";
 
     private final String date;
-    private final List<JsonAdaptedStudent> students = new ArrayList<>();
+    private final Set<JsonAdaptedStudent> students = new HashSet<>();
 
     /**
      * Constructs a {@code JsonAdaptedTutDate} with the given tut date details.
@@ -68,7 +69,7 @@ class JsonAdaptedTutDate {
             throw new IllegalValueException(TutDate.MESSAGE_CONSTRAINTS);
         }
 
-        final List<Student> modelStudents = new ArrayList<>();
+        final Set<Student> modelStudents = new HashSet<>();
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
             modelStudents.add(jsonAdaptedStudent.toModelType());
         }
