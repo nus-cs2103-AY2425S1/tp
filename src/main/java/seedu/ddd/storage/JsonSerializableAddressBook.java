@@ -43,6 +43,7 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         contacts.addAll(source.getContactList().stream().map(JsonAdaptedContactFactory::create)
                 .collect(Collectors.toList()));
+        nextId = AddressBook.getNextId();
     }
 
     /**
