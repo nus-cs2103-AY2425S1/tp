@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -36,8 +37,10 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
-        descriptor.setRoomNumber(person.getRoomNumber());
+        descriptor.setRoomNumber(person.getRoomNumber().orElse(null));
         descriptor.setAddress(person.getAddress());
+        descriptor.setEmergencyName(person.getEmergencyContact().flatMap(EmergencyContact::getName).orElse(null));
+        descriptor.setEmergencyPhone(person.getEmergencyContact().flatMap(EmergencyContact::getPhone).orElse(null));
         descriptor.setTags(person.getTags());
     }
 
@@ -78,6 +81,22 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code EmergencyName} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withEmergencyName(String emergencyName) {
+        descriptor.setEmergencyName(new Name(emergencyName));
+        return this;
+    }
+
+    /**
+     * Sets the {@code EmergencyPhone} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withEmergencyPhone(String emergencyPhone) {
+        descriptor.setEmergencyPhone(new Phone(emergencyPhone));
         return this;
     }
 

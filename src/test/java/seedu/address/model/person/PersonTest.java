@@ -102,9 +102,9 @@ public class PersonTest {
                 + "{name=" + ALICE.getName()
                 + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail()
-                + ", room number=" + ALICE.getRoomNumber()
+                + ", room number=" + ALICE.getRoomNumber().orElse(null)
                 + ", address=" + ALICE.getAddress()
-                + ", emergencyContact=" + ALICE.getEmergencyContact()
+                + ", emergencyContact=" + ALICE.getEmergencyContact().orElse(null)
                 + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }

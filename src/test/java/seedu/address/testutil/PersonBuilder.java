@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -22,12 +23,15 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_ROOM_NUMBER = "01-0123";
+    public static final String DEFAULT_EMERGENCY_NAME = "Bob Bee";
+    public static final String DEFAULT_EMERGENCY_PHONE = "98765432";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private RoomNumber roomNumber;
+    private EmergencyContact emergencyContact;
     private Set<Tag> tags;
 
     /**
@@ -39,6 +43,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         roomNumber = new RoomNumber(DEFAULT_ROOM_NUMBER);
         address = new Address(DEFAULT_ADDRESS);
+        emergencyContact = null;
         tags = new HashSet<>();
     }
 
@@ -49,8 +54,9 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
-        roomNumber = personToCopy.getRoomNumber();
+        roomNumber = personToCopy.getRoomNumber().orElse(null);
         address = personToCopy.getAddress();
+        emergencyContact = personToCopy.getEmergencyContact().orElse(null);
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -111,15 +117,25 @@ public class PersonBuilder {
     }
 
     /**
-     * Builds a person using AB3 constructor if roomNumber is not null,
-     * else uses overloaded constructor to build person
+     * Sets the {@code EmergencyContact} of the {@code Person} that we are building.
      */
-    public Person build() {
-        if (roomNumber != null) {
-            return new Person(name, phone, email, roomNumber, address, tags);
-        } else {
-            return new Person(name, phone, email, address, tags);
-        }
+    public PersonBuilder withEmergencyContact(String name, String phone) {
+        this.emergencyContact = new EmergencyContact(new Name(name), new Phone(phone));
+        return this;
     }
 
+    /**
+     * Sets the {@code EmergencyContact} of the {@code Person} that we are building to null.
+     */
+    public PersonBuilder withNoEmergencyContact() {
+        this.emergencyContact = null;
+        return this;
+    }
+
+    /**
+     * Builds a person using AB3 constructor.
+     */
+    public Person build() {
+        return new Person(name, phone, email, roomNumber, address, emergencyContact, tags);
+    }
 }
