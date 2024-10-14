@@ -12,7 +12,7 @@ import seedu.address.model.person.Name;
 
 /**
  * The {@code GoodsReceipt} class represents the receipt of goods from a supplier
- * Garauntees: Immutable;
+ * Guarantees: Immutable;
  */
 public class GoodsReceipt {
 
@@ -57,11 +57,18 @@ public class GoodsReceipt {
     public static boolean isValidProcurementDate(Date date) {
         return date.getDateTime().isBefore(LocalDateTime.now());
     }
+
+    /**
+     * Returns True if supplier is valid
+     */
     public boolean isFromSupplier(Name supplier) {
         requireNonNull(supplier);
         return supplierName == supplier;
     }
 
+    /**
+     * Returns quantity of the goods.
+     */
     public int getQuantity() {
         return this.quantity;
     }

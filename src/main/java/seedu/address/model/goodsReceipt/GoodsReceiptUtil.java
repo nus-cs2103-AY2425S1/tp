@@ -3,7 +3,6 @@ package seedu.address.model.goodsReceipt;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import seedu.address.model.goods.Goods;
 import seedu.address.model.person.Name;
 
 /**
