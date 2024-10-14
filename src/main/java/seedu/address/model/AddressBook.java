@@ -10,6 +10,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.model.student.UniqueStudentList;
 
 /**
@@ -100,6 +101,32 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedStudent);
 
         students.setPerson(target, editedStudent);
+    }
+
+    /**
+     * Returns true if a student with the same identity as {@code student} exists in the group
+     * with the same identity as {@code group}.
+     */
+    public boolean hasStudentInGroup(Student student, Group group) {
+        requireNonNull(student);
+        requireNonNull(group);
+        return group.getStudents().contains(student);
+    }
+
+    /**
+     * Adds {@code student} to {@code group}.
+     * {@code student} and {@code group} must exist in the address book.
+     */
+    public void addStudentToGroup(Student student, Group group) {
+        group.add(student);
+    }
+
+    public Student getStudentByNumber(StudentNumber studentNumber) {
+        return students.getStudentByNumber(studentNumber);
+    }
+
+    public Group getGroupByName(GroupName groupName) {
+        return groups.getGroupByName(groupName);
     }
 
     /**

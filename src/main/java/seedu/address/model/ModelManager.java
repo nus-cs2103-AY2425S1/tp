@@ -15,6 +15,7 @@ import seedu.address.commons.core.State;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -153,6 +154,28 @@ public class ModelManager implements Model {
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
+    @Override
+    public boolean hasPersonInGroup(Student student, Group group) {
+        requireAllNonNull(student, group);
+        return addressBook.hasStudentInGroup(student, group);
+    }
+
+    @Override
+    public void addPersonToGroup(Student student, Group group) {
+        requireAllNonNull(student, group);
+        addressBook.addStudentToGroup(student, group);
+    }
+
+    @Override
+    public Student getPersonByNumber(StudentNumber studentNumber) {
+        return addressBook.getStudentByNumber(studentNumber);
+    }
+
+    @Override
+    public Group getGroupByName(GroupName groupName) {
+        return addressBook.getGroupByName(groupName);
+    }
+  
     /**
      * Returns the group with the same group name as {@code groupName} exists in the address book
      */
