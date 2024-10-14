@@ -104,10 +104,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         for (String currentAddress : addressList) {
             String[] separatedAddresses = currentAddress.split("\\|", -1); // -1 limit keeps empty strings
 
-            for (String curr : separatedAddresses) {
-                System.out.println(curr);
-            }
-
             for (int i = 0; i < separatedAddresses.length; i++) { // remove whitespace between subsequent addresses
                 String trimmedAddress = separatedAddresses[i].trim();
                 newAddressList.add(trimmedAddress);
