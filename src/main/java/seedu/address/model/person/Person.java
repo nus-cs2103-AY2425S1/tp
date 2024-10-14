@@ -41,8 +41,10 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        deliveryList.add(new Delivery(this, this.address, new Cost("$50"), new Eta("2024-10-31")));
-        deliveryList.add(new Delivery(this, this.address, new Cost("$50"), new Eta("2024-10-31")));
+        deliveryList.add(new Delivery(this.address, new Cost("$50"), new Eta("2024-10-31")));
+        deliveryList.add(new Delivery(this.address, new Cost("$50"), new Eta("2024-10-31")));
+        deliveryList.add(new Delivery(this.address, new Cost("$50"), new Eta("2024-10-31")));
+        deliveryList.add(new Delivery(this.address, new Cost("$50"), new Eta("2024-10-31")));
     }
 
     public Name getName() {
@@ -71,6 +73,13 @@ public class Person {
 
     public ObservableList<Delivery> getDeliveryList() {
         return deliveryList.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Adds the delivery into the delivery list of this person.
+     */
+    public void addDelivery(Delivery delivery) {
+        deliveryList.add(delivery);
     }
 
     /**

@@ -7,14 +7,12 @@ import java.time.LocalTime;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Person;
 
 /**
  * Represents a Delivery.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Delivery {
-    private final Person person;
     private final Address address;
 
     private final Cost cost;
@@ -28,9 +26,8 @@ public class Delivery {
     /**
      * Every field must be present and not null.
      */
-    public Delivery(Person person, Address address, Cost cost, Date date, Time time, Eta eta) {
-        requireAllNonNull(person, address, cost, date, time, eta);
-        this.person = person;
+    public Delivery(Address address, Cost cost, Date date, Time time, Eta eta) {
+        requireAllNonNull(address, cost, date, time, eta);
         this.address = address;
         this.cost = cost;
         this.date = date;
@@ -41,18 +38,8 @@ public class Delivery {
     /**
      * Every field must be present and not null.
      */
-    public Delivery(Person person, Address address, Cost cost, Eta eta) {
-        requireAllNonNull(person, address, cost, eta);
-        this.person = person;
-        this.address = address;
-        this.cost = cost;
-        this.date = new Date(LocalDate.now().toString());
-        this.time = new Time(LocalTime.now().toString());
-        this.eta = eta;
-    }
-
-    public Person getPerson() {
-        return person;
+    public Delivery(Address address, Cost cost, Eta eta) {
+        this(address, cost, new Date(LocalDate.now().toString()), new Time(LocalTime.now().toString()), eta);
     }
 
     public Address getAddress() {
@@ -86,10 +73,6 @@ public class Delivery {
         return equals(otherDelivery);
     }
 
-    public boolean forPerson(Person person) {
-        return this.person.equals(person);
-    }
-
     /**
      * Returns true if both deliveries have the same identity and data fields.
      * This defines a stronger notion of equality between two deliveries.
@@ -106,8 +89,7 @@ public class Delivery {
         }
 
         Delivery otherDelivery = (Delivery) other;
-        return person.equals(otherDelivery.person)
-                && address.equals(otherDelivery.address)
+        return address.equals(otherDelivery.address)
                 && cost.equals(otherDelivery.cost)
                 && date.equals(otherDelivery.date)
                 && time.equals(otherDelivery.time)
@@ -117,7 +99,6 @@ public class Delivery {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("person", person)
                 .add("date", date)
                 .add("time", time)
                 .add("eta", eta)
