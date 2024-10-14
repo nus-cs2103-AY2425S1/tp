@@ -16,6 +16,7 @@ import seedu.ddd.model.tag.Tag;
 public abstract class Contact {
 
     // Identity fields
+    private final Id id;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -27,13 +28,14 @@ public abstract class Contact {
     /**
      * Every field must be present and not null.
      */
-    public Contact(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Contact(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Id id) {
         CollectionUtil.requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.id = id;
     }
 
     public Name getName() {
@@ -58,6 +60,9 @@ public abstract class Contact {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+    public Id getId() {
+        return id;
     }
 
     /**
@@ -93,13 +98,14 @@ public abstract class Contact {
                 && phone.equals(otherContact.phone)
                 && email.equals(otherContact.email)
                 && address.equals(otherContact.address)
-                && tags.equals(otherContact.tags);
+                && tags.equals(otherContact.tags)
+                && id.equals(otherContact.id);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, id);
     }
 
     @Override
@@ -110,6 +116,7 @@ public abstract class Contact {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("id", id)
                 .toString();
     }
 
