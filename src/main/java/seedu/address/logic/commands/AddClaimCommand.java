@@ -74,14 +74,14 @@ public class AddClaimCommand extends Command {
         try {
             InsurancePlan planToBeUsed = InsurancePlanFactory.createInsurancePlan(insuranceId);
 
-            InsurancePlansManager personToEditInsurancePlansManager = clientToEdit.getInsurancePlansManager();
-            personToEditInsurancePlansManager.checkIfPlanOwned(planToBeUsed);
+            InsurancePlansManager clientToEditInsurancePlansManager = clientToEdit.getInsurancePlansManager();
+            clientToEditInsurancePlansManager.checkIfPlanOwned(planToBeUsed);
 
             Claim claimToBeAdded = new Claim(claimID, claimAmount);
-            personToEditInsurancePlansManager.addClaimToInsurancePlan(planToBeUsed, claimToBeAdded);
+            clientToEditInsurancePlansManager.addClaimToInsurancePlan(planToBeUsed, claimToBeAdded);
 
-            Client personWithAddedInsurancePlan = lastShownList.get(index.getZeroBased());
-            model.setClient(clientToEdit, personWithAddedInsurancePlan);
+            Client clientWithAddedInsurancePlan = lastShownList.get(index.getZeroBased());
+            model.setClient(clientToEdit, clientWithAddedInsurancePlan);
             model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
             return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(clientToEdit), planToBeUsed,
