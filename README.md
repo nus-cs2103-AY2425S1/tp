@@ -8,20 +8,24 @@
 [CS2103-F13-1] SpleetWaise
 
 > SpleetWaise simplifies expense tracking for students, making it easy to split
-and manage shared costs. By offering a seamless solution to track who owes what,
-it eliminates the stress and confusion that often come with shared expenses,
-ensuring clarity and peace of mind for students who use SpleetWaise.
+> and manage shared costs. By offering a seamless solution to track who owes what,
+> it eliminates the stress and confusion that often come with shared expenses,
+> ensuring clarity and peace of mind for students who use SpleetWaise.
 
 > **Target User**: Tech-savvy students looking to track shared expenses and manage who owes what.
 
 ---
 
-* For the detailed documentation of this project, see the [SpleetWaise Product Website](https://ay2425s1-cs2103-f13-1.github.io/tp/).
+* For the detailed documentation of this project, see
+  the [SpleetWaise Product Website](https://ay2425s1-cs2103-f13-1.github.io/tp/).
 
 ---
+
 # Git Workflow
 
-This project uses the [Feature Branch Flow](https://nus-cs2103-ay2425s1.github.io/website/se-book-adapted/chapters/revisionControl.html#feature-branch-flow) with rules set to protect the `master` branch. PRs are mandatory and at least 1 member requires review.
+This project uses
+the [Feature Branch Flow](https://nus-cs2103-ay2425s1.github.io/website/se-book-adapted/chapters/revisionControl.html#feature-branch-flow)
+with rules set to protect the `master` branch. PRs are mandatory and at least 1 member requires review.
 
 ## Acknowledgement
 
