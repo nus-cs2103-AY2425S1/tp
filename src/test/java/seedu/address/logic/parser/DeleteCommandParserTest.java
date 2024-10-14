@@ -1,11 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +27,6 @@ public class DeleteCommandParserTest {
         DeleteCommand expectedCommand = new DeleteCommand(Index.fromOneBased(1));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
-    
 
     @Test
     public void parse_emptyArgs_throwsParseException() {
