@@ -3,7 +3,6 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -22,13 +21,11 @@ public class PersonBuilder {
     public static final String DEFAULT_STUDENTID = "E0000000";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private StudentId studentId;
     private Phone phone;
     private Email email;
-    private Address address;
     private Set<Tag> tags;
     private Set<Tutorial> tutorials;
 
@@ -40,7 +37,6 @@ public class PersonBuilder {
         studentId = new StudentId(DEFAULT_STUDENTID);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         tutorials = new HashSet<>();
     }
@@ -53,7 +49,6 @@ public class PersonBuilder {
         studentId = personToCopy.getStudentId();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         tutorials = new HashSet<>(personToCopy.getTutorials());
     }
@@ -91,14 +86,6 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
-        return this;
-    }
-
-    /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
@@ -115,7 +102,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, studentId, phone, email, address, tags, tutorials);
+        return new Person(name, studentId, phone, email, tags, tutorials);
     }
 
 }

@@ -58,7 +58,6 @@ public class MarkCommand extends Command {
                 personToEdit.getStudentId(),
                 personToEdit.getPhone(),
                 personToEdit.getEmail(),
-                personToEdit.getAddress(),
                 personToEdit.getTags(),
                 newTutorials
         );
