@@ -97,12 +97,10 @@ public class PersonBuilder {
     /**
      * Sets the {@code OrderList} of the {@code Person} that we are building.
      */
-    public PersonBuilder withOrders(Order... orders) {
-        OrderList orderList = new OrderList();
-        for (Order order: orders) {
-            orderList.add(order);
+    public PersonBuilder withOrders(Order... orderList) {
+        for (Order order: orderList) {
+            orders.add(order);
         }
-        this.orders = orderList;
         return this;
     }
 
