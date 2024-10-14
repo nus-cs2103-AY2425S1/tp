@@ -16,6 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.doctor.Doctor;
+import seedu.address.model.patient.Patient;
 import seedu.address.model.person.Person;
 
 /**
@@ -55,6 +57,28 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
+    // Patients
+    public static final Patient JOHN = new PatientBuilder().withName("John Doe")
+            .withAddress("123, Jurong West Ave 6, #08-123").withEmail("johndoe@example.com")
+            .withPhone("98765432").withGender("M").withDateOfBirth("01-01-2000")
+            .withTags("friends").build();
+
+    public static final Patient JANE = new PatientBuilder().withName("Jane Doe")
+            .withAddress("311, Clementi Ave 2, #02-25").withEmail("janedoe@example.com")
+            .withPhone("98765432").withGender("F").withDateOfBirth("01-01-2000")
+            .withTags("owesMoney", "friends").build();
+
+    // Doctors
+    public static final Doctor KENNEDY = new DoctorBuilder().withName("Kennedy Kwek")
+            .withAddress("322, Sengkang Central, #02-14").withEmail("kennedykwek@example.com")
+            .withPhone("98765432").withSpeciality("General")
+            .withTags("friends").build();
+
+    public static final Doctor KAREN = new DoctorBuilder().withName("Karen Koh")
+            .withAddress("411, Bukit Batok West Ave 6, #02-25").withEmail("karenkoh@example.com")
+            .withPhone("98765432").withSpeciality("Childcare")
+            .withTags("owesMoney", "friends").build();
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
@@ -67,6 +91,32 @@ public class TypicalPersons {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the typical persons and patients.
+     */
+    public static AddressBook getTypicalAddressBookWithPatients() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersons()) {
+            ab.addPerson(person);
+        }
+        ab.addPerson(JOHN);
+        ab.addPerson(JANE);
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the typical persons and doctors.
+     */
+    public static AddressBook getTypicalAddressBookWithDoctors() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersons()) {
+            ab.addPerson(person);
+        }
+        ab.addPerson(KENNEDY);
+        ab.addPerson(KAREN);
         return ab;
     }
 
