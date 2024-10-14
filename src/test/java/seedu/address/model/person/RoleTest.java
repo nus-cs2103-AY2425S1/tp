@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -52,5 +53,23 @@ public class RoleTest {
 
         // different values -> returns false
         assertFalse(role.equals(new Role("mUdder")));
+    }
+
+    @Test
+    public void hashCode_sameRoleSameHashCode() {
+        Role role1 = new Role("brUdder");
+        Role role2 = new Role("brUdder");
+
+        // same values -> same hashcode
+        assertEquals(role1.hashCode(), role2.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentRoleDifferentHashCode() {
+        Role role1 = new Role("mUdder");
+        Role role2 = new Role("brUdder");
+
+        // different values -> different hashcode
+        assertFalse(role1.hashCode() == role2.hashCode());
     }
 }
