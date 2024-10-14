@@ -7,7 +7,7 @@ import seedu.address.model.Model;
 import seedu.address.model.job.Job;
 
 /**
- * Deletes a contact identified using it's displayed index from the address book.
+ * Deletes a job identified using it's displayed index from the address book.
  */
 public class DeleteJobCommand extends DeleteCommand<Job> {
     public static final String ENTITY_WORD = "job";
