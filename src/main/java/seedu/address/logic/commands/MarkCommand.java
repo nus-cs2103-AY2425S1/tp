@@ -27,8 +27,8 @@ public class MarkCommand extends Command {
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Tutorial: %2$s";
 
-    public static final String MESSAGE_ADD_MARK_SUCCESS = "Marked tutorial for Person: %1$s";
-    public static final String MESSAGE_DELETE_MARK_SUCCESS = "Removed tutorial from Person: %1$s";
+    public static final String MESSAGE_MARK_SUCCESS = "Marked present in Tutorial: %2$s for Person: %1$s";
+    public static final String MESSAGE_MARK_UNNECESSARY = "Person: %1$s is already marked as present for Tutorial: %2$s";
 
     private final Index index;
     private final Tutorial tutorial;
@@ -52,7 +52,11 @@ public class MarkCommand extends Command {
 
         Person personToEdit = currDisplayedList.get(index.getZeroBased());
         Set<Tutorial> newTutorials = new HashSet<>(personToEdit.getTutorials());
-        newTutorials.add(tutorial);
+        if (!newTutorials.add(tutorial)) {
+            throw new CommandException(
+                    String.format(MESSAGE_MARK_UNNECESSARY, Messages.format(personToEdit), tutorial.tutorial));
+        };
+
         Person editedPerson = new Person(
                 personToEdit.getName(),
                 personToEdit.getStudentId(),
@@ -73,8 +77,7 @@ public class MarkCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !tutorial.tutorial.isEmpty() ? MESSAGE_ADD_MARK_SUCCESS : MESSAGE_DELETE_MARK_SUCCESS;
-        return String.format(message, Messages.format(personToEdit));
+        return String.format(MESSAGE_MARK_SUCCESS, Messages.format(personToEdit), tutorial.tutorial);
     }
 
     @Override
