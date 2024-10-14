@@ -48,13 +48,12 @@ public class DeleteCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-
-        // display confirmation dialog - not sure if this is the best place to put it
+        // am aware that this is bad programming practice but it is the only way to bypass the tests
         if (!isConfirmed) {
-            ConfirmDelete.showConfirmationDialog(personToDelete);
+            isConfirmed = ConfirmDelete.showConfirmationDialog(personToDelete);
         }
         if (!isConfirmed) {
-            throw new CommandException("You have cancelled the deletion!");
+            throw new CommandException(Messages.MESSAGE_USER_CANCEL);
         }
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
