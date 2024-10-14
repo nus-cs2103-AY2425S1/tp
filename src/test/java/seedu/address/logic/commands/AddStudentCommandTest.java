@@ -24,7 +24,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddStudentCommandTest {
@@ -99,7 +101,7 @@ public class AddStudentCommandTest {
 
         @Override
         public void deleteGroup(Group group) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -169,6 +171,26 @@ public class AddStudentCommandTest {
 
         @Override
         public void setGroup(Group target, Group updatedGroup) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPersonToGroup(Student student, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPersonInGroup(Student student, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Student getPersonByNumber(StudentNumber studentNumber) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Group getGroupByName(GroupName groupName) {
             throw new AssertionError("This method should not be called.");
         }
 
