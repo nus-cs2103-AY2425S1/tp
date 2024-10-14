@@ -58,11 +58,13 @@ public class AddCommandParserTest {
 
 
         // multiple client type - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withClientTypes(VALID_CLIENT_TYPE_A, VALID_CLIENT_TYPE_B)
+        Person expectedPersonMultipleClientTypes = new PersonBuilder(BOB)
+                .withClientTypes(VALID_CLIENT_TYPE_A, VALID_CLIENT_TYPE_B)
                 .build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + CLIENT_TYPE_DESC_B + CLIENT_TYPE_DESC_A,
-                new AddCommand(expectedPersonMultipleTags));
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + CLIENT_TYPE_DESC_B + CLIENT_TYPE_DESC_A,
+                new AddCommand(expectedPersonMultipleClientTypes));
     }
 
     @Test

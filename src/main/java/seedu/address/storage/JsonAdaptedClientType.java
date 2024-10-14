@@ -36,7 +36,7 @@ class JsonAdaptedClientType {
     /**
      * Converts this Jackson-friendly adapted client type object into the model's {@code clientType} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted client type.
      */
     public ClientType toModelType() throws IllegalValueException {
         if (!ClientType.isValidClientTypeName(clientTypeName)) {

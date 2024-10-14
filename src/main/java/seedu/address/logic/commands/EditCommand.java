@@ -99,9 +99,10 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<ClientType> updatedTags = editPersonDescriptor.getClientTypes().orElse(personToEdit.getClientTypes());
+        Set<ClientType> updatedClientTypes =
+                editPersonDescriptor.getClientTypes().orElse(personToEdit.getClientTypes());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedClientTypes);
     }
 
     @Override
@@ -201,7 +202,7 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable client types set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code clientTypes} is null.
          */

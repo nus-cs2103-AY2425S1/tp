@@ -58,7 +58,8 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code clientTypes} into a {@code Set<ClientType>} and set it to the {@code Person} that we are building.
+     * Parses the {@code clientTypes} into a {@code Set<ClientType>}
+     * and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withClientTypes(String ... clientTypes) {
         this.clientTypes = SampleDataUtil.getClientTypeSet(clientTypes);

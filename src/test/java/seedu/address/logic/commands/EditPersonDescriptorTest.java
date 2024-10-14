@@ -52,7 +52,7 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different tags -> returns false
+        // different clientTypes -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withClientTypes(VALID_CLIENT_TYPE_B).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }

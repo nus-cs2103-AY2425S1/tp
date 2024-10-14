@@ -166,9 +166,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseClientType_validValueWithWhitespace_returnsTrimmedClientType() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_CLIENT_TYPE_1 + WHITESPACE;
+        String clientTypeWithWhitespace = WHITESPACE + VALID_CLIENT_TYPE_1 + WHITESPACE;
         ClientType expectedClientType = new ClientType(VALID_CLIENT_TYPE_1);
-        assertEquals(expectedClientType, ParserUtil.parseClientType(tagWithWhitespace));
+        assertEquals(expectedClientType, ParserUtil.parseClientType(clientTypeWithWhitespace));
     }
 
     @Test
@@ -178,7 +178,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseClientTypes_collectionWithInvalidClientTypes_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseClientTypes(Arrays.asList(VALID_CLIENT_TYPE_1, INVALID_CLIENT_TYPE)));
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseClientTypes(Arrays.asList(VALID_CLIENT_TYPE_1,
+                        INVALID_CLIENT_TYPE)));
     }
 
     @Test
@@ -188,8 +190,10 @@ public class ParserUtilTest {
 
     @Test
     public void parseClientTypes_collectionWithValidClientTypes_returnsClientTypeSet() throws Exception {
-        Set<ClientType> actualClientTypeSet = ParserUtil.parseClientTypes(Arrays.asList(VALID_CLIENT_TYPE_1, VALID_CLIENT_TYPE_2));
-        Set<ClientType> expectedClientTypeSet = new HashSet<ClientType>(Arrays.asList(new ClientType(VALID_CLIENT_TYPE_1), new ClientType(VALID_CLIENT_TYPE_2)));
+        Set<ClientType> actualClientTypeSet = ParserUtil.parseClientTypes(Arrays.asList(VALID_CLIENT_TYPE_1,
+                VALID_CLIENT_TYPE_2));
+        Set<ClientType> expectedClientTypeSet = new HashSet<ClientType>(Arrays
+                .asList(new ClientType(VALID_CLIENT_TYPE_1), new ClientType(VALID_CLIENT_TYPE_2)));
 
         assertEquals(expectedClientTypeSet, actualClientTypeSet);
     }

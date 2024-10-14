@@ -46,7 +46,8 @@ public class ClientHubTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withClientTypes(VALID_CLIENT_TYPE_B)
+        Person editedAlice = new PersonBuilder(ALICE)
+                .withAddress(VALID_ADDRESS_BOB).withClientTypes(VALID_CLIENT_TYPE_B)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         ClientHubStub newData = new ClientHubStub(newPersons);
@@ -73,7 +74,8 @@ public class ClientHubTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInClientHub_returnsTrue() {
         clientHub.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withClientTypes(VALID_CLIENT_TYPE_B)
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+                .withClientTypes(VALID_CLIENT_TYPE_B)
                 .build();
         assertTrue(clientHub.hasPerson(editedAlice));
     }
