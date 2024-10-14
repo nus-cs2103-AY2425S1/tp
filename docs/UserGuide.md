@@ -101,7 +101,21 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GRADE_LEVEL]`
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 n/Jane Doe p/91234567` Edits the name and phone number of the 1st person to be `Jane Doe` and `91234567` respectively.
+*  `edit 1 n/Jane Doe p/91234567` Edits the name and phone number of the 1st student to be `Jane Doe` and `91234567` respectively.
+
+### Scheduling a regular lesson : `schedule`
+
+Schedules a regular lesson for the specified student in the student directory. 
+
+Format: `schedule INDEX d/DAY st/START_TIME et/END_TIME`
+
+* Schedules the regular lesson for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* If the student already has an existing regular lesson, it will be overwritten by the new regular lesson given.
+* `DAY` must be a day of the week (e.g. Monday, Tuesday etc.) or its 3-letter abbreviation (e.g. Mon, Tue etc.). This parameter is case-insensitive.
+* `START_TIME` and `END_TIME` must be in 24-hour format, and `START_TIME` must be before `END_TIME`
+
+Example:
+* `schedule 1 d/Tuesday st/16:00 et/18:00` Schedules a regular lesson on Tuesday, 4-6pm for the 1st student.
 
 ### Locating students by name: `find`
 
@@ -113,7 +127,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Students matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -132,8 +146,8 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the student directory.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd student in the student directory.
+* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -186,10 +200,12 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 g/LCM 1`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee p/81234567`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
 **Help**   | `help`
+**Add**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 g/LCM 1`
+**List**   | `list`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee p/81234567`
+**Schedule** | `schedule INDEX d/DAY st/START_TIME et/END_TIME`<br> e.g.,`schedule 1 d/Monday st/12:00 et/14:00`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Clear**  | `clear`
+**Exit**   | `exit`
