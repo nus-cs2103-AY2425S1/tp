@@ -84,6 +84,41 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
     }
+    @Test
+    public void hashCode_samePerson_sameHashCode() {
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentPersons_differentHashCode() {
+        assertFalse(ALICE.hashCode() == BOB.hashCode());
+    }
+
+    @Test
+    public void constructor_allFieldsPresent_success() {
+        Person person = new PersonBuilder().withName("Charlie")
+              .withPhone("12345678")
+              .withEmail("charlie@example.com")
+              .withAddress("123, Charlies Street")
+              .withTags("Medium Risk").build();
+
+        assertEquals("Charlie", person.getName().toString());
+        assertEquals("12345678", person.getPhone().toString());
+        assertEquals("charlie@example.com", person.getEmail().toString());
+        assertEquals("123, Charlies Street", person.getAddress().toString());
+        assertEquals("Medium Risk", person.getTag().toString());
+    }
+
+    @Test
+    public void getters_allFieldsCorrectlyRetrieved() {
+        assertEquals(ALICE.getName(), ALICE.getName());
+        assertEquals(ALICE.getPhone(), ALICE.getPhone());
+        assertEquals(ALICE.getEmail(), ALICE.getEmail());
+        assertEquals(ALICE.getAddress(), ALICE.getAddress());
+        assertEquals(ALICE.getTag(), ALICE.getTag());
+    }
+
 
     @Test
     public void toStringMethod() {
