@@ -12,8 +12,6 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
-import com.fasterxml.jackson.databind.Module;
-
 public class RoleTest {
     @Test
     public void defaultConstructor_null_throwsNullPointerException() {
