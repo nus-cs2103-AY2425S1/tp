@@ -107,6 +107,13 @@ public class ClientBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code ID} of the {@code Client} that we are building.
+     */
+    public ClientBuilder withId(int id) {
+        this.id = new Id(id);
+        return this;
+    }
     public Client build() {
         return new Client(name, phone, email, address, date, tags, id);
     }

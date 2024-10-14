@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Email;
+import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.vendor.Service;
@@ -21,12 +22,14 @@ public class VendorBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_SERVICE = "Catering";
+    public static final int DEFAULT_ID = 0;
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Service service;
     private Set<Tag> tags;
+    private Id id;
 
     /**
      * Creates a {@code VendorBuilder} with the default details.
@@ -38,6 +41,7 @@ public class VendorBuilder {
         address = new Address(DEFAULT_ADDRESS);
         service = new Service(DEFAULT_SERVICE);
         tags = new HashSet<>();
+        id = new Id(DEFAULT_ID);
     }
 
     /**
@@ -50,6 +54,7 @@ public class VendorBuilder {
         address = contactToCopy.getAddress();
         service = contactToCopy.getService();
         tags = new HashSet<>(contactToCopy.getTags());
+        id = contactToCopy.getId();
     }
 
     /**
@@ -99,7 +104,16 @@ public class VendorBuilder {
         this.service = new Service(service);
         return this;
     }
+
+    /**
+     * Sets the {@code ID} of the {@code Vendor} that we are building.
+     */
+    public VendorBuilder withId(int id) {
+        this.id = new Id(id);
+        return this;
+    }
+
     public Vendor build() {
-        return new Vendor(name, phone, email, address, service, tags);
+        return new Vendor(name, phone, email, address, service, tags, id);
     }
 }
