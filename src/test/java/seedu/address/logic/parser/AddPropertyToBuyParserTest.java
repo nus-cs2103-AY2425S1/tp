@@ -10,8 +10,7 @@ public class AddPropertyToBuyParserTest {
     private AddPropertyToBuyParser parser = new AddPropertyToBuyParser();
 
     @Test
-    public void parse_throwParseException() throws ParseException {
-        assertParseFailure(parser, " ", "Invalid command format! \n"
-                + "not implemented yet: AddPropertyToBuyCommand.MESSAGE_USAGE");
+    public void parse_allFieldsPresent_success() throws ParseException {
+        assertParseFailure(parser, "addBuy", "Invalid command format! \n"
     }
 }

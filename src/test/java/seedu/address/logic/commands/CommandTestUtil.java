@@ -3,10 +3,15 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYING_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSING_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTAL_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLING_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIT_NUMBER;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -36,6 +41,18 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_HOUSING_TYPE_HDB = "h";
+    public static final String VALID_HOUSING_TYPE_CONDO = "c";
+    public static final String VALID_BUYING_PRICE_1650000 = "1650000";
+    public static final String VALID_BUYING_PRICE_1900000 = "1900000";
+    public static final String VALID_SELLING_PRICE_1500000 = "1500000";
+    public static final String VALID_SELLING_PRICE_2000000 = "2000000";
+    public static final String VALID_POSTAL_CODE_567510 = "567510";
+    public static final String VALID_POSTAL_CODE_582090 = "582090";
+    public static final String VALID_UNIT_NUMBER_10_65 = "10-65";
+    public static final String VALID_UNIT_NUMBER_03_11 = "03-11";
+    public static final String VALID_TAG_SPACIOUS = "spacious";
+    public static final String VALID_TAG_NEAR_MRT = "near MRT";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -47,6 +64,18 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String HOUSING_TYPE_DESC_HDB = " " + PREFIX_HOUSING_TYPE + VALID_HOUSING_TYPE_HDB;
+    public static final String HOUSING_TYPE_DESC_CONDO = " " + PREFIX_HOUSING_TYPE + VALID_HOUSING_TYPE_CONDO;
+    public static final String BUYING_PRICE_DESC_1650000 = " " + PREFIX_BUYING_PRICE + VALID_BUYING_PRICE_1650000;
+    public static final String BUYING_PRICE_DESC_1900000 = " " + PREFIX_BUYING_PRICE + VALID_BUYING_PRICE_1900000;
+    public static final String SELLING_PRICE_DESC_1500000 = " " + PREFIX_SELLING_PRICE + VALID_SELLING_PRICE_1500000;
+    public static final String SELLING_PRICE_DESC_2000000 = " " + PREFIX_SELLING_PRICE + VALID_SELLING_PRICE_2000000;
+    public static final String POSTAL_CODE_DESC_567510 = " " + PREFIX_POSTAL_CODE + VALID_POSTAL_CODE_567510;
+    public static final String POSTAL_CODE_DESC_582090 = " " + PREFIX_POSTAL_CODE + VALID_POSTAL_CODE_582090;
+    public static final String UNIT_NUMBER_DESC_10_65 = " " + PREFIX_UNIT_NUMBER + VALID_UNIT_NUMBER_10_65;
+    public static final String UNIT_NUMBER_DESC_03_11 = " " + PREFIX_UNIT_NUMBER + VALID_UNIT_NUMBER_03_11;
+    public static final String TAG_DESC_SPACIOUS = " " + PREFIX_TAG + VALID_TAG_SPACIOUS;
+    public static final String TAG_DESC_NEAR_MRT = " " + PREFIX_TAG + VALID_TAG_NEAR_MRT;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
