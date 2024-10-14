@@ -55,7 +55,9 @@ public class Person {
         return address;
     }
 
-    public Payment getPayment() { return payment; }
+    public Payment getPayment() {
+        return payment;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

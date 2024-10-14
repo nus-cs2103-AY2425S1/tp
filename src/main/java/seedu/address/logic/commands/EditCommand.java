@@ -192,9 +192,13 @@ public class EditCommand extends Command {
             this.address = address;
         }
 
-        public Optional<Payment> getPayment() { return Optional.ofNullable(payment); }
+        public Optional<Payment> getPayment() {
+            return Optional.ofNullable(payment);
+        }
 
-        public void setPayment(Payment payment) { this.payment = payment; }
+        public void setPayment(Payment payment) {
+            this.payment = payment;
+        }
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);

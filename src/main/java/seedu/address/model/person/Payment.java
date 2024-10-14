@@ -8,6 +8,8 @@ import static java.util.Objects.requireNonNull;
  */
 public class Payment {
 
+    public static final String MESSAGE_CONSTRAINTS = "Payment takes true/false, blank/other values will be taken as " +
+            "false";
     public final Boolean hasPaid;
 
     /**

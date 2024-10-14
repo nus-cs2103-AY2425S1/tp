@@ -101,7 +101,6 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed
      */
     public static Payment parsePayment(String payment) {
-        requireNonNull(payment);
         String trimmedPayment = payment.trim();
         Boolean b = Boolean.parseBoolean(trimmedPayment);
         return new Payment(b);
