@@ -10,7 +10,6 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyMap;
-import seedu.address.model.policy.PolicyType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -45,7 +44,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, PolicyMap policies) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, address, tags, policies);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -85,26 +84,7 @@ public class Person {
     public boolean addPolicy(Policy policy) {
         return policies.add(policy);
     }
-    /**
-     * Removes policies of the specified types from the policy set.
-     * <p>
-     * This method attempts to delete each policy type in the provided {@code policyTypes} set.
-     * If any deletion fails, the method stops and returns {@code false}. If all policies
-     * are successfully deleted, it returns {@code true}.
-     * </p>
-     *
-     * @param policyTypes the set of {@code PolicyType} that should be removed
-     * @return {@code true} if all policies were successfully removed;
-     *         {@code false} if any removal failed
-     */
-    public boolean removePolicy(Set<PolicyType> policyTypes) {
-        for (PolicyType type : policyTypes) {
-            if (!policies.delete(type)) {
-                return false;
-            }
-        }
-        return true;
-    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.

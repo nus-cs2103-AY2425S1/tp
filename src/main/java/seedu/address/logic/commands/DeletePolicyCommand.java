@@ -12,6 +12,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.policy.PolicyMap;
 import seedu.address.model.policy.PolicyType;
 
 /**
@@ -53,20 +54,29 @@ public class DeletePolicyCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
+
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        PolicyMap editedPolicy = editPolicy(policyTypes, personToEdit.getPolicies());
+
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), personToEdit.getPolicies());
-        if (!editedPerson.removePolicy(policyTypes)) {
-            throw new CommandException(MESSAGE_POLICY_NOT_FOUND);
-        }
+                personToEdit.getAddress(), personToEdit.getTags(), editedPolicy);
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(POLICY_DELETE_PERSON_SUCCESS, Messages.format(personToEdit)));
+        return new CommandResult(String.format(POLICY_DELETE_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
-
+    private PolicyMap editPolicy(Set<PolicyType> policyTypes, PolicyMap policyMap) throws CommandException {
+        PolicyMap updatedPolicies = policyMap.duplicate();
+        for (PolicyType type : policyTypes) {
+            if (!updatedPolicies.delete(type)) {
+                throw new CommandException(MESSAGE_POLICY_NOT_FOUND);
+            }
+        }
+        return updatedPolicies;
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {

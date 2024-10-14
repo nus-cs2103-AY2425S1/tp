@@ -264,11 +264,11 @@ public class ParserUtilTest {
     @Test
     public void parsePolicyType_emptyList_throwsParseException() {
         List<String> policies = new ArrayList<>();
-        assertThrows(ParseException.class, () -> ParserUtil.parsePolicyType(policies));
+        assertThrows(ParseException.class, () -> ParserUtil.parsePolicyTypes(policies));
     }
     @Test
     public void parsePolicyType_listWithValidPolicies_returnsPolicyTypes() throws Exception {
-        Set<PolicyType> actual = ParserUtil.parsePolicyType(Arrays.asList(VALID_POLICY_TYPE_LIFE,
+        Set<PolicyType> actual = ParserUtil.parsePolicyTypes(Arrays.asList(VALID_POLICY_TYPE_LIFE,
                 VALID_POLICY_TYPE_HEALTH, VALID_POLICY_TYPE_EDUCATION));
         Set<PolicyType> expected = new HashSet<>();
         expected.add(PolicyType.LIFE);
@@ -280,6 +280,6 @@ public class ParserUtilTest {
     public void parsePolicyType_listWithInValidPolicies_throwsParseException() {
         List<String> policies = new ArrayList<>();
         policies.add(INVALID_POLICY_TYPE);
-        assertThrows(ParseException.class, () ->ParserUtil.parsePolicyType(policies));
+        assertThrows(ParseException.class, () ->ParserUtil.parsePolicyTypes(policies));
     }
 }

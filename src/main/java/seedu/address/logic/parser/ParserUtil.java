@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -166,7 +167,7 @@ public class ParserUtil {
      * @throws ParseException If the given {@code policy} is empty or does not match
      *                        any valid {@code PolicyType}.
      */
-    public static Set<PolicyType> parsePolicyType(List<String> policies) throws ParseException {
+    public static Set<PolicyType> parsePolicyTypes(List<String> policies) throws ParseException {
         requireNonNull(policies);
         if (policies.isEmpty()) {
             throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
@@ -189,7 +190,7 @@ public class ParserUtil {
                 throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
             }
         }
-        return policyTypes;
+        return Collections.unmodifiableSet(policyTypes);
     }
 
     /**

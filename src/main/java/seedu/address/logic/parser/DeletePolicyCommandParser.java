@@ -38,7 +38,7 @@ public class DeletePolicyCommandParser implements Parser<DeletePolicyCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePolicyCommand.MESSAGE_USAGE), ive);
         }
-        Set<PolicyType> policyTypes = ParserUtil.parsePolicyType(argMultimap.getAllValues(PREFIX_POLICY_TYPE));
+        Set<PolicyType> policyTypes = ParserUtil.parsePolicyTypes(argMultimap.getAllValues(PREFIX_POLICY_TYPE));
         return new DeletePolicyCommand(index, policyTypes);
     }
 }

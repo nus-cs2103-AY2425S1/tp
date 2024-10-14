@@ -69,4 +69,19 @@ public class PolicyMap {
         PolicyMap otherPolicyMap = (PolicyMap) other;
         return policies.equals(otherPolicyMap.policies);
     }
+    /**
+     * Creates and returns a shallow copy of this {@code PolicyMap}.
+     * The returned {@code PolicyMap} will contain the same mappings from {@code PolicyType} to {@code Policy},
+     * but changes to the mappings (i.e., adding or removing policies) in the copied {@code PolicyMap}
+     * will not affect the original {@code PolicyMap}, and vice versa.
+     * Note that the {@code Policy} objects themselves are not duplicated.
+     * Both the original and copied {@code PolicyMap} will reference the same {@code Policy} objects.
+     *
+     * @return a new {@code PolicyMap} containing the same mappings from {@code PolicyType} to {@code Policy}.
+     */
+    public PolicyMap duplicate() {
+        PolicyMap copiedPolicyMap = new PolicyMap();
+        copiedPolicyMap.policies.putAll(this.policies);
+        return copiedPolicyMap;
+    }
 }
