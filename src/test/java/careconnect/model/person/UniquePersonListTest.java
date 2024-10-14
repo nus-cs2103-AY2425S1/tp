@@ -5,7 +5,9 @@ import static careconnect.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static careconnect.testutil.Assert.assertThrows;
 import static careconnect.testutil.TypicalPersons.ALICE;
 import static careconnect.testutil.TypicalPersons.BOB;
+//CHECKSTYLE.OFF: AvoidStarImport
 import static org.junit.jupiter.api.Assertions.*;
+//CHECKSTYLE.ON: AvoidStarImport
 
 import java.util.Arrays;
 import java.util.Collections;
