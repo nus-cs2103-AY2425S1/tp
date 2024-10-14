@@ -66,6 +66,14 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public List<Property> getListOfSellingProperties() {
+        return sellingProperties;
+    }
+
+    public List<Property> getListOfBuyingProperties() {
+        return buyingProperties;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.

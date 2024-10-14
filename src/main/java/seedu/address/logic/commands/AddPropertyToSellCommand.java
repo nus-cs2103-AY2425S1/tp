@@ -8,9 +8,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIT_NUMBER;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Property;
+
+import java.util.List;
 
 /**
  * Adds a property to the list of properties to sell for a specific contact.
@@ -53,14 +57,26 @@ public class AddPropertyToSellCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
 
-        /*if (model.hasProperty(property)) {
+        if (personIndex.getOneBased() > lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Person personToEdit = lastShownList.get(personIndex.getZeroBased());
+
+        /*if (personToEdit.containsSellProperty(propertyToSellToBeAdded)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PROPERTY);
+        } else {
+            personToEdit.addSellProperty(propertyToSellToBeAdded);
+        }*/
+        /*if (model.hasSellProperty(personIndex, propertyToSellToBeAdded)) {
             throw new CommandException(MESSAGE_DUPLICATE_PROPERTY);
         }
 
-        model.addProperty(property);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, property));*/
-        return new CommandResult("Hello from AddPropertyToSellCommand");
+        model.addSellProperty(personIndex, propertyToSellToBeAdded);*/
+        return new CommandResult(String.format(MESSAGE_SUCCESS, propertyToSellToBeAdded));
+        //return new CommandResult("Hello from AddPropertyToSellCommand");
     }
 
     @Override

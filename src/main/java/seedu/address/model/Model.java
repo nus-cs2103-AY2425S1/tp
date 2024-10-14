@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Property;
 
@@ -61,7 +62,7 @@ public interface Model {
     /**
      * Returns true if a property with the same identity as {@code property} exists in the address book.
      */
-    boolean hasSellProperty(Property property);
+    boolean hasSellProperty(Index index, Property property);
 
     /**
      * Deletes the given person.
@@ -74,6 +75,12 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Adds the given property to the list of properties to sell.
+     * {@code property} must not already exist in the list of properties to sell.
+     */
+    void addSellProperty(Index index, Property property);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
