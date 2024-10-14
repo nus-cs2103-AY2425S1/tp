@@ -121,7 +121,7 @@ public class AddApptCommand extends Command {
         Gender updatedGender = personToEdit.getGender();
         Nric updatedNric = personToEdit.getNric();
         Set<Tag> updatedTags = personToEdit.getTags();
-        MedCon updatedMedCon = personToEdit.getMedCon();
+        Set<MedCon> updatedMedCon = personToEdit.getMedCons();
         Priority updatedPriority = personToEdit.getPriority();
         ArrayList<Appointment> oldAppointmentList = null;
         try {

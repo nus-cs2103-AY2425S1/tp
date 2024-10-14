@@ -66,7 +66,7 @@ public class PriorityCommand extends Command {
                         person.getName(), person.getPhone(), person.getEmail(),
                         person.getNric(), person.getAddress(), person.getDateOfBirth(),
                         person.getGender(), person.getTags(), priority, person.getAppointments(),
-                        person.getMedCon());
+                        person.getMedCons());
                 model.setPerson(person, editedPerson);
                 model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
                 return new CommandResult(generateSuccessMessage(editedPerson));

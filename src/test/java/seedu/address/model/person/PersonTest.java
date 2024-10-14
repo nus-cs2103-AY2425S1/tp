@@ -42,7 +42,7 @@ public class PersonTest {
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withName(VALID_NAME_BOB).withDateOfBirth(VALID_DOB_BOB).withGender(VALID_GENDER_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).withPriority(VALID_PRIORITY_BOB)
-                .withMedCon(VALID_MEDCON_BOB).build();
+                .withMedCons(VALID_MEDCON_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different nric, all other attributes same -> returns false
@@ -101,7 +101,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different medical condition -> returns false
-        editedAlice = new PersonBuilder(ALICE).withMedCon(VALID_MEDCON_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withMedCons(VALID_MEDCON_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different priority -> returns false
@@ -116,7 +116,7 @@ public class PersonTest {
                 + ", gender=" + ALICE.getGender() + ", dateOfBirth=" + ALICE.getDateOfBirth() + ", phone="
                 + ALICE.getPhone() + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
                 + ", tags=" + ALICE.getTags() + ", priority=" + ALICE.getPriority() + ", appointments="
-                + ALICE.getAppointments() + ", medical conditions=" + ALICE.getMedCon() + "}";
+                + ALICE.getAppointments() + ", medical conditions=" + ALICE.getMedCons() + "}";
 
         assertEquals(expected, ALICE.toString());
     }
