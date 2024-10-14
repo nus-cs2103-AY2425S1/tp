@@ -49,12 +49,10 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
 
-        // display confirmation dialog - not sure if this is the best place to put it
+        isConfirmed = ConfirmDelete.showConfirmationDialog(personToDelete);
+
         if (!isConfirmed) {
-            ConfirmDelete.showConfirmationDialog(personToDelete);
-        }
-        if (!isConfirmed) {
-            throw new CommandException("You have cancelled the deletion!");
+            throw new CommandException(Messages.MESSAGE_USER_CANCEL);
         }
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
