@@ -27,7 +27,7 @@ class JsonSerializableMeetUpList {
      * Constructs a {@code JsonSerializableMeetUpList} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableMeetUpList(@JsonProperty("meetups") List<JsonAdaptedMeetUp> meetUps) {
+    public JsonSerializableMeetUpList(@JsonProperty("meetUps") List<JsonAdaptedMeetUp> meetUps) {
         this.meetUps.addAll(meetUps);
     }
 

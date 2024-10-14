@@ -81,7 +81,7 @@ class JsonAdaptedMeetUp {
         // Placeholder code
         LocalDateTime from = LocalDateTime.of(2023, 10, 14, 15, 30, 45);
         LocalDateTime to = LocalDateTime.of(2023, 10, 14, 15, 30, 45);
-        return new MeetUp("placeholder", "placeholder", from, to);
+        return new MeetUp(name, info, from, to);
     }
 
 }
