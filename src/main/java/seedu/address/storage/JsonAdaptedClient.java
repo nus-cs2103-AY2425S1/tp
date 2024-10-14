@@ -16,6 +16,7 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.insurance.InsurancePlansManager;
+import seedu.address.model.client.insurance.claim.Claim;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,6 +31,7 @@ class JsonAdaptedClient {
     private final String email;
     private final String address;
     private final String insurancePlans;
+    private final String claims;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -38,13 +40,14 @@ class JsonAdaptedClient {
     @JsonCreator
     public JsonAdaptedClient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("insurancePlans") String insurancePlansString,
+            @JsonProperty("insurancePlans") String insurancePlansString, @JsonProperty("claims") String claimsString,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.insurancePlans = insurancePlansString;
+        this.claims = claimsString;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -59,6 +62,7 @@ class JsonAdaptedClient {
         email = source.getEmail().value;
         address = source.getAddress().value;
         insurancePlans = source.getInsurancePlansManager().toString();
+        claims = source.getInsurancePlansManager().convertClaimsToJson();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -111,7 +115,14 @@ class JsonAdaptedClient {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     InsurancePlansManager.class.getSimpleName()));
         }
+
+        if (claims == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Claim.class.getSimpleName()));
+        }
+
         final InsurancePlansManager modelInsurancePlansManager = new InsurancePlansManager(insurancePlans);
+        modelInsurancePlansManager.addAllClaimsFromJson(claims);
 
         final Set<Tag> modelTags = new HashSet<>(clientTags);
         return new Client(modelName, modelPhone, modelEmail, modelAddress, modelInsurancePlansManager, modelTags);

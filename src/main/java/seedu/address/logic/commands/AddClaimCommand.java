@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSURANCE_ID;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
 import java.util.List;
 
@@ -12,6 +13,12 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.exceptions.ClaimException;
+import seedu.address.model.client.exceptions.InsurancePlanException;
+import seedu.address.model.client.insurance.InsurancePlan;
+import seedu.address.model.client.insurance.InsurancePlanFactory;
+import seedu.address.model.client.insurance.InsurancePlansManager;
+import seedu.address.model.client.insurance.claim.Claim;
 
 /**
  * Adds a claim to an existing client with existing Insurance Plan in the address book.
@@ -24,14 +31,14 @@ public class AddClaimCommand extends Command {
             + "Parameters: INDEX (must be a positive integer), "
             + " INSURANCE_PLAN_ID (must be a valid ID), "
             + " Claim_ID (must be a valid ID), "
-            + " Claim amount (must be a valid integer, convert from dollars and cents to just cents) \n"
+            + " Claim amount (must be a valid monetary value without the dollar sign) \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_INSURANCE_ID + " 0 "
             + PREFIX_CLAIM_ID + " B1234 "
-            + PREFIX_CLAIM_AMOUNT + " 10000";
+            + PREFIX_CLAIM_AMOUNT + " 100.00";
 
     public static final String MESSAGE_SUCCESS =
-            "New claim added to Client: %1$s, under Insurance plan %2$s, with Claim ID: %3$s, Claim Amount: %4$d";
+            "New claim added to Client: %1$s, under Insurance plan %2$s, with Claim ID: %3$s, Claim Amount: %4$s";
 
     public final Index index;
     private final int insuranceId;
@@ -64,7 +71,25 @@ public class AddClaimCommand extends Command {
 
         Client clientToEdit = lastShownList.get(index.getZeroBased());
 
-        throw new CommandException(String.format(MESSAGE_SUCCESS, Messages.format(clientToEdit),
-                this.insuranceId, this.claimID, this.claimAmount));
+        try {
+            InsurancePlan planToBeUsed = InsurancePlanFactory.createInsurancePlan(insuranceId);
+
+            InsurancePlansManager personToEditInsurancePlansManager = clientToEdit.getInsurancePlansManager();
+            personToEditInsurancePlansManager.checkIfPlanOwned(planToBeUsed);
+
+            Claim claimToBeAdded = new Claim(claimID, claimAmount);
+            personToEditInsurancePlansManager.addClaimToInsurancePlan(planToBeUsed, claimToBeAdded);
+
+            Client personWithAddedInsurancePlan = lastShownList.get(index.getZeroBased());
+            model.setClient(clientToEdit, personWithAddedInsurancePlan);
+            model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
+
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(clientToEdit), planToBeUsed,
+                    claimID, Messages.formatClaimAmount(claimAmount)));
+        } catch (ClaimException e) {
+            throw new CommandException(String.format(e.getMessage(), claimID, Messages.format(clientToEdit)));
+        } catch (InsurancePlanException e) {
+            throw new CommandException(String.format(e.getMessage(), insuranceId, Messages.format(clientToEdit)));
+        }
     }
 }

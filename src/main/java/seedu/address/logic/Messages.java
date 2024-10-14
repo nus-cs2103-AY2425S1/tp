@@ -50,4 +50,15 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code ClaimAmount} for display to the user by converting from cents to dollar and cents.
+     * The formatting was generated using ChatGPT.
+     */
+    public static String formatClaimAmount(int claimAmount) {
+        int centsInADollar = 100;
+        int claimAmountDollarsPart = claimAmount / centsInADollar;
+        int claimAmountCentsPart = claimAmount % centsInADollar;
+        return String.format("$%d.%02d", claimAmountDollarsPart, claimAmountCentsPart);
+    }
+
 }

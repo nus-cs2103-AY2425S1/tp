@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.client.exceptions.InsurancePlanException;
 
 class InsurancePlansManagerTest {
 
@@ -43,7 +43,7 @@ class InsurancePlansManagerTest {
     void checkIfPlanNotOwnedWhileAdding_unownedPlan_success() {
         try {
             insurancePlansManager.checkIfPlanNotOwned(new BasicPlan());
-        } catch (ParseException e) {
+        } catch (InsurancePlanException e) {
             fail();
         }
     }
@@ -54,7 +54,7 @@ class InsurancePlansManagerTest {
             insurancePlansManager.addPlan(new BasicPlan());
             insurancePlansManager.checkIfPlanNotOwned(new BasicPlan());
             fail();
-        } catch (ParseException e) {
+        } catch (InsurancePlanException e) {
             assertEquals(e.getMessage(), InsurancePlansManager.DUPLICATE_PLAN_DETECTED_MESSAGE);
         }
     }
@@ -64,7 +64,7 @@ class InsurancePlansManagerTest {
         try {
             insurancePlansManager.addPlan(new BasicPlan());
             insurancePlansManager.checkIfPlanOwned(new BasicPlan());
-        } catch (ParseException e) {
+        } catch (InsurancePlanException e) {
             fail();
         }
     }
@@ -74,7 +74,7 @@ class InsurancePlansManagerTest {
         try {
             insurancePlansManager.checkIfPlanOwned(new BasicPlan());
             fail();
-        } catch (ParseException e) {
+        } catch (InsurancePlanException e) {
             assertEquals(e.getMessage(), InsurancePlansManager.PLAN_NOT_DETECTED_MESSAGE);
         }
     }

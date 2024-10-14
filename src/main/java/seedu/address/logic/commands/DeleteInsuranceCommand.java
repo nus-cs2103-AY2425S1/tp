@@ -9,9 +9,9 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.exceptions.InsurancePlanException;
 import seedu.address.model.client.insurance.InsurancePlan;
 import seedu.address.model.client.insurance.InsurancePlanFactory;
 import seedu.address.model.client.insurance.InsurancePlansManager;
@@ -37,7 +37,7 @@ public class DeleteInsuranceCommand extends Command {
     private final int insuranceID;
 
     /**
-     * @param index of the client in the filtered client list remove the insurance plan from
+     * @param index       of the client in the filtered client list remove the insurance plan from
      * @param insuranceID of the client to be updated to
      */
     public DeleteInsuranceCommand(Index index, int insuranceID) {
@@ -71,7 +71,7 @@ public class DeleteInsuranceCommand extends Command {
 
             return new CommandResult(String.format(MESSAGE_DELETE_INSURANCE_PLAN_SUCCESS,
                     planToBeDeleted, Messages.format(clientWithDeletedInsurancePlan)));
-        } catch (ParseException e) {
+        } catch (InsurancePlanException e) {
             throw new CommandException(
                     String.format(e.getMessage(), insuranceID, Messages.format(clientToEdit)));
         }

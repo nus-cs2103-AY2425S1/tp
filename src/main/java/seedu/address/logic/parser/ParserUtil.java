@@ -13,6 +13,7 @@ import seedu.address.model.client.Address;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.insurance.claim.Claim;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,6 +23,8 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_UNPARSABLE_INSURANCE_ID = "Insurance ID must be a positive integer.";
+    public static final String MESSAGE_INVALID_CENTS = "The claim amount can only contain up to 2 digits of cents.";
+    public static final String MESSAGE_TOO_MANY_DECIMALS = "Too many decimal points in claim amount!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -127,6 +130,54 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_UNPARSABLE_INSURANCE_ID);
         }
         return trimmedInsurancePlanId;
+    }
+
+    /**
+     * Parses {@code String claimId} into a valid claimId.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given claimId is invalid based on preset conventions.
+     */
+    public static String parseClaimId(String claimId) throws ParseException {
+        requireNonNull(claimId);
+        String trimmedClaimId = claimId.trim();
+        Claim.checkValidClaimId(trimmedClaimId);
+        return trimmedClaimId;
+    }
+
+    /**
+     * Parses {@code String claimId} into a valid claimId.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the claim amount is not a valid positive integer
+     */
+    public static int parseClaimAmount(String claimAmount) throws ParseException {
+        requireNonNull(claimAmount);
+        String[] claimAmountString = claimAmount.trim().split("\\.");
+
+        if (claimAmountString.length != 2) {
+            throw new ParseException(MESSAGE_TOO_MANY_DECIMALS);
+        }
+
+        int claimAmountInt;
+
+        try {
+            int centsInADollar = 100;
+            int claimAmountDollars = Integer.parseInt(claimAmountString[0].trim());
+
+            String claimAmountCentsString = claimAmountString[1].trim();
+            if (claimAmountCentsString.length() > 2) {
+                throw new ParseException(MESSAGE_INVALID_CENTS);
+            }
+            int claimAmountCents = Integer.parseInt(claimAmountCentsString);
+
+            claimAmountInt = claimAmountDollars * centsInADollar + claimAmountCents;
+        } catch (NumberFormatException e) {
+            throw new ParseException(Claim.INVALID_CLAIM_AMOUNT);
+        }
+
+        Claim.checkValidClaimAmount(claimAmountInt);
+        return claimAmountInt;
     }
 
     /**
