@@ -74,7 +74,7 @@ public class AddPropertyCommand extends Command {
      * @return A success message string.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !property.getProperty().isEmpty()
+        String message = !property.toString().isEmpty()
                 ? MESSAGE_ADD_PROPERTY_SUCCESS
                 : MESSAGE_DELETE_PROPERTY_SUCCESS;
         return String.format(message, personToEdit);

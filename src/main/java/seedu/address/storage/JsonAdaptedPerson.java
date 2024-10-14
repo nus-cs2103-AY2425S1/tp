@@ -58,7 +58,7 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        property = source.getProperty().getProperty();
+        property = source.getProperty().toString();
         date = source.getAppointment().getDate().value;
         from = source.getAppointment().getFrom().value;
         to = source.getAppointment().getTo().value;

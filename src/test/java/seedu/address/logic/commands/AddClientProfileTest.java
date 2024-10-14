@@ -25,7 +25,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
+public class AddClientProfileTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {

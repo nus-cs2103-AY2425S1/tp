@@ -4,11 +4,11 @@
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
+    "property" : "",
     "remark" : "",
-    "date": "",
-    "from": "",
-    "to" : "",
+    "date": "12/12/2024",
+    "from": "0900",
+    "to" : "1000",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",

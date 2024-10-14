@@ -29,10 +29,6 @@ public class Property {
     //      return test.matches(VALIDATION_REGEX);
     //  }
 
-    public String getProperty() {
-        return value;
-    }
-
     @Override
     public String toString() {
         return value;

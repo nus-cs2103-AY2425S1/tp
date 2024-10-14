@@ -1,21 +1,17 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Property;
-import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -78,9 +74,6 @@ public class PersonBuilder {
         return this;
     }
 
-    ///**
-    //* Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
-    //*/
     //  public PersonBuilder withTags(String ... tags) {
     //      this.tags = SampleDataUtil.getTagSet(tags);
     //      return this;
@@ -89,10 +82,10 @@ public class PersonBuilder {
     /**
     * Sets the {@code Email} of the {@code Person} that we are building.
     */
-      public PersonBuilder withEmail(String email) {
-          this.email = new Email(email);
-          return this;
-      }
+    public PersonBuilder withEmail(String email) {
+        this.email = new Email(email);
+        return this;
+    }
 
     /**
      * Sets the {@code Property} of the {@code Person} that we are building.
@@ -105,10 +98,10 @@ public class PersonBuilder {
     /**
     * Sets the {@code Appointment} of the {@code Person} that we are building.
     */
-      public PersonBuilder withAppointment(String date, String from, String to) {
-          this.appointment = new Appointment(new Date(date), new From(from), new To(to));
-          return this;
-      }
+    public PersonBuilder withAppointment(String date, String from, String to) {
+        this.appointment = new Appointment(new Date(date), new From(from), new To(to));
+        return this;
+    }
 
     public Person build() {
         return new Person(name, phone, email, appointment, property);
