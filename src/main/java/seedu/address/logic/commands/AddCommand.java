@@ -1,13 +1,13 @@
 package seedu.address.logic.commands;
 
-import java.util.logging.Logger;
-
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static java.util.Objects.requireNonNull;
+
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
@@ -24,8 +24,6 @@ import seedu.address.ui.InspectWindow;
  * Adds a person to the address book.
  */
 public class AddCommand extends Command {
-
-    private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
 
     public static final String COMMAND_WORD = "add";
 
@@ -50,8 +48,10 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PHONE = "\nWarning! There is a person with the same phone number";
     public static final String MESSAGE_DUPLICATE_EMAIL = "\nWarning! There is a person with the same email";
 
+    private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
     private final Person toAdd;
     private final Delivery deliveryToAdd;
+
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
@@ -61,6 +61,9 @@ public class AddCommand extends Command {
         deliveryToAdd = null;
     }
 
+    /**
+     * Creates an AddCommand to add the specified {@code Delivery}
+     */
     public AddCommand(Delivery delivery) {
         requireNonNull(delivery);
         deliveryToAdd = delivery;
