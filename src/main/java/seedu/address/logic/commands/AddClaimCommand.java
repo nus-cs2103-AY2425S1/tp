@@ -11,10 +11,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
 
 /**
- * Adds a claim to an existing person with existing Insurance Plan in the address book.
+ * Adds a claim to an existing client with existing Insurance Plan in the address book.
  */
 public class AddClaimCommand extends Command {
     public static final String COMMAND_WORD = "addClaim";
@@ -41,7 +41,7 @@ public class AddClaimCommand extends Command {
     /**
      * Constructs an AddClaimCommand object with the values passed in by the user.
      *
-     * @param index       of the person in the filtered person list to add the insurance plan to.
+     * @param index       of the client in the filtered client list to add the insurance plan to.
      * @param insuranceId of insurance plan the claim is to be added to.
      * @param claimID     the claimID received when a claim is created through official channels.
      * @param claimAmount the amount that is being claimed through this claim in cents.
@@ -56,15 +56,15 @@ public class AddClaimCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Client> lastShownList = model.getFilteredClientList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Client clientToEdit = lastShownList.get(index.getZeroBased());
 
-        throw new CommandException(String.format(MESSAGE_SUCCESS, Messages.format(personToEdit),
+        throw new CommandException(String.format(MESSAGE_SUCCESS, Messages.format(clientToEdit),
                 this.insuranceId, this.claimID, this.claimAmount));
     }
 }
