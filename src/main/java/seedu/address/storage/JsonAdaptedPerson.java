@@ -10,6 +10,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Ward;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -20,8 +21,8 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
     private final String name;
     private final String id;
-    /*
     private final String ward;
+    /*
     private final String diagnosis;
     private final String medication;
     private final String phone;
@@ -54,11 +55,11 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("id") String id) {
+    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("id") String id, @JsonProperty("ward") String ward) {
         this.name = name;
         this.id = id;
-        /*
         this.ward = ward;
+        /*
         this.diagnosis = diagnosis;
         this.medication = medication;
         if (tags != null) {
@@ -74,8 +75,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
         id = source.getId().value;
-        /*
         ward = source.getWard().value;
+        /*
         diagnosis = source.getDiagnosis().value;
         medication = source.getMedication().value;
         phone = source.getPhone().value;
@@ -116,6 +117,14 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Id.MESSAGE_CONSTRAINTS);
         }
         final Id modelId = new Id(id);
+
+        if (ward == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Ward.class.getSimpleName()));
+        }
+        if (!Ward.isValidWard(ward)) {
+            throw new IllegalValueException(Ward.MESSAGE_CONSTRAINTS);
+        }
+        final Ward modelWard = new Ward(ward);
         /*
 
         if (email == null) {
@@ -143,7 +152,7 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
          */
-        return new Person(modelName, modelId);
+        return new Person(modelName, modelId, modelWard);
     }
 
 }
