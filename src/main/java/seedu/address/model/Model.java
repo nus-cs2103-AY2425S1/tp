@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
 
 /**
  * The API of the Model component.
@@ -47,10 +46,10 @@ public interface Model<T> {
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setAddressBook(ReadOnlyAddressBook<T> addressBook);
 
     /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyAddressBook<T> getAddressBook();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

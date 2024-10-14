@@ -36,7 +36,7 @@ public class ModelManager<T extends AddressBookComparable<T>> implements Model<T
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook<>(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -77,7 +77,7 @@ public class ModelManager<T extends AddressBookComparable<T>> implements Model<T
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
+    public void setAddressBook(ReadOnlyAddressBook<T> addressBook) {
         this.addressBook.resetData(addressBook);
     }
 
@@ -100,7 +100,9 @@ public class ModelManager<T extends AddressBookComparable<T>> implements Model<T
     @Override
     public void addItem(T item) {
         addressBook.addItem(item);
-        updateFilteredList((Predicate<T>) PREDICATE_SHOW_ALL);
+        @SuppressWarnings("unchecked")
+        Predicate<T> showAll = (Predicate<T>) PREDICATE_SHOW_ALL;
+        updateFilteredList(showAll);
     }
 
     @Override
@@ -134,11 +136,10 @@ public class ModelManager<T extends AddressBookComparable<T>> implements Model<T
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ModelManager)) {
+        if (!(other instanceof ModelManager<?> otherModelManager)) {
             return false;
         }
 
-        ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filtered.equals(otherModelManager.filtered);

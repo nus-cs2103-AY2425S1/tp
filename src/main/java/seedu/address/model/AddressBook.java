@@ -6,7 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.UniqueList;
+import seedu.address.model.internship.UniqueList;
 
 /**
  * Wraps all data at the address-book level
@@ -114,11 +114,10 @@ public class AddressBook<T extends AddressBookComparable<T>> implements ReadOnly
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof AddressBook<?> otherAddressBook)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
         return items.equals(otherAddressBook.items);
     }
 

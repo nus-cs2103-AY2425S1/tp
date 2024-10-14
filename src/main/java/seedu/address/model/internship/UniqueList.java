@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.internship;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -9,8 +9,8 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.AddressBookComparable;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.internship.exceptions.DuplicatePersonException;
+import seedu.address.model.internship.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -117,11 +117,10 @@ public class UniqueList<T extends AddressBookComparable<T>> implements Iterable<
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UniqueList)) {
+        if (!(other instanceof UniqueList<?> otherUniquePersonList)) {
             return false;
         }
 
-        UniqueList otherUniquePersonList = (UniqueList) other;
         return internalList.equals(otherUniquePersonList.internalList);
     }
 
