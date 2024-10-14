@@ -66,12 +66,25 @@ public class FindCommandParserTest {
 
         // Multiple whitespaces between successive prefixes
         assertParseSuccess(parser, " a/ \n Clementi \n  \t   a/ Serangoon \n  \t", expectedFindCommand);
+
+        // Multiple addresses specified using one prefix
+        assertParseSuccess(parser, " a/Clementi | Serangoon", expectedFindCommand);
     }
 
     @Test
     public void parse_invalidArgsForAddress_failure() {
         // Blank input
         assertParseFailure(parser, " a/",
+                String.format(Address.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE));
+
+        // Blank address when using | symbol
+        assertParseFailure(parser, " a/ | ",
+                String.format(Address.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE));
+
+        assertParseFailure(parser, " a/Serangoon | ",
+                String.format(Address.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE));
+
+        assertParseFailure(parser, " a/ | Serangoon ",
                 String.format(Address.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE));
     }
 

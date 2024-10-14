@@ -25,17 +25,17 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters persons in the address book according to the "
-            + "given parameters. Matching is case-insensitive. A combination of the following parameters can be used. "
-            + "Note that to specify multiple addresses, the "
-            + "prefix \"" + PREFIX_ADDRESS + "\" should be used for each new address.\n"
+            + "given parameters. Matching is case-insensitive. A combination of the following parameters can be used.\n"
             + "Parameters: "
             + PREFIX_NAME + "START OF NAME "
             + PREFIX_ADDRESS + "PART OF ADDRESS "
             + PREFIX_PRIORITY + "PRIORITY\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Jo "
-            + PREFIX_ADDRESS + "Clementi "
-            + PREFIX_PRIORITY + "HIGH";
+            + PREFIX_ADDRESS + "Clementi | Serangoon"
+            + PREFIX_PRIORITY + "HIGH\n"
+            + "Note that each prefix can be used once or multiple times to specify multiple values to filter "
+            + "but for addresses, use the pipe symbol \"|\" to separate the keywords.";
 
     private final List<String> names;
     private final List<String> addresses;

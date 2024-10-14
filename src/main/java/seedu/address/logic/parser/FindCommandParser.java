@@ -56,6 +56,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE);
         }
 
+        addresses = splitAddresses(addresses);
         if (!areValidKeywords(addresses, Address.VALIDATION_REGEX)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE);
         }
@@ -64,7 +65,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (!areValidPriorities(priorities)) {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE);
         }
-
 
         return new FindCommand(names, addresses, priorities);
     }
@@ -90,6 +90,30 @@ public class FindCommandParser implements Parser<FindCommand> {
             newList.addAll(Arrays.asList(separatedStrings));
         }
         return newList;
+    }
+
+    /**
+     * Splits each string of addresses in {@code addressList} into the constituent addresses separated
+     * by the | symbol. Only use this for addresses since can have whitespace for a address filter.
+     *
+     * @return New list of addresses to filter by.
+     */
+    private List<String> splitAddresses(List<String> addressList) {
+        List<String> newAddressList = new ArrayList<>();
+
+        for (String currentAddress : addressList) {
+            String[] separatedAddresses = currentAddress.split("\\|", -1); // -1 limit keeps empty strings
+
+            for (String curr : separatedAddresses) {
+                System.out.println(curr);
+            }
+
+            for (int i = 0; i < separatedAddresses.length; i++) { // remove whitespace between subsequent addresses
+                String trimmedAddress = separatedAddresses[i].trim();
+                newAddressList.add(trimmedAddress);
+            }
+        }
+        return newAddressList;
     }
 
     /**
