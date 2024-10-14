@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -15,17 +14,17 @@ import seedu.address.model.person.Person;
 /**
  * Adds a person to the address book.
  */
-public class AddContactCommand extends Command {
-    public static final String COMMAND_WORD = "add_contact";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to the address book. "
+public class AddContactCommand extends AddCommand<Person> {
+    public static final String ENTITY_WORD = "contact";
+    public static final String FULL_COMMAND = COMMAND_WORD + " " + ENTITY_WORD;
+    public static final String MESSAGE_USAGE = FULL_COMMAND + ": Adds a contact to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ROLE + "ROLE "
             + "[" + PREFIX_SKILL + "SKILLS]... (Optional)\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + FULL_COMMAND + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
@@ -35,14 +34,11 @@ public class AddContactCommand extends Command {
     public static final String MESSAGE_DUPLICATE_CONTACT = "A candidate with this phone number "
             + "or email already exists.";
 
-    private final Person toAdd;
-
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
     public AddContactCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+        super(person);
     }
 
     @Override
@@ -77,12 +73,5 @@ public class AddContactCommand extends Command {
 
         AddContactCommand otherAddCommand = (AddContactCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .toString();
     }
 }
