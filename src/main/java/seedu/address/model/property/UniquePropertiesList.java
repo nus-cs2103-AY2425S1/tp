@@ -48,6 +48,17 @@ public class UniquePropertiesList implements Iterable<Property> {
     }
 
     /**
+     * Removes the equivalent client from the list.
+     * The client must exist in the list.
+     */
+    public void remove(Property toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new PropertyNotFoundException();
+        }
+    }
+
+    /**
      * Replaces the property {@code target} in the list with {@code editedProperty}.
      * {@code target} must exist in the list.
      * The property identity of {@code editedProperty} must not be the same as another existing property in the list.
