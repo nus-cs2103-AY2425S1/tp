@@ -11,8 +11,11 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "Phone numbers can contain numbers, spaces and hyphens, and it should be at least 3 digits long.\n" +
+                    "Only 1 space or hyphen is allowed between each alphanumeric character.";
+    public static final String VALIDATION_REGEX = "(?=((\\D*\\d){3,}))\\d{1,}([ -]\\d{1,})*";
+    //\\d{3,}
+    //add n/joseph p/99 e/1@gmail.com a/11
     public final String value;
 
     /**
