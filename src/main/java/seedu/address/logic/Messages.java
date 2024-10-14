@@ -59,11 +59,11 @@ public class Messages {
         return builder.toString();
     }
 
-    public static String listFormat(List<Person> persons, Function<Person, String> formatter) {
+    public static String ListFormat(List<Person> persons, Function<Person, String> formatter) {
         StringBuilder result = new StringBuilder();
 
         for (Person person : persons) {
-            result.append(formatter.apply(person) + "\n");
+            result.append(formatter.apply(person));
         }
 
         return result.toString();

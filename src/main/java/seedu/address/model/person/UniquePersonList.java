@@ -36,11 +36,21 @@ public class UniquePersonList implements Iterable<Person> {
         return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
 
+    /**
+     * Returns number of existing persons with clashing schedules with given argument.
+     * @param toCheck Person to check against.
+     * @return Number of persons with clashes.
+     */
     public long countClash(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().filter(toCheck::isClash).count();
     }
 
+    /**
+     * Returns a list of persons with clashing schedules with given argument.
+     * @param toCheck Person to check against.
+     * @return List of persons with clashes.
+     */
     public List<Person> getClashes(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().filter(toCheck::isClash).toList();

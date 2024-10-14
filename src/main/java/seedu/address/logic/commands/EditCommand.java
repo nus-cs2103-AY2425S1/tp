@@ -110,7 +110,14 @@ public class EditCommand extends Command {
                     + String.format(
                             MESSAGE_HAS_CLASHES,
                             clashes,
-                            Messages.listFormat(clashingPersons, person -> person.getName().toString())
+                            Messages.ListFormat(
+                                    clashingPersons,
+                                    person -> String.format(
+                                            "Name: %s | Schedule: %s\n",
+                                            person.getName(),
+                                            person.getSchedule()
+                                    )
+                            )
                     )
             );
         }
