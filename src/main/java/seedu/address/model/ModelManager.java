@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.function.Predicate;
+import java.util.logging.Filter;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -29,6 +30,7 @@ public class ModelManager implements Model {
     private final PropertyBook propertyBook;
     private final ClientBook clientBook;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Property> filteredProperties;
 
     // note that filteredClients may be removed if we decide not to keep the filtering feature
     private final FilteredList<Client> filteredClients;
@@ -49,8 +51,9 @@ public class ModelManager implements Model {
         this.propertyBook = new PropertyBook(propertyBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.clientBook = new ClientBook(clientBook);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredClients = new FilteredList<>(this.clientBook.getClientList());
+        this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.filteredClients = new FilteredList<>(this.clientBook.getClientList());
+        this.filteredProperties = new FilteredList<>(this.propertyBook.getPropertyList());
     }
 
     public ModelManager() {
@@ -249,5 +252,10 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyPropertyBook getPropertyBook() {
         return propertyBook;
+    }
+
+    @Override
+    public ObservableList<Property> getFilteredPropertyList() {
+        return filteredProperties;
     }
 }

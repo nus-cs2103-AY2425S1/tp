@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.model.property.Property;
 
 /**
  * Lists all persons in the address book to the user.
@@ -84,6 +85,11 @@ public class ListCommand extends Command {
         case PROPERTIES:
             // Logic to list properties
             System.out.println("Listing all properties");
+            // TODO: Remove this @apollo-tan
+            for (Property property : model.getFilteredPropertyList()) {
+                System.out.println(property.toString());
+            }
+
             break;
         default:
             throw new AssertionError("Unexpected key: " + key);

@@ -164,4 +164,6 @@ public interface Model {
      * {@code property} must not already exist in the address book.
      */
     void addProperty(Property property);
+
+    ObservableList<Property> getFilteredPropertyList();
 }
