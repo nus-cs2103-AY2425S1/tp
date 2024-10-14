@@ -1,13 +1,15 @@
 package seedu.address.model.goodsReceipt;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.time.LocalDateTime;
 
 import seedu.address.model.goods.Goods;
 import seedu.address.model.person.Name;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 
 public class GoodsReceipt {
 
