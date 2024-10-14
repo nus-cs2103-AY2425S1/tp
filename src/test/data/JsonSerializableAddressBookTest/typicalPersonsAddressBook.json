@@ -63,5 +63,29 @@
     "role": "SWE",
     "contractEndDate": "2024-10-09",
     "isEmployee": true
+  }, {
+    "name" : "Jevan Lim",
+    "phone" : "12345678",
+    "email" : "jevan@example.com",
+    "address" : "hougang ave",
+    "department": "IT",
+    "role": "SWE",
+    "isEmployee": false
+  }, {
+    "name" : "Kevin Lee",
+    "phone" : "87654321",
+    "email" : "kevin@example.com",
+    "address" : "sengkang street",
+    "department": "IT",
+    "role": "SWE",
+    "isEmployee": false
+  }, {
+    "name" : "Lily B",
+    "phone" : "12348765",
+    "email" : "lily@example.com",
+    "address" : "punggol cove",
+    "department": "IT",
+    "role": "SWE",
+    "isEmployee": false
   } ]
 }

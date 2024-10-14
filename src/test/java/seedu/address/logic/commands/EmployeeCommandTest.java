@@ -35,7 +35,7 @@ public class EmployeeCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new PersonBuilder().buildEmployee();
 
         CommandResult commandResult = new EmployeeCommand(validPerson).execute(modelStub);
 
@@ -46,7 +46,7 @@ public class EmployeeCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new PersonBuilder().buildEmployee();
         EmployeeCommand employeeCommand = new EmployeeCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
@@ -56,8 +56,8 @@ public class EmployeeCommandTest {
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        Person alice = new PersonBuilder().withName("Alice").buildEmployee();
+        Person bob = new PersonBuilder().withName("Bob").buildEmployee();
         EmployeeCommand addAliceCommand = new EmployeeCommand(alice);
         EmployeeCommand addBobCommand = new EmployeeCommand(bob);
 
