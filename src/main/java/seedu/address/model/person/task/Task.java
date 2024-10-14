@@ -10,8 +10,8 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Task {
     public static final String MESSAGE_CONSTRAINTS = "Task should have task description and deadline";
-    public final TaskDescription taskDescription;
-    public final TaskDeadline taskDeadline;
+    private final TaskDescription taskDescription;
+    private final TaskDeadline taskDeadline;
 
     /**
      * Constructs a {@code Task}.
@@ -24,6 +24,20 @@ public class Task {
         requireNonNull(taskDeadline);
         this.taskDescription = taskDescription;
         this.taskDeadline = taskDeadline;
+    }
+
+    /**
+     * Returns task description of task.
+     */
+    public TaskDescription getTaskDescription() {
+        return taskDescription;
+    }
+
+    /**
+     * Returns task deadline of task.
+     */
+    public TaskDeadline getTaskDeadline() {
+        return taskDeadline;
     }
 
     @Override
@@ -52,5 +66,12 @@ public class Task {
     @Override
     public int hashCode() {
         return taskDescription.hashCode() * taskDeadline.hashCode();
+    }
+
+    /**
+     * Compares task to other task based on their deadline.
+     */
+    public int compareTo(Task other) {
+        return taskDeadline.compareTo(other.taskDeadline);
     }
 }

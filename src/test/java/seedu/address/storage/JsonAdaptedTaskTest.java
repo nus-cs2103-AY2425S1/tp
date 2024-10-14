@@ -15,8 +15,8 @@ public class JsonAdaptedTaskTest {
     private static final String INVALID_TASK_DESCRIPTION = " ";
     private static final String INVALID_TASK_DEADLINE = "tomorrow";
 
-    private static final String VALID_TASK_DESCRIPTION = MARKING_TASK.taskDescription.toString();
-    private static final String VALID_TASK_DEADLINE = MARKING_TASK.taskDeadline.toString();
+    private static final String VALID_TASK_DESCRIPTION = MARKING_TASK.getTaskDescription().toString();
+    private static final String VALID_TASK_DEADLINE = MARKING_TASK.getTaskDeadline().toString();
 
     @Test
     public void toModelType_validTaskDetails_returnsTask() throws Exception {

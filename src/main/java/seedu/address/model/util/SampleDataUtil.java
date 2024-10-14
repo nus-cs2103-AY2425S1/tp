@@ -14,17 +14,24 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
+import seedu.address.model.person.task.Task;
+import seedu.address.model.person.task.TaskDeadline;
+import seedu.address.model.person.task.TaskDescription;
 import seedu.address.model.person.task.TaskList;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+    private static TaskList tl = new TaskList();
     public static Person[] getSamplePersons() {
+        tl.add(new Task(new TaskDescription("Mark homework"),
+                new TaskDeadline("2024-12-31")));
+
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new EmergencyContact("87438807"),
                 new Address("Blk 30 Geylang Street 29, #06-40"), new Note(""),
-                getSubjectSet("MATH"), new Level("K2"), new TaskList()),
+                getSubjectSet("MATH"), new Level("K2"), tl),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new EmergencyContact("99272758"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Note(""),
                 getSubjectSet("PHYSICS", "MATH"), new Level("P2"), new TaskList()),

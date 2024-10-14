@@ -24,7 +24,7 @@ public class TaskList implements Iterable<Task> {
      * Sorts task by deadline, earlier tasks are placed at the front
      */
     public void sortByDeadline() {
-        tasks.sort((o1, o2) -> o1.taskDeadline.compareTo(o2.taskDeadline));
+        tasks.sort(Task::compareTo);
     }
 
     /**

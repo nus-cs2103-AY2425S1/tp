@@ -27,8 +27,8 @@ public class TaskBuilder {
      * @param taskToCopy
      */
     public TaskBuilder(Task taskToCopy) {
-        taskDescription = taskToCopy.taskDescription;
-        taskDeadline = taskToCopy.taskDeadline;
+        taskDescription = taskToCopy.getTaskDescription();
+        taskDeadline = taskToCopy.getTaskDeadline();
     }
 
     /**
