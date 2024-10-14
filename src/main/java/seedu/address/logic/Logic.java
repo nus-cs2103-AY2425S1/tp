@@ -44,7 +44,7 @@ public interface Logic {
      */
     GuiSettings getGuiSettings();
 
-        /**
+    /**
      * Returns the MeetUpList.
      *
      * @see seedu.address.model.Model#getMeetUpList()
