@@ -50,7 +50,7 @@ public class LessonSchedule {
      * Adds the specified lesson to the lesson list.
      *
      * @param lesson The lesson to be added. Must not be null.
-     * @throws NullPointerException if the specified lesson is null.
+     * @throws NullPointerException If the specified lesson is null.
      */
     public void addLesson(Lesson lesson) {
         lessons.add(lesson);
