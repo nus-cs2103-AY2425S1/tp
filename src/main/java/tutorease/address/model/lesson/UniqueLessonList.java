@@ -74,7 +74,8 @@ public class UniqueLessonList implements Iterable<Lesson> {
      *
      * @param index The index of the lesson to retrieve.
      * @return The lesson at the specified index.
-     * @throws LessonIndexOutOfRange if the index is invalid (less than 0 or greater than or equal to the size of the list).
+     * @throws LessonIndexOutOfRange if the index is invalid (less than 0 or greater than or equal to the
+     *     size of the list).
      */
     public Lesson get(int index) {
         if (!isValidIndex(index)) {
@@ -114,7 +115,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
      *
      * @param index The index to check.
      * @return True if the index is within bounds (greater than or equal to 0 and less than the size of the
-     * list), false otherwise.
+     *     list), false otherwise.
      */
     public boolean isValidIndex(int index) {
         // index is 0-based
