@@ -1,5 +1,19 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalProjects.ALPHA;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
@@ -12,20 +26,6 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
 import seedu.address.testutil.ProjectBuilder;
-
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Predicate;
-
-import org.junit.jupiter.api.Test;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalProjects.ALPHA;
 
 public class AddProjectCommandTest {
 
@@ -52,8 +52,8 @@ public class AddProjectCommandTest {
         AddProjectCommand addProjectCommand = new AddProjectCommand(validProject);
         ModelStub modelStub = new ModelStubWithProject(validProject);
 
-        assertThrows(CommandException.class, AddProjectCommand.MESSAGE_DUPLICATE_PROJECT,
-                () -> addProjectCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddProjectCommand.MESSAGE_DUPLICATE_PROJECT, (
+                ) -> addProjectCommand.execute(modelStub));
     }
 
     @Test

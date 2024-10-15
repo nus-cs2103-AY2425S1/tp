@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectId;
 import seedu.address.model.project.ProjectName;
-import seedu.address.model.project.Project;
 
 /**
  * Jackson-friendly version of {@link Project}.
@@ -43,7 +43,8 @@ class JsonAdaptedProject {
      */
     public Project toModelType() throws IllegalValueException {
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ProjectName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ProjectName.class.getSimpleName()));
         }
         if (!ProjectName.isValidName(name)) {
             throw new IllegalValueException(ProjectName.MESSAGE_CONSTRAINTS);
@@ -51,7 +52,8 @@ class JsonAdaptedProject {
         final ProjectName modelProjectName = new ProjectName(name);
 
         if (id == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ProjectId.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ProjectId.class.getSimpleName()));
         }
         if (!ProjectId.isValidId(id)) {
             throw new IllegalValueException(ProjectId.MESSAGE_CONSTRAINTS);

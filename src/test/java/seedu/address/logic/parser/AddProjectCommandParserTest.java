@@ -1,23 +1,6 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.AddProjectCommand;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.project.Project;
-import seedu.address.model.project.ProjectId;
-import seedu.address.model.project.ProjectName;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.ProjectBuilder;
-
-import org.junit.jupiter.api.Test;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PROJECT_ID_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PROJECT_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
@@ -31,8 +14,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalProjects.ALPHA;
 import static seedu.address.testutil.TypicalProjects.BETA;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.AddProjectCommand;
+import seedu.address.model.project.Project;
+import seedu.address.model.project.ProjectId;
+import seedu.address.model.project.ProjectName;
+import seedu.address.testutil.ProjectBuilder;
+
 
 public class AddProjectCommandParserTest {
     private AddProjectCommandParser parser = new AddProjectCommandParser();
@@ -42,8 +34,8 @@ public class AddProjectCommandParserTest {
         Project expectedProject = new ProjectBuilder(BETA).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + PROJECT_ID_DESC_BETA + PROJECT_NAME_DESC_BETA
-                , new AddProjectCommand(expectedProject));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + PROJECT_ID_DESC_BETA + PROJECT_NAME_DESC_BETA,
+                new AddProjectCommand(expectedProject));
     }
 
     @Test
@@ -87,7 +79,7 @@ public class AddProjectCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddProjectCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser,  PROJECT_ID_DESC_BETA + VALID_PROJECT_NAME_BETA,
+        assertParseFailure(parser, PROJECT_ID_DESC_BETA + VALID_PROJECT_NAME_BETA,
                 expectedMessage);
 
         // missing id prefix
@@ -114,7 +106,7 @@ public class AddProjectCommandParserTest {
                 ProjectId.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + PROJECT_ID_DESC_BETA + PROJECT_NAME_DESC_BETA
-                , String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddProjectCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + PROJECT_ID_DESC_BETA + PROJECT_NAME_DESC_BETA,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddProjectCommand.MESSAGE_USAGE));
     }
 }

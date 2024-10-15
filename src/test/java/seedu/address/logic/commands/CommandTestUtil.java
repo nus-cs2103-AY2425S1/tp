@@ -76,8 +76,10 @@ public class CommandTestUtil {
     public static final String PROJECT_ID_DESC_ALPHA = " " + PREFIX_PROJECT_ID + VALID_PROJECT_ID_ALPHA;
     public static final String PROJECT_ID_DESC_BETA = " " + PREFIX_PROJECT_ID + VALID_PROJECT_ID_BETA;
 
-    public static final String INVALID_PROJECT_NAME_DESC = " " + PREFIX_PROJECT_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_PROJECT_ID_DESC = " " + PREFIX_PROJECT_ID + "James&"; // '&' not allowed in project id
+    public static final String INVALID_PROJECT_NAME_DESC = " " + PREFIX_PROJECT_NAME + "James&";
+    // '&' not allowed in names
+    public static final String INVALID_PROJECT_ID_DESC = " " + PREFIX_PROJECT_ID + "James&";
+    // '&' not allowed in project id
 
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

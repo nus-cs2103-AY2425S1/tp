@@ -330,7 +330,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list employees.
 2. HRConnect shows a list of employees with their ids.
-3. User requests to delete a specific employee in the list by their projectId.
+3. User requests to delete a specific employee in the list by their id.
 4. HRConnect deletes the person.
 
    Use case ends.
@@ -341,7 +341,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-- 3a. The given projectId is invalid.
+- 3a. The given id is invalid.
 
   - 3a1. HRConnect shows an error message.
 
@@ -355,7 +355,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list projects.
 2. HRConnect shows a list of projects with their ids.
-3. User requests to delete a specific project in the list by its projectId.
+3. User requests to delete a specific project in the list by its id.
 4. HRConnect deletes the project.
 
    Use case ends.
@@ -366,7 +366,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-- 3a. The given projectId is invalid.
+- 3a. The given id is invalid.
 
   - 3a1. HRConnect shows an error message.
 
@@ -382,7 +382,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. HRConnect shows a list of employees with their ids.
 3. User requests to list projects.
 4. HRConnect shows a list of projects with their ids.
-5. User requests to assign a specific employee by their projectId to a specific project by its projectId.
+5. User requests to assign a specific employee by their id to a specific project by its id.
 6. HRConnect assigns the employee to the project.
 
    Use case ends.
@@ -401,7 +401,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   - 5a1. HRConnect shows an error message.
 
-    HRConnect displays the list of projects if the project projectId is invalid and the list of employees if the employee projectId is invalid. Use case resume at step 4.
+    HRConnect displays the list of projects if the project id is invalid and the list of employees if the employee id is invalid. Use case resume at step 4.
 
 ---
 
@@ -411,9 +411,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list projects.
 2. HRConnect shows a list of projects with their ids.
-3. User selects a project by its projectId.
+3. User selects a project by its id.
 4. HRConnect shows a list of employees assigned to the project.
-5. User requests to un-assign a specific employee by their projectId from the selected project.
+5. User requests to un-assign a specific employee by their id from the selected project.
 6. HRConnect un-assigns the employee from the project.
 
    Use case ends.
@@ -428,7 +428,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-- 5a. The given projectId is invalid.
+- 5a. The given id is invalid.
 
   - 5a1. HRConnect shows an error message.
 
