@@ -166,7 +166,7 @@ public class AddCommandTest {
 
         @Override
         public void clearPersonSort() {
-
+            throw new AssertionError("This method should not be called.");
         }
     }
 
