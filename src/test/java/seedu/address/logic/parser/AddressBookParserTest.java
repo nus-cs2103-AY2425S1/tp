@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddConcertCommand;
 import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -24,7 +25,10 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.commons.NameContainsKeywordsPredicate;
+import seedu.address.model.concert.Concert;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.ConcertBuilder;
+import seedu.address.testutil.ConcertUtil;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -36,13 +40,17 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
-        AddPersonCommand command = (AddPersonCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+        AddPersonCommand command = (AddPersonCommand) parser.parseCommand(PersonUtil.getAddCommand(
+                person));
         assertEquals(new AddPersonCommand(person), command);
     }
 
     @Test
     public void parseCommand_addConcert() throws Exception {
-        // TODO: to be implemented
+        Concert concert = new ConcertBuilder().build();
+        AddConcertCommand command = (AddConcertCommand) parser.parseCommand(ConcertUtil
+                .getAddCommand(concert));
+        assertEquals(new AddConcertCommand(concert), command);
     }
 
     @Test
