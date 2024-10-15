@@ -79,5 +79,20 @@ public class AddCarCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_ADD_CAR_SUCCESS, carToAdd));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AddCarCommand)) {
+            return false;
+        }
+
+        AddCarCommand otherCommand = (AddCarCommand) other;
+        return index.equals(otherCommand.index) && carToAdd.equals(otherCommand.carToAdd);
+    }
+
 }
 
