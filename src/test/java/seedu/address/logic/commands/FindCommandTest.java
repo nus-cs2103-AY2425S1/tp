@@ -21,6 +21,7 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -56,13 +57,16 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        NricContainsKeywordsPredicate firstPredicate =
-                new NricContainsKeywordsPredicate(Collections.singletonList("first"));
-        NricContainsKeywordsPredicate secondPredicate =
-                new NricContainsKeywordsPredicate(Collections.singletonList("second"));
+        NameContainsKeywordsPredicate firstPredicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
+        NameContainsKeywordsPredicate secondPredicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        NricContainsKeywordsPredicate thirdPredicate =
+                new NricContainsKeywordsPredicate(Collections.singletonList("S1234567Z"));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FindCommand findThirdCommand = new FindCommand(thirdPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
@@ -79,6 +83,9 @@ public class FindCommandTest {
 
         // different person -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
+
+        // different predicate implementation -> returns false
+        assertFalse(findFirstCommand.equals(findThirdCommand));
     }
 
     @Test
