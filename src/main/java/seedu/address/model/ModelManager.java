@@ -16,6 +16,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
+import seedu.address.ui.UiState;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -29,6 +30,7 @@ public class ModelManager implements Model {
     private final ObjectProperty<Vendor> selectedVendor;
     private final FilteredList<Event> filteredEvents;
     private final ObjectProperty<Event> selectedEvent;
+    private final ObjectProperty<UiState> currentUiState;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -44,6 +46,7 @@ public class ModelManager implements Model {
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
         selectedVendor = new SimpleObjectProperty<>(null);
         selectedEvent = new SimpleObjectProperty<>(null);
+        currentUiState = new SimpleObjectProperty<>(UiState.DEFAULT);
     }
 
     public ModelManager() {
@@ -221,6 +224,19 @@ public class ModelManager implements Model {
     public void viewEvent(Event event) {
         requireNonNull(event);
         selectedEvent.setValue(event);
+    }
+
+    // =========== UI State Accessors
+    // =============================================================
+    @Override
+    public ObservableObjectValue<UiState> getUiState() {
+        return currentUiState;
+    }
+
+    @Override
+    public void setUiState(UiState uiState) {
+        requireNonNull(uiState);
+        currentUiState.setValue(uiState);
     }
 
 }

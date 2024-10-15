@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
+import seedu.address.ui.UiState;
 
 /**
  * The API of the Model component.
@@ -131,4 +132,16 @@ public interface Model {
      * Sets the selected Event.
      */
     void viewEvent(Event event);
+
+    /**
+     * Returns the current UI state.
+     * @return {@code UiState} observable object.
+     */
+    public ObservableObjectValue<UiState> getUiState();
+
+    /**
+     * Sets the current UI state.
+     * @param uiState {@code UiState} object.
+     */
+    public void setUiState(UiState uiState);
 }

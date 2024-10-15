@@ -10,6 +10,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
+import seedu.address.ui.UiState;
 
 /**
  * Display details of an event in the eventTory to the user.
@@ -38,6 +39,7 @@ public class ViewEventCommand extends ViewCommand {
 
         Event eventToView = lastShownList.get(targetIndex.getZeroBased());
         model.viewEvent(eventToView);
+        model.setUiState(UiState.EVENT_DETAILS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(eventToView)));
     }

@@ -33,7 +33,10 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private VendorListPanel vendorListPanel;
+    // TODO: Update once eventListPanel is implemented
+    private VendorListPanel eventListPanel;
     private VendorDetailsPanel vendorDetailsPanel;
+    private EventDetailsPanel eventDetailsPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -74,6 +77,23 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        logic.getUiState().addListener((observable, oldValue, newValue) -> {
+            switch (newValue) {
+            case DEFAULT:
+                setDefaultView();
+                break;
+            case VENDOR_DETAILS:
+                setVendorDetailsView();
+                break;
+            case EVENT_DETAILS:
+                setEventDetailsView();
+                break;
+            default:
+                singleView();
+                break;
+            }
+        });
     }
 
     public Stage getPrimaryStage() {
@@ -112,15 +132,17 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        splitView();
 
-        // panelsHolder.getColumnConstraints().get(0).setPercentWidth(0);
-        // panelsHolder.getColumnConstraints().get(0).setMaxWidth(0);
+        eventDetailsPanel = new EventDetailsPanel(logic.getViewedEvent(), logic.getFilteredVendorList());
+        vendorDetailsPanel = new VendorDetailsPanel(logic.getViewedVendor(), logic.getFilteredVendorList());
 
         vendorListPanel = new VendorListPanel(logic.getFilteredVendorList());
         leftPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
 
-        vendorDetailsPanel = new VendorDetailsPanel(logic.getViewedVendor(), logic.getFilteredVendorList());
-        rightPanelPlaceholder.getChildren().add(vendorDetailsPanel.getRoot());
+        // TODO: Update once eventListPanel is created
+        eventListPanel = new VendorListPanel(logic.getFilteredVendorList());
+        rightPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -130,6 +152,57 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Set main window to display two panels.
+     */
+    void splitView() {
+        panelsHolder.getColumnConstraints().get(1).setPercentWidth(50);
+        panelsHolder.getColumnConstraints().get(1).setMaxWidth(Double.MAX_VALUE);
+    }
+
+    /**
+     * Set main window to display only one panel.
+     */
+    void singleView() {
+        panelsHolder.getColumnConstraints().get(1).setPercentWidth(0);
+        panelsHolder.getColumnConstraints().get(1).setMaxWidth(0);
+    }
+
+    /**
+     * Set main window to display default view.
+     */
+    void setDefaultView() {
+        splitView();
+        rightPanelPlaceholder.getChildren().clear();
+        rightPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+        leftPanelPlaceholder.getChildren().clear();
+        leftPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
+    }
+
+    /**
+     * Set main window to display vendor details.
+     */
+    void setVendorDetailsView() {
+        splitView();
+        rightPanelPlaceholder.getChildren().clear();
+        rightPanelPlaceholder.getChildren().add(vendorDetailsPanel.getRoot());
+        leftPanelPlaceholder.getChildren().clear();
+        leftPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
+    }
+
+    /**
+     * Set main window to display event details.
+     */
+    void setEventDetailsView() {
+        splitView();
+        rightPanelPlaceholder.getChildren().clear();
+        rightPanelPlaceholder.getChildren().add(eventDetailsPanel.getRoot());
+        leftPanelPlaceholder.getChildren().clear();
+
+        // TODO: Update once eventListPanel is created
+        leftPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
     }
 
     /**

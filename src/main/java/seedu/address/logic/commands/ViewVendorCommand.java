@@ -10,6 +10,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.vendor.Vendor;
+import seedu.address.ui.UiState;
 
 /**
  * Display details of a vendor in the eventTory to the user.
@@ -38,6 +39,7 @@ public class ViewVendorCommand extends ViewCommand {
 
         Vendor vendorToView = lastShownList.get(targetIndex.getZeroBased());
         model.viewVendor(vendorToView);
+        model.setUiState(UiState.VENDOR_DETAILS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(vendorToView)));
     }
