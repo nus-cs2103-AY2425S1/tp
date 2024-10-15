@@ -91,7 +91,7 @@ public class AddressBookParser {
             return new AddClaimCommandParser().parse(arguments);
 
             case ListClaimsCommand.COMMAND_WORD:
-                return new ListClaimsCommandParser().parse(arguements);
+                return new ListClaimsCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
