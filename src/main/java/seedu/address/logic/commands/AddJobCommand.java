@@ -21,7 +21,7 @@ public class AddJobCommand extends AddCommand<Job> {
     public static final String FULL_COMMAND = COMMAND_WORD + " " + ENTITY_WORD;
     public static final String MESSAGE_USAGE = FULL_COMMAND + ": Adds a job listing to the address book. "
             + "Parameters: "
-            + PREFIX_NAME + "JOBNAME "
+            + PREFIX_NAME + "NAME "
             + PREFIX_COMPANY + "COMPANY "
             + PREFIX_SALARY + "SALARY "
             + "[" + PREFIX_REQUIREMENTS + "REQUIREMENTS] "
