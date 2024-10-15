@@ -35,8 +35,8 @@ public class MedConContainsKeywordsPredicate implements Predicate<Person> {
             return false;
         }
 
-        MedConContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (MedConContainsKeywordsPredicate) other;
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        MedConContainsKeywordsPredicate otherMedConContainsKeywordsPredicate = (MedConContainsKeywordsPredicate) other;
+        return keywords.equals(otherMedConContainsKeywordsPredicate.keywords);
     }
 
     @Override

@@ -1,14 +1,18 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.Test;
-import seedu.address.testutil.PersonBuilder;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.PersonBuilder;
+
+
 
 public class MedConContainsKeywordsPredicateTest {
     public void equals() {
@@ -85,8 +89,8 @@ public class MedConContainsKeywordsPredicateTest {
     public void toStringMethod() {
         List<String> keywords = List.of("diabetes", "hypertension");
         MedConContainsKeywordsPredicate predicate = new MedConContainsKeywordsPredicate(keywords);
-        String expectedString = MedConContainsKeywordsPredicate.class.getCanonicalName() +
-                "{keywords=" + keywords + "}";
-        assertTrue(predicate.toString().equals(expectedString));
+        String expectedString = MedConContainsKeywordsPredicate.class.getCanonicalName()
+                + "{keywords=" + keywords + "}";
+        assertEquals(expectedString, predicate.toString());
     }
 }

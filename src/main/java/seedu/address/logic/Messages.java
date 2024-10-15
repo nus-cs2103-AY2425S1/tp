@@ -67,6 +67,12 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Appends the {@code toAppend} to the {@code builder} with a comma.
+     *
+     * @param builder The StringBuilder to append to.
+     * @param toAppend The Set to append.
+     */
     private static void appendWithComma(StringBuilder builder, Set<?> toAppend) {
         String result = toAppend.stream()
                 .map(Object::toString)
