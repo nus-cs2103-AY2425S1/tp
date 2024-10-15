@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,11 +15,8 @@ class AssignCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsAssignCommand() throws Exception {
-        // Valid input: "v/1 e/2"
         AssignCommand expectedCommand = new AssignCommand(Index.fromOneBased(1), Index.fromOneBased(2));
-        AssignCommand resultCommand = parser.parse(" v/1 e/2");
-        
-        assertEquals(expectedCommand, resultCommand);
+        assertParseSuccess(parser, " v/1 e/2", expectedCommand);
     }
 
     @Test
