@@ -14,13 +14,13 @@ import seedu.address.model.person.Module;
 import seedu.address.model.person.StudentId;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new GradeCommand object
  */
 public class GradeCommandParser implements Parser<GradeCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the GradeCommand
+     * and returns a GradeCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public GradeCommand parse(String args) throws ParseException {
