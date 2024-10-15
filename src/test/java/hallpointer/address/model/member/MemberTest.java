@@ -100,7 +100,7 @@ public class MemberTest {
     @Test
     public void addSession_validSession_increasesSessions() {
         Member member = new MemberBuilder(ALICE).build();
-        Session newSession = new Session(new SessionName(VALID_NAME_BOB), new SessionDate("2021-10-10"), new Point(10));
+        Session newSession = new Session(new SessionName(VALID_NAME_BOB), new SessionDate("16 Oct 2024"), new Point(10));
         member.addSession(newSession);
         assertTrue(member.getSessions().contains(newSession));
         assertEquals(new Point(newSession.getPoints().points), member.getTotalPoints());
@@ -109,7 +109,7 @@ public class MemberTest {
     @Test
     public void removeSession_validSession_decreasesSessions() {
         Member member = new MemberBuilder(ALICE).build();
-        Session newSession = new Session(new SessionName(VALID_NAME_BOB), new SessionDate("2021-10-10"), new Point(10));
+        Session newSession = new Session(new SessionName(VALID_NAME_BOB), new SessionDate("10 Nov 2025"), new Point(10));
         member.addSession(newSession);
         member.removeSession(newSession);
         assertFalse(member.getSessions().contains(newSession));
