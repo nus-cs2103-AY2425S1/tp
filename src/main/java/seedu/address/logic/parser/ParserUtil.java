@@ -141,7 +141,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@Code String date} into a {@Code ConcertDate}. Leadibg and trailing whitespaces will
+     * Parses {@code String date} into a {@code ConcertDate}. Leadibg and trailing whitespaces will
      * be trimmed.
      */
     public static ConcertDate parsDate(String date) throws ParseException {
