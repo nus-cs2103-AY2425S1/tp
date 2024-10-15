@@ -26,6 +26,7 @@ public class JsonAdaptedLessonTest {
 
     private final Lesson validLesson = new LessonBuilder().withName(tutorEase.getPersonList().get(0)).build();
     private final String validStudent = validLesson.getStudent().toString();
+    private final String validStudentIndex = "1";
     private final String validLocationIndex = validLesson.getLocationIndex().toString();
     private final String validStartDateTime = validLesson.getStartDateTime().toString();
     private final String validEndDateTime = validLesson.getEndDateTime().toString();
@@ -50,36 +51,44 @@ public class JsonAdaptedLessonTest {
 
     @Test
     public void toModelType_nullStudent_throwsIllegalValueException() {
-        JsonAdaptedLesson lesson = new JsonAdaptedLesson(null, validLocationIndex, validStartDateTime, validEndDateTime);
-        String expectedMessage = String.format(JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName());
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(null, validLocationIndex,
+                validStartDateTime, validEndDateTime);
+        String expectedMessage = String.format(JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT,
+                Person.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(tutorEase));
     }
 
     @Test
     public void toModelType_invalidLocationIndex_throwsIllegalValueException() {
-        JsonAdaptedLesson lesson = new JsonAdaptedLesson(validStudent, INVALID_LOCATION_INDEX, validStartDateTime, validEndDateTime);
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(validStudentIndex, INVALID_LOCATION_INDEX,
+                validStartDateTime, validEndDateTime);
         String expectedMessage = LocationIndex.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(tutorEase));
     }
 
     @Test
     public void toModelType_nullLocationIndex_throwsIllegalValueException() {
-        JsonAdaptedLesson lesson = new JsonAdaptedLesson(validStudent, null, validStartDateTime, validEndDateTime);
-        String expectedMessage = String.format(JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT, LocationIndex.class.getSimpleName());
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(validStudentIndex, null,
+                validStartDateTime, validEndDateTime);
+        String expectedMessage = String.format(JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT,
+                LocationIndex.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(tutorEase));
     }
 
     @Test
     public void toModelType_invalidStartDateTime_throwsIllegalValueException() {
-        JsonAdaptedLesson lesson = new JsonAdaptedLesson(validStudent, validLocationIndex, INVALID_START_DATE_TIME, validEndDateTime);
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(validStudentIndex, validLocationIndex,
+                INVALID_START_DATE_TIME, validEndDateTime);
         String expectedMessage = StartDateTime.START_DATE_MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(tutorEase));
     }
 
     @Test
     public void toModelType_nullStartDateTime_throwsIllegalValueException() {
-        JsonAdaptedLesson lesson = new JsonAdaptedLesson(validStudent, validLocationIndex, null, validEndDateTime);
-        String expectedMessage = String.format(JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT, StartDateTime.class.getSimpleName());
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(validStudentIndex, validLocationIndex,
+                null, validEndDateTime);
+        String expectedMessage = String.format(JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT,
+                StartDateTime.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(tutorEase));
     }
 }
