@@ -22,7 +22,7 @@ public class Tier {
     public Tier(String tagName) {
         requireNonNull(tagName);
         if (tagName.isEmpty()) {
-            tagName = "NA";
+            tagName = TierEnum.NA.toString();
         }
         checkArgument(isValidTierName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = TierEnum.valueOf(tagName.toUpperCase());
