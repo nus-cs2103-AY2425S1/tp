@@ -86,7 +86,9 @@ public class Tut {
     public List<TutDate> getTutDates() {
         return tutDates;
     }
-
+    public TutorialClass getTutorialClass() {
+        return tutorialClass;
+    }
     /**
      *  Marks the attendance for the student for the particular tutorialDate
      */

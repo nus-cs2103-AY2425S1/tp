@@ -20,7 +20,7 @@ import seedu.address.model.tut.TutDate;
 public class JsonAdaptedTut {
 
     private final String tutName;
-    private final String tutorialClassName;
+    private final TutorialClass tutorialClassName;
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
     private final List<JsonAdaptedTutDate> tutDates = new ArrayList<>();
 
@@ -30,11 +30,11 @@ public class JsonAdaptedTut {
     @JsonCreator
     public JsonAdaptedTut(
             @JsonProperty("tutName") String tutName,
-            @JsonProperty("tutorialClassName") String tutorialClassName,
+            @JsonProperty("tutorialClassName") TutorialClass tutorialClass,
             @JsonProperty("students") List<JsonAdaptedStudent> students,
             @JsonProperty("tutDates") List<JsonAdaptedTutDate> tutDates) {
         this.tutName = tutName;
-        this.tutorialClassName = tutorialClassName;
+        this.tutorialClassName = tutorialClass;
         if (students != null) {
             this.students.addAll(students);
         }
@@ -48,7 +48,7 @@ public class JsonAdaptedTut {
      */
     public JsonAdaptedTut(Tut source) {
         this.tutName = source.getTutName();
-        this.tutorialClassName = source.getTutName();
+        this.tutorialClassName = source.getTutorialClass();
         this.students.addAll(source.getStudents().stream()
                 .map(JsonAdaptedStudent::new)
                 .collect(Collectors.toList()));
@@ -63,8 +63,6 @@ public class JsonAdaptedTut {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tutorial.
      */
     public Tut toModelType() throws IllegalValueException {
-        final TutorialClass tutorialClass = new TutorialClass(tutorialClassName);
-
         // Convert students
         final List<Student> modelStudents = new ArrayList<>();
         for (JsonAdaptedStudent student : students) {
@@ -77,7 +75,7 @@ public class JsonAdaptedTut {
             modelTutDates.add(tutDate.toModelType());
         }
 
-        Tut tut = new Tut(tutName, tutorialClass);
+        Tut tut = new Tut(tutName, tutorialClassName);
         for (Student student : modelStudents) {
             tut.add(student);
         }
