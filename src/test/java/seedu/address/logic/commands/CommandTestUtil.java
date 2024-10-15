@@ -68,7 +68,7 @@ public class CommandTestUtil {
 
     public static final String VALID_DATE_APPLE = " 10-10-2024 16:00";
     public static final String VALID_SUPPLIER_INDEX_APPLE = " 1";
-    public static final String VALID_PRODUCT_APPLE = " Iphone16Pro";
+    public static final String VALID_PRODUCT_APPLE = "Iphone16Pro";
     public static final String VALID_COST_APPLE = " 200000";
     public static final String VALID_QUANTITY_APPLE = " 200 units";
     public static final String TIME_DESC_APPLE = " " + PREFIX_DATETIME + VALID_DATE_APPLE;

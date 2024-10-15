@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRODUCT_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRODUCT_BREAD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -82,7 +83,7 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different address -> returns false
+        // different company -> returns false
         editedAlice = new PersonBuilder(ALICE).withCompany(VALID_COMPANY_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
@@ -91,7 +92,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different products -> returns false
-        editedAlice = new PersonBuilder(ALICE).withProducts(VALID_PRODUCT_BREAD).build();
+        editedAlice = new PersonBuilder(ALICE).withProducts(VALID_PRODUCT_APPLE).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 

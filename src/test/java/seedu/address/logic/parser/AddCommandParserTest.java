@@ -60,21 +60,21 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + COMPANY_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + COMPANY_DESC_BOB + TAG_DESC_FRIEND + PRODUCT_DESC_BREAD, new AddCommand(expectedPerson));
 
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
-        assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + COMPANY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + COMPANY_DESC_BOB
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + PRODUCT_DESC_BREAD,
                 new AddCommand(expectedPersonMultipleTags));
 
         // multiple products - all accepted
         Person expectedPersonMultipleProducts = new PersonBuilder(BOB)
                 .withProducts(VALID_PRODUCT_BREAD, VALID_PRODUCT_RICE).build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + COMPANY_DESC_BOB
-                + PRODUCT_DESC_BREAD + PRODUCT_DESC_RICE,
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + PRODUCT_DESC_BREAD + PRODUCT_DESC_RICE,
                 new AddCommand(expectedPersonMultipleProducts));
     }
 
@@ -146,7 +146,8 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + COMPANY_DESC_AMY,
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + COMPANY_DESC_AMY
+                + PRODUCT_DESC_BREAD + PRODUCT_DESC_RICE,
                 new AddCommand(expectedPerson));
     }
 
@@ -189,8 +190,8 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + COMPANY_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
-        // invalid address
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + COMPANY_DESC_BOB
+        // invalid company
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_COMPANY_DESC
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Company.MESSAGE_CONSTRAINTS);
 
         // invalid tag

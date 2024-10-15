@@ -1,15 +1,18 @@
 {
   "persons": [ {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "friends" ]
+    "name" : "John Doe",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "company" : "companya",
+    "tags" : [ "owesMoney", "friends" ],
+    "products" : [ "bread", "rice" ]
   }, {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "pauline@example.com",
-    "address": "4th street"
+    "name" : "John Doe",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "company" : "companya",
+    "tags" : [ "owesMoney", "friends" ],
+    "products" : [ "bread", "rice" ]
   } ],
 
   "deliveries" : []
