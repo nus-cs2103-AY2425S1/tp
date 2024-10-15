@@ -1,16 +1,14 @@
 package seedu.address.storage;
 
-import java.time.LocalDateTime;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.meetup.From;
+import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.model.meetup.MeetUpFrom;
-import seedu.address.model.meetup.MeetUpInfo;
-import seedu.address.model.meetup.MeetUpName;
-import seedu.address.model.meetup.MeetUpTo;
+import seedu.address.model.meetup.Name;
+import seedu.address.model.meetup.To;
 
 /**
  * Jackson-friendly version of {@link MeetUp}.
@@ -19,17 +17,17 @@ class JsonAdaptedMeetUp {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Meet up's %s field is missing!";
 
-    private final MeetUpName name;
-    private final MeetUpInfo info;
-    private final MeetUpFrom from;
-    private final MeetUpTo to;
+    private final Name name;
+    private final Info info;
+    private final From from;
+    private final To to;
 
     /**
      * Constructs a {@code JsonAdaptedMeetUp} with the given meet up details.
      */
     @JsonCreator
-    public JsonAdaptedMeetUp(@JsonProperty("name") MeetUpName name, @JsonProperty("info") MeetUpInfo info,
-            @JsonProperty("from") MeetUpFrom from, @JsonProperty("to") MeetUpTo to) {
+    public JsonAdaptedMeetUp(@JsonProperty("name") Name name, @JsonProperty("info") Info info,
+                             @JsonProperty("from") From from, @JsonProperty("to") To to) {
         this.name = name;
         this.info = info;
         this.from = from;
@@ -83,10 +81,8 @@ class JsonAdaptedMeetUp {
         // final PersonType modelPersonType = new PersonType(personType);
 
         // Placeholder code
-        LocalDateTime from = LocalDateTime.of(2023, 10, 14, 15, 30, 45);
-        LocalDateTime to = LocalDateTime.of(2023, 10, 14, 15, 30, 45);
-        MeetUpFrom start = new MeetUpFrom(from);
-        MeetUpTo end = new MeetUpTo(to);
+        From start = new From("2024-09-15 12:00");
+        To end = new To("2024-09-15 14:00");
         return new MeetUp(name, info, start, end);
     }
 
