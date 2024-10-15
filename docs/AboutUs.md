@@ -14,7 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/suhayl13.png" width="200px">
 
 [[github](https://github.com/suhayl13)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/suhayl13.md)]
 
 * Role: Testing
 * Responsibilities: Testing of all logic
