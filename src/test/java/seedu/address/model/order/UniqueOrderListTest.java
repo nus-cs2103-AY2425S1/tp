@@ -2,6 +2,7 @@ package seedu.address.model.order;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -53,6 +54,21 @@ class UniqueOrderListTest {
     void remove_orderDoesNotExist_throwsOrderNotFoundException() {
         UniqueOrderList list = new UniqueOrderList();
         assertThrows(OrderNotFoundException.class, () -> list.remove(new Order("cake")));
+    }
+
+    @Test
+    void equalsMethod() {
+        UniqueOrderList list = new UniqueOrderList();
+        UniqueOrderList list2 = new UniqueOrderList();
+        list.add(new Order("cake"));
+        list.add(new Order("pizza"));
+        list2.setOrders(list);
+
+        assertEquals(list, list);
+        assertEquals(list, list2);
+        assertNotEquals(list, null);
+        assertNotEquals(list, 1);
+
     }
 
     @Test

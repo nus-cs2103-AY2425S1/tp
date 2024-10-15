@@ -29,7 +29,7 @@ public class ListOrderCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteOrderCommand)) {
+        if (!(other instanceof ListOrderCommand)) {
             return false;
         }
 
