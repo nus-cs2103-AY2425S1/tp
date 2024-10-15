@@ -64,4 +64,10 @@ public class ApplicationTest {
         Application sweCopy2 = sweCopy.setAppStatus(new AppStatus("REJECTED"));
         assertTrue(sweCopy.isSameApplication(sweCopy2));
     }
+
+    @Test
+    public void testToString() {
+        Application sweCopy = new ApplicationBuilder(SWE_APPLICATION).build();
+        assertTrue(sweCopy.toString().equals("Software Engineering Intern (APPLIED)"));
+    }
 }

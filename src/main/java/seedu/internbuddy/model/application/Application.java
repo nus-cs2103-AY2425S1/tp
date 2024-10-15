@@ -41,10 +41,10 @@ public class Application {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(" Description: ")
-                .append(getDescription())
-                .append(" Status: ")
-                .append(getStatus());
+        builder.append(getDescription())
+                .append(" (")
+                .append(getStatus())
+                .append(")");
         return builder.toString();
     }
 
