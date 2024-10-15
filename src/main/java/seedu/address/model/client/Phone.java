@@ -15,6 +15,10 @@ public class Phone {
     public static final String VALIDATION_REGEX = "\\d{3,}";
     public final String value;
 
+    public Phone() {
+        value = null;
+    }
+
     /**
      * Constructs a {@code Phone}.
      *

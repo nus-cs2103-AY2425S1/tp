@@ -33,6 +33,9 @@ public class Email {
 
     public final String value;
 
+    public Email() {
+        value = null;
+    }
     /**
      * Constructs an {@code Email}.
      *
@@ -43,6 +46,8 @@ public class Email {
         checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
         value = email;
     }
+
+
 
     /**
      * Returns if a given string is a valid email.

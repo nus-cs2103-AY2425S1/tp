@@ -37,13 +37,28 @@ public class Messages {
      */
     public static String format(Client client) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(client.getName())
-                .append("; Phone: ")
-                .append(client.getPhone())
-                .append("; Email: ")
-                .append(client.getEmail())
-                .append("; Tags: ");
-        client.getTags().forEach(builder::append);
+
+        if (client.getEmail().value == null) {
+            builder.append(client.getName())
+                    .append("; Phone: ")
+                    .append(client.getPhone());
+        } else if (client.getPhone().value == null) {
+            builder.append(client.getName())
+                    .append("; Email: ")
+                    .append(client.getEmail());
+        } else {
+            builder.append(client.getName())
+                    .append("; Phone: ")
+                    .append(client.getPhone())
+                    .append("; Email: ")
+                    .append(client.getEmail());
+        }
+
+        if (!client.getTags().isEmpty()) {
+            builder.append("; Tags: ");
+            client.getTags().forEach(builder::append);
+        }
+
         return builder.toString();
     }
 
