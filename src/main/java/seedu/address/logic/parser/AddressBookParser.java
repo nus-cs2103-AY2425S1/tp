@@ -18,7 +18,9 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SetVolunteerHoursCommand;
+import seedu.address.logic.commands.group.CreateGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.group.CreateGroupCommandParser;
 
 /**
  * Parses user input.
@@ -80,6 +82,9 @@ public class AddressBookParser {
 
         case SetVolunteerHoursCommand.COMMAND_WORD:
             return new SetVolunteerHoursCommandParser().parse(arguments);
+
+        case CreateGroupCommand.COMMAND_WORD:
+            return new CreateGroupCommandParser().parse(arguments);
 
 
         default:
