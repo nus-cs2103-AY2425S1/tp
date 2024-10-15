@@ -21,44 +21,37 @@ public class Game {
     public final String gameName;
     public final Username username;
     public final SkillLevel skillLevel;
+    public final Role role;
+
 
     /**
-     * Constructs a {@code Game} without a username.
+     * Constructs a {@code Game}.
      *
      * @param gameName A valid Game name.
+     * @param username (Optional) A username.
+     * @param skillLevel (Optional) A skill level.
+     * @param role (Optional) A role.
      */
+    public Game(String gameName, String username, String skillLevel, String role) {
+        requireNonNull(gameName);
+        checkArgument(isValidGameName(gameName), MESSAGE_CONSTRAINTS);
+        this.gameName = gameName;
+        this.username = username != null ? new Username(username) : null;
+        this.skillLevel = skillLevel != null ? new SkillLevel(skillLevel) : null;
+        this.role = role != null ? new Role(role) : null;
+    }
+
+    // Overloaded constructors for convenience
     public Game(String gameName) {
-        requireNonNull(gameName);
-        checkArgument(isValidGameName(gameName), MESSAGE_CONSTRAINTS);
-        this.gameName = gameName;
-        this.username = null;
-        this.skillLevel = null;
+        this(gameName, null, null, null);
     }
 
-    /**
-     * Constructs a {@code Game} with a username.
-     *
-     * @param gameName A valid Game name.
-     */
     public Game(String gameName, String username) {
-        requireNonNull(gameName);
-        checkArgument(isValidGameName(gameName), MESSAGE_CONSTRAINTS);
-        this.gameName = gameName;
-        this.username = new Username(username);
-        this.skillLevel = null;
+        this(gameName, username, null, null);
     }
 
-    /**
-     * Constructs a {@code Game} with a username.
-     *
-     * @param gameName A valid Game name.
-     */
     public Game(String gameName, String username, String skillLevel) {
-        requireNonNull(gameName);
-        checkArgument(isValidGameName(gameName), MESSAGE_CONSTRAINTS);
-        this.gameName = gameName;
-        this.username = new Username(username);
-        this.skillLevel = new SkillLevel(skillLevel);
+        this(gameName, username, skillLevel, null);
     }
 
     /**
