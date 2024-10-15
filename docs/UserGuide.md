@@ -89,8 +89,7 @@ This feature ensures that any details you add to the app are saved automatically
 ### Feature 2: Add New Customer
 
 **Purpose:**  
-This feature allows you to enter and save detailed records for new customers. Each customer's record includes their
-name, contact number, email, occupation, and income. You can also enter the optional fields for credit card tier and remark here. Otherwise, new users are assigned a default value of "N.A".
+This feature allows you to enter and save detailed records for new customers.Each customer's record includes their name, contact number, email, occupation, and income. You can also enter the optional fields for credit card tier and remark here. Otherwise, new users are assigned a default value of "N.A".
 
 **How to Use It:**
 - **Command Format:**
