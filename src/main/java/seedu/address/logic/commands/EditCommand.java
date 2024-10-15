@@ -94,8 +94,8 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Id updatedId = editPersonDescriptor.getId().orElse(personToEdit.getId());
         Ward updatedWard = editPersonDescriptor.getWard().orElse(personToEdit.getWard());
-        /*
         Diagnosis updatedDiagnosis = editPersonDescriptor.getDiagnosis().orElse(personToEdit.getDiagnosis());
+        /*
         Medication updatedMedication = editPersonDescriptor.getMedication().orElse(personToEdit.getMedication());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
@@ -104,7 +104,7 @@ public class EditCommand extends Command {
 
          */
 
-        return new Person(updatedName, updatedId, updatedWard);
+        return new Person(updatedName, updatedId, updatedWard, updatedDiagnosis);
     }
 
     @Override
@@ -144,9 +144,6 @@ public class EditCommand extends Command {
         private Medication medication;
 
         /*
-        private Phone phone;
-        private Email email;
-        private Address address;
         private Set<Tag> tags;
 
          */
@@ -164,9 +161,6 @@ public class EditCommand extends Command {
             setDiagnosis(toCopy.diagnosis);
             setMedication(toCopy.medication);
             /*
-            setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
             setTags(toCopy.tags);
 
              */
@@ -186,6 +180,7 @@ public class EditCommand extends Command {
         public Optional<Id> getId() {
             return Optional.ofNullable(id);
         }
+
         public void setName(Name name) {
             this.name = name;
         }
@@ -217,34 +212,6 @@ public class EditCommand extends Command {
         public Optional<Medication> getMedication() {
             return Optional.ofNullable(medication);
         }
-
-
-        /*
-        public void setPhone(Phone phone) {
-            this.phone = phone;
-        }
-
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
-        }
-
-        public void setEmail(Email email) {
-            this.email = email;
-        }
-
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
-        }
-
-         */
 
         /*
         /**
@@ -304,8 +271,8 @@ public class EditCommand extends Command {
                     .add("id", id)
                     .add("name", name)
                     .add("ward", ward)
-                    /*
                     .add("diagnosis", diagnosis)
+                    /*
                     .add("medication", medication)
                     .add("phone", phone)
                     .add("email", email)

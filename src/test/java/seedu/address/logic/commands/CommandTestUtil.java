@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WARD;
@@ -30,6 +31,8 @@ public class CommandTestUtil {
     public static final String VALID_ID_BOB = "P54321";
     public static final String VALID_WARD_AMY = "A1";
     public static final String VALID_WARD_BOB = "B3";
+    public static final String VALID_DIAGNOSIS_AMY = "Celiac Disease";
+    public static final String VALID_DIAGNOSIS_BOB = "Chronic Sinusitis";
     public static final String VALID_NOTES_AMY = "Like skiing.";
     public static final String VALID_NOTES_BOB = "Favourite pastime: Eating";
     /*
@@ -50,6 +53,8 @@ public class CommandTestUtil {
     public static final String ID_DESC_BOB = " " + PREFIX_ID + VALID_ID_BOB;
     public static final String WARD_DESC_AMY = " " + PREFIX_WARD + VALID_WARD_AMY;
     public static final String WARD_DESC_BOB = " " + PREFIX_WARD + VALID_WARD_BOB;
+    public static final String DIAGNOSIS_DESC_AMY = " " + PREFIX_DIAGNOSIS + VALID_DIAGNOSIS_AMY;
+    public static final String DIAGNOSIS_DESC_BOB = " " + PREFIX_DIAGNOSIS + VALID_DIAGNOSIS_BOB;
     /*
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
@@ -65,6 +70,8 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_ID_DESC = " " + PREFIX_ID + "P12D45"; // Alphabets not allowed in numeric portion
     public static final String INVALID_WARD_DESC = " " + PREFIX_WARD + "A!"; // No special characters allowed
+    public static final String INVALID_DIAGNOSIS_DESC = " " + PREFIX_DIAGNOSIS + "$<>"; // Only a-z and .()/- allowed
+
     /*
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -81,9 +88,9 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).withId(VALID_ID_AMY)
-                .withWard(VALID_WARD_AMY).build();
+                .withWard(VALID_WARD_AMY).withDiagnosis(VALID_DIAGNOSIS_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).withId(VALID_ID_BOB)
-                .withWard(VALID_WARD_BOB).build();
+                .withWard(VALID_WARD_BOB).withDiagnosis(VALID_DIAGNOSIS_BOB).build();
     }
 
     /**
@@ -136,7 +143,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
+        final String[] splitName = person.getName().value.split("\\s+");
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());

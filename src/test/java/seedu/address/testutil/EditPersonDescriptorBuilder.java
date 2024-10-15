@@ -7,6 +7,7 @@ package seedu.address.testutil;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 //import seedu.address.model.person.Address;
 //import seedu.address.model.person.Email;
+import seedu.address.model.person.Diagnosis;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -58,6 +59,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withWard(String ward) {
         descriptor.setWard(new Ward(ward));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Diagnosis} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withDiagnosis(String diagnosis) {
+        descriptor.setDiagnosis(new Diagnosis(diagnosis));
         return this;
     }
 

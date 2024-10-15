@@ -94,7 +94,7 @@ public class ParserUtil {
         requireNonNull(diagnosis);
         String trimmedDiagnosis = diagnosis.trim();
         if (!Diagnosis.isValidDiagnosis(trimmedDiagnosis)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Diagnosis.MESSAGE_CONSTRAINTS);
         }
         return new Diagnosis(trimmedDiagnosis);
     }
