@@ -9,10 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Subject {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Subjects should only contain alphanumeric characters and spaces";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+            "Subjects should only contain alphanumeric characters";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
-    public final String value;
+    public final String subject;
 
     /**
      * Constructs a {@code Class}.
@@ -22,7 +22,7 @@ public class Subject {
     public Subject(String subject) {
         requireNonNull(subject);
         checkArgument(isValidSubject(subject), MESSAGE_CONSTRAINTS);
-        this.value = subject;
+        this.subject = subject;
     }
 
     /**
@@ -34,7 +34,7 @@ public class Subject {
 
     @Override
     public String toString() {
-        return value;
+        return subject;
     }
 
     @Override
@@ -49,11 +49,11 @@ public class Subject {
         }
 
         Subject otherSubject = (Subject) other;
-        return value.equals(otherSubject.value);
+        return subject.equals(otherSubject.subject);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return subject.hashCode();
     }
 }

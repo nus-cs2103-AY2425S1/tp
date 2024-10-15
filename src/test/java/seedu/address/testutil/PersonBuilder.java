@@ -22,7 +22,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_IC = "S1234567B";
-    public static final String DEFAULT_SUBJECT = "Computing";
+    public static final Subject DEFAULT_SUBJECT = new Subject("Computing");
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
@@ -30,7 +30,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Ic ic;
-    private Subject subject;
+    private Set<Subject> subjects;
     private Set<Tag> tags;
 
     /**
@@ -42,7 +42,8 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         ic = new Ic(DEFAULT_IC);
-        subject = new Subject(DEFAULT_SUBJECT);
+        subjects = new HashSet<>();
+        subjects.add(DEFAULT_SUBJECT);
         tags = new HashSet<>();
     }
 
@@ -55,7 +56,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         ic = personToCopy.getIc();
-        subject = personToCopy.getSubject();
+        subjects = new HashSet<>(personToCopy.getSubjects());
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -107,15 +108,15 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Subject} of the {@code Person} that we are building.
+     * Parses the {@code subjects} into a {@code Set<Subject>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withSubject(String subject) {
-        this.subject = new Subject(subject);
+    public PersonBuilder withSubjects(String ... subjects) {
+        this.subjects = SampleDataUtil.getSubjectSet(subjects);
         return this;
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, ic, subject, tags);
+        return new Person(name, phone, email, address, ic, subjects, tags);
     }
 
 }
