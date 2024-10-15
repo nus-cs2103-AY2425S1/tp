@@ -171,7 +171,7 @@ public class ParserUtil {
     public static ItemName parseItemName(String itemId) throws ParseException {
         requireNonNull(itemId);
         String trimmedName = itemId.trim();
-        if (!ItemName.isValidItemId(trimmedName)) {
+        if (!ItemName.isValidItemName(trimmedName)) {
             throw new ParseException(ItemName.MESSAGE_CONSTRAINTS);
         }
         return new ItemName(itemId);

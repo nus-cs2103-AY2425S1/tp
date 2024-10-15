@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Delivery Item's id in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidItemId(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidItemName(String)}
  */
 public class ItemName {
 
@@ -27,14 +27,14 @@ public class ItemName {
      */
     public ItemName(String name) {
         requireNonNull(name);
-        checkArgument(isValidItemId(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidItemName(name), MESSAGE_CONSTRAINTS);
         itemName = name;
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidItemId(String test) {
+    public static boolean isValidItemName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
