@@ -19,6 +19,7 @@ public class Client {
 
     public static final String NO_CLAIMS_MESSAGE = "No open claims";
     public static final String OPEN_CLAIMS_MESSAGE = "%1$s open claims";
+    public static final String ACCESS_CLAIMS_MESSAGE = "'s  claims: \n";
 
     // Identity fields
     private final Name name;
@@ -101,13 +102,18 @@ public class Client {
         return (numberOfOpenClaims == 0) ? NO_CLAIMS_MESSAGE : String.format(OPEN_CLAIMS_MESSAGE, numberOfOpenClaims);
     }
 
+    /**
+     * Accesses and retrieves a string representation of the claims associated with the current entity.
+     *
+     * This method constructs a message that includes the name of the entity and a predefined access claims message.
+     * It then appends the result of accessing claims from the {@link InsurancePlansManager}.
+     *
+     * @return A string that combines the entity's name, an access claims message,
+     *         and the claims information retrieved from the {@link InsurancePlansManager}.
+     */
     public String accessClaims() {
-        int numberOfOpenClaims = this.insurancePlansManager.getNumberOfOpenClaims();
-        if (numberOfOpenClaims == 0) {
-            return NO_CLAIMS_MESSAGE;
-        } else {
-            return "";
-        }
+        return this.name.toString() + ACCESS_CLAIMS_MESSAGE
+                    + this.insurancePlansManager.accessClaims();
     }
 
     /**
