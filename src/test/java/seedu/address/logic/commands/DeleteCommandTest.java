@@ -42,7 +42,7 @@ public class DeleteCommandTest {
         personToDeleteList.add(personToDelete);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.listFormat(personToDeleteList));
+                Messages.formatPersonList(personToDeleteList));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
@@ -60,7 +60,7 @@ public class DeleteCommandTest {
         personToDeleteList.add(personToDelete2);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.listFormat(personToDeleteList));
+                Messages.formatPersonList(personToDeleteList));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete1);
@@ -110,7 +110,7 @@ public class DeleteCommandTest {
         personToDeleteList.add(personToDelete);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.listFormat(personToDeleteList));
+                Messages.formatPersonList(personToDeleteList));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
