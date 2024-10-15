@@ -15,6 +15,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicySet;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,7 +39,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, List<JsonAdaptedPolicy> policies) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("policies")List<JsonAdaptedPolicy> policies) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -74,7 +77,7 @@ class JsonAdaptedPerson {
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
-        final List<Tag> personPolicies = new ArrayList<>();
+        final List<Policy> personPolicies = new ArrayList<>();
         for (JsonAdaptedPolicy policy : policies) {
             personPolicies.add(policy.toModelType());
         }
@@ -115,8 +118,9 @@ class JsonAdaptedPerson {
         if (policies == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
-        final Set<Tag> modelPolicies = new HashSet<>(personPolicies);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        final PolicySet modelPolicies = new PolicySet();
+        modelPolicies.addAll(personPolicies);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelPolicies);
     }
 
 }

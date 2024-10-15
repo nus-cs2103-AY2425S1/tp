@@ -3,7 +3,13 @@ package seedu.address.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import seedu.address.model.policy.*;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.policy.EducationPolicy;
+import seedu.address.model.policy.HealthPolicy;
+import seedu.address.model.policy.LifePolicy;
+import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyType;
+import seedu.address.model.tag.Tag;
 
 class JsonAdaptedPolicy {
     private final double premiumAmount;
@@ -33,16 +39,16 @@ class JsonAdaptedPolicy {
      *
      * @throws IllegalArgumentException if there were any data constraints violated.
      */
-    public Policy toModelType() throws IllegalArgumentException {
+    public Policy toModelType() throws IllegalValueException {
         final PolicyType modelPolicyType = PolicyType.valueOf(policyType);
         if (modelPolicyType == PolicyType.LIFE) {
             return new LifePolicy(premiumAmount, coverageAmount);
-        }
-        if (modelPolicyType == PolicyType.HEALTH) {
+        } else if (modelPolicyType == PolicyType.HEALTH) {
             return new HealthPolicy(premiumAmount, coverageAmount);
-        }
-        if (modelPolicyType == PolicyType.EDUCATION) {
+        } else if (modelPolicyType == PolicyType.EDUCATION) {
             return new EducationPolicy(premiumAmount, coverageAmount);
+        } else {
+            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
     }
 }
