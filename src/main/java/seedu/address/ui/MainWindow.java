@@ -15,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -167,10 +168,11 @@ public class MainWindow extends UiPart<Stage> {
         logger.info("Changing UI...");
 
         InspectWindow inspectWindow;
-        inspectWindow = new InspectWindow(primaryStage, logic);
+        inspectWindow = new InspectWindow(primaryStage, logic, commandResult.getPerson());
         inspectWindow.show();
         inspectWindow.fillInnerParts();
         inspectWindow.getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
+        AddressBookParser.setInspect(true);
     }
 
     public PersonListPanel getPersonListPanel() {

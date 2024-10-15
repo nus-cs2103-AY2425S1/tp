@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
+import seedu.address.model.util.DeliveryAction;
 
 /**
  * Represents the result of a command execution.
@@ -16,6 +18,9 @@ public class CommandResult {
     /** Help information should be shown to the user. */
     private final boolean isShowHelp;
 
+    /** The person to inspect (only if isInspect else null) **/
+    private final Person person;
+
     /** The application should exit. */
     private final boolean isExit;
 
@@ -25,12 +30,29 @@ public class CommandResult {
     /** Main page should be showed **/
     private final boolean isList;
 
+    private DeliveryAction deliveryAction = DeliveryAction.NONE;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit, boolean isInspect, boolean isList) {
+    public CommandResult(String feedbackToUser, DeliveryAction deliveryAction) {
+        this.feedbackToUser = feedbackToUser;
+        this.person = null;
+        this.isShowHelp = false;
+        this.isExit = false;
+        this.isInspect = false;
+        this.isList = false;
+        this.deliveryAction = deliveryAction;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, Person person, boolean isShowHelp, boolean isExit, boolean isInspect,
+                         boolean isList) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.isShowHelp = isShowHelp;
+        this.person = person;
         this.isExit = isExit;
         this.isInspect = isInspect;
         this.isList = isList;
@@ -39,15 +61,15 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit, boolean isInspect) {
-        this(feedbackToUser, isShowHelp, isExit, isInspect, false);
+    public CommandResult(String feedbackToUser, Person person, boolean isShowHelp, boolean isExit, boolean isInspect) {
+        this(feedbackToUser, person, isShowHelp, isExit, isInspect, false);
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        this(feedbackToUser, showHelp, exit, false);
+        this(feedbackToUser, null, showHelp, exit, false);
     }
 
     /**
@@ -60,6 +82,10 @@ public class CommandResult {
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public Person getPerson() {
+        return person;
     }
 
     public boolean isShowHelp() {
@@ -76,6 +102,14 @@ public class CommandResult {
 
     public boolean isList() {
         return isList;
+    }
+
+    public boolean isDeliveryAdded() {
+        return this.deliveryAction == DeliveryAction.ADD;
+    }
+
+    public boolean isDeliveryDeleted() {
+        return this.deliveryAction == DeliveryAction.DELETE;
     }
 
     @Override
@@ -105,7 +139,10 @@ public class CommandResult {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", isShowHelp)
+                .add("person", person)
                 .add("exit", isExit)
+                .add("inspect", isInspect)
+                .add("list", isList)
                 .toString();
     }
 

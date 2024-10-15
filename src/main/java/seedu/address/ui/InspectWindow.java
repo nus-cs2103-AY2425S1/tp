@@ -4,18 +4,23 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Inspect Window. Provides information about the contact being inspected
@@ -25,13 +30,15 @@ public class InspectWindow extends UiPart<Stage> {
 
     private static final String FXML = "InspectWindow.fxml";
 
+    private static Person person;
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private DeliveryListPanel deliveryListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +49,10 @@ public class InspectWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane personInfoPlaceholder;
+
+    @FXML
+    private StackPane deliveryListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -53,8 +63,11 @@ public class InspectWindow extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public InspectWindow(Stage primaryStage, Logic logic) {
+    public InspectWindow(Stage primaryStage, Logic logic, Person person) {
         super(FXML, primaryStage);
+
+        //this.person = person;
+        InspectWindow.person = person;
 
         // Set dependencies
         this.primaryStage = primaryStage;
@@ -110,8 +123,26 @@ public class InspectWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        // personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        HBox splitLayout = new HBox();
+        splitLayout.setSpacing(20);
+
+        VBox personInfoBox = new VBox();
+        personInfoBox.setSpacing(10);
+
+        Label nameLabel = new Label("Name: " + InspectWindow.person.getName());
+        Label phoneLabel = new Label("Phone: " + InspectWindow.person.getPhone());
+        Label emailLabel = new Label("Email: " + InspectWindow.person.getEmail());
+        Label addressLabel = new Label("Address: " + InspectWindow.person.getAddress());
+        Label tagsLabel = new Label("Tags: " + InspectWindow.person.getTags());
+
+        personInfoBox.getChildren().addAll(nameLabel, phoneLabel, emailLabel, addressLabel, tagsLabel);
+
+        DeliveryListPanel deliveryListPanel = new DeliveryListPanel(InspectWindow.person.getDeliveryList());
+        VBox deliveryListBox = new VBox(deliveryListPanel.getRoot());
+
+        splitLayout.getChildren().addAll(personInfoBox, deliveryListBox);
+
+        personInfoPlaceholder.getChildren().add(splitLayout);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -170,10 +201,7 @@ public class InspectWindow extends UiPart<Stage> {
         mainWindow.show();
         mainWindow.fillInnerParts();
         mainWindow.getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
-    }
-
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+        AddressBookParser.setInspect(false);
     }
 
     public ResultDisplay getResultDisplay() {
@@ -187,6 +215,13 @@ public class InspectWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
+            /* commandResult stores 'isInspect' boolean for whether we are in inspect mode.
+            *  However, to get this commandResult in the first place, we need to parse the correct add command
+            *  (i.e. window vs inspect).
+            *  Thus, another boolean for 'isInspect' is tracked in AddressBookParser. These 2 booleans
+            *  will always have the same value. */
+
+            // This commandResult should store the result after executing add.
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
@@ -197,6 +232,8 @@ public class InspectWindow extends UiPart<Stage> {
                 handleExit();
             } else if (commandResult.isList()) {
                 handleList(commandResult);
+            } else if (commandResult.isDeliveryAdded()) {
+                return commandResult;
             } else {
                 throw new CommandException("Not yet implemented");
             }
@@ -207,5 +244,9 @@ public class InspectWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    public static Person getInspectedPerson() {
+        return InspectWindow.person;
     }
 }

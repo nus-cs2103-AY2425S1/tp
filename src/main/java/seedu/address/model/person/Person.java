@@ -7,7 +7,10 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,6 +27,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final DeliveryList deliveryList = new DeliveryList();
 
     /**
      * Every field must be present and not null.
@@ -59,6 +63,17 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public ObservableList<Delivery> getDeliveryList() {
+        return deliveryList.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Adds the delivery into the delivery list of this person.
+     */
+    public void addDelivery(Delivery delivery) {
+        deliveryList.add(delivery);
     }
 
     /**

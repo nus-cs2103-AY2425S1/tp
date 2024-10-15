@@ -44,7 +44,8 @@ public class InspectCommand extends Command {
 
         Person personToInspect = lastShownList.get(index.getZeroBased());
 
-        return new CommandResult(generateSuccessMessage(personToInspect), false, false, true);
+        return new CommandResult(generateSuccessMessage(personToInspect), personToInspect, false,
+                false, true);
     }
 
     private String generateSuccessMessage(Person personToInspect) {
