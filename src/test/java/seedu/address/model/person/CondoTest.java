@@ -39,9 +39,13 @@ public class CondoTest {
         Condo condo1 = new Condo(new PostalCode("123456"), new UnitNumber("10-01"), new Price("500000"), tags);
         Condo condo2 = new Condo(new PostalCode("123456"), new UnitNumber("10-01"), new Price("500000"), tags);
         Condo condo3 = new Condo(new PostalCode("654321"), new UnitNumber("20-01"), new Price("750000"), tags);
+        Apartment apartment1 = new Apartment(new PostalCode("123456"),
+                new UnitNumber("10-01"), new Price("500000"), tags);
 
         // Test for equality with the same object
         assertTrue(condo1.equals(condo1)); // Same object should return true
+
+        assertFalse(condo1.equals(apartment1)); // Different subclass should return false
 
         /*// Test for equality with a different but identical object
         assertTrue(condo1.equals(condo2)); // Different object, same content should return true

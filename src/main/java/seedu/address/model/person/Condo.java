@@ -24,7 +24,7 @@ public class Condo extends Property {
         if (!super.equals(otherCondo)) {
             return false;
         }
-        if (!(otherCondo instanceof Bto)) {
+        if (!(otherCondo instanceof Condo)) {
             return false;
         }
         return true;

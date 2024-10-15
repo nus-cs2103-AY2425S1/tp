@@ -60,6 +60,9 @@ public class BtoTest {
         Bto bto2 = new Bto(new PostalCode("123456"), new UnitNumber("10-01"), new Price("300000"), tags);
         Bto bto3 = new Bto(new PostalCode("654321"), new UnitNumber("20-01"), new Price("500000"), tags);
 
+        Apartment apartment1 = new Apartment(new PostalCode("123456"), new UnitNumber("10-01"),
+                new Price("300000"), tags);
+
         // Test for equality with the same object
         assertTrue(bto1.equals(bto1)); // Same object should return true
 

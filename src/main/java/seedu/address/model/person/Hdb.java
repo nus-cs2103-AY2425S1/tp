@@ -24,7 +24,7 @@ public class Hdb extends Property {
         if (!super.equals(otherHdb)) {
             return false;
         }
-        if (!(otherHdb instanceof Bto)) {
+        if (!(otherHdb instanceof Hdb)) {
             return false;
         }
         return true;

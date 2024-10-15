@@ -24,7 +24,7 @@ public class OtherProperty extends Property {
         if (!super.equals(otherProperty)) {
             return false;
         }
-        if (!(otherProperty instanceof Bto)) {
+        if (!(otherProperty instanceof OtherProperty)) {
             return false;
         }
         return true;

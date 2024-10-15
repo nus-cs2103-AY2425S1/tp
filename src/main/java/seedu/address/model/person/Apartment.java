@@ -30,7 +30,7 @@ public class Apartment extends Property {
         if (!super.equals(otherApartment)) {
             return false;
         }
-        if (!(otherApartment instanceof Bto)) {
+        if (!(otherApartment instanceof Apartment)) {
             return false;
         }
         return true;

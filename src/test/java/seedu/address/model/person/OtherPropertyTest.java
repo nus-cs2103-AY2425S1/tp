@@ -62,9 +62,12 @@ public class OtherPropertyTest {
                 new UnitNumber("01-01"), new Price("500000"), tags);
         OtherProperty otherProperty3 = new OtherProperty(new PostalCode("654321"),
                 new UnitNumber("02-02"), new Price("600000"), tags);
+        Apartment apartment1 = new Apartment(new PostalCode("123456"), new UnitNumber("10-01"),
+                new Price("500000"), tags);
 
         // Test for equality with the same object
         assertTrue(otherProperty1.equals(otherProperty1)); // Same object should return true
+        assertFalse(otherProperty1.equals(apartment1)); // Different subclass should return false
 
         /*// Test for equality with a different but identical object
         assertTrue(otherProperty1.equals(otherProperty2)); // Different object, same content should return true
@@ -75,12 +78,11 @@ public class OtherPropertyTest {
         // Test for inequality with an object that is not an OtherProperty
         assertFalse(otherProperty1.equals(null)); // Null should return false
         assertFalse(otherProperty1.equals(new Object())); // Different type should return false
-
         // Test for inequality with a different Property subclass (e.g., Bto)
         Bto bto = new Bto(new PostalCode("123456"), new UnitNumber("01-01"), new Price("500000"), tags);
-        assertFalse(otherProperty1.equals(bto)); // Different subclass should return false*/
+        assertFalse(otherProperty1.equals(bto)); // Different subclass should return false
+        */
     }
-
     @Test
     public void getPostalCode_success() {
         assertEquals(postalCode1, otherProperty1.getPostalCode());

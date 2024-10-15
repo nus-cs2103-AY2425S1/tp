@@ -62,9 +62,13 @@ public class ApartmentTest {
                 new Price("1000000"), tags);
         Apartment apartment3 = new Apartment(new PostalCode("654321"), new UnitNumber("20-01"),
                 new Price("2000000"), tags);
+        Bto bto1 = new Bto(new PostalCode("123456"), new UnitNumber("10-01"), new Price("1000000"), tags);
 
         // Test for equality with the same object
         assertTrue(apartment1.equals(apartment1)); // Same object should return true
+        // Example: Asserting that two different objects are not equal (should return false)
+        assertFalse(apartment1.equals(bto1));
+
 
         /*// Test for equality with a different but identical object
         assertTrue(apartment1.equals(apartment2)); // Different object, same content should return true
