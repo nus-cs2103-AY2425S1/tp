@@ -135,9 +135,13 @@ Examples:
 
 View the contact of a specified person from the address book.
 
-Format: `view NAME`
+Format: `view KEYWORD`
 
 * This command is case-insensitive. e.g `alex` will match `alex`
+* The keyword can be either the full name (consisting multiple words) or partial name (consisting of only one word).
+* Full name view will match the exact name given e.g. `Alex Tan` will only give `Alex Tan`
+* Partial name view will find all contacts that has names containing the keyword e.g. `Alex` will give `Alex Tan` and `Alex Yeo`
+* Only the name can be used for viewing
 
 ### Deleting a person : `delete`
 
@@ -209,6 +213,6 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**View** | `view NAME`<br> e.g., `view Alex`
+**View**   | `view KEYWORD`<br> e.g., `view Alex`, `view Alex Tan`
 **List**   | `list`
 **Help**   | `help`
