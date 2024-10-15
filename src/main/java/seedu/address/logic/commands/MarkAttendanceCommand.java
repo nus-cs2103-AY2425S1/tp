@@ -58,7 +58,7 @@ public class MarkAttendanceCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_SUCCESS,
-                Messages.format(personToMarkAttendance)));
+                Messages.format(markedPerson)));
     }
 
     @Override
