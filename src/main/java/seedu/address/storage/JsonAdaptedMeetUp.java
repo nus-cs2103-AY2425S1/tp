@@ -7,6 +7,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.meetup.MeetUp;
+import seedu.address.model.meetup.MeetUpFrom;
+import seedu.address.model.meetup.MeetUpInfo;
+import seedu.address.model.meetup.MeetUpName;
+import seedu.address.model.meetup.MeetUpTo;
 
 /**
  * Jackson-friendly version of {@link MeetUp}.
@@ -15,17 +19,17 @@ class JsonAdaptedMeetUp {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Meet up's %s field is missing!";
 
-    private final String name;
-    private final String info;
-    private final LocalDateTime from;
-    private final LocalDateTime to;
+    private final MeetUpName name;
+    private final MeetUpInfo info;
+    private final MeetUpFrom from;
+    private final MeetUpTo to;
 
     /**
      * Constructs a {@code JsonAdaptedMeetUp} with the given meet up details.
      */
     @JsonCreator
-    public JsonAdaptedMeetUp(@JsonProperty("name") String name, @JsonProperty("info") String info,
-            @JsonProperty("from") LocalDateTime from, @JsonProperty("to") LocalDateTime to) {
+    public JsonAdaptedMeetUp(@JsonProperty("name") MeetUpName name, @JsonProperty("info") MeetUpInfo info,
+            @JsonProperty("from") MeetUpFrom from, @JsonProperty("to") MeetUpTo to) {
         this.name = name;
         this.info = info;
         this.from = from;
@@ -81,7 +85,9 @@ class JsonAdaptedMeetUp {
         // Placeholder code
         LocalDateTime from = LocalDateTime.of(2023, 10, 14, 15, 30, 45);
         LocalDateTime to = LocalDateTime.of(2023, 10, 14, 15, 30, 45);
-        return new MeetUp(name, info, from, to);
+        MeetUpFrom start = new MeetUpFrom(from);
+        MeetUpTo end = new MeetUpTo(to);
+        return new MeetUp(name, info, start, end);
     }
 
 }

@@ -156,6 +156,18 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    //=========== MeetUp List ================================================================================
+
+    @Override
+    public void setMeetUp(MeetUp target, MeetUp edittedMeetUp) {
+        return;
+    }
+
+    @Override
+    public void deleteMeetUp(MeetUp target) {
+        return;
+    }
+
     //=========== Filtered MeetUp List Accessors =============================================================
     public Path getMeetUpListFilePath() {
         return userPrefs.getMeetUpListFilePath();
@@ -183,9 +195,11 @@ public class ModelManager implements Model {
     public ObservableList<MeetUp> getFilteredMeetUpList() {
         return filteredMeetUps;
     }
+
     @Override
-    public void updateFilteredMeetUpList(Predicate<MeetUp> predicate) {
+    public void updateFilteredMeetUpList(Predicate <MeetUp> predicate) {
         requireNonNull(predicate);
         filteredMeetUps.setPredicate(predicate);
     }
+
 }
