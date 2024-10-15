@@ -40,6 +40,7 @@ public abstract class InsurancePlan {
         for (Claim c : claims) {
             if (c.getClaimId().equals(claim.getClaimId())) {
                 claims.remove(c);
+                break;
             }
         }
     }

@@ -143,6 +143,7 @@ public class InsurancePlansManager {
         for (InsurancePlan p : insurancePlans) {
             if (p.equals(insurancePlan)) {
                 p.removeClaim(claim);
+                this.claimIds.remove(claim.getClaimId());
             }
         }
     }
