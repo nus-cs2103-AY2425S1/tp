@@ -38,7 +38,6 @@ public class EditContactDescriptorBuilder {
         descriptor.setEmail(contact.getEmail());
         descriptor.setAddress(contact.getAddress());
         descriptor.setTags(contact.getTags());
-        descriptor.setId(contact.getId());
     }
 
     /**
@@ -85,6 +84,14 @@ public class EditContactDescriptorBuilder {
 
     public EditContactDescriptor build() {
         return descriptor;
+    }
+
+    /**
+     * Sets the {@code Id} of the {@code EditContactDescriptor} that we are building.
+     */
+    public EditContactDescriptorBuilder withId(int id) {
+        descriptor.setId(new Id(id));
+        return this;
     }
 
     /**

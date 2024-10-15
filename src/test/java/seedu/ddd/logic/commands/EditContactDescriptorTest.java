@@ -7,6 +7,7 @@ import static seedu.ddd.logic.commands.CommandTestUtil.DESC_CONTACT_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.DESC_VENDOR_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -17,6 +18,19 @@ import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.ddd.testutil.EditContactDescriptorBuilder;
 
 public class EditContactDescriptorTest {
+
+    @Test
+    public void isAnyFieldEdited() {
+        EditContactDescriptor editedDescriptor = new EditContactDescriptor(DESC_CONTACT_AMY);
+        assertTrue(editedDescriptor.isAnyFieldEdited());
+
+        EditContactDescriptor uneditedDescriptor = new EditContactDescriptor();
+        assertFalse(uneditedDescriptor.isAnyFieldEdited());
+
+        EditContactDescriptor onlyIdSpecifiedDescriptor = new EditContactDescriptorBuilder()
+                .withId(VALID_ID_AMY).build();
+        assertFalse(onlyIdSpecifiedDescriptor.isAnyFieldEdited());
+    }
 
     @Test
     public void equals() {

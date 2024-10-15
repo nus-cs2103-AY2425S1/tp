@@ -133,15 +133,15 @@ public class EditCommand extends Command {
         assert contactToEdit instanceof Client || contactToEdit instanceof Vendor;
 
         return contactToEdit instanceof Client
-            ? createEditedContact((Client) contactToEdit, editContactDescriptor)
-            : createEditedContact((Vendor) contactToEdit, editContactDescriptor);
+            ? createEditedClient((Client) contactToEdit, editContactDescriptor)
+            : createEditedVendor((Vendor) contactToEdit, editContactDescriptor);
     }
 
     /**
      * Creates and returns a {@code Client} with the details of {@code contactToEdit}
      * edited with {@code editContactDescriptor}.
      */
-    private static Client createEditedContact(Client contactToEdit, EditContactDescriptor editContactDescriptor) {
+    private static Client createEditedClient(Client contactToEdit, EditContactDescriptor editContactDescriptor) {
         assert contactToEdit != null;
 
         Name updatedName = editContactDescriptor.getName().orElse(contactToEdit.getName());
@@ -161,7 +161,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Vendor} with the details of {@code contactToEdit}
      * edited with {@code editContactDescriptor}.
      */
-    private static Vendor createEditedContact(Vendor contactToEdit, EditContactDescriptor editContactDescriptor) {
+    private static Vendor createEditedVendor(Vendor contactToEdit, EditContactDescriptor editContactDescriptor) {
         assert contactToEdit != null;
 
         Name updatedName = editContactDescriptor.getName().orElse(contactToEdit.getName());
@@ -230,10 +230,10 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns true if at least one field is edited.
+         * Returns true if at least one field is edited. ID is not included as an editable field.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, id);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
         }
 
         public void setName(Name name) {

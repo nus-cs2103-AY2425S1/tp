@@ -1,4 +1,4 @@
-package seedu.ddd.model.person;
+package seedu.ddd.model.contact;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,23 +16,23 @@ public class IdTest {
     }
 
     @Test
-    public void constructor_invalidAddress_throwsIllegalArgumentException() {
-        String invalidAddress = "";
-        assertThrows(IllegalArgumentException.class, () -> new Id(invalidAddress));
+    public void constructor_invalidId_throwsIllegalArgumentException() {
+        String invalidId = "";
+        assertThrows(IllegalArgumentException.class, () -> new Id(invalidId));
     }
 
     @Test
-    public void isValidAddress() {
-        // null address
+    public void isValidId() {
+        // null ID
         assertThrows(NullPointerException.class, () -> Id.isValidId(null));
 
-        // invalid ids
+        // invalid IDs
         assertFalse(Id.isValidId(-1));
         assertFalse(Id.isValidId(-10));
         assertFalse(Id.isValidId(""));
         assertFalse(Id.isValidId(" "));
 
-        // valid ids
+        // valid IDs
         assertTrue(Id.isValidId(0));
         assertTrue(Id.isValidId(1));
         assertTrue(Id.isValidId(10));

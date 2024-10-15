@@ -6,9 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.logic.commands.CommandTestUtil.DESC_CLIENT_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.DESC_CONTACT_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.DESC_VENDOR_BOB;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_DATE_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ID_AMY;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_SERVICE_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -48,58 +52,88 @@ public class EditCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Contact editedContact = (Contact) new ClientBuilder().build();
-        EditContactDescriptor editContactDescriptor = new EditContactDescriptorBuilder(editedContact).build();
+    public void execute_contactAllFieldsSpecifiedUnfilteredList_success() {
         Index targetIndex = INDEX_FIRST_CONTACT;
+        Contact targeContact = model.getFilteredContactList().get(targetIndex.getZeroBased());
+
+        Contact editedContact = (Contact) new ClientBuilder().withId(targeContact.getId().id).build();
+        EditContactDescriptor editContactDescriptor = new EditContactDescriptorBuilder(editedContact).build();
         EditCommand editCommand = new EditCommand(targetIndex, editContactDescriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
                 Messages.format(editedContact));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setContact(model.getFilteredContactList().get(targetIndex.getZeroBased()), editedContact);
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-
-        Client editedClient = new ClientBuilder().build();
-        EditClientDescriptor editClientDescriptor = new EditClientDescriptorBuilder(editedClient).build();
-        targetIndex = INDEX_FIRST_CONTACT;
-        editCommand = new EditCommand(targetIndex, editClientDescriptor);
-
-        expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedClient));
-        expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setContact(model.getFilteredContactList().get(targetIndex.getZeroBased()), editedClient);
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-
-        Vendor editedVendor = new VendorBuilder().build();
-        EditVendorDescriptor editVendorDescriptor = new EditVendorDescriptorBuilder(editedVendor).build();
-        targetIndex = Index.fromOneBased(model.getFilteredContactList().size());
-        editCommand = new EditCommand(targetIndex, editVendorDescriptor);
-
-        expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedVendor));
-        expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setContact(model.getFilteredContactList().get(targetIndex.getZeroBased()), editedVendor);
+        expectedModel.setContact(targeContact, editedContact);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastContact = Index.fromOneBased(model.getFilteredContactList().size());
-        Contact lastContact = model.getFilteredContactList().get(indexLastContact.getZeroBased());
+    public void execute_clientAllFieldsSpecifiedUnfilteredList_success() {
+        Index targetIndex = INDEX_FIRST_CONTACT;
+        Contact targeContact = model.getFilteredContactList().get(targetIndex.getZeroBased());
 
-        VendorBuilder bobInList = new VendorBuilder((Vendor) lastContact);
-        Contact editedContact = bobInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
-
-        EditVendorDescriptor descriptor = new EditVendorDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
-        EditCommand editCommand = new EditCommand(indexLastContact, descriptor);
+        Client editedContact = (Client) new ClientBuilder().withId(targeContact.getId().id).build();
+        EditClientDescriptor editClientDescriptor = new EditClientDescriptorBuilder(editedContact).build();
+        EditCommand editCommand = new EditCommand(targetIndex, editClientDescriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
                 Messages.format(editedContact));
-
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setContact(lastContact, editedContact);
+        expectedModel.setContact(targeContact, editedContact);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
 
+    @Test
+    public void execute_vendorAllFieldsSpecifiedUnfilteredList_success() {
+        Index targetIndex = INDEX_SECOND_CONTACT;
+        Contact targeContact = model.getFilteredContactList().get(targetIndex.getZeroBased());
+
+        Vendor editedContact = (Vendor) new VendorBuilder().withId(targeContact.getId().id).build();
+        EditVendorDescriptor editClientDescriptor = new EditVendorDescriptorBuilder(editedContact).build();
+        EditCommand editCommand = new EditCommand(targetIndex, editClientDescriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
+                Messages.format(editedContact));
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setContact(targeContact, editedContact);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_clientSomeFieldsSpecifiedUnfilteredList_success() {
+        Index targetIndex = INDEX_FIRST_CONTACT;
+        Contact targetContact = model.getFilteredContactList().get(targetIndex.getZeroBased());
+
+        ClientBuilder clientBuilder = new ClientBuilder((Client) targetContact);
+        Contact editedContact = clientBuilder.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withDate(VALID_DATE_AMY).withTags(VALID_TAG_HUSBAND).build();
+        EditClientDescriptor descriptor = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withTags(VALID_TAG_HUSBAND).build();
+        EditCommand editCommand = new EditCommand(targetIndex, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
+                Messages.format(editedContact));
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setContact(targetContact, editedContact);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_vendorSomeFieldsSpecifiedUnfilteredList_success() {
+        Index targetIndex = INDEX_SECOND_CONTACT;
+        Contact targetContact = model.getFilteredContactList().get(targetIndex.getZeroBased());
+
+        VendorBuilder bobInList = new VendorBuilder((Vendor) targetContact);
+        Contact editedContact = bobInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withService(VALID_SERVICE_BOB).withTags(VALID_TAG_HUSBAND).build();
+        EditVendorDescriptor descriptor = new EditVendorDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withService(VALID_SERVICE_BOB).withTags(VALID_TAG_HUSBAND).build();
+        EditCommand editCommand = new EditCommand(targetIndex, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
+                Messages.format(editedContact));
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setContact(targetContact, editedContact);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
@@ -110,9 +144,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
                 Messages.format(editedContact));
-
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
@@ -131,6 +163,25 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setContact(model.getFilteredContactList().get(0), editedContact);
 
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_byId_success() {
+        Index targetIndex = INDEX_FIRST_CONTACT;
+        Contact targetContact = model.getFilteredContactList().get(targetIndex.getZeroBased());
+
+        ClientBuilder clientBuilder = new ClientBuilder((Client) targetContact);
+        Contact editedContact = clientBuilder.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withDate(VALID_DATE_AMY).withTags(VALID_TAG_HUSBAND).build();
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withTags(VALID_TAG_HUSBAND).withId(targetContact.getId().id).build();
+        EditCommand editCommand = new EditCommand(null, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
+                Messages.format(editedContact));
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setContact(targetContact, editedContact);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 

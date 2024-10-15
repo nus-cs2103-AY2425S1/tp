@@ -32,7 +32,6 @@ public class EditClientDescriptorBuilder extends EditContactDescriptorBuilder {
         editClientDescriptor.setAddress(client.getAddress());
         editClientDescriptor.setDate(client.getDate());
         editClientDescriptor.setTags(client.getTags());
-        editClientDescriptor.setId(client.getId());
         descriptor = editClientDescriptor;
     }
 

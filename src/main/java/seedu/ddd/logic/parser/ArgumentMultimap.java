@@ -77,8 +77,8 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Throws a {@code ParseException} if any of the prefixes given in {@code prefixes} appeared more than
-     * once among the arguments.
+     * Throws a {@code ParseException} if more than 1 of the prefixes given in {@code prefixes} appears
+     * among the arguments.
      */
     public void verifyNoExclusivePrefixesFor(Prefix... prefixes) throws ParseException {
         int exclusivePrefixesCount = Stream.of(prefixes).distinct()

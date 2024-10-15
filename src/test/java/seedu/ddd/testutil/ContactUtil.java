@@ -2,6 +2,7 @@ package seedu.ddd.testutil;
 
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
@@ -12,7 +13,7 @@ import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.ddd.model.tag.Tag;
 
 /**
- * A utility class for Client.
+ * A utility class for Contact.
  */
 public class ContactUtil {
     /**
@@ -20,6 +21,7 @@ public class ContactUtil {
      */
     public static String getEditContactDescriptorDetails(EditContactDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
+        descriptor.getId().ifPresent(id -> sb.append(PREFIX_ID).append(id.id).append(" "));
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));

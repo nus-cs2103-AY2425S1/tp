@@ -5,7 +5,7 @@ import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_SERVICE;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_SERVICE_BOB;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,7 +28,7 @@ public class VendorBuilder {
     public static final String DEFAULT_PHONE = VALID_PHONE_BOB;
     public static final String DEFAULT_EMAIL = VALID_EMAIL_BOB;
     public static final String DEFAULT_ADDRESS = VALID_ADDRESS_BOB;
-    public static final String DEFAULT_SERVICE = VALID_SERVICE;
+    public static final String DEFAULT_SERVICE = VALID_SERVICE_BOB;
     public static final String DEFAULT_ID = VALID_ID_BOB;
 
     private Name name;

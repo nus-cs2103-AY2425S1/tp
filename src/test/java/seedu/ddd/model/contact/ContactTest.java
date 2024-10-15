@@ -1,5 +1,6 @@
-package seedu.ddd.model.person;
+package seedu.ddd.model.contact;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -13,7 +14,9 @@ import static seedu.ddd.testutil.TypicalContacts.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.vendor.Vendor;
 import seedu.ddd.testutil.ClientBuilder;
 import seedu.ddd.testutil.VendorBuilder;
 
@@ -50,6 +53,16 @@ public class ContactTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new VendorBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSameContact(editedBob));
+
+        // name has trailing spaces, all other attributes same -> returns false
+        Client clientBob = new ClientBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        Vendor vendorBob = new VendorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        assertTrue(clientBob.isSameContact(clientBob));
+        assertTrue(vendorBob.isSameContact(vendorBob));
+        assertFalse(clientBob.isSameContact(vendorBob));
+        assertFalse(vendorBob.isSameContact(clientBob));
     }
 
     /*
@@ -95,9 +108,16 @@ public class ContactTest {
 
     @Test
     public void toStringMethod() {
-        // String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName()
-        // + ", phone=" + ALICE.getPhone() + ", email=" + ALICE.getEmail()
-        // + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
-        // assertEquals(expected, ALICE.toString());
+        String expectedClientString = Client.class.getCanonicalName() + "{name=" + ALICE.getName()
+                + ", phone=" + ALICE.getPhone() + ", email=" + ALICE.getEmail()
+                + ", address=" + ALICE.getAddress() + ", date=" + ALICE.getDate()
+                + ", tags=" + ALICE.getTags() + ", id=" + ALICE.getId() + "}";
+        assertEquals(expectedClientString, ALICE.toString());
+
+        String expectedVendorString = Vendor.class.getCanonicalName() + "{name=" + BOB.getName()
+                + ", phone=" + BOB.getPhone() + ", email=" + BOB.getEmail()
+                + ", address=" + BOB.getAddress() + ", service=" + BOB.getService()
+                + ", tags=" + BOB.getTags() + ", id=" + BOB.getId() + "}";
+        assertEquals(expectedVendorString, BOB.toString());
     }
 }

@@ -18,12 +18,12 @@ import static seedu.ddd.logic.commands.CommandTestUtil.SERVICE_DESC_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.ddd.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_DATE;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_DATE_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.ddd.logic.commands.CommandTestUtil.VALID_SERVICE;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_SERVICE_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -125,7 +125,7 @@ public class EditCommandParserTest {
             + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + DATE_DESC_AMY + TAG_DESC_FRIEND;
         descriptor = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withDate(VALID_DATE).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withDate(VALID_DATE_AMY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -134,7 +134,7 @@ public class EditCommandParserTest {
             + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + SERVICE_DESC_BOB + TAG_DESC_FRIEND;
         descriptor = new EditVendorDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withService(VALID_SERVICE).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withService(VALID_SERVICE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
