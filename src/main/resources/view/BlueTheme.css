@@ -77,8 +77,8 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: derive(#dafaff, 20%);
-    -fx-border-color: transparent transparent transparent #4d4d4d;
+    -fx-background-color: derive(#154262, 20%);
+    -fx-border-color: transparent transparent transparent #154262;
 }
 
 .split-pane {
@@ -100,19 +100,19 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: #9accff;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: #d5eeff;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: #1aa2ff;
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
+    -fx-border-color: #1aa2ff;
     -fx-border-width: 1;
 }
 
@@ -207,6 +207,14 @@
     -fx-background-color: black;
 }
 
+.menu .menu-item .label {
+    -fx-text-fill: #124264;
+}
+
+.menu .menu-item:focused .label {
+    -fx-text-fill: white;
+}
+
 /*
  * Metro style Push Button
  * Author: Pedro Duque Vieira
@@ -214,23 +222,23 @@
  */
 .button {
     -fx-padding: 5 22 5 22;
-    -fx-border-color: #e2e2e2;
+    -fx-border-color: #124264;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: #dafaff;
     -fx-font-family: Futura, Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
-    -fx-text-fill: #d8d8d8;
+    -fx-text-fill: #124264;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
 .button:hover {
-    -fx-background-color: #3a3a3a;
+    -fx-background-color: #1272b6;
 }
 
 .button:pressed, .button:default:hover:pressed {
-  -fx-background-color: white;
-  -fx-text-fill: #1d1d1d;
+  -fx-background-color: #124264;
+  -fx-text-fill: white;
 }
 
 .button:focused {
@@ -243,13 +251,13 @@
 
 .button:disabled, .button:default:disabled {
     -fx-opacity: 0.4;
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: #dafaff;
     -fx-text-fill: white;
 }
 
 .button:default {
     -fx-background-color: -fx-focus-color;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #124264;
 }
 
 .button:default:hover {
