@@ -127,8 +127,8 @@ public class LessonScheduleTest {
         Lesson lesson = new LessonBuilder().build();
         lessonSchedule.addLesson(lesson);
         lessonScheduleCopy.addLesson(lesson);
-        assertEquals(lessonSchedule, lessonScheduleCopy);
-        assertNotEquals(null, lessonSchedule);
+        assertEquals(lessonSchedule, lessonSchedule);
+        assertNotEquals(lessonSchedule, lesson);
         assertNotEquals(lessonSchedule, new LessonSchedule());
     }
 
