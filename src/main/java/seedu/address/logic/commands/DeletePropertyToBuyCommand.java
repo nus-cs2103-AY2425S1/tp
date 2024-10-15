@@ -8,12 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -21,11 +16,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -133,6 +124,8 @@ public class DeletePropertyToBuyCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private List<Property> sellingProperties;
+        private List<Property> buyingProperties;
 
         public EditPersonPropertyDescriptor() {}
 
@@ -146,6 +139,8 @@ public class DeletePropertyToBuyCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setSellingProperties((ArrayList<Property>) toCopy.sellingProperties);
+            setBuyingProperties((ArrayList<Property>) toCopy.buyingProperties);
         }
 
         /**
@@ -204,6 +199,22 @@ public class DeletePropertyToBuyCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setSellingProperties(ArrayList<Property> sellingProperties) {
+            this.sellingProperties = (sellingProperties != null) ? new ArrayList<>(sellingProperties) : null;
+        }
+
+        public Optional<List<Property>> getSellingProperties() {
+            return Optional.ofNullable(sellingProperties);
+        }
+
+        public void setBuyingProperties(ArrayList<Property> buyingProperties) {
+            this.buyingProperties = (buyingProperties != null) ? new ArrayList<>(buyingProperties) : null;
+        }
+
+        public Optional<List<Property>> getBuyingProperties() {
+            return Optional.ofNullable(buyingProperties);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -220,7 +231,9 @@ public class DeletePropertyToBuyCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.deepEquals(sellingProperties, otherEditPersonDescriptor.sellingProperties)
+                    && Objects.deepEquals(buyingProperties, otherEditPersonDescriptor.buyingProperties);
         }
 
         @Override
@@ -231,6 +244,8 @@ public class DeletePropertyToBuyCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("properties-to-sell", sellingProperties)
+                    .add("properties-to-buy", buyingProperties)
                     .toString();
         }
     }
