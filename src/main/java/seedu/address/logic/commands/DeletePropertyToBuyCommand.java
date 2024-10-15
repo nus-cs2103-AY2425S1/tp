@@ -1,14 +1,15 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -38,18 +39,23 @@ public class DeletePropertyToBuyCommand extends Command {
 //    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
-    private final Index index;
-    private final EditPersonPropertyDescriptor editPersonPropertyDescriptor;
+    private final Index personIndex;
+    private final Index propertyIndex;
+    private EditPersonPropertyDescriptor editPersonPropertyDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonPropertyDescriptor details to edit the person with
+     * @param personIndex of the person in the filtered person list to edit.
+     * @param propertyIndex of the property belonging to the person in the filtered person list to edit.
+     * @param editPersonPropertyDescriptor details to edit the person and his/her property with
      */
-    public DeletePropertyToBuyCommand(Index index, EditPersonPropertyDescriptor editPersonPropertyDescriptor) {
-        requireNonNull(index);
+    public DeletePropertyToBuyCommand(Index personIndex, Index propertyIndex,
+                                      EditPersonPropertyDescriptor editPersonPropertyDescriptor) {
+        requireNonNull(personIndex);
+        requireNonNull(propertyIndex);
         requireNonNull(editPersonPropertyDescriptor);
 
-        this.index = index;
+        this.personIndex = personIndex;
+        this.propertyIndex = propertyIndex;
         this.editPersonPropertyDescriptor = new EditPersonPropertyDescriptor(editPersonPropertyDescriptor);
     }
 
@@ -58,11 +64,15 @@ public class DeletePropertyToBuyCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (personIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = lastShownList.get(personIndex.getZeroBased());
+
+        editPersonPropertyDescriptor.setBuyingProperties(personToEdit.getListOfBuyingProperties());
+        editPersonPropertyDescriptor.deleteBuyingProperties(propertyIndex);
+
         Person editedPerson = createEditedPerson(personToEdit, editPersonPropertyDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -71,7 +81,7 @@ public class DeletePropertyToBuyCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_PERSON_PROPERTY_SUCCESS, Messages.format(editedPerson)));
     }
 
     /**
@@ -86,8 +96,13 @@ public class DeletePropertyToBuyCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        List<Property> updatedListOfSellingProperties = editPersonDescriptor.getSellingProperties()
+                .orElse(personToEdit.getListOfSellingProperties());
+        List<Property> updatedListOfBuyingProperties = editPersonDescriptor.getBuyingProperties()
+                .orElse(personToEdit.getListOfBuyingProperties());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedListOfSellingProperties, updatedListOfBuyingProperties);
     }
 
     @Override
@@ -102,14 +117,16 @@ public class DeletePropertyToBuyCommand extends Command {
         }
 
         DeletePropertyToBuyCommand otherEditCommand = (DeletePropertyToBuyCommand) other;
-        return index.equals(otherEditCommand.index)
+        return personIndex.equals(otherEditCommand.personIndex)
+                && propertyIndex.equals(otherEditCommand.propertyIndex)
                 && editPersonPropertyDescriptor.equals(otherEditCommand.editPersonPropertyDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
+                .add("personIndex", personIndex)
+                .add("propertyIndex", propertyIndex)
                 .add("editPersonDescriptor", editPersonPropertyDescriptor)
                 .toString();
     }
@@ -199,7 +216,7 @@ public class DeletePropertyToBuyCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        public void setSellingProperties(ArrayList<Property> sellingProperties) {
+        public void setSellingProperties(List<Property> sellingProperties) {
             this.sellingProperties = (sellingProperties != null) ? new ArrayList<>(sellingProperties) : null;
         }
 
@@ -207,12 +224,19 @@ public class DeletePropertyToBuyCommand extends Command {
             return Optional.ofNullable(sellingProperties);
         }
 
-        public void setBuyingProperties(ArrayList<Property> buyingProperties) {
+        public void setBuyingProperties(List<Property> buyingProperties) {
             this.buyingProperties = (buyingProperties != null) ? new ArrayList<>(buyingProperties) : null;
         }
 
         public Optional<List<Property>> getBuyingProperties() {
             return Optional.ofNullable(buyingProperties);
+        }
+
+        /**
+         * Removes the property specified by the propertyIndex
+         */
+        public void deleteBuyingProperties(Index propertyIndex) {
+            buyingProperties.remove(propertyIndex.getZeroBased());
         }
 
         @Override

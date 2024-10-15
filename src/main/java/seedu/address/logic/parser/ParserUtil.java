@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -25,10 +26,13 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INCORRECT_INDEXES = "There should be 2 indexes separated by a space.\n"
+            + "Indexes should be non-zero unsigned integers.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -37,6 +41,45 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Returns an {@code Index} of personIndex from an argument String.
+     *
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static Index parsePersonIndex(String args) throws ParseException {
+        ArrayList<Index> indexArrayList = getIndexList(args);
+        return indexArrayList.get(0);
+    }
+
+    /**
+     * Returns an {@code Index} of propertyIndex from an argument String.
+     *
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static Index parsePropertyIndex(String args) throws ParseException{
+        ArrayList<Index> indexArrayList = getIndexList(args);
+        return indexArrayList.get(1);
+    }
+
+    /**
+     * Returns an {@code ArrayList<Index>} of personIndex and propertyIndex from an argument String.
+     *
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    private static ArrayList<Index> getIndexList(String args) throws ParseException {
+        String[] indexList = args.trim().split("\\s+");
+        ArrayList<Index> indexArrayList = new ArrayList<>();
+        int minIndexListLength = 2;  //TODO Remove magic number
+        if (indexList.length != minIndexListLength) {
+            throw new ParseException(MESSAGE_INCORRECT_INDEXES);
+        }
+        for (String i : indexList) {
+            Index index = parseIndex(i);
+            indexArrayList.add(index);
+        }
+        return indexArrayList;
     }
 
     /**

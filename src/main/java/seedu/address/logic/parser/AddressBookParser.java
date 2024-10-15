@@ -78,7 +78,7 @@ public class AddressBookParser {
             return new AddPropertyToBuyParser().parse(arguments);
 
         case DeletePropertyToBuyCommand.COMMAND_WORD:
-            return new AddPropertyToBuyParser().parse(arguments);
+            return new DeletePropertyToBuyCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
