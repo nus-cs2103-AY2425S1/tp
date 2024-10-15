@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
+
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.student.Student;
@@ -73,6 +75,6 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, phone, tutorialGroup, studentNumber);
+        return new Student(name, phone, tutorialGroup, studentNumber, new ArrayList<>());
     }
 }
