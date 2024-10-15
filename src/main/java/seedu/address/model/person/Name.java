@@ -37,8 +37,7 @@ public class Name {
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-
-
+    
     @Override
     public String toString() {
         return fullName;

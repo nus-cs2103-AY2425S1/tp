@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Name;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddClientProfileTest {
@@ -146,6 +147,11 @@ public class AddClientProfileTest {
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+        
+        @Override
+        public Person getPersonByName(Name name) {
             throw new AssertionError("This method should not be called.");
         }
 

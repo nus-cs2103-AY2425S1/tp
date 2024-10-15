@@ -38,7 +38,7 @@ public class Person {
         this.property = property;
         //  this.tags.addAll(tags);
     }
-
+    
     /**
      * Constructs a {@code Person} object with the specified name.
      * Initializes the phone number as {@code null}, sets the property to a default empty value,
@@ -46,6 +46,7 @@ public class Person {
      *
      * @param name The {@code Name} of the person. Must not be {@code null}.
      */
+    
     public Person(Name name) {
         this.name = name;
         this.phone = null;
@@ -88,7 +89,11 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getProperty().equals(getProperty())
+                && otherPerson.getAppointment().equals(getAppointment());
     }
 
     /**
