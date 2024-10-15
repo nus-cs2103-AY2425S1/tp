@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -66,5 +67,15 @@ public class TagCommandTest {
         TagCommand tagCommand = new TagCommand(outOfBoundsIndex, tagList);
 
         assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_excessiveTagsFilteredList_failure() {
+        Index index = INDEX_FIRST_PERSON;
+
+        Set<Tag> tagSet = SampleDataUtil.getTagSet("tag1", "tag2", "tag3", "tag4", "tag5", "tag6");
+        TagCommand command = new TagCommand(index, tagSet);
+        String expectedMessage = "Each person can only have up to 6 tags!";
+        assertCommandFailure(command, model, expectedMessage);
     }
 }

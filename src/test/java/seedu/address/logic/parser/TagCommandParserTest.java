@@ -59,4 +59,14 @@ public class TagCommandParserTest {
 
         assertParseFailure(parser, userInput, expectedMessage);
     }
+
+    @Test
+    public void parse_nonAlphanumericArgs_failure() {
+        TagCommandParser parser = new TagCommandParser();
+        String userInput = INDEX_FIRST_PERSON.getOneBased() + " t/bad*arg__!";
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                "Tags names should be alphanumeric");
+
+        assertParseFailure(parser, userInput, expectedMessage);
+    }
 }
