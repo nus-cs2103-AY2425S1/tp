@@ -26,6 +26,7 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
 import seedu.address.testutil.StudentBuilder;
@@ -57,6 +58,21 @@ public class AddCommandTest {
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_STUDENT, () -> addCommand.execute(modelStub));
     }
+
+    @Test
+    public void execute_duplicateStudentId_throwsCommandException() {
+        // Setup model with existing student having the same ID
+        Student existingStudent = new StudentBuilder().withStudentId("1001").build();
+        AddCommand addCommand = new AddCommand(existingStudent);
+
+        Student newStudent = new StudentBuilder().withName("Different name").withStudentId("1001").build();
+        ModelStub modelStub = new ModelStubWithStudent(newStudent);
+
+        // Assert that the expected exception is thrown
+        assertThrows(CommandException.class,
+                AddCommand.MESSAGE_DUPLICATE_STUDENTID + "1001", () -> addCommand.execute(modelStub));
+    }
+
 
     @Test
     public void equals() {
@@ -216,6 +232,12 @@ public class AddCommandTest {
         public void deleteTutorial(TutorialClass tutorialClass) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasStudentWithId(StudentId studentId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
@@ -234,6 +256,14 @@ public class AddCommandTest {
             requireNonNull(student);
             return this.student.isSameStudent(student);
         }
+
+        @Override
+        public boolean hasStudentWithId(StudentId studentId) {
+            requireNonNull(studentId);
+            return this.student.isSameStudentId(studentId);
+        }
+
+
     }
 
     /**
@@ -246,6 +276,11 @@ public class AddCommandTest {
         public boolean hasStudent(Student student) {
             requireNonNull(student);
             return studentsAdded.stream().anyMatch(student::isSameStudent);
+        }
+
+        @Override
+        public boolean hasStudentWithId(StudentId studentId) {
+            return studentsAdded.stream().anyMatch(s -> s.getStudentId().equals(studentId));
         }
 
         @Override

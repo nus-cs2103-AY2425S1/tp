@@ -9,6 +9,7 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
 
@@ -154,4 +155,10 @@ public interface Model {
      * Returns true if a tutorial class exists in the tutorial list.
      */
     boolean hasTutorialClass(TutorialClass tutorialClass);
+
+    /**
+     * Returns true if a student with the specified studentId exists.
+     */
+    public boolean hasStudentWithId(StudentId studentId);
+
 }

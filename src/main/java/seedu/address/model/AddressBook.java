@@ -8,6 +8,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
 import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
@@ -73,6 +74,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasStudent(Student student) {
         requireNonNull(student);
         return students.contains(student);
+    }
+
+    /**
+     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     */
+    public boolean hasStudentId(StudentId studentId) {
+        requireNonNull(studentId);
+        return getStudentList().stream()
+                .anyMatch(student -> student.getStudentId().equals(studentId));
     }
 
     /**

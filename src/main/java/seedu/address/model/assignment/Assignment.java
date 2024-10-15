@@ -62,6 +62,13 @@ public class Assignment {
     }
 
     /**
+     * Retrieves number of completed students.
+     */
+    public int getNumOfCompletedStudents() {
+        return numOfCompletedStudents;
+    }
+
+    /**
      * Marks the completion status of a student for this assignment.
      * Updates the number of completed students if the status changes to done.
      *
