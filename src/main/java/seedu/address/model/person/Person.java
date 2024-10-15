@@ -39,6 +39,18 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
     }
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, PolicySet policySet) {
+        requireAllNonNull(name, phone, email, address, tags, policySet);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.policies.addAll(policySet);
+    }
 
     public Name getName() {
         return name;
@@ -66,6 +78,9 @@ public class Person {
 
     public Set<Policy> getPolicies() {
         return Collections.unmodifiableSet(policies);
+    }
+    public PolicySet getPolicySet() {
+        return this.policies;
     }
 
     /**
