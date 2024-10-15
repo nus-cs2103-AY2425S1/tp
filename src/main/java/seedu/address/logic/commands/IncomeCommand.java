@@ -11,6 +11,7 @@ import seedu.address.model.Model;
  */
 public class IncomeCommand extends Command {
     public static final String COMMAND_WORD = "income";
+    public static final String COMMAND_WORD_RANDOM_CASE = "InCome";
 
     public static final String MESSAGE_SUCCESS = "Showed total money earned and owed";
     @Override

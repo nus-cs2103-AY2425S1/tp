@@ -23,8 +23,10 @@ import seedu.address.model.person.Person;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD_RANDOM_CASE = "AdD";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+            + "Command word is case-insensitive, e.g. " + COMMAND_WORD_RANDOM_CASE + " is allowed.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "

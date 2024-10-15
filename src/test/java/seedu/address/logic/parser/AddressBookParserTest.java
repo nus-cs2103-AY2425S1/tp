@@ -41,15 +41,35 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_add_Random_Case() throws Exception {
+        Person person = new PersonBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommandRandomCase(person));
+        assertEquals(new AddCommand(person), command);
+    }
+
+    @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
     @Test
+    public void parseCommand_clear_Random_Case() throws Exception {
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD_RANDOM_CASE) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD_RANDOM_CASE + " 3") instanceof ClearCommand);
+    }
+
+    @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_delete_Random_Case() throws Exception {
+        DeleteCommand command = (DeleteCommand) parser.parseCommand(
+                DeleteCommand.COMMAND_WORD_RANDOM_CASE + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
 
@@ -63,9 +83,24 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_edit_Random_Case() throws Exception {
+        Person person = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD_RANDOM_CASE + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+    }
+
+    @Test
+    public void parseCommand_exit_Random_Case() throws Exception {
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD_RANDOM_CASE) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD_RANDOM_CASE + " 3") instanceof ExitCommand);
     }
 
     @Test
@@ -77,9 +112,24 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_find_Random_Case() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindCommand command = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD_RANDOM_CASE + " "
+                        + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+    }
+
+    @Test
+    public void parseCommand_help_Random_Case() throws Exception {
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD_RANDOM_CASE) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD_RANDOM_CASE + " 3") instanceof HelpCommand);
     }
 
     @Test
@@ -87,6 +137,13 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
+
+    @Test
+    public void parseCommand_list_Random_Case() throws Exception {
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD_RANDOM_CASE) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD_RANDOM_CASE + " 3") instanceof ListCommand);
+    }
+
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {

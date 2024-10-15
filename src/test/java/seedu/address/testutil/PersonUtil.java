@@ -27,6 +27,13 @@ public class PersonUtil {
     }
 
     /**
+     * Returns an add command string for adding the {@code person}.
+     */
+    public static String getAddCommandRandomCase(Person person) {
+        return AddCommand.COMMAND_WORD_RANDOM_CASE + " " + getPersonDetails(person);
+    }
+
+    /**
      * Returns the part of command string for the given {@code person}'s details.
      */
     public static String getPersonDetails(Person person) {
