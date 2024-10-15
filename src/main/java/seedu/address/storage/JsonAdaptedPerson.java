@@ -1,7 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
@@ -91,8 +91,8 @@ class JsonAdaptedPerson {
                 Address.MESSAGE_CONSTRAINTS, Address::isValidAddress));
 
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        final Set<Note> modelNotes = new HashSet<>(personNotes);
+        final Set<Tag> modelTags = new LinkedHashSet<>(personTags);
+        final Set<Note> modelNotes = new LinkedHashSet<>(personNotes);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelNotes);
     }

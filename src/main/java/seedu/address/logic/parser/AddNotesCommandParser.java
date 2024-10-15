@@ -13,7 +13,7 @@ import seedu.address.model.person.Note;
 /**
  * Parses input arguments and creates a new NotesCommand object
  */
-public class NotesCommandParser implements Parser<AddNotesCommand> {
+public class AddNotesCommandParser implements Parser<AddNotesCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the NotesCommand
@@ -34,7 +34,8 @@ public class NotesCommandParser implements Parser<AddNotesCommand> {
                     AddNotesCommand.MESSAGE_USAGE), ive);
         }
 
-        String noteName = argMultimap.getValue(PREFIX_NOTES).orElse("");
+        String noteName = argMultimap.getValue(PREFIX_NOTES).get();
+        ParserUtil.parseNote(noteName);
         Note note = new Note(noteName);
 
         return new AddNotesCommand(index, note);
