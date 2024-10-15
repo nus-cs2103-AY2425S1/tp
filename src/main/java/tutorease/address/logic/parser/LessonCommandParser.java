@@ -13,6 +13,7 @@ import tutorease.address.logic.commands.Command;
 import tutorease.address.logic.commands.DeleteLessonCommand;
 import tutorease.address.logic.commands.HelpCommand;
 import tutorease.address.logic.commands.LessonCommand;
+import tutorease.address.logic.commands.ListLessonCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -37,6 +38,8 @@ public class LessonCommandParser implements Parser<Command> {
             return new AddLessonCommandParser().parse(subArguments);
         case DeleteLessonCommand.COMMAND_WORD:
             return new DeleteLessonCommandParser().parse(subArguments);
+        case ListLessonCommand.COMMAND_WORD:
+            return new ListLessonCommand();
         default:
             logger.finer("This user input caused a ParseException: "
                     + LessonCommand.COMMAND_WORD + " " + args);

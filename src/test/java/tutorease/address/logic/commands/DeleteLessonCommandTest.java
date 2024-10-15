@@ -5,19 +5,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorease.address.testutil.Assert.assertThrows;
-import static tutorease.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Predicate;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import tutorease.address.commons.core.GuiSettings;
-import tutorease.address.logic.Messages;
+import tutorease.address.commons.core.index.Index;
 import tutorease.address.logic.commands.exceptions.CommandException;
+import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.Model;
 import tutorease.address.model.ReadOnlyTutorEase;
@@ -25,70 +25,89 @@ import tutorease.address.model.ReadOnlyUserPrefs;
 import tutorease.address.model.TutorEase;
 import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.Person;
-import tutorease.address.testutil.PersonBuilder;
+import tutorease.address.testutil.LessonBuilder;
 
-public class AddContactCommandTest {
+public class DeleteLessonCommandTest {
 
-    @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddContactCommand(null));
+    public DeleteLessonCommandTest() throws ParseException {
+    }
+
+    private class ModelStubAcceptingLessonDeleted extends ModelStub {
+        final ArrayList<Lesson> lessonsAdded = new ArrayList<>();
+
+        @Override
+        public boolean hasLessons(Lesson lesson) {
+            requireNonNull(lesson);
+            return lessonsAdded.stream().anyMatch(lesson::isOverlapping);
+        }
+
+        @Override
+        public void addLesson(Lesson lesson) {
+            requireNonNull(lesson);
+            lessonsAdded.add(lesson);
+        }
+
+        @Override
+        public void deleteLesson(int index) {
+            lessonsAdded.remove(index);
+        }
+
+        @Override
+        public Lesson getLesson(int index) {
+            return lessonsAdded.get(index);
+        }
+
+        @Override
+        public int getLessonScheduleSize() {
+            return lessonsAdded.size();
+        }
+
+        @Override
+        public ReadOnlyTutorEase getTutorEase() {
+            return new TutorEase();
+        }
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
-
-        CommandResult commandResult = new AddContactCommand(validPerson).execute(modelStub);
-
-        assertEquals(String.format(AddContactCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+    public void constructor_nullIndex_throwsNullPointerException() {
+        // Ensure constructor throws NullPointerException if index is null
+        assertThrows(NullPointerException.class, () -> new DeleteLessonCommand(null));
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddContactCommand addContactCommand = new AddContactCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_validIndex_success() throws CommandException, ParseException {
+        ModelStubAcceptingLessonDeleted modelStub = new ModelStubAcceptingLessonDeleted();
+        LessonBuilder lessonBuilder = new LessonBuilder();
+        Lesson lesson = lessonBuilder.build();
+        Index index = Index.fromZeroBased(0);
+        DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(index);
 
-        assertThrows(CommandException.class, AddContactCommand.MESSAGE_DUPLICATE_PERSON, ()
-                -> addContactCommand.execute(modelStub));
+        modelStub.addLesson(lesson);
+        assertTrue(modelStub.hasLessons(lesson));
+        CommandResult result = deleteLessonCommand.execute(modelStub);
+
+        assertEquals(String.format(DeleteLessonCommand.MESSAGE_SUCCESS, lesson), result.getFeedbackToUser());
+        assertFalse(modelStub.hasLessons(lesson));
     }
 
     @Test
-    public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddContactCommand addAliceCommand = new AddContactCommand(alice);
-        AddContactCommand addBobCommand = new AddContactCommand(bob);
+    public void execute_invalidIndex_throwsCommandException() throws ParseException {
+        ModelStubAcceptingLessonDeleted modelStub = new ModelStubAcceptingLessonDeleted();
+        LessonBuilder lessonBuilder = new LessonBuilder();
+        Lesson lesson = lessonBuilder.build();
+        Index index = Index.fromZeroBased(10);
+        DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(index);
 
-        // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        modelStub.addLesson(lesson);
+        assertTrue(modelStub.hasLessons(lesson));
 
-        // same values -> returns true
-        AddContactCommand addAliceCommandCopy = new AddContactCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
-
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
-    }
-
-    @Test
-    public void toStringMethod() {
-        AddContactCommand addCommand = new AddContactCommand(ALICE);
-        String expected = AddContactCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        CommandException thrown = Assertions.assertThrows(
+                CommandException.class, () -> deleteLessonCommand.execute(modelStub));
+        assertEquals(DeleteLessonCommand.MESSAGE_INVALID_INDEX, thrown.getMessage());
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A Model stub that always accept the lesson being deleted.
      */
     private class ModelStub implements Model {
         @Override
@@ -117,7 +136,7 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public void setTutorEaseFilePath(Path addressBookFilePath) {
+        public void setTutorEaseFilePath(Path tutorEaseFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -201,47 +220,4 @@ public class AddContactCommandTest {
             throw new AssertionError("This method should not be called.");
         }
     }
-
-    /**
-     * A Model stub that contains a single person.
-     */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
-
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
-        }
-    }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
-        }
-
-        @Override
-        public ReadOnlyTutorEase getTutorEase() {
-            return new TutorEase();
-        }
-    }
-
 }
