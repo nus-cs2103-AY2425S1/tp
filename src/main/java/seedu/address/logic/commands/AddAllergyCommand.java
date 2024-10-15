@@ -27,8 +27,8 @@ public class AddAllergyCommand extends Command {
             + "[" + PREFIX_TAG + "Allergy]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NRIC + "S1234567A "
-            + PREFIX_TAG + "Insulin "
-            + PREFIX_TAG + "Diabetes";
+            + PREFIX_TAG + "Pollen "
+            + PREFIX_TAG + "Peanut";
 
     public static final String MESSAGE_SUCCESS = "New tag added: %1$s";
     public static final String MESSAGE_DUPLICATE_TAG = "This allergy already exists in the address book %1$s";
