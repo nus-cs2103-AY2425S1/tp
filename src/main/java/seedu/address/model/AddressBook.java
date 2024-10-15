@@ -45,6 +45,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         this();
         setPersons(toBeCopied.getPersonList());
         setProjects(toBeCopied.getProjectList());
+        setAssignments(toBeCopied.getAssignmentList());
         resetData(toBeCopied);
     }
 
@@ -59,11 +60,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the person list with {@code projects}.
+     * Replaces the contents of the project list with {@code projects}.
      * {@code projects} must not contain duplicate projects.
      */
     public void setProjects(List<Project> projects) {
         this.projects.setProjects(projects);
+    }
+
+    /**
+     * Replaces the contents of the assignment list with {@code assignments}.
+     * {@code assignments} must not contain duplicate assignments.
+     */
+    public void setAssignments(List<Assignment> assignments) {
+        this.assignments.setAssignments(assignments);
     }
 
     /**

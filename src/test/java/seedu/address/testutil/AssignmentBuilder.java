@@ -35,6 +35,14 @@ public class AssignmentBuilder {
     }
 
     /**
+     * Sets the {@code assignmentId} of the {@code Assignment} that we are building.
+     */
+    public AssignmentBuilder withAssignmentId(String assignmentId) {
+        this.assignmentId = new AssignmentId(assignmentId);
+        return this;
+    }
+
+    /**
      * Sets the {@code project} of the {@code Assignment} that we are building.
      */
     public AssignmentBuilder withProject(Project project) {
