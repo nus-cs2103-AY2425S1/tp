@@ -29,6 +29,7 @@ class JsonAdaptedSupplier {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedProduct> products = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedSupplier} with the given supplier details.
@@ -36,13 +37,16 @@ class JsonAdaptedSupplier {
     @JsonCreator
     public JsonAdaptedSupplier(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("products") List<JsonAdaptedProduct> products) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (products != null) {
+            this.products.addAll(products);
         }
     }
 
@@ -56,6 +60,9 @@ class JsonAdaptedSupplier {
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        products.addAll(source.getAssignedProducts().stream()
+                .map(JsonAdaptedProduct::new)
                 .collect(Collectors.toList()));
     }
 
@@ -103,7 +110,13 @@ class JsonAdaptedSupplier {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(supplierTags);
-        return new Supplier(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        Supplier supplier = new Supplier(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        for (JsonAdaptedProduct product : products) {
+            supplier.addProduct(product.toModelType());
+        }
+
+        return supplier;
     }
 
 }

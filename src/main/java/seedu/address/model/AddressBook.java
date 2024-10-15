@@ -82,7 +82,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return suppliers.contains(supplier);
     }
 
-
     /**
      * Adds a supplier to the address book.
      * The supplier must not already exist in the address book.
@@ -90,7 +89,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addSupplier(Supplier p) {
         suppliers.add(p);
     }
-
 
     /**
      * Replaces the given supplier {@code target} in the list with {@code editedSupplier}.
@@ -122,7 +120,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return products.contains(product);
     }
 
-
     /**
      * Adds a product to the address book.
      * The product must not already exist in the address book.
@@ -130,7 +127,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addProduct(Product p) {
         products.add(p);
     }
-
 
     /**
      * Replaces the given product {@code target} in the list with {@code editedProduct}.

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.product.Product;
 import seedu.address.model.supplier.Supplier;
 
 /**
@@ -20,15 +21,19 @@ import seedu.address.model.supplier.Supplier;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_SUPPLIER = "Suppliers list contains duplicate supplier(s).";
+    public static final String MESSAGE_DUPLICATE_PRODUCT = "Products list contains duplicate product(s).";
 
     private final List<JsonAdaptedSupplier> suppliers = new ArrayList<>();
+    private final List<JsonAdaptedProduct> products = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given suppliers.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("suppliers") List<JsonAdaptedSupplier> suppliers) {
+    public JsonSerializableAddressBook(@JsonProperty("suppliers") List<JsonAdaptedSupplier> suppliers,
+                                       @JsonProperty("products") List<JsonAdaptedProduct> products) {
         this.suppliers.addAll(suppliers);
+        this.products.addAll(products);
     }
 
     /**
@@ -38,6 +43,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         suppliers.addAll(source.getSupplierList().stream().map(JsonAdaptedSupplier::new).collect(Collectors.toList()));
+        products.addAll(source.getProductList().stream().map(JsonAdaptedProduct::new).collect(Collectors.toList()));
     }
 
     /**
@@ -53,6 +59,13 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_SUPPLIER);
             }
             addressBook.addSupplier(supplier);
+        }
+        for (JsonAdaptedProduct jsonAdaptedProduct : products) {
+            Product product = jsonAdaptedProduct.toModelType();
+            if (addressBook.hasProduct(product)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PRODUCT);
+            }
+            addressBook.addProduct(product);
         }
         return addressBook;
     }
