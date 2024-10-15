@@ -367,13 +367,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### Use case: Add a piano piece to a student
+#### Use case: Assign piano piece to a student
 
 **MSS**
 
-1. User enters command to add a piano piece to a student.
-2. KeyContacts parses the piano piece details from the user's command.
-3. KeyContacts adds the piano piece to the student's record and notifies the user.
+1. User enters command to assign piano pieces to a student.
+2. KeyContacts parses the piano pieces' details from the user's command.
+3. KeyContacts assigns the piano pieces to the student's record and notifies the user.
 
    Use case ends.
 

@@ -103,6 +103,18 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GRADE_LEVEL]`
 Examples:
 *  `edit 1 n/Jane Doe p/91234567` Edits the name and phone number of the 1st person to be `Jane Doe` and `91234567` respectively.
 
+### Assigning piano pieces to a student: `assign`
+
+Assigns piano pieces to a student in the student directory.
+
+Format: `assign INDEX pn/PIECE_NAME...`
+
+* Assigns piano pieces to the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+*  Existing values will remain unchanged
+
+Examples:
+*  `assign 1 pn/Etude pn/Moonlight Sonata` Adds `Etude` and `Moonlight Sonata` to the 1st person's piano pieces.
+
 ### Locating students by name: `find`
 
 Finds students whose names contain any of the given keywords.
@@ -190,6 +202,7 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee p/81234567`
+**Assign** | `assign INDEX pn/PIECE_NAME...`<br> e.g,`assign 1 pn/Moonlight Sonata pn/Canon in D`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
