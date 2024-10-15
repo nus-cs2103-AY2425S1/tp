@@ -1,6 +1,7 @@
+// src/test/java/seedu/address/logic/commands/DeleteYCommandTest.java
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -24,13 +25,15 @@ public class DeleteYCommandTest {
 
     @Test
     public void execute_confirmDeletion_success() throws CommandException {
-        // Ensure the person to delete is part of the model's filtered person list
+        // Use an existing person from the typical address book
         Person personToDelete = model.getFilteredPersonList().get(0);
         StaticContext.setPersonToDelete(personToDelete);
 
         DeleteYCommand deleteYCommand = new DeleteYCommand(personToDelete);
         CommandResult commandResult = deleteYCommand.execute(model);
 
-        assertCommandSuccess(deleteYCommand, model, String.format(DeleteYCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete), model);
+        String expectedMessage = String.format(DeleteYCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
     }
 }
