@@ -55,7 +55,7 @@ public class EditClientCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the client in the filtered client list to edit
+     * @param index                of the client in the filtered client list to edit
      * @param editPersonDescriptor details to edit the client with
      */
     public EditClientCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
@@ -143,7 +143,8 @@ public class EditClientCommand extends Command {
         private Set<Tag> tags;
         private Set<RentalInformation> rentalInformationList;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.

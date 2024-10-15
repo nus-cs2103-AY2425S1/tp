@@ -77,6 +77,10 @@ public class Email {
         }
 
         Email otherEmail = (Email) other;
+
+        if (value == null && otherEmail.value == null) {
+            return true;
+        }
         return value.equals(otherEmail.value);
     }
 

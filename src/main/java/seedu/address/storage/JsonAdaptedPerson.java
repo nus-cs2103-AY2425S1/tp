@@ -108,6 +108,12 @@ class JsonAdaptedPerson {
             modelEmail = new Email();
             return new Client(modelName, modelPhone, modelEmail, modelTags, modelRentalInformation);
         } else {
+            if (!Phone.isValidPhone(phone)) {
+                throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+            }
+            if (!Email.isValidEmail(email)) {
+                throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+            }
             modelPhone = new Phone(phone);
             modelEmail = new Email(email);
         }
