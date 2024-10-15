@@ -29,9 +29,9 @@ public class AddAssignmentCommand extends Command {
             + PREFIX_STUDENT_INDEX + "STUDENT INDEX "
             + PREFIX_ASSIGNMENT_NAME + "ASSIGNMENT NAME "
             + PREFIX_ASSIGNMENT_MAX_SCORE + "MAX SCORE "
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_STUDENT_INDEX + "1"
-            + PREFIX_ASSIGNMENT_NAME + "Assignment 1"
+            + "\nExample: " + COMMAND_WORD + " "
+            + PREFIX_STUDENT_INDEX + "1 "
+            + PREFIX_ASSIGNMENT_NAME + "Assignment 1 "
             + PREFIX_ASSIGNMENT_MAX_SCORE + "100";
     public static final String MESSAGE_SUCCESS = "New assignment added: %1$s";
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in the address book";

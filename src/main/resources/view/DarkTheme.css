@@ -156,6 +156,10 @@
     -fx-border-top-width: 1px;
 }
 
+.details-pane .viewport {
+    -fx-background-color: #3c3e3f;
+}
+
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }
