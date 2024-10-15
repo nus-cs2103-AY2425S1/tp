@@ -30,11 +30,14 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
 
         // instanceof handles nulls
         if (!(other instanceof NameContainsKeywordsPredicate)) {
-            return false;
+            if (other != null) {
+                return false;
+            }
         }
 
         NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        return keywords.equals(otherNameContainsKeywordsPredicate != null
+                ? otherNameContainsKeywordsPredicate.keywords : null);
     }
 
     @Override

@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -34,6 +35,9 @@ public class FindCommand extends Command {
             + COMMAND_WORD + " " + PREFIX_PHONE + "9243 9312";
 
     private final Predicate<Person> combinedPredicate;
+    private final NameContainsKeywordsPredicate namePredicate;
+    private final PhoneContainsKeywordsPredicate phonePredicate;
+    private final AddressContainsKeywordsPredicate addressPredicate;
 
     /**
      * Constructs a FindCommand object with optional predicates for filtering by name, phone, and address.
@@ -48,7 +52,12 @@ public class FindCommand extends Command {
     public FindCommand(NameContainsKeywordsPredicate namePredicate,
                        PhoneContainsKeywordsPredicate phonePredicate,
                        AddressContainsKeywordsPredicate addressPredicate) {
-        Predicate<Person> basePredicate = person -> true;
+        this.namePredicate = namePredicate;
+        this.phonePredicate = phonePredicate;
+        this.addressPredicate = addressPredicate;
+
+        Predicate<Person> basePredicate = namePredicate == null && phonePredicate == null && addressPredicate == null
+                ? person -> false : person -> true;
 
         if (namePredicate != null) {
             basePredicate = basePredicate.and(namePredicate);
@@ -83,13 +92,22 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return combinedPredicate.equals(otherFindCommand.combinedPredicate);
+
+
+        return (Objects.equals(this.namePredicate, otherFindCommand.namePredicate))
+                && (Objects.equals(this.phonePredicate, otherFindCommand.phonePredicate))
+                && (Objects.equals(this.addressPredicate, otherFindCommand.addressPredicate));
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("combinedPredicate", combinedPredicate)
+                .add("namePredicate", namePredicate == null ? "null" : namePredicate.toString())
+                .add("phonePredicate", phonePredicate == null ? "null" : phonePredicate.toString())
+                .add("addressPredicate", addressPredicate == null ? "null" : addressPredicate.toString())
                 .toString();
+//        return new ToStringBuilder(this)
+//                .add("combinedPredicate", combinedPredicate)
+//                .toString();
     }
 }

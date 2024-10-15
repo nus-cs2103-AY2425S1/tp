@@ -9,7 +9,9 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -22,13 +24,23 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
-        // no leading and trailing whitespaces
+        // no leading and trailing whitespaces on names
         FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
+                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")), null, null);
+        assertParseSuccess(parser, " n/Alice Bob", expectedFindCommand);
 
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+        // multiple whitespaces between name keywords
+        assertParseSuccess(parser, " n/ \n Alice \n \t Bob  \t", expectedFindCommand);
+
+        // multiple whitespaces between phone keywords
+        FindCommand expectedFindCommandForPhone =
+                new FindCommand(null, new PhoneContainsKeywordsPredicate(Arrays.asList("9345", "1234")), null);
+        assertParseSuccess(parser, " p/9345 1234", expectedFindCommandForPhone);
+
+        // whitespaces allowed in address and multiple "_" between address keywords
+        FindCommand expectedFindCommandForAddress =
+                new FindCommand(null, null, new AddressContainsKeywordsPredicate(Arrays.asList("Wall Street", "Michigan")));
+        assertParseSuccess(parser, " a/Wall Street_Michigan", expectedFindCommandForAddress);
     }
 
 }

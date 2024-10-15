@@ -27,7 +27,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS);
 
-        if (!argMultimap.getPreamble().isEmpty()) {
+        if (!argMultimap.getPreamble().isEmpty() || args.trim().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
@@ -43,7 +43,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         String[] addressKeywords = argMultimap.isPresent(PREFIX_ADDRESS)
                 ? argMultimap.getValue(PREFIX_ADDRESS).get().trim().split("_")
                 : null;
-        System.out.println(Arrays.toString(addressKeywords));
 
         // Create the specific predicates, or pass null if no valid keywords were provided
         NameContainsKeywordsPredicate namePredicate = nameKeywords != null
