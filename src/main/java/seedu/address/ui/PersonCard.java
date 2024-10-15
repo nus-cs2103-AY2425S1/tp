@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
 /**
@@ -29,6 +30,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private VBox vBox;
+    @FXML
     private Label name;
     @FXML
     private Label id;
@@ -50,8 +53,16 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        if (person.hasAddress()) {
+            Label address = new Label(person.getAddress().map(Object::toString).orElse(null));
+            address.getStyleClass().add("cell_small_label");
+            address.setText(person.getAddress().orElse(null).value);
+            vBox.getChildren().add(address);
+        }
+
+        email = new Label(person.getEmail().value);
+        email.getStyleClass().add("cell_small_label");
+        vBox.getChildren().add(email);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

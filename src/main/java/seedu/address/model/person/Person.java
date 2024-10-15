@@ -41,12 +41,12 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Optional<Address> address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = Optional.empty();
+        this.address = address;
         this.tags.addAll(tags);
     }
 
@@ -62,8 +62,8 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address.orElse(null);
+    public Optional<Address> getAddress() {
+        return address;
     }
 
     /**
@@ -122,10 +122,17 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email);
+
         address.ifPresent(addr -> builder.add("address", addr));
         builder.add("tags", tags);
 
         return builder.toString();
     }
 
+    /**
+     * Returns true if this person has a non-null address.
+     */
+    public boolean hasAddress() {
+        return this.address.isPresent();
+    }
 }

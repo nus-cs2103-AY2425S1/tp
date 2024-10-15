@@ -14,6 +14,10 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BETTY;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CARL;
+
+import java.util.Objects;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,9 +35,25 @@ public class PersonTest {
     public void testPersonConstructorWithoutAddress() {
         Person betty = new PersonBuilder(BETTY).buildEmptyAddressPerson();
 
-        Person person = new Person(BETTY.getName(), BETTY.getPhone(), BETTY.getEmail(), BETTY.getTags());
+        Person person = new Person(BETTY.getName(), BETTY.getPhone(), BETTY.getEmail(),
+                Optional.empty(), BETTY.getTags());
+
         assertNotNull(person, "The person object should not be null");
         assertEquals(betty, person);
+    }
+
+    @Test
+    public void testHasAddressWithoutAddress() {
+        Person betty = new PersonBuilder(BETTY).buildEmptyAddressPerson();
+
+        assertFalse(betty.hasAddress());
+    }
+
+    @Test
+    public void testHasAddressWithAddress() {
+        Person carl = new PersonBuilder(CARL).build();
+
+        assertTrue(carl.hasAddress());
     }
 
     @Test
@@ -94,8 +114,12 @@ public class PersonTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+        String expected = Person.class.getCanonicalName()
+                + "{name=" + ALICE.getName()
+                + ", phone=" + ALICE.getPhone()
+                + ", email=" + ALICE.getEmail()
+                + ", address=" + ALICE.getAddress().map(Objects ::toString).orElse(null)
+                + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
