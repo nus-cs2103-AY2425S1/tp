@@ -103,7 +103,7 @@ public class Person {
      * @param policies the list of {@code Policy} objects to be set. This list will replace
      *                 any existing policies.
      */
-    public void setPolicies(List<Policy> policies){
+    public void setPolicies(List<Policy> policies) {
         this.policies = policies;
     }
 

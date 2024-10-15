@@ -1,10 +1,17 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_POLICY_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_END_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_START_DATE;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -15,6 +22,7 @@ import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Policy;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -166,5 +174,70 @@ public class ParserUtil {
             throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
         }
         return new Appointment(appointment);
+    }
+
+    /**
+     * Parses a {@code String policyArgs} into a {@code Policy}.
+     *
+     * @throws ParseException if the given {@code policyArgs} is invalid.
+     */
+    public static Policy parsePolicy(String policyArgs) throws ParseException {
+        requireNonNull(policyArgs);
+        String trimmedPolicy = policyArgs.trim();
+
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(trimmedPolicy, PREFIX_POLICY_NAME, PREFIX_POLICY_START_DATE,
+                        PREFIX_POLICY_END_DATE);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_POLICY_NAME, PREFIX_POLICY_START_DATE, PREFIX_POLICY_END_DATE)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_POLICY_FORMAT));
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POLICY_NAME, PREFIX_POLICY_START_DATE,
+                PREFIX_POLICY_END_DATE);
+
+        String nameString = argMultimap.getValue(PREFIX_POLICY_NAME).get();
+        String startDateString = argMultimap.getValue(PREFIX_POLICY_START_DATE).get();
+        String endDateString = argMultimap.getValue(PREFIX_POLICY_END_DATE).get();
+
+        if (!Policy.isValidPolicy(nameString, startDateString, endDateString)) {
+            throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
+        }
+        return new Policy(nameString, startDateString, endDateString);
+    }
+
+    /**
+     * Parses {@code Collection<String> policies} into a {@code List<Policy>}.
+     */
+    public static Map<Index, Policy> parsePolicies(Collection<String> policies) throws ParseException {
+        requireNonNull(policies);
+        final Map<Index, Policy> policyMap = new HashMap<Index, Policy>();
+
+        for (String policyArgs : policies) {
+            String trimmedPolicy = policyArgs.trim();
+
+            ArgumentMultimap argMultimap =
+                    ArgumentTokenizer.tokenize(trimmedPolicy, PREFIX_POLICY_NAME);
+
+            Index index;
+
+            try {
+                index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            } catch (ParseException pe) {
+                throw new ParseException(String.format(MESSAGE_INVALID_POLICY_FORMAT), pe);
+            }
+
+            policyMap.put(index, parsePolicy(policyArgs));
+        }
+
+        return policyMap;
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
