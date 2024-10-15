@@ -17,7 +17,6 @@ import seedu.address.model.person.Property;
 import seedu.address.testutil.PropertyBuilder;
 
 public class AddPropertyToSellCommandTest {
-    
     private final Index index = Index.fromZeroBased(7);
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final Property property = new PropertyBuilder().build();
