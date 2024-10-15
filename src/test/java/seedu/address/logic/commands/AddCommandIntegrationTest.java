@@ -27,22 +27,22 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
-        Student validPerson = new StudentBuilder().build();
+    public void execute_newStudent_success() {
+        Student validStudent = new StudentBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
+        expectedModel.addStudent(validStudent);
 
-        assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertCommandSuccess(new AddCommand(validStudent), model,
+                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validStudent)),
                 expectedModel);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Student personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+    public void execute_duplicateStudent_throwsCommandException() {
+        Student studentInList = model.getAddressBook().getStudentList().get(0);
+        assertCommandFailure(new AddCommand(studentInList), model,
+                AddCommand.MESSAGE_DUPLICATE_STUDENT);
     }
 
 }

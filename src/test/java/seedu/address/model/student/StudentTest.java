@@ -20,35 +20,35 @@ public class StudentTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Student person = new StudentBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getCourses().remove(0));
+        Student student = new StudentBuilder().build();
+        assertThrows(UnsupportedOperationException.class, () -> student.getCourses().remove(0));
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSameStudent() {
         // same object -> returns true
-        assertTrue(ALICE.isSamePerson(ALICE));
+        assertTrue(ALICE.isSameStudent(ALICE));
 
         // null -> returns false
-        assertFalse(ALICE.isSamePerson(null));
+        assertFalse(ALICE.isSameStudent(null));
 
         // same name, all other attributes different -> returns true
         Student editedAlice = new StudentBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withCourses(VALID_COURSE_CS2103T).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        assertTrue(ALICE.isSameStudent(editedAlice));
 
         // different name, all other attributes same -> returns false
         editedAlice = new StudentBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        assertFalse(ALICE.isSameStudent(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
         Student editedBob = new StudentBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertFalse(BOB.isSameStudent(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new StudentBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertFalse(BOB.isSameStudent(editedBob));
     }
 
     @Test
@@ -66,7 +66,7 @@ public class StudentTest {
         // different type -> returns false
         assertFalse(ALICE.equals(5));
 
-        // different person -> returns false
+        // different student -> returns false
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false
