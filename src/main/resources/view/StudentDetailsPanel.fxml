@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
@@ -11,59 +12,70 @@
 <?import javafx.scene.layout.VBox?>
 
 <HBox id="detailsPane" fx:id="detailsPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <GridPane HBox.hgrow="ALWAYS">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
-        </columnConstraints>
-        <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
-            <padding>
-                <Insets top="5" right="5" bottom="5" left="15" />
-            </padding>
-            <HBox spacing="0.5" alignment="CENTER_LEFT">
-                <Label fx:id="id" styleClass="details_big_label">
-                    <minWidth>
-                        <!-- Ensures that the label text is never truncated -->
-                        <Region fx:constant="USE_PREF_SIZE" />
-                    </minWidth>
-                </Label>
-                <Label fx:id="name" text="\$first" styleClass="details_big_label" />
-                <padding>
-                    <Insets top="5" right="5" bottom="3" left="5" />
-                </padding>
-            </HBox>
-            <Separator />
-            <FlowPane fx:id="detailsTags">
-                <padding>
-                    <Insets top="10" bottom="8" left="5"/>
-                </padding>
-            </FlowPane>
-            <HBox spacing="5" alignment="CENTER_LEFT">
-                <padding>
-                    <Insets left="8"/>
-                </padding>
-                <Label text="Phone:       " styleClass="details_field_headers" />
-                <Label fx:id="phone" styleClass="details_small_label" text="\$phone" />
-            </HBox>
-            <HBox spacing="5" alignment="CENTER_LEFT">
-                <padding>
-                    <Insets left="8"/>
-                </padding>
-                <Label text="Email:          " styleClass="details_field_headers" />
-                <Label fx:id="email" styleClass="details_small_label" text="\$email" />
-                <!-- display for Assignments !-->
-            </HBox>
-            <HBox spacing="5" alignment="CENTER_LEFT">
-            <padding>
-                <Insets left="8" top="10" bottom="5"/>
-            </padding>
-            <Label text="Assignments:" styleClass="details_field_headers" />
-                <!-- Use a VBox inside the FlowPane to list each assignment in its own box -->
-                <FlowPane fx:id="assignments" vgap="10" hgap="10" alignment="CENTER_LEFT">
+    <ScrollPane fitToWidth="true" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="details-pane">
+        <content >
+            <GridPane >
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+                </columnConstraints>
+                <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
                     <padding>
-                        <Insets top="10" bottom="8" left="5"/>
+                        <Insets top="5" right="5" bottom="5" left="15" />
                     </padding>
-                </FlowPane>
-            </HBox>
-        </VBox>
-    </GridPane>
+                    <HBox spacing="0.5" alignment="CENTER_LEFT">
+                        <Label fx:id="id" styleClass="details_big_label">
+                            <minWidth>
+                                <!-- Ensures that the name text is never truncated -->
+                                <Region fx:constant="USE_PREF_SIZE" />
+                            </minWidth>
+                        </Label>
+                        <Label fx:id="name" text="\$first" styleClass="details_big_label" />
+                        <padding>
+                            <Insets top="5" right="5" bottom="3" left="5" />
+                        </padding>
+                    </HBox>
+                    <Separator />
+                    <FlowPane fx:id="detailsTags" >
+                        <padding>
+                            <Insets top="10" bottom="8" left="5"/>
+                        </padding>
+                    </FlowPane>
+                    <HBox spacing="5" alignment="CENTER_LEFT">
+                        <padding>
+                            <Insets left="8"/>
+                        </padding>
+                        <Label text="Phone:       " styleClass="details_field_headers" />
+                        <Label fx:id="phone" styleClass="details_small_label" text="\$phone" />
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER_LEFT">
+                        <padding>
+                            <Insets left="8"/>
+                        </padding>
+                        <Label text="Email:          " styleClass="details_field_headers" />
+                        <Label fx:id="email" styleClass="details_small_label" text="\$email" />
+                        <!-- display for Assignments !-->
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER_LEFT">
+                        <padding>
+                            <Insets top="10" left="8"/>
+                        </padding>
+                        <Label text="Assignments:" styleClass="details_field_headers" />
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER_LEFT">
+                        <padding>
+                            <Insets left="8" bottom="5"/>
+                        </padding>
+                        <!--<Label text="Assignments:" styleClass="details_field_headers" /> -->
+
+                        <!-- Use a VBox inside the FlowPane to list each assignment in its own box -->
+                        <FlowPane fx:id="assignments" vgap="10" hgap="10" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                            <padding>
+                                <Insets top="10" bottom="8" left="5"/>
+                            </padding>
+                        </FlowPane>
+                    </HBox>
+                </VBox>
+            </GridPane>
+        </content>
+    </ScrollPane>
 </HBox>
