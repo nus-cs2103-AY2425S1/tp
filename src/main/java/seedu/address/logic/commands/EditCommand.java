@@ -50,7 +50,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ROOM_NUMBER + "ROOMNUMBER] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_EMERGENCY_NAME + "EMERGENCY_NAME] "
-            + "[" + PREFIX_EMERGENCY_PHONE + "EMERGENCY_CONTACT_NUMBER] "
+            + "[" + PREFIX_EMERGENCY_PHONE + "EMERGENCY_PHONE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
