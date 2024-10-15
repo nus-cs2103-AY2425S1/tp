@@ -5,7 +5,6 @@ import static hallpointer.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_POINTS;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
 
-import java.util.HashSet;
 import java.util.stream.Stream;
 
 import hallpointer.address.logic.commands.AddSessionCommand;

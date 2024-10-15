@@ -13,7 +13,7 @@ import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Room;
 import hallpointer.address.model.member.Telegram;
 import hallpointer.address.model.point.Point;
-import hallpointer.address.model.session.Date;
+import hallpointer.address.model.session.SessionDate;
 import hallpointer.address.model.session.SessionName;
 import hallpointer.address.model.tag.Tag;
 
@@ -125,22 +125,22 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String date} into a {@code Date}.
+     * Parses a {@code String date} into a {@code SessionDate}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code date} is invalid.
      */
-    public static Date parseDate(String date) throws ParseException {
+    public static SessionDate parseSessionDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        if (!SessionDate.isValidDate(trimmedDate)) {
+            throw new ParseException(SessionDate.MESSAGE_CONSTRAINTS);
         }
-        return new Date(trimmedDate);
+        return new SessionDate(trimmedDate);
     }
 
     /**
-     * Parses a {@code String points} into an {@code int}.
+     * Parses a {@code String points} into an {@code Points}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code points} is invalid.
