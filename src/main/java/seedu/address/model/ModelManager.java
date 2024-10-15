@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -126,6 +127,19 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    /**
+     * Returns the person with the same name as {@code name} exists in the address book.
+     */
+    @Override
+    public Person getPersonByName(Name name) {
+        requireNonNull(name);
+        return this.getFilteredPersonList()
+                    .stream()
+                    .filter(person -> person.getName().equals(name))
+                    .findFirst()
+                    .orElse(null);
     }
 
     @Override
