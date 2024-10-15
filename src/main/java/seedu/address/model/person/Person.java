@@ -86,6 +86,15 @@ public class Person {
     }
 
     /**
+     * Replaces the given delivery {@code target} in the list with {@code editedDelivery}.
+     * {@code target} must exist in the address book.
+     * The identity of {@code editedDelivery} must not be the same as another existing delivery in the list.
+     */
+    public void setDelivery(Delivery target, Delivery editedDelivery) {
+        deliveryList.setDelivery(target, editedDelivery);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
