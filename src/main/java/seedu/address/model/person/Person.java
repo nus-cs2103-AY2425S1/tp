@@ -24,7 +24,13 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-
+    private Allergy allergy;
+    private BloodType bloodType;
+    private HealthCondition healthCondition;
+    private HealthRecord pastHealthRecord;
+    private Note additionalNote;
+    private Name nokName;
+    private Phone nokPhone;
     /**
      * Every field must be present and not null.
      */
@@ -35,6 +41,26 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Only Name, NRIC, Sex, BirthDate, HealthServices field need to be present.
+     * The other fields can be null
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Allergy allergy, BloodType bloodType,
+        HealthCondition healthCondition, HealthRecord healthRecord, Note note, Name nokName, Phone nokPhone) {
+        requireAllNonNull(name, phone, email);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.allergy = allergy;
+        this.bloodType = bloodType;
+        this.healthCondition = healthCondition;
+        this.pastHealthRecord = healthRecord;
+        this.additionalNote = note;
+        this.nokName = nokName;
+        this.nokPhone = nokPhone;
     }
 
     public Name getName() {
@@ -51,6 +77,34 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Name getNokName() {
+        return nokName;
+    }
+
+    public Phone getNokPhone() {
+        return nokPhone;
+    }
+
+    public Allergy getAllergies() {
+        return allergy;
+    }
+
+    public BloodType getBloodType() {
+        return bloodType;
+    }
+
+    public HealthCondition getHealthCondition() {
+        return healthCondition;
+    }
+
+    public Note getAdditionalNote() {
+        return additionalNote;
+    }
+
+    public HealthRecord getPastHealthRecord() {
+        return pastHealthRecord;
     }
 
     /**
