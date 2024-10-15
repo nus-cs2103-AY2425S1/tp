@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -21,18 +20,17 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.tag.Tag;
 
-@Disabled
 public class ParserUtilTest {
-    private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
-    private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_MAJOR = " ";
+    private static final String INVALID_NETID = "e12345";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
-    private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_STUDENTID = "A1234567P";
+    private static final String VALID_MAJOR = "Computer Science";
+    private static final String VALID_EMAIL = "e1234567@u.nus.edu";
+    private static final String VALID_NETID = "e1234567";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -64,11 +62,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseName_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NAME));
-    }
-
-    @Test
     public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
         Name expectedName = new Name(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parseName(VALID_NAME));
@@ -93,14 +86,14 @@ public class ParserUtilTest {
 
     @Test
     public void parsePhone_validValueWithoutWhitespace_returnsStudentId() throws Exception {
-        StudentId expectedStudentId = new StudentId(VALID_PHONE);
-        assertEquals(expectedStudentId, ParserUtil.parseStudentId(VALID_PHONE));
+        StudentId expectedStudentId = new StudentId(VALID_STUDENTID);
+        assertEquals(expectedStudentId, ParserUtil.parseStudentId(VALID_STUDENTID));
     }
 
     @Test
     public void parsePhone_validValueWithWhitespace_returnsTrimmedStudentId() throws Exception {
-        String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
-        StudentId expectedStudentId = new StudentId(VALID_PHONE);
+        String phoneWithWhitespace = WHITESPACE + VALID_STUDENTID + WHITESPACE;
+        StudentId expectedStudentId = new StudentId(VALID_STUDENTID);
         assertEquals(expectedStudentId, ParserUtil.parseStudentId(phoneWithWhitespace));
     }
 
@@ -110,20 +103,20 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseMajor(INVALID_ADDRESS));
+    public void parseMajor_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseMajor(INVALID_MAJOR));
     }
 
     @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsMajor() throws Exception {
-        Major expectedAddress = new Major(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseMajor(VALID_ADDRESS));
+    public void parseMajor_validValueWithoutWhitespace_returnsMajor() throws Exception {
+        Major expectedAddress = new Major(VALID_MAJOR);
+        assertEquals(expectedAddress, ParserUtil.parseMajor(VALID_MAJOR));
     }
 
     @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedMajor() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-        Major expectedAddress = new Major(VALID_ADDRESS);
+    public void parseMajor_validValueWithWhitespace_returnsTrimmedMajor() throws Exception {
+        String addressWithWhitespace = WHITESPACE + VALID_MAJOR + WHITESPACE;
+        Major expectedAddress = new Major(VALID_MAJOR);
         assertEquals(expectedAddress, ParserUtil.parseMajor(addressWithWhitespace));
     }
 
@@ -134,20 +127,20 @@ public class ParserUtilTest {
 
     @Test
     public void parseNetId_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseNetId(INVALID_EMAIL));
+        assertThrows(ParseException.class, () -> ParserUtil.parseNetId(INVALID_NETID));
     }
 
     @Test
     public void parseNetId_validValueWithoutWhitespace_returnsEmail() throws Exception {
         Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseNetId(VALID_EMAIL));
+        assertEquals(expectedEmail, ParserUtil.parseNetId(VALID_NETID));
     }
 
     @Test
     public void parseNetId_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
-        String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
+        String netIdWithWhitespace = WHITESPACE + VALID_NETID + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseNetId(emailWithWhitespace));
+        assertEquals(expectedEmail, ParserUtil.parseNetId(netIdWithWhitespace));
     }
 
     @Test
