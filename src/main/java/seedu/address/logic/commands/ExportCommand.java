@@ -1,14 +1,20 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+
+/**
+ * The ExportCommand class is responsible for exporting contacts from the address book to a CSV file.
+ * When executed, it writes the list of persons, along with their details, to a file in CSV format.
+ *
+ * Usage example: {@code export}
+ */
 public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
     public static final String MESSAGE_USAGE = "Contacts have been successfully exported";
@@ -41,7 +47,7 @@ public class ExportCommand extends Command {
         bw.write(COLUMN_HEADERS);
         bw.newLine();
         for (Person person : personList) {
-            bw.write(person.toCSVFormat());
+            bw.write(person.toCsvFormat());
             bw.newLine();
         }
         bw.close();
