@@ -1,6 +1,7 @@
 package tutorease.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static tutorease.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a Person's name in the address book.
  * Guarantees: immutable; its value is either "Guardian" or "Student"
@@ -19,10 +20,8 @@ public class Role {
      */
     public Role(String role) {
         requireNonNull(role);
-        if (!role.equals(GUARDIAN) && !role.equals(STUDENT)) {
-            throw new IllegalArgumentException("Role must be either 'Guardian' or 'Student'.");
-        }
-        this.value = role;
+        checkArgument(isValidRole(role), MESSAGE_CONSTRAINTS);
+        value = role;
     }
 
     @Override
@@ -38,7 +37,7 @@ public class Role {
     }
     // Validation method
     public static boolean isValidRole(String role) {
-        return role != null && !role.isEmpty() && role.matches("[\\p{Alnum} ]+");
+        return GUARDIAN.equals(role) || STUDENT.equals(role);
     }
 
     @Override
