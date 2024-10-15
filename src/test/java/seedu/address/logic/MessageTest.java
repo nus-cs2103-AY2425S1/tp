@@ -27,6 +27,7 @@ public class MessageTest {
         assertEquals(expectedMessage, actualMessage);
     }
 
+    //Relook at this section after creation of typicalDeliveries
 //    @Test
 //    public void testFormatDelivery() {
 //        Delivery delivery = new Delivery(new ItemName("Laptop"), new Address("123, Some Street"), new Cost("$1000"),
@@ -54,6 +55,7 @@ public class MessageTest {
         assertEquals(expectedMessage, actualMessage);
     }
 
+    //Relook at this section after creation of typicalDeliveries
 //    @Test
 //    public void testFormatDeliveryList() {
 //        Delivery delivery1 = new Delivery(new ItemName("Laptop"), new Address("123, Some Street"), new Cost("$1000"),
