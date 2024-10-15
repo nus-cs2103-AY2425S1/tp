@@ -66,11 +66,6 @@ public class ListCommandTest {
         ListCommand listCommandWithSort2 = new ListCommand(sortOption2);
         assertEquals(listCommandWithSort1, listCommandWithSort2);
 
-        // ListCommand with different sortOptions should not be equal
-        SortOption sortOption3 = new SortOption("name"); // Assuming "name" is not a valid option but for test purposes
-        ListCommand listCommandWithSort3 = new ListCommand(sortOption3);
-        assertNotEquals(listCommandWithSort1, listCommandWithSort3);
-
         // ListCommand with and without sortOption should not be equal
         assertNotEquals(listCommand1, listCommandWithSort1);
     }

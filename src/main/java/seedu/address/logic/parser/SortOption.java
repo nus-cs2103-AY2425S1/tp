@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +30,7 @@ public class SortOption {
      */
     public SortOption(String option) {
         requireNonNull(option);
+        checkArgument(isValidSortOption(option), MESSAGE_CONSTRAINTS);
         value = option;
     }
 

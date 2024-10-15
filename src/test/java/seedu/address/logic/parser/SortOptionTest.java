@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -21,7 +22,13 @@ public class SortOptionTest {
     public void constructor_validOption_createsSortOption() {
         // Valid sort option
         SortOption sortOption = new SortOption("alphabet");
-        assertTrue(sortOption.toString().equals("alphabet"));
+        assertEquals("alphabet", sortOption.toString());
+    }
+
+    @Test
+    public void constructor_invalidOption_throwsIllegalArgumentException() {
+        String invalidOption = "NotSortOption";
+        assertThrows(IllegalArgumentException.class, () -> new SortOption(invalidOption));
     }
 
     @Test
@@ -47,6 +54,20 @@ public class SortOptionTest {
     }
 
     @Test
+    public void testHashCode() {
+        SortOption sortOption1 = new SortOption("alphabet");
+        SortOption sortOption2 = new SortOption("alphabet");
+
+        // Ensure that hashCode returns the same value consistently
+        int initialHashCode = sortOption1.hashCode();
+        assertEquals(initialHashCode, sortOption1.hashCode());
+        assertEquals(initialHashCode, sortOption1.hashCode());
+
+        // Ensure their hash codes are the same
+        assertEquals(sortOption1.hashCode(), sortOption2.hashCode());
+    }
+
+    @Test
     public void equals() {
         SortOption sortOption = new SortOption("alphabet");
 
@@ -62,7 +83,7 @@ public class SortOptionTest {
         // different types -> returns false
         assertFalse(sortOption.equals(5));
 
-        // different values -> returns false
-        assertFalse(sortOption.equals(new SortOption("age")));
+        // Currently can only create SortOption with alphabet.
+        // Add more cases to check SortOption are not equal when option is different
     }
 }
