@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.person.Person;
+import seedu.address.model.person.*;
 
 
 /**
@@ -30,6 +30,13 @@ public class Event {
         requireAllNonNull(eventName, date, attendees);
         this.eventName = eventName;
         this.date = date;
+
+        // buffer data to show UI changes, since adding attendees are not yet implemented.
+        Person adam = new Person(new Name("Adam"), new Phone("99998888"),
+                                 new Email("abc@gmail.com"), new Relationship("Brother"));
+        Person jake = new Person(new Name("Jake"), new Phone("33338888"),
+                                 new Email("abcdef@gmail.com"), new Relationship("Father"));
+        attendees.addAll(Set.of(adam, jake));
         this.attendees.addAll(attendees);
     }
 
