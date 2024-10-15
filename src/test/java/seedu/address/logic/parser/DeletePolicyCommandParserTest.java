@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.DeletePolicyCommand;
 import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.Policy;
-import seedu.address.model.policy.PolicyMap;
+import seedu.address.model.policy.PolicySet;
 
 public class DeletePolicyCommandParserTest {
     private final DeletePolicyCommandParser parser = new DeletePolicyCommandParser();
@@ -21,7 +21,7 @@ public class DeletePolicyCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        final PolicyMap policies = new PolicyMap();
+        final PolicySet policies = new PolicySet();
         policies.add(health);
         String userInput = INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_HEALTH;
         DeletePolicyCommand expectedCommand = new DeletePolicyCommand(INDEX_FIRST_PERSON, policies);

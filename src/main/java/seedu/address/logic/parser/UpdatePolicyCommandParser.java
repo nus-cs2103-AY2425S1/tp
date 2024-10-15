@@ -7,7 +7,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.UpdatePolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.policy.PolicyMap;
+import seedu.address.model.policy.PolicySet;
 
 /**
  * Parses input arguments and creates a new UpdatePolicyCommand object.
@@ -35,7 +35,7 @@ public class UpdatePolicyCommandParser implements Parser<UpdatePolicyCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdatePolicyCommand.MESSAGE_USAGE), ive);
         }
 
-        PolicyMap policySet = ParserUtil.parsePolicies(argMultimap.getAllValues(PREFIX_POLICY_TYPE));
+        PolicySet policySet = ParserUtil.parsePolicies(argMultimap.getAllValues(PREFIX_POLICY_TYPE));
         return new UpdatePolicyCommand(index, policySet);
     }
 }

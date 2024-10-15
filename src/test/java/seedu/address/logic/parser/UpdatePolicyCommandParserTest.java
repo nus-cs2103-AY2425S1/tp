@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.UpdatePolicyCommand;
 import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.Policy;
-import seedu.address.model.policy.PolicyMap;
+import seedu.address.model.policy.PolicySet;
 
 public class UpdatePolicyCommandParserTest {
     private final UpdatePolicyCommandParser parser = new UpdatePolicyCommandParser();
@@ -21,7 +21,7 @@ public class UpdatePolicyCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        final PolicyMap policies = new PolicyMap();
+        final PolicySet policies = new PolicySet();
         policies.add(health);
         String userInput = INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_HEALTH;
         UpdatePolicyCommand expectedCommand = new UpdatePolicyCommand(INDEX_FIRST_PERSON, policies);

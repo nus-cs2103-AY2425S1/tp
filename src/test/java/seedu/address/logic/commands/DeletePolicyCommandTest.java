@@ -17,7 +17,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.policy.EducationPolicy;
 import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.LifePolicy;
-import seedu.address.model.policy.PolicyMap;
+import seedu.address.model.policy.PolicySet;
 
 public class DeletePolicyCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -27,14 +27,14 @@ public class DeletePolicyCommandTest {
 
     @Test
     public void constructor_nullInputs_throwsNullPointerException() {
-        final PolicyMap policies = new PolicyMap();
+        final PolicySet policies = new PolicySet();
         assertThrows(NullPointerException.class, () -> new DeletePolicyCommand(null, policies));
         assertThrows(NullPointerException.class, () -> new DeletePolicyCommand(INDEX_FIRST_PERSON, null));
     }
 
     @Test
     public void execute_throwsException() {
-        final PolicyMap policies = new PolicyMap();
+        final PolicySet policies = new PolicySet();
         policies.add(health);
 
         assertCommandFailure(new DeletePolicyCommand(INDEX_FIRST_PERSON, policies), model,
@@ -43,9 +43,9 @@ public class DeletePolicyCommandTest {
 
     @Test
     public void equals() {
-        final PolicyMap lifePolicies = new PolicyMap();
+        final PolicySet lifePolicies = new PolicySet();
         lifePolicies.add(life);
-        final PolicyMap educationPolicies = new PolicyMap();
+        final PolicySet educationPolicies = new PolicySet();
         educationPolicies.add(education);
 
         final DeletePolicyCommand standardCommand = new DeletePolicyCommand(INDEX_FIRST_PERSON, lifePolicies);
