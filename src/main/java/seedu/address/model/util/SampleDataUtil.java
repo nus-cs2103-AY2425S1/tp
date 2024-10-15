@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -76,8 +77,16 @@ public class SampleDataUtil {
      * Returns a role set containing the list of strings given.
      */
     public static Set<Role> getRoleSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(role -> Role.valueOf(role.toUpperCase())) // Convert string to Role enum
-                .collect(Collectors.toSet());
+        Set<Role> roleSet = new HashSet<>(); // Create an empty set to store Role enums
+
+        // Loop through each string in the input
+        for (String role : strings) {
+            if (role != null) { // Check for null to avoid NullPointerException
+                // Convert the string to uppercase and add the corresponding Role enum to the set
+                roleSet.add(Role.valueOf(role.toUpperCase()));
+            }
+        }
+
+        return roleSet; // Return the set containing Role enums
     }
 }

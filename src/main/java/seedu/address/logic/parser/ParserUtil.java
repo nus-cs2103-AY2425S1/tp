@@ -143,7 +143,7 @@ public class ParserUtil {
         try {
             return Role.valueOf(trimmedRole);
         } catch (IllegalArgumentException e) {
-            throw new ParseException("Invalid role: " + role + ". Valid roles are: PATIENT, CAREGIVER.");
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
     }
 

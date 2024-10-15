@@ -13,4 +13,7 @@ public enum Role {
      * Represents a caregiver in the address book.
      */
     CAREGIVER;
+
+    public static final String MESSAGE_CONSTRAINTS = "Roles should only be 'PATIENT' or 'CAREGIVER'";
+
 }
