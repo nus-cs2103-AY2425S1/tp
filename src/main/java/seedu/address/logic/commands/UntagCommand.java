@@ -82,9 +82,26 @@ public class UntagCommand extends Command {
      * @param originalTags the original set of tags
      * @param tagsToRemove the set of tags to remove
      * @return the modified set of tags
+     * @throws CommandException if any tag in tagsToRemove does not exist in originalTags
      */
-    public Set<Tag> removeTags(Set<Tag> originalTags, Set<Tag> tagsToRemove) {
+    public Set<Tag> removeTags(Set<Tag> originalTags, Set<Tag> tagsToRemove) throws CommandException {
         Set<Tag> modifiedTags = new HashSet<>(originalTags);
+
+        Set<Tag> nonExistentTags = tagsToRemove.stream()
+                .filter(tag -> !originalTags.contains(tag))
+                .collect(Collectors.toSet());
+
+        if (modifiedTags.isEmpty()) {
+            throw new CommandException("Error: No tags to remove from this person.");
+        }
+
+        if (!nonExistentTags.isEmpty()) {
+            String nonExistentTagsString = nonExistentTags.stream()
+                    .map(tag -> tag.tagName)
+                    .collect(Collectors.joining(", "));
+            throw new CommandException("Error: The following tags do not exist: " + nonExistentTagsString);
+        }
+
         modifiedTags.removeAll(tagsToRemove);
         return modifiedTags;
     }

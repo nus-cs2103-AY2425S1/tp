@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -46,6 +47,7 @@ public class UntagCommandParser implements Parser<UntagCommand> {
         }
 
         Set<Tag> tagsToRemove = argMultimap.getAllValues(PREFIX_TAG).stream()
+                .flatMap(tagString -> Arrays.stream(tagString.split("\\s+")))
                 .map(Tag::new)
                 .collect(Collectors.toSet());
 
