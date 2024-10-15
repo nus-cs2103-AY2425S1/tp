@@ -19,21 +19,12 @@ import seedu.address.model.tag.Tag;
  */
 public class Doctor extends Person {
 
-    // Doctor-specific data fields
-    private final Speciality speciality;
-
     /**
      * Every field must be present and not null.
      */
     public Doctor(Name name, Phone phone, Email email, Address address, Speciality speciality, Set<Tag> tags) {
-        super(name, phone, email, address, tags);
-
+        super(name, phone, email, address, speciality, tags);
         requireAllNonNull(speciality);
-        this.speciality = speciality;
-    }
-
-    public Speciality getSpeciality() {
-        return speciality;
     }
 
     /**
@@ -62,7 +53,7 @@ public class Doctor extends Person {
         }
 
         Doctor otherDoctor = (Doctor) other;
-        return speciality.equals(otherDoctor.speciality);
+        return super.getSpeciality().equals(otherDoctor.getSpeciality());
     }
 
     @Override
@@ -73,7 +64,7 @@ public class Doctor extends Person {
             super.getPhone(),
             super.getEmail(),
             super.getAddress(),
-            speciality,
+            super.getSpeciality(),
             super.getTags()
         );
     }
@@ -85,7 +76,7 @@ public class Doctor extends Person {
                 .add("phone", super.getPhone())
                 .add("email", super.getEmail())
                 .add("address", super.getAddress())
-                .add("speciality", speciality)
+                .add("speciality", super.getSpeciality())
                 .add("tags", super.getTags())
                 .toString();
     }
