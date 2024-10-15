@@ -8,7 +8,9 @@ import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Eta;
+import seedu.address.model.delivery.Id;
 import seedu.address.model.delivery.ItemName;
+import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.Time;
 import seedu.address.model.person.Address;
 
@@ -19,41 +21,49 @@ public class JsonAdaptedDelivery {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Delivery's %s field is missing!";
 
+    private final String id;
     private final String itemName;
     private final String address;
     private final String cost;
     private final String date;
     private final String time;
     private final String eta;
+    private final String status;
 
     /**
      * Constructs a {@code JsonAdaptedDelivery} with the given delivery details.
      */
     @JsonCreator
-    public JsonAdaptedDelivery(@JsonProperty("itemName") String itemName,
+    public JsonAdaptedDelivery(@JsonProperty("id") String id,
+                               @JsonProperty("itemName") String itemName,
                                @JsonProperty("address") String address,
                                @JsonProperty("cost") String cost,
                                @JsonProperty("date") String date,
                                @JsonProperty("time") String time,
-                               @JsonProperty("eta") String eta) {
+                               @JsonProperty("eta") String eta,
+                               @JsonProperty("status") String status) {
+        this.id = id;
         this.itemName = itemName;
         this.address = address;
         this.cost = cost;
         this.date = date;
         this.time = time;
         this.eta = eta;
+        this.status = status;
     }
 
     /**
      * Converts a given {@code Delivery} into this class for Jackson use.
      */
     public JsonAdaptedDelivery(Delivery source) {
+        id = String.valueOf(source.getId().value);
         itemName = source.getItemName().value;
         address = source.getAddress().value;
         cost = source.getCost().value;
         date = source.getDate().value.toString();
         time = source.getTime().value.toString();
         eta = source.getEta().value.toString();
+        status = String.valueOf(source.getStatus().value);
     }
 
     /**
@@ -62,15 +72,21 @@ public class JsonAdaptedDelivery {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Delivery toModelType() throws IllegalValueException {
+        if (id == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName()));
+        }
+        if(!Id.isValidId(id)) {
+            throw new IllegalValueException(Id.MESSAGE_CONSTRAINTS);
+        }
+        final Id modelId = new Id(id);
+
         if (itemName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ItemName.class.getSimpleName()));
         }
-
         if (!ItemName.isValidItemName(itemName)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-
         final ItemName modelItemName = new ItemName(itemName);
 
         if (address == null) {
@@ -113,6 +129,15 @@ public class JsonAdaptedDelivery {
         }
         final Eta modelEta = new Eta(eta);
 
-        return new Delivery(modelItemName, modelAddress, modelCost, modelDate, modelTime, modelEta);
+        if (status == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
+        }
+        if(!Status.isValidStatus(status)) {
+            throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
+        }
+        final Status modelStatus = new Status(status);
+
+        return new Delivery(modelId, modelItemName, modelAddress, modelCost, modelDate, modelTime, modelEta,
+                modelStatus);
     }
 }
