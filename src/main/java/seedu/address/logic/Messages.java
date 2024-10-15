@@ -57,14 +57,16 @@ public class Messages {
     public static String format(Delivery delivery) {
         final StringBuilder builder = new StringBuilder();
         builder.append(delivery.getItemName())
-                .append("; ")
-                .append(delivery.getCost())
-                .append("; ")
-                .append(delivery.getDate())
-                .append("; ")
-                .append(delivery.getTime())
-                .append("; ")
-                .append(delivery.getEta());
+            .append("; ")
+            .append(delivery.getAddress())
+            .append("; ")
+            .append(delivery.getCost())
+            .append("; ")
+            .append(delivery.getEta())
+            .append("; ")
+            .append(delivery.getDate())
+            .append("; ")
+            .append(delivery.getTime());
         return builder.toString();
     }
 
