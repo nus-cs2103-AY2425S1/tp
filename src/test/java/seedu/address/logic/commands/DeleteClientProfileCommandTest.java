@@ -11,10 +11,10 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalNames;
 
-import org.junit.jupiter.api.Test;
-
 import java.util.List;
 import java.util.Random;
+
+import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
