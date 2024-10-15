@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 import seedu.address.commons.exceptions.AppNotFoundException;
@@ -11,6 +12,10 @@ import seedu.address.commons.exceptions.AppNotFoundException;
  */
 public class History {
     private TreeMap<LocalDateTime, TreeMap<Integer, String>> appointmentHistory;
+
+    // Nigel's suggestion
+    public static TreeMap<LocalDateTime, Appointment> appointments;
+    private ArrayList<? extends Person> personAppointments;
 
     /**
      * Placeholder default constructor TODO.
@@ -80,8 +85,9 @@ public class History {
      * @param doctorId Id of doctor in the appointment.
      * @return True if appointment was successfully added, false if otherwise.
      */
-    public static boolean addAppointment(LocalDateTime dateTime, Id patientId, Id doctorId, String remarks) {
+    public boolean addAppointment(LocalDateTime dateTime, Id patientId, Id doctorId, String remarks) {
         // TODO something new Appointment(dateTime, patientId, doctorId, remarks)
+        // TODO also need add to this.personAppointments
         // Other notes: check for duplicate appointments / clashing timeslots w doctor & patient
         // What to throw if got error
         return false;
@@ -96,6 +102,7 @@ public class History {
      */
     public static boolean deleteAppointment(LocalDateTime dateTime, Id patientId, Id doctorId) {
         // TODO something
+        // TODO rmb need delete from this.personAppoitments
         return false;
     }
 

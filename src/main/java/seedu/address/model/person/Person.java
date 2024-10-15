@@ -1,7 +1,9 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -14,7 +16,6 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public abstract class Person implements Appointmentable {
-
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -86,6 +87,55 @@ public abstract class Person implements Appointmentable {
         return otherPerson != null
                 && otherPerson.getName().equals(getName())
                 && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
+    }
+
+    /**
+     * Adds a new appointment at the specified time, for the respective patient and doctor.
+     *
+     * @param dateTime  Time of appointment.
+     * @param patientId Id of patient in the appointment.
+     * @param doctorId  Id of doctor in the appointment.
+     * @return True if command was successful, false if otherwise.
+     */
+    @Override
+    public boolean addAppointment(LocalDateTime dateTime, Id patientId, Id doctorId, String remarks) {
+        requireNonNull(dateTime);
+        requireNonNull(patientId);
+        requireNonNull(doctorId);
+        requireNonNull(remarks);
+
+        return history.addAppointment(dateTime, patientId, doctorId, remarks);
+    }
+
+    /**
+     * Delete an appointment at the specified time, with the respective patient and doctor.
+     *
+     * @param dateTime  Time of appointment.
+     * @param patientId Id of patient in the appointment.
+     * @param doctorId  Id of doctor in the appointment.
+     * @return True if command was successful, false if otherwise.
+     */
+    @Override
+    public boolean deleteAppointment(LocalDateTime dateTime, Id patientId, Id doctorId) {
+        requireNonNull(dateTime);
+        requireNonNull(patientId);
+        requireNonNull(doctorId);
+
+        return History.deleteAppointment(dateTime, patientId, doctorId);
+    }
+
+    /**
+     * Gets an appointment at the specified time, with the respective patient and doctor.
+     *
+     * @param dateTime  Time of appointment.
+     * @param patientId Id of patient in the appointment.
+     * @param doctorId  Id of doctor in the appointment.
+     * @return True if command was successful, false if otherwise.
+     */
+    @Override
+    public Appointment getAppointment(LocalDateTime dateTime, Id patientId, Id doctorId) {
+        // TODO AFTER v1.3
+        return null;
     }
 
     @Override
