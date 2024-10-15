@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,73 +19,59 @@ public class HelpWindowTest {
 
     private HelpWindow helpWindow;
 
+    @BeforeAll
+    public static void initJFX() throws Exception {
+        // Initialize JavaFX platform if it's not already started
+        CountDownLatch latch = new CountDownLatch(1);
+        Platform.startup(() -> latch.countDown());
+        latch.await(2, TimeUnit.SECONDS); // Wait for JavaFX to initialize
+    }
+
     @BeforeEach
     public void setUp() throws Exception {
-        // Create JavaFX application thread manually
         CountDownLatch latch = new CountDownLatch(1);
         Platform.runLater(() -> {
             Stage stage = new Stage();
             helpWindow = new HelpWindow(stage);
             latch.countDown();
         });
-        latch.await(2, TimeUnit.SECONDS); // Wait for initialization
+        latch.await(2, TimeUnit.SECONDS);
     }
 
     @Test
     public void show_helpWindowIsShown() throws Exception {
-        // Use latch to synchronize with JavaFX thread
         CountDownLatch latch = new CountDownLatch(1);
         Platform.runLater(() -> {
-            // Ensure the help window is not shown initially
             assertFalse(helpWindow.isShowing());
-
-            // Show the help window
             helpWindow.show();
-
-            // Verify that the help window is now shown
             assertTrue(helpWindow.isShowing());
-
             latch.countDown();
         });
-        latch.await(2, TimeUnit.SECONDS); // Wait for test completion
+        latch.await(2, TimeUnit.SECONDS);
     }
 
     @Test
     public void hide_helpWindowIsHidden() throws Exception {
         CountDownLatch latch = new CountDownLatch(1);
         Platform.runLater(() -> {
-            // Show the help window first
             helpWindow.show();
-
-            // Verify that the help window is shown
             assertTrue(helpWindow.isShowing());
-
-            // Hide the help window
             helpWindow.hide();
-
-            // Verify that the help window is now hidden
             assertFalse(helpWindow.isShowing());
-
             latch.countDown();
         });
-        latch.await(2, TimeUnit.SECONDS); // Wait for test completion
+        latch.await(2, TimeUnit.SECONDS);
     }
 
     @Test
     public void copyUrl_urlIsCopiedToClipboard() throws Exception {
         CountDownLatch latch = new CountDownLatch(1);
         Platform.runLater(() -> {
-            // Call the copyUrl method
             helpWindow.copyUrl();
-
-            // Get the current clipboard content
             Clipboard clipboard = Clipboard.getSystemClipboard();
-
-            // Verify that the URL was copied to the clipboard
             assertEquals(HelpWindow.USERGUIDE_URL, clipboard.getString());
-
             latch.countDown();
         });
-        latch.await(2, TimeUnit.SECONDS); // Wait for test completion
+        latch.await(2, TimeUnit.SECONDS);
     }
 }
