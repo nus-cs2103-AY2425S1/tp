@@ -32,7 +32,7 @@ public class PersonUtil {
      */
     public static String getPersonDetails(Person person) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
+        sb.append(PREFIX_NAME + person.getName().value + " ");
         sb.append(PREFIX_ID + person.getId().value + " ");
         sb.append(PREFIX_WARD + person.getWard().value);
         /*
@@ -49,7 +49,7 @@ public class PersonUtil {
      */
     public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
+        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.value).append(" "));
         descriptor.getId().ifPresent(id -> sb.append(PREFIX_ID).append(id.value).append(" "));
         descriptor.getWard().ifPresent(ward -> sb.append(PREFIX_WARD).append(ward.value).append(" "));
         /*

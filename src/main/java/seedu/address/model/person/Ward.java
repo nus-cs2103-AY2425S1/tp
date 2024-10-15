@@ -28,6 +28,7 @@ public class Ward {
     public static boolean isValidWard(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
     @Override
     public String toString() {
         return value;

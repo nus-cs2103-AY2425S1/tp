@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Diagnosis;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -22,8 +23,8 @@ class JsonAdaptedPerson {
     private final String name;
     private final String id;
     private final String ward;
-    /*
     private final String diagnosis;
+    /*
     private final String medication;
     private final String phone;
     private final String email;
@@ -56,10 +57,11 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("id") String id,
-                             @JsonProperty("ward") String ward) {
+                             @JsonProperty("ward") String ward, @JsonProperty("diagnosis") String diagnosis) {
         this.name = name;
         this.id = id;
         this.ward = ward;
+        this.diagnosis = diagnosis;
         /*
         this.diagnosis = diagnosis;
         this.medication = medication;
@@ -74,11 +76,11 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
-        name = source.getName().fullName;
+        name = source.getName().value;
         id = source.getId().value;
         ward = source.getWard().value;
-        /*
         diagnosis = source.getDiagnosis().value;
+        /*
         medication = source.getMedication().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -126,6 +128,15 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Ward.MESSAGE_CONSTRAINTS);
         }
         final Ward modelWard = new Ward(ward);
+
+        if (diagnosis == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Diagnosis.class.getSimpleName()));
+        }
+        if (!Diagnosis.isValidDiagnosis(diagnosis)) {
+            throw new IllegalValueException(Diagnosis.MESSAGE_CONSTRAINTS);
+        }
+        final Diagnosis modelDiagnosis = new Diagnosis(diagnosis);
         /*
 
         if (email == null) {
@@ -147,13 +158,11 @@ class JsonAdaptedPerson {
          */
 
         /*
-        final Ward modelWard = new Ward(ward);
-        final Diagnosis modelDiagnosis = new Diagnosis(diagnosis);
         final Medication modelMedication = new Medication(medication);
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
          */
-        return new Person(modelName, modelId, modelWard);
+        return new Person(modelName, modelId, modelWard, modelDiagnosis);
     }
 
 }
