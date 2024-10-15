@@ -47,21 +47,39 @@ public class LessonSchedule {
     }
 
     /**
-     * Adds a lesson to the lesson schedule.
-     * The lesson must not already exist in the lesson schedule.
+     * Adds the specified lesson to the lesson list.
+     *
+     * @param lesson The lesson to be added. Must not be null.
+     * @throws NullPointerException If the specified lesson is null.
      */
     public void addLesson(Lesson lesson) {
         lessons.add(lesson);
     }
 
+    /**
+     * Deletes the lesson at the specified index from the lesson list.
+     *
+     * @param index The index of the lesson to be removed. Must be a valid index.
+     */
     public void deleteLesson(int index) {
         lessons.remove(index);
     }
 
+    /**
+     * Returns the lesson at the specified index.
+     *
+     * @param index The index of the lesson to retrieve. Must be a valid index.
+     * @return The lesson at the specified index.
+     */
     public Lesson getLesson(int index) {
         return lessons.get(index);
     }
 
+    /**
+     * Returns the number of lessons in the list.
+     *
+     * @return The size of the lesson list.
+     */
     public int getSize() {
         return lessons.size();
     }
