@@ -3,28 +3,31 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Notes;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
+
 
 /**
  * Changes or adds the notes of an existing person in BizBook.
  */
 public class AddNotesCommand extends Command {
 
-    public static final String COMMAND_WORD = "notes";
+    public static final String COMMAND_WORD = "addnotes";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the notes of the person identified "
             + "by the index number used in the last person listing. "
             + "New note will be appended to the notes currently stored."
             + " To delete notes of a person, input 'delete' after n/ instead of a note\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: Addnotes (must be a positive integer) "
             + "n/ [NOTES]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "n/ High profile client.";
@@ -35,14 +38,14 @@ public class AddNotesCommand extends Command {
     public static final String MESSAGE_DELETE_NOTES_SUCCESS = "Removed notes from Person: %1$s";
 
     private final Index index;
-    private final String note;
+    private final Note note;
 
 
     /**
      * @param index of the person in the filtered person list to edit the notes
      * @param note of the person to be updated to
      */
-    public AddNotesCommand(Index index, String note) {
+    public AddNotesCommand(Index index, Note note) {
         requireAllNonNull(index, note);
 
         this.index = index;
@@ -60,7 +63,7 @@ public class AddNotesCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
         // Update notes with new note
-        Notes notesToEdit = personToEdit.getNotes();
+        Set<Note> notesToEdit = new HashSet<>(personToEdit.getNotes());
         notesToEdit.add(note);
 
         Person editedPerson = new Person(

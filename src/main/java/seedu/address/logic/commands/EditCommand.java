@@ -24,7 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Notes;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -101,7 +101,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Notes updatedNotes = editPersonDescriptor.getNotes().orElse(personToEdit.getNotes());
+        Set<Note> updatedNotes = editPersonDescriptor.getNotes().orElse(personToEdit.getNotes());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedNotes);
     }
@@ -140,7 +140,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
-        private Notes notes;
+        private Set<Note> notes;
 
         public EditPersonDescriptor() {}
 
@@ -196,12 +196,13 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setNotes(Notes notes) {
-            this.notes = notes;
+        public void setNotes(Set<Note> notes) {
+            this.notes = (notes != null) ? new HashSet<>(notes) : null;
         }
 
-        public Optional<Notes> getNotes() {
-            return Optional.ofNullable(notes);
+
+        public Optional<Set<Note>> getNotes() {
+            return (notes != null) ? Optional.of(Collections.unmodifiableSet(notes)) : Optional.empty();
         }
 
         /**

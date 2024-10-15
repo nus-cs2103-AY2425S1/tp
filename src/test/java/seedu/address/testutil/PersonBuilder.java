@@ -1,14 +1,12 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Notes;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -23,14 +21,14 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final List<String> DEFAULT_NOTES = new ArrayList<>(List.of("High profile client", "Likes dumplings"));
+    //public static final HashSet<Note> DEFAULT_NOTES = new HashSet<>(new Note("note"));
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
-    private Notes notes;
+    private Set<Note> notes;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -41,7 +39,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        notes = new Notes(DEFAULT_NOTES);
+        notes = new HashSet<>();
     }
 
     /**
@@ -99,8 +97,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code Notes} of the {@code Person} that we are building.
      */
-    public PersonBuilder withNotes(List<String> notes) {
-        this.notes = new Notes(notes);
+    public PersonBuilder withNotes(String ... notes) {
+        this.notes = SampleDataUtil.getNoteSet(notes);
         return this;
     }
 
@@ -108,8 +106,5 @@ public class PersonBuilder {
         return new Person(name, phone, email, address, tags, notes);
     }
 
-    public Person buildWithoutNotes() {
-        return new Person(name, phone, email, address, tags, new Notes(new ArrayList<String>()));
-    }
 
 }

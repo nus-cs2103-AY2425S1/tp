@@ -35,7 +35,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().buildWithoutNotes();
+        Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         AddCommand commandUpperCase = (AddCommand) parser.parseCommand(
                 AddCommand.COMMAND_WORD.toUpperCase() + " " + PersonUtil.getPersonDetails(person));

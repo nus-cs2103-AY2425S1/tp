@@ -24,19 +24,19 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Notes notes;
+    private final Set<Note> notes = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Notes notes) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Note> notes) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.notes = notes;
+        this.notes.addAll(notes);
 
     }
 
@@ -64,8 +64,8 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public Notes getNotes() {
-        return notes;
+    public Set<Note> getNotes() {
+        return Collections.unmodifiableSet(notes);
     }
 
     /**

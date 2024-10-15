@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddNotesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Note;
 
 /**
  * Parses input arguments and creates a new NotesCommand object
@@ -33,7 +34,8 @@ public class NotesCommandParser implements Parser<AddNotesCommand> {
                     AddNotesCommand.MESSAGE_USAGE), ive);
         }
 
-        String note = argMultimap.getValue(PREFIX_NOTES).orElse("");
+        String noteName = argMultimap.getValue(PREFIX_NOTES).orElse("");
+        Note note = new Note(noteName);
 
         return new AddNotesCommand(index, note);
     }
