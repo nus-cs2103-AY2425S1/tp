@@ -6,14 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-public class PolicyMapTest {
+public class PolicySetTest {
     final LifePolicy life = new LifePolicy();
     final HealthPolicy health = new HealthPolicy();
     final EducationPolicy education = new EducationPolicy();
 
     @Test
     public void addMethod() {
-        final PolicyMap policies = new PolicyMap();
+        final PolicySet policies = new PolicySet();
 
         assertTrue(policies.add(life));
         assertTrue(policies.add(health));
@@ -27,26 +27,26 @@ public class PolicyMapTest {
     }
 
     @Test
-    public void deleteMethod() {
-        final PolicyMap policies = new PolicyMap();
+    public void removeMethod() {
+        final PolicySet policies = new PolicySet();
         policies.add(life);
         policies.add(health);
         policies.add(education);
 
-        assertTrue(policies.delete(life.getType()));
-        assertTrue(policies.delete(health.getType()));
-        assertTrue(policies.delete(education.getType()));
+        assertTrue(policies.remove(life.getType()));
+        assertTrue(policies.remove(health.getType()));
+        assertTrue(policies.remove(education.getType()));
 
-        assertFalse(policies.delete(life.getType()));
-        assertFalse(policies.delete(health.getType()));
-        assertFalse(policies.delete(education.getType()));
+        assertFalse(policies.remove(life.getType()));
+        assertFalse(policies.remove(health.getType()));
+        assertFalse(policies.remove(education.getType()));
 
-        assertFalse(policies.delete(null));
+        assertThrows(NullPointerException.class, () -> policies.remove(null));
     }
 
     @Test
     public void equalsMethod() {
-        final PolicyMap policies = new PolicyMap();
+        final PolicySet policies = new PolicySet();
         policies.add(life);
         policies.add(health);
         policies.add(education);
@@ -58,14 +58,14 @@ public class PolicyMapTest {
         assertFalse(policies.equals(null));
 
         // same values -> returns true
-        final PolicyMap samePolicies = new PolicyMap();
+        final PolicySet samePolicies = new PolicySet();
         samePolicies.add(education);
         samePolicies.add(health);
         samePolicies.add(life);
         assertTrue(policies.equals(samePolicies));
 
         // different values -> returns false
-        final PolicyMap differentPolicies = new PolicyMap();
+        final PolicySet differentPolicies = new PolicySet();
         differentPolicies.add(life);
         differentPolicies.add(education);
         assertFalse(policies.equals(differentPolicies));

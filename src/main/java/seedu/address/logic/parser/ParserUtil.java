@@ -20,7 +20,7 @@ import seedu.address.model.policy.EducationPolicy;
 import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.LifePolicy;
 import seedu.address.model.policy.Policy;
-import seedu.address.model.policy.PolicyMap;
+import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
 import seedu.address.model.tag.Tag;
 
@@ -196,14 +196,14 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> policies} into a {@code PolicyMap}.
      */
-    public static PolicyMap parsePolicies(Collection<String> policies) throws ParseException {
+    public static PolicySet parsePolicies(Collection<String> policies) throws ParseException {
         requireNonNull(policies);
-        final PolicyMap policyMap = new PolicyMap();
+        final PolicySet policySet = new PolicySet();
         for (String policy : policies) {
-            if (!policyMap.add(parsePolicy(policy))) {
+            if (!policySet.add(parsePolicy(policy))) {
                 throw new ParseException(AddPolicyCommand.MESSAGE_DUPLICATES);
             }
         }
-        return policyMap;
+        return policySet;
     }
 }

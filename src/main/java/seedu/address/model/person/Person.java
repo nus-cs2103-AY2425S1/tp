@@ -9,7 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.policy.Policy;
-import seedu.address.model.policy.PolicyMap;
+import seedu.address.model.policy.PolicySet;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,7 +26,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final PolicyMap policies;
+    private final PolicySet policies = new PolicySet();
 
     /**
      * Every field must be present and not null.
@@ -38,19 +38,6 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.policies = new PolicyMap();
-    }
-    /**
-     * Every field must be present and not null.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, PolicyMap policies) {
-        requireAllNonNull(name, phone, email, address, tags, policies);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.policies = policies;
     }
 
     public Name getName() {
@@ -77,12 +64,8 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public PolicyMap getPolicies() {
-        return policies;
-    }
-
-    public boolean addPolicy(Policy policy) {
-        return policies.add(policy);
+    public Set<Policy> getPolicies() {
+        return Collections.unmodifiableSet(policies);
     }
 
     /**
