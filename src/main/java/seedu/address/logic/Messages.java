@@ -61,7 +61,8 @@ public class Messages {
     public static Object format(Project project) {
         final StringBuilder builder = new StringBuilder();
         builder.append(project.getName())
-                .append("; Project ID: ");
+                .append("; Project ID: ")
+                .append(project.getId());
 
         return builder.toString();
     }
