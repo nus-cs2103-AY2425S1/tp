@@ -39,7 +39,6 @@ public class UniqueOrderList implements Iterable<Order> {
         if (contains(toAdd)) {
             throw new DuplicateOrderException();
         }
-        System.out.println("ORRRRDER ADDED " + toAdd.toString());
         internalList.add(toAdd);
     }
 
