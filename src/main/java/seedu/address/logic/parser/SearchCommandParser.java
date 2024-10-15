@@ -30,13 +30,6 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  * Parses input arguments and creates a new SearchCommand object
  */
 public class SearchCommandParser implements Parser<SearchCommand> {
-    public enum Field {
-        Address,
-        Email,
-        Name,
-        Phone
-    }
-
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
