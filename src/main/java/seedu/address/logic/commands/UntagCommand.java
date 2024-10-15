@@ -24,8 +24,8 @@ public class UntagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": untags specific contact \n"
-            + "Parameters: 'index t/ [TAG TO REMOVE]' OR 'index t/ all' (this removes everything)\n"
-            + "Examples: " + COMMAND_WORD + "1 t/ friends," + " " + COMMAND_WORD + " 1 t/ all";
+            + "Parameters: 'index t/[TAGS TO REMOVE]' OR 'index t/all' (this removes everything)\n"
+            + "Examples: " + COMMAND_WORD + " 1 t/friends colleagues," + " " + COMMAND_WORD + " 1 t/all";
 
     public static final String MESSAGE_UNTAG_SUCCESS = "Untagged the person: %1$s";
     private final Index index;
