@@ -14,6 +14,7 @@ import seedu.address.model.delivery.Quantity;
 import seedu.address.model.delivery.SupplierIndex;
 import seedu.address.model.delivery.Time;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -86,6 +87,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String company} into an {@code Company}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code company} is invalid.
+     */
+    public static Company parseCompany(String company) throws ParseException {
+        requireNonNull(company);
+        String trimmedCompany = company.trim();
+        if (!Address.isValidAddress(trimmedCompany)) {
+            throw new ParseException(Company.MESSAGE_CONSTRAINTS);
+        }
+        return new Company(trimmedCompany);
+    }
+
+    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -128,6 +144,33 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String productName } into a {@code Product}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code productName} is invalid.
+     */
+    public static Product parseProduct(String productName) throws ParseException {
+        requireNonNull(productName);
+        String trimmedProductName = productName.trim();
+        if (!Product.isValidProductName(trimmedProductName)) {
+            throw new ParseException(Product.MESSAGE_CONSTRAINTS);
+        }
+        return new Product(trimmedProductName);
+    }
+
+    /**
+     * Parses {@code Collection<String> products} into a {@code Set<Product>}.
+     */
+    public static Set<Product> parseProducts(Collection<String> products) throws ParseException {
+        requireNonNull(products);
+        final Set<Product> productSet = new HashSet<>();
+        for (String productName : products) {
+            productSet.add(parseProduct(productName));
+        }
+        return productSet;
+    }
+
+    /**
      * Parses a {@code String dd-MM-yyyy HH:mm } into a {@code Time}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -156,21 +199,6 @@ public class ParserUtil {
             throw new ParseException(SupplierIndex.MESSAGE_CONSTRAINTS);
         }
         return new SupplierIndex(trimmedSupplierIndex);
-    }
-
-    /**
-     * Parses a {@code String productName } into a {@code Product}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code productName} is invalid.
-     */
-    public static Product parseProduct(String productName) throws ParseException {
-        requireNonNull(productName);
-        String trimmedProductName = productName.trim();
-        if (!Product.isValidProductName(trimmedProductName)) {
-            throw new ParseException(Product.MESSAGE_CONSTRAINTS);
-        }
-        return new Product(trimmedProductName);
     }
 
     /**
