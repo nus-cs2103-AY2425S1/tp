@@ -30,6 +30,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+            <MenuItem fx:id="reportBugItem" mnemonicParsing="false" onAction="#handleReportBug" text="Report Bug" />
           </Menu>
         </MenuBar>
 

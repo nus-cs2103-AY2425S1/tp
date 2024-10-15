@@ -39,6 +39,7 @@
           <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
         </padding>
       </HBox>
+
     </Scene>
   </scene>
 </fx:root>
