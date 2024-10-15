@@ -20,6 +20,17 @@ import seedu.address.model.person.Person;
 public class EventCard extends UiPart<Region> {
     private static final String FXML = "EventListCard.fxml";
 
+    private static final int MAX_ATTENDEE_DISPLAY_SIZE = 2;
+
+    private static final Image IMAGE_CALENDAR_DARK =
+            new Image("/images/calendar_dark.png");
+    private static final Image IMAGE_CALENDAR_LIGHT =
+            new Image("/images/calendar_light.png");
+    private static final Image IMAGE_PERSON_DARK =
+            new Image("/images/person_dark.png");
+    private static final Image IMAGE_PERSON_LIGHT =
+            new Image("/images/person_light.png");
+
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -39,7 +50,6 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label date;
 
-    // TODO: Implement attendee group feature
     @FXML
     private FlowPane attendees;
 
@@ -56,25 +66,23 @@ public class EventCard extends UiPart<Region> {
         super(FXML);
         this.event = event;
         id.setText(displayedIndex + ". ");
-        name.setText("  " + event.getEventName());
-        date.setText("  " + event.getDate().format(DateTimeFormatter.ofPattern(" MMM dd, yyyy")));
+        name.setText(event.getEventName());
+        date.setText(event.getDate().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
         List<Person> sortedAttendees = event.getAttendees().stream()
                 .sorted(Comparator.comparing(person -> person.getName().toString()))
                 .toList();
 
-        int maxDisplay = 2;
         int numOfAttendees = sortedAttendees.size();
-        attendees.getChildren().add(new Label("  "));
-        for (int i = 0; i < maxDisplay; i++) {
+        for (int i = 0; i < Math.min(MAX_ATTENDEE_DISPLAY_SIZE, numOfAttendees); i++) {
             String name = sortedAttendees.get(i).getName().toString();
-            String formattedName = (i == maxDisplay - 1)
+            String formattedName = (i == MAX_ATTENDEE_DISPLAY_SIZE - 1)
                                    ? name
                                    : name + ", ";
             attendees.getChildren().add(new Label(formattedName));
         }
 
-        if (numOfAttendees > maxDisplay) {
-            int remainingPeople = numOfAttendees - maxDisplay;
+        if (numOfAttendees > MAX_ATTENDEE_DISPLAY_SIZE) {
+            int remainingPeople = numOfAttendees - MAX_ATTENDEE_DISPLAY_SIZE;
             attendees.getChildren().add(new Label(", and " + remainingPeople + " more"));
         }
 
@@ -91,11 +99,11 @@ public class EventCard extends UiPart<Region> {
      */
     public void toggleIcons(boolean selected) {
         if (selected) {
-            calendarIcon.setImage(new Image(getClass().getResourceAsStream("/images/calendar_dark.png")));
-            personIcon.setImage(new Image(getClass().getResourceAsStream("/images/person_dark.png")));
+            calendarIcon.setImage(IMAGE_CALENDAR_DARK);
+            personIcon.setImage(IMAGE_PERSON_DARK);
         } else {
-            calendarIcon.setImage(new Image(getClass().getResourceAsStream("/images/calendar_light.png")));
-            personIcon.setImage(new Image(getClass().getResourceAsStream("/images/person_light.png")));
+            calendarIcon.setImage(IMAGE_CALENDAR_LIGHT);
+            personIcon.setImage(IMAGE_PERSON_LIGHT);
         }
     }
 }

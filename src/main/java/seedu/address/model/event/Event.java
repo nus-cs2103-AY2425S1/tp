@@ -14,6 +14,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Relationship;
+import seedu.address.model.util.SampleDataUtil;
 
 
 /**
@@ -38,15 +39,7 @@ public class Event {
         this.date = date;
 
         // buffer data to show UI changes, since adding attendees are not yet implemented.
-        Person adam = new Person(new Name("Adam"), new Phone("99998888"),
-                                 new Email("abc@gmail.com"), new Relationship("Brother"));
-        Person jake = new Person(new Name("Jake"), new Phone("33338888"),
-                                 new Email("abcdef@gmail.com"), new Relationship("Father"));
-        Person kevin = new Person(new Name("Kevin"), new Phone("33338888"),
-                new Email("abcdef@gmail.com"), new Relationship("Father"));
-        Person melody = new Person(new Name("Melody"), new Phone("33338888"),
-                new Email("abcdef@gmail.com"), new Relationship("Father"));
-        attendees.addAll(Set.of(adam, jake, kevin, melody));
+        attendees.addAll(Set.of(SampleDataUtil.getSamplePersons()));
         this.attendees.addAll(attendees);
     }
 
