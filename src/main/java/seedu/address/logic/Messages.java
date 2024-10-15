@@ -65,8 +65,8 @@ public class Messages {
      */
     public static String format(Task task) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(task.getTaskName())
-                .append(task.getDeadline())
+        builder.append(task.getTaskName() + " ")
+                .append("(Due: " + task.getDeadline() + ") ")
                 .append(task.getStatus());
         return builder.toString();
     }
