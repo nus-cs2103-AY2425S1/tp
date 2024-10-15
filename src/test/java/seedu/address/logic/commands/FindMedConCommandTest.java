@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -79,6 +80,14 @@ public class FindMedConCommandTest {
         FindMedConCommand command = new FindMedConCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void toStringMethod() {
+        MedConContainsKeywordsPredicate predicate = preparePredicate("diabetes");
+        FindMedConCommand findCommand = new FindMedConCommand(predicate);
+        String expected = FindMedConCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        assertEquals(expected, findCommand.toString());
     }
 
     /**
