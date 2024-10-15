@@ -73,7 +73,7 @@ public class Tut {
                     .findFirst()
                     .map(student -> {
                         student.setAttendance(tutDates.get(date));
-                        tutDates.get(date).add(student);
+                        tutDates.get(date).add(target);
                         return true;
                     }).orElse(false);
 
@@ -84,7 +84,7 @@ public class Tut {
                 .findFirst()
                 .map(student -> {
                     student.setAttendance(tutDate);
-                    tutDate.add(student);
+                    tutDate.add(target);
                     return true;
                 })
                 .orElse(false);

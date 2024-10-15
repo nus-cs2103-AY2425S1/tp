@@ -10,6 +10,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.TypicalStudents;
 
@@ -25,7 +26,7 @@ public class TutDateTest {
         Date date = new Date();
         TutDate tutDate = new TutDate(date);
         assertEquals(date, tutDate.getDate());
-        assertTrue(tutDate.getStudents().isEmpty());
+        assertTrue(tutDate.getStudentIDs().isEmpty());
     }
 
     @Test
@@ -33,8 +34,8 @@ public class TutDateTest {
         Date date = new Date();
         TutDate tutDate = new TutDate(date);
         Student student = new StudentBuilder(TypicalStudents.ALICE).build();
-        tutDate.add(student);
-        assertTrue(tutDate.getStudents().contains(student));
+        tutDate.add(student.getStudentId());
+        assertTrue(tutDate.getStudentIDs().contains(student.getStudentId()));
     }
 
     @Test
@@ -49,17 +50,18 @@ public class TutDateTest {
         Date date = new Date();
         TutDate tutDate = new TutDate(date);
         Student student = new StudentBuilder(TypicalStudents.ALICE).build();
-        tutDate.add(student);
-        tutDate.add(student); // Attempt to add duplicate
-        assertEquals(1, tutDate.getStudents().size());
+        tutDate.add(student.getStudentId());
+        tutDate.add(student.getStudentId()); // Attempt to add duplicate
+        assertEquals(1, tutDate.getStudentIDs().size());
     }
 
     @Test
     public void getStudents_returnsUnmodifiableSet() {
         Date date = new Date();
         TutDate tutDate = new TutDate(date);
-        Set<Student> students = tutDate.getStudents();
-        assertThrows(UnsupportedOperationException.class, () -> students.add(new StudentBuilder().build()));
+        Set<StudentId> students = tutDate.getStudentIDs();
+        assertThrows(UnsupportedOperationException.class, () ->
+                students.add(new StudentBuilder().build().getStudentId()));
     }
 
     @Test

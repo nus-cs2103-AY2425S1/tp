@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
+
 /**
  * A class representing a tutorial date. Each {@code TutDate} object holds a specific {@link Date}
  * and a list of {@link Student} objects who are associated with that date.
@@ -16,7 +18,7 @@ public class TutDate {
 
     public static final String MESSAGE_CONSTRAINTS = "Date should be in correct format (dd/mm/yyyy)!";
     private final Date date;
-    private final Set<Student> students;
+    private final Set<StudentId> students;
 
     /**
      * Constructs a {@code TutDate} object with a specified {@link Date}.
@@ -35,7 +37,7 @@ public class TutDate {
      *
      * @param student The student supposed to be added.
      */
-    public void add(Student student) {
+    public void add(StudentId student) {
         requireNonNull(student);
         students.add(student);
     }
@@ -44,7 +46,7 @@ public class TutDate {
         return date;
     }
 
-    public Set<Student> getStudents() {
+    public Set<StudentId> getStudentIDs() {
         return Collections.unmodifiableSet(students);
     }
 
