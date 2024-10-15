@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 
-**Team**: T11-04  
+**Team**: T11-04
 **Name**: EZSTATES
 
 **User Target Profile**:
