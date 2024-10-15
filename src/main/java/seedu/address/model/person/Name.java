@@ -44,14 +44,23 @@ public class Name {
 
         for (String word : words) {
             if (!word.isEmpty()) {
-                formattedWords.append(Character.toUpperCase(word.charAt(0)))
-                        .append(word.substring(1))
-                        .append(" ");
+                formattedWords.append(capitalizeWord(word)).append(" ");
             }
         }
 
         return formattedWords.toString().trim();
     }
+
+    /**
+     * Helps to capitalize the first letter of each word.
+     *
+     * @param word The word to be formatted.
+     * @return Word with the first letter capitalized.
+     */
+    private static String capitalizeWord(String word) {
+        return Character.toUpperCase(word.charAt(0)) + word.substring(1);
+    }
+
 
 
     @Override
