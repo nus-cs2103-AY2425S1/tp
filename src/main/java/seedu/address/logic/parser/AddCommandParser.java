@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ETA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -18,6 +19,7 @@ import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Eta;
 import seedu.address.model.delivery.ItemName;
+import seedu.address.model.delivery.Status;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -61,25 +63,27 @@ public class AddCommandParser implements Parser<AddCommand> {
             return new AddCommand(person);
         } else {
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ETA, PREFIX_ADDRESS, PREFIX_COST);
+                    ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ETA, PREFIX_ADDRESS, PREFIX_COST,
+                            PREFIX_STATUS);
 
             // Checks for correct add format
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ETA, PREFIX_ADDRESS, PREFIX_COST)
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ETA, PREFIX_ADDRESS, PREFIX_COST, PREFIX_STATUS)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddCommand.MESSAGE_USAGE_DELIVERY));
             }
 
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
-            ItemName itemName = ParserUtil.parseItemName(argMultimap.getValue(PREFIX_NAME).orElse("MissingName"));
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                    PREFIX_STATUS);
             //Set default values if prefixes not present
             Eta eta = ParserUtil.parseEta(argMultimap.getValue(PREFIX_ETA).orElse("2026-10-12"));
             Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(
                     "nullAddress, S000000")
             );
             Cost cost = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).orElse("$0"));
-
-            Delivery delivery = new Delivery(itemName, address, cost, eta);
+            ItemName itemName = ParserUtil.parseItemName(argMultimap.getValue(PREFIX_NAME).orElse("MissingName"));
+            Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).orElse("not delivered"));
+            Delivery delivery = new Delivery(itemName, address, cost, eta, status);
             return new AddCommand(delivery);
         }
     }

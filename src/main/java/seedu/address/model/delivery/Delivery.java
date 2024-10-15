@@ -26,24 +26,31 @@ public class Delivery {
 
     private final Eta eta;
 
+    private final Id id;
+
+    private Status status;
+
     /**
      * Every field must be present and not null.
      */
-    public Delivery(ItemName itemName, Address address, Cost cost, Date date, Time time, Eta eta) {
-        requireAllNonNull(itemName, address, cost, date, time, eta);
+    public Delivery(Id id, ItemName itemName, Address address, Cost cost, Date date, Time time, Eta eta, Status status) {
+        requireAllNonNull(itemName, address, cost, date, time, eta, status);
+        this.id = id;
         this.itemName = itemName;
         this.address = address;
         this.cost = cost;
         this.date = date;
         this.time = time;
         this.eta = eta;
+        this.status = status;
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Delivery(ItemName itemName, Address address, Cost cost, Eta eta) {
-        this(itemName, address, cost, new Date(LocalDate.now().toString()), new Time(LocalTime.now().toString()), eta);
+    public Delivery(ItemName itemName, Address address, Cost cost, Eta eta, Status status) {
+        this(new Id(), itemName, address, cost, new Date(LocalDate.now().toString()),
+                new Time(LocalTime.now().toString()), eta, status);
     }
 
     public ItemName getItemName() {
@@ -69,6 +76,10 @@ public class Delivery {
     public Eta getEta() {
         return eta;
     }
+
+    public Id getId() { return id; }
+
+    public Status getStatus() { return status; }
 
     /**
      * Returns true if both deliveries are equal.
@@ -102,12 +113,14 @@ public class Delivery {
                 && cost.equals(otherDelivery.cost)
                 && date.equals(otherDelivery.date)
                 && time.equals(otherDelivery.time)
-                && eta.equals(otherDelivery.eta);
+                && eta.equals(otherDelivery.eta)
+                && id.equals(otherDelivery.id);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("id", id)
                 .add("itemName", itemName)
                 .add("date", date)
                 .add("time", time)
