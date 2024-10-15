@@ -330,17 +330,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. System detects error for invalid instruction
 
     * 3a1. System prompts error for invalid instruction
-    * 3a2. User enters new instruction 
+    * 3a2. User enters new instruction
     * Steps 3a1-3a2 are repeated until instruction is valid
-    
+
     Use case continues from step 3.
- 
+
 * 3b. System detects error in client's information
 
     * 3b1. System prompts error for invalid client's information
     * 3b2. User enters new client's information
     * Steps 3b1-3b2 are repeated until client's information is valid
-  
+
     Use case continues from step 3.
 
 * 3c. System detects duplicated client's information
@@ -391,7 +391,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4c1. System prompts error for invalid client's rental information
     * 4c2. User enters new client's rental information
     * Steps 4c1-4c2 are repeated until client's rental information is valid
-  
+
     Use case continues from step 4.
 
 * 4d. System detects duplicated client's rental information
@@ -399,7 +399,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4d1. System prompts error for duplicated client's rental information
     * 4d2. User enters new non-duplicated client's rental information
     * Steps 4d1-4d2 are repeated until client's rental information is valid
-    
+
     Use case continues from step 5.
 
 * *a. At any time, user chooses not proceed on with the operation.
@@ -424,7 +424,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. System prompts error for invalid instruction
     * 3a2. User enters new instruction
     * Steps 3a1-3a2 are repeated until instruction is valid
-  
+
     Use case continues from step 3.
 
 * 3b. System detects error for invalid keyword
@@ -432,7 +432,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. System prompts error for invalid keyword
     * 3b2. User enters new keyword
     * Steps 3b1-3b2 are repeated until keyword is valid
-  
+
     Use case continues from step 4.
 
 * 4a. The list is empty.
@@ -442,16 +442,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * *a. At any time, user chooses not proceed on with the operation.
 
   Use case ends.
-  
+
 **Use case: Edit a client's information**
 
 **MSS**
 
-1.  User chooses to edit a client's information. 
+1.  User chooses to edit a client's information.
 2.  User enters the client information that he / she wants to update.
-3.  System validates user input. 
-4.  System updates the client's information as requested. 
-5.  System notifies user for successful modification. 
+3.  System validates user input.
+4.  System updates the client's information as requested.
+5.  System notifies user for successful modification.
 
     Use case ends.
 
@@ -470,16 +470,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. System prompts error for invalid client information.
     * 3b2. User enters new client information.
     * Steps 3b1-3b2 are repeated until the client information is valid.
-  
+
   Use case resumes from step 3.
-    
+
 * 4a. System fails to update the client's information.
 
-    * 4a1. System prompts user that edit has failed. 
-  
+    * 4a1. System prompts user that edit has failed.
+
   Use case resumes from step 1 or user choose not to proceed and use case ends.
-    
-* *a. At any time, User chooses not to proceed with the operation. 
+
+* *a. At any time, User chooses not to proceed with the operation.
 
   Use case ends.
 
@@ -502,7 +502,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. System prompts error for invalid instruction.
     * 3a2. User enters new instruction.
     * Steps 3a1-3a2 are repeated until the instruction is valid.
-  
+
   Use case resumes from step 3.
 
 * 3b. System detects error for invalid rental information.
@@ -510,9 +510,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. System prompts error for invalid rental information.
     * 3b2. User enters new rental information.
     * Steps 3b1-3b2 are repeated until the rental information is valid.
-  
+
   Use case resumes from step 3.
-  
+
 * 4a. System fails to update the client's rental information.
 
     * 3a1. System prompts user that edit has failed.
@@ -547,7 +547,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case resumes from step 3.
 
 * 4a. User cancels the deletion
-  
+
   Use case ends.
 
 
