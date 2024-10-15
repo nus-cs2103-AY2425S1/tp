@@ -22,7 +22,7 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_STUDENTID + "STUDENT_ID "
-            + PREFIX_TUTORIALCLASS + "TUTORIAL_CLASS "
+            + PREFIX_TUTORIALCLASS + "TUTORIAL_CLASS \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Samson "
             + PREFIX_STUDENTID + "1001 "

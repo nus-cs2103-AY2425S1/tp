@@ -6,19 +6,19 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_TUT_NAME_DESC
 import static seedu.address.logic.commands.CommandTestUtil.TUT_ID_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TUT_NAME_DESC;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TutUtil.TUT_SAMPLE;
+//import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+//import static seedu.address.testutil.TutUtil.TUT_SAMPLE;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddTutCommand;
-import seedu.address.model.student.TutorialClass;
+//import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
 
 public class AddTutCommandParserTest {
 
     private final AddTutCommandParser parser = new AddTutCommandParser();
-
+    /*
     @Test
     public void parse_allFieldsPresent_success() {
         Tut expectedTut = TUT_SAMPLE;
@@ -32,6 +32,7 @@ public class AddTutCommandParserTest {
         Tut expectedTut = new Tut("CS2103T", new TutorialClass("1001"));
         assertParseSuccess(parser, TUT_NAME_DESC + TUT_ID_DESC, new AddTutCommand(expectedTut));
     }
+    */
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {

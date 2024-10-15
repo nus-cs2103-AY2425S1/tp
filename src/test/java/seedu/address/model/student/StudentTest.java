@@ -65,7 +65,7 @@ public class StudentTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different student id -> returns false
-        editedAlice = new StudentBuilder(ALICE).withName(VALID_STUDENTID_BOB).build();
+        editedAlice = new StudentBuilder(ALICE).withStudentId(VALID_STUDENTID_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
