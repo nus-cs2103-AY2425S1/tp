@@ -330,15 +330,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  Actor requests to list all people saved in the System.
-2.  System shows a list of persons.
+2.  System shows a list of people.
 
     Use case ends.
 
 **Extensions**
 
-- 2a. No contacts stored in the System.
+- 1a. No contacts stored in the System.
 
-  - 2a1 System informs Actor that they have no contacts stored.
+  - 1a1. System informs Actor that they have no contacts stored.
 
     Use case ends.
 
@@ -375,6 +375,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 2a. The specified person is invalid.
 
   - 2a1. System shows an error message.
+
+    Use case ends.
+
+**Use case: UC5 - Find people**
+
+**MSS**
+
+1.  Actor requests to find specific people.
+2.  System shows a filtered list of people.
+
+    Use case ends.
+
+**Extensions**
+
+- 1a. No contacts match keywords.
+
+  - 1a1. System informs Actor that they have no contacts that match.
 
     Use case ends.
 
