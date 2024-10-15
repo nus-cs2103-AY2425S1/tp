@@ -4,19 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.model.Model.PREDICATE_DO_NOT_SHOW_ALL_PERSONS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class RenameTagCommandTest {
@@ -30,20 +26,19 @@ public class RenameTagCommandTest {
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     }
 
-    /*
+
     @Test
     public void execute_renameTag_success() {
-        PersonBuilder personBuilder = new PersonBuilder().withTags("friends");
-        Person person = personBuilder.build();
-        String oldTag = person.getTags().iterator().next().getTagName();
-        String newTag = "besties";
-
-        RenameTagCommand renameTagCommand = new RenameTagCommand(oldTag, newTag);
-
+        String newTag = "friends1";
+        RenameTagCommand renameTagCommand = new RenameTagCommand("friends", newTag);
         String expectedMessage = String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, newTag);
+        assertCommandSuccess(renameTagCommand, model, expectedMessage, expectedModel);
 
-        assertCommandSuccess(renameTagCommand, model, expectedMessage, model);
-    }*/
+        String newTag2 = "friends";
+        RenameTagCommand renameTagCommand2 = new RenameTagCommand("friends1", newTag2);
+        String expectedMessage2 = String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, newTag2);
+        assertCommandSuccess(renameTagCommand2, model, expectedMessage2, expectedModel);
+    }
 
     @Test
     public void execute_renameInvalidTag_failure() {
