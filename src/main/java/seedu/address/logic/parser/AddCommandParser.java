@@ -50,7 +50,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagSet = Tag.stringToTagSet(tags);
 
         if (tagSet.size() > 6) {
-            throw new ParseException(String.format(MESSAGE_INVALID_TAG_LIST_SIZE, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_INVALID_TAG_LIST_SIZE);
         }
 
         Person person = new Person(name, phone, email, address, tagSet);
