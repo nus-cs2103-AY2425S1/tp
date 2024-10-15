@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMERGENCY_PHONE
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMERGENCY_PHONE_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
