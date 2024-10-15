@@ -41,8 +41,6 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.transactions.add(new Transaction("Buy raw materials", -100, "ABC Company", "10/10/2023"));
-        this.transactions.add(new Transaction("Invest", -1000, "Nice Company", "1st August 2024"));
     }
 
     public Name getName() {
