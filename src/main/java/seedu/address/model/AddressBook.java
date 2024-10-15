@@ -31,7 +31,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */ {
+     */
+    {
         students = new UniqueStudentList();
         groups = new UniqueGroupList();
         tasks = new UniqueTaskList();

@@ -11,6 +11,9 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
 
+/**
+ * Deletes a group from the address book and removes students in the group.
+ */
 public class DeleteGroupCommand extends Command {
     public static final String COMMAND_WORD = "delete_group";
 
@@ -57,6 +60,7 @@ public class DeleteGroupCommand extends Command {
             }
         }
         model.deleteGroup(groupToBeDeleted);
-        return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, Messages.format(groupToBeDeleted), studentsAffected));
+        return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, Messages.format(groupToBeDeleted),
+            studentsAffected));
     }
 }
