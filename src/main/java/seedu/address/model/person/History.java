@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 import seedu.address.commons.exceptions.AppNotFoundException;
@@ -10,7 +11,24 @@ import seedu.address.commons.exceptions.AppNotFoundException;
  * This class will store details of the appointments or medical interactions.
  */
 public class History {
+    // Nigel's suggestion
+    /**
+     * Static databse for ALL appointments sorted by Local Date Time
+     */
+    private static TreeMap<LocalDateTime, Appointment> appointmentDatabase;
+
+    /**
+     * List of appointments for this instance of a person.
+     */
+    private ArrayList<LocalDateTime> appointments;
+
     private TreeMap<LocalDateTime, TreeMap<Integer, String>> appointmentHistory;
+
+    /**
+     * Placeholder default constructor TODO.
+     */
+    public History() {
+    }
 
     /**
      * Constructs a History object to keep track the appointment history of a single patient.
@@ -64,5 +82,46 @@ public class History {
         return new TreeMap<>(appointmentHistory);
     }
 
+    // Nigel's code suggestion
+
+    /**
+     * Adds an appointment to the database with the specified content.
+     *
+     * @param dateTime Date & time of the appointment.
+     * @param patientId Id of patient in the appointment.
+     * @param doctorId Id of doctor in the appointment.
+     * @return True if appointment was successfully added, false if otherwise.
+     */
+    public boolean addAppointment(LocalDateTime dateTime, Id patientId, Id doctorId, String remarks) {
+        // TODO something new Appointment(dateTime, patientId, doctorId, remarks)
+        // TODO also need add to this.personAppointments
+        // Other notes: check for duplicate appointments / clashing timeslots w doctor & patient
+        // What to throw if got error
+        return false;
+    }
+
+    /**
+     * Deletes the specified appointment with the respective details.
+     * @param dateTime Date & time of the appointment to delete.
+     * @param patientId Id of the patient in the appointment.
+     * @param doctorId Id of doctor in the appointment.
+     * @return True if appointment was successfully deleted, false if otherwise.
+     */
+    public static boolean deleteAppointment(LocalDateTime dateTime, Id patientId, Id doctorId) {
+        // TODO something
+        // TODO rmb need delete from this.personAppoitments
+        return false;
+    }
+
+    /**
+     * Returns a String (or not String) representing all appointments related to that user id.
+     *
+     * @param id Id of Person to get appointments of.
+     * @return String representing all appointments related to the user id provided.
+     */
+    public static String getAllAppointments(Id id) {
+        // TODO
+        return "WIP";
+    }
 
 }

@@ -8,7 +8,8 @@ import static java.util.Objects.requireNonNull;
 public class Id {
     private static int patientIdCounter = 0;
     private static int doctorIdCounter = 0;
-    private int id;
+    private static int personIdCounter = 0; // TODO REMOVE AFTER V1.3
+    private int idValue;
     private Class<? extends Person> role;
 
     /**
@@ -22,16 +23,18 @@ public class Id {
 
         // Check if the class is Patient or Doctor and assign the appropriate ID
         if (personClass.equals(Patient.class)) {
-            id = ++patientIdCounter;
+            idValue = ++patientIdCounter;
         } else if (personClass.equals(Doctor.class)) {
-            id = ++doctorIdCounter;
+            idValue = ++doctorIdCounter;
+        } else if (personClass.equals(Person.class)) { // TODO AFTER INTEGRATION
+            idValue = ++personIdCounter;
         } else {
             throw new IllegalArgumentException("Invalid class type. Expected Patient or Doctor.");
         }
     }
 
-    public int getId() {
-        return id;
+    public int getIdValue() {
+        return idValue;
     }
 
     public Class<? extends Person> getRole() {
@@ -40,6 +43,6 @@ public class Id {
 
     @Override
     public String toString() {
-        return "Id{" + "id=" + id + ", role=" + role.getSimpleName() + '}';
+        return "Id{" + "id=" + idValue + ", role=" + role.getSimpleName() + '}';
     }
 }
