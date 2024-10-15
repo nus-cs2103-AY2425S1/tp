@@ -8,6 +8,10 @@ import seedu.address.model.Model;
 import seedu.address.model.event.EventCelebrityMatchesKeywordPredicate;
 import seedu.address.ui.CommandTabChange;
 
+/**
+ * Filters the events by the specified celebrity and displays it.
+ * Keyword matching is case insensitive.
+ */
 public class FilterEventCommand extends FilterCommand {
     public static final String COMMAND_FIELD = "event";
 
@@ -53,4 +57,5 @@ public class FilterEventCommand extends FilterCommand {
         return new ToStringBuilder(this)
                 .add("predicate", predicate)
                 .toString();
-    }}
+    }
+}
