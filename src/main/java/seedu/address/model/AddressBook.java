@@ -174,6 +174,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups.add(p);
     }
 
+    public void removeGroup(Group groupToBeDeleted) {
+        groups.remove(groupToBeDeleted);
+    }
+
     /**
      * Replaces the given group {@code target} in the list with {@code editedGroup}.
      * {@code target} must exist in the address book.
@@ -243,4 +247,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return students.hashCode();
     }
+
+
 }

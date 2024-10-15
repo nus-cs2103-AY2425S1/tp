@@ -23,9 +23,10 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.student.exceptions.PersonNotFoundException;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.PersonBuilder;
 
 
@@ -37,6 +38,7 @@ public class DeleteStudentFromGroupCommandTest {
     private static final Group validGroup = new Group(new GroupName("Team 1"));
     private static final Student validStudent = new PersonBuilder().build();
     private Model model;
+
     @BeforeEach
     public void setUp() {
         model = new ModelStubDeleteStudentFromGroup();
@@ -45,16 +47,17 @@ public class DeleteStudentFromGroupCommandTest {
     @Test
     public void execute_studentExistsInGroup_success() throws CommandException {
         DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(validGroup.getGroupName(),
-                validStudent.getStudentNumber());
+            validStudent.getStudentNumber());
         CommandResult commandResult = command.execute(model);
 
         assertEquals(String.format(DeleteStudentFromGroupCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                validStudent, validGroup.getGroupName()), commandResult.getFeedbackToUser());
+            validStudent, validGroup.getGroupName()), commandResult.getFeedbackToUser());
     }
 
     @Test
     public void execute_studentDoesNotExistInGroup_throwsCommandException() {
-        DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(validGroup.getGroupName(), new StudentNumber("A0123456Q"));
+        DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(validGroup.getGroupName(),
+            new StudentNumber("A0123456Q"));
 
         assertThrows(CommandException.class, Messages.MESSAGE_STUDENT_NO_NOT_FOUND, () -> command.execute(model));
     }
@@ -62,7 +65,7 @@ public class DeleteStudentFromGroupCommandTest {
     @Test
     public void execute_groupDoesNotExist_throwsCommandException() {
         DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(new GroupName("Team 5"),
-                validStudent.getStudentNumber());
+            validStudent.getStudentNumber());
         assertThrows(CommandException.class, Messages.MESSAGE_GROUP_NAME_NOT_FOUND, () -> command.execute(model));
     }
 
@@ -74,15 +77,15 @@ public class DeleteStudentFromGroupCommandTest {
         StudentNumber studentNumberTwo = new StudentNumber("A0654321Z");
 
         DeleteStudentFromGroupCommand deleteStudentOneFromTeamOneCommand =
-                new DeleteStudentFromGroupCommand(teamOneName, studentNumberOne);
+            new DeleteStudentFromGroupCommand(teamOneName, studentNumberOne);
         DeleteStudentFromGroupCommand deleteStudentTwoFromTeamOneCommand =
-                new DeleteStudentFromGroupCommand(teamOneName, studentNumberTwo);
+            new DeleteStudentFromGroupCommand(teamOneName, studentNumberTwo);
         DeleteStudentFromGroupCommand deleteStudentOneFromTeamTwoCommand =
-                new DeleteStudentFromGroupCommand(teamTwoName, studentNumberOne);
+            new DeleteStudentFromGroupCommand(teamTwoName, studentNumberOne);
 
         assertTrue(deleteStudentOneFromTeamOneCommand.equals(deleteStudentOneFromTeamOneCommand));
         DeleteStudentFromGroupCommand deleteStudentOneFromTeamOneCommandCopy =
-                new DeleteStudentFromGroupCommand(teamOneName, studentNumberOne);
+            new DeleteStudentFromGroupCommand(teamOneName, studentNumberOne);
         assertTrue(deleteStudentOneFromTeamOneCommand.equals(deleteStudentOneFromTeamOneCommandCopy));
         assertFalse(deleteStudentOneFromTeamOneCommand.equals(1));
         assertFalse(deleteStudentOneFromTeamOneCommand.equals(null));
@@ -198,6 +201,11 @@ public class DeleteStudentFromGroupCommandTest {
         }
 
         @Override
+        public ObservableList<Task> getFilteredTaskList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Student> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -208,12 +216,27 @@ public class DeleteStudentFromGroupCommandTest {
         }
 
         @Override
+        public void updateFilteredTaskList(Predicate<Task> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setStateStudents() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setStateGroups() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setStateGroupTask() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setStateTasks() {
             throw new AssertionError("This method should not be called.");
         }
 

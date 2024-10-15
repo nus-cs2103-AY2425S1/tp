@@ -12,6 +12,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.task.Task;
 
+
 /**
  * The API of the Model component.
  */
@@ -173,4 +174,6 @@ public interface Model {
     boolean containsGroupName(GroupName groupName);
 
     void deleteStudentFromGroup(Group group, Student student);
+
+    void deleteGroup(Group groupToBeDeleted);
 }

@@ -18,6 +18,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.task.Task;
 
+
 /**
  * Represents the in-memory model of the address book data.
  */
@@ -54,7 +55,8 @@ public class ModelManager implements Model {
 
     @Override
     public void setStateStudents() {
-        this.userPrefs.setStateStudents();;
+        this.userPrefs.setStateStudents();
+        ;
     }
 
     @Override
@@ -188,7 +190,7 @@ public class ModelManager implements Model {
     public Group getGroupByName(GroupName groupName) {
         return addressBook.getGroupByName(groupName);
     }
-  
+
     /**
      * Returns the group with the same group name as {@code groupName} exists in the address book
      */
@@ -210,6 +212,13 @@ public class ModelManager implements Model {
         requireNonNull(student);
         addressBook.deleteStudentFromGroup(group, student);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void deleteGroup(Group groupToBeDeleted) {
+        requireNonNull(groupToBeDeleted);
+        addressBook.removeGroup(groupToBeDeleted);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     //=========== Filtered Student List Accessors =============================================================
@@ -264,10 +273,10 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredStudents.equals(otherModelManager.filteredStudents)
-                && filteredGroups.equals(otherModelManager.filteredGroups)
-                && filteredTasks.equals(otherModelManager.filteredTasks);
+            && userPrefs.equals(otherModelManager.userPrefs)
+            && filteredStudents.equals(otherModelManager.filteredStudents)
+            && filteredGroups.equals(otherModelManager.filteredGroups)
+            && filteredTasks.equals(otherModelManager.filteredTasks);
     }
 
 }
