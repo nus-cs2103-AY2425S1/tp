@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.appointment.Appointment;
@@ -43,7 +44,7 @@ public class PersonBuilder {
         property = new Property(DEFAULT_PROPERTY);
         appointment = new Appointment(new Date(DEFAULT_DATE), new From(DEFAULT_FROM),
                                         new To(DEFAULT_TO));
-        //  tags = new HashSet<>();
+        tags = new HashSet<>();
     }
 
     /**
@@ -55,7 +56,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         property = personToCopy.getProperty();
         appointment = personToCopy.getAppointment();
-        //  tags = new HashSet<>(personToCopy.getTags());
+        tags = new HashSet<>(personToCopy.getTags());
     }
 
     /**
@@ -104,7 +105,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, appointment, property);
+        return new Person(name, phone, email, tags, appointment, property);
     }
 
 }

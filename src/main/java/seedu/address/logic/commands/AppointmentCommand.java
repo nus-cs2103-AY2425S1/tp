@@ -64,7 +64,7 @@ public class AppointmentCommand extends Command {
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(),
-                 personToEdit.getEmail(), appointment, personToEdit.getProperty());
+                 personToEdit.getEmail(), personToEdit.getTags(), appointment, personToEdit.getProperty());
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));
