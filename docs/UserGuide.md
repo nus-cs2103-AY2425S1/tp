@@ -127,6 +127,24 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Filtering employees persons by skills: `filter`
+
+Finds employees who has at least one skill matching at least one of the keyword arguments.
+
+Format: `filter KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `webdev` will match `WebDev`
+* The order of the keywords does not matter. e.g. `frontend backend` will match `{frontend, backend}`
+* Only the skills are searched.
+* Only full words will be matched e.g. `database` will not match `databases`
+* Employees who have at least one skill matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `frontend backend database` will return `{frontend, uiux}`, `{backend, database, api}`
+
+Examples:
+* `filter frontend` returns `{frontend}` and `{frontend, uiux}`
+* `filter backend database` returns `{backend, api}`, `{database, sql}`<br>
+  ![result for 'find alex david'](images/filterJohnBetsyResult.png)
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
