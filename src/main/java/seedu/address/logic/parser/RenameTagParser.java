@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEWTAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OLDTAG;
+import static seedu.address.model.tag.Tag.MESSAGE_CONSTRAINTS;
+import static seedu.address.model.tag.Tag.isValidTagName;
 
 import seedu.address.logic.commands.RenameTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -25,6 +27,9 @@ public class RenameTagParser implements Parser<RenameTagCommand> {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, RenameTagCommand.MESSAGE_USAGE)));
         String newTag = argMultimap.getValue(PREFIX_NEWTAG).orElseThrow(() -> new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, RenameTagCommand.MESSAGE_USAGE)));
+        if (!isValidTagName(newTag)) {
+            throw new ParseException(MESSAGE_CONSTRAINTS);
+        }
         return new RenameTagCommand(oldTag, newTag);
     }
 }

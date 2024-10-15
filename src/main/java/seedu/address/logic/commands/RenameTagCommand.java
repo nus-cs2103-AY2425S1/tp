@@ -64,9 +64,25 @@ public class RenameTagCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_DO_NOT_SHOW_ALL_PERSONS);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         if (!found) {
-            return new CommandResult(String.format(MESSAGE_TAG_NOT_FOUND, oldTag));
+            throw new CommandException(String.format(MESSAGE_TAG_NOT_FOUND, oldTag));
         } else {
             return new CommandResult(String.format(MESSAGE_RENAME_TAG_SUCCESS, newTag));
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof RenameTagCommand)) {
+            return false;
+        }
+
+        RenameTagCommand otherRenameTagCommand = (RenameTagCommand) other;
+        return (this.oldTag.equals(otherRenameTagCommand.oldTag))
+                && (this.newTag.equals(otherRenameTagCommand.newTag));
     }
 }
