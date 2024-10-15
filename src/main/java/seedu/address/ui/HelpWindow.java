@@ -1,14 +1,11 @@
 package seedu.address.ui;
 
-import java.awt.*;
+import java.awt.Desktop;
 import java.net.URI;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
