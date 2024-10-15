@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 
@@ -73,9 +74,10 @@ public class TutDateTest {
 
     @Test
     public void toString_returnsCorrectString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
         TutDate tutDate = new TutDate(date);
-        assertEquals(date.toString(), tutDate.toString());
+        assertEquals(sdf.format(date), tutDate.toString());
     }
 }
 

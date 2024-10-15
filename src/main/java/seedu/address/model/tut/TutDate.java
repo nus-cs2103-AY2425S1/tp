@@ -2,6 +2,7 @@ package seedu.address.model.tut;
 
 import static java.util.Objects.requireNonNull;
 
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
@@ -52,6 +53,7 @@ public class TutDate {
 
     @Override
     public String toString() {
-        return date.toString();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        return sdf.format(date);
     }
 }

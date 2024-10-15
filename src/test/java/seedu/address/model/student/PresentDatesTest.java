@@ -159,8 +159,8 @@ public class PresentDatesTest {
 
         PresentDates presentDates = new PresentDates(dateSet);
 
-        String expectedString = "[" + tutDate1.toString() + tutDate2.toString() + "]";
-        String alternativeExpectedString = "[" + tutDate2.toString() + tutDate1.toString() + "]";
+        String expectedString = "[ " + tutDate1 + " " + tutDate2 + " ]";
+        String alternativeExpectedString = "[ " + tutDate2 + " " + tutDate1 + " ]";
         String actualString = presentDates.toString();
 
         assertTrue(actualString.equals(expectedString) || actualString.equals(alternativeExpectedString));

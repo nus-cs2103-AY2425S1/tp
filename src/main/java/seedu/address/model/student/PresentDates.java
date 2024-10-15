@@ -59,9 +59,9 @@ public class PresentDates {
      */
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder("[");
+        StringBuilder s = new StringBuilder("[ ");
         for (TutDate date : dates) {
-            s.append(date.toString());
+            s.append(date.toString()).append(' ');
         }
         s.append(']');
         return s.toString();
