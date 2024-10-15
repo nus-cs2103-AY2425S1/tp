@@ -33,8 +33,8 @@ public class AddProjectCommandParser implements Parser<AddProjectCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PROJECT_ID, PREFIX_PROJECT_NAME);
-        ProjectName projectName = ParserUtil.parseProjectName(argMultimap.getValue(PREFIX_PROJECT_NAME).get());
         ProjectId projectId = ParserUtil.parseProjectId(argMultimap.getValue(PREFIX_PROJECT_ID).get());
+        ProjectName projectName = ParserUtil.parseProjectName(argMultimap.getValue(PREFIX_PROJECT_NAME).get());
 
         Project project = new Project(projectName, projectId);
 
