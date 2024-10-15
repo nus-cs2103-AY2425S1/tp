@@ -73,8 +73,8 @@ public class TagCommand extends Command {
         Set<Tag> newTags = new HashSet<>(personToTag.getTags());
         newTags.add(tag);
 
-        Person updatedPerson = new Person(personToTag.getName(), personToTag.getPhone(), personToTag.getEmail(),
-                personToTag.getAddress(), newTags);
+        Person updatedPerson = new Person(personToTag.getName(), personToTag.getPhone(),
+                personToTag.getEmail(), newTags);
         model.setPerson(personToTag, updatedPerson);
 
         return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(personToTag)));
