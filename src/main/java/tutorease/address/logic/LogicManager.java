@@ -15,6 +15,7 @@ import tutorease.address.logic.parser.TutorEaseParser;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.Model;
 import tutorease.address.model.ReadOnlyTutorEase;
+import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.Person;
 import tutorease.address.storage.Storage;
 
@@ -85,5 +86,10 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public ObservableList<Lesson> getFilteredLessonList() {
+        return model.getFilteredLessonList();
     }
 }

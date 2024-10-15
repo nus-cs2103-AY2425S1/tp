@@ -59,13 +59,8 @@ public class UniqueLessonListTest {
     }
 
     @Test
-    public void setLesson_nullTargetLesson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueLessonList.setLessons(null));
-    }
-
-    @Test
     public void setPersons_nullUniqueLessonList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueLessonList.setLessons((List<Lesson>) null));
+        assertThrows(NullPointerException.class, () -> uniqueLessonList.setLessons((UniqueLessonList) null));
     }
     @Test
     public void setPersons_nonUniqueLessonList_throwsOverlappingLessonException() {
