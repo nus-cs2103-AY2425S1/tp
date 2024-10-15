@@ -37,9 +37,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (nameKeywords.stream().anyMatch(String::isBlank)) {
             throw new ParseException(MESSAGE_EMPTY_FIND_KEYWORD);
         }
-        if (nameKeywords.stream().anyMatch(s -> s.contains(" "))) {
-            throw new ParseException(MESSAGE_FIND_KEYWORD_CONTAINS_WHITESPACE);
-        }
 
         return new FindCommand(new NameContainsKeywordsPredicate(nameKeywords));
     }
