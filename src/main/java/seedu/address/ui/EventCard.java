@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class EventCard extends UiPart<Region> {
     private static final String FXML = "EventListCard.fxml";
 
     private static final int MAX_ATTENDEE_DISPLAY_SIZE = 2;
+    private static final Label NO_ATTENDEES_LABEL = new Label("No attendees");
 
     private static final Image IMAGE_CALENDAR_DARK =
             new Image("/images/calendar_dark.png");
@@ -68,24 +70,48 @@ public class EventCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(event.getEventName());
         date.setText(event.getDate().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
+        attendees.getChildren().addAll(generateAttendeesLabels());
+    }
+
+    /**
+     * Generates a list of {@code Label} components representing the attendees of the event.
+     * If the event has no attendees, the default label is returned.
+     * Else, labels are sorted by attendee's names. If there are more attendees than can be displayed,
+     * a label that summarises the remaining attendees is added to conclude the list.
+     *
+     *
+     * @return A list of {@code Label} objects representing the attendees.
+     *
+     * @see Person
+     * @see Event
+     */
+    private List<Label> generateAttendeesLabels() {
         List<Person> sortedAttendees = event.getAttendees().stream()
                 .sorted(Comparator.comparing(person -> person.getName().toString()))
                 .toList();
 
         int numOfAttendees = sortedAttendees.size();
+
+        if (numOfAttendees == 0) {
+            return List.of(NO_ATTENDEES_LABEL);
+        }
+
+        List<Label> attendeesLabels = new ArrayList<>();
+
         for (int i = 0; i < Math.min(MAX_ATTENDEE_DISPLAY_SIZE, numOfAttendees); i++) {
             String name = sortedAttendees.get(i).getName().toString();
             String formattedName = (i == MAX_ATTENDEE_DISPLAY_SIZE - 1)
-                                   ? name
-                                   : name + ", ";
-            attendees.getChildren().add(new Label(formattedName));
+                    ? name
+                    : name + ", ";
+            attendeesLabels.add(new Label(formattedName));
         }
 
         if (numOfAttendees > MAX_ATTENDEE_DISPLAY_SIZE) {
             int remainingPeople = numOfAttendees - MAX_ATTENDEE_DISPLAY_SIZE;
-            attendees.getChildren().add(new Label(", and " + remainingPeople + " more"));
+            attendeesLabels.add(new Label(", and " + remainingPeople + " more"));
         }
 
+        return attendeesLabels;
     }
 
     /**
