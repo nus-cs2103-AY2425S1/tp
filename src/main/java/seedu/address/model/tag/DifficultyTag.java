@@ -31,7 +31,7 @@ public class DifficultyTag extends Tag {
      * Returns true if the difficulty level is valid.
      * Valid levels are "low", "medium", or "high".
      *
-     * @param difficultyLevel The difficulty level to validate.
+     * @param difficultyLevel The difficulty level to do validation.
      * @return true if the difficulty level is "low", "medium", or "high".
      */
     public static boolean isValidDifficulty(String difficultyLevel) {
