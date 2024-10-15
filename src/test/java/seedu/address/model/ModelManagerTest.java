@@ -44,8 +44,8 @@ public class ModelManagerTest {
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
 
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);  // Initialize storage
-        userPrefs = new UserPrefs();  // Initialize userPrefs
+        storage = new StorageManager(addressBookStorage, userPrefsStorage); // Initialize storage
+        userPrefs = new UserPrefs(); // Initialize userPrefs
 
         modelManager = new ModelManager(new AddressBook(), userPrefs, storage);
     }
@@ -136,14 +136,16 @@ public class ModelManagerTest {
 
     @Test
     public void equals_differentClass_returnsFalse() {
-        assertFalse(modelManager.equals("not a ModelManager"), "Comparing with an object of different class should return false.");
+        assertFalse(modelManager.equals("not a ModelManager"),
+                "Comparing with an object of different class should return false.");
     }
 
     @Test
     public void equals_differentAddressBook_returnsFalse() {
         ModelManager differentModel = new ModelManager(new AddressBook(), userPrefs, storage);
         differentModel.addPerson(ALICE); // Modify to ensure difference
-        assertFalse(modelManager.equals(differentModel), "Comparing with a different address book should return false.");
+        assertFalse(modelManager.equals(differentModel),
+                "Comparing with a different address book should return false.");
     }
 
     @Test
@@ -268,10 +270,10 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void cleanOldBackups_storageNotInitialized_throwsIOException() {
+    public void cleanOldBackups_storageNotInitialized_throwsIoException() {
         ModelManager modelWithoutStorage = new ModelManager(new AddressBook(), new UserPrefs(), null);
-        IOException exception = assertThrows(IOException.class,
-                () -> modelWithoutStorage.cleanOldBackups(5),
+        IOException exception = assertThrows(IOException.class, (
+                ) -> modelWithoutStorage.cleanOldBackups(5),
                 "Expected IOException when storage is not initialized.");
         assertEquals("Storage is not initialized!", exception.getMessage());
     }
