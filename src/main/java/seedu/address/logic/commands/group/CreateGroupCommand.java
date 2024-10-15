@@ -1,5 +1,9 @@
 package seedu.address.logic.commands.group;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
@@ -9,10 +13,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicateGroupException;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Command to create a new group with the specified name and persons inside.
@@ -47,7 +47,7 @@ public class CreateGroupCommand extends Command {
         Group newGroup = new Group(groupName);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        for(Index i : members) {
+        for (Index i : members) {
             if (i.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
