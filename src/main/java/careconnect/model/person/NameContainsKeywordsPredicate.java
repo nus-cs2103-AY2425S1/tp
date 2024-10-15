@@ -18,12 +18,18 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsPartialWordIgnoreCase(person.getName().fullName, keyword));
+        return (keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsPartialWordIgnoreCase(person.getName().fullName, keyword))
+                || keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsPartialWordIgnoreCase(person.getAddress().toString(), keyword))
+                || keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsPartialWordIgnoreCase(person.getEmail().toString(), keyword))
+            );
     }
 
     @Override
     public boolean equals(Object other) {
+        System.out.println("Hello NameContainsKeywordsPrecdicate");
         if (other == this) {
             return true;
         }
