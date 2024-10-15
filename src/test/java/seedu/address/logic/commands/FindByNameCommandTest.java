@@ -11,7 +11,7 @@ import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalCampusConnect;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,8 +27,8 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindByNameCommand}.
  */
 public class FindByNameCommandTest {
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalCampusConnect(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalCampusConnect(), new UserPrefs());
 
     @Test
     public void equals() {
