@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.ActualClearCommandParser.MESSAGE_FAILURE;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -11,12 +12,23 @@ import seedu.address.model.Model;
 public class ActualClearCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    private final String message;
 
+    public ActualClearCommand() {
+        this.message = MESSAGE_SUCCESS;
+    }
+
+    public ActualClearCommand(String message) {
+        this.message = message;
+    }
     @Override
     public CommandResult execute(Model model) {
+        if (message.equals(MESSAGE_FAILURE)) {
+            return new CommandResult(message);
+        }
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(message);
 
     }
 

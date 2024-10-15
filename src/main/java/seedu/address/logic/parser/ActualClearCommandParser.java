@@ -22,7 +22,7 @@ public class ActualClearCommandParser implements Parser<ActualClearCommand> {
             return new ActualClearCommand();
         }
 
-        throw new ParseException(MESSAGE_FAILURE);
+        return new ActualClearCommand(MESSAGE_FAILURE);
 
     }
 
