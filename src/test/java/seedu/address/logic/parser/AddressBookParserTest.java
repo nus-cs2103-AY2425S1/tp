@@ -94,17 +94,13 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_emergencyPhone() throws Exception {
-
-        final String name = "John Doe";
-        final String emergencyPhone = "91234567";
-
         EmergencyPhoneCommand expected = new EmergencyPhoneCommand(
-                new Name(name), new EmergencyPhone(emergencyPhone));
+                INDEX_FIRST_PERSON, new EmergencyPhone("91234567"));
 
         EmergencyPhoneCommand command = (EmergencyPhoneCommand) parser.parseCommand(
                 EmergencyPhoneCommand.COMMAND_WORD + " "
-                + "n/" + name + " "
-                + "ep/" + emergencyPhone);
+                + INDEX_FIRST_PERSON.getOneBased() + " "
+                + "ep/" + "91234567");
 
         assertEquals(expected, command);
     }
