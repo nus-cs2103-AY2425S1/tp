@@ -26,6 +26,7 @@
                 </Label>
             </HBox>
             <Label fx:id="address" styleClass="cell_small_label" text="address" />
+            <Label fx:id="itemName" styleClass="cell_small_label" text="itemName" />
             <Label fx:id="cost" styleClass="cell_small_label" text="cost" />
             <Label fx:id="date" styleClass="cell_small_label" text="date" />
             <Label fx:id="time" styleClass="cell_small_label" text="time" />
