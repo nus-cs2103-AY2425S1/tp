@@ -13,6 +13,8 @@ import seedu.address.model.person.Address;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Delivery {
+
+    private final ItemId itemId;
     private final Address address;
 
     private final Cost cost;
@@ -26,8 +28,9 @@ public class Delivery {
     /**
      * Every field must be present and not null.
      */
-    public Delivery(Address address, Cost cost, Date date, Time time, Eta eta) {
-        requireAllNonNull(address, cost, date, time, eta);
+    public Delivery(ItemId itemId, Address address, Cost cost, Date date, Time time, Eta eta) {
+        requireAllNonNull(itemId, address, cost, date, time, eta);
+        this.itemId = itemId;
         this.address = address;
         this.cost = cost;
         this.date = date;
@@ -38,8 +41,12 @@ public class Delivery {
     /**
      * Every field must be present and not null.
      */
-    public Delivery(Address address, Cost cost, Eta eta) {
-        this(address, cost, new Date(LocalDate.now().toString()), new Time(LocalTime.now().toString()), eta);
+    public Delivery(ItemId itemId, Address address, Cost cost, Eta eta) {
+        this(itemId, address, cost, new Date(LocalDate.now().toString()), new Time(LocalTime.now().toString()), eta);
+    }
+
+    public ItemId getItemId() {
+        return itemId;
     }
 
     public Address getAddress() {
@@ -89,7 +96,8 @@ public class Delivery {
         }
 
         Delivery otherDelivery = (Delivery) other;
-        return address.equals(otherDelivery.address)
+        return itemId.equals(otherDelivery.itemId)
+                && address.equals(otherDelivery.address)
                 && cost.equals(otherDelivery.cost)
                 && date.equals(otherDelivery.date)
                 && time.equals(otherDelivery.time)
@@ -99,6 +107,7 @@ public class Delivery {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("itemId", itemId)
                 .add("date", date)
                 .add("time", time)
                 .add("eta", eta)

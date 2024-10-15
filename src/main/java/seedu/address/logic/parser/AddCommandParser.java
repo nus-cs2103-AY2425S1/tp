@@ -17,6 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Eta;
+import seedu.address.model.delivery.ItemId;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -59,14 +60,23 @@ public class AddCommandParser implements Parser<AddCommand> {
             return new AddCommand(person);
         } else {
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_ETA, PREFIX_ADDRESS, PREFIX_COST);
-            Eta eta = ParserUtil.parseEta(argMultimap.getValue(PREFIX_ETA).get());
+                    ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ETA, PREFIX_ADDRESS, PREFIX_COST);
+            //Check if delivery cost is present
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
+                    || !argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            }
+
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+            ItemId itemId = ParserUtil.parseItemId(argMultimap.getValue(PREFIX_NAME).orElse("MissingName"));
+            //Set default values if prefixes not present
+            Eta eta = ParserUtil.parseEta(argMultimap.getValue(PREFIX_ETA).orElse("2026-10-12"));
             Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(
                     "nullAddress, S000000")
             );
-            Cost cost = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get());
+            Cost cost = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).orElse("$0"));
 
-            Delivery delivery = new Delivery(address, cost, eta);
+            Delivery delivery = new Delivery(itemId, address, cost, eta);
             return new AddCommand(delivery);
         }
     }
