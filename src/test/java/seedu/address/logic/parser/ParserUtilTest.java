@@ -22,7 +22,7 @@ import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
+    private static final String INVALID_MAJOR = " ";
     private static final String INVALID_NETID = "e12345";
     private static final String INVALID_TAG = "#friend";
 
@@ -103,18 +103,18 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseMajor(INVALID_ADDRESS));
+    public void parseMajor_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseMajor(INVALID_MAJOR));
     }
 
     @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsMajor() throws Exception {
+    public void parseMajor_validValueWithoutWhitespace_returnsMajor() throws Exception {
         Major expectedAddress = new Major(VALID_MAJOR);
         assertEquals(expectedAddress, ParserUtil.parseMajor(VALID_MAJOR));
     }
 
     @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedMajor() throws Exception {
+    public void parseMajor_validValueWithWhitespace_returnsTrimmedMajor() throws Exception {
         String addressWithWhitespace = WHITESPACE + VALID_MAJOR + WHITESPACE;
         Major expectedAddress = new Major(VALID_MAJOR);
         assertEquals(expectedAddress, ParserUtil.parseMajor(addressWithWhitespace));
