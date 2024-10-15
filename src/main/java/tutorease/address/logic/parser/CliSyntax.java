@@ -1,5 +1,6 @@
 package tutorease.address.logic.parser;
 
+
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
@@ -15,4 +16,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_LOCATION_INDEX = new Prefix("li/");
     public static final Prefix PREFIX_START_DATE = new Prefix("d/");
     public static final Prefix PREFIX_DURATION = new Prefix("h/");
+    public static final Prefix PREFIX_ROLE = new Prefix("/r");
 }
