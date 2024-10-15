@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -39,8 +38,8 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setRoomNumber(person.getRoomNumber().orElse(null));
         descriptor.setAddress(person.getAddress());
-        descriptor.setEmergencyName(person.getEmergencyContact().flatMap(EmergencyContact::getName).orElse(null));
-        descriptor.setEmergencyPhone(person.getEmergencyContact().flatMap(EmergencyContact::getPhone).orElse(null));
+        descriptor.setEmergencyName(person.getEmergencyContactName().orElse(null));
+        descriptor.setEmergencyPhone(person.getEmergencyContactPhone().orElse(null));
         descriptor.setTags(person.getTags());
     }
 

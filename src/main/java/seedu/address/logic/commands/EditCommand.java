@@ -110,9 +110,9 @@ public class EditCommand extends Command {
         RoomNumber updatedRoomNumber = editPersonDescriptor.getRoomNumber()
                 .orElse(personToEdit.getRoomNumber().orElse(null));
         Name updatedEmergencyName = editPersonDescriptor.getEmergencyName()
-                .orElse(personToEdit.getEmergencyContact().flatMap(EmergencyContact::getName).orElse(null));
+                .orElse(personToEdit.getEmergencyContactName().orElse(null));
         Phone updatedEmergencyPhone = editPersonDescriptor.getEmergencyPhone()
-                .orElse(personToEdit.getEmergencyContact().flatMap(EmergencyContact::getPhone).orElse(null));
+                .orElse(personToEdit.getEmergencyContactPhone().orElse(null));
 
         EmergencyContact updatedEmergencyContact;
         if (updatedEmergencyName == null && updatedEmergencyPhone == null) {

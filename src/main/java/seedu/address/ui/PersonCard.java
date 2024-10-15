@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Person;
 
 /**
@@ -68,11 +67,11 @@ public class PersonCard extends UiPart<Region> {
 
         // display default text if emergency contact is not assigned
         emergencyContactName.setText(
-                person.getEmergencyContact().flatMap(EmergencyContact::getName).map(name -> name.fullName)
+                person.getEmergencyContactName().map(name -> name.fullName)
                         .orElse("Emergency contact name not yet assigned")
         );
         emergencyContactPhone.setText(
-                person.getEmergencyContact().flatMap(EmergencyContact::getPhone).map(phone -> phone.value)
+                person.getEmergencyContactPhone().map(phone -> phone.value)
                         .orElse("Emergency contact phone not yet assigned")
         );
 

@@ -85,6 +85,14 @@ public class Person {
         return Optional.ofNullable(emergencyContact);
     }
 
+    public Optional<Name> getEmergencyContactName() {
+        return Optional.ofNullable(emergencyContact).flatMap(EmergencyContact::getName);
+    }
+
+    public Optional<Phone> getEmergencyContactPhone() {
+        return Optional.ofNullable(emergencyContact).flatMap(EmergencyContact::getPhone);
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
