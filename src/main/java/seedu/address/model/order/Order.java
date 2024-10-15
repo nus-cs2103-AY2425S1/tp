@@ -1,6 +1,9 @@
 package seedu.address.model.order;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Order represent an order ordered by a customer, each order is uniquely identified as its order name
@@ -65,6 +68,10 @@ public class Order {
 
     public static int getTotalOrderCount() {
         return nameToOrder.size();
+    }
+
+    public static ArrayList<Order> getOrders() {
+        return new ArrayList<Order>(nameToOrder.values());
     }
 
     @Override

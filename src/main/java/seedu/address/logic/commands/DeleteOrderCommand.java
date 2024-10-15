@@ -7,7 +7,7 @@ import seedu.address.model.Model;
 
 public class DeleteOrderCommand extends Command{
 
-    public static final String COMMAND_WORD = "del-order";
+    public static final String COMMAND_WORD = "deleteOrder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete an order from the address book,"
             + " order is always in lowercase. "

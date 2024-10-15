@@ -13,7 +13,7 @@ public class DeleteOrderCommandParser implements Parser<DeleteOrderCommand> {
 
         if (args.trim().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddOrderCommand.MESSAGE_USAGE));
+                    DeleteOrderCommand.MESSAGE_USAGE));
         }
 
         return new DeleteOrderCommand(args.trim());
