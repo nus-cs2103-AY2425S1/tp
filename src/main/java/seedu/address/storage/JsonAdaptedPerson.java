@@ -86,9 +86,10 @@ class JsonAdaptedPerson {
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        if (tag != null) {
-            personTag = tag.toModelType();
+        if (tag == null) {
+            throw new IllegalValueException(Tag.MESSAGE_FIELD_MESSAGE_FORMAT);
         }
+        personTag = tag.toModelType();
         final Address modelAddress = new Address(address);
 
         final Tag finalPersonTag = personTag;

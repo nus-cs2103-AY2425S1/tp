@@ -11,6 +11,7 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags should be High Risk, Medium Risk or Low Risk";
     public static final String VALIDATION_REGEX = "High Risk|Medium Risk|Low Risk";
+    public static final String MESSAGE_FIELD_MESSAGE_FORMAT = "Person's Tag field is missing!";
     public final String tagName;
 
     /**
