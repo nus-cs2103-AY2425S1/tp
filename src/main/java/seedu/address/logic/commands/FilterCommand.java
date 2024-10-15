@@ -17,8 +17,8 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches for all customers whose specified field contains "
-            + "the given substring (case-insensitive) and displays the results in a numbered list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches for all customers whose specified field "
+            + "contains the given substring (case-insensitive) and displays the results in a numbered list.\n"
             + "Parameters: <FLAG>/ <SEARCH TERM>\n"
             + "Flags: n/ (name), p/ (phone), e/ (email), a/ (address), j/ (job), r/ (remarks)\n"
             + "Example: " + COMMAND_WORD + " n/ Alice\n"
