@@ -34,13 +34,11 @@ public class TagAddCommand extends Command {
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag '%1$s' to contact: %2$s.";
     public static final String MESSAGE_ADD_TAG_FAILURE = "Tag must be a non-empty string with"
             + " only alphanumeric characters and underscores.";
-
     // All tags in existing Person match those to be added by the user
-    public static final String MESSAGE_ALL_DUPLICATE_TAGS = "Contact '%1$s' already has the tag '%2$s'";
-
+    public static final String MESSAGE_JUST_DUPLICATE_TAGS = "Contact '%1$s' already has those tags.";
     // Some tags in existing Person match those to be added by the user
-    public static final String MESSAGE_SOME_DUPLICATE_TAGS = "Contact '%1$s' already has the tag '%2$s'";
-
+    public static final String MESSAGE_SOME_DUPLICATE_TAGS = "Duplicate tags have been detected."
+            + " Only unique tags are added. \nContact '%1$s' now has the tag '%2$s'.";
 
 
     private final Name name;
@@ -79,18 +77,6 @@ public class TagAddCommand extends Command {
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
 
-    /*
-     * duplicate handling same tag
-     * 
-     * Cases:
-     * add multiple tags with the same name using tag-add (tag-add n/name t/tag
-     * t/tag)
-     * add new tag with same tag name as existing tag (tag-add n/name t/tag) 
-     *      either all tags match
-     *      or one of the new tags match
-     *          either mention the tags that match and add the ones that dont
-     */
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -112,8 +98,16 @@ public class TagAddCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = duplicateTags.isEmpty() ? MESSAGE_ADD_TAG_SUCCESS : MESSAGE_ADD_TAG_FAILURE;
-        return String.format(message, Messages.formatForTags(personToEdit), Messages.getName(personToEdit));
+        if (duplicateTags.isEmpty()) {
+            return String.format(MESSAGE_ADD_TAG_SUCCESS,
+                    Messages.formatForTags(personToEdit), Messages.getName(personToEdit));
+        } else if (duplicateTags.equals(tags)) {
+            return String.format(MESSAGE_JUST_DUPLICATE_TAGS,
+                    Messages.getName(personToEdit));
+        } else {
+            return String.format(MESSAGE_SOME_DUPLICATE_TAGS,
+                    Messages.getName(personToEdit), Messages.formatForTags(personToEdit));
+        }
     }
 
     /**
@@ -122,8 +116,7 @@ public class TagAddCommand extends Command {
      * Matching tags are added to a separate set that keeps track of duplicate tags.
      * Unique tags are added to a separate tag.
      * @param person EditedPerson from the execute method above.
-     * @return A Set<Tag> that contains distinct tags from both
-     * existing tags and those as inputted by the user.
+     * @return A set of tags that contains distinct tags from both existing tags and those inputted by the user.
      */
     private Set<Tag> handleDuplicateTags(Person person) {
         Set<Tag> ogTags = person.getTags();
