@@ -1,20 +1,11 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
-
-import java.util.Set;
 
 import seedu.address.logic.commands.CreateVendorCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.event.Event;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.vendor.Vendor;
 
 /**
  * A utility class for Event.
