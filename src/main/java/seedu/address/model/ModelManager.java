@@ -38,6 +38,8 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
+
+
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
