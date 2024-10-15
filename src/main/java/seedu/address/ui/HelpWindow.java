@@ -22,9 +22,9 @@ public class HelpWindow extends UiPart<Stage> {
                 2. add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG1 TAG2 ...]: Adds a contact with up to 6 tags.
                 3. list: Shows all saved contacts.
                 4. edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]: Edits a contact’s personal detail(s).
-                5. tag INDEX t/TAG1 [TAG2 ...] : Adds between 1 to 6 tags to a contact.
-                6. untag INDEX t/TAG [TAG2 ...] : Removes the specified tags from a contact.
-                7. filter t/TAG [TAG2 ...]: Filters contacts by the specified tag(s).
+                5. tag INDEX t/TAG1 TAG2 ... : Adds between 1 to 6 tags to a contact.
+                6. untag INDEX t/TAG1 TAG2 ... : Removes the specified tags from a contact.
+                7. filter t/TAG1 TAG2 ...: Filters contacts by the specified tag(s).
                 8. find KEYWORD1 [KEYWORD2] ... : Finds contacts with any of the given keywords in their name.
                 9. delete INDEX: Deletes the contact in the specified index.
                 10. clear: Clears all contacts (following a confirmation message).
