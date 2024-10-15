@@ -33,7 +33,7 @@ public class ExportCommand extends Command {
         return new CommandResult(MESSAGE_USAGE);
     }
 
-    private File createCSVFile() throws IOException {
+    private File createCsvFile() throws IOException {
         File file = new File(PATH);
         if (!file.exists()) {
             file.createNewFile();
