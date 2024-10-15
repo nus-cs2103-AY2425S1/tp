@@ -9,7 +9,11 @@ import static java.util.Objects.requireNonNull;
  */
 public class ModuleCode {
     public static final String MESSAGE_CONSTRAINTS =
-            "Module code should only contain alphanumeric characters, and it should not be blank";
+            "Module code should only contain alphanumeric characters, and it should not be blank.\n"
+            + "The accepted pattern is [Alphabets][Numbers][Alphabets], where the ending [Alphabets] are optional.\n"
+                    + "Note that input check is case-insensitive. As long as the pattern matches, program will automatically\n"
+                    + "convert it to upper case letter for consistent format and easy search of module code."
+                    + "For example: MA1522, cs2106, CS1101S, is1108, CS2103t are all considered valid inputs.";
 
     /*
      * The input should consist of only alphanumeric characters without spaces, should not contain
