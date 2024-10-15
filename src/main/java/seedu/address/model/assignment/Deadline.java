@@ -41,4 +41,18 @@ public class Deadline {
         }
         return true;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Deadline)) {
+            return false;
+        }
+
+        Deadline otherDeadline = (Deadline) other;
+        return otherDeadline.deadline.equals(this.deadline);
+    }
 }
