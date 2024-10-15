@@ -1,15 +1,12 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
@@ -28,13 +25,25 @@ public class DeleteCommandParserTest {
     private DeleteCommandParser parser = new DeleteCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
+    public void parse_validArgsIndex_returnsDeleteCommand() {
         assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "j/XYZ1235", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " j/123ABC", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "t/A", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " t/A", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "-1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteCommand.MESSAGE_USAGE));
     }
 
@@ -45,7 +54,7 @@ public class DeleteCommandParserTest {
         Name name = new Name("Alex Yeoh");
         Phone phone = new Phone("87438807");
         String args = " n/Alex Yeoh p/87438807";
-        DeleteCommand expectedCommand = new DeleteCommand(name,phone);
+        DeleteCommand expectedCommand = new DeleteCommand(name, phone);
         assertParseSuccess(parser, args, expectedCommand);
 
     }
@@ -55,7 +64,7 @@ public class DeleteCommandParserTest {
         Name name = new Name("Alex Yeoh");
         Email email = new Email("alexyeoh@gmail.com");
         String args = " n/Alex Yeoh e/alexyeoh@gmail.com";
-        DeleteCommand expectedCommand = new DeleteCommand(name,email);
+        DeleteCommand expectedCommand = new DeleteCommand(name, email);
         assertParseSuccess(parser, args, expectedCommand);
     }
 
@@ -67,4 +76,5 @@ public class DeleteCommandParserTest {
         DeleteCommand expectedCommand = new DeleteCommand(name);
         assertParseSuccess(parser, args, expectedCommand);
     }
+
 }

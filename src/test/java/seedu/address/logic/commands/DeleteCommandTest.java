@@ -6,25 +6,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import javafx.collections.transformation.FilteredList;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.FullNameMatchesPredicate;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.NameEmailPredicate;
-import seedu.address.model.person.NamePhonePredicate;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.testutil.PersonBuilder;
 
@@ -200,7 +196,7 @@ public class DeleteCommandTest {
         model.addPerson(duplicatePerson);
         DeleteCommand deleteCommand = new DeleteCommand(new Name("Carl Kurz"));
         String expectedMessage = "Multiple contacts with the same full name found. Please specify more using"
-                + "this format:\n" + "delete"  + " n/NAME e/EMAIL OR "
+                + "this format:\n" + "delete" + " n/NAME e/EMAIL OR "
                 + "delete" + " n/NAME p/PHONE";
         assertCommandFailure(deleteCommand, model, expectedMessage);
 
@@ -220,7 +216,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_deleteByNamephONENotFound_throwsCommandException() {
+    public void execute_deleteByNamePhoneNotFound_throwsCommandException() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Person duplicatePerson = new PersonBuilder().withName("Carl Kurz").withPhone("11111111")
                 .withEmail("testduplicate@gmail.com").withJobCode("testduplicate").build();
