@@ -23,9 +23,9 @@ checkstyle {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
-    jvmArgs += [
-            '--add-opens', 'javafx.graphics/com.sun.javafx.application=ALL-UNNAMED'
-    ]
+//    jvmArgs += [
+//            '--add-opens', 'javafx.graphics/com.sun.javafx.application=ALL-UNNAMED'
+//    ]
 }
 
 task coverage(type: JacocoReport) {
@@ -67,18 +67,18 @@ dependencies {
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
 
-    // TestFX Core
-    testImplementation 'org.testfx:testfx-core:4.0.16-alpha'
-
-    // TestFX JUnit5
-    testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
-
-    // JUnit5
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-
-    // Mockito for mocking
-    testImplementation 'org.mockito:mockito-core:3.7.7'
+//    // TestFX Core
+//    testImplementation 'org.testfx:testfx-core:4.0.16-alpha'
+//
+//    // TestFX JUnit5
+//    testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
+//
+//    // JUnit5
+//    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+//    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+//
+//    // Mockito for mocking
+//    testImplementation 'org.mockito:mockito-core:3.7.7'
 }
 
 shadowJar {
