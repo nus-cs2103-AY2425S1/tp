@@ -33,8 +33,8 @@ public class NricContainsKeywordsPredicate implements Predicate<Person> {
             return false;
         }
 
-        NricContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NricContainsKeywordsPredicate) other;
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        NricContainsKeywordsPredicate otherNricContainsKeywordsPredicate = (NricContainsKeywordsPredicate) other;
+        return keywords.equals(otherNricContainsKeywordsPredicate.keywords);
     }
 
     @Override

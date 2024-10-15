@@ -452,6 +452,16 @@ Use case ends.
       If No: The user is prompted to provide a new destination path or filename.
     - Use case ends.
 
+**Use case: Help command**
+
+**MSS**
+
+1. User requests for help.
+2. ClinicBuddy provides the user a list of available commands, along with infomation on each command.
+
+Use case ends.
+
+
 **Use case: Undo a command**
 
 **MSS**
