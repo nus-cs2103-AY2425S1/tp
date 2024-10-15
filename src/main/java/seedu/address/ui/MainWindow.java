@@ -213,11 +213,11 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowPersons()) {
+            if (commandResult.getTopPanelDisplayType().equals(DisplayType.PERSON_LIST)) {
                 handleShowPersons();
             }
 
-            if (commandResult.isShowAssignments()) {
+            if (commandResult.getTopPanelDisplayType().equals(DisplayType.ASSIGNMENT_LIST)) {
                 handleShowAssignments();
             }
 

@@ -18,6 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.skill.SkillsContainsKeywordsPredicate;
+import seedu.address.ui.DisplayType;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
@@ -28,10 +29,10 @@ public class FilterCommandTest {
 
     @Test
     public void equals() {
-        SkillsContainsKeywordsPredicate firstPredicate =
-                new SkillsContainsKeywordsPredicate(Collections.singletonList("first"));
-        SkillsContainsKeywordsPredicate secondPredicate =
-                new SkillsContainsKeywordsPredicate(Collections.singletonList("second"));
+        SkillsContainsKeywordsPredicate firstPredicate = new SkillsContainsKeywordsPredicate(
+                Collections.singletonList("first"));
+        SkillsContainsKeywordsPredicate secondPredicate = new SkillsContainsKeywordsPredicate(
+                Collections.singletonList("second"));
 
         FilterCommand filterFirstCommand = new FilterCommand(firstPredicate);
         FilterCommand filterSecondCommand = new FilterCommand(secondPredicate);
@@ -56,21 +57,24 @@ public class FilterCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage,
+                DisplayType.PERSON_LIST, false, false);
         SkillsContainsKeywordsPredicate predicate = preparePredicate(" ");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        SkillsContainsKeywordsPredicate predicate =
-                preparePredicate("moneyManagement thievery gambling");
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage,
+                DisplayType.PERSON_LIST, false, false);
+        SkillsContainsKeywordsPredicate predicate = preparePredicate("moneyManagement thievery gambling");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredPersonList());
     }
 
