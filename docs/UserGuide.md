@@ -187,7 +187,7 @@ Deletes the specified person from the address book.
 
 #### Command Format
 <div class="command-box">
-delete NAME
+delete n/NAME
 </div>
 
 * Deletes the person with the specified `NAME`.
@@ -196,7 +196,7 @@ delete NAME
 **Example**
 > **Use Case**: Deleting `John Doe` from the address book.
 > 
-> **Input**: `delete John Doe`
+> **Input**: `delete n/John Doe`
 > 
 > **Output**:
 
