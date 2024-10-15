@@ -1,4 +1,6 @@
 package seedu.address.model.event;
+
+
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
@@ -8,6 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.person.Person;
+import seedu.address.model.util.SampleDataUtil;
 
 
 /**
@@ -30,6 +33,9 @@ public class Event {
         requireAllNonNull(eventName, date, attendees);
         this.eventName = eventName;
         this.date = date;
+
+        // buffer data to show UI changes, since adding attendees are not yet implemented.
+        attendees.addAll(Set.of(SampleDataUtil.getSamplePersons()));
         this.attendees.addAll(attendees);
     }
 
