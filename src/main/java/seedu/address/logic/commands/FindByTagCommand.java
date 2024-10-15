@@ -1,20 +1,20 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
-public class FindByNameCommand extends AbstractFindCommand {
-    public static final String COMMAND_WORD = "find n/";
+public class FindByTagCommand extends AbstractFindCommand {
+    public static final String COMMAND_WORD = "find t/";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose tags "
             + "contain any of the specified keywords (case-insensitive) and displays them as a list with indices.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Example: " + COMMAND_WORD + " CS2100_classmate";
 
-    public FindByNameCommand(NameContainsKeywordsPredicate predicate) {
+    public FindByTagCommand(TagContainsKeywordsPredicate predicate) {
         super(predicate);
     }
 
@@ -25,11 +25,11 @@ public class FindByNameCommand extends AbstractFindCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindByNameCommand)) {
+        if (!(other instanceof FindByTagCommand)) {
             return false;
         }
 
-        FindByNameCommand otherFindCommand = (FindByNameCommand) other;
+        FindByTagCommand otherFindCommand = (FindByTagCommand) other;
         return this.getPredicate().equals(otherFindCommand.getPredicate());
     }
 }

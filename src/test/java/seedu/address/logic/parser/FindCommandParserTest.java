@@ -12,9 +12,11 @@ import seedu.address.logic.commands.AbstractFindCommand;
 import seedu.address.logic.commands.FindByContactCommand;
 import seedu.address.logic.commands.FindByEmailCommand;
 import seedu.address.logic.commands.FindByNameCommand;
+import seedu.address.logic.commands.FindByTagCommand;
 import seedu.address.model.person.ContactContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -62,6 +64,19 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, "e/ \n ryan@gmail.com \n \t tasha@gmail.com  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validArgs_returnsFindByTagCommand() {
+        FindByTagCommand expectedFindCommand =
+                new FindByTagCommand(new TagContainsKeywordsPredicate(
+                        Arrays.asList("PC2174ALecturer", "PC2032classmate")));
+
+        // no leading and trailing whitespaces
+        assertParseSuccess(parser, "t/PC2174ALecturer PC2032classmate", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "t/ \n PC2174ALecturer \n \t PC2032classmate  \t", expectedFindCommand);
     }
 
 }

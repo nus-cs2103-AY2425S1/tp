@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,10 +11,12 @@ import seedu.address.logic.commands.AbstractFindCommand;
 import seedu.address.logic.commands.FindByContactCommand;
 import seedu.address.logic.commands.FindByEmailCommand;
 import seedu.address.logic.commands.FindByNameCommand;
+import seedu.address.logic.commands.FindByTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContactContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -21,7 +24,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 public class FindCommandParser implements Parser<AbstractFindCommand> {
 
     public static final Pattern KEYWORD_EXTRACTOR =
-            Pattern.compile("^(?<tag>[cen]/)\\s*(?<arguments>[\\S\\s]+)$");
+            Pattern.compile("^(?<type>[cent]/)\\s*(?<arguments>[\\S\\s]+)$");
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -39,21 +42,24 @@ public class FindCommandParser implements Parser<AbstractFindCommand> {
         }
 
         // extract tag and search argument
-        String tag = m.group("tag");
-        String searchTerms = m.group("arguments");
-        String[] searchTermArray = searchTerms.split("\\s+");
+        String tag = m.group("type");
+        String[] searchTerms = m.group("arguments").split("\\s+");
+        List<String> searchTermArray = Arrays.asList(searchTerms);
 
         // return appropriate FindCommand class depending on tag
         switch (tag) {
         case "n/":
             return new FindByNameCommand(
-                    new NameContainsKeywordsPredicate(Arrays.asList(searchTermArray)));
+                    new NameContainsKeywordsPredicate(searchTermArray));
         case "c/":
             return new FindByContactCommand(
-                    new ContactContainsKeywordsPredicate(Arrays.asList(searchTermArray)));
+                    new ContactContainsKeywordsPredicate(searchTermArray));
         case "e/":
             return new FindByEmailCommand(
-                    new EmailContainsKeywordsPredicate(Arrays.asList(searchTermArray)));
+                    new EmailContainsKeywordsPredicate(searchTermArray));
+        case "t/":
+            return new FindByTagCommand(
+                    new TagContainsKeywordsPredicate(searchTermArray));
         default:
             return null; // temporary value, this should not occur due to regex
         }
