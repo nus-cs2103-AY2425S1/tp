@@ -36,7 +36,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STUDENTID, PREFIX_NETID,
                         PREFIX_MAJOR, PREFIX_TAG, PREFIX_YEAR);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_MAJOR, PREFIX_STUDENTID, PREFIX_NETID, PREFIX_YEAR)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_STUDENTID)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -45,10 +45,24 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_NETID, PREFIX_MAJOR, PREFIX_YEAR);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENTID).get());
-        Email email = ParserUtil.parseNetId(argMultimap.getValue(PREFIX_NETID).get());
-        Major major = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_MAJOR).get());
+
+        Year year = new Year();
+        Major major = new Major();
+        Email email = new Email();
+
+        if (isPrefixPresent(argMultimap, PREFIX_YEAR)) {
+            year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get());
+        }
+
+        if (isPrefixPresent(argMultimap, PREFIX_NETID)) {
+            email = ParserUtil.parseNetId(argMultimap.getValue(PREFIX_NETID).get());
+        }
+
+        if (isPrefixPresent(argMultimap, PREFIX_MAJOR)) {
+            major = ParserUtil.parseMajor(argMultimap.getValue(PREFIX_MAJOR).get());
+        }
+
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Year year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get());
 
         Person person = new Person(name, studentId, email, major, tagList, year);
 
@@ -63,4 +77,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    /**
+     * Returns true if the prefix contains non-empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean isPrefixPresent(ArgumentMultimap argumentMultimap, Prefix prefix) {
+        return argumentMultimap.getValue(prefix).isPresent();
+    }
 }

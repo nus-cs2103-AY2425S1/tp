@@ -24,6 +24,14 @@ public class Year {
     }
 
     /**
+     * Constructs an empty {@code Year}.
+     *
+     */
+    public Year() {
+        value = "";
+    }
+
+    /**
      * Returns true if a given string is a valid Year.
      */
     public static boolean isValidYear(String test) {
