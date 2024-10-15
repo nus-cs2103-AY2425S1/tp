@@ -60,8 +60,9 @@ public class UniqueAppointmentListTest {
 
     @Test
     public void testSetAppointmentNonExisting() {
-        assertThrows(AppointmentNotFoundException.class,
-                () -> uniqueAppointmentList.setAppointment(appointment1, appointment2));
+        assertThrows(AppointmentNotFoundException.class, () -> {
+            uniqueAppointmentList.setAppointment(appointment1, appointment2);
+        });
     }
 
     @Test
