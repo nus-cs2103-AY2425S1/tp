@@ -31,7 +31,7 @@ public class ModuleCode {
     public ModuleCode(String moduleCode) {
         requireNonNull(moduleCode);
         checkArgument(isValidModuleCode(moduleCode.trim()), MESSAGE_CONSTRAINTS);
-        this.moduleCode = moduleCode.trim();
+        this.moduleCode = moduleCode.trim().toUpperCase();
     }
 
     /**
