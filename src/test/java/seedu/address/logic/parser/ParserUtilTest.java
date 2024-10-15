@@ -20,7 +20,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.LifePolicy;
-import seedu.address.model.policy.PolicyMap;
+import seedu.address.model.policy.PolicySet;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -236,14 +236,14 @@ public class ParserUtilTest {
 
     @Test
     public void parsePolicies_emptyCollection_returnsEmptySet() throws Exception {
-        PolicyMap expected = new PolicyMap();
+        PolicySet expected = new PolicySet();
         assertEquals(expected, ParserUtil.parsePolicies(Collections.emptyList()));
     }
 
     @Test
     public void parsePolicies_collectionWithValidPolicies_returnsPolicySet() throws Exception {
-        PolicyMap actual = ParserUtil.parsePolicies(Arrays.asList(VALID_POLICY_TYPE_LIFE, VALID_POLICY_TYPE_HEALTH));
-        PolicyMap expected = new PolicyMap();
+        PolicySet actual = ParserUtil.parsePolicies(Arrays.asList(VALID_POLICY_TYPE_LIFE, VALID_POLICY_TYPE_HEALTH));
+        PolicySet expected = new PolicySet();
         expected.add(new LifePolicy());
         expected.add(new HealthPolicy());
 

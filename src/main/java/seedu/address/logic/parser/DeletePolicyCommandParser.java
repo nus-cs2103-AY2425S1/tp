@@ -7,7 +7,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.DeletePolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.policy.PolicyMap;
+import seedu.address.model.policy.PolicySet;
 
 /**
  * Parses input arguments and creates a new DeletePolicyCommand object.
@@ -35,7 +35,7 @@ public class DeletePolicyCommandParser implements Parser<DeletePolicyCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePolicyCommand.MESSAGE_USAGE), ive);
         }
-        PolicyMap policyDel = ParserUtil.parsePolicies(argMultimap.getAllValues(PREFIX_POLICY_TYPE));
+        PolicySet policyDel = ParserUtil.parsePolicies(argMultimap.getAllValues(PREFIX_POLICY_TYPE));
         return new DeletePolicyCommand(index, policyDel);
     }
 }

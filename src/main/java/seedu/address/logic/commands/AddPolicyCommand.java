@@ -5,7 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.policy.PolicyMap;
+import seedu.address.model.policy.PolicySet;
 
 /**
  * Add Policy to an existing client in Prudy.
@@ -23,7 +23,7 @@ public class AddPolicyCommand extends Command {
             + "pt/life";
 
     private final Index index;
-    private final PolicyMap policies;
+    private final PolicySet policies;
 
     /**
      * Creates an AddPolicyCommand to add the specified {@code PolicyMap} to the client.
@@ -31,7 +31,7 @@ public class AddPolicyCommand extends Command {
      * @param index of the client in the filtered client list to add policy.
      * @param policies the set of policies to be added.
      */
-    public AddPolicyCommand(Index index, PolicyMap policies) {
+    public AddPolicyCommand(Index index, PolicySet policies) {
         requireAllNonNull(index, policies);
 
         this.index = index;
