@@ -142,21 +142,21 @@ public class Tut {
     /**
      * Checks if two tutorials have the same id and name, primarily used for checking duplicates.
      */
-    public boolean equalsTutorial(Tut other) {
-        if (other == this) {
-            return true;
-        }
-
-        if (!(other instanceof Tut)) {
-            return false;
-        }
-
-        Tut otherTutorial = (Tut) other;
-        return tutorialClass.equals(otherTutorial.tutorialClass)
-                && tutDates.equals(otherTutorial.tutDates)
-                && tutName.equals(otherTutorial.tutName)
-                && students.equals(otherTutorial.students);
-    }
+    //    public boolean equalsTutorial(Tut other) {
+    //        if (other == this) {
+    //            return true;
+    //        }
+    //
+    //        if (!(other instanceof Tut)) {
+    //            return false;
+    //        }
+    //
+    //        Tut otherTutorial = (Tut) other;
+    //        return tutorialClass.equals(otherTutorial.tutorialClass)
+    //                && tutDates.equals(otherTutorial.tutDates)
+    //                && tutName.equals(otherTutorial.tutName)
+    //                && students.equals(otherTutorial.students);
+    //    }
     //TODO: Use the equalsTutorial function to remove duplicates
 
     @Override
