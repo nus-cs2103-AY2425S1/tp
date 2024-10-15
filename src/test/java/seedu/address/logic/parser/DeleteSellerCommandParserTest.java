@@ -13,7 +13,7 @@ import seedu.address.model.client.Phone;
 public class DeleteSellerCommandParserTest {
 
     private DeleteSellerCommandParser parser = new DeleteSellerCommandParser();
-    private final String nonEmptyphoneNumber = "12345678";
+    private final String nonEmptyphoneNumber = "92345678";
     @Test
     public void parse_phoneNumberSpecified_success() {
         // Test for valid phone number

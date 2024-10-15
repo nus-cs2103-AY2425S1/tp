@@ -118,7 +118,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_deleteBuyer() throws Exception {
-        final String phoneNumber = "12345678";
+        final String phoneNumber = "92345678";
         DeleteBuyerCommand command = (DeleteBuyerCommand) parser.parseCommand(
                 DeleteBuyerCommand.COMMAND_WORD + " " + PREFIX_PHONE + phoneNumber);
         assertEquals(new DeleteBuyerCommand(new Phone(phoneNumber)), command);
@@ -126,7 +126,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_deleteSeller() throws Exception {
-        final String phoneNumber = "12345678";
+        final String phoneNumber = "92345678";
         DeleteSellerCommand command = (DeleteSellerCommand) parser.parseCommand(
                 DeleteSellerCommand.COMMAND_WORD + " " + PREFIX_PHONE + phoneNumber);
         assertEquals(new DeleteSellerCommand(new Phone(phoneNumber)), command);

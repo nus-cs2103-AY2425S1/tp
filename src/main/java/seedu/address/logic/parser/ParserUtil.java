@@ -179,8 +179,8 @@ public class ParserUtil {
     public static seedu.address.model.client.Phone parseClientPhone(String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        if (!seedu.address.model.client.Phone.isValidPhone(trimmedPhone)) {
+            throw new ParseException(seedu.address.model.client.Phone.MESSAGE_CONSTRAINTS);
         }
         return new seedu.address.model.client.Phone(trimmedPhone);
     }
