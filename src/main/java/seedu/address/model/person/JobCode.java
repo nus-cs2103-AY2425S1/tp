@@ -5,42 +5,52 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's address in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidJobCode(String)}
  */
 public class JobCode {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Job code should have length of 2 to 12 characters inclusive,"
+            + " consisting of only alphanumeric characters and cannot have whitespace.\nFor example: XYZ123";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]+$";
+    public static final int MAX_LENGTH = 12;
+    public static final int MIN_LENGTH = 2;
 
     public final String value;
 
     /**
-     * Constructs an {@code Address}.
-     *
-     * @param address A valid address.
+     * Constructs a JobCode object
+     * @param jobCode
      */
     public JobCode(String jobCode) {
         requireNonNull(jobCode);
+        jobCode = jobCode.trim();
         checkArgument(isValidJobCode(jobCode), MESSAGE_CONSTRAINTS);
-        value = jobCode;
+        value = jobCode.trim();
+
     }
 
     /**
      * Returns true if a given string is a valid email.
      */
     public static boolean isValidJobCode(String test) {
-        return test.matches(VALIDATION_REGEX);
+        // Check that the string has no whitespace and its length is between 2 and 12
+        return test.length() >= MIN_LENGTH
+                && test.length() <= MAX_LENGTH
+                && !test.contains(" ")
+                && test.matches(VALIDATION_REGEX);
+
     }
 
     @Override
     public String toString() {
         return value;
     }
+
 
     @Override
     public boolean equals(Object other) {
