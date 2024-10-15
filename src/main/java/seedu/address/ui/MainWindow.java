@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -16,6 +18,9 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Guest;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Vendor;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -115,20 +120,37 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        guestListPanel = new PersonListPanel(logic.getFilteredGuestList(), "Guests");
+        ObservableList<Person> personList = logic.getFilteredPersonList();
+        FilteredList<Person> guestList = this.getFilteredGuestList(personList);
+        FilteredList<Person> vendorList = this.getFilteredVendorList(personList);
+
+        guestListPanel = new PersonListPanel(guestList, "Guests");
         guestListPanelPlaceholder.getChildren().add(guestListPanel.getRoot());
 
-        vendorListPanel = new PersonListPanel(logic.getFilteredVendorList(), "Vendors");
+        vendorListPanel = new PersonListPanel(vendorList, "Vendors");
         vendorListPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Filters away the vendors to obtain a list of guests.
+     */
+    private FilteredList<Person> getFilteredGuestList(ObservableList<Person> personList) {
+        return new FilteredList<>(personList,
+                person -> person instanceof Guest);
+    }
+
+    /**
+     * Filters away the guests to obtain a list of vendors.
+     */
+    private FilteredList<Person> getFilteredVendorList(ObservableList<Person> personList) {
+        return new FilteredList<>(personList,
+                person -> person instanceof Vendor);
     }
 
     /**
@@ -169,13 +191,6 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
-    }
-
-    public PersonListPanel getGuestListPanel() {
-        return guestListPanel;
-    }
-    public PersonListPanel getVendorListPanel() {
-        return vendorListPanel;
     }
 
     /**
