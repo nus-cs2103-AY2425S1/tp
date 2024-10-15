@@ -36,6 +36,7 @@ public class PhoneTest {
         assertTrue(Phone.isValidPhone("91112311")); // starts with 9
         assertTrue(Phone.isValidPhone("83121534")); // starts with 8
         assertTrue(Phone.isValidPhone("61273981")); // starts with 6
+        assertTrue(Phone.isValidPhone("31273981")); // starts with 6
     }
 
     @Test
