@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import seedu.address.logic.Messages;
+import seedu.address.logic.StaticContext;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -21,9 +21,17 @@ public class DeleteCommand extends Command {
             + "Parameters: n/NAME\n"
             + "Example: " + COMMAND_WORD + " n/Li Sirui";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person:\n%1$s";
     public static final String MESSAGE_NO_MATCH_FOUND = "No contact with the name '%1$s' found.";
     public static final String MESSAGE_MISSING_NAME = "Contact name is required.";
+    public static final String MESSAGE_CONFIRMATION_PROMPT = """
+            Are you sure you want to delete the following contact?
+            Enter 'delete-y' to confirm, or 'delete-n' to cancel.
+            Name: %1$s
+            Phone: %2$s
+            Email: %3$s
+            Address: %4$s
+            Job: %5$s
+            """;
 
     private final String name;
 
@@ -48,9 +56,21 @@ public class DeleteCommand extends Command {
         }
 
         Person personToDelete = matchingPersons.get(0);
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.formatForDeletion(personToDelete)));
+
+        String confirmationMessage = String.format(MESSAGE_CONFIRMATION_PROMPT,
+                personToDelete.getName().fullName,
+                personToDelete.getPhone().value,
+                personToDelete.getEmail().value,
+                personToDelete.getAddress().value,
+                personToDelete.getJob().value);
+
+        // Print confirmation prompt
+        System.out.println(confirmationMessage);
+
+        // Store the personToDelete in a static context
+        StaticContext.setPersonToDelete(personToDelete);
+
+        return new CommandResult(confirmationMessage);
     }
 
     @Override
