@@ -1,9 +1,10 @@
 package seedu.address.testutil;
 
-//import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_RELATIONSHIP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -36,7 +37,11 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        sb.append(PREFIX_EMERGENCY_CONTACT_NAME + person.getEcName().fullName + " ");
+        sb.append(PREFIX_EMERGENCY_CONTACT_NAME + person.getEmergencyContact().getName().fullName + " ");
+        sb.append(PREFIX_EMERGENCY_CONTACT_PHONE + person.getEmergencyContact().getPhone().value + " ");
+        sb.append(PREFIX_EMERGENCY_CONTACT_RELATIONSHIP
+                + person.getEmergencyContact().getRelationship().relationship + " ");
+
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
