@@ -68,7 +68,7 @@ BizBook (BB) is a **desktop app for managing contacts, optimized for use via a C
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 

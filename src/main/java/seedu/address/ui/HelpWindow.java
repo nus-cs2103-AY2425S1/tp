@@ -106,7 +106,7 @@ public class HelpWindow extends UiPart<Stage> {
     private void handleURL() {
         // try to open browser
         boolean redirectSuccess = openUrl();
-        
+
         // fall back to copying URL to clipboard
         if (!redirectSuccess) {
             copyUrl();
@@ -136,7 +136,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Open the URL to the user guide to the clipboard.
-     * 
+     *
      * @return success status of URL open.
      */
     private boolean openUrl() {
