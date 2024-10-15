@@ -1,13 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ETA;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -28,6 +22,8 @@ import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Eta;
+import seedu.address.model.delivery.Status;
+import seedu.address.model.delivery.Id;
 import seedu.address.model.delivery.ItemName;
 import seedu.address.model.delivery.Time;
 import seedu.address.model.person.Address;
@@ -65,11 +61,13 @@ public class EditCommand extends Command {
            + "[" + PREFIX_NAME + "ITEM NAME] "
            + "[" + PREFIX_ADDRESS + "ADDRESS] "
            + "[" + PREFIX_COST + "COST] "
-           + "[" + PREFIX_ETA + "ETA]\n"
+           + "[" + PREFIX_ETA + "ETA]"
+           + "[" + PREFIX_STATUS + "STATUS]\n"
            + "Example: " + COMMAND_WORD + " 1 "
            + PREFIX_NAME + "TV "
            + PREFIX_ADDRESS + "Clementi Ave 3, Blk 462, S120311 "
-           + PREFIX_COST + "$300";
+           + PREFIX_COST + "$300"
+           + PREFIX_STATUS + "not delivered";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -189,12 +187,14 @@ public class EditCommand extends Command {
     private static Delivery createEditedDelivery(Delivery toEdit, EditDeliveryDescriptor descriptor) {
         assert toEdit != null;
 
+        Id id = toEdit.getId();
         ItemName itemName = descriptor.getItemName().orElse(toEdit.getItemName());
         Address updatedAddress = descriptor.getAddress().orElse(toEdit.getAddress());
         Cost updatedCost = descriptor.getCost().orElse(toEdit.getCost());
         Eta updatedEta = descriptor.getEta().orElse(toEdit.getEta());
+        Status updatedStatus = descriptor.getStatus().orElse(toEdit.getStatus());
 
-        return new Delivery(itemName, updatedAddress, updatedCost, updatedEta);
+        return new Delivery(itemName, updatedAddress, updatedCost, updatedEta, updatedStatus);
     }
 
     @Override
@@ -337,12 +337,14 @@ public class EditCommand extends Command {
      * Stores the details to edit the Delivery with
      */
     public static class EditDeliveryDescriptor {
+
         private ItemName itemName;
         private Address address;
         private Cost cost;
         private Date date;
         private Time time;
         private Eta eta;
+        private Status status;
 
         public EditDeliveryDescriptor() {}
 
@@ -356,6 +358,7 @@ public class EditCommand extends Command {
             setDate(toCopy.date);
             setTime(toCopy.time);
             setEta(toCopy.eta);
+            setStatus(toCopy.status);
         }
 
         /**
@@ -413,6 +416,10 @@ public class EditCommand extends Command {
             return Optional.ofNullable(eta);
         }
 
+        public void setStatus(Status status) {this.status = status; }
+
+        public Optional<Status> getStatus() { return Optional.ofNullable(status); }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -428,7 +435,8 @@ public class EditCommand extends Command {
                        && Objects.equals(cost, otherEditDeliveryDescriptor.cost)
                        && Objects.equals(date, otherEditDeliveryDescriptor.date)
                        && Objects.equals(time, otherEditDeliveryDescriptor.time)
-                       && Objects.equals(eta, otherEditDeliveryDescriptor.eta);
+                       && Objects.equals(eta, otherEditDeliveryDescriptor.eta)
+                       && Objects.equals(status, otherEditDeliveryDescriptor.status);
         }
 
         @Override
@@ -439,6 +447,7 @@ public class EditCommand extends Command {
                        .add("date", date)
                        .add("time", time)
                        .add("eta", eta)
+                       .add("status", status)
                        .toString();
         }
     }
