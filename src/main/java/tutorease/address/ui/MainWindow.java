@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private LessonListPanel lessonListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -43,7 +44,8 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
-
+    @FXML
+    private StackPane lessonListPanelPlaceholder;
     @FXML
     private StackPane resultDisplayPlaceholder;
 
@@ -121,6 +123,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        lessonListPanel = new LessonListPanel(logic.getFilteredLessonList());
+        lessonListPanelPlaceholder.getChildren().add(lessonListPanel.getRoot());
     }
 
     /**
@@ -165,6 +170,15 @@ public class MainWindow extends UiPart<Stage> {
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    /**
+     * Gets the lesson list panel.
+     *
+     * @return The lesson list panel.
+     */
+    public LessonListPanel getLessonListPanel() {
+        return lessonListPanel;
     }
 
     /**
