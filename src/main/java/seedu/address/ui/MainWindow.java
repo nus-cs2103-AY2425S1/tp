@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private MeetUpListPanel meetUpListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -43,6 +44,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane meetUpListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -116,6 +120,9 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
+        meetUpListPanel = new MeetUpListPanel(logic.getFilteredMeetUpList());
+        meetUpListPanelPlaceholder.getChildren().add(meetUpListPanel.getRoot());
+
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
@@ -163,8 +170,24 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    private void handleAddressBook() {
+        personListPanel.getRoot().setVisible(true);
+        meetUpListPanel.getRoot().setVisible(false);
+    }
+
+    @FXML
+    private void handleMeetUpList() {
+        personListPanel.getRoot().setVisible(false);
+        meetUpListPanel.getRoot().setVisible(true);
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    public MeetUpListPanel getMeetUpListPanel() {
+        return meetUpListPanel;
     }
 
     /**
@@ -184,6 +207,14 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowAddressBook()) {
+                handleAddressBook();
+            }
+
+            if (commandResult.isShowMeetUpList()) {
+                handleMeetUpList();
             }
 
             return commandResult;
