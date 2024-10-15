@@ -57,6 +57,9 @@ BizBook (BB) is a **desktop app for managing contacts, optimized for use via a C
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+- Command keywords are case insensitive.<br>
+  e.g. `add` and `ADD` are all acceptable.
+
 - Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -65,7 +68,7 @@ BizBook (BB) is a **desktop app for managing contacts, optimized for use via a C
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 

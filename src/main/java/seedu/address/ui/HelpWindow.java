@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -16,13 +20,16 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103-f10-3.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
-
+    public static final String HELP_MESSAGE = "For full details, refer to the user guide: " + USERGUIDE_URL;
+    public static final String URL_FAIL_MESSAGE = "Failed to open the URL. The URL has been copied to the clipboard.";
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML
     private Button copyButton;
+
+    @FXML
+    private Label errorMessageLabel;
 
     @FXML
     private Label helpMessage;
@@ -35,6 +42,8 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        errorMessageLabel.setText("");
+        errorMessageLabel.setManaged(false);
     }
 
     /**
@@ -91,13 +100,56 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Copies the URL to the user guide to the clipboard.
+     * Handles the URL button pressed event.
      */
     @FXML
+    private void handleUrl() {
+        // try to open browser
+        boolean redirectSuccess = openUrl();
+
+        // fall back to copying URL to clipboard
+        if (!redirectSuccess) {
+            copyUrl();
+            showError();
+        }
+    }
+
+    /**
+     * Makes error message appear.
+     */
+    private void showError() {
+        errorMessageLabel.setText(URL_FAIL_MESSAGE);
+        errorMessageLabel.setManaged(true);
+        this.getRoot().sizeToScene();
+    }
+
+
+    /**
+     * Copies the URL to the user guide to the clipboard.
+     */
     private void copyUrl() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent url = new ClipboardContent();
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
+    }
+
+    /**
+     * Open the URL to the user guide to the clipboard.
+     *
+     * @return success status of URL open.
+     */
+    private boolean openUrl() {
+        try {
+            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                Desktop.getDesktop().browse(new URI(USERGUIDE_URL));
+                return true;
+            } else {
+                System.out.println("Desktop browsing is not supported on this system.");
+            }
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

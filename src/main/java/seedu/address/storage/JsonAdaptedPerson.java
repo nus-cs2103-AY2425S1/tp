@@ -1,7 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -29,6 +30,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedNote> notes = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -44,6 +46,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        // to modify for interaction with GUI
     }
 
     /**
@@ -56,6 +59,9 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
+                .toList());
+        notes.addAll(source.getNotes().stream()
+                .map(JsonAdaptedNote::new)
                 .toList());
     }
 
@@ -70,6 +76,11 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
+        final List<Note> personNotes = new ArrayList<>();
+        for (JsonAdaptedNote note : notes) {
+            personNotes.add(note.toModelType());
+        }
+
         final Name modelName = new Name(validateField(name, Name.class.getSimpleName(), Name.MESSAGE_CONSTRAINTS,
                 Name::isValidName));
         final Phone modelPhone = new Phone(validateField(phone, Phone.class.getSimpleName(), Phone.MESSAGE_CONSTRAINTS,
@@ -79,8 +90,11 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(validateField(address, Address.class.getSimpleName(),
                 Address.MESSAGE_CONSTRAINTS, Address::isValidAddress));
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        final Set<Tag> modelTags = new LinkedHashSet<>(personTags);
+        final Set<Note> modelNotes = new LinkedHashSet<>(personNotes);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelNotes);
     }
 
     /**
@@ -107,5 +121,4 @@ class JsonAdaptedPerson {
         }
         return field;
     }
-
 }
