@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.time.format.DateTimeFormatter;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -10,7 +12,7 @@ import seedu.address.model.appointment.Appointment;
  * Jackson-friendly version of {@link Appointment}.
  */
 class JsonAdaptedAppointment {
-
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     private final String appointmentDate;
 
     /**
@@ -25,7 +27,7 @@ class JsonAdaptedAppointment {
      * Converts a given {@code Tag} into this class for Jackson use.
      */
     public JsonAdaptedAppointment(Appointment source) {
-        appointmentDate = source.appointment.toString();
+        appointmentDate = source.appointment.format(FORMATTER);
     }
 
     @JsonValue
