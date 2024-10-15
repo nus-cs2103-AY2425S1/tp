@@ -12,6 +12,9 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
+
+import java.util.Set;
 
 /**
  * Adds a person to the address book.
@@ -56,6 +59,8 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        Set<Tag> tagSet = toAdd.getTags();
+        model.getActiveTags().incrementTags(tagSet);
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }

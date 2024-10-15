@@ -36,11 +36,11 @@ public class TagCommand extends Command {
 
     /**
      * @param index The Index of the person to tag
-     * @param tagList The Set of Tags to add to the person
+     * @param tagSet The Set of Tags to add to the person
      */
-    public TagCommand(Index index, Set<Tag> tagList) {
+    public TagCommand(Index index, Set<Tag> tagSet) {
         this.targetIndex = index;
-        this.addedTags = tagList;
+        this.addedTags = tagSet;
     }
 
     @Override
@@ -63,6 +63,7 @@ public class TagCommand extends Command {
 
         // Updating addressBook
         model.setPerson(personToTag, newPerson);
+        model.getActiveTags().incrementTags(addedTags);
         return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, personToTag.getName(), addedTagsString));
     }
 
