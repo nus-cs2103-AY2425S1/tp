@@ -30,12 +30,16 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
-        assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
+        assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits without country code
+        assertFalse(Phone.isValidPhone("+ 90111234")); // indicates empty country code
+        assertFalse(Phone.isValidPhone("+53  90111234")); // indicates empty area code
 
         // valid phone numbers
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
         assertTrue(Phone.isValidPhone("93121534"));
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+        // country code, area code and phone number of maximum length
+        assertTrue(Phone.isValidPhone("+123 1234 124293842033123"));
     }
 
     @Test
