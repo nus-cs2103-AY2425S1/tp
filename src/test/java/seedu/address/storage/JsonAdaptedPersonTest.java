@@ -7,6 +7,7 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -19,7 +20,7 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Skills;
 import seedu.address.model.person.Status;
-import seedu.address.model.tag.Tag;
+
 
 public class JsonAdaptedPersonTest {
 
