@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -15,14 +16,21 @@ import seedu.address.model.vendor.Vendor;
 /**
  * Adds a vendor to the address book.
  */
-public class CreateVendorCommand extends Command {
+public class CreateVendorCommand extends CreateCommand {
 
-    public static final String COMMAND_WORD = "create_vendor";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a vendor to the address book. " + "Parameters: "
-            + PREFIX_NAME + "NAME " + PREFIX_PHONE + "PHONE " + PREFIX_DESCRIPTION + "DESCRIPTION " + "[" + PREFIX_TAG
-            + "TAG]...\n" + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Adam's Bakery " + PREFIX_PHONE
-            + "98765432 " + PREFIX_DESCRIPTION + "Pastries and cakes, bake in a day " + PREFIX_TAG + "pastry "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a vendor to the address book.\n"
+            + "Parameters: "
+            + PREFIX_VENDOR + "<empty> "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_DESCRIPTION + "DESCRIPTION "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: "
+            + COMMAND_WORD + " "
+            + PREFIX_NAME + "Adam's Bakery "
+            + PREFIX_PHONE + "98765432 "
+            + PREFIX_DESCRIPTION + "Pastries and cakes, bake in a day "
+            + PREFIX_TAG + "pastry "
             + PREFIX_TAG + "fast";
 
     public static final String MESSAGE_SUCCESS = "New vendor added: %1$s";

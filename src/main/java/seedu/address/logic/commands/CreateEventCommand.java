@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -12,11 +13,10 @@ import seedu.address.model.event.Event;
 /**
  * Creates an event in the address book.
  */
-public class CreateEventCommand extends Command {
-    public static final String COMMAND_WORD = "create_event";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new event in the address book. "
+public class CreateEventCommand extends CreateCommand {
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new event in the address book.\n"
             + "Parameters: "
+            + PREFIX_EVENT + "<empty> "
             + PREFIX_NAME + "NAME "
             + PREFIX_DATE + "DATE";
 
