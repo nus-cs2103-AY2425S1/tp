@@ -10,9 +10,7 @@ import static seedu.address.testutil.TypicalStudents.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -111,11 +109,10 @@ public class ModelManagerTest {
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
         AssignmentList assignmentList = new AssignmentList();
-        List<Tut> tutorialList = new ArrayList<Tut>();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs, assignmentList, tutorialList);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, assignmentList, tutorialList);
+        modelManager = new ModelManager(addressBook, userPrefs, assignmentList);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, assignmentList);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -128,13 +125,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs,
-                assignmentList, tutorialList)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, assignmentList)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, assignmentList, tutorialList)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, assignmentList)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
@@ -142,7 +138,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs,
-                assignmentList, tutorialList)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, assignmentList)));
     }
 }

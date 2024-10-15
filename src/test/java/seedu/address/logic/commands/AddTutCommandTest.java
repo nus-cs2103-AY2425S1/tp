@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -164,11 +163,6 @@ public class AddTutCommandTest {
         @Override
         public void addTutorial(Tut tutorial) {
             throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public List<Tut> getTutorialList() {
-            return null;
         }
 
         @Override

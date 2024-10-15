@@ -41,23 +41,21 @@ public class AttendCommandParserTest {
         assertEquals(expectedCommand, command);
     }
 
-    //TODO: Work on MacOS issue
-    //
-    //    @Test
-    //    public void parse_optionalDateMissing_success() throws Exception {
-    //        String userInput = " " + PREFIX_STUDENTID + "1001 "
-    //                + PREFIX_TUTORIALCLASS + "1001";
-    //
-    //        AttendCommand command = parser.parse(userInput);
-    //
-    //        StudentId expectedStudentId = new StudentId("1001");
-    //        TutorialClass expectedTutorialClass = new TutorialClass("1001");
-    //        Date expectedDate = new Date();
-    //
-    //        AttendCommand expectedCommand = new AttendCommand(expectedStudentId, expectedTutorialClass, expectedDate);
-    //
-    //        assertEquals(expectedCommand, command);
-    //    }
+    @Test
+    public void parse_optionalDateMissing_success() throws Exception {
+        String userInput = " " + PREFIX_STUDENTID + "1001 "
+                + PREFIX_TUTORIALCLASS + "1001";
+
+        AttendCommand command = parser.parse(userInput);
+
+        StudentId expectedStudentId = new StudentId("1001");
+        TutorialClass expectedTutorialClass = new TutorialClass("1001");
+        Date expectedDate = new Date();
+
+        AttendCommand expectedCommand = new AttendCommand(expectedStudentId, expectedTutorialClass, expectedDate);
+
+        assertEquals(expectedCommand, command);
+    }
 
     @Test
     public void parse_missingStudentId_failure() {
