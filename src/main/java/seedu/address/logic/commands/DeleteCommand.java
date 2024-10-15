@@ -26,12 +26,15 @@ public class DeleteCommand extends Command {
             + "Example 1: " + COMMAND_WORD + " 1\n" // Example for index-based deletion
             + "Example 2: " + COMMAND_WORD + " alice"; // Example for name-based deletion
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-    public static final String MESSAGE_EXACT_PERSON_NOT_FOUND = "No exact match found for the specified name.\n"
-            + "Consider using exact name or providing an index.";
-    public static final String MESSAGE_MULTIPLE_PERSONS_FOUND = "Multiple persons found matching the criteria.\n"
-            + "Consider providing an index.";
-    public static final String MESSAGE_PARTIAL_PERSON_NOT_FOUND = "No exact or partial match found for the name.";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Successfully deleted the contact: %1$s.";
+    public static final String MESSAGE_EXACT_PERSON_NOT_FOUND = "No exact match found for the name \"%1$s\".\n"
+            + "The displayed list has been filtered based on the name \"%1$s\".\n"
+            + "Please use fullname or try using an index.";
+    public static final String MESSAGE_MULTIPLE_PERSONS_FOUND = "Multiple contact match the name \"%1$s\".\n"
+            + "The displayed list has been filtered based on the name \"%1$s\".\n"
+            + "Please specify an index to delete the correct person.";
+    public static final String MESSAGE_PARTIAL_PERSON_NOT_FOUND = "No contact found with an exact or "
+            + "partial match for the name \"%1$s\".";
 
     private final String nameToDelete;
     private final Index targetIndex;
@@ -82,14 +85,14 @@ public class DeleteCommand extends Command {
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
         } else {
             if (partialMatches.isEmpty()) {
-                throw new CommandException(MESSAGE_PARTIAL_PERSON_NOT_FOUND);
+                throw new CommandException(String.format(MESSAGE_PARTIAL_PERSON_NOT_FOUND, nameToDelete));
             }
             FindCommandParser findCommandParser = new FindCommandParser();
             findCommandParser.parse(nameToDelete).execute(model);
             if (exactMatch.size() > 1) {
-                return new CommandResult(MESSAGE_MULTIPLE_PERSONS_FOUND);
+                return new CommandResult(String.format(MESSAGE_MULTIPLE_PERSONS_FOUND, nameToDelete));
             }
-            return new CommandResult(MESSAGE_EXACT_PERSON_NOT_FOUND);
+            return new CommandResult(String.format(MESSAGE_EXACT_PERSON_NOT_FOUND, nameToDelete));
         }
     }
 

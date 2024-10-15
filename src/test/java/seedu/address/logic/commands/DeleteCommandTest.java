@@ -56,7 +56,7 @@ public class DeleteCommandTest {
     public void execute_noPersonFound_throwsCommandException() {
         DeleteCommand deleteCommand = new DeleteCommand("Charlie");
 
-        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_PERSON_NOT_FOUND);
+        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_PARTIAL_PERSON_NOT_FOUND);
     }
 
     @Test
