@@ -52,8 +52,8 @@ public class AddCommandTest {
         CreateVendorCommand addCommand = new CreateVendorCommand(validVendor);
         ModelStub modelStub = new ModelStubWithVendor(validVendor);
 
-        assertThrows(CommandException.class, CreateVendorCommand.MESSAGE_DUPLICATE_VENDOR, ()
-            -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, CreateVendorCommand.MESSAGE_DUPLICATE_VENDOR,
+                () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -191,6 +191,10 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void updateFilteredEventList(Predicate<Event> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

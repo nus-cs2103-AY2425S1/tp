@@ -137,14 +137,15 @@ public class ModelManager implements Model {
     @Override
     public void addEvent(Event event) {
         addressBook.addEvent(event);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
     // =========== Filtered Vendor List Accessors
     // =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Vendor} backed by the
-     * internal list of {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Vendor} backed by the internal list of
+     * {@code versionedAddressBook}
      */
     @Override
     public ObservableList<Vendor> getFilteredVendorList() {
@@ -161,12 +162,18 @@ public class ModelManager implements Model {
     // =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Event} backed by the
-     * internal list of {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Event} backed by the internal list of
+     * {@code versionedAddressBook}
      */
     @Override
     public ObservableList<Event> getFilteredEventList() {
         return filteredEvents;
+    }
+
+    @Override
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
     }
 
     @Override
@@ -182,7 +189,8 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook) && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredVendors.equals(otherModelManager.filteredVendors);
+                && filteredVendors.equals(otherModelManager.filteredVendors)
+                && filteredEvents.equals(otherModelManager.filteredEvents);
     }
 
     // =========== Viewed Vendor Accessors
