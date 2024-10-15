@@ -87,12 +87,14 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+/* Styles background of the list view */
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
     -fx-background-color: derive(#FFFFFF, 20%);
 }
 
+/* Styles the contact info cell */
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
@@ -108,7 +110,7 @@
 }
 
 .list-cell:filled:hover #cardPane {
-    -fx-border-color: #3e7b91;
+    -fx-border-color: transparent;
     -fx-border-width: 1;
     -fx-background-color: #FFBF61;
 }
@@ -150,7 +152,7 @@
     -fx-text-fill: black !important;
 }
 
-/* Path to local store bar */
+/* Styles local storage path bar */
 .status-bar {
     -fx-background-color: #FFFFFF;
 }
@@ -182,7 +184,7 @@
     -fx-background-color: derive(#1d1d1d, 30%);
 }
 
-/* Drop down for File and Help */
+/* Styles back drop of drop down menu for Menu Bar */
 .context-menu {
     -fx-background-color: #CBD2A4;
 }
@@ -191,29 +193,35 @@
     -fx-text-fill: black;
 }
 
+/* Styles File and Help buttons */
+.menu {
+    -fx-background-color: transparent;
+}
+
+.menu:hover {
+    -fx-background-color: #FFBF61;
+}
+
 .menu-bar {
     -fx-background-color: #E9EED9;
 }
 
-/* File and Help buttons  */
+/* Styles File and Help dropdown menu */
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: black;
-    -fx-opacity: 0.9;
-    -fx-background-color: #CBD2A4;
     -fx-padding: 5pt;
+    -fx-background-color: transparent;
 }
 
-.menu .left-container {
-    -fx-background-color: black;
+.menu-item {
+    -fx-background-color: transparent;
 }
 
-/*.menu-item:focused {*/
-/*    -fx-background-color: transparent;*/
-/*    -fx-focus-color: transparent;*/
-/*    -fx-faint-focus-color: transparent;*/
-/*}*/
+.menu-item:hover {
+    -fx-background-color: #FFBF61;
+}
 
 /*
  * Metro style Push Button
