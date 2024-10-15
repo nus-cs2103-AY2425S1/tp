@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -8,6 +9,9 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.doctor.Speciality;
+import seedu.address.model.patient.DateOfBirth;
+import seedu.address.model.patient.Gender;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,16 +29,80 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    // Doctor-specific data fields
+    private final Speciality speciality;
+
+    // Patient-specific data fields
+    private final DateOfBirth dateOfBirth;
+    private final Gender gender;
+
     /**
-     * Every field must be present and not null.
+     * Constructor to initialize all fields. Only person fields must not be null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(
+        Name name,
+        Phone phone,
+        Email email,
+        Address address,
+        Speciality speciality,
+        DateOfBirth dateOfBirth,
+        Gender gender,
+        Set<Tag> tags
+    ) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+
+        this.speciality = speciality;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+    }
+
+    /**
+     * Constructor with the person fields.
+     */
+    public Person(
+        Name name,
+        Phone phone,
+        Email email,
+        Address address,
+        Set<Tag> tags
+    ) {
+        this(name, phone, email, address, null, null, null, tags);
+    }
+
+    /**
+     * Constructor with the speciality field.
+     */
+    public Person(
+        Name name,
+        Phone phone,
+        Email email,
+        Address address,
+        Speciality speciality,
+        Set<Tag> tags
+    ) {
+        this(name, phone, email, address, speciality, null, null, tags);
+        requireNonNull(speciality);
+    }
+
+    /**
+     * Constructor with the dateOfBirth and gender fields.
+     */
+    public Person(
+        Name name,
+        Phone phone,
+        Email email,
+        Address address,
+        DateOfBirth dateOfBirth,
+        Gender gender,
+        Set<Tag> tags
+    ) {
+        this(name, phone, email, address, null, dateOfBirth, gender, tags);
+        requireAllNonNull(dateOfBirth, gender);
     }
 
     public Name getName() {
@@ -51,6 +119,18 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Speciality getSpeciality() {
+        return speciality;
+    }
+
+    public DateOfBirth getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public Gender getGender() {
+        return gender;
     }
 
     /**
