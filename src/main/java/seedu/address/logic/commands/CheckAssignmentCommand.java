@@ -29,6 +29,8 @@ public class CheckAssignmentCommand extends Command {
      * @param assignment The assignment to be checked.
      */
     public CheckAssignmentCommand(Assignment assignment) {
+        requireNonNull(assignment);
+
         this.assignment = assignment;
     }
 
@@ -43,5 +45,17 @@ public class CheckAssignmentCommand extends Command {
         } catch (AssignmentNotFoundException e) {
             throw new CommandException(MESSAGE_ASSIGNMENT_NOT_FOUND);
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof CheckAssignmentCommand)) {
+            return false;
+        }
+        CheckAssignmentCommand e = (CheckAssignmentCommand) other;
+        return assignment.equals(e.assignment);
     }
 }

@@ -60,10 +60,6 @@ public class Tut {
         return this.students;
     }
 
-    public TutorialClass getTutorialClass() {
-        return this.tutorialClass;
-    }
-
     public boolean setAttendance(Date date, StudentId target) {
         requireNonNull(date);
         requireNonNull(target);
@@ -102,6 +98,10 @@ public class Tut {
                 .filter(student -> student.getName().equals(name))
                 .findFirst()
                 .orElse(null); // Returns null if no student is found
+    }
+
+    public TutorialClass getTutorialClass() {
+        return tutorialClass;
     }
 
     @Override

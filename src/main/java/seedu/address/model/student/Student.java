@@ -2,7 +2,6 @@ package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -19,11 +18,8 @@ public class Student {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
-    private final Email email;
 
     // Data fields
-    private final Address address;
     private final StudentId studentId;
     private final TutorialClass tutorialClass;
     private final Set<Tag> tags = new HashSet<>();
@@ -32,13 +28,9 @@ public class Student {
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address,
-                   StudentId studentId, TutorialClass tutorialClass, Set<Tag> tags, PresentDates presentDates) {
-        requireAllNonNull(name, phone, email, address, studentId, tutorialClass, tags);
+    public Student(Name name, StudentId studentId, TutorialClass tutorialClass, PresentDates presentDates) {
+        requireAllNonNull(name, studentId, tutorialClass);
         this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
         this.tags.addAll(tags);
         this.presentDates = presentDates != null ? presentDates : new PresentDates(new HashSet<>());
         this.studentId = studentId;
@@ -48,19 +40,6 @@ public class Student {
     public Name getName() {
         return name;
     }
-
-    public Phone getPhone() {
-        return phone;
-    }
-
-    public Email getEmail() {
-        return email;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
     public PresentDates getPresentDates() {
         return presentDates;
     }
@@ -71,14 +50,6 @@ public class Student {
 
     public TutorialClass getTutorialClass() {
         return tutorialClass;
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
     }
 
     /**
@@ -98,6 +69,19 @@ public class Student {
         presentDates.setAttendance(tutDate);
     }
     /**
+     * Returns true if both students have the same student id.
+     * This defines a weaker notion of equality between two students.
+     */
+    public boolean isSameStudentId(StudentId otherStudentId) {
+        if (otherStudentId == this.studentId) {
+            return true;
+        }
+
+        return otherStudentId != null
+                && otherStudentId.equals(getStudentId());
+    }
+
+    /**
      * Returns true if both students have the same identity and data fields.
      * This defines a stronger notion of equality between two students.
      */
@@ -114,10 +98,6 @@ public class Student {
 
         Student otherStudent = (Student) other;
         return name.equals(otherStudent.name)
-                && phone.equals(otherStudent.phone)
-                && email.equals(otherStudent.email)
-                && address.equals(otherStudent.address)
-                && tags.equals(otherStudent.tags)
                 && studentId.equals(otherStudent.studentId)
                 && tutorialClass.equals(otherStudent.tutorialClass);
     }
@@ -125,19 +105,15 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, studentId, tutorialClass, tags);
+        return Objects.hash(name, studentId, tutorialClass);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
                 .add("student id", studentId)
                 .add("tutorial class", tutorialClass)
-                .add("tags", tags)
                 .toString();
     }
 

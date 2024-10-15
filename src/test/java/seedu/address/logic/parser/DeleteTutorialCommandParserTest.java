@@ -1,26 +1,30 @@
 package seedu.address.logic.parser;
 
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT1;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.DeleteAssignmentCommand;
-public class DeleteAssignmentCommandPaserTest {
+import seedu.address.logic.commands.DeleteTutorialCommand;
+import seedu.address.model.student.TutorialClass;
 
-    private DeleteAssignmentCommandParser parser = new DeleteAssignmentCommandParser();
+
+public class DeleteTutorialCommandParserTest {
+
+
+    private DeleteTutorialCommandParser parser = new DeleteTutorialCommandParser();
+
+    private final TutorialClass tutorialClass = new TutorialClass("1000");
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "Assignment 1", new DeleteAssignmentCommand(ASSIGNMENT1));
+        assertParseSuccess(parser, "1000", new DeleteTutorialCommand(tutorialClass));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteAssignmentCommand.MESSAGE_USAGE));
+                DeleteTutorialCommand.MESSAGE_USAGE));
     }
 }

@@ -144,6 +144,19 @@ public class ModelManager implements Model {
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return isSuccess;
     }
+
+    @Override
+    public void deleteTutorial(TutorialClass tutorialClass) {
+        requireNonNull(tutorialClass);
+        this.addressBook.deleteTutorial(tutorialClass);
+    }
+
+    @Override
+    public boolean hasTutorialClass(TutorialClass tutorialClass) {
+        requireNonNull(tutorialClass);
+        return addressBook.hasTutorialClass(tutorialClass);
+    }
+
     //=========== Assignment ================================================================================
 
     @Override
@@ -188,6 +201,14 @@ public class ModelManager implements Model {
     @Override
     public String listAssignments() {
         return assignmentList.toString();
+    }
+
+    //=========== Filtered Student List (student ID)
+
+    @Override
+    public boolean hasStudentWithId(StudentId studentId) {
+        requireNonNull(studentId);
+        return addressBook.hasStudentId(studentId);
     }
 
     //=========== Filtered Student List Accessors =============================================================
