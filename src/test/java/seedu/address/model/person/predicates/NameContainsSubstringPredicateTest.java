@@ -16,14 +16,17 @@ public class NameContainsSubstringPredicateTest {
         String firstPredicateSubstring = "first";
         String secondPredicateSubstring = "first second";
 
-        NameContainsSubstringPredicate firstPredicate = new NameContainsSubstringPredicate(firstPredicateSubstring);
-        NameContainsSubstringPredicate secondPredicate = new NameContainsSubstringPredicate(secondPredicateSubstring);
+        NameContainsSubstringPredicate firstPredicate =
+                new NameContainsSubstringPredicate(firstPredicateSubstring);
+        NameContainsSubstringPredicate secondPredicate =
+                new NameContainsSubstringPredicate(secondPredicateSubstring);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        NameContainsSubstringPredicate firstPredicateCopy = new NameContainsSubstringPredicate(firstPredicateSubstring);
+        NameContainsSubstringPredicate firstPredicateCopy =
+                new NameContainsSubstringPredicate(firstPredicateSubstring);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false

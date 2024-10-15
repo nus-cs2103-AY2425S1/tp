@@ -1,10 +1,13 @@
 package seedu.address.model.person.predicates;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import seedu.address.testutil.PersonBuilder;
 
-import static org.junit.jupiter.api.Assertions.*;
+import seedu.address.testutil.PersonBuilder;
 
 public class JobContainsSubstringPredicateTest {
 
@@ -13,14 +16,17 @@ public class JobContainsSubstringPredicateTest {
         String firstPredicateSubstring = "first";
         String secondPredicateSubstring = "first second";
 
-        JobContainsSubstringPredicate firstPredicate = new JobContainsSubstringPredicate(firstPredicateSubstring);
-        JobContainsSubstringPredicate secondPredicate = new JobContainsSubstringPredicate(secondPredicateSubstring);
+        JobContainsSubstringPredicate firstPredicate =
+                new JobContainsSubstringPredicate(firstPredicateSubstring);
+        JobContainsSubstringPredicate secondPredicate =
+                new JobContainsSubstringPredicate(secondPredicateSubstring);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        JobContainsSubstringPredicate firstPredicateCopy = new JobContainsSubstringPredicate(firstPredicateSubstring);
+        JobContainsSubstringPredicate firstPredicateCopy =
+                new JobContainsSubstringPredicate(firstPredicateSubstring);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false

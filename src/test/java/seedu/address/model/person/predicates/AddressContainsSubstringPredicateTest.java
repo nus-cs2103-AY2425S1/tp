@@ -16,14 +16,17 @@ public class AddressContainsSubstringPredicateTest {
         String firstPredicateSubstring = "first";
         String secondPredicateSubstring = "first second";
 
-        AddressContainsSubstringPredicate firstPredicate = new AddressContainsSubstringPredicate(firstPredicateSubstring);
-        AddressContainsSubstringPredicate secondPredicate = new AddressContainsSubstringPredicate(secondPredicateSubstring);
+        AddressContainsSubstringPredicate firstPredicate =
+                new AddressContainsSubstringPredicate(firstPredicateSubstring);
+        AddressContainsSubstringPredicate secondPredicate =
+                new AddressContainsSubstringPredicate(secondPredicateSubstring);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        AddressContainsSubstringPredicate firstPredicateCopy = new AddressContainsSubstringPredicate(firstPredicateSubstring);
+        AddressContainsSubstringPredicate firstPredicateCopy =
+                new AddressContainsSubstringPredicate(firstPredicateSubstring);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
