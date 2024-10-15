@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -13,7 +14,12 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.CommandTestUtil;
+import seedu.address.model.person.Grade;
+import seedu.address.model.person.Module;
 import seedu.address.testutil.PersonBuilder;
+
+import java.util.ArrayList;
 
 public class PersonTest {
 
@@ -54,6 +60,39 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
+    }
+
+    @Test
+    public void updateModules_validInputs_success() {
+        // adding module
+        Person person = new PersonBuilder().build();
+        Module validModule = new Module(CommandTestUtil.VALID_MODULE_AMY);
+        ArrayList<Module> updatedModules = new ArrayList<>();
+        updatedModules.add(validModule);
+        Person personWithModule = person.addModule(validModule);
+        assertEquals(personWithModule,
+                new Person(person.getStudentId(),
+                        person.getName(),
+                        person.getPhone(),
+                        person.getEmail(),
+                        person.getAddress(),
+                        person.getCourse(),
+                        person.getTag(),
+                        updatedModules));
+
+        // adding grade
+        Grade validGrade = new Grade(CommandTestUtil.VALID_GRADE_AMY);
+        updatedModules.get(0).setGrade(validGrade);
+        Person personWithModuleAndGrade = personWithModule.setModuleGrade(validModule, validGrade);
+        assertEquals(personWithModuleAndGrade,
+                new Person(person.getStudentId(),
+                        person.getName(),
+                        person.getPhone(),
+                        person.getEmail(),
+                        person.getAddress(),
+                        person.getCourse(),
+                        person.getTag(),
+                        updatedModules));
     }
 
     @Test
