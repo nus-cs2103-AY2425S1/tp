@@ -4,12 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
 import java.util.Set;
-import java.util.TreeMap;
 
 import seedu.address.model.tag.Tag;
 
 /**
- * Encapsulates the code required to represent a target user of the application.
+ * Encapsulates the code required to represent a target user (doctor) of the application.
  */
 public class Doctor extends Person{
     /**
