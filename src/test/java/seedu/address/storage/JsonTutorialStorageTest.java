@@ -60,6 +60,8 @@ public class JsonTutorialStorageTest {
 
         // Step 4: Optionally, check if the file has content written (size > 0)
         assertTrue(Files.size(filePath) > 0, "The file should not be empty after saving.");
+
+        Files.deleteIfExists(filePath);
     }
 
 
