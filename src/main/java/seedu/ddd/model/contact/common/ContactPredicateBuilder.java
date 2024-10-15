@@ -20,7 +20,7 @@ import seedu.ddd.logic.parser.ParserUtil;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.tag.Tag;
 
-
+//This class was generated with the help of ChatGPT for the logic to combine different predicates.
 /**
  * Builds a chain of predicates to the List command depending on the PREFIX present in argMultimap.
  */
