@@ -4,6 +4,7 @@
     "phone": "94351253",
     "address": "123, Jurong West Ave 6, #08-111",
     "gradeLevel": "ABRSM 1",
+    "pianoPieces": [],
     "regularLesson": {
       "lessonDay": "MONDAY",
       "startTime": "16:00",
@@ -14,6 +15,7 @@
     "phone": "94351253",
     "address": "4th street",
     "gradeLevel": "ABRSM 2",
+    "pianoPieces": [],
     "regularLesson": {
       "lessonDay": "MONDAY",
       "startTime": "16:00",
