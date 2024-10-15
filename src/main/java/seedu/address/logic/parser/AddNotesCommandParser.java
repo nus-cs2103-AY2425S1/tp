@@ -27,16 +27,16 @@ public class AddNotesCommandParser implements Parser<AddNotesCommand> {
                 PREFIX_NOTES);
 
         Index index;
+        Note note;
         try {
+            String noteName = argMultimap.getValue(PREFIX_NOTES).orElse("");
+            note = ParserUtil.parseNote(noteName);
+
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddNotesCommand.MESSAGE_USAGE), ive);
         }
-
-        String noteName = argMultimap.getValue(PREFIX_NOTES).get();
-
-        Note note = ParserUtil.parseNote(noteName);
 
         return new AddNotesCommand(index, note);
     }
