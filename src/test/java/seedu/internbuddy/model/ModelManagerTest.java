@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.internbuddy.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 import static seedu.internbuddy.testutil.Assert.assertThrows;
-import static seedu.internbuddy.testutil.TypicalCompanies.ALICE;
-import static seedu.internbuddy.testutil.TypicalCompanies.BENSON;
+import static seedu.internbuddy.testutil.TypicalCompanies.GOOGLE;
+import static seedu.internbuddy.testutil.TypicalCompanies.MICROSOFT;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,10 +18,16 @@ import seedu.internbuddy.commons.core.GuiSettings;
 import seedu.internbuddy.model.company.NameContainsKeywordsPredicate;
 import seedu.internbuddy.testutil.AddressBookBuilder;
 
+/**
+ * Test class for ModelManagerCompany
+ */
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
 
+    /**
+     * Test for constructor
+     */
     @Test
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
@@ -79,23 +85,31 @@ public class ModelManagerTest {
 
     @Test
     public void hasCompany_companyNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasCompany(ALICE));
+        assertFalse(modelManager.hasCompany(GOOGLE));
     }
 
+    /**
+     * Test for deleteCompany
+     */
     @Test
     public void hasCompany_companyInAddressBook_returnsTrue() {
-        modelManager.addCompany(ALICE);
-        assertTrue(modelManager.hasCompany(ALICE));
+        modelManager.addCompany(GOOGLE);
+        assertTrue(modelManager.hasCompany(GOOGLE));
     }
 
     @Test
     public void getFilteredCompanyList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredCompanyList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> modelManager
+            .getFilteredCompanyList().remove(0));
     }
 
+    /**
+     * Test for equals method
+     */
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withCompany(ALICE).withCompany(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder()
+            .withCompany(GOOGLE).withCompany(MICROSOFT).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -117,7 +131,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
+        String[] keywords = GOOGLE.getName().fullName.split("\\s+");
         modelManager.updateFilteredCompanyList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 

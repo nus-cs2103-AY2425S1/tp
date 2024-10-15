@@ -15,54 +15,58 @@ import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
 import seedu.internbuddy.model.company.Name;
 import seedu.internbuddy.model.company.Phone;
+import seedu.internbuddy.model.company.Status;
 import seedu.internbuddy.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Company}.
  */
-class JsonAdaptedCompany {
-
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "company's %s field is missing!";
+public class JsonAdaptedCompany {
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Company's %s field is missing!";
 
     private final String name;
     private final String phone;
     private final String email;
     private final String address;
+    private final String status;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedcompany} with the given company details.
+     * Constructs a {@link JsonAdaptedCompany} with the given company details.
      */
     @JsonCreator
     public JsonAdaptedCompany(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("status") String status) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.status = status;
         if (tags != null) {
             this.tags.addAll(tags);
         }
     }
 
     /**
-     * Converts a given {@code company} into this class for Jackson use.
+     * Converts a given {@link Company} into this class for Jackson use.
      */
     public JsonAdaptedCompany(Company source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        status = source.getStatus().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
     }
 
     /**
-     * Converts this Jackson-friendly adapted company object into the model's {@code company} object.
+     * Converts this Jackson-friendly adapted company object into the model's {@link Company} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted company.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Company toModelType() throws IllegalValueException {
         final List<Tag> companyTags = new ArrayList<>();
@@ -102,9 +106,14 @@ class JsonAdaptedCompany {
         }
         final Address modelAddress = new Address(address);
 
+        if (status == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
+        }
+        final Status modelStatus = new Status(status);
+
         final Set<Tag> modelTags = new HashSet<>(companyTags);
 
-        return new Company(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Company(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelStatus);
     }
 
 }

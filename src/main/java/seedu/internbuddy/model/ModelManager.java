@@ -111,10 +111,10 @@ public class ModelManager implements Model {
         addressBook.setCompany(target, editedCompany);
     }
 
-    //=========== Filtered company List Accessors =============================================================
+    //=========== Filtered Company List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code company} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Company} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override

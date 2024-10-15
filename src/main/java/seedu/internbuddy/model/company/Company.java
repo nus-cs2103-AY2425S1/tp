@@ -30,7 +30,7 @@ public class Company {
      * Every field must be present and not null.
      */
     public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Status status) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, address, tags, status);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -40,7 +40,7 @@ public class Company {
     }
 
     /**
-     * Overloaded constructor for Company which sets status as INTERESTED by default
+     * Construct but with default value for {@code status = "INTERESTED"}.
      */
     public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -76,7 +76,9 @@ public class Company {
         return Collections.unmodifiableSet(tags);
     }
 
-    public Status getStatus() { return status; }
+    public Status getStatus() {
+        return status;
+    }
 
     /**
      * Returns true if both companies have the same name.

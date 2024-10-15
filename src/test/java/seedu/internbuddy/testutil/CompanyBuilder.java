@@ -94,13 +94,16 @@ public class CompanyBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Status} of the {@code company} that we are building.
+     */
     public CompanyBuilder withStatus(String status) {
         this.status = new Status(status);
         return this;
     }
 
     public Company build() {
-        return new Company(name, phone, email, address, tags);
+        return new Company(name, phone, email, address, tags, status);
     }
 
 }

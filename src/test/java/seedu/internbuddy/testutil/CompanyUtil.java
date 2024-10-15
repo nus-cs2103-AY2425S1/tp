@@ -4,6 +4,7 @@ import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -37,6 +38,7 @@ public class CompanyUtil {
         company.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
+        sb.append(PREFIX_STATUS + company.getStatus().value + " ");
         return sb.toString();
     }
 
