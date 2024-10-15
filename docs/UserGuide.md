@@ -87,7 +87,7 @@ add n/NAME p/PHONE_NUMBER e/EMAIL
 
 #### Successful Execution
 **Example**
-> **Context**: Adding a client named `John Doe` with phone number `98765432` and email `johnd@example.com`.
+> **Use Case**: Adding a client named `John Doe` with phone number `98765432` and email `johnd@example.com`.
 >
 > **Input**:  `add n/John Doe p/98765432 e/johnd@example.com`
 >
@@ -126,14 +126,14 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]
 
 #### Successful Execution
 **Example 1**
-> **Context**: Editing phone number and email address of the 1st person in the list to be `91234567` and `johndoe@example.com` respectively.
+> **Use Case**: Editing phone number and email address of the 1st person in the list to be `91234567` and `johndoe@example.com` respectively.
 > 
 > **Input**:  `edit 1 p/91234567 e/johndoe@example.com`
 >
 > **Output**: 
 
 **Example 2** 
-> **Context**: Editing the name of the 2nd person in the list to be `Betsy Crower`.
+> **Use Case**: Editing the name of the 2nd person in the list to be `Betsy Crower`.
 > 
 > **Input**: `edit 2 n/Betsy Crower`
 > 
@@ -157,10 +157,29 @@ find KEYWORD [MORE_KEYWORDS]
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-#### Examples
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+#### Successful Execution
+**Example 1**
+> **Use Case**: Finding all clients with `John` in their names.
+> 
+> **Input**: `find John`
+> 
+> **Output**: 
+
+**Example 2**
+> **Use Case**: Finding all clients with `Alex` *OR* `David` in their names.
+> 
+> **Input**: `find alex david`
+> 
+> **Output**: 2 persons listed!
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+#### Failed Execution
+**Example 1**
+> **User Error**: Attempting to find a user that does not exist.
+> 
+> **Input**: `find BabyLockEmDoors`
+> 
+> **Output**:
 
 ### Deleting a person : `delete`
 
@@ -173,8 +192,21 @@ delete NAME
 
 * Deletes the person with the specified `NAME`.
 
-#### Examples
-* `list` followed by `delete John Doe` deletes the person with the name John Doe in the address book.
+#### Successful Execution
+**Example**
+> **Use Case**: Deleting `John Doe` from the address book.
+> 
+> **Input**: `delete John Doe`
+> 
+> **Output**:
+
+#### Failed Execution
+**Example**
+> **User Error**: Attempting to delete someone that does not exist.
+> 
+> **Input**:
+> 
+> **Output**:
 
 ### Clearing all entries : `clear`
 
