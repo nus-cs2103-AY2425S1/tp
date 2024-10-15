@@ -29,7 +29,7 @@ public class PolicyTest {
     }
 
     @Test
-    public void constructor_nullValues_throwsNullPointerException() {
+    public void constructor_nullInputs_throwsNullPointerException() {
         final LocalDate expiryDate = LocalDate.now();
         final Person insuree = new PersonBuilder().build();
 
