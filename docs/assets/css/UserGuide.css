@@ -4,4 +4,5 @@
     padding: 10px; /* Add padding inside the box */
     margin: 10px 0; /* Space around the box */
     border-radius: 5px; /* Rounded corners */
+    color: white; /* Changes the text color to white */
 }
