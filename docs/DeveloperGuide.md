@@ -594,15 +594,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **User**: A letting agent that is using TrueRental to manage the contact information of their clients
-* **Client**: An individual that is renting a property from a letting agent
-* **Letting agent**: An individual that facilitates a property rental agreement
-* **System**: TrueRental desktop application
-* **Client's information**: A client's information containing name, phone number and email, not meant to be shared with others.
-* **Client's rental information**: A client's rental information containing address, rental start date, rental end date, rent due date, monthly rent amount, deposit amount, tenant list, not meant to be shared with others.
-* **MSS**: Main Success Scenario.
+* <a id="glossary-mainstream-os"/>**Mainstream OS**: Windows, Linux, Unix, MacOS
+* <a id="glossary-private-contact-detail"/>**Private contact detail**: A contact detail that is not meant to be shared with others
+* <a id="glossary-user"/>**User**: A letting agent that is using TrueRental to manage the contact information of their clients
+* <a id="glossary-client"/>**Client**: An individual that is renting a property from a letting agent
+* <a id="glossary-letting-agent"/>**Letting agent**: An individual that facilitates a property rental agreement
+* <a id="glossary-system"/>**System**: TrueRental desktop application
+* <a id="glossary-clients-information"/>**Client's information**: A client's information containing name, phone number and email, not meant to be shared with others.
+* <a id="glossary-rental-information"/>**Client's rental information**: A client's rental information containing address, rental start date, rental end date, rent due date, monthly rent amount, deposit amount, tenant list, not meant to be shared with others.
+* <a id="glossary-mss"/>**MSS**: Main Success Scenario.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
