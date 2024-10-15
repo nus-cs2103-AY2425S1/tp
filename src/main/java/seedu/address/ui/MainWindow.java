@@ -17,8 +17,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.project.Id;
-import seedu.address.model.project.Name;
+import seedu.address.model.project.ProjectId;
+import seedu.address.model.project.ProjectName;
 import seedu.address.model.project.Project;
 
 /**
@@ -124,7 +124,7 @@ public class MainWindow extends UiPart<Stage> {
         // TODO: Fix logic.getFilteredProjectList() return empty ObservableArray bug
         //projectListPanel = new ProjectListPanel(logic.getFilteredProjectList());
         projectListPanel = new ProjectListPanel(FXCollections
-                .observableArrayList(new Project(new Name("Project Alpha"), new Id("A1234567"))));
+                .observableArrayList(new Project(new ProjectName("Project Alpha"), new ProjectId("A1234567"))));
         projectListPanelPlaceholder.getChildren().add(projectListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

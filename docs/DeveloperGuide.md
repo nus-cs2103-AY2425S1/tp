@@ -57,7 +57,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
+* defines its *API* in an `interface` with the same projectName as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
@@ -111,7 +111,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command projectName e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -288,9 +288,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                                         | remove an employee                                                               | remove entries that I no longer need                                                |
 | `* * *`  | user                                                         | remove a project                                                                 | remove entries that I no longer need                                                |
 | `* * *`  | user                                                         | remove a job candidate                                                           | remove entries that I no longer need                                                |
-| `* * *`  | user                                                         | search for employee details by name or ID                                        | locate employee details without having to go through the entire list                |
-| `* * *`  | user                                                         | search for project details by name or ID                                         | locate project details without having to go through the entire list                 |
-| `* * *`  | user                                                         | search for job candidates by name or ID                                          | locate candidate details without having to go through the entire list               |
+| `* * *`  | user                                                         | search for employee details by projectName or ID                                        | locate employee details without having to go through the entire list                |
+| `* * *`  | user                                                         | search for project details by projectName or ID                                         | locate project details without having to go through the entire list                 |
+| `* * *`  | user                                                         | search for job candidates by projectName or ID                                          | locate candidate details without having to go through the entire list               |
 | `* * *`  | user                                                         | assign employees to projects                                                     | update manpower allocation                                                          |
 | `* * *`  | user                                                         | un-assign employees to projects                                                  | update manpower allocation                                                          |
 | `* *`    | user                                                         | search for employees by skill sets                                               | find employees with desired skills without having to go through the entire list     |
@@ -309,7 +309,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user that recruits job candidates for projects               | filter job candidates with certain skill sets                                    | contact job candidates with skill sets sought after by the company                  |
 | `* *`    | frequent user                                                | see a summary of upcoming interviews and project deadlines upon starting the App | stay updated without searching or filtering for details                             |
 | `* *`    | busy user                                                    | have most responses return within 200 ms                                         | perform actions smoothly and quickly                                                |
-| `*`      | user with many persons in the App                            | sort persons by name                                                             | locate a person easily                                                              |
+| `*`      | user with many persons in the App                            | sort persons by projectName                                                             | locate a person easily                                                              |
 | `*`      | user that has entered a lot of wrong data                    | reset the data to its default state                                              | start over with fresh data                                                          |
 | `*`      | user with a lot of old data                                  | archive outdated records                                                         | keep the database clutter-free and relevant                                         |
 | `*`      | user that prefers short-form commands and keyboard shortcuts | use short-form commands and keyboard shortcuts to perform regular functions      | perform actions more efficiently                                                    |
@@ -330,7 +330,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list employees.
 2. HRConnect shows a list of employees with their ids.
-3. User requests to delete a specific employee in the list by their id.
+3. User requests to delete a specific employee in the list by their projectId.
 4. HRConnect deletes the person.
 
    Use case ends.
@@ -341,7 +341,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-- 3a. The given id is invalid.
+- 3a. The given projectId is invalid.
 
   - 3a1. HRConnect shows an error message.
 
@@ -355,7 +355,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list projects.
 2. HRConnect shows a list of projects with their ids.
-3. User requests to delete a specific project in the list by its id.
+3. User requests to delete a specific project in the list by its projectId.
 4. HRConnect deletes the project.
 
    Use case ends.
@@ -366,7 +366,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-- 3a. The given id is invalid.
+- 3a. The given projectId is invalid.
 
   - 3a1. HRConnect shows an error message.
 
@@ -382,7 +382,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. HRConnect shows a list of employees with their ids.
 3. User requests to list projects.
 4. HRConnect shows a list of projects with their ids.
-5. User requests to assign a specific employee by their id to a specific project by its id.
+5. User requests to assign a specific employee by their projectId to a specific project by its projectId.
 6. HRConnect assigns the employee to the project.
 
    Use case ends.
@@ -401,7 +401,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   - 5a1. HRConnect shows an error message.
 
-    HRConnect displays the list of projects if the project id is invalid and the list of employees if the employee id is invalid. Use case resume at step 4.
+    HRConnect displays the list of projects if the project projectId is invalid and the list of employees if the employee projectId is invalid. Use case resume at step 4.
 
 ---
 
@@ -411,9 +411,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list projects.
 2. HRConnect shows a list of projects with their ids.
-3. User selects a project by its id.
+3. User selects a project by its projectId.
 4. HRConnect shows a list of employees assigned to the project.
-5. User requests to un-assign a specific employee by their id from the selected project.
+5. User requests to un-assign a specific employee by their projectId from the selected project.
 6. HRConnect un-assigns the employee from the project.
 
    Use case ends.
@@ -428,7 +428,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-- 5a. The given id is invalid.
+- 5a. The given projectId is invalid.
 
   - 5a1. HRConnect shows an error message.
 

@@ -14,6 +14,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.project.ProjectId;
+import seedu.address.model.project.ProjectName;
 import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
@@ -38,7 +40,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code String employeeId} into a {@code EmployeeId}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
@@ -164,5 +166,35 @@ public class ParserUtil {
             skillSet.add(parseSkill(skill));
         }
         return skillSet;
+    }
+
+    /**
+     * Parses a {@code String projectId} into a {@code ProjectId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code projectId} is invalid.
+     */
+    public static ProjectId parseProjectId(String projectId) throws ParseException {
+        requireNonNull(projectId);
+        String trimmedProjectId = projectId.trim();
+        if (!ProjectId.isValidId(trimmedProjectId)) {
+            throw new ParseException(ProjectId.MESSAGE_CONSTRAINTS);
+        }
+        return new ProjectId(trimmedProjectId);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static ProjectName parseProjectName(String projectName) throws ParseException {
+        requireNonNull(projectName);
+        String trimmedProjectName = projectName.trim();
+        if (!ProjectName.isValidName(trimmedProjectName)) {
+            throw new ParseException(ProjectName.MESSAGE_CONSTRAINTS);
+        }
+        return new ProjectName(trimmedProjectName);
     }
 }
