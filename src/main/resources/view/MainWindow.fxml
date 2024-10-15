@@ -49,18 +49,10 @@
 
         <SplitPane VBox.vgrow="ALWAYS" styleClass="pane-with-border">
           <VBox fx:id="guestList" styleClass="pane-with-border" minWidth="200" prefWidth="200" VBox.vgrow="ALWAYS">
-            <Label text="Guest List" styleClass="label-bright"/>
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
             <StackPane fx:id="guestListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
           <VBox fx:id="vendorList" styleClass="pane-with-border" minWidth="200" prefWidth="200" VBox.vgrow="ALWAYS">
-            <Label text="Vendor List" styleClass="label-bright"/>
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
             <StackPane fx:id="vendorListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
         </SplitPane>
