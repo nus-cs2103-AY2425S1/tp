@@ -26,8 +26,6 @@ public class EmergencyPhoneCommand extends Command {
             + "Parameters: n/NAME en/[EMERGENCY_NUMBER]\n"
             + "Example: " + COMMAND_WORD + " 1 ep/91234567";
 
-    public static final String MESSAGE_ARGUMENTS = "Name: %1$s, ECNumber: %2$s";
-    public static final String MESSAGE_INVALID_NAME = "The name you entered is not in the addressbook!";
     public static final String MESSAGE_EMERGENCY_PHONE_SUCCESS = "Added emergency phone for %1$s\n"
             + "Emergency Contact Number: %2$s";
 

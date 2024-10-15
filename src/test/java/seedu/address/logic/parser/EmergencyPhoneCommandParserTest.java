@@ -25,11 +25,6 @@ public class EmergencyPhoneCommandParserTest {
     private EmergencyPhoneCommandParser parser = new EmergencyPhoneCommandParser();
 
     @Test
-    public void parse_indexSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
-    }
-
-    @Test
     public void parse_missingParts_failure() {
         // no index specified
         assertParseFailure(parser, VALID_EMERGENCY_PHONE_AMY, MESSAGE_INVALID_FORMAT);
