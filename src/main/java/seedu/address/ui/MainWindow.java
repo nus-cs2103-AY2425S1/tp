@@ -156,7 +156,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     private void displayPersonDetails(Person person) {
         personDetailView = new PersonDetailView(person);
-        System.out.println("Reached Here: " + person.getName().fullName);
         personDetailViewPlaceholder.getChildren().setAll(personDetailView.getRoot());
     }
 
