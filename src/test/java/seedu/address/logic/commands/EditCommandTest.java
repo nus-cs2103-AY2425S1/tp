@@ -37,7 +37,10 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().build();
+        // The issue here is that since a default person does not specify the remark field, it will be left untouched
+        // Hence, we need to add the remark field of the "TypicalPersons" (index=0) to show that it is unedited
+
+        Person editedPerson = new PersonBuilder().withRemark("remark for this person :D").build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
