@@ -23,11 +23,10 @@ public class AddNotesCommand extends Command {
     public static final String COMMAND_WORD = "addnotes";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the notes of the person identified "
+            + ": Add the note of the person identified "
             + "by the index number used in the last person listing. "
-            + "New note will be appended to the notes currently stored."
-            + " To delete notes of a person, input 'delete' after n/ instead of a note\n"
-            + "Parameters: Addnotes (must be a positive integer) "
+            + "New note will be appended to the notes currently stored.\n"
+            + "Parameters: INDEX (must be a positive integer) "
             + "n/ [NOTES]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "n/ High profile client.";
