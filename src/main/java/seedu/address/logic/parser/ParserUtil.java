@@ -133,7 +133,7 @@ public class ParserUtil {
         requireNonNull(dateOfLastVisit);
         String trimmedDateOfLastVisit = dateOfLastVisit.trim();
         if (!DateOfLastVisit.isValidDateOfLastVisit(trimmedDateOfLastVisit)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+            throw new ParseException(DateOfLastVisit.MESSAGE_CONSTRAINTS);
         }
         return new DateOfLastVisit(trimmedDateOfLastVisit);
     }
