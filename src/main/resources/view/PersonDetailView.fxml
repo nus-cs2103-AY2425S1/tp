@@ -70,11 +70,11 @@
                 <Text styleClass="detail-sub-header"> Upcoming Events </Text>
 
                 <!-- GridPane for displaying events -->
-                <GridPane fx:id="gridPane" hgap="10" vgap="10" VBox.vgrow="ALWAYS">
+                <GridPane fx:id="gridPane" hgap="10" vgap="15" VBox.vgrow="ALWAYS">
                     <!-- Header Row -->
                     <columnConstraints>
                         <ColumnConstraints percentWidth="100"/>
-                        <ColumnConstraints percentWidth="100"/>
+                        <ColumnConstraints percentWidth="80"/>
                         <ColumnConstraints percentWidth="50"/>
                     </columnConstraints>
 
@@ -90,10 +90,31 @@
                                 style="-fx-background-color: #D3D3D3; -fx-min-height: 1px;"/>
                     </children>
 
-                    <!-- Data Row -->
+                    <!-- Data Row (Placeholder) -->
                     <children>
-                        <Region GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="3"
-                                style="-fx-background-color: #D3D3D3; -fx-min-height: 1px;"/>
+                        <Label styleClass="grid-content-name" GridPane.rowIndex="2" GridPane.columnIndex="0"> Christmas Gathering </Label>
+                        <Label styleClass="grid-content-date" GridPane.rowIndex="2" GridPane.columnIndex="1"> December 5-7, 2024 </Label>
+                        <Label styleClass="grid-content-status-accept" GridPane.rowIndex="2" GridPane.columnIndex="2"> Attending </Label>
+                    </children>
+                    <children>
+                        <Label styleClass="grid-content-name" GridPane.rowIndex="3" GridPane.columnIndex="0"> Christmas Gathering </Label>
+                        <Label styleClass="grid-content-date" GridPane.rowIndex="3" GridPane.columnIndex="1"> December 5-7, 2024 </Label>
+                        <Label styleClass="grid-content-status-reject" GridPane.rowIndex="3" GridPane.columnIndex="2"> Rejected </Label>
+                    </children>
+                    <children>
+                        <Label styleClass="grid-content-name" GridPane.rowIndex="4" GridPane.columnIndex="0"> Christmas Gathering </Label>
+                        <Label styleClass="grid-content-date" GridPane.rowIndex="4" GridPane.columnIndex="1"> December 5-7, 2024 </Label>
+                        <Label styleClass="grid-content-status-reject" GridPane.rowIndex="4" GridPane.columnIndex="2"> Rejected </Label>
+                    </children>
+                    <children>
+                        <Label styleClass="grid-content-name" GridPane.rowIndex="5" GridPane.columnIndex="0"> Christmas Gathering </Label>
+                        <Label styleClass="grid-content-date" GridPane.rowIndex="5" GridPane.columnIndex="1"> December 5-7, 2024 </Label>
+                        <Label styleClass="grid-content-status-pending" GridPane.rowIndex="5" GridPane.columnIndex="2"> Pending </Label>
+                    </children>
+                    <children>
+                        <Label styleClass="grid-content-name" GridPane.rowIndex="6" GridPane.columnIndex="0"> Christmas Gathering </Label>
+                        <Label styleClass="grid-content-date" GridPane.rowIndex="6" GridPane.columnIndex="1"> December 5-7, 2024 </Label>
+                        <Label styleClass="grid-content-status-accept" GridPane.rowIndex="6" GridPane.columnIndex="2"> Attending </Label>
                     </children>
                 </GridPane>
             </VBox>
