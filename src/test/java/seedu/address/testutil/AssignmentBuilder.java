@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentId;
 import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
 
@@ -8,9 +9,11 @@ import seedu.address.model.project.Project;
  * A utility class to help with building Assignment objects.
  */
 public class AssignmentBuilder {
+    public static final AssignmentId DEFAULT_ASSIGNMENT_ID = new AssignmentId("1");
     public static final Project DEFAULT_PROJECT = TypicalProjects.ALPHA;
     public static final Person DEFAULT_PERSON = TypicalPersons.ALICE;
 
+    private AssignmentId assignmentId;
     private Project project;
     private Person person;
 
@@ -18,6 +21,7 @@ public class AssignmentBuilder {
      * Creates a {@code AssignmentBuilder} with the default details.
      */
     public AssignmentBuilder() {
+        assignmentId = DEFAULT_ASSIGNMENT_ID;
         project = DEFAULT_PROJECT;
         person = DEFAULT_PERSON;
     }
@@ -48,6 +52,6 @@ public class AssignmentBuilder {
     }
 
     public Assignment build() {
-        return new Assignment(project, person);
+        return new Assignment(assignmentId, project, person);
     }
 }

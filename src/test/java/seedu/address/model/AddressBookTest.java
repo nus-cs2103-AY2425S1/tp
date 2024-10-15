@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.project.Project;
@@ -52,7 +53,8 @@ public class AddressBookTest {
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         List<Project> newProjects = Arrays.asList(ALPHA);
-        AddressBookStub newData = new AddressBookStub(newPersons, newProjects);
+        List<Assignment> newAssignments = Arrays.asList();
+        AddressBookStub newData = new AddressBookStub(newPersons, newProjects, newAssignments);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -112,10 +114,12 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Project> projects = FXCollections.observableArrayList();
+        private final ObservableList<Assignment> assignments = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons, Collection<Project> projects) {
+        AddressBookStub(Collection<Person> persons, Collection<Project> projects, Collection<Assignment> assignments) {
             this.persons.setAll(persons);
             this.projects.setAll(projects);
+            this.assignments.setAll(assignments);
         }
 
         @Override
@@ -126,6 +130,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Project> getProjectList() {
             return projects;
+        }
+
+        @Override
+        public ObservableList<Assignment> getAssignmentList() {
+            return assignments;
         }
     }
 
