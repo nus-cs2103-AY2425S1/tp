@@ -72,8 +72,7 @@ Refer to the [Features](#features) section for details of each command.
 ### Feature 1: Ability to Save Current Data
 
 **Purpose:**  
-This feature ensures that any details you add to the app are saved automatically. When you close and reopen the app, 
-all your data will still be there.
+This feature ensures that any details you add to the app are saved automatically. When you close and reopen the app, all your data will still be there.
 
 **How it Works:**
 - **Command Format and Example:** Not applicable, as this process is automatic.
@@ -91,8 +90,7 @@ all your data will still be there.
 
 **Purpose:**  
 This feature allows you to enter and save detailed records for new customers. Each customer's record includes their
-name, contact number, email, occupation, and income. You can also enter the optional fields for credit card tier and
-remark here. Otherwise, new users are assigned a default value of "N.A".
+name, contact number, email, occupation, and income. You can also enter the optional fields for credit card tier and remark here. Otherwise, new users are assigned a default value of "N.A".
 
 **How to Use It:**
 - **Command Format:**
@@ -120,8 +118,7 @@ add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold
 #### What to Expect
 - **If Successful:** You'll see a message: "New person added: `<NAME>`; Phone: `<PHONE>`; Email: `<EMAIL>`; Address: `<ADDRESS>`; Job: `<JOB>`;  Income: `<INCOME>`; Tag: `<TAG>`; Remark: `<REMARK>`". It's noted that if "Tag" and "Remark" are not added, they will be defined as "N/A."
 - **If There is an Error:**
-  - "Please verify that your input is in the correct format. Include the following details: n/ `<NAME>` p/ `<PHONE>` 
-e/ `<EMAIL>` a/ `<ADDRESS>` j/ `<JOBNAME>` i/ `<INCOME>` [t/ `<TAG>`] [rn/ `<REMARK>`]."
+  - "Please verify that your input is in the correct format. Include the following details: n/ `<NAME>` p/ `<PHONE>` e/ `<EMAIL>` a/ `<ADDRESS>` j/ `<JOBNAME>` i/ `<INCOME>` [t/ `<TAG>`] [rn/ `<REMARK>`]."
 
 **Handling Duplicates:**  
 If a customer with the same name, email, job, and income is already saved, you'll get a message: "This customer is already saved as a contact."
@@ -163,10 +160,7 @@ Since customer INDEX are unique identifiers:
 ### Feature 4: Edit the existing customer
 
 **Purpose:**  
-This feature enables users to update the details of an existing customer, apart from the remark as of v1.1,
-in the
-database. It is designed to accommodate changes in a customer’s information such as contact details, address, job
-information, or any other relevant data.
+This feature enables users to update the details of an existing customer, apart from the remark as of v1.1, in the database. It is designed to accommodate changes in a customer’s information such as contact details, address, job information, or any other relevant data.
 
 **How to Use It:**
 - **Command Format:**
@@ -335,9 +329,9 @@ exit
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 **Q**: How do I change the remarks or credit card tier of an existing customer?<br>
-**A**: Use the [`edit`](#feature-4-edit-the-existing-customer) command, and specify the corresponding `t/` and or `r/`
-flag to change these two fields.
-
+**A**: Use the [`edit`](#feature-4-edit-the-existing-customer) command, and specify the corresponding `t/` and or `rn/` or `ra/` flag to change these two fields.
+**Q**: Why am I getting an error when trying to edit the remark of an existing customer?
+**A**: Besides making sure that the command syntax is correct, please note that the `rn/` and `ra/` flags cannot be used together, as `rn/` is used to provide a new remark that will override any existing remark. Whilst, `ra/` will append a given remark to any existing remark. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -353,7 +347,7 @@ flag to change these two fields.
 | Action                          | Command Format                                                                                                                                                | Example                                                                                                        |
 |---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
 | **Save Data Automatically**     | *Automatic*                                                                                                                                                   | *No command required*                                                                                          |
-| **Add New Customer**            | `add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TAG>] [r/ <REMARK>]`                                                              | `add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold rn/ got anger issue`         |
+| **Add New Customer**            | `add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TAG>] [rn/ <REMARK>]`                                                             | `add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold rn/ got anger issue`         |
 | **Remove Old Customer**         | `del <INDEX>`                                                                                                                                                 | `del 69`                                                                                                       |
 | **Edit Existing Customer**      | `edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TAG>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED ONTO EXISTING ONE]` | `edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000 ra/ Specialist in eye care` |
 | **Find a Customer by Details**  | `filter <FLAG>/ <FLAG FIELD>`                                                                                                                                 | `filter n/ TAN LESHEW`                                                                                         |
