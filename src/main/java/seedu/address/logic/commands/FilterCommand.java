@@ -20,10 +20,7 @@ public class FilterCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose field contains the "
             + "the specified substring (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: <FLAG> <SUBSTRING>\n"
-            + "Example: " + COMMAND_WORD + " n/ Alice";
-
-    public static final String MULTIPLE_FILTERS_NOT_IMPLEMENTED = "Using multiple filters is not supported yet. "
-            + "Please use only one filter.";
+            + "Example: " + COMMAND_WORD + " n/ Alice" + " p/ 91112222";
 
     private final Predicate<Person> predicate;
 
