@@ -158,7 +158,7 @@ public class EditCommand extends Command {
         private Income income;
         private Tier tier;
         private Remark remark;
-        private Remark appendedRemark = null;
+        private Remark appendedRemark;
         public EditPersonDescriptor() {}
 
         /**

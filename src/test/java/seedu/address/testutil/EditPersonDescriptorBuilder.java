@@ -104,6 +104,14 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code appendedRemark} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withAppendedRemark(String remark) {
+        descriptor.setAppendedRemark(new Remark(remark));
+        return this;
+    }
+
     public EditPersonDescriptor build() {
         return descriptor;
     }
