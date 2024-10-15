@@ -13,7 +13,11 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ],
-    "policies": []
+    "policies": [{
+      "premiumAmount" : 200.0,
+      "coverageAmount" : 20000.0,
+      "policyType" : "HEALTH"
+    }]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",

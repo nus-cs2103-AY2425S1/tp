@@ -118,5 +118,4 @@ public class JsonAdaptedPersonTest {
                         VALID_POLICIES);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
-
 }

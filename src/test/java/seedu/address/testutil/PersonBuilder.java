@@ -8,6 +8,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicySet;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -98,6 +99,13 @@ public class PersonBuilder {
      */
     public PersonBuilder withPolicies(PolicySet policies) {
         this.policies = policies;
+        return this;
+    }
+    /**
+     * Sets the {@code Policy} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPolicy(Policy policy) {
+        this.policies.add(policy);
         return this;
     }
     public Person build() {

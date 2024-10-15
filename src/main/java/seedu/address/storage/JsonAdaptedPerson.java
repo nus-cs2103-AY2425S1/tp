@@ -115,9 +115,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        if (policies == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
+
         final PolicySet modelPolicies = new PolicySet();
         modelPolicies.addAll(personPolicies);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelPolicies);

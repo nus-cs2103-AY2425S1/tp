@@ -9,7 +9,6 @@ import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.LifePolicy;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyType;
-import seedu.address.model.tag.Tag;
 
 class JsonAdaptedPolicy {
     private final double premiumAmount;
@@ -40,15 +39,18 @@ class JsonAdaptedPolicy {
      * @throws IllegalArgumentException if there were any data constraints violated.
      */
     public Policy toModelType() throws IllegalValueException {
-        final PolicyType modelPolicyType = PolicyType.valueOf(policyType);
-        if (modelPolicyType == PolicyType.LIFE) {
-            return new LifePolicy(premiumAmount, coverageAmount);
-        } else if (modelPolicyType == PolicyType.HEALTH) {
-            return new HealthPolicy(premiumAmount, coverageAmount);
-        } else if (modelPolicyType == PolicyType.EDUCATION) {
-            return new EducationPolicy(premiumAmount, coverageAmount);
-        } else {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+        try {
+            final PolicyType modelPolicyType = PolicyType.valueOf(policyType.toUpperCase());
+            if (modelPolicyType == PolicyType.LIFE) {
+                return new LifePolicy(premiumAmount, coverageAmount);
+            } else if (modelPolicyType == PolicyType.HEALTH) {
+                return new HealthPolicy(premiumAmount, coverageAmount);
+            } else {
+                return new EducationPolicy(premiumAmount, coverageAmount);
+            }
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException("Invalid policy type: " + policyType);
         }
     }
+
 }
