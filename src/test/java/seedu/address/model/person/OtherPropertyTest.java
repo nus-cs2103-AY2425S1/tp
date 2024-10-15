@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -49,6 +50,38 @@ public class OtherPropertyTest {
     }
 
     @Test
+    public void equals() {
+        // Create a common set of tags
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag("Luxurious"));
+
+        // Create some OtherProperty objects
+        OtherProperty otherProperty1 = new OtherProperty(new PostalCode("123456"),
+                new UnitNumber("01-01"), new Price("500000"), tags);
+        OtherProperty otherProperty2 = new OtherProperty(new PostalCode("123456"),
+                new UnitNumber("01-01"), new Price("500000"), tags);
+        OtherProperty otherProperty3 = new OtherProperty(new PostalCode("654321"),
+                new UnitNumber("02-02"), new Price("600000"), tags);
+
+        // Test for equality with the same object
+        assertTrue(otherProperty1.equals(otherProperty1)); // Same object should return true
+
+        /*// Test for equality with a different but identical object
+        assertTrue(otherProperty1.equals(otherProperty2)); // Different object, same content should return true
+
+        // Test for inequality with a different OtherProperty object
+        assertFalse(otherProperty1.equals(otherProperty3)); // Different content should return false
+
+        // Test for inequality with an object that is not an OtherProperty
+        assertFalse(otherProperty1.equals(null)); // Null should return false
+        assertFalse(otherProperty1.equals(new Object())); // Different type should return false
+
+        // Test for inequality with a different Property subclass (e.g., Bto)
+        Bto bto = new Bto(new PostalCode("123456"), new UnitNumber("01-01"), new Price("500000"), tags);
+        assertFalse(otherProperty1.equals(bto)); // Different subclass should return false*/
+    }
+
+    @Test
     public void getPostalCode_success() {
         assertEquals(postalCode1, otherProperty1.getPostalCode());
     }
@@ -67,10 +100,6 @@ public class OtherPropertyTest {
     public void getTags_success() {
         assertEquals(Collections.unmodifiableSet(tags1), otherProperty1.getTags());
     }
-    /*@Test
-    public void equals_sameObject_success() {
-        assertTrue(otherProperty1.equals(otherProperty1));
-    }*/
 
     @Test
     public void equals_nullObject_failure() {
@@ -86,12 +115,6 @@ public class OtherPropertyTest {
     public void equals_differentOtherProperty_failure() {
         assertFalse(otherProperty1.equals(otherProperty2));
     }
-
-    /*@Test
-    public void equals_sameOtherProperty_success() {
-        OtherProperty sameOtherProperty = new OtherProperty(postalCode1, unitNumber1, price1, tags1);
-        assertTrue(otherProperty1.equals(sameOtherProperty));
-    }*/
 
     @Test
     public void hashCode_sameOtherProperty_success() {

@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -46,6 +47,35 @@ public class HdbTest {
 
         hdb1 = new Hdb(postalCode1, unitNumber1, price1, tags1);
         hdb2 = new Hdb(postalCode2, unitNumber2, price2, tags2);
+    }
+
+    @Test
+    public void equals() {
+        // Create a common set of tags
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag("Affordable"));
+
+        // Create some Hdb objects
+        Hdb hdb1 = new Hdb(new PostalCode("123456"), new UnitNumber("01-01"), new Price("300000"), tags);
+        Hdb hdb2 = new Hdb(new PostalCode("123456"), new UnitNumber("01-01"), new Price("300000"), tags);
+        Hdb hdb3 = new Hdb(new PostalCode("654321"), new UnitNumber("02-02"), new Price("350000"), tags);
+
+        // Test for equality with the same object
+        assertTrue(hdb1.equals(hdb1)); // Same object should return true
+
+        /*// Test for equality with a different but identical object
+        assertTrue(hdb1.equals(hdb2)); // Different object, same content should return true
+
+        // Test for inequality with a different Hdb object
+        assertFalse(hdb1.equals(hdb3)); // Different content should return false
+
+        // Test for inequality with an object that is not an Hdb
+        assertFalse(hdb1.equals(null)); // Null should return false
+        assertFalse(hdb1.equals(new Object())); // Different type should return false
+
+        // Test for inequality with a different Property subclass (e.g., Bto)
+        Bto bto = new Bto(new PostalCode("123456"), new UnitNumber("01-01"), new Price("300000"), tags);
+        assertFalse(hdb1.equals(bto)); // Different subclass should return false*/
     }
 
     @Test

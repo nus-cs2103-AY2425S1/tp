@@ -18,6 +18,9 @@ public class OtherProperty extends Property {
 
     @Override
     public boolean equals(Object otherProperty) {
+        if (this == otherProperty) {
+            return true;
+        }
         if (!super.equals(otherProperty)) {
             return false;
         }

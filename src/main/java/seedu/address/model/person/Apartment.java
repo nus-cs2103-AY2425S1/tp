@@ -24,6 +24,9 @@ public class Apartment extends Property {
     }
     @Override
     public boolean equals(Object otherApartment) {
+        if (this == otherApartment) {
+            return true;
+        }
         if (!super.equals(otherApartment)) {
             return false;
         }

@@ -18,6 +18,9 @@ public class Condo extends Property {
 
     @Override
     public boolean equals(Object otherCondo) {
+        if (this == otherCondo) {
+            return true;
+        }
         if (!super.equals(otherCondo)) {
             return false;
         }

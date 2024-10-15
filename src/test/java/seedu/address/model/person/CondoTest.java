@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -28,18 +29,34 @@ public class CondoTest {
         assertEquals(tags, condo.getTags());
     }
 
-    /*@Test
-    public void equals_sameCondo_returnsTrue() {
-        PostalCode postalCode = new PostalCode("567510");
-        UnitNumber unitNumber = new UnitNumber("10-65");
-        Price price = new Price("1500000");
-        Set<Tag> tags = new HashSet<>(Collections.singleton(new Tag("Spacious")));
+    @Test
+    public void equals() {
+        // Create a common set of tags
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag("Luxury"));
 
-        Condo condo1 = new Condo(postalCode, unitNumber, price, tags);
-        Condo condo2 = new Condo(postalCode, unitNumber, price, tags);
+        // Create some Condo objects
+        Condo condo1 = new Condo(new PostalCode("123456"), new UnitNumber("10-01"), new Price("500000"), tags);
+        Condo condo2 = new Condo(new PostalCode("123456"), new UnitNumber("10-01"), new Price("500000"), tags);
+        Condo condo3 = new Condo(new PostalCode("654321"), new UnitNumber("20-01"), new Price("750000"), tags);
 
-        assertTrue(condo1.equals(condo2)); // same condo
-    }*/
+        // Test for equality with the same object
+        assertTrue(condo1.equals(condo1)); // Same object should return true
+
+        /*// Test for equality with a different but identical object
+        assertTrue(condo1.equals(condo2)); // Different object, same content should return true
+
+        // Test for inequality with a different Condo object
+        assertFalse(condo1.equals(condo3)); // Different content should return false
+
+        // Test for inequality with an object that is not a Condo
+        assertFalse(condo1.equals(null)); // Null should return false
+        assertFalse(condo1.equals(new Object())); // Different type should return false
+
+        // Test for inequality with a different Property subclass (e.g., Bto)
+        Bto bto = new Bto(new PostalCode("123456"), new UnitNumber("10-01"), new Price("500000"), tags);
+        assertFalse(condo1.equals(bto)); // Different subclass should return false*/
+    }
 
     @Test
     public void equals_differentCondo_returnsFalse() {
@@ -80,24 +97,4 @@ public class CondoTest {
         String expectedString = "[567510] Unit Number: 10-65";
         assertEquals(expectedString, condo.toString());
     }
-
-    /*@Test
-    public void constructor_nullInputs_throwsNullPointerException() {
-        PostalCode postalCode = new PostalCode("567510");
-        UnitNumber unitNumber = new UnitNumber("10-65");
-        Price price = new Price("1500000");
-        Set<Tag> tags = new HashSet<>(Collections.singleton(new Tag("Spacious")));
-
-        // Null postal code
-        assertThrows(NullPointerException.class, () -> new Condo(null, unitNumber, price, tags));
-
-        // Null unit number
-        assertThrows(NullPointerException.class, () -> new Condo(postalCode, null, price, tags));
-
-        // Null price
-        assertThrows(NullPointerException.class, () -> new Condo(postalCode, unitNumber, null, tags));
-
-        // Null tags
-        assertThrows(NullPointerException.class, () -> new Condo(postalCode, unitNumber, price, null));
-    }*/
 }

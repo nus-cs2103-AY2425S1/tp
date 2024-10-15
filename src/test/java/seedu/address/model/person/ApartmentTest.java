@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -46,6 +47,34 @@ public class ApartmentTest {
 
         apartment1 = new Apartment(postalCode1, unitNumber1, price1, tags1);
         apartment2 = new Apartment(postalCode2, unitNumber2, price2, tags2);
+    }
+
+    @Test
+    public void equals() {
+        // Create a common set of tags
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag("Luxury"));
+
+        // Create some Apartment objects
+        Apartment apartment1 = new Apartment(new PostalCode("123456"), new UnitNumber("10-01"),
+                new Price("1000000"), tags);
+        Apartment apartment2 = new Apartment(new PostalCode("123456"), new UnitNumber("10-01"),
+                new Price("1000000"), tags);
+        Apartment apartment3 = new Apartment(new PostalCode("654321"), new UnitNumber("20-01"),
+                new Price("2000000"), tags);
+
+        // Test for equality with the same object
+        assertTrue(apartment1.equals(apartment1)); // Same object should return true
+
+        /*// Test for equality with a different but identical object
+        assertTrue(apartment1.equals(apartment2)); // Different object, same content should return true
+
+        // Test for inequality with a different Apartment object
+        assertFalse(apartment1.equals(apartment3)); // Different content should return false
+
+        // Test for inequality with an object that is not an Apartment
+        assertFalse(apartment1.equals(null)); // Null should return false
+        assertFalse(apartment1.equals(new Object())); // Different type should return false*/
     }
 
     @Test

@@ -50,6 +50,36 @@ public class BtoTest {
     }
 
     @Test
+    public void equals() {
+        // Create a common set of tags
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag("Subsidized"));
+
+        // Create some Bto objects
+        Bto bto1 = new Bto(new PostalCode("123456"), new UnitNumber("10-01"), new Price("300000"), tags);
+        Bto bto2 = new Bto(new PostalCode("123456"), new UnitNumber("10-01"), new Price("300000"), tags);
+        Bto bto3 = new Bto(new PostalCode("654321"), new UnitNumber("20-01"), new Price("500000"), tags);
+
+        // Test for equality with the same object
+        assertTrue(bto1.equals(bto1)); // Same object should return true
+
+        // Test for equality with a different but identical object
+        assertTrue(bto1.equals(bto2)); // Different object, same content should return true
+
+        // Test for inequality with a different Bto object
+        assertFalse(bto1.equals(bto3)); // Different content should return false
+
+        // Test for inequality with an object that is not a Bto
+        assertFalse(bto1.equals(null)); // Null should return false
+        assertFalse(bto1.equals(new Object())); // Different type should return false
+
+        // Test for inequality with a different Property subclass (e.g., Apartment)
+        Apartment apartment = new Apartment(new PostalCode("123456"), new UnitNumber("10-01"),
+                new Price("300000"), tags);
+        assertFalse(bto1.equals(apartment)); // Different subclass should return false
+    }
+
+    @Test
     public void getPostalCode_success() {
         assertEquals(postalCode1, bto1.getPostalCode());
     }
