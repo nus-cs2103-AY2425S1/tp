@@ -17,13 +17,13 @@ public class Session {
     // Identity fields
     private final SessionName sessionName;
     private final int points;
-    private final Date date;
+    private final SessionDate date;
 
     /**
      * Every field must be present and not null.
      */
-    public Session(SessionName sessionName, Date date, int points, Set<Member> members) {
-        requireAllNonNull(sessionName, date, points, members);
+    public Session(SessionName sessionName, SessionDate date, int points) {
+        requireAllNonNull(sessionName, date, points);
         this.sessionName = sessionName;
         this.date = date;
         this.points = points;
@@ -40,7 +40,7 @@ public class Session {
     /**
      * Returns the date of the session.
      */
-    public Date getDate() {
+    public SessionDate getDate() {
         return date;
     }
 
