@@ -21,6 +21,9 @@ public class InsurancePlansManager {
             + "has not been added to this client: %2$s";
     public static final String DUPLICATE_CLAIM_ID_MESSAGE = "This claim with id: %1$s "
             + "has already been added to this client: %2$s";
+    public static final String NO_INSURANCE_PLANS_MESSAGE = "No existing insurance plans";
+    public static final String NO_CLAIMS_MESSAGE = "No existing claims";
+
 
     private final ArrayList<InsurancePlan> insurancePlans;
     private final HashSet<String> claimIds;
@@ -200,6 +203,29 @@ public class InsurancePlansManager {
             }
         }
         return count;
+    }
+
+    public String accessClaims() {
+        StringBuilder listOfClaims = new StringBuilder();
+        if (this.insurancePlans.isEmpty()) {
+            return NO_INSURANCE_PLANS_MESSAGE;
+        } else {
+            for (InsurancePlan p : this.insurancePlans) {
+                listOfClaims.append(p.toString()).append("\n");
+                if (p.claims.isEmpty()) {
+                    listOfClaims.append(NO_CLAIMS_MESSAGE + "\n");
+                } else {
+                    int listIndex = 1;
+                    for (Claim c : p.claims) {
+                        listOfClaims.append(listIndex)
+                                .append(". ")
+                                .append(c.toString())
+                                .append("\n");
+                    }
+                }
+            }
+        }
+        return listOfClaims.toString();
     }
 
     /**
