@@ -25,7 +25,8 @@ public class AssignmentNameTest {
         assertThrows(IllegalArgumentException.class, () -> new AssignmentName("")); // empty string
         assertThrows(IllegalArgumentException.class, () -> new AssignmentName(" ")); // blank string
         assertThrows(IllegalArgumentException.class, () -> new AssignmentName("!@#$%")); // special characters
-        assertThrows(IllegalArgumentException.class, () -> new AssignmentName("123*456")); // special character in string
+        assertThrows(IllegalArgumentException.class, () -> new AssignmentName("123*456"));
+        // special character in string
     }
 
     @Test
