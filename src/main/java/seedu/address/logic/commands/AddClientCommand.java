@@ -36,6 +36,7 @@ public class AddClientCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This client already exists in the address book";
     private final Client toAdd;
+
     /**
      * Creates an AddClientCommand to add the specified {@code Client}
      */

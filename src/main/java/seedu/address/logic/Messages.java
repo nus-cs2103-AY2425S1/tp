@@ -12,8 +12,8 @@ import seedu.address.model.rentalinformation.RentalInformation;
  * Container for user visible messages.
  */
 public class Messages {
-
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
+
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The client index provided is invalid";
     public static final String MESSAGE_INVALID_RENTAL_DISPLAYED_INDEX = "The rental index provided is invalid";
@@ -38,13 +38,28 @@ public class Messages {
      */
     public static String format(Client client) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(client.getName())
-                .append("; Phone: ")
-                .append(client.getPhone())
-                .append("; Email: ")
-                .append(client.getEmail())
-                .append("; Tags: ");
-        client.getTags().forEach(builder::append);
+
+        if (client.getEmail().value == null) {
+            builder.append(client.getName())
+                    .append("; Phone: ")
+                    .append(client.getPhone());
+        } else if (client.getPhone().value == null) {
+            builder.append(client.getName())
+                    .append("; Email: ")
+                    .append(client.getEmail());
+        } else {
+            builder.append(client.getName())
+                    .append("; Phone: ")
+                    .append(client.getPhone())
+                    .append("; Email: ")
+                    .append(client.getEmail());
+        }
+
+        if (!client.getTags().isEmpty()) {
+            builder.append("; Tags: ");
+            client.getTags().forEach(builder::append);
+        }
+
         return builder.toString();
     }
 

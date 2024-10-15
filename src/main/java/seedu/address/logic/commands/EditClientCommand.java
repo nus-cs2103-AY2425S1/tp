@@ -50,12 +50,13 @@ public class EditClientCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Client: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This client already exists in the address book.";
+    public static final String MESSAGE_EMPTY_PHONE_EMAIL = "This client must either have a phone number or email address.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the client in the filtered client list to edit
+     * @param index                of the client in the filtered client list to edit
      * @param editPersonDescriptor details to edit the client with
      */
     public EditClientCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
@@ -80,6 +81,10 @@ public class EditClientCommand extends Command {
 
         if (!clientToEdit.isSamePerson(editedClient) && model.hasPerson(editedClient)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (editedClient.isEmailPhoneEmpty()) {
+            throw new CommandException(MESSAGE_EMPTY_PHONE_EMAIL);
         }
 
         model.setPerson(clientToEdit, editedClient);
@@ -139,7 +144,8 @@ public class EditClientCommand extends Command {
         private Set<Tag> tags;
         private List<RentalInformation> rentalInformationList;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
