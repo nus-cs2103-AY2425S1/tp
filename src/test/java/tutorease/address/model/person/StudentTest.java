@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import tutorease.address.testutil.StudentBuilder;
 
-public class PersonTest {
+public class StudentTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
