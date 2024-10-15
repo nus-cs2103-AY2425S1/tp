@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
+import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectId;
 import seedu.address.model.project.ProjectName;
-import seedu.address.model.project.Project;
 
 /**
  * A utility class to help with building Person objects.

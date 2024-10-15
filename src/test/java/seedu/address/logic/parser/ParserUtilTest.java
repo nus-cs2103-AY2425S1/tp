@@ -19,8 +19,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.project.ProjectName;
 import seedu.address.model.project.ProjectId;
+import seedu.address.model.project.ProjectName;
 import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
