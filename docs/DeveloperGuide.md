@@ -373,7 +373,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. The specified person is invalid.
 
-  - 2a2. System shows an error message.
+  - 2a1. System shows an error message.
 
     Use case ends.
 
