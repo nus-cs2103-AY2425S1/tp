@@ -153,9 +153,9 @@ public class ModelManager implements Model {
     public LogsList getLastShownLogsList() {
         return logsList;
     }
-    public void detailView(Log log) {
-        requireNonNull(log);
-        log.toDetailedString(); // Modify this as necessary for your UI
-    }
+//    public void detailView(Log log) {
+//        requireNonNull(log);
+//        log.toDetailedString(); // Modify this as necessary for your UI
+//    }
 
 }
