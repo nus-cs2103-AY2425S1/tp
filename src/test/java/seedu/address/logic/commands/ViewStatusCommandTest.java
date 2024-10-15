@@ -11,6 +11,9 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -25,10 +28,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-
-import java.util.Arrays;
-import java.util.HashSet;
-
 
 public class ViewStatusCommandTest {
     public final Name amyName = new Name(VALID_NAME_AMY);
