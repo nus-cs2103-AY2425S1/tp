@@ -23,7 +23,7 @@ import seedu.address.model.person.Property;
 public class AddPropertyToBuyCommand extends Command {
     public static final String COMMAND_WORD = "addBuy";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a property to the list of properties to buy"
-            + "for this specific person. "
+            + " for this specific person. "
             + "Parameters: INDEX (Must be a positive integer)"
             + PREFIX_HOUSING_TYPE + "[HOUSING_TYPE]"
             + PREFIX_BUYING_PRICE + "[SELLING_PRICE]"
@@ -31,8 +31,9 @@ public class AddPropertyToBuyCommand extends Command {
             + PREFIX_UNIT_NUMBER + "[UNIT_NUMBER]"
             + PREFIX_TAG + "[TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
+            + "1 "
             + PREFIX_HOUSING_TYPE + "c "
-            + PREFIX_BUYING_PRICE + "1.65M "
+            + PREFIX_BUYING_PRICE + "1650000 "
             + PREFIX_POSTAL_CODE + "567510 "
             + PREFIX_UNIT_NUMBER + "10-65 "
             + PREFIX_TAG + "Extremely spacious "

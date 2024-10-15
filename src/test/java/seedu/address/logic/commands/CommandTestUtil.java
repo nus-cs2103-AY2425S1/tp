@@ -82,10 +82,16 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_HOUSING_TYPE_DESC = " " + PREFIX_HOUSING_TYPE + "x"; // 'x' not a valid housing type
-    public static final String INVALID_BUYING_PRICE_DESC = " " + PREFIX_BUYING_PRICE + "1.65million"; // 'million' not allowed in prices
-    public static final String INVALID_POSTAL_CODE_DESC = " " + PREFIX_POSTAL_CODE + "1234567"; // 7 digits not allowed in postal code
-    public static final String INVALID_UNIT_NUMBER_DESC = " " + PREFIX_UNIT_NUMBER + "10-65-01"; // '01' not allowed in unit number
+    public static final String INVALID_HOUSING_TYPE_DESC =
+            " " + PREFIX_HOUSING_TYPE + "x"; // 'x' not a valid housing type
+    public static final String INVALID_BUYING_PRICE_DESC =
+            " " + PREFIX_BUYING_PRICE + "1.65million"; // 'million' not allowed in prices
+    public static final String INVALID_SELLING_PRICE_DESC =
+            " " + PREFIX_SELLING_PRICE + "1.65M"; // 'M' not allowed in prices
+    public static final String INVALID_POSTAL_CODE_DESC =
+            " " + PREFIX_POSTAL_CODE + "1234567"; // 7 digits not allowed in postal code
+    public static final String INVALID_UNIT_NUMBER_DESC =
+            " " + PREFIX_UNIT_NUMBER + "10-65-01"; // '01' not allowed in unit number
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

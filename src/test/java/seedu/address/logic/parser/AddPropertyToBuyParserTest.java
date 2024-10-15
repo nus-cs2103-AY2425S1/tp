@@ -3,6 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.BUYING_PRICE_DESC_1650000;
 import static seedu.address.logic.commands.CommandTestUtil.HOUSING_TYPE_DESC_HDB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_BUYING_PRICE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_POSTAL_CODE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_UNIT_NUMBER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.POSTAL_CODE_DESC_567510;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_NEAR_MRT;
@@ -101,26 +104,25 @@ public class AddPropertyToBuyParserTest {
                 expectedMessageDuplicateHt);
     }
 
-    //    @Test
-    //    public void parse_invalidValue_failure() {
-    //        // invalid postal code
-    //        assertParseFailure(parser, PREAMBLE_INDEX + HOUSING_TYPE_DESC_HDB + BUYING_PRICE_DESC_1650000
-    //        + " pc/56751" + UNIT_NUMBER_DESC_03_11 + TAG_DESC_NEAR_MRT,
-    //                PostalCode.MESSAGE_CONSTRAINTS);
-    //
-    //        // invalid unit number
-    //        assertParseFailure(parser, PREAMBLE_INDEX + HOUSING_TYPE_DESC_HDB + BUYING_PRICE_DESC_1650000 +
-    //                POSTAL_CODE_DESC_567510 + " un/03-1" + TAG_DESC_NEAR_MRT,
-    //                UnitNumber.MESSAGE_CONSTRAINTS);
-    //
-    //        // invalid buying price
-    //        assertParseFailure(parser, PREAMBLE_INDEX + HOUSING_TYPE_DESC_HDB + " bp/1650000" +
-    //                POSTAL_CODE_DESC_567510 + UNIT_NUMBER_DESC_03_11 + TAG_DESC_NEAR_MRT,
-    //                Price.MESSAGE_CONSTRAINTS);
-    //
-    //        // invalid housing type
-    //        assertParseFailure(parser, PREAMBLE_INDEX + " ht/condo" + BUYING_PRICE_DESC_1650000 +
-    //                POSTAL_CODE_DESC_567510 + UNIT_NUMBER_DESC_03_11 + TAG_DESC_NEAR_MRT,
-    //                Hdb.MESSAGE_CONSTRAINTS);
-    //    }
+    @Test
+    public void parse_invalidValue_failure() {
+        // invalid postal code
+        assertParseFailure(parser, PREAMBLE_INDEX + HOUSING_TYPE_DESC_HDB + BUYING_PRICE_DESC_1650000
+                        + INVALID_POSTAL_CODE_DESC + UNIT_NUMBER_DESC_03_11 + TAG_DESC_NEAR_MRT,
+                PostalCode.MESSAGE_CONSTRAINTS);
+
+        // invalid unit number
+        assertParseFailure(parser, PREAMBLE_INDEX + HOUSING_TYPE_DESC_HDB + BUYING_PRICE_DESC_1650000
+                        + POSTAL_CODE_DESC_567510 + INVALID_UNIT_NUMBER_DESC + TAG_DESC_NEAR_MRT,
+                UnitNumber.MESSAGE_CONSTRAINTS);
+
+        // invalid buying price
+        assertParseFailure(parser, PREAMBLE_INDEX + HOUSING_TYPE_DESC_HDB + INVALID_BUYING_PRICE_DESC
+                        + POSTAL_CODE_DESC_567510 + UNIT_NUMBER_DESC_03_11 + TAG_DESC_NEAR_MRT,
+                Price.MESSAGE_CONSTRAINTS);
+
+        // invalid housing type
+        // assertParseFailure(parser, PREAMBLE_INDEX + INVALID_HOUSING_TYPE_DESC + BUYING_PRICE_DESC_1650000
+        // + POSTAL_CODE_DESC_567510 + UNIT_NUMBER_DESC_03_11 + TAG_DESC_NEAR_MRT, Hdb.MESSAGE_CONSTRAINTS);
+    }
 }
