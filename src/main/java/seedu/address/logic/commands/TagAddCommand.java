@@ -31,43 +31,24 @@ public class TagAddCommand extends Command {
             + PREFIX_TAG + "Jane and Tom 230412";
 
     public static final String MESSAGE_ARGUMENTS = "Name: %1$s, Tag: %2$s";
-    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag '%1$s' to contact: %2$s.";
-    public static final String MESSAGE_ADD_TAG_FAILURE = "Tag must be a non-empty string with"
+    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag(s) '%1$s' to contact: %2$s.";
+    public static final String MESSAGE_ADD_TAG_FAILURE = "Tag(s) must be non-empty string(s) with"
             + " only alphanumeric characters and underscores.";
-    // All tags in existing Person match those to be added by the user
-    public static final String MESSAGE_JUST_DUPLICATE_TAGS = "Contact '%1$s' already has those tags.";
-    // Some tags in existing Person match those to be added by the user
-    public static final String MESSAGE_SOME_DUPLICATE_TAGS = "Duplicate tags have been detected."
-            + " Only unique tags are added. \nContact '%1$s' now has the tag '%2$s'.";
-
+    public static final String MESSAGE_DUPLICATE_TAGS = "Contact '%1$s' already has the tag(s) '%2$s'.";
+    public static final String MESSAGE_PERSON_DOESNT_EXIST = "Contact: %1$s does not exist in KnottyPlanners";
 
     private final Name name;
-    private final Set<Tag> tags;
-    private final Set<Tag> duplicateTags;
+    private final Set<Tag> tagsToAdd;
 
     /**
-     * @param name of the person in the person list to edit the tags
-     * @param tags of the person to be updated to
+     * @param name      of the person in the person list to edit the tags
+     * @param tagsToAdd of the person to be updated to
      */
-    public TagAddCommand(Name name, Set<Tag> tags) {
-        requireAllNonNull(name, tags);
+    public TagAddCommand(Name name, Set<Tag> tagsToAdd) {
+        requireAllNonNull(name, tagsToAdd);
 
         this.name = name;
-        this.tags = tags;
-        this.duplicateTags = new HashSet<>();
-    }
-
-    /**
-     * Constructor to be used for TESTING only.
-     * @param name of the person in the person list to edit the tags
-     * @param tags of the person to be updated to
-     */
-    public TagAddCommand(Name name, Set<Tag> tags, Set<Tag> duplicateTags) {
-        requireAllNonNull(name, tags);
-
-        this.name = name;
-        this.tags = tags;
-        this.duplicateTags = duplicateTags;
+        this.tagsToAdd = tagsToAdd;
     }
 
     @Override
@@ -75,6 +56,10 @@ public class TagAddCommand extends Command {
         List<Person> matchingPersons = model.getFilteredPersonList().stream()
                 .filter(person -> person.getName().fullName.equalsIgnoreCase(name.toString()))
                 .toList();
+
+        if (matchingPersons.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_PERSON_DOESNT_EXIST, name));
+        }
 
         Person personToEdit = matchingPersons.get(0);
 
@@ -87,7 +72,7 @@ public class TagAddCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson));
+        return new CommandResult(generateSuccessMessage(personToEdit, editedPerson));
     }
 
     @Override
@@ -102,7 +87,7 @@ public class TagAddCommand extends Command {
         }
 
         TagAddCommand e = (TagAddCommand) other;
-        return tags.equals(e.tags);
+        return tagsToAdd.equals(e.tagsToAdd);
     }
 
     /**
@@ -110,36 +95,49 @@ public class TagAddCommand extends Command {
      * the tag is successfully added.
      * {@code personToEdit}.
      */
-    public String generateSuccessMessage(Person personToEdit) {
-        if (duplicateTags.isEmpty()) {
-            return String.format(MESSAGE_ADD_TAG_SUCCESS,
-                    Messages.formatForTags(personToEdit), Messages.getName(personToEdit));
-        } else if (duplicateTags.equals(tags)) {
-            return String.format(MESSAGE_JUST_DUPLICATE_TAGS,
-                    Messages.getName(personToEdit));
-        } else {
-            return String.format(MESSAGE_SOME_DUPLICATE_TAGS,
-                    Messages.getName(personToEdit), Messages.formatForTags(personToEdit));
+    public String generateSuccessMessage(Person personToEdit, Person editedPerson) {
+        Set<Tag> tagsInBoth = new HashSet<>(personToEdit.getTags());
+        Set<Tag> tagsInNeither = new HashSet<>(tagsToAdd);
+        // if all tags in og person matches the tags to add, means all tags to be added
+        // are duplicates, so dont go inside the loop
+        if (!personToEdit.getTags().containsAll(tagsToAdd)) {
+            tagsInBoth.retainAll(tagsToAdd); // duplicates that we dont want to add
+            tagsInNeither.removeAll(tagsInBoth); // new tags minus the duplicates that we want to add
+            if (tagsInBoth.isEmpty()) {
+                // if there are no duplicates, this is a clean addition
+                return String.format(MESSAGE_ADD_TAG_SUCCESS, Messages.tagSetToString(tagsToAdd),
+                        Messages.getName(editedPerson));
+            } else { // if there are some duplicates
+                // gets the tags that we actually want to add
+                String nonDuplicateTagsExist = String.format(MESSAGE_ADD_TAG_SUCCESS + "\n",
+                        Messages.tagSetToString(tagsInNeither), Messages.getName(editedPerson));
+                // gets the duplicate tags that we dont want to add
+                String duplicateTagsExist = String.format(MESSAGE_DUPLICATE_TAGS,
+                        Messages.getName(editedPerson), Messages.tagSetToString(tagsInBoth));
+                return nonDuplicateTagsExist + duplicateTagsExist;
+            }
         }
+        return String.format(MESSAGE_DUPLICATE_TAGS, Messages.getName(editedPerson),
+                Messages.tagSetToString(tagsToAdd));
     }
 
     /**
      * Handles duplicate tags as inputted by the user.
-     * Checks if any of the tags from user input matches existing tags in the original Person.
+     * Checks if any of the tags from user input matches existing tags in the
+     * original Person.
      * Matching tags are added to a separate set that keeps track of duplicate tags.
-     * Unique tags are added to a separate tag.
+     * Unique tags are added to a separate list of tags.
      * @param person EditedPerson from the execute method above.
-     * @return A set of tags that contains distinct tags from both existing tags and those inputted by the user.
+     * @return A set of tags that contains distinct tags from both existing tags and
+     *     those inputted by the user.
      */
     private Set<Tag> handleDuplicateTags(Person person) {
         Set<Tag> ogTags = person.getTags();
         Set<Tag> mergedTags = new HashSet<>();
 
-        for (Tag newTag : tags) {
+        for (Tag newTag : tagsToAdd) {
             if (!ogTags.contains(newTag)) {
                 mergedTags.add(newTag);
-            } else {
-                duplicateTags.add(newTag);
             }
         }
 
