@@ -11,8 +11,8 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers can contain numbers, spaces and hyphens, and it should be at least 3 digits long.\n" +
-                    "Only 1 space or hyphen is allowed between each alphanumeric character.";
+            "Phone numbers can contain numbers, spaces and hyphens, and it should be at least 3 digits long.\n"
+                    + "Only 1 space or hyphen is allowed between each alphanumeric character.";
     public static final String VALIDATION_REGEX = "(?=((\\D*\\d){3,}))\\d{1,}([ -]\\d{1,})*";
     public final String value;
 
