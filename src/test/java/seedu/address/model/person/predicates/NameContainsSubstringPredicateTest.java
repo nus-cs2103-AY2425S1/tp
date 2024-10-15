@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.person.predicates;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
 import seedu.address.testutil.PersonBuilder;
 
 public class NameContainsSubstringPredicateTest {
@@ -72,17 +71,32 @@ public class NameContainsSubstringPredicateTest {
         // Substring matches phone but does not match name
         predicate = new NameContainsSubstringPredicate("91234567");
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("91234567")
-                .withEmail("alice@email.com").withAddress("Main Street").build()));
+                .withEmail("alice@email.com").withAddress("Main Street").withRemark("Genius")
+                .withJob("Doctor").build()));
 
         // Substring matches email but does not match name
         predicate = new NameContainsSubstringPredicate("alice@email.com");
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("91234567")
-                .withEmail("alice@email.com").withAddress("Main Street").build()));
+                .withEmail("alice@email.com").withAddress("Main Street").withRemark("Genius")
+                .withJob("Doctor").build()));
 
         // Substring matches address but does not match name
         predicate = new NameContainsSubstringPredicate("Main Street");
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("91234567")
-                .withEmail("alice@email.com").withAddress("Main Street").build()));
+                .withEmail("alice@email.com").withAddress("Main Street").withRemark("Genius")
+                .withJob("Doctor").build()));
+
+        // Substring matches remark but does not match remark
+        predicate = new NameContainsSubstringPredicate("Genius");
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("91234567")
+                .withEmail("alice@email.com").withAddress("Main Street").withRemark("Genius")
+                .withJob("Doctor").build()));
+
+        // Substring matches remark but does not match job
+        predicate = new NameContainsSubstringPredicate("Doctor");
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("91234567")
+                .withEmail("alice@email.com").withAddress("Main Street").withRemark("Genius")
+                .withJob("Doctor").build()));
     }
 
     @Test
