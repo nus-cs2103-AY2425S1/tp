@@ -1,12 +1,12 @@
 package seedu.address.logic.commands;
 
-import java.util.List;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAKE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VRN;
+
+import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;

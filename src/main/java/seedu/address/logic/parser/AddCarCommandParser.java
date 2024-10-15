@@ -1,13 +1,13 @@
 package seedu.address.logic.parser;
 
-import java.util.stream.Stream;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAKE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VRN;
+
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCarCommand;
