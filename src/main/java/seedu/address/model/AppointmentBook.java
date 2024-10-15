@@ -71,8 +71,9 @@ public class AppointmentBook implements ReadOnlyAppointmentBook {
      * Adds an appointment to the appointment book.
      * The appointment must not already exist in the appointment book.
      */
-    public void addAppointment(Appointment appointment) {
+    public String addAppointment(Appointment appointment) {
         appointments.add(appointment);
+        return appointment.toString();
     }
 
     /**

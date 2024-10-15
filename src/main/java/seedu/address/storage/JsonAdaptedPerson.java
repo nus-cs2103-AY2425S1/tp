@@ -23,7 +23,6 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-
     private final String name;
     private final String phone;
     private final String email;
@@ -49,7 +48,6 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
     }
-
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
@@ -63,7 +61,17 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
     }
-
+    /**
+     * Checks if a given string is a positive int value
+     */
+    public static boolean isPositiveInteger(String str) {
+        try {
+            int number = Integer.parseInt(str);
+            return number >= 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
      *
@@ -74,7 +82,6 @@ class JsonAdaptedPerson {
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }

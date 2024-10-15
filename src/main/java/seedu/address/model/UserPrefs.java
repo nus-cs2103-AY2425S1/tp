@@ -15,6 +15,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path appointmentBookFilePath = Paths.get("data" , "appointmentbook.json");
+
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -51,9 +53,17 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return addressBookFilePath;
     }
 
+    public Path getAppointmentBookFilePath() {
+        return appointmentBookFilePath; }
+
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         this.addressBookFilePath = addressBookFilePath;
+    }
+
+    public void setAppointmentBookFilePath(Path appointmentBookFilePath) {
+        requireNonNull(appointmentBookFilePath);
+        this.appointmentBookFilePath = appointmentBookFilePath;
     }
 
     @Override
@@ -69,19 +79,21 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
+                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath)
+                && appointmentBookFilePath.equals(otherUserPrefs.appointmentBookFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        return Objects.hash(guiSettings, addressBookFilePath, appointmentBookFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("\nLocal address book data data file location : " + addressBookFilePath);
+        sb.append("\nLocal appointment book data file location : " + appointmentBookFilePath);
         return sb.toString();
     }
 
