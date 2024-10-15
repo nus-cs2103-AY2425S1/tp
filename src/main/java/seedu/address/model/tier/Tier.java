@@ -32,9 +32,6 @@ public class Tier {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTierName(String test) {
-        if (test.isEmpty()) {
-            return true;
-        }
         for (TierEnum c : TierEnum.values()) {
             if (c.name().equals(test.toUpperCase())) {
                 return true;

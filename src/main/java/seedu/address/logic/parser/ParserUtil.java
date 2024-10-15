@@ -146,9 +146,12 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tier parseTag(String tag) throws ParseException {
+    public static Tier parseTier(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
+        if (trimmedTag.isEmpty()) {
+            trimmedTag = Tier.TierEnum.NA.toString();
+        }
         if (!Tier.isValidTierName(trimmedTag)) {
             throw new ParseException(Tier.MESSAGE_CONSTRAINTS);
         }

@@ -52,7 +52,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Job job = ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get());
         Income income = ParserUtil.parseIncome(argMultimap.getValue(PREFIX_INCOME).get());
-        Tier tier = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TIER).orElse("NA"));
+        Tier tier = ParserUtil.parseTier(argMultimap.getValue(PREFIX_TIER).orElse("NA"));
         Remark remark = new Remark(""); // add command does not allow adding remarks straight away
         Person person = new Person(name, phone, email, address, job, income, tier, remark);
         return new AddCommand(person);

@@ -63,7 +63,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setIncome(ParserUtil.parseIncome(argMultimap.getValue(PREFIX_INCOME).get()));
         }
         if (argMultimap.getValue(PREFIX_TIER).isPresent()) {
-            editPersonDescriptor.setTier(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TIER).get()));
+            editPersonDescriptor.setTier(ParserUtil.parseTier(argMultimap.getValue(PREFIX_TIER).get()));
         }
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
