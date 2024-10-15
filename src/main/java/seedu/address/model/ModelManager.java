@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Guest;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Vendor;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -118,8 +120,15 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Person> getFilteredGuestList() {
+        return new FilteredList<>(filteredPersons,
+                person -> person instanceof Guest);
+    }
+
+    @Override
+    public ObservableList<Person> getFilteredVendorList() {
+        return new FilteredList<>(filteredPersons,
+                person -> person instanceof Vendor);
     }
 
     @Override
