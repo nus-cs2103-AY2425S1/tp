@@ -4,8 +4,9 @@ import static hallpointer.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import hallpointer.address.model.point.Point;
 import org.junit.jupiter.api.Test;
+
+import hallpointer.address.model.point.Point;
 
 public class SessionTest {
 
@@ -26,9 +27,9 @@ public class SessionTest {
         SessionName sessionName = new SessionName("Session 1");
         SessionDate date = new SessionDate("24 Sep 2024");
         Point points = new Point(10);
-        
+
         Session session = new Session(sessionName, date, points);
-        
+
         // same session -> returns true
         assertTrue(session.isSameSession(session));
 
@@ -49,7 +50,7 @@ public class SessionTest {
         SessionName sessionName = new SessionName("Session 1");
         SessionDate date = new SessionDate("24 Sep 2024");
         Point points = new Point(10);
-        
+
         Session session = new Session(sessionName, date, points);
 
         // same values -> returns true
@@ -76,9 +77,9 @@ public class SessionTest {
         SessionName sessionName = new SessionName("Session 1");
         SessionDate date = new SessionDate("24 Sep 2024");
         Point points = new Point(10);
-        
+
         Session session = new Session(sessionName, date, points);
-        
+
         // Ensure that hash code remains consistent for the same object
         int initialHashCode = session.hashCode();
         assertTrue(initialHashCode == session.hashCode());
@@ -89,9 +90,9 @@ public class SessionTest {
         SessionName sessionName = new SessionName("Session 1");
         SessionDate date = new SessionDate("24 Sep 2024");
         Point points = new Point(10);
-        
+
         Session session = new Session(sessionName, date, points);
-        
+
         String expectedString = "Session{sessionName=Session 1, points=10}";
         assertTrue(session.toString().contains("sessionName=Session 1"));
         assertTrue(session.toString().contains("points=10"));

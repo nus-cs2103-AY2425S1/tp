@@ -10,7 +10,7 @@ public class PointTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        // Since points is an int, we cannot pass null directly, 
+        // Since points is an int, we cannot pass null directly,
         // but we will test for invalid points.
         assertThrows(IllegalArgumentException.class, () -> new Point(-1)); // Negative points
     }
@@ -24,8 +24,8 @@ public class PointTest {
     @Test
     public void isValidPoints() {
         // valid points
-        assertTrue(Point.isValidPoints(0));  // Minimum valid value
-        assertTrue(Point.isValidPoints(5));  // Positive integer
+        assertTrue(Point.isValidPoints(0)); // Minimum valid value
+        assertTrue(Point.isValidPoints(5)); // Positive integer
 
         // invalid points
         assertFalse(Point.isValidPoints(-1)); // Negative value
@@ -63,7 +63,7 @@ public class PointTest {
     @Test
     public void toStringTest() {
         Point point = new Point(10);
-        
+
         // Check if the toString returns the expected value
         assertTrue(point.toString().equals("10")); // Ensure toString returns correct value
     }
@@ -71,7 +71,7 @@ public class PointTest {
     @Test
     public void getValueTest() {
         Point point = new Point(10);
-        
+
         // Ensure that getValue returns the correct points value
         assertTrue(point.getValue() == 10); // Verify the getValue method
     }

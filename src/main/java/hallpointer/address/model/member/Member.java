@@ -57,6 +57,9 @@ public class Member {
         this.totalPoints = new Point(0);
     }
 
+    /**
+     * Every field must be present and not null. Overloaded constructor to include totalPoints and sessions.
+     */
     public Member(Name name, Telegram telegram, Room room, Set<Tag> tags, Point totalPoints, Set<Session> sessions) {
         requireAllNonNull(name, telegram, room, tags);
 
