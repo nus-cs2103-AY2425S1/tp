@@ -21,8 +21,8 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_JOB = "Engineer";
     public static final int DEFAULT_INCOME = 0;
-    public static final String DEFAULT_TIER = "NA";
-    public static final String DEFAULT_REMARK = "";
+    public static final String DEFAULT_TIER = "REJECT";
+    public static final String DEFAULT_REMARK = "N.A";
 
     private Name name;
     private Phone phone;
