@@ -13,7 +13,6 @@ github_icon: "images/github-icon.png"
 
 plugins:
   - jemoji
-  - jekyll-toc
 
 kramdown:
   parse_block_html: true
