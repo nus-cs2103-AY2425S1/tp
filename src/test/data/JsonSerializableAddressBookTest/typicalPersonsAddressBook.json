@@ -8,6 +8,7 @@
     "register number" : "3",
     "sex": "F",
     "class": "1A",
+    "emergency phone": "",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -17,6 +18,7 @@
     "register number" : "4",
     "sex": "M",
     "class": "2B",
+    "emergency phone": "",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -26,6 +28,7 @@
     "register number" : "5",
     "sex": "M",
     "class": "3C",
+    "emergency phone": "",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -35,6 +38,7 @@
     "register number" : "6",
     "sex": "M",
     "class": "4D",
+    "emergency phone": "",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -44,6 +48,7 @@
     "register number" : "7",
     "sex": "F",
     "class": "3E",
+    "emergency phone": "",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -53,6 +58,7 @@
     "register number" : "8",
     "sex": "F",
     "class": "2A",
+    "emergency phone": "",
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -62,6 +68,7 @@
     "register number" : "9",
     "sex": "M",
     "class": "1A",
+    "emergency phone": "",
     "tags" : [ ]
   } ]
 }
