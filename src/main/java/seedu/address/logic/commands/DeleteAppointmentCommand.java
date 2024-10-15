@@ -11,6 +11,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
+/**
+ * Deletes an appointment identified using it's displayed name from the address book
+ */
 public class DeleteAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "appointment-delete";
@@ -47,7 +50,8 @@ public class DeleteAppointmentCommand extends Command {
 
         Person appointmentToDelete = lastShownList.get(index);
         model.deleteAppointment(appointmentToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS, Messages.format(appointmentToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS, 
+                Messages.format(appointmentToDelete)));
     }
 
     @Override

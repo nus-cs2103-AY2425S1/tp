@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a Person's scheduled appointment in the address book.
