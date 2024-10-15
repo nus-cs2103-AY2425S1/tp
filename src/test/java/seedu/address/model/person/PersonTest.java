@@ -91,10 +91,26 @@ public class PersonTest {
         assertTrue(ALICE.hasDuplicateInfo(ALICE));
         assertFalse(ALICE.hasDuplicateInfo(null));
 
+        // Different name, phone, same email
         Person editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_AMY).build();
         Person aliceWithNewEmail = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_AMY).build();
         assertTrue(editedBob.hasDuplicateInfo(aliceWithNewEmail));
         assertFalse(editedBob.hasDuplicateInfo(ALICE));
+
+        // Different email, phone, same phone
+        Person editedBob2 = new PersonBuilder(BOB).withPhone(VALID_PHONE_BOB).build();
+        Person aliceWithNewEmail2 = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertTrue(editedBob2.hasDuplicateInfo(aliceWithNewEmail2));
+        assertFalse(editedBob2.hasDuplicateInfo(ALICE));
+
+        // Different email, name, same name
+        Person editedBob3 = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        Person aliceWithNewEmail3 = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertTrue(editedBob3.hasDuplicateInfo(aliceWithNewEmail3));
+        assertTrue(editedBob3.hasDuplicateInfo(BOB));
+
+        //NULL
+        assertFalse(editedBob3.hasDuplicateInfo(null));
     }
 
     @Test
