@@ -11,12 +11,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.EmergencyPhone;
 
 /**
- * Parses input arguments and creates a new {@code AddEmergencyContactNumberCommand} object
+ * Parses input arguments and creates a new EmergencyPhoneCommand object
  */
 public class EmergencyPhoneCommandParser implements Parser<EmergencyPhoneCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the {@code AddEmergencyContactNumberCommand}
-     * and returns a {@code AddEmergencyContactCommand} object for execution.
+     * Parses the given {@code String} of arguments in the context of the EmergencyPhoneCommand
+     * and returns an EmergencyPhoneCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format.
      */
     public EmergencyPhoneCommand parse(String args) throws ParseException {

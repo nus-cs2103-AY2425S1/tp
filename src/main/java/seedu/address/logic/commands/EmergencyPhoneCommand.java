@@ -14,16 +14,16 @@ import seedu.address.model.person.EmergencyPhone;
 import seedu.address.model.person.Person;
 
 /**
- * Changes the emergency contact number of an existing student in the address book
+ * Changes the emergency phone number of an existing student in the address book
  */
 public class EmergencyPhoneCommand extends Command {
 
     public static final String COMMAND_WORD = "emergencyPhone";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds an emergency contact number to the student "
-            + "identified by the name. "
-            + "Parameters: n/NAME en/[EMERGENCY_NUMBER]\n"
+            + ": Adds an emergency phone number to the student "
+            + "identified by the index.\n"
+            + "Parameters: [INDEX] en/[EMERGENCY_NUMBER]\n"
             + "Example: " + COMMAND_WORD + " 1 ep/91234567";
 
     public static final String MESSAGE_EMERGENCY_PHONE_SUCCESS = "Added emergency phone for %1$s\n"

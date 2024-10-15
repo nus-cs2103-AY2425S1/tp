@@ -25,7 +25,7 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for AddEmergencyContactNumberCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for EmergencyPhoneCommand.
  */
 public class EmergencyPhoneCommandTest {
 

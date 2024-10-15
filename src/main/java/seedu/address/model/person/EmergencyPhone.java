@@ -15,18 +15,19 @@ public class EmergencyPhone {
     public final String value;
 
     /**
-     * Constructs a {@code Phone}.
+     * Constructs a {@code EmergencyPhone}.
      *
-     * @param phone A valid phone number.
+     * @param emergencyPhone A valid emergency phone number.
      */
-    public EmergencyPhone(String phone) {
-        requireNonNull(phone);
-        checkArgument(isValidEmergencyPhone(phone), MESSAGE_CONSTRAINTS);
-        value = phone;
+    public EmergencyPhone(String emergencyPhone) {
+        requireNonNull(emergencyPhone);
+        checkArgument(isValidEmergencyPhone(emergencyPhone), MESSAGE_CONSTRAINTS);
+        value = emergencyPhone;
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid emergency phone number or empty string if the emergency
+     * phone is not updated.
      */
     public static boolean isValidEmergencyPhone(String test) {
         return test.matches(VALIDATION_REGEX) || test.isEmpty();
