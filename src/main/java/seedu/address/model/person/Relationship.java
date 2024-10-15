@@ -33,6 +33,11 @@ public class Relationship {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return relationship;
+    }
+
     private enum RelationshipType {
         PARENT,
         MOTHER,

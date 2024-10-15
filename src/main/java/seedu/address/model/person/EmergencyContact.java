@@ -73,10 +73,14 @@ public class EmergencyContact {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("relationship", relationship)
+        return new StringBuilder()
+                .append("Name: ")
+                .append(name)
+                .append(" Phone: ")
+                .append(phone)
+                .append(" Relationship: ")
+                .append(relationship)
+                .append(" ")
                 .toString();
     }
 }
