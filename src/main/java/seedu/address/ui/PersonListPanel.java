@@ -23,7 +23,12 @@ public class PersonListPanel extends UiPart<Region> {
     private final PersonCard.PersonSelectionHandler personSelectionHandler;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code PersonListPanel} with the given {@code ObservableList<Person>}
+     * and a {@code PersonSelectionHandler} for handling user selections of a person.
+     *
+     * @param personList The {@code ObservableList<Person>} that contains the list of persons to be displayed.
+     * @param personSelectionHandler The {@code PersonSelectionHandler}
+     *                               to handle selection events when a person is clicked.
      */
     public PersonListPanel(ObservableList<Person> personList,
                            PersonCard.PersonSelectionHandler personSelectionHandler) {
@@ -48,15 +53,7 @@ public class PersonListPanel extends UiPart<Region> {
             } else {
                 PersonCard personCard = new PersonCard(person, getIndex() + 1, personSelectionHandler);
                 setGraphic(personCard.getRoot());
-
-                // Handle click events on the person card
-                personCard.getRoot().setOnMouseClicked(event -> {
-                    // Notify the personSelectionHandler when a card is clicked
-                    personSelectionHandler.handlePersonSelection(person);
-                });
-
             }
         }
     }
-
 }

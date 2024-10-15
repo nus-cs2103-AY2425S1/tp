@@ -150,6 +150,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
+        // Displays the first person in the list if exists onto the PersonDetailView
         if (!logic.getFilteredPersonList().isEmpty()) {
             personDetailView = new PersonDetailView(logic.getFilteredPersonList().get(0));
             personDetailViewPlaceholder.getChildren().setAll(personDetailView.getRoot());

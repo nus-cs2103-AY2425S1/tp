@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -43,6 +42,7 @@ public class PersonCard extends UiPart<Region> {
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * It also allows handling of selection events through the provided {@code PersonSelectionHandler}.
      */
     public PersonCard(Person person, int displayedIndex, PersonSelectionHandler personSelectionHandler) {
         super(FXML);
@@ -54,6 +54,12 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
         relationship.getChildren().add(new Label(person.getRelationship().relationship));
+
+        // Handle click events on the person card
+        getRoot().setOnMouseClicked(event -> {
+            // Notify the personSelectionHandler when a card is clicked
+            personSelectionHandler.handlePersonSelection(person);
+        });
     }
 
     /**

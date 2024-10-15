@@ -14,7 +14,8 @@ import seedu.address.model.person.Person;
 
 
 /**
- * Detail view of a Person.
+ * A detailed view that displays the full details of a {@code Person}.
+ * This view updates dynamically when a new {@code Person} is provided.
  */
 public class PersonDetailView extends UiPart<Region> implements DetailView<Person> {
 
@@ -36,9 +37,10 @@ public class PersonDetailView extends UiPart<Region> implements DetailView<Perso
     private Label relationship;
 
     /**
-     * Initializes a new instance of a DetailView for a person.
+     * Initializes a new {@code PersonDetailView} for displaying the details of the provided {@code Person}.
+     * It sets the person's details (name, phone number, email, and relationship) in the view immediately.
      *
-     * @param p The Person to display.
+     * @param p The {@code Person} whose details are to be displayed.
      */
     public PersonDetailView(Person p) {
         super(FXML);
