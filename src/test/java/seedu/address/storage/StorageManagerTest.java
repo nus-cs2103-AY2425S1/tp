@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static seedu.address.testutil.TypicalAssignments.getTypicalAssignmentList;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import java.nio.file.Path;
@@ -14,6 +15,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.assignment.AssignmentList;
 
 public class StorageManagerTest {
 
@@ -67,4 +69,23 @@ public class StorageManagerTest {
         assertNotNull(storageManager.getAddressBookFilePath());
     }
 
+    // ================ Assignment Tests ==============================
+
+    @Test
+    public void assignmentListReadSave() throws Exception {
+        AssignmentList original = getTypicalAssignmentList();
+        storageManager.saveAssignments(original);
+        AssignmentList retrieved = storageManager.readAssignments().get();
+        assertEquals(original, retrieved);
+    }
+
+    @Test
+    public void getAssignmentFilePath() {
+        assertNotNull(storageManager.getAssignmentFilePath());
+    }
+    // ================ Tutorial Tests ==============================
+    @Test
+    public void getTutorialFilePath() {
+        assertNotNull(storageManager.getTutorialFilePath());
+    }
 }
