@@ -1,10 +1,10 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.AddProjectCommand;
-import seedu.address.model.project.Project;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_NAME;
+
+import seedu.address.logic.commands.AddProjectCommand;
+import seedu.address.model.project.Project;
 
 /**
  * A utility class for Person.
