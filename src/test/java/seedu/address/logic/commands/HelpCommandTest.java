@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.ui.CommandDetailChange;
 import seedu.address.ui.CommandTabChange;
 
 public class HelpCommandTest {
@@ -16,7 +17,7 @@ public class HelpCommandTest {
     @Test
     public void execute_help_success() {
         CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false,
-                CommandTabChange.NONE);
+                CommandTabChange.NONE, CommandDetailChange.NONE);
         assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
     }
 }

@@ -178,11 +178,21 @@ public class MainWindow extends UiPart<Stage> {
         return eventListPanel;
     }
 
-    public void setPersonTab() {
+    public void setPersonTab(CommandDetailChange commandDetailChange) {
+        if (commandDetailChange == CommandDetailChange.DETAILED) {
+            personListPanel.setDetailedView();
+        } else if (commandDetailChange == CommandDetailChange.SIMPLIFIED) {
+            personListPanel.setSimplifiedView();
+        }
         tabPanePlaceholder.getSelectionModel().select(0);
     }
 
-    public void setEventTab() {
+    public void setEventTab(CommandDetailChange commandDetailChange) {
+        if (commandDetailChange == CommandDetailChange.DETAILED) {
+            eventListPanel.setDetailedView();
+        } else if (commandDetailChange == CommandDetailChange.SIMPLIFIED) {
+            eventListPanel.setSimplifiedView();
+        }
         tabPanePlaceholder.getSelectionModel().select(1);
     }
 
@@ -208,9 +218,9 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.getTabChange() == CommandTabChange.PERSON) {
-                setPersonTab();
+                setPersonTab(commandResult.getCommandDetailChange());
             } else if (commandResult.getTabChange() == CommandTabChange.EVENT) {
-                setEventTab();
+                setEventTab(commandResult.getCommandDetailChange());
             }
 
             return commandResult;
