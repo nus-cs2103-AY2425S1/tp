@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.UniquePersonList;
+import seedu.address.model.rentalinformation.RentalInformation;
 
 /**
  * Wraps all data at the address-book level
@@ -92,6 +93,17 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Client key) {
         persons.remove(key);
+    }
+
+    public boolean hasRentalInformation(Client client, RentalInformation rentalInformation) {
+        requireNonNull(client);
+        requireNonNull(rentalInformation);
+
+        if (persons.contains(client)) {
+            return client.getRentalInformation().contains(rentalInformation);
+        }
+
+        return false;
     }
 
     //// util methods
