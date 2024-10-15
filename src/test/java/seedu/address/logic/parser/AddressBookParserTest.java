@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteYCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -61,6 +62,19 @@ public class AddressBookParserTest {
         String name = person.getName().fullName;
         DeleteCommand command = (DeleteCommand) parser.parseCommand(DeleteCommand.COMMAND_WORD + " n/" + name);
         assertEquals(new DeleteCommand(name), command);
+    }
+
+    @Test
+    public void parseCommand_deleteY() throws Exception {
+        Person person = new PersonBuilder().withName("Alice Pauline").build();
+        DeleteYCommand command = (DeleteYCommand) parser.parseCommand(
+                DeleteYCommand.COMMAND_WORD + " " + person.getName().fullName);
+        assertTrue(command instanceof DeleteYCommand);
+    }
+
+    @Test
+    public void parseCommand_invalidCommand_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parseCommand("invalidCommand"));
     }
 
     @Test
