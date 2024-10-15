@@ -27,8 +27,8 @@ public class TaskTest {
         // same object
         assertTrue(FIRST_TASK.isSameTask(FIRST_TASK));
         // copy of same object
-        Task FIRST_TASK_COPY = new Task(FIRST_TASK.getTaskName(), FIRST_TASK.getDeadline());
-        assertTrue(FIRST_TASK.isSameTask(FIRST_TASK_COPY));
+        Task copyFirstTask = new Task(FIRST_TASK.getTaskName(), FIRST_TASK.getDeadline());
+        assertTrue(FIRST_TASK.isSameTask(copyFirstTask));
     }
 
     @Test
