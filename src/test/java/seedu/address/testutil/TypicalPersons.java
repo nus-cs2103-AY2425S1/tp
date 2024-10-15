@@ -39,14 +39,16 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends")
+            .withMedCons("Lung Cancer", "Diabetes")
             .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withNric("S1234167F").withDateOfBirth("2000-01-05").withGender("M")
-            .withEmail("heinz@example.com").withAddress("wall street")
+            .withEmail("heinz@example.com").withAddress("wall street").withMedCons("Arthritis", "Scoliosis", "Myopia")
             .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withNric("T0234567B").withDateOfBirth("2005-01-01").withGender("M")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
+            .withMedCons("Skin Cancer", "Diabetes")
             .build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withNric("T0234567F").withDateOfBirth("2001-01-01").withGender("F")
