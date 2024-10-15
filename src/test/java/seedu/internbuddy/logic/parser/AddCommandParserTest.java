@@ -30,7 +30,6 @@ import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.internbuddy.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.internbuddy.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.internbuddy.testutil.TypicalCompanies.GOOGLE;
