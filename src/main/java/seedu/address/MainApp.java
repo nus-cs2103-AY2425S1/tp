@@ -21,6 +21,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.tag.TagList;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -89,8 +90,9 @@ public class MainApp extends Application {
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
         }
-
-        return new ModelManager(initialData, userPrefs);
+        // TODO: get taglist from storage
+        TagList temp = new TagList();
+        return new ModelManager(initialData, userPrefs, temp);
     }
 
     private void initLogging(Config config) {
