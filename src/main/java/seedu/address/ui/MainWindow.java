@@ -147,6 +147,16 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    // Setter for HelpWindow to allow injection in tests
+    public void setHelpWindow(HelpWindow helpWindow) {
+        this.helpWindow = helpWindow;
+    }
+
+    // Getter for HelpWindow to verify behavior in tests
+    public HelpWindow getHelpWindow() {
+        return helpWindow;
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -155,7 +165,7 @@ public class MainWindow extends UiPart<Stage> {
      * Closes the application.
      */
     @FXML
-    private void handleExit() {
+    protected void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
