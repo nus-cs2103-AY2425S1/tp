@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
@@ -15,14 +17,18 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all records with the specified NRICs "
-            + "(case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + "S12345678Z";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds a record with the specified NRICs "
+            + "(case-sensitive) OR \n"
+            + "all records matching the specified names (case insensitive), \n"
+            + "before displaying as a list with index numbers.\n"
+            + "Parameters: NRIC | NAME [MORE_NAMES]...\n"
+            + "Examples:\n"
+            + COMMAND_WORD + " S1234567Z\n"
+            + COMMAND_WORD + " bob alice charlie\n";
 
-    private final NricContainsKeywordsPredicate predicate;
+    private final Predicate predicate;
 
-    public FindCommand(NricContainsKeywordsPredicate predicate) {
+    public FindCommand(Predicate predicate) {
         this.predicate = predicate;
     }
 
