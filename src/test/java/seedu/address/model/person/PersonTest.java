@@ -3,10 +3,16 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -14,6 +20,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -49,6 +56,24 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
+    }
+
+    @Test
+    public void testOverloadedConstructors() {
+        Person actualBob = new Person(new Name(VALID_NAME_BOB), new Phone(VALID_PHONE_BOB), new Email(VALID_EMAIL_BOB),
+                new Address(VALID_ADDRESS_BOB), SampleDataUtil.getTagSet(VALID_TAG_HUSBAND));
+        Person expectedBob = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withBirthday("").withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertEquals(expectedBob, actualBob);
+
+        Person actualAmy = new Person(new Name(VALID_NAME_AMY), new Phone(VALID_PHONE_AMY), new Email(VALID_EMAIL_AMY),
+                new Address(VALID_ADDRESS_AMY), new Remark(VALID_REMARK_AMY),
+                SampleDataUtil.getTagSet(VALID_TAG_FRIEND));
+        Person expectedAmy = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withRemark(VALID_REMARK_AMY)
+                .withBirthday("").withTags(VALID_TAG_FRIEND).build();
+        assertEquals(expectedAmy, actualAmy);
     }
 
     @Test
