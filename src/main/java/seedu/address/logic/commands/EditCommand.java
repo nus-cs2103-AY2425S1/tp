@@ -10,8 +10,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -103,7 +105,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Set<Game> updatedGames = editPersonDescriptor.getGames().orElse(personToEdit.getGames());
+        Map<String, Game> updatedGames = editPersonDescriptor.getGames().orElse(personToEdit.getGames());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedGames);
     }
@@ -142,7 +144,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
-        private Set<Game> games;
+        private Map<String, Game> games;
 
 
         public EditPersonDescriptor() {}
@@ -220,8 +222,8 @@ public class EditCommand extends Command {
          * Sets {@code games} to this object's {@code games}.
          * A defensive copy of {@code games} is used internally.
          */
-        public void setGames(Set<Game> games) {
-            this.games = (games != null) ? new HashSet<>(games) : null;
+        public void setGames(Map<String, Game> games) {
+            this.games = (games != null) ? new HashMap<>(games) : null;
         }
 
         /**
@@ -229,8 +231,8 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code games} is null.
          */
-        public Optional<Set<Game>> getGames() {
-            return (games != null) ? Optional.of(Collections.unmodifiableSet(games)) : Optional.empty();
+        public Optional<Map<String, Game>> getGames() {
+            return (games != null) ? Optional.of(Collections.unmodifiableMap(games)) : Optional.empty();
         }
         @Override
         public boolean equals(Object other) {

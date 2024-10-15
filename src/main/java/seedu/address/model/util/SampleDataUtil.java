@@ -1,6 +1,8 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,22 +25,22 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends"), getGameSet("LoL")),
+                getTagSet("friends"), getGameMap("LoL")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends"), getGameSet("LoL")),
+                getTagSet("colleagues", "friends"), getGameMap("LoL")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours"), getGameSet("LoL")),
+                getTagSet("neighbours"), getGameMap("LoL")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family"), getGameSet("LoL")),
+                getTagSet("family"), getGameMap("LoL")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates"), getGameSet("LoL")),
+                getTagSet("classmates"), getGameMap("LoL")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"), getGameSet("LoL"))
+                getTagSet("colleagues"), getGameMap("LoL"))
         };
     }
 
@@ -60,12 +62,13 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns a game set containing the list of strings given.
      */
-    public static Set<Game> getGameSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(Game::new)
-                .collect(Collectors.toSet());
+    public static Map<String, Game> getGameMap(String... strings) {
+        Map<String, Game> gameMap = new HashMap<>();
+         Arrays.stream(strings)
+                .forEach((gameName) -> gameMap.put(gameName, new Game(gameName)));
+         return gameMap;
     }
 
 }

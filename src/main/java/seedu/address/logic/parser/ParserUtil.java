@@ -3,13 +3,16 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.game.Game;
+import seedu.address.model.game.Username;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -140,12 +143,12 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> games} into a {@code Set<Game>}.
      */
-    public static Set<Game> parseGames(Collection<String> games) throws ParseException {
+    public static Map<String, Game> parseGames(Collection<String> games) throws ParseException {
         requireNonNull(games);
-        final Set<Game> gameSet = new HashSet<>();
-        for (String gameName : games) {
-            gameSet.add(parseGame(gameName));
+        final Map<String, Game> gameMap = new HashMap<>();
+        for (String gameName: games) {
+            gameMap.put(gameName, parseGame(gameName));
         }
-        return gameSet;
+        return gameMap;
     }
 }

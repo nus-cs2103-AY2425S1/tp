@@ -73,7 +73,7 @@ public class PersonBuilder {
      * Parses the {@code games} into a {@code Set<Game>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withGames(String ... games) {
-        this.games = SampleDataUtil.getGameSet(games);
+        this.games = SampleDataUtil.getGameMap(games);
         return this;
     }
     /**
