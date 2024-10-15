@@ -46,9 +46,8 @@ public class Messages {
                 .append("; Address: ")
                 .append(person.getAddress())
                 .append("; Telegram username: ")
-                .append(telegramUsername)
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append(telegramUsername);
+
         return builder.toString();
     }
 
