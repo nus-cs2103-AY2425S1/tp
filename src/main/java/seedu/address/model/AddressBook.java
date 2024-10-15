@@ -45,7 +45,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         this();
         setPersons(toBeCopied.getPersonList());
         setProjects(toBeCopied.getProjectList());
-        resetData(toBeCopied);
+        resetPersonData(toBeCopied);
+        resetProjectData(toBeCopied);
     }
 
     //// list overwrite operations
@@ -67,12 +68,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing persons data of this {@code AddressBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetPersonData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+    }
+
+    /**
+     * Resets the existing projects data of this {@code AddressBook} with {@code newData}.
+     */
+    public void resetProjectData(ReadOnlyAddressBook newData) {
+        requireNonNull(newData);
+
+        setProjects(newData.getProjectList());
     }
 
     //// person-level operations

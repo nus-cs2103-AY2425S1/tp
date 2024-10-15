@@ -10,14 +10,14 @@ import static java.util.Objects.requireNonNull;
  */
 public class ClearProjectCommand extends Command {
 
-    public static final String COMMAND_WORD = "clear";
+    public static final String COMMAND_WORD = "clearproject";
     public static final String MESSAGE_SUCCESS = "Address book projects have been cleared!";
 
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        model.setAddressBookProject(new AddressBook());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

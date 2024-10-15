@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddProjectCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearProjectCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteProjectCommand;
@@ -80,6 +81,9 @@ public class AddressBookParser {
 
         case DeleteProjectCommand.COMMAND_WORD:
             return new DeleteProjectCommandParser().parse(arguments);
+
+        case ClearProjectCommand.COMMAND_WORD:
+            return new ClearProjectCommand();
 
         case FindProjectCommand.COMMAND_WORD:
             return new FindProjectCommandParser().parse(arguments);

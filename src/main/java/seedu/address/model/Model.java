@@ -48,9 +48,19 @@ public interface Model {
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces all address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
+
+    /**
+     * Replaces address book persons data with the data in {@code addressBook}.
+     */
+    void setAddressBookPerson(ReadOnlyAddressBook addressBook);
+
+    /**
+     * Replaces address book projects data with the data in {@code addressBook}.
+     */
+    void setAddressBookProject(ReadOnlyAddressBook addressBook);
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();

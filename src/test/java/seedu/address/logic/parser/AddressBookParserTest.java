@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddProjectCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearProjectCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteProjectCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -109,6 +110,12 @@ public class AddressBookParserTest {
         DeleteProjectCommand command = (DeleteProjectCommand) parser.parseCommand(
                 DeleteProjectCommand.COMMAND_WORD + " " + INDEX_FIRST_PROJECT.getOneBased());
         assertEquals(new DeleteProjectCommand(INDEX_FIRST_PROJECT), command);
+    }
+
+    @Test
+    public void parseCommand_clearProject() throws Exception {
+        assertTrue(parser.parseCommand(ClearProjectCommand.COMMAND_WORD) instanceof ClearProjectCommand);
+        assertTrue(parser.parseCommand(ClearProjectCommand.COMMAND_WORD + " 3") instanceof ClearProjectCommand);
     }
 
     @Test
