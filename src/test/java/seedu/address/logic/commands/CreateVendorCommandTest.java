@@ -26,7 +26,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.testutil.VendorBuilder;
 
-public class AddCommandTest {
+public class CreateVendorCommandTest {
 
     @Test
     public void constructor_nullVendor_throwsNullPointerException() {
