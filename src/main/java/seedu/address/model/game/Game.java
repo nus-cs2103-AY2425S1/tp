@@ -20,6 +20,7 @@ public class Game {
 
     public final String gameName;
     public final Username username;
+    public final SkillLevel skillLevel;
 
     /**
      * Constructs a {@code Game} without a username.
@@ -31,6 +32,7 @@ public class Game {
         checkArgument(isValidGameName(gameName), MESSAGE_CONSTRAINTS);
         this.gameName = gameName;
         this.username = null;
+        this.skillLevel = null;
     }
 
     /**
@@ -43,6 +45,20 @@ public class Game {
         checkArgument(isValidGameName(gameName), MESSAGE_CONSTRAINTS);
         this.gameName = gameName;
         this.username = new Username(username);
+        this.skillLevel = null;
+    }
+
+    /**
+     * Constructs a {@code Game} with a username.
+     *
+     * @param gameName A valid Game name.
+     */
+    public Game(String gameName, String username, String skillLevel) {
+        requireNonNull(gameName);
+        checkArgument(isValidGameName(gameName), MESSAGE_CONSTRAINTS);
+        this.gameName = gameName;
+        this.username = new Username(username);
+        this.skillLevel = new SkillLevel(skillLevel);
     }
 
     /**
