@@ -219,6 +219,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
+            fillInnerParts();
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
@@ -232,6 +233,8 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.getChangeState() != -1) {
                 changeSystemState(commandResult.getChangeState());
             }
+
+
 
             return commandResult;
         } catch (CommandException | ParseException e) {

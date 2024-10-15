@@ -73,7 +73,8 @@ public class AddTaskToGroupCommand extends Command {
         if (!model.hasTask(task)) {
             model.addTask(task);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(task), Messages.format(group)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, task.getTaskName().toString(),
+                Messages.format(group)));
     }
 
     @Override
