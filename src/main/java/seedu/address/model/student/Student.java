@@ -126,6 +126,11 @@ public class Student {
         return Objects.hash(name, email, studentNumber, tags);
     }
 
+    public String toDisplayString() {
+        return new StringBuilder().append(name).append(" [").append(studentNumber).append(", ").append(email).append(
+            "]").toString();
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)

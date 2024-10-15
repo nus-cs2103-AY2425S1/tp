@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Optional;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -42,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label studentNumber;
+    @FXML
+    private Label group;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Student} and index to display.
@@ -53,6 +56,11 @@ public class PersonCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         email.setText(student.getEmail().value);
         studentNumber.setText(student.getStudentNumber().value);
+        if(student.getGroup().equals(Optional.empty())){
+            group.setText("Not in group yet.");
+        }else{
+            group.setText(student.getGroup().toString());
+        }
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
