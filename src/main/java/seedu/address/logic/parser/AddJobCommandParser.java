@@ -11,10 +11,10 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddJobCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.common.Name;
 import seedu.address.model.job.Job;
 import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobDescription;
-import seedu.address.model.job.JobName;
 import seedu.address.model.job.JobRequirements;
 import seedu.address.model.job.JobSalary;
 
@@ -48,7 +48,7 @@ public class AddJobCommandParser implements Parser<AddJobCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_COMPANY,
                     PREFIX_SALARY, PREFIX_REQUIREMENTS, PREFIX_DESCRIPTION);
-        JobName name = ParserUtil.parseJobName(argMultimap.getValue(PREFIX_NAME).get());
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         JobCompany company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
         JobSalary salary = ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get());
         JobRequirements requirements = ParserUtil.parseRequirements(argMultimap.getValue(PREFIX_REQUIREMENTS).get());

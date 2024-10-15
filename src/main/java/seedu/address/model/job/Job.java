@@ -1,12 +1,13 @@
 package seedu.address.model.job;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.common.Name;
 
 /**
  * Represents a Job Listing in the address book.
  */
 public class Job {
-    private final JobName name;
+    private final Name name;
     private final JobCompany company;
     private final JobSalary salary;
     private final JobRequirements requirements;
@@ -16,7 +17,7 @@ public class Job {
      * TODO: Implement data validation
      * Every field has no validation for now.
      */
-    public Job(JobName name, JobCompany company, JobSalary salary, JobRequirements requirements,
+    public Job(Name name, JobCompany company, JobSalary salary, JobRequirements requirements,
             JobDescription description) {
         this.name = name;
         this.company = company;
@@ -25,7 +26,7 @@ public class Job {
         this.description = description;
     }
 
-    public JobName getName() {
+    public Name getName() {
         return name;
     }
 

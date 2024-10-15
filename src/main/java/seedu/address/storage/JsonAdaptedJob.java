@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.common.Name;
 import seedu.address.model.job.Job;
 import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobDescription;
-import seedu.address.model.job.JobName;
 import seedu.address.model.job.JobRequirements;
 import seedu.address.model.job.JobSalary;
 
@@ -42,7 +42,7 @@ class JsonAdaptedJob {
      * Converts a given {@code Job} into this class for Jackson use.
      */
     public JsonAdaptedJob(Job source) {
-        name = source.getName().value;
+        name = source.getName().fullName;
         company = source.getCompany().value;
         salary = String.valueOf(source.getSalary().value);
         requirements = source.getRequirements().value;
@@ -57,13 +57,13 @@ class JsonAdaptedJob {
     public Job toModelType() throws IllegalValueException {
 
         // TODO: Input validation
-        JobName modelJobName = new JobName(name);
+        Name modelName = new Name(name);
         JobCompany modelJobCompany = new JobCompany(company);
         JobSalary modelJobSalary = new JobSalary(salary);
         JobRequirements modelJobRequirements = new JobRequirements(requirements);
         JobDescription modelJobDescription = new JobDescription(description);
 
-        return new Job(modelJobName, modelJobCompany, modelJobSalary, modelJobRequirements, modelJobDescription);
+        return new Job(modelName, modelJobCompany, modelJobSalary, modelJobRequirements, modelJobDescription);
     }
 
 }

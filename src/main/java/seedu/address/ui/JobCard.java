@@ -38,7 +38,7 @@ public class JobCard extends UiPart<Region> {
         super(FXML);
         this.job = job;
         id.setText(displayedIndex + ". ");
-        name.setText(job.getName().value);
+        name.setText(job.getName().fullName);
         company.setText(job.getCompany().value);
         salary.setText(job.getSalary().toString());
         requirements.setText(job.getRequirements().value);
