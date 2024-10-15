@@ -205,6 +205,23 @@ public class InsurancePlansManager {
         return count;
     }
 
+    /**
+     * Retrieves a formatted string listing all claims associated with the insurance plans.
+     *
+     * This method constructs a string representation of claims for each insurance plan
+     * managed by the current entity. If there are no insurance plans, it returns a message
+     * indicating that there are no insurance plans available. For each insurance plan,
+     * it lists the claims, and if a plan has no claims, it appends a message indicating that
+     * there are no claims for that particular plan.
+     *
+     * The format of the returned string is as follows:
+     * - For each insurance plan, it includes the plan's details.
+     * - If an insurance plan has no claims, it appends {@link #NO_CLAIMS_MESSAGE}.
+     * - If claims exist, they are listed with an index number.
+     *
+     * @return A string representation of all claims associated with the insurance plans,
+     *         or {@link #NO_INSURANCE_PLANS_MESSAGE} if there are no insurance plans.
+     */
     public String accessClaims() {
         StringBuilder listOfClaims = new StringBuilder();
         if (this.insurancePlans.isEmpty()) {
