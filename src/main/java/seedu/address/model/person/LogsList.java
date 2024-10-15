@@ -1,10 +1,10 @@
 package seedu.address.model.person;
 
-import seedu.address.model.log.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import seedu.address.model.log.Log;
 
 /**
  * Represents a list of logs in the address book.
