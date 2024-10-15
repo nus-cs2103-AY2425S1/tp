@@ -18,14 +18,14 @@ public class RsvpCommandParser implements Parser<RsvpCommand> {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RsvpCommand.MESSAGE_USAGE));
+                    String.format(RsvpCommand.MESSAGE_INVALID_FORMAT);
         }
 
 
         // Split the trimmedArgs into commandWord and index
         String[] splitArgs = trimmedArgs.split("\\s+");
         if (splitArgs.length != 2) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RsvpCommand.MESSAGE_USAGE));
+            throw new ParseException(RsvpCommand.MESSAGE_INVALID_FORMAT);
         }
 
         // Check if the index is a valid number
@@ -37,7 +37,7 @@ public class RsvpCommandParser implements Parser<RsvpCommand> {
             throw new ParseException("ERROR: Please enter a valid index (from 1 to [list length])");
         }
 
-        boolean isRsvp = commandWord.equals(RsvpCommand.COMMAND_WORD);
+        boolean isRsvp = commandWord.equals(RsvpCommand.RSVP_COMMAND_WORD);
         return new RsvpCommand(index, isRsvp);
     }
 }

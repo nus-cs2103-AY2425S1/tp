@@ -21,17 +21,21 @@ public class Person {
     private final Phone phone;
     private final Email email;
 
+    // Data fields
+
+    private final boolean isRsvp;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, boolean isRsvp, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.tags.addAll(tags);
+        this.isRsvp = isRsvp;
     }
 
     public Name getName() {
@@ -44,6 +48,10 @@ public class Person {
 
     public Email getEmail() {
         return email;
+    }
+
+    public boolean isRsvp() {
+        return isRsvp;
     }
 
     /**
@@ -101,6 +109,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
+                .add("isRsvp", isRsvp)
                 .add("tags", tags)
                 .toString();
     }
