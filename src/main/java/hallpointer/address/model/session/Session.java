@@ -2,7 +2,6 @@ package hallpointer.address.model.session;
 
 import static hallpointer.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
