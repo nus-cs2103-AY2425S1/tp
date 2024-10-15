@@ -44,6 +44,7 @@ public class PhoneTest {
         assertTrue(Phone.isValidPhone("999-999")); // Hyphen allowed between numbers
         assertTrue(Phone.isValidPhone("92-9")); // Phone number with at least 3 digits in total
         assertTrue(Phone.isValidPhone("987 983-834")); // Number with space and hyphen
+        assertTrue(Phone.isValidPhone("987 983-834  ")); // Number with trailing whitespaces
     }
 
     @Test

@@ -44,6 +44,7 @@ public class NameTest {
         assertTrue(Name.isValidName("David-Joseph Robson")); // Hyphenated names
         assertTrue(Name.isValidName("David-Joseph-Robson")); // Multiple hyphens in name
         assertTrue(Name.isValidName("1-2-3")); // Hyphens between digits
+        assertTrue(Name.isValidName("David Joseph Robson  ")); // Name with trailing whitespaces
     }
 
     @Test
