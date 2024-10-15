@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -30,8 +29,8 @@ public class AddClassCommand extends Command {
 
 
     public static final String MESSAGE_SUCCESS = "Added %1$s : %2$s to %3$s";
-    public static final String MESSAGE_DUPLICATE_CLASS = "Student is already taking that subject. " +
-            "Please check the student details and try again";
+    public static final String MESSAGE_DUPLICATE_CLASS = "Student is already taking that subject. "
+            + "Please check the student details and try again";
     public static final String MESSAGE_NO_STUDENT_FOUND = "No student found with specified ic";
 
 
@@ -59,7 +58,7 @@ public class AddClassCommand extends Command {
 
         student = model.getPersonWithIc(toAddIc);
 
-        if (model.personDuplicateClass(toAddSubject,student)) {
+        if (model.personDuplicateClass(toAddSubject, student)) {
             throw new CommandException(MESSAGE_DUPLICATE_CLASS);
         }
 

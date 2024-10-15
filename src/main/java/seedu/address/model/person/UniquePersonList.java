@@ -182,10 +182,10 @@ public class UniquePersonList implements Iterable<Person> {
     public void sortPersonsByClass() {
         internalList.sort(Comparator.comparing(person ->
                 person.getSubjects().stream()
-                        .map(Subject::toString)          // Convert each subject to string
-                        .sorted()                        // Sort the subjects lexicographically
-                        .findFirst()                     // Get the lexicographically smallest subject
-                        .orElse("")                      // Handle the case where a person has no subjects
+                        .map(Subject::toString)         // Convert each subject to string
+                        .sorted()                       // Sort the subjects lexicographically
+                        .findFirst()                    // Get the lexicographically smallest subject
+                        .orElse("")               // Handle the case where a person has no subjects
         ));
     }
 
