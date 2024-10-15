@@ -2,7 +2,6 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
-import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -68,21 +67,13 @@ public class LogicManager implements Logic {
 
     @Override
     public ObservableList<Person> getFilteredGuestList() {
-        // return model.getFilteredGuestList();
-        return model.getFilteredPersonList();
+        return model.getFilteredGuestList();
     }
 
     @Override
     public ObservableList<Person> getFilteredVendorList() {
-        // return model.getFilteredVendorList();
-        return model.getFilteredPersonList();
+        return model.getFilteredVendorList();
     }
-
-    @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
-    }
-
     @Override
     public GuiSettings getGuiSettings() {
         return model.getGuiSettings();

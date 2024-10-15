@@ -151,7 +151,12 @@ public class AddGuestCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Person> getFilteredGuestList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredVendorList() {
             throw new AssertionError("This method should not be called.");
         }
 
