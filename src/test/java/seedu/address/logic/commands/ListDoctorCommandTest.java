@@ -42,7 +42,6 @@ public class ListDoctorCommandTest {
         // same values -> returns true
         assertEquals(listDoctorCommand, listDoctorCommandCopy);
         assertNotEquals(listDoctorCommand, null); // Null check -> returns false
-
     }
 
     @Test

@@ -1,12 +1,13 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_ARGUMENT_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
 import seedu.address.logic.commands.FindDoctorCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.doctor.FindDoctorPredicate;
 
 /**
  * Parses input arguments and creates a new FindDoctorCommand object
@@ -24,8 +25,13 @@ public class FindDoctorCommandParser implements Parser<FindDoctorCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindDoctorCommand.MESSAGE_USAGE));
         }
 
+        // Ensure that the input is a string of alphabets separated by spaces
+        if (args.matches("^.*[^a-zA-Z ].*$")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_ARGUMENT_FORMAT, FindDoctorCommand.MESSAGE_USAGE));
+        }
+
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new FindDoctorCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FindDoctorCommand(new FindDoctorPredicate(Arrays.asList(nameKeywords)));
     }
 }
