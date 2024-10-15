@@ -50,7 +50,6 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-    public static final String MESSAGE_HAS_CLASHES = "\nYou have %d other students with clashing schedule:\n%s";
 
     private final Person toAdd;
 
@@ -79,18 +78,7 @@ public class AddCommand extends Command {
         } else {
             return new CommandResult(
                     String.format(MESSAGE_SUCCESS, Messages.format(toAdd))
-                    + String.format(
-                            MESSAGE_HAS_CLASHES,
-                            clashes,
-                            Messages.listFormat(
-                                    clashingPersons,
-                                    person -> String.format(
-                                            "Name: %s | Schedule: %s\n",
-                                            person.getName(),
-                                            person.getSchedule()
-                                    )
-                            )
-                    )
+                    + Messages.getWarningMessageForClashes(clashes, clashingPersons)
             );
         }
 

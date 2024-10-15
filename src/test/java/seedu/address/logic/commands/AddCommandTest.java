@@ -64,7 +64,7 @@ public class AddCommandTest {
 
         assertTrue(commandResult.getFeedbackToUser().contains(
                 String.format(
-                        AddCommand.MESSAGE_HAS_CLASHES,
+                        Messages.MESSAGE_HAS_CLASHES,
                         1,
                         "Name: " + ALICE.getName() + " | Schedule: " + ALICE.getSchedule() + "\n")));
     }
