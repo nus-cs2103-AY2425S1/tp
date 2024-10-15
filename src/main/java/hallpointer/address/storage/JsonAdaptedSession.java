@@ -8,10 +8,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import hallpointer.address.commons.exceptions.IllegalValueException;
 import hallpointer.address.model.member.Member;
-import hallpointer.address.model.session.SessionDate;
-import hallpointer.address.model.session.Session;
-import hallpointer.address.model.session.SessionName;
 import hallpointer.address.model.point.Point;
+import hallpointer.address.model.session.Session;
+import hallpointer.address.model.session.SessionDate;
+import hallpointer.address.model.session.SessionName;
 
 /**
  * Jackson-friendly version of {@link Session}.

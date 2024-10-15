@@ -9,9 +9,9 @@ import java.util.Objects;
 import java.util.Set;
 
 import hallpointer.address.commons.util.ToStringBuilder;
-import hallpointer.address.model.tag.Tag;
 import hallpointer.address.model.point.Point;
 import hallpointer.address.model.session.Session;
+import hallpointer.address.model.tag.Tag;
 
 /**
  * Represents a Member in the address book.
@@ -85,17 +85,29 @@ public class Member {
         return Collections.unmodifiableSet(sessions);
     }
 
+    /**
+     * @param points Points to be added to the member.
+     * Adds the given points to the member's total points.
+     */
     public void addPoints(Point points) {
         requireNonNull(points);
         this.totalPoints = new Point(this.totalPoints.points + points.points);
     }
 
+    /**
+     * @param session Session to be added to the member.
+     * Adds the given session to the member's list of sessions.
+     */
     public void addSession(Session session) {
         requireNonNull(session);
         this.sessions.add(session);
         this.totalPoints = new Point(this.totalPoints.points + session.getPoints().points);
     }
 
+    /**
+     * @param session Session to be removed from the member.
+     * Removes the given session from the member's list of sessions.
+     */
     public void removeSession(Session session) {
         requireNonNull(session);
         this.sessions.remove(session);
