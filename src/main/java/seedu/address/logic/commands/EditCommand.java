@@ -161,7 +161,6 @@ public class EditCommand extends Command {
             setAddTags(toCopy.addTags);
             setDeleteTags(toCopy.deleteTags);
             setRemark(toCopy.remark);
-            setTags(toCopy.tags);
         }
 
         /**
@@ -270,8 +269,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(addTags, otherEditPersonDescriptor.addTags);
-                    && Objects.equals(tags, otherEditPersonDescriptor.deleteTags)
+                    && Objects.equals(addTags, otherEditPersonDescriptor.addTags)
+                    && Objects.equals(deleteTags, otherEditPersonDescriptor.deleteTags)
                     && Objects.equals(remark, otherEditPersonDescriptor.remark);
         }
 
