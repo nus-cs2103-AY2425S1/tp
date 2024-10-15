@@ -21,7 +21,6 @@ import seedu.address.model.client.Phone;
 public class JsonAdaptedClientTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-//    private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String VALID_NAME_BENSON = BENSON.getName().toString();
@@ -59,7 +58,8 @@ public class JsonAdaptedClientTest {
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(null, VALID_PHONE_BENSON, VALID_EMAIL_BENSON, VALID_TAGS_BENSON);
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(null, VALID_PHONE_BENSON, VALID_EMAIL_BENSON, VALID_TAGS_BENSON);
 
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -75,7 +75,8 @@ public class JsonAdaptedClientTest {
 
     @Test
     public void toModelType_nullPhone_success() throws IllegalValueException {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME_DENVER, null, VALID_EMAIL_DENVER, VALID_TAGS_DENVER);
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME_DENVER, null, VALID_EMAIL_DENVER, VALID_TAGS_DENVER);
 
         assertEquals(DENVER, person.toModelType());
     }
@@ -91,7 +92,8 @@ public class JsonAdaptedClientTest {
 
     @Test
     public void toModelType_nullEmail_success() throws IllegalValueException {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME_CHARLIE, VALID_PHONE_CHARLIE, null, VALID_TAGS_CHARLIE);
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME_CHARLIE, VALID_PHONE_CHARLIE, null, VALID_TAGS_CHARLIE);
 
         assertEquals(CHARLIE, person.toModelType());
     }

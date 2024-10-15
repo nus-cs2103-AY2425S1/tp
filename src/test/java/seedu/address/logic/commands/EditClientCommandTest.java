@@ -41,7 +41,8 @@ public class EditClientCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedClient).build();
         EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedClient));
+        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                                               Messages.format(editedClient));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedClient);
@@ -62,7 +63,8 @@ public class EditClientCommandTest {
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditClientCommand editClientCommand = new EditClientCommand(indexLastPerson, descriptor);
 
-        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedClient));
+        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                                               Messages.format(editedClient));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastClient, editedClient);
@@ -75,7 +77,8 @@ public class EditClientCommandTest {
         EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
         Client editedClient = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedClient));
+        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                                               Messages.format(editedClient));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
@@ -91,7 +94,8 @@ public class EditClientCommandTest {
         EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedClient));
+        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                                               Messages.format(editedClient));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedClient);

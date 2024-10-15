@@ -45,6 +45,7 @@ public class FindCommand extends Command {
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
+    // TODO: update this equals method
     @Override
     public boolean equals(Object other) {
         if (other == this) {

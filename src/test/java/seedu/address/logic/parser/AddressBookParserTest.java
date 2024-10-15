@@ -13,9 +13,15 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.AddClientCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditClientCommand;
 import seedu.address.logic.commands.EditClientCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
@@ -62,13 +68,15 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
 
-//    @Test
-//    public void parseCommand_find() throws Exception {
-//        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-//        FindCommand command = (FindCommand) parser.parseCommand(
-//                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-//        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
-//    }
+    // TODO: update the below test
+    @Test
+    public void parseCommand_find() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindCommand command = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords), null, null),
+                     command);
+    }
 
     @Test
     public void parseCommand_help() throws Exception {

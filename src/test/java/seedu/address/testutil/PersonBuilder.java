@@ -7,7 +7,6 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
-import seedu.address.model.rentalinformation.Address;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -42,7 +41,6 @@ public class PersonBuilder {
         name = clientToCopy.getName();
         phone = clientToCopy.getPhone();
         email = clientToCopy.getEmail();
-//        address = clientToCopy.getAddress();
         tags = new HashSet<>(clientToCopy.getTags());
     }
 
@@ -61,14 +59,6 @@ public class PersonBuilder {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
-
-//    /**
-//     * Sets the {@code Address} of the {@code Client} that we are building.
-//     */
-//    public PersonBuilder withAddress(String address) {
-//        this.address = new Address(address);
-//        return this;
-//    }
 
     /**
      * Sets the {@code Phone} of the {@code Client} that we are building.
@@ -94,10 +84,11 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Returns the {@code Client} that we have built.
+     */
     public Client build() {
-//        return new Client(name, phone, email, address, tags);
         return new Client(name, phone, email, tags);
-
     }
 
 }
