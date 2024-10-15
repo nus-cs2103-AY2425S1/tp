@@ -299,7 +299,7 @@ Priorities: Very high (must have) - `****`,  High (good to have) - `***`, Medium
 | `****`   | teacher  who grades assignments     | edit status of submitted assignments                                          | keep track if a student has submitted an assignment        |
 | `***`    | teacher                             | create remark for individual students                                         | not forget any special consideration for certain students  |
 | `***`    | teacher                             | edit assignments                                                              | ensure that the assignments are up to date                 |
-| `***`    | teacher                             | view my student's contact information                                         | know how I can contact them if there are any issues        |
+| `***`    | teacher                             | view my student's student information                                         | know how I can student them if there are any issues        |
 | `***`    | teacher                             | view the submission deadlines                                                 | know when to remind my students                            |
 | `***`    | forgetful teacher                   | be reminded on deadlines due in 2 days                                        | prioritize which assignments to mark                       |
 | `***`    | teacher                             | sort an assignment by score                                                   | see the best and worst performers                          |
@@ -676,7 +676,7 @@ unless specified otherwise)
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Private student detail**: A student detail that is not meant to be shared with others
 * **Teacher** : Abbreviation of Teaching Assistant, a student responsible for assisting instructors in managing courses
 * **Class**: A group of students taking the same course assigned to a specific tutorial, sectional, laboratory or recitation which a Teacher is responsible for.
 
@@ -717,7 +717,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First student is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
