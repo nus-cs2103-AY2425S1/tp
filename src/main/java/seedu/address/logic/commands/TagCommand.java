@@ -24,9 +24,8 @@ public class TagCommand extends Command {
             + "identified by their index number. \n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_TAG + "TAG (specify at least 1)... \n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TAG + "friends" + " "
-            + PREFIX_TAG + "owesMoney";
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_TAG + "photographer foodCaterer";
 
     public static final String MESSAGE_TAG_PERSON_SUCCESS = "Tagged person: %1$s with tags: %2$s";
 
