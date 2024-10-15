@@ -3,6 +3,7 @@ package seedu.ddd.testutil;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_DATE;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 
@@ -29,7 +30,7 @@ public class ClientBuilder {
     public static final String DEFAULT_EMAIL = VALID_EMAIL_AMY;
     public static final String DEFAULT_ADDRESS = VALID_ADDRESS_AMY;
     public static final String DEFAULT_DATE = VALID_DATE;
-    public static final int DEFAULT_ID = 0;
+    public static final String DEFAULT_ID = VALID_ID_AMY;
 
     private Name name;
     private Phone phone;

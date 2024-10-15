@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.logic.commands.CommandTestUtil.DESC_CLIENT_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.DESC_CONTACT_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.DESC_VENDOR_BOB;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -135,6 +136,16 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicateContactList_failure() {
+        Contact firstContact = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
+        EditContactDescriptor descriptor = new EditClientDescriptorBuilder((Client) firstContact)
+                .withId(VALID_ID_AMY).build();
+        EditCommand editCommand = new EditCommand(INDEX_THIRD_CONTACT, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_CONTACT);
+    }
+
+    @Test
+    public void execute_duplicateId_failure() {
         Contact firstContact = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
         EditContactDescriptor descriptor = new EditClientDescriptorBuilder((Client) firstContact).build();
         EditCommand editCommand = new EditCommand(INDEX_THIRD_CONTACT, descriptor);

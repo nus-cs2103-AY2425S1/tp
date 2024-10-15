@@ -71,6 +71,11 @@ public class EditClientDescriptorBuilder extends EditContactDescriptorBuilder {
     }
 
     @Override
+    public EditClientDescriptorBuilder withId(String id) {
+        return (EditClientDescriptorBuilder) super.withId(id);
+    }
+
+    @Override
     public EditClientDescriptor build() {
         return (EditClientDescriptor) super.build();
     }

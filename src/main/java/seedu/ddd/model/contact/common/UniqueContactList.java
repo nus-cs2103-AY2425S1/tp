@@ -71,7 +71,7 @@ public class UniqueContactList implements Iterable<Contact> {
         Predicate<Contact> duplicateIdPredicate = contact ->
                 contact.getId().equals(editedContact.getId()) && !contact.equals(target);
         if (internalList.stream().anyMatch(duplicateIdPredicate)) {
-            throw new DuplicateContactException(editedContact.getId());
+            throw new DuplicateContactException();
         }
 
         internalList.set(index, editedContact);

@@ -102,7 +102,7 @@ public class EditCommand extends Command {
         try {
             model.setContact(contactToEdit, editedContact);
         } catch (DuplicateContactException e) {
-            throw new CommandException(e.getMessage());
+            throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
         model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
         return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact)));

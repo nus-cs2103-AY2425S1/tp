@@ -67,6 +67,11 @@ public class EditVendorDescriptorBuilder extends EditContactDescriptorBuilder {
     }
 
     @Override
+    public EditVendorDescriptorBuilder withId(String id) {
+        return (EditVendorDescriptorBuilder) super.withId(id);
+    }
+
+    @Override
     public EditVendorDescriptor build() {
         return (EditVendorDescriptor) super.build();
     }
