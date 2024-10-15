@@ -10,14 +10,14 @@ CareLink is a desktop address book application targeted towards independent Geri
 Given below are my contributions to the project.
 
 
-* **New Feature**: Added the ability to find a patient or caregiver based on the given NRIC.
+* **New Feature**: Added the ability to find a patient or caregiver based on the given NRIC [\#71]
   * What it does: allows the user to find 1 or more person by using their NRIC.
   * Justification: This feature enables the doctor to quickly retrieve the records of a patient using their NRIC. 
   * Highlights: This is an enhancement to the already existing find feature which finds person based on their names. This addition features quicker retrieval by using a person's unique NRIC.
 
 
 * **Enhancements to existing features**:
-  * Updated the Parser to incorporate a new NRIC field
+  * Updated the Parser to incorporate a new NRIC field [\#62]
 
 
 * **Documentation**:
