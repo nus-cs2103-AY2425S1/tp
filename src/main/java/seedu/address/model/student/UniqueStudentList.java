@@ -79,6 +79,7 @@ public class UniqueStudentList implements Iterable<Student> {
         internalList.set(index, editedStudent);
     }
 
+
     /**
      * Removes the equivalent student from the list.
      * The student must exist in the list.

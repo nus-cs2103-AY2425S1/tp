@@ -7,15 +7,12 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.PresentDates;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
@@ -131,33 +128,17 @@ public class ParserUtil {
      * Parses a date string in the format "dd/MM/yyyy" and converts it to a {@link TutDate} object.
      *
      * @param date The date string in the format "dd/MM/yyyy".
-     * @return A {@link TutDate} object representing the parsed date.
+     * @return A {@link Date} object representing the parsed date.
      * @throws ParseException If the date string is not in the correct format or cannot be parsed.
      */
-    public static TutDate parseDate(String date) throws ParseException {
+    public static Date parseDate(String date) throws ParseException {
         try {
-            Date d = new SimpleDateFormat("dd/MM/yyyy").parse(date);
-            return new TutDate(d);
+            return new SimpleDateFormat("yyyy/MM/dd").parse(date);
         } catch (java.text.ParseException e) {
             throw new ParseException(TutDate.MESSAGE_CONSTRAINTS);
         }
     }
 
-    /**
-     * Parses a collection of date strings and converts them into a {@link PresentDates} object.
-     *
-     * @param presentDates A collection of date strings in the format "dd/MM/yyyy".
-     * @return A {@link PresentDates} object containing the parsed dates.
-     * @throws ParseException If any of the date strings cannot be parsed.
-     */
-    public static PresentDates parseDates(Collection<String> presentDates) throws ParseException {
-        requireNonNull(presentDates);
-        final ArrayList<TutDate> dates = new ArrayList<>();
-        for (String date : presentDates) {
-            dates.add(parseDate(date));
-        }
-        return new PresentDates(dates);
-    }
 
     /**
      * Parses a due date string into a {@link LocalDateTime} object.

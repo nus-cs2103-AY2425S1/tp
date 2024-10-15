@@ -16,12 +16,12 @@ import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
 
 public class JsonAdaptedStudentTest {
-    private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_STUDENT_ID = "-1"; // Assuming negative IDs are invalid
     private static final String INVALID_TUTORIAL_CLASS = ""; // Assuming empty string is invalid
-    private static final String INVALID_DATE_STRING = "31/02/2023";
-    private static final JsonAdaptedTutDate INVALID_TUT_DATE = new JsonAdaptedTutDate(INVALID_DATE_STRING,
-            null);
+    private static final String INVALID_DATE_STRING = "2023/02/31";
+    private static final List<String> VALID_STUDENT_IDS = List.of("1001", "1002");
+    private static final JsonAdaptedTutDate INVALID_TUT_DATE =
+            new JsonAdaptedTutDate(INVALID_DATE_STRING, VALID_STUDENT_IDS);
     private static final List<JsonAdaptedTutDate> INVALID_TUT_DATES = new ArrayList<>();
 
     static {

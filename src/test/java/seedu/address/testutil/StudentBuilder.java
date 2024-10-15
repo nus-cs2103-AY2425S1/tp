@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 import seedu.address.model.student.Name;
 import seedu.address.model.student.PresentDates;
@@ -14,7 +14,7 @@ import seedu.address.model.student.TutorialClass;
 public class StudentBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final PresentDates DEFAULT_PRESENT_DATES = new PresentDates(new ArrayList<>());
+    public static final PresentDates DEFAULT_PRESENT_DATES = new PresentDates(new HashSet<>());
     public static final String DEFAULT_STUDENT_ID = "1000";
     public static final String DEFAULT_TUTORIAL_CLASS = "1001";
 

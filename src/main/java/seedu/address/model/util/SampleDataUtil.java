@@ -2,9 +2,9 @@ package seedu.address.model.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -56,7 +56,7 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
-    public static ArrayList<TutDate> getDateList(String... strings) {
+    public static Set<TutDate> getDateList(String... strings) {
         return Arrays.stream(strings)
                 .map(s -> {
                     try {
@@ -65,7 +65,7 @@ public class SampleDataUtil {
                         throw new RuntimeException(e);
                     }
                 })
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toCollection(HashSet::new));
     }
 
     /**

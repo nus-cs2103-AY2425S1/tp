@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
@@ -25,7 +26,7 @@ import seedu.address.model.tut.TutDate;
 public class TypicalStudents {
 
     // Date formatter
-    private static final String DATE_FORMAT = "dd/MM/yyyy";
+    private static final String DATE_FORMAT = "yyyy/MM/dd";
     private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT);
 
     // Create sample Dates
@@ -34,8 +35,8 @@ public class TypicalStudents {
 
     static {
         try {
-            DATE1 = DATE_FORMATTER.parse("12/10/2023");
-            DATE2 = DATE_FORMATTER.parse("19/10/2023");
+            DATE1 = DATE_FORMATTER.parse("2023/10/12");
+            DATE2 = DATE_FORMATTER.parse("2023/10/19");
         } catch (ParseException e) {
             throw new RuntimeException("Error parsing dates in TypicalStudents", e);
         }
@@ -47,7 +48,7 @@ public class TypicalStudents {
 
     // Create PresentDates for the students
     private static final PresentDates SAMPLE_PRESENT_DATES =
-            new PresentDates(new ArrayList<>(Arrays.asList(TUT_DATE1, TUT_DATE2)));
+            new PresentDates(new HashSet<>(Arrays.asList(TUT_DATE1, TUT_DATE2)));
 
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
             .withStudentId("1001").withTutorialClass("1001")

@@ -1,6 +1,6 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -85,7 +85,7 @@ class JsonAdaptedStudent {
         if (presentDates != null) {
             modelPresentDates = presentDates.toModelType();
         } else {
-            modelPresentDates = new PresentDates(new ArrayList<>());
+            modelPresentDates = new PresentDates(new HashSet<>());
         }
 
         return new Student(modelName, modelStudentId, modelTutorialClass, modelPresentDates);
