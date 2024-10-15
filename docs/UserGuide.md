@@ -68,7 +68,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaIning how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -79,28 +79,54 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL j/JOB_CODE_APPLIED_FOR [t/TAG]`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
-</box>
+**Tip:** Only one interview stage tag will be attached to a contact at any point of time. 
+
+Please refer to this table
+for list of valid tags:
+
+| Tag | Interview Stage                 |
+|-----|---------------------------------|
+| N   | New                             |
+| TP  | Technical Interview in Progress |
+| TC | Technical Interview Confirmed |
+| BP | Behavioral Interview in Progress |
+| BC | Behavioral Interview Confirmed |
+| A| Accepted|
+| R | Rejected |
+
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com j/XYZ1010, t/N`
+* `add n/Betsy Crowe t/BP e/betsycrowe@example.com j/AB1301 p/1234567`
 
-### Listing all persons : `list`
+### Listing persons based on attribute : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons or selected persons with certain attributes.
 
-Format: `list`
+Format: 
 
+`list`
+`list j/JOB_APPLIED_FOR`
+`list t/TAG`
+
+* `list` shows the list of all persons in the address book.
+* `list j/JOB_APPLIED_FOR` filters the persons based on job code they appled for.
+* `list t/TAG` filters the persons based on their interview stage tag.
+
+Examples:
+* `list`
+* `list j/XYZ1234`
+* `list t/TP`
+* 
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE_APPLIED_FOR] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -135,15 +161,25 @@ Examples:
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: 
+`delete INDEX`
+`delete n/NAME`
+`delete n/NAME n/PHONE_NUMBER`
+`delete n/NAME n/EMAIL`
 
-* Deletes the person at the specified `INDEX`.
+
+* Deletes the person at the specified `INDEX`, with a specified full name `NAME`, `NAME` and `PHONE_NUMBER`, or `NAME` 
+* and `EMAIL`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* If there are contacts with duplicate names, user must specifically find `NAME` and `PHONE` or `NAME` and `EMAIL`.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete n/Betsy` will delete contact with the full name Betsy. 
+* If there are two John Doe, one with `p/8834156` and another with `p/3810349`, type command
+* `delete n/John Doe p/8834156` to delete the former.
 
 ### Clearing all entries : `clear`
 
