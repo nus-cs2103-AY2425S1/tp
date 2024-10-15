@@ -193,6 +193,7 @@ public class Member {
                 .add("room", room)
                 .add("tags", tags)
                 .add("totalPoints", totalPoints)
+                .add("sessions", sessions)
                 .toString();
     }
 }
