@@ -4,12 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
-
 import java.util.Arrays;
 import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 
 public class MessageTest {
 
