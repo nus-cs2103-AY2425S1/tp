@@ -13,7 +13,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Person;
-import seedu.address.model.supplier.Supplier;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -25,7 +24,6 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Delivery> filteredDeliveries;
-    private final FilteredList<Supplier> filteredSuppliers;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,7 +37,6 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredDeliveries = new FilteredList<>(this.addressBook.getDeliveryList());
-        filteredSuppliers = new FilteredList<>(this.addressBook.getSupplierList());
 
     }
 
@@ -118,19 +115,6 @@ public class ModelManager implements Model {
 
         addressBook.setPerson(target, editedPerson);
     }
-    //=========== Supplier List Methods ==========================================================================
-    @Override
-    public void deleteSupplier(Supplier target) {
-        addressBook.removeSupplier(target);
-    }
-
-    @Override
-    public void setSupplier(Supplier target, Supplier editedSupplier) {
-        requireAllNonNull(target, editedSupplier);
-
-        addressBook.setSupplier(target, editedSupplier);
-    }
-
 
     //=========== Delivery List Methods ======================================================================
     @Override
@@ -169,16 +153,7 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredDeliveries.setPredicate(predicate);
     }
-    //=========== Filtered Supplier List Accessors =============================================================
-    @Override
-    public ObservableList<Supplier> getFilteredSupplierList() {
-        return filteredSuppliers;
-    }
-    @Override
-    public void updateFilteredSupplierList(Predicate<Supplier> predicate) {
-        requireNonNull(predicate);
-        filteredSuppliers.setPredicate(predicate);
-    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
