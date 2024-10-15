@@ -46,10 +46,12 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE_DELIVERY = COMMAND_WORD + ": Adds a delivery to the inspected person. "
             + "Parameters: "
+            + PREFIX_NAME + "NAME "
             + PREFIX_ETA + "ETA "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_COST + "COST\n"
             + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "Monitor "
             + PREFIX_ETA + "2020-02-02 "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25, S120300 "
             + PREFIX_COST + "$100 ";

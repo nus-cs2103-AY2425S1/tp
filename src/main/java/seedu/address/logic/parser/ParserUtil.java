@@ -13,6 +13,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Eta;
+import seedu.address.model.delivery.ItemName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -159,5 +160,20 @@ public class ParserUtil {
             throw new ParseException(Cost.MESSAGE_CONSTRAINTS);
         }
         return new Cost(trimmedCost);
+    }
+
+    /**
+     * Parses a {@code String itemId} into an {@code ItemName.java}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code itemId} is invalid.
+     */
+    public static ItemName parseItemName(String itemId) throws ParseException {
+        requireNonNull(itemId);
+        String trimmedName = itemId.trim();
+        if (!ItemName.isValidItemName(trimmedName)) {
+            throw new ParseException(ItemName.MESSAGE_CONSTRAINTS);
+        }
+        return new ItemName(itemId);
     }
 }
