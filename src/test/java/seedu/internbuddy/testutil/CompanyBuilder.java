@@ -27,8 +27,8 @@ public class CompanyBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tag> tags;
     private Status status;
+    private Set<Tag> tags;
 
     /**
      * Creates a {@code companyBuilder} with the default details.
@@ -38,6 +38,7 @@ public class CompanyBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        status = new Status(DEFAULT_STATUS);
         tags = new HashSet<>();
         status = new Status(DEFAULT_STATUS);
     }
@@ -105,5 +106,4 @@ public class CompanyBuilder {
     public Company build() {
         return new Company(name, phone, email, address, tags, status);
     }
-
 }

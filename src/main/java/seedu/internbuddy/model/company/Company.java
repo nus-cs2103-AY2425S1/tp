@@ -23,8 +23,8 @@ public class Company {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
     private final Status status;
+    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -37,19 +37,6 @@ public class Company {
         this.address = address;
         this.tags.addAll(tags);
         this.status = status;
-    }
-
-    /**
-     * Construct but with default value for {@code status = "INTERESTED"}.
-     */
-    public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.status = new Status("INTERESTED");
     }
 
     public Name getName() {
@@ -68,16 +55,16 @@ public class Company {
         return address;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
-    }
-
-    public Status getStatus() {
-        return status;
     }
 
     /**
@@ -113,14 +100,14 @@ public class Company {
                 && phone.equals(otherCompany.phone)
                 && email.equals(otherCompany.email)
                 && address.equals(otherCompany.address)
-                && tags.equals(otherCompany.tags)
-                && status.equals(otherCompany.status);
+                && status.equals(otherCompany.status)
+                && tags.equals(otherCompany.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, status);
+        return Objects.hash(name, phone, email, address, status, tags);
     }
 
     @Override
@@ -130,8 +117,8 @@ public class Company {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
                 .add("status", status)
+                .add("tags", tags)
                 .toString();
     }
 
