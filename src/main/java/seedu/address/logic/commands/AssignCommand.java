@@ -38,6 +38,22 @@ public class AssignCommand extends Command {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AssignCommand)) {
+            return false;
+        }
+
+        AssignCommand otherCommand = (AssignCommand) other;
+        return vendorIndex.equals(otherCommand.vendorIndex)
+            && eventIndex.equals(otherCommand.eventIndex);
+    }
+
+    @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
@@ -54,6 +70,11 @@ public class AssignCommand extends Command {
 
         Vendor vendor = vendorList.get(vendorIndex.getZeroBased());
         Event event = eventList.get(eventIndex.getZeroBased());
+
+        if (model.isVendorAssignedToEvent(vendor, event)) {
+            throw new CommandException(Messages.MESSAGE_VENDOR_ALREADY_ASSIGNED);
+        }
+
         model.assignVendorToEvent(vendor, event);
 
         return new CommandResult(

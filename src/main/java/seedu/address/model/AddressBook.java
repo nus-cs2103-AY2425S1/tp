@@ -117,15 +117,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// assign operations
 
     /**
+     * Returns true if the given {@code vendor} is already assigned to the given {@code event}.
+     * {@code vendor} and {@code event} must exist in the address book.
+     */
+    public boolean isVendorAssignedToEvent(Vendor vendor, Event event) {
+        requireAllNonNull(vendor, event);
+        Pair<Vendor, Event> pair = new Pair<>(vendor, event);
+        return associations.contains(pair);
+    }
+
+    /**
      * Assigns the given {@code vendor} in the list to {@code event}.
      * {@code vendor} and {@code event} must exist in the address book.
-     * The association between {@code vendor} and {@code event} must not already exist.
      */
     public void assignVendorToEvent(Vendor vendor, Event event) {
         requireAllNonNull(vendor, event);
         Pair<Vendor, Event> pair = new Pair<>(vendor, event);
-        if (associations.contains(pair)) {
-        }
         associations.add(pair);
     }
 

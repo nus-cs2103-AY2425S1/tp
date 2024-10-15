@@ -115,6 +115,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isVendorAssignedToEvent(Vendor vendor, Event event) {
+        requireAllNonNull(vendor, event);
+        return addressBook.isVendorAssignedToEvent(vendor, event);
+    }
+
+    @Override
     public void assignVendorToEvent(Vendor vendor, Event event) {
         requireAllNonNull(vendor, event);
         addressBook.assignVendorToEvent(vendor, event);

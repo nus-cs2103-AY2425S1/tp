@@ -94,8 +94,13 @@ public interface Model {
     void updateFilteredVendorList(Predicate<Vendor> predicate);
 
     /**
+     * Returns true if the given {@code vendor} is already assigned to the given {@code event}.
+     * {@code vendor} and {@code event} must exist in the address book.
+     */
+    boolean isVendorAssignedToEvent(Vendor vendor, Event event);
+
+    /**
      * Assigns the vendor corresponding to the id to the event specified by its id.
-     * @throws VendorAlreadyAssignedException if {@code Pair<Vendor, Event>} already exists in the associations set.
      */
     void assignVendorToEvent(Vendor vendor, Event event);
 
