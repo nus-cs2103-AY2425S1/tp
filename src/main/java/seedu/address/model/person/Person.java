@@ -19,11 +19,9 @@ public class Person {
     // Identity fields
     private final Name name;
     private final Phone phone;
-    //  private final Email email;
+    private final Email email;
 
     // Data fields
-    //  private final Address address;
-    //  private final Remark remark;
     private final Property property;
     private final Appointment appointment;
     //  private final Set<Tag> tags = new HashSet<>();
@@ -31,13 +29,11 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Appointment appointment, Property property) {
+    public Person(Name name, Phone phone, Email email, Appointment appointment, Property property) {
         requireAllNonNull(name, phone, appointment, property);
         this.name = name;
         this.phone = phone;
-        //  this.email = email;
-        //  this.address = address;
-        //  this.remark = remark;
+        this.email = email;
         this.appointment = appointment;
         this.property = property;
         //  this.tags.addAll(tags);
@@ -53,6 +49,7 @@ public class Person {
     public Person(Name name) {
         this.name = name;
         this.phone = null;
+        this.email = null;
         this.property = new Property("");
         this.appointment = new Appointment(new Date(""), new From(""), new To(""));
     }
@@ -65,15 +62,9 @@ public class Person {
         return phone;
     }
 
-    //  public Email getEmail() {
-    //      return email;
-    //  }
-    //  public Address getAddress() {
-    //      return address;
-    //  }
-    //  public Remark getRemark() {
-    //      return remark;
-    //  }
+    public Email getEmail() {
+        return email;
+    }
 
     public Property getProperty() {
         return property;
@@ -118,16 +109,14 @@ public class Person {
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
-                && property.equals(otherPerson.property);
-                //  && email.equals(otherPerson.email)
-                //  && address.equals(otherPerson.address)
-                //  && tags.equals(otherPerson.tags);
+                //  && tags.equals(otherPerson.tags)
+                && email.equals(otherPerson.email);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, appointment, property);
+        return Objects.hash(name, phone, email, appointment, property);
     }
 
     @Override
@@ -135,10 +124,8 @@ public class Person {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
-                //  .add("email", email)
-                //  .add("address", address)
-                //  .add("remark", remark)
                 //  .add("tags", tags)
+                .add("email", email)
                 .add("appointment", appointment)
                 .add("property", property)
                 .toString();

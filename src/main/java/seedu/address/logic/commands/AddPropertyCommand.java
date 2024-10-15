@@ -60,8 +60,8 @@ public class AddPropertyCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(personToEdit.getName(),
-                personToEdit.getPhone(), personToEdit.getAppointment(), property);
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(),
+                personToEdit.getEmail(), personToEdit.getAppointment(), property);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));
@@ -74,7 +74,7 @@ public class AddPropertyCommand extends Command {
      * @return A success message string.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !property.getProperty().isEmpty()
+        String message = !property.toString().isEmpty()
                 ? MESSAGE_ADD_PROPERTY_SUCCESS
                 : MESSAGE_DELETE_PROPERTY_SUCCESS;
         return String.format(message, personToEdit);

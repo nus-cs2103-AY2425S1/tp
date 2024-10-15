@@ -24,7 +24,7 @@ public class DeleteClientProfileCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/Tan Wen Xuan";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Successfully deleted %1$s "
-            + " with the number, %2$s!";
+            + " with the number: %2$s " + "and email: %3s!";
     private final Name targetName;
 
     public DeleteClientProfileCommand(Name targetName) {

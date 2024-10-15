@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MISSING_CLIENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.logic.commands.DeleteClientProfileCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -10,7 +11,7 @@ import seedu.address.model.person.Name;
 /**
  * Parses input arguments and creates a new DeleteClientProfileCommand object
  */
-public class DeleteCommandParser implements Parser<DeleteClientProfileCommand> {
+public class DeleteClientProfileCommandParser implements Parser<DeleteClientProfileCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteClientProfileCommand
@@ -18,7 +19,7 @@ public class DeleteCommandParser implements Parser<DeleteClientProfileCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteClientProfileCommand parse(String args) throws ParseException {
-        String namePrefix = "n/";
+        String namePrefix = PREFIX_NAME.toString();
         String trimmedArgs = args.trim();
 
         // Check if the input contains the "n/" prefix
