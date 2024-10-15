@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
@@ -23,17 +24,17 @@ public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
-    private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
-    private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
+
+    private static final String DATETIME_INVALID_FORMAT = "2024-12-12 11, 00";
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -76,6 +77,18 @@ public class ParserUtilTest {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
         Name expectedName = new Name(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
+    }
+
+    @Test
+    public void parseGoodsName_invalidValue_throwsParseException() {
+        String invalidGoodsName = "Bread*Invalid";
+        assertThrows(ParseException.class, () -> ParserUtil.parseGoodsName(invalidGoodsName));
+    }
+
+    @Test
+    public void parseGoodsName_validValue_success() {
+        String validGoodsName = "Milk Bread";
+        assertDoesNotThrow(() -> ParserUtil.parseGoodsName(validGoodsName));
     }
 
     @Test
@@ -169,5 +182,27 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseGoodsCategory_invalidValue_throwsParseException() {
+        String invalidCategory = "NOTGOODS";
+        assertThrows(ParseException.class, () -> ParserUtil.parseGoodsCategory(invalidCategory));
+    }
+
+    @Test
+    public void parseGoodsCategory_validValue_success() {
+        String validCategory = "CONSUMABLES";
+        assertDoesNotThrow(() -> ParserUtil.parseGoodsCategory(validCategory));
+    }
+
+    @Test
+    public void parseDateTimeValues_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDateTimeValues(null));
+    }
+
+    @Test
+    public void parseDateTimeValues_invalidFormat_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTimeValues(DATETIME_INVALID_FORMAT));
     }
 }
