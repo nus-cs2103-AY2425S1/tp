@@ -55,6 +55,7 @@ public class ListTaskCommand extends Command {
             model.setStateGroupTask();
             return new CommandResult(MESSAGE_SUCCESS, LIST_GROUP_TASK_MARKER);
         }
+        model.setStateTasks();
         return new CommandResult(MESSAGE_SUCCESS_ALL_TASKS, LIST_TASK_MARKER);
     }
 

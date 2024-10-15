@@ -26,10 +26,11 @@ public class Group {
     /**
      * Every field must be present and not null.
      */
-    public Group(GroupName groupName, Set<Student> students) {
+    public Group(GroupName groupName, Set<Student> students, Set<Task> tasks) {
         requireAllNonNull(groupName, students);
         this.groupName = groupName;
         this.students.addAll(students);
+        this.tasks.addAll(tasks);
     }
 
     /**

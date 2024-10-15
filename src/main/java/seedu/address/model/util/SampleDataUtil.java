@@ -18,17 +18,17 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Student[] getSamplePersons() {
         return new Student[]{
-            new Student(new Name("Alex Yeoh"), new Email("alexyeoh@example.com"),
+            new Student(new Name("Alex Yeoh"), new Email("alexyeoh@u.nus.edu"),
                 getTagSet("friends"), new StudentNumber("A0737935G")),
-            new Student(new Name("Bernice Yu"), new Email("berniceyu@example.com"),
+            new Student(new Name("Bernice Yu"), new Email("berniceyu@u.nus.edu"),
                 getTagSet("colleagues", "friends"), new StudentNumber("A0597991H")),
-            new Student(new Name("Charlotte Oliveiro"), new Email("charlotte@example.com"),
+            new Student(new Name("Charlotte Oliveiro"), new Email("charlotte@u.nus.edu"),
                 getTagSet("neighbours"), new StudentNumber("A0632228J")),
-            new Student(new Name("David Li"), new Email("lidavid@example.com"),
+            new Student(new Name("David Li"), new Email("lidavid@u.nus.edu"),
                 getTagSet("family"), new StudentNumber("A0965321G")),
-            new Student(new Name("Irfan Ibrahim"), new Email("irfan@example.com"),
+            new Student(new Name("Irfan Ibrahim"), new Email("irfan@u.nus.edu"),
                 getTagSet("classmates"), new StudentNumber("A0467953H")),
-            new Student(new Name("Roy Balakrishnan"), new Email("royb@example.com"),
+            new Student(new Name("Roy Balakrishnan"), new Email("royb@u.nus.edu"),
                 getTagSet("colleagues"), new StudentNumber("A0122764H"))
         };
     }

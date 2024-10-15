@@ -122,6 +122,17 @@ public interface Model {
     boolean hasPersonInGroup(Student student, Group group);
 
     /**
+     * Returns true if a task with the same identity as {@code task} exists in the group
+     * with the same identity as {@code task}.
+     */
+    boolean hasTaskInGroup(Task task, Group group);
+
+    /**
+     * Returns true if a task with the same identity as {@code task} exists in the in the model
+     */
+    boolean hasTask(Task task);
+
+    /**
      * Returns a {@code Student} with the student number {@code studentNumber}.
      * There must exist such a {@code Student} in the address book.
      */
@@ -176,4 +187,8 @@ public interface Model {
     void deleteStudentFromGroup(Group group, Student student);
 
     void deleteGroup(Group groupToBeDeleted);
+
+    void addTaskToGroup(Task task, Group group);
+
+    void addTask(Task task);
 }

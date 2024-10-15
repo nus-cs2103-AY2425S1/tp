@@ -1,8 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_STATUS;
+
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -10,55 +12,66 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.student.Student;
-import seedu.address.model.student.StudentNumber;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Status;
+import seedu.address.model.task.TaskName;
 
 /**
- * Adds a student to a group.
+ * Adds a task to a group.
  */
-public class AddStudentToGroupCommand extends Command {
+public class AddTaskToGroupCommand extends Command {
 
-    public static final String COMMAND_WORD = "add_student_grp";
+    public static final String COMMAND_WORD = "add_task_grp";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to a group. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to a group. "
             + "Parameters: "
-            + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER "
-            + PREFIX_GROUP_NAME + "GROUP_NAME\n"
+            + PREFIX_TASK_NAME + "TASK_NAME\n "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_STUDENT_NUMBER + "A02345678J "
-            + PREFIX_GROUP_NAME + "Group 1";
+            + PREFIX_TASK_NAME + "Complete this task";
 
-    public static final String MESSAGE_SUCCESS = "Added student: %1$s from %2$s";
+    public static final String MESSAGE_SUCCESS = "Added task: %1$s to %2$s";
 
-    public static final String MESSAGE_DUPLICATE_STUDENT_IN_GROUP = "This student is already in the group";
+    public static final String MESSAGE_DUPLICATE_TASK_IN_GROUP = "This task is already in the group";
 
-    private final StudentNumber toAdd;
+    public static final String GROUP_NOT_FOUND = "Group not found!";
+
+    private final TaskName taskName;
+
+    private final Deadline deadline;
 
     private final GroupName toAddInto;
 
     /**
      * Creates an AddStudentToGroupCommand to add the specified {@code Student} to the specified {@code Group}
      */
-    public AddStudentToGroupCommand(StudentNumber studentNumber, GroupName groupName) {
-        requireNonNull(studentNumber);
+    public AddTaskToGroupCommand(TaskName taskName, Deadline deadline, GroupName groupName) {
+        requireNonNull(taskName);
         requireNonNull(groupName);
-        toAdd = studentNumber;
-        toAddInto = groupName;
+        this.taskName = taskName;
+        this.deadline = deadline;
+        this.toAddInto = groupName;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        Student student = model.getPersonByNumber(toAdd);
-        Group group = model.getGroupByName(toAddInto);
-
-        if (model.hasPersonInGroup(student, group)) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT_IN_GROUP);
+        if (!model.containsGroupName(toAddInto)) {
+            throw new CommandException(GROUP_NOT_FOUND);
         }
 
-        model.addPersonToGroup(student, group);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(student), Messages.format(group)));
+        Task task = new Task(taskName, deadline);
+        Group group = model.getGroupByName(toAddInto);
+
+        if (model.hasTaskInGroup(task, group)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TASK_IN_GROUP);
+        }
+
+        model.addTaskToGroup(task, group);
+        if (!model.hasTask(task)) {
+            model.addTask(task);
+        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(task), Messages.format(group)));
     }
 
     @Override
@@ -67,19 +80,21 @@ public class AddStudentToGroupCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof AddStudentToGroupCommand)) {
+        if (!(other instanceof AddTaskToGroupCommand)) {
             return false;
         }
 
-        AddStudentToGroupCommand otherAddStudentToGroupCommand = (AddStudentToGroupCommand) other;
-        return toAdd.equals(otherAddStudentToGroupCommand.toAdd)
-                && toAddInto.equals(otherAddStudentToGroupCommand.toAddInto);
+        AddTaskToGroupCommand otherAddTaskToGroupCommand = (AddTaskToGroupCommand) other;
+        return taskName.equals(otherAddTaskToGroupCommand.taskName)
+                && deadline.equals(otherAddTaskToGroupCommand.deadline)
+                && toAddInto.equals(otherAddTaskToGroupCommand.toAddInto);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
+                .add("taskName", taskName)
+                .add("deadline", deadline)
                 .add("toAddInto", toAddInto)
                 .toString();
     }
