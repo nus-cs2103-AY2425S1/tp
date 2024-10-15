@@ -20,7 +20,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.skill.SkillsContainsKeywordsPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
  */
 public class FilterCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -77,13 +77,13 @@ public class FilterCommandTest {
     @Test
     public void toStringMethod() {
         SkillsContainsKeywordsPredicate predicate = new SkillsContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FilterCommand findCommand = new FilterCommand(predicate);
+        FilterCommand filterCommand = new FilterCommand(predicate);
         String expected = FilterCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, findCommand.toString());
+        assertEquals(expected, filterCommand.toString());
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code SkillsContainsKeywordsPredicate}.
      */
     private SkillsContainsKeywordsPredicate preparePredicate(String userInput) {
         return new SkillsContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));

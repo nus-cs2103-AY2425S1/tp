@@ -45,8 +45,8 @@ public class FilterCommand extends Command {
             return false;
         }
 
-        FilterCommand otherFindCommand = (FilterCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        FilterCommand otherFilterCommand = (FilterCommand) other;
+        return predicate.equals(otherFilterCommand.predicate);
     }
 
     @Override

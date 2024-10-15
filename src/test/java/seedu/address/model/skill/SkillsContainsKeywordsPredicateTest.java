@@ -63,7 +63,7 @@ public class SkillsContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameDoesNotContainKeywords_returnsFalse() {
+    public void test_skillsDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         SkillsContainsKeywordsPredicate predicate = new SkillsContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder().withSkills("frontend").build()));
