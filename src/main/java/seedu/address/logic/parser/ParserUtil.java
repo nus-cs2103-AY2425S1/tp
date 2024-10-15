@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -110,6 +111,25 @@ public class ParserUtil {
         }
         return new Email(trimmedEmail);
     }
+
+    /**
+     * Parses a {@code String subject} into a {@code Subject}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param subject the input string representing the subject to be parsed
+     * @return a {@code Subject} object if the input is valid
+     * @throws ParseException if the given {@code subject} is invalid according to {@code Subject}'s constraints
+     */
+    public static Subject parseSubject(String subject) throws ParseException {
+        requireNonNull(subject);
+        String trimmedSubject = subject.trim();
+        if (!Subject.isValidSubject(trimmedSubject)) {
+            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+        }
+        return new Subject(trimmedSubject);
+    }
+
+
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
