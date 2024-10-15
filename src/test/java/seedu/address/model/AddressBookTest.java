@@ -18,15 +18,9 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.doctor.Doctor;
-import seedu.address.model.patient.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.testutil.DoctorBuilder;
-import seedu.address.testutil.PatientBuilder;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TypicalDoctors;
-import seedu.address.testutil.TypicalPatients;
 
 public class AddressBookTest {
 
@@ -56,18 +50,8 @@ public class AddressBookTest {
                 .withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND)
                 .build();
-        Doctor editedBenson = new DoctorBuilder(TypicalDoctors.BENSON)
-                .withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND)
-                .build();
-        Patient editedCarl = new PatientBuilder(TypicalPatients.CARL)
-                .withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND)
-                .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        List<Doctor> newDoctors = Arrays.asList(TypicalDoctors.BENSON, editedBenson);
-        List<Patient> newPatients = Arrays.asList(TypicalPatients.CARL, editedCarl);
-        AddressBookStub newData = new AddressBookStub(newPersons, newDoctors, newPatients);
+        AddressBookStub newData = new AddressBookStub(newPersons);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -112,28 +96,16 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
-        private final ObservableList<Doctor> doctors = FXCollections.observableArrayList();
-        private final ObservableList<Patient> patients = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons, Collection<Doctor> doctors, Collection<Patient> patients) {
+
+        AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
-            this.doctors.setAll(doctors);
-            this.patients.setAll(patients);
+
         }
 
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
-        }
-
-        @Override
-        public ObservableList<Doctor> getDoctorList() {
-            return doctors;
-        }
-
-        @Override
-        public ObservableList<Patient> getPatientList() {
-            return patients;
         }
     }
 
