@@ -16,7 +16,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.LifePolicy;
-import seedu.address.model.policy.PolicyMap;
+import seedu.address.model.policy.PolicySet;
 
 public class UpdatePolicyCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -25,14 +25,14 @@ public class UpdatePolicyCommandTest {
 
     @Test
     public void constructor_nullInputs_throwsNullPointerException() {
-        final PolicyMap policies = new PolicyMap();
+        final PolicySet policies = new PolicySet();
         assertThrows(NullPointerException.class, () -> new UpdatePolicyCommand(null, policies));
         assertThrows(NullPointerException.class, () -> new UpdatePolicyCommand(INDEX_FIRST_PERSON, null));
     }
 
     @Test
     public void execute_throwsException() {
-        final PolicyMap policies = new PolicyMap();
+        final PolicySet policies = new PolicySet();
         policies.add(health);
 
         assertCommandFailure(new UpdatePolicyCommand(INDEX_FIRST_PERSON, policies), model,
@@ -41,9 +41,9 @@ public class UpdatePolicyCommandTest {
 
     @Test
     public void equals() {
-        final PolicyMap lifePolicies = new PolicyMap();
+        final PolicySet lifePolicies = new PolicySet();
         lifePolicies.add(life);
-        final PolicyMap healthPolicies = new PolicyMap();
+        final PolicySet healthPolicies = new PolicySet();
         healthPolicies.add(health);
 
         final UpdatePolicyCommand standardCommand = new UpdatePolicyCommand(INDEX_FIRST_PERSON, lifePolicies);

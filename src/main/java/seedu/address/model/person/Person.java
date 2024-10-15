@@ -9,8 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.policy.Policy;
-import seedu.address.model.policy.PolicyMap;
-import seedu.address.model.policy.PolicyType;
+import seedu.address.model.policy.PolicySet;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,7 +26,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final PolicyMap policies;
+    private final PolicySet policies = new PolicySet();
 
     /**
      * Every field must be present and not null.
@@ -39,7 +38,6 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.policies = new PolicyMap();
     }
 
     public Name getName() {
@@ -66,17 +64,10 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public PolicyMap getPolicies() {
-        return policies;
+    public Set<Policy> getPolicies() {
+        return Collections.unmodifiableSet(policies);
     }
 
-    public boolean addPolicy(Policy policy) {
-        return policies.add(policy);
-    }
-
-    public boolean removePolicy(PolicyType type) {
-        return policies.delete(type);
-    }
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.

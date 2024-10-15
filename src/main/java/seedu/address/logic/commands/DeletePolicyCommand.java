@@ -5,7 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.policy.PolicyMap;
+import seedu.address.model.policy.PolicySet;
 
 /**
  * Deletes Policy from an existing client in Prudy.
@@ -23,7 +23,7 @@ public class DeletePolicyCommand extends Command {
             + "pt/life";
 
     private final Index index;
-    private final PolicyMap policies;
+    private final PolicySet policies;
 
     /**
      * Creates a DeletePolicyCommand to delete the specified {@code PolicyMap} from the client.
@@ -31,7 +31,7 @@ public class DeletePolicyCommand extends Command {
      * @param index of the client in the filtered client list to delete policy.
      * @param policies the set of policies to be deleted.
      */
-    public DeletePolicyCommand(Index index, PolicyMap policies) {
+    public DeletePolicyCommand(Index index, PolicySet policies) {
         requireAllNonNull(index, policies);
 
         this.index = index;
