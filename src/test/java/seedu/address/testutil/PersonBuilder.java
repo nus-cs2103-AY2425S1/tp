@@ -99,11 +99,12 @@ public class PersonBuilder {
         this.email = new Email(email);
         return this;
     }
+
     /**
      * Sets the {@code Payment} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPayment(Boolean payment) {
-        this.payment = new Payment(payment);
+    public PersonBuilder withPayment(Boolean hasPaid) {
+        this.payment = new Payment(hasPaid);
         return this;
     }
 
@@ -115,13 +116,6 @@ public class PersonBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Payment} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withPayment(Boolean hasPaid) {
-        this.payment = new Payment(hasPaid);
-        return this;
-    }
 
     public Person build() {
         return new Person(name, phone, email, address, payment, attendance, tags);
