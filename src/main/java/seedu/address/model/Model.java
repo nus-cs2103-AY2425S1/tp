@@ -5,13 +5,14 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.internshipapplication.InternshipApplication;
 
 /**
  * The API of the Model component.
  */
 public interface Model<T> {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<?> PREDICATE_SHOW_ALL = unused -> true;
+    Predicate<InternshipApplication> PREDICATE_SHOW_ALL = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
