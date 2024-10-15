@@ -27,16 +27,14 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_VENDOR, PREFIX_EVENT);
 
-        final boolean isEventDelete = arePrefixesPresent(argMultimap, PREFIX_EVENT);
-        final boolean isVendorDelete = arePrefixesPresent(argMultimap, PREFIX_VENDOR);
-
-        // exactly one prefix should be present - checked using XOR (^)
-        if (!(isVendorDelete ^ isEventDelete)
+        if (!(argMultimap.exactlyOnePrefixPresent(PREFIX_VENDOR, PREFIX_EVENT))
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_VENDOR, PREFIX_EVENT);
+
+        final boolean isEventDelete = argMultimap.getValue(PREFIX_EVENT).isPresent();
 
         if (isEventDelete) {
             return parseEventDelete(argMultimap);
