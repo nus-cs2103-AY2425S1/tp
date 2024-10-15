@@ -66,6 +66,11 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasOrder_orderNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasOrder(new Order("cake")));
+    }
+
+    @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
         assertTrue(addressBook.hasPerson(ALICE));
