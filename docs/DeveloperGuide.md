@@ -3,15 +3,10 @@ layout: page
 title: Developer Guide
 ---
 
-# Developer Guide
-
 **Team**: T11-04  
 **Name**: EZSTATES
-
-### User Target Profile:
+# User Target Profile:
 This product is for freelance real estate agents who have to manage numerous property transactions and client interactions. It caters to those who need a fast, efficient tool to organize all their client data, track deals, and wish to streamline their workflow through command-line operations.
-
-
 ### Value Proposition:
 EZSTATES provides freelance real estate agents quick access to client details, categorized by their property’s needs and interests through a user-friendly CLI, streamlining operations by enabling swift and intuitive command-line interactions. This simplifies their workflow, boosts efficiency and enhances their client service.
 
