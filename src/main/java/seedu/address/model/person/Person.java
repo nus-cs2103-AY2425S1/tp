@@ -114,4 +114,11 @@ public class Person {
                 .toString();
     }
 
+    public String toCSVFormat() {
+        return "\"" + name + "\","
+                + "\"" + phone + "\","
+                + "\"" + email + "\","
+                + "\"" + address + "\","
+                + "\"" + tags + "\"";
+    }
 }
