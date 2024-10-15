@@ -103,7 +103,7 @@ public class HelpWindow extends UiPart<Stage> {
      * Handles the URL button pressed event.
      */
     @FXML
-    private void handleURL() {
+    private void handleUrl() {
         // try to open browser
         boolean redirectSuccess = openUrl();
 
