@@ -1,13 +1,17 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.ClientTypeContainsKeywordsPredicate;
 
-import static java.util.Objects.requireNonNull;
-
-public class FindClientTypeCommand extends Command{
+/**
+ * Finds and lists all persons in address book whose client_type contains any of the argument keywords.
+ * Keyword matching is case insensitive.
+ */
+public class FindClientTypeCommand extends Command {
 
     public static final String COMMAND_WORD = "fc";
 

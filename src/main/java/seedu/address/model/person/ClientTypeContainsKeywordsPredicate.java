@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.clienttype.ClientType;
 
@@ -20,15 +19,10 @@ public class ClientTypeContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-
         Set<ClientType> personClientTypes = person.getClientTypes();
-
-//        return keywords.stream()
-//                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
-
         return keywords.stream()
                 .anyMatch(keyword -> personClientTypes.stream().anyMatch(clientType ->
-                                        StringUtil.containsWordIgnoreCase(clientType.clientTypeName, keyword))
+                        clientType.clientTypeName.toLowerCase().startsWith(keyword.toLowerCase()))
                 );
     }
 
@@ -43,7 +37,8 @@ public class ClientTypeContainsKeywordsPredicate implements Predicate<Person> {
             return false;
         }
 
-        ClientTypeContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (ClientTypeContainsKeywordsPredicate) other;
+        ClientTypeContainsKeywordsPredicate otherNameContainsKeywordsPredicate =
+                (ClientTypeContainsKeywordsPredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 
