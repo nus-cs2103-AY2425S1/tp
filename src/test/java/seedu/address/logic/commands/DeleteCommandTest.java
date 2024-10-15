@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.io.IOException;
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -40,7 +41,7 @@ public class DeleteCommandTest {
      * Sets up the test environment with the required model and storage.
      */
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws IOException {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =

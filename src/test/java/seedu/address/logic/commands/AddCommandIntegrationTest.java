@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.io.IOException;
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +34,7 @@ public class AddCommandIntegrationTest {
      * Sets up the test environment with the required model and storage.
      */
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws IOException {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
@@ -45,7 +46,7 @@ public class AddCommandIntegrationTest {
      * Tests the successful execution of adding a new person.
      */
     @Test
-    public void execute_newPerson_success() {
+    public void execute_newPerson_success() throws IOException {
         Person validPerson = new PersonBuilder().build();
 
         JsonAddressBookStorage addressBookStorage =

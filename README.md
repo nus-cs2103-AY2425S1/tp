@@ -4,22 +4,25 @@
 
 ---
 
-ClinicBuddy aims to enhance the patient management process for small clinics, creating a platform to track patient information such as their treatment, contact information, visit records and future appointments.
+ClinicBuddy aims to enhance the patient management process for small clinics, creating a platform to track patient
+information such as their treatment, contact information, visit records and future appointments.
 
 ---
 
 ## Features
 
 <b>ClinicBuddy</b> allows you to
-1. <b>Create</b> patient records 
-2. <b>Update</b> patient records 
-3. <b>Delete</b> patient records 
-4. <b>Search</b> patient by ID or name 
-5. <b>Backup<b> patient records 
+
+1. <b>Create</b> patient records
+2. <b>Update</b> patient records
+3. <b>Delete</b> patient records
+4. <b>Search</b> patient by ID or name
+5. <b>Backup<b> patient records
 
 ---
 
 ## Sample of User Interface
+
 ![Ui](docs/images/Ui.png?)
 
 ---
