@@ -42,12 +42,14 @@ public class GroupTaskCard extends UiPart<Region> {
     public GroupTaskCard(Group group, int displayedIndex) {
         super(FXML);
         this.group = group;
-        id.setText(displayedIndex + ". ");
         name.setText(group.getGroupName().fullName + " Tasks");
         String taskList = "";
+        int count = 1;
         for (Task task : group.getTasks()) {
-            taskList += (task.getTaskName() + " [" + task.getDeadline() + "] " + "[" + task.getStatus() + "]");
+            taskList += ("" + count + ". " + task.getTaskName() + " [" + task.getDeadline() + "] " +
+                    "[" + task.getStatus() + "]");
             taskList += "\n";
+            count++;
         }
         tasks.setText(taskList);
     }

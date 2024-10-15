@@ -6,7 +6,9 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.model.task.Task;
 
 /**
@@ -56,6 +58,25 @@ public class Messages {
     public static String format(Group group) {
         final StringBuilder builder = new StringBuilder();
         builder.append(group.getGroupName());
+        builder.append(group.getStudents());
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code studentNumber} for display to the user.
+     */
+    public static String format(StudentNumber studentNumber) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(studentNumber.value);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code groupName} for display to the user.
+     */
+    public static String format(GroupName groupName) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(groupName.fullName);
         return builder.toString();
     }
 

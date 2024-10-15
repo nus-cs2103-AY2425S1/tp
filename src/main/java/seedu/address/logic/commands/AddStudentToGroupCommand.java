@@ -28,7 +28,7 @@ public class AddStudentToGroupCommand extends Command {
             + PREFIX_STUDENT_NUMBER + "A02345678J "
             + PREFIX_GROUP_NAME + "Group 1";
 
-    public static final String MESSAGE_SUCCESS = "Added student: %1$s from %2$s";
+    public static final String MESSAGE_SUCCESS = "Added student: %1$s to %2$s";
 
     public static final String MESSAGE_DUPLICATE_STUDENT_IN_GROUP = "This student is already in the group";
 
@@ -58,7 +58,7 @@ public class AddStudentToGroupCommand extends Command {
         }
 
         model.addPersonToGroup(student, group);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(student), Messages.format(group)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd), Messages.format(toAddInto)));
     }
 
     @Override
