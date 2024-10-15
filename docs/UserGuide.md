@@ -85,9 +85,22 @@ Adds a person to the address book.
 add n/NAME p/PHONE_NUMBER e/EMAIL
 </div>
 
-#### Examples
-* `add n/John Doe p/98765432 e/johnd@example.com`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com`
+#### Successful Execution
+**Example**
+> **Context**: Adding a client named `John Doe` with phone number `98765432` and email `johnd@example.com`.
+>
+> **Input**:  `add n/John Doe p/98765432 e/johnd@example.com`
+>
+> **Output**:
+
+#### Failed Execution
+**Example**
+> **User Error**: Missing a `PHONE` field.
+>
+> **Input**: `add n/Betsy Crowe e/betsycrowe@example.com`
+>
+> **Output**:
+
 
 ### Listing all Persons : `list`
 
@@ -111,9 +124,22 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-#### Examples
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+#### Successful Execution
+**Example 1**
+> **Context**: Editing phone number and email address of the 1st person in the list to be `91234567` and `johndoe@example.com` respectively.
+> 
+> **Input**:  `edit 1 p/91234567 e/johndoe@example.com`
+>
+> **Output**: 
+
+**Example 2** 
+> **Context**: Editing the name of the 2nd person in the list to be `Betsy Crower`.
+> 
+> **Input**: `edit 2 n/Betsy Crower`
+> 
+> **Output**:  
+
+#### Failed Execution
 
 ### Locating persons by name: `find`
 
