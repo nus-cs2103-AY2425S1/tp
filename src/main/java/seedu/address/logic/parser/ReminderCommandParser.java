@@ -1,14 +1,10 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_NAME_DISPLAYED;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_REMINDER_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import seedu.address.logic.commands.ReminderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -30,26 +26,16 @@ public class ReminderCommandParser implements Parser<ReminderCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_REMINDER);
         String name = argMultimap.getPreamble();
-        String appointmentDate = argMultimap.getValue(PREFIX_DATE).orElse("");
         String reminderTime = argMultimap.getValue(PREFIX_REMINDER).orElse("");
 
         // Check for missing name, date, or reminder
         if (name.isEmpty()) {
-            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
-        }
-        if (appointmentDate.isEmpty()) {
-            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
+            throw new ParseException(MESSAGE_INVALID_NAME_DISPLAYED);
         }
         if (reminderTime.isEmpty()) {
             throw new ParseException(MESSAGE_INVALID_REMINDER_FORMAT);
         }
 
-        // Validate the date format
-        try {
-            LocalDateTime.parse(appointmentDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-        } catch (DateTimeParseException e) {
-            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
-        }
-        return new ReminderCommand(name, appointmentDate, reminderTime);
+        return new ReminderCommand(name, reminderTime);
     }
 }

@@ -18,27 +18,24 @@ import seedu.address.model.person.Schedule;
 public class ReminderCommand extends Command {
     public static final String COMMAND_WORD = "reminder";
 
-    public static final String MESSAGE_SUCCESS = "Reminder set successfully: %s on %s. "
-            + "You will be reminded %s day before";
+    public static final String MESSAGE_SUCCESS = "Reminder set successfully for: %s. "
+            + "You will be reminded %s before.";
     public static final String MESSAGE_INVALID_REMINDER_TIME = "Invalid reminder time: "
-            + "Please enter a valid time expression (e.g '1 day', '2 hours')";
+            + "Please enter a valid time expression (e.g '1 day', '2 hours').";
     public static final String MESSAGE_INVALID_NAME = "Person not found";
     public static final String MESSAGE_INVALID_APPOINTMENT = "Appointment not found";
     public static final String MESSAGE_REMINDER_EXISTS = "This reminder already exists";
     private String name;
-    private String appointmentDateTime;
     private String reminderTime;
 
     /**
      * Constructs a ReminderCommand to set a reminder for a specific person and appointment.
      *
      * @param name The name of the person.
-     * @param appointmentDateTime The date and time of the appointment.
      * @param reminderTime The reminder time.
      */
-    public ReminderCommand(String name, String appointmentDateTime, String reminderTime) {
+    public ReminderCommand(String name, String reminderTime) {
         this.name = name;
-        this.appointmentDateTime = appointmentDateTime;
         this.reminderTime = reminderTime;
     }
 
@@ -54,7 +51,7 @@ public class ReminderCommand extends Command {
 
         // Check if the appointment exists
         Schedule appointmentSchedule = personToEdit.getSchedule();
-        if (appointmentSchedule == null || !appointmentSchedule.dateTime.equals(appointmentDateTime)) {
+        if (appointmentSchedule.toString().isEmpty()) {
             throw new CommandException(MESSAGE_INVALID_APPOINTMENT);
         }
 
@@ -66,18 +63,17 @@ public class ReminderCommand extends Command {
         // Check if the reminder already exists
         Reminder existingReminder = personToEdit.getReminder();
         if (existingReminder != null
-                && existingReminder.getAppointmentDateTime().equals(appointmentDateTime)
                 && existingReminder.getReminderTime().equals(reminderTime)) {
             throw new CommandException(MESSAGE_REMINDER_EXISTS);
         }
 
-        Reminder newReminder = new Reminder(appointmentDateTime, reminderTime);
+        Reminder newReminder = new Reminder(reminderTime);
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getSchedule(), newReminder, personToEdit.getTags());
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, name, this.appointmentDateTime, this.reminderTime));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, name, this.reminderTime));
     }
 
     /**
@@ -119,7 +115,6 @@ public class ReminderCommand extends Command {
         // State check
         ReminderCommand otherCommand = (ReminderCommand) other;
         return name.equals(otherCommand.name)
-                && appointmentDateTime.equals(otherCommand.appointmentDateTime)
                 && reminderTime.equals(otherCommand.reminderTime);
     }
 }

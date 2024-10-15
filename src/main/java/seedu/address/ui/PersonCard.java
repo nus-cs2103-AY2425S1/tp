@@ -43,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label schedule;
     @FXML
+    private Label note;
+    @FXML
     private Label reminder;
     @FXML
     private FlowPane tags;
@@ -58,6 +60,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+
         if (person.getSchedule().toString().isEmpty()) {
             schedule.setText(person.getSchedule().toString());
         } else {
@@ -65,15 +68,13 @@ public class PersonCard extends UiPart<Region> {
                     LocalDateTime.parse(person.getSchedule().toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
                             .format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a")));
         }
+        if (person.getSchedule().getNotes() == null || person.getSchedule().getNotes().isEmpty()) {
+            note.setText("");
+        } else {
+            note.setText("Notes: " + person.getSchedule().getNotes());
+        }
         if (person.getReminder() != null && !person.getReminder().toString().isEmpty()) {
-            String formattedDateTime = LocalDateTime.parse(
-                            person.getReminder().getAppointmentDateTime(),
-                            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
-                    .format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a"));
-
-            // Combine formatted date-time with the reminder time
-            reminder.setText(String.format("Reminder on %s, %s before",
-                    formattedDateTime,
+            reminder.setText(String.format("Reminder: %s before",
                     person.getReminder().getReminderTime()));
         } else {
             reminder.setText("");
