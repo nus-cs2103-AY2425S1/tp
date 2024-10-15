@@ -3,7 +3,18 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.StackPane?>
 
+
 <StackPane fx:id="placeHolder" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/17"
-    xmlns:fx="http://javafx.com/fxml/1">
-  <TextArea fx:id="resultDisplay" editable="false" styleClass="result-display"/>
+           xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: #121212; -fx-padding: 15; -fx-border-radius: 10;">
+
+  <TextArea fx:id="resultDisplay" editable="false"
+            styleClass="result-display"
+            wrapText="true"
+            style="-fx-background-color: #1a1a1a; -fx-text-fill: #FFD700; 
+                     -fx-font-size: 16; -fx-font-family: 'Georgia'; 
+                     -fx-border-color: #1a1a1a; -fx-border-radius: 8; 
+                     -fx-padding: 12; 
+                     -fx-effect: dropshadow(gaussian, rgba(255, 215, 0, 0.5), 5, 0.5, 0, 0);"/>
 </StackPane>
+
+
