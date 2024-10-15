@@ -95,8 +95,8 @@ public class EditCommand extends Command {
         Id updatedId = editPersonDescriptor.getId().orElse(personToEdit.getId());
         Ward updatedWard = editPersonDescriptor.getWard().orElse(personToEdit.getWard());
         Diagnosis updatedDiagnosis = editPersonDescriptor.getDiagnosis().orElse(personToEdit.getDiagnosis());
-        /*
         Medication updatedMedication = editPersonDescriptor.getMedication().orElse(personToEdit.getMedication());
+        /*
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
@@ -104,7 +104,7 @@ public class EditCommand extends Command {
 
          */
 
-        return new Person(updatedName, updatedId, updatedWard, updatedDiagnosis);
+        return new Person(updatedName, updatedId, updatedWard, updatedDiagnosis, updatedMedication);
     }
 
     @Override

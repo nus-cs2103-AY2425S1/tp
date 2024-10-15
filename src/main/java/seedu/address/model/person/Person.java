@@ -15,22 +15,20 @@ public class Person {
     private final Id id;
     private final Ward ward;
     private final Diagnosis diagnosis;
-    /*
     private final Medication medication;
+    /*
     private final Set<Tag> tags = new HashSet<>();
      */
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Id id, Ward ward, Diagnosis diagnosis) {
+    public Person(Name name, Id id, Ward ward, Diagnosis diagnosis, Medication medication) {
         this.name = name;
         this.id = id;
         this.ward = ward;
         this.diagnosis = diagnosis;
-        /*
         this.medication = medication;
-         */
     }
 
     public Id getId() {
@@ -49,12 +47,10 @@ public class Person {
         return diagnosis;
     }
 
-    /*
+
     public Medication getMedication() {
         return medication;
     }
-
-    */
 
     /*
     /**
@@ -99,17 +95,14 @@ public class Person {
         return id.equals(otherPerson.id)
                 && name.equals(otherPerson.name)
                 && ward.equals(otherPerson.ward)
-                && diagnosis.equals(otherPerson.diagnosis);
-        /*
+                && diagnosis.equals(otherPerson.diagnosis)
                 && medication.equals(otherPerson.medication);
-
-         */
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, id, ward, diagnosis);
+        return Objects.hash(name, id, ward, diagnosis, medication);
     }
 
     @Override
@@ -119,9 +112,7 @@ public class Person {
                 .add("id", id)
                 .add("ward", ward)
                 .add("diagnosis", diagnosis)
-                /*
                 .add("medication", medication)
-                */
                 .toString();
     }
 

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DIAGNOSIS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WARD_BOB;
@@ -51,6 +52,10 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withDiagnosis(VALID_DIAGNOSIS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        // different medication -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withMedication(VALID_MEDICATION_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         /*
         // different phone -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
@@ -78,7 +83,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getId().orElse(null) + ", name="
                 + editPersonDescriptor.getName().orElse(null) + ", ward="
                 + editPersonDescriptor.getWard().orElse(null) + ", diagnosis="
-                + editPersonDescriptor.getDiagnosis().orElse(null) + "}";
+                + editPersonDescriptor.getDiagnosis().orElse(null) + ", medication="
+                + editPersonDescriptor.getMedication().orElse(null) + "}";
 
         assertEquals(expected, editPersonDescriptor.toString());
 

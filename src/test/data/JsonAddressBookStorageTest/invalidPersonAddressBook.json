@@ -3,6 +3,7 @@
     "name": "Person with invalid name field: Ha!ns Mu@ster",
     "id": "P12345",
     "ward" : "A1",
-    "diagnosis" : "E. coli infection"
+    "diagnosis" : "E. coli infection",
+    "medication" : "Ciprofloxacin (Cipro)"
   } ]
 }

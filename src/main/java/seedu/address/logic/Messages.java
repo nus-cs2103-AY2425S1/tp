@@ -44,8 +44,8 @@ public class Messages {
                 .append(person.getWard())
                 .append("\n Diagnosis: ")
                 .append(person.getDiagnosis())
-                .append("\n Medication: ");
-        //.append(person.getMedication());
+                .append("\n Medication: ")
+                .append(person.getMedication());
         // .append("; Tags: ");
 
         // person.getTags().forEach(builder::append);

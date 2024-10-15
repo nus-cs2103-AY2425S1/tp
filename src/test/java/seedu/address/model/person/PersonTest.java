@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DIAGNOSIS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WARD_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICATION_BOB;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -34,7 +35,7 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withId(VALID_ID_BOB).withWard(VALID_WARD_BOB)
-                .withDiagnosis(VALID_DIAGNOSIS_BOB).build();
+                .withDiagnosis(VALID_DIAGNOSIS_BOB).withMedication(VALID_MEDICATION_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -101,7 +102,8 @@ public class PersonTest {
 
          */
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", id=" + ALICE.getId()
-                + ", ward=" + ALICE.getWard() + ", diagnosis=" + ALICE.getDiagnosis() + "}";
+                + ", ward=" + ALICE.getWard() + ", diagnosis=" + ALICE.getDiagnosis()
+                + ", medication=" + ALICE.getMedication() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

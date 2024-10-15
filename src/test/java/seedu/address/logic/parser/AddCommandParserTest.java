@@ -3,9 +3,12 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.DIAGNOSIS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DIAGNOSIS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.MEDICATION_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.MEDICATION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DIAGNOSIS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEDICATION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_WARD_DESC;
@@ -18,6 +21,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_WARD_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.WARD_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.WARD_DESC_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WARD;
@@ -30,6 +34,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Diagnosis;
+import seedu.address.model.person.Medication;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -45,7 +50,7 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + ID_DESC_BOB + WARD_DESC_BOB
-                        + DIAGNOSIS_DESC_BOB,
+                        + DIAGNOSIS_DESC_BOB + MEDICATION_DESC_BOB,
                 new AddCommand(expectedPerson));
 
         /*
@@ -61,7 +66,8 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
-        String validExpectedPersonString = NAME_DESC_BOB + ID_DESC_BOB + WARD_DESC_BOB + DIAGNOSIS_DESC_BOB;
+        String validExpectedPersonString = NAME_DESC_BOB + ID_DESC_BOB + WARD_DESC_BOB + DIAGNOSIS_DESC_BOB
+                + MEDICATION_DESC_BOB;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -75,6 +81,9 @@ public class AddCommandParserTest {
         // multiple diagnosis
         assertParseFailure(parser, DIAGNOSIS_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DIAGNOSIS));
+        // multiple medication
+        assertParseFailure(parser, MEDICATION_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEDICATION));
         /*
         // multiple phones
         assertParseFailure(parser, PHONE_DESC_AMY + validExpectedPersonString,
@@ -108,10 +117,12 @@ public class AddCommandParserTest {
         // invalid ward
         assertParseFailure(parser, INVALID_WARD_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_WARD));
-
         // invalid diagnosis
         assertParseFailure(parser, INVALID_DIAGNOSIS_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DIAGNOSIS));
+        // invalid medication
+        assertParseFailure(parser, INVALID_MEDICATION_DESC + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEDICATION));
 
         /*
         // invalid email
@@ -161,21 +172,24 @@ public class AddCommandParserTest {
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + ID_DESC_BOB + WARD_DESC_BOB + DIAGNOSIS_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, VALID_NAME_BOB + ID_DESC_BOB + WARD_DESC_BOB + DIAGNOSIS_DESC_BOB
+                        + MEDICATION_DESC_BOB, expectedMessage);
 
         // missing id prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_ID_BOB + WARD_DESC_BOB + DIAGNOSIS_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_ID_BOB + WARD_DESC_BOB + DIAGNOSIS_DESC_BOB
+                        + MEDICATION_DESC_BOB, expectedMessage);
 
         // missing ward prefix
-        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + VALID_WARD_BOB + DIAGNOSIS_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + VALID_WARD_BOB + DIAGNOSIS_DESC_BOB
+                        + MEDICATION_DESC_BOB, expectedMessage);
 
         // missing diagnosis prefix
-        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + VALID_WARD_BOB + DIAGNOSIS_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + VALID_WARD_BOB + DIAGNOSIS_DESC_BOB
+                        + MEDICATION_DESC_BOB, expectedMessage);
 
+        // missing medication prefix
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + VALID_WARD_BOB + DIAGNOSIS_DESC_BOB
+                + MEDICATION_DESC_BOB, expectedMessage);
         /*
 
         // missing phone prefix
@@ -199,20 +213,23 @@ public class AddCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + ID_DESC_BOB + WARD_DESC_BOB + DIAGNOSIS_DESC_BOB,
-                Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC + ID_DESC_BOB + WARD_DESC_BOB + DIAGNOSIS_DESC_BOB
+                        + MEDICATION_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // invalid id
-        assertParseFailure(parser, NAME_DESC_BOB + INVALID_ID_DESC + WARD_DESC_BOB + DIAGNOSIS_DESC_BOB,
-                Id.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_BOB + INVALID_ID_DESC + WARD_DESC_BOB + DIAGNOSIS_DESC_BOB
+                        + MEDICATION_DESC_BOB, Id.MESSAGE_CONSTRAINTS);
 
         // invalid ward
-        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + INVALID_WARD_DESC + DIAGNOSIS_DESC_BOB,
-                Ward.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + INVALID_WARD_DESC + DIAGNOSIS_DESC_BOB
+                        + MEDICATION_DESC_BOB, Ward.MESSAGE_CONSTRAINTS);
 
         // invalid diagnosis
-        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + WARD_DESC_BOB + INVALID_DIAGNOSIS_DESC,
-                Diagnosis.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + WARD_DESC_BOB + INVALID_DIAGNOSIS_DESC
+                        + MEDICATION_DESC_BOB, Diagnosis.MESSAGE_CONSTRAINTS);
+        // invalid medication prefix
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + WARD_DESC_BOB + DIAGNOSIS_DESC_BOB
+                + INVALID_MEDICATION_DESC, Medication.MESSAGE_CONSTRAINTS);
 
         /*
         // invalid email

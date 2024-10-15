@@ -3,6 +3,7 @@
     "name": "Hans Muster",
     "id": "P123D5",
     "ward" : "A1",
-    "diagnosis" : "E. coli infection"
+    "diagnosis" : "E. coli infection",
+    "medication" : "Ciprofloxacin (Cipro)"
   } ]
 }
