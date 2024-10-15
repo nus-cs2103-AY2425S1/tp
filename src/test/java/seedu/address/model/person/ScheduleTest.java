@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -9,8 +8,9 @@ import org.junit.jupiter.api.Test;
 public class ScheduleTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Schedule(null));
+    public void constructor_null_setsEmptyString() {
+        Schedule schedule = new Schedule(null);
+        assertEquals("", schedule.dateTime);
     }
 
     @Test

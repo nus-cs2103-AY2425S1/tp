@@ -14,11 +14,9 @@ public class Schedule {
      * Constructs a {@code Schedule} object with the given date and time.
      *
      * @param dateTime The date and time of the scheduled appointment.
-     * @throws NullPointerException if the {@code dateTime} is null.
      */
     public Schedule(String dateTime) {
-        requireNonNull(dateTime);
-        this.dateTime = dateTime;
+        this.dateTime = dateTime == null ? "" : dateTime;
     }
 
     @Override
