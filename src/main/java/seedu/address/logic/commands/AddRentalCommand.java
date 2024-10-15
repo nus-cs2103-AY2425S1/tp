@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RENTAL_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RENT_DUE_DATE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -66,6 +67,7 @@ public class AddRentalCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Client> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -73,7 +75,12 @@ public class AddRentalCommand extends Command {
         }
 
         Client clientToEdit = lastShownList.get(index.getZeroBased());
-        Set<RentalInformation> updatedRentalInformationList = new HashSet<>(clientToEdit.getRentalInformation());
+
+        if (model.hasRentalInformation(clientToEdit, toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_RENTAL_INFORMATION);
+        }
+
+        List<RentalInformation> updatedRentalInformationList = new ArrayList<>(clientToEdit.getRentalInformation());
         updatedRentalInformationList.add(toAdd);
         Client updatedClient = new Client(clientToEdit.getName(), clientToEdit.getPhone(), clientToEdit.getEmail(),
                 clientToEdit.getTags(), updatedRentalInformationList);

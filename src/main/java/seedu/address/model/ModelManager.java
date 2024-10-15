@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
+import seedu.address.model.rentalinformation.RentalInformation;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -109,6 +110,14 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedClient);
 
         addressBook.setPerson(target, editedClient);
+    }
+
+    @Override
+    public boolean hasRentalInformation(Client client, RentalInformation rentalInformation) {
+        requireNonNull(client);
+        requireNonNull(rentalInformation);
+
+        return addressBook.hasRentalInformation(client, rentalInformation);
     }
 
     //=========== Filtered Client List Accessors =============================================================

@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
+import seedu.address.model.rentalinformation.RentalInformation;
 
 /**
  * The API of the Model component.
@@ -75,6 +76,8 @@ public interface Model {
      * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
      */
     void setPerson(Client target, Client editedClient);
+
+    boolean hasRentalInformation(Client client, RentalInformation rentalInformation);
 
     /** Returns an unmodifiable view of the filtered client list */
     ObservableList<Client> getFilteredPersonList();

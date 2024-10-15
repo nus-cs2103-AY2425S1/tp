@@ -101,7 +101,7 @@ class JsonAdaptedPerson {
         final Email modelEmail = new Email(email);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        final Set<RentalInformation> modelRentalInformation = new HashSet<>(personRentalInformation);
+        final List<RentalInformation> modelRentalInformation = new ArrayList<>(personRentalInformation);
 
         return new Client(modelName, modelPhone, modelEmail, modelTags, modelRentalInformation);
     }
