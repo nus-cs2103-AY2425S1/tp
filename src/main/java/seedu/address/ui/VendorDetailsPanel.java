@@ -3,10 +3,12 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.beans.value.ObservableObjectValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.vendor.Vendor;
 
@@ -28,17 +30,22 @@ public class VendorDetailsPanel extends UiPart<Region> {
     private Label noVendorMsg;
     @FXML
     private GridPane detailsHolder;
+    @FXML
+    private StackPane detailsChildrenPlaceholder;
 
     /**
      * Creates a {@code VendorListPanel} with the given {@code ObservableList}.
      */
-    public VendorDetailsPanel(ObservableObjectValue<Vendor> vendor) {
+    public VendorDetailsPanel(ObservableObjectValue<Vendor> vendor, ObservableList<Vendor> assignedEvents) {
         super(FXML);
 
         vendor.addListener((observable, oldValue, newValue) -> {
             showVendorDetails();
             setVendor(newValue);
         });
+
+        VendorListPanel vendorListPanel = new VendorListPanel(assignedEvents);
+        detailsChildrenPlaceholder.getChildren().add(vendorListPanel.getRoot());
 
     }
 

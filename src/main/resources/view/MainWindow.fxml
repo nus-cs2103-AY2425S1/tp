@@ -46,7 +46,7 @@
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
-            <GridPane fx:id="vendorList" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+            <GridPane fx:id="panelsHolder" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
               <columnConstraints>
                 <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="169.0" />
                 <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="169.0" />

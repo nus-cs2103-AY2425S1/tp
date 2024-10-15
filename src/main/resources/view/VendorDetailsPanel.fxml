@@ -9,35 +9,55 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox styleClass="details" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
-   <Label style="-fx-font-weight: bold;" stylesheets="@DarkTheme.css" text="Vendor Details">
-      <padding>
-         <Insets bottom="10.0" right="15.0" top="10.0" />
-      </padding>
-   </Label>
-   <StackPane alignment="TOP_LEFT" prefHeight="78.0" prefWidth="200.0">
+   <VBox>
       <children>
-         <Label fx:id="noVendorMsg" alignment="TOP_LEFT" contentDisplay="TOP" text="No vendor seleted. Use the 'view' command to select a vendor!" />
-         <GridPane fx:id="detailsHolder" visible="false">
-           <columnConstraints>
-             <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="75.0" />
-             <ColumnConstraints hgrow="SOMETIMES" maxWidth="136.0" minWidth="10.0" prefWidth="125.0" />
-           </columnConstraints>
-           <rowConstraints>
-             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-           </rowConstraints>
+         <Label style="-fx-font-weight: bold;" stylesheets="@DarkTheme.css" text="Vendor Details">
+            <padding>
+               <Insets bottom="10.0" right="15.0" top="10.0" />
+            </padding>
+         </Label>
+         <StackPane alignment="TOP_LEFT">
             <children>
-               <Label text="Name:" textFill="WHITE" />
-               <Label fx:id="name" text="\$name" textFill="WHITE" GridPane.columnIndex="1" />
-               <Label text="Phone No:" textFill="WHITE" GridPane.rowIndex="1" />
-               <Label fx:id="phone" text="\$phone" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-               <Label text="Description:" textFill="WHITE" GridPane.rowIndex="2" />
-               <Label fx:id="description" text="\$description" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               <Label fx:id="noVendorMsg" alignment="TOP_LEFT" contentDisplay="TOP" text="No vendor seleted. Use the 'view' command to select a vendor!" />
+               <GridPane fx:id="detailsHolder" visible="false">
+                 <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="75.0" />
+                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="136.0" minWidth="10.0" prefWidth="125.0" />
+                 </columnConstraints>
+                 <rowConstraints>
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                 </rowConstraints>
+                  <children>
+                     <Label text="Name:" textFill="WHITE" />
+                     <Label fx:id="name" text="\$name" textFill="WHITE" GridPane.columnIndex="1" />
+                     <Label text="Phone No:" textFill="WHITE" GridPane.rowIndex="1" />
+                     <Label fx:id="phone" text="\$phone" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     <Label text="Description:" textFill="WHITE" GridPane.rowIndex="2" />
+                     <Label fx:id="description" text="\$description" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  </children>
+               </GridPane>
             </children>
-         </GridPane>
+         </StackPane>
       </children>
-   </StackPane>
+      <VBox.margin>
+         <Insets left="15.0" top="15.0" />
+      </VBox.margin>
+   </VBox>
+   <VBox prefHeight="200.0" prefWidth="100.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+      <children>
+         <Label style="-fx-font-weight: bold;" text="Assigned Events">
+            <VBox.margin>
+               <Insets bottom="15.0" left="15.0" top="15.0" />
+            </VBox.margin>
+         </Label>
+         <StackPane fx:id="detailsChildrenPlaceholder" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+      </children>
+      <VBox.margin>
+         <Insets top="15.0" />
+      </VBox.margin>
+   </VBox>
    <padding>
       <Insets bottom="15.0" left="15.0" right="15.0" />
    </padding>
