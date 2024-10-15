@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,6 +10,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.Person;
 
 /**
  * A UI component that displays information of a {@code Event}.
@@ -46,10 +49,26 @@ public class EventCard extends UiPart<Region> {
         this.event = event;
         id.setText(displayedIndex + ". ");
         name.setText(event.getEventName());
-        date.setText(event.getDate().toString());
-        event.getAttendees().stream()
+        date.setText(event.getDate().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
+        List<Person> sortedAttendees = event.getAttendees().stream()
                 .sorted(Comparator.comparing(person -> person.getName().toString()))
-                .forEach(person ->
-                        attendees.getChildren().add(new Label(person.getName().toString())));
+                .toList();
+
+        int maxDisplay = 2;
+        int numOfAttendees = sortedAttendees.size();
+
+        for (int i = 0; i < maxDisplay; i++) {
+            String name = sortedAttendees.get(i).getName().toString();
+            String formattedName = (i == maxDisplay - 1)
+                                   ? name
+                                   : name + ", ";
+            attendees.getChildren().add(new Label(formattedName));
+        }
+
+        if (numOfAttendees > maxDisplay) {
+            int remainingPeople = numOfAttendees - maxDisplay;
+            attendees.getChildren().add(new Label(", and " + remainingPeople + " more"));
+        }
+
     }
 }

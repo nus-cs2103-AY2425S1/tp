@@ -36,7 +36,11 @@ public class Event {
                                  new Email("abc@gmail.com"), new Relationship("Brother"));
         Person jake = new Person(new Name("Jake"), new Phone("33338888"),
                                  new Email("abcdef@gmail.com"), new Relationship("Father"));
-        attendees.addAll(Set.of(adam, jake));
+        Person kevin = new Person(new Name("Kevin"), new Phone("33338888"),
+                new Email("abcdef@gmail.com"), new Relationship("Father"));
+        Person melody = new Person(new Name("Melody"), new Phone("33338888"),
+                new Email("abcdef@gmail.com"), new Relationship("Father"));
+        attendees.addAll(Set.of(adam, jake, kevin, melody));
         this.attendees.addAll(attendees);
     }
 
