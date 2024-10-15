@@ -35,9 +35,13 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private SearchBox searchBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
+
+    @FXML
+    private StackPane searchBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -126,6 +130,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        searchBox = new SearchBox(this::executeFindCommand);
+        searchBoxPlaceholder.getChildren().add(searchBox.getRoot());
     }
     /**
      * Updates the Detail plane with the currently selected person.
@@ -201,10 +208,29 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            searchBox.clearSearchBox();
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Executes the find command and returns the result.
+     *
+     * @see seedu.address.logic.Logic#execute(String)
+     */
+    private CommandResult executeFindCommand(String commandText) throws CommandException, ParseException {
+        try {
+            CommandResult commandResult = logic.execute(commandText);
+            logger.info("Result: " + commandResult.getFeedbackToUser());
+
+            return commandResult;
+        } catch (CommandException | ParseException e) {
+            logger.info("An error occurred while executing command: " + commandText);
             throw e;
         }
     }

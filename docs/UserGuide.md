@@ -68,7 +68,7 @@ BizBook (BB) is a **desktop app for managing contacts, optimized for use via a C
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -122,13 +122,13 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 - The search is case-insensitive. e.g `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Only the name is searched.
-- Only full words will be matched e.g. `Han` will not match `Hans`
+- Partial words will be matched e.g. `Han` will match `Hans`
 - Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 
-- `find John` returns `john` and `John Doe`
+- `find John` returns `john`, `John Doe` and `Johnny`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
