@@ -31,7 +31,8 @@ public class MessageTest {
     //Relook at this section after creation of typicalDeliveries
     //    @Test
     //    public void testFormatDelivery() {
-    //        Delivery delivery = new Delivery(new ItemName("Laptop"), new Address("123, Some Street"), new Cost("$1000"),
+    //        Delivery delivery = new Delivery(new ItemName("Laptop"),
+    //        new Address("123, Some Street"), new Cost("$1000"),
     //                LocalDate.of(2023, 10, 15), LocalTime.of(14, 30), new Eta("30 minutes"));
     //
     //        String expectedMessage = "Laptop; $1000; 2023-10-15; 14:30; 30 minutes";
@@ -59,9 +60,11 @@ public class MessageTest {
     //Relook at this section after creation of typicalDeliveries
     //    @Test
     //    public void testFormatDeliveryList() {
-    //        Delivery delivery1 = new Delivery(new ItemName("Laptop"), new Address("123, Some Street"), new Cost("$1000"),
+    //        Delivery delivery1 = new Delivery(new ItemName("Laptop"),
+    //        new Address("123, Some Street"), new Cost("$1000"),
     //                LocalDate.of(2023, 10, 15), LocalTime.of(14, 30), new Eta("30 minutes"));
-    //        Delivery delivery2 = new Delivery(new ItemName("Phone"), new Address("456, Another Street"), new Cost("$500"),
+    //        Delivery delivery2 = new Delivery(new ItemName("Phone"),
+    //        new Address("456, Another Street"), new Cost("$500"),
     //                LocalDate.of(2023, 10, 16), LocalTime.of(10, 00), new Eta("15 minutes"));
     //
     //        List<Delivery> deliveryList = Arrays.asList(delivery1, delivery2);
