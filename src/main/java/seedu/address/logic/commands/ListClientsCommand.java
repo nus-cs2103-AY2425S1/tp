@@ -21,7 +21,7 @@ public class ListClientsCommand extends ListCommand {
         requireNonNull(model);
 
         // Logic to list clients (i.e. buyers and sellers)
-        model.updateFilteredClientList(client -> true);
+        model.updateFilteredClientList(Model.PREDICATE_SHOW_ALL_CLIENTS);
         model.setDisplayClients();
         return new CommandResult(String.format(ListCommand.MESSAGE_SUCCESS, KEY_WORD));
     }

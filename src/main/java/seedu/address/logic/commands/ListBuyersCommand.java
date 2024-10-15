@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.Model;
-import seedu.address.model.client.Client;
 
 /**
  * Lists all buyers in the client list to the user.
@@ -22,7 +21,7 @@ public class ListBuyersCommand extends ListCommand {
         requireNonNull(model);
 
         // Logic to list buyers
-        model.updateFilteredClientList(Client::isBuyer);
+        model.updateFilteredClientList(Model.PREDICATE_SHOW_ALL_BUYERS_ONLY);
         model.setDisplayClients();
         return new CommandResult(String.format(ListCommand.MESSAGE_SUCCESS, KEY_WORD));
     }

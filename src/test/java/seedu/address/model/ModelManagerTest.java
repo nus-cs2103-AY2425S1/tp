@@ -3,7 +3,10 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BUYERS_ONLY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SELLERS_ONLY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClients.CARL;
 import static seedu.address.testutil.TypicalClients.DANIEL;
@@ -20,6 +23,12 @@ import org.junit.jupiter.api.Test;
 import javafx.beans.Observable;
 import javafx.beans.property.BooleanProperty;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.client.Buyer;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
+import seedu.address.model.client.Seller;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.ClientBookBuilder;
@@ -222,5 +231,53 @@ public class ModelManagerTest {
 
         // Assert that the result is an instance of Observable
         assertTrue(result instanceof Observable, "Expected result to be an instance of Observable");
+    }
+
+    @Test
+    public void testBuyerPredicate() {
+        Name nameBuyer = mock(Name.class);
+        Phone phoneBuyer = mock(Phone.class);
+        Email emailBuyer = mock(Email.class);
+
+        Client mockBuyer = new Buyer(nameBuyer, phoneBuyer, emailBuyer);
+
+        Name nameSeller = mock(Name.class);
+        Phone phoneSeller = mock(Phone.class);
+        Email emailSeller = mock(Email.class);
+
+        Client mockSeller = new Seller(nameSeller, phoneSeller, emailSeller);
+
+        assertTrue(PREDICATE_SHOW_ALL_BUYERS_ONLY.test(mockBuyer), "Buyer should pass the buyer predicate");
+
+        // Predicate should return false for  (when client is a buyer)
+        assertFalse(
+                PREDICATE_SHOW_ALL_BUYERS_ONLY.test(mockSeller),
+                "Seller should not pass the buyer predicate"
+        );
+    }
+
+    @Test
+    public void testSellerPredicate() {
+        // Mocking the buyer and seller details
+        Name nameBuyer = mock(Name.class);
+        Phone phoneBuyer = mock(Phone.class);
+        Email emailBuyer = mock(Email.class);
+
+        Client mockBuyer = new Buyer(nameBuyer, phoneBuyer, emailBuyer);
+
+        Name nameSeller = mock(Name.class);
+        Phone phoneSeller = mock(Phone.class);
+        Email emailSeller = mock(Email.class);
+
+        Client mockSeller = new Seller(nameSeller, phoneSeller, emailSeller);
+
+        // Predicate should return true for sellers
+        assertTrue(PREDICATE_SHOW_ALL_SELLERS_ONLY.test(mockSeller), "Seller should pass the seller predicate");
+
+        // Predicate should return false for buyers (when client is a buyer)
+        assertFalse(
+                PREDICATE_SHOW_ALL_SELLERS_ONLY.test(mockBuyer),
+                "Buyer should not pass the seller predicate"
+        );
     }
 }
