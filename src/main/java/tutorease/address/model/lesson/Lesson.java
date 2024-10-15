@@ -79,6 +79,46 @@ public class Lesson {
         return endDateTime;
     }
 
+    /**
+     * Returns the start date time of the lesson as a string.
+     *
+     * @return The start date time of the lesson as a string.
+     */
+    public String getStartDateTimeString() {
+        return startDateTime.toString();
+    }
+
+    /**
+     * Returns the end date time of the lesson as a string.
+     *
+     * @return The end date time of the lesson as a string.
+     */
+    public String getEndDateTimeString() {
+        return endDateTime.toString();
+    }
+
+    /**
+     * Returns the name of the student of the lesson.
+     *
+     * @return The name of the student of the lesson.
+     */
+    public String getStudentName() {
+        return student.getName().fullName;
+    }
+
+    /**
+     * Returns the address of the student of the lesson.
+     *
+     * @return The address of the student of the lesson.
+     */
+    public String getAddress() {
+        if (this.locationIndex.getValue() == 0) {
+            return student.getAddress().value;
+        } else {
+            return "";
+        }
+    }
+
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
