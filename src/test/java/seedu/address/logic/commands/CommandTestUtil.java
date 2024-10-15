@@ -47,8 +47,8 @@ public class CommandTestUtil {
     public static final String VALID_STATUS_BOB = "Interviewed";
     public static final String VALID_NOTE_AMY = "Optimistic";
     public static final String VALID_NOTE_BOB = "Charismatic";
-    public static final String VALID_DESIREDROLE_AMY = "Software Engineer";
-    public static final String VALID_DESIREDROLE_BOB = "Data Analyst";
+    public static final String VALID_DESIRED_ROLE_AMY = "Software Engineer";
+    public static final String VALID_DESIRED_ROLE_BOB = "Data Analyst";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -68,8 +68,8 @@ public class CommandTestUtil {
     public static final String STATUS_DESC_BOB = " " + PREFIX_STATUS + VALID_STATUS_BOB;
     public static final String NOTE_DESC_AMY = " " + PREFIX_NOTE + VALID_NOTE_AMY;
     public static final String NOTE_DESC_BOB = " " + PREFIX_NOTE + VALID_NOTE_BOB;
-    public static final String DESIREDROLE_DESC_AMY = " " + PREFIX_DESIREDROLE + VALID_DESIREDROLE_AMY;
-    public static final String DESIREDROLE_DESC_BOB = " " + PREFIX_DESIREDROLE + VALID_DESIREDROLE_BOB;
+    public static final String DESIRED_ROLE_DESC_AMY = " " + PREFIX_DESIREDROLE + VALID_DESIRED_ROLE_AMY;
+    public static final String DESIRED_ROLE_DESC_BOB = " " + PREFIX_DESIREDROLE + VALID_DESIRED_ROLE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -81,7 +81,7 @@ public class CommandTestUtil {
     public static final String INVALID_SKILLS_DESC = " " + PREFIX_SKILLS + "C++,Python"; // '*' not allowed in skills
     public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "Recruited"; // not one of the valid statuses
     public static final String INVALID_NOTE_DESC = " " + PREFIX_NOTE; // empty string not allowed for note
-    public static final String INVALID_DESIREDROLE_DESC = " " + PREFIX_DESIREDROLE; // no value for desired role
+    public static final String INVALID_DESIRED_ROLE_DESC = " " + PREFIX_DESIREDROLE; // no value for desired role
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -95,12 +95,12 @@ public class CommandTestUtil {
             .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
             .withSkills(VALID_SKILLS_AMY).withExperience(VALID_EXPERIENCE_AMY)
             .withStatus(VALID_STATUS_AMY).withNote(VALID_NOTE_AMY)
-            .withDesiredRole(VALID_DESIREDROLE_AMY).withTags(VALID_TAG_FRIEND).build();
+            .withDesiredRole(VALID_DESIRED_ROLE_AMY).withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
             .withSkills(VALID_SKILLS_BOB).withExperience(VALID_EXPERIENCE_BOB)
             .withStatus(VALID_STATUS_BOB).withNote(VALID_NOTE_BOB)
-            .withDesiredRole(VALID_DESIREDROLE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withDesiredRole(VALID_DESIRED_ROLE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**
