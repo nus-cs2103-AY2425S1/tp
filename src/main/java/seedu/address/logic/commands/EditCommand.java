@@ -109,6 +109,7 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNric, updatedAddress, updatedRemark, updatedTags);
+    }
 
     @Override
     public boolean equals(Object other) {
