@@ -72,6 +72,14 @@ public class PropertyBook implements ReadOnlyPropertyBook {
         return properties.contains(property);
     }
 
+    /**
+     * Removes {@code key} from this {@code PropertyBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeProperty(Property key) {
+        properties.remove(key);
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)

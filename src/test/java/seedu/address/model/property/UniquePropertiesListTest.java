@@ -102,26 +102,25 @@ public class UniquePropertiesListTest {
         uniquePropertyList.add(BEDOK);
         assertThrows(DuplicatePropertyException.class, () -> uniquePropertyList.setProperty(ADMIRALTY, BEDOK));
     }
+    @Test
+    public void remove_nullProperty_throwsNullPointerException() {
+        uniquePropertyList.add(ADMIRALTY);
+        assertThrows(NullPointerException.class, () -> uniquePropertyList.remove(null));
+    }
 
-    //      COMMENTED CODE IS FOR PERSON IMPLEMENTING DELETE FUNCTIONAILITY
+    @Test
+    public void remove_propertyDoesNotExist_throwsPropertyNotFoundException() {
+        uniquePropertyList.add(ADMIRALTY);
+        assertThrows(PropertyNotFoundException.class, () -> uniquePropertyList.remove(BEDOK));
+    }
 
-    //    @Test
-    //    public void remove_nullProperty_throwsNullPointerException() {
-    //        assertThrows(NullPointerException.class, () -> uniquePropertyList.remove(null));
-    //    }
-
-    //    @Test
-    //    public void remove_propertyDoesNotExist_throwsPropertyNotFoundException() {
-    //        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.remove(ALICE));
-    //    }
-
-    //    @Test
-    //    public void remove_existingProperty_removesProperty() {
-    //        uniquePersonList.add(ALICE);
-    //        uniquePersonList.remove(ALICE);
-    //        UniquePersonList expectedUniquePersonList = new UniquePersonList();
-    //        assertEquals(expectedUniquePersonList, uniquePersonList);
-    //    }
+    @Test
+    public void remove_existingProperty_removesProperty() {
+        uniquePropertyList.add(ADMIRALTY);
+        uniquePropertyList.remove(ADMIRALTY);
+        UniquePropertiesList expectedUniquePersonList = new UniquePropertiesList();
+        assertEquals(expectedUniquePersonList, uniquePropertyList);
+    }
 
     @Test
     public void setProperty_nullUniquePropertyList_throwsNullPointerException() {
