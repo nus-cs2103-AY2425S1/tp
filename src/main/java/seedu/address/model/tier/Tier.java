@@ -21,12 +21,11 @@ public class Tier {
      */
     public Tier(String tagName) {
         requireNonNull(tagName);
-        checkArgument(isValidTierName(tagName), MESSAGE_CONSTRAINTS);
         if (tagName.isEmpty()) {
-            this.tagName = TierEnum.NA;
-        } else {
-            this.tagName = TierEnum.valueOf(tagName.toUpperCase());;
+            tagName = "NA";
         }
+        checkArgument(isValidTierName(tagName), MESSAGE_CONSTRAINTS);
+        this.tagName = TierEnum.valueOf(tagName.toUpperCase());
     }
 
     /**
