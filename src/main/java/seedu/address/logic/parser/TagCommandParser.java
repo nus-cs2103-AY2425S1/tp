@@ -19,21 +19,30 @@ public class TagCommandParser implements Parser<TagCommand> {
     public TagCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap multimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
+
+        //Reformatting error message for duplicate tags
         try {
-            Index index = ParserUtil.parseIndex(multimap.getPreamble());
-            String tags = multimap.getValue(PREFIX_TAG).orElse("");
-            Set<Tag> tagSet = Tag.stringToTagSet(tags);
-
-            if (tagSet.isEmpty()) {
-                throw new ParseException("No tags specified");
-            }
-            return new TagCommand(index, tagSet);
-
+            multimap.verifyNoDuplicatePrefixesFor(PREFIX_TAG);
         } catch (ParseException pe) {
-            if (pe.getMessage().equals("No tags specified")) {
-                throw new ParseException("No tags specified");
-            }
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    "Please only include one prefix t/ !"));
         }
+
+
+        // If t/ prefix is missing
+        if (multimap.getValue(PREFIX_TAG).isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+        }
+
+        Index index = ParserUtil.parseIndex(multimap.getPreamble());
+        String tags = multimap.getValue(PREFIX_TAG).orElse("");
+        Set<Tag> tagSet = Tag.stringToTagSet(tags);
+
+        // If t/ prefix is followed by empty string
+        if (tagSet.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, "No tags specified!"));
+        }
+        return new TagCommand(index, tagSet);
+
     }
 }

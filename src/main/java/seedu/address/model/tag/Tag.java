@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -89,13 +89,14 @@ public class Tag {
      * @return
      */
     public static Set<Tag> stringToTagSet(String tagString) {
-        if (tagString.isBlank()) {
-            return Collections.emptySet();
-        }
         String[] strArr = tagString.split("\\s+"); // regex to catch multiple spaces
-        System.out.println(Arrays.toString(strArr));
-        Set<Tag> tagSet = Arrays.stream(strArr).map(s -> new Tag(s)).collect(Collectors.toSet());
-        return tagSet;
+        // Catch edge case if strArr is length 1 with element ""
+        if (strArr.length == 0 || strArr[0].equals("")) {
+            return new HashSet<>();
+        } else {
+            Set<Tag> tagSet = Arrays.stream(strArr).map(Tag::new).collect(Collectors.toSet());
+            return tagSet;
+        }
     }
 
 }
