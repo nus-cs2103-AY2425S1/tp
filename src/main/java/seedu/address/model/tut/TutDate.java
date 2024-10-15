@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.student.Student;
@@ -44,71 +43,17 @@ public class TutDate {
         students.add(student);
     }
 
-    /**
-     * Returns the date of this tutorial.
-     *
-     * @return the associated {@link Date}.
-     */
     public Date getDate() {
         return date;
     }
-    /**
-     * Returns an unmodifiable list of students.
-     *
-     * @return an unmodifiable list of {@link Student}.
-     */
+
     public Set<StudentId> getStudentIDs() {
         return Collections.unmodifiableSet(students);
     }
 
-    /**
-     * Returns whether the tutorial date is valid (i.e., has a non-null date).
-     *
-     * @return true if the date is valid, false otherwise.
-     */
-    public boolean isValid() {
-        return date != null;
-    }
-
-    /**
-     * Custom equals method to check if two TutDate objects are considered equal.
-     * Two TutDate objects are equal if they have the same date and student list.
-     *
-     * @param other The object to compare.
-     * @return true if the objects are equal, false otherwise.
-     */
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        if (!(other instanceof TutDate)) {
-            return false;
-        }
-
-        TutDate otherTutDate = (TutDate) other;
-        return Objects.equals(date, otherTutDate.date) && students.equals(otherTutDate.students);
-    }
-
-    /**
-     * Returns a string representation of the tutorial date.
-     *
-     * @return the string representation of the date.
-     */
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         return sdf.format(date);
-    }
-
-    /**
-     * Generates a hash code based on the date and students.
-     *
-     * @return the hash code.
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(date, students);
     }
 }

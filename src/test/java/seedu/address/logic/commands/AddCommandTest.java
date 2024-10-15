@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -46,6 +45,7 @@ public class AddCommandTest {
         Student validStudent = new StudentBuilder().build();
 
         CommandResult commandResult = new AddCommand(validStudent).execute(modelStub);
+
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validStudent)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validStudent), modelStub.studentsAdded);
@@ -214,12 +214,6 @@ public class AddCommandTest {
         @Override
         public void addTutorial(Tut toAdd) {
         }
-
-        @Override
-        public List<Tut> getTutorialList() {
-            return null;
-        }
-
         public void deleteAssignment(Assignment assignment) {
             throw new AssertionError("This method should not be called.");
         }
