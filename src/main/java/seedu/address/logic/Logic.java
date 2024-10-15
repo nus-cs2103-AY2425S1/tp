@@ -57,6 +57,10 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
+    String getMostRecentGroupTaskDisplay();
+
+    void setMostRecentGroupTaskDisplay(String string);
+
     void setStateStudents();
 
     void setStateGroups();
@@ -64,4 +68,6 @@ public interface Logic {
     void setStateGroupTask();
 
     State getState();
+
+    void setMostRecentGroupTaskDisplay();
 }

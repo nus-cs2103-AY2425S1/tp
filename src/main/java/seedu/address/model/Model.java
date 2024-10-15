@@ -44,6 +44,12 @@ public interface Model {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
+    String getMostRecentGroupTaskDisplay();
+
+    void setMostRecentGroupTaskDisplay();
+
+    void setMostRecentGroupTaskDisplay(String string);
+
     /**
      * Returns the user prefs' address book file path.
      */

@@ -52,10 +52,12 @@ public class ListTaskCommand extends Command {
         if (groupOptional.isPresent()) {
             requireNonNull(model);
             model.updateFilteredGroupList(x -> x.getGroupName().equals(groupOptional.get().getGroupName()));
+            model.setMostRecentGroupTaskDisplay(groupOptional.get().getGroupName().fullName);
             model.setStateGroupTask();
             return new CommandResult(MESSAGE_SUCCESS, LIST_GROUP_TASK_MARKER);
         }
         model.setStateTasks();
+        model.setMostRecentGroupTaskDisplay("");
         return new CommandResult(MESSAGE_SUCCESS_ALL_TASKS, LIST_TASK_MARKER);
     }
 
