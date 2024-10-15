@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.ActiveTags;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,7 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-
+    private ActiveTags activeTags; //Stores all currently used tags
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -34,6 +35,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        activeTags = new ActiveTags(this.addressBook.findTagOccurrences());
     }
 
     public ModelManager() {
@@ -126,6 +128,11 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public ActiveTags getActiveTags() {
+        return activeTags;
     }
 
     @Override
