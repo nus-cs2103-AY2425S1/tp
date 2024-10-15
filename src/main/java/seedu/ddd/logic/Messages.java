@@ -17,8 +17,8 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_CONTACT_TYPE = "Invalid contact type! \n%1$s";
+    public static final String MESSAGE_INVALID_CONTACT_ID = "Invalid contact ID! \n%1$s";
     public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid";
-    // TODO: determine if "contact" should also be added here
     public static final String MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX = "The client index provided is invalid";
     public static final String MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX = "The vendor index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
@@ -77,6 +77,8 @@ public class Messages {
                 .append(client.getDate())
                 .append("; Tags: ");
         client.getTags().forEach(builder::append);
+        builder.append("; ID: ")
+                .append(client.getId());
         return builder.toString();
     }
 
@@ -96,6 +98,8 @@ public class Messages {
                 .append(vendor.getService())
                 .append("; Tags: ");
         vendor.getTags().forEach(builder::append);
+        builder.append("; ID: ")
+                .append(vendor.getId());
         return builder.toString();
     }
 }

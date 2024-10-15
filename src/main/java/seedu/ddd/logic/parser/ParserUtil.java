@@ -156,7 +156,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String date} into a {@code Id}.
+     * Parses a {@code String Id} into a {@code Id}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code id} is invalid.

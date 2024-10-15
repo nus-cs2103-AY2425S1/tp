@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
@@ -45,7 +46,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the contact identified "
             + "by the index number used in the displayed contact list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: {INDEX (must be a positive integer) OR "
+            + "[" + PREFIX_ID + "ID]} "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -70,7 +72,6 @@ public class EditCommand extends Command {
      * @param editContactDescriptor details to edit the contact with
      */
     public EditCommand(Index index, EditContactDescriptor editContactDescriptor) {
-        requireNonNull(index);
         requireNonNull(editContactDescriptor);
 
         this.index = index;
@@ -80,13 +81,28 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Contact> lastShownList = model.getFilteredContactList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
+        Contact contactToEdit = null;
+        if (index != null) {
+            List<Contact> lastShownList = model.getFilteredContactList();
+            if (index.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
+            }
+
+            contactToEdit = lastShownList.get(index.getZeroBased());
+        } else {
+            Id targetId = editContactDescriptor.getId().get();
+            assert targetId != null;
+
+            for (Contact contact : model.getFilteredContactList()) {
+                if (contact.getId().equals(targetId)) {
+                    contactToEdit = contact;
+                    break;
+                }
+            }
         }
+        assert contactToEdit != null;
 
-        Contact contactToEdit = lastShownList.get(index.getZeroBased());
         if (contactToEdit instanceof Client && editContactDescriptor instanceof EditVendorDescriptor) {
             throw new CommandException(String.format(MESSAGE_EDIT_INVALID_PARAMETER, PREFIX_SERVICE));
         }
@@ -136,9 +152,9 @@ public class EditCommand extends Command {
             ? ((EditClientDescriptor) editContactDescriptor).getDate().orElse(contactToEdit.getDate())
             : contactToEdit.getDate();
         Set<Tag> updatedTags = editContactDescriptor.getTags().orElse(contactToEdit.getTags());
-        Id updatedId = editContactDescriptor.getId().orElse(contactToEdit.getId());
 
-        return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDate, updatedTags, updatedId);
+        return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDate, updatedTags,
+                contactToEdit.getId());
     }
 
     /**
@@ -156,10 +172,9 @@ public class EditCommand extends Command {
             ? ((EditVendorDescriptor) editContactDescriptor).getService().orElse(contactToEdit.getService())
             : contactToEdit.getService();
         Set<Tag> updatedTags = editContactDescriptor.getTags().orElse(contactToEdit.getTags());
-        Id updatedId = editContactDescriptor.getId().orElse(contactToEdit.getId());
 
         return new Vendor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedService,
-                updatedTags, updatedId);
+                updatedTags, contactToEdit.getId());
     }
 
     @Override
