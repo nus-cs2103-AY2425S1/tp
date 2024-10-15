@@ -7,14 +7,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.company.Person;
+import seedu.address.model.company.Company;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Company}.
  */
-public class PersonCard extends UiPart<Region> {
+public class CompanyCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "CompanyListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved
@@ -26,7 +26,7 @@ public class PersonCard extends UiPart<Region> {
      *      issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final Company company;
 
     @FXML
     private HBox cardPane;
@@ -44,18 +44,18 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to
+     * Creates a {@code PersonCode} with the given {@code Company} and index to
      * display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public CompanyCard(Company company, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.company = company;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
+        name.setText(company.getName().fullName);
+        phone.setText(company.getPhone().value);
+        address.setText(company.getAddress().value);
+        email.setText(company.getEmail().value);
+        company.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
