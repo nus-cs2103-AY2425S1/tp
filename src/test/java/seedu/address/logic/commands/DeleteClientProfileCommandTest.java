@@ -79,7 +79,7 @@ public class DeleteClientProfileCommandTest {
     }
 
     @Test
-    public void execute_invalidNameFilteredList_success() {
+    public void execute_invalidNameFilteredList_throwsCommandException() {
         Random random = new Random();
         List<Name> typicalNames = getTypicalNames();
         int randomIndex = random.nextInt(typicalNames.size() - 2);
