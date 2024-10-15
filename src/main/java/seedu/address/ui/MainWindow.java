@@ -126,13 +126,13 @@ public class MainWindow extends UiPart<Stage> {
             informationListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
         } else if (this.logic.getState().equals(DEFAULT_GROUP_TASK)) {
             informationListPanelPlaceholder.getChildren().add(groupTaskPanel.getRoot());
+            logic.setMostRecentGroupTaskDisplay();
         } else if (this.logic.getState().equals(DEFAULT_GROUP)) {
             informationListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
         } else {
             informationListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
         }
 
-        logic.setMostRecentGroupTaskDisplay();
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
