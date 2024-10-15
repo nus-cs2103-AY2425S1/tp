@@ -92,13 +92,13 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        IdentityNumber identityNumber = editPersonDescriptor.getIdentity().orElse(personToEdit.getName());
+        IdentityNumber updatedIdentityNumber = editPersonDescriptor.getIdentityNumber().orElse(personToEdit.getIdentityNumber());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedIdentityNumber, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override
@@ -136,6 +136,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private LogsList logsList;
 
         public EditPersonDescriptor() {}
 
@@ -150,6 +151,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setLogsList(toCopy.logsList);
         }
 
         /**
@@ -214,6 +216,14 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public void setLogsList(LogsList logsList) {
+            this.logsList = logsList;
+        }
+
+        public Optional<LogsList> getLogsList() {
+            return Optional.ofNullable(logsList);
         }
 
         @Override

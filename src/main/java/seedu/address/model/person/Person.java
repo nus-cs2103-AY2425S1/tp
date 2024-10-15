@@ -32,16 +32,15 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, IdentityNumber identityNumber, Phone phone, Email email, Address address, Set<Tag> tags,
-                  LogsList logsList) {
-        requireAllNonNull(name, identityNumber, phone, email, address, tags, logsList);
+    public Person(Name name, IdentityNumber identityNumber, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, identityNumber, phone, email, address, tags);
         this.name = name;
         this.identityNumber = identityNumber;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.logsList = logsList;
+        this.logsList = null;
     }
 
     public Name getName() {
