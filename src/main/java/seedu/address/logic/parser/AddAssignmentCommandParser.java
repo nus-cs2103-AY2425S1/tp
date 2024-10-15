@@ -23,14 +23,23 @@ import seedu.address.model.person.Name;
  * Parses input arguments and creates a new AddAssignmentCommand object
  */
 public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> {
+
+    private static final String MESSAGE_EXPECTED_AT_MOST_TWO = "Provide at most 2 status\n"
+            + AddAssignmentCommand.MESSAGE_USAGE;
+
+    private static final String MESSAGE_EXPECTED_GRADE = "Expected a grade if grading has already been done\n"
+            + AddAssignmentCommand.MESSAGE_USAGE;
+
+
+
     @Override
     public AddAssignmentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_NAME, PREFIX_ASSIGNMENT, PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_GRADE
         );
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ASSIGNMENT, PREFIX_DEADLINE, PREFIX_STATUS,
-                PREFIX_GRADE) || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ASSIGNMENT, PREFIX_DEADLINE)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAssignmentCommand.MESSAGE_USAGE));
         }
         Name name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
@@ -38,12 +47,32 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
         AssignmentName assignmentName = ParserUtil.parseAssignmentName(
                 argMultimap.getValue(CliSyntax.PREFIX_ASSIGNMENT).get());
         List<Status> statusList = ParserUtil.parseStatuses(argMultimap.getAllValues(CliSyntax.PREFIX_STATUS));
-        if (statusList.size() != 2) {
-            throw new ParseException("Provide exactly 2 status");
+
+        Status submissionStatus, gradingStatus;
+        switch (statusList.size()) {
+        case 2:
+            submissionStatus = statusList.get(0);
+            gradingStatus = statusList.get(1);
+            break;
+        case 1:
+            submissionStatus = statusList.get(0);
+            gradingStatus = Status.getDefault();
+            break;
+        case 0:
+            submissionStatus = Status.getDefault();
+            gradingStatus = Status.getDefault();
+            break;
+        default:
+            throw new ParseException(MESSAGE_EXPECTED_AT_MOST_TWO);
         }
-        Status submissionStatus = statusList.get(0);
-        Status gradingStatus = statusList.get(1);
-        Grade grade = ParserUtil.parseGrade(argMultimap.getValue(CliSyntax.PREFIX_GRADE).get());
+        Grade grade;
+        if (gradingStatus.isGraded()) {
+            grade = ParserUtil.parseGrade(argMultimap.getValue(CliSyntax.PREFIX_GRADE).orElseThrow(
+                    () -> new ParseException(MESSAGE_EXPECTED_GRADE)
+            ));
+        } else {
+            grade = Grade.getDefault();
+        }
         return new AddAssignmentCommand(name,
                 new Assignment(assignmentName, deadline, submissionStatus, gradingStatus, grade));
     }

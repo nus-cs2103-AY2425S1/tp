@@ -42,6 +42,20 @@ public class Grade {
         return grade.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Constructs an empty {@code Grade}
+     */
+    private Grade() {
+        this.grade = Optional.empty();
+    }
+
+    /**
+     * Factory method to create a default {@code Grade}
+     */
+    public static Grade getDefault() {
+        return new Grade();
+    }
+
     @Override
     public String toString() {
         return new DecimalFormat("#.00").format(grade);

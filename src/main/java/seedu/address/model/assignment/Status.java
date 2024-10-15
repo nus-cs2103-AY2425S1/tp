@@ -39,10 +39,33 @@ public class Status {
     }
 
     /**
+     * Constructs a {@code Status}
+     *
+     * @param state A valid state
+     */
+    private Status(State state) {
+        this.status = state;
+    }
+
+    /**
+     * Factory method to initialize default status.
+     */
+    public static Status getDefault() {
+        return new Status(State.N);
+    }
+
+    /**
      * Returns true if the given string is a valid status
      */
     public static boolean isValidStatus(String status) {
         return status.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if the assignment is graded
+     */
+    public boolean isGraded() {
+        return status == State.Y;
     }
 
     @Override
@@ -60,7 +83,7 @@ public class Status {
             return false;
         }
 
-        seedu.address.model.assignment.Status otherStatus = (seedu.address.model.assignment.Status) other;
+        Status otherStatus = (Status) other;
         return this.status.equals(otherStatus.status);
     }
 
