@@ -45,6 +45,8 @@ public class Messages {
                 .append(client.getAddress())
                 .append("; Insurance Plans: ")
                 .append(client.getInsurancePlansManager())
+                .append("; Open Claims: ")
+                .append(client.getClaimsString())
                 .append("; Tags: ");
         client.getTags().forEach(builder::append);
         return builder.toString();

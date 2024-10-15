@@ -42,6 +42,8 @@ public class ClientCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label insurancePlans;
+    @FXML
+    private Label claims;
 
     /**
      * Creates a {@code ClientCode} with the given {@code Client} and index to display.
@@ -55,6 +57,7 @@ public class ClientCard extends UiPart<Region> {
         address.setText(client.getAddress().value);
         email.setText(client.getEmail().value);
         insurancePlans.setText(client.getInsurancePlansManager().toString());
+        claims.setText(client.getClaimsString());
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

@@ -17,6 +17,9 @@ import seedu.address.model.tag.Tag;
  */
 public class Client {
 
+    public static final String NO_CLAIMS_MESSAGE = "No open claims";
+    public static final String OPEN_CLAIMS_MESSAGE = "%1$s open claims";
+
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -80,6 +83,22 @@ public class Client {
 
         return otherClient != null
                 && otherClient.getName().equals(getName());
+    }
+
+    /**
+     * Retrieves a formatted string representing the number of open claims.
+     *
+     * This method checks the number of open claims managed by the {@link InsurancePlansManager}.
+     * If there are no open claims, it returns a predefined message indicating that there are no claims.
+     * Otherwise, it returns a formatted message displaying the count of open claims.
+     *
+     * @return A string message indicating the number of open claims. If there are no open claims,
+     *         it returns {@link #NO_CLAIMS_MESSAGE}. If there are open claims, it returns
+     *         a formatted string with the number of open claims using {@link #OPEN_CLAIMS_MESSAGE}.
+     */
+    public String getClaimsString() {
+        int numberOfOpenClaims = this.insurancePlansManager.getNumberOfOpenClaims();
+        return (numberOfOpenClaims == 0) ? NO_CLAIMS_MESSAGE : String.format(OPEN_CLAIMS_MESSAGE, numberOfOpenClaims);
     }
 
     /**
