@@ -39,46 +39,55 @@ public class AddCarCommandParserTest {
 
         // Test with full, valid input
         assertParseSuccess(parser, "1 " + PREFIX_VRN + VALID_CAR_VRN_B + " "
-                        + PREFIX_VIN + VALID_CAR_VIN_B + " " + PREFIX_MAKE + VALID_CAR_MAKE_B + " " + PREFIX_MODEL + VALID_CAR_MODEL_B,
+                        + PREFIX_VIN + VALID_CAR_VIN_B + " " + PREFIX_MAKE
+                        + VALID_CAR_MAKE_B + " " + PREFIX_MODEL + VALID_CAR_MODEL_B,
                 expectedCommand);
     }
 
     @Test
     public void parse_missingCarDetails_failure() {
         // Missing VIN
-        assertParseFailure(parser, "1 " + PREFIX_VRN + VALID_CAR_VRN_B + " " + PREFIX_MAKE + VALID_CAR_MAKE_B + " "
-                + PREFIX_MODEL + VALID_CAR_MODEL_B, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCarCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1 " + PREFIX_VRN + VALID_CAR_VRN_B + " " + PREFIX_MAKE
+                + VALID_CAR_MAKE_B + " " + PREFIX_MODEL
+                + VALID_CAR_MODEL_B, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCarCommand.MESSAGE_USAGE));
 
         // Missing VRN
-        assertParseFailure(parser, "1 " + PREFIX_VIN + VALID_CAR_VIN_B + " " + PREFIX_MAKE + VALID_CAR_MAKE_B + " "
-                + PREFIX_MODEL + VALID_CAR_MODEL_B, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCarCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1 " + PREFIX_VIN + VALID_CAR_VIN_B + " " + PREFIX_MAKE
+                + VALID_CAR_MAKE_B + " " + PREFIX_MODEL
+                + VALID_CAR_MODEL_B, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCarCommand.MESSAGE_USAGE));
 
         // Missing Make
-        assertParseFailure(parser, "1 " + PREFIX_VRN + VALID_CAR_VRN_B + " " + PREFIX_VIN + VALID_CAR_VIN_B + " "
-                + PREFIX_MODEL + VALID_CAR_MODEL_B, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCarCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1 " + PREFIX_VRN + VALID_CAR_VRN_B + " "
+                + PREFIX_VIN + VALID_CAR_VIN_B + " " + PREFIX_MODEL
+                + VALID_CAR_MODEL_B, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCarCommand.MESSAGE_USAGE));
 
         // Missing Model
-        assertParseFailure(parser, "1 " + PREFIX_VRN + VALID_CAR_VRN_B + " " + PREFIX_VIN + VALID_CAR_VIN_B + " "
-                + PREFIX_MAKE + VALID_CAR_MAKE_B, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCarCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1 " + PREFIX_VRN + VALID_CAR_VRN_B + " " + PREFIX_VIN
+                + VALID_CAR_VIN_B + " " + PREFIX_MAKE
+                + VALID_CAR_MAKE_B, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCarCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // bad VRN
-        assertParseFailure(parser, "1 " + PREFIX_VRN + INVALID_CAR_VRN + " " + PREFIX_VIN + VALID_CAR_VIN_B + " "
-                + PREFIX_MAKE + VALID_CAR_MAKE_B + " " + PREFIX_MODEL + VALID_CAR_MODEL_B, Vrn.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1 " + PREFIX_VRN + INVALID_CAR_VRN + " " + PREFIX_VIN
+                + VALID_CAR_VIN_B + " " + PREFIX_MAKE + VALID_CAR_MAKE_B + " "
+                + PREFIX_MODEL + VALID_CAR_MODEL_B, Vrn.MESSAGE_CONSTRAINTS);
 
         // bad VIN
-        assertParseFailure(parser, "1 " + PREFIX_VRN + VALID_CAR_VRN_B + " " + PREFIX_VIN + INVALID_CAR_VIN + " "
-                + PREFIX_MAKE + VALID_CAR_MAKE_B + " " + PREFIX_MODEL + VALID_CAR_MODEL_B, Vin.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1 " + PREFIX_VRN + VALID_CAR_VRN_B + " " + PREFIX_VIN
+                + INVALID_CAR_VIN + " " + PREFIX_MAKE + VALID_CAR_MAKE_B + " " + PREFIX_MODEL
+                + VALID_CAR_MODEL_B, Vin.MESSAGE_CONSTRAINTS);
 
         // bad Make
-        assertParseFailure(parser, "1 " + PREFIX_VRN + VALID_CAR_VRN_B + " " + PREFIX_VIN + VALID_CAR_VIN_B + " "
-                + PREFIX_MAKE + INVALID_CAR_MAKE + " " + PREFIX_MODEL + VALID_CAR_MODEL_B, CarMake.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1 " + PREFIX_VRN + VALID_CAR_VRN_B + " " + PREFIX_VIN
+                + VALID_CAR_VIN_B + " " + PREFIX_MAKE + INVALID_CAR_MAKE + " " + PREFIX_MODEL
+                + VALID_CAR_MODEL_B, CarMake.MESSAGE_CONSTRAINTS);
 
         // bad Model
-        assertParseFailure(parser, "1 " + PREFIX_VRN + VALID_CAR_VRN_B + " " + PREFIX_VIN + VALID_CAR_VIN_B + " "
-                + PREFIX_MAKE + VALID_CAR_MAKE_B + " " + PREFIX_MODEL + INVALID_CAR_MODEL, CarModel.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1 " + PREFIX_VRN + VALID_CAR_VRN_B + " " + PREFIX_VIN
+                + VALID_CAR_VIN_B + " " + PREFIX_MAKE + VALID_CAR_MAKE_B + " " + PREFIX_MODEL
+                + INVALID_CAR_MODEL, CarModel.MESSAGE_CONSTRAINTS);
     }
 
     @Test
