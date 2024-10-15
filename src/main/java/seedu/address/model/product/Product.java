@@ -135,7 +135,8 @@ public class Product {
 
         Product otherProduct = (Product) other;
         return name.equals(otherProduct.name) && stockLevel == otherProduct.stockLevel
-            && supplierName.equals(otherProduct.supplierName); // TODO: what happens if supplier is null?
+            && ((this.supplierName == null && otherProduct.supplierName == null)
+            || supplierName.equals(otherProduct.supplierName));
     }
 
     @Override
