@@ -10,7 +10,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PROJECTS;
  */
 public class ListProjectCommand extends Command {
 
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "listproject";
 
     public static final String MESSAGE_SUCCESS = "Listed all projects";
 
