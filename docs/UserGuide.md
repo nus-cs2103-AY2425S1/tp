@@ -54,9 +54,6 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -79,16 +76,27 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT f/FEE [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
 
-<box type="tip" seamless>
+<box type="note" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**NOTE:** 
+1. <b>SCHEDULE</b> must be in the format of <DAY OF THE WEEK>-<START TIME>-<END TIME>
+* <b>DAY OF THE WEEK</b> includes Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
+* <b>START TIME</b> and <b>END TIME</b> are represented as `HHmm`.
+
+2. <b>SUBJECT</b> should only be:
+`economics` / `literature` / `music` / `biology` / `chemistry` / `science` / `english` / `chinese` / `malay` / `tamil` / `math` / `history` / `geography` / `physics` / `GP`
+
+3. <b>FEE</b> is the tuition fee per hour.
+
+4. <b>FEE</b>, <b>PAID_AMOUNT</b> and <b>OWED_AMOUNT</b> must be at least 0 with at most 2 decimal places.
+<i>Example: </i> `12.00`, `0.0` or `7`
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Sunday-1000-1200 s/Geography f/100 paid/100 owed/0`
+* `add n/Betsy Crowe s/Math t/Saturday-1400-1600 e/betsycrowe@example.com a/Block 7 #02-02 Red Hill p/1234567 f/200 owed/200`
 
 ### Listing all persons : `list`
 
@@ -100,7 +108,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] …​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -170,6 +178,7 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
 ### Archiving data files `[coming in v2.0]`
