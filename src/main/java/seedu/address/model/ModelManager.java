@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.concert.Concert;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Concert> filteredConcerts;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredConcerts = new FilteredList<>(this.addressBook.getConcertList());
     }
 
     public ModelManager() {
@@ -94,6 +97,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasConcert(Concert concert) {
+        requireNonNull(concert);
+        return addressBook.hasConcert(concert);
+    }
+
+    @Override
+    public void addConcert(Concert concert) {
+        requireNonNull(concert);
+        updateFilteredConcertList(PREDICATE_SHOW_ALL_CONCERTS);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -128,6 +143,18 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Filtered Concert List Accessors =============================================================
+    @Override
+    public ObservableList<Concert> getFilteredConcertList() {
+        return filteredConcerts;
+    }
+
+    @Override
+    public void updateFilteredConcertList(Predicate<Concert> predicate) {
+        requireNonNull(predicate);
+        filteredConcerts.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -140,9 +167,8 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+        return addressBook.equals(otherModelManager.addressBook) && userPrefs.equals(
+                otherModelManager.userPrefs) && filteredPersons.equals(
+                        otherModelManager.filteredPersons);
     }
-
 }
