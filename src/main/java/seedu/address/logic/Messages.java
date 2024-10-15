@@ -53,7 +53,7 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(assignment.getName())
                 .append("; Max Score: ")
-                .append(assignment.getScore());
+                .append(assignment.getMaxScore());
         return builder.toString();
     }
 

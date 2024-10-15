@@ -131,11 +131,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Clears the details panel.
+     */
+    private void clearDetailsPanel() {
+        studentDetailsPanelPlaceholder.getChildren().clear();
+        BlankDetailsPanel blankDetailsPanel = new BlankDetailsPanel();
+        studentDetailsPanelPlaceholder.getChildren().add(blankDetailsPanel.getRoot());
+    }
+
+    /**
      * Updates the details panel to the selected student.
      */
     private void updateDetailsPanel(Student student, int index) {
         studentDetailsPanelPlaceholder.getChildren().clear();
-
         StudentDetailsPanel studentDetailsPanel = new StudentDetailsPanel(student, index + 1);
         studentDetailsPanelPlaceholder.getChildren().add(studentDetailsPanel.getRoot());
     }
@@ -197,6 +205,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isStudent()) {
                 updateDetailsPanel(commandResult.getStudent(), commandResult.getStudentIndex());
+            }
+
+            if (commandResult.isClear()) {
+                clearDetailsPanel();
             }
 
             if (commandResult.isShowHelp()) {

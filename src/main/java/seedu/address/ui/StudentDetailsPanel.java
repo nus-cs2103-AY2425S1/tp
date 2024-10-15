@@ -62,8 +62,14 @@ public class StudentDetailsPanel extends UiPart<Region> {
             assignmentBox.setSpacing(5); // Optional: add spacing between elements
 
             Label titleLabel = new Label(assignment.getName());
+            titleLabel.getStyleClass().add("assignment-name");
             Label scoreLabel = new Label("Score: " + assignment.getScore() + "/" + assignment.getMaxScore());
             Label statusLabel = new Label(assignment.getHasSubmitted() ? "Submitted" : "Not Submitted");
+            if (assignment.getHasSubmitted()) {
+                statusLabel.getStyleClass().add("assignment-status-submitted");
+            } else {
+                statusLabel.getStyleClass().add("assignment-status-unsubmitted");
+            }
 
             // Optionally apply CSS or styling to differentiate the assignment boxes
             assignmentBox.getStyleClass().add("assignment-box");
