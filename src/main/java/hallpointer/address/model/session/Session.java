@@ -2,8 +2,7 @@ package hallpointer.address.model.session;
 
 import static hallpointer.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
@@ -21,9 +20,6 @@ public class Session {
     private final int points;
     private final Date date;
 
-    // Data fields
-    private final Set<Member> members = new HashSet<>();
-
     /**
      * Every field must be present and not null.
      */
@@ -32,7 +28,6 @@ public class Session {
         this.sessionName = sessionName;
         this.date = date;
         this.points = points;
-        this.members.addAll(members);
     }
 
     public SessionName getSessionName() {
@@ -44,27 +39,10 @@ public class Session {
     }
 
     /**
-     * Returns an immutable member set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Member> getMembers() {
-        return Collections.unmodifiableSet(members);
-    }
-
-    /**
      * Returns the date of the session.
      */
     public Date getDate() {
         return date;
-    }
-
-    /**
-     * Updates the set of members in the session.
-     *
-     * @param newMembers New set of members.
-     */
-    public Session updateMembers(Set<Member> newMembers) {
-        return new Session(this.sessionName, this.date, this.points, newMembers);
     }
 
     /**
@@ -96,13 +74,12 @@ public class Session {
 
         Session otherSession = (Session) other;
         return sessionName.equals(otherSession.sessionName)
-                && points == otherSession.points
-                && members.equals(otherSession.members);
+                && points == otherSession.points;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sessionName, points, members);
+        return Objects.hash(sessionName, points);
     }
 
     @Override
@@ -110,7 +87,6 @@ public class Session {
         return new ToStringBuilder(this)
                 .add("sessionName", sessionName)
                 .add("points", points)
-                .add("members", members)
                 .toString();
     }
 
