@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import java.util.Objects;
+
 /**
  * Represents a Person's notes in BizBook.
  */
@@ -29,19 +31,25 @@ public class Note {
 
     @Override
     public boolean equals(Object other) {
+
         if (other == this) {
             return true;
         }
 
         // instanceof handles nulls
         if (!(other instanceof Note)) {
-
             return false;
         }
 
         Note otherNotes = (Note) other;
 
         return note.equals(otherNotes.note);
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(note);
     }
 
     /**
