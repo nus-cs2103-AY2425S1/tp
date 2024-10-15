@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Objects;
+
 public class Relationship {
     public static final String RELATIONSHIP_TYPE_CONSTRAINTS =
             "Relationship type should be Parent, Child, Sibling, Spouse, " +
@@ -36,6 +38,12 @@ public class Relationship {
     @Override
     public String toString() {
         return relationship;
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(relationship);
     }
 
     private enum RelationshipType {
