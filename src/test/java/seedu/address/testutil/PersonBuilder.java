@@ -106,7 +106,7 @@ public class PersonBuilder {
         this.remark = new Remark(remark);
         return this;
     }
-  
+
     /**
      * Sets the {@code Nric} of the {@code Person} that we are building.
      */
