@@ -111,6 +111,24 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void savePersonToDelete(Person person) {
+        addressBook.savePersonToDelete(person);
+    }
+
+    @Override
+    public boolean checkRestorable() {
+        return addressBook.checkRestorable();
+    }
+    @Override
+    public void makeNotRestorable() {
+        addressBook.makeNotRestorable();
+    }
+    @Override
+    public Person getLastDeletedPerson() {
+        return addressBook.getLastDeletedPerson();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -126,6 +144,11 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void sortFilteredPersonList(String order) {
+        addressBook.sortPersons(order);
     }
 
     @Override
