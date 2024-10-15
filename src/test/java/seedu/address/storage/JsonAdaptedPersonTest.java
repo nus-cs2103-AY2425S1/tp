@@ -37,6 +37,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(BENSON);
+        System.out.println(BENSON.equals(person.toModelType()));
         assertEquals(BENSON, person.toModelType());
     }
 
