@@ -7,7 +7,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Student}'s {@code Name} matches any of the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Student> {
     private final List<String> keywords;
@@ -17,9 +17,9 @@ public class NameContainsKeywordsPredicate implements Predicate<Student> {
     }
 
     @Override
-    public boolean test(Student person) {
+    public boolean test(Student student) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(student.getName().fullName, keyword));
     }
 
     @Override

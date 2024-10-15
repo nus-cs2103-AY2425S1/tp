@@ -21,7 +21,7 @@ import seedu.address.model.student.Student;
  */
 class JsonAdaptedStudent {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Student's %s field is missing!";
 
     private final String name;
     private final String phone;
@@ -29,7 +29,7 @@ class JsonAdaptedStudent {
     private final List<JsonAdaptedCourse> courses = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedStudent} with the given student details.
      */
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
@@ -44,7 +44,7 @@ class JsonAdaptedStudent {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Student} into this class for Jackson use.
      */
     public JsonAdaptedStudent(Student source) {
         name = source.getName().fullName;
@@ -56,15 +56,15 @@ class JsonAdaptedStudent {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted student object into the model's {@code Student} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public Student toModelType() throws IllegalValueException {
-        final List<Course> personCourses = new ArrayList<>();
+        final List<Course> studentCourses = new ArrayList<>();
 
         for (JsonAdaptedCourse course : courses) {
-            personCourses.add(course.toModelType());
+            studentCourses.add(course.toModelType());
         }
 
         if (name == null) {
@@ -91,7 +91,7 @@ class JsonAdaptedStudent {
         }
         final Email modelEmail = new Email(email);
 
-        final Set<Course> modelCourses = new HashSet<>(personCourses);
+        final Set<Course> modelCourses = new HashSet<>(studentCourses);
 
         return new Student(modelName, modelPhone, modelEmail, modelCourses);
     }

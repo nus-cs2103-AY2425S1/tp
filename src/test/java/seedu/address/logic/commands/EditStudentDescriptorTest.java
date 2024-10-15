@@ -12,15 +12,15 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
+import seedu.address.testutil.EditStudentDescriptorBuilder;
 
-public class EditPersonDescriptorTest {
+public class EditStudentDescriptorTest {
 
     @Test
     public void equals() {
         // same values -> returns true
-        EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_AMY);
+        EditStudentDescriptor descriptorWithSameValues = new EditStudentDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -36,30 +36,30 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+        EditStudentDescriptor editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
+        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different email -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
+        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withCourses(VALID_COURSE_CS2101).build();
+        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withCourses(VALID_COURSE_CS2101).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
     @Test
     public void toStringMethod() {
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", phone="
-                + editPersonDescriptor.getPhone().orElse(null) + ", email="
-                + editPersonDescriptor.getEmail().orElse(null) + ", courses="
-                + editPersonDescriptor.getCourses().orElse(null) + "}";
-        assertEquals(expected, editPersonDescriptor.toString());
+        EditStudentDescriptor editStudentDescriptor = new EditStudentDescriptor();
+        String expected = EditStudentDescriptor.class.getCanonicalName() + "{name="
+                + editStudentDescriptor.getName().orElse(null) + ", phone="
+                + editStudentDescriptor.getPhone().orElse(null) + ", email="
+                + editStudentDescriptor.getEmail().orElse(null) + ", courses="
+                + editStudentDescriptor.getCourses().orElse(null) + "}";
+        assertEquals(expected, editStudentDescriptor.toString());
     }
 }

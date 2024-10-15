@@ -85,8 +85,8 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredStudentList().remove(0));
     }
 
     /**
@@ -169,9 +169,9 @@ public class LogicManagerTest {
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY;
-        Student expectedPerson = new StudentBuilder(AMY).withCourses().build();
+        Student expectedStudent = new StudentBuilder(AMY).withCourses().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addStudent(expectedStudent);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

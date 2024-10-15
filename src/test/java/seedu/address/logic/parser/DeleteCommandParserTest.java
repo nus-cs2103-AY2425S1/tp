@@ -4,8 +4,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,15 +29,15 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_singleDeleteValidArgs_returnsDeleteCommand() {
         Set<Index> firstIndexSet = new HashSet<>();
-        firstIndexSet.add(INDEX_FIRST_PERSON);
+        firstIndexSet.add(INDEX_FIRST_STUDENT);
         assertParseSuccess(parser, " " + PREFIX_DELETE_INDEX + "1", new DeleteCommand(firstIndexSet));
     }
 
     @Test
     public void parse_multiDeleteValidArgs_returnsDeleteCommand() {
         Set<Index> indexSet = new HashSet<>();
-        indexSet.add(INDEX_FIRST_PERSON);
-        indexSet.add(INDEX_SECOND_PERSON);
+        indexSet.add(INDEX_FIRST_STUDENT);
+        indexSet.add(INDEX_SECOND_STUDENT);
         assertParseSuccess(parser, " " + PREFIX_DELETE_INDEX + "1 " + PREFIX_DELETE_INDEX + "2 ",
                 new DeleteCommand(indexSet));
     }
