@@ -70,6 +70,17 @@ public class PersonContainsKeywordsPredicateTest {
                 .asList("26", "June", "2002"));
         assertTrue(predicate.test(new PersonBuilder().withBirthday("26 06 2002").build()));
 
+        // Keywords match address, but does not match name, phone and email
+        predicate = new PersonContainsKeywordsPredicate(Arrays
+                .asList("Jurong"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Bob").withPhone("81111111")
+                .withEmail("bob123@gmail.com").build()));
+
+        // Keywords match tags, but does not match anything else
+        predicate = new PersonContainsKeywordsPredicate(Arrays
+                .asList("likesCoffee"));
+        assertTrue(predicate.test(new PersonBuilder().withTags("likesCoffee", "wealthy").build()));
+
         // Partial match (keyword is a substring of name but not a full word match)
         predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("Ali"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
