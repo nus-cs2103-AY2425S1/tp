@@ -55,7 +55,7 @@ public class DeleteAppointmentCommand extends Command {
         if (other == this) {
             return true;
         }
- 
+
         // instanceof handles nulls
         if (!(other instanceof DeleteAppointmentCommand)) {
             return false;
