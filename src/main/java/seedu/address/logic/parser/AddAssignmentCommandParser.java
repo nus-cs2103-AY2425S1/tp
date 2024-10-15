@@ -24,10 +24,10 @@ import seedu.address.model.person.Name;
  */
 public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> {
 
-    private static final String MESSAGE_EXPECTED_AT_MOST_TWO = "Provide at most 2 status\n"
+    public static final String MESSAGE_EXPECTED_AT_MOST_TWO = "Provide at most 2 status\n"
             + AddAssignmentCommand.MESSAGE_USAGE;
 
-    private static final String MESSAGE_EXPECTED_GRADE = "Expected a grade if grading has already been done\n"
+    public static final String MESSAGE_EXPECTED_GRADE = "Expected a grade if grading has already been done\n"
             + AddAssignmentCommand.MESSAGE_USAGE;
 
 
@@ -42,11 +42,11 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAssignmentCommand.MESSAGE_USAGE));
         }
-        Name name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
-        Deadline deadline = ParserUtil.parseDeadline(argMultimap.getValue(CliSyntax.PREFIX_DEADLINE).get());
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Deadline deadline = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE).get());
         AssignmentName assignmentName = ParserUtil.parseAssignmentName(
-                argMultimap.getValue(CliSyntax.PREFIX_ASSIGNMENT).get());
-        List<Status> statusList = ParserUtil.parseStatuses(argMultimap.getAllValues(CliSyntax.PREFIX_STATUS));
+                argMultimap.getValue(PREFIX_ASSIGNMENT).get());
+        List<Status> statusList = ParserUtil.parseStatuses(argMultimap.getAllValues(PREFIX_STATUS));
 
         Status submissionStatus;
         Status gradingStatus;
@@ -68,7 +68,7 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
         }
         Grade grade;
         if (gradingStatus.isGraded()) {
-            grade = ParserUtil.parseGrade(argMultimap.getValue(CliSyntax.PREFIX_GRADE)
+            grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE)
                     .orElseThrow(() -> new ParseException(MESSAGE_EXPECTED_GRADE)
             ));
         } else {

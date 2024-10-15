@@ -90,4 +90,22 @@ public class Assignment {
                 .add("grade", grade)
                 .toString();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Assignment)) {
+            return false;
+        }
+
+        Assignment otherAssignment = (Assignment) other;
+        return this.assignmentName.equals(otherAssignment.assignmentName)
+                && this.deadline.equals(otherAssignment.deadline)
+                && this.submissionStatus.equals(otherAssignment.submissionStatus)
+                && this.gradingStatus.equals(otherAssignment.gradingStatus)
+                && this.grade.equals(otherAssignment.grade);
+    }
 }

@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddAssignmentCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Name;
@@ -63,5 +64,20 @@ public class AddAssignmentCommand extends Command {
 
         student.addAssignment(assignment);
         return new CommandResult(String.format(MESSAGE_SUCCESS, assignment.getAssignmentName(), student.getName()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AddAssignmentCommand)) {
+            return false;
+        }
+
+        AddAssignmentCommand otherCommand = (AddAssignmentCommand) other;
+        return otherCommand.assignment.equals(this.assignment)
+                && otherCommand.name.equals(this.name);
     }
 }

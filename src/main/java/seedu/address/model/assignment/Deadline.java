@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException;
 public class Deadline {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Status should either be Y or N (case insensitive)";
+            "Invalid date format. Please use YYYY-MM-DD.";
 
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public final LocalDate deadline;

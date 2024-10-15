@@ -222,7 +222,6 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
         if (!Deadline.isValidDeadline(trimmedDate)) {
-            System.out.println(trimmedDate);
             throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
         }
         return new Deadline(trimmedDate);
