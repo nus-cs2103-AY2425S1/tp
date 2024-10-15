@@ -40,12 +40,7 @@ public class BirthdayCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withBirthday(BIRTHDAY_STUB).build();
         BirthdayCommand birthdayCommand = new BirthdayCommand(INDEX_FIRST_PERSON,
-                new Birthday(
-                        Optional.ofNullable(editedPerson.getBirthday().value)
-                                .filter(date -> !date.equals(LocalDate.MIN))
-                                .map(LocalDate::toString)
-                                .orElse("")
-                )
+                new Birthday(editedPerson.getBirthday().toString())
         );
 
         String expectedMessage = String.format(BirthdayCommand.MESSAGE_ADD_BIRTHDAY_SUCCESS,

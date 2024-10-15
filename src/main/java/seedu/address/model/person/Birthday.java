@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Person's birthday in the address book.
@@ -11,10 +12,10 @@ import java.time.LocalDate;
  */
 public class Birthday {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Birthday should be of the format yyyy-mm-dd";
-    public static final String VALIDATION_REGEX = "^(\\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$";
+    public static final String MESSAGE_CONSTRAINTS = "Birthday should be a valid date of the format yyyy-mm-dd and be"
+            + " within reasonable limits.";
     public static final Birthday EMPTY_BIRTHDAY = Birthday.of("");
+    public static final LocalDate LOWER_BOUND = LocalDate.parse("1908-05-23");
     public final LocalDate value;
 
     /**
@@ -36,7 +37,15 @@ public class Birthday {
      * Returns true if a given string is a valid birthday.
      */
     public static boolean isValidBirthday(String test) {
-        return test.matches(VALIDATION_REGEX) || test.isEmpty();
+        if (test.isEmpty()) {
+            return true;
+        }
+        try {
+            LocalDate date = LocalDate.parse(test);
+            return !date.isBefore(LOWER_BOUND) && !date.isAfter(LocalDate.now());
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     public static Birthday of(String birthday) {

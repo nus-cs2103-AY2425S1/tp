@@ -24,10 +24,11 @@ public class BirthdayCommandParser implements Parser<BirthdayCommand> {
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BirthdayCommand.MESSAGE_USAGE), ive);
+            String birthday = argMultimap.getValue(PREFIX_BIRTHDAY).orElse("");
+            return new BirthdayCommand(index, new Birthday(birthday));
+        } catch (IllegalValueException | IllegalArgumentException ive_or_iae) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BirthdayCommand.MESSAGE_USAGE),
+                    ive_or_iae);
         }
-        String birthday = argMultimap.getValue(PREFIX_BIRTHDAY).get(); // Gives empty string if no birthday is specified
-        return new BirthdayCommand(index, new Birthday(birthday));
     }
 }

@@ -107,9 +107,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
-        Birthday updatedBirthday = editPersonDescriptor.getBirthday()
-                .filter(date -> !date.getValue().equals(LocalDate.MIN))
-                .orElseGet(personToEdit::getBirthday);
+        Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedBirthday,
@@ -221,7 +219,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<Birthday> getBirthday() {
-            return Optional.ofNullable(birthday);
+            return Optional.ofNullable(birthday).filter(date -> !date.getValue().equals(LocalDate.MIN));
         }
 
         /**

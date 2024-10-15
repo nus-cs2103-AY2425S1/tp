@@ -1,6 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_BIRTHDAY_TOO_EARLY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_BIRTHDAY_TOO_LATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDAY_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -13,14 +17,17 @@ import seedu.address.logic.commands.BirthdayCommand;
 import seedu.address.model.person.Birthday;
 
 public class BirthdayCommandParserTest {
+
+    private static final String MESSAGE_INVALID_FORMAT =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, BirthdayCommand.MESSAGE_USAGE);
+
     private BirthdayCommandParser parser = new BirthdayCommandParser();
-    private final String nonEmptyBirthday = "1990-05-20";
     @Test
     public void parse_indexSpecified_success() {
         // have birthday
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_BIRTHDAY + nonEmptyBirthday;
-        BirthdayCommand expectedCommand = new BirthdayCommand(INDEX_FIRST_PERSON, new Birthday(nonEmptyBirthday));
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_BIRTHDAY + VALID_BIRTHDAY_AMY;
+        BirthdayCommand expectedCommand = new BirthdayCommand(INDEX_FIRST_PERSON, new Birthday(VALID_BIRTHDAY_AMY));
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // no birthday
@@ -35,6 +42,25 @@ public class BirthdayCommandParserTest {
         // no parameters
         assertParseFailure(parser, BirthdayCommand.COMMAND_WORD, expectedMessage);
         // no index
-        assertParseFailure(parser, BirthdayCommand.COMMAND_WORD + " " + nonEmptyBirthday, expectedMessage);
+        assertParseFailure(parser, BirthdayCommand.COMMAND_WORD + " " + VALID_BIRTHDAY_AMY, expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidValue_failure() {
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput1 = targetIndex.getOneBased() + INVALID_DATE_DESC;
+        String userInput2 = targetIndex.getOneBased() + INVALID_BIRTHDAY_TOO_EARLY_DESC;
+        String userInput3 = targetIndex.getOneBased() + INVALID_BIRTHDAY_TOO_LATE_DESC;
+
+        String expectedMessage = Birthday.MESSAGE_CONSTRAINTS;
+
+        // Invalid date
+        assertParseFailure(parser, userInput1, MESSAGE_INVALID_FORMAT);
+
+        // No human born on this day is alive today
+        assertParseFailure(parser, userInput2, MESSAGE_INVALID_FORMAT);
+
+        // Date must not be in the future
+        assertParseFailure(parser, userInput3, MESSAGE_INVALID_FORMAT);
     }
 }

@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -72,7 +73,12 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_BIRTHDAY_DESC = " " + PREFIX_BIRTHDAY; // empty string not allowed for birthdays
+    public static final String INVALID_DATE_DESC = " " + PREFIX_BIRTHDAY + "2002-02-30"; // empty string not allowed
+    // for birthdays
+    public static final String INVALID_DATE_AGAIN_DESC = " " + PREFIX_BIRTHDAY + "2024-13-01";
+    public static final String INVALID_BIRTHDAY_TOO_EARLY_DESC = " " + PREFIX_BIRTHDAY + "1908-04-22";
+    public static final String INVALID_BIRTHDAY_TOO_LATE_DESC = " " + PREFIX_BIRTHDAY + LocalDate.now()
+            .plusDays(1).toString();
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
