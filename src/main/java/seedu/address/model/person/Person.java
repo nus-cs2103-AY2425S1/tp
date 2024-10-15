@@ -2,9 +2,11 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -27,6 +29,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private List<Policy> policies = new ArrayList<>();
 
 
     /**
@@ -87,6 +90,24 @@ public class Person {
     }
 
     /**
+     * Returns an immutable policy list, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public List<Policy> getPolicies() {
+        return Collections.unmodifiableList(policies);
+    }
+
+    /**
+     * Sets the policy list for this object.
+     *
+     * @param policies the list of {@code Policy} objects to be set. This list will replace
+     *                 any existing policies.
+     */
+    public void setPolicies(List<Policy> policies){
+        this.policies = policies;
+    }
+
+    /**
      * Returns true if both persons have the same name and address.
      * This defines a weaker notion of equality between two persons.
      */
@@ -121,13 +142,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && birthday.equals(otherPerson.birthday);
+                && birthday.equals(otherPerson.birthday)
+                && policies.equals(otherPerson.policies);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, birthday, appointment);
+        return Objects.hash(name, phone, email, address, tags, birthday, appointment, policies);
     }
 
     @Override
@@ -140,6 +162,7 @@ public class Person {
                 .add("birthday", birthday)
                 .add("appointment", appointment)
                 .add("tags", tags)
+                .add("policies", policies)
                 .toString();
     }
 
