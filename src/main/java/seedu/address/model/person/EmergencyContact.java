@@ -4,14 +4,23 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import seedu.address.commons.util.ToStringBuilder;
-
+/**
+ * Represents an Emergency Contact in the address book.
+ * Guarantees: fields are present and not null, field values are validated.
+ */
 public class EmergencyContact {
     // Identity fields
     private final Name name;
     private final Phone phone;
     private final Relationship relationship;
 
+    /**
+     * Constructs an {@code EmergencyContact}.
+     *
+     * @param name A valid name.
+     * @param phone A valid phone number.
+     * @param relationship A valid relationship.
+     */
     public EmergencyContact(Name name, Phone phone, Relationship relationship) {
         requireAllNonNull(name, phone, relationship);
         this.name = name;
@@ -19,14 +28,29 @@ public class EmergencyContact {
         this.relationship = relationship;
     }
 
+    /**
+     * Returns the name of the emergency contact.
+     *
+     * @return Name of the emergency contact.
+     */
     public Name getName() {
         return name;
     }
 
+    /**
+     * Returns the phone number of the emergency contact.
+     *
+     * @return Phone number of the emergency contact.
+     */
     public Phone getPhone() {
         return phone;
     }
 
+    /**
+     * Returns the relationship with the emergency contact.
+     *
+     * @return Relationship with the emergency contact.
+     */
     public Relationship getRelationship() {
         return relationship;
     }
@@ -73,6 +97,6 @@ public class EmergencyContact {
 
     @Override
     public String toString() {
-        return "Name: " + name +" Phone: " + phone + " Relationship: " + relationship + " ";
+        return "Name: " + name + " Phone: " + phone + " Relationship: " + relationship + " ";
     }
 }
