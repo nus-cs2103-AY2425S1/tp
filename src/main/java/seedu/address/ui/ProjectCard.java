@@ -37,7 +37,7 @@ public class ProjectCard extends UiPart<Region> {
     public ProjectCard(Project project, int displayedIndex) {
         super(FXML);
         this.project = project;
-        id.setText(displayedIndex + ". ");
+        this.id.setText(displayedIndex + ". ");
         name.setText(project.getName().fullName);
     }
 }
