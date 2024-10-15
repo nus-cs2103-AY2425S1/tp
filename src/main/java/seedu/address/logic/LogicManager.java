@@ -16,6 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyMeetUpList;
+import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -81,6 +82,21 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ReadOnlyMeetUpList getMeetUpList() {
+        return model.getMeetUpList();
+    }
+
+    @Override
+    public ObservableList<MeetUp> getFilteredMeetUpList() {
+        return model.getFilteredMeetUpList();
+    }
+
+    @Override
+    public Path getMeetUpListFilePath() {
+        return model.getMeetUpListFilePath();
+    }
+
+    @Override
     public GuiSettings getGuiSettings() {
         return model.getGuiSettings();
     }
@@ -88,10 +104,5 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
-    }
-
-    @Override
-    public ReadOnlyMeetUpList getMeetUpList() {
-        return model.getMeetUpList();
     }
 }

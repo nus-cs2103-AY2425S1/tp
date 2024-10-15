@@ -10,6 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyMeetUpList;
 import seedu.address.model.person.Person;
+import seedu.address.model.meetup.MeetUp;
 
 /**
  * API of the Logic component
@@ -40,16 +41,24 @@ public interface Logic {
     Path getAddressBookFilePath();
 
     /**
-     * Returns the user prefs' GUI settings.
-     */
-    GuiSettings getGuiSettings();
-
-    /**
      * Returns the MeetUpList.
      *
      * @see seedu.address.model.Model#getMeetUpList()
      */
     ReadOnlyMeetUpList getMeetUpList();
+
+    /** Returns an unmodifiable view of the filtered list of meet ups */
+    ObservableList<MeetUp> getFilteredMeetUpList();
+
+    /**
+     * Returns the user prefs' meet up list file path.
+     */
+    Path getMeetUpListFilePath();
+
+    /**
+     * Returns the user prefs' GUI settings.
+     */
+    GuiSettings getGuiSettings();
 
     /**
      * Set the user prefs' GUI settings.
