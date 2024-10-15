@@ -1,12 +1,11 @@
 package seedu.address.model.appointment;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidAppointment(String)}
@@ -14,8 +13,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Appointment {
 
     public static final String MESSAGE_CONSTRAINTS = "Appointments should be form dd/MM/yyyy HHmm";
-    public final LocalDateTime appointment;
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+
+    public final LocalDateTime appointment;
 
     /**
      * Constructs a {@code Appointment}.
