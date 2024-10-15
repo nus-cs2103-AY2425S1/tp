@@ -8,6 +8,6 @@ public class AddAssignmentCommandTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddAssignmentCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddAssignmentCommand(null, null));
     }
 }

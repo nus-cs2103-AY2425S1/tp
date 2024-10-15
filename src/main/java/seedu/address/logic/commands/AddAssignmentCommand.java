@@ -10,6 +10,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.person.Name;
+import seedu.address.model.student.Student;
 
 /**
  * Adds an assignment to a student.
@@ -20,7 +22,7 @@ public class AddAssignmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an assignment to a student. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
+            + PREFIX_NAME + "STUDENT_NAME "
             + PREFIX_ASSIGNMENT + "ASSIGNMENT "
             + PREFIX_DEADLINE + "DEADLINE "
             + PREFIX_STATUS + "SUBMISSION STATUS "
@@ -28,27 +30,38 @@ public class AddAssignmentCommand extends Command {
             + PREFIX_GRADE + "GRADE "
             + "\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
+            + PREFIX_NAME + "Jane Doe "
             + PREFIX_ASSIGNMENT + "Math Quiz "
             + PREFIX_DEADLINE + "9/10/2024 "
             + PREFIX_STATUS + "N "
             + PREFIX_STATUS + "N "
             + PREFIX_GRADE + "NULL ";
 
-    public static final String MESSAGE_SUCCESS = "New assignment added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New assignment added: %1$s to student %2$s";
+    public static final String MESSAGE_NO_STUDENT_FOUND = "No such student found!";
 
-    public final Assignment toAdd;
+    public final Assignment assignment;
+    public final Name name;
 
     /**
      * Creates an AddAssignmentCommand to add the specified {@code Assignment}
      */
-    public AddAssignmentCommand(Assignment assignment) {
+    public AddAssignmentCommand(Name name, Assignment assignment) {
         requireNonNull(assignment);
-        toAdd = assignment;
+        this.assignment = assignment;
+        this.name = name;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        return null;
+        requireNonNull(model);
+        Student student = model.getStudentByName(name);
+
+        if (student == null) {
+            throw new CommandException(MESSAGE_NO_STUDENT_FOUND);
+        }
+
+        student.addAssignment(assignment);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, assignment.getName(), student.getName()));
     }
 }

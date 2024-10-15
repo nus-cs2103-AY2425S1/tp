@@ -3,12 +3,14 @@ package seedu.address.model.student;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -33,15 +35,18 @@ public class Student extends Person {
     // Identity fields
     private final TutorialGroup tutorialGroup;
     private final StudentNumber studentNumber;
+    private final ArrayList<Assignment> assignments;
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, TutorialGroup tutorialGroup, StudentNumber studentNumber) {
+    public Student(Name name, Phone phone, TutorialGroup tutorialGroup, StudentNumber studentNumber,
+                   ArrayList<Assignment> assignments) {
         super(name, phone, DUMMY_EMAIL, DUMMY_ADDRESS, DUMMY_TAG);
-        requireAllNonNull(tutorialGroup, studentNumber);
+        requireAllNonNull(tutorialGroup, studentNumber, assignments);
         this.tutorialGroup = tutorialGroup;
         this.studentNumber = studentNumber;
+        this.assignments = assignments;
     }
 
     public TutorialGroup getTutorialGroup() {
@@ -109,5 +114,15 @@ public class Student extends Person {
 
     public PersonAttendance getAttendance(LocalDate date) {
         return attendanceRecords.get(date);
+    }
+
+    /**
+     * Adds an assignment
+     *
+     * @param assignment A valid assignment
+     */
+    public void addAssignment(Assignment assignment) {
+        requireAllNonNull(assignment);
+        assignments.add(assignment);
     }
 }

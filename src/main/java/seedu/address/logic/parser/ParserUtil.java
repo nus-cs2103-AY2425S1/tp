@@ -5,13 +5,19 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.assignment.AssignmentName;
+import seedu.address.model.assignment.Deadline;
+import seedu.address.model.assignment.Grade;
+import seedu.address.model.assignment.Status;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -188,5 +194,85 @@ public class ParserUtil {
             throw new ParseException("Invalid attendance status. It must be either 'present' or 'absent'.");
         }
         return new Attendance(trimmedStatus);
+    }
+
+    /**
+     * Parses the given {@code String} of assignment name and returns an {@code AssignmentName} object.
+     *
+     * @param assignmentName The assignment name to parse.
+     * @return The parsed {@code AssignmentName}.
+     * @throws ParseException If the given assignment name is invalid.
+     */
+    public static AssignmentName parseAssignmentName(String assignmentName) throws ParseException {
+        requireNonNull(assignmentName);
+        if (!AssignmentName.isValidName(assignmentName)) {
+            throw new ParseException(AssignmentName.MESSAGE_CONSTRAINTS);
+        }
+        return new AssignmentName(assignmentName);
+    }
+
+    /**
+     * Parses the given {@code String} of date and returns a {@code Deadline} object.
+     *
+     * @param date The date string to parse.
+     * @return The parsed {@code Deadline}.
+     * @throws ParseException If the given date is invalid.
+     */
+    public static Deadline parseDeadline(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Deadline.isValidDeadline(trimmedDate)) {
+            System.out.println(trimmedDate);
+            throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
+        }
+        return new Deadline(trimmedDate);
+    }
+
+    /**
+     * Parses the given {@code String} of status and returns a {@code Status} object.
+     *
+     * @param status The status string to parse.
+     * @return The parsed {@code Status}.
+     * @throws ParseException If the given status is invalid.
+     */
+    public static Status parseStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim();
+        if (!Status.isValidStatus(trimmedStatus)) {
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+        }
+        return new Status(trimmedStatus);
+    }
+
+    /**
+     * Parses the given list of {@code String} statuses and returns a list of {@code Status} objects.
+     *
+     * @param statuses The list of status strings to parse.
+     * @return A list of parsed {@code Status} objects.
+     * @throws ParseException If any of the given statuses are invalid.
+     */
+    public static List<Status> parseStatuses(List<String> statuses) throws ParseException {
+        requireNonNull(statuses);
+        Status[] statusList = new Status[statuses.size()];
+        for (int i = 0; i < statuses.size(); i++) {
+            statusList[i] = parseStatus(statuses.get(i));
+        }
+        return Arrays.stream(statusList).toList();
+    }
+
+    /**
+     * Parses the given {@code String} of grade and returns a {@code Grade} object.
+     *
+     * @param grade The grade string to parse.
+     * @return The parsed {@code Grade}.
+     * @throws ParseException If the given grade is invalid.
+     */
+    public static Grade parseGrade(String grade) throws ParseException {
+        requireNonNull(grade);
+        String trimmedGrade = grade.trim();
+        if (!Grade.isValidGrade(trimmedGrade)) {
+            throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
+        }
+        return new Grade(trimmedGrade);
     }
 }
