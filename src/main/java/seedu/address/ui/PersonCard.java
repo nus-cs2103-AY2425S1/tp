@@ -59,15 +59,22 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
-        // check if room number label is null
-        if (person.getRoomNumber() != null) {
-            roomNumber.setText("#" + person.getRoomNumber().value);
-        } else {
-            roomNumber.setText("# Room not yet assigned");
-        }
+        // display default text if room number is not assigned
+        roomNumber.setText(
+                person.getRoomNumber().map(room -> "#" + room.value)
+                        .orElse("Room not yet assigned")
+        );
 
-        emergencyContactName.setText(person.getEmergencyContact().getName().fullName);
-        emergencyContactPhone.setText(person.getEmergencyContact().getPhone().value);
+        // display default text if emergency contact is not assigned
+        emergencyContactName.setText(
+                person.getEmergencyContactName().map(name -> name.fullName)
+                        .orElse("Emergency contact name not yet assigned")
+        );
+        emergencyContactPhone.setText(
+                person.getEmergencyContactPhone().map(phone -> phone.value)
+                        .orElse("Emergency contact phone not yet assigned")
+        );
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

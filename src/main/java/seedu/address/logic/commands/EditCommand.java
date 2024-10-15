@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_NUMBER;
@@ -24,6 +26,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -44,8 +47,10 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ROOM_NUMBER + "ROOMNUMBER]"
+            + "[" + PREFIX_ROOM_NUMBER + "ROOMNUMBER] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_EMERGENCY_NAME + "EMERGENCY_NAME] "
+            + "[" + PREFIX_EMERGENCY_PHONE + "EMERGENCY_PHONE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -102,10 +107,25 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        RoomNumber updatedRoomNumber = editPersonDescriptor.getRoomNumber().orElse(personToEdit.getRoomNumber());
+        RoomNumber updatedRoomNumber = editPersonDescriptor.getRoomNumber()
+                .orElse(personToEdit.getRoomNumber().orElse(null));
+        Name updatedEmergencyName = editPersonDescriptor.getEmergencyName()
+                .orElse(personToEdit.getEmergencyContactName().orElse(null));
+        Phone updatedEmergencyPhone = editPersonDescriptor.getEmergencyPhone()
+                .orElse(personToEdit.getEmergencyContactPhone().orElse(null));
+
+        EmergencyContact updatedEmergencyContact;
+        if (updatedEmergencyName == null && updatedEmergencyPhone == null) {
+            // emergency contact does not exist
+            updatedEmergencyContact = null;
+        } else {
+            updatedEmergencyContact = new EmergencyContact(updatedEmergencyName, updatedEmergencyPhone);
+        }
+
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedRoomNumber, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedRoomNumber,
+                updatedAddress, updatedEmergencyContact, updatedTags);
     }
 
     @Override
@@ -142,6 +162,8 @@ public class EditCommand extends Command {
         private Email email;
         private RoomNumber roomNumber;
         private Address address;
+        private Name emergencyName;
+        private Phone emergencyPhone;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -156,13 +178,16 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setRoomNumber(toCopy.roomNumber);
             setAddress(toCopy.address);
+            setEmergencyName(toCopy.emergencyName);
+            setEmergencyPhone(toCopy.emergencyPhone);
             setTags(toCopy.tags);
         }
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, roomNumber, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, roomNumber,
+                    address, emergencyName, emergencyPhone, tags);
         }
 
         public void setName(Name name) {
@@ -190,10 +215,12 @@ public class EditCommand extends Command {
         }
 
         public void setRoomNumber(RoomNumber roomNumber) {
-            this.roomNumber = roomNumber; }
+            this.roomNumber = roomNumber;
+        }
 
         public Optional<RoomNumber> getRoomNumber() {
-            return Optional.ofNullable(roomNumber); }
+            return Optional.ofNullable(roomNumber);
+        }
 
         public void setAddress(Address address) {
             this.address = address;
@@ -201,6 +228,22 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setEmergencyName(Name emergencyName) {
+            this.emergencyName = emergencyName;
+        }
+
+        public Optional<Name> getEmergencyName() {
+            return Optional.ofNullable(emergencyName);
+        }
+
+        public void setEmergencyPhone(Phone emergencyPhone) {
+            this.emergencyPhone = emergencyPhone;
+        }
+
+        public Optional<Phone> getEmergencyPhone() {
+            return Optional.ofNullable(emergencyPhone);
         }
 
         /**
@@ -248,6 +291,8 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("room number", roomNumber)
                     .add("address", address)
+                    .add("emergency name", emergencyName)
+                    .add("emergency phone", emergencyPhone)
                     .add("tags", tags)
                     .toString();
         }

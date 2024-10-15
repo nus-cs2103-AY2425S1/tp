@@ -151,13 +151,13 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        Person expectedPerson = new PersonBuilder(AMY).withNoRoomNumber().build();
         // roomNumber not present
+        Person expectedPerson = new PersonBuilder(AMY).withNoRoomNumber().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
-        expectedPerson = new PersonBuilder(AMY).withTags().build();
 
         // zero tags
+        expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                         + ROOM_NUMBER_DESC_AMY + ADDRESS_DESC_AMY,
                 new AddCommand(expectedPerson));
