@@ -103,7 +103,7 @@ public class ParserUtil {
      */
     public static Payment parsePayment(String payment) throws ParseException {
         String trimmedPayment = payment.trim().toLowerCase();
-        if (!Attendance.isValidAttendance(trimmedPayment)) {
+        if (!Payment.isValidPayment(trimmedPayment)) {
             throw new ParseException(Payment.MESSAGE_CONSTRAINTS);
         }
         Boolean b = Boolean.parseBoolean(trimmedPayment);
