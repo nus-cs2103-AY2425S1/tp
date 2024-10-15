@@ -274,7 +274,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* Tech-savvy Tutors/Tuition Teachers
+* Tech-savvy Tuition Teachers
 
 **Value proposition**:
 
@@ -287,49 +287,40 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: Very high (must have) - `****`,  High (good to have) - `***`, Medium (should have) - `**`, Low (unlikely to have) -  `*`,
 
-| Priority | As a …​                                    | I want to …​                                           | So that I can…​                                                       |
-|----------|--------------------------------------------|--------------------------------------------------------|-----------------------------------------------------------------------|
-| `****`   | TA with multiple students                  | add a new student                                      | store important data about my students                                |
-| `****`   | TA with multiple students                  | view my students                                       | see who is in my class                                                |
-| `****`   | TA                                         | delete a student's information                         | remove students who are no longer part of my class                    |
-| `****`   | TA having many classes                     | add assignments                                        | track assignments for students                                        |
-| `****`   | TA having many classes                     | add an assignment score to a student                   | grade my students                                                     |
-| `****`   | TA having many classes                     | view assignments                                       | have an overview of the assignments                                   |
-| `****`   | TA having many classes                     | delete assignments                                     | remove old assignments                                                |
-| `****`   | TA                                         | save data locally                                      | access them at a later time                                           |
-| `****`   | TA who grades assignments                  | edit status of submitted assignments                   | keep track if a student has submitted an assignment                   |
-| `***`    | TA                                         | create remark for individual students                  | not forget any special consideration for certain students             |
-| `***`    | TA having many classes                     | add a class                                            | tag students to be part of a class                                    |
-| `***`    | TA having many classes                     | delete a class                                         | remove old/expired classes                                            |
-| `***`    | TA with multiple classes                   | tag students within the same class                     | sort deliverables and progress by tags                                |
-| `***`    | TA                                         | edit class groups                                      | keep an up-to-date list of students in each group                     |
-| `***`    | TA                                         | edit assignments                                       | ensure that the assignments are up to date                            |
-| `***`    | TA having multiple classes                 | tag an assignment to a class                           | know which classes have which assignments                             |
-| `***`    | TA                                         | view my student's contact information                  | know how I can contact them if there are any issues                   |
-| `***`    | TA                                         | view student submissions for a class                   | know who has submitted                                                |
-| `***`    | TA                                         | view my class timetable                                | know when my classes are                                              |
-| `***`    | TA                                         | view the submission deadlines                          | know when to remind my students                                       |
-| `***`    | forgetful TA                               | be reminded on deadlines due in 2 days                 | prioritize which assignments to mark                                  |
-| `***`    | TA                                         | sort an assignment by score                            | see the best and worst performers                                     |
-| `**`     | TA                                         | link scanned PDF files (URL) to a student              | keep track of previous assignments for each student                   |
-| `**`     | TA                                         | view all the files (or just file names) submitted by the student before | not waste time finding them somewhere else           |
-| `**`     | TA who wants to improve grades             | compare average student performance between sections or classes | know which teaching methods are most effective         |
-| `**`     | TA who wants to improve grades             | create a priority list of students who need the most attention | allocate my time effectively                           |
-| `*`      | TA                                         | view a student's attendance history                    | mark their attendance scores throughout the whole semester            |
-| `*`      | TA                                         | mark attendance and manage participation marks for different students in real time | not need to update from paper every time              |
+| Priority | As a …​                             | I want to …​                                                                  | So that I can…​                                            |
+|----------|-------------------------------------|-------------------------------------------------------------------------------|------------------------------------------------------------|
+| `****`   | teacher with multiple students      | add a new student                                                             | store <br/>important data about my students                |
+| `****`   | teacher with multiple students      | view my students                                                              | see who is in my class                                     |
+| `****`   | teacher                             | delete a student's information                                                | remove students who are no longer part of my class         |
+| `****`   | teacher                             | add assignments                                                               | track assignments for students                             |
+| `****`   | teacher                             | add an assignment score to a student                                          | grade my students                                          |
+| `****`   | teacher                             | delete assignments                                                            | remove old assignments                                     |
+| `****`   | teacher                             | save data locally                                                             | access them at a later time                                |
+| `****`   | teacher  who grades assignments     | edit status of submitted assignments                                          | keep track if a student has submitted an assignment        |
+| `***`    | teacher                             | create remark for individual students                                         | not forget any special consideration for certain students  |
+| `***`    | teacher                             | edit assignments                                                              | ensure that the assignments are up to date                 |
+| `***`    | teacher                             | view my student's student information                                         | know how I can student them if there are any issues        |
+| `***`    | teacher                             | view the submission deadlines                                                 | know when to remind my students                            |
+| `***`    | forgetful teacher                   | be reminded on deadlines due in 2 days                                        | prioritize which assignments to mark                       |
+| `***`    | teacher                             | sort an assignment by score                                                   | see the best and worst performers                          |
+| `**`     | teacher                             | link scanned PDF files (URL) to a student                                     | keep track of previous assignments for each student        |
+| `**`     | teacher                             | view all the files (or just file names) submitted by the student before       | not waste time finding them somewhere else                 |
+| `**`     | teacher who wants to improve grades | create a priority list of students who need the most attention                | allocate my time effectively                               |
+| `*`      | teacher                             | view a student's attendance history                                           | mark their attendance scores throughout the whole semester |
+| `*`      | teacher                             | mark attendance and manage participation marks for different students in real time | not need to update from paper every time                   |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `TAchy` and the **Actor** is the `TA` (Teaching Assistant),
+(For all use cases below, the **System** is the `TAchy` and the **Actor** is the `tuition teacher`,
 unless specified otherwise)
 
 **Use case: Add a student**
 
 **MSS**
 
-1. TA requests to add a student
+1. Teacher requests to add a student
 2. TAchy adds the student to the student list
 
     Use case ends.
@@ -341,9 +332,9 @@ unless specified otherwise)
 
       Use case ends.
 
-* 1b. The student name already exists.
-    * 1b1. TAchy shows a list of students with the same name in order of adding time.
-    * 1b2. TA adds a note for the student to distinguish them.
+* 1b. The student information already exists.
+    * 1b1. TAchy an error message of duplicate student.
+    * 1b2. Teacher adds the student again by providing a different tag.
 
       Use case resumes at step 2.
 
@@ -353,23 +344,23 @@ unless specified otherwise)
 
 **MSS**
 
-1. TA requests to delete a student
-2. TAchy deletes the student from the student list
+1. Teacher requests to list the students
+2. Teacher requests to delete a student by index
+3TAchy deletes the student from the student list
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The student name is not in the list.
-    * 1a1. TAchy displays a "no students found" message.
+* 1a. There is no students in the app.
+    * 1a1. TAchy displays a "no students" message.
 
       Use case ends.
 
-* 1a. There are multiple students with the name.
-    * 1a1. TAchy shows a list of students with the same name with indices.
-    * 1a2. TA deletes one of them by index.
+* 2a. The student index is invalid.
+    * 2a1. TAchy shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
 
 ---
 
@@ -377,14 +368,14 @@ unless specified otherwise)
 
 **MSS**
 
-1. TA requests to list students.
+1. Teacher requests to list students.
 2. TAchy displays the list of students in the current class.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. No students found in the class.
+* 1a. There is no students in the app.
     * 1a1. TAchy displays a "no students" message.
 
       Use case ends.
@@ -395,7 +386,7 @@ unless specified otherwise)
 
 **MSS**
 
-1. TA requests to search for a student by name.
+1. Teacher requests to search for a student by name.
 2. TAchy displays the student(s) matching the search query.
 
    Use case ends.
@@ -413,15 +404,25 @@ unless specified otherwise)
 
 **MSS**
 
-1. TA requests to add an assignment to a class.
-2. TAchy adds the assignment to the class assignment list.
+1. Teacher requests to add an assignment to a student by index.
+2. TAchy adds the assignment to the student's assignment list.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The assignment name is invalid.
+* 1a. The student index is invalid.
     * 1a1. TAchy shows an error message.
+
+      Use case ends.
+
+* 1b. The assignment name is invalid.
+    * 1b1. TAchy shows an error message.
+
+      Use case ends.
+
+* 1c. The assignment already exists under the student.
+    * 1c1. TAchy shows a warning message.
 
       Use case ends.
 
@@ -431,33 +432,91 @@ unless specified otherwise)
 
 **MSS**
 
-1. TA requests to delete an assignment.
-2. TAchy removes the assignment from the class assignment list.
+1. Teacher requests to delete an assignment for a student by index.
+2. TAchy removes the assignment from the student's assignment list.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. No assignment matched the name.
-    * 1a1. TAchy displays a "this assignment does not exist" message.
+* 1a. The student index is invalid.
+    * 1a1. TAchy shows an error message.
+
+      Use case ends.
+
+* 1b. The assignment index is invalid.
+    * 1b1. TAchy shows an error message.
 
       Use case ends.
 
 ---
 
-**Use case: View assignments**
+**Use case: Edit assignment**
 
 **MSS**
 
-1. TA requests to view the list of assignments.
-2. TAchy displays the list of assignments for the class.
+1. Teacher requests to edit an assignment for a student by index.
+2. TAchy modifies the assignment detail in the student's assignment list.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. No assignments are found for the class.
-    * 1a1. TAchy displays a "no assignments found" message.
+* 1a. The student index is invalid.
+    * 1a1. TAchy shows an error message.
+
+      Use case ends.
+
+* 1b. The assignment index is invalid.
+    * 1b1. TAchy shows an error message.
+
+      Use case ends.
+
+---
+
+
+**Use case: Mark assignment**
+
+**MSS**
+
+1. Teacher requests to mark a assignment as submitted for a student by index.
+2. TAchy modifies the assignment submission status in the student's assignment list.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The student index is invalid.
+    * 1a1. TAchy shows an error message.
+
+      Use case ends.
+
+* 1b. The assignment index is invalid.
+    * 1b1. TAchy shows an error message.
+
+      Use case ends.
+
+---
+
+
+**Use case: Unmark assignment**
+
+**MSS**
+
+1. Teacher requests to mark a assignment as not submitted for a student by index.
+2. TAchy modifies the assignment submission status in the student's assignment list.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The student index is invalid.
+    * 1a1. TAchy shows an error message.
+
+      Use case ends.
+
+* 1b. The assignment index is invalid.
+    * 1b1. TAchy shows an error message.
 
       Use case ends.
 
@@ -467,19 +526,19 @@ unless specified otherwise)
 
 **MSS**
 
-1. TA requests to add a grade for a student’s assignment.
+1. Teacher requests to add a grade for a student’s assignment by index.
 2. TAchy records the grade for the student’s assignment.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The assignment is not found.
+* 1a. The student index is invalid.
     * 1a1. TAchy shows an error message.
 
       Use case ends.
 
-* 1b. The student is not found.
+* 1b. The assignment index is invalid.
     * 1b1. TAchy shows an error message.
 
       Use case ends.
@@ -491,111 +550,11 @@ unless specified otherwise)
 
 * 1d. The student has already been graded for the assignment.
     * 1d1. TAchy shows a warning message.
-    * 1d2. TAchy asks if the TA wants to overwrite the grade.
-    * 1d3. TA confirms the overwrite.
+    * 1d2. TAchy asks if the Teacher wants to overwrite the grade.
+    * 1d3. Teacher confirms the overwrite.
     * 1d4. TAchy records the new grade.
 
       Use case resumes at step 2.
-
----
-
-**Use case: View student submissions for an assignment**
-
-**MSS**
-
-1. TA requests to list all assignments.
-2. TAchy displays the list of assignments.
-3. TA requests to view submission status for an assignment by index.
-4. TAchy displays the list of submissions for the selected assignment.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. No assignments are found for the class.
-    * 1a1. TAchy displays a "no assignments found" message.
-
-      Use case ends.
-
-* 3a. The assignment index is invalid.
-    * 3a1. TAchy shows an error message.
-
-      Use case ends.
-
-* 4a. No submissions are found for the assignment.
-    * 4a1. TAchy displays a "no submissions found" message.
-
-      Use case ends.
-
----
-
-**Use case: Add class**
-
-**MSS**
-
-1. TA requests to add a new class.
-2. TAchy adds the class to the course list.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The class already exists.
-    * 1a1. TAchy shows an error message.
-
-      Use case ends.
-
----
-
-**Use case: Delete class**
-
-**MSS**
-
-1. TA requests to delete a class.
-2. TAchy removes the class from the course list.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The class does not exist.
-    * 1a1. TAchy shows an error message.
-
-      Use case ends.
-
-**Use case: View class timetable**
-
-**MSS**
-
-1. TA requests to view the class timetable.
-2. TAchy displays the class timetable for the current term.
-
-   Use case ends.
-
----
-
-**Use case: Tag students in a class**
-
-**MSS**
-
-1. TA requests to list all students.
-2. TAchy displays the list of students.
-3. TA requests to tag a student or group of students by index with the current class.
-4. TAchy adds the tags to the students.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. No students found in the class.
-    * 1a1. TAchy displays a "no students" message.
-
-      Use case ends.
-    *
-* 3a. The student index is invalid.
-    * 3a1. TAchy shows an error message.
-
-      Use case ends.
 
 ---
 
@@ -603,7 +562,7 @@ unless specified otherwise)
 
 **MSS**
 
-1. TA requests to sort students by the score of an assignment.
+1. Teacher requests to sort students by the score of an assignment.
 2. TAchy sorts the assignment results by score in ascending or descending order.
 
    Use case ends.
@@ -615,8 +574,8 @@ unless specified otherwise)
       Use case ends.
 * 1b. The assignment has not been graded for all students.
     * 1b1. TAchy shows a warning message.
-    * 1b2. TAchy asks if the TA wants to proceed.
-    * 1b3. TA confirms the action.
+    * 1b2. TAchy asks if the Teacher wants to proceed.
+    * 1b3. Teacher confirms the action.
 
       Use case resumes at step 2.
 * 1c. The assignment has not been graded for any student.
@@ -624,16 +583,15 @@ unless specified otherwise)
 
       Use case ends.
 
-
 ---
 
 **Use case: Link scanned PDF to a student**
 
 **MSS**
 
-1. TA requests to list all documents stored in a file directory.
+1. Teacher requests to list all documents stored in a file directory.
 2. TAchy displays the list of documents.
-3. TA requests to link a document to a student by index by name.
+3. Teacher requests to link a document to a student by index by name.
 4. TAchy records the link.
 
    Use case ends.
@@ -649,55 +607,9 @@ unless specified otherwise)
       Use case ends.
 * 3b. There are multiple students with the name.
     * 3b1. TAchy shows a list of students with the same name with indices.
-    * 3b2. TA links the document to one of them by index.
+    * 3b2. Teacher links the document to one of them by index.
 
       Use case resumes at step 4.
----
-
-**Use case: View professor contact information**
-
-**MSS**
-
-1. TA requests to view a professor’s contact information.
-2. TAchy displays the professor’s contact details.
-
-   Use case ends.
-
----
-
-**Use case: View professor’s office hours**
-
-**MSS**
-
-1. TA requests to view the time and location of a professor’s office hours.
-2. TAchy displays the professor’s office hours and location.
-
-   Use case ends.
-
----
-
-**Use case: Compare class performance for an assignment**
-
-**MSS**
-
-1. TA requests to list all assignments.
-2. TAchy displays the list of assignments.
-3. TA selects one assignment by index.
-4. TAchy displays the class in order of performance for the selected assignment.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. No assignments are found.
-    * 1a1. TAchy displays a "no assignments found" message.
-
-      Use case ends.
-
-* 3a. The assignment index is invalid.
-    * 3a1. TAchy shows an error message.
-
-      Use case ends.
 
 ---
 
@@ -705,8 +617,8 @@ unless specified otherwise)
 
 **MSS**
 
-1. TA requests to list students
-2. TA requests to create a list of students who need the most attention by indices.
+1. Teacher requests to list students
+2. Teacher requests to create a list of students who need the most attention by indices.
 3. TAchy generates a list of selected students.
 
    Use case ends.
@@ -720,69 +632,26 @@ unless specified otherwise)
 
 ---
 
-**Use case: View or add files posted by professor**
-
-**MSS**
-
-1. TA requests to view or add files posted by the professor for a class.
-2. TAchy displays or allows files to be added to the class.
-
-   Use case ends.
-
----
-
-**Use case: Mark attendance and manage participation**
-
-**MSS**
-
-1. TA requests to list all classes.
-2. TAchy displays the list of classes.
-3. TA selects one class by index.
-4. TAchy displays the list of students in the class.
-5. TA requests to mark attendance for a student by index.
-6. TAchy records the attendance.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. No classes are found.
-    * 1a1. TAchy displays a "no classes found" message.
-
-      Use case ends.
-
-* 3a. The class index is invalid.
-    * 3a1. TAchy shows an error message.
-
-      Use case ends.
-
-* 5a. The student index is invalid.
-    * 5a1. TAchy shows an error message.
-
-      Use case ends.
-
----
-
 **Use case: Add remark for individual student**
 
 **MSS**
 
-1. TA requests to add a remark for a student.
+1. Teacher requests to add a remark for a student by index.
 2. TAchy records the remark in the student’s profile.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The student is not found.
+* 1a. The student index is invalid.
     * 1a1. TAchy shows an error message.
 
       Use case ends.
 
 * 1b. The student already has a remark.
     * 1b1. TAchy shows a warning message.
-    * 1b2. TAchy asks if the TA wants to overwrite the remark.
-    * 1b3. TA confirms the overwrite.
+    * 1b2. TAchy asks if the Teacher wants to overwrite the remark.
+    * 1b3. Teacher confirms the overwrite.
     * 1b4. TAchy records the new remark.
 
       Use case resumes at step 2.
@@ -795,7 +664,7 @@ unless specified otherwise)
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-- Business/domain rules: Each student must be uniquely identifiable by their student ID, Assignments must have deadlines that  cannot be set on a date that has passed, Each class should not exceed 50 students, Assignments must be submitted by students up to the deadline set by the TA
+- Business/domain rules: Each student must be uniquely identifiable by their student ID, Assignments must have deadlines that  cannot be set on a date that has passed, Each class should not exceed 50 students, Assignments must be submitted by students up to the deadline set by the Teacher
 - Constraints: The system must be backward compatible with data produced by earlier versions of the system, The total project cost should be $0, The project is offered as a free service, TAs are only allowed to store up to 5 GB of data
 - Technical requirements: The system should work on both 32-bit and 64-bit environment, The system should be compatible with Windows, macOS and Linux operating systems.
 - Performance requirements: The system should respond to user inputs within five seconds, The system should be able to handle a large number of students, classes, and assignments without degradation in performance, Data retrieval should not take longer than 2 seconds.
@@ -807,9 +676,9 @@ unless specified otherwise)
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **TA** : Abbreviation of Teaching Assistant, a student responsible for assisting instructors in managing courses
-* **Class**: A group of students taking the same course assigned to a specific tutorial, sectional, laboratory or recitation which a TA is responsible for.
+* **Private student detail**: A student detail that is not meant to be shared with others
+* **Teacher** : Abbreviation of Teaching Assistant, a student responsible for assisting instructors in managing courses
+* **Class**: A group of students taking the same course assigned to a specific tutorial, sectional, laboratory or recitation which a Teacher is responsible for.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -848,7 +717,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First student is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
