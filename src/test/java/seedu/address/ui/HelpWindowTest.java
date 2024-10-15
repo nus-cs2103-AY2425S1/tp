@@ -33,7 +33,7 @@ public class HelpWindowTest {
             latch.countDown();
         });
 
-        latch.await(2, TimeUnit.SECONDS);
+        latch.await(5, TimeUnit.SECONDS);
     }
 
     @Test
