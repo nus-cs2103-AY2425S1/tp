@@ -77,7 +77,7 @@ public class TagCommand extends Command {
                 personToTag.getEmail(), newTags);
         model.setPerson(personToTag, updatedPerson);
 
-        return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(personToTag)));
+        return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(updatedPerson)));
     }
 
     @Override

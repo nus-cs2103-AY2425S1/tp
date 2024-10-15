@@ -56,20 +56,20 @@ public class UntagCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToTag = lastShownList.get(targetIndex.getZeroBased());
+        Person personToUntag = lastShownList.get(targetIndex.getZeroBased());
 
-        if (!personToTag.getTags().contains(tag)) {
+        if (!personToUntag.getTags().contains(tag)) {
             throw new CommandException(MESSAGE_TAG_NOT_FOUND);
         }
 
-        Set<Tag> newTags = new HashSet<>(personToTag.getTags());
+        Set<Tag> newTags = new HashSet<>(personToUntag.getTags());
         newTags.remove(tag);
 
-        Person updatedPerson = new Person(personToTag.getName(), personToTag.getPhone(),
-                personToTag.getEmail(), newTags);
-        model.setPerson(personToTag, updatedPerson);
+        Person updatedPerson = new Person(personToUntag.getName(), personToUntag.getPhone(),
+                personToUntag.getEmail(), newTags);
+        model.setPerson(personToUntag, updatedPerson);
 
-        return new CommandResult(String.format(MESSAGE_UNTAG_PERSON_SUCCESS, Messages.format(personToTag)));
+        return new CommandResult(String.format(MESSAGE_UNTAG_PERSON_SUCCESS, Messages.format(updatedPerson)));
     }
 
     @Override
@@ -84,7 +84,7 @@ public class UntagCommand extends Command {
         }
 
         UntagCommand otherTagCommand = (UntagCommand) other;
-        return targetIndex.equals(otherTagCommand.targetIndex);
+        return targetIndex.equals(otherTagCommand.targetIndex) && tag.equals(otherTagCommand.tag);
     }
 
     @Override
