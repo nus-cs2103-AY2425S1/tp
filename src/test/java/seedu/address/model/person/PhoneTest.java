@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -27,11 +29,10 @@ public class PhoneTest {
         // invalid phone numbers
         assertFalse(Phone.isValidPhone("")); // empty string
         assertFalse(Phone.isValidPhone(" ")); // spaces only
-        assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
+        assertFalse(Phone.isValidPhone("91")); // less than 8 numbers
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
-        assertFalse(Phone.isValidPhone("911")); // exactly 3 numbers
         assertFalse(Phone.isValidPhone("124293842033123")); // long phone numbers
 
         // valid phone numbers
@@ -59,5 +60,14 @@ public class PhoneTest {
 
         // different values -> returns false
         assertFalse(phone.equals(new Phone("99555555")));
+    }
+    @Test
+    public void hashCodeTest() {
+        Phone phone = new Phone("91234567");
+        Phone samePhone = new Phone("91234567");
+        Phone differentPhone = new Phone("98765432");
+
+        assertEquals(phone.hashCode(), samePhone.hashCode());
+        assertNotEquals(phone.hashCode(), differentPhone.hashCode());
     }
 }
