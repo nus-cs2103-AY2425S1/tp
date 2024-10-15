@@ -103,7 +103,8 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        DateOfLastVisit dateOfLastVisit = editPersonDescriptor.getDateOfLastVisit().orElse(personToEdit.getDateOfLastVisit());
+        DateOfLastVisit dateOfLastVisit = editPersonDescriptor.getDateOfLastVisit()
+                .orElse(personToEdit.getDateOfLastVisit());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, dateOfLastVisit);
     }

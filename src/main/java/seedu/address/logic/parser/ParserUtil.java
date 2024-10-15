@@ -129,7 +129,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code dateOfLastVisit} is invalid.
      */
-    public static DateOfLastVisit parseDateOfLastVisit(String dateOfLastVisit) throws ParseException{
+    public static DateOfLastVisit parseDateOfLastVisit(String dateOfLastVisit) throws ParseException {
         requireNonNull(dateOfLastVisit);
         String trimmedDateOfLastVisit = dateOfLastVisit.trim();
         if (!DateOfLastVisit.isValidDateOfLastVisit(trimmedDateOfLastVisit)) {
