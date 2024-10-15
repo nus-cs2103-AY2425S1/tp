@@ -1,6 +1,7 @@
 package tutorease.address.model.lesson;
 
 import static java.util.Objects.requireNonNull;
+import static tutorease.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
@@ -9,6 +10,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tutorease.address.model.lesson.exceptions.LessonIndexOutOfRange;
 import tutorease.address.model.lesson.exceptions.OverlappingLessonException;
+import tutorease.address.model.person.Person;
+import tutorease.address.model.person.UniquePersonList;
+import tutorease.address.model.person.exceptions.DuplicatePersonException;
 
 // adapted from UniquePersonList
 
@@ -76,11 +80,21 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * Replaces the contents of the lesson list with {@code lessons}.
      * {@code lessons} must not contain duplicate persons.
      */
-    public void setLessons(List<Lesson> lessons) {
+    public void setLessons(UniqueLessonList lessons) {
         requireNonNull(lessons);
+        internalList.setAll(lessons.internalList);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setLessons(List<Lesson> lessons) {
+        requireAllNonNull(lessons);
         if (!lessonsAreUnique(lessons)) {
             throw new OverlappingLessonException();
         }
+
         internalList.setAll(lessons);
     }
 
