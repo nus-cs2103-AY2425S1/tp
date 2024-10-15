@@ -51,6 +51,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         clientTypes = new HashSet<>(personToCopy.getClientTypes());
+        description = personToCopy.getDescription();
     }
 
     /**
