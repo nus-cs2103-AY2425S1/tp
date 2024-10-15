@@ -21,7 +21,7 @@ public class Status {
         DELIVERED
     }
 
-    public DeliveryStatus value;
+    private DeliveryStatus value;
 
     /**
      * Constructs a {@code Status}.
@@ -52,8 +52,16 @@ public class Status {
         return test.equals("not delivered") || test.equals("delivering") || test.equals("delivered");
     }
 
+    /**
+     * Method to get the enumerated value
+     * @return Value as a string
+     */
+    public String getValue() {
+        return String.valueOf(value);
+    }
+
     @Override
     public String toString() {
-        return "Status: " + value;
+        return "Status: " + getValue();
     }
 }

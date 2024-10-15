@@ -63,7 +63,7 @@ public class JsonAdaptedDelivery {
         date = source.getDate().value.toString();
         time = source.getTime().value.toString();
         eta = source.getEta().value.toString();
-        status = String.valueOf(source.getStatus().value);
+        status = source.getStatus().getValue();
     }
 
     /**
