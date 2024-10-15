@@ -23,9 +23,9 @@ public class TaskListPanel extends UiPart<Region> {
     /**
      *   Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public TaskListPanel(ObservableList<Task> studentList) {
+    public TaskListPanel(ObservableList<Task> taskList) {
         super(FXML);
-        taskListView.setItems(studentList);
+        taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
     }
 

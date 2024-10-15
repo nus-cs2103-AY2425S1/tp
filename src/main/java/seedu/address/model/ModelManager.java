@@ -56,7 +56,6 @@ public class ModelManager implements Model {
     @Override
     public void setStateStudents() {
         this.userPrefs.setStateStudents();
-        ;
     }
 
     @Override
@@ -277,6 +276,31 @@ public class ModelManager implements Model {
             && filteredStudents.equals(otherModelManager.filteredStudents)
             && filteredGroups.equals(otherModelManager.filteredGroups)
             && filteredTasks.equals(otherModelManager.filteredTasks);
+    }
+
+    @Override
+    public boolean hasTaskInGroup(Task task, Group group) {
+        requireAllNonNull(task, group);
+        return addressBook.hasTaskInGroup(task, group);
+    }
+
+    @Override
+    public void addTaskToGroup(Task task, Group group){
+        requireAllNonNull(task, group);
+        addressBook.addTaskToGroup(task, group);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+
+    @Override
+    public void addTask(Task task){
+        requireNonNull(task);
+        addressBook.addTask(task);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+
+    @Override
+    public boolean hasTask(Task task) {
+        return addressBook.hasTask(task);
     }
 
 }

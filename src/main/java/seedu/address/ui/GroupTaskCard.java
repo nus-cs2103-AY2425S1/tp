@@ -6,6 +6,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.group.Group;
+import seedu.address.model.student.Student;
+import seedu.address.model.task.Task;
 
 
 /**
@@ -32,7 +34,7 @@ public class GroupTaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private VBox tasks;
+    private Label tasks;
 
     /**
      * Creates a {@code GroupCode} with the given {@code Group} and index to display.
@@ -41,8 +43,12 @@ public class GroupTaskCard extends UiPart<Region> {
         super(FXML);
         this.group = group;
         id.setText(displayedIndex + ". ");
-        name.setText(group.getGroupName().fullName);
-        group.getTasks().stream()
-                .forEach(task -> tasks.getChildren().add(new Label(task.toString())));
+        name.setText(group.getGroupName().fullName + " Tasks");
+        String taskList = "";
+        for (Task task : group.getTasks()) {
+            taskList += (task.getTaskName() + " [" + task.getDeadline() + "] " + "[" + task.getStatus() + "]");
+            taskList += "\n";
+        }
+        tasks.setText(taskList);
     }
 }

@@ -127,11 +127,36 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a task with the same identity as {@code task} exists in the group
+     * with the same identity as {@code group}.
+     */
+    public boolean hasTaskInGroup(Task task, Group group) {
+        requireNonNull(task);
+        requireNonNull(group);
+        return group.getTasks().contains(task);
+    }
+
+    /**
      * Adds {@code student} to {@code group}.
      * {@code student} and {@code group} must exist in the address book.
      */
     public void addStudentToGroup(Student student, Group group) {
         group.add(student);
+    }
+
+    /**
+     * Adds {@code task} to {@code group}.
+     * {@code group} must exist in the address book.
+     */
+    public void addTaskToGroup(Task task, Group group) {
+        group.addTask(task);
+    }
+
+    /**
+     * Adds {@code task} to {@code addressbook}.
+     */
+    public void addTask(Task task) {
+        tasks.add(task);
     }
 
     public Student getStudentByNumber(StudentNumber studentNumber) {
@@ -204,6 +229,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         students.setPerson(student, student.removeGroup());
     }
 
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return tasks.contains(task);
+    }
+
     //// util methods
 
     @Override
@@ -240,7 +270,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return students.equals(otherAddressBook.students);
+        return students.equals(otherAddressBook.students)
+                && groups.equals(otherAddressBook.groups)
+                && tasks.equals(otherAddressBook.tasks);
     }
 
     @Override
