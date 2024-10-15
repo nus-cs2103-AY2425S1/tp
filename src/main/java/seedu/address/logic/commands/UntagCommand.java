@@ -16,32 +16,30 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * Tags a guest identified using it's displayed index from the address book with a tag already created.
+ * Untags a guest identified using it's displayed index from the address book with a tag already associated with guest.
  */
-public class TagCommand extends Command {
+public class UntagCommand extends Command {
 
-    public static final String COMMAND_WORD = "tag";
+    public static final String COMMAND_WORD = "untag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Tags the person identified by the index number used in the displayed person list "
-                + "with a predefined tag. \n"
+            + ": Untags a tag from the person identified by the index number used in the displayed person list. \n "
             + "Parameters: INDEX (must be a positive integer)\n"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "bride's side";
 
-    public static final String MESSAGE_TAG_PERSON_SUCCESS = "Tagged Person: %1$s";
-    public static final String MESSAGE_TAG_NOT_CREATED = "Tag must be created first using (newtag) command. \n";
-    public static final String MESSAGE_DUPLICATE_TAG = "This person already has this tag.";
+    public static final String MESSAGE_UNTAG_PERSON_SUCCESS = "Untagged Person: %1$s";
+    public static final String MESSAGE_TAG_NOT_FOUND = "This person does not have this tag.";
 
     private final Index targetIndex;
     private final Tag tag;
 
     /**
-     * @param targetIndex of the person in the filtered person list to tag
-     * @param tag to tag the person with
+     * @param targetIndex of the person in the filtered person list to untag
+     * @param tag to remove from the person
      */
-    public TagCommand(Index targetIndex, Tag tag) {
+    public UntagCommand(Index targetIndex, Tag tag) {
         requireNonNull(targetIndex);
         requireNonNull(tag);
 
@@ -60,24 +58,18 @@ public class TagCommand extends Command {
 
         Person personToTag = lastShownList.get(targetIndex.getZeroBased());
 
-        /*
-        if (!model.hasTag(tag)) {
-            throw new CommandException(MESSAGE_TAG_NOT_CREATED);
-        }
-        */
-
-        if (personToTag.getTags().contains(tag)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TAG);
+        if (!personToTag.getTags().contains(tag)) {
+            throw new CommandException(MESSAGE_TAG_NOT_FOUND);
         }
 
         Set<Tag> newTags = new HashSet<>(personToTag.getTags());
-        newTags.add(tag);
+        newTags.remove(tag);
 
         Person updatedPerson = new Person(personToTag.getName(), personToTag.getPhone(),
                 personToTag.getEmail(), newTags);
         model.setPerson(personToTag, updatedPerson);
 
-        return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(personToTag)));
+        return new CommandResult(String.format(MESSAGE_UNTAG_PERSON_SUCCESS, Messages.format(personToTag)));
     }
 
     @Override
@@ -87,11 +79,11 @@ public class TagCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TagCommand)) {
+        if (!(other instanceof UntagCommand)) {
             return false;
         }
 
-        TagCommand otherTagCommand = (TagCommand) other;
+        UntagCommand otherTagCommand = (UntagCommand) other;
         return targetIndex.equals(otherTagCommand.targetIndex);
     }
 
