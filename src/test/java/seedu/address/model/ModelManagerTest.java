@@ -232,4 +232,25 @@ public class ModelManagerTest {
                 "Expected IOException when trying to back up with null storage.");
     }
 
+    @Test
+    public void restoreFromBackup_successfulRestore() throws Exception {
+        JsonAddressBookStorage addressBookStorage =
+                new JsonAddressBookStorage(Paths.get("data/addressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(Paths.get("data/userPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+
+        ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs(), storage);
+        String backupPath = "data/backup.json";
+
+        // Create backup
+        modelManager.backupData(backupPath);
+
+        // Modify address book and restore from backup
+        modelManager.addPerson(ALICE);
+        boolean restored = modelManager.restoreFromBackup();
+        assertTrue(restored, "Backup restoration should be successful.");
+        assertFalse(modelManager.hasPerson(ALICE), "ALICE should not exist after restore.");
+    }
+
 }
