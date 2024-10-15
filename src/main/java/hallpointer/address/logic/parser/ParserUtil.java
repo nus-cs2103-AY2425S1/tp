@@ -12,6 +12,7 @@ import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Room;
 import hallpointer.address.model.member.Telegram;
+import hallpointer.address.model.point.Point;
 import hallpointer.address.model.session.Date;
 import hallpointer.address.model.session.SessionName;
 import hallpointer.address.model.tag.Tag;
@@ -144,11 +145,12 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code points} is invalid.
      */
-    public static int parsePoints(String points) throws ParseException {
+    public static Point parsePoints(String points) throws ParseException {
         requireNonNull(points);
         String trimmedPoints = points.trim();
         try {
-            return Integer.parseInt(trimmedPoints);
+            int parsedPoints = Integer.parseInt(trimmedPoints);
+            return new Point(parsedPoints);
         } catch (NumberFormatException e) {
             throw new ParseException("Points should be a valid integer.");
         }
