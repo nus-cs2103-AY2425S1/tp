@@ -2,13 +2,12 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE_INDEX;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
@@ -28,18 +27,17 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DELETE_INDEX);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
 
-        if (!DeleteCommandParser.arePrefixesPresent(argMultimap, PREFIX_DELETE_INDEX)
-                || !argMultimap.getPreamble().isEmpty()) {
+        List<String> indicesList = List.of(argMultimap.getPreamble().split(","));
+
+        if (argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
         try {
-
             Set<Index> indices;
-            Optional<Set<Index>> optionalIndices = parseIndicesForDelete(argMultimap.getAllValues(PREFIX_DELETE_INDEX));
+            Optional<Set<Index>> optionalIndices = parseIndicesForDelete(indicesList);
             if (optionalIndices.isPresent() && !optionalIndices.get().isEmpty()) {
                 indices = optionalIndices.get();
                 return new DeleteCommand(indices);
@@ -66,14 +64,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         }
         Collection<String> indicesSet = indices.size() == 1 && indices.contains("") ? Collections.emptySet() : indices;
         return Optional.of(ParserUtil.parseIndices(indicesSet));
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argMultimap.getValue(prefix).isPresent());
     }
 
 }
