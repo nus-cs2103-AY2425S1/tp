@@ -33,6 +33,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
    
    * `schedule John Doe d/2024-10-14 1200 note/First appointment`: Schedules an appointment for John Doe on October 14, 2024, at 12pm with the given note.
 
+   * `reminder John Doe r/1 hour` : Sets a reminder for John Doe 1 hour before his scheduled appointment.
+
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
@@ -102,6 +104,19 @@ Format: `schedule NAME d/DATE_AND_TIME [note/NOTES]`
 Examples:
 * `schedule John Doe d/2024-10-14 1200`
 * `schedule Betsy Crowe d/2024-10-14 1300 note/first appointment`
+
+### Setting a reminder: `reminder`
+
+Sets a reminder for a client before their appointment in the address book.
+
+Format: `reminder NAME r/REMINDER_TIME`
+
+* You can only set a reminder for a person who already has a scheduled appointment.
+* The reminder time must be a valid expression (e.g. "1 day", "2 hours").
+
+Examples:
+* `reminder John Doe r/10 days`
+* `reminder Betsy Crowe r/3 hours`
 
 ### Listing all persons : `list`
 
@@ -211,6 +226,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Schedule** | `schedule NAME d/DATE_AND_TIME [note/NOTES]`
+**Reminder** | `reminder NAME r/REMINDER_TIME`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`

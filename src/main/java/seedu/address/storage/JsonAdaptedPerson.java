@@ -32,7 +32,6 @@ class JsonAdaptedPerson {
     private final String address;
     private final String schedule;
     private final String note;
-    private final String reminderAppointment;
     private final String reminderTime;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -43,7 +42,6 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
              @JsonProperty("email") String email, @JsonProperty("address") String address,
              @JsonProperty("schedule") String schedule, @JsonProperty("note") String note,
-             @JsonProperty("reminderAppointment") String reminderAppointment,
             @JsonProperty("reminderTime") String reminderTime, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
@@ -51,7 +49,6 @@ class JsonAdaptedPerson {
         this.address = address;
         this.schedule = schedule;
         this.note = note;
-        this.reminderAppointment = reminderAppointment;
         this.reminderTime = reminderTime;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -68,7 +65,6 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         schedule = source.getSchedule().dateTime;
         note = source.getSchedule().getNotes();
-        reminderAppointment = source.getReminder().appointmentDateTime;
         reminderTime = source.getReminder().reminderTime;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -125,11 +121,11 @@ class JsonAdaptedPerson {
 
         final Schedule modelSchedule = new Schedule(schedule, note);
 
-        if (reminderAppointment == null || reminderTime == null) {
+        if (reminderTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Reminder.class.getSimpleName()));
         }
-        final Reminder modelReminder = new Reminder(reminderAppointment, reminderTime);
+        final Reminder modelReminder = new Reminder(reminderTime);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSchedule, modelReminder, modelTags);

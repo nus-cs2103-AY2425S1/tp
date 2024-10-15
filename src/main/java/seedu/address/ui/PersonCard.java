@@ -74,14 +74,7 @@ public class PersonCard extends UiPart<Region> {
             note.setText("Notes: " + person.getSchedule().getNotes());
         }
         if (person.getReminder() != null && !person.getReminder().toString().isEmpty()) {
-            String formattedDateTime = LocalDateTime.parse(
-                            person.getReminder().getAppointmentDateTime(),
-                            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
-                    .format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a"));
-
-            // Combine formatted date-time with the reminder time
-            reminder.setText(String.format("Reminder on %s, %s before",
-                    formattedDateTime,
+            reminder.setText(String.format("Reminder: %s before",
                     person.getReminder().getReminderTime()));
         } else {
             reminder.setText("");

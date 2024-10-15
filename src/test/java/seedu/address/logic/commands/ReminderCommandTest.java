@@ -32,21 +32,20 @@ public class ReminderCommandTest {
     public void execute_validReminder_success() {
         Person personToRemind = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Schedule validSchedule = new Schedule("2024-10-04 1000", "");
-        Reminder validReminder = new Reminder("2024-10-04 1000", "1 day");
+        Reminder validReminder = new Reminder("1 day");
 
         Person scheduledPerson = new PersonBuilder(personToRemind)
                 .withSchedule(validSchedule.dateTime, validSchedule.getNotes()).build();
         model.setPerson(personToRemind, scheduledPerson);
 
         ReminderCommand command = new ReminderCommand(personToRemind.getName().toString(),
-                validSchedule.dateTime, "1 day");
+                "1 hour");
 
         Person personWithReminder = new PersonBuilder(scheduledPerson)
-                .withReminder(validSchedule.dateTime, validReminder.getReminderTime())
-                .build();
+                .withReminder(validReminder.getReminderTime()).build();
 
         String expectedMessage = String.format(ReminderCommand.MESSAGE_SUCCESS,
-                personToRemind.getName(), validSchedule.dateTime, "1 day");
+                personToRemind.getName(), "1 hour");
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToRemind, personWithReminder);
@@ -58,7 +57,7 @@ public class ReminderCommandTest {
     public void execute_invalidReminderTime_throwsCommandException() {
         Person personToRemind = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Schedule validSchedule = new Schedule("2024-10-04 1000", "");
-        Reminder invalidReminder = new Reminder("2024-10-04 1000", "1 cycle"); // Invalid time
+        Reminder invalidReminder = new Reminder("1 cycle"); // Invalid time
 
         // Set the schedule first
         Person personWithSchedule = new PersonBuilder(personToRemind)
@@ -67,7 +66,7 @@ public class ReminderCommandTest {
 
         // Create reminder command
         ReminderCommand command = new ReminderCommand(personWithSchedule.getName().toString(),
-                validSchedule.dateTime, invalidReminder.getReminderTime());
+                invalidReminder.getReminderTime());
 
         assertCommandFailure(command, model, ReminderCommand.MESSAGE_INVALID_REMINDER_TIME);
     }
@@ -75,26 +74,27 @@ public class ReminderCommandTest {
     @Test
     public void execute_reminderAlreadyExists_throwsCommandException() throws CommandException {
         Person personToRemind = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
         Schedule validSchedule = new Schedule("2024-10-04 1000", "");
-        Reminder existingReminder = new Reminder(validSchedule.dateTime, "1 day");
+        Reminder existingReminder = new Reminder("1 day");
 
         // Set the schedule and reminder
         Person personWithReminder = new PersonBuilder(personToRemind)
                 .withSchedule(validSchedule.dateTime, validSchedule.getNotes())
-                .withReminder(validSchedule.dateTime, existingReminder.getReminderTime())
+                .withReminder(existingReminder.getReminderTime())
                 .build();
         model.setPerson(personToRemind, personWithReminder);
 
         // Try to set the same reminder again
         ReminderCommand command = new ReminderCommand(personWithReminder.getName().toString(),
-                validSchedule.dateTime, existingReminder.getReminderTime());
+                existingReminder.getReminderTime());
 
         assertCommandFailure(command, model, ReminderCommand.MESSAGE_REMINDER_EXISTS);
     }
 
     @Test
     public void execute_personNotFound_throwsCommandException() {
-        ReminderCommand command = new ReminderCommand("Unknown Person", "2024-10-05 1000", "1 day");
+        ReminderCommand command = new ReminderCommand("Unknown Person", "1 day");
 
         assertCommandFailure(command, model, ReminderCommand.MESSAGE_INVALID_NAME);
     }
@@ -102,58 +102,56 @@ public class ReminderCommandTest {
     @Test
     public void execute_appointmentNotFound_throwsCommandException() {
         Person personToRemind = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Reminder reminder = new Reminder("2024-10-05 1000", "1 day");
+        Person personWithoutSchedule = new PersonBuilder(personToRemind)
+                .withSchedule("", "")
+                .build();
+        model.setPerson(personToRemind, personWithoutSchedule);
 
-        // Person doesn't have the appointment
+        Reminder reminder = new Reminder("1 day");
+
+        // Person doesn't have an appointment
         ReminderCommand command = new ReminderCommand(personToRemind.getName().toString(),
-                reminder.getAppointmentDateTime(), reminder.getReminderTime());
+                reminder.getReminderTime());
 
         assertCommandFailure(command, model, ReminderCommand.MESSAGE_INVALID_APPOINTMENT);
     }
 
     @Test
     public void equals_sameObject_returnsFalse() {
-        ReminderCommand command = new ReminderCommand("John Doe", "2024-10-05 1000", "1 day");
+        ReminderCommand command = new ReminderCommand("John Doe", "1 day");
         assertFalse(command.equals(command));
     }
 
     @Test
     public void equals_nullObject_returnsFalse() {
-        ReminderCommand command = new ReminderCommand("John Doe", "2024-10-05 1000", "1 day");
+        ReminderCommand command = new ReminderCommand("John Doe", "1 day");
         assertFalse(command.equals(null));
     }
 
     @Test
     public void equals_differentType_returnsFalse() {
-        ReminderCommand command = new ReminderCommand("John Doe", "2024-10-05 1000", "1 day");
+        ReminderCommand command = new ReminderCommand("John Doe", "1 day");
         assertFalse(command.equals("String Object"));
     }
 
     @Test
     public void equals_differentName_returnsFalse() {
-        ReminderCommand command1 = new ReminderCommand("John Doe", "2024-10-05 1000", "1 day");
-        ReminderCommand command2 = new ReminderCommand("Jane Doe", "2024-10-05 1000", "1 day");
-        assertFalse(command1.equals(command2));
-    }
-
-    @Test
-    public void equals_differentAppointmentDateTime_returnsFalse() {
-        ReminderCommand command1 = new ReminderCommand("John Doe", "2024-10-05 1000", "1 day");
-        ReminderCommand command2 = new ReminderCommand("John Doe", "2024-11-05 1000", "1 day");
+        ReminderCommand command1 = new ReminderCommand("John Doe", "1 day");
+        ReminderCommand command2 = new ReminderCommand("Jane Doe", "1 day");
         assertFalse(command1.equals(command2));
     }
 
     @Test
     public void equals_differentReminderTime_returnsFalse() {
-        ReminderCommand command1 = new ReminderCommand("John Doe", "2024-10-05 1000", "1 day");
-        ReminderCommand command2 = new ReminderCommand("John Doe", "2024-10-05 1000", "2 days");
+        ReminderCommand command1 = new ReminderCommand("John Doe", "1 day");
+        ReminderCommand command2 = new ReminderCommand("John Doe", "2 days");
         assertFalse(command1.equals(command2));
     }
 
     @Test
     public void equals_identicalValues_returnsTrue() {
-        ReminderCommand command1 = new ReminderCommand("John Doe", "2024-10-05 1000", "1 day");
-        ReminderCommand command2 = new ReminderCommand("John Doe", "2024-10-05 1000", "1 day");
+        ReminderCommand command1 = new ReminderCommand("John Doe", "1 day");
+        ReminderCommand command2 = new ReminderCommand("John Doe", "1 day");
         assertTrue(command1.equals(command2));
     }
 }
