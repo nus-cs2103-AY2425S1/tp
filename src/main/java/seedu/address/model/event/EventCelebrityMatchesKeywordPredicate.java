@@ -4,6 +4,9 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 
+/**
+ * Tests that a {@code Event}'s {@code Celebrity} matches the keyword given.
+ */
 public class EventCelebrityMatchesKeywordPredicate implements Predicate<Event> {
     private final String keyword;
 

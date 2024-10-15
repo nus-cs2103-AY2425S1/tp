@@ -8,9 +8,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FilterEventCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
