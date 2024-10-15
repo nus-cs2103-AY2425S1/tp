@@ -41,18 +41,6 @@ public class ListCommandTest {
     }
 
     @Test
-    public void execute_withSortOption_showsNotImplementedMessage() {
-        // Create a SortOption instance with "alphabet"
-        SortOption sortOption = new SortOption("alphabet");
-
-        // Create a ListCommand with the SortOption
-        ListCommand listCommandWithSort = new ListCommand(sortOption);
-
-        // The expected outcome should be the "Sorting not yet implemented" message
-        assertCommandSuccess(listCommandWithSort, model, ListCommand.MESSAGE_SORT_NOT_IMPLEMENTED, expectedModel);
-    }
-
-    @Test
     public void equals() {
         // Same ListCommand without sortOption should be equal
         ListCommand listCommand1 = new ListCommand();
@@ -60,8 +48,8 @@ public class ListCommandTest {
         assertEquals(listCommand1, listCommand2);
 
         // ListCommand with the same sortOption should be equal
-        SortOption sortOption1 = new SortOption("alphabet");
-        SortOption sortOption2 = new SortOption("alphabet");
+        SortOption sortOption1 = new SortOption("name");
+        SortOption sortOption2 = new SortOption("name");
         ListCommand listCommandWithSort1 = new ListCommand(sortOption1);
         ListCommand listCommandWithSort2 = new ListCommand(sortOption2);
         assertEquals(listCommandWithSort1, listCommandWithSort2);
