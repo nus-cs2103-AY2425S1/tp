@@ -1,15 +1,11 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TelegramUsername;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -27,7 +23,6 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private TelegramUsername telegramUsername;
-    private Set<Tag> tags;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -38,7 +33,6 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         telegramUsername = new TelegramUsername(DEFAULT_TELEGRAM_USERNAME);
-        tags = new HashSet<>();
     }
 
     /**
@@ -50,7 +44,6 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         telegramUsername = personToCopy.getTelegramUsername();
-        tags = new HashSet<>(personToCopy.getTags());
     }
 
     /**
@@ -61,13 +54,6 @@ public class PersonBuilder {
         return this;
     }
 
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
-     */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
-        return this;
-    }
 
     /**
      * Sets the {@code Address} of the {@code Person} that we are building.
@@ -105,7 +91,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags, telegramUsername);
+        return new Person(name, phone, email, address, telegramUsername);
     }
 
 }
