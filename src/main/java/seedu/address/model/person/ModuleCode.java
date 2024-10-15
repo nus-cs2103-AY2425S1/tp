@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -7,6 +8,14 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable
  */
 public class ModuleCode {
+    public static final String MESSAGE_CONSTRAINTS =
+            "Module code should only contain alphanumeric characters, and it should not be blank";
+
+    /*
+     * The input should consist of only alphanumeric characters without spaces, should not contain
+     * space, and should not be blank.
+     */
+    public static final String VALIDATION_REGEX = "[A-Za-z]+[0-9]+[A-Za-z]?";
 
     public final String moduleCode;
 
@@ -17,7 +26,15 @@ public class ModuleCode {
      */
     public ModuleCode(String moduleCode) {
         requireNonNull(moduleCode);
-        this.moduleCode = moduleCode;
+        checkArgument(isValidModuleCode(moduleCode.trim()), MESSAGE_CONSTRAINTS);
+        this.moduleCode = moduleCode.trim();
+    }
+
+    /**
+     * Returns true if a given string is a valid module code.
+     */
+    public static boolean isValidModuleCode(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
@@ -46,4 +63,3 @@ public class ModuleCode {
     }
 
 }
-
