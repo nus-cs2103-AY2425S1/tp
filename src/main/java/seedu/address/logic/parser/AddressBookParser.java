@@ -85,7 +85,7 @@ public class AddressBookParser {
 
             case CountCommand.COMMAND_WORD:  // Route to CountCommandParser
                 return new CountCommand();
-            
+
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
 
