@@ -1,9 +1,15 @@
 package seedu.address.model;
 
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -85,6 +91,21 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
+    }
+
+    @Override
+    public void archiveAddressBook() throws IOException {
+        Path source = this.getAddressBookFilePath();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
+        String timestamp = LocalDateTime.now().format(formatter);
+        Path destination = Paths.get(source.getParent().toString(), "archive",
+                source.getFileName().toString().replace(".json", "") + "-" +
+                        timestamp + ".json");
+
+        Files.createDirectories(destination.getParent());
+        Files.copy(source, destination, REPLACE_EXISTING);
+        logger.info("Address book has been archived!");
     }
 
     @Override
