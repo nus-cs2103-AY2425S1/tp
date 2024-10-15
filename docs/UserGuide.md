@@ -71,7 +71,7 @@ Shows a message explaning how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-#### Format
+#### Command Format
 <div class="command-box">
 help
 </div>
@@ -80,12 +80,12 @@ help
 
 Adds a person to the address book.
 
-#### Format
+#### Command Format
 <div class="command-box">
 add n/NAME p/PHONE_NUMBER e/EMAIL
 </div>
 
-Examples:
+#### Examples
 * `add n/John Doe p/98765432 e/johnd@example.com`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com`
 
@@ -93,7 +93,7 @@ Examples:
 
 Shows a list of all persons in the address book.
 
-#### Format
+#### Command Format
 <div class="command-box">
 list
 </div>
@@ -102,7 +102,7 @@ list
 
 Edits an existing person in the address book.
 
-#### Format
+#### Command Format
 <div class="command-box">
 edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]
 </div>
@@ -111,7 +111,7 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-Examples:
+#### Examples
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
@@ -119,7 +119,7 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
-#### Format
+#### Command Format
 <div class="command-box">
 find KEYWORD [MORE_KEYWORDS]
 </div>
@@ -131,7 +131,7 @@ find KEYWORD [MORE_KEYWORDS]
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
+#### Examples
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
@@ -140,22 +140,21 @@ Examples:
 
 Deletes the specified person from the address book.
 
-#### Format
+#### Command Format
 <div class="command-box">
 delete NAME
 </div>
 
 * Deletes the person with the specified `NAME`.
 
-
-Example:
+#### Examples
 * `list` followed by `delete John Doe` deletes the person with the name John Doe in the address book.
 
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
-#### Format
+#### Command Format
 <div class="command-box">
 clear
 </div>
@@ -164,7 +163,7 @@ clear
 
 Exits the program.
 
-#### Format
+#### Command Format
 <div class="command-box">
 exit
 </div>
