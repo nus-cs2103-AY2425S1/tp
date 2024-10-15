@@ -176,8 +176,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = CreateVendorCommand.COMMAND_WORD + " " + PREFIX_VENDOR +
-                NAME_DESC_AMY + PHONE_DESC_AMY + DESCRIPTION_DESC_AMY;
+        String addCommand = CreateVendorCommand.COMMAND_WORD + " " + PREFIX_VENDOR
+                + NAME_DESC_AMY + PHONE_DESC_AMY + DESCRIPTION_DESC_AMY;
         Vendor expectedVendor = new VendorBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addVendor(expectedVendor);

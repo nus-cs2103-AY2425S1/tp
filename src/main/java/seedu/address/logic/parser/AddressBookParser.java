@@ -11,8 +11,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateCommand;
-import seedu.address.logic.commands.CreateEventCommand;
-import seedu.address.logic.commands.CreateVendorCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;

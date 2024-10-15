@@ -168,7 +168,7 @@ public class CreateVendorCommandParserTest {
 
         // invalid tag
         assertParseFailure(parser,
-                " " + PREFIX_VENDOR + NAME_DESC_BOB + PHONE_DESC_BOB + DESCRIPTION_DESC_BOB+ INVALID_TAG_DESC
+                " " + PREFIX_VENDOR + NAME_DESC_BOB + PHONE_DESC_BOB + DESCRIPTION_DESC_BOB + INVALID_TAG_DESC
                         + VALID_TAG_FRIEND,
                 Tag.MESSAGE_CONSTRAINTS);
 

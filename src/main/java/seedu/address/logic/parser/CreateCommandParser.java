@@ -9,6 +9,9 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.CreateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new CreateCommand object
+ */
 public class CreateCommandParser implements Parser<CreateCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the CreateCommand

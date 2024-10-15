@@ -45,7 +45,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Vendor vendor = new VendorBuilder().build();
-        CreateVendorCommand command = (CreateVendorCommand) parser.parseCommand(VendorUtil.getCreateVendorCommand(vendor));
+        CreateVendorCommand command = (CreateVendorCommand) parser
+                .parseCommand(VendorUtil.getCreateVendorCommand(vendor));
         assertEquals(new CreateVendorCommand(vendor), command);
     }
 
