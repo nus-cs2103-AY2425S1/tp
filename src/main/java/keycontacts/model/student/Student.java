@@ -10,6 +10,7 @@ import java.util.Set;
 
 import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.logic.commands.EditCommand.EditStudentDescriptor;
+import keycontacts.model.lesson.MakeupLesson;
 import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.pianopiece.PianoPiece;
 
@@ -28,6 +29,7 @@ public class Student {
     // Associations
     private final Set<PianoPiece> pianoPieces = new HashSet<>();
     private final RegularLesson regularLesson;
+    private final Set<MakeupLesson> makeupLessons = new HashSet<>();
 
     /**
      * Constructor for a new student. Uses default associations.
@@ -47,7 +49,7 @@ public class Student {
      * present and not null.
      */
     public Student(Name name, Phone phone, Address address, GradeLevel gradeLevel,
-                   Set<PianoPiece> pianoPieces, RegularLesson regularLesson) {
+                   Set<PianoPiece> pianoPieces, RegularLesson regularLesson, Set<MakeupLesson> makeupLessons) {
         requireAllNonNull(name, phone, address, gradeLevel, pianoPieces);
         this.name = name;
         this.phone = phone;
@@ -55,6 +57,7 @@ public class Student {
         this.gradeLevel = gradeLevel;
         this.pianoPieces.addAll(pianoPieces);
         this.regularLesson = regularLesson;
+        this.makeupLessons.addAll(makeupLessons);
     }
 
     public Name getName() {
@@ -85,6 +88,10 @@ public class Student {
         return Optional.ofNullable(regularLesson);
     }
 
+    public Set<MakeupLesson> getMakeupLessons() {
+        return Collections.unmodifiableSet(makeupLessons);
+    }
+
     /**
      * Returns string representation of the {@code regularLesson}
      */
@@ -108,14 +115,15 @@ public class Student {
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(phone);
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(address);
         GradeLevel updatedGradeLevel = editStudentDescriptor.getGradeLevel().orElse(this.gradeLevel);
-        return new Student(updatedName, updatedPhone, updatedAddress, updatedGradeLevel, pianoPieces, regularLesson);
+        return new Student(updatedName, updatedPhone, updatedAddress, updatedGradeLevel,
+            pianoPieces, regularLesson, makeupLessons);
     }
 
     /**
      * Creates and returns a new {@code Student} with the updated {@code regularLesson}.
      */
     public Student withRegularLesson(RegularLesson regularLesson) {
-        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson);
+        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson, makeupLessons);
     }
 
     /**
@@ -125,7 +133,17 @@ public class Student {
         Set<PianoPiece> updatedPianoPieces = new HashSet<>(pianoPieces);
         updatedPianoPieces.addAll(addedPianoPieces);
 
-        return new Student(name, phone, address, gradeLevel, updatedPianoPieces, regularLesson);
+        return new Student(name, phone, address, gradeLevel, updatedPianoPieces, regularLesson, makeupLessons);
+    }
+
+    /**
+     * Creates and returns a new {@code Student} with the {@code makeupLesson} added.
+     */
+    public Student withAddedMakeupLesson(MakeupLesson makeupLesson) {
+        Set<MakeupLesson> updatedMakeupLessons = new HashSet<>(makeupLessons);
+        updatedMakeupLessons.add(makeupLesson);
+
+        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson, updatedMakeupLessons);
     }
 
     /**
@@ -162,13 +180,14 @@ public class Student {
                 && address.equals(otherStudent.address)
                 && gradeLevel.equals(otherStudent.gradeLevel)
                 && pianoPieces.equals(otherStudent.pianoPieces)
-                && getRegularLesson().equals(otherStudent.getRegularLesson());
+                && getRegularLesson().equals(otherStudent.getRegularLesson())
+                && makeupLessons.equals(otherStudent.makeupLessons);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, address, gradeLevel, pianoPieces, regularLesson);
+        return Objects.hash(name, phone, address, gradeLevel, pianoPieces, regularLesson, makeupLessons);
     }
 
     @Override
@@ -180,6 +199,7 @@ public class Student {
                 .add("gradeLevel", gradeLevel)
                 .add("pianoPieces", pianoPieces)
                 .add("regularLesson", regularLesson)
+                .add("makeupLessons", makeupLessons)
                 .toString();
     }
 

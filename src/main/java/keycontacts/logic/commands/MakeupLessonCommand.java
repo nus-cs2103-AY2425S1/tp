@@ -34,6 +34,8 @@ public class MakeupLessonCommand extends Command {
             + PREFIX_START_TIME + "12:00 "
             + PREFIX_END_TIME + "13:00";
 
+    public static final String MESSAGE_SUCCESS = "Makeup lesson created.";
+
     private final Index targetIndex;
     private final MakeupLesson makeupLesson;
 
@@ -57,8 +59,11 @@ public class MakeupLessonCommand extends Command {
         }
 
         Student studentToUpdate = lastShownList.get(targetIndex.getZeroBased());
+        Student updatedStudent = studentToUpdate.withAddedMakeupLesson(makeupLesson);
 
-        return new CommandResult("Makeup lesson created.");
+        model.setStudent(studentToUpdate, updatedStudent);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(updatedStudent)));
     }
 
     @Override
