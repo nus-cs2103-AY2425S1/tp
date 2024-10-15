@@ -84,19 +84,19 @@ public class UnmarkCommandTest {
     @Test
     public void equals() {
         Tutorial tutorial = new Tutorial("1");
-        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, tutorial);
+        UnmarkCommand unmarkCommand = new UnmarkCommand(INDEX_FIRST_PERSON, tutorial);
 
         // is itself
-        assertTrue(markCommand.equals(markCommand));
+        assertTrue(unmarkCommand.equals(unmarkCommand));
 
         // is null
-        assertFalse(markCommand.equals(null));
+        assertFalse(unmarkCommand.equals(null));
 
-        // duplicate MarkCommand
+        // duplicate UnmarkCommand
         Tutorial duplicateTutorial = new Tutorial("1");
-        MarkCommand duplicateMarkCommand = new MarkCommand(INDEX_FIRST_PERSON, duplicateTutorial);
+        UnmarkCommand duplicateUnmarkCommand = new UnmarkCommand(INDEX_FIRST_PERSON, duplicateTutorial);
 
-        assertTrue(markCommand
-                .equals(duplicateMarkCommand));
+        assertTrue(unmarkCommand
+                .equals(duplicateUnmarkCommand));
     }
 }
