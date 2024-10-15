@@ -13,6 +13,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import hallpointer.address.model.point.Point;
+import hallpointer.address.model.session.Session;
+import hallpointer.address.model.session.SessionDate;
+import hallpointer.address.model.session.SessionName;
 import hallpointer.address.testutil.MemberBuilder;
 
 public class MemberTest {
@@ -86,10 +90,50 @@ public class MemberTest {
     }
 
     @Test
+    public void addPoints_validPoints_increasesTotalPoints() {
+        Member member = new MemberBuilder(ALICE).build();
+        Point pointsToAdd = new Point(10);
+        member.addPoints(pointsToAdd);
+        assertEquals(new Point(10), member.getTotalPoints());
+    }
+
+    @Test
+    public void addSession_validSession_increasesSessions() {
+        Member member = new MemberBuilder(ALICE).build();
+        Session newSession = new Session(new SessionName(VALID_NAME_BOB), new SessionDate("2021-10-10"), new Point(10));
+        member.addSession(newSession);
+        assertTrue(member.getSessions().contains(newSession));
+        assertEquals(new Point(newSession.getPoints().points), member.getTotalPoints());
+    }
+
+    @Test
+    public void removeSession_validSession_decreasesSessions() {
+        Member member = new MemberBuilder(ALICE).build();
+        Session newSession = new Session(new SessionName(VALID_NAME_BOB), new SessionDate("2021-10-10"), new Point(10));
+        member.addSession(newSession);
+        member.removeSession(newSession);
+        assertFalse(member.getSessions().contains(newSession));
+        assertEquals(new Point(0), member.getTotalPoints());
+    }
+
+    @Test
+    public void addSession_nullSession_throwsNullPointerException() {
+        Member member = new MemberBuilder(ALICE).build();
+        assertThrows(NullPointerException.class, () -> member.addSession(null));
+    }
+
+    @Test
+    public void removeSession_nullSession_throwsNullPointerException() {
+        Member member = new MemberBuilder(ALICE).build();
+        assertThrows(NullPointerException.class, () -> member.removeSession(null));
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = Member.class.getCanonicalName() + "{name=" + ALICE.getName()
-                + ", telegram=" + ALICE.getTelegram() + ", room=" + ALICE.getRoom()
-                + ", tags=" + ALICE.getTags() + "}";
+            + ", telegram=" + ALICE.getTelegram() + ", room=" + ALICE.getRoom()
+            + ", tags=" + ALICE.getTags() + ", totalPoints=" + ALICE.getTotalPoints()
+            + ", sessions=" + ALICE.getSessions() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
