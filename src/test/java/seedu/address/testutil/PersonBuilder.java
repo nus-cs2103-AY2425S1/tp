@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.clienttype.ClientType;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -20,12 +21,14 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_DESCRIPTION = "Likes to eat a lot";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<ClientType> clientTypes;
+    private Description description;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +39,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         clientTypes = new HashSet<>();
+        description = new Description(DEFAULT_DESCRIPTION);
     }
 
     /**
@@ -90,8 +94,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Description} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDescription(String description) {
+        this.description = new Description(description);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, clientTypes);
+        return new Person(name, phone, email, address, clientTypes, description);
     }
 
 }

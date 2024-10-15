@@ -23,8 +23,8 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_CLIENT_TYPE = "#A";
-    private static final String INVALID_DESCRIPTION = " 28y3126487216487162498629818936981273" +
-            "87498216t49612938712893791246912846918246891274172047190381873892173891738964891649164";
+    private static final String INVALID_DESCRIPTION = " 28y3126487216487162498629818936981273"
+            + "87498216t49612938712893791246912846918246891274172047190381873892173891738964891649164";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -44,8 +44,8 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_CLIENT_TYPES
-                ,VALID_DESCRIPTION);
+                new JsonAdaptedPerson(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_CLIENT_TYPES,
+                        VALID_DESCRIPTION);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -114,8 +114,8 @@ public class JsonAdaptedPersonTest {
         List<JsonAdaptedClientType> invalidClientTypes = new ArrayList<>(VALID_CLIENT_TYPES);
         invalidClientTypes.add(new JsonAdaptedClientType(INVALID_CLIENT_TYPE));
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidClientTypes
-                ,VALID_DESCRIPTION);
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidClientTypes,
+                        VALID_DESCRIPTION);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 
