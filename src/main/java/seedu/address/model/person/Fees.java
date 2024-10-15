@@ -46,11 +46,11 @@ public class Fees {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ClassId)) {
+        if (!(other instanceof Fees)) {
             return false;
         }
 
-        ClassId otherClassId = (ClassId) other;
+        Fees otherClassId = (Fees) other;
         return value.equals(otherClassId.value);
     }
 
