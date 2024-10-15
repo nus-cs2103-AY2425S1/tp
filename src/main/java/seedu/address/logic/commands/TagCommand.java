@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -25,9 +24,8 @@ public class TagCommand extends Command {
             + "identified by their index number. \n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_TAG + "TAG (specify at least 1)... \n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TAG + "friends" + " "
-            + PREFIX_TAG + "owesMoney";
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_TAG + "photographer foodCaterer";
 
     public static final String MESSAGE_TAG_PERSON_SUCCESS = "Tagged person: %1$s with tags: %2$s";
 
@@ -37,11 +35,11 @@ public class TagCommand extends Command {
 
     /**
      * @param index The Index of the person to tag
-     * @param tagList The Set of Tags to add to the person
+     * @param tagSet The Set of Tags to add to the person
      */
-    public TagCommand(Index index, Set<Tag> tagList) {
+    public TagCommand(Index index, Set<Tag> tagSet) {
         this.targetIndex = index;
-        this.addedTags = tagList;
+        this.addedTags = tagSet;
     }
 
     @Override
@@ -54,7 +52,7 @@ public class TagCommand extends Command {
         }
 
         Person personToTag = lastShownList.get(targetIndex.getZeroBased());
-        String addedTagsString = tagSetToString(addedTags);
+        String addedTagsString = Tag.tagSetToString(addedTags);
         // Union of existing tags and new tags
         addedTags.addAll(personToTag.getTags());
 
@@ -64,26 +62,10 @@ public class TagCommand extends Command {
 
         // Updating addressBook
         model.setPerson(personToTag, newPerson);
+        model.getActiveTags().incrementTags(addedTags);
         return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, personToTag.getName(), addedTagsString));
     }
 
-    /**
-     * Utility method to convert Set of Tags to strings delimited by commas
-     * @param tagList The Set of Tags to convert
-     * @return String of tags delimited by commas
-     */
-    public static String tagSetToString(Set<Tag> tagList) {
-        StringBuilder stringBuilder = new StringBuilder();
-        Iterator<Tag> it = tagList.iterator();
-        for (int i = 0; i < tagList.size(); i++) {
-            Tag t = it.next();
-            stringBuilder.append(t);
-            if (i != tagList.size() - 1) {
-                stringBuilder.append(", ");
-            }
-        }
-        return stringBuilder.toString();
-    }
 
     @Override
     public boolean equals(Object other) {

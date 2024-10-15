@@ -35,7 +35,26 @@ public class TagCommandTest {
         expectedModel.setPerson(firstPerson, taggedPerson);
 
         String expectedMessage = String.format(TagCommand.MESSAGE_TAG_PERSON_SUCCESS,
-                taggedPerson.getName(), TagCommand.tagSetToString(tagSet));
+                taggedPerson.getName(), Tag.tagSetToString(tagSet));
+
+        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_multipleTagsFilteredList_success() {
+        Index index = INDEX_FIRST_PERSON;
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Set<Tag> tagSet = SampleDataUtil.getTagSet("testTag1", "testTag2", "testTag3");
+        TagCommand tagCommand = new TagCommand(index, tagSet);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getUserPrefs());
+        Person taggedPerson = new PersonBuilder(firstPerson)
+                .withTags("friends", "testTag1", "testTag2", "testTag3").build();
+
+        expectedModel.setPerson(firstPerson, taggedPerson);
+
+        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_PERSON_SUCCESS,
+                taggedPerson.getName(), Tag.tagSetToString(tagSet));
 
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
