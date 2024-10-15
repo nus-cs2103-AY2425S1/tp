@@ -239,7 +239,7 @@ public class InspectWindow extends UiPart<Stage> {
             }
 
             return commandResult;
-        } catch (CommandException e/*| ParseException e*/) {
+        } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
