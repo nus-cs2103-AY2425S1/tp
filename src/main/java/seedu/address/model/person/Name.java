@@ -28,7 +28,7 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        fullName = formatName(name);
     }
 
     /**
@@ -36,6 +36,21 @@ public class Name {
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    private static String formatName(String name) {
+        String[] words = name.toLowerCase().split("\\s+");
+        StringBuilder formattedWords = new StringBuilder();
+
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                formattedWords.append(Character.toUpperCase(word.charAt(0)))
+                        .append(word.substring(1))
+                        .append(" ");
+            }
+        }
+
+        return formattedWords.toString().trim();
     }
 
 

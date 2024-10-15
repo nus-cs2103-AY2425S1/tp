@@ -56,12 +56,12 @@ public class PersonTest {
         // name differs in case, all other attributes same -> returns false
         // Note for Yi Fan: when you update the case-insensitive, this should return true
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
     }
 
     @Test
@@ -110,11 +110,9 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withRate(VALID_RATE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different schedule -> returns false
-        editedAlice = new PersonBuilder(ALICE).withSchedule(VALID_SCHEDULE_BOB).build();
-
         // different owedAmount -> returns false
         editedAlice = new PersonBuilder(ALICE).withOwedAmount(VALID_OWED_AMOUNT_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
 
     }
 
