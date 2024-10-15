@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -12,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddEmergencyContactNameCommand;
 import seedu.address.model.person.EmergencyContactName;
-import seedu.address.model.person.Name;
 
 
 public class AddEmergencyContactNameCommandParserTest {
@@ -28,7 +26,8 @@ public class AddEmergencyContactNameCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_ECNAME + validEmergencyContactName;
         AddEmergencyContactNameCommand expectedCommand =
-                new AddEmergencyContactNameCommand(INDEX_FIRST_PERSON, new EmergencyContactName(validEmergencyContactName));
+                new AddEmergencyContactNameCommand(INDEX_FIRST_PERSON,
+                        new EmergencyContactName(validEmergencyContactName));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -38,7 +37,8 @@ public class AddEmergencyContactNameCommandParserTest {
                 AddEmergencyContactNameCommand.MESSAGE_USAGE);
 
         // no index
-        String userInput = AddEmergencyContactNameCommand.COMMAND_WORD + " " + PREFIX_ECNAME + validEmergencyContactName;
+        String userInput = AddEmergencyContactNameCommand.COMMAND_WORD + " " + PREFIX_ECNAME
+                + validEmergencyContactName;
         assertParseFailure(parser, userInput, expectedMessage);
 
         // no parameters
