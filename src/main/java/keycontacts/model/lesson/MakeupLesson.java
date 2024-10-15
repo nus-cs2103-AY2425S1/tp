@@ -5,7 +5,7 @@ package keycontacts.model.lesson;
 */
 public class MakeupLesson extends Lesson {
 
-    public MakeupLesson(Day lessonDay, Time startTime, Time endTime) {
-        super(lessonDay, startTime, endTime);
+    public MakeupLesson(Time startTime, Time endTime) {
+        super(startTime, endTime);
     }
 }
