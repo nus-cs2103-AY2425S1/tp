@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYING_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSING_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTAL_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLING_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIT_NUMBER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -23,16 +23,17 @@ import seedu.address.model.person.Property;
 public class AddPropertyToBuyCommand extends Command {
     public static final String COMMAND_WORD = "addBuy";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a property to the list of properties to buy"
-            + "for this specific person. "
+            + " for this specific person. "
             + "Parameters: INDEX (Must be a positive integer)"
             + PREFIX_HOUSING_TYPE + "[HOUSING_TYPE]"
-            + PREFIX_SELLING_PRICE + "[SELLING_PRICE]"
+            + PREFIX_BUYING_PRICE + "[SELLING_PRICE]"
             + PREFIX_POSTAL_CODE + "[POSTAL_CODE]"
             + PREFIX_UNIT_NUMBER + "[UNIT_NUMBER]"
             + PREFIX_TAG + "[TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_HOUSING_TYPE + "Condo "
-            + PREFIX_SELLING_PRICE + "1.65M "
+            + "1 "
+            + PREFIX_HOUSING_TYPE + "c "
+            + PREFIX_BUYING_PRICE + "1650000 "
             + PREFIX_POSTAL_CODE + "567510 "
             + PREFIX_UNIT_NUMBER + "10-65 "
             + PREFIX_TAG + "Extremely spacious "

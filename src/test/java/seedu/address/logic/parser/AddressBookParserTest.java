@@ -14,7 +14,10 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddPropertyToBuyCommand;
+//import seedu.address.logic.commands.AddPropertyToSellCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -32,9 +35,11 @@ import seedu.address.model.person.Price;
 import seedu.address.model.person.Property;
 import seedu.address.model.person.UnitNumber;
 import seedu.address.model.tag.Tag;*/
+import seedu.address.model.person.Property;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.PropertyBuilder;
 
 public class AddressBookParserTest {
 
@@ -107,6 +112,15 @@ public class AddressBookParserTest {
             parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddPropertyToSellCommand(), command);*/
         assertEquals(1, 1);
+    }
+
+    @Test
+    public void parseCommand_addBuy() throws Exception {
+        Index index = Index.fromOneBased(1);
+        Property property = new PropertyBuilder().build();
+        AddPropertyToBuyCommand command =
+                (AddPropertyToBuyCommand) parser.parseCommand("addBuy 1 ht/c bp/1500000 pc/123456 un/10-01");
+        assertEquals(new AddPropertyToBuyCommand(index, property), command);
     }
 
     @Test
