@@ -33,10 +33,8 @@ public class AppointmentCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + "date/ 20/12/2024 fr/ 0800 to/ 1000";
 
-    public static final String MESSAGE_SUCCESS = "New appointment added: %1$s";
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Date: %2$s, From: %3$s, To: %4$s";
-    public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added remark to Person: %1$s";
-    public static final String MESSAGE_UPDATE_APPOINTMENT_SUCCESS = "Removed remark from Person: %1$s";
+    public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "New appointment added: %1$s";
+    public static final String MESSAGE_UPDATE_APPOINTMENT_SUCCESS = "Updated appointment from Person: %1$s";
 
     private final Index index;
     private final Appointment appointment;
