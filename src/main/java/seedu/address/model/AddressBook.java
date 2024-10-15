@@ -10,6 +10,8 @@ import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.UniqueDeliveryList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.supplier.Supplier;
+import seedu.address.model.supplier.UniqueSupplierList;
 
 /**
  * Wraps all data at the address-book level
@@ -19,6 +21,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueDeliveryList deliveries;
+    private final UniqueSupplierList suppliers;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -29,6 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         deliveries = new UniqueDeliveryList();
+        suppliers = new UniqueSupplierList();
     }
 
     public AddressBook() {}
@@ -58,6 +62,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setDeliveries(List<Delivery> deliveries) {
         this.deliveries.setDeliveries(deliveries);
     }
+    /**
+     * Replaces the contents of the supplier list with {@code suppliers}.
+     * {@code suppliers} must not contain duplicate suppliers.
+     */
+    public void setSuppliers(List<Supplier> suppliers) {
+        this.suppliers.setSuppliers(suppliers);
+    }
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
@@ -66,6 +77,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
         setDeliveries(newData.getDeliveryList());
         setPersons(newData.getPersonList());
+        setSuppliers(newData.getSupplierList());
     }
 
     //// delivery-level operations
@@ -107,7 +119,18 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         deliveries.setDelivery(target, updatedDelivery);
     }
+    //// supplier-level operations
+    public void removeSupplier(Supplier key) {
+        suppliers.remove(key);
+    }
+    public void setSupplier(Supplier target, Supplier editedSupplier) {
+        requireNonNull(editedSupplier);
 
+        suppliers.setSupplier(target, editedSupplier);
+    }
+    public void addSupplier(Supplier s) {
+        suppliers.add(s);
+    }
     //// person-level operations
 
     /**
@@ -162,6 +185,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Delivery> getDeliveryList() {
         return deliveries.asUnmodifiableObservableList();
+    }
+    @Override
+    public ObservableList<Supplier> getSupplierList() {
+        return suppliers.asUnmodifiableObservableList();
     }
 
     @Override
