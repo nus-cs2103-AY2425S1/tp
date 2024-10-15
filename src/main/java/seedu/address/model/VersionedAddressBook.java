@@ -11,6 +11,10 @@ public class VersionedAddressBook extends AddressBook {
     private final List<ReadOnlyAddressBook> addressBookStateList;
     private int currentStatePointer;
 
+    /**
+     * Creates a VersionedAddressBook using the Persons in the {@code initialState}
+     * and resets the state.
+     */
     public VersionedAddressBook(ReadOnlyAddressBook initialState) {
         super(initialState);
 
