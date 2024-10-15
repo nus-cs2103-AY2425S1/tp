@@ -6,8 +6,8 @@
 
 # TAchy User Guide
 
-TAchy is a **desktop app for managing students, optimized for use via a  Line Interface** (CLI) while 
-still having the benefits of a Graphical User Interface (GUI). If you can type fast, TAchy can get your student 
+TAchy is a **desktop app for managing students, optimized for use via a  Line Interface** (CLI) while
+still having the benefits of a Graphical User Interface (GUI). If you can type fast, TAchy can get your student
 management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
@@ -23,7 +23,7 @@ management tasks done faster than traditional GUI apps.
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TAchy.jar` command to 
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TAchy.jar` command to
    run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -33,7 +33,7 @@ management tasks done faster than traditional GUI apps.
 
    * `list` : Lists all students.
 
-   * `add_student n/John Doe p/98765432 e/johnd@example.com ` : Adds a student named 
+   * `add_student n/John Doe p/98765432 e/johnd@example.com ` : Adds a student named
      `John Doe` to the app.
 
    * `delete 3` : Deletes the 3rd student shown in the current list.
@@ -156,7 +156,7 @@ Adds an Assignment to the app.
 Format: `add_assignment studentIndex/STUDENT_INDEX assignmentName/ASSIGNMENT_NAME maxScore/MAX_SCORE`
 
 Examples:
-* `list` followed by `add_assignment studentIndex/3 assignmentName/Assignment 1 maxScore/100` adds an assignment to the 
+* `list` followed by `add_assignment studentIndex/3 assignmentName/Assignment 1 maxScore/100` adds an assignment to the
   3rd student in the app.
 * `add_assignment studentIndex/1 assignmentName/Assignment 1 maxScore/100`
 
