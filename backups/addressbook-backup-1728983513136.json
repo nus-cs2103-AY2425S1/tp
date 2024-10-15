@@ -1,0 +1,30 @@
+{
+  "persons" : [ {
+    "name" : "Roy Balakrishnan",
+    "age" : "50",
+    "gender" : "M",
+    "nric" : "S8888888Z",
+    "phone" : "92624417",
+    "email" : "royb@example.com",
+    "address" : "Blk 45 Aljunied Street 85, #11-31",
+    "tags" : [ "colleagues" ]
+  }, {
+    "name" : "John Doe",
+    "age" : "36",
+    "gender" : "M",
+    "nric" : "S1234567Z",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "tags" : [ "OwesMoney", "Patient" ]
+  }, {
+    "name" : "John Doe",
+    "age" : "36",
+    "gender" : "M",
+    "nric" : "S1234563Z",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "tags" : [ "OwesMoney", "Patient" ]
+  } ]
+}
