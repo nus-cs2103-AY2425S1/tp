@@ -13,11 +13,11 @@ import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
 import seedu.address.model.tut.TutDate;
 
-
 /**
  * Jackson-friendly version of {@link Tut}.
  */
 public class JsonAdaptedTut {
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Tutorial's %s field is missing!";
 
     private final String tutName;
     private final TutorialClass tutorialClassName;
@@ -30,11 +30,11 @@ public class JsonAdaptedTut {
     @JsonCreator
     public JsonAdaptedTut(
             @JsonProperty("tutName") String tutName,
-            @JsonProperty("tutorialClassName") TutorialClass tutorialClass,
+            @JsonProperty("tutorialClassName") TutorialClass tutorialClassName,
             @JsonProperty("students") List<JsonAdaptedStudent> students,
             @JsonProperty("tutDates") List<JsonAdaptedTutDate> tutDates) {
         this.tutName = tutName;
-        this.tutorialClassName = tutorialClass;
+        this.tutorialClassName = tutorialClassName;
         if (students != null) {
             this.students.addAll(students);
         }
@@ -63,6 +63,19 @@ public class JsonAdaptedTut {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tutorial.
      */
     public Tut toModelType() throws IllegalValueException {
+        if (tutName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "tutName"));
+        }
+        if (!Tut.isValidName(tutName)) {
+            throw new IllegalValueException(Tut.MESSAGE_NAME_CONSTRAINTS);
+        }
+
+        if (tutorialClassName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "tutorialClassName"));
+        }
+
+        final TutorialClass modelTutorialClass = tutorialClassName;
+
         // Convert students
         final List<Student> modelStudents = new ArrayList<>();
         for (JsonAdaptedStudent student : students) {
@@ -75,7 +88,7 @@ public class JsonAdaptedTut {
             modelTutDates.add(tutDate.toModelType());
         }
 
-        Tut tut = new Tut(tutName, tutorialClassName);
+        Tut tut = new Tut(tutName, modelTutorialClass);
         for (Student student : modelStudents) {
             tut.add(student);
         }

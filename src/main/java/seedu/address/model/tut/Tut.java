@@ -74,8 +74,15 @@ public class Tut {
     public boolean tutorialDateInList(TutDate tutorialDate) {
         return tutDates.contains(tutorialDate);
     }
+
+    /**
+     * Adds tutorial Date to tutorial
+     * @param tutorialDate
+     */
     public void addTutorialDate(TutDate tutorialDate) {
-        tutDates.add(tutorialDate);
+        if (!tutDates.contains(tutorialDate)) {
+            tutDates.add(tutorialDate);
+        }
     }
     public TutDate getTutorialDate(Integer id) {
         return tutDates.get(id);
