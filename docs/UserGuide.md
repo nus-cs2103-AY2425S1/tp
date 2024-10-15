@@ -102,7 +102,7 @@ add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999
 add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold r/ got anger issue
 ```
 
-#### Parameters
+#### Parameters {#add-command-parameters}
 | Parameter | Expected Format                                  | Explanation                                                                       |
 |-----------|--------------------------------------------------|-----------------------------------------------------------------------------------|
 | NAME      | Alphanumeric, capitalized                        | Names are in block letters for clarity and consistency.                           |
@@ -227,36 +227,68 @@ edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 100000000
 ### Feature 6: Find a Customer by Details
 
 **Purpose:**  
-Enables users to search for and display all customers who match the specified details such as name, job, or index.
+This feature allows users to search for customers by specific details such as name, address, email, phone number, job title, or remarks. 
 
 **How to Use It:**  
+To perform a search, use the `filter` command followed by a flag (indicating the field you want to search) and the corresponding search term. Searches are **case-insensitive** and use **substring-matching**. See [substring-matching](#substring-matching) to learn more. 
+
 - **Command Format:** 
 ```
-filter <FLAG>/ <FLAG FIELD>
+filter <FLAG>/ <SEARCH TERM>
 ```
 - **Examples:** 
-```
-filter n/ <NAME> 
-e.g. filter n/ TAN LESHEW
-
-filter j/ <JOB> 
-e.g. filter j/ doctor
-```
+  - Filter customers by name: 
+  ```
+  filter n/ TAN LESHEW
+  ```
+  - Filter customers by job:
+  ```
+  e.g. filter j/ doctor
+  ```
 
 #### Parameters
-| Parameter  | Expected Format                   | Explanation                                                                                 |
-|------------|-----------------------------------|---------------------------------------------------------------------------------------------|
-| FLAG       | Refer to `add` syntax constraints | Indicates the type of data to filter. Use n/ for name, p/ for phone number, etc.            |                                                                          |
-| FLAG FIELD | Refer to `add` parameter constraints for format | Fields should be input as follows: n/<NAME>, p/<PHONE>, etc. Searches are case-insensitive. |
+| Parameter   | Expected Format                                                                                              | Explanation                                                                                             |
+|-------------|--------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| FLAG        | Refer to the list of supported flags detailed below.                                                         | Identifies the field to search (e.g., `n/` for name, `j/` for job).|                                                                          |
+| SEARCH TERM | Refer to the syntax constraints in the [parameter subsection of the `add` command](#add-command-parameters). | The value to search for in the specified field (e.g., "doctor" for job, "TAN LESHEW" for name).         |
+
+#### Supported flags:
+- `n/` for Name
+- `p/` for Phone Number
+- `e/` for Email
+- `a/` for Address
+- `j/` for Job
+- `r/` for Remarks
+
+#### Substring Matching:
+- Substring matching is used for searches, meaning that the search term must match a part of the field in the same order as it appears in the customer record.
+- For instance, if a customer’s name is "John Lee", the search term "John", "Lee", or "John Lee" will match, but "Lee John" will not.
+
 
 #### What to Expect
 - **If Successful:** 
   - Message: "Here are all the customers that match your search: (List of customers)."
+- **If Unsuccessful (No Matches Found):**
+  - Message: "No customers match your search criteria."
+- **If Multiple Filters Are Used:**
+  - Message: "Using multiple filters is not supported yet. Please use only one filter."
 - **If There is an Error:** 
-  - "Please correct your input and ensure it matches the expected format. Refer to the guidelines for each parameter as specified."
+  - No Valid Flags Used:
+    - Message:
+    
+      "filter: Searches for all customers whose specified field contains the given
+    substring (case-insensitive) and displays the results in a numbered list.
+    
+      Parameters: `<FLAG>/ <SEARCH TERM>`
+      
+      Flags: `n/` (name), `p/` (phone), `e/` (email), `a/` (address), `j/` (job), `r/` (remarks)
+      
+      Example: `filter n/ Alice`
+    
+      This will find all customers whose names contain 'Alice'."
+  - If Search Term Fails to Meet Requirement (i.e. Phone Number longer than 8 digits):
+    - The system will display usage hints specific to the first invalid search term.
 
-**Handling Duplicates:**  
-- For `NAME` and `JOB` fields: Multiple customers can have the same names or jobs. The command will list all matching entries.
 ---
 
 ### Feature 7: Save Remarks About Customers
