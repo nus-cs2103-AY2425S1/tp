@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_OTHER_PARTY;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddTransactionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Transaction;
@@ -36,15 +35,15 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (IllegalValueException ive) {
+        } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddTransactionCommand.MESSAGE_USAGE), ive);
+                    AddTransactionCommand.MESSAGE_USAGE), pe);
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_AMOUNT,
                 PREFIX_OTHER_PARTY, PREFIX_DATE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddTransactionCommand.MESSAGE_USAGE + "err"));
+                    AddTransactionCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DESCRIPTION, PREFIX_AMOUNT,
