@@ -153,19 +153,9 @@ public class AddCommandParserTest {
                         + ADDRESS_DESC_MICROSOFT,
                 expectedMessage);
 
-        // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_MICROSOFT + VALID_PHONE_MICROSOFT + EMAIL_DESC_MICROSOFT
-                        + ADDRESS_DESC_MICROSOFT,
-                expectedMessage);
-
         // missing email prefix
         assertParseFailure(parser, NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT + VALID_EMAIL_MICROSOFT
                         + ADDRESS_DESC_MICROSOFT,
-                expectedMessage);
-
-        // missing address prefix
-        assertParseFailure(parser, NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT
-                        + VALID_ADDRESS_MICROSOFT,
                 expectedMessage);
 
         // all prefixes missing

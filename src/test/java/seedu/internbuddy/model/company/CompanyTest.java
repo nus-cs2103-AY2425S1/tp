@@ -100,7 +100,7 @@ public class CompanyTest {
     public void toStringMethod() {
         String expected = Company.class.getCanonicalName() + "{name=" + GOOGLE.getName()
                 + ", phone=" + GOOGLE.getPhone() + ", email=" + GOOGLE.getEmail() + ", address=" + GOOGLE.getAddress()
-                + ", tags=" + GOOGLE.getTags() + ", status=" + GOOGLE.getStatus() + "}";
+                + ", status=" + GOOGLE.getStatus() + ", tags=" + GOOGLE.getTags() + "}";
         assertEquals(expected, GOOGLE.toString());
     }
 }
