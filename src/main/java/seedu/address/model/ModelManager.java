@@ -127,6 +127,11 @@ public class ModelManager implements Model {
         return Order.orderExist(name);
     }
 
+    @Override
+    public boolean deleteOrder(String name) {
+        return Order.removeOrder(name);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

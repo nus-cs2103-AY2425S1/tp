@@ -91,4 +91,6 @@ public interface Model {
     void addOrder(String name);
 
     boolean hasOrder(String name);
+
+    boolean deleteOrder(String name);
 }
