@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class CredentialsTest {
     @Test
-    public void CredentialsTest() {
+    public void testFindUser() {
         Credentials testing = new Credentials("src/test/java/seedu/address/authentication/test.txt");
         assertTrue(testing.findUser("test1", "password"));
         assertTrue(testing.findUser("funnyfella", "heeheehaha@123"));
