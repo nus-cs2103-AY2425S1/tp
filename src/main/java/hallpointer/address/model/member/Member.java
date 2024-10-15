@@ -1,6 +1,7 @@
 package hallpointer.address.model.member;
 
 import static hallpointer.address.commons.util.CollectionUtil.requireAllNonNull;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -9,6 +10,8 @@ import java.util.Set;
 
 import hallpointer.address.commons.util.ToStringBuilder;
 import hallpointer.address.model.tag.Tag;
+import hallpointer.address.model.point.Point;
+import hallpointer.address.model.session.Session;
 
 /**
  * Represents a Member in the address book.
@@ -23,6 +26,8 @@ public class Member {
     // Data fields
     private final Room room;
     private final Set<Tag> tags = new HashSet<>();
+    private Point totalPoints;
+    private Set<Session> sessions = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -49,6 +54,7 @@ public class Member {
         this.telegram = telegram;
         this.room = room;
         this.tags.addAll(tags);
+        this.totalPoints = new Point(0);
     }
 
     public Name getName() {
@@ -69,6 +75,31 @@ public class Member {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Point getTotalPoints() {
+        return totalPoints;
+    }
+
+    public Set<Session> getSessions() {
+        return Collections.unmodifiableSet(sessions);
+    }
+
+    public void addPoints(Point points) {
+        requireNonNull(points);
+        this.totalPoints = new Point(this.totalPoints.points + points.points);
+    }
+
+    public void addSession(Session session) {
+        requireNonNull(session);
+        this.sessions.add(session);
+        this.totalPoints = new Point(this.totalPoints.points + session.getPoints().points);
+    }
+
+    public void removeSession(Session session) {
+        requireNonNull(session);
+        this.sessions.remove(session);
+        this.totalPoints = new Point(this.totalPoints.points - session.getPoints().points);
     }
 
     /**
@@ -120,6 +151,7 @@ public class Member {
                 .add("telegram", telegram)
                 .add("room", room)
                 .add("tags", tags)
+                .add("totalPoints", totalPoints)
                 .toString();
     }
 }

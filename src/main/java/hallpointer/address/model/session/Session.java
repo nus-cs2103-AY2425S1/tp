@@ -5,6 +5,7 @@ import static hallpointer.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import hallpointer.address.commons.util.ToStringBuilder;
+import hallpointer.address.model.point.Point;
 
 /**
  * Represents a Session in the system.
@@ -14,13 +15,13 @@ public class Session {
 
     // Identity fields
     private final SessionName sessionName;
-    private final int points;
+    private final Point points;
     private final SessionDate date;
 
     /**
      * Every field must be present and not null.
      */
-    public Session(SessionName sessionName, SessionDate date, int points) {
+    public Session(SessionName sessionName, SessionDate date, Point points) {
         requireAllNonNull(sessionName, date, points);
         this.sessionName = sessionName;
         this.date = date;
@@ -31,7 +32,7 @@ public class Session {
         return sessionName;
     }
 
-    public int getPoints() {
+    public Point getPoints() {
         return points;
     }
 
