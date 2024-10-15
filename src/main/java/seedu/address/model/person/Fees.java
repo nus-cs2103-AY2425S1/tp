@@ -50,8 +50,8 @@ public class Fees {
             return false;
         }
 
-        Fees otherClassId = (Fees) other;
-        return value.equals(otherClassId.value);
+        Fees otherFees = (Fees) other;
+        return value.equals(otherFees.value);
     }
 
     @Override
