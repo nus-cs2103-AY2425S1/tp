@@ -126,6 +126,9 @@ public class Student {
         return Objects.hash(name, email, studentNumber, tags);
     }
 
+    /**
+     * Returns Student in an easy to read format for listing in Group cards.
+     */
     public String toDisplayString() {
         return new StringBuilder().append(name).append(" [").append(studentNumber).append(", ").append(email).append(
             "]").toString();

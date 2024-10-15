@@ -56,13 +56,13 @@ public class PersonCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         email.setText(student.getEmail().value);
         studentNumber.setText(student.getStudentNumber().value);
-        if(student.getGroup().equals(Optional.empty())){
+        if (student.getGroup().equals(Optional.empty())) {
             group.setText("Not in group yet.");
-        }else{
+        } else {
             group.setText(student.getGroup().toString());
         }
         student.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+            .sorted(Comparator.comparing(tag -> tag.tagName))
+            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
