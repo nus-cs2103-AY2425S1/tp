@@ -292,7 +292,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `ClinicBuddy` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ClinicBuddy` and the **Actor** is the `user`, who is a receptionist, unless specified otherwise)
 
 **Use case: Add a new patient**
 
@@ -351,8 +351,8 @@ Use case ends.
 
 **MSS**
 
-1. User inputs the NRIC or the name of the patient to search for.
-2. ClinicBuddy search and return the record.
+1. User inputs the NRIC of a patient to search for OR the names of the patients to search for, but not both.
+2. ClinicBuddy searches and returns the record(s).
 
 Use case ends.
 
