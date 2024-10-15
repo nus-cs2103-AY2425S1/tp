@@ -1,6 +1,5 @@
 package tutorease.address.logic.parser;
 
-import tutorease.address.model.person.Role;
 
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
