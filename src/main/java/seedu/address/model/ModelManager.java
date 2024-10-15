@@ -104,7 +104,7 @@ public class ModelManager implements Model {
 
     @Override
     public void addConcert(Concert concert) {
-        requireNonNull(concert);
+        addressBook.addConcert(concert);
         updateFilteredConcertList(PREDICATE_SHOW_ALL_CONCERTS);
     }
 

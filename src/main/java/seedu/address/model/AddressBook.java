@@ -52,12 +52,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the concert list with {@code concerts}. {@code concert} ,ust not
+     * contain duplicate concerts.
+     */
+    public void setConcerts(List<Concert> concerts) {
+        this.concerts.setConcerts(concerts);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setConcerts(newData.getConcertList());
     }
 
     //// concert-level operations
