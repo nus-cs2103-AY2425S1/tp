@@ -323,7 +323,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list persons
 2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
+3.  User requests to delete a specific person in the list using name or index
 4.  AddressBook deletes the person
 
     Use case ends.
@@ -337,6 +337,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The given index is invalid.
 
     * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given name have no exact match.
+
+  * 3b1. AddressBook filters based on given name.
+
+  * 3b2. AddressBook prompts user to input exact name or use index.
+
+    Use case resumes at step 2.
+
+* 3c. The given name have more than 1 exact match.
+
+    * 3c1. AddressBook filters based on given name.
+
+    * 3c2. AddressBook prompts user to use index instead.
+
+      Use case resumes at step 2.
+
+* 3d. The given name have no exact match or partial match.
+
+    * 3d1. AddressBook shows an error message.
 
       Use case resumes at step 2.
 

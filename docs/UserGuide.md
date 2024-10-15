@@ -129,20 +129,29 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the person with the specified `NAME` or the person at the specified `INDEX`
 
-Format: `delete KEYWORD`
+Format: `delete NAME` or `delete INDEX`
 
-* Deletes the person with the specified `KEYWORD`.
-* Only the name is matched.
-* Delete is case-insensitive. e.g `hans` will delete `Hans`
-* If more than one person matches the KEYWORD, 
-  an error message will be displayed indicating that multiple matches were found.
-* Partial words will be deleted e.g. `Han` will delete `Hans` if no other matches
+* For deletion by `NAME`:
+  * Deletes the person with the specified `NAME`.
+  * Only delete if `NAME` is exact match with contact full name.
+  * Delete is case-insensitive. e.g `hans` will delete `Hans`.
+  * If no exact match, list will be filtered based on given `NAME`.
+    AddressBook will then prompt user to use fullname or `INDEX`.
+  * If no exact and partial match,
+    AddressBook will then prompt user to use another `NAME` or `INDEX`.
+  * If more than 1 exact match, list will be filtered based on given `NAME`.
+    AddressBook will then prompt user to use `INDEX` instead.
+
+* For deletion by `INDEX`:
+  * Deletes the person at the specified INDEX.
+  * The index refers to the index number shown in the displayed person list.
+  * The index must be a positive integer 1, 2, 3, …​
 
 Examples:
 * `delete Alice`: Deletes the person named Alice from the address book.
-* `delete Al`: Deletes the person named Alice if it’s the only person matching the partial name "Al".
+* `delete 1`: Deletes the first person in the currently displayed list.
 
 ### Clearing all entries : `clear`
 
