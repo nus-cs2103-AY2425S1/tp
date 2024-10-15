@@ -5,7 +5,7 @@ package seedu.address.model.event;
  * Guarantees: details are present and not null, field values are validated.
  */
 public class EventName {
-    private String eventName;
+    private final String eventName;
 
     /**
      * Constructs a {@code Name}.

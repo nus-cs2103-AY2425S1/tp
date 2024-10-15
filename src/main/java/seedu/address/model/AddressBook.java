@@ -57,7 +57,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code events} must not contain duplicate events.
      */
     public void setEvents(List<Event> events) {
-        // this.events.setEvents(events); //Implement in future
+        this.events.setEvents(events);
     }
 
     /**
@@ -67,7 +67,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
-        // setEvents(newData.getEventList()); //Implement in future
+        setEvents(newData.getEventList());
     }
 
     //// person-level operations
@@ -181,6 +181,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public int hashCode() {
-        return persons.hashCode(); // events.hashCode(); //Implement in future
+        return persons.hashCode() + events.hashCode();
     }
 }
