@@ -9,6 +9,8 @@ import static java.util.Objects.requireNonNull;
 
 public class Remark {
 
+    public static final String MESSAGE_CONSTRAINTS = "Remark must contain only ASCII characters.";
+    public static final String VALIDATION_REGEX = "^[\\x00-\\x7F]+$";
     public final String value;
 
     /**
@@ -19,6 +21,13 @@ public class Remark {
     public Remark(String remark) {
         requireNonNull(remark);
         this.value = remark;
+    }
+
+    /**
+     * Returns true if a given string is a valid remark.
+     */
+    public static boolean isValidRemark(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
