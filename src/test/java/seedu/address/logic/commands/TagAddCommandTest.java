@@ -43,8 +43,8 @@ public class TagAddCommandTest {
         stubTagList.add(new Tag(VALID_TAG_FRIEND));
         TagAddCommand tagAddCommand = new TagAddCommand(editedPerson.getName(), stubTagList);
 
-        String expectedMessage = String.format(TagAddCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(editedPerson));
-
+        String expectedMessage = String.format(TagAddCommand.MESSAGE_ADD_TAG_SUCCESS,
+                Messages.formatForTags(editedPerson), Messages.getName(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
