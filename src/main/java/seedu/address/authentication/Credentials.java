@@ -12,8 +12,8 @@ import seedu.address.commons.core.LogsCenter;
  * Credentials represents the HR account manager.
  */
 public class Credentials {
-    private final File credentials;
     private static final Logger logger = LogsCenter.getLogger(Credentials.class);
+    private final File credentials;
 
     /**
      * Create a Credential Manager
@@ -40,6 +40,13 @@ public class Credentials {
         }
         return users;
     }
+
+    /**
+     * Checks if the correct combination of username and password exists.
+     * @param username
+     * @param password
+     * @return True if such user is found
+     */
     public boolean findUser(String username, String password) {
         logger.info("find user");
         HashMap<String, String> credentials = readCredentials();
