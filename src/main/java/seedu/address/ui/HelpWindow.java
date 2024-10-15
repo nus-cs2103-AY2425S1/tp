@@ -38,13 +38,13 @@ public class HelpWindow extends UiPart<Stage> {
             "   - Example:\n" +
             "       grade id/ 12345678 m/ CS2103T g/ A\n" +
             "\n3. Edit Student\n" +
-            "   - Purpose: Edits a student's details except for tag and course.\n" +
+            "   - Purpose: Edits a student's details according to the fields specified.\n" +
             "   - Command Format:\n" +
             "       edit [STUDENT_ID] [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]\n" +
             "   - Editable Fields:\n" +
-            "       n/ [STUDENT_NAME], p/ [PHONE_NUMBER], e/ [EMAIL], a/ [ADDRESS]\n" +
+            "       n/ [STUDENT_NAME], p/ [PHONE_NUMBER], e/ [EMAIL], a/ [ADDRESS], c/ [COURSE], t/ [TAG]\n" +
             "   - Example:\n" +
-            "       edit 12345678 n/ Jane Doe p/ 88888888 e/ janedoe@gmail.com a/ 456 John Doe Road\n" +
+            "       edit 12345678 n/ Jane Doe p/ 88888888 e/ janedoe@gmail.com a/ 456 John Doe Road c/ Physics t/ Student\n" +
             "\n4. Delete Student\n" +
             "   - Purpose: Removes a student from the address book.\n" +
             "   - Command Format:\n" +
