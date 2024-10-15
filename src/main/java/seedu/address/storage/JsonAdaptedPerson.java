@@ -11,7 +11,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.healthservice.HealthService;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Birthdate;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Sex;
 
 /**
  * Jackson-friendly version of {@link Person}.
