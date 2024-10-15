@@ -275,13 +275,13 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * are [_letting agents_](#glossary-letting-agent)
-* has a need to manage a significant number of [_client_](#glossary-client)'s personal and rental information
+* has a need to manage a significant number of [_client_](#glossary-client)'s personal and [_rental information_](#glossary-rental-information)
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage many [_client_](#glossary-client)'s personal and rental information, such as name, phone number, address, rental start date, rental end date, monthly rent amount, etc.
+**Value proposition**: manage many [_client_](#glossary-client)'s personal and [_rental information_](#glossary-rental-information), such as name, phone number, address, rental start date, rental end date, monthly rent amount, etc.
 
 ### User stories
 
@@ -290,19 +290,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                 | I can …​                                      | So that I can…​                                                         |
 |----------|----------------------------|--------------------------------------------------|----------------------------------------------------------------------------|
 | `* * *`  | user                       | save a _client_'s personal information           | contact them easily                                                        |
-| `* * *`  | user                       | save a _client_'s rental information             | view their respective properties                                           |
+| `* * *`  | user                       | save a _client_'s _rental information_             | view their respective properties                                           |
 | `* * *`  | user                       | edit a _client_'s personal information           | modify their personal details                                              |
-| `* * *`  | user                       | edit a _client_'s rental information             | modify their property's rental information                                 |
+| `* * *`  | user                       | edit a _client_'s _rental information_             | modify their property's _rental information_                                 |
 | `* * * ` | user                       | delete a _client_'s personal information         | clear my application when he/she is no longer my _client_                  |
-| `* * *`  | user                       | delete a _client_'s rental information           | clear my application when the property is not owned by my _client_ anymore |
+| `* * *`  | user                       | delete a _client_'s _rental information_           | clear my application when the property is not owned by my _client_ anymore |
 | `* * *`  | user                       | find a _client_'s personal information           | find the _client_ easily                                                   |
-| `* * *`  | user                       | find a _client_'s rental information             | find the _client_'s property easily                                        |
+| `* * *`  | user                       | find a _client_'s _rental information_             | find the _client_'s property easily                                        |
 | `* *`    | user                       | colour code a _client_                           | differentiate more important _clients_                                     |
 | `* *`    | user                       | attach files to a _client_                       | attach important contracts to the respective _clients_                     |
 | `* *`    | user                       | assign tags to _clients_                         | differentiate _clients_ by any interesting factors                         |
 | `* *`    | user                       | autofill CLI commands                            | easily assess the command line without typing the command again            |
 | `* *`    | user                       | export all _client_'s personal information       | save it somewhere else                                                     |
-| `* *`    | user                       | export a specific _client_'s rental information  | save it somewhere else                                                     |
+| `* *`    | user                       | export a specific _client_'s _rental information_  | save it somewhere else                                                     |
 | `*`      | user                       | send emails to a _client_                        | schedule meetings with them                                                |
 | `*`      | user                       | set reminders for a _client_                     | remember my schedule with individual _client_                              |
 | `*`      | user                       | lock my application                              | protect my data                                                            |
@@ -355,13 +355,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Add a [_client_](#glossary-client)'s rental information**
+**Use case: Add a [_client_](#glossary-client)'s [_rental information_](#glossary-rental-information)**
 
 **MSS**
 
-1.  User chooses to add rental information
+1.  User chooses to add _rental information_
 2.  User selects _client_
-3.  User enters _client_'s rental information
+3.  User enters _client_'s _rental information_
 4.  System validates user input
 5.  System updates new _client_ information
 6.  System notifies user upon successful add operation
@@ -386,19 +386,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case continues from step 4.
 
-* 4c. System detects error in _client_'s rental information
+* 4c. System detects error in _client_'s _rental information_
 
-    * 4c1. System prompts error for invalid _client_'s rental information
-    * 4c2. User enters new _client_'s rental information
-    * Steps 4c1-4c2 are repeated until _client_'s rental information is valid
+    * 4c1. System prompts error for invalid _client_'s _rental information_
+    * 4c2. User enters new _client_'s _rental information_
+    * Steps 4c1-4c2 are repeated until _client_'s _rental information_ is valid
   
     Use case continues from step 4.
 
-* 4d. System detects duplicated _client_'s rental information
+* 4d. System detects duplicated _client_'s _rental information_
 
-    * 4d1. System prompts error for duplicated _client_'s rental information
-    * 4d2. User enters new non-duplicated _client_'s rental information
-    * Steps 4d1-4d2 are repeated until _client_'s rental information is valid
+    * 4d1. System prompts error for duplicated _client_'s _rental information_
+    * 4d2. User enters new non-duplicated _client_'s _rental information_
+    * Steps 4d1-4d2 are repeated until _client_'s _rental information_ is valid
     
     Use case continues from step 5.
 
@@ -483,14 +483,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Edit a [_client_](#glossary-client)'s rental information**
+**Use case: Edit a [_client_](#glossary-client)'s [_rental information_](#glossary-rental-information)**
 
 **MSS**
 
-1.  User chooses to edit a _client_'s rental information.
-2.  User enters the rental information that he / she wants to update.
+1.  User chooses to edit a _client_'s _rental information_.
+2.  User enters the _rental information_ that he / she wants to update.
 3.  System validates user input.
-4.  System updates the _client_'s rental information as requested.
+4.  System updates the _client_'s _rental information_ as requested.
 5.  System notifies user for successful modification.
 
     Use case ends.
@@ -505,15 +505,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
   Use case resumes from step 3.
 
-* 3b. System detects error for invalid rental information.
+* 3b. System detects error for invalid _rental information_.
 
-    * 3b1. System prompts error for invalid rental information.
-    * 3b2. User enters new rental information.
-    * Steps 3b1-3b2 are repeated until the rental information is valid.
+    * 3b1. System prompts error for invalid _rental information_.
+    * 3b2. User enters new _rental information_.
+    * Steps 3b1-3b2 are repeated until the _rental information_ is valid.
   
   Use case resumes from step 3.
   
-* 4a. System fails to update the _client_'s rental information.
+* 4a. System fails to update the _client_'s _rental information_.
 
     * 3a1. System prompts user that edit has failed.
 
@@ -528,11 +528,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User chooses to delete a _client_ and all related rental information
+1.  User chooses to delete a _client_ and all related _rental information_
 2.  User types in a command consisting the index of the _client_
 3.  System prompts the user for confirmation
 4.  User confirms the deletion
-5.  System deletes that _client_ and all related rental information
+5.  System deletes that _client_ and all related _rental information_
 
     Use case ends.
 
@@ -551,15 +551,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 
-**Use case: Delete a rental information from a [_client_](#glossary-client)**
+**Use case: Delete a [_rental information_](#glossary-rental-information) from a [_client_](#glossary-client)**
 
 **MSS**
 
-1.  User chooses to delete a specific rental information from a _client_
-2.  User types in a command consisting the index of the _client_ and rental information
+1.  User chooses to delete a specific _rental information_ from a _client_
+2.  User types in a command consisting the index of the _client_ and _rental information_
 3.  System prompts the user for confirmation
 4.  User confirms the deletion
-5.  System deletes that rental information
+5.  System deletes that _rental information_
 
     Use case ends.
 
