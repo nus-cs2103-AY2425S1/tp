@@ -41,7 +41,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label ic;
     @FXML
-    private Label classes;
+    private FlowPane classes;
     @FXML
     private FlowPane tags;
 
@@ -59,7 +59,7 @@ public class PersonCard extends UiPart<Region> {
         ic.setText(person.getIc().value);
         person.getSubjects().stream()
                 .sorted(Comparator.comparing(subject -> subject.subject))
-                .forEach(subject -> tags.getChildren().add(new Label(subject.subject)));
+                .forEach(subject -> classes.getChildren().add(new Label(subject.subject)));
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
