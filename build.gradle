@@ -72,4 +72,11 @@ shadowJar {
     archiveFileName = 'addressbook.jar'
 }
 
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
 defaultTasks 'clean', 'test'

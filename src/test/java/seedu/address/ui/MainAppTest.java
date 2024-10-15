@@ -16,17 +16,14 @@ import seedu.address.MainApp;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.testutil.PersonBuilder;
+
 public class MainAppTest extends ApplicationTest {
 
-    public void addPerson() {
-
-    }
     @BeforeAll
     public static void setup() throws Exception {
         // Use FxToolkit to launch the JavaFX Application correctly
         FxToolkit.registerPrimaryStage();
         FxToolkit.setupApplication(MainApp::new);
-
     }
 
     @BeforeEach
