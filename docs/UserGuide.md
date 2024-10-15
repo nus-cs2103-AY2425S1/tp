@@ -145,6 +145,19 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Deleting a lesson : `lesson delete`
+
+Deletes the lesson at the specified index from the lesson schedule.
+
+Format: `lesson delete INDEX`
+
+* Deletes the lesson at the specified `INDEX`.
+* The index refers to the index number shown in the displayed lesson schedule.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `lesson delete 2` deletes the 2nd lesson in the lessons schedule.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
