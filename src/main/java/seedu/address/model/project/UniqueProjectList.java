@@ -16,7 +16,7 @@ import seedu.address.model.project.exceptions.ProjectNotFoundException;
  * A project is considered unique by comparing using {@code Project#isSameProject(Project)}. As such, adding and
  * updating of projects uses Project#isSameProject(Project) for equality so as to ensure that the project being added
  * or updated is unique in terms of identity in the UniqueProjectList. However, the removal of a project uses
- * Project#equals(Object) so as to ensure that the person with exactly the same fields will be removed.
+ * Project#equals(Object) so as to ensure that the project with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
