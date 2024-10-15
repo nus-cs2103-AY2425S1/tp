@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -188,6 +189,13 @@ public class AddCommandParserTest {
         AddCommandParser anotherParser = new AddCommandParser();
         assertTrue(parser.equals(anotherParser));
     }
+
+    @Test
+    public void equals_notSameTypeOfObject_returnsFalse() {
+        PersonBuilder personBuilder = new PersonBuilder();
+        assertFalse(parser.equals(personBuilder));
+    }
+
 
 
     @Test
