@@ -16,6 +16,7 @@ import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
+import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
 
 /**
@@ -128,6 +129,18 @@ public class ModelManager implements Model {
     public boolean hasTutorial(Tut tutorial) {
         requireNonNull(tutorial);
         return addressBook.hasTutorial(tutorial);
+    }
+
+    @Override
+    public void deleteTutorial(TutorialClass tutorialClass) {
+        requireNonNull(tutorialClass);
+        this.addressBook.deleteTutorial(tutorialClass);
+    }
+
+    @Override
+    public boolean hasTutorialClass(TutorialClass tutorialClass) {
+        requireNonNull(tutorialClass);
+        return addressBook.hasTutorialClass(tutorialClass);
     }
 
     //=========== Assignment ================================================================================

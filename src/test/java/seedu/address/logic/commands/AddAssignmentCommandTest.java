@@ -23,6 +23,8 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
 import seedu.address.testutil.TypicalAssignments;
 
@@ -198,6 +200,20 @@ public class AddAssignmentCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public boolean hasStudentWithId(StudentId studentId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasTutorialClass(TutorialClass tutorialClass) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTutorial(TutorialClass tutorialClass) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

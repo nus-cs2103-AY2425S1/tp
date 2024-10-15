@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
+import seedu.address.model.student.TutorialClass;
 import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
 import seedu.address.model.tut.Tut;
@@ -179,5 +180,27 @@ public class AddressBook implements ReadOnlyAddressBook {
             throw new TutNoFoundException();
         }
         tutKey.add(key);
+    }
+
+    /**
+     * Removes {@code tutorial} from this {@code AddressBook}.
+     * {@code tutorial} must exist in the address book.
+     *
+     * @param tutorialClass The tutorial class to be deleted.
+     */
+    public void deleteTutorial(TutorialClass tutorialClass) {
+        requireNonNull(tutorialClass);
+        this.tutorials.removeIf(id -> id.getTutorialClass().equals(tutorialClass));
+    }
+
+    /**
+     * Check if tutorial class exist in tutorial list.
+     *
+     * @param tutorialClass The tutorial class to be checked.
+     * @return True if tutorial class exist.
+     */
+    public boolean hasTutorialClass(TutorialClass tutorialClass) {
+        requireNonNull(tutorialClass);
+        return tutorials.stream().anyMatch(x -> x.getTutorialClass().equals(tutorialClass));
     }
 }

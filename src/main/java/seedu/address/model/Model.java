@@ -10,6 +10,7 @@ import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
+import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
 
 /**
@@ -141,6 +142,19 @@ public interface Model {
      * @return String of all current assignments.
      */
     String listAssignments();
+
+    /**
+     * Delete the specified tutorial class.
+     * The tutorial class must exist in the tutorial list.
+     *
+     * @param tutorialClass The tutorial class to be deleted.
+     */
+    void deleteTutorial(TutorialClass tutorialClass);
+
+    /**
+     * Returns true if a tutorial class exists in the tutorial list.
+     */
+    boolean hasTutorialClass(TutorialClass tutorialClass);
 
     /**
      * Returns true if a student with the specified studentId exists.
