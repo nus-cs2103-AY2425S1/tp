@@ -113,6 +113,24 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+### Filtering employees persons by skills: `filter`
+
+Finds employees who has at least one skill matching at least one of the keyword arguments.
+
+Format: `filter KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `webdev` will match `WebDev`
+* The order of the keywords does not matter. e.g. `frontend backend` will match `{frontend, backend}`
+* Only the skills are searched.
+* Only full words will be matched e.g. `database` will not match `databases`
+* Employees who have at least one skill matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `frontend backend database` will return `{frontend, uiux}`, `{backend, database, api}`
+
+Examples:
+* `filter frontend` returns `{frontend}` and `{frontend, uiux}`
+* `filter backend database` returns `{backend, api}`, `{database, sql}`<br>
+  ![result for 'find alex david'](images/filterJohnBetsyResult.png)
+  
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -198,6 +216,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [s/SKILL]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Filter** | `filter KEYWORD [MORE_KEYWORDS]`<br> e.g., `filter frontend backend`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
