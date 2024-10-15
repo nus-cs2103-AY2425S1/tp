@@ -19,16 +19,39 @@ public class Game {
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String gameName;
+    public final Username username;
+    public final SkillLevel skillLevel;
+    public final Role role;
+
 
     /**
      * Constructs a {@code Game}.
      *
      * @param gameName A valid Game name.
+     * @param username (Optional) A username.
+     * @param skillLevel (Optional) A skill level.
+     * @param role (Optional) A role.
      */
-    public Game(String gameName) {
+    public Game(String gameName, String username, String skillLevel, String role) {
         requireNonNull(gameName);
         checkArgument(isValidGameName(gameName), MESSAGE_CONSTRAINTS);
         this.gameName = gameName;
+        this.username = username != null ? new Username(username) : null;
+        this.skillLevel = skillLevel != null ? new SkillLevel(skillLevel) : null;
+        this.role = role != null ? new Role(role) : null;
+    }
+
+    // Overloaded constructors for convenience
+    public Game(String gameName) {
+        this(gameName, null, null, null);
+    }
+
+    public Game(String gameName, String username) {
+        this(gameName, username, null, null);
+    }
+
+    public Game(String gameName, String username, String skillLevel) {
+        this(gameName, username, skillLevel, null);
     }
 
     /**
@@ -62,7 +85,11 @@ public class Game {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + gameName + ']';
+        if (username == null) {
+            return '[' + gameName + ']';
+        } else {
+            return '[' + gameName + "]: " + username.toString();
+        }
     }
 
 }
