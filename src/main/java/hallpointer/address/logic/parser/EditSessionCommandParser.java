@@ -48,7 +48,8 @@
 
 //         EditSessionDescriptor editSessionDescriptor = new EditSessionDescriptor();
 //         if (argMultimap.getValue(PREFIX_SESSION_NAME).isPresent()) {
-//             editSessionDescriptor.setName(ParserUtil.parseSessionName(argMultimap.getValue(PREFIX_SESSION_NAME).get()));
+//             editSessionDescriptor.setName(
+//              ParserUtil.parseSessionName(argMultimap.getValue(PREFIX_SESSION_NAME).get()));
 //         }
 //         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
 //             editSessionDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));

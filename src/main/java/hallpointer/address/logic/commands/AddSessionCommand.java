@@ -33,7 +33,8 @@ public class AddSessionCommand extends Command {
             + PREFIX_POINTS + "2"
             + PREFIX_MEMBER + "1";
 
-    public static final String MESSAGE_SUCCESS = "Session %1$s on %2$s for %3$d points added successfully with %4$d index member attending.";
+    public static final String MESSAGE_SUCCESS = "Session %1$s on %2$s for %3$d points" 
+            + "added successfully with %4$d index member attending.";
     public static final String MESSAGE_DUPLICATE_SESSION = "Error: Session already exists.";
     public static final String MESSAGE_INVALID_INDEX = "Error: Invalid index specified.";
 
@@ -64,11 +65,10 @@ public class AddSessionCommand extends Command {
             if (index.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(MESSAGE_INVALID_INDEX);
             }
-            
             Member member = lastShownList.get(index.getZeroBased());
 
             member.addSession(toAdd);
-        }        
+        }
 
         model.addSession(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getSessionName(),

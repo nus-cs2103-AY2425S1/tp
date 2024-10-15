@@ -13,9 +13,9 @@ import java.util.stream.Stream;
 import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.logic.commands.AddSessionCommand;
 import hallpointer.address.logic.parser.exceptions.ParseException;
-import hallpointer.address.model.session.SessionDate;
 import hallpointer.address.model.point.Point;
 import hallpointer.address.model.session.Session;
+import hallpointer.address.model.session.SessionDate;
 import hallpointer.address.model.session.SessionName;
 
 /**
