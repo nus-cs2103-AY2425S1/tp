@@ -28,7 +28,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -92,6 +93,38 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Gets person based on their nric
+     * @param nric
+     * @return
+     */
+    public Person getPerson(String nric) {
+        return persons.get(nric);
+    }
+
+    /**
+     * Returns true if a link between the patient and caregiver exists
+     * @param patientNric
+     * @param caregiverNric
+     * @return
+     */
+    public boolean hasLink(String patientNric, String caregiverNric) {
+        Person patient = persons.get(patientNric);
+        Person caregiver = persons.get(caregiverNric);
+        return persons.hasLink(patient, caregiver);
+    }
+
+    /**
+     * Adds a link between the patient and caregiver
+     * @param patientNric
+     * @param caregiverNric
+     */
+    public void addLink(String patientNric, String caregiverNric) {
+        Person patient = persons.get(patientNric);
+        Person caregiver = persons.get(caregiverNric);
+        persons.addLink(patient, caregiver);
     }
 
     //// util methods

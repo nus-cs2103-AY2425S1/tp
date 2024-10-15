@@ -111,6 +111,16 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public boolean hasLink(String patientNric, String caregiverNric) {
+        return addressBook.hasLink(patientNric, caregiverNric);
+    }
+
+    @Override
+    public void addLink(String patientNric, String caregiverNric) {
+        addressBook.addLink(patientNric, caregiverNric);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

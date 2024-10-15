@@ -28,6 +28,10 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Role> roles = new HashSet<>();
 
+    // Dependents
+    private final Set<Person> caregivers = new HashSet<>();
+    private final Set<Person> patients = new HashSet<>();
+
     /**
      * Every field must be present and not null.
      */
@@ -60,6 +64,22 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public boolean hasCaregiver(Person caregiver) {
+        return caregivers.contains(caregiver);
+    }
+
+    public boolean hasPatient(Person patient) {
+        return patients.contains(patient);
+    }
+
+    public void addCaregiver(Person caregiver) {
+        caregivers.add(caregiver);
+    }
+
+    public void addPatient(Person patient) {
+        patients.add(patient);
     }
 
     /**
