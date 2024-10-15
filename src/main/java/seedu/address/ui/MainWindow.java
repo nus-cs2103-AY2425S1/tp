@@ -150,7 +150,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void handlePanelUpdate() {
         contactDetailsPanel.setPerson(logic.getFocusedPerson());
-        contactDetailsPanel.updatePanel();
     }
 
     /**

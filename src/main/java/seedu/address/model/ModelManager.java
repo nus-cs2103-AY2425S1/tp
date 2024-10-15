@@ -121,7 +121,11 @@ public class ModelManager implements Model {
 
     @Override
     public void setFocusedPerson(Index index) {
-        this.focusedPerson = this.filteredPersons.get(index.getZeroBased());
+        if (index == null) {
+            this.focusedPerson = null;
+        } else {
+            this.focusedPerson = this.filteredPersons.get(index.getZeroBased());
+        }
     }
 
     //=========== Filtered Person List Accessors =============================================================

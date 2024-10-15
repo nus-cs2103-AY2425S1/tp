@@ -44,7 +44,7 @@ public class PersonListPanel extends UiPart<Region> {
         this.contactDetails = contactDetails;
 
         // Logging here to verify the setter works
-        logger.info("ContactDetails reference: " + this.contactDetails);
+        logger.finer("ContactDetails reference: " + this.contactDetails);
     }
 
     /**
@@ -57,7 +57,6 @@ public class PersonListPanel extends UiPart<Region> {
 
         if (index != -1) {
             contactDetails.setPerson(selectedPerson);
-            contactDetails.updatePanel();
             logger.info("Clicked on person: " + selectedPerson + " at index " + index);
         } else {
             logger.info("Clicked on an empty area of the ListView");

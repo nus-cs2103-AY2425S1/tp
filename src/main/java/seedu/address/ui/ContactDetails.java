@@ -21,7 +21,7 @@ public class ContactDetails extends UiPart<Region> {
     private Person person;
 
     @FXML
-    private HBox contactDetailPlane;
+    private HBox contactDetailPane;
 
     @FXML
     private Label name;
@@ -46,6 +46,7 @@ public class ContactDetails extends UiPart<Region> {
      */
     public ContactDetails(Person person) {
         super(FXML);
+        this.person = person;
     }
 
     /**
@@ -55,12 +56,6 @@ public class ContactDetails extends UiPart<Region> {
      */
     public void setPerson(Person person) {
         this.person = person;
-    }
-
-    /**
-     * Updates the contact details panel with person info.
-     */
-    public void updatePanel() {
         this.clearPanel();
         this.setPanelInformation();
     }
@@ -71,10 +66,10 @@ public class ContactDetails extends UiPart<Region> {
     private void clearPanel() {
         // Clear existing labels
         name.setText("");
-        phoneNo.setText("Mobile: ");
-        email.setText("Email: ");
-        address.setText("Address: ");
-        notes.setText("Notes: ");
+        phoneNo.setText("");
+        email.setText("");
+        address.setText("");
+        notes.setText("");
         notesList.getChildren().clear();
     }
 
@@ -84,12 +79,12 @@ public class ContactDetails extends UiPart<Region> {
     private void setPanelInformation() {
         // Update with new person details if person is not null
         if (person != null) {
-            logger.info("Displayig info of " + person.toString());
+            logger.info("Displaying info of " + person.toString());
 
-            name.setText(name.getText() + person.getName().fullName);
-            phoneNo.setText(phoneNo.getText() + person.getPhone().toString());
-            email.setText(email.getText() + person.getEmail().toString());
-            address.setText(address.getText() + person.getAddress().toString());
+            name.setText(person.getName().fullName);
+            phoneNo.setText("Mobile: " + person.getPhone().toString());
+            email.setText("Email: " + person.getEmail().toString());
+            address.setText("Address: " + person.getAddress().toString());
         }
     }
 
