@@ -8,12 +8,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents the time of a delivery in the application.
+ * Represents the date and time of a delivery in the application.
  */
 public class Time {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Time should be in the format dd-MM-yyyy HH:mm or dd-MM-yyyy, and must not be blank.";
+            "Time should be in the format dd-MM-yyyy HH:mm and must not be blank.";
 
     public static final DateTimeFormatter FORMATTER_TIME =
             DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");

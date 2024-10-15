@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddDeliveryCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteDeliveryCommand;
@@ -27,8 +28,11 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkDeliveryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.DeliveryBuilder;
+import seedu.address.testutil.DeliveryUtil;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -42,6 +46,14 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
+    }
+
+    @Test
+    public void parseCommand_add_delivery() throws Exception {
+        Delivery delivery = new DeliveryBuilder().buildWithNullSender();
+        AddDeliveryCommand command = (AddDeliveryCommand) parser.parseCommand(DeliveryUtil
+                .getDeliveryCommand(delivery));
+        assertEquals(new AddDeliveryCommand(delivery), command);
     }
 
     @Test
