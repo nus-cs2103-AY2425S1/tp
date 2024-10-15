@@ -16,7 +16,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Property;
 
-
 /**
  * Adds a property to the list of properties to sell for a specific contact.
  */

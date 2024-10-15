@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSING_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTAL_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLING_PRICE;
@@ -45,8 +46,9 @@ public class AddPropertyToSellParser implements Parser<AddPropertyToSellCommand>
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddPropertyToSellCommand.MESSAGE_USAGE), pe);
+            /*throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddPropertyToSellCommand.MESSAGE_USAGE), pe);*/
+            throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         // Removed this condition, not sure what it means :/
