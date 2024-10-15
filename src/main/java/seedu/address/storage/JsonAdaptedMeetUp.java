@@ -7,11 +7,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.meetup.From;
+import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.model.meetup.MeetUpFrom;
-import seedu.address.model.meetup.MeetUpInfo;
-import seedu.address.model.meetup.MeetUpName;
-import seedu.address.model.meetup.MeetUpTo;
+import seedu.address.model.meetup.Name;
+import seedu.address.model.meetup.To;
 
 /**
  * Jackson-friendly version of {@link MeetUp}.
@@ -36,6 +36,7 @@ class JsonAdaptedMeetUp {
     @JsonCreator
     public JsonAdaptedMeetUp(@JsonProperty("name") String name, @JsonProperty("info") String info,
             @JsonProperty("from") String from, @JsonProperty("to") String to) {
+
         this.name = name;
         this.info = info;
         this.from = from;
@@ -93,5 +94,4 @@ class JsonAdaptedMeetUp {
 
         return new MeetUp(modelName, modelInfo, modelFrom, modelTo);
     }
-
 }

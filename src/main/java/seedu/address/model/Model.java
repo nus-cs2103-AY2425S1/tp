@@ -89,20 +89,20 @@ public interface Model {
 
     // ============================ MeetUp Model - To be refactored ==========================
 
-    /**
-     * Returns the user prefs' meet up list file path.
-     */
-    Path getMeetUpListFilePath();
+    //    /**
+    //     * Returns the user prefs' meet up list file path.
+    //     */
+    //    Path getMeetUpListFilePath(); // Remove after refactoring
 
-    /**
-     * Sets the user prefs' meet up list file path.
-     */
-    void setMeetUpListFilePath(Path meetUpListFilePath);
+    //    /**
+    //     * Sets the user prefs' meet up list file path.
+    //     */
+    //    void setMeetUpListFilePath(Path meetUpListFilePath); // Remove after refactoring
 
-    /**
-     * Replaces meet up list data with the data in {@code meetUpList}.
-     */
-    void setMeetUpList(ReadOnlyMeetUpList meetUpList);
+    //    /**
+    //     * Replaces meet up list data with the data in {@code meetUpList}.
+    //     */
+    //    void setMeetUpList(ReadOnlyMeetUpList meetUpList); // Remove after refactoring
 
     /** Returns the MeetUpList */
     ReadOnlyMeetUpList getMeetUpList();

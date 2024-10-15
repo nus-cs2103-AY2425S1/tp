@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a meetup's details in the meetup list.
  */
-public class MeetUpInfo {
+public class Info {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Meetup details should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -20,11 +20,11 @@ public class MeetUpInfo {
     public final String meetUpInfo;
 
     /**
-     * Constructs a {@code MeetUpInfo}.
+     * Constructs a {@code Info}.
      *
      * @param meetUpInfo A valid meetup detail.
      */
-    public MeetUpInfo(String meetUpInfo) {
+    public Info(String meetUpInfo) {
         requireNonNull(meetUpInfo);
         checkArgument(isValidMeetUpInfo(meetUpInfo), MESSAGE_CONSTRAINTS);
         this.meetUpInfo = meetUpInfo;
@@ -49,11 +49,11 @@ public class MeetUpInfo {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MeetUpInfo)) {
+        if (!(other instanceof Info)) {
             return false;
         }
 
-        MeetUpInfo otherInfo = (MeetUpInfo) other;
+        Info otherInfo = (Info) other;
         return meetUpInfo.equals(otherInfo.meetUpInfo);
     }
 
