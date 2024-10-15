@@ -350,13 +350,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-<<<<<<< Updated upstream
-1.  User requests to view a person using an attribute like name to filter for the person
+1.  User requests to view a person using an attribute like name to filter for the person.
 2.  AgentAssist returns a list of users which match the filter set in step 1.
-=======
-1.  User requests to view a person with a specific user ID.
-2.  AgentAssist returns the user with the corresponding ID.
->>>>>>> Stashed changes
 
     Use case ends.
 
@@ -373,17 +368,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-<<<<<<< Updated upstream
-1.  User performs <u>View a person (U3)</u>
-2.  AgentAssist returns the person
-3.  User requests to add a remark about the person
-4.  AgentAssist adds a remark for the person
-=======
-1.  User performs <u>View a person (U3)</u> .
-2.  AgentAssist returns the person.
-3.  User requests to add a remark about the person.
+1.  User performs <u>Filter for a person (U3)</u> .
+2.  AgentAssist returns a list of people, with the person in it.
+3.  User requests to add a remark about the person, using the index of the person in the list.
 4.  AgentAssist adds a remark for the person.
->>>>>>> Stashed changes
 
     Use case ends.
 
