@@ -27,7 +27,7 @@
                 <Insets right="5.0" />
               </HBox.margin>
             </Label>
-            <Button fx:id="openButton" mnemonicParsing="false" onAction="#handleURL" text="Open URL">
+            <Button fx:id="openButton" mnemonicParsing="false" onAction="#handleUrl" text="Open URL">
               <HBox.margin>
                 <Insets left="5.0" />
               </HBox.margin>
