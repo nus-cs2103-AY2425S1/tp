@@ -57,7 +57,9 @@ public class Messages {
      */
     public static String format(Delivery delivery) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(delivery.getAddress())
+        builder.append(delivery.getItemName())
+            .append("; ")
+            .append(delivery.getAddress())
             .append("; ")
             .append(delivery.getCost())
             .append("; ")

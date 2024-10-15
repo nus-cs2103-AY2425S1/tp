@@ -28,6 +28,7 @@ import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Eta;
+import seedu.address.model.delivery.ItemName;
 import seedu.address.model.delivery.Time;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -61,17 +62,19 @@ public class EditCommand extends Command {
            + "by the index number used in the displayed delivery list. "
            + "Existing values will be overwritten by the input values.\n"
            + "Parameters: INDEX (must be a positive integer) "
+           + "[" + PREFIX_NAME + "ITEM NAME] "
            + "[" + PREFIX_ADDRESS + "ADDRESS] "
            + "[" + PREFIX_COST + "COST] "
            + "[" + PREFIX_ETA + "ETA]\n"
            + "Example: " + COMMAND_WORD + " 1 "
+           + PREFIX_NAME + "TV "
            + PREFIX_ADDRESS + "Clementi Ave 3, Blk 462, S120311 "
            + PREFIX_COST + "$300";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_EDIT_DELIVERY_SUCCESS = "Edited Delivery: %1$s";
+    public static final String MESSAGE_EDIT_DELIVERY_SUCCESS = "Edited Delivery %d: %2$s";
 
 
     private final Index index;
@@ -118,6 +121,9 @@ public class EditCommand extends Command {
         }
     }
 
+    /**
+     * Edits person according to descriptor and returns CommandResult
+     */
     private CommandResult editPerson(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -135,9 +141,14 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(
+            String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson))
+        );
     }
 
+    /**
+     * Edits delivery according to descriptor and returns CommandResult
+     */
     private CommandResult editDelivery() throws CommandException {
         Person inspectedPerson = InspectWindow.getInspectedPerson();
 
@@ -151,7 +162,9 @@ public class EditCommand extends Command {
         assert editDeliveryDescriptor != null;
         Delivery editedDelivery = createEditedDelivery(deliveryToEdit, editDeliveryDescriptor);
         inspectedPerson.setDelivery(deliveryToEdit, editedDelivery);
-        return new CommandResult(String.format(MESSAGE_EDIT_DELIVERY_SUCCESS, Messages.format(editedDelivery)));
+        return new CommandResult(
+            String.format(MESSAGE_EDIT_DELIVERY_SUCCESS, index.getOneBased(), Messages.format(editedDelivery))
+        );
     }
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
@@ -169,14 +182,19 @@ public class EditCommand extends Command {
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
+    /**
+     * Creates and returns a {@code Delivery} with the details of {@code toEdit}
+     * edited with {@code descriptor}.
+     */
     private static Delivery createEditedDelivery(Delivery toEdit, EditDeliveryDescriptor descriptor) {
         assert toEdit != null;
 
+        ItemName itemName = descriptor.getItemName().orElse(toEdit.getItemName());
         Address updatedAddress = descriptor.getAddress().orElse(toEdit.getAddress());
         Cost updatedCost = descriptor.getCost().orElse(toEdit.getCost());
         Eta updatedEta = descriptor.getEta().orElse(toEdit.getEta());
 
-        return new Delivery(updatedAddress, updatedCost, updatedEta);
+        return new Delivery(itemName, updatedAddress, updatedCost, updatedEta);
     }
 
     @Override
@@ -319,6 +337,7 @@ public class EditCommand extends Command {
      * Stores the details to edit the Delivery with
      */
     public static class EditDeliveryDescriptor {
+        private ItemName itemName;
         private Address address;
         private Cost cost;
         private Date date;
@@ -331,6 +350,7 @@ public class EditCommand extends Command {
          * Copy constructor.
          */
         public EditDeliveryDescriptor(EditDeliveryDescriptor toCopy) {
+            setItemName(toCopy.itemName);
             setAddress(toCopy.address);
             setCost(toCopy.cost);
             setDate(toCopy.date);
@@ -343,6 +363,14 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(address, cost, date, time, eta);
+        }
+
+        public void setItemName(ItemName itemName) {
+            this.itemName = itemName;
+        }
+
+        public Optional<ItemName> getItemName() {
+            return Optional.ofNullable(itemName);
         }
 
         public void setAddress(Address address) {

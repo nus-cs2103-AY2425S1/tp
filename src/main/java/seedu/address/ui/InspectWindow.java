@@ -235,9 +235,6 @@ public class InspectWindow extends UiPart<Stage> {
             } else {
                 return commandResult;
             }
-//            } else {
-//                throw new CommandException("Not yet implemented");
-//            }
 
             return commandResult;
         } catch (CommandException | ParseException e) {

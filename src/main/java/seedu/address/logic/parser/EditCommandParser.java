@@ -4,13 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ETA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import java.util.Collection;
@@ -82,22 +80,19 @@ public class EditCommandParser implements Parser<EditCommand> {
     private EditCommand getEditDeliveryCommand(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_ADDRESS, PREFIX_COST, PREFIX_DATE, PREFIX_TIME, PREFIX_ETA);
+            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_COST, PREFIX_ETA);
         Index index = parseIndex(argMultimap);
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ADDRESS, PREFIX_COST, PREFIX_DATE, PREFIX_TIME, PREFIX_ETA);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_COST, PREFIX_ETA);
 
         EditDeliveryDescriptor editDeliveryDescriptor = new EditDeliveryDescriptor();
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editDeliveryDescriptor.setItemName(ParserUtil.parseItemName(argMultimap.getValue(PREFIX_NAME).get()));
+        }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editDeliveryDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_COST).isPresent()) {
             editDeliveryDescriptor.setCost(ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get()));
-        }
-        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            editDeliveryDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
-            editDeliveryDescriptor.setTime(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get()));
         }
         if (argMultimap.getValue(PREFIX_ETA).isPresent()) {
             editDeliveryDescriptor.setEta(ParserUtil.parseEta(argMultimap.getValue(PREFIX_ETA).get()));
