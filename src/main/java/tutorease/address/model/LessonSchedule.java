@@ -16,6 +16,7 @@ public class LessonSchedule {
     {
         lessons = new UniqueLessonList();
     }
+
     public LessonSchedule() {
     }
 
@@ -26,7 +27,6 @@ public class LessonSchedule {
         this();
         resetData(toBeCopied);
     }
-
     /**
      * Replaces the contents of the lesson list with {@code lessons}.
      * {@code lessons} must not contain duplicate lessons.
@@ -89,5 +89,20 @@ public class LessonSchedule {
      */
     public void resetData(LessonSchedule newData) {
         lessons.setLessons(newData.getLessonList());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof LessonSchedule)) {
+            return false;
+        }
+
+        LessonSchedule otherLessonSchedule = (LessonSchedule) other;
+        return lessons.equals(otherLessonSchedule.lessons);
     }
 }
