@@ -26,7 +26,7 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     // New fields
-    private final String interest;
+    private final Interest interest;
     private final University university;
     private final Major major;
     private final Experience experience;
@@ -37,7 +37,7 @@ public class Person {
      * Interest and experience are initialized to empty strings.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, University university,
-                  Major major,String interest) {
+                  Major major, Interest interest) {
         requireAllNonNull(name, phone, email, address, tags, university, major);
         this.name = name;
         this.phone = phone;
@@ -75,7 +75,7 @@ public class Person {
         return major;
     }
 
-    public String getInterest() {
+    public Interest getInterest() {
         return interest;
     }
 

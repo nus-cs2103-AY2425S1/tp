@@ -165,9 +165,6 @@ public class ParserUtil {
     public static Interest parseInterest(String interest) throws ParseException {
         requireNonNull(interest);
         String trimmedInterest = interest.trim();
-        if (!Interest.isValidInterest(trimmedInterest)) {
-            throw new ParseException(Interest.MESSAGE_CONSTRAINTS);
-        }
         return new Interest(trimmedInterest);
     }
 

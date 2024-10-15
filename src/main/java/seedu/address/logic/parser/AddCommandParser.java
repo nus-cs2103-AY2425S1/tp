@@ -18,6 +18,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Interest;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -38,9 +39,9 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_INTEREST);
+                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_INTEREST, PREFIX_UNIVERSITY, PREFIX_MAJOR);
         boolean isValidBaseAdd = arePrefixesPresent(argMultimap, PREFIX_NAME,
-                PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL);
+                PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_UNIVERSITY, PREFIX_MAJOR);
         boolean isValidAddInterest = arePrefixesPresent(argMultimap, PREFIX_INTEREST);
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 && !arePrefixesPresent(argMultimap, PREFIX_INTEREST)) {
@@ -48,14 +49,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         if (isValidBaseAdd && !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        } else if (isValidAddInterest && argMultimap.getPreamble().isEmpty()) {
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                        PREFIX_UNIVERSITY, PREFIX_MAJOR);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_UNIVERSITY, PREFIX_MAJOR)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        } else if (isValidBaseAdd && argMultimap.getPreamble().isEmpty()) {
+            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
+                    PREFIX_UNIVERSITY, PREFIX_MAJOR);
         }
         if (arePrefixesPresent(argMultimap, PREFIX_INTEREST) && !argMultimap.getPreamble().isEmpty()) {
             String[] splitArgs = args.trim().split("\\s+");
@@ -69,26 +65,12 @@ public class AddCommandParser implements Parser<AddCommand> {
             Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
             Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-            Person person = new Person(name, phone, email, address, tagList, "");
-
+            // Parsing new fields
+            University university = ParserUtil.parseUniversity(argMultimap.getValue(PREFIX_UNIVERSITY).get());
+            Major major = ParserUtil.parseMajor(argMultimap.getValue(PREFIX_MAJOR).get());
+            Person person = new Person(name, phone, email, address, tagList, university, major, new Interest(""));
             return new AddCommand(person);
         }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_UNIVERSITY, PREFIX_MAJOR);
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        // Parsing new fields
-        University university = ParserUtil.parseUniversity(argMultimap.getValue(PREFIX_UNIVERSITY).get());
-        Major major = ParserUtil.parseMajor(argMultimap.getValue(PREFIX_MAJOR).get());
-        Person person = new Person(name, phone, email, address, tagList, university, major);
-        return new AddCommand(person);
-    }
-
     }
 
     /**

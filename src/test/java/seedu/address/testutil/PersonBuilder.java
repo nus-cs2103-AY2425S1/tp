@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Interest;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -24,6 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_UNIVERSITY = "NUS";
     public static final String DEFAULT_MAJOR = "Computer Science";
+    public static final String DEFAULT_INTEREST = "Swimming";
 
     private Name name;
     private Phone phone;
@@ -32,6 +34,7 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private University university;
     private Major major;
+    private Interest interest;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -44,6 +47,7 @@ public class PersonBuilder {
         tags = new HashSet<>();
         university = new University(DEFAULT_UNIVERSITY);
         major = new Major(DEFAULT_MAJOR);
+        interest = new Interest(DEFAULT_INTEREST);
     }
 
     /**
@@ -116,7 +120,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags, university, major,"");
+        return new Person(name, phone, email, address, tags, university, major, new Interest(""));
     }
 
 }
