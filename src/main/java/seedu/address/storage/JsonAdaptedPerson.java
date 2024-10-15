@@ -38,9 +38,10 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("idnetity number") String identityNumber,
+    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("identity number") String identityNumber,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-            @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("logs") List<JsonAdaptedLog> logs) {
         this.name = name;
         this.identityNumber = identityNumber;
         this.phone = phone;
@@ -48,6 +49,9 @@ class JsonAdaptedPerson {
         this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (logs != null) {
+            this.logs.addAll(logs);
         }
     }
 
@@ -63,9 +67,9 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        if (logs != null) {
-            this.logs.addAll(logs);
-        }
+        logs.addAll(source.getLogs().stream()
+                .map(JsonAdaptedLog::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -79,9 +83,9 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        final List<Log> sessionLogs = new ArrayList<>();
+        final List<Log> personLogs = new ArrayList<>();
         for (JsonAdaptedLog log : logs) {
-            sessionLogs.add(log.toModelType());
+            personLogs.add(log.toModelType());
         }
 
         if (name == null) {
@@ -126,7 +130,8 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelIdentityNumber, modelPhone, modelEmail, modelAddress, modelTags);
+        final Set<Log> modelLogs = new HashSet<>(personLogs);
+        return new Person(modelName, modelIdentityNumber, modelPhone, modelEmail, modelAddress, modelTags, modelLogs);
     }
 
 }

@@ -5,8 +5,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.log.AppointmentDate;
+import seedu.address.model.log.Log;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.IdentityNumber;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -33,10 +36,12 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(person.getName());
+        descriptor.setIdentityNumber(person.getIdentityNumber());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
+        descriptor.setLogs(person.getLogs());
     }
 
     /**
@@ -46,6 +51,15 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(new Name(name));
         return this;
     }
+
+    /**
+     * Sets the {@code Identity Number} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withIdentityNumber(String identityNumber) {
+        descriptor.setIdentityNumber(new IdentityNumber(identityNumber));
+        return this;
+    }
+
 
     /**
      * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
@@ -78,6 +92,26 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code logs} into a {@code Set<Log>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withLogs(String... logs) {
+        Set<Log> logSet = Stream.of(logs)
+                .map(log -> {
+                    String[] logParts = log.split("\\|", 2);
+                    if (logParts.length < 2) {
+                        throw new IllegalArgumentException("Log must be in the format 'date|details'");
+                    }
+                    AppointmentDate appointmentDate = new AppointmentDate(logParts[0].trim());
+                    String details = logParts[1].trim();
+                    return new Log(appointmentDate, details);
+                })
+                .collect(Collectors.toSet());
+        descriptor.setLogs(logSet);
         return this;
     }
 

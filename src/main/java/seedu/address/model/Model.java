@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.LogsList;
 import seedu.address.model.person.Person;
 
 /**
@@ -86,6 +85,4 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    /** Returns an unmodifiable view of a person's session log */
-    LogsList getLastShownLogsList();
 }

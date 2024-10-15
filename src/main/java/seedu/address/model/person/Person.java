@@ -27,12 +27,13 @@ public class Person {
     private final Address address;
     //private final LogsList logsList;
     private final Set<Tag> tags = new HashSet<>();
-    private final LogsList logsList;
+    private final Set<Log> logs = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, IdentityNumber identityNumber, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, IdentityNumber identityNumber, Phone phone, Email email, Address address, Set<Tag> tags,
+                  Set<Log> logs) {
         requireAllNonNull(name, identityNumber, phone, email, address, tags);
         this.name = name;
         this.identityNumber = identityNumber;
@@ -40,7 +41,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.logsList = null;
+        this.logs.addAll(logs);
     }
 
     public Name getName() {
@@ -71,17 +72,11 @@ public class Person {
     }
 
     /**
-     * Returns an immutable view of the logs list.
+     * Returns an immutable log set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
      */
-    public LogsList getLogsList() {
-        return logsList;
-    }
-
-    /**
-     * Adds a log to this person's log list.
-     */
-    public void addLog(Log log) {
-        logsList.addLog(log);
+    public Set<Log> getLogs() {
+        return Collections.unmodifiableSet(logs);
     }
 
     /**
@@ -113,17 +108,18 @@ public class Person {
         }
 
         return name.equals(otherPerson.name)
+                && identityNumber.equals(otherPerson.identityNumber)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && logsList.equals(otherPerson.logsList);
+                && logs.equals(otherPerson.logs);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, identityNumber, phone, email, address, tags, logsList);
+        return Objects.hash(name, identityNumber, phone, email, address, tags, logs);
     }
 
     @Override

@@ -9,11 +9,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.IdentityNumber;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.log.AppointmentDate;
+import seedu.address.model.log.Log;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -137,6 +135,40 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String logDetails} into a {@code Log}.
+     * Assumes that logDetails is in the format "date|details".
+     *
+     * @throws ParseException if the log string is invalid or cannot be parsed correctly.
+     */
+    public static Log parseLog(String logDetails) throws ParseException {
+        requireNonNull(logDetails);
+
+        String[] parts = logDetails.split("\\|", 2); // Split into two parts only
+        if (parts.length < 2) {
+            throw new ParseException("Log details must be in the format 'date|details'.");
+        }
+
+        AppointmentDate appointmentDate = new AppointmentDate(parts[0].trim());
+
+        String details = parts[1].trim();
+
+        return new Log(appointmentDate, details);
+    }
+
+    /**
+     * Parses {@code Collection<String> logs} into a {@code Set<Log>}.
+     */
+    public static Set<Log> parseLogs(Collection<String> logs) throws ParseException {
+        requireNonNull(logs);
+        final Set<Log> logSet = new HashSet<>();
+        for (String logDetails : logs) {
+            logSet.add(parseLog(logDetails));
+        }
+        return logSet;
+    }
+
 
     /**
      * Parses a {@code String id} into a formatted {@code String}.

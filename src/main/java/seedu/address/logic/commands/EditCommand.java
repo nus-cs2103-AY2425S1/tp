@@ -1,11 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -21,10 +17,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.log.Log;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.IdentityNumber;
-import seedu.address.model.person.LogsList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -42,10 +38,12 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_IDENTITY_NUMBER + "IDENTITY NUMBER] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_LOG + "APPOINTMENT DATE|ENTRY] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -104,8 +102,10 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Log> updatedLogs = editPersonDescriptor.getLogs().orElse(personToEdit.getLogs());
 
-        return new Person(updatedName, updatedIdentityNumber, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedIdentityNumber, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedLogs);
     }
 
     @Override
@@ -143,7 +143,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
-        private LogsList logsList;
+        private Set<Log> logs;
 
         public EditPersonDescriptor() {}
 
@@ -158,14 +158,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
-            setLogsList(toCopy.logsList);
+            setLogs(toCopy.logs);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, identityNumber, phone, email, address, tags, logs);
         }
 
         public void setName(Name name) {
@@ -225,12 +225,21 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        public void setLogsList(LogsList logsList) {
-            this.logsList = logsList;
+        /**
+         * Sets {@code logs} to this object's {@code logs}.
+         * A defensive copy of {@code logs} is used internally.
+         */
+        public void setLogs(Set<Log> logs) {
+            this.logs = (logs != null) ? new HashSet<>(logs) : null;
         }
 
-        public Optional<LogsList> getLogsList() {
-            return Optional.ofNullable(logsList);
+        /**
+         * Returns an unmodifiable log set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code logs} is null.
+         */
+        public Optional<Set<Log>> getLogs() {
+            return (logs != null) ? Optional.of(Collections.unmodifiableSet(logs)) : Optional.empty();
         }
 
         @Override
