@@ -37,8 +37,8 @@ public class ConcertDate {
      */
     public ConcertDate(String date) {
         requireNonNull(date);
-        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        concertDate = processDate(date);
+        checkArgument(isValidDate(date, INPUT_DATE_FORMATTER), MESSAGE_CONSTRAINTS);
+        concertDate = processDate(date, INPUT_DATE_FORMATTER, OUTPUT_DATE_FORMATTER);
     }
 
     /**
@@ -47,24 +47,13 @@ public class ConcertDate {
      * @param test A date to test.
      * @return true if the given string is a valid concert date.
      */
-    public static boolean isValidDate(String test) {
+    public static boolean isValidDate(String test, DateTimeFormatter formatter) {
         try {
-            LocalDateTime.parse(test, INPUT_DATE_FORMATTER);
+            LocalDateTime.parse(test, formatter);
             return true;
         } catch (DateTimeParseException e) {
             return false;
         }
-    }
-
-    /**
-     * Returns concert date in d MMM yyyy HHmm format.
-     *
-     * @param date A valid concert date.
-     * @return A output concert date.
-     */
-    public static String processDate(String date) {
-        LocalDateTime ldt = LocalDateTime.parse(date, INPUT_DATE_FORMATTER);
-        return ldt.format(OUTPUT_DATE_FORMATTER);
     }
 
     /**

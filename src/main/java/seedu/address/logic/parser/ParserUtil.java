@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.concert.ConcertDate.INPUT_DATE_FORMATTER;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -147,7 +148,7 @@ public class ParserUtil {
     public static ConcertDate parsDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if (!ConcertDate.isValidDate(trimmedDate)) {
+        if (!ConcertDate.isValidDate(trimmedDate, INPUT_DATE_FORMATTER)) {
             throw new ParseException(ConcertDate.MESSAGE_CONSTRAINTS);
         }
         return new ConcertDate(trimmedDate);

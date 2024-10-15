@@ -71,12 +71,17 @@ public class JsonAdaptedConcert {
         final Address modelAddress = new Address(address);
 
         // verify date
+        if (date == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ConcertDate.class.getSimpleName()));
+        }
+
+        if (!ConcertDate.isValidDate(date, OUTPUT_DATE_FORMATTER)) {
+            throw new IllegalValueException(ConcertDate.MESSAGE_CONSTRAINTS);
+        }
         // date is D MMM YYYY HHmm reverse the processdata when adding from json
         String formattedDate = ConcertDate.processDate(date, OUTPUT_DATE_FORMATTER,
                 INPUT_DATE_FORMATTER);
-        if (!ConcertDate.isValidDate(formattedDate)) {
-            throw new IllegalValueException(ConcertDate.MESSAGE_CONSTRAINTS);
-        }
         final ConcertDate modelDate = new ConcertDate(formattedDate);
 
         return new Concert(modelName, modelAddress, modelDate);
