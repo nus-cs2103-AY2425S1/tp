@@ -17,6 +17,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private static final State DEFAULT_STATE = new State("Students");
     private static final State GROUP_STATE = new State("Groups");
     private static final State GROUP_TASK_STATE = new State("GroupTask");
+    private static final State TASK_STATE = new State("Tasks");
     private State guiState = GROUP_STATE;
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
@@ -52,6 +53,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
      */
     public void setStateGroupTask() {
         this.guiState = GROUP_TASK_STATE;
+    }
+
+    public void setStateTasks() {
+        this.guiState = TASK_STATE;
     }
 
     public State getState() {
