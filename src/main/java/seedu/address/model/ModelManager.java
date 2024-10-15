@@ -151,7 +151,7 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Event List Accessors =============================================================
     /**
      * Returns an unmodifiable view of the list of {@code Event} backed by the internal list of
      * {@code versionedAddressBook}
