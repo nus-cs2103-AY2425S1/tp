@@ -1,14 +1,15 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.StringUtil;
-import seedu.address.commons.util.ToStringBuilder;
-
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.ToStringBuilder;
+
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Nric} matches any of the keywords given.
+ *
  */
+
 public class NricContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
@@ -42,3 +43,4 @@ public class NricContainsKeywordsPredicate implements Predicate<Person> {
         return new ToStringBuilder(this).add("keywords", keywords).toString();
     }
 }
+
