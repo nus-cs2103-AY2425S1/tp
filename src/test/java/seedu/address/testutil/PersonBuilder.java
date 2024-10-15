@@ -1,8 +1,11 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
+
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -30,6 +33,8 @@ public class PersonBuilder {
     private Address address;
     private Course course;
     private Tag tag;
+    private ArrayList<Module> modules;
+
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -42,6 +47,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         course = new Course(DEFAULT_COURSE);
         tag = new Tag(DEFAULT_TAG);
+        modules = new ArrayList<>();
     }
 
     /**
@@ -55,6 +61,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         course = personToCopy.getCourse();
         tag = personToCopy.getTag();
+        modules = personToCopy.getModules();
     }
 
     /**
@@ -113,7 +120,20 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Module} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withModule(String module) {
+        this.modules.add(new Module(module));
+        return this;
+    }
+
+    /**
+     * Builds the {@code Person}.
+     */
     public Person build() {
-        return new Person(studentId, name, phone, email, address, course, tag);
+        Person p = new Person(studentId, name, phone, email, address, course, tag);
+        p.setModules(modules);
+        return p;
     }
 }

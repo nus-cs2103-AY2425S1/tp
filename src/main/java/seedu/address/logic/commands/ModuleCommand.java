@@ -1,18 +1,18 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 
 /**
  * Assigns a course-specific grade to a student.
@@ -30,7 +30,7 @@ public class ModuleCommand extends Command {
             + PREFIX_STUDENTID + "12345678 "
             + PREFIX_MODULE + "CS2103T ";
 
-    public static final String MESSAGE_SUCCESS = "New grade added for %1$s";
+    public static final String MESSAGE_SUCCESS = "New module added for Student %1$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "This person does not exist in the address book";
     public static final String MESSAGE_DUPLICATE_MODULE = "The module %1$s already exists for this student";
 
@@ -68,12 +68,12 @@ public class ModuleCommand extends Command {
 
         ArrayList<Module> modules = person.getModules();
         if (modules.contains(module)) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_MODULE, module));
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_MODULE, module.value));
         }
 
         person.addModule(module);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, module));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, studentId));
     }
 
     @Override
@@ -94,6 +94,7 @@ public class ModuleCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("studentId", studentId)
                 .add("toAdd", module)
                 .toString();
     }

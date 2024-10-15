@@ -18,7 +18,7 @@ public class Module {
      */
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]+$";
 
-    public final String module;
+    public final String value;
     private Grade grade;
 
     /**
@@ -29,7 +29,7 @@ public class Module {
     public Module(String module) {
         requireNonNull(module);
         checkArgument(isValidModule(module), MESSAGE_CONSTRAINTS);
-        this.module = module;
+        this.value = module;
     }
 
     /**
@@ -45,7 +45,7 @@ public class Module {
 
     @Override
     public String toString() {
-        return module + ": " + (grade == null ? "Grade not assigned" : grade.toString());
+        return value + ": " + (grade == null ? "Grade not assigned" : grade.toString());
     }
 
     @Override
@@ -60,11 +60,11 @@ public class Module {
         }
 
         Module otherModule = (Module) other;
-        return module.equals(otherModule.module);
+        return value.equals(otherModule.value);
     }
 
     @Override
     public int hashCode() {
-        return module.hashCode();
+        return value.hashCode();
     }
 }

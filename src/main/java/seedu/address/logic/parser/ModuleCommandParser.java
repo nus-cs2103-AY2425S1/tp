@@ -1,15 +1,15 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
+
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.ModuleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.StudentId;
-
-import java.util.stream.Stream;
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 
 /**
  * Parses input arguments and creates a new ModuleCommand object

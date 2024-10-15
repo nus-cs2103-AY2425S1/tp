@@ -77,7 +77,7 @@ public class Person {
     }
 
     /**
-     * Adds a module. If the module already exists, it updates the grade.
+     * Adds a module.
      *
      * @param module The module for which to add or update the grade.
      */
@@ -87,7 +87,7 @@ public class Person {
     }
 
     /**
-     * Sets a module grade. If the module already exists, it updates the grade.
+     * Sets a module grade.
      *
      * @param module The module for which to add or update the grade.
      * @param grade The grade to associate with the module.
@@ -95,7 +95,9 @@ public class Person {
     public void setModuleGrade(Module module, Grade grade) {
         requireNonNull(module, "Module cannot be null");
         requireNonNull(grade, "Grade cannot be null");
-        module.setGrade(grade);
+        int index = modules.indexOf(module);
+        Module m = modules.get(index);
+        m.setGrade(grade);
     }
 
     /**
@@ -169,6 +171,7 @@ public class Person {
                 .add("address", address)
                 .add("course", course)
                 .add("tag", tag)
+                .add("modules", modules)
                 .toString();
     }
 

@@ -75,7 +75,7 @@ public class GradeCommand extends Command {
 
         ArrayList<Module> modules = person.getModules();
         if (!modules.contains(module)) {
-            throw new CommandException(String.format(MESSAGE_MODULE_NOT_FOUND, module));
+            throw new CommandException(String.format(MESSAGE_MODULE_NOT_FOUND, module.value));
         }
 
         person.setModuleGrade(module, grade);
@@ -101,7 +101,9 @@ public class GradeCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", module)
+                .add("studentId", studentId)
+                .add("module", module)
+                .add("toAdd", grade)
                 .toString();
     }
 }
