@@ -17,6 +17,9 @@ import seedu.address.model.tag.Tag;
  */
 public class Client {
 
+    public static final String NO_CLAIMS_MESSAGE = "No open claims";
+    public static final String OPEN_CLAIMS_MESSAGE = "%1$s open claims";
+
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -26,9 +29,6 @@ public class Client {
     private final Address address;
     private final InsurancePlansManager insurancePlansManager;
     private final Set<Tag> tags = new HashSet<>();
-
-    public static final String NO_CLAIMS_MESSAGE = "No open claims";
-    public static final String OPEN_CLAIMS_MESSAGE = "%1$s open claims";
 
     /**
      * Every field must be present and not null.
