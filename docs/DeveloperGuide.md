@@ -353,7 +353,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  ABCLI deletes the contact
 5.  ABCLI shows a success message
 6.  ABCLI shows the updated list of contacts on its interface
-    
+
 - Use case ends
 
 **Extensions**
@@ -379,7 +379,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 1a. The command is missing a name
   - 1a1. ABCLI shows an error message
   - Use case ends
-  
+
 - 1b. The command is missing a flag
   - 1b1 ABCLI shows an error message
   - Use case ends
@@ -400,7 +400,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 1a3. User requests to view seller contacts
     - 1a4. ABCLI shows the list of contacts of sellers on its interface
     - Use case ends
-  
+
 - 1b. t/ flag has invalid contact type
     - 1b1. ABCLI shows an error message
     - Use case ends
@@ -505,26 +505,26 @@ testers are expected to do more *exploratory* testing.
 1. ABCLI has to be packaged into a single JAR file.
 
 ### Glossary
-1. **ABCLI**  
+1. **ABCLI**
 Our product name.
 
-1. **CLI**  
+1. **CLI**
 The command line interface is a way to interact with a computer by typing text commands instead of using a mouse to click on icons.
 
-1. **Command Line**   
+1. **Command Line**
 A text box where you enter commands.
 
-1. **Flag**  
+1. **Flag**
 In our context, a flag is something preceded by a /, but is not the initial command. e.g in `add n/NAME`,  `n/` is a flag but `add` is not.
 
-1. **GUI**  
+1. **GUI**
 Graphical user interface. The screen you see when opening the application.
 
-1. [**Java**](https://www.java.com/en/)  
+1. [**Java**](https://www.java.com/en/)
 A programming language.
 
-1. **Parameter**  
+1. **Parameter**
 A value that you need to provide for the command to work. e.g in `add n/NAME`, `NAME` is a parameter.
 
-1. [**Windows**](https://en.wikipedia.org/wiki/Microsoft_Windows)  
+1. [**Windows**](https://en.wikipedia.org/wiki/Microsoft_Windows)
 An operating system.

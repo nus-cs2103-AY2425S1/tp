@@ -17,17 +17,18 @@ class JsonAdaptedMeetUp {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Meet up's %s field is missing!";
 
-    private final Name name;
-    private final Info info;
-    private final From from;
-    private final To to;
+    private final String name;
+    private final String info;
+    private final String from;
+    private final String to;
 
     /**
      * Constructs a {@code JsonAdaptedMeetUp} with the given meet up details.
      */
     @JsonCreator
-    public JsonAdaptedMeetUp(@JsonProperty("name") Name name, @JsonProperty("info") Info info,
-                             @JsonProperty("from") From from, @JsonProperty("to") To to) {
+    public JsonAdaptedMeetUp(@JsonProperty("name") String name, @JsonProperty("info") String info,
+            @JsonProperty("from") String from, @JsonProperty("to") String to) {
+
         this.name = name;
         this.info = info;
         this.from = from;
@@ -38,10 +39,10 @@ class JsonAdaptedMeetUp {
      * Converts a given {@code MeetUp} into this class for Jackson use.
      */
     public JsonAdaptedMeetUp(MeetUp source) {
-        name = source.getName();
-        info = source.getInfo();
-        from = source.getFrom();
-        to = source.getTo();
+        name = source.getName().toString();
+        info = source.getInfo().toString();
+        from = source.getFrom().toString();
+        to = source.getTo().toString();
     }
 
     /**
@@ -51,39 +52,30 @@ class JsonAdaptedMeetUp {
      */
     public MeetUp toModelType() throws IllegalValueException {
         // This can only be implemented after model is refactored
-        // if (name == null) {
-        //     throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
-        // }
-        // if (!Name.isValidName(name)) {
-        //     throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-        // }
-        // final Name modelName = new Name(name);
+        if (name == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Name.class.getSimpleName()));
+        }
+        final Name modelName = new Name(name);
 
-        // if (phone == null) {
-        //     throw new IllegalValueException(
-        // String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        // }
-        // if (!Phone.isValidPhone(phone)) {
-        //     throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        // }
-        // final Phone modelPhone = new Phone(phone);
+        if (info == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Info.class.getSimpleName()));
+        }
+        final Info modelInfo = new Info(info);
 
-        // if (email == null) {
-        //     throw new IllegalValueException(
-        // String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        // }
-        // if (!Email.isValidEmail(email)) {
-        //     throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        // }
-        // final Email modelEmail = new Email(email);
+        if (from == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    From.class.getSimpleName()));
+        }
+        final From modelFrom = new From(from);
 
-        // final Address modelAddress = new Address(address);
-        // final PersonType modelPersonType = new PersonType(personType);
+        if (to == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    To.class.getSimpleName()));
+        }
+        final To modelTo = new To(to);
 
-        // Placeholder code
-        From start = new From("2024-09-15 12:00");
-        To end = new To("2024-09-15 14:00");
-        return new MeetUp(name, info, start, end);
+        return new MeetUp(modelName, modelInfo, modelFrom, modelTo);
     }
-
 }

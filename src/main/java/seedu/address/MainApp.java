@@ -104,8 +104,10 @@ public class MainApp extends Application {
                 logger.info("Creating a new data file " + storage.getMeetUpListFilePath()
                         + " populated with a sample MeetUpList.");
             }
+
             initialMeetUpList = meetUpListOptional.orElseGet(SampleMeetUpDataUtil::getSampleMeetUpList);
             logger.info("initiala list is" + initialMeetUpList);
+
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getMeetUpListFilePath() + " could not be loaded."
                     + " Will be starting with an empty MeetUpList.");

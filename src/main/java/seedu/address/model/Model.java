@@ -89,26 +89,32 @@ public interface Model {
 
     // ============================ MeetUp Model - To be refactored ==========================
 
-    //    /**
-    //     * Returns the user prefs' meet up list file path.
-    //     */
-    //    Path getMeetUpListFilePath(); // Remove after refactoring
+    /**
+     * Returns the user prefs' meet up list file path.
+     */
+    Path getMeetUpListFilePath(); // Remove after refactoring
 
-    //    /**
-    //     * Sets the user prefs' meet up list file path.
-    //     */
-    //    void setMeetUpListFilePath(Path meetUpListFilePath); // Remove after refactoring
+    /**
+     * Sets the user prefs' meet up list file path.
+     */
+    void setMeetUpListFilePath(Path meetUpListFilePath); // Remove after refactoring
 
-    //    /**
-    //     * Replaces meet up list data with the data in {@code meetUpList}.
-    //     */
-    //    void setMeetUpList(ReadOnlyMeetUpList meetUpList); // Remove after refactoring
+    /**
+     * Replaces meet up list data with the data in {@code meetUpList}.
+     */
+    void setMeetUpList(ReadOnlyMeetUpList meetUpList); // Remove after refactoring
 
     /** Returns the MeetUpList */
     ReadOnlyMeetUpList getMeetUpList();
 
     /** Returns an unmodifiable view of the filtered meetup list */
     ObservableList<MeetUp> getFilteredMeetUpList();
+
+    /**
+     * Adds the given MeetUp.
+     * {@code MeetUp} must not already exist in the address book.
+     */
+    void addMeetUp(MeetUp meetUp);
 
     /**
      * Updates the given schedule's meetup in the schedule list.
@@ -126,4 +132,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredMeetUpList(Predicate<MeetUp> predicate);
+
+    /**
+     * Returns true if a MeetUp with the same identity as {@code MeetUp} exists in the MeetUp list.
+     */
+    boolean hasMeetUp(MeetUp meetUp);
 }

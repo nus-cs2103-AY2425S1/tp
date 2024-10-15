@@ -161,6 +161,21 @@ public class AddPersonCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public Path getMeetUpListFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setMeetUpListFilePath(Path meetUpListFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setMeetUpList(ReadOnlyMeetUpList meetUpList) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         // ============================ MeetUp Model - To be refactored ==========================
 
         @Override
@@ -171,6 +186,11 @@ public class AddPersonCommandTest {
         @Override
         public ObservableList<MeetUp> getFilteredMeetUpList() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addMeetUp(MeetUp meetUp) {
+
         }
 
         @Override
@@ -186,6 +206,11 @@ public class AddPersonCommandTest {
         @Override
         public void updateFilteredMeetUpList(Predicate<MeetUp> meetUp) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasMeetUp(MeetUp meetUp) {
+            return false;
         }
     }
 

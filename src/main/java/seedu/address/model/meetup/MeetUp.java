@@ -30,6 +30,20 @@ public class MeetUp {
     }
 
     /**
+     * Returns true if both meetups have the same name.
+     * This defines a weaker notion of equality between two meetups.
+     */
+    public boolean isSameMeetUp(MeetUp otherMeetUp) {
+        if (otherMeetUp == this) {
+            return true;
+        }
+
+        return otherMeetUp != null
+                && otherMeetUp.getName().equals(getName())
+                && otherMeetUp.getInfo().equals(getInfo());
+    }
+
+    /**
      * Returns true if both meetups have the same identity and data fields.
      * This defines a stronger notion of equality between two meetUps.
      */

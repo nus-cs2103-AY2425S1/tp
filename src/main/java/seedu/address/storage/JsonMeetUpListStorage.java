@@ -74,8 +74,6 @@ public class JsonMeetUpListStorage implements MeetUpListStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        logger.info("json serial is " + new JsonSerializableMeetUpList(meetUpList));
-        logger.info("json serial is " + new JsonSerializableMeetUpList(meetUpList));
         JsonUtil.saveJsonFile(new JsonSerializableMeetUpList(meetUpList), filePath);
     }
 

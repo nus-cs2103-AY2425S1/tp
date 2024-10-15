@@ -32,6 +32,7 @@ public class AddMeetUpCommand extends Command {
             + PREFIX_TO + "2024-02-03 15:30 ";
 
     public static final String MESSAGE_SUCCESS = "New Meetup added: %1$s";
+    public static final String MESSAGE_DUPLICATE_MEETUP = "This MeetUp already exists in the address book";
 
     private final MeetUp toAdd;
 
@@ -46,6 +47,12 @@ public class AddMeetUpCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.hasMeetUp(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_MEETUP);
+        }
+
+        model.addMeetUp(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
