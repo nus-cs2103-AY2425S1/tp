@@ -64,7 +64,7 @@ public class CommandTestUtil {
     public static final String INVALID_JOB_DESC = " " + PREFIX_JOB; // empty string not allowed for job
     public static final String INVALID_INCOME_DESC = " " + PREFIX_INCOME + "-999"; // negative numbers should not be
     // allowed
-    public static final String INVALID_TIER_DESC = " " + PREFIX_TIER + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TIER_DESC = " " + PREFIX_TIER + "platinum"; // not one of the 4 TierEnums
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
