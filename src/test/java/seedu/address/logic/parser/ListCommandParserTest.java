@@ -20,7 +20,8 @@ public class ListCommandParserTest {
 
     @Test
     public void parse_validSortOption_returnsListCommand() {
-        assertParseSuccess(parser, " s/alphabet", new ListCommand("alphabet"));
+        SortOption sortOption = new SortOption("alphabet");
+        assertParseSuccess(parser, " s/alphabet", new ListCommand(sortOption));
     }
 
     @Test
@@ -32,5 +33,11 @@ public class ListCommandParserTest {
     @Test
     public void parse_emptySortOption_throwsParseException() {
         assertParseFailure(parser, " s/", "Sort option cannot be empty.");
+    }
+
+    @Test
+    public void parse_invalidSortOption_throwsParseException() {
+        SortOption sortOption = new SortOption("alphabet");
+        assertParseFailure(parser, " s/name", SortOption.MESSAGE_CONSTRAINTS);
     }
 }

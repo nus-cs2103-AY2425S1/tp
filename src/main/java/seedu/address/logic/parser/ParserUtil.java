@@ -121,4 +121,19 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String sortOption} into a {@code SortOption}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given sortOption is invalid.
+     */
+    public static SortOption parseSortOption(String sortOption) throws ParseException {
+        requireNonNull(sortOption);
+        String trimmedOption = sortOption.trim();
+        if (!SortOption.isValidSortOption(trimmedOption)) {
+            throw new ParseException(SortOption.MESSAGE_CONSTRAINTS);
+        }
+        return new SortOption(trimmedOption);
+    }
 }
