@@ -22,7 +22,7 @@ public class ListClaimsCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) \n"
             + "Example: " + COMMAND_WORD + " 1 ";
 
-    public static final String MESSAGE_SUCCESS = "Listed claims for %1$s: %2$s";
+    public static final String MESSAGE_SUCCESS = "Listed claims! \n %1$s";
     public static final String MESSAGE_NO_CLAIMS = "Client %1$s has no claims";
 
     private final Index index;
@@ -44,7 +44,7 @@ public class ListClaimsCommand extends Command {
 
         Client clientToDisplay = lastShownList.get(index.getZeroBased());
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(clientToDisplay), clientToDisplay.accessClaims()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, clientToDisplay.accessClaims()));
     }
 
     @Override
