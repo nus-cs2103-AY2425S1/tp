@@ -10,6 +10,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -26,7 +28,8 @@ import seedu.address.model.student.Student;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new AssignmentList());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+            new AssignmentList(), new ArrayList<>());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -35,7 +38,8 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_STUDENT_SUCCESS,
                 Messages.format(studentToDelete));
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new AssignmentList());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
+                new AssignmentList(), new ArrayList<>());
         expectedModel.deleteStudent(studentToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -59,7 +63,8 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_STUDENT_SUCCESS,
                 Messages.format(studentToDelete));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new AssignmentList());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
+                new AssignmentList(), new ArrayList<>());
         expectedModel.deleteStudent(studentToDelete);
         showNoStudent(expectedModel);
 

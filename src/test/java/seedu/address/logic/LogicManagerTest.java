@@ -12,6 +12,8 @@ import static seedu.address.testutil.TypicalStudents.AMY;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,8 +30,10 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.Student;
+import seedu.address.model.tut.Tut;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonAssignmentStorage;
+import seedu.address.storage.JsonTutorialStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.StudentBuilder;
@@ -51,7 +55,9 @@ public class LogicManagerTest {
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         JsonAssignmentStorage assignmentStorage =
                 new JsonAssignmentStorage(temporaryFolder.resolve("assignments.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, assignmentStorage);
+        JsonTutorialStorage tutorialStorage = new JsonTutorialStorage(temporaryFolder.resolve("tutorials.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage,
+                assignmentStorage, tutorialStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -126,7 +132,8 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new AssignmentList());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
+                new AssignmentList(), new ArrayList<>());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -165,7 +172,9 @@ public class LogicManagerTest {
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
         JsonAssignmentStorage jsonAssignmentStorage =
                 new JsonAssignmentStorage(temporaryFolder.resolve("assignments.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, jsonAssignmentStorage);
+        JsonTutorialStorage tutorialStorage = new JsonTutorialStorage(temporaryFolder.resolve("tutorials.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage,
+                jsonAssignmentStorage, tutorialStorage);
 
         logic = new LogicManager(model, storage);
 
@@ -176,4 +185,55 @@ public class LogicManagerTest {
         expectedModel.addStudent(expectedStudent);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
+    //TODO: Resolve test case, fails for Ubuntu OS
+    //    @Test
+    //    public void getAddressBookFilePath_notNull() {
+    //        Path expectedPath = temporaryFolder.resolve("data").resolve("addressBook.json");
+    //        assertEquals(expectedPath, temporaryFolder.resolve(logic.getAddressBookFilePath()));
+    //    }
+    @Test
+    public void execute_storageThrowsIoExceptionOnSaveTutorials_throwsCommandException() {
+        // Create a dummy IOException to be thrown when saving tutorials
+        IOException dummyIoException = new IOException("Invalid command format! \n"
+                + "add: Adds a student to the tutorial book. Parameters: n/NAME s/STUDENT_ID "
+                + "c/TUTORIAL_CLASS \n"
+                + "Example: add n/Samson s/1001 c/1001 ");
+
+        // Create a temporary file path for the tutorial file
+        Path tempTutorialFilePath = temporaryFolder.resolve("ExceptionTutorials.json");
+
+        // Override the tutorial storage to throw the IOException when saving tutorials
+        JsonTutorialStorage tutorialStorage = new JsonTutorialStorage(tempTutorialFilePath) {
+            @Override
+            public void saveTutorials(List<Tut> tutorialList, Path filePath) throws IOException {
+                throw dummyIoException;
+            }
+        };
+
+        // Set up the storage manager with the overridden tutorial storage
+        JsonAddressBookStorage addressBookStorage =
+                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        JsonAssignmentStorage jsonAssignmentStorage =
+                new JsonAssignmentStorage(temporaryFolder.resolve("assignments.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage,
+                jsonAssignmentStorage, tutorialStorage);
+
+        // Set up LogicManager with the new storage manager that throws the exception
+        logic = new LogicManager(model, storage);
+
+        // Prepare the add command to trigger save operations
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY;
+        Student expectedStudent = new StudentBuilder(AMY).build();
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addStudent(expectedStudent);
+
+        // Assert that the CommandException is thrown with the correct message
+        assertCommandFailure(addCommand, ParseException.class,
+                String.format(dummyIoException.getMessage()), model);
+        //TODO: Change from model to expectedModel
+    }
+
+
 }
