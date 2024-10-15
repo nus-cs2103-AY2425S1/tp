@@ -8,6 +8,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 import seedu.address.model.person.Teacher;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -22,6 +23,8 @@ public class TeacherBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@example.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_SUBJECT = "Mathematics";
+    public static final String DEFAULT_CLASSES = "Class 1, Class 2";
 
     private Name name;
     private Gender gender;
@@ -29,6 +32,8 @@ public class TeacherBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Subject subject;
+    private Set<String> classes;
 
     /**
      * Creates a {@code TeacherBuilder} with the default details.
@@ -40,6 +45,8 @@ public class TeacherBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>(SampleDataUtil.getTagSet("friends"));
+        subject = new Subject(DEFAULT_SUBJECT);
+        classes = new HashSet<>(SampleDataUtil.getClassSet(DEFAULT_CLASSES));
     }
 
     /**
@@ -52,6 +59,8 @@ public class TeacherBuilder {
         email = teacherToCopy.getEmail();
         address = teacherToCopy.getAddress();
         tags = new HashSet<>(teacherToCopy.getTags());
+        subject = teacherToCopy.getSubject();
+        classes = new HashSet<>(teacherToCopy.getClasses());
     }
 
     /**
@@ -102,7 +111,23 @@ public class TeacherBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Subject} of the {@code Teacher} that we are building.
+     */
+    public TeacherBuilder withSubject(String subject) {
+        this.subject = new Subject(subject);
+        return this;
+    }
+
+    /**
+     * Parses the {@code classes} into a {@code Set<String>} and set it to the {@code Teacher} that we are building.
+     */
+    public TeacherBuilder withClasses(String... classes) {
+        this.classes = SampleDataUtil.getClassSet(classes);
+        return this;
+    }
+
     public Teacher build() {
-        return new Teacher(name, gender, phone, email, address, tags);
+        return new Teacher(name, gender, phone, email, address, tags, subject, classes);
     }
 }
