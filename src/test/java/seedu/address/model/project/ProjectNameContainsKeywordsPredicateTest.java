@@ -19,14 +19,17 @@ public class ProjectNameContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        ProjectNameContainsKeywordsPredicate firstPredicate = new ProjectNameContainsKeywordsPredicate(firstPredicateKeywordList);
-        ProjectNameContainsKeywordsPredicate secondPredicate = new ProjectNameContainsKeywordsPredicate(secondPredicateKeywordList);
+        ProjectNameContainsKeywordsPredicate firstPredicate =
+                new ProjectNameContainsKeywordsPredicate(firstPredicateKeywordList);
+        ProjectNameContainsKeywordsPredicate secondPredicate =
+                new ProjectNameContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        ProjectNameContainsKeywordsPredicate firstPredicateCopy = new ProjectNameContainsKeywordsPredicate(firstPredicateKeywordList);
+        ProjectNameContainsKeywordsPredicate firstPredicateCopy =
+                new ProjectNameContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -42,7 +45,8 @@ public class ProjectNameContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        ProjectNameContainsKeywordsPredicate predicate = new ProjectNameContainsKeywordsPredicate(Collections.singletonList("Alpha"));
+        ProjectNameContainsKeywordsPredicate predicate =
+                new ProjectNameContainsKeywordsPredicate(Collections.singletonList("Alpha"));
         assertTrue(predicate.test(new ProjectBuilder().withName("Project Alpha").build()));
 
         // Multiple keywords
@@ -61,7 +65,8 @@ public class ProjectNameContainsKeywordsPredicateTest {
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        ProjectNameContainsKeywordsPredicate predicate = new ProjectNameContainsKeywordsPredicate(Collections.emptyList());
+        ProjectNameContainsKeywordsPredicate predicate =
+                new ProjectNameContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new ProjectBuilder().withName("Alpha").build()));
 
         // Non-matching keyword

@@ -33,7 +33,8 @@ public class ProjectNameContainsKeywordsPredicate implements Predicate<Project> 
             return false;
         }
 
-        ProjectNameContainsKeywordsPredicate otherProjectNameContainsKeywordsPredicate = (ProjectNameContainsKeywordsPredicate) other;
+        ProjectNameContainsKeywordsPredicate otherProjectNameContainsKeywordsPredicate =
+                (ProjectNameContainsKeywordsPredicate) other;
         return keywords.equals(otherProjectNameContainsKeywordsPredicate.keywords);
     }
 
