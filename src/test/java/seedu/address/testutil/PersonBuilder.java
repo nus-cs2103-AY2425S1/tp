@@ -94,6 +94,14 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Job} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withJob(String job) {
+        this.job = new Job(job);
+        return this;
+    }
+
     public Person build() {
         return new Person(name, phone, email, address, job, tags);
     }
