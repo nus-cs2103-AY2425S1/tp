@@ -43,6 +43,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
     }
 
+    /**
+     * Return EditCommand for person, parsed from args
+     */
     private EditCommand getEditPersonCommand(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
@@ -77,6 +80,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         return new EditCommand(index, editPersonDescriptor);
     }
 
+    /**
+     * Return EditCommand for Delivery, parsed from args
+     */
     private EditCommand getEditDeliveryCommand(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
