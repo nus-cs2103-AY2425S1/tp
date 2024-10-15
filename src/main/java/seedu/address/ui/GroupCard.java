@@ -7,6 +7,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.group.Group;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 
 /**
  * An UI component that displays information of a {@code Student}.
@@ -43,6 +45,7 @@ public class GroupCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(group.getGroupName().fullName);
         group.getStudents().stream()
-                .forEach(student -> students.getChildren().add(new Label(student.toString())));
+                .forEach(student -> students.getChildren().add(
+                        new Label(student.getName() + " [" + student.getStudentNumber() + "]")));
     }
 }
