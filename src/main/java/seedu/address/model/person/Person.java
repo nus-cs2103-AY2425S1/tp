@@ -26,8 +26,7 @@ public class Person {
     private final Sex sex;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private Address address;
     private Allergy allergy;
     private BloodType bloodType;
     private HealthCondition healthCondition;
@@ -44,7 +43,6 @@ public class Person {
         this(name, nric, birthdate, sex, healthServices, new Phone("123"), new Email("dummy@gmail.com"));
     }
 
->>>>>>> Stashed changes
     /**
      * Every field must be present and not null.
      */
@@ -64,12 +62,16 @@ public class Person {
      * Only Name, NRIC, Sex, BirthDate, HealthServices field need to be present.
      * The other fields can be null
      */
-    public Person(Name name, Phone phone, Email email, Address address, Allergy allergy, BloodType bloodType,
+    public Person(Name name, Nric nric, Birthdate birthdate, Sex sex, Set<HealthService> healthServices, Phone phone, Email email, Address address, Allergy allergy, BloodType bloodType,
         HealthCondition healthCondition, HealthRecord healthRecord, Note note, Name nokName, Phone nokPhone) {
         requireAllNonNull(name, phone, email);
         this.name = name;
+        this.nric = nric;
+        this.birthdate = birthdate;
+        this.sex = sex;
         this.phone = phone;
         this.email = email;
+        this.healthServices.addAll(healthServices);
         this.address = address;
         this.allergy = allergy;
         this.bloodType = bloodType;
