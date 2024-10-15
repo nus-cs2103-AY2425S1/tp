@@ -499,3 +499,4 @@ testers are expected to do more *exploratory* testing.
    1a. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 2_{ more test cases …​ }_
+
