@@ -3,6 +3,11 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
@@ -57,6 +62,36 @@ public class Tag {
      */
     public String toString() {
         return '[' + tagName + ']';
+    }
+
+    /**
+     * Utility method to convert Set of Tags to strings delimited by commas
+     * @param tagList The Set of Tags to convert
+     * @return String of tags delimited by commas
+     */
+    public static String tagSetToString(Set<Tag> tagList) {
+        StringBuilder stringBuilder = new StringBuilder();
+        Iterator<Tag> it = tagList.iterator();
+        for (int i = 0; i < tagList.size(); i++) {
+            Tag t = it.next();
+            stringBuilder.append(t);
+            if (i != tagList.size() - 1) {
+                stringBuilder.append(", ");
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Utility method to parse tags delimited by spaces into a Set of Tags
+     * @param tagString Input string to parse
+     * @return
+     */
+    public static Set<Tag> stringToTagSet(String tagString) {
+        String[] strArr = tagString.split("\\s+"); // regex to catch multiple spaces
+        System.out.println(Arrays.toString(strArr));
+        Set<Tag> tagSet = Arrays.stream(strArr).map(s -> new Tag(s)).collect(Collectors.toSet());
+        return tagSet;
     }
 
 }
