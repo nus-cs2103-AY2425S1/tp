@@ -9,7 +9,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.delivery.exceptions.DeliveryNotFoundException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of deliveries that does not allow nulls.

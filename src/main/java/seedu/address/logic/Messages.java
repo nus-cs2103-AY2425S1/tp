@@ -52,17 +52,6 @@ public class Messages {
     }
 
     /**
-     * Formats the list of {@code person} for display to the user.
-     */
-    public static String formatPersonList(List<Person> personList) {
-        final StringBuilder builder = new StringBuilder();
-        for (Person person : personList) {
-            builder.append("\n").append(format(person));
-        }
-        return builder.toString();
-    }
-
-    /**
      * Formats the {@code delivery} for display to the user.
      */
     public static String format(Delivery delivery) {
@@ -81,6 +70,17 @@ public class Messages {
 
     /**
      * Formats the list of {@code person} for display to the user.
+     */
+    public static String formatPersonList(List<Person> personList) {
+        final StringBuilder builder = new StringBuilder();
+        for (Person person : personList) {
+            builder.append("\n").append(format(person));
+        }
+        return builder.toString();
+    }
+
+    /**
+     * Formats the list of {@code delivery} for display to the user.
      */
     public static String formatDeliveryList(List<Delivery> deliveryList) {
         final StringBuilder builder = new StringBuilder();
