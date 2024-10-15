@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -8,9 +10,16 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.FindAddressCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindEmailCommand;
 import seedu.address.logic.commands.FindNameCommand;
+import seedu.address.logic.commands.FindPhoneCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -28,7 +37,6 @@ public class FindCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
-
     @Test
     public void parse_validFindNameArgs_returnsFindNameCommand() {
         // no leading and trailing whitespaces
@@ -38,6 +46,132 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, "find n/ \n Alice \n \t Bob  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_missingNameAfterPrefix_throwsParseException() {
+        String input = "find n/"; // Input with empty name prefix
+        ParseException thrown = assertThrows(ParseException.class, () -> {
+            parser.parse(input);
+        });
+
+        // Check for correct error message
+        assertEquals("Name cannot be empty!", thrown.getMessage());
+
+    }
+
+    @Test
+    public void parse_missingNameWithTrailingWhiteSpace_throwsParseException() {
+        String input = "find n/ \n \t"; // Input with empty name prefix
+        ParseException thrown = assertThrows(ParseException.class, () -> {
+            parser.parse(input);
+        });
+
+        // Check for correct error message
+        assertEquals("Name cannot be empty!", thrown.getMessage());
+    }
+
+    @Test
+    public void parse_validFindAddressArgs_returnsFindAddressCommand() {
+        // no leading and trailing whitespaces
+        FindAddressCommand expectedFindCommand =
+                new FindAddressCommand(new AddressContainsKeywordsPredicate(Arrays.asList("5,", "Clementi",
+                        "Ave", "4,", "#03-945")));
+        assertParseSuccess(parser, "find a/5, Clementi Ave 4, #03-945", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "find a/ \n5, Clementi Ave 4, \t #03-945  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_missingAddressAfterPrefix_throwsParseException() {
+        String input = "find a/"; // Input with empty name prefix
+        ParseException thrown = assertThrows(ParseException.class, () -> {
+            parser.parse(input);
+        });
+
+        // Check for correct error message
+        assertEquals("Address cannot be empty!", thrown.getMessage());
+
+    }
+
+    @Test
+    public void missingAddressWithTrailingWhiteSpace_throwsParseException() {
+        String input = "find a/ \t \n"; // Input with empty name prefix
+        ParseException thrown = assertThrows(ParseException.class, () -> {
+            parser.parse(input);
+        });
+
+        // Check for correct error message
+        assertEquals("Address cannot be empty!", thrown.getMessage());
+    }
+
+    @Test
+    public void parse_validFindPhoneArgs_returnsFindPhoneCommand() {
+        // no leading and trailing whitespaces
+        FindPhoneCommand expectedFindCommand =
+                new FindPhoneCommand(new PhoneContainsKeywordsPredicate(Arrays.asList("91234567")));
+        assertParseSuccess(parser, "find p/91234567", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "find p/ \n91234567 \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_missingPhoneAfterPrefix_throwsParseException() {
+        String input = "find p/"; // Input with empty name prefix
+        ParseException thrown = assertThrows(ParseException.class, () -> {
+            parser.parse(input);
+        });
+
+        // Check for correct error message
+        assertEquals("Phone number cannot be empty!", thrown.getMessage());
+
+    }
+
+    @Test
+    public void parse_missingPhoneWithTrailingWhiteSpace_throwsParseException() {
+        String input = "find p/ \n \t"; // Input with empty name prefix
+        ParseException thrown = assertThrows(ParseException.class, () -> {
+            parser.parse(input);
+        });
+
+        // Check for correct error message
+        assertEquals("Phone number cannot be empty!", thrown.getMessage());
+    }
+
+    @Test
+    public void parse_validFindEmailArgs_returnsFindEmailCommand() {
+        // no leading and trailing whitespaces
+        FindEmailCommand expectedFindCommand =
+                new FindEmailCommand(new EmailContainsKeywordsPredicate(Arrays.asList("carlos@gmail.com")));
+        assertParseSuccess(parser, "find e/carlos@gmail.com", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "find e/ \t carlos@gmail.com", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_missingEmailAfterPrefix_throwsParseException() {
+        String input = "find e/"; // Input with empty name prefix
+        ParseException thrown = assertThrows(ParseException.class, () -> {
+            parser.parse(input);
+        });
+
+        // Check for correct error message
+        assertEquals("Email address cannot be empty!", thrown.getMessage());
+
+    }
+
+    @Test
+    public void parse_missingEmailWithTrailingWhiteSpace_throwsParseException() {
+        String input = "find e/ \n \t"; // Input with empty name prefix
+        ParseException thrown = assertThrows(ParseException.class, () -> {
+            parser.parse(input);
+        });
+
+        // Check for correct error message
+        assertEquals("Email address cannot be empty!", thrown.getMessage());
     }
 
 }
