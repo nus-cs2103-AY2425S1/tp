@@ -151,6 +151,12 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Populating with dummy data
+
+Adds dummy data to the social book.
+
+Format: `seed`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -203,3 +209,4 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
+**Seed**   | `seed`
