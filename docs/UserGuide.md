@@ -169,6 +169,34 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 - `add-client n/Betsy Crowe e/betsycrowe@example.com p/92345678 a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`
 
 ---
+<h3 style="color: #1877F2;">Adding a Car to a Client: <span class="highlight-feature">add-car</span></h3>
+
+**Format:**
+
+Adds a Car to a client (client must not already have a car).
+```shell
+add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL ​
+```
+
+**Parameters:**
+
+- `vrn/CAR_VRN`: Car's Vehicle Registration Number 
+- `vin/CAR_VIN`: Car's Vehicle Identification Number
+- `make/CAR_MAKE`: Car's make
+- `model/CAR_MODEL`: Car's model
+
+**Requirements:**
+
+- As stated above, client cannot already have a car.
+- **VRN** must follow the format listed [earlier](#glossary)
+- **VIN** must be a 17-character alphanumeric string.
+- **VRN** and **VIN** must be unique for each car.
+
+**Examples:**
+
+- `add-car 1 vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`
+
+---
 
 <h3 style="color: #1877F2;">Listing All Clients: <span class="highlight-feature">list</span></h3>
 

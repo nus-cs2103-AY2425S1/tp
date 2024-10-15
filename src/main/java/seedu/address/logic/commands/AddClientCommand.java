@@ -38,7 +38,7 @@ public class AddClientCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_VRN + "SGX 1234 B "
+            + PREFIX_VRN + "SGX1234B "
             + PREFIX_VIN + "KMHGH4JH3EU073801 "
             + PREFIX_MAKE + "Toyota "
             + PREFIX_MODEL + "Corolla ";
