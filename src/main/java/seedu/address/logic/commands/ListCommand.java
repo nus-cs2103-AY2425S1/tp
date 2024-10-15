@@ -17,13 +17,13 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all persons in the address book. "
-            + "Parameters: [/s SORT_FIELD] [/r]\n"
-            + "SORT_FIELD: firstname, lastname, or email\n"
-            + "Example: " + COMMAND_WORD + " /s lastname /r";
+            + "Parameters: [s/SORT_FIELD] [r/]\n"
+            + "SORT_FIELD: name or email\n"
+            + "Example: " + COMMAND_WORD + " s/name r/";
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
     public static final String MESSAGE_INVALID_SORT_FIELD = "Invalid sort field. "
-            + "Please use one of: firstname, lastname, email";
+            + "Please use either 'name' or 'email'";
 
     private final String sortField;
     private final boolean isReverse;
@@ -62,13 +62,8 @@ public class ListCommand extends Command {
 
     private Comparator<Person> getComparator(String field) throws CommandException {
         switch (field.toLowerCase()) {
-        case "firstname":
-            return Comparator.comparing(person -> person.getName().fullName.split("\\s+")[0]);
-        case "lastname":
-            return Comparator.comparing(person -> {
-                String[] names = person.getName().fullName.split("\\s+");
-                return names[names.length - 1];
-            });
+        case "name":
+            return Comparator.comparing(person -> person.getName().fullName);
         case "email":
             return Comparator.comparing(person -> person.getEmail().value);
         default:

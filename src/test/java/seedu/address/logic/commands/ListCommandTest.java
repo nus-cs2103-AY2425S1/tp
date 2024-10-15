@@ -41,23 +41,10 @@ public class ListCommandTest {
     }
 
     @Test
-    public void execute_listSortedByFirstName_success() {
-        ListCommand listCommand = new ListCommand("firstname", false);
+    public void execute_listSortedByName_success() {
+        ListCommand listCommand = new ListCommand("name", false);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.sortFilteredPersonList(Comparator.comparing(
-            person -> person.getName().fullName.split("\\s+")[0]
-        ));
-        assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
-    }
-
-    @Test
-    public void execute_listSortedByLastName_success() {
-        ListCommand listCommand = new ListCommand("lastname", false);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.sortFilteredPersonList(Comparator.comparing(person -> {
-            String[] names = person.getName().fullName.split("\\s+");
-            return names[names.length - 1];
-        }));
+        expectedModel.sortFilteredPersonList(Comparator.comparing(person -> person.getName().fullName));
         assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -70,11 +57,21 @@ public class ListCommandTest {
     }
 
     @Test
-    public void execute_listSortedByFirstNameReversed_success() {
-        ListCommand listCommand = new ListCommand("firstname", true);
+    public void execute_listSortedByNameReversed_success() {
+        ListCommand listCommand = new ListCommand("name", true);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.sortFilteredPersonList(
-            Comparator.comparing((Person person) -> person.getName().fullName.split("\\s+")[0]).reversed()
+            Comparator.comparing((Person person) -> person.getName().fullName).reversed()
+        );
+        assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_listSortedByEmailReversed_success() {
+        ListCommand listCommand = new ListCommand("email", true);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.sortFilteredPersonList(
+            Comparator.comparing((Person person) -> person.getEmail().value).reversed()
         );
         assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
