@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.AddAssignmentCommand;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentName;
@@ -16,9 +17,6 @@ import seedu.address.model.person.Name;
 
 public class AddAssignmentCommandParserTest {
 
-    private final AddAssignmentCommandParser parser = new AddAssignmentCommandParser();
-
-    // Common test input strings
     private static final String VALID_INPUT = " n/John Doe a/CS2103 Project d/2024-12-01 s/Y s/Y g/85.5";
     private static final String MISSING_NAME_INPUT = " a/CS2103 Project d/2024-12-01";
     private static final String MISSING_ASSIGNMENT_NAME_INPUT = " n/John Doe d/2024-12-01";
@@ -28,6 +26,8 @@ public class AddAssignmentCommandParserTest {
     private static final String GRADE_NOT_PROVIDED_INPUT = " n/John Doe a/CS2103 Project d/2024-12-01 s/Y";
     private static final String GRADING_STATUS_NOT_GRADED_INPUT = " n/John Doe a/CS2103 Project d/2024-12-01 s/N";
     private static final String STATUS_ONLY_INPUT = " n/John Doe a/CS2103 Project d/2024-12-01 s/Y";
+
+    private final AddAssignmentCommandParser parser = new AddAssignmentCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() throws Exception {
@@ -75,7 +75,7 @@ public class AddAssignmentCommandParserTest {
     }
 
     @Test
-    public void parse_gradeNotProvided_whenGradingStatusIsY_success() throws Exception {
+    public void parse_gradeNotProvidedWhenGradingStatusIsY_success() throws Exception {
         AddAssignmentCommand expectedCommand = new AddAssignmentCommand(
                 new Name("John Doe"),
                 new Assignment(
