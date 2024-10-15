@@ -20,7 +20,6 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private final TutorEaseStorage tutorEaseStorage;
     private final UserPrefsStorage userPrefsStorage;
-
     private final LessonScheduleStorage lessonScheduleStorage;
 
     /**
