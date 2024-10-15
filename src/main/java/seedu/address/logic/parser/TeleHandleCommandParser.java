@@ -34,9 +34,11 @@ public class TeleHandleCommandParser implements Parser<TeleHandleCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, TeleHandleCommand.MESSAGE_USAGE), ive);
         }
 
-        String teleHandle = argMultimap.getValue(PREFIX_TELEHANDLE).orElse("");
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TELEHANDLE);
 
-        return new TeleHandleCommand(index, new TelegramHandle(teleHandle));
+        TelegramHandle telegramHandle = ParserUtil.parseTelegramHandle(argMultimap.getValue(PREFIX_TELEHANDLE).get());
+
+        return new TeleHandleCommand(index, telegramHandle);
 
 
     }
