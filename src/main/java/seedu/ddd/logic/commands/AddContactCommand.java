@@ -120,7 +120,6 @@ public class AddContactCommand extends Command {
             throw new CommandException(INVALID_CONTACT_TYPE);
         }
 
-        System.out.println(toAdd.toString());
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
