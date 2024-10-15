@@ -233,6 +233,8 @@ public class MainWindow extends UiPart<Stage> {
                 changeSystemState(commandResult.getChangeState());
             }
 
+            fillInnerParts();
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);

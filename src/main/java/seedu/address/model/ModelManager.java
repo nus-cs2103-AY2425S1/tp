@@ -158,7 +158,9 @@ public class ModelManager implements Model {
     @Override
     public void addGroup(Group group) {
         addressBook.addGroup(group);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        if (userPrefs.getState().toString().equals(new State("Groups"))) {
+            updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        }
     }
 
     @Override
