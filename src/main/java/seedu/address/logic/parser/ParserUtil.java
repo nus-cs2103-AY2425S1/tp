@@ -13,6 +13,7 @@ import seedu.address.commons.util.DateUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.AddApptCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
@@ -23,7 +24,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -160,18 +160,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String allergy} into a {@code Allergy}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code allergy} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Allergy parseAllergy(String allergy) throws ParseException {
+        requireNonNull(allergy);
+        String trimmedAllergy = allergy.trim();
+        if (!Allergy.isValidAllergyName(trimmedAllergy)) {
+            throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Allergy(trimmedAllergy);
     }
 
     /**
@@ -203,15 +203,15 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> allergies} into a {@code Set<Allergy>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<Allergy> parseAllergies(Collection<String> allergies) throws ParseException {
+        requireNonNull(allergies);
+        final Set<Allergy> allergySet = new HashSet<>();
+        for (String allergyName : allergies) {
+            allergySet.add(parseAllergy(allergyName));
         }
-        return tagSet;
+        return allergySet;
     }
 
     /**

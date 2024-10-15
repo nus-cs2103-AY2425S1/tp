@@ -17,6 +17,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
@@ -29,7 +30,6 @@ import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
-import seedu.address.model.tag.Tag;
 
 /**
  * Adds a person to the address book.
@@ -120,7 +120,7 @@ public class AddApptCommand extends Command {
         DateOfBirth updatedDateOfBirth = personToEdit.getDateOfBirth();
         Gender updatedGender = personToEdit.getGender();
         Nric updatedNric = personToEdit.getNric();
-        Set<Tag> updatedTags = personToEdit.getTags();
+        Set<Allergy> updatedAllergys = personToEdit.getAllergies();
         Set<MedCon> updatedMedCon = personToEdit.getMedCons();
         Priority updatedPriority = personToEdit.getPriority();
         ArrayList<Appointment> oldAppointmentList = null;
@@ -139,7 +139,7 @@ public class AddApptCommand extends Command {
         Set<Appointment> newAppointments = new HashSet<>(oldAppointmentList);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNric, updatedAddress, updatedDateOfBirth,
-                          updatedGender, updatedTags, updatedPriority, newAppointments, updatedMedCon);
+                          updatedGender, updatedAllergys, updatedPriority, newAppointments, updatedMedCon);
     }
 
     @Override

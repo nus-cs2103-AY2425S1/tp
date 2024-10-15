@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.commands.PriorityCommand.PATIENT_DOES_NOT_EXIST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
 import java.util.List;
@@ -11,12 +11,12 @@ import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
 
 /**
- * Command to add a tag to a patient in the address book.
+ * Command to add an allergy to a patient in the address book.
  */
 public class AddAllergyCommand extends Command {
 
@@ -24,26 +24,26 @@ public class AddAllergyCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds allergy to the patient in the address book. "
             + "Parameters: NRIC (must be a valid NRIC in the system) "
-            + "[" + PREFIX_TAG + "Allergy]...\n"
+            + "[" + PREFIX_ALLERGY + "Allergy]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NRIC + "S1234567A "
-            + PREFIX_TAG + "Pollen "
-            + PREFIX_TAG + "Peanut";
+            + PREFIX_ALLERGY + "Pollen "
+            + PREFIX_ALLERGY + "Peanut";
 
-    public static final String MESSAGE_SUCCESS = "New tag added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TAG = "This allergy already exists in the address book %1$s";
+    public static final String MESSAGE_SUCCESS = "New allergy added: %1$s";
+    public static final String MESSAGE_DUPLICATE_ALLERGY = "This allergy already exists in the address book %1$s";
     public static final String MESSAGE_CONSTRAINT = "Allergy should be alphanumeric "
             + "and not exceed 30 characters long. \n%1$s";
     private final Nric nric;
-    private final Set<Tag> allergies;
+    private final Set<Allergy> allergies;
 
     /**
-     * Creates an AddAllergyCommand to add the specified {@code Tag} to the patient with the specified {@code Nric}.
+     * Creates an AddAllergyCommand to add the specified {@code Allergy} to the patient with the specified {@code Nric}.
      *
-     * @param nric The NRIC of the patient to add the tag to.
+     * @param nric The NRIC of the patient to add the allergy to.
      * @param allergies The allergies to be added to the patient.
      */
-    public AddAllergyCommand(Nric nric, Set<Tag> allergies) {
+    public AddAllergyCommand(Nric nric, Set<Allergy> allergies) {
         requireAllNonNull(nric, allergies);
         this.nric = nric;
         this.allergies = allergies;
@@ -54,11 +54,11 @@ public class AddAllergyCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
         for (Person person : lastShownList) {
             if (person.getNric().equals(this.nric)) {
-                Set<Tag> updatedallergieset = new HashSet<>(person.getTags());
+                Set<Allergy> updatedallergieset = new HashSet<>(person.getAllergies());
                 // check for duplicates
-                for (Tag tag : allergies) {
-                    if (!updatedallergieset.add(tag)) {
-                        throw new CommandException(String.format(MESSAGE_DUPLICATE_TAG, tag.toString()));
+                for (Allergy allergy : allergies) {
+                    if (!updatedallergieset.add(allergy)) {
+                        throw new CommandException(String.format(MESSAGE_DUPLICATE_ALLERGY, allergy.toString()));
                     }
                 }
                 Person editedPerson = new Person(

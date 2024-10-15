@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Allergy in the address book.
+ * Represents an Allergy in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidAllergyName(String)}
  */
 public class Allergy implements Comparable<Allergy> {

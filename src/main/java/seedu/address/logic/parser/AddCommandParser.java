@@ -18,6 +18,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
@@ -29,7 +30,6 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -61,14 +61,14 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = new HashSet<>();
+        Set<Allergy> allergyList = new HashSet<>();
         Set<Appointment> appointmentList = Collections.emptySet();
         Set<MedCon> medConList = Collections.emptySet();
         Priority priority = new Priority();
 
         logger.info("Successfully parsed all fields for AddCommand");
-        Person person = new Person(name, phone, email, nric, address, dob, gender, tagList, priority, appointmentList,
-                medConList);
+        Person person = new Person(name, phone, email, nric, address, dob, gender, allergyList,
+                priority, appointmentList, medConList);
         logger.info("Successfully created new Person object");
 
         return new AddCommand(person);

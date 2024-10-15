@@ -17,10 +17,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
 
 public class AddAllergyCommandTest {
 
@@ -35,8 +35,8 @@ public class AddAllergyCommandTest {
     public void execute_noNricFound() throws Exception {
         // ensures CommandException is thrown when provided with Nric that is not in addressbook
         Nric nric = new Nric("T1111111F");
-        Set<Tag> tags = ALICE.getTags();
-        AddAllergyCommand command = new AddAllergyCommand(nric, tags);
+        Set<Allergy> allergies = ALICE.getAllergies();
+        AddAllergyCommand command = new AddAllergyCommand(nric, allergies);
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 
@@ -45,26 +45,26 @@ public class AddAllergyCommandTest {
         // ensures CommandException is thrown when provided with Nric that is not in addressbook
         Nric nric = ALICE.getNric();
         String allergy = "Peanut allergy";
-        Set<Tag> tags = new HashSet<>();
-        tags.add(new Tag(allergy));
+        Set<Allergy> allergies = new HashSet<>();
+        allergies.add(new Allergy(allergy));
 
-        Set<Tag> expectedTags = new HashSet<>();
-        expectedTags.add(new Tag(allergy));
-        expectedTags.addAll(ALICE.getTags());
+        Set<Allergy> expectedTags = new HashSet<>();
+        expectedTags.add(new Allergy(allergy));
+        expectedTags.addAll(ALICE.getAllergies());
 
-        AddAllergyCommand command = new AddAllergyCommand(nric, tags);
+        AddAllergyCommand command = new AddAllergyCommand(nric, allergies);
         command.execute(model);
         Person alice = model.fetchPersonIfPresent(new NricMatchesPredicate(ALICE.getNric()))
                 .orElse(null);
-        assertEquals(expectedTags, alice.getTags());
+        assertEquals(expectedTags, alice.getAllergies());
     }
 
     @Test
     public void equals() {
         Nric aliceNric = ALICE.getNric();
-        Set<Tag> aliceTags = ALICE.getTags();
+        Set<Allergy> aliceTags = ALICE.getAllergies();
         Nric bobNric = BOB.getNric();
-        Set<Tag> bobTags = BOB.getTags();
+        Set<Allergy> bobTags = BOB.getAllergies();
         AddAllergyCommand addAliceAllergyCommand = new AddAllergyCommand(aliceNric, aliceTags);
         AddAllergyCommand addBobCommand = new AddAllergyCommand(bobNric, bobTags);
         // same object -> returns true

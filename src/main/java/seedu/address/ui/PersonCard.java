@@ -70,7 +70,7 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         priority.setText(person.getPriority().priority);
         addLabelsToFlowPane(person.getMedCons(), medCons);
-        addLabelsToFlowPane(person.getTags(), tags);
+        addLabelsToFlowPane(person.getAllergies(), tags);
         addLabelsToFlowPane(person.getAppointments(), appointments);
     }
 

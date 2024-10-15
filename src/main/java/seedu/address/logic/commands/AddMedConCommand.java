@@ -66,7 +66,7 @@ public class AddMedConCommand extends Command {
                 Person editedPerson = new Person(
                         person.getName(), person.getPhone(), person.getEmail(),
                         person.getNric(), person.getAddress(), person.getDateOfBirth(),
-                        person.getGender(), person.getTags(), person.getPriority(), person.getAppointments(),
+                        person.getGender(), person.getAllergies(), person.getPriority(), person.getAppointments(),
                         updatedMedConSet);
                 model.setPerson(person, editedPerson);
                 model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
