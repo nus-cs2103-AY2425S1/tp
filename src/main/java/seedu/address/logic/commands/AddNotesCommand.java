@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,11 +31,7 @@ public class AddNotesCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + "n/ High profile client.";
 
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Notes: %2$s";
-
     public static final String MESSAGE_ADD_NOTES_SUCCESS = "Added notes to Person: %1$s";
-    public static final String MESSAGE_DELETE_NOTES_SUCCESS = "Removed notes from Person: %1$s";
-
 
     private final Index index;
     private final Note note;
@@ -63,10 +58,13 @@ public class AddNotesCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-
-
         // Update notes with new note
         Set<Note> notesToEdit = new LinkedHashSet<>(personToEdit.getNotes());
+
+        if (notesToEdit.contains(note)) {
+            throw new CommandException(Note.DUPLICATE_MESSAGE_CONSTRAINTS);
+        }
+
         notesToEdit.add(note);
 
         Person editedPerson = new Person(
