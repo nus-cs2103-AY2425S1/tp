@@ -13,6 +13,30 @@ public class EventDescriptionTest {
     }
 
     @Test
+    public void constructor_invalidEventDescription_throwsIllegalArgumentException() {
+        String invalidEventDescription = " ";
+        assertThrows(IllegalArgumentException.class, () -> new EventDescription(invalidEventDescription));
+    }
+
+    @Test
+    public void isValidEventDescription() {
+        // null event description
+        assertThrows(NullPointerException.class, () -> EventDescription.isValidDescription(null));
+
+        // invalid event description
+        assertFalse(EventDescription.isValidDescription("")); // empty string
+        assertFalse(EventDescription.isValidDescription(" ")); // spaces only
+
+        // valid event description
+        assertTrue(EventDescription.isValidDescription("afternoon meeting")); // alphabets only
+        assertTrue(EventDescription.isValidDescription("12345")); // numbers only
+        assertTrue(EventDescription.isValidDescription("cs2103t lecture")); // alphanumeric characters
+        assertTrue(EventDescription.isValidDescription("CS2103T Project Meeting")); // with capital letters
+        assertTrue(EventDescription.isValidDescription(
+            "CS2103T Project Weekly Meeting on 14th October 2024 from 4pm to 6pm")); // long names
+    }
+
+    @Test
     public void equals() {
         EventDescription eventDescription = new EventDescription("Valid Event Description");
 
