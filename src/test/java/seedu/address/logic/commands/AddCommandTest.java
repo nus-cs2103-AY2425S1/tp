@@ -26,6 +26,7 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 import seedu.address.model.tut.Tut;
 import seedu.address.testutil.StudentBuilder;
 
@@ -206,6 +207,11 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public boolean hasStudentWithId(StudentId studentId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
@@ -224,6 +230,7 @@ public class AddCommandTest {
             requireNonNull(student);
             return this.student.isSameStudent(student);
         }
+
     }
 
     /**
@@ -236,6 +243,11 @@ public class AddCommandTest {
         public boolean hasStudent(Student student) {
             requireNonNull(student);
             return studentsAdded.stream().anyMatch(student::isSameStudent);
+        }
+
+        @Override
+        public boolean hasStudentWithId(StudentId studentId) {
+            return studentsAdded.stream().anyMatch(s -> s.getStudentId().equals(studentId));
         }
 
         @Override

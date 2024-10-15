@@ -49,6 +49,10 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
+        if (model.hasStudentWithId(toAdd.getStudentId())) {
+            throw new CommandException("This student ID already exists: " + toAdd.getStudentId());
+        }
+
         model.addStudent(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }

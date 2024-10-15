@@ -35,7 +35,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         // prevent duplicate student id?
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_STUDENTID);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_STUDENTID, PREFIX_TUTORIALCLASS);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         StudentId studentId = argMultimap.getValue(PREFIX_STUDENTID).isPresent()
                 ? ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENTID).get())

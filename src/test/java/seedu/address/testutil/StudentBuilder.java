@@ -15,7 +15,7 @@ public class StudentBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final PresentDates DEFAULT_PRESENT_DATES = new PresentDates(new ArrayList<>());
-    public static final String DEFAULT_STUDENT_ID = "1001";
+    public static final String DEFAULT_STUDENT_ID = "1000";
     public static final String DEFAULT_TUTORIAL_CLASS = "1001";
 
     private Name name;
