@@ -27,10 +27,12 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindMedConCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AppointmentExistsPredicate;
+import seedu.address.model.person.MedConContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.NricMatchesPredicate;
@@ -120,6 +122,14 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_findMedCon() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindMedConCommand command = (FindMedConCommand) parser.parseCommand(
+                FindMedConCommand.COMMAND_WORD + " " + String.join(" ", keywords));
+        assertEquals(new FindMedConCommand(new MedConContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
