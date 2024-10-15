@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
@@ -28,21 +27,6 @@ public class PersonCardTest extends ApplicationTest {
 
     private PersonCard personCard;
     private Person samplePerson;
-
-    @BeforeAll
-    public static void setupHeadlessMode() {
-        // Use Monocle for headless testing
-        if (Boolean.getBoolean("testfx.headless")) {
-            System.setProperty("monocle.platform", "Headless");
-            System.setProperty("prism.order", "sw");
-            System.setProperty("prism.text", "t2k");
-            System.setProperty("testfx.robot", "glass");
-            System.setProperty("glass.platform", "Monocle");
-            System.setProperty("glass.monocle.height", "768");
-            System.setProperty("glass.monocle.width", "1024");
-            System.setProperty("glass.monocle.msaa", "4");
-        }
-    }
 
     @Override
     public void start(Stage stage) {

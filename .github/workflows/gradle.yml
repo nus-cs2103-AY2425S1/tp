@@ -43,8 +43,20 @@ jobs:
           java-version: '17'
           java-package: jdk+fx
 
-      - name: Build and check with Gradle
+      # Run non-UI tests on Linux
+      - name: Build and run non-UI tests on Linux
         run: ./gradlew check coverage
+        if: matrix.platform == 'ubuntu-latest'  # Linux only runs non-UI tests
+
+      # Run UI and non-UI tests on macOS and Windows
+      - name: Build and run UI and non-UI tests on macOS and Windows
+        run: ./gradlew check coverage -Dtestfx.headless=true
+        if: matrix.platform == 'macos-latest' || matrix.platform == 'windows-latest'  # UI tests only on macOS/Windows
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Upload coverage reports to Codecov
         if: runner.os == 'Linux'

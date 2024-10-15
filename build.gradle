@@ -41,6 +41,27 @@ task coverage(type: JacocoReport) {
     }
 }
 
+// Specialized task to run only UI-related unit tests
+tasks.register('uiTest', Test) {
+    doFirst {
+        // Include only UI-related tests
+        include "**/**UiTest*"
+    }
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    // Only run the UI tests when on macOS or Windows
+    def disallowedOSes = ['ubuntu', 'nux']
+    def os = System.getProperty("os.name").toLowerCase()
+    def isAllowed = disallowedOSes.every { !os.contains(it) }
+    if (isAllowed) {
+        dependsOn uiTest
+    }
+}
+
 dependencies {
     String jUnitVersion = '5.4.0'
     String javaFxVersion = '17.0.7'
@@ -64,7 +85,6 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
     testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
 
-    testRuntimeOnly 'org.testfx:openjfx-monocle:8u76-b04'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
 }
 
