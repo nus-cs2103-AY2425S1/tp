@@ -16,14 +16,14 @@ import seedu.address.model.internshipapplication.InternshipApplication;
  */
 public class DeleteCommand extends Command<InternshipApplication> {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "/d";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the internship application identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted internship application: %1$s";
+    public static final String MESSAGE_DELETE_INTERNSHIP_APPLICATION_SUCCESS = "Deleted internship application: %1$s";
 
     private final Index targetIndex;
 
@@ -42,7 +42,7 @@ public class DeleteCommand extends Command<InternshipApplication> {
 
         InternshipApplication internshipApplicationToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteItem(internshipApplicationToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
+        return new CommandResult(String.format(MESSAGE_DELETE_INTERNSHIP_APPLICATION_SUCCESS,
                 Messages.format(internshipApplicationToDelete)));
     }
 
