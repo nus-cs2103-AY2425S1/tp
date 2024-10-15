@@ -16,6 +16,11 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         this.keywords = keywords;
     }
 
+    /**
+     * condition that seach keyword is tested against
+     * @param person the input argument
+     * @return
+     */
     @Override
     public boolean test(Person person) {
         return (keywords.stream()
