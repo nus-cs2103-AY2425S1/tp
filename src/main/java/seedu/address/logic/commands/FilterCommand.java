@@ -2,14 +2,9 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
-import java.util.Optional;
-import java.util.function.Predicate;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,6 +19,7 @@ public class FilterCommand extends Command {
             + "The given tag must be an exact match with the intended tag to find.\n"
             + "If there is no contact with the given tag, "
             + "an empty list of contacts will be displayed.\n"
+            + "Ensure that tag only contains alphanumeric characters. \n"
             + "Parameters: TAG\n"
             + "Example: " + COMMAND_WORD + " t/supplier";
 
@@ -32,31 +28,21 @@ public class FilterCommand extends Command {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE)
             + "\nListing all contacts instead.";
 
-    private Optional<Tag> tag;
+    private Tag tag;
 
     /**
      * Creates a FilterCommand, filtering for the given {@code tag}
      * @param tag Tag to be filtered for in the list of contacts.
      */
-    public FilterCommand(String tag) {
+    public FilterCommand(Tag tag) {
         requireAllNonNull(tag);
-
-        try {
-            this.tag = Optional.of(new Tag(tag));
-        } catch (IllegalArgumentException e) {
-            this.tag = Optional.empty();
-        }
+        this.tag = tag;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Predicate<Person> filterPredicate = this.tag
-                .map(tagItem -> (Predicate<Person>) person -> person.getTags().contains(tagItem))
-                .orElse(PREDICATE_SHOW_ALL_PERSONS);
-        model.updateFilteredPersonList(filterPredicate);
-        return new CommandResult(this.tag
-                .map(tagItem -> String.format(MESSAGE_SUCCESS, tagItem.getTagName()))
-                .orElse(MESSAGE_FAILURE));
+        model.updateFilteredPersonList(person -> person.getTags().contains(this.tag));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.tag.getTagName()));
     }
 
     @Override

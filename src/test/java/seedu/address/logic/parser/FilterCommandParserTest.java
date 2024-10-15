@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FilterCommand;
+import seedu.address.model.tag.Tag;
 
 public class FilterCommandParserTest {
 
@@ -22,7 +23,7 @@ public class FilterCommandParserTest {
     public void parse_validArgs_returnsFilterCommand() {
         // no leading and trailing whitespaces
         FilterCommand expectedFilterCommand =
-                new FilterCommand("friends");
+                new FilterCommand(new Tag("friends"));
         assertParseSuccess(parser, "filter t/friends", expectedFilterCommand);
     }
 }
