@@ -26,7 +26,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private PolicySet policies = new PolicySet();
+    private final PolicySet policies = new PolicySet();
 
     /**
      * Every field must be present and not null.
@@ -49,7 +49,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.policies.addAll(policies);
+        this.policies.addAll(policySet);
     }
 
     public Name getName() {
