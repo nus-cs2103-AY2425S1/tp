@@ -112,7 +112,6 @@ public class UniqueMeetUpList implements Iterable<MeetUp> {
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<MeetUp> asUnmodifiableObservableList() {
-        logger.info("the unmodifible list is here" + internalUnmodifiableList);
         return internalUnmodifiableList;
     }
 

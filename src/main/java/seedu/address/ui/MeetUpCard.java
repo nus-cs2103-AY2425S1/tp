@@ -1,12 +1,12 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.meetup.MeetUp;
 
 /**
@@ -14,7 +14,8 @@ import seedu.address.model.meetup.MeetUp;
  */
 public class MeetUpCard extends UiPart<Region> {
 
-    private static final String FXML = "MeetUpCard.fxml";
+    private static final String FXML = "MeetUpListCard.fxml";
+    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -27,7 +28,7 @@ public class MeetUpCard extends UiPart<Region> {
     public final MeetUp meetUp;
 
     @FXML
-    private HBox cardPane;
+    private HBox meetUpCardPane;
     @FXML
     private Label id;
     @FXML
@@ -50,5 +51,6 @@ public class MeetUpCard extends UiPart<Region> {
         info.setText(meetUp.getInfo().toString());
         from.setText(meetUp.getFrom().toString());
         to.setText(meetUp.getTo().toString());
+        logger.info("making meetup card");
     }
 }
