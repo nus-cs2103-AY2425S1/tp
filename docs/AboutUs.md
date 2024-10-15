@@ -7,9 +7,17 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
+
+### Estelle
+
+<img src="images/estellelim.png" width="200px">
+
+[[github](https://github.com/estellelim)]
+[[portfolio](team/estellelim.md)]
+
+* Role: Developer
+* Responsibilities: UI
 
 ### Lincoln Yao
 
@@ -37,7 +45,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/kohkakohla.png" width="200px">
 
 [[github](http://github.com/kohkakohla)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/kohkakohla.md)]
 
 * Role: Developer
 * Responsibilities: DevOps
