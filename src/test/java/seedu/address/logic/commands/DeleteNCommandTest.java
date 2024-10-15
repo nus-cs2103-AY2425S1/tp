@@ -1,6 +1,8 @@
 // src/test/java/seedu/address/logic/commands/DeleteNCommandTest.java
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -35,5 +37,23 @@ public class DeleteNCommandTest {
 
         assertCommandSuccess(deleteNCommand, model, DeleteNCommand.MESSAGE_CANCEL_DELETE, model);
         assertNull(StaticContext.getPersonToDelete());
+    }
+
+    @Test
+    public void equals() {
+        DeleteNCommand deleteNCommand1 = new DeleteNCommand();
+        DeleteNCommand deleteNCommand2 = new DeleteNCommand();
+
+        // Same object -> returns true
+        assertEquals(deleteNCommand1, deleteNCommand1);
+
+        // Same values -> returns true
+        assertEquals(deleteNCommand1, deleteNCommand2);
+
+        // Different types -> returns false
+        assertNotEquals(deleteNCommand1, 1);
+
+        // Null -> returns false
+        assertNotEquals(deleteNCommand1, null);
     }
 }

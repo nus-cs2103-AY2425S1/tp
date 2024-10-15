@@ -23,4 +23,10 @@ public class StaticContextTest {
         // Verify that the personToDelete is correctly set
         assertEquals(person, StaticContext.getPersonToDelete());
     }
+
+    @Test
+    public void testGetPersonToDeleteInitiallyNull() {
+        // Initially, personToDelete should be null
+        assertNull(StaticContext.getPersonToDelete());
+    }
 }
