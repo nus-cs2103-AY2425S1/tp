@@ -105,7 +105,7 @@ public class MainApp extends Application {
                         + " populated with a sample MeetUpList.");
             }
             initialMeetUpList = meetUpListOptional.orElseGet(SampleMeetUpList::getSampleMeetUpList);
-            logger.info("initiala list is" + initialMeetUpList);
+            logger.info("initial list is" + initialMeetUpList);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getMeetUpListFilePath() + " could not be loaded."
                     + " Will be starting with an empty MeetUpList.");

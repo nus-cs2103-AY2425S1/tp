@@ -159,6 +159,12 @@ public class ModelManager implements Model {
     //=========== MeetUp List ================================================================================
 
     @Override
+    public void addMeetUp(MeetUp meetUp) {
+        meetUpList.addMeetUp(meetUp);
+        updateFilteredMeetUpList(PREDICATE_SHOW_ALL_MEETUPS);
+    }
+
+    @Override
     public void setMeetUp(MeetUp target, MeetUp edittedMeetUp) {
         return;
     }
@@ -166,6 +172,12 @@ public class ModelManager implements Model {
     @Override
     public void deleteMeetUp(MeetUp target) {
         return;
+    }
+
+    @Override
+    public boolean hasMeetUp(MeetUp meetUp) {
+        requireNonNull(meetUp);
+        return meetUpList.hasMeetUp(meetUp);
     }
 
     //=========== Filtered MeetUp List Accessors =============================================================

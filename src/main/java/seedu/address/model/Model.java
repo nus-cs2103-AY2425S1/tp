@@ -111,6 +111,12 @@ public interface Model {
     ObservableList<MeetUp> getFilteredMeetUpList();
 
     /**
+     * Adds the given MeetUp.
+     * {@code MeetUp} must not already exist in the address book.
+     */
+    void addMeetUp(MeetUp meetUp);
+
+    /**
      * Updates the given schedule's meetup in the schedule list.
      * The schedule must exist in the schedule list.
      */
@@ -126,4 +132,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredMeetUpList(Predicate<MeetUp> predicate);
+
+    /**
+     * Returns true if a MeetUp with the same identity as {@code MeetUp} exists in the MeetUp list.
+     */
+    boolean hasMeetUp(MeetUp meetUp);
 }

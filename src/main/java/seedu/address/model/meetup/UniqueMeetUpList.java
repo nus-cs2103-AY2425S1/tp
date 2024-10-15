@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.ModelManager;
+import seedu.address.model.meetup.exceptions.DuplicateMeetUpException;
 import seedu.address.model.person.Person;
 
 /**
@@ -33,24 +34,23 @@ public class UniqueMeetUpList implements Iterable<MeetUp> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent MeetUp as the given argument.
      */
     public boolean contains(MeetUp toCheck) {
         // TODO
-        return true;
-        // requireNonNull(toCheck);
-        // return internalList.stream().anyMatch(toCheck::isSamePerson);
+         requireNonNull(toCheck);
+         return internalList.stream().anyMatch(toCheck::isSameMeetUp);
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a MeetUp to the list.
+     * The MeetUp must not already exist in the list.
      */
     public void add(MeetUp toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             // TODO
-            // throw new DuplicatePersonException();
+             throw new DuplicateMeetUpException();
         }
         internalList.add(toAdd);
     }
