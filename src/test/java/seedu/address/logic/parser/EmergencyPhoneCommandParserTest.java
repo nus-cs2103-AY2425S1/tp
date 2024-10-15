@@ -57,10 +57,17 @@ public class EmergencyPhoneCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
+        // emergency phone field is filled
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + EMERGENCY_PHONE_DESC_BOB;
         EmergencyPhoneCommand expectedCommand = new EmergencyPhoneCommand(targetIndex,
                 new EmergencyPhone(VALID_EMERGENCY_PHONE_BOB));
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // emergency phone field is empty
+        userInput = targetIndex.getOneBased() + " ep/";
+        expectedCommand = new EmergencyPhoneCommand(targetIndex,
+                new EmergencyPhone(""));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }

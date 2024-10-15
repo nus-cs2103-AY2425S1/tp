@@ -14,7 +14,7 @@ import seedu.address.model.person.EmergencyPhone;
 import seedu.address.model.person.Person;
 
 /**
- * Changes the emergency phone number of an existing student in the address book
+ * Add or remove the emergency phone number of an existing student in the address book
  */
 public class EmergencyPhoneCommand extends Command {
 
