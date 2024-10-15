@@ -16,7 +16,7 @@ public class Grade {
             "Grade should be a decimal number not between 0 and 100 (inclusive) "
             + "OR null if not graded";
 
-    public static final String VALIDATION_REGEX = "[0-9]{1,2}\\.[0-9]*|NULL|[0-9]{1,2}";
+    public static final String VALIDATION_REGEX = "[0-9]{1,2}\\.[0-9]*|NULL|[0-9]{1,2}|100";
 
     public final Optional<Double> grade;
 
@@ -58,7 +58,7 @@ public class Grade {
 
     @Override
     public String toString() {
-        return grade.map(g -> new DecimalFormat("#.00").format(grade)).orElse("NULL");
+        return grade.map(g -> new DecimalFormat("#.00").format(grade.get())).orElse("NULL");
     }
 
     @Override
