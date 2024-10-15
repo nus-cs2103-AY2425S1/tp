@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.sellsavvy.logic.commands.generalcommands.ClearCommand;
 import seedu.sellsavvy.logic.commands.generalcommands.ExitCommand;
 import seedu.sellsavvy.logic.commands.generalcommands.HelpCommand;
+import seedu.sellsavvy.logic.commands.ordercommands.ListOrderCommand;
 import seedu.sellsavvy.logic.commands.personcommands.AddPersonCommand;
 import seedu.sellsavvy.logic.commands.personcommands.DeletePersonCommand;
 import seedu.sellsavvy.logic.commands.personcommands.EditPersonCommand;
@@ -34,7 +35,7 @@ public class AddressBookParserTest {
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_addPerson() throws Exception {
         Person person = new PersonBuilder().build();
         AddPersonCommand command = (AddPersonCommand) parser.parseCommand(PersonUtil.getAddPersonCommand(person));
         assertEquals(new AddPersonCommand(person), command);
@@ -47,14 +48,14 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
+    public void parseCommand_deletePerson() throws Exception {
         DeletePersonCommand command = (DeletePersonCommand) parser.parseCommand(
                 DeletePersonCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeletePersonCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_editPerson() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditPersonCommand command = (EditPersonCommand) parser.parseCommand(EditPersonCommand.COMMAND_WORD + " "
@@ -69,7 +70,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_findPerson() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindPersonCommand command = (FindPersonCommand) parser.parseCommand(
                 FindPersonCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
@@ -83,9 +84,16 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
+    public void parseCommand_listPerson() throws Exception {
         assertTrue(parser.parseCommand(ListPersonCommand.COMMAND_WORD) instanceof ListPersonCommand);
         assertTrue(parser.parseCommand(ListPersonCommand.COMMAND_WORD + " 3") instanceof ListPersonCommand);
+    }
+
+    @Test
+    public void parseCommand_listOrder() throws Exception {
+        ListOrderCommand command = (ListOrderCommand) parser.parseCommand(
+                ListOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new ListOrderCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test

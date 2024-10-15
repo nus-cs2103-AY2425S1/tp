@@ -5,6 +5,7 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.sellsavvy.commons.core.GuiSettings;
 import seedu.sellsavvy.commons.core.LogsCenter;
@@ -69,6 +70,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ReadOnlyObjectProperty<Person> getSelectedPerson() {
+        return model.getSelectedPerson();
     }
 
     @Override
