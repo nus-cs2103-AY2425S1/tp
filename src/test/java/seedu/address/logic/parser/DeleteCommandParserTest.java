@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
@@ -30,7 +29,7 @@ public class DeleteCommandParserTest {
     public void parse_singleDeleteValidArgs_returnsDeleteCommand() {
         Set<Index> firstIndexSet = new HashSet<>();
         firstIndexSet.add(INDEX_FIRST_STUDENT);
-        assertParseSuccess(parser, " " + PREFIX_DELETE_INDEX + "1", new DeleteCommand(firstIndexSet));
+        assertParseSuccess(parser, "1", new DeleteCommand(firstIndexSet));
     }
 
     @Test
@@ -38,7 +37,7 @@ public class DeleteCommandParserTest {
         Set<Index> indexSet = new HashSet<>();
         indexSet.add(INDEX_FIRST_STUDENT);
         indexSet.add(INDEX_SECOND_STUDENT);
-        assertParseSuccess(parser, " " + PREFIX_DELETE_INDEX + "1 " + PREFIX_DELETE_INDEX + "2 ",
+        assertParseSuccess(parser, "1 ,2 ",
                 new DeleteCommand(indexSet));
     }
 
@@ -47,16 +46,22 @@ public class DeleteCommandParserTest {
         assertParseFailure(parser, "a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
+    @Test
+    public void parse_someValidSomeInvalidArgsNoTag_throwsParseException() {
+        assertParseFailure(parser, "1, a",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
 
     @Test
     public void parse_invalidArgsNoNum_throwsParseException() {
-        assertParseFailure(parser, PREFIX_DELETE_INDEX.toString(),
+        assertParseFailure(parser, ",",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidArgsSomeNoNum_throwsParseException() {
-        assertParseFailure(parser, PREFIX_DELETE_INDEX + " 1" + PREFIX_DELETE_INDEX,
+        assertParseFailure(parser, ", 1,",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 }
