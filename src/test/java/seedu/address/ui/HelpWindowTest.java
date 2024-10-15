@@ -20,7 +20,7 @@ public class HelpWindowTest {
     private HelpWindow helpWindow;
 
     @BeforeAll
-    public static void initJFX() throws Exception {
+    public static void initJfx() throws Exception {
         // Initialize JavaFX platform if it's not already started
         CountDownLatch latch = new CountDownLatch(1);
         Platform.startup(() -> latch.countDown());
