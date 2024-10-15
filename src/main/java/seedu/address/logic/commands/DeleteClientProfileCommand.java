@@ -24,7 +24,7 @@ public class DeleteClientProfileCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/Tan Wen Xuan";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Successfully deleted %1$s "
-            + " with the number: %2$s " + "and email: %3s!";
+            + " with the number: %2$s " + "and email: %3$s!";
     private final Name targetName;
 
     public DeleteClientProfileCommand(Name targetName) {
@@ -36,10 +36,7 @@ public class DeleteClientProfileCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        Person personToDelete = lastShownList.stream()
-                .filter(x -> x.isSamePerson(new Person(targetName)))
-                .findFirst()
-                .orElse(null);
+        Person personToDelete = model.getPersonByName(targetName);
 
         if (!lastShownList.contains(personToDelete)) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
@@ -47,7 +44,7 @@ public class DeleteClientProfileCommand extends Command {
 
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
-                personToDelete.getName(), personToDelete.getPhone()));
+                personToDelete.getName(), personToDelete.getPhone(), personToDelete.getEmail()));
     }
 
     @Override
