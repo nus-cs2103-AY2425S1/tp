@@ -18,7 +18,7 @@
 #helpMessageArea {
     -fx-background-color: derive(#dafaff, 20%);;
     -fx-text-fill: #124264;
-    -fx-font-family: Futura Bold, Helvetica, sans-serif;
+    -fx-font-family: Verdana Bold, Helvetica, sans-serif;
     -fx-font-size: 14px;
 }
 
