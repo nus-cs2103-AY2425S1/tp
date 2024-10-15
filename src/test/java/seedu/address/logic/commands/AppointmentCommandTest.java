@@ -97,9 +97,6 @@ public class AppointmentCommandTest {
         assertEquals(editedPerson.getAppointment(), validAppointment);
     }
 
-
-
-
     /**
      * A default model stub that have all of the methods failing.
      */
@@ -173,6 +170,7 @@ public class AppointmentCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
     }
 
     /**

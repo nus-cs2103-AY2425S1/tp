@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -27,7 +28,7 @@ public class AddPropertyCommand extends Command {
             + PREFIX_PROPERTY + "[property]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PROPERTY + "37B Clementi Rd.";
-    public static final String MESSAGE_ADD_PROPERTY_SUCCESS = "Added property to Person: %1$s";
+    public static final String MESSAGE_ADD_PROPERTY_SUCCESS = "Added %1$s to Person: %2$s";
     public static final String MESSAGE_DELETE_PROPERTY_SUCCESS = "Removed property from Person: %1$s";
 
     private final Index index;
@@ -77,7 +78,7 @@ public class AddPropertyCommand extends Command {
         String message = !property.toString().isEmpty()
                 ? MESSAGE_ADD_PROPERTY_SUCCESS
                 : MESSAGE_DELETE_PROPERTY_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(message, property, personToEdit);
     }
 
     @Override
@@ -94,5 +95,13 @@ public class AddPropertyCommand extends Command {
         AddPropertyCommand e = (AddPropertyCommand) other;
         return index.equals(e.index)
                 && property.equals(e.property);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("targetIndex", index)
+                .add("property", property)
+                .toString();
     }
 }

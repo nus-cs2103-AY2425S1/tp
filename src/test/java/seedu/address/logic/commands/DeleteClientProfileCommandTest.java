@@ -3,24 +3,25 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-//import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-//import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-//import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-//import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-//import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonWithName;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalNames;
+
+import java.util.List;
+import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 
-//import seedu.address.commons.core.index.Index;
-//import seedu.address.logic.Messages;
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-//import seedu.address.model.person.Name;
-//import seedu.address.model.person.Person;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -28,42 +29,47 @@ import seedu.address.model.UserPrefs;
  */
 public class DeleteClientProfileCommandTest {
 
+    private static final Name DO_NOT_EXIST_NAME = new Name("DO NOT EXIST NAME");
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    // change tests to use Person.name instead of index
-    /*
+
     @Test
-    public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(ALICE.getName());
+    public void execute_validNameUnfilteredList_success() {
+        Random random = new Random();
+        List<Name> typicalNames = getTypicalNames();
+        int randomIndex = random.nextInt(typicalNames.size() - 1);
+
+        Person personToDelete = model.getPersonByName(typicalNames.get(randomIndex));
+        DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(personToDelete.getName());
 
         String expectedMessage = String.format(DeleteClientProfileCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
+                personToDelete.getName(), personToDelete.getPhone(), personToDelete.getEmail());
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
-
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(new Name("DO_NOT_EXIST"));
+    public void execute_invalidNameUnfilteredList_throwsCommandException() {
+        DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(DO_NOT_EXIST_NAME);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_INPUT);
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    public void execute_validNameFilteredList_success() {
+        Random random = new Random();
+        List<Name> typicalNames = getTypicalNames();
+        int randomIndex = random.nextInt(typicalNames.size() - 1);
+        showPersonWithName(model, typicalNames.get(randomIndex));
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete = model.getPersonByName(typicalNames.get(randomIndex));
         DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(personToDelete.getName());
 
         String expectedMessage = String.format(DeleteClientProfileCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
+                personToDelete.getName(), personToDelete.getPhone(), personToDelete.getEmail());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
@@ -74,17 +80,16 @@ public class DeleteClientProfileCommandTest {
 
     @Test
     public void execute_invalidNameFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        Random random = new Random();
+        List<Name> typicalNames = getTypicalNames();
+        int randomIndex = random.nextInt(typicalNames.size() - 2);
+        showPersonWithName(model, typicalNames.get(randomIndex));
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(typicalNames
+                                                                            .get(randomIndex + 1));
 
-        DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(ALICE.getName());
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_INPUT);
     }
-     */
 
     @Test
     public void equals() {

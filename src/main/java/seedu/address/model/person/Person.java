@@ -42,7 +42,6 @@ public class Person {
         this.property = property;
         this.tags.addAll(tags);
     }
-
     /**
      * Constructs a {@code Person} object with the specified name.
      * Initializes the phone number as {@code null}, sets the property to a default empty value,
