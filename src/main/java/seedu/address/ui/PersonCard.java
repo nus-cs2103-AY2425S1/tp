@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.stream.IntStream;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -59,8 +60,15 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        person.getTutorials().stream()
-                .sorted(Comparator.comparing(tut -> tut.tutorial))
-                .forEach(tut -> tutorials.getChildren().add(new Label(tut.tutorial)));
+
+        IntStream.rangeClosed(1, 10).forEach(index -> {
+            Label tutorialLabel = new Label(String.valueOf(index));
+            tutorialLabel.getStyleClass().add("tutorial-label");
+
+            if (person.hasAttendedTutorial(String.valueOf(index))) {
+                tutorialLabel.getStyleClass().add("tutorial-attended");
+            }
+            tutorials.getChildren().add(tutorialLabel);
+        });
     }
 }

@@ -53,6 +53,20 @@ public class PersonTest {
     }
 
     @Test
+    public void correctlyChecksAttendance() {
+        Person alice = new PersonBuilder(ALICE).build();
+
+        // Alice currently has no tutorials attended, should return false.
+        assertFalse(alice.hasAttendedTutorial("0"));
+
+        // Set Alice to have attended tutorial 1, 3, 7.
+        alice = new PersonBuilder(ALICE).withTutorials("1", "3", "7").build();
+        assertTrue(alice.hasAttendedTutorial("1"));
+        assertTrue(alice.hasAttendedTutorial("3"));
+        assertFalse(alice.hasAttendedTutorial("2")); // Did not attend tutorial 2
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         Person aliceCopy = new PersonBuilder(ALICE).build();

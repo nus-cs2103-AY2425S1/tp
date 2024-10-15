@@ -1,0 +1,14 @@
+.tutorial-label {
+    -fx-pref-width: 50px;
+    -fx-alignment: center;
+    -fx-padding: 5px;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-background-color: #8c2029;
+}
+
+.tutorial-attended {
+    -fx-background-color: #206e35;
+}
