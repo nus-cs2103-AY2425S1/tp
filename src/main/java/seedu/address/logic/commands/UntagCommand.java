@@ -24,8 +24,8 @@ public class UntagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": untags specific contact \n"
-            + "Parameters: 'index t/ [TAG TO REMOVE]' OR 'index t/ all' (this removes everything)\n"
-            + "Examples: " + COMMAND_WORD + "1 t/ friends," + " " + COMMAND_WORD + " 1 t/ all";
+            + "Parameters: 'index t/[TAGS TO REMOVE]' OR 'index t/all' (this removes everything)\n"
+            + "Examples: " + COMMAND_WORD + " 1 t/friends colleagues," + " " + COMMAND_WORD + " 1 t/all";
 
     public static final String MESSAGE_UNTAG_SUCCESS = "Untagged the person: %1$s";
     private final Index index;
@@ -83,9 +83,26 @@ public class UntagCommand extends Command {
      * @param originalTags the original set of tags
      * @param tagsToRemove the set of tags to remove
      * @return the modified set of tags
+     * @throws CommandException if any tag in tagsToRemove does not exist in originalTags
      */
-    public Set<Tag> removeTags(Set<Tag> originalTags, Set<Tag> tagsToRemove) {
+    public Set<Tag> removeTags(Set<Tag> originalTags, Set<Tag> tagsToRemove) throws CommandException {
         Set<Tag> modifiedTags = new HashSet<>(originalTags);
+
+        Set<Tag> nonExistentTags = tagsToRemove.stream()
+                .filter(tag -> !originalTags.contains(tag))
+                .collect(Collectors.toSet());
+
+        if (modifiedTags.isEmpty()) {
+            throw new CommandException("Error: No tags to remove from this person.");
+        }
+
+        if (!nonExistentTags.isEmpty()) {
+            String nonExistentTagsString = nonExistentTags.stream()
+                    .map(tag -> tag.tagName)
+                    .collect(Collectors.joining(", "));
+            throw new CommandException("Error: The following tags do not exist: " + nonExistentTagsString);
+        }
+
         modifiedTags.removeAll(tagsToRemove);
         return modifiedTags;
     }
@@ -100,10 +117,10 @@ public class UntagCommand extends Command {
         String removedTagsString = removedTags.isEmpty()
                 ? "no tags"
                 : String.join(", ", removedTags.stream()
-                .map(tag -> tag.tagName)
+                .map(tag -> "[" + tag.tagName + "]")
                 .collect(Collectors.joining(", ")));
 
-        return String.format(MESSAGE_UNTAG_SUCCESS + ". Tags removed: [%2$s]",
+        return String.format(MESSAGE_UNTAG_SUCCESS + ". Tags removed: %2$s",
                 personToEdit.getName().toString(), removedTagsString);
     }
 
@@ -122,7 +139,7 @@ public class UntagCommand extends Command {
         // state check
         UntagCommand e = (UntagCommand) other;
         return index.equals(e.index)
-                && tagsToRemove.equals(e.tagsToRemove);
+                && (tagsToRemove == null ? e.tagsToRemove == null : tagsToRemove.equals(e.tagsToRemove));
     }
 
 }

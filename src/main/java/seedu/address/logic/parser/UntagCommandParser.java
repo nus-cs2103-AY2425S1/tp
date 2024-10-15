@@ -5,7 +5,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -30,6 +29,10 @@ public class UntagCommandParser implements Parser<UntagCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_TAG);
 
+        if (argMultimap.getAllValues(PREFIX_TAG).size() > 1) {
+            throw new ParseException("Error: More than one 't/' detected. Please use only one 't/' for untagging.");
+        }
+
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -45,9 +48,8 @@ public class UntagCommandParser implements Parser<UntagCommand> {
             return new UntagCommand(index, null);
         }
 
-        Set<Tag> tagsToRemove = argMultimap.getAllValues(PREFIX_TAG).stream()
-                .map(Tag::new)
-                .collect(Collectors.toSet());
+        String untagString = argMultimap.getValue(PREFIX_TAG).orElse("");
+        Set<Tag> tagsToRemove = Tag.stringToTagSet(untagString);
 
         if (tagsToRemove.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
