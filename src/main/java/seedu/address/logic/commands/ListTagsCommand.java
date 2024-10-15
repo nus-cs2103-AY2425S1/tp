@@ -1,11 +1,11 @@
 package seedu.address.logic.commands;
 
+import java.util.Arrays;
+import java.util.Set;
+
 import seedu.address.model.Model;
 import seedu.address.model.tag.ActiveTags;
 import seedu.address.model.tag.Tag;
-
-import java.util.Arrays;
-import java.util.Set;
 
 /**
  * Outputs the currently used tags in the AddressBook
@@ -18,9 +18,9 @@ public class ListTagsCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         ActiveTags tagMap = model.getActiveTags();
-        Set<Tag> tags = tagMap.getMap().keySet();    //Getting the unique Tags
+        Set<Tag> tags = tagMap.getMap().keySet(); //Getting the unique Tags
         String[] tagStrings = tags.stream().map(Tag::toString).toArray(String[]::new); //convert Set to Array
-        Arrays.sort(tagStrings);    //Sort the tag strings in alphabetical order
+        Arrays.sort(tagStrings); //Sort the tag strings in alphabetical order
 
         String resultString = String.join(", ", tagStrings);
 

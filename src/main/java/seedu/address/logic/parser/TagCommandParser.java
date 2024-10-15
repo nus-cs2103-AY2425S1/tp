@@ -11,14 +11,10 @@ import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
-
+/**
+ * Handles parsing user input into a TagCommand class
+ */
 public class TagCommandParser implements Parser<TagCommand> {
-
-    /**
-     * Parses the given {@code String} of arguments in the context of the TagCommand
-     * and returns a TagCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
-     */
     @Override
     public TagCommand parse(String args) throws ParseException {
         requireNonNull(args);

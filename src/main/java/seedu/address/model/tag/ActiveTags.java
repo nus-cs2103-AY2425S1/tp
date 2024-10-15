@@ -7,7 +7,7 @@ import java.util.Set;
  * A class to handle the tracking of currently used Tags in the AddressBook
  */
 public class ActiveTags {
-    private final HashMap<Tag, Integer> tagMap;   // Maps Tags to their respective number of occurrences
+    private final HashMap<Tag, Integer> tagMap; // Maps Tags to their respective number of occurrences
 
     public ActiveTags(HashMap<Tag, Integer> tagMap) {
         this.tagMap = tagMap;
