@@ -36,7 +36,7 @@ public class GradeAssignmentCommand extends Command {
             + PREFIX_ASSIGNMENT_SCORE + "100";
 
     public static final String MESSAGE_GRADE_SUCCESS = "Graded Assignment: %1$s belonging "
-            + "to Student: %1$s, with score: %1$s";
+            + "to Student: %2$s, with score: %3$s";
     private final Index studentIndex;
     private final Index assignmentIndex;
     private final int score;
