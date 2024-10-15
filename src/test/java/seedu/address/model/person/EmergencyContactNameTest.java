@@ -2,14 +2,13 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 public class EmergencyContactNameTest {
 
     @Test
-    public void isValidECName() {
+    public void isValidEcName() {
         // ecName can be null - optional feature
         // invalid name
         assertFalse(EmergencyContactName.isValidEmergencyContactName(" ")); // spaces only

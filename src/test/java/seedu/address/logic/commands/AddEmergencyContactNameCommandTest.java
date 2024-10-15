@@ -2,20 +2,18 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.AddEmergencyContactNameCommand.MESSAGE_ARGUMENTS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import seedu.address.logic.Messages;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -36,7 +34,8 @@ public class AddEmergencyContactNameCommandTest {
         Person editedPerson = new PersonBuilder(firstPerson).withEmergencyContactName(ECNAME_stub).build();
         AddEmergencyContactNameCommand ecNameCommand = new AddEmergencyContactNameCommand(INDEX_FIRST_PERSON,
                 new EmergencyContactName(editedPerson.getEmergencyContactName().fullName));
-        String expectedMessage = String.format(AddEmergencyContactNameCommand.MESSAGE_ADD_ECNAME_SUCCESS, editedPerson);
+        String expectedMessage = String.format(AddEmergencyContactNameCommand.MESSAGE_ADD_ECNAME_SUCCESS,
+                editedPerson);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(ecNameCommand, model, expectedMessage, expectedModel);
@@ -57,11 +56,12 @@ public class AddEmergencyContactNameCommandTest {
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
-                .withEmergencyContactName(ECNAME_stub).build();
+        Person editedPerson = new PersonBuilder(model.getFilteredPersonList()
+                .get(INDEX_FIRST_PERSON.getZeroBased())).withEmergencyContactName(ECNAME_stub).build();
         AddEmergencyContactNameCommand ecNameCommand = new AddEmergencyContactNameCommand(INDEX_FIRST_PERSON,
                 new EmergencyContactName(editedPerson.getEmergencyContactName().fullName));
-        String expectedMessage = String.format(AddEmergencyContactNameCommand.MESSAGE_ADD_ECNAME_SUCCESS, editedPerson);
+        String expectedMessage = String.format(AddEmergencyContactNameCommand.MESSAGE_ADD_ECNAME_SUCCESS,
+                editedPerson);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(ecNameCommand, model, expectedMessage, expectedModel);
