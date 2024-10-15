@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
@@ -21,12 +22,7 @@ public class CreateEventCommand extends CreateCommand {
             + PREFIX_DATE + "DATE";
 
     public static final String MESSAGE_SUCCESS = "New event created: %1$s";
-    public static final String MESSAGE_DUPLICATE_VENDOR = "This event already exists in the address book";
-    public static final String MESSAGE_INVALID_DATE = "Date specified is invalid";
-    public static final String MESSAGE_EMPTY_NAME = "Cannot create event without a name";
-    public static final String MESSAGE_INVALID_NAME = "Cannot create event with invalid name";
-    public static final String MESSAGE_UNIMPLEMENTED = "CreateEventCommand is unimplemented";
-
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
     private final Event toAdd;
 
     /**
@@ -39,10 +35,14 @@ public class CreateEventCommand extends CreateCommand {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(MESSAGE_UNIMPLEMENTED);
+        requireNonNull(model);
 
-        // TODO validation checks for event
-        // TODO add event to model
+        if (model.hasEvent(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+        }
+
+        model.addEvent(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override

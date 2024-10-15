@@ -87,7 +87,7 @@ public class CreateVendorCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that has all the methods failing.
      */
     private class ModelStub implements Model {
         @Override
