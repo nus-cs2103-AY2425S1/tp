@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -12,14 +11,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TUTOR;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CommandTestUtil;
-import seedu.address.model.person.Grade;
-import seedu.address.model.person.Module;
 import seedu.address.testutil.PersonBuilder;
-
-import java.util.ArrayList;
 
 public class PersonTest {
 
