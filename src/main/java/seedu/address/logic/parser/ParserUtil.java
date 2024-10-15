@@ -9,10 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.healthservice.HealthService;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,6 +32,35 @@ public class ParserUtil {
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
+
+    public static Nric parseNric(String nric) throws ParseException {
+        requireNonNull(nric);
+        String trimmedNric = nric.trim();
+        if (!Nric.isValidNric(trimmedNric)) {
+            throw new ParseException(Nric.MESSAGE_CONSTRAINTS);
+        }
+        return new Nric(trimmedNric);
+    }
+
+    public static Sex parseSex(String sex) throws ParseException {
+        requireNonNull(sex);
+        String trimmedSex = sex.trim();
+        if (!Sex.isValidSex(trimmedSex)) {
+            throw new ParseException(Sex.MESSAGE_CONSTRAINTS);
+        }
+        return new Sex(sex);
+    }
+
+    public static Birthdate parseBirthDate(String birthDate) throws ParseException {
+        requireNonNull(birthDate);
+        String trimmedbirthDate = birthDate.trim();
+        if (!Sex.isValidSex(trimmedbirthDate)) {
+            throw new ParseException(Birthdate.MESSAGE_CONSTRAINTS);
+        }
+        return new Birthdate(birthDate);
+    }
+
+
 
     /**
      * Parses a {@code String name} into a {@code Name}.
@@ -120,5 +147,23 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    public static HealthService parseHealthService(String healthService) throws ParseException {
+        requireNonNull(healthService);
+        String trimmedHealthService = healthService.trim();
+        if (!Tag.isValidTagName(trimmedHealthService)) {
+            throw new ParseException(HealthService.MESSAGE_CONSTRAINTS);
+        }
+        return new HealthService(trimmedHealthService);
+    }
+
+    public static Set<HealthService> parseHealthServices(Collection<String> healthServices) throws ParseException {
+        requireNonNull(healthServices);
+        final Set<HealthService> healthServiceSet = new HashSet<>();
+        for (String healthService : healthServices) {
+            healthServiceSet.add(parseHealthService(healthService));
+        }
+        return healthServiceSet;
     }
 }
