@@ -70,7 +70,7 @@ public class PersonCard extends UiPart<Region> {
         remark.setText(value);
         remark.setManaged(!value.isEmpty());
 
-        final String ageString = Integer.toString(person.getAge().value);
+        final String ageString = String.format("Age: %d", person.getAge().value);
         age.setText(ageString);
 
         person.getTags().stream()
