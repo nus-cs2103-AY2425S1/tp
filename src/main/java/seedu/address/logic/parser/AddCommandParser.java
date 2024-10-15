@@ -1,18 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_REMARK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.CommandCommons;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -23,6 +12,18 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tier.Tier;
+
+import java.util.stream.Stream;
+
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -53,8 +54,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Job job = ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get());
         Income income = ParserUtil.parseIncome(argMultimap.getValue(PREFIX_INCOME).get());
-        Tier tier = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).orElse("NA"));
-        Remark remark = ParserUtil.parseNewRemark(argMultimap.getValue(PREFIX_NEW_REMARK).orElse("NA"));
+        Tier tier = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).orElse(CommandCommons.DEFAULT_TIER));
+        Remark remark = ParserUtil.parseNewRemark(argMultimap.getValue(PREFIX_NEW_REMARK)
+                .orElse(CommandCommons.DEFAULT_REMARK));
         Person person = new Person(name, phone, email, address, job, income, tier, remark);
         return new AddCommand(person);
     }

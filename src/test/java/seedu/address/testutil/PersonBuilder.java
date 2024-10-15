@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import seedu.address.logic.commands.CommandCommons;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Income;
@@ -21,8 +22,8 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_JOB = "Engineer";
     public static final int DEFAULT_INCOME = 0;
-    public static final String DEFAULT_TIER = "REJECT";
-    public static final String DEFAULT_REMARK = "N.A";
+    public static final String DEFAULT_TIER = CommandCommons.DEFAULT_TIER;
+    public static final String DEFAULT_REMARK = CommandCommons.DEFAULT_REMARK;
 
     private Name name;
     private Phone phone;
