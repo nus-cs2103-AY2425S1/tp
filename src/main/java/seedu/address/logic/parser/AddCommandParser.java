@@ -47,7 +47,13 @@ public class AddCommandParser implements Parser<AddCommand> {
         // Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         String tags = argMultimap.getValue(PREFIX_TAG).orElse("");
-        Set<Tag> tagSet = Tag.stringToTagSet(tags);
+
+        Set<Tag> tagSet;
+        try {
+            tagSet = Tag.stringToTagSet(tags);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, e.getMessage()));
+        }
 
         if (tagSet.size() > 6) {
             throw new ParseException(MESSAGE_INVALID_TAG_LIST_SIZE);
