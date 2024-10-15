@@ -1,13 +1,9 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.log.Log;
 
 /**
  * Detailed View of a patient's session log identified using it's displayed index from the patient's session log list.
@@ -31,15 +27,15 @@ public class DetailedViewCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-//        requireNonNull(model);
-//        LogsList lastShownLogsList = model.getLastShownLogsList();
-//
-//        if (targetIndex.getZeroBased() >= lastShownLogsList.size()) {
-//            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-//        }
-//
-//        Log detailedLogToView = lastShownLogsList.getDetailedLog(targetIndex.getZeroBased());
-//        return new CommandResult(String.format(MESSAGE_DETAILED_VIEW_SUCCESS, detailedLogToView.toDetailedString()));
+        //        requireNonNull(model);
+        //        LogsList lastShownLogsList = model.getLastShownLogsList();
+        //
+        //        if (targetIndex.getZeroBased() >= lastShownLogsList.size()) {
+        //            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        //        }
+        //
+        //        Log detailedLogToView = lastShownLogsList.getDetailedLog(targetIndex.getZeroBased());
+        //        return new CommandResult(String.format(MESSAGE_DETAILED_VIEW_SUCCESS, detailedLogToView.toDetailedString()));
         return null;
     }
 
