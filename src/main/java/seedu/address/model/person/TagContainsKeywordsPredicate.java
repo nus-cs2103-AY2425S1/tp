@@ -26,7 +26,7 @@ public class TagContainsKeywordsPredicate extends ContainsKeywordsPredicate {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof TagContainsKeywordsPredicate)) {
             return false;
         }
 
