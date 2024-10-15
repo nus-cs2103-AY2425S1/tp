@@ -100,8 +100,8 @@ public class ModelManager implements Model {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
         String timestamp = LocalDateTime.now().format(formatter);
         Path destination = Paths.get(source.getParent().toString(), "archive",
-                source.getFileName().toString().replace(".json", "") + "-" +
-                        timestamp + ".json");
+                source.getFileName().toString().replace(".json", "") + "-"
+                        + timestamp + ".json");
 
         Files.createDirectories(destination.getParent());
         Files.copy(source, destination, REPLACE_EXISTING);

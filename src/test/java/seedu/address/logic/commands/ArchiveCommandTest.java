@@ -30,8 +30,8 @@ public class ArchiveCommandTest {
 
     @Test
     public void execute_emptyAddressBook_failure() {
-        Model model = new ModelManagerStubThrowingIOException();
-        Model expectedModel = new ModelManagerStubThrowingIOException();
+        Model model = new ModelManagerStubThrowingIoException();
+        Model expectedModel = new ModelManagerStubThrowingIoException();
 
         assertCommandSuccess(new ArchiveCommand(), model, ArchiveCommand.MESSAGE_FAILURE, expectedModel);
     }
@@ -39,7 +39,7 @@ public class ArchiveCommandTest {
     /**
      * A ModelManager stub that always throws IOException when archiveAddressBook() is called.
      */
-    private class ModelManagerStubThrowingIOException extends ModelManager {
+    private static class ModelManagerStubThrowingIoException extends ModelManager {
         @Override
         public void archiveAddressBook() throws IOException {
             throw new IOException();
