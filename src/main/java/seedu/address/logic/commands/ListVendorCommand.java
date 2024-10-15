@@ -1,10 +1,13 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_VENDORS;
 
+import seedu.address.model.Model;
+
+/**
+ * Lists all vendors in the address book to the user.
+ */
 public class ListVendorCommand extends ListCommand {
 
     public static final String MESSAGE_LIST_VENDOR_SUCCESS = "Vendor list shown successfully";

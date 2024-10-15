@@ -8,7 +8,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_VENDORS;
 import seedu.address.model.Model;
 
 /**
- * Lists all vendors in the address book to the user.
+ * Displays multiview of vendor and event lists to the user.
  */
 public class ListCommand extends Command {
 
