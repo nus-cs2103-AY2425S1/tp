@@ -4,9 +4,10 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# Client Grid User guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+ClientGrid is an **address book** designed for real estate agents to efficiently manage client contacts, including buyers and sellers. It provides a streamlined way to organize client data and monitor the buying or selling process while maintaining core address book functionality.
+
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -32,7 +33,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `addbuyer n/John p/12345678 e/john@gmail.com` : Add a buyer whose name is `John`, phone number is `12345678` and email is `john@gmail.com`.
+
+   * `deletebuyer p/81234567` : Deletes the buyer with contact number `81234567`.
 
    * `clear` : Deletes all contacts.
 
@@ -131,20 +134,65 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Adding a buyer : `addbuyer`
 
-Deletes the specified person from the address book.
+Add a specified buyer into the client book.
 
-Format: `delete INDEX`
+Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Adds a buyer with the specified `BUYER_NAME`, `BUYER_PHONE_NUMBER`, and `BUYER_EMAIL`.
+* The `BUYER_NAME` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. The `BUYER_NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the in-memory database
+* The `BUYER_PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’
+* The `BUYER_EMAIL` should follow the format local-part@domain and adhere to the following constraints: The local-part must consist only of alphanumeric characters and allowed special characters, with no special characters at the beginning or end. After the local-part, there must be an '@' followed by the domain name. The domain name consists of domain labels separated by periods. Each domain label must start and end with an alphanumeric character and may contain hyphens in between. Additionally, the domain must end with a domain label that is at least two characters long.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `addbuyer n/John p/12345678 e/john@gmail.com` adds a buyer whose name is `John`, phone number is `12345678` and email is `john@gmail.com`.
 
+  ![result for 'addbuyer n/John p/12345678 e/john@gmail.com'](images/addbuyer.png)
+
+### Adding a seller : `addseller`
+
+Add a specified seller into the client book.
+
+Format: `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`
+
+* Adds a seller with the specified `SELLER_NAME`, `SELLER_PHONE_NUMBER`, and `SELLER_EMAIL`.
+* The `SELLER_NAME` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. The `SELLER_NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the in-memory database
+* The `SELLER_PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’
+* The `SELLER_EMAIL` should follow the format local-part@domain and adhere to the following constraints: The local-part must consist only of alphanumeric characters and allowed special characters, with no special characters at the beginning or end. After the local-part, there must be an '@' followed by the domain name. The domain name consists of domain labels separated by periods. Each domain label must start and end with an alphanumeric character and may contain hyphens in between. Additionally, the domain must end with a domain label that is at least two characters long.
+
+Examples:
+* `addseller n/Mary p/23456789 e/mary@gmail.com` adds a seller whose name is `Mary`, phone number is `23456789` and email is `mary@gmail.com`.
+
+  ![result for 'addseller n/Mary p/23456789 e/mary@gmail.com'](images/addseller.png)
+
+### Deleting a buyer : `deletebuyer`
+
+Deletes the specified buyer from the client book.
+
+Format: `deletebuyer p/PHONE_NUMBER`
+
+* Deletes the buyer with the specified `PHONE_NUMBER`.
+* The `PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’
+
+
+Examples:
+* `deletebuyer p/94351253` deletes the buyer with phone number `94351253` from the client book.
+  ![result for 'deletebuyer p/94351253'](images/deletebuyer.png)
+
+### Deleting a seller : `deleteseller`
+
+Deletes the specified seller from the client book.
+
+Format: `deleteseller p/PHONE_NUMBER`
+
+* Deletes the seller with the specified `PHONE_NUMBER`.
+* The `PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’
+
+Examples:
+* `deleteseller p/98765432` deletes the seller with phone number `98765432` from the client book.
+
+    ![result for 'deleteseller p/98765432'](images/deleteseller.png)
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -203,3 +251,8 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
+**Add Buyer** | `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
+**Add Seller** | `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`
+**Delete Buyer** | `deletebuyer p/PHONE_NUMBER`
+**Delete Seller** | `deleteseller p/PHONE_NUMBER`
+
