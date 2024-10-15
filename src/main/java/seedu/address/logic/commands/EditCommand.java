@@ -2,10 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -23,10 +25,12 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Sex;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,6 +48,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_AGE + "AGE] "
+            + "[" + PREFIX_SEX + "SEX] "
             + "[" + PREFIX_APPOINTMENT + "APPOINTMENT] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " John Doe "
@@ -105,11 +111,14 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Age updatedAge = editPersonDescriptor.getAge().orElse(personToEdit.getAge());
+        Sex updatedSex = editPersonDescriptor.getSex().orElse(personToEdit.getSex());
         Set<Appointment> updatedAppointment = editPersonDescriptor.getAppointments()
                 .orElse(personToEdit.getAppointment());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedAppointment, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                          updatedAge, updatedSex, updatedAppointment, updatedTags);
     }
 
     @Override
@@ -145,6 +154,8 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Age age;
+        private Sex sex;
         private Set<Appointment> appointments;
         private Set<Tag> tags;
 
@@ -159,6 +170,8 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setAge(toCopy.age);
+            setSex(toCopy.sex);
             setAppointments(toCopy.appointments);
             setTags(toCopy.tags);
         }
@@ -167,7 +180,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, appointments);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, age, sex, tags, appointments);
         }
 
         public void setName(Name name) {
@@ -200,6 +213,21 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setAge(Age age) {
+            this.age = age;
+        }
+
+        public Optional<Age> getAge() {
+            return Optional.ofNullable(age);
+        }
+        public void setSex(Sex sex) {
+            this.sex = sex;
+        }
+
+        public Optional<Sex> getSex() {
+            return Optional.ofNullable(sex);
         }
 
         /**
@@ -252,6 +280,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(age, otherEditPersonDescriptor.age)
+                    && Objects.equals(sex, otherEditPersonDescriptor.sex)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(appointments, otherEditPersonDescriptor.appointments);
         }
@@ -263,6 +293,8 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("age", age)
+                    .add("sex", sex)
                     .add("appointments", appointments)
                     .add("tags", tags)
                     .toString();

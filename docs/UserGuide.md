@@ -83,11 +83,13 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [ap/APPOINTMENT] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENT] [t/TAG]…​`
 
 - `PHONE_NUMBER` must only contain characters 0-9 and must be exactly 8 digits long. 
 - `EMAIL` should be in the format **local-part@domain** whereby the local-part contains only alphanumeric characters and some special characters like +_.- but may not start with the special characters. The domain name must end with a domain label at least 2 characters long and start and end with alphanumeric characters. The domain label should consist of alphanumeric characters separated only be hyphens, if any. 
-- `APPOINTMENT` should be in the format **dd/MM/yyyy HHmm**
+- `AGE` must only contain characters 0-9 and must be 1-3 digits long.
+- `SEX` must only contain alphanumeric characters.
+- `APPOINTMENT` should be in the format **dd/MM/yyyy HHmm**.
 
 <box type="tip" seamless>
 
@@ -95,8 +97,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [ap/APPOINTMENT] [t/TAG]…
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Hospital p/12345678 t/patient`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/40 s/Male`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Hospital p/12345678 t/patient b/20 s/Female`
+* `add n/Evie Sage p/88888888 e/eviesage@example.com a/Hickory Forest b/23 s/Female ap/11/11/2024 1100`
 
 ### Listing all persons : `list`
 
@@ -110,7 +113,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [ap/APPOINTMENT] [t/TAG]…​`
+Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…​`
 
 * Edits the person with the specified `NAME`. The name refers to the full name shown in the displayed person list.
 * At least one of the optional fields must be provided.
@@ -212,10 +215,10 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [ap/APPOINTMENTS]… [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 ap/01/01/2025 1200 t/friend t/colleague`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENTS]… [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/24 s/Male ap/01/01/2025 1200 t/friend t/colleague` 
 **Clear**  | `clear`
 **Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3`, `delete Alex Yeoh`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` 
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James 89127777`
 **List**   | `list`
 **Help**   | `help`

@@ -40,6 +40,10 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label age;
+    @FXML
+    private Label sex;
+    @FXML
     private FlowPane tags;
     @FXML
     private FlowPane appointments;
@@ -54,6 +58,8 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        age.setText(person.getAge().value);
+        sex.setText(person.getSex().value);
         person.getAppointment().stream()
                 .sorted(Comparator.comparing(appointment -> appointment.appointment.toString()))
                 .forEach(appointment -> appointments.getChildren()
