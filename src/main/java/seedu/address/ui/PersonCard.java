@@ -63,4 +63,33 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
+
+    // Getter methods for private fields
+    public Label getId() {
+        return id;
+    }
+
+    public Label getName() {
+        return name;
+    }
+
+    public Label getPhone() {
+        return phone;
+    }
+
+    public Label getEmail() {
+        return email;
+    }
+
+    public FlowPane getTags() {
+        return tags;
+    }
+
+    public Label getAppointment() {
+        return appointment;
+    }
+
+    public Label getProperty() {
+        return property;
+    }
 }

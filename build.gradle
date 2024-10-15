@@ -22,6 +22,7 @@ checkstyle {
 
 test {
     useJUnitPlatform()
+    jvmArgs += ['--add-opens', 'javafx.graphics/com.sun.javafx.application=ALL-UNNAMED']
     finalizedBy jacocoTestReport
 }
 
@@ -61,6 +62,7 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.7.4'
 
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
+    testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
 }
