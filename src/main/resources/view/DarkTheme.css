@@ -321,7 +321,7 @@
     -fx-border-width: 1; /* Set border width, affecting the grey line */
     -fx-font-family: "Segoe UI Semibold"; /* Bold font */
     -fx-font-size: 13pt;
-    -fx-text-fill: white; /* White text for input */
+    -fx-text-fill: black; /* White text for input */
     -fx-prompt-text-fill: black; /* White placeholder text */
 }
 
