@@ -125,7 +125,23 @@ public class ParserUtil {
         }
         return parsedScore;
     }
-
+    /**
+     * Parses a {@code String studentIndex} into a {@code int}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code studentIndex} is invalid.
+     */
+    public static int parseStudentIndex(String studentIndex) throws ParseException {
+        requireNonNull(studentIndex);
+        String trimmedStudentIndex = studentIndex.trim();
+        int parsedStudentIndex;
+        try {
+            parsedStudentIndex = Integer.parseInt(trimmedStudentIndex);
+        } catch (NumberFormatException e) {
+            throw new ParseException("The score must be an integer!");
+        }
+        return parsedStudentIndex;
+    }
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */

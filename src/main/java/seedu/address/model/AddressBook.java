@@ -6,21 +6,14 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.assignment.Assignment;
-import seedu.address.model.assignment.UniqueAssignmentList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
-
-
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameStudent comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
-
     private final UniqueStudentList students;
-    private final UniqueAssignmentList assignments;
-
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -30,7 +23,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         students = new UniqueStudentList();
-        assignments = new UniqueAssignmentList();
     }
 
     public AddressBook() {}
@@ -52,23 +44,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setStudents(List<Student> students) {
         this.students.setStudents(students);
     }
-
-    /**
-     * Replaces the contents of the assignment list with {@code assignments}.
-     * {@code assignments} must not contain duplicate assignments.
-     */
-    public void setAssignments(List<Assignment> assignments) {
-        this.assignments.setAssignments(assignments);
-    }
-
-
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         setStudents(newData.getStudentList());
-        setAssignments(newData.getAssignmentList());
     }
 
     //// student-level operations
@@ -97,7 +78,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
-
         students.setStudent(target, editedStudent);
     }
 
@@ -108,63 +88,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removeStudent(Student key) {
         students.remove(key);
     }
-
-    //// assignment-level operations
-
-    /**
-     * Returns true if an assignment with the same identity as {@code assignment} exists in the app.
-     */
-    public boolean hasAssignment(Assignment assignment) {
-        requireNonNull(assignment);
-        return assignments.contains(assignment);
-    }
-
-    /**
-     * Adds an assignment to the app.
-     * The assignment must not already exist in the app.
-     */
-    public void addAssignment(Assignment a) {
-        assignments.add(a);
-    }
-
-    /**
-     * Replaces the given Assignment {@code assignment} in the list with {@code editedAssignment}.
-     * {@code assignment} must exist in the address book.
-     * The assignment identity of {@code editedAssignment} must not be the same as another existing assignment in the
-     * app.
-     */
-    public void setAssignment(Assignment target, Assignment editedAssignment) {
-        requireNonNull(editedAssignment);
-
-        assignments.setAssignment(target, editedAssignment);
-    }
-
-    /**
-     * Removes {@code key} from this {@code app}.
-     * {@code key} must exist in the address book.
-     */
-    public void removeAssignment(Assignment key) {
-        assignments.remove(key);
-    }
-
     //// util methods
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("students", students)
-                .add("assignments", assignments)
                 .toString();
     }
 
     @Override
     public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public ObservableList<Assignment> getAssignmentList() {
-        return assignments.asUnmodifiableObservableList();
     }
 
     @Override
@@ -179,7 +113,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return students.equals(otherAddressBook.students) && assignments.equals(otherAddressBook.assignments);
+        return students.equals(otherAddressBook.students);
     }
 
     @Override
