@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
@@ -23,6 +24,7 @@ import seedu.address.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DISCARD_PERSON_FORMAT = "The following person contact will be discarded: %1$s";
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -76,10 +78,8 @@ class JsonSerializableAddressBook {
         assert person != null;
 
         if (addressBook.hasPerson(person)) {
-            logger.warning(MESSAGE_DUPLICATE_PERSON + " The following person contact will be discarded:\n"
-                    + "Name: " + person.getName() + "\n" + "Phone: " + person.getPhone() + "\n" + "Email: "
-                    + person.getEmail() + "\n" + "Address: " + person.getAddress() + "\n" + "Tags: "
-                    + person.getTags());
+            logger.warning(String.format(MESSAGE_DUPLICATE_PERSON + " " + MESSAGE_DISCARD_PERSON_FORMAT,
+                    Messages.format(person)));
             return;
         }
         addressBook.addPerson(person);
