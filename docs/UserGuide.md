@@ -90,7 +90,7 @@ Examples:
 
 Shows a list of all persons in the address book.
 
-<div class= "command-box">
+<div class="command-box">
 Format: list
 </div>
 
@@ -98,7 +98,9 @@ Format: list
 
 Edits an existing person in the address book.
 
+<div class="command-box">
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]​`
+</div>
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -112,7 +114,9 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
+<div class="command-box">
 Format: `find KEYWORD [MORE_KEYWORDS]`
+</div>
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -130,7 +134,9 @@ Examples:
 
 Deletes the specified person from the address book.
 
+<div class="command-box">
 Format: `delete NAME`
+</div>
 
 * Deletes the person with the specified `NAME`.
 
@@ -142,13 +148,17 @@ Example:
 
 Clears all entries from the address book.
 
+<div class="command-box">
 Format: `clear`
+</div>
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
+<div class="command-box">
 Format: `exit`
+</div>
 
 ### Saving the data
 
