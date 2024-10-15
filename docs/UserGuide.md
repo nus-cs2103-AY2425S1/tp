@@ -146,9 +146,9 @@ Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
 * The `BUYER_EMAIL` should follow the format local-part@domain and adhere to the following constraints: The local-part must consist only of alphanumeric characters and allowed special characters, with no special characters at the beginning or end. After the local-part, there must be an '@' followed by the domain name. The domain name consists of domain labels separated by periods. Each domain label must start and end with an alphanumeric character and may contain hyphens in between. Additionally, the domain must end with a domain label that is at least two characters long.
 
 Examples:
-* `addbuyer n/John p/12345678 e/john@gmail.com` adds a buyer whose name is `John`, phone number is `12345678` and email is `john@gmail.com`.
+* `addbuyer n/John p/83456789 e/john@gmail.com` adds a buyer whose name is `John`, phone number is `83456789` and email is `john@gmail.com`.
 
-  ![result for 'addbuyer n/John p/12345678 e/john@gmail.com'](images/addbuyer.png)
+  ![result for 'addbuyer n/John p/83456789 e/john@gmail.com'](images/addbuyer.png)
 
 ### Adding a seller : `addseller`
 
@@ -162,9 +162,9 @@ Format: `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`
 * The `SELLER_EMAIL` should follow the format local-part@domain and adhere to the following constraints: The local-part must consist only of alphanumeric characters and allowed special characters, with no special characters at the beginning or end. After the local-part, there must be an '@' followed by the domain name. The domain name consists of domain labels separated by periods. Each domain label must start and end with an alphanumeric character and may contain hyphens in between. Additionally, the domain must end with a domain label that is at least two characters long.
 
 Examples:
-* `addseller n/Mary p/23456789 e/mary@gmail.com` adds a seller whose name is `Mary`, phone number is `23456789` and email is `mary@gmail.com`.
+* `addseller n/Mary p/83456789 e/mary@gmail.com` adds a seller whose name is `Mary`, phone number is `83456789` and email is `mary@gmail.com`.
 
-  ![result for 'addseller n/Mary p/23456789 e/mary@gmail.com'](images/addseller.png)
+  ![result for 'addseller n/Mary p/83456789 e/mary@gmail.com'](images/addseller.png)
 
 ### Deleting a buyer : `deletebuyer`
 
@@ -193,6 +193,22 @@ Examples:
 * `deleteseller p/98765432` deletes the seller with phone number `98765432` from the client book.
 
     ![result for 'deleteseller p/98765432'](images/deleteseller.png)
+
+### Adding a property : `addproperty`
+
+Add a specified property into the client book.
+
+Format: `addproperty c/POSTAL_CODE u/UNIT_NUMBER`
+
+* Adds a property with the specified `POSTAL_CODE` and `UNIT_NUMBER`.
+* The `POSTAL_CODE` must be exactly 6 digits with each digit in the range [0-9]. It does not accept any non-integer characters or spaces
+* The `UNIT_NUMBER` comprises of numbers that is delimited by exactly one dash(-). On either side of the dash are numbers comprising of two or more digit. The range of numbers of the left hand side of the dash is [00-148] and the right hand side is [00-111110]. Other than the dash, other non-integer characters or spaces are not accepted
+
+Examples:
+* `addproperty c/124894 u/15-20` adds a property with postal code `124894` and unit number is `15-20`.
+
+  ![result for 'addproperty c/124894 u/15-20'](images/addproperty.png)
+* 
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
