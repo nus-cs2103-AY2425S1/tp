@@ -8,6 +8,7 @@ import static java.util.Objects.requireNonNull;
 public class Id {
     private static int patientIdCounter = 0;
     private static int doctorIdCounter = 0;
+    private static int personIdCounter = 0; // TODO REMOVE AFTER V1.3
     private int idValue;
     private Class<? extends Person> role;
 
@@ -25,6 +26,8 @@ public class Id {
             idValue = ++patientIdCounter;
         } else if (personClass.equals(Doctor.class)) {
             idValue = ++doctorIdCounter;
+        } else if (personClass.equals(Person.class)) { // TODO AFTER INTEGRATION
+            idValue = ++personIdCounter;
         } else {
             throw new IllegalArgumentException("Invalid class type. Expected Patient or Doctor.");
         }
