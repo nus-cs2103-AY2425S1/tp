@@ -83,8 +83,9 @@ public class AddCommandParserTest {
                 .withAppointments(VALID_APPOINTMENT_ONE, VALID_APPOINTMENT_TWO).build();
 
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                                   + ADDRESS_DESC_BOB + APPOINTMENT_DESC_ONE + APPOINTMENT_DESC_TWO
-                                   + TAG_DESC_FRIEND, new AddCommand(expectedPersonMultipleAppointments));
+                + ADDRESS_DESC_BOB + AGE_DESC_BOB + SEX_DESC_BOB
+                + APPOINTMENT_DESC_ONE + APPOINTMENT_DESC_TWO + TAG_DESC_FRIEND,
+                new AddCommand(expectedPersonMultipleAppointments));
     }
 
     @Test
@@ -165,13 +166,13 @@ public class AddCommandParserTest {
         Person expectedPersonNoTagOneAppointment = new PersonBuilder(AMY).withTags()
                 .withAppointments(VALID_APPOINTMENT_ONE).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                                   + ADDRESS_DESC_AMY + APPOINTMENT_DESC_ONE,
+                                   + ADDRESS_DESC_AMY + AGE_DESC_AMY + SEX_DESC_AMY + APPOINTMENT_DESC_ONE,
                 new AddCommand(expectedPersonNoTagOneAppointment));
 
         // one tag and zero appointments
         Person expectedPersonOneTagNoAppointments = new PersonBuilder(AMY).withTags(VALID_TAG_HUSBAND).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                                   + ADDRESS_DESC_AMY + TAG_DESC_HUSBAND,
+                                   + ADDRESS_DESC_AMY + AGE_DESC_AMY + SEX_DESC_AMY + TAG_DESC_HUSBAND,
                 new AddCommand(expectedPersonOneTagNoAppointments));
     }
 
@@ -233,8 +234,9 @@ public class AddCommandParserTest {
                 + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
         // invalid appointment
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                                   + INVALID_APPOINTMENT_DESC + VALID_TAG_FRIEND, Appointment.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB + AGE_DESC_BOB + SEX_DESC_BOB
+                + INVALID_APPOINTMENT_DESC + VALID_TAG_FRIEND, Appointment.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
