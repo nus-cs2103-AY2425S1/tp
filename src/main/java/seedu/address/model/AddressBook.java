@@ -99,10 +99,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns a HashMap of the currently used Tags and their occurences
+     * Returns a HashMap of the currently used Tags and their occurrences
      * @return
      */
-    public HashMap<Tag, Integer> findTagOccurences() {
+    public HashMap<Tag, Integer> findTagOccurrences() {
         HashMap<Tag, Integer> result = new HashMap<>();
         Iterator<Person> iterator = persons.iterator();
         while (iterator.hasNext()) {
@@ -113,7 +113,7 @@ public class AddressBook implements ReadOnlyAddressBook {
                     Integer i = result.get(t);
                     result.replace(t, i + 1);
                 } else {
-                    result.put(t, 0);
+                    result.put(t, 1);
                 }
             }
         }
