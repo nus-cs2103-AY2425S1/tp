@@ -36,17 +36,17 @@ public class Grade {
     }
 
     /**
-     * Returns true is given string is a valid grade
-     */
-    public static boolean isValidGrade(String grade) {
-        return grade.matches(VALIDATION_REGEX);
-    }
-
-    /**
      * Constructs an empty {@code Grade}
      */
     private Grade() {
         this.grade = Optional.empty();
+    }
+
+    /**
+     * Returns true is given string is a valid grade
+     */
+    public static boolean isValidGrade(String grade) {
+        return grade.matches(VALIDATION_REGEX);
     }
 
     /**

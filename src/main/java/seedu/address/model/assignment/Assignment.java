@@ -36,10 +36,48 @@ public class Assignment {
     }
 
     /**
-     * Returns assignment name
+     * Returns the {@code AssignmentName} of the assignment.
+     *
+     * @return The name of the assignment.
      */
-    public String getName() {
-        return assignmentName.fullName;
+    public AssignmentName getAssignmentName() {
+        return assignmentName;
+    }
+
+    /**
+     * Returns the {@code Deadline} of the assignment.
+     *
+     * @return The deadline of the assignment.
+     */
+    public Deadline getDeadline() {
+        return deadline;
+    }
+
+    /**
+     * Returns the {@code Submission Status} of the assignment.
+     *
+     * @return The submission status of the assignment.
+     */
+    public Status getSubmissionStatus() {
+        return submissionStatus;
+    }
+
+    /**
+     * Returns the {@code Grading Status} of the assignment.
+     *
+     * @return The grading status of the assignment.
+     */
+    public Status getGradingStatus() {
+        return gradingStatus;
+    }
+
+    /**
+     * Returns the {@code Grade} of the assignment.
+     *
+     * @return The grade of the assignment.
+     */
+    public Grade getGrade() {
+        return grade;
     }
 
     @Override

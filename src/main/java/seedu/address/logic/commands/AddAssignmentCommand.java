@@ -62,6 +62,6 @@ public class AddAssignmentCommand extends Command {
         }
 
         student.addAssignment(assignment);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, assignment.getName(), student.getName()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, assignment.getAssignmentName(), student.getName()));
     }
 }

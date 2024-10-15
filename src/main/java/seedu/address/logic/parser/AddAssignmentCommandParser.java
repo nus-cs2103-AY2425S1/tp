@@ -48,7 +48,8 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
                 argMultimap.getValue(CliSyntax.PREFIX_ASSIGNMENT).get());
         List<Status> statusList = ParserUtil.parseStatuses(argMultimap.getAllValues(CliSyntax.PREFIX_STATUS));
 
-        Status submissionStatus, gradingStatus;
+        Status submissionStatus;
+        Status gradingStatus;
         switch (statusList.size()) {
         case 2:
             submissionStatus = statusList.get(0);
@@ -67,8 +68,8 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
         }
         Grade grade;
         if (gradingStatus.isGraded()) {
-            grade = ParserUtil.parseGrade(argMultimap.getValue(CliSyntax.PREFIX_GRADE).orElseThrow(
-                    () -> new ParseException(MESSAGE_EXPECTED_GRADE)
+            grade = ParserUtil.parseGrade(argMultimap.getValue(CliSyntax.PREFIX_GRADE)
+                    .orElseThrow(() -> new ParseException(MESSAGE_EXPECTED_GRADE)
             ));
         } else {
             grade = Grade.getDefault();
