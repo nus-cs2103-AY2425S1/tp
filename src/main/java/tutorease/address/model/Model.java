@@ -14,7 +14,7 @@ import tutorease.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-
+    Predicate<Lesson> PREDICATE_SHOW_ALL_LESSONS = unused -> true;
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -92,6 +92,10 @@ public interface Model {
      * @return The lesson schedule.
      */
     LessonSchedule getLessonSchedule();
+
+    ObservableList<Lesson> getFilteredLessonList();
+
+    void updateFilteredLessonList(Predicate<Lesson> predicate);
 
     /**
      * Adds the given lesson.
