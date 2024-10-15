@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DIAGNOSIS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WARD_BOB;
@@ -32,7 +33,8 @@ public class PersonTest {
         assertFalse(ALICE.isSamePerson(null));
 
         // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withId(VALID_ID_BOB).withWard(VALID_WARD_BOB).build();
+        Person editedAlice = new PersonBuilder(ALICE).withId(VALID_ID_BOB).withWard(VALID_WARD_BOB)
+                .withDiagnosis(VALID_DIAGNOSIS_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -64,12 +66,8 @@ public class PersonTest {
         // different type -> returns false
         assertFalse(ALICE.equals(5));
 
-        /*
         // different person -> returns false
         assertFalse(ALICE.equals(BOB));
-
-         */
-
 
         // different name -> returns false
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
@@ -103,7 +101,7 @@ public class PersonTest {
 
          */
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", id=" + ALICE.getId()
-                + ", ward=" + ALICE.getWard() + "}";
+                + ", ward=" + ALICE.getWard() + ", diagnosis=" + ALICE.getDiagnosis() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

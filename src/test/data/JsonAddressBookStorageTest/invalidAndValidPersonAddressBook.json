@@ -2,10 +2,12 @@
   "persons": [ {
     "name": "Valid Person",
     "id": "P12345",
-    "ward" : "A1"
+    "ward" : "A1",
+    "diagnosis" : "E. coli infection"
   }, {
-    "name": "Person With Invalid Id Field",
+    "name": "Person With Invalid Id and Ward Field",
     "id": "P12D45",
-    "ward" : "B 2"
+    "ward" : "B 2",
+    "diagnosis" : "HIV/AIDS"
   } ]
 }

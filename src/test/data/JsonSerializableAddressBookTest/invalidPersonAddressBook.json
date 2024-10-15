@@ -2,6 +2,7 @@
   "persons": [ {
     "name": "Hans Muster",
     "id": "P123D5",
-    "ward" : "A1"
+    "ward" : "A1",
+    "diagnosis" : "E. coli infection"
   } ]
 }

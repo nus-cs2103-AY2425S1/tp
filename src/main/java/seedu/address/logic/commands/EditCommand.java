@@ -180,6 +180,7 @@ public class EditCommand extends Command {
         public Optional<Id> getId() {
             return Optional.ofNullable(id);
         }
+
         public void setName(Name name) {
             this.name = name;
         }
