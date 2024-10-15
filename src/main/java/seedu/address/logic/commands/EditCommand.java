@@ -272,8 +272,8 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("ward", ward)
                     .add("diagnosis", diagnosis)
-                    /*
                     .add("medication", medication)
+                    /*
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)

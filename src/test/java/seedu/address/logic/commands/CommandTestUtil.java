@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WARD;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class CommandTestUtil {
     public static final String VALID_DIAGNOSIS_AMY = "Celiac Disease";
     public static final String VALID_DIAGNOSIS_BOB = "Chronic Sinusitis";
     public static final String VALID_MEDICATION_AMY = "gluten-free diet";
-    public static final String VALID_MEDICATION_BOB = "Fluticasone (Flonase, Veramyst)";
+    public static final String VALID_MEDICATION_BOB = "Fluticasone (Flonase Veramyst)";
     public static final String VALID_NOTES_AMY = "Like skiing.";
     public static final String VALID_NOTES_BOB = "Favourite pastime: Eating";
     /*

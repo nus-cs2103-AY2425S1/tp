@@ -3,9 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WARD;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
 
 import java.util.stream.Stream;
 
@@ -13,10 +13,10 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Diagnosis;
 import seedu.address.model.person.Id;
+import seedu.address.model.person.Medication;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Ward;
-import seedu.address.model.person.Medication;
 
 
 /**

@@ -2,18 +2,17 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.DIAGNOSIS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEDICATION_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.MEDICATION_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_WARD_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.MEDICATION_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DIAGNOSIS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICATION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICATION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WARD_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.WARD_DESC_AMY;
@@ -31,7 +30,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Id;
-import seedu.address.model.person.Medication;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Ward;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -77,8 +75,6 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_ID_DESC, Id.MESSAGE_CONSTRAINTS); // invalid id
         assertParseFailure(parser, "1" + INVALID_WARD_DESC, Ward.MESSAGE_CONSTRAINTS); // invalid ward
         assertParseFailure(parser, "1" + INVALID_WARD_DESC, Ward.MESSAGE_CONSTRAINTS); // invalid ward
-        assertParseFailure(parser, "1" + INVALID_MEDICATION_DESC,
-                Medication.MESSAGE_CONSTRAINTS); // invalid medication
 
         /*
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone

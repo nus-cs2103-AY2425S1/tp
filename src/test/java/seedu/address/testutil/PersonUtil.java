@@ -5,9 +5,9 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WARD;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
 //import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 //import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 

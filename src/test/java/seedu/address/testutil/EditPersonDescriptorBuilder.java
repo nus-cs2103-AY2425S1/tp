@@ -9,10 +9,10 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 //import seedu.address.model.person.Email;
 import seedu.address.model.person.Diagnosis;
 import seedu.address.model.person.Id;
+import seedu.address.model.person.Medication;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Ward;
-import seedu.address.model.person.Medication;
 //import seedu.address.model.person.Phone;
 //import seedu.address.model.tag.Tag;
 
@@ -75,7 +75,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Medication} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withMedication(String medication) {
-        descriptor.setDiagnosis(new Diagnosis(medication));
+        descriptor.setMedication(new Medication(medication));
         return this;
     }
 
