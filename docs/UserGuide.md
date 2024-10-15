@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+<link rel="stylesheet" type="text/css" href="assets/css/UserGuide.css">
+
+EZStates is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -27,9 +29,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete John Doe` : Deletes the contact with name John Doe from the list.
 
    * `clear` : Deletes all contacts.
 
@@ -69,51 +71,84 @@ Shows a message explaning how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+#### Command Format
+<div class="command-box">
+help
+</div>
 
-
-### Adding a person: `add`
+### Adding a Person: `add`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+#### Command Format
+<div class="command-box">
+add n/NAME p/PHONE_NUMBER e/EMAIL
 </div>
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+#### Successful Execution
+**Example**
+> **Use Case**: Adding a client named `John Doe` with phone number `98765432` and email `johnd@example.com`.
+>
+> **Input**:  `add n/John Doe p/98765432 e/johnd@example.com`
+>
+> **Output**:
 
-### Listing all persons : `list`
+#### Failed Execution
+**Example**
+> **User Error**: Missing a `PHONE` field.
+>
+> **Input**: `add n/Betsy Crowe e/betsycrowe@example.com`
+>
+> **Output**:
+
+
+### Listing all Persons : `list`
 
 Shows a list of all persons in the address book.
 
-Format: `list`
+#### Command Format
+<div class="command-box">
+list
+</div>
 
-### Editing a person : `edit`
+### Editing a Person : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+#### Command Format
+<div class="command-box">
+edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]
+</div>
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+#### Successful Execution
+**Example 1**
+> **Use Case**: Editing phone number and email address of the 1st person in the list to be `91234567` and `johndoe@example.com` respectively.
+> 
+> **Input**:  `edit 1 p/91234567 e/johndoe@example.com`
+>
+> **Output**: 
+
+**Example 2** 
+> **Use Case**: Editing the name of the 2nd person in the list to be `Betsy Crower`.
+> 
+> **Input**: `edit 2 n/Betsy Crower`
+> 
+> **Output**:  
+
+#### Failed Execution
 
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+#### Command Format
+<div class="command-box">
+find KEYWORD [MORE_KEYWORDS]
+</div>
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -122,36 +157,74 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+#### Successful Execution
+**Example 1**
+> **Use Case**: Finding all clients with `John` in their names.
+> 
+> **Input**: `find John`
+> 
+> **Output**: 
+
+**Example 2**
+> **Use Case**: Finding all clients with `Alex` *OR* `David` in their names.
+> 
+> **Input**: `find alex david`
+> 
+> **Output**: 2 persons listed!
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+#### Failed Execution
+**Example 1**
+> **User Error**: Attempting to find a user that does not exist.
+> 
+> **Input**: `find BabyLockEmDoors`
+> 
+> **Output**:
 
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+#### Command Format
+<div class="command-box">
+delete n/NAME
+</div>
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person with the specified `NAME`.
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+#### Successful Execution
+**Example**
+> **Use Case**: Deleting `John Doe` from the address book.
+> 
+> **Input**: `delete n/John Doe`
+> 
+> **Output**:
+
+#### Failed Execution
+**Example**
+> **User Error**: Attempting to delete someone that does not exist.
+> 
+> **Input**:
+> 
+> **Output**:
 
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
-Format: `clear`
+#### Command Format
+<div class="command-box">
+clear
+</div>
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
-Format: `exit`
+#### Command Format
+<div class="command-box">
+exit
+</div>
 
 ### Saving the data
 
@@ -190,10 +263,10 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Delete** | `delete NAME`<br> e.g. `delete James Ho`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com` <br> e.g.`edit 2 n/James Voo`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
