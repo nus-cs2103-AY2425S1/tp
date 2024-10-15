@@ -25,8 +25,9 @@ public class Nric {
      * @param nric A valid NRIC.
      */
     public Nric(String nric) {
-        requireNonNull(nric);
-        checkArgument(isValidNric(nric), MESSAGE_CONSTRAINTS);
+        String newNric = nric.toUpperCase();
+        requireNonNull(newNric);
+        checkArgument(isValidNric(newNric), MESSAGE_CONSTRAINTS);
         fullNric = nric;
     }
 
@@ -54,7 +55,7 @@ public class Nric {
         }
 
         Nric otherNric = (Nric) other;
-        return fullNric.equals(otherNric.fullNric);
+        return fullNric.equalsIgnoreCase(otherNric.fullNric);
     }
 
     @Override
