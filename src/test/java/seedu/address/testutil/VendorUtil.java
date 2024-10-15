@@ -4,6 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
 
 import java.util.Set;
 
@@ -21,7 +22,7 @@ public class VendorUtil {
      * Returns an add command string for adding the {@code vendor}.
      */
     public static String getAddCommand(Vendor vendor) {
-        return CreateVendorCommand.COMMAND_WORD + " " + getVendorDetails(vendor);
+        return CreateVendorCommand.COMMAND_WORD + " " + PREFIX_VENDOR + " " + getVendorDetails(vendor);
     }
 
     /**
