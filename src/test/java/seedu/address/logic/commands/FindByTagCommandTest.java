@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalCampusConnect;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,8 +22,8 @@ import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 public class FindByTagCommandTest {
 
-    private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalCampusConnect(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalCampusConnect(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -64,7 +64,7 @@ public class FindByTagCommandTest {
 
     @Test
     public void execute_resultsWithPartialMatch_multiplePersonsFound() {
-        System.out.println(expectedModel.getAddressBook().toString());
+        System.out.println(expectedModel.getCampusConnect().toString());
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         TagContainsKeywordsPredicate predicate = preparePredicate("en");
         FindByTagCommand command = new FindByTagCommand(predicate);
