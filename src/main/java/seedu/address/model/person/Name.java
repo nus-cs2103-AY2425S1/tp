@@ -40,6 +40,17 @@ public class Name {
 
     private static String formatName(String name) {
         String[] words = name.toLowerCase().split("\\s+");
+        return formatWords(words);
+    }
+
+    /**
+     * Formats an array of words by capitalizing the first letter of each word
+     * and joining them into a single string.
+     *
+     * @param words Array of words to be formatted.
+     * @return A formatted string with each word capitalized.
+     */
+    private static String formatWords(String[] words) {
         StringBuilder formattedWords = new StringBuilder();
 
         for (String word : words) {
@@ -52,7 +63,7 @@ public class Name {
     }
 
     /**
-     * Helps to capitalize the first letter of each word.
+     * Capitalizes the first letter of the word.
      *
      * @param word The word to be formatted.
      * @return Word with the first letter capitalized.
@@ -60,6 +71,7 @@ public class Name {
     private static String capitalizeWord(String word) {
         return Character.toUpperCase(word.charAt(0)) + word.substring(1);
     }
+
 
 
 
