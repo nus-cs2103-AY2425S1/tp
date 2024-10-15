@@ -1,6 +1,9 @@
 package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 
@@ -13,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 public class HelpWindowTest {
 
@@ -21,6 +25,8 @@ public class HelpWindowTest {
 
     @BeforeEach
     public void setUp() throws InterruptedException {
+        System.setProperty("java.awt.headless", "true");
+
         new JFXPanel();
 
         CountDownLatch latch = new CountDownLatch(1);
@@ -33,6 +39,18 @@ public class HelpWindowTest {
         if (!latch.await(5, TimeUnit.SECONDS)) {
             fail("HelpWindow initialization timed out");
         }
+    }
+
+    @Test
+    public void testHyperlinkTextProperties() {
+        assertNotNull(helpWindow);
+
+        Platform.runLater(() -> {
+            Color expectedColor = Color.rgb(173, 216, 230);
+            assertEquals(expectedColor, helpWindow.getHyperlinkTextFill());
+
+            assertTrue(helpWindow.isHyperlinkTextUnderlined());
+        });
     }
 
     @Test
