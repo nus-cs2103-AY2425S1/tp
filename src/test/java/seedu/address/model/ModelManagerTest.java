@@ -37,6 +37,7 @@ public class ModelManagerTest {
     @TempDir
     public Path temporaryFolder;
     private ModelManager modelManager;
+    private StorageManager storage;
 
     /**
      * Sets up the test environment with the required storage.
@@ -47,7 +48,7 @@ public class ModelManagerTest {
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        storage = new StorageManager(addressBookStorage, userPrefsStorage);  // Initialize storage
 
         modelManager = new ModelManager(new AddressBook(), new UserPrefs(), storage);
     }
@@ -273,6 +274,23 @@ public class ModelManagerTest {
         boolean restored = modelManager.restoreFromBackup();
         assertTrue(restored, "Restoration should be successful.");
         assertFalse(modelManager.hasPerson(ALICE), "Person should not exist after restoration.");
+    }
+
+    @Test
+    public void backupData_nullStorage_throwsIOException() {
+        ModelManager modelWithoutStorage = new ModelManager(new AddressBook(), new UserPrefs(), null);
+        String backupPath = temporaryFolder.resolve("backup.json").toString();
+
+        assertThrows(IOException.class, () -> modelWithoutStorage.backupData(backupPath),
+                "Expected IOException when storage is not initialized.");
+    }
+    
+    @Test
+    public void cleanOldBackups_nullStorage_throwsIOException() {
+        ModelManager modelWithoutStorage = new ModelManager(new AddressBook(), new UserPrefs(), null);
+
+        assertThrows(IOException.class, () -> modelWithoutStorage.cleanOldBackups(5),
+                "Expected IOException when storage is not initialized.");
     }
 
 }
