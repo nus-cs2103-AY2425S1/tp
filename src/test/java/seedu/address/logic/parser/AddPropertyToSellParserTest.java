@@ -89,4 +89,39 @@ public class AddPropertyToSellParserTest {
 
         assertThrows(ParseException.class, () -> parser.parse(userInput));
     }
+
+    @Test
+    public void parse_invalidUnitNumber_throwsParseException() {
+        String userInput = INDEX_FIRST_PERSON.getOneBased() + " "
+                + PREFIX_HOUSING_TYPE + "Condo "
+                + PREFIX_SELLING_PRICE + "1000000 "
+                + PREFIX_POSTAL_CODE + "123456 "
+                + PREFIX_UNIT_NUMBER + "invalidUnitNumber "
+                + PREFIX_TAG + "New";
+
+        assertThrows(ParseException.class, () -> parser.parse(userInput));
+    }
+    @Test
+    public void parse_invalidTag_throwsParseException() {
+        String userInput = INDEX_FIRST_PERSON.getOneBased() + " "
+                + PREFIX_HOUSING_TYPE + "Condo "
+                + PREFIX_SELLING_PRICE + "1000000 "
+                + PREFIX_POSTAL_CODE + "123456 "
+                + PREFIX_UNIT_NUMBER + "10-01 "
+                + PREFIX_TAG + "InvalidTag";
+
+        assertThrows(ParseException.class, () -> parser.parse(userInput));
+    }
+    @Test
+    public void parse_allFieldsPresent_success() throws ParseException {
+        String userInput = INDEX_FIRST_PERSON.getOneBased() + " "
+                + PREFIX_HOUSING_TYPE + "a "
+                + PREFIX_SELLING_PRICE + "1000000 "
+                + PREFIX_POSTAL_CODE + "123456 "
+                + PREFIX_UNIT_NUMBER + "10-01 "
+                + PREFIX_TAG + "New";
+
+        // No exception should be thrown
+        parser.parse(userInput);
+    }
 }

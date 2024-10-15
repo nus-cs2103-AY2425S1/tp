@@ -62,7 +62,7 @@ public class OtherPropertyTest {
                 new UnitNumber("01-01"), new Price("500000"), tags);
         OtherProperty otherProperty3 = new OtherProperty(new PostalCode("654321"),
                 new UnitNumber("02-02"), new Price("600000"), tags);
-        Apartment apartment1 = new Apartment(new PostalCode("123456"), new UnitNumber("10-01"),
+        Apartment apartment1 = new Apartment(new PostalCode("123456"), new UnitNumber("01-01"),
                 new Price("500000"), tags);
 
         // Test for equality with the same object
