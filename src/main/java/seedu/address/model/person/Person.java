@@ -90,7 +90,7 @@ public class Person {
     }
 
     /**
-     * Constructor with the speciality field.
+     * Constructor with the dateOfBirth and gender fields.
      */
     public Person(
         Name name,
