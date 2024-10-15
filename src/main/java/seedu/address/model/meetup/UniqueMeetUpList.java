@@ -37,9 +37,8 @@ public class UniqueMeetUpList implements Iterable<MeetUp> {
      * Returns true if the list contains an equivalent MeetUp as the given argument.
      */
     public boolean contains(MeetUp toCheck) {
-        // TODO
-         requireNonNull(toCheck);
-         return internalList.stream().anyMatch(toCheck::isSameMeetUp);
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameMeetUp);
     }
 
     /**
@@ -49,8 +48,7 @@ public class UniqueMeetUpList implements Iterable<MeetUp> {
     public void add(MeetUp toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            // TODO
-             throw new DuplicateMeetUpException();
+            throw new DuplicateMeetUpException();
         }
         internalList.add(toAdd);
     }
