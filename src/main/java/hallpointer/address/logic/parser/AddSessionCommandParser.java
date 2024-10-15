@@ -2,11 +2,15 @@ package hallpointer.address.logic.parser;
 
 import static hallpointer.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static hallpointer.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_POINTS;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.logic.commands.AddSessionCommand;
 import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.session.SessionDate;
@@ -26,9 +30,9 @@ public class AddSessionCommandParser implements Parser<AddSessionCommand> {
      */
     public AddSessionCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_SESSION_NAME, PREFIX_DATE, PREFIX_POINTS);
+                ArgumentTokenizer.tokenize(args, PREFIX_SESSION_NAME, PREFIX_DATE, PREFIX_POINTS, PREFIX_MEMBER);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_SESSION_NAME, PREFIX_DATE, PREFIX_POINTS)
+        if (!arePrefixesPresent(argMultimap, PREFIX_SESSION_NAME, PREFIX_DATE, PREFIX_POINTS, PREFIX_MEMBER)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSessionCommand.MESSAGE_USAGE));
         }
@@ -36,10 +40,20 @@ public class AddSessionCommandParser implements Parser<AddSessionCommand> {
         SessionName name = ParserUtil.parseSessionName(argMultimap.getValue(PREFIX_SESSION_NAME).get());
         SessionDate date = ParserUtil.parseSessionDate(argMultimap.getValue(PREFIX_DATE).get());
         Point points = ParserUtil.parsePoints(argMultimap.getValue(PREFIX_POINTS).get());
+        List<Index> memberIndexes = argMultimap.getAllValues(PREFIX_MEMBER).stream()
+                .map(value -> {
+                    try {
+                        return ParserUtil.parseIndex(value);
+                    } catch (ParseException e) {
+                        throw new IllegalArgumentException("Invalid member index: " + value);
+                    }
+                })
+                .collect(Collectors.toList());
+
 
         Session session = new Session(name, date, points);
 
-        return new AddSessionCommand(session);
+        return new AddSessionCommand(session, memberIndexes);
     }
 
     /**
