@@ -24,6 +24,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -171,6 +172,10 @@ public class AppointmentCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public Person getPersonByName(Name name) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

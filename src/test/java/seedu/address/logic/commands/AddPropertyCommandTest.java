@@ -31,7 +31,7 @@ public class AddPropertyCommandTest {
         AddPropertyCommand addPropertyCommand = new AddPropertyCommand(INDEX_FIRST_PERSON, property);
 
         Person personWithAddedProperty = new Person(personToAddProperty.getName(),
-                personToAddProperty.getPhone(), personToAddProperty.getEmail(),
+                personToAddProperty.getPhone(), personToAddProperty.getEmail(), personToAddProperty.getTags(),
                 personToAddProperty.getAppointment(), property);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToAddProperty, personWithAddedProperty);
@@ -59,7 +59,7 @@ public class AddPropertyCommandTest {
         AddPropertyCommand addPropertyCommand = new AddPropertyCommand(INDEX_FIRST_PERSON, property);
 
         Person personWithAddedProperty = new Person(personToAddProperty.getName(),
-                personToAddProperty.getPhone(), personToAddProperty.getEmail(),
+                personToAddProperty.getPhone(), personToAddProperty.getEmail(), personToAddProperty.getTags(),
                 personToAddProperty.getAppointment(), property);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToAddProperty, personWithAddedProperty);
