@@ -19,10 +19,6 @@ import seedu.address.model.tag.Tag;
  */
 public class Patient extends Person {
 
-    // Patient-specific data fields
-    private final DateOfBirth dateOfBirth;
-    private final Gender gender;
-
     /**
      * Every field must be present and not null.
      */
@@ -35,19 +31,8 @@ public class Patient extends Person {
         Gender gender,
         Set<Tag> tags
     ) {
-        super(name, phone, email, address, tags);
-
+        super(name, phone, email, address, dateOfBirth, gender, tags);
         requireAllNonNull(dateOfBirth, gender);
-        this.dateOfBirth = dateOfBirth;
-        this.gender = gender;
-    }
-
-    public DateOfBirth getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public Gender getGender() {
-        return gender;
     }
 
     /**
@@ -76,8 +61,8 @@ public class Patient extends Person {
         }
 
         Patient otherPatient = (Patient) other;
-        return dateOfBirth.equals(otherPatient.dateOfBirth)
-                && gender.equals(otherPatient.gender);
+        return super.getDateOfBirth().equals(otherPatient.getDateOfBirth())
+                && super.getGender().equals(otherPatient.getGender());
     }
 
     @Override
@@ -88,8 +73,8 @@ public class Patient extends Person {
             super.getPhone(),
             super.getEmail(),
             super.getAddress(),
-            dateOfBirth,
-            gender,
+            super.getDateOfBirth(),
+            super.getGender(),
             super.getTags()
         );
     }
@@ -101,8 +86,8 @@ public class Patient extends Person {
                 .add("phone", super.getPhone())
                 .add("email", super.getEmail())
                 .add("address", super.getAddress())
-                .add("dob", dateOfBirth)
-                .add("gender", gender)
+                .add("dob", super.getDateOfBirth())
+                .add("gender", super.getGender())
                 .add("tags", super.getTags())
                 .toString();
     }
