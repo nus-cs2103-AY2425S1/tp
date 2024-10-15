@@ -101,6 +101,15 @@ public class Client {
         return (numberOfOpenClaims == 0) ? NO_CLAIMS_MESSAGE : String.format(OPEN_CLAIMS_MESSAGE, numberOfOpenClaims);
     }
 
+    public String accessClaims() {
+        int numberOfOpenClaims = this.insurancePlansManager.getNumberOfOpenClaims();
+        if (numberOfOpenClaims == 0) {
+            return NO_CLAIMS_MESSAGE;
+        } else {
+            return "";
+        }
+    }
+
     /**
      * Returns true if both clients have the same identity and data fields.
      * This defines a stronger notion of equality between two clients.
