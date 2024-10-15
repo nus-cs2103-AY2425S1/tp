@@ -20,8 +20,8 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String HELP_MESSAGE_COMMANDS = "Below are the list of commands TalentSG supports:\n\n"
             + "Add    |    Edit    |    List    |    Delete    |    View    |    Find    |    Filter    |    Clear  "
             + "    |    Help    |    Exit\n\n";
-    public static final String HELP_MESSAGE = HELP_MESSAGE_COMMANDS + "For additional information, " +
-            "please refer to the user guide:\n " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE = HELP_MESSAGE_COMMANDS + "For additional information, "
+            + "please refer to the user guide:\n " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
