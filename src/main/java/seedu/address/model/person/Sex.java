@@ -10,9 +10,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Sex {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Sex should only contain alphabets, and it should not be blank";
+            "Sex should only contain alphanumeric characters and spaces, and it should not be blank\"";
 
-    public static final String VALIDATION_REGEX = "[a-zA-Z]";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String sex;
 

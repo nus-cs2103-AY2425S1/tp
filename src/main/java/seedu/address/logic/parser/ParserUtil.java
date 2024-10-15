@@ -117,7 +117,7 @@ public class ParserUtil {
         requireNonNull(sex);
         String trimmedSex = sex.trim();
         if (!Sex.isValidSex(trimmedSex)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Sex.MESSAGE_CONSTRAINTS);
         }
         return new Sex(trimmedSex);
     }
