@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -37,6 +38,7 @@ public class PersonUtil {
         person.getClientTypes().stream().forEach(
             s -> sb.append(PREFIX_CLIENT_TYPE + s.clientTypeName + " ")
         );
+        sb.append(PREFIX_DESCRIPTION + person.getDescription().description + " ");
         return sb.toString();
     }
 
@@ -57,6 +59,8 @@ public class PersonUtil {
                 clientTypes.forEach(s -> sb.append(PREFIX_CLIENT_TYPE).append(s.clientTypeName).append(" "));
             }
         }
+        descriptor.getDescription().ifPresent(description -> sb.append(PREFIX_DESCRIPTION)
+                .append(description.description).append(" "));
         return sb.toString();
     }
 }

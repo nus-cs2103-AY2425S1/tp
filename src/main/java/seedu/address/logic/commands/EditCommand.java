@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -23,6 +24,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.clienttype.ClientType;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -44,6 +46,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_CLIENT_TYPE + "CLIENT_TYPE]...\n"
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -101,8 +104,11 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<ClientType> updatedClientTypes =
                 editPersonDescriptor.getClientTypes().orElse(personToEdit.getClientTypes());
+        Description updatedDescription = editPersonDescriptor.getDescription()
+                .orElse(personToEdit.getDescription());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedClientTypes);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedClientTypes, updatedDescription);
     }
 
     @Override
@@ -139,6 +145,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<ClientType> clientTypes;
+        private Description description;
 
         public EditPersonDescriptor() {}
 
@@ -152,6 +159,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setClientTypes(toCopy.clientTypes);
+            setDescription(toCopy.description);
         }
 
         /**
@@ -210,6 +218,14 @@ public class EditCommand extends Command {
             return (clientTypes != null) ? Optional.of(Collections.unmodifiableSet(clientTypes)) : Optional.empty();
         }
 
+        public void setDescription(Description description) {
+            this.description = description;
+        }
+
+        public Optional<Description> getDescription() {
+            return Optional.ofNullable(description);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -226,7 +242,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(clientTypes, otherEditPersonDescriptor.clientTypes);
+                    && Objects.equals(clientTypes, otherEditPersonDescriptor.clientTypes)
+                    && Objects.equals(description, otherEditPersonDescriptor.description);
         }
 
         @Override
@@ -237,6 +254,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("clientTypes", clientTypes)
+                    .add("description", description)
                     .toString();
         }
     }
