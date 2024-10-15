@@ -35,7 +35,6 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        // TODO: fees, classid, monthspaid are set to basic default values by default
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_FEES, PREFIX_CLASSID, PREFIX_TAG);
@@ -68,6 +67,18 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+    @Override
+    public boolean equals(Object other) {
+
+        if (!(other instanceof AddCommandParser)) {
+            return false;
+        }
+        if (other == this) {
+            return true;
+        }
+        // instanceof handles nulls
+        return true;
     }
 
 }

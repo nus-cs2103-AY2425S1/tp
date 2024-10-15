@@ -81,7 +81,6 @@ public class AddCommand extends Command {
         AddCommand otherAddCommand = (AddCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
     }
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
