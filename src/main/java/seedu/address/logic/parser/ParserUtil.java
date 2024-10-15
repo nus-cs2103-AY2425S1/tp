@@ -178,6 +178,12 @@ public class ParserUtil {
         return new ItemName(trimmedName);
     }
 
+    /**
+     * Parses a {@code String status} into an {@code Status.java}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
     public static Status parseStatus(String status) throws ParseException {
         requireNonNull(status);
         String trimmedStatus = status.trim();
