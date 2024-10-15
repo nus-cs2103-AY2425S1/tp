@@ -93,7 +93,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removePerson(Person key) {
         persons.remove(key);
     }
-    
+
     /**
      * Deletes the appointment of the given {@code target}.
      * The person must exist in the address book.

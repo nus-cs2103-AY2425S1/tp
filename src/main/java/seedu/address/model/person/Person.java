@@ -101,7 +101,7 @@ public class Person {
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         return appointmentDateTime.isAfter(now);
     }
-    
+
     /**
      * Removes the appointment of the person by setting the schedule to an empty string.
      */

@@ -12,16 +12,16 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 public class DeleteAppointmentCommand extends Command {
-    
+
     public static final String COMMAND_WORD = "appointment-delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the specified appointment.\n"
             + "Parameters: NAME (must be the name of an existing client)\n"
             + "Example: " + COMMAND_WORD + " John Doe";
-    
+
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted appointment: %1$s";
-    
+
     private Name name;
 
     public DeleteAppointmentCommand(Name name) {
@@ -49,22 +49,22 @@ public class DeleteAppointmentCommand extends Command {
         model.deleteAppointment(appointmentToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS, Messages.format(appointmentToDelete)));
     }
-    
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
-        
+ 
         // instanceof handles nulls
         if (!(other instanceof DeleteAppointmentCommand)) {
             return false;
         }
-        
+
         DeleteAppointmentCommand otherDeleteAppointmentCommand = (DeleteAppointmentCommand) other;
         return name.equals(otherDeleteAppointmentCommand.name);
     }
-    
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
