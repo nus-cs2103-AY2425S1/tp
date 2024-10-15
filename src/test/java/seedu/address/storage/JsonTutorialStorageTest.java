@@ -45,7 +45,7 @@ public class JsonTutorialStorageTest {
     }
     @Test
     public void saveTutorials_saveDataToFile_success() throws Exception {
-        Path filePath = testFolder.resolve("TempTutorial.json");
+        Path filePath = Paths.get("testtutorials.json");
         JsonTutorialStorage jsonTutorialStorage = new JsonTutorialStorage(filePath);
 
         // Step 1: Create a tutorial sample
@@ -79,7 +79,6 @@ public class JsonTutorialStorageTest {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
-
     @Test
     public void saveTutorials_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveTutorials(List.of(TUT_SAMPLE), null));
