@@ -93,7 +93,7 @@ public class TagContainsKeywordPredicateTest {
     }
 
     @Test
-    public void test_personHasMixedTags_someMatching_returnsTrue() {
+    public void personHasMixedTags_someMatching_returnsTrue() {
         TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(Arrays.asList("family", "colleague"));
         assertTrue(predicate.test(new PersonBuilder().withTags("family", "gym").build()));
     }
