@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.HashSet;
@@ -24,12 +26,12 @@ public class TagAddCommand extends Command {
             + ": Adds a tag to the person identified "
             + "by their name. "
             + "Parameters: "
-            + "n/NAME t/[TAG]\n"
-            + "Example: " + COMMAND_WORD + " n/ Li Sirui "
-            + "Jane and Tom 230412";
+            + PREFIX_NAME + "NAME " + PREFIX_TAG + "[TAG]\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Li Sirui "
+            + PREFIX_TAG + "Jane and Tom 230412";
 
     public static final String MESSAGE_ARGUMENTS = "Name: %1$s, Tag: %2$s";
-    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag to Person: %1$s";
+    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag '%1$s' to contact: %2$s.";
     public static final String MESSAGE_ADD_TAG_FAILURE = "Tag must be a non-empty string with"
             + " only alphanumeric characters and underscores.";
 
@@ -111,7 +113,7 @@ public class TagAddCommand extends Command {
      */
     private String generateSuccessMessage(Person personToEdit) {
         String message = duplicateTags.isEmpty() ? MESSAGE_ADD_TAG_SUCCESS : MESSAGE_ADD_TAG_FAILURE;
-        return String.format(message, Messages.format(personToEdit));
+        return String.format(message, Messages.formatForTags(personToEdit), Messages.getName(personToEdit));
     }
 
     /**

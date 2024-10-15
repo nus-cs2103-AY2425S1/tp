@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Tag;
 
 /**
  * Container for user visible messages.
@@ -16,8 +17,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
-    public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_DUPLICATE_FIELDS = "Multiple values specified "
+            + "for the following single-valued field(s): ";
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Message not implemented yet!";
 
     /**
@@ -26,8 +27,7 @@ public class Messages {
     public static String getErrorMessageForDuplicatePrefixes(Prefix... duplicatePrefixes) {
         assert duplicatePrefixes.length > 0;
 
-        Set<String> duplicateFields =
-                Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
+        Set<String> duplicateFields = Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
 
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
     }
@@ -69,5 +69,19 @@ public class Messages {
      */
     public static String getDeletionMessage(Person person) {
         return "Deleted Person:\n" + formatForDeletion(person);
+    }
+
+    /**
+     * Formats the {@code person} to display their tags.
+     */
+    public static String formatForTags(Person person) {
+        return person.getTags().stream().map(Tag::getTagName).collect(Collectors.joining(", "));
+    }
+
+    /**
+     * Formats the {@code person} to display their tags.
+     */
+    public static String getName(Person person) {
+        return person.getName().toString();
     }
 }
