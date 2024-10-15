@@ -80,4 +80,62 @@ public class HireCommandTest {
 
         assertThrows(CommandException.class, () -> hireCommand.execute(model));
     }
+
+    @Test
+    public void execute_personWithDifferentJob_throwsPersonNotFoundException() {
+        Person validPerson = new Person(
+                new Name("Amy Bee"),
+                new Job("Data Analyst"),
+                new Phone("85355255"),
+                new Email("amy@gmail.com"),
+                new Address("123, Jurong West Ave 6, #08-111"),
+                new HashSet<>(Set.of(new Tag("pending")))
+        );
+        model.addPerson(validPerson);
+
+        HireCommand hireCommand = new HireCommand(new Name("Amy Bee"), new Job("Software Engineer"));
+
+        assertThrows(CommandException.class, () -> hireCommand.execute(model));
+    }
+
+    @Test
+    public void execute_personWithMultipleTags_hireSuccessful() throws Exception {
+        Person validPerson = new Person(
+                new Name("Amy Bee"),
+                new Job("Software Engineer"),
+                new Phone("85355255"),
+                new Email("amy@gmail.com"),
+                new Address("123, Jurong West Ave 6, #08-111"),
+                new HashSet<>(Set.of(new Tag("pending"), new Tag("interviewed")))
+        );
+        model.addPerson(validPerson);
+
+        HireCommand hireCommand = new HireCommand(validPerson.getName(), validPerson.getJob());
+        hireCommand.execute(model);
+
+        // Check the status and tags of the person
+        assertEquals("hired", validPerson.getStatus());
+        assertTrue(validPerson.getTags().contains(Person.TAG_HIRED));
+        assertFalse(validPerson.getTags().contains(Person.DEFAULT_TAG_PENDING));
+        assertFalse(validPerson.getTags().contains(Person.TAG_REJECTED));
+        assertTrue(validPerson.getTags().contains(new Tag("interviewed")));
+    }
+
+    @Test
+    public void execute_jobNotFound_throwsJobNotFoundException() {
+        Person validPerson = new Person(
+                new Name("Amy Bee"),
+                new Job("Software Engineer"),
+                new Phone("85355255"),
+                new Email("amy@gmail.com"),
+                new Address("123, Jurong West Ave 6, #08-111"),
+                new HashSet<>(Set.of(new Tag("pending")))
+        );
+        model.addPerson(validPerson);
+
+        HireCommand hireCommand = new HireCommand(new Name("Amy Bee"), new Job("Data Scientist"));
+
+        assertThrows(CommandException.class, () -> hireCommand.execute(model),
+                "Error: Job not found.");
+    }
 }
