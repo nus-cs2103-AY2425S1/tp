@@ -10,6 +10,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Person;
 
 /**
@@ -50,6 +51,7 @@ public class MarkAttendanceCommand extends Command {
         Person markedPerson = new Person(
                 personToMarkAttendance.getName(), personToMarkAttendance.getPhone(),
                 personToMarkAttendance.getEmail(), personToMarkAttendance.getAddress(),
+                personToMarkAttendance.getPayment(), new Attendance(true),
                 personToMarkAttendance.getTags());
 
         model.setPerson(personToMarkAttendance, markedPerson);

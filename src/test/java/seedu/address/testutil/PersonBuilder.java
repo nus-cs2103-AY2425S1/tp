@@ -4,8 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -21,10 +23,15 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
+    public static final Boolean DEFAULT_PAYMENT = false;
+    public static final Boolean DEFAULT_ATTENDANCE = false;
+
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Payment payment;
+    private Attendance attendance;
     private Set<Tag> tags;
 
     /**
@@ -35,6 +42,8 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        payment = new Payment(DEFAULT_PAYMENT);
+        attendance = new Attendance(DEFAULT_ATTENDANCE);
         tags = new HashSet<>();
     }
 
@@ -46,6 +55,8 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        payment = personToCopy.getPayment();
+        attendance = personToCopy.getAttendance();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -88,9 +99,32 @@ public class PersonBuilder {
         this.email = new Email(email);
         return this;
     }
+    /**
+     * Sets the {@code Payment} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPayment(Boolean payment) {
+        this.payment = new Payment(payment);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Attendance} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAttendance(Boolean isPresent) {
+        this.attendance = new Attendance(isPresent);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Payment} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPayment(Boolean hasPaid) {
+        this.payment = new Payment(hasPaid);
+        return this;
+    }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, payment, attendance, tags);
     }
 
 }
