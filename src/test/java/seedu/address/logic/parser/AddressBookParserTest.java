@@ -8,6 +8,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
@@ -23,10 +27,12 @@ import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.predicates.CombinedPredicate;
 import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+
 
 public class AddressBookParserTest {
 
@@ -70,12 +76,18 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_filter() throws Exception {
         String substring = "foo";
-        System.out.println(FilterCommand.COMMAND_WORD + " "
-                + CliSyntax.PREFIX_NAME.getPrefix() + " " + substring);
-        FilterCommand command = (FilterCommand) parser.parseCommand(
-                FilterCommand.COMMAND_WORD + " "
-                        + CliSyntax.PREFIX_NAME.getPrefix() + " " + substring);
-        assertEquals(new FilterCommand(new NameContainsSubstringPredicate(substring)), command);
+
+        // Build expected command
+        List<Predicate<Person>> expectedPredicates = new ArrayList<>();
+        expectedPredicates.add(new NameContainsSubstringPredicate(substring));
+        CombinedPredicate combinedPredicate = new CombinedPredicate(expectedPredicates);
+        FilterCommand expectedCommand = new FilterCommand(combinedPredicate);
+
+        // Build actual command
+        FilterCommand actualCommand = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD
+                + " " + CliSyntax.PREFIX_NAME.getPrefix() + " " + substring);
+
+        assertEquals(expectedCommand, actualCommand);
     }
 
     @Test
