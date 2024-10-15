@@ -41,12 +41,11 @@ public class FindNricCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.logic.commands.FindCommand)) {
+        if (!(other instanceof FindNricCommand)) {
             return false;
         }
 
-        seedu.address.logic.commands.FindNricCommand otherFindCommand =
-                (seedu.address.logic.commands.FindNricCommand) other;
+        FindNricCommand otherFindCommand = (FindNricCommand) other;
         return predicate.equals(otherFindCommand.predicate);
     }
 
