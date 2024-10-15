@@ -1,6 +1,10 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * Seeds dummy data into the SocialBook.
@@ -8,11 +12,20 @@ import seedu.address.model.Model;
 public class SeedCommand extends Command {
 
     public static final String COMMAND_WORD = "seed";
+
     public static final String MESSAGE_SUCCESS = "Seeded sample data";
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Not implemented yet";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Seeds dummy data into the SocialBook.";
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(MESSAGE_NOT_IMPLEMENTED_YET);
+        requireNonNull(model);
+        for (Person person : SampleDataUtil.getSamplePersons()) {
+            if (model.hasPerson(person)) {
+                continue;
+            }
+            model.addPerson(person);
+        }
+        return new CommandResult(MESSAGE_SUCCESS);
     }
+
 }
