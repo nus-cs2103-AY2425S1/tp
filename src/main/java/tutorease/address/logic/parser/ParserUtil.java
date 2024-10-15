@@ -167,7 +167,7 @@ public class ParserUtil {
     public static StartDateTime parseStartDateTime(String startDateTime) throws ParseException {
         requireNonNull(startDateTime);
         String trimmedStartDateTime = startDateTime.trim();
-        if (!StartDateTime.isValidStartDateTime(trimmedStartDateTime)) {
+        if (!StartDateTime.isValidDateTime(trimmedStartDateTime)) {
             throw new ParseException(StartDateTime.START_DATE_MESSAGE_CONSTRAINTS);
         }
         return StartDateTime.createStartDateTime(trimmedStartDateTime);

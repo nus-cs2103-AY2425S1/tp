@@ -3,20 +3,17 @@ package tutorease.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.commons.util.AppUtil.checkArgument;
 import static tutorease.address.commons.util.DateTimeUtil.dateTimeToString;
-import static tutorease.address.commons.util.DateTimeUtil.isValidDateTime;
+import static tutorease.address.commons.util.DateTimeUtil.getDateTimeFormat;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Locale;
+
+import tutorease.address.commons.util.DateTimeUtil;
 
 /**
  * Represents a DateTime in the address book.
  */
 public class DateTime {
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
-            .withLocale(Locale.getDefault());
-    private static final String MESSAGE_CONSTRAINTS = "DateTime must be in the format of " + formatter;
+    private static final String MESSAGE_CONSTRAINTS = "DateTime must be in the format of " + getDateTimeFormat();
     private final LocalDateTime dateTime;
     /**
      * Constructs a {@code DateTime}.
@@ -25,7 +22,7 @@ public class DateTime {
      */
     public DateTime(LocalDateTime dateTime) {
         requireNonNull(dateTime);
-        checkArgument(isValidDateTime(dateTimeToString(dateTime)), MESSAGE_CONSTRAINTS);
+        checkArgument(DateTimeUtil.isValidDateTime(dateTimeToString(dateTime)), MESSAGE_CONSTRAINTS);
         this.dateTime = dateTime;
     }
 
@@ -58,7 +55,7 @@ public class DateTime {
 
     @Override
     public String toString() {
-        return dateTime.format(formatter);
+        return DateTimeUtil.dateTimeToString(dateTime);
     }
 
     @Override
@@ -74,5 +71,14 @@ public class DateTime {
 
         DateTime otherDateTime = (DateTime) other;
         return dateTime.equals(otherDateTime.dateTime);
+    }
+
+    /**
+     * Returns true if a given string is a valid date and time.
+     * @param dateTime The date and time to be checked.
+     * @return True if the date and time is valid, false otherwise.
+     */
+    public static boolean isValidDateTime(String dateTime) {
+        return DateTimeUtil.isValidDateTime(dateTime);
     }
 }
