@@ -7,7 +7,7 @@
 # TrueRental Developer Guide
 
 <!-- * Table of Contents -->
-<page-nav-print />
+<a id="table-of-contents"/><page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -287,25 +287,25 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                 | I can …​                                      | So that I can…​                                                         |
-|----------|----------------------------|--------------------------------------------------|----------------------------------------------------------------------------|
-| `* * *`  | user                       | save a _client_'s personal information           | contact them easily                                                        |
-| `* * *`  | user                       | save a _client_'s _rental information_             | view their respective properties                                           |
-| `* * *`  | user                       | edit a _client_'s personal information           | modify their personal details                                              |
-| `* * *`  | user                       | edit a _client_'s _rental information_             | modify their property's _rental information_                                 |
-| `* * * ` | user                       | delete a _client_'s personal information         | clear my application when he/she is no longer my _client_                  |
-| `* * *`  | user                       | delete a _client_'s _rental information_           | clear my application when the property is not owned by my _client_ anymore |
-| `* * *`  | user                       | find a _client_'s personal information           | find the _client_ easily                                                   |
-| `* * *`  | user                       | find a _client_'s _rental information_             | find the _client_'s property easily                                        |
-| `* *`    | user                       | colour code a _client_                           | differentiate more important _clients_                                     |
-| `* *`    | user                       | attach files to a _client_                       | attach important contracts to the respective _clients_                     |
-| `* *`    | user                       | assign tags to _clients_                         | differentiate _clients_ by any interesting factors                         |
-| `* *`    | user                       | autofill CLI commands                            | easily assess the command line without typing the command again            |
-| `* *`    | user                       | export all _client_'s personal information       | save it somewhere else                                                     |
-| `* *`    | user                       | export a specific _client_'s _rental information_  | save it somewhere else                                                     |
-| `*`      | user                       | send emails to a _client_                        | schedule meetings with them                                                |
-| `*`      | user                       | set reminders for a _client_                     | remember my schedule with individual _client_                              |
-| `*`      | user                       | lock my application                              | protect my data                                                            |
+| Priority | As a …​                 | I can …​                                       | So that I can…​                                                         |
+|----------|----------------------------|---------------------------------------------------|----------------------------------------------------------------------------|
+| `* * *`  | user                       | save a _client_'s personal information            | contact them easily                                                        |
+| `* * *`  | user                       | save a _client_'s _rental information_            | view their respective properties                                           |
+| `* * *`  | user                       | edit a _client_'s personal information            | modify their personal details                                              |
+| `* * *`  | user                       | edit a _client_'s _rental information_            | modify their property's _rental information_                               |
+| `* * * ` | user                       | delete a _client_'s personal information          | clear my application when he/she is no longer my _client_                  |
+| `* * *`  | user                       | delete a _client_'s _rental information_          | clear my application when the property is not owned by my _client_ anymore |
+| `* * *`  | user                       | find a _client_'s personal information            | find the _client_ easily                                                   |
+| `* * *`  | user                       | find a _client_'s _rental information_            | find the _client_'s property easily                                        |
+| `* *`    | user                       | colour code a _client_                            | differentiate more important _clients_                                     |
+| `* *`    | user                       | attach files to a _client_                        | attach important contracts to the respective _clients_                     |
+| `* *`    | user                       | assign tags to _clients_                          | differentiate _clients_ by any interesting factors                         |
+| `* *`    | user                       | autofill CLI commands                             | easily assess the command line without typing the command again            |
+| `* *`    | user                       | export all _client_'s personal information        | save it somewhere else                                                     |
+| `* *`    | user                       | export a specific _client_'s _rental information_ | save it somewhere else                                                     |
+| `*`      | user                       | send emails to a _client_                         | schedule meetings with them                                                |
+| `*`      | user                       | set reminders for a _client_                      | remember my schedule with individual _client_                              |
+| `*`      | user                       | lock my application                               | protect my data                                                            |
 
 *{More to be added}*
 
@@ -596,8 +596,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * <a id="glossary-mainstream-os"/>**Mainstream OS**: Windows, Linux, Unix, MacOS
 * <a id="glossary-private-contact-detail"/>**Private contact detail**: A contact detail that is not meant to be shared with others
-
-[//]: # (Is User necessary here?)
 * <a id="glossary-user"/>**User**: A letting agent that is using TrueRental to manage the contact information of their clients
 * <a id="glossary-client"/>**Client**: An individual that is renting a property from a letting agent
 * <a id="glossary-letting-agent"/>**Letting agent**: An individual that facilitates a property rental agreement
@@ -605,6 +603,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * <a id="glossary-clients-information"/>**Client's information**: A client's information containing name, phone number and email, not meant to be shared with others.
 * <a id="glossary-rental-information"/>**Client's rental information**: A client's rental information containing address, rental start date, rental end date, rent due date, monthly rent amount, deposit amount, tenant list, not meant to be shared with others.
 * <a id="glossary-mss"/>**MSS**: Main Success Scenario.
+
+[Back to top](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
