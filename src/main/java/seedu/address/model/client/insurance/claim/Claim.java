@@ -91,4 +91,24 @@ public class Claim {
     public int getClaimAmount() {
         return this.claimAmount;
     }
+
+    /**
+     * Returns a string representation of the claim object.
+     *
+     * This method overrides the default `toString` method to provide a formatted string
+     * that indicates the status of the claim (open or closed), along with the claim ID
+     * and the claim amount. The returned string format is as follows:
+     * - If the claim is open: "[open] <claimId> $<claimAmount>"
+     * - If the claim is closed: "[closed] <claimId> $<claimAmount>"
+     *
+     * @return A string representation of the claim, including its status, ID, and amount.
+     */
+    @Override
+    public String toString() {
+        if (this.isOpen) {
+            return "[open] " + this.claimId + " $" + this.claimAmount;
+        } else {
+            return "[closed] " + this.claimId + " $" + this.claimAmount;
+        }
+    }
 }
