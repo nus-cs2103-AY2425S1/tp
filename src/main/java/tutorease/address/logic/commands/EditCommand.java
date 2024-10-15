@@ -5,6 +5,7 @@ import static tutorease.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static tutorease.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static tutorease.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -26,6 +27,7 @@ import tutorease.address.model.person.Email;
 import tutorease.address.model.person.Name;
 import tutorease.address.model.person.Person;
 import tutorease.address.model.person.Phone;
+import tutorease.address.model.person.Role;
 import tutorease.address.model.tag.Tag;
 
 /**
@@ -40,6 +42,7 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
@@ -98,10 +101,11 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Role role = personToEdit.getRole();
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, role, updatedTags);
     }
 
     @Override
