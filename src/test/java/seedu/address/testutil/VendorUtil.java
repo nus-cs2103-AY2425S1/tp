@@ -21,7 +21,7 @@ public class VendorUtil {
     /**
      * Returns an add command string for adding the {@code vendor}.
      */
-    public static String getAddCommand(Vendor vendor) {
+    public static String getCreateVendorCommand(Vendor vendor) {
         return CreateVendorCommand.COMMAND_WORD + " " + PREFIX_VENDOR + " " + getVendorDetails(vendor);
     }
 
