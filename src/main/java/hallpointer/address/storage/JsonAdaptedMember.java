@@ -12,11 +12,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import hallpointer.address.commons.exceptions.IllegalValueException;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
-import hallpointer.address.model.point.Point;
 import hallpointer.address.model.member.Room;
 import hallpointer.address.model.member.Telegram;
-import hallpointer.address.model.tag.Tag;
+import hallpointer.address.model.point.Point;
 import hallpointer.address.model.session.Session;
+import hallpointer.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Member}.
@@ -30,7 +30,7 @@ class JsonAdaptedMember {
     private final String room;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final int totalPoints;
-    private  final List<JsonAdaptedSession> sessions = new ArrayList<>();
+    private final List<JsonAdaptedSession> sessions = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedMember} with the given member details.
@@ -116,7 +116,7 @@ class JsonAdaptedMember {
 
         member.addPoints(new Point(totalPoints));
         modelSessions.forEach(member::addSession);
-        
+
         return member;
     }
 

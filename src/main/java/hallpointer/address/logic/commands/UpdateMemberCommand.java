@@ -218,7 +218,8 @@ public class UpdateMemberCommand extends Command {
         }
 
         public Optional<Set<Session>> getSessions() {
-            return (sessions != null) ? Optional.of(Collections.unmodifiableSet(new HashSet<>(sessions))) : Optional.empty();
+            return (sessions != null)
+                ? Optional.of(Collections.unmodifiableSet(new HashSet<>(sessions))) : Optional.empty();
         }
 
         @Override
