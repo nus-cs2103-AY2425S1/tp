@@ -2,6 +2,11 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+
+/**
+ * Represents a Person's nric in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidNric(String)}
+ */
 public class Nric {
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -9,6 +14,11 @@ public class Nric {
 
     public final String value;
 
+    /**
+     * Constructs an {@code Nric}.
+     *
+     * @param nric A valid nric.
+     */
     public Nric(String nric) {
         requireNonNull(nric);
         value = nric;
