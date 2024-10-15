@@ -22,15 +22,31 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Tests that a {@code Person} matches any of the keywords given.
  */
 public class PersonContainsKeywordsPredicate implements Predicate<Person> {
+    private boolean isClearAll = false;
+
+    // Identity fields
     private final List<String> nameKeywords = new ArrayList<>();
     private final List<String> phoneKeywords = new ArrayList<>();
     private final List<String> emailKeywords = new ArrayList<>();
+
+    // Data fields
     private final List<String> addressKeywords = new ArrayList<>();
     private final List<String> tagsKeywords = new ArrayList<>();
 
     // TODO: Missing keywords lists for subject and classes
 
-    public PersonContainsKeywordsPredicate(List<String> keywords) throws ParseException {
+    /**
+     * Constructs a {@code PersonContainsKeywordsPredicate}
+     *
+     * @param searchQuery A list representing the search or filter query by the user
+     * @throws ParseException If a non-empty search query was given that didn't fit the categories
+     */
+    public PersonContainsKeywordsPredicate(List<String> searchQuery) throws ParseException {
+        if (searchQuery.get(0).isEmpty()) {
+            isClearAll = true;
+            return;
+        }
+
         Map<Prefix, List<String>> keywordMap = new HashMap<>();
         keywordMap.put(PREFIX_NAME, nameKeywords);
         keywordMap.put(PREFIX_PHONE, phoneKeywords);
@@ -40,7 +56,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
 
         List<String> currentList = null;
 
-        for (String keyword : keywords) {
+        for (String keyword : searchQuery) {
             if (keywordMap.containsKey(new Prefix(keyword))) {
                 currentList = keywordMap.get(new Prefix(keyword));
             } else if (currentList != null) {
@@ -53,6 +69,10 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+        if (isClearAll) {
+            return true;
+        }
+
         boolean hasMatchingName = nameKeywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
 

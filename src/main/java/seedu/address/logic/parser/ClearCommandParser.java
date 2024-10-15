@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.PersonContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new ClearCommand object
@@ -20,7 +20,7 @@ public class ClearCommandParser implements Parser<ClearCommand> {
         String trimmedArgs = args.trim();
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new ClearCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new ClearCommand(new PersonContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
 
 }
