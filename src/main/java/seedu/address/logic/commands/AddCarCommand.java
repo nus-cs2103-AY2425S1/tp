@@ -1,12 +1,5 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.car.Car;
-import seedu.address.model.person.Person;
-
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
@@ -14,6 +7,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MAKE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VRN;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.car.Car;
+import seedu.address.model.person.Person;
 
 /**
  * Adds a Car to a person already present in the MATER address book.

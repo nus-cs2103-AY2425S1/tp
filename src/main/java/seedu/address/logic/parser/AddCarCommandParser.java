@@ -1,14 +1,5 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddCarCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.car.Car;
-import seedu.address.model.car.CarMake;
-import seedu.address.model.car.CarModel;
-import seedu.address.model.car.Vin;
-import seedu.address.model.car.Vrn;
-
 import java.util.stream.Stream;
 
 import static java.util.Objects.requireNonNull;
@@ -18,6 +9,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VRN;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.AddCarCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.car.Car;
+import seedu.address.model.car.CarMake;
+import seedu.address.model.car.CarModel;
+import seedu.address.model.car.Vin;
+import seedu.address.model.car.Vrn;
 
 /**
  * Parses input arguments and creates a new AddCarCommand object
