@@ -274,7 +274,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* are letting agents
+* are [_letting agents_](#glossary-letting-agent)
 * has a need to manage a significant number of [_client_](#glossary-client)'s personal and rental information
 * prefer desktop apps over other types
 * can type fast
@@ -602,8 +602,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * <a id="glossary-client"/>**Client**: An individual that is renting a property from a letting agent
 * <a id="glossary-letting-agent"/>**Letting agent**: An individual that facilitates a property rental agreement
 * <a id="glossary-system"/>**System**: TrueRental desktop application
-* <a id="glossary-clients-information"/>**Client's information**: A _client_'s information containing name, phone number and email, not meant to be shared with others.
-* <a id="glossary-rental-information"/>**Client's rental information**: A _client_'s rental information containing address, rental start date, rental end date, rent due date, monthly rent amount, deposit amount, tenant list, not meant to be shared with others.
+* <a id="glossary-clients-information"/>**Client's information**: A client's information containing name, phone number and email, not meant to be shared with others.
+* <a id="glossary-rental-information"/>**Client's rental information**: A client's rental information containing address, rental start date, rental end date, rent due date, monthly rent amount, deposit amount, tenant list, not meant to be shared with others.
 * <a id="glossary-mss"/>**MSS**: Main Success Scenario.
 --------------------------------------------------------------------------------------------------------------------
 
