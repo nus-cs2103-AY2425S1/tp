@@ -36,14 +36,14 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_INCOME, PREFIX_REMARK, PREFIX_TAG);
+                        PREFIX_INCOME, PREFIX_JOB, PREFIX_REMARK, PREFIX_TAG);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_INCOME, PREFIX_REMARK, PREFIX_TAG);
+                PREFIX_INCOME, PREFIX_JOB, PREFIX_REMARK, PREFIX_TAG);
 
         // Filtering by multiple fields/flags has not been implemented yet
         long numberOfFiltersUsed = countPrefixesUsed(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_INCOME, PREFIX_REMARK, PREFIX_TAG);
+                PREFIX_ADDRESS, PREFIX_JOB, PREFIX_INCOME, PREFIX_REMARK, PREFIX_TAG);
         if (numberOfFiltersUsed > 1) {
             throw new ParseException(FilterCommand.MULTIPLE_FILTERS_NOT_IMPLEMENTED);
         }
