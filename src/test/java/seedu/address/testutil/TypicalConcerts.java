@@ -17,7 +17,7 @@ import seedu.address.model.concert.Concert;
 /**
  * A utility class containing a list of {@code Concert} objects to be used in tests.
  */
-public class TypicalConcerts {
+public class TypicalConcerts extends TypicalAddressBook {
     public static final Concert COACHELLA = new ConcertBuilder().withName(VALID_NAME_COACHELLA)
             .withAddress(VALID_ADDRESS_COACHELLA).withDate(VALID_DATE_COACHELLA).build();
     public static final Concert GLASTONBURY = new ConcertBuilder().withName(VALID_NAME_GLASTONBURY)

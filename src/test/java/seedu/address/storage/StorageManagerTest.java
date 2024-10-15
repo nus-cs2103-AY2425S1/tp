@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 
 import java.nio.file.Path;
 
@@ -24,7 +24,8 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath(
+                "ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
     }
@@ -36,9 +37,9 @@ public class StorageManagerTest {
     @Test
     public void prefsReadSave() throws Exception {
         /*
-         * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonUserPrefsStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonUserPrefsStorageTest} class.
+         * Note: This is an integration test that verifies the StorageManager is properly wired to
+         * the {@link JsonUserPrefsStorage} class. More extensive testing of UserPref saving/reading
+         * is done in {@link JsonUserPrefsStorageTest} class.
          */
         UserPrefs original = new UserPrefs();
         original.setGuiSettings(new GuiSettings(300, 600, 4, 6));
@@ -50,9 +51,9 @@ public class StorageManagerTest {
     @Test
     public void addressBookReadSave() throws Exception {
         /*
-         * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * Note: This is an integration test that verifies the StorageManager is properly wired to
+         * the {@link JsonAddressBookStorage} class. More extensive testing of UserPref
+         * saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
         AddressBook original = getTypicalAddressBook();
         storageManager.saveAddressBook(original);
