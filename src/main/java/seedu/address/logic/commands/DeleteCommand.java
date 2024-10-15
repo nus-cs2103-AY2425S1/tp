@@ -90,9 +90,15 @@ public class DeleteCommand extends Command {
             FindCommandParser findCommandParser = new FindCommandParser();
             findCommandParser.parse(nameToDelete).execute(model);
             if (exactMatch.size() > 1) {
+<<<<<<< HEAD
                 return new CommandResult(String.format(MESSAGE_MULTIPLE_PERSONS_FOUND, nameToDelete));
             }
             return new CommandResult(String.format(MESSAGE_EXACT_PERSON_NOT_FOUND, nameToDelete));
+=======
+                throw new CommandException(MESSAGE_MULTIPLE_PERSONS_FOUND);
+            }
+            throw new CommandException(MESSAGE_EXACT_PERSON_NOT_FOUND);
+>>>>>>> b9d67c180497a21d00cc3d2ccfdcb2f6d7da086d
         }
     }
 
