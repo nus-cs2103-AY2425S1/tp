@@ -28,6 +28,7 @@ public class ModelManager implements Model {
     private final FilteredList<Vendor> filteredVendors;
     private final ObjectProperty<Vendor> selectedVendor;
     private final FilteredList<Event> filteredEvents;
+    private final ObjectProperty<Event> selectedEvent;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,6 +43,7 @@ public class ModelManager implements Model {
         filteredVendors = new FilteredList<>(this.addressBook.getVendorList());
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
         selectedVendor = new SimpleObjectProperty<>(null);
+        selectedEvent = new SimpleObjectProperty<>(null);
     }
 
     public ModelManager() {
@@ -205,6 +207,20 @@ public class ModelManager implements Model {
     public void viewVendor(Vendor vendor) {
         requireNonNull(vendor);
         selectedVendor.setValue(vendor);
+    }
+
+    // =========== Viewed Events Accessors
+    // =============================================================
+
+    @Override
+    public ObservableObjectValue<Event> getViewedEvent() {
+        return selectedEvent;
+    }
+
+    @Override
+    public void viewEvent(Event event) {
+        requireNonNull(event);
+        selectedEvent.setValue(event);
     }
 
 }
