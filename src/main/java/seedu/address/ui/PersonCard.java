@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
 /**
@@ -42,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private VBox fields;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -58,5 +61,16 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        fields.getChildren().removeIf(node -> {
+            if (node instanceof Label) {
+                Label label = (Label) node;
+                return label.getText().isEmpty();
+            }
+            return false;
+        });
+
+        year.setText("Year " + year.getText());
     }
+
 }

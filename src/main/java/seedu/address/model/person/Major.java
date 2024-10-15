@@ -20,7 +20,7 @@ public class Major {
     public final String value;
 
     /**
-     * Constructs an {@code Major}.
+     * Constructs a {@code Major}.
      *
      * @param major A valid major.
      */
@@ -28,6 +28,14 @@ public class Major {
         requireNonNull(major);
         checkArgument(isValidMajor(major), MESSAGE_CONSTRAINTS);
         value = major;
+    }
+
+    /**
+     * Constructs an empty {@code Major}.
+     *
+     */
+    public Major() {
+        value = "";
     }
 
     /**
