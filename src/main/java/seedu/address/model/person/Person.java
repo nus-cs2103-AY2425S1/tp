@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -28,7 +29,6 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final DeliveryList deliveryList = new DeliveryList();
-
     /**
      * Every field must be present and not null.
      */
@@ -67,6 +67,15 @@ public class Person {
 
     public ObservableList<Delivery> getDeliveryList() {
         return deliveryList.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Sets the delivery list of this person.
+     * <p>
+     * Mainly used when loading a person's information from storage.
+     */
+    public void setDeliveryList(List<Delivery> deliveryList) {
+        this.deliveryList.setDeliveries(deliveryList);
     }
 
     /**
