@@ -150,6 +150,10 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     EmergencyPhone.class.getSimpleName()));
         }
+        if (!EmergencyPhone.isValidEmergencyPhone(emergencyPhone)) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    EmergencyPhone.class.getSimpleName()));
+        }
         final EmergencyPhone modelEmergencyPhone = new EmergencyPhone(emergencyPhone);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);

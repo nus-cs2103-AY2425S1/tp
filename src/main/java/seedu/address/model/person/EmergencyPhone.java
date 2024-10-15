@@ -1,13 +1,17 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's emergency phone number in the address book.
- * Guarantees: immutable; is always valid
+ * Guarantees: immutable; is valid as declared in {@link #isValidEmergencyPhone(String)}
  */
 public class EmergencyPhone {
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "Emergency numbers should contain numbers that are 8 digits long";
+    public static final String VALIDATION_REGEX = "\\d{8}";
     public final String value;
 
     /**
@@ -17,7 +21,15 @@ public class EmergencyPhone {
      */
     public EmergencyPhone(String phone) {
         requireNonNull(phone);
+        checkArgument(isValidEmergencyPhone(phone), MESSAGE_CONSTRAINTS);
         value = phone;
+    }
+
+    /**
+     * Returns true if a given string is a valid phone number.
+     */
+    public static boolean isValidEmergencyPhone(String test) {
+        return test.matches(VALIDATION_REGEX) || test.isEmpty();
     }
 
     @Override

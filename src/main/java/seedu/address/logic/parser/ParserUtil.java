@@ -153,6 +153,9 @@ public class ParserUtil {
     public static EmergencyPhone parseEmergencyPhone(String emergencyPhone) throws ParseException {
         requireNonNull(emergencyPhone);
         String trimmedEmergencyPhone = emergencyPhone.trim();
+        if (!EmergencyPhone.isValidEmergencyPhone(trimmedEmergencyPhone) || emergencyPhone.isEmpty()) {
+            throw new ParseException(EmergencyPhone.MESSAGE_CONSTRAINTS);
+        }
         return new EmergencyPhone(trimmedEmergencyPhone);
     }
 

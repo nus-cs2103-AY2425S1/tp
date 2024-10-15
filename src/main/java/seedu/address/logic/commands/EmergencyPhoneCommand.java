@@ -1,11 +1,14 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Optional;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.EmergencyPhone;
@@ -17,48 +20,50 @@ import seedu.address.model.person.Person;
  */
 public class EmergencyPhoneCommand extends Command {
 
-    public static final String COMMAND_WORD = "addEmergencyContactNumber";
+    public static final String COMMAND_WORD = "emergencyPhone";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds an emergency contact number to the student "
             + "identified by the name. "
             + "Parameters: n/NAME en/[EMERGENCY_NUMBER]\n"
-            + "Example: " + COMMAND_WORD + " n/Henry ep/91234567";
+            + "Example: " + COMMAND_WORD + " 1 ep/91234567";
 
     public static final String MESSAGE_ARGUMENTS = "Name: %1$s, ECNumber: %2$s";
     public static final String MESSAGE_INVALID_NAME = "The name you entered is not in the addressbook!";
-    public static final String MESSAGE_EMERGENCY_PHONE_SUCCESS = "New Emergency Phone Number %1$s, for %2$s";
+    public static final String MESSAGE_EMERGENCY_PHONE_SUCCESS = "Added emergency phone for %1$s\n"
+            + "Emergency Contact Number: %2$s";
 
-    private final Name name;
+    private final Index index;
     private final EmergencyPhone emergencyPhone;
 
     /**
-     * @param name name of the person in the filtered person list to edit the emergency contact phone
+     * @param index index of the person in the filtered person list to edit the emergency contact phone
      * @param emergencyPhone emergency contact phone of the person to be updated to
      */
-    public EmergencyPhoneCommand(Name name, EmergencyPhone emergencyPhone) {
-        requireAllNonNull(name, emergencyPhone);
+    public EmergencyPhoneCommand(Index index, EmergencyPhone emergencyPhone) {
+        requireAllNonNull(index, emergencyPhone);
 
-        this.name = name;
+        this.index = index;
         this.emergencyPhone = emergencyPhone;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
 
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        List<Person> fullList = model.getFilteredPersonList();
-        Optional<Person> personToUpdate = fullList.stream().filter(person -> person.getName().equals(name)).findFirst();
-        if (personToUpdate.isEmpty()) {
-            throw new CommandException(MESSAGE_INVALID_NAME);
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        Person personToEdit = personToUpdate.get();
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getRegisterNumber(), personToEdit.getSex(),
                 personToEdit.getStudentClass(), emergencyPhone, personToEdit.getTags());
         model.setPerson(personToEdit, editedPerson);
-//        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EMERGENCY_PHONE_SUCCESS, emergencyPhone, name));
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EMERGENCY_PHONE_SUCCESS,
+                editedPerson.getName(), editedPerson.getEmergencyPhone()));
     }
 
     @Override
@@ -72,7 +77,7 @@ public class EmergencyPhoneCommand extends Command {
         }
 
         EmergencyPhoneCommand e = (EmergencyPhoneCommand) other;
-        return name.equals(e.name)
+        return index.equals(e.index)
                 && emergencyPhone.equals(e.emergencyPhone);
     }
 }
