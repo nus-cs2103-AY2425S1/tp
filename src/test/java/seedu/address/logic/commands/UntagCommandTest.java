@@ -78,7 +78,7 @@ public class UntagCommandTest {
         Set<Tag> tagSet = SampleDataUtil.getTagSet("friends");
         UntagCommand untagCommand = new UntagCommand(outOfBoundsIndex, tagSet);
 
-        assertCommandFailure(untagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(untagCommand, model, "Error: " + Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + ".");
     }
 
 }
