@@ -20,11 +20,16 @@ public class PersonListPanel extends UiPart<Region> {
     @FXML
     private ListView<Person> personListView;
 
+    private final PersonCard.PersonSelectionHandler personSelectionHandler;
+
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public PersonListPanel(ObservableList<Person> personList,
+                           PersonCard.PersonSelectionHandler personSelectionHandler) {
         super(FXML);
+        this.personSelectionHandler = personSelectionHandler;
+
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
     }
@@ -41,7 +46,15 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                PersonCard personCard = new PersonCard(person, getIndex() + 1, personSelectionHandler);
+                setGraphic(personCard.getRoot());
+
+                // Handle click events on the person card
+                personCard.getRoot().setOnMouseClicked(event -> {
+                    // Notify the personSelectionHandler when a card is clicked
+                    personSelectionHandler.handlePersonSelection(person);
+                });
+
             }
         }
     }

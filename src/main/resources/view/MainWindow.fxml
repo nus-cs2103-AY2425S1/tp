@@ -59,7 +59,7 @@
                               </AnchorPane>
                             <AnchorPane>
                                  <children>
-                                    <VBox fx:id="personDetailViewPlaceholder" minWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <VBox fx:id="personDetailViewPlaceholder" minWidth="450.0" AnchorPane.bottomAnchor="0.0" styleClass="pane-with-border" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                           </items>

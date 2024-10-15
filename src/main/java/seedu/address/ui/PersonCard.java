@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -37,16 +38,29 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane relationship;
 
+    // Callback to notify when a person is clicked
+    private final PersonSelectionHandler personSelectionHandler;
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard(Person person, int displayedIndex, PersonSelectionHandler personSelectionHandler) {
         super(FXML);
         this.person = person;
+        this.personSelectionHandler = personSelectionHandler;
+
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
         relationship.getChildren().add(new Label(person.getRelationship().relationship));
+    }
+
+    /**
+     * Functional interface for person selection handler
+     */
+    @FunctionalInterface
+    public interface PersonSelectionHandler {
+        void handlePersonSelection(Person person);
     }
 }

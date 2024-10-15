@@ -19,6 +19,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -38,6 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     private EventListPanel eventListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private PersonDetailView personDetailView;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -132,7 +134,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this::displayPersonDetails);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
@@ -146,6 +148,16 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Updates the person details view when a person is selected from the list.
+     * @param person The selected person to display in the detail view.
+     */
+    private void displayPersonDetails(Person person) {
+        personDetailView = new PersonDetailView(person);
+        System.out.println("Reached Here: " + person.getName().fullName);
+        personDetailViewPlaceholder.getChildren().setAll(personDetailView.getRoot());
     }
 
     /**
