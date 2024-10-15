@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.log.Log;
 import seedu.address.model.person.LogsList;
 import seedu.address.model.person.Person;
 
@@ -153,9 +152,4 @@ public class ModelManager implements Model {
     public LogsList getLastShownLogsList() {
         return logsList;
     }
-//    public void detailView(Log log) {
-//        requireNonNull(log);
-//        log.toDetailedString(); // Modify this as necessary for your UI
-//    }
-
 }

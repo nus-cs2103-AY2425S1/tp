@@ -8,10 +8,9 @@ import java.util.Objects;
  * Represents an appointment date in the log.
  */
 public class AppointmentDate {
-    private final LocalDate date;
 
-    // Formatter to format the date in 'dd MMM yyyy' format
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
+    private final LocalDate date;
 
     /**
      * Constructs an {@code AppointmentDate} with the specified {@code LocalDate}.
