@@ -26,15 +26,15 @@ public class UntagCommandTest {
 
     @Test
     public void execute_multipleTagRemoval_success() {
-        // Test case: remove multiple tags from the second person (Benson) by untagging "friends" and "owesMoney"
+
         Index index = INDEX_SECOND_PERSON;
         Person personToEdit = model.getFilteredPersonList().get(index.getZeroBased());
         Set<Tag> tagSet = SampleDataUtil.getTagSet("friends", "owesMoney");
         UntagCommand untagCommand = new UntagCommand(index, tagSet);
 
-        // Expected Model
+
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        Person editedPerson = new PersonBuilder(personToEdit).withTags().build(); // Assuming no remaining tags
+        Person editedPerson = new PersonBuilder(personToEdit).withTags().build();
         expectedModel.setPerson(personToEdit, editedPerson);
 
         String expectedMessage = String.format(UntagCommand.MESSAGE_UNTAG_SUCCESS + ". Tags removed: %2$s",
@@ -45,14 +45,13 @@ public class UntagCommandTest {
 
     @Test
     public void execute_removeAllTags_success() {
-        // Test case: remove all tags from the first person (Alice) by untagging everything (t/all)
+
         Index index = INDEX_FIRST_PERSON;
         Person personToEdit = model.getFilteredPersonList().get(index.getZeroBased());
-        UntagCommand untagCommand = new UntagCommand(index, null); // null indicates "remove all tags"
+        UntagCommand untagCommand = new UntagCommand(index, null);
 
-        // Expected Model
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        Person editedPerson = new PersonBuilder(personToEdit).withTags().build(); // No tags after removal
+        Person editedPerson = new PersonBuilder(personToEdit).withTags().build();
         expectedModel.setPerson(personToEdit, editedPerson);
 
         String expectedMessage = String.format(UntagCommand.MESSAGE_UNTAG_SUCCESS + ". Tags removed: %2$s",
@@ -63,7 +62,7 @@ public class UntagCommandTest {
 
     @Test
     public void execute_nonExistentTagRemoval_throwsCommandException() {
-        // Test case: try to untag a tag that doesn't exist for the second person (Benson)
+
         Index index = INDEX_SECOND_PERSON;
         Set<Tag> nonExistentTagSet = SampleDataUtil.getTagSet("nonExistentTag");
         UntagCommand untagCommand = new UntagCommand(index, nonExistentTagSet);
@@ -74,7 +73,7 @@ public class UntagCommandTest {
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_throwsCommandException() {
-        // Test case: invalid index (person does not exist)
+
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         Set<Tag> tagSet = SampleDataUtil.getTagSet("friends");
         UntagCommand untagCommand = new UntagCommand(outOfBoundsIndex, tagSet);
