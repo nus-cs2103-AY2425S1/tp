@@ -4,11 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.FileTime;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -85,6 +87,20 @@ public class BackupManagerTest {
         Files.deleteIfExists(TEMP_FILE); // Ensure no backups exist
         Optional<Path> restoredBackup = backupManager.restoreMostRecentBackup();
         assertFalse(restoredBackup.isPresent(), "No backup should be available.");
+    }
+
+    @Test
+    public void getFileCreationTime_fileNotFound_returnsCurrentTime() {
+        // Provide a non-existent path to simulate IOException
+        Path nonExistentPath = TEMP_BACKUP_DIR.resolve("non-existent-file.json");
+
+        // Call the method and capture the result
+        FileTime result = backupManager.getFileCreationTime(nonExistentPath);
+
+        // Verify that the fallback time is set to the current time
+        long now = System.currentTimeMillis();
+        assertTrue(Math.abs(result.toMillis() - now) < 1000,
+                "The returned FileTime should be close to the current system time.");
     }
 
 }

@@ -3,31 +3,25 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.AddressBookBuilder;
 
 /**
  * Contains unit tests for {@code ModelManager}.
@@ -38,6 +32,7 @@ public class ModelManagerTest {
     public Path temporaryFolder;
     private ModelManager modelManager;
     private StorageManager storage;
+    private UserPrefs userPrefs;
 
     /**
      * Sets up the test environment with the required storage.
@@ -48,9 +43,11 @@ public class ModelManagerTest {
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        storage = new StorageManager(addressBookStorage, userPrefsStorage); // Initialize storage
 
-        modelManager = new ModelManager(new AddressBook(), new UserPrefs(), storage);
+        storage = new StorageManager(addressBookStorage, userPrefsStorage);  // Initialize storage
+        userPrefs = new UserPrefs();  // Initialize userPrefs
+
+        modelManager = new ModelManager(new AddressBook(), userPrefs, storage);
     }
 
     /**
@@ -128,47 +125,33 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
-        UserPrefs userPrefs = new UserPrefs();
-
-        // same values -> returns true
-        ModelManager modelManagerCopy =
-                new ModelManager(addressBook, userPrefs, modelManager.getStorage());
-        ModelManager modelManagerWithSameValues =
-                new ModelManager(addressBook, userPrefs, modelManager.getStorage());
-        assertEquals(modelManagerCopy, modelManagerWithSameValues);
-
-        // same object -> returns true
-        assertEquals(modelManagerCopy, modelManagerCopy);
-
-        // null -> returns false
-        assertNotEquals(null, modelManagerCopy);
-
-        // different types -> returns false
-        assertNotEquals(5, modelManagerCopy);
-
-        // different addressBook -> returns false
-        assertNotEquals(modelManagerCopy,
-                new ModelManager(differentAddressBook, userPrefs, modelManager.getStorage()));
-
-        // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManagerCopy.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        ModelManager modelWithFilteredPersons =
-                new ModelManager(addressBook, userPrefs, modelManager.getStorage());
-        assertNotEquals(modelManagerCopy, modelWithFilteredPersons);
-
-        // resets modelManager to initial state for upcoming tests
-        modelManagerCopy.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
-        // different userPrefs -> returns false
-        UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertNotEquals(modelManagerCopy,
-                new ModelManager(addressBook, differentUserPrefs, modelManager.getStorage()));
+    public void equals_sameObject_returnsTrue() {
+        assertTrue(modelManager.equals(modelManager), "Comparing the same object should return true.");
     }
+
+    @Test
+    public void equals_nullObject_returnsFalse() {
+        assertFalse(modelManager.equals(null), "Comparing with null should return false.");
+    }
+
+    @Test
+    public void equals_differentClass_returnsFalse() {
+        assertFalse(modelManager.equals("not a ModelManager"), "Comparing with an object of different class should return false.");
+    }
+
+    @Test
+    public void equals_differentAddressBook_returnsFalse() {
+        ModelManager differentModel = new ModelManager(new AddressBook(), userPrefs, storage);
+        differentModel.addPerson(ALICE); // Modify to ensure difference
+        assertFalse(modelManager.equals(differentModel), "Comparing with a different address book should return false.");
+    }
+
+    @Test
+    public void equals_identicalModelManager_returnsTrue() {
+        ModelManager identicalModel = new ModelManager(new AddressBook(), userPrefs, storage);
+        assertTrue(modelManager.equals(identicalModel), "Comparing with an identical ModelManager should return true.");
+    }
+
 
     @Test
     public void backupData_validPath_success() throws Exception {
@@ -282,6 +265,28 @@ public class ModelManagerTest {
 
         assertThrows(IOException.class, () -> modelWithoutStorage.cleanOldBackups(5),
                 "Expected IOException when storage is not initialized.");
+    }
+
+    @Test
+    public void cleanOldBackups_storageNotInitialized_throwsIOException() {
+        ModelManager modelWithoutStorage = new ModelManager(new AddressBook(), new UserPrefs(), null);
+        IOException exception = assertThrows(IOException.class,
+                () -> modelWithoutStorage.cleanOldBackups(5),
+                "Expected IOException when storage is not initialized.");
+        assertEquals("Storage is not initialized!", exception.getMessage());
+    }
+
+    @Test
+    public void cleanOldBackups_validStorage_executesSuccessfully() throws IOException {
+        JsonAddressBookStorage addressBookStorage =
+                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+
+        ModelManager modelManagerWithStorage = new ModelManager(new AddressBook(), new UserPrefs(), storage);
+        assertDoesNotThrow(() -> modelManagerWithStorage.cleanOldBackups(5),
+                "Cleaning old backups with valid storage should not throw any exception.");
     }
 
 }

@@ -130,7 +130,7 @@ public class BackupManager {
      *
      * @param backupPath The path to the backup file to delete.
      */
-    private void deleteBackup(Path backupPath) {
+    protected void deleteBackup(Path backupPath) {
         try {
             Files.deleteIfExists(backupPath);
             logger.info("Deleted old backup: " + backupPath);
