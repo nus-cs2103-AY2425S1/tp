@@ -1,18 +1,16 @@
 package seedu.address.storage;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.AppointmentType;
-import seedu.address.model.appointment.Medicine;
-import seedu.address.model.appointment.Sickness;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.appointment.Appointment;
 
 class JsonAdaptedAppointmentTest {
-
     private static final String VALID_APPOINTMENT_TYPE = "Consultation";
     private static final String VALID_APPOINTMENT_DATE_TIME = "2024-10-15T10:30:00";
     private static final String VALID_PERSON_ID = "123";

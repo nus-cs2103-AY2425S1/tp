@@ -1,26 +1,19 @@
 package seedu.address.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalAppointments.getTypicalAppointmentBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyAppointmentBook;
-import seedu.address.model.appointment.Appointment;
 import seedu.address.model.AppointmentBook;
-import seedu.address.model.appointment.AppointmentType;
-import seedu.address.model.appointment.Medicine;
-import seedu.address.model.appointment.Sickness;
+import seedu.address.model.ReadOnlyAppointmentBook;
 
 public class JsonAppointmentBookStorageTest {
 
@@ -35,7 +28,8 @@ public class JsonAppointmentBookStorageTest {
     }
 
     private Optional<ReadOnlyAppointmentBook> readAppointmentBook(String filePath) throws Exception {
-        return new JsonAppointmentBookStorage(Paths.get(filePath)).readAppointmentBook(addToTestDataPathIfNotNull(filePath));
+        return new JsonAppointmentBookStorage(Paths.get(filePath))
+                .readAppointmentBook(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String filePath) {
