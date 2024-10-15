@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -41,6 +43,12 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private FlowPane attendees;
 
+    @FXML
+    private ImageView calendarIcon;
+
+    @FXML
+    private ImageView personIcon;
+
     /**
      * Creates a {@code EventCard} with the given {@code Event} and index to display.
      */
@@ -48,15 +56,15 @@ public class EventCard extends UiPart<Region> {
         super(FXML);
         this.event = event;
         id.setText(displayedIndex + ". ");
-        name.setText(event.getEventName());
-        date.setText(event.getDate().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
+        name.setText("  " + event.getEventName());
+        date.setText("  " + event.getDate().format(DateTimeFormatter.ofPattern(" MMM dd, yyyy")));
         List<Person> sortedAttendees = event.getAttendees().stream()
                 .sorted(Comparator.comparing(person -> person.getName().toString()))
                 .toList();
 
         int maxDisplay = 2;
         int numOfAttendees = sortedAttendees.size();
-
+        attendees.getChildren().add(new Label("  "));
         for (int i = 0; i < maxDisplay; i++) {
             String name = sortedAttendees.get(i).getName().toString();
             String formattedName = (i == maxDisplay - 1)
@@ -70,5 +78,24 @@ public class EventCard extends UiPart<Region> {
             attendees.getChildren().add(new Label(", and " + remainingPeople + " more"));
         }
 
+    }
+
+    /**
+     * Toggles the icons for the {@code calendarIcon} and {@code personIcon} based on selection state of event card.
+     *
+     * If the event card is selected, then the dark-themed versions of the icons are displayed.
+     * Else, the light versions of the icons are displayed.
+     *
+     * @param selected {@code true} if the card is selected.
+     *                 {@code false} if the card is not selected.
+     */
+    public void toggleIcons(boolean selected) {
+        if (selected) {
+            calendarIcon.setImage(new Image(getClass().getResourceAsStream("/images/calendar_dark.png")));
+            personIcon.setImage(new Image(getClass().getResourceAsStream("/images/person_dark.png")));
+        } else {
+            calendarIcon.setImage(new Image(getClass().getResourceAsStream("/images/calendar_light.png")));
+            personIcon.setImage(new Image(getClass().getResourceAsStream("/images/person_light.png")));
+        }
     }
 }

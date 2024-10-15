@@ -42,7 +42,17 @@ public class EventListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new EventCard(event, getIndex() + 1).getRoot());
+                EventCard eventCard = new EventCard(event, getIndex() + 1);
+                setGraphic(eventCard.getRoot());
+
+                if (isSelected()) {
+                    eventCard.toggleIcons(true);
+                } else {
+                    eventCard.toggleIcons(false);
+                }
+
+                this.selectedProperty().addListener((obs, wasSelected, isNowSelected) ->
+                        eventCard.toggleIcons(isNowSelected));
             }
         }
     }
