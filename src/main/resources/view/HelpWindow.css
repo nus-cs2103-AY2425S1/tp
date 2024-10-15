@@ -1,9 +1,23 @@
-#copyButton, #helpMessage {
-    -fx-text-fill: white;
+#helpMessageContainer {
+    -fx-background-color: #121212;
+    -fx-padding: 15;
+    -fx-border-radius: 10;
+}
+
+#helpMessage {
+    -fx-text-fill: #FFD700;
+    -fx-font-size: 16;
+    -fx-font-family: 'Georgia';
 }
 
 #copyButton {
     -fx-background-color: dimgray;
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+    -fx-border-color: #FFD700;
+    -fx-border-radius: 5;
+    -fx-border-width: 2;
+    -fx-padding: 5 10;
 }
 
 #copyButton:hover {
@@ -14,6 +28,3 @@
     -fx-background-color: darkgray;
 }
 
-#helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
-}
