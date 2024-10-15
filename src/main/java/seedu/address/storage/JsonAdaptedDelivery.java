@@ -7,6 +7,7 @@ import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Eta;
+import seedu.address.model.delivery.ItemName;
 import seedu.address.model.delivery.Time;
 import seedu.address.model.person.Address;
 
@@ -17,6 +18,7 @@ public class JsonAdaptedDelivery {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Delivery's %s field is missing!";
 
+    private final String itemName;
     private final String address;
     private final String cost;
     private final String date;
@@ -27,11 +29,13 @@ public class JsonAdaptedDelivery {
      * Constructs a {@code JsonAdaptedDelivery} with the given delivery details.
      */
     @JsonCreator
-    public JsonAdaptedDelivery(@JsonProperty("address") String address,
+    public JsonAdaptedDelivery(@JsonProperty("itemName") String itemName,
+                               @JsonProperty("address") String address,
                                @JsonProperty("cost") String cost,
                                @JsonProperty("date") String date,
                                @JsonProperty("time") String time,
                                @JsonProperty("eta") String eta) {
+        this.itemName = itemName;
         this.address = address;
         this.cost = cost;
         this.date = date;
@@ -43,6 +47,7 @@ public class JsonAdaptedDelivery {
      * Converts a given {@code Delivery} into this class for Jackson use.
      */
     public JsonAdaptedDelivery(Delivery source) {
+        itemName = source.getItemName().value;
         address = source.getAddress().value;
         cost = source.getCost().value;
         date = source.getDate().value.toString();
@@ -56,6 +61,16 @@ public class JsonAdaptedDelivery {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Delivery toModelType() throws IllegalValueException {
+        if (itemName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ItemName.class.getSimpleName()));
+        }
+
+        if (!ItemName.isValidItemName(itemName)) {
+            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        }
+
+        final ItemName modelItemName = new ItemName(itemName);
+
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
@@ -96,6 +111,6 @@ public class JsonAdaptedDelivery {
         }
         final Eta modelEta = new Eta(eta);
 
-        return new Delivery(modelAddress, modelCost, modelDate, modelTime, modelEta);
+        return new Delivery(modelItemName, modelAddress, modelCost, modelDate, modelTime, modelEta);
     }
 }
