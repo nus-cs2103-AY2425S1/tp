@@ -96,7 +96,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_schedule() throws Exception {
         String dateTime = "2024-10-04 1000";
-        ScheduleCommand expectedCommand = new ScheduleCommand("Jane", new Schedule(dateTime));
+        ScheduleCommand expectedCommand = new ScheduleCommand("Jane", new Schedule(dateTime, ""));
 
         ScheduleCommand actualCommand = (ScheduleCommand) parser.parseCommand(
                 ScheduleCommand.COMMAND_WORD + " Jane" + " d/" + dateTime);
@@ -112,13 +112,11 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_reminder() throws Exception {
-        String appointmentDateTime = "2024-10-04 1000";
         String reminderTime = "1 day";
-        ReminderCommand expectedCommand = new ReminderCommand("Jane", appointmentDateTime, reminderTime);
+        ReminderCommand expectedCommand = new ReminderCommand("Jane", reminderTime);
 
         ReminderCommand actualCommand = (ReminderCommand) parser.parseCommand(
-                ReminderCommand.COMMAND_WORD + " Jane" + " d/" + appointmentDateTime
-                + " r/" + reminderTime);
+                ReminderCommand.COMMAND_WORD + " Jane" + " r/" + reminderTime);
 
         // Assert that the expected command equals the actual command
         assertEquals(expectedCommand, actualCommand);

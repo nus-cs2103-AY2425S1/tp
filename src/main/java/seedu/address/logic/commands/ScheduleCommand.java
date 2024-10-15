@@ -27,17 +27,17 @@ public class ScheduleCommand extends Command {
     public static final String MESSAGE_SLOT_TAKEN = "The selected time slot is already taken.";
     public static final String MESSAGE_INVALID_NAME = "Person not found";
     private String name;
-    private Schedule date;
+    private Schedule schedule;
 
     /**
      * Constructs a ScheduleCommand to schedule an appointment for the specified person.
      *
      * @param name The name of the person.
-     * @param date The schedule date and time.
+     * @param schedule The schedule date and time and optional notes.
      */
-    public ScheduleCommand(String name, Schedule date) {
+    public ScheduleCommand(String name, Schedule schedule) {
         this.name = name;
-        this.date = date;
+        this.schedule = schedule;
     }
 
 
@@ -68,22 +68,22 @@ public class ScheduleCommand extends Command {
         }
 
         // Check if the schedule time is valid (on the hour and within weekday working hours)
-        if (!isOnTheHour(date.dateTime) || !isWithinWorkingHours(date.dateTime)) {
+        if (!isOnTheHour(schedule.dateTime) || !isWithinWorkingHours(schedule.dateTime)) {
             throw new CommandException(MESSAGE_INVALID_TIME);
         }
 
         // Check if the time slot is already taken
-        if (isTimeSlotTaken(lastShownList, date.dateTime)) {
+        if (isTimeSlotTaken(lastShownList, schedule.dateTime)) {
             throw new CommandException(MESSAGE_SLOT_TAKEN);
         }
 
         Person personToEdit = lastShownList.get(index);
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), date, personToEdit.getReminder(), personToEdit.getTags());
+                personToEdit.getAddress(), schedule, personToEdit.getReminder(), personToEdit.getTags());
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.date, name));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.schedule, name));
     }
 
     /**
@@ -143,6 +143,6 @@ public class ScheduleCommand extends Command {
         // State check
         ScheduleCommand otherCommand = (ScheduleCommand) other;
         return name.equals(otherCommand.name)
-                && date.equals(otherCommand.date);
+                && schedule.equals(otherCommand.schedule);
     }
 }

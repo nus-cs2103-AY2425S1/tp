@@ -9,14 +9,25 @@ import static java.util.Objects.requireNonNull;
 public class Schedule {
 
     public final String dateTime;
+    private final String notes;
 
     /**
      * Constructs a {@code Schedule} object with the given date and time.
      *
      * @param dateTime The date and time of the scheduled appointment.
+     * @param notes Optional notes regarding the appointment.
      */
-    public Schedule(String dateTime) {
+    public Schedule(String dateTime, String notes) {
         this.dateTime = dateTime == null ? "" : dateTime;
+        this.notes = notes;
+    }
+
+    /**
+     * Returns the notes associated with the appointment.
+     * @return a {@code String} representing the notes.
+     */
+    public String getNotes() {
+        return notes;
     }
 
     @Override
