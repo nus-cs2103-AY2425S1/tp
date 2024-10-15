@@ -132,7 +132,7 @@ public class ParserUtil {
     public static Tier parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Tier.isValidTagName(trimmedTag)) {
+        if (!Tier.isValidTierName(trimmedTag)) {
             throw new ParseException(Tier.MESSAGE_CONSTRAINTS);
         }
         return new Tier(trimmedTag);
