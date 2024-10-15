@@ -310,10 +310,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  AgentAssist shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AgentAssist deletes the person
+1.  User requests to list persons.
+2.  AgentAssist shows a list of persons.
+3.  User requests to delete a specific person in the list.
+4.  AgentAssist deletes the person.
 
     Use case ends.
 
@@ -333,9 +333,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a user
-2.  AgentAssist adds a person
-3.  AgentAssist returns the unique user ID tagged to the new user
+1.  User requests to add a user.
+2.  AgentAssist adds a person.
+3.  AgentAssist returns the unique user ID tagged to the new user.
 
     Use case ends.
 
@@ -350,8 +350,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
+<<<<<<< Updated upstream
 1.  User requests to view a person using an attribute like name to filter for the person
 2.  AgentAssist returns a list of users which match the filter set in step 1.
+=======
+1.  User requests to view a person with a specific user ID.
+2.  AgentAssist returns the user with the corresponding ID.
+>>>>>>> Stashed changes
 
     Use case ends.
 
@@ -368,10 +373,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
+<<<<<<< Updated upstream
 1.  User performs <u>View a person (U3)</u>
 2.  AgentAssist returns the person
 3.  User requests to add a remark about the person
 4.  AgentAssist adds a remark for the person
+=======
+1.  User performs <u>View a person (U3)</u> .
+2.  AgentAssist returns the person.
+3.  User requests to add a remark about the person.
+4.  AgentAssist adds a remark for the person.
+>>>>>>> Stashed changes
 
     Use case ends.
 
@@ -379,8 +391,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to exit
-2.  AgentAssist exits
+1.  User requests to exit.
+2.  AgentAssist exits.
 
     Use case ends.
 
