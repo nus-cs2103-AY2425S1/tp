@@ -63,7 +63,7 @@ public class PersonCard extends UiPart<Region> {
     }
 
     /**
-     * Functional interface for person selection handler
+     * Functional interface for person selection handler.
      */
     @FunctionalInterface
     public interface PersonSelectionHandler {

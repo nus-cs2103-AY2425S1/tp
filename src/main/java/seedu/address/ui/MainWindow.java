@@ -134,7 +134,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this::displayPersonDetails);
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this::handleSelectedPerson);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
@@ -157,10 +157,12 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Updates the person details view when a person is selected from the list.
+     * Sets the person details view to the person selected from the list.
+     * This is a callback handler called from {@code PersonCard} when a given card is clicked by the user.
+     *
      * @param person The selected person to display in the detail view.
      */
-    private void displayPersonDetails(Person person) {
+    private void handleSelectedPerson(Person person) {
         personDetailView = new PersonDetailView(person);
         personDetailViewPlaceholder.getChildren().setAll(personDetailView.getRoot());
     }
