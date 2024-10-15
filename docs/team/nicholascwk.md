@@ -1,6 +1,6 @@
 ---
   layout: default.md
-    title: "Nicholas Chua's Project Portfolio Page"
+  title: "Nicholas Chua's Project Portfolio Page"
 ---
 
 ### Project: ClubConnect

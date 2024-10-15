@@ -13,9 +13,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Chan Guan Yu
 
-<img src="images/g_y_chan.png" width="200px">
+<img src="images/g-y-chan.png" width="200px">
 
-[[github](https://github.com/G_Y_Chan)]
+[[github](https://github.com/G-Y-Chan)]
 [[portfolio](team/G_Y_Chan.md)]
 
 * Role: Git Expert
@@ -33,7 +33,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/lihaixin000.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/LiHaixin000)]
 [[portfolio](team/lihaixin000.md)]
 

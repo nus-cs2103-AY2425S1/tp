@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,6 +35,14 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Returns true if the list contains a person with the same name (case-insensitive) as the given argument.
+     */
+    public boolean containsName(Name nameToCheck) {
+        requireNonNull(nameToCheck);
+        return internalList.stream().anyMatch(p -> p.getName().equalsLowerCase(nameToCheck));
     }
 
     /**
@@ -77,6 +86,17 @@ public class UniquePersonList implements Iterable<Person> {
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
+    }
+
+    /**
+     * Gets all the persons whose names are the same (case-insensitive) as the given argument.
+     */
+    public List<Person> getPersonsWithName(Name name) {
+        requireNonNull(name);
+        if (this.containsName(name)) {
+            return internalList.stream().filter(p -> p.getName().equalsLowerCase(name)).toList();
+        }
+        return new ArrayList<>();
     }
 
     public void setPersons(UniquePersonList replacement) {
