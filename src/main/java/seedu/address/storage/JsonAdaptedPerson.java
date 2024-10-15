@@ -38,13 +38,17 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("company") String company,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("products") List<JsonAdaptedTag> products) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("products") List<JsonAdaptedProduct> products) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.company = company;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (products != null) {
+            this.products.addAll(products);
         }
     }
 
@@ -58,6 +62,9 @@ class JsonAdaptedPerson {
         company = source.getCompany().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        products.addAll(source.getProducts().stream()
+                .map(JsonAdaptedProduct::new)
                 .collect(Collectors.toList()));
     }
 
