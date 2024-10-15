@@ -5,6 +5,7 @@ import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collections;
@@ -43,6 +44,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -79,7 +81,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Remark updatedRemark = personToEdit.getRemark();
+        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(id, updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
@@ -143,6 +145,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Remark remark;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {
@@ -157,6 +160,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setRemark(toCopy.remark);
             setTags(toCopy.tags);
         }
 
@@ -164,7 +168,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, remark, tags);
         }
 
         public Optional<String> getId() {
@@ -207,6 +211,14 @@ public class EditCommand extends Command {
             this.address = address;
         }
 
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
+        }
+
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException} if modification is
          * attempted. Returns {@code Optional#empty()} if {@code tags} is null.
@@ -238,6 +250,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(remark, otherEditPersonDescriptor.remark)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -248,6 +261,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("remark", remark)
                     .add("tags", tags)
                     .toString();
         }

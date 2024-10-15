@@ -30,7 +30,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(String id, Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(name, phone, email, address, tags);
+        CollectionUtil.requireAllNonNull(name, phone, email, address, remark, tags);
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -115,6 +115,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && remark.equals(otherPerson.remark)
                 && tags.equals(otherPerson.tags);
     }
 
@@ -130,6 +131,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("remark", remark)
                 .add("tags", tags)
                 .toString();
     }
