@@ -9,7 +9,7 @@ public class ScheduleTest {
 
     @Test
     public void constructor_null_setsEmptyString() {
-        Schedule schedule = new Schedule(null);
+        Schedule schedule = new Schedule(null, null);
         assertEquals("", schedule.dateTime);
     }
 

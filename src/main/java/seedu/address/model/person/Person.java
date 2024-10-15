@@ -106,7 +106,7 @@ public class Person {
      * Removes the appointment of the person by setting the schedule to an empty string.
      */
     public void removeAppointment() {
-        schedule = new Schedule(null);
+        schedule = new Schedule(null, null);
     }
 
     /**
