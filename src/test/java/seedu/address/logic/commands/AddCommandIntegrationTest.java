@@ -54,6 +54,7 @@ public class AddCommandIntegrationTest {
                 new JsonUserPrefsStorage(temporaryFolder.resolve("expectedUserPrefs.json"));
         StorageManager expectedStorage = new StorageManager(addressBookStorage, userPrefsStorage);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), expectedStorage);
+
         expectedModel.addPerson(validPerson);
 
         assertCommandSuccess(new AddCommand(validPerson), model,

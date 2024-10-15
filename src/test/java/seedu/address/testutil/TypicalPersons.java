@@ -32,42 +32,42 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAge("30").withGender("F").withNric("S1234567Z")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253")
+            .withPhone("12345678")
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAge("53").withGender("M").withNric("S1111111Z")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432")
+            .withEmail("johnd@example.com").withPhone("83648172")
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withAge("38").withGender("M").withNric("S2222222Z")
-            .withPhone("95352563")
+            .withPhone("74526283")
             .withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withAge("12").withGender("M").withNric("S3333333Z")
-            .withPhone("87652533")
+            .withPhone("84517263")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
             .withAge("43").withGender("F").withNric("F4444444Z")
-            .withPhone("9482224")
+            .withPhone("84635473")
             .withEmail("werner@example.com").withAddress("michegan ave").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
             .withAge("88").withGender("F").withNric("G8888888X")
-            .withPhone("9482427")
+            .withPhone("84657833")
             .withEmail("lydia@example.com").withAddress("little tokyo").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
             .withAge("23").withGender("M").withNric("F7777777D")
-            .withPhone("9482442")
+            .withPhone("39478273")
             .withEmail("anna@example.com").withAddress("4th street").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
             .withAge("34").withGender("M").withNric("G1234678Z")
-            .withPhone("8482424")
+            .withPhone("84823424")
             .withEmail("stefan@example.com").withAddress("little india").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
             .withAge("54").withGender("F").withNric("F9999999Y")
-            .withPhone("8482131")
+            .withPhone("84821331")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
