@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
@@ -179,6 +180,17 @@ public class AddCommandTest {
         public ObservableList<Event> getFilteredEventList() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ObservableObjectValue<Vendor> getViewedVendor() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void viewVendor(Vendor vendor) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
