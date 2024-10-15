@@ -13,7 +13,6 @@ Class HelpWindow
 Class ResultDisplay
 Class PersonListPanel
 Class PersonCard
-Class ContactDetails
 Class StatusBarFooter
 Class CommandBox
 }
@@ -31,7 +30,6 @@ HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
-
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
@@ -39,10 +37,8 @@ MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
 PersonListPanel -down-> "*" PersonCard
-PersonListPanel -down-> "*" ContactDetails
 
 MainWindow -left-|> UiPart
-ContactDetails -down-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
@@ -52,8 +48,6 @@ StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
 PersonCard ..> Model
-ContactDetails ..> Model
-
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
