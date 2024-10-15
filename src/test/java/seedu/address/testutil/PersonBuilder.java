@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.Deque;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -62,6 +61,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Category} of the {@code Person} that we are building.
+     */
     public PersonBuilder withCategory(String category) {
         this.category = category;
         return this;
