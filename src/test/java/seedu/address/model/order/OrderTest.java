@@ -1,6 +1,7 @@
 package seedu.address.model.order;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
@@ -14,10 +15,13 @@ class OrderTest {
         Order order3 = new Order("Cake");
         assertEquals(order, order3);
         assertNotEquals(order, order2);
+        assertNotEquals(order, new Object());
     }
+
     @Test
     public void toStringTest() {
         Order order = new Order("Cake");
         assertEquals("Cake", order.toString());
     }
+
 }
