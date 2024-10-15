@@ -60,6 +60,10 @@ public class TagCommand extends Command {
         Person newPerson = new Person(personToTag.getName(), personToTag.getPhone(),
                 personToTag.getEmail(), personToTag.getAddress(), addedTags);
 
+        if (newPerson.getTags().size() > 6) {
+            throw new CommandException("Each person can only have up to 6 tags!");
+        }
+
         // Updating addressBook
         model.setPerson(personToTag, newPerson);
         model.getActiveTags().incrementTags(addedTags);

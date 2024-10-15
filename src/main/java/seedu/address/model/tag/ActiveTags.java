@@ -27,8 +27,6 @@ public class ActiveTags {
                 tagMap.put(t, 1);
             }
         }
-
-        System.out.println(this.getMap().toString());
     }
 
     /**
@@ -45,8 +43,6 @@ public class ActiveTags {
                 tagMap.replace(t, --i);
             }
         }
-
-        System.out.println(this.getMap().toString());
     }
 
     public HashMap<Tag, Integer> getMap() {
