@@ -19,7 +19,6 @@ import seedu.address.model.student.StudentNumber;
 import seedu.address.model.task.Task;
 
 
-
 /**
  * Represents the in-memory model of the address book data.
  */
@@ -213,6 +212,13 @@ public class ModelManager implements Model {
         requireNonNull(student);
         addressBook.deleteStudentFromGroup(group, student);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void deleteGroup(Group groupToBeDeleted) {
+        requireNonNull(groupToBeDeleted);
+        addressBook.removeGroup(groupToBeDeleted);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     //=========== Filtered Student List Accessors =============================================================

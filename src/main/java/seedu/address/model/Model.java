@@ -174,4 +174,6 @@ public interface Model {
     boolean containsGroupName(GroupName groupName);
 
     void deleteStudentFromGroup(Group group, Student student);
+
+    void deleteGroup(Group groupToBeDeleted);
 }
