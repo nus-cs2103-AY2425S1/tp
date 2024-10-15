@@ -364,9 +364,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Actor performs <u>list all people (UC2)</u>.
-2.  Actor request to see specific person.
-3.  System shows person's contact details.
+1.  Actor request to see specific person.
+2.  System shows person's contact details.
 
     Use case ends.
 
