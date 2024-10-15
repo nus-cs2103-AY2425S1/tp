@@ -17,6 +17,7 @@
   <scene>
     <Scene>
       <stylesheets>
+        <URL value="@BlueTheme.css" />
         <URL value="@HelpWindow.css" />
       </stylesheets>
 
