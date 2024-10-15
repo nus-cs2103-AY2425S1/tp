@@ -259,6 +259,11 @@ public class DeleteStudentFromGroupCommandTest {
         public void deleteStudentFromGroup(Group group, Student student) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void deleteGroup(Group groupToBeDeleted) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     private class ModelStubDeleteStudentFromGroup extends ModelStub {

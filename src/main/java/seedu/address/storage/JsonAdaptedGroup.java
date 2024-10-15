@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
+import seedu.address.model.task.Task;
 
 /**
  * Jackson-friendly version of {@link Group}.
@@ -23,16 +24,21 @@ class JsonAdaptedGroup {
 
     private final String groupName;
     private final List<JsonAdaptedPerson> students = new ArrayList<>();
+    private final List<JsonAdaptedTask> tasks = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedGroup} with the given student details.
      */
     @JsonCreator
     public JsonAdaptedGroup(@JsonProperty("groupname") String groupName,
-                             @JsonProperty("students") List<JsonAdaptedPerson> students) {
+                             @JsonProperty("students") List<JsonAdaptedPerson> students,
+                            @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
         this.groupName = groupName;
         if (students != null) {
             this.students.addAll(students);
+        }
+        if (tasks != null) {
+            this.tasks.addAll(tasks);
         }
     }
 
@@ -43,6 +49,9 @@ class JsonAdaptedGroup {
         groupName = source.getGroupName().fullName;
         students.addAll(source.getStudents().stream()
                 .map(JsonAdaptedPerson::new)
+                .collect(Collectors.toList()));
+        tasks.addAll(source.getTasks().stream()
+                .map(JsonAdaptedTask::new)
                 .collect(Collectors.toList()));
     }
 
@@ -57,6 +66,10 @@ class JsonAdaptedGroup {
             allStudents.add(student.toModelType());
         }
 
+        final List<Task> allTasks = new ArrayList<>();
+        for (JsonAdaptedTask task : this.tasks) {
+            allTasks.add(task.toModelType());
+        }
         if (groupName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     GroupName.class.getSimpleName()));
@@ -67,7 +80,9 @@ class JsonAdaptedGroup {
         final GroupName modelGroupName = new GroupName(groupName);
 
         final Set<Student> modelStudents = new HashSet<>(allStudents);
-        return new Group(modelGroupName, modelStudents);
+
+        final Set<Task> modelTasks = new HashSet<>(allTasks);
+        return new Group(modelGroupName, modelStudents, modelTasks);
     }
 
 }

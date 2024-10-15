@@ -1,14 +1,14 @@
 {
   "persons": [ {
     "name": "Alice Pauline",
-    "email": "alice@example.com",
+    "email": "alice@u.nus.edu",
     "tags": [ "friends" ],
     "student number" : "A0111111J"
   }, {
     "name": "Alice Pauline",
-    "email": "pauline@example.com",
+    "email": "pauline@u.nus.edu",
     "student number" : "A0111111J",
-    "email": "pauline@example.com"
+    "email": "pauline@u.nus.edu"
   } ],
   "groups" : [ ]
 }
