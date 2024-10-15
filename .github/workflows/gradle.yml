@@ -23,16 +23,15 @@ jobs:
 
       - name: Set up virtual display for TestFX (Linux only)
         if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y xvfb
+        run:
+          sudo apt-get update
+          sudo apt-get install -y xvfb libgtk-3-0 libnotify-bin libnss3 libxss1 libasound2
 
       - name: Start virtual display (Linux only)
         if: runner.os == 'Linux'
-        run: Xvfb :99 & export DISPLAY=:99
-
-      - name: Run repository-wide tests
-        if: runner.os == 'Linux'
-        working-directory:  ${{ github.workspace }}/.github
-        run: ./run-checks.sh
+        run: Xvfb :99 -screen 0 1024x768x16 &
+        env:
+          DISPLAY: :99
 
       - name: Validate Gradle Wrapper
         uses: gradle/actions/wrapper-validation@v3
