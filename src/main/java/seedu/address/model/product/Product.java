@@ -6,7 +6,6 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.supplier.Name;
-import seedu.address.model.supplier.Supplier;
 
 /**
  * Represents a Product in the address book.
@@ -80,7 +79,7 @@ public class Product {
     public int getMinStockLevel() {
         return minStockLevel;
     }
-    
+
     /**
      * Sets the minimum stock level of the product.
      */

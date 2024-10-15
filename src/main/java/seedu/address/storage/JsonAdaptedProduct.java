@@ -25,7 +25,8 @@ class JsonAdaptedProduct {
      */
     @JsonCreator
     public JsonAdaptedProduct(@JsonProperty("name") String name, @JsonProperty("supplierName") String supplierName,
-                              @JsonProperty("stockLevel") int stockLevel, @JsonProperty("minStockLevel") int minStockLevel,
+                              @JsonProperty("stockLevel") int stockLevel,
+                              @JsonProperty("minStockLevel") int minStockLevel,
                               @JsonProperty("maxStockLevel") int maxStockLevel) {
         this.name = name;
         this.supplierName = supplierName;
@@ -52,7 +53,8 @@ class JsonAdaptedProduct {
      */
     public Product toModelType() throws IllegalValueException {
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ProductName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ProductName
+                .class.getSimpleName()));
         }
         if (!ProductName.isValidName(name)) {
             throw new IllegalValueException(ProductName.MESSAGE_CONSTRAINTS);
