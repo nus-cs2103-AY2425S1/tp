@@ -57,6 +57,19 @@ public class TagAddCommand extends Command {
         this.duplicateTags = new HashSet<>();
     }
 
+    /**
+     * Constructor to be used for TESTING only.
+     * @param name of the person in the person list to edit the tags
+     * @param tags of the person to be updated to
+     */
+    public TagAddCommand(Name name, Set<Tag> tags, Set<Tag> duplicateTags) {
+        requireAllNonNull(name, tags);
+
+        this.name = name;
+        this.tags = tags;
+        this.duplicateTags = duplicateTags;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> matchingPersons = model.getFilteredPersonList().stream()
@@ -97,7 +110,7 @@ public class TagAddCommand extends Command {
      * the tag is successfully added.
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(Person personToEdit) {
+    public String generateSuccessMessage(Person personToEdit) {
         if (duplicateTags.isEmpty()) {
             return String.format(MESSAGE_ADD_TAG_SUCCESS,
                     Messages.formatForTags(personToEdit), Messages.getName(personToEdit));
