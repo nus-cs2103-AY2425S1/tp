@@ -30,7 +30,7 @@ public class AddContactCommandTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddContactCommand(null));
     }
 
     @Test
@@ -53,10 +53,11 @@ public class AddContactCommandTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
+        AddCommand addCommand = new AddContactCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddContactCommand.MESSAGE_DUPLICATE_CONTACT, ()
+                -> addCommand.execute(modelStub));
     }
 
     @Test

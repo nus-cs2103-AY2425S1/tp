@@ -7,9 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REQUIREMENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.Mode;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.job.Job;
@@ -17,18 +15,18 @@ import seedu.address.model.job.Job;
 /**
  * Adds a job to the address book.
  */
-public class AddJobCommand extends Command {
+public class AddJobCommand extends AddCommand<Job> {
 
-    public static final String COMMAND_WORD = "add_job";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a job listing to the address book. "
+    public static final String ENTITY_WORD = "job";
+    public static final String FULL_COMMAND = COMMAND_WORD + " " + ENTITY_WORD;
+    public static final String MESSAGE_USAGE = FULL_COMMAND + ": Adds a job listing to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "JOBNAME "
             + PREFIX_COMPANY + "COMPANY "
             + PREFIX_SALARY + "SALARY "
             + "[" + PREFIX_REQUIREMENTS + "REQUIREMENTS] "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + FULL_COMMAND + " "
             + PREFIX_NAME + "Waiter "
             + PREFIX_COMPANY + "Starbucks "
             + PREFIX_SALARY + "2500 "
@@ -38,14 +36,11 @@ public class AddJobCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New job added: %1$s";
     public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the address book";
 
-    private final Job toAdd;
-
     /**
      * Creates an AddJobCommand to add the specified {@code Job}
      */
     public AddJobCommand(Job job) {
-        requireNonNull(job);
-        toAdd = job;
+        super(job);
     }
 
     @Override
@@ -57,8 +52,7 @@ public class AddJobCommand extends Command {
         }
 
         model.addJob(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)),
-                false, false, Mode.JOB);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override
@@ -76,10 +70,4 @@ public class AddJobCommand extends Command {
         return toAdd.equals(otherAddJobCommand.toAdd);
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .toString();
-    }
 }
