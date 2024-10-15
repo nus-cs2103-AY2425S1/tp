@@ -151,4 +151,16 @@ class BuyerTest {
 
         assertEquals(expectedString, buyer.toString());
     }
+
+    @Test
+    void testGetTypeString_returnsCorrectType() {
+        // Arrange
+        Buyer buyer = new Buyer(mock(Name.class), mock(Phone.class), mock(Email.class));
+
+        // Act
+        String typeString = buyer.getTypeString();
+
+        // Assert
+        assertEquals(ClientTypes.BUYER.getType(), typeString);
+    }
 }

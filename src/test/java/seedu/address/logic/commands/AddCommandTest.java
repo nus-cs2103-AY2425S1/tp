@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
@@ -251,6 +252,22 @@ public class AddCommandTest {
         public void updateFilteredPropertyList(Predicate<Property> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public BooleanProperty getIsDisplayClientsProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDisplayClients() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDisplayProperties() {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

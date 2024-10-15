@@ -9,6 +9,8 @@ import java.nio.file.Paths;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -30,13 +32,15 @@ public class ModelManager implements Model {
     private final PropertyBook propertyBook;
     private final ClientBook clientBook;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Property> filteredProperties;
 
     // note that filteredClients may be removed if we decide not to keep the filtering feature
     private final FilteredList<Client> filteredClients;
-    private final FilteredList<Property> filteredProperty;
 
     private Path clientBookFilePath = Paths.get("data" , "clientbook.json");
     private Path propertyBookFilePath = Paths.get("data" , "propertybook.json");
+
+    private final BooleanProperty isDisplayClients = new SimpleBooleanProperty(true);
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -52,9 +56,9 @@ public class ModelManager implements Model {
         this.propertyBook = new PropertyBook(propertyBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.clientBook = new ClientBook(clientBook);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredClients = new FilteredList<>(this.clientBook.getClientList());
-        filteredProperty = new FilteredList<>(this.propertyBook.getPropertyList());
+        this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.filteredClients = new FilteredList<>(this.clientBook.getClientList());
+        this.filteredProperties = new FilteredList<>(this.propertyBook.getPropertyList());
     }
 
     public ModelManager() {
@@ -267,19 +271,33 @@ public class ModelManager implements Model {
     }
 
     //=========== Filtered Property List Accessors =============================================================
-
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Property} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
     public ObservableList<Property> getFilteredPropertyList() {
-        return filteredProperty;
+        return filteredProperties;
     }
 
     @Override
     public void updateFilteredPropertyList(Predicate<Property> predicate) {
         requireNonNull(predicate);
-        filteredProperty.setPredicate(predicate);
+        filteredProperties.setPredicate(predicate);
+    }
+
+    //=========== Managing UI  ==================================================================================
+    @Override
+    public BooleanProperty getIsDisplayClientsProperty() {
+        return isDisplayClients;
+    }
+    @Override
+    public void setDisplayClients() {
+        isDisplayClients.set(true);
+    }
+
+    @Override
+    public void setDisplayProperties() {
+        isDisplayClients.set(false);
     }
 }
