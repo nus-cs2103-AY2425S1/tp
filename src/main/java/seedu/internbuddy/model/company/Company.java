@@ -39,19 +39,6 @@ public class Company {
         this.status = status;
     }
 
-    /**
-     * Construct but with default value for {@code status = "INTERESTED"}.
-     */
-    public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.status = new Status("INTERESTED");
-        this.tags.addAll(tags);
-    }
-
     public Name getName() {
         return name;
     }

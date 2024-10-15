@@ -95,8 +95,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser,
                 validExpectedcompaniestring + PHONE_DESC_GOOGLE + EMAIL_DESC_GOOGLE + NAME_DESC_GOOGLE
                         + ADDRESS_DESC_GOOGLE + validExpectedcompaniestring,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE,
-                        PREFIX_STATUS));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE));
 
         // invalid value followed by valid value
 
