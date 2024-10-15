@@ -76,7 +76,7 @@ public class Goods {
      */
     public boolean isFromSupplier(Name supplier) {
         requireNonNull(supplier);
-        return this.supplierName == supplier;
+        return this.supplierName.equals(supplier);
     }
 
     public int getQuantity() {

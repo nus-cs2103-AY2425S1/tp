@@ -1,5 +1,8 @@
 package seedu.address.model.goods;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -14,7 +17,13 @@ public class Date {
 
     private LocalDateTime dateTime;
 
+    /**
+     * Constructs Date object for Goods.
+     */
     public Date(String dateTime) {
+        requireNonNull(dateTime);
+        // Basic check for the length of string format
+        checkArgument(dateTime.length() > 10);
         this.dateTime = LocalDateTime.parse(dateTime, PATTERN_READ);
     }
 
