@@ -50,7 +50,11 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
+        if (phone.isEmpty()) {
+            descriptor.setPhone(new Phone());
+        } else {
+            descriptor.setPhone(new Phone(phone));
+        }
         return this;
     }
 
@@ -58,7 +62,11 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
+        if (email.isEmpty()) {
+            descriptor.setEmail(new Email());
+        } else {
+            descriptor.setEmail(new Email(email));
+        }
         return this;
     }
 
