@@ -57,7 +57,8 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return fullName.trim().equals(otherName.fullName.trim());
+        // so "Bob" is the same as "bob"
+        return fullName.trim().equalsIgnoreCase(otherName.fullName.trim());
     }
 
     @Override
