@@ -38,18 +38,18 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    - `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Command Overview](#command-overview) below for details of each command.
 
 ---
 
-## Interacting with the DocTrack Platform
+## Interacting with DocTrack
 
-All interactions with the DocTrack platform are done through a series of commands entered by the user. These commands allow you to perform various tasks, such as adding, editing, listing, and managing persons/appointments, as well as interacting with the application itself. The commands are designed to be flexible and user-friendly, allowing parameters in any order, handling multiple entries for specific fields.
+All interactions with the DocTrack platform are done through a series of **commands** entered by the user. These commands allow you to perform various **tasks**, such as adding, editing, listing, and managing persons/appointments. The commands are designed to be flexible and user-friendly, allowing **parameters** in any order, handling multiple entries for specific fields.
 
-Here are some key points to keep in mind when using commands:
+Here are some **key points** to keep in mind when using commands:
 
-- Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+- You should supply all the parameters (words in `UPPER_CASE`) that are needed for a command.<br>
+  e.g. in `add person n/NAME`, `NAME` is a parameter which can be used as `add person n/John Doe`.
 
 - Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -57,25 +57,33 @@ Here are some key points to keep in mind when using commands:
 - Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-- Parameters can be in any order.<br>
+- You can add parameters in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+- If you add extraneous parameters for commands that do not take in parameters (such as `help`, `list person`, `list appt`, `exit` and `clear`), they will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 ---
 
-## Commands Overview
+## Command Overview
 
 The following sections describe the various commands available in the DocTrack platform:
 
+- [Person Commands](#person-commands)
+- [Appointment Commands](#appointment-commands)
+- [General Commands](#general-commands)
+
 ---
 
-## Person Commands
+### Person Commands
 
-### Adding a person: `add person`
+A **person** is a patient with several data fields: a name, a phone number, an email, an address and optional tags. These patients can be uniquely identified by their **patient ID (PID)** for easy reference. DocTrack allows you interact with patient information through different commands, which can be seen below.
+
+<br>
+
+##### Adding a person: `add person`
 
 Adds a person to the address book.
 
@@ -91,17 +99,21 @@ Examples:
 - `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 - `add person n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list person`
+<br>
+
+##### Listing all persons : `list person`
 
 Shows a list of all persons in the address book.
 
-Format: `list`
+Format: `list person`
 
-### Editing a person : `edit person`
+<br>
+
+##### Editing a person : `edit person`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
@@ -115,7 +127,9 @@ Examples:
 - `edit person 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 - `edit person 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find person`
+<br>
+
+##### Locating persons by name: `find person`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -131,14 +145,16 @@ Format: `find person KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 - `find person John` returns `john` and `John Doe`
-- `find person alex david` returns `Alex Yeoh`, `David Li`<br>
+- `find person alex david` returns `Alex Yeoh`, `David Li`<br><br>
   ![result for 'find person alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete person`
+<br>
+
+##### Deleting a person : `delete person`
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `delete person INDEX`
 
 - Deletes the person at the specified `INDEX`.
 - The index refers to the index number shown in the displayed person list.
@@ -146,20 +162,28 @@ Format: `delete INDEX`
 
 Examples:
 
-- `list` followed by `delete 2` deletes the 2nd person in the address book.
-- `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+- `list` followed by `delete person 2` deletes the 2nd person in the address book.
+- `find Betsy` followed by `delete person 1` deletes the 1st person in the results of the `find` command.
+
+<br>
 
 ---
 
-## Appointment Commands
+### Appointment Commands
+
+<br>
 
 TODO: Add appointment commands here.
 
 ---
 
-## General Commands
+### General Commands
 
-### Viewing help : `help`
+**General commands** can help you with miscellaneous tasks related to patient and appointment management.
+
+<br>
+
+##### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
 
@@ -167,23 +191,31 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### Clearing all entries : `clear`
+<br>
+
+##### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+<br>
+
+##### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+<br>
+
+##### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+<br>
+
+##### Editing the data file
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
