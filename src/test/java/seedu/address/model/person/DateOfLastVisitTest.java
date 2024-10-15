@@ -38,7 +38,7 @@ public class DateOfLastVisitTest {
         // valid dateOfLastVisits
         assertTrue(DateOfLastVisit.isValidDateOfLastVisit("01-01-0000"));   // year 0000
         assertTrue(DateOfLastVisit.isValidDateOfLastVisit("31-01-2024"));   // month with 31st
-        assertTrue(DateOfLastVisit.isValidDateOfLastVisit("30-03-2024"));   // month with 30th
+        assertTrue(DateOfLastVisit.isValidDateOfLastVisit("30-04-2024"));   // month with 30th
     }
 
     @Test
