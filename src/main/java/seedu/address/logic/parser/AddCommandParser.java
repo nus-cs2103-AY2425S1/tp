@@ -43,7 +43,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             //Check if name is present
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                     || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddCommand.MESSAGE_USAGE_PERSON));
             }
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
@@ -61,10 +62,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         } else {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ETA, PREFIX_ADDRESS, PREFIX_COST);
-            //Check if delivery cost is present
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
+
+            // Checks for correct add format
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ETA, PREFIX_ADDRESS, PREFIX_COST)
                     || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddCommand.MESSAGE_USAGE_DELIVERY));
             }
 
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
