@@ -24,8 +24,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_ID = "P12D45";
     private static final String INVALID_WARD = "D 4";
-
-    // Note: There is no INVALID_DIAGNOSIS
+    private static final String INVALID_DIAGNOSIS = "$<>";
 
     /*
     private static final String INVALID_PHONE = "+651234";
@@ -96,6 +95,14 @@ public class JsonAdaptedPersonTest {
     public void toModelType_nullWard_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_ID, null, VALID_DIAGNOSIS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Ward.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidDiagnosis_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_ID, VALID_WARD, INVALID_DIAGNOSIS);
+        String expectedMessage = Diagnosis.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

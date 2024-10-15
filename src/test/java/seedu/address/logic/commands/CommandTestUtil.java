@@ -72,8 +72,6 @@ public class CommandTestUtil {
     public static final String INVALID_WARD_DESC = " " + PREFIX_WARD + "A!"; // No special characters allowed
     public static final String INVALID_DIAGNOSIS_DESC = " " + PREFIX_DIAGNOSIS + "$<>"; // Only a-z and .()/- allowed
 
-    // No INVALID_DIAGNOSIS_DESC
-
     /*
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol

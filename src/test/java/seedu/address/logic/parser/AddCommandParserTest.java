@@ -109,7 +109,9 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_WARD_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_WARD));
 
-        // Note: No invalid diagnosis
+        // invalid diagnosis
+        assertParseFailure(parser, INVALID_DIAGNOSIS_DESC + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DIAGNOSIS));
 
         /*
         // invalid email
