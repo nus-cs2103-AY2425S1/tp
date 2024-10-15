@@ -10,18 +10,18 @@ import seedu.address.commons.util.ToStringBuilder;
  * Represents a MeetUp in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class MeetUp { //TODO
+public class MeetUp {
 
     // Identity fields
-    private final MeetUpName name;
-    private final MeetUpInfo info;
-    private final MeetUpFrom from;
-    private final MeetUpTo to;
+    private final Name name;
+    private final Info info;
+    private final From from;
+    private final To to;
 
     /**
      * Every field must be present and not null.
      */
-    public MeetUp(MeetUpName name, MeetUpInfo info, MeetUpFrom from, MeetUpTo to) {
+    public MeetUp(Name name, Info info, From from, To to) {
         requireAllNonNull(name, info, from, to);
         this.name = name;
         this.info = info;
@@ -59,7 +59,6 @@ public class MeetUp { //TODO
 
     @Override
     public String toString() {
-        //TODO
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("info", info)
@@ -68,19 +67,19 @@ public class MeetUp { //TODO
                 .toString();
     }
 
-    public MeetUpName getName() {
+    public Name getName() {
         return this.name;
     }
 
-    public MeetUpInfo getInfo() {
+    public Info getInfo() {
         return this.info;
     }
 
-    public MeetUpFrom getFrom() {
+    public From getFrom() {
         return this.from;
     }
 
-    public MeetUpTo getTo() {
+    public To getTo() {
         return this.to;
     }
 }
