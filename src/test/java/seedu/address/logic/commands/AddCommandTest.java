@@ -26,6 +26,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.testutil.VendorBuilder;
+import seedu.address.ui.UiState;
 
 public class AddCommandTest {
 
@@ -203,6 +204,16 @@ public class AddCommandTest {
 
         @Override
         public void viewEvent(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableObjectValue<UiState> getUiState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setUiState(UiState uiState) {
             throw new AssertionError("This method should not be called.");
         }
     }
