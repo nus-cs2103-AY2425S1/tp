@@ -2,11 +2,11 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GEORGE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -33,18 +33,18 @@ public class TagDeleteCommandTest {
     @Test
     public void execute_deleteTagUnfilteredList_success() {
         List<Person> matchingPersons = model.getFilteredPersonList().stream()
-                .filter(person -> person.getName().fullName.equalsIgnoreCase(VALID_NAME_GEORGE))
+                .filter(person -> person.getName().fullName.equalsIgnoreCase(VALID_NAME_ALICE))
                 .toList();
 
         Person firstPerson = matchingPersons.get(0);
-        Person originalPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_FRIEND).build();
-        Person editedPerson = new PersonBuilder(firstPerson).build();
+        Person originalPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_FRIENDS).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withTags().build();
 
-        stubTagList.add(new Tag(VALID_TAG_FRIEND));
+        stubTagList.add(new Tag(VALID_TAG_FRIENDS));
         TagDeleteCommand tagDeleteCommand = new TagDeleteCommand(originalPerson.getName(), stubTagList);
 
         String expectedMessage = String.format(TagDeleteCommand.MESSAGE_DELETE_TAG_SUCCESS,
-                Messages.format(editedPerson));
+                Messages.tagSetToString(stubTagList), Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -56,7 +56,7 @@ public class TagDeleteCommandTest {
     public void equals() {
 
         Tag tag1 = new Tag(VALID_TAG_AMY);
-        Tag tag2 = new Tag(VALID_TAG_FRIEND);
+        Tag tag2 = new Tag(VALID_TAG_FRIENDS);
         Name name = new Name(VALID_NAME_AMY);
         Set<Tag> standardTagList = new HashSet<>();
         Set<Tag> deleteTagList = new HashSet<>();
@@ -68,7 +68,7 @@ public class TagDeleteCommandTest {
 
         // same values -> returns true
         Tag stubTag1 = new Tag(VALID_TAG_AMY);
-        Tag stubTag2 = new Tag(VALID_TAG_FRIEND);
+        Tag stubTag2 = new Tag(VALID_TAG_FRIENDS);
         Name stubName = new Name(VALID_NAME_AMY);
         Set<Tag> stubTagList = new HashSet<>();
         Set<Tag> deleteStubTagList = new HashSet<>();
@@ -90,7 +90,7 @@ public class TagDeleteCommandTest {
 
         // different tag -> returns false
         Tag newStubTag1 = new Tag(VALID_TAG_BOB);
-        Tag newStubTag2 = new Tag(VALID_TAG_FRIEND);
+        Tag newStubTag2 = new Tag(VALID_TAG_FRIENDS);
         Set<Tag> newStubTagList = new HashSet<>();
         Set<Tag> newDeleteStubTagList = new HashSet<>();
         newStubTagList.add(newStubTag1);

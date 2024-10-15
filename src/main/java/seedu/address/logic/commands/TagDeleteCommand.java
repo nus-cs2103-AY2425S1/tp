@@ -119,6 +119,7 @@ public class TagDeleteCommand extends Command {
                 return tagsNotExist + tagsExist;
             }
         }
-        return String.format(MESSAGE_DELETE_TAG_SUCCESS, tagsToDelete, Messages.format(editedPerson));
+        return String.format(MESSAGE_DELETE_TAG_SUCCESS, Messages.tagSetToString(tagsToDelete),
+                Messages.format(editedPerson));
     }
 }
