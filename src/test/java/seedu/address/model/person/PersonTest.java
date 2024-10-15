@@ -65,7 +65,7 @@ public class PersonTest {
 
         // different person -> returns false
         assertFalse(ALICE.equals(BOB));
-        assertNotEquals(ALICE.hashCode(), LILY.hashCode());
+        assertNotEquals(BOB.hashCode(), LILY.hashCode());
 
         // different name -> returns false
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withIsEmployee(true).build();
