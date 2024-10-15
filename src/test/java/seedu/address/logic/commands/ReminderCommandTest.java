@@ -103,7 +103,7 @@ public class ReminderCommandTest {
     public void execute_appointmentNotFound_throwsCommandException() {
         Person personToRemind = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person personWithoutSchedule = new PersonBuilder(personToRemind)
-                .withSchedule("")
+                .withSchedule("", "")
                 .build();
         model.setPerson(personToRemind, personWithoutSchedule);
 
