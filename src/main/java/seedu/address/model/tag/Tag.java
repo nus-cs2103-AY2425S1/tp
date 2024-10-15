@@ -68,8 +68,6 @@ public class Tag {
      * @param newName new tag name
      */
     public void updateTagName(String newName) {
-        requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         tagName = newName;
     }
 }
