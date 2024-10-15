@@ -2,6 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a person's emergency contact name in the address book
+ * The name can be empty or contain only alphanumeric characters and spaces.
+ */
 public class EmergencyContactName {
 
     public static final String MESSAGE_CONSTRAINTS =
