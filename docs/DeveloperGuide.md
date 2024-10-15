@@ -371,9 +371,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 2a. The specified person is invalid.
+- 1a. The specified person is invalid.
 
-  - 2a1. System shows an error message.
+  - 1a1. System shows an error message.
 
     Use case ends.
 
