@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.Main;
+import seedu.address.MainApp;
 
 public class VersionTest {
 
@@ -131,5 +133,14 @@ public class VersionTest {
     private void verifyVersionParsedCorrectly(String versionString,
             int major, int minor, int patch, boolean isEarlyAccess) {
         assertEquals(new Version(major, minor, patch, isEarlyAccess), Version.fromString(versionString));
+    }
+
+    @Test
+    public void testCurrentVersion() {
+        Version test = MainApp.VERSION;
+        assertEquals(1, test.getMajor());
+        assertEquals(3, test.getMinor());
+        assertEquals(0, test.getPatch());
+        assertTrue(test.isEarlyAccess());
     }
 }
