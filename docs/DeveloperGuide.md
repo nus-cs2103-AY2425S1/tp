@@ -582,7 +582,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+1.  Should work on any [_mainstream OS_](#glossary-mainstream-os) as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  A user should be able to see clearly with reasonably large texts.
@@ -596,6 +596,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * <a id="glossary-mainstream-os"/>**Mainstream OS**: Windows, Linux, Unix, MacOS
 * <a id="glossary-private-contact-detail"/>**Private contact detail**: A contact detail that is not meant to be shared with others
+
+[//]: # (Is User necessary here?)
 * <a id="glossary-user"/>**User**: A letting agent that is using TrueRental to manage the contact information of their clients
 * <a id="glossary-client"/>**Client**: An individual that is renting a property from a letting agent
 * <a id="glossary-letting-agent"/>**Letting agent**: An individual that facilitates a property rental agreement
