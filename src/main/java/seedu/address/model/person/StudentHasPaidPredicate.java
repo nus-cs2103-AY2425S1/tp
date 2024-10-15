@@ -7,8 +7,6 @@ import seedu.address.commons.util.ToStringBuilder;
  * Tests a {@code Person}'s hasPaid status
  */
 public class StudentHasPaidPredicate implements Predicate<Person> {
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET =
-            "StudentHasPaidPredicate not implemented yet";
     private final boolean hasPaid;
 
     public StudentHasPaidPredicate(boolean hasPaid) {
@@ -18,7 +16,7 @@ public class StudentHasPaidPredicate implements Predicate<Person> {
     //TODO Implement test
     @Override
     public boolean test(Person person) {
-        throw new UnsupportedOperationException(MESSAGE_NOT_IMPLEMENTED_YET);
+        return this.hasPaid == person.getPayment().hasPaid;
     }
 
     @Override
