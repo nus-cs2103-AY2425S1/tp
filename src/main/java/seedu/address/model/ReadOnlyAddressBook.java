@@ -1,8 +1,6 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.doctor.Doctor;
-import seedu.address.model.patient.Patient;
 import seedu.address.model.person.Person;
 
 /**
