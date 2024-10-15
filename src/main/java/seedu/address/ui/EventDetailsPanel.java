@@ -43,7 +43,7 @@ public class EventDetailsPanel extends UiPart<Region> {
             setEvent(newValue);
         });
 
-        VendorListPanel vendorListPanel = new VendorListPanel(assignedVendors);
+        VendorListPanel vendorListPanel = new VendorListPanel(assignedVendors, "Assigned Vendors");
         detailsChildrenPlaceholder.getChildren().add(vendorListPanel.getRoot());
 
     }

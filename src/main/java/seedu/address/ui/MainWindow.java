@@ -137,11 +137,11 @@ public class MainWindow extends UiPart<Stage> {
         eventDetailsPanel = new EventDetailsPanel(logic.getViewedEvent(), logic.getFilteredVendorList());
         vendorDetailsPanel = new VendorDetailsPanel(logic.getViewedVendor(), logic.getFilteredVendorList());
 
-        vendorListPanel = new VendorListPanel(logic.getFilteredVendorList());
+        vendorListPanel = new VendorListPanel(logic.getFilteredVendorList(), "Vendors List");
         leftPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
 
         // TODO: Update once eventListPanel is created
-        eventListPanel = new VendorListPanel(logic.getFilteredVendorList());
+        eventListPanel = new VendorListPanel(logic.getFilteredVendorList(), "Events List");
         rightPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
