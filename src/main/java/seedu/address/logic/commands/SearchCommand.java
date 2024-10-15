@@ -17,10 +17,15 @@ public class SearchCommand extends Command {
 
     public static final String COMMAND_WORD = "search";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Search all persons whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches all persons whose names or tags contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "At least one of the following parameters must be provided.\n"
+            + "Parameters: [n/NAME_KEYWORD] [t/TAG_KEYWORD]\n"
+            + "You can search by name, tag, or both. If both are provided, only persons matching both criteria will be shown.\n"
+            + "Example 1: " + COMMAND_WORD + " n/alice\n"
+            + "Example 2: " + COMMAND_WORD + " t/friend\n"
+            + "Example 3: " + COMMAND_WORD + " n/alice t/friend\n"
+            + "Example 4: " + COMMAND_WORD + " t/friend n/alice";
 
     private final Predicate<Person> predicate;
 
