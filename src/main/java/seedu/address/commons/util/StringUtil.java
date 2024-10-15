@@ -26,6 +26,7 @@ public class StringUtil {
      *       prepareSearch("ABc def  ", "abc") == SearchPair("ABc def", "abc")
      *       prepareSearch("ABc def", "DEF") == SearchPair("ABc def", "DEF")
      *       </pre>
+     *
      * @param sentence cannot be null
      * @param word cannot be null, cannot be empty, must be a single word
      */
@@ -50,6 +51,7 @@ public class StringUtil {
      *       containsWordIgnoreCase("ABc def", "DEF") == true
      *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
      *       </pre>
+     *
      * @param sentence cannot be null
      * @param word cannot be null, cannot be empty, must be a single word
      */
@@ -74,6 +76,7 @@ public class StringUtil {
      *       containsCharactersInWordIgnoreCase("ABc def", "ac") == true
      *       containsCharactersInWordIgnoreCase("ABc def", "af") == false
      *       </pre>
+     *
      * @param sentence cannot be null
      * @param word cannot be null, cannot be empty, must be a single word
      */
@@ -134,11 +137,5 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
-    }
-
-    public static void main(String[] args) {
-        System.out.println(containsCharactersInWordIgnoreCase("ABc def", "abc"));
-        System.out.println(containsCharactersInWordIgnoreCase("gareth", "ah"));
-        System.out.println(containsCharactersInWordIgnoreCase("AaaaBc def", "aabc"));
     }
 }

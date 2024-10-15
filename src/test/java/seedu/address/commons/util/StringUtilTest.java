@@ -100,7 +100,6 @@ public class StringUtilTest {
      *
      * The test method below tries to verify all above with a reasonably low number of test cases.
      */
-
     @Test
     public void containsWordIgnoreCase_validInputs_correctResult() {
 
@@ -150,7 +149,6 @@ public class StringUtilTest {
      *
      * The test method below tries to verify all above with a reasonably low number of test cases.
      */
-
     @Test
     public void containsCharactersInWordIgnoreCase_validInputs_correctResult() {
 
