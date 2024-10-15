@@ -1,33 +1,70 @@
 ---
 layout: page
 title: AcademyAssist User Guide
+
 ---
 
-AcademyAssist is a **desktop app for managing student contacts in a tuition center, optimized for use via a Command 
-Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, 
-AcademyAssist can get your contact management tasks done faster than traditional GUI apps.
+## Table of Contents
+1. [Introduction](#introduction)
+
+2. [Quick Start](#quick-start)
+
+3. [Features](#features)
+   * [Adding a student](#adding-a-student--add)
+   * [Deleting a student](#deleting-a-student--del)
+   * [Editing a student](#editing-a-student--edit)
+   * [Viewing all student](#viewing-all-students--view)
+   * [Finding a student](#finding-a-student--find)
+   * [Sorting students](#sorting-students--sort)
+   * [Clearing all entries](#clearing-all-entries--clear)
+   * [Viewing help](#viewing-help--help)
+   * [Exiting the program](#exiting-the-program--exit)
+
+4. [FAQ](#faq)
+
+5. [Command summary](#command-summary)
+
+## Introduction
+Welcome to AcademyAssist, your ultimate solution for efficient student contact management in tuition centers. 
+This desktop application is designed to streamline your administrative tasks, allowing you to focus more 
+on what truly matters - educating and nurturing young minds.
+
+AcademyAssist combines the power of a **Command Line Interface (CLI) with the user-friendly aspects of a Graphical 
+User Interface (GUI).** This hybrid approach ensures that you can manage your student database with 
+lightning-fast efficiency while still enjoying the visual benefits of modern software design. Whether you're a 
+seasoned administrator or new to digital management systems, AcademyAssist is intuitive enough for beginners yet 
+powerful enough for experts. With features like quick student addition, easy information retrieval, 
+and automated data saving, AcademyAssist is set to revolutionize how you manage your tuition center.
+
+Let's embark on this journey to simpler, faster, and more effective student management!
+
+---
 
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
+   1. Open a terminal window, and navigate to the root of your project folder.
+   2. Run the `java -version` command to confirm the terminal is using Java 17.
+   3. If Java version is not Java 17, download it [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 
 2. Download the latest `AcademyAssist.jar` file from the official website.
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AcademyAssist.
 
-4. Double-click the file to start the app. The GUI should appear in a few seconds.
+4. Double-click the file to start the app.
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will 
-open the help window.
+5. For first time users, a help window appears automatically and details of some basic features are shown. 
 
-6. Refer to the [Features](#features) below for details of each command.
+6. Type the command in the command box and press Enter to execute it. For example, to bring up the help window
+again, type `help` and press Enter. 
+
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
 <div markdown="block" class="alert alert-info">
-**:information_source: Notes about the command format:**
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
