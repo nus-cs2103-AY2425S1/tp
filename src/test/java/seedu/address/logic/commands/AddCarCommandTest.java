@@ -58,8 +58,8 @@ public class AddCarCommandTest {
         AddCarCommand addCarCommand = new AddCarCommand(Index.fromOneBased(1), newCar2);
         ModelStubWithPerson modelStub = new ModelStubWithPerson(personWithCar);
 
-        assertThrows(CommandException.class, AddCarCommand.MESSAGE_CAR_ALREADY_PRESENT,
-                () -> addCarCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddCarCommand.MESSAGE_CAR_ALREADY_PRESENT, () -> addCarCommand.execute(modelStub));
     }
 
     /**
