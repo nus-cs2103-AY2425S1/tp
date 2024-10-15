@@ -389,6 +389,16 @@ Use case ends.
         If No: The user is prompted to provide a new destination path or filename.
     - Use case ends.
 
+**Use case: Help command**
+
+**MSS**
+
+1. User requests for help.
+2. ClinicBuddy provides the user a list of available commands, along with infomation on each command.
+
+Use case ends.
+
+
 **Use case: Undo a command**
 
 **MSS**
@@ -403,7 +413,6 @@ Use case ends.
 * 1a. There are no commands to undo.
     - 1a1. ClinicBuddy informs the user that there is no action to undo.
     - Use case ends.
-
 
 ### **Non-Functional Requirements**
 
