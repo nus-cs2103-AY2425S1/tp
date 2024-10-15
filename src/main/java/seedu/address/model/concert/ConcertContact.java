@@ -54,7 +54,7 @@ public class ConcertContact {
      *
      * @return List of ConcertContact
      */
-    public ArrayList<ConcertContact> concertContactList(Concert concert){
+    public ArrayList<ConcertContact> concertContactList(Concert concert) {
         return concertContacts.get(concert);
     }
 

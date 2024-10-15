@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 public class ConcertContactTest {
     @Test
     void createConcertContact() {
+        //checks if ConcertContact object can be created
         ConcertContact contactTest1 = new ConcertContact(ALICE, COACHELLA);
 
         assertEquals(COACHELLA, contactTest1.getConcert());
@@ -19,7 +20,8 @@ public class ConcertContactTest {
     }
 
     @Test
-    void getContactFromConcertTest(){
+    void getContactFromConcertTest() {
+        //checks if list of ConcertContacts can be retrieved from concert
         ConcertContact contactTest1 = new ConcertContact(ALICE, COACHELLA);
         ConcertContact contactTest2 = new ConcertContact(BOB, COACHELLA);
 
