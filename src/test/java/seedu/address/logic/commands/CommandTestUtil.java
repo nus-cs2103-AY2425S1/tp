@@ -63,7 +63,7 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String INVALID_DATEOFLASTVISIT_DESC = " " + PREFIX_DATEOFLASTVISIT
-            + "13/13/2023"; // date should only be in the format: dd/MM/yyyy, separated by '/'
+            + "13/13/2023"; // date should only be in the format: dd/MM/yyyy, separated by '-'
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
