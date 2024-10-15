@@ -43,4 +43,19 @@ public class ViewVendorCommand extends ViewCommand {
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(vendorToView)));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ViewVendorCommand)) {
+            return false;
+        }
+
+        ViewVendorCommand otherViewVendorCommand = (ViewVendorCommand) other;
+        return targetIndex.equals(otherViewVendorCommand.targetIndex);
+    }
 }
