@@ -15,7 +15,7 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public abstract class Person implements Appointmentable {
+public class Person implements Appointmentable {
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -141,6 +141,12 @@ public abstract class Person implements Appointmentable {
     @Override
     public String getAllAppointments() {
         return History.getAllAppointments(this.getId());
+    }
+
+    @Override
+    public boolean editAppointment(LocalDateTime dateTime, Id patientId, Id doctorId) {
+        // TODO AFTER v1.3
+        return false;
     }
 
     /**

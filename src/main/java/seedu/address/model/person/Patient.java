@@ -30,4 +30,5 @@ public class Patient extends Person {
     public static ArrayList<Patient> getPatients() {
         return patients;
     }
+
 }

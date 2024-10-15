@@ -17,15 +17,15 @@ public interface Appointmentable {
      */
     public abstract boolean addAppointment(LocalDateTime dateTime, Id patientId, Id doctorId, String remarks);
 
-//    /**
-//     * Edit an appointment at the specified time, with the respective patient and doctor.
-//     *
-//     * @param dateTime Time of appointment.
-//     * @param patientId Id of patient in the appointment.
-//     * @param doctorId Id of doctor in the appointment.
-//     * @return True if command was successful, false if otherwise.
-//     */
-//    public abstract boolean editAppointment(LocalDateTime dateTime, Id patientId, Id doctorId);
+    /**
+     * Edit an appointment at the specified time, with the respective patient and doctor.
+     *
+     * @param dateTime Time of appointment.
+     * @param patientId Id of patient in the appointment.
+     * @param doctorId Id of doctor in the appointment.
+     * @return True if command was successful, false if otherwise.
+     */
+    public abstract boolean editAppointment(LocalDateTime dateTime, Id patientId, Id doctorId);
 
     /**
      * Delete an appointment at the specified time, with the respective patient and doctor.

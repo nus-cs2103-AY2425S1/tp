@@ -11,11 +11,18 @@ import seedu.address.commons.exceptions.AppNotFoundException;
  * This class will store details of the appointments or medical interactions.
  */
 public class History {
-    private TreeMap<LocalDateTime, TreeMap<Integer, String>> appointmentHistory;
-
     // Nigel's suggestion
-    public static TreeMap<LocalDateTime, Appointment> appointments;
-    private ArrayList<? extends Person> personAppointments;
+    /**
+     * Static databse for ALL appointments sorted by Local Date Time
+     */
+    private static TreeMap<LocalDateTime, Appointment> appointmentDatabase;
+
+    /**
+     * List of appointments for this instance of a person.
+     */
+    private ArrayList<LocalDateTime> appointments;
+
+    private TreeMap<LocalDateTime, TreeMap<Integer, String>> appointmentHistory;
 
     /**
      * Placeholder default constructor TODO.
