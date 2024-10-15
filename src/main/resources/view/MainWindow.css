@@ -48,10 +48,12 @@
     background-color: #004aad; /* Used in the default.html file */
 }
 
-#resultDisplayPlaceholder {
-    -fx-background-color: #efeee7;
-}
+
 
 #personList {
     -fx-background-color: #e7ebf0;
+}
+
+#commandBoxPlaceholder {
+    -fx-text-fill: white;
 }
