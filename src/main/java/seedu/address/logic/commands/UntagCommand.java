@@ -117,10 +117,10 @@ public class UntagCommand extends Command {
         String removedTagsString = removedTags.isEmpty()
                 ? "no tags"
                 : String.join(", ", removedTags.stream()
-                .map(tag -> tag.tagName)
+                .map(tag -> "[" + tag.tagName + "]")
                 .collect(Collectors.joining(", ")));
 
-        return String.format(MESSAGE_UNTAG_SUCCESS + ". Tags removed: [%2$s]",
+        return String.format(MESSAGE_UNTAG_SUCCESS + ". Tags removed: %2$s",
                 personToEdit.getName().toString(), removedTagsString);
     }
 
@@ -139,7 +139,7 @@ public class UntagCommand extends Command {
         // state check
         UntagCommand e = (UntagCommand) other;
         return index.equals(e.index)
-                && tagsToRemove.equals(e.tagsToRemove);
+                && (tagsToRemove == null ? e.tagsToRemove == null : tagsToRemove.equals(e.tagsToRemove));
     }
 
 }
