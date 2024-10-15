@@ -47,12 +47,12 @@ public class Assignment {
             return true;
         }
 
-        Person otherPerson = otherAssignment.getPerson();
-        boolean isSamePerson = otherPerson != null && person.equals(otherPerson);
+        if (otherAssignment == null) {
+            return false;
+        }
 
-        Project otherProject = otherAssignment.getProject();
-        boolean isSameProject = otherProject != null && project.equals(otherProject);
-
+        boolean isSameProject = otherAssignment.getProject().equals(project);
+        boolean isSamePerson = otherAssignment.getPerson().equals(person);
         return isSamePerson && isSameProject;
     }
 

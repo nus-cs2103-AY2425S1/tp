@@ -30,6 +30,7 @@ public class AssignmentBuilder {
      * Initializes the AssignmentBuilder with the data of {@code assignmentToCopy}.
      */
     public AssignmentBuilder(Assignment assignmentToCopy) {
+        assignmentId = assignmentToCopy.getAssignmentId();
         project = assignmentToCopy.getProject();
         person = assignmentToCopy.getPerson();
     }
