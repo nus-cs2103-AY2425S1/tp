@@ -106,8 +106,5 @@ public class FindCommand extends Command {
                 .add("phonePredicate", phonePredicate == null ? "null" : phonePredicate.toString())
                 .add("addressPredicate", addressPredicate == null ? "null" : addressPredicate.toString())
                 .toString();
-//        return new ToStringBuilder(this)
-//                .add("combinedPredicate", combinedPredicate)
-//                .toString();
     }
 }
