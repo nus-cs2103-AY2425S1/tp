@@ -37,6 +37,8 @@ public class MemberCard extends UiPart<Region> {
     @FXML
     private Label room;
     @FXML
+    private Label points;
+    @FXML
     private FlowPane tags;
     @FXML
     private FlowPane sessions;
@@ -49,11 +51,14 @@ public class MemberCard extends UiPart<Region> {
         this.member = member;
         id.setText(displayedIndex + ". ");
         name.setText(member.getName().fullName);
+        points.setText(member.getTotalPoints().getValue() + " points");
         telegram.setText(member.getTelegram().value);
         room.setText(member.getRoom().value);
+
         member.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
         member.getSessions().stream()
                 .sorted(Comparator.comparing(session -> session.getSessionName().toString()))
                 .forEach(session -> sessions.getChildren().add(new Label(session.getSessionName().toString())));
