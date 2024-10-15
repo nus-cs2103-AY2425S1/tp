@@ -33,6 +33,11 @@ public class ListAppointmentsCommand extends Command {
     private final Optional<LocalDate> dateFilter;
     private final Optional<LocalTime> timeFilter;
 
+    /**
+     * All fields are optional
+     * @param dateFilter
+     * @param timeFilter
+     */
     public ListAppointmentsCommand(Optional<LocalDate> dateFilter, Optional<LocalTime> timeFilter) {
         this.dateFilter = dateFilter;
         this.timeFilter = timeFilter;
@@ -88,7 +93,7 @@ public class ListAppointmentsCommand extends Command {
         }
         ListAppointmentsCommand otherCommand = (ListAppointmentsCommand) other;
         return Objects.equals(dateFilter, otherCommand.dateFilter)
-                && Objects.equals(timeFilter ,otherCommand.timeFilter);
+                && Objects.equals(timeFilter , otherCommand.timeFilter);
     }
 
     @Override

@@ -2,14 +2,13 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.logic.commands.ListAppointmentsCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
+import seedu.address.logic.commands.ListAppointmentsCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new ListAppointmentsCommand object.
