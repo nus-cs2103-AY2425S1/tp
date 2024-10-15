@@ -30,11 +30,11 @@ public class AddSessionCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SESSION_NAME + "Rehearsal "
             + PREFIX_DATE + "2024-09-19 "
-            + PREFIX_POINTS + "2"
+            + PREFIX_POINTS + "2 "
             + PREFIX_MEMBER + "1";
 
-    public static final String MESSAGE_SUCCESS = "Session %1$s on %2$s for %3$d points"
-            + "added successfully with %4$d index member attending.";
+    public static final String MESSAGE_SUCCESS = "Session %1$s on %2$s for %3$d points "
+            + "added successfully with %4$d member attending.";
     public static final String MESSAGE_DUPLICATE_SESSION = "Error: Session already exists.";
     public static final String MESSAGE_INVALID_INDEX = "Error: Invalid index specified.";
 
@@ -71,8 +71,8 @@ public class AddSessionCommand extends Command {
         }
 
         model.addSession(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getSessionName(),
-                toAdd.getDate(), toAdd.getPoints()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getSessionName().toString(), toAdd.getDate().toString(), toAdd.getPoints().getValue(),
+                memberIndexes.size()));
     }
 
     @Override
