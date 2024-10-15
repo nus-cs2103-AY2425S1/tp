@@ -4,9 +4,11 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# Talency User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Talency is a **desktop app for managing job applicant contacts and monitoring their interview stages, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Talency can get your contact management tasks done faster than traditional GUI apps.
+
+The codebase of Talency originates from AddressBook Level 3 (AB3) developed by CS2103 team.
 
 <!-- * Table of Contents -->
 <page-nav-print />
