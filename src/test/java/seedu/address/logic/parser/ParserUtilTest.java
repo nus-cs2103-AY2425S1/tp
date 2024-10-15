@@ -214,12 +214,12 @@ public class ParserUtilTest {
     @Test
     public void parseDateOfLastVisit_validValueWithoutWhitespace_returnsEmail() throws Exception {
         DateOfLastVisit expectedDateOfLastVisit = new DateOfLastVisit(VALID_DATEOFLASTVISIT);
-        assertEquals(expectedDateOfLastVisit, ParserUtil.parseEmail(VALID_DATEOFLASTVISIT));
+        assertEquals(expectedDateOfLastVisit, ParserUtil.parseDateOfLastVisit(VALID_DATEOFLASTVISIT));
     }
 
     @Test
     public void parseDateOfLastVisit_validValueWithWhitespace_returnsTrimmedDateOfLastVisit() throws Exception {
-        String dateOfLastVisitWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
+        String dateOfLastVisitWithWhitespace = WHITESPACE + VALID_DATEOFLASTVISIT + WHITESPACE;
         DateOfLastVisit expectedDateOfLastVisit = new DateOfLastVisit(VALID_DATEOFLASTVISIT);
         assertEquals(expectedDateOfLastVisit, ParserUtil.parseDateOfLastVisit(dateOfLastVisitWithWhitespace));
     }
