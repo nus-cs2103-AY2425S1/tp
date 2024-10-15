@@ -30,6 +30,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_STUDENTID = "This student ID already exists in the address book: ";
 
     private final Student toAdd;
 
@@ -50,7 +51,7 @@ public class AddCommand extends Command {
         }
 
         if (model.hasStudentWithId(toAdd.getStudentId())) {
-            throw new CommandException("This student ID already exists: " + toAdd.getStudentId());
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENTID + toAdd.getStudentId());
         }
 
         model.addStudent(toAdd);

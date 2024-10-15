@@ -61,6 +61,19 @@ public class Student {
     }
 
     /**
+     * Returns true if both students have the same student id.
+     * This defines a weaker notion of equality between two students.
+     */
+    public boolean isSameStudentId(StudentId otherStudentId) {
+        if (otherStudentId == this.studentId) {
+            return true;
+        }
+
+        return otherStudentId != null
+                && otherStudentId.equals(getStudentId());
+    }
+
+    /**
      * Returns true if both students have the same identity and data fields.
      * This defines a stronger notion of equality between two students.
      */
