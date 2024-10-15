@@ -43,7 +43,7 @@ public class TagAddCommandTest {
     }
 
     @Test
-    public void execute_addTagUnfilteredList_success() {
+    public void execute_noDuplicateTags_success() {
         List<Person> matchingPersons = model.getFilteredPersonList().stream()
                 .filter(person -> person.getName().fullName.equalsIgnoreCase(VALID_NAME_GEORGE))
                 .toList();
