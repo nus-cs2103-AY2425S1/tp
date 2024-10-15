@@ -83,13 +83,9 @@ The Help command simplifies the process for you!
 
 It opens a pop-up window containing a message to copy the link to the user guide, allowing you to learn more about the application.
 
-
-
-
-![help message](images/helpWindow.png)
-
 Format: `help`
 
+![help message](images/helpWindow.png)
 
 ### Adding a supplier: `add`
 
