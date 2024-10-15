@@ -40,21 +40,31 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
-                .append("; NRIC: ")
+                .append("\nNRIC: ")
                 .append(person.getNric())
-                .append("; Gender: ")
+                .append("\nGender: ")
                 .append(person.getGender())
-                .append("; Date of Birth: ")
+                .append("\nDate of Birth: ")
                 .append(person.getDateOfBirth())
-                .append("; Phone: ")
+                .append("\nPhone: ")
                 .append(person.getPhone())
-                .append("; Email: ")
+                .append("\nEmail: ")
                 .append(person.getEmail())
-                .append("; Address: ")
+                .append("\nAddress: ")
                 .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append("\nMedical Conditions: ");
+        appendWithComma(builder, person.getMedCons());
+        builder.append("\nAppointments: ");
+        appendWithComma(builder, person.getAppointments());
+        builder.append("\nTags: ");
+        appendWithComma(builder, person.getTags());
         return builder.toString();
     }
 
+    private static void appendWithComma(StringBuilder builder, Set<?> toAppend) {
+        String result = toAppend.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(", "));
+        builder.append(result);
+    }
 }

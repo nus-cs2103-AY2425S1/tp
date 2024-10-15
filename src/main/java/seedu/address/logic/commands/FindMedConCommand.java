@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.MedConContainsKeywordsPredicate;
@@ -17,8 +18,8 @@ public class FindMedConCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all patients with medical conditions that"
             + "contains the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: "
-            + "MEDICAL CONDITION [MORE_MEDICAL_CONDITIONS]\n"
-            + "Example: " + COMMAND_WORD + " diabetes hypertension";
+            + "KEYWORD [MORE KEYWORDS]\n"
+            + "Example: " + COMMAND_WORD + " diabetes cancer";
     private final MedConContainsKeywordsPredicate predicate;
     public FindMedConCommand(MedConContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
@@ -45,5 +46,12 @@ public class FindMedConCommand extends Command {
 
         FindMedConCommand otherFindMedConCommand = (FindMedConCommand) other;
         return predicate.equals(otherFindMedConCommand.predicate);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("predicate", predicate)
+                .toString();
     }
 }
