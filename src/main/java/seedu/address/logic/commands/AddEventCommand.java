@@ -11,6 +11,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
+import seedu.address.ui.CommandTabChange;
 
 /**
  * Adds an event to the address book.
@@ -52,7 +53,8 @@ public class AddEventCommand extends AddCommand {
         }
 
         model.addEvent(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.eventFormat(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.eventFormat(toAdd)), false,
+                false, CommandTabChange.EVENT);
     }
 
     @Override
