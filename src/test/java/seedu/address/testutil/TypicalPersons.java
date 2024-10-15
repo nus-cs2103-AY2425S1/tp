@@ -20,6 +20,7 @@ import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Eta;
 import seedu.address.model.delivery.ItemName;
+import seedu.address.model.delivery.Status;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 
@@ -36,9 +37,9 @@ public class TypicalPersons {
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends")
             .withDelivery(new Delivery(new ItemName("Monitor"), new Address("311, Clementi Ave 2, #02-25, S120300"),
-                    new Cost("$100"), new Eta("2020-02-02")))
+                    new Cost("$100"), new Eta("2020-02-02"), new Status("not delivered")))
             .withDelivery(new Delivery(new ItemName("Monkey"), new Address("369, WHERE Ave 2, #01-01, S987654"),
-                    new Cost("$20"), new Eta("1990-04-04")))
+                    new Cost("$20"), new Eta("1990-04-04"), new Status("not delivered")))
             .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street, S120300").build();
