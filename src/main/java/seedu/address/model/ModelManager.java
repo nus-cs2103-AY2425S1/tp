@@ -15,6 +15,7 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 import seedu.address.model.tut.Tut;
 
 /**
@@ -173,6 +174,14 @@ public class ModelManager implements Model {
     @Override
     public String listAssignments() {
         return assignmentList.toString();
+    }
+
+    //=========== Filtered Student List (student ID)
+
+    @Override
+    public boolean hasStudentWithId(StudentId studentId) {
+        requireNonNull(studentId);
+        return addressBook.hasStudentId(studentId);
     }
 
     //=========== Filtered Student List Accessors =============================================================

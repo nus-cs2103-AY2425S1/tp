@@ -1,12 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALCLASS;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -25,24 +21,16 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the tutorial book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_STUDENTID + "STUDENT_ID "
-            + PREFIX_TUTORIALCLASS + "TUTORIAL_CLASS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + PREFIX_TUTORIALCLASS + "TUTORIAL_CLASS \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Samson "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_STUDENTID + "1001 "
-            + PREFIX_TUTORIALCLASS + "1001 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TUTORIALCLASS + "1001 ";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_STUDENTID = "This student ID already exists in the address book: ";
 
     private final Student toAdd;
 
@@ -60,6 +48,10 @@ public class AddCommand extends Command {
 
         if (model.hasStudent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+        }
+
+        if (model.hasStudentWithId(toAdd.getStudentId())) {
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENTID + toAdd.getStudentId());
         }
 
         model.addStudent(toAdd);
