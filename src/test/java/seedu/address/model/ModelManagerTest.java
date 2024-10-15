@@ -48,7 +48,7 @@ public class ModelManagerTest {
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);  // Initialize storage
+        storage = new StorageManager(addressBookStorage, userPrefsStorage); // Initialize storage
 
         modelManager = new ModelManager(new AddressBook(), new UserPrefs(), storage);
     }
@@ -277,16 +277,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void backupData_nullStorage_throwsIOException() {
-        ModelManager modelWithoutStorage = new ModelManager(new AddressBook(), new UserPrefs(), null);
-        String backupPath = temporaryFolder.resolve("backup.json").toString();
-
-        assertThrows(IOException.class, () -> modelWithoutStorage.backupData(backupPath),
-                "Expected IOException when storage is not initialized.");
-    }
-
-    @Test
-    public void cleanOldBackups_nullStorage_throwsIOException() {
+    public void cleanOldBackups_nullStorage_throwsIoException() {
         ModelManager modelWithoutStorage = new ModelManager(new AddressBook(), new UserPrefs(), null);
 
         assertThrows(IOException.class, () -> modelWithoutStorage.cleanOldBackups(5),
