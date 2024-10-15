@@ -28,19 +28,20 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, TagList tagList) {
-        requireAllNonNull(addressBook, userPrefs, tagList);
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        // TODO: get from storage
         this.tagList = new TagList();
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new TagList());
+        this(new AddressBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================

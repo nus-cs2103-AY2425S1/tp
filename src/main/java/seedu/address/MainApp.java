@@ -90,9 +90,7 @@ public class MainApp extends Application {
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
         }
-        // TODO: get taglist from storage
-        TagList temp = new TagList();
-        return new ModelManager(initialData, userPrefs, temp);
+        return new ModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {
