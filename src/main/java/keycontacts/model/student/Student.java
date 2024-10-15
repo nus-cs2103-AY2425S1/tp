@@ -10,7 +10,10 @@ import java.util.Set;
 
 import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.logic.commands.EditCommand.EditStudentDescriptor;
+import keycontacts.model.lesson.CancelledLesson;
+import keycontacts.model.lesson.Date;
 import keycontacts.model.lesson.RegularLesson;
+import keycontacts.model.lesson.Time;
 import keycontacts.model.pianopiece.PianoPiece;
 
 /**
@@ -28,6 +31,7 @@ public class Student {
     // Associations
     private final Set<PianoPiece> pianoPieces = new HashSet<>();
     private final RegularLesson regularLesson;
+    private final Set<CancelledLesson> cancelledLessons = new HashSet<>();
 
     /**
      * Constructor for a new student. Uses default associations.
@@ -181,6 +185,27 @@ public class Student {
                 .add("pianoPieces", pianoPieces)
                 .add("regularLesson", regularLesson)
                 .toString();
+    }
+
+    /**
+     * A function to check if the {@code date} and {@code startTime} parameters match {@code regularLesson}.
+     *
+     * @param date date of the lesson to match with
+     * @param startTime start time of the lesson to match with
+     * @return a boolean representing whether the inputted params match {@code regularLesson}
+     */
+    public boolean matchesLesson(Date date, Time startTime) {
+        return this.getRegularLesson()
+                .map(lesson -> lesson.isOnDayAndTime(date.convertToDay(), startTime))
+                .orElse(false);
+    }
+
+    /**
+     * Adds a cancelled lesson to {@code cancelledLessons}.
+     * @param cancelledLesson the cancelled lesson to be added
+     */
+    public void addCancelledLesson(CancelledLesson cancelledLesson) {
+        this.cancelledLessons.add(cancelledLesson);
     }
 
 }

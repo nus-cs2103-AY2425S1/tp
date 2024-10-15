@@ -7,7 +7,7 @@ import java.util.Objects;
 import keycontacts.commons.util.ToStringBuilder;
 
 /**
- * Abstract class representing a Student's lesson in the student directory.
+ * Class representing a Student's lesson in the student directory.
  * Guarantees: immutable, start time and end time are valid as declared in
  * {@link keycontacts.model.lesson.Time#isValidTime(String)}, lesson day is valid as declared in
  * {@link keycontacts.model.lesson.Day#isValidDay(String)}.
@@ -62,5 +62,12 @@ public class RegularLesson extends Lesson {
     public String toDisplay() {
         return lessonDay.toString().substring(0, 1).toUpperCase()
                 + lessonDay.toString().substring(1).toLowerCase() + ", " + super.toDisplay();
+    }
+
+    /**
+     * Returns true if the lesson falls on the given day and time.
+     */
+    public boolean isOnDayAndTime(Day day, Time time) {
+        return this.getStartTime().equals(time) && this.getLessonDay().equals(day);
     }
 }

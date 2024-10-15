@@ -5,8 +5,7 @@ import static keycontacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_DATE;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
 
-import java.time.LocalDate;
-
+import keycontacts.commons.core.index.Index;
 import keycontacts.logic.commands.CancelLessonCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
 import keycontacts.model.lesson.Date;
@@ -28,8 +27,9 @@ public class CancelLessonCommandParser implements Parser<CancelLessonCommand> {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_START_TIME);
 
+            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
             if (!argMultimap.arePrefixesPresent(PREFIX_DATE, PREFIX_START_TIME)
-                    || argMultimap.isPreamblePresent()) {
+                    || !argMultimap.isPreamblePresent()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         CancelLessonCommand.MESSAGE_USAGE));
             }
@@ -37,7 +37,7 @@ public class CancelLessonCommandParser implements Parser<CancelLessonCommand> {
 
             Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
             Time startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
-            return new CancelLessonCommand(date, startTime);
+            return new CancelLessonCommand(date, startTime, index);
         } catch (ParseException e) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CancelLessonCommand.MESSAGE_USAGE), e);

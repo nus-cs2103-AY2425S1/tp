@@ -6,13 +6,22 @@ import static keycontacts.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a student's lesson date in the student directory.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
+ */
 public class Date {
 
-    private LocalDate date;
+    private final LocalDate date;
     public static final String MESSAGE_CONSTRAINTS = "Date should be in DD/MM/YYYY format";
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static final String VALIDATION_REGEX = "^(0[1-9]|[12]\\d|3[01])-(0[1-9]|1[0-2])-\\d{4}$";
 
+    /**
+     * Constructs a {@code Date} object.
+     *
+     * @param date A valid date
+     */
     public Date(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
@@ -41,5 +50,12 @@ public class Date {
 
         Date otherDate = (Date) other;
         return date.equals(otherDate.date);
+    }
+
+    /**
+     * Returns a {@code Day} object which the date falls on.
+     */
+    public Day convertToDay() {
+        return new Day(date.getDayOfWeek().name());
     }
 }
