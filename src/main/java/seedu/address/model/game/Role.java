@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Role {
 
     private static final String MESSAGE_CONSTRAINTS =
-            "Skill Level should not be blank";
+            "Role should not be blank";
 
     /*
      * Regex expression matches Strings that contain at least one non-whitespace character.
