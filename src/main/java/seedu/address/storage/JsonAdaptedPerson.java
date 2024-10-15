@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -85,19 +86,29 @@ class JsonAdaptedPerson {
         dateOfBirth = source.getDateOfBirth().value;
         gender = source.getGender().value;
         nric = source.getNric().value;
-        medCons.addAll(source.getMedCons()
-                .stream()
-                .map(JsonAdaptedMedCon::new)
-                .toList());
+
+        // Use helper function to convert and sort medical conditions, tags, and appointments
+        medCons.addAll(convertToSortedList(source.getMedCons(), JsonAdaptedMedCon::new));
+        tags.addAll(convertToSortedList(source.getTags(), JsonAdaptedTag::new));
+        appointments.addAll(convertToSortedList(source.getAppointments(), JsonAdaptedAppointment::new));
+
         priority = source.getPriority().priority;
-        tags.addAll(source.getTags()
-                          .stream()
-                          .map(JsonAdaptedTag::new)
-                          .toList());
-        appointments.addAll(source.getAppointments()
-                                  .stream()
-                                  .map(JsonAdaptedAppointment::new)
-                                  .toList());
+    }
+
+    /**
+     * Helper function to convert a set to a sorted list of adapted JSON objects.
+     *
+     * @param source The set of items to be converted and sorted.
+     * @param mapper A function to map the item to its adapted form.
+     * @param <T> The type of items in the set.
+     * @param <R> The type of the adapted JSON item.
+     * @return A sorted list of adapted items.
+     */
+    private <T extends Comparable<T>, R> List<R> convertToSortedList(Set<T> source, Function<T, R> mapper) {
+        return source.stream()
+                .sorted()
+                .map(mapper)
+                .toList();
     }
 
     /**
