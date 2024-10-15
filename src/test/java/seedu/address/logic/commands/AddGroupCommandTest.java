@@ -27,6 +27,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddGroupCommandTest {
@@ -204,6 +205,11 @@ public class AddGroupCommandTest {
         }
 
         @Override
+        public ObservableList<Task> getFilteredTaskList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Student> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -214,12 +220,27 @@ public class AddGroupCommandTest {
         }
 
         @Override
+        public void updateFilteredTaskList(Predicate<Task> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setStateStudents() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setStateGroups() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setStateGroupTask() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setStateTasks() {
             throw new AssertionError("This method should not be called.");
         }
 

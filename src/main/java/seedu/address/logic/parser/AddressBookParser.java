@@ -90,7 +90,7 @@ public class AddressBookParser {
 
         case AddStudentToGroupCommand.COMMAND_WORD:
             return new AddStudentToGroupCommandParser().parse(arguments);
-            
+
         case DeleteStudentFromGroupCommand.COMMAND_WORD:
             return new DeleteStudentFromGroupCommandParser().parse(arguments);
 
