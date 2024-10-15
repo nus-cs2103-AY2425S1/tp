@@ -20,7 +20,8 @@ public class Email {
             + "The domain name must:\n"
             + "    - end with a domain label at least 2 characters long\n"
             + "    - have each domain label start and end with alphanumeric characters\n"
-            + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.";
+            + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.\n"
+            + "3. Email must not exceed 50 characters.";
     // alphanumeric and special characters
     private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+"; // alphanumeric characters except underscore
     private static final String LOCAL_PART_REGEX = "^" + ALPHANUMERIC_NO_UNDERSCORE + "([" + SPECIAL_CHARACTERS + "]"
@@ -40,7 +41,9 @@ public class Email {
      */
     public Email(String email) {
         requireNonNull(email);
+        email = email.trim();
         checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidLengthEmail(email), MESSAGE_CONSTRAINTS);
         value = email;
     }
 
@@ -49,6 +52,13 @@ public class Email {
      */
     public static boolean isValidEmail(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns if a given string is a valid length for an email.
+     */
+    public static boolean isValidLengthEmail(String test) {
+        return test.length() <= 50 && !test.contains(" ");
     }
 
     @Override
