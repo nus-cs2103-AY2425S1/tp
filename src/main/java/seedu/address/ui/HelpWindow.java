@@ -74,10 +74,12 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML
-    private Label helpMessage;
+    protected Label helpMessage;
 
     @FXML
-    private Text hyperlinkText;
+    protected Text hyperlinkText;
+
+    private Desktop desktop;
 
     /**
      * Creates a new HelpWindow.
@@ -106,7 +108,7 @@ public class HelpWindow extends UiPart<Stage> {
      * @throws Exception If there is an error while trying to open the user guide,
      *                   such as an invalid URI or inability to access the browser.
      */
-    private void openUserGuide(MouseEvent event) {
+    protected void openUserGuide(MouseEvent event) {
         try {
             Desktop.getDesktop().browse(new URI(USERGUIDE_URL));
         } catch (Exception e) {
@@ -157,5 +159,23 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
+    }
+
+    /**
+     * Returns the fill color of the hyperlink text.
+     *
+     * @return the Color object representing the fill color of the hyperlink text.
+     */
+    public Color getHyperlinkTextFill() {
+        return (Color) hyperlinkText.getFill();
+    }
+
+    /**
+     * Checks if the hyperlink text is underlined.
+     *
+     * @return true if the hyperlink text is underlined, false otherwise.
+     */
+    public boolean isHyperlinkTextUnderlined() {
+        return hyperlinkText.isUnderline();
     }
 }
