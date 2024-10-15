@@ -50,9 +50,8 @@ Ensure that the project is set up locally:
     ./gradlew run
     ```
 
-<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+
 The Gradle instructions provided are for macOS and Linux users. If you are using Windows, please refer to the [official documentation](https://docs.gradle.org/current/userguide/gradle_wrapper.html#sec:using_wrapper) on using the Gradle Wrapper  (i.e. `./gradlew`) on Windows.
-</div>
 
 ## Development Milestones
 
