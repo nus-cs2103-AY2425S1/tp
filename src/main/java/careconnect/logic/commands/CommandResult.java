@@ -10,6 +10,8 @@ import careconnect.commons.util.ToStringBuilder;
  * Represents the result of a command execution.
  */
 public class CommandResult {
+    /** We use -1 to represent none-selection. */
+    public static final int NO_RECORD_SELECTED = -1;
 
     private final String feedbackToUser;
 
@@ -18,14 +20,25 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
+    /** The index of the selected record. We use -1 to represent none-selection. */
+    private final int selectedIndex;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, int selectedIndex) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.selectedIndex = selectedIndex;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        this(feedbackToUser, showHelp, exit, NO_RECORD_SELECTED);
     }
 
     /**
@@ -33,7 +46,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, NO_RECORD_SELECTED);
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +59,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public int getSelectedIndex() {
+        return selectedIndex;
     }
 
     @Override
@@ -62,12 +79,13 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && selectedIndex == otherCommandResult.selectedIndex;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, selectedIndex);
     }
 
     @Override
@@ -76,6 +94,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("selectedIndex", selectedIndex)
                 .toString();
     }
 
