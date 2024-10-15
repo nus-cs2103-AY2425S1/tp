@@ -13,8 +13,8 @@ import static seedu.address.testutil.TypicalPersons.getTypicalNames;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Random;
 import java.util.List;
+import java.util.Random;
 
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
@@ -29,10 +29,10 @@ import seedu.address.model.person.Person;
  */
 public class DeleteClientProfileCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    
     private static final Name DO_NOT_EXIST_NAME = new Name("DO NOT EXIST NAME");
-    
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+
     @Test
     public void execute_validNameUnfilteredList_success() {
         Random random = new Random();
@@ -47,10 +47,10 @@ public class DeleteClientProfileCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
-        
+
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
-    
+
     @Test
     public void execute_invalidNameUnfilteredList_throwsCommandException() {
         DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(DO_NOT_EXIST_NAME);
