@@ -15,9 +15,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Sex;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -26,6 +28,8 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_AGE = "1011";
+    private static final String INVALID_SEX = "M@le";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "12345678";
@@ -33,6 +37,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_AGE = "50";
+    private static final String VALID_SEX = "Female";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -146,6 +152,52 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseAge_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAge((String) null));
+    }
+
+    @Test
+    public void parseAge_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAge(INVALID_AGE));
+    }
+
+    @Test
+    public void parseAge_validValueWithoutWhitespace_returnsAge() throws Exception {
+        Age expectedAge = new Age(VALID_AGE);
+        assertEquals(expectedAge, ParserUtil.parseAge(VALID_AGE));
+    }
+
+    @Test
+    public void parseAge_validValueWithWhitespace_returnsTrimmedAge() throws Exception {
+        String ageWithWhitespace = WHITESPACE + VALID_AGE + WHITESPACE;
+        Age expectedAge = new Age(VALID_AGE);
+        assertEquals(expectedAge, ParserUtil.parseAge(ageWithWhitespace));
+    }
+
+    @Test
+    public void parseSex_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSex((String) null));
+    }
+
+    @Test
+    public void parseSex_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSex(INVALID_SEX));
+    }
+
+    @Test
+    public void parseSex_validValueWithoutWhitespace_returnsSex() throws Exception {
+        Sex expectedSex = new Sex(VALID_SEX);
+        assertEquals(expectedSex, ParserUtil.parseSex(VALID_SEX));
+    }
+
+    @Test
+    public void parseSex_validValueWithWhitespace_returnsTrimmedSex() throws Exception {
+        String sexWithWhitespace = WHITESPACE + VALID_SEX + WHITESPACE;
+        Sex expectedSex = new Sex(VALID_SEX);
+        assertEquals(expectedSex, ParserUtil.parseSex(sexWithWhitespace));
     }
 
     @Test

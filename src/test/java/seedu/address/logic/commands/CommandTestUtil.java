@@ -67,6 +67,9 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_AGE_DESC = " " + PREFIX_AGE + "1011"; // over 3 digits not allowed for ages
+    // non-alphanumeric characters not allowed for sexes
+    public static final String INVALID_SEX_DESC = " " + PREFIX_SEX + "Fem@le";
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     // '*' not allowed in appointments
     public static final String INVALID_APPOINTMENT_DESC = " " + PREFIX_APPOINTMENT + "11/11/2025 0000*";
