@@ -119,6 +119,10 @@ public class ModelManager implements Model {
         return addressBook.findPersonsWithName(name);
     }
 
+    @Override
+    public List<Person> getPersonList() {
+        return addressBook.getPersonList();
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
