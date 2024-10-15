@@ -2,6 +2,7 @@ package tutorease.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorease.address.testutil.Assert.assertThrows;
 import static tutorease.address.testutil.TypicalPersons.ALICE;
@@ -117,6 +118,18 @@ public class LessonScheduleTest {
         Lesson lesson = new LessonBuilder().build();
         lessonSchedule.addLesson(lesson);
         assertEquals(1, lessonSchedule.getSize());
+    }
+
+    @Test
+    public void equals() throws ParseException {
+        LessonSchedule lessonSchedule = new LessonSchedule();
+        LessonSchedule lessonScheduleCopy = new LessonSchedule();
+        Lesson lesson = new LessonBuilder().build();
+        lessonSchedule.addLesson(lesson);
+        lessonScheduleCopy.addLesson(lesson);
+        assertEquals(lessonSchedule, lessonScheduleCopy);
+        assertNotEquals(null, lessonSchedule);
+        assertNotEquals(lessonSchedule, new LessonSchedule());
     }
 
     private static class LessonScheduleStub extends LessonSchedule {
