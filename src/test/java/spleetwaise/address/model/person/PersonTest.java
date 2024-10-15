@@ -8,6 +8,7 @@ import static spleetwaise.address.logic.commands.CommandTestUtil.VALID_ADDRESS_B
 import static spleetwaise.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static spleetwaise.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static spleetwaise.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static spleetwaise.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static spleetwaise.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.HashSet;
@@ -40,7 +41,8 @@ public class PersonTest {
 
         Person editedAlice =
                 new PersonBuilder(TypicalPersons.ALICE).withId(TypicalPersons.ALICE.getId()).withPhone(VALID_PHONE_BOB)
-                        .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                        .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withRemark(VALID_REMARK_BOB)
+                        .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(TypicalPersons.ALICE.hasSameId(editedAlice));
         // Even though isSamePerson returns false, hasSameId returns true. This is to facilitate the editing of
         // the person's details without changing the id
@@ -133,6 +135,7 @@ public class PersonTest {
         String expected = Person.class.getCanonicalName() + "{name=" + TypicalPersons.ALICE.getName() + ", phone="
                 + TypicalPersons.ALICE.getPhone()
                 + ", email=" + TypicalPersons.ALICE.getEmail() + ", address=" + TypicalPersons.ALICE.getAddress()
+                + ", remark=" + TypicalPersons.ALICE.getRemark()
                 + ", tags=" + TypicalPersons.ALICE.getTags() + "}";
         assertEquals(expected, TypicalPersons.ALICE.toString());
     }
