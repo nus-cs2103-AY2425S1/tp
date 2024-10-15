@@ -2,6 +2,7 @@ package spleetwaise.address;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -32,7 +33,7 @@ public class AppParameters {
      */
     public static AppParameters parse(Application.Parameters parameters) {
         AppParameters appParameters = new AppParameters();
-        Map<String, String> namedParameters = parameters.getNamed();
+        Map<String, String> namedParameters = parameters != null ? parameters.getNamed() : new HashMap<>();
 
         String configPathParameter = namedParameters.get("config");
         if (configPathParameter != null && !FileUtil.isValidPath(configPathParameter)) {
