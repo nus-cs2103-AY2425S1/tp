@@ -2,6 +2,7 @@ package seedu.address.model.supplier;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -118,6 +119,14 @@ public class Supplier {
                 .add("address", address)
                 .add("tags", tags)
                 .toString();
+    }
+
+    /**
+     * Returns an immutable product set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Collection<Product> getAssignedProducts() {
+        return Collections.unmodifiableCollection(assignedProducts);
     }
 
 }
