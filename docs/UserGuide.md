@@ -202,7 +202,7 @@ Format: `addproperty c/POSTAL_CODE u/UNIT_NUMBER`
 
 * Adds a property with the specified `POSTAL_CODE` and `UNIT_NUMBER`.
 * The `POSTAL_CODE` must be exactly 6 digits with each digit in the range [0-9]. It does not accept any non-integer characters or spaces
-* The `UNIT_NUMBER` comprises of numbers that is delimited by exactly one dash(-). On either side of the dash are numbers comprising of two or more digit. The range of numbers of the left hand side of the dash is [00-148] and the right hand side is [00-111110]. Other than the dash bo other non-integer characters or spaces are accepted
+* The `UNIT_NUMBER` comprises of numbers that is delimited by exactly one dash(-). On either side of the dash are numbers comprising of two or more digit. The range of numbers of the left hand side of the dash is [00-148] and the right hand side is [00-111110]. Other than the dash, other non-integer characters or spaces are not accepted
 
 Examples:
 * `addproperty c/124894 u/15-20` adds a property with postal code `124894` and unit number is `15-20`.
