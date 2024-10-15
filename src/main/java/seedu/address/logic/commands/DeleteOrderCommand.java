@@ -6,7 +6,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.Order;
 
-public class DeleteOrderCommand extends Command{
+/**
+ * Delete an order from the addressbook
+ */
+public class DeleteOrderCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteOrder";
 

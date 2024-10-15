@@ -12,6 +12,10 @@ import seedu.address.model.order.exceptions.DuplicateOrderException;
 import seedu.address.model.order.exceptions.OrderNotFoundException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 
+/**
+ * A list of orders that enforces uniqueness between its elements and does not allow nulls.
+ * An order is considered unique by comparing using {@code Order#equals(Order)}.
+ */
 public class UniqueOrderList implements Iterable<Order> {
 
     private final ObservableList<Order> internalList = FXCollections.observableArrayList();

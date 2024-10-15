@@ -2,12 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.Order;
 
-public class AddOrderCommand extends Command{
+/**
+ * Add a new order to addressbook
+ */
+public class AddOrderCommand extends Command {
 
     public static final String COMMAND_WORD = "order";
 

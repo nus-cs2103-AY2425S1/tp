@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
+/**
+ * List all order in the addressbook
+ */
 public class ListOrderCommand extends Command {
 
     public static final String COMMAND_WORD = "listOrder";
