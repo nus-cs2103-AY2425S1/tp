@@ -26,4 +26,16 @@ public class FilterCommandParserTest {
                 new FilterCommand(new Tag("friends"));
         assertParseSuccess(parser, "filter t/friends", expectedFilterCommand);
     }
+
+    @Test
+    public void parse_invalidArgs_throwsParseException() {
+        String[] invalidTags = {
+            "best-friends",
+            "best friends"
+        };
+        for (String invalidTag : invalidTags) {
+            assertParseFailure(parser, "filter t/" + invalidTag,
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
+    }
 }
