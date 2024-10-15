@@ -114,8 +114,8 @@ public class AddressBookParserTest {
     public void parseCommand_findProject() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindProjectCommand command = (FindProjectCommand) parser.parseCommand(
-                FindProjectCommand.COMMAND_WORD + " " +
-                        keywords.stream().collect(Collectors.joining(" ")));
+                FindProjectCommand.COMMAND_WORD + " "
+                        + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindProjectCommand(new ProjectNameContainsKeywordsPredicate(keywords)), command);
     }
 
