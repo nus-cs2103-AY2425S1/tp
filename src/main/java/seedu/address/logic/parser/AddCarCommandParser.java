@@ -53,16 +53,20 @@ public class AddCarCommandParser implements Parser<AddCarCommand> {
         }
 
         // Prepare for car creation
-        Vrn vrn = new Vrn(argMultimap.getValue(PREFIX_VRN).get());
-        Vin vin = new Vin(argMultimap.getValue(PREFIX_VIN).get());
-        CarMake make = new CarMake(argMultimap.getValue(PREFIX_MAKE).get());
-        CarModel model = new CarModel(argMultimap.getValue(PREFIX_MODEL).get());
+        try {
+            Vrn vrn = new Vrn(argMultimap.getValue(PREFIX_VRN).get());
+            Vin vin = new Vin(argMultimap.getValue(PREFIX_VIN).get());
+            CarMake make = new CarMake(argMultimap.getValue(PREFIX_MAKE).get());
+            CarModel model = new CarModel(argMultimap.getValue(PREFIX_MODEL).get());
 
-        Car carToAdd;
+            Car carToAdd;
 
-        carToAdd = new Car(vrn, vin, make, model);
+            carToAdd = new Car(vrn, vin, make, model);
 
-        return new AddCarCommand(index, carToAdd);
+            return new AddCarCommand(index, carToAdd);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage(), e);
+        }
     }
 
     /**
