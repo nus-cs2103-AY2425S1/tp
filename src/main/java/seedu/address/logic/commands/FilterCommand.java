@@ -9,7 +9,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 
-public class FilterCommand extends Command{
+/**
+ * Finds and lists all persons in address book whose tag equals to any of the specified tag.
+ * Tag name must be the same (case sensitive).
+ */
+public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
