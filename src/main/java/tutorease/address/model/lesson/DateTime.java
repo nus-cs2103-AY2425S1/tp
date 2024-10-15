@@ -3,20 +3,17 @@ package tutorease.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.commons.util.AppUtil.checkArgument;
 import static tutorease.address.commons.util.DateTimeUtil.dateTimeToString;
+import static tutorease.address.commons.util.DateTimeUtil.getDateTimeFormat;
 import static tutorease.address.commons.util.DateTimeUtil.isValidDateTime;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Locale;
+import tutorease.address.commons.util.DateTimeUtil;
 
 /**
  * Represents a DateTime in the address book.
  */
 public class DateTime {
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
-            .withLocale(Locale.getDefault());
-    private static final String MESSAGE_CONSTRAINTS = "DateTime must be in the format of " + formatter;
+    private static final String MESSAGE_CONSTRAINTS = "DateTime must be in the format of " + getDateTimeFormat();
     private final LocalDateTime dateTime;
     /**
      * Constructs a {@code DateTime}.
@@ -58,7 +55,7 @@ public class DateTime {
 
     @Override
     public String toString() {
-        return dateTime.format(formatter);
+        return dateTimeToString(dateTime);
     }
 
     @Override
