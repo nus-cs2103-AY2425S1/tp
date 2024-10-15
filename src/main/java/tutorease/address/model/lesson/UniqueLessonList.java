@@ -74,8 +74,8 @@ public class UniqueLessonList implements Iterable<Lesson> {
     }
 
     /**
-     * Replaces the contents of the lesson list with {@code lessons}.
-     * {@code lessons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code lessons}.
+     * {@code lessons} must not contain duplicate lessons.
      */
     public void setLessons(UniqueLessonList lessons) {
         requireNonNull(lessons);
