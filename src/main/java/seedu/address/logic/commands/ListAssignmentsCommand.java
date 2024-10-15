@@ -9,11 +9,8 @@ import seedu.address.model.Model;
  * Lists all persons in the address book to the user.
  */
 public class ListAssignmentsCommand extends Command {
-
     public static final String COMMAND_WORD = "listassignments";
-
     public static final String MESSAGE_SUCCESS = "Listed all assignments";
-
 
     @Override
     public CommandResult execute(Model model) {

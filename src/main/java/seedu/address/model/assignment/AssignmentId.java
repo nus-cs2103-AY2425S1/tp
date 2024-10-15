@@ -8,9 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is always valid
  */
 public class AssignmentId {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Assignment ID should only contain numeric characters";
-
+    public static final String MESSAGE_CONSTRAINTS = "Assignment ID should only contain numeric characters";
     public final String value;
 
     /**
@@ -45,7 +43,7 @@ public class AssignmentId {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AssignmentId // instanceof handles nulls
-                && value.equals(((AssignmentId) other).value)); // state check
+                        && value.equals(((AssignmentId) other).value)); // state check
     }
 
     @Override
