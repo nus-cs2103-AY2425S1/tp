@@ -127,10 +127,14 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<Doctor> getDoctorList() { return doctors; }
+        public ObservableList<Doctor> getDoctorList() {
+            return doctors;
+        }
 
         @Override
-        public ObservableList<Patient> getPatientList() { return patients; }
+        public ObservableList<Patient> getPatientList() {
+            return patients;
+        }
     }
 
 }

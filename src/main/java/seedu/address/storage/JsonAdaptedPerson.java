@@ -10,6 +10,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.doctor.Doctor;
+import seedu.address.model.doctor.Speciality;
+import seedu.address.model.patient.DateOfBirth;
+import seedu.address.model.patient.Gender;
+import seedu.address.model.patient.Patient;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -29,6 +34,9 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String speciality;
+    private final String dateOfBirth;
+    private final String gender;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,11 +44,17 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("speciality") String speciality,
+                             @JsonProperty("dateOfBirth") String dateOfBirth,
+                             @JsonProperty("gender") String gender,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.speciality = speciality;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -57,6 +71,20 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+
+        if (source instanceof Doctor) {
+            speciality = ((Doctor) source).getSpeciality().value;
+            dateOfBirth = null;
+            gender = null;
+        } else if (source instanceof Patient) {
+            speciality = null;
+            dateOfBirth = ((Patient) source).getDateOfBirth().toString();
+            gender = ((Patient) source).getGender().value;
+        } else {
+            speciality = null;
+            dateOfBirth = null;
+            gender = null;
+        }
     }
 
     /**
@@ -103,7 +131,15 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        if (speciality != null) {
+            return new Doctor(modelName, modelPhone, modelEmail, modelAddress, new Speciality(speciality), modelTags);
+        } else if (dateOfBirth != null && gender != null) {
+            return new Patient(modelName, modelPhone, modelEmail, modelAddress, new DateOfBirth(dateOfBirth),
+                    new Gender(gender), modelTags);
+        } else {
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        }
     }
 
 }
