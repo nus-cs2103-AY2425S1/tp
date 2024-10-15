@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -27,20 +28,22 @@ public class TagDeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/ Li Sirui "
             + "t/ Jane and Tom 230412";
 
-    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Removed tag from Person: %1$s";
+    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Removed existing tags: '%1$s' from contact: %2$s";
+    public static final String MESSAGE_PERSON_DOESNT_EXIST = "Contact: %1$s does not exist in KnottyPlanners";
+    public static final String MESSAGE_TAG_DOESNT_EXIST = "Given tag(s): '%1$s' do not exist for contact: %2$s";
 
     private final Name name;
-    private final Set<Tag> tags;
+    private final Set<Tag> tagsToDelete;
 
     /**
      * @param name of the person in the person list to edit the tags
-     * @param tags of the person to be updated to
+     * @param tagsToDelete the set of tags to be deleted from the person
      */
-    public TagDeleteCommand(Name name, Set<Tag> tags) {
-        requireAllNonNull(name, tags);
+    public TagDeleteCommand(Name name, Set<Tag> tagsToDelete) {
+        requireAllNonNull(name, tagsToDelete);
 
         this.name = name;
-        this.tags = tags;
+        this.tagsToDelete = tagsToDelete;
     }
 
     @Override
@@ -49,18 +52,22 @@ public class TagDeleteCommand extends Command {
                 .filter(person -> person.getName().fullName.equalsIgnoreCase(name.toString()))
                 .toList();
 
+        if (matchingPersons.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_PERSON_DOESNT_EXIST, name));
+        }
+
         Person personToEdit = matchingPersons.get(0);
 
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getJob(),
-                getTagsAfterDelete(personToEdit.getTags(), tags));
+                getTagsAfterDelete(personToEdit.getTags(), tagsToDelete));
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateDeleteMessage(editedPerson));
+        return new CommandResult(generateDeleteMessage(personToEdit, editedPerson));
     }
 
     /**
@@ -70,8 +77,9 @@ public class TagDeleteCommand extends Command {
      * @return the edited set of tags that no longer include the deleted tags
      */
     public Set<Tag> getTagsAfterDelete(Set<Tag> ogTags, Set<Tag> deleteTags) {
-        ogTags.removeAll(deleteTags);
-        return ogTags;
+        Set<Tag> copyOgTags = new HashSet<>(ogTags);
+        copyOgTags.removeAll(deleteTags);
+        return copyOgTags;
     }
 
     @Override
@@ -86,7 +94,7 @@ public class TagDeleteCommand extends Command {
         }
 
         TagDeleteCommand e = (TagDeleteCommand) other;
-        return tags.equals(e.tags);
+        return tagsToDelete.equals(e.tagsToDelete);
     }
 
     /**
@@ -94,8 +102,23 @@ public class TagDeleteCommand extends Command {
      * the tags are removed
      * {@code personToEdit}.
      */
-    private String generateDeleteMessage(Person personToEdit) {
-        String message = MESSAGE_DELETE_TAG_SUCCESS;
-        return String.format(message, Messages.format(personToEdit));
+    private String generateDeleteMessage(Person personToEdit, Person editedPerson) {
+        Set<Tag> tagsInBoth = new HashSet<>(personToEdit.getTags());
+        Set<Tag> tagsInNeither = new HashSet<>(tagsToDelete);
+        if (!personToEdit.getTags().containsAll(tagsToDelete)) {
+            tagsInBoth.retainAll(tagsToDelete);
+            tagsInNeither.removeAll(tagsInBoth);
+            if (tagsInBoth.isEmpty()) {
+                return String.format(MESSAGE_TAG_DOESNT_EXIST, Messages.tagSetToString(tagsToDelete),
+                        Messages.format(editedPerson));
+            } else {
+                String tagsNotExist = String.format(MESSAGE_TAG_DOESNT_EXIST + "\n",
+                        Messages.tagSetToString(tagsInNeither), Messages.format(personToEdit));
+                String tagsExist = String.format(MESSAGE_DELETE_TAG_SUCCESS, Messages.tagSetToString(tagsInBoth),
+                        Messages.format(editedPerson));
+                return tagsNotExist + tagsExist;
+            }
+        }
+        return String.format(MESSAGE_DELETE_TAG_SUCCESS, tagsToDelete, Messages.format(editedPerson));
     }
 }

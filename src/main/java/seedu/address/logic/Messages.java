@@ -79,6 +79,13 @@ public class Messages {
     }
 
     /**
+     * Formats the {@code tags} to display the set of tags in the appropriate format.
+     */
+    public static String tagSetToString(Set<Tag> tags) {
+        return tags.stream().map(Tag::getTagName).collect(Collectors.joining(", "));
+    }
+
+    /**
      * Formats the {@code person} to display their tags.
      */
     public static String getName(Person person) {
