@@ -42,7 +42,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "       n/ [STUDENT_NAME], p/ [PHONE_NUMBER], e/ [EMAIL], a/ [ADDRESS], c/ [COURSE], t/ [TAG]\n"
             + "   - Example:\n"
             + "       edit 12345678 n/ Jane Doe p/ 88888888 e/ janedoe@gmail.com "
-            + "a/ 456 John Doe Road c/ Physics t/ Student\n"
+            +         "a/ 456 John Doe Road c/ Physics t/ Student\n"
             + "\n4. Delete Student\n"
             + "   - Purpose: Removes a student from the address book.\n"
             + "   - Command Format:\n"
@@ -74,10 +74,10 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML
-    private Label helpMessage;
+    protected Label helpMessage;
 
     @FXML
-    private Text hyperlinkText;
+    protected Text hyperlinkText;
 
     /**
      * Creates a new HelpWindow.
@@ -106,7 +106,7 @@ public class HelpWindow extends UiPart<Stage> {
      * @throws Exception If there is an error while trying to open the user guide,
      *                   such as an invalid URI or inability to access the browser.
      */
-    private void openUserGuide(MouseEvent event) {
+    protected void openUserGuide(MouseEvent event) {
         try {
             Desktop.getDesktop().browse(new URI(USERGUIDE_URL));
         } catch (Exception e) {
@@ -157,5 +157,23 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
+    }
+
+    /**
+     * Returns the fill color of the hyperlink text.
+     *
+     * @return the Color object representing the fill color of the hyperlink text.
+     */
+    public Color getHyperlinkTextFill() {
+        return (Color) hyperlinkText.getFill();
+    }
+
+    /**
+     * Checks if the hyperlink text is underlined.
+     *
+     * @return true if the hyperlink text is underlined, false otherwise.
+     */
+    public boolean isHyperlinkTextUnderlined() {
+        return hyperlinkText.isUnderline();
     }
 }
