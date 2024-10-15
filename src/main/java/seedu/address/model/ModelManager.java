@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,7 +14,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonAttendance;
+import seedu.address.model.student.Student;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +28,9 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Student> filteredStudents;
+    private final Map<Person, Map<LocalDate, PersonAttendance>> attendanceMap = new HashMap<>();
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +43,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
     }
 
     public ModelManager() {
@@ -111,6 +121,31 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public boolean hasStudent(Student student) {
+        requireNonNull(student);
+        return addressBook.hasStudent(student);
+    }
+
+    @Override
+    public void deleteStudent(Student target) {
+        addressBook.removeStudent(target);
+    }
+
+    @Override
+    public void addStudent(Student student) {
+        addressBook.addStudent(student);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+    }
+
+    @Override
+    public void setStudent(Student target, Student editedStudent) {
+        requireAllNonNull(target, editedStudent);
+        addressBook.setStudent(target, editedStudent);
+    }
+
+
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -129,6 +164,39 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Student> getFilteredStudentList() {
+        return filteredStudents;
+    }
+
+    @Override
+    public void updateFilteredStudentList(Predicate<Student> predicate) {
+        requireNonNull(predicate);
+        filteredStudents.setPredicate(predicate);
+    }
+
+
+    @Override
+    public Person getPersonByName(Name name) {
+        for (Person person : getAddressBook().getPersonList()) {
+            if (person.getName().equals(name)) {
+                return person;
+            }
+        }
+        return null; // Return null if no matching person is found
+    }
+
+    @Override
+    public Student getStudentByName(Name name) {
+        for (Student student : getAddressBook().getStudentList()) {
+            if (student.getName().equals(name)) {
+                return student;
+            }
+        }
+        return null; // Return null if no matching student is found
+
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -144,5 +212,7 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
+
+
 
 }
