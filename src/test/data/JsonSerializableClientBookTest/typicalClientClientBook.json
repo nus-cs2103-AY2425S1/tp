@@ -22,18 +22,18 @@
     "type": "SELLER"
   }, {
     "name" : "Elle Meyer",
-    "phone" : "9482224",
+    "phone" : "94822242",
     "email" : "werner@example.com",
     "type": "BUYER"
 
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
+    "phone" : "94824272",
     "email" : "lydia@example.com",
     "type": "SELLER"
   }, {
     "name" : "George Best",
-    "phone" : "9482442",
+    "phone" : "94824422",
     "email" : "anna@example.com",
     "type": "BUYER"
   } ]

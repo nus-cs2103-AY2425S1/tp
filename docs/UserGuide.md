@@ -33,7 +33,9 @@ ClientGrid is an **address book** designed for real estate agents to efficiently
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `deletebuyer p/81234567` : Deletes the buyer with contact number 81234567.
+   * `addbuyer n/John p/12345678 e/john@gmail.com` : Add a buyer whose name is `John`, phone number is `12345678` and email is `john@gmail.com`.
+
+   * `deletebuyer p/81234567` : Deletes the buyer with contact number `81234567`.
 
    * `clear` : Deletes all contacts.
 
@@ -132,6 +134,38 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Adding a buyer : `addbuyer`
+
+Add a specified buyer into the client book.
+
+Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
+
+* Adds a buyer with the specified `BUYER_NAME`, `BUYER_PHONE_NUMBER`, and `BUYER_EMAIL`.
+* The `BUYER_NAME` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. The `BUYER_NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the in-memory database
+* The `BUYER_PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’
+* The `BUYER_EMAIL` should follow the format local-part@domain and adhere to the following constraints: The local-part must consist only of alphanumeric characters and allowed special characters, with no special characters at the beginning or end. After the local-part, there must be an '@' followed by the domain name. The domain name consists of domain labels separated by periods. Each domain label must start and end with an alphanumeric character and may contain hyphens in between. Additionally, the domain must end with a domain label that is at least two characters long.
+
+Examples:
+* `addbuyer n/John p/12345678 e/john@gmail.com` adds a buyer whose name is `John`, phone number is `12345678` and email is `john@gmail.com`.
+
+  ![result for 'addbuyer n/John p/12345678 e/john@gmail.com'](images/addbuyer.png)
+
+### Adding a seller : `addseller`
+
+Add a specified seller into the client book.
+
+Format: `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`
+
+* Adds a seller with the specified `SELLER_NAME`, `SELLER_PHONE_NUMBER`, and `SELLER_EMAIL`.
+* The `SELLER_NAME` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. The `SELLER_NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the in-memory database
+* The `SELLER_PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’
+* The `SELLER_EMAIL` should follow the format local-part@domain and adhere to the following constraints: The local-part must consist only of alphanumeric characters and allowed special characters, with no special characters at the beginning or end. After the local-part, there must be an '@' followed by the domain name. The domain name consists of domain labels separated by periods. Each domain label must start and end with an alphanumeric character and may contain hyphens in between. Additionally, the domain must end with a domain label that is at least two characters long.
+
+Examples:
+* `addseller n/Mary p/23456789 e/mary@gmail.com` adds a seller whose name is `Mary`, phone number is `23456789` and email is `mary@gmail.com`.
+
+  ![result for 'addseller n/Mary p/23456789 e/mary@gmail.com'](images/addseller.png)
+
 ### Deleting a buyer : `deletebuyer`
 
 Deletes the specified buyer from the client book.
@@ -139,8 +173,7 @@ Deletes the specified buyer from the client book.
 Format: `deletebuyer p/PHONE_NUMBER`
 
 * Deletes the buyer with the specified `PHONE_NUMBER`.
-* The `PHONE_NUMBER` must be 8 digits long.
-* The `PHONE_NUMBER` must be greater than 0. 
+* The `PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’
 
 
 Examples:
@@ -154,8 +187,7 @@ Deletes the specified seller from the client book.
 Format: `deleteseller p/PHONE_NUMBER`
 
 * Deletes the seller with the specified `PHONE_NUMBER`.
-* The `PHONE_NUMBER` must be 8 digits long.
-* The `PHONE_NUMBER` must be greater than 0.
+* The `PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’
 
 Examples:
 * `deleteseller p/98765432` deletes the seller with phone number `98765432` from the client book.
@@ -219,3 +251,8 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
+**Add Buyer** | `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
+**Add Seller** | `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`
+**Delete Buyer** | `deletebuyer p/PHONE_NUMBER`
+**Delete Seller** | `deleteseller p/PHONE_NUMBER`
+
