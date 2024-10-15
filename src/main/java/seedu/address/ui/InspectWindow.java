@@ -234,6 +234,8 @@ public class InspectWindow extends UiPart<Stage> {
                 handleList(commandResult);
             } else if (commandResult.isDeliveryAdded()) {
                 return commandResult;
+            } else if (commandResult.isDeliveryDeleted()) {
+                return commandResult;
             } else {
                 throw new CommandException("Not yet implemented");
             }

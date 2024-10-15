@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryList;
@@ -74,6 +75,13 @@ public class Person {
      */
     public void addDelivery(Delivery delivery) {
         deliveryList.add(delivery);
+    }
+
+    /**
+     * Remove the delivery from the delivery list of this person.
+     */
+    public void deleteDelivery(Index deliveryIndex) {
+        deliveryList.remove(deliveryIndex);
     }
 
     /**

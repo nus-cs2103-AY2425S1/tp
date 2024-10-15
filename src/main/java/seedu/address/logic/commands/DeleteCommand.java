@@ -13,8 +13,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
+import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.DeliveryAction;
+import seedu.address.ui.InspectWindow;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -30,6 +34,8 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
+    public static final String MESSAGE_DELETE_DELIVERY_SUCCESS = "Deleted Delivery for %1$s: %2$s";
+
     private final List<Index> indexList;
 
     public DeleteCommand(List<Index> indexList) {
@@ -38,29 +44,56 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-        List<Person> personToDeleteList = new ArrayList<>();
-
         //Want to arrange the indexList as descending order
         indexList.sort(Comparator.comparing(Index::getZeroBased).reversed());
 
-        boolean duplicate = hasDuplicates(indexList);
+        if (!AddressBookParser.getInspect()) {
+            requireNonNull(model);
+            List<Person> lastShownList = model.getFilteredPersonList();
+            List<Person> personToDeleteList = new ArrayList<>();
 
-        for (Index targetIndex : indexList) {
-            if (targetIndex.getZeroBased() >= lastShownList.size() || duplicate) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            boolean duplicate = hasDuplicates(indexList);
+
+            for (Index targetIndex : indexList) {
+                if (targetIndex.getZeroBased() >= lastShownList.size() || duplicate) {
+                    throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                }
+
+                Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+                personToDeleteList.add(personToDelete);
+                model.deletePerson(personToDelete);
             }
+            // Create a copy of the personToDeleteList and reverse it
+            List<Person> reversedPersonToDeleteList = new ArrayList<>(personToDeleteList);
+            Collections.reverse(reversedPersonToDeleteList);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
+                    Messages.formatPersonList(reversedPersonToDeleteList)));
+        } else {
+            requireNonNull(model);
+            Person inspectedPerson = InspectWindow.getInspectedPerson();
+            int deliveryListSize = inspectedPerson.getDeliveryList().size();
+            List<Delivery> deliveryToDeleteList = new ArrayList<>();
 
-            Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-            personToDeleteList.add(personToDelete);
-            model.deletePerson(personToDelete);
+            boolean duplicate = hasDuplicates(indexList);
+
+            for (Index targetIndex : indexList) {
+                if (targetIndex.getZeroBased() >= deliveryListSize || duplicate) {
+                    throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
+                }
+
+                Delivery deliveryToDelete = inspectedPerson.getDeliveryList().get(targetIndex.getZeroBased());
+                deliveryToDeleteList.add(deliveryToDelete);
+                inspectedPerson.deleteDelivery(targetIndex);
+            }
+            // Create a copy of the personToDeleteList and reverse it
+            List<Delivery> reversedDeliveryToDeleteList = new ArrayList<>(deliveryToDeleteList);
+            Collections.reverse(reversedDeliveryToDeleteList);
+            return new CommandResult(String.format(
+                    MESSAGE_DELETE_DELIVERY_SUCCESS,
+                    inspectedPerson.getName(),
+                    Messages.formatDeliveryList(reversedDeliveryToDeleteList)),
+                    DeliveryAction.DELETE);
         }
-        // Create a copy of the personToDeleteList and reverse it
-        List<Person> reversedPersonToDeleteList = new ArrayList<>(personToDeleteList);
-        Collections.reverse(reversedPersonToDeleteList);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.listFormat(reversedPersonToDeleteList)));
     }
 
     /**

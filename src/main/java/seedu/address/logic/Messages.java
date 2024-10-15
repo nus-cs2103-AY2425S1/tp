@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Person;
 
 /**
@@ -16,6 +17,7 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX = "The delivery index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
@@ -52,12 +54,41 @@ public class Messages {
     /**
      * Formats the list of {@code person} for display to the user.
      */
-    public static String listFormat(List<Person> personList) {
+    public static String formatPersonList(List<Person> personList) {
         final StringBuilder builder = new StringBuilder();
         for (Person person : personList) {
             builder.append("\n").append(format(person));
         }
         return builder.toString();
     }
+
+    /**
+     * Formats the {@code delivery} for display to the user.
+     */
+    public static String format(Delivery delivery) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(delivery.getItemName())
+                .append("; ")
+                .append(delivery.getCost())
+                .append("; ")
+                .append(delivery.getDate())
+                .append("; ")
+                .append(delivery.getTime())
+                .append("; ")
+                .append(delivery.getEta());
+        return builder.toString();
+    }
+
+    /**
+     * Formats the list of {@code person} for display to the user.
+     */
+    public static String formatDeliveryList(List<Delivery> deliveryList) {
+        final StringBuilder builder = new StringBuilder();
+        for (Delivery delivery : deliveryList) {
+            builder.append("\n").append(format(delivery));
+        }
+        return builder.toString();
+    }
+
 
 }
