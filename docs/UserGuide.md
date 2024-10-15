@@ -141,6 +141,16 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Restoring a deleted person : `restore`
+
+Restores the person deleted from the address book by the 'delete' command.
+
+format: `restore`
+
+* Restores the last person deleted from the address book by the 'delete' command.
+* Only works if person has been deleted by the 'delete' command within the session.
+* Does not work if same person has been added to the address book after deletion using add command.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
