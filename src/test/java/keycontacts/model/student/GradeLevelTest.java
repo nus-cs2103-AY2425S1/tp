@@ -1,12 +1,13 @@
 package keycontacts.model.student;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 public class GradeLevelTest {
-    
+
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new GradeLevel(null));
@@ -19,7 +20,7 @@ public class GradeLevelTest {
     }
 
     @Test
-    public void is_valid_grade_level() {
+    public void isValidGradeLevel() {
         // valid grade levels
         assertTrue(GradeLevel.isValidGradeLevel("ABRSM 1"));
         assertTrue(GradeLevel.isValidGradeLevel("Trinity 1"));
@@ -29,9 +30,9 @@ public class GradeLevelTest {
 
         // invalid grade levels
         // special character
-        assertTrue(GradeLevel.isValidGradeLevel("ABRSM 1!"));
+        assertFalse(GradeLevel.isValidGradeLevel("ABRSM 1!"));
         // no space
-        assertTrue(GradeLevel.isValidGradeLevel("Trinity1"));
+        assertFalse(GradeLevel.isValidGradeLevel("Trinity1"));
     }
 
     @Test
@@ -45,12 +46,12 @@ public class GradeLevelTest {
         assertTrue(gradeLevel.equals(gradeLevel));
 
         // null -> returns false
-        assertTrue(gradeLevel.equals(null));
+        assertFalse(gradeLevel.equals(null));
 
         // different types -> returns false
-        assertTrue(gradeLevel.equals(5.0f));
+        assertFalse(gradeLevel.equals(5.0f));
 
         // different values -> returns false
-        assertTrue(gradeLevel.equals(new GradeLevel("Trinity 1")));
+        assertFalse(gradeLevel.equals(new GradeLevel("Trinity 1")));
     }
 }
