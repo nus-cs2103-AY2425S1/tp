@@ -45,10 +45,10 @@ public class TypicalPersons {
             .withPhone("9482442").withEmail("anna@example.com").build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").build();
-    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").build();
+    public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
+            .withStudentId("E0000009").withPhone("8482424").withEmail("stefan@example.com").build();
+    public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
+            .withStudentId("E0000010").withPhone("8482131").withEmail("hans@example.com").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withStudentId(VALID_STUDENTID_AMY)
