@@ -22,10 +22,10 @@ public class SortCommandParserTest {
 
     @Test
     public void parse_wrongNumberOfArg_throwsParseException() {
-        assertParseFailure(parser, "ASC ASC"
-                , String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "descending ASC"
-                , String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "ASC ASC",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "descending ASC",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
     }
 
     @Test
