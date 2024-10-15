@@ -2,11 +2,16 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.tagSetToString;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DANIEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GEORGE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -50,7 +55,7 @@ public class TagAddCommandTest {
         TagAddCommand tagAddCommand = new TagAddCommand(editedPerson.getName(), stubTagList);
 
         String expectedMessage = String.format(TagAddCommand.MESSAGE_ADD_TAG_SUCCESS,
-                Messages.formatForTags(editedPerson), Messages.getName(editedPerson));
+                Messages.tagSetToString(stubTagList), Messages.getName(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
@@ -60,19 +65,18 @@ public class TagAddCommandTest {
     @Test
     public void execute_allDuplicateTags_success() {
         List<Person> matchingPersons = model.getFilteredPersonList().stream()
-                .filter(person -> person.getName().fullName.equalsIgnoreCase(VALID_NAME_GEORGE))
+                .filter(person -> person.getName().fullName.equalsIgnoreCase(VALID_NAME_ALICE))
                 .toList();
 
         Person firstPerson = matchingPersons.get(0);
-        Person editedPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_FRIEND, VALID_TAG_AMY).build();
+        Person editedPerson = new PersonBuilder(firstPerson).build();
 
-        stubTagList.add(new Tag(VALID_TAG_FRIEND));
-        stubTagList.add(new Tag(VALID_TAG_AMY));
+        stubTagList.add(new Tag(VALID_TAG_FRIENDS));
 
-        TagAddCommand tagAddCommand = new TagAddCommand(editedPerson.getName(), stubTagList, stubTagList);
+        TagAddCommand tagAddCommand = new TagAddCommand(editedPerson.getName(), stubTagList);
 
-        String expectedMessage = String.format(TagAddCommand.MESSAGE_JUST_DUPLICATE_TAGS,
-                Messages.getName(editedPerson));
+        String expectedMessage = String.format(TagAddCommand.MESSAGE_DUPLICATE_TAGS,
+                Messages.getName(editedPerson), tagSetToString(stubTagList));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
@@ -82,26 +86,24 @@ public class TagAddCommandTest {
     @Test
     public void execute_someDuplicateTags_success() {
         List<Person> matchingPersons = model.getFilteredPersonList().stream()
-                .filter(person -> person.getName().fullName.equalsIgnoreCase(VALID_NAME_GEORGE))
+                .filter(person -> person.getName().fullName.equalsIgnoreCase(VALID_NAME_DANIEL))
                 .toList();
 
         Person firstPerson = matchingPersons.get(0);
-        Person testPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_AMY).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_FRIENDS, VALID_TAG_HUSBAND).build();
 
-        stubTagList.add(new Tag(VALID_TAG_FRIEND));
-        stubTagList.add(new Tag(VALID_TAG_AMY));
+        stubTagList.add(new Tag(VALID_TAG_FRIENDS));
+        stubTagList.add(new Tag(VALID_TAG_HUSBAND));
 
-        Set<Tag> duplicateTags = new HashSet<>();
-        duplicateTags.add(new Tag(VALID_TAG_AMY));
+        TagAddCommand tagAddCommand = new TagAddCommand(editedPerson.getName(), stubTagList);
 
-        TagAddCommand tagAddCommand = new TagAddCommand(testPerson.getName(), stubTagList, duplicateTags);
-
-        Person expectedPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_FRIEND, VALID_TAG_AMY).build();
-
-        String expectedMessage = String.format(TagAddCommand.MESSAGE_SOME_DUPLICATE_TAGS,
-                Messages.getName(expectedPerson), Messages.formatForTags(expectedPerson));
+        String nonDuplicateMessage = String.format(TagAddCommand.MESSAGE_ADD_TAG_SUCCESS + "\n",
+                VALID_TAG_HUSBAND, Messages.getName(editedPerson));
+        String duplicatesMessage = String.format(TagAddCommand.MESSAGE_DUPLICATE_TAGS,
+                Messages.getName(editedPerson), VALID_TAG_FRIENDS);
+        String expectedMessage = nonDuplicateMessage + duplicatesMessage;
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, expectedPerson);
+        expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(tagAddCommand, model, expectedMessage, expectedModel);
     }
