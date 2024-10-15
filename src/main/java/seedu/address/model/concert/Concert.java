@@ -46,7 +46,6 @@ public class Concert {
     public boolean isSameConcert(Concert otherConcert) {
         return equals(otherConcert);
     }
-
     /**
      * Returns true if both concerts have the same name, address and concertDate.
      */
