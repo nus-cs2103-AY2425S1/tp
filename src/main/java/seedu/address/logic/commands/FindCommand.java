@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.stream.Collectors;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
@@ -40,7 +42,10 @@ public class FindCommand extends Command {
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
                         model.getFilteredPersonList().size(),
-                        String.join(" ", predicate.getKeywords()))
+                        predicate.getKeywords().stream()
+                                .map(kw -> "\"" + kw + "\"")
+                                .collect(Collectors.joining(", "))
+                )
         );
     }
 
