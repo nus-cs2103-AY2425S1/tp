@@ -15,7 +15,6 @@ public class ContactDisplay extends VBox {
         emailLabel = new Label("Email:");
 
         getChildren().addAll(nameLabel, phoneLabel, emailLabel);
-        
         setStyle("-fx-padding: 10; -fx-background-color: #f0f0f0; -fx-border-color: #ccc;");
     }
 
