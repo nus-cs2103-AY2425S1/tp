@@ -20,7 +20,7 @@ import seedu.address.logic.commands.FilterCommand;
 import seedu.address.model.tag.Tag;
 
 public class FilterCommandParserTest {
-    FilterCommandParser parser = new FilterCommandParser();
+    private FilterCommandParser parser = new FilterCommandParser();
 
     @Test
     public void parse_oneTag_success() {

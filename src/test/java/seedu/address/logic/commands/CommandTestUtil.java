@@ -52,13 +52,9 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String TAG_DESC_FRIEND_HUSBAND = " " + PREFIX_TAG + VALID_TAG_FRIEND + " " + VALID_TAG_HUSBAND;
-    public static final String TAG_DESC_FRIENDS= " " + PREFIX_TAG + VALID_TAG_FRIENDS;
-    public static final String TAG_DESC_FRIENDS_OWESMONEY = " " + PREFIX_TAG + VALID_TAG_FRIENDS
-            + " " + VALID_TAG_OWESMONEY;
     public static final Set<Tag> TAG_SET_FRIEND = Set.of(new Tag(VALID_TAG_FRIEND));
     public static final Set<Tag> TAG_SET_FRIEND_HUSBAND = Set.of(new Tag(VALID_TAG_FRIEND), new Tag(VALID_TAG_HUSBAND));
     public static final Set<Tag> TAG_SET_FRIENDS = Set.of(new Tag(VALID_TAG_FRIENDS));
-    public static final Set<Tag> TAG_SET_OWESMONEY = Set.of(new Tag(VALID_TAG_OWESMONEY));
     public static final Set<Tag> TAG_SET_FRIENDS_OWESMONEY = Set.of(new Tag(VALID_TAG_FRIENDS),
             new Tag(VALID_TAG_OWESMONEY));
 

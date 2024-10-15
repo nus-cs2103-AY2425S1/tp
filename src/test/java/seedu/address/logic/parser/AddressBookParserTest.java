@@ -106,7 +106,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_filter() throws Exception {
-        FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD + TAG_DESC_FRIEND_HUSBAND);
+        FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD
+                + TAG_DESC_FRIEND_HUSBAND);
         assertEquals(new FilterCommand(TAG_SET_FRIEND_HUSBAND), command);
     }
 
