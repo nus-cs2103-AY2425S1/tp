@@ -74,7 +74,7 @@ public class AddTaskToGroupCommand extends Command {
             model.addTask(task);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, task.getTaskName().toString(),
-                Messages.format(group)));
+                group.getGroupName().fullName));
     }
 
     @Override
