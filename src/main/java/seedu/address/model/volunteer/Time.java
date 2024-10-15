@@ -1,10 +1,10 @@
 package seedu.address.model.volunteer;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Event's time in the address book.
@@ -19,7 +19,7 @@ public class Time {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "\\d{2}:\\d{2}]";
+    public static final String VALIDATION_REGEX = "\\d{2}:\\d{2}";
 
     public final LocalTime eventTime;
 

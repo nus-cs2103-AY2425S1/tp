@@ -10,10 +10,11 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.parser.eventCommandParser.EventCommandParser;
+import seedu.address.logic.parser.eventcommandparser.EventCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.volunteerCommandParser.VolunteerCommandParser;
+import seedu.address.logic.parser.volunteercommandparser.VolunteerCommandParser;
 
 /**
  * Parses user input.
@@ -24,10 +25,10 @@ public class AddressBookParser {
     /**
      * Used for initial separation of command word and args.
      */
+    public static final String EVENT_COMMAND_INDICATOR = "/e";
+    public static final String VOLUNTEER_COMMAND_INDICATOR = "/v";
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
-    private static final String EVENT_COMMAND_INDICATOR = "/e";
-    private static final String VOLUNTEER_COMMAND_INDICATOR = "/v";
 
     /**
      * Parses user input into command for execution.
@@ -62,6 +63,9 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case ExportCommand.COMMAND_WORD:
+            return new ExportCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

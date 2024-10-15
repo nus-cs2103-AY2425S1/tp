@@ -8,16 +8,20 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.volunteer.Volunteer;
 import seedu.address.model.volunteer.exceptions.DuplicateVolunteerException;
 import seedu.address.model.volunteer.exceptions.VolunteerNotFoundException;
 
+
 /**
- * A list of volunteer that enforces uniqueness between its elements and does not allow nulls.
- * A volunteer is considered unique by comparing using {@code Volunteer#isSameVolunteer(Volunteer)}. As such, adding and updating of
- * volunteers uses Volunteer#isSameVolunteer(Volunteer) for equality so as to ensure that the volunteer being added or updated is
- * unique in terms of identity in the UniqueVolunteerList. However, the removal of a volunteer uses Volunteer#equals(Object) so
- * as to ensure that the volunteer with exactly the same fields will be removed.
+ * A list of volunteer that enforces uniqueness between
+ * its elements and does not allow nulls.
+ * A volunteer is considered unique by comparing using
+ * {@code Volunteer#isSameVolunteer(Volunteer)}. As such, adding and updating of
+ * volunteers uses Volunteer#isSameVolunteer(Volunteer) for equality to ensure
+ * that the volunteer being added or updated is unique in terms of identity
+ * in the UniqueVolunteerList.
+ * However, the removal of a volunteer uses Volunteer#equals(Object)
+ * to ensure that the volunteer with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *

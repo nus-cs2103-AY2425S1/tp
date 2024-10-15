@@ -23,23 +23,35 @@ public class Event {
     /**
      * Every field must be present and not null.
      */
-    public Event(EventName eventName, Location location, Date date, Time start_time, Time end_time, Description description) {
-        requireAllNonNull(eventName, location, date, start_time, end_time, description);
+    public Event(EventName eventName, Location location, Date date,
+                 Time startTime, Time endTime, Description description) {
+        requireAllNonNull(eventName, location, date, startTime, endTime, description);
         this.eventName = eventName;
         this.location = location;
         this.date = date;
-        this.startTime = start_time;
-        this.endTime = end_time;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.description = description;
     }
 
-    public Event(EventName eventName, Location location, Date date, Time start_time, Time end_time) {
-        requireAllNonNull(eventName, location, date, start_time, end_time);
+    /**
+     * Constructs an {@code Event} object with the specified event name, location, date, start time, and end time.
+     *
+     * @param eventName The name of the event.
+     * @param location The location of the event.
+     * @param date The date of the event.
+     * @param startTime The start time of the event.
+     * @param endTime The end time of the event.
+     *
+     * @throws NullPointerException if any of the parameters are null.
+     */
+    public Event(EventName eventName, Location location, Date date, Time startTime, Time endTime) {
+        requireAllNonNull(eventName, location, date, startTime, endTime);
         this.eventName = eventName;
         this.location = location;
         this.date = date;
-        this.startTime = start_time;
-        this.endTime = end_time;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.description = new Description();
     }
 
@@ -72,7 +84,7 @@ public class Event {
      * This defines a weaker notion of equality between two events.
      */
     public boolean isSameEvent(Event otherEvent) {
-        if (otherEvent== this) {
+        if (otherEvent == this) {
             return true;
         }
 
