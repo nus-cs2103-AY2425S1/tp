@@ -13,7 +13,7 @@ public class Phone {
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers can contain numbers, spaces and hyphens, and it should be at least 3 digits long.\n"
                     + "Only 1 space or hyphen is allowed between each alphanumeric character.";
-    public static final String VALIDATION_REGEX = "(?=((\\D*\\d){3,}))\\d{1,}([ -]\\d{1,})*";
+    public static final String VALIDATION_REGEX = "(?=((\\D*\\d){3,}))\\d{1,}([ -]\\d{1,})*\\s*";
     public final String value;
 
     /**
@@ -31,8 +31,7 @@ public class Phone {
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {
-        String trimmedTest = test.trim();
-        return trimmedTest.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
