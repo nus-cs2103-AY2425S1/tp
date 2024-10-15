@@ -61,4 +61,18 @@ public class UntagCommandParserTest {
         String expectedMessage = "Error: More than one 't/' detected. Please use only one 't/' for untagging.";
         assertParseFailure(parser, userInput, expectedMessage);
     }
+
+    @Test
+    public void parse_invalidTagCharacters_failure() {
+        String userInput = INDEX_FIRST_PERSON.getOneBased() + " t/friends *colleagues";
+        String expectedMessage = "Error: Tags can only contain alphabetic characters.";
+        assertParseFailure(parser, userInput, expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidIndex_failure() {
+        String userInput = "untag 999 t/friends";
+        String expectedMessage = "Error: The person index provided is invalid.";
+        assertParseFailure(parser, userInput, expectedMessage);
+    }
 }

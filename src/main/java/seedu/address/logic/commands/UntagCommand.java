@@ -55,8 +55,8 @@ public class UntagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (index.getZeroBased() >= lastShownList.size() || index.getZeroBased() < 0) {
+            throw new CommandException("Error: " + Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + ".");
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());

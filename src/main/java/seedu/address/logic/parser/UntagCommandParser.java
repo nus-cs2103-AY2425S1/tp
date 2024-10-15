@@ -5,9 +5,11 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
@@ -16,6 +18,8 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new UntagCommand object.
  */
 public class UntagCommandParser implements Parser<UntagCommand> {
+
+    private static final Pattern VALID_TAG_PATTERN = Pattern.compile("^[a-zA-Z]+$");
 
     /**
      * Parses the given {@code String} of arguments in the context of the UntagCommand
@@ -37,8 +41,11 @@ public class UntagCommandParser implements Parser<UntagCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    UntagCommand.MESSAGE_USAGE), ive);
+            throw new ParseException("Error: " + Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + ".");
+        }
+
+        if (argMultimap.getValue(PREFIX_TAG).orElse("").trim().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
         }
 
         // Handle the case where the user inputs "all" to remove all tags where null set signifies removing all tags
@@ -49,6 +56,14 @@ public class UntagCommandParser implements Parser<UntagCommand> {
         }
 
         String untagString = argMultimap.getValue(PREFIX_TAG).orElse("");
+
+        String[] tagsArray = untagString.split("\\s+");
+        for (String tag : tagsArray) {
+            if (!isValidTagString(tag)) {
+                throw new ParseException("Error: Tags can only contain alphabetic characters.");
+            }
+        }
+
         Set<Tag> tagsToRemove = Tag.stringToTagSet(untagString);
 
         if (tagsToRemove.isEmpty()) {
@@ -56,6 +71,16 @@ public class UntagCommandParser implements Parser<UntagCommand> {
         }
 
         return new UntagCommand(index, tagsToRemove);
+    }
+
+    /**
+     * Checks if the given tag string is valid (contains only alphabetic characters).
+     *
+     * @param tagString the string to check
+     * @return true if valid, false otherwise
+     */
+    private boolean isValidTagString(String tagString) {
+        return VALID_TAG_PATTERN.matcher(tagString).matches();
     }
 
 }
