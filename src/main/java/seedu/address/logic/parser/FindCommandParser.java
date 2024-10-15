@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_EMPTY_FIND_KEYWORD;
-import static seedu.address.logic.Messages.MESSAGE_FIND_KEYWORD_CONTAINS_WHITESPACE;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
@@ -36,9 +35,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         // all keywords must be non-empty and contain no whitespace
         if (nameKeywords.stream().anyMatch(String::isBlank)) {
             throw new ParseException(MESSAGE_EMPTY_FIND_KEYWORD);
-        }
-        if (nameKeywords.stream().anyMatch(s -> s.contains(" "))) {
-            throw new ParseException(MESSAGE_FIND_KEYWORD_CONTAINS_WHITESPACE);
         }
 
         return new FindCommand(new NameContainsKeywordsPredicate(nameKeywords));

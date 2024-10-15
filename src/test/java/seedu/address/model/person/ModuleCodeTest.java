@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -11,6 +12,56 @@ public class ModuleCodeTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new ModuleCode(null));
+    }
+
+    @Test
+    public void constructor_emptyString_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new ModuleCode("");
+        });
+    }
+
+    @Test
+    public void constructor_moduleCodeWithSpace_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new ModuleCode("CS 1101S");
+        });
+    }
+
+    @Test
+    public void constructor_moduleCodeWithWrongOrder_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new ModuleCode("1101CS");
+        });
+    }
+
+    @Test
+    public void constructor_validModuleCodeWithNoLetterBehind() {
+        assertDoesNotThrow(() -> {
+            new ModuleCode("MA1522");
+        });
+    }
+
+    @Test
+    public void constructor_validModuleCodeWithLetterBehind() {
+        assertDoesNotThrow(() -> {
+            new ModuleCode("CS1231S");
+        });
+    }
+
+    @Test
+    public void constructor_validModuleCodeWithLettersBehind() {
+        assertDoesNotThrow(() -> {
+            new ModuleCode("CFG2002KH");
+        });
+    }
+
+    @Test
+    public void constructor_validModuleCodeWithLowerCaseLetter() {
+        assertDoesNotThrow(() -> {
+            new ModuleCode("ma1522");
+            new ModuleCode("cs1231s");
+        });
     }
 
     @Test
