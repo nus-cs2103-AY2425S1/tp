@@ -153,6 +153,20 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Clearing all entries : `view`
+
+Views the details of a person in the address book.
+
+Format: `view INDEX`
+
+- Views a the details of the person at the specified `INDEX`.
+- The index refers to the index number shown in the displayed person list.
+- The index **must be a positive integer** 1, 2, 3, ...
+- The index **must be within the range** shown on the displayed person list.
+
+Examples:
+- `view 1` shows the contact details of the first person shown on the displayed person list. 
+
 ### Exiting the program : `exit`
 
 Exits the program.
