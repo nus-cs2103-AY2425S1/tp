@@ -1,10 +1,13 @@
 package keycontacts.model.student;
 
 import static keycontacts.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static keycontacts.logic.commands.CommandTestUtil.VALID_DAY;
+import static keycontacts.logic.commands.CommandTestUtil.VALID_END_TIME;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_GRADE_LEVEL_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_PIANO_PIECE_BEETHOVEN;
+import static keycontacts.logic.commands.CommandTestUtil.VALID_START_TIME;
 import static keycontacts.testutil.Assert.assertThrows;
 import static keycontacts.testutil.TypicalStudents.ALICE;
 import static keycontacts.testutil.TypicalStudents.BOB;
@@ -26,6 +29,11 @@ public class StudentTest {
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Student student = new StudentBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> student.getPianoPieces().remove(0));
+    }
+
+    @Test
+    public void getRegularLessonDisplayString() {
+        assertEquals(ALICE.getRegularLesson().toDisplay(), ALICE.getRegularLessonDisplay());
     }
 
     @Test
@@ -87,10 +95,14 @@ public class StudentTest {
 
         // different grade level -> returns false
         editedAlice = new StudentBuilder(ALICE).withGradeLevel(VALID_GRADE_LEVEL_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
 
         // different piano pieces -> returns false
         editedAlice = new StudentBuilder(ALICE).withPianoPieces(VALID_PIANO_PIECE_BEETHOVEN).build();
+        assertFalse(ALICE.equals(editedAlice));
 
+        // different regular lesson -> returns false
+        editedAlice = new StudentBuilder(ALICE).withRegularLesson(VALID_DAY, VALID_START_TIME, VALID_END_TIME).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
