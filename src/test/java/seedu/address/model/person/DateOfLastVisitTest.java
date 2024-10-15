@@ -1,12 +1,13 @@
 package seedu.address.model.person;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import org.junit.jupiter.api.Test;
+
 public class DateOfLastVisitTest {
+
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new DateOfLastVisit(null));
@@ -35,9 +36,9 @@ public class DateOfLastVisitTest {
         assertFalse(DateOfLastVisit.isValidDateOfLastVisit("31-04-2024")); // 31st of even month
 
         // valid dateOfLastVisits
-        assertTrue(DateOfLastVisit.isValidDateOfLastVisit("01-01-0000"));   // year 0000
-        assertTrue(DateOfLastVisit.isValidDateOfLastVisit("31-01-2024"));   // month with 31st
-        assertTrue(DateOfLastVisit.isValidDateOfLastVisit("30-04-2024"));   // month with 30th
+        assertTrue(DateOfLastVisit.isValidDateOfLastVisit("01-01-0000")); // year 0000
+        assertTrue(DateOfLastVisit.isValidDateOfLastVisit("31-01-2024")); // month with 31st
+        assertTrue(DateOfLastVisit.isValidDateOfLastVisit("30-04-2024")); // month with 30th
         assertTrue(DateOfLastVisit.isValidDateOfLastVisit("29-02-2024")); // leap year (29 feb)
     }
 
