@@ -5,12 +5,16 @@
     "email": "alice@example.com",
     "room number": "01-0123",
     "address": "123, Jurong West Ave 6, #08-111",
+    "emergency name": null,
+    "emergency phone": null,
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
     "room number": "01-0123",
-    "address": "4th street"
+    "address": "4th street",
+    "emergency name": null,
+    "emergency phone": null
   } ]
 }
