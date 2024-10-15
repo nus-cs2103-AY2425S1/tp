@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# UniLink User Guide
 
 UniLink is a desktop app that allows university students to manage their contacts. With Unilink, students can categorise
 their contacts into 'work' contacts and 'personal' contacts to better manage their lives!
