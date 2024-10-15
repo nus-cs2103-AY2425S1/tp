@@ -77,7 +77,7 @@ InvenTrack simulates an ongoing software project for a desktop application dedic
 
 ### Viewing help : `help`
 
-Stuck on how to use the app? 
+Stuck on how to use the app?
 
 The Help command simplifies the process for you!
 
