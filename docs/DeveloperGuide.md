@@ -336,9 +336,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 2a. No contacts stored in the System.
+- 1a. No contacts stored in the System.
 
-  - 2a1. System informs Actor that they have no contacts stored.
+  - 1a1. System informs Actor that they have no contacts stored.
 
     Use case ends.
 
@@ -389,9 +389,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 2a. No contacts match keywords.
+- 1a. No contacts match keywords.
 
-  - 2a1. System informs Actor that they have no contacts that match.
+  - 1a1. System informs Actor that they have no contacts that match.
 
     Use case ends.
 
