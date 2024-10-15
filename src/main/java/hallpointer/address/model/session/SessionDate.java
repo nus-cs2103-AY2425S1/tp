@@ -37,8 +37,8 @@ public class SessionDate {
      */
     public static boolean isValidDate(String test) {
         try {
-            DATE_FORMATTER.parse(test);
-            return true;
+            LocalDate parsedDate = LocalDate.parse(test, DATE_FORMATTER);
+            return parsedDate.format(DATE_FORMATTER).equals(test);
         } catch (DateTimeParseException e) {
             return false;
         }
