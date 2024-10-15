@@ -7,6 +7,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_VENDOR;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteEventCommand;
 import seedu.address.logic.commands.DeleteVendorCommand;
 
 public class DeleteCommandParserTest {
@@ -20,12 +22,20 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        // invalid index
-        assertParseFailure(parser, "v/1abc",
+        // invalid index - vendor
+        assertParseFailure(parser, " v/1abc",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteVendorCommand.MESSAGE_USAGE));
 
+        // invalid index - event
+        assertParseFailure(parser, " e/1abc",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteEventCommand.MESSAGE_USAGE));
+
+        // multiple prefixes
+        assertParseFailure(parser, " v/1 e/1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+
         // no prefix
-        assertParseFailure(parser, "a",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteVendorCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " a",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 }
