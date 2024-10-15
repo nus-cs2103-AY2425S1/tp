@@ -78,17 +78,9 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL​`
-
-[//]: # (<div markdown="span" class="alert alert-primary">:bulb: **Tip:**)
-
-[//]: # ()
-[//]: # ()
-[//]: # (A person can have any number of tags &#40;including 0&#41;)
-
-[//]: # ()
-[//]: # ()
-[//]: # (</div>)
+<div class="command-box">
+Format: add n/NAME p/PHONE_NUMBER e/EMAIL​
+</div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
