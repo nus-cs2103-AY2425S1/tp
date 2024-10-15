@@ -101,7 +101,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_nullNric_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, null,
-                VALID_ADDRESS, VALIR_REMARK, VALID_TAGS);
+                VALID_ADDRESS, VALID_REMARK, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
