@@ -28,8 +28,10 @@ import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
+import seedu.address.ui.HelpWindow;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
+
 
 /**
  * Runs the application.
@@ -172,6 +174,26 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
         ui.start(primaryStage);
+        if (model.getUserPrefs().isFirstTime()) {
+            showHelpWindow();
+            // Set isFirstTime to false and save the updated preferences
+            UserPrefs updatedPrefs = new UserPrefs(model.getUserPrefs());
+            updatedPrefs.setIsFirstTime(false);
+            model.setUserPrefs(updatedPrefs);
+            try {
+                storage.saveUserPrefs(updatedPrefs);
+            } catch (IOException e) {
+                logger.warning("Failed to save updated user preferences: " + StringUtil.getDetails(e));
+            }
+        }
+    }
+
+    /**
+     * Shows the help window.
+     */
+    private void showHelpWindow() {
+        HelpWindow helpWindow = new HelpWindow();
+        helpWindow.show();
     }
 
     @Override
