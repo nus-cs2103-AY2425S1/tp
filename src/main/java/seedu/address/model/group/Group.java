@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.group.exceptions.ExceedGroupSizeException;
 import seedu.address.model.student.Student;
 
 /**
@@ -54,6 +55,8 @@ public class Group {
     public void add(Student student) {
         if (students.size() < MAXIMUM_STUDENTS_IN_GROUP) {
             students.add(student);
+        } else {
+            throw new ExceedGroupSizeException();
         }
     }
 
