@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -66,6 +67,13 @@ public class UniqueContactList implements Iterable<Contact> {
             throw new DuplicateContactException();
         }
 
+        // check if the id already exists
+        Predicate<Contact> duplicateIdPredicate = contact ->
+                contact.getId().equals(editedContact.getId()) && !contact.equals(target);
+        if (internalList.stream().anyMatch(duplicateIdPredicate)) {
+            throw new DuplicateContactException(editedContact.getId());
+        }
+
         internalList.set(index, editedContact);
     }
 
@@ -122,15 +130,6 @@ public class UniqueContactList implements Iterable<Contact> {
         }
 
         UniqueContactList otherUniqueContactList = (UniqueContactList) other;
-        // Set<Id> ids = internalList.stream().map(contact -> contact.getId()).collect(Collectors.toSet());
-        // int matchedIdsCount = 0;
-        // for (Contact contact : otherUniqueContactList) {
-        //     if (!ids.contains(contact.getId())) {
-        //         return false;
-        //     }
-        //     matchedIdsCount++;
-        // }
-        // return matchedIdsCount == ids.size();
         return internalList.equals(otherUniqueContactList.internalList);
     }
 
