@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -15,8 +19,8 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-t11-2.github.io/tp/UserGuide.html";
+    public static final String HELP_MESSAGE = "Please refer to the user guide: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -24,6 +28,8 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Button copyButton;
 
+    @FXML
+    private Button openLinkButton;
     @FXML
     private Label helpMessage;
 
@@ -98,5 +104,16 @@ public class HelpWindow extends UiPart<Stage> {
         final ClipboardContent url = new ClipboardContent();
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
+    }
+
+    /**
+     * Launches the URL of the user guide in the user's console
+     *
+     * @throws URISyntaxException
+     * @throws IOException
+     */
+    @FXML
+    private void openUrl() throws URISyntaxException, IOException {
+        Desktop.getDesktop().browse(new URI(USERGUIDE_URL));
     }
 }
