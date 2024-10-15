@@ -34,6 +34,8 @@ import seedu.sellsavvy.logic.commands.ordercommands.AddOrderCommand;
 import seedu.sellsavvy.model.order.Count;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
+import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.testutil.OrderBuilder;
 
 public class AddOrderCommandParserTest {
 
@@ -48,6 +50,16 @@ public class AddOrderCommandParserTest {
         String userInput = targetIndex.getOneBased() + VALID_ORDER_STRING;
 
         assertParseSuccess(parser, userInput, new AddOrderCommand(INDEX_FIRST_PERSON, ATLAS));
+    }
+
+    @Test
+    public void parse_countFieldMissing_succes() {
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput = targetIndex.getOneBased() + ITEM_DESC_ATLAS + DATE_DESC_ATLAS;
+        Order expectedOrder = new OrderBuilder().withItem(VALID_ITEM_ATLAS)
+                .withDate(VALID_DATE_ATLAS).withCount("1").build();
+
+        assertParseSuccess(parser, userInput, new AddOrderCommand(INDEX_FIRST_PERSON, expectedOrder));
     }
 
     @Test
@@ -72,9 +84,9 @@ public class AddOrderCommandParserTest {
         assertParseFailure(parser, "1" + ITEM_DESC_ATLAS + VALID_DATE_ATLAS + COUNT_DESC_ATLAS,
                 MESSAGE_INVALID_FORMAT);
 
-        // missing count prefix
+        // missing count prefix, leading to invalid date
         assertParseFailure(parser, "1" + ITEM_DESC_ATLAS + DATE_DESC_ATLAS + VALID_COUNT_ATLAS,
-                MESSAGE_INVALID_FORMAT);
+                Date.MESSAGE_CONSTRAINTS);
 
         // all prefixes missing
         assertParseFailure(parser, "1 " + VALID_ITEM_ATLAS + VALID_DATE_ATLAS + VALID_COUNT_ATLAS,

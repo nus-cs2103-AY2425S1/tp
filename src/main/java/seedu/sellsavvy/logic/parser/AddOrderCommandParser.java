@@ -21,6 +21,8 @@ import seedu.sellsavvy.model.order.Order;
  */
 public class AddOrderCommandParser implements Parser<AddOrderCommand> {
 
+    private static final Count DEFAULT_COUNT = new Count("1");
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddOrderCommand.
      * and returns an AddOrderCommand object for execution.
@@ -34,7 +36,7 @@ public class AddOrderCommandParser implements Parser<AddOrderCommand> {
 
         Index index;
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ITEM, PREFIX_DATE, PREFIX_COUNT)
+        if (!arePrefixesPresent(argMultimap, PREFIX_ITEM, PREFIX_DATE)
                 || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddOrderCommand.MESSAGE_USAGE));
         }
@@ -49,7 +51,7 @@ public class AddOrderCommandParser implements Parser<AddOrderCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ITEM, PREFIX_DATE, PREFIX_COUNT);
         Item item = ParserUtil.parseItem(argMultimap.getValue(PREFIX_ITEM).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        Count count = ParserUtil.parseCount(argMultimap.getValue(PREFIX_COUNT).get());
+        Count count = parseCountValue(argMultimap);
 
         Order order = new Order(item, count, date);
 
@@ -62,5 +64,17 @@ public class AddOrderCommandParser implements Parser<AddOrderCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Parses for the {@code Count} value. If the count value is not provided,
+     * returns a {@code Count} with a value of 1.
+     */
+    private static Count parseCountValue(ArgumentMultimap argMultimap) throws ParseException {
+        if (!argMultimap.getValue(PREFIX_COUNT).isPresent()) {
+            return DEFAULT_COUNT;
+        }
+
+        return ParserUtil.parseCount(argMultimap.getValue(PREFIX_COUNT).get());
     }
 }
