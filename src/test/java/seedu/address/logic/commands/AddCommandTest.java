@@ -22,7 +22,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.Ic;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Subject;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -139,6 +141,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasPersonWithIc(Ic ic) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean personDuplicateClass(Subject subject, Person student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addSubjectToPerson(Subject subject, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -159,8 +176,13 @@ public class AddCommandTest {
         }
 
         @Override
-        public void sortAddressBook() {
+        public void sortAddressBookByName() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getPersonWithIc(Ic ic) {
+            return null;
         }
     }
 

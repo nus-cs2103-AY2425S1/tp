@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Ic;
+import seedu.address.model.person.Subject;
 
 /**
  * The API of the Model component.
@@ -58,6 +60,21 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with this {@code ic} exists in the address book.
+     */
+    boolean hasPersonWithIc(Ic ic);
+
+    /**
+     * Returns true if {@code Person} already is taking this {@code subject}
+     */
+    boolean personDuplicateClass(Subject subject, Person student);
+
+    /**
+     * Adds {@code subject} to {@code person} in address book
+     */
+    void addSubjectToPerson(Subject subject, Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -86,7 +103,19 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Sorts the address book managed by model.
+     * Sorts the address book managed by model, based on alphabetical order of names of persons inside it.
      */
-    void sortAddressBook();
+    void sortAddressBookByName();
+
+    /**
+     * Sorts the address book managed by model, based on alphabetical order of classes of persons inside it.
+     */
+    void sortAddressBookByClass();
+
+    /**
+     * Returns person from address book with given ic.
+     */
+    Person getPersonWithIc(Ic ic);
+
+
 }

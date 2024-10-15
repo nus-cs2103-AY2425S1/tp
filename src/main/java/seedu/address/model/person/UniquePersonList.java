@@ -99,6 +99,26 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if there is a person in the list with the given IC.
+     */
+    public boolean hasPersonWithIc(Ic ic) {
+        requireNonNull(ic);
+        return internalList.stream().anyMatch(person -> person.getIc().equals(ic));
+    }
+
+    /**
+     * Returns the person in the list with the given IC.
+     * Throws PersonNotFoundException if no person with the given IC is found.
+     */
+    public Person getPersonWithIc(Ic ic) {
+        requireNonNull(ic);
+        return internalList.stream()
+                .filter(person -> person.getIc().equals(ic))
+                .findFirst()
+                .orElseThrow(PersonNotFoundException::new);
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
@@ -155,4 +175,18 @@ public class UniquePersonList implements Iterable<Person> {
     public void sortPersonsByName() {
         internalList.sort(Comparator.comparing(person -> person.getName().toString()));
     }
+
+    /**
+     * Sorts the internal list of persons by their classes in-place. Sort based on lexicographically smallest subject.
+     */
+    public void sortPersonsByClass() {
+        internalList.sort(Comparator.comparing(person ->
+                person.getSubjects().stream()
+                        .map(Subject::toString)          // Convert each subject to string
+                        .sorted()                        // Sort the subjects lexicographically
+                        .findFirst()                     // Get the lexicographically smallest subject
+                        .orElse("")                      // Handle the case where a person has no subjects
+        ));
+    }
+
 }
