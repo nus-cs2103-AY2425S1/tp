@@ -51,6 +51,24 @@ public class HelpWindow extends UiPart<Stage> {
             "       delete id/ [STUDENT_ID]\n" +
             "   - Example:\n" +
             "       delete id/ 12345678\n" +
+            "\n5. List Students\n" +
+            "   - Purpose: Displays all students currently stored in the address book.\n" +
+            "   - Command Format:\n" +
+            "       list\n" +
+            "   - Example:\n" +
+            "       list\n" +
+            "\n6. Clear Data\n" +
+            "   - Purpose: Clears all student data from the address book.\n" +
+            "   - Command Format:\n" +
+            "       clear\n" +
+            "   - Example:\n" +
+            "       clear\n" +
+            "\n7. Exit Application\n" +
+            "   - Purpose: Exits the application.\n" +
+            "   - Command Format:\n" +
+            "       exit\n" +
+            "   - Example:\n" +
+            "       exit\n" +
             "\n============================================================================================\n" +
             "For more details, refer to the user guide:";
 
