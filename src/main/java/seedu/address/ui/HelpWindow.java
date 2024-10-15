@@ -79,8 +79,6 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     protected Text hyperlinkText;
 
-    private Desktop desktop;
-
     /**
      * Creates a new HelpWindow.
      *
