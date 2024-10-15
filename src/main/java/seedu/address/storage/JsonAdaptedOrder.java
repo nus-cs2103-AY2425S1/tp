@@ -3,7 +3,6 @@ package seedu.address.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 
@@ -30,11 +29,10 @@ class JsonAdaptedOrder {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted person object into the model's {@code Order} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
-    public Order toModelType() throws IllegalValueException {
+    public Order toModelType() {
         return new Order(this.name);
     }
 
