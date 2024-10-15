@@ -29,6 +29,7 @@ import seedu.address.model.tag.Tag;
 import java.util.Arrays;
 import java.util.HashSet;
 
+
 public class ViewStatusCommandTest {
     public final Name amyName = new Name(VALID_NAME_AMY);
     public final Name bobName = new Name(VALID_NAME_BOB);
