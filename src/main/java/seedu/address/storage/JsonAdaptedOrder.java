@@ -26,7 +26,7 @@ class JsonAdaptedOrder {
      * Converts a given {@code Order} into this class for Jackson use.
      */
     public JsonAdaptedOrder(Order order) {
-        name = order.toString();
+        this.name = order.toString();
     }
 
     /**

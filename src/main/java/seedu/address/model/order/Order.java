@@ -21,7 +21,8 @@ public class Order {
             return false;
         }
 
-        return this.name.equals(((Order) rhs).name);
+        Order other = (Order) rhs;
+        return this.name.equals(other.name);
     }
 
     @Override

@@ -10,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.order.exceptions.DuplicateOrderException;
 import seedu.address.model.order.exceptions.OrderNotFoundException;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
  * A list of orders that enforces uniqueness between its elements and does not allow nulls.
@@ -64,8 +63,8 @@ public class UniqueOrderList implements Iterable<Order> {
      */
     public void setOrders(List<Order> orders) {
         requireAllNonNull(orders);
-        if (!personsAreUnique(orders)) {
-            throw new DuplicatePersonException();
+        if (!ordersAreUnique(orders)) {
+            throw new DuplicateOrderException();
         }
 
         internalList.setAll(orders);
@@ -111,7 +110,7 @@ public class UniqueOrderList implements Iterable<Order> {
     /**
      * Returns true if {@code persons} contains only unique persons.
      */
-    private boolean personsAreUnique(List<Order> orders) {
+    private boolean ordersAreUnique(List<Order> orders) {
         for (int i = 0; i < orders.size() - 1; i++) {
             for (int j = i + 1; j < orders.size(); j++) {
                 if (orders.get(i).equals(orders.get(j))) {
