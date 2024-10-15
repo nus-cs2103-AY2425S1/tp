@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
  * Represents a date in the system.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public class Date {
+public class SessionDate {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Dates should be in the format dd MMM yyyy (e.g. 24 Sep 2024)";
@@ -26,7 +26,7 @@ public class Date {
      *
      * @param date A valid date string.
      */
-    public Date(String date) {
+    public SessionDate(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
         fullDate = parseDate(date);
@@ -67,11 +67,11 @@ public class Date {
             return true;
         }
 
-        if (!(other instanceof Date)) {
+        if (!(other instanceof SessionDate)) {
             return false;
         }
 
-        Date otherDate = (Date) other;
+        SessionDate otherDate = (SessionDate) other;
         return fullDate.equals(otherDate.fullDate);
     }
 
