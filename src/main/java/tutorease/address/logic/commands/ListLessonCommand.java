@@ -1,6 +1,7 @@
 package tutorease.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutorease.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 
 import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.model.Model;
@@ -14,7 +15,7 @@ public class ListLessonCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateLessonList(PREDICATE_SHOW_ALL_LESSONS);
-        return CommandResult(MESSAGE_SUCCESS);
+        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }
