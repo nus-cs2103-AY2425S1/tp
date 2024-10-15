@@ -27,7 +27,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Deliverables and deadlines
 * Responsibilities: Project deliverables
-* 
+*
 ### Ng Eswen
 
 <img src="images/solomon0519.png" width="200px">

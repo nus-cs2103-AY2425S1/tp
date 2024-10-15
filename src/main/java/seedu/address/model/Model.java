@@ -92,17 +92,17 @@ public interface Model {
     /**
      * Returns the user prefs' meet up list file path.
      */
-    Path getMeetUpListFilePath();
+    Path getMeetUpListFilePath(); // Remove after refactoring
 
     /**
      * Sets the user prefs' meet up list file path.
      */
-    void setMeetUpListFilePath(Path meetUpListFilePath);
+    void setMeetUpListFilePath(Path meetUpListFilePath); // Remove after refactoring
 
     /**
      * Replaces meet up list data with the data in {@code meetUpList}.
      */
-    void setMeetUpList(ReadOnlyMeetUpList meetUpList);
+    void setMeetUpList(ReadOnlyMeetUpList meetUpList); // Remove after refactoring
 
     /** Returns the MeetUpList */
     ReadOnlyMeetUpList getMeetUpList();

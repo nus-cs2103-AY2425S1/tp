@@ -54,7 +54,7 @@
             </padding>
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
-          
+
           <!-- Meetup List -->
           <VBox fx:id="meetupList" styleClass="pane-with-border" minWidth="340" prefWidth="340" visible="false">
             <padding>
