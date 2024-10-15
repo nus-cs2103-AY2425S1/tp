@@ -91,7 +91,7 @@ class JsonAdaptedPerson {
         final Phone modelPhone;
         final Email modelEmail;
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        final Set<RentalInformation> modelRentalInformation = new HashSet<>(personRentalInformation);
+        final List<RentalInformation> modelRentalInformation = new ArrayList<>(personRentalInformation);
 
         if (phone == null) {
             if (!Email.isValidEmail(email)) {

@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -102,7 +103,7 @@ public class EditClientCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(clientToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(clientToEdit.getEmail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(clientToEdit.getTags());
-        Set<RentalInformation> updatedRentalInformationList = editPersonDescriptor.getRentalInformationList()
+        List<RentalInformation> updatedRentalInformationList = editPersonDescriptor.getRentalInformationList()
                 .orElse(clientToEdit.getRentalInformation());
 
         return new Client(updatedName, updatedPhone, updatedEmail, updatedTags, updatedRentalInformationList);
@@ -141,7 +142,7 @@ public class EditClientCommand extends Command {
         private Phone phone;
         private Email email;
         private Set<Tag> tags;
-        private Set<RentalInformation> rentalInformationList;
+        private List<RentalInformation> rentalInformationList;
 
         public EditPersonDescriptor() {
         }
@@ -206,7 +207,7 @@ public class EditClientCommand extends Command {
         }
 
         public void setRentalInformationList(Set<RentalInformation> rentalInformationList) {
-            this.rentalInformationList = (rentalInformationList != null) ? new HashSet<>(rentalInformationList) : null;
+            this.rentalInformationList = (rentalInformationList != null) ? new ArrayList<>(rentalInformationList) : null;
         }
 
         /**
@@ -214,9 +215,9 @@ public class EditClientCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
-        public Optional<Set<RentalInformation>> getRentalInformationList() {
+        public Optional<List<RentalInformation>> getRentalInformationList() {
             return (rentalInformationList != null)
-                    ? Optional.of(Collections.unmodifiableSet(rentalInformationList))
+                    ? Optional.of(Collections.unmodifiableList(rentalInformationList))
                     : Optional.empty();
         }
 
