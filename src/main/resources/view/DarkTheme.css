@@ -99,16 +99,17 @@
     -fx-graphic-text-gap : 5;
     -fx-padding: 5 2 5 2;
     -fx-background-color: #fdf5f5;
+    -fx-background-radius: 5;
 }
 
 .list-cell:filled:even {
     -fx-border-color: derive(#757575, 90%);
-    -fx-background-color: #fdf5f5;
+    -fx-background-color: white;
 }
 
 .list-cell:filled:odd {
     -fx-border-color: derive(#757575, 90%);
-    -fx-background-color: #fdf5f5;
+    -fx-background-color: white;
 }
 
 .list-cell:filled:selected {
@@ -138,20 +139,18 @@
 }
 
 .stack-pane {
-     -fx-background-color: #FFE7E7;
-     -fx-padding: 10px;
+     -fx-background-color: #fdf5f5;
+     /*-fx-padding: 10px;*/
 }
 
 .pane-with-border {
-     /*-fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);*/
      -fx-background-color: #FDF5F5;
      -fx-border-color: #FDF5F5;
      -fx-border-top-width: 1px;
 }
 
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: #F3EDF7;
 }
 
 .result-display {
@@ -167,7 +166,7 @@
 
 .status-bar .label {
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-text-fill: #5B4A82;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
 }
@@ -193,16 +192,39 @@
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: #F3EDF7;
 }
 
 .context-menu .label {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
+}
+
+.menu {
+    -fx-background-color: transparent;
+}
+
+.menu:hover {
+    -fx-background-color: #D0BDF2;
+}
+
+.menu:selected {
+    -fx-background-color: #D0BDF2;
+}
+
+.menu-item {
+    -fx-background-color: transparent;
+}
+
+.menu-item:hover {
+    -fx-background-color: #D0BDF2;
+}
+
+.menu-item:selected {
+    -fx-background-color: #D0BDF2;
 }
 
 .menu-bar {
-    /*-fx-background-color: derive(#1d1d1d, 20%);*/
-    -fx-background-color: #FDF7FE;
+    -fx-background-color: #F3EDF7;
 }
 
 .menu-bar .label {
@@ -210,59 +232,6 @@
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: #5B4A82;
     -fx-opacity: 0.9;
-}
-
-.menu .left-container {
-    -fx-background-color: black;
-}
-
-/*
- * Metro style Push Button
- * Author: Pedro Duque Vieira
- * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
- */
-.button {
-    -fx-padding: 5 22 5 22;
-    -fx-border-color: #e2e2e2;
-    -fx-border-width: 2;
-    -fx-background-radius: 0;
-    -fx-background-color: #1d1d1d;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 11pt;
-    -fx-text-fill: #d8d8d8;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
-}
-
-.button:hover {
-    -fx-background-color: #3a3a3a;
-}
-
-.button:pressed, .button:default:hover:pressed {
-  -fx-background-color: white;
-  -fx-text-fill: #1d1d1d;
-}
-
-.button:focused {
-    -fx-border-color: white, white;
-    -fx-border-width: 1, 1;
-    -fx-border-style: solid, segments(1, 1);
-    -fx-border-radius: 0, 0;
-    -fx-border-insets: 1 1 1 1, 0;
-}
-
-.button:disabled, .button:default:disabled {
-    -fx-opacity: 0.4;
-    -fx-background-color: #1d1d1d;
-    -fx-text-fill: white;
-}
-
-.button:default {
-    -fx-background-color: -fx-focus-color;
-    -fx-text-fill: #ffffff;
-}
-
-.button:default:hover {
-    -fx-background-color: derive(-fx-focus-color, 30%);
 }
 
 .dialog-pane {
@@ -291,7 +260,7 @@
 }
 
 .scroll-bar {
-    -fx-background-color: e8def8
+    -fx-background-color: #e8def8;
 }
 
 .scroll-bar .thumb {
@@ -329,9 +298,11 @@
 #inputContainer {
     -fx-background-color: #F3EDF7;
     -fx-padding: 5;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
+    -fx-border-radius: 0 0 10 10;
+    -fx-background-radius: 0 0 10 10;
+    -fx-border-color: derive(#757575, 90%);
 }
+
 #commandTextField {
     -fx-background-color: transparent #383838 transparent #383838;
     -fx-background-insets: 0;
@@ -365,8 +336,10 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #F2EDF6, transparent, #F2EDF6;
-    -fx-background-radius: 0;
+    -fx-background-color: #F2EDF6;
+    -fx-background-radius: 10 10 0 0;
+    -fx-border-radius: 10 10 0 0;
+    -fx-border-color: derive(#757575, 90%);
 }
 
 #tags {
