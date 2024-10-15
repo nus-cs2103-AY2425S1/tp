@@ -22,6 +22,12 @@ public class StatisticsCommand extends Command {
 
     public static final String MESSAGE_DISPLAY_STATISTICS_SUCCESS = "Here are all the statistics:\n%s";
 
+    public static final String MESSAGE_DISPLAY_TOTAL_PEOPLE = "Total Number Of People: %s";
+    public static final String MESSAGE_DISPLAY_HIGH_PRIORITY = "Number Of HIGH Priority People: %s";
+    public static final String MESSAGE_DISPLAY_MEDIUM_PRIORITY = "Number Of MEDIUM Priority People: %s";
+    public static final String MESSAGE_DISPLAY_LOW_PRIORITY = "Number Of LOW Priority People: %s";
+    public static final String MESSAGE_LACK_PRIORITY = "Each person should have a priority";
+
     /**
      * Displays all the overall statistics to be shown.
      *
@@ -37,21 +43,32 @@ public class StatisticsCommand extends Command {
         int mediumPriority = 0;
         int lowPriority = 0;
         String[] allStats = new String[4];
-        allStats[0] = String.format("Total Nb Of People: %s", nbOfPeople);
-        allStats[1] = String.format("Number Of HIGH Priority People: %s", highPriority);
-        allStats[2] = String.format("Number Of MEDIUM Priority People: %s", mediumPriority);
-        allStats[3] = String.format("Number Of LOW Priority People: %s", lowPriority);
+        allStats[0] = String.format(MESSAGE_DISPLAY_TOTAL_PEOPLE, nbOfPeople);
+        allStats[1] = String.format(MESSAGE_DISPLAY_HIGH_PRIORITY, highPriority);
+        allStats[2] = String.format(MESSAGE_DISPLAY_MEDIUM_PRIORITY, mediumPriority);
+        allStats[3] = String.format(MESSAGE_DISPLAY_LOW_PRIORITY, lowPriority);
         for (int i = 0; i < nbOfPeople; i++) {
-            Priority prior = lastShownList.get(i).getPriority();
-            if (prior == Priority.HIGH) {
+            Priority pri = lastShownList.get(i).getPriority();
+
+            switch (pri) {
+
+            case HIGH:
                 highPriority++;
                 allStats[1] = String.format("Number Of HIGH Priority People: %s", highPriority);
-            } else if (prior == Priority.MEDIUM) {
+                break;
+
+            case MEDIUM:
                 mediumPriority++;
                 allStats[2] = String.format("Number Of MEDIUM Priority People: %s", mediumPriority);
-            } else if (prior == Priority.LOW) {
+                break;
+
+            case LOW:
                 lowPriority++;
                 allStats[3] = String.format("Number Of LOW Priority People: %s", lowPriority);
+                break;
+
+            default:
+                throw new CommandException(MESSAGE_LACK_PRIORITY);
             }
         }
         for (int i = 0; i < allStats.length; i++) {
