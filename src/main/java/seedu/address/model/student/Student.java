@@ -35,18 +35,16 @@ public class Student extends Person {
     // Identity fields
     private final TutorialGroup tutorialGroup;
     private final StudentNumber studentNumber;
-    private final ArrayList<Assignment> assignments;
+    private final ArrayList<Assignment> assignments = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, TutorialGroup tutorialGroup, StudentNumber studentNumber,
-                   ArrayList<Assignment> assignments) {
+    public Student(Name name, Phone phone, TutorialGroup tutorialGroup, StudentNumber studentNumber) {
         super(name, phone, DUMMY_EMAIL, DUMMY_ADDRESS, DUMMY_TAG);
-        requireAllNonNull(tutorialGroup, studentNumber, assignments);
+        requireAllNonNull(tutorialGroup, studentNumber);
         this.tutorialGroup = tutorialGroup;
         this.studentNumber = studentNumber;
-        this.assignments = assignments;
     }
 
     public TutorialGroup getTutorialGroup() {

@@ -44,7 +44,7 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         TutorialGroup tutorialGroup = ParserUtil.parseTutorialGroup(argMultimap.getValue(PREFIX_TUTORIAL_GROUP).get());
         StudentNumber studentNumber = ParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
 
-        Student student = new Student(name, phone, tutorialGroup, studentNumber, new ArrayList<>());
+        Student student = new Student(name, phone, tutorialGroup, studentNumber);
         return new AddStudentCommand(student);
     }
 
