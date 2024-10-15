@@ -147,16 +147,6 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    // Setter for HelpWindow to allow injection in tests
-    public void setHelpWindow(HelpWindow helpWindow) {
-        this.helpWindow = helpWindow;
-    }
-
-    // Getter for HelpWindow to verify behavior in tests
-    public HelpWindow getHelpWindow() {
-        return helpWindow;
-    }
-
     void show() {
         primaryStage.show();
     }
