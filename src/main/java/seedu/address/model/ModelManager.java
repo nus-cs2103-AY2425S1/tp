@@ -107,8 +107,13 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+    }
+    
+    @Override
+    public void deleteAppointment(Person target) {
+        requireNonNull(target);
+        addressBook.deleteAppointment(target);
     }
 
     //=========== Filtered Person List Accessors =============================================================

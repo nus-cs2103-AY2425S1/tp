@@ -25,7 +25,7 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Schedule schedule;
+    private Schedule schedule;
     private final Reminder reminder;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -100,6 +100,13 @@ public class Person {
         LocalDateTime appointmentDateTime = LocalDateTime.parse(schedule.dateTime,
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         return appointmentDateTime.isAfter(now);
+    }
+    
+    /**
+     * Removes the appointment of the person by setting the schedule to an empty string.
+     */
+    public void removeAppointment() {
+        schedule = new Schedule("");
     }
 
     /**

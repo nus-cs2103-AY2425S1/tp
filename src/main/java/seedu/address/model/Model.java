@@ -79,6 +79,11 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /**
+     * Deletes the scheduled appointment of the given {@code target}.
+     * {@code target} must exist in the address book.
+     */
+    void deleteAppointment(Person target);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

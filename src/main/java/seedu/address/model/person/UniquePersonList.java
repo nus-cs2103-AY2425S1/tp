@@ -78,7 +78,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new PersonNotFoundException();
         }
     }
-
+    
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -95,6 +95,20 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    /**
+     * Deletes the appointment of the given person.
+     * The person must exist in the list.
+     */
+    public void deleteAppointment(Person target) {
+        requireNonNull(target);
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+        
+        internalList.get(index).removeAppointment();
     }
 
     /**
