@@ -25,7 +25,7 @@ public class ExportCommand extends Command {
     public CommandResult execute(Model model) {
         List<Person> personList = model.getPersonList();
         try {
-            File file = createCSVFile();
+            File file = createCsvFile();
             exportContacts(file, personList);
         } catch (IOException e) {
             e.printStackTrace();
