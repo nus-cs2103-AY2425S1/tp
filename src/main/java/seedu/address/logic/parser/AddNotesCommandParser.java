@@ -35,8 +35,8 @@ public class AddNotesCommandParser implements Parser<AddNotesCommand> {
         }
 
         String noteName = argMultimap.getValue(PREFIX_NOTES).get();
-        ParserUtil.parseNote(noteName);
-        Note note = new Note(noteName);
+
+        Note note = ParserUtil.parseNote(noteName);
 
         return new AddNotesCommand(index, note);
     }
