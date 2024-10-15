@@ -36,7 +36,13 @@ public class TagCommandParser implements Parser<TagCommand> {
 
         Index index = ParserUtil.parseIndex(multimap.getPreamble());
         String tags = multimap.getValue(PREFIX_TAG).orElse("");
-        Set<Tag> tagSet = Tag.stringToTagSet(tags);
+
+        Set<Tag> tagSet;
+        try {
+            tagSet = Tag.stringToTagSet(tags);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, e.getMessage()));
+        }
 
         // If t/ prefix is followed by empty string
         if (tagSet.isEmpty()) {
