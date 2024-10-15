@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalStudents.AMY;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,6 +32,7 @@ import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.Student;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonAssignmentStorage;
+import seedu.address.storage.JsonTutorialStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.StudentBuilder;
@@ -52,7 +54,9 @@ public class LogicManagerTest {
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         JsonAssignmentStorage assignmentStorage =
                 new JsonAssignmentStorage(temporaryFolder.resolve("assignments.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, assignmentStorage);
+        JsonTutorialStorage tutorialStorage = new JsonTutorialStorage(temporaryFolder.resolve("tutorials.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage,
+                assignmentStorage, tutorialStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -127,7 +131,8 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new AssignmentList());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
+                new AssignmentList(), new ArrayList<>());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -166,7 +171,9 @@ public class LogicManagerTest {
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
         JsonAssignmentStorage jsonAssignmentStorage =
                 new JsonAssignmentStorage(temporaryFolder.resolve("assignments.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, jsonAssignmentStorage);
+        JsonTutorialStorage tutorialStorage = new JsonTutorialStorage(temporaryFolder.resolve("tutorials.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage,
+                jsonAssignmentStorage, tutorialStorage);
 
         logic = new LogicManager(model, storage);
 

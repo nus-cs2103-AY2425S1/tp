@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -92,7 +93,10 @@ public interface Model {
 
     boolean hasTutorial(Tut tutorial);
     void addTutorial(Tut toAdd);
-
+    /**
+     * Returns the List of Tut
+     */
+    List<Tut> getTutorialList();
 
     /** Returns the AssignmentList */
     AssignmentList getAssignmentList();

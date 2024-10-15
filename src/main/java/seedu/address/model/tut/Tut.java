@@ -83,6 +83,9 @@ public class Tut {
     public boolean isValidTutorialDate(TutDate tutorialDate) {
         return tutorialDate.isValid();
     }
+    public List<TutDate> getTutDates() {
+        return tutDates;
+    }
 
     /**
      *  Marks the attendance for the student for the particular tutorialDate
@@ -101,6 +104,26 @@ public class Tut {
     }
     private boolean studentInList(Student student) {
         return students.contains(student);
+    }
+    /**
+     * Checks if two tutorials have the same id and name, primarily used for checking duplicates.
+     */
+    //TODO: Check duplicates
+    public boolean equalsTutorial(Tut other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Tut)) {
+            return false;
+        }
+
+        Tut otherTutorial = (Tut) other;
+        return tutorialClass.equals(otherTutorial.tutorialClass)
+                && tutDates.equals(otherTutorial.tutDates)
+                && tutName.equals(otherTutorial.tutName)
+                && students.equals(otherTutorial.students);
     }
 
     @Override

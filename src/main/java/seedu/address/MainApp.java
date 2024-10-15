@@ -2,6 +2,8 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -22,14 +24,17 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.AssignmentList;
+import seedu.address.model.tut.Tut;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.AssignmentStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonAssignmentStorage;
+import seedu.address.storage.JsonTutorialStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.TutorialStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
@@ -62,7 +67,8 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         AssignmentStorage assignmentStorage = new JsonAssignmentStorage(userPrefs.getAssignmentFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage, assignmentStorage);
+        TutorialStorage tutorialStorage = new JsonTutorialStorage(userPrefs.getTutorialFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, assignmentStorage, tutorialStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -83,6 +89,7 @@ public class MainApp extends Application {
         ReadOnlyAddressBook initialData;
         Optional<AssignmentList> assignmentListOptional;
         AssignmentList assignmentData;
+        List<Tut> tutorialData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -97,14 +104,22 @@ public class MainApp extends Application {
                         + " populated with empty assignment list.");
             }
             assignmentData = assignmentListOptional.orElseGet(AssignmentList::new);
+            //TODO: Convert List<Tut> to TutorialList
+            Optional<List<Tut>> tutorialListOptional = storage.readTutorials();
+            if (!tutorialListOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getTutorialFilePath()
+                        + " populated with empty tutorial list.");
+            }
+            tutorialData = tutorialListOptional.orElseGet(() -> new ArrayList<Tut>());
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
             assignmentData = new AssignmentList();
+            tutorialData = new ArrayList<Tut>();
         }
 
-        return new ModelManager(initialData, userPrefs, assignmentData);
+        return new ModelManager(initialData, userPrefs, assignmentData, tutorialData);
     }
 
     private void initLogging(Config config) {
