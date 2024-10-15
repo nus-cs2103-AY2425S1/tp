@@ -4,6 +4,7 @@
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
+    "nric": "S1234567A",
     "address" : "123, Jurong West Ave 6, #08-111",
     "remark" : "",
     "tags" : [ "friends" ]
@@ -11,6 +12,7 @@
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
+    "nric": "S1234567B",
     "address" : "311, Clementi Ave 2, #02-25",
     "remark" : "",
     "tags" : [ "owesMoney", "friends" ]
@@ -18,6 +20,7 @@
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
+    "nric": "S1234567C",
     "address" : "wall street",
     "remark" : "",
     "tags" : [ ]
@@ -25,6 +28,7 @@
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
+    "nric": "S1234567D",
     "address" : "10th street",
     "remark" : "",
     "tags" : [ "friends" ]
@@ -32,6 +36,7 @@
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
+    "nric": "S1234567E",
     "address" : "michegan ave",
     "remark" : "",
     "tags" : [ ]
@@ -39,6 +44,7 @@
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
+    "nric": "S1234567F",
     "address" : "little tokyo",
     "remark" : "",
     "tags" : [ ]
@@ -46,6 +52,7 @@
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
+    "nric": "S1234567G",
     "address" : "4th street",
     "remark" : "",
     "tags" : [ ]
