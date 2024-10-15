@@ -87,5 +87,7 @@ public class AgeTest {
             Age age2 = entry.getValue();
             assertNotEquals(age1, age2);
         }
+
+        assertNotEquals(new Age(30), Integer.valueOf(30));
     }
 }
