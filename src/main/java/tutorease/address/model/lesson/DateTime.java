@@ -7,7 +7,6 @@ import static tutorease.address.commons.util.DateTimeUtil.getDateTimeFormat;
 import static tutorease.address.commons.util.DateTimeUtil.isValidDateTime;
 
 import java.time.LocalDateTime;
-import tutorease.address.commons.util.DateTimeUtil;
 
 /**
  * Represents a DateTime in the address book.
