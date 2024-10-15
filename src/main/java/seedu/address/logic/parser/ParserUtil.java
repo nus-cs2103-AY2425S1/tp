@@ -62,7 +62,6 @@ public class ParserUtil {
      * @throws ParseException if the given {@code phone} is invalid.
      */
     public static Phone parsePhone(String phone) throws ParseException {
-//        requireNonNull(phone);
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhoneForEdit(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);

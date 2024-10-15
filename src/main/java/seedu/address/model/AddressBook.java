@@ -95,6 +95,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Checks if the given {@code RentalInformation} is in the list of rental information of the given {@code Client}.
+     *
+     * @return {@code true} if the given {@code Client} has the given {@code RentalInformation},
+     *         {@code false} otherwise.
+     */
     public boolean hasRentalInformation(Client client, RentalInformation rentalInformation) {
         requireNonNull(client);
         requireNonNull(rentalInformation);

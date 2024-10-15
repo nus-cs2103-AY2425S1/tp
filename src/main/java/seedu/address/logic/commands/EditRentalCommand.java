@@ -119,14 +119,15 @@ public class EditRentalCommand extends Command {
      * Creates and returns a {@code Client} with the details of {@code clientToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Client createEditedPerson(Index index, Client clientToEdit, EditRentalDescriptor editRentalDescriptor) {
+    private static Client createEditedPerson(Index index, Client clientToEdit,
+                                             EditRentalDescriptor editRentalDescriptor) {
         assert clientToEdit != null;
 
         Name clientName = clientToEdit.getName();
         Phone clientPhone = clientToEdit.getPhone();
         Email clientEmail = clientToEdit.getEmail();
         Set<Tag> clientTags = clientToEdit.getTags();
-        List<RentalInformation> updatedRentalInformationList = EditRentalDescriptor.updateRentalInformationList(index,
+        List<RentalInformation> updatedRentalInformationList = EditRentalDescriptor.updateRentalInformation(index,
                 clientToEdit.getRentalInformation(), editRentalDescriptor);
 
         return new Client(clientName, clientPhone, clientEmail, clientTags, updatedRentalInformationList);
@@ -195,9 +196,19 @@ public class EditRentalCommand extends Command {
                     deposit, customerList);
         }
 
-        public static List<RentalInformation> updateRentalInformationList(Index index,
-                                                                         List<RentalInformation> currentList,
-                                                                         EditRentalDescriptor editRentalDescriptor) {
+        /**
+         * Edits the rental information at the given index in the given list
+         * with the given {@code EditRentalDescriptor}.
+         * Returns the updated list of rental information.
+         *
+         * @param index index of the rental information to edit
+         * @param currentList list of rental information
+         * @param editRentalDescriptor descriptor to edit the rental information with
+         * @return updated list, with the edited rental information
+         */
+        public static List<RentalInformation> updateRentalInformation(Index index,
+                                                                      List<RentalInformation> currentList,
+                                                                      EditRentalDescriptor editRentalDescriptor) {
             List<RentalInformation> newList = new ArrayList<>(currentList);
             RentalInformation targetRentalInformation = newList.get(index.getZeroBased());
             RentalInformation editRentalInformation = editRentalDescriptor.getRentalInformationEquivalent(

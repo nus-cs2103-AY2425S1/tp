@@ -12,8 +12,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RENTAL_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RENT_DUE_DATE;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditRentalCommand.EditRentalDescriptor;
 import seedu.address.logic.commands.EditRentalCommand;
+import seedu.address.logic.commands.EditRentalCommand.EditRentalDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

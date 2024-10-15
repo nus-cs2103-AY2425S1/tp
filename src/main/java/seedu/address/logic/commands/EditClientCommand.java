@@ -50,7 +50,8 @@ public class EditClientCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Client: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This client already exists in the address book.";
-    public static final String MESSAGE_EMPTY_PHONE_EMAIL = "This client must either have a phone number or email address.";
+    public static final String MESSAGE_EMPTY_PHONE_EMAIL = "This client must either have a phone number "
+            + "or email address.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -207,7 +208,9 @@ public class EditClientCommand extends Command {
         }
 
         public void setRentalInformationList(Set<RentalInformation> rentalInformationList) {
-            this.rentalInformationList = (rentalInformationList != null) ? new ArrayList<>(rentalInformationList) : null;
+            this.rentalInformationList = (rentalInformationList != null)
+                                         ? new ArrayList<>(rentalInformationList)
+                                         : null;
         }
 
         /**

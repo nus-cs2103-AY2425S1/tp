@@ -26,6 +26,10 @@ public class FindCommand extends Command {
     private final PhoneContainsKeywordsPredicate phonePredicate;
     private final EmailContainsKeywordsPredicate emailPredicate;
 
+    /**
+     * Constructs a {@code FindCommand} with the given name, phone and email predicates.
+     * The command will find all clients whose name, phone and email matches the predicates.
+     */
     public FindCommand(NameContainsKeywordsPredicate namePredicate, PhoneContainsKeywordsPredicate phonePredicate,
                        EmailContainsKeywordsPredicate emailPredicate) {
         this.namePredicate = namePredicate;
