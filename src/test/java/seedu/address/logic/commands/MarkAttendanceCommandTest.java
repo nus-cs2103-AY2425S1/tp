@@ -19,6 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -30,18 +31,16 @@ public class MarkAttendanceCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToMarkAttendance = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person markedPerson = new Person(
-                personToMarkAttendance.getName(), personToMarkAttendance.getPhone(),
-                personToMarkAttendance.getEmail(), personToMarkAttendance.getAddress(),
-                personToMarkAttendance.getPayment(), personToMarkAttendance.getTags());
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(INDEX_FIRST_PERSON);
+        Person personToMarkAttendance = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        assertFalse(personToMarkAttendance.getAttendance().isPresent);
+        Person markedPerson = new PersonBuilder(personToMarkAttendance).withAttendance(true).build();
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(INDEX_SECOND_PERSON);
 
         String expectedMessage = String.format(MarkAttendanceCommand.MESSAGE_MARK_ATTENDANCE_SUCCESS,
-                Messages.format(personToMarkAttendance));
+                Messages.format(markedPerson));
 
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), markedPerson);
+        expectedModel.setPerson(model.getFilteredPersonList().get(1), markedPerson);
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
     }
 
@@ -55,13 +54,11 @@ public class MarkAttendanceCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_SECOND_PERSON);
 
         Person personToMarkAttendance = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person markedPerson = new Person(
-                personToMarkAttendance.getName(), personToMarkAttendance.getPhone(),
-                personToMarkAttendance.getEmail(), personToMarkAttendance.getAddress(),
-                personToMarkAttendance.getPayment(), personToMarkAttendance.getTags());
+        assertFalse(personToMarkAttendance.getAttendance().isPresent);
+        Person markedPerson = new PersonBuilder(personToMarkAttendance).withAttendance(true).build();
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(MarkAttendanceCommand.MESSAGE_MARK_ATTENDANCE_SUCCESS,
