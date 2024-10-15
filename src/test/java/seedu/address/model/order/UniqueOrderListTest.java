@@ -54,4 +54,12 @@ class UniqueOrderListTest {
         UniqueOrderList list = new UniqueOrderList();
         assertThrows(OrderNotFoundException.class, () -> list.remove(new Order("cake")));
     }
+
+    @Test
+    void toStringMethod() {
+        UniqueOrderList list = new UniqueOrderList();
+        list.add(new Order("cake"));
+        list.add(new Order("pizza"));
+        assertEquals(list.asUnmodifiableObservableList().toString(), list.toString());
+    }
 }

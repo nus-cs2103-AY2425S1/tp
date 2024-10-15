@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -24,5 +26,29 @@ class DeleteOrderCommandTest {
         expectedModel.removeOrder(new Order(name));
         assertCommandSuccess(new DeleteOrderCommand(name), model,
                 String.format(DeleteOrderCommand.MESSAGE_SUCCESS, name), expectedModel);
+    }
+
+    @Test
+    void equals() {
+        String firstOrderName = "cake";
+        String secondOrderName = "pizza";
+        DeleteOrderCommand first = new DeleteOrderCommand(firstOrderName);
+        DeleteOrderCommand second = new DeleteOrderCommand(secondOrderName);
+
+        // same object -> returns true
+        assertTrue(first.equals(first));
+
+        // same values -> returns true
+        DeleteOrderCommand firstCopy = new DeleteOrderCommand(firstOrderName);
+        assertTrue(first.equals(firstCopy));
+
+        // different types -> returns false
+        assertFalse(first.equals(1));
+
+        // null -> returns false
+        assertFalse(first.equals(null));
+
+        // different person -> returns false
+        assertFalse(first.equals(second));
     }
 }

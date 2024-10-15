@@ -35,5 +35,4 @@ class JsonAdaptedOrder {
     public Order toModelType() {
         return new Order(this.name);
     }
-
 }
