@@ -40,6 +40,9 @@ public class HelpWindow extends UiPart<Stage> {
             + "- Format: findtag TAG [MORE_TAGS]\n"
             + "- Example: findtag HDB Condo\n"
             + "- Items in the [square brackets] are optional.";
+    private static final String HELP_EXIT_COMMAND = "Exit Command\n"
+            + "- Format: exit\n"
+            + "- Example: exit";
     private static final String HELP_MORE_INFORMATION = "For more detailed information, "
             + "- visit the PROperty User Guide at: https://ay2425s1-cs2103t-f15-3.github.io/tp/UserGuide.html";
 
@@ -58,12 +61,14 @@ public class HelpWindow extends UiPart<Stage> {
             + "\n\n"
             + HELP_FINDTAG_COMMAND
             + "\n\n"
+            + HELP_EXIT_COMMAND
+            + "\n\n"
             + HELP_MORE_INFORMATION;
 
     private static final double DEFAULT_WIDTH = 800;
     private static final double DEFAULT_HEIGHT = 650;
     private static final double MIN_WIDTH = 800;
-    private static final double MIN_HEIGHT = 650;
+    private static final double MIN_HEIGHT = 700;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -83,7 +88,6 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
         setWindowDefaultSize(root);
-
     }
 
     /**
