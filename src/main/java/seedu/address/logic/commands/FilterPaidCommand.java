@@ -18,9 +18,6 @@ public class FilterPaidCommand extends Command {
             + "Parameters: HASPAID\n"
             + "Example: " + COMMAND_WORD + " true";
 
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET =
-            "FilterPaidCommand not implemented yet";
-
     private final StudentHasPaidPredicate predicate;
 
     public FilterPaidCommand(StudentHasPaidPredicate predicate) {
