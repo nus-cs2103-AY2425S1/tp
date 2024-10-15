@@ -159,6 +159,23 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Filtering persons by tags : `filter`
+
+Filters all persons whose tags contain any of the specified keywords. The filtering is case-insensitive.
+
+Format: `filter KEYWORD [MORE_KEYWORDS]...`
+
+* Filters all persons whose tags contain any of the specified keywords.
+* The search is case-insensitive. e.g `friend` will match `Friend`
+* The order of the keywords does not matter. e.g. `friend colleague` will match `colleague friend`
+* Only full words will be matched e.g. `col` will not match `colleague`
+
+Example: `filter friends family` Lists all persons in the address book whose tags match any of the specified keywords.
+
+**Change Highlight**:
+- Added the **filter** command to the list of available commands.
+- Detailed usage and example of the **filter** command added.
+
 ### Exiting the program : `exit`
 
 Exits the program.
