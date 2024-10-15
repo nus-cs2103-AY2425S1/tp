@@ -13,3 +13,4 @@ github_icon: "images/github-icon.png"
 
 plugins:
   - jemoji
+  - jekyll-toc
