@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSES;
@@ -29,6 +30,9 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new AddStudentCommand object
  */
 public class AddStudentCommandParser implements Parser<AddStudentCommand> {
+
+    private static final String CLASS_NAME_VALIDATION_REGEX = "[A-Za-z0-9]+";
+    private static final String MESSAGE_INVALID_CLASS = "Classes should be valid!";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddStudentCommand
@@ -73,11 +77,29 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
      * Parses the classes string (comma-separated) and returns a set of class names.
      */
     private Set<String> parseClasses(String classes) throws ParseException {
+        requireNonNull(classes);
+
         Set<String> classSet = new HashSet<>();
         String[] classArray = classes.split(",");
+
         for (String className : classArray) {
-            classSet.add(className.trim()); // Trim to remove unnecessary spaces
+            String trimmedClassName = className.trim(); // Trim to remove unnecessary spaces
+
+            // Validate each class name
+            if (!isValidClassName(trimmedClassName)) {
+                throw new ParseException(MESSAGE_INVALID_CLASS);
+            }
+
+            classSet.add(trimmedClassName);
         }
+
         return classSet;
+    }
+
+    /**
+     * Validates a class name.
+     */
+    private boolean isValidClassName(String className) {
+        return className.matches(CLASS_NAME_VALIDATION_REGEX);
     }
 }

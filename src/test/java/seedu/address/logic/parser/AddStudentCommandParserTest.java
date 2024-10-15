@@ -7,13 +7,18 @@ import static seedu.address.logic.commands.CommandTestUtil.CLASSES_DESC_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.CLASSES_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CLASSES_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SUBJECT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_MICHAEL;
@@ -33,11 +38,15 @@ import static seedu.address.testutil.TypicalPersons.CHRIS;
 import static seedu.address.testutil.TypicalPersons.MICHAEL;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.Subject;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddStudentCommandParserTest {
@@ -109,18 +118,46 @@ public class AddStudentCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_MICHAEL + EMAIL_DESC_MICHAEL
-                        + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL + CLASSES_DESC_MICHAEL + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                Name.MESSAGE_CONSTRAINTS);
+                        + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL
+                        + CLASSES_DESC_MICHAEL + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_MICHAEL + INVALID_PHONE_DESC + EMAIL_DESC_MICHAEL
-                        + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL + CLASSES_DESC_MICHAEL + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                Phone.MESSAGE_CONSTRAINTS);
+                        + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL + CLASSES_DESC_MICHAEL
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_MICHAEL + PHONE_DESC_MICHAEL + INVALID_EMAIL_DESC
-                        + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL + CLASSES_DESC_MICHAEL + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                Email.MESSAGE_CONSTRAINTS);
-        
+                        + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL + CLASSES_DESC_MICHAEL
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+
+        // invalid address
+        assertParseFailure(parser, NAME_DESC_MICHAEL + PHONE_DESC_MICHAEL + EMAIL_DESC_MICHAEL
+                        + INVALID_ADDRESS_DESC + SUBJECT_DESC_MICHAEL + CLASSES_DESC_MICHAEL
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+
+        // invalid subject
+        assertParseFailure(parser, NAME_DESC_MICHAEL + PHONE_DESC_MICHAEL + EMAIL_DESC_MICHAEL
+                        + ADDRESS_DESC_MICHAEL + INVALID_SUBJECT_DESC + CLASSES_DESC_MICHAEL + TAG_DESC_HUSBAND
+                        + TAG_DESC_FRIEND, Subject.MESSAGE_CONSTRAINTS);
+
+        // invalid classes
+        assertParseFailure(parser, NAME_DESC_MICHAEL + PHONE_DESC_MICHAEL + EMAIL_DESC_MICHAEL
+                        + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL + INVALID_CLASSES_DESC
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, "Classes should be valid!");
+
+        // invalid tag
+        assertParseFailure(parser, NAME_DESC_MICHAEL + PHONE_DESC_MICHAEL + EMAIL_DESC_MICHAEL
+                        + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL + CLASSES_DESC_MICHAEL
+                        + INVALID_TAG_DESC + TAG_DESC_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+
+        // two invalid values, only first invalid value reported
+        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_MICHAEL + EMAIL_DESC_MICHAEL
+                + INVALID_ADDRESS_DESC + SUBJECT_DESC_MICHAEL + CLASSES_DESC_MICHAEL, Name.MESSAGE_CONSTRAINTS);
+
+        // non-empty preamble
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_MICHAEL + PHONE_DESC_MICHAEL + EMAIL_DESC_MICHAEL
+                        + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL + CLASSES_DESC_MICHAEL + TAG_DESC_HUSBAND
+                + TAG_DESC_FRIEND, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
     }
 }
