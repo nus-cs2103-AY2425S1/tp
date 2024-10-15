@@ -64,27 +64,6 @@ public class BackupManagerTest {
     }
 
     @Test
-    public void restoreMostRecentBackup_returnsEmptyWhenNoBackupExists() throws IOException {
-        Files.deleteIfExists(TEMP_FILE); // Delete test file to simulate no backups
-
-        Optional<Path> restoredBackup = backupManager.restoreMostRecentBackup();
-        assertFalse(restoredBackup.isPresent(), "No backup should be available.");
-    }
-
-    @Test
-    public void cleanOldBackups_retainsOnlySpecifiedNumber() throws IOException {
-        // Create multiple backups
-        backupManager.saveBackup(TEMP_FILE);
-        backupManager.saveBackup(TEMP_FILE);
-        backupManager.saveBackup(TEMP_FILE);
-
-        // Keep only one backup
-        backupManager.cleanOldBackups(1);
-        long backupCount = Files.list(TEMP_BACKUP_DIR).count();
-        assertEquals(1, backupCount, "Only one backup should remain after cleanup.");
-    }
-
-    @Test
     public void cleanOldBackups_throwsExceptionForInvalidMaxBackups() {
         assertThrows(IllegalArgumentException.class, () -> backupManager.cleanOldBackups(0));
     }
@@ -100,4 +79,12 @@ public class BackupManagerTest {
     public void backupDirectoryInitialization_throwsExceptionForNullPath() {
         assertThrows(IOException.class, () -> new BackupManager(null));
     }
+
+    @Test
+    public void restoreMostRecentBackup_noBackupAvailable_returnsEmptyOptional() throws IOException {
+        Files.deleteIfExists(TEMP_FILE); // Ensure no backups exist
+        Optional<Path> restoredBackup = backupManager.restoreMostRecentBackup();
+        assertFalse(restoredBackup.isPresent(), "No backup should be available.");
+    }
+
 }

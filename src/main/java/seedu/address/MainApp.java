@@ -84,7 +84,7 @@ public class MainApp extends Application {
         return new ModelManager(initialData, userPrefs, storage);
     }
 
-    private void initLogging(Config config) {
+    protected void initLogging(Config config) {
         LogsCenter.init(config);
     }
 

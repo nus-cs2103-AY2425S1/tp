@@ -14,8 +14,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.Config;
 import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -136,4 +139,33 @@ public class MainAppTest {
         ReadOnlyAddressBook restoredAddressBook = addressBookStorage.readAddressBook(restoredBackup.get()).get();
         assertEquals(sampleAddressBook, restoredAddressBook, "Restored address book should match the original.");
     }
+
+    @Test
+    public void init_invalidConfigPath_usesDefaultConfig() throws IOException {
+        Path invalidConfigPath = temporaryFolder.resolve("invalidConfig.json");
+        Files.writeString(invalidConfigPath, "{ invalid json }"); // Corrupt config file
+
+        Config config = mainApp.initConfig(invalidConfigPath);
+        assertNotNull(config, "Default config should be used if the config file is invalid.");
+    }
+
+    @Test
+    public void stop_savesUserPrefsSuccessfully() throws IOException, DataLoadingException {
+        Path userPrefsPath = temporaryFolder.resolve("userprefs.json");
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(userPrefsPath);
+        UserPrefs userPrefs = new UserPrefs();
+        userPrefs.setAddressBookFilePath(temporaryFolder.resolve("addressbook.json"));
+
+        // Initialize storage with valid user preferences
+        Storage storage = new StorageManager(
+                new JsonAddressBookStorage(userPrefs.getAddressBookFilePath()), userPrefsStorage);
+        mainApp.storage = (StorageManager) storage;
+        mainApp.model = new ModelManager(new AddressBook(), userPrefs, storage);
+
+        // Stop the application and ensure user preferences are saved successfully
+        assertDoesNotThrow(() -> mainApp.stop());
+        Optional<UserPrefs> savedPrefs = userPrefsStorage.readUserPrefs();
+        assertTrue(savedPrefs.isPresent(), "User preferences should be saved successfully.");
+    }
+
 }

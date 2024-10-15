@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -12,6 +13,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -233,24 +235,44 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void restoreFromBackup_successfulRestore() throws Exception {
+    public void restoreFromBackup_validBackup_returnsTrue() throws IOException {
         JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(Paths.get("data/addressBook.json"));
+                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
-                new JsonUserPrefsStorage(Paths.get("data/userPrefs.json"));
+                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs(), storage);
-        String backupPath = "data/backup.json";
+        String backupPath = temporaryFolder.resolve("backup.json").toString();
 
-        // Create backup
+        // Backup current state
         modelManager.backupData(backupPath);
 
-        // Modify address book and restore from backup
+        // Modify the address book and restore from backup
         modelManager.addPerson(ALICE);
         boolean restored = modelManager.restoreFromBackup();
         assertTrue(restored, "Backup restoration should be successful.");
-        assertFalse(modelManager.hasPerson(ALICE), "ALICE should not exist after restore.");
+        assertFalse(modelManager.hasPerson(ALICE), "ALICE should not exist after restoring the backup.");
+    }
+
+    @Test
+    public void backupData_withValidStorageAndFilePath_success() throws IOException {
+        Path backupPath = temporaryFolder.resolve("backup.json");
+        assertDoesNotThrow(() -> modelManager.backupData(backupPath.toString()));
+        assertTrue(Files.exists(backupPath), "Backup file should be created successfully.");
+    }
+
+    @Test
+    public void restoreFromBackup_withValidBackup_restoresSuccessfully() throws IOException {
+        // Create backup
+        Path backupPath = temporaryFolder.resolve("backup.json");
+        modelManager.backupData(backupPath.toString());
+
+        // Add a person and restore to verify the restore works
+        modelManager.addPerson(ALICE);
+        boolean restored = modelManager.restoreFromBackup();
+        assertTrue(restored, "Restoration should be successful.");
+        assertFalse(modelManager.hasPerson(ALICE), "Person should not exist after restoration.");
     }
 
 }
