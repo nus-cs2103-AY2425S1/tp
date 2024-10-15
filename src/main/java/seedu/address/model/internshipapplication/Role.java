@@ -13,7 +13,7 @@ public class Role {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Role should only contain alphanumeric characters, single spaces between words, "
-                    + "and should not start or end with spaces or special characters.";
+                    + "and should not start nor end with spaces or special characters.";
 
     /*
      * Roles should start with an alphanumeric character, and can contain single spaces between words.

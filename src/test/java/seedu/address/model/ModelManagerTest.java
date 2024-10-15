@@ -3,7 +3,10 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalInternshipApplications.GOOGLE;
+import static seedu.address.testutil.TypicalInternshipApplications.YAHOO;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -14,18 +17,19 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.internshipapplication.InternshipApplication;
 import seedu.address.model.internshipapplication.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
 
-    private ModelManager modelManager = new ModelManager();
+    private ModelManager<InternshipApplication> modelManager = new ModelManager<InternshipApplication>();
 
     @Test
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new AddressBook<>(), new AddressBook<>(modelManager.getAddressBook()));
     }
 
     @Test
@@ -73,29 +77,29 @@ public class ModelManagerTest {
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> modelManager.hasItem(null));
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+        assertFalse(modelManager.hasItem(GOOGLE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+        modelManager.addItem(GOOGLE);
+        assertTrue(modelManager.hasItem(GOOGLE));
     }
 
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredList().remove(0));
     }
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+        AddressBook<InternshipApplication> addressBook = new AddressBookBuilder().withApplication(GOOGLE).withApplication(YAHOO).build();
+        AddressBook<InternshipApplication> differentAddressBook = new AddressBook<>();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
@@ -115,13 +119,14 @@ public class ModelManagerTest {
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
-        // different filteredList -> returns false
-        String[] keywords = ALICE.getName().getValue().split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+// Todo once FILTER feature is implemented
+//        // different filteredList -> returns false
+//        String[] keywords = GOOGLE.getCompany().getName().getValue().split("\\s+");
+//        modelManager.updateFilteredList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+//        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredList(PREDICATE_SHOW_ALL);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

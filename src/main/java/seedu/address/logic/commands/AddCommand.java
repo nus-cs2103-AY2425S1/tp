@@ -32,7 +32,7 @@ public class AddCommand extends Command<InternshipApplication> {
             + PREFIX_DATE + "16/09/24";
 
     public static final String MESSAGE_SUCCESS = "New internship application added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON =
+    public static final String MESSAGE_DUPLICATE_APPLICATION =
             "This internship application already exists in the address book";
 
     private final InternshipApplication toAdd;
@@ -50,7 +50,7 @@ public class AddCommand extends Command<InternshipApplication> {
         requireNonNull(model);
 
         if (model.hasItem(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_APPLICATION);
         }
 
         model.addItem(toAdd);

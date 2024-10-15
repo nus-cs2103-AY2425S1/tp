@@ -55,9 +55,9 @@ public class TypicalInternshipApplications {
             .withDate("06/06/24")
             .build();
     public static final InternshipApplication GOOGLE = new InternshipApplicationBuilder().withName("Google")
-            .withEmail("google@example.com")
-            .withRole("Full Stack Developer Intern")
-            .withDate("07/07/24")
+            .withEmail("google@gmail.com")
+            .withDate("04/09/98")
+            .withRole("SWE")
             .build();
 
     // Manually added
@@ -70,6 +70,12 @@ public class TypicalInternshipApplications {
             .withEmail("ida@example.com")
             .withRole("Ida Intern")
             .withDate("02/02/24")
+            .build();
+
+    public static final InternshipApplication YAHOO = new InternshipApplicationBuilder().withName("Yahoo")
+            .withEmail("yahoo@yahoo.com")
+            .withDate("01/01/94")
+            .withRole("Clerk")
             .build();
 
     // Manually added - InternshipApplication's details found in {@code CommandTestUtil}
@@ -94,6 +100,6 @@ public class TypicalInternshipApplications {
     }
 
     public static List<InternshipApplication> getTypicalInternshipApplications() {
-        return new ArrayList<>(Arrays.asList(APPLE, BOFA, CITIBANK, DELL, EY, FIGMA, GOOGLE));
+        return new ArrayList<>(Arrays.asList(APPLE, BOFA, CITIBANK, DELL, EY, FIGMA, GOOGLE, YAHOO));
     }
 }
