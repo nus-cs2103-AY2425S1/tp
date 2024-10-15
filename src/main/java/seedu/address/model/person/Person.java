@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.healthservice.HealthService;
 
 /**
  * Represents a Person in the address book.
@@ -21,6 +21,10 @@ public class Person {
     private final Phone phone;
     private final Email email;
 
+    private final Nric nric;
+    private final Birthdate birthdate;
+    private final Sex sex;
+
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
@@ -31,16 +35,29 @@ public class Person {
     private Note additionalNote;
     private Name nokName;
     private Phone nokPhone;
+    private final Set<HealthService> healthServices = new HashSet<>();
+
+    /**
+     * Name, Nric, Sex, Birthdate and healthservice must be present and not null
+     */
+    public Person(Name name, Nric nric, Birthdate birthdate, Sex sex, Set<HealthService> healthServices) {
+        this(name, nric, birthdate, sex, healthServices, new Phone("123"), new Email("dummy@gmail.com"));
+    }
+
+>>>>>>> Stashed changes
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Nric nric, Birthdate birthdate, Sex sex, Set<HealthService> healthServices, Phone phone, Email email) {
+        requireAllNonNull(name, nric, birthdate, sex, healthServices, phone, email);
         this.name = name;
+        this.nric = nric;
+        this.birthdate = birthdate;
+        this.sex = sex;
         this.phone = phone;
         this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+        this.healthServices.addAll(healthServices);
+
     }
 
     /**
@@ -75,8 +92,16 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Nric getNric() {
+        return nric;
+    }
+
+    public Birthdate getBirthdate() {
+        return birthdate;
+    }
+
+    public Sex getSex() {
+        return sex;
     }
 
     public Name getNokName() {
@@ -111,8 +136,8 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<HealthService> getHealthServices() {
+        return Collections.unmodifiableSet(healthServices);
     }
 
     /**
@@ -125,7 +150,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getNric().equals(getNric());
     }
 
     /**
@@ -144,27 +169,25 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+        return !this.isSamePerson(otherPerson);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, nric, birthdate, sex, healthServices);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
+                .add("nric", nric)
+                .add("sex", sex)
+                .add("birthdate", birthdate)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
+                .add("Health Services", healthServices)
                 .toString();
     }
 
