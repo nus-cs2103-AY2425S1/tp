@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_1;
-import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_2;
+import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT1;
+import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT2;
 import static seedu.address.testutil.TypicalAssignments.getTypicalAssignmentList;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
@@ -49,14 +49,14 @@ public class DeleteAssignmentCommandTest {
 
     @Test
     public void equals() {
-        DeleteAssignmentCommand deleteFirstCommand = new DeleteAssignmentCommand(ASSIGNMENT_1);
-        DeleteAssignmentCommand deleteSecondCommand = new DeleteAssignmentCommand(ASSIGNMENT_2);
+        DeleteAssignmentCommand deleteFirstCommand = new DeleteAssignmentCommand(ASSIGNMENT1);
+        DeleteAssignmentCommand deleteSecondCommand = new DeleteAssignmentCommand(ASSIGNMENT2);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteAssignmentCommand deleteFirstCommandCopy = new DeleteAssignmentCommand(ASSIGNMENT_1);
+        DeleteAssignmentCommand deleteFirstCommandCopy = new DeleteAssignmentCommand(ASSIGNMENT1);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -71,7 +71,7 @@ public class DeleteAssignmentCommandTest {
 
     @Test
     public void toStringMethod() {
-        Assignment assignment = ASSIGNMENT_1;
+        Assignment assignment = ASSIGNMENT1;
         DeleteAssignmentCommand deleteAssignmentCommand = new DeleteAssignmentCommand(assignment);
         String expected = DeleteAssignmentCommand.class.getCanonicalName() + "{assignment=" + assignment + "}";
         assertEquals(expected, deleteAssignmentCommand.toString());

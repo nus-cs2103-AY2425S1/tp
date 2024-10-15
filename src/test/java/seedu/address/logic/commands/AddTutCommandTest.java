@@ -10,6 +10,7 @@ import static seedu.address.testutil.TutUtil.TUT_SAMPLE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -26,6 +27,7 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
 
@@ -145,6 +147,11 @@ public class AddTutCommandTest {
         }
 
         @Override
+        public boolean setStudentAttendance(StudentId studentId, TutorialClass tutorialClass, Date date) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -181,7 +188,7 @@ public class AddTutCommandTest {
 
         @Override
         public void deleteAssignment(Assignment assignment) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -212,6 +219,21 @@ public class AddTutCommandTest {
 
         @Override
         public void deleteStudent(Student target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasTutorialClass(TutorialClass tutorialClass) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTutorial(TutorialClass tutorialClass) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasStudentWithId(StudentId studentId) {
             throw new AssertionError("This method should not be called.");
         }
     }

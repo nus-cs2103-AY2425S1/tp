@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -17,6 +18,8 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
 
 /**
@@ -29,6 +32,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
     private final AssignmentList assignmentList;
+    private final List<Tut> tutorials;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -40,11 +44,11 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + ", user prefs " + userPrefs
             + "and assignment list: " + assignmentList);
-
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
         this.assignmentList = assignmentList;
+        tutorials = new ArrayList<>();
     }
 
     public ModelManager() {
@@ -118,7 +122,6 @@ public class ModelManager implements Model {
     @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
-
         addressBook.setStudent(target, editedStudent);
     }
     @Override
@@ -136,6 +139,29 @@ public class ModelManager implements Model {
     public boolean hasTutorial(Tut tutorial) {
         requireNonNull(tutorial);
         return addressBook.hasTutorial(tutorial);
+    }
+
+    @Override
+    public boolean setStudentAttendance(StudentId target, TutorialClass tut, Date date) {
+        boolean isSuccess = tutorials.stream()
+                .filter(s -> s.getTutorialClass().equals(tut))
+                .findFirst()
+                .map(tutorial -> tutorial.setAttendance(date, target))
+                .orElse(false);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        return isSuccess;
+    }
+
+    @Override
+    public void deleteTutorial(TutorialClass tutorialClass) {
+        requireNonNull(tutorialClass);
+        this.addressBook.deleteTutorial(tutorialClass);
+    }
+
+    @Override
+    public boolean hasTutorialClass(TutorialClass tutorialClass) {
+        requireNonNull(tutorialClass);
+        return addressBook.hasTutorialClass(tutorialClass);
     }
 
     //=========== Assignment ================================================================================
@@ -184,6 +210,14 @@ public class ModelManager implements Model {
         return assignmentList.toString();
     }
 
+    //=========== Filtered Student List (student ID)
+
+    @Override
+    public boolean hasStudentWithId(StudentId studentId) {
+        requireNonNull(studentId);
+        return addressBook.hasStudentId(studentId);
+    }
+
     //=========== Filtered Student List Accessors =============================================================
 
     /**
@@ -208,11 +242,10 @@ public class ModelManager implements Model {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ModelManager)) {
+        if (!(other instanceof ModelManager otherModelManager)) {
             return false;
         }
 
-        ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredStudents.equals(otherModelManager.filteredStudents)

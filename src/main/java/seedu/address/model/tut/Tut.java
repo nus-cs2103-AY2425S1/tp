@@ -4,10 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.exceptions.TutDateNotFoundException;
 
@@ -26,12 +29,11 @@ public class Tut {
     // Example validation regex for tutorial name (customize as needed)
     public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
-    private final List<Student> students = new ArrayList<>();
 
-    // TODO: Insert TutDate
+    private final List<Student> students = new ArrayList<>();
+    private final HashMap<Date, TutDate> tutDates = new HashMap<>();
     private final String tutName;
     private final TutorialClass tutorialClass;
-    private List<TutDate> tutDates = new ArrayList<>();
 
     /**
      * Constructs a {@code Tut}.
@@ -47,15 +49,33 @@ public class Tut {
     }
 
     /**
-     * * Adds student to the tutorial
-     **/
+     * Adds a student to the tutorial.
+     */
     public void add(Student student) {
         if (student != null && !students.contains(student)) {
             students.add(student);
         }
     }
+
     public List<Student> getStudents() {
         return this.students;
+    }
+
+    /**
+     * Sets the attendance for the given student on a specific date.
+     */
+    public boolean setAttendance(Date date, StudentId target) {
+        requireNonNull(date);
+        requireNonNull(target);
+        TutDate tutDate = tutDates.computeIfAbsent(date, TutDate::new);
+        return students.stream()
+                .filter(s -> s.getStudentId().equals(target))
+                .findFirst()
+                .map(student -> {
+                    student.setAttendance(tutDate);
+                    tutDate.add(target);
+                    return true;
+                }).orElse(false);
     }
 
     public static boolean isValidName(String test) {
@@ -65,39 +85,44 @@ public class Tut {
     public String getTutName() {
         return this.tutName;
     }
-    Student get(Name name) {
+
+    public Student get(Name name) {
         return students.stream()
-                    .filter(student -> student.getName().equals(name))
-                    .findFirst()
-                    .orElse(null); // Returns null if no student is found
+                .filter(student -> student.getName().equals(name))
+                .findFirst()
+                .orElse(null); // Returns null if no student is found
     }
-    public boolean tutorialDateInList(TutDate tutorialDate) {
-        return tutDates.contains(tutorialDate);
+
+    public boolean tutorialDateInList(TutDate date) {
+        return tutDates.containsKey(date.getDate());
     }
 
     /**
-     * Adds tutorial Date to tutorial
-     * @param tutorialDate
+     * Adds a tutorial date to the tutorial.
      */
     public void addTutorialDate(TutDate tutorialDate) {
-        if (!tutDates.contains(tutorialDate)) {
-            tutDates.add(tutorialDate);
-        }
+        requireNonNull(tutorialDate);
+        tutDates.putIfAbsent(tutorialDate.getDate(), tutorialDate);
     }
-    public TutDate getTutorialDate(Integer id) {
-        return tutDates.get(id);
+
+    public TutDate getTutorialDate(Date date) {
+        return tutDates.get(date);
     }
+
     public boolean isValidTutorialDate(TutDate tutorialDate) {
         return tutorialDate.isValid();
     }
+
     public List<TutDate> getTutDates() {
-        return tutDates;
+        return new ArrayList<>(tutDates.values());
     }
+
     public TutorialClass getTutorialClass() {
         return tutorialClass;
     }
+
     /**
-     *  Marks the attendance for the student for the particular tutorialDate
+     * Marks the attendance for the student for the particular tutorial date.
      */
     public void markAttendance(Student student, TutDate tutorialDate) throws TutDateNotFoundException {
         if (!isValidTutorialDate(tutorialDate)) {
@@ -106,24 +131,22 @@ public class Tut {
         if (!studentInList(student)) {
             add(student);
         }
-        if (!tutorialDateInList(tutorialDate)) {
-            addTutorialDate(tutorialDate);
-        }
-        tutorialDate.add(student);
+        addTutorialDate(tutorialDate);
+        tutorialDate.add(student.getStudentId());
     }
+
     private boolean studentInList(Student student) {
         return students.contains(student);
     }
+
     /**
      * Checks if two tutorials have the same id and name, primarily used for checking duplicates.
      */
-    //TODO: Check duplicates
     public boolean equalsTutorial(Tut other) {
         if (other == this) {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof Tut)) {
             return false;
         }
@@ -134,6 +157,7 @@ public class Tut {
                 && tutName.equals(otherTutorial.tutName)
                 && students.equals(otherTutorial.students);
     }
+    //TODO: Use the equalsTutorial function to remove duplicates
 
     @Override
     public boolean equals(Object other) {
@@ -141,7 +165,6 @@ public class Tut {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof Tut)) {
             return false;
         }
@@ -152,6 +175,7 @@ public class Tut {
                 && tutName.equals(otherTutorial.tutName)
                 && students.equals(otherTutorial.students);
     }
+
     @Override
     public String toString() {
         return tutName + ": Tutorial " + tutorialClass;

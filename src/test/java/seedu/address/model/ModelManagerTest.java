@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -90,6 +91,13 @@ public class ModelManagerTest {
     public void hasStudent_studentInAddressBook_returnsTrue() {
         modelManager.addStudent(ALICE);
         assertTrue(modelManager.hasStudent(ALICE));
+    }
+
+    @Test
+    public void hasTutorial_tutorialInAddressBook_returnsTrue() {
+        Tut tut = new Tut("Tut", new TutorialClass("1000"));
+        modelManager.addTutorial(tut);
+        assertTrue(modelManager.hasTutorial(tut));
     }
 
     @Test

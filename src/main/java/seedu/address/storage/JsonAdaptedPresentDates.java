@@ -1,7 +1,9 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,7 @@ import seedu.address.model.tut.TutDate;
  */
 class JsonAdaptedPresentDates {
 
-    private final List<JsonAdaptedTutDate> dates = new ArrayList<>();
+    private final Set<JsonAdaptedTutDate> dates = new HashSet<>();
 
     /**
      * Constructs a {@code JsonAdaptedPresentDates} with the given dates.
@@ -46,6 +48,6 @@ class JsonAdaptedPresentDates {
         for (JsonAdaptedTutDate jsonDate : dates) {
             modelDates.add(jsonDate.toModelType());
         }
-        return new PresentDates(new ArrayList<>(modelDates));
+        return new PresentDates(new HashSet<>(modelDates));
     }
 }

@@ -1,5 +1,7 @@
 package seedu.address.model.assignment;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
@@ -26,6 +28,8 @@ public class AssignmentList {
      * @param assignments The assignments in the list.
      */
     public AssignmentList(ArrayList<Assignment> assignments) {
+        requireNonNull(assignments);
+
         this.assignments = assignments;
     }
 
@@ -88,8 +92,8 @@ public class AssignmentList {
                 uncompletedList.append(student.getName()).append(", ");
             }
         }
-        String completedString = completedList.substring(0, Math.max(0, completedList.length() - 2));
-        String uncompletedString = uncompletedList.substring(0, Math.max(0, uncompletedList.length() - 2));
+        String completedString = completedList.substring(0, Math.max(30, completedList.length() - 2));
+        String uncompletedString = uncompletedList.substring(0, Math.max(34, uncompletedList.length() - 2));
         return targetAssignment.toString() + "\n" + completedString + "\n" + uncompletedString;
     }
 

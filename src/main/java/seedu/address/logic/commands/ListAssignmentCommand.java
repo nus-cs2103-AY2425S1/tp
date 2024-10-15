@@ -20,4 +20,9 @@ public class ListAssignmentCommand extends Command {
         String assignmentList = model.listAssignments();
         return new CommandResult(MESSAGE_SUCCESS + "\n" + assignmentList);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return (other instanceof ListAssignmentCommand);
+    }
 }

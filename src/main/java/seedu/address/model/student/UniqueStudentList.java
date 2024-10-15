@@ -34,14 +34,27 @@ public class UniqueStudentList implements Iterable<Student> {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameStudent);
     }
+
+    /**
+     * Returns true if the list contains an equivalent studentId as the given argument.
+     */
+    public boolean containsStudentId(String studentId) {
+        requireNonNull(studentId);
+        return internalList.stream().anyMatch(student -> student.getStudentId().equals(studentId));
+    }
+
     /**
      * Adds a student to the list.
      * The student must not already exist in the list.
      */
     public void add(Student toAdd) {
         requireNonNull(toAdd);
+        String studentId = String.valueOf(toAdd.getStudentId());
+        if (containsStudentId(studentId)) {
+            throw new DuplicateStudentException("Student ID already exists: " + studentId);
+        }
         if (contains(toAdd)) {
-            throw new DuplicateStudentException();
+            throw new DuplicateStudentException("This student already exists in the address book");
         }
         internalList.add(toAdd);
     }
@@ -65,6 +78,7 @@ public class UniqueStudentList implements Iterable<Student> {
 
         internalList.set(index, editedStudent);
     }
+
 
     /**
      * Removes the equivalent student from the list.

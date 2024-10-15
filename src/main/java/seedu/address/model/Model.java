@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -10,6 +11,8 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
 
 /**
@@ -82,6 +85,8 @@ public interface Model {
      */
     void setStudent(Student target, Student editedStudent);
 
+    boolean setStudentAttendance(StudentId target, TutorialClass tut, Date date);
+
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
 
@@ -144,4 +149,23 @@ public interface Model {
      * @return String of all current assignments.
      */
     String listAssignments();
+
+    /**
+     * Delete the specified tutorial class.
+     * The tutorial class must exist in the tutorial list.
+     *
+     * @param tutorialClass The tutorial class to be deleted.
+     */
+    void deleteTutorial(TutorialClass tutorialClass);
+
+    /**
+     * Returns true if a tutorial class exists in the tutorial list.
+     */
+    boolean hasTutorialClass(TutorialClass tutorialClass);
+
+    /**
+     * Returns true if a student with the specified studentId exists.
+     */
+    public boolean hasStudentWithId(StudentId studentId);
+
 }

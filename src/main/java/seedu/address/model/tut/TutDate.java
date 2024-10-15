@@ -1,12 +1,16 @@
 package seedu.address.model.tut;
 
-import java.util.ArrayList;
+import static java.util.Objects.requireNonNull;
+
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 
 /**
  * A class representing a tutorial date. Each {@code TutDate} object holds a specific {@link Date}
@@ -16,7 +20,7 @@ public class TutDate {
 
     public static final String MESSAGE_CONSTRAINTS = "Date should be in correct format (dd/mm/yyyy)!";
     private final Date date;
-    private final List<Student> students;
+    private final Set<StudentId> students;
 
     /**
      * Constructs a {@code TutDate} object with a specified {@link Date}.
@@ -25,20 +29,19 @@ public class TutDate {
      * @param date The date associated with the {@code TutDate}.
      */
     public TutDate(Date date) {
+        requireNonNull(date);
         this.date = date;
-        this.students = new ArrayList<>();
+        this.students = new HashSet<>();
     }
 
     /**
-     * Adds a student to the tutorial date.
-     * Prevents adding duplicate students.
+     * Add student to the hash set.
      *
-     * @param student The student to add.
+     * @param student The student supposed to be added.
      */
-    public void add(Student student) {
-        if (!students.contains(student)) {
-            students.add(student);
-        }
+    public void add(StudentId student) {
+        requireNonNull(student);
+        students.add(student);
     }
 
     /**
@@ -49,14 +52,13 @@ public class TutDate {
     public Date getDate() {
         return date;
     }
-
     /**
      * Returns an unmodifiable list of students.
      *
      * @return an unmodifiable list of {@link Student}.
      */
-    public List<Student> getStudents() {
-        return Collections.unmodifiableList(students);
+    public Set<StudentId> getStudentIDs() {
+        return Collections.unmodifiableSet(students);
     }
 
     /**
@@ -96,7 +98,8 @@ public class TutDate {
      */
     @Override
     public String toString() {
-        return date.toString();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        return sdf.format(date);
     }
 
     /**

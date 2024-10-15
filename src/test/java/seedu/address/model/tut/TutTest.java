@@ -9,22 +9,34 @@ import static seedu.address.testutil.TutUtil.TUT_NAME;
 import static seedu.address.testutil.TutUtil.TUT_SAMPLE;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 
+import java.util.Date;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.student.Student;
-import seedu.address.model.tut.exceptions.TutDateNotFoundException;
+import seedu.address.model.student.StudentId;
 import seedu.address.testutil.StudentBuilder;
 
 public class TutTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
+    public void constructor_nullName_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Tut(null, TUTORIAL_CLASS));
         assertThrows(NullPointerException.class, () -> new Tut(TUT_NAME, null));
     }
 
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
+        String invalidTutName = "";
+        assertThrows(IllegalArgumentException.class, () -> new Tut(invalidTutName, TUTORIAL_CLASS));
+    }
+    @Test
+    public void constructor_nullTutorialClass_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Tut(TUT_NAME, null));
+    }
+
+    @Test
+    public void constructor_invalidTagName_throwsIllegalArgumentException() {
         String invalidTutName = "";
         assertThrows(IllegalArgumentException.class, () -> new Tut(invalidTutName, TUTORIAL_CLASS));
     }
@@ -91,7 +103,7 @@ public class TutTest {
 
         TUT_SAMPLE.markAttendance(alice, TUT_DATE);
         assertTrue(TUT_SAMPLE.tutorialDateInList(TUT_DATE));
-        assertTrue(TUT_DATE.getStudents().contains(alice));
+        assertTrue(TUT_DATE.getStudentIDs().contains(alice.getStudentId()));
     }
 
     @Test
@@ -102,16 +114,7 @@ public class TutTest {
 
         TUT_SAMPLE.markAttendance(alice, TUT_DATE);
         assertTrue(TUT_SAMPLE.tutorialDateInList(TUT_DATE));
-        assertTrue(TUT_DATE.getStudents().contains(alice));
-    }
-
-    @Test
-    public void markAttendance_invalidTutorialDate_throwsException() {
-        Student alice = new StudentBuilder(ALICE).build();
-        TUT_SAMPLE.add(alice);
-
-        TutDate invalidDate = new TutDate(null);
-        assertThrows(TutDateNotFoundException.class, () -> TUT_SAMPLE.markAttendance(alice, invalidDate));
+        assertTrue(TUT_DATE.getStudentIDs().contains(alice.getStudentId()));
     }
 
     @Test
@@ -120,7 +123,7 @@ public class TutTest {
 
         TUT_SAMPLE.markAttendance(newStudent, TUT_DATE);
         assertTrue(TUT_SAMPLE.getStudents().contains(newStudent));
-        assertTrue(TUT_DATE.getStudents().contains(newStudent));
+        assertTrue(TUT_DATE.getStudentIDs().contains(newStudent.getStudentId()));
     }
 
     @Test
@@ -141,7 +144,7 @@ public class TutTest {
     @Test
     public void getTutorialDate_returnsCorrectDate() {
         TUT_SAMPLE.addTutorialDate(TUT_DATE);
-        assertTrue(TUT_SAMPLE.getTutorialDate(0).equals(TUT_DATE));
+        assertTrue(TUT_SAMPLE.getTutorialDate(TUT_DATE.getDate()).equals(TUT_DATE));
     }
 
     @Test
@@ -153,5 +156,42 @@ public class TutTest {
     @Test
     public void getTutorialClass() {
         assertTrue(TUT_SAMPLE.getTutorialClass().equals(TUTORIAL_CLASS));
+    }
+
+    @Test
+    public void setAttendance_success() {
+        Student aliceCopy = new StudentBuilder(ALICE).build();
+        Tut tut = new Tut(TUT_NAME, TUTORIAL_CLASS);
+        tut.add(aliceCopy);
+        Date date = new Date();
+        StudentId aliceId = aliceCopy.getStudentId();
+        boolean result = tut.setAttendance(date, aliceId);
+        assertTrue(result);
+    }
+
+    @Test
+    public void setAttendance_studentNotInTut_false() {
+        Student aliceCopy = new StudentBuilder(ALICE).build();
+        Tut tut = new Tut(TUT_NAME, TUTORIAL_CLASS);
+        Date date = new Date();
+        StudentId aliceId = aliceCopy.getStudentId();
+        boolean result = tut.setAttendance(date, aliceId);
+        assertFalse(result);
+    }
+
+    @Test
+    public void setAttendance_nullDate_throwsNullPointerException() {
+        Student aliceCopy = new StudentBuilder(ALICE).build();
+        Tut tut = new Tut(TUT_NAME, TUTORIAL_CLASS);
+        tut.add(aliceCopy);
+        StudentId aliceId = aliceCopy.getStudentId();
+        assertThrows(NullPointerException.class, () -> tut.setAttendance(null, aliceId));
+    }
+
+    @Test
+    public void setAttendance_nullStudentId_throwsNullPointerException() {
+        Tut tut = new Tut(TUT_NAME, TUTORIAL_CLASS);
+        Date date = new Date();
+        assertThrows(NullPointerException.class, () -> tut.setAttendance(date, null));
     }
 }

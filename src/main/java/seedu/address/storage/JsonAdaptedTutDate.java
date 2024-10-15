@@ -2,15 +2,15 @@ package seedu.address.storage;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 import seedu.address.model.tut.TutDate;
 
 /**
@@ -19,21 +19,18 @@ import seedu.address.model.tut.TutDate;
 class JsonAdaptedTutDate {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "TutDate's %s field is missing!";
-    public static final String DATE_FORMAT = "dd/MM/yyyy";
-
+    public static final String DATE_FORMAT = "yyyy/MM/dd";
     private final String date;
-    private final List<JsonAdaptedStudent> students = new ArrayList<>();
+    private final List<String> studentIds;
 
     /**
      * Constructs a {@code JsonAdaptedTutDate} with the given tut date details.
      */
     @JsonCreator
     public JsonAdaptedTutDate(@JsonProperty("date") String date,
-                              @JsonProperty("students") List<JsonAdaptedStudent> students) {
+                              @JsonProperty("studentIds") List<String> studentIds) {
         this.date = date;
-        if (students != null) {
-            this.students.addAll(students);
-        }
+        this.studentIds = studentIds;
     }
 
     /**
@@ -43,9 +40,11 @@ class JsonAdaptedTutDate {
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
         sdf.setLenient(false);
         this.date = sdf.format(source.getDate());
-        this.students.addAll(source.getStudents().stream()
-                .map(JsonAdaptedStudent::new)
-                .toList());
+
+        // Convert StudentIds to Strings
+        this.studentIds = source.getStudentIDs().stream()
+                .map(studentId -> studentId.value)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -55,7 +54,7 @@ class JsonAdaptedTutDate {
      */
     public TutDate toModelType() throws IllegalValueException {
         if (date == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "date"));
         }
 
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
@@ -68,17 +67,18 @@ class JsonAdaptedTutDate {
             throw new IllegalValueException(TutDate.MESSAGE_CONSTRAINTS);
         }
 
-        final List<Student> modelStudents = new ArrayList<>();
-        for (JsonAdaptedStudent jsonAdaptedStudent : students) {
-            modelStudents.add(jsonAdaptedStudent.toModelType());
-        }
-
         TutDate tutDate = new TutDate(modelDate);
-        for (Student student : modelStudents) {
-            tutDate.add(student);
+
+        if (studentIds != null) {
+            for (String studentIdStr : studentIds) {
+                if (!StudentId.isValidStudentId(studentIdStr)) {
+                    throw new IllegalValueException(StudentId.MESSAGE_CONSTRAINTS);
+                }
+                StudentId studentId = new StudentId(studentIdStr);
+                tutDate.add(studentId);
+            }
         }
 
         return tutDate;
     }
-
 }
