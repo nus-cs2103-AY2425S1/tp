@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.model.Model.PREDICATE_DO_NOT_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -27,18 +29,20 @@ public class RenameTagCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     }
+
     /*
     @Test
     public void execute_renameTag_success() {
-        Person person = new PersonBuilder().withTags("friends").build();
-        Tag tag = person.getTags().iterator().next();
+        PersonBuilder personBuilder = new PersonBuilder().withTags("friends");
+        Person person = personBuilder.build();
+        String oldTag = person.getTags().iterator().next().getTagName();
         String newTag = "besties";
 
-        RenameTagCommand renameTagCommand = new RenameTagCommand(tag.getTagName(), newTag);
+        RenameTagCommand renameTagCommand = new RenameTagCommand(oldTag, newTag);
 
         String expectedMessage = String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, newTag);
 
-        assertCommandSuccess(renameTagCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(renameTagCommand, model, expectedMessage, model);
     }*/
 
     @Test

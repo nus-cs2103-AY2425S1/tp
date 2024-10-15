@@ -109,6 +109,19 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+### Renaming a Tag : `renameTag`
+
+Renames an existing tag in the address book.
+
+Format: `renameTag [ot/OLDTAG] [nt/NEWTAG]`
+
+* Renames the tags called `OLDTAG` to `NEWTAG`.
+* Every contact with the tag `OLDTAG` will be edited.
+
+Examples:
+*  `renameTag ot/manager nt/boss` Renames the tag `manager` to be `boss`.
+*  `renameTag ot/friends nt/enemies` Edits the tag `friends` to be `enemies`.
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
