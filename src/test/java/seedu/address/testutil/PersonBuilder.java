@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
@@ -31,6 +32,7 @@ public class PersonBuilder {
     private Address address;
     private Age age;
     private Sex sex;
+    private Set<Appointment> appointments;
     private Set<Tag> tags;
 
     /**
@@ -43,6 +45,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         age = new Age(DEFAULT_AGE);
         sex = new Sex(DEFAULT_SEX);
+        appointments = new HashSet<>();
         tags = new HashSet<>();
     }
 
@@ -56,6 +59,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         age = personToCopy.getAge();
         sex = personToCopy.getSex();
+        appointments = new HashSet<>(personToCopy.getAppointment());
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -72,6 +76,15 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code appointments} into a {@code Set<Appointment>}
+     * and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withAppointments(String ... appointments) {
+        this.appointments = SampleDataUtil.getAppointmentSet(appointments);
         return this;
     }
 
@@ -116,7 +129,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, age, sex, tags);
+        return new Person(name, phone, email, address, age, sex, appointments, tags);
     }
 
 }

@@ -48,7 +48,9 @@ public class Messages {
                 .append(person.getAge())
                 .append("; Sex: ")
                 .append(person.getSex())
-                .append("; Tags: ");
+                .append("; Appointments: ");
+        person.getAppointment().forEach(builder::append);
+        builder.append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
