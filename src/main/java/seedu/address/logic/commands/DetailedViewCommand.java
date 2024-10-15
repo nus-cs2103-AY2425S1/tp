@@ -35,7 +35,8 @@ public class DetailedViewCommand extends Command {
         //        }
         //
         //        Log detailedLogToView = lastShownLogsList.getDetailedLog(targetIndex.getZeroBased());
-        //        return new CommandResult(String.format(MESSAGE_DETAILED_VIEW_SUCCESS, detailedLogToView.toDetailedString()));
+        //        return new CommandResult(String.format(MESSAGE_DETAILED_VIEW_SUCCESS, detailedLogToView
+        //        .toDetailedString()));
         return null;
     }
 
