@@ -1,5 +1,11 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AppointmentCommand;
@@ -9,13 +15,16 @@ import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+/**
+ * Parses input arguments and creates a new AppointmentCommandParser object
+ */
+public class AppointmentCommandParser implements Parser<AppointmentCommand> {
 
-
-public class AppointmentCommandParser implements Parser<AppointmentCommand>{
-
+    /**
+     * Parses the given {@code String} of arguments in the context of the {@code AppointmentCommand}
+     * and returns an {@code AppointmentCommand} object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public AppointmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_FROM, PREFIX_TO);
@@ -23,7 +32,8 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand>{
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE), ive);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE),
+                    ive);
         }
         String date = argMultimap.getValue(PREFIX_DATE).orElse("");
         String from = argMultimap.getValue(PREFIX_FROM).orElse("");

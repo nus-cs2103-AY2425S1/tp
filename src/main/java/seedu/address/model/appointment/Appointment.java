@@ -1,18 +1,26 @@
 package seedu.address.model.appointment;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
-
-import java.util.Objects;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+/**
+ * Represents an appointment in the address book.
+ * An {@code Appointment} consists of a {@code Date}, start time ({@code From}), and end time ({@code To}).
+ * All fields must be non-null.
+ */
 public class Appointment {
 
     private final Date date;
     private final From from;
     private final To to;
 
+    /**
+     * Constructs an {@code Appointment} with the specified date, start time, and end time.
+     * All values must be non-null.
+     *
+     * @param date The date of the appointment.
+     * @param from The start time of the appointment.
+     * @param to   The end time of the appointment.
+     */
     public Appointment(Date date, From from, To to) {
         requireAllNonNull(date, from, to);
         this.date = date;
