@@ -307,6 +307,14 @@
     -fx-padding: 8 1 8 1;
 }
 
+.personInfo {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+    -fx-padding: 10;
+}
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
