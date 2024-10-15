@@ -29,14 +29,15 @@ import seedu.address.testutil.PersonBuilder;
 public class AddCarCommandTest {
 
     @Test
-    public void AddCarCommand_throwsNullPointerException() {
+    public void addCarCommand_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCarCommand(null, null));
     }
 
     @Test
     public void execute_addCarToEligiblePerson_success() throws Exception {
         Person validPerson = new PersonBuilder().build();
-        Car validCar = new Car(new Vrn("SGX1234B"), new Vin("KMHGH4JH3EU073801"), new CarMake("Toyota"), new CarModel("Corolla"));
+        Car validCar = new Car(new Vrn("SGX1234B"), new Vin("KMHGH4JH3EU073801"),
+                new CarMake("Toyota"), new CarModel("Corolla"));
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         modelStub.addPerson(validPerson); // Add person to the stub model
 
@@ -47,9 +48,10 @@ public class AddCarCommandTest {
     }
 
     @Test
-    public void person_AlreadyHasCar_throwsCommandException() {
+    public void person_alreadyHasCar_throwsCommandException() {
 
-        Person personWithCar = new PersonBuilder().withCar("SGX1234B", "KMHGH4JH3EU073801", "Toyota", "Corolla").build();
+        Person personWithCar = new PersonBuilder().withCar("SGX1234B", "KMHGH4JH3EU073801",
+                "Toyota", "Corolla").build();
 
         Car newCar2 = new Car(new Vrn("SH8942L"), new Vin("KMHGH4JH3EU073802"),
                 new CarMake("Honda"), new CarModel("Civic"));
