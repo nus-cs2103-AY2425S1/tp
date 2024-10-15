@@ -118,7 +118,7 @@ public class ParserUtil {
         requireNonNull(role);
         String trimmedRole = role.trim();
         if (!Role.isValidRole(trimmedRole)) {
-            throw new ParseException(Department.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
         return new Role(trimmedRole);
     }
@@ -133,7 +133,7 @@ public class ParserUtil {
         requireNonNull(contractEndDate);
         String trimmedContractEndDate = contractEndDate.trim();
         if (!ContractEndDate.isValidDate(trimmedContractEndDate)) {
-            throw new ParseException(Department.MESSAGE_CONSTRAINTS);
+            throw new ParseException(ContractEndDate.MESSAGE_CONSTRAINTS);
         }
         return ContractEndDate.of(trimmedContractEndDate);
     }
