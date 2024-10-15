@@ -164,4 +164,10 @@ public class ModelManagerTest {
         differentUserPrefs.setTutorEaseFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(tutorEase, differentUserPrefs, lessonSchedule)));
     }
+
+    @Test
+    public void deleteStudentLesson_success() {
+        // placeholder. will update in next iteration
+        assertTrue(true);
+    }
 }
