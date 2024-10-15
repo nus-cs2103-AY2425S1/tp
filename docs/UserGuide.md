@@ -126,7 +126,7 @@ Examples:
 * `filter frontend` returns `{frontend}` and `{frontend, uiux}`
 * `filter backend database` returns `{backend, api}`, `{database, sql}`<br>
   ![result for 'find alex david'](images/filterJohnBetsyResult.png)
-
+  
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -212,6 +212,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Filter** | `filter KEYWORD [MORE_KEYWORDS]`<br> e.g., `filter frontend backend`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
