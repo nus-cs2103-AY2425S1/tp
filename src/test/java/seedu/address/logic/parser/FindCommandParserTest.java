@@ -39,7 +39,8 @@ public class FindCommandParserTest {
 
         // whitespaces allowed in address and multiple "_" between address keywords
         FindCommand expectedFindCommandForAddress =
-                new FindCommand(null, null, new AddressContainsKeywordsPredicate(Arrays.asList("Wall Street", "Michigan")));
+                new FindCommand(null, null,
+                        new AddressContainsKeywordsPredicate(Arrays.asList("Wall Street", "Michigan")));
         assertParseSuccess(parser, " a/Wall Street_Michigan", expectedFindCommandForAddress);
     }
 

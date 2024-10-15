@@ -20,9 +20,10 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
-import seedu.address.model.person.AddressContainsKeywordsPredicate;
+
 
 public class FindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -147,7 +148,7 @@ public class FindCommandTest {
         PhoneContainsKeywordsPredicate phonePredicate = new PhoneContainsKeywordsPredicate(Arrays.asList("phone"));
         FindCommand findCommand = new FindCommand(namePredicate, phonePredicate, null);
         String expected = FindCommand.class.getCanonicalName() + "{namePredicate=" + namePredicate + ", phonePredicate="
-                + phonePredicate + ", addressPredicate=null}" ;
+                + phonePredicate + ", addressPredicate=null}";
         assertEquals(expected, findCommand.toString());
     }
 

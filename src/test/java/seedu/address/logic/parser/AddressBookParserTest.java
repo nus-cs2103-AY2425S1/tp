@@ -85,14 +85,17 @@ public class AddressBookParserTest {
         // Test find on phone
         List<String> phoneKeywords = Arrays.asList("12345678", "92631731");
         FindCommand phoneCommand = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + PREFIX_PHONE + phoneKeywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " " + PREFIX_PHONE
+                        + phoneKeywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(null, new PhoneContainsKeywordsPredicate(phoneKeywords), null), phoneCommand);
 
         // Test find on address
         List<String> addressKeywords = Arrays.asList("blk 50", "blk 49");
         FindCommand addressCommand = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + PREFIX_ADDRESS + addressKeywords.stream().collect(Collectors.joining("_")));
-        assertEquals(new FindCommand(null, null, new AddressContainsKeywordsPredicate(addressKeywords)), addressCommand);
+                FindCommand.COMMAND_WORD + " " + PREFIX_ADDRESS
+                        + addressKeywords.stream().collect(Collectors.joining("_")));
+        assertEquals(new FindCommand(null, null,
+                new AddressContainsKeywordsPredicate(addressKeywords)), addressCommand);
 
         // Test find on multiple fields (name, phone, address)
         FindCommand combinedCommand = (FindCommand) parser.parseCommand(
