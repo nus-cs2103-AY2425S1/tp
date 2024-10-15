@@ -1,5 +1,7 @@
 package seedu.address.model.event;
 
+import java.util.Objects;
+
 import seedu.address.model.person.Person;
 
 /**
@@ -45,7 +47,26 @@ public class Event {
 
     @Override
     public boolean equals(Object other) {
-        return false; //To implement
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Event)) {
+            return false;
+        }
+
+        Event otherEvent = (Event) other;
+        return name.equals(otherEvent.name)
+                && time.equals(otherEvent.time)
+                && venue.equals(otherEvent.venue)
+                && celebrity.equals(otherEvent.celebrity);
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(name, time, venue, celebrity);
     }
 
     /**
