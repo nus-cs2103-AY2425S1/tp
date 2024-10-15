@@ -8,8 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.EmergencyPhoneCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.EmergencyPhone;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 
 /**
  * Parses input arguments and creates a new {@code AddEmergencyContactNumberCommand} object
@@ -29,16 +29,16 @@ public class EmergencyPhoneCommandParser {
         }
 
         Name name;
-        Phone phone;
+        EmergencyPhone emergencyPhone;
 
         try {
             name = ParserUtil.parseName(argMultiMap.getValue(PREFIX_NAME).get());
-            phone = ParserUtil.parsePhone(argMultiMap.getValue(PREFIX_ECNUMBER).get());
+            emergencyPhone = ParserUtil.parseEmergencyPhone(argMultiMap.getValue(PREFIX_ECNUMBER).get());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EmergencyPhoneCommand.MESSAGE_USAGE), ive);
         }
 
-        return new EmergencyPhoneCommand(name, phone);
+        return new EmergencyPhoneCommand(name, emergencyPhone);
     }
 }

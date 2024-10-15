@@ -1,11 +1,16 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
+import java.util.Optional;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.EmergencyPhone;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.Person;
 
 /**
  * Changes the emergency contact number of an existing student in the address book
@@ -18,28 +23,42 @@ public class EmergencyPhoneCommand extends Command {
             + ": Adds an emergency contact number to the student "
             + "identified by the name. "
             + "Parameters: n/NAME en/[EMERGENCY_NUMBER]\n"
-            + "Example: " + COMMAND_WORD + "n/Henry en/91234567";
+            + "Example: " + COMMAND_WORD + " n/Henry ep/91234567";
 
     public static final String MESSAGE_ARGUMENTS = "Name: %1$s, ECNumber: %2$s";
+    public static final String MESSAGE_INVALID_NAME = "The name you entered is not in the addressbook!";
+    public static final String MESSAGE_EMERGENCY_PHONE_SUCCESS = "New Emergency Phone Number %1$s, for %2$s";
 
     private final Name name;
-    private final Phone phone;
+    private final EmergencyPhone emergencyPhone;
 
     /**
      * @param name name of the person in the filtered person list to edit the emergency contact phone
-     * @param phone emergency contact phone of the person to be updated to
+     * @param emergencyPhone emergency contact phone of the person to be updated to
      */
-    public EmergencyPhoneCommand(Name name, Phone phone) {
-        requireAllNonNull(name, phone);
+    public EmergencyPhoneCommand(Name name, EmergencyPhone emergencyPhone) {
+        requireAllNonNull(name, emergencyPhone);
 
         this.name = name;
-        this.phone = phone;
+        this.emergencyPhone = emergencyPhone;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(
-                String.format(MESSAGE_ARGUMENTS, name, phone));
+
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        List<Person> fullList = model.getFilteredPersonList();
+        Optional<Person> personToUpdate = fullList.stream().filter(person -> person.getName().equals(name)).findFirst();
+        if (personToUpdate.isEmpty()) {
+            throw new CommandException(MESSAGE_INVALID_NAME);
+        }
+        Person personToEdit = personToUpdate.get();
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), personToEdit.getRegisterNumber(), personToEdit.getSex(),
+                personToEdit.getStudentClass(), emergencyPhone, personToEdit.getTags());
+        model.setPerson(personToEdit, editedPerson);
+//        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EMERGENCY_PHONE_SUCCESS, emergencyPhone, name));
     }
 
     @Override
@@ -54,6 +73,6 @@ public class EmergencyPhoneCommand extends Command {
 
         EmergencyPhoneCommand e = (EmergencyPhoneCommand) other;
         return name.equals(e.name)
-                && phone.equals(e.phone);
+                && emergencyPhone.equals(e.emergencyPhone);
     }
 }

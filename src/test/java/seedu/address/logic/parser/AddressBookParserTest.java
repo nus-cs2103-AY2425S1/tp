@@ -25,10 +25,10 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.EmergencyPhone;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -96,15 +96,15 @@ public class AddressBookParserTest {
     public void parseCommand_emergencyPhone() throws Exception {
 
         final String name = "John Doe";
-        final String phone = "91234567";
+        final String emergencyPhone = "91234567";
 
         EmergencyPhoneCommand expected = new EmergencyPhoneCommand(
-                new Name(name), new Phone(phone));
+                new Name(name), new EmergencyPhone(emergencyPhone));
 
         EmergencyPhoneCommand command = (EmergencyPhoneCommand) parser.parseCommand(
                 EmergencyPhoneCommand.COMMAND_WORD + " "
                 + "n/" + name + " "
-                + "ep/" + phone);
+                + "ep/" + emergencyPhone);
 
         assertEquals(expected, command);
     }
