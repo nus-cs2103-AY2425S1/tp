@@ -40,7 +40,7 @@ public class BackupCommandTest {
      * Sets up the test environment with the required model and storage.
      */
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws IOException {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
@@ -150,6 +150,17 @@ public class BackupCommandTest {
             @Override
             public Path getUserPrefsFilePath() {
                 return null;
+            }
+
+            @Override
+            public Optional<Path> restoreBackup() {
+                // Simulate no backup available
+                return Optional.empty();
+            }
+
+            @Override
+            public void cleanOldBackups(int maxBackups) {
+                // No-op
             }
         };
     }

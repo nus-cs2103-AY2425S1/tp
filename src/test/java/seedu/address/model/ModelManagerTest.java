@@ -40,7 +40,7 @@ public class ModelManagerTest {
      * Sets up the test environment with the required storage.
      */
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws IOException {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
@@ -177,7 +177,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void modelManager_initialization_validStorage() {
+    public void modelManager_initialization_validStorage() throws IOException {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(Paths.get("data/addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(Paths.get("data/userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
@@ -188,7 +188,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void backupData_withValidStorage_noException() {
+    public void backupData_withValidStorage_noException() throws IOException {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(Paths.get("data/addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(Paths.get("data/userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);

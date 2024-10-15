@@ -29,13 +29,21 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
 
-    /**
-     * Saves the address book to the specified file path.
-     *
-     * @param addressBook The address book data to save.
-     * @param filePath The file path where the address book will be saved.
-     * @throws IOException if there is an error saving the address book.
-     */
     void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
 
+    /**
+     * Restores the most recent backup of the address book, if available.
+     *
+     * @return An Optional containing the Path to the most recent backup, if found.
+     * @throws IOException If there is an error accessing the backup.
+     */
+    Optional<Path> restoreBackup() throws IOException;
+
+    /**
+     * Cleans up old backups, retaining only the specified number of the most recent backups.
+     *
+     * @param maxBackups The number of recent backups to retain.
+     * @throws IOException If there is an error during cleanup.
+     */
+    void cleanOldBackups(int maxBackups) throws IOException;
 }

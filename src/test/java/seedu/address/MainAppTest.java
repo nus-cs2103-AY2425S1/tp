@@ -31,7 +31,7 @@ public class MainAppTest {
     }
 
     @Test
-    public void initModelManager_validStorageAndUserPrefs_doesNotThrow() {
+    public void initModelManager_validStorageAndUserPrefs_doesNotThrow() throws IOException {
         Path addressBookPath = temporaryFolder.resolve("addressbook.json");
         Path userPrefsPath = temporaryFolder.resolve("userprefs.json");
 
@@ -50,7 +50,7 @@ public class MainAppTest {
     }
 
     @Test
-    public void initModelManager_storageWithoutAddressBook_usesSampleData() {
+    public void initModelManager_storageWithoutAddressBook_usesSampleData() throws IOException {
         Path addressBookPath = temporaryFolder.resolve("non_existent_addressbook.json");
         Path userPrefsPath = temporaryFolder.resolve("userprefs.json");
 

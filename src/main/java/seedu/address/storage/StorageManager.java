@@ -12,23 +12,29 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of AddressBook data and backup functionality.
  */
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
-    private UserPrefsStorage userPrefsStorage;
+    private final AddressBookStorage addressBookStorage;
+    private final UserPrefsStorage userPrefsStorage;
+    private final BackupManager backupManager;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given storage and initializes backup management.
+     *
+     * @param addressBookStorage Storage for AddressBook.
+     * @param userPrefsStorage   Storage for User preferences.
+     * @throws IOException If the backup directory cannot be initialized.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) throws IOException {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.backupManager = new BackupManager(Path.of("backups")); // Use "backups" directory.
     }
 
-    // ================ UserPrefs methods ==============================
+    // =================== User Preferences Methods ===================
 
     @Override
     public Path getUserPrefsFilePath() {
@@ -45,8 +51,7 @@ public class StorageManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
-
-    // ================ AddressBook methods ==============================
+    // =================== AddressBook Methods ===================
 
     @Override
     public Path getAddressBookFilePath() {
@@ -60,19 +65,48 @@ public class StorageManager implements Storage {
 
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
-        logger.fine("Attempting to read data from file: " + filePath);
+        logger.fine("Reading AddressBook from: " + filePath);
         return addressBookStorage.readAddressBook(filePath);
     }
 
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+        Path filePath = addressBookStorage.getAddressBookFilePath();
+        saveAddressBook(addressBook, filePath);
     }
 
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
+        logger.fine("Saving AddressBook to: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
+        backupManager.saveBackup(filePath); // Save backup after each AddressBook save.
     }
 
+    // =================== Backup and Restore Methods ===================
+
+    /**
+     * Restores the most recent backup of the AddressBook, if available.
+     *
+     * @return Optional containing the restored backup path, if any.
+     * @throws IOException If restoration fails.
+     */
+    public Optional<Path> restoreBackup() throws IOException {
+        Optional<Path> restoredBackup = backupManager.restoreMostRecentBackup();
+        if (restoredBackup.isPresent()) {
+            logger.info("Restored from backup: " + restoredBackup.get());
+        } else {
+            logger.warning("No backup available to restore.");
+        }
+        return restoredBackup;
+    }
+
+    /**
+     * Cleans up old backups, keeping only the most recent `maxBackups`.
+     *
+     * @param maxBackups The number of backups to retain.
+     * @throws IOException If cleanup fails.
+     */
+    public void cleanOldBackups(int maxBackups) throws IOException {
+        backupManager.cleanOldBackups(maxBackups);
+    }
 }
