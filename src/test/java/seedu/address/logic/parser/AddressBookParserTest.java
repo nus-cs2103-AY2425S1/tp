@@ -11,13 +11,18 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_NAM
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIMEPERIOD_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEL_APPT_AMY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddAllergyCommand;
 import seedu.address.logic.commands.AddApptCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -37,6 +42,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -74,6 +80,17 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + VALID_NRIC_AMY + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(new NricMatchesPredicate(new Nric(VALID_NRIC_AMY)), descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_addAllergy() throws Exception {
+        Person person = new PersonBuilder().withNric(VALID_NRIC_AMY).build();
+        AddAllergyCommand command = (AddAllergyCommand) parser.parseCommand(
+                AddAllergyCommand.COMMAND_WORD + " " + PREFIX_NRIC + NRIC_DESC_AMY
+                        + " " + PREFIX_TAG + "Insulin");
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag("Insulin"));
+        assertEquals(new AddAllergyCommand(new Nric(VALID_NRIC_AMY), tags), command);
     }
 
     @Test

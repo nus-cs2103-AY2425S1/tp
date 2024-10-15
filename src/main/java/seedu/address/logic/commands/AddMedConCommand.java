@@ -42,7 +42,7 @@ public class AddMedConCommand extends Command {
 
     /**
      * @param nric of the patient to assign the medical conditions to
-     * @param medCons set of medical conditions to be assigned
+     * @param medCons set of medical conditions to be assigned.
      */
     public AddMedConCommand(Nric nric, Set<MedCon> medCons) {
         requireAllNonNull(nric, medCons);
