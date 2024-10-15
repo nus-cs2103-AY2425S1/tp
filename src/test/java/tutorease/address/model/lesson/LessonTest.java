@@ -1,5 +1,6 @@
 package tutorease.address.model.lesson;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_DURATION;
@@ -74,5 +75,32 @@ public class LessonTest {
     @Test
     public void getEndDateTime() {
         assertTrue(lesson.getEndDateTime().equals(endDateTime));
+    }
+    @Test
+    public void getStartDateTimeString() {
+        assertEquals(VALID_START_DATE, lesson.getStartDateTimeString());
+    }
+    @Test
+    public void getEndDateTimeString() {
+        assertEquals(DateTimeUtil.dateTimeToString(endDateTime.getDateTime()), lesson.getEndDateTimeString());
+    }
+    @Test
+    public void getStudentName() {
+        assertEquals(person.getName().toString(), lesson.getStudentName());
+    }
+    @Test
+    public void getAddress() {
+        assertEquals(person.getAddress().toString(), lesson.getAddress());
+    }
+    @Test
+    public void toStringTest() {
+        assertEquals("Student: "
+                + person.getName().toString()
+                + " Location: "
+                + locationIndex.toString()
+                + " Start: "
+                + startDateTime.toString()
+                + " End: "
+                + endDateTime.toString(), lesson.toString());
     }
 }

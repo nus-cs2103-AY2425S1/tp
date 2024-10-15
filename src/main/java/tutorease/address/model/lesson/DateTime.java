@@ -6,7 +6,6 @@ import static tutorease.address.commons.util.DateTimeUtil.dateTimeToString;
 import static tutorease.address.commons.util.DateTimeUtil.getDateTimeFormat;
 
 import java.time.LocalDateTime;
-
 import tutorease.address.commons.util.DateTimeUtil;
 
 /**
@@ -55,7 +54,7 @@ public class DateTime {
 
     @Override
     public String toString() {
-        return DateTimeUtil.dateTimeToString(dateTime);
+        return dateTimeToString(dateTime);
     }
 
     @Override

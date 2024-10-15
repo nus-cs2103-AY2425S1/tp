@@ -27,7 +27,6 @@ public class LessonSchedule {
         this();
         resetData(toBeCopied);
     }
-
     /**
      * Replaces the contents of the lesson list with {@code lessons}.
      * {@code lessons} must not contain duplicate lessons.
