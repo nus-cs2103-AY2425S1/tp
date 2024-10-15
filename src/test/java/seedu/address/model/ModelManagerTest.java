@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,7 +49,7 @@ public class ModelManagerTest {
         storage = new StorageManager(addressBookStorage, userPrefsStorage); // Initialize storage
         userPrefs = new UserPrefs(); // Initialize userPrefs
 
-        modelManager = new ModelManager(new AddressBook(), userPrefs, storage);
+        modelManager = new ModelManager(new AddressBook(), new UserPrefs(), storage);
     }
 
     /**
@@ -154,14 +156,31 @@ public class ModelManagerTest {
         assertTrue(modelManager.equals(identicalModel), "Comparing with an identical ModelManager should return true.");
     }
 
-
     @Test
-    public void backupData_validPath_success() throws Exception {
-        Path backupPath = temporaryFolder.resolve("backup.json");
-        modelManager.backupData(backupPath.toString());
+    public void backupData_defaultPath_success() throws Exception {
+        // Set up the expected backup directory
+        Path backupDir = Path.of("backups");
+        Files.createDirectories(backupDir); // Ensure the directory exists
 
-        // Assert that the file was created successfully.
-        assertTrue(backupPath.toFile().exists(), "Backup file should have been created successfully.");
+        // Run the backup operation
+        assertDoesNotThrow(() -> modelManager.backupData(null)); // Should not throw an exception
+
+        // Wait briefly to allow the backup process to complete
+        Thread.sleep(500); // Ensure the backup file is written before checking
+
+        // Verify that the backup directory contains at least one file
+        List<Path> backupFiles = Files.list(backupDir).toList();
+        assertFalse(backupFiles.isEmpty(), "No backup files found, but one was expected.");
+
+        // Verify the backup file follows the correct format
+        String expectedPrefix = "addressbook-backup-";
+        boolean validBackupExists = backupFiles.stream()
+                .anyMatch(file -> {
+                    String filename = file.getFileName().toString();
+                    return filename.startsWith(expectedPrefix) && filename.endsWith(".json");
+                });
+
+        assertTrue(validBackupExists, "Expected a backup file with the correct timestamp format.");
     }
 
     @Test
@@ -213,52 +232,29 @@ public class ModelManagerTest {
      */
     @Test
     public void backupData_nullStorage_throwsIoException() {
+        // Create a ModelManager without a storage instance
         ModelManager modelManagerWithoutStorage = new ModelManager(new AddressBook(), new UserPrefs(), null);
-        String backupPath = temporaryFolder.resolve("backup.json").toString();
 
-        assertThrows(IOException.class, () -> modelManagerWithoutStorage.backupData(backupPath),
+        // Verify that calling backupData throws an IOException when the storage is not initialized
+        assertThrows(IOException.class, (
+                ) -> modelManagerWithoutStorage.backupData(null),
                 "Expected IOException when trying to back up with null storage.");
     }
 
     @Test
-    public void restoreFromBackup_validBackup_returnsTrue() throws IOException {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
-        JsonUserPrefsStorage userPrefsStorage =
-                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-
-        ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs(), storage);
-        String backupPath = temporaryFolder.resolve("backup.json").toString();
-
-        // Backup current state
-        modelManager.backupData(backupPath);
-
-        // Modify the address book and restore from backup
-        modelManager.addPerson(ALICE);
-        boolean restored = modelManager.restoreFromBackup();
-        assertTrue(restored, "Backup restoration should be successful.");
-        assertFalse(modelManager.hasPerson(ALICE), "ALICE should not exist after restoring the backup.");
-    }
-
-    @Test
     public void backupData_withValidStorageAndFilePath_success() throws IOException {
-        Path backupPath = temporaryFolder.resolve("backup.json");
-        assertDoesNotThrow(() -> modelManager.backupData(backupPath.toString()));
-        assertTrue(Files.exists(backupPath), "Backup file should be created successfully.");
-    }
+        modelManager.backupData(null); // Manually triggering the backup.
 
-    @Test
-    public void restoreFromBackup_withValidBackup_restoresSuccessfully() throws IOException {
-        // Create backup
-        Path backupPath = temporaryFolder.resolve("backup.json");
-        modelManager.backupData(backupPath.toString());
+        // Ensure backup exists in the backup folder
+        Path backupDir = Path.of("backups");
 
-        // Add a person and restore to verify the restore works
-        modelManager.addPerson(ALICE);
-        boolean restored = modelManager.restoreFromBackup();
-        assertTrue(restored, "Restoration should be successful.");
-        assertFalse(modelManager.hasPerson(ALICE), "Person should not exist after restoration.");
+        try (Stream<Path> backups = Files.list(backupDir)) {
+            boolean backupExists = backups.anyMatch(path ->
+                    path.getFileName().toString().startsWith("addressbook-backup-")
+                            && path.toString().endsWith(".json")
+            );
+            assertTrue(backupExists, "Backup file should be created successfully.");
+        }
     }
 
     @Test

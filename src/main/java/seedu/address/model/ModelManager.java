@@ -4,8 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Optional;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,9 +17,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
+
 
 /**
  * Represents the in-memory model of the address book data.
@@ -23,18 +27,23 @@ import seedu.address.storage.Storage;
 public class ModelManager implements Model {
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss-SSS");
+    private static final long MIN_BACKUP_INTERVAL_MS = 1000; // 1 second debounce
+
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final Storage storage;
     private final FilteredList<Person> filteredPersons;
+    private long lastBackupTime = 0; // Store the last backup timestamp
+    private String lastBackupHash = ""; // Store the hash of the last backed-up content
 
     /**
      * Initializes a ModelManager with the given address book, user preferences, and storage.
      *
      * @param addressBook The address book data to initialize the model with.
      * @param userPrefs   The user preferences to initialize the model with.
-     * @param storage     The storage to be used by the model, for backup and restore operations.
+     * @param storage     The storage to be used by the model for backup and restore operations.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, Storage storage) {
         requireNonNull(addressBook);
@@ -46,7 +55,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.storage = storage; // Storage instance to handle backup and restore.
+        this.storage = storage;
         this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
@@ -94,6 +103,7 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
+        triggerBackup(); // Trigger backup after setting new data
     }
 
     @Override
@@ -110,18 +120,21 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        triggerBackup(); // Trigger backup after deletion
     }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        triggerBackup(); // Trigger backup after addition
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
+        triggerBackup(); // Trigger backup after editing
     }
 
     // ============ Filtered Person List Accessors =======================================================
@@ -140,55 +153,77 @@ public class ModelManager implements Model {
     // ============ Backup and Restore Methods ===========================================================
 
     /**
-     * Backs up the AddressBook data to the specified file path.
+     * Backs up the AddressBook data to a timestamped backup file.
+     */
+    private void triggerBackup() {
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastBackupTime < MIN_BACKUP_INTERVAL_MS) {
+            return; // Skip backup if triggered too soon
+        }
+
+        String currentHash = computeAddressBookHash();
+        if (currentHash.equals(lastBackupHash)) {
+            logger.info("No changes detected. Skipping backup.");
+            return; // Skip backup if the content hasn't changed
+        }
+
+        lastBackupTime = currentTime;
+        lastBackupHash = currentHash;
+
+        try {
+            backupData(null); // Use default path for backup
+        } catch (IOException e) {
+            logger.warning("Failed to create backup: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Backs up the AddressBook data to the specified file path or default path.
      *
-     * @param filePath The file path to save the backup.
+     * @param filePath The file path to save the backup, or null to use the default path.
      * @throws IOException If there is an error during the backup process.
      */
     @Override
     public void backupData(String filePath) throws IOException {
-        requireNonNull(filePath);
-        if (storage != null) {
-            logger.info("Backing up data to: " + filePath);
-            storage.saveAddressBook(this.getAddressBook(), Path.of(filePath));
-
-            // Clean old backups, retaining only the most recent 5 backups
-            storage.cleanOldBackups(5);
-        } else {
+        if (storage == null) {
             throw new IOException("Storage is not initialized!");
         }
+
+        // Use the default backups directory if no path is provided
+        String backupDir = "backups";
+        Files.createDirectories(Path.of(backupDir)); // Ensure the directory exists
+
+        // Generate a timestamp-based filename for the backup
+        String timestamp = LocalDateTime.now().format(FORMATTER);
+        String backupPath = backupDir + "/addressbook-backup-" + timestamp + ".json";
+
+        logger.info("Backing up data to: " + backupPath);
+        storage.saveAddressBook(getAddressBook(), Path.of(backupPath));
+
+        // Clean old backups, retaining only the latest 10 backups
+        cleanOldBackups(10);
     }
 
     /**
-     * Restores the AddressBook from the most recent backup, if available.
-     *
-     * @return True if the restore was successful, false otherwise.
-     * @throws IOException If there is an error during the restore process.
+     * Computes a hash of the current AddressBook data to detect changes.
      */
-    public boolean restoreFromBackup() throws IOException {
-        if (storage != null) {
-            Optional<Path> restoredPath = storage.restoreBackup();
-            if (restoredPath.isPresent()) {
-                try {
-                    logger.info("Restored AddressBook from backup: " + restoredPath.get());
-                    setAddressBook(storage.readAddressBook(restoredPath.get()).orElse(new AddressBook()));
-                    return true;
-                } catch (DataLoadingException e) {
-                    logger.warning("Failed to load data from backup: " + e.getMessage());
-                    throw new IOException("Error loading backup data", e);
-                }
-            } else {
-                logger.warning("No backup found to restore.");
-                return false;
+    private String computeAddressBookHash() {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(addressBook.toString().getBytes());
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                hexString.append(String.format("%02x", b));
             }
-        } else {
-            throw new IOException("Storage is not initialized!");
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            logger.warning("Hash algorithm not found: " + e.getMessage());
+            return "";
         }
     }
 
-
     /**
-     * Cleans up old backups, retaining only the most recent `maxBackups`.
+     * Cleans up old backups, retaining only the latest `maxBackups`.
      *
      * @param maxBackups The number of backups to retain.
      * @throws IOException If there is an error during cleanup.

@@ -1,0 +1,12 @@
+{
+  "persons" : [ {
+    "name" : "Alice Pauline",
+    "age" : "30",
+    "gender" : "F",
+    "nric" : "S1234567Z",
+    "phone" : "12345678",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "tags" : [ "friends" ]
+  } ]
+}

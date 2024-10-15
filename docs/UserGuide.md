@@ -187,11 +187,11 @@ Format: `backup`
       ```
     - Example: 
       ```
-      addressbook-backup-1697380298000.json
+      addressbook-backup-2024-10-16_00-00-38-083.json
       ```
-    - The program retains **only the 10 most recent backups** to manage storage effectively. Older backups are automatically deleted.
+    - The program retains **only the 10 most recent backups** to manage storage effectively. Older backups are automatically deleted when the limit is exceeded.
 2. **Manual Backups:**
-   - In addition to automatic backups, you can **manually trigger a backup** using the `backup` command.
+   - In addition to automatic backups, you can **manually trigger a backup** using the `backup` command anytime.
    - Command Format:
      ```
      backup
@@ -214,7 +214,7 @@ Format: `backup`
    2. Identify the backup files using their **timestamp-based naming convention**.
    3. **Move or copy** the files if needed for external storage or manual restoration.
 
-⚠ **Note:** While the system handles automatic backups, manual backups provide additional flexibility and control when needed.
+⚠ While the system handles automatic backups, manual backups provide additional flexibility and control when needed.
 
 _Note: A restore function will be introduced soon to recover patient records from the latest backup._
 

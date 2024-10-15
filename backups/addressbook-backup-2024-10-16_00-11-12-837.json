@@ -1,0 +1,12 @@
+{
+  "persons" : [ {
+    "name" : "John",
+    "age" : "20",
+    "gender" : "F",
+    "nric" : "S1234567A",
+    "phone" : "87654321",
+    "email" : "john@gmail.com",
+    "address" : "kent ridge [t/owesMoney]",
+    "tags" : [ ]
+  } ]
+}
