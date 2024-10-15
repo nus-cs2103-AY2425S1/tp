@@ -29,7 +29,7 @@ public class AddSessionCommand extends Command {
             + "[" + PREFIX_MEMBER + "INDEX]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SESSION_NAME + "Rehearsal "
-            + PREFIX_DATE + "2024-09-19 "
+            + PREFIX_DATE + "24 Oct 2024 "
             + PREFIX_POINTS + "2 "
             + PREFIX_MEMBER + "1";
 
