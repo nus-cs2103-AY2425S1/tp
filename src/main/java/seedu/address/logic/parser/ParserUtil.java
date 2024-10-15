@@ -195,7 +195,7 @@ public class ParserUtil {
 
     /**
      * Parses a String containing the field to search and keywords,
-     * into a List<String> containing the keywords.
+     * into a List containing the keywords.
      */
     public static List<String> parseSearchKeywords(String fieldAndValues) {
         requireNonNull(fieldAndValues);

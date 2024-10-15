@@ -33,7 +33,8 @@ public class AddressContainsKeywordsPredicate implements Predicate<Person> {
             return false;
         }
 
-        AddressContainsKeywordsPredicate otherAddressContainsKeywordsPredicate = (AddressContainsKeywordsPredicate) other;
+        AddressContainsKeywordsPredicate otherAddressContainsKeywordsPredicate =
+                (AddressContainsKeywordsPredicate) other;
         return keywords.equals(otherAddressContainsKeywordsPredicate.keywords);
     }
 
