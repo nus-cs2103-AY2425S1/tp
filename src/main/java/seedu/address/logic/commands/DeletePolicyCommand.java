@@ -12,7 +12,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.policy.PolicyMap;
+import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
 
 /**
@@ -56,7 +56,7 @@ public class DeletePolicyCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        PolicyMap editedPolicy = editPolicy(policyTypes, personToEdit.getPolicies());
+        PolicySet editedPolicy = editPolicy(policyTypes, personToEdit.getPolicySet());
 
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), editedPolicy);
@@ -67,10 +67,10 @@ public class DeletePolicyCommand extends Command {
         return new CommandResult(String.format(POLICY_DELETE_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
-    private PolicyMap editPolicy(Set<PolicyType> policyTypes, PolicyMap policyMap) throws CommandException {
-        PolicyMap updatedPolicies = policyMap.duplicate();
+    private PolicySet editPolicy(Set<PolicyType> policyTypes, PolicySet policySet) throws CommandException {
+        PolicySet updatedPolicies = policySet.duplicate();
         for (PolicyType type : policyTypes) {
-            if (!updatedPolicies.delete(type)) {
+            if (!updatedPolicies.remove(type)) {
                 throw new CommandException(MESSAGE_POLICY_NOT_FOUND);
             }
         }

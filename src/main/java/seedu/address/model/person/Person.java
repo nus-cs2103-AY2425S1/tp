@@ -26,7 +26,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final PolicySet policies = new PolicySet();
+    private PolicySet policies = new PolicySet();
 
     /**
      * Every field must be present and not null.
@@ -38,6 +38,18 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+    }
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, PolicySet policies) {
+        requireAllNonNull(name, phone, email, address, tags, policies);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.policies = policies;
     }
 
     public Name getName() {
@@ -66,6 +78,9 @@ public class Person {
 
     public Set<Policy> getPolicies() {
         return Collections.unmodifiableSet(policies);
+    }
+    public PolicySet getPolicySet() {
+        return this.policies;
     }
 
     /**
