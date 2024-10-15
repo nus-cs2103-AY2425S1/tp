@@ -284,7 +284,7 @@ public class ModelManagerTest {
         assertThrows(IOException.class, () -> modelWithoutStorage.backupData(backupPath),
                 "Expected IOException when storage is not initialized.");
     }
-    
+
     @Test
     public void cleanOldBackups_nullStorage_throwsIOException() {
         ModelManager modelWithoutStorage = new ModelManager(new AddressBook(), new UserPrefs(), null);
