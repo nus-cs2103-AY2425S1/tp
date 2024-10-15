@@ -53,7 +53,7 @@ public class Game {
      *
      * @param gameName A valid Game name.
      */
-    public Game(String gameName, String username, SkillLevel skillLevel) {
+    public Game(String gameName, String username, String skillLevel) {
         requireNonNull(gameName);
         checkArgument(isValidGameName(gameName), MESSAGE_CONSTRAINTS);
         this.gameName = gameName;
