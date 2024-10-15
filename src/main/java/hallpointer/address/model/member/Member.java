@@ -86,8 +86,9 @@ public class Member {
     }
 
     /**
-     * @param points Points to be added to the member.
-     * Adds the given points to the member's total points.
+     *  Adds the given points to the member's total points.
+     *
+     *  @param points Points to be added to the member.
      */
     public void addPoints(Point points) {
         requireNonNull(points);
@@ -95,8 +96,9 @@ public class Member {
     }
 
     /**
-     * @param session Session to be added to the member.
-     * Adds the given session to the member's list of sessions.
+     *  Adds the given session to the member's list of sessions.
+     *
+     *  @param session Session to be added to the member.
      */
     public void addSession(Session session) {
         requireNonNull(session);
@@ -105,8 +107,9 @@ public class Member {
     }
 
     /**
-     * @param session Session to be removed from the member.
      * Removes the given session from the member's list of sessions.
+     *
+     * @param session Session to be removed from the member.
      */
     public void removeSession(Session session) {
         requireNonNull(session);
