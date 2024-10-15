@@ -1,20 +1,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
 
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.CreateCommand;
-import seedu.address.logic.commands.CreateEventCommand;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.event.Date;
-import seedu.address.model.event.Event;
-import seedu.address.model.event.Name;
 
 public class CreateCommandParser implements Parser<CreateCommand> {
     /**
