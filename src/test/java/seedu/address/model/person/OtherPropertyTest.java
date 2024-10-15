@@ -68,19 +68,6 @@ public class OtherPropertyTest {
     public void getTags_success() {
         assertEquals(Collections.unmodifiableSet(tags1), otherProperty1.getTags());
     }
-
-    @Test
-    public void isValidOtherPropertyName_validNames_success() {
-        assertTrue(OtherProperty.isValidOtherPropertyName("OtherProperty123"));
-        assertTrue(OtherProperty.isValidOtherPropertyName("12345"));
-    }
-
-    @Test
-    public void isValidOtherPropertyName_invalidNames_failure() {
-        assertFalse(OtherProperty.isValidOtherPropertyName("!@#$"));
-        assertFalse(OtherProperty.isValidOtherPropertyName("Other Property")); // Contains space
-    }
-
     /*@Test
     public void equals_sameObject_success() {
         assertTrue(otherProperty1.equals(otherProperty1));

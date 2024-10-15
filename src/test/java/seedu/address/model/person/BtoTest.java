@@ -70,18 +70,6 @@ public class BtoTest {
     }
 
     @Test
-    public void isValidBtoName_validNames_success() {
-        assertTrue(Bto.isValidBtoName("Bto123"));
-        assertTrue(Bto.isValidBtoName("12345"));
-    }
-
-    @Test
-    public void isValidBtoName_invalidNames_failure() {
-        assertFalse(Bto.isValidBtoName("!@#$"));
-        assertFalse(Bto.isValidBtoName("Bto Name")); // Contains space
-    }
-
-    @Test
     public void equals_sameObject_success() {
         assertTrue(bto1.equals(bto1));
     }

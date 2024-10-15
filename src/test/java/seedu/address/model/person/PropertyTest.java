@@ -70,18 +70,6 @@ public class PropertyTest {
         assertEquals(Collections.unmodifiableSet(tags1), property1.getTags());
     }
 
-    @Test
-    public void isValidPropertyName_validNames_success() {
-        assertTrue(Property.isValidPropertyName("Property1"));
-        assertTrue(Property.isValidPropertyName("12345"));
-    }
-
-    @Test
-    public void isValidPropertyName_invalidNames_failure() {
-        assertFalse(Property.isValidPropertyName("!@#$"));
-        assertFalse(Property.isValidPropertyName("Property 123")); // Contains space
-    }
-
     /*@Test
     public void isSameProperty_sameProperty_success() {
         Property sameProperty = new Property(postalCode1, unitNumber1, price1, tags1) {};

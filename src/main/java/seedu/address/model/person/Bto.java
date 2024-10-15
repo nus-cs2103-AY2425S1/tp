@@ -11,7 +11,6 @@ import seedu.address.model.tag.Tag;
 public class Bto extends Property {
 
     public static final String MESSAGE_CONSTRAINTS = "BTO names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+"; // Checks if the BTO name is alphanumeric
 
     /**
      * Constructs a {@code BTO}.
@@ -22,13 +21,6 @@ public class Bto extends Property {
      */
     public Bto(PostalCode postalCode, UnitNumber unitNumber, Price price, Set<Tag> tags) {
         super(postalCode, unitNumber, price, tags);
-    }
-
-    /**
-     * Returns true if a given string is a valid BTO name.
-     */
-    public static boolean isValidBtoName(String test) {
-        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

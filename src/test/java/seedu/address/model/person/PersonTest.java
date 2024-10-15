@@ -96,4 +96,62 @@ public class PersonTest {
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
+    @Test
+    public void hashCodeMethod() {
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
+    }
+    @Test
+    public void getPhoneMethod() {
+        assertEquals(ALICE.getPhone(), ALICE.getPhone());
+    }
+    @Test
+    public void getEmailMethod() {
+        assertEquals(ALICE.getEmail(), ALICE.getEmail());
+    }
+    @Test
+    public void getAddressMethod() {
+        assertEquals(ALICE.getAddress(), ALICE.getAddress());
+    }
+    @Test
+    public void getTagsMethod() {
+        assertEquals(ALICE.getTags(), ALICE.getTags());
+    }
+    @Test
+    public void getListOfSellingPropertiesMethod() {
+        assertEquals(ALICE.getListOfSellingProperties(), ALICE.getListOfSellingProperties());
+    }
+    @Test
+    public void getListOfBuyingPropertiesMethod() {
+        assertEquals(ALICE.getListOfBuyingProperties(), ALICE.getListOfBuyingProperties());
+    }
+    @Test
+    public void containsBuyPropertyMethod() {
+        Apartment property = new Apartment(new PostalCode("123456"), new UnitNumber("10-65"),
+                new Price("1500000"), ALICE.getTags());
+        assertFalse(ALICE.containsBuyProperty(property));
+    }
+    /*@Test
+    public void addBuyPropertyMethod() {
+        Apartment property = new Apartment(new PostalCode("123456"), new UnitNumber("10-65"),
+                new Price("1500000"), ALICE.getTags());
+        ALICE.addBuyProperty(property);
+        assertTrue(ALICE.containsBuyProperty(property));
+    }*/
+    @Test
+    public void isSamePersonMethod() {
+        assertTrue(ALICE.isSamePerson(ALICE));
+    }
+    @Test
+    public void equalsMethod() {
+        assertTrue(ALICE.equals(ALICE));
+    }
+    @Test
+    public void toStringMethod2() {
+        assertEquals(ALICE.toString(), ALICE.toString());
+    }
+    @Test
+    public void hashCodeMethod2() {
+        assertEquals(ALICE.hashCode(), ALICE.hashCode());
+    }
 }

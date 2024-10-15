@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -67,18 +66,6 @@ public class ApartmentTest {
     @Test
     public void getTags_success() {
         assertEquals(Collections.unmodifiableSet(tags1), apartment1.getTags());
-    }
-
-    @Test
-    public void isValidApartmentName_validNames_success() {
-        assertTrue(Apartment.isValidApartmentName("Apartment1"));
-        assertTrue(Apartment.isValidApartmentName("12345"));
-    }
-
-    @Test
-    public void isValidApartmentName_invalidNames_failure() {
-        assertFalse(Apartment.isValidApartmentName("!@#$"));
-        assertFalse(Apartment.isValidApartmentName("Apartment 123")); // Contains space
     }
 
     /*@Test
