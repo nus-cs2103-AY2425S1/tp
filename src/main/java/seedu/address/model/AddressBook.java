@@ -12,6 +12,8 @@ import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.student.UniqueStudentList;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Wraps all data at the address-book level
@@ -21,6 +23,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueStudentList students;
     private final UniqueGroupList groups;
+    private final UniqueTaskList tasks;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -32,6 +35,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         students = new UniqueStudentList();
         groups = new UniqueGroupList();
+        tasks = new UniqueTaskList();
     }
 
     public AddressBook() {
@@ -64,6 +68,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the task list with {@code tasks}.
+     * {@code tasks} must not contain duplicate tasks.
+     */
+    public void setTasks(List<Task> tasks) {
+        this.tasks.setTasks(tasks);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
@@ -71,6 +83,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setStudents(newData.getStudentList());
         setGroups(newData.getGroupList());
+        setTasks(newData.getTaskList());
     }
 
     //// student-level operations
@@ -161,6 +174,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups.add(p);
     }
 
+    public void removeGroup(Group groupToBeDeleted) {
+        groups.remove(groupToBeDeleted);
+    }
+
     /**
      * Replaces the given group {@code target} in the list with {@code editedGroup}.
      * {@code target} must exist in the address book.
@@ -207,6 +224,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Task> getTaskList() {
+        return tasks.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -225,4 +247,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return students.hashCode();
     }
+
+
 }

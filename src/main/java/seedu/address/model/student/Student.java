@@ -92,7 +92,7 @@ public class Student {
     }
 
     /**
-     * Returns a copy of studnet which has no group
+     * Returns a copy of student which has no group
      */
     public Student removeGroup() {
         return new Student(name, email, tags, studentNumber, Optional.empty());

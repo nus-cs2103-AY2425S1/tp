@@ -121,13 +121,15 @@ public class MainWindow extends UiPart<Stage> {
         studentListPanel = new StudentListPanel(logic.getFilteredPersonList());
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
         groupTaskPanel = new GroupTaskPanel(logic.getFilteredGroupList());
-        taskListPanel = new StudentListPanel(logic.getFilteredPersonList());
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
         if (this.logic.getState().equals(DEFAULT_STUDENT)) {
             informationListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
         } else if (this.logic.getState().equals(DEFAULT_GROUP_TASK)) {
             informationListPanelPlaceholder.getChildren().add(groupTaskPanel.getRoot());
-        } else {
+        } else if (this.logic.getState().equals(DEFAULT_GROUP)) {
             informationListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        } else {
+            informationListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
         }
 
         resultDisplay = new ResultDisplay();
@@ -199,6 +201,9 @@ public class MainWindow extends UiPart<Stage> {
         } else if (changeState == 1) {
             informationListPanelPlaceholder.getChildren().clear();
             informationListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        } else if (changeState == 2) {
+            informationListPanelPlaceholder.getChildren().clear();
+            informationListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
         } else {
             informationListPanelPlaceholder.getChildren().clear();
             informationListPanelPlaceholder.getChildren().add(groupTaskPanel.getRoot());

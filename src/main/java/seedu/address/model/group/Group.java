@@ -48,6 +48,10 @@ public class Group {
         return Collections.unmodifiableSet(students);
     }
 
+    public boolean hasStudents() {
+        return !students.isEmpty();
+    }
+
     public Set<Task> getTasks() {
         return Collections.unmodifiableSet(tasks);
     }
@@ -55,7 +59,8 @@ public class Group {
     /**
      * Adds a given student into the {@code group} object.
      * There can be a maximum of 5 students in each group.
-     * @param student  The {@code student} object to be added.
+     *
+     * @param student The {@code student} object to be added.
      */
     public void add(Student student) {
         if (students.size() < MAXIMUM_STUDENTS_IN_GROUP) {
@@ -66,7 +71,8 @@ public class Group {
     /**
      * Adds a given task into the {@code group} object.
      * There can be a maximum of 5 students in each group.
-     * @param task  The {@code task} object to be added.
+     *
+     * @param task The {@code task} object to be added.
      */
     public void addTask(Task task) {
         tasks.add(task);
@@ -86,7 +92,7 @@ public class Group {
         }
 
         return otherGroup != null
-                && otherGroup.getGroupName().equals(getGroupName());
+            && otherGroup.getGroupName().equals(getGroupName());
     }
 
     /**
@@ -106,7 +112,7 @@ public class Group {
 
         Group otherStudent = (Group) other;
         return groupName.equals(otherStudent.groupName)
-                && students.equals(otherStudent.students);
+            && students.equals(otherStudent.students);
     }
 
     @Override
@@ -118,8 +124,8 @@ public class Group {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("groupname", groupName)
-                .add("students", students)
-                .toString();
+            .add("groupname", groupName)
+            .add("students", students)
+            .toString();
     }
 }
