@@ -52,12 +52,18 @@ public class Messages {
                 .append(person.getEmail())
                 .append("\nAddress: ")
                 .append(person.getAddress())
-                .append("\nMedical Conditions: ");
+                .append("\nPriority: ")
+                .append(person.getPriority());
+
+        builder.append("\nMedical Conditions: ");
         appendWithComma(builder, person.getMedCons());
+
         builder.append("\nAppointments: ");
         appendWithComma(builder, person.getAppointments());
+
         builder.append("\nTags: ");
         appendWithComma(builder, person.getTags());
+
         return builder.toString();
     }
 
