@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import seedu.address.model.log.Log;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 

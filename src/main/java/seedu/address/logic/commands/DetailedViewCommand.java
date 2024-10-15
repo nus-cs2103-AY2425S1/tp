@@ -9,10 +9,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.log.Log;
 import seedu.address.model.person.LogsList;
-import seedu.address.model.person.Person;
-
-import java.util.List;
-
 
 /**
  * Detailed View of a patient's session log identified using it's displayed index from the patient's session log list.
