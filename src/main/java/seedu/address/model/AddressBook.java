@@ -5,8 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Property;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -68,11 +70,25 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a property with the same identity as {@code property} exists in the address book.
+     */
+    public boolean hasSellProperty(Index index, Property property) {
+        requireNonNull(property);
+        // There's no get method for ObservableList, so we can't get the property at the index
+        //Person specificPerson = persons.get(index.getZeroBased());
+        return false;
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
         persons.add(p);
+    }
+
+    public void addSellProperty(Property p) {
+        //properties.add(p);
     }
 
     /**

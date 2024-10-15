@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.util.Collections;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
@@ -11,7 +12,6 @@ import seedu.address.model.tag.Tag;
 public abstract class Property {
 
     public static final String MESSAGE_CONSTRAINTS = "Property names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+"; // Checks if the property name is alphanumeric
 
     private final PostalCode postalCode;
     private final UnitNumber unitNumber;
@@ -30,12 +30,40 @@ public abstract class Property {
         this.tags = tags;
     }
 
-    /**
-     * Returns true if a given string is a valid property name.
-     */
-    public static boolean isValidPropertyName(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public PostalCode getPostalCode() {
+        return postalCode;
     }
+
+    public UnitNumber getUnitNumber() {
+        return unitNumber;
+    }
+
+    public Price getPrice() {
+        return price;
+    }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns true if the property is the same as the other property.
+     */
+    public boolean isSameProperty(Property otherProperty) {
+        if (otherProperty == this) {
+            return true;
+        }
+
+        return otherProperty != null
+                && this.getClass().equals(otherProperty.getClass())
+                && otherProperty.getPostalCode().equals(getPostalCode())
+                && otherProperty.getUnitNumber().equals(getUnitNumber());
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -48,7 +76,7 @@ public abstract class Property {
         }
 
         Property otherProperty = (Property) other;
-        return postalCode.equals(otherProperty.postalCode);
+        return postalCode.equals(otherProperty.postalCode) && unitNumber.equals(otherProperty.unitNumber);
     }
 
     @Override

@@ -7,8 +7,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLING_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIT_NUMBER;
 
+import java.util.List;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Property;
 
 /**
@@ -16,17 +21,18 @@ import seedu.address.model.person.Property;
  */
 public class AddPropertyToSellCommand extends Command {
     public static final String COMMAND_WORD = "addSell";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a property to the list of properties to sell"
-            + "for this specific person. "
-            + "Parameters: INDEX (Must be a positive integer)"
-            + PREFIX_HOUSING_TYPE + "[HOUSING_TYPE]"
-            + PREFIX_SELLING_PRICE + "[SELLING_PRICE]"
-            + PREFIX_POSTAL_CODE + "[POSTAL_CODE]"
-            + PREFIX_UNIT_NUMBER + "[UNIT_NUMBER]"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a property to the list of properties to sell "
+            + "for this specific person. \n"
+            + "Parameters: INDEX (Must be a positive integer) "
+            + PREFIX_HOUSING_TYPE + "[HOUSING_TYPE] "
+            + PREFIX_SELLING_PRICE + "[SELLING_PRICE] "
+            + PREFIX_POSTAL_CODE + "[POSTAL_CODE] "
+            + PREFIX_UNIT_NUMBER + "[UNIT_NUMBER] "
             + PREFIX_TAG + "[TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_HOUSING_TYPE + "Condo "
-            + PREFIX_SELLING_PRICE + "1.65M "
+            + "1 "
+            + PREFIX_HOUSING_TYPE + "c "
+            + PREFIX_SELLING_PRICE + "165000000 "
             + PREFIX_POSTAL_CODE + "567510 "
             + PREFIX_UNIT_NUMBER + "10-65 "
             + PREFIX_TAG + "Extremely spacious "
@@ -38,26 +44,35 @@ public class AddPropertyToSellCommand extends Command {
             + "in the list of properties to sell";
 
     private final Property propertyToSellToBeAdded;
+    private final Index personIndex;
 
     /**
      * Creates an AddPropertyToSellCommand to add the specified {@code Property}
      */
-    public AddPropertyToSellCommand(Property property) {
+    public AddPropertyToSellCommand(Index personIndex, Property property) {
         requireNonNull(property);
+        this.personIndex = personIndex;
         this.propertyToSellToBeAdded = property;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
 
-        /*if (model.hasProperty(property)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PROPERTY);
+        if (personIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        model.addProperty(property);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, property));*/
-        return new CommandResult("Hello from AddPropertyToSellCommand");
+        Person personToEdit = lastShownList.get(personIndex.getZeroBased());
+
+        if (personToEdit.containsSellProperty(propertyToSellToBeAdded)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PROPERTY);
+        } else {
+            personToEdit.addSellProperty(propertyToSellToBeAdded);
+        }
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, propertyToSellToBeAdded));
     }
 
     @Override

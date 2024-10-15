@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSING_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTAL_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLING_PRICE;
@@ -10,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIT_NUMBER;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddPropertyToSellCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Apartment;
@@ -39,12 +41,24 @@ public class AddPropertyToSellParser implements Parser<AddPropertyToSellCommand>
                 ArgumentTokenizer.tokenize(args, PREFIX_HOUSING_TYPE, PREFIX_SELLING_PRICE,
                         PREFIX_POSTAL_CODE, PREFIX_UNIT_NUMBER, PREFIX_TAG);
 
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            /*throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddPropertyToSellCommand.MESSAGE_USAGE), pe);*/
+            throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        // Removed this condition, not sure what it means :/
+        // || !argMultimap.getPreamble().isEmpty()
         if (!arePrefixesPresent(argMultimap, PREFIX_HOUSING_TYPE, PREFIX_SELLING_PRICE,
-                PREFIX_POSTAL_CODE, PREFIX_UNIT_NUMBER)
-                || !argMultimap.getPreamble().isEmpty()) {
+                PREFIX_POSTAL_CODE, PREFIX_UNIT_NUMBER)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddPropertyToSellCommand.MESSAGE_USAGE));
         }
+
         // Create a new Property object here and pass it to AddPropertyToSellCommand(Property property);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_HOUSING_TYPE,
                 PREFIX_SELLING_PRICE, PREFIX_POSTAL_CODE, PREFIX_UNIT_NUMBER);
@@ -56,9 +70,8 @@ public class AddPropertyToSellParser implements Parser<AddPropertyToSellCommand>
 
         Property property = getSpecificPropertyObject(housingType, sellingPrice, postalCode, unitNumber, tagList);
 
-        return new AddPropertyToSellCommand(property);
+        return new AddPropertyToSellCommand(index, property);
     }
-
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());

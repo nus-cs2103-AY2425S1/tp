@@ -11,7 +11,6 @@ import seedu.address.model.tag.Tag;
 public class Apartment extends Property {
 
     public static final String MESSAGE_CONSTRAINTS = "Apartment names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+"; // Checks if the Apartment name is alphanumeric
 
     /**
      * Constructs a {@code Apartment}.
@@ -23,12 +22,18 @@ public class Apartment extends Property {
     public Apartment(PostalCode postalCode, UnitNumber unitNumber, Price price, Set<Tag> tags) {
         super(postalCode, unitNumber, price, tags);
     }
-
-    /**
-     * Returns true if a given string is a valid Apartment name.
-     */
-    public static boolean isValidApartmentName(String test) {
-        return test.matches(VALIDATION_REGEX);
+    @Override
+    public boolean equals(Object otherApartment) {
+        if (this == otherApartment) {
+            return true;
+        }
+        if (!super.equals(otherApartment)) {
+            return false;
+        }
+        if (!(otherApartment instanceof Apartment)) {
+            return false;
+        }
+        return true;
     }
 
     @Override

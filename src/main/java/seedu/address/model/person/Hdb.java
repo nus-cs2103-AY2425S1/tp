@@ -11,18 +11,23 @@ import seedu.address.model.tag.Tag;
 public class Hdb extends Property {
 
     public static final String MESSAGE_CONSTRAINTS = "HDB names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+"; // Checks if the HDB name is alphanumeric
-
 
     public Hdb(PostalCode postalCode, UnitNumber unitNumber, Price price, Set<Tag> tags) {
         super(postalCode, unitNumber, price, tags);
     }
 
-    /**
-    * Returns true if a given string is a valid HDB name.
-    */
-    public static boolean isValidHdbName(String test) {
-        return test.matches(VALIDATION_REGEX);
+    @Override
+    public boolean equals(Object otherHdb) {
+        if (this == otherHdb) {
+            return true;
+        }
+        if (!super.equals(otherHdb)) {
+            return false;
+        }
+        if (!(otherHdb instanceof Hdb)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
