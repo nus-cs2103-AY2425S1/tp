@@ -42,7 +42,7 @@ public class FilterCommandParserTest {
     }
 
     @Test
-    public void parse_ValidArgs_returnsFilterCommand() {
+    public void parse_validArgs_returnsFilterCommand() {
         // single tag
         Set<Tag> firstSet = new HashSet<>();
         firstSet.add(new Tag(VALID_TAG_HUSBAND));
