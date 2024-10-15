@@ -50,6 +50,13 @@ public class ModuleCodeTest {
     }
 
     @Test
+    public void constructor_validModuleCodeWithLettersBehind() {
+        assertDoesNotThrow(() -> {
+            new ModuleCode("CFG2002KH");
+        });
+    }
+
+    @Test
     public void constructor_validModuleCodeWithLowerCaseLetter() {
         assertDoesNotThrow(() -> {
             new ModuleCode("ma1522");
