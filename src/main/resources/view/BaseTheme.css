@@ -158,7 +158,7 @@
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: white;
 }
 
 .list-view {
@@ -444,4 +444,84 @@
     -fx-border-radius: 0;
     -fx-background-radius: 7;
     -fx-font-size: 13;
+}
+
+.detail-box {
+    -fx-padding: 20;
+}
+
+.detail-view {
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-padding: 35;
+    -fx-spacing: 35px;
+}
+
+#personDetailView .detail-header {
+    -fx-font-size: 30pt;
+    -fx-font-family: "Poppins";
+    -fx-text-fill: black;
+}
+
+#personDetailView .detail-sub-header {
+    -fx-font-size: 15pt;
+    -fx-font-family: "Poppins";
+    -fx-text-fill: black;
+}
+
+#personDetailView .detail-contents {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Poppins Regular";
+    -fx-text-fill: black;
+}
+
+#personDetailView .detail-grid-header {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Poppins Regular";
+    -fx-text-fill: black;
+}
+
+#personDetailView .grid-content-name {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Poppins Regular";
+    -fx-text-fill: #000;
+}
+
+#personDetailView .grid-content-date {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Poppins Regular";
+    -fx-text-fill: #848484;
+
+}
+
+#personDetailView .grid-content-status-accept,
+#personDetailView .grid-content-status-pending,
+#personDetailView .grid-content-status-reject {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Poppins Regular";
+    -fx-text-fill: #000;
+    -fx-background-radius: 20px;
+    -fx-padding: 5px 15px;
+
+    -fx-alignment: center;
+
+    -fx-pref-width: 100px;
+
+    -fx-min-height: 30px;
+    -fx-max-height: 30px;
+    -fx-alignment: center;
+}
+
+#personDetailView .grid-content-status-accept {
+    -fx-background-color: #E4FFDE;
+}
+
+#personDetailView .grid-content-status-pending {
+    -fx-background-color: #FFFBDE;
+}
+
+#personDetailView .grid-content-status-reject {
+    -fx-background-color: #FFE3DE;
 }
