@@ -27,6 +27,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -98,7 +99,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         EventName name = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_EVENT_NAME).get());
         Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_EVENT_TIME).get());
         Venue venue = ParserUtil.parseVenue((argMultimap.getValue(PREFIX_EVENT_VENUE)).get());
-        Person celebrity = parseCelebrity(argMultimap.getValue(PREFIX_EVENT_CELEBRITY).get());
+        Person celebrity = UniquePersonList.findPerson(argMultimap.getValue(PREFIX_EVENT_CELEBRITY).get());
 
         return new AddEventCommand(new Event(name, time, venue, celebrity));
     }
