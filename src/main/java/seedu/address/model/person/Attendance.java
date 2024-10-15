@@ -2,21 +2,29 @@ package seedu.address.model.person;
 
 /**
  * Represents a Person's attendance in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidAttendance(String)}
  */
 public class Attendance {
 
     public static final String MESSAGE_CONSTRAINTS = "Attendance must be either present (true) or absent (false).";
+    public static final String VALIDATION_REGEX = "^(true|false)$";
 
-    public final boolean isPresent;
+    public final Boolean isPresent;
 
     /**
      * Constructs an {@code Attendance}.
      *
-     * @param isPresent A boolean indicating if the person is present (true) or absent (false).
+     * @param isPresent A Boolean indicating if the person is present (true) or absent (false).
      */
-    public Attendance(boolean isPresent) {
+    public Attendance(Boolean isPresent) {
         this.isPresent = isPresent;
+    }
+
+    /**
+     * Returns true if a given string is a valid attendance status (either true or false).
+     */
+    public static Boolean isValidAttendance(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
