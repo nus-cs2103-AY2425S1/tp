@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 
 import java.util.concurrent.CountDownLatch;
@@ -24,6 +25,8 @@ public class HelpWindowTest {
 
     @BeforeEach
     public void setUp() throws InterruptedException {
+        System.setProperty("java.awt.headless", "true");
+
         new JFXPanel();
 
         CountDownLatch latch = new CountDownLatch(1);
@@ -33,7 +36,9 @@ public class HelpWindowTest {
             latch.countDown();
         });
 
-        latch.await(5, TimeUnit.SECONDS);
+        if (!latch.await(5, TimeUnit.SECONDS)) {
+            fail("HelpWindow initialization timed out");
+        }
     }
 
     @Test
