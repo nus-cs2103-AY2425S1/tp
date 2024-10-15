@@ -8,9 +8,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import hallpointer.address.commons.exceptions.IllegalValueException;
 import hallpointer.address.model.member.Member;
-import hallpointer.address.model.session.Date;
+import hallpointer.address.model.session.SessionDate;
 import hallpointer.address.model.session.Session;
 import hallpointer.address.model.session.SessionName;
+import hallpointer.address.model.point.Point;
 
 /**
  * Jackson-friendly version of {@link Session}.
@@ -47,9 +48,8 @@ public class JsonAdaptedSession {
      */
     public JsonAdaptedSession(Session source) {
         sessionName = source.getSessionName().toString();
-        points = source.getPoints();
+        points = source.getPoints().getValue();
         date = source.getDate().toString();
-        source.getMembers().forEach(member -> members.add(new JsonAdaptedMember(member)));
     }
 
     /**
@@ -63,6 +63,6 @@ public class JsonAdaptedSession {
         for (JsonAdaptedMember member : members) {
             modelMembers.add(member.toModelType());
         }
-        return new Session(new SessionName(sessionName), new Date(date), points, modelMembers);
+        return new Session(new SessionName(sessionName), new SessionDate(date), new Point(points));
     }
 }

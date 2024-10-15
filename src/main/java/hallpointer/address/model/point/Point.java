@@ -49,6 +49,10 @@ public class Point {
         return Integer.hashCode(points);
     }
 
+    public int getValue() {
+        return points;
+    }
+
     /**
      * Returns the points as a formatted string.
      */
