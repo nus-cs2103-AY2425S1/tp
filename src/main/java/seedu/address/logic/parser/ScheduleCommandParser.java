@@ -11,9 +11,12 @@ import java.time.format.DateTimeParseException;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Meeting;
+import seedu.address.model.person.Person;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -61,10 +64,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
             throw new ParseException("Invalid end time format. Please use the correct format: 'dd-MM-yyyy HH:mm'");
         }
 
-        Meeting meeting = ParserUtil.parseMeeting(startTime, endTime,
-                argMultimap.getValue(PREFIX_LOCATION).get());
-
-        return new ScheduleCommand(index, meeting);
+        return new ScheduleCommand(index, startTime, endTime, argMultimap.getValue(PREFIX_LOCATION).get());
     }
 
     /**

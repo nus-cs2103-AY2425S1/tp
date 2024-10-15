@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,6 +48,13 @@ public class Meetings {
     }
 
     /**
+     * Sorts the list of meetings by startTime.
+     */
+    public void sortMeetingsByStartTime() {
+        FXCollections.sort(internalList, Comparator.comparing(Meeting::getStartTime));
+    }
+
+    /**
      * Adds a meeting to the list.
      * The meeting must not clash with other meetings in the list.
      */
@@ -60,6 +68,8 @@ public class Meetings {
 
         // find the index to slot the meeting in.
         internalList.add(index, toAdd);
+
+        sortMeetingsByStartTime();
     }
 
     public Meeting getMeeting(int index) {
@@ -88,6 +98,13 @@ public class Meetings {
 
     @Override
     public String toString() {
-        return internalList.toString();
+        StringBuilder meetingList = new StringBuilder();
+
+        for (int i = 0; i < internalList.size(); i++) {
+            meetingList.append(i + 1).append(". Meeting with ").append(getMeeting(i).getPersonToMeet().getName())
+                    .append(" ").append(getMeeting(i).toString()).append("\n");
+        }
+
+        return meetingList.toString();
     }
 }

@@ -3,8 +3,12 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 
 /**
  * Represents a Person's meetings in the Meetings field.
@@ -25,6 +29,7 @@ public class Meeting {
     public final String location;
     public final LocalDateTime startTime;
     public final LocalDateTime endTime;
+    public final Person personToMeet;
 
     /**
      * Constructs an {@code Meeting}.
@@ -33,7 +38,8 @@ public class Meeting {
      * @param endTime A valid ending time of the meeting.
      * @param location A valid location.
      */
-    public Meeting(LocalDateTime startTime, LocalDateTime endTime, String location) {
+    public Meeting(Person person, LocalDateTime startTime, LocalDateTime endTime, String location) {
+        requireNonNull(person);
         requireNonNull(location);
         requireNonNull(startTime);
         requireNonNull(endTime);
@@ -44,6 +50,8 @@ public class Meeting {
 
         checkArgument(isValidLocation(location), MESSAGE_CONSTRAINTS_LOCATION);
         this.location = location;
+
+        this.personToMeet = person;
     }
 
     public static boolean isValidStartAndEndTime(LocalDateTime start, LocalDateTime end) {
@@ -70,8 +78,8 @@ public class Meeting {
 
     @Override
     public String toString() {
-        SimpleDateFormat formatter = new SimpleDateFormat("h:mm a, d MMMM yyyy");
-        return formatter.format(startTime) + " - " + location;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "h:mm a, d MMMM yyyy");
+        return "from " + formatter.format(startTime) + " to " + formatter.format(endTime) + " at " + location;
     }
 
     @Override
@@ -105,5 +113,9 @@ public class Meeting {
 
     public LocalDateTime getEndTime() {
         return endTime;
+    }
+
+    public Person getPersonToMeet() {
+        return personToMeet;
     }
 }

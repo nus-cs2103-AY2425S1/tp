@@ -113,7 +113,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public void addMeeting(Person p, Meeting m) {
+        System.out.println("addMeeting in AddressBook");
         p.getMeetings().addMeeting(m);
+        meetings.addMeeting(m);
+    }
+
+    public String listMeetings() {
+        return meetings.toString();
     }
 
     @Override

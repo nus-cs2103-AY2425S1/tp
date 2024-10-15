@@ -10,13 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Major;
-import seedu.address.model.person.Meeting;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Role;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -154,27 +148,5 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
-    }
-
-    /**
-     * Parses a meeting
-     *
-     * @throws ParseException if the give {@code meeting} is invalid.
-     */
-    public static Meeting parseMeeting(LocalDateTime startTime, LocalDateTime endTime, String location)
-            throws ParseException {
-        requireNonNull(startTime);
-        requireNonNull(endTime);
-        requireNonNull(location);
-
-        if (!Meeting.isValidLocation(location)) {
-            throw new ParseException(Meeting.MESSAGE_CONSTRAINTS_LOCATION);
-        }
-
-        if (!Meeting.isValidStartAndEndTime(startTime, endTime)) {
-            throw new ParseException(Meeting.MESSAGE_CONSTRAINTS_TIME);
-        }
-
-        return new Meeting(startTime, endTime, location);
     }
 }

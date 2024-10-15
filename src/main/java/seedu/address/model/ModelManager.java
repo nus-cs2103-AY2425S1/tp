@@ -112,6 +112,16 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void addMeeting(Person target, Meeting meeting) {
+        System.out.println("addMeeting in ModelManager");
+        addressBook.addMeeting(target, meeting);
+    }
+
+    public String listMeetings() {
+        return addressBook.listMeetings();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -129,10 +139,7 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    @Override
-    public void addMeeting(Person target, Meeting meeting) {
-        addressBook.addMeeting(target, meeting);
-    }
+
 
     @Override
     public boolean equals(Object other) {
