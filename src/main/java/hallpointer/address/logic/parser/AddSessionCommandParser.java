@@ -10,7 +10,8 @@ import java.util.stream.Stream;
 
 import hallpointer.address.logic.commands.AddSessionCommand;
 import hallpointer.address.logic.parser.exceptions.ParseException;
-import hallpointer.address.model.session.Date;
+import hallpointer.address.model.session.SessionDate;
+import hallpointer.address.model.point.Point;
 import hallpointer.address.model.session.Session;
 import hallpointer.address.model.session.SessionName;
 
@@ -34,10 +35,10 @@ public class AddSessionCommandParser implements Parser<AddSessionCommand> {
         }
 
         SessionName name = ParserUtil.parseSessionName(argMultimap.getValue(PREFIX_SESSION_NAME).get());
-        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        int points = ParserUtil.parsePoints(argMultimap.getValue(PREFIX_POINTS).get());
+        SessionDate date = ParserUtil.parseSessionDate(argMultimap.getValue(PREFIX_DATE).get());
+        Point points = ParserUtil.parsePoints(argMultimap.getValue(PREFIX_POINTS).get());
 
-        Session session = new Session(name, date, points, new HashSet<>());
+        Session session = new Session(name, date, points);
 
         return new AddSessionCommand(session);
     }
