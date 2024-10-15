@@ -10,9 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tutorease.address.model.lesson.exceptions.LessonIndexOutOfRange;
 import tutorease.address.model.lesson.exceptions.OverlappingLessonException;
-import tutorease.address.model.person.Person;
-import tutorease.address.model.person.UniquePersonList;
-import tutorease.address.model.person.exceptions.DuplicatePersonException;
 
 // adapted from UniquePersonList
 
