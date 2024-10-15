@@ -70,7 +70,7 @@ public class AddCarCommand extends Command {
                 personToAddCarTo.getPhone(),
                 personToAddCarTo.getEmail(),
                 personToAddCarTo.getAddress(),
-                personToAddCarTo.getTags(),
+                personToAddCarTo.getIssues(),
                 carToAdd
         );
 
