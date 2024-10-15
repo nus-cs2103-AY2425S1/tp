@@ -30,6 +30,9 @@ public class TagCommandParser implements Parser<TagCommand> {
             return new TagCommand(index, tagSet);
 
         } catch (ParseException pe) {
+            if (pe.getMessage().equals("No tags specified")) {
+                throw new ParseException("No tags specified");
+            }
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE), pe);
         }
     }
