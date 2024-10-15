@@ -37,20 +37,20 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getCampusConnectFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setCampusConnectFilePath(Path campusConnectFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code campusConnect}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setCampusConnect(ReadOnlyCampusConnect campusConnect);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the CampusConnect */
+    ReadOnlyCampusConnect getCampusConnect();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
