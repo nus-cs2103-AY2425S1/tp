@@ -26,7 +26,6 @@ public class DateOfLastVisitTest {
         // invalid dateOfLastVisits
         assertFalse(DateOfLastVisit.isValidDateOfLastVisit("")); // empty string
         assertFalse(DateOfLastVisit.isValidDateOfLastVisit("    ")); // spaces only
-        assertFalse(DateOfLastVisit.isValidDateOfLastVisit("29-02-2024")); // leap year (29 feb)
         assertFalse(DateOfLastVisit.isValidDateOfLastVisit("33-14-20240")); // invalid year (5 digits)
         assertFalse(DateOfLastVisit.isValidDateOfLastVisit("13-13-2024")); // invalid month (13 > 12)
         assertFalse(DateOfLastVisit.isValidDateOfLastVisit("32-01-2024")); // invalid day (32 > 30/31)
@@ -39,6 +38,7 @@ public class DateOfLastVisitTest {
         assertTrue(DateOfLastVisit.isValidDateOfLastVisit("01-01-0000"));   // year 0000
         assertTrue(DateOfLastVisit.isValidDateOfLastVisit("31-01-2024"));   // month with 31st
         assertTrue(DateOfLastVisit.isValidDateOfLastVisit("30-04-2024"));   // month with 30th
+        assertTrue(DateOfLastVisit.isValidDateOfLastVisit("29-02-2024")); // leap year (29 feb)
     }
 
     @Test
