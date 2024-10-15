@@ -236,7 +236,9 @@ public class DeletePropertyToBuyCommand extends Command {
          * Removes the property specified by the propertyIndex
          */
         public void deleteBuyingProperties(Index propertyIndex) {
-            buyingProperties.remove(propertyIndex.getZeroBased());
+            if (buyingProperties.size() > 0) {
+                buyingProperties.remove(propertyIndex.getZeroBased());
+            }
         }
 
         @Override
