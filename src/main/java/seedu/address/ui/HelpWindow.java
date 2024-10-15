@@ -42,7 +42,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "       n/ [STUDENT_NAME], p/ [PHONE_NUMBER], e/ [EMAIL], a/ [ADDRESS], c/ [COURSE], t/ [TAG]\n"
             + "   - Example:\n"
             + "       edit 12345678 n/ Jane Doe p/ 88888888 e/ janedoe@gmail.com "
-            +         "a/ 456 John Doe Road c/ Physics t/ Student\n"
+            + "a/ 456 John Doe Road c/ Physics t/ Student\n"
             + "\n4. Delete Student\n"
             + "   - Purpose: Removes a student from the address book.\n"
             + "   - Command Format:\n"
