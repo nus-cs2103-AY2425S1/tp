@@ -34,6 +34,8 @@ ClinicBuddy aims to enhance the patient management process for small clinics, cr
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
+   
+   * `backup` : Creates a backup of the current patient records.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -166,6 +168,56 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
+### Backup the records : `backup`
+The `backup` feature ensures your data is safe by **automatically creating backups** whenever patient records are modified. Backups are stored in the `backups` folder located in the root directory of the application.
+In addition to automatic backups, the system also provides a **manual backup option** for users who want more control over their data management.
+
+Format: `backup`
+
+#### **How Backups works:**
+1. **Automatic Backups:**
+    - Each time the patient records are modified (e.g., adding, editing, or deleting a record), the system **automatically creates a backup**.
+    - These backups are stored in:
+      ```
+      [Application Directory]/backups/
+      ```
+    - Naming Format:
+      ```
+      addressbook-backup-[timestamp].json
+      ```
+    - Example: 
+      ```
+      addressbook-backup-1697380298000.json
+      ```
+    - The program retains **only the 10 most recent backups** to manage storage effectively. Older backups are automatically deleted.
+2. **Manual Backups:**
+   - In addition to automatic backups, you can **manually trigger a backup** using the `backup` command.
+   - Command Format:
+     ```
+     backup
+     ```
+   - **Storage Location:**  
+     Manual backups are saved in the same directory:
+     ```
+     [Application Directory]/backups/
+     ```
+   - **Naming Format:**  
+     The manual backup will follow the same naming convention as automatic backups:
+     ```
+     addressbook-backup-[timestamp].json
+     ```
+#### **Accessing Backup Files:**
+   1. Navigate to the backup directory:
+      ```
+      [Application Directory]/backups/
+      ```
+   2. Identify the backup files using their **timestamp-based naming convention**.
+   3. **Move or copy** the files if needed for external storage or manual restoration.
+
+⚠ **Note:** While the system handles automatic backups, manual backups provide additional flexibility and control when needed.
+
+_Note: A restore function will be introduced soon to recover patient records from the latest backup._
+
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
@@ -176,6 +228,16 @@ _Details coming soon ..._
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+
+**Q**: Why Use Manual Backups?<br>
+**A**:
+- **Extra Control:** Save your data at any moment, even without making changes.
+- **Checkpointing:** Use manual backups before importing new data or making major changes.
+- **Peace of Mind:** Ensure you have a backup exactly when you need it.
+
+**Q**: Can I Save Backups to a Custom Path?<br>
+**A**: Currently, **manual backups are saved to the default path** (`/backups` folder). There is no option to specify a **custom path** within the application. However, you can **move the backup files** manually from the `/backups` folder to any desired location if needed.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -197,3 +259,4 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+| **Backup**    | `backup` <br> e.g., `backup` creates a new backup of the patient records. |
