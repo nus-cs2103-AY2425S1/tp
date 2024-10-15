@@ -8,12 +8,15 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeletePolicyCommand;
 import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.Policy;
-import seedu.address.model.policy.PolicySet;
+import seedu.address.model.policy.PolicyType;
 
 public class DeletePolicyCommandParserTest {
     private final DeletePolicyCommandParser parser = new DeletePolicyCommandParser();
@@ -21,10 +24,10 @@ public class DeletePolicyCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        final PolicySet policies = new PolicySet();
-        policies.add(health);
+        final Set<PolicyType> policyTypes = new HashSet<>();
+        policyTypes.add(PolicyType.HEALTH);
         String userInput = INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_HEALTH;
-        DeletePolicyCommand expectedCommand = new DeletePolicyCommand(INDEX_FIRST_PERSON, policies);
+        DeletePolicyCommand expectedCommand = new DeletePolicyCommand(INDEX_FIRST_PERSON, policyTypes);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -38,6 +41,9 @@ public class DeletePolicyCommandParserTest {
 
         // no index
         assertParseFailure(parser, POLICY_TYPE_DESC_HEALTH, expectedMessage);
+
+        // negative index
+        assertParseFailure(parser, "-1 pt/life", expectedMessage);
 
         // no policies
         assertParseFailure(parser, String.valueOf(INDEX_FIRST_PERSON.getOneBased()), expectedMessage);
