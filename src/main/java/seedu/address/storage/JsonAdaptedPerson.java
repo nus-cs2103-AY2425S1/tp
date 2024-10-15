@@ -15,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,17 +24,11 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-    public static final String MISSING_PARENT_FIELD_MESSAGE_FORMAT = "Person's parent %s field is missing!";
 
     private final String name;
     private final String phone;
     private final String email;
     private final String address;
-
-    private final String parentName;
-    private final String parentPhone;
-    private final String parentEmail;
-
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -42,16 +37,11 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
-            @JsonProperty("parentEmail") String parentEmail,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.parentName = parentName;
-        this.parentEmail = parentEmail;
-        this.parentPhone = parentPhone;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -65,12 +55,36 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        parentName = source.getParentName() == null ? null : source.getParentName().fullName;
-        parentPhone = source.getParentPhone() == null ? null : source.getParentPhone().value;
-        parentEmail = source.getParentEmail() == null ? null : source.getParentEmail().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+    }
+
+    public static JsonAdaptedPerson of(Person source) {
+        if (source instanceof Student) {
+            return new JsonAdaptedStudent((Student) source);
+        }
+        return new JsonAdaptedPerson(source);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public List<JsonAdaptedTag> getTags() {
+        return tags;
     }
 
     /**
@@ -116,33 +130,8 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        Name modelParentName = null;
-        if (parentName != null) {
-            if (!Name.isValidName(parentName)) {
-                throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-            }
-            modelParentName = new Name(parentName);
-        }
-
-        Phone modelParentPhone = null;
-        if (parentPhone != null) {
-            if (!Phone.isValidPhone(parentPhone)) {
-                throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-            }
-            modelParentPhone = new Phone(parentPhone);
-        }
-
-        Email modelParentEmail = null;
-        if (parentEmail != null) {
-            if (!Email.isValidEmail(parentEmail)) {
-                throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-            }
-            modelParentEmail = new Email(parentEmail);
-        }
-
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelParentName, modelParentPhone,
-                modelParentEmail, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
     }
 
 }

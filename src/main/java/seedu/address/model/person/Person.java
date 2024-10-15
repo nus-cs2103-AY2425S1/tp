@@ -116,4 +116,18 @@ public class Person {
                 .toString();
     }
 
+    public String toMessageString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName())
+                .append("; Phone: ")
+                .append(getPhone())
+                .append("; Email: ")
+                .append(getEmail())
+                .append("; Address: ")
+                .append(getAddress())
+                .append("; Tags: ");
+        getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
 }

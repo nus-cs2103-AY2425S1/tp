@@ -67,4 +67,25 @@ public class Student extends Person {
                 .add("tags", this.getTags())
                 .toString();
     }
+
+    @Override
+    public String toMessageString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName())
+                .append("; Phone: ")
+                .append(getPhone())
+                .append("; Email: ")
+                .append(getEmail())
+                .append("; Address: ")
+                .append(getAddress())
+                .append("; Parent Name: ")
+                .append(getParentName())
+                .append("; Parent Phone: ")
+                .append(getParentPhone())
+                .append("; Parent Email: ")
+                .append(getParentEmail())
+                .append("; Tags: ");
+        getTags().forEach(builder::append);
+        return builder.toString();
+    }
 }
