@@ -3,14 +3,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox
-    xmlns="http://javafx.com/javafx/17"
-    xmlns:fx="http://javafx.com/fxml/1"
->
-  <TextField
-      fx:id="searchBoxField"
-      onAction="#handleCommandUpdate"
-      promptText="Search"
-      HBox.hgrow="ALWAYS"
-  />
+<HBox fx:id="placeHolder" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <TextField fx:id="searchBoxField" onAction="#handleCommandUpdate" promptText="Search" HBox.hgrow="ALWAYS"/>
 </HBox>

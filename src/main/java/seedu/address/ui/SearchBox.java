@@ -44,7 +44,7 @@ public class SearchBox extends UiPart<Region> {
     private void handleCommandUpdate() {
         String commandText = searchBoxField.getText();
 
-        if (commandText.equals("")) {
+        if (commandText.isEmpty()) {
             try {
                 commandExecutor.execute(ListCommand.COMMAND_WORD);
             } catch (CommandException | ParseException e) {
