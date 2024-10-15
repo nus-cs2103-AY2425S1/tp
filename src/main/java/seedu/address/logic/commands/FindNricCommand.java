@@ -16,8 +16,7 @@ public class FindNricCommand extends Command {
 
     public static final String COMMAND_WORD = "findnric";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds and lists all persons who have matching Nric\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
