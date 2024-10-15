@@ -4,7 +4,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
- * API of DetailView component
+ * API of DetailView component.
  */
 public interface DetailView<T> {
 
