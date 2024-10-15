@@ -29,7 +29,8 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] keywords = trimmedArgs.split("\\s+");
 
-        boolean containsNric = Arrays.asList(keywords).stream().anyMatch(keyword -> Nric.isValidNric(keyword));
+        boolean containsNric = Arrays.asList(keywords).stream().anyMatch(keyword ->
+                Nric.isValidNric(keyword.toUpperCase()));
 
         if (!containsNric) {
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));

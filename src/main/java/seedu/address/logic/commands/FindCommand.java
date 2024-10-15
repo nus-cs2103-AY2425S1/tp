@@ -7,10 +7,9 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NricContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose NRIC contains any of the argument keywords.
+ * Finds and lists all persons in address book whose field contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
@@ -18,7 +17,7 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds a record with the specified NRICs "
-            + "(case-sensitive) OR \n"
+            + "(case insensitive) OR \n"
             + "all records matching the specified names (case insensitive), \n"
             + "before displaying as a list with index numbers.\n"
             + "Parameters: NRIC | NAME [MORE_NAMES]...\n"
