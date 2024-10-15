@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
-import java.util.Set;
 import java.util.stream.IntStream;
 
 import javafx.fxml.FXML;
@@ -10,7 +9,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Tutorial;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -63,21 +61,14 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        Set<Tutorial> tutorialSet = person.getTutorials();
-        IntStream.rangeClosed(1, 10)
-                .mapToObj(Integer::toString)
-                .forEach(index -> {
-                    Label tutorialLabel = new Label(index);
-                    tutorialLabel.setStyle("-fx-background-color: #8c2029; -fx-pref-width: 50px; "
-                            + "-fx-alignment: center; -fx-padding: 5px; -fx-border-color: white; "
-                            + "-fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-radius: 10px;");
+        IntStream.rangeClosed(1, 10).forEach(index -> {
+            Label tutorialLabel = new Label(String.valueOf(index));
+            tutorialLabel.getStyleClass().add("tutorial-label");
 
-                    if (tutorialSet.contains(new Tutorial(index))) {
-                        tutorialLabel.setStyle("-fx-background-color: #206e35; -fx-pref-width: 50px; "
-                                + "-fx-alignment: center; -fx-padding: 5px; -fx-border-color: white; "
-                                + "-fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-radius: 10px;");
-                    }
-                    tutorials.getChildren().add(tutorialLabel);
-                });
+            if (person.hasAttendedTutorial(String.valueOf(index))) {
+                tutorialLabel.getStyleClass().add("tutorial-attended");
+            }
+            tutorials.getChildren().add(tutorialLabel);
+        });
     }
 }

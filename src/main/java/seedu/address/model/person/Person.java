@@ -73,6 +73,13 @@ public class Person {
     }
 
     /**
+     * Returns true if the person has attended the stated tutorial.
+     */
+    public boolean hasAttendedTutorial(String index) {
+        return tutorials.contains(new Tutorial(index));
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
