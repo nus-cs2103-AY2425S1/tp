@@ -3,10 +3,8 @@ package hallpointer.address.model.session;
 import static hallpointer.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
-import java.util.Set;
 
 import hallpointer.address.commons.util.ToStringBuilder;
-import hallpointer.address.model.member.Member;
 
 /**
  * Represents a Session in the system.
