@@ -2,37 +2,37 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
-    "email" : "alice@example.com",
+    "email" : "alice@u.nus.edu",
     "tags" : [ "friends" ],
     "student number" : "A0111111J"
   }, {
     "name" : "Benson Meier",
-    "email" : "johnd@example.com",
+    "email" : "johnd@u.nus.edu",
     "tags" : [ "owesMoney", "friends" ],
     "student number" : "A0222222H"
   }, {
     "name" : "Carl Kurz",
-    "email" : "heinz@example.com",
+    "email" : "heinz@u.nus.edu",
     "tags" : [ ],
     "student number" : "A0333333M"
   }, {
     "name" : "Daniel Meier",
-    "email" : "cornelia@example.com",
+    "email" : "cornelia@u.nus.edu",
     "tags" : [ "friends" ],
     "student number" : "A0444444N"
   }, {
     "name" : "Elle Meyer",
-    "email" : "werner@example.com",
+    "email" : "werner@u.nus.edu",
     "tags" : [ ],
     "student number" : "A0555555H"
   }, {
     "name" : "Fiona Kunz",
-    "email" : "lydia@example.com",
+    "email" : "lydia@u.nus.edu",
     "tags" : [ ],
     "student number" : "A0666666J"
   }, {
     "name" : "George Best",
-    "email" : "anna@example.com",
+    "email" : "anna@u.nus.edu",
     "tags" : [ ],
     "student number" : "A0888888M"
   } ],

@@ -52,7 +52,10 @@ public class TaskTest {
             .append("{name=")
             .append(FIRST_TASK.getTaskName())
             .append(", deadline=")
-            .append(FIRST_TASK.getDeadline()).append("}")
+            .append(FIRST_TASK.getDeadline())
+            .append(", status=")
+            .append(FIRST_TASK.getStatus())
+            .append("}")
             .toString();
         assertEquals(expected, FIRST_TASK.toString());
     }
