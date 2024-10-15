@@ -21,13 +21,13 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static final EmergencyContactName emptyECName = new EmergencyContactName("");
+    public static final EmergencyContactName EMPTY_EC_NAME = new EmergencyContactName("");
 
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"), new RegisterNumber("1"), new Sex("M"),
-                new StudentClass("1A"), emptyECName, getTagSet("friends")),
+                new StudentClass("1A"), EMPTY_EC_NAME, getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new RegisterNumber("2"), new Sex("F"),
                 new StudentClass("2A"), new EmergencyContactName("John Do"), getTagSet("colleagues", "friends")),

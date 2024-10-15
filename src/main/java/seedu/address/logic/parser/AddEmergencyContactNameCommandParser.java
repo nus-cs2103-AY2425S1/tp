@@ -3,14 +3,12 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddEmergencyContactNameCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.EmergencyContactName;
-import seedu.address.model.person.Name;
 
 /**
  * Parses input arguments and creates a new {@code AddEmergencyContactNameCommand} object
@@ -34,7 +32,8 @@ public class AddEmergencyContactNameCommandParser implements Parser<AddEmergency
         EmergencyContactName eCName;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            eCName = (EmergencyContactName) ParserUtil.parseEmergencyContactName(argMultimap.getValue(PREFIX_ECNAME).get());
+            eCName = (EmergencyContactName) ParserUtil.parseEmergencyContactName(
+                    argMultimap.getValue(PREFIX_ECNAME).get());
 
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

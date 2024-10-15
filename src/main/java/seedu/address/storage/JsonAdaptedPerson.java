@@ -147,7 +147,7 @@ class JsonAdaptedPerson {
         }
         final StudentClass modelStudentClass = new StudentClass(studentClass);
 
-        if(!EmergencyContactName.isValidEmergencyContactName(ecName)) {
+        if (!EmergencyContactName.isValidEmergencyContactName(ecName)) {
             throw new IllegalValueException(EmergencyContactName.MESSAGE_CONSTRAINTS);
         }
         final EmergencyContactName emergencyContactName = new EmergencyContactName(ecName);

@@ -5,10 +5,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class EmergencyContactName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Emergency contact names should only contain alphanumeric characters and spaces, " +
-                    "and it can be blank if no contact is provided.";
+            "Emergency contact names should only contain alphanumeric characters and spaces, "
+                    + "and it can be blank if no contact is provided.";
 
-    /*
+    /**
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */

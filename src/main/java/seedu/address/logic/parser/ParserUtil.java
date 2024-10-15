@@ -151,11 +151,11 @@ public class ParserUtil {
      * @throws ParseException if the given {@code ecName} is invalid.
      */
     public static EmergencyContactName parseEmergencyContactName(String ecName) throws ParseException {
-        String trimmedECName = ecName.trim();
-        if (!EmergencyContactName.isValidEmergencyContactName(trimmedECName)) {
+        String trimmedEcName = ecName.trim();
+        if (!EmergencyContactName.isValidEmergencyContactName(trimmedEcName)) {
             throw new ParseException(EmergencyContactName.MESSAGE_CONSTRAINTS);
         }
-        return new EmergencyContactName(trimmedECName);
+        return new EmergencyContactName(trimmedEcName);
     }
 
 
