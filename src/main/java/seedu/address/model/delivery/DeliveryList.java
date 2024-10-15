@@ -7,8 +7,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.delivery.exceptions.DeliveryNotFoundException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of deliveries that does not allow nulls.
@@ -55,11 +55,12 @@ public class DeliveryList {
      * Removes the equivalent delivery from the list.
      * The delivery must exist in the list.
      */
-    public void remove(Delivery toRemove) throws PersonNotFoundException {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+    public void remove(Index deliveryIndex) throws DeliveryNotFoundException {
+        requireNonNull(deliveryIndex);
+        if (deliveryIndex.getZeroBased() >= internalList.size()) {
+            throw new DeliveryNotFoundException();
         }
+        internalList.remove(deliveryIndex.getZeroBased());
     }
 
     public void setDeliveries(DeliveryList replacement) {

@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON_LIST;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SECOND_PERSON_LIST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LIST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SECOND_LIST;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,21 +55,21 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON_LIST, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST_LIST, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON_LIST, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_LIST, ParserUtil.parseIndex("  1  "));
 
         // 2 Input with only one whitespace
         List<Index> indexList = new ArrayList<>();
         indexList = ParserUtil.parseIndex("1 2");
-        assertTrue(INDEX_FIRST_SECOND_PERSON_LIST.containsAll(indexList)
-                && indexList.containsAll(INDEX_FIRST_SECOND_PERSON_LIST));
+        assertTrue(INDEX_FIRST_SECOND_LIST.containsAll(indexList)
+                && indexList.containsAll(INDEX_FIRST_SECOND_LIST));
 
         //2 Input with leading and trailing whitespace
         indexList = ParserUtil.parseIndex("   1    2     ");
-        assertTrue(INDEX_FIRST_SECOND_PERSON_LIST.containsAll(indexList)
-                && indexList.containsAll(INDEX_FIRST_SECOND_PERSON_LIST));
+        assertTrue(INDEX_FIRST_SECOND_LIST.containsAll(indexList)
+                && indexList.containsAll(INDEX_FIRST_SECOND_LIST));
     }
 
     @Test
