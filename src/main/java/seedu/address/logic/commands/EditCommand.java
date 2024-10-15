@@ -162,7 +162,6 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private EmergencyContact emergencyContact;
         private Name emergencyContactName;
         private Phone emergencyContactPhone;
         private Relationship emergencyContactRelationship;
@@ -179,7 +178,9 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setEmergencyContact(toCopy.emergencyContact);
+            setEmergencyContactName(toCopy.emergencyContactName);
+            setEmergencyContactPhone(toCopy.emergencyContactPhone);
+            setEmergencyContactRelationship(toCopy.emergencyContactRelationship);
             setTags(toCopy.tags);
         }
 
@@ -187,7 +188,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, emergencyContact, emergencyContactName,
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, emergencyContactName,
                     emergencyContactPhone, emergencyContactRelationship, tags);
         }
 
@@ -228,53 +229,28 @@ public class EditCommand extends Command {
             this.address = address;
         }
 
-        private Optional<Name> getEmergencyContactName() {
+        public Optional<Name> getEmergencyContactName() {
             return Optional.ofNullable(emergencyContactName);
         }
 
         public void setEmergencyContactName(Name emergencyContactName) {
             this.emergencyContactName = emergencyContactName;
-            if (emergencyContact != null) {
-                this.emergencyContact = new EmergencyContact(emergencyContactName, emergencyContact.getPhone(),
-                        emergencyContact.getRelationship());
-            }
         }
 
-        private Optional<Phone> getEmergencyContactPhone() {
+        public Optional<Phone> getEmergencyContactPhone() {
             return Optional.ofNullable(emergencyContactPhone);
         }
 
         public void setEmergencyContactPhone(Phone emergencyContactPhone) {
             this.emergencyContactPhone = emergencyContactPhone;
-            if (emergencyContact != null) {
-                this.emergencyContact = new EmergencyContact(emergencyContact.getName(), emergencyContactPhone,
-                        emergencyContact.getRelationship());
-            }
         }
 
-        private Optional<Relationship> getEmergencyContactRelationship() {
+        public Optional<Relationship> getEmergencyContactRelationship() {
             return Optional.ofNullable(emergencyContactRelationship);
         }
 
         public void setEmergencyContactRelationship(Relationship emergencyContactRelationship) {
             this.emergencyContactRelationship = emergencyContactRelationship;
-            if (emergencyContact != null) {
-                this.emergencyContact = new EmergencyContact(emergencyContact.getName(), emergencyContact.getPhone(),
-                        emergencyContactRelationship);
-            }
-        }
-
-        public Optional<EmergencyContact> getEmergencyContact() {
-            return Optional.ofNullable(emergencyContact);
-        }
-
-        public void setEmergencyContact(EmergencyContact emergencyContact) {
-            this.emergencyContact = emergencyContact;
-            if (emergencyContact != null) {
-                this.emergencyContactName = emergencyContact.getName();
-                this.emergencyContactPhone = emergencyContact.getPhone();
-                this.emergencyContactRelationship = emergencyContact.getRelationship();
-            }
         }
 
         /**
@@ -310,7 +286,10 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(emergencyContact, otherEditPersonDescriptor.emergencyContact)
+                    && Objects.equals(emergencyContactName, otherEditPersonDescriptor.emergencyContactName)
+                    && Objects.equals(emergencyContactPhone, otherEditPersonDescriptor.emergencyContactPhone)
+                    && Objects.equals(emergencyContactRelationship,
+                    otherEditPersonDescriptor.emergencyContactRelationship)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -321,7 +300,9 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("emergency contact", emergencyContact)
+                    .add("emergency contact name", emergencyContactName)
+                    .add("emergency contact phone", emergencyContactPhone)
+                    .add("emergency contact relationship", emergencyContactRelationship)
                     .add("tags", tags)
                     .toString();
         }
