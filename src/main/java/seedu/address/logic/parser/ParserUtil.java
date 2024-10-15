@@ -146,7 +146,6 @@ public class ParserUtil {
         final Set<Appointment> appointmentSet = new HashSet<>();
         for (String appointmentDates : appointments) {
             appointmentSet.add(parseAppointment(appointmentDates));
-            break;
         }
         return appointmentSet;
     }

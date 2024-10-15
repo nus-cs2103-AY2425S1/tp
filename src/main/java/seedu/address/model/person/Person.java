@@ -105,8 +105,8 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags)
-                && appointment.equals(otherPerson.appointment);
+                && appointment.equals(otherPerson.appointment)
+                && tags.equals(otherPerson.tags);
     }
 
     @Override
@@ -122,7 +122,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("appointment", appointment)
+                .add("appointments", appointment)
                 .add("tags", tags)
                 .toString();
     }
