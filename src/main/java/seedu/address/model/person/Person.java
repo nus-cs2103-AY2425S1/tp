@@ -13,17 +13,19 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public abstract class Person implements Appointmentable {
 
     // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Id id;
 
     // Data fields
     private final Address address;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
+    private final History history;
 
     /**
      * Every field must be present and not null.
@@ -36,6 +38,8 @@ public class Person {
         this.address = address;
         this.remark = remark;
         this.tags.addAll(tags);
+        this.id = new Id(this.getClass());
+        this.history = new History();
     }
 
     public Name getName() {
@@ -58,6 +62,10 @@ public class Person {
         return remark;
     }
 
+    public Id getId() {
+        return id;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -78,6 +86,11 @@ public class Person {
         return otherPerson != null
                 && otherPerson.getName().equals(getName())
                 && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
+    }
+
+    @Override
+    public String getAllAppointments() {
+        return History.getAllAppointments(this.getId());
     }
 
     /**

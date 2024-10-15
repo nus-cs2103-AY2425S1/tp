@@ -13,6 +13,12 @@ public class History {
     private TreeMap<LocalDateTime, TreeMap<Integer, String>> appointmentHistory;
 
     /**
+     * Placeholder default constructor TODO.
+     */
+    public History() {
+    }
+
+    /**
      * Constructs a History object to keep track the appointment history of a single patient.
      * @param date date of the appointment
      * @param doctorId ID of the doctor that the patient is under
@@ -64,5 +70,44 @@ public class History {
         return new TreeMap<>(appointmentHistory);
     }
 
+    // Nigel's code suggestion
+
+    /**
+     * Adds an appointment to the database with the specified content.
+     *
+     * @param dateTime Date & time of the appointment.
+     * @param patientId Id of patient in the appointment.
+     * @param doctorId Id of doctor in the appointment.
+     * @return True if appointment was successfully added, false if otherwise.
+     */
+    public static boolean addAppointment(LocalDateTime dateTime, Id patientId, Id doctorId, String remarks) {
+        // TODO something new Appointment(dateTime, patientId, doctorId, remarks)
+        // Other notes: check for duplicate appointments / clashing timeslots w doctor & patient
+        // What to throw if got error
+        return false;
+    }
+
+    /**
+     * Deletes the specified appointment with the respective details.
+     * @param dateTime Date & time of the appointment to delete.
+     * @param patientId Id of the patient in the appointment.
+     * @param doctorId Id of doctor in the appointment.
+     * @return True if appointment was successfully deleted, false if otherwise.
+     */
+    public static boolean deleteAppointment(LocalDateTime dateTime, Id patientId, Id doctorId) {
+        // TODO something
+        return false;
+    }
+
+    /**
+     * Returns a String (or not String) representing all appointments related to that user id.
+     *
+     * @param id Id of Person to get appointments of.
+     * @return String representing all appointments related to the user id provided.
+     */
+    public static String getAllAppointments(Id id) {
+        // TODO
+        return "WIP";
+    }
 
 }
