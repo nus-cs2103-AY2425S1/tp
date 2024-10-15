@@ -148,7 +148,7 @@ Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
 Examples:
 * `addbuyer n/John p/83456789 e/john@gmail.com` adds a buyer whose name is `John`, phone number is `83456789` and email is `john@gmail.com`.
 
-  ![result for 'addbuyer n/John p/12345678 e/john@gmail.com'](images/addbuyer.png)
+  ![result for 'addbuyer n/John p/83456789 e/john@gmail.com'](images/addbuyer.png)
 
 ### Adding a seller : `addseller`
 
@@ -164,7 +164,7 @@ Format: `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`
 Examples:
 * `addseller n/Mary p/83456789 e/mary@gmail.com` adds a seller whose name is `Mary`, phone number is `83456789` and email is `mary@gmail.com`.
 
-  ![result for 'addseller n/Mary p/23456789 e/mary@gmail.com'](images/addseller.png)
+  ![result for 'addseller n/Mary p/83456789 e/mary@gmail.com'](images/addseller.png)
 
 ### Deleting a buyer : `deletebuyer`
 
