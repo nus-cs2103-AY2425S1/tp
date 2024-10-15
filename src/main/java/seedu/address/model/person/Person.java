@@ -13,8 +13,8 @@ public class Person {
     // Identity fields
     private final Name name;
     private final Id id;
-    /*
     private final Ward ward;
+    /*
     private final Diagnosis diagnosis;
     private final Medication medication;
     private final Phone phone;
@@ -26,11 +26,11 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Id id) {
+    public Person(Name name, Id id, Ward ward) {
         this.name = name;
         this.id = id;
-        /*
         this.ward = ward;
+        /*
         this.diagnosis = diagnosis;
         this.medication = medication;
          */
@@ -43,11 +43,11 @@ public class Person {
     public Name getName() {
         return name;
     }
-    /*
+
     public Ward getWard() {
         return ward;
     }
-
+    /*
     public Diagnosis getDiagnosis() {
         return diagnosis;
     }
@@ -111,9 +111,9 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return id.equals(otherPerson.id)
-                && name.equals(otherPerson.name);
+                && name.equals(otherPerson.name)
+                && ward.equals(otherPerson.ward);
         /*
-                && ward.equals(otherPerson.ward)
                 && diagnosis.equals(otherPerson.diagnosis)
                 && medication.equals(otherPerson.medication);
 
@@ -123,7 +123,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, id);
+        return Objects.hash(name, id, ward);
     }
 
     @Override
@@ -131,8 +131,8 @@ public class Person {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("id", id)
-                /*
                 .add("ward", ward)
+                /*
                 .add("diagnosis", diagnosis)
                 .add("medication", medication)
                 */

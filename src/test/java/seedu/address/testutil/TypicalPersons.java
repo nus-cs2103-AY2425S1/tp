@@ -4,6 +4,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WARD_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WARD_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,20 +13,25 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
-
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withId("P12345").build();
-    public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withId("P54321").build();
-    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withId("P73443").build();
-    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withId("P54786").build();
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withId("P27346").build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withId("P07962").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withId("P18277").build();
+            .withId("P12345").withWard("A1").build();
+    public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
+            .withId("P54321").withWard("A2").build();
+    public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
+            .withId("P73443").withWard("B3").build();
+    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
+            .withId("P54786").withWard("C8").build();
+    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
+            .withId("P27346").withWard("I5").build();
+    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
+            .withId("P07962").withWard("A1").build();
+    public static final Person GEORGE = new PersonBuilder().withName("George Best")
+            .withId("P18277").withWard("B1").build();
 
     /*
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
@@ -52,8 +59,10 @@ public class TypicalPersons {
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withId("P28349").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withId(VALID_ID_AMY).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withId(VALID_ID_BOB).build();
+    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withId(VALID_ID_AMY)
+            .withWard(VALID_WARD_AMY).build();
+    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withId(VALID_ID_BOB)
+            .withWard(VALID_WARD_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

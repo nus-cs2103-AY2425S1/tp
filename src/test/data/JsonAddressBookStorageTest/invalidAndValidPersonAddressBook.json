@@ -1,9 +1,11 @@
 {
   "persons": [ {
     "name": "Valid Person",
-    "id": "P12345"
+    "id": "P12345",
+    "ward" : "A1"
   }, {
     "name": "Person With Invalid Id Field",
-    "id": "P12D45"
+    "id": "P12D45",
+    "ward" : "B 2"
   } ]
 }

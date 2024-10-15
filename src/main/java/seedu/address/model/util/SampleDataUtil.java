@@ -9,6 +9,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Ward;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,12 +39,12 @@ public class SampleDataUtil {
                 getTagSet("colleagues"))
 
              */
-            new Person(new Name("Alex Yeoh"), new Id("P12345")),
-            new Person(new Name("Bernice Yu"), new Id("P23456")),
-            new Person(new Name("Charlotte Oliveiro"), new Id("P34567")),
-            new Person(new Name("David Li"), new Id("P45678")),
-            new Person(new Name("Irfan Ibrahim"), new Id("P56789")),
-            new Person(new Name("Roy Balakrishnan"), new Id("P67890"))
+            new Person(new Name("Alex Yeoh"), new Id("P12345"), new Ward("A1")),
+            new Person(new Name("Bernice Yu"), new Id("P23456"), new Ward("B1")),
+            new Person(new Name("Charlotte Oliveiro"), new Id("P34567"), new Ward("C2")),
+            new Person(new Name("David Li"), new Id("P45678"), new Ward("A1")),
+            new Person(new Name("Irfan Ibrahim"), new Id("P56789"), new Ward("D1")),
+            new Person(new Name("Roy Balakrishnan"), new Id("P67890"), new Ward("B1"))
 
         };
     }

@@ -2,24 +2,31 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
-    "id": "P12345"
+    "id": "P12345",
+    "ward" : "A1"
   }, {
     "name" : "Benson Meier",
-    "id":"P54321"
+    "id":"P54321",
+    "ward" : "A2"
   }, {
     "name" : "Carl Kurz",
-    "id": "P73443"
+    "id": "P73443",
+    "ward" : "B3"
   }, {
     "name" : "Daniel Meier",
-    "id": "P54786"
+    "id": "P54786",
+    "ward" : "C8"
   }, {
     "name" : "Elle Meyer",
-    "id": "P27346"
+    "id": "P27346",
+    "ward" : "I5"
   }, {
     "name" : "Fiona Kunz",
-    "id": "P07962"
+    "id": "P07962",
+    "ward" : "A1"
   }, {
     "name" : "George Best",
-    "id": "P18277"
+    "id": "P18277",
+    "ward" : "B1"
   } ]
 }

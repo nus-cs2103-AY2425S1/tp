@@ -79,7 +79,7 @@ public class ParserUtil {
         requireNonNull(ward);
         String trimmedWard = ward.trim();
         if (!Ward.isValidWard(trimmedWard)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Ward.MESSAGE_CONSTRAINTS);
         }
         return new Ward(trimmedWard);
     }

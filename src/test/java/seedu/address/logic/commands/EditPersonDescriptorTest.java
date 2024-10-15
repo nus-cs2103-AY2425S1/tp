@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WARD_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -41,6 +42,10 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withId(VALID_ID_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        // different ward -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withWard(VALID_WARD_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         /*
         // different phone -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
@@ -66,7 +71,8 @@ public class EditPersonDescriptorTest {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         String expected = EditPersonDescriptor.class.getCanonicalName() + "{id="
                 + editPersonDescriptor.getId().orElse(null) + ", name="
-                + editPersonDescriptor.getName().orElse(null) + "}";
+                + editPersonDescriptor.getName().orElse(null) + ", ward="
+                + editPersonDescriptor.getWard().orElse(null) + "}";
 
         assertEquals(expected, editPersonDescriptor.toString());
 
