@@ -33,7 +33,8 @@ public class Delivery {
     /**
      * Every field must be present and not null.
      */
-    public Delivery(Id id, ItemName itemName, Address address, Cost cost, Date date, Time time, Eta eta, Status status) {
+    public Delivery(Id id, ItemName itemName, Address address, Cost cost, Date date, Time time, Eta eta,
+                    Status status) {
         requireAllNonNull(itemName, address, cost, date, time, eta, status);
         this.id = id;
         this.itemName = itemName;
@@ -77,9 +78,13 @@ public class Delivery {
         return eta;
     }
 
-    public Id getId() { return id; }
+    public Id getId() {
+        return id;
+    }
 
-    public Status getStatus() { return status; }
+    public Status getStatus() {
+        return status;
+    }
 
     /**
      * Returns true if both deliveries are equal.

@@ -75,7 +75,7 @@ public class JsonAdaptedDelivery {
         if (id == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName()));
         }
-        if(!Id.isValidId(id)) {
+        if (!Id.isValidId(id)) {
             throw new IllegalValueException(Id.MESSAGE_CONSTRAINTS);
         }
         final Id modelId = new Id(id);
@@ -132,7 +132,7 @@ public class JsonAdaptedDelivery {
         if (status == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
         }
-        if(!Status.isValidStatus(status)) {
+        if (!Status.isValidStatus(status)) {
             throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
         }
         final Status modelStatus = new Status(status);

@@ -29,9 +29,9 @@ import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Eta;
-import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.Id;
 import seedu.address.model.delivery.ItemName;
+import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.Time;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -68,13 +68,13 @@ public class EditCommand extends Command {
            + "[" + PREFIX_NAME + "ITEM NAME] "
            + "[" + PREFIX_ADDRESS + "ADDRESS] "
            + "[" + PREFIX_COST + "COST] "
-           + "[" + PREFIX_ETA + "ETA]"
+           + "[" + PREFIX_ETA + "ETA] "
            + "[" + PREFIX_STATUS + "STATUS]\n"
            + "Example: " + COMMAND_WORD + " 1 "
            + PREFIX_NAME + "TV "
            + PREFIX_ADDRESS + "Clementi Ave 3, Blk 462, S120311 "
            + PREFIX_COST + "$300"
-           + PREFIX_STATUS + "not delivered";
+           + PREFIX_STATUS + "not delivered ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -423,9 +423,13 @@ public class EditCommand extends Command {
             return Optional.ofNullable(eta);
         }
 
-        public void setStatus(Status status) {this.status = status; }
+        public void setStatus(Status status) {
+            this.status = status;
+        }
 
-        public Optional<Status> getStatus() { return Optional.ofNullable(status); }
+        public Optional<Status> getStatus() {
+            return Optional.ofNullable(status);
+        }
 
         @Override
         public boolean equals(Object other) {
