@@ -114,8 +114,8 @@ public class ModelManager implements Model {
 
     @Override
     public void addMeeting(Person target, Meeting meeting) {
-        System.out.println("addMeeting in ModelManager");
-        addressBook.addMeeting(target, meeting);
+        target.getMeetings().addMeeting(meeting);
+        addressBook.addMeeting(meeting);
     }
 
     public String listMeetings() {

@@ -73,7 +73,7 @@ public class ScheduleCommand extends Command {
 
         Person personToScheduleMeetingWith = lastShownList.get(index.getZeroBased());
 
-        toAdd = new Meeting(personToScheduleMeetingWith, startTime, endTime, location);
+        toAdd = new Meeting(personToScheduleMeetingWith.getName(), startTime, endTime, location);
 
         model.addMeeting(personToScheduleMeetingWith, toAdd);
 

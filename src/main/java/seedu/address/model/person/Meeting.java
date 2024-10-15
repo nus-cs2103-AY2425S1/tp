@@ -29,16 +29,17 @@ public class Meeting {
     public final String location;
     public final LocalDateTime startTime;
     public final LocalDateTime endTime;
-    public final Person personToMeet;
+    public final Name personToMeet;
 
     /**
      * Constructs an {@code Meeting}.
      *
+     * @param person A valid name of a person to meet.
      * @param startTime A valid starting time of the meeting.
      * @param endTime A valid ending time of the meeting.
      * @param location A valid location.
      */
-    public Meeting(Person person, LocalDateTime startTime, LocalDateTime endTime, String location) {
+    public Meeting(Name person, LocalDateTime startTime, LocalDateTime endTime, String location) {
         requireNonNull(person);
         requireNonNull(location);
         requireNonNull(startTime);
@@ -115,7 +116,7 @@ public class Meeting {
         return endTime;
     }
 
-    public Person getPersonToMeet() {
+    public Name getPersonToMeet() {
         return personToMeet;
     }
 }

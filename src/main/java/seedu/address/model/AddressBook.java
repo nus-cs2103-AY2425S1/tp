@@ -53,12 +53,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setMeetings(List<Meeting> meetings) {
+        this.meetings.setInternalList(meetings);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setMeetings(newData.getMeetingList());
     }
 
     //// person-level operations
@@ -112,14 +121,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
-    public void addMeeting(Person p, Meeting m) {
-        System.out.println("addMeeting in AddressBook");
-        p.getMeetings().addMeeting(m);
+    public void addMeeting(Meeting m) {
         meetings.addMeeting(m);
     }
 
     public String listMeetings() {
         return meetings.toString();
+    }
+
+    public ObservableList<Meeting> getMeetingList() {
+        return meetings.getInternalList();
     }
 
     @Override

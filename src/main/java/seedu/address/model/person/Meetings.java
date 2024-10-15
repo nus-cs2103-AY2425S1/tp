@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -101,10 +102,19 @@ public class Meetings {
         StringBuilder meetingList = new StringBuilder();
 
         for (int i = 0; i < internalList.size(); i++) {
-            meetingList.append(i + 1).append(". Meeting with ").append(getMeeting(i).getPersonToMeet().getName())
+            meetingList.append(i + 1).append(". Meeting with ").append(getMeeting(i).getPersonToMeet().fullName)
                     .append(" ").append(getMeeting(i).toString()).append("\n");
         }
 
         return meetingList.toString();
+    }
+
+    public ObservableList<Meeting> getInternalList() {
+        return internalList;
+    }
+
+    public void setInternalList(List<Meeting> replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement);
     }
 }
