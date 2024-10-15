@@ -75,6 +75,6 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, phone, tutorialGroup, studentNumber, new ArrayList<>());
+        return new Student(name, phone, tutorialGroup, studentNumber);
     }
 }
