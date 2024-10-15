@@ -76,4 +76,11 @@ public class Messages {
     public static String formatForTags(Person person) {
         return person.getTags().stream().map(Tag::getTagName).collect(Collectors.joining(", "));
     }
+
+    /**
+     * Formats the {@code person} to display their tags.
+     */
+    public static String getName(Person person) {
+        return person.getName().toString();
+    }
 }
