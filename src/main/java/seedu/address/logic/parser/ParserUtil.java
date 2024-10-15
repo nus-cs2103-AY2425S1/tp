@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -103,7 +104,7 @@ public class ParserUtil {
     public static AssignmentName parseAssignmentName(String assignmentName) throws ParseException {
         requireNonNull(assignmentName);
         String trimmedAssignmentName = assignmentName.trim();
-        if (!Tag.isValidTagName(trimmedAssignmentName)) {
+        if (!Name.isValidName(trimmedAssignmentName)) {
             throw new ParseException(AssignmentName.MESSAGE_CONSTRAINTS);
         }
         return new AssignmentName(assignmentName);
@@ -125,7 +126,23 @@ public class ParserUtil {
         }
         return parsedScore;
     }
-
+    /**
+     * Parses a {@code String studentIndex} into a {@code int}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code studentIndex} is invalid.
+     */
+    public static int parseStudentIndex(String studentIndex) throws ParseException {
+        requireNonNull(studentIndex);
+        String trimmedStudentIndex = studentIndex.trim();
+        int parsedStudentIndex;
+        try {
+            parsedStudentIndex = Integer.parseInt(trimmedStudentIndex);
+        } catch (NumberFormatException e) {
+            throw new ParseException("The score must be an integer!");
+        }
+        return parsedStudentIndex;
+    }
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
@@ -137,4 +154,13 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
 }

@@ -50,6 +50,19 @@
                 </padding>
                 <Label text="Email:          " styleClass="details_field_headers" />
                 <Label fx:id="email" styleClass="details_small_label" text="\$email" />
+                <!-- display for Assignments !-->
+            </HBox>
+            <HBox spacing="5" alignment="CENTER_LEFT">
+            <padding>
+                <Insets left="8" top="10" bottom="5"/>
+            </padding>
+            <Label text="Assignments:" styleClass="details_field_headers" />
+                <!-- Use a VBox inside the FlowPane to list each assignment in its own box -->
+                <FlowPane fx:id="assignments" vgap="10" hgap="10" alignment="CENTER_LEFT">
+                    <padding>
+                        <Insets top="10" bottom="8" left="5"/>
+                    </padding>
+                </FlowPane>
             </HBox>
         </VBox>
     </GridPane>

@@ -17,8 +17,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.assignment.Assignment;
-import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.testutil.StudentBuilder;
@@ -50,9 +48,7 @@ public class AddressBookTest {
         Student editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
-        List<Assignment> newAssignments = Arrays.asList(new Assignment(new AssignmentName("Assignment1"),
-                100));
-        AddressBookStub newData = new AddressBookStub(newStudents, newAssignments);
+        AddressBookStub newData = new AddressBookStub(newStudents);
 
         assertThrows(DuplicateStudentException.class, () -> addressBook.resetData(newData));
     }
@@ -99,20 +95,13 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Student> students = FXCollections.observableArrayList();
-        private final ObservableList<Assignment> assignments = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Student> students, Collection<Assignment> assignments) {
+        AddressBookStub(Collection<Student> students) {
             this.students.setAll(students);
-            this.assignments.setAll(assignments);
         }
         @Override
         public ObservableList<Student> getStudentList() {
             return students;
-        }
-
-        @Override
-        public ObservableList<Assignment> getAssignmentList() {
-            return assignments;
         }
     }
 

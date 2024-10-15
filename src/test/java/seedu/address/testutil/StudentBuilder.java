@@ -1,8 +1,11 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -24,6 +27,7 @@ public class StudentBuilder {
     private Phone phone;
     private Email email;
     private Set<Tag> tags;
+    private List<Assignment> assignments = new ArrayList<Assignment>();
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -43,6 +47,7 @@ public class StudentBuilder {
         phone = studentToCopy.getPhone();
         email = studentToCopy.getEmail();
         tags = new HashSet<>(studentToCopy.getTags());
+        assignments = studentToCopy.getAssignmentList();
     }
 
     /**
@@ -74,6 +79,14 @@ public class StudentBuilder {
      */
     public StudentBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code assignments} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withAssignments(List<Assignment> assignmentList) {
+        this.assignments = assignmentList;
         return this;
     }
 

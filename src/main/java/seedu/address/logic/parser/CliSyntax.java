@@ -11,6 +11,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_ASSIGNMENT_NAME = new Prefix("assignmentName/");
+    public static final Prefix PREFIX_ASSIGNMENT_SCORE = new Prefix("score/");
+    public static final Prefix PREFIX_STUDENT_INDEX = new Prefix("studentIndex/");
+    public static final Prefix PREFIX_ASSIGNMENT_INDEX = new Prefix("assignmentIndex/");
     public static final Prefix PREFIX_ASSIGNMENT_MAX_SCORE = new Prefix("maxScore/");
     public static final Prefix PREFIX_SUBJECT = new Prefix("s/");
     public static final Prefix PREFIX_GRADE = new Prefix("g/");

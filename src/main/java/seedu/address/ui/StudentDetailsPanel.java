@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.student.Student;
 
 /**
@@ -38,6 +39,8 @@ public class StudentDetailsPanel extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane detailsTags;
+    @FXML
+    private FlowPane assignments;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -52,5 +55,24 @@ public class StudentDetailsPanel extends UiPart<Region> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> detailsTags.getChildren().add(new Label(tag.tagName)));
+
+        // Displaying assignments
+        student.getAssignmentList().stream().forEach(assignment -> {
+            VBox assignmentBox = new VBox();
+            assignmentBox.setSpacing(5); // Optional: add spacing between elements
+
+            Label titleLabel = new Label(assignment.getName());
+            Label scoreLabel = new Label("Score: " + assignment.getScore() + "/" + assignment.getMaxScore());
+            Label statusLabel = new Label(assignment.getHasSubmitted() ? "Submitted" : "Not Submitted");
+
+            // Optionally apply CSS or styling to differentiate the assignment boxes
+            assignmentBox.getStyleClass().add("assignment-box");
+
+            // Add all labels to the VBox
+            assignmentBox.getChildren().addAll(titleLabel, scoreLabel, statusLabel);
+
+            // Add the VBox to the assignments FlowPane
+            assignments.getChildren().add(assignmentBox);
+        });
     }
 }

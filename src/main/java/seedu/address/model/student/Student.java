@@ -2,12 +2,16 @@ package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.student.exceptions.AssignmentIndexOutOfRangeException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,9 +27,11 @@ public class Student {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
+    //AssignmentList initially null
+    private List<Assignment> assignmentList = new ArrayList<Assignment>();
 
     /**
-     * Every field must be present and not null.
+     * Every field except assignmentList must be present and not null.
      */
     public Student(Name name, Phone phone, Email email, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, tags);
@@ -34,6 +40,18 @@ public class Student {
         this.email = email;
         this.tags.addAll(tags);
     }
+    /**
+     * Creates a Student object with an AssignmentList
+     */
+    public Student(Name name, Phone phone, Email email, Set<Tag> tags, List<Assignment> assignmentList) {
+        requireAllNonNull(name, phone, email, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.tags.addAll(tags);
+        this.assignmentList = assignmentList;
+    }
+
 
     public Name getName() {
         return name;
@@ -45,6 +63,9 @@ public class Student {
 
     public Email getEmail() {
         return email;
+    }
+    public List<Assignment> getAssignmentList() {
+        return assignmentList;
     }
 
     /**
@@ -87,7 +108,8 @@ public class Student {
         return name.equals(otherStudent.name)
                 && phone.equals(otherStudent.phone)
                 && email.equals(otherStudent.email)
-                && tags.equals(otherStudent.tags);
+                && tags.equals(otherStudent.tags)
+                && assignmentList.equals(otherStudent.assignmentList);
     }
 
     @Override
@@ -103,6 +125,40 @@ public class Student {
                 .add("phone", phone)
                 .add("email", email)
                 .add("tags", tags)
+                .add("assignments", assignmentList)
                 .toString();
+    }
+
+    /**
+     * Verifies if the {@code student} has already been assigned an {@code assignment} with the same
+     * {@code AssignmentName}
+     */
+    public boolean hasAssignment(Assignment otherAssignment) {
+        Objects.requireNonNull(otherAssignment);
+        for (Assignment assignment : assignmentList) {
+            if (assignment.isSameAssignment(otherAssignment)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
+     * Creates a new Student that has the same existing data, but with an added {@code assignment}
+     * @return a new {@code Student} object with the additional Assignment
+     */
+    public Student addAssignment(Assignment assignmentToAdd) {
+        Objects.requireNonNull(assignmentToAdd);
+        List<Assignment> newAssignmentlist = new ArrayList<Assignment>(assignmentList);
+        newAssignmentlist.add(assignmentToAdd);
+        return new Student(this.name, this.phone, this.email, this.tags, newAssignmentlist);
+    }
+    /**
+     * Deletes the Assignment at {@code index} in the student's assignmentList
+     */
+    public void deleteAssignment(int index) {
+        if (assignmentList.size() < (index - 1) || index <= 0) {
+            throw new AssignmentIndexOutOfRangeException();
+        }
+        assignmentList.remove(index - 1);
     }
 }
