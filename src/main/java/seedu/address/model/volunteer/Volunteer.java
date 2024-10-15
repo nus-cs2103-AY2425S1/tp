@@ -9,7 +9,10 @@ import java.util.Objects;
  */
 public class Volunteer {
 
+    private static int NEXT_ID = 0;
+
     // Identity fields
+    private final int id;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -32,6 +35,9 @@ public class Volunteer {
     public Volunteer(Name name, Phone phone, Email email, Date availableDate,
                      Time startTimeAvailability, Time endTimeAvailability) {
         requireAllNonNull(name, phone, email, availableDate, startTimeAvailability, endTimeAvailability);
+        this.id = NEXT_ID;
+        NEXT_ID++;
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -39,6 +45,8 @@ public class Volunteer {
         this.startTimeAvailability = startTimeAvailability;
         this.endTimeAvailability = endTimeAvailability;
     }
+
+    public int getId() { return id; }
 
     public Name getName() {
         return name;

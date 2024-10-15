@@ -46,7 +46,7 @@ public class VolunteerCard extends UiPart<Region> {
         super(FXML);
         this.volunteer = volunteer;
         id.setText(displayedIndex + ". ");
-        name.setText(volunteer.getName().fullName);
+        name.setText(volunteer.getName().fullName + " (#" + volunteer.getId() + ")");
         phone.setText(volunteer.getPhone().value);
         email.setText(volunteer.getEmail().value);
         date.setText(volunteer.getAvailableDate().toString());

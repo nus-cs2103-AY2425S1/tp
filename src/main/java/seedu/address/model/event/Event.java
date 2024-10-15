@@ -11,8 +11,10 @@ import seedu.address.commons.util.ToStringBuilder;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Event {
+    private static int NEXT_ID = 0;
 
     // Identity fields
+    private final int id;
     private final EventName eventName;
     private final Location location;
     private final Date date;
@@ -26,6 +28,9 @@ public class Event {
     public Event(EventName eventName, Location location, Date date,
                  Time startTime, Time endTime, Description description) {
         requireAllNonNull(eventName, location, date, startTime, endTime, description);
+        this.id = NEXT_ID;
+        NEXT_ID++;
+
         this.eventName = eventName;
         this.location = location;
         this.date = date;
@@ -47,6 +52,9 @@ public class Event {
      */
     public Event(EventName eventName, Location location, Date date, Time startTime, Time endTime) {
         requireAllNonNull(eventName, location, date, startTime, endTime);
+        this.id = NEXT_ID;
+        NEXT_ID++;
+
         this.eventName = eventName;
         this.location = location;
         this.date = date;
@@ -54,6 +62,8 @@ public class Event {
         this.endTime = endTime;
         this.description = new Description();
     }
+
+    public int getId() { return id; }
 
     public EventName getName() {
         return eventName;
