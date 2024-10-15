@@ -18,11 +18,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.*;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Meeting;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -122,9 +120,18 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
+    
+        @Override
+        public void addMeeting(Meeting meeting) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+        
+        public void setScheduleList(ReadOnlyScheduleList newData) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -132,7 +139,10 @@ public class AddCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
-
+        
+        public ReadOnlyScheduleList getScheduleList() {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
@@ -142,9 +152,19 @@ public class AddCommandTest {
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
+    
+        @Override
+        public void deleteMeeting(Meeting target) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+    
+        @Override
+        public void setMeeting(Meeting meeting, Meeting editedMeeting) {
             throw new AssertionError("This method should not be called.");
         }
 

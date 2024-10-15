@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Meeting;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,22 +23,36 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final ScheduleList scheduleList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlyScheduleList scheduleList) {
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs + "and stored schedule" + scheduleList);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.scheduleList = new ScheduleList(scheduleList);
+    }
+    
+    //Duplicate Constructor First
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(addressBook, userPrefs);
+    
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+    
+        this.addressBook = new AddressBook(addressBook);
+        this.userPrefs = new UserPrefs(userPrefs);
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.scheduleList = new ScheduleList();
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new ScheduleList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -110,6 +125,32 @@ public class ModelManager implements Model {
 
         addressBook.setPerson(target, editedPerson);
     }
+    
+    //=========== ScheduleList ================================================================================
+    @Override
+    public void setScheduleList(ReadOnlyScheduleList scheduleList) {
+        this.scheduleList.resetData(scheduleList);
+    }
+    @Override
+    
+    public ReadOnlyScheduleList getScheduleList() { return scheduleList;
+    }
+    @Override
+    public void deleteMeeting(Meeting target) {
+        scheduleList.removeMeeting(target);
+    }
+    @Override
+    public void addMeeting(Meeting meeting) {
+        scheduleList.addMeeting(meeting);
+//        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+    @Override
+    public void setMeeting(Meeting target, Meeting editedMeeting) {
+        requireAllNonNull(target, editedMeeting);
+    
+        scheduleList.setMeeting(target, editedMeeting);
+    }
+    
 
     //=========== Filtered Person List Accessors =============================================================
 
