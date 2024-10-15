@@ -27,6 +27,9 @@ public class Client {
     private final InsurancePlansManager insurancePlansManager;
     private final Set<Tag> tags = new HashSet<>();
 
+    public static final String NO_CLAIMS_MESSAGE = "No open claims";
+    public static final String OPEN_CLAIMS_MESSAGE = "%1$s open claims";
+
     /**
      * Every field must be present and not null.
      */
@@ -80,6 +83,11 @@ public class Client {
 
         return otherClient != null
                 && otherClient.getName().equals(getName());
+    }
+
+    public String getClaimsString() {
+        int numberOfOpenClaims = this.insurancePlansManager.getNumberOfOpenClaims();
+        return (numberOfOpenClaims == 0) ? NO_CLAIMS_MESSAGE : String.format(OPEN_CLAIMS_MESSAGE, numberOfOpenClaims);
     }
 
     /**
