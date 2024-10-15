@@ -67,7 +67,7 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + AGE_DESC_BOB + SEX_DESC_BOB 
+                + ADDRESS_DESC_BOB + AGE_DESC_BOB + SEX_DESC_BOB
                            + APPOINTMENT_DESC_ONE + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple tags - all accepted
