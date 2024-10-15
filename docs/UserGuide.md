@@ -90,6 +90,23 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+### Adding a lesson : `lesson add`
+
+Adds a lesson tied to a student with start and end date time.
+
+Format: `lesson add  sid/STUDENTID d/STARTDATE li/LOCATIONINDEX h/DURATION`
+
+* Add a lesson with the student at specified `STUDENTID`.
+* The student ID refers to the index number shown in the displayed person list.
+* The lesson starts at the specified `STARTDATE` in the format `dd-MM-yyyy HH:mm`.
+* The lesson is held at the location specified by the `LOCATIONINDEX`.
+* The location index refers to the index number shown in the displayed location list.
+* The index refers to the index number shown in the displayed lesson schedule.
+* The duration of the lesson is specified by the `DURATION` in hours.
+* The duration must be between 0 and 24 hours inclusive.
+* The student ID and location and duration **must be a positive integer** 1, 2, 3, …​
+
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
