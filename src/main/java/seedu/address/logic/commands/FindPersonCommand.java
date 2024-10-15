@@ -1,28 +1,39 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+
+import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.commons.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all persons in address book
+ * whose name contains any of the name argument keywords
+ * and role matches the role argument keyword.
+ * Keyword matching is case-insensitive.
  */
 public class FindPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "findp";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "the specified names (case-insensitive) and role matches the specified role (case-insensitive) "
+            + "and displays them as a list with index numbers.\n"
+            + "Parameters: "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_ROLE + "ROLE]\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "alice bob charlie "
+            + PREFIX_ROLE + "organiser";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final Predicate<Person> predicate;
 
-    public FindPersonCommand(NameContainsKeywordsPredicate predicate) {
+    public FindPersonCommand(Predicate<Person> predicate) {
         this.predicate = predicate;
     }
 
