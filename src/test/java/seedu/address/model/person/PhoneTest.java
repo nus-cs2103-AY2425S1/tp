@@ -34,6 +34,7 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("934-")); // Hyphen at the end
         assertFalse(Phone.isValidPhone("934--999")); // Double hyphen between digits
         assertFalse(Phone.isValidPhone("934  999")); // Double space between digits
+        assertFalse(Name.isValidName("999- 934")); // Hyphen and space between 2 characters
 
         // valid phone numbers
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
