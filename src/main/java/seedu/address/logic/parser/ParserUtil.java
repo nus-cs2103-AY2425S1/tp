@@ -101,8 +101,11 @@ public class ParserUtil {
      * Parses a {@code String payment} into an {@code Payment}.
      * Leading and trailing whitespaces will be trimmed
      */
-    public static Payment parsePayment(String payment) {
-        String trimmedPayment = payment.trim();
+    public static Payment parsePayment(String payment) throws ParseException {
+        String trimmedPayment = payment.trim().toLowerCase();
+        if (!Payment.isValidPayment(trimmedPayment)) {
+            throw new ParseException(Payment.MESSAGE_CONSTRAINTS);
+        }
         Boolean b = Boolean.parseBoolean(trimmedPayment);
         return new Payment(b);
     }

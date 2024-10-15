@@ -8,8 +8,8 @@ import static java.util.Objects.requireNonNull;
  */
 public class Payment {
 
-    public static final String MESSAGE_CONSTRAINTS = "Payment takes true/false, blank/other values will be taken as "
-            + "false";
+    public static final String MESSAGE_CONSTRAINTS = "Payment must be either paid (true) or not paid (false).";
+    public static final String VALIDATION_REGEX = "^(true|false)$";
     public final Boolean hasPaid;
 
     /**
@@ -28,6 +28,13 @@ public class Payment {
      */
     public Payment() {
         this.hasPaid = false;
+    }
+
+    /**
+     * Returns true if a given string is a valid payment status (either true or false).
+     */
+    public static Boolean isValidPayment(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
