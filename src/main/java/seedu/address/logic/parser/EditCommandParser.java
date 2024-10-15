@@ -3,10 +3,14 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ETA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import java.util.Collection;
@@ -17,6 +21,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditCommand.EditDeliveryDescriptor;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
@@ -32,21 +37,22 @@ public class EditCommandParser implements Parser<EditCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(String args) throws ParseException {
+        boolean isInspect = AddressBookParser.getInspect();
+        if (!isInspect) {
+            return getEditPersonCommand(args);
+        } else {
+            return getEditDeliveryCommand(args);
+        }
+    }
+
+    private EditCommand getEditPersonCommand(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
         Index index;
 
-        try {
-            List<Index> indexList = ParserUtil.parseIndex(argMultimap.getPreamble());
-            if (indexList.isEmpty()) {
-                throw new ParseException(MESSAGE_INVALID_INDEX);
-            }
-            index = indexList.get(0);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
-        }
+        index = parseIndex(argMultimap);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
@@ -71,6 +77,52 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         return new EditCommand(index, editPersonDescriptor);
+    }
+
+    private EditCommand getEditDeliveryCommand(String args) throws ParseException {
+        requireNonNull(args);
+        ArgumentMultimap argMultimap =
+            ArgumentTokenizer.tokenize(args, PREFIX_ADDRESS, PREFIX_COST, PREFIX_DATE, PREFIX_TIME, PREFIX_ETA);
+        Index index = parseIndex(argMultimap);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ADDRESS, PREFIX_COST, PREFIX_DATE, PREFIX_TIME, PREFIX_ETA);
+
+        EditDeliveryDescriptor editDeliveryDescriptor = new EditDeliveryDescriptor();
+        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            editDeliveryDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        }
+        if (argMultimap.getValue(PREFIX_COST).isPresent()) {
+            editDeliveryDescriptor.setCost(ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get()));
+        }
+        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            editDeliveryDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
+            editDeliveryDescriptor.setTime(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_ETA).isPresent()) {
+            editDeliveryDescriptor.setEta(ParserUtil.parseEta(argMultimap.getValue(PREFIX_ETA).get()));
+        }
+        if (!editDeliveryDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        }
+        return new EditCommand(index, editDeliveryDescriptor);
+    }
+
+    private static Index parseIndex(ArgumentMultimap argMultimap) throws ParseException {
+        Index index;
+        try {
+            List<Index> indexList = ParserUtil.parseIndex(argMultimap.getPreamble());
+            if (indexList.isEmpty()) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            }
+            index = indexList.get(0);
+        } catch (ParseException pe) {
+            String message = AddressBookParser.getInspect()
+                                 ? EditCommand.INSPECT_MESSAGE_USAGE
+                                 : EditCommand.MESSAGE_USAGE;
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, message), pe);
+        }
+        return index;
     }
 
     /**

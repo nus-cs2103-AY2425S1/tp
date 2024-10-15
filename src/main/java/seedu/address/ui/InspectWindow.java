@@ -232,11 +232,12 @@ public class InspectWindow extends UiPart<Stage> {
                 handleExit();
             } else if (commandResult.isList()) {
                 handleList(commandResult);
-            } else if (commandResult.isDeliveryAdded()) {
-                return commandResult;
             } else {
-                throw new CommandException("Not yet implemented");
+                return commandResult;
             }
+//            } else {
+//                throw new CommandException("Not yet implemented");
+//            }
 
             return commandResult;
         } catch (CommandException | ParseException e) {
