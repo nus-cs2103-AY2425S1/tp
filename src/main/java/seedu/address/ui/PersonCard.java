@@ -43,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label remark;
     @FXML
+    private Label age;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -67,6 +69,9 @@ public class PersonCard extends UiPart<Region> {
         String value = person.getRemark().value;
         remark.setText(value);
         remark.setManaged(!value.isEmpty());
+
+        final String ageString = Integer.toString(person.getAge().value);
+        age.setText(ageString);
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

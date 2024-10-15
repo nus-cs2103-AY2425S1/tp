@@ -83,6 +83,7 @@ public class EditCommandTest {
                 personToBeEdited.getAddress(),
                 personToBeEdited.getPriority(),
                 remark,
+                personToBeEdited.getAge(),
                 personToBeEdited.getTags());
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
