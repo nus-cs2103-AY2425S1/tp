@@ -21,6 +21,14 @@ jobs:
       - name: Merge to master
         run: git checkout --progress --force ${{ github.sha }}
 
+      - name: Set up virtual display for TestFX (Linux only)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+
+      - name: Start virtual display (Linux only)
+        if: runner.os == 'Linux'
+        run: Xvfb :99 & export DISPLAY=:99
+
       - name: Run repository-wide tests
         if: runner.os == 'Linux'
         working-directory:  ${{ github.workspace }}/.github
