@@ -6,23 +6,23 @@ import keycontacts.commons.util.ToStringBuilder;
 
 /**
  *  Class representing a Student's cancelled lesson in the student directory.
- *  Guarantees: immutable, start time and end time are valid as declared in
- *  {@link #isValidTimePair(Time, Time)}.
+ *  Guarantees: immutable
  */
-public class CancelledLesson extends Lesson {
+public class CancelledLesson {
     private final Date lessonDate;
 
     /**
      * Constructs a {@code CancelledLesson} object.
      *
      * @param lessonDate The lesson date of the cancelled lesson
-     * @param startTime The start time of the cancelled lesson
-     * @param endTime The end time of the cancelled lesson
      */
-    public CancelledLesson(Date lessonDate, Time startTime, Time endTime) {
-        super(startTime, endTime);
+    public CancelledLesson(Date lessonDate) {
         requireAllNonNull(lessonDate);
         this.lessonDate = lessonDate;
+    }
+
+    public Date getLessonDate() {
+        return lessonDate;
     }
 
     @Override
@@ -37,21 +37,13 @@ public class CancelledLesson extends Lesson {
         }
 
         CancelledLesson otherLesson = (CancelledLesson) other;
-        return super.equals(otherLesson) && lessonDate.equals(otherLesson.lessonDate);
+        return lessonDate.equals(otherLesson.lessonDate);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("lessonDate", lessonDate)
-                .add("startTime", getStartTime())
-                .add("endTime", getEndTime())
                 .toString();
-    }
-
-    @Override
-    public String toDisplay() {
-        return lessonDate.toString().substring(0, 1).toUpperCase()
-                + lessonDate.toString().substring(1).toLowerCase() + ", " + super.toDisplay();
     }
 }

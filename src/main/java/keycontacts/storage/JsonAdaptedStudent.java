@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import keycontacts.commons.exceptions.IllegalValueException;
+import keycontacts.model.lesson.CancelledLesson;
 import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Address;
@@ -31,6 +32,7 @@ class JsonAdaptedStudent {
     private final String gradeLevel;
     private final List<JsonAdaptedPianoPiece> pianoPieces = new ArrayList<>();
     private final JsonAdaptedRegularLesson regularLesson;
+    private final List<JsonAdaptedCancelledLesson> cancelledLessons = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -39,7 +41,8 @@ class JsonAdaptedStudent {
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("address") String address, @JsonProperty("gradeLevel") String gradeLevel,
                               @JsonProperty("pianoPieces") List<JsonAdaptedPianoPiece> pianoPieces,
-                              @JsonProperty("regularLesson") JsonAdaptedRegularLesson regularLesson) {
+                              @JsonProperty("regularLesson") JsonAdaptedRegularLesson regularLesson,
+                              @JsonProperty("cancelledLessons") List<JsonAdaptedCancelledLesson> cancelledLessons) {
         this.name = name;
         this.phone = phone;
         this.address = address;
@@ -48,6 +51,9 @@ class JsonAdaptedStudent {
             this.pianoPieces.addAll(pianoPieces);
         }
         this.regularLesson = regularLesson;
+        if (cancelledLessons != null) {
+            this.cancelledLessons.addAll(cancelledLessons);
+        }
     }
 
     /**
@@ -62,6 +68,9 @@ class JsonAdaptedStudent {
                 .map(JsonAdaptedPianoPiece::new)
                 .collect(Collectors.toList()));
         regularLesson = source.getRegularLesson().map(JsonAdaptedRegularLesson::new).orElse(null);
+        cancelledLessons.addAll(source.getCancelledLessons().stream()
+                .map(JsonAdaptedCancelledLesson::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -73,6 +82,11 @@ class JsonAdaptedStudent {
         final List<PianoPiece> studentPianoPieces = new ArrayList<>();
         for (JsonAdaptedPianoPiece pianoPiece : pianoPieces) {
             studentPianoPieces.add(pianoPiece.toModelType());
+        }
+
+        final List<CancelledLesson> studentCancelledLessons = new ArrayList<>();
+        for (JsonAdaptedCancelledLesson cancelledLesson : cancelledLessons) {
+            studentCancelledLessons.add(cancelledLesson.toModelType());
         }
 
         if (name == null) {
@@ -117,7 +131,10 @@ class JsonAdaptedStudent {
             modelRegularLesson = null;
         }
 
-        return new Student(modelName, modelPhone, modelAddress, modelGradeLevel, modelPianoPieces, modelRegularLesson);
+        final Set<CancelledLesson> modelCancelledLessons = new HashSet<>(studentCancelledLessons);
+
+        return new Student(modelName, modelPhone, modelAddress, modelGradeLevel, modelPianoPieces, modelRegularLesson,
+                modelCancelledLessons);
     }
 
 }

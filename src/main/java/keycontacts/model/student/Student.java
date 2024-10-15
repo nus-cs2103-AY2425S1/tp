@@ -51,7 +51,7 @@ public class Student {
      * present and not null.
      */
     public Student(Name name, Phone phone, Address address, GradeLevel gradeLevel,
-                   Set<PianoPiece> pianoPieces, RegularLesson regularLesson) {
+                   Set<PianoPiece> pianoPieces, RegularLesson regularLesson, Set<CancelledLesson> cancelledLessons) {
         requireAllNonNull(name, phone, address, gradeLevel, pianoPieces);
         this.name = name;
         this.phone = phone;
@@ -59,6 +59,7 @@ public class Student {
         this.gradeLevel = gradeLevel;
         this.pianoPieces.addAll(pianoPieces);
         this.regularLesson = regularLesson;
+        this.cancelledLessons.addAll(cancelledLessons);
     }
 
     public Name getName() {
@@ -90,6 +91,14 @@ public class Student {
     }
 
     /**
+     * Returns an immutable cancelled lesson set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<CancelledLesson> getCancelledLessons() {
+        return Collections.unmodifiableSet(cancelledLessons);
+    }
+
+    /**
      * Returns string representation of the {@code regularLesson}
      */
     public String getRegularLessonString() {
@@ -112,14 +121,15 @@ public class Student {
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(phone);
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(address);
         GradeLevel updatedGradeLevel = editStudentDescriptor.getGradeLevel().orElse(this.gradeLevel);
-        return new Student(updatedName, updatedPhone, updatedAddress, updatedGradeLevel, pianoPieces, regularLesson);
+        return new Student(updatedName, updatedPhone, updatedAddress, updatedGradeLevel, pianoPieces, regularLesson,
+                cancelledLessons);
     }
 
     /**
      * Creates and returns a new {@code Student} with the updated {@code regularLesson}.
      */
     public Student withRegularLesson(RegularLesson regularLesson) {
-        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson);
+        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson, cancelledLessons);
     }
 
     /**
@@ -129,7 +139,7 @@ public class Student {
         Set<PianoPiece> updatedPianoPieces = new HashSet<>(pianoPieces);
         updatedPianoPieces.addAll(addedPianoPieces);
 
-        return new Student(name, phone, address, gradeLevel, updatedPianoPieces, regularLesson);
+        return new Student(name, phone, address, gradeLevel, updatedPianoPieces, regularLesson, cancelledLessons);
     }
 
     /**
@@ -188,11 +198,7 @@ public class Student {
     }
 
     /**
-     * A function to check if the {@code date} and {@code startTime} parameters match {@code regularLesson}.
-     *
-     * @param date date of the lesson to match with
-     * @param startTime start time of the lesson to match with
-     * @return a boolean representing whether the inputted params match {@code regularLesson}
+     * Returns true if the {@code date} and {@code startTime} of {@code regularLesson} match the parameters.
      */
     public boolean matchesLesson(Date date, Time startTime) {
         return this.getRegularLesson()
@@ -201,11 +207,12 @@ public class Student {
     }
 
     /**
-     * Adds a cancelled lesson to {@code cancelledLessons}.
-     * @param cancelledLesson the cancelled lesson to be added
+     * Returns a new student with an additional {@code CancelledLesson}.
      */
-    public void addCancelledLesson(CancelledLesson cancelledLesson) {
-        this.cancelledLessons.add(cancelledLesson);
+    public Student withAddedCancelledLesson(CancelledLesson cancelledLesson) {
+        Set<CancelledLesson> updatedCancelledLessons = new HashSet<>(cancelledLessons);
+        updatedCancelledLessons.add(cancelledLesson);
+        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson, updatedCancelledLessons);
     }
 
 }

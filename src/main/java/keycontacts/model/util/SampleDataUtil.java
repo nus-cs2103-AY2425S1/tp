@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import keycontacts.model.ReadOnlyStudentDirectory;
 import keycontacts.model.StudentDirectory;
+import keycontacts.model.lesson.CancelledLesson;
+import keycontacts.model.lesson.Date;
 import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.GradeLevel;
@@ -48,6 +50,15 @@ public class SampleDataUtil {
     public static Set<PianoPiece> getPianoPieceSet(String... strings) {
         return Arrays.stream(strings)
                 .map(PianoPiece::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a cancelled lesson set containing the list of strings given.
+     */
+    public static Set<CancelledLesson> getCancelledLessonSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(string -> new CancelledLesson(new Date(string)))
                 .collect(Collectors.toSet());
     }
 

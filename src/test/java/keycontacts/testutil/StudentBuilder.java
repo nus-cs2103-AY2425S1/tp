@@ -3,6 +3,7 @@ package keycontacts.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import keycontacts.model.lesson.CancelledLesson;
 import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.GradeLevel;
@@ -26,6 +27,7 @@ public class StudentBuilder {
     private Address address;
     private GradeLevel gradeLevel;
     private Set<PianoPiece> pianoPieces;
+    private Set<CancelledLesson> cancelledLessons;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -36,6 +38,7 @@ public class StudentBuilder {
         address = new Address(DEFAULT_ADDRESS);
         gradeLevel = new GradeLevel(DEFAULT_GRADE_LEVEL);
         pianoPieces = new HashSet<>();
+        cancelledLessons = new HashSet<>();
     }
 
     /**
@@ -47,6 +50,7 @@ public class StudentBuilder {
         address = studentToCopy.getAddress();
         gradeLevel = studentToCopy.getGradeLevel();
         pianoPieces = new HashSet<>(studentToCopy.getPianoPieces());
+        cancelledLessons = new HashSet<>(studentToCopy.getCancelledLessons());
     }
 
     /**
@@ -91,8 +95,17 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code pianoPieces} into a {@code Set<PianoPiece>}
+     * and set it to the {@code Student} that we are building.
+     */
+    public StudentBuilder withCancelledLessons(String ... cancelledLessons) {
+        this.cancelledLessons = SampleDataUtil.getCancelledLessonSet(cancelledLessons);
+        return this;
+    }
+
     public Student build() {
-        return new Student(name, phone, address, gradeLevel, pianoPieces, null);
+        return new Student(name, phone, address, gradeLevel, pianoPieces, null, cancelledLessons);
     }
 
 }

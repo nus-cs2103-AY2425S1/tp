@@ -70,12 +70,11 @@ public class CancelLessonCommand extends Command {
             throw new CommandException(String.format(MESSAGE_LESSON_NOT_FOUND, Messages.format(studentToUpdate)));
         }
 
-        CancelledLesson cancelledLesson = new CancelledLesson(date,
-                lessonToCancel.getStartTime(), lessonToCancel.getEndTime());
-        studentToUpdate.addCancelledLesson(cancelledLesson);
+        CancelledLesson cancelledLesson = new CancelledLesson(date);
+        Student updatedStudent = studentToUpdate.withAddedCancelledLesson(cancelledLesson);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS,
-                Messages.format(lessonToCancel), Messages.format(studentToUpdate)));
+                Messages.format(lessonToCancel), Messages.format(updatedStudent)));
     }
 
     @Override

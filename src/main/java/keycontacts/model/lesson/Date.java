@@ -10,10 +10,10 @@ import java.time.format.DateTimeFormatter;
  * Represents a student's lesson date in the student directory.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public class Date {
+public class Date implements Comparable<Date> {
 
     private final LocalDate date;
-    public static final String MESSAGE_CONSTRAINTS = "Date should be in DD/MM/YYYY format";
+    public static final String MESSAGE_CONSTRAINTS = "Date should be in DD-MM-YYYY format";
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static final String VALIDATION_REGEX = "^(0[1-9]|[12]\\d|3[01])-(0[1-9]|1[0-2])-\\d{4}$";
 
@@ -50,6 +50,11 @@ public class Date {
 
         Date otherDate = (Date) other;
         return date.equals(otherDate.date);
+    }
+
+    @Override
+    public int compareTo(Date other) {
+        return this.date.compareTo(other.date);
     }
 
     /**

@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import keycontacts.model.lesson.CancelledLesson;
 import keycontacts.model.student.Student;
 
 /**
@@ -41,6 +42,8 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label regularLesson;
     @FXML
+    private Label cancelledLessons;
+    @FXML
     private Label pianoPieces;
 
     /**
@@ -54,6 +57,10 @@ public class StudentCard extends UiPart<Region> {
         phone.setText(student.getPhone().value);
         address.setText(student.getAddress().value);
         gradeLevel.setText(student.getGradeLevel().value);
+        cancelledLessons.setText(student.getCancelledLessons().stream()
+                .sorted(Comparator.comparing(CancelledLesson::getLessonDate))
+                .map(cancelledLesson -> cancelledLesson.getLessonDate().toString())
+                .collect(Collectors.joining(", ")));
         regularLesson.setText(student.getRegularLessonDisplay());
         pianoPieces.setText(student.getPianoPieces().stream()
                 .sorted(Comparator.comparing(pianoPiece -> pianoPiece.pianoPieceName))
