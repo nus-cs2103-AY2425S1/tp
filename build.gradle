@@ -64,6 +64,7 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
     testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
 
+    testRuntimeOnly 'org.testfx:openjfx-monocle:8u76-b04'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
 }
 
