@@ -46,6 +46,7 @@ public class CondoTest {
         assertTrue(condo1.equals(condo1)); // Same object should return true
 
         assertFalse(condo1.equals(apartment1)); // Different subclass should return false
+        assertTrue(condo1.equals(condo2)); // Different object, same content should return true
 
         /*// Test for equality with a different but identical object
         assertTrue(condo1.equals(condo2)); // Different object, same content should return true

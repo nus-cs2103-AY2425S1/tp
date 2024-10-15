@@ -124,4 +124,16 @@ public class AddPropertyToSellParserTest {
         // No exception should be thrown
         parser.parse(userInput);
     }
+    @Test
+    public void parse_allFieldsPresent_success2() throws ParseException {
+        String userInput = INDEX_FIRST_PERSON.getOneBased() + " "
+                + PREFIX_HOUSING_TYPE + "a "
+                + PREFIX_SELLING_PRICE + "1000000 "
+                + PREFIX_POSTAL_CODE + "123456 "
+                + PREFIX_UNIT_NUMBER + "10-01 "
+                + PREFIX_TAG + "New";
+
+        // No exception should be thrown
+        parser.parse(userInput);
+    }
 }

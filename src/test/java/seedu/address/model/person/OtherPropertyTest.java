@@ -68,6 +68,7 @@ public class OtherPropertyTest {
         // Test for equality with the same object
         assertTrue(otherProperty1.equals(otherProperty1)); // Same object should return true
         assertFalse(otherProperty1.equals(apartment1)); // Different subclass should return false
+        assertTrue(otherProperty1.equals(otherProperty2)); // Different object, same content should return true
 
         /*// Test for equality with a different but identical object
         assertTrue(otherProperty1.equals(otherProperty2)); // Different object, same content should return true

@@ -68,6 +68,7 @@ public class ApartmentTest {
         assertTrue(apartment1.equals(apartment1)); // Same object should return true
         // Example: Asserting that two different objects are not equal (should return false)
         assertFalse(apartment1.equals(bto1));
+        assertTrue(apartment1.equals(apartment2));
 
 
         /*// Test for equality with a different but identical object

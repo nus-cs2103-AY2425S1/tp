@@ -59,12 +59,13 @@ public class HdbTest {
         Hdb hdb1 = new Hdb(new PostalCode("123456"), new UnitNumber("01-01"), new Price("300000"), tags);
         Hdb hdb2 = new Hdb(new PostalCode("123456"), new UnitNumber("01-01"), new Price("300000"), tags);
         Hdb hdb3 = new Hdb(new PostalCode("654321"), new UnitNumber("02-02"), new Price("350000"), tags);
-        Apartment apartment1 = new Apartment(new PostalCode("123456"), new UnitNumber("10-01"),
-                new Price("1000000"), tags);
+        Apartment apartment1 = new Apartment(new PostalCode("123456"), new UnitNumber("01-01"),
+                new Price("300000"), tags);
 
         // Test for equality with the same object
         assertTrue(hdb1.equals(hdb1)); // Same object should return true
         assertFalse(hdb1.equals(apartment1)); // Different subclass should return false
+        assertTrue(hdb1.equals(hdb2)); // Different object, same content should return true
 
         /*// Test for equality with a different but identical object
         assertTrue(hdb1.equals(hdb2)); // Different object, same content should return true
