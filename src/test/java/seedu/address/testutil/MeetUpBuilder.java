@@ -1,18 +1,18 @@
 package seedu.address.testutil;
 
+import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Name;
 import seedu.address.model.meetup.To;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building MeetUp objects.
  */
 public class MeetUpBuilder {
 
     public static final String DEFAULT_NAME = "Client Meeting";
-    public static final String DEFAULT_INFO = "Get client's requirements";
+    public static final String DEFAULT_INFO = "Get clients requirements";
     public static final String DEFAULT_FROM = "2024-09-01 12:00";
     public static final String DEFAULT_TO = "2024-09-01 14:00";
 
@@ -22,7 +22,7 @@ public class MeetUpBuilder {
     private To to;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code MeetUpBuilder} with the default details.
      */
     public MeetUpBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -32,7 +32,7 @@ public class MeetUpBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the MeetUpBuilder with the data of {@code meetUpToCopy}.
      */
     public MeetUpBuilder(MeetUp meetUpToCopy) {
         name = meetUpToCopy.getName();

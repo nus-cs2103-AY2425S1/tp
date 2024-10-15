@@ -3,8 +3,8 @@ package seedu.address.model.util;
 import seedu.address.model.MeetUpList;
 import seedu.address.model.ReadOnlyMeetUpList;
 import seedu.address.model.meetup.From;
-import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.meetup.Info;
+import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.meetup.Name;
 import seedu.address.model.meetup.To;
 
@@ -15,9 +15,9 @@ import seedu.address.model.meetup.To;
 public class SampleMeetUpDataUtil {
     public static MeetUp[] getSampleMeetUps() {
         return new MeetUp[] {
-            new MeetUp(new Name("Sales Meeting"), new Info("Pitch products to potential clients."),
+            new MeetUp(new Name("Sales Meeting"), new Info("Pitch products to potential clients"),
                     new From("2024-09-15 12:00"), new To("2024-09-15 14:00")),
-            new MeetUp(new Name("Closing Meeting"), new Info("Contract negotiation and closing."),
+            new MeetUp(new Name("Closing Meeting"), new Info("Contract negotiation and closing"),
                     new From("2024-09-16 12:00"), new To("2024-09-16 14:00")),
         };
     }

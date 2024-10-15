@@ -21,6 +21,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyMeetUpList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.person.Person;
@@ -160,9 +161,31 @@ public class AddPersonCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        // ============================ MeetUp Model - To be refactored ==========================
+
+        @Override
+        public ReadOnlyMeetUpList getMeetUpList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<MeetUp> getFilteredMeetUpList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setMeetUp(MeetUp target, MeetUp editedMeetUp) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteMeetUp(MeetUp target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void updateFilteredMeetUpList(Predicate<MeetUp> meetUp) {
-            // TODO
+            throw new AssertionError("This method should not be called.");
         }
     }
 

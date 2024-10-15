@@ -11,11 +11,10 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddMeetUpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.meetup.From;
-import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.meetup.Info;
+import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.meetup.Name;
 import seedu.address.model.meetup.To;
-
 /**
  * Parses input arguments and creates a new AddMeetUpCommand object
  */
