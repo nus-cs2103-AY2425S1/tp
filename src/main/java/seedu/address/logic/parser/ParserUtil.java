@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -47,6 +48,21 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String telegramHandle} into a {@code TelegramHandle}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static TelegramHandle parseTelegramHandle(String telegramHandle) throws ParseException {
+        requireNonNull(telegramHandle);
+        String trimmedTelegramHandle = telegramHandle.trim();
+        if (!TelegramHandle.isValidTelegramHandle(trimmedTelegramHandle)) {
+            throw new ParseException(TelegramHandle.MESSAGE_CONSTRAINTS);
+        }
+        return new TelegramHandle(trimmedTelegramHandle);
     }
 
     /**
