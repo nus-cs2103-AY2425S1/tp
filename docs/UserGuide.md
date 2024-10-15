@@ -4,9 +4,18 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# InvenTrack User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+InvenTrack is a desktop app for managing convenience store inventory, optimized for use via a Line Interface (CLI) while still offering the benefits of a Graphical User Interface (GUI).
+
+This project is designed for convenience store inventory managers, allowing users to:
+
+- Add products and suppliers to the inventory
+- Assign products to supplier
+- Update and Track stock levels of products
+
+InvenTrack simulates an ongoing software project for a desktop application dedicated to managing suppliers, product, and stock details within a convenience store setting. It is developed using object-oriented programming (OOP) principles, providing a robust and maintainable code base. The application also includes comprehensive user and developer documentation for ease of use and understanding.
+
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -68,12 +77,15 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Stuck on how to use the app?
 
-![help message](images/helpMessage.png)
+The Help command simplifies the process for you!
+
+It opens a pop-up window containing a message to copy the link to the user guide, allowing you to learn more about the application.
 
 Format: `help`
 
+![help message](images/helpWindow.png)
 
 ### Adding a supplier: `add`
 

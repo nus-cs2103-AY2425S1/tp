@@ -282,7 +282,7 @@ This application is aimed towards convenience store managers who often need to m
 * Regularly order products and prefer a user-friendly interface
 * prefer a fast, efficient typing interface over mouse or voice commands
 
-**Value proposition**: 
+**Value proposition**:
 
 InvenTrack enables inventory managers to efficiently manage large number of supplier contact information and streamline communication, ensuring smooth operations and minimizing errors in stock replenishment, all through a typing-optimized interface
 The three main aspects of this product are:
@@ -339,11 +339,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. Inventory Manager tries to assign a product to a supplier.
-2. System validates that the product name & supplier name exists in the list. 
-3. The system assigns the specified product to the specified supplier. 
+2. System validates that the product name & supplier name exists in the list.
+3. The system assigns the specified product to the specified supplier.
 4. System updates the product-supplier relationship in the list.
 5. System confirms the assignment with a success message.
-   
+
     Use case ends.
 
 **Extensions**
@@ -355,7 +355,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. Product/Supplier name does not exist:
   * 2a1. System displays an error message.
-  * 2a2. System prompts the Inventory Manager to re-enter the command. 
+  * 2a2. System prompts the Inventory Manager to re-enter the command.
   * 2a3. Use case resumes at step 1.
 
 **Use case: Delete Suppliers/Products**
@@ -369,7 +369,7 @@ Preconditions:
 2. System checks if product or supplier exists which is to be deleted.
 3. System removes the specified supplier or product from the list.
 4. System confirms the deletion with a success message.
-   
+
     Use case ends.
 
 **Extensions**
@@ -392,10 +392,10 @@ Preconditions:
 **MSS**
 1. Inventory Manager tries to set a threshold for a product.
 2. System validates that the product name exists in the list.
-3. System sets the specified threshold for the product. 
+3. System sets the specified threshold for the product.
 4. System updates the product information in the list.
 5. System confirms the threshold setting with a success message.
-   
+
     Use case ends.
 
 **Extensions**
@@ -418,10 +418,10 @@ Preconditions:
 
 **MSS**
 1. User requests for help guide.
-2. System opens a new window or panel displaying the user guide. 
-3. User reviews the guide. 
+2. System opens a new window or panel displaying the user guide.
+3. User reviews the guide.
 4. User closes the guide when finished.
-   
+
     Use case ends.
 
 **Extensions**
@@ -429,7 +429,7 @@ Preconditions:
     * 1a1. System displays an error message.
     * 1a2. System prompts the Inventory Manager to re-enter the command.
     * 1a3. Use case resumes at step 1.
-  
+
   Use case ends.
 
 ### Non-Functional Requirements

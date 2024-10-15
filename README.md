@@ -4,7 +4,7 @@
 
 * This is **a project for convenience store inventory managers**.<br>
   Example usages:
-  * add products and suppliers 
+  * add products and suppliers
   * track stock of products
 * The project simulates an ongoing software project for a desktop application (called _InvenTrack_) used for managing suppliers, product and stock details of a convenience store.
   * It is **written in OOP fashion**. It provides a **reasonably well-written** code base.

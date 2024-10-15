@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/yu7ong)]
 
-* Role: Team member 
+* Role: Team member
 * Responsibilities: Code quality, Deliverables and deadlines
 
 ### Anvita
