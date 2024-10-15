@@ -36,7 +36,6 @@ public class AddSessionCommandParser implements Parser<AddSessionCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSessionCommand.MESSAGE_USAGE));
         }
-        System.out.println("AddSessionCommandParser:parse: argMultimap: " + argMultimap);
 
         SessionName name = ParserUtil.parseSessionName(argMultimap.getValue(PREFIX_SESSION_NAME).get());
         SessionDate date = ParserUtil.parseSessionDate(argMultimap.getValue(PREFIX_DATE).get());
