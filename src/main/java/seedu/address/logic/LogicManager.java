@@ -18,6 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.group.Group;
 import seedu.address.model.student.Student;
+import seedu.address.model.task.Task;
 import seedu.address.storage.Storage;
 
 /**
@@ -54,6 +55,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getAddressBook());
+            storage.saveUserPrefs(model.getUserPrefs());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -79,6 +81,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return model.getFilteredTaskList();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
     }
@@ -101,6 +108,11 @@ public class LogicManager implements Logic {
     @Override
     public void setStateGroups() {
         this.model.setStateGroups();
+    }
+
+    @Override
+    public void setStateGroupTask() {
+        this.model.setStateGroupTask();
     }
 
     @Override

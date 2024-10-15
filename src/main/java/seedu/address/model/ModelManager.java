@@ -16,6 +16,8 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
+import seedu.address.model.task.Task;
+
 
 /**
  * Represents the in-memory model of the address book data.
@@ -28,6 +30,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
     private final FilteredList<Group> filteredGroups;
+    private final FilteredList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -41,6 +44,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
         filteredGroups = new FilteredList<>(this.addressBook.getGroupList());
+        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
     }
 
     public ModelManager() {
@@ -51,12 +55,22 @@ public class ModelManager implements Model {
 
     @Override
     public void setStateStudents() {
-        this.userPrefs.setStateStudents();;
+        this.userPrefs.setStateStudents();
     }
 
     @Override
     public void setStateGroups() {
         this.userPrefs.setStateGroups();
+    }
+
+    @Override
+    public void setStateGroupTask() {
+        this.userPrefs.setStateGroupTask();
+    }
+
+    @Override
+    public void setStateTasks() {
+        this.userPrefs.setStateTasks();
     }
 
     @Override
@@ -175,7 +189,7 @@ public class ModelManager implements Model {
     public Group getGroupByName(GroupName groupName) {
         return addressBook.getGroupByName(groupName);
     }
-  
+
     /**
      * Returns the group with the same group name as {@code groupName} exists in the address book
      */
@@ -199,6 +213,13 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    @Override
+    public void deleteGroup(Group groupToBeDeleted) {
+        requireNonNull(groupToBeDeleted);
+        addressBook.removeGroup(groupToBeDeleted);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
     //=========== Filtered Student List Accessors =============================================================
 
     /**
@@ -216,6 +237,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return filteredTasks;
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
@@ -225,6 +251,12 @@ public class ModelManager implements Model {
     public void updateFilteredGroupList(Predicate<Group> predicate) {
         requireNonNull(predicate);
         filteredGroups.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        filteredTasks.setPredicate(predicate);
     }
 
     @Override
@@ -240,9 +272,35 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredStudents.equals(otherModelManager.filteredStudents)
-                && filteredGroups.equals(otherModelManager.filteredGroups);
+            && userPrefs.equals(otherModelManager.userPrefs)
+            && filteredStudents.equals(otherModelManager.filteredStudents)
+            && filteredGroups.equals(otherModelManager.filteredGroups)
+            && filteredTasks.equals(otherModelManager.filteredTasks);
+    }
+
+    @Override
+    public boolean hasTaskInGroup(Task task, Group group) {
+        requireAllNonNull(task, group);
+        return addressBook.hasTaskInGroup(task, group);
+    }
+
+    @Override
+    public void addTaskToGroup(Task task, Group group){
+        requireAllNonNull(task, group);
+        addressBook.addTaskToGroup(task, group);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+
+    @Override
+    public void addTask(Task task){
+        requireNonNull(task);
+        addressBook.addTask(task);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+
+    @Override
+    public boolean hasTask(Task task) {
+        return addressBook.hasTask(task);
     }
 
 }

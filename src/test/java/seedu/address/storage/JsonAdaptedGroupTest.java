@@ -34,14 +34,15 @@ public class JsonAdaptedGroupTest {
 
     @Test
     public void toModelType_invalidGroupName_throwsIllegalValueException() {
-        JsonAdaptedGroup group = new JsonAdaptedGroup(INVALID_NAME, new ArrayList<JsonAdaptedPerson>());
+        JsonAdaptedGroup group = new JsonAdaptedGroup(INVALID_NAME, new ArrayList<JsonAdaptedPerson>(), new ArrayList<JsonAdaptedTask>());
         String expectedMessage = GroupName.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, group::toModelType);
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedGroup group = new JsonAdaptedGroup(null, new ArrayList<JsonAdaptedPerson>());
+        JsonAdaptedGroup group = new JsonAdaptedGroup(null, new ArrayList<JsonAdaptedPerson>(),
+                new ArrayList<JsonAdaptedTask>());
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, GroupName.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, group::toModelType);
     }

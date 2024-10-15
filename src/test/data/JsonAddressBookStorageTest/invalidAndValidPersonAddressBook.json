@@ -1,7 +1,7 @@
 {
   "persons": [ {
     "name": "Valid Person",
-    "email": "hans@example.com"
+    "email": "hans@u.nus.edu"
   }, {
     "name": "Person With Invalid Email Field",
     "email": "invalid@email!3e"

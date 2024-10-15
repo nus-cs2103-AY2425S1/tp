@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.group.exceptions.ExceedGroupSizeException;
 import seedu.address.model.student.Student;
+import seedu.address.model.task.Task;
 
 /**
  * Represents a Group in the address book.
@@ -21,14 +22,16 @@ public class Group {
     private static final int MAXIMUM_STUDENTS_IN_GROUP = 5;
     private final GroupName groupName;
     private final Set<Student> students = new HashSet<>();
+    private final Set<Task> tasks = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Group(GroupName groupName, Set<Student> students) {
+    public Group(GroupName groupName, Set<Student> students, Set<Task> tasks) {
         requireAllNonNull(groupName, students);
         this.groupName = groupName;
         this.students.addAll(students);
+        this.tasks.addAll(tasks);
     }
 
     /**
@@ -47,10 +50,19 @@ public class Group {
         return Collections.unmodifiableSet(students);
     }
 
+    public boolean hasStudents() {
+        return !students.isEmpty();
+    }
+
+    public Set<Task> getTasks() {
+        return Collections.unmodifiableSet(tasks);
+    }
+
     /**
      * Adds a given student into the {@code group} object.
      * There can be a maximum of 5 students in each group.
-     * @param student  The {@code student} object to be added.
+     *
+     * @param student The {@code student} object to be added.
      */
     public void add(Student student) {
         if (students.size() < MAXIMUM_STUDENTS_IN_GROUP) {
@@ -58,6 +70,16 @@ public class Group {
         } else {
             throw new ExceedGroupSizeException();
         }
+    }
+
+    /**
+     * Adds a given task into the {@code group} object.
+     * There can be a maximum of 5 students in each group.
+     *
+     * @param task The {@code task} object to be added.
+     */
+    public void addTask(Task task) {
+        tasks.add(task);
     }
 
     public void delete(Student student) {
@@ -74,7 +96,7 @@ public class Group {
         }
 
         return otherGroup != null
-                && otherGroup.getGroupName().equals(getGroupName());
+            && otherGroup.getGroupName().equals(getGroupName());
     }
 
     /**
@@ -94,7 +116,7 @@ public class Group {
 
         Group otherStudent = (Group) other;
         return groupName.equals(otherStudent.groupName)
-                && students.equals(otherStudent.students);
+            && students.equals(otherStudent.students);
     }
 
     @Override
@@ -106,8 +128,8 @@ public class Group {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("groupname", groupName)
-                .add("students", students)
-                .toString();
+            .add("groupname", groupName)
+            .add("students", students)
+            .toString();
     }
 }

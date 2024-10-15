@@ -6,6 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.group.Group;
+import seedu.address.model.student.Student;
 
 
 /**
@@ -32,7 +33,7 @@ public class GroupCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private VBox students;
+    private Label students;
 
     /**
      * Creates a {@code GroupCode} with the given {@code Group} and index to display.
@@ -42,7 +43,11 @@ public class GroupCard extends UiPart<Region> {
         this.group = group;
         id.setText(displayedIndex + ". ");
         name.setText(group.getGroupName().fullName);
-        group.getStudents().stream()
-                .forEach(student -> students.getChildren().add(new Label(student.toString())));
+        String studentList = "";
+        for (Student student : group.getStudents()) {
+            studentList += student.toDisplayString();
+            studentList += "\n";
+        }
+        students.setText(studentList);
     }
 }

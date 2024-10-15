@@ -10,6 +10,8 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
+import seedu.address.model.task.Task;
+
 
 /**
  * The API of the Model component.
@@ -20,6 +22,7 @@ public interface Model {
      */
     Predicate<Student> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
+    Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -119,6 +122,17 @@ public interface Model {
     boolean hasPersonInGroup(Student student, Group group);
 
     /**
+     * Returns true if a task with the same identity as {@code task} exists in the group
+     * with the same identity as {@code task}.
+     */
+    boolean hasTaskInGroup(Task task, Group group);
+
+    /**
+     * Returns true if a task with the same identity as {@code task} exists in the in the model
+     */
+    boolean hasTask(Task task);
+
+    /**
      * Returns a {@code Student} with the student number {@code studentNumber}.
      * There must exist such a {@code Student} in the address book.
      */
@@ -141,6 +155,11 @@ public interface Model {
     ObservableList<Group> getFilteredGroupList();
 
     /**
+     * Returns an unmodifiable view of the filtered student list
+     */
+    ObservableList<Task> getFilteredTaskList();
+
+    /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.
@@ -149,9 +168,15 @@ public interface Model {
 
     void updateFilteredGroupList(Predicate<Group> predicate);
 
+    void updateFilteredTaskList(Predicate<Task> predicate);
+
     void setStateStudents();
 
     void setStateGroups();
+
+    void setStateGroupTask();
+
+    void setStateTasks();
 
     State getState();
 
@@ -160,4 +185,10 @@ public interface Model {
     boolean containsGroupName(GroupName groupName);
 
     void deleteStudentFromGroup(Group group, Student student);
+
+    void deleteGroup(Group groupToBeDeleted);
+
+    void addTaskToGroup(Task task, Group group);
+
+    void addTask(Task task);
 }

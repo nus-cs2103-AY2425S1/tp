@@ -11,8 +11,10 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.AddStudentToGroupCommand;
+import seedu.address.logic.commands.AddTaskToGroupCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.DeleteStudentFromGroupCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -21,6 +23,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListGroupCommand;
 import seedu.address.logic.commands.ListStudentCommand;
+import seedu.address.logic.commands.ListTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -89,9 +92,18 @@ public class AddressBookParser {
 
         case AddStudentToGroupCommand.COMMAND_WORD:
             return new AddStudentToGroupCommandParser().parse(arguments);
-            
+
         case DeleteStudentFromGroupCommand.COMMAND_WORD:
             return new DeleteStudentFromGroupCommandParser().parse(arguments);
+
+        case ListTaskCommand.COMMAND_WORD:
+            return new ListTaskCommandParser().parse(arguments);
+
+        case DeleteGroupCommand.COMMAND_WORD:
+            return new DeleteGroupCommandParser().parse(arguments);
+
+        case AddTaskToGroupCommand.COMMAND_WORD:
+            return new AddTaskToGroupCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

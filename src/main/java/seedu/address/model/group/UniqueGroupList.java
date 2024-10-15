@@ -8,16 +8,16 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.student.exceptions.DuplicatePersonException;
-import seedu.address.model.student.exceptions.PersonNotFoundException;
+import seedu.address.model.group.exceptions.DuplicateGroupException;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A student is considered unique by comparing using {@code Student#isSamePerson(Student)}. As such, adding and
+ * A list of groups that enforces uniqueness between its elements and does not allow nulls.
+ * A group is considered unique by comparing using {@code Group#isSameGroup(Group)}. As such, adding and
  * updating of
- * persons uses Student#isSamePerson(Student) for equality so as to ensure that the student being added or updated is
- * unique in terms of identity in the UniqueStudentList. However, the removal of a student uses Student#equals
- * (Object) so as to ensure that the student with exactly the same fields will be removed.
+ * groups uses sGroup#isSameGroup(Group) for equality so as to ensure that the group being added or updated is
+ *  * unique in terms of identity in the UniqueGroupList. However, the removal of a group uses Group#equals
+ * (Object) so as to ensure that the group with exactly the same fields will be removed.
  * <p>
  * Supports a minimal set of list operations.
  *
@@ -44,7 +44,7 @@ public class UniqueGroupList implements Iterable<Group> {
     public void add(Group toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateGroupException();
         }
         internalList.add(toAdd);
     }
@@ -52,31 +52,31 @@ public class UniqueGroupList implements Iterable<Group> {
     /**
      * Replaces the group {@code target} in the list with {@code editedGroup}.
      * {@code target} must exist in the list.
-     * The group identity of {@code editedStudent} must not be the same as another existing student in the list.
+     * The group identity of {@code editedGroup} must not be the same as another existing group in the list.
      */
-    public void setGroup(Group target, Group editedStudent) {
-        requireAllNonNull(target, editedStudent);
+    public void setGroup(Group target, Group editedGroup) {
+        requireAllNonNull(target, editedGroup);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new GroupNotFoundException();
         }
 
-        if (target.isSameGroup(editedStudent) && contains(editedStudent)) {
-            throw new DuplicatePersonException();
+        if (target.isSameGroup(editedGroup) && contains(editedGroup)) {
+            throw new DuplicateGroupException();
         }
 
-        internalList.set(index, editedStudent);
+        internalList.set(index, editedGroup);
     }
 
     /**
-     * Removes the equivalent student from the list.
-     * The student must exist in the list.
+     * Removes the equivalent group from the list.
+     * The group must exist in the list.
      */
     public void remove(Group toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new GroupNotFoundException();
         }
     }
 
@@ -87,15 +87,15 @@ public class UniqueGroupList implements Iterable<Group> {
 
     /**
      * Replaces the contents of this list with {@code groups}.
-     * {@code students} must not contain duplicate groups.
+     * {@code groups} must not contain duplicate groups.
      */
-    public void setGroups(List<Group> students) {
-        requireAllNonNull(students);
-        if (!groupsAreUnique(students)) {
-            throw new DuplicatePersonException();
+    public void setGroups(List<Group> groups) {
+        requireAllNonNull(groups);
+        if (!groupsAreUnique(groups)) {
+            throw new DuplicateGroupException();
         }
 
-        internalList.setAll(students);
+        internalList.setAll(groups);
     }
 
     /**

@@ -12,13 +12,14 @@ import java.time.format.ResolverStyle;
  * Represents a Deadline for a Task.
  */
 public class Deadline implements Comparable<Deadline> {
-    public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}";
+    public static final String MESSAGE_CONSTRAINTS = "Deadlines must be given in the form YYYY-MM-DD HHMM";
+    public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2} \\d{2}\\d{2}";
     // safer to use 'uuuu' vs 'yyyy'
     // https://stackoverflow.com/questions/
     // 41177442/uuuu-versus-yyyy-in-datetimeformatter-formatting-pattern-codes-in-java
-    private static final String DATETIME_FORMAT = "uuuu-MM-dd HH:mm";
-    private static final String DATETIME_OUTPUT_FORMAT = "d MMM uuuu HH:mm";
-    private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter
+    public static final String DATETIME_FORMAT = "uuuu-MM-dd HHmm";
+    public static final String DATETIME_OUTPUT_FORMAT = "d MMM uuuu HHmm";
+    public static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter
         .ofPattern(DATETIME_FORMAT)
         .withResolverStyle(ResolverStyle.STRICT);
 
@@ -78,5 +79,9 @@ public class Deadline implements Comparable<Deadline> {
     @Override
     public String toString() {
         return time.format(DateTimeFormatter.ofPattern(DATETIME_OUTPUT_FORMAT));
+    }
+
+    public String deadlineInInputFormat() {
+        return time.format(DateTimeFormatter.ofPattern(DATETIME_FORMAT));
     }
 }

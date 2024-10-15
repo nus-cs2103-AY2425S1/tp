@@ -11,7 +11,7 @@ public class TaskName {
     public static final String NAME_CONSTRAINT =
         "Task Name cannot be blank.";
 
-    public static final String VALIDATION_REGEX = "[\\\\S\\\\s]+[\\\\S]+";
+    public static final String VALIDATION_REGEX = "(.|\\s)*\\S(.|\\s)*";
 
     public final String taskName;
 

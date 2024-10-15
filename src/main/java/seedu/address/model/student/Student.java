@@ -92,7 +92,7 @@ public class Student {
     }
 
     /**
-     * Returns a copy of studnet which has no group
+     * Returns a copy of student which has no group
      */
     public Student removeGroup() {
         return new Student(name, email, tags, studentNumber, Optional.empty());
@@ -124,6 +124,14 @@ public class Student {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, email, studentNumber, tags);
+    }
+
+    /**
+     * Returns Student in an easy to read format for listing in Group cards.
+     */
+    public String toDisplayString() {
+        return new StringBuilder().append(name).append(" [").append(studentNumber).append(", ").append(email).append(
+            "]").toString();
     }
 
     @Override

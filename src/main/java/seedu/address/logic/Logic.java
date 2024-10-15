@@ -11,6 +11,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.group.Group;
 import seedu.address.model.student.Student;
+import seedu.address.model.task.Task;
 
 /**
  * API of the Logic component
@@ -38,6 +39,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of groups */
     ObservableList<Group> getFilteredGroupList();
 
+    /** Returns an unmodifiable view of the filtered list of tasks */
+    ObservableList<Task> getFilteredTaskList();
+
     /**
      * Returns the user prefs' address book file path.
      */
@@ -56,6 +60,8 @@ public interface Logic {
     void setStateStudents();
 
     void setStateGroups();
+
+    void setStateGroupTask();
 
     State getState();
 }

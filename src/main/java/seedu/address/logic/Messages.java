@@ -9,6 +9,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
+import seedu.address.model.task.Task;
 
 /**
  * Container for user visible messages.
@@ -76,6 +77,17 @@ public class Messages {
     public static String format(GroupName groupName) {
         final StringBuilder builder = new StringBuilder();
         builder.append(groupName.fullName);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code task} for display to the user.
+     */
+    public static String format(Task task) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(task.getTaskName())
+                .append(task.getDeadline())
+                .append(task.getStatus());
         return builder.toString();
     }
 
