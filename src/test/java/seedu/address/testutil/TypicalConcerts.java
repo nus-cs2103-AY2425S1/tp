@@ -11,24 +11,30 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.AddressBook;
 import seedu.address.model.concert.Concert;
 
 /**
  * A utility class containing a list of {@code Concert} objects to be used in tests.
  */
 public class TypicalConcerts {
-    public static final Concert COACHELLA = new ConcertBuilder()
-            .withName(VALID_NAME_COACHELLA)
-            .withAddress(VALID_ADDRESS_COACHELLA)
-            .withDate(VALID_DATE_COACHELLA)
-            .build();
-    public static final Concert GLASTONBURY = new ConcertBuilder()
-            .withName(VALID_NAME_GLASTONBURY)
-            .withAddress(VALID_ADDRESS_GLASTONBURY)
-            .withDate(VALID_DATE_GLASTONBURY)
-            .build();
+    public static final Concert COACHELLA = new ConcertBuilder().withName(VALID_NAME_COACHELLA)
+            .withAddress(VALID_ADDRESS_COACHELLA).withDate(VALID_DATE_COACHELLA).build();
+    public static final Concert GLASTONBURY = new ConcertBuilder().withName(VALID_NAME_GLASTONBURY)
+            .withAddress(VALID_ADDRESS_GLASTONBURY).withDate(VALID_DATE_GLASTONBURY).build();
 
     private TypicalConcerts() {} // prevents instantiation
+
+    /**
+     * Returns an {@code AddressBook} with all the typical concerts.
+     */
+    public static AddressBook getTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Concert concert : getTypicalConcerts()) {
+            ab.addConcert(concert);
+        }
+        return ab;
+    }
 
     public static List<Concert> getTypicalConcerts() {
         return new ArrayList<>(Arrays.asList(COACHELLA, GLASTONBURY));
