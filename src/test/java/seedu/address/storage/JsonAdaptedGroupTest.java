@@ -34,7 +34,8 @@ public class JsonAdaptedGroupTest {
 
     @Test
     public void toModelType_invalidGroupName_throwsIllegalValueException() {
-        JsonAdaptedGroup group = new JsonAdaptedGroup(INVALID_NAME, new ArrayList<JsonAdaptedPerson>(), new ArrayList<JsonAdaptedTask>());
+        JsonAdaptedGroup group = new JsonAdaptedGroup(INVALID_NAME, new ArrayList<JsonAdaptedPerson>(),
+                new ArrayList<JsonAdaptedTask>());
         String expectedMessage = GroupName.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, group::toModelType);
     }

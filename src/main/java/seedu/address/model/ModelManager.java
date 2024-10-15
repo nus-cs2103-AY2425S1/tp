@@ -285,7 +285,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addTaskToGroup(Task task, Group group){
+    public void addTaskToGroup(Task task, Group group) {
         requireAllNonNull(task, group);
         addressBook.addTaskToGroup(task, group);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
