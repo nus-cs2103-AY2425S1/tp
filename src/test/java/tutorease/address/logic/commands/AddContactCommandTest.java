@@ -25,7 +25,7 @@ import tutorease.address.model.ReadOnlyUserPrefs;
 import tutorease.address.model.TutorEase;
 import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.Person;
-import tutorease.address.testutil.PersonBuilder;
+import tutorease.address.testutil.StudentBuilder;
 
 public class AddContactCommandTest {
 
@@ -37,7 +37,7 @@ public class AddContactCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new StudentBuilder().build();
 
         CommandResult commandResult = new AddContactCommand(validPerson).execute(modelStub);
 
@@ -48,7 +48,7 @@ public class AddContactCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new StudentBuilder().build();
         AddContactCommand addContactCommand = new AddContactCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
@@ -58,8 +58,8 @@ public class AddContactCommandTest {
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        Person alice = new StudentBuilder().withName("Alice").build();
+        Person bob = new StudentBuilder().withName("Bob").build();
         AddContactCommand addAliceCommand = new AddContactCommand(alice);
         AddContactCommand addBobCommand = new AddContactCommand(bob);
 

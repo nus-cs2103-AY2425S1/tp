@@ -1,11 +1,14 @@
 package tutorease.address.model.person;
 
-import tutorease.address.model.tag.Tag;
+import static tutorease.address.model.person.Role.STUDENT;
 
 import java.util.Set;
 
-import static tutorease.address.model.person.Role.STUDENT;
-
+import tutorease.address.model.tag.Tag;
+/**
+ * Represents a Student in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Student extends Person {
     /**
      * Every field must be present and not null.
@@ -22,7 +25,7 @@ public class Student extends Person {
         super(name, phone, email, address, role, tags);
     }
 
-    public String getRole() {
-        return STUDENT;
+    public Role getRole() {
+        return new Role(STUDENT);
     }
 }

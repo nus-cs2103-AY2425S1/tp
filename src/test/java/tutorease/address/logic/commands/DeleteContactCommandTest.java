@@ -22,7 +22,7 @@ import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.ReadOnlyUserPrefs;
 import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.Person;
-import tutorease.address.testutil.PersonBuilder;
+import tutorease.address.testutil.StudentBuilder;
 
 @Nested
 class DeleteContactCommandTest {
@@ -35,7 +35,7 @@ class DeleteContactCommandTest {
     @Test
     public void execute_validIndex_success() throws Exception {
         ModelStubAcceptingPersonDeleted modelStub = new ModelStubAcceptingPersonDeleted();
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new StudentBuilder().build();
         modelStub.addPerson(validPerson);
 
         CommandResult commandResult = new DeleteContactCommand(Index.fromZeroBased(0)).execute(modelStub);

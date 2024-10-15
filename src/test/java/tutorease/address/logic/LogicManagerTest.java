@@ -32,7 +32,7 @@ import tutorease.address.storage.JsonLessonScheduleStorage;
 import tutorease.address.storage.JsonTutorEaseStorage;
 import tutorease.address.storage.JsonUserPrefsStorage;
 import tutorease.address.storage.StorageManager;
-import tutorease.address.testutil.PersonBuilder;
+import tutorease.address.testutil.StudentBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -161,7 +161,7 @@ public class LogicManagerTest {
         // Triggers the saveTutorEase method by executing an add command
         String addContactCommand = AddContactCommand.COMMAND_WORD + " " + AddContactCommand.SUB_COMMAND_WORD
                 + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + ROLE_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Person expectedPerson = new StudentBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addContactCommand, CommandException.class, expectedMessage, expectedModel);

@@ -10,8 +10,6 @@ import java.util.Set;
 import tutorease.address.commons.util.ToStringBuilder;
 import tutorease.address.model.tag.Tag;
 
-
-
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -57,7 +55,7 @@ public abstract class Person {
         return address;
     }
 
-    public abstract String getRole();
+    public abstract Role getRole();
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
