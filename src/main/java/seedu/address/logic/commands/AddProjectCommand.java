@@ -22,8 +22,8 @@ public class AddProjectCommand extends Command {
             + PREFIX_PROJECT_ID + "PROJECT ID "
             + PREFIX_PROJECT_NAME + "PROJECT NAME "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_PROJECT_NAME + "Project Alpha "
-            + PREFIX_PROJECT_ID + "A0276123K ";
+            + PREFIX_PROJECT_ID + "A0276123K "
+            + PREFIX_PROJECT_NAME + "Project Alpha ";
 
     public static final String MESSAGE_SUCCESS = "New project added: %1$s";
     public static final String MESSAGE_DUPLICATE_PROJECT = "This project already exists in the address book";
