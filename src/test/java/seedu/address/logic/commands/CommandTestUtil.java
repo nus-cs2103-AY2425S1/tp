@@ -111,6 +111,18 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
+    /**
+     * Executes the given code command without comparing data model
+     *
+     * @param command command object to be executed
+     * @param model model to be executed on
+     * @param expectedMsg expected message to be thrown
+     */
+    public static void assertCommandFailureWithoutModel(Command command, Model model, String expectedMsg) {
+        assertThrows(CommandException.class, expectedMsg, () -> command.execute(model));
+    }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
