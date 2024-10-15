@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_STATUS;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -26,9 +24,13 @@ public class AddTaskToGroupCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to a group. "
             + "Parameters: "
-            + PREFIX_TASK_NAME + "TASK_NAME\n "
+            + PREFIX_TASK_NAME + "TASK_NAME "
+            + PREFIX_TASK_DEADLINE + "TASK_DATE "
+            + PREFIX_GROUP_NAME + "GROUP_NAME\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TASK_NAME + "Complete this task";
+            + PREFIX_TASK_NAME + "Complete this task "
+            + PREFIX_TASK_DEADLINE + "2024-01-01 1300 "
+            + PREFIX_GROUP_NAME + "Team 1";
 
     public static final String MESSAGE_SUCCESS = "Added task: %1$s to %2$s";
 
