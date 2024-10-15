@@ -20,7 +20,7 @@ public abstract class AbstractFindCommand extends Command {
     public static final String TAG_COMMAND_WORD = " t/";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names, contacts, emails "
-            + "or tagscontain any of the specified keywords (case-insensitive) and displays"
+            + "or tags contain any of the specified keywords (case-insensitive) and displays"
             + "them as a list with indices.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example:\n"
