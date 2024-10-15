@@ -12,6 +12,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.policy.EducationPolicy;
+import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.LifePolicy;
 import seedu.address.model.policy.PolicySet;
 import seedu.address.model.tag.Tag;
@@ -22,12 +23,14 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
 
     public static Person[] getSamplePersons() {
-        PolicySet lifePolicy = new PolicySet();
-        lifePolicy.add(new LifePolicy());
+        PolicySet policies = new PolicySet();
+        policies.add(new LifePolicy());
+        policies.add(new EducationPolicy());
+        policies.add(new HealthPolicy());
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends"), lifePolicy),
+                getTagSet("friends"), policies),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getTagSet("colleagues", "friends"), new PolicySet()),
