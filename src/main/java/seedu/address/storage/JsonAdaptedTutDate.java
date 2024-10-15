@@ -3,7 +3,6 @@ package seedu.address.storage;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,15 +17,13 @@ class JsonAdaptedTutDate {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "TutDate's %s field is missing!";
     public static final String DATE_FORMAT = "yyyy/MM/dd";
-
     private final String date;
 
     /**
      * Constructs a {@code JsonAdaptedTutDate} with the given tut date details.
      */
     @JsonCreator
-    public JsonAdaptedTutDate(@JsonProperty("date") String date,
-                              @JsonProperty("students") List<JsonAdaptedStudent> students) {
+    public JsonAdaptedTutDate(@JsonProperty("date") String date) {
         this.date = date;
     }
 

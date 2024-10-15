@@ -27,8 +27,7 @@ public class JsonAdaptedStudentTest {
     private static final String INVALID_TUTORIAL_CLASS = ""; // Assuming empty string is invalid
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_DATE_STRING = "2023/02/31";
-    private static final JsonAdaptedTutDate INVALID_TUT_DATE = new JsonAdaptedTutDate(INVALID_DATE_STRING,
-            null);
+    private static final JsonAdaptedTutDate INVALID_TUT_DATE = new JsonAdaptedTutDate(INVALID_DATE_STRING);
     private static final List<JsonAdaptedTutDate> INVALID_TUT_DATES = new ArrayList<>();
 
     static {
