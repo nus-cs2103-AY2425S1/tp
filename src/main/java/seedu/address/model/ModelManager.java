@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.ActiveTags;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,7 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final HashMap<Tag,Integer> activeTags; //Stores all currently used tags
+    private ActiveTags activeTags; //Stores all currently used tags
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -36,7 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        activeTags = this.addressBook.findTagOccurences();
+        activeTags = new ActiveTags(this.addressBook.findTagOccurrences());
     }
 
     public ModelManager() {
@@ -132,7 +132,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public HashMap<Tag, Integer> getActiveTags() {
+    public ActiveTags getActiveTags() {
         return activeTags;
     }
 
