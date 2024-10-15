@@ -5,6 +5,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.ClassIdContainsKeywordsPredicate;
+import seedu.address.model.person.NameAndClassIdContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 
@@ -20,29 +21,47 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " n/alice bob charlie";
+            + "Example 1: " + COMMAND_WORD + " n/alice bob charlie\n"
+            + "Example 2: " + COMMAND_WORD + " c/1 2\n"
+            + "Example 3: " + COMMAND_WORD + " n/alice c/1\n";
+
+    public static final String NO_SEARCH_FIELDS_PROVIDED = "At least one field to search by must be provided.";
 
     private final NameContainsKeywordsPredicate predicate;
 
     private final ClassIdContainsKeywordsPredicate predicateClassId;
 
+    private final NameAndClassIdContainsKeywordsPredicate predicateNameAndClassId;
+
 
     /**
-     * Stores the predicate to be used to filter the list of persons
+     * Stores the predicate to be used to filter the list of persons by name
      * @param predicate the predicate to be used to filter the list of persons
      */
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
         this.predicateClassId = null;
+        this.predicateNameAndClassId = null;
     }
 
     /**
-     * Stores the predicate to be used to filter the list of persons
+     * Stores the predicate to be used to filter the list of persons by class ID
      * @param predicate the predicate to be used to filter the list of persons
      */
     public FindCommand(ClassIdContainsKeywordsPredicate predicate) {
         this.predicateClassId = predicate;
         this.predicate = null;
+        this.predicateNameAndClassId = null;
+    }
+
+    /**
+     * Stores the predicate to be used to filter the list of persons by name and class ID
+     * @param predicate the predicate to be used to filter the list of persons
+     */
+    public FindCommand(NameAndClassIdContainsKeywordsPredicate predicate) {
+        this.predicateNameAndClassId = predicate;
+        this.predicate = null;
+        this.predicateClassId = null;
     }
 
 
@@ -55,6 +74,8 @@ public class FindCommand extends Command {
             model.updateFilteredPersonList(predicate);
         } else if (predicateClassId != null) {
             model.updateFilteredPersonList(predicateClassId);
+        } else {
+            model.updateFilteredPersonList(predicateNameAndClassId);
         }
 
         return new CommandResult(
@@ -73,8 +94,16 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return (predicate != null ? predicate.equals(otherFindCommand.predicate)
-                : predicateClassId.equals(otherFindCommand.predicateClassId));
+
+        if (predicate != null) {
+            return predicate.equals(otherFindCommand.predicate);
+        } else if (predicateClassId != null) {
+            return predicateClassId.equals(otherFindCommand.predicateClassId);
+        } else {
+            assert(predicateNameAndClassId != null);
+            return predicateNameAndClassId.equals(otherFindCommand.predicateNameAndClassId);
+        }
+
     }
 
     @Override
@@ -83,9 +112,13 @@ public class FindCommand extends Command {
             return new ToStringBuilder(this)
                     .add("predicate", predicate)
                     .toString();
-        } else {
+        } else if (predicateClassId != null) {
             return new ToStringBuilder(this)
                     .add("predicate", predicateClassId)
+                    .toString();
+        } else {
+            return new ToStringBuilder(this)
+                    .add("predicate", predicateNameAndClassId)
                     .toString();
         }
 
