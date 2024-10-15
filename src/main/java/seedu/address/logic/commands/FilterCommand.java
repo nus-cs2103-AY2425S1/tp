@@ -17,10 +17,12 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose field contains the "
-            + "the specified substring (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: <FLAG> <SUBSTRING>\n"
-            + "Example: " + COMMAND_WORD + " n/ Alice" + " p/ 91112222";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches for all customers whose specified field "
+            + "contains the given substring (case-insensitive) and displays the results in a numbered list.\n"
+            + "Parameters: <FLAG>/ <SEARCH TERM>\n"
+            + "Flags: n/ (name), p/ (phone), e/ (email), a/ (address), j/ (job), r/ (remarks)\n"
+            + "Example: " + COMMAND_WORD + " n/ Alice\n"
+            + "This will find all customers whose names contain 'Alice'.";
 
     private final Predicate<Person> predicate;
 
