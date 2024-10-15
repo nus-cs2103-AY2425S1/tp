@@ -373,13 +373,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
-**<u>Use case: UC4 - Update Student Information</u>**
+**<u>Use case: UC4 - Edit Student Information</u>**
 
-**Precondition:** The Updated Student exists in Database
+**Precondition:** The Edited Student exists in Database
 
 **MSS:**
 
-1. User requests to update a student's information by providing the index and necessary details (name, contact, courses, email).
+1. User requests to edit a student's information by providing the index and necessary details (name, contact, courses, email).
 2. TAHub validates the inputs.
 3. TAHub updates the student with the provided details.
 4. TAHub displays the updated student's information.
@@ -461,20 +461,61 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a student
+
+1. Adding a student
+   1. Test case: `add n/TestOne p/11111111 e/test1@example.com c/CS2103T`<br>
+   Expected: Student `TestOne` is added to the list. Details of the added student is shown.
+   2. Test case: `add n/TestOne p/11111111`<br>
+   Expected: No student is added. Error details shown.
+   3. Test case: `add n/TestOne e/test1@example.com c/CS2103T`<br>
+   Expected: No student is added. Error details shown.
+   4. Test case: `add n/Test1 p/11111111 e/test1@example.com c/CS2103T`<br>
+      Expected: No student is added. Error details shown.
+
+### Finding a student (by course)
+1. Finding a student (by course)
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+   2. Test case: `find c/CS2103T` (Assuming Students with course `CS2103T` Exist)<br>
+   Expected: Displays students details with course `CS2103T`.
+   3. Test case: `find c/CS2103T` (Assuming Students with course `CS2103T` does not Exist)<br>
+   Expected: No Students Found. Displays 0 students.
+   4. Test case: `find c/1234`
+   Expected: No Students Found. Error details shown.
+
+
+### Finding a student (by name)
+1. Finding a student (by name)
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+    2. Test case: `find n/TestOne` (Assuming Student with name `TestOne` Exists)<br>
+       Expected: Displays students details with name `TestOne`.
+    3. Test case: `find n/TestOne` (Assuming Students with name `TestOne` does not Exist)<br>
+       Expected: No Students Found. Displays 0 students.
+    4. Test case: `find n/Test1`
+       Expected: No Students Found. Error details shown.
+
+### Editing a student
+1. Editing a student
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list. 
+   2. Test case: `edit 1 n/TestOne p/11111111`<br>
+   Expected: 1st student is edited. Details of the edited student is shown.
+   3. Test case: `edit 2 e/test1@example.com c/CS2103T`<br>
+      Expected: 2nd student is edited. Details of the edited student is shown.
+   4. Test case: `edit 2 n/Test 2`<br>
+      Expected: No student is edited. Error details shown.
+   5. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+      Expected: No student is edited. Error details shown.
+
 ### Deleting a student
 
 1. Deleting a student while all students are being shown
-
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   2. Test case: `delete 1`<br>
+      Expected: 1st student is deleted from the list. Details of the deleted student shown in the status message.
+   3. Test case: `delete 0`<br>
+      Expected: No student is deleted. Error details shown in the status message.
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: No student is deleted. Error details shown in the status message.
 
 1. _{ more test cases …​ }_
 
