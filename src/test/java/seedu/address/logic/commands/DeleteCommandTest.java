@@ -105,24 +105,17 @@ public class DeleteCommandTest {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(keyword);
         model.updateFilteredPersonList(predicate);
 
-        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_EXACT_PERSON_NOT_FOUND);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_EXACT_PERSON_NOT_FOUND, "Alic");
+
+        assertCommandFailure(deleteCommand, model, expectedMessage);
     }
 
     @Test
     public void execute_noPersonFound_throwsCommandException() {
         DeleteCommand deleteCommand = new DeleteCommand("Charlie");
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_PARTIAL_PERSON_NOT_FOUND, "Charlie");
 
-        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_PARTIAL_PERSON_NOT_FOUND);
-<<<<<<< HEAD
-    }
-
-    @Test
-    public void execute_multipleMatches_throwsCommandException() {
-        DeleteCommand deleteCommand = new DeleteCommand("a");
-
-        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_MULTIPLE_PERSONS_FOUND);
-=======
->>>>>>> b9d67c180497a21d00cc3d2ccfdcb2f6d7da086d
+        assertCommandFailure(deleteCommand, model, expectedMessage);
     }
 
     @Test
