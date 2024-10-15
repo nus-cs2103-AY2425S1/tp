@@ -23,5 +23,5 @@ src/test/data/sandbox/
 docs/_site/
 docs/_markbind/logs/
 
-#VSCode
+#VSCode files
 .vscode/
