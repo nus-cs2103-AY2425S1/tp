@@ -193,8 +193,8 @@ public class DeleteCommandTest {
     public void equals() {
         DeleteCommand deleteFirstPotentialCommand = new DeletePotentialCommand(INDEX_FIRST_PERSON);
         DeleteCommand deleteSecondPotentialCommand = new DeletePotentialCommand(INDEX_SECOND_PERSON);
-        DeleteCommand deleteFirstEmployeeCommand = new DeletePotentialCommand(Index.fromOneBased(10));
-        DeleteCommand deleteSecondEmployeeCommand = new DeletePotentialCommand(Index.fromOneBased(11));
+        DeleteCommand deleteFirstEmployeeCommand = new DeleteEmployeeCommand(Index.fromOneBased(10));
+        DeleteCommand deleteSecondEmployeeCommand = new DeleteEmployeeCommand(Index.fromOneBased(11));
 
         // same object -> returns true
         assertTrue(deleteFirstPotentialCommand.equals(deleteFirstPotentialCommand));
@@ -202,7 +202,7 @@ public class DeleteCommandTest {
 
         // same values -> returns true
         DeleteCommand deleteFirstCommandPotentialCopy = new DeletePotentialCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteFirstCommandEmployeeCopy = new DeletePotentialCommand(Index.fromOneBased(10));
+        DeleteCommand deleteFirstCommandEmployeeCopy = new DeleteEmployeeCommand(Index.fromOneBased(10));
         assertTrue(deleteFirstPotentialCommand.equals(deleteFirstCommandPotentialCopy));
         assertTrue(deleteFirstEmployeeCommand.equals(deleteFirstCommandEmployeeCopy));
 
