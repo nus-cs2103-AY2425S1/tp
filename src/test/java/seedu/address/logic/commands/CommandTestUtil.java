@@ -7,6 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYEE_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -63,6 +65,20 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final String VALID_PROJECT_NAME_ALPHA = "Project Alpha";
+    public static final String VALID_PROJECT_NAME_BETA = "Project Beta";
+    public static final String VALID_PROJECT_ID_ALPHA = "A0276123J";
+    public static final String VALID_PROJECT_ID_BETA = "A0276123K";
+
+    public static final String PROJECT_NAME_DESC_ALPHA = " " + PREFIX_PROJECT_NAME + VALID_PROJECT_NAME_ALPHA;
+    public static final String PROJECT_NAME_DESC_BETA = " " + PREFIX_PROJECT_NAME + VALID_PROJECT_NAME_BETA;
+    public static final String PROJECT_ID_DESC_ALPHA = " " + PREFIX_PROJECT_ID + VALID_PROJECT_ID_ALPHA;
+    public static final String PROJECT_ID_DESC_BETA = " " + PREFIX_PROJECT_ID + VALID_PROJECT_ID_BETA;
+
+    public static final String INVALID_PROJECT_NAME_DESC = " " + PREFIX_PROJECT_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_PROJECT_ID_DESC = " " + PREFIX_PROJECT_ID + "James&"; // '&' not allowed in project id
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
