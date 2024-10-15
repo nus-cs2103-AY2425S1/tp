@@ -21,7 +21,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 public class FindCommandParser implements Parser<AbstractFindCommand> {
 
     public static final Pattern KEYWORD_EXTRACTOR =
-            Pattern.compile("^(?<tag>/[cen])\\s*(?<arguments>[\\S\\s]+)$");
+            Pattern.compile("^(?<tag>[cen]/)\\s*(?<arguments>[\\S\\s]+)$");
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -45,13 +45,13 @@ public class FindCommandParser implements Parser<AbstractFindCommand> {
 
         // return appropriate FindCommand class depending on tag
         switch (tag) {
-        case "/n":
+        case "n/":
             return new FindByNameCommand(
                     new NameContainsKeywordsPredicate(Arrays.asList(searchTermArray)));
-        case "/c":
+        case "c/":
             return new FindByContactCommand(
                     new ContactContainsKeywordsPredicate(Arrays.asList(searchTermArray)));
-        case "/e":
+        case "e/":
             return new FindByEmailCommand(
                     new EmailContainsKeywordsPredicate(Arrays.asList(searchTermArray)));
         default:
