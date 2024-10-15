@@ -330,18 +330,4 @@ public class PolicySet implements Set<Policy> {
         }
         return true;
     }
-    /**
-     * Creates a deep copy of this PolicySet.
-     *
-     * @return a new PolicySet that contains all the same policies as this one.
-     */
-    public PolicySet duplicate() {
-        PolicySet copy = new PolicySet();
-        for (Policy policy : this.policies) {
-            if (policy != null) {
-                copy.add(policy);
-            }
-        }
-        return copy;
-    }
 }
