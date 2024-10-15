@@ -9,22 +9,25 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Sex {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Sex should only contain alphanumeric characters and spaces, and it should not be blank\"";
+    public static final String MESSAGE_CONSTRAINTS = "Sex can take any values, and it should not be blank";
 
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    /*
+     * The first character of the address must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String VALIDATION_REGEX = "[^\\s].*";
 
-    public final String sex;
+    public final String value;
 
     /**
-     * Constructs a {@code Sex}.
+     * Constructs an {@code Sex}.
      *
-     * @param sex A valid name.
+     * @param sex A valid sex.
      */
     public Sex(String sex) {
         requireNonNull(sex);
         checkArgument(isValidSex(sex), MESSAGE_CONSTRAINTS);
-        this.sex = sex;
+        value = sex;
     }
 
     /**
@@ -34,10 +37,9 @@ public class Sex {
         return test.matches(VALIDATION_REGEX);
     }
 
-
     @Override
     public String toString() {
-        return sex;
+        return value;
     }
 
     @Override
@@ -47,17 +49,17 @@ public class Sex {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof Sex)) {
             return false;
         }
 
-        Name otherName = (Name) other;
-        return sex.equals(otherName.fullName);
+        Sex otherSex = (Sex) other;
+        return value.equals(otherSex.value);
     }
 
     @Override
     public int hashCode() {
-        return sex.hashCode();
+        return value.hashCode();
     }
 
 }
