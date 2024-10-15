@@ -14,7 +14,8 @@ import seedu.address.model.person.Address;
  */
 public class Delivery {
 
-    private final ItemId itemId;
+    private final ItemName itemName;
+
     private final Address address;
 
     private final Cost cost;
@@ -28,9 +29,9 @@ public class Delivery {
     /**
      * Every field must be present and not null.
      */
-    public Delivery(ItemId itemId, Address address, Cost cost, Date date, Time time, Eta eta) {
-        requireAllNonNull(itemId, address, cost, date, time, eta);
-        this.itemId = itemId;
+    public Delivery(ItemName itemName, Address address, Cost cost, Date date, Time time, Eta eta) {
+        requireAllNonNull(itemName, address, cost, date, time, eta);
+        this.itemName = itemName;
         this.address = address;
         this.cost = cost;
         this.date = date;
@@ -41,12 +42,12 @@ public class Delivery {
     /**
      * Every field must be present and not null.
      */
-    public Delivery(ItemId itemId, Address address, Cost cost, Eta eta) {
-        this(itemId, address, cost, new Date(LocalDate.now().toString()), new Time(LocalTime.now().toString()), eta);
+    public Delivery(ItemName itemName, Address address, Cost cost, Eta eta) {
+        this(itemName, address, cost, new Date(LocalDate.now().toString()), new Time(LocalTime.now().toString()), eta);
     }
 
-    public ItemId getItemId() {
-        return itemId;
+    public ItemName getItemName() {
+        return itemName;
     }
 
     public Address getAddress() {
@@ -96,7 +97,7 @@ public class Delivery {
         }
 
         Delivery otherDelivery = (Delivery) other;
-        return itemId.equals(otherDelivery.itemId)
+        return itemName.equals(otherDelivery.itemName)
                 && address.equals(otherDelivery.address)
                 && cost.equals(otherDelivery.cost)
                 && date.equals(otherDelivery.date)
@@ -107,7 +108,7 @@ public class Delivery {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("itemId", itemId)
+                .add("itemName", itemName)
                 .add("date", date)
                 .add("time", time)
                 .add("eta", eta)

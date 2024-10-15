@@ -13,7 +13,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Eta;
-import seedu.address.model.delivery.ItemId;
+import seedu.address.model.delivery.ItemName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -163,17 +163,17 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String itemId} into an {@code ItemId.java}.
+     * Parses a {@code String itemId} into an {@code ItemName.java}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code itemId} is invalid.
      */
-    public static ItemId parseItemId(String itemId) throws ParseException {
+    public static ItemName parseItemName(String itemId) throws ParseException {
         requireNonNull(itemId);
         String trimmedName = itemId.trim();
-        if (!ItemId.isValidItemId(trimmedName)) {
-            throw new ParseException(ItemId.MESSAGE_CONSTRAINTS);
+        if (!ItemName.isValidItemId(trimmedName)) {
+            throw new ParseException(ItemName.MESSAGE_CONSTRAINTS);
         }
-        return new ItemId(itemId);
+        return new ItemName(itemId);
     }
 }

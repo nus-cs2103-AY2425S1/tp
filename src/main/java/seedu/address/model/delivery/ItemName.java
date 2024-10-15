@@ -7,10 +7,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Delivery Item's id in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidItemId(String)}
  */
-public class ItemId {
+public class ItemName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "ItemId should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Item Name should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -18,17 +18,17 @@ public class ItemId {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String itemId;
+    public final String itemName;
 
     /**
      * Constructs a {@code Name}.
      *
      * @param name A valid name.
      */
-    public ItemId(String name) {
+    public ItemName(String name) {
         requireNonNull(name);
         checkArgument(isValidItemId(name), MESSAGE_CONSTRAINTS);
-        itemId = name;
+        itemName = name;
     }
 
     /**
@@ -41,7 +41,7 @@ public class ItemId {
 
     @Override
     public String toString() {
-        return itemId;
+        return "Item: " + itemName;
     }
 
     @Override
@@ -51,17 +51,17 @@ public class ItemId {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ItemId)) {
+        if (!(other instanceof ItemName)) {
             return false;
         }
 
-        ItemId otherItemId = (ItemId) other;
-        return itemId.equals(otherItemId.itemId);
+        ItemName otherItemId = (ItemName) other;
+        return itemName.equals(otherItemId.itemName);
     }
 
     @Override
     public int hashCode() {
-        return itemId.hashCode();
+        return itemName.hashCode();
     }
 
 }

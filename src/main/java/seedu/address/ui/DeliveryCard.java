@@ -48,7 +48,7 @@ public class DeliveryCard extends UiPart<Region> {
         super(FXML);
         this.delivery = delivery;
         id.setText(displayedIndex + ". ");
-        itemId.setText(delivery.getItemId().toString());
+        itemId.setText(delivery.getItemName().toString());
         address.setText(delivery.getAddress().toString());
         cost.setText(delivery.getCost().toString());
         date.setText(delivery.getDate().toString());
