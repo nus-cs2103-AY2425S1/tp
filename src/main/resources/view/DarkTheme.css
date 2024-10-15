@@ -166,8 +166,8 @@
 }
 
 .status-bar-with-border {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 25%);
+    -fx-background-color: derive(#fde68a, 30%);
+    -fx-border-color: derive(#fde68a, 25%);
     -fx-border-width: 1px;
 }
 
@@ -205,7 +205,7 @@
 }
 
 .menu .left-container {
-    -fx-background-color: black;
+    -fx-background-color: #fde68a;
 }
 
 /*
@@ -218,7 +218,7 @@
     -fx-border-color: #e2e2e2;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: #fde68a;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
@@ -231,7 +231,7 @@
 
 .button:pressed, .button:default:hover:pressed {
     -fx-background-color: white;
-    -fx-text-fill: #1d1d1d;
+    -fx-text-fill: #fde68a;
 }
 
 .button:focused {
@@ -244,7 +244,7 @@
 
 .button:disabled, .button:default:disabled {
     -fx-opacity: 0.4;
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: #fde68a;
     -fx-text-fill: white;
 }
 
@@ -258,11 +258,11 @@
 }
 
 .dialog-pane {
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: #fde68a;
 }
 
 .dialog-pane > *.button-bar > *.container {
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: #fde68a;
 }
 
 .dialog-pane > *.label.content {
@@ -272,7 +272,7 @@
 }
 
 .dialog-pane:header *.header-panel {
-    -fx-background-color: derive(#1d1d1d, 25%);
+    -fx-background-color: derive(#fde68a, 25%);
 }
 
 .dialog-pane:header *.header-panel *.label {
@@ -283,11 +283,11 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#60a5fa, 20%);
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(#60a5fa, 50%);
     -fx-background-insets: 3;
 }
 
@@ -319,7 +319,7 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-color: transparent #fde68a transparent #fde68a;
     -fx-background-insets: 0;
     -fx-border-color: #a3a3a3 #a3a3a3 #a3a3a3 #a3a3a3;
     -fx-border-insets: 0;
