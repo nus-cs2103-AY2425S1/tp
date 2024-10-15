@@ -31,8 +31,13 @@ public class Email {
     private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
     public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
 
+    public static final String EMPTY_REGEX = "^$";
+
     public final String value;
 
+    public Email() {
+        value = null;
+    }
     /**
      * Constructs an {@code Email}.
      *
@@ -49,6 +54,10 @@ public class Email {
      */
     public static boolean isValidEmail(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public static boolean isValidEmailForEdit(String test) {
+        return test.matches(VALIDATION_REGEX) || test.matches(EMPTY_REGEX);
     }
 
     @Override
@@ -68,6 +77,10 @@ public class Email {
         }
 
         Email otherEmail = (Email) other;
+
+        if (value == null && otherEmail.value == null) {
+            return true;
+        }
         return value.equals(otherEmail.value);
     }
 

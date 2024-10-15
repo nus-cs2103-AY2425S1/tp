@@ -35,9 +35,8 @@ public class AddRentalCommandParser implements Parser<AddRentalCommand> {
     public AddRentalCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ADDRESS, PREFIX_RENTAL_START_DATE,
-                        PREFIX_RENTAL_END_DATE, PREFIX_RENT_DUE_DATE, PREFIX_MONTHLY_RENT, PREFIX_DEPOSIT,
-                        PREFIX_CUSTOMER_LIST);
+                ArgumentTokenizer.tokenize(args, PREFIX_ADDRESS, PREFIX_RENTAL_START_DATE, PREFIX_RENTAL_END_DATE,
+                        PREFIX_RENT_DUE_DATE, PREFIX_MONTHLY_RENT, PREFIX_DEPOSIT, PREFIX_CUSTOMER_LIST);
         Index index;
 
         try {

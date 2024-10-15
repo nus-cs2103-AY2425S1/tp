@@ -84,25 +84,39 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
+        if (phone == null && email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelEmail = new Email(email);
-
+        final Phone modelPhone;
+        final Email modelEmail;
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        final Set<RentalInformation> modelRentalInformation = new HashSet<>(personRentalInformation);
+        final List<RentalInformation> modelRentalInformation = new ArrayList<>(personRentalInformation);
 
+        if (phone == null) {
+            if (!Email.isValidEmail(email)) {
+                throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+            }
+            modelPhone = new Phone();
+            modelEmail = new Email(email);
+            return new Client(modelName, modelPhone, modelEmail, modelTags, modelRentalInformation);
+        } else if (email == null){
+            if (!Phone.isValidPhone(phone)) {
+                throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+            }
+            modelPhone = new Phone(phone);
+            modelEmail = new Email();
+            return new Client(modelName, modelPhone, modelEmail, modelTags, modelRentalInformation);
+        } else {
+            if (!Phone.isValidPhone(phone)) {
+                throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+            }
+            if (!Email.isValidEmail(email)) {
+                throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+            }
+            modelPhone = new Phone(phone);
+            modelEmail = new Email(email);
+        }
         return new Client(modelName, modelPhone, modelEmail, modelTags, modelRentalInformation);
     }
 }

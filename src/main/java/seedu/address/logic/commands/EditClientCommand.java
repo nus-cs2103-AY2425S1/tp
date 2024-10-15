@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -49,12 +50,13 @@ public class EditClientCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Client: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This client already exists in the address book.";
+    public static final String MESSAGE_EMPTY_PHONE_EMAIL = "This client must either have a phone number or email address.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the client in the filtered client list to edit
+     * @param index                of the client in the filtered client list to edit
      * @param editPersonDescriptor details to edit the client with
      */
     public EditClientCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
@@ -81,6 +83,10 @@ public class EditClientCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        if (editedClient.isEmailPhoneEmpty()) {
+            throw new CommandException(MESSAGE_EMPTY_PHONE_EMAIL);
+        }
+
         model.setPerson(clientToEdit, editedClient);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedClient)));
@@ -97,7 +103,7 @@ public class EditClientCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(clientToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(clientToEdit.getEmail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(clientToEdit.getTags());
-        Set<RentalInformation> updatedRentalInformationList = editPersonDescriptor.getRentalInformationList()
+        List<RentalInformation> updatedRentalInformationList = editPersonDescriptor.getRentalInformationList()
                 .orElse(clientToEdit.getRentalInformation());
 
         return new Client(updatedName, updatedPhone, updatedEmail, updatedTags, updatedRentalInformationList);
@@ -136,9 +142,10 @@ public class EditClientCommand extends Command {
         private Phone phone;
         private Email email;
         private Set<Tag> tags;
-        private Set<RentalInformation> rentalInformationList;
+        private List<RentalInformation> rentalInformationList;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -200,7 +207,7 @@ public class EditClientCommand extends Command {
         }
 
         public void setRentalInformationList(Set<RentalInformation> rentalInformationList) {
-            this.rentalInformationList = (rentalInformationList != null) ? new HashSet<>(rentalInformationList) : null;
+            this.rentalInformationList = (rentalInformationList != null) ? new ArrayList<>(rentalInformationList) : null;
         }
 
         /**
@@ -208,9 +215,9 @@ public class EditClientCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
-        public Optional<Set<RentalInformation>> getRentalInformationList() {
+        public Optional<List<RentalInformation>> getRentalInformationList() {
             return (rentalInformationList != null)
-                    ? Optional.of(Collections.unmodifiableSet(rentalInformationList))
+                    ? Optional.of(Collections.unmodifiableList(rentalInformationList))
                     : Optional.empty();
         }
 

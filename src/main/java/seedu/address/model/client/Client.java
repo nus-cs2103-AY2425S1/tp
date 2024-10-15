@@ -2,8 +2,10 @@ package seedu.address.model.client;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -23,12 +25,12 @@ public class Client {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<RentalInformation> rentalInformationList = new HashSet<>();
+    private final List<RentalInformation> rentalInformationList = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Client(Name name, Phone phone, Email email, Set<Tag> tags, Set<RentalInformation> rentalInformationList) {
+    public Client(Name name, Phone phone, Email email, Set<Tag> tags, List<RentalInformation> rentalInformationList) {
         requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
@@ -60,8 +62,8 @@ public class Client {
         return email;
     }
 
-    public Set<RentalInformation> getRentalInformation() {
-        return Collections.unmodifiableSet(rentalInformationList);
+    public List<RentalInformation> getRentalInformation() {
+        return Collections.unmodifiableList(rentalInformationList);
     }
 
     /**
@@ -83,6 +85,11 @@ public class Client {
 
         return otherClient != null
                 && otherClient.getName().equals(getName());
+    }
+
+    public boolean isEmailPhoneEmpty() {
+        System.out.println("email: " + this.email.value + " phone: " + this.phone.value);
+        return this.email.value == null && this.phone.value == null;
     }
 
     /**
