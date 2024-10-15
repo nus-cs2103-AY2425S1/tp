@@ -16,6 +16,8 @@ public class SortCommand extends Command {
             + "Parameters: String\n"
             + "Example: " + COMMAND_WORD + " asc/desc/ascending/descending (case insensitive)";
     public static final String MESSAGE_SUCCESS = "Successfully sorted";
+    public static final String ASCENDING = "asc";
+    public static final String DESCENDING = "desc";
     private String order;
     public SortCommand(String order) {
         this.order = order;
@@ -25,5 +27,19 @@ public class SortCommand extends Command {
         requireNonNull(model);
         model.sortFilteredPersonList(order);
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortCommand)) {
+            return false;
+        }
+
+        SortCommand otherSortCommand = (SortCommand) other;
+        return order.equals(otherSortCommand.order);
     }
 }
