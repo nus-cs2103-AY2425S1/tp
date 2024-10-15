@@ -36,7 +36,7 @@ public class ModuleCommandTest {
         Person expectedStudent = new PersonBuilder(student).build();
         StudentId studentId = student.getStudentId();
         Module validModule = new Module(VALID_MODULE_AMY);
-        expectedStudent.addModule(validModule);
+        expectedStudent = expectedStudent.addModule(validModule);
         ModuleCommand moduleCommand = new ModuleCommand(studentId, validModule);
 
         String expectedMessage = String.format(ModuleCommand.MESSAGE_SUCCESS, studentId);
@@ -51,17 +51,15 @@ public class ModuleCommandTest {
     public void execute_duplicateModule_throwsCommandException() {
         Person student = model.getFilteredPersonList().get(0);
         Person expectedStudent = new PersonBuilder(student).build();
-        StudentId studentId = student.getStudentId();
         Module validModule = new Module(VALID_MODULE_AMY);
-        expectedStudent.addModule(validModule);
+        expectedStudent = expectedStudent.addModule(validModule);
+        model.setPerson(model.getFilteredPersonList().get(0), expectedStudent);
+
+        StudentId studentId = student.getStudentId();
         ModuleCommand moduleCommand = new ModuleCommand(studentId, validModule);
-
-        Model newModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        newModel.setPerson(model.getFilteredPersonList().get(0), expectedStudent);
-
         assertThrows(CommandException.class,
             String.format(ModuleCommand.MESSAGE_DUPLICATE_MODULE, VALID_MODULE_AMY), ()
-                -> moduleCommand.execute(newModel));
+                -> moduleCommand.execute(model));
     }
 
     @Test

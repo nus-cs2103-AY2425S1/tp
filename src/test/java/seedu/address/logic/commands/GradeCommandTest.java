@@ -37,24 +37,23 @@ public class GradeCommandTest {
     @Test
     public void execute_gradeAcceptedByModel_addSuccessful() {
         Person student = model.getFilteredPersonList().get(0);
-        Person expectedStudent = new PersonBuilder(student).build();
-        StudentId studentId = student.getStudentId();
-        Module validModule = new Module(VALID_MODULE_AMY);
-        expectedStudent.addModule(validModule);
+        Person newStudent = new PersonBuilder(student).build();
 
-        Model newModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        newModel.setPerson(model.getFilteredPersonList().get(0), expectedStudent);
+        Module validModule = new Module(VALID_MODULE_AMY);
+        newStudent = newStudent.addModule(validModule);
+        model.setPerson(model.getFilteredPersonList().get(0), newStudent);
 
         Grade validGrade = new Grade(VALID_GRADE_AMY);
-        expectedStudent.setModuleGrade(validModule, validGrade);
+        newStudent = newStudent.setModuleGrade(validModule, validGrade);
+        StudentId studentId = student.getStudentId();
         GradeCommand gradeCommand = new GradeCommand(studentId, validModule, validGrade);
 
         String expectedMessage = String.format(GradeCommand.MESSAGE_SUCCESS, validModule);
 
-        Model expectedModel = new ModelManager(new AddressBook(newModel.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(newModel.getFilteredPersonList().get(0), expectedStudent);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), newStudent);
 
-        assertCommandSuccess(gradeCommand, newModel, expectedMessage, expectedModel);
+        assertCommandSuccess(gradeCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

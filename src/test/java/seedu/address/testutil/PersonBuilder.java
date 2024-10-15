@@ -121,14 +121,6 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Module} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withModule(String module) {
-        this.modules.add(new Module(module));
-        return this;
-    }
-
-    /**
      * Builds the {@code Person}.
      */
     public Person build() {

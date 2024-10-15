@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,8 +72,9 @@ public class ModuleCommand extends Command {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_MODULE, module.value));
         }
 
-        person.addModule(module);
-
+        Person updatedPerson = person.addModule(module);
+        model.setPerson(person, updatedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentId));
     }
 

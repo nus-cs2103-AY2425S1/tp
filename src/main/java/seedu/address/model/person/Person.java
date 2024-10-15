@@ -25,7 +25,7 @@ public class Person {
     private final Address address;
     private final Course course;
     private final Tag tag;
-    private final ArrayList<Module> modules = new ArrayList<>();
+    private final ArrayList<Module> modules;
 
     /**
      * Every field must be present and not null.
@@ -40,6 +40,23 @@ public class Person {
         this.address = address;
         this.course = course;
         this.tag = tag;
+        this.modules = new ArrayList<>();
+    }
+
+    /**
+     * Facilitates creating new Person object with module list.
+     */
+    public Person(StudentId studentId, Name name, Phone phone, Email email, Address address, Course course,
+                  Tag tag, ArrayList<Module> modules) {
+        requireAllNonNull(studentId, name, phone, email, address, course, tag);
+        this.studentId = studentId;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.course = course;
+        this.tag = tag;
+        this.modules = modules;
     }
 
     public StudentId getStudentId() {
@@ -77,27 +94,33 @@ public class Person {
     }
 
     /**
-     * Adds a module.
+     * Returns a new Person object with the module added.
      *
-     * @param module The module for which to add or update the grade.
+     * @param module The module to add.
      */
-    public void addModule(Module module) {
+    public Person addModule(Module module) {
         requireNonNull(module, "Module cannot be null");
-        modules.add(module);
+
+        ArrayList<Module> updatedModules = new ArrayList<>(modules);
+        updatedModules.add(module);
+        return new Person(studentId, name, phone, email, address, course, tag, updatedModules);
     }
 
     /**
-     * Sets a module grade.
+     * Returns a new Person object with the module grade set.
      *
-     * @param module The module for which to add or update the grade.
+     * @param module The module for which to update the grade.
      * @param grade The grade to associate with the module.
      */
-    public void setModuleGrade(Module module, Grade grade) {
+    public Person setModuleGrade(Module module, Grade grade) {
         requireNonNull(module, "Module cannot be null");
         requireNonNull(grade, "Grade cannot be null");
+
+        ArrayList<Module> updatedModules = new ArrayList<>(modules);
+        module.setGrade(grade);
         int index = modules.indexOf(module);
-        Module m = modules.get(index);
-        m.setGrade(grade);
+        updatedModules.set(index, module);
+        return new Person(studentId, name, phone, email, address, course, tag, updatedModules);
     }
 
     /**

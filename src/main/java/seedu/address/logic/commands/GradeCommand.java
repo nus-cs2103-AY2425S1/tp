@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,8 +79,9 @@ public class GradeCommand extends Command {
             throw new CommandException(String.format(MESSAGE_MODULE_NOT_FOUND, module.value));
         }
 
-        person.setModuleGrade(module, grade);
-
+        Person updatedPerson = person.setModuleGrade(module, grade);
+        model.setPerson(person, updatedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, module));
     }
 
