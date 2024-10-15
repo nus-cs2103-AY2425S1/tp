@@ -23,6 +23,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalVendors.AMY;
@@ -39,7 +40,7 @@ import seedu.address.model.vendor.Phone;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.testutil.VendorBuilder;
 
-public class AddCommandParserTest {
+public class CreateVendorCommandParserTest {
     private CreateVendorCommandParser parser = new CreateVendorCommandParser();
 
     @Test
@@ -48,20 +49,23 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser,
-                PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + DESCRIPTION_DESC_BOB + TAG_DESC_FRIEND,
+                PREAMBLE_WHITESPACE + " " + PREFIX_VENDOR + NAME_DESC_BOB + PHONE_DESC_BOB
+                        + DESCRIPTION_DESC_BOB + TAG_DESC_FRIEND,
                 new CreateVendorCommand(expectedVendor));
 
         // multiple tags - all accepted
         Vendor expectedVendorMultipleTags = new VendorBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + DESCRIPTION_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                " " + PREFIX_VENDOR + NAME_DESC_BOB + PHONE_DESC_BOB + DESCRIPTION_DESC_BOB
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 new CreateVendorCommand(expectedVendorMultipleTags));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
-        String validExpectedVendorString = NAME_DESC_BOB + PHONE_DESC_BOB + DESCRIPTION_DESC_BOB + TAG_DESC_FRIEND;
+        String validExpectedVendorString = " " + PREFIX_VENDOR
+                + NAME_DESC_BOB + PHONE_DESC_BOB + DESCRIPTION_DESC_BOB + TAG_DESC_FRIEND;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedVendorString,
@@ -71,7 +75,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, PHONE_DESC_AMY + validExpectedVendorString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
-        // multiple descriptiones
+        // multiple descriptions
         assertParseFailure(parser, DESCRIPTION_DESC_AMY + validExpectedVendorString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DESCRIPTION));
 
@@ -114,7 +118,7 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Vendor expectedVendor = new VendorBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + DESCRIPTION_DESC_AMY,
+        assertParseSuccess(parser, " " + PREFIX_VENDOR + NAME_DESC_AMY + PHONE_DESC_AMY + DESCRIPTION_DESC_AMY,
                 new CreateVendorCommand(expectedVendor));
     }
 
@@ -122,49 +126,61 @@ public class AddCommandParserTest {
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateVendorCommand.MESSAGE_USAGE);
 
+        // missing vendor prefix
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + DESCRIPTION_DESC_BOB, expectedMessage);
+
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + DESCRIPTION_DESC_BOB, expectedMessage);
+        assertParseFailure(parser, " " + PREFIX_VENDOR
+                + VALID_NAME_BOB + PHONE_DESC_BOB + DESCRIPTION_DESC_BOB, expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + DESCRIPTION_DESC_BOB, expectedMessage);
+        assertParseFailure(parser, " " + PREFIX_VENDOR
+                + NAME_DESC_BOB + VALID_PHONE_BOB + DESCRIPTION_DESC_BOB, expectedMessage);
 
         // missing description prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_DESCRIPTION_BOB, expectedMessage);
+        assertParseFailure(parser, " " + PREFIX_VENDOR
+                + NAME_DESC_BOB + PHONE_DESC_BOB + VALID_DESCRIPTION_BOB, expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_DESCRIPTION_BOB, expectedMessage);
+        assertParseFailure(parser, " " + PREFIX_VENDOR
+                + VALID_NAME_BOB + VALID_PHONE_BOB + VALID_DESCRIPTION_BOB, expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser,
-                INVALID_NAME_DESC + PHONE_DESC_BOB + DESCRIPTION_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                " " + PREFIX_VENDOR + INVALID_NAME_DESC + PHONE_DESC_BOB + DESCRIPTION_DESC_BOB
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser,
-                NAME_DESC_BOB + INVALID_PHONE_DESC + DESCRIPTION_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                " " + PREFIX_VENDOR + NAME_DESC_BOB + INVALID_PHONE_DESC + DESCRIPTION_DESC_BOB
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 Phone.MESSAGE_CONSTRAINTS);
 
         // invalid description
         assertParseFailure(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_DESCRIPTION_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                " " + PREFIX_VENDOR + NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_DESCRIPTION_DESC
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 Description.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + DESCRIPTION_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND,
+                " " + PREFIX_VENDOR + NAME_DESC_BOB + PHONE_DESC_BOB + DESCRIPTION_DESC_BOB + INVALID_TAG_DESC
+                        + VALID_TAG_FRIEND,
                 Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + INVALID_DESCRIPTION_DESC,
+        assertParseFailure(parser, " " + PREFIX_VENDOR + INVALID_NAME_DESC + PHONE_DESC_BOB
+                        + INVALID_DESCRIPTION_DESC,
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser,
-                PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + DESCRIPTION_DESC_BOB + TAG_DESC_HUSBAND
-                        + TAG_DESC_FRIEND,
+                PREAMBLE_NON_EMPTY + " " + PREFIX_VENDOR + NAME_DESC_BOB + PHONE_DESC_BOB
+                        + DESCRIPTION_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateVendorCommand.MESSAGE_USAGE));
     }
 }
