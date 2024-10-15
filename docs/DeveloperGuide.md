@@ -2,24 +2,82 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
 
---------------------------------------------------------------------------------------------------------------------
+# Developer Guide
 
-## **Acknowledgements**
+**Team**: T11-04  
+**Name**: EZSTATES
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+### User Target Profile:
+This product is for freelance real estate agents who have to manage numerous property transactions and client interactions. It caters to those who need a fast, efficient tool to organize all their client data, track deals, and wish to streamline their workflow through command-line operations.
 
---------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+### Value Proposition:
+EZSTATES provides freelance real estate agents quick access to client details, categorized by their property’s needs and interests through a user-friendly CLI, streamlining operations by enabling swift and intuitive command-line interactions. This simplifies their workflow, boosts efficiency and enhances their client service.
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+# Table of Contents
+{% include toc.html %}
 
---------------------------------------------------------------------------------------------------------------------
+## Acknowledgements
 
-## **Design**
+This project is adapted from the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/)
+
+
+## Getting started
+
+### Setting up
+
+In order to develop for EZSTATES you can follow the steps we have provided below:
+
+Ensure that the project is set up locally:
+
+1. Create a fork of the GitHub repository
+2. Clone the fork
+
+    ```bash
+    git clone https://github.com/<your Github username>/tp.git
+    ```
+3. Change to the fork local directory
+
+    ```bash
+    cd tp/
+    ```
+4. Build the project
+
+    ```bash
+    ./gradlew build
+    ```
+5. Run the project
+
+    ```bash
+    ./gradlew run
+    ```
+
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+The Gradle instructions provided are for macOS and Linux users. If you are using Windows, please refer to the [official documentation](https://docs.gradle.org/current/userguide/gradle_wrapper.html#sec:using_wrapper) on using the Gradle Wrapper  (i.e. `./gradlew`) on Windows.
+</div>
+
+## Development Milestones
+
+### Milestone v1.1
+**General Update**
+- Add individual photos
+- Update AboutUs.md
+
+### Milestone v1.2
+**Adding Basic Functionalities**
+- Create Client Profile
+- List
+- Add Property
+- Delete Client Profile
+- Add Appointment
+- Delete Appointment
+
+### Milestone v1.3
+
+### Milestone v1.4
+
+## Design Overview
 
 <div markdown="span" class="alert alert-primary">
 
@@ -58,7 +116,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -149,9 +207,18 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## Features and Implementation
+
+### Client Management
+Sub features
+### Appointment Management
+Sub features
+### Utility
+Sub features
+
+**BELOW THIS IS KINDA JUST FOR REFERENCE**
+
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -244,9 +311,8 @@ _{more aspects and alternatives to be added}_
 _{Explain here how the data archiving feature will be implemented}_
 
 
---------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## Documentation, logging, testing, configuration, dev-ops
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -254,9 +320,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
 
---------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## Appendix: Requirements
 
 ### Product scope
 
@@ -276,19 +341,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​   | I want to …​                                         | So that I can…​                                         |
-|----------|-----------|------------------------------------------------------|---------------------------------------------------------|
-| `High`   | New User  | have a place to store my client details              | manage my large number of client details                |
-| `High`   | New User  | create a new client profile                          | store new clients                                       |
-| `High`   | New User  | delete a client profile                              | remove clients I no longer serve                        |
-| `High`   | New User  | search for a client by name                          | quickly access the profile of the client of interest    |
-| `High`   | New User  | be able to add my client's age to their profile      | know old he/she iss                                     |
-| `High`   | New User  | create appointments with my clients                  | manage my appointments with my clients                  |
-| `High`   | New User  | delete appointments                                  | remove appointments I have already cleared              |
-| `Medium` | New User  | assign a status to a client                          | easily categorise clients by priority                   |
-| `Medium` | New User  | search by appointments                               | pinpoint which client I am serving for that appointment |
-| `Medium` | Busy User | be able to keep track of all my appointments         | plan out my schedule efficiently                        |
-| `Medium` | Busy User | be able to know what appointments I have for the day | make immediate changes to my schedule                   |
+| Priority | As a …​                     | I want to …​                                                       | So that I can…​                                         |
+|----------|-----------------------------|--------------------------------------------------------------------|---------------------------------------------------------|
+| `High`   | tech-savvy property agent   | have a place to store my client details                            | manage my large number of client details                |
+| `High`   | tech-savvy property agent   | create a new client profile                                        | store new clients                                       |
+| `High`   | tech-savvy property agent   | delete a client profile                                            | remove clients I no longer serve                        |
+| `High`   | tech-savvy property agent   | search for a client by name                                        | quickly access the profile of the client of interest    |
+| `High`   | tech-savvy property agent   | be able to add my client's phone number and email to their profile | know how to contact him/her                             |
+| `High`   | tech-savvy property agent   | create appointments with my clients                                | manage my appointments with my clients                  |
+| `High`   | tech-savvy property agent   | delete appointments                                                | remove appointments I have already cleared              |
+| `Medium` | tech-savvy property agent   | assign a status to a client                                        | easily categorise clients by priority                   |
+| `Medium` | tech-savvy property agent   | search by appointments                                             | pinpoint which client I am serving for that appointment |
+| `Medium` | tech-savvy property agent   | be able to keep track of all my appointments                       | plan out my schedule efficiently                        |
+| `Medium` | tech-savvy property agent   | be able to know what appointments I have for the day               | make immediate changes to my schedule                   |
 
 
 *{More to be added}*
@@ -412,14 +477,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Glossary
+## Appendix
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Client**: An individual whom the `User` engages
-
---------------------------------------------------------------------------------------------------------------------
-
-## **Appendix: Instructions for manual testing**
+### Appendix: Instructions for manual testing
 
 Given below are instructions to test the app manually.
 
@@ -469,3 +529,5 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Appendix: Known Bugs
