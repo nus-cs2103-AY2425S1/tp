@@ -7,7 +7,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * Json-friendly version of {@link Tag}.
  */
 class JsonAdaptedTag {
 
@@ -22,7 +22,7 @@ class JsonAdaptedTag {
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code Tag} into this class for Json use.
      */
     public JsonAdaptedTag(Tag source) {
         tagName = source.tagName;
@@ -34,7 +34,7 @@ class JsonAdaptedTag {
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jason-friendly adapted tag object into the model's {@code Tag} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
