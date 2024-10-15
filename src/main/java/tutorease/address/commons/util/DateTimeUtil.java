@@ -65,4 +65,13 @@ public class DateTimeUtil {
     public static String dateTimeNowString() {
         return LocalDateTime.now().format(formatter);
     }
+
+    /**
+     * Returns the date time format.
+     *
+     * @return The date time format.
+     */
+    public static String getDateTimeFormat() {
+        return dateTimeFormat;
+    }
 }
