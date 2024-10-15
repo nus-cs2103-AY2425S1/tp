@@ -20,7 +20,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static final Schedule EMPTY_SCHEDULE = new Schedule("");
+    public static final Schedule EMPTY_SCHEDULE = new Schedule("", "");
     public static final Reminder EMPTY_REMINDER = new Reminder("");
     public static Person[] getSamplePersons() {
 

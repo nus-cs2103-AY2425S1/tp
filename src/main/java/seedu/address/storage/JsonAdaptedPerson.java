@@ -31,6 +31,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String schedule;
+    private final String note;
     private final String reminderTime;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -40,13 +41,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
              @JsonProperty("email") String email, @JsonProperty("address") String address,
-             @JsonProperty("schedule") String schedule, @JsonProperty("reminderTime") String reminderTime,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+             @JsonProperty("schedule") String schedule, @JsonProperty("note") String note,
+            @JsonProperty("reminderTime") String reminderTime, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.schedule = schedule;
+        this.note = note;
         this.reminderTime = reminderTime;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -62,6 +64,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         schedule = source.getSchedule().dateTime;
+        note = source.getSchedule().getNotes();
         reminderTime = source.getReminder().reminderTime;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -115,7 +118,8 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Schedule.class.getSimpleName()));
         }
-        final Schedule modelSchedule = new Schedule(schedule);
+
+        final Schedule modelSchedule = new Schedule(schedule, note);
 
         if (reminderTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

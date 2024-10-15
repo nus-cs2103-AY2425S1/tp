@@ -44,7 +44,7 @@ public class ScheduleCommandParserTest {
         // valid input with name and date
         String userInput = VALID_NAME + " d/" + VALID_DATE;
         LocalDateTime expectedDate = LocalDateTime.parse(VALID_DATE, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-        Schedule expectedSchedule = new Schedule(VALID_DATE);
+        Schedule expectedSchedule = new Schedule(VALID_DATE, "");
         ScheduleCommand expectedCommand = new ScheduleCommand(VALID_NAME, expectedSchedule);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -55,7 +55,7 @@ public class ScheduleCommandParserTest {
         // valid input with extra whitespaces
         String userInput = "    " + VALID_NAME + "     d/" + VALID_DATE + "   ";
         LocalDateTime expectedDate = LocalDateTime.parse(VALID_DATE, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-        Schedule expectedSchedule = new Schedule(VALID_DATE);
+        Schedule expectedSchedule = new Schedule(VALID_DATE, "");
         ScheduleCommand expectedCommand = new ScheduleCommand(VALID_NAME, expectedSchedule);
 
         assertParseSuccess(parser, userInput, expectedCommand);

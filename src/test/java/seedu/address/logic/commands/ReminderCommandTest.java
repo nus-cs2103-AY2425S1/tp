@@ -31,11 +31,11 @@ public class ReminderCommandTest {
     @Test
     public void execute_validReminder_success() {
         Person personToRemind = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Schedule validSchedule = new Schedule("2024-10-04 1000");
+        Schedule validSchedule = new Schedule("2024-10-04 1000", "");
         Reminder validReminder = new Reminder("1 day");
 
         Person scheduledPerson = new PersonBuilder(personToRemind)
-                .withSchedule(validSchedule.dateTime).build();
+                .withSchedule(validSchedule.dateTime, validSchedule.getNotes()).build();
         model.setPerson(personToRemind, scheduledPerson);
 
         ReminderCommand command = new ReminderCommand(personToRemind.getName().toString(),
@@ -56,11 +56,12 @@ public class ReminderCommandTest {
     @Test
     public void execute_invalidReminderTime_throwsCommandException() {
         Person personToRemind = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Schedule validSchedule = new Schedule("2024-10-04 1000");
+        Schedule validSchedule = new Schedule("2024-10-04 1000", "");
         Reminder invalidReminder = new Reminder("1 cycle"); // Invalid time
 
         // Set the schedule first
-        Person personWithSchedule = new PersonBuilder(personToRemind).withSchedule(validSchedule.dateTime).build();
+        Person personWithSchedule = new PersonBuilder(personToRemind)
+                .withSchedule(validSchedule.dateTime, validSchedule.getNotes()).build();
         model.setPerson(personToRemind, personWithSchedule);
 
         // Create reminder command
@@ -73,12 +74,13 @@ public class ReminderCommandTest {
     @Test
     public void execute_reminderAlreadyExists_throwsCommandException() throws CommandException {
         Person personToRemind = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Schedule validSchedule = new Schedule("2024-10-04 1000");
+
+        Schedule validSchedule = new Schedule("2024-10-04 1000", "");
         Reminder existingReminder = new Reminder("1 day");
 
         // Set the schedule and reminder
         Person personWithReminder = new PersonBuilder(personToRemind)
-                .withSchedule(validSchedule.dateTime)
+                .withSchedule(validSchedule.dateTime, validSchedule.getNotes())
                 .withReminder(existingReminder.getReminderTime())
                 .build();
         model.setPerson(personToRemind, personWithReminder);
