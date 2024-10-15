@@ -128,8 +128,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         suppliers.setSupplier(target, editedSupplier);
     }
-
-
+    public void addSupplier(Supplier s) {
+        suppliers.add(s);
+    }
     //// person-level operations
 
     /**
