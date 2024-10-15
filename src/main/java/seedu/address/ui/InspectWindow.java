@@ -6,10 +6,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -38,7 +38,6 @@ public class InspectWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private DeliveryListPanel deliveryListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -52,13 +51,16 @@ public class InspectWindow extends UiPart<Stage> {
     private StackPane personInfoPlaceholder;
 
     @FXML
-    private StackPane deliveryListPanelPlaceholder;
+    private StackPane deliveryListPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private SplitPane mainSplitPane;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -123,26 +125,27 @@ public class InspectWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        HBox splitLayout = new HBox();
-        splitLayout.setSpacing(20);
-
         VBox personInfoBox = new VBox();
-        personInfoBox.setSpacing(10);
+        personInfoBox.setSpacing(20);
 
         Label nameLabel = new Label("Name: " + InspectWindow.person.getName());
         Label phoneLabel = new Label("Phone: " + InspectWindow.person.getPhone());
         Label emailLabel = new Label("Email: " + InspectWindow.person.getEmail());
         Label addressLabel = new Label("Address: " + InspectWindow.person.getAddress());
         Label tagsLabel = new Label("Tags: " + InspectWindow.person.getTags());
+        nameLabel.getStyleClass().add("personInfo");
+        phoneLabel.getStyleClass().add("personInfo");
+        emailLabel.getStyleClass().add("personInfo");
+        addressLabel.getStyleClass().add("personInfo");
+        tagsLabel.getStyleClass().add("personInfo");
 
         personInfoBox.getChildren().addAll(nameLabel, phoneLabel, emailLabel, addressLabel, tagsLabel);
 
         DeliveryListPanel deliveryListPanel = new DeliveryListPanel(InspectWindow.person.getDeliveryList());
         VBox deliveryListBox = new VBox(deliveryListPanel.getRoot());
 
-        splitLayout.getChildren().addAll(personInfoBox, deliveryListBox);
-
-        personInfoPlaceholder.getChildren().add(splitLayout);
+        personInfoPlaceholder.getChildren().add(personInfoBox);
+        deliveryListPlaceholder.getChildren().add(deliveryListBox);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -232,10 +235,8 @@ public class InspectWindow extends UiPart<Stage> {
                 handleExit();
             } else if (commandResult.isList()) {
                 handleList(commandResult);
-            } else if (commandResult.isDeliveryAdded()) {
-                return commandResult;
             } else {
-                throw new CommandException("Not yet implemented");
+                return commandResult;
             }
 
             return commandResult;

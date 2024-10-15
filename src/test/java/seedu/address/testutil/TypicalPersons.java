@@ -16,13 +16,17 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.delivery.Cost;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.Eta;
+import seedu.address.model.delivery.ItemName;
+import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
 public class TypicalPersons {
-
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111, S120300").withEmail("alice@example.com")
             .withPhone("94351253")
@@ -30,7 +34,12 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25, S120300")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends")
+            .withDelivery(new Delivery(new ItemName("Monitor"), new Address("311, Clementi Ave 2, #02-25, S120300"),
+                    new Cost("$100"), new Eta("2020-02-02")))
+            .withDelivery(new Delivery(new ItemName("Monkey"), new Address("369, WHERE Ave 2, #01-01, S987654"),
+                    new Cost("$20"), new Eta("1990-04-04")))
+            .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street, S120300").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")

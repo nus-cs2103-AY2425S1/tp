@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -28,7 +29,6 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final DeliveryList deliveryList = new DeliveryList();
-
     /**
      * Every field must be present and not null.
      */
@@ -70,10 +70,28 @@ public class Person {
     }
 
     /**
+     * Sets the delivery list of this person.
+     * <p>
+     * Mainly used when loading a person's information from storage.
+     */
+    public void setDeliveryList(List<Delivery> deliveryList) {
+        this.deliveryList.setDeliveries(deliveryList);
+    }
+
+    /**
      * Adds the delivery into the delivery list of this person.
      */
     public void addDelivery(Delivery delivery) {
         deliveryList.add(delivery);
+    }
+
+    /**
+     * Replaces the given delivery {@code target} in the list with {@code editedDelivery}.
+     * {@code target} must exist in the address book.
+     * The identity of {@code editedDelivery} must not be the same as another existing delivery in the list.
+     */
+    public void setDelivery(Delivery target, Delivery editedDelivery) {
+        deliveryList.setDelivery(target, editedDelivery);
     }
 
     /**
