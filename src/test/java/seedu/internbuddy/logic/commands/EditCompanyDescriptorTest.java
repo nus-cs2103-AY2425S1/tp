@@ -14,7 +14,7 @@ import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND
 import org.junit.jupiter.api.Test;
 
 import seedu.internbuddy.logic.commands.EditCommand.EditCompanyDescriptor;
-import seedu.internbuddy.testutil.EditPersonDescriptorBuilder;
+import seedu.internbuddy.testutil.EditCompanyDescriptorBuilder;
 
 public class EditCompanyDescriptorTest {
 
@@ -37,35 +37,36 @@ public class EditCompanyDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        EditCompanyDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+        EditCompanyDescriptor editedAmy = new EditCompanyDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
+        editedAmy = new EditCompanyDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different email -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
+        editedAmy = new EditCompanyDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different address -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
+        editedAmy = new EditCompanyDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        editedAmy = new EditCompanyDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
     @Test
     public void toStringMethod() {
-        EditCompanyDescriptor editPersonDescriptor = new EditCompanyDescriptor();
+        EditCompanyDescriptor editCompanyDescriptor = new EditCompanyDescriptor();
         String expected = EditCompanyDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", phone="
-                + editPersonDescriptor.getPhone().orElse(null) + ", email="
-                + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + "}";
-        assertEquals(expected, editPersonDescriptor.toString());
+                + editCompanyDescriptor.getName().orElse(null) + ", phone="
+                + editCompanyDescriptor.getPhone().orElse(null) + ", email="
+                + editCompanyDescriptor.getEmail().orElse(null) + ", address="
+                + editCompanyDescriptor.getAddress().orElse(null) + ", tags="
+                + editCompanyDescriptor.getTags().orElse(null) + ", status="
+                + editCompanyDescriptor.getStatus().orElse(null) + "}";
+        assertEquals(expected, editCompanyDescriptor.toString());
     }
 }

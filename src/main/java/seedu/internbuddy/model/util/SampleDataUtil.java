@@ -6,18 +6,18 @@ import java.util.stream.Collectors;
 
 import seedu.internbuddy.model.AddressBook;
 import seedu.internbuddy.model.ReadOnlyAddressBook;
-import seedu.internbuddy.model.person.Address;
-import seedu.internbuddy.model.person.Email;
-import seedu.internbuddy.model.person.Name;
-import seedu.internbuddy.model.person.Company;
-import seedu.internbuddy.model.person.Phone;
+import seedu.internbuddy.model.company.Address;
+import seedu.internbuddy.model.company.Company;
+import seedu.internbuddy.model.company.Email;
+import seedu.internbuddy.model.company.Name;
+import seedu.internbuddy.model.company.Phone;
 import seedu.internbuddy.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static Company[] getSamplePersons() {
+    public static Company[] getSampleCompanies() {
         return new Company[] {
             new Company(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
@@ -42,8 +42,8 @@ public class SampleDataUtil {
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Company samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+        for (Company sampleCompany : getSampleCompanies()) {
+            sampleAb.addCompany(sampleCompany);
         }
         return sampleAb;
     }

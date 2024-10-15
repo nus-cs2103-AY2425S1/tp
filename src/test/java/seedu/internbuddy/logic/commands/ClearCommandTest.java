@@ -1,7 +1,7 @@
 package seedu.internbuddy.logic.commands;
 
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.internbuddy.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 

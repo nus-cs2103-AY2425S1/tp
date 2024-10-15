@@ -1,7 +1,7 @@
 package seedu.internbuddy.model;
 
 import javafx.collections.ObservableList;
-import seedu.internbuddy.model.person.Person;
+import seedu.internbuddy.model.company.Company;
 
 /**
  * Unmodifiable view of an address book
@@ -9,9 +9,9 @@ import seedu.internbuddy.model.person.Person;
 public interface ReadOnlyAddressBook {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the companies list.
+     * This list will not contain any duplicate companies.
      */
-    ObservableList<Person> getPersonList();
+    ObservableList<Company> getCompanyList();
 
 }
