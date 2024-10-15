@@ -11,7 +11,7 @@ import tutorease.address.model.lesson.Lesson;
  */
 public class LessonCard extends UiPart<Region> {
 
-    private static final String FXML = "LessonCard.fxml";
+    private static final String FXML = "LessonListCard.fxml";
 
     @FXML
     private HBox cardPane;
