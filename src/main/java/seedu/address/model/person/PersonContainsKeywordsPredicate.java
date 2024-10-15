@@ -7,7 +7,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Person}'s {@code Name}, {@code Phone}, {@code Email}, {@code Address},
+ * Tests that a {@code Person}'s {@code Name}, {@code Phone}, {@code Email}, {@code Address}, {@code Birthday}
  * or {@code Tags} match any of the keywords given.
  */
 public class PersonContainsKeywordsPredicate implements Predicate<Person> {
@@ -21,12 +21,13 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         return keywords.stream()
                 .anyMatch(keyword ->
-                        StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword)
-                                || StringUtil.containsWordIgnoreCase(person.getPhone().toString(), keyword)
-                                || StringUtil.containsWordIgnoreCase(person.getEmail().toString(), keyword)
-                                || StringUtil.containsWordIgnoreCase(person.getAddress().toString(), keyword)
+                        StringUtil.containsIgnoreCase(person.getName().fullName, keyword)
+                                || StringUtil.containsIgnoreCase(person.getPhone().toString(), keyword)
+                                || StringUtil.containsIgnoreCase(person.getEmail().toString(), keyword)
+                                || StringUtil.containsIgnoreCase(person.getAddress().toString(), keyword)
+                                || StringUtil.containsIgnoreCase(person.getBirthday().toString(), keyword)
                                 || person.getTags().stream()
-                                        .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.toString(), keyword))
+                                        .anyMatch(tag -> StringUtil.containsIgnoreCase(tag.toString(), keyword))
                 );
     }
 
