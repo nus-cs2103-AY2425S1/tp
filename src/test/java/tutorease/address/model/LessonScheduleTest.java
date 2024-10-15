@@ -5,19 +5,20 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorease.address.testutil.Assert.assertThrows;
 import static tutorease.address.testutil.TypicalPersons.ALICE;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
 import tutorease.address.logic.parser.exceptions.ParseException;
-import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.lesson.exceptions.LessonIndexOutOfRange;
 import tutorease.address.model.lesson.exceptions.OverlappingLessonException;
-import tutorease.address.model.person.Person;
 import tutorease.address.testutil.LessonBuilder;
 
 public class LessonScheduleTest {
