@@ -16,6 +16,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,6 +31,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedRole> roles = new ArrayList<>();
     private final String nric;
 
     /**
@@ -39,7 +41,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("nric") String nric,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
             @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("roles") List<JsonAdaptedRole> roles) {
         this.name = name;
         this.nric = nric;
         this.phone = phone;
@@ -47,6 +49,10 @@ class JsonAdaptedPerson {
         this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+
+        if (roles != null) {
+            this.roles.addAll(roles);
         }
     }
 
@@ -115,8 +121,14 @@ class JsonAdaptedPerson {
         }
         final Nric modelNric = new Nric(nric);
 
+        final List<Role> roleList = new ArrayList<>();
+        for (JsonAdaptedRole role : roles) {
+            roleList.add(role.toModelType());
+        }
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelNric, modelPhone, modelEmail, modelAddress, modelTags);
+        final Set<Role> modelRoles = new HashSet<>(roleList);
+        return new Person(modelName, modelNric, modelPhone, modelEmail, modelAddress, modelTags, modelRoles);
     }
 
 }
