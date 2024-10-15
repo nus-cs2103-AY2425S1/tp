@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.FindNricCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.NricContainsKeywordsPredicate;
 
 
@@ -28,6 +29,10 @@ public class FindNricCommandParser implements Parser<FindNricCommand> {
         }
 
         String[] nricKeywords = trimmedArgs.split("\\s+");
+
+        if (Arrays.stream(nricKeywords).anyMatch(nric -> !Nric.isValidNric(nric))) {
+            throw new ParseException(Nric.MESSAGE_CONSTRAINTS);
+        }
 
         return new FindNricCommand(new NricContainsKeywordsPredicate(Arrays.asList(nricKeywords)));
     }
