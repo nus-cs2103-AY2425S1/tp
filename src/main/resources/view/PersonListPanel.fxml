@@ -5,6 +5,6 @@
 <?import javafx.scene.control.Label?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <Label text="Person List" styleClass="label-title" VBox.vgrow="NEVER" maxWidth="Infinity" />
+  <Label text="Customer List" styleClass="label-title" VBox.vgrow="NEVER" maxWidth="Infinity" />
   <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
 </VBox>

@@ -53,6 +53,7 @@ public class OrderListPanel extends UiPart<Region> {
             clearOrderList();
             return;
         }
+        
         orderListView.setItems(person.getOrderUnmodifiableObservableList());
         orderListView.setCellFactory(listView -> new OrderListViewCell());
         toggleOrderListVisibility(true);

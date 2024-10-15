@@ -86,7 +86,6 @@ public class ListOrderCommandTest {
 
         // same object -> returns true
         assertTrue(listOrderOfFirstPersonCommand.equals(listOrderOfFirstPersonCommand));
-        assertTrue(listOrderOfFirstPersonCommand.equals(listOrderOfFirstPersonCommand));
 
         // same values -> returns true
         ListOrderCommand listOrderOfFirstPersonCommandCopy = new ListOrderCommand(INDEX_FIRST_PERSON);
