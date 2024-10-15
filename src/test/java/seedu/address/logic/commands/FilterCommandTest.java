@@ -61,14 +61,15 @@ public class FilterCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
-    //TODO fix this test execute_multipleKeywords_multiplePersonsFound()
 
     @Test
-    public void toStringMethod() {
-        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(Arrays.asList("friend"));
-        FilterCommand filterCommand = new FilterCommand(predicate);
-        String expected = FilterCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, filterCommand.toString());
+    public void execute_multipleKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        TagContainsKeywordsPredicate predicate = preparePredicate("friends family gym");
+        FilterCommand command = new FilterCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(3, model.getFilteredPersonList().size());
     }
 
     /**

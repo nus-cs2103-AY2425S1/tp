@@ -3,7 +3,9 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -77,4 +79,33 @@ public class TagContainsKeywordPredicateTest {
         predicate = new TagContainsKeywordsPredicate(Arrays.asList("Alice", "12345"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withTags("bruh").build()));
     }
+
+    @Test
+    public void test_personHasNoTags_returnsFalse() {
+        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(Arrays.asList("friends"));
+        assertFalse(predicate.test(new PersonBuilder().withTags().build()));
+    }
+
+    @Test
+    public void test_tagContainsSubstringOfKeyword_returnsFalse() {
+        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(Arrays.asList("family"));
+        assertFalse(predicate.test(new PersonBuilder().withTags("familiar").build()));
+    }
+
+    @Test
+    public void test_personHasMixedTags_someMatching_returnsTrue() {
+        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(Arrays.asList("family", "colleague"));
+        assertTrue(predicate.test(new PersonBuilder().withTags("family", "gym").build()));
+    }
+
+    @Test
+    public void test_largeNumberOfKeywords_performanceCheck() {
+        List<String> keywords = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            keywords.add("keyword" + i);
+        }
+        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(keywords);
+        assertFalse(predicate.test(new PersonBuilder().withTags("unrelated").build()));
+    }
+
 }
