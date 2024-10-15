@@ -151,10 +151,10 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the list of employees.
+     * Shows the list of persons.
      */
     @FXML
-    public void handleShowEmployees() {
+    public void handleShowPersons() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         PersonListPanel placeholder = personListPanel;
         topPanelPlaceholder.getChildren().add(placeholder.getRoot());
@@ -212,6 +212,14 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isShowPersons()) {
+                handleShowPersons();
+            }
+
+            if (commandResult.isShowAssignments()) {
+                handleShowAssignments();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
