@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,6 +17,11 @@ import seedu.address.model.meetup.MeetUpTo;
  * Jackson-friendly version of {@link MeetUp}.
  */
 class JsonAdaptedMeetUp {
+
+    // Formatter for the required format (with 'T')
+    private static final DateTimeFormatter REQUIRED_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+    // Formatter for the stored format (with space)
+    private static final DateTimeFormatter STORED_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Meet up's %s field is missing!";
 
@@ -62,8 +68,7 @@ class JsonAdaptedMeetUp {
         final MeetUpName modelName = new MeetUpName(name);
 
         if (info == null) {
-            throw new IllegalValueException(
-        String.format(MISSING_FIELD_MESSAGE_FORMAT, MeetUpInfo.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, MeetUpInfo.class.getSimpleName()));
         }
         if (!MeetUpInfo.isValidMeetUpInfo(info)) {
             throw new IllegalValueException(MeetUpInfo.MESSAGE_CONSTRAINTS);
@@ -71,23 +76,21 @@ class JsonAdaptedMeetUp {
         final MeetUpInfo modelInfo = new MeetUpInfo(info);
 
         if (from == null) {
-            throw new IllegalValueException(
-        String.format(MISSING_FIELD_MESSAGE_FORMAT, MeetUpFrom.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, MeetUpFrom.class.getSimpleName()));
         }
         if (!MeetUpFrom.isValidMeetUpFromTime(from)) {
             throw new IllegalValueException(MeetUpFrom.MESSAGE_CONSTRAINTS);
         }
-        final MeetUpFrom modelFrom = new MeetUpFrom(LocalDateTime.parse(from));
+        final MeetUpFrom modelFrom = new MeetUpFrom(LocalDateTime.parse(from, STORED_FORMATTER));
 
         if (to == null) {
-            throw new IllegalValueException(
-        String.format(MISSING_FIELD_MESSAGE_FORMAT, MeetUpTo.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, MeetUpTo.class.getSimpleName()));
         }
         if (!MeetUpTo.isValidMeetUpToTime(to)) {
             throw new IllegalValueException(MeetUpTo.MESSAGE_CONSTRAINTS);
         }
-        final MeetUpTo modelTo = new MeetUpTo(LocalDateTime.parse(to));
-        
+        final MeetUpTo modelTo = new MeetUpTo(LocalDateTime.parse(to, STORED_FORMATTER));
+
         return new MeetUp(modelName, modelInfo, modelFrom, modelTo);
     }
 
