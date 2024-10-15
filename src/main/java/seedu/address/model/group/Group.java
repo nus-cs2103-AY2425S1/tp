@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
@@ -77,6 +78,10 @@ public class Group {
      */
     public void addTask(Task task) {
         tasks.add(task);
+    }
+
+    public void deleteTask(Task task) {
+        tasks.remove(task);
     }
 
     public void delete(Student student) {

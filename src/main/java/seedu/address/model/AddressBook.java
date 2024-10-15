@@ -234,6 +234,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         return tasks.contains(task);
     }
 
+    public void deleteTask(Task task) {
+        tasks.remove(task);
+    }
+
+    public void deleteTaskFromGroup(Task task, Group group) {
+        group.deleteTask(task);
+    }
+
     //// util methods
 
     @Override
@@ -279,6 +287,4 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return students.hashCode();
     }
-
-
 }

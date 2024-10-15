@@ -191,4 +191,8 @@ public interface Model {
     void addTaskToGroup(Task task, Group group);
 
     void addTask(Task task);
+
+    void deleteTaskFromGroup(Task task, Group group);
+
+    void deleteTask(Task task);
 }
