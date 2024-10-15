@@ -58,7 +58,7 @@ public class AddStudentToGroupCommand extends Command {
         }
 
         model.addPersonToGroup(student, group);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(student), Messages.format(group)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd), Messages.format(toAddInto)));
     }
 
     @Override
