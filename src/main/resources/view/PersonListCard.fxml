@@ -41,7 +41,7 @@
       <padding>
         <Insets top="5" left="5" bottom="5" right="15" />
       </padding>
-      <Label alignment="BASELINE_CENTER" text="Tutorials Attended:" style="-fx-underline: true;">
+      <Label alignment="BASELINE_CENTER" text="Tutorials Attended:" style="-fx-underline: true; -fx-font-weight: bold;">
         <VBox.margin>
           <Insets bottom="5"/>
         </VBox.margin>

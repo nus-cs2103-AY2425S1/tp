@@ -95,16 +95,18 @@
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
-    -fx-graphic-text-gap : 0;
-    -fx-padding: 0 0 0 0;
+    -fx-graphic-text-gap: 0;
+    -fx-background-radius: 30px;
+    -fx-border-color: black;
+    -fx-border-radius: 30px;
+    -fx-border-width: 2px;
+    -fx-padding: 6px;
+    -fx-border-insets: 6px;
+    -fx-background-insets: 6px;
 }
 
-.list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
-}
-
-.list-cell:filled:odd {
-    -fx-background-color: #515658;
+.list-cell:filled {
+    -fx-background-color: #f0f0e6;
 }
 
 .list-cell:filled:selected {
@@ -117,7 +119,7 @@
 }
 
 .list-cell .label {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .cell_big_label {
