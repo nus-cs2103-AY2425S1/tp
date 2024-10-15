@@ -29,6 +29,8 @@ import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.IdUtil;
 import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
 import spleetwaise.transaction.logic.parser.ParserUtil;
+import spleetwaise.transaction.model.ReadOnlyTransactionBook;
+import spleetwaise.transaction.storage.JsonTransactionBookStorage;
 
 public class LogicManagerTest {
 
@@ -43,10 +45,12 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(
-                temporaryFolder.resolve("addressBook.json"));
+        JsonAddressBookStorage addressBookStorage =
+                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonTransactionBookStorage transactionBookStorage =
+                new JsonTransactionBookStorage(temporaryFolder.resolve("transactionBook.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, transactionBookStorage);
         logic = new LogicManager(addressBookModel, transactionModel, storage);
     }
 
@@ -94,8 +98,10 @@ public class LogicManagerTest {
 
         // TODO: add a TransactionUtil class to handle generation of commands and expected messages
         String addTxnCommand = "addTxn p/94351253 amt/12.3 desc/Test date/01012024";
-        String expectedMessageSuccess = String.format(spleetwaise.transaction.logic.commands.AddCommand.MESSAGE_SUCCESS,
-            "[test-uuid] Alice Pauline(94351253): Test on 01/01/2024 for $12.30");
+        String expectedMessageSuccess = String.format(
+                spleetwaise.transaction.logic.commands.AddCommand.MESSAGE_SUCCESS,
+                "[test-uuid] Alice Pauline(94351253): Test on 01/01/2024 for $12.30"
+        );
 
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, addressBookModel, transactionModel);
         IdUtil.setDeterminate(true);
@@ -105,15 +111,23 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION,
-                String.format(LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage())
+        assertCommandFailureForExceptionFromStorage(
+                DUMMY_IO_EXCEPTION,
+                String.format(
+                        LogicManager.FILE_OPS_ERROR_FORMAT,
+                        DUMMY_IO_EXCEPTION.getMessage()
+                )
         );
     }
 
     @Test
     public void execute_storageThrowsAdException_throwsCommandException() {
-        assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION,
-                String.format(LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage())
+        assertCommandFailureForExceptionFromStorage(
+                DUMMY_AD_EXCEPTION,
+                String.format(
+                        LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT,
+                        DUMMY_AD_EXCEPTION.getMessage()
+                )
         );
     }
 
@@ -131,9 +145,11 @@ public class LogicManagerTest {
      * spleetwaise.transaction.model.Model)
      */
     private void assertCommandSuccess(
-            String inputCommand, String expectedMessage, spleetwaise.address.model.Model expectedAddressBookModel,
+            String inputCommand, String expectedMessage,
+            spleetwaise.address.model.Model expectedAddressBookModel,
             spleetwaise.transaction.model.Model expectedTransactionModel
-    ) throws SpleetWaiseCommandException, ParseException {
+    )
+            throws SpleetWaiseCommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedAddressBookModel, addressBookModel);
@@ -167,10 +183,11 @@ public class LogicManagerTest {
      * spleetwaise.transaction.model.Model)
      */
     private void assertCommandFailure(
-            String inputCommand, Class<? extends Throwable> expectedException, String expectedMessage
+            String inputCommand, Class<? extends Throwable> expectedException,
+            String expectedMessage
     ) {
-        spleetwaise.address.model.Model expectedAddressBookModel = new spleetwaise.address.model.ModelManager(
-                addressBookModel.getAddressBook(), new UserPrefs());
+        spleetwaise.address.model.Model expectedAddressBookModel =
+                new spleetwaise.address.model.ModelManager(addressBookModel.getAddressBook(), new UserPrefs());
 
         spleetwaise.transaction.model.Model expectedTransactionModel = new spleetwaise.transaction.model.ModelManager();
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedAddressBookModel,
@@ -186,8 +203,8 @@ public class LogicManagerTest {
      * @see #assertCommandSuccess(String, String, spleetwaise.address.model.Model, spleetwaise.transaction.model.Model)
      */
     private void assertCommandFailure(
-            String inputCommand, Class<? extends Throwable> expectedException, String expectedMessage,
-            spleetwaise.address.model.Model expectedAddressBookModel,
+            String inputCommand, Class<? extends Throwable> expectedException,
+            String expectedMessage, spleetwaise.address.model.Model expectedAddressBookModel,
             spleetwaise.transaction.model.Model expectedTransactionModel
     ) {
         Assert.assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
@@ -204,7 +221,8 @@ public class LogicManagerTest {
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
+        // Inject LogicManager with AddressBookStorage and TransactionBookStorage that throws the IOException
+        // when saving
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
             @Override
             public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
@@ -212,15 +230,24 @@ public class LogicManagerTest {
             }
         };
 
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(
-                temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonTransactionBookStorage transactionBookStorage = new JsonTransactionBookStorage(prefPath) {
+            @Override
+            public void saveTransactionBook(ReadOnlyTransactionBook transactionBook, Path filePath) throws IOException {
+                throw e;
+            }
+        };
+
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, transactionBookStorage);
 
         logic = new LogicManager(addressBookModel, transactionModel, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY
+        String abAddCommand = AddCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY
                 + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY + CommandTestUtil.REMARK_DESC_AMY;
+        // Triggers the saveTransactionBook method by executing a list command (simpler)
+        String tbListCommand = spleetwaise.transaction.logic.commands.ListCommand.COMMAND_WORD;
 
         IdUtil.setDeterminate(true);
         Person expectedPerson = new PersonBuilder(TypicalPersons.AMY).withId(IdUtil.getId()).withTags().build();
@@ -230,9 +257,15 @@ public class LogicManagerTest {
 
         spleetwaise.transaction.model.Model expectedTransactionModel = new spleetwaise.transaction.model.ModelManager();
 
-        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedAddressBookModel,
+
+        assertCommandFailure(abAddCommand, CommandException.class, expectedMessage, expectedAddressBookModel,
+                expectedTransactionModel
+        );
+        assertCommandFailure(tbListCommand, CommandException.class, expectedMessage, expectedAddressBookModel,
                 expectedTransactionModel
         );
         IdUtil.setDeterminate(false);
+
+
     }
 }

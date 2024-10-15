@@ -50,13 +50,21 @@ public class TransactionBook implements ReadOnlyTransactionBook {
     }
 
     /**
-     * Checks if the provided transaction already has a entry in the transaction book.
+     * Checks if the provided transaction already has an entry in the transaction book.
      *
      * @param transaction The transaction to check against.
      * @return true if transaction exists in the book.
      */
     public boolean containsTransaction(Transaction transaction) {
         return transactionList.contains(transaction);
+    }
+
+    /**
+     * Returns true if the list contains a transaction with a matching id
+     */
+    public boolean containsTransactionById(Transaction toCheck) {
+        requireNonNull(toCheck);
+        return transactionList.stream().anyMatch(toCheck::hasSameId);
     }
 
     /**
@@ -82,6 +90,14 @@ public class TransactionBook implements ReadOnlyTransactionBook {
             throw new DuplicateTransactionException();
         }
         transactionList.add(transaction);
+    }
+
+    /**
+     * Removes {@code key} from this {@code TransactionBook}. {@code key} must exist in the transaction book.
+     * @return whether the removal was successful
+     */
+    public boolean removeTransaction(Transaction key) {
+        return transactionList.remove(key);
     }
 
     @Override
