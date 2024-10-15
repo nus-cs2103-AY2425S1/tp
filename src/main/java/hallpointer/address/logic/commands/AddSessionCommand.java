@@ -71,7 +71,10 @@ public class AddSessionCommand extends Command {
         }
 
         model.addSession(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getSessionName().toString(), toAdd.getDate().toString(), toAdd.getPoints().getValue(),
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                toAdd.getSessionName().toString(),
+                toAdd.getDate().toString(),
+                toAdd.getPoints().getValue(),
                 memberIndexes.size()));
     }
 
