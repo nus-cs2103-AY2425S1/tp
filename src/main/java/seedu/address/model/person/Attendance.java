@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Represents a Person's attendance in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAttendance(String)}
@@ -17,6 +19,7 @@ public class Attendance {
      * @param isPresent A Boolean indicating if the person is present (true) or absent (false).
      */
     public Attendance(Boolean isPresent) {
+        requireNonNull(isPresent);
         this.isPresent = isPresent;
     }
 
