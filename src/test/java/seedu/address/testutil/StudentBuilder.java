@@ -1,7 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
-
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.student.Student;
