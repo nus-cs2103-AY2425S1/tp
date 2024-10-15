@@ -39,6 +39,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label description;
+    @FXML
     private FlowPane clientTypes;
 
     /**
@@ -55,5 +57,6 @@ public class PersonCard extends UiPart<Region> {
         person.getClientTypes().stream()
                 .sorted(Comparator.comparing(clientType -> clientType.clientTypeName))
                 .forEach(clientType -> clientTypes.getChildren().add(new Label(clientType.clientTypeName)));
+        description.setText(person.getDescription().description);
     }
 }

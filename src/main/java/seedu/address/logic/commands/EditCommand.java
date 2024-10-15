@@ -22,6 +22,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.clienttype.ClientType;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -101,8 +102,11 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<ClientType> updatedClientTypes =
                 editPersonDescriptor.getClientTypes().orElse(personToEdit.getClientTypes());
+        Description updatedDescription = editPersonDescriptor.getDescription().
+                orElse(personToEdit.getDescription());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedClientTypes);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedClientTypes, updatedDescription);
     }
 
     @Override
@@ -139,6 +143,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<ClientType> clientTypes;
+        private Description description;
 
         public EditPersonDescriptor() {}
 
@@ -152,6 +157,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setClientTypes(toCopy.clientTypes);
+            setDescription(toCopy.description);
         }
 
         /**
@@ -208,6 +214,14 @@ public class EditCommand extends Command {
          */
         public Optional<Set<ClientType>> getClientTypes() {
             return (clientTypes != null) ? Optional.of(Collections.unmodifiableSet(clientTypes)) : Optional.empty();
+        }
+
+        public void setDescription(Description description) {
+            this.description = description;
+        }
+
+        public Optional<Description> getDescription() {
+            return Optional.ofNullable(description);
         }
 
         @Override

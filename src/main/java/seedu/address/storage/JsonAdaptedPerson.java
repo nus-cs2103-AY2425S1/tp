@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.clienttype.ClientType;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -29,6 +30,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedClientType> clientTypes = new ArrayList<>();
+    private final String description;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,7 +38,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("clientTypes") List<JsonAdaptedClientType> clientTypes) {
+            @JsonProperty("clientTypes") List<JsonAdaptedClientType> clientTypes,
+                             @JsonProperty("description") String description) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,6 +47,7 @@ class JsonAdaptedPerson {
         if (clientTypes != null) {
             this.clientTypes.addAll(clientTypes);
         }
+        this.description = description;
     }
 
     /**
@@ -57,6 +61,7 @@ class JsonAdaptedPerson {
         clientTypes.addAll(source.getClientTypes().stream()
                 .map(JsonAdaptedClientType::new)
                 .collect(Collectors.toList()));
+        description = source.getDescription().description;
     }
 
     /**
@@ -103,7 +108,17 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<ClientType> modelClientTypes = new HashSet<>(personClientTypes);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelClientTypes);
+
+        final Description modelDescription = new Description(description);
+
+        if (description == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
+        }
+
+        if (!Description.isValidDescription(description)) {
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelClientTypes, modelDescription);
     }
 
 }

@@ -20,6 +20,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Description description;
 
     // Data fields
     private final Address address;
@@ -28,13 +29,15 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<ClientType> clientTypes) {
-        requireAllNonNull(name, phone, email, address, clientTypes);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Set<ClientType> clientTypes, Description description) {
+        requireAllNonNull(name, phone, email, address, clientTypes, description);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.clientTypes.addAll(clientTypes);
+        this.description = description;
     }
 
     public Name getName() {
@@ -51,6 +54,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Description getDescription() {
+        return description;
     }
 
     /**
@@ -94,13 +101,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && clientTypes.equals(otherPerson.clientTypes);
+                && clientTypes.equals(otherPerson.clientTypes)
+                && description.equals(otherPerson.description);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, clientTypes);
+        return Objects.hash(name, phone, email, address, clientTypes, description);
     }
 
     @Override
@@ -111,6 +119,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("clientTypes", clientTypes)
+                .add("description", description)
                 .toString();
     }
 
