@@ -76,7 +76,10 @@ public class CommandTestUtil {
     public static final String UNIT_NUMBER_DESC_03_11 = " " + PREFIX_UNIT_NUMBER + VALID_UNIT_NUMBER_03_11;
     public static final String TAG_DESC_SPACIOUS = " " + PREFIX_TAG + VALID_TAG_SPACIOUS;
     public static final String TAG_DESC_NEAR_MRT = " " + PREFIX_TAG + VALID_TAG_NEAR_MRT;
-
+    public static final String BUYING_PROPERTIES_INDEX_1 = "1";
+    public static final String BUYING_PROPERTIES_INDEX_2 = "2";
+    public static final String SELLING_PROPERTIES_INDEX_1 = "1";
+    public static final String SELLING_PROPERTIES_INDEX_2 = "2";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -92,6 +95,9 @@ public class CommandTestUtil {
             " " + PREFIX_POSTAL_CODE + "1234567"; // 7 digits not allowed in postal code
     public static final String INVALID_UNIT_NUMBER_DESC =
             " " + PREFIX_UNIT_NUMBER + "10-65-01"; // '01' not allowed in unit number
+
+    public static final String INVALID_BUYING_PROPERTIES_INDEX = "0";  //indexes are based on 1 based indexing.
+    public static final String INVALID_SELLING_PROPERTIES_INDEX = "0"; //indexes are based on 1 based indexing.
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

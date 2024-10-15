@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeletePropertyToBuyCommand;
 import seedu.address.logic.commands.DeletePropertyToBuyCommand.EditPersonPropertyDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -11,7 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new EditCommand object
  */
-public class DeletePropertyToBuyCommandParser {
+public class DeletePropertyToBuyCommandParser implements Parser<DeletePropertyToBuyCommand>{
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
