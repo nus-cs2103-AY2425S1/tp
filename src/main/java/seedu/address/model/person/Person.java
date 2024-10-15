@@ -25,7 +25,7 @@ public class Person {
     private final Address address;
     private final Course course;
     private final Tag tag;
-    private final ArrayList<Module> moduleGrades = new ArrayList<>();
+    private final ArrayList<Module> modules = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -67,34 +67,43 @@ public class Person {
     }
 
     /**
-     * Sets the module grades to the provided map.
+     * Sets the module to the provided list.
      *
-     * @param newModuleGrades A map of Module and Grade pairs to set.
+     * @param newModules A list of modules to set.
      */
-    public void setModuleGrades(ArrayList<Module> newModuleGrades) {
-        moduleGrades.clear();
-        moduleGrades.addAll(newModuleGrades);
+    public void setModules(ArrayList<Module> newModules) {
+        modules.clear();
+        modules.addAll(newModules);
     }
 
     /**
-     * Adds a module grade. If the module already exists, it updates the grade.
+     * Adds a module. If the module already exists, it updates the grade.
+     *
+     * @param module The module for which to add or update the grade.
+     */
+    public void addModule(Module module) {
+        requireNonNull(module, "Module cannot be null");
+        modules.add(module);
+    }
+
+    /**
+     * Sets a module grade. If the module already exists, it updates the grade.
      *
      * @param module The module for which to add or update the grade.
      * @param grade The grade to associate with the module.
      */
-    public void addModuleGrade(Module module, Grade grade) {
+    public void setModuleGrade(Module module, Grade grade) {
         requireNonNull(module, "Module cannot be null");
         requireNonNull(grade, "Grade cannot be null");
         module.setGrade(grade);
-        moduleGrades.add(module);
     }
 
     /**
      * Returns an immutable course grades map, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public ArrayList<Module> getModuleGrades() {
-        return moduleGrades;
+    public ArrayList<Module> getModules() {
+        return modules;
     }
 
     /**
@@ -141,13 +150,13 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && course.equals(otherPerson.course)
                 && tag.equals(otherPerson.tag)
-                && moduleGrades.equals(otherPerson.moduleGrades);
+                && modules.equals(otherPerson.modules);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(studentId, name, phone, email, address, course, tag, moduleGrades);
+        return Objects.hash(studentId, name, phone, email, address, course, tag, modules);
     }
 
     @Override
