@@ -90,7 +90,7 @@ public class AddressBookParser {
 
     public static void setInspect(boolean inspect) {
         isInspect = inspect;
-        logger.info(String.valueOf(isInspect));
+        //logger.info(String.valueOf(isInspect));
     }
 
     public static boolean getInspect() {
