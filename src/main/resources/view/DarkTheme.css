@@ -94,6 +94,10 @@
     -fx-padding: 0 0 0 0;
 }
 
+.list-view .list-cell:empty {
+    -fx-background-color: #FF8080; /* Ensure empty cells or extra space also have a pink background */
+}
+
 .list-cell:filled:even {
     -fx-background-color: #FFDC73; /* Yellow for the list cells */
 }
