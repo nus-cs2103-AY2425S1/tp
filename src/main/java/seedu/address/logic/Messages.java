@@ -48,6 +48,8 @@ public class Messages {
             builder.setLength(builder.length() - 1); // Remove trailing space
         }
 
+        appendIfNotEmpty(builder, person.getRemark().toString(), "; Remark: ");
+
         return builder.toString().trim();
     }
 
