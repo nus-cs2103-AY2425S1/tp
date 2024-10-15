@@ -19,7 +19,7 @@ public class ModuleCode {
      * The input should consist of only alphanumeric characters without spaces, should not contain
      * space, and should not be blank.
      */
-    public static final String VALIDATION_REGEX = "[A-Za-z]+[0-9]+[A-Za-z]?";
+    public static final String VALIDATION_REGEX = "[A-Za-z]+[0-9]+[A-Za-z]*";
 
     public final String moduleCode;
 
