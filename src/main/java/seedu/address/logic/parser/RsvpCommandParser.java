@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RsvpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -18,7 +16,7 @@ public class RsvpCommandParser implements Parser<RsvpCommand> {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                    String.format(RsvpCommand.MESSAGE_INVALID_FORMAT);
+                    String.format(RsvpCommand.MESSAGE_INVALID_FORMAT));
         }
 
 
@@ -34,7 +32,7 @@ public class RsvpCommandParser implements Parser<RsvpCommand> {
         try {
             index = ParserUtil.parseIndex(splitArgs[1]);
         } catch (ParseException pe) {
-            throw new ParseException("ERROR: Please enter a valid index (from 1 to [list length])");
+            throw new ParseException(RsvpCommand.MESSAGE_INVALID_INDEX);
         }
 
         boolean isRsvp = commandWord.equals(RsvpCommand.RSVP_COMMAND_WORD);
