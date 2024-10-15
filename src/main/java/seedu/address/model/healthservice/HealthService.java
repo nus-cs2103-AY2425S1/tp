@@ -6,24 +6,24 @@ import static java.util.Objects.requireNonNull;
  * Represents a Health Service in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidHealthserviceName(String)}
  */
-public class Healthservice {
+public class HealthService {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Health Service names should be alphanumeric";
 
     public final String healthServiceName;
 
     /**
-     * Constructs a {@code Tag}.
+     * Constructs a {@code HealthService}.
      *
-     * @param healthServiceName A valid tag name.
+     * @param healthServiceName A valid Health Service name.
      */
-    public Healthservice(String healthServiceName) {
+    public HealthService(String healthServiceName) {
         requireNonNull(healthServiceName);
         this.healthServiceName = healthServiceName;
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid Health Service name.
      */
     public static boolean isValidHealthserviceName(String test) {
         return true;
@@ -36,11 +36,11 @@ public class Healthservice {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Healthservice)) {
+        if (!(other instanceof HealthService)) {
             return false;
         }
 
-        Healthservice otherhealthService = (Healthservice) other;
+        HealthService otherhealthService = (HealthService) other;
         return healthServiceName.equals(otherhealthService.healthServiceName);
     }
 

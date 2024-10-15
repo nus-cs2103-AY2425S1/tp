@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+
 /**
  * Represents a Person's nric in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidNric(String)}
@@ -46,8 +47,8 @@ public class Nric {
             return false;
         }
 
-        Nric otherNric = (Nric) other;
-        return value.equals(otherNric.value);
+        Nric otherNRIC = (Nric) other;
+        return value.equals(otherNRIC.value);
     }
 
     @Override
