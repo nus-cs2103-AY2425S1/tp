@@ -26,8 +26,7 @@ public class EmergencyPhone {
     }
 
     /**
-     * Returns true if a given string is a valid emergency phone number or empty string if the emergency
-     * phone is not updated.
+     * Returns true if a given string is a valid emergency phone number or empty string to delete
      */
     public static boolean isValidEmergencyPhone(String test) {
         return test.matches(VALIDATION_REGEX) || test.isEmpty();

@@ -26,7 +26,10 @@ public class EmergencyPhoneCommand extends Command {
             + "Parameters: [INDEX] en/[EMERGENCY_NUMBER]\n"
             + "Example: " + COMMAND_WORD + " 1 ep/91234567";
 
-    public static final String MESSAGE_EMERGENCY_PHONE_SUCCESS = "Added emergency phone for %1$s\n"
+    public static final String MESSAGE_ADD_EMERGENCY_PHONE_SUCCESS = "Added emergency phone for %1$s\n"
+            + "Emergency Contact Number: %2$s";
+
+    public static final String MESSAGE_DELETE_EMERGENCY_PHONE_SUCCESS = "Removed emergency phone for %1$s\n"
             + "Emergency Contact Number: %2$s";
 
     private final Index index;
@@ -58,8 +61,18 @@ public class EmergencyPhoneCommand extends Command {
                 personToEdit.getStudentClass(), emergencyPhone, personToEdit.getTags());
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EMERGENCY_PHONE_SUCCESS,
-                editedPerson.getName(), editedPerson.getEmergencyPhone()));
+        return new CommandResult(generateSuccessMessage(editedPerson));
+    }
+
+    /**
+     * Generates a command execution success message based on whether
+     * the emergency phone is added to or removed from
+     * {@code personToEdit}.
+     */
+    private String generateSuccessMessage(Person personToEdit) {
+        String message = !emergencyPhone.value.isEmpty()
+                ? MESSAGE_ADD_EMERGENCY_PHONE_SUCCESS : MESSAGE_DELETE_EMERGENCY_PHONE_SUCCESS;
+        return String.format(message, personToEdit.getName(), personToEdit.getEmergencyPhone());
     }
 
     @Override

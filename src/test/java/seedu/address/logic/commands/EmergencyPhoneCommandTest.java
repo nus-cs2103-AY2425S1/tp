@@ -7,7 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMERGENCY_PHONE
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.logic.commands.EmergencyPhoneCommand.MESSAGE_EMERGENCY_PHONE_SUCCESS;
+import static seedu.address.logic.commands.EmergencyPhoneCommand.MESSAGE_ADD_EMERGENCY_PHONE_SUCCESS;
+import static seedu.address.logic.commands.EmergencyPhoneCommand.MESSAGE_DELETE_EMERGENCY_PHONE_SUCCESS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -32,17 +33,31 @@ public class EmergencyPhoneCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_emergencyPhoneUnfilteredList_success() {
+    public void execute_addEmergencyPhoneUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withEmergencyPhone(VALID_EMERGENCY_PHONE_AMY).build();
         EmergencyPhoneCommand emergencyPhoneCommand = new EmergencyPhoneCommand(INDEX_FIRST_PERSON,
                 new EmergencyPhone(VALID_EMERGENCY_PHONE_AMY));
-        String expectedMessage = String.format(MESSAGE_EMERGENCY_PHONE_SUCCESS,
+        String expectedMessage = String.format(MESSAGE_ADD_EMERGENCY_PHONE_SUCCESS,
                 editedPerson.getName(), editedPerson.getEmergencyPhone());
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(emergencyPhoneCommand, model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void execute_deleteEmergencyPhoneUnfilteredList_success() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(firstPerson).withEmergencyPhone("").build();
+        EmergencyPhoneCommand emergencyPhoneCommand = new EmergencyPhoneCommand(INDEX_FIRST_PERSON,
+                new EmergencyPhone(""));
+        String expectedMessage = String.format(MESSAGE_DELETE_EMERGENCY_PHONE_SUCCESS,
+                editedPerson.getName(), editedPerson.getEmergencyPhone());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+        assertCommandSuccess(emergencyPhoneCommand, model, expectedMessage, expectedModel);
+    }
+
     @Test
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
@@ -51,7 +66,7 @@ public class EmergencyPhoneCommandTest {
                 .withEmergencyPhone(VALID_EMERGENCY_PHONE_AMY).build();
         EmergencyPhoneCommand emergencyPhoneCommand = new EmergencyPhoneCommand(INDEX_FIRST_PERSON,
                 new EmergencyPhone(VALID_EMERGENCY_PHONE_AMY));
-        String expectedMessage = String.format(MESSAGE_EMERGENCY_PHONE_SUCCESS,
+        String expectedMessage = String.format(MESSAGE_ADD_EMERGENCY_PHONE_SUCCESS,
                 editedPerson.getName(), editedPerson.getEmergencyPhone());
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
