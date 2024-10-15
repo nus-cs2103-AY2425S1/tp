@@ -17,9 +17,9 @@ import seedu.address.model.person.Person;
  */
 public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
-    public static final String MESSAGE_USAGE = "Contacts have been successfully exported";
+    public static final String MESSAGE_SUCCESS = "Contacts have been successfully exported";
     public static final String COLUMN_HEADERS = "Name,Phone Number,Email Address,Address,Tags";
-    public static final String PATH = "./data/addressbook.csv";
+    public static final String PATH = "./data/ExportedContacts.csv";
 
     @Override
     public CommandResult execute(Model model) {
@@ -30,7 +30,7 @@ public class ExportCommand extends Command {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new CommandResult(MESSAGE_USAGE);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     private File createCsvFile() throws IOException {
