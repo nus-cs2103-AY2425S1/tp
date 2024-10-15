@@ -9,7 +9,6 @@ import java.util.function.Predicate;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.contact.common.Contact;
 
-// TODO change to take in vargs (take in /t) also
 
 /**
  * Lists all persons in the address book to the user.
@@ -18,7 +17,7 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
+    public static final String MESSAGE_SUCCESS = "Listed all contacts";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all contacts.\n";
 
