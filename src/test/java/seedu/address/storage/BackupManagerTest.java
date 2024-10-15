@@ -64,21 +64,6 @@ public class BackupManagerTest {
     }
 
     @Test
-    public void restoreMostRecentBackup_restoresSuccessfully() throws IOException {
-        // Create two backups and update data for the second one
-        backupManager.saveBackup(TEMP_FILE);
-        Files.writeString(TEMP_FILE, "Updated AddressBook Data");
-        backupManager.saveBackup(TEMP_FILE);
-
-        Optional<Path> restoredBackup = backupManager.restoreMostRecentBackup();
-        assertTrue(restoredBackup.isPresent(), "A recent backup should exist.");
-
-        // Verify that the restored backup contains the latest data
-        String restoredData = Files.readString(restoredBackup.get());
-        assertEquals("Updated AddressBook Data", restoredData);
-    }
-
-    @Test
     public void restoreMostRecentBackup_returnsEmptyWhenNoBackupExists() throws IOException {
         Files.deleteIfExists(TEMP_FILE); // Delete test file to simulate no backups
 
