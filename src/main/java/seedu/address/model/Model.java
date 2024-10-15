@@ -87,13 +87,11 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    boolean removeOrder(String name);
+    void removeOrder(Order order);
 
-    void addOrder(String name);
+    void addOrder(Order order);
 
-    boolean hasOrder(String name);
+    boolean hasOrder(Order order);
 
-    boolean deleteOrder(String name);
-
-    ArrayList<Order> getOrderList();
+    ObservableList<Order> getOrderList();
 }

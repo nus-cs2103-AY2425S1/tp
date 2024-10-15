@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.order.Order;
 
 public class AddOrderCommand extends Command{
 
@@ -18,10 +19,10 @@ public class AddOrderCommand extends Command{
     public static final String MESSAGE_SUCCESS = "New order added: %1$s";
     public static final String MESSAGE_DUPLICATE_ORDER = "This order already exists in the address book";
 
-    private final String toAdd;
+    private final Order toAdd;
 
     public AddOrderCommand(String name) {
-        this.toAdd = name.trim().toLowerCase();
+        this.toAdd = new Order(name.trim().toLowerCase());
     }
 
     @Override

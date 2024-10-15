@@ -42,5 +42,8 @@
     "email" : "anna@example.com",
     "address" : "4th street #12-345",
     "tags" : [ ]
+  } ],
+  "orders": [ {
+    "name": "Cake"
   } ]
 }

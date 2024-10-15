@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -159,24 +160,25 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean removeOrder(String name) {
+        public void removeOrder(Order order) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addOrder(String name) {
+        public void addOrder(Order name) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasOrder(String name) {
+        public boolean hasOrder(Order order) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean deleteOrder(String name) {
+        public ObservableList<Order> getOrderList() {
             throw new AssertionError("This method should not be called.");
         }
+
     }
 
     /**

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.order.Order;
 
 public class DeleteOrderCommand extends Command{
 
@@ -17,10 +18,10 @@ public class DeleteOrderCommand extends Command{
     public static final String MESSAGE_SUCCESS = "Order deleted: %1$s";
     public static final String MESSAGE_ABSENT_ORDER = "This order does not exists in the address book";
 
-    private final String toDelete;
+    private final Order toDelete;
 
     public DeleteOrderCommand(String name) {
-        this.toDelete = name.trim().toLowerCase();
+        this.toDelete = new Order(name.trim().toLowerCase());
     }
 
     @Override
@@ -28,7 +29,7 @@ public class DeleteOrderCommand extends Command{
         requireNonNull(model);
 
         if (model.hasOrder(toDelete)) {
-            model.deleteOrder(toDelete);
+            model.removeOrder(toDelete);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toDelete));
         }
 

@@ -114,28 +114,23 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean removeOrder(String name) {
-        return Order.removeOrder(name);
+    public void removeOrder(Order order) {
+        addressBook.removeOrder(order);
     }
 
     @Override
-    public void addOrder(String name) {
-        Order.of(name);
+    public void addOrder(Order order) {
+        addressBook.addOrder(order);
     }
 
     @Override
-    public boolean hasOrder(String name) {
-        return Order.orderExist(name);
+    public boolean hasOrder(Order order) {
+        return addressBook.hasOrder(order);
     }
 
     @Override
-    public boolean deleteOrder(String name) {
-        return Order.removeOrder(name);
-    }
-
-    @Override
-    public ArrayList<Order> getOrderList() {
-        return Order.getOrders();
+    public ObservableList<Order> getOrderList() {
+        return addressBook.getOrderList();
     }
     //=========== Filtered Person List Accessors =============================================================
 
