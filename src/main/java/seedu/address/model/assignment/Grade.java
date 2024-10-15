@@ -58,7 +58,7 @@ public class Grade {
 
     @Override
     public String toString() {
-        return new DecimalFormat("#.00").format(grade);
+        return grade.map(g -> new DecimalFormat("#.00").format(grade)).orElse("NULL");
     }
 
     @Override
