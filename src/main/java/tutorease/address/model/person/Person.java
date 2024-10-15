@@ -16,21 +16,27 @@ import tutorease.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public abstract class Person {
 
     // Identity fields
     private final Name name;
     private final Phone phone;
+    private final Email email;
+
+    // Data fields
+    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Role role;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Role role, Set<Tag> tags) {
-        requireAllNonNull(name, phone, role);
+    public Person(Name name, Phone phone, Email email, Address address, Role role, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, role, tags);
         this.name = name;
         this.phone = phone;
+        this.email = email;
+        this.address = address;
         this.role = role;
         this.tags.addAll(tags);
     }
@@ -43,9 +49,15 @@ public class Person {
         return phone;
     }
 
-    public Role getRole() {
-        return role;
+    public Email getEmail() {
+        return email;
     }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public abstract String getRole();
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -86,6 +98,8 @@ public class Person {
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
+                && email.equals(otherPerson.email)
+                && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
                 && role.equals(otherPerson.role);
     }
@@ -93,7 +107,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, role, tags);
+        return Objects.hash(name, phone, email, address, tags);
     }
 
     @Override
@@ -101,6 +115,8 @@ public class Person {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
+                .add("email", email)
+                .add("address", address)
                 .add("tags", tags)
                 .add("role", role)
                 .toString();
