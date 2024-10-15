@@ -60,7 +60,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_NAME).isPresent()) {
             editPersonDescriptor.setEmergencyContactName(
-                    ParserUtil.parseName(argMultimap.getValue(PREFIX_ADDRESS).get()));
+                    ParserUtil.parseName(argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_PHONE).isPresent()) {
             editPersonDescriptor.setEmergencyContactPhone(ParserUtil.parsePhone(

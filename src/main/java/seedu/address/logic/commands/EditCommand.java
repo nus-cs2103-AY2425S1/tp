@@ -187,7 +187,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, emergencyContact, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, emergencyContact, emergencyContactName,
+                    emergencyContactPhone, emergencyContactRelationship, tags);
         }
 
         public boolean isAnyEmergencyContactFieldEdited() {
@@ -233,6 +234,10 @@ public class EditCommand extends Command {
 
         public void setEmergencyContactName(Name emergencyContactName) {
             this.emergencyContactName = emergencyContactName;
+            if (emergencyContact != null) {
+                this.emergencyContact = new EmergencyContact(emergencyContactName, emergencyContact.getPhone(),
+                        emergencyContact.getRelationship());
+            }
         }
 
         private Optional<Phone> getEmergencyContactPhone() {
@@ -241,6 +246,10 @@ public class EditCommand extends Command {
 
         public void setEmergencyContactPhone(Phone emergencyContactPhone) {
             this.emergencyContactPhone = emergencyContactPhone;
+            if (emergencyContact != null) {
+                this.emergencyContact = new EmergencyContact(emergencyContact.getName(), emergencyContactPhone,
+                        emergencyContact.getRelationship());
+            }
         }
 
         private Optional<Relationship> getEmergencyContactRelationship() {
@@ -249,6 +258,10 @@ public class EditCommand extends Command {
 
         public void setEmergencyContactRelationship(Relationship emergencyContactRelationship) {
             this.emergencyContactRelationship = emergencyContactRelationship;
+            if (emergencyContact != null) {
+                this.emergencyContact = new EmergencyContact(emergencyContact.getName(), emergencyContact.getPhone(),
+                        emergencyContactRelationship);
+            }
         }
 
         public Optional<EmergencyContact> getEmergencyContact() {
@@ -257,6 +270,11 @@ public class EditCommand extends Command {
 
         public void setEmergencyContact(EmergencyContact emergencyContact) {
             this.emergencyContact = emergencyContact;
+            if (emergencyContact != null) {
+                this.emergencyContactName = emergencyContact.getName();
+                this.emergencyContactPhone = emergencyContact.getPhone();
+                this.emergencyContactRelationship = emergencyContact.getRelationship();
+            }
         }
 
         /**

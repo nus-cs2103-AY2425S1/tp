@@ -46,6 +46,21 @@ public class Relationship {
         return Objects.hash(relationship);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Relationship)) {
+            return false;
+        }
+
+        Relationship otherRelationship = (Relationship) other;
+        return relationship.equals(otherRelationship.relationship);
+    }
+
     private enum RelationshipType {
         PARENT,
         MOTHER,
