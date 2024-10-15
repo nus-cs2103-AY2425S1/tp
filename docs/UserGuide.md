@@ -153,7 +153,7 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Clearing all entries : `view`
+### View an existing contact's details : `view`
 
 Views the details of a person in the address book.
 
