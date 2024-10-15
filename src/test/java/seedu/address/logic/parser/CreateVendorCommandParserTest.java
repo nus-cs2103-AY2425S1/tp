@@ -39,7 +39,7 @@ import seedu.address.model.vendor.Phone;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.testutil.VendorBuilder;
 
-public class AddCommandParserTest {
+public class CreateVendorCommandParserTest {
     private CreateVendorCommandParser parser = new CreateVendorCommandParser();
 
     @Test
