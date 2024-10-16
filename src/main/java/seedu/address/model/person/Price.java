@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -35,7 +34,6 @@ public class Price implements Comparable<Price> {
 
     /**
      * Returns a string representation of the price category based on the value of
-     * @param price
      * @return
      */
     public String getPriceCategoryString() {
@@ -63,12 +61,8 @@ public class Price implements Comparable<Price> {
         }
 
         try {
-            // Remove leading and trailing whitespaces
             String cleanedString = priceString.trim();
-            
-            // Convert the cleaned string to a numeric value
             double value = Double.parseDouble(cleanedString);
-            
             return new Price(value);
         } catch (NumberFormatException e) {
             // Handle cases where the string cannot be converted to a valid number
