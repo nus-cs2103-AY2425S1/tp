@@ -3,6 +3,7 @@ package tutorease.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static tutorease.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static tutorease.address.testutil.Assert.assertThrows;
+import static tutorease.address.testutil.TypicalGuardians.ALEX;
 import static tutorease.address.testutil.TypicalStudents.BENSON;
 
 import java.util.ArrayList;
@@ -36,9 +37,15 @@ public class JsonAdaptedPersonTest {
             .collect(Collectors.toList());
 
     @Test
-    public void toModelType_validPersonDetails_returnsPerson() throws Exception {
+    public void toModelType_validPersonDetails_returnsStudent() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(BENSON);
         assertEquals(BENSON, person.toModelType());
+    }
+
+    @Test
+    public void toModelType_validPersonDetails_returnsGuardian() throws Exception {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(ALEX);
+        assertEquals(ALEX, person.toModelType());
     }
 
     @Test
