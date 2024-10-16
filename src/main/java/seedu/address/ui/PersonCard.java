@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
 
 /**
@@ -28,6 +29,8 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private HBox cardPane;
+    @FXML
+    private Label appointment;
     @FXML
     private Label id;
     @FXML
@@ -57,6 +60,13 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
+        Appointment appt = person.getAppointment();
+        if (appt == null) {
+            appointment.setManaged(false);
+        } else {
+            appointment.setText(appt.toString());
+        }
+
         priority.getStyleClass().add(switch (person.getPriority()) {
         case HIGH -> "priority-high";
         case MEDIUM -> "priority-medium";
@@ -65,8 +75,11 @@ public class PersonCard extends UiPart<Region> {
         priority.setText(person.getPriority().name());
 
         String value = person.getRemark().value;
-        remark.setText(value);
-        remark.setManaged(!value.isEmpty());
+        if (value.isEmpty()) {
+            remark.setManaged(false);
+        } else {
+            remark.setText(value);
+        }
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

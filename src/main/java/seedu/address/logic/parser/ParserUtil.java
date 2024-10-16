@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -105,9 +108,8 @@ public class ParserUtil {
      */
     public static Priority parsePriority(String priority) throws ParseException {
         requireNonNull(priority);
-        String trimmedPriority = priority.trim().toUpperCase();
         try {
-            return Priority.valueOf(trimmedPriority);
+            return Priority.valueOf(priority.trim().toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
         }
@@ -120,6 +122,36 @@ public class ParserUtil {
     public static Remark parseRemark(String remark) {
         requireNonNull(remark);
         return new Remark(remark.trim());
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code LocalDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static LocalDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        try {
+            return LocalDate.parse(date.trim());
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Dates should be in yyyy-MM-dd format");
+        }
+    }
+
+    /**
+     * Parses a {@code String time} into a {@code LocalTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static LocalTime parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        try {
+            return LocalTime.parse(time.trim());
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Time should be in HH:mm format");
+        }
     }
 
     /**

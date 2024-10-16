@@ -13,5 +13,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_PRIORITY = new Prefix("pri/");
     public static final Prefix PREFIX_REMARK = new Prefix("r/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_DATE = new Prefix("date/");
+    public static final Prefix PREFIX_FROM = new Prefix("from/");
+    public static final Prefix PREFIX_TO = new Prefix("to/");
 
 }

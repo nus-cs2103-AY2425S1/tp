@@ -1,8 +1,11 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -31,6 +34,7 @@ public class PersonBuilder {
     private Address address;
     private Priority priority;
     private Remark remark;
+    private Appointment appointment;
     private Set<Tag> tags;
 
     /**
@@ -43,6 +47,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         priority = Priority.valueOf(DEFAULT_PRIORITY);
         remark = new Remark(DEFAULT_REMARK);
+        appointment = null;
         tags = new HashSet<>();
     }
 
@@ -56,6 +61,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         priority = personToCopy.getPriority();
         remark = personToCopy.getRemark();
+        appointment = personToCopy.getAppointment();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -108,6 +114,23 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Appointment} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAppointment(String date, String startTime, String endTime) {
+        this.appointment =
+                new Appointment(LocalDate.parse(date), LocalTime.parse(startTime), LocalTime.parse(endTime));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Appointment} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAppointment(Appointment appointment) {
+        this.appointment = appointment;
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withTags(String ... tags) {
@@ -116,7 +139,6 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, priority, remark, tags);
+        return new Person(name, phone, email, address, priority, remark, appointment, tags);
     }
-
 }
