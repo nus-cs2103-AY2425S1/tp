@@ -15,13 +15,15 @@ public class DoctorName extends Name {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
+    public final String doctorName;
     /**
      * Constructs a {@code DoctorName}.
      *
      * @param name A valid name.
      */
     public DoctorName(String name) {
-        super("Dr " + name);
+        super(name);
+        this.doctorName = "Dr " + name;
     }
 
     /**
@@ -31,6 +33,9 @@ public class DoctorName extends Name {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public String getDoctorName() {
+        return doctorName;
+    }
 
     @Override
     public String toString() {
