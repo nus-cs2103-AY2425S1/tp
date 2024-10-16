@@ -2,13 +2,12 @@ package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.mock;
 
-import javafx.application.Platform;
 import org.junit.jupiter.api.Test;
 
+import javafx.application.Platform;
 import javafx.stage.Stage;
-
-import static org.mockito.Mockito.mock;
 
 public class HelpWindowTest {
 
@@ -37,6 +36,6 @@ public class HelpWindowTest {
             HelpWindow helpWindow = new HelpWindow(mainStage);
 
             assertNotNull(helpWindow);
-            });
+        });
     }
 }
