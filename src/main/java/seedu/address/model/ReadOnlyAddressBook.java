@@ -21,6 +21,7 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate owners.
      */
     ObservableList<Owner> getOwnerList();
+
     /**
      * Returns an unmodifiable view of the pets list.
      * This list will not contain any duplicate pets.

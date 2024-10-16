@@ -1,10 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -53,9 +50,6 @@ class JsonAdaptedPet {
         breed = source.getBreed().value;
         age = source.getAge().value;
         sex = source.getSex().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
     }
 
     /**
@@ -109,8 +103,7 @@ class JsonAdaptedPet {
         }
         final Sex modelSex = new Sex(sex);
 
-        final Set<Tag> modelTags = new HashSet<>(petTags);
-        return new Pet(modelName, modelSpecies, modelBreed, modelAge, modelSex, modelTags);
+        return new Pet(modelName, modelSpecies, modelBreed, modelAge, modelSex);
     }
 
 }

@@ -236,7 +236,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         return persons.equals(otherAddressBook.persons) && owners.equals(otherAddressBook.owners)
                 && pets.equals(otherAddressBook.pets);
-        return persons.equals(otherAddressBook.persons) && owners.equals(otherAddressBook.owners);
     }
 
     @Override
