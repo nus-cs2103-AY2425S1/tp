@@ -20,7 +20,7 @@ public class PriorityTest {
     }
 
     @Test
-    public void isValidPhone() {
+    public void isValidPriority() {
         // null priority
         assertThrows(NullPointerException.class, () -> Priority.isValidPriority(null));
 
