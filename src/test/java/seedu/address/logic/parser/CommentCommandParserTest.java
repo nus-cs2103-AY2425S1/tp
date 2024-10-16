@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 
@@ -9,10 +11,12 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommentCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Comment;
 
 public class CommentCommandParserTest {
     private CommentCommandParser parser = new CommentCommandParser();
-    private final String nonEmptyComment = "Some Comment.";
+    private final Comment nonEmptyComment = new Comment("Some Comment");
 
     @Test
     public void parse_indexSpecified_success() {
@@ -20,11 +24,6 @@ public class CommentCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_COMMENT + nonEmptyComment;
         CommentCommand expectedCommand = new CommentCommand(INDEX_FIRST_PERSON, nonEmptyComment);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
-        // no comment
-        userInput = targetIndex.getOneBased() + " " + PREFIX_COMMENT;
-        expectedCommand = new CommentCommand(INDEX_FIRST_PERSON, "");
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

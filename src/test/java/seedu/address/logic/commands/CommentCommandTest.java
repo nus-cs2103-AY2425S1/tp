@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommentCommand.MESSAGE_ARGUMENTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -13,18 +14,19 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Comment;
 
 public class CommentCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    public static final String VALID_COMMENT_AMY = "Like skiing.";
-    public static final String VALID_COMMENT_BOB = "Favourite pastime: Eating";
+    public static final Comment VALID_COMMENT_AMY = new Comment("Like skiing");
+    public static final Comment VALID_COMMENT_BOB = new Comment("Favourite pastime is Eating");
 
     @Test
     public void execute() {
-        final String remark = "Some remark";
+        final Comment comment = new Comment("Some comment");
 
-        assertCommandFailure(new CommentCommand(INDEX_FIRST_PERSON, remark), model,
-                String.format(MESSAGE_ARGUMENTS, INDEX_FIRST_PERSON.getOneBased(), remark));
+        assertCommandFailure(new CommentCommand(INDEX_FIRST_PERSON, comment), model,
+                String.format(MESSAGE_ARGUMENTS, INDEX_FIRST_PERSON.getOneBased(), comment));
     }
 
     @Test

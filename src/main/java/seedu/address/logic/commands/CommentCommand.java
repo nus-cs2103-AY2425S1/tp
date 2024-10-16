@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Comment;
 
 /**
  * Changes the comment of an existing person identified using the displayed index from the address book.
@@ -25,13 +26,13 @@ public class CommentCommand extends Command {
     public static final String MESSAGE_ARGUMENTS = " Index: %1$d, Comemnt: %2$s";
 
     private final Index index;
-    private final String comment;
+    private final Comment comment;
 
     /**
      * @param index of the person in the filtered person list to edit the comment
      * @param comment of the person to be updated to
      */
-    public CommentCommand(Index index, String comment) {
+    public CommentCommand(Index index, Comment comment) {
         requireAllNonNull(index, comment);
 
         this.index = index;
