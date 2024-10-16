@@ -33,7 +33,9 @@ public class Person {
     public Person(Name name, Phone phone, Email email, Address address, Birthday birthday,
                   Set<Tag> tags, Boolean hasPaid) {
 
-        requireAllNonNull(name, phone, email, address, tags, hasPaid);
+        requireAllNonNull(name, phone, email, address, tags);
+        //hasPaid not required to be non-null for testing of commands that do not interact with paid status
+        //e.g. edit command in AddressBookParserTest::parseCommand_edit()
         this.name = name;
         this.phone = phone;
         this.email = email;
