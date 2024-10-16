@@ -20,10 +20,10 @@ import seedu.address.model.task.Task;
  */
 public class DeleteTaskFromGroupCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete_task";
+    public static final String COMMAND_WORD = "delete_task_grp";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a task from a group. "
             + "Parameters: "
-            + PREFIX_GROUP_NAME + "TASK_NAME "
+            + PREFIX_GROUP_NAME + "GROUP_NAME "
             + PREFIX_INDEX + "INDEX\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GROUP_NAME + "Team 5 "
