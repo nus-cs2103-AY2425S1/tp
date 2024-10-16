@@ -112,6 +112,14 @@ public class JsonAddressBookStorageTest {
 
     @Test
     public void saveAddressBook_writeAccessDenied_throwsAccessDeniedException() {
+    Path filePath = Path.of("writeAccessDeniedAddressBook.json");
+        File file = filePath.toFile();  // Convert Path to File
+
+        if (file.setWritable( false,
+                false)) {
+            System.out.println("File cannot be written to");
+        }
+
         assertThrows(AccessDeniedException.class, () -> saveAddressBook(new AddressBook(),
                 "writeAccessDeniedAddressBook.json"));
     }
