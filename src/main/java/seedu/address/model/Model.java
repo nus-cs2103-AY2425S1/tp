@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
@@ -51,6 +52,11 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /**
+     * Archives the address book.
+     */
+    void archiveAddressBook() throws IOException;
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

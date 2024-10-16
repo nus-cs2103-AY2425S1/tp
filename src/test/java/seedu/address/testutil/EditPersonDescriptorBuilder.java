@@ -10,6 +10,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Relationship;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,6 +37,9 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setEmergencyContactName(person.getEmergencyContact().getName());
+        descriptor.setEmergencyContactPhone(person.getEmergencyContact().getPhone());
+        descriptor.setEmergencyContactRelationship(person.getEmergencyContact().getRelationship());
         descriptor.setTags(person.getTags());
     }
 
@@ -68,6 +72,30 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code EmergencyContact Name} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withEmergencyContactName(String name) {
+        descriptor.setEmergencyContactName(new Name(name));
+        return this;
+    }
+
+    /**
+     * Sets the {@code EmergencyContact Phone} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withEmergencyContactPhone(String phone) {
+        descriptor.setEmergencyContactPhone(new Phone(phone));
+        return this;
+    }
+
+    /**
+     * Sets the {@code EmergencyContact relationship} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withEmergencyContactRelationship(String relationship) {
+        descriptor.setEmergencyContactRelationship(new Relationship(relationship));
         return this;
     }
 
