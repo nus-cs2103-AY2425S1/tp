@@ -3,11 +3,12 @@ package seedu.address.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import seedu.address.model.property.Property;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.property.Property;
 
 /**
- * Jackson-friendly version of {@link Property}.
+ * JSON adapter for the Property class.
+ * This class handles the conversion between a Property object and its JSON representation.
  */
 class JsonAdaptedProperty {
 

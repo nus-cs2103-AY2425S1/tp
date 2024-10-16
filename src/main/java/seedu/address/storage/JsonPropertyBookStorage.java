@@ -12,6 +12,10 @@ import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.PropertyBook;
 
+/**
+ * Handles the storage and retrieval of PropertyBook data in JSON format.
+ * This class provides methods to read from and write to JSON files for persistence.
+ */
 public class JsonPropertyBookStorage implements PropertyBookStorage {
     private static final Logger logger = LogsCenter.getLogger(JsonPropertyBookStorage.class);
     private final Path filePath;
@@ -30,6 +34,13 @@ public class JsonPropertyBookStorage implements PropertyBookStorage {
         return readPropertyBook(filePath);
     }
 
+    /**
+     * Reads a PropertyBook from a JSON file specified by the file path.
+     *
+     * @param filePath the path to the JSON file containing the PropertyBook data
+     * @return an Optional containing the PropertyBook if successfully read, or an empty Optional if no data is present
+     * @throws DataLoadingException if there are illegal values in the JSON data
+     */
     public Optional<PropertyBook> readPropertyBook(Path filePath) throws DataLoadingException {
         Optional<JsonSerializablePropertyBook> jsonPropertyBook = JsonUtil.readJsonFile(
                 filePath, JsonSerializablePropertyBook.class);
