@@ -67,7 +67,7 @@ public class PersonCard extends UiPart<Region> {
         ecName.setText(person.getEmergencyContact().getName().fullName);
         ecPhone.setText(person.getEmergencyContact().getPhone().value);
         ecRelationship.setText(person.getEmergencyContact().getRelationship().relationship);
-        doctorName.setText(person.getDoctor().getName().fullName);
+        doctorName.setText(person.getDoctor().getName().getDoctorName());
         doctorPhone.setText(person.getDoctor().getPhone().value);
         doctorEmail.setText(person.getDoctor().getEmail().value);
         person.getTags().stream()

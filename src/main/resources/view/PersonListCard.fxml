@@ -34,6 +34,9 @@
       <Label fx:id="ecName" styleClass="emergency_contact" text="\$ecName" />
       <Label fx:id="ecPhone" styleClass="emergency_contact" text="\$ecName" />
       <Label fx:id="ecRelationship" styleClass="emergency_contact" text="\$ecRelationship" />
+      <Label fx:id="doctorName" styleClass="doctor" text="\$doctorName" />
+      <Label fx:id="doctorPhone" styleClass="doctor" text="\$doctorPhone" />
+      <Label fx:id="doctorEmail" styleClass="doctor" text="\$doctorEmail" />
     </VBox>
   </GridPane>
 </HBox>
