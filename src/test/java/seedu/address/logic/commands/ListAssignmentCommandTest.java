@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +23,7 @@ public class ListAssignmentCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
-                TypicalAssignments.getTypicalAssignmentList());
+                TypicalAssignments.getTypicalAssignmentList(), new ArrayList<>());
     }
 
     @Test

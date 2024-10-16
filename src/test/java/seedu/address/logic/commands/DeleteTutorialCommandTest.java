@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalAssignments.getTypicalAssignmentList;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.AddressBook;
@@ -14,7 +16,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
-
 
 
 public class DeleteTutorialCommandTest {
@@ -31,7 +32,7 @@ public class DeleteTutorialCommandTest {
 
     private final AddressBook addressBook = new AddressBook();
 
-    private Model model = new ModelManager(addressBook, new UserPrefs(), getTypicalAssignmentList());
+    private Model model = new ModelManager(addressBook, new UserPrefs(), getTypicalAssignmentList(), new ArrayList<>());
 
 
     @Test

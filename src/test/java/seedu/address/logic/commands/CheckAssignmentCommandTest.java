@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT1;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -23,7 +25,7 @@ public class CheckAssignmentCommandTest {
     public void execute_assignmentExists_success() throws Exception {
         ReadOnlyAddressBook addressBook = TypicalStudents.getTypicalAddressBook();
         AssignmentList assignmentList = TypicalAssignments.getTypicalAssignmentList();
-        Model model = new ModelManager(addressBook, new UserPrefs(), assignmentList);
+        Model model = new ModelManager(addressBook, new UserPrefs(), assignmentList, new ArrayList<>());
         CheckAssignmentCommand checkCommand = new CheckAssignmentCommand(ASSIGNMENT1);
 
         CommandResult result = checkCommand.execute(model);
@@ -35,7 +37,7 @@ public class CheckAssignmentCommandTest {
     public void execute_assignmentDoesNotExist_throwsCommandException() {
         ReadOnlyAddressBook addressBook = TypicalStudents.getTypicalAddressBook();
         AssignmentList assignmentList = new AssignmentList();
-        Model model = new ModelManager(addressBook, new UserPrefs(), assignmentList);
+        Model model = new ModelManager(addressBook, new UserPrefs(), assignmentList, new ArrayList<>());
         CheckAssignmentCommand checkCommand = new CheckAssignmentCommand(ASSIGNMENT1);
 
         assertThrows(CommandException.class, CheckAssignmentCommand.MESSAGE_ASSIGNMENT_NOT_FOUND, () -> {
