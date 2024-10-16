@@ -1,17 +1,21 @@
 package seedu.address.ui;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
-
-import seedu.address.commons.core.LogsCenter;
 
 /**
  * UI component that will store the previously executed commands in a session.
  */
 public class CommandBuffer {
-    private static final Logger logger = LogsCenter.getLogger(CommandBuffer.class);
-    private ArrayList<String> commandHistory = new ArrayList<>();
-    private int commandPointer = 0;
+    private ArrayList<String> commandHistory;
+    private int commandPointer;
+
+    /**
+     * Creates a CommandBuffer
+     */
+    public CommandBuffer() {
+        commandHistory = new ArrayList<>();
+        commandPointer = 0;
+    }
 
     /**
      * On the entering of a new command, add that command to the buffer
@@ -24,20 +28,33 @@ public class CommandBuffer {
         }
         commandHistory.add(command);
         commandPointer = commandHistory.size() - 1;
-        logger.info("Added  \n" + command + "\nAdded at index " + commandPointer);
-    }
-
-    /**
-     * Handle Up input
-     */
-    public void handleUpInput() {
-        // Do nothing for now
     }
 
     /**
      * Handle Down input
      */
-    public void handleDownInput() {
-        // Do nothing for now
+    public String handleDownInput() {
+        if (commandHistory.isEmpty()) {
+            return "";
+        }
+        if (commandPointer == commandHistory.size() - 1) {
+            return commandHistory.get(commandPointer);
+        }
+        commandPointer += 1;
+        return commandHistory.get(commandPointer);
+    }
+
+    /**
+     * Handle Up input
+     */
+    public String handleUpInput() {
+        if (commandHistory.isEmpty()) {
+            return "";
+        }
+        if (commandPointer == 0) {
+            return commandHistory.get(0);
+        }
+        commandPointer -= 1;
+        return commandHistory.get(commandPointer);
     }
 }

@@ -44,20 +44,6 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Handles the Up Arrow button pressed event.
-     */
-    private void handleUpKey() {
-        System.out.println("Up pressed");
-    }
-
-    /**
-     * Handles the Up Arrow button pressed event.
-     */
-    private void handleDownKey() {
-        System.out.println("Down pressed");
-    }
-
-    /**
      * Handles the Enter button pressed event.
      */
     @FXML
@@ -74,6 +60,22 @@ public class CommandBox extends UiPart<Region> {
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
+    }
+
+    /**
+     * Handles the Up Arrow button pressed event.
+     */
+    private void handleUpKey() {
+        String legacyCommand = commandBuffer.handleUpInput();
+        commandTextField.setText(legacyCommand);
+    }
+
+    /**
+     * Handles the Down Arrow button pressed event.
+     */
+    private void handleDownKey() {
+        String legacyCommand = commandBuffer.handleDownInput();
+        commandTextField.setText(legacyCommand);
     }
 
     /**
