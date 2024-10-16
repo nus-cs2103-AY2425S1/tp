@@ -31,6 +31,8 @@ public class SessionDateTest {
         assertFalse(SessionDate.isValidDate("31 Feb 2024")); // invalid month-day combination
         assertFalse(SessionDate.isValidDate("24-09-2024")); // wrong format
         assertFalse(SessionDate.isValidDate("24 September 2024")); // wrong format
+        assertFalse(SessionDate.isValidDate("Oct 24 2024")); // wrong format
+        assertFalse(SessionDate.isValidDate("2024 24 Sep")); // wrong format
 
         // valid dates
         assertTrue(SessionDate.isValidDate("24 Sep 2024")); // valid date

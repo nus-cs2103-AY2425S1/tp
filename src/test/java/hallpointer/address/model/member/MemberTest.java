@@ -104,7 +104,7 @@ public class MemberTest {
                                 new SessionDate("16 Oct 2024"), new Point(10));
         member.addSession(newSession);
         assertTrue(member.getSessions().contains(newSession));
-        assertEquals(new Point(newSession.getPoints().points), member.getTotalPoints());
+        assertEquals(newSession.getPoints(), member.getTotalPoints());
     }
 
     @Test

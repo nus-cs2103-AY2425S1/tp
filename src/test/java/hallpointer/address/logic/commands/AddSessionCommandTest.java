@@ -1,27 +1,22 @@
 package hallpointer.address.logic.commands;
 
 import static hallpointer.address.testutil.Assert.assertThrows;
-import static hallpointer.address.testutil.TypicalMembers.ALICE;
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import hallpointer.address.commons.core.GuiSettings;
-import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.model.AddressBook;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.ReadOnlyAddressBook;
 import hallpointer.address.model.ReadOnlyUserPrefs;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.session.Session;
-import hallpointer.address.testutil.MemberBuilder;
 import javafx.collections.ObservableList;
 
 class AddSessionCommandTest {

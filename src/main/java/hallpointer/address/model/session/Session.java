@@ -72,6 +72,7 @@ public class Session {
 
         Session otherSession = (Session) other;
         return sessionName.equals(otherSession.sessionName)
+                && date == otherSession.date
                 && points == otherSession.points;
     }
 
@@ -84,6 +85,7 @@ public class Session {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("sessionName", sessionName)
+                .add("date", date)
                 .add("points", points)
                 .toString();
     }
