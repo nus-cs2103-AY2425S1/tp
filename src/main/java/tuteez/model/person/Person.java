@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import tuteez.commons.util.ToStringBuilder;
+import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
 
 /**
@@ -24,17 +25,19 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Lesson> lessons = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Lesson> lessons) {
+        requireAllNonNull(name, phone, email, address, tags, lessons);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.lessons.addAll(lessons);
     }
 
     public Name getName() {
@@ -59,6 +62,14 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable lesson set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Lesson> getLessons() {
+        return Collections.unmodifiableSet(lessons);
     }
 
     /**
@@ -94,13 +105,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && lessons.equals(otherPerson.lessons);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, lessons);
     }
 
     @Override
@@ -111,6 +123,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("lessons", lessons)
                 .toString();
     }
 

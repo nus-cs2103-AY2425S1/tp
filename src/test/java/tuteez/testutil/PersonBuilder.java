@@ -8,6 +8,7 @@ import tuteez.model.person.Email;
 import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
+import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
 import tuteez.model.util.SampleDataUtil;
 
@@ -27,6 +28,8 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
 
+    private Set<Lesson> lessons;
+
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
@@ -36,6 +39,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        lessons = new HashSet<>();
     }
 
     /**
@@ -47,6 +51,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        lessons = new HashSet<>(personToCopy.getLessons());
     }
 
     /**
@@ -62,6 +67,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code lessons} into a {@code Set<Lesson>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withLessons(String ... lessons) {
+        this.lessons = SampleDataUtil.getLessonSet(lessons);
         return this;
     }
 
@@ -90,7 +103,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, tags, lessons);
     }
 
 }

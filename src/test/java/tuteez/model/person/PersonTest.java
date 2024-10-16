@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tuteez.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static tuteez.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static tuteez.logic.commands.CommandTestUtil.VALID_LESSON_DAY_AND_TME;
 import static tuteez.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static tuteez.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static tuteez.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -88,12 +89,26 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different lessons -> returns false
+        editedAlice = new PersonBuilder(ALICE).withLessons(VALID_LESSON_DAY_AND_TME).build();
+        assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void testEqualObjectsHaveEqualHashCodes() {
+        Person person1 = new PersonBuilder(ALICE).build();
+        Person person2 = new PersonBuilder(ALICE).build();
+
+        // If two objects are equal, their hashCode should be the same
+        assertEquals(person1.hashCode(), person2.hashCode());
     }
 
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
+                + ", lessons=" + ALICE.getLessons() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
