@@ -9,12 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddTaskCommand;
-import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.task.Task;
-import seedu.address.model.person.task.TaskDeadline;
-import seedu.address.model.person.task.TaskDescription;
 
 /**
  * Parses input arguments and creates a new AddTaskCommand object.
@@ -42,15 +39,11 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
         try {
             personName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_PERSON_DISPLAYED_NAME, UpdateCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_NAME, pe);
         }
 
-        TaskDescription taskDescription =
-                ParserUtil.parseTaskDescription(argMultimap.getValue(PREFIX_TASK_DESCRIPTION).get());
-        TaskDeadline taskDeadline = ParserUtil.parseTaskDeadline(argMultimap.getValue(PREFIX_TASK_DEADLINE).get());
-
-        Task task = new Task(taskDescription, taskDeadline);
+        Task task = ParserUtil.parseTask(argMultimap.getValue(PREFIX_TASK_DESCRIPTION).get(),
+                argMultimap.getValue(PREFIX_TASK_DEADLINE).get());
 
         return new AddTaskCommand(personName, task);
     }
