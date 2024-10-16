@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.group;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBERS;
 
 import java.util.List;
 
@@ -22,8 +24,10 @@ public class CreateGroupCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new group of specified name, with"
             + "the specified persons (referenced by index of current list) inside.\n"
-            + "Parameters: GROUP_NAME /m [INDICES]...\n"
-            + "Example: " + COMMAND_WORD + "blood drive /m 1 4 6";
+            + "Parameters: "
+            + PREFIX_GROUP_NAME + "GROUP_NAME "
+            + PREFIX_MEMBERS + " INDEX [MORE_INDICES...]\n"
+            + "Example: " + COMMAND_WORD + "g/blood drive m/ 1 4 6";
 
     public static final String MESSAGE_CREATE_GROUP_SUCCESS = "Created group %s\n";
 
