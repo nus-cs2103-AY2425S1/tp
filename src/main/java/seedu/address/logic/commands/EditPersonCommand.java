@@ -71,13 +71,14 @@ public class EditPersonCommand extends EditCommand {
         EditPersonDescriptor editPersonDescriptorCasted = (EditPersonDescriptor) editPersonDescriptor;
         Person personToEditCasted = (Person) personToEdit;
 
+        int personId = personToEditCasted.getPersonId();
         Name updatedName = editPersonDescriptorCasted.getName().orElse(personToEditCasted.getName());
         Phone updatedPhone = editPersonDescriptorCasted.getPhone().orElse(personToEditCasted.getPhone());
         Email updatedEmail = editPersonDescriptorCasted.getEmail().orElse(personToEditCasted.getEmail());
         Address updatedAddress = editPersonDescriptorCasted.getAddress().orElse(personToEditCasted.getAddress());
         Set<Tag> updatedTags = editPersonDescriptorCasted.getTags().orElse(personToEditCasted.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, personId);
     }
 
     @Override
