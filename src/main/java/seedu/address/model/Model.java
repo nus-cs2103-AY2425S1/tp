@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * The API of the Model component.
@@ -84,4 +85,29 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Adds a tag to the tag list.
+     *
+     * @param tag The tag to be added.
+     * @return true if the tag was successfully added, false if the tag already exists.
+     */
+    boolean addTag(Tag tag);
+
+    /**
+     * Checks if a tag exists in the tag list.
+     *
+     * @param tag The tag to check for existence.
+     * @return true if the tag exists, false otherwise.
+     */
+    boolean hasTag(Tag tag);
+
+    /**
+     * Returns the String representation of the
+     * tag list managed by this model.
+     *
+     * @return The {@code TagList} instance.
+     */
+    String getTagList();
+
 }

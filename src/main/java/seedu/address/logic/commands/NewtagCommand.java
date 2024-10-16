@@ -13,7 +13,8 @@ public class NewtagCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new tag.\n"
             + "Parameters: TAG_NAME (MAX 50 alphanumeric characters)\n"
             + "Example: " + COMMAND_WORD + " Bride's Friend";
-
+    public static final String MESSAGE_SUCCESS = "New tag added: ";
+    public static final String MESSAGE_DUPLICATE = "This tag already exists.\n";
     private final Tag tag;
 
     /**
@@ -26,6 +27,13 @@ public class NewtagCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult("Valid newtag Command Received: " + tag);
+        requireAllNonNull(model);
+        boolean isSucessful = model.addTag(tag);
+        if (!isSucessful) {
+            return new CommandResult(MESSAGE_DUPLICATE);
+        }
+        String successMessage = MESSAGE_SUCCESS + " " + tag + "\n";
+        String currentTags = "Your tags: " + model.getTagList();
+        return new CommandResult(successMessage + currentTags);
     }
 }

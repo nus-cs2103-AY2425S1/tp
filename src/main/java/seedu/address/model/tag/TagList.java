@@ -29,7 +29,6 @@ public class TagList {
     public boolean contains(Tag tag) {
         return tags.contains(tag);
     }
-
     @Override
     public String toString() {
         return String.join(", ", tags.stream().map(Tag::getTagName).toList());
