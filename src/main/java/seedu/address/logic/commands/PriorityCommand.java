@@ -14,9 +14,12 @@ public class PriorityCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the priority level for a patient identified by "
             + "the index number used in the displayed person list.\n"
             + "Parameters: id INDEX (must be a positive integer) /level LEVEL (must be 1, 2, or 3)\n"
+            + "Parameters: deletelevel INDEX or INDEX /level LEVEL\n"
+            + "Example: priority deletelevel 1\n"
             + "Example: " + COMMAND_WORD + " /id 1 /level 2";
     private final int index;
     private final int priorityLevel;
+    private final boolean isReset;
 
     /**
      * Constructs a new {@code PriorityCommand} with the specified index and priority level.
@@ -25,9 +28,10 @@ public class PriorityCommand extends Command {
      * @param priorityLevel the priority level to be assigned to the person.
      *                      This should be a valid priority level as per the application's standards.
      */
-    public PriorityCommand(int index, int priorityLevel) {
+    public PriorityCommand(int index, int priorityLevel, boolean isReset) {
         this.index = index;
         this.priorityLevel = priorityLevel;
+        this.isReset = isReset;
     }
 
     /**
@@ -48,10 +52,11 @@ public class PriorityCommand extends Command {
                     personToEdit.getAddress(),
                     personToEdit.getEmergencyContact(),
                     personToEdit.getTags(),
-                    new PriorityLevel(priorityLevel));
+                    new PriorityLevel(isReset ? 3 : priorityLevel));
 
             model.setPerson(personToEdit, editedPerson);
             return new CommandResult(String.format("Priority level %d successfully set for %s", priorityLevel,
+                    isReset ? "reset to default" : "set",
                     editedPerson.getName()));
         } catch (IndexOutOfBoundsException e) {
             throw new CommandException("Invalid patient ID. Please enter a valid patient identifier.");
@@ -75,6 +80,6 @@ public class PriorityCommand extends Command {
             return false;
         }
         PriorityCommand that = (PriorityCommand) other;
-        return index == that.index && priorityLevel == that.priorityLevel;
+        return index == that.index && priorityLevel == that.priorityLevel && isReset == that.isReset;
     }
 }
