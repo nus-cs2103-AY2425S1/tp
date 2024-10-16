@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NameMatchesNamePredicate;
 
 /**
  * View the person in address book whose name matches the keyword.
@@ -20,9 +20,9 @@ public class ViewCommand extends Command {
             + "Parameters: NAME\n"
             + "Example: " + COMMAND_WORD + " alice";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final NameMatchesNamePredicate predicate;
 
-    public ViewCommand(NameContainsKeywordsPredicate predicate) {
+    public ViewCommand(NameMatchesNamePredicate predicate) {
         this.predicate = predicate;
     }
 

@@ -26,7 +26,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/shernicesng.png" width="200px">
 
-[[github](http://github.com/shernicesng)] 
+[[github](http://github.com/shernicesng)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
