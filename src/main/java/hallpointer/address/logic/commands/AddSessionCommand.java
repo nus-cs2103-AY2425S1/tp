@@ -1,13 +1,19 @@
 package hallpointer.address.logic.commands;
 
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static hallpointer.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_POINTS;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
+import static hallpointer.address.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
+import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.commons.util.ToStringBuilder;
 import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.model.Model;
+import hallpointer.address.model.member.Member;
 import hallpointer.address.model.session.Session;
 
 /**
@@ -21,21 +27,29 @@ public class AddSessionCommand extends Command {
             + PREFIX_SESSION_NAME + "NAME "
             + PREFIX_DATE + "DATE "
             + PREFIX_POINTS + "POINTS "
+            + "[" + PREFIX_MEMBER + "INDEX]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SESSION_NAME + "Rehearsal "
-            + PREFIX_DATE + "2024-09-19 "
-            + PREFIX_POINTS + "2";
+            + PREFIX_DATE + "24 Oct 2024 "
+            + PREFIX_POINTS + "2 "
+            + PREFIX_MEMBER + "1";
 
-    public static final String MESSAGE_SUCCESS = "Session %1$s on %2$s for %3$d points added successfully.";
+    public static final String MESSAGE_SUCCESS = "Session %1$s on %2$s for %3$d points "
+            + "added successfully with %4$d member attending.";
     public static final String MESSAGE_DUPLICATE_SESSION = "Error: Session already exists.";
+    public static final String MESSAGE_INVALID_INDEX = "Error: Invalid index specified.";
+
     private final Session toAdd;
+    private final List<Index> memberIndexes;
 
     /**
      * Creates an AddSessionCommand to add the specified {@code Session}
      */
-    public AddSessionCommand(Session session) {
+    public AddSessionCommand(Session session, List<Index> memberIndexes) {
         requireNonNull(session);
+        requireNonNull(memberIndexes);
         toAdd = session;
+        this.memberIndexes = memberIndexes;
     }
 
     @Override
@@ -46,9 +60,23 @@ public class AddSessionCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_SESSION);
         }
 
-        model.addSession(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getSessionName(),
-                toAdd.getDate(), toAdd.getPoints()));
+        List<Member> lastShownList = model.getFilteredMemberList();
+
+        for (Index index : memberIndexes) {
+            if (index.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(MESSAGE_INVALID_INDEX);
+            }
+            Member member = lastShownList.get(index.getZeroBased());
+            member.addSession(toAdd);
+        }
+
+        model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                toAdd.getSessionName().toString(),
+                toAdd.getDate().toString(),
+                toAdd.getPoints().getValue(),
+                memberIndexes.size()));
     }
 
     @Override

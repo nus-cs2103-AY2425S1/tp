@@ -60,6 +60,8 @@ public class UpdateMemberDescriptorTest {
             + ", telegram=" + updateMemberDescriptor.getTelegram().orElse(null)
             + ", room=" + updateMemberDescriptor.getRoom().orElse(null)
             + ", tags=" + updateMemberDescriptor.getTags().orElse(null)
+            + ", totalPoints=" + updateMemberDescriptor.getTotalPoints().orElse(null)
+            + ", sessions=" + updateMemberDescriptor.getSessions().orElse(null)
             + "}";
         assertEquals(expected, updateMemberDescriptor.toString());
     }

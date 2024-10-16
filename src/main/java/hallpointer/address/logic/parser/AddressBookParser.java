@@ -14,12 +14,12 @@ import hallpointer.address.logic.commands.ClearCommand;
 import hallpointer.address.logic.commands.Command;
 import hallpointer.address.logic.commands.DeleteMemberCommand;
 import hallpointer.address.logic.commands.DeleteSessionCommand;
-import hallpointer.address.logic.commands.UpdateSessionCommand;
 import hallpointer.address.logic.commands.ExitCommand;
 import hallpointer.address.logic.commands.FindMemberCommand;
 import hallpointer.address.logic.commands.HelpCommand;
 import hallpointer.address.logic.commands.ListMembersCommand;
 import hallpointer.address.logic.commands.UpdateMemberCommand;
+import hallpointer.address.logic.commands.UpdateSessionCommand;
 import hallpointer.address.logic.parser.exceptions.ParseException;
 
 /**
