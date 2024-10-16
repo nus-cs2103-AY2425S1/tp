@@ -9,8 +9,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMERGENCY_CONTA
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -32,7 +35,37 @@ public class EmergencyContactCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_addRemarkUnfilteredList_success() {
+    public void execute_addEmergencyContactUnfilteredList_success() {
+        Person thirdPerson = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(thirdPerson).withEmergencyContact(EMERGENCY_CONTACT_NAME_STUB,
+                EMERGENCY_CONTACT_NUMBER_STUB).build();
+        EmergencyContactCommand emergencyContactCommand = new EmergencyContactCommand(INDEX_THIRD_PERSON,
+                new EmergencyContact(editedPerson.getEmergencyContact().contactName,
+                        editedPerson.getEmergencyContact().contactNumber));
+        String expectedMessage = String.format(EmergencyContactCommand.MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS,
+                editedPerson);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(thirdPerson, editedPerson);
+        assertCommandSuccess(emergencyContactCommand, model, expectedMessage, expectedModel);
+    }
+    @Test
+    public void execute_deleteEmergencyContactUnfilteredList_success() {
+        // TODO To edit after implementing delete emergency contact function
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(firstPerson).withEmergencyContact("",
+                "").build();
+        EmergencyContactCommand emergencyContactCommand = new EmergencyContactCommand(INDEX_THIRD_PERSON,
+                new EmergencyContact(editedPerson.getEmergencyContact().contactName,
+                        editedPerson.getEmergencyContact().contactNumber));
+        String expectedMessage = String.format(EmergencyContactCommand.MESSAGE_DELETE_EMERGENCY_CONTACT_SUCCESS,
+                editedPerson);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+        assertCommandSuccess(emergencyContactCommand, model, expectedMessage, expectedModel);
+    }
+    @Test
+    public void execute_filteredList_success() {
+        showPersonAtIndex(model, INDEX_THIRD_PERSON);
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withEmergencyContact(EMERGENCY_CONTACT_NAME_STUB,
                 EMERGENCY_CONTACT_NUMBER_STUB).build();
@@ -45,35 +78,37 @@ public class EmergencyContactCommandTest {
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(emergencyContactCommand, model, expectedMessage, expectedModel);
     }
+
     @Test
-    public void execute_deleteRemarkUnfilteredList_success() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withEmergencyContact("",
-                "").build();
-        EmergencyContactCommand emergencyContactCommand = new EmergencyContactCommand(INDEX_FIRST_PERSON,
-                new EmergencyContact(editedPerson.getEmergencyContact().contactName,
-                        editedPerson.getEmergencyContact().contactNumber));
-        String expectedMessage = String.format(EmergencyContactCommand.MESSAGE_DELETE_EMERGENCY_CONTACT_SUCCESS,
-                editedPerson);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, editedPerson);
-        assertCommandSuccess(emergencyContactCommand, model, expectedMessage, expectedModel);
-    }
-    @Test
-    public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
-                .withEmergencyContact(EMERGENCY_CONTACT_NAME_STUB, EMERGENCY_CONTACT_NUMBER_STUB).build();
-        EmergencyContactCommand emergencyContactCommand = new EmergencyContactCommand(INDEX_FIRST_PERSON,
+    public void execute_overrideEmergencyContactWithOnlyNameUnfilteredList_success() {
+        Person fourthPerson = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(fourthPerson).withEmergencyContact(EMERGENCY_CONTACT_NAME_STUB,
+                EMERGENCY_CONTACT_NUMBER_STUB).build();
+        EmergencyContactCommand emergencyContactCommand = new EmergencyContactCommand(INDEX_FOURTH_PERSON,
                 new EmergencyContact(editedPerson.getEmergencyContact().contactName,
                         editedPerson.getEmergencyContact().contactNumber));
         String expectedMessage = String.format(EmergencyContactCommand.MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS,
                 editedPerson);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, editedPerson);
+        expectedModel.setPerson(fourthPerson, editedPerson);
         assertCommandSuccess(emergencyContactCommand, model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void execute_overrideEmergencyContactWithOnlyNumberUnfilteredList_success() {
+        Person fifthPerson = model.getFilteredPersonList().get(INDEX_FIFTH_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(fifthPerson).withEmergencyContact(EMERGENCY_CONTACT_NAME_STUB,
+                EMERGENCY_CONTACT_NUMBER_STUB).build();
+        EmergencyContactCommand emergencyContactCommand = new EmergencyContactCommand(INDEX_FIFTH_PERSON,
+                new EmergencyContact(editedPerson.getEmergencyContact().contactName,
+                        editedPerson.getEmergencyContact().contactNumber));
+        String expectedMessage = String.format(EmergencyContactCommand.MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS,
+                editedPerson);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(fifthPerson, editedPerson);
+        assertCommandSuccess(emergencyContactCommand, model, expectedMessage, expectedModel);
+    }
+
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
@@ -81,10 +116,19 @@ public class EmergencyContactCommandTest {
                 new EmergencyContact(VALID_EMERGENCY_CONTACT_NAME_BOB, VALID_EMERGENCY_CONTACT_NUMBER_BOB));
         assertCommandFailure(emergencyContactCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
-    /**
-     * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
-     */
+
+    @Test
+    public void execute_overrideEmergencyContactUnfilteredList_failure() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(firstPerson).build();
+        EmergencyContactCommand emergencyContactCommand = new EmergencyContactCommand(INDEX_FIRST_PERSON,
+                new EmergencyContact(editedPerson.getEmergencyContact().contactName,
+                        editedPerson.getEmergencyContact().contactNumber));
+        String expectedMessage = String.format(EmergencyContactCommand.MESSAGE_EMERGENCY_CONTACT_EXISTS,
+                editedPerson);
+        assertCommandFailure(emergencyContactCommand, model, expectedMessage);
+    }
+
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
