@@ -1,4 +1,4 @@
-package seedu.address.model.goods;
+package seedu.address.model.goodsReceipt;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
