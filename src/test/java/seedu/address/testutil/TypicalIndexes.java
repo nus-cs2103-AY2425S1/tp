@@ -12,4 +12,5 @@ public class TypicalIndexes {
 
     public static final Index INDEX_FIRST_COMPANY = Index.fromOneBased(1);
 
+    public static final Index INDEX_OUT_OF_BOUNDS = Index.fromOneBased(100);
 }

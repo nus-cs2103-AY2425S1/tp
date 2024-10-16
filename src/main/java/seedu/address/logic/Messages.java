@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.company.Company;
 import seedu.address.model.job.Job;
 import seedu.address.model.person.Person;
 
@@ -73,5 +74,21 @@ public class Messages {
                 .append(job.getDescription());
         return builder.toString();
     }
+
+    /**
+     * Formats the {@code company} for display to the user.
+     */
+    public static String format(Company company) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(company.getName())
+                .append("; Phone: ")
+                .append(company.getPhone())
+                .append("; Address: ")
+                .append(company.getAddress())
+                .append("; Billing Date: ")
+                .append(company.getBillingDate());
+        return builder.toString();
+    }
+
 
 }
