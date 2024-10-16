@@ -143,9 +143,28 @@ Examples:
 * `fp 98765432` returns every contact that has phone number `98765432`
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+
+### Locating persons by address `fa`
+
+Finds persons whose address matches any part of the given keyword(s).
+
+Format `fa KEYWORD(s)`
+
+* The search is case-insensitive. e.g `tampines` will match `Tampines`
+* The order of the keywords does not matter. e.g. `Street 45` will match `45 Street`
+* Only the address of the contact is searched.
+* Persons with address with any matching substring to the keyword will be returned.
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+
+Examples:
+* `fa Blk` returns `Blk 45` and `Blk 35`
+* `fa blk street` returns `Tampines Street 1` and `Blk 35 Ang Mo Kio`
+* `fa tampines` returns `Blk 47 Tampines Street 20`
+  ![result for 'fa tampines`](images/findTampines.png)
+
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from ClientHub.
 
 Format: `delete INDEX`
 
@@ -154,12 +173,12 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in ClientHub.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from ClientHub.
 
 Format: `clear`
 
@@ -171,11 +190,11 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ClientHub data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ClientHub data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -204,13 +223,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action                | Format, Examples                                                                                                                                                            |
-|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CLIENT_TYPE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/Plan A c/Plan A`  | 
-| **Clear**             | `clear`                                                                                                                                                                     |
-| **Delete**            | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                         |
-| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLIENT_TYPE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                         | 
-| **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                  |
-| **Find Phone Number** | `fp KEYWORD`                                                                                                                                                                |
-| **List**              | `list`                                                                                                                                                                      |
-| **Help**              | `help`                                                                                                                                                                      |
+| Action                | Format, Examples                                                                                                                                                           |
+|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CLIENT_TYPE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/Plan A c/Plan A` | 
+| **Clear**             | `clear`                                                                                                                                                                    |
+| **Delete**            | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                        |
+| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLIENT_TYPE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        | 
+| **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                 |
+| **Find Phone Number** | `fp KEYWORD`                                                                                                                                                               |
+| **Find Address**      | `fa KEYWORD(s)`                                                                                                                                                             |
+| **List**              | `list`                                                                                                                                                                     |
+| **Help**              | `help`                                                                                                                                                                     |
