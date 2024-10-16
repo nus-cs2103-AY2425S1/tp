@@ -105,11 +105,9 @@ public class Claim {
      * @return A string representation of the claim, including its status, ID, and amount.
      */
     @Override
-    public String toString() {
-        if (this.isOpen) {
-            return "[open] " + this.claimId + " " + Messages.formatClaimAmount(this.claimAmount);
-        } else {
-            return "[closed] " + this.claimId + " " + Messages.formatClaimAmount(this.claimAmount);
+    public String toString() { String status = "open";
+        if (!this.isOpen) {
+            status = "closed";
         }
-    }
+        return "[" + status + "] " + this.claimId + " " + Messages.formatClaimAmount(this.claimAmount); }
 }
