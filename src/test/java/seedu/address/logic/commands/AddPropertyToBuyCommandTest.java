@@ -30,7 +30,7 @@ public class AddPropertyToBuyCommandTest {
 
         CommandResult result = command.execute(model);
 
-        assertEquals(AddPropertyToBuyCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
+        assertEquals(String.format(AddPropertyToBuyCommand.MESSAGE_SUCCESS, property), result.getFeedbackToUser());
     }
 
     @Test
