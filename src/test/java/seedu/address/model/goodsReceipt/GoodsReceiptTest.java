@@ -1,12 +1,15 @@
 package seedu.address.model.goodsReceipt;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.goods.Goods;
 import seedu.address.model.goods.GoodsCategories;
 import seedu.address.model.goods.GoodsName;
 import seedu.address.model.person.Name;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class GoodsReceiptTest {
 
@@ -40,7 +43,7 @@ public class GoodsReceiptTest {
     @Test
     public void getGoods_success() {
         Goods goods = new Goods(new GoodsName("Milk Bread"), GoodsCategories.CONSUMABLES);
-        GoodsReceipt goodsReceipt =  new GoodsReceipt(
+        GoodsReceipt goodsReceipt = new GoodsReceipt(
                 goods,
                 new Name("Alex Yeoh"), new Date(DATETIME_VALID),
                 new Date(DATETIME_VALID), false, 1, 5.22);
@@ -51,7 +54,7 @@ public class GoodsReceiptTest {
     @Test
     public void unmarkedGoodsReceipt_markAsDelivered_returnsMarkedReceipt() {
         Goods goods = new Goods(new GoodsName("Milk Bread"), GoodsCategories.CONSUMABLES);
-        GoodsReceipt goodsReceipt =  new GoodsReceipt(
+        GoodsReceipt goodsReceipt = new GoodsReceipt(
                 goods, new Name("Alex Yeoh"), new Date(DATETIME_VALID),
                 new Date(DATETIME_VALID), false, 1, 5.22);
 
