@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContactName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RegisterNumber;
@@ -31,6 +32,8 @@ public class ParserUtilTest {
     private static final String INVALID_REGISTER_NUMBER = "41";
     private static final String INVALID_SEX = "H";
     private static final String INVALID_STUDENT_CLASS = "A1";
+    private static final String INVALID_EMERGENCY_CONTACT_NAME = "--";
+
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -40,6 +43,7 @@ public class ParserUtilTest {
     private static final String VALID_REGISTER_NUMBER = "1";
     private static final String VALID_SEX = "F";
     private static final String VALID_STUDENT_CLASS = "1A";
+    private static final String VALID_EMERGENCY_CONTACT_NAME = "Joe Walker";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -224,6 +228,24 @@ public class ParserUtilTest {
         String studentClassWithWhitespace = WHITESPACE + VALID_STUDENT_CLASS + WHITESPACE;
         StudentClass expectedStudentClass = new StudentClass(VALID_STUDENT_CLASS);
         assertEquals(expectedStudentClass, ParserUtil.parseStudentClass(studentClassWithWhitespace));
+    }
+
+    @Test
+    public void parseEmergencyContactName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmergencyContactName(INVALID_EMERGENCY_CONTACT_NAME));
+    }
+
+    @Test
+    public void parseEmergencyContactName_validValueWithoutWhitespace_returnsEcName() throws Exception {
+        EmergencyContactName expectedEcName = new EmergencyContactName(VALID_EMERGENCY_CONTACT_NAME);
+        assertEquals(expectedEcName, ParserUtil.parseEmergencyContactName(VALID_EMERGENCY_CONTACT_NAME));
+    }
+
+    @Test
+    public void parseEmergencyContactName_validValueWithWhitespace_returnsTrimmedEcName() throws Exception {
+        String eCNameWithWhitespace = WHITESPACE + VALID_EMERGENCY_CONTACT_NAME + WHITESPACE;
+        EmergencyContactName expectedEcName = new EmergencyContactName(VALID_EMERGENCY_CONTACT_NAME);
+        assertEquals(expectedEcName, ParserUtil.parseEmergencyContactName(eCNameWithWhitespace));
     }
 
     @Test
