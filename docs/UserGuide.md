@@ -86,6 +86,12 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
 **Tip:** A person can have any number of tags (including 0)
 </box>
 
+<box type="warning" seamless>
+
+**Duplicate Handling:**
+A person is considered a duplicate if another person in the address book has the same email address. The app will prevent adding contacts with duplicate emails. 
+</box>
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
