@@ -22,6 +22,18 @@ public class FilterCommandParserTest {
     }
 
     @Test
+    public void parse_missingTagPrefix_throwsParseException() {
+        assertParseFailure(parser, "friends family", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FilterCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_justPrefix_throwsParseException() {
+        assertParseFailure(parser, "t/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FilterCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_validArgs_returnsFilterCommand() {
         // no leading and trailing whitespaces
         FilterCommand expectedFilterCommand =

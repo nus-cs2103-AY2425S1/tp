@@ -27,13 +27,13 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-        // Extract the string value from the Prefix object
         String[] tagKeywords = Arrays.stream(trimmedArgs.split("\\s+"))
                 .filter(arg -> arg.startsWith(TAG_PREFIX.getPrefix()))
                 .map(arg -> arg.substring(TAG_PREFIX.getPrefix().length()))
                 .toArray(String[]::new);
 
-        if (tagKeywords.length == 0) {
+        // Check if keywords are empty
+        if (tagKeywords.length == 0 || Arrays.stream(tagKeywords).anyMatch(String::isEmpty)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
