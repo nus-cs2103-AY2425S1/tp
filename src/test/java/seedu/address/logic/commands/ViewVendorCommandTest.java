@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showVendorAtIndex;
-import static seedu.address.testutil.TypicalEvents.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_VENDOR;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_VENDOR;
+import static seedu.address.testutil.TypicalVendors.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -52,7 +52,7 @@ public class ViewVendorCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_VENDOR;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getEventList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getVendorList().size());
 
         ViewVendorCommand viewCommand = new ViewVendorCommand(outOfBoundIndex);
 

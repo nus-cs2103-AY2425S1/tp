@@ -56,9 +56,6 @@ public class TypicalEvents {
         for (Event event : getTypicalEvents()) {
             ab.addEvent(event);
         }
-        for (Vendor vendor: getTypicalVendors()) {
-            ab.addVendor(vendor);
-        }
         return ab;
     }
 
