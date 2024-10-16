@@ -119,10 +119,10 @@ Finds contacts whose names or/and phone numbers or/and address contain any of th
 
 Format: `find n/NAMEKEYWORDS p/PHONEKEYWORDS a/ADDRESSKEYWORDS`
 
+**NOTE:** At least one field MUST be specified  
+  e.g. `find n/Hans` or `find p/12345678` or `find a/wall street` will work  
+  e.g. `find Hans` or `find wall street` or `find` will fail
 * The search is case-insensitive. e.g `hans` will match `Hans` or `wall Street` will match `Wall Street`
-* At least one field MUST be specified  
-   e.g. `find n/Hans` or `find p/12345678` or `find a/wall street` will work  
-   e.g. `find Hans` or `find wall street` or `find` will fail
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Partial words will be matched e.g. `Han` will match `Hans`
 * Contacts matching at least one keyword will be returned (i.e. `OR` search).
