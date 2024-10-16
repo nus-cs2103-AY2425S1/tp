@@ -56,8 +56,7 @@ public class Messages {
      */
     public static String format(Transaction transaction) {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Description: ")
-                .append(transaction.getDescription())
+        builder.append(transaction.getDescription())
                 .append("; Amount: ")
                 .append(transaction.getAmount())
                 .append("; Other party: ")

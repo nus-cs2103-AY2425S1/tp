@@ -36,7 +36,7 @@ public class AddTransactionCommand extends Command {
             + PREFIX_OTHER_PARTY + "Company XYZ "
             + PREFIX_DATE + "10-10-2024";
 
-    public static final String MESSAGE_ADD_TRANSACTION_SUCCESS = "Added new transaction %1$s\n to%2$s";
+    public static final String MESSAGE_ADD_TRANSACTION_SUCCESS = "Added new transaction %1$s\nto %2$s";
 
     private final Index index;
     private final Transaction toAdd;
