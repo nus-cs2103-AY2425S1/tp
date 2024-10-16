@@ -27,21 +27,8 @@ public class AssignCommandParser implements Parser<AssignCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
         }
 
-        // Parse vendor index using the Index class
-        Index vendorIndex;
-        try {
-            vendorIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_VENDOR).get());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE), pe);
-        }
-
-        // Parse event index using the Index class
-        Index eventIndex;
-        try {
-            eventIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_EVENT).get());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE), pe);
-        }
+        Index vendorIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_VENDOR).get());
+        Index eventIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_EVENT).get());
 
         return new AssignCommand(vendorIndex, eventIndex);
     }

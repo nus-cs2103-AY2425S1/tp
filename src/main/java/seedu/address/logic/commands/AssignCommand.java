@@ -79,8 +79,8 @@ public class AssignCommand extends Command {
 
         return new CommandResult(
                 String.format(MESSAGE_ASSIGN_SUCCESS,
-                vendorIndex.getOneBased(),
-                eventIndex.getOneBased()));
+                        vendorIndex.getOneBased(),
+                        eventIndex.getOneBased()));
     }
 }
 

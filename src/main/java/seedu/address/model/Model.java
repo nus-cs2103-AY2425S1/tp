@@ -100,7 +100,7 @@ public interface Model {
     boolean isVendorAssignedToEvent(Vendor vendor, Event event);
 
     /**
-     * Assigns the vendor corresponding to the id to the event specified by its id.
+     * Assigns the given vendor to the given event.
      */
     void assignVendorToEvent(Vendor vendor, Event event);
 
