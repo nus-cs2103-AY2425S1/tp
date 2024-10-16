@@ -23,8 +23,8 @@ public class CommandBuffer {
             return;
         }
         commandHistory.add(command);
-        logger.info("Added:  " + command);
         commandPointer = commandHistory.size() - 1;
+        logger.info("Added  \n" + command + "\nAdded at index " + commandPointer);
     }
 
     /**

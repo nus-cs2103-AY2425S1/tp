@@ -18,6 +18,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private CommandBuffer commandBuffer;
 
     @FXML
     private TextField commandTextField;
@@ -28,6 +29,7 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
+        this.commandBuffer = new CommandBuffer();
         // create a listener for the up and down key events
         commandTextField.setOnKeyPressed(event -> {
             setStyleToDefault();
@@ -66,6 +68,7 @@ public class CommandBox extends UiPart<Region> {
         }
 
         try {
+            commandBuffer.addCommand(commandText);
             commandExecutor.execute(commandText);
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
