@@ -7,9 +7,11 @@ import static tuteez.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static tuteez.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static tuteez.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static tuteez.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static tuteez.logic.commands.CommandTestUtil.INVALID_LESSON_DESC;
 import static tuteez.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static tuteez.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static tuteez.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static tuteez.logic.commands.CommandTestUtil.LESSON_DESC_MON;
 import static tuteez.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static tuteez.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static tuteez.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
@@ -17,6 +19,7 @@ import static tuteez.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static tuteez.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static tuteez.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static tuteez.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static tuteez.logic.commands.CommandTestUtil.VALID_LESSON_DAY_AND_TME;
 import static tuteez.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static tuteez.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static tuteez.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -24,6 +27,7 @@ import static tuteez.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static tuteez.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tuteez.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
 import static tuteez.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
 import static tuteez.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -48,6 +52,8 @@ import tuteez.testutil.EditPersonDescriptorBuilder;
 public class EditCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
+
+    private static final String LESSON_EMPTY = " " + PREFIX_LESSON;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -107,11 +113,11 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND + LESSON_DESC_MON;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withLessons(VALID_LESSON_DAY_AND_TME).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -161,6 +167,12 @@ public class EditCommandParserTest {
         descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
+
+        // lessons
+        userInput = targetIndex.getOneBased() + LESSON_DESC_MON;
+        descriptor = new EditPersonDescriptorBuilder().withLessons(VALID_LESSON_DAY_AND_TME).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
@@ -189,7 +201,7 @@ public class EditCommandParserTest {
 
         // multiple invalid values
         userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
-                + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC;
+                + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC + INVALID_LESSON_DESC;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
@@ -201,6 +213,17 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_resetLessons_success() {
+        Index targetIndex = INDEX_THIRD_PERSON;
+        String userInput = targetIndex.getOneBased() + LESSON_EMPTY;
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withLessons().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
