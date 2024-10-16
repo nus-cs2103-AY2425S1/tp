@@ -129,6 +129,22 @@ Format: `appointment-delete NAME`
 Examples:
 * `appointment-delete John Doe`
 
+### Viewing upcoming appointments: `appointment-list`
+
+Lists all upcoming appointments 
+
+Format: `appointment-list [DATE_AND_TIME]`
+
+* By default this will only show appointments that are in the future (compared to local time now).
+* The optional date and time fields act as filters.
+* A time filter cannot be applied without date filter.
+* Format for the date and time must be in yyyy-MM-dd HHmm.
+
+Examples:
+* `appointment-list`
+* `appointment-list 2024-10-17`
+* `appointment-list 2024-10-18 1000`
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
@@ -243,5 +259,6 @@ Action | Format, Examples
 **Reminder** | `reminder NAME r/REMINDER_TIME`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find [KEYWORD] [MORE_KEYWORDS] / [p/PHONE]`<br> e.g., `find James Jake` `find 8357 2348`
+**Appointment List** | `appointment-list [DATE_AND_TIME]` <br> e.g., `appointment-list 2024-10-20 1100`
 **List** | `list`
 **Help** | `help`
