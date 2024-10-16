@@ -85,17 +85,6 @@ public class EditClientCommandParserTest {
                 Name.MESSAGE_CONSTRAINTS);
     }
 
-//    @Test
-//    public void parse_emptyPhoneEmail_failure() {
-//        Index targetIndex = INDEX_FIRST_PERSON;
-//        String userInput = targetIndex.getOneBased() + PHONE_DESC_EMPTY + EMAIL_DESC_EMPTY;
-//        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_EMPTY_PHONE)
-//                .withEmail(VALID_EMPTY_EMAIL).build();
-//        EditClientCommand expectedCommand = new EditClientCommand(targetIndex, descriptor);
-//
-//        assertParseFailure(parser, userInput, expectedCommand.MESSAGE_EMPTY_PHONE_EMAIL);
-//    }
-
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;

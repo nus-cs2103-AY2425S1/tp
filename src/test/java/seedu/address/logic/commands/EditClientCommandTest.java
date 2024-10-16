@@ -125,6 +125,18 @@ public class EditClientCommandTest {
     }
 
     @Test
+    public void execute_emptyEmailPhone_failure() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withName(VALID_NAME_BOB).withPhone("").withEmail("").build();
+        EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder(descriptor).build());
+
+        assertCommandFailure(editClientCommand, model, EditClientCommand.MESSAGE_EMPTY_PHONE_EMAIL);
+    }
+
+    @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
