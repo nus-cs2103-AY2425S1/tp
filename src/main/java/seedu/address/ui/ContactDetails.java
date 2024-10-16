@@ -99,10 +99,6 @@ public class ContactDetails extends UiPart<Region> {
                             notesList.getChildren().add(label);
                         });
             }
-
-
-
         }
     }
-
 }
