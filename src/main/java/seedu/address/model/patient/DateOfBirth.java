@@ -23,6 +23,8 @@ public class DateOfBirth {
 
     public final LocalDate date;
 
+    public final String value;
+
     /**
      * Constructs a {@code DateOfBirth}.
      *
@@ -33,6 +35,7 @@ public class DateOfBirth {
         checkArgument(isValidDate(input), MESSAGE_CONSTRAINTS);
 
         date = LocalDate.parse(input, FORMATTER);
+        value = input;
     }
 
     /**

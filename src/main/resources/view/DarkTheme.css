@@ -132,6 +132,13 @@
     -fx-text-fill: #010504;
 }
 
+.cell_patient_flag_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #010504;
+    -fx-background-color: #f75c5c;
+}
+
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }
