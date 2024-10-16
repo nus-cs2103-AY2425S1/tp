@@ -222,15 +222,6 @@ public class EditCommand extends Command {
             this.tutorials = (tutorials != null) ? new HashSet<>(tutorials) : null;
         }
 
-        /**
-         * Returns an unmodifiable tutorial set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tutorials} is null.
-         */
-        public Optional<Set<Tutorial>> getTutorials() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tutorials)) : Optional.empty();
-        }
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -258,7 +249,6 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("tags", tags)
-                    .add("tutorials", tutorials)
                     .toString();
         }
     }
