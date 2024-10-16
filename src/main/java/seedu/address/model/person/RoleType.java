@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Represents types of role that a person can take.
  * @see #STUDENT
@@ -35,5 +37,16 @@ public enum RoleType {
         public String toString() {
             return "Professor";
         }
+    };
+
+    /**
+     * Returns true if the given role type String keyword is valid.
+     *
+     * @param keyword role type keyword
+     * @return whether the keyword is valid
+     */
+    public static boolean isValidRoleTypeKeyword(String keyword) {
+        requireNonNull(keyword);
+        return keyword.toLowerCase().matches(ModuleRoleMap.VALIDATION_REGEX);
     }
 }

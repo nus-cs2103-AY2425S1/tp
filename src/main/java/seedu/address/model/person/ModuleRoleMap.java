@@ -66,46 +66,6 @@ public class ModuleRoleMap {
     }
 
     /**
-     * Returns true if the given role type String array contains all
-     * valid role type keywords.
-     *
-     * @param roleTypes Array of role type keywords
-     * @return whether the array contains all valid keywords
-     */
-    public static boolean areValidRoleTypeKeywords(String[] roleTypes) {
-        requireNonNull(roleTypes);
-        for (String keyword: roleTypes) {
-            if (!keyword.toLowerCase().matches(VALIDATION_REGEX)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Converts a given role type keyword to its corresponding RoleType Enum value.
-     *
-     * @param keyword Keyword representing a role type.
-     * @return corresponding RoleType Enum value.
-     */
-    public static RoleType roleTypeStringToEnum(String keyword) {
-        requireNonNull(keyword);
-        switch (keyword.toLowerCase()) {
-        case "": // Fall through
-        case "student":
-            return RoleType.STUDENT;
-        case "tutor": // Fall through
-        case "ta":
-            return RoleType.TUTOR;
-        case "professor": // Fall through
-        case "prof":
-            return RoleType.PROFESSOR;
-        default:
-            throw new IllegalArgumentException("Invalid role type keyword for conversion to Enum value");
-        }
-    }
-
-    /**
      * Gets a filtered stream of ModuleCode objects based on the given RoleType Enum Value.
      * Provides an easier way to query, search and manipulate modules.
      *
