@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertAddTaskCommandSuccess;
@@ -108,5 +109,14 @@ public class AddTaskCommandTest {
 
         // different task and name -> returns false
         assertFalse(addTask1Command.equals(addTask2Command));
+    }
+
+    @Test
+    public void toStringMethod() {
+        Name name = new Name("Test name");
+        Task taskToAdd = new TaskBuilder().withTaskDescription("Test task").withTaskDeadline("2024-10-10").build();
+        AddTaskCommand addTaskCommand = new AddTaskCommand(name, taskToAdd);
+        String expected = AddTaskCommand.class.getCanonicalName() + "{name=" + name + ", taskToAdd=" + taskToAdd + "}";
+        assertEquals(expected, addTaskCommand.toString());
     }
 }
