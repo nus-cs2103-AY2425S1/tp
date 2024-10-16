@@ -114,11 +114,17 @@ public class ModelManager implements Model {
 
         addressBook.setPerson(target, editedPerson);
     }
+
     //=========== Person List Accessors ======================================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
+     *
+     * The returned list is both sorted and filtered based on the current comparator and filter predicate
+     * applied.
+     *
+     * @return a filtered and sorted list of persons.
      */
     @Override
     public ObservableList<Person> getPersonList() {
