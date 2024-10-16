@@ -1,6 +1,5 @@
 package seedu.academyassist.logic.commands;
 
-import static seedu.academyassist.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SORT_PARAM;
 
 import seedu.academyassist.commons.util.CollectionUtil;
@@ -9,13 +8,13 @@ import seedu.academyassist.model.Model;
 import seedu.academyassist.model.sort.SortParam;
 
 /**
- * Sorts contacts based on name or class.
+ * Sorts students based on name or class.
  */
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts contacts based on name/class. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts students based on name/class. "
             + "Parameters: "
             + PREFIX_SORT_PARAM + "'name'/'class' "
             + "Example: " + COMMAND_WORD + " "

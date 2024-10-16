@@ -6,7 +6,7 @@ import seedu.academyassist.model.AddressBook;
 import seedu.academyassist.model.Model;
 
 /**
- * Clears the address book.
+ * Clears the admin system.
  */
 public class ClearCommand extends Command {
 

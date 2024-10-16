@@ -4,22 +4,22 @@ import static java.util.Objects.requireNonNull;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.academyassist.commons.util.ToStringBuilder;
+import seedu.academyassist.logic.Messages;
 import seedu.academyassist.logic.commands.exceptions.CommandException;
 import seedu.academyassist.model.Model;
 import seedu.academyassist.model.person.Ic;
 import seedu.academyassist.model.person.IcMatchesPredicate;
 import seedu.academyassist.model.person.Person;
-import seedu.academyassist.logic.Messages;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a student identified using it's NRIC from the management system.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the student identified by the NRIC used in the displayed student list.\n"
             + "Parameters: NRIC (should follow the format of Singaporean IC and FIN numbers)\n"
             + "Example: " + COMMAND_WORD + " S1234567A";
 

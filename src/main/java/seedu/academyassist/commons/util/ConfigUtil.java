@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import seedu.academyassist.commons.exceptions.DataLoadingException;
 import seedu.academyassist.commons.core.Config;
+import seedu.academyassist.commons.exceptions.DataLoadingException;
 
 /**
  * A class for accessing the Config File.

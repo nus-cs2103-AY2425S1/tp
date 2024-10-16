@@ -13,7 +13,7 @@ import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Subject;
 
 /**
- * Adds a class to a person to the address book.
+ * Adds a class to a student in the management system.
  */
 public class AddClassCommand extends Command {
 

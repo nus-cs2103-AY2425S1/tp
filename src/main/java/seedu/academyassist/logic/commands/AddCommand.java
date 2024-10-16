@@ -10,19 +10,19 @@ import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.academyassist.commons.util.ToStringBuilder;
-import seedu.academyassist.model.Model;
-import seedu.academyassist.model.person.Person;
 import seedu.academyassist.logic.Messages;
 import seedu.academyassist.logic.commands.exceptions.CommandException;
+import seedu.academyassist.model.Model;
+import seedu.academyassist.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Adds a person to the management system.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the system.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -39,11 +39,11 @@ public class AddCommand extends Command {
             + PREFIX_IC + "S1234567A "
             + PREFIX_SUBJECT + "English "
             + PREFIX_SUBJECT + "Science "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "Clementi Primary School"
+            + PREFIX_TAG + "English speaker";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New student added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the system";
 
     private final Person toAdd;
 

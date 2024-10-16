@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.academyassist.model.Model;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all student in the management system to the user.
  */
 public class ListCommand extends Command {
 

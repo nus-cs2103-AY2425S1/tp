@@ -1,7 +1,7 @@
 package seedu.academyassist.logic.commands;
 
-import seedu.academyassist.model.Model;
 import seedu.academyassist.logic.commands.exceptions.CommandException;
+import seedu.academyassist.model.Model;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.

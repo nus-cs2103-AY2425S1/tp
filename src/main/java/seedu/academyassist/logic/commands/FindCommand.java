@@ -3,12 +3,12 @@ package seedu.academyassist.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.academyassist.commons.util.ToStringBuilder;
+import seedu.academyassist.logic.Messages;
 import seedu.academyassist.model.Model;
 import seedu.academyassist.model.person.NameContainsKeywordsPredicate;
-import seedu.academyassist.logic.Messages;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all student in management system whose name contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
