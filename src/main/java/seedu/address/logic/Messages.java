@@ -67,6 +67,15 @@ public class Messages {
     }
 
     /**
+     * Formats the {@code person} for display to the user after executing addMedCon or delMedCon.
+     */
+    public static String formatMedCon(Person person) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(person.getName());
+        return builder.toString();
+    }
+
+    /**
      * Appends the {@code toAppend} to the {@code builder} with a comma.
      *
      * @param builder The StringBuilder to append to.
