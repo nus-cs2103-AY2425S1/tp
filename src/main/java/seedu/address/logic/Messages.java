@@ -59,7 +59,6 @@ public class Messages {
     public static String format(Group group) {
         final StringBuilder builder = new StringBuilder();
         builder.append(group.getGroupName());
-        builder.append(group.getStudents());
         return builder.toString();
     }
 
