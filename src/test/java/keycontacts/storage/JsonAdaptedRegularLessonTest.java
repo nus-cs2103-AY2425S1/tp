@@ -27,10 +27,17 @@ public class JsonAdaptedRegularLessonTest {
                 new RegularLesson( new Day(VALID_DAY), new Time(VALID_START_TIME), new Time(VALID_END_TIME));;
         assertEquals(regularLesson, jsonAdaptedRegularLesson.toModelType());
     }
+
     @Test
     public void toModelType_invalidDay_throwsIllegalValueException() {
         assertThrows(IllegalValueException.class, () -> new JsonAdaptedRegularLesson(
                 INVALID_DAY, VALID_START_TIME, VALID_END_TIME).toModelType());
+    }
+
+    @Test
+    public void toModelType_nullDay_throwsIllegalValueException() {
+        assertThrows(IllegalValueException.class, () -> new JsonAdaptedRegularLesson(
+                null, VALID_START_TIME, VALID_END_TIME).toModelType());
     }
 
     @Test
@@ -40,9 +47,21 @@ public class JsonAdaptedRegularLessonTest {
     }
 
     @Test
+    public void toModelType_nullStartTime_throwsIllegalValueException() {
+        assertThrows(IllegalValueException.class, () -> new JsonAdaptedRegularLesson(
+                VALID_DAY, null, VALID_END_TIME).toModelType());
+    }
+
+    @Test
     public void toModelType_invalidEndTime_throwsIllegalValueException() {
         assertThrows(IllegalValueException.class, () -> new JsonAdaptedRegularLesson(
                 VALID_DAY, VALID_START_TIME, INVALID_END_TIME).toModelType());
+    }
+
+    @Test
+    public void toModelType_nullEndTime_throwsIllegalValueException() {
+        assertThrows(IllegalValueException.class, () -> new JsonAdaptedRegularLesson(
+                VALID_DAY, VALID_START_TIME, null).toModelType());
     }
 
     @Test
