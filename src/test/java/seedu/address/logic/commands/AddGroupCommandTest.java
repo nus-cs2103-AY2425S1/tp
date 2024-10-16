@@ -42,7 +42,7 @@ public class AddGroupCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingGroupAdded modelStub = new ModelStubAcceptingGroupAdded();
-      
+
         Student validStudent = new PersonBuilder().build();
         Group validGroup = new Group(VALID_GROUPNAME, new HashSet<>(), new HashSet<>());
 
@@ -289,7 +289,7 @@ public class AddGroupCommandTest {
         public void addTask(Task task) {
             throw new AssertionError("This method should not be called");
         }
-      
+
         @Override
         public void deleteTaskFromGroup(Task task, Group group) {
             throw new AssertionError("This method should not be called");
