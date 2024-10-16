@@ -31,4 +31,36 @@ public class Patient extends Person {
         return patients;
     }
 
+    /**
+     * Retrieves a patient from the list of all patients with a matching ID in String format.
+     *
+     * @param id The ID of the patient as a String.
+     * @return The Patient object if a patient with the given ID exists, or null if no such patient is found.
+     */
+    public static Patient getPatientWithId(String id) {
+        ArrayList<Patient> allPatients = getPatients();
+        for (Patient patient : allPatients) {
+            if (String.valueOf(patient.getId().getIdValue()).equals(id)) {
+                return patient;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Retrieves a patient from the list of all patients with a matching ID.
+     *
+     * @param id The ID of the patient as an Id object.
+     * @return The Patient object if a patient with the given ID exists, or null if no such patient is found.
+     */
+    public static Patient getPatientWithId(Id id) {
+        ArrayList<Patient> allPatients = getPatients();
+        for (Patient patient : allPatients) {
+            if (patient.getId().equals(id)) {
+                return patient;
+            }
+        }
+        return null;
+    }
+
 }

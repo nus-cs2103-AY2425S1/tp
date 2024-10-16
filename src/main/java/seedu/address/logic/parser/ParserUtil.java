@@ -11,7 +11,9 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -120,5 +122,14 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String id} into a {@code Id}.
+     */
+    public static Id parsePatientId(String id) {
+        String trimmedId = id.trim();
+        Patient patientWithId = Patient.getPatientWithId(trimmedId);
+        return patientWithId.getId();
     }
 }
