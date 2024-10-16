@@ -78,7 +78,7 @@ public class ParserUtil {
     public static Birthdate parseBirthDate(String birthDate) throws ParseException {
         requireNonNull(birthDate);
         String trimmedBirthDate = birthDate.trim();
-        if (!Sex.isValidSex(trimmedBirthDate)) {
+        if (!Birthdate.isValidBirthdate(trimmedBirthDate)) {
             throw new ParseException(Birthdate.MESSAGE_CONSTRAINTS);
         }
         return new Birthdate(birthDate);

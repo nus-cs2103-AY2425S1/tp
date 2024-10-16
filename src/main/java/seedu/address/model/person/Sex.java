@@ -9,7 +9,9 @@ import static java.util.Objects.requireNonNull;
 public class Sex {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Sex should either be M or F";
+            "Sex should either be uppercase characters M or F";
+
+    public static final String VALIDATION_REGEX = "^[MF]$";
 
     public final String value;
 
@@ -24,7 +26,7 @@ public class Sex {
     }
 
     public static boolean isValidSex(String test) {
-        return true;
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

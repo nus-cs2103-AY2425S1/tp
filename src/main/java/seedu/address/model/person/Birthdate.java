@@ -10,7 +10,7 @@ import static java.util.Objects.requireNonNull;
 public class Birthdate {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Birth Date should follow the format YYYY/MM/DD";
+            "Birth Date should follow the format YYYY/MM/DD or YYYY-MM-DD";
 
     public final String value;
 
