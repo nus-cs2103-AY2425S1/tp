@@ -37,7 +37,17 @@ public class FindClientTypeCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return true;
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FindClientTypeCommand)) {
+            return false;
+        }
+
+        FindClientTypeCommand otherFindCommand = (FindClientTypeCommand) other;
+        return predicate.equals(otherFindCommand.predicate);
     }
 
     @Override
