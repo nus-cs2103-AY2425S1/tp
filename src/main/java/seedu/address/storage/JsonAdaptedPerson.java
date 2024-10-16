@@ -109,7 +109,6 @@ class JsonAdaptedPerson {
 
         final Set<ClientType> modelClientTypes = new HashSet<>(personClientTypes);
 
-        final Description modelDescription = new Description(description);
 
         if (description == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -119,6 +118,9 @@ class JsonAdaptedPerson {
         if (!Description.isValidDescription(description)) {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
+
+        final Description modelDescription = new Description(description);
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelClientTypes, modelDescription);
     }
 
