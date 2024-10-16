@@ -1,5 +1,6 @@
 package seedu.internbuddy.model.application;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.internbuddy.testutil.TypicalApplications.DS_APPLICATION;
@@ -68,6 +69,6 @@ public class ApplicationTest {
     @Test
     public void testToString() {
         Application sweCopy = new ApplicationBuilder(SWE_APPLICATION).build();
-        assertTrue(sweCopy.toString().equals("Software Engineering Intern (APPLIED)"));
+        assertEquals("Software Engineering Intern Requires: ReactJS and ExpressJS (APPLIED)", sweCopy.toString());
     }
 }

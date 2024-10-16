@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import seedu.internbuddy.commons.core.LogsCenter;
 import seedu.internbuddy.logic.commands.AddCommand;
+import seedu.internbuddy.logic.commands.ApplyCommand;
 import seedu.internbuddy.logic.commands.ClearCommand;
 import seedu.internbuddy.logic.commands.Command;
 import seedu.internbuddy.logic.commands.DeleteCommand;
@@ -55,6 +56,9 @@ public class AddressBookParser {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
+
+        case ApplyCommand.COMMAND_WORD:
+            return new ApplyCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);

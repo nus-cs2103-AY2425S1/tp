@@ -6,6 +6,8 @@ import static seedu.internbuddy.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.internbuddy.model.name.Name;
+
 public class NameTest {
 
     @Test

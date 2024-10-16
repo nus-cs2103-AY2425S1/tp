@@ -3,31 +3,44 @@ package seedu.internbuddy.testutil;
 import seedu.internbuddy.model.application.AppStatus;
 import seedu.internbuddy.model.application.Application;
 import seedu.internbuddy.model.application.Description;
+import seedu.internbuddy.model.name.Name;
 
 /**
  * A utility class to help with building Application objects.
  */
 public class ApplicationBuilder {
-    public static final String DEFAULT_DESCRIPTION = "Software Engineering Intern";
+    public static final String DEFAULT_NAME = "Software Engineering Intern";
+    public static final String DEFAULT_DESCRIPTION = "Requires: ReactJS and ExpressJS";
     public static final String DEFAULT_STATUS = "APPLIED";
 
+    private Name name;
     private Description description;
-    private AppStatus status;
+    private AppStatus appStatus;
 
     /**
      * Creates a {@code ApplicationBuilder} with the default details.
      */
     public ApplicationBuilder() {
+        name = new Name(DEFAULT_NAME);
         description = new Description(DEFAULT_DESCRIPTION);
-        status = new AppStatus(DEFAULT_STATUS);
+        appStatus = new AppStatus(DEFAULT_STATUS);
     }
 
     /**
      * Initializes the ApplicationBuilder with the data of {@code applicationToCopy}.
      */
     public ApplicationBuilder(Application applicationToCopy) {
+        name = applicationToCopy.getName();
         description = applicationToCopy.getDescription();
-        status = applicationToCopy.getStatus();
+        appStatus = applicationToCopy.getAppStatus();
+    }
+
+    /**
+     * Sets the {@code Name} of the {@code Application} that we are building.
+     */
+    public ApplicationBuilder withName(String name) {
+        this.name = new Name(name);
+        return this;
     }
 
     /**
@@ -42,14 +55,12 @@ public class ApplicationBuilder {
      * Sets the {@code AppStatus} of the {@code Application} that we are building.
      */
     public ApplicationBuilder withStatus(String status) {
-        this.status = new AppStatus(status);
+        this.appStatus = new AppStatus(status);
         return this;
     }
 
     public Application build() {
-        return new Application(description, status);
+        return new Application(name, description, appStatus);
     }
-
-
 
 }

@@ -30,6 +30,10 @@ public class Status {
         return test.equals("INTERESTED") || test.equals("APPLIED") || test.equals("CLOSED");
     }
 
+    public Status applied() {
+        return new Status("APPLIED");
+    }
+
     @Override
     public String toString() {
         return value;

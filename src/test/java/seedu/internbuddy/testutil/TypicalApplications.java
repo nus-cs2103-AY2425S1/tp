@@ -12,14 +12,17 @@ import seedu.internbuddy.model.application.Application;
 public class TypicalApplications {
     public static final Application EMPTY_APPLICATION = new ApplicationBuilder().build();
     public static final Application SWE_APPLICATION = new ApplicationBuilder()
-        .withDescription("Software Engineering Intern")
-        .withStatus("APPLIED").build();
+            .withName("Software Engineering Intern")
+            .withDescription("Requires: ReactJS and ExpressJS")
+            .withStatus("APPLIED").build();
     public static final Application DS_APPLICATION = new ApplicationBuilder()
-        .withDescription("Data Science Intern")
-        .withStatus("REJECTED").build();
+            .withName("Data Science Intern")
+            .withDescription("Requires: Python")
+            .withStatus("REJECTED").build();
     public static final Application PM_APPLICATION = new ApplicationBuilder()
-        .withDescription("Product Manager Intern")
-        .withStatus("INTERVIEWED").build();
+            .withName("Product Manager Intern")
+            .withDescription("Requires: Figma")
+            .withStatus("INTERVIEWED").build();
 
     private TypicalApplications() {} // prevents instantiation
 

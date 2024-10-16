@@ -2,12 +2,15 @@ package seedu.internbuddy.model.company;
 
 import static seedu.internbuddy.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.internbuddy.commons.util.ToStringBuilder;
+import seedu.internbuddy.model.application.Application;
+import seedu.internbuddy.model.name.Name;
 import seedu.internbuddy.model.tag.Tag;
 
 /**
@@ -22,8 +25,9 @@ public class Company {
     private final Email email;
 
     // Data fields
+    private final ArrayList<Application> applications;
     private final Address address;
-    private final Status status;
+    private Status status;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -31,6 +35,7 @@ public class Company {
      */
     public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Status status) {
         requireAllNonNull(name, phone, email, address, tags, status);
+        this.applications = new ArrayList<>();
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -65,6 +70,14 @@ public class Company {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Adds a new application to the company
+     */
+    public void addApplication(Application application) {
+        this.status = status.applied();
+        this.applications.add(application);
     }
 
     /**
