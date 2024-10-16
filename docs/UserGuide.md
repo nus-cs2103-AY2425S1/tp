@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+PROperty is a **desktop app for property agents managing contacts and their property listings,
+optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+If you can type fast, PROperty can get your contact and property management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -154,6 +156,12 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
+
+### Quick reference help: `help`
+
+Shows commands in a help menu for quick reference during use of PROperty.
+
+Format: `help`
 
 ### Saving the data
 
