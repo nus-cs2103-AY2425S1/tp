@@ -10,9 +10,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
 
-<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="CareConnect" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="CareConnect" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -33,30 +33,36 @@
           </Menu>
         </MenuBar>
 
-        <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
+        <StackPane fx:id="commandBoxPlaceholder" styleClass="pane" VBox.vgrow="NEVER">
           <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
+            <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
           </padding>
         </StackPane>
 
-        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
+        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
           <SplitPane dividerPositions="0.3" VBox.vgrow="ALWAYS">
-              <VBox fx:id="personList" minWidth="380" styleClass="pane-with-border">
+              <VBox fx:id="personList" minWidth="380" styleClass="pane">
                   <padding>
-                      <Insets bottom="10" left="10" top="10"/>
+                      <Insets left="10.0" />
                   </padding>
-                  <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                  <StackPane fx:id="personListPanelPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
   </VBox>
               <VBox fx:id="personDetail" minWidth="340">
                   <padding>
-                      <Insets bottom="10" left="10" right="10" top="10"/>
+                      <Insets right="10.0" />
                   </padding>
-                  <StackPane fx:id="personDetailPlaceholder" VBox.vgrow="ALWAYS"/>
+                  <StackPane fx:id="personDetailPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                     <padding>
+                        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+                     </padding></StackPane>
               </VBox>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
           </SplitPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />

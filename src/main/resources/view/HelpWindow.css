@@ -1,19 +1,22 @@
+@import url("theme.css");
+
 #copyButton, #helpMessage {
-    -fx-text-fill: black;
+    -fx-text-fill: -fx-text;
 }
 
 #copyButton {
-    -fx-background-color: #E9EED9;
+    -fx-background-color: -fx-primary;
 }
 
 #copyButton:hover {
-    -fx-background-color: #FFBF61;
+    -fx-background-color: derive(-fx-primary, 25%);
+    -fx-cursor: hand;
 }
 
 #copyButton:armed {
-    -fx-background-color: #CBD2A4;
+    -fx-background-color: derive(-fx-primary, -10%);
 }
 
 #helpMessageContainer {
-    -fx-background-color: #FEF9F2;
+    -fx-background-color: -fx-secondary-bg;
 }
