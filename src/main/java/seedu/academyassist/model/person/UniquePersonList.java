@@ -1,7 +1,6 @@
 package seedu.academyassist.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.academyassist.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -108,7 +107,7 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Returns the person in the list with the given IC.
+     * Returns the student in the list with the given IC.
      * Throws PersonNotFoundException if no person with the given IC is found.
      */
     public Person getPersonWithIc(Ic ic) {

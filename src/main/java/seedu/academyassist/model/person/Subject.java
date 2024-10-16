@@ -1,12 +1,11 @@
 package seedu.academyassist.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.academyassist.commons.util.AppUtil.checkArgument;
 
 import seedu.academyassist.commons.util.AppUtil;
 
 /**
- * Represents a Person's class in the address book.
+ * Represents subjects taken by a Person in the management system.
  */
 public class Subject {
 
@@ -17,9 +16,9 @@ public class Subject {
     public final String subject;
 
     /**
-     * Constructs a {@code Class}.
+     * Constructs a {@code Subject}.
      *
-     * @param subject A valid class.
+     * @param subject A valid subject.
      */
     public Subject(String subject) {
         requireNonNull(subject);
@@ -28,7 +27,7 @@ public class Subject {
     }
 
     /**
-     * Returns true if a given string is a valid class name.
+     * Returns true if a given string is a valid subject name.
      */
     public static boolean isValidSubject(String test) {
         return test.matches(VALIDATION_REGEX);

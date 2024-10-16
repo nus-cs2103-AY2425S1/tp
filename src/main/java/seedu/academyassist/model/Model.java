@@ -105,12 +105,12 @@ public interface Model {
     /**
      * Sorts the address book managed by model, based on alphabetical order of names of persons inside it.
      */
-    void sortAddressBookByName();
+    void sortAcademyAssistByName();
 
     /**
      * Sorts the address book managed by model, based on alphabetical order of classes of persons inside it.
      */
-    void sortAddressBookByClass();
+    void sortAcademyAssistByClass();
 
     /**
      * Returns person from address book with given ic.

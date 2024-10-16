@@ -176,12 +176,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void sortAddressBookByName() {
+        public void sortAcademyAssistByName() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void sortAddressBookByClass() {
+        public void sortAcademyAssistByClass() {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -12,7 +12,7 @@ import seedu.academyassist.commons.util.ToStringBuilder;
 import seedu.academyassist.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Person(student) in the management system.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {

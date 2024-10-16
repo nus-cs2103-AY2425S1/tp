@@ -136,12 +136,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortAddressBookByName() {
+    public void sortAcademyAssistByName() {
         addressBook.sortPersonsByName();
     }
 
     @Override
-    public void sortAddressBookByClass() {
+    public void sortAcademyAssistByClass() {
         addressBook.sortPersonsByClass();
     }
 

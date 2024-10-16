@@ -1,12 +1,11 @@
 package seedu.academyassist.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.academyassist.commons.util.AppUtil.checkArgument;
 
 import seedu.academyassist.commons.util.AppUtil;
 
 /**
- * Represents a Person's IC number in the address book.
+ * Represents a Person's IC number in the management system.
  */
 public class Ic {
 
