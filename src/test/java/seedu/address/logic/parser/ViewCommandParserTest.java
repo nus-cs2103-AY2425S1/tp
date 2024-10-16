@@ -28,6 +28,8 @@ public class ViewCommandParserTest {
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
 
         assertParseSuccess(parser, " \n Alice Bob  \t", expectedFindCommand);
+
+        assertParseSuccess(parser, " \n Alice       Bob  \t", expectedFindCommand);
     }
 
 }
