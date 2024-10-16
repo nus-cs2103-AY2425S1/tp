@@ -6,8 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalConcerts.COACHELLA;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,6 +22,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.concert.Concert;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.testutil.ConcertBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -80,15 +82,34 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasConcert_concertInAddressBook_returnsTrue() {
+        addressBook.addConcert(COACHELLA);
+        assertTrue(addressBook.hasConcert(COACHELLA));
+    }
+
+    @Test
+    public void hasConcert_concertWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addConcert(COACHELLA);
+        Concert editedConcert = new ConcertBuilder(COACHELLA).build();
+        assertTrue(addressBook.hasConcert(editedConcert));
+    }
+
+    @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(
                 0));
     }
 
     @Test
+    public void getConcertList_modifyList_throwsUnsuppoetedOperationExeception() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getConcertList().remove(
+                0));
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook
-                .getPersonList() + "}";
+                .getPersonList() + ", concerts=" + addressBook.getConcertList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 

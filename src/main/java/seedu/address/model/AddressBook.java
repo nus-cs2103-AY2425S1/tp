@@ -144,7 +144,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("persons", persons).toString();
+        return new ToStringBuilder(this).add("persons", persons).add("concerts", concerts)
+                .toString();
     }
 
     @Override
