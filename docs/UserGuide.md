@@ -30,7 +30,7 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 
     * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client contact named `John Doe` to Clientele+.
 
-    * `delete 3` : Deletes the 3rd client shown in the current list.
+    * `delete 3` : Deletes the 3rd client contact shown in the current list.
 
     * `clear` : Deletes all client contacts.
 
