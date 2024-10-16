@@ -32,7 +32,7 @@ class AssignCommandParserTest {
     }
 
     @Test
-    public void parse_fieldsMissing_failure() {
+    public void parse_missingFields_failure() {
         // Missing vendor prefix: only event prefix provided
         assertParseFailure(parser, " e/2",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
@@ -41,21 +41,23 @@ class AssignCommandParserTest {
         assertParseFailure(parser, " v/1",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
 
-        // Missing both vendor and event indexes
-        assertParseFailure(parser, " v/ e/", ParserUtil.MESSAGE_INVALID_INDEX);
-
         // Completely empty input
         assertParseFailure(parser, "",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_invalidValue_failure() {
+    public void parse_invalidArgumentValue_failure() {
         // Non-numeric vendor index
         assertParseFailure(parser, " v/a e/1", ParserUtil.MESSAGE_INVALID_INDEX);
 
         // Non-numeric event index
         assertParseFailure(parser, " v/1 e/b", ParserUtil.MESSAGE_INVALID_INDEX);
+
+        // Missing vendor or event indexes
+        assertParseFailure(parser, " v/ e/", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, " v/1 e/", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, " v/ e/1", ParserUtil.MESSAGE_INVALID_INDEX);
 
         // Zero and negative index values
         assertParseFailure(parser, " v/0 e/1", ParserUtil.MESSAGE_INVALID_INDEX);
@@ -74,6 +76,8 @@ class AssignCommandParserTest {
     public void parse_extraArguments_failure() {
         // Extra arguments in input
         assertParseFailure(parser, " v/1 e/2 extra", ParserUtil.MESSAGE_INVALID_INDEX);
+
+        // Repeated arguments
         assertParseFailure(parser, " v/1 e/2 v/2", Messages.MESSAGE_DUPLICATE_FIELDS + PREFIX_VENDOR);
         assertParseFailure(parser, " v/1 e/2 e/2", Messages.MESSAGE_DUPLICATE_FIELDS + PREFIX_EVENT);
     }
