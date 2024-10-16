@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 
@@ -41,10 +41,20 @@ public class DeleteCommand extends Command {
     private final Index targetIndex;
     private final Name targetName;
 
+    /**
+     * Creates a DeleteCommand that targets a person by its index in the list.
+     *
+     * @param targetIndex The index of the person to be deleted.
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         this.targetName = null;
     }
+    /**
+     * Creates a DeleteCommand that targets a person by its name in the list.
+     *
+     * @param targetName The index of the person to be deleted.
+     */
     public DeleteCommand(Name targetName) {
         this.targetName = targetName;
         this.targetIndex = null;
