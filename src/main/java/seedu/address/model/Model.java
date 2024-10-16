@@ -59,6 +59,23 @@ public interface Model {
     void archiveAddressBook() throws IOException;
 
     /**
+     * Undoes the previous command that modified the state or storage of the address book.
+     */
+    void undoAddressBook();
+
+    /**
+     * Returns true if there is a previous state in the address book that can be undone.
+     *
+     * @return true if undo can be performed, false otherwise.
+     */
+    boolean canUndoAddressBook();
+
+    /**
+     * Saves the current state of the address book to history.
+     */
+    void saveAddressBook();
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
