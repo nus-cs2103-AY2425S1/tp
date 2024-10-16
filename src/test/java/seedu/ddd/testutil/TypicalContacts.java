@@ -2,12 +2,14 @@ package seedu.ddd.testutil;
 
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_DATE_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.ddd.logic.commands.CommandTestUtil.VALID_SERVICE_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
@@ -21,7 +23,7 @@ import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.vendor.Vendor;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Contact} objects to be used in tests.
  */
 public class TypicalContacts {
 
@@ -95,19 +97,20 @@ public class TypicalContacts {
             .withId(9)
             .build();
 
-    // Manually added - Client's details found in {@code CommandTestUtil}
+    // Manually added - Contacts' details found in {@code CommandTestUtil}
     public static final Client AMY = new ClientBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
-    public static final Client BOB = new ClientBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .build();
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withDate(VALID_DATE_AMY)
+            .withTags(VALID_TAG_FRIEND).build();
+    public static final Vendor BOB = new VendorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withService(VALID_SERVICE_BOB)
+            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalContacts() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical contacts.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();

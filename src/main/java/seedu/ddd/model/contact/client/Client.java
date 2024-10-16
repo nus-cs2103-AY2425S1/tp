@@ -20,6 +20,7 @@ import seedu.ddd.model.tag.Tag;
  */
 public class Client extends Contact {
     private Date date;
+
     /**
      * Constructs a {@code Client}.
      *
@@ -45,6 +46,24 @@ public class Client extends Contact {
     public Date getDate() {
         return date;
     }
+
+    /**
+     * Returns true if both persons have the same name.
+     * This defines a weaker notion of equality between two persons.
+     */
+    @Override
+    public boolean isSameContact(Contact otherContact) {
+        if (otherContact == this) {
+            return true;
+        }
+
+        if (!(otherContact instanceof Client)) {
+            return false;
+        }
+
+        return super.isSameContact(otherContact);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -59,6 +78,7 @@ public class Client extends Contact {
         Client otherClient = (Client) other;
         return super.equals(otherClient) && date.equals(otherClient.date);
     }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
@@ -76,6 +96,7 @@ public class Client extends Contact {
                 .add("address", this.getAddress())
                 .add("date", this.date)
                 .add("tags", this.getTags())
+                .add("id", this.getId())
                 .toString();
     }
 
