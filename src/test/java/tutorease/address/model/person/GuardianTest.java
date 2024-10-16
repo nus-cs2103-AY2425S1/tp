@@ -5,10 +5,9 @@ import tutorease.address.testutil.GuardianBuilder;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static tutorease.address.logic.commands.CommandTestUtil.*;
-import static tutorease.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static tutorease.address.testutil.Assert.assertThrows;
-import static tutorease.address.testutil.TypicalPersons.ALICE;
-import static tutorease.address.testutil.TypicalPersons.BOB;
+import static tutorease.address.testutil.TypicalGuardians.MEG;
+import static tutorease.address.testutil.TypicalGuardians.CHICK;
 
 public class GuardianTest {
     @Test
@@ -20,74 +19,74 @@ public class GuardianTest {
     @Test
     public void isSamePerson() {
         // same object -> returns true
-        assertTrue(ALICE.isSamePerson(ALICE));
+        assertTrue(MEG.isSamePerson(MEG));
 
         // null -> returns false
-        assertFalse(ALICE.isSamePerson(null));
+        assertFalse(MEG.isSamePerson(null));
 
         // same name, all other attributes different -> returns true
-        Guardian editedAlice = new GuardianBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        Guardian editedMeg = new GuardianBuilder(MEG).withPhone(VALID_PHONE_MEG).withEmail(VALID_EMAIL_MEG)
+                .withAddress(VALID_ADDRESS_MEG).withTags(VALID_TAG_SUPPORTIVE).build();
+        assertTrue(MEG.isSamePerson(editedMeg));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new GuardianBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        editedMeg = new GuardianBuilder(MEG).withName(VALID_NAME_CHICK).build();
+        assertFalse(MEG.isSamePerson(editedMeg));
 
         // name differs in case, all other attributes same -> returns false
-        Guardian editedBob = new GuardianBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        Guardian editedChick = new GuardianBuilder(CHICK).withName(VALID_NAME_MEG.toLowerCase()).build();
+        assertFalse(CHICK.isSamePerson(editedChick));
 
         // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new GuardianBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        String nameWithTrailingSpaces = VALID_NAME_MEG + " ";
+        editedChick = new GuardianBuilder(CHICK).withName(nameWithTrailingSpaces).build();
+        assertFalse(CHICK.isSamePerson(editedChick));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Guardian aliceCopy = new GuardianBuilder(ALICE).build();
-        assertTrue(ALICE.equals(aliceCopy));
+        Guardian megCopy = new GuardianBuilder(MEG).build();
+        assertTrue(MEG.equals(megCopy));
 
         // same object -> returns true
-        assertTrue(ALICE.equals(ALICE));
+        assertTrue(MEG.equals(MEG));
 
         // null -> returns false
-        assertFalse(ALICE.equals(null));
+        assertFalse(MEG.equals(null));
 
         // different type -> returns false
-        assertFalse(ALICE.equals(5));
+        assertFalse(MEG.equals(5));
 
         // different person -> returns false
-        assertFalse(ALICE.equals(BOB));
+        assertFalse(MEG.equals(CHICK));
 
         // different name -> returns false
-        Guardian editedAlice = new GuardianBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        Guardian editedMeg = new GuardianBuilder(MEG).withName(VALID_NAME_CHICK).build();
+        assertFalse(MEG.equals(editedMeg));
 
         // different phone -> returns false
-        editedAlice = new GuardianBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedMeg = new GuardianBuilder(MEG).withPhone(VALID_PHONE_CHICK).build();
+        assertFalse(MEG.equals(editedMeg));
 
         // different email -> returns false
-        editedAlice = new GuardianBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedMeg = new GuardianBuilder(MEG).withEmail(VALID_EMAIL_CHICK).build();
+        assertFalse(MEG.equals(editedMeg));
 
         // different address -> returns false
-        editedAlice = new GuardianBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedMeg = new GuardianBuilder(MEG).withAddress(VALID_ADDRESS_CHICK).build();
+        assertFalse(MEG.equals(editedMeg));
 
         // different tags -> returns false
-        editedAlice = new GuardianBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedMeg = new GuardianBuilder(MEG).withTags(VALID_TAG_MENTOR).build();
+        assertFalse(MEG.equals(editedMeg));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = Guardian.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
-                + ", role=" + ALICE.getRole() + "}";
-        assertEquals(expected, ALICE.toString());
+        String expected = Guardian.class.getCanonicalName() + "{name=" + MEG.getName() + ", phone=" + MEG.getPhone()
+                + ", email=" + MEG.getEmail() + ", address=" + MEG.getAddress() + ", tags=" + MEG.getTags()
+                + ", role=" + MEG.getRole() + "}";
+        assertEquals(expected, MEG.toString());
     }
 }
