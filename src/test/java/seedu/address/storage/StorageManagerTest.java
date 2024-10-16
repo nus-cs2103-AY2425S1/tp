@@ -15,6 +15,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.HireMeComparable;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.internshipapplication.InternshipApplication;
 
 public class StorageManagerTest {
 
@@ -58,7 +59,7 @@ public class StorageManagerTest {
         AddressBook original = getTypicalAddressBook();
         storageManager.saveAddressBook(original);
         ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        assertEquals(original, new AddressBook<InternshipApplication>(retrieved));
     }
 
     @Test
