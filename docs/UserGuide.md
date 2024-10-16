@@ -133,17 +133,18 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person or persons from the address book.
 
-Format: `delete INDEX`
+Format: `delete INDEX` `delete INDEX INDEX ...'
 
-* Deletes the person at the specified `INDEX`.
+* Deletes the person or persons at the specified `INDEX` or `INDEX INDEX ...`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 1 2` deletes the 1st and 2nd person in the address book. 
 
 ### Clearing all entries : `clear`
 
