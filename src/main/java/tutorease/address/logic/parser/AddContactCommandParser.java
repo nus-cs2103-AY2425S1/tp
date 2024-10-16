@@ -34,7 +34,7 @@ public class AddContactCommandParser implements Parser<AddContactCommand> {
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddContactCommand parse(String args) throws ParseException {
+    public AddContactCommand parse(String args) throws ParseException, IllegalArgumentException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_ROLE, PREFIX_TAG);
@@ -54,10 +54,12 @@ public class AddContactCommandParser implements Parser<AddContactCommand> {
 
         Person person;
 
-        if (role.equals(Role.STUDENT)) {
+        if (role.getRoleString().equals(Role.STUDENT)) {
             person = new Student(name, phone, email, address, role, tagList);
-        } else {
+        } else if (role.getRoleString().equals(Role.GUARDIAN)) {
             person = new Guardian(name, phone, email, address, role, tagList);
+        } else {
+            throw new IllegalArgumentException(Role.MESSAGE_CONSTRAINTS);
         }
 
         return new AddContactCommand(person);
