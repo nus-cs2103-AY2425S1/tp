@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
+import seedu.address.model.id.counter.list.IdCounterList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -16,10 +17,12 @@ import seedu.address.model.person.UniquePersonList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
+@SuppressWarnings("checkstyle:Regexp")
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueEventList events;
+    private IdCounterList idCounterList;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -31,6 +34,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         events = new UniqueEventList();
+        idCounterList = new IdCounterList();
     }
 
     public AddressBook() {}
@@ -125,6 +129,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         events.add(event);
     }
 
+    //// ID counter-level operations
+
+    /**
+     * Adds the ID counter list to the address book.
+     * The ID counters for persons/events should be more than or equal to
+     * the number of persons/events in the address book.
+     */
+    public void addIdCounterList(IdCounterList idCounterList) {
+        this.idCounterList = idCounterList;
+    }
+
     //// util methods
 
     @Override
@@ -142,6 +157,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Event> getEventList() {
         return events.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public IdCounterList getIdCounterList() {
+        return idCounterList;
     }
 
     @Override

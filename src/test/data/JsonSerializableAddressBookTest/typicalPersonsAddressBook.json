@@ -50,5 +50,9 @@
       "eventFrom": "2024-10-10",
       "eventTo": "2024-10-11"
     }
-  ]
+  ],
+  "idCounterList" : {
+    "personIdCounter" : 7,
+    "eventIdCounter" : 1
+  }
 }

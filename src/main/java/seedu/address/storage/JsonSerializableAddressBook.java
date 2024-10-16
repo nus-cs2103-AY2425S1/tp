@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.event.Event;
+import seedu.address.model.id.counter.list.IdCounterList;
 import seedu.address.model.person.Person;
 
 /**
@@ -25,15 +26,18 @@ class JsonSerializableAddressBook {
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedEvent> events = new ArrayList<>();
+    private final JsonAdaptedIdCounterList idCounterList;
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons and events.
+     * Constructs a {@code JsonSerializableAddressBook} with the given persons, events and ID counters.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                       @JsonProperty("events") List<JsonAdaptedEvent> events) {
+                                       @JsonProperty("events") List<JsonAdaptedEvent> events,
+                                       @JsonProperty("idCounterList") JsonAdaptedIdCounterList idCounterList) {
         this.persons.addAll(persons);
         this.events.addAll(events);
+        this.idCounterList = idCounterList;
     }
 
     /**
@@ -44,6 +48,7 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         events.addAll(source.getEventList().stream().map(JsonAdaptedEvent::new).collect(Collectors.toList()));
+        idCounterList = new JsonAdaptedIdCounterList(source.getIdCounterList());
     }
 
     /**
@@ -67,6 +72,9 @@ class JsonSerializableAddressBook {
             }
             addressBook.addEvent(event);
         }
+        IdCounterList idCounterList = this.idCounterList.toModelType();
+        addressBook.addIdCounterList(idCounterList);
+
         return addressBook;
     }
 
