@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -75,5 +77,22 @@ class UnassignCommandTest {
         // Verify that an exception is thrown when the vendor is already unassigned
         CommandException exception = assertThrows(CommandException.class, () -> unassignCommand.execute(model));
         assertEquals(Messages.MESSAGE_VENDOR_NOT_ASSIGNED_TO_EVENT, exception.getMessage());
+    }
+
+    @Test
+    public void equals() {
+        UnassignCommand unassignCommand = new UnassignCommand(Index.fromOneBased(1), Index.fromOneBased(1));
+
+        // Same object -> returns true
+        assertTrue(unassignCommand.equals(unassignCommand));
+
+        // Same values -> returns true
+        assertTrue(unassignCommand.equals(new UnassignCommand(Index.fromOneBased(1), Index.fromOneBased(1))));
+
+        // Different vendor index -> returns false
+        assertFalse(unassignCommand.equals(new UnassignCommand(Index.fromOneBased(2), Index.fromOneBased(1))));
+
+        // Different event index -> returns false
+        assertFalse(unassignCommand.equals(new UnassignCommand(Index.fromOneBased(1), Index.fromOneBased(2))));
     }
 }
