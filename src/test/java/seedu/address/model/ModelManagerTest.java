@@ -16,6 +16,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
@@ -31,6 +33,7 @@ public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
     private final Event testEvent = new Event(new Name("Test Event"), new Date("2024-10-11"));
+    private final Event anotherEvent = new EventBuilder().withName("Another Event").build();
 
     @Test
     public void constructor() {
@@ -172,6 +175,46 @@ public class ModelManagerTest {
 
         modelManager.viewVendor(vendor2);
         assertEquals(vendor2, observedState.get());
+    }
+
+    @Test
+    public void getAssociatedVendors_noAssociations_returnsEmptyList() {
+        ObservableList<Vendor> associatedVendors = modelManager.getAssociatedVendors(testEvent);
+        assertEquals(FXCollections.observableArrayList(), associatedVendors);
+    }
+
+    @Test
+    public void getAssociatedVendors_withAssociations_returnsCorrectVendors() {
+        modelManager.addVendor(ALICE);
+        modelManager.addVendor(BENSON);
+        modelManager.addEvent(testEvent);
+        modelManager.assignVendorToEvent(ALICE, testEvent);
+        modelManager.assignVendorToEvent(BENSON, testEvent);
+
+        ObservableList<Vendor> associatedVendors = modelManager.getAssociatedVendors(testEvent);
+        ObservableList<Vendor> expectedVendors = FXCollections.observableArrayList(BENSON, ALICE);
+
+        assertEquals(expectedVendors, associatedVendors);
+    }
+
+    @Test
+    public void getAssociatedEvents_noAssociations_returnsEmptyList() {
+        ObservableList<Event> associatedEvents = modelManager.getAssociatedEvents(ALICE);
+        assertEquals(FXCollections.observableArrayList(), associatedEvents);
+    }
+
+    @Test
+    public void getAssociatedEvents_withAssociations_returnsCorrectEvents() {
+        modelManager.addVendor(ALICE);
+        modelManager.addEvent(testEvent);
+        modelManager.addEvent(anotherEvent);
+        modelManager.assignVendorToEvent(ALICE, testEvent);
+        modelManager.assignVendorToEvent(ALICE, anotherEvent);
+
+        ObservableList<Event> associatedEvents = modelManager.getAssociatedEvents(ALICE);
+        ObservableList<Event> expectedEvents = FXCollections.observableArrayList(anotherEvent, testEvent);
+
+        assertEquals(expectedEvents, associatedEvents);
     }
 
     @Test
