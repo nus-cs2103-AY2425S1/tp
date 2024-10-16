@@ -1,12 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.student.StudentNumber.isValidStudentNumber;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Name;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.StudentNumber;
 
 /**
  * Deletes a student from the system based on the student number provided.
@@ -15,26 +14,24 @@ public class DeleteStudentCommand extends Command {
     public static final String COMMAND_WORD = "deletestu";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the student identified by the student number used in the displayed student list.\n"
-            + "Parameters: STUDENT_NUMBER (must be a valid student number)\n"
-            + "Example: " + COMMAND_WORD + " A1234567B";
+            + ": Deletes the student identified by the student name used in the displayed student list.\n"
+            + "Parameters: STUDENT (must be a valid student name)\n"
+            + "Example: " + COMMAND_WORD + " Jerrell Lee";
 
     public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s";
 
-    public static final String MESSAGE_INVALID_STUDENT_NUMBER = "The student number you provided is not valid.";
+    public static final String MESSAGE_NONEXISTENT_STUDENT = "This student is not in your student list: %1$s";
 
-    public static final String MESSAGE_NONEXISTENT_STUDENT = "This student is not in your student list.";
-
-    private final StudentNumber targetStudentNumber;
+    private final Name name;
 
     /**
      * Constructs a DeleteStudentCommand to delete the specified student by student number.
      *
-     * @param targetStudentNumber The student number of the student to be deleted.
+     * @param name The student name of the student to be deleted.
      */
-    public DeleteStudentCommand(StudentNumber targetStudentNumber) {
-        requireNonNull(targetStudentNumber);
-        this.targetStudentNumber = targetStudentNumber;
+    public DeleteStudentCommand(Name name) {
+        requireNonNull(name);
+        this.name = name;
     }
 
     /**
@@ -47,13 +44,8 @@ public class DeleteStudentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        // Check if the student number is valid
-        if (!isValidStudentNumber(targetStudentNumber.toString())) {
-            throw new CommandException(MESSAGE_INVALID_STUDENT_NUMBER);
-        }
 
-        // Given a valid student number, check if student exists
-        Student studentToDelete = model.getStudentByNumber(targetStudentNumber);
+        Student studentToDelete = model.getStudentByName(name);
         if (studentToDelete == null) {
             throw new CommandException(MESSAGE_NONEXISTENT_STUDENT);
         }
@@ -79,6 +71,6 @@ public class DeleteStudentCommand extends Command {
         }
 
         DeleteStudentCommand otherDeleteStudentCommand = (DeleteStudentCommand) other;
-        return targetStudentNumber.equals(otherDeleteStudentCommand.targetStudentNumber);
+        return name.equals(otherDeleteStudentCommand.name);
     }
 }
