@@ -21,6 +21,12 @@ public class TelegramUsernameTest {
     }
 
     @Test
+    public void emptyFactoryMethod_returnsNullUsername() {
+        TelegramUsername emptyUsername = TelegramUsername.empty();
+        assertEquals(emptyUsername.telegramUsername, null);
+    }
+
+    @Test
     public void isValidUsername() {
         // null username
         assertThrows(NullPointerException.class, () -> TelegramUsername.isValidTelegramHandle(null));
@@ -78,6 +84,12 @@ public class TelegramUsernameTest {
         String username = "johnwick";
         TelegramUsername user = TelegramUsername.of(username);
         assertTrue(user.toString().equals(username));
+    }
+
+    @Test
+    public void toString_nullUsername_returnsEmptyString() {
+        TelegramUsername emptyUsername = TelegramUsername.empty();
+        assertEquals(emptyUsername.toString(), "");
     }
 
     @Test
