@@ -54,7 +54,7 @@ public class PersonUtil {
         if (descriptor.getClientTypes().isPresent()) {
             Set<ClientType> clientTypes = descriptor.getClientTypes().get();
             if (clientTypes.isEmpty()) {
-                sb.append(PREFIX_CLIENT_TYPE);
+                sb.append(PREFIX_CLIENT_TYPE).append(" ");
             } else {
                 clientTypes.forEach(s -> sb.append(PREFIX_CLIENT_TYPE).append(s.clientTypeName).append(" "));
             }
