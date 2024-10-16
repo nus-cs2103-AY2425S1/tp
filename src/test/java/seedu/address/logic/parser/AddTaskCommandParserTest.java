@@ -45,11 +45,11 @@ public class AddTaskCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_TASK_DESCRIPTION_PROJECT + TASK_DEADLINE_DESC_BOB,
+        assertParseFailure(parser, VALID_NAME_BOB + TASK_DESCRIPTION_DESC_BOB + TASK_DEADLINE_DESC_BOB,
                 expectedMessage);
 
         // missing task prefix
-        assertParseFailure(parser, NAME_DESC_BOB + "Homework" + TASK_DEADLINE_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_TASK_DESCRIPTION_PROJECT + TASK_DEADLINE_DESC_BOB,
                 expectedMessage);
 
         // missing deadline prefix
@@ -57,7 +57,7 @@ public class AddTaskCommandParserTest {
                 expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + "Homework 2024-10-30",
+        assertParseFailure(parser, VALID_NAME_BOB + VALID_TASK_DESCRIPTION_PROJECT + VALID_TASK_DEADLINE,
                 expectedMessage);
     }
 

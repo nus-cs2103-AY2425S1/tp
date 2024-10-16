@@ -78,6 +78,17 @@ public class TypicalPersons {
         return ab;
     }
 
+    /**
+     * Returns an {code AddressBook} with all the typical persons as new objects each time
+     */
+    public static AddressBook getUniqueTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersons()) {
+            ab.addPerson(new PersonBuilder(person).build());
+        }
+        return ab;
+    }
+
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
