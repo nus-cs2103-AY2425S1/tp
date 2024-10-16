@@ -3,6 +3,10 @@ package keycontacts.model.lesson;
 import static keycontacts.commons.util.AppUtil.checkArgument;
 import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
+
+import keycontacts.commons.util.ToStringBuilder;
+
 /**
  * Abstract class representing a Student's lesson in the student directory.
  * Guarantees: immutable, start time and end time are valid as declared in
@@ -37,11 +41,33 @@ public abstract class Lesson {
         return endTime;
     }
 
-    public abstract int hashCode();
+    @Override
+    public int hashCode() {
+        return Objects.hash(startTime, endTime);
+    }
 
-    public abstract boolean equals(Object other);
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
 
-    public abstract String toString();
+        // instanceof handles nulls
+        if (!(other instanceof Lesson)) {
+            return false;
+        }
+
+        Lesson otherLesson = (Lesson) other;
+        return startTime.equals(otherLesson.startTime) && endTime.equals(otherLesson.endTime);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("startTime", startTime)
+                .add("endTime", endTime)
+                .toString();
+    }
 
     /**
      * Returns a user-friendly display message of the lesson.
