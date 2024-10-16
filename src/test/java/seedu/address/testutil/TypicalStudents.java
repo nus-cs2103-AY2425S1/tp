@@ -9,7 +9,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_HUGH;
 
+import seedu.address.model.AddressBook;
+import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A utility class containing a list of {@code Student} objects to be used in tests.
@@ -24,5 +30,46 @@ public class TypicalStudents {
             .withPhone(VALID_PHONE_HUGH).withTutorialGroup(VALID_TUTORIAL_GROUP_HUGH)
             .withStudentNumber(VALID_STUDENT_NUMBER_HUGH).build();
 
+    public static final Student ALICE = new StudentBuilder().withName("Alice Smith")
+            .withPhone("81234567").withTutorialGroup("B11")
+            .withStudentNumber("A0123456M").build();
+
+    public static final Student BOB = new StudentBuilder().withName("Bob Tan")
+            .withPhone("91234567").withTutorialGroup("C21")
+            .withStudentNumber("A0654321X").build();
+
+    public static final Student CHARLIE = new StudentBuilder().withName("Charlie Lim")
+            .withPhone("83312233").withTutorialGroup("A10")
+            .withStudentNumber("A0987654Z").build();
+
+    public static final Student DAVID = new StudentBuilder().withName("David Lee")
+            .withPhone("89994444").withTutorialGroup("D14")
+            .withStudentNumber("A0345678K").build();
+
+    public static final Student ELLA = new StudentBuilder().withName("Ella Wong")
+            .withPhone("84443322").withTutorialGroup("E31")
+            .withStudentNumber("A0543217J").build();
+
+    public static final Student FRANK = new StudentBuilder().withName("Frank Ho")
+            .withPhone("88881111").withTutorialGroup("F12")
+            .withStudentNumber("A0135792H").build();
+
+    public static final Student GRACE = new StudentBuilder().withName("Grace Ng")
+            .withPhone("81119988").withTutorialGroup("G23")
+            .withStudentNumber("A0988765T").build();
+
+
     private TypicalStudents() {} // prevents instantiation
+
+    public static AddressBook getTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Student student : getTypicalStudents()) {
+            ab.addStudent(student);
+        }
+        return ab;
+    }
+
+    public static List<Student> getTypicalStudents() {
+        return new ArrayList<>(Arrays.asList(HUGH, DIDDY, ALICE));
+    }
 }
