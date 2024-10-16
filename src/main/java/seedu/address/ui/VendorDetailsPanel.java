@@ -59,10 +59,8 @@ public class VendorDetailsPanel extends UiPart<Region> {
             updateAssignedEvents(associations);
         });
 
-        // TODO: Update to EventListPanel once implemented
-        // VendorListPanel vendorListPanel = new VendorListPanel(assignedEvents, "Assigned Events");
-        // detailsChildrenPlaceholder.getChildren().add(vendorListPanel.getRoot());
-
+        EventListPanel eventListPanel = new EventListPanel(assignedEvents, "Assigned Events");
+        detailsChildrenPlaceholder.getChildren().add(eventListPanel.getRoot());
     }
 
     private void setVendor(Vendor vendor) {
