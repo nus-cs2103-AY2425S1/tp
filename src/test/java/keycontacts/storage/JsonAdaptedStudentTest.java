@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import keycontacts.commons.exceptions.IllegalValueException;
 import keycontacts.model.student.Address;
+import keycontacts.model.student.GradeLevel;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
 
@@ -80,6 +81,23 @@ public class JsonAdaptedStudentTest {
                 new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, INVALID_ADDRESS, VALID_GRADE_LEVEL, VALID_PIANO_PIECES,
                         EMPTY_REGULAR_LESSON);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidGradeLevel_throwsIllegalValueException() {
+        JsonAdaptedStudent student =
+                new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_ADDRESS, INVALID_GRADE_LEVEL, VALID_PIANO_PIECES,
+                        EMPTY_REGULAR_LESSON);
+        String expectedMessage = GradeLevel.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullGradeLevel_throwsIllegalValueException() {
+        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_ADDRESS, null,
+                VALID_PIANO_PIECES, EMPTY_REGULAR_LESSON);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, GradeLevel.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
