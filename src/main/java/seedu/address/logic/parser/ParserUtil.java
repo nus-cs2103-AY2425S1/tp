@@ -105,7 +105,7 @@ public class ParserUtil {
         requireNonNull(subjects);
         final Set<Subject> subjectSet = new HashSet<>();
         for (String subjectName : subjects) {
-            subjectSet.add(parseSubject(subjectName));
+            subjectSet.add(parseSubject(subjectName.toUpperCase()));
         }
         return subjectSet;
     }
