@@ -19,10 +19,10 @@ public class DeleteStudentCommand extends Command {
     public static final String COMMAND_WORD = "delete_student";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the student identified by the student number used.\n"
-            + "Parameters: STUDENT_NUMBER (must be a string starting with 'A0', followed by 6 numeric figures, "
-            + "and ends with a capital letter')\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_STUDENT_NUMBER + " " + "A0123456B";
+        + ": Deletes the student identified by the student number used.\n"
+        + "Parameters: STUDENT_NUMBER (must be a string starting with 'A0', followed by 6 numeric figures, "
+        + "and ends with a capital letter')\n"
+        + "Example: " + COMMAND_WORD + " " + PREFIX_STUDENT_NUMBER + " " + "A0123456B";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Student: %1$s";
 
@@ -51,6 +51,10 @@ public class DeleteStudentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_STUDENT_NO_NOT_FOUND);
         }
 
+        if (studentToBeDeleted.getGroupName().isPresent()) {
+            model.deleteStudentFromGroup(model.getGroupByName(studentToBeDeleted.getGroupName().get()),
+                studentToBeDeleted);
+        }
         model.deletePerson(studentToBeDeleted);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(studentToBeDeleted)));
     }
@@ -77,7 +81,7 @@ public class DeleteStudentCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetStudentNumber", targetStudentNo)
-                .toString();
+            .add("targetStudentNumber", targetStudentNo)
+            .toString();
     }
 }

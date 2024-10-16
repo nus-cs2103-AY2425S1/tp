@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,7 +25,7 @@ public class Student {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-    private final Optional<Group> group;
+    private final Optional<GroupName> groupName;
 
     /**
      * Every field must be present and not null.
@@ -36,18 +36,18 @@ public class Student {
         this.email = email;
         this.tags.addAll(tags);
         this.studentNumber = studentNumber;
-        this.group = Optional.empty();
+        this.groupName = Optional.empty();
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Email email, Set<Tag> tags, StudentNumber studentNumber, Optional<Group> group) {
-        requireAllNonNull(name, email, tags, studentNumber, group);
+    public Student(Name name, Email email, Set<Tag> tags, StudentNumber studentNumber, Optional<GroupName> groupName) {
+        requireAllNonNull(name, email, tags, studentNumber, groupName);
         this.name = name;
         this.email = email;
         this.tags.addAll(tags);
-        this.group = group;
+        this.groupName = groupName;
         this.studentNumber = studentNumber;
     }
 
@@ -63,8 +63,8 @@ public class Student {
         return studentNumber;
     }
 
-    public Optional<Group> getGroup() {
-        return group;
+    public Optional<GroupName> getGroupName() {
+        return groupName;
     }
 
 
@@ -141,7 +141,7 @@ public class Student {
             .add("email", email)
             .add("tags", tags)
             .add("student number", studentNumber)
-            .add("group", group.orElse(null))
+            .add("group", groupName.orElse(null))
             .toString();
     }
 
