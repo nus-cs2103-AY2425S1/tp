@@ -136,7 +136,7 @@ Examples:
 
 Marks the attendance of the specified person from the address book.
 
-Format: `markattend INDEX`
+Format: `attend INDEX`
 
 * Marks the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
