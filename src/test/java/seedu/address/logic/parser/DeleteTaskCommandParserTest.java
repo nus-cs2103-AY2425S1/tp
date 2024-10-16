@@ -1,12 +1,17 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_FIELDS;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.model.person.Name;
 
@@ -29,9 +34,9 @@ public class DeleteTaskCommandParserTest {
     @Test
     public void parse_tooManyArg_throwsParseException() {
         assertParseFailure(parser, " n/alice n/bob ti/1",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTaskCommand.MESSAGE_USAGE));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
         assertParseFailure(parser, " n/alice ti/1 ti/2",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTaskCommand.MESSAGE_USAGE));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TASK_INDEX));
     }
 
     @Test
