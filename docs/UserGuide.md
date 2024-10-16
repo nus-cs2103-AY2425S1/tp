@@ -96,7 +96,7 @@ Format: `list`
 
 Edits an existing supplier in the address book.
 
-Format: `edit NAME [n/NAME] [p/PHONE] [a/ADDRESS] [t/TAG]...`
+Format: `edit NAME [n/NAME] [p/PHONE] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the supplier with the specified `NAME`.
 * At least one of the optional fields must be provided.
