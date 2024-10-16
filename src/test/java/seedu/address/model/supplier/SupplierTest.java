@@ -12,7 +12,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalSuppliers.ALICE;
 import static seedu.address.testutil.TypicalSuppliers.BOB;
 
-import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.product.Product;
