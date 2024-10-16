@@ -29,6 +29,4 @@ public class FindAddressCommandParser implements Parser<FindAddressCommand> {
 
         return new FindAddressCommand(new AddressContainsKeywordsPredicate(Arrays.asList(addressKeywords)));
     }
-
-
 }

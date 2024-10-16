@@ -15,10 +15,10 @@ public class FindAddressCommand extends Command {
 
     public static final String COMMAND_WORD = "fa";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose locations contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose address contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " jurong east";
+            + "Example: " + COMMAND_WORD + " tampines";
 
     private final AddressContainsKeywordsPredicate predicate;
 
