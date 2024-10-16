@@ -23,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Supplier> filteredSuppliers;
+    private final FilteredList<Product> filteredProduct;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredSuppliers = new FilteredList<>(this.addressBook.getSupplierList());
+        filteredProduct = new FilteredList<>((this.addressBook.getProductList()));
     }
 
     public ModelManager() {
@@ -97,8 +99,8 @@ public class ModelManager implements Model {
 
     @Override
     public boolean hasProduct(Product product) {
-        System.out.println("has Product in model manager.");
-        return true;
+        requireNonNull(product);
+        return addressBook.hasProduct(product);
     }
 
     @Override
@@ -115,7 +117,8 @@ public class ModelManager implements Model {
 
     @Override
     public void addProduct(Product product) {
-        System.out.println("Add Product in model manager.");
+        addressBook.addProduct(product);
+        updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
 
     }
 
@@ -134,6 +137,16 @@ public class ModelManager implements Model {
     public void updateFilteredSupplierList(Predicate<Supplier> predicate) {
         requireNonNull(predicate);
         filteredSuppliers.setPredicate(predicate);
+    }
+    @Override
+    public ObservableList<Product> getFilteredProductList() {
+        return filteredProduct;
+    }
+
+    @Override
+    public void updateFilteredProductList(Predicate<Product> predicate) {
+        requireNonNull(predicate);
+        filteredProduct.setPredicate(predicate);
     }
 
     @Override
