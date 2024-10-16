@@ -151,7 +151,7 @@ Adds an order under a specified person from the address book.
 
 Format: `addOrder INDEX i/ITEM d/DATE [c/QUANTITY]`
 
-* List all orders of the person at the specified `INDEX`.
+* Add an order under the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index and quantity **must be a positive integer** 1, 2, 3, …​
 * Date must follow the following format: `DD-MM-YYYY`
@@ -160,6 +160,7 @@ Format: `addOrder INDEX i/ITEM d/DATE [c/QUANTITY]`
 Examples:
 * `addOrder 2 i/Lamp d/20-11-2024 c/3` 
 * `addOrder 1 i/Books d/02-03-2026` Adds the order with item `Books` with quantity of **1** and delivery date `02-03-2026`
+* `find Betsy` followed by `addOrder 1 i/Bottles d/12-12-2002 c/1` adds an order under the 1st person in the results of the `find` command.
 
 ### Listing all orders under a Person : `listOrder`
 
