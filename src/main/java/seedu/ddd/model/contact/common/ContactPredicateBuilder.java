@@ -55,7 +55,7 @@ public class ContactPredicateBuilder {
             String trimmedArgs = argMultimap.getValue(PREFIX_NAME).get().trim();
             if (trimmedArgs.isEmpty()) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.NAME_MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
             }
             String[] nameKeywords = trimmedArgs.split("\\s+");
             combinedPredicate = combinedPredicate.and(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
