@@ -26,7 +26,6 @@ public class UiState {
      */
     public void setState(State state) {
         currentState = state;
-        System.out.println(state);
     }
 
     @Override

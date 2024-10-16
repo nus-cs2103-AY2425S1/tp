@@ -32,7 +32,9 @@ public class UiStateTest {
     public void execute_sameCommandTypes_returnsSameUiState() throws CommandException {
         new AddCommand(AMY).execute(expectedModel);
         new DeleteCommand(INDEX_FIRST_PERSON).execute(model);
+        assertEquals(model.getUiState(), model.getUiState());
         assertEquals(expectedModel.getUiState(), model.getUiState());
+        assertEquals(expectedModel.getUiState().getState(), model.getUiState().getState());
     }
 
     @Test
@@ -40,5 +42,12 @@ public class UiStateTest {
         new AddCommand(AMY).execute(expectedModel);
         new ViewTasksCommand().execute(model);
         assertNotEquals(expectedModel.getUiState(), model.getUiState());
+        assertNotEquals(expectedModel.getUiState().getState(), model.getUiState().getState());
+    }
+
+    @Test
+    public void null_returnsNotEquals() throws CommandException {
+        new ViewTasksCommand().execute(model);
+        assertNotEquals(null, model.getUiState());
     }
 }

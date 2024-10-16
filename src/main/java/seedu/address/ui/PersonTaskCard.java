@@ -37,11 +37,9 @@ public class PersonTaskCard extends UiPart<Region> {
      */
     public PersonTaskCard(Person person, int displayedIndex) {
         super(FXML);
-        System.out.println("no");
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        System.out.println(person.getTaskList().toDescription());
         taskList.setText("Tasks:\n" + person.getTaskList().toDescription());
     }
 }
