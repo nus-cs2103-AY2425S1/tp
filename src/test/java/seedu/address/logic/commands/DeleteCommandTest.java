@@ -192,7 +192,7 @@ public class DeleteCommandTest {
     public void execute_deleteByNameWithDuplicates_throwsCommandException() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Person duplicatePerson = new PersonBuilder().withName("Carl Kurz").withPhone("11111111")
-                .withEmail("testduplicate@gmail.com").withJobCode("testduplicate").build();
+                .withEmail("testduplicate@gmail.com").withJobCode("123ABC").build();
         model.addPerson(duplicatePerson);
         DeleteCommand deleteCommand = new DeleteCommand(new Name("Carl Kurz"));
         String expectedMessage = "Multiple contacts with the same full name found. Please specify more using"
@@ -206,7 +206,7 @@ public class DeleteCommandTest {
     public void execute_deleteByNameEmailNotFound_throwsCommandException() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Person duplicatePerson = new PersonBuilder().withName("Carl Kurz").withPhone("11111111")
-                .withEmail("testduplicate@gmail.com").withJobCode("testduplicate").build();
+                .withEmail("testduplicate@gmail.com").withJobCode("123ABC").build();
         model.addPerson(duplicatePerson);
         Name invalidName = new Name("Invalid Person");
         Email invalidEmail = new Email("invalidEmail@gmail.com");
@@ -219,7 +219,7 @@ public class DeleteCommandTest {
     public void execute_deleteByNamePhoneNotFound_throwsCommandException() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Person duplicatePerson = new PersonBuilder().withName("Carl Kurz").withPhone("11111111")
-                .withEmail("testduplicate@gmail.com").withJobCode("testduplicate").build();
+                .withEmail("testduplicate@gmail.com").withJobCode("123ABC").build();
         model.addPerson(duplicatePerson);
         Name invalidName = new Name("Invalid Person");
         Phone invalidPhone = new Phone("99999999");
