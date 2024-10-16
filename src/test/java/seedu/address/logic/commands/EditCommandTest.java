@@ -3,17 +3,17 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_MICROSOFT;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_MICROSOFT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_MICROSOFT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BIGTECH;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showCompanyAtIndex;
+import static seedu.address.testutil.TypicalCompanies.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_COMPANY;
-import static seedu.address.testutil.TypicalCompanies.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,7 +42,8 @@ public class EditCommandTest {
         EditCommand.EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder(editedCompany).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_COMPANY, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_COMPANY_SUCCESS, Messages.format(editedCompany));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_COMPANY_SUCCESS,
+                Messages.format(editedCompany));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setCompany(model.getFilteredCompanyList().get(0), editedCompany);
@@ -63,7 +64,8 @@ public class EditCommandTest {
                 .withPhone(VALID_PHONE_MICROSOFT).withTags(VALID_TAG_BIGTECH).build();
         EditCommand editCommand = new EditCommand(indexLastCompany, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_COMPANY_SUCCESS, Messages.format(editedCompany));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_COMPANY_SUCCESS,
+                Messages.format(editedCompany));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setCompany(lastCompany, editedCompany);
@@ -76,7 +78,8 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_COMPANY, new EditCommand.EditCompanyDescriptor());
         Company editedCompany = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_COMPANY_SUCCESS, Messages.format(editedCompany));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_COMPANY_SUCCESS,
+                Messages.format(editedCompany));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
@@ -92,7 +95,8 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_COMPANY,
                 new EditCompanyDescriptorBuilder().withName(VALID_NAME_MICROSOFT).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_COMPANY_SUCCESS, Messages.format(editedCompany));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_COMPANY_SUCCESS,
+                Messages.format(editedCompany));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setCompany(model.getFilteredCompanyList().get(0), editedCompany);

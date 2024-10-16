@@ -26,8 +26,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.company.Company;
 import seedu.address.model.company.NameContainsKeywordsPredicate;
 import seedu.address.testutil.CompanyBuilder;
-import seedu.address.testutil.EditCompanyDescriptorBuilder;
 import seedu.address.testutil.CompanyUtil;
+import seedu.address.testutil.EditCompanyDescriptorBuilder;
 
 public class AddressBookParserTest {
 
@@ -90,8 +90,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE),
-                () -> parser.parseCommand(""));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
+                -> parser.parseCommand(""));
     }
 
     @Test
