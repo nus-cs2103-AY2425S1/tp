@@ -36,6 +36,10 @@ public class Volunteer extends Person {
         this.hours = hours;
     }
 
+    public Hours getHours() {
+        return hours;
+    }
+
     /**
      * Compares this Volunteer to another for equality.
      *
