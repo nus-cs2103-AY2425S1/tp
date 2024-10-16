@@ -22,6 +22,7 @@ import seedu.internbuddy.commons.util.ToStringBuilder;
 import seedu.internbuddy.logic.Messages;
 import seedu.internbuddy.logic.commands.exceptions.CommandException;
 import seedu.internbuddy.model.Model;
+import seedu.internbuddy.model.application.Application;
 import seedu.internbuddy.model.company.Address;
 import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
@@ -104,8 +105,11 @@ public class EditCommand extends Command {
         Address updatedAddress = editCompanyDescriptor.getAddress().orElse(companyToEdit.getAddress());
         Set<Tag> updatedTags = editCompanyDescriptor.getTags().orElse(companyToEdit.getTags());
         Status updatedStatus = editCompanyDescriptor.getStatus().orElse(companyToEdit.getStatus());
+        List<Application> applications = companyToEdit.getApplications();
 
-        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedStatus);
+
+        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedStatus, applications);
     }
 
     @Override
