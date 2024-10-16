@@ -1,5 +1,8 @@
 package seedu.address.model.preferredtime;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents the Day of PreferredTime to play games in the gamer book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDay(String)}.
@@ -17,8 +20,14 @@ public class Day {
 
     public final String day;
 
-    // TODO: constructor
+    /**
+     * Constructs a {@code Day}.
+     *
+     * @param day A valid day.
+     */
     public Day(String day) {
+        requireNonNull(day);
+        checkArgument(isValidDay(day), MESSAGE_CONSTRAINTS);
         this.day = day;
     }
 

@@ -1,5 +1,8 @@
 package seedu.address.model.preferredtime;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents the TIme of PreferredTime to play games in the gamer book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}.
@@ -16,6 +19,8 @@ public class Time {
      * Constructs a {@code Time}.
      */
     public Time(String start) {
+        requireNonNull(start);
+        checkArgument(isValidTime(start), MESSAGE_CONSTRAINTS);
         this.start = start;
     }
 

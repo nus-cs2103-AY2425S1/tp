@@ -1,6 +1,11 @@
 package seedu.address.model.preferredtime;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 /**
  * Represents a Person's preferred time to play games in the gamer book.
@@ -11,12 +16,10 @@ public class PreferredTime {
     public static final String MESSAGE_CONSTRAINTS =
             "PreferredTime should consists of Day and Time in the format 'Day HHmm'.\n"
             + "There should be exactly one space in between";
+    public static final String VALIDATION_REGEX = "(\\p{L}+)\\s(\\d{4})$";
+    private static final Pattern VALIDATED_PATTERN = Pattern.compile(VALIDATION_REGEX);
 
-    // TODO: change the REGEX
-    public static final String VALIDATION_REGEX = "\\p{L}+\\s\\d{4}$";
     public final String preferredTime;
-
-    // TODO: need to change to Day and Time separately in the future
     public final Day day;
     public final Time time;
 
@@ -25,14 +28,20 @@ public class PreferredTime {
     /**
      * Constructs a {@code PreferredTime}.
      *
-     * @param day
-     * @param time
+     * @param preferredTime A valid preferredTime input that can be break down to valid day and valid time.
      */
-    public PreferredTime(String preferredTime, String day, String time) {
-        requireNonNull(day, time);
+    public PreferredTime(String preferredTime) {
+        requireNonNull(preferredTime);
+        checkArgument(isValidPreferredTime(preferredTime), MESSAGE_CONSTRAINTS);
         this.preferredTime = preferredTime;
-        this.day = new Day(day);
-        this.time = new Time(time);
+
+        Matcher matcher = VALIDATED_PATTERN.matcher(preferredTime); // should always match as checked
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException("Invalid preferred time format: " + preferredTime);
+        }
+
+        day = new Day(matcher.group(1));
+        time = new Time(matcher.group(2));
     }
 
     /**
@@ -62,7 +71,7 @@ public class PreferredTime {
         return preferredTime.hashCode();
     }
 
-    // TODO: toString
+
     /**
      * Format state as text for viewing.
      */

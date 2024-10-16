@@ -11,8 +11,24 @@ import org.junit.jupiter.api.Test;
 public class PreferredTimeTest {
 
     @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new PreferredTime(null));
+    }
+
+    @Test
+    public void constructor_invalidName_throwsIllegalArgumentException() {
+        String invalid_empty = "";
+        assertThrows(IllegalArgumentException.class, () -> new PreferredTime(invalid_empty));
+
+        String invalid_out_of_range = "Monday 4500";
+        assertThrows(IllegalArgumentException.class, () -> new PreferredTime(invalid_out_of_range));
+
+        String invalid_day = "weekday 1200";
+        assertThrows(IllegalArgumentException.class, () -> new PreferredTime(invalid_day));
+    }
+
+    @Test
     public void isValidPreferredTime() {
-        // TODO: implement test for PreferredTime
 
         // null preferred time
         assertThrows(NullPointerException.class, () -> PreferredTime.isValidPreferredTime(null));

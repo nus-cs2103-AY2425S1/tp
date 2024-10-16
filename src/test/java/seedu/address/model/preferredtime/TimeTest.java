@@ -10,8 +10,22 @@ import org.junit.jupiter.api.Test;
 public class TimeTest {
 
     @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Time(null));
+    }
+
+    @Test
+    public void constructor_invalidName_throwsIllegalArgumentException() {
+        String invalidTime_empty = "";
+        assertThrows(IllegalArgumentException.class, () -> new Time(invalidTime_empty));
+
+        String invalidTime_out_of_range = "4500";
+        assertThrows(IllegalArgumentException.class, () -> new Time(invalidTime_out_of_range));
+    }
+
+
+    @Test
     public void isValidTime() {
-        // TODO: implement test for time format
 
         // null time
         assertThrows(NullPointerException.class, () -> Time.isValidTime(null));
