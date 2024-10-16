@@ -125,6 +125,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredGuestList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -139,4 +140,31 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredGuestList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the vendor at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showVendorAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredVendorList().size());
+
+        Person person = model.getFilteredVendorList().get(targetIndex.getZeroBased());
+        final String[] splitName = person.getName().fullName.split("\\s+");
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredVendorList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the guest at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showGuestAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredGuestList().size());
+
+        Person person = model.getFilteredGuestList().get(targetIndex.getZeroBased());
+        final String[] splitName = person.getName().fullName.split("\\s+");
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredGuestList().size());
+    }
 }
