@@ -1,4 +1,4 @@
-package seedu.ddd.model.contact;
+package seedu.ddd.model.contact.common;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -15,7 +15,6 @@ import static seedu.ddd.testutil.TypicalContacts.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.model.contact.client.Client;
-import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.vendor.Vendor;
 import seedu.ddd.testutil.ClientBuilder;
 import seedu.ddd.testutil.VendorBuilder;

@@ -1,4 +1,4 @@
-package seedu.ddd.model.contact;
+package seedu.ddd.model.contact.common;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -10,7 +10,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ddd.model.contact.common.NameContainsKeywordsPredicate;
 import seedu.ddd.testutil.ClientBuilder;
 
 public class NameContainsKeywordsPredicateTest {
