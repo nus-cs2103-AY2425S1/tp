@@ -18,6 +18,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RoomNumber;
 import seedu.address.model.tag.Tag;
+
 /**
  * Jackson-friendly version of {@link Person}.
  */
@@ -30,6 +31,8 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String roomNumber;
+    private final String emergencyName;
+    private final String emergencyPhone;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -38,12 +41,15 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("room number") String roomNumber,
-            @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("address") String address, @JsonProperty("emergency name") String emergencyName,
+            @JsonProperty("emergency phone") String emergencyPhone, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.roomNumber = roomNumber;
         this.address = address;
+        this.emergencyName = emergencyName;
+        this.emergencyPhone = emergencyPhone;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -58,23 +64,14 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         roomNumber = source.getRoomNumber().map(rn -> rn.value).orElse(null);
         address = source.getAddress().value;
-        //TODO: Implement serialization for emergency contact in the storage commit.
+        emergencyName = source.getEmergencyContactName().map(en -> en.fullName).orElse(null);
+        emergencyPhone = source.getEmergencyContactPhone().map(ep -> ep.value).orElse(null);
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
     }
 
-    /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
-     *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
-     */
-    public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
-
+    private Name parseName(String name) throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -84,46 +81,83 @@ class JsonAdaptedPerson {
         if (!Name.isValidLength(name)) {
             throw new IllegalValueException(Name.LENGTH_MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        return new Name(name);
+    }
 
+    private Phone parsePhone(String phone) throws IllegalValueException {
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
         if (!Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        return new Phone(phone);
+    }
 
+    private Email parseEmail(String email) throws IllegalValueException {
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
         if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+        return new Email(email);
+    }
 
-        //TODO: Make room number optional in the storage commit.
-        if (roomNumber == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    RoomNumber.class.getSimpleName()));
-        }
-        if (!RoomNumber.isValidRoomNumber(roomNumber)) {
+    private RoomNumber parseRoomNumber(String roomNumber) throws IllegalValueException {
+        // room number is optional
+        boolean hasRoomNumber = roomNumber != null;
+        if (hasRoomNumber && !RoomNumber.isValidRoomNumber(roomNumber)) {
             throw new IllegalValueException(RoomNumber.MESSAGE_CONSTRAINTS);
         }
-        final RoomNumber modelRoomNumber = new RoomNumber(roomNumber);
+        return hasRoomNumber ? new RoomNumber(roomNumber) : null;
+    }
 
+    private Address parseAddress(String address) throws IllegalValueException {
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        return new Address(address);
+    }
 
-        final EmergencyContact modelEmergencyContact = null;
-        //TODO: Implement parsing and marshalling in the storage commit.
+    private EmergencyContact parseEmergencyContact(String name, String phone) throws IllegalValueException {
+        final boolean hasName = name != null;
+        final boolean hasPhone = phone != null;
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        // emergency contact is optional
+        if (!hasName && !hasPhone) {
+            return null;
+        }
+
+        final Name emergencyName = hasName ? parseName(name) : null;
+        final Phone emergencyPhone = hasPhone ? parsePhone(phone) : null;
+        return new EmergencyContact(emergencyName, emergencyPhone);
+    }
+
+    private Set<Tag> parseTags(List<JsonAdaptedTag> tags) throws IllegalValueException {
+        final Set<Tag> personTags = new HashSet<>();
+        for (JsonAdaptedTag tag : tags) {
+            personTags.add(tag.toModelType());
+        }
+        return personTags;
+    }
+
+    /**
+     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     */
+    public Person toModelType() throws IllegalValueException {
+        final Name modelName = parseName(name);
+        final Phone modelPhone = parsePhone(phone);
+        final Email modelEmail = parseEmail(email);
+        final RoomNumber modelRoomNumber = parseRoomNumber(roomNumber);
+        final Address modelAddress = parseAddress(address);
+        final EmergencyContact modelEmergencyContact = parseEmergencyContact(emergencyName, emergencyPhone);
+        final Set<Tag> modelTags = parseTags(tags);
         return new Person(modelName, modelPhone, modelEmail, modelRoomNumber, modelAddress,
                 modelEmergencyContact, modelTags);
     }

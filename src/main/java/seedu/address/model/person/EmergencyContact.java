@@ -3,8 +3,6 @@ package seedu.address.model.person;
 import java.util.Objects;
 import java.util.Optional;
 
-import seedu.address.commons.util.ToStringBuilder;
-
 /**
  * Represents a Person's emergency contact in the address book.
  * Guarantees: field values are validated, immutable.
@@ -58,9 +56,10 @@ public class EmergencyContact {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("Name", name)
-                .add("Phone", phone)
+        return new StringBuilder()
+                .append("(Name: ").append(name)
+                .append("; Phone: ").append(phone)
+                .append(")")
                 .toString();
     }
 }
