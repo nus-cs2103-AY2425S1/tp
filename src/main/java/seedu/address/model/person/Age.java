@@ -7,8 +7,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Age {
     public static final String MESSAGE_CONSTRAINTS =
-            "Age should only contain a number between 0 and 150 ";
+            "Age should only contain a number between 0 and 150";
     public final String value;
+
     /**
      * Constructs a {@code Age}.
      *
@@ -17,8 +18,9 @@ public class Age {
     public Age(String age) {
         requireNonNull(age);
         checkArgument(isValidAge(age), MESSAGE_CONSTRAINTS);
-        value = age;
+        this.value = age;
     }
+
     /**
      * Returns true if a given string is a valid age.
      * A valid age should be a number between 0 and 150 (inclusive).
@@ -31,10 +33,12 @@ public class Age {
             return false;
         }
     }
+
     @Override
     public String toString() {
         return value;
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -47,8 +51,10 @@ public class Age {
         Age otherAge = (Age) other;
         return value.equals(otherAge.value);
     }
+
     @Override
     public int hashCode() {
         return value.hashCode();
     }
+
 }
