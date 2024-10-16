@@ -30,7 +30,7 @@ TAHub simplifies the role of Teaching Assistants by providing a centralized hub 
 
    * `list` : Lists all students.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com c/CS2103T,CS2101` : Adds a student named `John Doe` to TAHub.
+   * `add n/John Doe p/98765432 e/johnd@example.com c/CS2103T;CS2101` : Adds a student named `John Doe` to TAHub.
 
    * `delete 2` : Deletes the 2nd student shown in the current list.
 
@@ -55,7 +55,7 @@ TAHub simplifies the role of Teaching Assistants by providing a centralized hub 
   e.g `n/NAME [c/COURSE]` can be used as `n/John Doe c/CS2103T` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[c/COURSE]…​` can be used as ` ` (i.e. 0 times), `c/CS2103T,CS2101`, `c/CS2103T c/CS2101` etc.
+  e.g. `[c/COURSE]…​` can be used as ` ` (i.e. 0 times), `c/CS2103T;CS2101`, `c/CS2103T c/CS2101` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -87,7 +87,7 @@ A student can have any number of courses (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
-* `add n/Betsy Crowe e/betsycrowe@example.com p/1234567 c/CS2103T,CS2101`
+* `add n/Betsy Crowe e/betsycrowe@example.com p/1234567 c/CS2103T;CS2101`
 
 ### Listing all students : `list`
 
@@ -111,7 +111,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [c/COURSE]…​`
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower c/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing courses.
-*  `edit 3 c/CS2103T,CS2101` Edits the courses of the 3rd student to be CS2103T & CS2101.
+*  `edit 3 c/CS2103T;CS2101` Edits the courses of the 3rd student to be CS2103T & CS2101.
 
 ### Locating students by name: `find`
 
@@ -140,11 +140,11 @@ Format: `delete INDEX...`
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Can delete multiple students at once.
+* Can delete multiple students at once by separating indices with semicolons (;).
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in TAHub.
-* `list` followed by `delete 2,3` deletes the 2nd and 3rd student in TAHub.
+* `list` followed by `delete 2;3` deletes the 2nd and 3rd student in TAHub.
 * `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 ### Clearing all entries : `clear`
@@ -196,10 +196,10 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL [c/COURSE]…​` <br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com c/CS2103T,CS2101`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL [c/COURSE]…​` <br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com c/CS2103T;CS2101`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COURSE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com, c/CS2100`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COURSE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com c/CS2100`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
