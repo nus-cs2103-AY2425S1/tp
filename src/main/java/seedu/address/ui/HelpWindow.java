@@ -48,6 +48,9 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label helpMessage;
 
+    private double xOffset = 0;
+    private double yOffset = 0;
+
     /**
      * Creates a new HelpWindow.
      *
@@ -56,6 +59,16 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+
+        // Make the window draggable
+        getRoot().getScene().setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+        getRoot().getScene().setOnMouseDragged(event -> {
+            getRoot().setX(event.getScreenX() - xOffset);
+            getRoot().setY(event.getScreenY() - yOffset);
+        });
     }
 
     /**
