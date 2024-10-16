@@ -72,7 +72,11 @@ public class AddressBookParser {
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(modelType, arguments);
+            if (modelType == ModelType.PERSON) {
+                return new FindCommandParser().parse(modelType, arguments);
+            } else {
+                return new FindEventCommandParser().parse(modelType, arguments);
+            }
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
