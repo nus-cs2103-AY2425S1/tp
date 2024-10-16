@@ -1,41 +1,61 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Represents a Student's Attendance.
  */
 public class AttendanceList {
-    private List<Attendance> attendanceList;
+    private final Map<LocalDateTime, Attendance> attendanceList;
 
     /**
-     * Initializes an empty attendance list.
+     * Initializes an empty immutable attendance list.
      */
     public AttendanceList() {
-        this.attendanceList = new ArrayList<Attendance>();
+        this.attendanceList = Collections.unmodifiableMap(new HashMap<>());
     }
 
     /**
-     * Adds an attendance record to the attendance list.
-     *
-     * @param attendance The attendance record to be added. Must not be null.
+     * Initializes an populated immutable attendance list.
      */
-    public void addAttendance(Attendance attendance) {
-        requireNonNull(attendance);
-        attendanceList.add(attendance);
+    public AttendanceList(Map<LocalDateTime, Attendance> attendanceList) {
+        this.attendanceList = Collections.unmodifiableMap(attendanceList);
     }
 
     /**
-     * Removes the specified attendance from the attendance list.
+     * Sets the attendance for a specific date.
+     * If an attendance record already exists for the given date, it will be
+     * replaced with the new attendance.
      *
-     * @param index The index of the attendance record to be removed.
+     * @param date       The date for which the attendance is to be set.
+     * @param attendance The attendance to be set for the specified date.
+     * @return A new AttendanceList with the updated attendance record.
      */
-    public void removeAttendance(int index) {
-        // TODO: handle error for invalid index
-        attendanceList.remove(index);
+    public AttendanceList setAttendance(LocalDateTime date, Attendance attendance) {
+        Map<LocalDateTime, Attendance> newAttendanceList = new HashMap<>(attendanceList);
+        attendanceList.merge(date, attendance, (oldAttendance, newAttendance) -> newAttendance);
+        return new AttendanceList(newAttendanceList);
+    }
+
+    /**
+     * Removes the attendance record for the specified date.
+     *
+     * @param date The date of the attendance record to be removed.
+     * @return A new AttendanceList with the specified attendance record removed.
+     * @throws IllegalArgumentException If the attendance record for the specified
+     *                                  date does not exist.
+     */
+    public AttendanceList removeAttendance(LocalDateTime date) {
+        if (!attendanceList.containsKey(date)) {
+            // TODO throw better exception
+            throw new IllegalArgumentException("Attendance record does not exist.");
+        }
+        Map<LocalDateTime, Attendance> newAttendanceList = new HashMap<>(attendanceList);
+        newAttendanceList.remove(date);
+        return new AttendanceList(attendanceList);
     }
 
     @Override
@@ -54,10 +74,10 @@ public class AttendanceList {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Attendance attendance : attendanceList) {
+        attendanceList.forEach((date, attendance) -> {
             sb.append(attendance.toString());
             sb.append("\n");
-        }
+        });
         return sb.toString();
     }
 
