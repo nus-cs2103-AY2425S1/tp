@@ -13,4 +13,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_BIRTHDAY = new Prefix("b/");
     public static final Prefix PREFIX_APPOINTMENT = new Prefix("appt/");
+    public static final Prefix PREFIX_POLICY = new Prefix("po/");
+    public static final Prefix PREFIX_POLICY_NAME = new Prefix("pon/");
+    public static final Prefix PREFIX_POLICY_START_DATE = new Prefix("pos/");
+    public static final Prefix PREFIX_POLICY_END_DATE = new Prefix("poe/");
 }

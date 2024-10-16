@@ -8,6 +8,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_END_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -42,6 +46,9 @@ public class CommandTestUtil {
     public static final String VALID_BIRTHDAY_BOB = "1990-10-10";
     public static final String VALID_APPOINTMENT_AMY = "2024-12-12 12:00";
     public static final String VALID_APPOINTMENT_BOB = "2024-10-10 11:00";
+    public static final String VALID_POLICY_NAME_LIFE = "life insurance";
+    public static final String VALID_DATE_1 = "2024-10-16";
+    public static final String VALID_DATE_2 = "2025-11-11";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -57,6 +64,11 @@ public class CommandTestUtil {
     public static final String BIRTHDAY_BOB = " " + PREFIX_BIRTHDAY + VALID_BIRTHDAY_BOB;
     public static final String APPOINTMENT_AMY = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_AMY;
     public static final String APPOINTMENT_BOB = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_BOB;
+    public static final String EDIT_POLICY_LIFE_1 = " 1 "
+            + PREFIX_POLICY_NAME + VALID_POLICY_NAME_LIFE + " "
+            + PREFIX_POLICY_START_DATE + VALID_DATE_1 + " "
+            + PREFIX_POLICY_END_DATE + VALID_DATE_2;
+    public static final String VALID_EDIT_POLICY_LIFE = " " + PREFIX_POLICY + EDIT_POLICY_LIFE_1;
 
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
