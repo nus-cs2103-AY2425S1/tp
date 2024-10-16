@@ -4,19 +4,24 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BENSON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_OWESMONEY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -30,8 +35,13 @@ public class TagDeleteCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Set<Tag> stubTagList = new HashSet<>();
 
+    @BeforeEach
+    public void init() {
+        stubTagList.clear();
+    }
+
     @Test
-    public void execute_deleteTagUnfilteredList_success() {
+    public void execute_allTagsMatch_success() {
         List<Person> matchingPersons = model.getFilteredPersonList().stream()
                 .filter(person -> person.getName().fullName.equalsIgnoreCase(VALID_NAME_ALICE))
                 .toList();
@@ -53,29 +63,105 @@ public class TagDeleteCommandTest {
     }
 
     @Test
+    public void execute_oneTagMatch_success() {
+        List<Person> matchingPersons = model.getFilteredPersonList().stream()
+                .filter(person -> person.getName().fullName.equalsIgnoreCase(VALID_NAME_ALICE))
+                .toList();
+
+        Person firstPerson = matchingPersons.get(0);
+        Person originalPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_FRIENDS).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withTags().build();
+
+        stubTagList.add(new Tag(VALID_TAG_FRIENDS));
+        stubTagList.add(new Tag(VALID_TAG_HUSBAND));
+        TagDeleteCommand tagDeleteCommand = new TagDeleteCommand(originalPerson.getName(), stubTagList);
+
+        String expectedMessage1 = String.format(TagDeleteCommand.MESSAGE_TAG_DOESNT_EXIST + "\n",
+                VALID_TAG_HUSBAND, Messages.format(originalPerson));
+        String expectedMessage2 = String.format(TagDeleteCommand.MESSAGE_DELETE_TAG_SUCCESS,
+                VALID_TAG_FRIENDS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccess(tagDeleteCommand, model, expectedMessage1 + expectedMessage2,
+                expectedModel);
+    }
+
+    @Test
+    public void execute_noTagMatch_success() {
+        List<Person> matchingPersons = model.getFilteredPersonList().stream()
+                .filter(person -> person.getName().fullName.equalsIgnoreCase(VALID_NAME_ALICE))
+                .toList();
+
+        Person firstPerson = matchingPersons.get(0);
+        Person originalPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_FRIENDS).build();
+
+        stubTagList.add(new Tag(VALID_TAG_HUSBAND));
+        TagDeleteCommand tagDeleteCommand = new TagDeleteCommand(originalPerson.getName(), stubTagList);
+
+        String expectedMessage = String.format(TagDeleteCommand.MESSAGE_TAG_DOESNT_EXIST,
+                Messages.tagSetToString(stubTagList), Messages.format(originalPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, originalPerson);
+
+        assertCommandSuccess(tagDeleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_multipleTagMatch_success() {
+        List<Person> matchingPersons = model.getFilteredPersonList().stream()
+                .filter(person -> person.getName().fullName.equalsIgnoreCase(VALID_NAME_BENSON))
+                .toList();
+
+        Person firstPerson = matchingPersons.get(0);
+        Person originalPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_FRIENDS, VALID_TAG_OWESMONEY).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withTags().build();
+
+        stubTagList.add(new Tag(VALID_TAG_FRIENDS));
+        stubTagList.add(new Tag(VALID_TAG_OWESMONEY));
+        TagDeleteCommand tagDeleteCommand = new TagDeleteCommand(originalPerson.getName(), stubTagList);
+
+        String expectedMessage = String.format(TagDeleteCommand.MESSAGE_DELETE_TAG_SUCCESS,
+                Messages.tagSetToString(stubTagList), Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccess(tagDeleteCommand, model, expectedMessage, expectedModel);
+
+    }
+
+    @Test
+    public void execute_nameMismatch_exceptionThrown() {
+        List<Person> matchingPersons = model.getFilteredPersonList().stream()
+                .filter(person -> person.getName().fullName.equalsIgnoreCase(VALID_NAME_ALICE))
+                .toList();
+
+        Person firstPerson = matchingPersons.get(0);
+        Person wrongPerson = new PersonBuilder(firstPerson).withName(VALID_NAME_AMY).build();
+        stubTagList.add(new Tag(VALID_TAG_FRIENDS));
+
+        TagDeleteCommand tagDeleteCommand = new TagDeleteCommand(wrongPerson.getName(), stubTagList);
+
+        assertThrows(CommandException.class, String.format(TagDeleteCommand.MESSAGE_PERSON_DOESNT_EXIST,
+                        wrongPerson.getName()), () -> tagDeleteCommand.execute(model));
+    }
+
+    @Test
     public void equals() {
 
-        Tag tag1 = new Tag(VALID_TAG_AMY);
         Tag tag2 = new Tag(VALID_TAG_FRIENDS);
         Name name = new Name(VALID_NAME_AMY);
-        Set<Tag> standardTagList = new HashSet<>();
         Set<Tag> deleteTagList = new HashSet<>();
-        standardTagList.add(tag1);
-        standardTagList.add(tag2);
         deleteTagList.add(tag2);
-        final TagAddCommand standardCommand = new TagAddCommand(name, standardTagList);
         final TagDeleteCommand standardDeleteCommand = new TagDeleteCommand(name, deleteTagList);
 
         // same values -> returns true
-        Tag stubTag1 = new Tag(VALID_TAG_AMY);
-        Tag stubTag2 = new Tag(VALID_TAG_FRIENDS);
         Name stubName = new Name(VALID_NAME_AMY);
-        Set<Tag> stubTagList = new HashSet<>();
         Set<Tag> deleteStubTagList = new HashSet<>();
-        stubTagList.add(stubTag1);
-        stubTagList.add(stubTag2);
         deleteStubTagList.add(tag2);
-        TagAddCommand commandWithSameValues = new TagAddCommand(stubName, stubTagList);
         TagDeleteCommand deleteCommandWithSameValues = new TagDeleteCommand(name, deleteStubTagList);
         assertTrue(standardDeleteCommand.equals(deleteCommandWithSameValues));
 
@@ -90,13 +176,8 @@ public class TagDeleteCommandTest {
 
         // different tag -> returns false
         Tag newStubTag1 = new Tag(VALID_TAG_BOB);
-        Tag newStubTag2 = new Tag(VALID_TAG_FRIENDS);
-        Set<Tag> newStubTagList = new HashSet<>();
         Set<Tag> newDeleteStubTagList = new HashSet<>();
-        newStubTagList.add(newStubTag1);
-        newStubTagList.add(newStubTag2);
         deleteStubTagList.add(newStubTag1);
-        TagAddCommand commandWithDifferentValues = new TagAddCommand(stubName, newStubTagList);
         TagDeleteCommand deleteCommandWithDifferentValues = new TagDeleteCommand(stubName, newDeleteStubTagList);
         assertFalse(standardDeleteCommand.equals(deleteCommandWithDifferentValues));
     }
