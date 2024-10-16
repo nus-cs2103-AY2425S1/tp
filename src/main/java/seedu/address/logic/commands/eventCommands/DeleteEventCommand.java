@@ -47,7 +47,7 @@ public class DeleteEventCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, Messages.format(eventToDelete)));
     }
 
-     @Override
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
