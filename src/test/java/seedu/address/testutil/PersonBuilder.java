@@ -94,7 +94,7 @@ public class PersonBuilder {
         return this;
     }
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code organisation} of the {@code Organisation} that we are building.
      */
     public PersonBuilder withOrganisation(String organisation) {
         this.organisation = new Organisation(organisation);
