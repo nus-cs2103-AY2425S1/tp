@@ -204,14 +204,8 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
   
   >Shows a list of all persons in the address book.
   >
-  >Format: `list all`
-  >* Lists all perons regardless of if they are employees or potential hires
-  >
-  >Format `list e`
-  >*List all employees
-  >
-  >Format `list ph`
-  >*List all potential hires
+  >Format: `list all` or `list ph` or `list e` *(Note the `ph` or `e` parameter. `ph` refers to potential hires and `e` refers to employees)*
+  >* Lists type of persons based on the parameter given.
 </details>
 
 <br>
