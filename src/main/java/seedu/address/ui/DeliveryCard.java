@@ -44,7 +44,7 @@ public class DeliveryCard extends UiPart<Region> {
         senderName.setText(delivery.getDeliverySender().getName().fullName); // only displaying supplier's name for now
         status.setText(delivery.getDeliveryStatus().name());
         deliveryTime.setText(delivery.getDeliveryDate().toString());
-        cost.setText(delivery.getDeliveryCost().toString());
+        cost.setText(delivery.getDeliveryCost().displayString());
         quantity.setText(delivery.getDeliveryQuantity().toString());
     }
 
