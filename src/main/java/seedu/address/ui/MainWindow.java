@@ -150,6 +150,9 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the pie chart window.
+     */
     @FXML
     public void handlePieChart() {
         piChartWindow = new PiChartWindow();

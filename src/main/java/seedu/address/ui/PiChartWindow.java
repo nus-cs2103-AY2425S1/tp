@@ -1,18 +1,18 @@
 package seedu.address.ui;
 
+import java.util.Map;
+import java.util.logging.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.util.Map;
-import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 
+/**
+ * The Pie Chart window. Displays a Pie Chart of the number of students in each class.
+ */
 public class PiChartWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(PiChartWindow.class);
     private static final String FXML = "PiChartWindow.fxml";
