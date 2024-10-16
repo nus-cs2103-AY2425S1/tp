@@ -12,7 +12,6 @@ import keycontacts.model.student.GradeLevel;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
 import keycontacts.model.student.Student;
-import keycontacts.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Student objects.
@@ -93,7 +92,7 @@ public class StudentBuilder {
      * and set it to the {@code Student} that we are building.
      */
     public StudentBuilder withPianoPieces(String ... pianoPieces) {
-        this.pianoPieces = SampleDataUtil.getPianoPieceSet(pianoPieces);
+        this.pianoPieces = PianoPiece.getPianoPieceSet(pianoPieces);
         return this;
     }
 
