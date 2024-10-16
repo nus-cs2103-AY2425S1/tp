@@ -20,10 +20,10 @@ import seedu.address.model.person.exceptions.DuplicateGroupException;
 public class CreateGroupCommand extends Command {
     public static final String COMMAND_WORD = "createGroup";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new group of specified name, with"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new group of specified name, with "
             + "the specified persons (referenced by index of current list) inside.\n"
-            + "Parameters: GROUP_NAME /m [INDICES]...\n"
-            + "Example: " + COMMAND_WORD + "blood drive /m 1 4 6";
+            + "Parameters: GROUP_NAME m/INDEX [MORE_INDICES...]\n"
+            + "Example: " + COMMAND_WORD + "blood drive m/ 1 4 6";
 
     public static final String MESSAGE_CREATE_GROUP_SUCCESS = "Created group %s\n";
 
@@ -45,7 +45,7 @@ public class CreateGroupCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Group newGroup = new Group(groupName);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getPersonList();
 
         for (Index i : members) {
             if (i.getZeroBased() >= lastShownList.size()) {

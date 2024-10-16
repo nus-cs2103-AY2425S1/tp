@@ -166,12 +166,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updatePersonListSort(Comparator<Person> comparator) {
+        public void removeGroup(String groupName) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void removeGroup(Group group) {
+        public void updatePersonListSort(Comparator<Person> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 

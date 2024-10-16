@@ -98,9 +98,9 @@ public interface Model {
     void addGroup(Group group) throws DuplicateGroupException;
 
     /**
-     * Removes {@code group} from the groups in the {@code AddressBook}.
+     * Removes group with name {@code groupName} from the groups in the {@code AddressBook}.
      */
-    void removeGroup(Group group) throws GroupNotFoundException;
+    void removeGroup(String groupName) throws GroupNotFoundException;
 
     /**
      * Updates the sort order of the person list to the given {@code comparator}.
