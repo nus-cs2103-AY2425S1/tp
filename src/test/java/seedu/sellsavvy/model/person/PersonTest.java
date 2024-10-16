@@ -97,4 +97,10 @@ public class PersonTest {
                 + ", orders=" + ALICE.getOrderList() + "}";
         assertEquals(expected, ALICE.toString());
     }
+
+    @Test
+    public void getOrderUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, ()
+                -> ALICE.getOrderUnmodifiableObservableList().remove(0));
+    }
 }

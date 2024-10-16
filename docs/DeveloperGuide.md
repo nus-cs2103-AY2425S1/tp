@@ -336,7 +336,7 @@ Use case ends.
 
 * 1a. SellSavvy detects required details missing.
   * 1a1. SellSavvy displays an error message “Missing details of customer!”.
-    
+
   Use case ends.
 
 **Use case 3: Delete Customer and All Orders Related to The Customer**
@@ -380,7 +380,7 @@ Use case ends.
 
 * 3a. SellSavvy detects required details missing.
     * 3a1. SellSavvy displays an error message “Missing details of customer!”.
-    
+
     Use case ends.
 
 * 3b. User can list orders made by a customer using their username.
@@ -398,7 +398,7 @@ Use case ends.
 
 **MSS**
 
-1.  User wants to mark an order by a customer as completed. 
+1.  User wants to mark an order by a customer as completed.
 2.  User chooses to <ins>view all orders of a specified customer from contacts list (UC04)</ins>.
 3.  User marks the order as completed by the customer index and the order index.
 4.  SellSavvy updates the status of the order and indicates that the action is successful.
@@ -456,10 +456,10 @@ Use case ends.
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2. Should be able to hold up to 100 persons and/or 1000 orders without a noticeable sluggishness in performance for typical usage. 
+2. Should be able to hold up to 100 persons and/or 1000 orders without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be able to be used offline (i.e. without internet connection)
-5. Should provide clear error messages to indicate issues to the user. 
+5. Should provide clear error messages to indicate issues to the user.
 6. Should log user inputs and errors for analysis and debugging.
 7. The system should respond within 2 seconds from any user input.
 

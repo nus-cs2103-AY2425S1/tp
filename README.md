@@ -10,7 +10,7 @@ It is optimized for CLI users so that frequent tasks can be done faster by typin
 ## Features
 - Add & delete customer information.
 - Add & delete order information for each customer.
-- View full list of customer.
+- View full list of customers.
 - View full list of orders under each customer.
 
 ## Site Map
