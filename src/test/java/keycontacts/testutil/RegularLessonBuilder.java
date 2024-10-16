@@ -63,5 +63,4 @@ public class RegularLessonBuilder {
     public RegularLesson build() {
         return new RegularLesson(lessonDay, startTime, endTime);
     }
-
 }

@@ -25,7 +25,7 @@ public class JsonAdaptedRegularLessonTest {
         JsonAdaptedRegularLesson jsonAdaptedRegularLesson =
                 new JsonAdaptedRegularLesson(VALID_DAY, VALID_START_TIME, VALID_END_TIME);
         RegularLesson regularLesson =
-                new RegularLesson( new Day(VALID_DAY), new Time(VALID_START_TIME), new Time(VALID_END_TIME));;
+                new RegularLesson(new Day(VALID_DAY), new Time(VALID_START_TIME), new Time(VALID_END_TIME));;
         assertEquals(regularLesson, jsonAdaptedRegularLesson.toModelType());
     }
 

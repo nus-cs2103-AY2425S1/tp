@@ -63,10 +63,11 @@ public class ScheduleCommandTest {
     }
 
     @Test
-    public void execute_lessonUnchanged_throwsCommandException() throws Exception {ALICE.getRegularLesson();
+    public void execute_lessonUnchanged_throwsCommandException() throws Exception {
         Student studentToSchedule = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
 
-        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_STUDENT, studentToSchedule.getRegularLesson());
+        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_STUDENT,
+                studentToSchedule.getRegularLesson());
 
         assertThrows(CommandException.class,
                 ScheduleCommand.MESSAGE_LESSON_UNCHANGED, () -> scheduleCommand.execute(model));
