@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -13,6 +15,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Property;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -81,4 +84,25 @@ public class EditPersonPropertyDescriptorBuilder {
         descriptor.setTags(tagSet);
         return this;
     }
+
+    /**
+     * Sets the {@code buyingProperties} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonPropertyDescriptorBuilder withPropertyToBuy(Property propertyToBuy) {
+        List<Property> propertyToBuyList = new ArrayList<>();
+        propertyToBuyList.add(propertyToBuy);
+        descriptor.setBuyingProperties(propertyToBuyList);
+        return this;
+    }
+
+    /**
+     * Sets the {@code sellingProperties} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonPropertyDescriptorBuilder withPropertyToSell(Property propertyToSell) {
+        List<Property> propertyToSellList = new ArrayList<>();
+        propertyToSellList.add(propertyToSell);
+        descriptor.setBuyingProperties(propertyToSellList);
+        return this;
+    }
+
 }

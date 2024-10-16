@@ -39,7 +39,7 @@ import seedu.address.model.person.Property;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
-import seedu.address.testutil.PropertyBuilder;
+import seedu.address.testutil.PropertyToBuyBuilder;
 
 public class AddressBookParserTest {
 
@@ -117,7 +117,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addBuy() throws Exception {
         Index index = Index.fromOneBased(1);
-        Property property = new PropertyBuilder().build();
+        Property property = new PropertyToBuyBuilder().build();
         AddPropertyToBuyCommand command =
                 (AddPropertyToBuyCommand) parser.parseCommand("addBuy 1 ht/c bp/1500000 pc/123456 un/10-01");
         assertEquals(new AddPropertyToBuyCommand(index, property), command);

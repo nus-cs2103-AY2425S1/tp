@@ -25,7 +25,7 @@ import seedu.address.model.person.Price;
 import seedu.address.model.person.Property;
 import seedu.address.model.person.UnitNumber;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.testutil.PropertyBuilder;
+import seedu.address.testutil.PropertyToBuyBuilder;
 
 public class AddPropertyToBuyParserTest {
     private AddPropertyToBuyParser parser = new AddPropertyToBuyParser();
@@ -43,7 +43,7 @@ public class AddPropertyToBuyParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Property expectedProperty = new PropertyBuilder().withPostalCode("567510").withUnitNumber("03-11")
+        Property expectedProperty = new PropertyToBuyBuilder().withPostalCode("567510").withUnitNumber("03-11")
                 .withPrice("1650000").build();
 
         assertParseSuccess(parser, PREAMBLE_INDEX + HOUSING_TYPE_DESC_HDB + BUYING_PRICE_DESC_1650000

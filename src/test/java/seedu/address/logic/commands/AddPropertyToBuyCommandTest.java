@@ -14,12 +14,12 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Property;
-import seedu.address.testutil.PropertyBuilder;
+import seedu.address.testutil.PropertyToBuyBuilder;
 
 public class AddPropertyToBuyCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final Property property = new PropertyBuilder().build();
+    private final Property property = new PropertyToBuyBuilder().build();
     private final Index indexWithProperty = Index.fromZeroBased(7);
     private final Index indexWithoutProperty = Index.fromZeroBased(0);
     private final Index invalidIndex = Index.fromZeroBased(1000);
@@ -51,7 +51,7 @@ public class AddPropertyToBuyCommandTest {
 
     @Test
     public void equals() {
-        Property differentProperty = new PropertyBuilder().withPostalCode("654321").build();
+        Property differentProperty = new PropertyToBuyBuilder().withPostalCode("654321").build();
         AddPropertyToBuyCommand commandWithSameValues = new AddPropertyToBuyCommand(indexWithoutProperty,
                 property);
         AddPropertyToBuyCommand commandWithDifferentProperty = new AddPropertyToBuyCommand(indexWithoutProperty,
