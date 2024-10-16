@@ -28,7 +28,6 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.setItems(personList);
         // cell factory creates new ListCell objects for each item in the ListView.
         personListView.setCellFactory(listView -> new PersonListViewCell());
-        // provides customisation of how each cell is displayed
     }
 
     /**
@@ -40,7 +39,6 @@ public class PersonListPanel extends UiPart<Region> {
             super.updateItem(person, empty);
 
             if (empty || person == null) {
-                // when the cell is empty
                 setGraphic(null);
                 setText(null);
             } else {

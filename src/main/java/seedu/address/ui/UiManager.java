@@ -22,7 +22,6 @@ public class UiManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
 
-    // keeps references to Logic and MainWindow
     private Logic logic;
     private MainWindow mainWindow;
 
@@ -34,7 +33,6 @@ public class UiManager implements Ui {
     }
 
 
-    // implements the start method from Ui interface
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting UI...");

@@ -34,6 +34,7 @@ public class DateOfLastVisitTest {
         assertFalse(DateOfLastVisit.isValidDateOfLastVisit("33-10-20240")); // invalid day and year
         assertFalse(DateOfLastVisit.isValidDateOfLastVisit("03-14-20240")); // invalid month and year
         assertFalse(DateOfLastVisit.isValidDateOfLastVisit("31-04-2024")); // 31st of even month
+        assertFalse(DateOfLastVisit.isValidDateOfLastVisit("29-02-2023")); // 29th feb of non leap year
 
         // valid dateOfLastVisits
         assertTrue(DateOfLastVisit.isValidDateOfLastVisit("01-01-0000")); // year 0000

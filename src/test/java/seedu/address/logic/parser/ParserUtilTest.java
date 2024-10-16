@@ -212,7 +212,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseDateOfLastVisit_validValueWithoutWhitespace_returnsEmail() throws Exception {
+    public void parseDateOfLastVisit_validValueWithoutWhitespace_returnsDateOfLastVisit() throws Exception {
         DateOfLastVisit expectedDateOfLastVisit = new DateOfLastVisit(VALID_DATEOFLASTVISIT);
         assertEquals(expectedDateOfLastVisit, ParserUtil.parseDateOfLastVisit(VALID_DATEOFLASTVISIT));
     }
