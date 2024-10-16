@@ -29,7 +29,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_WARD, PREFIX_DIAGNOSIS,
                         PREFIX_MEDICATION);
 
-        if (argMultimap.numberOfUniquePrefixes() != 2 || !argMultimap.getPreamble().isEmpty()) {
+        if (argMultimap.numberOfUniquePrefixes() != 1 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 

@@ -80,6 +80,6 @@ public class ArgumentMultimap {
      * Returns the number of unique prefixes found.
      */
     public int numberOfUniquePrefixes() {
-        return this.argMultimap.size();
+        return this.argMultimap.size() - 1;
     }
 }
