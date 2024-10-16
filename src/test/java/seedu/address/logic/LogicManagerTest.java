@@ -20,6 +20,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.SetChangeListener;
+import javafx.util.Pair;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CreateVendorCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -35,6 +37,8 @@ import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.TypicalEvents;
+import seedu.address.testutil.TypicalVendors;
 import seedu.address.testutil.VendorBuilder;
 import seedu.address.ui.UiState;
 
@@ -72,7 +76,7 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        assertCommandSuccess(listCommand, ListCommand.MESSAGE_MULTIVIEW_SUCCESS, model);
     }
 
     @Test
@@ -90,6 +94,11 @@ public class LogicManagerTest {
     @Test
     public void getFilteredVendorList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredVendorList().remove(0));
+    }
+
+    @Test
+    public void getFilteredEventList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredEventList().remove(0));
     }
 
     @Test
@@ -140,6 +149,17 @@ public class LogicManagerTest {
 
         model.viewVendor(vendor2);
         assertEquals(vendor2, observedState.get());
+    }
+
+    @Test
+    public void getAssociation_newAssociation_updateSuccessful() {
+        ObjectProperty<Pair<Vendor, Event>> observedState = new SimpleObjectProperty<>();
+        logic.getAssociations().addListener((SetChangeListener.Change<? extends Pair<Vendor, Event>> change) -> {
+            observedState.set(change.getElementAdded());
+        });
+
+        model.assignVendorToEvent(TypicalVendors.AMY, TypicalEvents.BIRTHDAY);
+        assertEquals(observedState.get(), new Pair<>(TypicalVendors.AMY, TypicalEvents.BIRTHDAY));
     }
 
     /**

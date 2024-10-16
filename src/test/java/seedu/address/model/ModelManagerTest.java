@@ -18,6 +18,8 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.SetChangeListener;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
@@ -26,6 +28,8 @@ import seedu.address.model.vendor.NameContainsKeywordsPredicate;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.TypicalEvents;
+import seedu.address.testutil.TypicalVendors;
 import seedu.address.testutil.VendorBuilder;
 import seedu.address.ui.UiState;
 
@@ -215,6 +219,17 @@ public class ModelManagerTest {
         ObservableList<Event> expectedEvents = FXCollections.observableArrayList(anotherEvent, testEvent);
 
         assertEquals(expectedEvents, associatedEvents);
+    }
+
+    @Test
+    public void getAssociation_newAssociation_updateSuccessful() {
+        ObjectProperty<Pair<Vendor, Event>> observedState = new SimpleObjectProperty<>();
+        modelManager.getAssociations().addListener((SetChangeListener.Change<? extends Pair<Vendor, Event>> change) -> {
+            observedState.set(change.getElementAdded());
+        });
+
+        modelManager.assignVendorToEvent(TypicalVendors.AMY, TypicalEvents.BIRTHDAY);
+        assertEquals(observedState.get(), new Pair<>(TypicalVendors.AMY, TypicalEvents.BIRTHDAY));
     }
 
     @Test
