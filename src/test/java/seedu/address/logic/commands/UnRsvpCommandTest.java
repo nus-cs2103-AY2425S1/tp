@@ -47,7 +47,8 @@ public class UnRsvpCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         UnRsvpCommand unrsvpCommand = new UnRsvpCommand(outOfBoundIndex);
 
-        assertCommandFailure(unrsvpCommand, model, String.format(UnRsvpCommand.MESSAGE_INVALID_INDEX + model.getFilteredPersonList().size() + ")"));
+        assertCommandFailure(unrsvpCommand, model, String.format(UnRsvpCommand.MESSAGE_INVALID_INDEX
+                + model.getFilteredPersonList().size() + ")"));
     }
 
     @Test
