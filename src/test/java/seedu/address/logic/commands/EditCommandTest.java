@@ -49,7 +49,7 @@ public class EditCommandTest {
 
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         expectedModel.deletePerson(firstPerson);
-        expectedModel.addPerson(editedPerson);
+        expectedModel.insertPerson(editedPerson, INDEX_FIRST_PERSON.getZeroBased());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -85,7 +85,7 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new CampusConnect(model.getCampusConnect()), new UserPrefs());
         Person firstPerson = expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         expectedModel.deletePerson(firstPerson);
-        expectedModel.addPerson(firstPerson);
+        expectedModel.insertPerson(firstPerson, INDEX_FIRST_PERSON.getZeroBased());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -112,7 +112,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new CampusConnect(model.getCampusConnect()), new UserPrefs());
         expectedModel.deletePerson(personInFilteredList);
-        expectedModel.addPerson(editedPerson);
+        expectedModel.insertPerson(editedPerson, INDEX_FIRST_PERSON.getZeroBased());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
