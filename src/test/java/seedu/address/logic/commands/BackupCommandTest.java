@@ -143,7 +143,7 @@ public class BackupCommandTest {
     }
 
     @Test
-    public void executeBackupCommand_storageThrowsIOException_throwsCommandException() throws Exception {
+    public void executeBackupCommand_storageThrowsIoException_throwsCommandException() throws Exception {
         // Create a storage stub that simulates an IOException
         Storage storageStub = createStorageStubForIoException();
         Model modelWithFailingStorage = new ModelManager(getTypicalAddressBook(), new UserPrefs(), storageStub);
