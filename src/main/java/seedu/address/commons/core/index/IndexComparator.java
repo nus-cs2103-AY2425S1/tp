@@ -8,6 +8,6 @@ import java.util.Comparator;
 public class IndexComparator implements Comparator<Index> {
     @Override
     public int compare(Index i1, Index i2) {
-        return i2.getZeroBased() - i1.getZeroBased() ;
+        return i2.getZeroBased() - i1.getZeroBased();
     }
 }

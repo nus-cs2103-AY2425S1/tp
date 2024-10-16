@@ -1,11 +1,10 @@
 package seedu.address.logic.parser;
 
-import java.util.List;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.core.index.IndexComparator;

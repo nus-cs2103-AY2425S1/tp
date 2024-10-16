@@ -68,7 +68,8 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         return new CommandResult(MESSAGE_DELETE_PEOPLE_SUCCESS + String.join(", ", deletedPersons)
-                + MESSAGE_INVALID_INDICES + String.join(", ", invalidIndices.stream().map(x -> String.valueOf(x.getOneBased())).toList()));
+                + MESSAGE_INVALID_INDICES + String.join(", ", invalidIndices.stream()
+                .map(x -> String.valueOf(x.getOneBased())).toList()));
     }
 
     @Override
@@ -93,7 +94,7 @@ public class DeleteCommand extends Command {
                 .toString();
     }
 
-    private CommandResult deleteSingleIndex(Model model, Index targetIndex) throws CommandException {requireNonNull(model);
+    private CommandResult deleteSingleIndex(Model model, Index targetIndex) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
