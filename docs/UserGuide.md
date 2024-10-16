@@ -44,26 +44,28 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ## Interacting with DocTrack
 
-All interactions with the DocTrack platform are done through a series of **commands** entered by the user. These commands allow you to perform various **tasks**, such as adding, editing, listing, and managing persons/appointments. The commands are designed to be flexible and user-friendly, allowing **parameters** in any order, handling multiple entries for specific fields.
+All interactions with the DocTrack platform are done through a series of **commands** entered by the user. These commands allow you to perform various **tasks**, such as adding, editing, listing, and managing persons/appointments. The commands are designed to be flexible and user-friendly, allowing **data fields** in any order, handling multiple entries for specific fields.
 
 Here are some **key points** to keep in mind when using commands:
 
-- You should supply all the parameters (words in `UPPER_CASE`) that are needed for a command.<br>
-  e.g. in `add person n/NAME`, `NAME` is a parameter which can be used as `add person n/John Doe`.
+- You should supply all the fields (words in `UPPER_CASE`) that are needed for a command.<br>
+  e.g. in `add person n/NAME`, `NAME` is a field which can be used as `add person n/John Doe`.
+
+- The `INDEX` in a command format refers to the index number (shown beside the person or appointment) in the displayed list.
 
 - Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-- Items with `…`​ after them can be used multiple times including zero times.<br>
+- Items with `…`​ after them can be used zero times or more times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-- You can add parameters in any order.<br>
+- You can add fields in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-- If you add extraneous parameters for commands that do not take in parameters (such as `help`, `list person`, `list appt`, `exit` and `clear`), they will be ignored.<br>
+- If you add extraneous fields for commands that do not take in fields (such as `help`, `list person`, `list appt`, `exit` and `clear`), they will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-- If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+- If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines. This is because some space characters surrounding line-breaks may be omitted when copied over.
 
 ---
 
@@ -79,7 +81,7 @@ The following sections describe the various commands available in the DocTrack p
 
 ### Person Commands
 
-A **person** is a patient with several data fields: a name, a phone number, an email, an address and optional tags. These patients can be uniquely identified by their **patient ID (PID)** for easy reference. DocTrack allows you interact with patient information through different commands, which can be seen below.
+A **person** is a patient with several fields: a name, a phone number, an email, an address and optional tags. These patients can be uniquely identified by their **patient ID (PID)** for easy reference. DocTrack allows you interact with patient information through different commands, which can be seen below.
 
 <br>
 
