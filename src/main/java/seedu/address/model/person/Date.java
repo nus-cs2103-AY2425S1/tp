@@ -8,6 +8,12 @@ import static java.util.Objects.requireNonNull;
  */
 public class Date {
     public final String value;
+
+    /**
+     * Constructs a {@code Date}.
+     *
+     * @param date A valid date.
+     */
     public Date(String date) {
         requireNonNull(date);
         value = date;
