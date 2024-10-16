@@ -18,15 +18,15 @@ public class ConcertListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(ConcertListPanel.class);
 
     @FXML
-    private ListView<Concert> ConcertListView;
+    private ListView<Concert> concertListView;
 
     /**
      * Creates a {@code ConcertListPanel} with the given {@code ObservableList}.
      */
-    public ConcertListPanel(ObservableList<Concert> ConcertList) {
+    public ConcertListPanel(ObservableList<Concert> concertList) {
         super(FXML);
-        ConcertListView.setItems(ConcertList);
-        ConcertListView.setCellFactory(listView -> new ConcertListViewCell());
+        concertListView.setItems(concertList);
+        concertListView.setCellFactory(listView -> new ConcertListViewCell());
     }
 
     /**
