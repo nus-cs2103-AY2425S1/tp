@@ -26,7 +26,7 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces on names
         FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")), null, null);
+                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
         assertParseSuccess(parser, " n/Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between name keywords
@@ -34,13 +34,12 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between phone keywords
         FindCommand expectedFindCommandForPhone =
-                new FindCommand(null, new PhoneContainsKeywordsPredicate(Arrays.asList("9345", "1234")), null);
+                new FindCommand(new PhoneContainsKeywordsPredicate(Arrays.asList("9345", "1234")));
         assertParseSuccess(parser, " p/9345 1234", expectedFindCommandForPhone);
 
         // whitespaces allowed in address and multiple "_" between address keywords
         FindCommand expectedFindCommandForAddress =
-                new FindCommand(null, null,
-                        new AddressContainsKeywordsPredicate(Arrays.asList("Wall Street", "Michigan")));
+                new FindCommand(new AddressContainsKeywordsPredicate(Arrays.asList("Wall Street", "Michigan")));
         assertParseSuccess(parser, " a/Wall Street_Michigan", expectedFindCommandForAddress);
     }
 
