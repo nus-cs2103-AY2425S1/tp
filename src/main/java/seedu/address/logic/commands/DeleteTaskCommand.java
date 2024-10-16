@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
@@ -18,6 +17,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.task.Task;
 import seedu.address.model.person.task.TaskList;
 
+/**
+ * Deletes a Task  from a Person identified using it's displayed index from the address book.
+ */
 public class DeleteTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "deletetask";
