@@ -62,7 +62,7 @@ public class PersonCard extends UiPart<Region> {
      * Factory method for constructing a {@code PersonCard}
      */
     public static PersonCard of(Person person, int displayedIndex) {
-        if (person instanceof Student student && student.getParentName() != null) {
+        if (person instanceof Student student) {
             return new StudentCard(student, displayedIndex);
         }
         return new PersonCard(person, displayedIndex);

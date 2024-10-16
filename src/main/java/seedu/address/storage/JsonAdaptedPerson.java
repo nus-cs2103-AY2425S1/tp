@@ -34,10 +34,7 @@ class JsonAdaptedPerson {
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
-    @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedPerson(String name, String phone, String email, String address, List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -45,6 +42,15 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+    }
+
+    @JsonCreator
+    public static JsonAdaptedPerson of(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+            @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
+            @JsonProperty("parentEmail") String parentEmail, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+        //TODO: Add check to check if contact is a student
+        return new JsonAdaptedStudent(name, phone, email, address, parentName, parentPhone, parentEmail, tags);
     }
 
     /**
@@ -55,9 +61,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
 
     public static JsonAdaptedPerson of(Person source) {
