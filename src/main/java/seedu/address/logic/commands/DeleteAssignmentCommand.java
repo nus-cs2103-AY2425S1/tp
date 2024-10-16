@@ -12,7 +12,7 @@ import seedu.address.model.assignment.Assignment;
  */
 public class DeleteAssignmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete_asg";
+    public static final String COMMAND_WORD = "deleteAsg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the assignment identified by the title used in the displayed assignment list."

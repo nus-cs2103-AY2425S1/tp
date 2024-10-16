@@ -13,7 +13,7 @@ import seedu.address.model.tut.Tutorial;
 public class DeleteTutorialCommand extends Command {
 
 
-    public static final String COMMAND_WORD = "delete_tut";
+    public static final String COMMAND_WORD = "deleteTut";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the tutorial identified by the tutorial ID used in the displayed tutorial list."
