@@ -1,27 +1,22 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILLLEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILLLEVEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.game.Game;
 import seedu.address.model.game.Role;
 import seedu.address.model.game.SkillLevel;
 import seedu.address.model.game.Username;
-import seedu.address.model.person.Person;
-
 
 public class EditGameCommand extends Command {
     public static final String COMMAND_WORD = "editgame";
@@ -55,6 +50,10 @@ public class EditGameCommand extends Command {
         this.editGameDescriptor = null;
     }
 
+    /**
+     * @param index of the person in the filtered person list to edit
+     * @param editGameDescriptor details to edit the game with
+     */
     public EditGameCommand(Index index, String gameName, EditGameDescriptor editGameDescriptor) {
         requireNonNull(index);
         requireNonNull(editGameDescriptor);
@@ -70,6 +69,10 @@ public class EditGameCommand extends Command {
         throw new CommandException("This command should return an edited game");
     }
 
+    /**
+     * Creates and returns a {@code Game} with the details of {@code gameToEdit}
+     * edited with {@code editGameDescriptor}.
+     */
     private static Game createEditedGame(Game gameToEdit, EditGameDescriptor editGameDescriptor) {
         assert gameToEdit != null;
 
@@ -91,23 +94,41 @@ public class EditGameCommand extends Command {
 
         public EditGameDescriptor() {}
 
+        /**
+         * Copy constructor.
+         */
         public EditGameDescriptor(EditGameDescriptor toCopy) {
             setUsername(toCopy.username);
             setSkillLevel(toCopy.skillLevel);
             setRole(toCopy.role);
         }
 
-        public void setUsername(Username username) {this.username = username;}
+        /**
+         * Returns true if at least one field is edited.
+         */
+        public void setUsername(Username username) {
+            this.username = username;
+        }
 
-        public Optional<Username> getUsername() {return Optional.ofNullable(username);}
+        public Optional<Username> getUsername() {
+            return Optional.ofNullable(username);
+        }
 
-        public void setSkillLevel(SkillLevel skillLevel) {this.skillLevel = skillLevel;}
+        public void setSkillLevel(SkillLevel skillLevel) {
+            this.skillLevel = skillLevel;
+        }
 
-        public Optional<SkillLevel> getSkillLevel() {return Optional.ofNullable(skillLevel);}
+        public Optional<SkillLevel> getSkillLevel() {
+            return Optional.ofNullable(skillLevel);
+        }
 
-        public void setRole(Role role) {this.role = role;}
+        public void setRole(Role role) {
+            this.role = role;
+        }
 
-        public Optional<Role> getRole() {return Optional.ofNullable(role);}
+        public Optional<Role> getRole() {
+            return Optional.ofNullable(role);
+        }
 
         @Override
         public boolean equals(Object other) {

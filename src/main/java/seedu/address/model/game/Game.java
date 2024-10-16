@@ -43,7 +43,10 @@ public class Game {
         this.role = role;
     }
 
-    //alternate constructor
+    /**
+     * Alternate constructor
+     * @param gameName the name of the game.
+     */
     public Game(String gameName) {
         requireNonNull(gameName);
         checkArgument(isValidGameName(gameName), MESSAGE_CONSTRAINTS);

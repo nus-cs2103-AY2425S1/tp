@@ -51,6 +51,9 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code game} for display to the user.
+     */
     public static String format(Game game) {
         final StringBuilder builder = new StringBuilder();
         builder.append(game.getGameName())
