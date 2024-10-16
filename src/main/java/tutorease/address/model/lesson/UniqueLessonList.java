@@ -44,8 +44,8 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * The lesson must not already exist in the list.
      *
      * @param toAdd The lesson to add.
-     * @throws NullPointerException if {@code toAdd} is null.
-     * @throws OverlappingLessonException if the lesson overlaps with an existing lesson in the list.
+     * @throws NullPointerException If {@code toAdd} is null.
+     * @throws OverlappingLessonException If the lesson overlaps with an existing lesson in the list.
      */
     public void add(Lesson toAdd) {
         requireNonNull(toAdd);
@@ -59,7 +59,8 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * Removes the lesson at the specified index from the list.
      *
      * @param index The index of the lesson to be removed.
-     * @throws LessonIndexOutOfRange if the index is invalid (less than 0 or greater than the size of the list).
+     * @throws LessonIndexOutOfRange If the index is invalid (less than 0 or greater than the size of the
+     * list).
      */
     public void remove(int index) {
         if (!isValidIndex(index)) {
@@ -74,7 +75,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
      *
      * @param index The index of the lesson to retrieve.
      * @return The lesson at the specified index.
-     * @throws LessonIndexOutOfRange if the index is invalid (less than 0 or greater than or equal to the
+     * @throws LessonIndexOutOfRange If the index is invalid (less than 0 or greater than or equal to the
      *     size of the list).
      */
     public Lesson get(int index) {
@@ -99,8 +100,8 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * {@code lessons} must not contain duplicate lessons.
      *
      * @param lessons The list of lessons to replace the current list.
-     * @throws NullPointerException if {@code lessons} is null.
-     * @throws OverlappingLessonException if any lessons in the list overlap with each other.
+     * @throws NullPointerException If {@code lessons} is null.
+     * @throws OverlappingLessonException If any lessons in the list overlap with each other.
      */
     public void setLessons(List<Lesson> lessons) {
         requireNonNull(lessons);
