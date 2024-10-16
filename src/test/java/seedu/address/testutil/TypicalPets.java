@@ -1,15 +1,15 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_FLUFFY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BELLA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_FLUFFY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_BELLA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_BREED_FLUFFY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_BREED_BELLA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_FLUFFY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_BELLA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_FLUFFY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_FLUFFY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BREED_BELLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BREED_FLUFFY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BELLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_FLUFFY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_BELLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_FLUFFY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_BELLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_FLUFFY;
 
 import java.util.ArrayList;
 import java.util.Arrays;

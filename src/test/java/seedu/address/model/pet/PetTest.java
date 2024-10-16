@@ -8,8 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_BREED_FLUFFY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_FLUFFY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_FLUFFY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_FLUFFY;
-import static seedu.address.testutil.TypicalPets.FLUFFY;
 import static seedu.address.testutil.TypicalPets.BELLA;
+import static seedu.address.testutil.TypicalPets.FLUFFY;
 
 import org.junit.jupiter.api.Test;
 

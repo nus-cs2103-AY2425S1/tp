@@ -69,7 +69,8 @@ public class FindPetCommandTest {
         FindPetCommand command = new FindPetCommand(predicate);
         expectedModel.updateFilteredPetList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(TypicalPets.BELLA, TypicalPets.FLUFFY, TypicalPets.DAISY), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(TypicalPets.BELLA, TypicalPets.FLUFFY, TypicalPets.DAISY),
+            model.getFilteredPersonList());
     }
 
     @Test

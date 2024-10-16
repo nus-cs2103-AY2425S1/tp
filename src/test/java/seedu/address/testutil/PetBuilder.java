@@ -1,6 +1,11 @@
 package seedu.address.testutil;
 
-import seedu.address.model.pet.*;
+import seedu.address.model.pet.Age;
+import seedu.address.model.pet.Breed;
+import seedu.address.model.pet.Name;
+import seedu.address.model.pet.Pet;
+import seedu.address.model.pet.Sex;
+import seedu.address.model.pet.Species;
 
 /**
  * A utility class to help with building Pet objects.
