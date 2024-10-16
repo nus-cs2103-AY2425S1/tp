@@ -76,7 +76,6 @@ public class Price implements Comparable<Price> {
         }
     }
 
-
     @Override
     public String toString() {
         return String.format("%.2f", value);
