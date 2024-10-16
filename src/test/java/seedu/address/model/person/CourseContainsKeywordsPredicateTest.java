@@ -19,14 +19,17 @@ public class CourseContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("Computer Science");
         List<String> secondPredicateKeywordList = Arrays.asList("Computer Science", "Data Science");
 
-        CourseContainsKeywordsPredicate firstPredicate = new CourseContainsKeywordsPredicate(firstPredicateKeywordList);
-        CourseContainsKeywordsPredicate secondPredicate = new CourseContainsKeywordsPredicate(secondPredicateKeywordList);
+        CourseContainsKeywordsPredicate firstPredicate =
+                new CourseContainsKeywordsPredicate(firstPredicateKeywordList);
+        CourseContainsKeywordsPredicate secondPredicate =
+                new CourseContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        CourseContainsKeywordsPredicate firstPredicateCopy = new CourseContainsKeywordsPredicate(firstPredicateKeywordList);
+        CourseContainsKeywordsPredicate firstPredicateCopy =
+                new CourseContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -42,7 +45,8 @@ public class CourseContainsKeywordsPredicateTest {
     @Test
     public void test_courseContainsKeywords_returnsTrue() {
         // One keyword
-        CourseContainsKeywordsPredicate predicate = new CourseContainsKeywordsPredicate(Collections.singletonList("Computer Science"));
+        CourseContainsKeywordsPredicate predicate =
+                new CourseContainsKeywordsPredicate(Collections.singletonList("Computer Science"));
         assertTrue(predicate.test(new PersonBuilder().withCourse("Computer Science").build()));
 
         // Multiple keywords
@@ -61,7 +65,8 @@ public class CourseContainsKeywordsPredicateTest {
     @Test
     public void test_courseDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        CourseContainsKeywordsPredicate predicate = new CourseContainsKeywordsPredicate(Collections.emptyList());
+        CourseContainsKeywordsPredicate predicate =
+                new CourseContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder().withCourse("Computer Science").build()));
 
         // Non-matching keyword

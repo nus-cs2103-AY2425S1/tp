@@ -18,7 +18,8 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        assertParseFailure(
+                parser, "   ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -35,4 +36,16 @@ public class FilterCommandParserTest {
         assertParseSuccess(parser, " \n n/alice \n \t bob  \t charlie", expectedFilterCommand);
     }
 
+    @Test
+    public void parse_invalidArgs_throwsParseException() {
+        // invalid inputs
+        assertParseFailure(parser, "invalid input",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " n/",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " n/    ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " x/alice",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+    }
 }
