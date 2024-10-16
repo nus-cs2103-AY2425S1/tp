@@ -12,6 +12,7 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.logic.Messages;
 import seedu.ddd.logic.commands.exceptions.CommandException;
+import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
@@ -22,7 +23,6 @@ import seedu.ddd.model.contact.vendor.Vendor;
  */
 public class AddCommand extends Command {
 
-    // add1 to not conflict with existing command
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to the address book. "
@@ -119,6 +119,9 @@ public class AddCommand extends Command {
         } else {
             throw new CommandException(INVALID_CONTACT_TYPE);
         }
+
+        // Increment ID counter only if addition of contact is successful
+        AddressBook.incrementNextId();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }

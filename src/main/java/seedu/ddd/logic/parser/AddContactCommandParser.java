@@ -2,7 +2,6 @@ package seedu.ddd.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.ddd.logic.Messages.MESSAGE_INVALID_CONTACT_TYPE;
 import static seedu.ddd.logic.Messages.MESSAGE_MULTIPLE_CONTACT_TYPES;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
@@ -92,7 +91,7 @@ public class AddContactCommandParser implements Parser<AddCommand> {
             Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
             contact = new Client(name, phone, email, address, date, tagList, id);
         }
-        AddressBook.incrementNextId();
+
         return new AddCommand(contact);
     }
 
