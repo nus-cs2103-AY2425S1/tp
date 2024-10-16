@@ -21,6 +21,9 @@ public class InsurancePlansManager {
             + "has not been added to this client: %2$s";
     public static final String DUPLICATE_CLAIM_ID_MESSAGE = "This claim with id: %1$s "
             + "has already been added to this client: %2$s";
+    public static final String NO_INSURANCE_PLANS_MESSAGE = "No existing insurance plans";
+    public static final String NO_CLAIMS_MESSAGE = "No existing claims";
+
 
     private final ArrayList<InsurancePlan> insurancePlans;
     private final HashSet<String> claimIds;
@@ -200,6 +203,47 @@ public class InsurancePlansManager {
             }
         }
         return count;
+    }
+
+    /**
+     * Retrieves a formatted string listing all claims associated with the insurance plans.
+     *
+     * This method constructs a string representation of claims for each insurance plan
+     * managed by the current entity. If there are no insurance plans, it returns a message
+     * indicating that there are no insurance plans available. For each insurance plan,
+     * it lists the claims, and if a plan has no claims, it appends a message indicating that
+     * there are no claims for that particular plan.
+     *
+     * The format of the returned string is as follows:
+     * - For each insurance plan, it includes the plan's details.
+     * - If an insurance plan has no claims, it appends {@link #NO_CLAIMS_MESSAGE}.
+     * - If claims exist, they are listed with an index number.
+     *
+     * @return A string representation of all claims associated with the insurance plans,
+     *         or {@link #NO_INSURANCE_PLANS_MESSAGE} if there are no insurance plans.
+     */
+    public String accessClaims() {
+        StringBuilder listOfClaims = new StringBuilder();
+        if (this.insurancePlans.isEmpty()) {
+            return NO_INSURANCE_PLANS_MESSAGE;
+        } else {
+            for (InsurancePlan p : this.insurancePlans) {
+                listOfClaims.append(p.toString()).append("\n");
+                if (p.claims.isEmpty()) {
+                    listOfClaims.append(NO_CLAIMS_MESSAGE + "\n");
+                } else {
+                    int listIndex = 1;
+                    for (Claim c : p.claims) {
+                        listOfClaims.append(listIndex)
+                                .append(". ")
+                                .append(c.toString())
+                                .append("\n");
+                        listIndex++;
+                    }
+                }
+            }
+        }
+        return listOfClaims.toString();
     }
 
     /**

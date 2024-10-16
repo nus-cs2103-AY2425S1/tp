@@ -1,5 +1,6 @@
 package seedu.address.model.client.insurance.claim;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -91,4 +92,23 @@ public class Claim {
     public int getClaimAmount() {
         return this.claimAmount;
     }
+
+    /**
+     * Returns a string representation of the claim object.
+     *
+     * This method overrides the default `toString` method to provide a formatted string
+     * that indicates the status of the claim (open or closed), along with the claim ID
+     * and the claim amount. The returned string format is as follows:
+     * - If the claim is open: "[open] {@code claimId} {@code claimAmount}"
+     * - If the claim is closed: "[closed] {@code claimId} {@code claimAmount}"
+     *
+     * @return A string representation of the claim, including its status, ID, and amount.
+     */
+    @Override
+    public String toString() {
+        String status = "open";
+        if (!this.isOpen) {
+            status = "closed";
+        }
+        return "[" + status + "] " + this.claimId + " " + Messages.formatClaimAmount(this.claimAmount); }
 }
