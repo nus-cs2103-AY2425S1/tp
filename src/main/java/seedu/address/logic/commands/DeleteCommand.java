@@ -11,6 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.ui.MainWindow;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -68,6 +69,12 @@ public class DeleteCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
             }
             personToDelete = personOptional.get();
+        }
+
+        boolean isConfirmed = MainWindow.showConfirmationDialog("Are you sure you want to delete "
+                + personToDelete.getName() + "?");
+        if (!isConfirmed) {
+            return new CommandResult("Deletion cancelled.");
         }
 
         model.deletePerson(personToDelete);
