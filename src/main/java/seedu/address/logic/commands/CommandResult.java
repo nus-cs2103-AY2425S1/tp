@@ -45,6 +45,14 @@ public class CommandResult {
         this(feedbackToUser, false, false, false, true);
     }
 
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser} and
+     * meet up list, and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp) {
+        this(feedbackToUser, showHelp, false, true, false);
+    }
+
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
