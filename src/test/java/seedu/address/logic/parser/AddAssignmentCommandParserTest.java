@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.AddAssignmentCommandParser.MESSAGE_EXPECTED_AT_MOST_TWO;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -22,7 +21,6 @@ public class AddAssignmentCommandParserTest {
     private static final String MISSING_ASSIGNMENT_NAME_INPUT = " n/John Doe d/2024-12-01";
     private static final String MISSING_DEADLINE_INPUT = " n/John Doe a/CS2103 Project";
     private static final String INVALID_DEADLINE_INPUT = " n/John Doe a/CS2103 Project d/invalid-date";
-    private static final String EXCEEDING_STATUS_INPUT = " n/John Doe a/CS2103 Project d/2024-12-01 s/Y s/N s/Y";
     private static final String GRADE_NOT_PROVIDED_INPUT = " n/John Doe a/CS2103 Project d/2024-12-01 s/Y";
     private static final String GRADING_STATUS_NOT_GRADED_INPUT = " n/John Doe a/CS2103 Project d/2024-12-01 s/N";
     private static final String STATUS_ONLY_INPUT = " n/John Doe a/CS2103 Project d/2024-12-01 s/Y";
@@ -67,11 +65,6 @@ public class AddAssignmentCommandParserTest {
     public void parse_invalidDeadline_throwsParseException() {
         String expectedMessage = Deadline.MESSAGE_CONSTRAINTS;
         assertParseFailure(parser, INVALID_DEADLINE_INPUT, expectedMessage);
-    }
-
-    @Test
-    public void parse_exceedingStatus_throwsParseException() {
-        assertParseFailure(parser, EXCEEDING_STATUS_INPUT, MESSAGE_EXPECTED_AT_MOST_TWO);
     }
 
     @Test

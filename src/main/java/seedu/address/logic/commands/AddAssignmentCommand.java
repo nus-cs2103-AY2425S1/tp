@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
@@ -25,9 +26,9 @@ public class AddAssignmentCommand extends Command {
             + PREFIX_NAME + "STUDENT_NAME "
             + PREFIX_ASSIGNMENT + "ASSIGNMENT "
             + PREFIX_DEADLINE + "DEADLINE "
-            + PREFIX_STATUS + "SUBMISSION STATUS "
-            + PREFIX_STATUS + "GRADING STATUS "
-            + PREFIX_GRADE + "GRADE "
+            + PREFIX_STATUS + "SUBMISSION STATUS (OPTIONAL)"
+            + PREFIX_STATUS + "GRADING STATUS (OPTIONAL)"
+            + PREFIX_GRADE + "GRADE (OPTIONAL)"
             + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Jane Doe "
@@ -47,7 +48,7 @@ public class AddAssignmentCommand extends Command {
      * Creates an AddAssignmentCommand to add the specified {@code Assignment}
      */
     public AddAssignmentCommand(Name name, Assignment assignment) {
-        requireNonNull(assignment);
+        requireAllNonNull(name, assignment);
         this.assignment = assignment;
         this.name = name;
     }
