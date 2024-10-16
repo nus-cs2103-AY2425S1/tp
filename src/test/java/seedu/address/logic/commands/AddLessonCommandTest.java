@@ -19,7 +19,6 @@ public class AddLessonCommandTest {
     public void addValidLesson() throws CommandException {
         Lesson lesson = new Lesson("Math", DayOfWeek.MONDAY, LocalTime.of(12, 0), LocalTime.of(13, 0));
         Model model = new ModelManager();
-        model.addLesson(lesson);
 
         AddLessonCommand command = new AddLessonCommand(lesson);
         CommandResult result = command.execute(model);
