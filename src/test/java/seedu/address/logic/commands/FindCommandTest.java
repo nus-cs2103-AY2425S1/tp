@@ -8,27 +8,34 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.owner.OwnerNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.testutil.TypicalOwners;
+import seedu.address.testutil.TypicalPersons;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+
+    private Model ownerModel = new ModelManager(TypicalOwners.getTypicalAddressBook(), new UserPrefs());
+    private Model expectedOwnerModel = new ModelManager(TypicalOwners.getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {
+        // Test for persons
         NameContainsKeywordsPredicate firstPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("first"));
         NameContainsKeywordsPredicate secondPredicate =
@@ -52,6 +59,31 @@ public class FindCommandTest {
 
         // different person -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
+
+        // Test for owners
+        OwnerNameContainsKeywordsPredicate firstOwnerPredicate =
+                new OwnerNameContainsKeywordsPredicate(Collections.singletonList("first"));
+        OwnerNameContainsKeywordsPredicate secondOwnerPredicate =
+                new OwnerNameContainsKeywordsPredicate(Collections.singletonList("second"));
+
+        FindCommand findOwnerFirstCommand = new FindCommand(firstOwnerPredicate);
+        FindCommand findOwnerSecondCommand = new FindCommand(secondOwnerPredicate);
+
+        // same object -> returns true
+        assertTrue(findOwnerFirstCommand.equals(findOwnerFirstCommand));
+
+        // same values -> returns true
+        FindCommand findOwnerFirstCommandCopy = new FindCommand(firstOwnerPredicate);
+        assertTrue(findOwnerFirstCommand.equals(findOwnerFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(findOwnerFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(findOwnerFirstCommand.equals(null));
+
+        // different owners -> returns false
+        assertFalse(findOwnerFirstCommand.equals(findOwnerSecondCommand));
     }
 
     @Test
@@ -65,13 +97,36 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_zeroKeywords_noOwnerFound() {
+        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        OwnerNameContainsKeywordsPredicate predicate = prepareOwnerPredicate(" ");
+        FindCommand command = new FindCommand(predicate); // 'true' indicates an owner search
+        expectedOwnerModel.updateFilteredOwnerList(predicate);
+        assertCommandSuccess(command, ownerModel, expectedMessage, expectedOwnerModel);
+        assertEquals(Collections.emptyList(), ownerModel.getFilteredOwnerList());
+    }
+
+    @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-        FindCommand command = new FindCommand(predicate);
+        FindCommand command = new FindCommand(predicate); // 'false' for person search
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleKeywords_multipleOwnersFound() {
+        String expectedOwnerMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        OwnerNameContainsKeywordsPredicate ownerPredicate = prepareOwnerPredicate("Kurz Elle Kunz");
+        FindCommand commandOwner = new FindCommand(ownerPredicate); // 'true' for owner search
+        expectedOwnerModel.updateFilteredOwnerList(ownerPredicate);
+        assertCommandSuccess(commandOwner, ownerModel, expectedOwnerMessage, expectedOwnerModel);
+        assertEquals(Arrays.asList(seedu.address.testutil.TypicalOwners.CARL,
+                        seedu.address.testutil.TypicalOwners.ELLE,
+                        seedu.address.testutil.TypicalOwners.FIONA),
+                ownerModel.getFilteredOwnerList());
     }
 
     @Test
@@ -87,5 +142,12 @@ public class FindCommandTest {
      */
     private NameContainsKeywordsPredicate preparePredicate(String userInput) {
         return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code OwnerNameContainsKeywordsPredicate}.
+     */
+    private OwnerNameContainsKeywordsPredicate prepareOwnerPredicate(String userInput) {
+        return new OwnerNameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }

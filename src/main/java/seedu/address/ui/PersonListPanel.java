@@ -11,22 +11,29 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing two lists: one for owners and one for pets.
  */
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     @FXML
-    private ListView<Person> personListView;
+    private ListView<Person> ownerListView;
+
+    @FXML
+    private ListView<Person> petListView;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public PersonListPanel(ObservableList<Person> ownerList) {
         super(FXML);
-        personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        ownerListView.setItems(ownerList);
+        ownerListView.setCellFactory(listView -> new PersonListViewCell());
+
+        // Temporarily using ownerList for both, but you can modify this once the petList is implemented
+        petListView.setItems(ownerList); // Replace with petList later
+        petListView.setCellFactory(listView -> new PersonListViewCell());
     }
 
     /**
