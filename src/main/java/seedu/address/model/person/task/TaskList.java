@@ -37,6 +37,14 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
+     * Gets a {@code Task} from the list with {@code index}
+     * @return the Task at the specified position in this TaskList
+     */
+    public Task get(int index) {
+        return tasks.get(index);
+    }
+
+    /**
      * Removes the equivalent task from the list.
      */
     public void remove(Task toRemove) {
