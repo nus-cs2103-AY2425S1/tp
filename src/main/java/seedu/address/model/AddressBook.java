@@ -52,7 +52,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
-    public void setTags(List<Tag> tags) { this.tags.setTags(tags); };
+    public void setTags(List<Tag> tags) {
+        this.tags.setTags(tags);
+    };
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
@@ -103,6 +105,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /// tag methods
 
+    /**
+     * Adds {@code key} to this {@code AddressBook}.
+     * @param t The tag to be added.
+     */
     public boolean addTag(Tag t) {
         tags.addTag(t);
         return true;
