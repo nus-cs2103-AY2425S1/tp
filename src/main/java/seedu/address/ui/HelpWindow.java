@@ -38,6 +38,8 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
+        root.setAlwaysOnTop(true);
+
         helpMessage.setText(HELP_MESSAGE);
         helpCommands.setText(HELP_COMMAND);
     }
