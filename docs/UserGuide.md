@@ -1,7 +1,7 @@
 ---
   layout: default.md
-  title: "User Guide"
-  pageNav: 3
+    title: "User Guide"
+    pageNav: 3
 ---
 
 # AB-3 User Guide
@@ -28,15 +28,15 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Admin` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Admin` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -64,7 +64,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+  </box>
 
 ### Viewing help : `help`
 
@@ -91,7 +91,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE…​`
 5. Events (internal)
 6. Events (external)
 7. External Relations
-</box>
+   </box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/Admin`
