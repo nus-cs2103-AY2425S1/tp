@@ -1,5 +1,8 @@
 package tuteez.logic.commands;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static java.util.Objects.requireNonNull;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tuteez.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -12,6 +15,7 @@ import tuteez.commons.util.ToStringBuilder;
 import tuteez.logic.Messages;
 import tuteez.logic.commands.exceptions.CommandException;
 import tuteez.model.Model;
+import tuteez.model.person.lesson.Lesson;
 import tuteez.model.person.Person;
 
 /**
@@ -40,6 +44,8 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_LESSON = "This time slot is already taken by another " +
+            " student, please retype command";
 
     private final Person toAdd;
 
@@ -59,8 +65,21 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        Set<Lesson> lessonSet = toAdd.getLessons();
+        for (Lesson lesson: lessonSet) {
+           if (checkForClashingLesson(lesson)) {
+               throw new CommandException(MESSAGE_DUPLICATE_LESSON);
+//               return new CommandResult(MESSAGE_DUPLICATE_LESSON, false, false, false);
+           }
+        }
+
+        Lesson.addAllLesson(lessonSet);
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    public boolean checkForClashingLesson(Lesson lesson) {
+        return Lesson.isDuplicateLesson(lesson);
     }
 
     @Override

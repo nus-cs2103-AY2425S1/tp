@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -107,6 +108,16 @@ public class Lesson {
         lessonSet.add(lesson);
     }
 
+
+    /**
+     * Adds one or more lessons to the HashSet.
+     *
+     * @param newLessons Hashset containing lesson / lessons to add.
+     */
+    public static void addAllLesson(Set<Lesson> newLessons) {
+        lessonSet.addAll(newLessons);
+    }
+
     /**
      * Removes a lesson from the HashSet.
      *
@@ -114,6 +125,15 @@ public class Lesson {
      */
     public static void removeLesson(Lesson lesson) {
         lessonSet.remove(lesson);
+    }
+
+    /**
+     * Removes one or more lessons to the HashSet.
+     *
+     * @param lessonsToDelete Hashset containing lesson / lessons to add.
+     */
+    public static void removeAllLesson(Set<Lesson> lessonsToDelete) {
+        lessonSet.removeAll(lessonsToDelete);
     }
 
     /**

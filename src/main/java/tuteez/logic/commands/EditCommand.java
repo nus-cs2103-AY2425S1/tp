@@ -54,7 +54,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This time slow is already taken by another student";
+    public static final String MESSAGE_DUPLICATE_LESSON = "This time slot is already taken by another student" +
+            " please retype command";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -89,13 +90,20 @@ public class EditCommand extends Command {
 
         Optional<Set<Lesson>> lessons = editPersonDescriptor.getLessons();
         if (lessons.isPresent()) {
-            for (Lesson lesson : lessons.get()) {
-                if (checkForClashingLesson(lesson)) {
-                    return new CommandResult(MESSAGE_DUPLICATE_LESSON, false, false, false);
+            for (Lesson newLesson : lessons.get()) {
+                if (personToEdit.getLessons().contains(newLesson)) {
+                    continue;
+                }
+
+                if (checkForClashingLesson(newLesson)) {
+                    throw new CommandException(MESSAGE_DUPLICATE_LESSON);
+//                    return new CommandResult(MESSAGE_DUPLICATE_LESSON, false, false, false);
                 }
             }
         }
 
+        Lesson.removeAllLesson(personToEdit.getLessons());
+        Lesson.addAllLesson(editPersonDescriptor.getLessons().orElse(Collections.emptySet()));
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
@@ -177,7 +185,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, lessons);
         }
 
         public void setName(Name name) {
