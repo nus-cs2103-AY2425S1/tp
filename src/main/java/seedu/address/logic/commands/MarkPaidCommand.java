@@ -90,4 +90,18 @@ public class MarkPaidCommand extends Command {
         return new Person(name, phone, email, address, fees, classId,
                 newMonthsPaid, tags);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        // instanceof handles nulls
+        if (!(other instanceof MarkPaidCommand)) {
+            return false;
+        }
+        MarkPaidCommand otherMarkPaidCommand = (MarkPaidCommand) other;
+        return index.equals(otherMarkPaidCommand.index)
+                && monthsPaid.equals(otherMarkPaidCommand.monthsPaid);
+    }
 }
