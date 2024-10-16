@@ -40,8 +40,8 @@ public class AddressBook<T extends HireMeComparable<T>> implements ReadOnlyAddre
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the person list with {@code internship applications}.
+     * {@code internship applications} must not contain duplicate persons.
      */
     public void setItems(List<T> items) {
         this.items.setItems(items);

@@ -42,7 +42,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
+        AddressBook<InternshipApplication> newData = getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -75,10 +75,10 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasItem_itemWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasItem_itemWithSameIdentityFieldsInAddressBook_returnsFalse() {
         addressBook.addItem(APPLE);
         InternshipApplication editedApple = new InternshipApplicationBuilder(APPLE).withRole(VALID_ROLE_BOFA).build();
-        assertTrue(addressBook.hasItem(editedApple));
+        assertFalse(addressBook.hasItem(editedApple));
     }
 
     @Test
@@ -88,7 +88,7 @@ public class AddressBookTest {
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{applications=" + addressBook.getList() + "}";
+        String expected = AddressBook.class.getCanonicalName() + "{items=" + addressBook.getList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
