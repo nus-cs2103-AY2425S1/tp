@@ -39,8 +39,8 @@ public class UntagCommandParser implements Parser<UntagCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
         }
 
-        Set<Tag> DeleteTagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        return new UntagCommand(index, DeleteTagList);
+        Set<Tag> deleteTagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        return new UntagCommand(index, deleteTagList);
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
