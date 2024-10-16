@@ -30,11 +30,12 @@ public class AddOrderCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_ITEM + "ITEM "
             + PREFIX_DATE + "DELIVERY_BY "
-            + PREFIX_COUNT + "QUANTITY\n"
+            + "[" + PREFIX_COUNT + "QUANTITY]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ITEM + "Lamp "
             + PREFIX_DATE + "20-12-2024 "
-            + PREFIX_COUNT + "2";
+            + PREFIX_COUNT + "2\n"
+            + "If [" + PREFIX_COUNT + "QUANTITY] is not provided, the quantity will be set to 1";
 
     public static final String MESSAGE_SUCCESS = "New order added for %1$s: %2$s";
     public static final String MESSAGE_DUPLICATE_ORDER_WARNING = "Note: "
