@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 public class MedicineTest {
     @Test
-    public void testValidMedicine() {
+    public void isValidMedicine_validMedicineNames_returnsTrue() {
         assertTrue(Medicine.isValidMedicine("Aspirin"));
         assertTrue(Medicine.isValidMedicine("Tamiflu"));
         assertTrue(Medicine.isValidMedicine("Paracetamol"));
@@ -18,39 +18,39 @@ public class MedicineTest {
     }
 
     @Test
-    public void testInvalidMedicine() {
+    public void isValidMedicine_invalidMedicineNames_returnsFalse() {
         assertFalse(Medicine.isValidMedicine(""));
         assertFalse(Medicine.isValidMedicine(" "));
         assertFalse(Medicine.isValidMedicine(" Aspirin"));
     }
 
     @Test
-    public void testConstructorWithValidInput() {
+    public void constructor_validMedicineName_createsMedicine() {
         Medicine medicine = new Medicine("Aspirin");
-        assertEquals("aspirin", medicine.value);
+        assertEquals("Aspirin", medicine.value);
     }
 
     @Test
-    public void testConstructorWithInvalidInput() {
+    public void constructor_invalidMedicineName_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Medicine(""));
         assertThrows(IllegalArgumentException.class, () -> new Medicine(" "));
         assertThrows(IllegalArgumentException.class, () -> new Medicine(" Aspirin"));
     }
 
     @Test
-    public void testConstructorWithNullInput() {
+    public void constructor_nullInput_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Sickness(null));
     }
 
     @Test
-    public void testToString() {
+    public void toString_validMedicine_returnsFormattedString() {
         Medicine medicine = new Medicine("Aspirin");
-        assertEquals("aspirin", medicine.toString());
-        assertNotEquals("Aspirin", medicine.toString());
+        assertEquals("Aspirin", medicine.toString());
+        assertNotEquals("aspirin", medicine.toString());
     }
 
     @Test
-    public void testEquals() {
+    public void equals_compareIdenticalAndDifferentMedicines_returnsCorrectEquality() {
         Medicine medicine1 = new Medicine("Aspirin");
         Medicine medicine2 = new Medicine("Aspirin");
         Medicine medicine3 = new Medicine("Tamiflu");
@@ -63,7 +63,7 @@ public class MedicineTest {
     }
 
     @Test
-    public void testHashCode() {
+    public void hashCode_compareIdenticalAndDifferentMedicines_returnsConsistentHashes() {
         Medicine medicine1 = new Medicine("Aspirin");
         Medicine medicine2 = new Medicine("Aspirin");
         Medicine medicine3 = new Medicine("Tamiflu");

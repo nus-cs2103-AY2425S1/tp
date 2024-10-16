@@ -20,7 +20,6 @@ public class UniqueAppointmentListTest {
     private UniqueAppointmentList uniqueAppointmentList;
     private Appointment appointment1;
     private Appointment appointment2;
-    private Appointment appointment3;
 
     @BeforeEach
     void setUp() {
@@ -29,26 +28,24 @@ public class UniqueAppointmentListTest {
                 new Sickness("Cold"), new Medicine("Aspirin"));
         appointment2 = new Appointment(new AppointmentType("Followup"), LocalDateTime.of(2024, 1, 2, 11, 0), 2,
                 new Sickness("Flu"), new Medicine("Tamiflu"));
-        appointment3 = new Appointment(new AppointmentType("Consultation"), LocalDateTime.of(2024, 1, 3, 14, 0), 3,
-                new Sickness("Headache"), new Medicine("Ibuprofen"));
     }
 
     @Test
-    public void testContains() {
+    public void contains_existingAndNonExistingAppointment_returnsCorrect() {
         assertFalse(uniqueAppointmentList.contains(appointment1));
         uniqueAppointmentList.add(appointment1);
         assertTrue(uniqueAppointmentList.contains(appointment1));
     }
 
     @Test
-    public void testAdd() {
+    public void add_newAppointment_addsSuccessfully() {
         uniqueAppointmentList.add(appointment1);
         assertTrue(uniqueAppointmentList.contains(appointment1));
         assertThrows(DuplicateAppointmentException.class, () -> uniqueAppointmentList.add(appointment1));
     }
 
     @Test
-    public void testSetAppointment() {
+    public void setAppointment_existingAppointment_updatesSuccessfully() {
         uniqueAppointmentList.add(appointment1);
         Appointment editedAppointment = new Appointment(new AppointmentType("Checkup"),
                 LocalDateTime.of(2024, 1, 1, 10, 0), 1,
@@ -59,28 +56,28 @@ public class UniqueAppointmentListTest {
     }
 
     @Test
-    public void testSetAppointmentNonExisting() {
+    public void setAppointment_nonExistingAppointment_throwsAppointmentNotFoundException() {
         assertThrows(AppointmentNotFoundException.class, () -> {
             uniqueAppointmentList.setAppointment(appointment1, appointment2);
         });
     }
 
     @Test
-    public void testRemove() {
+    public void remove_existingAppointment_removesSuccessfully() {
         uniqueAppointmentList.add(appointment1);
         uniqueAppointmentList.remove(appointment1);
         assertFalse(uniqueAppointmentList.contains(appointment1));
     }
 
     @Test
-    public void testSetAppointments() {
+    public void setAppointments_validList_replacesExistingList() {
         uniqueAppointmentList.setAppointments(Arrays.asList(appointment1, appointment2));
         assertTrue(uniqueAppointmentList.contains(appointment1));
         assertTrue(uniqueAppointmentList.contains(appointment2));
     }
 
     @Test
-    public void testAsUnmodifiableObservableList() {
+    public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         uniqueAppointmentList.add(appointment1);
         uniqueAppointmentList.add(appointment2);
         List<Appointment> unmodifiableList = uniqueAppointmentList.asUnmodifiableObservableList();
@@ -88,7 +85,7 @@ public class UniqueAppointmentListTest {
     }
 
     @Test
-    public void testEquals() {
+    public void equals_differentAndSameAppointments_returnsCorrectEquality() {
         UniqueAppointmentList list1 = new UniqueAppointmentList();
         UniqueAppointmentList list2 = new UniqueAppointmentList();
         list1.add(appointment1);
@@ -99,7 +96,7 @@ public class UniqueAppointmentListTest {
     }
 
     @Test
-    public void testHashCode() {
+    public void hashCode_differentAndSameAppointments_returnsCorrectHashCodeEquality() {
         UniqueAppointmentList list1 = new UniqueAppointmentList();
         UniqueAppointmentList list2 = new UniqueAppointmentList();
         list1.add(appointment1);
@@ -110,7 +107,7 @@ public class UniqueAppointmentListTest {
     }
 
     @Test
-    public void testToString() {
+    public void toString_multipleAppointments_returnsFormattedString() {
         uniqueAppointmentList.add(appointment1);
         uniqueAppointmentList.add(appointment2);
         String expectedString = "[" + appointment1.toString() + ", " + appointment2.toString() + "]";

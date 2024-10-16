@@ -12,39 +12,39 @@ import org.junit.jupiter.api.Test;
 public class AppointmentTypeTest {
 
     @Test
-    public void testValidAppointmentType() {
+    public void isValidAppointmentType_validTypes_returnsTrue() {
         assertTrue(AppointmentType.isValidAppointmentType("Check Up"));
         assertTrue(AppointmentType.isValidAppointmentType("Follow Up"));
     }
 
     @Test
-    public void testInvalidAppointmentType() {
+    public void isValidAppointmentType_invalidTypes_returnsFalse() {
         assertFalse(AppointmentType.isValidAppointmentType(" Check Up"));
         assertFalse(AppointmentType.isValidAppointmentType(""));
         assertFalse(AppointmentType.isValidAppointmentType(" "));
     }
 
     @Test
-    public void testConstructorWithValidInput() {
+    public void constructor_validType_createsAppointmentType() {
         AppointmentType appointmentType = new AppointmentType("Check Up");
         assertEquals("Check Up", appointmentType.value);
     }
 
     @Test
-    public void testConstructorWithInvalidInput() {
+    public void constructor_invalidType_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new AppointmentType(""));
         assertThrows(IllegalArgumentException.class, () -> new AppointmentType(" "));
         assertThrows(IllegalArgumentException.class, () -> new AppointmentType(" CheckUp"));
     }
 
     @Test
-    public void testToString() {
+    public void toString_validAppointmentType_returnsFormattedString() {
         AppointmentType appointmentType = new AppointmentType("Checkup");
         assertEquals("Checkup", appointmentType.toString());
     }
 
     @Test
-    public void testEquals() {
+    public void equals_compareIdenticalAndDifferentTypes_returnsCorrectEquality() {
         AppointmentType appointmentType1 = new AppointmentType("Checkup");
         AppointmentType appointmentType2 = new AppointmentType("Checkup");
         AppointmentType appointmentType3 = new AppointmentType("Followup");
@@ -57,7 +57,7 @@ public class AppointmentTypeTest {
     }
 
     @Test
-    public void testHashCode() {
+    public void hashCode_compareIdenticalAndDifferentTypes_returnsConsistentHashes() {
         AppointmentType appointmentType1 = new AppointmentType("Checkup");
         AppointmentType appointmentType2 = new AppointmentType("Checkup");
         AppointmentType appointmentType3 = new AppointmentType("Followup");

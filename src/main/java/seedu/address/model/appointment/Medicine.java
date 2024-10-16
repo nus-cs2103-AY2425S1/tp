@@ -27,7 +27,7 @@ public class Medicine {
     public Medicine(String medicine) {
         requireNonNull(medicine);
         checkArgument(isValidMedicine(medicine), MESSAGE_CONSTRAINTS);
-        value = medicine.toLowerCase();
+        value = medicine;
     }
 
     /**

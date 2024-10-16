@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 public class SicknessTest {
 
     @Test
-    void testValidSickness() {
+    void isValidSickness_validSicknessNames_returnsTrue() {
         assertTrue(Sickness.isValidSickness("Common cold"));
         assertTrue(Sickness.isValidSickness("Flu"));
         assertTrue(Sickness.isValidSickness("COVID-19"));
@@ -21,38 +21,38 @@ public class SicknessTest {
     }
 
     @Test
-    void testInvalidSickness() {
+    void isValidSickness_invalidSicknessNames_returnsFalse() {
         assertFalse(Sickness.isValidSickness(""));
         assertFalse(Sickness.isValidSickness(" "));
         assertFalse(Sickness.isValidSickness(" Headache"));
     }
 
     @Test
-    void testConstructorWithValidInput() {
+    void constructor_validSicknessName_createsSickness() {
         Sickness sickness = new Sickness("Fever");
         assertEquals("Fever", sickness.value);
     }
 
     @Test
-    void testConstructorWithInvalidInput() {
+    void constructor_invalidSicknessName_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Sickness(""));
         assertThrows(IllegalArgumentException.class, () -> new Sickness(" "));
         assertThrows(IllegalArgumentException.class, () -> new Sickness(" Cough"));
     }
 
     @Test
-    void testConstructorWithNullInput() {
+    void constructor_nullInput_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Sickness(null));
     }
 
     @Test
-    void testToString() {
+    void toString_validSickness_returnsFormattedString() {
         Sickness sickness = new Sickness("Allergies");
         assertEquals("Allergies", sickness.toString());
     }
 
     @Test
-    void testEquals() {
+    void equals_compareIdenticalAndDifferentSicknesses_returnsCorrectEquality() {
         Sickness sickness1 = new Sickness("Asthma");
         Sickness sickness2 = new Sickness("Asthma");
         Sickness sickness3 = new Sickness("Bronchitis");
@@ -65,7 +65,7 @@ public class SicknessTest {
     }
 
     @Test
-    void testHashCode() {
+    void hashCode_compareIdenticalAndDifferentSicknesses_returnsConsistentHashes() {
         Sickness sickness1 = new Sickness("Diabetes");
         Sickness sickness2 = new Sickness("Diabetes");
         Sickness sickness3 = new Sickness("Hypertension");
