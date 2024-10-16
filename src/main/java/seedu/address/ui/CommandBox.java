@@ -90,12 +90,12 @@ public class CommandBox extends UiPart<Region> {
     private void initaliseEventHandler() {
         commandTextArea.setOnKeyPressed(event -> {
             switch (event.getCode()) {
-                case ENTER:
-                    handleCommandEntered();
-                    event.consume();
-                    break;
-                default:
-                    break;
+            case ENTER:
+                handleCommandEntered();
+                event.consume();
+                break;
+            default:
+                break;
             }
         });
     }
