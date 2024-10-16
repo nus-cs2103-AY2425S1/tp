@@ -1,13 +1,11 @@
 package seedu.address.logic.parser;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.core.Pair;
 import seedu.address.commons.core.index.Index;
