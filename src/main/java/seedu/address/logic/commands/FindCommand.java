@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
@@ -28,27 +28,14 @@ public abstract class FindCommand extends Command {
 
     public static final String MESSAGE_FIND_PERSON_UNSUCCESSFUL = "No contacts found.";
 
-    private final TraitContainsKeywordsPredicate<?> predicate;
+    protected final TraitContainsKeywordsPredicate<?> predicate;
 
     public FindCommand(TraitContainsKeywordsPredicate<?> predicate) {
         this.predicate = predicate;
     }
 
     @Override
-    public CommandResult execute(Model model) {
-        requireNonNull(model);
-        if (predicate instanceof NameContainsKeywordsPredicate namePredicate) {
-            model.updateFilteredPersonList(namePredicate);
-        } else if (predicate instanceof TagContainsKeywordsPredicate tagPredicate) {
-            model.updateFilteredPersonListByTag(tagPredicate);
-        }
-
-        if (!model.getFilteredPersonList().isEmpty()) {
-            return new CommandResult(String.format(MESSAGE_FIND_PERSON_SUCCESS, predicate.getDisplayString()));
-        } else {
-            return new CommandResult(MESSAGE_FIND_PERSON_UNSUCCESSFUL);
-        }
-    }
+    public abstract CommandResult execute(Model model);
 
     @Override
     public boolean equals(Object other) {

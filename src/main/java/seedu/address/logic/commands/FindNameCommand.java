@@ -2,10 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case-insensitive and allows partial matching.
@@ -15,8 +13,6 @@ public class FindNameCommand extends FindCommand {
     public static final String MESSAGE_FIND_NAME_PERSON_SUCCESS = "Search for name containing \"%s\" was successful. "
             + " Showing results:";
 
-    private final NameContainsKeywordsPredicate predicate;
-
     /**
      * Command to filter contacts in WedLinker based on names using partial matching.
      * This command allows users to search for contacts by providing one or more keywords.
@@ -25,13 +21,13 @@ public class FindNameCommand extends FindCommand {
      * @param predicate Keywords used to filter contacts by name.
      */
     public FindNameCommand(NameContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
+        super(predicate);
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredPersonList((NameContainsKeywordsPredicate) predicate);
 
         if (!model.getFilteredPersonList().isEmpty()) {
             return new CommandResult(String.format(MESSAGE_FIND_NAME_PERSON_SUCCESS, predicate.getDisplayString()));
@@ -47,18 +43,10 @@ public class FindNameCommand extends FindCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindNameCommand)) {
+        if (!(other instanceof FindNameCommand otherFindCommand)) {
             return false;
         }
 
-        FindNameCommand otherFindCommand = (FindNameCommand) other;
         return predicate.equals(otherFindCommand.predicate);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("predicate", predicate)
-                .toString();
     }
 }

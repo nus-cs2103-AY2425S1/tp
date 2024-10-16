@@ -2,10 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
-
 /**
  * Finds and lists all persons in address book whose phone number contains any of the argument keywords.
  * Keyword matching allows partial matching.
@@ -15,7 +13,6 @@ public class FindPhoneCommand extends FindCommand {
     public static final String MESSAGE_FIND_PHONE_PERSON_SUCCESS = "Search for phone number containing \"%s\" "
             + " was successful. Showing results:";
 
-    private final PhoneContainsKeywordsPredicate predicate;
 
     /**
      * Command to filter contacts in WedLinker based on phone numbers.
@@ -24,13 +21,13 @@ public class FindPhoneCommand extends FindCommand {
      * @param predicate Keywords used to filter contacts by their phone number.
      */
     public FindPhoneCommand(PhoneContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
+        super(predicate);
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredPersonList((PhoneContainsKeywordsPredicate) predicate);
 
         if (!model.getFilteredPersonList().isEmpty()) {
             return new CommandResult(String.format(MESSAGE_FIND_PHONE_PERSON_SUCCESS, predicate.getDisplayString()));
@@ -46,19 +43,11 @@ public class FindPhoneCommand extends FindCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindPhoneCommand)) {
+        if (!(other instanceof FindPhoneCommand otherFindCommand)) {
             return false;
         }
 
-        FindPhoneCommand otherFindCommand = (FindPhoneCommand) other;
         return predicate.equals(otherFindCommand.predicate);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("predicate", predicate)
-                .toString();
     }
 
 

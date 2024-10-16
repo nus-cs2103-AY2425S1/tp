@@ -20,7 +20,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FilterCommand;
+import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindNameCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -84,7 +84,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_filter() throws Exception {
-        assertTrue(parser.parseCommand(FilterCommand.COMMAND_WORD + " " + "foo") instanceof FilterCommand);
+        assertTrue(parser.parseCommand(FindTagCommand.COMMAND_WORD + " " + "foo") instanceof FindTagCommand);
     }
 
     @Test

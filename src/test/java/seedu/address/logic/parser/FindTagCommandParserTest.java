@@ -8,27 +8,27 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.FilterCommand;
+import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 
-public class FilterCommandParserTest {
+public class FindTagCommandParserTest {
 
     private FilterCommandParser parser = new FilterCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTagCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsFilterCommand() {
         // no leading and trailing whitespaces
-        FilterCommand expectedFilterCommand =
-                new FilterCommand(new TagContainsKeywordsPredicate(List.of("friends")));
-        assertParseSuccess(parser, "friends", expectedFilterCommand);
+        FindTagCommand expectedFindTagCommand =
+                new FindTagCommand(new TagContainsKeywordsPredicate(List.of("friends")));
+        assertParseSuccess(parser, "friends", expectedFindTagCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "friends", expectedFilterCommand);
+        assertParseSuccess(parser, "friends", expectedFindTagCommand);
     }
 
 }

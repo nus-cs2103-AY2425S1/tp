@@ -2,10 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
-
 /**
  * Finds and lists all persons in address book whose address contains any of the argument keywords.
  * Keyword matching is case-insensitive and allows partial matching.
@@ -15,8 +13,6 @@ public class FindAddressCommand extends FindCommand {
     public static final String MESSAGE_FIND_ADDRESS_PERSON_SUCCESS = "Search for address containing \"%s\" "
             + " was successful. Showing results:";
 
-    private final AddressContainsKeywordsPredicate predicate;
-
     /**
      * Command to filter contacts in WedLinker based on phone numbers.
      * The search matches any parts of the phone numbers.
@@ -24,13 +20,13 @@ public class FindAddressCommand extends FindCommand {
      * @param predicate Keywords used to filter contacts by their phone number.
      */
     public FindAddressCommand(AddressContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
+        super(predicate);
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredPersonList((AddressContainsKeywordsPredicate) predicate);
 
         if (!model.getFilteredPersonList().isEmpty()) {
             return new CommandResult(String.format(MESSAGE_FIND_ADDRESS_PERSON_SUCCESS, predicate.getDisplayString()));
@@ -46,19 +42,10 @@ public class FindAddressCommand extends FindCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindAddressCommand)) {
+        if (!(other instanceof FindAddressCommand otherFindCommand)) {
             return false;
         }
 
-        FindAddressCommand otherFindCommand = (FindAddressCommand) other;
         return predicate.equals(otherFindCommand.predicate);
     }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("predicate", predicate)
-                .toString();
-    }
-
 }
