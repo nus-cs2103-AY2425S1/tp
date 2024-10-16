@@ -55,6 +55,7 @@ public class DeleteGroupCommand extends Command {
         if (groupToBeDeleted.hasStudents()) {
             for (Student student : groupToBeDeleted.getStudents()) {
                 // update group in student
+                // have to do here else there will be an error
                 model.setPerson(student, student.removeGroup());
                 studentsAffected++;
             }
