@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -33,15 +35,53 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_personWithAllFields_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        Person personWithAllFields = new PersonBuilder().build();
+        CommandResult commandResult = new AddCommand(personWithAllFields).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(personWithAllFields)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(Arrays.asList(personWithAllFields), modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_personWithoutEmail_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        Person personWithoutEmail = new PersonBuilder(ALICE).withEmail().build();
+        CommandResult commandResultWithoutEmail = new AddCommand(personWithoutEmail).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(personWithoutEmail)),
+                commandResultWithoutEmail.getFeedbackToUser());
+        assertEquals(Arrays.asList(personWithoutEmail), modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_personWithoutAddress_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        Person personWithoutAddress = new PersonBuilder(BENSON).withAddress().build();
+        CommandResult commandResultWithoutAddress = new AddCommand(personWithoutAddress).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(personWithoutAddress)),
+                commandResultWithoutAddress.getFeedbackToUser());
+        assertEquals(Arrays.asList(personWithoutAddress),
+                modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_personWithoutEmailOrAddress_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        Person personWithoutEmailOrAddress = new PersonBuilder(CARL).withEmail().withAddress().build();
+        CommandResult commandResultWithoutEmailOrAddress = new AddCommand(personWithoutEmailOrAddress)
+                .execute(modelStub);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(personWithoutEmailOrAddress)),
+                commandResultWithoutEmailOrAddress.getFeedbackToUser());
+        assertEquals(Arrays.asList(personWithoutEmailOrAddress),
+                modelStub.personsAdded);
     }
 
     @Test
