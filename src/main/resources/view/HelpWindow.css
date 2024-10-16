@@ -1,4 +1,4 @@
-#copyButton, #helpMessage {
+#copyButton, #helpMessage, #helpCommands {
     -fx-text-fill: white;
 }
 
@@ -16,4 +16,8 @@
 
 #helpMessageContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+#helpCommands {
+    -fx-font-size: 12pt;
 }

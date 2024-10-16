@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
 <fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
@@ -19,26 +20,37 @@
         <URL value="@HelpWindow.css" />
       </stylesheets>
 
-      <HBox alignment="CENTER" fx:id="helpMessageContainer">
-        <children>
-          <Label fx:id="helpMessage" text="Label">
-            <HBox.margin>
-              <Insets right="5.0" />
-            </HBox.margin>
-          </Label>
-          <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
-            <HBox.margin>
-              <Insets left="5.0" />
-            </HBox.margin>
-          </Button>
-        </children>
+      <VBox alignment="CENTER" fx:id="helpMessageContainer">
+        <HBox alignment="CENTER" fx:id="helpMessageContainer">
+          <children>
+            <Label fx:id="helpMessage" text="Label">
+              <HBox.margin>
+                <Insets right="5.0" />
+              </HBox.margin>
+            </Label>
+            <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
+              <HBox.margin>
+                <Insets left="5.0" />
+              </HBox.margin>
+            </Button>
+          </children>
+        </HBox>
+        <VBox fx:id="helpCommandsContainer">
+          <children>
+            <Label fx:id="helpCommands" text="Label">
+              <VBox.margin>
+                <Insets right="5.0" />
+              </VBox.margin>
+            </Label>
+          </children>
+        </VBox>
         <opaqueInsets>
           <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
         </opaqueInsets>
         <padding>
           <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
         </padding>
-      </HBox>
+      </VBox>
     </Scene>
   </scene>
 </fx:root>
