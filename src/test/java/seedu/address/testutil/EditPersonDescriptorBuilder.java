@@ -11,6 +11,7 @@ import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.WorkExp;
 import seedu.address.model.person.University;
 import seedu.address.model.tag.Tag;
 
@@ -39,6 +40,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setInterest(person.getInterest());
+        descriptor.setWorkExp(person.getWorkExp());
         descriptor.setTags(person.getTags());
         descriptor.setUniversity(person.getUniversity());
         descriptor.setMajor(person.getMajor());
@@ -76,6 +78,11 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    public EditPersonDescriptorBuilder withWorkExp(String workExp) {
+        descriptor.setWorkExp(new WorkExp(workExp));
+        return this;
+    }
+
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
@@ -105,4 +112,5 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptor build() {
         return descriptor;
     }
+
 }

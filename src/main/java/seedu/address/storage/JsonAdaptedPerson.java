@@ -17,6 +17,7 @@ import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.WorkExp;
 import seedu.address.model.person.University;
 import seedu.address.model.tag.Tag;
 
@@ -32,6 +33,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String interest;
+    private final String workExp;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String university;
     private final String major;
@@ -43,6 +45,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("workExp") String workExp, 
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("university") String university,
                              @JsonProperty("major") String major, @JsonProperty("interest") String interest) {
         this.name = name;
@@ -50,8 +53,10 @@ class JsonAdaptedPerson {
         this.email = email;
         this.address = address;
         this.interest = interest;
+        this.workExp = workExp;
         this.university = university;
         this.major = major;
+
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -66,6 +71,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         interest = source.getInterest().value;
         address = source.getAddress().value;
+        workExp = source.getWorkExp().value;
         university = source.getUniversity().value;
         major = source.getMajor().value;
         tags.addAll(source.getTags().stream()
@@ -116,6 +122,14 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (workExp == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, WorkExp.class.getSimpleName()));
+        }
+        if (!WorkExp.isValidWorkExp(workExp)) {
+            throw new IllegalValueException(WorkExp.MESSAGE_CONSTRAINTS);
+        }
+        final WorkExp modelWorkExp = new WorkExp(workExp);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         // Validation for new fields
@@ -136,8 +150,8 @@ class JsonAdaptedPerson {
         }
         final Major modelMajor = new Major(major);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                modelUniversity, modelMajor, new Interest(""));
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelWorkExp, modelTags, modelUniversity,
+                          modelMajor, new Interest(""));
     }
 
 }
