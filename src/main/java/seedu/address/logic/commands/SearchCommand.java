@@ -21,7 +21,7 @@ public class SearchCommand extends Command {
             + ": Searches all persons whose names or tags contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "At least one of the following parameters must be provided.\n"
-            + "Parameters: [n/NAME_KEYWORD] [t/TAG_KEYWORD]\n"
+            + "Parameters: " + "/PREFIX KEYWORD [/ANOTHER_PREFIX KEYWORD] \n"
             + "You can search by name, tag, or both."
             + " If both are provided, only persons matching both criteria will be shown.\n"
             + "Example 1: " + COMMAND_WORD + " n/alice\n"

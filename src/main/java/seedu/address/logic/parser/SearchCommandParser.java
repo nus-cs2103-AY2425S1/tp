@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -22,18 +24,20 @@ public class SearchCommandParser implements Parser<SearchCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public SearchCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_TAG);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG);
 
-        // Checks for multiple instances of the same prefix
-        checkForMultipleInstances(argMultimap, CliSyntax.PREFIX_NAME, "name");
-        checkForMultipleInstances(argMultimap, CliSyntax.PREFIX_TAG, "tag");
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+        }
 
-        String nameArgs = argMultimap.getValue(CliSyntax.PREFIX_NAME).orElse("");
-        String tagArgs = argMultimap.getValue(CliSyntax.PREFIX_TAG).orElse("");
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TAG);
+
+        String nameArgs = argMultimap.getValue(PREFIX_NAME).orElse("");
+        String tagArgs = argMultimap.getValue(PREFIX_TAG).orElse("");
 
         // Check for empty inputs after the prefixes
-        checkForEmptyInput(argMultimap, CliSyntax.PREFIX_NAME, nameArgs, "name");
-        checkForEmptyInput(argMultimap, CliSyntax.PREFIX_TAG, tagArgs, "tag");
+        checkForEmptyInput(argMultimap, PREFIX_NAME, nameArgs);
+        checkForEmptyInput(argMultimap, PREFIX_TAG, tagArgs);
 
         Predicate<Person> combinedPredicate = null;
 
@@ -57,22 +61,6 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         return new SearchCommand(combinedPredicate);
     }
 
-    /**
-     * Checks if there are multiple instances of the given {@code prefix} in the {@code ArgumentMultimap}.
-     * If more than one value is associated with the {@code prefix}, a {@code ParseException} is thrown.
-     *
-     * @param argMultimap The {@code ArgumentMultimap} containing the user's input and associated prefixes.
-     * @param prefix The {@code Prefix} to check for multiple instances.
-     * @param prefixName A human-readable name for the prefix (e.g., "name" or "tag"), used in the exception message.
-     * @throws ParseException If more than one instance of the {@code prefix} is found in the {@code ArgumentMultimap}.
-     */
-    private void checkForMultipleInstances(ArgumentMultimap argMultimap, Prefix prefix, String prefixName)
-            throws ParseException {
-        if (argMultimap.getAllValues(prefix).size() > 1) {
-            throw new ParseException(String.format("Multiple %s prefixes (%s) detected. Only one %s prefix is allowed.",
-                    prefixName, prefix.getPrefix(), prefixName));
-        }
-    }
 
     /**
      * Checks if the value for a given prefix is empty in the {@code ArgumentMultimap}.
@@ -81,14 +69,12 @@ public class SearchCommandParser implements Parser<SearchCommand> {
      * @param argMultimap The {@code ArgumentMultimap} containing the user's input and associated prefixes.
      * @param prefix The {@code Prefix} to check for empty input.
      * @param value The value associated with the {@code prefix} to check.
-     * @param prefixName A human-readable name for the prefix (e.g., "name" or "tag"), used in the exception message.
      * @throws ParseException If the prefix is present but its value is empty.
      */
-    private void checkForEmptyInput(ArgumentMultimap argMultimap, Prefix prefix, String value, String prefixName)
+    private void checkForEmptyInput(ArgumentMultimap argMultimap, Prefix prefix, String value)
             throws ParseException {
         if (argMultimap.getValue(prefix).isPresent() && value.trim().isEmpty()) {
-            throw new ParseException(String.format("The %s prefix (%s) cannot be empty. Please provide a valid %s.",
-                    prefixName, prefix.getPrefix(), prefixName));
+            throw new ParseException("The prefix cannot be empty. Please input a keyword for the prefix.");
         }
     }
 
