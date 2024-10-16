@@ -1,8 +1,8 @@
 package seedu.address.model.tag;
 
-import java.util.Locale;
-
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.Locale;
 
 
 /**
