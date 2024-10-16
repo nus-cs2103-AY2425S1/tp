@@ -219,15 +219,15 @@ the data of your previous AcademyAssist folder.
 
 ## Command summary
 
-| Action | Format, Examples |
-|--------|-------------------|
+| Action | Format, Examples                                                                                                                                                                                  |
+|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add** | `add n/NAME ic/IC_NUMBER e/EMAIL p/PHONE_NUMBER a/ADDRESS c/CLASS y/ACADEMIC_YEAR` <br> e.g., `add n/John Doe ic/T384859A e/johndoe@gmail.com p/81003999 a/9 Smith Street c/Science1 y/Standard1` |
-| **Delete** | `del STUDENT_ID`<br> e.g., `del 12345` |
-| **Edit** | `edit STUDENT_ID FIELD:NEW_VALUE`<br> e.g.,`edit 12345 Address:New Address` |
-| **View** | `view` |
-| **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John Jane` |
-| **Add Class** | `addc STUDENT_ID CLASS_NAME`<br> e.g., `addc 12345 Science1` |
-| **Sort** | `sort FIELD`<br> e.g., `sort name` |
-| **Clear** | `clear` |
-| **Help** | `help` |
-| **Exit** | `exit` |
+| **Delete** | `del STUDENT_ID`<br> e.g., `del 12345`                                                                                                                                                            |
+| **Edit** | `edit STUDENT_ID FIELD:NEW_VALUE`<br> e.g.,`edit 12345 Address:New Address`                                                                                                                       |
+| **View** | `view`                                                                                                                                                                                            |
+| **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John Jane`                                                                                                                                         |
+| **Add Class** | `addc STUDENT_ID CLASS_NAME`<br> e.g., `addc 12345 Science1`                                                                                                                                      |
+| **Sort** | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                                                            |
+| **Clear** | `clear`                                                                                                                                                                                           |
+| **Help** | `help`                                                                                                                                                                                            |
+| **Exit** | `exit`                                                                                                                                                                                            |
