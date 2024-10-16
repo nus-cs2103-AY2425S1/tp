@@ -4,45 +4,48 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.StudyGroupTag;
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * Jackson-friendly version of {@link StudyGroupTag}.
  */
-class JsonAdaptedTag {
+class JsonAdaptedStudyGroupTag {
 
-    private final String tagName;
+    private final String studyGroupName;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedStudyGroupTag} with the given
+     * {@code studyGroupName}.
      */
     @JsonCreator
-    public JsonAdaptedTag(String tagName) {
-        this.tagName = tagName;
+    public JsonAdaptedStudyGroupTag(String studyGroupName) {
+        this.studyGroupName = studyGroupName;
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code StudyGroupTag} into this class for Jackson use.
      */
-    public JsonAdaptedTag(Tag source) {
-        tagName = source.tagName;
+    public JsonAdaptedStudyGroupTag(StudyGroupTag source) {
+        studyGroupName = source.studyGroupName;
     }
 
     @JsonValue
-    public String getTagName() {
-        return tagName;
+    public String getStudyGroupName() {
+        return studyGroupName;
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted tag object into the model's
+     * {@code StudyGroupTag} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted study group tag.
      */
-    public Tag toModelType() throws IllegalValueException {
-        if (!Tag.isValidTagName(tagName)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+    public StudyGroupTag toModelType() throws IllegalValueException {
+        if (!StudyGroupTag.isValidStudyGroupName(studyGroupName)) {
+            throw new IllegalValueException(StudyGroupTag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(tagName);
+        return new StudyGroupTag(studyGroupName);
     }
 
 }

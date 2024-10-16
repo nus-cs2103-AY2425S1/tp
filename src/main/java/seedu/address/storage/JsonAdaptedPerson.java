@@ -16,7 +16,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.StudyGroupTag;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -29,7 +29,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String gender;
     private final String age;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedStudyGroupTag> studyGroups = new ArrayList<>();
     private final String detail;
 
     /**
@@ -38,13 +38,13 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("email") String email,
             @JsonProperty("gender") String gender, @JsonProperty("age") String age,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("detail") String detail) {
+            @JsonProperty("tags") List<JsonAdaptedStudyGroupTag> tags, @JsonProperty("detail") String detail) {
         this.name = name;
         this.email = email;
         this.gender = gender;
         this.age = age;
         if (tags != null) {
-            this.tags.addAll(tags);
+            this.studyGroups.addAll(tags);
         }
         this.detail = detail;
     }
@@ -57,21 +57,23 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         gender = source.getGender().value;
         age = source.getAge().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        studyGroups.addAll(source.getStudyGroups().stream()
+                .map(JsonAdaptedStudyGroupTag::new)
                 .collect(Collectors.toList()));
         detail = source.getDetail().value;
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted person object into the model's
+     * {@code Person} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+        final List<StudyGroupTag> personStudyGroups = new ArrayList<>();
+        for (JsonAdaptedStudyGroupTag tag : studyGroups) {
+            personStudyGroups.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -106,11 +108,11 @@ class JsonAdaptedPerson {
         }
         final Age modelAge = new Age(age);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<StudyGroupTag> modelStudyGroups = new HashSet<>(personStudyGroups);
 
         final Detail modelDetail = new Detail(detail);
 
-        return new Person(modelName, modelEmail, modelGender, modelAge, modelTags, modelDetail);
+        return new Person(modelName, modelEmail, modelGender, modelAge, modelStudyGroups, modelDetail);
     }
 
 }

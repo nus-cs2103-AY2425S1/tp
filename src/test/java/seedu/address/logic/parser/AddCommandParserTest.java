@@ -49,21 +49,21 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Person expectedPerson = new PersonBuilder(BOB).withStudyGroups(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + EMAIL_DESC_BOB
                 + GENDER_DESC_BOB + AGE_DESC_BOB + TAG_DESC_FRIEND + DETAIL_DESC_BOB,
                 new AddCommand(expectedPerson));
 
-
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Person expectedPersonMultipleStudyGroups = new PersonBuilder(BOB)
+                .withStudyGroups(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + EMAIL_DESC_BOB + GENDER_DESC_BOB + AGE_DESC_BOB + TAG_DESC_HUSBAND
                         + TAG_DESC_FRIEND + DETAIL_DESC_BOB,
-                new AddCommand(expectedPersonMultipleTags));
+                new AddCommand(expectedPersonMultipleStudyGroups));
     }
 
     @Test
@@ -126,18 +126,18 @@ public class AddCommandParserTest {
     @Test
     public void parse_tagFieldsMissing_success() {
         // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().withDetail("detail").build();
+        Person expectedPerson = new PersonBuilder(AMY).withStudyGroups().withDetail("detail").build();
         assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY
-                        + GENDER_DESC_AMY + AGE_DESC_AMY + DETAIL_DESC_AMY,
+                + GENDER_DESC_AMY + AGE_DESC_AMY + DETAIL_DESC_AMY,
                 new AddCommand(expectedPerson));
     }
 
     @Test
     public void parse_detailFieldsMissing_success() {
         // no detail
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Person expectedPerson = new PersonBuilder(AMY).withStudyGroups().build();
         assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY
-                        + GENDER_DESC_AMY + AGE_DESC_AMY,
+                + GENDER_DESC_AMY + AGE_DESC_AMY,
                 new AddCommand(expectedPerson));
     }
 

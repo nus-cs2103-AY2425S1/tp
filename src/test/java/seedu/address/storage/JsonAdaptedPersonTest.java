@@ -27,8 +27,8 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_GENDER = BENSON.getGender().toString();
     private static final String VALID_AGE = BENSON.getAge().toString();
     private static final String VALID_DETAIL = BENSON.getDetail().toString();
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
-            .map(JsonAdaptedTag::new)
+    private static final List<JsonAdaptedStudyGroupTag> VALID_TAGS = BENSON.getStudyGroups().stream()
+            .map(JsonAdaptedStudyGroupTag::new)
             .collect(Collectors.toList());
 
     @Test
@@ -39,8 +39,8 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(INVALID_NAME, VALID_EMAIL, VALID_GENDER, VALID_AGE, VALID_TAGS, VALID_DETAIL);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(INVALID_NAME, VALID_EMAIL, VALID_GENDER, VALID_AGE, VALID_TAGS,
+                VALID_DETAIL);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -55,8 +55,8 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, INVALID_EMAIL, VALID_GENDER, VALID_AGE, VALID_TAGS, VALID_DETAIL);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, INVALID_EMAIL, VALID_GENDER, VALID_AGE, VALID_TAGS,
+                VALID_DETAIL);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -71,16 +71,17 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
-        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
-        invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_EMAIL, VALID_GENDER, VALID_AGE, invalidTags, VALID_DETAIL);
+        List<JsonAdaptedStudyGroupTag> invalidTags = new ArrayList<>(VALID_TAGS);
+        invalidTags.add(new JsonAdaptedStudyGroupTag(INVALID_TAG));
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_EMAIL, VALID_GENDER, VALID_AGE, invalidTags,
+                VALID_DETAIL);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
+
     @Test
     public void toModelType_invalidAge_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_EMAIL, VALID_GENDER, INVALID_AGE, VALID_TAGS, VALID_DETAIL);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_EMAIL, VALID_GENDER, INVALID_AGE, VALID_TAGS,
+                VALID_DETAIL);
         String expectedMessage = Age.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }

@@ -12,7 +12,7 @@ import java.util.Set;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.StudyGroupTag;
 
 /**
  * A utility class for Person.
@@ -36,14 +36,14 @@ public class PersonUtil {
         sb.append(PREFIX_GENDER + person.getGender().value + " ");
         sb.append(PREFIX_AGE + person.getAge().value + " ");
         sb.append(PREFIX_DETAIL + person.getDetail().value + " ");
-        person.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
+        person.getStudyGroups().stream().forEach(
+                s -> sb.append(PREFIX_TAG + s.studyGroupName + " "));
         return sb.toString();
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given
+     * {@code EditPersonDescriptor}'s details.
      */
     public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
@@ -52,12 +52,12 @@ public class PersonUtil {
         descriptor.getGender().ifPresent(gender -> sb.append(PREFIX_GENDER).append(gender.value).append(" "));
         descriptor.getAge().ifPresent(age -> sb.append(PREFIX_AGE).append(age.value).append(" "));
         descriptor.getDetail().ifPresent(detail -> sb.append(PREFIX_DETAIL).append(detail.value).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
+        if (descriptor.getStudyGroups().isPresent()) {
+            Set<StudyGroupTag> tags = descriptor.getStudyGroups().get();
             if (tags.isEmpty()) {
                 sb.append(PREFIX_TAG);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.studyGroupName).append(" "));
             }
         }
         return sb.toString();

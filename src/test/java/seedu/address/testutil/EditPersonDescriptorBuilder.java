@@ -11,7 +11,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.StudyGroupTag;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -29,7 +29,8 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditPersonDescriptor} with fields containing
+     * {@code person}'s details
      */
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
@@ -37,12 +38,13 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setGender(person.getGender());
         descriptor.setAge(person.getAge());
-        descriptor.setTags(person.getTags());
+        descriptor.setStudyGroups(person.getStudyGroups());
         descriptor.setDetail(person.getDetail());
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are
+     * building.
      */
     public EditPersonDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
@@ -50,7 +52,8 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are
+     * building.
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
@@ -58,7 +61,8 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Gender} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Gender} of the {@code EditPersonDescriptor} that we are
+     * building.
      */
     public EditPersonDescriptorBuilder withGender(String gender) {
         descriptor.setGender(new Gender(gender));
@@ -66,7 +70,8 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Age} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Age} of the {@code EditPersonDescriptor} that we are
+     * building.
      */
     public EditPersonDescriptorBuilder withAge(String age) {
         descriptor.setAge(new Age(age));
@@ -74,17 +79,18 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
-     * that we are building.
+     * Parses the {@code studyGroups} into a {@code Set<StudyGroupTag>} and set it
+     * to the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditPersonDescriptorBuilder withStudyGroups(String... studyGroups) {
+        Set<StudyGroupTag> tagSet = Stream.of(studyGroups).map(StudyGroupTag::new).collect(Collectors.toSet());
+        descriptor.setStudyGroups(tagSet);
         return this;
     }
 
     /**
-     * Sets the {@code Detail} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Detail} of the {@code EditPersonDescriptor} that we are
+     * building.
      */
     public EditPersonDescriptorBuilder withDetail(String detail) {
         descriptor.setDetail(new Detail(detail));

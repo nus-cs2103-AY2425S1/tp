@@ -9,7 +9,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.StudyGroupTag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -28,7 +28,7 @@ public class PersonBuilder {
     private Email email;
     private Gender gender;
     private Age age;
-    private Set<Tag> tags;
+    private Set<StudyGroupTag> studyGroups;
     private Detail detail;
 
     /**
@@ -39,7 +39,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         gender = new Gender(DEFAULT_GENDER);
         age = new Age(DEFAULT_AGE);
-        tags = new HashSet<>();
+        studyGroups = new HashSet<>();
     }
 
     /**
@@ -50,7 +50,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         gender = personToCopy.getGender();
         age = personToCopy.getAge();
-        tags = new HashSet<>(personToCopy.getTags());
+        studyGroups = new HashSet<>(personToCopy.getStudyGroups());
         detail = personToCopy.getDetail();
     }
 
@@ -63,10 +63,11 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code studyGroups} into a {@code Set<StudyGroupTag>} and set it
+     * to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withStudyGroups(String... studyGroups) {
+        this.studyGroups = SampleDataUtil.getStudyGroupSet(studyGroups);
         return this;
     }
 
@@ -103,7 +104,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, email, gender, age, tags, detail);
+        return new Person(name, email, gender, age, studyGroups, detail);
     }
 
 }
