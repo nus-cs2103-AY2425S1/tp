@@ -51,7 +51,7 @@ public class CommandBufferTest {
         commandBuffer.addCommand("first command");
         commandBuffer.addCommand("second command");
 
-        commandBuffer.handleUpInput();  // Move to first command
+        commandBuffer.handleUpInput();
         assertEquals("second command", commandBuffer.handleDownInput());
     }
 
