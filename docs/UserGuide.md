@@ -225,10 +225,7 @@ Action     | Format                                                             
 **Find**   | `find /all [KEYWORDS]` <br> `find /e [KEYWORDS]` <br> `find /ph [KEYWORDS]`                   | `find /all Jake` <br> `find /e Jake` <br> `find /ph Jake`
 **List**   | `list all` <br> `list e` <br> `list ph`                                                                                       |  
 **Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​`                      | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
-**Exit**   | `exit`                                                                                | 
-**Find**   | `find /all [KEYWORDS]` <br> `find /e [KEYWORDS]` <br> `find /ph [KEYWORDS]`           | `find /all Jake` <br> `find /e Jake` <br> `find /ph Jake`
-**List**   | `list all` <br> `list e` <br> `list ph`                                                                                | 
-**Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​`              | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
+
 
 --------------------------------------------------------------------------------------------------------------------
 
