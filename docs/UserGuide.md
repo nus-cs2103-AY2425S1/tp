@@ -131,17 +131,17 @@ Examples:
 
 Deletes the specified student from the address book.
 
-Format: `delete i/INDEX...`
+Format: `delete INDEX[;INDEX]...`
 
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Can delete multiple items at once
+* Can delete multiple items at once by separating indices with semicolons (;)
 
 Examples:
-* `list` followed by `delete i/2` deletes the 2nd student in the address book.
-* `list` followed by `delete i/2 i/3` deletes the 2nd and 3rd student in the address book.
-* `find Betsy` followed by `delete i/1` deletes the 1st student in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd student in the address book.
+* `list` followed by `delete 2;3` deletes the 2nd and 3rd student in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
