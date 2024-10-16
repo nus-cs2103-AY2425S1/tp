@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -58,11 +59,40 @@ public class PersonCardUiTest extends ApplicationTest {
         FlowPane tagsFlowPane = personCard.getTags();
         assertEquals(2, tagsFlowPane.getChildren().size()); // Expecting 2 tags
 
-        //Tags are rendered lexicographically
+        // Tags are rendered lexicographically
         Label firstTag = (Label) tagsFlowPane.getChildren().get(0);
         Label secondTag = (Label) tagsFlowPane.getChildren().get(1);
         assertEquals("colleagues", firstTag.getText());
         assertEquals("friends", secondTag.getText());
+    }
+
+    @Test
+    void personCard_throwsIllegalArgumentExceptionForInvalidPhone() {
+        // Use assertThrows to verify that IllegalArgumentException is thrown for an invalid phone number
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
+            new Person(
+                    new Name("Invalid Phone"),
+                    new Phone("12"), // Invalid phone number (less than 3 digits)
+                    new Email("invalid@example.com"),
+                    new HashSet<>(),
+                    null,
+                    new Property("Some Property")
+            );
+        });
+
+        // Verify the exception message
+        assertEquals("Phone numbers should only contain numbers, and it should be at least 3 digits long",
+                thrown.getMessage());
+    }
+
+    @Test
+    void personCard_handlesDifferentIndexes() {
+        // Test PersonCard with various indexes
+        PersonCard personCardIndex5 = new PersonCard(samplePerson, 5);
+        assertEquals("5. ", personCardIndex5.getId().getText());
+
+        PersonCard personCardIndex10 = new PersonCard(samplePerson, 10);
+        assertEquals("10. ", personCardIndex10.getId().getText());
     }
 
     /**
@@ -83,5 +113,3 @@ public class PersonCardUiTest extends ApplicationTest {
         );
     }
 }
-
-
