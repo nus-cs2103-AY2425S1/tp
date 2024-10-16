@@ -5,19 +5,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TutUtil.TUTORIAL_CLASS;
 import static seedu.address.testutil.TutUtil.TUT_NAME;
-import static seedu.address.testutil.TutUtil.TUT_SAMPLE;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.model.tut.Tut;
 import seedu.address.model.tut.TutName;
+import seedu.address.model.tut.Tutorial;
+import seedu.address.model.tut.TutorialList;
 
 public class JsonTutorialStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonTutorialStorageTest");
@@ -30,7 +30,7 @@ public class JsonTutorialStorageTest {
         assertThrows(NullPointerException.class, () -> readTutorials(null));
     }
 
-    private java.util.Optional<List<Tut>> readTutorials(String filePath) throws Exception {
+    private java.util.Optional<TutorialList> readTutorials(String filePath) throws Exception {
         return new JsonTutorialStorage(Paths.get(filePath)).readTutorials(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -50,8 +50,11 @@ public class JsonTutorialStorageTest {
         JsonTutorialStorage jsonTutorialStorage = new JsonTutorialStorage(filePath);
 
         // Step 1: Create a tutorial sample
-        Tut tutSample = new Tut(new TutName(TUT_NAME), TUTORIAL_CLASS);
-        List<Tut> originalTutorials = List.of(tutSample);
+        Tutorial tutorialSample = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        ArrayList<Tutorial> tutorials = new ArrayList<>();
+        tutorials.add(tutorialSample);
+        TutorialList originalTutorials = new TutorialList(tutorials);
+
 
         // Step 2: Save the tutorial sample to the file
         jsonTutorialStorage.saveTutorials(originalTutorials, filePath);
@@ -74,7 +77,7 @@ public class JsonTutorialStorageTest {
     /**
      * Saves {@code tutorialList} at the specified {@code filePath}.
      */
-    private void saveTutorials(List<Tut> tutorialList, String filePath) {
+    private void saveTutorials(TutorialList tutorialList, String filePath) {
         try {
             new JsonTutorialStorage(Paths.get(filePath))
                     .saveTutorials(tutorialList, addToTestDataPathIfNotNull(filePath));
@@ -84,6 +87,6 @@ public class JsonTutorialStorageTest {
     }
     @Test
     public void saveTutorials_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveTutorials(List.of(TUT_SAMPLE), null));
+        assertThrows(NullPointerException.class, () -> saveTutorials(new TutorialList(), null));
     }
 }

@@ -4,7 +4,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.DeleteTutorialCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.student.TutorialClass;
+import seedu.address.model.tut.TutName;
+import seedu.address.model.tut.Tutorial;
 
 /**
  * Parses input arguments and creates a new DeleteTutorialCommand object
@@ -27,7 +28,7 @@ public class DeleteTutorialCommandParser implements Parser<DeleteTutorialCommand
                 );
             }
 
-            TutorialClass tutorial = ParserUtil.parseTutIndex(args);
+            Tutorial tutorial = new Tutorial(new TutName("random"), ParserUtil.parseTutIndex(args));
             return new DeleteTutorialCommand(tutorial);
 
         } catch (ParseException pe) {

@@ -2,8 +2,6 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -24,7 +22,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.AssignmentList;
-import seedu.address.model.tut.Tut;
+import seedu.address.model.tut.TutorialList;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.AssignmentStorage;
@@ -89,7 +87,8 @@ public class MainApp extends Application {
         ReadOnlyAddressBook initialData;
         Optional<AssignmentList> assignmentListOptional;
         AssignmentList assignmentData;
-        List<Tut> tutorialData;
+        Optional<TutorialList> tutorialListOptional;
+        TutorialList tutorialData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -104,19 +103,19 @@ public class MainApp extends Application {
                         + " populated with empty assignment list.");
             }
             assignmentData = assignmentListOptional.orElseGet(AssignmentList::new);
-            //TODO: Convert List<Tut> to TutorialList
-            Optional<List<Tut>> tutorialListOptional = storage.readTutorials();
+
+            tutorialListOptional = storage.readTutorials();
             if (!tutorialListOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getTutorialFilePath()
                         + " populated with empty tutorial list.");
             }
-            tutorialData = tutorialListOptional.orElseGet(() -> new ArrayList<Tut>());
+            tutorialData = tutorialListOptional.orElseGet(() -> new TutorialList());
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
             assignmentData = new AssignmentList();
-            tutorialData = new ArrayList<Tut>();
+            tutorialData = new TutorialList();
         }
 
         return new ModelManager(initialData, userPrefs, assignmentData, tutorialData);

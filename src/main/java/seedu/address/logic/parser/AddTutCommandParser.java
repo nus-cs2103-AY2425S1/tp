@@ -9,8 +9,8 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddTutCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.TutorialClass;
-import seedu.address.model.tut.Tut;
 import seedu.address.model.tut.TutName;
+import seedu.address.model.tut.Tutorial;
 
 /**
  * Parses input arguments and creates a new AddTutCommand object.
@@ -33,7 +33,8 @@ public class AddTutCommandParser implements Parser<AddTutCommand> {
         TutName tutName = ParserUtil.parseTutName(argMultimap.getValue(PREFIX_TUT_NAME).get());
         TutorialClass id = ParserUtil.parseTutIndex(argMultimap.getValue(PREFIX_TUT_ID).get());
 
-        Tut tutorial = new Tut(tutName, id);
+        Tutorial tutorial = new Tutorial(tutName, id);
+
 
         return new AddTutCommand(tutorial);
     }

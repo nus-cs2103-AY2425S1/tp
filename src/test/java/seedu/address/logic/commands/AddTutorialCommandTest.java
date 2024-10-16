@@ -5,13 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TutUtil.TUT_SAMPLE;
+import static seedu.address.testutil.TutUtil.TUTORIAL_SAMPLE;
+import static seedu.address.testutil.TypicalTutorials.TUTORIAL1;
+import static seedu.address.testutil.TypicalTutorials.TUTORIAL2;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -29,10 +30,11 @@ import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
-import seedu.address.model.tut.Tut;
-import seedu.address.model.tut.TutName;
+import seedu.address.model.tut.Tutorial;
+import seedu.address.model.tut.TutorialList;
 
-public class AddTutCommandTest {
+
+public class AddTutorialCommandTest {
 
     @Test
     public void constructor_nullTut_throwsNullPointerException() {
@@ -42,20 +44,20 @@ public class AddTutCommandTest {
     @Test
     public void execute_tutAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingTutAdded modelStub = new ModelStubAcceptingTutAdded();
-        Tut validTut = TUT_SAMPLE;
+        Tutorial validTutorial = TUTORIAL_SAMPLE;
 
-        CommandResult commandResult = new AddTutCommand(validTut).execute(modelStub);
+        CommandResult commandResult = new AddTutCommand(validTutorial).execute(modelStub);
 
-        assertEquals(String.format(AddTutCommand.MESSAGE_SUCCESS, validTut),
+        assertEquals(String.format(AddTutCommand.MESSAGE_SUCCESS, validTutorial),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validTut), modelStub.tutorialsAdded);
+        assertEquals(Arrays.asList(validTutorial), modelStub.tutorialsAdded);
     }
 
     @Test
     public void execute_duplicateTut_throwsCommandException() {
-        Tut validTut = TUT_SAMPLE;
-        AddTutCommand addTutCommand = new AddTutCommand(validTut);
-        ModelStub modelStub = new ModelStubWithTut(validTut);
+        Tutorial validTutorial = TUTORIAL_SAMPLE;
+        AddTutCommand addTutCommand = new AddTutCommand(validTutorial);
+        ModelStub modelStub = new ModelStubWithTut(validTutorial);
 
         assertThrows(CommandException.class,
                      AddTutCommand.MESSAGE_DUPLICATE_TUTORIAL, () -> addTutCommand.execute(modelStub));
@@ -63,17 +65,17 @@ public class AddTutCommandTest {
 
     @Test
     public void equals() {
-        Tut tutSample1 = TUT_SAMPLE;
-        Tut tutSample2 = new Tut(new TutName("CS2040S"), new TutorialClass("1001")); // Different tutorial
+        Tutorial tutorialSample1 = TUTORIAL1;
+        Tutorial tutorialSample2 = TUTORIAL2; // Different tutorial
 
-        AddTutCommand addTutSample1Command = new AddTutCommand(tutSample1);
-        AddTutCommand addTutSample2Command = new AddTutCommand(tutSample2);
+        AddTutCommand addTutSample1Command = new AddTutCommand(tutorialSample1);
+        AddTutCommand addTutSample2Command = new AddTutCommand(tutorialSample2);
 
         // same object -> returns true
         assertTrue(addTutSample1Command.equals(addTutSample1Command));
 
         // same values -> returns true
-        AddTutCommand addTutSample1CommandCopy = new AddTutCommand(tutSample1);
+        AddTutCommand addTutSample1CommandCopy = new AddTutCommand(tutorialSample1);
         assertTrue(addTutSample1Command.equals(addTutSample1CommandCopy));
 
         // different types -> returns false
@@ -88,8 +90,8 @@ public class AddTutCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddTutCommand addTutCommand = new AddTutCommand(TUT_SAMPLE);
-        String expected = AddTutCommand.class.getCanonicalName() + "{toAdd=" + TUT_SAMPLE + "}";
+        AddTutCommand addTutCommand = new AddTutCommand(TUTORIAL_SAMPLE);
+        String expected = AddTutCommand.class.getCanonicalName() + "{toAdd=" + TUTORIAL_SAMPLE + "}";
         assertEquals(expected, addTutCommand.toString());
     }
 
@@ -158,17 +160,17 @@ public class AddTutCommandTest {
         }
 
         @Override
-        public boolean hasTutorial(Tut tutorial) {
+        public boolean hasTutorial(Tutorial tutorial) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addTutorial(Tut tutorial) {
+        public void addTutorial(Tutorial tutorial) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public List<Tut> getTutorialList() {
+        public TutorialList getTutorialList() {
             return null;
         }
 
@@ -209,6 +211,11 @@ public class AddTutCommandTest {
         }
 
         @Override
+        public void deleteTutorial(Tutorial tutorial) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -224,16 +231,6 @@ public class AddTutCommandTest {
         }
 
         @Override
-        public boolean hasTutorialClass(TutorialClass tutorialClass) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteTutorial(TutorialClass tutorialClass) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean hasStudentWithId(StudentId studentId) {
             throw new AssertionError("This method should not be called.");
         }
@@ -243,14 +240,14 @@ public class AddTutCommandTest {
      * A Model stub that contains a single tutorial.
      */
     private class ModelStubWithTut extends ModelStub {
-        private final Tut tutorial;
+        private final Tutorial tutorial;
 
-        ModelStubWithTut(Tut tutorial) {
+        ModelStubWithTut(Tutorial tutorial) {
             this.tutorial = tutorial;
         }
 
         @Override
-        public boolean hasTutorial(Tut tutorial) {
+        public boolean hasTutorial(Tutorial tutorial) {
             requireNonNull(tutorial);
             return this.tutorial.equals(tutorial);
         }
@@ -260,16 +257,16 @@ public class AddTutCommandTest {
      * A Model stub that always accepts the tutorial being added.
      */
     private class ModelStubAcceptingTutAdded extends ModelStub {
-        final ArrayList<Tut> tutorialsAdded = new ArrayList<>();
+        final ArrayList<Tutorial> tutorialsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasTutorial(Tut tutorial) {
+        public boolean hasTutorial(Tutorial tutorial) {
             requireNonNull(tutorial);
             return tutorialsAdded.stream().anyMatch(tutorial::equals);
         }
 
         @Override
-        public void addTutorial(Tut tutorial) {
+        public void addTutorial(Tutorial tutorial) {
             requireNonNull(tutorial);
             tutorialsAdded.add(tutorial);
         }

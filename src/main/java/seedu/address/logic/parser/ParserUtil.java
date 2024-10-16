@@ -15,9 +15,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
-import seedu.address.model.tut.Tut;
 import seedu.address.model.tut.TutDate;
 import seedu.address.model.tut.TutName;
+import seedu.address.model.tut.Tutorial;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -66,7 +66,7 @@ public class ParserUtil {
         requireNonNull(tutName);
         String trimmedName = tutName.trim();
         if (!TutName.isValidTutName(trimmedName)) {
-            throw new ParseException(Tut.MESSAGE_NAME_CONSTRAINTS);
+            throw new ParseException(Tutorial.MESSAGE_NAME_CONSTRAINTS);
         }
         return new TutName(trimmedName);
     }
@@ -112,7 +112,7 @@ public class ParserUtil {
     public static TutorialClass parseTutIndex(String id) throws ParseException {
         requireNonNull(id);
         String trimmedId = id.trim();
-        checkArgument(checkUsingIsDigitMethod(trimmedId), Tut.MESSAGE_ID_CONSTRAINTS);
+        checkArgument(checkUsingIsDigitMethod(trimmedId), Tutorial.MESSAGE_ID_CONSTRAINTS);
         return new TutorialClass(trimmedId);
     }
 

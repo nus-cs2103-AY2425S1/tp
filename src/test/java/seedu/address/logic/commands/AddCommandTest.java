@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -30,7 +29,8 @@ import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
-import seedu.address.model.tut.Tut;
+import seedu.address.model.tut.Tutorial;
+import seedu.address.model.tut.TutorialList;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddCommandTest {
@@ -207,16 +207,16 @@ public class AddCommandTest {
 
         @Override
 
-        public boolean hasTutorial(Tut tutorial) {
+        public boolean hasTutorial(Tutorial tutorial) {
             return false;
         }
 
         @Override
-        public void addTutorial(Tut toAdd) {
+        public void addTutorial(Tutorial toAdd) {
         }
 
         @Override
-        public List<Tut> getTutorialList() {
+        public TutorialList getTutorialList() {
             return null;
         }
 
@@ -236,12 +236,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasTutorialClass(TutorialClass tutorialClass) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteTutorial(TutorialClass tutorialClass) {
+        public void deleteTutorial(Tutorial tutorial) {
             throw new AssertionError("This method should not be called.");
         }
 

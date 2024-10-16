@@ -28,7 +28,8 @@ import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
-import seedu.address.model.tut.Tut;
+import seedu.address.model.tut.Tutorial;
+import seedu.address.model.tut.TutorialList;
 
 /**
  * Contains unit tests for {@code AttendCommand}.
@@ -175,17 +176,17 @@ public class AttendCommandTest {
         }
 
         @Override
-        public boolean hasTutorial(Tut tutorial) {
+        public boolean hasTutorial(Tutorial tutorial) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addTutorial(Tut tutorial) {
+        public void addTutorial(Tutorial tutorial) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public List<Tut> getTutorialList() {
+        public TutorialList getTutorialList() {
             return null;
         }
 
@@ -220,12 +221,7 @@ public class AttendCommandTest {
         }
 
         @Override
-        public void deleteTutorial(TutorialClass tutorialClass) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasTutorialClass(TutorialClass tutorialClass) {
+        public void deleteTutorial(Tutorial tutorial) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -295,7 +291,7 @@ public class AttendCommandTest {
      * A Model stub without tutorial class
      */
     private class ModelStubWithoutTutorialClass extends ModelStub {
-        private final List<Tut> tutorials = new ArrayList<>();
+        private final List<Tutorial> tutorials = new ArrayList<>();
 
         @Override
         public boolean setStudentAttendance(StudentId studentId, TutorialClass tutorialClass, Date date) {

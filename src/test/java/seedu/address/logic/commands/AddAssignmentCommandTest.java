@@ -10,7 +10,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -27,7 +26,8 @@ import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
-import seedu.address.model.tut.Tut;
+import seedu.address.model.tut.Tutorial;
+import seedu.address.model.tut.TutorialList;
 import seedu.address.testutil.TypicalAssignments;
 
 public class AddAssignmentCommandTest {
@@ -188,6 +188,11 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
+        public void deleteTutorial(Tutorial tutorial) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Student> getFilteredStudentList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -198,17 +203,17 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
-        public boolean hasTutorial(Tut tutorial) {
+        public boolean hasTutorial(Tutorial tutorial) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addTutorial(Tut toAdd) {
+        public void addTutorial(Tutorial toAdd) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public List<Tut> getTutorialList() {
+        public TutorialList getTutorialList() {
             return null;
         }
 
@@ -217,15 +222,6 @@ public class AddAssignmentCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public boolean hasTutorialClass(TutorialClass tutorialClass) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteTutorial(TutorialClass tutorialClass) {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**

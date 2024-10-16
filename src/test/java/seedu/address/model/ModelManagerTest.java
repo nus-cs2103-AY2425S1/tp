@@ -10,9 +10,7 @@ import static seedu.address.testutil.TypicalStudents.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,8 +18,9 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.TutorialClass;
-import seedu.address.model.tut.Tut;
 import seedu.address.model.tut.TutName;
+import seedu.address.model.tut.Tutorial;
+import seedu.address.model.tut.TutorialList;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -95,10 +94,10 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasTutorial_tutorialInAddressBook_returnsTrue() {
-        Tut tut = new Tut(new TutName("Tut"), new TutorialClass("1000"));
-        modelManager.addTutorial(tut);
-        assertTrue(modelManager.hasTutorial(tut));
+    public void hasTutorial_tutorialInModel_returnsTrue() {
+        Tutorial tutorial = new Tutorial(new TutName("Tut"), new TutorialClass("1000"));
+        modelManager.addTutorial(tutorial);
+        assertTrue(modelManager.hasTutorial(tutorial));
     }
 
     @Test
@@ -112,7 +111,7 @@ public class ModelManagerTest {
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
         AssignmentList assignmentList = new AssignmentList();
-        List<Tut> tutorialList = new ArrayList<Tut>();
+        TutorialList tutorialList = new TutorialList();
 
         // same values -> returns true
         modelManager = new ModelManager(addressBook, userPrefs, assignmentList, tutorialList);

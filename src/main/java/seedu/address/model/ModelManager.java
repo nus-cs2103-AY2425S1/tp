@@ -4,9 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -20,7 +18,8 @@ import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
-import seedu.address.model.tut.Tut;
+import seedu.address.model.tut.Tutorial;
+import seedu.address.model.tut.TutorialList;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -32,13 +31,13 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
     private final AssignmentList assignmentList;
-    private final List<Tut> tutorials;
 
+    private final TutorialList tutorials;
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
-                        AssignmentList assignmentList, List<Tut> tutorialList) {
+                        AssignmentList assignmentList, TutorialList tutorialList) {
         //TODO: Add sample tutorialList for the test cases (see getTypicalStudentsList())
         requireAllNonNull(addressBook, userPrefs, assignmentList, tutorialList);
 
@@ -48,11 +47,11 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
         this.assignmentList = assignmentList;
-        tutorials = new ArrayList<>();
+        tutorials = tutorialList;
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new AssignmentList(), new ArrayList<Tut>());
+        this(new AddressBook(), new UserPrefs(), new AssignmentList(), new TutorialList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -124,26 +123,29 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedStudent);
         addressBook.setStudent(target, editedStudent);
     }
+
+    //=========== Tutorial ================================================================================
+
     @Override
-    public void addTutorial(Tut tutorial) {
+    public void addTutorial(Tutorial tutorial) {
         requireNonNull(tutorial);
-        addressBook.addTutorial(tutorial);
+        tutorials.addTutorial(tutorial);
     }
 
     @Override
-    public List<Tut> getTutorialList() {
-        return addressBook.getTutorials();
+    public TutorialList getTutorialList() {
+        return tutorials;
     }
 
     @Override
-    public boolean hasTutorial(Tut tutorial) {
+    public boolean hasTutorial(Tutorial tutorial) {
         requireNonNull(tutorial);
-        return addressBook.hasTutorial(tutorial);
+        return tutorials.hasTutorial(tutorial);
     }
 
     @Override
     public boolean setStudentAttendance(StudentId target, TutorialClass tut, Date date) {
-        boolean isSuccess = tutorials.stream()
+        boolean isSuccess = tutorials.getTutorials().stream()
                 .filter(s -> s.getTutorialClass().equals(tut))
                 .findFirst()
                 .map(tutorial -> tutorial.setAttendance(date, target))
@@ -153,16 +155,11 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteTutorial(TutorialClass tutorialClass) {
-        requireNonNull(tutorialClass);
-        this.addressBook.deleteTutorial(tutorialClass);
+    public void deleteTutorial(Tutorial tutorial) {
+        requireNonNull(tutorial);
+        tutorials.deleteTutorial(tutorial);
     }
 
-    @Override
-    public boolean hasTutorialClass(TutorialClass tutorialClass) {
-        requireNonNull(tutorialClass);
-        return addressBook.hasTutorialClass(tutorialClass);
-    }
 
     //=========== Assignment ================================================================================
 

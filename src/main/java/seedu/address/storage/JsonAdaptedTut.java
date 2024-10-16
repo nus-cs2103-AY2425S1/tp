@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialClass;
-import seedu.address.model.tut.Tut;
 import seedu.address.model.tut.TutDate;
 import seedu.address.model.tut.TutName;
+import seedu.address.model.tut.Tutorial;
 
 /**
- * Jackson-friendly version of {@link Tut}.
+ * Jackson-friendly version of {@link Tutorial}.
  */
 public class JsonAdaptedTut {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Tutorial's %s field is missing!";
@@ -47,7 +47,8 @@ public class JsonAdaptedTut {
     /**
      * Converts a given {@code Tut} into this class for Jackson use.
      */
-    public JsonAdaptedTut(Tut source) {
+
+    public JsonAdaptedTut(Tutorial source) {
         this.tutName = source.getTutName().tutName;
         this.tutorialClass = source.getTutorialClass().value;
         this.students.addAll(source.getStudents().stream()
@@ -63,12 +64,13 @@ public class JsonAdaptedTut {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tutorial.
      */
-    public Tut toModelType() throws IllegalValueException {
+    public Tutorial toModelType() throws IllegalValueException {
         if (tutName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "tutName"));
         }
+
         if (!TutName.isValidTutName(tutName)) {
-            throw new IllegalValueException(Tut.MESSAGE_NAME_CONSTRAINTS);
+            throw new IllegalValueException(Tutorial.MESSAGE_NAME_CONSTRAINTS);
         }
 
         if (tutorialClass == null) {
@@ -86,14 +88,14 @@ public class JsonAdaptedTut {
             modelTutDates.add(tutDate.toModelType());
         }
 
-        Tut tut = new Tut(modelTutName, modelTutorialClass);
+        Tutorial tutorial = new Tutorial(modelTutName, modelTutorialClass);
         for (Student student : modelStudents) {
-            tut.add(student);
+            tutorial.add(student);
         }
         for (TutDate tutDate : modelTutDates) {
-            tut.addTutorialDate(tutDate);
+            tutorial.addTutorialDate(tutDate);
         }
 
-        return tut;
+        return tutorial;
     }
 }

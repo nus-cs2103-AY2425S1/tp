@@ -2,7 +2,6 @@ package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -12,7 +11,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.AssignmentList;
-import seedu.address.model.tut.Tut;
+import seedu.address.model.tut.TutorialList;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -119,23 +118,23 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<List<Tut>> readTutorials() throws DataLoadingException {
+    public Optional<TutorialList> readTutorials() throws DataLoadingException {
         return readTutorials(tutorialStorage.getTutorialFilePath());
     }
 
     @Override
-    public Optional<List<Tut>> readTutorials(Path filePath) throws DataLoadingException {
+    public Optional<TutorialList> readTutorials(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read tutorial data from file: " + filePath);
         return tutorialStorage.readTutorials(filePath);
     }
 
     @Override
-    public void saveTutorials(List<Tut> tutorialList) throws IOException {
+    public void saveTutorials(TutorialList tutorialList) throws IOException {
         saveTutorials(tutorialList, tutorialStorage.getTutorialFilePath());
     }
 
     @Override
-    public void saveTutorials(List<Tut> tutorialList, Path filePath) throws IOException {
+    public void saveTutorials(TutorialList tutorialList, Path filePath) throws IOException {
         logger.fine("Attempting to write tutorial data to file: " + filePath);
         tutorialStorage.saveTutorials(tutorialList, filePath);
     }
