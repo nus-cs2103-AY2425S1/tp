@@ -44,19 +44,6 @@ public class Claim {
     }
 
     /**
-     * Constructs a claim object based on claim id only. This constructor is used, usually during deletion of claims.
-     * The {@code isOpen} and {@code claimAmount} attributes are set to default values, but they are not relevant as
-     * claims are deleted solely based on the claim id.
-     *
-     * @param claimId     claim id obtained through official channels.
-     */
-    public Claim(String claimId) {
-        this.claimId = claimId;
-        this.isOpen = true;
-        this.claimAmount = 0;
-    }
-
-    /**
      * Checks if the claim id is valid based on preset notations.
      * Regular expression pattern:
      * ^ - start of the string
@@ -103,5 +90,29 @@ public class Claim {
      */
     public int getClaimAmount() {
         return this.claimAmount;
+    }
+
+    /**
+     * Compares this claim to another object for equality.
+     * Two claims are considered equal if they are the same object
+     * or if they are both instances of {@code Claim} and share the same claim ID, claim status and claim amount.
+     *
+     * @param other the object to be compared for equality
+     * @return {@code true} if the specified object is equal to this claim, {@code false} otherwise
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Claim c)) {
+            return false;
+        }
+
+        return claimId.equals(c.getClaimId())
+                && isOpen == c.getClaimStatus()
+                && claimAmount == c.getClaimAmount();
     }
 }

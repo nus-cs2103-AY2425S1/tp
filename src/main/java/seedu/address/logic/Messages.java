@@ -62,5 +62,4 @@ public class Messages {
         int claimAmountCentsPart = claimAmount % centsInADollar;
         return String.format("$%d.%02d", claimAmountDollarsPart, claimAmountCentsPart);
     }
-
 }

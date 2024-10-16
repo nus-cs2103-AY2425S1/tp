@@ -42,7 +42,7 @@ public class AddClaimCommand extends Command {
 
     public final Index index;
     private final int insuranceId;
-    private final String claimID;
+    private final String claimId;
     private final int claimAmount;
 
     /**
@@ -50,13 +50,13 @@ public class AddClaimCommand extends Command {
      *
      * @param index       of the client in the filtered client list to add the insurance plan to.
      * @param insuranceId of insurance plan the claim is to be added to.
-     * @param claimID     the claimID received when a claim is created through official channels.
+     * @param claimId     the claimID received when a claim is created through official channels.
      * @param claimAmount the amount that is being claimed through this claim in cents.
      */
-    public AddClaimCommand(Index index, int insuranceId, final String claimID, final int claimAmount) {
+    public AddClaimCommand(Index index, int insuranceId, final String claimId, final int claimAmount) {
         this.index = index;
         this.insuranceId = insuranceId;
-        this.claimID = claimID;
+        this.claimId = claimId;
         this.claimAmount = claimAmount;
     }
 
@@ -77,7 +77,7 @@ public class AddClaimCommand extends Command {
             InsurancePlansManager clientToEditInsurancePlansManager = clientToEdit.getInsurancePlansManager();
             clientToEditInsurancePlansManager.checkIfPlanOwned(planToBeUsed);
 
-            Claim claimToBeAdded = new Claim(claimID, claimAmount);
+            Claim claimToBeAdded = new Claim(claimId, claimAmount);
             clientToEditInsurancePlansManager.addClaimToInsurancePlan(planToBeUsed, claimToBeAdded);
 
             Client clientWithAddedClaim = lastShownList.get(index.getZeroBased());
@@ -85,9 +85,9 @@ public class AddClaimCommand extends Command {
             model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
             return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(clientToEdit), planToBeUsed,
-                    claimID, Messages.formatClaimAmount(claimAmount)));
+                    claimId, Messages.formatClaimAmount(claimAmount)));
         } catch (ClaimException e) {
-            throw new CommandException(String.format(e.getMessage(), claimID, Messages.format(clientToEdit)));
+            throw new CommandException(String.format(e.getMessage(), claimId, Messages.format(clientToEdit)));
         } catch (InsurancePlanException e) {
             throw new CommandException(String.format(e.getMessage(), insuranceId, Messages.format(clientToEdit)));
         }

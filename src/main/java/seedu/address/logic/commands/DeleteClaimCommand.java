@@ -16,7 +16,6 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.exceptions.ClaimException;
 import seedu.address.model.client.exceptions.InsurancePlanException;
 import seedu.address.model.client.insurance.InsurancePlan;
-import seedu.address.model.client.insurance.InsurancePlanFactory;
 import seedu.address.model.client.insurance.InsurancePlansManager;
 import seedu.address.model.client.insurance.claim.Claim;
 
@@ -40,21 +39,21 @@ public class DeleteClaimCommand extends Command {
 
     public final Index index;
     private final int insuranceId;
-    private final String claimID;
+    private final String claimId;
 
     /**
      * Constructs a DeleteClaimCommand object with the values passed in by the user.
      *
      * @param index       of the client in the filtered client list to add the claim to.
      * @param insuranceId of insurance plan the claim is to be added to.
-     * @param claimID     the claimID received when a claim is created through official channels.
+     * @param claimId     the claimID received when a claim is created through official channels.
      */
-    public DeleteClaimCommand(Index index, int insuranceId, final String claimID) {
-        requireAllNonNull(index, insuranceId, claimID);
+    public DeleteClaimCommand(Index index, int insuranceId, final String claimId) {
+        requireAllNonNull(index, insuranceId, claimId);
 
         this.index = index;
         this.insuranceId = insuranceId;
-        this.claimID = claimID;
+        this.claimId = claimId;
     }
 
     @Override
@@ -69,13 +68,11 @@ public class DeleteClaimCommand extends Command {
         Client clientToEdit = lastShownList.get(index.getZeroBased());
 
         try {
-            InsurancePlan planToBeUsed = InsurancePlanFactory.createInsurancePlan(insuranceId);
 
             InsurancePlansManager clientToEditInsurancePlansManager = clientToEdit.getInsurancePlansManager();
-            clientToEditInsurancePlansManager.checkIfPlanOwned(planToBeUsed);
+            InsurancePlan planToBeUsed = clientToEditInsurancePlansManager.getInsurancePlan(insuranceId);
 
-            Claim claimToBeDeleted = new Claim(claimID);
-            clientToEditInsurancePlansManager.checkIfClaimOwned(planToBeUsed, claimToBeDeleted);
+            Claim claimToBeDeleted = planToBeUsed.getClaim(claimId);
             clientToEditInsurancePlansManager.deleteClaimFromInsurancePlan(planToBeUsed, claimToBeDeleted);
 
             Client clientWithDeletedClaim = lastShownList.get(index.getZeroBased());
@@ -83,9 +80,9 @@ public class DeleteClaimCommand extends Command {
             model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
             return new CommandResult(String.format(MESSAGE_DELETE_CLAIM_SUCCESS, Messages.format(clientToEdit),
-                    planToBeUsed, claimID));
+                    planToBeUsed, claimId));
         } catch (ClaimException e) {
-            throw new CommandException(String.format(e.getMessage(), claimID, Messages.format(clientToEdit)));
+            throw new CommandException(String.format(e.getMessage(), claimId, Messages.format(clientToEdit)));
         } catch (InsurancePlanException e) {
             throw new CommandException(String.format(e.getMessage(), insuranceId, Messages.format(clientToEdit)));
         }
