@@ -97,6 +97,11 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void getFilteredEventList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredEventList().remove(0));
+    }
+
+    @Test
     public void getUiState_setNewUiState_updateSuccessful() {
         ObjectProperty<UiState> observedState = new SimpleObjectProperty<>();
         logic.getUiState().addListener((observable, oldValue, newValue) -> {

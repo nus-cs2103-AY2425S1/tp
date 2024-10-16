@@ -33,8 +33,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private VendorListPanel vendorListPanel;
-    // TODO: Update once eventListPanel is implemented
-    private VendorListPanel eventListPanel;
+    private EventListPanel eventListPanel;
     private VendorDetailsPanel vendorDetailsPanel;
     private EventDetailsPanel eventDetailsPanel;
     private ResultDisplay resultDisplay;
@@ -89,6 +88,12 @@ public class MainWindow extends UiPart<Stage> {
             case EVENT_DETAILS:
                 setEventDetailsView();
                 break;
+            case VENDOR_LIST:
+                setVendorList();
+                break;
+            case EVENT_LIST:
+                setEventList();
+                break;
             default:
                 singleView();
                 break;
@@ -141,7 +146,7 @@ public class MainWindow extends UiPart<Stage> {
         leftPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
 
         // TODO: Update once eventListPanel is created
-        eventListPanel = new VendorListPanel(logic.getFilteredVendorList(), "Events List");
+        eventListPanel = new EventListPanel(logic.getFilteredEventList(), "Events List");
         rightPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -200,9 +205,25 @@ public class MainWindow extends UiPart<Stage> {
         rightPanelPlaceholder.getChildren().clear();
         rightPanelPlaceholder.getChildren().add(eventDetailsPanel.getRoot());
         leftPanelPlaceholder.getChildren().clear();
+        leftPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+    }
 
-        // TODO: Update once eventListPanel is created
+    /**
+     * Set main window to display vendor list.
+     */
+    void setVendorList() {
+        singleView();
+        leftPanelPlaceholder.getChildren().clear();
         leftPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
+    }
+
+    /**
+     * Set main window to display event list.
+     */
+    void setEventList() {
+        singleView();
+        leftPanelPlaceholder.getChildren().clear();
+        leftPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
     }
 
     /**
