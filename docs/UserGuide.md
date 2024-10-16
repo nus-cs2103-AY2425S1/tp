@@ -146,6 +146,18 @@ Examples:
 * `list` followed by `delete 2,3` or `delete 3,2` deletes the 2nd and 3rd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Getting that parameter of all these people: `get` 
+Gets the specified parameter of the filtered people from SocialBook.
+
+Format: `get PARAMETER`
+
+* Gets the specified parameter for each of the people in the filtered list.
+* The parameter input only includes those that are already defined by SocialBook like NAME, PHONE, EMAIL, ADDRESS.
+
+Examples:
+* `list` followed by `get p` gets the phone number of all the people in SocialBook.
+* `find p/HIGH` followed by `get e` gets the email of all the high priority people.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
