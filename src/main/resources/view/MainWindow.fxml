@@ -30,9 +30,12 @@
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Commands" />
-                  <MenuItem fx:id="helpMenuItem1" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+    <!-- Keeping both changes from feature/add-bug-reporting-button and master -->
+    <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Commands" />
+    <MenuItem fx:id="helpMenuItem1" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+    <MenuItem fx:id="reportBugItem" mnemonicParsing="false" onAction="#handleReportBug" text="Report Bug" />
           </Menu>
+
         </MenuBar>
 
         <StackPane fx:id="commandBoxPlaceholder" style="-fx-background-color: derive(#031926, 10%);" styleClass="pane-with-border" VBox.vgrow="NEVER">

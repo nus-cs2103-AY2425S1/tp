@@ -34,12 +34,16 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ReportBugWindow reportBugWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem reportBugItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -64,8 +68,10 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
+        setAcceleratorsBugReport();
 
         helpWindow = new HelpWindow();
+        reportBugWindow = new ReportBugWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -74,6 +80,10 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+    }
+
+    private void setAcceleratorsBugReport() {
+        setAccelerator(reportBugItem, KeyCombination.valueOf("F2"));
     }
 
     /**
@@ -147,6 +157,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the report bug window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleReportBug() {
+        if (!reportBugWindow.isShowing()) {
+            reportBugWindow.show();
+        } else {
+            reportBugWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -160,6 +182,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        reportBugWindow.hide();
         primaryStage.hide();
     }
 
