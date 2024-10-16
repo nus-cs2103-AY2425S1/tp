@@ -19,10 +19,11 @@ public class HelpWindow extends UiPart<Stage> {
             + "- Example: add n/John Doe p/12345678 t/Student\n"
             + "- Items in the [square brackets] are optional and can be input in any order!";
     private static final String HELP_EDIT_COMMAND = "Edit Command \n"
-            + "- Format: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARK]\n"
-            + "- Example: edit 1 p/87654321"
+            + "- Format: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [dt/TAG] [r/REMARK]\n"
+            + "- Example: edit 1 p/87654321 t/Tutor dt/Student"
             + "- INDEX is the index of the customer displayed. Items in the [square brackets] are optional "
-            + "- and can be input in any order!";
+            + "- and can be input in any order! TAG can be both a tag to be added or removed, depending on "
+            + "- the prefix for the item.";
     private static final String HELP_DELETE_COMMAND = "Delete Command\n"
             + "- Format: delete INDEX\n"
             + "- Example: delete 1\n"
