@@ -100,7 +100,7 @@ public class StudentBuilder {
      * and set it to the {@code Student} that we are building.
      */
     public StudentBuilder withCancelledLessons(String ... cancelledLessons) {
-        this.cancelledLessons = SampleDataUtil.getCancelledLessonSet(cancelledLessons);
+        this.cancelledLessons = CancelledLesson.getCancelledLessonSet(cancelledLessons);
         return this;
     }
 

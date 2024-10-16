@@ -2,6 +2,10 @@ package keycontacts.model.lesson;
 
 import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import keycontacts.commons.util.ToStringBuilder;
 
 /**
@@ -45,5 +49,14 @@ public class CancelledLesson {
         return new ToStringBuilder(this)
                 .add("lessonDate", lessonDate)
                 .toString();
+    }
+
+    /**
+     * Returns a cancelled lesson set containing the list of strings given.
+     */
+    public static Set<CancelledLesson> getCancelledLessonSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(string -> new CancelledLesson(new Date(string)))
+                .collect(Collectors.toSet());
     }
 }

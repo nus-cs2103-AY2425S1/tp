@@ -53,13 +53,4 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
-    /**
-     * Returns a cancelled lesson set containing the list of strings given.
-     */
-    public static Set<CancelledLesson> getCancelledLessonSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(string -> new CancelledLesson(new Date(string)))
-                .collect(Collectors.toSet());
-    }
-
 }
