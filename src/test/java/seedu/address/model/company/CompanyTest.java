@@ -33,7 +33,8 @@ public class CompanyTest {
         assertFalse(GOOGLE.isSameCompany(null));
 
         // same name, all other attributes different -> returns true
-        Company editedAlice = new CompanyBuilder(GOOGLE).withPhone(VALID_PHONE_MICROSOFT).withEmail(VALID_EMAIL_MICROSOFT)
+        Company editedAlice = new CompanyBuilder(GOOGLE).withPhone(VALID_PHONE_MICROSOFT)
+                .withEmail(VALID_EMAIL_MICROSOFT)
                 .withAddress(VALID_ADDRESS_MICROSOFT).withTags(VALID_TAG_BIGTECH).build();
         assertTrue(GOOGLE.isSameCompany(editedAlice));
 
@@ -92,8 +93,10 @@ public class CompanyTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Company.class.getCanonicalName() + "{name=" + GOOGLE.getName() + ", phone=" + GOOGLE.getPhone()
-                + ", email=" + GOOGLE.getEmail() + ", address=" + GOOGLE.getAddress() + ", tags=" + GOOGLE.getTags() + "}";
+        String expected = Company.class.getCanonicalName() + "{name=" + GOOGLE.getName() + ", phone="
+                + GOOGLE.getPhone()
+                + ", email=" + GOOGLE.getEmail() + ", address=" + GOOGLE.getAddress() + ", tags="
+                + GOOGLE.getTags() + "}";
         assertEquals(expected, GOOGLE.toString());
     }
 }

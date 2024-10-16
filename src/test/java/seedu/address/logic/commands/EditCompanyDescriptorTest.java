@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_MICROSOFT;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_MICROSOFT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_MICROSOFT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_MICROSOFT;
@@ -37,7 +37,8 @@ public class EditCompanyDescriptorTest {
         assertFalse(DESC_TESLA.equals(DESC_MICROSOFT));
 
         // different name -> returns false
-        EditCompanyDescriptor editedAmy = new EditCompanyDescriptorBuilder(DESC_TESLA).withName(VALID_NAME_MICROSOFT).build();
+        EditCompanyDescriptor editedAmy = new EditCompanyDescriptorBuilder(DESC_TESLA)
+                .withName(VALID_NAME_MICROSOFT).build();
         assertFalse(DESC_TESLA.equals(editedAmy));
 
         // different phone -> returns false

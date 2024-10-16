@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.company.exceptions.DuplicateCompanyException;
 import seedu.address.model.company.exceptions.CompanyNotFoundException;
+import seedu.address.model.company.exceptions.DuplicateCompanyException;
 import seedu.address.testutil.CompanyBuilder;
 
 public class UniqueCompanyListTest {
@@ -42,7 +42,8 @@ public class UniqueCompanyListTest {
     @Test
     public void contains_companyWithSameIdentityFieldsInList_returnsTrue() {
         uniqueCompanyList.add(GOOGLE);
-        Company editedAlice = new CompanyBuilder(GOOGLE).withAddress(VALID_ADDRESS_MICROSOFT).withTags(VALID_TAG_BIGTECH)
+        Company editedAlice = new CompanyBuilder(GOOGLE).withAddress(VALID_ADDRESS_MICROSOFT)
+                .withTags(VALID_TAG_BIGTECH)
                 .build();
         assertTrue(uniqueCompanyList.contains(editedAlice));
     }
@@ -85,7 +86,8 @@ public class UniqueCompanyListTest {
     @Test
     public void setCompany_editedCompanyHasSameIdentity_success() {
         uniqueCompanyList.add(GOOGLE);
-        Company editedAlice = new CompanyBuilder(GOOGLE).withAddress(VALID_ADDRESS_MICROSOFT).withTags(VALID_TAG_BIGTECH)
+        Company editedAlice = new CompanyBuilder(GOOGLE).withAddress(VALID_ADDRESS_MICROSOFT)
+                .withTags(VALID_TAG_BIGTECH)
                 .build();
         uniqueCompanyList.setCompany(GOOGLE, editedAlice);
         UniqueCompanyList expectedUniqueCompanyList = new UniqueCompanyList();
@@ -164,8 +166,8 @@ public class UniqueCompanyListTest {
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class,
-                () -> uniqueCompanyList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class, ()
+                -> uniqueCompanyList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test

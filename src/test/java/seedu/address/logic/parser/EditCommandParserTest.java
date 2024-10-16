@@ -1,27 +1,27 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_MICROSOFT;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_TESLA;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_MICROSOFT;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_TESLA;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_MICROSOFT;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_COMPANY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_BIGTECH;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_COMPANY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TESLA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_MICROSOFT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_COMPANY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BIGTECH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -100,7 +100,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_COMPANY + TAG_DESC_BIGTECH, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_TESLA + VALID_PHONE_TESLA,
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_TESLA
+                        + VALID_PHONE_TESLA,
                 Name.MESSAGE_CONSTRAINTS);
     }
 
@@ -135,7 +136,8 @@ public class EditCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_COMPANY;
         String userInput = targetIndex.getOneBased() + NAME_DESC_TESLA;
-        EditCommand.EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder().withName(VALID_NAME_TESLA).build();
+        EditCommand.EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder()
+                .withName(VALID_NAME_TESLA).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

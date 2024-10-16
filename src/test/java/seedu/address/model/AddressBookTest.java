@@ -46,7 +46,8 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateCompanies_throwsDuplicatePersonException() {
         // Two companies with the same identity fields
-        Company editedAlice = new CompanyBuilder(GOOGLE).withAddress(VALID_ADDRESS_MICROSOFT).withTags(VALID_TAG_BIGTECH)
+        Company editedAlice = new CompanyBuilder(GOOGLE).withAddress(VALID_ADDRESS_MICROSOFT)
+                .withTags(VALID_TAG_BIGTECH)
                 .build();
         List<Company> newCompanies = Arrays.asList(GOOGLE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newCompanies);
@@ -73,7 +74,8 @@ public class AddressBookTest {
     @Test
     public void hasCompany_companyWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addCompany(GOOGLE);
-        Company editedAlice = new CompanyBuilder(GOOGLE).withAddress(VALID_ADDRESS_MICROSOFT).withTags(VALID_TAG_BIGTECH)
+        Company editedAlice = new CompanyBuilder(GOOGLE).withAddress(VALID_ADDRESS_MICROSOFT)
+                .withTags(VALID_TAG_BIGTECH)
                 .build();
         assertTrue(addressBook.hasCompany(editedAlice));
     }
