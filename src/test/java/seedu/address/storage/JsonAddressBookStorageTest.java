@@ -105,6 +105,7 @@ public class JsonAddressBookStorageTest {
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
+        
     }
     @Test
     public void saveAddressBook_nullFilePath_throwsNullPointerException() {
