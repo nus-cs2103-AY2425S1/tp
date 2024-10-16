@@ -46,7 +46,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_personAcceptedByModel_emptyEmail_addSuccessful() throws Exception {
+    public void execute_personAcceptedByModel_emptyEmail() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().withEmptyEmail().build();
 
@@ -58,7 +58,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_personAcceptedByModel_emptyAddress_addSuccessful() throws Exception {
+    public void execute_personAcceptedByModel_emptyAddress() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().withEmptyAddress().build();
 
