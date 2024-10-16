@@ -31,7 +31,7 @@ public class PriorityCommand extends Command {
     public static final String PRIORITY_ASSIGN_SUCCESS = "Assigned priority to Person: %1$s";
     public static final String PATIENT_DOES_NOT_EXIST = "Patient does not exist in contact list";
     public static final String PRIORITY_SET_TO_NONE_SUCCESS = "Priority has been removed from Person: %1$s";
-
+    public static final String MULTIPLE_PARAMETER = "Please input only 1 of each parameter";
     private final Priority priority;
     private final Nric nric;
 

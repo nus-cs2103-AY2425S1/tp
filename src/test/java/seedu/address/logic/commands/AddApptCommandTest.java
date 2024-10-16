@@ -66,10 +66,11 @@ public class AddApptCommandTest {
                                                   .withPhone(targetPerson.getPhone().value)
                                                   .withDateOfBirth(targetPerson.getDateOfBirth().value)
                                                   .withAllergies(targetPerson.getAllergies()
-                                                          .stream().map(x -> x.allergyName)
+                                                          .stream()
+                                                          .map(x -> x.allergyName)
                                                           .toArray(String[]::new))
                                                   .withAppointments(currentSerializedAppointmentLists
-                                                          .toArray(String[]::new))
+                                                                            .toArray(String[]::new))
                                                   .build();
         String expectedMessage = String.format(AddApptCommand.MESSAGE_SUCCESS_4S, nric.value,
                                                VALID_APPOINTMENT_NAME_AMY, VALID_APPOINTMENT_DATE_AMY,

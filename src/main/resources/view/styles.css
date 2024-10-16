@@ -1,0 +1,27 @@
+.priority-high-bg {
+    -fx-background-color: red !important;
+    -fx-padding: 5;  /* Add padding to make the background color more visible */
+    -fx-background-radius: 5; /* Optional: Add rounded corners */
+}
+
+.priority-medium-bg {
+    -fx-background-color: orange !important;
+    -fx-padding: 5;
+    -fx-background-radius: 5;
+}
+
+.priority-low-bg {
+    -fx-background-color: green !important;
+    -fx-padding: 5;
+    -fx-background-radius: 5;
+}
+
+.priority-none-bg {
+    -fx-background-color: white !important;
+    -fx-padding: 5;
+    -fx-background-radius: 5;
+}
+
+.priority-label {
+    -fx-font-size: 11px;
+}

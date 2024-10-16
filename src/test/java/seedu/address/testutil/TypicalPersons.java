@@ -1,27 +1,13 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_MILK;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
+
+import static seedu.address.logic.commands.CommandTestUtil.*;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -33,12 +19,13 @@ public class TypicalPersons {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withAppointments("Physio:2024-12-01:1500-1600", "Orthopedic:2024-12-01:1200-1300")
-            .withAllergies("pollen").build();
+            .withAllergies("Pollen")
+            .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withNric("T0234547A").withDateOfBirth("2002-01-01").withGender("M")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withAllergies("peanuts", "pollen")
+            .withAllergies("Milk", "Peanuts")
             .withMedCons("Lung Cancer", "Diabetes")
             .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
@@ -47,7 +34,8 @@ public class TypicalPersons {
             .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withNric("T0234567B").withDateOfBirth("2005-01-01").withGender("M")
-            .withEmail("cornelia@example.com").withAddress("10th street").withAllergies("MILKs")
+            .withEmail("cornelia@example.com").withAddress("10th street")
+            .withAllergies("Pollen", "Dust")
             .withMedCons("Skin Cancer", "Diabetes")
             .build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
@@ -76,7 +64,8 @@ public class TypicalPersons {
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withNric(VALID_NRIC_AMY).withDateOfBirth(VALID_DOB_AMY).withGender(VALID_GENDER_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withAllergies(VALID_ALLERGY_MILK)
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+            .withAllergies(VALID_ALLERGY_SOYBEANS)
             .build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withNric(VALID_NRIC_BOB).withDateOfBirth(VALID_DOB_BOB).withGender(VALID_GENDER_BOB)
