@@ -9,6 +9,8 @@ import seedu.address.logic.parser.Prefix;
 
 /**
  * Tests that a {@code Person}'s fields matches any of the keywords given.
+ * {@code Name} is partial match.
+ * {@code Tag} is lower-cased exact match.
  */
 public class FieldContainsKeywordsPredicate implements Predicate<Person> {
     private final ArgumentMultimap argMultimap;

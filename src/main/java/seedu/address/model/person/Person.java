@@ -78,7 +78,7 @@ public class Person {
      * Returns true if the person has the specified tag.
      */
     public boolean hasTag(String tag) {
-        return tags.contains(new Tag(tag));
+        return tags.stream().anyMatch(t -> t.tagName.toLowerCase().equals(tag.toLowerCase()));
     }
 
     /**
