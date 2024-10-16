@@ -51,11 +51,10 @@ public class Application {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" ")
+                .append("; Description: ")
                 .append(getDescription())
-                .append(" (")
-                .append(getAppStatus())
-                .append(")");
+                .append("; App Status: ")
+                .append(getAppStatus());
         return builder.toString();
     }
 

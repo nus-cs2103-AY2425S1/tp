@@ -25,17 +25,16 @@ public class Company {
     private final Email email;
 
     // Data fields
-    private final ArrayList<Application> applications;
     private final Address address;
     private Status status;
     private final Set<Tag> tags = new HashSet<>();
+    private final ArrayList<Application> applications = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
     public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Status status) {
         requireAllNonNull(name, phone, email, address, tags, status);
-        this.applications = new ArrayList<>();
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -76,7 +75,7 @@ public class Company {
      * Adds a new application to the company
      */
     public void addApplication(Application application) {
-        this.status = status.applied();
+        this.status = Status.applied();
         this.applications.add(application);
     }
 

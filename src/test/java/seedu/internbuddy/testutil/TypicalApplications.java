@@ -14,15 +14,15 @@ public class TypicalApplications {
     public static final Application SWE_APPLICATION = new ApplicationBuilder()
             .withName("Software Engineering Intern")
             .withDescription("Requires: ReactJS and ExpressJS")
-            .withStatus("APPLIED").build();
+            .withAppStatus("APPLIED").build();
     public static final Application DS_APPLICATION = new ApplicationBuilder()
             .withName("Data Science Intern")
             .withDescription("Requires: Python")
-            .withStatus("REJECTED").build();
+            .withAppStatus("REJECTED").build();
     public static final Application PM_APPLICATION = new ApplicationBuilder()
             .withName("Product Manager Intern")
             .withDescription("Requires: Figma")
-            .withStatus("INTERVIEWED").build();
+            .withAppStatus("INTERVIEWED").build();
 
     private TypicalApplications() {} // prevents instantiation
 

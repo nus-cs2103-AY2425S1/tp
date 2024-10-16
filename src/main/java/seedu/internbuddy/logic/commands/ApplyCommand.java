@@ -5,6 +5,7 @@ import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
+import java.util.Objects;
 
 import seedu.internbuddy.commons.core.index.Index;
 import seedu.internbuddy.commons.util.ToStringBuilder;
@@ -66,12 +67,11 @@ public class ApplyCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ApplyCommand)) {
+        if (!(other instanceof ApplyCommand otherApplyCommand)) {
             return false;
         }
 
-        ApplyCommand otherApplyCommand = (ApplyCommand) other;
-        return toAdd.equals(otherApplyCommand.toAdd);
+        return Objects.equals(index, otherApplyCommand.index);
     }
 
     @Override

@@ -30,7 +30,7 @@ public class Status {
         return test.equals("INTERESTED") || test.equals("APPLIED") || test.equals("CLOSED");
     }
 
-    public Status applied() {
+    public static Status applied() {
         return new Status("APPLIED");
     }
 

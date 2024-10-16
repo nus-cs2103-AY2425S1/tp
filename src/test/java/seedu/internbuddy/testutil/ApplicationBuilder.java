@@ -54,7 +54,7 @@ public class ApplicationBuilder {
     /**
      * Sets the {@code AppStatus} of the {@code Application} that we are building.
      */
-    public ApplicationBuilder withStatus(String status) {
+    public ApplicationBuilder withAppStatus(String status) {
         this.appStatus = new AppStatus(status);
         return this;
     }

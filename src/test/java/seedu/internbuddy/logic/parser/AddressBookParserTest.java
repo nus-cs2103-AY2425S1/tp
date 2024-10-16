@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.internbuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.internbuddy.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.internbuddy.testutil.Assert.assertThrows;
+import static seedu.internbuddy.testutil.TypicalApplications.SWE_APPLICATION;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 
 import java.util.Arrays;
@@ -14,6 +17,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.internbuddy.logic.commands.AddCommand;
+import seedu.internbuddy.logic.commands.ApplyCommand;
 import seedu.internbuddy.logic.commands.ClearCommand;
 import seedu.internbuddy.logic.commands.DeleteCommand;
 import seedu.internbuddy.logic.commands.EditCommand;
@@ -23,6 +27,7 @@ import seedu.internbuddy.logic.commands.FindCommand;
 import seedu.internbuddy.logic.commands.HelpCommand;
 import seedu.internbuddy.logic.commands.ListCommand;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
+import seedu.internbuddy.model.application.Application;
 import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.NameContainsKeywordsPredicate;
 import seedu.internbuddy.testutil.CompanyBuilder;
@@ -38,6 +43,15 @@ public class AddressBookParserTest {
         Company company = new CompanyBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(CompanyUtil.getAddCommand(company));
         assertEquals(new AddCommand(company), command);
+    }
+
+    @Test
+    public void parseCommand_apply() throws Exception {
+        Application application = SWE_APPLICATION;
+        ApplyCommand command = (ApplyCommand) parser.parseCommand(ApplyCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_COMPANY.getOneBased() + " " + PREFIX_NAME + "Full Stack Engineer" + " "
+                + PREFIX_DESCRIPTION + "Requires: ReactJS and ExpressJS");
+        assertEquals(new ApplyCommand(INDEX_FIRST_COMPANY, application), command);
     }
 
     @Test

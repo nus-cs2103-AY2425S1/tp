@@ -23,7 +23,7 @@ public class ApplicationTest {
         assertFalse(SWE_APPLICATION.isSameApplication(null));
 
         // same name, all other attributes different -> returns true
-        Application editedDS = new ApplicationBuilder(DS_APPLICATION).withStatus("APPLIED").build();
+        Application editedDS = new ApplicationBuilder(DS_APPLICATION).withAppStatus("APPLIED").build();
         assertTrue(DS_APPLICATION.isSameApplication(editedDS));
 
         // different name, all other attributes same -> returns false
@@ -55,7 +55,7 @@ public class ApplicationTest {
         assertFalse(SWE_APPLICATION.equals(editedSwe));
 
         // different status -> returns True
-        editedSwe = new ApplicationBuilder(SWE_APPLICATION).withStatus("APPLIED").build();
+        editedSwe = new ApplicationBuilder(SWE_APPLICATION).withAppStatus("APPLIED").build();
         assertTrue(SWE_APPLICATION.equals(editedSwe));
     }
 
@@ -69,6 +69,7 @@ public class ApplicationTest {
     @Test
     public void testToString() {
         Application sweCopy = new ApplicationBuilder(SWE_APPLICATION).build();
-        assertEquals("Software Engineering Intern Requires: ReactJS and ExpressJS (APPLIED)", sweCopy.toString());
+        assertEquals("Software Engineering Intern; Description: Requires: ReactJS and ExpressJS;"
+                + " App Status: APPLIED", sweCopy.toString());
     }
 }
