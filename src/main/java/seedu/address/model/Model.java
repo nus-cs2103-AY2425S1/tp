@@ -13,7 +13,8 @@ import seedu.address.model.supplier.Supplier;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Supplier> PREDICATE_SHOW_ALL_SUPPLIERS = unused -> true;
-
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Product> PREDICATE_SHOW_ALL_PRODUCTS = unused -> true;
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -96,4 +97,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredSupplierList(Predicate<Supplier> predicate);
+
+    /** Returns an unmodifiable view of the filtered product list */
+    ObservableList<Product> getFilteredProductList();
+
+    /**
+     * Updates the filter of the filtered supplier list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredProductList(Predicate<Product> predicate);
 }
+

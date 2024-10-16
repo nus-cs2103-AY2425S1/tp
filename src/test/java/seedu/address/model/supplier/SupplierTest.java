@@ -14,6 +14,9 @@ import static seedu.address.testutil.TypicalSuppliers.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.product.Product;
+import seedu.address.model.product.ProductName;
+import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.SupplierBuilder;
 
 public class SupplierTest {
@@ -51,6 +54,25 @@ public class SupplierTest {
         assertFalse(BOB.isSameSupplier(editedBob));
     }
 
+    @Test
+    public void getProducts_throwsUnsupportedOperationException() {
+        Supplier supplier = new SupplierBuilder().build();
+        assertThrows(UnsupportedOperationException.class, () -> supplier.getProducts().remove(0));
+    }
+
+    @Test
+    public void hasProduct_productInList_returnsTrue() {
+        Product product = new Product(new ProductName("Test Product"));
+        Supplier supplier = new SupplierBuilder().withProducts(SampleDataUtil.getProductSet("Test Product")).build();
+        assertTrue(supplier.hasProduct(product));
+    }
+
+    @Test
+    public void hasProduct_productNotInList_returnsFalse() {
+        Product product = new Product(new ProductName("Test Product"));
+        Supplier supplier = new SupplierBuilder().build();
+        assertFalse(supplier.hasProduct(product));
+    }
     @Test
     public void equals() {
         // same values -> returns true

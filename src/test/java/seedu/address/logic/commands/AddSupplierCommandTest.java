@@ -167,6 +167,15 @@ public class AddSupplierCommandTest {
         public void updateFilteredSupplierList(Predicate<Supplier> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public ObservableList<Product> getFilteredProductList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredProductList(Predicate<Product> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

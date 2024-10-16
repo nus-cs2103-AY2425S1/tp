@@ -21,6 +21,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.product.Product;
 import seedu.address.model.supplier.Address;
 import seedu.address.model.supplier.Email;
 import seedu.address.model.supplier.Name;
@@ -101,8 +102,8 @@ public class EditCommand extends Command {
         Email updatedEmail = editSupplierDescriptor.getEmail().orElse(supplierToEdit.getEmail());
         Address updatedAddress = editSupplierDescriptor.getAddress().orElse(supplierToEdit.getAddress());
         Set<Tag> updatedTags = editSupplierDescriptor.getTags().orElse(supplierToEdit.getTags());
-
-        return new Supplier(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        Set<Product> existingProductList = supplierToEdit.getProducts();
+        return new Supplier(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, existingProductList);
     }
 
     @Override
