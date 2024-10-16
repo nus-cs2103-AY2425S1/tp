@@ -73,7 +73,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "   - Example:\n"
             + "       exit\n"
             + "\n============================================================================================\n"
-            + "For more details, refer to the user guide: " + USERGUIDE_URL;
+            + "For more details, refer to the user guide: \n" + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
