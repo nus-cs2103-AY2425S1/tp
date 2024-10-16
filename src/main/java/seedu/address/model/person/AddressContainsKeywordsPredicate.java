@@ -24,18 +24,13 @@ public class AddressContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean equals(Object other) {
-        System.out.println("This is in equals of AddressContainsPredicate class!");
-        System.out.println(other);
-
         if (other == this) {
             return true;
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressContainsKeywordsPredicate)) {
-            if (other != null) {
-                return false;
-            }
+        if (!(other instanceof AddressContainsKeywordsPredicate) && other != null) {
+            return false;
         }
 
         AddressContainsKeywordsPredicate otherAddressContainsKeywordsPredicate =

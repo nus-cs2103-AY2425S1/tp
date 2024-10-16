@@ -56,7 +56,9 @@ public class FindCommand extends Command {
         this.phonePredicate = phonePredicate;
         this.addressPredicate = addressPredicate;
 
-        Predicate<Person> basePredicate = namePredicate == null && phonePredicate == null && addressPredicate == null
+        Predicate<Person> basePredicate = ((namePredicate == null)
+                && (phonePredicate == null)
+                && (addressPredicate == null))
                 ? person -> false : person -> true;
 
         if (namePredicate != null) {
@@ -92,7 +94,6 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-
 
         return (Objects.equals(this.namePredicate, otherFindCommand.namePredicate))
                 && (Objects.equals(this.phonePredicate, otherFindCommand.phonePredicate))
