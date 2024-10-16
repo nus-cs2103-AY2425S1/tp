@@ -3,7 +3,10 @@
 ![Ui](docs/images/Ui.png)
 
 # CampusConnect
-A seamless platform for undergraduate students to exchange contact information and socialise.
+> Made by NUS students, for NUS students
+
+Sporting the iconic colours of NUS, CampusConnect is a seamless platform for undergraduate students to exchange contact 
+information to socialise and mingle.
 
 # Features
 CampusConnect not only provides basic contact information storage solutions, but also custom tagging, searching, and
