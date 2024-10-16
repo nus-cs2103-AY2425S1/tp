@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
@@ -36,7 +35,8 @@ public class CategoryContainsKeywordsPredicate implements Predicate<Person> {
             return false;
         }
 
-        CategoryContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (CategoryContainsKeywordsPredicate) other;
+        CategoryContainsKeywordsPredicate otherNameContainsKeywordsPredicate =
+                (CategoryContainsKeywordsPredicate) other;
         return keyword.equals(otherNameContainsKeywordsPredicate.keyword);
     }
 

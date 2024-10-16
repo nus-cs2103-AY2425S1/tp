@@ -43,7 +43,9 @@ public class Person {
         return name;
     }
 
-    public String getCategory() { return this.category; }
+    public String getCategory() {
+        return this.category;
+    }
 
     public Phone getPhone() {
         return phone;

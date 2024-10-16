@@ -39,7 +39,7 @@ For each parameter:
 
 Purpose: Allows the user to delete an existing contact.
 
-Command format: `delete <INDEX>`  
+Command format: `delete <INDEX>`
 Example commands:
 
 - `delete 1` (deletes the first contact in the list)
