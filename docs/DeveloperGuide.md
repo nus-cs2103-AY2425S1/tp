@@ -493,7 +493,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 1a. `Essential` The number of contacts in a single event should not exceed 1000, ensuring efficient management of contacts for each event.
 
 **2. Technical Requirements**
-- 2a. `Essential` Must be compatible with Java 17 or higher, ensuring that the application runs on modern environments. 
+- 2a. `Essential` Must be compatible with Java 17 or higher, ensuring that the application runs on modern environments.
 - 2b. `Typical` The system should work on both 32-bit and 64-bit environments, making it accessible to a broader range of users.
 - 2c. `Novel` The system must support running offline and sync data when the internet is available, allowing event planners to manage contacts without internet access.
 
