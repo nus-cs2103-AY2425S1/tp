@@ -1,18 +1,17 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
 import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.person.Birthdate;
 import seedu.address.model.person.Name;
@@ -32,10 +31,11 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX, PREFIX_BIRTHDATE, PREFIX_HEALTHSERVICE);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX,
+                        PREFIX_BIRTHDATE, PREFIX_HEALTHSERVICE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX, PREFIX_BIRTHDATE, PREFIX_HEALTHSERVICE)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX,
+                PREFIX_BIRTHDATE, PREFIX_HEALTHSERVICE) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
@@ -44,7 +44,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
         Sex sex = ParserUtil.parseSex(argMultimap.getValue(PREFIX_SEX).get());
         Birthdate birthDate = ParserUtil.parseBirthDate(argMultimap.getValue(PREFIX_BIRTHDATE).get());
-        Set<HealthService> healthServicesList = ParserUtil.parseHealthServices(argMultimap.getAllValues(PREFIX_HEALTHSERVICE));
+        Set<HealthService> healthServicesList = ParserUtil.parseHealthServices(
+                argMultimap.getAllValues(PREFIX_HEALTHSERVICE));
 
         Person person = new Person(name, nric, birthDate, sex, healthServicesList);
 

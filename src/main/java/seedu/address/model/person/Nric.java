@@ -47,8 +47,8 @@ public class Nric {
             return false;
         }
 
-        Nric otherNRIC = (Nric) other;
-        return value.equals(otherNRIC.value);
+        Nric otherNric = (Nric) other;
+        return value.equals(otherNric.value);
     }
 
     @Override
