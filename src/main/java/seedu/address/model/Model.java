@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentDescriptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonDescriptor;
 
@@ -104,7 +105,7 @@ public interface Model {
     /**
      * Returns true if an appointment with the same identity as {@code appointment} exists in the appointment book.
      */
-    boolean hasAppointment(Appointment appointment);
+    boolean hasAppointment(AppointmentDescriptor appointmentDescriptor);
 
     /**
      * Deletes the given appointment.
@@ -116,7 +117,7 @@ public interface Model {
      * Adds the given appointment.
      * {@code appointment} must not already exist in the appointment book.
      */
-    void addAppointment(Appointment appointment);
+    void addAppointment(AppointmentDescriptor appointmentDescriptor);
 
     /**
      * Replaces the given appointment {@code target} with {@code editedAppointment}.

@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentDescriptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonDescriptor;
 
@@ -146,7 +147,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasAppointment(Appointment appointment) {
+    public boolean hasAppointment(AppointmentDescriptor appointment) {
         requireNonNull(appointment);
         return appointmentBook.hasAppointment(appointment);
     }
@@ -157,7 +158,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addAppointment(Appointment appointment) {
+    public void addAppointment(AppointmentDescriptor appointment) {
         appointmentBook.addAppointment(appointment);
         updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
     }

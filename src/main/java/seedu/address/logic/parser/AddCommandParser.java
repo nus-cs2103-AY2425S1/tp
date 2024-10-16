@@ -2,19 +2,30 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SICKNESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.ParserUtil.APPOINTMENT_ENTITY_STRING;
 import static seedu.address.logic.parser.ParserUtil.PERSON_ENTITY_STRING;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.AppointmentDescriptor;
+import seedu.address.model.appointment.AppointmentType;
+import seedu.address.model.appointment.Medicine;
+import seedu.address.model.appointment.Sickness;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -34,7 +45,9 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_TAG, PREFIX_PERSON_ID, PREFIX_DATETIME,
+                        PREFIX_APPOINTMENT_TYPE, PREFIX_SICKNESS, PREFIX_MEDICINE);
         String entityType = argMultimap.getEntityType();
 
         switch (entityType) {
@@ -54,7 +67,26 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             return new AddPersonCommand(person);
         case APPOINTMENT_ENTITY_STRING:
-            //TODO: Instantiate and return AddAppointmentCommand
+            if (!arePrefixesPresent(argMultimap, PREFIX_PERSON_ID, PREFIX_DATETIME,
+                    PREFIX_APPOINTMENT_TYPE, PREFIX_SICKNESS, PREFIX_MEDICINE)) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE));
+            }
+
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PERSON_ID, PREFIX_DATETIME,
+                    PREFIX_APPOINTMENT_TYPE, PREFIX_SICKNESS, PREFIX_MEDICINE);
+            int personId = ParserUtil.parsePersonId(argMultimap.getValue(PREFIX_PERSON_ID).get());
+            LocalDateTime appointmentDateTime = ParserUtil.parseAppointmentDateTime(
+                    argMultimap.getValue(PREFIX_DATETIME).get());
+            AppointmentType appointmentType = ParserUtil.parseAppointmentType(
+                    argMultimap.getValue(PREFIX_APPOINTMENT_TYPE).get());
+            Sickness sickness = ParserUtil.parseSickness(argMultimap.getValue(PREFIX_SICKNESS).get());
+            Medicine medicine = ParserUtil.parseMedicine(argMultimap.getValue(PREFIX_MEDICINE).get());
+
+            AppointmentDescriptor appointment = new AppointmentDescriptor(
+                    appointmentType, appointmentDateTime, personId, sickness, medicine);
+
+            return new AddAppointmentCommand(appointment);
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }

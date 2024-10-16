@@ -40,6 +40,17 @@ public class Appointment {
         this.medicine = medicine;
     }
 
+    /**
+     * Creates an appointment object using appointmentDescriptor.
+     */
+    public Appointment(AppointmentDescriptor appointmentDescriptor) {
+        this.appointmentType = appointmentDescriptor.getAppointmentType();
+        this.appointmentDateTime = appointmentDescriptor.getAppointmentDateTime();
+        this.personId = appointmentDescriptor.getPersonId();
+        this.sickness = appointmentDescriptor.getSickness();
+        this.medicine = appointmentDescriptor.getMedicine();
+    }
+
     public AppointmentType getAppointmentType() {
         return appointmentType;
     }
