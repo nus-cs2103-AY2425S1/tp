@@ -2,9 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.ArrayList;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -28,6 +28,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INCORRECT_INDEXES = "There should be 2 indexes separated by a space.\n"
             + "Indexes should be non-zero unsigned integers.";
+    public static final int ARGUMENT_COUNT = 2;
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -58,7 +59,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
-    public static Index parsePropertyIndex(String args) throws ParseException{
+    public static Index parsePropertyIndex(String args) throws ParseException {
         ArrayList<Index> indexArrayList = getIndexList(args);
         return indexArrayList.get(1);
     }
@@ -71,8 +72,7 @@ public class ParserUtil {
     private static ArrayList<Index> getIndexList(String args) throws ParseException {
         String[] indexList = args.trim().split("\\s+");
         ArrayList<Index> indexArrayList = new ArrayList<>();
-        int minIndexListLength = 2;  //TODO Remove magic number
-        if (indexList.length != minIndexListLength) {
+        if (indexList.length != ARGUMENT_COUNT) {
             throw new ParseException(MESSAGE_INCORRECT_INDEXES);
         }
         for (String i : indexList) {
