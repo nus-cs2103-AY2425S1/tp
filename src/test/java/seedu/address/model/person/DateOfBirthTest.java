@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Test;
 
 public class DateOfBirthTest {
@@ -33,6 +36,13 @@ public class DateOfBirthTest {
     }
 
     @Test
+    public void constructor_currentDate_shouldSucceed() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Date.DATE_FORMAT_STRING);
+        String currentDate = LocalDate.now().format(formatter);
+        assertDoesNotThrow(() -> new DateOfBirth(currentDate));
+    }
+
+    @Test
     public void isValidDate_null_throwsNullPointerException() {
         String nullString = null;
         assertThrows(NullPointerException.class, () -> DateOfBirth.isValidDate(nullString));
@@ -57,5 +67,12 @@ public class DateOfBirthTest {
     public void isValidDate_futureDate_returnsFalse() {
         String futureDate = "9 Jan 9999";
         assertFalse(DateOfBirth.isValidDate(futureDate));
+    }
+
+    @Test
+    public void isValidDate_currentDate_returnsTrue() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Date.DATE_FORMAT_STRING);
+        String currentDate = LocalDate.now().format(formatter);
+        assertTrue(DateOfBirth.isValidDate(currentDate));
     }
 }

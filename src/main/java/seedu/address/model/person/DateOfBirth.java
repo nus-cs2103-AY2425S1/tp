@@ -35,7 +35,8 @@ public class DateOfBirth extends Date {
 
         try {
             LocalDate localDate = Date.parseLocalDate(test);
-            return localDate.isBefore(LocalDate.now());
+            LocalDate now = LocalDate.now();
+            return localDate.isBefore(now) || localDate.isEqual(now);
         } catch (DateTimeParseException e) {
             return false;
         }
