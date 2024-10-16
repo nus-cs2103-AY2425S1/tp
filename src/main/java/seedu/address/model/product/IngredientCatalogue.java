@@ -19,7 +19,6 @@ public class IngredientCatalogue extends Catalogue {
     // Map to store ingredient names for quick lookups
     private final Map<String, Ingredient> ingredientByName = new HashMap<>();
 
-
     public IngredientCatalogue() {
         addDefaultProducts();
         super.nextProductId += 6;
@@ -36,7 +35,11 @@ public class IngredientCatalogue extends Catalogue {
         addIngredient(CREAM);
     }
 
-    private void addIngredient(Ingredient ingredient) {
+    public int getNextProductId() {
+        return nextProductId;
+    }
+
+    public void addIngredient(Ingredient ingredient) {
         productCatalogue.put(ingredient.getProductId(), ingredient);
         ingredientByName.put(ingredient.getName().toLowerCase(), ingredient);  // Store by lowercase name
         nextProductId++;

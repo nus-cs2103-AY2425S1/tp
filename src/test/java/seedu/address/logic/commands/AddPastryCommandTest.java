@@ -16,6 +16,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.Pastry;
+import seedu.address.model.product.PastryCatalogue;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code AddPastryCommand}.
@@ -44,8 +45,12 @@ public class AddPastryCommandTest {
         // Create a new AddPastryCommand
         AddPastryCommand command = new AddPastryCommand(PASTRY_NAME, PASTRY_COST, ingredients);
 
+        // Use the model's PastryCatalogue to get the next available ID
+        PastryCatalogue catalogue = model.getPastryCatalogue();
+        int nextProductId = catalogue.getNextProductId();  // Ensure consistent product ID
+
         // Create the expected pastry object
-        Pastry expectedPastry = new Pastry(7, PASTRY_NAME, PASTRY_COST, ingredients); // ID assumed to be 1
+        Pastry expectedPastry = new Pastry(nextProductId, PASTRY_NAME, PASTRY_COST, ingredients); // ID assumed to be 1
         String expectedMessage = String.format(AddPastryCommand.MESSAGE_ADD_PASTRY_SUCCESS, expectedPastry);
 
         // Create a new expected model (which should reflect the expected state)
