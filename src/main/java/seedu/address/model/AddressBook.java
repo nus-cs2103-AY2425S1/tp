@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -138,6 +139,32 @@ public class AddressBook implements ReadOnlyAddressBook {
         associations.add(pair);
     }
 
+    /**
+     * Returns list of associated vendors to an event.
+     */
+    public ObservableList<Vendor> getAssociatedVendors(Event event) {
+        requireNonNull(event);
+        List<Vendor> vendorsList = associations.stream()
+                .filter(pair -> pair.getValue().equals(event))
+                .map(Pair::getKey)
+                .collect(Collectors.toList());
+
+        return FXCollections.observableArrayList(vendorsList);
+    }
+
+    /**
+     * Returns list of associated events to a vendor.
+     */
+    public ObservableList<Event> getAssociatedEvents(Vendor vendor) {
+        requireNonNull(vendor);
+        List<Event> eventsList = associations.stream()
+                .filter(pair -> pair.getKey().equals(vendor))
+                .map(Pair::getValue)
+                .collect(Collectors.toList());
+
+        return FXCollections.observableArrayList(eventsList);
+    }
+
     //// event-level operations
 
     /**
@@ -211,3 +238,4 @@ public class AddressBook implements ReadOnlyAddressBook {
         return Objects.hash(vendors.hashCode(), events.hashCode());
     }
 }
+

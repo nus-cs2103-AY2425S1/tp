@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BOB
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalVendors.ALICE;
+import static seedu.address.testutil.TypicalVendors.BOB;
 import static seedu.address.testutil.TypicalVendors.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -32,6 +33,7 @@ public class AddressBookTest {
 
     private final AddressBook addressBook = new AddressBook();
     private final Event testEvent = new Event(new Name("Test Event"), new Date("2024-10-11"));
+    private final Event anotherEvent = new Event(new Name("Another Event"), new Date("2024-10-11"));
     private final Event similarTestEvent = new Event(new Name("Test Event"), new Date("2023-05-20"));
 
     @Test
@@ -145,6 +147,46 @@ public class AddressBookTest {
                 + "events=" + addressBook.getEventList()
                 + "}";
         assertEquals(expected, addressBook.toString());
+    }
+
+    @Test
+    public void getAssociatedVendors_noAssociations_returnsEmptyList() {
+        ObservableList<Vendor> associatedVendors = addressBook.getAssociatedVendors(testEvent);
+        assertEquals(FXCollections.observableArrayList(), associatedVendors);
+    }
+
+    @Test
+    public void getAssociatedVendors_withAssociations_returnsCorrectVendors() {
+        addressBook.addVendor(ALICE);
+        addressBook.addVendor(BOB);
+        addressBook.addEvent(testEvent);
+        addressBook.assignVendorToEvent(ALICE, testEvent);
+        addressBook.assignVendorToEvent(BOB, testEvent);
+
+        ObservableList<Vendor> associatedVendors = addressBook.getAssociatedVendors(testEvent);
+        ObservableList<Vendor> expectedVendors = FXCollections.observableArrayList(BOB, ALICE);
+
+        assertEquals(expectedVendors, associatedVendors);
+    }
+
+    @Test
+    public void getAssociatedEvents_noAssociations_returnsEmptyList() {
+        ObservableList<Event> associatedEvents = addressBook.getAssociatedEvents(ALICE);
+        assertEquals(FXCollections.observableArrayList(), associatedEvents);
+    }
+
+    @Test
+    public void getAssociatedEvents_withAssociations_returnsCorrectEvents() {
+        addressBook.addVendor(ALICE);
+        addressBook.addEvent(testEvent);
+        addressBook.addEvent(anotherEvent);
+        addressBook.assignVendorToEvent(ALICE, testEvent);
+        addressBook.assignVendorToEvent(ALICE, anotherEvent);
+
+        ObservableList<Event> associatedEvents = addressBook.getAssociatedEvents(ALICE);
+        ObservableList<Event> expectedEvents = FXCollections.observableArrayList(anotherEvent, testEvent);
+
+        assertEquals(expectedEvents, associatedEvents);
     }
 
     /**
