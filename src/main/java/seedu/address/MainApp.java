@@ -98,9 +98,10 @@ public class MainApp extends Application {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
+            predefinedAssignments = new PredefinedAssignmentsData();
         }
 
-        return new ModelManager(initialData, userPrefs, readAssignmentOptional.get());
+        return new ModelManager(initialData, userPrefs, predefinedAssignments);
     }
 
     private void initLogging(Config config) {
