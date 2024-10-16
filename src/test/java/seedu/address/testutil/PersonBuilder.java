@@ -20,7 +20,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DEPARTMENT = "IT";
     public static final String DEFAULT_ROLE = "SWE";
-    public static final String DEFAULT_CONTRACT_START_DATE = "2024-10-09";
+    public static final String DEFAULT_CONTRACT_END_DATE = "2024-10-09";
     public static final boolean DEFAULT_IS_EMPLOYEE = true;
 
     private Name name;
@@ -42,7 +42,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         department = new Department(DEFAULT_DEPARTMENT);
         role = new Role(DEFAULT_ROLE);
-        contractEndDate = ContractEndDate.of(DEFAULT_CONTRACT_START_DATE);
+        contractEndDate = ContractEndDate.of(DEFAULT_CONTRACT_END_DATE);
         isEmployee = DEFAULT_IS_EMPLOYEE;
     }
 
