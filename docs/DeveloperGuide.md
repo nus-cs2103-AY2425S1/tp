@@ -334,99 +334,80 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 (For all use cases below, the **System** is the `Cher` and the **Actor** is the `User`, unless specified otherwise)
 
 #### Use case: UC1 - Add contact
-
 **MSS**
-
 1. User enters add contact command with the contact details.
 2. Cher add contact to memory.
 3. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
-4. Cher show success message.
-
+4. Cher show success message. <br>
    Use case ends.
 
 **Extensions**
-
 * 1a. Cher detects error in user input.
-  - 1a1. Cher raises error.
-  - 1a2. Cher shows correct input format.
-
-  Use case ends.
-
+    - 1a1. Cher raises error.
+    - 1a2. Cher shows correct input format. <br>
+      Use case ends.
 * 1b. Cher detects duplicate contacts.
-  - 1b1. Cher raises error.
-
-  Use case ends.
+    - 1b1. Cher raises error. <br>
+      Use case ends.
 
 #### Use case: UC2 - Delete a contact
 
 **MSS**
-1. User enters delete contact command with the contact's full name.
+1. User enters delete contact command with the contact's detail (full name or phone number).
 2. Cher shows list of contacts with name that matches user input.
-3. Cher request the index of the contact the user wants to delete.
-4. User enters the index.
-5. Cher prompts for delete confirmation.
-6. User confirms deletion.
-7. Cher deletes the contact from memory.
-8. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
-9. Cher shows a success message.
-
-    Use case ends.
+3. User re-enters delete command with phone number of the contact to delete.
+4. Cher prompts for delete confirmation.
+5. User confirms deletion.
+6. Cher deletes the contact from memory.
+7. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+8. Cher shows a success message. <br>
+   Use case ends.
 
 **Extensions**
-
 * 1a. Cher detects error in user input.
-  - 1a1. Cher shows correct input format.
+    - 1a1. Cher shows correct input format.<br>
+      Use case ends.
+* 1b. Cher detects only 1 contact
+    - Use Case jumps to step 5
+* 3a. Cher detects error in user input.
+    - 3a1. Cher shows error message. <br>
+      Use case ends.
 
-  Use case ends.
-* 3b. User no longer wants to delete a contact.
-    - 3b1. User gives empty input.
-
-  Use Case ends.
-* 4a. Cher detects error in user input.
-    - 4a1. Cher shows error message.
-
-    Use case ends.
-
-#### Use case: UC3 - View contacts
-
+#### Use case: UC3 - List contacts
 **MSS**
-
-1. User enters view contacts command.
-2. Cher displays all contacts in memory to user.
-
-    Use case ends.
+1. User enters List command.
+2. Cher displays all contacts in memory to user. <br>
+   Use case ends.
 
 **Extensions**
-
 * 1a. Cher detects error in user input.
-    - 1a1. Cher shows correct input format.
-
-  Use case ends.
-
+    - 1a1. Cher shows correct input format. <br>
+      Use case ends.
+  
 #### Use case: UC4 - Save to disk
-
 **MSS**
-
 1. Cher opens a local file.
-2. Cher saves contacts in memory into local file.
+2. Cher saves contacts in memory into local file. <br>
+   Use case ends.
 
-    Use case ends.
-
-**Use case: UC5 - Sync disk and memory**
-
+#### Use case: UC5 - Sync disk and memory
 **MSS**
-
 1. Cher reads from local file.
-2. Cher store contact data to memory.
-
-    Use case ends.
+2. Cher store contact data to memory. <br>
+   Use case ends.
 
 ### Non-Functional Requirements
-
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The user interface should be intuitive for teachers with minimal technical expertise
+3.  A user with above average typing speed (>50 words per minute) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The user interface should be intuitive for users with minimal technical expertise.
+5.  Commands should be intuitive and simple. 
+6.  Command structures should be logical, consistent and memorable. 
+7.  All texts should be of appropriate size and easily-readable for users of all ages.
+8.  The color scheme of the user interface should be high-contrast to accomodate for users of all accessibility levels. 
+9.  Invalid inputs should be handled gracefully, and the user should be informed clearly of their mistake.
+10.  The user should be promptly informed of the outcome of their action (sucess/failure) via the feedback box. 
+
 
 *{More to be added}*
 
@@ -438,6 +419,11 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 * **Case-insensitive**: Refers to functionality where uppercase and lowercase letters are treated as the same (e.g., "Peter Tan" is the same as "peter tan")
 * **Novice user**: A user with limited experience or familiarity with the system, requiring guidance and simple, intuitive interfaces to perform tasks effectively
 * **Intermediate user**: A user with some experience and familiarity with the system, capable of performing tasks with minimal guidance but not yet an expert
+* **Use case**: A description of a sequences of actions that the user or system performs, resulting in an observable outcome
+* **Actor**: In the context of use cases, actor refers to the role played by the user
+* **Main Success Scenario (MSS)**: The sequence of interactions that is the most straightforward and assumes that nothing goes wrong
+* **Non-Functional Requirements**: A set of specifications that describes the system's operation capabilities, instead of its function
+
 
 --------------------------------------------------------------------------------------------------------------------
 
