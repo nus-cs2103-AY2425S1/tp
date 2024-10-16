@@ -103,10 +103,8 @@ public class ParserUtil {
     /**
      * Parses a {@code String note} into an {@code Note}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code note} is invalid.
      */
-    public static Note parseNote(String note) throws ParseException {
+    public static Note parseNote(String note) {
         requireNonNull(note);
         String trimmedNote = note.trim();
 

@@ -38,6 +38,9 @@ public class DeleteTaskCommand extends Command {
     private final Name targetName;
     private final Index targetIndex;
 
+    /**
+     * Creates an DeleteTaskCommand to delete a task from specified User at the specified Displayed Index{@code Person}
+     */
     public DeleteTaskCommand(Name name, Index targetIndex) {
         this.targetName = name;
         this.targetIndex = targetIndex;
