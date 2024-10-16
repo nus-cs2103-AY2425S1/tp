@@ -32,20 +32,20 @@ public class CancelLessonCommandTest {
 
     @Test
     public void constructor_nullDate_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> new CancelLessonCommand(null, VALID_START_TIME, VALID_INDEX));
+        assertThrows(NullPointerException.class, () ->
+                new CancelLessonCommand(null, VALID_START_TIME, VALID_INDEX));
     }
 
     @Test
     public void constructor_nullTime_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> new CancelLessonCommand(VALID_DATE, null, VALID_INDEX));
+        assertThrows(NullPointerException.class, () ->
+                new CancelLessonCommand(VALID_DATE, null, VALID_INDEX));
     }
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> new CancelLessonCommand(VALID_DATE, VALID_START_TIME, null));
+        assertThrows(NullPointerException.class, () ->
+                new CancelLessonCommand(VALID_DATE, VALID_START_TIME, null));
     }
 
     @Test
@@ -62,8 +62,8 @@ public class CancelLessonCommandTest {
         CancelLessonCommand command = new CancelLessonCommand(new Date("01-01-2023"), new Time("14:00"), VALID_INDEX);
 
         assertThrows(CommandException.class,
-                String.format(CancelLessonCommand.MESSAGE_LESSON_NOT_FOUND, Messages.format(ALICE)),
-                () -> command.execute(model));
+                String.format(CancelLessonCommand.MESSAGE_LESSON_NOT_FOUND, Messages.format(ALICE)), () ->
+                        command.execute(model));
     }
 
     @Test
