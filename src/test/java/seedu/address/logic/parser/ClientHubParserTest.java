@@ -19,11 +19,13 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindAddressCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindPhoneCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneBeginsWithKeywordPredicate;
@@ -96,6 +98,14 @@ public class ClientHubParserTest {
         FindPhoneCommand command = (FindPhoneCommand) parser.parseCommand(
                 FindPhoneCommand.COMMAND_WORD + " " + keyword);
         assertEquals(new FindPhoneCommand(new PhoneBeginsWithKeywordPredicate(keyword)), command);
+    }
+
+    @Test
+    public void parseCommand_findAddress() throws Exception {
+        List<String> keywords = Arrays.asList("Tampines", "Street", "1");
+        FindAddressCommand command = (FindAddressCommand) parser.parseCommand(
+                FindAddressCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindAddressCommand(new AddressContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
