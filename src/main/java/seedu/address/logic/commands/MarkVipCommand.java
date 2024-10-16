@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
@@ -91,6 +92,6 @@ public class MarkVipCommand extends Command {
         }
 
         MarkVipCommand otherMarkVipCommand = (MarkVipCommand) other;
-        return targetIndex.equals(otherMarkVipCommand.targetIndex);
+        return targetIndex.equals(otherMarkVipCommand.targetIndex) && newState == otherMarkVipCommand.newState;
     }
 }
