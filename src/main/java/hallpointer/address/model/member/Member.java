@@ -11,6 +11,7 @@ import java.util.Set;
 import hallpointer.address.commons.util.ToStringBuilder;
 import hallpointer.address.model.point.Point;
 import hallpointer.address.model.session.Session;
+import hallpointer.address.model.session.SessionName;
 import hallpointer.address.model.tag.Tag;
 
 /**
@@ -150,10 +151,19 @@ public class Member {
      *
      * @param session Session to be removed from the member.
      */
-    public void removeSession(Session session) {
-        requireNonNull(session);
-        this.sessions.remove(session);
-        subtractPoints(session.getPoints());
+    public void removeSession(SessionName session) {
+        if (session == null) {
+            throw new IllegalArgumentException("Session is null: " + session);
+        }
+        Session target = this.sessions.stream()
+                .filter(object -> object.getSessionName().toString().equals(session.toString()))
+                .findFirst()   // get the first match, wrapped in Optional
+                .orElse(null); // return null if no match is found
+        if (target == null) {
+            throw new IllegalArgumentException("Session not found: " + session);
+        }
+        this.sessions.remove(target);
+        subtractPoints(target.getPoints());
     }
 
     /**
