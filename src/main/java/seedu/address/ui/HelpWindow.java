@@ -40,6 +40,10 @@ public class HelpWindow extends UiPart<Stage> {
             + "- Format: findtag TAG [MORE_TAGS]\n"
             + "- Example: findtag HDB Condo\n"
             + "- Items in the [square brackets] are optional.";
+    private static final String HELP_REMARK_COMMAND = "remark Command\n"
+            + "- Format: remark INDEX r/[REMARKS]\n"
+            + "- Example: remark 1 r/Prefers high rise apartments\n"
+            + "- Items in the [square brackets] are optional. If [REMARKS] is left blank, the remark will be deleted from the specified Person at INDEX.";
     private static final String HELP_EXIT_COMMAND = "Exit Command\n"
             + "- Format: exit\n"
             + "- Example: exit";
