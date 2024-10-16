@@ -102,8 +102,10 @@ public class MainApp extends Application {
             if (!appointmentBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAppointmentBookFilePath()
                         + " populated with a sample AppointmentBook.");
+                initialAppointmentData = SampleDataUtil.getSampleAppointmentBook(initialPersonsData);
+            } else {
+                initialAppointmentData = appointmentBookOptional.get();
             }
-            initialAppointmentData = appointmentBookOptional.orElseGet(SampleDataUtil::getSampleAppointmentBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAppointmentBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AppointmentBook.");
