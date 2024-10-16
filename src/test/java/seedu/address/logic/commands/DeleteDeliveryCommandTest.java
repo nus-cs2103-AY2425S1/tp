@@ -27,7 +27,7 @@ public class DeleteDeliveryCommandTest {
         DeleteDeliveryCommand deleteDeliveryCommand = new DeleteDeliveryCommand(INDEX_FIRST_DELIVERY);
 
         String expectedMessage = String.format(DeleteDeliveryCommand.MESSAGE_DELETE_DELIVERY_SUCCESS,
-                deliveryToDelete);
+                Messages.format(deliveryToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteDelivery(deliveryToDelete);

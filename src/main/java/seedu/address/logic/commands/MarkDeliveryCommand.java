@@ -55,7 +55,7 @@ public class MarkDeliveryCommand extends Command {
 
         model.setDelivery(deliveryToMark, markedDelivery);
         model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
-        return new CommandResult(String.format(MESSAGE_MARK_DELIVERY_SUCCESS, deliveryToMark, status));
+        return new CommandResult(String.format(MESSAGE_MARK_DELIVERY_SUCCESS, Messages.format(deliveryToMark), status));
     }
 
     @Override

@@ -43,7 +43,7 @@ public class DeleteDeliveryCommand extends Command {
         model.deleteDelivery(deliveryToDelete);
 
         // Return success message
-        return new CommandResult(String.format(MESSAGE_DELETE_DELIVERY_SUCCESS, deliveryToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_DELIVERY_SUCCESS, Messages.format(deliveryToDelete)));
     }
 
     @Override

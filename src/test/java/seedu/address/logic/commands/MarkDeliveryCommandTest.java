@@ -29,7 +29,7 @@ public class MarkDeliveryCommandTest {
         MarkDeliveryCommand markDeliveryCommand = new MarkDeliveryCommand(index, Status.DELIVERED);
 
         String expectedMessage = String.format(
-                MarkDeliveryCommand.MESSAGE_MARK_DELIVERY_SUCCESS, deliveryToMark, Status.DELIVERED);
+                MarkDeliveryCommand.MESSAGE_MARK_DELIVERY_SUCCESS, Messages.format(deliveryToMark), Status.DELIVERED);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Delivery updatedDelivery = new Delivery(
