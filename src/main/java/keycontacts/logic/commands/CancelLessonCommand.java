@@ -30,9 +30,9 @@ public class CancelLessonCommand extends Command {
             + PREFIX_START_TIME + "START_TIME\n"
             + "Example: " + COMMAND_WORD + PREFIX_DATE + "06-07-2022 " + PREFIX_START_TIME + "12:00";
     public static final String MESSAGE_SUCCESS = "Cancelled lesson on %1s$ for student: %2s$";
-    public static final String MESSAGE_LESSON_NOT_FOUND = "No lesson with the " +
-            "specified parameters found for student %1s$. " +
-            "Check if you inputted the right timing and student!";
+    public static final String MESSAGE_LESSON_NOT_FOUND = "No lesson with the "
+            + "specified parameters found for student %1s$. "
+            + "Check if you inputted the right timing and student!";
     private final Date date;
     private final Time startTime;
     private final Index index;

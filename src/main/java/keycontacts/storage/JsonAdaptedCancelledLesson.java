@@ -7,6 +7,9 @@ import keycontacts.commons.exceptions.IllegalValueException;
 import keycontacts.model.lesson.CancelledLesson;
 import keycontacts.model.lesson.Date;
 
+/**
+ * Jackson-friendly version of {@link CancelledLesson}.
+ */
 public class JsonAdaptedCancelledLesson {
 
     private final String cancelledLessonDate;

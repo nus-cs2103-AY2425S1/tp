@@ -12,10 +12,10 @@ import java.time.format.DateTimeFormatter;
  */
 public class Date implements Comparable<Date> {
 
-    private final LocalDate date;
     public static final String MESSAGE_CONSTRAINTS = "Date should be in DD-MM-YYYY format";
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static final String VALIDATION_REGEX = "^(0[1-9]|[12]\\d|3[01])-(0[1-9]|1[0-2])-\\d{4}$";
+    private final LocalDate date;
 
     /**
      * Constructs a {@code Date} object.

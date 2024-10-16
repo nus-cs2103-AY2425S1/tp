@@ -57,6 +57,9 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats a {@code RegularLesson} for display to the user.
+     */
     public static String format(RegularLesson regularLesson) {
         final StringBuilder builder = new StringBuilder();
         builder.append(regularLesson.getLessonDay())
