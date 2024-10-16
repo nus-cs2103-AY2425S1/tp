@@ -146,6 +146,8 @@ public class TagCommandTest {
         TagCommand tagCommandWithSameValues = new TagCommand(new Name(VALID_NAME_BOB), copyDescriptor);
         assertEquals(tagCommand, tagCommandWithSameValues);
 
+        assertEquals(tagCommand, tagCommand);
+
         assertNotEquals(tagCommand, null);
 
         assertNotEquals(tagCommand, new TagCommand(new Name(VALID_NAME_AMY), DESC_AMY));
