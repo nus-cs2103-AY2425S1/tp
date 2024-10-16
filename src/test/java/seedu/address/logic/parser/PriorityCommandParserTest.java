@@ -80,4 +80,19 @@ public class PriorityCommandParserTest {
         // Priority parameter missing
         assertParseFailure(parser, NRIC_DESC_AMY, String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_multipleParameter_failure() {
+        // Multiple NRIC input
+        assertParseFailure(parser, NRIC_DESC_AMY + NRIC_DESC_BOB + PRIORITY_DESC_AMY,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PriorityCommand.MULTIPLE_PARAMETER));
+
+        // Multiple Priority input
+        assertParseFailure(parser, NRIC_DESC_AMY + PRIORITY_DESC_AMY + PRIORITY_DESC_BOB,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PriorityCommand.MULTIPLE_PARAMETER));
+
+        // Multiple NRIC and Priority input
+        assertParseFailure(parser, NRIC_DESC_AMY + NRIC_DESC_BOB + PRIORITY_DESC_AMY
+                + PRIORITY_DESC_BOB, String.format(MESSAGE_INVALID_COMMAND_FORMAT, PriorityCommand.MULTIPLE_PARAMETER));
+    }
 }

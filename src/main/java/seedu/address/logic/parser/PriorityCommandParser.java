@@ -34,10 +34,17 @@ public class PriorityCommandParser implements Parser<PriorityCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     PriorityCommand.MESSAGE_USAGE));
         }
-
+        if (argMultimap.getAllValues(PREFIX_NRIC).size() > 1) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    PriorityCommand.MULTIPLE_PARAMETER));
+        }
         if (!argMultimap.getValue(PREFIX_PRIORITY).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     PriorityCommand.MESSAGE_USAGE));
+        }
+        if (argMultimap.getAllValues(PREFIX_PRIORITY).size() > 1) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    PriorityCommand.MULTIPLE_PARAMETER));
         }
 
         String nricStr = argMultimap.getValue(PREFIX_NRIC).orElse("");
