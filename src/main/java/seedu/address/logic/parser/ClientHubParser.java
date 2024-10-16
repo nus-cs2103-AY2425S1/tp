@@ -16,6 +16,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindClientTypeCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindNameCommand;
 import seedu.address.logic.commands.FindPhoneCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -82,8 +83,13 @@ public class ClientHubParser {
         case FindPhoneCommand.COMMAND_WORD:
             return new FindPhoneCommandParser().parse(arguments);
 
+<<<<<<< HEAD
         case FindClientTypeCommand.COMMAND_WORD:
             return new FindClientTypeCommandParser().parse(arguments);
+=======
+        case FindNameCommand.COMMAND_WORD:
+            return new FindNameCommandParser().parse(arguments);
+>>>>>>> branch-findnamecommand
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
