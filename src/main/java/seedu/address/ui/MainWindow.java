@@ -134,8 +134,8 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         splitView();
 
-        eventDetailsPanel = new EventDetailsPanel(logic.getViewedEvent(), logic.getFilteredVendorList());
-        vendorDetailsPanel = new VendorDetailsPanel(logic.getViewedVendor(), logic.getFilteredVendorList());
+        eventDetailsPanel = new EventDetailsPanel(logic.getViewedEvent(), logic.getAssociations());
+        vendorDetailsPanel = new VendorDetailsPanel(logic.getViewedVendor(), logic.getAssociations());
 
         vendorListPanel = new VendorListPanel(logic.getFilteredVendorList(), "Vendors List");
         leftPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
