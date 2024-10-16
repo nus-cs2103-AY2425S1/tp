@@ -20,7 +20,7 @@ public class CsvConverters {
     public static class GoodsDateConverter extends AbstractBeanField<Date, String> {
         @Override
         protected Object convert(String value) {
-            return new Date(value);
+            return new Date(value.replace("T", " "));
         }
     }
 
