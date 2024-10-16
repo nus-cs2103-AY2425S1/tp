@@ -78,6 +78,9 @@ public class AddressBookParser {
         case AddSupplyOrderCommand.COMMAND_WORD:
             return new AddSupplyOrderCommandParser().parse(arguments);
 
+        case DeleteCustomerOrderCommand.COMMAND_WORD:
+            return new DeleteCustomerOrderCommandParser().parse(arguments);
+
         case RemoveIngredientCommand.COMMAND_WORD:
             return new RemoveIngredientCommandParser().parse(arguments);
 

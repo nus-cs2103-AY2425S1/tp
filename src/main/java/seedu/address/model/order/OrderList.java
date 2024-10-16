@@ -1,7 +1,10 @@
 package seedu.address.model.order;
 
+import seedu.address.model.product.Product;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Class to manage a list of orders, including both supply and customer orders.
@@ -111,5 +114,28 @@ public class OrderList {
                 "supplyOrders=" + supplyOrders +
                 ", customerOrders=" + customerOrders +
                 '}';
+    }
+
+    public String viewSupplyOrders() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < supplyOrders.size(); i++) {
+            Order order = supplyOrders.get(i);
+            sb.append(String.format("Order %d", i + 1));
+            sb.append("\n");
+            sb.append(order.viewOrder());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+    public String viewCustomerOrders() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < customerOrders.size(); i++) {
+            Order order = customerOrders.get(i);
+            sb.append(String.format("Order %d", i + 1));
+            sb.append("\n");
+            sb.append(order.viewOrder());
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 }
