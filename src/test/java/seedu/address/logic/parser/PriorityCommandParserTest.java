@@ -14,11 +14,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_BOB;
 import static seedu.address.logic.commands.PriorityCommand.MESSAGE_USAGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.PriorityCommand;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Priority;
@@ -85,14 +88,14 @@ public class PriorityCommandParserTest {
     public void parse_multipleParameter_failure() {
         // Multiple NRIC input
         assertParseFailure(parser, NRIC_DESC_AMY + NRIC_DESC_BOB + PRIORITY_DESC_AMY,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PriorityCommand.MULTIPLE_PARAMETER));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NRIC));
 
         // Multiple Priority input
         assertParseFailure(parser, NRIC_DESC_AMY + PRIORITY_DESC_AMY + PRIORITY_DESC_BOB,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PriorityCommand.MULTIPLE_PARAMETER));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PRIORITY));
 
         // Multiple NRIC and Priority input
         assertParseFailure(parser, NRIC_DESC_AMY + NRIC_DESC_BOB + PRIORITY_DESC_AMY
-                + PRIORITY_DESC_BOB, String.format(MESSAGE_INVALID_COMMAND_FORMAT, PriorityCommand.MULTIPLE_PARAMETER));
+                + PRIORITY_DESC_BOB, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NRIC, PREFIX_PRIORITY));
     }
 }
