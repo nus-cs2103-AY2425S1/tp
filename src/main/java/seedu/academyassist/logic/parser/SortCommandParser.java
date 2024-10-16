@@ -5,9 +5,9 @@ import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SORT_PARAM;
 
 import java.util.stream.Stream;
 
-import seedu.academyassist.model.sort.SortParam;
 import seedu.academyassist.logic.commands.SortCommand;
 import seedu.academyassist.logic.parser.exceptions.ParseException;
+import seedu.academyassist.model.sort.SortParam;
 
 /**
  * Parses input arguments and creates a new SortCommand object

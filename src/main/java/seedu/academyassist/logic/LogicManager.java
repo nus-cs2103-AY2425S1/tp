@@ -11,7 +11,7 @@ import seedu.academyassist.commons.core.LogsCenter;
 import seedu.academyassist.logic.commands.Command;
 import seedu.academyassist.logic.commands.CommandResult;
 import seedu.academyassist.logic.commands.exceptions.CommandException;
-import seedu.academyassist.logic.parser.AddressBookParser;
+import seedu.academyassist.logic.parser.AcademyAssistParser;
 import seedu.academyassist.logic.parser.exceptions.ParseException;
 import seedu.academyassist.model.Model;
 import seedu.academyassist.model.ReadOnlyAddressBook;
@@ -31,7 +31,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final AcademyAssistParser addressBookParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -39,7 +39,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        addressBookParser = new AcademyAssistParser();
     }
 
     @Override

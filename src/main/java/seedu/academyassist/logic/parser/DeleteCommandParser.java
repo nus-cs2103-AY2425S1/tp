@@ -2,9 +2,9 @@ package seedu.academyassist.logic.parser;
 
 import static seedu.academyassist.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import seedu.academyassist.logic.commands.DeleteCommand;
 import seedu.academyassist.logic.parser.exceptions.ParseException;
 import seedu.academyassist.model.person.Ic;
-import seedu.academyassist.logic.commands.DeleteCommand;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
