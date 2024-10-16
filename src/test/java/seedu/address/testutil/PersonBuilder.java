@@ -30,6 +30,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private List<Property> buyingProperties = new ArrayList<>();
+    private List<Property> sellingProperties = new ArrayList<>();
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -98,6 +99,13 @@ public class PersonBuilder {
      */
     public PersonBuilder withBuyProperty(Property property) {
         this.buyingProperties.add(property);
+        return this;
+    }
+    /**
+     * Sets the {@code sellingProperties} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSellProperty(Property property) {
+        this.sellingProperties.add(property);
         return this;
     }
 
