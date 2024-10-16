@@ -63,7 +63,7 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTiers(VALID_TIER_REJECT).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTier(VALID_TIER_REJECT).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 

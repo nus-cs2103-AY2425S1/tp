@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Tag in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
+ * Guarantees: immutable; name is valid as declared in {@link #isValidTierName(String)}
  */
 public class Tier {
 
@@ -21,14 +21,17 @@ public class Tier {
      */
     public Tier(String tagName) {
         requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = TierEnum.valueOf(tagName.toUpperCase());;
+        if (tagName.isEmpty()) {
+            tagName = TierEnum.NA.toString();
+        }
+        checkArgument(isValidTierName(tagName), MESSAGE_CONSTRAINTS);
+        this.tagName = TierEnum.valueOf(tagName.toUpperCase());
     }
 
     /**
      * Returns true if a given string is a valid tag name.
      */
-    public static boolean isValidTagName(String test) {
+    public static boolean isValidTierName(String test) {
         for (TierEnum c : TierEnum.values()) {
             if (c.name().equals(test.toUpperCase())) {
                 return true;
