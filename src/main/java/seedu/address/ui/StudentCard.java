@@ -4,6 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import seedu.address.model.person.Student;
 
+/**
+ * An UI component that displays information of a {@code Student}.
+ */
 public class StudentCard extends PersonCard {
 
     @FXML
@@ -15,9 +18,6 @@ public class StudentCard extends PersonCard {
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
-     *
-     * @param person
-     * @param displayedIndex
      */
     public StudentCard(Student person, int displayedIndex) {
         super(person, displayedIndex);

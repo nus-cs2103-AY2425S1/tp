@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -14,6 +17,9 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Jackson-friendly version of {@link Student}.
+ */
 public class JsonAdaptedStudent extends JsonAdaptedPerson {
 
     public static final String MISSING_PARENT_FIELD_MESSAGE_FORMAT = "Person's parent %s field is missing!";
@@ -22,14 +28,23 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     private final String parentPhone;
     private final String parentEmail;
 
-    public JsonAdaptedStudent(String name, String phone, String email, String address, String parentName,
-            String parentPhone, String parentEmail, List<JsonAdaptedTag> tags) {
+    /**
+     * Constructs a {@code JsonAdaptedStudent} with the given details.
+     */
+    @JsonCreator
+    public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+            @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
+            @JsonProperty("parentEmail") String parentEmail, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         super(name, phone, email, address, tags);
         this.parentName = parentName;
         this.parentEmail = parentEmail;
         this.parentPhone = parentPhone;
     }
 
+    /**
+     * Constructs a {@code JsonAdaptedStudent} with the given {@code Student}.
+     */
     public JsonAdaptedStudent(Student source) {
         super(source);
         parentName = source.getParentName() == null ? null : source.getParentName().fullName;
@@ -38,7 +53,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     }
 
     @Override
-    public Person toModelType() throws IllegalValueException {
+    public Student toModelType() throws IllegalValueException {
 
         String name = this.getName();
         String phone = this.getPhone();

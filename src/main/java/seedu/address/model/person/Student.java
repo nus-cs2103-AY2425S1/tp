@@ -6,12 +6,18 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Represents a student in the address book.
+ */
 public class Student extends Person {
 
     private final Name parentName;
     private final Phone parentPhone;
     private final Email parentEmail;
 
+    /**
+     * Constructs a {@code Student} with the given details.
+     */
     public Student(Name name, Phone phone, Email email, Address address, Name parentName, Phone parentPhone,
             Email parentEmail, Set<Tag> tags) {
         super(name, phone, email, address, tags);
@@ -20,6 +26,9 @@ public class Student extends Person {
         this.parentEmail = parentEmail;
     }
 
+    /**
+     * Constructs a {@code Student} with the given {@code Person} as a base.
+     */
     public Student(Person person, Name parentName, Phone parentPhone, Email parentEmail) {
         super(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), person.getTags());
         this.parentName = parentName;
@@ -51,8 +60,8 @@ public class Student extends Person {
         }
 
         Student otherStudent = (Student) other;
-        return super.equals(otherStudent) && parentName.equals(otherStudent.parentName) &&
-                parentPhone.equals(otherStudent.parentPhone) && parentEmail.equals(otherStudent.parentEmail);
+        return super.equals(otherStudent) && parentName.equals(otherStudent.parentName)
+                &&parentPhone.equals(otherStudent.parentPhone) && parentEmail.equals(otherStudent.parentEmail);
     }
 
     @Override

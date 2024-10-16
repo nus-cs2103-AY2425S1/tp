@@ -58,9 +58,12 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
+    /**
+     * Factory method for constructing a {@code PersonCard}
+     */
     public static PersonCard of(Person person, int displayedIndex) {
-        if (person instanceof Student) {
-            return new StudentCard((Student) person, displayedIndex);
+        if (person instanceof Student student && student.getParentName() != null) {
+            return new StudentCard(student, displayedIndex);
         }
         return new PersonCard(person, displayedIndex);
     }
