@@ -63,7 +63,7 @@ public class AddMeetUpCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddPersonCommand)) {
+        if (!(other instanceof AddMeetUpCommand)) {
             return false;
         }
 
