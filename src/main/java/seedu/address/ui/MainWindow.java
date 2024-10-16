@@ -37,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private EventListPanel eventListPanel;
+    private EventDetailPanel eventDetailPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private PersonDetailView personDetailView;
@@ -73,6 +74,8 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+    @FXML
+    private VBox eventDetailViewPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -137,8 +140,10 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this::handleSelectedPerson);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        eventDetailPanel = new EventDetailPanel();
+        eventListPanel = new EventListPanel(logic.getFilteredEventList(), eventDetailPanel);
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+        eventDetailViewPlaceholder.getChildren().add(eventDetailPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -153,6 +158,13 @@ public class MainWindow extends UiPart<Stage> {
         if (!logic.getFilteredPersonList().isEmpty()) {
             personDetailView = new PersonDetailView(logic.getFilteredPersonList().get(0));
             personDetailViewPlaceholder.getChildren().setAll(personDetailView.getRoot());
+        }
+
+        // Displays the first event in the list if exists onto the EventDetailView
+        if (!logic.getFilteredEventList().isEmpty()) {
+            eventDetailPanel.setEvent(logic.getFilteredEventList().get(0));
+        } else {
+            eventDetailViewPlaceholder.getChildren().clear(); // Display an empty screen if no events
         }
     }
 
