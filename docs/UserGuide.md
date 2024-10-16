@@ -20,6 +20,7 @@ title: AcademyAssist User Guide
    * [Viewing help](#viewing-help--help)
    * [Exiting the program](#exiting-the-program--exit)
 
+4. [Data Management](#data-management-in-academyassist)
 4. [FAQ](#faq)
 
 5. [Command summary](#command-summary)
@@ -88,24 +89,24 @@ lines as space characters surrounding line-breaks may be omitted when copied ove
 
 Adds a new student to the tuition center management system.
 
-Format: `add n/NAME ic/IC_NUMBER e/EMAIL p/PHONE_NUMBER a/ADDRESS c/CLASS y/ACADEMIC_YEAR`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER s/SUBJECT [t/TAG]`
 
 * `NAME` should be 1-100 characters long and contain only alphabets and spaces.
-* `IC_NUMBER` should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
 * `PHONE_NUMBER` should be an 8-digit number.
 * `EMAIL` is optional and should follow the format username@domain.
 * `ADDRESS` is optional.
-* `CLASS` should be a combination of Subject and Number (e.g., Science1).
-* `ACADEMIC_YEAR` should be in the format Standard[Number] (e.g., Standard1).
+* `IC_NUMBER` should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
+* `SUBJECT` should follow 
+* `TAG` is optional. 
 
 Examples:
-* `add n/John Doe ic/T384859A e/johndoe@gmail.com p/81003999 a/9 Smith Street c/Science1 y/Standard1`
+* `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street ic/T384859A s/Science t/student`
 
-### Deleting a student : `del`
+### Deleting a student : `delete`
 
 Removes a student from the tuition center management system.
 
-Format: `del STUDENT_ID`
+Format: `delete STUDENT_ID`
 
 * `STUDENT_ID` should be a 5-digit number.
 
@@ -188,24 +189,58 @@ Exits the program.
 
 Format: `exit`
 
-### Saving the data
+---
 
-AcademyAssist data are saved in the hard disk automatically after any command that changes the data. There is no need
-to save manually.
+## Data Management in AcademyAssist
 
-### Editing the data file
+Welcome to the Data Management section of AcademyAssist! Here, we'll explain how your important information
+is stored and managed in a simple, easy-to-understand way.
 
-AcademyAssist data are saved automatically as a JSON file `[JAR file location]/data/academyassist.json`. Advanced users
-are welcome to update data directly by editing that data file.
+### How Your Data is Saved
 
-<div markdown="span" class="alert alert-warning">
-:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AcademyAssist will discard all data and start with an empty 
-data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AcademyAssist to behave in unexpected ways (e.g., if a value entered is 
-outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it 
-correctly.
-</div>
+Don't worry about constantly saving your work - AcademyAssist has got you covered! Here's what you need to know:
+
+1. **Automatic Saving**: Every time you make a change, like adding a new student or updating information,
+AcademyAssist saves it right away. You don't have to do anything!
+
+2. **Where Your Data Lives**: All your information is safely stored on your computer in a special file.
+It's like a digital filing cabinet just for AcademyAssist.
+
+3. **Easy to Understand**: We use a format called JSON to store your data. While you don't need
+to know the details, it's designed to be easy for both computers and humans to read if needed.
+
+### Keeping Your Data Safe
+
+Your information is important, so here are some tips to keep it secure:
+
+1. **Make Backups**: It's always a good idea to have an extra copy of your data. Once a week, 
+why not copy your AcademyAssist file to a USB drive or cloud storage?
+
+2. **Be Careful with Editing**: While it's possible to open and edit the data file directly, we don't recommend 
+it unless you're very comfortable with computers. It's safer to make changes through the AcademyAssist program.
+
+
+### What If Something Goes Wrong?
+
+Don't panic! AcademyAssist is designed to handle most issues smoothly. But if you do run into problems:
+
+1. **Check for Messages**: If there's an issue loading your data, AcademyAssist will show a helpful
+message explaining what's wrong.
+
+2. **Use Your Backup**: This is where your backup copy comes in handy. You can replace the problematic
+file with your backup to get back on track.
+
+## Moving to a New Computer?
+
+Taking AcademyAssist with you is easy:
+
+1. Install AcademyAssist on your new computer.
+2. Find your data file on the old computer (we'll show you where in the program).
+3. Copy this file to the same location on your new computer.
+4. Start AcademyAssist, and all your information will be there!
+
+Remember, AcademyAssist is here to make managing student information easy and stress-free. If you ever have questions about your data, just ask - we're always happy to help!
+
 
 --------------------------------------------------------------------------------------------------------------------
 
