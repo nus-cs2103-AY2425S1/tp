@@ -7,9 +7,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import seedu.address.model.person.Person?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" 
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
       spacing="10" style="-fx-padding: 10; -fx-background-color: #B5D4F5; -fx-border-color: #ccc;">
-    
     <Label fx:id="nameLabel" text="Name:" style="-fx-font-weight: bold; -fx-font-size: 14px;" />
     <Label fx:id="categoryLabel" text="Category:" style="-fx-font-size: 14px;" />
     <Label fx:id="phoneLabel" text="Phone:" style="-fx-font-size: 14px;" />
