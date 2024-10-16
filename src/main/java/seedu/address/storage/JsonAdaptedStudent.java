@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,90 +12,54 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Student}.
  */
-class JsonAdaptedPerson {
+public class JsonAdaptedStudent extends JsonAdaptedPerson {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_PARENT_FIELD_MESSAGE_FORMAT = "Person's parent %s field is missing!";
 
-    private final String name;
-    private final String phone;
-    private final String email;
-    private final String address;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String parentName;
+    private final String parentPhone;
+    private final String parentEmail;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedStudent} with the given details.
      */
-    public JsonAdaptedPerson(String name, String phone, String email, String address, List<JsonAdaptedTag> tags) {
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
-    }
-
-    /**
-     * Converts a given {@code Person} into this class for Jackson use.
-     */
-    public JsonAdaptedPerson(Person source) {
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
-        tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
-    }
-
     @JsonCreator
-    public static JsonAdaptedPerson of(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
             @JsonProperty("parentEmail") String parentEmail, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
-        //TODO: Add check to check if contact is a student
-        return new JsonAdaptedStudent(name, phone, email, address, parentName, parentPhone, parentEmail, tags);
-    }
-
-    public static JsonAdaptedPerson of(Person source) {
-        if (source instanceof Student) {
-            return new JsonAdaptedStudent((Student) source);
-        }
-        return new JsonAdaptedPerson(source);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public List<JsonAdaptedTag> getTags() {
-        return tags;
+        super(name, phone, email, address, tags);
+        this.parentName = parentName;
+        this.parentEmail = parentEmail;
+        this.parentPhone = parentPhone;
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
-     *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * Constructs a {@code JsonAdaptedStudent} with the given {@code Student}.
      */
-    public Person toModelType() throws IllegalValueException {
+    public JsonAdaptedStudent(Student source) {
+        super(source);
+        parentName = source.getParentName() == null ? null : source.getParentName().fullName;
+        parentPhone = source.getParentPhone() == null ? null : source.getParentPhone().value;
+        parentEmail = source.getParentEmail() == null ? null : source.getParentEmail().value;
+    }
+
+    @Override
+    public Student toModelType() throws IllegalValueException {
+
+        String name = this.getName();
+        String phone = this.getPhone();
+        String email = this.getEmail();
+        String address = this.getAddress();
+        List<JsonAdaptedTag> tags = this.getTags();
+
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
@@ -134,8 +97,32 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
-    }
+        Name modelParentName = null;
+        if (parentName != null) {
+            if (!Name.isValidName(parentName)) {
+                throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+            }
+            modelParentName = new Name(parentName);
+        }
 
+        Phone modelParentPhone = null;
+        if (parentPhone != null) {
+            if (!Phone.isValidPhone(parentPhone)) {
+                throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+            }
+            modelParentPhone = new Phone(parentPhone);
+        }
+
+        Email modelParentEmail = null;
+        if (parentEmail != null) {
+            if (!Email.isValidEmail(parentEmail)) {
+                throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+            }
+            modelParentEmail = new Email(parentEmail);
+        }
+
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelParentName, modelParentPhone,
+                modelParentEmail, modelTags);
+    }
 }
