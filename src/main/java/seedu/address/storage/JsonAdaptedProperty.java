@@ -1,12 +1,20 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Apartment;
 import seedu.address.model.person.Bto;
 import seedu.address.model.person.Condo;
 import seedu.address.model.person.Hdb;
+import seedu.address.model.person.HousingType;
 import seedu.address.model.person.OtherProperty;
 import seedu.address.model.person.PostalCode;
 import seedu.address.model.person.Price;
@@ -14,65 +22,108 @@ import seedu.address.model.person.Property;
 import seedu.address.model.person.UnitNumber;
 import seedu.address.model.tag.Tag;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 /**
  * Jackson-friendly version of {@link Property}.
  */
 class JsonAdaptedProperty {
 
-    private final String propertyString;
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Property's %s field is missing!";
+
+    private final String housingType;
+    private final String postalCode;
+    private final String unitNumber;
+    private final String price;
+    private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedProperty} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedProperty(String propertyString) {
-        this.propertyString = propertyString;
+    public JsonAdaptedProperty(@JsonProperty("housingType") String housingType,
+                               @JsonProperty("postalCode") String postalCode,
+                               @JsonProperty("unitNumber") String unitNumber,
+                               @JsonProperty("price") String price,
+                               @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+        this.housingType = housingType;
+        this.postalCode = postalCode;
+        this.unitNumber = unitNumber;
+        this.price = price;
+        if (tags != null) {
+            this.tags.addAll(tags);
+        }
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code Property} into this class for Jackson use.
      */
     public JsonAdaptedProperty(Property source) {
-        propertyString =
-                source.toString() + " Price: " + source.getPrice() + " Tags: " + source.getTags().toString()
-                        + " HousingType: " + source.getClass().getSimpleName();
-    }
-
-    @JsonValue
-    public String getPropertyString() {
-        return propertyString;
+        housingType = source.getClass().getSimpleName();
+        postalCode = source.getPostalCode().toString();
+        unitNumber = source.getUnitNumber().toString();
+        price = source.getPrice().toString();
+        tags.addAll(source.getTags().stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Property} object.
+     * Converts this Jackson-friendly adapted property object into the model's {@code Property} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted property.
      */
     public Property toModelType() throws IllegalValueException {
-        String housingType = propertyString.split(" HousingType: ")[1];
-        PostalCode postalcode = new PostalCode(propertyString.split(" Price: ")[0].split(" ")[0]);
-        UnitNumber unitnumber = new UnitNumber(propertyString.split(" Price: ")[0].split(" ")[1]);
-        Price price = new Price(propertyString.split(" Price: ")[1].split(" Tags: ")[0]);
-        Set<Tag> tag = new HashSet<>();
+        final List<Tag> propertyTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tags) {
+            propertyTags.add(tag.toModelType());
+        }
+
+        if (housingType == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    HousingType.class.getSimpleName()));
+        }
+
+        if (postalCode == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    PostalCode.class.getSimpleName()));
+        }
+        if (!PostalCode.isValidPostalCode(postalCode)) {
+            throw new IllegalValueException(PostalCode.MESSAGE_CONSTRAINTS);
+        }
+        final PostalCode modelPostalCode = new PostalCode(postalCode);
+
+        if (unitNumber == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    UnitNumber.class.getSimpleName()));
+        }
+        if (!UnitNumber.isValidUnitNumber(unitNumber)) {
+            throw new IllegalValueException(UnitNumber.MESSAGE_CONSTRAINTS);
+        }
+        final UnitNumber modelUnitNUmber = new UnitNumber(unitNumber);
+
+        if (price == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Price.class.getSimpleName()));
+        }
+        if (!Price.isValidPrice(price)) {
+            throw new IllegalValueException(Price.MESSAGE_CONSTRAINTS);
+        }
+        final Price modelPrice = new Price(price);
+
+        final Set<Tag> modelTags = new HashSet<>(propertyTags);
+
         switch (housingType.toUpperCase()) {
         case "HDB":
-            return new Hdb(postalcode, unitnumber, price, tag);
-        case "CONDO":
-            return new Condo(postalcode, unitnumber, price, tag);
-        case "APARTMENT":
-            return new Apartment(postalcode, unitnumber, price, tag);
+            return new Hdb(modelPostalCode, modelUnitNUmber, modelPrice, modelTags);
         case "BTO":
-            return new Bto(postalcode, unitnumber, price, tag);
+            return new Bto(modelPostalCode, modelUnitNUmber, modelPrice, modelTags);
+        case "CONDO":
+            return new Condo(modelPostalCode, modelUnitNUmber, modelPrice, modelTags);
+        case "APARTMENT":
+            return new Apartment(modelPostalCode, modelUnitNUmber, modelPrice, modelTags);
         case "OTHERPROPERTY":
-            return new OtherProperty(postalcode, unitnumber, price, tag);
+            return new OtherProperty(modelPostalCode, modelUnitNUmber, modelPrice, modelTags);
         default:
-            throw new IllegalValueException(Property.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException("Invalid housing type");
         }
     }
-
 }

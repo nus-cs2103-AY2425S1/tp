@@ -131,9 +131,9 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        final Set<Property> modelSellProperties = new HashSet<>(personSellProperties);
+        final List<Property> modelSellProperties = new ArrayList<>(personSellProperties);
 
-        final Set<Property> modelBuyProperties = new HashSet<>(personBuyProperties);
+        final List<Property> modelBuyProperties = new ArrayList<>(personBuyProperties);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
                 modelSellProperties, modelBuyProperties);

@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -27,8 +28,8 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     // Property details
-    private Set<Property> sellingProperties = new HashSet<>();
-    private Set<Property> buyingProperties = new HashSet<>();
+    private List<Property> sellingProperties = new ArrayList<>();
+    private List<Property> buyingProperties = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -45,8 +46,8 @@ public class Person {
     /**
      * Constructor for when there are properties to be added.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Property> sellingProperties,
-                  Set<Property> buyingProperties) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, List<Property> sellingProperties,
+                  List<Property> buyingProperties) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -81,11 +82,11 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public Set<Property> getListOfSellingProperties() {
+    public List<Property> getListOfSellingProperties() {
         return sellingProperties;
     }
 
-    public Set<Property> getListOfBuyingProperties() {
+    public List<Property> getListOfBuyingProperties() {
         return buyingProperties;
     }
 
