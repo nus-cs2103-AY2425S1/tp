@@ -2,10 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -23,18 +20,18 @@ public class Person {
 
     // Data fields
     private final JobCode jobCode;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Tag tag;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, JobCode jobCode, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, jobCode, tags);
+    public Person(Name name, Phone phone, Email email, JobCode jobCode, Tag tag) {
+        requireAllNonNull(name, phone, email, jobCode, tag);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.jobCode = jobCode;
-        this.tags.addAll(tags);
+        this.tag = tag;
     }
 
     public Name getName() {
@@ -53,12 +50,8 @@ public class Person {
         return jobCode;
     }
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Tag getTag() {
+        return tag;
     }
 
     /**
@@ -100,7 +93,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, jobCode, tags);
+        return Objects.hash(name, phone, email, jobCode, tag);
     }
 
     @Override
@@ -110,7 +103,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("jobCode", jobCode)
-                .add("tags", tags)
+                .add("tag", tag)
                 .toString();
     }
 
