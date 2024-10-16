@@ -2,11 +2,14 @@ package seedu.address.model.util;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -62,6 +65,17 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a map containing the sets of public addresses given.
+     */
+    public static Map<Network, Set<PublicAddress>> getPublicAddressMap(PublicAddress... publicAddresses) {
+        return Arrays.stream(publicAddresses)
+                .collect(Collectors.groupingBy(
+                        PublicAddress::getNetwork,
+                        Collectors.toSet()
+                ));
     }
 
 }

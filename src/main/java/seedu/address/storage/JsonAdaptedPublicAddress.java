@@ -35,7 +35,6 @@ class JsonAdaptedPublicAddress {
         tag = source.tag;
     }
 
-
     /**
      * Converts this Jackson-friendly adapted public address object into the model's {@code PublicAddress} object.
      *
