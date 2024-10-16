@@ -37,6 +37,10 @@ public class FindCommandParser implements Parser<FindCommand> {
                 new RoleContainsKeywordsPredicate(roleKeywords));
     }
 
+    /**
+     * Returns true if any of the prefixes contains non-empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
     public static boolean areSomePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }

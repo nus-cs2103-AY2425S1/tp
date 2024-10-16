@@ -6,7 +6,6 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -24,25 +23,12 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final Telegram telegram;
-    // private List<Role> roles;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
-     */
-    /*
-    public Person(Name name, Phone phone, Email email, Telegram telegram, List<Role> roles, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, telegram, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.telegram = telegram;
-        this.roles = roles;
-        this.tags.addAll(tags);
-    }
-
      */
     public Person(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, telegram, tags);
@@ -68,8 +54,6 @@ public class Person {
     public Telegram getTelegram() {
         return telegram;
     }
-
-    // public List<Role> getRoles() {return roles;}
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

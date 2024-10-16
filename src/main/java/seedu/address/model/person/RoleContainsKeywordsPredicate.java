@@ -7,6 +7,9 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Tests that a {@code Person}'s {@code Role} matches any of the keywords given.
+ */
 public class RoleContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
@@ -17,7 +20,6 @@ public class RoleContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-               // .anyMatch(keyword -> person.getRoles().stream().anyMatch(role -> role.equals(new Role(keyword))));
                 .anyMatch(keyword -> person.getTags().stream().anyMatch(x -> x.equals(new Tag(keyword))));
     }
 
