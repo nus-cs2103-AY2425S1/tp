@@ -6,6 +6,7 @@ title: AcademyAssist User Guide
 # AcademyAssist User Guide
 
 ## Table of Contents
+
 1. [Introduction](#introduction)
 
 2. [Quick Start](#quick-start)
@@ -102,7 +103,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER s/SUBJECT [t/TA
 * `TAG` is optional. 
 
 Examples:
-* `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street ic/T384859A s/Science t/student`
+* `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T3848559A s/Science t/student`
+
+![Add Success Message](/images/add.png)
 
 ### Deleting a student : `delete`
 
@@ -114,6 +117,8 @@ Format: `delete IC_NUMBER`
 
 Examples:
 * `delete T0211234D`
+
+![Delete Success Message](/images/delete.png)
 
 ### Editing a student : `edit`
 
@@ -129,11 +134,15 @@ Examples:
 * `edit S1234567A a/New_Address`
 * `edit T1234567D p/91234567 a/New_Address`
 
+![Edit Success Message](/images/edit.png)
+
 ### Viewing all students : `view`
 
 Shows a list of all students in the system.
 
 Format: `view`
+
+![View Success Message](/images/view.png)
 
 ### Finding a student : `find`
 
@@ -149,17 +158,21 @@ Examples:
 * `find John` returns `John` and `John Doe`
 * `find John Jane` returns any student having names `John` or `Jane`
 
+![Find Success Message](/images/find.png)
+
 ### Adding a class to a student : `addc`
 
 Adds a class to an existing student's record.
 
-Format: `addc IC_NUMBER SUBJECT`
+Format: `addc i/IC_NUMBER s/SUBJECT`
 
 * `IC_NUMBER` is compulsory and should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
 * `SUBJECT` is compulsory, and can add multiple subjects (e.g. Science).
 
 Examples:
-* `addc S1234567A Science`
+* `addc i/S1234567A s/Science`
+
+![addc Success Message](/images/addc.png)
 
 ### Sorting students : `sort`
 
@@ -173,17 +186,23 @@ Examples:
 * `sort s/name`
 * `sort s/class`
 
+![Sort Success Message](/images/sort.png)
+
 ### Clearing all entries : `clear`
 
 Clears all student entries from the system.
 
 Format: `clear`
 
+![Clear Success Message](/images/clear.png)
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
 Format: `help`
+
+![Help Success Message](/images/help.png)
 
 ### Exiting the program : `exit`
 
@@ -248,15 +267,15 @@ the data of your previous AcademyAssist folder.
 
 ## Command summary
 
-| Action | Format, Examples                                                                                                                                                    |
-|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action | Format, Examples                                                                                                                                                     |
+|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER s/SUBJECT` <br> e.g., `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T384859A s/Science` |
-| **Delete** | `delete IC_NUMBER`<br> e.g., `delete S1234567A`                                                                                                                     |
-| **Edit** | `edit IC_NUMBER FIELD/NEW_VALUE`<br> e.g.,`edit S1234567A a/New_Address`                                                                                            |
-| **View** | `view`                                                                                                                                                              |
-| **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John Jane`                                                                                                           |
-| **Add Class** | `addc IC_NUMBER SUBJECT`<br> e.g., `addc S1234567A Science`                                                                                                         |
-| **Sort** | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                              |
-| **Clear** | `clear`                                                                                                                                                             |
-| **Help** | `help`                                                                                                                                                              |
-| **Exit** | `exit`                                                                                                                                                              |
+| **Delete** | `delete IC_NUMBER`<br> e.g., `delete S1234567A`                                                                                                                      |
+| **Edit** | `edit IC_NUMBER FIELD/NEW_VALUE`<br> e.g.,`edit S1234567A a/New_Address`                                                                                             |
+| **View** | `view`                                                                                                                                                               |
+| **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John Jane`                                                                                                            |
+| **Add Class** | `addc i/IC_NUMBER s/SUBJECT`<br> e.g., `addc S1234567A Science`                                                                                                      |
+| **Sort** | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                               |
+| **Clear** | `clear`                                                                                                                                                              |
+| **Help** | `help`                                                                                                                                                               |
+| **Exit** | `exit`                                                                                                                                                               |
