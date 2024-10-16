@@ -61,7 +61,7 @@ import seedu.ddd.testutil.VendorBuilder;
 
 public class AddCommandParserTest {
 
-    private AddContactCommandParser parser = new AddContactCommandParser();
+    private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_clientAllFieldsPresent_success() {
