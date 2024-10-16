@@ -29,9 +29,13 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete John Doe` : Deletes the contact named `John Doe` in the current list.
    
    * `schedule John Doe d/2024-10-14 1200 note/First appointment`: Schedules an appointment for John Doe on October 14, 2024, at 12pm with the given note.
+
+   * `appointment-delete John Doe` : Deletes a scheduled appointment for John Doe.
+
+   * `appoointment-list` : Lists all scheduled appointments.
 
    * `reminder John Doe r/1 hour` : Sets a reminder for John Doe 1 hour before his scheduled appointment.
 
@@ -177,15 +181,13 @@ Examples:
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `delete NAME`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person with the specified `NAME`.
+* The name must be the name of an existing person.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete John Doe` deletes the person named `John Doe` in the address book.
 
 ### Clearing all entries : `clear`
 
@@ -238,8 +240,9 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete NAME`<br> e.g., `delete John Doe`
 **Schedule** | `schedule NAME d/DATE_AND_TIME [note/NOTES]`
+**Delete Appointment** | `appointment-delete NAME`<br> e.g., `appointment-delete John Doe`
 **Reminder** | `reminder NAME r/REMINDER_TIME`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find [KEYWORD] [MORE_KEYWORDS] / [p/PHONE]`<br> e.g., `find James Jake` `find 8357 2348`
