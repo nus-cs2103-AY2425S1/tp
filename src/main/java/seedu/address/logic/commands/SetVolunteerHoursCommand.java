@@ -5,6 +5,9 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FOR_PERSON_TY
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -18,9 +21,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.volunteer.Volunteer;
 import seedu.address.model.tag.Tag;
-
-import java.util.List;
-import java.util.Set;
 
 /**
  * Sets the hours of an existing volunteer in the address book
