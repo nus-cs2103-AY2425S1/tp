@@ -135,6 +135,6 @@ public class ParserUtil {
         if (!Priority.isValidPriority(trimmedPriority)) {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
         }
-        return new Priority(priority);
+        return new Priority(trimmedPriority);
     }
 }
