@@ -67,7 +67,7 @@ public class SearchCommandTest {
         SearchCommand command = new SearchCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getPersonList());
     }
 
     @Test
@@ -77,7 +77,7 @@ public class SearchCommandTest {
         SearchCommand command = new SearchCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getPersonList());
     }
 
     @Test
@@ -87,7 +87,7 @@ public class SearchCommandTest {
         SearchCommand command = new SearchCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getPersonList());
     }
 
     @Test
@@ -97,7 +97,7 @@ public class SearchCommandTest {
         SearchCommand command = new SearchCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.singletonList(BENSON), model.getFilteredPersonList());
+        assertEquals(Collections.singletonList(BENSON), model.getPersonList());
     }
 
     @Test
@@ -107,7 +107,7 @@ public class SearchCommandTest {
         SearchCommand command = new SearchCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getPersonList());
     }
 
     @Test
@@ -119,7 +119,7 @@ public class SearchCommandTest {
         SearchCommand command = new SearchCommand(combinedPredicate);
         expectedModel.updateFilteredPersonList(combinedPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.singletonList(ALICE), model.getFilteredPersonList());
+        assertEquals(Collections.singletonList(ALICE), model.getPersonList());
     }
 
     @Test
@@ -131,7 +131,7 @@ public class SearchCommandTest {
         SearchCommand command = new SearchCommand(combinedPredicate);
         expectedModel.updateFilteredPersonList(combinedPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getPersonList());
     }
 
     @Test
