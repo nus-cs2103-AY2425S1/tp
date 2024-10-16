@@ -18,7 +18,7 @@ public class HelpWindow extends UiPart<Stage> {
     // TODO: Remove hardcoding of message, find a way to pass in the help
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-t10-3.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE =
-            "Add a person: add n/NAME i/STUDENT_ID p/PHONE_NUMBER e/EMAIL [t/TAG]\n"
+            "Add a person: add n/NAME i/STUDENT_ID p/PHONE e/EMAIL [t/TAG]\n"
             + "Listing all persons: list\n"
             + "Editing a person: edit INDEX [n/NAME] [i/STUDENT_ID] [p/PHONE] [e/EMAIL] [t/TAG]\n"
             + "Marking a person as attended: mark INDEX tut/TUTORIAL\n"
