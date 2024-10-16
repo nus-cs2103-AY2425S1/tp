@@ -45,6 +45,8 @@ public class Messages {
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail());
+
+        // Only display Address: if present
         person.getAddress().ifPresent(address -> builder.append("; Address: ")
                 .append(person.getAddress().map(Object::toString).orElse("")));
 
