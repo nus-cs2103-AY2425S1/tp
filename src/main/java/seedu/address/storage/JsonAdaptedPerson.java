@@ -106,7 +106,7 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
         if (!LastSeen.isValidDate(lastSeen)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(LastSeen.MESSAGE_CONSTRAINTS);
         }
         final LastSeen modelLastSeen = new LastSeen(lastSeen);
 
