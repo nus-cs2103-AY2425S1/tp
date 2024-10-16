@@ -84,6 +84,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public Path getAppointmentBookFilePath() {
+        return model.getAppointmentBookFilePath();
+    }
+
+    @Override
     public GuiSettings getGuiSettings() {
         return model.getGuiSettings();
     }

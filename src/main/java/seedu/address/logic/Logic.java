@@ -43,6 +43,11 @@ public interface Logic {
     Path getAddressBookFilePath();
 
     /**
+     * Returns the user prefs' address book file path.
+     */
+    Path getAppointmentBookFilePath();
+    
+    /**
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();
