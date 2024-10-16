@@ -50,7 +50,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateApplications_throwsDuplicateApplicationsException() {
         // Two persons with the same identity fields
-        InternshipApplication editedApple = new InternshipApplicationBuilder(APPLE).withRole(VALID_ROLE_BOFA).build();
+        InternshipApplication editedApple = new InternshipApplicationBuilder(APPLE).build();
         List<InternshipApplication> newApplications = Arrays.asList(APPLE, editedApple);
         AddressBookStub newData = new AddressBookStub(newApplications);
 

@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.COMPANY_EMAIL_DESC_AP
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_NAME_DESC_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_APPLE;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalInternshipApplications.APPLE;
 import static seedu.address.testutil.TypicalInternshipApplications.GOOGLE;
 
 
@@ -168,7 +169,7 @@ public class LogicManagerTest {
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + COMPANY_NAME_DESC_APPLE + ROLE_DESC_APPLE
                 + COMPANY_EMAIL_DESC_APPLE + DATE_DESC_APPLE;
-        InternshipApplication expectedApplication = new InternshipApplicationBuilder(GOOGLE).build();
+        InternshipApplication expectedApplication = new InternshipApplicationBuilder(APPLE).build();
         ModelManager<InternshipApplication> expectedModel = new ModelManager<>();
         expectedModel.addItem(expectedApplication);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
