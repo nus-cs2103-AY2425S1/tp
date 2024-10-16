@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -17,6 +18,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.beans.Observable;
+import javafx.beans.property.BooleanProperty;
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -135,7 +138,7 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage) {
+                                      String expectedMessage) {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getPropertyBook(),
                 model.getClientBook());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
@@ -196,5 +199,33 @@ public class LogicManagerTest {
         ModelManager expectedModel = new ModelManager();
         expectedModel.addClient(expectedPerson);
         assertCommandFailure(addBuyerCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void getFilteredClientList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredClientList().remove(0));
+    }
+
+    @Test
+    public void getFilteredPropertiesList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPropertyList().remove(0));
+    }
+
+    @Test
+    public void getIsDisplayClientsProperty_returnsBooleanPropertyType() {
+        // Call the method
+        BooleanProperty result = logic.getIsDisplayClientsProperty();
+
+        // Assert that the result is an instance of BooleanProperty
+        assertTrue(result instanceof BooleanProperty, "Expected result to be an instance of BooleanProperty");
+    }
+
+    @Test
+    public void getIsDisplayClientsProperty_isObservable() {
+        // Call the method
+        BooleanProperty result = logic.getIsDisplayClientsProperty();
+
+        // Assert that the result is an instance of Observable
+        assertTrue(result instanceof Observable, "Expected result to be an instance of Observable");
     }
 }

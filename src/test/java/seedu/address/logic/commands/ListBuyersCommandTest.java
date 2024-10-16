@@ -6,20 +6,16 @@ import static seedu.address.testutil.TypicalClients.getTypicalClientBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalProperty.getTypicalPropertyBook;
 
-import java.lang.reflect.Modifier;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
-/**
- * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
- */
-public class ListCommandTest {
 
+public class ListBuyersCommandTest {
     private Model model;
     private Model expectedModel;
 
@@ -32,13 +28,23 @@ public class ListCommandTest {
     }
 
     @Test
-    public void listCommandIsAbstract() {
-        Class<ListCommand> clazz = ListCommand.class;
-        // Check if the class is abstract
-        assertTrue(Modifier.isAbstract(clazz.getModifiers()), "ListCommand should be abstract");
+    public void listBuyersCommandGeneration() {
+        Command command = new ListBuyersCommand();
+
+        // Check if command is an instance of ListBuyersCommand
+        assertTrue(command instanceof ListBuyersCommand,
+                "Command should be an instance of ListBuyersCommand");
     }
+
     @Test
-    public void commandWordEqualsList() {
-        assertEquals("list", ListCommand.COMMAND_WORD);
+    public void testExecuteBuyers() throws CommandException {
+        Command command = new ListBuyersCommand();
+        CommandResult result = command.execute(this.model);
+        assertEquals(result.getFeedbackToUser(), "Listed all buyers");
+    }
+
+    @Test
+    public void keywordEqualsBuyers() {
+        assertEquals("buyers", ListBuyersCommand.KEY_WORD);
     }
 }
