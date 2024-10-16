@@ -140,6 +140,13 @@ public class ModelManager implements Model {
     }
 
     // ============ Undo and Redo Methods ================================================================
+    /**
+     * Commits the current state of the address book to history.
+     */
+    @Override
+    public void saveAddressBook() {
+        versionedAddressBook.save();
+    }
 
     /**
      * Restores the previous state of the address book (undo).
@@ -147,17 +154,9 @@ public class ModelManager implements Model {
     @Override
     public void undoAddressBook() {
         if (canUndoAddressBook()) {
-            versionedAddressBook.undo(); // Restore the previous state
-            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // Refresh the UI
+            versionedAddressBook.undo();
+            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         }
-    }
-
-    /**
-     * Commits the current state of the address book to history.
-     */
-    @Override
-    public void saveAddressBook() {
-        versionedAddressBook.save(); // Save the current state to history
     }
 
     /**
@@ -166,6 +165,19 @@ public class ModelManager implements Model {
     @Override
     public boolean canUndoAddressBook() {
         return versionedAddressBook.canUndo();
+    }
+
+    @Override
+    public void redoAddressBook() {
+        if (canRedoAddressBook()) {
+            versionedAddressBook.redo();
+            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        }
+    }
+
+    @Override
+    public boolean canRedoAddressBook() {
+        return versionedAddressBook.canRedo();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -190,8 +202,6 @@ public class ModelManager implements Model {
         if (other == this) {
             return true;
         }
-
-        // instanceof handles nulls
         if (!(other instanceof ModelManager)) {
             return false;
         }
