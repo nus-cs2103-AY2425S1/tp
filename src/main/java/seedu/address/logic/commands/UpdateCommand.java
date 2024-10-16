@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -15,13 +15,18 @@ import seedu.address.model.event.Event;
  * Updates an Event in the address book.
  */
 public class UpdateCommand extends Command {
-    public static final String COMMAND_WORD = "update -e";
+    public static final String COMMAND_WORD = "update";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates an event in the address book. "
             + "Parameters: "
             + PREFIX_INDEX + "EVENT INDEX "
             + PREFIX_NAME + "NEW EVENT NAME "
-            + PREFIX_DATE + "NEW DATE ";
+            + PREFIX_DATE + "NEW DATE (yyyy-mm-dd) \n"
+            + "Example: "
+            + COMMAND_WORD + " "
+            + PREFIX_INDEX + "3"
+            + PREFIX_NAME + "New Year's Party "
+            + PREFIX_DATE + "2025-01-01";
 
     public static final String MESSAGE_SUCCESS = "event has been updated: %1$s";
 
@@ -43,7 +48,7 @@ public class UpdateCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if ( oldEventIndex >= model.getEventListLength() || oldEventIndex < 0) {
+        if (oldEventIndex >= model.getEventListLength() || oldEventIndex < 0) {
             throw new CommandException(MESSAGE_INDEX_OUT_OF_BOUNDS);
         }
 

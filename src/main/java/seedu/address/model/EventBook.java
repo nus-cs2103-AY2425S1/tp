@@ -88,7 +88,9 @@ public class EventBook implements ReadOnlyEventBook {
     }
 
     @Override
-    public int getEventListLength() { return events.size(); }
+    public int getEventListLength() {
+        return events.size();
+    }
 
     @Override
     public String toString() {

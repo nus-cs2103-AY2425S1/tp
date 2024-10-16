@@ -200,7 +200,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public int getEventListLength() { return eventBook.getEventListLength(); }
+    public int getEventListLength() {
+        return eventBook.getEventListLength();
+    }
 
     @Override
     public void updateFilteredEventList(Predicate<Event> predicate) {

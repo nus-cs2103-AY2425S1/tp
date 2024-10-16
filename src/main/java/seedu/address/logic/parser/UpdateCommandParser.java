@@ -2,8 +2,8 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -41,6 +41,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
 
         String name = argMultimap.getValue(PREFIX_NAME).get().trim();
         LocalDate date = LocalDate.parse(argMultimap.getValue(PREFIX_DATE).get().trim());
+        indexToUpdate -= 1; // subtract 1 because user's event list is not 0-indexed
 
         Event event = new Event(name, date, new HashSet<>());
 
