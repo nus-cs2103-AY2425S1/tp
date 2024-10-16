@@ -220,3 +220,4 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
+**Add Emergency Phone Number**  | `emergencyPhone INDEX [ep/EMERGENCY_PHONE_NUMBER]`<br> e.g., `emergencyPhone 2 ep/91231234`
