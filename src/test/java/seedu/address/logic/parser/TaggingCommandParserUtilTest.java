@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,13 +35,25 @@ public class TaggingCommandParserUtilTest {
     }
 
     @Test
-    public void parseIndexAndTags_invalidIndex_throwsParseException() {
+    public void parseIndexAndTags_invalidIndexType_throwsParseException() {
         String userInput = "a " + PREFIX_TAG + "friend";
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_TAG);
 
-        assertThrows(ParseException.class, () ->
+        ParseException thrown = assertThrows(ParseException.class, () ->
                 TaggingCommandParserUtil.parseIndexAndTags(argMultimap, "dummy usage message")
         );
+        assertEquals(MESSAGE_INVALID_INDEX, thrown.getMessage());
+    }
+
+    @Test
+    public void parseIndexAndTags_outOfRangeIndex_throwsParseException() {
+        String userInput = "-1 " + PREFIX_TAG + "friend";
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_TAG);
+
+        ParseException thrown = assertThrows(ParseException.class, () ->
+                TaggingCommandParserUtil.parseIndexAndTags(argMultimap, "dummy usage message")
+        );
+        assertEquals(MESSAGE_INVALID_INDEX, thrown.getMessage());
     }
 
     @Test
@@ -47,8 +61,23 @@ public class TaggingCommandParserUtilTest {
         String userInput = "1";
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_TAG);
 
-        assertThrows(ParseException.class, () ->
+        ParseException thrown = assertThrows(ParseException.class, () ->
                 TaggingCommandParserUtil.parseIndexAndTags(argMultimap, "dummy usage message")
         );
+        assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                "dummy usage message"), thrown.getMessage());
     }
+
+    @Test
+    public void parseIndexAndTags_invalidTagNames_throwsParseException() {
+        String userInput = "1 " + PREFIX_TAG + "invalidTag_";
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_TAG);
+
+        ParseException thrown = assertThrows(ParseException.class, () ->
+                TaggingCommandParserUtil.parseIndexAndTags(argMultimap, "dummy usage message")
+        );
+
+        assertEquals(TagName.MESSAGE_CONSTRAINTS, thrown.getMessage());
+    }
+
 }
