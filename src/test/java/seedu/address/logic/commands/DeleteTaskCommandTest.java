@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersons.getUniqueTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,29 +24,27 @@ import seedu.address.model.person.task.TaskDeadline;
 import seedu.address.model.person.task.TaskDescription;
 import seedu.address.testutil.PersonBuilder;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for
+ * {@code DeleteTaskCommand}.
+ */
 public class DeleteTaskCommandTest {
-    private Model model = new ModelManager(new AddressBook(), new UserPrefs());
-    private PersonBuilder testPersonBuilder = new PersonBuilder();
-    private Task testFirstTask = new Task(new TaskDescription("First Assignment"), new TaskDeadline("2024-10-16"));
-    private Task testSecondTask = new Task(new TaskDescription("Second Assignment"), new TaskDeadline("2024-10-19"));
+    private Model model = new ModelManager(getUniqueTypicalAddressBook(), new UserPrefs());
+    private Task testTask = new Task(new TaskDescription("First Assignment"), new TaskDeadline("2024-10-16"));
     private Index INDEX_FIRST_TASK = Index.fromOneBased(1);
-    private Index INDEX_SECOND_TASK = Index.fromOneBased(2);
 
     @Test
     public void execute_validArgument_success() {
         //Have a test person with a task
-        Person testPerson = testPersonBuilder.build();
-        model.addPerson(testPerson);
-        testPerson.getTaskList().add(testFirstTask);
-
-        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(testPerson.getName(),INDEX_FIRST_TASK);
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        personToDelete.getTaskList().add(testTask);
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(personToDelete.getName(),INDEX_FIRST_TASK);
 
         String expectedMessage = String.format(DeleteTaskCommand.MESSAGE_DELETE_TASK_SUCCESS,
-                testFirstTask.toString());
+                testTask.toString());
 
         // Test Person without the task for expected model
-        ModelManager expectedModel = new ModelManager(new AddressBook(), new UserPrefs());
-        expectedModel.addPerson(testPersonBuilder.build());
+        ModelManager expectedModel = new ModelManager(getUniqueTypicalAddressBook(), new UserPrefs());;
         // Check that initially model is different
         assertNotEquals(model, expectedModel);
 
@@ -53,13 +53,21 @@ public class DeleteTaskCommandTest {
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
+        Person targetPerson = model.getFilteredPersonList().get(0);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(targetPerson.getName(),outOfBoundIndex);
 
+        assertCommandFailure(deleteTaskCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
 
     @Test
     public void execute_invalidName_throwsCommandException() {
+        Person targetPerson = model.getFilteredPersonList().get(0);
+        targetPerson.getTaskList().add(testTask);
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(new Name("UNKNOWN NAME"),INDEX_FIRST_TASK);
 
+        assertCommandFailure(deleteTaskCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
     }
 
     @Test
@@ -98,8 +106,8 @@ public class DeleteTaskCommandTest {
         Index targetIndex = Index.fromOneBased(1);
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(targetName, targetIndex);
         String expected = DeleteTaskCommand.class.getCanonicalName()
-                + "{targetName=" + targetName + "}"
-                + "{targetIndex=" + targetIndex + "}";
+                + "{targetName=" + targetName + ", "
+                + "targetIndex=" + targetIndex + "}";
         assertEquals(expected, deleteTaskCommand.toString());
     }
 }
