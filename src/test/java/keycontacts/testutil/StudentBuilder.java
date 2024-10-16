@@ -3,10 +3,10 @@ package keycontacts.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import keycontacts.model.lesson.CancelledLesson;
 import keycontacts.model.lesson.Day;
 import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.lesson.Time;
-import keycontacts.model.lesson.CancelledLesson;
 import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.GradeLevel;

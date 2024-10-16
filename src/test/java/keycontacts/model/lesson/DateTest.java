@@ -1,13 +1,12 @@
 package keycontacts.model.lesson;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 public class DateTest {
-    Date date = new Date("06-07-2002");
+    private Date date = new Date("06-07-2002");
 
     @Test
     public void equals() {

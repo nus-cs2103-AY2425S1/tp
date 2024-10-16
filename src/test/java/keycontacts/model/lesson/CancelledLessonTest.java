@@ -11,8 +11,8 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 public class CancelledLessonTest {
-    Date date = new Date("06-07-2002");
-    CancelledLesson cancelledLesson = new CancelledLesson(date);
+    private Date date = new Date("06-07-2002");
+    private CancelledLesson cancelledLesson = new CancelledLesson(date);
 
     @Test
     public void getLessonDateTest() {
