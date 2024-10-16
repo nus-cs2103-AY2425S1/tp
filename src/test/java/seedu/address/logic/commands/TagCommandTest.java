@@ -97,7 +97,8 @@ public class TagCommandTest {
 
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, nonExistentTag);
 
-        assertCommandFailure(tagCommand, model, TagCommand.MESSAGE_TAG_NOT_CREATED);
+        assertCommandFailure(tagCommand, model, nonExistentTag + " "
+                + TagCommand.MESSAGE_TAG_NOT_CREATED);
     }
 
     @Test
