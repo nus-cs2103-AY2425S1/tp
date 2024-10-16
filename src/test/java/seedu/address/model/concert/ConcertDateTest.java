@@ -2,6 +2,7 @@ package seedu.address.model.concert;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.concert.ConcertDate.INPUT_DATE_FORMATTER;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -22,19 +23,24 @@ public class ConcertDateTest {
     @Test
     public void isValidDate() {
         // null date
-        assertThrows(NullPointerException.class, () -> ConcertDate.isValidDate(null));
+        assertThrows(NullPointerException.class, () -> ConcertDate.isValidDate(null,
+                INPUT_DATE_FORMATTER));
 
         // invalid date
-        assertFalse(ConcertDate.isValidDate("")); // empty string
-        assertFalse(ConcertDate.isValidDate(" ")); // spaces only
-        assertFalse(ConcertDate.isValidDate("^")); // only non-alphanumeric characters
-        assertFalse(ConcertDate.isValidDate("peter*")); // contains non-alphanumeric characters
-        assertFalse(ConcertDate.isValidDate("2024-10-10 2200 foo")); // contains extra word after date
-        assertFalse(ConcertDate.isValidDate("2024-foo-10-10 2200")); // contains extra word in the middle of date
+        assertFalse(ConcertDate.isValidDate("", INPUT_DATE_FORMATTER)); // empty string
+        assertFalse(ConcertDate.isValidDate(" ", INPUT_DATE_FORMATTER)); // spaces only
+        // only non-alphanumeric characters
+        assertFalse(ConcertDate.isValidDate("^", INPUT_DATE_FORMATTER));
+        // contains non-alphanumeric characters
+        assertFalse(ConcertDate.isValidDate("peter*", INPUT_DATE_FORMATTER));
+        // contains extra word after date
+        assertFalse(ConcertDate.isValidDate("2024-10-10 2200 foo", INPUT_DATE_FORMATTER));
+        // contains extra word in the middle of date
+        assertFalse(ConcertDate.isValidDate("2024-foo-10-10 2200", INPUT_DATE_FORMATTER));
 
         // valid date
-        assertTrue(ConcertDate.isValidDate("2024-10-10 2200"));
-        assertTrue(ConcertDate.isValidDate("1970-12-12 2259"));
+        assertTrue(ConcertDate.isValidDate("2024-10-10 2200", INPUT_DATE_FORMATTER));
+        assertTrue(ConcertDate.isValidDate("1970-12-12 2259", INPUT_DATE_FORMATTER));
     }
 
     @Test
