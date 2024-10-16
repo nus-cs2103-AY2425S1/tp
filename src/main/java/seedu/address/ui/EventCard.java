@@ -31,6 +31,8 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label id;
+    @FXML
     private Label time;
     @FXML
     private Label address;
@@ -43,6 +45,7 @@ public class EventCard extends UiPart<Region> {
     public EventCard(Event event, int displayedIndex) {
         super(FXML);
         this.event = event;
+        id.setText(displayedIndex + ". ");
         name.setText(event.getName().fullName);
         address.setText(event.getLocation().value);
         time.setText(event.getStartTime().value);
