@@ -16,7 +16,7 @@ import static seedu.address.testutil.TypicalGuests.getTypicalAddressBookWithGues
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- * {@code DeleteCommand}.
+ * {@code DeleteGuestCommand}.
  */
 public class DeleteGuestCommandTest {
 

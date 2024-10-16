@@ -16,7 +16,7 @@ import static seedu.address.testutil.TypicalVendors.getTypicalAddressBookWithVen
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- * {@code DeleteCommand}.
+ * {@code DeleteVendorCommand}.
  */
 public class DeleteVendorCommandTest {
 

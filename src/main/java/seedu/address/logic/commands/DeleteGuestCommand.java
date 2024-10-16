@@ -12,7 +12,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a guest identified using it's displayed index from the address book.
  */
 public class DeleteGuestCommand extends Command {
 

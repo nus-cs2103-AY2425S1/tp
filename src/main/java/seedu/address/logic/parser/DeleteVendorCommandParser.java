@@ -7,13 +7,13 @@ import seedu.address.logic.commands.DeleteVendorCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DeleteGuestCommand object
+ * Parses input arguments and creates a new DeleteVendorCommand object
  */
 public class DeleteVendorCommandParser implements Parser<DeleteVendorCommand>  {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns a DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteVendorCommand
+     * and returns a DeleteVendorCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteVendorCommand parse(String args) throws ParseException {

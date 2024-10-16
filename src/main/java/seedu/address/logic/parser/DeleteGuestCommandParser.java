@@ -12,8 +12,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class DeleteGuestCommandParser implements Parser<DeleteGuestCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns a DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteGuestCommand
+     * and returns a DeleteGuestCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteGuestCommand parse(String args) throws ParseException {
