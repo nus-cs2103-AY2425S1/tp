@@ -45,7 +45,7 @@ public class AddStudentCommandTest {
         CommandResult commandResult = new AddStudentCommand(validStudent).execute(modelStub);
 
         assertEquals(String.format(AddStudentCommand.MESSAGE_SUCCESS, Messages.format(validStudent)),
-                commandResult.getFeedbackToUser());
+            commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validStudent), modelStub.personsAdded);
     }
 
@@ -56,7 +56,7 @@ public class AddStudentCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validStudent);
 
         assertThrows(CommandException.class, AddStudentCommand.MESSAGE_DUPLICATE_PERSON, () ->
-                addCommand.execute(modelStub));
+            addCommand.execute(modelStub));
     }
 
     @Test
@@ -181,6 +181,16 @@ public class AddStudentCommandTest {
         }
 
         @Override
+        public boolean hasTaskInGroup(Task task, Group group) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean hasTask(Task task) {
+            return false;
+        }
+
+        @Override
         public Student getPersonByNumber(StudentNumber studentNumber) {
             throw new AssertionError("This method should not be called.");
         }
@@ -263,6 +273,26 @@ public class AddStudentCommandTest {
         @Override
         public void deleteGroup(Group groupToBeDeleted) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTaskToGroup(Task task, Group group) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void addTask(Task task) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void deleteTaskFromGroup(Task task, Group group) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void deleteTask(Task task) {
+            throw new AssertionError("This method should not be called");
         }
     }
 

@@ -245,6 +245,7 @@ public class ModelManager implements Model {
         requireNonNull(groupToBeDeleted);
         addressBook.removeGroup(groupToBeDeleted);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Student List Accessors =============================================================
@@ -330,4 +331,18 @@ public class ModelManager implements Model {
         return addressBook.hasTask(task);
     }
 
+    @Override
+    public void deleteTask(Task task) {
+        requireNonNull(task);
+        addressBook.deleteTask(task);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+
+    @Override
+    public void deleteTaskFromGroup(Task task, Group group) {
+        requireNonNull(task);
+        requireNonNull(group);
+        addressBook.deleteTaskFromGroup(task, group);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
 }

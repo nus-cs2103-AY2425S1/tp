@@ -6,8 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +22,6 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.task.Task;
@@ -49,9 +47,8 @@ public class DeleteStudentFromGroupCommandTest {
         DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(validGroup.getGroupName(),
             validStudent.getStudentNumber());
         CommandResult commandResult = command.execute(model);
-
         assertEquals(String.format(DeleteStudentFromGroupCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-            validStudent, validGroup.getGroupName()), commandResult.getFeedbackToUser());
+            validStudent.getStudentNumber(), validGroup.getGroupName()), commandResult.getFeedbackToUser());
     }
 
     @Test
@@ -181,12 +178,22 @@ public class DeleteStudentFromGroupCommandTest {
         }
 
         @Override
+        public boolean hasTaskInGroup(Task task, Group group) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean hasTask(Task task) {
+            return false;
+        }
+
+        @Override
         public Student getPersonByNumber(StudentNumber studentNumber) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public Group getGroupByName(GroupName groupName) throws GroupNotFoundException {
+        public Group getGroupByName(GroupName groupName) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -264,16 +271,36 @@ public class DeleteStudentFromGroupCommandTest {
         public void deleteGroup(Group groupToBeDeleted) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addTaskToGroup(Task task, Group group) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void addTask(Task task) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void deleteTaskFromGroup(Task task, Group group) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void deleteTask(Task task) {
+            throw new AssertionError("This method should not be called");
+        }
     }
 
     private class ModelStubDeleteStudentFromGroup extends ModelStub {
-        private final Set<Group> groups = new HashSet<>();
-        private final Set<Student> students = new HashSet<>();
+        private final ArrayList<Group> groups = new ArrayList<Group>();
+        private final ArrayList<Student> students = new ArrayList<Student>();
 
         ModelStubDeleteStudentFromGroup() {
             validGroup.add(validStudent);
-            groups.add(validGroup);
-            students.add(validStudent);
+            this.groups.add(validGroup);
+            this.students.add(validStudent);
         }
 
         @Override
