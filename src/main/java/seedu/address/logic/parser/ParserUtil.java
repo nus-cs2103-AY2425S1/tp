@@ -10,7 +10,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Age;
+import seedu.address.model.person.Date;
+import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -116,29 +117,21 @@ public class ParserUtil {
 
 
     /**
-     * Parses a {@code String age} into a {@code Age}.
+     * Parses a {@code String date} into a {@code Date}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code age} is invalid.
+     * @throws ParseException if the given {@code date} is invalid.
      */
-    public static Age parseAge(String age) throws ParseException {
-        int parsedAge;
+    public static DateOfBirth parseDateOfBirth(String dateOfBirth) throws ParseException {
+        requireNonNull(dateOfBirth);
 
-        requireNonNull(age);
+        String trimmedDate = dateOfBirth.trim();
 
-        String trimmedAge = age.trim();
-
-        if (!Age.isValidAge(trimmedAge)) {
-            throw new ParseException(Age.MESSAGE_CONSTRAINTS);
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
 
-        try {
-            parsedAge = Integer.parseInt(trimmedAge);
-        } catch (NumberFormatException e) {
-            throw new ParseException(Age.MESSAGE_CONSTRAINTS);
-        }
-
-        return new Age(parsedAge);
+        return new DateOfBirth(trimmedDate);
     }
 
     /**

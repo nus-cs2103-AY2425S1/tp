@@ -7,7 +7,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "priority" : "MEDIUM",
     "remark" : "She likes pygmy hippos.",
-    "age": 32,
+    "dateOfBirth": "1 Jan 2000",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -16,7 +16,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "priority" : "HIGH",
     "remark" : "Promises to pay back next week.",
-    "age": 32,
+    "dateOfBirth": "1 Jan 2000",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -25,7 +25,7 @@
     "address" : "wall street",
     "priority" : "LOW",
     "remark" : "",
-    "age": 32,
+    "dateOfBirth": "1 Jan 2000",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -34,7 +34,7 @@
     "address" : "10th street",
     "priority" : "LOW",
     "remark" : "",
-    "age": 32,
+    "dateOfBirth": "1 Jan 2000",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -43,7 +43,7 @@
     "address" : "michegan ave",
     "priority" : "LOW",
     "remark" : "",
-    "age": 32,
+    "dateOfBirth": "1 Jan 2000",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -52,7 +52,7 @@
     "address" : "little tokyo",
     "priority" : "LOW",
     "remark" : "",
-    "age": 32,
+    "dateOfBirth": "1 Jan 2000",
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -61,7 +61,7 @@
     "address" : "4th street",
     "priority" : "LOW",
     "remark" : "",
-    "age": 32,
+    "dateOfBirth": "1 Jan 2000",
     "tags" : [ ]
   } ]
 }

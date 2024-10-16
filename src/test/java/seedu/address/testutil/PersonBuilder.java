@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Age;
+import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -25,7 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_PRIORITY = "LOW";
     public static final String DEFAULT_REMARK = "";
-    public static final int DEFAULT_AGE = 0;
+    public static final String DEFAULT_DATE_OF_BIRTH = "1 Jan 2000";
 
     private Name name;
     private Phone phone;
@@ -33,7 +33,7 @@ public class PersonBuilder {
     private Address address;
     private Priority priority;
     private Remark remark;
-    private Age age;
+    private DateOfBirth dateOfBirth;
     private Set<Tag> tags;
 
     /**
@@ -46,7 +46,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         priority = Priority.valueOf(DEFAULT_PRIORITY);
         remark = new Remark(DEFAULT_REMARK);
-        age = new Age(DEFAULT_AGE);
+        dateOfBirth = new DateOfBirth(DEFAULT_DATE_OF_BIRTH);
         tags = new HashSet<>();
     }
 
@@ -60,7 +60,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         priority = personToCopy.getPriority();
         remark = personToCopy.getRemark();
-        age = personToCopy.getAge();
+        dateOfBirth = personToCopy.getDateOfBirth();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -113,10 +113,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Age} of the {@code Person} that we are building.
+     * Sets the {@code dateOfBirth} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAge(int age) {
-        this.age = new Age(age);
+    public PersonBuilder withDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = new DateOfBirth(dateOfBirth);
         return this;
     }
 
@@ -129,7 +129,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, priority, remark, age, tags);
+        return new Person(name, phone, email, address, priority, remark, dateOfBirth, tags);
     }
 
 }

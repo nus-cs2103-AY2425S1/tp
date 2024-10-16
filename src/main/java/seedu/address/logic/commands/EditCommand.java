@@ -24,7 +24,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Age;
+import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -108,11 +108,11 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority());
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
-        Age updatedAge = editPersonDescriptor.getAge().orElse(personToEdit.getAge());
+        DateOfBirth updatedDateOfBirth = editPersonDescriptor.getDateOfBirth().orElse(personToEdit.getDateOfBirth());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedPriority, updatedRemark, updatedAge, updatedTags);
+                updatedPriority, updatedRemark, updatedDateOfBirth, updatedTags);
     }
 
     @Override
@@ -150,7 +150,7 @@ public class EditCommand extends Command {
         private Address address;
         private Priority priority;
         private Remark remark;
-        private Age age;
+        private DateOfBirth dateOfBirth;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -166,7 +166,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setPriority(toCopy.priority);
             setRemark(toCopy.remark);
-            setAge(toCopy.age);
+            setDateOfBirth(toCopy.dateOfBirth);
             setTags(toCopy.tags);
         }
 
@@ -225,12 +225,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(remark);
         }
 
-        public void setAge(Age age) {
-            this.age = age;
+        public void setDateOfBirth(DateOfBirth dateOfBirth) {
+            this.dateOfBirth = dateOfBirth;
         }
 
-        public Optional<Age> getAge() {
-            return Optional.ofNullable(age);
+        public Optional<DateOfBirth> getDateOfBirth() {
+            return Optional.ofNullable(dateOfBirth);
         }
 
         /**

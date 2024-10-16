@@ -94,7 +94,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different age -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAge(120).build();
+        editedAlice = new PersonBuilder(ALICE).withDateOfBirth("28 May 1978").build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
@@ -110,8 +110,8 @@ public class PersonTest {
                 + ALICE.getEmail() + ", address="
                 + ALICE.getAddress() + ", priority="
                 + ALICE.getPriority() + ", remark="
-                + ALICE.getRemark() + ", age="
-                + ALICE.getAge() + ", tags="
+                + ALICE.getRemark() + ", dateOfBirth="
+                + ALICE.getDateOfBirth() + ", tags="
                 + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
