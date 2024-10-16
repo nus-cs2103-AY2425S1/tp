@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents a Concert's date and time in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
+ * Represents a Concert's date and time in the address book. Guarantees: immutable; is valid as
+ * declared in {@link #isValidDate(String)}
  */
 public class ConcertDate {
 
@@ -19,12 +19,14 @@ public class ConcertDate {
     /*
      * The ConcertDate input should be a string in YYYY-MM-DD hhmm format.
      */
-    public static final DateTimeFormatter INPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    public static final DateTimeFormatter INPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern(
+            "yyyy-MM-dd HHmm");
 
     /*
      * The ConcertDate stores the date in 'D MMM YYYY HHmm format.
      */
-    public static final DateTimeFormatter OUTPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy HHmm");
+    public static final DateTimeFormatter OUTPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern(
+            "d MMM yyyy HHmm");
 
     public final String concertDate;
 
@@ -35,8 +37,8 @@ public class ConcertDate {
      */
     public ConcertDate(String date) {
         requireNonNull(date);
-        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        concertDate = processDate(date);
+        checkArgument(isValidDate(date, INPUT_DATE_FORMATTER), MESSAGE_CONSTRAINTS);
+        concertDate = processDate(date, INPUT_DATE_FORMATTER, OUTPUT_DATE_FORMATTER);
     }
 
     /**
@@ -45,9 +47,9 @@ public class ConcertDate {
      * @param test A date to test.
      * @return true if the given string is a valid concert date.
      */
-    public static boolean isValidDate(String test) {
+    public static boolean isValidDate(String test, DateTimeFormatter formatter) {
         try {
-            LocalDateTime.parse(test, INPUT_DATE_FORMATTER);
+            LocalDateTime.parse(test, formatter);
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -55,14 +57,17 @@ public class ConcertDate {
     }
 
     /**
-     * Returns concert date in d MMM yyyy HHmm format.
+     * Returns the date in the output format specified.
      *
      * @param date A valid concert date.
-     * @return A output concert date.
+     * @param intputFormat The format of the date param.
+     * @param outputFormat The desired format for the returned date.
+     * @return The date formmatted according the the outputFormat.
      */
-    public static String processDate(String date) {
-        LocalDateTime ldt = LocalDateTime.parse(date, INPUT_DATE_FORMATTER);
-        return ldt.format(OUTPUT_DATE_FORMATTER);
+    public static String processDate(String date, DateTimeFormatter intputFormat,
+            DateTimeFormatter outputFormat) {
+        LocalDateTime ldt = LocalDateTime.parse(date, intputFormat);
+        return ldt.format(outputFormat);
     }
 
     @Override

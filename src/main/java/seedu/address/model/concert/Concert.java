@@ -56,9 +56,13 @@ public class Concert {
             return true;
         }
 
+        if (!(other instanceof Concert)) {
+            return false;
+        }
+
         Concert otherConcert = (Concert) other;
-        return otherConcert != null && otherConcert.name == name && otherConcert.address == address
-                && otherConcert.concertDate == concertDate;
+        return name.equals(otherConcert.name) && address.equals(
+                otherConcert.address) && concertDate.equals(otherConcert.concertDate);
     }
 
     @Override
@@ -68,7 +72,7 @@ public class Concert {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("name", name).add("address", address)
-                .add("date", concertDate).toString();
+        return new ToStringBuilder(this).add("name", name).add("address", address).add("date",
+                concertDate).toString();
     }
 }
