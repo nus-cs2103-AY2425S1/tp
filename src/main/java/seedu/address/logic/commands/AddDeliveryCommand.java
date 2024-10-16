@@ -35,7 +35,7 @@ public class AddDeliveryCommand extends Command {
             + PREFIX_DATETIME + " 18-06-2024 17:00 "
             + PREFIX_SUPPLIER_INDEX + " 1 "
             + PREFIX_PRODUCT + " bread "
-            + PREFIX_QUANTITY + " 500g "
+            + PREFIX_QUANTITY + " 500 g "
             + PREFIX_COST + " 25.50 ";
     public static final String MESSAGE_SUCCESS = "New delivery added: %1$s";
     public static final String MESSAGE_DUPLICATE_DELIVERY = "Delivery is already added!!!";
