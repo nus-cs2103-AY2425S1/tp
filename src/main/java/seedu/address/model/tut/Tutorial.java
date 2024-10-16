@@ -83,6 +83,17 @@ public class Tutorial {
                 }).orElse(false);
     }
 
+    /**
+     * Assign student to the tutorial.
+     *
+     * @param student The student to be assigned
+     */
+    public void assignStudent(Student student) {
+        requireNonNull(student);
+
+        students.add(student);
+    }
+
     public TutName getTutName() {
         return this.tutName;
     }

@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TutUtil.TUTORIAL_CLASS;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTutorials.getTypicalTutorialList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,8 +15,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.Student;
-import seedu.address.model.tut.TutorialList;
 import seedu.address.testutil.StudentBuilder;
+
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -25,18 +27,20 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new AssignmentList(), new TutorialList());
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new AssignmentList(),
+                getTypicalTutorialList());
     }
 
     @Test
     public void execute_newStudent_success() {
         Student validStudent = new StudentBuilder().build();
 
+
         Model expectedModel = new ModelManager(model.getAddressBook(),
-                new UserPrefs(), new AssignmentList(), new TutorialList());
+                new UserPrefs(), new AssignmentList(), getTypicalTutorialList());
         expectedModel.addStudent(validStudent);
 
-        assertCommandSuccess(new AddCommand(validStudent), model,
+        assertCommandSuccess(new AddCommand(validStudent, TUTORIAL_CLASS), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validStudent)),
                 expectedModel);
     }
@@ -44,7 +48,7 @@ public class AddCommandIntegrationTest {
     @Test
     public void execute_duplicateStudent_throwsCommandException() {
         Student studentInList = model.getAddressBook().getStudentList().get(0);
-        assertCommandFailure(new AddCommand(studentInList), model,
+        assertCommandFailure(new AddCommand(studentInList, TUTORIAL_CLASS), model,
                 AddCommand.MESSAGE_DUPLICATE_STUDENT);
     }
 

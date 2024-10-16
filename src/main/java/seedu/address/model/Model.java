@@ -97,6 +97,7 @@ public interface Model {
     void updateFilteredStudentList(Predicate<Student> predicate);
 
     boolean hasTutorial(Tutorial tutorial);
+    boolean hasTutorial(TutorialClass tutorialClass);
     void addTutorial(Tutorial toAdd);
     /**
      * Returns the List of Tut
@@ -162,5 +163,13 @@ public interface Model {
      * Returns true if a student with the specified studentId exists.
      */
     public boolean hasStudentWithId(StudentId studentId);
+
+    /**
+     * Assign student to specified tutorial.
+     *
+     * @param student Student id of target student.
+     * @param tutorialClass The tutorial class that student will be assigned to.
+     */
+    void assignStudent(Student student, TutorialClass tutorialClass);
 
 }

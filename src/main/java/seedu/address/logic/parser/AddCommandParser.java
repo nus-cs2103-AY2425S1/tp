@@ -44,7 +44,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 : new TutorialClass("1001");
 
         Student student = new Student(name, studentId, tutorialClass, null);
-        return new AddCommand(student);
+        return new AddCommand(student, tutorialClass);
     }
 
     /**

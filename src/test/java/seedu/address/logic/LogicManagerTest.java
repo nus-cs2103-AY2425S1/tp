@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.STUDENTID_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TUTORIALCLASS_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.AMY;
+import static seedu.address.testutil.TypicalTutorials.TUTORIAL2;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -175,11 +176,12 @@ public class LogicManagerTest {
                 jsonAssignmentStorage, tutorialStorage);
 
         logic = new LogicManager(model, storage);
-
+        model.addTutorial(TUTORIAL2);
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + STUDENTID_DESC_AMY + TUTORIALCLASS_DESC_AMY;
         Student expectedStudent = new StudentBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
+        expectedModel.addTutorial(TUTORIAL2);
         expectedModel.addStudent(expectedStudent);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }

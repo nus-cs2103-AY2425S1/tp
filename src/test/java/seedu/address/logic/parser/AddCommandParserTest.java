@@ -19,6 +19,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TutUtil.TUTORIAL_CLASS;
 import static seedu.address.testutil.TypicalStudents.AMY;
 import static seedu.address.testutil.TypicalStudents.BOB;
 
@@ -41,7 +42,7 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + STUDENTID_DESC_BOB
-                + TUTORIALCLASS_DESC_BOB, new AddCommand(expectedStudent));
+                + TUTORIALCLASS_DESC_BOB, new AddCommand(expectedStudent, TUTORIAL_CLASS));
 
 
         // multiple tags - all accepted (no longer relevant)
@@ -49,7 +50,7 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + STUDENTID_DESC_BOB + TUTORIALCLASS_DESC_BOB,
-                new AddCommand(expectedStudentMultipleTags));
+                new AddCommand(expectedStudentMultipleTags, TUTORIAL_CLASS));
     }
 
     @Test
@@ -91,7 +92,7 @@ public class AddCommandParserTest {
         // zero tags
         Student expectedStudent = new StudentBuilder(AMY).build();
         assertParseSuccess(parser, NAME_DESC_AMY + STUDENTID_DESC_AMY + TUTORIALCLASS_DESC_AMY,
-                new AddCommand(expectedStudent));
+                new AddCommand(expectedStudent, TUTORIAL_CLASS));
     }
 
     @Test
