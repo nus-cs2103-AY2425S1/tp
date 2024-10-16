@@ -7,10 +7,6 @@ import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_ITEM_ATLAS;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_ITEM_BOTTLE;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import seedu.sellsavvy.model.order.Order;
 
 /**
@@ -37,8 +33,4 @@ public class TypicalOrders {
             .withCount(VALID_COUNT_BOTTLE).withDate(VALID_DATE_BOTTLE).build();
 
     private TypicalOrders() {} // prevents instantiation
-
-    public static List<Order> getTypicalOrders() {
-        return new ArrayList<>(Arrays.asList(ABACUS, BLOCKS, CAMERA, DAGGER));
-    }
 }
