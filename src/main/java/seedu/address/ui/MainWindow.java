@@ -3,6 +3,8 @@ package seedu.address.ui;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -204,12 +206,29 @@ public class MainWindow extends UiPart<Stage> {
      * @return {@code true} if the user types "y" to confirm, {@code false} otherwise.
      */
     public static boolean showConfirmationDialog(String message) {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Confirmation");
-        dialog.setHeaderText(null);
-        dialog.setContentText(message + "\n( \"y\" to confirm or any other key to cancel)");
+        final boolean[] result = {false};
 
-        Optional<String> result = dialog.showAndWait();
-        return result.isPresent() && result.get().trim().equalsIgnoreCase("y");
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                TextInputDialog dialog = new TextInputDialog();
+                dialog.setTitle("Confirmation");
+                dialog.setHeaderText(null);
+                dialog.setContentText(message + "\n( \"y\" to confirm or any other key to cancel)");
+
+                Optional<String> dialogResult = dialog.showAndWait();
+                result[0] = dialogResult.isPresent() && dialogResult.get().trim().equalsIgnoreCase("y");
+                return null;
+            }
+        };
+
+        Platform.runLater(task);
+        try {
+            task.get(); // Wait for the task to complete
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result[0];
     }
 }
