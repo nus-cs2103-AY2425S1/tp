@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 
 import java.time.DateTimeException;
@@ -25,6 +26,7 @@ public class DateOfCreation {
      * @param dateOfCreation The date when the entity was created.
      */
     public DateOfCreation(LocalDate dateOfCreation) {
+        requireNonNull(dateOfCreation);
         this.dateOfCreation = dateOfCreation;
     }
 
