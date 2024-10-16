@@ -8,7 +8,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.clienttype.ClientType;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Client_Type} matches any of the keywords given.
  */
 public class ClientTypeContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;

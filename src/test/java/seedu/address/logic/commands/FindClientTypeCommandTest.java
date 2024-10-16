@@ -84,7 +84,7 @@ public class FindClientTypeCommandTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code ClientTypeContainsKeywordsPredicate}.
      */
     private ClientTypeContainsKeywordsPredicate preparePredicate(String userInput) {
         return new ClientTypeContainsKeywordsPredicate(List.of(userInput));

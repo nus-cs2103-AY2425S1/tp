@@ -9,13 +9,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ClientTypeContainsKeywordsPredicate;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new FindClientTypeCommand object
  */
 public class FindClientTypeCommandParser implements Parser<FindClientTypeCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FindClientTypeCommand
+     * and returns a FindClientTypeCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindClientTypeCommand parse(String args) throws ParseException {
