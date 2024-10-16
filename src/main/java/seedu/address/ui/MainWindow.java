@@ -10,6 +10,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -194,11 +195,12 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             String personName = commandResult.getPersonName();
+            personListPanel = new PersonListPanel(logic.getFilteredPersonList());
 
             if (commandResult.getFeedbackToUser().contains(String.format(MESSAGE_SHOW_HISTORY_SUCCESS, personName))) {
-                updateCallHistory();
+                switchMainPanel(personListPanel, callHistoryPanel);
             } else {
-                updatePersonListPanel();
+                switchMainPanel(callHistoryPanel, personListPanel);
             }
 
             return commandResult;
@@ -209,20 +211,16 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private void updateCallHistory() {
+    private void switchMainPanel(UiPart<Region> fromPanel, UiPart<Region> toPanel) {
+        if (fromPanel != null && fromPanel.getRoot().getParent() != null) {
+            mainListPanelPlaceholder.getChildren().remove(fromPanel.getRoot());
+        }
+
         if (callHistoryPanel.getRoot().getParent() != null) {
             mainListPanelPlaceholder.getChildren().remove(callHistoryPanel.getRoot());
         }
         callHistoryPanel.initializeCallHistory(logic.getCallHistory());
-        mainListPanelPlaceholder.getChildren().remove(personListPanel.getRoot());
-        mainListPanelPlaceholder.getChildren().add(callHistoryPanel.getRoot());
-    }
-
-    private void updatePersonListPanel() {
-        if (callHistoryPanel.getRoot().getParent() != null) {
-            mainListPanelPlaceholder.getChildren().remove(callHistoryPanel.getRoot());
-        }
-        mainListPanelPlaceholder.getChildren().remove(personListPanel.getRoot());
-        mainListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        mainListPanelPlaceholder.getChildren().remove(toPanel.getRoot());
+        mainListPanelPlaceholder.getChildren().add(toPanel.getRoot());
     }
 }
