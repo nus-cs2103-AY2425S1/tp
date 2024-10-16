@@ -66,7 +66,7 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -154,7 +154,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the Clientele+.
+Deletes the specified person from Clientele+.
 
 Format: `delete INDEX`
 
@@ -168,7 +168,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from Clientele+.
 
 Format: `clear`
 
