@@ -26,7 +26,9 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
+import seedu.address.logic.commands.ViewTasksCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ModelManager;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicate.NameContainsKeywordsPredicate;
@@ -36,7 +38,7 @@ import seedu.address.testutil.UpdatePersonDescriptorBuilder;
 
 public class AddressBookParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final AddressBookParser parser = new AddressBookParser(new ModelManager());
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -100,6 +102,11 @@ public class AddressBookParserTest {
         NoteCommand command = (NoteCommand) parser.parseCommand(NoteCommand.COMMAND_WORD
                 + NAME_DESC_AMY + " " + PREFIX_NOTE + note.value);
         assertEquals(new NoteCommand(AMY.getName(), note), command);
+    }
+
+    @Test
+    public void parseCommand_viewTasks() throws Exception {
+        assertTrue(parser.parseCommand(ViewTasksCommand.COMMAND_WORD) instanceof ViewTasksCommand);
     }
 
     @Test

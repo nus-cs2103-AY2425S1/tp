@@ -46,6 +46,13 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
+    /**
+     * Returns the size of the task list.
+     */
+    public int size() {
+        return this.tasks.size();
+    }
+
     public void setTasks(TaskList replacement) {
         requireNonNull(replacement);
         tasks.setAll(replacement.tasks);
@@ -103,6 +110,16 @@ public class TaskList implements Iterable<Task> {
 
         for (int i = 0; i < this.tasks.size(); i++) {
             result.add(String.valueOf(i + 1) + ". " + tasks.get(i).toString());
+        }
+
+        return String.join("\n", result);
+    }
+
+    public String toDescription() {
+        List<String> result = new ArrayList<>();
+
+        for (int i = 0; i < this.tasks.size(); i++) {
+            result.add(String.valueOf(i + 1) + ". " + tasks.get(i).toDescription());
         }
 
         return String.join("\n", result);
