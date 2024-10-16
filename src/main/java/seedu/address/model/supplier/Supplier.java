@@ -2,7 +2,6 @@ package seedu.address.model.supplier;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -26,22 +25,19 @@ public class Supplier {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<Product> assignedProducts = new HashSet<>();
+    private final Set<Product> productList;
 
     /**
      * Every field must be present and not null.
      */
-    public Supplier(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Supplier(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Product> productlist) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-    }
-
-    public boolean addProduct(Product product) {
-        return this.assignedProducts.add(product);
+        this.productList = productlist;
     }
 
     public Name getName() {
@@ -66,6 +62,22 @@ public class Supplier {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Set<Product> getProducts() {
+        return Collections.unmodifiableSet(productList);
+    }
+
+    public boolean hasProduct(Product product) {
+        return productList.contains(product);
+    }
+
+    public void addProduct(Product product) {
+        productList.add(product);
+    }
+
+    public void removeProduct(Product product) {
+        productList.remove(product);
     }
 
     /**
@@ -119,14 +131,6 @@ public class Supplier {
                 .add("address", address)
                 .add("tags", tags)
                 .toString();
-    }
-
-    /**
-     * Returns an immutable product set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Collection<Product> getAssignedProducts() {
-        return Collections.unmodifiableCollection(assignedProducts);
     }
 
 }
