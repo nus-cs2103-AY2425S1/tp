@@ -22,23 +22,23 @@ import seedu.address.model.person.Person;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingName;
 
-public class UnassignWeddingCommandTest {
+public class AssignWeddingCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void unassignWedding_success() {
-        Person personToEdit = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        HashSet<Wedding> weddingsToRemove = new HashSet<>(Arrays.asList(new Wedding(new WeddingName("Wedding 2"))));
+    public void assignWedding_success() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        HashSet<Wedding> weddingsToAdd = new HashSet<>(Arrays.asList(AMY_WEDDING));
 
-        UnassignWeddingCommand unassignWeddingCommand = new UnassignWeddingCommand(
-                INDEX_SECOND_PERSON, weddingsToRemove);
+        AssignWeddingCommand assignWeddingCommand = new AssignWeddingCommand(
+                INDEX_FIRST_PERSON, weddingsToAdd);
 
-        String expectedMessage = String.format(Messages.MESSAGE_REMOVE_WEDDING_SUCCESS, "Wedding 2",
+        String expectedMessage = String.format(Messages.MESSAGE_ADD_WEDDING_SUCCESS, "Amy's Wedding",
                 personToEdit.getName().toString());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Set<Wedding> updatedWeddings = new HashSet<>(personToEdit.getWeddings());
-        updatedWeddings.removeAll(weddingsToRemove);
+        updatedWeddings.addAll(weddingsToAdd);
         Person editedPerson = new Person(
                 personToEdit.getName(),
                 personToEdit.getPhone(),
@@ -48,46 +48,38 @@ public class UnassignWeddingCommandTest {
                 updatedWeddings);
         expectedModel.setPerson(personToEdit, editedPerson);
 
-        CommandTestUtil.assertCommandSuccess(unassignWeddingCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(assignWeddingCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void unassignWeddingZeroWeddings_fail() {
-        HashSet<Wedding> weddingsToRemove = new HashSet<>(Arrays.asList(AMY_WEDDING));
-        UnassignWeddingCommand unassignWeddingCommand = new UnassignWeddingCommand(
-                INDEX_SECOND_PERSON, weddingsToRemove);
-        String expectedMessage = Messages.MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT;
-        CommandTestUtil.assertCommandFailure(unassignWeddingCommand, model, expectedMessage);
-    }
-
-    @Test
-    public void unassignWeddingNoMatchingWedding_fail() {
-        HashSet<Wedding> weddingsToRemove = new HashSet<>(Arrays.asList(BOB_WEDDING));
-        UnassignWeddingCommand unassignWeddingCommand = new UnassignWeddingCommand(
-                INDEX_FIRST_PERSON, weddingsToRemove);
-        String expectedMessage = Messages.MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT;
-        CommandTestUtil.assertCommandFailure(unassignWeddingCommand, model, expectedMessage);
+    public void assignWeddingZeroWeddings_fail() {
+        Wedding unseenWedding = new Wedding(new WeddingName("UNKNOWN WEDDING"));
+        HashSet<Wedding> weddingsToAdd = new HashSet<>(Arrays.asList(unseenWedding));
+        AssignWeddingCommand assignWeddingCommand = new AssignWeddingCommand(
+                INDEX_FIRST_PERSON, weddingsToAdd);
+        String expectedMessage = Messages.MESSAGE_WEDDING_NOT_FOUND;
+        CommandTestUtil.assertCommandFailure(assignWeddingCommand, model, expectedMessage);
     }
 
     @Test
     public void sameCommandTest_success() {
         HashSet<Wedding> weddingsToRemove = new HashSet<>(Arrays.asList(BOB_WEDDING));
-        UnassignWeddingCommand command1 = new UnassignWeddingCommand(INDEX_FIRST_PERSON, weddingsToRemove);
+        AssignWeddingCommand command1 = new AssignWeddingCommand(INDEX_FIRST_PERSON, weddingsToRemove);
         assertTrue(command1.equals(command1));
     }
 
     @Test
     public void differentCommandType_fail() {
         HashSet<Wedding> weddingsToRemove = new HashSet<>();
-        UnassignWeddingCommand command1 = new UnassignWeddingCommand(INDEX_FIRST_PERSON, weddingsToRemove);
+        AssignWeddingCommand command1 = new AssignWeddingCommand(INDEX_FIRST_PERSON, weddingsToRemove);
         assertFalse(command1.equals(null));
     }
 
     @Test
     public void differentIndex_fail() {
         HashSet<Wedding> weddingsToRemove = new HashSet<>();
-        UnassignWeddingCommand command1 = new UnassignWeddingCommand(INDEX_FIRST_PERSON, weddingsToRemove);
-        UnassignWeddingCommand command2 = new UnassignWeddingCommand(INDEX_SECOND_PERSON, weddingsToRemove);
+        AssignWeddingCommand command1 = new AssignWeddingCommand(INDEX_FIRST_PERSON, weddingsToRemove);
+        AssignWeddingCommand command2 = new AssignWeddingCommand(INDEX_SECOND_PERSON, weddingsToRemove);
         assertFalse(command1.equals(command2));
     }
 
@@ -95,8 +87,8 @@ public class UnassignWeddingCommandTest {
     public void differentWeddings_fail() {
         HashSet<Wedding> weddingsToRemove1 = new HashSet<>();
         HashSet<Wedding> weddingsToRemove2 = new HashSet<>(Arrays.asList(AMY_WEDDING));
-        UnassignWeddingCommand command1 = new UnassignWeddingCommand(INDEX_FIRST_PERSON, weddingsToRemove1);
-        UnassignWeddingCommand command2 = new UnassignWeddingCommand(INDEX_SECOND_PERSON, weddingsToRemove2);
+        AssignWeddingCommand command1 = new AssignWeddingCommand(INDEX_FIRST_PERSON, weddingsToRemove1);
+        AssignWeddingCommand command2 = new AssignWeddingCommand(INDEX_SECOND_PERSON, weddingsToRemove2);
         assertFalse(command1.equals(command2));
     }
 }

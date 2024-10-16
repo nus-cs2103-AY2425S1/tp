@@ -201,7 +201,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : new HashSet<>();
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         /**
@@ -218,7 +218,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code weddings} is used internally.
          */
         public void setWeddings(Set<Wedding> weddings) {
-            this.weddings = (weddings != null) ? new HashSet<>(weddings) : new HashSet<>();
+            this.weddings = (weddings != null) ? new HashSet<>(weddings) : null;
         }
 
         /**
