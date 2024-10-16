@@ -30,6 +30,10 @@ public class FindCommand extends Command {
     /* field for PetContainsKeywordsPredicate */
     private final boolean isOwnerSearch; // indicates if second word of argument is OWNER or PET
 
+    /**
+     * Constructor for finding persons.
+     * @param predicate
+     */
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
         ownerPredicate = null;
