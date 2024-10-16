@@ -145,6 +145,26 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding an Emergency contact's name : 'addEmergencyContactName' 
+
+Adds an emergency contact's name to the specified person in the address book.
+
+Format: 'addEmergencyContactName INDEX en/[ECNAME]'
+
+<box type="tip" seamless>
+
+**Tip:** You can delete the emergency contact's name by leaving the `ECNAME` field empty.
+</box>
+
+* Adds the emergency contact's name `ECNAME` to the person at the specified `INDEX`
+* Deletes the emergency contact's name at the specified `INDEX`
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `addEmergencyContactName 1 en/John Doe` to add the emergency contact's name "John Doe" to the 1st person 
+in the list.
+* `addEmergencyContactName 2 en/` to delete the emergency contact's name from the 2nd person in the list.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
