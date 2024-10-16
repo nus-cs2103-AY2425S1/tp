@@ -52,23 +52,22 @@ public class DeleteCommand extends Command {
     /**
      * Initializes command to delete a person identified using it's displayed index
      */
-     public DeleteCommand(Index targetIndex) {
-         this.targetIndex = targetIndex;
-         this.phoneNumber = null;
-         this.predicate = null;
-     }
+    public DeleteCommand(Index targetIndex) {
+        this.targetIndex = targetIndex;
+        this.phoneNumber = null;
+        this.predicate = null;
+    }
 
     /**
      * Constructs a {@code DeleteCommand} that deletes a person identified by their phone number.
      *
      * @param phoneNumber The phone number of the person to be deleted.
      */
-     public DeleteCommand(Phone phoneNumber) {
-         this.phoneNumber = phoneNumber;
-         this.targetIndex = null;
-         this.predicate = null;
-     }
-
+    public DeleteCommand(Phone phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        this.targetIndex = null;
+        this.predicate = null;
+    }
 
     /**
      * Executes the delete command.
