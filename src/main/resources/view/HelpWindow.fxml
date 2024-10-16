@@ -3,13 +3,12 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.stage.Stage?>
 
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 <fx:root title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
@@ -22,11 +21,11 @@
       <ScrollPane fitToHeight="true" fitToWidth="true">
         <VBox fx:id="helpMessageContainer" alignment="TOP_LEFT">
           <children>
-            <Label fx:id="helpMessage" alignment="TOP_LEFT" text="Label" textFill="WHITE" wrapText="true">
+            <Text fx:id="helpMessage" wrappingWidth="600" fill="WHITE">
               <VBox.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
               </VBox.margin>
-            </Label>
+            </Text>
           </children>
         </VBox>
       </ScrollPane>
