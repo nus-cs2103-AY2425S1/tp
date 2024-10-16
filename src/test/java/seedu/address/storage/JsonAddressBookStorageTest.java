@@ -3,6 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalInternshipApplications.AIRBNB;
 import static seedu.address.testutil.TypicalInternshipApplications.APPLE;
 import static seedu.address.testutil.TypicalInternshipApplications.GOOGLE;
 import static seedu.address.testutil.TypicalInternshipApplications.FIGMA;
@@ -52,13 +53,13 @@ public class JsonAddressBookStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidPersonAddressBook.json"));
+    public void readAddressBook_invalidInternshipAddressBook_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidInternshipAddressBook.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidAndValidPersonAddressBook.json"));
+    public void readAddressBook_invalidAndValidInternshipAddressBook_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidAndValidInternshipAddressBook.json"));
     }
 
     @Test
@@ -73,14 +74,14 @@ public class JsonAddressBookStorageTest {
         assertEquals(original, new AddressBook<InternshipApplication>(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addItem(APPLE);
+        original.addItem(GOOGLE);
         original.removeItem(FIGMA);
         jsonAddressBookStorage.saveAddressBook(original, filePath);
         readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new AddressBook<InternshipApplication>(readBack));
 
         // Save and read without specifying file path
-        original.addItem(GOOGLE);
+        original.addItem(AIRBNB);
         jsonAddressBookStorage.saveAddressBook(original); // file path not specified
         readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
         assertEquals(original, new AddressBook<InternshipApplication>(readBack));
