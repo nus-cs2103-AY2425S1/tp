@@ -194,23 +194,23 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseCED_null_throwsNullPointerException() {
+    public void parseContractEndDate_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseContractEndDate((String) null));
     }
 
     @Test
-    public void parseCED_invalidValue_throwsParseException() {
+    public void parseContractEndDate_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseContractEndDate(INVALID_CONTRACT_END_DATE));
     }
 
     @Test
-    public void parseCED_validValueWithoutWhitespace_returnsCED() throws Exception {
+    public void parseContractEndDate_validValueWithoutWhitespace_returnsContractEndDate() throws Exception {
         ContractEndDate expectedContractEndDate = ContractEndDate.of(VALID_CONTRACT_END_DATE);
         assertEquals(expectedContractEndDate, ParserUtil.parseContractEndDate(VALID_CONTRACT_END_DATE));
     }
 
     @Test
-    public void parseCED_validValueWithWhitespace_returnsTrimmedCED() throws Exception {
+    public void parseContractEndDate_validValueWithWhitespace_returnsTrimmedContractEndDate() throws Exception {
         String contractEndDateWithWhitespace = WHITESPACE + VALID_CONTRACT_END_DATE + WHITESPACE;
         ContractEndDate expectedContractEndDate = ContractEndDate.of(VALID_CONTRACT_END_DATE);
         assertEquals(expectedContractEndDate, ParserUtil.parseContractEndDate(contractEndDateWithWhitespace));

@@ -1,11 +1,11 @@
 package seedu.address.model.person;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class ContractEndDateTest {
 
@@ -15,20 +15,20 @@ public class ContractEndDateTest {
     }
 
     @Test
-    public void constructor_invalidCED_throwsIllegalArgumentException() {
+    public void constructor_invalidContractEndDate_throwsIllegalArgumentException() {
         String invalidContractEndDate = "";
         assertThrows(IllegalArgumentException.class, () -> ContractEndDate.of(invalidContractEndDate));
     }
 
     @Test
-    public void constructor_validEmptyCED() {
+    public void constructor_validEmptyContractEndDate() {
         ContractEndDate emptyContractEndDate = ContractEndDate.empty();
         assertEquals(emptyContractEndDate.getValue(), "");
         assertEquals(emptyContractEndDate.toString(), "");
     }
 
     @Test
-    public void isValidCED() {
+    public void isValidContractEndDate() {
         // null contract end date
         assertThrows(NullPointerException.class, () -> ContractEndDate.isValidDate(null));
 
