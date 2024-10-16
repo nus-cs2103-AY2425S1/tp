@@ -2,22 +2,25 @@ package seedu.address.model.order;
 
 import seedu.address.model.person.Phone;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * Abstract class representing a general order.
  */
 public abstract class Order {
+    private static int nextId = 1; // Static field to track the next available order ID
+    private int orderId;           // Unique ID for each order
     private String phoneNumber; //may be better to store "person" object or "Phone" in the future
-    private Date orderDate;
+    private LocalDateTime orderDate;
     private List<? extends Product> items; //stores list of pastries/ingredients
     private String status;  // e.g., "Pending", "Completed", "Cancelled"
 
     // Constructor
-    public Order(String phoneNumber, Date orderDate, List<? extends Product> items, String status) {
+    public Order(String phoneNumber, List<? extends Product> items, String status) {
+        this.orderId = nextId++;  // Assign the current value of nextId and increment
         this.phoneNumber = phoneNumber;
-        this.orderDate = orderDate;
+        this.orderDate = LocalDateTime.now();
         this.items = items;
         this.status = status;
     }
@@ -31,11 +34,11 @@ public abstract class Order {
         this.phoneNumber = phoneNumber;
     }
 
-    public Date getOrderDate() {
+    public LocalDateTime getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
 

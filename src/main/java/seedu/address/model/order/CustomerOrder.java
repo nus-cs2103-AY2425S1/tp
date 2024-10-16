@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 public class CustomerOrder extends Order {
-    public CustomerOrder(String phoneNumber, Date orderDate, List<Pastries> items, String status) {
-        super(phoneNumber, orderDate, items, status);
+    public CustomerOrder(String phoneNumber, List<Pastry> items, String status) {
+        super(phoneNumber, items, status);
     }
 
     @Override
