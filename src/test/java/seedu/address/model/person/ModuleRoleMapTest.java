@@ -21,10 +21,17 @@ public class ModuleRoleMapTest {
     }
 
     @Test
-    public void defaultConstructor_invalidRoleTypes_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> {
+    public void defaultConstructor_nullRoleTypes_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> {
             new ModuleRoleMap(new ModuleCode[]{new ModuleCode("CS1101S")},
                     new RoleType[]{null});
+        });
+    }
+    @Test
+    public void defaultConstructor_nullModuleCodes_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> {
+            new ModuleRoleMap(new ModuleCode[]{null},
+                    new RoleType[]{RoleType.TUTOR});
         });
     }
 
@@ -46,44 +53,30 @@ public class ModuleRoleMapTest {
     @Test
     public void areValidRoleTypeKeywords() {
         assertThrows(NullPointerException.class, () -> {
-            ModuleRoleMap.areValidRoleTypeKeywords(null);
+            RoleType.isValidRoleTypeKeyword(null);
         });
 
-        assertTrue(ModuleRoleMap.areValidRoleTypeKeywords(new String[]{""}));
-        assertTrue(ModuleRoleMap.areValidRoleTypeKeywords(new String[]{"student"}));
-        assertTrue(ModuleRoleMap.areValidRoleTypeKeywords(new String[]{"tutor"}));
-        assertTrue(ModuleRoleMap.areValidRoleTypeKeywords(new String[]{"ta"}));
-        assertTrue(ModuleRoleMap.areValidRoleTypeKeywords(new String[]{"professor"}));
-        assertTrue(ModuleRoleMap.areValidRoleTypeKeywords(new String[]{"prof"}));
-        assertTrue(ModuleRoleMap.areValidRoleTypeKeywords(new String[]{"", "prof", "ta"}));
-        assertTrue(ModuleRoleMap.areValidRoleTypeKeywords(new String[]{"Student", "TA", "Tutor", "Professor", "Prof"}));
-        assertTrue(ModuleRoleMap.areValidRoleTypeKeywords(new String[]{"StUdEnT", "Ta", "TuTOr", "ProFeSsOr", "PrOf"}));
+        assertTrue(RoleType.isValidRoleTypeKeyword(""));
+        assertTrue(RoleType.isValidRoleTypeKeyword("student"));
+        assertTrue(RoleType.isValidRoleTypeKeyword("tutor"));
+        assertTrue(RoleType.isValidRoleTypeKeyword("ta"));
+        assertTrue(RoleType.isValidRoleTypeKeyword("professor"));
+        assertTrue(RoleType.isValidRoleTypeKeyword("prof"));
+        assertTrue(RoleType.isValidRoleTypeKeyword("Student"));
+        assertTrue(RoleType.isValidRoleTypeKeyword("TA"));
+        assertTrue(RoleType.isValidRoleTypeKeyword("Tutor"));
+        assertTrue(RoleType.isValidRoleTypeKeyword("Professor"));
+        assertTrue(RoleType.isValidRoleTypeKeyword("Prof"));
+        assertTrue(RoleType.isValidRoleTypeKeyword("StUDent"));
+        assertTrue(RoleType.isValidRoleTypeKeyword("ProF"));
+        assertTrue(RoleType.isValidRoleTypeKeyword("TuTOR"));
+        assertTrue(RoleType.isValidRoleTypeKeyword("Ta"));
+        assertTrue(RoleType.isValidRoleTypeKeyword("ProFESsor"));
 
-        assertFalse(ModuleRoleMap.areValidRoleTypeKeywords(new String[]{"Hello"}));
-        assertFalse(ModuleRoleMap.areValidRoleTypeKeywords(new String[]{"Teacher"}));
-        assertFalse(ModuleRoleMap.areValidRoleTypeKeywords(new String[]{"&(!&$!"}));
-        assertFalse(ModuleRoleMap.areValidRoleTypeKeywords(new String[]{"ta", "daffd"}));
-    }
-
-    @Test
-    public void roleTypeStringToEnum() {
-        assertThrows(NullPointerException.class, () -> {
-            ModuleRoleMap.roleTypeStringToEnum(null);
-        });
-        assertThrows(IllegalArgumentException.class, () -> {
-            ModuleRoleMap.roleTypeStringToEnum("adfa");
-        });
-        assertEquals(RoleType.STUDENT, ModuleRoleMap.roleTypeStringToEnum(""));
-        assertEquals(RoleType.STUDENT, ModuleRoleMap.roleTypeStringToEnum("student"));
-        assertEquals(RoleType.TUTOR, ModuleRoleMap.roleTypeStringToEnum("tutor"));
-        assertEquals(RoleType.TUTOR, ModuleRoleMap.roleTypeStringToEnum("ta"));
-        assertEquals(RoleType.PROFESSOR, ModuleRoleMap.roleTypeStringToEnum("professor"));
-        assertEquals(RoleType.PROFESSOR, ModuleRoleMap.roleTypeStringToEnum("prof"));
-        assertEquals(RoleType.STUDENT, ModuleRoleMap.roleTypeStringToEnum("Student"));
-        assertEquals(RoleType.TUTOR, ModuleRoleMap.roleTypeStringToEnum("Tutor"));
-        assertEquals(RoleType.TUTOR, ModuleRoleMap.roleTypeStringToEnum("Ta"));
-        assertEquals(RoleType.PROFESSOR, ModuleRoleMap.roleTypeStringToEnum("Professor"));
-        assertEquals(RoleType.PROFESSOR, ModuleRoleMap.roleTypeStringToEnum("Prof"));
+        assertFalse(RoleType.isValidRoleTypeKeyword("Hello"));
+        assertFalse(RoleType.isValidRoleTypeKeyword("Teacher"));
+        assertFalse(RoleType.isValidRoleTypeKeyword("&(!&$!"));
+        assertFalse(RoleType.isValidRoleTypeKeyword("dafafdas"));
     }
 
     @Test
