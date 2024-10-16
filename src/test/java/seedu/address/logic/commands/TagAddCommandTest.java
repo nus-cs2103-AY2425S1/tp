@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.tagSetToString;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DANIEL;
@@ -12,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -106,6 +108,14 @@ public class TagAddCommandTest {
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(tagAddCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_noMatchingPerson_throwsException() {
+        TagAddCommand tagAddCommand = new TagAddCommand(new Name(INVALID_NAME), stubTagList);
+
+        String expectedMessage = String.format(TagAddCommand.MESSAGE_PERSON_DOESNT_EXIST, INVALID_NAME);
+        assertCommandFailure(tagAddCommand, model, expectedMessage);
     }
 
     @Test
