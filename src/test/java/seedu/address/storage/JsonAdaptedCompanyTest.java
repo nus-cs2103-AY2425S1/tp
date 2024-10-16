@@ -12,7 +12,11 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.company.*;
+import seedu.address.model.company.Address;
+import seedu.address.model.company.CareerPageUrl;
+import seedu.address.model.company.Email;
+import seedu.address.model.company.Name;
+import seedu.address.model.company.Phone;
 
 public class JsonAdaptedCompanyTest {
     private static final String INVALID_NAME = "R@chel";
@@ -115,7 +119,7 @@ public class JsonAdaptedCompanyTest {
         JsonAdaptedCompany company = new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 INVALID_URL, VALID_TAGS);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, company::toModelType);
+        assertThrows(IllegalArgumentException.class, expectedMessage, company::toModelType);
     }
 
     @Test
