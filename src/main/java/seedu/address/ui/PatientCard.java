@@ -1,13 +1,19 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import seedu.address.model.person.Person;
 import seedu.address.model.patient.Patient;
 
 /**
  * A UI component that displays information of a {@code Patient}.
  */
-public class PatientCard extends PersonCard {
+public class PatientCard extends UiPart<Region> {
 
     private static final String FXML = "PatientListCard.fxml";
 
@@ -19,17 +25,45 @@ public class PatientCard extends PersonCard {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
+    public final Patient patient;
+
+    @FXML
+    private HBox cardPane;
+    @FXML
+    private Label patientFlag;
+    @FXML
+    private Label name;
+    @FXML
+    private Label id;
+    @FXML
+    private Label phone;
+    @FXML
+    private Label address;
+    @FXML
+    private Label email;
     @FXML
     private Label dob;
     @FXML
     private Label gender;
+    @FXML
+    private FlowPane tags;
 
     /**
      * Creates a {@code PatientCode} with the given {@code Patient} and index to display.
      */
     public PatientCard(Patient patient, int displayedIndex) {
-        super(patient, displayedIndex);
+        super(FXML);
+        this.patient = patient;
+        id.setText(displayedIndex + ". ");
+        patientFlag.setText("[PATIENT]");
+        name.setText(patient.getName().fullName);
+        phone.setText(patient.getPhone().value);
+        address.setText(patient.getAddress().value);
+        email.setText(patient.getEmail().value);
         dob.setText(patient.getDateOfBirth().value);
         gender.setText(patient.getGender().value);
+        patient.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
