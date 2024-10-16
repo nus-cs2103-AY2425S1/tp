@@ -41,6 +41,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     public static final String MESSAGE_DUPLICATE_PHONE = "This phone number already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_NAME = "A person with this name already exists in the address book";
 
     private final Person toAdd;
 
@@ -56,8 +57,9 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        // Duplication checking for contact number, name and person as a whole.
+        if (model.hasName(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_NAME);
         } else if (model.hasPhone(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PHONE);
         }

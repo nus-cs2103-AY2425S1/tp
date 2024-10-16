@@ -32,6 +32,7 @@ public class Name {
      */
     public Name(String name) {
         requireNonNull(name);
+        name = name.strip();
         checkArgument(hasValidChars(name), CHAR_MESSAGE_CONSTRAINTS);
         checkArgument(isValidLength(name), LENGTH_MESSAGE_CONSTRAINTS);
         fullName = name;
@@ -75,7 +76,7 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
+        return fullName.equalsIgnoreCase(otherName.fullName);
     }
 
     @Override
