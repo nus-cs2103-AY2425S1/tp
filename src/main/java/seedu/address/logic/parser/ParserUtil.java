@@ -1,5 +1,8 @@
 package seedu.address.logic.parser;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
@@ -23,6 +26,23 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+    // Pattern to match strings of the form "p" followed by an integer with up to 3 digits.
+    private static final Pattern PX_PATTERN = Pattern.compile("^p\\d{1,3}$");
+
+    /**
+     * Checks if a given string is of the form "px", where "x" is an integer of up to 3 digits.
+     *
+     * @param input The string to check.
+     * @return {@code true} if the string is of the form "px", {@code false} otherwise.
+     */
+
+    public static boolean isValidInput(String input) {
+        // The pattern matches 'p' or 'o' followed by an integer (1 to 3 digits)
+        String pattern1 = "^p\\d{1,3}$";
+        String pattern2 = "^o\\d{1,3}$";
+        return input.matches(pattern1) || input.matches(pattern2);
+    }
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -30,14 +50,11 @@ public class ParserUtil {
      */
     public static Pair parseIndex(String oneBasedIndexAndType) throws ParseException {
         String trimmedIndex = oneBasedIndexAndType.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(Character.toString(trimmedIndex.charAt(1)))) {
+        if (!isValidInput(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         Pair res = new Pair(Index.fromOneBased(Integer.parseInt(Character.toString(trimmedIndex.charAt(1)))),
                 Character.toString(trimmedIndex.charAt(0)));
-        if (!(res.second.equals("p") || res.second.equals("o"))) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
-        }
         return res;
         //return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
