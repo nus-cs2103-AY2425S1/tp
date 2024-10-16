@@ -74,6 +74,33 @@ public class FindCommand extends Command {
         this.combinedPredicate = basePredicate;
     }
 
+    public FindCommand(NameContainsKeywordsPredicate namePredicate,
+                       PhoneContainsKeywordsPredicate phonePredicate) {
+        this(namePredicate, phonePredicate, null);
+    }
+
+    public FindCommand(PhoneContainsKeywordsPredicate phonePredicate,
+                       AddressContainsKeywordsPredicate addressPredicate) {
+        this(null, phonePredicate, addressPredicate);
+    }
+
+    public FindCommand(NameContainsKeywordsPredicate namePredicate,
+                       AddressContainsKeywordsPredicate addressPredicate) {
+        this(namePredicate, null, addressPredicate);
+    }
+
+    public FindCommand(NameContainsKeywordsPredicate namePredicate) {
+        this(namePredicate, null, null);
+    }
+
+    public FindCommand(PhoneContainsKeywordsPredicate phonePredicate) {
+        this(null, phonePredicate, null);
+    }
+
+    public FindCommand(AddressContainsKeywordsPredicate addressPredicate) {
+        this(null, null, addressPredicate);
+    }
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
