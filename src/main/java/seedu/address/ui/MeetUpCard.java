@@ -15,6 +15,7 @@ import seedu.address.model.meetup.MeetUp;
 public class MeetUpCard extends UiPart<Region> {
 
     private static final String FXML = "MeetUpListCard.fxml";
+    public final MeetUp meetUp;
     private final Logger logger = LogsCenter.getLogger(MeetUpCard.class);
 
     /**
@@ -24,9 +25,6 @@ public class MeetUpCard extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
-    public final MeetUp meetUp;
-
     @FXML
     private HBox meetUpCardPane;
     @FXML

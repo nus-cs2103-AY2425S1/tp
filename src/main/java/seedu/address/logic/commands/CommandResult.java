@@ -18,13 +18,13 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
-    
+
     /** Change view to MeetUpList */
     private final boolean showMeetUpList;
 
     /** Change view to Address Book */
     private final boolean showAddressBook;
-    
+
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
