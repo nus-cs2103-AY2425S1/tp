@@ -33,30 +33,30 @@ public class AttendanceListTest {
 
     @Test
     public void equals() {
-        AttendanceList attendanceList = new AttendanceList();
-        attendanceList.setAttendance(LocalDateTime.of(2024, 1, 1, 12, 0), new Attendance(true));
-        attendanceList.setAttendance(LocalDateTime.of(2024, 1, 8, 12, 0), new Attendance(false));
+        AttendanceList list = new AttendanceList();
+        list = list.setAttendance(LocalDateTime.of(2024, 1, 1, 12, 0), new Attendance(true));
+        list = list.setAttendance(LocalDateTime.of(2024, 1, 8, 12, 0), new Attendance(false));
 
         // same values -> returns true
-        AttendanceList sameAttendanceList = new AttendanceList();
-        sameAttendanceList.setAttendance(LocalDateTime.of(2024, 1, 1, 12, 0), new Attendance(true));
-        sameAttendanceList.setAttendance(LocalDateTime.of(2024, 1, 8, 12, 0), new Attendance(false));
-        assertTrue(attendanceList.equals(sameAttendanceList));
+        AttendanceList same = new AttendanceList();
+        same = same.setAttendance(LocalDateTime.of(2024, 1, 1, 12, 0), new Attendance(true));
+        same = same.setAttendance(LocalDateTime.of(2024, 1, 8, 12, 0), new Attendance(false));
+        assertTrue(list.equals(same));
 
         // same object -> returns true
-        assertTrue(attendanceList.equals(attendanceList));
+        assertTrue(list.equals(list));
 
         // null -> returns false
-        assertFalse(attendanceList.equals(null));
+        assertFalse(list.equals(null));
 
         // different types -> returns false
-        assertFalse(attendanceList.equals(5.0f));
+        assertFalse(list.equals(5.0f));
 
         // at least one different value -> returns false
-        AttendanceList differentAttendanceList = new AttendanceList();
-        differentAttendanceList.setAttendance(LocalDateTime.of(2024, 1, 1, 12, 0), new Attendance(false));
-        differentAttendanceList.setAttendance(LocalDateTime.of(2024, 1, 8, 12, 0), new Attendance(false));
-        assertFalse(attendanceList.equals(differentAttendanceList));
+        AttendanceList different = new AttendanceList();
+        different = different.setAttendance(LocalDateTime.of(2024, 1, 1, 12, 0), new Attendance(false));
+        different = different.setAttendance(LocalDateTime.of(2024, 1, 8, 12, 0), new Attendance(false));
+        assertFalse(list.equals(different));
     }
 
     @Test
@@ -64,9 +64,8 @@ public class AttendanceListTest {
         LocalDateTime firstDatetime = LocalDateTime.of(2024, 1, 1, 12, 0);
         LocalDateTime secondDatetime = LocalDateTime.of(2024, 1, 8, 12, 0);
         AttendanceList attendanceList = new AttendanceList();
-        attendanceList.setAttendance(firstDatetime, new Attendance(true));
-        attendanceList.setAttendance(secondDatetime, new Attendance(false));
-
+        attendanceList = attendanceList.setAttendance(firstDatetime, new Attendance(true));
+        attendanceList = attendanceList.setAttendance(secondDatetime, new Attendance(false));
         assertTrue(attendanceList.toString().equals("01/01/2024 12:00 Attended\n08/01/2024 12:00 Absent\n"));
     }
 }

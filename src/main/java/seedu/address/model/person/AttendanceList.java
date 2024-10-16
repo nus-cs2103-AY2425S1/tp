@@ -1,9 +1,12 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Represents a Student's Attendance.
@@ -15,7 +18,7 @@ public class AttendanceList {
      * Initializes an empty immutable attendance list.
      */
     public AttendanceList() {
-        this.attendanceList = Collections.unmodifiableMap(new HashMap<>());
+        this.attendanceList = Collections.unmodifiableMap(new TreeMap<>());
     }
 
     /**
@@ -35,8 +38,9 @@ public class AttendanceList {
      * @return A new AttendanceList with the updated attendance record.
      */
     public AttendanceList setAttendance(LocalDateTime date, Attendance attendance) {
-        Map<LocalDateTime, Attendance> newAttendanceList = new HashMap<>(attendanceList);
-        attendanceList.merge(date, attendance, (oldAttendance, newAttendance) -> newAttendance);
+        requireNonNull(date);
+        Map<LocalDateTime, Attendance> newAttendanceList = new TreeMap<>(attendanceList);
+        newAttendanceList.merge(date, attendance, (oldAttendance, newAttendance) -> newAttendance);
         return new AttendanceList(newAttendanceList);
     }
 
@@ -53,7 +57,7 @@ public class AttendanceList {
             // TODO throw better exception
             throw new IllegalArgumentException("Attendance record does not exist.");
         }
-        Map<LocalDateTime, Attendance> newAttendanceList = new HashMap<>(attendanceList);
+        Map<LocalDateTime, Attendance> newAttendanceList = new TreeMap<>(attendanceList);
         newAttendanceList.remove(date);
         return new AttendanceList(attendanceList);
     }
@@ -75,6 +79,8 @@ public class AttendanceList {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         attendanceList.forEach((date, attendance) -> {
+            sb.append(DateTimeFormatter.ofPattern("DD/MM/yyyy HH:mm").format(date));
+            sb.append(" ");
             sb.append(attendance.toString());
             sb.append("\n");
         });
