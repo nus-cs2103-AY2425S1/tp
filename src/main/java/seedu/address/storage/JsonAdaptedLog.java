@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -35,15 +36,7 @@ class JsonAdaptedLog {
     public JsonAdaptedLog(Log source) {
         entry = source.getEntry();
         // Convert AppointmentDate to string
-        appointmentDate = stringToValidDate(source.getAppointmentDate()); // Assuming getAppointmentDate() returns the formatted string
-    }
-
-    public String stringToValidDate(String date) {
-        String[] dateParts = date.split(" ");
-        String day = dateParts[0];
-        String month = dateParts[1];
-        String year = dateParts[2];
-        return day + "-" + month + "-" + year;
+        appointmentDate = source.getAppointmentDate(); // Assuming getAppointmentDate() returns the formatted string
     }
 
     /**
@@ -63,7 +56,7 @@ class JsonAdaptedLog {
         // Parse the appointment date from the string
         LocalDate parsedDate;
         try {
-            parsedDate = LocalDate.parse(appointmentDate);
+            parsedDate = LocalDate.parse(appointmentDate, DateTimeFormatter.ofPattern("dd MMM yyyy"));
         } catch (Exception e) {
             throw new IllegalValueException("Invalid date format for appointment date!");
         }
