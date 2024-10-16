@@ -340,9 +340,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | educator | search for students by name                                                | find information about specific students                                                                       |
 | `* *`    | educator | store additional information about students on grades, attendance or notes | better access and organise student information                                                                 |
 | `* *`    | educator | edit a student details                                                     | correct mistakes or update new information about the student                                                   |
-| `* *`    | educator | filter searched students by grades, attendance or notes                    | quickly find specific students or groups based on specific criteria                                            |
-| `*`      | educator | group students                                                             | efficiently manage classes, group-based activities, assignments, and projects                                  |
+| `* *`    | educator | group students                                                             | efficiently manage classes, group-based activities, assignments, and projects                                  |
 | `*`      | educator | import and export student data from other systems                          | streamline data management and avoid manual entry, ensuring compatibility with school databases or grade books |
+| `*`      | educator | filter searched students by grades, attendance or notes                    | quickly find specific students or groups based on specific criteria                                            |
 | `*`      | educator | use security measures for student data                                     | protect sensitive information and control access to parental data                                              |
 
 ### Use cases

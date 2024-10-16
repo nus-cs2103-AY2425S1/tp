@@ -1,15 +1,15 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.group.Group;
+import seedu.address.model.tag.Tag;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.group.Group;
-import seedu.address.model.tag.Tag;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a Person in the address book.
@@ -58,9 +58,28 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public Person setTags(Set<Tag> newTags) {
-        return new Person(this.name, this.studentClass, this.phone, newTags);
+    /**
+     * Returns a new Person object with a new set of tags
+     * with new tags added.
+     */
+    public Person addTags(Set<Tag> newTags) {
+        this.tags.addAll(newTags);
+        return new Person(this.name, this.studentClass, this.phone, this.tags);
     }
+
+    /**
+     * Returns a new Person object with a new set of tags
+     * with specified tags deleted.
+     */
+    public Person deleteTags(Set<Tag> tagsToBeDeleted) {
+        this.tags.removeAll(tagsToBeDeleted);
+        return new Person(this.name, this.studentClass, this.phone, this.tags);
+    }
+
+    public boolean tagExists(Set<Tag> tags) {
+        return this.tags.containsAll(tags);
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.

@@ -121,8 +121,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setTag(Person target, Set<Tag> tags) {
-        Person updatedPerson = target.setTags(tags);
+    public void addTag(Person target, Set<Tag> newTags) {
+        Person updatedPerson = target.addTags(newTags);
+        setPerson(target, updatedPerson);
+    }
+
+    @Override
+    public void deleteTag(Person target, Set<Tag> tagsToDelete) {
+        Person updatedPerson = target.deleteTags(tagsToDelete);
         setPerson(target, updatedPerson);
     }
 

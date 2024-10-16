@@ -17,27 +17,28 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 /**
  * Adds tags to a person.
  */
-public class TagCommand extends Command {
+public class UntagCommand extends Command {
 
-    public static final String COMMAND_WORD = "tag";
+    public static final String COMMAND_WORD = "untag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag(s) to a person. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a tag(s) from a person. "
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_TAG + "TAG\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 " + PREFIX_TAG + "needs consult";
 
-    public static final String MESSAGE_SUCCESS = "New tag(s) added";
+    public static final String MESSAGE_SUCCESS = "Tag(s) deleted";
+    public static final String MESSAGE_TAG_DOES_NOT_EXIST = "The tag(s) does not exist";
     private final Index targetIndex;
-    private final Set<Tag> newTags;
+    private final Set<Tag> tagsToDelete;
 
     /**
      * Creates a TagCommand to add the specified {@code Set<Tag>}
      * to the person of specified {@code Index}
      */
-    public TagCommand(Index targetIndex, Set<Tag> newTags) {
+    public UntagCommand(Index targetIndex, Set<Tag> tagsToDelete) {
         this.targetIndex = targetIndex;
-        this.newTags = newTags;
+        this.tagsToDelete = tagsToDelete;
     }
 
     @Override
@@ -50,7 +51,12 @@ public class TagCommand extends Command {
         }
 
         Person person = lastShownList.get(targetIndex.getZeroBased());
-        model.addTag(person, newTags);
+        Boolean tagExists = person.tagExists(tagsToDelete);
+
+        if (!tagExists) {
+            throw new CommandException(MESSAGE_TAG_DOES_NOT_EXIST);
+        }
+        model.deleteTag(person, tagsToDelete);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(person)));
     }
 
@@ -61,19 +67,19 @@ public class TagCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TagCommand)) {
+        if (!(other instanceof UntagCommand)) {
             return false;
         }
 
-        TagCommand otherTagCommand = (TagCommand) other;
-        return newTags.equals(otherTagCommand.newTags)
-                && targetIndex.equals(otherTagCommand.targetIndex);
+        UntagCommand otherUntagCommand = (UntagCommand) other;
+        return tagsToDelete.equals(otherUntagCommand)
+                && targetIndex.equals(otherUntagCommand.targetIndex);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("tags", newTags)
+                .add("tags", tagsToDelete)
                 .toString();
     }
 }
