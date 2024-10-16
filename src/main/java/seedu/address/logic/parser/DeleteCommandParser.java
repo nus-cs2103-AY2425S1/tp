@@ -2,15 +2,14 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.Arrays;
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Phone;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -29,28 +28,29 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         String argumentType = getArgumentType(args);
 
         switch(argumentType) {
-            case "PHONE":
-                Phone phone = ParserUtil.parsePhone(args);
-                return new DeleteCommand(phone);
 
-            case "INDEX":
-                Index index = ParserUtil.parseIndex(args);
-                return new DeleteCommand(index);
-            default:
-                if (args.isEmpty()) {
-                    throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-                }
+        case "PHONE":
+            Phone phone = ParserUtil.parsePhone(args);
+            return new DeleteCommand(phone);
 
-                String[] nameKeywords = args.split("\\s+");
-                List<String> nameKeywordsList = Arrays.asList(nameKeywords);
-                NameContainsKeywordsPredicate predicate =
-                        new NameContainsKeywordsPredicate(nameKeywordsList);
-                return new DeleteCommand(predicate);
+        case "INDEX":
+            Index index = ParserUtil.parseIndex(args);
+            return new DeleteCommand(index);
+
+        default:
+            if (args.isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            }
+
+            String[] nameKeywords = args.split("\\s+");
+            List<String> nameKeywordsList = Arrays.asList(nameKeywords);
+            NameContainsKeywordsPredicate predicate =
+                    new NameContainsKeywordsPredicate(nameKeywordsList);
+            return new DeleteCommand(predicate);
 
 
         }
-
     }
 
     public String getArgumentType(String args) {
