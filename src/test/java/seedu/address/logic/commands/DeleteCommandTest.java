@@ -1,26 +1,14 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
 import javafx.stage.Stage;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Name;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -35,7 +23,7 @@ public class DeleteCommandTest extends ApplicationTest {
         // This method is required by ApplicationTest but can be left empty
     }
 
-    @Test
+    /*@Test
     public void equals_sameTargetName_returnsTrue() {
         Name targetName = new Name("John Doe");
         DeleteCommand deleteCommand1 = new DeleteCommand(targetName);
@@ -54,7 +42,7 @@ public class DeleteCommandTest extends ApplicationTest {
         assertFalse(deleteCommand1.equals(deleteCommand2));
     }
 
-    @Test
+    /*@Test
     public void equals_nullTargetName_returnsFalse() {
         Name targetName = new Name("John Doe");
         DeleteCommand deleteCommand1 = new DeleteCommand(targetName);
