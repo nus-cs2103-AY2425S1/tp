@@ -11,7 +11,7 @@ import seedu.address.model.tag.Tag;
  */
 public class NewtagCommandParser implements Parser<NewtagCommand> {
     public static final int MAX_LENGTH = 50;
-    public static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}' ]+";
 
     /**
      * Parses the given {@code String} of arguments in the context of the NewtagCommand
@@ -25,14 +25,13 @@ public class NewtagCommandParser implements Parser<NewtagCommand> {
         // or contains non-alphanumeric characters other than spaces.
         boolean isEmpty = trimmedArgs.isEmpty();
         boolean isTooLong = trimmedArgs.length() > MAX_LENGTH;
-        boolean isAlphanumeric = trimmedArgs.matches(VALIDATION_REGEX);
-        if (isEmpty || isTooLong || !isAlphanumeric) {
+        boolean isValidCharacters = trimmedArgs.matches(VALIDATION_REGEX);
+        if (isEmpty || isTooLong || !isValidCharacters) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NewtagCommand.MESSAGE_USAGE));
         }
 
         // Create and return the NewtagCommand.
         Tag tag = new Tag(trimmedArgs);
-        System.out.println(tag);
         return new NewtagCommand(tag);
     }
 }

@@ -37,4 +37,18 @@ public class NewtagCommand extends Command {
         String currentTags = "Your tags: " + model.getTagList();
         return new CommandResult(successMessage + currentTags);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (!(other instanceof NewtagCommand)) {
+            return false;
+        }
+
+        NewtagCommand otherCommand = (NewtagCommand) other;
+        return tag.equals(otherCommand.tag);
+    }
 }
