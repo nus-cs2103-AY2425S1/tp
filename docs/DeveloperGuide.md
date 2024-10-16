@@ -645,10 +645,4 @@ testers are expected to do more *exploratory* testing.
    7. Other incorrect find commands to try: `find aLL john`, `find pH john`, `find a`, `...`<br>
             Expected: Similar to previous points. If the format is incorrect, the command is recognised but the action is invalid and a specific status message is shown.
 
-### Saving data
 
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-2. _{ more test cases …​ }_
