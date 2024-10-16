@@ -73,5 +73,20 @@ public class ContactPredicateBuilder {
 
         return combinedPredicate;
     }
+    // TODO: Implement this for parser test
+    /*
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
 
+        ContactPredicateBuilder other = (ContactPredicateBuilder) obj;
+        try {
+            Predicate<Contact> thisPredicate = this.build();
+            Predicate<Contact> otherPredicate = other.build();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    */
 }
