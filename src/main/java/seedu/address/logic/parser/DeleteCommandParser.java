@@ -26,7 +26,6 @@ public class DeleteCommandParser implements Parser<Command> {
         } else {
             return parseForEvent(args);
         }
-        
     }
 
     public DeleteCommand parseForPerson(String args) throws ParseException {

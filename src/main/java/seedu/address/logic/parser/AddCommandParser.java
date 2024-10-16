@@ -74,7 +74,7 @@ public class AddCommandParser implements Parser<Command> {
     }
 
     public AddEventCommand parseForEvent(String args) throws ParseException {
-        ArgumentMultimap argMultimap = 
+        ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_START_TIME, PREFIX_TAG);
         // Validate that the necessary prefixes are present
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_START_TIME)
