@@ -30,14 +30,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     // private final ObservableSet<Pair<Vendor, Event>> associations;
 
     /*
-     * The 'unusual' code block below is a non-static initialization block,
-     * sometimes used to avoid duplication
-     * between constructors. See
-     * https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
+     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *
-     * Note that non-static init blocks are not recommended to use. There are other
-     * ways to avoid duplication
-     * among constructors.
+     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
+     *   among constructors.
      */
     {
         vendors = new UniqueVendorList();
@@ -45,8 +42,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         events = new UniqueEventList();
     }
 
-    public AddressBook() {
-    }
+    public AddressBook() {}
 
     /**
      * Creates an AddressBook using the Vendors in the {@code toBeCopied}
@@ -87,8 +83,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// vendor-level operations
 
     /**
-     * Returns true if a vendor with the same identity as {@code vendor} exists in
-     * the address book.
+     * Returns true if a vendor with the same identity as {@code vendor} exists in the address book.
      */
     public boolean hasVendor(Vendor vendor) {
         requireNonNull(vendor);
@@ -104,11 +99,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given vendor {@code target} in the list with
-     * {@code editedVendor}.
+     * Replaces the given vendor {@code target} in the list with {@code editedVendor}.
      * {@code target} must exist in the address book.
-     * The vendor identity of {@code editedVendor} must not be the same as another
-     * existing vendor in the address book.
+     * The vendor identity of {@code editedVendor} must not be the same as another existing vendor in the address book.
      */
     public void setVendor(Vendor target, Vendor editedVendor) {
         requireNonNull(editedVendor);
@@ -127,8 +120,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// assign operations
 
     /**
-     * Returns true if the given {@code vendor} is already assigned to the given
-     * {@code event}.
+     * Returns true if the given {@code vendor} is already assigned to the given {@code event}.
      * {@code vendor} and {@code event} must exist in the address book.
      */
     public boolean isVendorAssignedToEvent(Vendor vendor, Event event) {
@@ -186,8 +178,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// event-level operations
 
     /**
-     * Returns true if a event with the same identity as {@code event} exists in the
-     * address book.
+     * Returns true if a event with the same identity as {@code event} exists in the address book.
      */
     public boolean hasEvent(Event event) {
         requireNonNull(event);

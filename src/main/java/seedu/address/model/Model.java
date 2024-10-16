@@ -61,8 +61,7 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a vendor with the same identity as {@code vendor} exists in
-     * the address book.
+     * Returns true if a vendor with the same identity as {@code vendor} exists in the address book.
      */
     boolean hasVendor(Vendor vendor);
 
@@ -72,16 +71,13 @@ public interface Model {
     void deleteVendor(Vendor target);
 
     /**
-     * Adds the given vendor. {@code vendor} must not already exist in the address
-     * book.
+     * Adds the given vendor. {@code vendor} must not already exist in the address book.
      */
     void addVendor(Vendor vendor);
 
     /**
-     * Replaces the given vendor {@code target} with {@code editedVendor}.
-     * {@code target} must exist in the address
-     * book. The vendor identity of {@code editedVendor} must not be the same as
-     * another existing vendor in the address
+     * Replaces the given vendor {@code target} with {@code editedVendor}. {@code target} must exist in the address
+     * book. The vendor identity of {@code editedVendor} must not be the same as another existing vendor in the address
      * book.
      */
     void setVendor(Vendor target, Vendor editedVendor);
@@ -90,16 +86,13 @@ public interface Model {
     ObservableList<Vendor> getFilteredVendorList();
 
     /**
-     * Updates the filter of the filtered vendor list to filter by the given
-     * {@code predicate}.
-     *
+     * Updates the filter of the filtered vendor list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredVendorList(Predicate<Vendor> predicate);
 
     /**
-     * Returns true if the given {@code vendor} is already assigned to the given
-     * {@code event}. {@code vendor} and
+     * Returns true if the given {@code vendor} is already assigned to the given {@code event}. {@code vendor} and
      * {@code event} must exist in the address book.
      */
     boolean isVendorAssignedToEvent(Vendor vendor, Event event);
@@ -135,8 +128,7 @@ public interface Model {
     void viewVendor(Vendor vendor);
 
     /*
-     * Returns true if an event with the same identity as {@code event} exists in
-     * the address book.
+     * Returns true if an event with the same identity as {@code event} exists in the address book.
      */
     boolean hasEvent(Event event);
 
@@ -146,8 +138,7 @@ public interface Model {
     void deleteEvent(Event target);
 
     /**
-     * Adds the given event. {@code event} must not already exist in the address
-     * book.
+     * Adds the given event. {@code event} must not already exist in the address book.
      */
     void addEvent(Event event);
 
@@ -155,9 +146,7 @@ public interface Model {
     ObservableList<Event> getFilteredEventList();
 
     /**
-     * Updates the filter of the filtered event list to filter by the given
-     * {@code predicate}.
-     *
+     * Updates the filter of the filtered event list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
@@ -174,14 +163,12 @@ public interface Model {
 
     /**
      * Returns the current UI state.
-     *
      * @return {@code UiState} observable object.
      */
     public ObservableObjectValue<UiState> getUiState();
 
     /**
      * Sets the current UI state.
-     *
      * @param uiState {@code UiState} object.
      */
     public void setUiState(UiState uiState);
