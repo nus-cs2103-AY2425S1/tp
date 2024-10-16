@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.product.Product;
+import seedu.address.model.product.ProductName;
 import seedu.address.model.supplier.Address;
 import seedu.address.model.supplier.Email;
 import seedu.address.model.supplier.Name;
@@ -57,6 +58,15 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a product set containing the list of products with name given.
+     */
+    public static Set<Product> getProductSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(name -> new Product(new ProductName(name)))
                 .collect(Collectors.toSet());
     }
 

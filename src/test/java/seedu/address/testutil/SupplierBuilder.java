@@ -93,6 +93,14 @@ public class SupplierBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code products} into a {@code Set<Product>} and set it to the {@code Supplier} that we are building.
+     */
+    public SupplierBuilder withProducts(Set<Product> products) {
+        this.products = products;
+        return this;
+    }
+
     public Supplier build() {
         return new Supplier(name, phone, email, address, tags, products);
     }
