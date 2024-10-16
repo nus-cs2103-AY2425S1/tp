@@ -6,6 +6,7 @@ import seedu.address.model.student.Student;
 
 public class AssignmentBuilder {
 
+    public static final Student DEFAULT_STUDENT = new StudentBuilder().build();
     public static final String DEFAULT_ASSIGNMENT_NAME = "Math Homework";
     public static final int DEFAULT_MAX_SCORE = 100;
     public static final int DEFAULT_SCORE = 0;
@@ -18,7 +19,7 @@ public class AssignmentBuilder {
     private boolean hasSubmitted;
 
     public AssignmentBuilder() {
-        student = new StudentBuilder().build();
+        student = DEFAULT_STUDENT;
         assignmentName = new AssignmentName(DEFAULT_ASSIGNMENT_NAME);
         maxScore = DEFAULT_MAX_SCORE;
         score = DEFAULT_SCORE;
