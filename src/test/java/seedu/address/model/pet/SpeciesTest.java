@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import seedu.address.model.pet.*;
-
 import org.junit.jupiter.api.Test;
 
 public class SpeciesTest {
@@ -43,10 +41,10 @@ public class SpeciesTest {
 
     @Test
     public void equals() {
-        Species species = new Species("Valid Species");
+        Species species = new Species("Hamster");
 
         // same values -> returns true
-        assertTrue(species.equals(new Species("Valid Species")));
+        assertTrue(species.equals(new Species("Hamster")));
 
         // same object -> returns true
         assertTrue(species.equals(species));
@@ -58,6 +56,6 @@ public class SpeciesTest {
         assertFalse(species.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(species.equals(new Species("Other Valid Species")));
+        assertFalse(species.equals(new Species("Dog")));
     }
 }

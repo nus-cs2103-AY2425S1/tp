@@ -28,13 +28,13 @@ public class BreedTest {
         assertFalse(Breed.isValidBreed("")); // empty string
         assertFalse(Breed.isValidBreed(" ")); // spaces only
         assertFalse(Breed.isValidBreed("12345")); // numbers only
+        assertFalse(Breed.isValidBreed("kangal 40")); // alphanumeric characters
         assertFalse(Breed.isValidBreed("^")); // only non-alphanumeric characters
         assertFalse(Breed.isValidBreed("dog*")); // contains non-alphanumeric characters
 
         // valid breed
         assertTrue(Breed.isValidBreed("siamese")); // alphabets only
         assertTrue(Breed.isValidBreed("Dwarf Hamster")); // with capital letters
-        assertTrue(Breed.isValidBreed("3 toed sloth")); // alphanumeric characters
         assertTrue(Breed.isValidBreed("bengal-cat")); // with hyphen
         assertTrue(Breed.isValidBreed("labrador retriever")); // long names
     }

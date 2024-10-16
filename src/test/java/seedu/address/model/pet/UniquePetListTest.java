@@ -3,10 +3,10 @@ package seedu.address.model.pet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_FLUFFY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_FLUFFY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPets.FLUFFY;
 import static seedu.address.testutil.TypicalPets.BELLA;
+import static seedu.address.testutil.TypicalPets.FLUFFY;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -41,7 +41,7 @@ public class UniquePetListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePetList.add(BELLA);
-        Pet editedBella = new PetBuilder(BELLA).withName(VALID_NAME_FLUFFY).build();
+        Pet editedBella = new PetBuilder(BELLA).withAge(VALID_AGE_FLUFFY).build();
         assertTrue(uniquePetList.contains(editedBella));
     }
 
@@ -74,7 +74,7 @@ public class UniquePetListTest {
     @Test
     public void setPerson_editedPersonIsSamePerson_success() {
         uniquePetList.add(BELLA);
-        uniquePetList.setOwner(BELLA, BELLA);
+        uniquePetList.setPet(BELLA, BELLA);
         UniquePetList expectedUniquePersonList = new UniquePetList();
         expectedUniquePersonList.add(BELLA);
         assertEquals(expectedUniquePersonList, uniquePetList);
@@ -83,7 +83,7 @@ public class UniquePetListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniquePetList.add(BELLA);
-        Pet editedBella = new PetBuilder(BELLA).withName(VALID_NAME_FLUFFY).build();
+        Pet editedBella = new PetBuilder(BELLA).withAge(VALID_AGE_FLUFFY).build();
         uniquePetList.setPet(BELLA, editedBella);
         UniquePetList expectedUniquePersonList = new UniquePetList();
         expectedUniquePersonList.add(editedBella);

@@ -8,12 +8,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_BREED_FLUFFY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_FLUFFY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_FLUFFY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_FLUFFY;
-import static seedu.address.testutil.TypicalPets.FLUFFY;
 import static seedu.address.testutil.TypicalPets.BELLA;
+import static seedu.address.testutil.TypicalPets.FLUFFY;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.pet.;
 import seedu.address.testutil.PetBuilder;
 
 public class PetTest {
@@ -26,10 +25,10 @@ public class PetTest {
         // null -> returns false
         assertFalse(BELLA.isSamePet(null));
 
-        // same name, all other attributes different -> returns true
+        // same name, all other attributes different -> returns false
         Pet editedBella = new PetBuilder(FLUFFY).withSpecies(VALID_SPECIES_FLUFFY).withBreed(VALID_BREED_FLUFFY)
                 .withAge(VALID_AGE_FLUFFY).withSex(VALID_SEX_FLUFFY).build();
-        assertTrue(BELLA.isSamePet(editedBella));
+        assertFalse(BELLA.isSamePet(editedBella));
 
         // different name, all other attributes same -> returns false
         editedBella = new PetBuilder(BELLA).withName(VALID_NAME_FLUFFY).build();

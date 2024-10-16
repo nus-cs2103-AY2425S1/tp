@@ -43,7 +43,7 @@ public class SexTest {
         Sex sex = new Sex("F");
 
         // same values -> returns true
-        assertTrue(sex.equals(new Sex("Valid Sex")));
+        assertTrue(sex.equals(new Sex("F")));
 
         // same object -> returns true
         assertTrue(sex.equals(sex));

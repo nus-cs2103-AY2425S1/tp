@@ -1,15 +1,15 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_FLUFFY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BELLA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_FLUFFY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_BELLA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_BREED_FLUFFY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_BREED_BELLA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_FLUFFY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_BELLA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_FLUFFY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_FLUFFY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BREED_BELLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BREED_FLUFFY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BELLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_FLUFFY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_BELLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_FLUFFY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_BELLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_FLUFFY;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,10 +40,10 @@ public class TypicalPets {
             .withAge("2").withSex("F").build();
 
     // Manually added - Pet's details found in {@code CommandTestUtil}
-    public static final Pet FLUFFY = new OwnerBuilder().withName(VALID_NAME_FLUFFY)
+    public static final Pet FLUFFY = new PetBuilder().withName(VALID_NAME_FLUFFY)
             .withSpecies(VALID_SPECIES_FLUFFY).withBreed(VALID_BREED_FLUFFY)
             .withAge(VALID_AGE_FLUFFY).withSex(VALID_SEX_FLUFFY).build();
-    public static final Pet BELLA = new OwnerBuilder().withName(VALID_NAME_BELLA)
+    public static final Pet BELLA = new PetBuilder().withName(VALID_NAME_BELLA)
             .withSpecies(VALID_SPECIES_BELLA).withBreed(VALID_BREED_BELLA)
             .withAge(VALID_AGE_BELLA).withSex(VALID_SEX_BELLA).build();
 
