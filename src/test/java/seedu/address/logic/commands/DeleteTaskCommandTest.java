@@ -29,7 +29,7 @@ import seedu.address.model.person.task.TaskDescription;
 public class DeleteTaskCommandTest {
     private Model model = new ModelManager(getUniqueTypicalAddressBook(), new UserPrefs());
     private Task testTask = new Task(new TaskDescription("First Assignment"), new TaskDeadline("2024-10-16"));
-    private final Index INDEX_FIRST_TASK = Index.fromOneBased(1);
+    private static final Index INDEX_FIRST_TASK = Index.fromOneBased(1);
 
     @Test
     public void execute_validArgument_success() {
