@@ -9,10 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -124,13 +121,17 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String id} into a formatted {@code String}.
-     * @param id in the form of a string
+     * @param identityNumber in the form of a string
      * @return Formatted string
      * @throws ParseException
      */
-    public static String parseId(String id) throws ParseException {
-        requireNonNull(id);
-        String formattedId = id.trim().toUpperCase();
-        return formattedId;
+
+    public static IdentityNumber parseIdentityNumber(String identityNumber) throws ParseException {
+        requireNonNull(identityNumber);
+        String trimmedIdentityNumber = identityNumber.trim();
+        if (!IdentityNumber.isValidIdentityNumber(trimmedIdentityNumber)) {
+            throw new ParseException(IdentityNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new IdentityNumber(trimmedIdentityNumber);
     }
 }

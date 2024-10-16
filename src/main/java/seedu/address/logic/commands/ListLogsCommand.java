@@ -23,7 +23,7 @@ public class ListLogsCommand extends Command {
     /**
      * Creates a ListLogsCommand to list the logs of the specified person
      */
-    public ListLogsCommand(String id) {
+    public ListLogsCommand(IdentityNumber id) {
         try {
             this.identityNumber = new IdentityNumber(id);
         } catch (IllegalArgumentException e) {

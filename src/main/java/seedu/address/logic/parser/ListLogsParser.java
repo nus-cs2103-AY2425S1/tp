@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.ListLogsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.IdentityNumber;
 
 /**
  * Parses input arguments and creates a new ListLogsCommand object
@@ -16,8 +17,8 @@ public class ListLogsParser implements Parser<ListLogsCommand> {
      */
     public ListLogsCommand parse(String args) throws ParseException {
         try {
-            String id = ParserUtil.parseId(args);
-            return new ListLogsCommand(id);
+            IdentityNumber identityNumber = ParserUtil.parseIdentityNumber(args);
+            return new ListLogsCommand(identityNumber);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListLogsCommand.MESSAGE_USAGE), pe);
