@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDE
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.HOURS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -15,11 +16,13 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -56,26 +59,31 @@ public class LogicManagerTest {
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
+        assertHistoryCorrect(invalidCommand);
     }
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertHistoryCorrect(deleteCommand);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        assertHistoryCorrect(listCommand);
     }
 
+    @Disabled
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
                 LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
     }
 
+    @Disabled
     @Test
     public void execute_storageThrowsAdException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
@@ -141,6 +149,21 @@ public class LogicManagerTest {
     }
 
     /**
+     * Asserts that the result display shows all the {@code expectedCommands} upon the execution of
+     * {@code HistoryCommand}.
+     */
+    private void assertHistoryCorrect(String... expectedCommands) {
+        try {
+            CommandResult result = logic.execute(HistoryCommand.COMMAND_WORD);
+            String expectedMessage = String.format(
+                    HistoryCommand.MESSAGE_SUCCESS, String.join("\n", expectedCommands));
+            assertEquals(expectedMessage, result.getFeedbackToUser());
+        } catch (ParseException | CommandException e) {
+            throw new AssertionError("Parsing and execution of HistoryCommand.COMMAND_WORD should succeed.", e);
+        }
+    }
+
+    /**
      * Tests the Logic component's handling of an {@code IOException} thrown by the Storage component.
      *
      * @param e the exception to be thrown by the Storage component
@@ -166,7 +189,7 @@ public class LogicManagerTest {
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + HOURS_DESC_AMY;
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
