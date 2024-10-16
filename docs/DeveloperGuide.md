@@ -1,9 +1,3 @@
----
-  layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
----
-
 # TAHub Contacts Developer Guide
 
 <!-- * Table of Contents -->
@@ -362,6 +356,9 @@ Priorities:
 
    Use case ends.</panel>
 
+<<<<<<< HEAD
+**Use case: Delete a contact**
+=======
 <panel header="#### Use Case: Get Warnings Before Making Major Changes" expanded>
 
 **Main Success Scenario (MSS):**
@@ -381,6 +378,7 @@ Priorities:
       Use case ends.</panel>
 
 <panel header="#### Use case: Delete a contact" expanded>
+>>>>>>> 891c7d84d1563eaa7eb78100dd524da03f496d15
 
 **Main Success Scenario (MSS):**
 
@@ -603,7 +601,27 @@ Priorities:
   * System displays a message: "Operation cancelled."
   * **Use case ends.**</panel>
 
+<<<<<<< HEAD
+**Use Case: Get Warnings Before Making Major Changes**
+
+1. Tutor initiates a major change (e.g., deleting a student record or modifying multiple student details at once).
+2. System detects the action as a major change.
+3. System prompts the tutor with a warning message describing the potential consequences (e.g., "Warning: You are about to delete [Student's name]. This action cannot be undone. Do you wish to proceed?").
+4. Tutor reviews the warning and confirms whether to proceed or cancel.
+5. If confirmed, the system proceeds with the requested changes and displays a success message.
+
+   **Use case ends.**
+
+**Extensions:**
+
+* 2a. The list is empty.
+    * 2a1. System shows a message, "No contacts available."
+      Use case ends.
+
+**Use Case: Explore App with Sample Student Data**
+=======
 <panel header="#### Use Case: Explore App with Sample Student Data" expanded>
+>>>>>>> 891c7d84d1563eaa7eb78100dd524da03f496d15
 
 **Main Success Scenario (MSS):**
 
