@@ -25,11 +25,14 @@ import keycontacts.logic.commands.ExitCommand;
 import keycontacts.logic.commands.FindCommand;
 import keycontacts.logic.commands.HelpCommand;
 import keycontacts.logic.commands.ListCommand;
+import keycontacts.logic.commands.ScheduleCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
+import keycontacts.model.lesson.RegularLesson;
+import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.NameContainsKeywordsPredicate;
 import keycontacts.model.student.Student;
-import keycontacts.model.util.SampleDataUtil;
 import keycontacts.testutil.EditStudentDescriptorBuilder;
+import keycontacts.testutil.RegularLessonBuilder;
 import keycontacts.testutil.StudentBuilder;
 import keycontacts.testutil.StudentUtil;
 
@@ -104,8 +107,17 @@ public class KeyContactsParserTest {
 
         AssignPiecesCommand expectedCommand = new AssignPiecesCommand(
                 index,
-                SampleDataUtil.getPianoPieceSet(pianoPieces));
+                PianoPiece.getPianoPieceSet(pianoPieces));
         assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_schedule() throws Exception {
+        RegularLesson regularLesson = new RegularLessonBuilder().build();
+        ScheduleCommand command = (ScheduleCommand) parser.parseCommand(
+                ScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased() + " "
+                        + StudentUtil.getRegularLessonDetails(regularLesson));
+        assertEquals(new ScheduleCommand(INDEX_FIRST_STUDENT, regularLesson), command);
     }
 
     @Test

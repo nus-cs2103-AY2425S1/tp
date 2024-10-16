@@ -86,7 +86,14 @@ public class Student {
         return Collections.unmodifiableSet(pianoPieces);
     }
 
-    public Optional<RegularLesson> getRegularLesson() {
+    public RegularLesson getRegularLesson() {
+        return regularLesson;
+    }
+
+    /**
+     * Returns {@code regularLesson} wrapped in a Optional.
+     */
+    public Optional<RegularLesson> getRegularLessonOptional() {
         return Optional.ofNullable(regularLesson);
     }
 
@@ -102,14 +109,14 @@ public class Student {
      * Returns string representation of the {@code regularLesson}
      */
     public String getRegularLessonString() {
-        return Optional.ofNullable(regularLesson).map(RegularLesson::toString).orElse(null);
+        return getRegularLessonOptional().map(RegularLesson::toString).orElse(null);
     }
 
     /**
      * Returns user-friendly display string of the {@code regularLesson}.
      */
     public String getRegularLessonDisplay() {
-        return Optional.ofNullable(regularLesson).map(RegularLesson::toDisplay)
+        return getRegularLessonOptional().map(RegularLesson::toDisplay)
                 .orElse("No regular lesson scheduled");
     }
 
@@ -176,7 +183,7 @@ public class Student {
                 && address.equals(otherStudent.address)
                 && gradeLevel.equals(otherStudent.gradeLevel)
                 && pianoPieces.equals(otherStudent.pianoPieces)
-                && getRegularLesson().equals(otherStudent.getRegularLesson());
+                && getRegularLessonOptional().equals(otherStudent.getRegularLessonOptional());
     }
 
     @Override

@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import keycontacts.commons.core.index.Index;
 import keycontacts.logic.commands.AssignPiecesCommand;
 import keycontacts.model.pianopiece.PianoPiece;
-import keycontacts.model.util.SampleDataUtil;
 
 public class AssignPiecesCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
@@ -60,7 +59,7 @@ public class AssignPiecesCommandParserTest {
     public void parse_multiplePianoPieces_success() {
         String userInput = VALID_INDEX.getOneBased() + " " + PREFIX_PIECE_NAME + VALID_PIANO_PIECE_ONE + " "
                 + PREFIX_PIECE_NAME + VALID_PIANO_PIECE_TWO;
-        Set<PianoPiece> pianoPieceSet = SampleDataUtil.getPianoPieceSet(VALID_PIANO_PIECE_ONE, VALID_PIANO_PIECE_TWO);
+        Set<PianoPiece> pianoPieceSet = PianoPiece.getPianoPieceSet(VALID_PIANO_PIECE_ONE, VALID_PIANO_PIECE_TWO);
         AssignPiecesCommand expectedCommand = new AssignPiecesCommand(VALID_INDEX, pianoPieceSet);
 
         assertParseSuccess(parser, userInput, expectedCommand);

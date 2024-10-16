@@ -67,7 +67,7 @@ class JsonAdaptedStudent {
         pianoPieces.addAll(source.getPianoPieces().stream()
                 .map(JsonAdaptedPianoPiece::new)
                 .collect(Collectors.toList()));
-        regularLesson = source.getRegularLesson().map(JsonAdaptedRegularLesson::new).orElse(null);
+        regularLesson = source.getRegularLessonOptional().map(JsonAdaptedRegularLesson::new).orElse(null);
         cancelledLessons.addAll(source.getCancelledLessons().stream()
                 .map(JsonAdaptedCancelledLesson::new)
                 .collect(Collectors.toList()));

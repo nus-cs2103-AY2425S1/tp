@@ -3,6 +3,10 @@ package keycontacts.model.pianopiece;
 import static java.util.Objects.requireNonNull;
 import static keycontacts.commons.util.AppUtil.checkArgument;
 
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 /**
  * Represents a Piano Piece in the student directory.
  * Guarantees: immutable; name is valid as declared in {@link #isValidPianoPieceName(String)}
@@ -64,4 +68,12 @@ public class PianoPiece {
         return pianoPieceName;
     }
 
+    /**
+     * Returns a piano piece set containing the list of strings given.
+     */
+    public static Set<PianoPiece> getPianoPieceSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(PianoPiece::new)
+                .collect(Collectors.toSet());
+    }
 }

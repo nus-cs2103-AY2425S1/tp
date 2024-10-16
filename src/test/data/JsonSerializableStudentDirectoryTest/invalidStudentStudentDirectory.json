@@ -4,7 +4,7 @@
     "phone": "invalid phone",
     "address": "4th street",
     "gradeLevel": "ABRSM 1",
-    "pianoPieces": [ ],
+    "pianoPieces": [],
     "regularLesson": null,
     "cancelledLessons": [ ]
   } ]

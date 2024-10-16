@@ -30,6 +30,7 @@ public class TypicalStudents {
             .withPhone("94351253")
             .withGradeLevel("ABRSM 2")
             .withPianoPieces("Etude")
+            .withRegularLesson("Monday", "12:00", "14:00")
             .build();
     public static final Student BENSON = new StudentBuilder()
             .withName("Benson Meier")
@@ -37,18 +38,24 @@ public class TypicalStudents {
             .withPhone("98765432")
             .withGradeLevel("RSL 3")
             .withPianoPieces("Sonata I. X. 1905 \"From the Street\"", "Waltz No. 2")
+            .withRegularLesson("Tuesday", "13:00", "15:00")
             .build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
             .withAddress("wall street").withGradeLevel("ABRSM 1")
-            .withPianoPieces("Clair de Lune", "Le Sapin Op. 75 No. 5").build();
+            .withPianoPieces("Clair de Lune", "Le Sapin Op. 75 No. 5")
+            .withRegularLesson("Wednesday", "18:00", "19:00").build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withAddress("10th street").withGradeLevel("ABRSM 3").build();
+            .withAddress("10th street").withGradeLevel("ABRSM 3")
+            .withRegularLesson("Thursday", "09:00", "10:00").build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withAddress("michegan ave").withGradeLevel("IMEB 1").build();
+            .withAddress("michegan ave").withGradeLevel("IMEB 1")
+            .withRegularLesson("Friday", "11:00", "12:00").build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withAddress("little tokyo").withGradeLevel("RCM 2").build();
+            .withAddress("little tokyo").withGradeLevel("RCM 2")
+            .withRegularLesson("Saturday", "20:00", "21:00").build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("9482442")
-            .withAddress("4th street").withGradeLevel("LCM 3").build();
+            .withAddress("4th street").withGradeLevel("LCM 3")
+            .withRegularLesson("Sunday", "15:00", "17:00").build();
 
     // Manually added
     public static final Student HOON = new StudentBuilder().withName("Hoon Meier").withPhone("8482424")
