@@ -23,22 +23,24 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final String TITLE = "Below are the commands you can use in the application:\n";
 
-    private static final String ADD_COMMAND = "add\n";
-
-    private static final String CLEAR_COMMAND = "clear\n";
-
-    private static final String DELETE_COMMAND = "delete\n";
-
-    private static final String EDIT_COMMAND = "edit\n";
-
-    private static final String FIND_COMMAND = "find\n";
+    private static final String ADD_COMMAND = "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…\u200B\n";
 
     private static final String LIST_COMMAND = "list\n";
 
-    private static final String HELP_COMMAND = "help\n";
+    private static final String EDIT_COMMAND = "edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…\u200B\n";
 
-    private static final String[] COMMANDS = {ADD_COMMAND, CLEAR_COMMAND, DELETE_COMMAND, EDIT_COMMAND,
-        FIND_COMMAND, LIST_COMMAND, HELP_COMMAND};
+    private static final String FIND_COMMAND = "find KEYWORD [MORE_KEYWORDS]\n";
+
+    private static final String DELETE_COMMAND = "delete INDEXES\n";
+
+    private static final String CLEAR_COMMAND = "clear\n";
+
+    private static final String EXIT_COMMAND = "exit\n";
+
+    private static final String HELP_COMMAND = "help [COMMANDS]\n";
+
+    private static final String[] COMMANDS = {ADD_COMMAND, LIST_COMMAND, EDIT_COMMAND, FIND_COMMAND,
+        DELETE_COMMAND, CLEAR_COMMAND, EXIT_COMMAND, HELP_COMMAND};
 
     @FXML
     private Button copyButton;
