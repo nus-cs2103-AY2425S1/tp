@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 /**
- * A class to represent a Person's date data in the address book.
+ * A class to represent a person's date of birth in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class DateOfBirth extends Date {
