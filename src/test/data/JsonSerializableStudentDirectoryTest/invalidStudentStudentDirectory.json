@@ -3,6 +3,9 @@
     "name": "Hans Muster",
     "phone": "invalid phone",
     "address": "4th street",
-    "gradeLevel": "ABRSM 1"
+    "gradeLevel": "ABRSM 1",
+    "pianoPieces": [ ],
+    "regularLesson": null,
+    "cancelledLessons": [ ]
   } ]
 }

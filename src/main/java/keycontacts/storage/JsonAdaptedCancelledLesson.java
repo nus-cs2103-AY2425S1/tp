@@ -18,8 +18,8 @@ public class JsonAdaptedCancelledLesson {
      * Constructs a {@code JsonAdaptedCancelledLesson} with the given {@code cancelledLessonName}.
      */
     @JsonCreator
-    public JsonAdaptedCancelledLesson(Date cancelledLessonDate) {
-        this.cancelledLessonDate = cancelledLessonDate.toString();
+    public JsonAdaptedCancelledLesson(String cancelledLessonDate) {
+        this.cancelledLessonDate = cancelledLessonDate;
     }
 
     /**

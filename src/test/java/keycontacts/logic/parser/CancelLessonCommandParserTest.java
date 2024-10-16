@@ -24,7 +24,7 @@ public class CancelLessonCommandParserTest {
     @Test
     public void parse_noMissingParts_success() {
         CancelLessonCommand expectedCommand = new CancelLessonCommand(VALID_DATE, VALID_TIME, VALID_INDEX);
-        String userInput = VALID_INDEX.getOneBased() + " " + PREFIX_DATE + "15-10-2024 " + PREFIX_START_TIME + "14:30";
+        String userInput = VALID_INDEX.getOneBased() + " " + PREFIX_DATE + "15-10-2024 " + PREFIX_START_TIME + "10:30";
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -55,7 +55,7 @@ public class CancelLessonCommandParserTest {
     @Test
     public void parse_validDateAndStartTime_success() {
         CancelLessonCommand expectedCommand = new CancelLessonCommand(VALID_DATE, VALID_TIME, VALID_INDEX);
-        String userInput = PREFIX_DATE + "15-10-2024 " + PREFIX_START_TIME + "10:30";
+        String userInput = VALID_INDEX.getOneBased() + " " + PREFIX_DATE + "15-10-2024 " + PREFIX_START_TIME + "10:30";
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }

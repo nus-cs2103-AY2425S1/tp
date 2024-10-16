@@ -23,25 +23,26 @@ public class CancelLessonCommandParser implements Parser<CancelLessonCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public CancelLessonCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_START_TIME);
+        Index index;
+
         try {
-            ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_START_TIME);
-
-            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            if (!argMultimap.arePrefixesPresent(PREFIX_DATE, PREFIX_START_TIME)
-                    || !argMultimap.isPreamblePresent()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        CancelLessonCommand.MESSAGE_USAGE));
-            }
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE, PREFIX_START_TIME);
-
-            Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-            Time startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
-            return new CancelLessonCommand(date, startTime, index);
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException e) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CancelLessonCommand.MESSAGE_USAGE), e);
         }
+
+        if (!argMultimap.arePrefixesPresent(PREFIX_DATE, PREFIX_START_TIME)
+                || !argMultimap.isPreamblePresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    CancelLessonCommand.MESSAGE_USAGE));
+        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE, PREFIX_START_TIME);
+
+        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        Time startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
+        return new CancelLessonCommand(date, startTime, index);
     }
 
 }

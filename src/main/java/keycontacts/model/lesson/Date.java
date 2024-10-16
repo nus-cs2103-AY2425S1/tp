@@ -34,7 +34,7 @@ public class Date implements Comparable<Date> {
 
     @Override
     public String toString() {
-        return date.toString();
+        return date.format(DATE_TIME_FORMATTER);
     }
 
     @Override
