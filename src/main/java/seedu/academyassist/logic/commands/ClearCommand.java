@@ -2,7 +2,7 @@ package seedu.academyassist.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.academyassist.model.AddressBook;
+import seedu.academyassist.model.AcademyAssist;
 import seedu.academyassist.model.Model;
 
 /**
@@ -17,7 +17,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        model.setAcademyAssist(new AcademyAssist());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

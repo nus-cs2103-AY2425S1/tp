@@ -1,7 +1,6 @@
 package seedu.academyassist.model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.academyassist.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -12,8 +11,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.academyassist.commons.core.GuiSettings;
 import seedu.academyassist.commons.core.LogsCenter;
 import seedu.academyassist.commons.util.CollectionUtil;
-import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Ic;
+import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Subject;
 
 /**
@@ -22,25 +21,25 @@ import seedu.academyassist.model.person.Subject;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final AcademyAssist academyAssist;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAcademyAssist addressBook, ReadOnlyUserPrefs userPrefs) {
-        CollectionUtil.requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyAcademyAssist academyAssist, ReadOnlyUserPrefs userPrefs) {
+        CollectionUtil.requireAllNonNull(academyAssist, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + academyAssist + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.academyAssist = new AcademyAssist(academyAssist);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons = new FilteredList<>(this.academyAssist.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AcademyAssist(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -81,50 +80,50 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAcademyAssist addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setAcademyAssist(ReadOnlyAcademyAssist addressBook) {
+        this.academyAssist.resetData(addressBook);
     }
 
     @Override
     public ReadOnlyAcademyAssist getAcademyAssist() {
-        return addressBook;
+        return academyAssist;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return academyAssist.hasPerson(person);
     }
 
     @Override
     public boolean hasPersonWithIc(Ic ic) {
         requireNonNull(ic);
-        return addressBook.hasPersonWithIc(ic);
+        return academyAssist.hasPersonWithIc(ic);
     }
 
     @Override
     public Person getPersonWithIc(Ic ic) {
-        return addressBook.getPersonWithIc(ic);
+        return academyAssist.getPersonWithIc(ic);
     };
 
     @Override
     public boolean personDuplicateClass(Subject subject, Person student) {
-        return addressBook.personDuplicateClass(subject, student);
+        return academyAssist.personDuplicateClass(subject, student);
     }
 
     @Override
     public void addSubjectToPerson(Subject subject, Person person) {
-        addressBook.addSubjectToPerson(subject, person);
+        academyAssist.addSubjectToPerson(subject, person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        academyAssist.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        academyAssist.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -132,17 +131,17 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         CollectionUtil.requireAllNonNull(target, editedPerson);
 
-        addressBook.setPerson(target, editedPerson);
+        academyAssist.setPerson(target, editedPerson);
     }
 
     @Override
     public void sortAcademyAssistByName() {
-        addressBook.sortPersonsByName();
+        academyAssist.sortPersonsByName();
     }
 
     @Override
     public void sortAcademyAssistByClass() {
-        addressBook.sortPersonsByClass();
+        academyAssist.sortPersonsByClass();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -174,7 +173,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return academyAssist.equals(otherModelManager.academyAssist)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }

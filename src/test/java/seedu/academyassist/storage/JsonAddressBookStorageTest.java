@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.academyassist.commons.exceptions.DataLoadingException;
-import seedu.academyassist.model.AddressBook;
+import seedu.academyassist.model.AcademyAssist;
 import seedu.academyassist.model.ReadOnlyAcademyAssist;
 
 public class JsonAddressBookStorageTest {
