@@ -15,10 +15,10 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 
 /**
