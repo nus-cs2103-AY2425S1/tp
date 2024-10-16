@@ -25,7 +25,7 @@ public class ClaimTest {
     @Test
     void checkValidClaimId_invalidClaim_failure() {
         try {
-            Claim.checkValidClaimId("12345");  // Invalid because it doesn't start with a letter
+            Claim.checkValidClaimId("12345"); // Invalid because it doesn't start with a letter
             fail("Expected ParseException not thrown.");
         } catch (ParseException e) {
             assertEquals(Claim.INVALID_CLAIM_ID, e.getMessage(),
@@ -36,7 +36,7 @@ public class ClaimTest {
     @Test
     void checkValidClaimAmount_positiveAmount_success() {
         try {
-            Claim.checkValidClaimAmount(1000);  // Positive claim amount
+            Claim.checkValidClaimAmount(1000); // Positive claim amount
         } catch (ParseException e) {
             fail("Valid claim amount should not throw an exception.");
         }
@@ -45,7 +45,7 @@ public class ClaimTest {
     @Test
     void checkValidClaimAmount_negativeAmount_failure() {
         try {
-            Claim.checkValidClaimAmount(-500);  // Invalid negative amount
+            Claim.checkValidClaimAmount(-500); // Invalid negative amount
             fail("Expected ParseException not thrown.");
         } catch (ParseException e) {
             assertEquals(Claim.NEGATIVE_CLAIM_AMOUNT, e.getMessage(),
