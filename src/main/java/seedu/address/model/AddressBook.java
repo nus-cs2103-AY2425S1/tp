@@ -220,7 +220,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * deletes the student {@code student} from the given group {@code group}
+     * Deletes the student {@code student} from the given group {@code group}
      */
     public void deleteStudentFromGroup(Group group, Student student) {
         requireNonNull(group);
@@ -229,9 +229,20 @@ public class AddressBook implements ReadOnlyAddressBook {
         students.setPerson(student, student.removeGroup());
     }
 
+    /**
+     * Returns true if a task with the same identity as {@code task} exists in the address book.
+     */
     public boolean hasTask(Task task) {
         requireNonNull(task);
         return tasks.contains(task);
+    }
+
+    public void deleteTask(Task task) {
+        tasks.remove(task);
+    }
+
+    public void deleteTaskFromGroup(Task task, Group group) {
+        group.deleteTask(task);
     }
 
     //// util methods
@@ -279,6 +290,4 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return students.hashCode();
     }
-
-
 }
