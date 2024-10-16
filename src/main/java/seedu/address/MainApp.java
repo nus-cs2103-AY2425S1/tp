@@ -23,7 +23,6 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.tut.TutorialList;
-import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.AssignmentStorage;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -91,25 +90,25 @@ public class MainApp extends Application {
         TutorialList tutorialData;
         try {
             addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
+            if (addressBookOptional.isEmpty()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = addressBookOptional.orElseGet(AddressBook::new);
 
             assignmentListOptional = storage.readAssignments();
-            if (!assignmentListOptional.isPresent()) {
+            if (assignmentListOptional.isEmpty()) {
                 logger.info("Creating a new data file " + storage.getAssignmentFilePath()
                         + " populated with empty assignment list.");
             }
             assignmentData = assignmentListOptional.orElseGet(AssignmentList::new);
 
             tutorialListOptional = storage.readTutorials();
-            if (!tutorialListOptional.isPresent()) {
+            if (tutorialListOptional.isEmpty()) {
                 logger.info("Creating a new data file " + storage.getTutorialFilePath()
                         + " populated with empty tutorial list.");
             }
-            tutorialData = tutorialListOptional.orElseGet(() -> new TutorialList());
+            tutorialData = tutorialListOptional.orElseGet(TutorialList::new);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
@@ -145,7 +144,7 @@ public class MainApp extends Application {
 
         try {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
-            if (!configOptional.isPresent()) {
+            if (configOptional.isEmpty()) {
                 logger.info("Creating new config file " + configFilePathUsed);
             }
             initializedConfig = configOptional.orElse(new Config());

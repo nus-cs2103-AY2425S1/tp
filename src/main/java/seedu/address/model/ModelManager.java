@@ -32,7 +32,6 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
     private final AssignmentList assignmentList;
-
     private final TutorialList tutorials;
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -152,13 +151,11 @@ public class ModelManager implements Model {
 
     @Override
     public boolean setStudentAttendance(StudentId target, TutorialClass tut, Date date) {
-        boolean isSuccess = tutorials.getTutorials().stream()
+        return tutorials.getTutorials().stream()
                 .filter(s -> s.getTutorialClass().equals(tut))
                 .findFirst()
                 .map(tutorial -> tutorial.setAttendance(date, target))
                 .orElse(false);
-        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        return isSuccess;
     }
 
     @Override
