@@ -35,12 +35,12 @@ public class AddAllergyCommandParser implements Parser<AddAllergyCommand> {
         }
         try {
             Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
-            Set<Tag> Allergies = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+            Set<Tag> allergies = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
             logger.info("Successfully parsed nric for AddAllergyCommand: " + nric);
-            logger.info("Successfully parsed tags for AddAllergyCommand: " + Allergies);
+            logger.info("Successfully parsed tags for AddAllergyCommand: " + allergies);
 
-            return new AddAllergyCommand(nric, Allergies);
+            return new AddAllergyCommand(nric, allergies);
         } catch (ParseException pe) {
             logger.warning("Unable to parse the NRIC or tags for FindNricCommand: " + args);
             throw new ParseException(
