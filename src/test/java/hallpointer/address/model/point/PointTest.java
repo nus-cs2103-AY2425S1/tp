@@ -9,13 +9,6 @@ import org.junit.jupiter.api.Test;
 public class PointTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        // Since points is an int, we cannot pass null directly,
-        // but we will test for invalid points.
-        assertThrows(IllegalArgumentException.class, () -> new Point(-1)); // Negative points
-    }
-
-    @Test
     public void constructor_invalidPoints_throwsIllegalArgumentException() {
         // Testing invalid points values
         assertThrows(IllegalArgumentException.class, () -> new Point(-1)); // Negative points
