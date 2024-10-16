@@ -31,10 +31,6 @@ public class AddGradeCommandParser implements Parser<AddGradeCommand> {
         }
 
         // Parse and validate the name
-
-        if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGradeCommand.MESSAGE_USAGE));
-        }
         String name = argMultimap.getValue(PREFIX_NAME).orElse("").trim();
         if (name.isEmpty()) {
             throw new ParseException("Name cannot be empty.");
