@@ -15,6 +15,7 @@ import tutorease.address.logic.commands.AddContactCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.person.Address;
 import tutorease.address.model.person.Email;
+import tutorease.address.model.person.Guardian;
 import tutorease.address.model.person.Name;
 import tutorease.address.model.person.Person;
 import tutorease.address.model.person.Phone;
@@ -51,7 +52,13 @@ public class AddContactCommandParser implements Parser<AddContactCommand> {
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Student(name, phone, email, address, role, tagList);
+        Person person;
+
+        if (role.equals(Role.STUDENT)) {
+            person = new Student(name, phone, email, address, role, tagList);
+        } else {
+            person = new Guardian(name, phone, email, address, role, tagList);
+        }
 
         return new AddContactCommand(person);
     }
