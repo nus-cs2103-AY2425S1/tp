@@ -125,6 +125,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
+Result for `find alex david`:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Locating persons by name: `fn`
@@ -141,8 +143,10 @@ Format: `fn KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `fn John` returns `john` and `John Doe`
+* `fn alex david` returns `Alex Yeoh`, `David Li`<br>
+
+Result for `fn alex david`:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Locating persons by phone number: `fp`
@@ -159,10 +163,12 @@ Examples:
 * `fp 9` returns every contact that has phone number beginning with `9`
 * `fp 9123` returns every contact that has phone number beginning with `9123`
 * `fp 98765432` returns every contact that has phone number `98765432`
+
+Result for `fp 91031282`:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 
-### Locating persons by address `fa`
+### Locating persons by address: `fa`
 
 Finds persons whose address matches any part of the given keyword(s).
 
@@ -178,7 +184,33 @@ Examples:
 * `fa Blk` returns `Blk 45` and `Blk 35`
 * `fa blk street` returns `Tampines Street 1` and `Blk 35 Ang Mo Kio`
 * `fa tampines` returns `Blk 47 Tampines Street 20`
+
+Result for `fa tampines`:
   ![result for 'fa tampines`](images/findTampines.png)
+
+### Locating persons by client type: `fc`
+
+Finds persons whose address matches any part of the given keyword(s).
+
+Format `fc KEYWORD [MORE_KEYWORDS]`
+* The search is case-insensitive. e.g `investment` will match `Investment`
+* Only the `client_type` of the person is searched.
+* Persons whose `client_type` contains a substring that matches the provided `KEYWORD` will be returned.
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+
+ A **valid** `KEYWORD` should:
+  * Only be alphanumeric. Special Characters are not valid. (eg. Investment #1 is invalid)
+    * `client_type` will always be in alphanumeric format.
+  * Not be empty. 
+    * For eg. Just typing `fc` without providing any `KEYWORD` will throw an error.
+
+Examples:
+* `fc Investment` returns every contact that has a `client_type` beginning with `Investment`
+* `fc Invest` returns every contact that has `client_type` beginning with `Invest`
+* `fc Investment Healthcare` returns every contact that has `client_type` beginning with `Investment` OR `Healthcare`
+
+Result for `fc Investment Plan`:
+  ![result for 'fc Investment Plan`](images/FindClientType.png)
 
 ### Deleting a person : `delete`
 

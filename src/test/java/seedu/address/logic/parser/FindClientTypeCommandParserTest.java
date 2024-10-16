@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.FindClientTypeCommand;
 import seedu.address.model.person.ClientTypeContainsKeywordsPredicate;
 
+/**
+ * Contains unit tests for {@code FindClientTypeCommandParser}.
+ */
 public class FindClientTypeCommandParserTest {
 
     private FindClientTypeCommandParser parser = new FindClientTypeCommandParser();
