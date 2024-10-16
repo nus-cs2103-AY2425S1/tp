@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEFAULT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
@@ -37,7 +38,7 @@ public class DeleteCommandParserTest {
         Set<Index> indexSet = new HashSet<>();
         indexSet.add(INDEX_FIRST_STUDENT);
         indexSet.add(INDEX_SECOND_STUDENT);
-        assertParseSuccess(parser, "1 ,2 ",
+        assertParseSuccess(parser, "1" + PREFIX_DEFAULT + " 2",
                 new DeleteCommand(indexSet));
     }
 
@@ -47,6 +48,8 @@ public class DeleteCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
+
+
     @Test
     public void parse_invalidArgsNoTag_throwsParseException() {
         assertParseFailure(parser, "a",
@@ -55,19 +58,19 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_someValidSomeInvalidArgsNoTag_throwsParseException() {
-        assertParseFailure(parser, "1, a",
+        assertParseFailure(parser, "1" + PREFIX_DEFAULT + " a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidArgsNoNum_throwsParseException() {
-        assertParseFailure(parser, ",",
+        assertParseFailure(parser, PREFIX_DEFAULT.toString(),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidArgsSomeNoNum_throwsParseException() {
-        assertParseFailure(parser, ", 1,",
+        assertParseFailure(parser, PREFIX_DEFAULT + " 1" + PREFIX_DEFAULT,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 }
