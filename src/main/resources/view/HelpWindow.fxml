@@ -21,7 +21,7 @@
       </stylesheets>
 
       <VBox alignment="CENTER" fx:id="helpMessageContainer">
-        <HBox alignment="CENTER" fx:id="helpMessageContainer">
+        <HBox alignment="CENTER">
           <children>
             <Label fx:id="helpMessage" text="Label">
               <HBox.margin>

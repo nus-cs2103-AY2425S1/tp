@@ -17,10 +17,10 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-f15-1.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
-
+    private static final String HELP_COMMAND = getAllCommands();
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
-    private static final String HELP_COMMAND = getAllCommands();
+
     @FXML
     private Button copyButton;
 
@@ -107,8 +107,8 @@ public class HelpWindow extends UiPart<Stage> {
     /**
      * Returns the list of all commands.
      */
-    private static String getAllCommands() {
-        return "Here are the list of commands:\n"
+    public static String getAllCommands() {
+        return "Here are the list of commands available:\n"
                 + "1. add\n"
                 + "2. delete\n"
                 + "3. addtask\n"
