@@ -132,4 +132,29 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, goodsReceiptList)));
     }
+
+    @Test
+    public void setGoods_nullGoods_throwsNullPointerException() {
+        // TODO Implement this
+    }
+
+    @Test
+    public void setGoods_validGoods_setsGoods() {
+        // TODO Implement this
+    }
+
+    @Test
+    public void getGoods_modifyList_throwsUnsupportedOperationException() {
+        // TODO Implement this
+    }
+
+    @Test
+    public void addGoods_nullGoods_throwsNullPointerException() {
+        // TODO Implement this
+    }
+
+    @Test
+    public void addGoods_validGoods_addsGoods() {
+        // TODO Implement this
+    }
 }
