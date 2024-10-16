@@ -41,9 +41,22 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_SUPPORTIVE = "supportive";
+    public static final String VALID_TAG_MENTOR = "mentor";
     public static final String VALID_ROLE_ANY = "Student";
     public static final String VALID_ROLE_AMY = "Student";
     public static final String VALID_ROLE_BOB = "Student";
+    public static final String VALID_NAME_MEG = "Meg";
+    public static final String VALID_PHONE_MEG = "97554213";
+    public static final String VALID_EMAIL_MEG = "meg@guardian.com";
+    public static final String VALID_ADDRESS_MEG = "Yishun 1234";
+    public static final String VALID_ROLE_MEG = "Guardian";
+    public static final String VALID_NAME_CHICK = "Chick";
+    public static final String VALID_PHONE_CHICK = "96541178";
+    public static final String VALID_EMAIL_CHICK = "ChickenGuard@guardian.com";
+    public static final String VALID_ADDRESS_CHICK = "Pasir Ris Chicken";
+    public static final String VALID_ROLE_CHICK = "Guardian";
+
 
     public static final String VALID_STUDENT_ID = "1";
     public static final String VALID_LOCATION_INDEX = "1";
