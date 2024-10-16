@@ -1,6 +1,8 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
+import javafx.util.Pair;
 import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
 
@@ -20,5 +22,10 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate events.
      */
     ObservableList<Event> getEventList();
+
+    /**
+     * Returns an unmodifiable view of the associations set.
+     */
+    ObservableSet<Pair<Vendor, Event>> getAssociations();
 
 }

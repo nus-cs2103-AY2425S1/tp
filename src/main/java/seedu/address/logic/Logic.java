@@ -4,6 +4,8 @@ import java.nio.file.Path;
 
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -47,6 +49,9 @@ public interface Logic {
 
     /** Returns the current state of the UI */
     ObservableObjectValue<UiState> getUiState();
+
+    /** Returns a view of the associations */
+    ObservableSet<Pair<Vendor, Event>> getAssociations();
 
     /**
      * Returns the user prefs' address book file path.

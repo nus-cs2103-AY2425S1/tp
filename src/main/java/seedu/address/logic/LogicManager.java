@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
@@ -92,6 +94,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableObjectValue<UiState> getUiState() {
         return model.getUiState();
+    }
+
+    @Override
+    public ObservableSet<Pair<Vendor, Event>> getAssociations() {
+        return model.getAssociations();
     }
 
     @Override

@@ -6,9 +6,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import javafx.util.Pair;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
@@ -24,7 +25,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueVendorList vendors;
     private final UniqueEventList events;
-    private final Set<Pair<Vendor, Event>> associations;
+    private final ObservableSet<Pair<Vendor, Event>> associations;
+    // private final ObservableSet<Pair<Vendor, Event>> associations;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -35,7 +37,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         vendors = new UniqueVendorList();
-        associations = new HashSet<>();
+        associations = FXCollections.observableSet(new HashSet<>());
         events = new UniqueEventList();
     }
 
@@ -182,6 +184,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Event> getEventList() {
         return events.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableSet<Pair<Vendor, Event>> getAssociations() {
+        return associations;
     }
 
     @Override
