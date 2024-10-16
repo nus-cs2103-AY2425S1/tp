@@ -20,6 +20,7 @@ public class AssignmentQueryTest {
         AssignmentQuery queryA = new AssignmentQuery(ASSIGNMENT_NAME_A, DEADLINE_A, STATUS_Y, STATUS_N, GRADE_80);
         AssignmentQuery queryB = new AssignmentQuery(ASSIGNMENT_NAME_A, DEADLINE_A, STATUS_Y, STATUS_N, GRADE_80);
         assertTrue(queryA.equals(queryB));
+        assertTrue(queryA.equals(queryA));
     }
 
     @Test
@@ -27,6 +28,13 @@ public class AssignmentQueryTest {
         AssignmentQuery queryA = new AssignmentQuery(ASSIGNMENT_NAME_A, DEADLINE_A, STATUS_Y, STATUS_N, GRADE_80);
         AssignmentQuery queryB = new AssignmentQuery(ASSIGNMENT_NAME_B, DEADLINE_B, STATUS_N, STATUS_N, GRADE_90);
         assertFalse(queryA.equals(queryB));
+    }
+
+    @Test
+    public void equals_differentObject_returnsFalse() {
+        AssignmentQuery queryA = new AssignmentQuery(ASSIGNMENT_NAME_A, DEADLINE_A, STATUS_Y, STATUS_N, GRADE_80);
+        assertFalse(queryA.equals(1));
+        assertFalse(queryA.equals("OMEGA"));
     }
 
     @Test
