@@ -50,6 +50,7 @@ public class OrderList implements Iterable<Order> {
         requireAllNonNull(orders);
         internalList.setAll(orders);
     }
+
     public void setOrders(OrderList replacement) {
         requireAllNonNull(replacement);
         internalList.setAll(replacement.internalList);
