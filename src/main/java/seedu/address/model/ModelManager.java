@@ -111,8 +111,7 @@ public class ModelManager implements Model {
         String stringToUpdate = userPrefs.getMostRecentGroupTaskDisplay();
         if (!stringToUpdate.equals("")) {
             updateFilteredGroupList(x -> x.getGroupName().fullName.equals(stringToUpdate));
-        }
-        else {
+        } else {
             updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         }
     }
@@ -122,8 +121,7 @@ public class ModelManager implements Model {
         userPrefs.setMostRecentGroupTaskDisplay(string);
         if (!string.equals("")) {
             updateFilteredGroupList(x -> x.getGroupName().fullName.equals(string));
-        }
-        else {
+        } else {
             updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         }
     }
@@ -314,14 +312,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addTaskToGroup(Task task, Group group){
+    public void addTaskToGroup(Task task, Group group) {
         requireAllNonNull(task, group);
         addressBook.addTaskToGroup(task, group);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
     @Override
-    public void addTask(Task task){
+    public void addTask(Task task) {
         requireNonNull(task);
         addressBook.addTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);

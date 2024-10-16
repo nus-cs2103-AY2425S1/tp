@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.Optional;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.State;

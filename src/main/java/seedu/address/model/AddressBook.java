@@ -229,6 +229,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         students.setPerson(student, student.removeGroup());
     }
 
+    /**
+     * Checks if the specified task currently exists.
+     * @param task  The task in particular.
+     * @return      A variable dispplaying true or false.
+     */
     public boolean hasTask(Task task) {
         requireNonNull(task);
         return tasks.contains(task);

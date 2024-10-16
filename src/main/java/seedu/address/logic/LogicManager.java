@@ -106,11 +106,6 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public void setMostRecentGroupTaskDisplay(String string) {
-        model.setMostRecentGroupTaskDisplay(string);
-    }
-
-    @Override
     public void setStateStudents() {
         this.model.setStateStudents();
     }
@@ -128,6 +123,11 @@ public class LogicManager implements Logic {
     @Override
     public State getState() {
         return this.model.getState();
+    }
+
+    @Override
+    public void setMostRecentGroupTaskDisplay(String string) {
+        model.setMostRecentGroupTaskDisplay(string);
     }
 
     @Override
