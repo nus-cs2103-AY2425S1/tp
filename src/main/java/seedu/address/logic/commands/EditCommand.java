@@ -168,7 +168,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, publicAddresses);
         }
 
         public Optional<Name> getName() {
@@ -218,7 +218,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code publicAddresses} is used internally.
          */
         public void setPublicAddresses(Map<Network, Set<PublicAddress>> publicAddresses) {
-            this.publicAddresses = (publicAddresses != null) ? new HashMap<>(publicAddresses) : null;
+            this.publicAddresses = publicAddresses;
         }
 
         /**
@@ -250,11 +250,13 @@ public class EditCommand extends Command {
             }
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
+
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(publicAddresses.values(), otherEditPersonDescriptor.publicAddresses.values());
         }
 
         @Override
@@ -265,6 +267,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("public addresses", publicAddresses)
                     .toString();
         }
     }
