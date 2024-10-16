@@ -10,6 +10,20 @@ import org.junit.jupiter.api.Test;
 public class DayTest {
 
     @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Day(null));
+    }
+
+    @Test
+    public void constructor_invalidName_throwsIllegalArgumentException() {
+        String invalid_empty = "";
+        assertThrows(IllegalArgumentException.class, () -> new Day(invalid_empty));
+
+        String invalid_out_of_range = "Wednes";
+        assertThrows(IllegalArgumentException.class, () -> new Time(invalid_out_of_range));
+    }
+
+    @Test
     public void isValidDay() {
         // null day
         assertThrows(NullPointerException.class, () -> Day.isValidDay(null));

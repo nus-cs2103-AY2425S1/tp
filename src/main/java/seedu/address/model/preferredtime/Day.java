@@ -28,7 +28,35 @@ public class Day {
     public Day(String day) {
         requireNonNull(day);
         checkArgument(isValidDay(day), MESSAGE_CONSTRAINTS);
-        this.day = day;
+
+        switch (day.trim().toLowerCase()) {
+        case "mon":
+        case "monday":
+            this.day = "Monday";
+            break;
+        case "tue":
+        case "tuesday":
+            this.day = "Tuesday";
+            break;
+        case "wed":
+        case "wednesday":
+            this.day = "Wednesday";
+            break;
+        case "thu":
+        case "thursday":
+            this.day = "Thursday";
+            break;
+        case "fri":
+        case "friday":
+            this.day = "Friday";
+            break;
+        case "sat":
+        case "saturday":
+            this.day = "Saturday";
+            break;
+        default:
+            this.day = "Sunday";
+        }
     }
 
 
@@ -39,7 +67,6 @@ public class Day {
         return test.matches(VALIDATION_REGEX);
     }
 
-    // TODO: equals
     @Override
     public boolean equals(Object other) {
         if (other == this) {
