@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -22,19 +23,19 @@ public class EmergencyContactName {
 
     /**
      * Constructs an EmergencyContactName
-     * @param name
+     * @param ecName
      */
-    public EmergencyContactName(String name) {
-        checkArgument(isValidEmergencyContactName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
-
+    public EmergencyContactName(String ecName) {
+        requireNonNull(ecName);
+        checkArgument(isValidEmergencyContactName(ecName), MESSAGE_CONSTRAINTS);
+        fullName = ecName;
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidEmergencyContactName(String name) {
-        return name == null || name.isEmpty() || name.matches(VALIDATION_REGEX);
+        return name != null && (name.isEmpty() || name.matches(VALIDATION_REGEX));
     }
 
     @Override

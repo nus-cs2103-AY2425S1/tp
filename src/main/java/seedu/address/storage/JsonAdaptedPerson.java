@@ -147,6 +147,10 @@ class JsonAdaptedPerson {
         }
         final StudentClass modelStudentClass = new StudentClass(studentClass);
 
+        if (ecName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    EmergencyContactName.class.getSimpleName()));
+        }
         if (!EmergencyContactName.isValidEmergencyContactName(ecName)) {
             throw new IllegalValueException(EmergencyContactName.MESSAGE_CONSTRAINTS);
         }

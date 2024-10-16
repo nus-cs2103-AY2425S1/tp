@@ -9,8 +9,8 @@ public class EmergencyContactNameTest {
 
     @Test
     public void isValidEcName() {
-        // ecName can be null - optional feature
         // invalid name
+        assertFalse(EmergencyContactName.isValidEmergencyContactName(null));
         assertFalse(EmergencyContactName.isValidEmergencyContactName(" ")); // spaces only
         assertFalse(EmergencyContactName.isValidEmergencyContactName("^")); // only non-alphanumeric characters
         assertFalse(EmergencyContactName.isValidEmergencyContactName("jane*"));

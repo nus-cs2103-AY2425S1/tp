@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -19,8 +20,8 @@ public class AddEmergencyContactNameCommand extends Command {
     public static final String COMMAND_WORD = "addEmergencyContactName";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an emergency contact name to the student "
-            + "identified by the index. "
-            + "Parameters: index en/EMERGENCY_CONTACT\n"
+            + "identified by the index.\n"
+            + "Parameters: [INDEX] en/EMERGENCY_CONTACT\n"
             + "Example: " + COMMAND_WORD + " 1 en/John Doe";
 
     public static final String MESSAGE_ADD_ECNAME_SUCCESS = "Added emergency contact's name for Person: %1$s";
@@ -44,9 +45,7 @@ public class AddEmergencyContactNameCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        /*// Placeholder - Update with actual logic
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, index.getOneBased(), emergencyContactName));*/
-
+        requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

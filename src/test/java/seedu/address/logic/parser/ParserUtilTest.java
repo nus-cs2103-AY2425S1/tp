@@ -231,6 +231,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseEmergencyContactName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmergencyContactName((String) null));
+    }
+
+    @Test
     public void parseEmergencyContactName_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseEmergencyContactName(INVALID_EMERGENCY_CONTACT_NAME));
     }
