@@ -28,7 +28,7 @@ public class DeleteAssignmentCommand extends Command {
             + "Parameters: "
             + "[" + PREFIX_STUDENT_INDEX + "INDEX] "
             + "[" + PREFIX_ASSIGNMENT_INDEX + "INDEX] "
-            + "\nExample: " + COMMAND_WORD
+            + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_STUDENT_INDEX + "1 "
             + PREFIX_ASSIGNMENT_INDEX + "1 ";
     public static final String MESSAGE_DELETE_SUCCESS = "Deleted Assignment: %1$s belonging "
@@ -63,7 +63,7 @@ public class DeleteAssignmentCommand extends Command {
         assignmentList.remove(assignmentIndex.getZeroBased());
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_DELETE_SUCCESS, assignmentToDelete.getName(),
-                student.getName().fullName));
+                student.getName().fullName), student, studentIndex.getZeroBased());
     }
     @Override
     public boolean equals(Object other) {
