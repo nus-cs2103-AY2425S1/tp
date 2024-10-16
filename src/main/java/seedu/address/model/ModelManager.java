@@ -124,6 +124,23 @@ public class ModelManager implements Model {
         addressBook.setVendor(target, editedVendor);
     }
 
+    @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+
+    @Override
+    public void deleteEvent(Event target) {
+        addressBook.removeEvent(target);
+    }
+
+    @Override
+    public void addEvent(Event event) {
+        addressBook.addEvent(event);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+    }
+
     // =========== Assigning vendors and events =============================================================
     @Override
     public boolean isVendorAssignedToEvent(Vendor vendor, Event event) {
@@ -147,23 +164,6 @@ public class ModelManager implements Model {
     public ObservableList<Vendor> getAssociatedVendors(Event event) {
         requireNonNull(event);
         return addressBook.getAssociatedVendors(event);
-    }
-
-    @Override
-    public boolean hasEvent(Event event) {
-        requireNonNull(event);
-        return addressBook.hasEvent(event);
-    }
-
-    @Override
-    public void deleteEvent(Event target) {
-        addressBook.removeEvent(target);
-    }
-
-    @Override
-    public void addEvent(Event event) {
-        addressBook.addEvent(event);
-        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
     // =========== Filtered Vendor List Accessors =============================================================
