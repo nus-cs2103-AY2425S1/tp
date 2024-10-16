@@ -1,6 +1,8 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.TypicalDeliveries.APPLES;
+import static seedu.address.testutil.TypicalDeliveries.ORANGES;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -9,7 +11,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class MessageTest {
@@ -28,18 +32,16 @@ public class MessageTest {
         assertEquals(expectedMessage, actualMessage);
     }
 
-    //Relook at this section after creation of typicalDeliveries
-    //    @Test
-    //    public void testFormatDelivery() {
-    //        Delivery delivery = new Delivery(new ItemName("Laptop"),
-    //        new Address("123, Some Street"), new Cost("$1000"),
-    //                LocalDate.of(2023, 10, 15), LocalTime.of(14, 30), new Eta("30 minutes"));
-    //
-    //        String expectedMessage = "Laptop; $1000; 2023-10-15; 14:30; 30 minutes";
-    //        String actualMessage = Messages.format(delivery);
-    //
-    //        assertEquals(expectedMessage, actualMessage);
-    //    }
+    @Test
+    public void testFormatDelivery() {
+        Delivery delivery = new DeliveryBuilder(APPLES).build();
+
+        String expectedMessage = "Item: apples; 123, Jurong West Ave 6, #08-111, S120300; "
+                + "Cost: $100; ETA: 2024-12-31; Date Ordered: 2024-10-16; Time Ordered: 00:00";
+        String actualMessage = Messages.format(delivery);
+
+        assertEquals(expectedMessage, actualMessage);
+    }
 
     @Test
     public void testFormatPersonList() {
@@ -57,22 +59,19 @@ public class MessageTest {
         assertEquals(expectedMessage, actualMessage);
     }
 
-    //Relook at this section after creation of typicalDeliveries
-    //    @Test
-    //    public void testFormatDeliveryList() {
-    //        Delivery delivery1 = new Delivery(new ItemName("Laptop"),
-    //        new Address("123, Some Street"), new Cost("$1000"),
-    //                LocalDate.of(2023, 10, 15), LocalTime.of(14, 30), new Eta("30 minutes"));
-    //        Delivery delivery2 = new Delivery(new ItemName("Phone"),
-    //        new Address("456, Another Street"), new Cost("$500"),
-    //                LocalDate.of(2023, 10, 16), LocalTime.of(10, 00), new Eta("15 minutes"));
-    //
-    //        List<Delivery> deliveryList = Arrays.asList(delivery1, delivery2);
-    //
-    //        String expectedMessage = "\nLaptop; $1000; 2023-10-15; 14:30; 30 minutes"
-    //                + "\nPhone; $500; 2023-10-16; 10:00; 15 minutes";
-    //        String actualMessage = Messages.formatDeliveryList(deliveryList);
-    //
-    //        assertEquals(expectedMessage, actualMessage);
-    //    }
+    @Test
+    public void testFormatDeliveryList() {
+        Delivery delivery1 = new DeliveryBuilder(APPLES).build();
+        Delivery delivery2 = new DeliveryBuilder(ORANGES).build();
+
+        List<Delivery> deliveryList = Arrays.asList(delivery1, delivery2);
+
+        String expectedMessage = "\nItem: apples; 123, Jurong West Ave 6, #08-111, S120300; Cost: $100; "
+                + "ETA: 2024-12-31; Date Ordered: 2024-10-16; Time Ordered: 00:00"
+                + "\nItem: oranges; 123, Jurong West Ave 6, #08-111, S120300; "
+                + "Cost: $120; ETA: 2024-11-23; Date Ordered: 2024-10-17; Time Ordered: 00:10";
+        String actualMessage = Messages.formatDeliveryList(deliveryList);
+
+        assertEquals(expectedMessage, actualMessage);
+    }
 }
