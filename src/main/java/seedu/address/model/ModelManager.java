@@ -154,7 +154,7 @@ public class ModelManager implements Model {
     }
 
     // Automatically trigger backup after operations
-    private void triggerBackup() {
+    protected void triggerBackup() {
         try {
             logger.info("Automatic backup triggered.");
             backupManager.triggerBackup(storage.getAddressBookFilePath());
@@ -177,24 +177,6 @@ public class ModelManager implements Model {
     }
 
     // ============ Backup and Restore Methods ===========================================================
-
-    /**
-     * Computes a hash of the current AddressBook data to detect changes.
-     */
-    private String computeAddressBookHash() {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(addressBook.toString().getBytes());
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : hash) {
-                hexString.append(String.format("%02x", b));
-            }
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            logger.warning("Hash algorithm not found: " + e.getMessage());
-            return "";
-        }
-    }
 
     /**
      * Cleans up old backups, retaining only the latest `maxBackups`.

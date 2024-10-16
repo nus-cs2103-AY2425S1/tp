@@ -288,4 +288,17 @@ public class ModelManagerTest {
                 "Cleaning old backups with valid storage should not throw any exception.");
     }
 
+    @Test
+    public void triggerBackup_validStorage_executesSuccessfully() throws IOException {
+        // Initialize with valid storage
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(Paths.get("data/addressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(Paths.get("data/userPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+
+        ModelManager modelManagerWithStorage = new ModelManager(new AddressBook(), new UserPrefs(), storage);
+
+        // Trigger backup and check that no exception is thrown
+        assertDoesNotThrow(() -> modelManagerWithStorage.triggerBackup());
+    }
+
 }
