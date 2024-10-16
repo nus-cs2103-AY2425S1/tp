@@ -4,11 +4,10 @@ import java.util.Objects;
 
 /**
  * A class meant to group all relevant details of an appointment together.
- * @param <Id>
- * @param <Id>
- * @param <String>
+ *
+ * @param <Id> A generic type representing the ID type.
  */
-public class Appointment<Id, String> {
+public class Appointment<Id> {
     private Id patientId;
     private Id doctorId;
     private String remarks;
@@ -47,11 +46,22 @@ public class Appointment<Id, String> {
             return false;
         }
 
-        Appointment<?, ?> appointment = (Appointment<?, ?>) o; // Typecast to Appointment
+        Appointment<?> appointment = (Appointment<?>) o; // Typecast to Appointment
 
         // Compare key and value
         return Objects.equals(patientId, appointment.patientId)
                 && Objects.equals(doctorId, appointment.doctorId)
                 && Objects.equals(remarks, appointment.remarks);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(patientId, doctorId, remarks);
+    }
+
+    @Override
+    public String toString() {
+        return "Appointment: " + getPatientId() + " (patient id) with " + getDoctorId() + " (doctor id). "
+                + "Remarks: " + getRemarks();
     }
 }
