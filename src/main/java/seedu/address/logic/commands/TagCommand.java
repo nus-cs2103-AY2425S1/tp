@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -43,16 +45,19 @@ public class TagCommand extends Command {
     public static final String MESSAGE_STUDENT_NOT_FOUND = "Student does not exist in address book.";
 
 
-    private final Name nameToTag;
-    private final UpdateCommand.UpdatePersonDescriptor tagsToAdd;
+    public final Name nameToTag;
+    public final UpdatePersonDescriptor tagsToAdd;
 
     /**
      * @param nameToTag name of the person in the address book to tag
      * @param tagsToAdd details to tag the person with
      */
     public TagCommand(Name nameToTag, UpdateCommand.UpdatePersonDescriptor tagsToAdd) {
+        requireNonNull(nameToTag);
+        requireNonNull(tagsToAdd);
         this.nameToTag = nameToTag;
         this.tagsToAdd = tagsToAdd;
+
     }
 
     @Override
@@ -63,7 +68,7 @@ public class TagCommand extends Command {
 
         Optional<Person> optionalPersonToTag = lastShownList.stream()
                 .filter(x -> x.getName()
-                        .equals(nameToTag)).findFirst();
+                .equals(nameToTag)).findFirst();
 
 
         Person personToTag;
@@ -96,6 +101,29 @@ public class TagCommand extends Command {
         TaskList updatedTaskList = tagsToAdd.getTaskList().orElse(personToTag.getTaskList());
         return new Person(updatedName, updatedPhone, updatedEmergencyContact,
                 updatedAddress, updatedNote, updatedSubjects, schoolLevel, updatedTaskList);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof TagCommand t)) {
+            return false;
+        }
+
+        return this.nameToTag.equals(t.nameToTag) && this.tagsToAdd.equals(t.tagsToAdd);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("name", nameToTag)
+                .add("level", tagsToAdd.getLevel())
+                .add("subjects", tagsToAdd.getSubjects())
+                .toString();
     }
 
 
