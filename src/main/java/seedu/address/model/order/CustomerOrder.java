@@ -1,10 +1,12 @@
 package seedu.address.model.order;
 
 import seedu.address.model.product.Pastry;
+import seedu.address.model.product.Product;
+
 import java.util.List;
 
 public class CustomerOrder extends Order {
-    public CustomerOrder(String phoneNumber, List<Pastry> items, String status) {
+    public CustomerOrder(String phoneNumber, List<Product> items, String status) {
         super(phoneNumber, items, status);
     }
 
