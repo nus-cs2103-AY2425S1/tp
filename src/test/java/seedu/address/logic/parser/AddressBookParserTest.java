@@ -21,6 +21,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GroupCommand;
+import seedu.address.logic.commands.GroupsCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -28,6 +29,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.GroupUtil;
+import seedu.address.testutil.GroupsUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -45,6 +47,11 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_group() throws Exception {
         assertTrue(parser.parseCommand(GroupUtil.groupCommand()) instanceof GroupCommand);
+    }
+
+    @Test
+    public void parseCommand_groups() throws Exception {
+        assertTrue(parser.parseCommand(GroupsUtil.groupsCommand()) instanceof GroupsCommand);
     }
 
     @Test

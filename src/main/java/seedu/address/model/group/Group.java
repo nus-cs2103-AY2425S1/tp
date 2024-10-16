@@ -22,8 +22,10 @@ public class Group {
      * @throws NullPointerException if {@code groupName} or {@code members} is null.
      */
     public Group(String groupName, List<Person> members) {
+
         requireNonNull(groupName);
         requireNonNull(members);
+
         this.groupName = new GroupName(groupName);
         this.members = members;
     }

@@ -31,7 +31,6 @@ public class ModelManager implements Model {
 
     private final List<Group> groups = new ArrayList<>();
 
-
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -49,7 +48,8 @@ public class ModelManager implements Model {
         this(new AddressBook(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
+    // =========== UserPrefs
+    // ==================================================================================
 
     @Override
     public ReadOnlyUserPrefs getUserPrefs() {
@@ -84,7 +84,8 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    // =========== AddressBook
+    // ================================================================================
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
@@ -125,10 +126,12 @@ public class ModelManager implements Model {
         setPerson(target, updatedPerson);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    // =========== Filtered Person List Accessors
+    // =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Person} backed by the
+     * internal list of
      * {@code versionedAddressBook}
      */
     @Override
@@ -142,7 +145,8 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    //=========== Group Logic =============================================================
+    // =========== Group Logic
+    // =============================================================
 
     /**
      * Adds a group to the Model
@@ -180,6 +184,21 @@ public class ModelManager implements Model {
         return groups.toString();
     }
 
+    /**
+     * Checks if a group with the same name already exists in the Model
+     *
+     * @param group Group to be checked
+     * @return true if the group exists, false otherwise
+     */
+    @Override
+    public boolean hasGroupName(Group group) {
+        if (group == null) {
+            throw new NullPointerException();
+        }
+        return groups.stream().anyMatch(existingGroup -> existingGroup.getGroupName().equals(group
+                .getGroupName()));
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -196,6 +215,7 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
+
     @Override
     public List<Group> updateFilteredGroupList(GroupContainsKeywordsPredicate groupPredicate) {
         requireNonNull(groupPredicate);
@@ -209,6 +229,5 @@ public class ModelManager implements Model {
         // Return the list of matching groups
         return matchingGroups;
     }
-
 
 }
