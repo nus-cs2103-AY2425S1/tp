@@ -35,7 +35,7 @@ public class Person {
         this.email = email;
         this.gender = gender;
         this.age = age;
-        this.detail = detail;
+        this.detail = (detail != null) ? detail : new Detail("");
         this.tags.addAll(tags);
     }
 

@@ -1,10 +1,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.AGE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.AGE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.DETAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DETAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AGE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
@@ -27,6 +30,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
@@ -119,14 +123,23 @@ public class AddCommandParserTest {
 
     }
 
-    //    @Test
-    //    public void parse_optionalFieldsMissing_success() {
-    //        // zero tags
-    //        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-    //        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-    //                        + GENDER_DESC_AMY + AGE_DESC_AMY + DETAIL_DESC_AMY,
-    //                new AddCommand(expectedPerson));
-    //    }
+    @Test
+    public void parse_tagFieldsMissing_success() {
+        // zero tags
+        Person expectedPerson = new PersonBuilder(AMY).withTags().withDetail("detail").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY
+                        + GENDER_DESC_AMY + AGE_DESC_AMY + DETAIL_DESC_AMY,
+                new AddCommand(expectedPerson));
+    }
+
+    @Test
+    public void parse_detailFieldsMissing_success() {
+        // no detail
+        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY
+                        + GENDER_DESC_AMY + AGE_DESC_AMY,
+                new AddCommand(expectedPerson));
+    }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
