@@ -110,7 +110,8 @@ public class EditCommand extends Command {
         //placeholder
         Appointment appointment = editPersonDescriptor.getAppointment().orElse(personToEdit.getAppointment());
         Birthday birthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday());
-        List<Policy> policies = editPolicies(personToEdit, editPersonDescriptor);
+        List<Policy> policies = editPolicies(personToEdit,
+                editPersonDescriptor.getPolicies().orElse(Collections.emptyMap()));
 
         Person newPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
                 appointment, birthday);
@@ -120,10 +121,9 @@ public class EditCommand extends Command {
         return newPerson;
     }
 
-    private static List<Policy> editPolicies(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
+    public static List<Policy> editPolicies(Person personToEdit, Map<Index, Policy> newPolicies)
             throws CommandException {
         List<Policy> oldPolicies = personToEdit.getPolicies();
-        Map<Index, Policy> newPolicies = editPersonDescriptor.getPolicies().orElse(Collections.emptyMap());
 
         List<Policy> updatedPolicies = new ArrayList<Policy>(oldPolicies);
         int policiesSize = updatedPolicies.size();
