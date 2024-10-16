@@ -51,7 +51,7 @@ Here are some **key points** to keep in mind when using commands:
 - You should supply all the fields (words in `UPPER_CASE`) that are needed for a command.<br>
   e.g. in `add person n/NAME`, `NAME` is a field which can be used as `add person n/John Doe`.
 
-- The `INDEX` in a command format refers to the index number (shown beside the person or appointment) in the displayed list.
+- The `INDEX` in command formats like `person edit` and `person delete` refers to the index number (shown beside the person or appointment) in the displayed list. The index **must be a positive integer** 1, 2, 3, …​
 
 - Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -117,7 +117,7 @@ Edits an existing person in the address book.
 
 Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- Edits the person at the specified `INDEX`.
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -159,8 +159,6 @@ Deletes the specified person from the address book.
 Format: `delete person INDEX`
 
 - Deletes the person at the specified `INDEX`.
-- The index refers to the index number shown in the displayed person list.
-- The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 
