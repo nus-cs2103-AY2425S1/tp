@@ -82,7 +82,6 @@ public class Vendor extends Contact {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("id", this.getId())
                 .add("name", this.getName())
                 .add("phone", this.getPhone())
                 .add("email", this.getEmail())
