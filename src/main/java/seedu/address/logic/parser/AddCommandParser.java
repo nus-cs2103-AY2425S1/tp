@@ -47,12 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Priority priority;
-        if (argMultimap.getValue(PREFIX_PRIORITY).isEmpty()) {
-            priority = ParserUtil.parsePriority("low");
-        } else {
-            priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get());
-        }
+        Priority priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).orElse("low"));
 
         Person person = new Person(name, phone, email, address, tagList, priority);
 
