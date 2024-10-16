@@ -29,13 +29,13 @@ public class AssignPiecesCommandParserTest {
                 Set.of(new PianoPiece(VALID_PIANO_PIECE_BEETHOVEN))
         );
 
-        String userInput = INDEX_FIRST_STUDENT.getOneBased() + PIANO_PIECE_DESC_BEETHOVEN;
+        String userInput = "1" + PIANO_PIECE_DESC_BEETHOVEN;
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
     @Test
     public void parse_pianoPieceNotPresent_failure() {
-        String userInput = INDEX_FIRST_STUDENT.getOneBased() + "";
+        String userInput = "1";
         assertParseFailure(parser, userInput, invalidFormatMessage);
     }
     @Test
@@ -53,14 +53,12 @@ public class AssignPiecesCommandParserTest {
     }
     @Test
     public void parse_invalidPianoPiece_failure() {
-        String invalidPieceName = " ";
-        String userInput = INDEX_FIRST_STUDENT.getOneBased() + INVALID_PIANO_PIECE_DESC;
+        String userInput = "1" + INVALID_PIANO_PIECE_DESC;
         assertParseFailure(parser, userInput, PianoPiece.MESSAGE_CONSTRAINTS);
     }
     @Test
     public void parse_multiplePianoPieces_success() {
-        String userInput = INDEX_FIRST_STUDENT.getOneBased() + " " + PIANO_PIECE_DESC_BEETHOVEN
-                + PIANO_PIECE_DESC_PACHELBEL;
+        String userInput = "1" + PIANO_PIECE_DESC_BEETHOVEN + PIANO_PIECE_DESC_PACHELBEL;
         Set<PianoPiece> pianoPieceSet = PianoPiece.getPianoPieceSet(VALID_PIANO_PIECE_BEETHOVEN,
                 VALID_PIANO_PIECE_PACHELBEL);
         AssignPiecesCommand expectedCommand = new AssignPiecesCommand(INDEX_FIRST_STUDENT, pianoPieceSet);
