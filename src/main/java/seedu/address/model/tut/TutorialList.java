@@ -8,7 +8,7 @@ import seedu.address.model.tut.exceptions.DuplicateTutorialException;
 import seedu.address.model.tut.exceptions.TutNoFoundException;
 
 /**
- * Represents an tutorial list with a title, due date, and completion statuses for students.
+ * Represents a tutorial list with a title, due date, and completion statuses for students.
  */
 public class TutorialList {
 
