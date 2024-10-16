@@ -132,7 +132,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Marking Attendance: `markattend`
+### Marking Attendance: `attend`
 
 Marks the attendance of the specified person from the address book.
 
