@@ -10,11 +10,11 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.FindAddressCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindEmailCommand;
-import seedu.address.logic.commands.FindNameCommand;
-import seedu.address.logic.commands.FindPhoneCommand;
+import seedu.address.logic.commands.findcommand.FindAddressCommand;
+import seedu.address.logic.commands.findcommand.FindCommand;
+import seedu.address.logic.commands.findcommand.FindEmailCommand;
+import seedu.address.logic.commands.findcommand.FindNameCommand;
+import seedu.address.logic.commands.findcommand.FindPhoneCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;

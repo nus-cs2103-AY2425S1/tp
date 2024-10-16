@@ -11,16 +11,18 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.logic.commands.FindAddressCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindEmailCommand;
-import seedu.address.logic.commands.FindNameCommand;
-import seedu.address.logic.commands.FindPhoneCommand;
+import seedu.address.logic.commands.findcommand.FindAddressCommand;
+import seedu.address.logic.commands.findcommand.FindCommand;
+import seedu.address.logic.commands.findcommand.FindEmailCommand;
+import seedu.address.logic.commands.findcommand.FindNameCommand;
+import seedu.address.logic.commands.findcommand.FindPhoneCommand;
+import seedu.address.logic.commands.findcommand.FindTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 
 /**
@@ -38,7 +40,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
@@ -51,6 +53,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         boolean hasPhonePrefix = argMultimap.getValue(PREFIX_PHONE).isPresent();
         boolean hasEmailPrefix = argMultimap.getValue(PREFIX_EMAIL).isPresent();
         boolean hasAddressPrefix = argMultimap.getValue(PREFIX_ADDRESS).isPresent();
+        boolean hasTagPrefix = argMultimap.getValue(PREFIX_TAG).isPresent();
 
         if (hasNamePrefix) {
             String nameInput = argMultimap.getValue(PREFIX_NAME).get().trim(); // Get the actual name input
@@ -86,6 +89,15 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
             List<String> addressKeywords = Arrays.asList(addressInput.split("\\s+"));
             return new FindAddressCommand(new AddressContainsKeywordsPredicate(addressKeywords));
+        }
+
+        if (hasTagPrefix) {
+            String tagInput = argMultimap.getValue(PREFIX_TAG).get().trim(); // Get the actual tag input
+            if (tagInput.isEmpty()) {
+                throw new ParseException("Tag cannot be empty!");
+            }
+            List<String> tagKeywords = Arrays.asList(tagInput.split("\\s+"));
+            return new FindTagCommand(new TagContainsKeywordsPredicate(tagKeywords));
         }
 
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));

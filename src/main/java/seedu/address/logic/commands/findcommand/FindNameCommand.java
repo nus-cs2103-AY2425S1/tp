@@ -1,15 +1,17 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.findcommand;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.person.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 /**
- * Finds and lists all persons in address book whose email contains any of the argument keywords.
- * Keyword matching is case-insensitive and allows partial matching, including numbers and symbols.
+ * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Keyword matching is case-insensitive and allows partial matching.
  */
-public class FindEmailCommand extends FindCommand {
-    public static final String MESSAGE_FIND_EMAIL_PERSON_SUCCESS = "Search for email containing \"%s\" was successful. "
+public class FindNameCommand extends FindCommand {
+
+    public static final String MESSAGE_FIND_NAME_PERSON_SUCCESS = "Search for name containing \"%s\" was successful. "
             + " Showing results:";
 
     /**
@@ -19,17 +21,17 @@ public class FindEmailCommand extends FindCommand {
      *
      * @param predicate Keywords used to filter contacts by name.
      */
-    public FindEmailCommand(EmailContainsKeywordsPredicate predicate) {
+    public FindNameCommand(NameContainsKeywordsPredicate predicate) {
         super(predicate);
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList((EmailContainsKeywordsPredicate) predicate);
+        model.updateFilteredPersonList((NameContainsKeywordsPredicate) predicate);
 
         if (!model.getFilteredPersonList().isEmpty()) {
-            return new CommandResult(String.format(MESSAGE_FIND_EMAIL_PERSON_SUCCESS, predicate.getDisplayString()));
+            return new CommandResult(String.format(MESSAGE_FIND_NAME_PERSON_SUCCESS, predicate.getDisplayString()));
         } else {
             return new CommandResult(MESSAGE_FIND_PERSON_UNSUCCESSFUL);
         }
@@ -42,7 +44,7 @@ public class FindEmailCommand extends FindCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindEmailCommand otherFindCommand)) {
+        if (!(other instanceof FindNameCommand otherFindCommand)) {
             return false;
         }
 
