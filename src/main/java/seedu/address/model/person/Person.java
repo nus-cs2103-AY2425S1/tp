@@ -44,7 +44,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Optional<Address> address, Set<Tag> tags, ModuleRoleMap moduleRoleMap) {
+    public Person(Name name, Phone phone, Email email, Optional<Address> address, Set<Tag> tags,
+                  ModuleRoleMap moduleRoleMap) {
         requireAllNonNull(name, phone, email, tags, moduleRoleMap);
         this.name = name;
         this.phone = phone;

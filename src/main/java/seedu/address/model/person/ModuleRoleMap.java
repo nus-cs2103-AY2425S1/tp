@@ -10,8 +10,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.management.relation.Role;
-
 /**
  * Represents the mapping between module and role type in the roles
  * taken by a Person in NUS.

@@ -38,8 +38,9 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("moduleRoleMap") JsonAdaptedModuleRoleMap moduleRoleMap) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("moduleRoleMap") JsonAdaptedModuleRoleMap moduleRoleMap) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -57,9 +58,9 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().map(Object::toString).orElse(null);
+        address = source.getAddress().map(Object :: toString).orElse(null);
         tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+                .map(JsonAdaptedTag :: new)
                 .collect(Collectors.toList()));
         moduleRoleMap = new JsonAdaptedModuleRoleMap(source.getModuleRoleMap());
     }
@@ -112,7 +113,12 @@ class JsonAdaptedPerson {
 
         final ModuleRoleMap modelModuleRoleMap = moduleRoleMap.toModelType();
 
-        return new Person(modelName, modelPhone, modelEmail, Optional.ofNullable(modelAddress), modelTags, modelModuleRoleMap);
+        return new Person(modelName,
+                modelPhone,
+                modelEmail,
+                Optional.ofNullable(modelAddress),
+                modelTags,
+                modelModuleRoleMap);
     }
 
 }

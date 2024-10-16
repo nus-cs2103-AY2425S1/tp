@@ -14,6 +14,9 @@ import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleRoleMap;
 import seedu.address.model.person.RoleType;
 
+/**
+ * Jackson-friendly version of {@link ModuleRoleMap}.
+ */
 public class JsonAdaptedModuleRoleMap {
     private final Map<String, String> moduleRoleMap;
 
