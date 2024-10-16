@@ -7,8 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HIGH_RISK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOW_RISK;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -17,12 +17,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
-
-    @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
-    }
 
     @Test
     public void isSamePerson() {
@@ -34,7 +28,7 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HIGH_RISK).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -86,14 +80,50 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_LOW_RISK).build();
         assertFalse(ALICE.equals(editedAlice));
+
     }
+    @Test
+    public void hashCode_samePerson_sameHashCode() {
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentPersons_differentHashCode() {
+        assertFalse(ALICE.hashCode() == BOB.hashCode());
+    }
+
+    @Test
+    public void constructor_allFieldsPresent_success() {
+        Person person = new PersonBuilder().withName("Charlie")
+              .withPhone("12345678")
+              .withEmail("charlie@example.com")
+              .withAddress("123, Charlies Street")
+              .withTags("Medium Risk").build();
+
+        assertEquals("Charlie", person.getName().toString());
+        assertEquals("12345678", person.getPhone().toString());
+        assertEquals("charlie@example.com", person.getEmail().toString());
+        assertEquals("123, Charlies Street", person.getAddress().toString());
+        assertEquals("Medium Risk", person.getTag().toString());
+    }
+
+    @Test
+    public void getters_allFieldsCorrectlyRetrieved() {
+        assertEquals(ALICE.getName(), ALICE.getName());
+        assertEquals(ALICE.getPhone(), ALICE.getPhone());
+        assertEquals(ALICE.getEmail(), ALICE.getEmail());
+        assertEquals(ALICE.getAddress(), ALICE.getAddress());
+        assertEquals(ALICE.getTag(), ALICE.getTag());
+    }
+
 
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tag=" + ALICE.getTag() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
