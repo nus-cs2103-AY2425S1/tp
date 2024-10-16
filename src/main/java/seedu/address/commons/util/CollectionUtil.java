@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -24,6 +25,17 @@ public class CollectionUtil {
     public static void requireAllNonNull(Collection<?> items) {
         requireNonNull(items);
         items.forEach(Objects::requireNonNull);
+    }
+
+    /**
+     * Throws NullPointerException if {@code items} or any element of {@code items} is null.
+     */
+    public static void requireAllNonNull(Map<?, ?> map) {
+        requireNonNull(map);
+        map.forEach((key, value) -> {
+            requireNonNull(key);
+            requireNonNull(value);
+        });
     }
 
     /**

@@ -1,7 +1,7 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,16 +39,13 @@ public class ModuleRoleMap {
      * @param roleTypes Array of role type String
      */
     public ModuleRoleMap(ModuleCode[] moduleCodes, RoleType[] roleTypes) {
-        requireNonNull(moduleCodes);
-        requireNonNull(roleTypes);
+        requireAllNonNull((Object[]) moduleCodes);
+        requireAllNonNull((Object[]) roleTypes);
 
         if (moduleCodes.length != roleTypes.length) {
             throw new IllegalArgumentException(
                     "Module code array's length is not consistent with that of role type array.");
         }
-
-        checkArgument(isValidModuleCodeArray(moduleCodes), ModuleCode.MESSAGE_CONSTRAINTS);
-        checkArgument(isValidRoleTypeArray(roleTypes), MESSAGE_CONSTRAINTS);
 
         HashMap<ModuleCode, RoleType> newRoles = new HashMap<>();
         for (int i = 0; i < moduleCodes.length; i++) {
@@ -64,7 +61,7 @@ public class ModuleRoleMap {
      * @param roles new roles which are assigned to the Person
      */
     public ModuleRoleMap(HashMap<ModuleCode, RoleType> roles) {
-        requireNonNull(roles);
+        requireAllNonNull(roles);
         this.roles = new HashMap<>(roles);
     }
 
@@ -79,38 +76,6 @@ public class ModuleRoleMap {
         requireNonNull(roleTypes);
         for (String keyword: roleTypes) {
             if (!keyword.toLowerCase().matches(VALIDATION_REGEX)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Returns true if the given ModuleCode array does not contain null object.
-     *
-     * @param moduleCodes Array of module codes.
-     * @return whether the array contains all valid ModuleCode
-     */
-    public static boolean isValidModuleCodeArray(ModuleCode[] moduleCodes) {
-        requireNonNull(moduleCodes);
-        for (ModuleCode moduleCode: moduleCodes) {
-            if (moduleCode == null) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Returns true if the given RoleType array does not contain null object.
-     *
-     * @param roleTypes Array of RoleType objects.
-     * @return whether the array contains all valid RoleType objects.
-     */
-    public static boolean isValidRoleTypeArray(RoleType[] roleTypes) {
-        requireNonNull(roleTypes);
-        for (RoleType roleType: roleTypes) {
-            if (roleType == null) {
                 return false;
             }
         }

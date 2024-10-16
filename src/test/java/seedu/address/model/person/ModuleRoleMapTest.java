@@ -66,60 +66,6 @@ public class ModuleRoleMapTest {
     }
 
     @Test
-    public void isValidRoleTypeArray_arrayContainsOnlyNull_false() {
-        assertFalse(ModuleRoleMap.isValidRoleTypeArray(new RoleType[]{null}));
-    }
-
-    @Test
-    public void isValidRoleTypeArray_arrayContainsOnlyNulls_false() {
-        assertFalse(ModuleRoleMap.isValidRoleTypeArray(new RoleType[]{null, null, null}));
-    }
-
-    @Test
-    public void isValidRoleTypeArray_arrayContainsNullAndValidRoleType_false() {
-        assertFalse(ModuleRoleMap.isValidRoleTypeArray(new RoleType[]{RoleType.TUTOR, null}));
-    }
-
-    @Test
-    public void isValidRoleTypeArray_validRoleType() {
-        assertTrue(ModuleRoleMap.isValidRoleTypeArray(new RoleType[]{RoleType.TUTOR}));
-    }
-
-    @Test
-    public void isValidRoleTypeArray_validRoleTypes() {
-        assertTrue(ModuleRoleMap.isValidRoleTypeArray(
-                new RoleType[]{RoleType.TUTOR, RoleType.STUDENT, RoleType.PROFESSOR}));
-    }
-
-    @Test
-    public void isValidModuleCodeArray_arrayContainsOnlyNull_false() {
-        assertFalse(ModuleRoleMap.isValidModuleCodeArray(new ModuleCode[]{null}));
-    }
-
-    @Test
-    public void isValidModuleCodeArray_arrayContainsOnlyNulls_false() {
-        assertFalse(ModuleRoleMap.isValidModuleCodeArray(new ModuleCode[]{null, null, null}));
-    }
-
-    @Test
-    public void isValidModuleCodeArray_arrayContainsNullAndValidModuleCode_false() {
-        assertFalse(ModuleRoleMap.isValidModuleCodeArray(new ModuleCode[]{new ModuleCode("CS1231S"), null}));
-    }
-
-    @Test
-    public void isValidModuleCodeArray_validModuleCode() {
-        assertTrue(ModuleRoleMap.isValidModuleCodeArray(new ModuleCode[]{new ModuleCode("CS1231S")}));
-    }
-
-    @Test
-    public void isValidModuleCodeArray_validModuleCodes() {
-        assertTrue(ModuleRoleMap.isValidModuleCodeArray(
-                new ModuleCode[]{new ModuleCode("CS1231S"),
-                    new ModuleCode("MA1521"),
-                    new ModuleCode("CS2030S")}));
-    }
-
-    @Test
     public void roleTypeStringToEnum() {
         assertThrows(NullPointerException.class, () -> {
             ModuleRoleMap.roleTypeStringToEnum(null);
