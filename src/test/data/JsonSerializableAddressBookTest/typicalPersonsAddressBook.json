@@ -7,7 +7,8 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "note" : "Needs Jesus rn",
     "subjects" : [ "PHYSICS" ],
-    "level" : "S3"
+    "level" : "S3",
+    "taskList" : [ ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",

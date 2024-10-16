@@ -28,6 +28,15 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
+     * Returns true if there are no tasks in the task list.
+     *
+     * @return true if the task list contains no tasks, false otherwise.
+     */
+    public boolean isEmpty() {
+        return tasks.isEmpty();
+    }
+
+    /**
      * Adds a task to the list and sorts it by date.
      */
     public void add(Task toAdd) {
@@ -57,6 +66,17 @@ public class TaskList implements Iterable<Task> {
     public void setTasks(List<Task> replacementTasks) {
         requireNonNull(replacementTasks);
         tasks.setAll(replacementTasks);
+    }
+
+    /**
+     * Checks if the task list contains the specified task.
+     *
+     * @param toCheck The task to check for.
+     * @return true if the task is in the list, false otherwise.
+     */
+    public boolean contains(Task toCheck) {
+        requireNonNull(toCheck);
+        return tasks.contains(toCheck);
     }
 
     /**
@@ -106,5 +126,19 @@ public class TaskList implements Iterable<Task> {
         }
 
         return String.join("\n", result);
+    }
+
+    /**
+     * Creates and returns a copy of the current TaskList.
+     * This performs a deep copy of the tasks.
+     *
+     * @return a new TaskList that is a copy of the current one.
+     */
+    public TaskList copy() {
+        TaskList copiedTaskList = new TaskList();
+        for (Task task : tasks) {
+            copiedTaskList.add(new Task(task.getTaskDescription(), task.getTaskDeadline()));
+        }
+        return copiedTaskList;
     }
 }
