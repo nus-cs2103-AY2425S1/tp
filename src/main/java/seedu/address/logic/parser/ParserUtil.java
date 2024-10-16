@@ -12,8 +12,10 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleRoleMap;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RoleType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -121,6 +123,30 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String keyword} into a {@code RoleType}.
+     */
+    public static RoleType parseRoleType(String keyword) throws ParseException {
+        requireNonNull(keyword);
+        String trimmedLowerCaseKeyword = keyword.trim().toLowerCase();
+        if (!RoleType.isValidRoleTypeKeyword(trimmedLowerCaseKeyword)) {
+            throw new ParseException(ModuleRoleMap.MESSAGE_CONSTRAINTS);
+        }
+        switch (trimmedLowerCaseKeyword) {
+        case "": // Fall through
+        case "student":
+            return RoleType.STUDENT;
+        case "tutor": // Fall through
+        case "ta":
+            return RoleType.TUTOR;
+        case "professor": // Fall through
+        case "prof":
+            return RoleType.PROFESSOR;
+        default:
+            throw new ParseException(ModuleRoleMap.MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**

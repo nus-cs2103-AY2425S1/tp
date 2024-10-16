@@ -8,7 +8,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -74,6 +76,35 @@ public class CollectionUtilTest {
     }
 
     @Test
+    public void requireAllNonNullMap() {
+        // null reference
+        assertNullPointerExceptionThrown((Map<?, ?>) null);
+
+        // Map containing nulls
+        assertNullPointerExceptionThrown(new HashMap<>() {{
+                put(null, null);
+            }});
+
+        assertNullPointerExceptionThrown(new HashMap<>() {{
+                put(1, null);
+            }});
+
+        assertNullPointerExceptionThrown(new HashMap<>() {{
+                put(null, 1);
+            }});
+
+        assertNullPointerExceptionThrown(new HashMap<>() {{
+                put(1, null);
+            }});
+
+        // empty Map
+        assertNullPointerExceptionNotThrown(Map.of());
+
+        // valid entries
+        assertNullPointerExceptionNotThrown(Map.of(1, 2, 3, 4));
+    }
+
+    @Test
     public void isAnyNonNull() {
         assertFalse(CollectionUtil.isAnyNonNull());
         assertFalse(CollectionUtil.isAnyNonNull((Object) null));
@@ -82,12 +113,46 @@ public class CollectionUtilTest {
         assertTrue(CollectionUtil.isAnyNonNull(new Object(), null));
     }
 
+    @Test
+    public void areOfSameSize() {
+        assertThrows(NullPointerException.class, () -> {
+            CollectionUtil.areOfSameSize(new Object[]{}, null);
+        });
+        assertTrue(CollectionUtil.areOfSameSize());
+        assertTrue(CollectionUtil.areOfSameSize(
+                new Object[]{null, 1, "Hello", null, 3.14},
+                new Integer[]{1, 2, 3, 4, 5}
+        ));
+        assertFalse(CollectionUtil.areOfSameSize(
+                new Object[]{1, 2, 3},
+                new Integer[]{2, 3}
+        ));
+        assertTrue(CollectionUtil.areOfSameSize(
+                new Object[]{1, 2, 3}
+        ));
+        assertTrue(CollectionUtil.areOfSameSize(
+                new Object[]{}
+        ));
+        assertTrue(CollectionUtil.areOfSameSize(
+                new Object[]{},
+                new String[]{}
+        ));
+    }
+
     /**
      * Asserts that {@code CollectionUtil#requireAllNonNull(Object...)} throw {@code NullPointerException}
      * if {@code objects} or any element of {@code objects} is null.
      */
     private void assertNullPointerExceptionThrown(Object... objects) {
         assertThrows(NullPointerException.class, () -> requireAllNonNull(objects));
+    }
+
+    /**
+     * Asserts that {@code CollectionUtil#requireAllNonNull(Map<?, ?>)} throw {@code NullPointerException}
+     * if {@code map} or any element of {@code map} is null.
+     */
+    private void assertNullPointerExceptionThrown(Map<?, ?> map) {
+        assertThrows(NullPointerException.class, () -> requireAllNonNull(map));
     }
 
     /**
