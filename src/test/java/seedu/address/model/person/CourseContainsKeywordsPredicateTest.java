@@ -44,36 +44,29 @@ public class CourseContainsKeywordsPredicateTest {
 
     @Test
     public void test_courseContainsKeywords_returnsTrue() {
-        // One keyword
         CourseContainsKeywordsPredicate predicate =
                 new CourseContainsKeywordsPredicate(Collections.singletonList("Computer Science"));
         assertTrue(predicate.test(new PersonBuilder().withCourse("Computer Science").build()));
 
-        // Multiple keywords
         predicate = new CourseContainsKeywordsPredicate(Arrays.asList("Computer", "Science"));
         assertTrue(predicate.test(new PersonBuilder().withCourse("Computer Science").build()));
 
-        // Partial match (course starts with keyword)
         predicate = new CourseContainsKeywordsPredicate(Collections.singletonList("Com"));
         assertTrue(predicate.test(new PersonBuilder().withCourse("Computer Science").build()));
 
-        // Mixed-case keywords
         predicate = new CourseContainsKeywordsPredicate(Arrays.asList("cOmPuTer", "sCiEnCe"));
         assertTrue(predicate.test(new PersonBuilder().withCourse("Computer Science").build()));
     }
 
     @Test
     public void test_courseDoesNotContainKeywords_returnsFalse() {
-        // Zero keywords
         CourseContainsKeywordsPredicate predicate =
                 new CourseContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder().withCourse("Computer Science").build()));
 
-        // Non-matching keyword
         predicate = new CourseContainsKeywordsPredicate(Arrays.asList("Data"));
         assertFalse(predicate.test(new PersonBuilder().withCourse("Computer Science").build()));
 
-        // Keywords match name, but do not match course
         predicate = new CourseContainsKeywordsPredicate(Arrays.asList("Alice"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withCourse("Computer Science").build()));
     }
