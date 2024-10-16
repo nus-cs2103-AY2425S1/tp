@@ -33,6 +33,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
    * `clear` : Deletes all contacts.
+   
+   * `undo` : Undo previous command.
 
    * `exit` : Exits the app.
 
@@ -153,6 +155,23 @@ Examples:
 Clears all entries from the address book.
 
 Format: `clear`
+
+### Clearing all entries : `undo`
+Restores the previous state of the address book after any change, such as an addition, edit, or deletion of a person or entry.
+
+Format: `undo`
+
+Success Message:
+If the undo operation is successful, it returns: "Address book has undone previous command!"
+
+Failure Message:
+If there is no action to undo, or if the undo operation fails, it returns: "Address book failed to be undone. Please try again later."
+
+How it works:
+* It checks whether there is an operation in the undo stack (like an add, delete, or edit) that can be undone. This check is done via the model.canUndoAddressBook() method.
+* If there is an undoable operation, it calls the model.undoAddressBook() method to restore the address book's previous state.
+* If there are no operations to undo (i.e., if the user tries to undo without having made any modifications), the command will return the failure message.
+
 
 ### Exiting the program : `exit`
 

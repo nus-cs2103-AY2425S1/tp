@@ -89,6 +89,57 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void undoAddressBook_success() {
+        // Setup initial state and add a person
+        modelManager.addPerson(BENSON);
+        modelManager.saveAddressBook();
+
+        // Verify BENSON is in the address book
+        assertTrue(modelManager.hasPerson(BENSON), "BENSON should be present in the address book after adding.");
+
+        // Perform undo operation
+        modelManager.undoAddressBook();
+
+        // BENSON should no longer be in the address book after undo
+        assertFalse(modelManager.hasPerson(BENSON), "BENSON should not be in the address book after undo.");
+    }
+
+    @Test
+    public void canUndoAddressBook_noSavedState_returnsFalse() {
+        // Check that undo is not possible without any prior state changes
+        assertFalse(modelManager.canUndoAddressBook());
+    }
+
+
+    @Test
+    public void undoAddressBook_noUndoableState_failure() {
+        // Check that undo is not possible without any prior state changes
+        assertFalse(modelManager.canUndoAddressBook());
+    }
+
+    @Test
+    public void canUndoAddressBook_stateSaved_success() {
+        // Add a person and save the state
+        modelManager.addPerson(BENSON);
+        modelManager.saveAddressBook();
+
+        // Check that undo is now possible
+        assertTrue(modelManager.canUndoAddressBook());
+    }
+
+    @Test
+    public void saveAddressBook_success() {
+        // Setup initial state and add a person
+        modelManager.addPerson(BENSON);
+        modelManager.saveAddressBook();
+
+        // After saving, undo should be possible
+        assertTrue(modelManager.canUndoAddressBook());
+    }
+
+    //=========== Filtered Person List Accessors Tests =============================================================
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
