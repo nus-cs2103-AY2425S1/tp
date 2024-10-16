@@ -50,7 +50,7 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String HELP_EXIT_COMMAND = "Exit Command\n"
             + "- Format: exit\n"
             + "- Example: exit";
-    private static final String HELP_MORE_INFORMATION = "For more detailed information, "
+    private static final String HELP_MORE_INFORMATION = "For more detailed information,"
             + " visit the PROperty User Guide at: https://ay2425s1-cs2103t-f15-3.github.io/tp/UserGuide.html";
 
 
