@@ -4,9 +4,19 @@
 <?import javafx.scene.layout.StackPane?>
 
 
-
+<?import java.net.URL?>
+<?import javafx.scene.layout.HBox?>
+<HBox xmlns="http://javafx.com/javafx/17"
+        xmlns:fx="http://javafx.com/fxml/1" HBox.hgrow="ALWAYS">
 <StackPane fx:id="placeHolder" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/17"
-    xmlns:fx="http://javafx.com/fxml/1">
+           xmlns:fx="http://javafx.com/fxml/1" HBox.hgrow="ALWAYS">
 
-  <TextArea fx:id="resultDisplay" editable="false" styleClass="result-display"/>
+  <stylesheets>
+    <URL value="@ResultDisplay.css" />
+    <URL value="@Extensions.css" />
+  </stylesheets>
+
+  <TextArea fx:id="resultDisplay" wrapText="true" editable="false" styleClass="result-display" />
+
 </StackPane>
+</HBox>
