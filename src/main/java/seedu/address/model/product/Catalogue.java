@@ -57,11 +57,11 @@ public abstract class Catalogue {
 
     @Override
     public String toString() {
-        StringBuilder string = new StringBuilder("List of ingredients:\n");
+        StringBuilder sb = new StringBuilder();
         for (Map.Entry<Integer, Product> entry : productCatalogue.entrySet()) {
-            string.append(entry.getValue().toString());
-            string.append("\n");
+            sb.append(entry.getValue().toString());
+            sb.append("\n");
         }
-        return string.toString();
+        return sb.toString();
     }
 }
