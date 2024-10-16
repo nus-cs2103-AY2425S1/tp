@@ -54,8 +54,12 @@ public class DeleteCommand extends Command {
             resultMessages.add(Messages.format(person));
         }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_PEOPLE_SUCCESS,
-                String.join("\n", resultMessages)));
+        if (resultMessages.size() == 1) {
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, resultMessages.get(0)));
+        } else {
+            return new CommandResult(String.format(MESSAGE_DELETE_PEOPLE_SUCCESS,
+                    String.join("\n", resultMessages)));
+        }
     }
 
     @Override
