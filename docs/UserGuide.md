@@ -3,6 +3,7 @@ layout: page
 title: AcademyAssist User Guide
 
 ---
+# AcademyAssist User Guide
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -21,9 +22,10 @@ title: AcademyAssist User Guide
    * [Exiting the program](#exiting-the-program--exit)
 
 4. [Data Management](#data-management-in-academyassist)
-4. [FAQ](#faq)
 
-5. [Command summary](#command-summary)
+5. [FAQ](#faq)
+
+6. [Command summary](#command-summary)
 
 ## Introduction
 Welcome to AcademyAssist, your ultimate solution for efficient student contact management in tuition centers. 
@@ -67,16 +69,16 @@ again, type `help` and press Enter.
 
 <div markdown="block" class="alert alert-info">
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `UPPER_CASE` are the inputs to be supplied by the user.
+  e.g `delete IC_NUMBER` means the user has to enter the IC number of the student to be deleted.
 
 * Items in square brackets are optional.
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `add n/NAME... [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Parameters can be in any order.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will 
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `view`, `exit` and `clear`) will 
 be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -95,8 +97,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER s/SUBJECT [t/TA
 * `PHONE_NUMBER` should be an 8-digit number.
 * `EMAIL` is optional and should follow the format username@domain.
 * `ADDRESS` is optional.
-* `IC_NUMBER` should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
-* `SUBJECT` should follow 
+* `IC_NUMBER` is compulsory and should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
+* `SUBJECT` is compulsory, and can add multiple subjects (e.g. Science).
 * `TAG` is optional. 
 
 Examples:
@@ -106,26 +108,26 @@ Examples:
 
 Removes a student from the tuition center management system.
 
-Format: `delete STUDENT_ID`
+Format: `delete IC_NUMBER`
 
-* `STUDENT_ID` should be a 5-digit number.
+* `IC_NUMBER` is compulsory and should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
 
 Examples:
-* `del 12345`
+* `delete T0211234D`
 
 ### Editing a student : `edit`
 
 Edits an existing student's details in the system.
 
-Format: `edit STUDENT_ID FIELD:NEW_VALUE`
+Format: `edit IC_NUMBER FIELD/NEW_VALUE`
 
-* `STUDENT_ID` should be a 5-digit number.
-* `FIELD` can be one of: Phone Number, Address, Class Taken, or Academic Year.
+* `IC_NUMBER` is compulsory and should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
+* `FIELD` can be one of: Name, Phone Number, Email, Address, IC Number or Subject taken.
 * `NEW_VALUE` should follow the format for the respective field.
 
 Examples:
-* `edit 12345 Address:New Address`
-* `edit 12345 Phone:91234567`
+* `edit S1234567A a/New_Address`
+* `edit T1234567D p/91234567 a/New_Address`
 
 ### Viewing all students : `view`
 
@@ -151,9 +153,9 @@ Examples:
 
 Adds a class to an existing student's record.
 
-Format: `addc STUDENT_ID CLASS_NAME`
+Format: `addc IC_NUMBER CLASS_NAME`
 
-* `STUDENT_ID` should be a 5-digit number.
+* `IC_NUMBER` is compulsory and should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
 * `CLASS_NAME` should be a combination of Subject and Number (e.g., Science1).
 
 Examples:
@@ -163,13 +165,13 @@ Examples:
 
 Sorts the list of students based on a specified field.
 
-Format: `sort FIELD`
+Format: `sort s/FIELD`
 
 * `FIELD` can be either `name` or `class`.
 
 Examples:
-* `sort name`
-* `sort class`
+* `sort s/name`
+* `sort s/class`
 
 ### Clearing all entries : `clear`
 
@@ -194,7 +196,7 @@ Format: `exit`
 ## Data Management in AcademyAssist
 
 Welcome to the Data Management section of AcademyAssist! Here, we'll explain how your important information
-is stored and managed in a simple, easy-to-understand way.
+is stored and managed.
 
 ### How Your Data is Saved
 
@@ -239,7 +241,8 @@ Taking AcademyAssist with you is easy:
 3. Copy this file to the same location on your new computer.
 4. Start AcademyAssist, and all your information will be there!
 
-Remember, AcademyAssist is here to make managing student information easy and stress-free. If you ever have questions about your data, just ask - we're always happy to help!
+Remember, AcademyAssist is here to make managing student information easy and stress-free. 
+If you ever have questions about your data, just ask - we're always happy to help!
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -254,15 +257,15 @@ the data of your previous AcademyAssist folder.
 
 ## Command summary
 
-| Action | Format, Examples                                                                                                                                                                                  |
-|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add** | `add n/NAME ic/IC_NUMBER e/EMAIL p/PHONE_NUMBER a/ADDRESS c/CLASS y/ACADEMIC_YEAR` <br> e.g., `add n/John Doe ic/T384859A e/johndoe@gmail.com p/81003999 a/9 Smith Street c/Science1 y/Standard1` |
-| **Delete** | `del STUDENT_ID`<br> e.g., `del 12345`                                                                                                                                                            |
-| **Edit** | `edit STUDENT_ID FIELD:NEW_VALUE`<br> e.g.,`edit 12345 Address:New Address`                                                                                                                       |
-| **View** | `view`                                                                                                                                                                                            |
-| **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John Jane`                                                                                                                                         |
-| **Add Class** | `addc STUDENT_ID CLASS_NAME`<br> e.g., `addc 12345 Science1`                                                                                                                                      |
-| **Sort** | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                                                            |
-| **Clear** | `clear`                                                                                                                                                                                           |
-| **Help** | `help`                                                                                                                                                                                            |
-| **Exit** | `exit`                                                                                                                                                                                            |
+| Action | Format, Examples                                                                                                                                                     |
+|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER s/SUBJECT` <br> e.g., `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T384859A s/Science` |
+| **Delete** | `delete IC_NUMBER`<br> e.g., `delete S1234567A`                                                                                                                      |
+| **Edit** | `edit IC_NUMBER FIELD/NEW_VALUE`<br> e.g.,`edit S1234567A a/New_Address`                                                                                             |
+| **View** | `view`                                                                                                                                                               |
+| **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John Jane`                                                                                                            |
+| **Add Class** | `addc IC_NUMBER CLASS_NAME`<br> e.g., `addc 12345 Science1`                                                                                                          |
+| **Sort** | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                               |
+| **Clear** | `clear`                                                                                                                                                              |
+| **Help** | `help`                                                                                                                                                               |
+| **Exit** | `exit`                                                                                                                                                               |
