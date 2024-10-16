@@ -11,7 +11,7 @@ public class InternshipApplicationBuilder {
 
     public static final String DEFAULT_COMPANY_NAME = "Google";
     public static final String DEFAULT_EMAIL = "google@gmail.com";
-    public static final String DEFAULT_DATE = "04/09/98";
+    public static final String DEFAULT_DATE = "01/01/24";
     public static final String DEFAULT_ROLE = "SWE";
 
     private Company company;
