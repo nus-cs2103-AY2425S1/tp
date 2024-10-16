@@ -105,7 +105,8 @@ public class Claim {
      * @return A string representation of the claim, including its status, ID, and amount.
      */
     @Override
-    public String toString() { String status = "open";
+    public String toString() {
+        String status = "open";
         if (!this.isOpen) {
             status = "closed";
         }

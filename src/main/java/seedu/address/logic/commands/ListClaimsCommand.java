@@ -52,7 +52,9 @@ public class ListClaimsCommand extends Command {
 
         Client clientToDisplay = lastShownList.get(index.getZeroBased());
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, clientToDisplay.getName().toString(), clientToDisplay.getInsurancePlansManager().accessClaims()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                clientToDisplay.getName().toString(),
+                clientToDisplay.getInsurancePlansManager().accessClaims()));
     }
 
     @Override
