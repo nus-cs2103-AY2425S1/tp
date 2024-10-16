@@ -31,7 +31,7 @@ public class ListLogsParser implements Parser<ListLogsCommand> {
 
         try {
             // Try to initialise id
-             id = new IdentityNumber(arg);
+            id = new IdentityNumber(arg);
         } catch (IllegalArgumentException e) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListLogsCommand.MESSAGE_USAGE));
