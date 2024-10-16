@@ -26,7 +26,7 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 1. Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all clients.
+    * `list` : Lists all clients' contacts.
 
     * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Add a client named `John Doe` to the Clientele+.
 
