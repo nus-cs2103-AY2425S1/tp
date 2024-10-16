@@ -51,18 +51,18 @@ lines as space characters surrounding line-breaks may be omitted when copied ove
 
 Adds a new student to the tuition center management system.
 
-Format: `add n/NAME ic/IC_NUMBER e/EMAIL p/PHONE_NUMBER a/ADDRESS c/CLASS y/ACADEMIC_YEAR`
+Format: `add n/NAME i/IC_NUMBER p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECT t/TAG`
 
 * `NAME` should be 1-100 characters long and contain only alphabets and spaces.
-* `IC_NUMBER` should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
+* `IC_NUMBER` is compulsory and should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
 * `PHONE_NUMBER` should be an 8-digit number.
 * `EMAIL` is optional and should follow the format username@domain.
 * `ADDRESS` is optional.
-* `CLASS` should be a combination of Subject and Number (e.g., Science1).
-* `ACADEMIC_YEAR` should be in the format Standard[Number] (e.g., Standard1).
+* `SUBJECT` is compulsory, and can add multiple subjects (e.g. Science).
+* `TAG` is optional (e.g. owes money).
 
 Examples:
-* `add n/John Doe ic/T384859A e/johndoe@gmail.com p/81003999 a/9 Smith Street c/Science1 y/Standard1`
+* `add n/John Doe i/M3848598A e/johndoe@gmail.com p/81003999 a/9 Smith Street s/Science`
 
 ### Deleting a student : `del`
 
