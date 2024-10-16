@@ -28,12 +28,14 @@ public class ListVendorCommandTest {
 
     @Test
     public void execute_eventListIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListVendorCommand(), model, ListVendorCommand.MESSAGE_LIST_VENDOR_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListVendorCommand(), model,
+                ListVendorCommand.MESSAGE_LIST_VENDOR_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showVendorAtIndex(model, INDEX_FIRST_VENDOR);
-        assertCommandSuccess(new ListVendorCommand(), model, ListVendorCommand.MESSAGE_LIST_VENDOR_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListVendorCommand(), model,
+                ListVendorCommand.MESSAGE_LIST_VENDOR_SUCCESS, expectedModel);
     }
 }
