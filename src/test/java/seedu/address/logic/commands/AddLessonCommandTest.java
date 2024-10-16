@@ -16,25 +16,32 @@ import seedu.address.model.calendar.Lesson;
 
 public class AddLessonCommandTest {
 
+    private Model model;
+    private Lesson validLesson;
+
+    public void setUp() {
+        model = new ModelManager();
+        validLesson = new Lesson("Math", DayOfWeek.MONDAY, LocalTime.of(12, 0), LocalTime.of(13, 0));
+    }
+
     @Test
     public void addValidLesson() throws CommandException {
-        Lesson lesson = new Lesson("Math", DayOfWeek.MONDAY, LocalTime.of(12, 0), LocalTime.of(13, 0));
-        Model model = new ModelManager();
-
-        AddLessonCommand command = new AddLessonCommand(lesson);
+        setUp();
+        AddLessonCommand command = new AddLessonCommand(validLesson);
         CommandResult result = command.execute(model);
         assertEquals(result.getFeedbackToUser(),
-                String.format(AddLessonCommand.MESSAGE_SUCCESS, lesson));
-        assertTrue(model.hasLesson(lesson));
+                String.format(AddLessonCommand.MESSAGE_SUCCESS, validLesson));
+        assertTrue(model.hasLesson(validLesson));
     }
 
     @Test
     public void addDuplicateLesson() throws CommandException {
-        Lesson lesson = new Lesson("Math", DayOfWeek.MONDAY, LocalTime.of(12, 0), LocalTime.of(13, 0));
-        Model model = new ModelManager();
-        model.addLesson(lesson);
+        setUp();
+        model.addLesson(validLesson);
 
-        AddLessonCommand command = new AddLessonCommand(lesson);
+        // note that the lesson only has identical descriptions as the validLesson
+        Lesson duplicateLesson = new Lesson("Math", DayOfWeek.TUESDAY, LocalTime.of(13, 0), LocalTime.of(14, 0));
+        AddLessonCommand command = new AddLessonCommand(duplicateLesson);
 
         assertCommandFailure(command, model, AddLessonCommand.MESSAGE_DUPLICATE_LESSON);
     }
