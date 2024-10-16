@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -162,10 +163,9 @@ public class ModuleRoleMap {
      */
     public static String getModuleCodeString(Stream<ModuleCode> moduleCodeStream) {
         requireNonNull(moduleCodeStream);
-        String[] moduleCodeStringArray = moduleCodeStream
+        return moduleCodeStream
                 .map(ModuleCode::toString)
-                .toArray(String[]::new);
-        return String.join(", ", moduleCodeStringArray);
+                .collect(Collectors.joining(", "));
     }
 
     /**
