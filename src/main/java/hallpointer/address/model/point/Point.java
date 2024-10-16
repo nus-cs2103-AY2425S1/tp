@@ -30,6 +30,20 @@ public class Point {
         return test >= 0; // Points must be non-negative
     }
 
+    /**
+     * Takes in a Point object and returns a new Point object with the points added.
+     */
+    public Point add(Point other) {
+        return new Point(points + other.points);
+    }
+
+    /**
+     * Takes in a Point object and returns a new Point object with the points subtracted.
+     */
+    public Point subtract(Point other) {
+        return new Point(points - other.points);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -58,6 +72,6 @@ public class Point {
      */
     @Override
     public String toString() {
-        return String.valueOf(points);
+        return String.valueOf(points) + " points";
     }
 }
