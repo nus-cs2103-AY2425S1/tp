@@ -44,9 +44,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ## Features
 
-<box type="info" seamless>
-
-**Notes about the command format:**<br>
+<box type="info" seamless>**Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -56,6 +54,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+* No two students can have both same **NAME** and **PHONE**.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -78,19 +78,19 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT f/FEE [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
 
-<box type="note" seamless>
-
-**NOTE:** 
+<box type="note" seamless>**NOTE:** 
 1. <b>SCHEDULE</b> must be in the format of <DAY OF THE WEEK>-<START TIME>-<END TIME>
 * <b>DAY OF THE WEEK</b> includes Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
 * <b>START TIME</b> and <b>END TIME</b> are represented as `HHmm`.
 
-2. <b>SUBJECT</b> should only be:
+2. New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-person--edit)
+
+3. <b>SUBJECT</b> should only be:
 `economics` / `literature` / `music` / `biology` / `chemistry` / `science` / `english` / `chinese` / `malay` / `tamil` / `math` / `history` / `geography` / `physics` / `GP`
 
-3. <b>FEE</b> is the tuition fee per hour.
+4. <b>FEE</b> is the tuition fee per hour.
 
-4. <b>FEE</b>, <b>PAID_AMOUNT</b> and <b>OWED_AMOUNT</b> must be at least 0 with at most 2 decimal places.
+5. <b>FEE</b>, <b>PAID_AMOUNT</b> and <b>OWED_AMOUNT</b> must be at least 0 with at most 2 decimal places.
 <i>Example: </i> `12.00`, `0.0` or `7`
 </box>
 
