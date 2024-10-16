@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorease.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static tutorease.address.testutil.Assert.assertThrows;
-import static tutorease.address.testutil.TypicalPersons.ALICE;
-import static tutorease.address.testutil.TypicalPersons.BENSON;
+import static tutorease.address.testutil.TypicalStudents.ALICE;
+import static tutorease.address.testutil.TypicalStudents.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

@@ -9,7 +9,7 @@ import static tutorease.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static tutorease.address.logic.commands.CommandTestUtil.ROLE_DESC_AMY;
 import static tutorease.address.testutil.Assert.assertThrows;
 import static tutorease.address.testutil.TypicalLessons.getTypicalLessons;
-import static tutorease.address.testutil.TypicalPersons.AMY;
+import static tutorease.address.testutil.TypicalStudents.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;

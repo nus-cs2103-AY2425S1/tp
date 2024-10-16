@@ -3,7 +3,7 @@ package tutorease.address.logic.commands;
 import static tutorease.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorease.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorease.address.testutil.TypicalLessons.getTypicalLessons;
-import static tutorease.address.testutil.TypicalPersons.getTypicalTutorEase;
+import static tutorease.address.testutil.TypicalStudents.getTypicalTutorEase;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

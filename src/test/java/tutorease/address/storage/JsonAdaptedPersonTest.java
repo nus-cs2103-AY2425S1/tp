@@ -3,7 +3,7 @@ package tutorease.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static tutorease.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static tutorease.address.testutil.Assert.assertThrows;
-import static tutorease.address.testutil.TypicalPersons.BENSON;
+import static tutorease.address.testutil.TypicalStudents.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;

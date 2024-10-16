@@ -3,10 +3,10 @@ package tutorease.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static tutorease.address.testutil.Assert.assertThrows;
-import static tutorease.address.testutil.TypicalPersons.ALICE;
-import static tutorease.address.testutil.TypicalPersons.HOON;
-import static tutorease.address.testutil.TypicalPersons.IDA;
-import static tutorease.address.testutil.TypicalPersons.getTypicalTutorEase;
+import static tutorease.address.testutil.TypicalStudents.ALICE;
+import static tutorease.address.testutil.TypicalStudents.HOON;
+import static tutorease.address.testutil.TypicalStudents.IDA;
+import static tutorease.address.testutil.TypicalStudents.getTypicalTutorEase;
 
 import java.io.IOException;
 import java.nio.file.Path;

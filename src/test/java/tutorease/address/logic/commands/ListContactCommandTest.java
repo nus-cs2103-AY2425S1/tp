@@ -4,7 +4,7 @@ import static tutorease.address.logic.commands.CommandTestUtil.assertCommandSucc
 import static tutorease.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static tutorease.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static tutorease.address.testutil.TypicalLessons.getTypicalLessons;
-import static tutorease.address.testutil.TypicalPersons.getTypicalTutorEase;
+import static tutorease.address.testutil.TypicalStudents.getTypicalTutorEase;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
