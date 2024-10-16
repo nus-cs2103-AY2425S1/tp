@@ -5,6 +5,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSIGNMENT_NAME
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MAX_SCORE_MATH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MAX_SCORE_PHYSICS;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.assignment.Assignment;
@@ -22,6 +24,6 @@ public class TypicalAssignments {
             .withMaxScore(VALID_MAX_SCORE_PHYSICS).build();
 
     public static List<Assignment> getTypicalAssignments() {
-        return List.of(MATH_HOMEWORK, PHYSICS_HOMEWORK);
+        return new ArrayList<>(Arrays.asList(MATH_HOMEWORK, PHYSICS_HOMEWORK));
     }
 }

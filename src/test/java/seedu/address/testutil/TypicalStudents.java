@@ -75,6 +75,8 @@ public class TypicalStudents {
     }
 
     public static List<Student> getTypicalStudents() {
+        System.out.println("TypicalStudents.getTypicalStudents()");
+        System.out.println(new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE)));
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

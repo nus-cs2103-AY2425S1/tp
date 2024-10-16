@@ -27,7 +27,7 @@ public class StudentBuilder {
     private Phone phone;
     private Email email;
     private Set<Tag> tags;
-    private List<Assignment> assignments = new ArrayList<Assignment>();
+    private List<Assignment> assignments;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -36,6 +36,7 @@ public class StudentBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        assignments = new ArrayList<>();
         tags = new HashSet<>();
     }
 
@@ -91,7 +92,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, phone, email, tags);
+        return new Student(name, phone, email, tags, assignments);
     }
 
 }
