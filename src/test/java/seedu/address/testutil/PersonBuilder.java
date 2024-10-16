@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyPhone;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -26,6 +27,7 @@ public class PersonBuilder {
     public static final String DEFAULT_REGISTER_NUMBER = "1";
     public static final String DEFAULT_SEX = "F";
     public static final String DEFAULT_STUDENT_CLASS = "1A";
+    public static final String DEFAULT_EMERGENCY_PHONE = "";
 
     private Name name;
     private Phone phone;
@@ -34,6 +36,7 @@ public class PersonBuilder {
     private RegisterNumber registerNumber;
     private Sex sex;
     private StudentClass studentClass;
+    private EmergencyPhone emergencyPhone;
     private Set<Tag> tags;
 
     /**
@@ -47,6 +50,7 @@ public class PersonBuilder {
         registerNumber = new RegisterNumber(DEFAULT_REGISTER_NUMBER);
         sex = new Sex(DEFAULT_SEX);
         studentClass = new StudentClass(DEFAULT_STUDENT_CLASS);
+        emergencyPhone = new EmergencyPhone(DEFAULT_EMERGENCY_PHONE);
         tags = new HashSet<>();
     }
 
@@ -61,6 +65,7 @@ public class PersonBuilder {
         registerNumber = personToCopy.getRegisterNumber();
         sex = personToCopy.getSex();
         studentClass = personToCopy.getStudentClass();
+        emergencyPhone = personToCopy.getEmergencyPhone();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -128,8 +133,20 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code EmergencyPhone} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEmergencyPhone(String emergencyPhone) {
+        this.emergencyPhone = new EmergencyPhone(emergencyPhone);
+        return this;
+    }
+
+    /**
+     * Builds a new Person with all the required attributes.
+     */
     public Person build() {
-        return new Person(name, phone, email, address, registerNumber, sex, studentClass, tags);
+        return new Person(name, phone, email, address, registerNumber, sex, studentClass,
+                emergencyPhone, tags);
     }
 
 }

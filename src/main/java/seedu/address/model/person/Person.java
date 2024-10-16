@@ -26,14 +26,15 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final EmergencyPhone emergencyPhone;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, RegisterNumber registerNumber, Sex sex,
-            StudentClass studentClass, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, registerNumber, sex, studentClass, tags);
+            StudentClass studentClass, EmergencyPhone emergencyPhone, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, registerNumber, sex, studentClass, emergencyPhone, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -41,6 +42,7 @@ public class Person {
         this.registerNumber = registerNumber;
         this.sex = sex;
         this.studentClass = studentClass;
+        this.emergencyPhone = emergencyPhone;
         this.tags.addAll(tags);
     }
 
@@ -70,6 +72,10 @@ public class Person {
 
     public StudentClass getStudentClass() {
         return studentClass;
+    }
+
+    public EmergencyPhone getEmergencyPhone() {
+        return emergencyPhone;
     }
 
     /**
@@ -116,13 +122,14 @@ public class Person {
                 && registerNumber.equals(otherPerson.registerNumber)
                 && sex.equals(otherPerson.sex)
                 && studentClass.equals(otherPerson.studentClass)
+                && emergencyPhone.equals(otherPerson.emergencyPhone)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, registerNumber, sex, studentClass, tags);
+        return Objects.hash(name, phone, email, address, registerNumber, sex, studentClass, emergencyPhone, tags);
     }
 
     @Override
@@ -135,6 +142,7 @@ public class Person {
                 .add("register number", registerNumber)
                 .add("sex", sex)
                 .add("class", studentClass)
+                .add("emergency phone", emergencyPhone)
                 .add("tags", tags)
                 .toString();
     }

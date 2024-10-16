@@ -145,6 +145,23 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding an Emergency phone number : `emergencyPhone`
+
+Adds a emergency phone number to the specified person in the address book.
+
+Format: `emergencyPhone INDEX [ep/PHONE]`
+
+<box type="tip" seamless>
+
+**Tip:** You can delete the emergency phone number by leaving the `PHONE` field empty.
+</box>
+
+* Adds the phone number `PHONE` to the person at the specified `INDEX`
+
+Examples:
+* `emergencyPhone 1 ep/91234567` to add the emergency number 91234567 to the 1st person in the list.
+* `emergencyPhone 2 ep/` to delete the emergency number from the 2nd person in the list.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -203,3 +220,4 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
+**Add Emergency Phone Number**  | `emergencyPhone INDEX [ep/EMERGENCY_PHONE_NUMBER]`<br> e.g., `emergencyPhone 2 ep/91231234`
