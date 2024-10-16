@@ -33,7 +33,13 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-
+    public static final String VALID_ASSIGNMENT_NAME_MATH = "Math Homework";
+    public static final int VALID_MAX_SCORE_MATH = 100;
+    public static final int VALID_SCORE_MATH = 100;
+    public static final String VALID_ASSIGNMENT_NAME_PHYSICS = "Physics Homework";
+    public static final int VALID_MAX_SCORE_PHYSICS = 60;
+    public static final int VALID_SCORE_PHYSICS = 45;
+    public static final int VALID_SCORE = 0;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
