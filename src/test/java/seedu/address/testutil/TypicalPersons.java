@@ -52,13 +52,13 @@ public class TypicalPersons {
 
     // Potentials
     public static final Person JEVAN = new PersonBuilder().withName("Jevan Lim").withPhone("12345678")
-            .withEmail("jevan@example.com").withAddress("hougang ave").withIsEmployee(false).build();
+            .withEmail("jevan@example.com").withAddress("hougang ave").withIsEmployee(true).build();
 
     public static final Person KEVIN = new PersonBuilder().withName("Kevin Lee").withPhone("87654321")
-            .withEmail("kevin@example.com").withAddress("sengkang street").withIsEmployee(false).build();
+            .withEmail("kevin@example.com").withAddress("sengkang street").withIsEmployee(true).build();
 
     public static final Person LILY = new PersonBuilder().withName("Lily B").withPhone("12348765")
-            .withEmail("lily@example.com").withAddress("punggol cove").withIsEmployee(false).build();
+            .withEmail("lily@example.com").withAddress("punggol cove").withIsEmployee(true).build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)

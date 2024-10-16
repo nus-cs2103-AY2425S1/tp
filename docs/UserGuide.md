@@ -186,7 +186,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
   
   >Finds the employee/potential hire whose names contain any of the given keywords.
   >
-  >Format: `find (/all or /e or /ph) KEYWORD [MORE_KEYWORDS]`
+  >Format: `find (all or e or ph) KEYWORD [MORE_KEYWORDS]`
   >
   >* The search is case-insensitive. e.g `hans` will match `Hans`
   >* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -196,9 +196,9 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
   >  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
   >
   >Examples:
-  >* `find /all John` returns people `john` and `John Doe`
-  >* `find /e John` returns employees `john` and `John Doe`
-  >* `find /ph alex david` returns potential hires `Alex Yeoh`, `David Li`<br>
+  >* `find all John` returns people `john` and `John Doe`
+  >* `find e John` returns employees `john` and `John Doe`
+  >* `find ph alex david` returns potential hires `Alex Yeoh`, `David Li`<br>
   >  ![result for 'find alex david'](images/findAlexDavidResult.png)
 </details>
 
@@ -216,17 +216,17 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
 # Commands Summary
 
-Action     | Format                                                                                        | Examples
------------|-----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------
-**Help**   | `?` or `help`                                                                                 |
-**Clear**  | `clear`                                                                                       | 
-**Delete** | `delete e INDEX` <br> `delete ph INDEX`                                                       | `delete e 3`<br> `delete ph 1`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`                        | `edit 2 n/James Lee e/jameslee@example.com`
+Action     | Format                                                                                     | Examples
+-----------|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------
+**Help**   | `?` or `help`                                                                              |
+**Clear**  | `clear`                                                                                    | 
+**Delete** | `delete e INDEX` <br> `delete ph INDEX`                                                    | `delete e 3`<br> `delete ph 1`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`                     | `edit 2 n/James Lee e/jameslee@example.com`
 **Employee**| `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE​` | `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/01-01-2021`
-**Exit**   | `exit`                                                                                        | 
-**Find**   | `find /all [KEYWORDS]` <br> `find /e [KEYWORDS]` <br> `find /ph [KEYWORDS]`                   | `find /all Jake` <br> `find /e Jake` <br> `find /ph Jake`
-**List**   | `list`                                                                                        | 
-**Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​`                      | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
+**Exit**   | `exit`                                                                                     | 
+**Find**   | `find all [KEYWORDS]` <br> `find e [KEYWORDS]` <br> `find ph [KEYWORDS]`                   | `find all Jake` <br> `find e Jake` <br> `find ph Jake`
+**List**   | `list`                                                                                     | 
+**Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​`                   | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
 
 --------------------------------------------------------------------------------------------------------------------
 
