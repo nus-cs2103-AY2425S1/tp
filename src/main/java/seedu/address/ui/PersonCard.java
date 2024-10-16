@@ -43,7 +43,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Label price;
+    private FlowPane prices;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to
@@ -57,9 +58,11 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
+        person.getTagsWithoutPrice().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        price.setText(person.getPrice().getPriceCategoryString());
+        person.getPriceTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> prices.getChildren().add(new Label(tag.tagName)));
     }
 }

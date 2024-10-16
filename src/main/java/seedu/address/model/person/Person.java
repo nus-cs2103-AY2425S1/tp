@@ -70,6 +70,40 @@ public class Person {
     }
 
     /**
+     * Returns an immutable tag set without $, $$, $$$ or $$$$, which throws
+     * {@code UnsupportedOperationException} if modification is attempted.
+     */
+    public Set<Tag> getTagsWithoutPrice() {
+        Set<Tag> tagsWithoutPrice = new HashSet<>();
+        for (Tag tag : tags) {
+            if (!tag.tagName.equals("$")
+                    && !tag.tagName.equals("$$")
+                    && !tag.tagName.equals("$$$")
+                    && !tag.tagName.equals("$$$$")) {
+                tagsWithoutPrice.add(tag);
+            }
+        }
+        return Collections.unmodifiableSet(tagsWithoutPrice);
+    }
+
+    /**
+     * Returns an immutable tag set with only $, $$, $$$ or $$$$, which throws
+     * {@code UnsupportedOperationException} if modification is attempted.
+     */
+    public Set<Tag> getPriceTags() {
+        Set<Tag> priceTags = new HashSet<>();
+        for (Tag tag : tags) {
+            if (tag.tagName.equals("$")
+                    || tag.tagName.equals("$$")
+                    || tag.tagName.equals("$$$")
+                    || tag.tagName.equals("$$$$")) {
+                priceTags.add(tag);
+            }
+        }
+        return Collections.unmodifiableSet(priceTags);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
