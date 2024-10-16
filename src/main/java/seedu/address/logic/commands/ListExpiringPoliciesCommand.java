@@ -26,12 +26,11 @@ public class ListExpiringPoliciesCommand extends Command {
             + ": Lists all policies nearing expiry within the next 30 days.\n"
             + "Example: " + COMMAND_WORD;
 
-    private static final String MESSAGE_SUCCESS = "The following policies are near expiry:";
+    private static final String MESSAGE_SUCCESS = "The following policies are near expiry:\n\n";
     private static final String MESSAGE_NO_EXPIRING_POLICY = "No policies expiring within the next 30 days!";
     private static final String MESSAGE_FAILURE = "Failed to retrieve expiring policies. Please try again.";
-    private static final String MESSAGE_POLICY_LISTED_DETAILS = "Insuree phone: %1$s, Policy Type: %2$s, "
-            + "Premium Amount: %3$s, Coverage Amount: %4$s, Expiry Date: %5$s";
-
+    private static final String MESSAGE_POLICY_LISTED_DETAILS = "Insuree phone: %1$s\nPolicy Type: %2$s\n"
+            + "Premium Amount: %3$.2f\nCoverage Amount: %4$.2f\nExpiry Date: %5$s\n\n";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -86,9 +85,6 @@ public class ListExpiringPoliciesCommand extends Command {
             return new CommandResult(MESSAGE_FAILURE);
         }
     }
-
-
-
 
     @Override
     public boolean equals(Object other) {
