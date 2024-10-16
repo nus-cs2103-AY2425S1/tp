@@ -41,10 +41,10 @@ public class JobCodeTest {
 
     @Test
     public void equals() {
-        JobCode jobCode = new JobCode("Valid Job Code");
+        JobCode jobCode = new JobCode("123Valid");
 
         // same values -> returns true
-        assertTrue(jobCode.equals(new JobCode("Valid Job Code")));
+        assertTrue(jobCode.equals(new JobCode("123Valid")));
 
         // same object -> returns true
         assertTrue(jobCode.equals(jobCode));
@@ -56,6 +56,6 @@ public class JobCodeTest {
         assertFalse(jobCode.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(jobCode.equals(new JobCode("Other Valid Job Code")));
+        assertFalse(jobCode.equals(new JobCode("234Other")));
     }
 }
