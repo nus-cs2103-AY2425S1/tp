@@ -107,22 +107,39 @@ Examples:
 *  `edit 1 p/98765432 e/swensens@plsreply.com` Edits the phone number and email address of the 1st restaurant to be `98765432` and `swensens@plsreply.com` respectively.
 *  `edit 2 n/Mala Hot Pot t/` Edits the name of the 2nd restaurant to be `Mala Hot Pot` and clears all existing tags.
 
-### Locating restaurants by name and tag: `find`
+### Locating restaurants by name: `find`
 
-Finds restaurants whose names and tags contain any of the given keywords.
+Finds restaurants whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `mala` will match `Mala`
-* The order of the keywords does not matter. e.g. `Swensens Halal` will match `Halal Swensens`
-* Only the name and tags are searched.
+* The order of the keywords does not matter. e.g. `Mala Hot Pot` will match `Hot Pot Mala`
+* Only the name are searched.
 * Only full words will be matched e.g. `Swen` will not match `Swensens`
 * Restaurants matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Chinese Western` will return `Swensens`, `Western`
+  e.g. `Mala Swensens` will return `Swensens`, `Mala Hot Pot`
 
 Examples:
-* `find Halal` returns `Swensens` and `Mala Hot Pot`
+* `find Swensens Mala` returns `Swensens` and `Mala Hot Pot`
 * `find mala` returns `Mala Hot Pot`<br>
+
+### Locating restaurants by tag: `tag`
+
+Finds restaurants whose tags contain any of the given keywords.
+
+Format: `tag KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `halal` will match `Halal`
+* The order of the keywords does not matter. e.g. `Chinese Halal` will match `Halal Chinese`
+* Only the tags are searched.
+* Only full words will be matched e.g. `Hal` will not match `Halal`
+* Restaurants matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Chinese Western` will return `Swensens`, `Mala Hot Pot`
+
+Examples:
+* `tag Halal` returns `Swensens` and `Mala Hot Pot`
+* `tag Chinese` returns `Mala Hot Pot`<br>
 
 ### Deleting a restaurant : `delete`
 
@@ -193,6 +210,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 1 p/98765432 e/swensens@plsreply.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Halal`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Mala`
+**Tag** | `tag KEYWORD [MORE_KEYWORDS]`<br> e.g., `tag Chinese`
 **List** | `list`
 **Help** | `help`
