@@ -24,7 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Ic;
-import seedu.address.model.person.IdMatchesPredicate;
+import seedu.address.model.person.IcMatchesPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -54,7 +54,7 @@ public class EditCommandTest {
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Ic lastPersonIc = new Ic("F1294667X");
-        model.updateFilteredPersonList(new IdMatchesPredicate(lastPersonIc));
+        model.updateFilteredPersonList(new IcMatchesPredicate(lastPersonIc));
         Person lastPerson = model.getFilteredPersonList().get(0);
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
@@ -77,7 +77,7 @@ public class EditCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditCommand editCommand = new EditCommand(new Ic("F1264567X"), new EditPersonDescriptor());
-        model.updateFilteredPersonList(new IdMatchesPredicate(new Ic("F1264567X")));
+        model.updateFilteredPersonList(new IcMatchesPredicate(new Ic("F1264567X")));
         Person editedPerson = model.getFilteredPersonList().get(0);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson.getName(),
@@ -110,7 +110,7 @@ public class EditCommandTest {
     public void execute_duplicatePersonUnfilteredList_failure() {
         Ic firstPersonIc = new Ic("F2234567X");
         Ic secondPersonIc = new Ic("F1264567X");
-        model.updateFilteredPersonList(new IdMatchesPredicate(firstPersonIc));
+        model.updateFilteredPersonList(new IcMatchesPredicate(firstPersonIc));
         Person firstPerson = model.getFilteredPersonList().get(0);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
