@@ -19,6 +19,7 @@ import tutorease.address.model.person.Name;
 import tutorease.address.model.person.Person;
 import tutorease.address.model.person.Phone;
 import tutorease.address.model.person.Role;
+import tutorease.address.model.person.Student;
 import tutorease.address.model.tag.Tag;
 
 /**
@@ -50,7 +51,7 @@ public class AddContactCommandParser implements Parser<AddContactCommand> {
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, role, tagList);
+        Person person = new Student(name, phone, email, address, role, tagList);
 
         return new AddContactCommand(person);
     }
