@@ -25,7 +25,7 @@ public class RentalInformation {
      * @param rentalEndDate A valid rental end date.
      * @param rentDueDate A valid rent due date.
      * @param monthlyRent A valid monthly rent.
-     * @param deposit A valid depost.
+     * @param deposit A valid deposit.
      * @param customerList A valid customer list.
      */
     public RentalInformation(String address, String rentalStartDate, String rentalEndDate, String rentDueDate,
