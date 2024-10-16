@@ -19,6 +19,7 @@
         <URL value="@Menu.css" />
             <URL value="@Extensions.css" />
             <URL value="@ResultDisplay.css" />
+            <URL value="@MainWindow.css" />
       </stylesheets>
 
       <VBox>
