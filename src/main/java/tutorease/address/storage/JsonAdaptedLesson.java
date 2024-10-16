@@ -2,6 +2,7 @@ package tutorease.address.storage;
 
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.commons.util.DateTimeUtil.dateTimeToString;
+import static tutorease.address.model.lesson.StartDateTime.START_IS_AFTER_END;
 import static tutorease.address.model.lesson.StudentId.INVALID_MESSAGE_CONSTRAINTS;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -77,15 +78,21 @@ public class JsonAdaptedLesson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     StartDateTime.class.getSimpleName()));
         }
+        if (!StartDateTime.isValidDateTime(startDateTime)) {
+            throw new IllegalValueException(StartDateTime.START_DATE_MESSAGE_CONSTRAINTS);
+        }
         final StartDateTime startDateTime = StartDateTime.createStartDateTime(this.startDateTime);
 
         if (endDateTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "EndDateTime"));
         }
+        if (!EndDateTime.isValidDateTime(endDateTime)) {
+            throw new IllegalValueException(EndDateTime.END_DATE_MESSAGE_CONSTRAINTS);
+        }
         final EndDateTime endDateTime = EndDateTime.createEndDateTime(this.endDateTime);
 
         if (startDateTime.isAfter(endDateTime)) {
-            throw new IllegalValueException("StartDateTime cannot be after EndDateTime");
+            throw new IllegalValueException(START_IS_AFTER_END);
         }
         return new Lesson(studentPerson, locationIndex, startDateTime, endDateTime);
     }
