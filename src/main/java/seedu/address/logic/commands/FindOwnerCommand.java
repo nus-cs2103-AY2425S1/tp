@@ -17,6 +17,6 @@ public class FindOwnerCommand extends FindCommand<Owner> {
         requireNonNull(model);
         model.updateFilteredOwnerList(super.predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredOwnerList().size()));
+                String.format(Messages.MESSAGE_OWNERS_LISTED_OVERVIEW, model.getFilteredOwnerList().size()));
     }
 }

@@ -74,7 +74,7 @@ public class UniquePetListTest {
     @Test
     public void setPerson_editedPersonIsSamePerson_success() {
         uniquePetList.add(BELLA);
-        uniquePetList.setOwner(BELLA, BELLA);
+        uniquePetList.setPet(BELLA, BELLA);
         UniquePetList expectedUniquePersonList = new UniquePetList();
         expectedUniquePersonList.add(BELLA);
         assertEquals(expectedUniquePersonList, uniquePetList);

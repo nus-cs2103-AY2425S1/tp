@@ -13,7 +13,6 @@ import static seedu.address.testutil.TypicalPets.BELLA;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.pet.;
 import seedu.address.testutil.PetBuilder;
 
 public class PetTest {

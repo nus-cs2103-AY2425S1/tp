@@ -17,6 +17,6 @@ public class FindPetCommand extends FindCommand<Pet> {
         requireNonNull(model);
         model.updateFilteredPetList(super.predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPetList().size()));
+                String.format(Messages.MESSAGE_PETS_LISTED_OVERVIEW, model.getFilteredPetList().size()));
     }
 }
