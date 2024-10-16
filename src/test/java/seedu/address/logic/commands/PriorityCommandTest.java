@@ -28,10 +28,11 @@ public class PriorityCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withPriorityLevel(VALID_PRIORITY_LEVEL).build();
 
-        PriorityCommand priorityCommand = new PriorityCommand(INDEX_FIRST_PERSON.getOneBased(), VALID_PRIORITY_LEVEL);
+        PriorityCommand priorityCommand = new PriorityCommand(INDEX_FIRST_PERSON.getOneBased(), VALID_PRIORITY_LEVEL,
+                false);
 
-        String expectedMessage = String.format("Priority level %d successfully set for %s", VALID_PRIORITY_LEVEL,
-                editedPerson.getName());
+        String expectedMessage = String.format("Priority level %d successfully set for %s",
+                VALID_PRIORITY_LEVEL, editedPerson.getName());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -39,12 +40,14 @@ public class PriorityCommandTest {
         assertCommandSuccess(priorityCommand, model, expectedMessage, expectedModel);
     }
 
+
     @Test
     public void equals() {
-        final PriorityCommand standardCommand = new PriorityCommand(INDEX_FIRST_PERSON.getZeroBased(), 1);
+        // Updated to include false for the reset flag in all PriorityCommand constructors
+        final PriorityCommand standardCommand = new PriorityCommand(INDEX_FIRST_PERSON.getZeroBased(), 1, false);
 
         // same values -> returns true
-        PriorityCommand commandWithSameValues = new PriorityCommand(INDEX_FIRST_PERSON.getZeroBased(), 1);
+        PriorityCommand commandWithSameValues = new PriorityCommand(INDEX_FIRST_PERSON.getZeroBased(), 1, false);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -57,9 +60,9 @@ public class PriorityCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new PriorityCommand(INDEX_SECOND_PERSON.getZeroBased(), 1)));
+        assertFalse(standardCommand.equals(new PriorityCommand(INDEX_SECOND_PERSON.getZeroBased(), 1, false)));
 
         // different priorityLevel -> returns false
-        assertFalse(standardCommand.equals(new PriorityCommand(INDEX_FIRST_PERSON.getZeroBased(), 2)));
+        assertFalse(standardCommand.equals(new PriorityCommand(INDEX_FIRST_PERSON.getZeroBased(), 2, false)));
     }
 }
