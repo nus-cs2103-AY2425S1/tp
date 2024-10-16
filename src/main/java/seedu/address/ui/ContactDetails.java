@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -85,6 +86,22 @@ public class ContactDetails extends UiPart<Region> {
             phoneNo.setText("Mobile: " + person.getPhone().toString());
             email.setText("Email: " + person.getEmail().toString());
             address.setText("Address: " + person.getAddress().toString());
+
+            if (!person.getNotes().isEmpty()) {
+                Label notesHeader = new Label("Notes");
+                notesHeader.setId("notes-header");
+                notesList.getChildren().add(notesHeader);
+                person.getNotes().stream()
+                        .sorted(Comparator.comparing(note -> note.getNote()))
+                        .forEach(note -> {
+                            Label label = new Label("• " + note.getNote());
+                            label.setId("notes-label");
+                            notesList.getChildren().add(label);
+                        });
+            }
+
+
+
         }
     }
 
