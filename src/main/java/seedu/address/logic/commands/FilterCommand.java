@@ -5,9 +5,9 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.person.CourseContainsKeywordsPredicate;
 import seedu.address.model.person.ModuleContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-
 
 /**
  * Finds and lists all persons in address book whose name matches the specified keywords
@@ -22,11 +22,14 @@ public class FilterCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: NAME_KEYWORD [MORE_NAME_KEYWORDS]...\n"
             + "or: MODULE_KEYWORD\n"
+            + "or: COURSE_KEYWORD\n"
             + "Example NAME: " + COMMAND_WORD + " n/alice bob charlie\n"
-            + "Example MODULE: " + COMMAND_WORD + " m/CS2103T";
+            + "Example MODULE: " + COMMAND_WORD + " m/CS2103T\n"
+            + "Example COURSE: " + COMMAND_WORD + " c/Computer Science";
 
     private final NameContainsKeywordsPredicate namePredicate;
     private final ModuleContainsKeywordsPredicate modulePredicate;
+    private final CourseContainsKeywordsPredicate coursePredicate;
 
     /**
      * Constructs a {@code FilterCommand} with a {@code NameContainsKeywordsPredicate}.
@@ -35,6 +38,7 @@ public class FilterCommand extends Command {
      * @param namePredicate the predicate to filter the list by name keywords
      */
     public FilterCommand(NameContainsKeywordsPredicate namePredicate) {
+        this.coursePredicate = null;
         this.namePredicate = namePredicate;
         this.modulePredicate = null;
     }
@@ -46,8 +50,21 @@ public class FilterCommand extends Command {
      * @param modulePredicate the predicate to filter the list by module keywords
      */
     public FilterCommand(ModuleContainsKeywordsPredicate modulePredicate) {
+        this.coursePredicate = null;
         this.modulePredicate = modulePredicate;
         this.namePredicate = null;
+    }
+
+    /**
+     * Constructs a {@code FilterCommand} with a {@code CourseContainsKeywordsPredicate}.
+     * The {@code namePredicate} and {@code modulePredicate} will be set to {@code null}.
+     *
+     * @param coursePredicate the predicate to filter the list by course keywords
+     */
+    public FilterCommand(CourseContainsKeywordsPredicate coursePredicate) {
+        this.coursePredicate = coursePredicate;
+        this.namePredicate = null;
+        this.modulePredicate = null;
     }
 
     @Override
@@ -57,11 +74,12 @@ public class FilterCommand extends Command {
             model.updateFilteredPersonList(namePredicate);
         } else if (modulePredicate != null) {
             model.updateFilteredPersonList(modulePredicate);
+        } else if (coursePredicate != null) {
+            model.updateFilteredPersonList(coursePredicate);
         }
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -75,7 +93,8 @@ public class FilterCommand extends Command {
 
         FilterCommand otherFilterCommand = (FilterCommand) other;
         return (namePredicate != null && namePredicate.equals(otherFilterCommand.namePredicate))
-                || (modulePredicate != null && modulePredicate.equals(otherFilterCommand.modulePredicate));
+                || (modulePredicate != null && modulePredicate.equals(otherFilterCommand.modulePredicate))
+                || (coursePredicate != null && coursePredicate.equals(otherFilterCommand.coursePredicate));
     }
 
     @Override
@@ -83,6 +102,7 @@ public class FilterCommand extends Command {
         return new ToStringBuilder(this)
                 .add("namePredicate", namePredicate)
                 .add("modulePredicate", modulePredicate)
+                .add("coursePredicate", coursePredicate)
                 .toString();
     }
 }
