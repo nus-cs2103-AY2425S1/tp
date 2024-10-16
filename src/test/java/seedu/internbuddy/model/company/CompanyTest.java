@@ -10,6 +10,7 @@ import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_PHONE_MICRO
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_STATUS_MICROSOFT;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_TAG_SOFTWARE;
 import static seedu.internbuddy.testutil.Assert.assertThrows;
+import static seedu.internbuddy.testutil.TypicalApplications.PM_APPLICATION;
 import static seedu.internbuddy.testutil.TypicalCompanies.GOOGLE;
 import static seedu.internbuddy.testutil.TypicalCompanies.MICROSOFT;
 
@@ -26,7 +27,7 @@ public class CompanyTest {
     }
 
     @Test
-    public void isSamecompany() {
+    public void isSameCompany() {
         // same object -> returns true
         assertTrue(GOOGLE.isSameCompany(GOOGLE));
 
@@ -92,7 +93,11 @@ public class CompanyTest {
         assertFalse(GOOGLE.equals(editedGoogle));
 
         // different status -> returns false
-        editedGoogle = new CompanyBuilder(GOOGLE).withTags(VALID_STATUS_MICROSOFT).build();
+        editedGoogle = new CompanyBuilder(GOOGLE).withStatus(VALID_STATUS_MICROSOFT).build();
+        assertFalse(GOOGLE.equals(editedGoogle));
+
+        // different applications -> return false
+        editedGoogle = new CompanyBuilder(GOOGLE).withApplications(PM_APPLICATION).build();
         assertFalse(GOOGLE.equals(editedGoogle));
     }
 
@@ -100,7 +105,8 @@ public class CompanyTest {
     public void toStringMethod() {
         String expected = Company.class.getCanonicalName() + "{name=" + GOOGLE.getName()
                 + ", phone=" + GOOGLE.getPhone() + ", email=" + GOOGLE.getEmail() + ", address=" + GOOGLE.getAddress()
-                + ", tags=" + GOOGLE.getTags() + ", status=" + GOOGLE.getStatus() + "}";
+                + ", status=" + GOOGLE.getStatus() + ", tags=" + GOOGLE.getTags()
+                + ", applications=" + GOOGLE.getApplications() + "}";
         assertEquals(expected, GOOGLE.toString());
     }
 }
