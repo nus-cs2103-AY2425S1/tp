@@ -47,7 +47,8 @@ public class MessagesTest {
         String expectedOutput = "John Doe; Phone: 12345678; Email: john@example.com; Address: 123 Main St; Tags: "
                 + person.getTags().stream()
                 .map(Tag::toString)
-                .collect(Collectors.joining());
+                .collect(Collectors.joining())
+                + "; Weddings: ";
 
         String actualOutput = Messages.format(person);
         assertEquals(expectedOutput, actualOutput);

@@ -1,0 +1,11 @@
+{
+  "persons": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "tags": [ "friends" ]
+  }],
+  "tags": ["florist", "chef"],
+  "weddings": ["Wedding July 2026", "Wedding 1", "Wedding July 2026", "Paula's Wedding"]
+}

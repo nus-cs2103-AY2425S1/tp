@@ -25,7 +25,7 @@ public class TagCommandParser implements Parser<TagCommand> {
      * and returns a TagCommand object for execution.
      *
      * @param args the user input string containing the index and tags to be added
-     * @return a new TagCommand object that contains the parsed index and list of tags
+     * @return a new {@code TagCommand} object that contains the parsed index and list of tags
      * @throws ParseException if the input does not conform to the expected format (i.e., invalid index or missing tags)
      */
     public TagCommand parse(String args) throws ParseException {

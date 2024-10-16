@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -40,6 +40,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane weddings;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -55,5 +57,8 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.getTagName().toString()))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.getTagName().toString())));
+        person.getWeddings().stream()
+                .sorted(Comparator.comparing(wedding -> wedding.getWeddingName().toString()))
+                .forEach(wedding -> weddings.getChildren().add(new Label(wedding.getWeddingName().toString())));
     }
 }

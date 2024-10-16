@@ -10,14 +10,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new CreateTagCommand object
  */
 public class CreateTagCommandParser implements Parser<CreateTagCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * Parses the given {@code String} of arguments in the context of the CreateTagCommand
+     * and returns an CreateTagCommand object for execution.
+     * @throws ParseException if the user input does not conform to the expected format
      */
     public CreateTagCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

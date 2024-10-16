@@ -16,7 +16,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * Removes a tag associated with an existing person in the address book.
+ * Adds a tag to an existing person in the Wedlinker.
  */
 public class TagCommand extends Command {
 
@@ -35,7 +35,7 @@ public class TagCommand extends Command {
 
 
     /**
-     * Constructs a TagCommand to add tags to a person.
+     * Constructs a {@code TagCommand} to add tags to a person.
      *
      * @param index The index of the person in the person list.
      * @param tagsToAdd The list of tags to be added.
@@ -82,7 +82,8 @@ public class TagCommand extends Command {
                 personToEdit.getPhone(),
                 personToEdit.getEmail(),
                 personToEdit.getAddress(),
-                updatedTags);
+                updatedTags,
+                personToEdit.getWeddings());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
