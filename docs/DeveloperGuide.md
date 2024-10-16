@@ -281,50 +281,57 @@ _{Explain here how the data archiving feature will be implemented}_
 * is reasonably comfortable using CLI apps
 * has a need to generate and visualize reports (e.g., volunteer hours, visit frequency) in a simple and efficient way
 
-**Value proposition**: manage volunteer records and site visits faster than a typical mouse/GUI-driven app, while efficiently scheduling and tracking volunteer engagement
+**Value proposition**: Manage volunteering _tutor_ and _tutee_ records, site visits, and scheduling faster than a typical 
+    mouse/GUI-driven app, while efficiently tracking and enhancing volunteer engagement.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​    | I want to …​                                                   | So that I can…​                                                            |
-|----------|------------|----------------------------------------------------------------|----------------------------------------------------------------------------|
-| `* * *`  | new user   | see usage instructions                                         | refer to instructions when I forget how to use the App                     |
-| `* * *`  | supervisor | view the contact details of volunteers                         | reach out to them for administrative matters                               |
-| `* * *`  | supervisor | view the contact details of clients                            | reach out to them for administrative matters                               |
-| `* * *`  | supervisor | add a new volunteer and their details                          | keep track of the volunteers and their personal information                |
-| `* * *`  | supervisor | add a new client and their details                             | keep track of the clients and their personal information                   |
-| `* * *`  | supervisor | update a volunteer's contact information                       | keep the details accurate                                                  |
-| `* * *`  | supervisor | update a client's contact information                          | keep the details accurate                                                  |
-| `* * *`  | supervisor | delete details of an inactive volunteer                        | keep the database up-to-date                                               |
-| `* * *`  | supervisor | delete details of a former client                              | keep the database up-to-date                                               |
-| `* * *`  | supervisor | view the address of a volunteer                                | arrange site visits to locations that are convenient for them              |
-| `* * *`  | supervisor | view the address of a client                                   | arrange site visits by volunteers located near them                        |
-| `* * *`  | supervisor | update a volunteer's address                                   | keep the details accurate                                                  |
-| `* * *`  | supervisor | update a client's address                                      | keep the details accurate                                                  |
-| `* * *`  | supervisor | update a volunteer's total volunteer hours                     | keep track of the number of hours they have put into volunteering          |
-| `* * *`  | supervisor | update a volunteer's visitation records                        | keep track of their site visits                                            |
-| `* * *`  | supervisor | view a volunteer's total volunteer hours                       | track their productivity and contributions over time                       |
-| `* * *`  | supervisor | interact with the application's GUI easily                     | enjoy the application and use it intuitively                               |
-| `* * *`  | supervisor | find a volunteer by name                                       | locate details of volunteers without going through the entire list         |
-| `* *`    | supervisor | view the availability of volunteers                            | schedule site visits that matches their availability                       |
-| `* *`    | supervisor | add the available timeslots of volunteers                      | allow site visits to be arranged                                           |
-| `* *`    | supervisor | update the available timeslots of volunteers                   | ensure volunteers can conduct site visits as scheduled                     |
-| `* *`    | supervisor | view a volunteer's total hours in graphs or charts             | easily analyze volunteer engagement and allocate resources efficiently     |
-| `* *`    | supervisor | view volunteer visit frequency by location in graphs or charts | identify the most and least visited sites and adjust resources accordingly |
-| `*`      | supervisor | sort volunteers in different orders                            | locate a volunteer easily                                                  |
-| `*`      | supervisor | filter the volunteers by certain categories                    | locate a volunteer easily                                                  |
-| `*`      | supervisor | download a report of a volunteer's hours                       | use it for book-keeping or share with the volunteer upon request           |
-| `*`      | supervisor | read large amount of data at once by importing an excel file   | quickly populate the system without manually entering each data point      |
-| `*`      | supervisor | have an autocomplete feature when typing commands              | save time and reduce errors while entering commands or data                |
-| `*`      | supervisor | utilize keyboard shortcuts                                     | navigate to a different page quickly and conveniently                      |
+| Priority | As a …​    | I want to …​                                                   | So that I can…​                                                          |
+|----------|------------|----------------------------------------------------------------|--------------------------------------------------------------------------|
+| `* * *`  | new user   | see usage instructions                                         | refer to instructions when I forget how to use the App                   |
+| `* * *`  | supervisor | view the contact details of _tutors_                           | reach out to them for administrative matters                             |
+| `* * *`  | supervisor | view the contact details of _tutees_                           | reach out to them for administrative matters                             |
+| `* * *`  | supervisor | add a new tutor and their details                              | keep track of the tutors and their personal information                  |
+| `* * *`  | supervisor | add a new tutee and their details                              | keep track of the tutees and their personal information                  |
+| `* * *`  | supervisor | add a tutor's tutoring subject                                 | match them with tutees who need help in that subject                     |
+| `* * *`  | supervisor | add a tutee's required subject for tutoring                    | match them with a suitable volunteering tutor                            |
+| `* * *`  | supervisor | update a tutor's contact information                           | keep the details accurate                                                |
+| `* * *`  | supervisor | update a tutee's contact information                           | keep the details accurate                                                |
+| `* * *`  | supervisor | delete details of an inactive tutor                            | keep the database up-to-date                                             |
+| `* * *`  | supervisor | delete details of a former tutee                               | keep the database up-to-date                                             |
+| `* * *`  | supervisor | view the address of a tutor                                    | arrange tutoring sessions in locations that are convenient for them      |
+| `* * *`  | supervisor | view the address of a tutee                                    | arrange tutoring sessions by tutors located near them                    |
+| `* * *`  | supervisor | update a tutor's address                                       | keep the details accurate                                                |
+| `* * *`  | supervisor | update a tutee's address                                       | keep the details accurate                                                |
+| `* * *`  | supervisor | update a tutor's total volunteer hours                         | keep track of the number of hours they have put into volunteering        |
+| `* * *`  | supervisor | update a tutor's scheduled tutoring sessions                   | keep track of the sessions scheduled                                     |
+| `* * *`  | supervisor | view a tutor's total volunteer hours                           | track their productivity and contributions over time                     |
+| `* * *`  | supervisor | view a tutor or tutee's scheduled tutoring sessions            | avoid scheduling sessions that clash                                     |
+| `* * *`  | supervisor | interact with the application's GUI easily                     | enjoy the application and use it intuitively                             |
+| `* * *`  | supervisor | find a tutor or tutee by name                                  | locate details of tutors or tutees without going through the entire list |
+| `* * *`  | supervisor | undo the last command executed                                 | easily correct mistakes without re-entering the data manually            |
+| `* * *`  | supervisor | redo a previously undone command                               | reapply actions if undone by mistake                                     |
+| `* * *`  | supervisor | view the history of commands from most recent to least recent  | track the actions performed and verify changes                           |
+| `* *`    | supervisor | view the total number of tutors and tutees in graphs or charts | identify any inefficient allocation of resources and adjust accordingly  |
+| `* *`    | supervisor | filter the tutors by subjects tutored                          | locate a tutor easily for matching purposes                              |
+| `*`      | supervisor | add the available timeslots of tutors                          | allow tutoring sessions to be arranged                                   |
+| `*`      | supervisor | update the available timeslots of tutors                       | ensure tutors can conduct tutoring sessions as scheduled                 |
+| `*`      | supervisor | view the availability of tutors                                | schedule tutoring sessions that matches their availability               |
+| `*`      | supervisor | view a tutor's total hours in graphs or charts                 | easily analyze tutor engagement and allocate resources efficiently       |
+| `*`      | supervisor | sort tutors in different orders                                | locate a tutor easily                                                    |
+| `*`      | supervisor | download a report of a tutor's hours                           | use it for book-keeping or share with the tutor upon request             |
+| `*`      | supervisor | read large amount of data at once by importing an excel file   | quickly populate the system without manually entering each data point    |
+| `*`      | supervisor | have an autocomplete feature when typing commands              | save time and reduce errors while entering commands or data              |
+| `*`      | supervisor | utilize keyboard shortcuts                                     | navigate to a different page quickly and conveniently                    |
 
 ### Use cases
 
 (For all use cases below, the **System** is the `VolunTier` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC1 - View list of persons**
+**Use case: UC1 - View list of _persons_**
 
 **MSS**
 
@@ -425,7 +432,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Person**: A volunteer or a client
+* **Tutor**: A volunteer; A person who provides tutoring services to tutees
+* **Tutee**: A client; A person receiving tutoring services from a tutor
+* **Person**: A tutor or tutee
 
 --------------------------------------------------------------------------------------------------------------------
 
