@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB; // Import job pre
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -36,7 +36,7 @@ public class PersonUtil {
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
         sb.append(PREFIX_JOB + person.getJob().value + " ");
         sb.append(PREFIX_INCOME + (String.valueOf(person.getIncome().value)) + " ");
-        sb.append(PREFIX_TAG + person.getTier().tagName.toString() + " ");
+        sb.append(PREFIX_TIER + person.getTier().tagName.toString() + " ");
         sb.append(PREFIX_NEW_REMARK + person.getRemark().value + " ");
         return sb.toString();
     }
@@ -52,9 +52,10 @@ public class PersonUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getJob().ifPresent(job -> sb.append(PREFIX_JOB).append(job.value).append(" "));
         descriptor.getIncome().ifPresent(income -> sb.append(PREFIX_INCOME).append(income.value).append(" "));
-        descriptor.getTiers().ifPresent(tier -> sb.append(PREFIX_TAG).append(tier.tagName).append(" "));
+        descriptor.getTiers().ifPresent(tier -> sb.append(PREFIX_TIER).append(tier.tagName).append(" "));
         descriptor.getNewRemark().ifPresent(newRemark -> sb.append(PREFIX_NEW_REMARK).append(newRemark.value)
                 .append(" "));
         return sb.toString();
     }
+
 }

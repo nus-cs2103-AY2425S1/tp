@@ -27,12 +27,12 @@ public class TypicalPersons {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withJob("Engineer")
             .withIncome(3)
-            .withTiers("GOLD").withRemark("She is stingy").build();
+            .withTier("GOLD").withRemark("She is stingy").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withIncome(40).withJob("Doctor")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTiers("Bronze").withRemark("He is rich").build();
+            .withTier("Bronze").withRemark("He is rich").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withJob("Lawyer")
             .withIncome(40)
@@ -40,7 +40,7 @@ public class TypicalPersons {
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withJob("Artist")
             .withIncome(30)
-            .withTiers("REJECT")
+            .withTier("REJECT")
             .withRemark(CommandCommons.DEFAULT_REMARK).build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822240")
             .withEmail("werner@example.com").withAddress("michegan ave").withJob("Nurse")
@@ -69,12 +69,12 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
             .withJob("Teacher")
             .withIncome(999999999)
-            .withTiers(VALID_TIER_REJECT)
+            .withTier(VALID_TIER_REJECT)
             .withRemark(CommandCommons.DEFAULT_REMARK).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withJob("Developer")
             .withIncome(9)
-            .withTiers(VALID_TIER_REJECT)
+            .withTier(VALID_TIER_REJECT)
             .withRemark(CommandCommons.DEFAULT_REMARK).build();
 
     private TypicalPersons() {} // prevents instantiation

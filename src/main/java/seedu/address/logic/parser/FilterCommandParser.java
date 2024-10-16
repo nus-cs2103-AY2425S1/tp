@@ -4,10 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
 
 import java.util.Arrays;
 
@@ -15,6 +17,7 @@ import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.predicates.AddressContainsSubstringPredicate;
 import seedu.address.model.person.predicates.EmailContainsSubstringPredicate;
+import seedu.address.model.person.predicates.JobContainsSubstringPredicate;
 import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
 import seedu.address.model.person.predicates.PhoneContainsSubstringPredicate;
 import seedu.address.model.person.predicates.RemarkContainsSubstringPredicate;
@@ -32,13 +35,15 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public FilterCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_INCOME, PREFIX_JOB, PREFIX_REMARK, PREFIX_TIER);
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_INCOME, PREFIX_JOB, PREFIX_REMARK, PREFIX_TIER);
 
         // Filtering by multiple fields/flags has not been implemented yet
         long numberOfFiltersUsed = countPrefixesUsed(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS);
+                PREFIX_ADDRESS, PREFIX_JOB, PREFIX_INCOME, PREFIX_REMARK, PREFIX_TIER);
         if (numberOfFiltersUsed > 1) {
             throw new ParseException(FilterCommand.MULTIPLE_FILTERS_NOT_IMPLEMENTED);
         }
@@ -59,8 +64,12 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             String substring = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()).value;
             return new FilterCommand(new AddressContainsSubstringPredicate(substring));
         }
+        if (argMultimap.getValue(PREFIX_JOB).isPresent()) {
+            String substring = ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get()).value;
+            return new FilterCommand(new JobContainsSubstringPredicate(substring));
+        }
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
-            String substring = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_REMARK).get()).value;
+            String substring = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get()).value;
             return new FilterCommand(new RemarkContainsSubstringPredicate(substring));
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));

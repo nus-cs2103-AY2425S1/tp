@@ -9,8 +9,8 @@ import static java.util.Objects.requireNonNull;
 
 public class Remark {
 
-    public static final String MESSAGE_CONSTRAINTS = "Remarks cannot be empty. They must at least consist of 1 "
-            + "character";
+    public static final String MESSAGE_CONSTRAINTS = "Remark must contain only ASCII characters.";
+    public static final String VALIDATION_REGEX = "^[\\x00-\\x7F]+$";
 
     public final String value;
 
@@ -22,6 +22,13 @@ public class Remark {
     public Remark(String remark) {
         requireNonNull(remark);
         this.value = remark;
+    }
+
+    /**
+     * Returns true if a given string is a valid remark.
+     */
+    public static boolean isValidRemark(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
@@ -43,10 +50,6 @@ public class Remark {
     @Override
     public int hashCode() {
         return value.hashCode();
-    }
-
-    public static boolean isValidRemark(String test) {
-        return test != null && !(test.isEmpty());
     }
 
     /**

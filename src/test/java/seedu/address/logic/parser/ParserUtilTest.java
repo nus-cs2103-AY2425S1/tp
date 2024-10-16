@@ -143,26 +143,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+    public void parseTier_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTier(null));
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+    public void parseTier_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTier(INVALID_TAG));
     }
 
     @Test
-    public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
+    public void parseTier_validValueWithoutWhitespace_returnsTag() throws Exception {
         Tier expectedTier = new Tier(VALID_TAG_1);
-        assertEquals(expectedTier, ParserUtil.parseTag(VALID_TAG_1));
+        assertEquals(expectedTier, ParserUtil.parseTier(VALID_TAG_1));
     }
 
     @Test
-    public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
+    public void parseTier_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
         Tier expectedTier = new Tier(VALID_TAG_1);
-        assertEquals(expectedTier, ParserUtil.parseTag(tagWithWhitespace));
+        assertEquals(expectedTier, ParserUtil.parseTier(tagWithWhitespace));
     }
 
 }

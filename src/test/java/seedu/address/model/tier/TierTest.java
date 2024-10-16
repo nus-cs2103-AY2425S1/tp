@@ -12,15 +12,15 @@ public class TierTest {
     }
 
     @Test
-    public void constructor_invalidTagName_throwsIllegalArgumentException() {
-        String invalidTagName = "";
+    public void constructor_invalidTierName_throwsIllegalArgumentException() {
+        String invalidTagName = "yellow";
         assertThrows(IllegalArgumentException.class, () -> new Tier(invalidTagName));
     }
 
     @Test
-    public void isValidTagName() {
+    public void isValidTierName() {
         // null tag name
-        assertThrows(NullPointerException.class, () -> Tier.isValidTagName(null));
+        assertThrows(NullPointerException.class, () -> Tier.isValidTierName(null));
     }
 
 }

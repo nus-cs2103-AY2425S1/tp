@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -32,7 +32,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_INCOME, PREFIX_JOB, PREFIX_TAG, PREFIX_NEW_REMARK, PREFIX_APPEND_REMARK);
+                        PREFIX_INCOME, PREFIX_JOB, PREFIX_TIER, PREFIX_NEW_REMARK, PREFIX_APPEND_REMARK);
 
         Index index;
 
@@ -49,7 +49,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_INCOME, PREFIX_JOB, PREFIX_TAG, PREFIX_NEW_REMARK, PREFIX_APPEND_REMARK);
+                PREFIX_INCOME, PREFIX_JOB, PREFIX_TIER, PREFIX_NEW_REMARK, PREFIX_APPEND_REMARK);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -71,8 +71,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_INCOME).isPresent()) {
             editPersonDescriptor.setIncome(ParserUtil.parseIncome(argMultimap.getValue(PREFIX_INCOME).get()));
         }
-        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            editPersonDescriptor.setTier(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get()));
+        if (argMultimap.getValue(PREFIX_TIER).isPresent()) {
+            editPersonDescriptor.setTier(ParserUtil.parseTier(argMultimap.getValue(PREFIX_TIER).get()));
         }
         if (argMultimap.getValue(PREFIX_NEW_REMARK).isPresent()) {
             editPersonDescriptor.setNewRemark(ParserUtil.parseNewRemark(argMultimap.getValue(PREFIX_NEW_REMARK).get()));

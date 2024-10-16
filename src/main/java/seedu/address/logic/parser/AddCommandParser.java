@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
 
 import java.util.stream.Stream;
 
@@ -39,7 +39,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_JOB,
-                        PREFIX_INCOME, PREFIX_TAG, PREFIX_NEW_REMARK);
+                        PREFIX_INCOME, PREFIX_TIER, PREFIX_NEW_REMARK);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_JOB, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_INCOME)
@@ -48,14 +48,14 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_JOB,
-                PREFIX_INCOME, PREFIX_TAG, PREFIX_NEW_REMARK);
+                PREFIX_INCOME, PREFIX_TIER, PREFIX_NEW_REMARK);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Job job = ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get());
         Income income = ParserUtil.parseIncome(argMultimap.getValue(PREFIX_INCOME).get());
-        Tier tier = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).orElse(CommandCommons.DEFAULT_TIER));
+        Tier tier = ParserUtil.parseTier(argMultimap.getValue(PREFIX_TIER).orElse("NA"));
         Remark remark = ParserUtil.parseNewRemark(argMultimap.getValue(PREFIX_NEW_REMARK)
                 .orElse(CommandCommons.DEFAULT_REMARK));
         Person person = new Person(name, phone, email, address, job, income, tier, remark);

@@ -39,7 +39,7 @@ class JsonAdaptedTag {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Tier toModelType() throws IllegalValueException {
-        if (!Tier.isValidTagName(tagName)) {
+        if (!Tier.isValidTierName(tagName)) {
             throw new IllegalValueException(Tier.MESSAGE_CONSTRAINTS);
         }
         return new Tier(tagName);

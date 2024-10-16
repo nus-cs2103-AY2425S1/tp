@@ -8,7 +8,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+<<<<<<< HEAD
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+=======
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
+>>>>>>> master
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -31,8 +36,12 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_JOB + "JOB "
             + PREFIX_INCOME + "INCOME "
+<<<<<<< HEAD
             + "[" + PREFIX_TAG + "TAG]..."
             + "[" + PREFIX_NEW_REMARK + "NEW REMARK]...\n"
+=======
+            + "[" + PREFIX_TIER + "TAG]...\n"
+>>>>>>> master
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -40,8 +49,13 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_JOB + "doctor "
             + PREFIX_INCOME + "300 "
+<<<<<<< HEAD
             + PREFIX_TAG + "GOLD "
             + PREFIX_NEW_REMARK + "He is very smart ";
+=======
+            + PREFIX_TIER + "GOLD "
+            + PREFIX_REMARK + "owesMoney";
+>>>>>>> master
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

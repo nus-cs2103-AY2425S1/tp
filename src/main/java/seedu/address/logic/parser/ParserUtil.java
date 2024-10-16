@@ -110,18 +110,34 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Income}.
+     * Parses an {@code String income} into an {@code Income}.
      * Leading and trailing whitespaces will be trimmed.
      * The string is parsed into a primitive int.
-     * @throws ParseException if the given {@code email} is invalid.
+     *
+     * @throws ParseException if the given {@code income} is invalid.
      */
-    public static Income parseIncome(String potentialIncome) throws ParseException {
-        requireNonNull(potentialIncome);
-        String trimmedIncome = potentialIncome.trim();
+    public static Income parseIncome(String income) throws ParseException {
+        requireNonNull(income);
+        String trimmedIncome = income.trim();
         if (!(Income.isValidIncome(trimmedIncome))) {
             throw new ParseException(Income.MESSAGE_CONSTRAINTS);
         }
         return new Income(Integer.parseInt(trimmedIncome));
+    }
+
+    /**
+     * Parses an {@code String remark} into an {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code remark} is invalid.
+     */
+    public static Remark parseRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        return new Remark(trimmedRemark);
     }
 
     /**
@@ -130,10 +146,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tier parseTag(String tag) throws ParseException {
+    public static Tier parseTier(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Tier.isValidTagName(trimmedTag)) {
+        if (trimmedTag.isEmpty()) {
+            trimmedTag = Tier.TierEnum.NA.toString();
+        }
+        if (!Tier.isValidTierName(trimmedTag)) {
             throw new ParseException(Tier.MESSAGE_CONSTRAINTS);
         }
         return new Tier(trimmedTag);

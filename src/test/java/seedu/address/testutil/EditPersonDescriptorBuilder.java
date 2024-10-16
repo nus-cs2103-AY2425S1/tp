@@ -91,7 +91,7 @@ public class EditPersonDescriptorBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTiers(String tier) {
+    public EditPersonDescriptorBuilder withTier(String tier) {
         descriptor.setTier(new Tier(tier));
         return this;
     }
