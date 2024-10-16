@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -22,7 +21,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.task.Task;
 import seedu.address.model.person.task.TaskDeadline;
 import seedu.address.model.person.task.TaskDescription;
-import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -31,14 +29,14 @@ import seedu.address.testutil.PersonBuilder;
 public class DeleteTaskCommandTest {
     private Model model = new ModelManager(getUniqueTypicalAddressBook(), new UserPrefs());
     private Task testTask = new Task(new TaskDescription("First Assignment"), new TaskDeadline("2024-10-16"));
-    private Index INDEX_FIRST_TASK = Index.fromOneBased(1);
+    private final Index INDEX_FIRST_TASK = Index.fromOneBased(1);
 
     @Test
     public void execute_validArgument_success() {
         //Have a test person with a task
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         personToDelete.getTaskList().add(testTask);
-        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(personToDelete.getName(),INDEX_FIRST_TASK);
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(personToDelete.getName(), INDEX_FIRST_TASK);
 
         String expectedMessage = String.format(DeleteTaskCommand.MESSAGE_DELETE_TASK_SUCCESS,
                 testTask.toString());
@@ -55,7 +53,7 @@ public class DeleteTaskCommandTest {
     public void execute_invalidIndex_throwsCommandException() {
         Person targetPerson = model.getFilteredPersonList().get(0);
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(targetPerson.getName(),outOfBoundIndex);
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(targetPerson.getName(), outOfBoundIndex);
 
         assertCommandFailure(deleteTaskCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
@@ -65,7 +63,7 @@ public class DeleteTaskCommandTest {
     public void execute_invalidName_throwsCommandException() {
         Person targetPerson = model.getFilteredPersonList().get(0);
         targetPerson.getTaskList().add(testTask);
-        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(new Name("UNKNOWN NAME"),INDEX_FIRST_TASK);
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(new Name("UNKNOWN NAME"), INDEX_FIRST_TASK);
 
         assertCommandFailure(deleteTaskCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
     }
