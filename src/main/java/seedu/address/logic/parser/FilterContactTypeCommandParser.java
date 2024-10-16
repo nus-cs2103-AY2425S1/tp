@@ -5,7 +5,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContactType;
 import seedu.address.model.person.ContactTypePredicate;
 
-public class FilterContactTypeParser implements Parser<FilterContactTypeCommand> {
+public class FilterContactTypeCommandParser implements Parser<FilterContactTypeCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FilterContactTypeCommand

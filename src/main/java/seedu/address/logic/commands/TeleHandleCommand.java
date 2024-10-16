@@ -60,7 +60,7 @@ public class TeleHandleCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getContactType(), personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 telegramHandle, personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);

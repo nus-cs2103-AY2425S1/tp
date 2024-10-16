@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.ContactType;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -92,8 +93,11 @@ class JsonAdaptedPerson {
 
         final TelegramHandle modelTelegramHandle = new TelegramHandle("");
 
+        //Placeholder Work contact type first but will have to add ContactType as a new field
+        final ContactType modelContactType = new ContactType("Work");
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelTelegramHandle, modelTags);
+        return new Person(modelContactType, modelName, modelPhone, modelEmail, modelTelegramHandle, modelTags);
 
     }
 
