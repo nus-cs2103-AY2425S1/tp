@@ -25,7 +25,10 @@ public class StorageManager implements Storage {
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage, ScheduleStorage scheduleStorage) {
+    public StorageManager(
+            AddressBookStorage addressBookStorage,
+            UserPrefsStorage userPrefsStorage,
+            ScheduleStorage scheduleStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.scheduleStorage = scheduleStorage;
@@ -77,29 +80,29 @@ public class StorageManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
-    
+
     // ================ ScheduleList methods ==============================
     @Override
     public Path getScheduleListFilePath() {
         return scheduleStorage.getScheduleListFilePath();
     }
-    
+
     @Override
     public Optional<ReadOnlyScheduleList> readScheduleList() throws DataLoadingException {
         return scheduleStorage.readScheduleList();
     }
-    
+
     @Override
-    public Optional<ReadOnlyScheduleList>  readScheduleList(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyScheduleList> readScheduleList(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
         return scheduleStorage.readScheduleList(filePath);
     }
-    
+
     @Override
     public void saveScheduleList(ReadOnlyScheduleList scheduleList) throws IOException {
         saveScheduleList(scheduleList, addressBookStorage.getAddressBookFilePath());
     }
-    
+
     @Override
     public void saveScheduleList(ReadOnlyScheduleList scheduleList, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
