@@ -27,7 +27,7 @@ public class AddLessonCommandTest {
     }
 
     @Test
-    public void addValidLesson() throws CommandException {
+    public void execute_uniqueValidLesson_success() throws CommandException {
         AddLessonCommand command = new AddLessonCommand(validLesson);
         CommandResult result = command.execute(model);
         assertEquals(result.getFeedbackToUser(),
@@ -36,7 +36,7 @@ public class AddLessonCommandTest {
     }
 
     @Test
-    public void addDuplicateLesson() throws CommandException {
+    public void execute_duplicateValidLesson_throwsCommandException() throws CommandException {
         model.addLesson(validLesson);
 
         // note that the lesson only has identical descriptions as the validLesson
