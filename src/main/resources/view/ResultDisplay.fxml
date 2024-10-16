@@ -5,12 +5,18 @@
 
 
 <?import java.net.URL?>
+<?import javafx.scene.layout.HBox?>
+<HBox xmlns="http://javafx.com/javafx/17"
+        xmlns:fx="http://javafx.com/fxml/1" HBox.hgrow="ALWAYS">
 <StackPane fx:id="placeHolder" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/17"
-           xmlns:fx="http://javafx.com/fxml/1">
+           xmlns:fx="http://javafx.com/fxml/1" HBox.hgrow="ALWAYS">
+
   <stylesheets>
     <URL value="@ResultDisplay.css" />
     <URL value="@Extensions.css" />
   </stylesheets>
 
-  <TextArea fx:id="resultDisplay" wrapText="true" editable="false" styleClass="result-display"/>
+  <TextArea fx:id="resultDisplay" wrapText="true" editable="false" styleClass="result-display" />
+
 </StackPane>
+</HBox>
