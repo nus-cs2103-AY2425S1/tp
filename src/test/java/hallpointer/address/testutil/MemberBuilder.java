@@ -53,14 +53,6 @@ public class MemberBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Member} that we are building.
-     */
-    public MemberBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
-        return this;
-    }
-
-    /**
      * Sets the {@code Room} of the {@code Member} that we are building.
      */
     public MemberBuilder withRoom(String room) {
@@ -76,6 +68,14 @@ public class MemberBuilder {
         return this;
     }
 
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Member} that we are building.
+     */
+    public MemberBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
 
     public Member build() {
         return new Member(name, telegram, room, tags);

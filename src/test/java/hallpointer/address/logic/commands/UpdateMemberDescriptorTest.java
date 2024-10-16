@@ -43,7 +43,7 @@ public class UpdateMemberDescriptorTest {
         editedAmy = new UpdateMemberDescriptorBuilder(DESC_AMY).withTelegram(VALID_TELEGRAM_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different address -> returns false
+        // different room -> returns false
         editedAmy = new UpdateMemberDescriptorBuilder(DESC_AMY).withRoom(VALID_ROOM_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 

@@ -1,12 +1,16 @@
 package hallpointer.address.model.session;
 
 import static hallpointer.address.testutil.Assert.assertThrows;
+import static hallpointer.address.testutil.TypicalSessions.MEETING;
+import static hallpointer.address.testutil.TypicalSessions.REHEARSAL;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 import hallpointer.address.model.point.Point;
+import hallpointer.address.testutil.SessionBuilder;
 
 public class SessionTest {
 
@@ -24,22 +28,19 @@ public class SessionTest {
 
     @Test
     public void isSameSession() {
-        SessionName sessionName = new SessionName("Session 1");
-        SessionDate date = new SessionDate("24 Sep 2024");
-        Point points = new Point(10);
-
-        Session session = new Session(sessionName, date, points);
+        Session session = new SessionBuilder(REHEARSAL).build();
 
         // same session -> returns true
         assertTrue(session.isSameSession(session));
 
         // different session with same name -> returns true
-        Session sameNameSession = new Session(new SessionName("Session 1"), new SessionDate("25 Sep 2024"), points);
-        assertTrue(session.isSameSession(sameNameSession));
+        Session editedSession = new SessionBuilder(REHEARSAL).withDate("20 Jan 2025").build();
+        assertTrue(session.isSameSession(editedSession));
 
         // different session with different name -> returns false
-        Session differentNameSession = new Session(new SessionName("Session 2"), date, points);
-        assertFalse(session.isSameSession(differentNameSession));
+        editedSession = new SessionBuilder(REHEARSAL)
+                .withSessionName("Rehearsal 2").build();
+        assertFalse(session.isSameSession(editedSession));
 
         // null -> returns false
         assertFalse(session.isSameSession(null));
@@ -47,29 +48,31 @@ public class SessionTest {
 
     @Test
     public void equals() {
-        SessionName sessionName = new SessionName("Session 1");
-        SessionDate date = new SessionDate("24 Sep 2024");
-        Point points = new Point(10);
-
-        Session session = new Session(sessionName, date, points);
+        Session sessionCopy = new SessionBuilder(MEETING).build();
 
         // same values -> returns true
-        assertTrue(session.equals(new Session(sessionName, date, points)));
+        assertTrue(MEETING.equals(sessionCopy));
 
         // same object -> returns true
-        assertTrue(session.equals(session));
+        assertTrue(MEETING.equals(MEETING));
 
         // null -> returns false
-        assertFalse(session.equals(null));
+        assertFalse(MEETING.equals(null));
 
         // different types -> returns false
-        assertFalse(session.equals(5.0f));
+        assertFalse(MEETING.equals(5.0f));
 
         // different session name -> returns false
-        assertFalse(session.equals(new Session(new SessionName("Session 2"), date, points)));
+        Session editedSession = new SessionBuilder(MEETING).withSessionName("Meeting W3").build();
+        assertFalse(MEETING.equals(editedSession));
+
+        // different dates -> returns false
+        editedSession = new SessionBuilder(MEETING).withDate("01 Aug 2020").build();
+        assertFalse(MEETING.equals(editedSession));
 
         // different points -> returns false
-        assertFalse(session.equals(new Session(sessionName, date, new Point(5))));
+        editedSession = new SessionBuilder(MEETING).withPoints(3).build();
+        assertFalse(MEETING.equals(editedSession));
     }
 
     @Test
@@ -86,15 +89,9 @@ public class SessionTest {
     }
 
     @Test
-    public void toStringTest() {
-        SessionName sessionName = new SessionName("Session 1");
-        SessionDate date = new SessionDate("24 Sep 2024");
-        Point points = new Point(10);
-
-        Session session = new Session(sessionName, date, points);
-
-        String expectedString = "Session{sessionName=Session 1, points=10}";
-        assertTrue(session.toString().contains("sessionName=Session 1"));
-        assertTrue(session.toString().contains("points=10"));
+    public void toStringMethod() {
+        String expected = Session.class.getCanonicalName() + "{sessionName=" + MEETING.getSessionName()
+                + ", date=" + MEETING.getDate() + ", points=" + MEETING.getPoints() + "}";
+        assertEquals(expected, MEETING.toString());
     }
 }
