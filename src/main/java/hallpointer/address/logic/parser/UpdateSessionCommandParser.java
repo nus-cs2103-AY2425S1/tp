@@ -9,14 +9,14 @@ import static java.util.Objects.requireNonNull;
 import java.util.stream.Stream;
 
 import hallpointer.address.commons.core.index.Index;
-import hallpointer.address.logic.commands.EditSessionCommand;
-import hallpointer.address.logic.commands.EditSessionCommand.EditSessionDescriptor;
+import hallpointer.address.logic.commands.UpdateSessionCommand;
+import hallpointer.address.logic.commands.UpdateSessionCommand.EditSessionDescriptor;
 import hallpointer.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new EditSessionCommand object
+ * Parses input arguments and creates a new UpdateSessionCommand object
  */
-public class EditSessionCommandParser implements Parser<EditSessionCommand> {
+public class UpdateSessionCommandParser implements Parser<UpdateSessionCommand> {
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
@@ -27,12 +27,12 @@ public class EditSessionCommandParser implements Parser<EditSessionCommand> {
     }
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditSessionCommand
-     * and returns an EditSessionCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the UpdateSessionCommand
+     * and returns an UpdateSessionCommand object for execution.
      *
      * @throws ParseException if the user input does not conform to the expected format
      */
-    public EditSessionCommand parse(String args) throws ParseException {
+    public UpdateSessionCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_SESSION_NAME, PREFIX_DATE, PREFIX_POINTS);
@@ -43,7 +43,7 @@ public class EditSessionCommandParser implements Parser<EditSessionCommand> {
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                            EditSessionCommand.MESSAGE_USAGE), pe);
+                            UpdateSessionCommand.MESSAGE_USAGE), pe);
         }
 
         EditSessionDescriptor editSessionDescriptor = new EditSessionDescriptor();
@@ -58,10 +58,10 @@ public class EditSessionCommandParser implements Parser<EditSessionCommand> {
         }
 
         if (!editSessionDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditSessionCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(UpdateSessionCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditSessionCommand(index, editSessionDescriptor);
+        return new UpdateSessionCommand(index, editSessionDescriptor);
     }
 
 }

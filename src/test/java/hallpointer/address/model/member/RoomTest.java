@@ -38,7 +38,6 @@ public class RoomTest {
         assertFalse(Room.isValidRoom("1/2/3/4")); // incorrect extra input
         assertFalse(Room.isValidRoom("3/2/3 0")); // also incorrect extra input
 
-
         // valid rooms
         assertTrue(Room.isValidRoom("1/2/3"));
         assertTrue(Room.isValidRoom("1/2/0")); // 0 is also acceptable here
