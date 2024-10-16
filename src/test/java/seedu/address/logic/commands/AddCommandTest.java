@@ -54,6 +54,24 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_personWithMultipleRoles_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        // Create a person with both PATIENT and CAREGIVER roles
+        Person validPersonWithMultipleRoles = new PersonBuilder().withRole("PATIENT", "CAREGIVER").build();
+
+        // Execute the add command
+        CommandResult commandResult = new AddCommand(validPersonWithMultipleRoles).execute(modelStub);
+
+        // Check if the command result is correct
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPersonWithMultipleRoles)),
+                commandResult.getFeedbackToUser());
+
+        // Verify the person was added with the correct roles
+        assertEquals(Arrays.asList(validPersonWithMultipleRoles), modelStub.personsAdded);
+    }
+
+    @Test
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
