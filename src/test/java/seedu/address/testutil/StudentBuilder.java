@@ -92,6 +92,10 @@ public class StudentBuilder {
     }
 
     public Student build() {
+        return new Student(name, phone, email, tags);
+    }
+
+    public Student buildWithAssignment() {
         return new Student(name, phone, email, tags, assignments);
     }
 

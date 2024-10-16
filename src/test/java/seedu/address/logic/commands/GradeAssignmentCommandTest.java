@@ -11,7 +11,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ASSIGNMENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalStudents.getTypicalAddressBookWithAssignments;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +25,7 @@ import seedu.address.model.student.Student;
 
 public class GradeAssignmentCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBookWithAssignments(), new UserPrefs());
 
     @Test
     public void execute_validIndexScore_success() {

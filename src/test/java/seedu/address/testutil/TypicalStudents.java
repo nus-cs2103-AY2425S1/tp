@@ -25,26 +25,33 @@ public class TypicalStudents {
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com")
             .withPhone("94351253")
-            .withTags("friends").withAssignments(getTypicalAssignments())
+            .withTags("friends")
             .build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").withAssignments(getTypicalAssignments())
+            .withTags("owesMoney", "friends")
             .build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAssignments(getTypicalAssignments())
+            .withEmail("heinz@example.com")
             .build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAssignments(getTypicalAssignments())
+            .withEmail("cornelia@example.com")
             .withTags("friends").build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAssignments(getTypicalAssignments())
+            .withEmail("werner@example.com")
             .build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAssignments(getTypicalAssignments())
+            .withEmail("lydia@example.com")
             .build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").build();
+            .withEmail("anna@example.com")
+            .build();
+    public static final Student JAMES = new StudentBuilder().withName("James Bond").withPhone("94792042")
+            .withEmail("james@example.com").withAssignments(getTypicalAssignments())
+            .buildWithAssignment();
+    public static final Student NICOLAS = new StudentBuilder().withName("Nicolas Jackson").withPhone("92841092")
+            .withEmail("nicolas@example.com").withAssignments(getTypicalAssignments())
+            .buildWithAssignment();
 
     // Manually added
     public static final Student HOON = new StudentBuilder().withName("Hoon Meier").withPhone("8482424")
@@ -74,9 +81,19 @@ public class TypicalStudents {
         return ab;
     }
 
+    public static AddressBook getTypicalAddressBookWithAssignments() {
+        AddressBook ab = new AddressBook();
+        for (Student student : getTypicalStudentsWithAssignments()) {
+            ab.addStudent(student);
+        }
+        return ab;
+    }
+
     public static List<Student> getTypicalStudents() {
-        System.out.println("TypicalStudents.getTypicalStudents()");
-        System.out.println(new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE)));
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Student> getTypicalStudentsWithAssignments() {
+        return new ArrayList<>(Arrays.asList(JAMES, NICOLAS));
     }
 }
