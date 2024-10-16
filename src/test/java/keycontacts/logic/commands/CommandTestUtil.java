@@ -1,9 +1,12 @@
 package keycontacts.logic.commands;
 
 import static keycontacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_DAY;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADE_LEVEL;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static keycontacts.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -35,6 +38,9 @@ public class CommandTestUtil {
     public static final String VALID_GRADE_LEVEL_BOB = "ABRSM 3";
     public static final String VALID_PIANO_PIECE_BEETHOVEN = "Für Elise";
     public static final String VALID_PIANO_PIECE_PACHELBEL = "Canon in D";
+    public static final String VALID_DAY = "Monday";
+    public static final String VALID_START_TIME = "14:00";
+    public static final String VALID_END_TIME = "16:00";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -44,12 +50,18 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String GRADE_LEVEL_DESC_AMY = " " + PREFIX_GRADE_LEVEL + VALID_GRADE_LEVEL_AMY;
     public static final String GRADE_LEVEL_DESC_BOB = " " + PREFIX_GRADE_LEVEL + VALID_GRADE_LEVEL_BOB;
+    public static final String VALID_DAY_DESC = " " + PREFIX_DAY + VALID_DAY;
+    public static final String VALID_START_TIME_DESC = " " + PREFIX_START_TIME + VALID_START_TIME;
+    public static final String VALID_END_TIME_DESC = " " + PREFIX_END_TIME + VALID_END_TIME;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     // '*' not allowed in grade levels
     public static final String INVALID_GRADE_LEVEL_DESC = " " + PREFIX_GRADE_LEVEL + "RSL*";
+    public static final String INVALID_DAY_DESC = " " + PREFIX_DAY + "day"; // not a day of the week
+    public static final String INVALID_START_TIME_DESC = " " + PREFIX_START_TIME + "10am"; // not in 24 hour format
+    public static final String INVALID_END_TIME_DESC = " " + PREFIX_END_TIME + "10pm"; // not in 24 hour format
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

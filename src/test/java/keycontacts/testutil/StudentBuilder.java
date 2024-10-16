@@ -3,6 +3,9 @@ package keycontacts.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import keycontacts.model.lesson.Day;
+import keycontacts.model.lesson.RegularLesson;
+import keycontacts.model.lesson.Time;
 import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.GradeLevel;
@@ -19,12 +22,14 @@ public class StudentBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_GRADE_LEVEL = "ABRSM 3";
+    public static final RegularLesson DEFAULT_REGULAR_LESSON = null;
 
     private Name name;
     private Phone phone;
     private Address address;
     private GradeLevel gradeLevel;
     private Set<PianoPiece> pianoPieces;
+    private RegularLesson regularLesson;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -35,6 +40,7 @@ public class StudentBuilder {
         address = new Address(DEFAULT_ADDRESS);
         gradeLevel = new GradeLevel(DEFAULT_GRADE_LEVEL);
         pianoPieces = new HashSet<>();
+        regularLesson = DEFAULT_REGULAR_LESSON;
     }
 
     /**
@@ -46,6 +52,7 @@ public class StudentBuilder {
         address = studentToCopy.getAddress();
         gradeLevel = studentToCopy.getGradeLevel();
         pianoPieces = new HashSet<>(studentToCopy.getPianoPieces());
+        regularLesson = studentToCopy.getRegularLesson();
     }
 
     /**
@@ -74,7 +81,6 @@ public class StudentBuilder {
 
     /**
      * Sets the {@code GradeLevel} of the {@code Student} that we are building.
-     * @param gradeLevel
      */
     public StudentBuilder withGradeLevel(String gradeLevel) {
         this.gradeLevel = new GradeLevel(gradeLevel);
@@ -90,8 +96,16 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code RegularLesson} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withRegularLesson(String day, String startTime, String endTime) {
+        this.regularLesson = new RegularLesson(new Day(day), new Time(startTime), new Time(endTime));
+        return this;
+    }
+
     public Student build() {
-        return new Student(name, phone, address, gradeLevel, pianoPieces, null);
+        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson);
     }
 
 }
