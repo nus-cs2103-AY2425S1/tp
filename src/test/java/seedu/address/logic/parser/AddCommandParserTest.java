@@ -135,6 +135,16 @@ public class AddCommandParserTest {
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
                 new AddCommand(expectedPerson));
+
+        // empty email
+        Person expectedPerson2 = new PersonBuilder(AMY).withEmptyEmail().withTags().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY,
+            new AddCommand(expectedPerson2));
+
+        // empty address
+        Person expectedPerson3 = new PersonBuilder(AMY).withEmptyAddress().withTags().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY,
+            new AddCommand(expectedPerson3));
     }
 
     @Test

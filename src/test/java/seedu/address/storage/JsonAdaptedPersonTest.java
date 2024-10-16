@@ -145,4 +145,12 @@ public class JsonAdaptedPersonTest {
             VALID_NAME, VALID_PHONE, EMPTY_FIELD_FORMAT, EMPTY_FIELD_FORMAT, validTags);
         assertEquals(testPerson, person.toModelType());
     }
+
+    @Test
+    public void toModelType_emptyFields_returnsPerson() throws Exception {
+        Person testPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
+            .withEmptyEmail().withEmptyAddress().withTags("friend").build();
+        JsonAdaptedPerson person = new JsonAdaptedPerson(testPerson);
+        assertEquals(testPerson, person.toModelType());
+    }
 }
