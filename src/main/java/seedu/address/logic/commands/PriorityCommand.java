@@ -55,9 +55,8 @@ public class PriorityCommand extends Command {
                     new PriorityLevel(isReset ? 3 : priorityLevel));
 
             model.setPerson(personToEdit, editedPerson);
-            return new CommandResult(String.format("Priority level %d successfully set for %s", priorityLevel,
-                    isReset ? "reset to default" : "set",
-                    editedPerson.getName()));
+            return new CommandResult(String.format("Priority level %d successfully set for %s",
+                    priorityLevel, editedPerson.getName()));
         } catch (IndexOutOfBoundsException e) {
             throw new CommandException("Invalid patient ID. Please enter a valid patient identifier.");
         } catch (IllegalArgumentException e) {
