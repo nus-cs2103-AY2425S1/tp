@@ -102,12 +102,12 @@ public class TutDate {
     }
 
     /**
-     * Generates a hash code based on the date and students.
+     * Generates a hash code based on the date.
      *
      * @return the hash code.
      */
     @Override
     public int hashCode() {
-        return Objects.hash(date, students);
+        return Objects.hash(date);
     }
 }
