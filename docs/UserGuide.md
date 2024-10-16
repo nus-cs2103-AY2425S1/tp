@@ -142,7 +142,7 @@ Examples:
   ![result for 'find n/alex david'](images/findAlexDavidResult.png)
 
 Disallowed examples:
-* `find n/John p/82345670` will be rejected, as the command only searches on single fields.
+* `find n/John p/82345670` will not succeed as intended, as the command only searches on single fields. "`p/82345670`" will be treated as a keyword string.
 
 ### Deleting a person : `delete`
 
