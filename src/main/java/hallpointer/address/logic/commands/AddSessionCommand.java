@@ -4,6 +4,7 @@ import static hallpointer.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_POINTS;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
+import static hallpointer.address.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
@@ -66,10 +67,11 @@ public class AddSessionCommand extends Command {
                 throw new CommandException(MESSAGE_INVALID_INDEX);
             }
             Member member = lastShownList.get(index.getZeroBased());
-
             member.addSession(toAdd);
         }
-        
+
+        model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 toAdd.getSessionName().toString(),
                 toAdd.getDate().toString(),

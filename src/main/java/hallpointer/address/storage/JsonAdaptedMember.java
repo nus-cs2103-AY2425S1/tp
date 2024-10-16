@@ -107,15 +107,14 @@ class JsonAdaptedMember {
 
         final Set<Tag> modelTags = new HashSet<>(memberTags);
 
+        final Point modelTotalPoints = new Point(this.totalPoints);
+
         final Set<Session> modelSessions = new HashSet<>();
         for (JsonAdaptedSession session : sessions) {
             modelSessions.add(session.toModelType());
         }
 
-        Member member = new Member(modelName, modelTelegram, modelRoom, modelTags);
-
-        member.addPoints(new Point(totalPoints));
-        modelSessions.forEach(member::addSession);
+        Member member = new Member(modelName, modelTelegram, modelRoom, modelTags, modelTotalPoints, modelSessions);
 
         return member;
     }
