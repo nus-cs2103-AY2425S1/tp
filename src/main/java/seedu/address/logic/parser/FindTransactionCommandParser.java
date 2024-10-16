@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.FindTransactionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.TransactionContainsKeywordsPredicate;
@@ -25,8 +26,18 @@ public class FindTransactionCommandParser implements Parser<FindTransactionComma
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTransactionCommand.MESSAGE_USAGE));
         }
 
+        // first item is index, the rest are keywords
         String[] transactionKeywords = trimmedArgs.split("\\s+");
-
-        return new FindTransactionCommand(new TransactionContainsKeywordsPredicate(Arrays.asList(transactionKeywords)));
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(transactionKeywords[0]);
+            // remove the first item (index)
+            transactionKeywords = Arrays.copyOfRange(transactionKeywords, 1, transactionKeywords.length);
+        } catch (ParseException e) {
+            // if index is not provided, default to first index
+            index = Index.fromOneBased(1);
+        }
+        return new FindTransactionCommand(index,
+                new TransactionContainsKeywordsPredicate(Arrays.asList(transactionKeywords)));
     }
 }
