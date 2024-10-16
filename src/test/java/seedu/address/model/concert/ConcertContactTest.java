@@ -30,7 +30,16 @@ public class ConcertContactTest {
         concertListTest.add(contactTest1);
         concertListTest.add(contactTest2);
 
-        assertEquals(concertListTest, contactTest1.concertContactList(COACHELLA));
+        assertEquals(concertListTest, contactTest1.getConcertContactList(COACHELLA));
+    }
+
+    @Test
+    void toStringTest(){
+        //checks output of toString method in Concert Contact class
+        ConcertContact contactTest1 = new ConcertContact(ALICE, COACHELLA);
+        String expectedString = ALICE.getName() + " is a " + ALICE.getRole() + " for " + COACHELLA.getName();
+
+        assertEquals(contactTest1.toString(), expectedString);
     }
 
 }

@@ -34,10 +34,10 @@ public class ConcertContact {
     }
 
     public Person getPerson() {
-        return this.person;
+        return person;
     }
     public Concert getConcert() {
-        return this.concert;
+        return concert;
     }
 
     /**
@@ -54,7 +54,7 @@ public class ConcertContact {
      *
      * @return List of ConcertContact
      */
-    public ArrayList<ConcertContact> concertContactList(Concert concert) {
+    public ArrayList<ConcertContact> getConcertContactList(Concert concert) {
         return concertContacts.get(concert);
     }
 
@@ -69,7 +69,7 @@ public class ConcertContact {
         }
 
         ConcertContact otherContact = (ConcertContact) other;
-        return otherContact.person.equals(person)
+        return otherContact != null && otherContact.person.equals(person)
                 && otherContact.concert.equals(concert);
     }
 
