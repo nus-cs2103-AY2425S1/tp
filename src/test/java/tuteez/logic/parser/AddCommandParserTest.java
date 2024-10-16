@@ -26,7 +26,6 @@ import static tuteez.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static tuteez.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static tuteez.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static tuteez.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static tuteez.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tuteez.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tuteez.logic.parser.CliSyntax.PREFIX_NAME;
