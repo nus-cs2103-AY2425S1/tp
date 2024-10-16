@@ -11,7 +11,6 @@ public class HelpCommand extends Command {
     public static final String COMMAND_WORD_RANDOM_CASE = "HeLp";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
-            + "Command word is case-insensitive, e.g. " + COMMAND_WORD_RANDOM_CASE + " is allowed.\n"
             + "Example: " + COMMAND_WORD;
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
