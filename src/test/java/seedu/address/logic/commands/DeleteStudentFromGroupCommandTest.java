@@ -181,6 +181,16 @@ public class DeleteStudentFromGroupCommandTest {
         }
 
         @Override
+        public boolean hasTaskInGroup(Task task, Group group) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean hasTask(Task task) {
+            return false;
+        }
+
+        @Override
         public Student getPersonByNumber(StudentNumber studentNumber) {
             throw new AssertionError("This method should not be called.");
         }
@@ -263,6 +273,16 @@ public class DeleteStudentFromGroupCommandTest {
         @Override
         public void deleteGroup(Group groupToBeDeleted) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTaskToGroup(Task task, Group group) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void addTask(Task task) {
+            throw new AssertionError("This method should not be called");
         }
     }
 

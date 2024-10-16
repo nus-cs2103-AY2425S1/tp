@@ -43,29 +43,29 @@ public class AddGroupCommandTest {
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingGroupAdded modelStub = new ModelStubAcceptingGroupAdded();
         Student validStudent = new PersonBuilder().build();
-        Group validGroup = new Group(VALID_GROUPNAME, new HashSet<>());
+        Group validGroup = new Group(VALID_GROUPNAME, new HashSet<>(),new HashSet<>());
 
         CommandResult commandResult = new AddGroupCommand(validGroup).execute(modelStub);
 
         assertEquals(String.format(AddGroupCommand.MESSAGE_SUCCESS, Messages.format(validGroup)),
-                commandResult.getFeedbackToUser());
+            commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validGroup), modelStub.groupsAdded);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Group validGroup = new Group(VALID_GROUPNAME, new HashSet<>());
+        Group validGroup = new Group(VALID_GROUPNAME, new HashSet<>(), new HashSet<>());
         AddGroupCommand addGroupCommand = new AddGroupCommand(validGroup);
         ModelStub modelStub = new ModelStubWithGroup(validGroup);
 
         assertThrows(CommandException.class, AddGroupCommand.MESSAGE_DUPLICATE_GROUP, () ->
-                addGroupCommand.execute(modelStub));
+            addGroupCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Group teamOne = new Group(new GroupName("Team 1"), new HashSet<>());
-        Group teamTwo = new Group(new GroupName("Team 2"), new HashSet<>());
+        Group teamOne = new Group(new GroupName("Team 1"), new HashSet<>(), new HashSet<>());
+        Group teamTwo = new Group(new GroupName("Team 2"), new HashSet<>(), new HashSet<>());
         AddGroupCommand addTeamOneCommand = new AddGroupCommand(teamOne);
         AddGroupCommand addTeamTwoCommand = new AddGroupCommand(teamTwo);
 
@@ -88,7 +88,7 @@ public class AddGroupCommandTest {
 
     @Test
     public void toStringMethod() {
-        Group teamOne = new Group(new GroupName("Team 1"), new HashSet<>());
+        Group teamOne = new Group(new GroupName("Team 1"), new HashSet<>(), new HashSet<>());
         AddGroupCommand addTeamOneCommand = new AddGroupCommand(teamOne);
         String expected = AddGroupCommand.class.getCanonicalName() + "{toAdd=" + teamOne + "}";
         assertEquals(expected, addTeamOneCommand.toString());
@@ -185,6 +185,16 @@ public class AddGroupCommandTest {
         }
 
         @Override
+        public boolean hasTaskInGroup(Task task, Group group) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean hasTask(Task task) {
+            return false;
+        }
+
+        @Override
         public Student getPersonByNumber(StudentNumber studentNumber) {
             throw new AssertionError("This method should not be called");
         }
@@ -267,6 +277,16 @@ public class AddGroupCommandTest {
         @Override
         public void deleteGroup(Group groupToBeDeleted) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTaskToGroup(Task task, Group group) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void addTask(Task task) {
+            throw new AssertionError("This method should not be called");
         }
     }
 
