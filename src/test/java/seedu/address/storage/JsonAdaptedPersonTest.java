@@ -117,7 +117,8 @@ public class JsonAdaptedPersonTest {
         Person testPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
             .withEmptyEmail().withAddress(VALID_ADDRESS).withTags("friend").build();
 
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, EMPTY_FIELD_FORMAT, VALID_ADDRESS, validTags);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+            VALID_NAME, VALID_PHONE, EMPTY_FIELD_FORMAT, VALID_ADDRESS, validTags);
         assertEquals(testPerson, person.toModelType());
     }
 
@@ -128,7 +129,8 @@ public class JsonAdaptedPersonTest {
         Person testPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
             .withEmail(VALID_EMAIL).withEmptyAddress().withTags("friend").build();
 
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, EMPTY_FIELD_FORMAT, validTags);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+            VALID_NAME, VALID_PHONE, VALID_EMAIL, EMPTY_FIELD_FORMAT, validTags);
         assertEquals(testPerson, person.toModelType());
     }
 
@@ -139,7 +141,8 @@ public class JsonAdaptedPersonTest {
         Person testPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
             .withEmptyEmail().withEmptyAddress().withTags("friend").build();
 
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, EMPTY_FIELD_FORMAT, EMPTY_FIELD_FORMAT, validTags);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+            VALID_NAME, VALID_PHONE, EMPTY_FIELD_FORMAT, EMPTY_FIELD_FORMAT, validTags);
         assertEquals(testPerson, person.toModelType());
     }
 }
