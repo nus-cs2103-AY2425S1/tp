@@ -121,7 +121,12 @@ public class Member {
      */
     public void addPoints(Point points) {
         requireNonNull(points);
-        this.totalPoints = new Point(this.totalPoints.points + points.points);
+        this.totalPoints = totalPoints.add(points);
+    }
+
+    public void subtractPoints(Point points) {
+        requireNonNull(points);
+        this.totalPoints = totalPoints.subtract(points);
     }
 
     /**
@@ -132,7 +137,7 @@ public class Member {
     public void addSession(Session session) {
         requireNonNull(session);
         this.sessions.add(session);
-        this.totalPoints = new Point(this.totalPoints.points + session.getPoints().points);
+        addPoints(totalPoints);
     }
 
     /**
@@ -143,7 +148,7 @@ public class Member {
     public void removeSession(Session session) {
         requireNonNull(session);
         this.sessions.remove(session);
-        this.totalPoints = new Point(this.totalPoints.points - session.getPoints().points);
+        subtractPoints(totalPoints);
     }
 
     /**

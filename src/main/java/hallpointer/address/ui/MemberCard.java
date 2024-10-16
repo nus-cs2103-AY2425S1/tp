@@ -51,7 +51,7 @@ public class MemberCard extends UiPart<Region> {
         this.member = member;
         id.setText(displayedIndex + ". ");
         name.setText(member.getName().fullName);
-        points.setText(member.getTotalPoints().getValue() + " points");
+        points.setText(member.getTotalPoints().toString());
         telegram.setText(member.getTelegram().value);
         room.setText(member.getRoom().value);
 
