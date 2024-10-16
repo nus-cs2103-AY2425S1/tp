@@ -30,8 +30,9 @@ public class DeleteApptCommandParser implements Parser<DeleteApptCommand> {
     @Override
     public DeleteApptCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_DATE,
-                                                                  PREFIX_TIMEPERIOD);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_DATE, PREFIX_TIMEPERIOD);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NRIC, PREFIX_DATE, PREFIX_TIMEPERIOD);
+
         String patientNricValue;
         String newApptDate;
         String newApptTime;
