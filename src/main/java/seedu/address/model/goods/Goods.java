@@ -3,8 +3,16 @@ package seedu.address.model.goods;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.storage.CsvConverters.GoodsDateConverter;
+import static seedu.address.storage.CsvConverters.GoodsNameConverter;
+import static seedu.address.storage.CsvConverters.PersonNameConverter;
 
 import java.time.LocalDateTime;
+
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvCustomBindByName;
+import com.opencsv.bean.CsvDate;
+import com.opencsv.bean.CsvNumber;
 
 import seedu.address.model.person.Name;
 
@@ -18,13 +26,32 @@ public class Goods {
     public static final String MESSAGE_CONSTRAINTS = "Product quantity cannot be negative or 0!";
     public static final String VALIDATION_REGEX = "/^[\\w\\-\\s]+$/";
 
+    @CsvCustomBindByName(column = "Goods Name", converter = GoodsNameConverter.class, required = true)
     private final GoodsName goodsName;
+
+    @CsvBindByName(column = "Quantity", required = true)
+    @CsvNumber(value = "#")
     private final int quantity;
+
+    @CsvBindByName(column = "Price", required = true)
+    @CsvNumber(value = "0.00")
     private final double price;
+
+    @CsvBindByName(column = "Category", required = true)
     private final GoodsCategories category;
+
+    @CsvCustomBindByName(column = "Procurement Date", converter = GoodsDateConverter.class, required = true)
+    @CsvDate(value = "yyyy-MM-dd HH:mm")
     private final Date procurementDate;
+
+    @CsvCustomBindByName(column = "Arrival Date", converter = GoodsDateConverter.class, required = true)
+    @CsvDate(value = "yyyy-MM-dd HH:mm")
     private final Date arrivalDate;
+
+    @CsvBindByName(column = "Is Delivered", required = true)
     private final boolean isDelivered;
+
+    @CsvCustomBindByName(column = "Supplier Name", converter = PersonNameConverter.class, required = true)
     private final Name supplierName;
 
     /**
