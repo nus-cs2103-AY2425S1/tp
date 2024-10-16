@@ -48,36 +48,36 @@ public class FindPetCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different pet -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
+    public void execute_zeroKeywords_noPetFound() {
         String expectedMessage = String.format(MESSAGE_PETS_LISTED_OVERVIEW, 0);
         PetNameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindPetCommand command = new FindPetCommand(predicate);
         expectedModel.updateFilteredPetList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredPetList());
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
+    public void execute_multipleKeywords_multiplePetsFound() {
         String expectedMessage = String.format(MESSAGE_PETS_LISTED_OVERVIEW, 3);
-        PetNameContainsKeywordsPredicate predicate = preparePredicate("fluffy daisy belle");
+        PetNameContainsKeywordsPredicate predicate = preparePredicate("Bison Max Milo");
         FindPetCommand command = new FindPetCommand(predicate);
         expectedModel.updateFilteredPetList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(TypicalPets.BELLA, TypicalPets.FLUFFY, TypicalPets.DAISY),
-            model.getFilteredPersonList());
+        assertEquals(Arrays.asList(TypicalPets.MAX, TypicalPets.MILO, TypicalPets.BISON),
+            model.getFilteredPetList());
     }
 
     @Test
     public void toStringMethod() {
         PetNameContainsKeywordsPredicate predicate = new PetNameContainsKeywordsPredicate(Arrays.asList("keyword"));
         FindPetCommand findCommand = new FindPetCommand(predicate);
-        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        String expected = FindPetCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
     }
 
