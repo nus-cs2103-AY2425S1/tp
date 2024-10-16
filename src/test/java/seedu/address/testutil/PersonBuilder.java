@@ -1,6 +1,8 @@
 package seedu.address.testutil;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import seedu.address.model.game.Game;
@@ -27,7 +29,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
-    private Set<Game> games;
+    private Map<String, Game> games;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -38,7 +40,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        games = new HashSet<>();
+        games = new HashMap<>();
     }
 
     /**
@@ -50,7 +52,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
-        games = new HashSet<>(personToCopy.getGames());
+        games = new HashMap<>(personToCopy.getGames());
     }
 
     /**
