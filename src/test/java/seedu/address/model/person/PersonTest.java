@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -118,12 +119,6 @@ public class PersonTest {
     }
 
     @Test
-    public void hashCodeTest() {
-        Person aliceCopy = new PersonBuilder(ALICE).build();
-        assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
-    }
-
-    @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
@@ -131,5 +126,26 @@ public class PersonTest {
                 + ", rate=" + ALICE.getRate() + ", paid=" + ALICE.getPaid()
                 + ", owedAmount=" + ALICE.getOwedAmount() + "}";
         assertEquals(expected, ALICE.toString());
+    }
+
+    @Test
+    public void hashCodeTest() {
+        // same attributes -> returns true
+        Person sameAlice = new PersonBuilder(ALICE).build();
+
+        assertEquals(ALICE.hashCode(), sameAlice.hashCode());
+
+        // different attributes -> returns false
+        Person differentPhone = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        Person differentEmail = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        Person differentAddress = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        Person differentName = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        Person differentPerson = new PersonBuilder(BOB).build();
+
+        assertNotEquals(ALICE.hashCode(), differentPhone.hashCode());
+        assertNotEquals(ALICE.hashCode(), differentEmail.hashCode());
+        assertNotEquals(ALICE.hashCode(), differentAddress.hashCode());
+        assertNotEquals(ALICE.hashCode(), differentName.hashCode());
+        assertNotEquals(ALICE.hashCode(), differentPerson.hashCode());
     }
 }
