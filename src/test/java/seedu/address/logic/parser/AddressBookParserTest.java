@@ -116,7 +116,7 @@ public class AddressBookParserTest {
     public void parseCommand_renameTag() throws Exception {
         RenameTagCommand command = (RenameTagCommand) parser.parseCommand(
                 RenameTagCommand.COMMAND_WORD + " " + PREFIX_OLDTAG + "friends" + " " + PREFIX_NEWTAG
-        + "enemies");
+                        + "enemies");
         assertEquals(new RenameTagCommand("friends", "enemies"), command);
     }
 }
