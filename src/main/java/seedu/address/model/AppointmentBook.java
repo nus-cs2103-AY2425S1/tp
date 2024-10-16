@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentDescriptor;
 import seedu.address.model.appointment.UniqueAppointmentList;
 
 /**
@@ -68,12 +69,30 @@ public class AppointmentBook implements ReadOnlyAppointmentBook {
     }
 
     /**
+     * Returns true if an appointment with the same identity as {@code appointment} exists in the appointment book.
+     */
+    public boolean hasAppointment(AppointmentDescriptor appointmentDescriptor) {
+        requireNonNull(appointmentDescriptor);
+        return appointments.contains(appointmentDescriptor);
+    }
+
+    /**
      * Adds an appointment to the appointment book.
      * The appointment must not already exist in the appointment book.
      */
     public String addAppointment(Appointment appointment) {
         appointments.add(appointment);
         return appointment.toString();
+    }
+
+    /**
+     * Adds an appointment to the appointment book.
+     * The appointment must not already exist in the appointment book.
+     */
+    public String addAppointment(AppointmentDescriptor appointmentDescriptor) {
+        requireNonNull(appointmentDescriptor);
+        appointments.add(new Appointment(appointmentDescriptor));
+        return appointmentDescriptor.toString();
     }
 
     /**
