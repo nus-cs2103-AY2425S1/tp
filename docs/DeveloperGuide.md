@@ -182,7 +182,7 @@ Step 2. The user executes `delete 5` command to delete the 5th person in the add
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `employee n/David …​` to add a new employee. The `employee` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -230,7 +230,7 @@ Step 5. The user then decides to execute the command `list`. Commands that do no
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `employee n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -450,16 +450,99 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
+
+### Adding an employee
+
+1. Add an employee
+
+   1. Prerequisites: List all employees using the `list e` command.
+
+   2. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
+      Expected: John Doe is added into the list
+
+   3. Test case: `employee n/John@Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
+      Expected: No employee added, error details shown in the status message
+
+   4. Test case: `employee n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
+      Expected: No employee added, error details shown in the status message
+
+   5. Test case: `employee n/John Doe p/98765a432 e/johnd@example-.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
+      Expected: No employee added, error details shown in the status message
+
+   6. Test case: `employee n/John Doe p/98765a432 e/johnd@example.com a/ d/IT r/SWE ced/2024-10-09`<br>
+      Expected: No employee added, error details shown in the status message
+
+   7. Test case: `employee n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/I@T r/SWE ced/2024-10-09`<br>
+      Expected: No employee added, error details shown in the status message
+
+   8. Test case: `employee n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SW-E ced/2024-10-09`<br>
+      Expected: No employee added, error details shown in the status message
+   
+   9. Test case: `employee n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/01-09-2023`<br>
+      Expected: No employee added, error details shown in the status message
+
+2. Adding a duplicate employee
+
+    1. Prerequisites: The employee `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09` should already be added
+
+    2. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
+       Expected: John Doe should not be added since he already exists
+
+    3. Test case: `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
+       Expected: John Doe should not be added since he already exists in employee
+
+    4. Test case: `employee n/John Doe2 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
+       Expected: John Doe2 should be added as he has a different name
+
+### Adding a potential hire
+
+1. Add a potential hire
+
+    1. Prerequisites: List all potential hires using the `list ph` command.
+
+    2. Test case: `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
+       Expected: John Doe is added into the list
+
+    3. Test case: `potential n/John@Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
+       Expected: No potential hire added, error details shown in the status message
+
+    4. Test case: `potential n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
+       Expected: No potential hire added, error details shown in the status message
+
+    5. Test case: `potential n/John Doe p/98765a432 e/johnd@example-.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
+       Expected: No potential hire added, error details shown in the status message
+
+    6. Test case: `potential n/John Doe p/98765a432 e/johnd@example.com a/ d/IT r/SWE`<br>
+       Expected: No potential hire added, error details shown in the status message
+
+    7. Test case: `potential n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/I@T r/SWE`<br>
+       Expected: No potential hire added, error details shown in the status message
+
+    8. Test case: `potential n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/S-WE`<br>
+       Expected: No potential hire added, error details shown in the status message
+
+2. Adding a duplicate potential hire
+
+    1. Prerequisites: The potential hire `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09` should already be added
+
+    2. Test case: `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
+       Expected: John Doe should not be added since he already exists
+
+    3. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
+       Expected: John Doe should not be added since he already exists in potential hire
+
+    4. Test case: `potential n/John Doe2 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
+       Expected: John Doe2 should be added as he has a different name
 
 ### Deleting a person
 
@@ -467,26 +550,26 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all potential hires/employees using the `list ph` or `list e` command. potential hires/employees persons in the list.
 
-   1. Test case: `delete ph 1`<br>
+   2. Test case: `delete ph 1`<br>
       Expected: First potential hire is deleted from the list. Details of the deleted potential hires/employees shown in the status message. Timestamp in the status bar is updated. The numbering system is 1 based indexing.
 
-   1. Test case: `delete ph 0`<br>
+   3. Test case: `delete ph 0`<br>
       Expected: No potential hire is deleted. Error details shown in the status message.
 
-   1. Test case: `Delete E 1`<br>
+   4. Test case: `Delete E 1`<br>
       Expected: Unrecognised command. Error is due to capitalisation of `Delete` and/or `E` instead of `delete` and/or `e`. Captialisation matters.
 
-   1. Test case: `delete e`<br>
+   5. Test case: `delete e`<br>
       Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete ph`, `delete e x`, `delete e 1 2`, `delete e    1     `,  `...` (where x is larger than the list size)<br>
+   6. Other incorrect delete commands to try: `delete ph`, `delete e x`, `delete e 1 2`, `delete e    1     `,  `...` (where x is larger than the list size)<br>
       Expected: Similar to previous points. If the syntax is incorrect, the command is not recognised. Otherwise, the command is recognised but the action is invalid and a specific status message is shown.
 
-1. Deleting a person with no potential hires/employees
+2. Deleting a person with no potential hires/employees
 
    1. Prerequisites: List all potential hires/employees using the `list ph` or `list e` command. No potential hires/employees is shown.
 
-   1. Test case: `delete ph 1`<br>
+   2. Test case: `delete ph 1`<br>
       Expected: No potential hires/employees are deleted. The error message will show that there are no potential hires/employees to delete.
 
 ### Saving data
@@ -495,4 +578,4 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
