@@ -32,6 +32,30 @@ public class DeleteCommandParserTest {
     }
 
     @Test
+    public void parse_invalidEmail_throwsParseException() {
+        // Invalid email input
+        String userInput = "delete n/Alice Pauline p/12345678 e/ @gmail.com";
+
+        // Expected error message
+        String expectedMessage = "ERROR: Invalid email format. Please provide a valid email address.";
+
+        assertParseFailure(parser, userInput, expectedMessage);
+
+    }
+
+    @Test
+    public void parse_invalidPhone_throwsParseException() {
+        // Simulate an input with an invalid phone number (e.g., less than 8 digits)
+        String userInput = "delete n/Alice Pauline p/1234"; // Invalid phone number
+
+        // Expected error message when the phone number is invalid
+        String expectedMessage = "ERROR: Invalid phone number format. Enter a valid 8 digit phone number.";
+
+        // Call the parser and expect a ParseException with the specific message
+        assertParseFailure(parser, userInput, expectedMessage);
+    }
+
+    @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }

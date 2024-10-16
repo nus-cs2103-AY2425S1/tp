@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -100,6 +101,15 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_multipleMatchingPersons_throwsCommandException() {
+        // Both ALICE and BENSON have names that match "Alice" (assuming case-insensitive match)
+        DeleteCommand deleteCommand = new DeleteCommand(Optional.empty(), Optional.of("94351253"), Optional.empty());
+
+        // Expect CommandException with MESSAGE_MULTIPLE_PERSONS_FOUND
+        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_MULTIPLE_PERSONS_FOUND);
+    }
+
+    @Test
     public void equals() {
         DeleteCommand deleteByNameCommand = new DeleteCommand(Optional.of(ALICE.getName().toString()),
                 Optional.empty(), Optional.empty());
@@ -124,13 +134,22 @@ public class DeleteCommandTest {
         assertFalse(deleteByNameCommand.equals(deleteByPhoneCommand));
     }
 
-    //@Test
-    //public void toStringMethod() {
-    //    Index targetIndex = Index.fromOneBased(1);
-    //    DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-    //    String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
-    //    assertEquals(expected, deleteCommand.toString());
-    //}
+    @Test
+    public void toString_validCommand() {
+        DeleteCommand deleteCommand = new DeleteCommand(
+                Optional.of("Alice Pauline"),
+                Optional.of("94351253"),
+                Optional.of("alice@example.com")
+        );
+
+        // Expected output
+        String expectedString = "seedu.address.logic.commands.DeleteCommand{name=Optional[Alice Pauline],"
+                + " phone=Optional[94351253], email=Optional[alice@example.com]}";
+
+        // Assert that the toString output matches the expected string
+        assertEquals(expectedString, deleteCommand.toString());
+    }
+
 
     /**
      * Updates {@code model}'s filtered list to show no one.
