@@ -208,7 +208,7 @@ Examples:
 * `addproperty c/124894 u/15-20` adds a property with postal code `124894` and unit number is `15-20`.
 
   ![result for 'addproperty c/124894 u/15-20'](images/addproperty.png)
-* 
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -271,4 +271,5 @@ Action     | Format, Examples
 **Add Seller** | `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`
 **Delete Buyer** | `deletebuyer p/PHONE_NUMBER`
 **Delete Seller** | `deleteseller p/PHONE_NUMBER`
+**Add Property** | `addproperty c/POSTAL_CODE u/UNIT_NUMBER`
 
