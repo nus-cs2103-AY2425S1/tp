@@ -23,15 +23,20 @@ public class JobCodeTest {
     public void isValidJobCode() {
         // null JobCode
         assertThrows(NullPointerException.class, () -> JobCode.isValidJobCode(null));
-
         // invalid Job Codes
         assertFalse(JobCode.isValidJobCode("")); // empty string
         assertFalse(JobCode.isValidJobCode(" ")); // spaces only
+        assertFalse(JobCode.isValidJobCode("^")); // single incorrect character
+        assertFalse(JobCode.isValidJobCode("a")); // single valid character
+        assertFalse(JobCode.isValidJobCode("SWE1234*")); // valid length, combination with invalid characters
+        // more than 12 characters
+        assertFalse(JobCode.isValidJobCode("ABC345678901234567890123456789012345678901234567890123456789"));
+        assertFalse(JobCode.isValidJobCode("ABC 1234"));
 
         // valid Job Codes
         assertTrue(JobCode.isValidJobCode("SWE1234"));
         assertTrue(JobCode.isValidJobCode("321")); // three characters
-        assertTrue(JobCode.isValidJobCode("QAT012389472")); // long Job Code
+        assertTrue(JobCode.isValidJobCode("QAT012345678")); // 12 characters
     }
 
     @Test

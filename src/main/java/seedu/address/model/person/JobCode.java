@@ -13,7 +13,7 @@ public class JobCode {
             + " consisting of only alphanumeric characters and cannot have whitespace.\nFor example: XYZ123";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the JobCode must not be a whitespace. There is no whitespace
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]+$";
@@ -23,8 +23,8 @@ public class JobCode {
     public final String value;
 
     /**
-     * Constructs a JobCode object
-     * @param jobCode
+     * Constructs a JobCode object.
+     * @param jobCode String provided by user.
      */
     public JobCode(String jobCode) {
         requireNonNull(jobCode);
@@ -36,6 +36,7 @@ public class JobCode {
 
     /**
      * Returns true if a given string is a valid email.
+     * Tests against minimum and maximum length, presence of whitespace, and if it is fully alphanumeric.
      */
     public static boolean isValidJobCode(String test) {
         // Check that the string has no whitespace and its length is between 2 and 12
