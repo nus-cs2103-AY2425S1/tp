@@ -31,7 +31,6 @@ public class DeleteTaskCommandTest {
 
     private Model model = new ModelManager(getUniqueTypicalAddressBook(), new UserPrefs());
     private Task testTask = new Task(new TaskDescription("First Assignment"), new TaskDeadline("2024-10-16"));
-    
     @Test
     public void execute_validArgument_success() {
         //Have a test person with a task
