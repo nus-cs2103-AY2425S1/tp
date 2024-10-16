@@ -18,7 +18,9 @@ import tutorease.address.commons.core.GuiSettings;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.NameContainsKeywordsPredicate;
+import tutorease.address.model.person.Person;
 import tutorease.address.testutil.LessonBuilder;
+import tutorease.address.testutil.StudentBuilder;
 import tutorease.address.testutil.TutorEaseBuilder;
 
 public class ModelManagerTest {
@@ -166,8 +168,60 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void deleteStudentLesson_success() {
-        // placeholder. will update in next iteration
-        assertTrue(true);
+    public void deleteStudentLesson_oneStudent_success() throws ParseException {
+        LessonSchedule lessonSchedule = modelManager.getLessonSchedule();
+        LessonBuilder lessonBuilder = new LessonBuilder();
+        Lesson lesson = lessonBuilder.build();
+        Person student = lesson.getStudent();
+        lessonSchedule.addLesson(lesson);
+        assertTrue(lessonSchedule.hasLesson(lesson));
+        modelManager.deleteStudentLesson(student);
+        assertFalse(lessonSchedule.hasLesson(lesson));
+    }
+
+    @Test
+    public void deleteStudentLesson_noStudent_success() throws ParseException {
+        LessonSchedule lessonSchedule = modelManager.getLessonSchedule();
+        LessonBuilder lessonBuilder = new LessonBuilder();
+        Lesson lesson = lessonBuilder.build();
+        Person student = lesson.getStudent();
+        assertEquals(0, lessonSchedule.getSize());
+        modelManager.deleteStudentLesson(student);
+        assertEquals(0, lessonSchedule.getSize());
+    }
+
+    @Test
+    public void deleteStudentLesson_multipleStudent_success() throws ParseException {
+        LessonSchedule lessonSchedule = modelManager.getLessonSchedule();
+
+        // Create Alice's Lesson
+        LessonBuilder lessonBuilderAlice = new LessonBuilder();
+        Lesson lessonAlice = lessonBuilderAlice.build();
+
+        // Create Bob
+        StudentBuilder studentBuilder = new StudentBuilder().withName("Bob");
+        Person bob = studentBuilder.build();
+
+        // Create Bob's Lesson
+        LessonBuilder lessonBuilderBob = new LessonBuilder().withName(bob)
+                .withStartDateTime("02-02-2024 " + "12:00")
+                .withEndDateTime("02-02-2024 " + "13:00");
+        Lesson lessonBob = lessonBuilderBob.build();
+        assertEquals(bob, lessonBob.getStudent());
+
+        // Add both Alice's and Bob's lesson
+        lessonSchedule.addLesson(lessonAlice);
+        lessonSchedule.addLesson(lessonBob);
+        assertEquals(2, lessonSchedule.getSize());
+        assertTrue(lessonSchedule.hasLesson(lessonAlice));
+        assertTrue(lessonSchedule.hasLesson(lessonBob));
+
+        // Only remove Bob's lesson
+        modelManager.deleteStudentLesson(bob);
+        
+        // Only Alice's lesson should remain
+        assertEquals(1, lessonSchedule.getSize());
+        assertTrue(lessonSchedule.hasLesson(lessonAlice));
+        assertFalse(lessonSchedule.hasLesson(lessonBob));
     }
 }
