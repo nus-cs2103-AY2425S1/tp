@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.company.Company;
 
+
 /**
  * An UI component that displays information of a {@code Company}.
  */
@@ -59,7 +60,7 @@ public class CompanyCard extends UiPart<Region> {
         careerPageUrl.setText(company.getCareerPageUrl().value);
         email.setText(company.getEmail().value);
         company.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .sorted(Comparator.comparing(tag -> tag.toString()))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
     }
 }

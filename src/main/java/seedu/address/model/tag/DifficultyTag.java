@@ -4,7 +4,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Locale;
 
-
 /**
  * Represents a Tag with a difficulty level.
  * This tag is used to categorize items by difficulty,
