@@ -50,6 +50,33 @@ public class Price implements Comparable<Price> {
         }
     }
 
+    /**
+     * Returns a Price object based on the string value of the priceString.
+     * @param priceString the string representation of the price
+     * @return a Price object with the parsed value
+     * @throws IllegalArgumentException if the input is invalid
+     */
+    public static Price fromString(String priceString) {
+        // Check if the input is null or empty
+        if (priceString == null || priceString.isEmpty()) {
+            throw new IllegalArgumentException("Price string cannot be null or empty");
+        }
+
+        try {
+            // Remove leading and trailing whitespaces
+            String cleanedString = priceString.trim();
+            
+            // Convert the cleaned string to a numeric value
+            double value = Double.parseDouble(cleanedString);
+            
+            return new Price(value);
+        } catch (NumberFormatException e) {
+            // Handle cases where the string cannot be converted to a valid number
+            throw new IllegalArgumentException("Invalid price format: " + priceString, e);
+        }
+    }
+
+
     @Override
     public String toString() {
         return String.format("%.2f", value);
