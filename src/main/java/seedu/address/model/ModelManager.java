@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -13,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.goodsReceipt.GoodsReceipt;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,11 +26,14 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private List<GoodsReceipt> goodsList; // TODO: Add ReadOnly Feature to Goods
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook,
+                        ReadOnlyUserPrefs userPrefs,
+                        List<GoodsReceipt> goodsList) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
@@ -36,10 +41,11 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.goodsList = goodsList;
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new LinkedList<>());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -155,5 +161,23 @@ public class ModelManager implements Model {
     @Override
     public List<Person> getPersonList() {
         return addressBook.getPersonList().stream().toList();
+    }
+
+    //=========== Goods ================================================================================
+
+    @Override
+    public void setGoods(List<GoodsReceipt> goodsReceipts) {
+        requireNonNull(goodsReceipts);
+        this.goodsList = goodsReceipts;
+    }
+
+    @Override
+    public List<GoodsReceipt> getGoods() {
+        return goodsList;
+    }
+
+    @Override
+    public void addGoods(GoodsReceipt goodsReceipt) {
+        goodsList.add(goodsReceipt);
     }
 }
