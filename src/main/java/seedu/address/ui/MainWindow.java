@@ -119,8 +119,8 @@ public class MainWindow extends UiPart<Stage> {
         contactDisplay = new ContactDisplay();
 
         splitPane = new SplitPane();
-        splitPane.getItems().addAll(personListPanel.getRoot(), contactDisplay);
-        splitPane.setDividerPositions(0.7);
+        splitPane.getItems().addAll(personListPanel.getRoot(), contactDisplay.getRoot());
+        splitPane.setDividerPositions(0.5);
 
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(splitPane);
