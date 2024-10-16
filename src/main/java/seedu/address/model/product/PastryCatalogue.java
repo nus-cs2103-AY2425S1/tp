@@ -35,7 +35,11 @@ public class PastryCatalogue extends Catalogue {
         )));
     }
 
-    private void addPastry(String name, double cost, ArrayList<Ingredient> ingredients) {
+    public int getNextProductId() {
+        return nextProductId;
+    }
+
+    public void addPastry(String name, double cost, ArrayList<Ingredient> ingredients) {
         Pastry pastry = new Pastry(nextProductId, name, cost, ingredients);
         productCatalogue.put(nextProductId, pastry);  // Store in the product catalogue
         nextProductId++;  // Increment the product ID for the next pastry

@@ -12,6 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.product.Pastry;
+import seedu.address.model.product.PastryCatalogue;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final PastryCatalogue pastryCatalogue = new PastryCatalogue();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -29,11 +32,12 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook
+                + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -102,6 +106,16 @@ public class ModelManager implements Model {
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addPastry(Pastry pastry) {
+        pastryCatalogue.addPastry(pastry.getName(), pastry.getCost(), pastry.getIngredients());
+    }
+
+    @Override
+    public PastryCatalogue getPastryCatalogue() {
+        return pastryCatalogue;
     }
 
     @Override
