@@ -39,13 +39,13 @@ public class EditCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Company editedcompany = new CompanyBuilder().build();
         EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder(editedcompany).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_COMPANY, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_COMPANY, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_COMPANY_SUCCESS,
                 Messages.format(editedcompany));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setCompany(model.getFilteredCompanyList().get(0), editedcompany);
+        expectedModel.setCompany(model.getFilteredCompanyList().get(1), editedcompany);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
