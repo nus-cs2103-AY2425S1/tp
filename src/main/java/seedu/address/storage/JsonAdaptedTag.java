@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagBuilder;
 
 /**
  * Jackson-friendly version of {@link Tag}.
@@ -28,6 +29,7 @@ class JsonAdaptedTag {
         tagName = source.tagName;
     }
 
+
     @JsonValue
     public String getTagName() {
         return tagName;
@@ -42,7 +44,7 @@ class JsonAdaptedTag {
         if (!Tag.isValidTagName(tagName)) {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(tagName);
+        return new TagBuilder().build(tagName);
     }
 
 }
