@@ -27,22 +27,28 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.*;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddClientCommand;
+import seedu.address.logic.commands.EditClientCommand;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddClientCommandParserTest {
@@ -70,13 +76,13 @@ public class AddClientCommandParserTest {
         Client expectedClient = new PersonBuilder(CHARLIE).build();
 
         // whitespace only preamble, missing email
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_CHARLIE + PHONE_DESC_CHARLIE
-                + EMAIL_DESC_CHARLIE, new AddClientCommand(expectedClient));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_CHARLIE + PHONE_DESC_CHARLIE,
+                new AddClientCommand(expectedClient));
 
         Client expectedClient1 = new PersonBuilder(DENVER).build();
 
         // whitespace only preamble, missing phone number
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_DENVER + PHONE_DESC_DENVER
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_DENVER
                 + EMAIL_DESC_DENVER, new AddClientCommand(expectedClient1));
     }
 
