@@ -97,6 +97,22 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+### Adding a lesson : `lesson add`
+
+Adds a lesson tied to a student with start and end date time.
+
+Format: `lesson add  sid/STUDENTID d/STARTDATE li/LOCATIONINDEX h/DURATION`
+
+* Add a lesson with the student at specified `STUDENTID`.
+* The student ID refers to the index number shown in the displayed person list.
+* The lesson starts at the specified `STARTDATE` in the format `dd-MM-yyyy HH:mm`.
+* The lesson is held at the location specified by the `LOCATIONINDEX`.
+* The location index refers to the index number shown in the displayed location list.
+* The index refers to the index number shown in the displayed lesson schedule.
+* The duration of the lesson is specified by the `DURATION` in hours.
+* The duration must be between 0 and 24 hours inclusive.
+* The student ID and location and duration **must be a positive integer** 1, 2, 3, …​
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
@@ -238,6 +254,7 @@ the data of your previous AddressBook home folder.
  Action           | Format, Examples                                                                                                                                                      
 ------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
  **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` 
+ **Add Lesson**   | `lesson add  sid/STUDENTID d/STARTDATE li/LOCATIONINDEX h/DURATION` <br> e.g., `lesson add sid/1 d/15-10-2024 23:47 li/1 h/1`                                         
  **Clear**        | `clear`                                                                                                                                                               
  **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   
  **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           
