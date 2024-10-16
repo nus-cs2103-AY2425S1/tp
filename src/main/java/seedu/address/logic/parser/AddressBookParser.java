@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -39,7 +40,16 @@ public class AddressBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        if (userInput.trim().length() >= 2
+                && userInput.trim().substring(userInput.trim().length()-2).equals(PREFIX_TAG.getPrefix().trim())
+                && userInput.trim().length() < userInput.length()) {
+            int lastIndex = userInput.lastIndexOf(PREFIX_TAG.getPrefix());
+            userInput = userInput.substring(0, lastIndex + 2) +
+                    userInput.substring(lastIndex + 2).replaceAll("\\s+", " ");
+        } else {
+            userInput = userInput.trim();
+        }
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput);
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
@@ -57,7 +67,7 @@ public class AddressBookParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
+        case EditCommand.SHORT_COMMAND_WORD, EditCommand.LONG_COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.SHORT_COMMAND_WORD, DeleteCommand.LONG_COMMAND_WORD:
