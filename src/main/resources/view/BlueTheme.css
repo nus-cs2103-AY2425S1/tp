@@ -362,3 +362,14 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#subjects {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#subjects .label {
+    -fx-font-family: Verdana, Helvetica, sans-serif;
+    -fx-font-size: 13px;
+}
+
