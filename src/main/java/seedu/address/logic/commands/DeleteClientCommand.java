@@ -14,7 +14,7 @@ import seedu.address.model.client.Client;
 /**
  * Deletes a client identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public class DeleteClientCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
+    public DeleteClientCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -52,11 +52,11 @@ public class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof DeleteClientCommand)) {
             return false;
         }
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
+        DeleteClientCommand otherDeleteCommand = (DeleteClientCommand) other;
         return targetIndex.equals(otherDeleteCommand.targetIndex);
     }
 
