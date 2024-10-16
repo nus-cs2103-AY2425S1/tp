@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -9,11 +10,16 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.assignment.AssignmentName;
+import seedu.address.model.assignment.Deadline;
+import seedu.address.model.assignment.Grade;
+import seedu.address.model.assignment.Status;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -192,5 +198,79 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseAssignmentName_validName_success() throws Exception {
+        AssignmentName assignmentName = ParserUtil.parseAssignmentName("CS2103 Project");
+        assertEquals("CS2103 Project", assignmentName.fullName);
+    }
+
+    @Test
+    public void parseAssignmentName_invalidName_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAssignmentName("  "));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAssignmentName("!!InvalidName"));
+    }
+
+    @Test
+    public void parseDeadline_validDate_success() throws Exception {
+        Deadline deadline = ParserUtil.parseDeadline("2024-12-01");
+        assertEquals("2024-12-01", deadline.deadline.format(Deadline.DATE_TIME_FORMATTER));
+    }
+
+    @Test
+    public void parseDeadline_invalidDate_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDeadline("2024-13-01"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDeadline("invalid-date"));
+    }
+
+    @Test
+    public void parseStatus_validStatus_success() throws Exception {
+        Status status1 = ParserUtil.parseStatus("Y");
+        Status status2 = ParserUtil.parseStatus("n");
+
+        assertEquals(Status.State.Y, status1.status);
+        assertEquals(Status.State.N, status2.status);
+    }
+
+    @Test
+    public void parseStatus_invalidStatus_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseStatus("Yes"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseStatus("maybe"));
+    }
+
+    @Test
+    public void parseStatuses_validStatuses_success() throws Exception {
+        List<String> statuses = Arrays.asList("Y", "N", "y", "n");
+        List<Status> parsedStatuses = ParserUtil.parseStatuses(statuses);
+
+        assertEquals(4, parsedStatuses.size());
+        assertEquals(Status.State.Y, parsedStatuses.get(0).status);
+        assertEquals(Status.State.N, parsedStatuses.get(1).status);
+        assertEquals(Status.State.Y, parsedStatuses.get(2).status);
+        assertEquals(Status.State.N, parsedStatuses.get(3).status);
+    }
+
+    @Test
+    public void parseStatuses_invalidStatuses_throwsParseException() {
+        List<String> statuses = Arrays.asList("Y", "maybe");
+        assertThrows(ParseException.class, () -> ParserUtil.parseStatuses(statuses));
+    }
+
+    @Test
+    public void parseGrade_validGrade_success() throws Exception {
+        Grade grade1 = ParserUtil.parseGrade("85.5");
+        Grade grade2 = ParserUtil.parseGrade("NULL");
+
+        assertTrue(grade1.grade.isPresent());
+        assertEquals(85.5, grade1.grade.get());
+
+        assertFalse(grade2.grade.isPresent());
+    }
+
+    @Test
+    public void parseGrade_invalidGrade_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGrade("invalid"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseGrade("101")); // greater than 100
     }
 }
