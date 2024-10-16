@@ -91,8 +91,8 @@ public class Meeting {
         }
 
         Meeting otherMeeting = (Meeting) other;
-        return location.equals(otherMeeting.location) && startTime.equals(otherMeeting.startTime)
-                && endTime.equals(otherMeeting.endTime);
+        return personToMeet.equals(otherMeeting.personToMeet) && location.equals(otherMeeting.location)
+                && startTime.equals(otherMeeting.startTime) && endTime.equals(otherMeeting.endTime);
     }
 
     @Override
