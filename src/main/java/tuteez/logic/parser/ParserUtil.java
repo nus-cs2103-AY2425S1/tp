@@ -11,6 +11,7 @@ import tuteez.commons.util.StringUtil;
 import tuteez.logic.parser.exceptions.ParseException;
 import tuteez.model.person.Address;
 import tuteez.model.person.Email;
+import tuteez.model.person.Lesson;
 import tuteez.model.person.Name;
 import tuteez.model.person.Phone;
 import tuteez.model.tag.Tag;
@@ -110,6 +111,15 @@ public class ParserUtil {
         return new Tag(trimmedTag);
     }
 
+    public static Lesson parseLesson(String lesson) throws ParseException {
+        requireNonNull(lesson);
+        String trimmedLesson = lesson.trim();
+        if (!Lesson.isValidLesson(trimmedLesson)) {
+            throw new ParseException(Lesson.MESSAGE_CONSTRAINTS);
+        }
+        return new Lesson(trimmedLesson);
+    }
+
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
@@ -120,5 +130,14 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    public static Set<Lesson> parseLessons(Collection<String> lessons) throws ParseException {
+        requireNonNull(lessons);
+        final Set<Lesson> lessonSet = new HashSet<>();
+        for (String lesson : lessons) {
+            lessonSet.add(parseLesson(lesson));
+        }
+        return lessonSet;
     }
 }

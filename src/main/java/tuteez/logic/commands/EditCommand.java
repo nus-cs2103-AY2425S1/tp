@@ -23,6 +23,7 @@ import tuteez.logic.commands.exceptions.CommandException;
 import tuteez.model.Model;
 import tuteez.model.person.Address;
 import tuteez.model.person.Email;
+import tuteez.model.person.Lesson;
 import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
@@ -83,9 +84,22 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        Optional<Set<Lesson>> lessons = editPersonDescriptor.getLessons();
+        if (lessons.isPresent()) {
+            for (Lesson lesson : lessons.get()) {
+                if (checkForClashingLesson(lesson)) {
+                    return new CommandResult("Lesson clash detected. Confirm change?");
+                }
+            }
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    public boolean checkForClashingLesson(Lesson lesson) {
+        return Lesson.isDuplicateLesson(lesson);
     }
 
     /**
@@ -100,6 +114,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Lesson> updatedLesson = editPersonDescriptor.getLessons().orElse(personToEdit.getLesson());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
@@ -138,6 +153,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Set<Lesson> lessons;
 
         public EditPersonDescriptor() {}
 
@@ -151,6 +167,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setLessons(toCopy.lessons);
         }
 
         /**
@@ -209,6 +226,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setLessons(Set<Lesson> lessons) {
+            this.lessons= (lessons != null) ? new HashSet<>(lessons) : null;
+        }
+
+        public Optional<Set<Lesson>> getLessons() {
+            return (lessons != null) ? Optional.of(Collections.unmodifiableSet(lessons)) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -225,7 +250,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(lessons, otherEditPersonDescriptor.lessons);
         }
 
         @Override
@@ -236,6 +262,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("lessons", lessons)
                     .toString();
         }
     }
