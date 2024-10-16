@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Grade;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -117,6 +118,26 @@ public class PersonBuilder {
      */
     public PersonBuilder withCourse(String course) {
         this.course = new Course(course);
+        return this;
+    }
+
+    /**
+     * Adds an ungraded {@code Module} of the {@code Person} that we are building.
+     */
+    public PersonBuilder addUngradedModule(String module) {
+        Module personModule = new Module(module);
+        this.modules.add(personModule);
+        return this;
+    }
+
+    /**
+     * Adds a graded {@code Module} of the {@code Person} that we are building.
+     */
+    public PersonBuilder addGradedModule(String module, String grade) {
+        Module personModule = new Module(module);
+        Grade moduleGrade = new Grade(grade);
+        personModule.setGrade(moduleGrade);
+        this.modules.add(personModule);
         return this;
     }
 

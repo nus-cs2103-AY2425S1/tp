@@ -141,7 +141,8 @@ class JsonAdaptedPerson {
         }
         final Tag modelTag = new Tag(tag);
 
-        Person person = new Person(modelStudentId, modelName, modelPhone, modelEmail, modelAddress, modelCourse, modelTag);
+        Person person = new Person(modelStudentId, modelName, modelPhone, modelEmail,
+                modelAddress, modelCourse, modelTag);
         person.setModules(modelModules);
 
         return person;

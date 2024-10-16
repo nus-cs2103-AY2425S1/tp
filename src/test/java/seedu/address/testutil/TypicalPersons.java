@@ -6,6 +6,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -35,6 +39,8 @@ public class TypicalPersons {
             .withPhone("94351253")
             .withCourse("Math")
             .withTag("Student")
+            .addGradedModule("MA1100", "A")
+            .addUngradedModule("MA2202")
             .build();
     public static final Person BENSON = new PersonBuilder()
             .withStudentId("19191919")
@@ -44,6 +50,7 @@ public class TypicalPersons {
             .withPhone("98765432")
             .withCourse("Medicine")
             .withTag("Student")
+            .addUngradedModule("GEC1044")
             .build();
     public static final Person CARL = new PersonBuilder()
             .withStudentId("21212121")
@@ -62,6 +69,8 @@ public class TypicalPersons {
             .withAddress("10th street")
             .withCourse("Dentistry")
             .withTag("Student")
+            .addUngradedModule("DI5100")
+            .addUngradedModule("DI5200")
             .build();
     public static final Person ELLE = new PersonBuilder()
             .withStudentId("25252525")
@@ -71,6 +80,8 @@ public class TypicalPersons {
             .withAddress("michegan ave")
             .withCourse("biomedical engineering")
             .withTag("Student")
+            .addGradedModule("BN1111", "D")
+            .addGradedModule("BN2102", "C+")
             .build();
     public static final Person FIONA = new PersonBuilder()
             .withStudentId("98989898")
@@ -89,6 +100,8 @@ public class TypicalPersons {
             .withAddress("4th street")
             .withCourse("Dentistry")
             .withTag("Student")
+            .addUngradedModule("DI5100")
+            .addUngradedModule("DI5200")
             .build();
 
     // Manually added
@@ -109,6 +122,8 @@ public class TypicalPersons {
             .withAddress("chicago ave")
             .withCourse("Architecture")
             .withTag("Student")
+            .addGradedModule("AR1101", "A+")
+            .addUngradedModule("AR1102")
             .build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
@@ -119,7 +134,9 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_AMY)
             .withAddress(VALID_ADDRESS_AMY)
             .withCourse(VALID_COURSE_AMY)
-            .withTag(VALID_TAG_STUDENT).build();
+            .withTag(VALID_TAG_STUDENT)
+            .addGradedModule(VALID_MODULE_AMY, VALID_GRADE_AMY)
+            .build();
     public static final Person BOB = new PersonBuilder()
             .withStudentId(VALID_STUDENTID_BOB)
             .withName(VALID_NAME_BOB)
@@ -128,6 +145,7 @@ public class TypicalPersons {
             .withAddress(VALID_ADDRESS_BOB)
             .withCourse(VALID_COURSE_BOB)
             .withTag(VALID_TAG_TUTOR)
+            .addGradedModule(VALID_MODULE_BOB, VALID_GRADE_BOB)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
