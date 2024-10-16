@@ -71,7 +71,7 @@ public class JsonAddressBookStorageTest {
         ReadOnlyAddressBook readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new AddressBook(readBack));
 
-        // Modify data, overwrite exiting file, and read back
+        // Modify data, overwrite existing file, and read back
         original.addPerson(HOON);
         original.removePerson(ALICE);
         jsonAddressBookStorage.saveAddressBook(original, filePath);
@@ -102,7 +102,6 @@ public class JsonAddressBookStorageTest {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
-
     @Test
     public void saveAddressBook_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveAddressBook(new AddressBook(), null));
