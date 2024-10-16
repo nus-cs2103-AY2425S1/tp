@@ -12,11 +12,11 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  * Keyword matching is case insensitive.
  */
 public class FindPotentialCommand extends FindCommand {
-    public static final String ARGUMENT_WORD = "/ph";
+    public static final String ARGUMENT_WORD = "ph";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all potential hires whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: /ph KEYWORD [MORE_KEYWORDS]...\n"
+            + "Parameters: ph KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " " + ARGUMENT_WORD + " alice bob charlie";
 
     public FindPotentialCommand(NameContainsKeywordsPredicate predicate) {
