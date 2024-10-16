@@ -16,7 +16,6 @@ public class MeetUpCard extends UiPart<Region> {
 
     private static final String FXML = "MeetUpListCard.fxml";
     public final MeetUp meetUp;
-    private final Logger logger = LogsCenter.getLogger(MeetUpCard.class);
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

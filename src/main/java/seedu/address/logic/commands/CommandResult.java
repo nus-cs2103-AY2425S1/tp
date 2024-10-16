@@ -25,7 +25,6 @@ public class CommandResult {
     /** Change view to Address Book */
     private final boolean showAddressBook;
 
-
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */

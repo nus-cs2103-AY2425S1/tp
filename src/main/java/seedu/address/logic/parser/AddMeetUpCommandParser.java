@@ -6,18 +6,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddMeetUpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.meetup.From;
+import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.model.meetup.MeetUpFrom;
-import seedu.address.model.meetup.MeetUpInfo;
-import seedu.address.model.meetup.MeetUpName;
-import seedu.address.model.meetup.MeetUpTo;
-
+import seedu.address.model.meetup.Name;
+import seedu.address.model.meetup.To;
 /**
  * Parses input arguments and creates a new AddMeetUpCommand object
  */
@@ -38,11 +35,10 @@ public class AddMeetUpCommandParser implements Parser<AddMeetUpCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_INFO, PREFIX_FROM, PREFIX_TO);
-        MeetUpName name = new MeetUpName(argMultimap.getValue(PREFIX_NAME).get());
-        MeetUpInfo info = new MeetUpInfo(argMultimap.getValue(PREFIX_INFO).get());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        MeetUpFrom from = new MeetUpFrom(LocalDateTime.parse(argMultimap.getValue(PREFIX_FROM).get(), formatter));
-        MeetUpTo to = new MeetUpTo(LocalDateTime.parse(argMultimap.getValue(PREFIX_TO).get(), formatter));
+        Name name = new Name(argMultimap.getValue(PREFIX_NAME).get());
+        Info info = new Info(argMultimap.getValue(PREFIX_INFO).get());
+        From from = new From(argMultimap.getValue(PREFIX_FROM).get());
+        To to = new To(argMultimap.getValue(PREFIX_TO).get());
 
         MeetUp meetUp = new MeetUp(name, info, from, to);
 
