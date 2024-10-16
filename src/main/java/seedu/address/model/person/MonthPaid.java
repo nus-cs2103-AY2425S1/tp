@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.Collection;
 import java.util.Objects;
 
 /**
@@ -38,15 +37,7 @@ public class MonthPaid {
      * Returns true if a given string is a valid monthsPaid.
      */
     public static boolean isValidMonthPaid(String monthPaid) {
-        assert !monthPaid.isEmpty();
         return monthPaid.matches(SPLIT_VALIDATION_REGEX);
-    }
-
-    /**
-     * Returns true if all strings in a given {@code Collection<String> monthsPaid} is a valid monthPaid.
-     */
-    public static boolean isValidMonthsPaid(Collection<String> monthsPaid) {
-        return monthsPaid.stream().allMatch(MonthPaid::isValidMonthPaid);
     }
 
     @Override

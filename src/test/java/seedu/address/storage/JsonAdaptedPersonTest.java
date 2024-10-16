@@ -29,8 +29,6 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_CLASS_ID = "-1";
     private static final String INVALID_FEES = "-300";
-    private static final List<JsonAdaptedMonthPaid> INVALID_MONTHS_PAID =
-            List.of(new JsonAdaptedMonthPaid("123"));
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -174,26 +172,22 @@ public class JsonAdaptedPersonTest {
         String expectedMessage = ClassId.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
-
     @Test
-    public void toModelType_nullMonthsPaid_success() {
-        fail();
+    public void toModelType_invalidTags_throwsIllegalVsdfalueException() {
+        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
+        invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_FEES, VALID_CLASS_ID,
-                        null, VALID_TAGS);
-        try {
-            //assert person.toModelType().getMonthsPaid().value.isEmpty();
-            assert true;
-        } catch (Exception e) {
-            fail();
-        }
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_FEES,
+                        VALID_CLASS_ID, VALID_MONTHS_PAID, invalidTags);
+        assertThrows(IllegalValueException.class, person::toModelType);
     }
-
     @Test
     public void toModelType_invalidMonthsPaid_throwsIllegalValueException() {
+        List<JsonAdaptedMonthPaid> invalidMonthsPaid123 =
+                List.of(new JsonAdaptedMonthPaid("123"));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_FEES, VALID_CLASS_ID,
-                        INVALID_MONTHS_PAID, VALID_TAGS);
+                        invalidMonthsPaid123, VALID_TAGS);
         String expectedMessage = MonthPaid.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
