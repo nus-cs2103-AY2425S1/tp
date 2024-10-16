@@ -157,4 +157,21 @@ public class ParserUtil {
         }
         return new Tier(trimmedTag);
     }
+
+    /**
+     * Parses a {@code String remark} into a {@code Remark}.
+     * Leading and trailing whitespaces are trimmed.
+     *
+     * @throws ParseException if the given {@code remark} is invalid.
+     */
+    public static Remark parseNewRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        System.out.println(trimmedRemark);
+        return new Remark(trimmedRemark);
+    }
+
 }

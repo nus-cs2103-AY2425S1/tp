@@ -2,10 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPEND_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -39,7 +41,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
+            + "Existing values will be overwritten by the input values. Any fields unspecified will not be modified.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
@@ -48,6 +50,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_JOB + "JOB] "
             + "[" + PREFIX_INCOME + "INCOME] "
             + "[" + PREFIX_TIER + "TAG]...\n"
+            + "[" + PREFIX_NEW_REMARK + "NEW REMARK] "
+            + "[" + PREFIX_APPEND_REMARK + "ADD-ON TO EXISTING REMARK] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -106,8 +110,13 @@ public class EditCommand extends Command {
         Job updatedJob = editPersonDescriptor.getJob().orElse(personToEdit.getJob());
         Income updatedIncome = editPersonDescriptor.getIncome().orElse(personToEdit.getIncome());
         Tier updatedTier = editPersonDescriptor.getTiers().orElse(personToEdit.getTier());
-        Remark updatedRemark = personToEdit.getRemark(); // edit command does not allow editing remarks
-
+        Remark updatedRemark;
+        if (editPersonDescriptor.getAppendedRemark().isPresent()) {
+            updatedRemark = Remark.combineRemarks(personToEdit.getRemark(),
+                    editPersonDescriptor.getAppendedRemark().get());
+        } else {
+            updatedRemark = editPersonDescriptor.getNewRemark().orElse(personToEdit.getRemark());
+        }
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedJob, updatedIncome,
                 updatedTier, updatedRemark);
     }
@@ -148,6 +157,8 @@ public class EditCommand extends Command {
         private Job job;
         private Income income;
         private Tier tier;
+        private Remark remark;
+        private Remark appendedRemark;
         public EditPersonDescriptor() {}
 
         /**
@@ -162,13 +173,15 @@ public class EditCommand extends Command {
             setJob(toCopy.job);
             setIncome(toCopy.income);
             setTier(toCopy.tier);
+            setNewRemark(toCopy.remark);
+            setAppendedRemark(toCopy.appendedRemark);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, job, income, tier);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, job, income, tier, remark, appendedRemark);
         }
 
         public void setName(Name name) {
@@ -235,6 +248,22 @@ public class EditCommand extends Command {
             return (tier != null) ? Optional.of(tier) : Optional.empty();
         }
 
+        public void setNewRemark(Remark remark) {
+            this.remark = remark;
+        }
+
+        public Optional<Remark> getNewRemark() {
+            return Optional.ofNullable(remark);
+        }
+
+        public void setAppendedRemark(Remark remark) {
+            this.appendedRemark = remark;
+        }
+
+        public Optional<Remark> getAppendedRemark() {
+            return Optional.ofNullable(appendedRemark);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -253,7 +282,9 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(job, otherEditPersonDescriptor.job)
                     && Objects.equals(income, otherEditPersonDescriptor.income)
-                    && Objects.equals(tier, otherEditPersonDescriptor.tier);
+                    && Objects.equals(tier, otherEditPersonDescriptor.tier)
+                    && Objects.equals(remark, otherEditPersonDescriptor.remark)
+                    && Objects.equals(appendedRemark, otherEditPersonDescriptor.appendedRemark);
         }
 
         @Override
@@ -266,6 +297,7 @@ public class EditCommand extends Command {
                     .add("job", job)
                     .add("income", income)
                     .add("tier", tier)
+                    .add("remark", remark)
                     .toString();
         }
     }

@@ -11,6 +11,7 @@ public class Remark {
 
     public static final String MESSAGE_CONSTRAINTS = "Remark must contain only ASCII characters.";
     public static final String VALIDATION_REGEX = "^[\\x00-\\x7F]+$";
+
     public final String value;
 
     /**
@@ -50,4 +51,18 @@ public class Remark {
     public int hashCode() {
         return value.hashCode();
     }
+
+    /**
+     * Constructs an {@code Remark}, with the concatenated values of all give {@code Remark remarks}.
+     *
+     * @param remarks Multiple remarks.
+     */
+    public static Remark combineRemarks(Remark... remarks) {
+        StringBuilder combinedValues = new StringBuilder();
+        for (Remark currentRemark: remarks) {
+            combinedValues.append(currentRemark.value + "\n");
+        }
+        return new Remark(combinedValues.toString());
+    }
+
 }

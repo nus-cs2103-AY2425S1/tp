@@ -75,4 +75,16 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     * Returns true if the given {@code ArgumentMultimap argumentMultimap} contains both flags for new remark {@code
+     * remarkNewPrefix} and append remark {@code remarkAppendPrefix}.
+     */
+    public static boolean isBothRemarkNewAndRemarkAppendPresent(ArgumentMultimap argumentMultimap,
+                                                               Prefix remarkNewPrefix,
+                                                         Prefix remarkAppendPrefix) {
+        return argumentMultimap.getValue(remarkNewPrefix).isPresent()
+                && argumentMultimap.getValue(remarkAppendPrefix).isPresent();
+    }
+
 }

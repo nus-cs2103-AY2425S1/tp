@@ -8,6 +8,7 @@ import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tier.Tier;
 
 /**
@@ -37,6 +38,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setJob(person.getJob());
         descriptor.setIncome(person.getIncome());
         descriptor.setTier(person.getTier());
+        descriptor.setNewRemark(person.getRemark());
     }
 
     /**
@@ -91,6 +93,22 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withTier(String tier) {
         descriptor.setTier(new Tier(tier));
+        return this;
+    }
+
+    /**
+     * Sets the {@code remark} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withNewRemark(String remark) {
+        descriptor.setNewRemark(new Remark(remark));
+        return this;
+    }
+
+    /**
+     * Sets the {@code appendedRemark} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withAppendedRemark(String remark) {
+        descriptor.setAppendedRemark(new Remark(remark));
         return this;
     }
 
