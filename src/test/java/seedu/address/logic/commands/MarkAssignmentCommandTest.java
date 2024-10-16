@@ -53,4 +53,34 @@ public class MarkAssignmentCommandTest {
         assertCommandSuccess(markAssignmentCommand, model, expectedMessage, expectedModel);
         assertTrue(student.getAssignmentList().get(INDEX_FIRST_ASSIGNMENT.getZeroBased()).getHasSubmitted());
     }
+
+    @Test
+    public void execute_invalidStudentIndex_markFailure() {
+        Assignment assignment = new AssignmentBuilder()
+                .withAssignmentName("Math Homework")
+                .withMaxScore(100)
+                .build();
+        Student student = new StudentBuilder().withAssignments(new ArrayList<>()).build().addAssignment(assignment);
+        model.addStudent(student);
+        MarkAssignmentCommand markAssignmentCommand = new MarkAssignmentCommand(
+                Index.fromOneBased(2),
+                INDEX_FIRST_ASSIGNMENT);
+        String expectedMessage = Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+        assertCommandFailure(markAssignmentCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_invalidAssignmentIndex_markFailure() {
+        Assignment assignment = new AssignmentBuilder()
+                .withAssignmentName("Math Homework")
+                .withMaxScore(100)
+                .build();
+        Student student = new StudentBuilder().withAssignments(new ArrayList<>()).build().addAssignment(assignment);
+        model.addStudent(student);
+        MarkAssignmentCommand markAssignmentCommand = new MarkAssignmentCommand(
+                INDEX_FIRST_STUDENT,
+                Index.fromOneBased(2));
+        String expectedMessage = Messages.MESSAGE_INVALID_ASSIGNMENT_INDEX;
+        assertCommandFailure(markAssignmentCommand, model, expectedMessage);
+    }
 }
