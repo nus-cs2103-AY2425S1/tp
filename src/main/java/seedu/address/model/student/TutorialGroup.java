@@ -16,7 +16,7 @@ public class TutorialGroup {
      */
     public static final String VALIDATION_REGEX = "[A-Za-z][0-9]{2}";
 
-    public final String tutorialGroup;
+    public final String value;
 
     /**
      * Constructs a {@code TutorialGroup}.
@@ -26,7 +26,7 @@ public class TutorialGroup {
     public TutorialGroup(String tutorialGroup) {
         requireNonNull(tutorialGroup);
         checkArgument(isValidTutorialGroup(tutorialGroup), MESSAGE_CONSTRAINTS);
-        this.tutorialGroup = tutorialGroup;
+        this.value = tutorialGroup;
     }
 
     /**
@@ -38,7 +38,7 @@ public class TutorialGroup {
 
     @Override
     public String toString() {
-        return tutorialGroup;
+        return value;
     }
 
     @Override
@@ -51,6 +51,6 @@ public class TutorialGroup {
             return false;
         }
 
-        return tutorialGroup.equals(otherTutorialGroup.tutorialGroup);
+        return value.equals(otherTutorialGroup.value);
     }
 }
