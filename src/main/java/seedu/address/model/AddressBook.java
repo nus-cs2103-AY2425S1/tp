@@ -11,6 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicySet;
 
 /**
  * Wraps all data at the address-book level
@@ -113,7 +114,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Policy> getPolicyList() {
         List<Policy> allPolicies = new ArrayList<>();
         for (Person person : persons) {
-            allPolicies.addAll(person.getPolicies().getAllPolicies());
+            PolicySet pset = person.getPolicySet();
+            allPolicies.addAll(pset.getAllPolicies());
         }
         return FXCollections.observableList(allPolicies);
     }

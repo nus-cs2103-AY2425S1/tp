@@ -240,6 +240,21 @@ public class PolicySet implements Set<Policy> {
         throw new UnsupportedOperationException("PolicySet does not support the retainAll method.");
     }
 
+    /**
+     * Retrieves all the policies stored in this PolicySet as a list.
+     *
+     * @return a List of all policies in the set.
+     */
+    public List<Policy> getAllPolicies() {
+        List<Policy> policyList = new ArrayList<>();
+        for (Policy policy : policies) {
+            if (policy != null) {
+                policyList.add(policy);
+            }
+        }
+        return policyList;
+    }
+
     @Override
     public int size() {
         int count = 0;

@@ -17,28 +17,18 @@ public class PolicyTest {
     @Test
     public void constructor_negativeAmounts_throwsIllegalArgumentException() {
         final LocalDate expiryDate = LocalDate.now();
-        final Person insuree = new PersonBuilder().build();
 
         // Constructor using premiumAmount, coverageAmount and expiryDate only
         assertThrows(IllegalArgumentException.class, () -> new ConcretePolicy(-1, 0, expiryDate));
         assertThrows(IllegalArgumentException.class, () -> new ConcretePolicy(0, -1, expiryDate));
-
-        // Constructor using premiumAmount, coverageAmount, expiryDate and insuree
-        assertThrows(IllegalArgumentException.class, () -> new ConcretePolicy(-1, 0, expiryDate, insuree));
-        assertThrows(IllegalArgumentException.class, () -> new ConcretePolicy(0, -1, expiryDate, insuree));
     }
 
     @Test
     public void constructor_nullInputs_throwsNullPointerException() {
-        final LocalDate expiryDate = LocalDate.now();
-        final Person insuree = new PersonBuilder().build();
 
         // Constructor using premiumAmount, coverageAmount and expiryDate only
         assertThrows(NullPointerException.class, () -> new ConcretePolicy(0, 0, null));
 
-        // Constructor using premiumAmount, coverageAmount, expiryDate and insuree
-        assertThrows(NullPointerException.class, () -> new ConcretePolicy(0, 0, null, insuree));
-        assertThrows(NullPointerException.class, () -> new ConcretePolicy(0, 0, expiryDate, null));
     }
 
     @Test
@@ -46,20 +36,17 @@ public class PolicyTest {
         final double premiumAmount = 100;
         final double coverageAmount = 200;
         final LocalDate expiryDate = LocalDate.now();
-        final Person insuree = new PersonBuilder().build();
-        final Policy policy = new ConcretePolicy(premiumAmount, coverageAmount, expiryDate, insuree);
+        final Policy policy = new ConcretePolicy(premiumAmount, coverageAmount, expiryDate);
 
         assertEquals(premiumAmount, policy.getPremiumAmount());
         assertEquals(coverageAmount, policy.getCoverageAmount());
         assertEquals(expiryDate, policy.getExpiryDate());
-        assertEquals(insuree, policy.getInsuree());
     }
 
     @Test
     public void setters_setCorrectValues() {
         final double premiumAmount = 100;
         final double coverageAmount = 200;
-        final Person insuree = new PersonBuilder().build();
         final LocalDate expiryDate = LocalDate.now();
         final Policy policy = new ConcretePolicy(0, 0, expiryDate);
 
@@ -69,8 +56,6 @@ public class PolicyTest {
         assertEquals(coverageAmount, policy.getCoverageAmount());
         policy.setExpiryDate(expiryDate);
         assertEquals(expiryDate, policy.getExpiryDate());
-        policy.setInsuree(insuree);
-        assertEquals(insuree, policy.getInsuree());
     }
 
     @Test
@@ -79,7 +64,6 @@ public class PolicyTest {
         assertThrows(IllegalArgumentException.class, () -> policy.setPremiumAmount(-1)); // negative premiumAmount
         assertThrows(IllegalArgumentException.class, () -> policy.setCoverageAmount(-1)); // negative coverageAmount;
         assertThrows(NullPointerException.class, () -> policy.setExpiryDate(null)); // null expiryDate;
-        assertThrows(NullPointerException.class, () -> policy.setInsuree(null)); // null insuree;
     }
 
     @Test
@@ -87,8 +71,7 @@ public class PolicyTest {
         final double premiumAmount = 100;
         final double coverageAmount = 200;
         final LocalDate expiryDate = LocalDate.now();
-        final Person insuree = new PersonBuilder().build();
-        final Policy policy = new ConcretePolicy(premiumAmount, coverageAmount, expiryDate, insuree);
+        final Policy policy = new ConcretePolicy(premiumAmount, coverageAmount, expiryDate);
 
         // same object -> returns true
         assertTrue(policy.equals(policy));
@@ -100,27 +83,21 @@ public class PolicyTest {
         assertFalse(policy.equals(5));
 
         // policies with different premiumAmount -> returns false
-        final Policy policyWithDifferentPremiumAmount = new ConcretePolicy(0, coverageAmount, expiryDate, insuree);
+        final Policy policyWithDifferentPremiumAmount = new ConcretePolicy(0, coverageAmount, expiryDate);
         assertFalse(policy.equals(policyWithDifferentPremiumAmount));
 
         // policies with different coverageAmount -> returns false
-        final Policy policyWithDifferentCoverageAmount = new ConcretePolicy(premiumAmount, 0, expiryDate, insuree);
+        final Policy policyWithDifferentCoverageAmount = new ConcretePolicy(premiumAmount, 0, expiryDate);
         assertFalse(policy.equals(policyWithDifferentCoverageAmount));
 
         // policies with different expiryDate -> returns false
         final LocalDate differentExpiryDate = LocalDate.of(2000, 10, 10);
         final Policy policyWithDifferentExpiry = new ConcretePolicy(premiumAmount, coverageAmount,
-                differentExpiryDate, insuree);
+                differentExpiryDate);
         assertFalse(policy.equals(policyWithDifferentExpiry));
 
-        // policies with different insuree -> returns false
-        final Person differentInsuree = new PersonBuilder().withName("foo").build();
-        final Policy policyWithDifferentInsuree = new ConcretePolicy(premiumAmount, coverageAmount,
-                expiryDate, differentInsuree);
-        assertFalse(policy.equals(policyWithDifferentInsuree));
-
         // policies with same values -> returns true
-        final Policy policyWithSameValues = new ConcretePolicy(premiumAmount, coverageAmount, expiryDate, insuree);
+        final Policy policyWithSameValues = new ConcretePolicy(premiumAmount, coverageAmount, expiryDate);
         assertTrue(policy.equals(policyWithSameValues));
     }
 
@@ -156,10 +133,6 @@ public class PolicyTest {
     private class ConcretePolicy extends Policy {
         public ConcretePolicy(double premiumAmount, double coverageAmount, LocalDate expiryDate) {
             super(premiumAmount, coverageAmount, expiryDate);
-        }
-
-        public ConcretePolicy(double premiumAmount, double coverageAmount, LocalDate expiryDate, Person insuree) {
-            super(premiumAmount, coverageAmount, expiryDate, insuree);
         }
 
         @Override

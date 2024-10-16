@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyExpiryDatePredicate;
-import seedu.address.model.policy.PolicyMap;
+import seedu.address.model.policy.PolicySet;
 
 /**
  * Lists all policies in the address book that are nearing expiry within the next 30 days.
@@ -53,10 +53,10 @@ public class ListExpiringPoliciesCommand extends Command {
 
             // Iterate over all persons and their policies
             for (Person person : persons) {
-                PolicyMap policyMap = person.getPolicyMap();
+                PolicySet policySet = person.getPolicySet();
 
                 // Filter the policies based on expiry date predicate
-                for (Policy policy : policyMap.getAllPolicies()) {
+                for (Policy policy : policySet) {
                     if (predicate.test(policy)) {
                         // At least one expiring policy exists
                         hasExpiringPolicies = true;
@@ -68,22 +68,21 @@ public class ListExpiringPoliciesCommand extends Command {
                                 policy.getType().toString(),
                                 policy.getPremiumAmount(),
                                 policy.getCoverageAmount(),
-                                policy.getExpiryDate().toLocalDate()
+                                policy.getExpiryDate()
                         ));
                     }
                 }
             }
 
-            // If no expiring policies were found
+            // no expiring policies were found
             if (!hasExpiringPolicies) {
                 return new CommandResult(MESSAGE_NO_EXPIRING_POLICY);
             }
 
-            // Return the result message if expiring policies were found
+            // expiring policies found
             return new CommandResult(resultMessage.toString());
 
         } catch (Exception e) {
-            // Handle any unexpected errors and return a failure message
             return new CommandResult(MESSAGE_FAILURE);
         }
     }

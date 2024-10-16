@@ -16,7 +16,8 @@
     "policies": [{
       "premiumAmount" : 200.0,
       "coverageAmount" : 20000.0,
-      "policyType" : "HEALTH"
+      "policyType" : "HEALTH",
+      "expiryDate" : "10/16/2034"
     }]
   }, {
     "name" : "Carl Kurz",
