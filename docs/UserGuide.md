@@ -133,8 +133,8 @@ Finds persons whose tags contain any of the given words.
 Format: `findtag TAG [MORE_TAGS]`
 
 - The search is case-insensitive. e.g., `HDB` will match `hdb`.
-- Persons with at least one matching tag will be returned (i.e., an `OR` search).
 - The order of the tags does not matter.
+- Persons with at least one matching tag will be returned (i.e., an `OR` search).
 
 Examples:
 
@@ -242,6 +242,7 @@ _Details coming soon ..._
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                               |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARKS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                        |
+| **Findtag**| `findtag TAG [MORE_TAGS]`<br> e.g., `findtag friend colleague`                                                                                                                    |
 | **List**   | `list`                                                                                                                                                                            |
 | **Help**   | `help`                                                                                                                                                                            |
 | **Remark** | `remark INDEX r/[REMARKS]`                                                                                                                                                        |
