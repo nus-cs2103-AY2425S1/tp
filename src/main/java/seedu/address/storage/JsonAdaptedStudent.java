@@ -94,17 +94,17 @@ public class JsonAdaptedStudent {
         }
         final Address modelAddress = new Address(address); //to be used later
 
-        if (studentNumber == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentNumber.class.getSimpleName()));
-        }
-
         if (tutorialGroup == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentNumber.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TutorialGroup.class.getSimpleName()));
         }
         if (!TutorialGroup.isValidTutorialGroup(tutorialGroup)) {
             throw new IllegalValueException(TutorialGroup.MESSAGE_CONSTRAINTS);
         }
         final TutorialGroup modelTutorialGroup = new TutorialGroup(tutorialGroup);
+
+        if (studentNumber == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentNumber.class.getSimpleName()));
+        }
 
         if (!StudentNumber.isValidStudentNumber(studentNumber)) {
             throw new IllegalValueException(StudentNumber.MESSAGE_CONSTRAINTS);
