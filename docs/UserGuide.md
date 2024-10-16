@@ -143,6 +143,7 @@ Examples:
 * `fp 98765432` returns every contact that has phone number `98765432`
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+
 ### Locating persons by address `fa`
 
 Finds persons whose address matches any part of the given keyword(s).
@@ -153,13 +154,13 @@ Format `fa KEYWORD(s)`
 * The order of the keywords does not matter. e.g. `Street 45` will match `45 Street`
 * Only the address of the contact is searched.
 * Persons with address with any matching substring to the keyword will be returned.
-* Persons matching at least one keyword will be returned (i.e. `OR` search). 
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
 
 Examples:
 * `fa Blk` returns `Blk 45` and `Blk 35`
 * `fa blk street` returns `Tampines Street 1` and `Blk 35 Ang Mo Kio`
 * `fa tampines` returns `Blk 47 Tampines Street 20`
-    ![result for 'fa tampines`](images/findTampines.png)
+  ![result for 'fa tampines`](images/findTampines.png)
 
 ### Deleting a person : `delete`
 
@@ -222,13 +223,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action                | Format, Examples                                                                                                                                                            |
-|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CLIENT_TYPE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/Plan A c/Plan A`  | 
-| **Clear**             | `clear`                                                                                                                                                                     |
-| **Delete**            | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                         |
-| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLIENT_TYPE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                         | 
-| **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                  |
-| **Find Phone Number** | `fp KEYWORD`                                                                                                                                                                |
-| **List**              | `list`                                                                                                                                                                      |
-| **Help**              | `help`                                                                                                                                                                      |
+| Action                | Format, Examples                                                                                                                                                           |
+|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CLIENT_TYPE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/Plan A c/Plan A` | 
+| **Clear**             | `clear`                                                                                                                                                                    |
+| **Delete**            | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                        |
+| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLIENT_TYPE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        | 
+| **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                 |
+| **Find Phone Number** | `fp KEYWORD`                                                                                                                                                               |
+| **Find Address**      | `fa KEYWORD(s)`                                                                                                                                                             |
+| **List**              | `list`                                                                                                                                                                     |
+| **Help**              | `help`                                                                                                                                                                     |
