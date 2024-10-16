@@ -67,7 +67,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 >**Notes about the command format:**<br>
 >
 >* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
->  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+>  e.g. in `employee n/NAME`, `NAME` is a parameter which can be used as `employee n/John Doe`.
 >
 >* Items in square brackets are optional.<br>
 >  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -126,7 +126,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
   ></box>
   >
   >Examples:
-  >* `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
+  >* `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
 </details>
 
 <details>
