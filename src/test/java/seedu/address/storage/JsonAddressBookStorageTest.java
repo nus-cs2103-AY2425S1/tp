@@ -110,21 +110,4 @@ public class JsonAddressBookStorageTest {
     public void saveAddressBook_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveAddressBook(new AddressBook(), null));
     }
-<<<<<<< HEAD
-=======
-
-    @Test
-    public void saveAddressBook_writeAccessDenied_throwsAccessDeniedException() {
-        Path filePath = Path.of("writeAccessDeniedAddressBook.json");
-        File file = filePath.toFile();
-
-        if (file.setWritable( false,
-                false)) {
-            System.out.println("File cannot be written to");
-        }
-
-        assertThrows(AccessDeniedException.class, () -> saveAddressBook(new AddressBook(),
-                "writeAccessDeniedAddressBook.json"));
-    }
->>>>>>> d77ba35e42381d27e6454ee4424dd2dfb606dccc
 }
