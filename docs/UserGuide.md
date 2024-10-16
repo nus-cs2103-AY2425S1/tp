@@ -118,6 +118,17 @@ Examples:
 * `reminder John Doe r/10 days`
 * `reminder Betsy Crowe r/3 hours`
 
+### Deleting an appointment: `appointment-delete`
+
+Deletes a scheduled appointment for a client in the address book.
+
+Format: `appointment-delete NAME`
+
+* The given date name must be the name of an existing client.
+
+Examples:
+* `appointment-delete John Doe`
+
 ### Viewing upcoming appointments: `appointment-list`
 
 Lists all upcoming appointments 
