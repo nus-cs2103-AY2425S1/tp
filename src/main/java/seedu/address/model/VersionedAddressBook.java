@@ -14,7 +14,6 @@ public class VersionedAddressBook extends AddressBook {
 
     /**
      * Creates a VersionedAddressBook with the initial state.
-     *
      * @param initialState The initial state of the AddressBook.
      */
     public VersionedAddressBook(ReadOnlyAddressBook initialState) {
@@ -26,16 +25,15 @@ public class VersionedAddressBook extends AddressBook {
 
     /**
      * Saves the current address book state to the state list.
-     * If there are undone states in the list, discard those states and save the new current state.
+     * It removes all future states in the history after the current state when a new change is saved.
+     * This ensures that any redoable history is discarded once a new change is made after an undo.
      */
     public void save() {
-        // Trim the future states if we are not at the end of the state list
         if (currentStatePointer < addressBookStateList.size() - 1) {
             addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
         }
 
-        // Check if the current state is the same as the last saved state
-        // If so, avoid saving a duplicate state
+        // Check if the current state is same as last saved state -> avoid saving a duplicate state
         if (!addressBookStateList.get(currentStatePointer).equals(new AddressBook(this))) {
             // Save the current state
             addressBookStateList.add(new AddressBook(this));
@@ -43,22 +41,40 @@ public class VersionedAddressBook extends AddressBook {
         }
     }
 
-
     /**
-     * Restores the previous state from the state list.
+     * Restores the previous state of the address book.
+     * Moves one step back in the history to undo the last change.
      */
     public void undo() {
         if (canUndo()) {
             currentStatePointer--;
-            resetData(addressBookStateList.get(currentStatePointer)); // Restore previous state
+            resetData(addressBookStateList.get(currentStatePointer));
         }
     }
 
     /**
-     * Returns true if undo is possible.
+     * Checks if there is a previous state to undo.
      */
     public boolean canUndo() {
         return currentStatePointer > 0;
+    }
+
+    /**
+     * Restores the next state of the address book.
+     * Moves one step forward in the history to redo the last undone change.
+     */
+    public void redo() {
+        if (canRedo()) {
+            currentStatePointer++;
+            resetData(addressBookStateList.get(currentStatePointer));
+        }
+    }
+
+    /**
+     * Checks if there is a next state to redo.
+     */
+    public boolean canRedo() {
+        return currentStatePointer < addressBookStateList.size() - 1;
     }
 
 }
