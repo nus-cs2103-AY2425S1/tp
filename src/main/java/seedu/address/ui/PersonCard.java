@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
+
 /**
  * An UI component that displays information of a {@code Person}.
  */
@@ -45,6 +46,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane roles;
 
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -57,12 +59,11 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         setTextForTelegramUsername(person);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
         person.getRoles().stream()
                 .sorted(Comparator.comparing(role -> role.getRoleName()))
                 .forEach(role -> roles.getChildren().add(new Label(role.getRoleName())));
+
     }
 
     private void setTextForTelegramUsername(Person person) {

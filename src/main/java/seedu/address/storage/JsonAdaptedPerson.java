@@ -17,7 +17,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TelegramUsername;
 import seedu.address.model.role.Role;
-import seedu.address.model.tag.Tag;
+
+
+
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -31,8 +33,9 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String telegramUsername;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+
     private final List<JsonAdaptedRole> roles = new ArrayList<>();
+
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -40,22 +43,22 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+
             @JsonProperty("telegramUsername") String telegramUsername,
             @JsonProperty("roles") JsonAdaptedRole... roles) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.telegramUsername = telegramUsername;
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
+
         if (roles != null) {
             for (JsonAdaptedRole role : roles) {
                 this.roles.add(role);
             }
         }
+
 
     }
 
@@ -68,12 +71,11 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         telegramUsername = source.getTelegramUsername().telegramUsername;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+
         roles.addAll(source.getRoles().stream()
                 .map(JsonAdaptedRole::new)
                 .collect(Collectors.toList()));
+
     }
 
     /**
@@ -82,15 +84,13 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
+
 
         final List<Role> personRoles = new ArrayList<>();
         for (JsonAdaptedRole role : roles) {
             personRoles.add(role.toModelType());
         }
+
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -126,7 +126,7 @@ class JsonAdaptedPerson {
 
         final TelegramUsername modelTelegramUsername = new TelegramUsername(telegramUsername);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+
         //        Role[] roles = new Role[this.roles.size()];
         //
         //        if (this.roles.size() != 0) {
@@ -140,8 +140,9 @@ class JsonAdaptedPerson {
         //        }
 
         final Set<Role> modelRoles = new HashSet<>(personRoles);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+        return new Person(modelName, modelPhone, modelEmail, modelAddress,
                 modelTelegramUsername, modelRoles);
+
     }
 
 }

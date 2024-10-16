@@ -9,7 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.role.Role;
-import seedu.address.model.tag.Tag;
+
 
 /**
  * Represents a Person in the address book.
@@ -24,7 +24,6 @@ public class Person implements Comparable<Person> {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
 
     private final TelegramUsername telegramUsername;
     private final Set<Role> roles = new HashSet<>();
@@ -32,14 +31,14 @@ public class Person implements Comparable<Person> {
     /**
      * Every field must be present and not null
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+    public Person(Name name, Phone phone, Email email, Address address,
                   TelegramUsername telegramUsername, Set<Role> roles) {
-        requireAllNonNull(name, phone, email, address, tags, telegramUsername, roles);
+        requireAllNonNull(name, phone, email, address, telegramUsername, roles);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
         this.telegramUsername = telegramUsername;
         this.roles.addAll(roles);
     }
@@ -84,13 +83,6 @@ public class Person implements Comparable<Person> {
 
 
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
 
     /**
      * Returns an immutable role set, which throws {@code UnsupportedOperationException}
@@ -118,6 +110,28 @@ public class Person implements Comparable<Person> {
 
 
     /**
+     * Returns true if both persons have the same phone number.
+     */
+    public boolean isSamePhone(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null && otherPerson.getPhone().equals(getPhone());
+    }
+
+    /**
+     * Returns true if both persons have the same email.
+     */
+    public boolean isSameEmail(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null && otherPerson.getEmail().equals(getEmail());
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -137,15 +151,17 @@ public class Person implements Comparable<Person> {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags)
+
                 && telegramUsername.equals(otherPerson.telegramUsername)
                 && roles.equals(otherPerson.roles);
+
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, roles);
+        return Objects.hash(name, phone, email, address, roles);
+
     }
 
     /**
@@ -163,7 +179,6 @@ public class Person implements Comparable<Person> {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
                 .add("roles", roles)
                 .toString();
     }
