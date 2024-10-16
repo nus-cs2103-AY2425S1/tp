@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -17,7 +18,7 @@ public class Customer extends Person {
 
     private final String orderHistory;
     private final String favoriteItems;
-    private final OrderList<CustomerOrder> customerOrders;
+    private List<CustomerOrder> openCustomerOrders; //stores a list of open/unfulfilled customer orders
 
     /**
      * Every field must be present and not null.
@@ -28,19 +29,7 @@ public class Customer extends Person {
         super(name, phone, email, address, preference, remark, tags);
         this.orderHistory = orderHistory;
         this.favoriteItems = favoriteItems;
-        this.customerOrders = new OrderList<>();
-    }
-
-    public void addCustomerOrder(CustomerOrder order) {
-        customerOrders.addOrder(order);
-    }
-
-    public List<CustomerOrder> collateOrders() {
-        return customerOrders.getAllOrders();
-    }
-
-    public int getCustomerOrderCount() {
-        return customerOrders.getOrderCount();
+        this.openCustomerOrders = new ArrayList<>();
     }
 
     public String getOrderHistory() {
