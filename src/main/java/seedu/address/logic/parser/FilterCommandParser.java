@@ -42,9 +42,12 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
     private void validateArguments(ArgumentMultimap argMultimap) throws ParseException {
         if (!argMultimap.getPreamble().isEmpty()
-                || argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_NAME).get().isEmpty()
-                || argMultimap.getValue(PREFIX_MODULE).isPresent() && argMultimap.getValue(PREFIX_MODULE).get().isEmpty()
-                || argMultimap.getValue(PREFIX_COURSE).isPresent() && argMultimap.getValue(PREFIX_COURSE).get().isEmpty()) {
+                || argMultimap.getValue(PREFIX_NAME).isPresent()
+                    && argMultimap.getValue(PREFIX_NAME).get().isEmpty()
+                || argMultimap.getValue(PREFIX_MODULE).isPresent()
+                    && argMultimap.getValue(PREFIX_MODULE).get().isEmpty()
+                || argMultimap.getValue(PREFIX_COURSE).isPresent()
+                    && argMultimap.getValue(PREFIX_COURSE).get().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
     }
