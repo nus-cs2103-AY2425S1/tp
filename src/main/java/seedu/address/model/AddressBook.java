@@ -6,7 +6,9 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Ic;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Subject;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -94,6 +96,49 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Sorts persons in this address book by name, in alphabetical order.
+     */
+    public void sortPersonsByName() {
+        persons.sortPersonsByName();
+    }
+
+    /**
+     * Sorts persons in this address book by class, in alphabetical order.
+     */
+    public void sortPersonsByClass() {
+        persons.sortPersonsByClass();
+    }
+
+    /**
+     * Returns True if this {@code AddressBook} contains Person with given {@code Ic}
+     */
+    public boolean hasPersonWithIc(Ic ic) {
+        return persons.hasPersonWithIc(ic);
+    }
+
+    /**
+     * Returns the {@code Person} in this {@code AddressBook} with the given {@code Ic}
+     */
+    public Person getPersonWithIc(Ic ic) {
+        return persons.getPersonWithIc(ic);
+    }
+
+    /**
+     * Returns true if {@code Person} is already taking this {@code subject}
+     */
+    public boolean personDuplicateClass(Subject subject, Person student) {
+        return student.getSubjects().contains(subject);
+    }
+
+    /**
+     * Adds {@code subject} to {@code person}
+     */
+    public void addSubjectToPerson(Subject subject, Person person) {
+        persons.remove(person);
+        persons.add(person.addSubject(subject));
+    }
+
     //// util methods
 
     @Override
@@ -128,7 +173,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.hashCode();
     }
 
-    public void sortPersonsByName() {
-        persons.sortPersonsByName();
-    }
+
+
 }
