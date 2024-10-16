@@ -30,6 +30,8 @@ public class AppointmentCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label appointmentId;
+    @FXML
     private Label dateTime;
     @FXML
     private Label personName;
@@ -46,6 +48,7 @@ public class AppointmentCard extends UiPart<Region> {
         super(FXML);
         this.appointment = appointment;
         id.setText(displayedIndex + ". ");
+        appointmentId.setText(String.valueOf(appointment.getAppointmentId()));
         appointmentType.setText(appointment.getAppointmentType().value);
         dateTime.setText(appointment.getAppointmentDateTime().toString());
         //TODO: don't talk to strangers
