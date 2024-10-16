@@ -42,11 +42,12 @@ public class Messages {
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
+                .append(person.getAddress());
+
+        appendTelegramUsernameToMsg(person, builder);
         builder.append("; Roles: ");
         person.getRoles().forEach(builder::append);
-        appendTelegramUsernameToMsg(person, builder);
+
         return builder.toString();
     }
 
