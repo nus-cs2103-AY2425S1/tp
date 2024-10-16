@@ -9,7 +9,6 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import careconnect.commons.core.LogsCenter;
 import careconnect.logic.commands.FindCommand;
 import careconnect.model.person.NameOrAddressContainsKeywordPredicate;
 

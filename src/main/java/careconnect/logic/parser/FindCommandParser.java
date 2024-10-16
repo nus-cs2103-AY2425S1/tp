@@ -5,7 +5,6 @@ import java.util.Arrays;
 import careconnect.logic.Messages;
 import careconnect.logic.commands.FindCommand;
 import careconnect.logic.parser.exceptions.ParseException;
-import careconnect.model.person.NameContainsKeywordsPredicate;
 import careconnect.model.person.NameOrAddressContainsKeywordPredicate;
 
 /**

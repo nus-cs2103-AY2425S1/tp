@@ -43,7 +43,8 @@ public class NameOrAddressContainsKeywordPredicate implements Predicate<Person> 
             return false;
         }
 
-        NameOrAddressContainsKeywordPredicate otherNameContainsKeywordsPredicate = (NameOrAddressContainsKeywordPredicate) other;
+        NameOrAddressContainsKeywordPredicate otherNameContainsKeywordsPredicate =
+                (NameOrAddressContainsKeywordPredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 

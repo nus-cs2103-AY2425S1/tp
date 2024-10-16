@@ -297,7 +297,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to add a new beneficiary with the relevant information.
 2.  CareConnect confirms the new beneficiary has been added.
-    
+
     Use case ends.
 
 **Extensions**
