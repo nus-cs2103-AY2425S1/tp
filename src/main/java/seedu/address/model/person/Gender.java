@@ -11,7 +11,12 @@ public class Gender {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Gender should only be 'F' / 'f' (Female) or 'M' / 'm' (Male)";
+
+    /*
+     * The gender must be either 'F', 'f', 'M' or 'm'.
+     */
     public static final String VALIDATION_REGEX = "^[FfMm]$";
+
     public final String value;
 
     /**
