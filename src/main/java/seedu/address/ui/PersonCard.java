@@ -85,6 +85,7 @@ public class PersonCard extends UiPart<Region> {
         // Set up the label for priority
         Label priorityLabel = new Label(person.getPriority().priority);
         priorityLabel.getStyleClass().add("priority-label");
+
         // Remove any existing priority styles
         priority.getStyleClass().removeAll("priority-high-bg", "priority-medium-bg",
                 "priority-low-bg", "priority-none-bg");
@@ -108,6 +109,7 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // Add the label to the FlowPane
+        priorityLabel.setStyle("-fx-text-fill: black;");
         priority.getChildren().add(priorityLabel);
 
     }
