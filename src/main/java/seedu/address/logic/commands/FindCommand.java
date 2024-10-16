@@ -11,7 +11,7 @@ import seedu.address.model.client.PhoneContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
@@ -26,6 +26,10 @@ public class FindCommand extends Command {
     private final PhoneContainsKeywordsPredicate phonePredicate;
     private final EmailContainsKeywordsPredicate emailPredicate;
 
+    /**
+     * Constructs a {@code FindCommand} with the given name, phone and email predicates.
+     * The command will find all clients whose name, phone and email matches the predicates.
+     */
     public FindCommand(NameContainsKeywordsPredicate namePredicate, PhoneContainsKeywordsPredicate phonePredicate,
                        EmailContainsKeywordsPredicate emailPredicate) {
         this.namePredicate = namePredicate;
@@ -36,11 +40,12 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(namePredicate);
+        model.updateFilteredPersonList(namePredicate.or(phonePredicate).or(emailPredicate));
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
+    // TODO: update this equals method
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -53,13 +58,17 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return namePredicate.equals(otherFindCommand.namePredicate);
+        return namePredicate.equals(otherFindCommand.namePredicate)
+                && phonePredicate.equals(otherFindCommand.phonePredicate)
+                && emailPredicate.equals(otherFindCommand.emailPredicate);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", namePredicate)
+                .add("namePredicate", namePredicate)
+                .add("phonePredicate", phonePredicate)
+                .add("emailPredicate", emailPredicate)
                 .toString();
     }
 }

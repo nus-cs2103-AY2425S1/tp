@@ -87,6 +87,11 @@ public class Client {
                 && otherClient.getName().equals(getName());
     }
 
+    /**
+     * Checks if both the email and phone fields of this {@code Client} are empty.
+     *
+     * @return {@code true} if both email and phone fields are empty, {@code false} otherwise
+     */
     public boolean isEmailPhoneEmpty() {
         System.out.println("email: " + this.email.value + " phone: " + this.phone.value);
         return this.email.value == null && this.phone.value == null;

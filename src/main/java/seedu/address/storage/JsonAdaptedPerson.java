@@ -100,7 +100,7 @@ class JsonAdaptedPerson {
             modelPhone = new Phone();
             modelEmail = new Email(email);
             return new Client(modelName, modelPhone, modelEmail, modelTags, modelRentalInformation);
-        } else if (email == null){
+        } else if (email == null) {
             if (!Phone.isValidPhone(phone)) {
                 throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
             }

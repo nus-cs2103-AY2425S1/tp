@@ -15,7 +15,6 @@ import seedu.address.model.rentalinformation.RentalInformation;
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
-
     private final UniquePersonList persons;
 
     /*
@@ -95,6 +94,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Returns true if a rental information with the same details as {@code rentalInformation} exists
+     * for the specified client in the address book.
+     *
+     * @param client The client to check for existence of rental information.
+     * @param rentalInformation The rental information to be compared.
+     */
     public boolean hasRentalInformation(Client client, RentalInformation rentalInformation) {
         requireNonNull(client);
         requireNonNull(rentalInformation);

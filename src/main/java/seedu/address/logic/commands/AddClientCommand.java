@@ -17,7 +17,6 @@ import seedu.address.model.client.Client;
  * Adds a client to the address book.
  */
 public class AddClientCommand extends Command {
-
     public static final String COMMAND_WORD = "cadd";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a client to the address book. "
@@ -32,9 +31,9 @@ public class AddClientCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
-
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This client already exists in the address book";
+
     private final Client toAdd;
 
     /**

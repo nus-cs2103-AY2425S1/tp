@@ -30,7 +30,7 @@ public class AddRentalCommandParser implements Parser<AddRentalCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddRentalCommand
      * and returns an AddRentalCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public AddRentalCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -60,6 +60,15 @@ public class AddRentalCommandParser implements Parser<AddRentalCommand> {
         return new AddRentalCommand(index, rentalInformation);
     }
 
+    /**
+     * Parses the rental information from the given {@code ArgumentMultimap} and creates a
+     * {@code RentalInformation} object.
+     *
+     * @param argMultimap The {@code ArgumentMultimap} containing the rental information values
+     *                    to be parsed.
+     * @return A {@code RentalInformation} object populated with the parsed values.
+     * @throws ParseException If the values are invalid.
+     */
     private RentalInformation parseRentalInformation(ArgumentMultimap argMultimap) throws ParseException {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         RentalDate rentalStartDate = ParserUtil.parseRentalDate(argMultimap.getValue(PREFIX_RENTAL_START_DATE).get());

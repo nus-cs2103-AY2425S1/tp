@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Deposit {
     public static final String MESSAGE_CONSTRAINTS =
             "Deposit should only contain numbers, and in 2 decimal places if needed";
-    public static final String VALIDATION_REGEX = "^\\d+(\\.\\d{2})?$";
+    public static final String VALIDATION_REGEX = "^(0|(?!0)\\d+)(\\.\\d{2})?$";
 
     public final double deposit;
 
