@@ -29,9 +29,7 @@ ClientGrid is an **address book** designed for real estate agents to efficiently
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
-
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `list k/clients` : Lists all clients.
 
    * `addbuyer n/John p/12345678 e/john@gmail.com` : Add a buyer whose name is `John`, phone number is `12345678` and email is `john@gmail.com`.
 
@@ -63,7 +61,7 @@ ClientGrid is an **address book** designed for real estate agents to efficiently
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -112,7 +110,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
-Examples:
+Examples:  
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
@@ -133,6 +131,32 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+
+### Listing address book records: `list`
+
+Shows a list of all existing properties, sellers, buyers, or clients in the address book.
+
+Format: `list k/KEY`
+
+* The `list` command displays records based on the specified `KEY`. 
+* The `KEY` must be one of the following: `properties`, `buyers`, `sellers`, or `clients`.
+  * `buyers`: Lists all buyers in the database.
+  * `sellers`: Lists all sellers in the database.
+  * `clients`: Lists all buyers and sellers (i.e. clients) combined.
+  * `properties`: Lists all properties in the database.
+
+* If an invalid `KEY` is provided, an error message will be displayed.
+
+Key Considerations:
+* Only accepts "properties", "buyers", "sellers", and "clients" (case insensitive) as valid inputs for `k/KEY`.
+* The `KEY` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. The `KEY` also ignores UPPER/lower case. All names will be converted to lower case and checked against the list of valid keys.
+* If the user provides an invalid key, the system will respond with an error message indicating that only the valid keys are accepted.
+
+Examples:
+* `list k/buyers` displays a list of all existing buyers in the address book
+
+  ![result for 'list k/sellers'](images/list.png)
 
 ### Adding a buyer : `addbuyer`
 
@@ -265,7 +289,7 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
+**List**   | `list k/KEY`
 **Help**   | `help`
 **Add Buyer** | `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
 **Add Seller** | `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`
