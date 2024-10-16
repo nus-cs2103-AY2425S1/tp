@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -103,4 +104,23 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTransactionList(Predicate<Transaction> predicate);
+    /**
+     * Specifies if transaction view or person view is used.
+     */
+    void setViewTransactions(boolean newValue);
+
+    /**
+     * Determines if transaction view or person view is used.
+     */
+    boolean getViewTransactions();
+
+    /** Returns an unmodifiable view of the transaction list */
+    ObservableList<Transaction> getTransactionList();
+
+    /**
+     * Updates the transaction list to contain the specified transactions.
+     *
+     * @param transactions The new list.
+     */
+    void updateTransactionList(List<Transaction> transactions);
 }

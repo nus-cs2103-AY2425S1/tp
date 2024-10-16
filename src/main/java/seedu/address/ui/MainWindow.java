@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private TransactionListPanel transactionListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -43,6 +44,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane transactionListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -113,6 +117,8 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        transactionListPanelPlaceholder.setVisible(false);
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -177,6 +183,23 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (logic.isViewTransactions()) {
+                personListPanelPlaceholder.setVisible(false);
+                personListPanelPlaceholder.setManaged(false);
+
+                transactionListPanel = new TransactionListPanel(logic.getTransactionList());
+                transactionListPanelPlaceholder.getChildren().clear();
+                transactionListPanelPlaceholder.getChildren().add(transactionListPanel.getRoot());
+
+                transactionListPanelPlaceholder.setVisible(true);
+                transactionListPanelPlaceholder.setManaged(true);
+            } else {
+                transactionListPanelPlaceholder.setVisible(false);
+                transactionListPanelPlaceholder.setManaged(false);
+                personListPanelPlaceholder.setVisible(true);
+                personListPanelPlaceholder.setManaged(true);
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

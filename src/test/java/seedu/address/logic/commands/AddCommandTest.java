@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -160,12 +161,30 @@ public class AddCommandTest {
         }
 
         @Override
+<<<<<<< HEAD
         public ObservableList<Transaction> getFilteredTransactionList() {
+=======
+        public void updateTransactionList(List<Transaction> transactions) {
+>>>>>>> a50674f2051ad04c1e08bcd7e00732b1089113f3
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
+<<<<<<< HEAD
         public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
+=======
+        public void setViewTransactions(boolean isViewTransaction) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean getViewTransactions() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Transaction> getTransactionList() {
+>>>>>>> a50674f2051ad04c1e08bcd7e00732b1089113f3
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -24,7 +25,9 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final FilteredList<Transaction> filteredTransactions;
+    private FilteredList<Transaction> filteredTransactions;
+    private ObservableList<Transaction> transactions;
+    private boolean isViewTransactions = false;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,6 +42,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         // TODO: Implement transactions list
         filteredTransactions = new FilteredList<>(FXCollections.observableArrayList());
+        transactions = FXCollections.observableList(List.of());
     }
 
     public ModelManager() {
@@ -131,9 +135,10 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+        setViewTransactions(false);
     }
 
-    //=========== Filtered Transaction List Accessors =============================================================
+    //=========== Transaction =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Transaction} backed by the internal list of
@@ -168,4 +173,23 @@ public class ModelManager implements Model {
                 && filteredTransactions.equals(otherModelManager.filteredTransactions);
     }
 
+    @Override
+    public void setViewTransactions(boolean viewTransactions) {
+        this.isViewTransactions = viewTransactions;
+    }
+
+    @Override
+    public boolean getViewTransactions() {
+        return this.isViewTransactions;
+    }
+
+    @Override
+    public ObservableList<Transaction> getTransactionList() {
+        return this.transactions;
+    }
+
+    @Override
+    public void updateTransactionList(List<Transaction> transactions) {
+        this.transactions = FXCollections.observableList(transactions);
+    }
 }
