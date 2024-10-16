@@ -32,7 +32,7 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 
     * `delete 3` : Deletes the 3rd client shown in the current list.
 
-    * `clear` : Deletes all clients.
+    * `clear` : Deletes all client contacts.
 
     * `exit` : Exits the app.
 
