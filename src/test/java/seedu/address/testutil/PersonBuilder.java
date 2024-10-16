@@ -1,15 +1,11 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.model.person.Email;
 import seedu.address.model.person.JobCode;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -20,12 +16,13 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_JOBCODE = "SWE1234";
+    public static final String DEFAULT_TAG = "N";
 
     private Name name;
     private Phone phone;
     private Email email;
     private JobCode jobCode;
-    private Set<Tag> tags;
+    private Tag tag;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -35,7 +32,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         jobCode = new JobCode(DEFAULT_JOBCODE);
-        tags = new HashSet<>();
+        tag = new Tag(DEFAULT_TAG);
     }
 
     /**
@@ -46,7 +43,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         jobCode = personToCopy.getJobCode();
-        tags = new HashSet<>(personToCopy.getTags());
+        tag = personToCopy.getTag();
     }
 
     /**
@@ -58,10 +55,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tag} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withTag(String tag) {
+        this.tag = new Tag(tag);
         return this;
     }
 
@@ -90,7 +87,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, jobCode, tags);
+        return new Person(name, phone, email, jobCode, tag);
     }
 
 }
