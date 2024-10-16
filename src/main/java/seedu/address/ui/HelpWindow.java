@@ -21,7 +21,6 @@ public class HelpWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
     private static final String HELP_COMMAND = getAllCommands();
-
     @FXML
     private Button copyButton;
 
@@ -32,23 +31,32 @@ public class HelpWindow extends UiPart<Stage> {
     private Label helpCommands;
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new HelpWindow. The HelpWindow will be set at
+     * foreground of the MainWindow until closed.
      *
      * @param root Stage to use as the root of the HelpWindow.
      */
-    public HelpWindow(Stage root) {
+    public HelpWindow(Stage root, Stage mainStage) {
         super(FXML, root);
         root.setAlwaysOnTop(true);
 
         helpMessage.setText(HELP_MESSAGE);
         helpCommands.setText(HELP_COMMAND);
+
+        mainStage.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+            if (isNowFocused) {
+                root.setAlwaysOnTop(true);
+            } else {
+                root.setAlwaysOnTop(false);
+            }
+        });
     }
 
     /**
      * Creates a new HelpWindow.
      */
-    public HelpWindow() {
-        this(new Stage());
+    public HelpWindow(Stage mainStage) {
+        this(new Stage(), mainStage);
     }
 
     /**
@@ -96,10 +104,22 @@ public class HelpWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
+    /**
+     * Returns the list of all commands.
+     */
     private static String getAllCommands() {
         return "Here are the list of commands:\n"
                 + "1. add\n"
-                + "2. delete\n";
+                + "2. delete\n"
+                + "3. addtask\n"
+                + "4. deletetask\n"
+                + "5. emergency\n"
+                + "6. priority\n"
+                + "7. list\n"
+                + "8. help\n"
+                + "9. exit\n"
+                + "10. find\n"
+                + "11. clear\n";
     }
 
     /**
