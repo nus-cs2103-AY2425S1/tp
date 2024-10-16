@@ -121,13 +121,29 @@ Examples:
 
 <br><br/>
 
+### Tagging a contact: `tag`
+
+Adds one or more tags to a specific contact in the address book
+
+Format: `tag INDEX t/TAG1 TAG2 ...`
+
+* Tags the contact at the specified `INDEX`. The index refers to the index number shown next to the contact in the contact list. The index **must be a positive integer** 1, 2, 3, ...
+* Tags specified in the command must be alphanumeric, and only one word long.
+* The user can specify multiple tags in the same command by separating the tags with a space.
+
+Examples:
+* `tag 1 t/photographer` adds the tag 'photographer' to the contact at index 1
+* `tag 2 t/baker florist friend` adds the tags 'baker', 'florist' and 'friend' to the contact at index 2
+
+<br><br/>
+
 ### Untagging a contact : `untag`
 
-Untags a specific contact in the address book.
+Removes one or more tags from a specific contact in the address book.
 
 Format: `untag INDEX t/TAG1 TAG2 ...` or `untag INDEX t/all`
 
-* Untags the contact at the specified `INDEX`. The index refers to the index number shown next to a contact's name in the displayed contact list. The index **must be a positive integer** 1, 2, 3, ...
+* Untags the contact at the specified `INDEX`. The index refers to the index number shown next to the contact in the contact list. The index **must be a positive integer** 1, 2, 3, ...
 * If the user only wants to remove specific tags from the contact, at least one tag to remove must be specified.
 * The user can remove multiple tags from a contact by separating them with a space.
 * The user can alternatively remove all tags associated with a contact by using 'untag INDEX t/all'.
