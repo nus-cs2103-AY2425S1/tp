@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's role in the address book.
+ * Represents a Person's role (case-insensitive) in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidRole(String)}
  */
 public class Role {
@@ -32,13 +32,18 @@ public class Role {
     public Role(String role) {
         requireNonNull(role);
         checkArgument(isValidRole(role), MESSAGE_CONSTRAINTS);
-        value = role;
+        value = role.toUpperCase();
     }
 
     /**
      * Returns true if a given string is a valid role.
      */
     public static boolean isValidRole(String test) {
+        // Allow only alphabetical characters and whitespaces
+        if (!test.matches("^[ A-Za-z]+$")) {
+            return false;
+        }
+
         test = test.replace(" ", "_");
         for (Roles role : Roles.values()) {
             if (role.name().equalsIgnoreCase(test)) {
