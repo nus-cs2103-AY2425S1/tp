@@ -95,7 +95,8 @@ class JsonAdaptedPerson {
         final Sex modelSex = new Sex(sex);
 
         if (birthDate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Birthdate.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Birthdate.class.getSimpleName()));
         }
         if (!Birthdate.isValidBirthdate(birthDate)) {
             throw new IllegalValueException(Birthdate.MESSAGE_CONSTRAINTS);

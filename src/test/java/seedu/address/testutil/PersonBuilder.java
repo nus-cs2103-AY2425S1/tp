@@ -3,13 +3,15 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthdate;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.person.Sex;
 
 /**
  * A utility class to help with building Person objects.
@@ -20,12 +22,20 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_NRIC = "S1234567A";
+    public static final String DEFAULT_BIRTHDATE = "1990-01-01";
+    public static final String DEFAULT_SEX = "F";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tag> tags;
+    private Nric nric;
+    private Birthdate birthdate;
+    private Sex sex;
+    private Set<HealthService> healthServices;
+
+    //TODO to add default values for the rest of the fields, and add with___ methods for all fields
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -35,7 +45,10 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        nric = new Nric(DEFAULT_NRIC);
+        birthdate = new Birthdate(DEFAULT_BIRTHDATE);
+        sex = new Sex(DEFAULT_SEX);
+        healthServices = new HashSet<>();
     }
 
     /**
@@ -46,7 +59,10 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+        nric = personToCopy.getNric();
+        birthdate = personToCopy.getBirthdate();
+        sex = personToCopy.getSex();
+        healthServices = new HashSet<>(personToCopy.getHealthServices());
     }
 
     /**
@@ -54,14 +70,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
-     */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -89,8 +97,40 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Nric} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNric(String nric) {
+        this.nric = new Nric(nric);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Birthdate} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withBirthdate(String birthdate) {
+        this.birthdate = new Birthdate(birthdate);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Sex} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSex(String sex) {
+        this.sex = new Sex(sex);
+        return this;
+    }
+
+    /**
+     * Sets the {@code HealthServices} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withHealthServices(Set<HealthService> healthServices) {
+        this.healthServices = healthServices;
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, nric, birthdate, sex, healthServices, phone, email);
     }
 
 }

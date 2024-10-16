@@ -39,6 +39,12 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
+    /**
+     * Parses a {@code String nric} into a {@code Nric}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code nric} is invalid.
+     */
     public static Nric parseNric(String nric) throws ParseException {
         requireNonNull(nric);
         String trimmedNric = nric.trim();
@@ -48,6 +54,12 @@ public class ParserUtil {
         return new Nric(trimmedNric);
     }
 
+    /**
+     * Parses a {@code String sex} into a {@code Sex}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sex} is invalid.
+     */
     public static Sex parseSex(String sex) throws ParseException {
         requireNonNull(sex);
         String trimmedSex = sex.trim();
@@ -57,16 +69,20 @@ public class ParserUtil {
         return new Sex(sex);
     }
 
+    /**
+     * Parses a {@code String birthDate} into a {@code BirthDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code birthDate} is invalid.
+     */
     public static Birthdate parseBirthDate(String birthDate) throws ParseException {
         requireNonNull(birthDate);
-        String trimmedbirthDate = birthDate.trim();
-        if (!Sex.isValidSex(trimmedbirthDate)) {
+        String trimmedBirthDate = birthDate.trim();
+        if (!Sex.isValidSex(trimmedBirthDate)) {
             throw new ParseException(Birthdate.MESSAGE_CONSTRAINTS);
         }
         return new Birthdate(birthDate);
     }
-
-
 
     /**
      * Parses a {@code String name} into a {@code Name}.
@@ -155,15 +171,24 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses a {@code String healthService} into a {@code HealthService}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code healthService} is invalid.
+     */
     public static HealthService parseHealthService(String healthService) throws ParseException {
         requireNonNull(healthService);
         String trimmedHealthService = healthService.trim();
-        if (!Tag.isValidTagName(trimmedHealthService)) {
+        if (!HealthService.isValidHealthserviceName(trimmedHealthService)) {
             throw new ParseException(HealthService.MESSAGE_CONSTRAINTS);
         }
         return new HealthService(trimmedHealthService);
     }
 
+    /**
+     * Parses {@code Collection<String> healthServices} into a {@code Set<HealthService>}.
+     */
     public static Set<HealthService> parseHealthServices(Collection<String> healthServices) throws ParseException {
         requireNonNull(healthServices);
         final Set<HealthService> healthServiceSet = new HashSet<>();
