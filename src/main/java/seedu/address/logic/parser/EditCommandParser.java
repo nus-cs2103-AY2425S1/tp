@@ -38,24 +38,19 @@ public class EditCommandParser implements Parser<EditCommand> {
         String trimmedArgs = args.trim();
         String[] splitArgs = trimmedArgs.split("\\s+");
 
-        if (splitArgs.length < 3) {
+        if (splitArgs.length < 2) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
         String entityType = splitArgs[0];
         String indexString = splitArgs[1];
 
-        System.out.println(entityType == PERSON_ENTITY_STRING);
-
         switch (entityType) {
         case PERSON_ENTITY_STRING:
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                             PREFIX_ADDRESS, PREFIX_TAG);
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        EditPersonCommand.MESSAGE_USAGE));
-            }
+                            
             Index index = ParserUtil.parseIndex(indexString);
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 

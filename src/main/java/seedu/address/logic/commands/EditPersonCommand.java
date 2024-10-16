@@ -98,8 +98,8 @@ public class EditPersonCommand extends EditCommand {
 
     @Override
     protected String formatEntity(Object entity) {
-        assert entity instanceof PersonDescriptor;
-        return Messages.formatPerson((PersonDescriptor) entity);
+        assert entity instanceof Person;
+        return Messages.formatPerson((Person) entity);
     }
 
     @Override
