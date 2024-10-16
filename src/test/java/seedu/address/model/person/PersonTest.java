@@ -11,8 +11,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TUTOR;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -54,6 +57,39 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
+    }
+
+    @Test
+    public void updateModules_validInputs_success() {
+        // adding module
+        Person person = new PersonBuilder().build();
+        Module validModule = new Module(CommandTestUtil.VALID_MODULE_AMY);
+        ArrayList<Module> updatedModules = new ArrayList<>();
+        updatedModules.add(validModule);
+        Person personWithModule = person.addModule(validModule);
+        assertEquals(personWithModule,
+                new Person(person.getStudentId(),
+                        person.getName(),
+                        person.getPhone(),
+                        person.getEmail(),
+                        person.getAddress(),
+                        person.getCourse(),
+                        person.getTag(),
+                        updatedModules));
+
+        // adding grade
+        Grade validGrade = new Grade(CommandTestUtil.VALID_GRADE_AMY);
+        updatedModules.get(0).setGrade(validGrade);
+        Person personWithModuleAndGrade = personWithModule.setModuleGrade(validModule, validGrade);
+        assertEquals(personWithModuleAndGrade,
+                new Person(person.getStudentId(),
+                        person.getName(),
+                        person.getPhone(),
+                        person.getEmail(),
+                        person.getAddress(),
+                        person.getCourse(),
+                        person.getTag(),
+                        updatedModules));
     }
 
     @Test
@@ -100,7 +136,7 @@ public class PersonTest {
         String expected = Person.class.getCanonicalName() + "{studentId=" + ALICE.getStudentId() + ", name="
                 + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", course=" + ALICE.getCourse()
-                + ", tag=" + ALICE.getTag() + "}";
+                + ", tag=" + ALICE.getTag() + ", modules=" + ALICE.getModules() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

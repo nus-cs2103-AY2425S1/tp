@@ -8,7 +8,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -31,6 +31,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label studentId;
+    @FXML
     private Label phone;
     @FXML
     private Label address;
@@ -49,6 +51,7 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        studentId.setText("StudentID: " + person.getStudentId().value);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
@@ -58,7 +61,7 @@ public class PersonCard extends UiPart<Region> {
         singleTagFlowPane.getChildren().add(tagLabel);
         tags.getChildren().add(singleTagFlowPane);
 
-        String modulesAsString = person.getModuleGrades().stream()
+        String modulesAsString = person.getModules().stream()
                 .map(m -> m.toString() + "\n")
                 .reduce("", (x, y) -> x + y);
 
