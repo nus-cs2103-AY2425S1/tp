@@ -103,16 +103,16 @@ add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold
 ```
 
 #### Parameters {#add-command-parameters}
-| Parameter | Expected Format                                  | Explanation                                                                                    |
-|-----------|--------------------------------------------------|------------------------------------------------------------------------------------------------|
-| NAME      | Alphanumeric, capitalized                        | Names are in block letters for clarity and consistency.                                        |
-| PHONE     | 8-digit number, starts with 8 or 9               | Ensures the contact number is valid in Singapore.                                              |
-| EMAIL     | Must include "@" and domain, case insensitive    | Verifies that the email address is in a standard format.                                       |
-| ADDRESS   | Any text, case insensitive                       | Accepts all addresses without case sensitivity. Addresses can have numbers and symbol alike /. |
-| JOB       | Any text, case insensitive                       | Accepts all job titles without case sensitivity.                                               |
-| INCOME    | Non-negative integers                            | Only positive numbers or zero are valid for income fields.                                     |
-| TIER      | [optional] String (gold, silver, bronze, reject) | Defines the specific credit card tier to be assigned or updated.                               |
-| REMARK    | [optional] Any string                            | Notes are case-insensitive and can include any textual information.                            |
+| Parameter | Expected Format                                  | Explanation                                                                                                       |
+|-----------|--------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| NAME      | Alphanumeric, case insensitive                   | Accepts all names without case sensitivity. Names will be displayed in block letters for clarity and consistency. |
+| PHONE     | 8-digit number, starts with 8 or 9               | Ensures the contact number is valid in Singapore.                                                                 |
+| EMAIL     | Must include "@" and domain, case insensitive    | Verifies that the email address is in a standard format.                                                          |
+| ADDRESS   | Any text, case insensitive                       | Accepts all addresses without case sensitivity. Addresses can have numbers and symbol alike /.                    |
+| JOB       | Any text, case insensitive                       | Accepts all job titles without case sensitivity.                                                                  |
+| INCOME    | Non-negative integers                            | Only positive numbers or zero are valid for income fields.                                                        |
+| TIER      | [optional] String (gold, silver, bronze, reject) | Defines the specific credit card tier to be assigned or updated.                                                  |
+| REMARK    | [optional] Any string                            | Notes are case-insensitive and can include any textual information.                                               |
 
 #### What to Expect
 - **If Successful:** You'll see a message: "New person added: `<NAME>`; Phone: `<PHONE>`; Email: `<EMAIL>`; Address: `<ADDRESS>`; Job: `<JOB>`;  Income: `<INCOME>`; Tier: `<TIER>`; Remark: `<REMARK>`". It's noted that if "Tier" and "Remark" are not added, they will be defined as "N/A."
