@@ -204,7 +204,14 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
   
   >Shows a list of all persons in the address book.
   >
-  >Format: `list`
+  >Format: `list all`
+  >* Lists all perons regardless of if they are employees or potential hires
+  >
+  >Format `list e`
+  >*List all employees
+  >
+  >Format `list ph`
+  >*List all potential hires
 </details>
 
 <br>
@@ -220,9 +227,13 @@ Action     | Format                                                             
 **Delete** | `delete e INDEX` <br> `delete ph INDEX`                                               | `delete e 3`<br> `delete ph 1`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`                | `edit 2 n/James Lee e/jameslee@example.com`
 **Employee**| `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE​` | `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/01-01-2021`
+**Exit**   | `exit`                                                                                        | 
+**Find**   | `find /all [KEYWORDS]` <br> `find /e [KEYWORDS]` <br> `find /ph [KEYWORDS]`                   | `find /all Jake` <br> `find /e Jake` <br> `find /ph Jake`
+**List**   | `list all` <br> `list e` <br> `list ph`                                                                                       |  
+**Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​`                      | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
 **Exit**   | `exit`                                                                                | 
 **Find**   | `find /all [KEYWORDS]` <br> `find /e [KEYWORDS]` <br> `find /ph [KEYWORDS]`           | `find /all Jake` <br> `find /e Jake` <br> `find /ph Jake`
-**List**   | `list`                                                                                | 
+**List**   | `list all` <br> `list e` <br> `list ph`                                                                                | 
 **Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​`              | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
 
 --------------------------------------------------------------------------------------------------------------------
