@@ -124,6 +124,11 @@ public class Member {
         this.totalPoints = totalPoints.add(points);
     }
 
+    /**
+     *  Subtracts the given points from the member's total points.
+     *
+     *  @param points Points to be subtracted from the member.
+     */
     public void subtractPoints(Point points) {
         requireNonNull(points);
         this.totalPoints = totalPoints.subtract(points);
@@ -137,7 +142,7 @@ public class Member {
     public void addSession(Session session) {
         requireNonNull(session);
         this.sessions.add(session);
-        addPoints(totalPoints);
+        addPoints(session.getPoints());
     }
 
     /**
@@ -148,7 +153,7 @@ public class Member {
     public void removeSession(Session session) {
         requireNonNull(session);
         this.sessions.remove(session);
-        subtractPoints(totalPoints);
+        subtractPoints(session.getPoints());
     }
 
     /**

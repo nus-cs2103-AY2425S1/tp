@@ -65,7 +65,7 @@ public class PointTest {
         Point point = new Point(10);
 
         // Check if the toString returns the expected value
-        assertTrue(point.toString().equals("10")); // Ensure toString returns correct value
+        assertTrue(point.toString().equals("10 points")); // Ensure toString returns correct value
     }
 
     @Test
