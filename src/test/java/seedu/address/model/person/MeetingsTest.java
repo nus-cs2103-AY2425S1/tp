@@ -16,7 +16,8 @@ public class MeetingsTest {
     private LocalDateTime startTime = LocalDateTime.parse("30-07-2024 11:00", formatter);
     private LocalDateTime endTime = LocalDateTime.parse("30-07-2024 12:00", formatter);
     private String location = "A Valid Location";
-    private Meeting defaultMeeting = new Meeting(startTime, endTime, location);
+    private Name name = new Name("A Valid Name");
+    private Meeting defaultMeeting = new Meeting(name, startTime, endTime, location);
 
     @Test
     public void isClash() {
@@ -65,7 +66,9 @@ public class MeetingsTest {
         LocalDateTime otherStartTime = LocalDateTime.parse("30-01-2024 11:00", formatter);
         LocalDateTime otherEndTime = LocalDateTime.parse("30-12-2024 12:00", formatter);
         String otherLocation = "Other Valid Location";
-        Meeting otherMeeting = new Meeting(otherStartTime, otherEndTime, otherLocation);
+        Name otherName = new Name("Other Valid Name");
+
+        Meeting otherMeeting = new Meeting(otherName, otherStartTime, otherEndTime, otherLocation);
         Meetings differentMeetings = new Meetings();
         differentMeetings.addMeeting(otherMeeting);
 
