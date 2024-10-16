@@ -3,14 +3,14 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.DESIREDROLE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESIREDROLE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.DESIRED_ROLE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DESIRED_ROLE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EXPERIENCE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EXPERIENCE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESIREDROLE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESIRED_ROLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EXPERIENCE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -34,7 +34,7 @@ import static seedu.address.logic.commands.CommandTestUtil.STATUS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESIREDROLE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESIRED_ROLE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -80,14 +80,14 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-            + ADDRESS_DESC_BOB + DESIREDROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB
+            + ADDRESS_DESC_BOB + DESIRED_ROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB
             + STATUS_DESC_BOB + NOTE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
             .build();
         assertParseSuccess(parser,
-            NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DESIREDROLE_DESC_BOB
+            NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DESIRED_ROLE_DESC_BOB
                 + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
             new AddCommand(expectedPersonMultipleTags));
@@ -96,7 +96,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-            + ADDRESS_DESC_BOB + DESIREDROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB
+            + ADDRESS_DESC_BOB + DESIRED_ROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB
             + STATUS_DESC_BOB + NOTE_DESC_BOB + TAG_DESC_FRIEND;
 
         // multiple names
@@ -116,7 +116,7 @@ public class AddCommandParserTest {
             Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
         // multiple desired roles
-        assertParseFailure(parser, DESIREDROLE_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, DESIRED_ROLE_DESC_AMY + validExpectedPersonString,
             Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DESIREDROLE));
 
         // multiple skills
@@ -141,7 +141,7 @@ public class AddCommandParserTest {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + DESIREDROLE_DESC_AMY + SKILLS_DESC_AMY + EXPERIENCE_DESC_AMY + STATUS_DESC_AMY
+                + DESIRED_ROLE_DESC_AMY + SKILLS_DESC_AMY + EXPERIENCE_DESC_AMY + STATUS_DESC_AMY
                 + NOTE_DESC_AMY,
             new AddCommand(expectedPerson));
     }
@@ -152,27 +152,27 @@ public class AddCommandParserTest {
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + DESIREDROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB,
+                + DESIRED_ROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB,
             expectedMessage);
 
         // missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + DESIREDROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB,
+                + DESIRED_ROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB,
             expectedMessage);
 
         // missing email prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
-                + DESIREDROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB,
+                + DESIRED_ROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB,
             expectedMessage);
 
         // missing address prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
-                + DESIREDROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB,
+                + DESIRED_ROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB,
             expectedMessage);
 
         // missing desired role prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + VALID_DESIREDROLE_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB,
+                + VALID_DESIRED_ROLE_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB,
             expectedMessage);
     }
 
@@ -180,62 +180,62 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-            + DESIREDROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB
+            + DESIRED_ROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB
             + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-            + DESIREDROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB
+            + DESIRED_ROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB
             + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-            + DESIREDROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB
+            + DESIRED_ROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB
             + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-            + DESIREDROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB
+            + DESIRED_ROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB
             + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
 
         // invalid desired role
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-            + INVALID_DESIREDROLE_DESC + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB
+            + INVALID_DESIRED_ROLE_DESC + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB
             + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, DesiredRole.MESSAGE_CONSTRAINTS);
 
         // invalid skills
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-            + DESIREDROLE_DESC_BOB + INVALID_SKILLS_DESC + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB
+            + DESIRED_ROLE_DESC_BOB + INVALID_SKILLS_DESC + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB
             + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Skills.MESSAGE_CONSTRAINTS);
 
         // invalid experience
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-            + DESIREDROLE_DESC_BOB + SKILLS_DESC_BOB + INVALID_EXPERIENCE_DESC + STATUS_DESC_BOB + NOTE_DESC_BOB
+            + DESIRED_ROLE_DESC_BOB + SKILLS_DESC_BOB + INVALID_EXPERIENCE_DESC + STATUS_DESC_BOB + NOTE_DESC_BOB
             + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Experience.MESSAGE_CONSTRAINTS);
 
         // invalid status
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-            + DESIREDROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + INVALID_STATUS_DESC + NOTE_DESC_BOB
+            + DESIRED_ROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + INVALID_STATUS_DESC + NOTE_DESC_BOB
             + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Status.MESSAGE_CONSTRAINTS);
 
         // invalid note
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-            + DESIREDROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + INVALID_NOTE_DESC
+            + DESIRED_ROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + INVALID_NOTE_DESC
             + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Note.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-            + DESIREDROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB
+            + DESIRED_ROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB
             + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + DESIREDROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB,
+                + DESIRED_ROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB + NOTE_DESC_BOB,
             Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + DESIREDROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB
+                + ADDRESS_DESC_BOB + DESIRED_ROLE_DESC_BOB + SKILLS_DESC_BOB + EXPERIENCE_DESC_BOB + STATUS_DESC_BOB
                 + NOTE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }

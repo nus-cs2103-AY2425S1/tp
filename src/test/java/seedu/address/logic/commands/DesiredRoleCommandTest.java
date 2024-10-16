@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESIREDROLE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESIREDROLE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESIRED_ROLE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESIRED_ROLE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -57,7 +57,7 @@ public class DesiredRoleCommandTest {
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DesiredRoleCommand desiredRoleCommand = new DesiredRoleCommand(outOfBoundIndex,
-            new DesiredRole(VALID_DESIREDROLE_BOB));
+            new DesiredRole(VALID_DESIRED_ROLE_BOB));
 
         // Adjust the expected message to include the period at the end
         assertCommandFailure(desiredRoleCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -75,7 +75,7 @@ public class DesiredRoleCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
         DesiredRoleCommand desiredRoleCommand = new DesiredRoleCommand(outOfBoundIndex,
-            new DesiredRole(VALID_DESIREDROLE_BOB));
+            new DesiredRole(VALID_DESIRED_ROLE_BOB));
 
         // Adjust the expected message to include the period at the end
         assertCommandFailure(desiredRoleCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -84,11 +84,11 @@ public class DesiredRoleCommandTest {
     @Test
     public void equals() {
         final DesiredRoleCommand standardCommand = new DesiredRoleCommand(INDEX_FIRST_PERSON,
-            new DesiredRole(VALID_DESIREDROLE_AMY));
+            new DesiredRole(VALID_DESIRED_ROLE_AMY));
 
         // same values -> returns true
         DesiredRoleCommand commandWithSameValues = new DesiredRoleCommand(INDEX_FIRST_PERSON,
-            new DesiredRole(VALID_DESIREDROLE_AMY));
+            new DesiredRole(VALID_DESIRED_ROLE_AMY));
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -102,10 +102,10 @@ public class DesiredRoleCommandTest {
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new DesiredRoleCommand(INDEX_SECOND_PERSON,
-            new DesiredRole(VALID_DESIREDROLE_AMY))));
+            new DesiredRole(VALID_DESIRED_ROLE_AMY))));
 
         // different desired role -> returns false
         assertFalse(standardCommand.equals(new DesiredRoleCommand(INDEX_FIRST_PERSON,
-            new DesiredRole(VALID_DESIREDROLE_BOB))));
+            new DesiredRole(VALID_DESIRED_ROLE_BOB))));
     }
 }
