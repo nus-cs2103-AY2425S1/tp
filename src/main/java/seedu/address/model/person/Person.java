@@ -43,7 +43,7 @@ public class Person {
             this.subjects.addAll(subjects);
         }
         this.level = level;
-        this.taskList = tasklist;
+        this.taskList = tasklist.copy();
     }
 
     public Name getName() {

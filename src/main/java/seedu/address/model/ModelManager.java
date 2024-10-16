@@ -13,7 +13,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.task.Task;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -119,14 +118,6 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person updatedPerson) {
         requireAllNonNull(target, updatedPerson);
         addressBook.setPerson(target, updatedPerson);
-    }
-
-    @Override
-    public void addTask(Name validName, Task validTask) {
-        requireNonNull(validName);
-        requireNonNull(validTask);
-        Person person = getPersonByName(validName);
-        person.getTaskList().add(validTask);
     }
 
     //=========== Filtered Person List Accessors =============================================================

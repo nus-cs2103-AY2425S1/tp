@@ -38,24 +38,27 @@ public class AddTaskCommandTest {
     }
 
     @Test
-    public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_taskAcceptedByModel_addSuccessful() {
         // Get an existing person from the typical address book
-        Person person = model.getAddressBook().getPersonList().get(0);
+        Person person = new PersonBuilder(model.getAddressBook().getPersonList().get(0)).build(); // Deep copy
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         Model copiedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
         Task validTask = new TaskBuilder().build();
         Name validName = person.getName();
 
-        PersonBuilder copiedPerson = new PersonBuilder(person);
-        Person updatedPerson = copiedPerson.build();
-        updatedPerson.getTaskList().add(validTask);
+        // Create a copy of the person and add the task
+        Person updatedPerson = new PersonBuilder(person).build(); // Create a deep copy
+        updatedPerson.getTaskList().add(validTask); // Modify the deep copy
 
+        // Update the person in expectedModel
         expectedModel.setPerson(person, updatedPerson);
 
         AddTaskCommand addTaskCommand = new AddTaskCommand(validName, validTask);
         String expectedMessage = String.format(AddTaskCommand.MESSAGE_SUCCESS,
                 validTask.getTaskDescription(), validName, validTask.getTaskDeadline());
 
+        // Ensure that the original person in copiedModel is not modified
         assertCommandSuccess(addTaskCommand, copiedModel, expectedMessage, expectedModel);
     }
 

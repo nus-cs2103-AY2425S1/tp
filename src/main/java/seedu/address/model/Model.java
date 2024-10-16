@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.task.Task;
 
 /**
  * The API of the Model component.
@@ -92,12 +91,4 @@ public interface Model {
      * If no such person exists, returns null.
      */
     Person getPersonByName(Name name);
-
-    /**
-     * Adds a task to the specified person in the address book.
-     *
-     * @param validName the name of an existing person.
-     * @param validTask the task to be added for the person.
-     */
-    void addTask(Name validName, Task validTask);
 }
