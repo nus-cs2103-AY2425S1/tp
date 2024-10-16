@@ -25,6 +25,12 @@ public class FindClientTypeCommandParser implements Parser<FindClientTypeCommand
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindClientTypeCommand.MESSAGE_USAGE));
         }
 
+        // Check for special characters - only allow alphanumeric and whitespace
+        if (!trimmedArgs.matches("^[a-zA-Z0-9\\s]+$")) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindClientTypeCommand.MESSAGE_USAGE));
+        }
+
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
         return new FindClientTypeCommand(new ClientTypeContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
