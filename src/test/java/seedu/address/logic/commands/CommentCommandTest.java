@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommentCommand.MESSAGE_ARGUMENTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -16,10 +15,13 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Comment;
 
+/**
+ * Tests CommentCommand class.
+ */
 public class CommentCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    public static final Comment VALID_COMMENT_AMY = new Comment("Like skiing");
     public static final Comment VALID_COMMENT_BOB = new Comment("Favourite pastime is Eating");
+    public static final Comment VALID_COMMENT_AMY = new Comment("Like skiing");
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute() {

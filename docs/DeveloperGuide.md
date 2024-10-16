@@ -284,7 +284,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * works independently and does not share her computer physically with others
 * occasionally need to share customer profile databases with other customer service representatives
 
-**Value proposition**: 
+**Value proposition**:
 
 ServiceTrack offers users **convenient features** through CLI-first optimization, sorting, and classification, enhancing operational efficiency. Additionally, it enables personalized customer interactions by providing **quick access to information** such as customer profiles, details, and remarks, thereby resolving inquiries more effectively and improving the customer satisfaction rate in food delivery customer service.
 
