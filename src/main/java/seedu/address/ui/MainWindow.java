@@ -37,7 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private EventListPanel eventListPanel;
-    private EventDetailPanel eventDetailPanel;
+    private EventDetailView eventDetailView;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private PersonDetailView personDetailView;
@@ -140,10 +140,10 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this::handleSelectedPerson);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        eventDetailPanel = new EventDetailPanel();
-        eventListPanel = new EventListPanel(logic.getFilteredEventList(), eventDetailPanel);
+        eventDetailView = new EventDetailView();
+        eventListPanel = new EventListPanel(logic.getFilteredEventList(), eventDetailView);
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
-        eventDetailViewPlaceholder.getChildren().add(eventDetailPanel.getRoot());
+        eventDetailViewPlaceholder.getChildren().add(eventDetailView.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -162,7 +162,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // Displays the first event in the list if exists onto the EventDetailView
         if (!logic.getFilteredEventList().isEmpty()) {
-            eventDetailPanel.setEvent(logic.getFilteredEventList().get(0));
+            eventDetailView.setEvent(logic.getFilteredEventList().get(0));
         } else {
             eventDetailViewPlaceholder.getChildren().clear(); // Display an empty screen if no events
         }

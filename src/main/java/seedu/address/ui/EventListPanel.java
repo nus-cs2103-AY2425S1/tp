@@ -20,18 +20,18 @@ public class EventListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Event> eventListView;
-    private EventDetailPanel eventDetailPanel;
+    private EventDetailView eventDetailView;
 
     /**
      * Creates a {@code EventListPanel} with the given {@code ObservableList}.
      */
-    public EventListPanel(ObservableList<Event> eventList, EventDetailPanel eventDetailPanel) {
+    public EventListPanel(ObservableList<Event> eventList, EventDetailView eventDetailView) {
         super(FXML);
         eventListView.setItems(eventList);
         eventListView.setCellFactory(listView -> new EventListViewCell());
         eventListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                eventDetailPanel.setEvent(newValue);
+                eventDetailView.setEvent(newValue);
             }
         });
     }

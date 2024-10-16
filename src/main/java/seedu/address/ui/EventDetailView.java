@@ -12,8 +12,8 @@ import seedu.address.model.event.Event;
  * A UI component that displays detailed information about an {@code Event}.
  * This panel updates dynamically when a new {@code Event} is provided.
  */
-public class EventDetailPanel extends UiPart<Region> {
-    private static final String FXML = "EventDetailPanel.fxml";
+public class EventDetailView extends UiPart<Region> {
+    private static final String FXML = "EventDetailView.fxml";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d, yyyy");
 
     @FXML
@@ -25,7 +25,7 @@ public class EventDetailPanel extends UiPart<Region> {
     @FXML
     private VBox attendees;
 
-    public EventDetailPanel() {
+    public EventDetailView() {
         super(FXML);
     }
 
