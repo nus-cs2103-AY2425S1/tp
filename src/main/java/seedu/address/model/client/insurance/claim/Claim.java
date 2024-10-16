@@ -99,8 +99,8 @@ public class Claim {
      * This method overrides the default `toString` method to provide a formatted string
      * that indicates the status of the claim (open or closed), along with the claim ID
      * and the claim amount. The returned string format is as follows:
-     * - If the claim is open: "[open] <claimId> $<claimAmount>"
-     * - If the claim is closed: "[closed] <claimId> $<claimAmount>"
+     * - If the claim is open: "[open] {@code claimId} {@code claimAmount}"
+     * - If the claim is closed: "[closed] {@code claimId} {@code claimAmount"
      *
      * @return A string representation of the claim, including its status, ID, and amount.
      */

@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
@@ -27,9 +26,18 @@ public class ListClaimsCommand extends Command {
 
     private final Index index;
 
-
+    /**
+     * Constructs a {@code ListClaimsCommand} with the specified index.
+     *
+     * This constructor initializes a new instance of {@code ListClaimsCommand} using the provided
+     * index, which specifies the position of the claims to be listed. It ensures that the index
+     * is not null by calling {@link #requireNonNull(Object...)}.
+     *
+     * @param index The index specifying which claims to list. Must not be null.
+     * @throws NullPointerException if the provided {@code index} is null.
+     */
     public ListClaimsCommand(Index index) {
-        requireAllNonNull(index);
+        requireNonNull(index);
         this.index = index;
     }
 
