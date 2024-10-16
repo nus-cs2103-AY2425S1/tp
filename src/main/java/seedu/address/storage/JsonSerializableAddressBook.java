@@ -1,11 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -46,8 +42,8 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
-        groups.addAll(source.getGroupsAsJson());
+        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).toList());
+        groups.addAll(source.getGroupList().toJson());
     }
 
     /**
@@ -58,7 +54,11 @@ class JsonSerializableAddressBook {
         AddressBook addressBook = new AddressBook();
         for (JsonAdaptedGroup jsonAdaptedGroup : groups) {
             Group group = jsonAdaptedGroup.toModelType();
-            addressBook.addGroup(group);
+            try {
+                addressBook.addGroup(group);
+            } catch (DuplicateGroupException e) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_GROUP);
+            }
         }
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();

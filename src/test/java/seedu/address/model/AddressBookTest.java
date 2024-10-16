@@ -21,7 +21,6 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.GroupList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.storage.JsonAdaptedGroup;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -108,8 +107,8 @@ public class AddressBookTest {
         }
 
         @Override
-        public List<JsonAdaptedGroup> getGroupsAsJson() {
-            return groups.toJson();
+        public GroupList getGroupList() {
+            return groups;
         }
     }
 

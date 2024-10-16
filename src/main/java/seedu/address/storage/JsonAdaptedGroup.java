@@ -43,8 +43,7 @@ public class JsonAdaptedGroup {
     }
 
     /**
-     * Converts this object into an incomplete {@code Group} object. The members are not initialised in this
-     * {@code Group} object.
+     * Returns a {@code Group} object from this object, with the given {@code Person}s as members.
      * @throws IllegalValueException If the group name or any of the persons' fields are missing/invalid.
      */
     public Group toModelType() throws IllegalValueException {

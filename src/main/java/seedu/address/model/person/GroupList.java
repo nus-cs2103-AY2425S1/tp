@@ -75,6 +75,14 @@ public class GroupList {
         return groups.stream().map(JsonAdaptedGroup::new).toList();
     }
 
+    /**
+     * Clears the {@code GroupList} and sets its contents to that of {@code toCopy}.
+     */
+    public void set(GroupList toCopy) {
+        groups.clear();
+        groups.addAll(toCopy.groups);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this) {
