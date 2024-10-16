@@ -60,11 +60,9 @@ public class TagCommand extends Command {
 
         Person personToTag = lastShownList.get(targetIndex.getZeroBased());
 
-        /*
         if (!model.hasTag(tag)) {
             throw new CommandException(MESSAGE_TAG_NOT_CREATED);
         }
-        */
 
         if (personToTag.getTags().contains(tag)) {
             throw new CommandException(MESSAGE_DUPLICATE_TAG);
