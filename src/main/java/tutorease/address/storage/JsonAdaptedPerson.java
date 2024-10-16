@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import tutorease.address.commons.exceptions.IllegalValueException;
-import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.person.Address;
 import tutorease.address.model.person.Email;
 import tutorease.address.model.person.Guardian;
