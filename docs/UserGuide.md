@@ -27,10 +27,18 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
+   * `list-doctor` : Lists all doctors.
+   
+   * `list-patient` : Lists all patients.
+
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `add-doctor n/Dr. John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 s/Orthopedics` : Adds a doctor named Dr. John Doe to the Address Book.
+   
+   * `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 d/23-04-1987 g/M` : Adds a patient named John Doe to the Address Book.
 
+   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
