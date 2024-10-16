@@ -60,7 +60,7 @@ public class GoodsReceipt {
      */
     public boolean isFromSupplier(Name supplier) {
         requireNonNull(supplier);
-        return supplierName == supplier;
+        return supplierName.equals(supplier);
     }
 
     /**
@@ -68,6 +68,14 @@ public class GoodsReceipt {
      */
     public int getQuantity() {
         return this.quantity;
+    }
+
+
+    /**
+     * Returns goods.
+     */
+    public Goods getGoods() {
+        return this.goods;
     }
 
     /**

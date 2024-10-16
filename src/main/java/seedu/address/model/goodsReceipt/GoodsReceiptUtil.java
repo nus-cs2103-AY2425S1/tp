@@ -3,6 +3,7 @@ package seedu.address.model.goodsReceipt;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import seedu.address.model.goods.Goods;
 import seedu.address.model.person.Name;
 
 /**
@@ -15,12 +16,8 @@ public class GoodsReceiptUtil {
      * @param supplier A valid supplier name.
      * @param goodsReceipt A list of goodsReceipts.
      */
-    public static List<Name> filterGoodsBySuppliers(Name supplier, List<GoodsReceipt> goodsReceipt) {
-        return goodsReceipt.stream()
-                .filter(g -> g.isFromSupplier(supplier))
-                .map(x-> new Name(x.toString()))
-                .collect(Collectors.toSet())
-                .stream().toList();
+    public static List<GoodsReceipt> filterGoodsReceiptsBySuppliers(Name supplier, List<GoodsReceipt> goodsReceipt) {
+        return goodsReceipt.stream().filter(g -> g.isFromSupplier(supplier)).toList();
     }
 
     /**
@@ -37,7 +34,7 @@ public class GoodsReceiptUtil {
     }
 
     /**
-     * Return the sum of price totals from a list of goods.
+     * Return the sum of price totals from a list of goodsReceipts.
      *
      * @param goodsReceipt A list of goodsReceipts.
      */
