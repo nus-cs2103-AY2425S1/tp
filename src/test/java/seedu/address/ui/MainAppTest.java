@@ -19,6 +19,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class MainAppTest extends ApplicationTest {
 
+
     @BeforeAll
     public static void setup() throws Exception {
         // Use FxToolkit to launch the JavaFX Application correctly
