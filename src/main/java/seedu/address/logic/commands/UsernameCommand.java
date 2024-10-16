@@ -16,12 +16,21 @@ public class UsernameCommand extends Command {
     private final Game targetGame;
     private final Username username;
 
+    /**
+     * creates a username command with all fields set to null.
+     */
     public UsernameCommand() {
         this.index = null;
         this.targetGame = null;
         this.username = null;
     }
 
+    /**
+     * Creates a username command with the fields specified.
+     * @param index the index of the person listed in the address book
+     * @param game the game to associate the username with
+     * @param username the username to be added
+     */
     public UsernameCommand(Index index, Game game, Username username) {
         this.index = index;
         this.targetGame = game;
