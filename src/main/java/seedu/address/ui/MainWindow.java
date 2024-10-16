@@ -200,7 +200,7 @@ public class MainWindow extends UiPart<Stage> {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Confirmation");
         dialog.setHeaderText(null);
-        dialog.setContentText(message + " (y/n)");
+        dialog.setContentText(message + "\n( \"y\" to confirm or any other key to cancel)");
 
         Optional<String> result = dialog.showAndWait();
         return result.isPresent() && result.get().trim().equalsIgnoreCase("y");
