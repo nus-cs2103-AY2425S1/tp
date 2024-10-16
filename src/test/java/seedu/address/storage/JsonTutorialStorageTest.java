@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.model.tut.Tut;
+import seedu.address.model.tut.TutName;
 
 public class JsonTutorialStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonTutorialStorageTest");
@@ -49,7 +50,7 @@ public class JsonTutorialStorageTest {
         JsonTutorialStorage jsonTutorialStorage = new JsonTutorialStorage(filePath);
 
         // Step 1: Create a tutorial sample
-        Tut tutSample = new Tut(TUT_NAME, TUTORIAL_CLASS);
+        Tut tutSample = new Tut(new TutName(TUT_NAME), TUTORIAL_CLASS);
         List<Tut> originalTutorials = List.of(tutSample);
 
         // Step 2: Save the tutorial sample to the file

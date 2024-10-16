@@ -30,6 +30,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
+import seedu.address.model.tut.TutName;
 
 public class AddTutCommandTest {
 
@@ -63,7 +64,7 @@ public class AddTutCommandTest {
     @Test
     public void equals() {
         Tut tutSample1 = TUT_SAMPLE;
-        Tut tutSample2 = new Tut("CS2040S", new TutorialClass("1001")); // Different tutorial
+        Tut tutSample2 = new Tut(new TutName("CS2040S"), new TutorialClass("1001")); // Different tutorial
 
         AddTutCommand addTutSample1Command = new AddTutCommand(tutSample1);
         AddTutCommand addTutSample2Command = new AddTutCommand(tutSample2);

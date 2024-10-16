@@ -12,6 +12,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
 import seedu.address.model.tut.TutDate;
+import seedu.address.model.tut.TutName;
 
 /**
  * Jackson-friendly version of {@link Tut}.
@@ -20,7 +21,7 @@ public class JsonAdaptedTut {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Tutorial's %s field is missing!";
 
     private final String tutName;
-    private final TutorialClass tutorialClassName;
+    private final String tutorialClass;
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
     private final List<JsonAdaptedTutDate> tutDates = new ArrayList<>();
 
@@ -30,11 +31,11 @@ public class JsonAdaptedTut {
     @JsonCreator
     public JsonAdaptedTut(
             @JsonProperty("tutName") String tutName,
-            @JsonProperty("tutorialClassName") TutorialClass tutorialClassName,
+            @JsonProperty("tutorialClassName") String tutorialClass,
             @JsonProperty("students") List<JsonAdaptedStudent> students,
             @JsonProperty("tutDates") List<JsonAdaptedTutDate> tutDates) {
         this.tutName = tutName;
-        this.tutorialClassName = tutorialClassName;
+        this.tutorialClass = tutorialClass;
         if (students != null) {
             this.students.addAll(students);
         }
@@ -47,8 +48,8 @@ public class JsonAdaptedTut {
      * Converts a given {@code Tut} into this class for Jackson use.
      */
     public JsonAdaptedTut(Tut source) {
-        this.tutName = source.getTutName();
-        this.tutorialClassName = source.getTutorialClass();
+        this.tutName = source.getTutName().tutName;
+        this.tutorialClass = source.getTutorialClass().value;
         this.students.addAll(source.getStudents().stream()
                 .map(JsonAdaptedStudent::new)
                 .collect(Collectors.toList()));
@@ -66,29 +67,26 @@ public class JsonAdaptedTut {
         if (tutName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "tutName"));
         }
-        if (!Tut.isValidName(tutName)) {
+        if (!TutName.isValidTutName(tutName)) {
             throw new IllegalValueException(Tut.MESSAGE_NAME_CONSTRAINTS);
         }
 
-        if (tutorialClassName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "tutorialClassName"));
+        if (tutorialClass == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "tutorialClass"));
         }
 
-        final TutorialClass modelTutorialClass = tutorialClassName;
-
-        // Convert students
+        final TutorialClass modelTutorialClass = new TutorialClass(tutorialClass);
+        final TutName modelTutName = new TutName(tutName);
         final List<Student> modelStudents = new ArrayList<>();
         for (JsonAdaptedStudent student : students) {
             modelStudents.add(student.toModelType());
         }
-
-        // Convert tutDates
         final List<TutDate> modelTutDates = new ArrayList<>();
         for (JsonAdaptedTutDate tutDate : tutDates) {
             modelTutDates.add(tutDate.toModelType());
         }
 
-        Tut tut = new Tut(tutName, modelTutorialClass);
+        Tut tut = new Tut(modelTutName, modelTutorialClass);
         for (Student student : modelStudents) {
             tut.add(student);
         }
