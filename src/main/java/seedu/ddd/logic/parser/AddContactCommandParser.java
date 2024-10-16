@@ -2,7 +2,9 @@ package seedu.ddd.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.ddd.logic.Messages.MESSAGE_INVALID_CONTACT_TYPE;
+import static seedu.ddd.logic.Messages.MESSAGE_MULTIPLE_CONTACT_TYPES;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -13,7 +15,6 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.ddd.model.contact.common.ContactType.CLIENT;
 import static seedu.ddd.model.contact.common.ContactType.VENDOR;
 
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -47,22 +48,18 @@ public class AddContactCommandParser implements Parser<AddCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_SERVICE, PREFIX_DATE);
+                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_SERVICE, PREFIX_DATE, FLAG_CLIENT, FLAG_VENDOR);
 
         ContactType contactType;
-        String contactTypeString = argMultimap.getPreamble();
 
-        try {
-            if (Objects.equals(contactTypeString, "client")) {
-                contactType = CLIENT;
-            } else if (Objects.equals(contactTypeString, "vendor")) {
-                contactType = VENDOR;
-            } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_CONTACT_TYPE, contactTypeString));
-            }
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddCommand.MESSAGE_USAGE), pe);
+        if (argMultimap.getValue(FLAG_CLIENT).isPresent() && argMultimap.getValue(FLAG_VENDOR).isPresent()) {
+            throw new ParseException(MESSAGE_MULTIPLE_CONTACT_TYPES);
+        } else if (argMultimap.getValue(FLAG_CLIENT).isPresent()) {
+            contactType = CLIENT;
+        } else if (argMultimap.getValue(FLAG_VENDOR).isPresent()) {
+            contactType = VENDOR;
+        } else {
+            throw new ParseException(AddCommand.MESSAGE_USAGE);
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_SERVICE)
@@ -94,7 +91,7 @@ public class AddContactCommandParser implements Parser<AddCommand> {
             Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
             contact = new Client(name, phone, email, address, date, tagList, id);
         }
-        AddressBook.incrementNextId();
+
         return new AddCommand(contact);
     }
 

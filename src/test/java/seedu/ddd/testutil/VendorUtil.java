@@ -18,7 +18,7 @@ public class VendorUtil {
     /**
      * Returns an add command string for adding the {@code contact}.
      */
-    public static String getAddContactCommand(Vendor vendor) {
+    public static String getAddCommand(Vendor vendor) {
         return AddCommand.COMMAND_WORD + " vendor " + getVendorDetails(vendor);
     }
 

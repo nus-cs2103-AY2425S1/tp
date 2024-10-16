@@ -12,6 +12,7 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.logic.Messages;
 import seedu.ddd.logic.commands.exceptions.CommandException;
+import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
@@ -22,11 +23,10 @@ import seedu.ddd.model.contact.vendor.Vendor;
  */
 public class AddCommand extends Command {
 
-    // add1 to not conflict with existing command
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to the address book. "
-            + "Parameters: CONTACT_TYPE (either `vendor` or `client`)"
+            + "Parameters: CONTACT_FLAG (either `-v` or `-c`)"
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
@@ -34,7 +34,7 @@ public class AddCommand extends Command {
             + PREFIX_SERVICE + "SERVICE (only if adding vendor) "
             + PREFIX_DATE + "WEDDING_DATE (only if adding client) "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Vendor example: " + COMMAND_WORD + " vendor "
+            + "Vendor example: " + COMMAND_WORD + " -v "
             + PREFIX_NAME + "ABC Catering "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "contact@abccatering.com "
@@ -42,7 +42,7 @@ public class AddCommand extends Command {
             + PREFIX_SERVICE + "catering "
             + PREFIX_TAG + "vegetarian "
             + PREFIX_TAG + "budget\n"
-            + "Client example: " + COMMAND_WORD + " client "
+            + "Client example: " + COMMAND_WORD + " -c "
             + PREFIX_NAME + "Jane Doe "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "jane.doe@example.com "
@@ -52,7 +52,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "pets";
 
     public static final String VENDOR_MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to the address book. "
-            + "Parameters: CONTACT_TYPE (either `vendor` or `client`)"
+            + "Parameters: CONTACT_FLAG (either `-v` or `-c`)"
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
@@ -60,7 +60,7 @@ public class AddCommand extends Command {
             + PREFIX_SERVICE + "SERVICE (only if adding vendor) "
             + PREFIX_DATE + "WEDDING_DATE (only if adding client) "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " vendor "
+            + "Example: " + COMMAND_WORD + " -v "
             + PREFIX_NAME + "ABC Catering "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "contact@abccatering.com "
@@ -70,7 +70,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "budget";
 
     public static final String CLIENT_MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to the address book. "
-            + "Parameters: CONTACT_TYPE (either `vendor` or `client`)"
+            + "Parameters: CONTACT_FLAG (either `-v` or `-c`)"
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
@@ -78,7 +78,7 @@ public class AddCommand extends Command {
             + PREFIX_SERVICE + "SERVICE (only if adding vendor) "
             + PREFIX_DATE + "WEDDING_DATE (only if adding client) "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " client "
+            + "Example: " + COMMAND_WORD + " -c "
             + PREFIX_NAME + "Jane Doe "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "jane.doe@example.com "
@@ -119,6 +119,9 @@ public class AddCommand extends Command {
         } else {
             throw new CommandException(INVALID_CONTACT_TYPE);
         }
+
+        // Increment ID counter only if addition of contact is successful
+        AddressBook.incrementNextId();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
