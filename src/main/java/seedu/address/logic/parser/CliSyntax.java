@@ -12,8 +12,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_GAME = new Prefix("g/");
-    public static final Prefix PREFIX_THEME = new Prefix("c/");
-    public static final Prefix PREFIX_FONTSIZE = new Prefix("fs/");
+    public static final Prefix PREFIX_USERNAME = new Prefix("u/");
 
     // TODO: add Prefix Prefixed PreferredTime, likely to be "pt/"
 

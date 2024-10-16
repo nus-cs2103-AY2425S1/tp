@@ -3,7 +3,9 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -25,7 +27,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<Game> games = new HashSet<>();
+    private final Map<String, Game> games = new HashMap<>();
 
     // TODO: update the preferredTime field
     // TODO: update the constructors and some other methods
@@ -33,14 +35,14 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Game> games) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Map<String, Game> games) {
         requireAllNonNull(name, phone, email, address, tags, games);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.games.addAll(games);
+        this.games.putAll(games);
     }
 
     public Name getName() {
@@ -68,11 +70,11 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable map of games, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Game> getGames() {
-        return Collections.unmodifiableSet(games);
+    public Map<String, Game> getGames() {
+        return Collections.unmodifiableMap(games);
     }
     /**
      * Returns true if both persons have the same name.

@@ -1,8 +1,10 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -64,7 +66,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        games.addAll(source.getGames().stream()
+        games.addAll(source.getGames().values().stream()
                 .map(JsonAdaptedGame::new)
                 .collect(Collectors.toList()));
     }
@@ -79,9 +81,9 @@ class JsonAdaptedPerson {
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
-        final List<Game> personGames = new ArrayList<>();
+        final Map<String, Game> personGames = new HashMap<>();
         for (JsonAdaptedGame game : games) {
-            personGames.add(game.toModelType());
+            personGames.put(game.getGameName(), game.toModelType());
         }
 
         if (name == null) {
@@ -117,7 +119,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        final Set<Game> modelGames = new HashSet<>(personGames);
+        final Map<String, Game> modelGames = new HashMap<>(personGames);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelGames);
     }

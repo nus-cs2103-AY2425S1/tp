@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -84,12 +86,13 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code games} into a {@code Set<Game>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code games} into a {@code Map<String, Game>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
     public EditPersonDescriptorBuilder withGames(String... games) {
-        Set<Game> gameSet = Stream.of(games).map(Game::new).collect(Collectors.toSet());
-        descriptor.setGames(gameSet);
+        Map<String, Game> gameMap = new HashMap<>();
+        Stream.of(games).forEach((gameName) -> gameMap.put(gameName, new Game(gameName)));
+        descriptor.setGames(gameMap);
         return this;
     }
     public EditPersonDescriptor build() {
