@@ -33,17 +33,17 @@ public class AddIngredientCommandTest {
         // Create the AddIngredientCommand
         AddIngredientCommand command = new AddIngredientCommand(INGREDIENT_NAME, INGREDIENT_COST);
 
-        // Use the model's IngredientCatalogue to get the next available ID
+        // Retrieve the next product ID to maintain consistency with the model
         IngredientCatalogue catalogue = model.getIngredientCatalogue();
-        int nextProductId = catalogue.getNextProductId();  // Ensure consistent product ID
-
-        // Create the expected ingredient object
+        int nextProductId = catalogue.getNextProductId();
         Ingredient expectedIngredient = new Ingredient(nextProductId, INGREDIENT_NAME, INGREDIENT_COST);
+
+        // Prepare the expected success message
         String expectedMessage = String.format(AddIngredientCommand.MESSAGE_ADD_INGREDIENT_SUCCESS, expectedIngredient);
 
-        // Set up the expected model to reflect the final state
+        // Set up the expected model state
         Model expectedModel = new ModelManager();
-        expectedModel.addIngredient(expectedIngredient);  // Manually add the ingredient
+        expectedModel.getIngredientCatalogue().addIngredient(expectedIngredient);
 
         // Execute the command and verify success
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
