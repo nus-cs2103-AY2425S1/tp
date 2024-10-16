@@ -48,7 +48,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/limernest.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Frontend
 
 ### thortol
 

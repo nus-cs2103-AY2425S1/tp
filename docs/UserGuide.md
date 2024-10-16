@@ -33,19 +33,19 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
 1. Copy the file to the folder you want to use as the _home folder_ for your StaffSync.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar staffSync.jar` command to run the application.<br>
 
    Alternatively, you can double-click the jar file to run the application (though we do not officially support it).
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** or **`?`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list ph` : Lists all potential hires.
 
-   * `employee n/John Doe p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/01-01-2021` : Adds an employee named `John Doe` to StaffSync.
+   * `employee n/John Doe p/81234567 e/pohjunkang@gmail.com a/21 Lower Kent Ridge Rd d/Department of communications and informatics r/Head of communications and Informatics ced/01-01-2021` : Adds an employee named `John Doe` to StaffSync.
 
    * `delete ph 1` : Deletes the 1st potential hire shown in the current list.
 
@@ -69,16 +69,16 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 >* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
 >  e.g. in `employee n/NAME`, `NAME` is a parameter which can be used as `employee n/John Doe`.
 >
->* Items in square brackets are optional.<br>
->  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
->
->* Items with `…`​ after them can be used multiple times including zero times.<br>
->  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
->
+>* Items in square brackets are optional.
+>  e.g. `edit INDEX [n/NAME] [e/EMAIL]` can be used as `edit 1 n/John Doe e/johndoe@gmail.com` or `edit 1 n/John Doe`.
+> 
 >* Parameters can be in any order.<br>
 >  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 >
->* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+>* Parameters and commands are case-sensitive
+>  e.g. the command `Help` and `edit 1 N/John Doe` will return an error
+> 
+>* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
 >  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 >
 >* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters >surrounding line-breaks may be omitted when copied over to the application.
@@ -86,13 +86,13 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
 
 <details>
-  <summary>&nbsp&nbsp<h3>Viewing help: <code>?</code> or <code>help</code></h3></summary>
+  <summary>&nbsp&nbsp<h3>Viewing help: <code>help</code></h3></summary>
 
-  >Shows a message explaning how to access the help page.
+  >Displays a help window containing the list of commands, its purpose and the format
   >
-  >![Ui](images/Ui.png)
+  >![Ui](images/helpWindow.png)
   >
-  >Format: `?` or `help`
+  >Format:`help`
 </details>
 
 
@@ -159,14 +159,11 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
   
   >Edits an existing person in the address book.
   >
-  >Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+  >Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
   >
   >* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
   >* At least one of the optional fields must be provided.
   >* Existing values will be updated to the input values.
-  >* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-  >* You can remove all the person’s tags by typing `t/` without
-  >    specifying any tags after it.
   >
   >Examples:
   >*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -216,17 +213,17 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
 # Commands Summary
 
-Action     | Format                                                                                        | Examples
------------|-----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------
-**Help**   | `?` or `help`                                                                                 |
-**Clear**  | `clear`                                                                                       | 
-**Delete** | `delete e INDEX` <br> `delete ph INDEX`                                                       | `delete e 3`<br> `delete ph 1`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`                        | `edit 2 n/James Lee e/jameslee@example.com`
+Action     | Format                                                                                | Examples
+-----------|---------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------
+**Help**   | `help`                                                                                |
+**Clear**  | `clear`                                                                               | 
+**Delete** | `delete e INDEX` <br> `delete ph INDEX`                                               | `delete e 3`<br> `delete ph 1`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`                | `edit 2 n/James Lee e/jameslee@example.com`
 **Employee**| `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE​` | `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/01-01-2021`
-**Exit**   | `exit`                                                                                        | 
-**Find**   | `find /all [KEYWORDS]` <br> `find /e [KEYWORDS]` <br> `find /ph [KEYWORDS]`                   | `find /all Jake` <br> `find /e Jake` <br> `find /ph Jake`
-**List**   | `list`                                                                                        | 
-**Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​`                      | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
+**Exit**   | `exit`                                                                                | 
+**Find**   | `find /all [KEYWORDS]` <br> `find /e [KEYWORDS]` <br> `find /ph [KEYWORDS]`           | `find /all Jake` <br> `find /e Jake` <br> `find /ph Jake`
+**List**   | `list`                                                                                | 
+**Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​`              | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
 
 --------------------------------------------------------------------------------------------------------------------
 
