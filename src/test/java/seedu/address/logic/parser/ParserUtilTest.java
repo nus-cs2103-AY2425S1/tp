@@ -18,6 +18,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PriorityLevel;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -193,4 +194,24 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseDeletePriorityLevel_validDeleteCommand_returnsDefaultPriorityLevel() throws Exception {
+        PriorityLevel expectedPriorityLevel = new PriorityLevel(3);
+        assertEquals(expectedPriorityLevel, ParserUtil.parseDeletePriorityLevel("deletelevel"));
+    }
+
+    @Test
+    public void parseDeletePriorityLevel_validDeleteCommandWithWhitespace_returnsDefaultPriorityLevel()
+            throws Exception {
+        PriorityLevel expectedPriorityLevel = new PriorityLevel(3);
+        assertEquals(expectedPriorityLevel, ParserUtil.parseDeletePriorityLevel("   deletelevel   "));
+    }
+
+    @Test
+    public void parseDeletePriorityLevel_nullInput_throwsNullPointerException() {
+        // Test with null input
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDeletePriorityLevel(null));
+    }
+
 }
