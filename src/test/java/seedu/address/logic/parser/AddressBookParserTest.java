@@ -16,7 +16,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddGuestCommand;
 import seedu.address.logic.commands.AddVendorCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteGuestCommand;
+import seedu.address.logic.commands.DeleteVendorCommand;
 import seedu.address.logic.commands.EditGuestCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -58,10 +59,17 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    public void parseCommand_deleteGuest() throws Exception {
+        DeleteGuestCommand command = (DeleteGuestCommand) parser.parseCommand(
+                DeleteGuestCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteGuestCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_deleteVendor() throws Exception {
+        DeleteVendorCommand command = (DeleteVendorCommand) parser.parseCommand(
+                DeleteVendorCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteVendorCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
