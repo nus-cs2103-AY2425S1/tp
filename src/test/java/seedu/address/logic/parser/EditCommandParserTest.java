@@ -10,22 +10,13 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-<<<<<<< HEAD
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_GOLD;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_REJECT;
-=======
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TIER_DESC_GOLD;
 import static seedu.address.logic.commands.CommandTestUtil.TIER_DESC_REJECT;
->>>>>>> master
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -98,20 +89,9 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
-<<<<<<< HEAD
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tier.MESSAGE_CONSTRAINTS); // invalid tag
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
-        // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + TAG_DESC_GOLD + TAG_DESC_REJECT + TAG_EMPTY,
-                Messages.MESSAGE_DUPLICATE_FIELDS + PREFIX_TAG);
-        assertParseFailure(parser, "1" + TAG_DESC_GOLD + TAG_EMPTY + TAG_DESC_REJECT,
-                Messages.MESSAGE_DUPLICATE_FIELDS + PREFIX_TAG);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_GOLD + TAG_DESC_REJECT,
-                Messages.MESSAGE_DUPLICATE_FIELDS + PREFIX_TAG);
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY
-                        + VALID_PHONE_AMY, Name.MESSAGE_CONSTRAINTS);
-=======
+                + VALID_PHONE_AMY, Name.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + INVALID_TIER_DESC, Tier.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid email
@@ -119,8 +99,7 @@ public class EditCommandParserTest {
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC
-                        + VALID_ADDRESS_AMY + VALID_PHONE_AMY, Name.MESSAGE_CONSTRAINTS);
->>>>>>> master
+                + VALID_ADDRESS_AMY + VALID_PHONE_AMY, Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -205,11 +184,7 @@ public class EditCommandParserTest {
                 + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TIER_DESC_REJECT;
 
         assertParseFailure(parser, userInput,
-<<<<<<< HEAD
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG));
-=======
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TIER));
->>>>>>> master
 
         // multiple invalid values
         userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC

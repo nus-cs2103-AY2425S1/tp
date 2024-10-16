@@ -40,7 +40,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newPersonWithTierAndRemark_success() {
-        Person validPerson = new PersonBuilder().withTiers("GOLD").withRemark("big brained").build();
+        Person validPerson = new PersonBuilder().withTier("GOLD").withRemark("big brained").build();
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
 

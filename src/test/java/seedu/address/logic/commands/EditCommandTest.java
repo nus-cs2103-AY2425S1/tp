@@ -88,10 +88,10 @@ public class EditCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTiers(VALID_TIER_REJECT).withRemark(CommandCommons.DEFAULT_REMARK + "\nTest\n").build();
+                .withTier(VALID_TIER_REJECT).withRemark(CommandCommons.DEFAULT_REMARK + "\nTest\n").build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTiers(VALID_TIER_REJECT)
+                .withPhone(VALID_PHONE_BOB).withTier(VALID_TIER_REJECT)
                 .withAppendedRemark("Test").build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
@@ -110,10 +110,10 @@ public class EditCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTiers(VALID_TIER_REJECT).withRemark("Test").build();
+                .withTier(VALID_TIER_REJECT).withRemark("Test").build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTiers(VALID_TIER_REJECT)
+                .withPhone(VALID_PHONE_BOB).withTier(VALID_TIER_REJECT)
                 .withNewRemark("Test").build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
