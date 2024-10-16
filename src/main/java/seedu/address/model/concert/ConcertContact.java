@@ -3,7 +3,9 @@ package seedu.address.model.concert;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -54,8 +56,8 @@ public class ConcertContact {
      *
      * @return List of ConcertContact
      */
-    public ArrayList<ConcertContact> getConcertContactList(Concert concert) {
-        return concertContacts.get(concert);
+    public List<ConcertContact> getConcertContactList(Concert concert) {
+        return Collections.unmodifiableList(concertContacts.get(concert));
     }
 
     @Override
@@ -69,7 +71,7 @@ public class ConcertContact {
         }
 
         ConcertContact otherContact = (ConcertContact) other;
-        return otherContact != null && otherContact.person.equals(person)
+        return otherContact.person.equals(person)
                 && otherContact.concert.equals(concert);
     }
 
