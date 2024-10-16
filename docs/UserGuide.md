@@ -85,6 +85,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 :information_source: Notes about the `add` Command.
 
 * Clients with the **same** `NAME`, `EMAIL` and `PHONE NUMBER` are considered duplicates and will not be added
+* A person can have any number of tags (including 0)
 * `NAME` must be **alphanumeric**, may contain **spaces** and **dashes**, and should not be blank.
 * `NAME` is case-insensitive. `John Doe` and `joHN dOE` are considered same clients, but name is stored in the same case as the input (so `John Doe` is stored as `John Doe` and `JOHN Doe` is stored as `JOHN Doe`
 * `NAME` must not exist in Clientele+ already.
