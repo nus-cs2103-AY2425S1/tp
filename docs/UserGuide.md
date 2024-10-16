@@ -156,7 +156,7 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Clearing all entries : `undo`
+### Undo previous command : `undo`
 Restores the previous state of the address book after any change, such as an addition, edit, or deletion of a person or entry.
 
 Format: `undo`
@@ -171,6 +171,24 @@ How it works:
 * It checks whether there is an operation in the undo stack (like an add, delete, or edit) that can be undone. This check is done via the model.canUndoAddressBook() method.
 * If there is an undoable operation, it calls the model.undoAddressBook() method to restore the address book's previous state.
 * If there are no operations to undo (i.e., if the user tries to undo without having made any modifications), the command will return the failure message.
+
+
+### Redo previous command : `redo`
+
+Restores the state of the address book after an undo operation has been executed, effectively "redoing" the undone changes, such as an addition, edit, or deletion of a person or entry.
+
+Format: `redo`
+
+Success Message:
+If the redo operation is successful, it returns: "Address book has redone previous undo command!"
+
+Failure Message:
+If there is no action to redo or if the redo operation fails, it returns: "Redo not possible as no actions were undone."
+
+How it works:
+* It checks whether there is an undo operation that can be redone. This check is done via the model.canRedoAddressBook() method.
+* If there is a redoable operation, it calls the model.redoAddressBook() method to restore the address book's previous state (before the undo).
+* If there are no operations to redo (e.g., if the user tries to redo without any undo), the command will return the failure message.
 
 
 ### Exiting the program : `exit`
@@ -214,12 +232,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 ecname/Lim Jun Wei t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action     | Format, Examples                                                                                                                                                                                                       |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 ecname/Lim Jun Wei t/friend t/colleague` |
+| **Clear**  | `clear`                                                                                                                                                                                                                |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                    |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                            |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                             |
+| **Undo**   | `undo`                                                                                                                                                                                                                 |
+| **Redo**   | `redo`                                                                                                                                                                                                                 |
+| **List**   | `list`                                                                                                                                                                                                                 |
+| **Help**   | `help`                                                                                                                                                                                                                 |
