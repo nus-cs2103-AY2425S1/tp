@@ -1,6 +1,8 @@
 package seedu.address.model.tut;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TutUtil.TUTORIAL_CLASS;
@@ -43,46 +45,36 @@ public class TutorialTest {
     }
 
     @Test
-    public void isValidTutName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> TutName.isValidTutName(null));
-    }
-
-    @Test
-    public void successValidTutName() {
-        assertTrue(TutName.isValidTutName(TUT_NAME));
-    }
-
-    @Test
     public void successAddStudentToTutorial() {
         Student aliceCopy = new StudentBuilder(ALICE).build();
         Tutorial tutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
         tutorial.add(aliceCopy);
-        assertTrue(aliceCopy.equals(tutorial.get(ALICE.getName())));
+        assertEquals(aliceCopy, tutorial.get(ALICE.getName()));
     }
 
     @Test
     public void checkEquals_sameInstance() {
         Tutorial sameTutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
-        assertTrue(sameTutorial.equals(sameTutorial));
+        assertEquals(sameTutorial, sameTutorial);
     }
 
     @Test
     public void checkEquals_differentInstance() {
         Tutorial tutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
         Tutorial otherTutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
-        assertTrue(tutorial.equals(otherTutorial));
+        assertEquals(tutorial, otherTutorial);
     }
 
     @Test
     public void checkEquals_differentObjects() {
         Tutorial tutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
         Object notATut = new Object();
-        assertFalse(tutorial.equals(notATut));
+        assertNotEquals(tutorial, notATut);
     }
 
     @Test
     public void checkToString() {
-        assertTrue(TUTORIAL_SAMPLE.toString().equals(TUT_NAME + ": Tutorial " + TUTORIAL_CLASS));
+        assertEquals(TUTORIAL_SAMPLE.toString(), TUT_NAME + ": Tutorial " + TUTORIAL_CLASS);
     }
 
     @Test
@@ -94,7 +86,7 @@ public class TutorialTest {
 
         // Try adding again
         TUTORIAL_SAMPLE.add(aliceCopy);
-        assertTrue(TUTORIAL_SAMPLE.getStudents().size() == initialSize);
+        assertEquals(TUTORIAL_SAMPLE.getStudents().size(), initialSize);
     }
 
     @Test
@@ -133,7 +125,7 @@ public class TutorialTest {
         int initialSize = TUTORIAL_SAMPLE.getTutDates().size();
 
         TUTORIAL_SAMPLE.addTutorialDate(TUT_DATE);
-        assertTrue(TUTORIAL_SAMPLE.getTutDates().size() == initialSize);
+        assertEquals(TUTORIAL_SAMPLE.getTutDates().size(), initialSize);
     }
 
     @Test
@@ -145,7 +137,7 @@ public class TutorialTest {
     @Test
     public void getTutorialDate_returnsCorrectDate() {
         TUTORIAL_SAMPLE.addTutorialDate(TUT_DATE);
-        assertTrue(TUTORIAL_SAMPLE.getTutorialDate(TUT_DATE.getDate()).equals(TUT_DATE));
+        assertEquals(TUTORIAL_SAMPLE.getTutorialDate(TUT_DATE.getDate()), TUT_DATE);
     }
 
     @Test

@@ -25,17 +25,17 @@ public class SampleDataUtil {
     public static Student[] getSampleStudents() {
         return new Student[] {
             new Student(new Name("Alex Yeoh"), new StudentId("1010"), new TutorialClass("1001"),
-                        new PresentDates(getDateList("20/02/2024"))),
+                        new PresentDates(getDateList("2024/02/20"))),
             new Student(new Name("Bernice Yu"), new StudentId("1011"), new TutorialClass("1002"),
-                        new PresentDates(getDateList("20/02/2024", "22/02/2024"))),
+                        new PresentDates(getDateList("2024/02/20", "2024/02/22"))),
             new Student(new Name("Charlotte Oliveiro"), new StudentId("1012"), new TutorialClass("1003"),
-                        new PresentDates(getDateList("20/02/2024"))),
+                        new PresentDates(getDateList("2024/02/20"))),
             new Student(new Name("David Li"), new StudentId("1013"), new TutorialClass("1004"),
-                        new PresentDates(getDateList("20/02/2024"))),
+                        new PresentDates(getDateList("2024/02/20"))),
             new Student(new Name("Irfan Ibrahim"), new StudentId("1014"), new TutorialClass("1005"),
-                        new PresentDates(getDateList("20/02/2024"))),
+                        new PresentDates(getDateList("2024/02/20"))),
             new Student(new Name("Roy Balakrishnan"), new StudentId("1015"), new TutorialClass("1006"),
-                        new PresentDates(getDateList("20/02/2024")))
+                        new PresentDates(getDateList("2024/02/20")))
         };
     }
 
@@ -77,7 +77,7 @@ public class SampleDataUtil {
      * @throws ParseException If the date string cannot be parsed due to an invalid format.
      */
     public static TutDate parseDate(String date) throws ParseException {
-        Date d = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+        Date d = new SimpleDateFormat("yyyy/MM/dd").parse(date);
         return new TutDate(d);
     }
 }

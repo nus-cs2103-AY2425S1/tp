@@ -14,10 +14,7 @@ public class TutName {
             + " characters and spaces, and it should not be blank.";
 
     /** Regular expression to validate tutorial names that only contain alphanumeric characters. */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-
-    /** Additional regex to allow only alphanumeric characters without spaces. */
-    public static final String TUT_NAME_VALIDATION_REGEX = "^[a-zA-Z0-9]+$";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}]+( [\\p{Alnum}]+)*";
 
     /** The tutorial name of the tutorial. */
     public final String tutName;
@@ -40,7 +37,7 @@ public class TutName {
      * @return True if the string matches both the alphanumeric regex and the validation regex.
      */
     public static boolean isValidTutName(String test) {
-        return test.matches(TUT_NAME_VALIDATION_REGEX) && test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**

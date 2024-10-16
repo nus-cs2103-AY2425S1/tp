@@ -4,9 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -37,17 +35,14 @@ public class JsonTutorialStorage implements TutorialStorage {
     public Optional<TutorialList> readTutorials(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
 
-        Optional<JsonAdaptedTut[]> jsonAdaptedTutorials = JsonUtil.readJsonFile(filePath, JsonAdaptedTut[].class);
-        if (!jsonAdaptedTutorials.isPresent()) {
+        Optional<JsonSerializableTutorialList> jsonSerializableTutorialList = JsonUtil.readJsonFile(filePath,
+                JsonSerializableTutorialList.class);
+        if (jsonSerializableTutorialList.isEmpty()) {
             return Optional.empty();
         }
 
         try {
-            TutorialList tutorials = new TutorialList();
-            for (JsonAdaptedTut jsonAdaptedTut : jsonAdaptedTutorials.get()) {
-                tutorials.addTutorial(jsonAdaptedTut.toModelType());
-            }
-            return Optional.of(tutorials);
+            return Optional.of(jsonSerializableTutorialList.get().toModelType());
         } catch (IllegalValueException ive) {
             throw new DataLoadingException(ive);
         }
@@ -63,10 +58,6 @@ public class JsonTutorialStorage implements TutorialStorage {
         requireNonNull(tutorialList);
         requireNonNull(filePath);
 
-        List<JsonAdaptedTut> jsonAdaptedTutList = tutorialList.getTutorials().stream()
-                .map(JsonAdaptedTut::new)
-                .collect(Collectors.toList());
-
-        JsonUtil.saveJsonFile(jsonAdaptedTutList.toArray(new JsonAdaptedTut[0]), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableTutorialList(tutorialList), filePath);
     }
 }

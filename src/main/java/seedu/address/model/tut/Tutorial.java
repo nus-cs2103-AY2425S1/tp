@@ -166,11 +166,10 @@ public class Tutorial {
             return true;
         }
 
-        if (!(other instanceof Tutorial)) {
+        if (!(other instanceof Tutorial otherTutorial)) {
             return false;
         }
 
-        Tutorial otherTutorial = (Tutorial) other;
         return tutorialClass.equals(otherTutorial.tutorialClass);
 
     }

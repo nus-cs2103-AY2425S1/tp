@@ -83,11 +83,10 @@ public class TutDate {
             return true;
         }
 
-        if (!(other instanceof TutDate)) {
+        if (!(other instanceof TutDate otherTutDate)) {
             return false;
         }
 
-        TutDate otherTutDate = (TutDate) other;
         return Objects.equals(date, otherTutDate.date) && students.equals(otherTutDate.students);
     }
 
