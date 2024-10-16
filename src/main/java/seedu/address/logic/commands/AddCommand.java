@@ -36,7 +36,7 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TELEGRAM + "johndoe "
 
-            + PREFIX_ROLE + "sponsor"
+            + PREFIX_ROLE + "sponsor "
 
             + PREFIX_ROLE + "attendee";
 

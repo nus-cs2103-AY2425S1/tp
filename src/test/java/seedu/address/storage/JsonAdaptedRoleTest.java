@@ -19,7 +19,6 @@ public class JsonAdaptedRoleTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
     private static final String INVALID_TELE = "c";
     private static final String INVALID_ROLE = "invalidRole";
 
