@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import seedu.address.logic.commands.AddCustomerOrderCommand;
-import seedu.address.logic.commands.AddIngredientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 import java.util.ArrayList;
@@ -19,12 +18,11 @@ public class AddCustomerOrderCommandParser implements Parser<AddCustomerOrderCom
 
         if (splitArgs.length < 2) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddIngredientCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCustomerOrderCommand.MESSAGE_USAGE));
         }
 
         String phoneNumber = splitArgs[0];
 
-        // Second argument is the cost; must be a valid double
         int id;
         ArrayList<Integer> idList = new ArrayList<>();
 

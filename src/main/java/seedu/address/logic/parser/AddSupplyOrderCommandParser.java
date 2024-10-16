@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.AddCustomerOrderCommand;
-import seedu.address.logic.commands.AddIngredientCommand;
+import seedu.address.logic.commands.AddSupplyOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 import java.util.ArrayList;
@@ -10,21 +9,20 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 
-public class AddCustomerOrderCommandParser implements Parser<AddCustomerOrderCommand> {
+public class AddSupplyOrderCommandParser implements Parser<AddSupplyOrderCommand> {
 
-    public AddCustomerOrderCommand parse(String args) throws ParseException {
+    public AddSupplyOrderCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
         String[] splitArgs = args.trim().split("\\s+");
 
         if (splitArgs.length < 2) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddIngredientCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSupplyOrderCommand.MESSAGE_USAGE));
         }
 
         String phoneNumber = splitArgs[0];
 
-        // Second argument is the cost; must be a valid double
         int id;
         ArrayList<Integer> idList = new ArrayList<>();
 
@@ -39,6 +37,6 @@ public class AddCustomerOrderCommandParser implements Parser<AddCustomerOrderCom
         }
 
 
-        return new AddCustomerOrderCommand(phoneNumber, idList);
+        return new AddSupplyOrderCommand(phoneNumber, idList);
     }
 }
