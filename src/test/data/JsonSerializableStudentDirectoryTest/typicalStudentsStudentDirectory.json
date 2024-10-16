@@ -23,7 +23,7 @@
       "startTime": "13:00",
       "endTime": "15:00"
     },
-    "cancelledLessons": [  ]
+    "cancelledLessons": [ "01-10-2024" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -35,7 +35,7 @@
       "startTime": "18:00",
       "endTime": "19:00"
     },
-    "cancelledLessons": [ ]
+    "cancelledLessons": [ "15-10-2024" ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",

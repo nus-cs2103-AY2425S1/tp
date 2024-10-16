@@ -31,6 +31,7 @@ public class TypicalStudents {
             .withGradeLevel("ABRSM 2")
             .withPianoPieces("Etude")
             .withRegularLesson("Monday", "12:00", "14:00")
+            .withCancelledLessons("01-10-2024")
             .build();
     public static final Student BENSON = new StudentBuilder()
             .withName("Benson Meier")
@@ -39,6 +40,7 @@ public class TypicalStudents {
             .withGradeLevel("RSL 3")
             .withPianoPieces("Sonata I. X. 1905 \"From the Street\"", "Waltz No. 2")
             .withRegularLesson("Tuesday", "13:00", "15:00")
+            .withCancelledLessons("15-10-2024")
             .build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
             .withAddress("wall street").withGradeLevel("ABRSM 1")
