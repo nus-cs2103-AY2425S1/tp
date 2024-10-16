@@ -46,7 +46,7 @@ public class Messages {
         addAddress(builder, person);
         addTags(builder, person);
         addDateOfLastVisit(builder, person);
-        
+
         return builder.toString();
     }
 
