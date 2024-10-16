@@ -245,16 +245,22 @@ public class ParserUtil {
 
     /**
      * Parses the given list of {@code String} statuses and returns a list of {@code Status} objects.
+     * Pads the list to be exactly the given length
      *
      * @param statuses The list of status strings to parse.
+     * @param requiredLength The exact length of the output list
      * @return A list of parsed {@code Status} objects.
      * @throws ParseException If any of the given statuses are invalid.
      */
-    public static List<Status> parseStatuses(List<String> statuses) throws ParseException {
+    public static List<Status> parseStatuses(List<String> statuses, int requiredLength) throws ParseException {
         requireNonNull(statuses);
-        Status[] statusList = new Status[statuses.size()];
-        for (int i = 0; i < statuses.size(); i++) {
-            statusList[i] = parseStatus(statuses.get(i));
+        Status[] statusList = new Status[requiredLength];
+        for (int i = 0; i < requiredLength; i++) {
+            if (i < statuses.size()) {
+                statusList[i] = parseStatus(statuses.get(i));
+            } else {
+                statusList[i] = Status.getDefault();
+            }
         }
         return Arrays.stream(statusList).toList();
     }
