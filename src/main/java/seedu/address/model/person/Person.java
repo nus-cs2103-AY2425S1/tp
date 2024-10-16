@@ -29,6 +29,9 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final Map<String, Game> games = new HashMap<>();
 
+    // TODO: update the preferredTime field
+    // TODO: update the constructors and some other methods
+
     /**
      * Every field must be present and not null.
      */
