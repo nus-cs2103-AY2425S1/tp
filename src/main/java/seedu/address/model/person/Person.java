@@ -39,6 +39,10 @@ public abstract class Person {
         this.tags.addAll(tags);
     }
 
+    public abstract boolean isTutor();
+
+    public abstract boolean isTutee();
+
     public Name getName() {
         return name;
     }
