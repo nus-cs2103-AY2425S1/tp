@@ -408,24 +408,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Actor performs <u>list all people (UC2)</u>.
-2.  Actor requests to add a note to a specific person.
-3.  System shows details of the newly added note to that person.
+1.  Actor requests to add a note to a specific person.
+2.  System shows details of the newly added note to that person.
 
     Use case ends.
 
 **Extensions**
 
-- 3a. The specified person is invalid.
+- 2a. The specified person is invalid.
 
-    - 3a1. System shows an error message.
+    - 2a1. System shows an error message.
 
       Use case ends.
 
 
-- 3b. The note name is invalid.
+- 2b. The note name is invalid.
 
-    - 3b1. System shows an error message.
+    - 2b1. System shows an error message.
 
       Use case ends.
 
