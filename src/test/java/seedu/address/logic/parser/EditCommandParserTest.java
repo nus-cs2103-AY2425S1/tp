@@ -3,8 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_MILK;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_SOYBEANS;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
@@ -16,8 +16,8 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_MILK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_SOYBEANS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -101,12 +101,12 @@ public class EditCommandParserTest {
 
         // while parsing {@code PREFIX_ALLERGY} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid allergy results in error
-        assertParseFailure(parser, VALID_NRIC_AMY + ALLERGY_DESC_FRIEND + ALLERGY_DESC_HUSBAND
+        assertParseFailure(parser, VALID_NRIC_AMY + ALLERGY_DESC_MILK + ALLERGY_DESC_SOYBEANS
                 + ALLERGY_EMPTY, Allergy.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, VALID_NRIC_AMY + ALLERGY_DESC_FRIEND + ALLERGY_EMPTY
-                + ALLERGY_DESC_HUSBAND, Allergy.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, VALID_NRIC_AMY + ALLERGY_EMPTY + ALLERGY_DESC_FRIEND
-                + ALLERGY_DESC_HUSBAND, Allergy.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_NRIC_AMY + ALLERGY_DESC_MILK + ALLERGY_EMPTY
+                + ALLERGY_DESC_SOYBEANS, Allergy.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_NRIC_AMY + ALLERGY_EMPTY + ALLERGY_DESC_MILK
+                + ALLERGY_DESC_SOYBEANS, Allergy.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, VALID_NRIC_AMY + INVALID_NAME_DESC + INVALID_EMAIL_DESC
@@ -115,12 +115,12 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        String userInput = VALID_NRIC_AMY + PHONE_DESC_BOB + ALLERGY_DESC_HUSBAND
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + ALLERGY_DESC_FRIEND;
+        String userInput = VALID_NRIC_AMY + PHONE_DESC_BOB + ALLERGY_DESC_SOYBEANS
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + ALLERGY_DESC_MILK;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_ALLERGY_HUSBAND, VALID_ALLERGY_FRIEND).build();
+                .withTags(VALID_ALLERGY_SOYBEANS, VALID_ALLERGY_MILK).build();
         EditCommand expectedCommand = new EditCommand(new NricMatchesPredicate(new Nric(VALID_NRIC_AMY)), descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -165,8 +165,8 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
-        userInput = nric + ALLERGY_DESC_FRIEND;
-        descriptor = new EditPersonDescriptorBuilder().withTags(VALID_ALLERGY_FRIEND).build();
+        userInput = nric + ALLERGY_DESC_MILK;
+        descriptor = new EditPersonDescriptorBuilder().withTags(VALID_ALLERGY_MILK).build();
         expectedCommand = new EditCommand(new NricMatchesPredicate(nric), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -189,8 +189,8 @@ public class EditCommandParserTest {
 
         // mulltiple valid fields repeated
         userInput = nric + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
-                + ALLERGY_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + ALLERGY_DESC_FRIEND
-                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + ALLERGY_DESC_HUSBAND;
+                + ALLERGY_DESC_MILK + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + ALLERGY_DESC_MILK
+                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + ALLERGY_DESC_SOYBEANS;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));

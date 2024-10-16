@@ -49,8 +49,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_ALLERGY_HUSBAND = "husband";
-    public static final String VALID_ALLERGY_FRIEND = "friend";
+    public static final String VALID_ALLERGY_MILK = "milk";
+    public static final String VALID_ALLERGY_SOYBEANS = "soybeans";
     public static final String VALID_PRIORITY_AMY = "HIGH";
     public static final String VALID_PRIORITY_BOB = "LOW";
     public static final String VALID_APPOINTMENT_NAME_DENTAL = "Dental";
@@ -87,8 +87,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String ALLERGY_DESC_FRIEND = " " + PREFIX_ALLERGY + VALID_ALLERGY_FRIEND;
-    public static final String ALLERGY_DESC_HUSBAND = " " + PREFIX_ALLERGY + VALID_ALLERGY_HUSBAND;
+    public static final String ALLERGY_DESC_MILK = " " + PREFIX_ALLERGY + VALID_ALLERGY_MILK;
+    public static final String ALLERGY_DESC_SOYBEANS = " " + PREFIX_ALLERGY + VALID_ALLERGY_SOYBEANS;
     public static final String PRIORITY_DESC_AMY = " " + PREFIX_PRIORITY + VALID_PRIORITY_AMY;
     public static final String PRIORITY_DESC_BOB = " " + PREFIX_PRIORITY + VALID_PRIORITY_BOB;
     public static final String MEDCON_DESC_AMY = " " + PREFIX_MEDCON + VALID_MEDCON_AMY;
@@ -112,7 +112,7 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_ALLERGY_DESC = " " + PREFIX_ALLERGY + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_ALLERGY_DESC = " " + PREFIX_ALLERGY + "shellfish*"; // '*' not allowed in tags
     // Only "NONE", "LOW", "MEDIUM" or "HIGH" is allowed for Priority
     public static final String INVALID_PRIORITY_DESC = " " + PREFIX_PRIORITY + "invalidPriority";
 
@@ -174,11 +174,11 @@ public class CommandTestUtil {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withGender(VALID_GENDER_AMY).withNric(VALID_NRIC_AMY).withDateOfBirth(VALID_DOB_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_ALLERGY_FRIEND).build();
+                .withTags(VALID_ALLERGY_MILK).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withNric(VALID_NRIC_BOB).withDateOfBirth(VALID_DOB_BOB).withGender(VALID_GENDER_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_ALLERGY_HUSBAND, VALID_ALLERGY_FRIEND).build();
+                .withTags(VALID_ALLERGY_SOYBEANS, VALID_ALLERGY_MILK).build();
     }
 
     /**

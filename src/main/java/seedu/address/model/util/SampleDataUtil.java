@@ -35,7 +35,7 @@ public class SampleDataUtil {
                        new Address("Blk 30 Geylang Street 29,#06-40"),
                        new DateOfBirth("1990-01-01"),
                        new Gender("M"),
-                       getAllergySet("friends"),
+                       getAllergySet("Peanuts"),
                        new Priority(),
                        getAppointmentSet("Dental:2024-12-25:1235-1300"),
                        getMedConSet("tooth decay")
@@ -47,7 +47,7 @@ public class SampleDataUtil {
                        new Address("Blk 30 Lorong 3 Serangoon Gardens,#07-18"),
                        new DateOfBirth("1990-01-01"),
                        new Gender("M"),
-                       getAllergySet("colleagues", "friends"),
+                       getAllergySet("Peanuts", "Pollen"),
                        new Priority(),
                        getAppointmentSet("Orthopedic:2024-12-01:1200-1300", "Physio:2024-12-01:1500-1600"),
                     getMedConSet("arthritis", "scoliosis")
@@ -59,7 +59,7 @@ public class SampleDataUtil {
                        new Address("Blk 11 Ang Mo Kio Street 74,#11-04"),
                        new DateOfBirth("1990-01-01"),
                        new Gender("M"),
-                       getAllergySet("neighbours"),
+                       getAllergySet("Peanuts"),
                        new Priority(),
                        Collections.emptySet(),
                        getMedConSet("skill issue")
@@ -71,7 +71,7 @@ public class SampleDataUtil {
                        new Address("Blk 436 Serangoon Gardens Street 26,#16-43"),
                        new DateOfBirth("1990-01-01"),
                        new Gender("M"),
-                       getAllergySet("family"),
+                       getAllergySet("Peanuts"),
                        new Priority(),
                        getAppointmentSet("OT:2025-01-12:1000-1300",
                                          "PT:2025-02-02:1200-1300",
@@ -85,7 +85,7 @@ public class SampleDataUtil {
                        new Address("Blk 47 Tampines Street 20,#17-35"),
                        new DateOfBirth("1990-01-01"),
                        new Gender("M"),
-                       getAllergySet("classmates"),
+                       getAllergySet("Pollen"),
                        new Priority(),
                        getAppointmentSet("Dental:2024-10-25:1235-1300"),
                        getMedConSet("cavity")
@@ -97,7 +97,7 @@ public class SampleDataUtil {
                        new Address("Blk 47 Tampines Street 20,#17-35"),
                        new DateOfBirth("1990-01-01"),
                        new Gender("M"),
-                       getAllergySet("colleagues"),
+                       getAllergySet("Pollen"),
                        new Priority(),
                        Collections.emptySet(),
                        Collections.emptySet()

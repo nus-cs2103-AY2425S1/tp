@@ -117,7 +117,7 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Allergy> personAllergys = new ArrayList<>();
+        final List<Allergy> personAllergies = new ArrayList<>();
         final List<Appointment> personAppointments = new ArrayList<>();
         final List<MedCon> personMedCons = new ArrayList<>();
 
@@ -126,7 +126,7 @@ class JsonAdaptedPerson {
         }
 
         for (JsonAdaptedAllergy allergy : allergies) {
-            personAllergys.add(allergy.toModelType());
+            personAllergies.add(allergy.toModelType());
         }
 
         for (JsonAdaptedMedCon medCon : medCons) {
@@ -193,7 +193,7 @@ class JsonAdaptedPerson {
         }
         final Nric modelNric = new Nric(nric);
 
-        final Set<Allergy> modelAllergys = new HashSet<>(personAllergys);
+        final Set<Allergy> modelAllergies = new HashSet<>(personAllergies);
 
         if (priority == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -206,7 +206,7 @@ class JsonAdaptedPerson {
         final Set<MedCon> modelMedCons = new HashSet<>(personMedCons);
 
         return new Person(modelName, modelPhone, modelEmail, modelNric, modelAddress, modelDateOfBirth,
-                modelGender, modelAllergys, modelPriority, modelAppointments, modelMedCons);
+                modelGender, modelAllergies, modelPriority, modelAppointments, modelMedCons);
 
     }
 

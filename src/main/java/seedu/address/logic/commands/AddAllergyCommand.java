@@ -54,17 +54,17 @@ public class AddAllergyCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
         for (Person person : lastShownList) {
             if (person.getNric().equals(this.nric)) {
-                Set<Allergy> updatedallergieset = new HashSet<>(person.getAllergies());
+                Set<Allergy> updatedAllergiesSet = new HashSet<>(person.getAllergies());
                 // check for duplicates
                 for (Allergy allergy : allergies) {
-                    if (!updatedallergieset.add(allergy)) {
+                    if (!updatedAllergiesSet.add(allergy)) {
                         throw new CommandException(String.format(MESSAGE_DUPLICATE_ALLERGY, allergy.toString()));
                     }
                 }
                 Person editedPerson = new Person(
                         person.getName(), person.getPhone(), person.getEmail(),
                         person.getNric(), person.getAddress(), person.getDateOfBirth(),
-                        person.getGender(), updatedallergieset, person.getPriority(), person.getAppointments(),
+                        person.getGender(), updatedAllergiesSet, person.getPriority(), person.getAppointments(),
                         person.getMedCons());
                 model.setPerson(person, editedPerson);
                 model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);

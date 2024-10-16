@@ -90,7 +90,8 @@ public class AddApptCommand extends Command {
                                    .orElseThrow(() -> new CommandException(Messages.MESSAGE_PERSON_NRIC_NOT_FOUND));
         Person editedPerson = createEditedPerson(personToEdit, newApptName, newApptDate, newApptTime);
         model.setPerson(personToEdit, editedPerson);
-        logger.info("AddAppt command has been exceuted successfully on a person with NRIC: " + editedPerson.getNric());
+        logger.info("AddAppt command has been exceuted successfully on a person with NRIC: "
+                + editedPerson.getNric());
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS_4S, editedPerson.getNric(), newApptName, newApptDate,
                                                newApptTime));
@@ -120,7 +121,7 @@ public class AddApptCommand extends Command {
         DateOfBirth updatedDateOfBirth = personToEdit.getDateOfBirth();
         Gender updatedGender = personToEdit.getGender();
         Nric updatedNric = personToEdit.getNric();
-        Set<Allergy> updatedAllergys = personToEdit.getAllergies();
+        Set<Allergy> updatedAllergies = personToEdit.getAllergies();
         Set<MedCon> updatedMedCon = personToEdit.getMedCons();
         Priority updatedPriority = personToEdit.getPriority();
         ArrayList<Appointment> oldAppointmentList = null;
@@ -139,7 +140,7 @@ public class AddApptCommand extends Command {
         Set<Appointment> newAppointments = new HashSet<>(oldAppointmentList);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNric, updatedAddress, updatedDateOfBirth,
-                          updatedGender, updatedAllergys, updatedPriority, newAppointments, updatedMedCon);
+                          updatedGender, updatedAllergies, updatedPriority, newAppointments, updatedMedCon);
     }
 
     @Override
