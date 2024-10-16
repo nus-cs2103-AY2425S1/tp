@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagList;
 
 /**
@@ -51,6 +52,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    public void setTags(List<Tag> tags) { this.tags.setTags(tags); };
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -58,6 +61,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setTags(newData.getTagList());
     }
 
     //// person-level operations
@@ -97,6 +101,21 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /// tag methods
+
+    public boolean addTag(Tag t) {
+        tags.addTag(t);
+        return true;
+    }
+
+    public boolean hasTag(Tag t) {
+        return tags.contains(t);
+    }
+
+    public String tagsToString() {
+        return tags.toString();
+    }
+
     //// util methods
 
     @Override
@@ -110,6 +129,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
+
+    @Override
+    public ObservableList<Tag> getTagList() { return tags.asUnmodifiableObservableList(); }
 
     @Override
     public boolean equals(Object other) {

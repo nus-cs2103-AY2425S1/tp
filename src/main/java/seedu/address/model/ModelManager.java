@@ -23,7 +23,6 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final TagList tagList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -36,8 +35,6 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        // TODO: get from storage
-        this.tagList = new TagList();
     }
 
     public ModelManager() {
@@ -132,24 +129,26 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Tags ================================================================================
+
     @Override
     public boolean addTag(Tag tag) {
         if (this.hasTag(tag)) {
             return false;
         }
 
-        tagList.addTag(tag);
+        addressBook.addTag(tag);
         return true;
     }
 
     @Override
     public boolean hasTag(Tag tag) {
-        return tagList.contains(tag);
+        return addressBook.hasTag(tag);
     }
 
     @Override
     public String getTagList() {
-        return tagList.toString();
+        return addressBook.tagsToString();
     }
 
     @Override
