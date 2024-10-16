@@ -3,9 +3,9 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_JASON_MEETUP;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_JESSY_MEETUP;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_INFO_JASON;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_NETWORKING_MEETUP;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_PITCH_MEETUP;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_INFO_PITCH;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showMeetUpAtIndex;
@@ -57,9 +57,9 @@ public class EditMeetUpCommandTest {
         MeetUp lastMeetUp = model.getFilteredMeetUpList().get(indexLastMeetUp.getZeroBased());
 
         MeetUpBuilder meetUpInList = new MeetUpBuilder(lastMeetUp);
-        MeetUp editedMeetUp = meetUpInList.withInfo(VALID_MEETUP_INFO_JASON).build();
+        MeetUp editedMeetUp = meetUpInList.withInfo(VALID_MEETUP_INFO_PITCH).build();
 
-        EditMeetUpDescriptor descriptor = new EditMeetUpDescriptorBuilder().withInfo(VALID_MEETUP_INFO_JASON).build();
+        EditMeetUpDescriptor descriptor = new EditMeetUpDescriptorBuilder().withInfo(VALID_MEETUP_INFO_PITCH).build();
         EditMeetUpCommand editMeetUpCommand = new EditMeetUpCommand(indexLastMeetUp, descriptor);
 
         String expectedMessage = String.format(EditMeetUpCommand.MESSAGE_EDIT_MEETUP_SUCCESS,
@@ -91,9 +91,9 @@ public class EditMeetUpCommandTest {
         showMeetUpAtIndex(model, INDEX_FIRST_MEETUP);
 
         MeetUp meetUpInFilteredList = model.getFilteredMeetUpList().get(INDEX_FIRST_MEETUP.getZeroBased());
-        MeetUp editedMeetUp = new MeetUpBuilder(meetUpInFilteredList).withInfo(VALID_MEETUP_INFO_JASON).build();
+        MeetUp editedMeetUp = new MeetUpBuilder(meetUpInFilteredList).withInfo(VALID_MEETUP_INFO_PITCH).build();
         EditMeetUpCommand editMeetUpCommand = new EditMeetUpCommand(INDEX_FIRST_MEETUP,
-                new EditMeetUpDescriptorBuilder().withInfo(VALID_MEETUP_INFO_JASON).build());
+                new EditMeetUpDescriptorBuilder().withInfo(VALID_MEETUP_INFO_PITCH).build());
 
         String expectedMessage = String.format(EditMeetUpCommand.MESSAGE_EDIT_MEETUP_SUCCESS,
                 Messages.format(editedMeetUp));
@@ -129,7 +129,7 @@ public class EditMeetUpCommandTest {
     @Test
     public void execute_invalidMeetUpIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredMeetUpList().size() + 1);
-        EditMeetUpDescriptor descriptor = new EditMeetUpDescriptorBuilder().withInfo(VALID_MEETUP_INFO_JASON).build();
+        EditMeetUpDescriptor descriptor = new EditMeetUpDescriptorBuilder().withInfo(VALID_MEETUP_INFO_PITCH).build();
         EditMeetUpCommand editMeetUpCommand = new EditMeetUpCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editMeetUpCommand, model, Messages.MESSAGE_INVALID_MEETUP_DISPLAYED_INDEX);
@@ -147,17 +147,17 @@ public class EditMeetUpCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getMeetUpList().getMeetUpList().size());
 
         EditMeetUpCommand editMeetUpCommand = new EditMeetUpCommand(outOfBoundIndex,
-                new EditMeetUpDescriptorBuilder().withInfo(VALID_MEETUP_INFO_JASON).build());
+                new EditMeetUpDescriptorBuilder().withInfo(VALID_MEETUP_INFO_PITCH).build());
 
         assertCommandFailure(editMeetUpCommand, model, Messages.MESSAGE_INVALID_MEETUP_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final EditMeetUpCommand standardCommand = new EditMeetUpCommand(INDEX_FIRST_MEETUP, DESC_JASON_MEETUP);
+        final EditMeetUpCommand standardCommand = new EditMeetUpCommand(INDEX_FIRST_MEETUP, DESC_PITCH_MEETUP);
 
         // same values -> returns true
-        EditMeetUpDescriptor copyDescriptor = new EditMeetUpDescriptor(DESC_JASON_MEETUP);
+        EditMeetUpDescriptor copyDescriptor = new EditMeetUpDescriptor(DESC_PITCH_MEETUP);
         EditMeetUpCommand commandWithSameValues = new EditMeetUpCommand(INDEX_FIRST_MEETUP, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -171,10 +171,10 @@ public class EditMeetUpCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditMeetUpCommand(INDEX_SECOND_MEETUP, DESC_JASON_MEETUP)));
+        assertFalse(standardCommand.equals(new EditMeetUpCommand(INDEX_SECOND_MEETUP, DESC_PITCH_MEETUP)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditMeetUpCommand(INDEX_FIRST_MEETUP, DESC_JESSY_MEETUP)));
+        assertFalse(standardCommand.equals(new EditMeetUpCommand(INDEX_FIRST_MEETUP, DESC_NETWORKING_MEETUP)));
     }
 
     @Test

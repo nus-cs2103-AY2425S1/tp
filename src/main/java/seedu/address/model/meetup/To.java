@@ -27,17 +27,17 @@ public class To {
      *
      * @param str A valid string that can transformed to a date.
      */
-    public To(String str) {
-        requireNonNull(str);
-        checkArgument(isValidMeetUpToTime(str), MESSAGE_CONSTRAINTS);
+    public To(String to) {
+        requireNonNull(to);
+        checkArgument(isValidTo(to), MESSAGE_CONSTRAINTS);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        this.value = LocalDateTime.parse(str, formatter);
+        this.value = LocalDateTime.parse(to, formatter);
     }
 
     /**
      * Returns true if a given string is a valid end timing.
      */
-    public static boolean isValidMeetUpToTime(String test) {
+    public static boolean isValidTo(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

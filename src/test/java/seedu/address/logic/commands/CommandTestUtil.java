@@ -42,14 +42,14 @@ public class CommandTestUtil {
     public static final String VALID_PERSON_TYPE_BOB = "buyer";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_MEETUP_JASON = "Jason Teo";
-    public static final String VALID_MEETUP_JESSY = "Jessy Yong";
-    public static final String VALID_MEETUP_INFO_JASON = "Eat lunch with Jason Teo";
-    public static final String VALID_MEETUP_INFO_JESSY = "Project work with Jessy";
-    public static final String VALID_MEETUP_FROM_JASON = "2024-09-11 12:00";
-    public static final String VALID_MEETUP_FROM_JESSY = "2024-10-12 17:30";
-    public static final String VALID_MEETUP_TO_JASON = "2024-09-11 12:59";
-    public static final String VALID_MEETUP_TO_JESSY = "2024-10-12 19:45";
+    public static final String VALID_MEETUP_NAME_PITCH = "Sales Pitch";
+    public static final String VALID_MEETUP_NAME_NETWORKING = "Networking Session";
+    public static final String VALID_MEETUP_INFO_PITCH = "Pitching property at Bukit Timah.";
+    public static final String VALID_MEETUP_INFO_NETWORKING = "Networking with real estate agents.";
+    public static final String VALID_MEETUP_FROM_PITCH = "2024-09-11 12:00";
+    public static final String VALID_MEETUP_FROM_NETWORKING = "2024-10-12 17:30";
+    public static final String VALID_MEETUP_TO_PITCH = "2024-09-11 12:59";
+    public static final String VALID_MEETUP_TO_NETWORKING = "2024-10-12 19:45";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -77,8 +77,8 @@ public class CommandTestUtil {
 
     public static final EditPersonCommand.EditPersonDescriptor DESC_AMY;
     public static final EditPersonCommand.EditPersonDescriptor DESC_BOB;
-    public static final EditMeetUpCommand.EditMeetUpDescriptor DESC_JASON_MEETUP;
-    public static final EditMeetUpCommand.EditMeetUpDescriptor DESC_JESSY_MEETUP;
+    public static final EditMeetUpCommand.EditMeetUpDescriptor DESC_PITCH_MEETUP;
+    public static final EditMeetUpCommand.EditMeetUpDescriptor DESC_NETWORKING_MEETUP;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -87,12 +87,12 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-        DESC_JASON_MEETUP = new EditMeetUpDescriptorBuilder().withName(VALID_MEETUP_JASON)
-                .withInfo(VALID_MEETUP_INFO_JASON).withFrom(VALID_MEETUP_FROM_JASON)
-                .withTo(VALID_MEETUP_TO_JASON).build();
-        DESC_JESSY_MEETUP = new EditMeetUpDescriptorBuilder().withName(VALID_MEETUP_JESSY)
-                .withInfo(VALID_MEETUP_INFO_JESSY).withFrom(VALID_MEETUP_FROM_JESSY)
-                .withTo(VALID_MEETUP_TO_JESSY).build();
+        DESC_PITCH_MEETUP = new EditMeetUpDescriptorBuilder().withName(VALID_MEETUP_NAME_PITCH)
+                .withInfo(VALID_MEETUP_INFO_PITCH).withFrom(VALID_MEETUP_FROM_PITCH)
+                .withTo(VALID_MEETUP_TO_PITCH).build();
+        DESC_NETWORKING_MEETUP = new EditMeetUpDescriptorBuilder().withName(VALID_MEETUP_NAME_NETWORKING)
+                .withInfo(VALID_MEETUP_INFO_NETWORKING).withFrom(VALID_MEETUP_FROM_NETWORKING)
+                .withTo(VALID_MEETUP_TO_NETWORKING).build();
     }
 
     /**
@@ -118,16 +118,6 @@ public class CommandTestUtil {
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
             Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
-        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
-    }
-
-    /**
-     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
-     * that takes a string {@code expectedMessage}.
-     */
-    public static void assertMeetupCommandSuccess(Command command, Model actualModel,
-            String expectedMessage, Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 

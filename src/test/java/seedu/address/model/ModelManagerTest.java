@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalMeetUps.NETWORKING_MEETUP;
+import static seedu.address.testutil.TypicalMeetUps.PITCH_MEETUP;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -17,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.MeetUpListBuilder;
 
 public class ModelManagerTest {
 
@@ -73,6 +76,18 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setMeetUpListFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setMeetUpListFilePath(null));
+    }
+
+    @Test
+    public void setMeetUpListFilePath_validPath_setsMeetUpListFilePath() {
+        Path path = Paths.get("meet/up/list/file/path");
+        modelManager.setMeetUpListFilePath(path);
+        assertEquals(path, modelManager.getMeetUpListFilePath());
+    }
+
+    @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
     }
@@ -89,6 +104,22 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasMeetUp_nullMeetUp_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasMeetUp(null));
+    }
+
+    @Test
+    public void hasMeetUp_meetUpNotInMeetUpList_returnsFalse() {
+        assertFalse(modelManager.hasMeetUp(PITCH_MEETUP));
+    }
+
+    @Test
+    public void hasMeetUp_meetUpInMeetUpList_returnsTrue() {
+        modelManager.addMeetUp(PITCH_MEETUP);
+        assertTrue(modelManager.hasMeetUp(PITCH_MEETUP));
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
@@ -98,7 +129,8 @@ public class ModelManagerTest {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
-        MeetUpList meetUpList = new MeetUpList();
+        MeetUpList meetUpList = new MeetUpListBuilder().withMeetUp(PITCH_MEETUP).withMeetUp(NETWORKING_MEETUP).build();
+        MeetUpList differentMeetUpList = new MeetUpList();
 
         // same values -> returns true
         modelManager = new ModelManager(addressBook, userPrefs, meetUpList);
@@ -116,6 +148,9 @@ public class ModelManagerTest {
 
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, meetUpList)));
+
+        // different meetUpList -> returns false
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, differentMeetUpList)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");

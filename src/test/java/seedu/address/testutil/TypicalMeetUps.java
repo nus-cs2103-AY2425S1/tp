@@ -40,16 +40,16 @@ public class TypicalMeetUps {
             .withTo("2024-10-04 19:00").build();
 
     // Manually added - MeetUp's details found in {@code CommandTestUtil}
-    public static final MeetUp SELLER_MEETUP = new MeetUpBuilder()
-            .withName("Meet Up with seller")
-            .withInfo("Discuss compensation and settle on payment for service rendered")
-            .withFrom("2024-11-01 15:00")
-            .withTo("2024-11-01 17:00").build();
-    public static final MeetUp BUYER_MEETUP = new MeetUpBuilder()
-            .withName("Meet Up with buyer")
-            .withInfo("Discuss potential sale with buyer")
-            .withFrom("2024-11-10 07:00")
-            .withTo("2024-11-10 10:00").build();
+    public static final MeetUp NETWORKING_MEETUP = new MeetUpBuilder()
+            .withName("Networking Session")
+            .withInfo("Networking with real estate agents.")
+            .withFrom("2024-10-12 17:30")
+            .withTo("2024-10-12 19:45").build();
+    public static final MeetUp PITCH_MEETUP = new MeetUpBuilder()
+            .withName("Sales Pitch")
+            .withInfo("Pitching property at Bukit Timah.")
+            .withFrom("2024-09-11 12:00")
+            .withTo("2024-09-11 12:59").build();
 
     private TypicalMeetUps() {} // prevents instantiation
 

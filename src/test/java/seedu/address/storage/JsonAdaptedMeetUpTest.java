@@ -15,7 +15,7 @@ import seedu.address.model.meetup.To;
 
 public class JsonAdaptedMeetUpTest {
     private static final String INVALID_NAME = "Z!x!n";
-    private static final String INVALID_INFO = "D!scuss Pl@ns";
+    private static final String INVALID_INFO = " ";
     private static final String INVALID_FROM = "2023213-0231-03";
     private static final String INVALID_TO = "2023-02-31 37:78";
 
