@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalVendors.AMY;
 
@@ -175,7 +176,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = CreateVendorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + DESCRIPTION_DESC_AMY;
+        String addCommand = CreateVendorCommand.COMMAND_WORD + " " + PREFIX_VENDOR
+                + NAME_DESC_AMY + PHONE_DESC_AMY + DESCRIPTION_DESC_AMY;
         Vendor expectedVendor = new VendorBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addVendor(expectedVendor);

@@ -36,6 +36,7 @@ import seedu.address.model.event.Name;
 import seedu.address.model.vendor.NameContainsKeywordsPredicate;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.testutil.EditVendorDescriptorBuilder;
+import seedu.address.testutil.EventUtil;
 import seedu.address.testutil.VendorBuilder;
 import seedu.address.testutil.VendorUtil;
 
@@ -46,7 +47,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Vendor vendor = new VendorBuilder().build();
-        CreateVendorCommand command = (CreateVendorCommand) parser.parseCommand(VendorUtil.getAddCommand(vendor));
+        CreateVendorCommand command = (CreateVendorCommand) parser
+                .parseCommand(VendorUtil.getCreateVendorCommand(vendor));
         assertEquals(new CreateVendorCommand(vendor), command);
     }
 
