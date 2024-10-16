@@ -21,7 +21,7 @@ public class DeleteTransactionCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SUCCESS = "Deleted transaction: %1$s";
+    public static final String MESSAGE_SUCCESS = "Deleted transaction %1$s\\nfrom %2$s";
 
     private static final Index CURRENT_PERSON = Index.fromOneBased(1);
     private final Index index;
@@ -47,7 +47,10 @@ public class DeleteTransactionCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
         }
 
+        Transaction transactionToRemove = transactions.get(index.getZeroBased());
         transactions.remove(index.getZeroBased());
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(selected)));
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, transactionToRemove.toString(),
+                Messages.format(selected)));
     }
 }
