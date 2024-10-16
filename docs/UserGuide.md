@@ -157,6 +157,10 @@ Format: `addnotes INDEX n/[NOTES]`
 A person can have any number of notes (including 0)
 </div>
 
+- Add note to the person at the specified `INDEX`.
+- The index refers to the index number shown in the displayed person list.
+- The index **must be a positive integer** 1, 2, 3, …​
+
 Examples:
 
 - `addnotes 1 n/Supplier 1`
