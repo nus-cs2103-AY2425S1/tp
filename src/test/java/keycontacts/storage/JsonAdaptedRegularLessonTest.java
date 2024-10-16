@@ -1,6 +1,7 @@
 package keycontacts.storage;
 
 import static keycontacts.testutil.Assert.assertThrows;
+import static keycontacts.testutil.TypicalStudents.ALICE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
@@ -11,9 +12,9 @@ import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.lesson.Time;
 
 public class JsonAdaptedRegularLessonTest {
-    private static final String VALID_DAY = "MONDAY";
-    private static final String VALID_START_TIME = "14:00";
-    private static final String VALID_END_TIME = "15:00";
+    private static final String VALID_DAY = ALICE.getRegularLesson().getLessonDay().toString();
+    private static final String VALID_START_TIME = ALICE.getRegularLesson().getStartTime().toString();
+    private static final String VALID_END_TIME = ALICE.getRegularLesson().getEndTime().toString();
 
     private static final String INVALID_DAY = "day";
     private static final String INVALID_START_TIME = "2pm";

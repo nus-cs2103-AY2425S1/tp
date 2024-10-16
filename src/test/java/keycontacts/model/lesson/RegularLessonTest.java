@@ -10,6 +10,8 @@ import java.util.Objects;
 
 import org.junit.jupiter.api.Test;
 
+import keycontacts.testutil.RegularLessonBuilder;
+
 public class RegularLessonTest {
 
     @Test
@@ -30,15 +32,14 @@ public class RegularLessonTest {
 
     @Test
     public void equals() {
-        RegularLesson regularLesson1 = new RegularLesson(new Day("Monday"), new Time("10:00"), new Time("11:00"));
-        RegularLesson regularLesson1Duplicate =
-                new RegularLesson(new Day("Monday"), new Time("10:00"), new Time("11:00"));
+        RegularLesson regularLesson1 = new RegularLessonBuilder().build();
+        RegularLesson regularLesson1Duplicate = new RegularLessonBuilder().build();
         // different start time
-        RegularLesson regularLesson2 = new RegularLesson(new Day("Monday"), new Time("09:00"), new Time("11:00"));
+        RegularLesson regularLesson2 = new RegularLessonBuilder().withStartTime("15:00").build();;
         // different end time
-        RegularLesson regularLesson3 = new RegularLesson(new Day("Monday"), new Time("10:00"), new Time("12:00"));
+        RegularLesson regularLesson3 = new RegularLessonBuilder().withEndTime("19:00").build();
         // different day
-        RegularLesson regularLesson4 = new RegularLesson(new Day("Tuesday"), new Time("10:00"), new Time("11:00"));
+        RegularLesson regularLesson4 = new RegularLessonBuilder().withLessonDay("Tuesday").build();
 
         assertFalse(regularLesson1.equals(regularLesson2));
         assertFalse(regularLesson2.equals(regularLesson1));
