@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import seedu.academyassist.model.person.Name;
 import seedu.academyassist.model.person.Phone;
 import seedu.academyassist.model.AddressBook;
-import seedu.academyassist.model.ReadOnlyAddressBook;
+import seedu.academyassist.model.ReadOnlyAcademyAssist;
 import seedu.academyassist.model.person.Address;
 import seedu.academyassist.model.person.Email;
 import seedu.academyassist.model.person.Ic;
@@ -42,7 +42,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyAcademyAssist getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);

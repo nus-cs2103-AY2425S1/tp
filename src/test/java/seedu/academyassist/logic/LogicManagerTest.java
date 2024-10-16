@@ -25,7 +25,7 @@ import seedu.academyassist.logic.commands.exceptions.CommandException;
 import seedu.academyassist.logic.parser.exceptions.ParseException;
 import seedu.academyassist.model.Model;
 import seedu.academyassist.model.ModelManager;
-import seedu.academyassist.model.ReadOnlyAddressBook;
+import seedu.academyassist.model.ReadOnlyAcademyAssist;
 import seedu.academyassist.model.UserPrefs;
 import seedu.academyassist.model.person.Person;
 import seedu.academyassist.storage.JsonAddressBookStorage;
@@ -123,7 +123,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAcademyAssist(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -152,7 +152,7 @@ public class LogicManagerTest {
         // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
             @Override
-            public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
+            public void saveAddressBook(ReadOnlyAcademyAssist addressBook, Path filePath)
                     throws IOException {
                 throw e;
             }

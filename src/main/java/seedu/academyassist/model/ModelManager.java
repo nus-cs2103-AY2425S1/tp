@@ -29,7 +29,7 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAcademyAssist addressBook, ReadOnlyUserPrefs userPrefs) {
         CollectionUtil.requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
@@ -68,7 +68,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getAcademyAssistFilePath() {
         return userPrefs.getAddressBookFilePath();
     }
 
@@ -81,12 +81,12 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
+    public void setAddressBook(ReadOnlyAcademyAssist addressBook) {
         this.addressBook.resetData(addressBook);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyAcademyAssist getAcademyAssist() {
         return addressBook;
     }
 

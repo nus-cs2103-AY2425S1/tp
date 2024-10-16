@@ -20,7 +20,7 @@ import seedu.academyassist.logic.Messages;
 import seedu.academyassist.logic.commands.exceptions.CommandException;
 import seedu.academyassist.model.AddressBook;
 import seedu.academyassist.model.Model;
-import seedu.academyassist.model.ReadOnlyAddressBook;
+import seedu.academyassist.model.ReadOnlyAcademyAssist;
 import seedu.academyassist.model.ReadOnlyUserPrefs;
 import seedu.academyassist.model.person.Ic;
 import seedu.academyassist.model.person.Person;
@@ -111,7 +111,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getAcademyAssistFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -126,12 +126,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setAddressBook(ReadOnlyAcademyAssist newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyAcademyAssist getAcademyAssist() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -228,7 +228,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyAcademyAssist getAcademyAssist() {
             return new AddressBook();
         }
     }

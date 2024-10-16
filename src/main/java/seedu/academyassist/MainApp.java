@@ -18,7 +18,7 @@ import seedu.academyassist.logic.LogicManager;
 import seedu.academyassist.model.AddressBook;
 import seedu.academyassist.model.Model;
 import seedu.academyassist.model.ModelManager;
-import seedu.academyassist.model.ReadOnlyAddressBook;
+import seedu.academyassist.model.ReadOnlyAcademyAssist;
 import seedu.academyassist.model.ReadOnlyUserPrefs;
 import seedu.academyassist.model.UserPrefs;
 import seedu.academyassist.model.util.SampleDataUtil;
@@ -77,8 +77,8 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyAcademyAssist> addressBookOptional;
+        ReadOnlyAcademyAssist initialData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {

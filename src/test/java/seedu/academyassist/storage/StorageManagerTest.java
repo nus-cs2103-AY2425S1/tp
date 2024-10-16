@@ -12,7 +12,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.academyassist.commons.core.GuiSettings;
 import seedu.academyassist.model.AddressBook;
-import seedu.academyassist.model.ReadOnlyAddressBook;
+import seedu.academyassist.model.ReadOnlyAcademyAssist;
 import seedu.academyassist.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -56,7 +56,7 @@ public class StorageManagerTest {
          */
         AddressBook original = getTypicalAddressBook();
         storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
+        ReadOnlyAcademyAssist retrieved = storageManager.readAddressBook().get();
         assertEquals(original, new AddressBook(retrieved));
     }
 

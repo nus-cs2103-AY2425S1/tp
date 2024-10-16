@@ -8,7 +8,7 @@ import seedu.academyassist.logic.commands.CommandResult;
 import seedu.academyassist.logic.commands.exceptions.CommandException;
 import seedu.academyassist.logic.parser.exceptions.ParseException;
 import seedu.academyassist.model.Model;
-import seedu.academyassist.model.ReadOnlyAddressBook;
+import seedu.academyassist.model.ReadOnlyAcademyAssist;
 import seedu.academyassist.model.person.Person;
 
 /**
@@ -25,11 +25,11 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the AcademyAssist.
      *
-     * @see Model#getAddressBook()
+     * @see Model#getAcademyAssist()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyAcademyAssist getAcademyAssist();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
@@ -37,7 +37,7 @@ public interface Logic {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getAcademyAssistFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

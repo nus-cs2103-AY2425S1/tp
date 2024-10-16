@@ -45,7 +45,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
                 model.getFilteredPersonList().get(0).getName(), "F2234567X", Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAcademyAssist()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -68,7 +68,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
             lastPerson.getName(), lastPerson.getIc(), Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAcademyAssist()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -83,7 +83,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson.getName(),
                 "F1264567X", Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAcademyAssist()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -100,7 +100,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, personInFilteredList.getName(),
                 "F1264567X", Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAcademyAssist()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -125,7 +125,7 @@ public class EditCommandTest {
         showPersonWithIc(model, firstPersonIc);
 
         // edit person in filtered list into a duplicate in address book
-        Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person personInList = model.getAcademyAssist().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(firstPersonIc,
                 new EditPersonDescriptorBuilder(personInList).build());
 

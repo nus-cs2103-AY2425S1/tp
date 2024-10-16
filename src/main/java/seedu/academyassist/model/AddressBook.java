@@ -15,7 +15,7 @@ import seedu.academyassist.model.person.Subject;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class AddressBook implements ReadOnlyAcademyAssist {
 
     private final UniquePersonList persons;
 
@@ -35,7 +35,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public AddressBook(ReadOnlyAcademyAssist toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -53,7 +53,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyAcademyAssist newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
