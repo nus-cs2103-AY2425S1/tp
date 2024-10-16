@@ -37,7 +37,7 @@ public class NoteCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withNote(NOTE_STUB).build();
         NoteCommand noteCommand = new NoteCommand(firstPerson.getName(), new Note(editedPerson.getNote().value));
-        String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS, Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
@@ -49,7 +49,7 @@ public class NoteCommandTest {
         Person editedPerson = new PersonBuilder(firstPerson).withNote("").build();
         NoteCommand noteCommand = new NoteCommand(firstPerson.getName(),
                 new Note(editedPerson.getNote().toString()));
-        String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
