@@ -141,6 +141,20 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Sort persons by name: `sort`
+
+Sorts and displays the list of persons by name in either ascending or descending alphabetical order
+
+Format: `sort [ORDER]`
+
+* `[ORDER]` can be either "asc" / "ascending" or "desc" / "descending" (case-insensitive)
+* If no order is provided, persons will be sorted in ascending order by default
+
+Examples:
+* `sort` will sort by persons names alphabetically in ascending order
+* `sort ascending` will sort by persons names alphabetically in ascending order
+* `sort descending` will sort by persons names alphabetically in descending order
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -197,3 +211,4 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Sort** | `sort [ORDER]`<br> e.g., `sort asc`
