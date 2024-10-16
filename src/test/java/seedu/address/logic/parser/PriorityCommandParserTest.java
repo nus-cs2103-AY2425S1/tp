@@ -51,4 +51,25 @@ public class PriorityCommandParserTest {
         assertParseFailure(parser, "1 /level notANumber",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, PriorityCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_invalidPriorityLevel_throwsParseException() {
+        assertParseFailure(parser, "1 /level 4",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PriorityCommand.MESSAGE_USAGE));
+
+        assertParseFailure(parser, "1 /level 0",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PriorityCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_nonNumericLevel_throwsParseException() {
+        assertParseFailure(parser, "1 /level abc",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PriorityCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_missingLevelArgument_throwsParseException() {
+        assertParseFailure(parser, "1 /level", // Missing level argument
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PriorityCommand.MESSAGE_USAGE));
+    }
 }
