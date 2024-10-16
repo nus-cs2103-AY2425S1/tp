@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Doctor;
+import seedu.address.model.person.DoctorName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
@@ -25,12 +27,16 @@ public class PersonBuilder {
     public static final String DEFAULT_ECNAME = "Sarah Lim";
     public static final String DEFAULT_ECPHONE = "98761234";
     public static final String DEFAULT_ECRS = "Parent";
+    public static final String DEFAULT_DOC_NAME = "Dr. John Doe";
+    public static final String DEFAULT_DOC_PHONE = "98927134";
+    public static final String DEFAULT_DOC_EMAIL = "johndoe@gmail.com";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private EmergencyContact emergencyContact;
+    private Doctor doctor;
     private Set<Tag> tags;
 
     /**
@@ -43,6 +49,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         emergencyContact = new EmergencyContact(new Name(DEFAULT_ECNAME),
                 new Phone(DEFAULT_ECPHONE), new Relationship(DEFAULT_ECRS));
+        doctor = new Doctor(new DoctorName(DEFAULT_DOC_NAME), new Phone(DEFAULT_DOC_PHONE), new Email(DEFAULT_DOC_EMAIL));
         tags = new HashSet<>();
     }
 
@@ -55,6 +62,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         emergencyContact = personToCopy.getEmergencyContact();
+        doctor = personToCopy.getDoctor();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -67,9 +75,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the
+     * {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -99,7 +108,8 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code EmergencyContact Name} of the {@code Person} that we are building.
+     * Sets the {@code EmergencyContact Name} of the {@code Person} that we are
+     * building.
      */
     public PersonBuilder withEcName(String ecName) {
         this.emergencyContact = new EmergencyContact(new Name(ecName), emergencyContact.getPhone(),
@@ -108,15 +118,18 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code EmergencyContact Phone} of the {@code Person} that we are building.
+     * Sets the {@code EmergencyContact Phone} of the {@code Person} that we are
+     * building.
      */
     public PersonBuilder withEcPhone(String ecPhone) {
         this.emergencyContact = new EmergencyContact(emergencyContact.getName(), new Phone(ecPhone),
                 emergencyContact.getRelationship());
         return this;
     }
+
     /**
-     * Sets the {@code EmergencyContact Relationship} of the {@code Person} that we are building.
+     * Sets the {@code EmergencyContact Relationship} of the {@code Person} that we
+     * are building.
      */
     public PersonBuilder withEcRelationship(String ecRelationship) {
         this.emergencyContact = new EmergencyContact(emergencyContact.getName(), emergencyContact.getPhone(),
@@ -124,8 +137,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Doctor Name} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDoctorName(String doctorName) {
+        this.doctor = new Doctor(new DoctorName(doctorName), doctor.getPhone(), doctor.getEmail());
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, emergencyContact, tags);
+        return new Person(name, phone, email, address, emergencyContact, doctor, tags);
     }
 
 }

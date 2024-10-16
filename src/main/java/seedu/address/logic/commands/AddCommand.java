@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_PHONE;
@@ -32,6 +35,9 @@ public class AddCommand extends Command {
             + PREFIX_EMERGENCY_CONTACT_NAME + "EMERGENCY CONTACT NAME "
             + PREFIX_EMERGENCY_CONTACT_PHONE + "EMERGENCY CONTACT PHONE "
             + PREFIX_EMERGENCY_CONTACT_RELATIONSHIP + "EMERGENCY CONTACT RELATIONSHIP "
+            + PREFIX_DOC_NAME + "DOCTOR NAME "
+            + PREFIX_DOC_PHONE + "DOCTOR PHONE "
+            + PREFIX_DOC_EMAIL + "DOCTOR EMAIL "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -41,6 +47,9 @@ public class AddCommand extends Command {
             + PREFIX_EMERGENCY_CONTACT_NAME + "Beatrice Bean "
             + PREFIX_EMERGENCY_CONTACT_PHONE + "91324856 "
             + PREFIX_EMERGENCY_CONTACT_RELATIONSHIP + "Parent "
+            + PREFIX_DOC_NAME + "Tan Wei Ming "
+            + PREFIX_DOC_PHONE + "62345678 "
+            + PREFIX_DOC_EMAIL + "tanweiming@gmail.com "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
