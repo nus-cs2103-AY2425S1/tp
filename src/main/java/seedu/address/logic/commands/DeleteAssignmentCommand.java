@@ -30,7 +30,7 @@ public class DeleteAssignmentCommand extends Command {
             + PREFIX_STATUS + "SUBMISSION STATUS (OPTIONAL)"
             + PREFIX_STATUS + "GRADING STATUS (OPTIONAL)"
             + PREFIX_GRADE + "GRADE (OPTIONAL)"
-            + "\n"  
+            + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_ASSIGNMENT + "Math Quiz ";
