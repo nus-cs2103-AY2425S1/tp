@@ -3,6 +3,9 @@ package seedu.ddd.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_CONTACT_TYPE;
+import static seedu.ddd.logic.Messages.MESSAGE_MULTIPLE_CONTACT_TYPES;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -13,11 +16,10 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.ddd.model.contact.common.ContactType.CLIENT;
 import static seedu.ddd.model.contact.common.ContactType.VENDOR;
 
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.ddd.logic.commands.AddContactCommand;
+import seedu.ddd.logic.commands.AddCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.contact.client.Client;
@@ -36,44 +38,40 @@ import seedu.ddd.model.tag.Tag;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class AddContactCommandParser implements Parser<AddContactCommand> {
+public class AddContactCommandParser implements Parser<AddCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddContactCommand parse(String args) throws ParseException {
+    public AddCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_SERVICE, PREFIX_DATE);
+                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_SERVICE, PREFIX_DATE, FLAG_CLIENT, FLAG_VENDOR);
 
         ContactType contactType;
-        String contactTypeString = argMultimap.getPreamble();
 
-        try {
-            if (Objects.equals(contactTypeString, "client")) {
-                contactType = CLIENT;
-            } else if (Objects.equals(contactTypeString, "vendor")) {
-                contactType = VENDOR;
-            } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_CONTACT_TYPE, contactTypeString));
-            }
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddContactCommand.MESSAGE_USAGE), pe);
+        if (argMultimap.getValue(FLAG_CLIENT).isPresent() && argMultimap.getValue(FLAG_VENDOR).isPresent()) {
+            throw new ParseException(MESSAGE_MULTIPLE_CONTACT_TYPES);
+        } else if (argMultimap.getValue(FLAG_CLIENT).isPresent()) {
+            contactType = CLIENT;
+        } else if (argMultimap.getValue(FLAG_VENDOR).isPresent()) {
+            contactType = VENDOR;
+        } else {
+            throw new ParseException(AddCommand.MESSAGE_USAGE);
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_SERVICE)
                 && contactType == VENDOR) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddContactCommand.VENDOR_MESSAGE_USAGE));
+                    AddCommand.VENDOR_MESSAGE_USAGE));
         } else if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS,
                 PREFIX_PHONE, PREFIX_EMAIL, PREFIX_DATE)
                 && contactType == CLIENT) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddContactCommand.CLIENT_MESSAGE_USAGE));
+                    AddCommand.CLIENT_MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
@@ -95,7 +93,7 @@ public class AddContactCommandParser implements Parser<AddContactCommand> {
             contact = new Client(name, phone, email, address, date, tagList, id);
         }
         AddressBook.incrementNextId();
-        return new AddContactCommand(contact);
+        return new AddCommand(contact);
     }
 
     /**
