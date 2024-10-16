@@ -76,6 +76,24 @@ public class Lesson {
     }
 
     /**
+     * Adds a lesson to the HashSet.
+     *
+     * @param lesson The lesson to add.
+     */
+    public static void addLesson(Lesson lesson) {
+        lessonSet.add(lesson);
+    }
+
+    /**
+     * Removes a lesson from the HashSet.
+     *
+     * @param lesson The lesson to remove.
+     */
+    public static void removeLesson(Lesson lesson) {
+        lessonSet.remove(lesson);
+    }
+
+    /**
      * Checks if the given lesson is a duplicate by checking the HashSet.
      *
      * @param lesson The lesson to check for duplication.
