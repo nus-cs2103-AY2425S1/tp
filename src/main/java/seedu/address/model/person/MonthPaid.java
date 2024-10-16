@@ -21,19 +21,6 @@ public class MonthPaid {
     }
 
     /**
-     * Concatenates with another monthsPaid
-     * @param otherMonthPaid the monthsPaid to be concatenated with
-     * @return the concatenated monthsPaid
-     */
-    public MonthPaid concatenate(MonthPaid otherMonthPaid) {
-        if (value.isEmpty()) {
-            return otherMonthPaid;
-        } else {
-            return new MonthPaid(value + " " + otherMonthPaid.value);
-        }
-    }
-
-    /**
      * Returns true if a given string is a valid monthsPaid.
      */
     public static boolean isValidMonthPaid(String monthPaid) {
