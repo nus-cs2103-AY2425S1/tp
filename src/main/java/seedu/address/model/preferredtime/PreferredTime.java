@@ -9,7 +9,8 @@ import static java.util.Objects.requireNonNull;
 public class PreferredTime {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "PreferredTime should consists of Day and Time in the format 'Day HHmm'. ";
+            "PreferredTime should consists of Day and Time in the format 'Day HHmm'.\n"
+            + "There should be exactly one space in between";
 
     // TODO: change the REGEX
     public static final String VALIDATION_REGEX = "\\p{L}+\\s\\d{4}$";

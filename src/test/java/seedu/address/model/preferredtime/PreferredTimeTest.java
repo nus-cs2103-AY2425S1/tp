@@ -25,6 +25,7 @@ public class PreferredTimeTest {
         assertFalse(PreferredTime.isValidPreferredTime("2345 3456")); // first part being number
         assertFalse(PreferredTime.isValidPreferredTime("Monday 12")); // < 4 places for second part
         assertFalse(PreferredTime.isValidPreferredTime("Monday 24380")); // > 4 places for second part
+        assertFalse(PreferredTime.isValidPreferredTime("Wednesday  2130")); // more than one space
 
         // valid preferred time
         assertTrue(PreferredTime.isValidPreferredTime("Monday 1230"));
