@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ public class MassDeleteCommandTest {
         Person firstPersonToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person secondPersonToDelete = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         List<Index> indicesToDelete = Arrays.asList(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON);
-        MassDeleteCommand massDeleteCommand = new MassDeleteCommand(indicesToDelete);
+        MassDeleteCommand massDeleteCommand = new MassDeleteCommand(indicesToDelete, Collections.emptyList());
 
         String expectedMessage = String.format(MassDeleteCommand.MESSAGE_DELETE_PERSONS_SUCCESS,
                 Arrays.asList(INDEX_FIRST_PERSON.getOneBased(), INDEX_SECOND_PERSON.getOneBased()));
@@ -51,7 +52,7 @@ public class MassDeleteCommandTest {
 
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         List<Index> indicesToDelete = Arrays.asList(INDEX_FIRST_PERSON);
-        MassDeleteCommand massDeleteCommand = new MassDeleteCommand(indicesToDelete);
+        MassDeleteCommand massDeleteCommand = new MassDeleteCommand(indicesToDelete, Collections.emptyList());
 
         String expectedMessage = String.format(MassDeleteCommand.MESSAGE_DELETE_PERSONS_SUCCESS,
                 Arrays.asList(INDEX_FIRST_PERSON.getOneBased()));
@@ -65,14 +66,14 @@ public class MassDeleteCommandTest {
 
     @Test
     public void equals() {
-        MassDeleteCommand massDeleteFirstCommand = new MassDeleteCommand(Arrays.asList(INDEX_FIRST_PERSON));
-        MassDeleteCommand massDeleteSecondCommand = new MassDeleteCommand(Arrays.asList(INDEX_SECOND_PERSON));
+        MassDeleteCommand massDeleteFirstCommand = new MassDeleteCommand(Arrays.asList(INDEX_FIRST_PERSON), Collections.emptyList());
+        MassDeleteCommand massDeleteSecondCommand = new MassDeleteCommand(Arrays.asList(INDEX_SECOND_PERSON), Collections.emptyList());
 
         // same object -> returns true
         assertTrue(massDeleteFirstCommand.equals(massDeleteFirstCommand));
 
         // same values -> returns true
-        MassDeleteCommand massDeleteFirstCommandCopy = new MassDeleteCommand(Arrays.asList(INDEX_FIRST_PERSON));
+        MassDeleteCommand massDeleteFirstCommandCopy = new MassDeleteCommand(Arrays.asList(INDEX_FIRST_PERSON), Collections.emptyList());
         assertTrue(massDeleteFirstCommand.equals(massDeleteFirstCommandCopy));
 
         // different types -> returns false
@@ -88,8 +89,8 @@ public class MassDeleteCommandTest {
     @Test
     public void toStringMethod() {
         List<Index> targetIndices = Arrays.asList(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON);
-        MassDeleteCommand massDeleteCommand = new MassDeleteCommand(targetIndices);
-        String expected = MassDeleteCommand.class.getCanonicalName() + "{targetIndices=" + targetIndices + "}";
+        MassDeleteCommand massDeleteCommand = new MassDeleteCommand(targetIndices, Collections.emptyList());
+        String expected = MassDeleteCommand.class.getCanonicalName() + "{targetIndices=" + targetIndices + ", invalidInputs=[]}";
         assertEquals(expected, massDeleteCommand.toString());
     }
 
