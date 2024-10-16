@@ -2,6 +2,7 @@ package seedu.address.model.commons;
 
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Role;
 
@@ -32,11 +33,11 @@ public class RoleContainsKeywordPredicate implements Predicate<Person> {
         }
 
         RoleContainsKeywordPredicate otherRoleContainsKeywordPredicate = (RoleContainsKeywordPredicate) other;
-        return keyword.equals(otherRoleContainsKeywordPredicate.keyword);
+        return new Role(keyword).equals(new Role(otherRoleContainsKeywordPredicate.keyword));
     }
 
     @Override
     public String toString() {
-        return keyword;
+        return new ToStringBuilder(this).add("keyword", keyword).toString();
     }
 }
