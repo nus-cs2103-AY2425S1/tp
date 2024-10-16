@@ -5,6 +5,9 @@ import java.util.Arrays;
 import seedu.address.model.person.task.Task;
 import seedu.address.model.person.task.TaskList;
 
+/**
+ * A utility class to help with building TaskList objects.
+ */
 public class TaskListBuilder {
     public TaskList taskList;
 
@@ -23,6 +26,10 @@ public class TaskListBuilder {
         this.taskList.setTasks(taskListToCopy);
     }
 
+
+    /**
+     * Sets the {@code Tasks} of the {@code TaskList} that we are building.
+     */
     public void withTasks(Task ... tasks) {
         taskList.setTasks(Arrays.stream(tasks).toList());
     }
