@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import seedu.address.logic.commands.NoteCommand;
+
 /**
  * Stores the current state of the UI display.
  */
@@ -27,5 +29,20 @@ public class UiState {
     public void setState(State state) {
         currentState = state;
         System.out.println(state);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof UiState)) {
+            return false;
+        }
+
+        UiState e = (UiState) other;
+        return currentState.equals(e.currentState);
     }
 }

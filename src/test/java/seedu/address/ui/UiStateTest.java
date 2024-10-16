@@ -32,13 +32,13 @@ public class UiStateTest {
     public void execute_sameCommandTypes_returnsSameUiState() throws CommandException {
         new AddCommand(AMY).execute(expectedModel);
         new DeleteCommand(INDEX_FIRST_PERSON).execute(model);
-        assertEquals(expectedModel.getUiState().getState(), model.getUiState().getState());
+        assertEquals(expectedModel.getUiState(), model.getUiState());
     }
 
     @Test
     public void execute_differentCommandTypes_returnsDifferentUiState() throws CommandException {
         new AddCommand(AMY).execute(expectedModel);
         new ViewTasksCommand().execute(model);
-        assertNotEquals(expectedModel.getUiState().getState(), model.getUiState().getState());
+        assertNotEquals(expectedModel.getUiState(), model.getUiState());
     }
 }
