@@ -4,27 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
-
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.calendar.EdulogCalendar;
-import seedu.address.model.calendar.Lesson;
-import seedu.address.model.student.Student;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.calendar.Lesson;
 
 public class DeleteLessonCommandTest {
 
@@ -36,7 +25,8 @@ public class DeleteLessonCommandTest {
 
         DeleteLessonCommand command = new DeleteLessonCommand("Math");
         CommandResult result = command.execute(model);
-        assertEquals(result.getFeedbackToUser(), String.format(DeleteLessonCommand.MESSAGE_DELETE_STUDENT_SUCCESS, lesson));
+        assertEquals(result.getFeedbackToUser(),
+                String.format(DeleteLessonCommand.MESSAGE_DELETE_STUDENT_SUCCESS, lesson));
     }
 
     @Test
