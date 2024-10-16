@@ -47,6 +47,18 @@ public class Tut {
         this.tutName = tutName;
         this.tutorialClass = tutorialClass;
     }
+    /**
+     * Constructs a {@code Tut}.
+     *
+     * @param tutName A valid tutorial name.
+     */
+    public Tut(String tutName, String tutClass) {
+        requireNonNull(tutClass);
+        requireNonNull(tutName);
+        checkArgument(isValidName(tutName), MESSAGE_NAME_CONSTRAINTS);
+        this.tutorialClass = new TutorialClass(tutClass);
+        this.tutName = tutName;
+    }
 
     /**
      * Adds a student to the tutorial.

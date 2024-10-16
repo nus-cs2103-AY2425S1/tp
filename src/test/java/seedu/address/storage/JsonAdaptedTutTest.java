@@ -13,6 +13,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
 
 /**
@@ -65,7 +66,7 @@ public class JsonAdaptedTutTest {
     public void toModelType_invalidTutorialClass_throwsIllegalValueException() {
         // Creating a JsonAdaptedTut with invalid tutorial class
         JsonAdaptedTut tut = new JsonAdaptedTut(
-                VALID_TUT_NAME, null,
+                VALID_TUT_NAME, (TutorialClass) null,
                 List.of(VALID_STUDENT),
                 List.of(VALID_TUT_DATE)
         );
