@@ -107,8 +107,8 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... allergies) {
-        Set<Allergy> allergySet = Stream.of(allergies).map(Allergy::new).collect(Collectors.toSet());
-        descriptor.setAllergies(allergySet);
+        Set<Allergy> allergiesSet = Stream.of(allergies).map(Allergy::new).collect(Collectors.toSet());
+        descriptor.setAllergies(allergiesSet);
         return this;
     }
 

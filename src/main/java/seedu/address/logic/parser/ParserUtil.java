@@ -207,11 +207,11 @@ public class ParserUtil {
      */
     public static Set<Allergy> parseAllergies(Collection<String> allergies) throws ParseException {
         requireNonNull(allergies);
-        final Set<Allergy> allergySet = new HashSet<>();
+        final Set<Allergy> allergiesSet = new HashSet<>();
         for (String allergyName : allergies) {
-            allergySet.add(parseAllergy(allergyName));
+            allergiesSet.add(parseAllergy(allergyName));
         }
-        return allergySet;
+        return allergiesSet;
     }
 
     /**

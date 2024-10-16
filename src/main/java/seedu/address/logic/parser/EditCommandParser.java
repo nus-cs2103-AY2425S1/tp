@@ -94,9 +94,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (allergies.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> allergySet = allergies.size() == 1 && allergies.contains("")
+        Collection<String> allergiesSet = allergies.size() == 1 && allergies.contains("")
                 ? Collections.emptySet()
                 : allergies;
-        return Optional.of(ParserUtil.parseAllergies(allergySet));
+        return Optional.of(ParserUtil.parseAllergies(allergiesSet));
     }
 }
