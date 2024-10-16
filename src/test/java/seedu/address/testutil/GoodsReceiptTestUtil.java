@@ -28,22 +28,22 @@ public class GoodsReceiptTestUtil {
         GoodsReceipt goods1 = new GoodsReceipt(
                 new Goods(new GoodsName("Milk Bread"), GoodsCategories.CONSUMABLES),
                 new Name("Alex Yeoh"), new Date(DATETIME_VALID_PROCUREMENT),
-                new Date(DATETIME_VALID_ARRIVAL),false, 1, 5.22);
+                new Date(DATETIME_VALID_ARRIVAL), false, 1, 5.22);
 
         GoodsReceipt goods2 = new GoodsReceipt(
                 new Goods(new GoodsName("Potato Chips"), GoodsCategories.CONSUMABLES),
-                new Name("Bernice Yu"),  new Date(DATETIME_VALID_PROCUREMENT),
-                new Date(DATETIME_VALID_ARRIVAL),false, 5, 3.5);
+                new Name("Bernice Yu"), new Date(DATETIME_VALID_PROCUREMENT),
+                new Date(DATETIME_VALID_ARRIVAL), false, 5, 3.5);
 
         GoodsReceipt goods3 = new GoodsReceipt(
                 new Goods(new GoodsName("Chocolate Bars"), GoodsCategories.CONSUMABLES),
-                new Name("Alex Yeoh"),  new Date(DATETIME_VALID_PROCUREMENT),
-                new Date(DATETIME_VALID_ARRIVAL),false, 10, 2.0);
+                new Name("Alex Yeoh"), new Date(DATETIME_VALID_PROCUREMENT),
+                new Date(DATETIME_VALID_ARRIVAL), false, 10, 2.0);
 
         GoodsReceipt goods4 = new GoodsReceipt(
                 new Goods(new GoodsName("LEGO Toy"), GoodsCategories.CONSUMABLES),
-                new Name("Bernice Yu"),  new Date(DATETIME_VALID_PROCUREMENT),
-                new Date(DATETIME_VALID_ARRIVAL),false, 1, 100.00);
+                new Name("Bernice Yu"), new Date(DATETIME_VALID_PROCUREMENT),
+                new Date(DATETIME_VALID_ARRIVAL), false, 1, 100.00);
 
         ArrayList<GoodsReceipt> goodsList = new ArrayList<>();
         goodsList.add(goods1);

@@ -15,8 +15,8 @@ public class GoodsTest {
 
     @Test
     public void constructor_invalidProcurementDate_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new Goods(new GoodsName("Milk Bread^*"), GoodsCategories.CONSUMABLES));
+        assertThrows(IllegalArgumentException.class, () -> new Goods(new GoodsName("Milk Bread^*"),
+                GoodsCategories.CONSUMABLES));
     }
 
     @Test
