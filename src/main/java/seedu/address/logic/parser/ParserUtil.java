@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.concert.ConcertDate.INPUT_DATE_FORMATTER;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -11,6 +12,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.commons.Address;
 import seedu.address.model.commons.Name;
+import seedu.address.model.concert.ConcertDate;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
@@ -24,8 +26,9 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing
+     * whitespaces will be trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -37,8 +40,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String name} into a {@code Name}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
@@ -52,8 +55,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String phone} into a {@code Phone}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
@@ -67,8 +70,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String address} into an {@code Address}. Leading and trailing whitespaces
+     * will be trimmed.
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
@@ -82,8 +85,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String email} into an {@code Email}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
@@ -97,8 +100,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String role} into an {@code Role}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String role} into an {@code Role}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code role} is invalid.
      */
@@ -112,8 +115,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String tag} into a {@code Tag}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
@@ -136,5 +139,18 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String date} into a {@code ConcertDate}. Leadibg and trailing whitespaces will
+     * be trimmed.
+     */
+    public static ConcertDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!ConcertDate.isValidDate(trimmedDate, INPUT_DATE_FORMATTER)) {
+            throw new ParseException(ConcertDate.MESSAGE_CONSTRAINTS);
+        }
+        return new ConcertDate(trimmedDate);
     }
 }
