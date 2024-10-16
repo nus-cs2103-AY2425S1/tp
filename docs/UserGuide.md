@@ -82,16 +82,17 @@ Format: `help`
 
 Adds a contact to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG1 TAG2 ...]`
 
 <box type="tip" seamless>
 
-**Tip:** A contact can have any number of tags (including 0)
+**Tip:** A contact can only have up to 6 tags (including 0). No two contacts can have the same phone number.
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Homer Simpson p/98765432 e/homersimpson@example.com a/742 Evergreen Terrace, block 123, #01-01`
+* `add n/Marge Simpson t/client wife e/margesimpson@example.com a/742 Evergreen Terrace p/1234567`
+* `add n/Foutou Graffer  e/margesimpson@example.com a/123 Commons Studio p/1234567 t/photographer dancer caterer`
 
 <br><br/>
 
@@ -155,6 +156,8 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+<br><br/>
+
 ### Filtering contacts by tag: `filter`
 
 Filters contacts who are tagged with all of the given tags.
@@ -188,7 +191,9 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Confirms with the user whether they actually want to clear the address book, then clears all entries from the address 
+book only if the follow-up input is `yes` or `y` (case-insensitive). Any other input will result in the address book not 
+being cleared.
 
 Format: `clear`
 
@@ -217,6 +222,7 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
 <br><br/>
@@ -246,7 +252,7 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Help**   | `help`
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend colleague`
 **List**   | `list`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Untag**  | `untag INDEX t/TAG1 [TAG2...]` or `untag INDEX t/all` <br> e.g., `untag 1 t/friends buddies`
