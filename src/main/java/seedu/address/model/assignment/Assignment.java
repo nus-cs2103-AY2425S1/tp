@@ -34,6 +34,7 @@ public class Assignment {
     public Assignment(Student student, AssignmentName name, int maxScore) {
         requireNonNull(student);
         requireNonNull(name);
+        this.student = student;
         this.assignmentName = name;
         checkArgument(isValidScore(maxScore), MESSAGE_CONSTRAINTS);
         this.maxScore = maxScore;
