@@ -42,8 +42,11 @@ class JsonAdaptedRole {
     public Role toModelType() throws IllegalValueException {
         try {
             return Role.valueOf(roleName.toUpperCase());
+        } catch (NullPointerException e) {
+            throw new IllegalValueException(String.format(JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT, "Role"));
         } catch (IllegalArgumentException e) {
-            throw new IllegalValueException("Invalid role: " + roleName);
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
         }
     }
+
 }
