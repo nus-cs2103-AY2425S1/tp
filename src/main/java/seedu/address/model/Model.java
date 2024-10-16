@@ -97,11 +97,17 @@ public interface Model {
     /** Deletes the given {@code event} from the list of events. */
     void deleteEvent(Event event);
 
+    /** Updates the event at the given {@code oldEventIndex} from the list of events to {@code newEvent} */
+    void updateEvent(Event newEvent, int oldEventIndex);
+
     /** Returns an unmodifiable view of the list of events. */
     ObservableList<Event> getEventList();
 
     /** Returns an unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();
+
+    /** Returns the length of the event list */
+    int getEventListLength();
 
     void setEventBook(ReadOnlyEventBook eventBook);
     ReadOnlyEventBook getEventBook();

@@ -183,6 +183,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateEvent(Event newEvent, int oldEventIndex) {
+        requireAllNonNull(newEvent, oldEventIndex);
+
+        eventBook.updateEvent(newEvent, oldEventIndex);
+    }
+
+    @Override
     public ObservableList<Event> getEventList() {
         return eventBook.getEventList();
     }
@@ -191,6 +198,9 @@ public class ModelManager implements Model {
     public ObservableList<Event> getFilteredEventList() {
         return FXCollections.unmodifiableObservableList(filteredEvents);
     }
+
+    @Override
+    public int getEventListLength() { return eventBook.getEventListLength(); }
 
     @Override
     public void updateFilteredEventList(Predicate<Event> predicate) {
