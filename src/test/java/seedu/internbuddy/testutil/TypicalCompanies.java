@@ -12,6 +12,8 @@ import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_STATUS_GOOG
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_STATUS_MICROSOFT;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_TAG_SOFTWARE;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_TAG_TECH;
+import static seedu.internbuddy.testutil.TypicalApplications.DS_APPLICATION;
+import static seedu.internbuddy.testutil.TypicalApplications.SWE_APPLICATION;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +31,10 @@ public class TypicalCompanies {
             .withEmail("contact@apple.com").withAddress("1 Apple Park Way, Cupertino, CA").build();
     public static final Company AMAZON = new CompanyBuilder().withName("Amazon").withPhone("2062661000")
             .withEmail("contact@amazon.com").withAddress("410 Terry Ave N, Seattle, WA")
-            .withTags("ecommerce", "cloud").build();
+            .withTags("ecommerce", "cloud")
+            .withStatus("APPLIED")
+            .withApplications(SWE_APPLICATION, DS_APPLICATION)
+            .build();
     public static final Company FACEBOOK = new CompanyBuilder().withName("Facebook").withPhone("6505434800")
             .withEmail("contact@facebook.com").withAddress("1 Hacker Way, Menlo Park, CA").build();
     public static final Company TESLA = new CompanyBuilder().withName("Tesla").withPhone("6506815000")
@@ -46,7 +51,7 @@ public class TypicalCompanies {
     // Manually added - Company's details found in {@code CommandTestUtil}
     public static final Company GOOGLE = new CompanyBuilder().withName(VALID_NAME_GOOGLE).withPhone(VALID_PHONE_GOOGLE)
             .withEmail(VALID_EMAIL_GOOGLE).withAddress(VALID_ADDRESS_GOOGLE).withTags(VALID_TAG_TECH)
-            .withStatus(VALID_STATUS_GOOGLE).build();
+            .withStatus(VALID_STATUS_GOOGLE).withApplications(SWE_APPLICATION).build();
     public static final Company MICROSOFT = new CompanyBuilder().withName(VALID_NAME_MICROSOFT)
             .withPhone(VALID_PHONE_MICROSOFT).withEmail(VALID_EMAIL_MICROSOFT)
             .withAddress(VALID_ADDRESS_MICROSOFT).withTags(VALID_TAG_SOFTWARE, VALID_TAG_TECH)

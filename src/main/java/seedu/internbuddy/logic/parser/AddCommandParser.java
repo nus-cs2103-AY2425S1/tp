@@ -8,11 +8,13 @@ import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.internbuddy.logic.commands.AddCommand;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
+import seedu.internbuddy.model.application.Application;
 import seedu.internbuddy.model.company.Address;
 import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
@@ -48,8 +50,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElseGet(() -> "No Address"));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).orElseGet(() -> "INTERESTED"));
+        ArrayList<Application> applications = new ArrayList<>();
 
-        Company company = new Company(name, phone, email, address, tagList, status);
+        Company company = new Company(name, phone, email, address, tagList, status, applications);
 
         return new AddCommand(company);
     }

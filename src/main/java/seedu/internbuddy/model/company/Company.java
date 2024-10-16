@@ -4,10 +4,12 @@ import static seedu.internbuddy.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.internbuddy.commons.util.ToStringBuilder;
+import seedu.internbuddy.model.application.Application;
 import seedu.internbuddy.model.tag.Tag;
 
 /**
@@ -24,12 +26,14 @@ public class Company {
     // Data fields
     private final Address address;
     private final Status status;
+    private final List<Application> applications;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Status status) {
+    public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Status status,
+               List<Application> applications) {
         requireAllNonNull(name, phone, email, address, tags, status);
         this.name = name;
         this.phone = phone;
@@ -37,6 +41,7 @@ public class Company {
         this.address = address;
         this.tags.addAll(tags);
         this.status = status;
+        this.applications = applications;
     }
 
     public Name getName() {
@@ -65,6 +70,10 @@ public class Company {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public List<Application> getApplications() {
+        return Collections.unmodifiableList(applications);
     }
 
     /**
@@ -101,13 +110,14 @@ public class Company {
                 && email.equals(otherCompany.email)
                 && address.equals(otherCompany.address)
                 && status.equals(otherCompany.status)
-                && tags.equals(otherCompany.tags);
+                && tags.equals(otherCompany.tags)
+                && applications.equals(otherCompany.applications);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, status, tags);
+        return Objects.hash(name, phone, email, address, status, tags, applications);
     }
 
     @Override
@@ -119,6 +129,7 @@ public class Company {
                 .add("address", address)
                 .add("status", status)
                 .add("tags", tags)
+                .add("applications", applications)
                 .toString();
     }
 

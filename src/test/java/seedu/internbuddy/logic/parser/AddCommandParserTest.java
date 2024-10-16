@@ -135,8 +135,9 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
+        // todo: add test for the other optional fields
         // zero tags
-        Company expectedcompany = new CompanyBuilder(GOOGLE).withTags().build();
+        Company expectedcompany = new CompanyBuilder(GOOGLE).withTags().withApplications().build();
         assertParseSuccess(parser, NAME_DESC_GOOGLE + PHONE_DESC_GOOGLE + EMAIL_DESC_GOOGLE
                         + ADDRESS_DESC_GOOGLE + STATUS_DESC_GOOGLE,
                 new AddCommand(expectedcompany));
