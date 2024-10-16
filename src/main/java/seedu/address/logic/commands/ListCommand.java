@@ -26,8 +26,12 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        // TODO update ListCommand to initiate multiview
         model.updateFilteredVendorList(PREDICATE_SHOW_ALL_VENDORS);
         return new CommandResult(MESSAGE_MULTIVIEW_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this || (other instanceof ListCommand);
     }
 }
