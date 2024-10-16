@@ -5,8 +5,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.eventcommands.EventDeleteCommand;
 import seedu.address.logic.parser.EventParserUtil;
-import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.Parser;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
