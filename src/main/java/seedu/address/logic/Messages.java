@@ -46,7 +46,7 @@ public class Messages {
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         builder.append("; Games: ");
-        person.getGames().forEach(builder::append);
+        person.getGames().keySet().forEach(builder::append);
         return builder.toString();
     }
 

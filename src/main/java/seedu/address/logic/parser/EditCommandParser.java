@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -91,7 +92,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code games} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Game>} containing zero games.
      */
-    private Optional<Set<Game>> parseGamesForEdit(Collection<String> games) throws ParseException {
+    private Optional<Map<String, Game>> parseGamesForEdit(Collection<String> games) throws ParseException {
         assert games != null;
 
         if (games.isEmpty()) {
