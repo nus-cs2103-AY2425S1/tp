@@ -11,17 +11,17 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
+import seedu.address.model.task.Status;
 import seedu.address.model.task.Task;
 
 /**
- * Deletes a task from a group.
+ * Changes the status of a task.
  */
-public class DeleteTaskFromGroupCommand extends Command {
+public class MarkTaskCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete_task_grp";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a task from a group. "
+    public static final String COMMAND_WORD = "mark_task";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the status of a task. "
             + "Parameters: "
             + PREFIX_GROUP_NAME + "GROUP_NAME "
             + PREFIX_INDEX + "INDEX\n"
@@ -29,44 +29,43 @@ public class DeleteTaskFromGroupCommand extends Command {
             + PREFIX_GROUP_NAME + "Team 5 "
             + PREFIX_INDEX + "2";
 
-    public static final String MESSAGE_SUCCESS = "Deleted task: %1$s from %2$s";
-    public static final String MESSAGE_TASK_NOT_IN_GROUP = "This task is not in the group";
+    public static final String MESSAGE_SUCCESS = "Changed the status of task: %1$s";
+    public static final String GROUP_NOT_FOUND = "Group not found";
 
     private final Index index;
-    private final GroupName toDeleteFrom;
+    private final GroupName toMarkFrom;
 
     /**
-     * Creates an DeleteTaskToGroupCommand to delete the specified task on {@code index} from the
+     * Creates a MarkTaskCommand to change the status of the specified task on {@code index} from the
      * specified {@code groupName}.
      */
-    public DeleteTaskFromGroupCommand(Index index, GroupName groupName) {
+    public MarkTaskCommand(Index index, GroupName groupName) {
         requireNonNull(index);
         requireNonNull(groupName);
         this.index = index;
-        toDeleteFrom = groupName;
+        toMarkFrom = groupName;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        if (!model.containsGroupName(toMarkFrom)) {
+            throw new CommandException(GROUP_NOT_FOUND);
+        }
+
         List<Task> lastShownList = model.getFilteredTaskList();
 
         // the index here refers to the index in the list of all tasks from all groups
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        Task task = lastShownList.get(index.getZeroBased());
-        Group group = model.getGroupByName(toDeleteFrom);
+        Task taskToMark = lastShownList.get(index.getZeroBased());
+        Status changedStatus = taskToMark.getStatus().equals(Status.PENDING) ? Status.COMPLETED : Status.PENDING;
+        Task markedTask = new Task(taskToMark.getTaskName(), taskToMark.getDeadline(), changedStatus);
 
-        if (!model.hasTaskInGroup(task, group)) {
-            throw new CommandException(MESSAGE_TASK_NOT_IN_GROUP);
-        }
-
-        model.deleteTaskFromGroup(task, group);
-        model.deleteTask(task);
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(task), Messages.format(group)));
+        model.setTask(taskToMark, markedTask);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(markedTask)));
     }
 
     @Override
@@ -75,20 +74,21 @@ public class DeleteTaskFromGroupCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof DeleteTaskFromGroupCommand)) {
+        if (!(other instanceof MarkTaskCommand)) {
             return false;
         }
 
-        DeleteTaskFromGroupCommand otherDeleteTaskFromGroupCommand = (DeleteTaskFromGroupCommand) other;
-        return index.equals(otherDeleteTaskFromGroupCommand.index)
-                && toDeleteFrom.equals(otherDeleteTaskFromGroupCommand.toDeleteFrom);
+        MarkTaskCommand otherMarkTaskCommand = (MarkTaskCommand) other;
+        return index.equals(otherMarkTaskCommand.index)
+                && toMarkFrom.equals(otherMarkTaskCommand.toMarkFrom);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("toDeleteFrom", toDeleteFrom)
+                .add("toMarkFrom", toMarkFrom)
                 .toString();
     }
+
 }
