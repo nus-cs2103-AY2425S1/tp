@@ -46,6 +46,19 @@ public class Person {
         this.roles.addAll(roles);
     }
 
+    /**
+     * Constructor to make a deep copy of a Person object.
+     */
+    public Person(Person otherperson) {
+        this.name = otherperson.getName();
+        this.nric = otherperson.getNric();
+        this.phone = otherperson.getPhone();
+        this.email = otherperson.getEmail();
+        this.address = otherperson.getAddress();
+        this.tags.addAll(otherperson.getTags());
+        this.roles.addAll(otherperson.getRoles());
+    }
+
     public Name getName() {
         return name;
     }
@@ -80,6 +93,29 @@ public class Person {
 
     public void addPatient(Person patient) {
         patients.add(patient);
+    }
+
+    /**
+     * Removes the specified caregiver from the list of caregivers if the caregiver is present.
+     *
+     * @param caregiver The caregiver to be removed.
+     */
+    public void removeCaregiver(Person caregiver) {
+        if (this.hasCaregiver(caregiver)) {
+            caregivers.remove(caregiver);
+        }
+
+    }
+
+    /**
+     * Removes the specified patient from the list of patients if the patient is present.
+     *
+     * @param patient The patient to be removed.
+     */
+    public void removePatient(Person patient) {
+        if (this.hasPatient(patient)) {
+            patients.remove(patient);
+        }
     }
 
     /**

@@ -106,25 +106,30 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Returns true if a link between the patient and caregiver exists
-     * @param patientNric
-     * @param caregiverNric
+     * @param patient
+     * @param caregiver
      * @return
      */
-    public boolean hasLink(String patientNric, String caregiverNric) {
-        Person patient = persons.get(patientNric);
-        Person caregiver = persons.get(caregiverNric);
+    public boolean hasLink(Person patient, Person caregiver) {
         return persons.hasLink(patient, caregiver);
     }
 
     /**
      * Adds a link between the patient and caregiver
-     * @param patientNric
-     * @param caregiverNric
+     * @param patient
+     * @param caregiver
      */
-    public void addLink(String patientNric, String caregiverNric) {
-        Person patient = persons.get(patientNric);
-        Person caregiver = persons.get(caregiverNric);
+    public void addLink(Person patient, Person caregiver) {
         persons.addLink(patient, caregiver);
+    }
+
+    /**
+     * Deletes a link between the patient and caregiver
+     * @param patient
+     * @param caregiver
+     */
+    public void deleteLink(Person patient, Person caregiver) {
+        persons.deleteLink(patient, caregiver);
     }
 
     //// util methods

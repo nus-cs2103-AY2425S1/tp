@@ -85,7 +85,11 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    boolean hasLink(String patientNric, String caregiverNric);
+    boolean hasLink(Person patient, Person caregiver);
 
-    void addLink(String patientNric, String caregiverNric);
+    void addLink(Person patient, Person caregiver);
+
+    void deleteLink(Person patient, Person caregiver);
+
+    Person getPerson(String nric);
 }

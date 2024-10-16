@@ -159,12 +159,22 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasLink(String patientNric, String caregiverNric) {
+        public boolean hasLink(Person patient, Person caregiver) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addLink(String patientNric, String caregiverNric) {
+        public void addLink(Person patient, Person caregiver) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteLink(Person patient, Person caregiver) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getPerson(String nric) {
             throw new AssertionError("This method should not be called.");
         }
     }
