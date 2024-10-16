@@ -7,7 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.task.Task;
 
 /**
  * A UI component that displays information of a {@code Person}.
@@ -44,6 +46,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane subjects;
     @FXML
     private Label level;
+    @FXML
+    private VBox tasks;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -61,5 +65,22 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(subject -> subject.subjectName))
                 .forEach(subject -> subjects.getChildren()
                         .add(new Label(person.getLevel().levelName + " " + subject.subjectName)));
+        displayTasks();
+    }
+
+    /**
+     * Displays the task list of the person in the tasks FlowPane.
+     */
+    private void displayTasks() {
+        tasks.getChildren().clear(); // Clear any previous tasks
+        if (!person.getTaskList().isEmpty()) {
+            int taskIndex = 1;
+            for (Task task : person.getTaskList()) {
+                Label taskLabel = new Label(taskIndex + ". " + task.getTaskDescription());
+                taskLabel.getStyleClass().add("task_label"); // Apply the task label style
+                tasks.getChildren().add(taskLabel); // Add the label to the VBox
+                taskIndex++;
+            }
+        }
     }
 }

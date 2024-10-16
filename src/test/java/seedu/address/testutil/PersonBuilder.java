@@ -62,7 +62,7 @@ public class PersonBuilder {
         note = personToCopy.getNote();
         subjects = new HashSet<>(personToCopy.getSubjects());
         level = personToCopy.getLevel();
-        taskList = personToCopy.getTaskList();
+        taskList = personToCopy.getTaskList().copy();
     }
 
     /**

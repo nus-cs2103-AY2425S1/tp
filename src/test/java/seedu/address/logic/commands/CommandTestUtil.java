@@ -49,6 +49,8 @@ public class CommandTestUtil {
     public static final String VALID_NOTE_AMY = "Likes asking questions.";
     public static final String VALID_NOTE_BOB = "Always sleeping";
     public static final String VALID_TASK_DESCRIPTION_AMY = "Mark homework";
+    public static final String VALID_TASK_DESCRIPTION_PROJECT = "Do project";
+    public static final String VALID_TASK_DEADLINE = "2024-10-15";
     public static final String VALID_TASK_DEADLINE_AMY = "2024-01-01";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -66,7 +68,10 @@ public class CommandTestUtil {
     public static final String SUBJECT_DESC_ENGLISH = " " + PREFIX_SUBJECT + VALID_SUBJECT_ENGLISH;
     public static final String SUBJECT_DESC_MATH = " " + PREFIX_SUBJECT + VALID_SUBJECT_MATH;
     public static final String TASK_DESCRIPTION_DESC_AMY = " " + PREFIX_TASK_DESCRIPTION + VALID_TASK_DESCRIPTION_AMY;
+    public static final String TASK_DESCRIPTION_DESC_BOB =
+            " " + PREFIX_TASK_DESCRIPTION + VALID_TASK_DESCRIPTION_PROJECT;
     public static final String TASK_DEADLINE_DESC_AMY = " " + PREFIX_TASK_DEADLINE + VALID_TASK_DEADLINE_AMY;
+    public static final String TASK_DEADLINE_DESC_BOB = " " + PREFIX_TASK_DEADLINE + VALID_TASK_DEADLINE;
 
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -76,6 +81,9 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_SUBJECT_DESC = " " + PREFIX_SUBJECT + "MATH*"; // '*' not allowed in subjects
     public static final String INVALID_LEVEL_DESC = " " + PREFIX_LEVEL + "P7";
+    public static final String INVALID_TASK_DESC = " " + PREFIX_TASK_DESCRIPTION + "   "; // blank task description
+    public static final String INVALID_DEADLINE_DESC = " " + PREFIX_TASK_DEADLINE + "2024-14-23"; // invalid month
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
