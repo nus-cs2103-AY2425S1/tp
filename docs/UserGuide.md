@@ -132,6 +132,18 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Filtering persons by payment: `filterp`
+
+Finds persons who has or has not made payment.
+
+Format: `filterp [HASPAID]`
+
+* When inputting `[HASPAID]` refers to either `true` or `false`, and it is case-sensitive. Refer to the example below for its usages.
+
+Examples:
+* `filterp true`
+* `filterp false`
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
