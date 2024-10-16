@@ -211,7 +211,7 @@ public class ParserUtil {
      */
     public static Map<Index, Policy> parsePolicies(Collection<String> policies) throws ParseException {
         requireNonNull(policies);
-        final Map<Index, Policy> policyMap = new HashMap<Index, Policy>();
+        final Map<Index, Policy> policyMap = new HashMap<>();
 
         for (String policyArgs : policies) {
             String trimmedPolicy = policyArgs.trim();
