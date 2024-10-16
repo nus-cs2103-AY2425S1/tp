@@ -1,6 +1,6 @@
 package seedu.address.model.order;
 
-import java.util.Date;
+import seedu.address.model.product.Pastry;
 import java.util.List;
 
 public class CustomerOrder extends Order {
