@@ -5,8 +5,6 @@ title: User Guide
 
 Clientele+ seamlessly combines client contacts, payment tracking and more in one efficient package, tailored specifically for freelance software developers.
 
-
-
 * Table of Contents
   {:toc}
 
@@ -31,7 +29,7 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 
     * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client contact named `John Doe` to Clientele+.
 
-    * `delete 3` : Deletes the 3rd client contact shown in the current list.
+    * `delete id/3` : Deletes the 3rd client contact shown in the current list.
 
     * `clear` : Deletes all client contacts.
 
@@ -81,87 +79,87 @@ Allows the user to add a new client with details about payment status, client st
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ 
 [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
 
-****
-* Clients with the **same** `NAME`, `EMAIL` and `PHONE NUMBER` are considered duplicates and will not be added
-* A person can have any number of tags (including 0)
-* `NAME` must be **alphanumeric**, may contain **spaces** and **dashes**, and should not be blank.
-* `NAME` is case-insensitive. `John Doe` and `joHN dOE` are considered same clients, but name is stored in the same case as the input (so `John Doe` is stored as `John Doe` and `JOHN Doe` is stored as `JOHN Doe`
-* `NAME` must not exist in Clientele+ already.
-* `PHONE_NUMBER` should be **Numeric** digits,may include “-” or spaces. Example: `555-1234` or `555 1234`.
-* `EMAIL`  Standard email format “user@example.com”
-* `PAYMENT STATUS` Acceptable values are `paid`, `unpaid`, `p`, `u`, `0` for **paid**, `1` for **unpaid**. Case insensitive.
-* `CLIENT STATUS`  Acceptable values are `active`, `unresponsive`, `potential`, `old`. Case sensitive.
-* `PROJECT STATUS` Acceptable values are `in progress`, `completed`. Case insensitive.
-****
+>* Clients with the **same** `NAME`, `EMAIL` and `PHONE NUMBER` are considered duplicates and will not be added
+>* A person can have any number of tags (including 0)
+>* `NAME` must be **alphanumeric**, may contain **spaces** and **dashes**, and should not be blank.
+>* `NAME` is case-insensitive. `John Doe` and `joHN dOE` are considered same clients, but name is stored in the same case as the input (so `John Doe` is stored as `John Doe` and `JOHN Doe` is stored as `JOHN Doe`
+>* `NAME` must not exist in Clientele+ already.
+>* `PHONE_NUMBER` should be **Numeric** digits,may include “-” or spaces. Example: `555-1234` or `555 1234`.
+>* `EMAIL`  Standard email format “user@example.com”
+>* `PAYMENT STATUS` Acceptable values are `paid`, `unpaid`, `p`, `u`, `0` for **paid**, `1` for **unpaid**. Case insensitive.
+>* `CLIENT STATUS`  Acceptable values are `active`, `unresponsive`, `potential`, `old`. Case sensitive.
+>* `PROJECT STATUS` Acceptable values are `in progress`, `completed`. Case insensitive.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
 t/friends ps/in progress py/unpaid cs/active`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### View Client List : `list`
 
-Shows a list of all clients in Clientele+.
+Displays a list of all clients and their details.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Update client details : `edit`
 
-Edits an existing client in Clientele+.
+Allows updating of various statuses of an existing client.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
 
-****
-* `NAME` Acceptable values are same as in add command
-* `PHONE_NUMBER` Acceptable values are same as in add command
-* `EMAIL` Acceptable values are same as in add command
-* `PAYMENT STATUS` Acceptable values are same as in add command
-* `CLIENT STATUS` Acceptable values are same as in add command
-* `PROJECT STATUS` Acceptable values are same as in add command
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+>* `NAME` Acceptable values are same as in add command
+>* `PHONE_NUMBER` Acceptable values are same as in add command
+>* `EMAIL` Acceptable values are same as in add command
+>* `PAYMENT STATUS` Acceptable values are same as in add command
+>* `CLIENT STATUS` Acceptable values are same as in add command
+>* `PROJECT STATUS` Acceptable values are same as in add command
+>* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+>* At least one of the optional fields must be provided.
+>* Existing values will be updated to the input values.
+>* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+>* You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
-****
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-*  `edit 1 ps/completed py/paid cs/old` Edits the project status, payment status and client status of the 1st person to be `completed`, `paid` and `old` respectively.
-### Locating persons by name: `find`
+*  `edit 1 p/91234567 e/johndoe@example.com` Updates the first person’s phone number to `91234567` and email address to `johndoe@example.com`
+*  `edit 2 n/Betsy Crower t/` Updates the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 ps/completed py/paid cs/old` Updates the project status, payment status and client status of the 1st person to be `completed`, `paid` and `old` respectively.
+
+### Locating clients by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+>* The search is case-insensitive. e.g `hans` will match `Hans`
+>* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+>* Only the name is searched.
+>* Only full words will be matched e.g. `Han` will not match `Hans`
+>* Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Delete Client Details : `delete`
 
 Deletes the specified person from Clientele+.
 
-Format: `delete INDEX`
+Format: `delete [n/NAME] [id/ID]`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+>* Deletes clients identified by the specified `ID` or `NAME`.
+>* `NAME` Acceptable values are same as in add command
+>* `ID` refers to the index number shown in the displayed person list.
+>* `ID` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the Clientele+.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete n/John` deletes clients with the name `John`.
+* `list` followed by `delete id/2` deletes the 2nd person in the list.
+* `find Betsy` followed by `delete id/1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -214,7 +212,7 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/friends ps/in progress py/unpaid cs/active`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete [n/NAME] [id/ID]`<br> e.g., `delete n/John Doe` or `delete id/4`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
