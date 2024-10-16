@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import java.util.Collections;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.tag.Tag;
 
@@ -87,6 +88,14 @@ public abstract class Property {
      * Format state as text for viewing.
      */
     public String toString() {
-        return "[" + postalCode + "]" + " Unit Number: " + unitNumber;
+        String formattedTags = tags.stream()
+                .map(Tag::toString) // Convert each Tag object to its String representation
+                .collect(Collectors.joining(", ")); // Join with a comma and space
+        return "Postal Code: " + postalCode + "; " + " Unit Number: " + unitNumber + "; " + " Price: " + price
+                + "; Tags: " + formattedTags;
     }
+    /*public String toString() {
+        return "[" + postalCode + "]" + " Unit Number: " + unitNumber;
+    }*/
+
 }

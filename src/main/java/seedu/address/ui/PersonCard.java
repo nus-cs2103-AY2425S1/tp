@@ -59,8 +59,28 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        // Find out what getTags() does and follow from there
-        //person.getSellingProperties().stream();
-        //person.getBuyingProperties().stream();
+        // Process selling properties, with null check
+        if (person.getListOfSellingProperties() != null) {
+            int[] sellingIndex = {1}; // Using an array to maintain a mutable index
+            person.getListOfSellingProperties().stream()
+                    .forEach(property -> {
+                        Label label = new Label(sellingIndex[0] + ". " + property.toString());
+                        label.getStyleClass().add("cell_small_label");
+                        sellingProperties.getChildren().add(label);
+                        sellingIndex[0]++; // Increment the index
+                    });
+        }
+
+        // Process buying properties, with null check
+        if (person.getListOfBuyingProperties() != null) {
+            int[] buyingIndex = {1}; // Using an array to maintain a mutable index
+            person.getListOfBuyingProperties().stream()
+                    .forEach(property -> {
+                        Label label = new Label(buyingIndex[0] + ". " + property.toString());
+                        label.getStyleClass().add("cell_small_label");
+                        buyingProperties.getChildren().add(label);
+                        buyingIndex[0]++; // Increment the index
+                    });
+        }
     }
 }

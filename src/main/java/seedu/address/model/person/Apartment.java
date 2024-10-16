@@ -38,6 +38,6 @@ public class Apartment extends Property {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Apartment " + super.toString();
     }
 }
