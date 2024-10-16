@@ -12,19 +12,19 @@ import seedu.academyassist.model.ReadOnlyUserPrefs;
 import seedu.academyassist.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of AcademyAssist data in local storage.
  */
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private AcademyAssistStorage academyAssistStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code AcademyAssistStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
-        this.addressBookStorage = addressBookStorage;
+    public StorageManager(AcademyAssistStorage academyAssistStorage, UserPrefsStorage userPrefsStorage) {
+        this.academyAssistStorage = academyAssistStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -46,33 +46,33 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ AcademyAssist methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public Path getAcademyAssistFilePath() {
+        return academyAssistStorage.getAcademyAssistFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAcademyAssist> readAddressBook() throws DataLoadingException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyAcademyAssist> readAcademyAssist() throws DataLoadingException {
+        return readAcademyAssist(academyAssistStorage.getAcademyAssistFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAcademyAssist> readAddressBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyAcademyAssist> readAcademyAssist(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return academyAssistStorage.readAcademyAssist(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAcademyAssist addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveAcademyAssist(ReadOnlyAcademyAssist academyAssist) throws IOException {
+        saveAcademyAssist(academyAssist, academyAssistStorage.getAcademyAssistFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAcademyAssist addressBook, Path filePath) throws IOException {
+    public void saveAcademyAssist(ReadOnlyAcademyAssist academyAssist, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        academyAssistStorage.saveAcademyAssist(academyAssist, filePath);
     }
 
 }

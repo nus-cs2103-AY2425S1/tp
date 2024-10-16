@@ -22,8 +22,8 @@ import seedu.academyassist.model.ReadOnlyAcademyAssist;
 import seedu.academyassist.model.ReadOnlyUserPrefs;
 import seedu.academyassist.model.UserPrefs;
 import seedu.academyassist.model.util.SampleDataUtil;
-import seedu.academyassist.storage.AddressBookStorage;
-import seedu.academyassist.storage.JsonAddressBookStorage;
+import seedu.academyassist.storage.AcademyAssistStorage;
+import seedu.academyassist.storage.JsonAcademyAssistStorage;
 import seedu.academyassist.storage.JsonUserPrefsStorage;
 import seedu.academyassist.storage.Storage;
 import seedu.academyassist.storage.StorageManager;
@@ -59,7 +59,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAcademyAssistFilePath());
+        AcademyAssistStorage addressBookStorage = new JsonAcademyAssistStorage(userPrefs.getAcademyAssistFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
@@ -75,19 +75,19 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using data file : " + storage.getAcademyAssistFilePath());
 
         Optional<ReadOnlyAcademyAssist> addressBookOptional;
         ReadOnlyAcademyAssist initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readAcademyAssist();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
+                logger.info("Creating a new data file " + storage.getAcademyAssistFilePath()
                         + " populated with a sample AddressBook.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAcademyAssist);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
+            logger.warning("Data file at " + storage.getAcademyAssistFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
         }

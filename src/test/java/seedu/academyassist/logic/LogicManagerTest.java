@@ -28,7 +28,7 @@ import seedu.academyassist.model.ModelManager;
 import seedu.academyassist.model.ReadOnlyAcademyAssist;
 import seedu.academyassist.model.UserPrefs;
 import seedu.academyassist.model.person.Person;
-import seedu.academyassist.storage.JsonAddressBookStorage;
+import seedu.academyassist.storage.JsonAcademyAssistStorage;
 import seedu.academyassist.storage.JsonUserPrefsStorage;
 import seedu.academyassist.storage.StorageManager;
 import seedu.academyassist.testutil.PersonBuilder;
@@ -45,8 +45,8 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonAcademyAssistStorage addressBookStorage =
+                new JsonAcademyAssistStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -149,10 +149,10 @@ public class LogicManagerTest {
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
+        // Inject LogicManager with an AcademyAssistStorage that throws the IOException e when saving
+        JsonAcademyAssistStorage addressBookStorage = new JsonAcademyAssistStorage(prefPath) {
             @Override
-            public void saveAddressBook(ReadOnlyAcademyAssist addressBook, Path filePath)
+            public void saveAcademyAssist(ReadOnlyAcademyAssist addressBook, Path filePath)
                     throws IOException {
                 throw e;
             }

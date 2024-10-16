@@ -5,18 +5,18 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.academyassist.commons.exceptions.DataLoadingException;
-import seedu.academyassist.model.AddressBook;
+import seedu.academyassist.model.AcademyAssist;
 import seedu.academyassist.model.ReadOnlyAcademyAssist;
 
 /**
- * Represents a storage for {@link AddressBook}.
+ * Represents a storage for {@link AcademyAssist}.
  */
-public interface AddressBookStorage {
+public interface AcademyAssistStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getAcademyAssistFilePath();
 
     /**
      * Returns AddressBook data as a {@link ReadOnlyAcademyAssist}.
@@ -24,23 +24,23 @@ public interface AddressBookStorage {
      *
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    Optional<ReadOnlyAcademyAssist> readAddressBook() throws DataLoadingException;
+    Optional<ReadOnlyAcademyAssist> readAcademyAssist() throws DataLoadingException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getAcademyAssistFilePath()
      */
-    Optional<ReadOnlyAcademyAssist> readAddressBook(Path filePath) throws DataLoadingException;
+    Optional<ReadOnlyAcademyAssist> readAcademyAssist(Path filePath) throws DataLoadingException;
 
     /**
      * Saves the given {@link ReadOnlyAcademyAssist} to the storage.
-     * @param addressBook cannot be null.
+     * @param academyAssist cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyAcademyAssist addressBook) throws IOException;
+    void saveAcademyAssist(ReadOnlyAcademyAssist academyAssist) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyAcademyAssist)
+     * @see #saveAcademyAssist(ReadOnlyAcademyAssist)
      */
-    void saveAddressBook(ReadOnlyAcademyAssist addressBook, Path filePath) throws IOException;
+    void saveAcademyAssist(ReadOnlyAcademyAssist addressBook, Path filePath) throws IOException;
 
 }
