@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.CourseContainsKeywordsPredicate;
 import seedu.address.model.person.ModuleContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
@@ -76,12 +77,14 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void toStringMethod() {
+    public void toStringMethod_namePredicate() {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
         FilterCommand filterCommand = new FilterCommand(predicate);
         String expected = FilterCommand.class.getCanonicalName()
                 + "{namePredicate="
-                + predicate + ", modulePredicate=null}";
+                + predicate
+                + ", modulePredicate=null"
+                + ", coursePredicate=null}";
         assertEquals(expected, filterCommand.toString());
     }
 
@@ -91,7 +94,20 @@ public class FilterCommandTest {
         FilterCommand filterCommand = new FilterCommand(modulePredicate);
         String expected = FilterCommand.class.getCanonicalName()
                 + "{namePredicate=null, modulePredicate="
-                + modulePredicate + "}";
+                + modulePredicate
+                + ", coursePredicate=null}";;
+        assertEquals(expected, filterCommand.toString());
+    }
+
+    @Test
+    public void toStringMethod_coursePredicate() {
+        CourseContainsKeywordsPredicate coursePredicate =
+                new CourseContainsKeywordsPredicate(Arrays.asList("Computer Science"));
+        FilterCommand filterCommand = new FilterCommand(coursePredicate);
+        String expected = FilterCommand.class.getCanonicalName()
+                + "{namePredicate=null, modulePredicate=null"
+                + ", coursePredicate="
+                + coursePredicate + "}";
         assertEquals(expected, filterCommand.toString());
     }
 
