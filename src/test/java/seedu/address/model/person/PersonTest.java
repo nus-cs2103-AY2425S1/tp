@@ -22,7 +22,6 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.Assert;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
