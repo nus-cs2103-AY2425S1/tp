@@ -8,9 +8,9 @@ I'm a Year 2 Computer Science undergraduate student studying at the National
 University of Singapore with a passion in building software to solve real-world problems!
 
 ### Projects
-Orbital 2024 - NUSenior Assist: 
+Orbital 2024 - NUSenior Assist:
 >NUSenior Assist is a web application where NUS students can find
-> assistance in courses from qualified tutoring assistants. 
+> assistance in courses from qualified tutoring assistants.
 
 ### CCAs/Hobbies
 - Swimming: Vice Captain for NUS Swimming for AY2024/2025

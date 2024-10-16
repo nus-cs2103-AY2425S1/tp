@@ -32,7 +32,7 @@ You can reach us at the following emails:
 [[Github](https://github.com/leowolf275)]
 [[About Me](team/leowolf275.md)]
 
-* Role: Developer 
+* Role: Developer
 * Responsibilities: Dev Ops, Tracking
 
 ### Youngseo Park
