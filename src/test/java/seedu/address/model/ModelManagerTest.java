@@ -83,14 +83,37 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasOwner_ownerNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasOwner(seedu.address.testutil.TypicalOwners.ALICE));
+    }
+
+    @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
     }
 
     @Test
+    public void hasOwner_ownerInAddressBook_returnsTrue() {
+        modelManager.addOwner(seedu.address.testutil.TypicalOwners.ALICE);
+        assertTrue(modelManager.hasOwner(seedu.address.testutil.TypicalOwners.ALICE));
+    }
+
+    @Test
+    public void deleteOwner_ownerInAddressBook_returnsFalse() {
+        modelManager.addOwner(seedu.address.testutil.TypicalOwners.ALICE);
+        modelManager.deleteOwner(seedu.address.testutil.TypicalOwners.ALICE);
+        assertFalse(modelManager.hasOwner(seedu.address.testutil.TypicalOwners.ALICE));
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getFilteredOwnerList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredOwnerList().remove(0));
     }
 
     @Test
