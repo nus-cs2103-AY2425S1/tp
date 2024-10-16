@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static seedu.address.logic.Messages.MESSAGE_ACTIVITY_LIST_NOT_INITIALIZED;
 import static seedu.address.logic.Messages.MESSAGE_BEFORE_DATE_OF_CREATION;
-import static seedu.address.logic.Messages.MESSAGE_NO_ENTRY_ON_DATE;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -110,8 +109,6 @@ public class History {
             return listOfActivitiesMessage.stream()
                     .map(s -> Activity.of(date, s))
                     .collect(Collectors.toList());
-        } catch (NoSuchElementException e1) {
-            throw new NoSuchElementException(String.format(MESSAGE_NO_ENTRY_ON_DATE, date));
         } catch (NullPointerException e2) {
             throw new NullPointerException(MESSAGE_ACTIVITY_LIST_NOT_INITIALIZED);
         }

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +62,42 @@ public class HistoryTest {
         // Verify the activity
         assertEquals(1, activities.size());
         assertEquals("[2024-01-10] Completed task A", activities.get(0).toString());
+    }
+
+    @Test
+    public void getActivitiesOnDay_validDateWithActivities_success() {
+        LocalDate validDate = of(2024, 1, 10); // Valid date after creation
+        String message = "Completed task A";
+
+        // Add an activity and retrieve it
+        history.addActivity(validDate, message);
+        List<Activity> activities = history.getActivitiesOnDay(validDate);
+
+        // Verify the activity
+        assertEquals(1, activities.size());
+        assertEquals("[2024-01-10] Completed task A", activities.get(0).toString());
+    }
+
+    @Test
+    public void getActivitiesOnDay_noActivitiesForDate_throwsNoSuchElementException() {
+        LocalDate validDate = of(2024, 1, 10); // Valid date after creation
+
+        // Expect NoSuchElementException for a valid date with no activities
+        assertThrows(NullPointerException.class, () -> history.getActivitiesOnDay(validDate));
+    }
+
+    @Test
+    public void getActivitiesOnDay_nullDate_throwsNullPointerException() {
+        // Null date should throw NullPointerException
+        assertThrows(NullPointerException.class, () -> history.getActivitiesOnDay(null));
+    }
+
+    @Test
+    public void getActivitiesOnDay_beforeDateOfCreation_throwsDateTimeException() {
+        LocalDate invalidDate = of(2023, 12, 31); // Date before creation
+
+        // Expect DateTimeException for date before the date of creation
+        assertThrows(DateTimeException.class, () -> history.getActivitiesOnDay(invalidDate));
     }
 
     @Test
