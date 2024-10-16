@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OTHER_PARTY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -37,7 +36,7 @@ public class AddTransactionCommand extends Command {
             + PREFIX_OTHER_PARTY + "Company XYZ "
             + PREFIX_DATE + "10-10-2024";
 
-    public static final String MESSAGE_ADD_TRANSACTION_SUCCESS = "New transaction added: %1$s";
+    public static final String MESSAGE_ADD_TRANSACTION_SUCCESS = "Added new transaction %1$s\n to%2$s";
 
     private final Index index;
     private final Transaction toAdd;
@@ -71,7 +70,8 @@ public class AddTransactionCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_ADD_TRANSACTION_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_ADD_TRANSACTION_SUCCESS, Messages.format(toAdd),
+                Messages.format(editedPerson)));
     }
 
     @Override
