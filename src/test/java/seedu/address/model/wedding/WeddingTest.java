@@ -1,113 +1,117 @@
 package seedu.address.model.wedding;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagName;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalWeddings.AMY_WEDDING;
+import static seedu.address.testutil.TypicalWeddings.BOB_WEDDING;
+import static seedu.address.testutil.TypicalWeddings.VALID_WEDDING_NAME_AMY_WEDDING;
+import static seedu.address.testutil.TypicalWeddings.VALID_WEDDING_NAME_BOB_WEDDING;
+
+import org.junit.jupiter.api.Test;
 
 public class WeddingTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Tag(null));
+        assertThrows(NullPointerException.class, () -> new Wedding(null));
     }
 
     @Test
-    public void constructor_invalidTagName_throwsIllegalArgumentException() {
-        String invalidTagName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Tag(new TagName(invalidTagName)));
+    public void constructor_invalidWeddingName_throwsIllegalArgumentException() {
+        String invalidWeddingName = "";
+        assertThrows(IllegalArgumentException.class, () -> new Wedding(new WeddingName(invalidWeddingName)));
     }
 
     @Test
-    public void isValidTagName() {
-        // null tag name
-        assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
+    public void isValidWeddingName() {
+        // null Wedding name
+        assertThrows(NullPointerException.class, () -> Wedding.isValidWeddingName(null));
     }
 
     @Test
-    public void isValidTagName_validTagName_returnsTrue() {
-        // Valid tag names
-        assertTrue(Tag.isValidTagName("friend"));
-        assertTrue(Tag.isValidTagName("work"));
-        assertTrue(Tag.isValidTagName("123"));
-        assertTrue(Tag.isValidTagName("friend 123")); // Alphanumeric with spaces
+    public void isValidWeddingName_validWeddingName_returnsTrue() {
+        // Valid Wedding names
+        assertTrue(Wedding.isValidWeddingName("friend"));
+        assertTrue(Wedding.isValidWeddingName("work"));
+        assertTrue(Wedding.isValidWeddingName("123"));
+        assertTrue(Wedding.isValidWeddingName("friend 123")); // Alphanumeric with spaces
     }
 
     @Test
-    public void isValidTagName_invalidTagName_returnsFalse() {
-        // Invalid tag names
-        assertFalse(Tag.isValidTagName("")); // Empty string
-        assertFalse(Tag.isValidTagName(" ")); // Spaces only
-        assertFalse(Tag.isValidTagName("@home")); // Special character not allowed
-        assertFalse(Tag.isValidTagName("friend!")); // Special character not allowed
+    public void isValidWeddingName_invalidWeddingName_returnsFalse() {
+        // Invalid Wedding names
+        assertFalse(Wedding.isValidWeddingName("")); // Empty string
+        assertFalse(Wedding.isValidWeddingName(" ")); // Spaces only
+        assertFalse(Wedding.isValidWeddingName("@home")); // Special character not allowed
+        assertFalse(Wedding.isValidWeddingName("friend!")); // Special character not allowed
     }
 
     @Test
-    public void isSameTag_sameTag_returnsTrue() {
-        Tag tag = new Tag(new TagName("friend"));
-        assertTrue(tag.isSameTag(tag));
+    public void isSameWedding_sameWedding_returnsTrue() {
+        Wedding amyWedding = AMY_WEDDING;
+        assertTrue(amyWedding.isSameWedding(amyWedding));
     }
 
     @Test
-    public void isSameTag_identicalTagName_returnsTrue() {
-        Tag tag1 = new Tag(new TagName("friend"));
-        Tag tag2 = new Tag(new TagName("friend"));
-        assertTrue(tag1.isSameTag(tag2));
+    public void isSameWedding_identicalWeddingName_returnsTrue() {
+        Wedding amyWedding1 = AMY_WEDDING;
+        Wedding amyWedding2 = AMY_WEDDING;
+        assertTrue(amyWedding1.isSameWedding(amyWedding2));
     }
 
     @Test
-    public void isSameTag_differentTagName_returnsFalse() {
-        Tag tag1 = new Tag(new TagName("friend"));
-        Tag tag2 = new Tag(new TagName("colleague"));
-        assertFalse(tag1.isSameTag(tag2));
+    public void isSameWedding_differentWeddingName_returnsFalse() {
+        Wedding amyWedding = AMY_WEDDING;
+        Wedding bobWeding = BOB_WEDDING;
+        assertFalse(amyWedding.isSameWedding(bobWeding));
     }
 
     @Test
-    public void equals_identicalTagName_returnsTrue() {
-        Tag tag1 = new Tag(new TagName("friend"));
-        Tag tag2 = new Tag(new TagName("friend"));
-        assertTrue(tag1.equals(tag2));
+    public void equals_identicalWeddingName_returnsTrue() {
+        Wedding wedding1 = new Wedding(VALID_WEDDING_NAME_AMY_WEDDING);
+        Wedding wedding2 = new Wedding(VALID_WEDDING_NAME_AMY_WEDDING);
+        assertTrue(wedding1.equals(wedding2));
     }
 
     @Test
-    public void equals_differentTagName_returnsFalse() {
-        Tag tag1 = new Tag(new TagName("friend"));
-        Tag tag2 = new Tag(new TagName("colleague"));
-        assertFalse(tag1.equals(tag2));
+    public void equals_differentWeddingName_returnsFalse() {
+        Wedding wedding1 = new Wedding(VALID_WEDDING_NAME_AMY_WEDDING);
+        Wedding wedding2 = new Wedding(VALID_WEDDING_NAME_BOB_WEDDING);
+        assertFalse(wedding1.equals(wedding2));
     }
 
     @Test
-    public void toString_validTag_returnsExpectedFormat() {
-        Tag tag = new Tag(new TagName("friend"));
-        assertTrue(tag.toString().equals("[friend]"));
+    public void toString_validWedding_returnsExpectedFormat() {
+        Wedding amyWedding = AMY_WEDDING;
+        assertTrue(amyWedding.toString().equals("[Amy's Wedding]"));
     }
 
     @Test
-    public void noPersonsTaggedCheck() {
-        Tag florist = new Tag(new TagName("Florist"));
-        assertEquals(0, florist.getNumberOfPersonsTagged());
+    public void noPersonsWeddinggedCheck() {
+        Wedding amyWedding = new Wedding(VALID_WEDDING_NAME_AMY_WEDDING);
+        assertEquals(0, amyWedding.getNumPersonsForWedding());
     }
 
     @Test
-    public void incrementTaggedCount() {
-        Tag florist = new Tag(new TagName("Florist"));
-        florist.increaseTaggedCount();
-        assertEquals(1, florist.getNumberOfPersonsTagged());
+    public void increasePeopleCount() {
+        Wedding amyWedding = new Wedding(VALID_WEDDING_NAME_AMY_WEDDING);
+        amyWedding.increasePeopleCount();
+        assertEquals(1, amyWedding.getNumPersonsForWedding());
     }
 
     @Test
-    public void decrementTaggedCount() {
-        Tag florist = new Tag(new TagName("Florist"));;
-        florist.increaseTaggedCount();
-        florist.decreaseTaggedCount();
-        assertEquals(0, florist.getNumberOfPersonsTagged());
+    public void decrementPeopleCount() {
+        Wedding amyWedding = new Wedding(VALID_WEDDING_NAME_AMY_WEDDING);
+        amyWedding.increasePeopleCount();
+        amyWedding.decreasePeopleCount();
+        assertEquals(0, amyWedding.getNumPersonsForWedding());
     }
 
     @Test
     public void canBeDeleted() {
-        Tag florist = new Tag(new TagName("Florist"));
-        assertTrue(florist.canBeDeleted());
+        Wedding amyWedding = new Wedding(VALID_WEDDING_NAME_AMY_WEDDING);
+        assertTrue(amyWedding.canBeDeleted());
     }
 }

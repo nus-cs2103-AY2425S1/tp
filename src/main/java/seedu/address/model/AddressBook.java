@@ -52,14 +52,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
-     */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
-    }
-
-    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
@@ -76,14 +68,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
-    }
-
-    /**
-     * Replaces the contents of the tag list with {@code tags}.
-     * {@code tags} must not contain duplicate tags.
-     */
-    public void setTags(List<Tag> tags) {
-        this.tags.setTags(tags);
     }
 
     //// person-level operations
@@ -143,6 +127,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the tag list with {@code tags}.
+     * {@code tags} must not contain duplicate tags.
+     */
+    public void setTags(List<Tag> tags) {
+        this.tags.setTags(tags);
+    }
+
+    /**
      * Adds a wedding to the Wedlinker
      * The wedding must not already exist in the Wedlinker
      * @param wedding A {@code Wedding} object to be added.
@@ -160,6 +152,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedWedding);
 
         weddings.setWedding(target, editedWedding);
+    }
+
+    /**
+     * Replaces the contents of the wedding list with {@code weddings}.
+     * {@code weddings} must not contain duplicate weddings.
+     */
+    public void setWeddings(List<Wedding> weddings) {
+        this.weddings.setWeddings(weddings);
     }
 
     /**

@@ -1,10 +1,13 @@
 package seedu.address.model.wedding;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.wedding.WeddingName;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalWeddings.VALID_WEDDING_STRING_AMY_WEDDING;
+import static seedu.address.testutil.TypicalWeddings.VALID_WEDDING_STRING_BOB_WEDDING;
+
+import org.junit.jupiter.api.Test;
 
 public class WeddingNameTest {
 
@@ -46,44 +49,44 @@ public class WeddingNameTest {
 
     @Test
     public void equals() {
-        WeddingName WeddingName = new WeddingName("friend");
+        WeddingName weddingName = new WeddingName(VALID_WEDDING_STRING_AMY_WEDDING);
 
-        assertTrue(WeddingName.equals(WeddingName));
+        assertTrue(weddingName.equals(weddingName));
 
-        WeddingName WeddingNameCopy = new WeddingName("friend");
-        assertTrue(WeddingName.equals(WeddingNameCopy));
+        WeddingName weddingNameCopy = new WeddingName(VALID_WEDDING_STRING_AMY_WEDDING);
+        assertTrue(weddingName.equals(weddingNameCopy));
 
-        assertFalse(WeddingName.equals(5));
+        assertFalse(weddingName.equals(5));
 
-        assertFalse(WeddingName.equals(null));
+        assertFalse(weddingName.equals(null));
 
-        WeddingName differentWeddingName = new WeddingName("colleague");
-        assertFalse(WeddingName.equals(differentWeddingName));
+        WeddingName differentWeddingName = new WeddingName(VALID_WEDDING_STRING_BOB_WEDDING);
+        assertFalse(weddingName.equals(differentWeddingName));
     }
 
     @Test
     public void hashCode_sameWeddingName_returnsSameHashCode() {
-        WeddingName WeddingName = new WeddingName("friend");
-        WeddingName WeddingNameCopy = new WeddingName("friend");
-        assertEquals(WeddingName.hashCode(), WeddingNameCopy.hashCode());
+        WeddingName weddingName = new WeddingName(VALID_WEDDING_STRING_AMY_WEDDING);
+        WeddingName weddingNameCopy = new WeddingName(VALID_WEDDING_STRING_AMY_WEDDING);
+        assertEquals(weddingName.hashCode(), weddingNameCopy.hashCode());
     }
 
     @Test
     public void hashCode_differentWeddingName_returnsDifferentHashCode() {
-        WeddingName WeddingName = new WeddingName("friend");
-        WeddingName differentWeddingName = new WeddingName("colleague");
-        assertFalse(WeddingName.hashCode() == differentWeddingName.hashCode());
+        WeddingName weddingName = new WeddingName(VALID_WEDDING_STRING_AMY_WEDDING);
+        WeddingName differentWeddingName = new WeddingName(VALID_WEDDING_STRING_BOB_WEDDING);
+        assertFalse(weddingName.hashCode() == differentWeddingName.hashCode());
     }
 
     @Test
     public void toString_validWeddingName_returnsStringRepresentation() {
-        WeddingName WeddingName = new WeddingName("friend");
-        assertEquals("friend", WeddingName.toString());
+        WeddingName amyWeddingName = new WeddingName(VALID_WEDDING_STRING_AMY_WEDDING);
+        assertEquals("Amy's Wedding", amyWeddingName.toString());
     }
 
     @Test
     public void matches_validRegex_returnsTrue() {
-        WeddingName WeddingName = new WeddingName("friend");
-        assertTrue(WeddingName.matches("[\\p{Alnum}][\\p{Alnum} ]*"));
+        WeddingName amyWeddingName = new WeddingName(VALID_WEDDING_STRING_AMY_WEDDING);
+        assertTrue(amyWeddingName.matches("[\\p{Alnum}'][\\p{Alnum} ']*"));
     }
 }

@@ -1,17 +1,20 @@
 package seedu.address.model.wedding;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.wedding.exceptions.DuplicateWeddingException;
-import seedu.address.model.wedding.exceptions.WeddingNotFoundException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalWeddings.AMY_WEDDING;
+import static seedu.address.testutil.TypicalWeddings.BOB_WEDDING;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalWeddings.AMY_WEDDING;
-import static seedu.address.testutil.TypicalWeddings.BOB_WEDDING;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.wedding.exceptions.DuplicateWeddingException;
+import seedu.address.model.wedding.exceptions.WeddingNotFoundException;
 
 public class UniqueWeddingListTest {
     private final UniqueWeddingList uniqueWeddingList = new UniqueWeddingList();
@@ -22,18 +25,18 @@ public class UniqueWeddingListTest {
     }
 
     @Test
-    public void contains_WeddingNotInList_returnsFalse() {
+    public void contains_weddingNotInList_returnsFalse() {
         assertFalse(uniqueWeddingList.contains(AMY_WEDDING));
     }
 
     @Test
-    public void contains_WeddingInList_returnsTrue() {
+    public void contains_weddingInList_returnsTrue() {
         uniqueWeddingList.add(AMY_WEDDING);
         assertTrue(uniqueWeddingList.contains(AMY_WEDDING));
     }
 
     @Test
-    public void contains_WeddingWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_weddingWithSameIdentityFieldsInList_returnsTrue() {
         uniqueWeddingList.add(AMY_WEDDING);
         Wedding sameWedding = new Wedding(new WeddingName("Amy's Wedding"));
         assertTrue(uniqueWeddingList.contains(sameWedding));
@@ -96,7 +99,7 @@ public class UniqueWeddingListTest {
     }
 
     @Test
-    public void remove_WeddingDoesNotExist_throwsWeddingNotFoundException() {
+    public void remove_weddingDoesNotExist_throwsWeddingNotFoundException() {
         assertThrows(WeddingNotFoundException.class, () -> uniqueWeddingList.remove(AMY_WEDDING));
     }
 

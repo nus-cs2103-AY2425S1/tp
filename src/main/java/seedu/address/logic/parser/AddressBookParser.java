@@ -76,6 +76,8 @@ public class AddressBookParser {
         case DeleteWeddingCommand.COMMAND_WORD -> new DeleteWeddingCommandParser().parse(arguments);
         case TagCommand.COMMAND_WORD -> new TagCommandParser().parse(arguments);
         case UntagCommand.COMMAND_WORD -> new UntagCommandParser().parse(arguments);
+        case AssignWeddingCommand.COMMAND_WORD -> new AssignWeddingCommandParser().parse(arguments);
+        case UnassignWeddingCommand.COMMAND_WORD -> new UnassignWeddingCommandParser().parse(arguments);
         default -> {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

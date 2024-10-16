@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteWeddingCommand;
-import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingName;
 
 public class DeleteWeddingCommandParserTest {
