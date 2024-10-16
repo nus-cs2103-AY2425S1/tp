@@ -48,6 +48,6 @@ public class UiStateTest {
     @Test
     public void null_returnsNotEquals() throws CommandException {
         new ViewTasksCommand().execute(model);
-        assertNotEquals(null, model.getUiState());
+        assertNotEquals(model.getUiState(), null);
     }
 }
