@@ -83,13 +83,11 @@ public class ClientHubParser {
         case FindPhoneCommand.COMMAND_WORD:
             return new FindPhoneCommandParser().parse(arguments);
 
-<<<<<<< HEAD
         case FindClientTypeCommand.COMMAND_WORD:
             return new FindClientTypeCommandParser().parse(arguments);
-=======
+
         case FindNameCommand.COMMAND_WORD:
             return new FindNameCommandParser().parse(arguments);
->>>>>>> branch-findnamecommand
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
