@@ -30,6 +30,8 @@ public class PersonCard extends UiPart<Region> {
 
     public final Person person;
 
+    private Map<String, String> roleColors = new HashMap<>();
+
     @FXML
     private HBox cardPane;
     @FXML
@@ -46,8 +48,6 @@ public class PersonCard extends UiPart<Region> {
     private Label telegramUsername;
     @FXML
     private FlowPane roles;
-
-    Map<String, String> roleColors = new HashMap<>();
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
