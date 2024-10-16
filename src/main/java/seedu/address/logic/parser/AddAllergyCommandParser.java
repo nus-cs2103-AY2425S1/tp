@@ -1,11 +1,9 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_FIELDS;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -36,10 +34,7 @@ public class AddAllergyCommandParser implements Parser<AddAllergyCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAllergyCommand.MESSAGE_USAGE));
         }
 
-        List<String> argsPrefixNric = argMultimap.getAllValues(PREFIX_NRIC);
-        if (argsPrefixNric.size() > 1) {
-            throw new ParseException(MESSAGE_DUPLICATE_FIELDS);
-        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NRIC);
 
         try {
             Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());

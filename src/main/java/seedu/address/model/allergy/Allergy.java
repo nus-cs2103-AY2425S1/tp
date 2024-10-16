@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Allergy implements Comparable<Allergy> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Allergys names should be alphanumeric and not "
+    public static final String MESSAGE_CONSTRAINTS = "Allergy names should be alphanumeric and not "
             + "exceed 30 characters";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+(\\s\\p{Alnum}+)*";
 
