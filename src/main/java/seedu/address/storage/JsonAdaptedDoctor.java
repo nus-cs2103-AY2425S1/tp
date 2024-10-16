@@ -9,6 +9,9 @@ import seedu.address.model.person.DoctorName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Phone;
 
+/**
+ * Constructs a {@code JsonAdaptedDoctor} with the given person details.
+ */
 public class JsonAdaptedDoctor {
     private final String doctorName;
     private final String doctorPhone;

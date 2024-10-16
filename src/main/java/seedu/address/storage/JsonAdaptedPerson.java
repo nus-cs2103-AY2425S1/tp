@@ -11,9 +11,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmergencyContact;
-import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -123,7 +123,8 @@ class JsonAdaptedPerson {
         final Doctor modelDoctor = doctor.toModelType();
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelEmergencyContact, modelDoctor, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelEmergencyContact, modelDoctor,
+                            modelTags);
     }
 
 }
