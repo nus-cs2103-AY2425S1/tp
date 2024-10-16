@@ -37,14 +37,13 @@ public class TelegramTest {
         assertFalse(Telegram.isValidTelegram("1aaaaaa")); // start cannot be numberic
         assertTrue(Telegram.isValidTelegram("tota1")); // end cannot be numeric
 
-
         // valid telegrams
         assertTrue(Telegram.isValidTelegram("AAAAA")); // exactly 5 chars, just caps
         assertTrue(Telegram.isValidTelegram("bbbbbbbb")); // just lowercase
         assertTrue(Telegram.isValidTelegram("A22W_f_wfe3")); // numbers and underscores ok
         assertTrue(Telegram.isValidTelegram("A_____A")); // consecutive underscores ok
         assertTrue(Telegram.isValidTelegram("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ")); // exactly 32 chars
-        assertTrue(Telegram.isValidTelegram("Ra_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a")); // certain regexes may fail this too
+        assertTrue(Telegram.isValidTelegram("Ra_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a")); // certain regexes fail this too
     }
 
     @Test

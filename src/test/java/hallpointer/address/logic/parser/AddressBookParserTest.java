@@ -34,7 +34,7 @@ public class AddressBookParserTest {
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_addMember() throws Exception {
         Member member = new MemberBuilder().build();
         AddMemberCommand command = (AddMemberCommand) parser.parseCommand(MemberUtil.getAddCommand(member));
         assertEquals(new AddMemberCommand(member), command);
@@ -47,14 +47,14 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
+    public void parseCommand_deleteMember() throws Exception {
         DeleteMemberCommand command = (DeleteMemberCommand) parser.parseCommand(
                 DeleteMemberCommand.COMMAND_WORD + " " + INDEX_FIRST_MEMBER.getOneBased());
         assertEquals(new DeleteMemberCommand(INDEX_FIRST_MEMBER), command);
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_updateMember() throws Exception {
         Member member = new MemberBuilder().build();
         UpdateMemberDescriptor descriptor = new UpdateMemberDescriptorBuilder(member).build();
         UpdateMemberCommand command = (UpdateMemberCommand) parser.parseCommand(UpdateMemberCommand.COMMAND_WORD + " "
@@ -69,7 +69,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_findMember() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindMemberCommand command = (FindMemberCommand) parser.parseCommand(
                 FindMemberCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
@@ -83,7 +83,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
+    public void parseCommand_listMembers() throws Exception {
         assertTrue(parser.parseCommand(ListMembersCommand.COMMAND_WORD) instanceof ListMembersCommand);
         assertTrue(parser.parseCommand(ListMembersCommand.COMMAND_WORD + " 3") instanceof ListMembersCommand);
     }

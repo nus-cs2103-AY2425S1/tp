@@ -80,7 +80,7 @@ public class MemberTest {
         editedAlice = new MemberBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different address -> returns false
+        // different room -> returns false
         editedAlice = new MemberBuilder(ALICE).withRoom(VALID_ROOM_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
@@ -104,7 +104,7 @@ public class MemberTest {
                                 new SessionDate("16 Oct 2024"), new Point(10));
         member.addSession(newSession);
         assertTrue(member.getSessions().contains(newSession));
-        assertEquals(new Point(newSession.getPoints().points), member.getTotalPoints());
+        assertEquals(newSession.getPoints(), member.getTotalPoints());
     }
 
     @Test

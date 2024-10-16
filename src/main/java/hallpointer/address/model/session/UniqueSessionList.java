@@ -6,8 +6,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.Iterator;
 import java.util.List;
 
-import hallpointer.address.model.member.exceptions.DuplicateSessionException;
-import hallpointer.address.model.member.exceptions.SessionNotFoundException;
+import hallpointer.address.model.session.exceptions.DuplicateSessionException;
+import hallpointer.address.model.session.exceptions.SessionNotFoundException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

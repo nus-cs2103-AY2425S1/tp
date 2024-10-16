@@ -15,8 +15,8 @@ public class Session {
 
     // Identity fields
     private final SessionName sessionName;
-    private final Point points;
     private final SessionDate date;
+    private final Point points;
 
     /**
      * Every field must be present and not null.
@@ -72,6 +72,7 @@ public class Session {
 
         Session otherSession = (Session) other;
         return sessionName.equals(otherSession.sessionName)
+                && date == otherSession.date
                 && points == otherSession.points;
     }
 
@@ -84,6 +85,7 @@ public class Session {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("sessionName", sessionName)
+                .add("date", date)
                 .add("points", points)
                 .toString();
     }
