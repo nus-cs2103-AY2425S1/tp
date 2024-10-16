@@ -58,6 +58,23 @@ public class TelegramUsernameTest {
     }
 
     @Test
+    public void equals_oneNullTelegramUsername_returnsFalse() {
+        TelegramUsername nullUsername = new TelegramUsername(null);
+        TelegramUsername validUsername = new TelegramUsername("valid_name");
+
+        assertFalse(validUsername.equals(nullUsername));
+        assertFalse(nullUsername.equals(validUsername));
+    }
+
+    @Test
+    public void equals_bothNullTelegramUsername_returnsTrue() {
+        TelegramUsername nullUsername1 = new TelegramUsername(null);
+        TelegramUsername nullUsername2 = new TelegramUsername(null);
+
+        assertEquals(nullUsername1, nullUsername2);
+    }
+
+    @Test
     public void toString_correctlyConvertsToString() {
         TelegramUsername username = new TelegramUsername("Valid_Name");
         assertEquals("Valid_Name", username.toString());
