@@ -16,8 +16,8 @@ public class AttendanceListTest {
     public void addAttendance_nullAttendance_throwsNullPointerException() {
         AttendanceList attendanceList = new AttendanceList();
         assertThrows(NullPointerException.class, () -> attendanceList.setAttendance(null, new Attendance(true)));
-        assertThrows(NullPointerException.class,
-                () -> attendanceList.setAttendance(LocalDateTime.of(1, 1, 1, 1, 1), null));
+        assertThrows(NullPointerException.class, () ->
+            attendanceList.setAttendance(LocalDateTime.of(1, 1, 1, 1, 1), null));
         assertThrows(NullPointerException.class, () -> attendanceList.setAttendance(null, null));
     }
 
@@ -26,7 +26,7 @@ public class AttendanceListTest {
         AttendanceList list = new AttendanceList();
         list = list.setAttendance(LocalDateTime.of(2024, 1, 1, 12, 0), new Attendance(true));
         list = list.setAttendance(LocalDateTime.of(2024, 1, 1, 12, 0), new Attendance(false));
-        assertTrue(list.toString().equals("01/01/2024 12:00 Absent"));
+        assertTrue(list.toString().equals("01/01/2024 12:00 Absent\n"));
     }
 
     @Test
@@ -44,7 +44,7 @@ public class AttendanceListTest {
         AttendanceList list = new AttendanceList();
         list.setAttendance(date, new Attendance(true));
         assertTrue(list.toString().equals(""));
-        
+
         // removeAttendance should not modify the original list
         list = list.setAttendance(date, new Attendance(true));
         list.removeAttendance(date);
