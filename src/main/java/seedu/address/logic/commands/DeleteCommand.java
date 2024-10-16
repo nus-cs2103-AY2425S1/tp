@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -38,7 +37,6 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_MULTIPLE_MATCHES = "Multiple persons found with the name";
     public static final String MESSAGE_NAME_NOT_FOUND = "No person with that name found.";
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     private final Index targetIndex;
     private final Name targetName;
