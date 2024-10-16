@@ -119,4 +119,28 @@ public class UniqueLessonListTest {
         // Verify that the size of the list reflects the added lessons
         assertEquals(1, uniqueLessonList.size());
     }
+
+    @Test
+    public void setLessons_withValidUniqueLessonList_replacesData() {
+        UniqueLessonList newData = new UniqueLessonList();
+        newData.add(lesson);
+        uniqueLessonList.setLessons(newData);
+        assertEquals(newData, uniqueLessonList);
+    }
+
+    @Test
+    public void setLessons_withValidLessonList_replacesData() {
+        List<Lesson> newData = List.of(lesson);
+        UniqueLessonList originalData = new UniqueLessonList();
+        originalData.add(lesson);
+        uniqueLessonList.setLessons(newData);
+        assertEquals(originalData, uniqueLessonList);
+    }
+
+    @Test
+    public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, ()
+                -> uniqueLessonList.asUnmodifiableObservableList().remove(0));
+    }
+
 }

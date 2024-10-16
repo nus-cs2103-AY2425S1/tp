@@ -13,7 +13,7 @@ import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.lesson.StudentId;
 import tutorease.address.model.person.Person;
 import tutorease.address.testutil.LessonBuilder;
-import tutorease.address.testutil.PersonBuilder;
+import tutorease.address.testutil.StudentBuilder;
 
 public class JsonAdaptedLessonTest {
     private static final String INVALID_STUDENT = "R@chel";
@@ -40,7 +40,7 @@ public class JsonAdaptedLessonTest {
     @Test
     public void toModelType_invalidStudent_throwsIllegalValueException() throws ParseException {
         String nameNotExist = "JohnDoesNotExist";
-        Person person = new PersonBuilder().withName(nameNotExist).build();
+        Person person = new StudentBuilder().withName(nameNotExist).build();
         JsonAdaptedLesson lesson = new JsonAdaptedLesson(new LessonBuilder().withName(person).build());
         String expectedMessage = StudentId.INVALID_MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(tutorEase));
