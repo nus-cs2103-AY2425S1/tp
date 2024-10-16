@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -27,6 +28,23 @@ public class ListClaimsCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    /**
+     * Tests the execution of {@code ListClaimsCommand} with a valid index on an unfiltered client list.
+     *
+     * This test verifies that when a valid index is provided, the command successfully retrieves
+     * the corresponding client and their claims from the model. It checks that the expected success
+     * message is generated and that the model state remains consistent after the command execution.
+     *
+     * Specifically, this test:
+     * - Retrieves the first client from the filtered client list.
+     * - Constructs a {@code ListClaimsCommand} with the specified index.
+     * - Asserts that executing the command results in a success message formatted with the client's name
+     *   and their associated claims.
+     * - Verifies that the model state after executing the command matches the expected model state.
+     *
+     * @see ListClaimsCommand
+     * @see Model
+     */
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Client clientToDisplay = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
@@ -41,6 +59,22 @@ public class ListClaimsCommandTest {
         assertCommandSuccess(listClaimsCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * Tests the execution of {@code ListClaimsCommand} with an invalid index on an unfiltered client list.
+     *
+     * This test verifies that when an invalid index (one that exceeds the bounds of the filtered client list)
+     * is provided, the command throws a {@code CommandException}. It ensures that the command does not
+     * execute successfully and that the appropriate error message is returned.
+     *
+     * Specifically, this test:
+     * - Constructs an out-of-bounds index based on the size of the unfiltered client list.
+     * - Creates a {@code ListClaimsCommand} with the invalid index.
+     * - Asserts that executing the command results in a failure with the expected error message,
+     *   indicating an invalid client display index.
+     *
+     * @see ListClaimsCommand
+     * @see CommandException
+     */
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredClientList().size() + 1);
@@ -49,6 +83,25 @@ public class ListClaimsCommandTest {
         assertCommandFailure(listClaimsCommand, model, Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
     }
 
+    /**
+     * Tests the execution of {@code ListClaimsCommand} with a valid index on a filtered client list.
+     *
+     * This test verifies that when a valid index is provided and the client list is filtered,
+     * the command successfully retrieves the corresponding client and their claims from the model.
+     * It checks that the expected success message is generated and that the model state remains
+     * consistent after the command execution.
+     *
+     * Specifically, this test:
+     * - Displays the client at the specified index in the filtered list.
+     * - Constructs a {@code ListClaimsCommand} with the specified index.
+     * - Asserts that executing the command results in a success message formatted with the client's name
+     *   and their associated claims.
+     * - Verifies that the model state after executing the command matches the expected model state,
+     *   which also reflects showing the client at the specified index.
+     *
+     * @see ListClaimsCommand
+     * @see Model
+     */
     @Test
     public void execute_validIndexFilteredList_success() {
         showClientAtIndex(model, INDEX_FIRST_CLIENT);
@@ -66,6 +119,24 @@ public class ListClaimsCommandTest {
         assertCommandSuccess(listClaimsCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * Tests the execution of {@code ListClaimsCommand} with an invalid index on a filtered client list.
+     *
+     * This test verifies that when an invalid index is provided (one that is out of bounds for the
+     * filtered client list), the command throws a {@code CommandException}. It ensures that the
+     * command does not execute successfully and that the appropriate error message is returned.
+     *
+     * Specifically, this test:
+     * - Displays the client at the specified index in the filtered list to set up the context.
+     * - Defines an out-of-bounds index for the client list.
+     * - Asserts that the out-of-bounds index is still valid within the context of the full address book.
+     * - Constructs a {@code ListClaimsCommand} with the invalid index.
+     * - Asserts that executing the command results in a failure with the expected error message,
+     *   indicating an invalid client display index.
+     *
+     * @see ListClaimsCommand
+     * @see CommandException
+     */
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showClientAtIndex(model, INDEX_FIRST_CLIENT);
