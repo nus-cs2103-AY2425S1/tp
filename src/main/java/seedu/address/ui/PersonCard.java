@@ -1,14 +1,13 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Set;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.appointment.Appointment;
-import seedu.address.model.person.MedCon;
 import seedu.address.model.person.Person;
 
 /**
@@ -49,7 +48,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Label priority;
+    private FlowPane priority;
     @FXML
     private FlowPane appointments;
     @FXML
@@ -69,16 +68,47 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getMedCons().stream()
-                .sorted(Comparator.comparing(MedCon::toString))
-                .forEach(medCon -> medCons.getChildren().add(new Label(medCon.toString())));
-        priority.setText(person.getPriority().priority);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        person.getAppointments()
-                .stream()
-                .sorted(Comparator.comparing(Appointment::getAppointmentStartDateTime))
-                .forEach(appointment -> appointments.getChildren().add(new Label(appointment.toString())));
+        applyPriorityBackground(priority, person.getPriority().priority);
+        addLabelsToFlowPane(person.getMedCons(), medCons);
+        addLabelsToFlowPane(person.getTags(), tags);
+        addLabelsToFlowPane(person.getAppointments(), appointments);
+    }
+
+    private <T extends Comparable<T>> void addLabelsToFlowPane(Set<T> items, FlowPane flowPane) {
+        items.stream()
+                .sorted(Comparator.naturalOrder())
+                .forEach(item -> flowPane.getChildren().add(new Label(item.toString())));
+    }
+
+    // Apply background color styles based on the priority value
+    private void applyPriorityBackground(FlowPane flowPane, String priorityValue) {
+        // Set up the label for priority
+        Label priorityLabel = new Label(person.getPriority().priority);
+        priorityLabel.getStyleClass().add("priority-label");
+        // Remove any existing priority styles
+        priority.getStyleClass().removeAll("priority-high-bg", "priority-medium-bg",
+                "priority-low-bg", "priority-none-bg");
+
+        // Add the new label with the corresponding background style
+        switch (priorityValue) {
+        case "HIGH":
+            priorityLabel.getStyleClass().add("priority-high-bg");
+            break;
+        case "MEDIUM":
+            priorityLabel.getStyleClass().add("priority-medium-bg");
+            break;
+        case "LOW":
+            priorityLabel.getStyleClass().add("priority-low-bg");
+            break;
+        case "NONE":
+            priorityLabel.getStyleClass().add("priority-none-bg");
+            break;
+        default:
+            break;
+        }
+
+        // Add the label to the FlowPane
+        priority.getChildren().add(priorityLabel);
+
     }
 }

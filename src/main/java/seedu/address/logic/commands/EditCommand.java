@@ -247,6 +247,7 @@ public class EditCommand extends Command {
         public void setNric(Nric nric) {
             this.nric = nric;
         }
+
         /**
          * Returns an unmodifiable medCon set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
