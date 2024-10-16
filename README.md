@@ -3,12 +3,12 @@
 
 ![Ui](docs/images/Ui.png)
 
-**<h2>🦁 EventfulNUS is every NUS Inter-Faculty Games (IFG) organiser's handy contact manager! 🏆</h2>** 
+**<h2>🦁 EventfulNUS is every NUS Inter-Faculty Games (IFG) organiser's handy contact manager! 🏆</h2>**
 
 **All event organizers will be able to:**
 - 🏀 View what kind of participant each contact is in the application is without having to dig through paperwork / NUSync
 - 🏊 View how participants are grouped by membership (e.g. faculty sports team) without having to dig through paperwork / NUSync
-- 🎾 Track the particular participant’s involvement in the event’s sub-events (e.g. IFG has multiple sub-events that stakeholders can take part in) without having to dig through paperwork / NUSync 
+- 🎾 Track the particular participant’s involvement in the event’s sub-events (e.g. IFG has multiple sub-events that stakeholders can take part in) without having to dig through paperwork / NUSync.
 
 While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 

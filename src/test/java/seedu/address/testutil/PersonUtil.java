@@ -1,14 +1,18 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
-
-import static seedu.address.logic.parser.CliSyntax.*;
+import seedu.address.model.person.role.Role;
 
 /**
  * A utility class for Person.
@@ -26,14 +30,14 @@ public class PersonUtil {
      */
     public static String getPersonDetails(Person person) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        person.getEvents().stream().forEach(
-                e -> sb.append(PREFIX_EVENTS + e.value + " ")
+        sb.append(PREFIX_NAME).append(person.getName().fullName).append(" ");
+        sb.append(PREFIX_PHONE).append(person.getPhone().value).append(" ");
+        sb.append(PREFIX_EMAIL).append(person.getEmail().value).append(" ");
+        person.getEvents().forEach(
+                e -> sb.append(PREFIX_EVENT).append(e.value).append(" ")
         );
-        person.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+        person.getRoles().forEach(
+            s -> sb.append(PREFIX_ROLE).append(s.getRoleName()).append(" ")
         );
         return sb.toString();
     }
@@ -50,20 +54,21 @@ public class PersonUtil {
         if (descriptor.getEvents().isPresent()) {
             Set<Event> events = descriptor.getEvents().get();
             if (events.isEmpty()) {
-                sb.append(PREFIX_EVENTS);
+                sb.append(PREFIX_EVENT);
             } else {
-                events.forEach(e -> sb.append(PREFIX_EVENTS).append(e.value).append(" "));
+                events.forEach(e -> sb.append(PREFIX_EVENT).append(e.value).append(" "));
             }
         }
 
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+        if (descriptor.getRoles().isPresent()) {
+            Set<Role> roles = descriptor.getRoles().get();
+            if (roles.isEmpty()) {
+                sb.append(PREFIX_ROLE);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                roles.forEach(s -> sb.append(PREFIX_ROLE).append(s.getRoleName()).append(" "));
             }
         }
+
         return sb.toString();
     }
 }

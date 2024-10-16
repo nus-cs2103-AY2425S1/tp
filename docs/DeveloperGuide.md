@@ -263,7 +263,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-Sports Event (e.g. IFG) Organisers that need to manage and contact: 
+Sports Event (e.g. IFG) Organisers that need to manage and contact:
 - Audience
 - Athletes
 - Committee Members
@@ -273,15 +273,15 @@ and more.
 
 This person prefers CLI over GUI and has many event participants to keep track of.
 
-**Value proposition**: 
+**Value proposition**:
 
 All event organizers will be able to:
-- View what kind of participant each contact is in the application is 
+- View what kind of participant each contact is in the application is
 without having to dig through paperwork / NUSync.
-- View how participants are grouped by membership (e.g. faculty sports team) 
+- View how participants are grouped by membership (e.g. faculty sports team)
 without having to dig through paperwork / NUSync.
-- Track the particular participant’s involvement in the event’s sub-events 
-(e.g. IFG has multiple sub-events that stakeholders can take part in) 
+- Track the particular participant’s involvement in the event’s sub-events
+(e.g. IFG has multiple sub-events that stakeholders can take part in)
 without having to dig through paperwork / NUSync.
 
 
@@ -477,33 +477,33 @@ Use case resumes from step 2.
 ### Non-Functional Requirements
 
 #### 1. Additional Requirements
-1.1. The system should work on any **mainstream OS** as long as it has **Java 17** or above installed.  
-1.2. The system should be able to hold up to **1,000 persons** without noticeable sluggishness in performance for typical usage.  
+1.1. The system should work on any **mainstream OS** as long as it has **Java 17** or above installed.
+1.2. The system should be able to hold up to **1,000 persons** without noticeable sluggishness in performance for typical usage.
 1.3. A user with **above average typing speed** for regular English text (i.e. not code, not system admin commands) should be able to accomplish most tasks faster using commands than using the mouse.
 
 #### 2. Performance
-2.1. The system should respond within **2 seconds** after the user types in a command.  
+2.1. The system should respond within **2 seconds** after the user types in a command.
 2.2. The system should start up within **5 seconds**.
 
 #### 3. Scalability
-3.1. The system should be able to handle up to **10,000+ users** without degradation in performance.  
-3.2. An event should be able to handle **1,000+ participants**.  
+3.1. The system should be able to handle up to **10,000+ users** without degradation in performance.
+3.2. An event should be able to handle **1,000+ participants**.
 3.3. A participant should be able to keep track of **10+ events** at once.
 
 #### 4. Portability
-4.1. The system should run on **all OS systems** (e.g. Windows, Mac, Linux).  
+4.1. The system should run on **all OS systems** (e.g. Windows, Mac, Linux).
 4.2. The system should work on both **32-bit and 64-bit environments**.
 
 #### 5. Security
 5.1. Sensitive data should be **safely encrypted**.
 
 #### 6. Maintainability
-6.1. Codebase should be easy to maintain and follow **industry-standard design practices**.  
-6.2. **Coupling** should be reduced to allow for easier testing of features.  
+6.1. Codebase should be easy to maintain and follow **industry-standard design practices**.
+6.2. **Coupling** should be reduced to allow for easier testing of features.
 6.3. Codebase should aim for **high cohesion** to increase the understandability of individual components.
 
 #### 7. Usability
-7.1. The system should be **easy-to-use** for a novice, who does not have a lot of experience using CLI-based apps.  
+7.1. The system should be **easy-to-use** for a novice, who does not have a lot of experience using CLI-based apps.
 7.2. The system should offer a **user-friendly** and **intuitive CLI syntax**, minimizing the learning curve for new users.
 
 #### 8. Process

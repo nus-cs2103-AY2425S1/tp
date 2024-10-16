@@ -42,6 +42,13 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
+     * Creates a new HelpWindow.
+     */
+    public HelpWindow() {
+        this(new Stage());
+    }
+
+    /**
      * Reads the help message from a file.
      */
     private String loadHelpMessage() {
@@ -57,13 +64,6 @@ public class HelpWindow extends UiPart<Stage> {
             return "Failed to load help message." + EXTRA_HELP_MESSAGE;
         }
         return helpMessage + EXTRA_HELP_MESSAGE;
-    }
-
-    /**
-     * Creates a new HelpWindow.
-     */
-    public HelpWindow() {
-        this(new Stage());
     }
 
     /**
