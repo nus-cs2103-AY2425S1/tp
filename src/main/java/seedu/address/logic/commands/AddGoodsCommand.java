@@ -13,6 +13,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.goods.Goods;
+import seedu.address.model.goodsReceipt.GoodsReceipt;
 
 /**
  * Adds trackable goods linked to contacted suppliers.
@@ -41,13 +42,16 @@ public class AddGoodsCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New goods added: %1$s";
 
     private final Goods toAdd;
+    private final GoodsReceipt linkToGoods;
 
     /**
      * Creates an AddGoodsCommand for the goods
      */
-    public AddGoodsCommand(Goods goods) {
+    public AddGoodsCommand(Goods goods, GoodsReceipt goodsReceipt) {
         requireNonNull(goods);
+        requireNonNull(goodsReceipt);
         this.toAdd = goods;
+        this.linkToGoods = goodsReceipt;
     }
 
     @Override

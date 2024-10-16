@@ -2,8 +2,8 @@ package seedu.address.storage;
 
 import com.opencsv.bean.AbstractBeanField;
 
-import seedu.address.model.goods.Date;
 import seedu.address.model.goods.GoodsName;
+import seedu.address.model.goodsReceipt.Date;
 import seedu.address.model.person.Name;
 
 

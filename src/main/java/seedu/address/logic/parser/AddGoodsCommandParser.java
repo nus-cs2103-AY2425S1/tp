@@ -14,10 +14,11 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddGoodsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.goods.Date;
 import seedu.address.model.goods.Goods;
 import seedu.address.model.goods.GoodsCategories;
 import seedu.address.model.goods.GoodsName;
+import seedu.address.model.goodsReceipt.Date;
+import seedu.address.model.goodsReceipt.GoodsReceipt;
 import seedu.address.model.person.Name;
 
 /**
@@ -53,10 +54,12 @@ public class AddGoodsCommandParser implements Parser<AddGoodsCommand> {
         Date arrivalDate = ParserUtil.parseDateTimeValues(argMultimap.getValue(PREFIX_ARRIVAL_DATE).get());
         Boolean isDelivered = arrivalDate.getDateTime().isBefore(LocalDateTime.now());
 
-        Goods goods = new Goods(goodsName, quantity, price, category, procurementDate, arrivalDate,
-                isDelivered, supplierName);
+        Goods goods = new Goods(goodsName, category); //TODO: If Exists return Else Create NEW
 
-        return new AddGoodsCommand(goods);
+        GoodsReceipt goodsReceipt = new GoodsReceipt(goods, supplierName,
+                procurementDate, arrivalDate, isDelivered, quantity, price);
+
+        return new AddGoodsCommand(goods, goodsReceipt);
     }
 
     /**
