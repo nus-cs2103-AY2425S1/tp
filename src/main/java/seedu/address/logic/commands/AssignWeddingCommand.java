@@ -44,6 +44,12 @@ public class AssignWeddingCommand extends Command {
         this.weddingsToAdd = weddingsToAdd;
     }
 
+    /**
+     * Constructs a {@code AssignWedding} Command to add weddings to a person with the force flag.
+     * @param index The index of the person in the person list.
+     * @param weddingsToAdd The list of weddings to be added.
+     * @param force Whether the command should force the assignment by creating the Wedding object.
+     */
     public AssignWeddingCommand(Index index, HashSet<Wedding> weddingsToAdd, boolean force) {
         this.index = index;
         this.weddingsToAdd = weddingsToAdd;
