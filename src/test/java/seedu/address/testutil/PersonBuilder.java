@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,6 +24,8 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final Property DEFAULT_BUYING_PROPERTY = new PropertyToBuyBuilder().build();
+    public static final Property DEFAULT_SELLING_PROPERTY = new PropertyToSellBuilder().build();
 
     private Name name;
     private Phone phone;
@@ -41,8 +44,8 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        sellingProperties = new ArrayList<>();
-        buyingProperties = new ArrayList<>();
+        sellingProperties = new ArrayList<>((Collection<Property>) DEFAULT_SELLING_PROPERTY);
+        buyingProperties = new ArrayList<>((Collection<Property>) DEFAULT_BUYING_PROPERTY);
     }
 
     /**

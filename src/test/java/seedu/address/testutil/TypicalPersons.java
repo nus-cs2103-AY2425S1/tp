@@ -43,7 +43,7 @@ public class TypicalPersons {
             .withEmail("anna@example.com").withAddress("4th street").build();
     public static final Person HENRY = new PersonBuilder().withName("Henry Meier").withPhone("8482424")
             .withEmail("henry@example.com").withAddress("kent ridge")
-            .withBuyProperty(new PropertyBuilder().build()).build();
+            .withBuyProperty(new PropertyToBuyBuilder().build()).build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
