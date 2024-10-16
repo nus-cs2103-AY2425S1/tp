@@ -41,6 +41,13 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_add_alt() throws Exception {
+        Person person = new PersonBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommandAlt(person));
+        assertEquals(new AddCommand(person), command);
+    }
+
+    @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
@@ -60,6 +67,13 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_delete_alt() throws Exception {
+        DeleteCommand command = (DeleteCommand) parser.parseCommand(
+                DeleteCommand.ALT_COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
@@ -75,10 +89,24 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_exit_alt() throws Exception {
+        assertTrue(parser.parseCommand(ExitCommand.ALT_COMMAND_WORD) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.ALT_COMMAND_WORD + " 3") instanceof ExitCommand);
+    }
+
+    @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_find_alt() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindCommand command = (FindCommand) parser.parseCommand(
+                FindCommand.ALT_COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
