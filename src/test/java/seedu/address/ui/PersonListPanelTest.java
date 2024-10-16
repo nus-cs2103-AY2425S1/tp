@@ -3,13 +3,14 @@ package seedu.address.ui;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import org.junit.jupiter.api.Test;
+import org.testfx.framework.junit5.ApplicationTest;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.GuestBuilder;
 

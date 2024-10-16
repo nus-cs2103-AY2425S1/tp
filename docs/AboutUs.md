@@ -10,7 +10,7 @@ We are a team based in the [School of Computing, National University of Singapor
 You can reach us at CS2103T F09 group 3!
 
 ## Project team
-Here are the members of our team! 
+Here are the members of our team!
 
 ### Tan Yi Xuan
 
@@ -39,7 +39,7 @@ Here are the members of our team!
 [[github](http://github.com/YangQF2002)]
 [[portfolio](team/qifeng.md)]
 
-* Role: Developer 
+* Role: Developer
 * Responsibilities: Code quality
 
 ### Wei Bin
