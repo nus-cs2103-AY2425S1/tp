@@ -121,7 +121,7 @@ public class Person implements Appointmentable {
         requireNonNull(patientId);
         requireNonNull(doctorId);
 
-        return history.deleteAppointment(dateTime, patientId, doctorId);
+        return History.deleteAppointment(dateTime, patientId, doctorId);
     }
 
     /**
