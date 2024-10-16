@@ -35,8 +35,8 @@ import seedu.address.model.tag.Tag;
  */
 public class EditCommand extends Command {
 
-    public static final String LONG_COMMAND_WORD = "edit";
-    public static final String SHORT_COMMAND_WORD = "ed";
+    public static final String LONG_COMMAND_WORD = ":edit";
+    public static final String SHORT_COMMAND_WORD = ":ed";
 
     public static final String MESSAGE_USAGE = LONG_COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
