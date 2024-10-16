@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PATIENT;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
@@ -30,13 +31,13 @@ public class LinkCommand extends Command {
 
     public static final String PERSON_NOT_FOUND = "Incorrect NRIC. Person not found";
 
-    private final String patientNric;
-    private final String caregiverNric;
+    private final Nric patientNric;
+    private final Nric caregiverNric;
 
     /**
      * Creates a LinkCommand to link the specified {@code Patient} and {@code Caregiver}
      */
-    public LinkCommand(String patientNric, String caregiverNric) {
+    public LinkCommand(Nric patientNric, Nric caregiverNric) {
         this.patientNric = patientNric;
         this.caregiverNric = caregiverNric;
     }
@@ -57,6 +58,21 @@ public class LinkCommand extends Command {
 
         model.addLink(patient, caregiver);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(patient), Messages.format(caregiver)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof LinkCommand)) {
+            return false;
+        }
+
+        LinkCommand otherLinkCommand = (LinkCommand) other;
+        return patientNric.equals(otherLinkCommand.patientNric)
+                && caregiverNric.equals(otherLinkCommand.caregiverNric);
     }
 
 }

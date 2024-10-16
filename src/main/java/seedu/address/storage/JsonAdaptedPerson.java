@@ -33,6 +33,8 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedRole> roles = new ArrayList<>();
     private final String nric;
+    private final List<Nric> caregivers = new ArrayList<>();
+    private final List<Nric> patients = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -41,7 +43,9 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("nric") String nric,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
             @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("roles") List<JsonAdaptedRole> roles) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("roles") List<JsonAdaptedRole> roles,
+            @JsonProperty("caregivers") List<Nric> caregivers,
+            @JsonProperty("patients") List<Nric> patients) {
         this.name = name;
         this.nric = nric;
         this.phone = phone;
@@ -53,6 +57,12 @@ class JsonAdaptedPerson {
 
         if (roles != null) {
             this.roles.addAll(roles);
+        }
+        if (caregivers != null) {
+            this.caregivers.addAll(caregivers);
+        }
+        if (patients != null) {
+            this.patients.addAll(patients);
         }
     }
 
@@ -66,6 +76,9 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
+        roles.addAll(source.getRoles().stream().map(JsonAdaptedRole::new).collect(Collectors.toList()));
+        patients.addAll(source.getPatients());
+        caregivers.addAll(source.getCaregivers());
     }
 
     /**
@@ -126,9 +139,18 @@ class JsonAdaptedPerson {
             roleList.add(role.toModelType());
         }
 
+        final Set<Nric> caregiverNrics = caregivers.stream()
+                .collect(Collectors.toSet());
+
+        final Set<Nric> patientNrics = patients.stream()
+                .collect(Collectors.toSet());
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Set<Role> modelRoles = new HashSet<>(roleList);
-        return new Person(modelName, modelNric, modelPhone, modelEmail, modelAddress, modelTags, modelRoles);
+        final Set<Nric> modelCaregivers = new HashSet<>(caregiverNrics);
+        final Set<Nric> modelPatients = new HashSet<>(patientNrics);
+        return new Person(modelName, modelNric, modelPhone, modelEmail, modelAddress, modelTags, modelRoles,
+                modelCaregivers, modelPatients);
     }
 
 }

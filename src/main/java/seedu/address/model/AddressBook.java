@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -100,7 +101,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param nric
      * @return
      */
-    public Person getPerson(String nric) {
+    public Person getPerson(Nric nric) {
         return persons.get(nric);
     }
 
