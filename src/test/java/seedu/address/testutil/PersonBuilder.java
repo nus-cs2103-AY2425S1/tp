@@ -1,8 +1,12 @@
 package seedu.address.testutil;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
+import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -25,6 +29,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
+    private Map<Network, Set<PublicAddress>> publicAddresses;
     private Set<Tag> tags;
 
     /**
@@ -35,6 +40,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        publicAddresses = new HashMap<>();
         tags = new HashSet<>();
     }
 
@@ -46,6 +52,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        publicAddresses = new HashMap<>(personToCopy.getPublicAddresses());
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -54,6 +61,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Phone} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPublicAddresses(String ... publicAddresses) {
+        // TODO: Implement this
         return this;
     }
 
@@ -90,7 +105,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, publicAddresses, tags);
     }
 
 }
