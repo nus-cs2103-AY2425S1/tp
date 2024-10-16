@@ -102,6 +102,6 @@ public class AddressBookParserTest {
 
     @Test
     public void trackCommand_track() throws Exception {
-        assertTrue(parser.parseCommand(TrackCommand.COMMAND_WORD) instanceof TrackCommand);
+        assertTrue(parser.parseCommand(TrackCommand.COMMAND_WORD + " student") instanceof TrackCommand);
     }
 }

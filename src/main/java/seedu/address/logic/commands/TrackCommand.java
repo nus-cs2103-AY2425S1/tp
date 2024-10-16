@@ -2,13 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.CategoryContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Tracks and lists all persons in the address book who are in the specified category to the user.
@@ -26,11 +23,12 @@ public class TrackCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: CATEGORY (must be one of the predefined categories (student, company))\n"
             + "Example: " + COMMAND_WORD + " student";
-
     private final CategoryContainsKeywordsPredicate categoryPredicate;
 
-//    private final CategoryContainsKeywordsPredicate category;
-
+    /**
+     * TBC
+     * @param categoryPredicate
+     */
     public TrackCommand(CategoryContainsKeywordsPredicate categoryPredicate) {
         requireAllNonNull(categoryPredicate);
         this.categoryPredicate = categoryPredicate;
