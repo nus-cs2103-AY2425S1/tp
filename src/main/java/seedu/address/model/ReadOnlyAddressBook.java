@@ -22,11 +22,9 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Owner> getOwnerList();
 
-
     /**
      * Returns an unmodifiable view of the pets list.
      * This list will not contain any duplicate pets.
      */
     ObservableList<Pet> getPetList();
-
 }
