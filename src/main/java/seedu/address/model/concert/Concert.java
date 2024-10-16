@@ -56,8 +56,12 @@ public class Concert {
             return true;
         }
 
+        if (!(other instanceof Concert)) {
+            return false;
+        }
+
         Concert otherConcert = (Concert) other;
-        return otherConcert != null && name.equals(otherConcert.name) && address.equals(
+        return name.equals(otherConcert.name) && address.equals(
                 otherConcert.address) && concertDate.equals(otherConcert.concertDate);
     }
 
