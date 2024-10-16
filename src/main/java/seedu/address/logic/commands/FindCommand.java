@@ -2,9 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.company.NameCompanyMatchesPredicate;
+import seedu.address.model.company.NameContainsKeywordsPredicate;
 
 import java.util.List;
 
@@ -18,9 +17,9 @@ public class FindCommand extends Command {
             + "\nExample: " + COMMAND_WORD + " /t Tech"
             + "\nExample: " + COMMAND_WORD + " /num 12345678";
 
-    private final CompanyMatchesPredicate predicate;
+    private final NameContainsKeywordsPredicate predicate;
 
-    public FindCommand(CompanyMatchesPredicate predicate) {
+    public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -45,6 +44,7 @@ public class FindCommand extends Command {
             return true;
         }
 
+        // instanceof handles nulls
         if (!(other instanceof FindCommand)) {
             return false;
         }

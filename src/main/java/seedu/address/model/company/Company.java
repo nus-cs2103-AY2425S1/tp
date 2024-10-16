@@ -1,14 +1,14 @@
 package seedu.address.model.company;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Company in the address book.
@@ -66,8 +66,8 @@ public class Company {
     }
 
     /**
-     * Returns true if both company have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both companies have the same name.
+     * This defines a weaker notion of equality between two companies.
      */
     public boolean isSameCompany(Company otherCompany) {
         if (otherCompany == this) {
@@ -80,7 +80,7 @@ public class Company {
 
     /**
      * Returns true if both companies have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * This defines a stronger notion of equality between two companies.
      */
     @Override
     public boolean equals(Object other) {
@@ -89,7 +89,7 @@ public class Company {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Company)) {
             return false;
         }
 
