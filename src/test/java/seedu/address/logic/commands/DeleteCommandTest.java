@@ -11,7 +11,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
@@ -96,7 +95,8 @@ public class DeleteCommandTest extends ApplicationTest {
         DeleteCommand deleteCommand = new DeleteCommand(new Name("John Doe"));
 
         CommandResult result = deleteCommand.execute(model);
-        assertEquals(String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, validPerson), result.getFeedbackToUser());
+        assertEquals(String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, validPerson),
+                result.getFeedbackToUser());
     }
 
     @Test
