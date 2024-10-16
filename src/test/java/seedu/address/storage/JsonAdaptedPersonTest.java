@@ -22,13 +22,13 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_TELEGRAM = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_ROLE = "#friend";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_TELEGRAM = BENSON.getTelegram().toString();
-    private static final List<JsonAdaptedRole> VALID_ROLES = BENSON.getTags().stream()
+    private static final List<JsonAdaptedRole> VALID_ROLES = BENSON.getRoles().stream()
             .map(JsonAdaptedRole::new)
             .collect(Collectors.toList());
 
@@ -99,11 +99,11 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidTags_throwsIllegalValueException() {
-        List<JsonAdaptedRole> invalidTags = new ArrayList<>(VALID_ROLES);
-        invalidTags.add(new JsonAdaptedRole(INVALID_TAG));
+    public void toModelType_invalidRoles_throwsIllegalValueException() {
+        List<JsonAdaptedRole> invalidRoles = new ArrayList<>(VALID_ROLES);
+        invalidRoles.add(new JsonAdaptedRole(INVALID_ROLE));
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TELEGRAM, invalidTags);
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TELEGRAM, invalidRoles);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 

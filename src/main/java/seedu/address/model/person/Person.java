@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.role.Role;
 
 /**
  * Represents a Person in the address book.
@@ -24,18 +24,18 @@ public class Person {
     private final Email email;
     private final Telegram telegram;
     // Data fields
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Role> roles = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, telegram, tags);
+    public Person(Name name, Phone phone, Email email, Telegram telegram, Set<Role> roles) {
+        requireAllNonNull(name, phone, email, telegram, roles);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.telegram = telegram;
-        this.tags.addAll(tags);
+        this.roles.addAll(roles);
     }
 
     public Name getName() {
@@ -58,8 +58,8 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Role> getRoles() {
+        return Collections.unmodifiableSet(roles);
     }
 
     /**
@@ -76,16 +76,16 @@ public class Person {
             return this.getEmail().toString();
         } else if (c.equals(Telegram.class)) {
             return this.getTelegram().toString();
-        } else if (c.equals(Tag.class)) {
+        } else if (c.equals(Role.class)) {
             StringBuilder t = new StringBuilder("| ");
-            Set<Tag> tags = this.getTags();
-            for (Tag tag : tags) {
-                t.append(tag + " |");
+            Set<Role> roles = this.getRoles();
+            for (Role role : roles) {
+                t.append(role + " |");
             }
             return t.toString();
             // code for this method is currently not very elegant...
         } else if (c.equals(Set.class)) {
-            return getString(Tag.class);
+            return getString(Role.class);
         } else {
             return "";
         }
@@ -136,13 +136,13 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && telegram.equals(otherPerson.telegram)
-                && tags.equals(otherPerson.tags);
+                && roles.equals(otherPerson.roles);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, telegram, tags);
+        return Objects.hash(name, phone, email, telegram, roles);
     }
 
     @Override
@@ -152,7 +152,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("telegram", telegram)
-                .add("tags", tags)
+                .add("roles", roles)
                 .toString();
     }
 

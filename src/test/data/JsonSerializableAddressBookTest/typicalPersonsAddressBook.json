@@ -5,42 +5,42 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "telegram" : "alicePauline",
-    "tags" : [ "friends" ]
+    "roles" : [ ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "telegram" : "bensonMeier",
-    "tags" : [ ]
+    "roles" : [ ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "telegram" : "carlKurz",
-    "tags" : [ ]
+    "roles" : [ ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "telegram" : "danMeier",
-    "tags" : [ ]
+    "roles" : [ ]
   }, {
     "name" : "Elle Meyer",
-    "phone" : "9482224",
+    "phone" : "94822224",
     "email" : "werner@example.com",
     "telegram" : "elleMeyer",
-    "tags" : [ ]
+    "roles" : [ ]
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
+    "phone" : "94822427",
     "email" : "lydia@example.com",
     "telegram" : "fionaKunz",
-    "tags" : [ ]
+    "roles" : [ ]
   }, {
     "name" : "George Best",
-    "phone" : "9482442",
+    "phone" : "94822442",
     "email" : "anna@example.com",
     "telegram" : "georgeBest",
-    "tags" : [ ]
+    "roles" : [ ]
   } ]
 }

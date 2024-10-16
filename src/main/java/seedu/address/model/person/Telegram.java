@@ -18,7 +18,7 @@ public class Telegram {
     /*
      * The telegram handle cannot have any whitespaces or be empty
      */
-        public static final String VALIDATION_REGEX = "^$|\\s+";
+    public static final String VALIDATION_REGEX = "^$|\\s+";
 
     public final String value;
 

@@ -15,7 +15,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.role.Role;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -54,7 +54,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         telegram = source.getTelegram().value;
-        roles.addAll(source.getTags().stream()
+        roles.addAll(source.getRoles().stream()
                 .map(JsonAdaptedRole::new)
                 .collect(Collectors.toList()));
     }
@@ -65,7 +65,7 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personRoles = new ArrayList<>();
+        final List<Role> personRoles = new ArrayList<>();
         for (JsonAdaptedRole role : roles) {
             personRoles.add(role.toModelType());
         }
@@ -103,8 +103,8 @@ class JsonAdaptedPerson {
         }
         final Telegram modelTelegram = new Telegram(telegram);
 
-        final Set<Tag> modelTags = new HashSet<>(personRoles);
-        return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelTags);
+        final Set<Role> modelRoles = new HashSet<>(personRoles);
+        return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelRoles);
     }
 
 }

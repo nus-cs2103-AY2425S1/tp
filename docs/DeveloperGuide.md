@@ -127,7 +127,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique role, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -290,8 +290,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user          | edit the contact information of any entry                                   | update any outdated information, and keep the list current           |
 | `* * *`  | user          | delete an entry if needed                                                   | remove any individuals who are no longer relevant to my organisation |
 | `* *`    | user          | sort the contacts by alphabetical order of their names                      | quickly scan through and find the relevant contact                   |
-| `* *`    | user          | tag contacts to a group/tag name                                            | group individuals into relevant sections for better clarity          |
-| `* *`    | user          | search for multiple contacts by querying its tag                            | get the information of all the contacts related to the relevant tag  |
+| `* *`    | user          | role contacts to a group/role name                                            | group individuals into relevant sections for better clarity          |
+| `* *`    | user          | search for multiple contacts by querying its role                            | get the information of all the contacts related to the relevant role  |
 | `* *`    | user          | save my current profile                                                     | persist my profile locally through different sessions                |
 | `* *`    | user          | export my profile                                                           | use my profile on other machines/by other people                     |
 | `* *`    | user          | import another profile onto my local program                                | access the contact details from another user/another machine         |

@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.role.Role;
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * Jackson-friendly version of {@link Role}.
  */
 class JsonAdaptedRole {
 
@@ -22,27 +22,27 @@ class JsonAdaptedRole {
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code Role} into this class for Jackson use.
      */
-    public JsonAdaptedRole(Tag source) {
-        roleName = source.tagName;
+    public JsonAdaptedRole(Role source) {
+        roleName = source.roleName;
     }
 
     @JsonValue
-    public String getTagName() {
+    public String getRoleName() {
         return roleName;
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted role object into the model's {@code Role} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted role.
      */
-    public Tag toModelType() throws IllegalValueException {
-        if (!Tag.isValidTagName(roleName)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+    public Role toModelType() throws IllegalValueException {
+        if (!Role.isValidRoleName(roleName)) {
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(roleName);
+        return new Role(roleName);
     }
 
 }

@@ -11,7 +11,7 @@ import java.util.Set;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.role.Role;
 
 /**
  * A utility class for Person.
@@ -34,8 +34,8 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_TELEGRAM + person.getTelegram().value + " ");
-        person.getTags().stream().forEach(
-            s -> sb.append(PREFIX_ROLE + s.tagName + " ")
+        person.getRoles().stream().forEach(
+            s -> sb.append(PREFIX_ROLE + s.roleName + " ")
         );
         return sb.toString();
     }
@@ -49,12 +49,12 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getTelegram().ifPresent(address -> sb.append(PREFIX_TELEGRAM).append(address.value).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
+        if (descriptor.getRoles().isPresent()) {
+            Set<Role> roles = descriptor.getRoles().get();
+            if (roles.isEmpty()) {
                 sb.append(PREFIX_ROLE);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_ROLE).append(s.tagName).append(" "));
+                roles.forEach(s -> sb.append(PREFIX_ROLE).append(s.roleName).append(" "));
             }
         }
         return sb.toString();
