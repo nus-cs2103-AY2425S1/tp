@@ -1,14 +1,17 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
-import static java.util.Objects.requireNonNull;
 
-public class UnRsvpCommand extends Command{
+/**
+ * Creates an UnRsvpCommand to toggle rsvp status
+ */
+public class UnRsvpCommand extends Command {
     public static final String UNRSVP_COMMAND_WORD = "unrsvp";
     public static final String MESSAGE_UNRSVP_SUCCESS = "Guest unRSVP'ed: ";
     public static final String MESSAGE_USAGE = "Untoggle RSVP for a guest\n";
