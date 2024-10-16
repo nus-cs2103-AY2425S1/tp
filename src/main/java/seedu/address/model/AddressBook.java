@@ -52,6 +52,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setPersons(List<Person> persons) {
+        this.persons.setPersons(persons);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
@@ -76,14 +84,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setTags(List<Tag> tags) {
         this.tags.setTags(tags);
-    }
-
-    /**
-     * Replaces the contents of the wedding list with {@code weddings}.
-     * {@code weddings} must not contain duplicate tags.
-     */
-    public void setWeddings(List<Wedding> weddings) {
-        this.weddings.setWeddings(weddings);
     }
 
     //// person-level operations
@@ -181,7 +181,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given tag {@code target} in the list with {@code editedTag}.
      * {@code target} must exist in the address book.
-     * The tag identity of {@code editedTag} must not be the same as another existing tag in the address book.
+     * The person identity of {@code editedTag} must not be the same as another existing tag in the address book.
      */
     public void setTag(Tag target, Tag editedTag) {
         requireNonNull(editedTag);

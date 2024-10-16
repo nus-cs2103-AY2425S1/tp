@@ -21,7 +21,7 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_TAG_NOT_FOUND = "One or more specified tags do not exist in the Wedlinker.";
+    public static final String MESSAGE_TAG_NOT_FOUND = "One or more specified tags do not exist in the model.";
     public static final String MESSAGE_TAG_NOT_FOUND_IN_CONTACT = "Some tags were not found in the person's tag list.";
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag(s) %1$s to %2$s.";
     public static final String MESSAGE_ADD_WEDDING_SUCCESS = "Added wedding(s) %1$s to %2$s.";

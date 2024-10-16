@@ -33,6 +33,8 @@ public class UntagCommand extends Command {
     private final Index index;
     private final HashSet<Tag> tagsToRemove;
 
+
+
     /**
      * Constructs an UntagCommand to remove tags from a person.
      *
@@ -56,6 +58,7 @@ public class UntagCommand extends Command {
                 .collect(Collectors.joining(", "));
         return String.format(MESSAGE_REMOVE_TAG_SUCCESS, removedTags, personToEdit.getName().toString());
     }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
