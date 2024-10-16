@@ -1,6 +1,7 @@
 package tuteez.model.tag;
 import static java.util.Objects.requireNonNull;
 import static tuteez.commons.util.AppUtil.checkArgument;
+import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -15,12 +16,12 @@ import java.util.HashSet;
 public class Lesson {
     public static final String MESSAGE_CONSTRAINTS =
             "Days should be one of the following: "
-            + "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday (case insensitive). "
+            + "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday (case insensitive). \n"
             + "Lesson time should be in the format HHMM-HHMM (24-hour format). "
-            + "Start time must be before end time.";
+            + "Start time must be before end time. \n"
+            + "Lesson input must contain a day and a time range separated by a space. "
+            + "Example: " + PREFIX_LESSON + " monday 0900-1000";
 
-    public static final String INCORRECT_LESSON_FORMAT =
-            "Lesson input must contain a day and a time range separated by a space.";
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
     private static final String VALID_TIME_RANGE_REGEX = "([01]?[0-9]|2[0-3])[0-5][0-9]-([01]?[0-9]|2[0-3])[0-5][0-9]";
     private static final HashSet<Lesson> lessonSet = new HashSet<>();
@@ -34,8 +35,6 @@ public class Lesson {
      */
     public Lesson(String lesson) {
         requireNonNull(lesson);
-        String[] parts = lesson.split(" ", 2);
-        checkArgument(parts.length == 2, INCORRECT_LESSON_FORMAT);
         checkArgument(isValidLesson(lesson), MESSAGE_CONSTRAINTS);
         this.dayAndTime = lesson.toUpperCase();
     }
