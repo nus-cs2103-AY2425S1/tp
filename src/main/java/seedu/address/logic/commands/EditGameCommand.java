@@ -18,6 +18,10 @@ import seedu.address.model.game.Role;
 import seedu.address.model.game.SkillLevel;
 import seedu.address.model.game.Username;
 
+/**
+ * Represents a command to edit information about a game.
+ * This game is stored within a {@code Person}.
+ */
 public class EditGameCommand extends Command {
     public static final String COMMAND_WORD = "editgame";
 
@@ -44,6 +48,9 @@ public class EditGameCommand extends Command {
     private final String gameName;
     private final EditGameDescriptor editGameDescriptor;
 
+    /**
+     * Default constructor for an edit game command.
+     */
     public EditGameCommand() {
         this.index = null;
         this.gameName = null;
