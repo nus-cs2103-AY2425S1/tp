@@ -73,6 +73,7 @@ public class TypicalInternshipApplications {
             .withRole("Clerk")
             .build();
 
+
     // Manually added - InternshipApplication's details found in {@code CommandTestUtil}
     public static final InternshipApplication APPLE = new InternshipApplicationBuilder().withName(VALID_COMPANY_NAME_APPLE)
             .withEmail(VALID_COMPANY_EMAIL_APPLE).withRole(VALID_ROLE_APPLE).build();

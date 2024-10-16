@@ -1,8 +1,8 @@
 package seedu.address.logic.validator;
 
 public class NameValidator extends Validator<String> {
+    public static final String VALIDATION_REGEX = "[ A-Za-z0-9_&/]*";
 
-    public static final String VALIDATION_REGEX = "[ A-Za-z0-9_&]*";
     private static NameValidator instance;
     public static NameValidator of() {
         if (instance == null) {
@@ -13,6 +13,6 @@ public class NameValidator extends Validator<String> {
     private NameValidator() {}
     @Override
     public boolean validate(String input) {
-        return input.matches(VALIDATION_REGEX);
+        return !input.trim().isEmpty() && input.matches(VALIDATION_REGEX);
     }
 }
