@@ -79,6 +79,20 @@ public class Person {
     }
 
     /**
+     * Returns a comparator that compares persons by appointment date in chronological order.
+     */
+    public static Comparator<Person> getAppointmentDateComparator() {
+        return Comparator.comparing(person -> person.getAppointment().value);
+    }
+
+    /**
+     * Returns a comparator that compares persons by birthday in chronological order.
+     */
+    public static Comparator<Person> getBirthdayComparator() {
+        return Comparator.comparing(person -> person.getBirthday().value);
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
