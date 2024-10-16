@@ -18,6 +18,7 @@ import tuteez.model.person.Address;
 import tuteez.model.person.Email;
 import tuteez.model.person.Name;
 import tuteez.model.person.Phone;
+import tuteez.model.tag.Lesson;
 import tuteez.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -27,12 +28,18 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
+    private static final String INVALID_LESSON = "someday 0900-1100";
+
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+
+    private static final String VALID_LESSON = "monday 0800-1100";
+
+    private static final String VALID_LESSON_2 = "sunday 0900-1135";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -192,5 +199,48 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    /////////
+    @Test
+    public void parseLesson_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLesson(null));
+    }
+
+    @Test
+    public void parseLesson_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_LESSON));
+    }
+
+    @Test
+    public void parseLesson_validValueWithoutWhitespace_returnsTag() throws Exception {
+        Lesson expectedLesson = new Lesson(VALID_LESSON);
+        assertEquals(expectedLesson, ParserUtil.parseLesson(VALID_LESSON));
+    }
+
+    @Test
+    public void parseLesson_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
+        String lessonWithWhitespace = WHITESPACE + VALID_LESSON + WHITESPACE;
+        Lesson expectedLesson = new Lesson(VALID_LESSON);
+        assertEquals(expectedLesson, ParserUtil.parseLesson(lessonWithWhitespace));
+    }
+
+    @Test
+    public void parseLesson_collectionWithInvalidTags_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLessons(Arrays.asList(VALID_LESSON, INVALID_LESSON)));
+    }
+
+    @Test
+    public void parseLessons_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseLessons(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseLessons_collectionWithValidTags_returnsTagSet() throws Exception {
+        Set<Lesson> actualLessonSet = ParserUtil.parseLessons(Arrays.asList(VALID_LESSON, VALID_LESSON_2));
+        Set<Lesson> expectedLessonSet =
+                new HashSet<>(Arrays.asList(new Lesson(VALID_LESSON), new Lesson(VALID_LESSON_2)));
+
+        assertEquals(actualLessonSet, expectedLessonSet);
     }
 }

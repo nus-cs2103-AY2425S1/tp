@@ -37,7 +37,7 @@ public class Lesson {
         String[] parts = lesson.split(" ", 2);
         checkArgument(parts.length == 2, INCORRECT_LESSON_FORMAT);
         checkArgument(isValidLesson(lesson), MESSAGE_CONSTRAINTS);
-        this.dayAndTime = lesson;
+        this.dayAndTime = lesson.toUpperCase();
     }
 
     /**
