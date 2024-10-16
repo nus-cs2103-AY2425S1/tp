@@ -133,6 +133,9 @@ Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png) 
+* `find p/87438807 91031282` returns `Alex Yeoh`, `David Li`
+* `find a/serangoon` returns `David Li`
+* `find n/alex p/87438807 a/geylang` returns `Alex Yeoh`
 
 ### Deleting a person : `delete`
 
