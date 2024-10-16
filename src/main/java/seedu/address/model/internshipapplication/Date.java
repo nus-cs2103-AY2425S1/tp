@@ -17,7 +17,7 @@ public class Date {
     public static final String MESSAGE_CONSTRAINTS =
             "Dates should be in the format 'dd/MM/yy' and must be valid.";
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy");
 
     private final LocalDate date;
 
