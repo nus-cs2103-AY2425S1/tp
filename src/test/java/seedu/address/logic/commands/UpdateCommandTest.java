@@ -1,10 +1,12 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -40,17 +42,33 @@ public class UpdateCommandTest {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(
-                                                                temporaryFolder.resolve("userPrefs.json"));
+                temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), storage);
     }
 
     @Test
-    public void execute_allFieldsSpecified_success() {
+    public void execute_allFieldsSpecified_success1() {
         Person editedPerson = new PersonBuilder().withNric("S1234567Z").build();
         UpdateCommand.UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder(editedPerson).build();
         UpdateCommand updateCommand = new UpdateCommand(editedPerson.getNric(), descriptor);
+
+        String expectedMessage = String.format(UpdateCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new UserPrefs(), model.getStorage());
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+
+        assertCommandSuccess(updateCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_allFieldsSpecified_success2() {
+        Person editedPerson = new PersonBuilder().withName("Alice Pauline").build();
+        UpdateCommand.UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder(editedPerson).build();
+        UpdateCommand updateCommand = new UpdateCommand(editedPerson.getName(), descriptor);
 
         String expectedMessage = String.format(UpdateCommand.MESSAGE_EDIT_PERSON_SUCCESS,
                 Messages.format(editedPerson));
@@ -74,16 +92,22 @@ public class UpdateCommandTest {
     public void equals() {
         final UpdateCommand standardCommand = new UpdateCommand(new Nric("S1234567D"),
                 new UpdatePersonDescriptorBuilder().withName(VALID_NAME_AMY).withEmail(VALID_EMAIL_AMY)
-                        .withAge(VALID_AGE_AMY).build());
+                        .withAge(VALID_AGE_AMY).withPhone(VALID_PHONE_AMY).build());
 
         // same values -> returns true
         UpdateCommand.UpdatePersonDescriptor copyDescriptor = new UpdatePersonDescriptorBuilder()
-                .withName(VALID_NAME_AMY).withEmail(VALID_EMAIL_AMY).withAge(VALID_AGE_AMY).build();
+                .withName(VALID_NAME_AMY).withEmail(VALID_EMAIL_AMY).withAge(VALID_AGE_AMY).withPhone(VALID_PHONE_AMY)
+                .build();
         UpdateCommand commandWithSameValues = new UpdateCommand(new Nric("S1234567D"), copyDescriptor);
         assertEquals(standardCommand, commandWithSameValues);
 
         // different NRIC -> returns false
         UpdateCommand commandWithDifferentNric = new UpdateCommand(new Nric("S7654321D"), copyDescriptor);
-        assertThrows(AssertionError.class, () -> assertEquals(standardCommand, commandWithDifferentNric));
+        assertNotEquals(standardCommand, commandWithDifferentNric);
+
+        // different descriptor -> returns false
+        UpdateCommand commandWithDifferentDescriptor = new UpdateCommand(new Nric("S1234567D"),
+                new UpdatePersonDescriptorBuilder().withName("Bob").build());
+        assertNotEquals(standardCommand, commandWithDifferentDescriptor);
     }
 }

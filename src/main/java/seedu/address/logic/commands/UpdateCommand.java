@@ -172,8 +172,14 @@ public class UpdateCommand extends Command {
             return false;
         }
 
-        return nric.equals(otherEditCommand.nric)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        if (nric != null) {
+            return nric.equals(otherEditCommand.nric)
+                    && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        } else {
+            assert name != null;
+            return name.equals(otherEditCommand.name)
+                    && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        }
     }
 
     @Override
