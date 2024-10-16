@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -28,7 +30,8 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label helpMessage;
 
-
+    @FXML
+    private WebView helpContent;
 
     /**
      * Creates a new HelpWindow.
@@ -52,7 +55,8 @@ public class HelpWindow extends UiPart<Stage> {
      * Loads and renders the user guide.
      */
     private void loadUserGuide() {
-
+        WebEngine webEngine = helpContent.getEngine();
+        webEngine.load(USERGUIDE_URL);
     }
 
     /**
