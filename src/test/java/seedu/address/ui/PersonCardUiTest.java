@@ -23,7 +23,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Property;
 import seedu.address.model.tag.Tag;
 
-public class PersonCardTest extends ApplicationTest {
+public class PersonCardUiTest extends ApplicationTest {
 
     private PersonCard personCard;
     private Person samplePerson;
