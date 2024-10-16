@@ -15,8 +15,11 @@
   <scene>
     <Scene>
       <stylesheets>
+        <URL value="@CommandText.css" />
+        <URL value="@MainWindow.css" />
+        <URL value="@Menu.css" />
         <URL value="@PersonListPanel.css" />
-        <URL value="@Extensions.css" />
+        <URL value="@ResultDisplay.css" />
       </stylesheets>
 
       <VBox>
