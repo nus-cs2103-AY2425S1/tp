@@ -43,7 +43,7 @@ public class ViewVendorCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredVendorList().size() + 1);
         ViewVendorCommand viewCommand = new ViewVendorCommand(outOfBoundIndex);
 
-        assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class ViewVendorCommandTest {
 
         ViewVendorCommand viewCommand = new ViewVendorCommand(outOfBoundIndex);
 
-        assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
     }
 
     @Test

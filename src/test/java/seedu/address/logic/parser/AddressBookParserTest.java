@@ -16,6 +16,8 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.AssignCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CreateEventCommand;
 import seedu.address.logic.commands.CreateVendorCommand;
@@ -49,6 +51,12 @@ public class AddressBookParserTest {
         CreateVendorCommand command = (CreateVendorCommand) parser
                 .parseCommand(VendorUtil.getCreateVendorCommand(vendor));
         assertEquals(new CreateVendorCommand(vendor), command);
+    }
+
+    @Test
+    public void parseCommand_assign() throws Exception {
+        AssignCommand command = new AssignCommand(Index.fromOneBased(1), Index.fromOneBased(1));
+        assertEquals(parser.parseCommand(AssignCommand.COMMAND_WORD + " v/1 e/1"), command);
     }
 
     @Test

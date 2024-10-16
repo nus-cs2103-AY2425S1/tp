@@ -1,11 +1,15 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
@@ -20,6 +24,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueVendorList vendors;
     private final UniqueEventList events;
+    private final Set<Pair<Vendor, Event>> associations;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -30,6 +35,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         vendors = new UniqueVendorList();
+        associations = new HashSet<>();
         events = new UniqueEventList();
     }
 
@@ -106,6 +112,28 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeVendor(Vendor key) {
         vendors.remove(key);
+    }
+
+    //// assign operations
+
+    /**
+     * Returns true if the given {@code vendor} is already assigned to the given {@code event}.
+     * {@code vendor} and {@code event} must exist in the address book.
+     */
+    public boolean isVendorAssignedToEvent(Vendor vendor, Event event) {
+        requireAllNonNull(vendor, event);
+        Pair<Vendor, Event> pair = new Pair<>(vendor, event);
+        return associations.contains(pair);
+    }
+
+    /**
+     * Assigns the given {@code vendor} in the list to {@code event}.
+     * {@code vendor} and {@code event} must exist in the address book.
+     */
+    public void assignVendorToEvent(Vendor vendor, Event event) {
+        requireAllNonNull(vendor, event);
+        Pair<Vendor, Event> pair = new Pair<>(vendor, event);
+        associations.add(pair);
     }
 
     //// event-level operations

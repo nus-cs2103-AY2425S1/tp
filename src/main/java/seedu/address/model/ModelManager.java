@@ -126,6 +126,18 @@ public class ModelManager implements Model {
 
     // =========== Filtered Vendor List Accessors =============================================================
     @Override
+    public boolean isVendorAssignedToEvent(Vendor vendor, Event event) {
+        requireAllNonNull(vendor, event);
+        return addressBook.isVendorAssignedToEvent(vendor, event);
+    }
+
+    @Override
+    public void assignVendorToEvent(Vendor vendor, Event event) {
+        requireAllNonNull(vendor, event);
+        addressBook.assignVendorToEvent(vendor, event);
+    }
+
+    @Override
     public boolean hasEvent(Event event) {
         requireNonNull(event);
         return addressBook.hasEvent(event);

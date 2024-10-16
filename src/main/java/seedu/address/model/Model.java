@@ -90,6 +90,17 @@ public interface Model {
     void updateFilteredVendorList(Predicate<Vendor> predicate);
 
     /**
+     * Returns true if the given {@code vendor} is already assigned to the given {@code event}.
+     * {@code vendor} and {@code event} must exist in the address book.
+     */
+    boolean isVendorAssignedToEvent(Vendor vendor, Event event);
+
+    /**
+     * Assigns the given vendor to the given event.
+     */
+    void assignVendorToEvent(Vendor vendor, Event event);
+
+    /**
      * Returns the current selected vendor.
      */
     ObservableObjectValue<Vendor> getViewedVendor();
@@ -145,3 +156,4 @@ public interface Model {
      */
     public void setUiState(UiState uiState);
 }
+
