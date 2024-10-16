@@ -33,4 +33,15 @@ public class TagList {
     public String toString() {
         return String.join(", ", tags.stream().map(Tag::getTagName).toList());
     }
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof TagList)) {
+            return false;
+        }
+        TagList otherTagList = (TagList) other;
+        return tags.equals(otherTagList.tags);
+    }
 }
