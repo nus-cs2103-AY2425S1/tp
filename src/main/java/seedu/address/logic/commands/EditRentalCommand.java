@@ -128,7 +128,7 @@ public class EditRentalCommand extends Command {
         Phone clientPhone = clientToEdit.getPhone();
         Email clientEmail = clientToEdit.getEmail();
         Set<Tag> clientTags = clientToEdit.getTags();
-        List<RentalInformation> updatedRentalInformationList = EditRentalDescriptor.updateRentalInformationList(index,
+        List<RentalInformation> updatedRentalInformationList = EditRentalDescriptor.updateRentalInformation(index,
                 clientToEdit.getRentalInformation(), editRentalDescriptor);
 
         return new Client(clientName, clientPhone, clientEmail, clientTags, updatedRentalInformationList);
@@ -195,7 +195,6 @@ public class EditRentalCommand extends Command {
             return CollectionUtil.isAnyNonNull(address, rentalStartDate, rentalEndDate, rentDueDate, monthlyRent,
                     deposit, customerList);
         }
-
 
         /**
          * Updates the list of rental information by replacing an existing rental

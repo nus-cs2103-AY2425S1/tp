@@ -26,6 +26,10 @@ public class FindCommand extends Command {
     private final PhoneContainsKeywordsPredicate phonePredicate;
     private final EmailContainsKeywordsPredicate emailPredicate;
 
+    /**
+     * Constructs a {@code FindCommand} with the given name, phone and email predicates.
+     * The command will find all clients whose name, phone and email matches the predicates.
+     */
     public FindCommand(NameContainsKeywordsPredicate namePredicate, PhoneContainsKeywordsPredicate phonePredicate,
                        EmailContainsKeywordsPredicate emailPredicate) {
         this.namePredicate = namePredicate;
@@ -41,6 +45,7 @@ public class FindCommand extends Command {
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
+    // TODO: update this equals method
     @Override
     public boolean equals(Object other) {
         if (other == this) {

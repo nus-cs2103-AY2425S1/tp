@@ -34,7 +34,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(client.getName());
         descriptor.setPhone(client.getPhone());
         descriptor.setEmail(client.getEmail());
-//        descriptor.setAddress(client.getAddress());
         descriptor.setTags(client.getTags());
     }
 
@@ -69,14 +68,6 @@ public class EditPersonDescriptorBuilder {
         }
         return this;
     }
-
-//    /**
-//     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
-//     */
-//    public EditPersonDescriptorBuilder withAddress(String address) {
-//        descriptor.setAddress(new Address(address));
-//        return this;
-//    }
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}

@@ -463,7 +463,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a2. User enters new instruction.
     * Steps 3a1-3a2 are repeated until the instruction is valid.
 
-  Use case resumes from step 3.
+    Use case resumes from step 3.
 
 * 3b. System detects error for invalid _client_ information.
 
@@ -471,17 +471,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b2. User enters new _client_ information.
     * Steps 3b1-3b2 are repeated until the _client_ information is valid.
 
-  Use case resumes from step 3.
+    Use case resumes from step 3.
 
 * 4a. System fails to update the _client_'s information.
 
     * 4a1. System prompts user that edit has failed.
 
-  Use case resumes from step 1 or user choose not to proceed and use case ends.
+    Use case resumes from step 1 or user choose not to proceed and use case ends.
 
 * *a. At any time, User chooses not to proceed with the operation.
 
-  Use case ends.
+    Use case ends.
 
 **Use case: Edit a [_client_](#glossary-client)'s [_rental information_](#glossary-rental-information)**
 
@@ -503,25 +503,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a2. User enters new instruction.
     * Steps 3a1-3a2 are repeated until the instruction is valid.
 
-  Use case resumes from step 3.
+    Use case resumes from step 3.
 
 * 3b. System detects error for invalid _rental information_.
 
     * 3b1. System prompts error for invalid _rental information_.
     * 3b2. User enters new _rental information_.
     * Steps 3b1-3b2 are repeated until the _rental information_ is valid.
-
-  Use case resumes from step 3.
+  
+    Use case resumes from step 3.
 
 * 4a. System fails to update the _client_'s _rental information_.
 
-    * 3a1. System prompts user that edit has failed.
+    * 4a1. System prompts user that edit has failed.
 
-  Use case resumes from step 1 or user choose not to proceed and use case ends.
+    Use case resumes from step 1 or user choose not to proceed and use case ends.
 
 * *a. At any time, User chooses not to proceed with the operation.
 
-  Use case ends.
+    Use case ends.
 
 
 **Use case: Delete a [_client_](#glossary-client)**

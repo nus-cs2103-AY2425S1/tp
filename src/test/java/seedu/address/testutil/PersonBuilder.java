@@ -99,6 +99,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Returns the {@code Client} that we have built.
+     */
     public Client build() {
         return new Client(name, phone, email, tags, rentalInformationList);
     }
