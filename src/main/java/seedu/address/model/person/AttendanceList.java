@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
+import seedu.address.model.person.exceptions.AttendanceNotFoundException;
+
 /**
  * Represents a Student's Attendance.
  */
@@ -49,13 +51,12 @@ public class AttendanceList {
      *
      * @param date The date of the attendance record to be removed.
      * @return A new AttendanceList with the specified attendance record removed.
-     * @throws IllegalArgumentException If the attendance record for the specified
+     * @throws AttendanceNotFoundException If the attendance record for the specified
      *                                  date does not exist.
      */
     public AttendanceList removeAttendance(LocalDateTime date) {
         if (!attendanceList.containsKey(date)) {
-            // TODO throw better exception
-            throw new IllegalArgumentException("Attendance record does not exist.");
+            throw new AttendanceNotFoundException();
         }
         Map<LocalDateTime, Attendance> newAttendanceList = new TreeMap<>(attendanceList);
         newAttendanceList.remove(date);

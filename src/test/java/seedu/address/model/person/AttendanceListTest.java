@@ -8,27 +8,47 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.exceptions.AttendanceNotFoundException;
+
 public class AttendanceListTest {
 
     @Test
     public void addAttendance_nullAttendance_throwsNullPointerException() {
         AttendanceList attendanceList = new AttendanceList();
         assertThrows(NullPointerException.class, () -> attendanceList.setAttendance(null, new Attendance(true)));
-        assertThrows(NullPointerException.class, () ->
-            attendanceList.setAttendance(LocalDateTime.of(1, 1, 1, 1, 1), null));
+        assertThrows(NullPointerException.class,
+                () -> attendanceList.setAttendance(LocalDateTime.of(1, 1, 1, 1, 1), null));
         assertThrows(NullPointerException.class, () -> attendanceList.setAttendance(null, null));
     }
 
     @Test
-    public void addAttendance_duplicateAttendance_throwsDuplicateAttendanceException() {
-        // TODO: Adding an attendance with the same datetime should throw
-        // DuplicateAttendanceException
+    public void addAttendance_duplicateAttendance_replacesAttendance() {
+        AttendanceList list = new AttendanceList();
+        list = list.setAttendance(LocalDateTime.of(2024, 1, 1, 12, 0), new Attendance(true));
+        list = list.setAttendance(LocalDateTime.of(2024, 1, 1, 12, 0), new Attendance(false));
+        assertTrue(list.toString().equals("01/01/2024 12:00 Absent"));
     }
 
     @Test
-    public void removeAttendance_indexOutOfBounds_throwsAttendanceNotFoundException() {
-        // TODO: Removing an index greater than the list size or less than 0 should
-        // throw AttendanceNotFoundException
+    public void removeAttendance_invalidDate_throwsAttendanceNotFoundException() {
+        AttendanceList list = new AttendanceList();
+        assertThrows(AttendanceNotFoundException.class, () ->
+            list.removeAttendance(LocalDateTime.of(2024, 1, 1, 12, 0)));
+    }
+
+    @Test
+    public void immutability() {
+        LocalDateTime date = LocalDateTime.of(2024, 1, 1, 12, 0);
+
+        // setAttendance should not modify the original list
+        AttendanceList list = new AttendanceList();
+        list.setAttendance(date, new Attendance(true));
+        assertTrue(list.toString().equals(""));
+        
+        // removeAttendance should not modify the original list
+        list = list.setAttendance(date, new Attendance(true));
+        list.removeAttendance(date);
+        assertFalse(list.toString().equals(""));
     }
 
     @Test
