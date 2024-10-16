@@ -46,7 +46,6 @@ public class DeleteStudentFromGroupCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredPersonList();
         boolean hasFoundTargetStudent = false;
         Student studentToBeDeleted = null;
         if (!model.containsGroupName(targetGroupName)) {
@@ -77,7 +76,7 @@ public class DeleteStudentFromGroupCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteStudentCommand)) {
+        if (!(other instanceof DeleteStudentFromGroupCommand)) {
             return false;
         }
 
