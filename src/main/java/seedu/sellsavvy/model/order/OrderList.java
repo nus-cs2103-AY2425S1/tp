@@ -7,6 +7,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.model.order.exceptions.OrderNotFoundException;
 
 /**
@@ -53,11 +54,24 @@ public class OrderList implements Iterable<Order> {
      * Removes the first instance of an equivalent order from the list.
      * The order must exist in the list.
      */
-    public void remove(Order toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new OrderNotFoundException();
-        }
+    public void remove(Index index) {
+        requireNonNull(index);
+        internalList.remove(index.getZeroBased());
+    }
+
+    /**
+     * Retrieves an order from the list at the specified index.
+     * The index must be less than the list size.
+     */
+    public Order get(int index) {
+        return internalList.get(index); // This will automatically throw IndexOutOfBoundsException if the index is invalid.
+    }
+
+    /**
+     * Returns the number of orders in the list.
+     */
+    public int size() {
+        return internalList.size();
     }
 
     /**
