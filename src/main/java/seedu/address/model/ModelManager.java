@@ -33,7 +33,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredRestaurants = new FilteredList<>(this.addressBook.getPersonList());
+        filteredRestaurants = new FilteredList<>(this.addressBook.getRestaurantList());
     }
 
     public ModelManager() {
@@ -88,42 +88,42 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Restaurant restaurant) {
+    public boolean hasRestaurant(Restaurant restaurant) {
         requireNonNull(restaurant);
-        return addressBook.hasPerson(restaurant);
+        return addressBook.hasRestaurant(restaurant);
     }
 
     @Override
-    public void deletePerson(Restaurant target) {
-        addressBook.removePerson(target);
+    public void deleteRestaurant(Restaurant target) {
+        addressBook.removeRestaurant(target);
     }
 
     @Override
-    public void addPerson(Restaurant restaurant) {
-        addressBook.addPerson(restaurant);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addRestaurant(Restaurant restaurant) {
+        addressBook.addRestaurant(restaurant);
+        updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
     }
 
     @Override
-    public void setPerson(Restaurant target, Restaurant editedRestaurant) {
+    public void setRestaurant(Restaurant target, Restaurant editedRestaurant) {
         requireAllNonNull(target, editedRestaurant);
 
-        addressBook.setPerson(target, editedRestaurant);
+        addressBook.setRestaurant(target, editedRestaurant);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Restaurant List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Restaurant} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Restaurant> getFilteredPersonList() {
+    public ObservableList<Restaurant> getFilteredRestaurantList() {
         return filteredRestaurants;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Restaurant> predicate) {
+    public void updateFilteredRestaurantList(Predicate<Restaurant> predicate) {
         requireNonNull(predicate);
         filteredRestaurants.setPredicate(predicate);
     }

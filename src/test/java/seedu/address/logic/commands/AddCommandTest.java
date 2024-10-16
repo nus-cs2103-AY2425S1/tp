@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalRestaurants.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -23,40 +23,41 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.restaurant.Restaurant;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.RestaurantBuilder;
 
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullRestaurant_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Restaurant validRestaurant = new PersonBuilder().build();
+    public void execute_restaurantAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingRestaurantAdded modelStub = new ModelStubAcceptingRestaurantAdded();
+        Restaurant validRestaurant = new RestaurantBuilder().build();
 
         CommandResult commandResult = new AddCommand(validRestaurant).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validRestaurant)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validRestaurant), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validRestaurant), modelStub.restaurantsAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Restaurant validRestaurant = new PersonBuilder().build();
+    public void execute_duplicateRestaurant_throwsCommandException() {
+        Restaurant validRestaurant = new RestaurantBuilder().build();
         AddCommand addCommand = new AddCommand(validRestaurant);
-        ModelStub modelStub = new ModelStubWithPerson(validRestaurant);
+        ModelStub modelStub = new ModelStubWithRestaurant(validRestaurant);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_RESTAURANT, ()
+                -> addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Restaurant alice = new PersonBuilder().withName("Alice").build();
-        Restaurant bob = new PersonBuilder().withName("Bob").build();
+        Restaurant alice = new RestaurantBuilder().withName("Alice").build();
+        Restaurant bob = new RestaurantBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -73,7 +74,7 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different person -> returns false
+        // different restaurant -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
@@ -119,7 +120,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPerson(Restaurant restaurant) {
+        public void addRestaurant(Restaurant restaurant) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -134,65 +135,65 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Restaurant restaurant) {
+        public boolean hasRestaurant(Restaurant restaurant) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Restaurant target) {
+        public void deleteRestaurant(Restaurant target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Restaurant target, Restaurant editedRestaurant) {
+        public void setRestaurant(Restaurant target, Restaurant editedRestaurant) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Restaurant> getFilteredPersonList() {
+        public ObservableList<Restaurant> getFilteredRestaurantList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Restaurant> predicate) {
+        public void updateFilteredRestaurantList(Predicate<Restaurant> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single restaurant.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithRestaurant extends ModelStub {
         private final Restaurant restaurant;
 
-        ModelStubWithPerson(Restaurant restaurant) {
+        ModelStubWithRestaurant(Restaurant restaurant) {
             requireNonNull(restaurant);
             this.restaurant = restaurant;
         }
 
         @Override
-        public boolean hasPerson(Restaurant restaurant) {
+        public boolean hasRestaurant(Restaurant restaurant) {
             requireNonNull(restaurant);
-            return this.restaurant.isSamePerson(restaurant);
+            return this.restaurant.isSameRestaurant(restaurant);
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the restaurant being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Restaurant> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingRestaurantAdded extends ModelStub {
+        final ArrayList<Restaurant> restaurantsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Restaurant restaurant) {
+        public boolean hasRestaurant(Restaurant restaurant) {
             requireNonNull(restaurant);
-            return personsAdded.stream().anyMatch(restaurant::isSamePerson);
+            return restaurantsAdded.stream().anyMatch(restaurant::isSameRestaurant);
         }
 
         @Override
-        public void addPerson(Restaurant restaurant) {
+        public void addRestaurant(Restaurant restaurant) {
             requireNonNull(restaurant);
-            personsAdded.add(restaurant);
+            restaurantsAdded.add(restaurant);
         }
 
         @Override

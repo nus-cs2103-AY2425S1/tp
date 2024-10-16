@@ -11,7 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Restaurant in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Restaurant {
@@ -104,10 +104,10 @@ public class Restaurant {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both restaurants have the same name.
+     * This defines a weaker notion of equality between two restaurants.
      */
-    public boolean isSamePerson(Restaurant otherRestaurant) {
+    public boolean isSameRestaurant(Restaurant otherRestaurant) {
         if (otherRestaurant == this) {
             return true;
         }
@@ -117,8 +117,8 @@ public class Restaurant {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both restaurants have the same identity and data fields.
+     * This defines a stronger notion of equality between two restaurants.
      */
     @Override
     public boolean equals(Object other) {

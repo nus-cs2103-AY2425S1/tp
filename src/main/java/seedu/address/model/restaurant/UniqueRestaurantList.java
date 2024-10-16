@@ -8,19 +8,21 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.restaurant.exceptions.DuplicatePersonException;
-import seedu.address.model.restaurant.exceptions.PersonNotFoundException;
+import seedu.address.model.restaurant.exceptions.DuplicateRestaurantException;
+import seedu.address.model.restaurant.exceptions.RestaurantNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A list of restaurants that enforces uniqueness between its elements and does not allow nulls.
+ * A restaurant is considered unique by comparing using {@code Restaurant#isSameRestaurant(Restaurant)}.
+ * As such, adding and updating of restaurants uses Restaurant#isSameRestaurant(Restaurant) for equality
+ * so as to ensure that the restaurant being added or updated is
+ * unique in terms of identity in the UniqueRestaurantList.
+ * However, the removal of a restaurant uses Restaurant#equals(Object) so
+ * as to ensure that the restaurant with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Restaurant#isSamePerson(Restaurant)
+ * @see Restaurant#isSameRestaurant(Restaurant)
  */
 public class UniqueRestaurantList implements Iterable<Restaurant> {
 
@@ -29,69 +31,70 @@ public class UniqueRestaurantList implements Iterable<Restaurant> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent restaurant as the given argument.
      */
     public boolean contains(Restaurant toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSameRestaurant);
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a restaurant to the list.
+     * The restaurant must not already exist in the list.
      */
     public void add(Restaurant toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateRestaurantException();
         }
         internalList.add(toAdd);
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the restaurant {@code target} in the list with {@code editedRestaurant}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The restaurant identity of {@code editedRestaurant}
+     * must not be the same as another existing restaurant in the list.
      */
-    public void setPerson(Restaurant target, Restaurant editedRestaurant) {
+    public void setRestaurant(Restaurant target, Restaurant editedRestaurant) {
         requireAllNonNull(target, editedRestaurant);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new RestaurantNotFoundException();
         }
 
-        if (!target.isSamePerson(editedRestaurant) && contains(editedRestaurant)) {
-            throw new DuplicatePersonException();
+        if (!target.isSameRestaurant(editedRestaurant) && contains(editedRestaurant)) {
+            throw new DuplicateRestaurantException();
         }
 
         internalList.set(index, editedRestaurant);
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent restaurant from the list.
+     * The restaurant must exist in the list.
      */
     public void remove(Restaurant toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new RestaurantNotFoundException();
         }
     }
 
-    public void setPersons(UniqueRestaurantList replacement) {
+    public void setRestaurants(UniqueRestaurantList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code restaurants}.
+     * {@code restaurants} must not contain duplicate restaurants.
      */
-    public void setPersons(List<Restaurant> restaurants) {
+    public void setRestaurants(List<Restaurant> restaurants) {
         requireAllNonNull(restaurants);
-        if (!personsAreUnique(restaurants)) {
-            throw new DuplicatePersonException();
+        if (!restaurantsAreUnique(restaurants)) {
+            throw new DuplicateRestaurantException();
         }
 
         internalList.setAll(restaurants);
@@ -135,12 +138,12 @@ public class UniqueRestaurantList implements Iterable<Restaurant> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code restaurants} contains only unique restaurants.
      */
-    private boolean personsAreUnique(List<Restaurant> restaurants) {
+    private boolean restaurantsAreUnique(List<Restaurant> restaurants) {
         for (int i = 0; i < restaurants.size() - 1; i++) {
             for (int j = i + 1; j < restaurants.size(); j++) {
-                if (restaurants.get(i).isSamePerson(restaurants.get(j))) {
+                if (restaurants.get(i).isSameRestaurant(restaurants.get(j))) {
                     return false;
                 }
             }

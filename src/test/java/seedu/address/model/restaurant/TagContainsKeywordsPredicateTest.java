@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.RestaurantBuilder;
 
 
 
@@ -48,34 +48,34 @@ public class TagContainsKeywordsPredicateTest {
         // One keyword
         TagContainsKeywordsPredicate predicate =
                 new TagContainsKeywordsPredicate(Collections.singletonList("Premium"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("Premium").build()));
+        assertTrue(predicate.test(new RestaurantBuilder().withTags("Premium").build()));
 
         // Multiple keywords
         predicate = new TagContainsKeywordsPredicate(Arrays.asList("Premium", "Affordable", "Cheap"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("Premium", "Affordable", "Cheap").build()));
+        assertTrue(predicate.test(new RestaurantBuilder().withTags("Premium", "Affordable", "Cheap").build()));
 
         // Only one matching keyword
         predicate = new TagContainsKeywordsPredicate(Arrays.asList("Premium", "Affordable", "Cheap"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("Premium").build()));
+        assertTrue(predicate.test(new RestaurantBuilder().withTags("Premium").build()));
 
         // Mixed-case keywords
         predicate = new TagContainsKeywordsPredicate(Arrays.asList("CrImInal"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("criminal").build()));
+        assertTrue(predicate.test(new RestaurantBuilder().withTags("criminal").build()));
     }
 
     @Test
     public void test_tagDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withTags("Premium").build()));
+        assertFalse(predicate.test(new RestaurantBuilder().withTags("Premium").build()));
 
         // Non-matching keyword
         predicate = new TagContainsKeywordsPredicate(Arrays.asList("Premium"));
-        assertFalse(predicate.test(new PersonBuilder().withTags("western").build()));
+        assertFalse(predicate.test(new RestaurantBuilder().withTags("western").build()));
 
         // Keywords match phone, email and address, but does not match tag
         predicate = new TagContainsKeywordsPredicate(Arrays.asList("Premium", "Affordable", "Cheap"));
-        assertFalse(predicate.test(new PersonBuilder().withTags("justSomeTag").withPhone("12345")
+        assertFalse(predicate.test(new RestaurantBuilder().withTags("justSomeTag").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 
