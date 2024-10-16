@@ -60,6 +60,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// person-level operations
 
     /**
+     * Returns the number of persons in the address book with the same identity as {@code person}.
+     */
+    public int countSamePersons(Person person) {
+        requireNonNull(person);
+        return persons.countSamePerson(person);
+    }
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     public boolean hasPerson(Person person) {

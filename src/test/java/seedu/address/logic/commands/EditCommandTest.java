@@ -112,6 +112,33 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_doubleDuplicatePersonUnfilteredList_failure() {
+        // Tests the case where I edit only 1 field that must be unique to be same as an existing entry.
+        // Which means the new edited entry will be same as both the old entry and some other entry.
+
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+
+        // Same Phone
+        EditPersonDescriptor samePhoneDescriptor = new EditPersonDescriptorBuilder(secondPerson)
+                .withPhone(firstPerson.getPhone().value).build();
+        EditCommand editCommand1 = new EditCommand(INDEX_SECOND_PERSON, samePhoneDescriptor);
+        assertCommandFailure(editCommand1, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+
+        // Same Email
+        EditPersonDescriptor sameEmailDescriptor = new EditPersonDescriptorBuilder(secondPerson)
+                .withEmail(firstPerson.getEmail().value).build();
+        EditCommand editCommand2 = new EditCommand(INDEX_SECOND_PERSON, sameEmailDescriptor);
+        assertCommandFailure(editCommand2, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+
+        // Same Telegram Username
+        EditPersonDescriptor sameTelegramUsernameDescriptor = new EditPersonDescriptorBuilder(secondPerson)
+                .withTelegramUsername(firstPerson.getTelegramUsername().telegramUsername).build();
+        EditCommand editCommand3 = new EditCommand(INDEX_SECOND_PERSON, sameTelegramUsernameDescriptor);
+        assertCommandFailure(editCommand3, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+    }
+
+    @Test
     public void execute_duplicatePersonFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 

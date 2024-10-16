@@ -88,6 +88,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public int countSamePersons(Person person) {
+        requireNonNull(person);
+        return addressBook.countSamePersons(person);
+    }
+
+    @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);

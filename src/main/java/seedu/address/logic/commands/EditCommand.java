@@ -85,14 +85,13 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        boolean hasEmailOrPhoneChanged =
-                !(personToEdit.isSamePhone(editedPerson) && personToEdit.isSameEmail(editedPerson));
-        boolean hasDuplicateExistingPhone =
-                model.hasPhone(editedPerson) && editedPerson.getPhone() != personToEdit.getPhone();
-        boolean hasDuplicateExistingEmail =
-                model.hasEmail(editedPerson) && editedPerson.getEmail() != personToEdit.getEmail();
+        // It is not possible to have more than 1 duplicate in the model
+        if (model.countSamePersons(editedPerson) >= 2) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
 
-        if (hasEmailOrPhoneChanged && (hasDuplicateExistingPhone || hasDuplicateExistingEmail)) {
+        // It is possible to have 1, but that is only if that is the old version of you before editing
+        if (model.hasPerson(editedPerson) && !personToEdit.isSamePerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
