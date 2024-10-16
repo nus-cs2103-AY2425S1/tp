@@ -30,7 +30,7 @@ public class LinkCommandTest {
     @Test
     public void execute_successfulinkCommand() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        LinkCommand linkCommand = new LinkCommand(ALICE.getNric().value, BENSON.getNric().value);
+        LinkCommand linkCommand = new LinkCommand(ALICE.getNric(), BENSON.getNric());
 
         String expectedMessage = String.format(LinkCommand.MESSAGE_SUCCESS, Messages.format(ALICE),
                 Messages.format(BENSON));

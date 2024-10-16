@@ -102,9 +102,9 @@ public class UniquePersonList implements Iterable<Person> {
      * @param nric
      * @return
      */
-    public Person get(String nric) {
+    public Person get(Nric nric) {
         for (Person p : internalList) {
-            if (p.getNric().value.equals(nric)) {
+            if (p.getNric().equals(nric)) {
                 return p;
             }
         }
