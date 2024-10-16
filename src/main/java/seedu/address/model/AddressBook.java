@@ -12,6 +12,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicateGroupException;
 import seedu.address.model.person.exceptions.GroupNotFoundException;
+import seedu.address.storage.JsonAdaptedGroup;
 
 /**
  * Wraps all data at the address-book level
@@ -20,7 +21,7 @@ import seedu.address.model.person.exceptions.GroupNotFoundException;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final GroupList groups;
+    private final GroupList groups = new GroupList();
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -31,7 +32,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        groups = new GroupList();
     }
 
     public AddressBook() {}
@@ -129,6 +129,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public List<JsonAdaptedGroup> getGroupsAsJson() {
+        return groups.toJson();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -140,7 +145,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons) && groups.equals(otherAddressBook.groups);
     }
 
     @Override

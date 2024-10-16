@@ -41,4 +41,12 @@ public class Group extends UniquePersonList {
         requireNonNull(group);
         return name.equals(group.name);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Group otherGroup)) {
+            return false;
+        }
+        return super.equals(o) && name.equals(otherGroup.name);
+    }
 }
