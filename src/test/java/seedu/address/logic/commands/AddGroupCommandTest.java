@@ -42,13 +42,14 @@ public class AddGroupCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingGroupAdded modelStub = new ModelStubAcceptingGroupAdded();
+      
         Student validStudent = new PersonBuilder().build();
         Group validGroup = new Group(VALID_GROUPNAME, new HashSet<>(), new HashSet<>());
 
         CommandResult commandResult = new AddGroupCommand(validGroup).execute(modelStub);
 
         assertEquals(String.format(AddGroupCommand.MESSAGE_SUCCESS, Messages.format(validGroup)),
-                commandResult.getFeedbackToUser());
+            commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validGroup), modelStub.groupsAdded);
     }
 
@@ -59,7 +60,7 @@ public class AddGroupCommandTest {
         ModelStub modelStub = new ModelStubWithGroup(validGroup);
 
         assertThrows(CommandException.class, AddGroupCommand.MESSAGE_DUPLICATE_GROUP, () ->
-                addGroupCommand.execute(modelStub));
+            addGroupCommand.execute(modelStub));
     }
 
     @Test
@@ -288,7 +289,7 @@ public class AddGroupCommandTest {
         public void addTask(Task task) {
             throw new AssertionError("This method should not be called");
         }
-
+      
         @Override
         public void deleteTaskFromGroup(Task task, Group group) {
             throw new AssertionError("This method should not be called");
