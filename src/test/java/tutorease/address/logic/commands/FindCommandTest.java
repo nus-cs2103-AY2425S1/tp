@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorease.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static tutorease.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorease.address.testutil.TypicalLessons.getTypicalLessons;
-import static tutorease.address.testutil.TypicalPersons.CARL;
-import static tutorease.address.testutil.TypicalPersons.ELLE;
-import static tutorease.address.testutil.TypicalPersons.FIONA;
-import static tutorease.address.testutil.TypicalPersons.getTypicalTutorEase;
+import static tutorease.address.testutil.TypicalStudents.CARL;
+import static tutorease.address.testutil.TypicalStudents.ELLE;
+import static tutorease.address.testutil.TypicalStudents.FIONA;
+import static tutorease.address.testutil.TypicalStudents.getTypicalTutorEase;
 
 import java.util.Arrays;
 import java.util.Collections;

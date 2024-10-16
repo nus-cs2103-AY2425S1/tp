@@ -2,7 +2,7 @@ package tutorease.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static tutorease.address.testutil.Assert.assertThrows;
-import static tutorease.address.testutil.TypicalPersons.getTypicalTutorEase;
+import static tutorease.address.testutil.TypicalStudents.getTypicalTutorEase;
 
 import org.junit.jupiter.api.Test;
 

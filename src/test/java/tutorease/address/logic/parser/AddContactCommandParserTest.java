@@ -33,8 +33,8 @@ import static tutorease.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static tutorease.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorease.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static tutorease.address.testutil.TypicalPersons.AMY;
-import static tutorease.address.testutil.TypicalPersons.BOB;
+import static tutorease.address.testutil.TypicalStudents.AMY;
+import static tutorease.address.testutil.TypicalStudents.BOB;
 
 import org.junit.jupiter.api.Test;
 

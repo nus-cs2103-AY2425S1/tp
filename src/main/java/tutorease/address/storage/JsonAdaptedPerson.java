@@ -121,9 +121,7 @@ class JsonAdaptedPerson {
         } else if (role.equals(Role.GUARDIAN)) {
             return new Guardian(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelTags);
         } else {
-            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
-        }
-
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
     }
 
 }

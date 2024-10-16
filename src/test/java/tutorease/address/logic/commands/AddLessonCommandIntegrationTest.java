@@ -3,7 +3,7 @@ package tutorease.address.logic.commands;
 import static tutorease.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorease.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorease.address.testutil.TypicalLessons.getTypicalLessons;
-import static tutorease.address.testutil.TypicalPersons.getTypicalTutorEase;
+import static tutorease.address.testutil.TypicalStudents.getTypicalTutorEase;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,11 +19,11 @@ import tutorease.address.model.lesson.StartDateTime;
 import tutorease.address.model.lesson.StudentId;
 import tutorease.address.model.person.Person;
 import tutorease.address.testutil.LessonBuilder;
-import tutorease.address.testutil.TypicalPersons;
+import tutorease.address.testutil.TypicalStudents;
 
 public class AddLessonCommandIntegrationTest {
     private Model model;
-    private Person validPerson = TypicalPersons.ALICE;
+    private Person validPerson = TypicalStudents.ALICE;
     private StudentId studentId = new StudentId("1");
     private LocationIndex locationIndex = new LocationIndex("1");
     private String startDateTime = "10-11-2024 02:18";
