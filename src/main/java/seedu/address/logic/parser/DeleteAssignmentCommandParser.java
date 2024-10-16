@@ -23,9 +23,6 @@ import seedu.address.model.person.Name;
  */
 public class DeleteAssignmentCommandParser implements Parser<DeleteAssignmentCommand> {
 
-    public static final String MESSAGE_EXPECTED_AT_MOST_TWO = "Provide at most 2 status\n"
-            + DeleteAssignmentCommand.MESSAGE_USAGE;
-
     @Override
     public DeleteAssignmentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
@@ -38,8 +35,8 @@ public class DeleteAssignmentCommandParser implements Parser<DeleteAssignmentCom
         }
 
         // nitializing compulsory fields
-        Name name = new Name(argMultimap.getValue(PREFIX_NAME).get());
-        AssignmentName queryAssignment = new AssignmentName(argMultimap.getValue(PREFIX_ASSIGNMENT).get());
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        AssignmentName queryAssignment = ParserUtil.parseAssignmentName(argMultimap.getValue(PREFIX_ASSIGNMENT).get());
 
         // Initializing non-compulsory fields
         Deadline queryDeadline;

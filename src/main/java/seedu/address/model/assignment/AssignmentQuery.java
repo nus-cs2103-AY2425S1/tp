@@ -18,7 +18,7 @@ public class AssignmentQuery {
      */
     public AssignmentQuery(AssignmentName assignmentName, Deadline deadline, Status submissionStatus,
                            Status gradingStatus, Grade grade) {
-        this.queryName = Optional.of(assignmentName);
+        this.queryName = Optional.ofNullable(assignmentName);
         this.queryDeadline = Optional.ofNullable(deadline);
         this.querySubmissionStatus = Optional.ofNullable(submissionStatus);
         this.queryGradingStatus = Optional.ofNullable(gradingStatus);
