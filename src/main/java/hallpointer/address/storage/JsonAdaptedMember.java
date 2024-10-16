@@ -14,6 +14,8 @@ import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Room;
 import hallpointer.address.model.member.Telegram;
+import hallpointer.address.model.point.Point;
+import hallpointer.address.model.session.Session;
 import hallpointer.address.model.tag.Tag;
 
 /**
@@ -27,6 +29,8 @@ class JsonAdaptedMember {
     private final String telegram;
     private final String room;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final int totalPoints;
+    private final List<JsonAdaptedSession> sessions = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedMember} with the given member details.
@@ -34,12 +38,18 @@ class JsonAdaptedMember {
     @JsonCreator
     public JsonAdaptedMember(@JsonProperty("name") String name, @JsonProperty("telegram") String telegram,
                              @JsonProperty("room") String room,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("totalPoints") int totalPoints,
+                             @JsonProperty("sessions") List<JsonAdaptedSession> sessions) {
         this.name = name;
         this.telegram = telegram;
         this.room = room;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        this.totalPoints = totalPoints;
+        if (sessions != null) {
+            this.sessions.addAll(sessions);
         }
     }
 
@@ -52,6 +62,10 @@ class JsonAdaptedMember {
         room = source.getRoom().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        totalPoints = source.getTotalPoints().getValue();
+        sessions.addAll(source.getSessions().stream()
+                .map(JsonAdaptedSession::new)
                 .collect(Collectors.toList()));
     }
 
@@ -92,7 +106,17 @@ class JsonAdaptedMember {
         final Room modelRoom = new Room(room);
 
         final Set<Tag> modelTags = new HashSet<>(memberTags);
-        return new Member(modelName, modelTelegram, modelRoom, modelTags);
+
+        final Point modelTotalPoints = new Point(this.totalPoints);
+
+        final Set<Session> modelSessions = new HashSet<>();
+        for (JsonAdaptedSession session : sessions) {
+            modelSessions.add(session.toModelType());
+        }
+
+        Member member = new Member(modelName, modelTelegram, modelRoom, modelTags, modelTotalPoints, modelSessions);
+
+        return member;
     }
 
 }
