@@ -31,7 +31,7 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_JOBCODE + person.getJobCode().value + " ");
-        sb.append(PREFIX_TAG + person.getTag().tagName + " ");
+        sb.append(PREFIX_TAG + person.getTag().tagCode + " ");
         return sb.toString();
     }
 
@@ -44,7 +44,7 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getJobCode().ifPresent(jobCode -> sb.append(PREFIX_JOBCODE).append(jobCode.value).append(" "));
-        descriptor.getTag().ifPresent(tag -> sb.append(PREFIX_TAG).append(tag.tagName).append(" "));
+        descriptor.getTag().ifPresent(tag -> sb.append(PREFIX_TAG).append(tag.tagCode).append(" "));
         return sb.toString();
     }
 }
