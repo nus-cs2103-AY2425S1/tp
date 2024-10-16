@@ -24,6 +24,8 @@ public class Gender {
 
     public final PatientGender gender;
 
+    public final String value;
+
     /**
      * Constructs an {@code Gender}.
      *
@@ -35,12 +37,15 @@ public class Gender {
 
         if (input.equals("M")) {
             gender = PatientGender.MALE;
+            value = "M";
         } else if (input.equals("F")) {
             gender = PatientGender.FEMALE;
+            value = "F";
         } else {
             // input is guaranteed to be "O" here
             assert(input.equals("O"));
             gender = PatientGender.OTHER;
+            value = "O";
         }
     }
 

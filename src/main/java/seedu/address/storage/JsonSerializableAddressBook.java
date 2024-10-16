@@ -24,12 +24,13 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given persons, patients and doctors
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
         this.persons.addAll(persons);
     }
+
 
     /**
      * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
@@ -56,5 +57,4 @@ class JsonSerializableAddressBook {
         }
         return addressBook;
     }
-
 }
