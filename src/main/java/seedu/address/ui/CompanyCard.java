@@ -1,13 +1,13 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.company.Company;
+
+import java.util.Comparator;
 
 /**
  * An UI component that displays information of a {@code Company}.
@@ -56,7 +56,7 @@ public class CompanyCard extends UiPart<Region> {
         address.setText(company.getAddress().value);
         email.setText(company.getEmail().value);
         company.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .sorted(Comparator.comparing(tag -> tag.toString()))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
     }
 }

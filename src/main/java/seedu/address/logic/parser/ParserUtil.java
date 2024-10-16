@@ -1,11 +1,5 @@
 package seedu.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
-
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -14,6 +8,13 @@ import seedu.address.model.company.Email;
 import seedu.address.model.company.Name;
 import seedu.address.model.company.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagBuilder;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser
@@ -108,11 +109,15 @@ public class ParserUtil {
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        try {
+            // Try to create the Tag
+            return new TagBuilder().build(trimmedTag);
+        } catch (Exception e) {
+            // If any exception occurs, throw a new ParseException
+            throw new ParseException(e.getMessage());
         }
-        return new Tag(trimmedTag);
     }
+
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.

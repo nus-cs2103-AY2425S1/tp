@@ -1,8 +1,8 @@
 package seedu.address.model.tag;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 import java.util.Locale;
+
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 
 /**
@@ -12,7 +12,7 @@ import java.util.Locale;
  */
 public class DifficultyTag extends Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Difficulty level needs to be a number";
+    public static final String MESSAGE_CONSTRAINTS = "Difficulty level needs to be either Low, Medium or High";
 
     private String difficultyLevel;
     /**
