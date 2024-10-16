@@ -36,7 +36,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_AllFieldsSpecified_success() {
+    public void execute_allFieldsSpecified_success() {
         for (Person person : getDefaultModel().getPersonList()) {
             EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor(
                     Optional.of(person.getName()),
@@ -60,7 +60,7 @@ public class EditCommandTest {
                         editPersonDescriptors.add(new EditPersonDescriptor(
                                 editName ? Optional.of(name) : Optional.empty(),
                                 editPhone ? Optional.of(phone) : Optional.empty(),
-                                editAddress  ? Optional.of(address) : Optional.empty(),
+                                editAddress ? Optional.of(address) : Optional.empty(),
                                 editTags ? Optional.of(tags) : Optional.empty()));
                     }
                 }
@@ -122,11 +122,12 @@ public class EditCommandTest {
         List<Person> persons = getDefaultModel().getPersonList();
         for (Person person1 : persons) {
             for (Person person2 : persons) {
-                if (person1 == person2) continue;
+                if (person1 == person2) {
+                    continue;
+                }
                 EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor(
                         Optional.of(person2.getName()), Optional.empty(),
-                        Optional.empty(),Optional.empty()
-                );
+                        Optional.empty(), Optional.empty());
                 EditCommand editCommand = new EditCommand(person1.getName(), editPersonDescriptor);
                 assertCommandFailure(editCommand, getDefaultModel(), EditCommand.MESSAGE_DUPLICATE_PERSON);
             }
@@ -137,7 +138,7 @@ public class EditCommandTest {
     public void execute_nonExistentPerson_failure() {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor(
                 Optional.of(new Name(VALID_NAME_BOB)), Optional.empty(),
-                Optional.empty(),  Optional.empty());
+                Optional.empty(), Optional.empty());
         EditCommand editCommand = new EditCommand(new Name(VALID_NAME_BOB), editPersonDescriptor);
 
         assertCommandFailure(editCommand, getDefaultModel(), Messages.MESSAGE_PERSON_NOT_FOUND);

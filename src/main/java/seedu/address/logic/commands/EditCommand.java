@@ -43,6 +43,9 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
+    /**
+     * Holds edit information to edit a person.
+     */
     public record EditPersonDescriptor(Optional<Name> name, Optional<Phone> phone,
                                        Optional<Address> address, Optional<Set<Tag>> tags) { }
 
