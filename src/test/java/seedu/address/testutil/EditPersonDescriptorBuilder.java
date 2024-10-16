@@ -10,6 +10,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.person.TelegramHandle;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -34,6 +35,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
+        descriptor.setTelegramHandle(person.getTelegramHandle());
         descriptor.setTags(person.getTags());
     }
 
@@ -58,6 +60,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
+        return this;
+    }
+
+    /**
+     * Sets the {@code TelegramHandle} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withTelegramHandle(String telegramHandle) {
+        descriptor.setTelegramHandle(new TelegramHandle(telegramHandle));
         return this;
     }
 
