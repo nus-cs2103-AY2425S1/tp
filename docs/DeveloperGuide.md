@@ -557,7 +557,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No potential hire is deleted. Error details shown in the status message.
 
    4. Test case: `Delete E 1`<br>
-      Expected: Unrecognised command. Error is due to capitalisation of `Delete` and/or `E` instead of `delete` and/or `e`. Captialisation matters.
+      Expected: Unrecognised command. Error is due to capitalisation of `Delete` and/or `E` instead of `delete` and/or `e`. Capitalisation matters.
 
    5. Test case: `delete e`<br>
       Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
@@ -572,6 +572,29 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `delete ph 1`<br>
       Expected: No potential hires/employees are deleted. The error message will show that there are no potential hires/employees to delete.
 
+### Finding a person
+
+1. Finding a person 
+   1. Test case: `find all john`<br>
+      Expected: Number of people listed shown in the status message. Displays the list of potential hires with any keywords.
+
+   2. Test case: `find ph john`<br>
+            Expected: Number of potential hires listed shown in the status message. Displays the list of potential hires with any keywords.
+   
+   3. Test case: `find e john`<br>
+            Expected: Number of employees listed shown in the status message. Displays the list of employees.
+
+   4. Test case: `Find all john`, `Find e john`, `Find ph john`<br>
+            Expected: Unknown command. Error is due to capitalisation of `Find`. Capitalisation of command matters.
+   
+   5. Test case: `find all`, `find e`, `find ph`<br>
+      Expected: Incorrect command format. Status message shows the correct usage of Find command.
+
+   6. Test case: `find ALL john`, `find E john`, `find PH john`<br>
+            Expected: Incorrect command format. Status message shows the correct usage of Find command.
+
+   7. Other incorrect find commands to try: `find aLL john`, `find pH john`, `find a`, `...`<br>
+            Expected: Similar to previous points. If the format is incorrect, the command is recognised but the action is invalid and a specific status message is shown.
 
 ### Saving data
 
