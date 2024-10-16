@@ -15,7 +15,6 @@ import seedu.address.model.meetup.To;
  */
 class JsonAdaptedMeetUp {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Meet up's %s field is missing!";
-    private static final DateTimeFormatter STORED_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     private final String name;
     private final String info;

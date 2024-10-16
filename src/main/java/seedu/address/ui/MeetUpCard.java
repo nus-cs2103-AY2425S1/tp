@@ -1,12 +1,9 @@
 package seedu.address.ui;
 
-import java.util.logging.Logger;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.meetup.MeetUp;
 
 /**
@@ -48,6 +45,5 @@ public class MeetUpCard extends UiPart<Region> {
         info.setText(meetUp.getInfo().toString());
         from.setText(meetUp.getFrom().toString());
         to.setText(meetUp.getTo().toString());
-        logger.info("making meetup card");
     }
 }
