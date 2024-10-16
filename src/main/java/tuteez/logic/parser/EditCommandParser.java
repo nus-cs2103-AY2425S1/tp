@@ -18,7 +18,7 @@ import tuteez.commons.core.index.Index;
 import tuteez.logic.commands.EditCommand;
 import tuteez.logic.commands.EditCommand.EditPersonDescriptor;
 import tuteez.logic.parser.exceptions.ParseException;
-import tuteez.model.tag.Lesson;
+import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
 
 /**

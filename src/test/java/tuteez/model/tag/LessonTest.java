@@ -2,6 +2,7 @@ package tuteez.model.tag;
 
 import org.junit.jupiter.api.Test;
 
+import tuteez.model.person.lesson.Lesson;
 import static tuteez.testutil.Assert.assertThrows;
 
 public class LessonTest {

@@ -24,10 +24,10 @@ import tuteez.logic.commands.exceptions.CommandException;
 import tuteez.model.Model;
 import tuteez.model.person.Address;
 import tuteez.model.person.Email;
+import tuteez.model.person.lesson.Lesson;
 import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
-import tuteez.model.tag.Lesson;
 import tuteez.model.tag.Tag;
 
 /**
@@ -54,6 +54,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_LESSON = "This time slow is already taken by another student";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -86,9 +87,22 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        Optional<Set<Lesson>> lessons = editPersonDescriptor.getLessons();
+        if (lessons.isPresent()) {
+            for (Lesson lesson : lessons.get()) {
+                if (checkForClashingLesson(lesson)) {
+                    return new CommandResult(MESSAGE_DUPLICATE_LESSON, false, false, false);
+                }
+            }
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    public boolean checkForClashingLesson(Lesson lesson) {
+        return Lesson.isDuplicateLesson(lesson);
     }
 
     /**
@@ -163,7 +177,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, lessons);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
         }
 
         public void setName(Name name) {
