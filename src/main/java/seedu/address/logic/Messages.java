@@ -1,3 +1,4 @@
+
 package seedu.address.logic;
 
 import java.util.Set;
@@ -17,6 +18,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX = "The vendor index provided is invalid";
     public static final String MESSAGE_INVALID_EVENT_DISPLAYED_INDEX = "The vendor index provided is invalid";
+    public static final String MESSAGE_VENDOR_NOT_ASSIGNED_TO_EVENT = "Vendor is not assigned to this event";
     public static final String MESSAGE_VENDORS_LISTED_OVERVIEW = "%1$d vendors listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
         "Multiple values specified for the following single-valued field(s): ";
