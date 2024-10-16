@@ -48,9 +48,9 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
    * `list ph` : Lists all potential hires.
 
-   * `employee n/John Doe p/81234567 e/pohjunkang@gmail.com a/21 Lower Kent Ridge Rd d/Department of communications and informatics r/Head of communications and Informatics ced/01-01-2021` : Adds an employee named `John Doe` to StaffSync.
+   * `employee n/John Doe p/81234567 e/pohjunkang@gmail.com a/21 Lower Kent Ridge Rd d/Department of communications and informatics r/Head of communications and Informatics ced/2021-01-01` : Adds an employee named `John Doe` to StaffSync.
 
-   * `delete ph 1` : Deletes the 1st potential hire shown in the current list.
+   * `delete ph 1` : Deletes the 1st person shown if they are a potential hire.
 
    * `clear` : Deletes all contacts.
 
@@ -164,7 +164,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
 <br>
 <details>
-  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Editing a person: <code>edit</code></strong></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">[WIP] Editing a person: <code>edit</code></strong></summary>
   
   >Edits an existing person in the StaffSync.
   >
