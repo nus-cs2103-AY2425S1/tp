@@ -4,10 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a default Tag .
- * This tag is the parent of all specific type of tags.
- * This will tag will be used if user doesn't use the special tags that we provide
- *
+ * Represents a default Tag.
+ * This tag is the superclass of our provided tags.
+ * If user doesn't use any of our pre-provided tags,
+ * this tag will be used instead as the default option
  */
 public class Tag {
 
