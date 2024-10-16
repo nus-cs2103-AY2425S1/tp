@@ -45,7 +45,7 @@ public class CreateGroupCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Group newGroup = new Group(groupName);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getPersonList();
 
         for (Index i : members) {
             if (i.getZeroBased() >= lastShownList.size()) {
