@@ -1,0 +1,17 @@
+{
+  "students" : [ {
+    "name" : "Hugh",
+    "phone" : "83322191",
+    "email" : "dummy@example.com",
+    "address" : "dummy address",
+    "tutorialGroup" : "G22",
+    "studentNumber" : "A0272888H"
+  }, {
+    "name" : "Hugh",
+    "phone" : "83322191",
+    "email" : "dummies@example.com",
+    "address" : "dummy address",
+    "tutorialGroup" : "G22",
+    "studentNumber" : "A0272888H"
+  }]
+}
