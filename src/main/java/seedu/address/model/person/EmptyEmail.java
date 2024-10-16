@@ -1,8 +1,5 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 /**
  * Represents an empty Email of a Person in the address book.
  * Guarantees: immutable
@@ -10,6 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 class EmptyEmail extends Email {
 
     private static final EmptyEmail emptyEmail = new EmptyEmail();
+
     public static final String INTERNAL_REPRESENTATION = "<REPRESENTATION FOR EMPTY EMAIL>";
 
     private EmptyEmail() {
