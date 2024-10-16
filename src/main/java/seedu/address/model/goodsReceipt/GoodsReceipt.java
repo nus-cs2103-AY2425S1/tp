@@ -70,6 +70,10 @@ public class GoodsReceipt {
         return this.quantity;
     }
 
+    /**
+     * Returns if goods are delivered
+     */
+    public boolean isDelivered() { return isDelivered; }
 
     /**
      * Returns goods.
