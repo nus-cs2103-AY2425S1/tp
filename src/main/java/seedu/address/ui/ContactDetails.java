@@ -21,7 +21,7 @@ public class ContactDetails extends UiPart<Region> {
     private Person person;
 
     @FXML
-    private HBox contactDetailPanel;
+    private HBox contactDetailsPanel;
 
     @FXML
     private Label name;
@@ -42,7 +42,7 @@ public class ContactDetails extends UiPart<Region> {
     private VBox notesList;
 
     /**
-     * Creates a {@code ContactDetailPanel} with the given {@code Person} information.
+     * Creates a {@code ContactDetailsPanel} with the given {@code Person} information.
      */
     public ContactDetails(Person person) {
         super(FXML);
