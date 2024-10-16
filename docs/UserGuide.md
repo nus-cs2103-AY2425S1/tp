@@ -120,6 +120,23 @@ Examples:
 
 <br><br/>
 
+### Untagging a contact : `untag`
+
+Untags a specific contact in the address book.
+
+Format: `untag INDEX t/TAG1 [TAG2...]` or `untag INDEX t/all`
+
+* Untags the contact at the specified `INDEX`. The index refers to the index number shown next to a contact's name in the displayed contact list. The index **must be a positive integer** 1, 2, 3, ...
+* If the user only wants to remove specific tags from the contact, at least one tag to remove must be specified.
+* The user can remove multiple tags from a contact by separating them with a space.
+* The user can alternatively remove all tags associated with a contact by using 'untag INDEX t/all'.
+
+Examples:
+* `untag 1 t/friends buddies` if the contact at index 1 has the tags: 'friends', 'buddies'.
+* `untag 2 t/all` to remove all tags from the contact at index 2.
+
+<br><br/>
+
 ### Locating contacts by name: `find`
 
 Finds contacts whose names contain any of the given keywords.
@@ -232,6 +249,7 @@ Action     | Format, Examples
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **List**   | `list`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Untag**  | `untag INDEX t/TAG1 [TAG2...]` or `untag INDEX t/all` <br> e.g., `untag 1 t/friends buddies`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Clear**  | `clear`
