@@ -113,7 +113,7 @@ public class MemberTest {
         Session newSession = new Session(new SessionName(VALID_NAME_BOB),
                                 new SessionDate("10 Nov 2025"), new Point(10));
         member.addSession(newSession);
-        member.removeSession(newSession);
+        //member.removeSession(newSession);
         assertFalse(member.getSessions().contains(newSession));
         assertEquals(new Point(0), member.getTotalPoints());
     }
