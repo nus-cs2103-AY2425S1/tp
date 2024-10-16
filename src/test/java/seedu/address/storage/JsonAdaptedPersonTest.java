@@ -183,11 +183,11 @@ public class JsonAdaptedPersonTest {
     }
     @Test
     public void toModelType_invalidMonthsPaid_throwsIllegalValueException() {
-        List<JsonAdaptedMonthPaid> invalidMonthsPaid123 =
+        List<JsonAdaptedMonthPaid> invalidMonthsPaid =
                 List.of(new JsonAdaptedMonthPaid("123"));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_FEES, VALID_CLASS_ID,
-                        invalidMonthsPaid123, VALID_TAGS);
+                        invalidMonthsPaid, VALID_TAGS);
         String expectedMessage = MonthPaid.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
