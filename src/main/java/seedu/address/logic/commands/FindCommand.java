@@ -25,6 +25,10 @@ public class FindCommand extends Command {
 
     private final RoleContainsKeywordsPredicate rolePredicate;
 
+    /**
+     * @param namePredicate determines whether a person has a name that satisfy a condition
+     * @param rolePredicate determines whether a person has a role that satisfy a condition
+     */
     public FindCommand(NameContainsKeywordsPredicate namePredicate, RoleContainsKeywordsPredicate rolePredicate) {
         this.namePredicate = namePredicate;
         this.rolePredicate = rolePredicate;
