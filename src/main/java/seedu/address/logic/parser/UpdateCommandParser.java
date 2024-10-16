@@ -19,6 +19,7 @@ import java.util.Set;
 import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.tag.Tag;
 
@@ -36,17 +37,14 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
     public UpdateCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        String[] argArray = args.trim().split(" ", 2);
+        String[] argArray = args.trim().split("\\s+", 2);
 
         if (argArray.length < 2) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE));
         }
 
-        Nric nric = ParserUtil.parseNric(argArray[0]);
-        System.out.println(argArray[0]);
-
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME,
+                ArgumentTokenizer.tokenize(args , PREFIX_NAME,
                         PREFIX_AGE, PREFIX_GENDER, PREFIX_NRIC,
                         PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
@@ -83,7 +81,16 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
             throw new ParseException(UpdateCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new UpdateCommand(nric, editPersonDescriptor);
+
+        boolean isContainNric = Nric.isValidNric(argArray[0]);
+
+        if (isContainNric) {
+            Nric nric = ParserUtil.parseNric(argArray[0]);
+            return new UpdateCommand(nric, editPersonDescriptor);
+        } else {
+            Name name = ParserUtil.parseName(argArray[0]);
+            return new UpdateCommand(name, editPersonDescriptor);
+        }
     }
 
     /**

@@ -42,9 +42,9 @@ public class UpdateCommand extends Command {
     public static final String COMMAND_WORD = "update";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the details of the person identified "
-            + "by the NRIC number used in the displayed person list. "
+            + "by the NRIC number or name used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: NRIC (must be a positive integer) "
+            + "Parameters: NRIC OR name (case insensitive)"
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_AGE + "AGE] "
             + "[" + PREFIX_GENDER + "GENDER] "
@@ -53,15 +53,21 @@ public class UpdateCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example1: " + COMMAND_WORD + " S1234567Z "
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com"
+            + "Example2: " + COMMAND_WORD + " Alex "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_SAME_NRID = "Multiple persons with the same NRIC found. Please specify further.";
+    public static final String MESSAGE_SAME_NAME = "Multiple persons with the same name found. Please specify further.";
 
     private final Nric nric;
+    private final Name name;
     private final UpdatePersonDescriptor editPersonDescriptor;
 
     /**
@@ -73,6 +79,20 @@ public class UpdateCommand extends Command {
         requireNonNull(editPersonDescriptor);
 
         this.nric = nric;
+        this.name = null;
+        this.editPersonDescriptor = new UpdatePersonDescriptor(editPersonDescriptor);
+    }
+
+    /**
+     * @param name                 of the person in the filtered person list to edit
+     * @param editPersonDescriptor details to edit the person with
+     */
+    public UpdateCommand(Name name, UpdatePersonDescriptor editPersonDescriptor) {
+        requireNonNull(name);
+        requireNonNull(editPersonDescriptor);
+
+        this.nric = null;
+        this.name = name;
         this.editPersonDescriptor = new UpdatePersonDescriptor(editPersonDescriptor);
     }
 
@@ -100,11 +120,36 @@ public class UpdateCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        Person personToEdit;
 
-        Person personToEdit = lastShownList.stream()
-                .filter(person -> person.getNric().equals(nric))
-                .findFirst()
-                .orElseThrow(() -> new CommandException(MESSAGE_NOT_EDITED));
+        if (nric != null) {
+            List<Person> matchingPersons = lastShownList.stream()
+                    .filter(person -> person.getNric().equals(nric))
+                    .toList();
+
+            if (matchingPersons.isEmpty()) {
+                throw new CommandException(MESSAGE_NOT_EDITED);
+            } else if (matchingPersons.size() == 1) {
+                personToEdit = matchingPersons.get(0);
+            } else {
+                // Handle multiple matches for NRIC
+                throw new CommandException(MESSAGE_SAME_NRID);
+            }
+        } else { // for name
+            List<Person> matchingPersons = lastShownList.stream()
+                    .filter(person -> person.getName().equals(name))
+                    .toList();
+
+            if (matchingPersons.isEmpty()) {
+                throw new CommandException(MESSAGE_NOT_EDITED);
+            } else if (matchingPersons.size() == 1) {
+                personToEdit = matchingPersons.get(0);
+            } else {
+                // Handle multiple matches for Name
+                throw new CommandException(MESSAGE_SAME_NAME);
+            }
+        }
+
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
