@@ -27,10 +27,10 @@ public class DeleteAddressCommand extends Command {
             + ": Deletes the person's public address identified by the index number "
             + "used in the displayed person list and their crypto network.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + PREFIX_PUBLIC_ADDRESS + "Network"
+            + PREFIX_PUBLIC_ADDRESS + "NETWORK\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_PUBLIC_ADDRESS + "BTC";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person's Address: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person's Public Address: %1$s";
 
     private final Index targetIndex;
     private final Network targetAddressnetwork;

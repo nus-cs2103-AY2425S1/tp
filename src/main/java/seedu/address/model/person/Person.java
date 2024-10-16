@@ -71,7 +71,7 @@ public class Person {
      * @return publicAddresses
      */
     public Map<Network, Set<PublicAddress>> getPublicAddresses() {
-        return Collections.unmodifiableMap(publicAddresses);
+        return this.publicAddresses;
     }
 
     /**
