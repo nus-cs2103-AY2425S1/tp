@@ -1,15 +1,19 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import seedu.address.logic.commands.AddConcertCommand;
 import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -24,13 +28,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.commons.NameContainsKeywordsPredicate;
 import seedu.address.model.concert.Concert;
 import seedu.address.model.person.Person;
-import static seedu.address.testutil.Assert.assertThrows;
 import seedu.address.testutil.ConcertBuilder;
 import seedu.address.testutil.ConcertUtil;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 public class AddressBookParserTest {
 
@@ -84,8 +86,10 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        String userInput = FindPersonCommand.COMMAND_WORD + " "
+                + PREFIX_NAME + keywords.stream().collect(Collectors.joining(" "));
         FindPersonCommand command = (FindPersonCommand) parser.parseCommand(
-                FindPersonCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                userInput);
         assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -113,3 +117,4 @@ public class AddressBookParserTest {
                 "unknownCommand"));
     }
 }
+

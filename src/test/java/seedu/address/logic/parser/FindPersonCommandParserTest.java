@@ -48,6 +48,10 @@ public class FindPersonCommandParserTest {
         // no leading and trailing whitespaces
         String userInput1 = generateUserInput(PREFIX_ROLE + "organiser");
         assertDoesNotThrow(() -> parser.parse(userInput1), "Parse exception thrown");
+
+        // leading and trailing whitespaces
+        String userInput2 = generateUserInput(PREFIX_ROLE + "  organiser    ");
+        assertDoesNotThrow(() -> parser.parse(userInput2), "Parse exception thrown");
     }
 
     @Test
