@@ -46,6 +46,19 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if a person with the same fields as {@code person} exists in the address book
+     * with personToExclude excluded.
+     *
+     * @param personToExclude Person to exclude from checking for duplicate fields.
+     * @param person Target person to check for duplicate fields.
+     * @return True if there is no duplicate field, otherwise False.
+     */
+    public boolean containsFieldsWithException(Person personToExclude, Person person) {
+        requireNonNull(person);
+        return internalList.stream().filter(p -> p != personToExclude).anyMatch(person::hasSameFields);
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
@@ -75,7 +88,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
 
-        if (!target.isSamePerson(editedPerson) && containsFields(editedPerson)) {
+        if (!target.isSamePerson(editedPerson) && containsFieldsWithException(target, editedPerson)) {
             throw new DuplicateFieldException();
         }
 

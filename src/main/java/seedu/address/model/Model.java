@@ -63,6 +63,15 @@ public interface Model {
     boolean hasDuplicateFields(Person person);
 
     /**
+     * Returns true if a person with the same fields as {@code person} exists in the address book
+     * with personToExclude excluded.
+     *
+     * @param personToExclude Person to exclude from checking for duplicate fields.
+     * @param person Target person to check for duplicate fields.
+     * @return True if there is no duplicate field, otherwise False.
+     */
+    boolean hasDuplicateFieldsWithException(Person personToExclude, Person person);
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */

@@ -88,7 +88,8 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasDuplicateFields(editedPerson)) {
+        if (!personToEdit.isSamePerson(editedPerson)
+                && model.hasDuplicateFieldsWithException(personToEdit, editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_FIELDS);
         }
 
