@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,7 +24,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         try {
-            ArrayList<String> stringIndices = new ArrayList<>(new HashSet<String>((Arrays.asList(args.split("\\s*")))));
+            args = args.trim();
+            ArrayList<String> stringIndices = new ArrayList<>(new HashSet<String>((Arrays.asList(args.split("\\s+")))));
             ArrayList<Index> indices = new ArrayList<>();
             for (String s: stringIndices) {
                 indices.add(ParserUtil.parseIndex(s));
