@@ -122,6 +122,6 @@ class JsonAdaptedPerson {
             return new Guardian(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelTags);
         } else {
             throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
+        }
     }
-
 }
