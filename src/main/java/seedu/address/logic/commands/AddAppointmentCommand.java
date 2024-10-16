@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.time.LocalDateTime;
+
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -14,13 +16,11 @@ import seedu.address.model.person.Id;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 
-import java.time.LocalDateTime;
-
 /**
  * Adds an appointment to both a patient and a doctor.
  */
 
-public class AddAppointmentCommand extends Command{
+public class AddAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "addAppointment";
 
@@ -58,8 +58,10 @@ public class AddAppointmentCommand extends Command{
         ObservableList<Person> allPersons = model.getFilteredPersonList();
         Patient patientToAddAppointment = model.getFilteredPatientById(allPersons, patientId);
         Doctor doctorToAddAppointment = model.getFilteredDoctorById(allPersons, doctorId);
-        patientToAddAppointment.addAppointment(appointmentTime, patientToAddAppointment.getId(), doctorToAddAppointment.getId(), remarks);
-        doctorToAddAppointment.addAppointment(appointmentTime, patientToAddAppointment.getId(), doctorToAddAppointment.getId(), remarks);
+        patientToAddAppointment.addAppointment(appointmentTime, patientToAddAppointment.getId(),
+                doctorToAddAppointment.getId(), remarks);
+        doctorToAddAppointment.addAppointment(appointmentTime, patientToAddAppointment.getId(),
+                doctorToAddAppointment.getId(), remarks);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_ADD_APPOINTMENT_SUCCESS);
     }

@@ -7,19 +7,19 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
-import seedu.address.logic.commands.AddAppointmentCommand;
-import seedu.address.commons.exceptions.InvalidIdException;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Id;
-
 import java.time.LocalDateTime;
 import java.util.stream.Stream;
+
+import seedu.address.commons.exceptions.InvalidIdException;
+import seedu.address.logic.commands.AddAppointmentCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Id;
 
 /**
  * Parses input arguments and creates a new AddAppointmentCommand object
  */
 
-public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand>{
+public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddAppointmentCommand
      * and returns a AddAppointmentCommand object for execution.
@@ -36,7 +36,8 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
 
         if (!arePrefixesPresent(argumentMultimap, PREFIX_DATE, PREFIX_ID)
                 || !argumentMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddAppointmentCommand.MESSAGE_USAGE));
         }
         Id patientId;
         Id doctorId;

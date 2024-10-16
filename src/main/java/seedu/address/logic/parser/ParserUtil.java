@@ -10,8 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.exceptions.InvalidIdException;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Doctor;
@@ -53,7 +53,7 @@ public class ParserUtil {
         String trimmedId = id.trim();
         Patient patientWithId = Patient.getPatientWithId(trimmedId);
         if (patientWithId == null) {
-           throw new InvalidIdException(MESSAGE_INVALID_PATIENT_ID);
+            throw new InvalidIdException(MESSAGE_INVALID_PATIENT_ID);
         }
         return patientWithId.getId();
     }
@@ -91,8 +91,7 @@ public class ParserUtil {
      * Parses a {@code String date} into a {@code LocalDateTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code date} is invalid or
-     * not in the expected format.
+     * @throws ParseException if the given {@code date} is invalid or not in the expected format.
      */
     public static LocalDateTime parseDate(String date) throws ParseException {
         requireNonNull(date);
