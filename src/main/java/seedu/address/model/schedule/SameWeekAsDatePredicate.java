@@ -13,16 +13,34 @@ import seedu.address.commons.util.ToStringBuilder;
 public class SameWeekAsDatePredicate implements Predicate<Meeting> {
 
     private final LocalDate date;
+    private final WeekFields weekfields;
 
+    /**
+     * @param date of the week
+     */
     public SameWeekAsDatePredicate(LocalDate date) {
         this.date = date;
+        this.weekfields = WeekFields.of(Locale.getDefault());
     }
 
     @Override
     public boolean test(Meeting meeting) {
-        WeekFields weekfields = WeekFields.of(Locale.getDefault());
         return date.get(weekfields.weekOfWeekBasedYear())
                 == meeting.getMeetingDate().get(weekfields.weekOfWeekBasedYear());
+    }
+
+    /**
+     * @return Start date of the week
+     */
+    public LocalDate getStartDateOfWeek() {
+        return date.with(weekfields.dayOfWeek(), 1);
+    }
+
+    /**
+     * @return Last date of the week
+     */
+    public LocalDate getLastDateOfWeek() {
+        return date.with(weekfields.dayOfWeek(), 7);
     }
 
     @Override

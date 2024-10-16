@@ -24,7 +24,7 @@ public class SeeScheduleCommandParser implements Parser<SeeScheduleCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DATE);
 
-        if (args.isEmpty()) {
+        if (args.isEmpty() || !AddCommandParser.arePrefixesPresent(argMultimap, PREFIX_DATE)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SeeScheduleCommand.MESSAGE_USAGE));
         }
