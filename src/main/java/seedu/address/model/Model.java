@@ -92,7 +92,7 @@ public interface Model {
     /**
      * Updates the filter of the filtered vendor list to filter by the given
      * {@code predicate}.
-     * 
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredVendorList(Predicate<Vendor> predicate);
@@ -157,7 +157,7 @@ public interface Model {
     /**
      * Updates the filter of the filtered event list to filter by the given
      * {@code predicate}.
-     * 
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
@@ -174,14 +174,14 @@ public interface Model {
 
     /**
      * Returns the current UI state.
-     * 
+     *
      * @return {@code UiState} observable object.
      */
     public ObservableObjectValue<UiState> getUiState();
 
     /**
      * Sets the current UI state.
-     * 
+     *
      * @param uiState {@code UiState} object.
      */
     public void setUiState(UiState uiState);
