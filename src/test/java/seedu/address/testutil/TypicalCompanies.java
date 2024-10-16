@@ -36,10 +36,10 @@ public class TypicalCompanies {
             .build();
 
     public static final Company NUS = new CompanyBuilder()
-            .withName("National University of Singapore")
+            .withName("NUS")
             .withAddress("21 Lower Kent Ridge Rd, Singapore 119077")
-            .withBillingDate("8")
-            .withPhone("65168888")
+            .withBillingDate("5")
+            .withPhone("65166666")
             .build();
 
     public static final Company APPLE = new CompanyBuilder()
