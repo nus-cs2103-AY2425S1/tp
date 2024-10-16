@@ -17,9 +17,6 @@ import seedu.address.model.meetup.MeetUpTo;
  * Jackson-friendly version of {@link MeetUp}.
  */
 class JsonAdaptedMeetUp {
-
-    // Formatter for the required format (with 'T')
-    private static final DateTimeFormatter REQUIRED_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
     // Formatter for the stored format (with space)
     private static final DateTimeFormatter STORED_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 

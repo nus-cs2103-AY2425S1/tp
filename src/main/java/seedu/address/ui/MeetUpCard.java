@@ -15,7 +15,7 @@ import seedu.address.model.meetup.MeetUp;
 public class MeetUpCard extends UiPart<Region> {
 
     private static final String FXML = "MeetUpListCard.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(MeetUpCard.class);
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

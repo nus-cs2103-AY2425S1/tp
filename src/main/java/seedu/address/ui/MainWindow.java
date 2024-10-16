@@ -117,11 +117,12 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
         meetUpListPanel = new MeetUpListPanel(logic.getFilteredMeetUpList());
         meetUpListPanelPlaceholder.getChildren().add(meetUpListPanel.getRoot());
+        logger.info(logic.getFilteredMeetUpList().toString());
+
+        resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -180,6 +181,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleMeetUpList() {
         personListPanel.getRoot().setVisible(false);
         meetUpListPanel.getRoot().setVisible(true);
+        logger.info(meetUpListPanel.getRoot().toString());
     }
 
     public PersonListPanel getPersonListPanel() {
