@@ -21,6 +21,8 @@ public class HelpWindow extends UiPart<Stage> {
             "Add a person: add n/NAME i/STUDENT_ID p/PHONE_NUMBER e/EMAIL [t/TAG]\n"
             + "Listing all persons: list\n"
             + "Editing a person: edit INDEX [n/NAME] [i/STUDENT_ID] [p/PHONE] [e/EMAIL] [t/TAG]\n"
+            + "Marking a person as attended: mark INDEX tut/TUTORIAL\n"
+            + "Marking a person as absent: unmark INDEX tut/TUTORIAL\n"
             + "Locating a person by name: find KEYWORD [MORE_KEYWORDS]\n"
             + "Deleting a person: delete INDEX\n"
             + "Clearing all entries: clear\n"
