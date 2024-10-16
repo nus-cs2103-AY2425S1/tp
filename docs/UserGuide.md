@@ -112,7 +112,7 @@ Examples:
 
 ### Locating beneficiaries by name: `find`
 
-Finds beneficiaries whose names contain any of the given keywords.
+Finds beneficiaries whose names or address contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -122,11 +122,13 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Partial names will also be matched e.g. `Han` will match `Hans`
 * Beneficiaries matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Hans serangoon` will return `Hans Gruber` who has the address `Serangoon street 2, blk 111`
 
 Examples:
 * `find John` returns `johnny` and `John Doe`
 * `find benson carl` returns `Benson Meier`, `Carl Kurz`<br>
   ![result for 'find benson carl'](images/findBensonCarlResult.png)
+
 
 ### Deleting a client : `delete`
 
