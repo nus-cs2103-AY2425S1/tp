@@ -28,6 +28,7 @@ public class Vendor extends Contact {
      * @param address A valid address.
      * @param service A valid service.
      * @param tags    A set of tags associated with the client.
+     * @param id      A valid id.
      */
     public Vendor(Name name, Phone phone, Email email, Address address, Service service, Set<Tag> tags, Id id) {
         super(name, phone, email, address, tags, id);
@@ -38,6 +39,24 @@ public class Vendor extends Contact {
     public Service getService() {
         return service;
     }
+
+    /**
+     * Returns true if both persons have the same name.
+     * This defines a weaker notion of equality between two persons.
+     */
+    @Override
+    public boolean isSameContact(Contact otherContact) {
+        if (otherContact == this) {
+            return true;
+        }
+
+        if (!(otherContact instanceof Vendor)) {
+            return false;
+        }
+
+        return super.isSameContact(otherContact);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -69,6 +88,7 @@ public class Vendor extends Contact {
                 .add("address", this.getAddress())
                 .add("service", this.service)
                 .add("tags", this.getTags())
+                .add("id", this.getId())
                 .toString();
     }
 

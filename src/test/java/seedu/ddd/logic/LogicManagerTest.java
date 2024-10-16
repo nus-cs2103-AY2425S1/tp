@@ -1,7 +1,7 @@
 package seedu.ddd.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.ddd.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.ddd.logic.Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX;
 import static seedu.ddd.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.ddd.testutil.Assert.assertThrows;
 
@@ -50,7 +50,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
     }
 
     @Test
