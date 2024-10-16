@@ -98,13 +98,13 @@ public class PersonTest {
     @Test
     public void constructor_allFieldsPresent_success() {
         Person person = new PersonBuilder().withName("Charlie")
-              .withPhone("12345678")
+              .withPhone("98765432")
               .withEmail("charlie@example.com")
               .withAddress("123, Charlies Street")
               .withTags("Medium Risk").build();
 
         assertEquals("Charlie", person.getName().toString());
-        assertEquals("12345678", person.getPhone().toString());
+        assertEquals("98765432", person.getPhone().toString());
         assertEquals("charlie@example.com", person.getEmail().toString());
         assertEquals("123, Charlies Street", person.getAddress().toString());
         assertEquals("Medium Risk", person.getTag().toString());
