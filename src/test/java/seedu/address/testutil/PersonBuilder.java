@@ -12,6 +12,7 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Sex;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -124,8 +125,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code HealthServices} of the {@code Person} that we are building.
      */
-    public PersonBuilder withHealthServices(Set<HealthService> healthServices) {
-        this.healthServices = healthServices;
+    public PersonBuilder withHealthServices(String... healthServices) {
+        this.healthServices = SampleDataUtil.getHealthServiceSet(healthServices);
         return this;
     }
 
