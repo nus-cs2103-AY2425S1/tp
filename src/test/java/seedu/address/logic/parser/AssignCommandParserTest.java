@@ -1,63 +1,80 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AssignCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 
 class AssignCommandParserTest {
 
     private final AssignCommandParser parser = new AssignCommandParser();
 
     @Test
-    public void parse_validArgs_returnsAssignCommand() throws Exception {
-        AssignCommand expectedCommand = new AssignCommand(Index.fromOneBased(1), Index.fromOneBased(2));
+    public void parse_allFieldsPresent_success() throws Exception {
+        AssignCommand expectedCommand = new AssignCommand(
+                Index.fromOneBased(1), Index.fromOneBased(2));
         assertParseSuccess(parser, " v/1 e/2", expectedCommand);
+
+        // Whitespace handling
+        assertParseSuccess(parser, "  v/1    e/2  ", expectedCommand);
+
+        // Large index values
+        AssignCommand expectedCommandLarge = new AssignCommand(
+                Index.fromOneBased(999999), Index.fromOneBased(999999));
+        assertParseSuccess(parser, " v/999999 e/999999", expectedCommandLarge);
     }
 
     @Test
-    public void parse_invalidFormat_throwsParseException() {
-        // Invalid format: missing both prefixes
-        assertThrows(ParseException.class, () -> parser.parse(" 1 2"));
-    }
-
-    @Test
-    public void parse_missingVendorPrefix_throwsParseException() {
+    public void parse_fieldsMissing_failure() {
         // Missing vendor prefix: only event prefix provided
-        assertThrows(ParseException.class, () -> parser.parse(" e/2"));
-    }
+        assertParseFailure(parser, " e/2",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
 
-    @Test
-    public void parse_missingEventPrefix_throwsParseException() {
         // Missing event prefix: only vendor prefix provided
-        assertThrows(ParseException.class, () -> parser.parse(" v/1"));
+        assertParseFailure(parser, " v/1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
+
+        // Missing both vendor and event indexes
+        assertParseFailure(parser, " v/ e/", ParserUtil.MESSAGE_INVALID_INDEX);
+
+        // Completely empty input
+        assertParseFailure(parser, "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_nonNumericVendorIndex_throwsParseException() {
+    public void parse_invalidValue_failure() {
         // Non-numeric vendor index
-        assertThrows(ParseException.class, () -> parser.parse(" v/a e/1"));
-    }
+        assertParseFailure(parser, " v/a e/1", ParserUtil.MESSAGE_INVALID_INDEX);
 
-    @Test
-    public void parse_nonNumericEventIndex_throwsParseException() {
         // Non-numeric event index
-        assertThrows(ParseException.class, () -> parser.parse(" v/1 e/b"));
+        assertParseFailure(parser, " v/1 e/b", ParserUtil.MESSAGE_INVALID_INDEX);
+
+        // Zero and negative index values
+        assertParseFailure(parser, " v/0 e/1", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, " v/1 e/0", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, " v/-1 e/1", ParserUtil.MESSAGE_INVALID_INDEX);
     }
 
     @Test
-    public void parse_extraArguments_throwsParseException() {
+    public void parse_invalidPrefixes_failure() {
+        // Unrecognized prefix
+        assertParseFailure(parser, " x/1 e/2",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_extraArguments_failure() {
         // Extra arguments in input
-        assertThrows(ParseException.class, () -> parser.parse(" v/1 e/2 some_extra_arg"));
-    }
-
-    @Test
-    public void parse_missingIndexes_throwsParseException() {
-        // Missing index values for vendor and event
-        assertThrows(ParseException.class, () -> parser.parse(" v/ e/"));
+        assertParseFailure(parser, " v/1 e/2 extra", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, " v/1 e/2 v/2", Messages.MESSAGE_DUPLICATE_FIELDS + PREFIX_VENDOR);
+        assertParseFailure(parser, " v/1 e/2 e/2", Messages.MESSAGE_DUPLICATE_FIELDS + PREFIX_EVENT);
     }
 }
