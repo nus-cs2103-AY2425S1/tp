@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showGuestAtIndex;
 import static seedu.address.testutil.TypicalGuests.getTypicalAddressBookWithGuests;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -86,7 +86,7 @@ public class EditGuestCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showGuestAtIndex(model, INDEX_FIRST_PERSON);
 
         Guest guestInFilteredList = (Guest) model.getFilteredGuestList().get(INDEX_FIRST_PERSON.getZeroBased());
         Guest editedGuest = new GuestBuilder(guestInFilteredList).withName(VALID_NAME_BOB).build();
@@ -113,7 +113,7 @@ public class EditGuestCommandTest {
 
     @Test
     public void execute_duplicateGuestFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showGuestAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit guest in filtered list into a duplicate in address book
         Guest guestInList = (Guest) model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
@@ -138,7 +138,7 @@ public class EditGuestCommandTest {
      */
     @Test
     public void execute_invalidGuestIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showGuestAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
