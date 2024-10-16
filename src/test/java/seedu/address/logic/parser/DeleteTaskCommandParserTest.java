@@ -1,6 +1,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_INDEX;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_INDEX_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -30,6 +36,23 @@ public class DeleteTaskCommandParserTest {
     }
 
     @Test
+    public void parse_compulsoryFieldMissing_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTaskCommand.MESSAGE_USAGE);
+
+        // missing name prefix
+        assertParseFailure(parser, VALID_NAME_BOB + TASK_INDEX_DESC,
+                expectedMessage);
+
+        // missing task index prefix
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_TASK_INDEX,
+                expectedMessage);
+
+        // all prefixes missing
+        assertParseFailure(parser, VALID_NAME_BOB + VALID_TASK_INDEX,
+                expectedMessage);
+    }
+
+    @Test
     public void parse_tooManyArg_throwsParseException() {
         assertParseFailure(parser, " n/alice n/bob ti/1",
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
@@ -41,21 +64,21 @@ public class DeleteTaskCommandParserTest {
     public void parse_validArgs_returnsDeleteTaskCommand() {
         // no leading and trailing whitespaces
         DeleteTaskCommand expectedDeleteTaskCommand =
-                new DeleteTaskCommand(new Name("alice"), Index.fromOneBased(1));
-        assertParseSuccess(parser, " n/alice ti/1", expectedDeleteTaskCommand);
+                new DeleteTaskCommand(new Name("Bob Choo"), Index.fromOneBased(1));
+        assertParseSuccess(parser, NAME_DESC_BOB + TASK_INDEX_DESC, expectedDeleteTaskCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " n/ alice \n ti/ 1 ", expectedDeleteTaskCommand);
+        assertParseSuccess(parser, " n/ Bob Choo  \n ti/ 1 ", expectedDeleteTaskCommand);
     }
 
     @Test
     public void parse_invalidNameArgs_throwsParseException() {
-        assertParseFailure(parser, " n/alice_! ti/1", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC + TASK_INDEX_DESC, Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_invalidIndexArgs_throwsParseException() {
-        assertParseFailure(parser, " n/alice ti/1!", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, NAME_DESC_BOB + INVALID_TASK_INDEX, ParserUtil.MESSAGE_INVALID_INDEX);
     }
 
 }

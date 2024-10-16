@@ -33,7 +33,7 @@ public class DeleteTaskCommand extends Command {
             + PREFIX_NAME + "John Doe "
             + PREFIX_TASK_INDEX + "1";
 
-    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
+    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s for %2$s by %3$s";
 
     private final Name targetName;
     private final Index targetIndex;
@@ -67,7 +67,10 @@ public class DeleteTaskCommand extends Command {
         Task taskToDelete = taskList.get(targetIndex.getZeroBased());
 
         taskList.remove(taskToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete.toString()));
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS,
+                taskToDelete.getTaskDescription(),
+                targetPerson.getName(),
+                taskToDelete.getTaskDeadline()));
     }
 
     @Override

@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -54,6 +55,7 @@ public class CommandTestUtil {
     public static final String VALID_TASK_DESCRIPTION_PROJECT = "Do project";
     public static final String VALID_TASK_DEADLINE = "2024-10-15";
     public static final String VALID_TASK_DEADLINE_AMY = "2024-01-01";
+    public static final String VALID_TASK_INDEX = "1";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -74,6 +76,7 @@ public class CommandTestUtil {
             " " + PREFIX_TASK_DESCRIPTION + VALID_TASK_DESCRIPTION_PROJECT;
     public static final String TASK_DEADLINE_DESC_AMY = " " + PREFIX_TASK_DEADLINE + VALID_TASK_DEADLINE_AMY;
     public static final String TASK_DEADLINE_DESC_BOB = " " + PREFIX_TASK_DEADLINE + VALID_TASK_DEADLINE;
+    public static final String TASK_INDEX_DESC = " " + PREFIX_TASK_INDEX + VALID_TASK_INDEX;
 
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -85,6 +88,7 @@ public class CommandTestUtil {
     public static final String INVALID_LEVEL_DESC = " " + PREFIX_LEVEL + "P7";
     public static final String INVALID_TASK_DESC = " " + PREFIX_TASK_DESCRIPTION + "   "; // blank task description
     public static final String INVALID_DEADLINE_DESC = " " + PREFIX_TASK_DEADLINE + "2024-14-23"; // invalid month
+    public static final String INVALID_TASK_INDEX = " " + PREFIX_TASK_INDEX + "1!";
 
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

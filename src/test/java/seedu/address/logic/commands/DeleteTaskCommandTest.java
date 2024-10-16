@@ -39,7 +39,7 @@ public class DeleteTaskCommandTest {
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(personToDelete.getName(), INDEX_FIRST_TASK);
 
         String expectedMessage = String.format(DeleteTaskCommand.MESSAGE_DELETE_TASK_SUCCESS,
-                testTask.toString());
+                testTask.getTaskDescription(), personToDelete.getName(), testTask.getTaskDeadline());
 
         // Test Person without the task for expected model
         ModelManager expectedModel = new ModelManager(getUniqueTypicalAddressBook(), new UserPrefs());;
