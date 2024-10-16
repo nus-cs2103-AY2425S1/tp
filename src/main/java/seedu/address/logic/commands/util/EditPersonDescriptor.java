@@ -7,7 +7,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -18,7 +17,7 @@ import seedu.address.model.tag.Tag;
  * Stores the details to edit the person with. Each non-empty field value will replace the
  * corresponding field value of the person.
  */
-public abstract class EditPersonDescriptor {
+public class EditPersonDescriptor {
     private Name name;
     private Phone phone;
     private Email email;
@@ -112,16 +111,5 @@ public abstract class EditPersonDescriptor {
                 && Objects.equals(email, otherEditPersonDescriptor.email)
                 && Objects.equals(address, otherEditPersonDescriptor.address)
                 && Objects.equals(tags, otherEditPersonDescriptor.tags);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
-                .toString();
     }
 }
