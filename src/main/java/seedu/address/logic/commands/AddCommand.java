@@ -28,6 +28,7 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_TELEGRAM + "TELEGRAM "
             + "[" + PREFIX_TAG + "TAG]... "
             + PREFIX_GITHUB + "GITHUB\n"
             + "Example: " + COMMAND_WORD + " "
@@ -56,12 +57,12 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.addPerson(toAdd);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
