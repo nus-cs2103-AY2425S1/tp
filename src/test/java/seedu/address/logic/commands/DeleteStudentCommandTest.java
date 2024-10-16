@@ -34,7 +34,7 @@ public class DeleteStudentCommandTest {
         DeleteStudentCommand deleteStudentCommand = new DeleteStudentCommand(studentNumber);
 
         String expectedMessage = String.format(DeleteStudentCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(studentToDelete));
+            Messages.format(studentToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(studentToDelete);
@@ -45,7 +45,7 @@ public class DeleteStudentCommandTest {
     @Test
     public void execute_invalidStudentNumber_throwsCommandException() {
         assertParseFailure(new DeleteStudentCommandParser(),
-                "B1234567", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentCommand.MESSAGE_USAGE));
+            "B1234567", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentCommand.MESSAGE_USAGE));
     }
 
 
