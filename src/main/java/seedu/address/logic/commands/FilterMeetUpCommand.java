@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.meetup.MeetUpContainsDate;
+import seedu.address.model.meetup.MeetUpContainsKeywordsPredicate;
 
 
 /**
@@ -19,9 +19,9 @@ public class FilterMeetUpCommand extends Command {
             + "Parameters: KEYWORD yyyy-mm-dd\n"
             + "Example: " + COMMAND_WORD + "2022-12-12";
 
-    private final MeetUpContainsDate predicate;
+    private final MeetUpContainsKeywordsPredicate predicate;
 
-    public FilterMeetUpCommand(MeetUpContainsDate predicate) {
+    public FilterMeetUpCommand(MeetUpContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 

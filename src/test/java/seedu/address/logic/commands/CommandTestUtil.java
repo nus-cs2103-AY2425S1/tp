@@ -16,7 +16,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -24,10 +23,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.model.meetup.MeetUpContainsDate;
 import seedu.address.model.meetup.MeetUpContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditMeetUpDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -47,10 +46,14 @@ public class CommandTestUtil {
     public static final String VALID_PERSON_TYPE_BOB = "buyer";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_MEETUP_NAME = "Jason Teo";
-    public static final String VALID_MEETUP_INFO = "Eat lunch with Jason Teo";
-    public static final String VALID_MEETUP_FROM = "2024-09-11 12:00";
-    public static final String VALID_MEETUP_TO = "2024-09-11 12:59";
+    public static final String VALID_MEETUP_JASON = "Jason Teo";
+    public static final String VALID_MEETUP_JESSY = "Jessy Yong";
+    public static final String VALID_MEETUP_INFO_JASON = "Eat lunch with Jason Teo";
+    public static final String VALID_MEETUP_INFO_JESSY = "Project work with Jessy";
+    public static final String VALID_MEETUP_FROM_JASON = "2024-09-11 12:00";
+    public static final String VALID_MEETUP_FROM_JESSY = "2024-10-12 17:30";
+    public static final String VALID_MEETUP_TO_JASON = "2024-09-11 12:59";
+    public static final String VALID_MEETUP_TO_JESSY = "2024-10-12 19:45";
 
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -65,7 +68,6 @@ public class CommandTestUtil {
     public static final String PERSON_TYPE_DESC_AMY = " " + PREFIX_PERSON_TYPE + VALID_PERSON_TYPE_AMY;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String INFO_DESC = " " + PREFIX_INFO + VALID_MEETUP_INFO;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -80,6 +82,8 @@ public class CommandTestUtil {
 
     public static final EditPersonCommand.EditPersonDescriptor DESC_AMY;
     public static final EditPersonCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditMeetUpCommand.EditMeetUpDescriptor DESC_JASON_MEETUP;
+    public static final EditMeetUpCommand.EditMeetUpDescriptor DESC_JESSY_MEETUP;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -88,6 +92,12 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_JASON_MEETUP = new EditMeetUpDescriptorBuilder().withName(VALID_MEETUP_JASON)
+                .withInfo(VALID_MEETUP_INFO_JASON).withFrom(VALID_MEETUP_FROM_JASON)
+                .withTo(VALID_MEETUP_TO_JASON).build();
+        DESC_JESSY_MEETUP = new EditMeetUpDescriptorBuilder().withName(VALID_MEETUP_JESSY)
+                .withInfo(VALID_MEETUP_INFO_JESSY).withFrom(VALID_MEETUP_FROM_JESSY)
+                .withTo(VALID_MEETUP_TO_JESSY).build();
     }
 
     /**
@@ -156,7 +166,7 @@ public class CommandTestUtil {
         final String[] splitName = meetUp.getName().meetUpFullName.split("\\s+");
         model.updateFilteredMeetUpList(new MeetUpContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredMeetUpList().size());
     }
 
 }
