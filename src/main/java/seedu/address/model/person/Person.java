@@ -28,6 +28,10 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Role> roles = new HashSet<>();
 
+    // Dependents
+    private final Set<Person> caregivers = new HashSet<>();
+    private final Set<Person> patients = new HashSet<>();
+
     /**
      * Every field must be present and not null.
      */
@@ -40,6 +44,19 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.roles.addAll(roles);
+    }
+
+    /**
+     * Constructor to make a deep copy of a Person object.
+     */
+    public Person(Person otherperson) {
+        this.name = otherperson.getName();
+        this.nric = otherperson.getNric();
+        this.phone = otherperson.getPhone();
+        this.email = otherperson.getEmail();
+        this.address = otherperson.getAddress();
+        this.tags.addAll(otherperson.getTags());
+        this.roles.addAll(otherperson.getRoles());
     }
 
     public Name getName() {
@@ -60,6 +77,45 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public boolean hasCaregiver(Person caregiver) {
+        return caregivers.contains(caregiver);
+    }
+
+    public boolean hasPatient(Person patient) {
+        return patients.contains(patient);
+    }
+
+    public void addCaregiver(Person caregiver) {
+        caregivers.add(caregiver);
+    }
+
+    public void addPatient(Person patient) {
+        patients.add(patient);
+    }
+
+    /**
+     * Removes the specified caregiver from the list of caregivers if the caregiver is present.
+     *
+     * @param caregiver The caregiver to be removed.
+     */
+    public void removeCaregiver(Person caregiver) {
+        if (this.hasCaregiver(caregiver)) {
+            caregivers.remove(caregiver);
+        }
+
+    }
+
+    /**
+     * Removes the specified patient from the list of patients if the patient is present.
+     *
+     * @param patient The patient to be removed.
+     */
+    public void removePatient(Person patient) {
+        if (this.hasPatient(patient)) {
+            patients.remove(patient);
+        }
     }
 
     /**

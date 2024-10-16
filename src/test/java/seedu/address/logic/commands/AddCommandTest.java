@@ -157,6 +157,26 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasLink(Person patient, Person caregiver) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addLink(Person patient, Person caregiver) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteLink(Person patient, Person caregiver) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getPerson(String nric) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -84,4 +84,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    boolean hasLink(Person patient, Person caregiver);
+
+    void addLink(Person patient, Person caregiver);
+
+    void deleteLink(Person patient, Person caregiver);
+
+    Person getPerson(String nric);
 }
