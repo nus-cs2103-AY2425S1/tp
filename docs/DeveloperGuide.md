@@ -372,11 +372,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: View all contacts**
+**Use case: List all contacts**
 
 **MSS**
 
-1.  User requests to view all contacts
+1.  User requests to list all contacts
 2.  AddressBook shows list of all contacts
 
     Use case ends.
