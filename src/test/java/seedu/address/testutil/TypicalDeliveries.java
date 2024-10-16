@@ -4,6 +4,9 @@ package seedu.address.testutil;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryList;
 
+/**
+ * A utility class containing a list of {@code Delivery} objects to be used in tests.
+ */
 public class TypicalDeliveries {
     public static final Delivery APPLES = new DeliveryBuilder().withCost("100").withDate("2024-10-16")
             .withEta("2024-12-31").withUndeclaredId().withItemName("apples").withStatus("not delivered")

@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
+
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryList;
-
-import java.util.ArrayList;
 
 /**
  * A utility class to help with building DeliveryList objects.

@@ -16,14 +16,14 @@ import seedu.address.model.person.Address;
  */
 public class DeliveryBuilder {
 
-    public static final String DEFAULT_COST="$100";
-    public static final String DEFAULT_DATE="2024-10-16";
-    public static final String DEFAULT_ETA="2103-12-31";
-    public static final String DEFAULT_ID="0";
-    public static final String DEFAULT_ITEM_NAME="Laptop";
-    public static final String DEFAULT_STATUS="not delivered";
-    public static final String DEFAULT_TIME="00:00:00";
-    public static final String DEFAULT_ADDRESS="123, Jurong West Ave 6, #08-111, S120300";
+    public static final String DEFAULT_COST = "$100";
+    public static final String DEFAULT_DATE = "2024-10-16";
+    public static final String DEFAULT_ETA = "2103-12-31";
+    public static final String DEFAULT_ID = "0";
+    public static final String DEFAULT_ITEM_NAME = "Laptop";
+    public static final String DEFAULT_STATUS = "not delivered";
+    public static final String DEFAULT_TIME = "00:00:00";
+    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111, S120300";
 
     private Cost cost;
     private Date date;
@@ -142,7 +142,7 @@ public class DeliveryBuilder {
      * @return The built Delivery object.
      */
     public Delivery build() {
-        return new Delivery(id, itemName, address, cost, date,time, eta, status);
+        return new Delivery(id, itemName, address, cost, date, time, eta, status);
     }
 
 }
