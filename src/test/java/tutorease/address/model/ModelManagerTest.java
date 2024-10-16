@@ -216,10 +216,8 @@ public class ModelManagerTest {
         assertTrue(lessonSchedule.hasLesson(lessonAlice));
         assertTrue(lessonSchedule.hasLesson(lessonBob));
 
-        // Only remove Bob's lesson
+        // Only remove Bob's lesson so only Alice's remain
         modelManager.deleteStudentLesson(bob);
-        
-        // Only Alice's lesson should remain
         assertEquals(1, lessonSchedule.getSize());
         assertTrue(lessonSchedule.hasLesson(lessonAlice));
         assertFalse(lessonSchedule.hasLesson(lessonBob));
