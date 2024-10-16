@@ -136,9 +136,9 @@ Examples:
 
 Finds persons who has or has not made payment.
 
-Format: `filterp [HASPAID]`
+Format: `filterp HASPAID`
 
-* When inputting `[HASPAID]` refers to either `true` or `false`, and it is case-sensitive. Refer to the example below for its usages.
+* When inputting `HASPAID` refers to either `true` or `false`, and it is case-sensitive. Refer to the example below for its usages.
 
 Examples:
 * `filterp true`
