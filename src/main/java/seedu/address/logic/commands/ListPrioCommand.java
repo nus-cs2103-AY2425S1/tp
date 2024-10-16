@@ -17,8 +17,8 @@ public class ListPrioCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all patients whose Priority "
             + "matches the given Priority level.\n"
-            + "Parameters: Priority\n"
-            + "Example: " + COMMAND_WORD + " HIGH";
+            + "Parameters: !/Priority\n"
+            + "Example: " + COMMAND_WORD + " !/HIGH\n";
 
     private final PriorityMatchesPredicate predicate;
 
@@ -44,6 +44,7 @@ public class ListPrioCommand extends Command {
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
+
 
     /**
      * Compares this ListPrioCommand with another object.
