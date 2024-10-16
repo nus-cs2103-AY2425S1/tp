@@ -27,6 +27,7 @@ public class GroupTest {
 
     @Test
     public void constructor_nullMembers_throwsNullPointerException() {
+
         assertThrows(NullPointerException.class, () -> new Group(groupName.toString(), null));
     }
 
