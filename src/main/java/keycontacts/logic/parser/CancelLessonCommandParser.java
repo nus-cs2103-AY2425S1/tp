@@ -42,7 +42,7 @@ public class CancelLessonCommandParser implements Parser<CancelLessonCommand> {
 
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Time startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
-        return new CancelLessonCommand(date, startTime, index);
+        return new CancelLessonCommand(index, date, startTime);
     }
 
 }

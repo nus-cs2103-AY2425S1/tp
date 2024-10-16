@@ -38,17 +38,18 @@ public class CancelLessonCommand extends Command {
     private final Index index;
 
     /**
+     * @param index Index of the student attached to the lesson to be cancelled
      * @param date Date of the lesson to be cancelled
      * @param startTime Start time of the lesson to be cancelled
      */
-    public CancelLessonCommand(Date date, Time startTime, Index index) {
+    public CancelLessonCommand(Index index, Date date, Time startTime) {
+        requireNonNull(index);
         requireNonNull(date);
         requireNonNull(startTime);
-        requireNonNull(index);
 
+        this.index = index;
         this.date = date;
         this.startTime = startTime;
-        this.index = index;
     }
 
     @Override

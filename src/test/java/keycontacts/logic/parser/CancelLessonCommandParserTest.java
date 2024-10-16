@@ -23,7 +23,7 @@ public class CancelLessonCommandParserTest {
 
     @Test
     public void parse_noMissingParts_success() {
-        CancelLessonCommand expectedCommand = new CancelLessonCommand(VALID_DATE, VALID_TIME, VALID_INDEX);
+        CancelLessonCommand expectedCommand = new CancelLessonCommand(VALID_INDEX, VALID_DATE, VALID_TIME);
         String userInput = VALID_INDEX.getOneBased() + " " + PREFIX_DATE + "15-10-2024 " + PREFIX_START_TIME + "10:30";
         assertParseSuccess(parser, userInput, expectedCommand);
     }

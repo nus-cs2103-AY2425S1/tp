@@ -33,25 +33,25 @@ public class CancelLessonCommandTest {
     @Test
     public void constructor_nullDate_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
-                new CancelLessonCommand(null, VALID_START_TIME, VALID_INDEX));
+                new CancelLessonCommand(VALID_INDEX, null, VALID_START_TIME));
     }
 
     @Test
     public void constructor_nullTime_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
-                new CancelLessonCommand(VALID_DATE, null, VALID_INDEX));
+                new CancelLessonCommand(VALID_INDEX, VALID_DATE, null));
     }
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
-                new CancelLessonCommand(VALID_DATE, VALID_START_TIME, null));
+                new CancelLessonCommand(VALID_INDEX, VALID_DATE, VALID_START_TIME));
     }
 
     @Test
     public void execute_indexOutOfBounds_failure() {
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
-        CancelLessonCommand command = new CancelLessonCommand(VALID_DATE, VALID_START_TIME, outOfBoundsIndex);
+        CancelLessonCommand command = new CancelLessonCommand(outOfBoundsIndex, VALID_DATE, VALID_START_TIME);
 
         assertThrows(CommandException.class,
                 Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, () -> command.execute(model));
@@ -59,7 +59,7 @@ public class CancelLessonCommandTest {
 
     @Test
     public void execute_lessonNotFound_throwsCommandException() {
-        CancelLessonCommand command = new CancelLessonCommand(new Date("01-01-2023"), new Time("14:00"), VALID_INDEX);
+        CancelLessonCommand command = new CancelLessonCommand(VALID_INDEX, new Date("01-01-2023"), new Time("14:00"));
 
         assertThrows(CommandException.class,
                 String.format(CancelLessonCommand.MESSAGE_LESSON_NOT_FOUND, Messages.format(ALICE)), () ->
@@ -68,14 +68,14 @@ public class CancelLessonCommandTest {
 
     @Test
     public void equals() {
-        CancelLessonCommand command1 = new CancelLessonCommand(VALID_DATE, VALID_START_TIME, VALID_INDEX);
-        CancelLessonCommand command2 = new CancelLessonCommand(VALID_DATE, VALID_START_TIME, VALID_INDEX);
+        CancelLessonCommand command1 = new CancelLessonCommand(VALID_INDEX, VALID_DATE, VALID_START_TIME);
+        CancelLessonCommand command2 = new CancelLessonCommand(VALID_INDEX, VALID_DATE, VALID_START_TIME);
         CancelLessonCommand differentDateAndTimeCommand =
-                new CancelLessonCommand(new Date("01-01-2023"), new Time("14:00"), VALID_INDEX);
+                new CancelLessonCommand(VALID_INDEX, new Date("01-01-2023"), new Time("14:00"));
         CancelLessonCommand differentTimeCommand =
-                new CancelLessonCommand(new Date("06-07-2022"), new Time("14:00"), VALID_INDEX);
+                new CancelLessonCommand(VALID_INDEX, new Date("06-07-2022"), new Time("14:00"));
         CancelLessonCommand differentDateCommand =
-                new CancelLessonCommand(new Date("01-01-2023"), new Time("12:00"), VALID_INDEX);
+                new CancelLessonCommand(VALID_INDEX, new Date("01-01-2023"), new Time("12:00"));
 
         assertEquals(command1, command1);
         assertEquals(command1, command2);
@@ -88,7 +88,7 @@ public class CancelLessonCommandTest {
 
     @Test
     public void toStringMethod() {
-        CancelLessonCommand cancelLessonCommand = new CancelLessonCommand(VALID_DATE, VALID_START_TIME, VALID_INDEX);
+        CancelLessonCommand cancelLessonCommand = new CancelLessonCommand(VALID_INDEX, VALID_DATE, VALID_START_TIME);
         String expected = CancelLessonCommand.class.getCanonicalName() + "{date=" + VALID_DATE + ", "
                 + "startTime=" + VALID_START_TIME + ", index=" + VALID_INDEX + "}";
         assertEquals(expected, cancelLessonCommand.toString());
