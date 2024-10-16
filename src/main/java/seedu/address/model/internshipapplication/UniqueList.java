@@ -9,8 +9,8 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.HireMeComparable;
-import seedu.address.model.internshipapplication.exceptions.DuplicatePersonException;
-import seedu.address.model.internshipapplication.exceptions.PersonNotFoundException;
+import seedu.address.model.internshipapplication.exceptions.DuplicateInternshipException;
+import seedu.address.model.internshipapplication.exceptions.InternshipNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -44,7 +44,7 @@ public class UniqueList<T extends HireMeComparable<T>> implements Iterable<T> {
     public void add(T toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateInternshipException();
         }
         internalList.add(toAdd);
     }
@@ -59,11 +59,11 @@ public class UniqueList<T extends HireMeComparable<T>> implements Iterable<T> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new InternshipNotFoundException();
         }
 
         if (!target.isSame(edited) && contains(edited)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateInternshipException();
         }
 
         internalList.set(index, edited);
@@ -76,7 +76,7 @@ public class UniqueList<T extends HireMeComparable<T>> implements Iterable<T> {
     public void remove(T toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new InternshipNotFoundException();
         }
     }
 
@@ -92,7 +92,7 @@ public class UniqueList<T extends HireMeComparable<T>> implements Iterable<T> {
     public void setItems(List<T> items) {
         requireAllNonNull(items);
         if (!areUnique(items)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateInternshipException();
         }
 
         internalList.setAll(items);

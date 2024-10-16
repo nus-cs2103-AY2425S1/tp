@@ -22,7 +22,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.internshipapplication.InternshipApplication;
 import seedu.address.model.internshipapplication.Person;
-import seedu.address.model.internshipapplication.exceptions.DuplicatePersonException;
+import seedu.address.model.internshipapplication.exceptions.DuplicateInternshipException;
 import seedu.address.testutil.InternshipApplicationBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -54,7 +54,8 @@ public class AddressBookTest {
         List<InternshipApplication> newApplications = Arrays.asList(APPLE, editedApple);
         AddressBookStub newData = new AddressBookStub(newApplications);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateInternshipException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateInternshipException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
