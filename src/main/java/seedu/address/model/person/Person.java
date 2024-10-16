@@ -47,6 +47,13 @@ public class Person {
         return name;
     }
 
+    /**
+     * Returns true if the person's name contains the keyword.
+     */
+    public boolean nameContainsKeyword(String keyword) {
+        return name.fullName.toLowerCase().contains(keyword.toLowerCase());
+    }
+
     public Phone getPhone() {
         return phone;
     }
@@ -65,6 +72,13 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns true if the person has the specified tag.
+     */
+    public boolean hasTag(String tag) {
+        return tags.contains(new Tag(tag));
     }
 
     /**
