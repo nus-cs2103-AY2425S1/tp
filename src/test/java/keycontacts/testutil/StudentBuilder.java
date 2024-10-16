@@ -91,7 +91,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, phone, address, gradeLevel, pianoPieces, null);
+        return new Student(name, phone, address, gradeLevel, pianoPieces, null, new HashSet<>());
     }
 
 }

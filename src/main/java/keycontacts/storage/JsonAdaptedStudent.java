@@ -31,7 +31,7 @@ class JsonAdaptedStudent {
     private final String address;
     private final String gradeLevel;
     private final List<JsonAdaptedPianoPiece> pianoPieces = new ArrayList<>();
-    private final List<MakeupLesson> makeupLessons = new ArrayList<>();
+    private final List<JsonAdaptedMakeupLesson> makeupLessons = new ArrayList<>();
     private final JsonAdaptedRegularLesson regularLesson;
 
     /**
@@ -42,7 +42,7 @@ class JsonAdaptedStudent {
                               @JsonProperty("address") String address, @JsonProperty("gradeLevel") String gradeLevel,
                               @JsonProperty("pianoPieces") List<JsonAdaptedPianoPiece> pianoPieces,
                               @JsonProperty("regularLesson") JsonAdaptedRegularLesson regularLesson,
-                              @JsonProperty("makeupLessons") List<MakeupLesson> makeupLessons) {
+                              @JsonProperty("makeupLessons") List<JsonAdaptedMakeupLesson> makeupLessons) {
         this.name = name;
         this.phone = phone;
         this.address = address;
@@ -68,7 +68,9 @@ class JsonAdaptedStudent {
                 .map(JsonAdaptedPianoPiece::new)
                 .collect(Collectors.toList()));
         regularLesson = source.getRegularLesson().map(JsonAdaptedRegularLesson::new).orElse(null);
-        makeupLessons.addAll(source.getMakeupLessons());
+        makeupLessons.addAll(source.getMakeupLessons().stream()
+                .map(JsonAdaptedMakeupLesson::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -80,6 +82,11 @@ class JsonAdaptedStudent {
         final List<PianoPiece> studentPianoPieces = new ArrayList<>();
         for (JsonAdaptedPianoPiece pianoPiece : pianoPieces) {
             studentPianoPieces.add(pianoPiece.toModelType());
+        }
+
+        final List<MakeupLesson> studentMakeupLessons = new ArrayList<>();
+        for (JsonAdaptedMakeupLesson makeupLesson : makeupLessons) {
+            studentMakeupLessons.add(makeupLesson.toModelType());
         }
 
         if (name == null) {
@@ -123,7 +130,7 @@ class JsonAdaptedStudent {
         } else {
             modelRegularLesson = null;
         }
-        final Set<MakeupLesson> modelMakeupLessons = new HashSet<>();
+        final Set<MakeupLesson> modelMakeupLessons = new HashSet<>(studentMakeupLessons);
 
         return new Student(modelName, modelPhone, modelAddress, modelGradeLevel, modelPianoPieces,
             modelRegularLesson, modelMakeupLessons);

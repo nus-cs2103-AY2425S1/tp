@@ -30,7 +30,7 @@ public class MakeupLessonCommand extends Command {
             + PREFIX_START_TIME + "START_TIME "
             + PREFIX_END_TIME + "END_TIME\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DATE + "06-07-2022 "
+            + PREFIX_DATE + "2025-07-01 "
             + PREFIX_START_TIME + "12:00 "
             + PREFIX_END_TIME + "13:00";
 

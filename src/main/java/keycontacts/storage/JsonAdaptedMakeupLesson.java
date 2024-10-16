@@ -18,7 +18,18 @@ public class JsonAdaptedMakeupLesson {
     private final String endTime;
 
     /**
-     * Constructs a {@code JsonAdaptedMakeupLesson} with the given makeup lesson details.
+     * Constructs a {@code JsonAdaptedMakeupLesson} with no arguments. This is used by Jackson to create a new
+     * {@code JsonAdaptedMakeupLesson} object.
+     */
+    public JsonAdaptedMakeupLesson() {
+        this.lessonDate = "";
+        this.startTime = "";
+        this.endTime = "";
+    }
+
+    /**
+     * Constructs a {@code JsonAdaptedMakeupLesson} with the given makeup lesson
+     * details.
      */
     public JsonAdaptedMakeupLesson(String lessonDate, String startTime, String endTime) {
         this.lessonDate = lessonDate;
@@ -36,14 +47,16 @@ public class JsonAdaptedMakeupLesson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted makeup lesson object into the model's {@code MakeupLesson} object.
+     * Converts this Jackson-friendly adapted makeup lesson object into the model's
+     * {@code MakeupLesson} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted makeup lesson.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted makeup lesson.
      */
     public MakeupLesson toModelType() throws IllegalValueException {
         if (lessonDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                LocalDate.class.getSimpleName()));
+                    LocalDate.class.getSimpleName()));
         }
         // Check if the date is valid by using LocalDate.parse
         try {
