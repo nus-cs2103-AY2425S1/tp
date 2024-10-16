@@ -2,6 +2,8 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -21,8 +23,11 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.goodsReceipt.GoodsReceipt;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.CsvGoodsStorage;
+import seedu.address.storage.GoodsStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
@@ -58,7 +63,9 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        GoodsStorage goodsStorage = new CsvGoodsStorage(userPrefs.getGoodsFilePath());
+        
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, goodsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -90,7 +97,23 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        Optional<List<GoodsReceipt>> goodsReceiptList;
+        List<GoodsReceipt> initialGoodsData;
+        try {
+            goodsReceiptList = storage.readGoods();
+            if (!goodsReceiptList.isPresent()) {
+                logger.info("Creating a new data file " + storage.getGoodsFilePath()
+                        + " populated with no Goods.");
+            }
+            // TODO: Add Sample Data for Goods
+            initialGoodsData = goodsReceiptList.orElseGet(LinkedList::new);
+        } catch (DataLoadingException e) {
+            logger.warning("Creating a new data file " + storage.getGoodsFilePath()
+                    + " populated with no Goods.");
+            initialGoodsData = new LinkedList<>();
+        }
+
+        return new ModelManager(initialData, userPrefs, initialGoodsData);
     }
 
     private void initLogging(Config config) {
