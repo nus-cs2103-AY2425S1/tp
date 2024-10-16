@@ -18,7 +18,6 @@ public class ExportCommand extends Command {
             + ": Exports the address book in CSV format. "
             + "Example: " + COMMAND_WORD + " "
             + "format/csv";
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Export command not implemented yet";
     private final String format;
 
     /**
