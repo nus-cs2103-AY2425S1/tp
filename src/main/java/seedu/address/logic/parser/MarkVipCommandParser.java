@@ -10,7 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new MarkVipCommand.
  */
-public class MarkVipCommandParser {
+public class MarkVipCommandParser implements Parser<MarkVipCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the MarkVipCommand

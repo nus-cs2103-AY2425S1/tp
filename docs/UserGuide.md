@@ -176,7 +176,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 Marks the specified person from the address book as a VIP or removes said label.
 
-Format: `vip INDEX v/IS_VIP`
+Format: `vip INDEX IS_VIP`
 
 * Affects the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
@@ -184,8 +184,8 @@ Format: `vip INDEX v/IS_VIP`
 * IS_VIP should either be `true` or `false`, corresponding to whether you intend to mark the target as a VIP or remove such a mark.
 
 Examples:
-* `list` followed by `vip 2 v/true` marks the 2nd person in the address book as a VIP.
-* `find Betsy` followed by `vip 1 v/false` removes VIP status from the 1st person in the results of the `find` command.
+* `list` followed by `vip 2 true` marks the 2nd person in the address book as a VIP.
+* `find Betsy` followed by `vip 1 false` removes VIP status from the 1st person in the results of the `find` command.
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -217,5 +217,5 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
-**Vip**    | `vip INDEX v/IS_VIP`<br> e.g., `vip 3 v/true`
+**Vip**    | `vip INDEX IS_VIP`<br> e.g., `vip 3 true`
 **Help**   | `help`

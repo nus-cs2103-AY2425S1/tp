@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
@@ -27,7 +26,7 @@ public class MarkVipCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks or unmarks the person identified by the index "
             + "number used in the displayed person list as a VIP.\n"
-            + "Parameters: INDEX (must be a positive integer) v/IS_VIP (must be \"true\" or \"false\")\n"
+            + "Parameters: INDEX (must be a positive integer) IS_VIP (must be \"true\" or \"false\")\n"
             + "Example: " + COMMAND_WORD + " 1 true";
 
     public static final String MESSAGE_VIP_PERSON_SUCCESS = "Person marked as a VIP: %1$s";
