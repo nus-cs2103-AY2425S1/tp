@@ -24,6 +24,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Guest;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rsvp;
 import seedu.address.model.tag.Tag;
@@ -88,16 +89,13 @@ public class EditGuestCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Guest> lastShownList = model.getFilteredGuestList().stream()
-                .filter(person -> person instanceof Guest)
-                .map(person -> (Guest) person)
-                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+        List<Person> lastShownList = model.getFilteredGuestList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Guest guestToEdit = lastShownList.get(index.getZeroBased());
+        Guest guestToEdit = (Guest) lastShownList.get(index.getZeroBased());
         Guest editedGuest = createEditedGuest(guestToEdit, editGuestDescriptor);
 
         if (!guestToEdit.isSamePerson(editedGuest) && model.hasPerson(editedGuest)) {
