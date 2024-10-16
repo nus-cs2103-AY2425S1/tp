@@ -30,7 +30,8 @@ public class JsonAdaptedStudentTest {
     private static final List<JsonAdaptedPianoPiece> VALID_PIANO_PIECES = BENSON.getPianoPieces().stream()
             .map(JsonAdaptedPianoPiece::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedCancelledLesson> VALID_CANCELLED_LESSONS = BENSON.getCancelledLessons().stream()
+    private static final List<JsonAdaptedCancelledLesson> VALID_CANCELLED_LESSONS = BENSON.getCancelledLessons()
+            .stream()
             .map(JsonAdaptedCancelledLesson::new)
             .toList();
 

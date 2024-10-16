@@ -13,10 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import keycontacts.logic.commands.CancelLessonCommand;
 import keycontacts.model.StudentDirectory;
-import keycontacts.model.lesson.CancelledLesson;
-import keycontacts.model.lesson.Date;
 import keycontacts.model.student.Student;
 
 /**
