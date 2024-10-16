@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -37,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private EventListPanel eventListPanel;
+    private HostServices hostServices;
 
 
     @FXML
@@ -57,7 +59,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public MainWindow(Stage primaryStage, Logic logic, HostServices hostServices) {
         super(FXML, primaryStage);
 
         primaryStage.setTitle("VolunSync");
@@ -65,6 +67,7 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.hostServices = hostServices;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -151,11 +154,13 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
-            helpWindow.focus();
-        }
+        //@@ author ytw - adapted
+        // method to open a web browser from javafx app was sourced from the following source and adapted to be used
+        // in the project.
+        // source:
+        // https://forums.oracle.com/ords/apexds/post/opening-an-external-web-browser-from-a-javafx-application-4429
+        hostServices.showDocument(HelpWindow.USERGUIDE_URL);
+        //@@ author
     }
 
     void show() {
