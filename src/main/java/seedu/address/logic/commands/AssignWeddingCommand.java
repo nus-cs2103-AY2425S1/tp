@@ -32,6 +32,7 @@ public class AssignWeddingCommand extends Command {
 
     private final Index index;
     private final HashSet<Wedding> weddingsToAdd;
+    private boolean force = false;
 
     /**
      * Constructs a {@code AssignWedding} Command to add weddings to a person.
@@ -41,6 +42,12 @@ public class AssignWeddingCommand extends Command {
     public AssignWeddingCommand(Index index, HashSet<Wedding> weddingsToAdd) {
         this.index = index;
         this.weddingsToAdd = weddingsToAdd;
+    }
+
+    public AssignWeddingCommand(Index index, HashSet<Wedding> weddingsToAdd, boolean force) {
+        this.index = index;
+        this.weddingsToAdd = weddingsToAdd;
+        this.force = force;
     }
 
     /**
@@ -68,7 +75,12 @@ public class AssignWeddingCommand extends Command {
 
         for (Wedding wedding : weddingsToAdd) {
             if (!model.hasWedding(wedding)) {
-                throw new CommandException(MESSAGE_WEDDING_NOT_FOUND);
+                if (this.force) {
+                    CreateWeddingCommand newWedding = new CreateWeddingCommand(wedding);
+                    newWedding.execute(model);
+                } else {
+                    throw new CommandException(MESSAGE_WEDDING_NOT_FOUND);
+                }
             }
         }
 
