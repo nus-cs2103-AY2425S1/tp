@@ -2,7 +2,7 @@ package seedu.address.ui;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -15,11 +15,13 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
+    private static final double MAX_HEIGHT = 200;
+    private static final double INITIAL_HEIGHT = 40;
 
     private final CommandExecutor commandExecutor;
 
     @FXML
-    private TextField commandTextField;
+    private TextArea commandTextArea;
 
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
@@ -28,7 +30,10 @@ public class CommandBox extends UiPart<Region> {
         super(FXML);
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
-        commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        commandTextArea.textProperty().addListener((unused1, unused2, unused3) -> {
+            setStyleToDefault();
+        });
+        initaliseEventHandler();
     }
 
     /**
@@ -36,14 +41,13 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleCommandEntered() {
-        String commandText = commandTextField.getText();
+        String commandText = commandTextArea.getText();
         if (commandText.equals("")) {
             return;
         }
-
         try {
             commandExecutor.execute(commandText);
-            commandTextField.setText("");
+            commandTextArea.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
@@ -53,19 +57,17 @@ public class CommandBox extends UiPart<Region> {
      * Sets the command box style to use the default style.
      */
     private void setStyleToDefault() {
-        commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+        commandTextArea.getStyleClass().remove(ERROR_STYLE_CLASS);
     }
 
     /**
      * Sets the command box style to indicate a failed command.
      */
     private void setStyleToIndicateCommandFailure() {
-        ObservableList<String> styleClass = commandTextField.getStyleClass();
-
+        ObservableList<String> styleClass = commandTextArea.getStyleClass();
         if (styleClass.contains(ERROR_STYLE_CLASS)) {
             return;
         }
-
         styleClass.add(ERROR_STYLE_CLASS);
     }
 
@@ -82,4 +84,25 @@ public class CommandBox extends UiPart<Region> {
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
 
+    /**
+     * Initialises the Event Handler for the input of commands.
+     */
+    private void initaliseEventHandler() {
+        commandTextArea.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+                case ENTER:
+                    handleCommandEntered();
+                    event.consume();
+                    break;
+                default:
+                    break;
+            }
+        });
+    }
+    /**
+     * Adjusts the height of the TextArea based on its content.
+     */
+    private void adjustTextAreaHeight() {
+        // To be implemented
+    }
 }
