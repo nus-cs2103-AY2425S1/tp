@@ -576,13 +576,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Finding a person 
    1. Test case: `find all john`<br>
-      Expected: Number of people listed shown in the status message. Displays the list of potential hires with any keywords.
+      Expected: Number of people listed found shown in the status message. Displays the list of people found.
 
    2. Test case: `find ph john`<br>
-            Expected: Number of potential hires listed shown in the status message. Displays the list of potential hires with any keywords.
+            Expected: Number of potential hires listed found shown in the status message. Displays the list of potential hires found.
    
    3. Test case: `find e john`<br>
-            Expected: Number of employees listed shown in the status message. Displays the list of employees.
+            Expected: Number of employees listed shown in the status message. Displays the list of employees found.
 
    4. Test case: `Find all john`, `Find e john`, `Find ph john`<br>
             Expected: Unknown command. Error is due to capitalisation of `Find`. Capitalisation of command matters.
