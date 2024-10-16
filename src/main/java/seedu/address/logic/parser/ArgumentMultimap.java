@@ -77,7 +77,7 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Returns the number of unique prefixes found.
+     * Returns the number of unique Prefixes found minus the Preamble.
      */
     public int numberOfUniquePrefixes() {
         return this.argMultimap.size() - 1;
