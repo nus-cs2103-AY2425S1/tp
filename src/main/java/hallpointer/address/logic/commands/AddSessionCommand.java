@@ -68,10 +68,10 @@ public class AddSessionCommand extends Command {
             }
             Member member = lastShownList.get(index.getZeroBased());
             member.addSession(toAdd);
+            model.setMember(member, member);
         }
 
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
-
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 toAdd.getSessionName().toString(),
                 toAdd.getDate().toString(),
