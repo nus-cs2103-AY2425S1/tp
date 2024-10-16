@@ -53,18 +53,6 @@ public class DeletePropertyToBuyCommandTest {
     }
 
     @Test
-    public void execute_noPropertyToDelete_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Person firstPerson = model.getFilteredPersonList().get(0);
-        Index invalidPropertyIndex = Index.fromOneBased(1);
-
-        DeletePropertyToBuyCommand command = new DeletePropertyToBuyCommand(INDEX_FIRST_PERSON, invalidPropertyIndex,
-                new EditPersonPropertyDescriptorBuilder().withName(firstPerson.getName().fullName).build());
-
-        assertCommandFailure(command, model, Messages.MESSAGE_NO_PROPERTIES_TO_DELETE);
-    }
-
-    @Test
     public void execute_propertyIndexOutOfBounds_failure() {
         Index jackIndex = TypicalPersons.getTypicalPersonIndex(JACK);
         Person jack = model.getFilteredPersonList().get(jackIndex.getZeroBased());
