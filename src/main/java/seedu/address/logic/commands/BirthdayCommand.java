@@ -15,7 +15,7 @@ import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Person;
 
 /**
- * Changes the birthday of an existing person in the address book.
+ * Edits the birthday of an existing person in the address book.
  */
 public class BirthdayCommand extends Command {
 

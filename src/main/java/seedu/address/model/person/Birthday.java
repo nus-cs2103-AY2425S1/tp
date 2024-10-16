@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Person's birthday in the address book.
- * Guarantees: immutable; is always valid
+ * Guarantees: immutable; is valid as declared in {@link #isValidBirthday(String)}
  */
 public class Birthday {
 
@@ -48,10 +48,18 @@ public class Birthday {
         }
     }
 
+    /**
+     * Returns a {@code Birthday} object of the passed {@code birthday}, which throws {@link IllegalArgumentException}
+     * if the birthday format is invalid.
+     * @param birthday of the Person
+     */
     public static Birthday of(String birthday) {
         return new Birthday(birthday);
     }
 
+    /**
+     * Returns the value stored in the Birthday object.
+     */
     public LocalDate getValue() {
         return value;
     }
