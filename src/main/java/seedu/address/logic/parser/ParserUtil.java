@@ -136,7 +136,7 @@ public class ParserUtil {
     public static Map<Network, Set<PublicAddress>> parsePublicAddresses(Collection<String> publicAddresses)
             throws ParseException {
         requireNonNull(publicAddresses);
-        final Map<Network, Set<PublicAddress>> publicAddressesMap = new HashMap<>();
+        Map<Network, Set<PublicAddress>> publicAddressesMap = new HashMap<>();
         for (String publicAddress : publicAddresses) {
 
             // TODO: Implement tokenizer in a separate file

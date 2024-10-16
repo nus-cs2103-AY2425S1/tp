@@ -64,6 +64,12 @@ public class Person {
         return publicAddresses.getOrDefault(network, new HashSet<>());
     }
 
+    public void setPublicAddressesByNetwork(Network network, HashSet<PublicAddress> addresses) {
+        //TODO Temporary Fix on unknown issue
+        this.publicAddresses = new HashMap<>();
+    }
+
+
     /**
      * Gets the current Public address map
      * Should be replaced with a better method in the future
