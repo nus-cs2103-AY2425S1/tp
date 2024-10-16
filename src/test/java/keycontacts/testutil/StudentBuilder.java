@@ -109,7 +109,7 @@ public class StudentBuilder {
     }
 
     /**
-     * Parses the {@code pianoPieces} into a {@code Set<PianoPiece>}
+     * Parses the {@code cancelledLessons} into a {@code Set<CancelledLesson>}
      * and set it to the {@code Student} that we are building.
      */
     public StudentBuilder withCancelledLessons(String ... cancelledLessons) {
