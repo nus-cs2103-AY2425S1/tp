@@ -50,7 +50,7 @@ public class AssignCommand extends Command {
 
         AssignCommand otherCommand = (AssignCommand) other;
         return vendorIndex.equals(otherCommand.vendorIndex)
-            && eventIndex.equals(otherCommand.eventIndex);
+                && eventIndex.equals(otherCommand.eventIndex);
     }
 
     @Override
