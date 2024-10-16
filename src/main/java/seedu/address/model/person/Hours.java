@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents the number of hours a volunteer has contributed.
  * Guarantees: immutable; is valid as declared in {@link #isValidHours(String)}
  */
-public class Hours {
+public class Hours implements Comparable<Hours> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Hour numbers should be an non-negative integer number.";
@@ -41,6 +41,11 @@ public class Hours {
     }
 
     @Override
+    public int compareTo(Hours hours) {
+        return this.hours.compareTo(hours.hours);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -58,5 +63,10 @@ public class Hours {
     @Override
     public int hashCode() {
         return hours.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return hours.toString();
     }
 }
