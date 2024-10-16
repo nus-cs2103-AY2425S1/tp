@@ -30,7 +30,7 @@ public class MarkAttendanceCommand extends Command {
             + COMMAND_WORD + " 1" + PREFIX_ATTENDANCE + "present \n"
             + COMMAND_WORD + " 1" + PREFIX_ATTENDANCE + "absent \n";
 
-    public static final String MESSAGE_MARK_ATTENDANCE_SUCCESS = "Person: %1$s marked as present on %2$s";
+    public static final String MESSAGE_MARK_ATTENDANCE_SUCCESS = "Person: %1$s marked as %2$s on %3$s";
 
     private final Index targetIndex;
     private final LocalDateTime classDate;
