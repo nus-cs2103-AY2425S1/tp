@@ -147,8 +147,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         associations.add(pair);
     }
 
+    /**
+     * Unassigns the given {@code vendor} in the list from {@code event}.
+     * {@code vendor} and {@code event} must exist in the address book.
+     */
     void unassignVendorFromEvent(Vendor vendor, Event event) {
-        // TODO implement this
+        requireAllNonNull(vendor, event);
+        Pair<Vendor, Event> pair = new Pair<>(vendor, event);
+        associations.remove(pair);
     }
 
     /**
