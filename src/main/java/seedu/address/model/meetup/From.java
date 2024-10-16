@@ -67,4 +67,11 @@ public class From {
     public int hashCode() {
         return value.hashCode();
     }
+
+    /**
+     * Getter method for LocalDateTime value.
+     */
+    public LocalDateTime getDateTime() {
+        return value;
+    }
 }

@@ -44,6 +44,7 @@ public class EditMeetUpCommand extends Command {
 
     public static final String MESSAGE_EDIT_MEETUP_SUCCESS = "Edited Meetup: %1$s";
     public static final String MESSAGE_MEETUP_NOT_EDITED = "Please check for missing fields or invalid format.";
+    public static final String MESSAGE_DUPLICATE_MEETUP = "This meetup already exists in the meetup list.";
 
     private final Index targetIndex;
     private final EditMeetUpCommand.EditMeetUpDescriptor editMeetUpDescriptor;
@@ -70,6 +71,10 @@ public class EditMeetUpCommand extends Command {
 
         MeetUp meetUpToEdit = lastShownList.get(targetIndex.getZeroBased());
         MeetUp editedMeetUp = createEditedMeetUp(meetUpToEdit, editMeetUpDescriptor);
+
+        if (!meetUpToEdit.isSameMeetUp(editedMeetUp) && model.hasMeetUp(editedMeetUp)) {
+            throw new CommandException(MESSAGE_DUPLICATE_MEETUP);
+        }
 
         model.setMeetUp(meetUpToEdit, editedMeetUp);
         model.updateFilteredMeetUpList(PREDICATE_SHOW_ALL_MEETUPS);
