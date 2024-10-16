@@ -39,6 +39,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer
 * Responsibilities: DevOps
 
+
 ### Ivan Jerrick Koh
 
 <img src="images/kohkakohla.png" width="200px">
@@ -58,3 +59,5 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Developer
 * Responsibilities: UI, testing
+* Responsibilities: UI
+>>>>>>> c67e80a4a4187592fbab8364a21aaef8b3b15b6a
