@@ -39,6 +39,13 @@ public class AddProductCommand extends Command {
         }
 
         model.addProduct(toAdd);
+
+        if (toAdd.getSupplierName() != null) { // TODO: Inform user that AssignProduct gets called here too
+            AssignProductCommand assignProductCommand = new AssignProductCommand(toAdd.getName(),
+                toAdd.getSupplierName());
+            assignProductCommand.execute(model);
+        }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
@@ -53,8 +60,8 @@ public class AddProductCommand extends Command {
             return false;
         }
 
-        AddProductCommand otherAddCommand = (AddProductCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        AddProductCommand otherAddProductCommand = (AddProductCommand) other;
+        return toAdd.equals(otherAddProductCommand.toAdd);
     }
 
     @Override
