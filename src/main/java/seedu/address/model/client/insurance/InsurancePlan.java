@@ -2,6 +2,7 @@ package seedu.address.model.client.insurance;
 
 import java.util.ArrayList;
 
+import seedu.address.model.client.exceptions.ClaimException;
 import seedu.address.model.client.insurance.claim.Claim;
 
 /**
@@ -10,6 +11,8 @@ import seedu.address.model.client.insurance.claim.Claim;
  * This class is meant to be extended by specific insurance plan implementations.
  */
 public abstract class InsurancePlan {
+    public static final String CLAIM_NOT_DETECTED_MESSAGE = "This claim with id: %1$s "
+            + "has not been added to this insurance plan of the client: %2$s";
 
     /**
      * Unique identifier for the insurance plan, to be determined in each class separately.
@@ -29,6 +32,31 @@ public abstract class InsurancePlan {
      */
     public int getInsurancePlanId() {
         return insurancePlanId;
+    }
+
+    /**
+     * Retrieves a claim from the list of claims based on the given claim ID.
+     *
+     * @param claimId The ID of the claim to retrieve.
+     * @return The {@code Claim} object that matches the given claim ID.
+     * @throws ClaimException if no claim with the given ID is found within the insurance plan.
+     */
+    public Claim getClaim(String claimId) throws ClaimException {
+        for (Claim c : claims) {
+            if (c.getClaimId().equals(claimId)) {
+                return c;
+            }
+        }
+        throw new ClaimException(CLAIM_NOT_DETECTED_MESSAGE);
+    }
+
+    /**
+     * Removes a claim from the insurance plan's list of claims.
+     *
+     * @param claim The claim to be removed.
+     */
+    public void removeClaim(Claim claim) {
+        claims.remove(claim);
     }
 
     /**

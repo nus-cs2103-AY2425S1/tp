@@ -65,6 +65,24 @@ public class InsurancePlansManager {
         return this.insurancePlans;
     }
 
+
+    /**
+     * Retrieves an insurance plan from the client's list of insurance plans based on the given insurance plan ID.
+     *
+     * @param insuranceId The ID of the insurance plan to retrieve.
+     * @return The {@code InsurancePlan} object that matches the given insurance plan ID.
+     * @throws InsurancePlanException if no insurance plan with the given ID is found within
+     *                                the client's list of insurance plans.
+     */
+    public InsurancePlan getInsurancePlan(int insuranceId) throws InsurancePlanException {
+        for (InsurancePlan plan : insurancePlans) {
+            if (plan.getInsurancePlanId() == insuranceId) {
+                return plan;
+            }
+        }
+        throw new InsurancePlanException(PLAN_NOT_DETECTED_MESSAGE);
+    }
+
     /**
      * Adds a new insurance plan to the client's list of insurance plans.
      *
@@ -130,6 +148,21 @@ public class InsurancePlansManager {
             if (p.equals(insurancePlan)) {
                 p.claims.add(claim);
                 this.claimIds.add(claim.getClaimId());
+            }
+        }
+    }
+
+    /**
+     * Deletes a claim from the insurance plan of the client.
+     *
+     * @param insurancePlan The insurance plan the claim is to be deleted from.
+     * @param claim         The claim that is to be deleted from the insurance plan.
+     */
+    public void deleteClaimFromInsurancePlan(InsurancePlan insurancePlan, Claim claim) {
+        for (InsurancePlan p : insurancePlans) {
+            if (p.equals(insurancePlan)) {
+                p.removeClaim(claim);
+                this.claimIds.remove(claim.getClaimId());
             }
         }
     }

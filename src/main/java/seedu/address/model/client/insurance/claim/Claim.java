@@ -94,6 +94,30 @@ public class Claim {
     }
 
     /**
+     * Compares this claim to another object for equality.
+     * Two claims are considered equal if they are the same object
+     * or if they are both instances of {@code Claim} and share the same claim ID, claim status and claim amount.
+     *
+     * @param other the object to be compared for equality
+     * @return {@code true} if the specified object is equal to this claim, {@code false} otherwise
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Claim c)) {
+            return false;
+        }
+
+        return claimId.equals(c.getClaimId())
+                && isOpen == c.getClaimStatus()
+                && claimAmount == c.getClaimAmount();
+    }
+
+    /**
      * Returns a string representation of the claim object.
      *
      * This method overrides the default `toString` method to provide a formatted string
