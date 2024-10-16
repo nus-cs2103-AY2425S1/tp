@@ -115,9 +115,28 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons: `find`
 
-Finds persons whose names contain any of the given keywords.
+`find` allows you to find patient records by NRIC or name.
+
+
+#### Finding a single record by its NRIC
+Format: `find NRIC`
+* The search is case-insensitive. e.g `s1234567z` will match `S1234567Z`
+* The NRIC must start with 'S', 'T', 'F','G' or 'M', have 7 digits, and end with a letter.
+* In a single command, only one record with the given NRIC can be found. e.g. `find S1234567Z T7654321Z` does not work as it 
+attempts to find 2 records containing the given NRICs.
+* Only full NRICs will be matched e.g. `S12345` will not match `S1234567Z`
+
+Example:
+* `find S1234567Z` returns the patient record whose NRIC is `S1234567Z`
+
+  ![result for 'find S1234567Z'](./images/findS1234567Zresult.png)
+
+
+#### Finding multiple records by their names
+
+Finds patient records whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
