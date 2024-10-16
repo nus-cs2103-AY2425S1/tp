@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
+import seedu.address.model.pet.Pet;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -25,6 +26,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
 
     private final FilteredList<Owner> filteredOwners;
+    private final FilteredList<Pet> filteredPets;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -38,6 +40,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredOwners = new FilteredList<>(this.addressBook.getOwnerList());
+        filteredPets = new FilteredList<>(this.addressBook.getPetList());
     }
 
     public ModelManager() {
@@ -104,6 +107,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasPet(Pet pet) {
+        requireNonNull(pet);
+        return addressBook.hasPet(pet);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -111,6 +120,11 @@ public class ModelManager implements Model {
     @Override
     public void deleteOwner(Owner target) {
         addressBook.removeOwner(target);
+    }
+
+    @Override
+    public void deletePet(Pet target) {
+        addressBook.removePet(target);
     }
 
     @Override
@@ -126,6 +140,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addPet(Pet pet) {
+        addressBook.addPet(pet);
+        updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
@@ -137,6 +157,13 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedOwner);
 
         addressBook.setOwner(target, editedOwner);
+    }
+
+    @Override
+    public void setPet(Pet target, Pet editedPet) {
+        requireAllNonNull(target, editedPet);
+
+        addressBook.setPet(target, editedPet);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -160,6 +187,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Pet> getFilteredPetList() {
+        return filteredPets;
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
@@ -169,6 +201,11 @@ public class ModelManager implements Model {
     public void updateFilteredOwnerList(Predicate<Owner> predicate) {
         requireNonNull(predicate);
         filteredOwners.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredPetList(Predicate<seedu.address.model.pet.Pet> predicate) {
+
     }
 
     @Override
@@ -187,11 +224,8 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
-                && filteredOwners.equals(otherModelManager.filteredOwners);
-
-        /* return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredOwners.equals(otherModelManager.filteredOwners); */
+                && filteredOwners.equals(otherModelManager.filteredOwners)
+                && filteredPets.equals(otherModelManager.filteredPets);
     }
 
 }
