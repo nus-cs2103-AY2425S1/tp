@@ -10,7 +10,7 @@ import seedu.address.logic.validator.DateValidator;
 
 /**
  * Represents a Date in the internship book.
- * Guarantees: immutable; is valid as declared in {@link #validate(String)}.
+ * Guarantees: immutable; the date is valid as declared in the constructor.
  */
 public class Date {
 
@@ -24,7 +24,7 @@ public class Date {
     /**
      * Constructs a {@code Date} with a {@code LocalDate}.
      *
-     * @param date A valid LocalDate object.
+     * @param date A valid {@code LocalDate} object.
      * @throws NullPointerException if the {@code date} is null.
      */
     public Date(LocalDate date) {
@@ -33,12 +33,11 @@ public class Date {
     }
 
     /**
-     * Constructs a {@code Date} from a String.
-     * The String must be in the format 'yyyy-MM-dd'.
+     * Constructs a {@code Date} from a string in the format 'dd/MM/yy'.
      *
-     * @param dateString A string representing a date.
+     * @param dateString A string representing a date in the format 'dd/MM/yy'.
      * @throws NullPointerException if the {@code dateString} is null.
-     * @throws IllegalArgumentException if the {@code dateString} does not satisfy the format.
+     * @throws IllegalArgumentException if the {@code dateString} does not satisfy the format or is invalid.
      */
     public Date(String dateString) {
         requireNonNull(dateString);
@@ -49,16 +48,16 @@ public class Date {
     /**
      * Returns the {@code LocalDate} representation of the date.
      *
-     * @return the date as a {@code LocalDate} object.
+     * @return The date as a {@code LocalDate} object.
      */
     public LocalDate getValue() {
         return this.date;
     }
 
     /**
-     * Returns a string representation of the date using the 'yyyy-MM-dd' format.
+     * Returns a string representation of the date using the 'dd/MM/yy' format.
      *
-     * @return the formatted date as a string.
+     * @return The formatted date as a string.
      */
     @Override
     public String toString() {
@@ -66,10 +65,10 @@ public class Date {
     }
 
     /**
-     * Compares this date to another object.
+     * Compares this {@code Date} to another object for equality.
      *
-     * @param other the object to compare.
-     * @return true if the object is an instance of {@code Date} and has the same value, false otherwise.
+     * @param other The object to compare with.
+     * @return True if the object is an instance of {@code Date} and has the same value, false otherwise.
      */
     @Override
     public boolean equals(Object other) {
@@ -88,7 +87,7 @@ public class Date {
     /**
      * Returns the hash code of the date.
      *
-     * @return the hash code of the {@code LocalDate} value.
+     * @return The hash code of the {@code LocalDate} value.
      */
     @Override
     public int hashCode() {

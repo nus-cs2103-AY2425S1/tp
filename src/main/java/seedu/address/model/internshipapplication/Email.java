@@ -6,8 +6,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import seedu.address.logic.validator.EmailValidator;
 
 /**
- * Represents a Person's email in the network book.
- * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
+ * Represents a Company's email in the internship book.
+ * Guarantees: immutable; the email is valid as declared in {@link EmailValidator#validate(String)}.
  */
 public class Email {
 
@@ -27,36 +27,58 @@ public class Email {
     private final String value;
 
     /**
-     * Constructs an {@code Email}.
+     * Constructs an {@code Email} object with a valid email address.
      *
      * @param email A valid email address.
+     * @throws NullPointerException if the email is null.
+     * @throws IllegalArgumentException if the email does not satisfy the format constraints.
      */
     public Email(String email) {
         requireNonNull(email);
         checkArgument(EmailValidator.of().validate(email), MESSAGE_CONSTRAINTS);
-        value = email;
+        this.value = email;
     }
 
+    /**
+     * Returns the value of the email.
+     *
+     * @return The email string.
+     */
     public String getValue() {
         return this.value;
     }
 
+    /**
+     * Returns the email in a mailto URI format.
+     *
+     * @return The email URI string.
+     */
     public String toEmailUri() {
         return String.format("mailto:%s", this.value);
     }
 
+    /**
+     * Returns a string representation of the email.
+     *
+     * @return The email string.
+     */
     @Override
     public String toString() {
         return value;
     }
 
+    /**
+     * Compares this email to another object.
+     *
+     * @param other The object to compare.
+     * @return True if the other object is an {@code Email} with the same value, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof Email)) {
             return false;
         }
@@ -65,9 +87,13 @@ public class Email {
         return value.equals(otherEmail.value);
     }
 
+    /**
+     * Returns the hash code of the email.
+     *
+     * @return The hash code of the email value.
+     */
     @Override
     public int hashCode() {
         return value.hashCode();
     }
-
 }
