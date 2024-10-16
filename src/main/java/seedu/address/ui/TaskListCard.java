@@ -23,6 +23,9 @@ public class TaskListCard extends UiPart<Region> {
     @FXML
     private Label patient;
 
+    @FXML
+    private Label status;
+
     /**
      * Creates a {@code TaskListCard} with the given {@code Task} and index to display.
      */
@@ -32,5 +35,8 @@ public class TaskListCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescription());
         patient.setText(task.getPatient().getName().fullName);
+        status.textProperty().bind(task.isCompleteProperty().asString().map(
+                isComplete -> task.getStatusString()
+        ));
     }
 }
