@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.model.person.Birthday.EMPTY_BIRTHDAY;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -123,7 +125,7 @@ class JsonAdaptedPerson {
         if (!Birthday.isValidBirthday(birthday)) {
             throw new IllegalValueException(Birthday.MESSAGE_CONSTRAINTS);
         }
-        final Birthday modelBirthday = new Birthday(birthday);
+        final Birthday modelBirthday = birthday == "" ? EMPTY_BIRTHDAY : new Birthday(birthday);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelBirthday, modelTags);
