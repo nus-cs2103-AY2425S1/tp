@@ -135,7 +135,7 @@ Examples:
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX [INDEX]...`
+Format: `delete INDEX [MORE_INDICES]...`
 
 * Deletes the person(s) at the specified INDEX(es).
 * The index refers to the index number shown in the displayed person list.
@@ -198,7 +198,7 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
-**Delete** | `delete INDEX [INDEX]...`<br> e.g., `delete 3` or `delete 1 3 5`
+**Delete** | `delete INDEX [MORE_INDICES]...`<br> e.g., `delete 3` or `delete 1 3 5`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
