@@ -32,7 +32,6 @@ public class EmergencyContactCommand extends Command {
             + PREFIX_PHONE + "82943718";
 
     public static final String MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS = "Added emergency contact to Person: %1$s";
-    public static final String MESSAGE_DELETE_EMERGENCY_CONTACT_SUCCESS = "Removed emergency contact from Person: %1$s";
     public static final String MESSAGE_EMERGENCY_CONTACT_EXISTS = "Person: %1$s Already has a saved emergency contact";
 
     private final Index index;

@@ -48,21 +48,7 @@ public class EmergencyContactCommandTest {
         expectedModel.setPerson(thirdPerson, editedPerson);
         assertCommandSuccess(emergencyContactCommand, model, expectedMessage, expectedModel);
     }
-    @Test
-    public void execute_deleteEmergencyContactUnfilteredList_success() {
-        // TODO To edit after implementing delete emergency contact function
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withEmergencyContact("",
-                "").build();
-        EmergencyContactCommand emergencyContactCommand = new EmergencyContactCommand(INDEX_THIRD_PERSON,
-                new EmergencyContact(editedPerson.getEmergencyContact().contactName,
-                        editedPerson.getEmergencyContact().contactNumber));
-        String expectedMessage = String.format(EmergencyContactCommand.MESSAGE_DELETE_EMERGENCY_CONTACT_SUCCESS,
-                editedPerson);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, editedPerson);
-        assertCommandSuccess(emergencyContactCommand, model, expectedMessage, expectedModel);
-    }
+
     @Test
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_THIRD_PERSON);
