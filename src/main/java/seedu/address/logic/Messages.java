@@ -45,6 +45,8 @@ public class Messages {
                 .append(person.getAddress());
 
         appendTelegramUsernameToMsg(person, builder);
+        builder.append("; Roles: ");
+        person.getRoles().forEach(builder::append);
 
         return builder.toString();
     }

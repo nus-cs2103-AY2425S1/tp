@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -36,6 +37,11 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TELEGRAM_AMY = "amybee";
     public static final String VALID_TELEGRAM_BOB = "bobby";
+    public static final String VALID_ROLE_ATTENDEE = "attendee";
+    public static final String VALID_ROLE_SPONSOR = "sponsor";
+    public static final String VALID_ROLE_VENDOR = "vendor";
+    public static final String VALID_ROLE_VOLUNTEER = "volunteer";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -48,10 +54,19 @@ public class CommandTestUtil {
     public static final String TELEGRAM_DESC_AMY = " " + PREFIX_TELEGRAM + VALID_TELEGRAM_AMY;
     public static final String TELEGRAM_DESC_BOB = " " + PREFIX_TELEGRAM + VALID_TELEGRAM_BOB;
 
+    public static final String ROLE_DESC_ATTENDEE = " " + PREFIX_ROLE + VALID_ROLE_ATTENDEE;
+    public static final String ROLE_DESC_SPONSOR = " " + PREFIX_ROLE + VALID_ROLE_SPONSOR;
+    public static final String ROLE_DESC_VENDOR = " " + PREFIX_ROLE + VALID_ROLE_VENDOR;
+    public static final String ROLE_DESC_VOLUNTEER = " " + PREFIX_ROLE + VALID_ROLE_VOLUNTEER;
+
+    public static final String ROLE_DESC_BOB = " " + PREFIX_ROLE + VALID_ROLE_VENDOR;
+    public static final String ROLE_DESC_AMY = " " + PREFIX_ROLE + VALID_ROLE_ATTENDEE;
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "owner";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -62,10 +77,12 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTelegramUsername("amybee").build();
+                .withTelegramUsername("amybee").withRoles(VALID_ROLE_ATTENDEE).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTelegramUsername("bobby").build();
+                .withTelegramUsername("bobby")
+                .withRoles(VALID_ROLE_SPONSOR).build();
+
     }
 
     /**

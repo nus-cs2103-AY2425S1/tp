@@ -2,9 +2,14 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.role.Role;
+
 
 /**
  * Represents a Person in the address book.
@@ -21,19 +26,41 @@ public class Person implements Comparable<Person> {
     private final Address address;
 
     private final TelegramUsername telegramUsername;
+    private final Set<Role> roles = new HashSet<>();
 
     /**
      * Every field must be present and not null
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  TelegramUsername telegramUsername) {
-        requireAllNonNull(name, phone, email, address, telegramUsername);
+                  TelegramUsername telegramUsername, Set<Role> roles) {
+        requireAllNonNull(name, phone, email, address, telegramUsername, roles);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.telegramUsername = telegramUsername;
+        this.roles.addAll(roles);
     }
+
+    /**
+     * Constructor that takes in a variable number of roles(optional field)
+     */
+    //    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+    //                    TelegramUsername telegramUsername, Role... roles) {
+    //        requireAllNonNull(name, phone, email, address, tags);
+    //        this.name = name;
+    //        this.phone = phone;
+    //        this.email = email;
+    //        this.address = address;
+    //        this.tags.addAll(tags);
+    //        this.telegramUsername = telegramUsername;
+    //        for (Role role : roles) {
+    //            this.roles.add(role);
+    //        }
+    //
+    //    }
+
 
     public Name getName() {
         return name;
@@ -52,6 +79,17 @@ public class Person implements Comparable<Person> {
     }
     public TelegramUsername getTelegramUsername() {
         return telegramUsername;
+    }
+
+
+
+
+    /**
+     * Returns an immutable role set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Role> getRoles() {
+        return Collections.unmodifiableSet(roles);
     }
 
     /**
@@ -79,6 +117,9 @@ public class Person implements Comparable<Person> {
                 || otherPerson.getEmail().equals(getEmail())
                 || otherPerson.getTelegramUsername().equals(getTelegramUsername());
     }
+
+
+
 
     /**
      * Returns true if both persons have the same phone number.
@@ -122,14 +163,26 @@ public class Person implements Comparable<Person> {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && telegramUsername.equals(otherPerson.telegramUsername);
+
+                && telegramUsername.equals(otherPerson.telegramUsername)
+                && roles.equals(otherPerson.roles);
+
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address);
+        return Objects.hash(name, phone, email, address, roles);
+
     }
+
+    /**
+     * Returns true if the person has the specified role.
+     */
+    public boolean hasRole(Role role) {
+        return roles.contains(role);
+    }
+
 
     @Override
     public String toString() {
@@ -139,6 +192,7 @@ public class Person implements Comparable<Person> {
                 .add("email", email)
                 .add("address", address)
                 .add("telegram", telegramUsername)
+                .add("roles", roles)
                 .toString();
     }
 

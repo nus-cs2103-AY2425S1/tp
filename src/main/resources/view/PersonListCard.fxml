@@ -30,7 +30,7 @@
           <Label fx:id="telegramUsername" styleClass="cell_small_label" />
         </HBox>
       </HBox>
-      <FlowPane fx:id="tags" />
+      <FlowPane fx:id="roles" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />

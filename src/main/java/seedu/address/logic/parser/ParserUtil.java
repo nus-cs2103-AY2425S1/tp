@@ -2,6 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -114,6 +118,9 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+
+
+
     /**
      * Parses a {@code String role} into a {@code Role}.
      */
@@ -126,9 +133,24 @@ public class ParserUtil {
         }
 
         try {
-            return rh.getRole(role);
+            return RoleHandler.getRole(role);
         } catch (InvalidRoleException e) {
             throw new ParseException(RoleHandler.MESSAGE_CONSTRAINTS);
         }
+    }
+
+    /**
+     * Parses {@code Collection<String> roles} into a {@code Set<Role>}.
+     * @param roles Collection of roles to be parsed
+     * @return Set of roles to be added
+     * @throws ParseException if one of the roles is invalid
+     */
+    public static Set<Role> parseRoles(Collection<String> roles) throws ParseException {
+        requireNonNull(roles);
+        final Set<Role> roleSet = new HashSet<>();
+        for (String role : roles) {
+            roleSet.add(parseRole(role));
+        }
+        return roleSet;
     }
 }

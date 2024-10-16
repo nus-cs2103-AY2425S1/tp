@@ -14,6 +14,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.lang.reflect.Method;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -27,12 +29,15 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
+
+
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -194,8 +199,36 @@ public class EditCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB)));
+
+
     }
 
+    @Test
+    public void equals_telegramUsernameField() {
+        EditPersonDescriptor descriptorWithTelegram = new EditPersonDescriptorBuilder()
+                .withTelegramUsername("username1").build();
+        EditPersonDescriptor sameDescriptorWithTelegram = new EditPersonDescriptorBuilder()
+                .withTelegramUsername("username1").build();
+        EditPersonDescriptor differentDescriptorWithTelegram = new EditPersonDescriptorBuilder()
+                .withTelegramUsername("username2").build();
+
+        // same values -> returns true
+        assertTrue(descriptorWithTelegram.equals(sameDescriptorWithTelegram));
+
+        // different values -> returns false
+        assertFalse(descriptorWithTelegram.equals(differentDescriptorWithTelegram));
+    }
+
+    @Test
+    public void equals_rolesField() {
+        EditPersonDescriptor descriptorWithRoles = new EditPersonDescriptorBuilder().withRoles("attendee").build();
+        EditPersonDescriptor sameDescriptorWithRoles = new EditPersonDescriptorBuilder().withRoles("attendee").build();
+        EditPersonDescriptor differentDescriptorWithRoles = new EditPersonDescriptorBuilder()
+               .withRoles("sponsor").build();
+
+        assertTrue(descriptorWithRoles.equals(sameDescriptorWithRoles));
+        assertFalse(descriptorWithRoles.equals(differentDescriptorWithRoles));
+    }
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
@@ -204,6 +237,24 @@ public class EditCommandTest {
         String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editPersonDescriptor="
                 + editPersonDescriptor + "}";
         assertEquals(expected, editCommand.toString());
+    }
+
+    @Test
+    public void createEditedPerson_reflection_success() throws Exception {
+        // Create a person and an EditPersonDescriptor
+        Person person = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+
+        // Use reflection to access the private static method
+        Method method = EditCommand.class.getDeclaredMethod("createEditedPerson",
+                Person.class, EditPersonDescriptor.class);
+        method.setAccessible(true);
+
+        // Invoke the method and get the result
+        Person editedPerson = (Person) method.invoke(null, person, descriptor);
+
+        // Assert the expected result
+        assertEquals(person, editedPerson);
     }
 
 }
