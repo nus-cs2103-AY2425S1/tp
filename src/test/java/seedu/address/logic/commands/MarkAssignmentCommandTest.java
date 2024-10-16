@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT1;
 
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -26,7 +24,7 @@ public class MarkAssignmentCommandTest {
     public void execute_assignmentExists_success() throws Exception {
         ReadOnlyAddressBook addressBook = TypicalStudents.getTypicalAddressBook();
         AssignmentList assignmentList = TypicalAssignments.getTypicalAssignmentList();
-        Model model = new ModelManager(addressBook, new UserPrefs(), assignmentList, new ArrayList<>());
+        Model model = new ModelManager(addressBook, new UserPrefs(), assignmentList);
         Assignment assignment = new Assignment("Assignment 1", ASSIGNMENT1.getDueDate());
         MarkAssignmentCommand markCommand = new MarkAssignmentCommand(0, assignment);
 
@@ -39,7 +37,7 @@ public class MarkAssignmentCommandTest {
     public void execute_assignmentDoesNotExist_throwsCommandException() {
         ReadOnlyAddressBook addressBook = TypicalStudents.getTypicalAddressBook();
         AssignmentList assignmentList = new AssignmentList();
-        Model model = new ModelManager(addressBook, new UserPrefs(), assignmentList, new ArrayList<>());
+        Model model = new ModelManager(addressBook, new UserPrefs(), assignmentList);
         MarkAssignmentCommand markCommand = new MarkAssignmentCommand(0, ASSIGNMENT1);
 
         assertThrows(CommandException.class, MarkAssignmentCommand.MESSAGE_ASSIGNMENT_NOT_FOUND, () -> {

@@ -37,10 +37,8 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
-                        AssignmentList assignmentList, List<Tut> tutorialList) {
-        //TODO: Add sample tutorialList for the test cases (see getTypicalStudentsList())
-        requireAllNonNull(addressBook, userPrefs, assignmentList, tutorialList);
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, AssignmentList assignmentList) {
+        requireAllNonNull(addressBook, userPrefs, assignmentList);
 
         logger.fine("Initializing with address book: " + addressBook + ", user prefs " + userPrefs
             + "and assignment list: " + assignmentList);
@@ -52,7 +50,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new AssignmentList(), new ArrayList<Tut>());
+        this(new AddressBook(), new UserPrefs(), new AssignmentList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -128,11 +126,6 @@ public class ModelManager implements Model {
     public void addTutorial(Tut tutorial) {
         requireNonNull(tutorial);
         addressBook.addTutorial(tutorial);
-    }
-
-    @Override
-    public List<Tut> getTutorialList() {
-        return addressBook.getTutorials();
     }
 
     @Override

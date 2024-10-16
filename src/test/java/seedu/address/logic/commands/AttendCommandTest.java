@@ -185,11 +185,6 @@ public class AttendCommandTest {
         }
 
         @Override
-        public List<Tut> getTutorialList() {
-            return null;
-        }
-
-        @Override
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }

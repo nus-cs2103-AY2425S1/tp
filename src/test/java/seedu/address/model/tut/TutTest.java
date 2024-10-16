@@ -4,9 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TutUtil.TUTORIAL_CLASS;
-import static seedu.address.testutil.TutUtil.TUT_DATE;
 import static seedu.address.testutil.TutUtil.TUT_NAME;
-import static seedu.address.testutil.TutUtil.TUT_SAMPLE;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 
 import java.util.Date;
@@ -34,6 +32,11 @@ public class TutTest {
     }
 
     @Test
+    public void constructor_nullName_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Tut(null, TUTORIAL_CLASS));
+    }
+
+    @Test
     public void constructor_nullTutorialClass_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Tut(TUT_NAME, (String) null));
     }
@@ -52,17 +55,19 @@ public class TutTest {
     }
 
     @Test
-    public void isValidTutName_null_throwsNullPointerException() {
+    public void isValidTutName() {
+        // null tut name
         assertThrows(NullPointerException.class, () -> Tut.isValidName(null));
     }
 
     @Test
     public void successValidTutName() {
-        assertTrue(Tut.isValidName(TUT_NAME));
+        Tut tut = new Tut(TUT_NAME, TUTORIAL_CLASS);
+        assertTrue(tut.getTutName().equals(TUT_NAME));
     }
-
     @Test
     public void successAddStudentToTutorial() {
+        // Add a student to tutorial
         Student aliceCopy = new StudentBuilder(ALICE).build();
         Tut tut = new Tut(TUT_NAME, TUTORIAL_CLASS);
         tut.add(aliceCopy);
@@ -70,15 +75,12 @@ public class TutTest {
     }
 
     @Test
-    public void checkEquals_sameInstance() {
-        Tut sameTut = new Tut(TUT_NAME, TUTORIAL_CLASS);
-        assertTrue(sameTut.equals(sameTut));
-    }
-
-    @Test
-    public void checkEquals_differentInstance() {
+    public void successCheckEquals() {
+        Student aliceCopy = new StudentBuilder(ALICE).build();
         Tut tut = new Tut(TUT_NAME, TUTORIAL_CLASS);
+        tut.add(aliceCopy);
         Tut otherTut = new Tut(TUT_NAME, TUTORIAL_CLASS);
+        otherTut.add(aliceCopy);
         assertTrue(tut.equals(otherTut));
     }
 
@@ -159,6 +161,11 @@ public class TutTest {
     @Test
     public void getTutorialClass() {
         assertTrue(TUT_SAMPLE.getTutorialClass().equals(TUTORIAL_CLASS));
+    public void successCheckToString() {
+        Student aliceCopy = new StudentBuilder(ALICE).build();
+        Tut tut = new Tut(TUT_NAME, TUTORIAL_CLASS);
+        tut.add(aliceCopy);
+        assertTrue(tut.toString().equals(TUT_NAME + ": Tutorial " + TUTORIAL_CLASS));
     }
 
     @Test

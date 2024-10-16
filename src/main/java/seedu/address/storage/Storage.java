@@ -8,10 +8,12 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage, AssignmentStorage, TutorialStorage {
+public interface Storage extends AddressBookStorage, UserPrefsStorage, AssignmentStorage {
+
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
 
@@ -26,4 +28,5 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, Assignmen
 
     @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+
 }

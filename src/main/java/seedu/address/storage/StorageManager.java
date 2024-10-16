@@ -2,7 +2,6 @@ package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -12,7 +11,6 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.AssignmentList;
-import seedu.address.model.tut.Tut;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -22,7 +20,6 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private final AddressBookStorage addressBookStorage;
     private final UserPrefsStorage userPrefsStorage;
-    private final TutorialStorage tutorialStorage;
     private AssignmentStorage assignmentStorage;
 
     /**
@@ -30,11 +27,10 @@ public class StorageManager implements Storage {
      * and {@code AssignmentStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
-                          AssignmentStorage assignmentStorage, TutorialStorage tutorialStorage) {
+                          AssignmentStorage assignmentStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.assignmentStorage = assignmentStorage;
-        this.tutorialStorage = tutorialStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -111,34 +107,4 @@ public class StorageManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         assignmentStorage.saveAssignments(assignmentList, filePath);
     }
-
-    // ================ Tutorial methods ==============================
-    @Override
-    public Path getTutorialFilePath() {
-        return tutorialStorage.getTutorialFilePath();
-    }
-
-    @Override
-    public Optional<List<Tut>> readTutorials() throws DataLoadingException {
-        return readTutorials(tutorialStorage.getTutorialFilePath());
-    }
-
-    @Override
-    public Optional<List<Tut>> readTutorials(Path filePath) throws DataLoadingException {
-        logger.fine("Attempting to read tutorial data from file: " + filePath);
-        return tutorialStorage.readTutorials(filePath);
-    }
-
-    @Override
-    public void saveTutorials(List<Tut> tutorialList) throws IOException {
-        saveTutorials(tutorialList, tutorialStorage.getTutorialFilePath());
-    }
-
-    @Override
-    public void saveTutorials(List<Tut> tutorialList, Path filePath) throws IOException {
-        logger.fine("Attempting to write tutorial data to file: " + filePath);
-        tutorialStorage.saveTutorials(tutorialList, filePath);
-    }
-
-    // ================ Tutorial methods ==============================
 }

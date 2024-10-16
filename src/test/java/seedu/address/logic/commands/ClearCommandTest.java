@@ -3,8 +3,6 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.AddressBook;
@@ -25,10 +23,8 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
-                new AssignmentList(), new ArrayList<>());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
-                new AssignmentList(), new ArrayList<>());
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new AssignmentList());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new AssignmentList());
         expectedModel.setAddressBook(new AddressBook());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
