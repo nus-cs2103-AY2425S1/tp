@@ -22,6 +22,7 @@ checkstyle {
 
 test {
     useJUnitPlatform()
+
     finalizedBy jacocoTestReport
 }
 
@@ -39,6 +40,69 @@ task coverage(type: JacocoReport) {
         xml.required = true
     }
 }
+
+task(guiTests)
+task(nonGuiTests)
+guiTests.dependsOn test
+nonGuiTests.dependsOn test
+
+task(allTests)
+allTests.dependsOn guiTests
+allTests.dependsOn nonGuiTests
+
+test {
+//    useJUnitPlatform()
+    systemProperty 'testfx.setup.timeout', '60000'
+
+    jacoco {
+        destinationFile = new File("${buildDir}/jacoco/test.exec")
+    }
+
+    doFirst {
+        boolean runGuiTests = gradle.taskGraph.hasTask(guiTests)
+        boolean runNonGuiTests = gradle.taskGraph.hasTask(nonGuiTests)
+
+        if (!runGuiTests && !runNonGuiTests) {
+            runGuiTests = true
+            runNonGuiTests = true
+        }
+
+        if (runNonGuiTests) {
+            test.include 'spleetwaise/address/**'
+            test.include 'spleetwaise/commons/**'
+            test.include 'spleetwaise/transaction/**'
+        }
+
+        if (runGuiTests) {
+            test.include 'spleetwaise/address/ui/**'
+            test.include 'spleetwaise/commons/ui/**'
+            test.include 'spleetwaise/transaction/ui/**'
+        }
+
+        if (!runGuiTests) {
+            test.exclude 'spleetwaise/address/ui/**'
+            test.exclude 'spleetwaise/commons/ui/**'
+            test.exclude 'spleetwaise/transaction/ui/**'
+        }
+    }
+
+//    finalizedBy jacocoTestReport
+}
+
+task headless {
+    doLast {
+        println 'Setting headless mode properties.'
+        test {
+            systemProperties = [
+                    'testfx.robot': 'glass',
+                    'testfx.headless': 'true',
+                    'prism.order': 'sw',
+                    'prism.text': 't2k',
+            ]
+        }
+    }
+}
+test.mustRunAfter headless
 
 dependencies {
     String jUnitVersion = '5.4.0'
@@ -66,6 +130,8 @@ dependencies {
 
     testImplementation "org.testfx:testfx-core:4.0.18"
     testImplementation "org.testfx:testfx-junit5:4.0.18"
+    testImplementation 'org.testfx:openjfx-monocle:17.0.10'
+//    testRuntimeOnly group: 'org.testfx', name: 'openjfx-monocle', version: 'jdk-11+26'
     testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.1'
     testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.13.2'
 }
@@ -74,4 +140,4 @@ shadowJar {
     archiveFileName = 'addressbook.jar'
 }
 
-defaultTasks 'clean', 'test'
+defaultTasks 'clean', 'headless', 'allTests', 'coverage'
