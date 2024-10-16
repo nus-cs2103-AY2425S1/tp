@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.EVENT_PREFIX_START_TIME;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.eventcommands.EventAddCommand;
+import seedu.address.logic.commands.eventcommands.EventNewCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.EventParserUtil;
@@ -27,7 +27,7 @@ import seedu.address.model.event.Time;
 /**
  * Parses input arguments and creates a new {@code EventAddCommand} object.
  */
-public class EventAddCommandParser implements Parser<EventAddCommand> {
+public class EventNewCommandParser implements Parser<EventNewCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the {@code EventAddCommand}
      * and returns an {@code EventAddCommand} object for execution.
@@ -36,7 +36,7 @@ public class EventAddCommandParser implements Parser<EventAddCommand> {
      * @return A new {@code EventAddCommand} containing the parsed event data.
      * @throws ParseException If the input arguments do not conform to the expected format.
      */
-    public EventAddCommand parse(String args) throws ParseException {
+    public EventNewCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, EVENT_PREFIX_NAME, EVENT_PREFIX_LOCATION, EVENT_PREFIX_DATE,
                         EVENT_PREFIX_START_TIME, EVENT_PREFIX_END_TIME, EVENT_PREFIX_DESCRIPTION);
@@ -44,7 +44,7 @@ public class EventAddCommandParser implements Parser<EventAddCommand> {
         if (!arePrefixesPresent(argMultimap, EVENT_PREFIX_NAME, EVENT_PREFIX_LOCATION, EVENT_PREFIX_DATE,
                 EVENT_PREFIX_START_TIME, EVENT_PREFIX_END_TIME)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EventAddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EventNewCommand.MESSAGE_USAGE));
         }
 
 
@@ -67,7 +67,7 @@ public class EventAddCommandParser implements Parser<EventAddCommand> {
             event = new Event(eventName, location, date, startTime, endTime);
         }
 
-        return new EventAddCommand(event);
+        return new EventNewCommand(event);
     }
 
     /**
