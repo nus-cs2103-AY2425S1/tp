@@ -18,12 +18,15 @@ import static tuteez.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static tuteez.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static tuteez.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static tuteez.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static tuteez.logic.commands.CommandTestUtil.TELEGRAM_DESC_AMY;
+import static tuteez.logic.commands.CommandTestUtil.TELEGRAM_DESC_BOB;
 import static tuteez.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static tuteez.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static tuteez.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static tuteez.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static tuteez.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static tuteez.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static tuteez.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tuteez.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tuteez.logic.parser.CliSyntax.PREFIX_NAME;
@@ -54,14 +57,15 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + ADDRESS_DESC_BOB + TELEGRAM_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TELEGRAM_DESC_BOB
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 new AddCommand(expectedPersonMultipleTags));
     }
 
@@ -130,10 +134,20 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_optionalFieldsMissing_success() {
+    public void parse_optionalFieldsTagsMissing_success() {
         // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
+        Person expectedPerson = new PersonBuilder(AMY).withTelegram("amy_bee").withTags().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                + TELEGRAM_DESC_AMY,
+                new AddCommand(expectedPerson));
+    }
+
+    @Test
+    public void parse_optionalFieldsTelegramMissing_success() {
+        Person expectedPerson = new PersonBuilder(AMY).withTelegram(null)
+                .withTags(VALID_TAG_FRIEND).build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
     }
 

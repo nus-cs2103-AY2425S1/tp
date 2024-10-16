@@ -3,6 +3,8 @@ package tuteez.model.person;
 import static java.util.Objects.requireNonNull;
 import static tuteez.commons.util.AppUtil.checkArgument;
 
+import java.util.Objects;
+
 /**
  * Represents a Person's telegram username in the address book.
  * The person's telegram username is optional.
@@ -74,6 +76,9 @@ public class TelegramUsername {
         }
 
         TelegramUsername otherTeleHandle = (TelegramUsername) other;
+        if (telegramUsername == null) {
+            return Objects.equals(otherTeleHandle.telegramUsername, null);
+        }
         return this.telegramUsername.equals(otherTeleHandle.telegramUsername);
     }
 

@@ -66,8 +66,7 @@ public class PersonCard extends UiPart<Region> {
         if (username != null && username.telegramUsername != null && !username.telegramUsername.isEmpty()) {
             telegram.setText("@" + username.telegramUsername);
             telegram.setVisible(true);
-        }
-        if (username.telegramUsername == null) {
+        } else {
             telegram.setVisible(false);
         }
     }

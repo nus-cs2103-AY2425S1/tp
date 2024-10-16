@@ -116,12 +116,11 @@ class JsonAdaptedPerson {
     private TelegramUsername getModelTelegramUsername(String username) throws IllegalValueException {
         if (username == null) {
             return TelegramUsername.empty();
-        } else {
-            if (!TelegramUsername.isValidTelegramHandle(username)) {
-                throw new IllegalValueException(TelegramUsername.MESSAGE_CONSTRAINTS);
-            }
-            return TelegramUsername.of(username);
         }
+        if (!TelegramUsername.isValidTelegramHandle(username)) {
+            throw new IllegalValueException(TelegramUsername.MESSAGE_CONSTRAINTS);
+        }
+        return TelegramUsername.of(username);
     }
 
 }
