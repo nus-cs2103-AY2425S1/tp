@@ -138,6 +138,19 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Filtering contacts by tag: `filter`
+
+Filters contacts who are tagged with all of the given tags.
+
+Format: `filter t/TAG [MORE_TAGS]`
+
+
+* Contacts matching all tags will be returned (i.e. `AND` search).
+
+Examples:
+* `filter t/foodCaterer venue` returns all contacts tagged with both `foodCaterer` and `venue`
+* `filter t/foodCaterer` returns all contacts tagged with the tag `foodCaterer`<br>
+
 <br><br/>
 
 ### Deleting a contact : `delete`
