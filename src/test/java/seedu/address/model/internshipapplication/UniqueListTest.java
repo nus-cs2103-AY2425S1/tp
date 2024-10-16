@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import static seedu.address.testutil.Assert.assertThrows;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANYNAME_YAHOO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_NAME_YAHOO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_YAHOO;
 import static seedu.address.testutil.TypicalInternshipApplications.GOOGLE;
 import static seedu.address.testutil.TypicalInternshipApplications.YAHOO;
@@ -46,7 +46,7 @@ public class UniqueListTest {
     public void contains_internshipWithSameIdentityFieldsInList_returnsTrue() {
         uniqueList.add(GOOGLE);
         InternshipApplication editedGoogle = new InternshipApplicationBuilder(GOOGLE)
-                                                .withName(VALID_COMPANYNAME_YAHOO)
+                                                .withName(VALID_COMPANY_NAME_YAHOO)
                                                 .withDate(VALID_DATE_YAHOO)
                                                 .build();
 
@@ -92,7 +92,7 @@ public class UniqueListTest {
     public void setItem_editedInternshipHasSameIdentity_success() {
         uniqueList.add(GOOGLE);
         InternshipApplication editedGoogle = new InternshipApplicationBuilder(GOOGLE)
-                .withName(VALID_COMPANYNAME_YAHOO)
+                .withName(VALID_COMPANY_NAME_YAHOO)
                 .withDate(VALID_DATE_YAHOO)
                 .build();
         uniqueList.setItem(GOOGLE, editedGoogle);

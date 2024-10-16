@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_APPLE;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_APPLE;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_APPLE;
+import static seedu.address.logic.commands.CommandTestUtil.COMPANY_EMAIL_DESC_APPLE;
+import static seedu.address.logic.commands.CommandTestUtil.COMPANY_NAME_DESC_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_APPLE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalInternshipApplications.GOOGLE;
@@ -29,12 +29,10 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.internshipapplication.InternshipApplication;
-import seedu.address.model.internshipapplication.Person;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.InternshipApplicationBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -168,8 +166,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_APPLE + ROLE_DESC_APPLE
-                + EMAIL_DESC_APPLE + DATE_DESC_APPLE;
+        String addCommand = AddCommand.COMMAND_WORD + COMPANY_NAME_DESC_APPLE + ROLE_DESC_APPLE
+                + COMPANY_EMAIL_DESC_APPLE + DATE_DESC_APPLE;
         InternshipApplication expectedApplication = new InternshipApplicationBuilder(GOOGLE).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addItem(expectedApplication);

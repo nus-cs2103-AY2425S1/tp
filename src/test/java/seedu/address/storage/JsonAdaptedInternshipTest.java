@@ -13,13 +13,13 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalInternshipApplications.GOOGLE;
 
 public class JsonAdaptedInternshipTest {
-    private static final String INVALID_COMPANYNAME = "G@@GLE";
-    private static final String INVALID_COMPANYEMAIL = "google.com";
+    private static final String INVALID_COMPANY_NAME = "G@@GLE";
+    private static final String INVALID_COMPANY_EMAIL = "google.com";
     private static final String INVALID_ROLE = " ";
     private static final String INVALID_DATESTRING = "4 Sep 1998";
 
-    private static final String VALID_COMPANYNAME = GOOGLE.getCompany().getName().toString();
-    private static final String VALID_COMPANYEMAIL = GOOGLE.getCompany().getEmail().toString();
+    private static final String VALID_COMPANY_NAME = GOOGLE.getCompany().getName().toString();
+    private static final String VALID_COMPANY_EMAIL = GOOGLE.getCompany().getEmail().toString();
     private static final String VALID_ROLE = GOOGLE.getRole().toString();
     private static final String VALID_DATE = GOOGLE.getDateOfApplication().toString();
 
@@ -32,7 +32,7 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void toModelType_invalidCompanyName_throwsIllegalValueException() {
         JsonAdaptedInternship application =
-                new JsonAdaptedInternship(INVALID_COMPANYNAME, VALID_COMPANYEMAIL, VALID_ROLE, VALID_DATE);
+                new JsonAdaptedInternship(INVALID_COMPANY_NAME, VALID_COMPANY_EMAIL, VALID_ROLE, VALID_DATE);
 
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, application::toModelType);
@@ -41,7 +41,7 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void toModelType_nullCompanyName_throwsIllegalValueException() {
         JsonAdaptedInternship application =
-                new JsonAdaptedInternship(null, VALID_COMPANYEMAIL, VALID_ROLE, VALID_DATE);
+                new JsonAdaptedInternship(null, VALID_COMPANY_EMAIL, VALID_ROLE, VALID_DATE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, application::toModelType);
     }
@@ -49,7 +49,7 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void toModelType_invalidRole_throwsIllegalValueException() {
         JsonAdaptedInternship application =
-                new JsonAdaptedInternship(VALID_COMPANYNAME, VALID_COMPANYEMAIL, INVALID_ROLE, VALID_DATE);
+                new JsonAdaptedInternship(VALID_COMPANY_NAME, VALID_COMPANY_EMAIL, INVALID_ROLE, VALID_DATE);
 
         String expectedMessage = Role.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, application::toModelType);
@@ -58,7 +58,7 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void toModelType_nullRole_throwsIllegalValueException() {
         JsonAdaptedInternship application =
-                new JsonAdaptedInternship(VALID_COMPANYNAME, VALID_COMPANYEMAIL, null, VALID_DATE);
+                new JsonAdaptedInternship(VALID_COMPANY_NAME, VALID_COMPANY_EMAIL, null, VALID_DATE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, application::toModelType);
     }
@@ -66,7 +66,7 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void toModelType_invalidCompanyEmail_throwsIllegalValueException() {
         JsonAdaptedInternship application =
-                new JsonAdaptedInternship(VALID_COMPANYNAME, INVALID_COMPANYEMAIL, VALID_ROLE, VALID_DATE);
+                new JsonAdaptedInternship(VALID_COMPANY_NAME, INVALID_COMPANY_EMAIL, VALID_ROLE, VALID_DATE);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, application::toModelType);
     }
@@ -74,7 +74,7 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void toModelType_nullCompanyEmail_throwsIllegalValueException() {
         JsonAdaptedInternship application =
-                new JsonAdaptedInternship(VALID_COMPANYNAME, null, VALID_ROLE, VALID_DATE);
+                new JsonAdaptedInternship(VALID_COMPANY_NAME, null, VALID_ROLE, VALID_DATE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, application::toModelType);
     }
@@ -82,7 +82,7 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void toModelType_invalidDate_throwsIllegalValueException() {
         JsonAdaptedInternship application =
-                new JsonAdaptedInternship(VALID_COMPANYNAME, VALID_COMPANYEMAIL, VALID_ROLE, INVALID_DATESTRING);
+                new JsonAdaptedInternship(VALID_COMPANY_NAME, VALID_COMPANY_EMAIL, VALID_ROLE, INVALID_DATESTRING);
         String expectedMessage = Date.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, application::toModelType);
     }
@@ -90,7 +90,7 @@ public class JsonAdaptedInternshipTest {
     @Test
     public void toModelType_nullDate_throwsIllegalValueException() {
         JsonAdaptedInternship application =
-                new JsonAdaptedInternship(VALID_COMPANYNAME, VALID_COMPANYEMAIL, VALID_ROLE, null);
+                new JsonAdaptedInternship(VALID_COMPANY_NAME, VALID_COMPANY_EMAIL, VALID_ROLE, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, application::toModelType);
     }

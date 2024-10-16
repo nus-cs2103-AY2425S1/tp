@@ -21,41 +21,39 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.internshipapplication.InternshipApplication;
 import seedu.address.model.internshipapplication.NameContainsKeywordsPredicate;
-import seedu.address.model.internshipapplication.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.InternshipApplicationBuilder;
 
 /**
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
-    public static final String VALID_COMPANYNAME_GOOGLE = "Google";
+    public static final String VALID_COMPANY_NAME_GOOGLE = "Google";
     public static final String VALID_EMAIL_GOOGLE = "google@gmail.com";
     public static final String VALID_DATE_GOOGLE = "04/09/98";
     public static final String VALID_ROLE_GOOGLE = "SWE";
 
-    public static final String VALID_COMPANYNAME_YAHOO = "Yahoo";
+    public static final String VALID_COMPANY_NAME_YAHOO = "Yahoo";
     public static final String VALID_EMAIL_YAHOO = "yahoo@yahoo.com";
     public static final String VALID_DATE_YAHOO = "01/01/94";
     public static final String VALID_ROLE_YAHOO = "Clerk";
 
-    public static final String VALID_NAME_APPLE = "Apple";
-    public static final String VALID_NAME_BOFA = "BOFA";
+    public static final String VALID_COMPANY_NAME_APPLE = "Apple";
+    public static final String VALID_COMPANY_NAME_BOFA = "BOFA";
     public static final String VALID_DATE_APPLE = "01/01/24";
     public static final String VALID_DATE_BOFA = "02/02/24";
-    public static final String VALID_EMAIL_APPLE = "apple@example.com";
-    public static final String VALID_EMAIL_BOFA = "bofa@example.com";
+    public static final String VALID_COMPANY_EMAIL_APPLE = "apple@example.com";
+    public static final String VALID_COMPANY_EMAIL_BOFA = "bofa@example.com";
     public static final String VALID_ROLE_APPLE = "Software Engineer Intern";
     public static final String VALID_ROLE_BOFA = "Backend Intern";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
-    public static final String NAME_DESC_APPLE = " " + PREFIX_NAME + VALID_NAME_APPLE;
-    public static final String NAME_DESC_BOFA = " " + PREFIX_NAME + VALID_NAME_BOFA;
+    public static final String COMPANY_NAME_DESC_APPLE = " " + PREFIX_NAME + VALID_COMPANY_NAME_APPLE;
+    public static final String COMPANY_NAME_DESC_BOFA = " " + PREFIX_NAME + VALID_COMPANY_NAME_BOFA;
     public static final String DATE_DESC_APPLE = " " + PREFIX_DATE + VALID_DATE_APPLE;
     public static final String DATE_DESC_BOFA = " " + PREFIX_DATE + VALID_DATE_BOFA;
-    public static final String EMAIL_DESC_APPLE = " " + PREFIX_EMAIL + VALID_EMAIL_APPLE;
-    public static final String EMAIL_DESC_BOFA = " " + PREFIX_EMAIL + VALID_EMAIL_BOFA;
+    public static final String COMPANY_EMAIL_DESC_APPLE = " " + PREFIX_EMAIL + VALID_COMPANY_EMAIL_APPLE;
+    public static final String COMPANY_EMAIL_DESC_BOFA = " " + PREFIX_EMAIL + VALID_COMPANY_EMAIL_BOFA;
     public static final String ROLE_DESC_APPLE = " " + PREFIX_ROLE + VALID_ROLE_APPLE;
     public static final String ROLE_DESC_BOFA = " " + PREFIX_ROLE + VALID_ROLE_BOFA;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
@@ -104,11 +102,11 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_BOFA;
 
     static {
-        DESC_APPLE = new EditPersonDescriptorBuilder().withName(VALID_NAME_APPLE)
-                .withPhone(VALID_DATE_APPLE).withEmail(VALID_EMAIL_APPLE).withAddress(VALID_ROLE_APPLE)
+        DESC_APPLE = new EditPersonDescriptorBuilder().withName(VALID_COMPANY_NAME_APPLE)
+                .withPhone(VALID_DATE_APPLE).withEmail(VALID_COMPANY_EMAIL_APPLE).withAddress(VALID_ROLE_APPLE)
                 .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOFA = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOFA)
-                .withPhone(VALID_DATE_BOFA).withEmail(VALID_EMAIL_BOFA).withAddress(VALID_ROLE_BOFA)
+        DESC_BOFA = new EditPersonDescriptorBuilder().withName(VALID_COMPANY_NAME_BOFA)
+                .withPhone(VALID_DATE_BOFA).withEmail(VALID_COMPANY_EMAIL_BOFA).withAddress(VALID_ROLE_BOFA)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 

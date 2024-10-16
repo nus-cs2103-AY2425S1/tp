@@ -2,15 +2,10 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOFA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_APPLE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOFA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_APPLE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOFA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_APPLE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOFA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalInternshipApplications.getTypicalInternshipApplications;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_EMAIL_APPLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_EMAIL_BOFA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_NAME_APPLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_NAME_BOFA;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -79,10 +74,10 @@ public class TypicalInternshipApplications {
             .build();
 
     // Manually added - InternshipApplication's details found in {@code CommandTestUtil}
-    public static final InternshipApplication APPLE = new InternshipApplicationBuilder().withName(VALID_NAME_APPLE)
-            .withEmail(VALID_EMAIL_APPLE).withRole(VALID_ROLE_APPLE).build();
-    public static final InternshipApplication BOFA = new InternshipApplicationBuilder().withName(VALID_NAME_BOFA)
-            .withEmail(VALID_EMAIL_BOFA).withRole(VALID_ROLE_BOFA).build();
+    public static final InternshipApplication APPLE = new InternshipApplicationBuilder().withName(VALID_COMPANY_NAME_APPLE)
+            .withEmail(VALID_COMPANY_EMAIL_APPLE).withRole(VALID_ROLE_APPLE).build();
+    public static final InternshipApplication BOFA = new InternshipApplicationBuilder().withName(VALID_COMPANY_NAME_BOFA)
+            .withEmail(VALID_COMPANY_EMAIL_BOFA).withRole(VALID_ROLE_BOFA).build();
 
     public static final String KEYWORD_MATCHING_HOON = "HOON"; // A keyword that matches HOON
 

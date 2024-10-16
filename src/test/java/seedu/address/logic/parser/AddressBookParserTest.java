@@ -44,13 +44,12 @@ public class AddressBookParserTest {
         assertEquals(new AddCommand(application), command);
     }
 
-//   Todo when CLEAR feature is implemented
-//
-//    @Test
-//    public void parseCommand_clear() throws Exception {
-//        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-//        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
-//    }
+
+    @Test
+    public void parseCommand_clear() throws Exception {
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+    }
 
     @Test
     public void parseCommand_delete() throws Exception {

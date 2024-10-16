@@ -1,17 +1,12 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_APPLE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOFA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_APPLE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOFA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_EMAIL_APPLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_EMAIL_BOFA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_NAME_APPLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_NAME_BOFA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import seedu.address.model.AddressBook;
 import seedu.address.model.internshipapplication.Person;
 
 /**
@@ -45,10 +40,10 @@ public class TypicalPersons {
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person APPLE = new PersonBuilder().withName(VALID_NAME_APPLE)
-            .withEmail(VALID_EMAIL_APPLE).withTags(VALID_TAG_FRIEND).build();
-    public static final Person BOFA = new PersonBuilder().withName(VALID_NAME_BOFA)
-            .withEmail(VALID_EMAIL_BOFA).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+    public static final Person APPLE = new PersonBuilder().withName(VALID_COMPANY_NAME_APPLE)
+            .withEmail(VALID_COMPANY_EMAIL_APPLE).withTags(VALID_TAG_FRIEND).build();
+    public static final Person BOFA = new PersonBuilder().withName(VALID_COMPANY_NAME_BOFA)
+            .withEmail(VALID_COMPANY_EMAIL_BOFA).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
