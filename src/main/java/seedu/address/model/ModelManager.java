@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -113,6 +114,18 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void addGroup(Group group) {
+        requireNonNull(group);
+        addressBook.addGroup(group);
+    }
+
+    @Override
+    public void removeGroup(Group group) {
+        requireNonNull(group);
+        addressBook.removeGroup(group);
     }
 
     //=========== Person List Accessors ======================================================================

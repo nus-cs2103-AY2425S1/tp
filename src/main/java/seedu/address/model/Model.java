@@ -6,7 +6,10 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Group;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicateGroupException;
+import seedu.address.model.person.exceptions.GroupNotFoundException;
 
 /**
  * The API of the Model component.
@@ -88,6 +91,16 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Adds {@code group} to the groups in the {@code AddressBook}.
+     */
+    void addGroup(Group group) throws DuplicateGroupException;
+
+    /**
+     * Removes {@code group} from the groups in the {@code AddressBook}.
+     */
+    void removeGroup(Group group) throws GroupNotFoundException;
 
     /**
      * Updates the sort order of the person list to the given {@code comparator}.
