@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.areOfSameSize;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashMap;
@@ -20,6 +22,9 @@ public class ModuleRoleMap {
             + "1. Student: student or leave blank\n"
             + "2. Tutor: tutor or ta\n"
             + "3. Professor: professor or prof";
+
+    public static final String MESSAGE_INPUT_SIZE_CONSTRAINTS =
+            "ModuleCode array and RoleType array must be of the same length";
 
     /*
      * Input keyword must match one of the keyword provided in the regex.
@@ -42,10 +47,7 @@ public class ModuleRoleMap {
         requireAllNonNull((Object[]) moduleCodes);
         requireAllNonNull((Object[]) roleTypes);
 
-        if (moduleCodes.length != roleTypes.length) {
-            throw new IllegalArgumentException(
-                    "Module code array's length is not consistent with that of role type array.");
-        }
+        checkArgument(areOfSameSize(moduleCodes, roleTypes), MESSAGE_INPUT_SIZE_CONSTRAINTS);
 
         HashMap<ModuleCode, RoleType> newRoles = new HashMap<>();
         for (int i = 0; i < moduleCodes.length; i++) {

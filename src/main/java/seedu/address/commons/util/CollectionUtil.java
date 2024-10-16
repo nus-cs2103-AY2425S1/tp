@@ -44,4 +44,23 @@ public class CollectionUtil {
     public static boolean isAnyNonNull(Object... items) {
         return items != null && Arrays.stream(items).anyMatch(Objects::nonNull);
     }
+
+    /**
+     * Returns true if the supplied arrays are of the same length.
+     */
+    public static boolean areOfSameSize(Object[]... arrays) {
+        for (Object[] array: arrays) {
+            requireNonNull(array);
+        }
+        if (arrays.length == 0) {
+            return true;
+        }
+        int len = arrays[0].length;
+        for (Object[] array: arrays) {
+            if (array.length != len) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
