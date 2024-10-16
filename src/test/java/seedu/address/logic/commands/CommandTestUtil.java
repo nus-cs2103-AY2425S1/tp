@@ -17,11 +17,14 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.util.EditGuestDescriptor;
+import seedu.address.logic.commands.util.EditVendorDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditGuestDescriptorBuilder;
+import seedu.address.testutil.EditVendorDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -43,7 +46,6 @@ public class CommandTestUtil {
     public static final String VALID_RSVP_PENDING = "PENDING";
     public static final String VALID_COMPANY_AMY = "Wedding here";
     public static final String VALID_COMPANY_BOB = "Wedding anywhere";
-
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -71,16 +73,25 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditGuestDescriptor DESC_AMY;
+    public static final EditGuestDescriptor DESC_BOB;
+    public static final EditVendorDescriptor DESC_VENDOR_AMY;
+    public static final EditVendorDescriptor DESC_VENDOR_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new EditGuestDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withTags(VALID_TAG_FRIEND).withRsvp(VALID_RSVP_ACCEPTED).build();
+        DESC_BOB = new EditGuestDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withRsvp(VALID_RSVP_PENDING).build();
+        DESC_VENDOR_AMY = new EditVendorDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withTags(VALID_TAG_FRIEND).withCompany(VALID_COMPANY_AMY).build();
+        DESC_VENDOR_BOB = new EditVendorDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withCompany(VALID_COMPANY_BOB).build();
+
     }
 
     /**
