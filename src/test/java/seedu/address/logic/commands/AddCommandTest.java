@@ -23,6 +23,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.product.Ingredient;
+import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.Pastry;
 import seedu.address.model.product.PastryCatalogue;
 import seedu.address.testutil.PersonBuilder;
@@ -147,6 +149,16 @@ public class AddCommandTest {
 
         @Override
         public PastryCatalogue getPastryCatalogue() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addIngredient(Ingredient ingredient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public IngredientCatalogue getIngredientCatalogue() {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.product.Ingredient;
+import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.Pastry;
 import seedu.address.model.product.PastryCatalogue;
 
@@ -90,4 +92,8 @@ public interface Model {
     void addPastry(Pastry expectedPastry);
 
     PastryCatalogue getPastryCatalogue();
+
+    void addIngredient(Ingredient expectedIngredient);
+
+    IngredientCatalogue getIngredientCatalogue();
 }
