@@ -19,7 +19,7 @@ public class NewtagCommandParser implements Parser<NewtagCommand> {
      * @throws ParseException if the user input does not conform the expected format.
      */
     public NewtagCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
+        String trimmedArgs = args.trim().toLowerCase();
 
         // Check if the input is empty, exceeds the maximum length,
         // or contains non-alphanumeric characters other than spaces.
@@ -32,6 +32,7 @@ public class NewtagCommandParser implements Parser<NewtagCommand> {
 
         // Create and return the NewtagCommand.
         Tag tag = new Tag(trimmedArgs);
+        System.out.println(tag);
         return new NewtagCommand(tag);
     }
 }
