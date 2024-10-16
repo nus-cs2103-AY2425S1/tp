@@ -46,24 +46,24 @@ public class SearchCommandParserTest {
     @Test
     public void parse_emptyNameArg_throwsParseException() {
         assertParseFailure(parser, " n/ t/ friends",
-                "The name prefix (n/) cannot be empty. Please provide a valid name.");
+                "The prefix cannot be empty. Please input a keyword for the prefix.");
     }
 
     @Test
     public void parse_emptyTagArg_throwsParseException() {
-        assertParseFailure(parser, " n/Alice t/", "The tag prefix (t/) cannot be empty. Please provide a valid tag.");
+        assertParseFailure(parser, " n/Alice t/", "The prefix cannot be empty. Please input a keyword for the prefix.");
     }
 
     @Test
     public void parse_multipleNames_throwsParseException() {
         assertParseFailure(parser, " n/Alice n/Bob",
-                "Multiple name prefixes (n/) detected. Only one name prefix is allowed.");
+                "Multiple values specified for the following single-valued field(s): n/");
     }
 
     @Test
     public void parse_multipleTags_throwsParseException() {
         assertParseFailure(parser, " t/friend t/colleague",
-                "Multiple tag prefixes (t/) detected. Only one tag prefix is allowed.");
+                "Multiple values specified for the following single-valued field(s): t/");
     }
 
 }
