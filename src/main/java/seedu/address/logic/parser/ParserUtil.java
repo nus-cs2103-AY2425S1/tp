@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -94,6 +95,14 @@ public class ParserUtil {
         }
         return new Email(trimmedEmail);
     }
+
+    /*
+    public static List<Role> parseRole(List<String> roles) {
+        requireNonNull(roles);
+        return roles.stream().map(Role::new).toList();
+    }
+
+     */
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
