@@ -107,7 +107,10 @@ public class Student extends Person {
         attendanceRecords.put(date, attendance);
     }
 
+    //getters
+
     public PersonAttendance getAttendance(LocalDate date) {
         return attendanceRecords.get(date);
     }
+
 }
