@@ -27,6 +27,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
@@ -73,6 +74,18 @@ public class AddCommandTest {
         // Assert that the expected exception is thrown
         assertThrows(CommandException.class,
                 AddCommand.MESSAGE_DUPLICATE_STUDENTID + "1001", () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_invalidTutorial_throwsCommandException() {
+        TutorialClass tutorialClass = new TutorialClass("10000");
+        Student validStudent = new Student(new Name("ABC"), new StudentId("1999"),
+                new TutorialClass("100"), null);
+        AddCommand addCommand = new AddCommand(validStudent, tutorialClass);
+        ModelStub modelStub = new ModelStubWithStudent(ALICE);
+
+        assertThrows(CommandException.class,
+                AddCommand.MESSAGE_TUTORIAL_NOT_FOUND + tutorialClass, () -> addCommand.execute(modelStub));
     }
 
 
@@ -282,6 +295,11 @@ public class AddCommandTest {
             return this.student.isSameStudentId(studentId);
         }
 
+        @Override
+        public boolean hasTutorial(TutorialClass tutorialClass) {
+            requireNonNull(tutorialClass);
+            return false;
+        }
 
     }
 

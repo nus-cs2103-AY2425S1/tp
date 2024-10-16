@@ -49,6 +49,8 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        System.out.println("TUT " + tutorialClass);
+        System.out.println("STU " + toAdd);
 
         if (model.hasStudent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
@@ -59,7 +61,7 @@ public class AddCommand extends Command {
         }
 
         if (!model.hasTutorial(tutorialClass)) {
-            throw new CommandException(MESSAGE_TUTORIAL_NOT_FOUND + toAdd.getStudentId());
+            throw new CommandException(MESSAGE_TUTORIAL_NOT_FOUND + tutorialClass);
         }
 
         model.assignStudent(toAdd, tutorialClass);

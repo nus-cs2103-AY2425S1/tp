@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TutUtil.TUTORIAL_CLASS;
+import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalTutorials.TUTORIAL1;
 import static seedu.address.testutil.TypicalTutorials.TUTORIAL2;
 import static seedu.address.testutil.TypicalTutorials.getTypicalTutorialList;
@@ -82,6 +84,22 @@ public class TutorialListTest {
         tutorialList.addTutorial(TUTORIAL1);
         assertTrue(tutorialList.hasTutorial(TUTORIAL1));
         assertFalse(tutorialList.hasTutorial(TUTORIAL2));
+    }
+
+    @Test
+    public void hasTutorialClassTest_success() {
+        TutorialList tutorialList = new TutorialList();
+        tutorialList.addTutorial(TUTORIAL2);
+        assertTrue(tutorialList.hasTutorial(TUTORIAL_CLASS));
+    }
+
+
+    @Test
+    public void assignTutorialTest_success() {
+        TutorialList tutorialList = new TutorialList();
+        tutorialList.addTutorial(TUTORIAL2);
+        tutorialList.assignStudent(ALICE, TUTORIAL_CLASS);
+        assertEquals(tutorialList.getTutorials().get(0).get(ALICE.getName()), ALICE);
     }
 
     @Test
