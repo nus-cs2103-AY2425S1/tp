@@ -65,15 +65,6 @@ If you can type fast, PROperty can get your contact and property management task
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
-
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
-
 ### Adding a person: `add`
 
 Adds a person to the address book.
@@ -160,6 +151,8 @@ Format: `exit`
 ### Quick reference help: `help`
 
 Shows commands in a help menu for quick reference during use of PROperty.
+
+[//]: # (![help message]&#40;images/helpMessage.png&#41; // To be updated)
 
 Format: `help`
 
