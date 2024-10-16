@@ -7,10 +7,12 @@ import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_WARD_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.MEDICATION_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DIAGNOSIS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICATION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WARD_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.WARD_DESC_AMY;
@@ -100,9 +102,11 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + ID_DESC_BOB + NAME_DESC_AMY + WARD_DESC_AMY + DIAGNOSIS_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + ID_DESC_BOB + NAME_DESC_AMY + WARD_DESC_AMY
+                + DIAGNOSIS_DESC_AMY + MEDICATION_DESC_AMY;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withId(VALID_ID_BOB).withWard(VALID_WARD_AMY).withDiagnosis(VALID_DIAGNOSIS_AMY).build();
+                .withId(VALID_ID_BOB).withWard(VALID_WARD_AMY).withDiagnosis(VALID_DIAGNOSIS_AMY)
+                .withMedication(VALID_MEDICATION_AMY).build();
         /*
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
@@ -120,11 +124,13 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + ID_DESC_BOB + WARD_DESC_AMY + DIAGNOSIS_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + ID_DESC_BOB + WARD_DESC_AMY
+                + DIAGNOSIS_DESC_AMY + MEDICATION_DESC_AMY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withId(VALID_ID_BOB)
                 .withWard(VALID_WARD_AMY)
                 .withDiagnosis(VALID_DIAGNOSIS_AMY)
+                .withMedication(VALID_MEDICATION_AMY)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -155,6 +161,12 @@ public class EditCommandParserTest {
         // diagnosis
         userInput = targetIndex.getOneBased() + DIAGNOSIS_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withDiagnosis(VALID_DIAGNOSIS_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // medication
+        userInput = targetIndex.getOneBased() + MEDICATION_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withMedication(VALID_MEDICATION_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

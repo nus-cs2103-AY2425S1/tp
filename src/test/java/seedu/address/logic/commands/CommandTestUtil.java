@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WARD;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -33,6 +34,8 @@ public class CommandTestUtil {
     public static final String VALID_WARD_BOB = "B3";
     public static final String VALID_DIAGNOSIS_AMY = "Celiac Disease";
     public static final String VALID_DIAGNOSIS_BOB = "Chronic Sinusitis";
+    public static final String VALID_MEDICATION_AMY = "gluten-free diet";
+    public static final String VALID_MEDICATION_BOB = "Fluticasone (Flonase Veramyst)";
     public static final String VALID_NOTES_AMY = "Like skiing.";
     public static final String VALID_NOTES_BOB = "Favourite pastime: Eating";
     /*
@@ -55,6 +58,8 @@ public class CommandTestUtil {
     public static final String WARD_DESC_BOB = " " + PREFIX_WARD + VALID_WARD_BOB;
     public static final String DIAGNOSIS_DESC_AMY = " " + PREFIX_DIAGNOSIS + VALID_DIAGNOSIS_AMY;
     public static final String DIAGNOSIS_DESC_BOB = " " + PREFIX_DIAGNOSIS + VALID_DIAGNOSIS_BOB;
+    public static final String MEDICATION_DESC_AMY = " " + PREFIX_MEDICATION + VALID_MEDICATION_AMY;
+    public static final String MEDICATION_DESC_BOB = " " + PREFIX_MEDICATION + VALID_MEDICATION_BOB;
     /*
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
@@ -71,6 +76,7 @@ public class CommandTestUtil {
     public static final String INVALID_ID_DESC = " " + PREFIX_ID + "P12D45"; // Alphabets not allowed in numeric portion
     public static final String INVALID_WARD_DESC = " " + PREFIX_WARD + "A!"; // No special characters allowed
     public static final String INVALID_DIAGNOSIS_DESC = " " + PREFIX_DIAGNOSIS + "$<>"; // Only a-z and .()/- allowed
+    public static final String INVALID_MEDICATION_DESC = " " + PREFIX_MEDICATION + "$<>"; // Only a-z and .()/- allowed
 
     /*
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -88,9 +94,11 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).withId(VALID_ID_AMY)
-                .withWard(VALID_WARD_AMY).withDiagnosis(VALID_DIAGNOSIS_AMY).build();
+                .withWard(VALID_WARD_AMY).withDiagnosis(VALID_DIAGNOSIS_AMY)
+                .withMedication(VALID_MEDICATION_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).withId(VALID_ID_BOB)
-                .withWard(VALID_WARD_BOB).withDiagnosis(VALID_DIAGNOSIS_BOB).build();
+                .withWard(VALID_WARD_BOB).withDiagnosis(VALID_DIAGNOSIS_BOB)
+                .withMedication(VALID_MEDICATION_BOB).build();
     }
 
     /**

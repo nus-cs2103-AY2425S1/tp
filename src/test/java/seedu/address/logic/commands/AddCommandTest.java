@@ -56,9 +56,9 @@ public class AddCommandTest {
     @Test
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").withId("P12345").withWard("A1")
-                .withDiagnosis("Celiac Disease").build();
+                .withDiagnosis("Celiac Disease").withMedication("gluten-free diet").build();
         Person bob = new PersonBuilder().withName("Bob").withId("P54321").withWard("B3")
-                .withDiagnosis("Celiac Disease").build();
+                .withDiagnosis("Celiac Disease").withMedication("gluten-free diet").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 

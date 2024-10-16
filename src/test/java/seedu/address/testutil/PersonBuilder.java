@@ -16,6 +16,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ID = "P12345";
     public static final String DEFAULT_WARD = "A1";
     public static final String DEFAULT_DIAGNOSIS = "Celiac Disease";
+    public static final String DEFAULT_MEDICATION = "gluten-free diet";
     /*
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
@@ -42,6 +43,7 @@ public class PersonBuilder {
         id = new Id(DEFAULT_ID);
         ward = new Ward(DEFAULT_WARD);
         diagnosis = new Diagnosis(DEFAULT_DIAGNOSIS);
+        medication = new Medication(DEFAULT_MEDICATION);
         /*
         diagnosis = new Diagnosis("temp");
         medication = new Medication("temp");
@@ -60,6 +62,7 @@ public class PersonBuilder {
         id = personToCopy.getId();
         ward = personToCopy.getWard();
         diagnosis = personToCopy.getDiagnosis();
+        medication = personToCopy.getMedication();
         /*
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
@@ -101,6 +104,14 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Diagnosis} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withMedication(String medication) {
+        this.medication = new Medication(medication);
+        return this;
+    }
+
     /*
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
@@ -136,7 +147,7 @@ public class PersonBuilder {
     */
 
     public Person build() {
-        return new Person(name, id, ward, diagnosis);
+        return new Person(name, id, ward, diagnosis, medication);
     }
 
 }

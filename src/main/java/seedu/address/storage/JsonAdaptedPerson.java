@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Diagnosis;
 import seedu.address.model.person.Id;
+import seedu.address.model.person.Medication;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Ward;
@@ -24,8 +25,8 @@ class JsonAdaptedPerson {
     private final String id;
     private final String ward;
     private final String diagnosis;
-    /*
     private final String medication;
+    /*
     private final String phone;
     private final String email;
     private final String address;
@@ -57,11 +58,13 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("id") String id,
-                             @JsonProperty("ward") String ward, @JsonProperty("diagnosis") String diagnosis) {
+                             @JsonProperty("ward") String ward, @JsonProperty("diagnosis") String diagnosis,
+                             @JsonProperty("medication") String medication) {
         this.name = name;
         this.id = id;
         this.ward = ward;
         this.diagnosis = diagnosis;
+        this.medication = medication;
         /*
         this.diagnosis = diagnosis;
         this.medication = medication;
@@ -80,8 +83,8 @@ class JsonAdaptedPerson {
         id = source.getId().value;
         ward = source.getWard().value;
         diagnosis = source.getDiagnosis().value;
-        /*
         medication = source.getMedication().value;
+        /*
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
@@ -137,6 +140,15 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Diagnosis.MESSAGE_CONSTRAINTS);
         }
         final Diagnosis modelDiagnosis = new Diagnosis(diagnosis);
+
+        if (medication == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Medication.class.getSimpleName()));
+        }
+        if (!Medication.isValidMedication(medication)) {
+            throw new IllegalValueException(Medication.MESSAGE_CONSTRAINTS);
+        }
+        final Medication modelMedication = new Medication(medication);
         /*
 
         if (email == null) {
@@ -162,7 +174,7 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
          */
-        return new Person(modelName, modelId, modelWard, modelDiagnosis);
+        return new Person(modelName, modelId, modelWard, modelDiagnosis, modelMedication);
     }
 
 }
