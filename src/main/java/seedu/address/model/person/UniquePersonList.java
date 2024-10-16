@@ -98,6 +98,20 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Deletes the appointment of the given person.
+     * The person must exist in the list.
+     */
+    public void deleteAppointment(Person target) {
+        requireNonNull(target);
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+
+        internalList.get(index).removeAppointment();
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {

@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a Person's scheduled appointment in the address book.
@@ -16,11 +15,9 @@ public class Schedule {
      *
      * @param dateTime The date and time of the scheduled appointment.
      * @param notes Optional notes regarding the appointment.
-     * @throws NullPointerException if the {@code dateTime} is null.
      */
     public Schedule(String dateTime, String notes) {
-        requireNonNull(dateTime);
-        this.dateTime = dateTime;
+        this.dateTime = dateTime == null ? "" : dateTime;
         this.notes = notes;
     }
 

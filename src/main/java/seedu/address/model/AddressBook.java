@@ -94,6 +94,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Deletes the appointment of the given {@code target}.
+     * The person must exist in the address book.
+     */
+    public void deleteAppointment(Person target) {
+        persons.deleteAppointment(target);
+    }
+
     //// util methods
 
     @Override
