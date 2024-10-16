@@ -20,7 +20,7 @@ public class Supplier extends Person {
     private final String supplyFrequency;
     private final int minimumOrderQuantity;
     private final List<String> paymentTerms;  // Multiple payment options
-    private final OrderList<SupplyOrder> supplyOrders;
+    private final List<SupplyOrder> openSupplyOrders;
 
     /**
      * Every field must be present and not null.
@@ -35,19 +35,7 @@ public class Supplier extends Person {
         this.supplyFrequency = supplyFrequency;
         this.minimumOrderQuantity = minimumOrderQuantity;
         this.paymentTerms = paymentTerms;
-        this.supplyOrders = new OrderList<>();
-    }
-
-    public void addSupplyOrder(SupplyOrder order) {
-        supplyOrders.addOrder(order);
-    }
-
-    public List<SupplyOrder> collateOrders() {
-        return supplyOrders.getAllOrders();
-    }
-
-    public int getSupplyOrderCount() {
-        return supplyOrders.getOrderCount();
+        this.openSupplyOrders = new ArrayList<>();
     }
 
     public String getCompanyName() {
