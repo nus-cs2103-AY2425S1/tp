@@ -3,8 +3,11 @@ layout: page
 title: PROperty
 ---
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+[//]: # ([![CI Status]&#40;https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg&#41;]&#40;https://github.com/se-edu/addressbook-level3/actions&#41;)
+
+[//]: # ([![codecov]&#40;https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg&#41;]&#40;https://codecov.io/gh/se-edu/addressbook-level3&#41;)
+
+[//]: # (The commented out section is not relevent to PROperty. However, I do not know how to properly change the links such that it reflect PROperty's content. Hence, I have left it commented out for future reference.)
 
 ![Ui](images/Ui.png)
 
