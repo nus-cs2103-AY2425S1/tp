@@ -38,7 +38,7 @@ public class NameTest {
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr")); // long names
         assertTrue(Name.isValidName("Goliath, David")); // contains comma character
-        assertTrue(Name.isValidName("David Roger, Jackson Ray Jr, Peterson Rogers\"")); // contains comma characters
+        assertTrue(Name.isValidName("David Roger, Jackson Ray Jr, Peterson Rogers")); // contains comma characters
     }
 
     @Test
