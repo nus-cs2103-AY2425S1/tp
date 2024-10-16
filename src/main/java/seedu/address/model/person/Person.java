@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -88,7 +89,7 @@ public class Person {
      *
      * @param newModules A list of modules to set.
      */
-    public void setModules(ArrayList<Module> newModules) {
+    public void setModules(List<Module> newModules) {
         modules.clear();
         modules.addAll(newModules);
     }

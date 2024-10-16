@@ -1,5 +1,9 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -7,6 +11,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -27,6 +32,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String course;
     private final String tag;
+    private final List<JsonAdaptedModule> modules = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -38,7 +44,8 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email,
                              @JsonProperty("address") String address,
                              @JsonProperty("course") String course,
-                             @JsonProperty("tag") String tag) {
+                             @JsonProperty("tag") String tag,
+                             @JsonProperty("modules") List<JsonAdaptedModule> modules) {
         this.studentId = studentId;
         this.name = name;
         this.phone = phone;
@@ -46,6 +53,9 @@ class JsonAdaptedPerson {
         this.address = address;
         this.course = course;
         this.tag = tag;
+        if (modules != null) {
+            this.modules.addAll(modules);
+        }
     }
 
     /**
@@ -59,6 +69,8 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         course = source.getCourse().course;
         tag = source.getTag().toString();
+        modules.addAll(source.getModules().stream()
+                .map(JsonAdaptedModule::new).toList());
     }
 
     /**
@@ -67,10 +79,10 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        /*final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }*/
+        final List<Module> modelModules = new ArrayList<>();
+        for (JsonAdaptedModule module : modules) {
+            modelModules.add(module.toModelType());
+        }
 
         if (studentId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -129,7 +141,10 @@ class JsonAdaptedPerson {
         }
         final Tag modelTag = new Tag(tag);
 
-        return new Person(modelStudentId, modelName, modelPhone, modelEmail, modelAddress, modelCourse, modelTag);
+        Person person = new Person(modelStudentId, modelName, modelPhone, modelEmail, modelAddress, modelCourse, modelTag);
+        person.setModules(modelModules);
+
+        return person;
     }
 
 }
