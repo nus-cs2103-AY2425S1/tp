@@ -9,20 +9,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RSVP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.util.EditGuestDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -72,31 +68,6 @@ public class EditGuestCommand extends Command {
         this.editGuestDescriptor = new EditGuestDescriptor(editGuestDescriptor);
     }
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        List<Guest> lastShownList = model.getFilteredGuestList().stream()
-                .filter(person -> person instanceof Guest)
-                .map(person -> (Guest) person)
-                .collect(Collectors.toCollection(FXCollections::observableArrayList));;
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Guest guestToEdit = lastShownList.get(index.getZeroBased());
-        Guest editedGuest = createEditedGuest(guestToEdit, editGuestDescriptor);
-        System.out.println(editedGuest.toString());
-
-        if (!guestToEdit.isSamePerson(editedGuest) && model.hasPerson(editedGuest)) {
-            throw new CommandException(MESSAGE_DUPLICATE_GUEST);
-        }
-
-        model.setPerson(guestToEdit, editedGuest);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_GUEST_SUCCESS, Messages.format(editedGuest)));
-    }
-
     /**
      * Creates and returns a {@code Guest} with the details of {@code guestToEdit}
      * edited with {@code editGuestDescriptor}.
@@ -112,6 +83,30 @@ public class EditGuestCommand extends Command {
         Rsvp updatedRsvp = editGuestDescriptor.getRsvp().orElse(guestToEdit.getRsvp());
 
         return new Guest(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedRsvp);
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Guest> lastShownList = model.getFilteredGuestList().stream()
+                .filter(person -> person instanceof Guest)
+                .map(person -> (Guest) person)
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Guest guestToEdit = lastShownList.get(index.getZeroBased());
+        Guest editedGuest = createEditedGuest(guestToEdit, editGuestDescriptor);
+
+        if (!guestToEdit.isSamePerson(editedGuest) && model.hasPerson(editedGuest)) {
+            throw new CommandException(MESSAGE_DUPLICATE_GUEST);
+        }
+
+        model.setPerson(guestToEdit, editedGuest);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_GUEST_SUCCESS, Messages.format(editedGuest)));
     }
 
     @Override
@@ -136,129 +131,5 @@ public class EditGuestCommand extends Command {
                 .add("index", index)
                 .add("editGuestDescriptor", editGuestDescriptor)
                 .toString();
-    }
-
-    /**
-     * Stores the details to edit the guest with. Each non-empty field value will replace the
-     * corresponding field value of the guest.
-     */
-    public static class EditGuestDescriptor {
-        private Name name;
-        private Phone phone;
-        private Email email;
-        private Address address;
-        private Set<Tag> tags;
-        private Rsvp rsvp;
-
-        public EditGuestDescriptor() {}
-
-        /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public EditGuestDescriptor(EditGuestDescriptor toCopy) {
-            setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
-            setTags(toCopy.tags);
-            setRsvp(toCopy.rsvp);
-        }
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, rsvp);
-        }
-
-        public void setName(Name name) {
-            this.name = name;
-        }
-
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
-        }
-
-        public void setPhone(Phone phone) {
-            this.phone = phone;
-        }
-
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
-        }
-
-        public void setEmail(Email email) {
-            this.email = email;
-        }
-
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
-        }
-
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
-        public void setRsvp(Rsvp rsvp) {
-            this.rsvp = rsvp;
-        }
-
-        public Optional<Rsvp> getRsvp() {
-            return Optional.ofNullable(rsvp);
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            if (other == this) {
-                return true;
-            }
-
-            // instanceof handles nulls
-            if (!(other instanceof EditGuestDescriptor)) {
-                return false;
-            }
-
-            EditGuestDescriptor otherEditGuestDescriptor = (EditGuestDescriptor) other;
-            return Objects.equals(name, otherEditGuestDescriptor.name)
-                    && Objects.equals(phone, otherEditGuestDescriptor.phone)
-                    && Objects.equals(email, otherEditGuestDescriptor.email)
-                    && Objects.equals(address, otherEditGuestDescriptor.address)
-                    && Objects.equals(tags, otherEditGuestDescriptor.tags)
-                    && Objects.equals(rsvp, otherEditGuestDescriptor.rsvp);
-        }
-
-        @Override
-        public String toString() {
-            return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("tags", tags)
-                    .add("RSVP", rsvp)
-                    .toString();
-        }
     }
 }
