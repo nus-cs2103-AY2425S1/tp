@@ -6,7 +6,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
@@ -239,3 +238,4 @@ public class AddressBook implements ReadOnlyAddressBook {
         return Objects.hash(vendors.hashCode(), events.hashCode());
     }
 }
+
