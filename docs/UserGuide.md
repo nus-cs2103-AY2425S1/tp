@@ -31,11 +31,13 @@ ClientGrid is an **address book** designed for real estate agents to efficiently
 
    * `list k/clients` : Lists all clients.
 
-   * `addbuyer n/John p/12345678 e/john@gmail.com` : Add a buyer whose name is `John`, phone number is `12345678` and email is `john@gmail.com`.
+   * `addbuyer n/John p/12345678 e/john@gmail.com` : Adds a buyer whose name is `John`, phone number is `12345678` and email is `john@gmail.com`.
 
    * `deletebuyer p/81234567` : Deletes the buyer with contact number `81234567`.
-
-   * `clear` : Deletes all contacts.
+   
+   * `addproperty c/124894 u/15-20` : Adds a property with postal code 124894 and unit number #15-20.
+   
+   * `deleteproperty c/124894 u/15-20` : Deletes the property with postal code 124894 and unit number #15-20.
 
    * `exit` : Exits the app.
 
@@ -154,19 +156,19 @@ Key Considerations:
 * If the user provides an invalid key, the system will respond with an error message indicating that only the valid keys are accepted.
 
 Examples:
-* `list k/buyers` displays a list of all existing buyers in the address book
+* `list k/buyers` displays a list of all existing buyers in the address book.
 
   ![result for 'list k/sellers'](images/list.png)
 
 ### Adding a buyer : `addbuyer`
 
-Add a specified buyer into the client book.
+Add a specified buyer into the client book of ClientGrid.
 
 Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
 
 * Adds a buyer with the specified `BUYER_NAME`, `BUYER_PHONE_NUMBER`, and `BUYER_EMAIL`.
-* The `BUYER_NAME` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. The `BUYER_NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the in-memory database
-* The `BUYER_PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’
+* The `BUYER_NAME` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. The `BUYER_NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the in-memory database.
+* The `BUYER_PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’.
 * The `BUYER_EMAIL` should follow the format local-part@domain and adhere to the following constraints: The local-part must consist only of alphanumeric characters and allowed special characters, with no special characters at the beginning or end. After the local-part, there must be an '@' followed by the domain name. The domain name consists of domain labels separated by periods. Each domain label must start and end with an alphanumeric character and may contain hyphens in between. Additionally, the domain must end with a domain label that is at least two characters long.
 
 Examples:
@@ -176,13 +178,13 @@ Examples:
 
 ### Adding a seller : `addseller`
 
-Add a specified seller into the client book.
+Add a specified seller into the client book of ClientGrid.
 
 Format: `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`
 
 * Adds a seller with the specified `SELLER_NAME`, `SELLER_PHONE_NUMBER`, and `SELLER_EMAIL`.
-* The `SELLER_NAME` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. The `SELLER_NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the in-memory database
-* The `SELLER_PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’
+* The `SELLER_NAME` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. The `SELLER_NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the in-memory database.
+* The `SELLER_PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’.
 * The `SELLER_EMAIL` should follow the format local-part@domain and adhere to the following constraints: The local-part must consist only of alphanumeric characters and allowed special characters, with no special characters at the beginning or end. After the local-part, there must be an '@' followed by the domain name. The domain name consists of domain labels separated by periods. Each domain label must start and end with an alphanumeric character and may contain hyphens in between. Additionally, the domain must end with a domain label that is at least two characters long.
 
 Examples:
@@ -192,12 +194,12 @@ Examples:
 
 ### Deleting a buyer : `deletebuyer`
 
-Deletes the specified buyer from the client book.
+Deletes the specified buyer from the client book of ClientGrid.
 
 Format: `deletebuyer p/PHONE_NUMBER`
 
 * Deletes the buyer with the specified `PHONE_NUMBER`.
-* The `PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’
+* The `PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’.
 
 
 Examples:
@@ -206,12 +208,12 @@ Examples:
 
 ### Deleting a seller : `deleteseller`
 
-Deletes the specified seller from the client book.
+Deletes the specified seller from the client book of ClientGrid.
 
 Format: `deleteseller p/PHONE_NUMBER`
 
 * Deletes the seller with the specified `PHONE_NUMBER`.
-* The `PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’
+* The `PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’.
 
 Examples:
 * `deleteseller p/98765432` deletes the seller with phone number `98765432` from the client book.
@@ -220,18 +222,33 @@ Examples:
 
 ### Adding a property : `addproperty`
 
-Add a specified property into the client book.
+Add a specified property into the property book of ClientGrid.
 
 Format: `addproperty c/POSTAL_CODE u/UNIT_NUMBER`
 
 * Adds a property with the specified `POSTAL_CODE` and `UNIT_NUMBER`.
-* The `POSTAL_CODE` must be exactly 6 digits with each digit in the range [0-9]. It does not accept any non-integer characters or spaces
-* The `UNIT_NUMBER` comprises of numbers that is delimited by exactly one dash(-). On either side of the dash are numbers comprising of two or more digit. The range of numbers of the left hand side of the dash is [00-148] and the right hand side is [00-111110]. Other than the dash, other non-integer characters or spaces are not accepted
+* The `POSTAL_CODE` must be exactly 6 digits with each digit in the range [0-9]. It does not accept any non-integer characters or spaces.
+* The `UNIT_NUMBER` comprises of two numbers delimited by exactly one dash(-). On either side of the dash are numbers comprising of two or more digits. The range of numbers of the left hand side of the dash is [00-148] and the right hand side is [00-111110]. Other than the dash, other non-integer characters or spaces are not accepted.
 
 Examples:
-* `addproperty c/124894 u/15-20` adds a property with postal code `124894` and unit number is `15-20`.
+* `addproperty c/124894 u/15-20` adds a property with postal code `124894` and unit number `15-20`.
 
   ![result for 'addproperty c/124894 u/15-20'](images/addproperty.png)
+
+### Deleting a property : `deleteproperty`
+
+Deletes a specified property from the property book of ClientGrid.
+
+Format: `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`
+
+* Deletes a property with the specified `POSTAL_CODE` and `UNIT_NUMBER`.
+* The `POSTAL_CODE` must be exactly 6 digits with each digit in the range [0-9]. It does not accept any non-integer characters or spaces.
+* The `UNIT_NUMBER` comprises of two numbers delimited by exactly one dash(-). On either side of the dash are numbers comprising of two or more digits. The range of numbers of the left hand side of the dash is [00-148] and the right hand side is [00-111110]. Other than the dash, other non-integer characters or spaces are not accepted.
+
+Examples:
+* `deleteproperty c/124894 u/15-20` deletes a property with postal code `124894` and unit number `15-20`.
+
+  ![result for 'deleteproperty c/124894 u/15-20'](images/deleteproperty.png)
 
 ### Clearing all entries : `clear`
 
@@ -296,4 +313,5 @@ Action     | Format, Examples
 **Delete Buyer** | `deletebuyer p/PHONE_NUMBER`
 **Delete Seller** | `deleteseller p/PHONE_NUMBER`
 **Add Property** | `addproperty c/POSTAL_CODE u/UNIT_NUMBER`
+**Delete Property** | `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`
 
