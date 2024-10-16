@@ -126,6 +126,21 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Locating persons by tag: `findtag`
+
+Finds persons whose tags contain any of the given words.
+
+Format: `findtag TAG [MORE_TAGS]`
+
+- The search is case-insensitive. e.g., `HDB` will match `hdb`.
+- Persons with at least one matching tag will be returned (i.e., an `OR` search).
+- The order of the tags does not matter.
+
+Examples:
+
+- `findtag HDB` returns persons tagged with `HDB`.
+- `findtag HDB colleague` returns persons tagged with either `HDB` or `colleague`.
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
