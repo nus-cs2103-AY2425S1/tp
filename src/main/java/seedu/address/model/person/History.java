@@ -1,127 +1,247 @@
 package seedu.address.model.person;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
 import java.util.TreeMap;
 
 import seedu.address.commons.exceptions.AppNotFoundException;
 
 /**
  * Represents a medical history entry associated with a doctor.
- * This class will store details of the appointments or medical interactions.
+ * This class stores details of the appointments or medical interactions
+ * for a patient, including the doctor, date, and remarks.
  */
 public class History {
-    // Nigel's suggestion
+
     /**
-     * Static databse for ALL appointments sorted by Local Date Time
+     * Static database for all appointments sorted by LocalDateTime.
+     * It contains appointments shared across all patients.
      */
     private static TreeMap<LocalDateTime, Appointment> appointmentDatabase;
 
     /**
-     * List of appointments for this instance of a person.
+     * List of appointment dates (LocalDateTime) for this instance of a person.
      */
-    private ArrayList<LocalDateTime> appointments;
-
-    private TreeMap<LocalDateTime, TreeMap<Integer, String>> appointmentHistory;
+    private final ArrayList<LocalDateTime> appointments;
 
     /**
-     * Placeholder default constructor TODO.
+     * Default constructor for History class.
+     * Initializes the appointment database and the patient's list of appointments.
      */
     public History() {
-    }
-
-    /**
-     * Constructs a History object to keep track the appointment history of a single patient.
-     * @param date date of the appointment
-     * @param doctorId ID of the doctor that the patient is under
-     * @param remark some remarks that the doctor inputs for the appointment session including
-     *               treatment, condition and many others
-     */
-    public History(LocalDateTime date, int doctorId, String remark) {
-        TreeMap<Integer, String> appointmentDetails = new TreeMap<>();
-        appointmentDetails.put(doctorId, remark);
-        this.appointmentHistory = new TreeMap<>();
-        appointmentHistory.put(date, appointmentDetails);
-    }
-
-    /**
-     * Constructs a History object to keep track the appointment history of a single patient.
-     * Remark is set to null by default
-     * @param date date of the appointment
-     * @param doctorId ID of the doctor that the patient is under
-     */
-    public History(LocalDateTime date, int doctorId) {
-        TreeMap<Integer, String> appointmentDetails = new TreeMap<>();
-        appointmentDetails.put(doctorId, null);
-        this.appointmentHistory = new TreeMap<>();
-        appointmentHistory.put(date, appointmentDetails);
-    }
-
-    /**
-     * returns the detail of one appointment
-     * @param date date of the appointment
-     * @param doctorId the doctor that the appointment is scheduled under
-     *
-     * @return all remarks of that appointment which could include the patient's condition and treatment.
-     * @throws AppNotFoundException if the appointment with the given details cannot be found.
-     */
-    public String getOneAppointmentDetail(LocalDateTime date, int doctorId) throws AppNotFoundException {
-        TreeMap<Integer, String> appointmentDetails = appointmentHistory.get(date);
-        if (appointmentDetails == null || !appointmentDetails.containsKey(doctorId)) {
-            throw new AppNotFoundException("No such appointment is found.");
+        // Initialize the static appointmentDatabase if it has not been initialized yet
+        if (appointmentDatabase == null) {
+            appointmentDatabase = new TreeMap<>();
         }
-        return appointmentDetails.get(doctorId);
+        appointments = new ArrayList<>();
     }
 
     /**
-     * returns the entire appointment history of a patient
+     * Constructs a History object for a specific patient to track their appointments.
+     * Sets a default remark of "no remark" for the appointment.
      *
-     * @return all the past appointments of a patient
+     * @param date The date and time of the appointment.
+     * @param patientId The ID of the patient for the appointment.
+     * @param doctorId The ID of the doctor for the appointment.
      */
-    public TreeMap<LocalDateTime, TreeMap<Integer, String>> getAllAppointment() {
-        return new TreeMap<>(appointmentHistory);
+    public History(LocalDateTime date, Id patientId, Id doctorId) {
+        this();
+        addAppointment(date, patientId, doctorId, "no remark");
     }
 
-    // Nigel's code suggestion
+    /**
+     * Constructs a History object for a specific patient to track their appointments.
+     * Allows for a remark to be set for the appointment.
+     *
+     * @param date The date and time of the appointment.
+     * @param patientId The ID of the patient for the appointment.
+     * @param doctorId The ID of the doctor for the appointment.
+     * @param remark Remarks provided by the doctor for the appointment.
+     */
+    public History(LocalDateTime date, Id patientId, Id doctorId, String remark) {
+        this();
+        addAppointment(date, patientId, doctorId, remark);
+    }
 
     /**
-     * Adds an appointment to the database with the specified content.
+     * Adds a new appointment to the shared appointment database and the patient's history.
      *
-     * @param dateTime Date & time of the appointment.
-     * @param patientId Id of patient in the appointment.
-     * @param doctorId Id of doctor in the appointment.
-     * @return True if appointment was successfully added, false if otherwise.
+     * @param date The date and time of the appointment.
+     * @param patientId The ID of the patient.
+     * @param doctorId The ID of the doctor.
+     * @param remark The remark for the appointment.
+     * @return true if the appointment was successfully added, false if a duplicate was found.
      */
-    public boolean addAppointment(LocalDateTime dateTime, Id patientId, Id doctorId, String remarks) {
-        // TODO something new Appointment(dateTime, patientId, doctorId, remarks)
-        // TODO also need add to this.personAppointments
-        // Other notes: check for duplicate appointments / clashing timeslots w doctor & patient
-        // What to throw if got error
+    public boolean addAppointment(LocalDateTime date, Id patientId, Id doctorId, String remark) {
+        if (appointmentDatabase.containsKey(date)) {
+            Appointment existingAppointment = appointmentDatabase.get(date);
+            if (existingAppointment.getPatientId().equals(patientId)
+                    && existingAppointment.getDoctorId().equals(doctorId)) {
+                return false; // Duplicate found
+            }
+        }
+        Appointment appointment = new Appointment(patientId, doctorId, remark);
+        appointmentDatabase.put(date, appointment);
+        appointments.add(date);
+        return true;
+    }
+
+    /**
+     * Deletes an appointment from the shared appointment database and the patient's history.
+     *
+     * @param date The date and time of the appointment.
+     * @param patientId The ID of the patient.
+     * @param doctorId The ID of the doctor.
+     * @return true if the appointment was successfully deleted, false if no matching appointment was found.
+     */
+    public static boolean deleteAppointment(LocalDateTime date, Id patientId, Id doctorId) {
+        Appointment appointment = appointmentDatabase.get(date);
+        Patient patient = Patient.getPatientWithId(patientId);
+        History history = patient.getHistory();
+        if (appointment == null || history.checkDuplicateAppointments(date)) {
+            return false;
+        }
+        appointmentDatabase.remove(date);
+        history.removeAppointments(date);
+        return true;
+    }
+
+    /**
+     * Removes an appointment from the patient's history.
+     *
+     * @param date The date and time of the appointment to remove.
+     */
+    public void removeAppointments(LocalDateTime date) {
+        if (appointments.contains(date)) {
+            appointments.remove(date);
+        }
+    }
+
+    /**
+     * Checks if the patient has duplicate appointments for the same date.
+     *
+     * @param date The date to check for duplicates.
+     * @return true if duplicate appointments are found, false otherwise.
+     */
+    public boolean checkDuplicateAppointments(LocalDateTime date) {
+        if (Collections.frequency(appointments, date) > 1) {
+            return true; // Duplicate found
+        }
         return false;
     }
 
     /**
-     * Deletes the specified appointment with the respective details.
-     * @param dateTime Date & time of the appointment to delete.
-     * @param patientId Id of the patient in the appointment.
-     * @param doctorId Id of doctor in the appointment.
-     * @return True if appointment was successfully deleted, false if otherwise.
+     * Retrieves the details of a single appointment based on the date, patient, and doctor.
+     *
+     * @param date The date and time of the appointment.
+     * @param patientId The ID of the patient.
+     * @param doctorId The ID of the doctor.
+     * @return The appointment details.
+     * @throws AppNotFoundException if no appointment is found for the given patient and doctor.
      */
-    public static boolean deleteAppointment(LocalDateTime dateTime, Id patientId, Id doctorId) {
-        // TODO something
-        // TODO rmb need delete from this.personAppoitments
-        return false;
+    public Appointment getOneAppointmentDetail(LocalDateTime date, Id patientId, Id doctorId)
+            throws AppNotFoundException {
+        if (!appointments.contains(date)) {
+            throw new AppNotFoundException("No appointment found in this patient's history for the given date.");
+        }
+        Appointment appointment = appointmentDatabase.get(date);
+        if (appointment == null || !appointment.getPatientId().equals(patientId)
+                || !appointment.getDoctorId().equals(doctorId)) {
+            throw new AppNotFoundException("No such appointment found for the given patient and doctor.");
+        }
+        return appointment;
     }
 
     /**
-     * Returns a String (or not String) representing all appointments related to that user id.
+     * Retrieves all the appointments for a specific patient.
      *
-     * @param id Id of Person to get appointments of.
-     * @return String representing all appointments related to the user id provided.
+     * @param patientId The ID of the patient.
+     * @return A string listing all the appointments for the patient.
      */
-    public static String getAllAppointments(Id id) {
-        // TODO
-        return "WIP";
+    public String getAllPatientsAppointments(Id patientId) {
+        StringBuilder result = new StringBuilder("These are all the appointments this patient has:\n");
+        for (LocalDateTime date : appointments) {
+            Appointment appointment = appointmentDatabase.get(date);
+            if (appointment.getPatientId().equals(patientId)) {
+                result.append(formatAppointment(date, appointment)).append("\n");
+            }
+        }
+        return result.toString();
     }
 
+    /**
+     * Retrieves all appointments for a specific doctor.
+     *
+     * @param doctorId The ID of the doctor.
+     * @return A string listing all appointments for the doctor.
+     */
+    public static String getAllAppointments(Id doctorId) {
+        StringBuilder sb = new StringBuilder("All appointments for you in the database:\n");
+        for (Map.Entry<LocalDateTime, Appointment> entry : appointmentDatabase.entrySet()) {
+            Id checkId = entry.getValue().getDoctorId();
+            if (checkId.equals(doctorId)) {
+                LocalDateTime date = entry.getKey();
+                Appointment appointment = entry.getValue();
+                sb.append(formatAppointment(date, appointment)).append("\n");
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Retrieves all appointments for a specific day for a patient and doctor.
+     *
+     * @param date The date to check.
+     * @param patientId The ID of the patient.
+     * @param doctorId The ID of the doctor.
+     * @return A list of appointments on the specified day.
+     * @throws AppNotFoundException if no appointments are found for the specified date.
+     */
+    public ArrayList<Appointment> getAppointmentsForDay(LocalDate date, Id patientId, Id doctorId)
+            throws AppNotFoundException {
+        ArrayList<Appointment> appointmentsForDay = new ArrayList<>();
+        for (LocalDateTime appointmentDateTime : appointments) {
+            Appointment appointment = appointmentDatabase.get(appointmentDateTime);
+            if (appointmentDateTime.toLocalDate().equals(date)
+                    && appointment.getPatientId().equals(patientId)
+                    && appointment.getDoctorId().equals(doctorId)) {
+                appointmentsForDay.add(appointment);
+            }
+        }
+        if (appointmentsForDay.isEmpty()) {
+            throw new AppNotFoundException("No appointments found for the specified date.");
+        }
+        return appointmentsForDay;
+    }
+
+    /**
+     * Formats the appointment details for display.
+     *
+     * @param dateTime The date and time of the appointment.
+     * @param appointment The appointment object.
+     * @return A formatted string representing the appointment details.
+     */
+    private static String formatAppointment(LocalDateTime dateTime, Appointment appointment) {
+        return String.format("Appointment on %s: Doctor ID = %s, Patient ID = %s",
+                dateTime.toString(), appointment.getDoctorId().toString(), appointment.getPatientId().toString());
+    }
+
+    /**
+     * Returns a string representation of all appointments in the database.
+     *
+     * @return A string listing all appointments.
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("All appointments in the database:\n");
+        for (Map.Entry<LocalDateTime, Appointment> entry : appointmentDatabase.entrySet()) {
+            LocalDateTime date = entry.getKey();
+            Appointment appointment = entry.getValue();
+            sb.append(formatAppointment(date, appointment)).append("\n");
+        }
+        return sb.toString();
+    }
 }

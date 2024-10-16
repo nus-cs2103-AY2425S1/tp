@@ -67,6 +67,10 @@ public class Person implements Appointmentable {
         return id;
     }
 
+    public History getHistory() {
+        return history;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
