@@ -1,15 +1,16 @@
 package seedu.address.ui;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ContactDisplayTest {
 
@@ -48,7 +49,7 @@ public class ContactDisplayTest {
             assertEquals("Phone: 12345678", phoneLabel.getText());
             assertEquals("Email: johndoe@example.com", emailLabel.getText());
             assertEquals("Address: 123 Main St", addressLabel.getText());
-            
+
             assertEquals(2, tags.getChildren().size());
             assertTrue(tags.getChildren().stream().anyMatch(node -> ((Label) node).getText().equals("friend")));
             assertTrue(tags.getChildren().stream().anyMatch(node -> ((Label) node).getText().equals("colleague")));
