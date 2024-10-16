@@ -35,7 +35,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Nric nric, Phone phone, Email email, Address address, Set<Tag> tags, Set<Role> roles) {
+    public Person(Name name, Nric nric, Phone phone, Email email, Address address,
+            Set<Tag> tags, Set<Role> roles) {
         requireAllNonNull(name, nric, phone, email, address, tags, roles);
         this.name = name;
         this.nric = nric;
@@ -44,6 +45,23 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.roles.addAll(roles);
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Nric nric, Phone phone, Email email, Address address,
+            Set<Tag> tags, Set<Role> roles, Set<Person> caregivers, Set<Person> patients) {
+        requireAllNonNull(name, nric, phone, email, address, tags, roles);
+        this.name = name;
+        this.nric = nric;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.roles.addAll(roles);
+        this.caregivers.addAll(caregivers);
+        this.patients.addAll(patients);
     }
 
     /**
@@ -57,6 +75,8 @@ public class Person {
         this.address = otherperson.getAddress();
         this.tags.addAll(otherperson.getTags());
         this.roles.addAll(otherperson.getRoles());
+        this.caregivers.addAll(otherperson.getCaregivers());
+        this.patients.addAll(otherperson.getPatients());
     }
 
     public Name getName() {
@@ -134,6 +154,24 @@ public class Person {
      */
     public Set<Role> getRoles() {
         return Collections.unmodifiableSet(roles);
+    }
+
+    /**
+     * Returns an immutable set of caregivers, which throws
+     * {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Person> getCaregivers() {
+        return Collections.unmodifiableSet(caregivers);
+    }
+
+    /**
+     * Returns an immutable set of patients, which throws
+     * {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Person> getPatients() {
+        return Collections.unmodifiableSet(patients);
     }
 
     /**
