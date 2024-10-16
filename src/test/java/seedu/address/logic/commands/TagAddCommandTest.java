@@ -111,7 +111,7 @@ public class TagAddCommandTest {
     }
 
     @Test
-    public void execute_noMatchingPerson_throwsException() {
+    public void execute_noMatchingPerson_throwsCommandException() {
         TagAddCommand tagAddCommand = new TagAddCommand(new Name(INVALID_NAME), stubTagList);
 
         String expectedMessage = String.format(TagAddCommand.MESSAGE_PERSON_DOESNT_EXIST, INVALID_NAME);
