@@ -171,8 +171,8 @@ public class DeletePropertyToBuyCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
-            setSellingProperties((ArrayList<Property>) toCopy.sellingProperties);
-            setBuyingProperties((ArrayList<Property>) toCopy.buyingProperties);
+            setSellingProperties(toCopy.sellingProperties);
+            setBuyingProperties(toCopy.buyingProperties);
         }
 
         /**
