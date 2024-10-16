@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_FIELDS;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.AddApptCommand.MESSAGE_USAGE;
 import static seedu.address.logic.commands.CommandTestUtil.APPOINTMENT_DESC_AMY;
@@ -24,6 +25,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIM
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEPERIOD;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -88,5 +90,17 @@ public class AddApptCommandParserTest {
                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         assertParseFailure(parser, VALID_APPOINTMENT_NAME_DENTAL,
                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_duplicateValues_throwsParserException() {
+        assertParseFailure(parser, NRIC_DESC_AMY + APPOINTMENT_DESC_AMY + NRIC_DESC_AMY,
+                           MESSAGE_DUPLICATE_FIELDS + PREFIX_NRIC);
+        assertParseFailure(parser, APPOINTMENT_DESC_AMY + " " + PREFIX_DATE + VALID_APPOINTMENT_DATE_DENTAL + " "
+                                   + NRIC_DESC_AMY, MESSAGE_DUPLICATE_FIELDS + PREFIX_DATE);
+        assertParseFailure(parser, APPOINTMENT_DESC_AMY + " " + PREFIX_TIMEPERIOD + VALID_APPOINTMENT_TIMEPERIOD_DENTAL
+                                   + " " + NRIC_DESC_AMY, MESSAGE_DUPLICATE_FIELDS + PREFIX_TIMEPERIOD);
+        assertParseFailure(parser, APPOINTMENT_DESC_BOB + " " + APPOINTMENT_DESC_AMY + NRIC_DESC_AMY,
+                           MESSAGE_DUPLICATE_FIELDS + PREFIX_DATE + " " + PREFIX_TIMEPERIOD);
     }
 }
