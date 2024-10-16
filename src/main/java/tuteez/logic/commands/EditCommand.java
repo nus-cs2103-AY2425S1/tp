@@ -52,6 +52,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_LESSON = "This time slow is already taken by another student";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -88,7 +89,7 @@ public class EditCommand extends Command {
         if (lessons.isPresent()) {
             for (Lesson lesson : lessons.get()) {
                 if (checkForClashingLesson(lesson)) {
-                    return new CommandResult("Lesson clash detected. Confirm change?");
+                    return new CommandResult(MESSAGE_DUPLICATE_LESSON, false, false, false);
                 }
             }
         }
