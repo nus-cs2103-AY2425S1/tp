@@ -141,6 +141,14 @@ public class ArgumentTokenizerTest {
     }
 
     @Test
+    public void tokenize_onlyOneSemicolonWithSemicolons() {
+        String argsString = ";";
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, semicolon);
+        assertPreamblePresent(argMultimap, "");
+        assertArgumentPresent(argMultimap, semicolon, "");
+    }
+
+    @Test
     public void tokenize_multipleArgumentsJoined() {
         String argsString = "SomePreambleStringp/ pSlash joined-tjoined -t not joined^Qjoined";
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash, dashT, hatQ);
