@@ -50,7 +50,6 @@ public class RestoreCommandTest {
     }
 
 
-
     private class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -86,6 +85,7 @@ public class RestoreCommandTest {
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public void savePersonToDelete(Person person) {
             throw new AssertionError("This method should not be called.");
@@ -95,10 +95,12 @@ public class RestoreCommandTest {
         public boolean checkRestorable() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public void makeNotRestorable() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public Person getLastDeletedPerson() {
             throw new AssertionError("This method should not be called.");
@@ -144,6 +146,7 @@ public class RestoreCommandTest {
             throw new AssertionError("This method should not be called.");
         }
     }
+
     private class ModelStubWithDeletedPerson extends ModelStub {
         private final Person deletedPerson;
         private boolean restorable = true;
