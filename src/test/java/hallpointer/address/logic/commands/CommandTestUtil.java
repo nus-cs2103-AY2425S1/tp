@@ -46,7 +46,7 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_TELEGRAM_DESC = " "
             + PREFIX_TELEGRAM + "#"; // '#' not allowed in telegrams
-    public static final String INVALID_ROOM_DESC = " " + PREFIX_ROOM + "1/1/1a"; // 'a' npt allowed in rooms
+    public static final String INVALID_ROOM_DESC = " " + PREFIX_ROOM + "1/1/1a"; // 'a' not allowed in rooms
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

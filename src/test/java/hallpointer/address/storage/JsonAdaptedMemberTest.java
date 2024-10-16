@@ -19,7 +19,7 @@ import hallpointer.address.model.member.Telegram;
 public class JsonAdaptedMemberTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_TELEGRAM = "+651234";
-    private static final String INVALID_ROOM = " ";
+    private static final String INVALID_ROOM = " 222";
     private static final String INVALID_TAG = "#friend";
 
     // Valid values
