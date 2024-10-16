@@ -8,9 +8,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -28,6 +31,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Policy;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -94,7 +98,8 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
+            throws CommandException {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -105,8 +110,46 @@ public class EditCommand extends Command {
         //placeholder
         Appointment appointment = editPersonDescriptor.getAppointment().orElse(personToEdit.getAppointment());
         Birthday birthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday());
+        List<Policy> policies = editPolicies(personToEdit,
+                editPersonDescriptor.getPolicies().orElse(Collections.emptyMap()));
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, appointment, birthday);
+        Person newPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                appointment, birthday);
+
+        newPerson.setPolicies(policies);
+
+        return newPerson;
+    }
+
+    /**
+     * Edits the policies of a given person based on a map of new policies and their corresponding indexes.
+     *
+     * @param personToEdit The person whose policies are to be edited.
+     * @param newPolicies A map where the key is the {@code Index} of the policy to be replaced, and the value is the
+     *                    new {@code Policy}.
+     * @return A list of updated policies after applying the changes specified in the {@code newPolicies} map.
+     * @throws CommandException If any provided index in the {@code newPolicies} map is out of bounds, indicating that
+     *     the specified policy does not exist.
+     */
+    public static List<Policy> editPolicies(Person personToEdit, Map<Index, Policy> newPolicies)
+            throws CommandException {
+        List<Policy> oldPolicies = personToEdit.getPolicies();
+
+        List<Policy> updatedPolicies = new ArrayList<Policy>(oldPolicies);
+        int policiesSize = updatedPolicies.size();
+
+        for (Map.Entry<Index, Policy> entry : newPolicies.entrySet()) {
+            Index index = entry.getKey();
+            Policy policy = entry.getValue();
+
+            if (index.getZeroBased() >= policiesSize) {
+                throw new CommandException(Messages.MESSAGE_INVALID_POLICY_DISPLAYED_INDEX);
+            }
+
+            updatedPolicies.set(index.getZeroBased(), policy);
+        }
+
+        return updatedPolicies;
     }
 
     @Override
@@ -146,6 +189,8 @@ public class EditCommand extends Command {
         private Birthday birthday;
         private Appointment appointment;
 
+        private Map<Index, Policy> policies;
+
         public EditPersonDescriptor() {}
 
         /**
@@ -160,13 +205,14 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setAppointment(toCopy.appointment);
             setBirthday(toCopy.birthday);
+            setPolicies(toCopy.policies);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, birthday, appointment);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, birthday, appointment, policies);
         }
 
         public void setName(Name name) {
@@ -233,6 +279,23 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code policies} to this object's {@code policies}.
+         * A defensive copy of {@code policies} is used internally.
+         */
+        public void setPolicies(Map<Index, Policy> policies) {
+            this.policies = (policies != null) ? new HashMap<Index, Policy>(policies) : null;
+        }
+
+        /**
+         * Returns an unmodifiable policy list, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code policies} is null.
+         */
+        public Optional<Map<Index, Policy>> getPolicies() {
+            return (policies != null) ? Optional.of(Collections.unmodifiableMap(policies)) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -251,7 +314,8 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(birthday, otherEditPersonDescriptor.birthday)
-                    && Objects.equals(appointment, otherEditPersonDescriptor.appointment);
+                    && Objects.equals(appointment, otherEditPersonDescriptor.appointment)
+                    && Objects.equals(policies, otherEditPersonDescriptor.policies);
         }
 
         @Override
@@ -264,6 +328,7 @@ public class EditCommand extends Command {
                     .add("tags", tags)
                     .add("birthday", birthday)
                     .add("appointment", appointment)
+                    .add("policies", policies)
                     .toString();
         }
     }
