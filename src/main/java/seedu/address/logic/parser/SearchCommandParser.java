@@ -8,8 +8,8 @@ import java.util.function.Predicate;
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -18,7 +18,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * and returns a SearchCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public SearchCommand parse(String args) throws ParseException {
@@ -38,12 +38,14 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         Predicate<Person> combinedPredicate = null;
 
         if (!nameArgs.isEmpty()) {
-            NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(Arrays.asList(nameArgs.split("\\s+")));
+            NameContainsKeywordsPredicate namePredicate =
+                    new NameContainsKeywordsPredicate(Arrays.asList(nameArgs.split("\\s+")));
             combinedPredicate = combinePredicate(combinedPredicate, namePredicate);
         }
 
         if (!tagArgs.isEmpty()) {
-            TagContainsKeywordsPredicate tagPredicate = new TagContainsKeywordsPredicate(Arrays.asList(tagArgs.split("\\s+")));
+            TagContainsKeywordsPredicate tagPredicate =
+                    new TagContainsKeywordsPredicate(Arrays.asList(tagArgs.split("\\s+")));
             combinedPredicate = combinePredicate(combinedPredicate, tagPredicate);
         }
 
@@ -64,9 +66,10 @@ public class SearchCommandParser implements Parser<SearchCommand> {
      * @param prefixName A human-readable name for the prefix (e.g., "name" or "tag"), used in the exception message.
      * @throws ParseException If more than one instance of the {@code prefix} is found in the {@code ArgumentMultimap}.
      */
-    private void checkForMultipleInstances(ArgumentMultimap argMultimap, Prefix prefix, String prefixName) throws ParseException {
+    private void checkForMultipleInstances(ArgumentMultimap argMultimap, Prefix prefix, String prefixName)
+            throws ParseException {
         if (argMultimap.getAllValues(prefix).size() > 1) {
-            throw new ParseException(String.format("Multiple %s prefixes (%s/) detected. Only one %s prefix is allowed.",
+            throw new ParseException(String.format("Multiple %s prefixes (%s) detected. Only one %s prefix is allowed.",
                     prefixName, prefix.getPrefix(), prefixName));
         }
     }
@@ -81,9 +84,10 @@ public class SearchCommandParser implements Parser<SearchCommand> {
      * @param prefixName A human-readable name for the prefix (e.g., "name" or "tag"), used in the exception message.
      * @throws ParseException If the prefix is present but its value is empty.
      */
-    private void checkForEmptyInput(ArgumentMultimap argMultimap, Prefix prefix, String value, String prefixName) throws ParseException {
+    private void checkForEmptyInput(ArgumentMultimap argMultimap, Prefix prefix, String value, String prefixName)
+            throws ParseException {
         if (argMultimap.getValue(prefix).isPresent() && value.trim().isEmpty()) {
-            throw new ParseException(String.format("The %s prefix (%s/) cannot be empty. Please provide a valid %s.",
+            throw new ParseException(String.format("The %s prefix (%s) cannot be empty. Please provide a valid %s.",
                     prefixName, prefix.getPrefix(), prefixName));
         }
     }
