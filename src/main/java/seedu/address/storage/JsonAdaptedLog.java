@@ -35,7 +35,15 @@ class JsonAdaptedLog {
     public JsonAdaptedLog(Log source) {
         entry = source.getEntry();
         // Convert AppointmentDate to string
-        appointmentDate = source.getAppointmentDate(); // Assuming getAppointmentDate() returns the formatted string
+        appointmentDate = stringToValidDate(source.getAppointmentDate()); // Assuming getAppointmentDate() returns the formatted string
+    }
+
+    public String stringToValidDate(String date) {
+        String[] dateParts = date.split(" ");
+        String day = dateParts[0];
+        String month = dateParts[1];
+        String year = dateParts[2];
+        return day + "-" + month + "-" + year;
     }
 
     /**
