@@ -23,9 +23,8 @@ public abstract class FindCommand<T> extends Command {
 
 
     protected final Predicate<T> predicate;
-
     /**
-     * Constructor for finding any entitty.
+     * Constructor for finding any entity.
      * @param predicate Predicate for entity.
      */
     public FindCommand(Predicate<T> predicate) {
