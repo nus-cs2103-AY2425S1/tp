@@ -19,6 +19,11 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -33,11 +38,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Policy;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -170,7 +170,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void editPolicies_validPolicyMap_returnsPolicyList() throws CommandException{
+    public void editPolicies_validPolicyMap_returnsPolicyList() throws CommandException {
         Person personToEdit = new PersonBuilder().build();
         Policy oldPolicy = new Policy(VALID_NAME_BOB, VALID_DATE_1, VALID_DATE_2);
         personToEdit.setPolicies(List.of(oldPolicy));

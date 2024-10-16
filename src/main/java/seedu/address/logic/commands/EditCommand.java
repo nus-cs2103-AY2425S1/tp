@@ -121,6 +121,16 @@ public class EditCommand extends Command {
         return newPerson;
     }
 
+    /**
+     * Edits the policies of a given person based on a map of new policies and their corresponding indexes.
+     *
+     * @param personToEdit The person whose policies are to be edited.
+     * @param newPolicies A map where the key is the {@code Index} of the policy to be replaced, and the value is the
+     *                    new {@code Policy}.
+     * @return A list of updated policies after applying the changes specified in the {@code newPolicies} map.
+     * @throws CommandException If any provided index in the {@code newPolicies} map is out of bounds, indicating that
+     *     the specified policy does not exist.
+     */
     public static List<Policy> editPolicies(Person personToEdit, Map<Index, Policy> newPolicies)
             throws CommandException {
         List<Policy> oldPolicies = personToEdit.getPolicies();
