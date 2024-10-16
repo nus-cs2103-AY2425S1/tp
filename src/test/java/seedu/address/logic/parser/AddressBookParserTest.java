@@ -9,7 +9,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -31,7 +33,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.LifePolicy;
-import seedu.address.model.policy.PolicyMap;
+import seedu.address.model.policy.PolicySet;
+import seedu.address.model.policy.PolicyType;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -102,7 +105,7 @@ public class AddressBookParserTest {
         AddPolicyCommand command = (AddPolicyCommand) parser.parseCommand(
                 AddPolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
                 + " pt/life");
-        PolicyMap policies = new PolicyMap();
+        PolicySet policies = new PolicySet();
         policies.add(new LifePolicy());
         assertEquals(new AddPolicyCommand(INDEX_FIRST_PERSON, policies), command);
     }
@@ -113,19 +116,20 @@ public class AddressBookParserTest {
         UpdatePolicyCommand command = (UpdatePolicyCommand) parser.parseCommand(
                 UpdatePolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
                         + " " + PREFIX_POLICY_TYPE + "life");
-        PolicyMap policies = new PolicyMap();
+        PolicySet policies = new PolicySet();
         policies.add(new LifePolicy());
         assertEquals(new UpdatePolicyCommand(INDEX_FIRST_PERSON, policies), command);
     }
+    @Test
     public void parseCommand_deletePolicy() throws Exception {
         // This is hardcoded for now.
         // Will change in future commits.
         DeletePolicyCommand command = (DeletePolicyCommand) parser.parseCommand(
                 DeletePolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
                         + " " + PREFIX_POLICY_TYPE + "life");
-        PolicyMap policies = new PolicyMap();
-        policies.add(new LifePolicy());
-        assertEquals(new DeletePolicyCommand(INDEX_FIRST_PERSON, policies), command);
+        final Set<PolicyType> policyTypes = new HashSet<>();
+        policyTypes.add(PolicyType.LIFE);
+        assertEquals(new DeletePolicyCommand(INDEX_FIRST_PERSON, policyTypes), command);
     }
 
     @Test

@@ -1,6 +1,12 @@
 package seedu.address.model.policy;
 
-import java.time.LocalDateTime;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.dateformatter.DateFormatter.MM_DD_YYYY_FORMATTER;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Objects;
 
 import seedu.address.model.person.Person;
@@ -14,21 +20,24 @@ public abstract class Policy {
     private Person insuree;
     private double premiumAmount;
     private double coverageAmount;
-    private LocalDateTime expiryDate;
+    private LocalDate expiryDate;
 
     /**
-     * Constructor for a new Policy without a insuree specified.
+     * Constructor for a new Policy without an insuree specified.
      *
      * @param premiumAmount the price of the policy, paid per month.
      * @param coverageAmount the maximum amount that can be claimed under this policy.
+     * @param expiryDate the date of Policy's expiry.
      * @throws IllegalArgumentException if the premiumAmount or coverageAmount is negative.
+     * @throws NullPointerException if the expiryDate is null.
      */
-    public Policy(double premiumAmount, double coverageAmount) throws IllegalArgumentException {
-        if (premiumAmount < 0 || coverageAmount < 0) {
-            throw new IllegalArgumentException("Premium amount and coverage amount cannot be negative.");
-        }
+    public Policy(double premiumAmount, double coverageAmount, LocalDate expiryDate) {
+        requireAllNonNegative(premiumAmount, coverageAmount);
+        requireNonNull(expiryDate);
+
         this.premiumAmount = premiumAmount;
         this.coverageAmount = coverageAmount;
+        this.expiryDate = expiryDate;
     }
 
     /**
@@ -36,21 +45,39 @@ public abstract class Policy {
      *
      * @param premiumAmount the price of the policy, paid per month.
      * @param coverageAmount the maximum amount that can be claimed under this policy.
+     * @param expiryDate the date of Policy's expiry.
      * @param insuree the policy insuree.
      * @throws IllegalArgumentException if the premiumAmount or coverageAmount is negative.
-     * @throws NullPointerException if the given insuree is null.
+     * @throws NullPointerException if the given expiryDate or insuree is null.
      */
-    public Policy(double premiumAmount, double coverageAmount, Person insuree)
-            throws IllegalArgumentException, NullPointerException {
-        if (premiumAmount < 0 || coverageAmount < 0) {
-            throw new IllegalArgumentException("Premium amount and coverage amount cannot be negative.");
-        }
-        if (insuree == null) {
-            throw new NullPointerException("Policy's insuree cannot be null.");
-        }
+    public Policy(double premiumAmount, double coverageAmount, LocalDate expiryDate, Person insuree) {
+        requireAllNonNegative(premiumAmount, coverageAmount);
+        requireAllNonNull(expiryDate, insuree);
+
         this.premiumAmount = premiumAmount;
         this.coverageAmount = coverageAmount;
+        this.expiryDate = expiryDate;
         this.insuree = insuree;
+    }
+
+    /**
+     * Throws IllegalArgumentException if amount is less than zero.
+     *
+     * @param amount to be tested.
+     */
+    private static void requireNonNegative(double amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Amount cannot be negative");
+        }
+    }
+
+    /**
+     * Throws IllegalArgumentException if any amount in amounts is less than zero.
+     *
+     * @param amounts array to be tested.
+     */
+    private static void requireAllNonNegative(double... amounts) {
+        Arrays.stream(amounts).forEach(Policy::requireNonNegative);
     }
 
     /**
@@ -79,6 +106,15 @@ public abstract class Policy {
     }
 
     /**
+     * Return this policy's expiry date.
+     *
+     * @return this policy's expiry date.
+     */
+    public LocalDate getExpiryDate() {
+        return expiryDate;
+    }
+
+    /**
      * Return this policy's insuree.
      *
      * @return this policy's insuree.
@@ -88,24 +124,13 @@ public abstract class Policy {
     }
 
     /**
-     * Return this policy's expiry date.
-     *
-     * @return this policy's expiry date.
-     */
-    public LocalDateTime getExpiryDate() {
-        return expiryDate;
-    }
-
-    /**
      * Change this policy's premium amount to the specified value, which cannot be negative.
      *
      * @param premiumAmount the new price of the policy, paid per month.
      * @throws IllegalArgumentException if the given premiumAmount is negative.
      */
     public void setPremiumAmount(double premiumAmount) throws IllegalArgumentException {
-        if (premiumAmount < 0) {
-            throw new IllegalArgumentException("Premium amount cannot be negative.");
-        }
+        requireNonNegative(premiumAmount);
         this.premiumAmount = premiumAmount;
     }
 
@@ -116,10 +141,19 @@ public abstract class Policy {
      * @throws IllegalArgumentException if the given coverageAmount is negative.
      */
     public void setCoverageAmount(double coverageAmount) throws IllegalArgumentException {
-        if (coverageAmount < 0) {
-            throw new IllegalArgumentException("Coverage amount cannot be negative.");
-        }
+        requireNonNegative(coverageAmount);
         this.coverageAmount = coverageAmount;
+    }
+
+    /**
+     * Change this policy's expiry date to the specified expiryDate, which cannot be null.
+     *
+     * @param expiryDate the new expiry date of this policy.
+     * @throws NullPointerException if the given expiryDate is null.
+     */
+    public void setExpiryDate(LocalDate expiryDate) {
+        requireNonNull(expiryDate);
+        this.expiryDate = expiryDate;
     }
 
     /**
@@ -129,16 +163,23 @@ public abstract class Policy {
      * @throws NullPointerException if the given insuree is null.
      */
     public void setInsuree(Person insuree) {
-        if (insuree == null) {
-            throw new NullPointerException("Policy's insuree cannot be null.");
-        }
+        requireNonNull(insuree);
         this.insuree = insuree;
+    }
+
+    /**
+     * Return whether this Policy is expired by comparing it with the date today.
+     *
+     * @return true if this Policy is expired.
+     */
+    public boolean isExpired() {
+        return expiryDate.compareTo(LocalDate.now()) <= 0;
     }
 
     @Override
     public String toString() {
-        return String.format("Premium amount: $%.2f | Coverage amount: $%.2f",
-                premiumAmount, coverageAmount);
+        return String.format("Premium amount: $%.2f | Coverage amount: $%.2f | Expiry date: %s",
+                premiumAmount, coverageAmount, expiryDate.format(MM_DD_YYYY_FORMATTER));
     }
 
     @Override
@@ -156,13 +197,14 @@ public abstract class Policy {
         boolean sameInsuree = insuree == null ? p.insuree == null : insuree.equals(p.insuree);
         return sameInsuree
                 && premiumAmount == p.premiumAmount
-                && coverageAmount == p.coverageAmount;
+                && coverageAmount == p.coverageAmount
+                && expiryDate.equals(p.expiryDate);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(insuree, premiumAmount, coverageAmount);
+        return Objects.hash(insuree, premiumAmount, coverageAmount, expiryDate);
     }
 
     /**

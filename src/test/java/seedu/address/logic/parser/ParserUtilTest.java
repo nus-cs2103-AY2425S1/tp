@@ -6,9 +6,11 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -18,9 +20,11 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.policy.EducationPolicy;
 import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.LifePolicy;
-import seedu.address.model.policy.PolicyMap;
+import seedu.address.model.policy.PolicySet;
+import seedu.address.model.policy.PolicyType;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -39,7 +43,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_POLICY_TYPE_LIFE = "life";
     private static final String VALID_POLICY_TYPE_HEALTH = "health";
-
+    private static final String VALID_POLICY_TYPE_EDUCATION = "education";
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
@@ -236,17 +240,18 @@ public class ParserUtilTest {
 
     @Test
     public void parsePolicies_emptyCollection_returnsEmptySet() throws Exception {
-        PolicyMap expected = new PolicyMap();
+        PolicySet expected = new PolicySet();
         assertEquals(expected, ParserUtil.parsePolicies(Collections.emptyList()));
     }
 
     @Test
     public void parsePolicies_collectionWithValidPolicies_returnsPolicySet() throws Exception {
-        PolicyMap actual = ParserUtil.parsePolicies(Arrays.asList(VALID_POLICY_TYPE_LIFE, VALID_POLICY_TYPE_HEALTH));
-        PolicyMap expected = new PolicyMap();
+        PolicySet actual = ParserUtil.parsePolicies(Arrays.asList(VALID_POLICY_TYPE_LIFE,
+                VALID_POLICY_TYPE_HEALTH, VALID_POLICY_TYPE_EDUCATION));
+        PolicySet expected = new PolicySet();
         expected.add(new LifePolicy());
         expected.add(new HealthPolicy());
-
+        expected.add(new EducationPolicy());
         assertEquals(expected, actual);
     }
 
@@ -254,5 +259,26 @@ public class ParserUtilTest {
     public void parsePolicies_collectionWithDuplicatePolicies_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parsePolicies(
                 Arrays.asList(VALID_POLICY_TYPE_LIFE, VALID_POLICY_TYPE_LIFE)));
+    }
+    @Test
+    public void parsePolicyType_emptyList_throwsParseException() {
+        List<String> policies = new ArrayList<>();
+        assertThrows(ParseException.class, () -> ParserUtil.parsePolicyTypes(policies));
+    }
+    @Test
+    public void parsePolicyType_listWithValidPolicies_returnsPolicyTypes() throws Exception {
+        Set<PolicyType> actual = ParserUtil.parsePolicyTypes(Arrays.asList(VALID_POLICY_TYPE_LIFE,
+                VALID_POLICY_TYPE_HEALTH, VALID_POLICY_TYPE_EDUCATION));
+        Set<PolicyType> expected = new HashSet<>();
+        expected.add(PolicyType.LIFE);
+        expected.add(PolicyType.HEALTH);
+        expected.add(PolicyType.EDUCATION);
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void parsePolicyType_listWithInValidPolicies_throwsParseException() {
+        List<String> policies = new ArrayList<>();
+        policies.add(INVALID_POLICY_TYPE);
+        assertThrows(ParseException.class, () ->ParserUtil.parsePolicyTypes(policies));
     }
 }
