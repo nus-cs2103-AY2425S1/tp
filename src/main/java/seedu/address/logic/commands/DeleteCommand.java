@@ -26,6 +26,8 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DELETE_OWNER_SUCCESS = "Deleted Owner: %1$s";
 
+    public static final String MESSAGE_DELETE_PET_SUCCESS = "Deleted Pet: %1$s";
+
     private final Index targetIndex;
     private final String type;
 
@@ -40,7 +42,7 @@ public class DeleteCommand extends Command {
 
         /*
          code for deleting an owner:
-        List<Owner> lastShownList = model.getFilteredPersonList(); // must add new method to get owner
+        List<Owner> lastShownList = model.getFilteredOwnerList(); // must add new method to get owner
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_OWNER_DISPLAYED_INDEX);
@@ -53,6 +55,15 @@ public class DeleteCommand extends Command {
 
         /*
         code for deleting a pet
+        List<Pet> lastShownList = model.getFilteredPetList(); // must add new method to get pet
+
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
+        }
+
+        Pet petToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deletePet(petToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PET_SUCCESS, Messages.format(personToDelete)));
          */
         List<Person> lastShownList = model.getFilteredPersonList();
 

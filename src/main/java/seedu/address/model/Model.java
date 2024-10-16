@@ -78,6 +78,12 @@ public interface Model {
     void deleteOwner(Owner target);
 
     /**
+     * Deletes the given pet.
+     * The owner must exist in the address book.
+     */
+    void deletePet(Pet target);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
@@ -108,6 +114,9 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered owner list */
     ObservableList<Owner> getFilteredOwnerList();
+
+    /** Returns an unmodifiable view of the filtered pet list */
+    ObservableList<Owner> getFilteredPetList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
