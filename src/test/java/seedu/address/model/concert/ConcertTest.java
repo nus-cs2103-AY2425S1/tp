@@ -50,6 +50,21 @@ public class ConcertTest {
 
         // different return false
         assertFalse(GLASTONBURY.equals(COACHELLA));
+
+        // different date returns false
+        Concert editedCoachella = new ConcertBuilder(COACHELLA)
+                .withDate(VALID_DATE_GLASTONBURY)
+                .build();
+        assertFalse(COACHELLA.equals(editedCoachella));
+
+        // different address returns false
+        editedCoachella = new ConcertBuilder(COACHELLA)
+                .withAddress(VALID_ADDRESS_GLASTONBURY)
+                .build();
+        assertFalse(COACHELLA.equals(editedCoachella));
+
+        // null returns false
+        assertFalse(COACHELLA.equals(null));
     }
 
     @Test
