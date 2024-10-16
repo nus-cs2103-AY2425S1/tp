@@ -135,19 +135,39 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+
+### Locating persons by tag: `filter`
+
+Finds persons whose names contain any of the given keywords.
+
+Format: `filter t/TAG [t/MORE_TAG]...`
+
+* The search is case-sensitive. e.g `friends` will not match `Friends`
+* The order of the keywords does not matter. e.g. `t/friends t/family` will match `t/family t/friends`
+* Only the tags is searched.
+* Only full tag name will be matched e.g. `friend` will not match `friends`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `t/friends t/family` will return any contact tagged with `friend` or `family`.
+
+Examples:
+* `filter t/friend t/family` returns any contact tagged with `friend` or `family`<br>
+  ![result for 'filter t/friend t/family'](images/findAlexDavidResult.png)
+
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `delete n/NAME`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person with the specified name.
+* The name refers to the full name of the person shown in the displayed person list.
+* If a person matches the name but is not shown in the list, it will not be deleted.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete n/Betsy` deletes the person with the name `Betsy`.
+* `find Betsy` followed by `delete Alex` will not delete the person named `Alex`.
+* `delete n/Betsy` deletes the person named `Betsy` if it is shown on the filtered list.
 
 ### Clearing all entries : `clear`
 
@@ -202,8 +222,9 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS telegram/TELEGRAM [t/TAG]…​ github/GITHUB` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 telegram/@James t/friend t/colleague github/james-cool`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete n/NAME`<br> e.g., `delete n/James`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Filter** | `filter t/[TAG] t/[MORE_TAG]…​`<br> e.g., `filter t/friends t/family`
 **List**   | `list`
 **Help**   | `help`
