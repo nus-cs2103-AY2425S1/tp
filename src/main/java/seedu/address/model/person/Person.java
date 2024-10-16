@@ -58,8 +58,6 @@ public class Person {
         this.transactions = transactions;
     }
 
-
-
     public Name getName() {
         return name;
     }
