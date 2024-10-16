@@ -158,7 +158,7 @@ public class ModelManager implements Model {
         return predefinedAssignmentsData.hasAssignment(name);
     }
 
-    public float maxScore (String assignment) {
+    public float maxScore(String assignment) {
         return predefinedAssignmentsData.maxScore(assignment);
     }
 

@@ -85,7 +85,7 @@ public class AddGradeCommand extends Command {
             throw new CommandException("Invalid assignment name: " + assignmentName);
         }
 
-        if (score > model.maxScore(assignmentName) || score<0) {
+        if (score > model.maxScore(assignmentName) || score < 0) {
             throw new CommandException("Score must be between 0.0 and " + model.maxScore(assignmentName));
         }
 

@@ -3,7 +3,7 @@ package seedu.address.model.assignment;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
-import java.util.Objects;
+
 
 /**
  * Wraps all data at the assignment data level.
@@ -51,6 +51,12 @@ public class PredefinedAssignmentsData implements ReadOnlyPredefinedAssignmentsD
         return false;
     }
 
+    /**
+     * Returns the max score of an assignment.
+     *
+     * @param name the name of assignment
+     * @return the float (max score)
+     */
     public float maxScore(String name) {
         for (PredefinedAssignment assignment : predefinedAssignmentArrayList) {
             if (assignment.name().equalsIgnoreCase(name)) {
