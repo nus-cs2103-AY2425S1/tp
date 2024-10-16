@@ -1,5 +1,12 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.Assert.assertThrows;
+
+import java.nio.file.Path;
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -11,14 +18,6 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
-
-import java.nio.file.Path;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.Assert.assertThrows;
-
 
 public class RestoreCommandTest {
 
@@ -40,15 +39,16 @@ public class RestoreCommandTest {
         modelStub.addPerson(validPerson);
         RestoreCommand restoreCommand = new RestoreCommand();
 
-        assertThrows(CommandException.class, RestoreCommand.MESSAGE_DUPLICATE_PERSON, () -> restoreCommand.execute(modelStub));
+        assertThrows(CommandException.class, RestoreCommand.MESSAGE_DUPLICATE_PERSON,
+                () -> restoreCommand.execute(modelStub));
     }
 
     @Test
     public void execute_noDeletedPersonToRestore_throwsCommandException() {
         ModelStubWithoutDeletedPerson modelStub = new ModelStubWithoutDeletedPerson();
         RestoreCommand restoreCommand = new RestoreCommand();
-
-        assertThrows(CommandException.class, RestoreCommand.MESSAGE_NOTHING_TO_RESTORE, () -> restoreCommand.execute(modelStub));
+        assertThrows(CommandException.class, RestoreCommand.MESSAGE_NOTHING_TO_RESTORE,
+                () -> restoreCommand.execute(modelStub));
     }
 
 
