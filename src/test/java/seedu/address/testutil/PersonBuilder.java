@@ -57,7 +57,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String tag) {
+    public PersonBuilder withTag(String tag) {
         this.tag = new Tag(tag);
         return this;
     }

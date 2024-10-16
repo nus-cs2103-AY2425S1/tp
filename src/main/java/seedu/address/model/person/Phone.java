@@ -12,7 +12,7 @@ public class Phone {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Invalid Singapore phone number input. Enter a valid phone number that is more than 3 digits.";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+    public static final String VALIDATION_REGEX = "[3689]\\d{7}";
     public final String value;
 
     /**

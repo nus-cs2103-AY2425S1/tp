@@ -4,7 +4,8 @@
 
 # Health Connect
 
-Health Connect is an application designed to streamline client management for healthcare professionals. It allows users to efficiently track client details and appointments, simplifying the management process.
+Health Connect is an application designed to streamline client management for Singapore based healthcare professionals. 
+It allows users to efficiently track client details and appointments, simplifying the management process.
 
 ## Features
 
