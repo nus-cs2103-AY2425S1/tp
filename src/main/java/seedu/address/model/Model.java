@@ -93,6 +93,10 @@ public interface Model {
      */
     void updateFilteredVendorList(Predicate<Vendor> predicate);
 
+    boolean isVendorAssignedToEvent(Vendor vendor, Event event);
+
+    void unassignVendorFromEvent(Vendor vendor, Event event);
+
     /**
      * Returns true if an event with the same identity as {@code event} exists in
      * the address book.
