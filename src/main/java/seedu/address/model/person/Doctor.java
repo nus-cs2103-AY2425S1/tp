@@ -29,4 +29,14 @@ public class Doctor extends Person {
     public static ArrayList<Doctor> getDoctors() {
         return Doctor.doctors;
     }
+
+    public static Doctor getDoctorWithId(String id) {
+        ArrayList<Doctor> allDoctors = getDoctors();
+        for (Doctor doctor : allDoctors) {
+            if (String.valueOf(doctor.getId().getIdValue()).equals(id)) {
+                return doctor;
+            }
+        }
+        return null;
+    }
 }

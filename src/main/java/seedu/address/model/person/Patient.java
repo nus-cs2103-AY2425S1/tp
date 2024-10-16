@@ -30,5 +30,13 @@ public class Patient extends Person {
     public static ArrayList<Patient> getPatients() {
         return patients;
     }
-
+    public static Patient getPatientWithId(String id) {
+        ArrayList<Patient> allPatients = getPatients();
+        for (Patient patient : allPatients) {
+            if (String.valueOf(patient.getId().getIdValue()).equals(id)) {
+                return patient;
+            }
+        }
+        return null;
+    }
 }
