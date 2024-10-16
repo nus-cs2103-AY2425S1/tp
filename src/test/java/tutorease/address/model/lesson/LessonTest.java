@@ -7,7 +7,7 @@ import static tutorease.address.logic.commands.CommandTestUtil.VALID_DURATION;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_LOCATION_INDEX;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_START_DATE;
 import static tutorease.address.testutil.Assert.assertThrows;
-import static tutorease.address.testutil.TypicalPersons.getTypicalPersons;
+import static tutorease.address.testutil.TypicalStudents.getTypicalStudents;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.person.Person;
 
 public class LessonTest {
-    private Person person = getTypicalPersons().get(0);
+    private Person person = getTypicalStudents().get(0);
     private LocationIndex locationIndex = new LocationIndex(VALID_LOCATION_INDEX);
     private StartDateTime startDateTime = StartDateTime.createStartDateTime(VALID_START_DATE);
     private EndDateTime endDateTime = EndDateTime.createEndDateTime(startDateTime, VALID_DURATION);
