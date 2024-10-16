@@ -1,8 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DISPLAYED_INDEX;
 
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
@@ -12,16 +14,12 @@ import seedu.address.model.job.Job;
 import seedu.address.model.person.Person;
 
 /**
- *  Screen all contacts and return a list of candidate that fit a job listing
- *  requirement to save time, filter via contact role for now
+ *  Screens all contacts and return a list of candidate that fit a job listing
+ *  requirement
  */
 public class ScreenJobCommand extends ScreenCommand {
 
     public static final String ENTITY_WORD = "job";
-
-    public static final String MESSAGE_SUCCESS = "Screen all candidates";
-    public static final String MESSAGE_FAILURE = "Invalid index in the job list."
-            + "Please enter an appropriate index from the contact list.";
 
     private final Index targetIndex;
     public ScreenJobCommand(Index jobIndex) {
@@ -35,31 +33,42 @@ public class ScreenJobCommand extends ScreenCommand {
 
         // Convert jobIndex to zero-based and check if it's valid
         if (targetIndex.getZeroBased() >= jobList.size()) {
-            throw new CommandException(MESSAGE_FAILURE);
+            throw new CommandException(MESSAGE_INVALID_DISPLAYED_INDEX);
         }
 
         Job jobToScreen = jobList.get(targetIndex.getZeroBased());
-        String jobName = jobToScreen.getName().value;
+
+        Predicate<Person> filterCriteria = roleMatchesJobPredicate(jobToScreen);
 
         // Filter persons by checking if their role is present in the job requirements (case-insensitive)
         List<Person> matchingPersons = model.getFilteredPersonList().stream()
-                .filter(person -> containsRoleIgnoreCase(jobName, person.getRole().value))
+                .filter(filterCriteria)
                 .collect(Collectors.toList());
 
 
         if (matchingPersons.isEmpty()) {
-            return new CommandResult("0 contacts found");
+            model.updateFilteredPersonList(unused -> true);
+            return new CommandResult("0 candidates found");
         }
 
         // Show the matching persons and a summary message
-        model.updateFilteredPersonList(person -> containsRoleIgnoreCase(jobName, person.getRole().value));
-        return new CommandResult(matchingPersons.size() + " contacts found");
+        model.updateFilteredPersonList(filterCriteria);
+        String candidateWord = matchingPersons.size() == 1 ? "candidate" : "candidates";
+        return new CommandResult(matchingPersons.size() + " " + candidateWord + " found");
     }
 
     /**
-     * Helper method to check if the job name contain the role (case-insensitive).
+     * Returns a predicate that checks whether a person's role matches the job's requirements (case-insensitive).
+     *
+     * This is used to determine if the contact is applying for roles that match the job listing.
+     *
+     * @param job The job to be matched.
+     * @return A predicate that can be used to filter persons based on their role matching the job.
      */
-    private boolean containsRoleIgnoreCase(String jobName, String role) {
-        return jobName.toLowerCase().contains(role.toLowerCase());
+    private Predicate<Person> roleMatchesJobPredicate(Job job) {
+        String jobName = job.getName().value.toLowerCase();
+
+        // Return a predicate that checks if the person's role matches the job's name
+        return person -> jobName.contains(person.getRole().value.toLowerCase());
     }
 }
