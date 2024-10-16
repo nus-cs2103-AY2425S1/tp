@@ -117,22 +117,23 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Finding persons: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons that match the specified filters.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/StartOfName] [a/PartOfAddress] [pri/PRIORITY]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is case-insensitive. e.g `n/alex` will match `Alex`.
+* For names, only those that start with the given filter will be matched e.g. find n/A returns all persons whose first name starts with A only. 
+* For addresses, those that contain the given filter are returned e.g. find a/clementi returns all persons who stay at clementi only.
+* For priorities, exact priorities must be specified to filter accurately e.g. find pri/high returns all persons with high priority only.
+* At least one filter must be specified.
+* To specify multiple filters of the same type, use the corresponding prefix for every new filter e.g. find n/alex n/david n/bobby
+* Per type of prefix, all persons matching any of the filters given will be returned (i.e. `OR`search) but when combined, only those who also pass the filters of other types are are returned (i.e. `AND` search) e.g. find n/A n/B pri/HIGH returns all persons whose name starts with either A or B but have high priority. 
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting people : `delete`
