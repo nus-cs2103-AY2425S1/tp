@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -22,8 +21,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -39,13 +36,41 @@ public class DeleteCommandTest extends ApplicationTest {
     }
 
     @Test
+    public void equals_sameTargetName_returnsTrue() {
+        Name targetName = new Name("John Doe");
+        DeleteCommand deleteCommand1 = new DeleteCommand(targetName);
+        DeleteCommand deleteCommand2 = new DeleteCommand(targetName);
+
+        assertTrue(deleteCommand1.equals(deleteCommand2));
+    }
+
+    @Test
+    public void equals_differentTargetName_returnsFalse() {
+        Name targetName1 = new Name("John Doe");
+        Name targetName2 = new Name("Jane Doe");
+        DeleteCommand deleteCommand1 = new DeleteCommand(targetName1);
+        DeleteCommand deleteCommand2 = new DeleteCommand(targetName2);
+
+        assertFalse(deleteCommand1.equals(deleteCommand2));
+    }
+
+    @Test
+    public void equals_nullTargetName_returnsFalse() {
+        Name targetName = new Name("John Doe");
+        DeleteCommand deleteCommand1 = new DeleteCommand(targetName);
+        DeleteCommand deleteCommand2 = new DeleteCommand((Name) null);
+
+        assertFalse(deleteCommand1.equals(deleteCommand2));
+    }
+
+    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
-    
+
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
