@@ -6,7 +6,9 @@ import static tutorease.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.commons.exceptions.DataLoadingException;
 import tutorease.address.commons.exceptions.IllegalValueException;
 import tutorease.address.commons.util.FileUtil;
@@ -18,6 +20,7 @@ import tutorease.address.model.ReadOnlyTutorEase;
  * A class to access LessonSchedule data stored as a json file on the hard disk.
  */
 public class JsonLessonScheduleStorage implements LessonScheduleStorage {
+    private static final Logger logger = LogsCenter.getLogger(JsonLessonScheduleStorage.class);
     private Path filePath;
 
     public JsonLessonScheduleStorage(Path filePath) {
@@ -47,6 +50,7 @@ public class JsonLessonScheduleStorage implements LessonScheduleStorage {
         try {
             return Optional.of(jsonLessonSchedule.get().toModelType(tutorEase));
         } catch (IllegalValueException ive) {
+            logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataLoadingException(ive);
         }
     }
