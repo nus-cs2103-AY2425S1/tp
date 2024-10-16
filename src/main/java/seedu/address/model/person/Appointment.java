@@ -46,9 +46,9 @@ public class Appointment {
 
         Appointment appointment = (Appointment) o;
 
-        return Objects.equals(patientId, appointment.patientId) &&
-                Objects.equals(doctorId, appointment.doctorId) &&
-                Objects.equals(remarks, appointment.remarks);
+        return Objects.equals(patientId, appointment.patientId)
+                && Objects.equals(doctorId, appointment.doctorId)
+                && Objects.equals(remarks, appointment.remarks);
     }
 
     @Override
