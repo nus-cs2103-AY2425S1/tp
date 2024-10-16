@@ -2,6 +2,7 @@ package careconnect.logic.commands;
 
 import static careconnect.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static careconnect.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static careconnect.testutil.TypicalPersons.ALICE;
 import static careconnect.testutil.TypicalPersons.CARL;
 import static careconnect.testutil.TypicalPersons.ELLE;
 import static careconnect.testutil.TypicalPersons.FIONA;
@@ -73,6 +74,16 @@ public class FindCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_addressKeyword_onePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        NameOrAddressContainsKeywordPredicate predicate = preparePredicate("jurong");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE), model.getFilteredPersonList());
     }
 
     @Test
