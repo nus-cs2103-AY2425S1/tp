@@ -1,8 +1,6 @@
 package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.util.NodeQueryUtils.isVisible;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,15 +8,25 @@ import org.junit.jupiter.api.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
 
-import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
 import seedu.address.MainApp;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class MainAppTest extends ApplicationTest {
 
+    String name = PersonBuilder.DEFAULT_NAME;
+    String phone = PersonBuilder.DEFAULT_PHONE;
+    String email = PersonBuilder.DEFAULT_EMAIL;
+    String address = PersonBuilder.DEFAULT_ADDRESS;
+    String schedule = PersonBuilder.DEFAULT_SCHEDULE;
+    String subject = PersonBuilder.DEFAULT_SUBJECT;
+    String fee = PersonBuilder.DEFAULT_FEE;
+    String paid = PersonBuilder.DEFAULT_PAID;
+    String owed = PersonBuilder.DEFAULT_OWED_AMOUNT;
 
     @BeforeAll
     public static void setup() throws Exception {
@@ -34,19 +42,8 @@ public class MainAppTest extends ApplicationTest {
         push(KeyCode.ENTER);
     }
 
-    @Test
-    public void personHasAllDetailsShown() {
+    public void addPerson() {
         //adds a person
-        String name = PersonBuilder.DEFAULT_NAME;
-        String phone = PersonBuilder.DEFAULT_PHONE;
-        String email = PersonBuilder.DEFAULT_EMAIL;
-        String address = PersonBuilder.DEFAULT_ADDRESS;
-        String schedule = PersonBuilder.DEFAULT_SCHEDULE;
-        String subject = PersonBuilder.DEFAULT_SUBJECT;
-        String fee = PersonBuilder.DEFAULT_FEE;
-        String paid = PersonBuilder.DEFAULT_PAID;
-        String owed = PersonBuilder.DEFAULT_OWED_AMOUNT;
-
         //Add a person to the list
         clickOn("#commandTextField");
 
@@ -62,38 +59,31 @@ public class MainAppTest extends ApplicationTest {
         write(" owed/" + owed);
 
         push(KeyCode.ENTER);
+    }
 
-        // Ensure that the Labels are visible
-        verifyThat("#personList #personListView #name", isVisible());
-        verifyThat("#personList #personListView #phone", isVisible());
-        verifyThat("#personList #personListView #email", isVisible());
-        verifyThat("#personList #personListView #address", isVisible());
-        verifyThat("#personList #personListView #schedule", isVisible());
-        verifyThat("#personList #personListView #subject", isVisible());
-        verifyThat("#personList #personListView #rate", isVisible());
-        verifyThat("#personList #personListView #paid", isVisible());
-        verifyThat("#personList #personListView #owedAmount", isVisible());
+    @Test
+    public void personHasAllDetailsShown() {
+        addPerson();
 
-        // Lookup Labels by their fx:id
-        Label nameLabel = lookup("#personList #personListView #name").queryAs(Label.class);
-        Label phoneLabel = lookup("#personList #personListView #name").queryAs(Label.class);
-        Label emailLabel = lookup("#personList #personListView #name").queryAs(Label.class);
-        Label addressLabel = lookup("#personList #personListView #name").queryAs(Label.class);
-        Label scheduleLabel = lookup("#personList #personListView #name").queryAs(Label.class);
-        Label subjectLabel = lookup("#personList #personListView #name").queryAs(Label.class);
-        Label rateLabel = lookup("#personList #personListView #name").queryAs(Label.class);
-        Label paidLabel = lookup("#personList #personListView #name").queryAs(Label.class);
-        Label owedAmountLabel = lookup("#personList #personListView #name").queryAs(Label.class);
 
-        //Ensure Labels contain the correct texts
-        assertEquals(nameLabel.getText(), name);
-        assertEquals(phoneLabel.getText(), name);
-        assertEquals(emailLabel.getText(), name);
-        assertEquals(addressLabel.getText(), name);
-        assertEquals(scheduleLabel.getText(), name);
-        assertEquals(subjectLabel.getText(), name);
-        assertEquals(rateLabel.getText(), name);
-        assertEquals(paidLabel.getText(), name);
-        assertEquals(owedAmountLabel.getText(), name);
+
+        ListView<PersonCard> personListView = lookup("#personList #personListView").queryListView();
+//        Label label = lookup("#personList #personListView #cardPane").query();
+//        System.out.println("Label node name: " + label.getClass().getSimpleName());
+
+        Person person = personListView.getItems().get(0).person;
+
+        //name phone, address email subject and schedule, rate paid owedamount
+        assertEquals(person.getName().fullName, name);
+        assertEquals(person.getPhone().value, phone);
+        assertEquals(person.getAddress().value, address);
+        assertEquals(person.getEmail().value, email);
+        assertEquals(person.getSubject().toString(), subject);
+        assertEquals(person.getSchedule().value, schedule);
+        assertEquals(person.getRate().toString(), fee);
+        assertEquals(person.getPaid().toString(), subject);
+        assertEquals(person.getOwedAmount().toString(), schedule);
+
+
     }
 }

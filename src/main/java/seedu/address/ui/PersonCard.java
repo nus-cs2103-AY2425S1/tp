@@ -39,9 +39,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
-    private Label schedule;
-    @FXML
-    private Label subject;
+    private Label subjectAndSchedule;
     @FXML
     private Label rate;
     @FXML
@@ -64,13 +62,12 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText("Contact: " + person.getPhone().value);
-        address.setText("Address: " + person.getAddress().value);
-        email.setText("Email: " + person.getEmail().value);
-        schedule.setText("Schedule: " + person.getSchedule().value);
-        subject.setText("Subjects: " + person.getSubject().toString());
-        rate.setText("Rate: $" + person.getRate().toString() + "/hr");
-        paid.setText("Paid: $" + person.getPaid().toString());
+        phone.setText(person.getPhone().value);
+        address.setText(person.getAddress().value);
+        email.setText(person.getEmail().value);
+        subjectAndSchedule.setText(person.getSubject().toString() + ": " + person.getSchedule().toString());
+        rate.setText("Rate: $" + person.getRate().toString() + "/hr,");
+        paid.setText("Paid: $" + person.getPaid().toString() + ",");
         owedAmount.setText("Owed: $" + person.getOwedAmount().toString());
 
         // This is the code to show blue tags. I will comment it out instead of deleting it.
