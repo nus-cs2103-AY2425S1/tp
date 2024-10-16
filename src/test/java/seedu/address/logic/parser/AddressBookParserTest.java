@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DIDDY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalStudents.DIDDY;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +24,9 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ViewStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -74,6 +78,14 @@ public class AddressBookParserTest {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_viewStudent() throws Exception {
+        Name name = DIDDY.getName();
+        ViewStudentCommand command = (ViewStudentCommand) parser.parseCommand(ViewStudentCommand.COMMAND_WORD
+                + " " + VALID_NAME_DIDDY);
+        assertEquals(new ViewStudentCommand(name), command);
     }
 
     @Test
