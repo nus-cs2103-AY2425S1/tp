@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.person.ContactType;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -16,10 +17,12 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PersonBuilder {
 
+    public static final String DEFAULT_CONTACTTYPE = "Work";
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
 
+    private ContactType contactType;
     private Name name;
     private Phone phone;
     private Email email;
@@ -29,6 +32,7 @@ public class PersonBuilder {
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
+        contactType = new ContactType(DEFAULT_CONTACTTYPE);
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -39,12 +43,20 @@ public class PersonBuilder {
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
     public PersonBuilder(Person personToCopy) {
+        contactType = personToCopy.getContactType();
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
+    /**
+     * Sets the {@code ContactType} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withContactType(String contactType) {
+        this.contactType = new ContactType(contactType);
+        return this;
+    }
     /**
      * Sets the {@code Name} of the {@code Person} that we are building.
      */
@@ -78,7 +90,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, new TelegramHandle(""), tags);
+        return new Person(contactType, name, phone, email, new TelegramHandle(""), tags);
     }
 
 }
