@@ -93,7 +93,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 * `EMAIL`  Standard email format “user@example.com”
 * `PAYMENT STATUS` Acceptable values are `paid`, `unpaid`, `p`, `u`, `0` for **paid**, `1` for **unpaid**. Case insensitive, stored as boolean.
 * `CLIENT STATUS`  Acceptable values are `active`, `unresponsive`, `potential`, `old`. Case sensitive.
-* `PROJECT STATUS` Acceptable values are `in progress`, `completed`. Case insensitive but stored as boolean.
+* `PROJECT STATUS` Acceptable values are `in progress`, `completed`. Case insensitive.
 </div>
 
 Examples:
