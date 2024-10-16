@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
 import static seedu.address.model.Model.COMPARATOR_SORT_BY_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -16,8 +17,8 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all persons in the address book.\n"
-            + "Optional parameters: [s/SORT_OPTION]\n"
-            + "Example: " + COMMAND_WORD + " s/alphabet";
+            + "Parameters: " + "[" + PREFIX_SORT + "SORT_OPTION]\n"
+            + "Example: " + COMMAND_WORD + " s/name";
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
     public static final String MESSAGE_SORT_SUCCESS = "Listed all persons sorted by %s";
