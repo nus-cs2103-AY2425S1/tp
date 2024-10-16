@@ -14,7 +14,7 @@ import seedu.address.model.person.Transaction;
 /**
  * Deletes a transaction from a person's transaction list using its specified index.
  */
-public class DeleteTransactionCommand extends Command{
+public class DeleteTransactionCommand extends Command {
     public static final String COMMAND_WORD = "deletet";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the transaction identified by the index number used in the displayed transaction list.\n"
@@ -23,9 +23,9 @@ public class DeleteTransactionCommand extends Command{
 
     public static final String MESSAGE_SUCCESS = "Deleted transaction: %1$s";
 
+    private static final Index CURRENT_PERSON = Index.fromOneBased(1);
     private final Index index;
 
-    private static final Index CURRENT_PERSON = Index.fromOneBased(1);
 
     public DeleteTransactionCommand(Index index) {
         this.index = index;
