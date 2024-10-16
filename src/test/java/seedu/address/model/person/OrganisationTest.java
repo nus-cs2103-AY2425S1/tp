@@ -40,7 +40,7 @@ public class OrganisationTest {
         Organisation organisation = new Organisation("Valid Organisation");
 
         // same values -> returns true
-        assertTrue(organisation.equals(new Address("Valid Organisation")));
+        assertTrue(organisation.equals(new Organisation("Valid Organisation")));
 
         // same object -> returns true
         assertTrue(organisation.equals(organisation));
