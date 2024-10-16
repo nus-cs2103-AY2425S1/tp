@@ -1,7 +1,6 @@
 package seedu.address.model.tut;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +12,6 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.exceptions.TutDateNotFoundException;
-
 /**
  * Represents a Tutorial in the address book.
  * Guarantees: details are present and not null
@@ -26,13 +24,9 @@ public class Tutorial {
             + "and it should not be blank.";
     public static final String MESSAGE_ID_CONSTRAINTS = TutorialClass.MESSAGE_CONSTRAINTS;
 
-    // Example validation regex for tutorial name (customize as needed)
-    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
-
     private final List<Student> students = new ArrayList<>();
     private final HashMap<Date, TutDate> tutDates = new HashMap<>();
-    private final String tutName;
+    private final TutName tutName;
     private final TutorialClass tutorialClass;
 
     /**
@@ -40,22 +34,21 @@ public class Tutorial {
      *
      * @param tutName A valid tutorial name.
      */
-    public Tutorial(String tutName, TutorialClass tutorialClass) {
+    public Tutorial(TutName tutName, TutorialClass tutorialClass) {
         requireNonNull(tutorialClass);
         requireNonNull(tutName);
-        checkArgument(isValidName(tutName), MESSAGE_NAME_CONSTRAINTS);
         this.tutName = tutName;
         this.tutorialClass = tutorialClass;
     }
+
     /**
      * Constructs a {@code Tut}.
      *
      * @param tutName A valid tutorial name.
      */
-    public Tutorial(String tutName, String tutClass) {
+    public Tutorial(TutName tutName, String tutClass) {
         requireNonNull(tutClass);
         requireNonNull(tutName);
-        checkArgument(isValidName(tutName), MESSAGE_NAME_CONSTRAINTS);
         this.tutorialClass = new TutorialClass(tutClass);
         this.tutName = tutName;
     }
@@ -90,11 +83,7 @@ public class Tutorial {
                 }).orElse(false);
     }
 
-    public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
-    }
-
-    public String getTutName() {
+    public TutName getTutName() {
         return this.tutName;
     }
 
@@ -183,6 +172,7 @@ public class Tutorial {
 
         Tutorial otherTutorial = (Tutorial) other;
         return tutorialClass.equals(otherTutorial.tutorialClass);
+
     }
 
     @Override

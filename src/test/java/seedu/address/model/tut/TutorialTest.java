@@ -23,59 +23,59 @@ public class TutorialTest {
     @Test
     public void constructor_nullName_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Tutorial(null, TUTORIAL_CLASS));
-        assertThrows(NullPointerException.class, () -> new Tutorial(TUT_NAME, (TutorialClass) null));
+        assertThrows(NullPointerException.class, () -> new Tutorial(new TutName(TUT_NAME), (TutorialClass) null));
+
     }
 
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
-        String invalidTutName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Tutorial(invalidTutName, TUTORIAL_CLASS));
+        assertThrows(IllegalArgumentException.class, () -> new Tutorial(new TutName(""), TUTORIAL_CLASS));
     }
     @Test
     public void constructor_nullTutorialClass_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Tutorial(TUT_NAME, (TutorialClass) null));
+        assertThrows(NullPointerException.class, () -> new Tutorial(new TutName(TUT_NAME), (TutorialClass) null));
     }
 
     @Test
     public void constructor_invalidTagName_throwsIllegalArgumentException() {
         String invalidTutName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Tutorial(invalidTutName, TUTORIAL_CLASS));
+        assertThrows(IllegalArgumentException.class, () -> new Tutorial(new TutName(""), TUTORIAL_CLASS));
     }
 
     @Test
     public void isValidTutName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> Tutorial.isValidName(null));
+        assertThrows(NullPointerException.class, () -> TutName.isValidTutName(null));
     }
 
     @Test
     public void successValidTutName() {
-        assertTrue(Tutorial.isValidName(TUT_NAME));
+        assertTrue(TutName.isValidTutName(TUT_NAME));
     }
 
     @Test
     public void successAddStudentToTutorial() {
         Student aliceCopy = new StudentBuilder(ALICE).build();
-        Tutorial tutorial = new Tutorial(TUT_NAME, TUTORIAL_CLASS);
+        Tutorial tutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
         tutorial.add(aliceCopy);
         assertTrue(aliceCopy.equals(tutorial.get(ALICE.getName())));
     }
 
     @Test
     public void checkEquals_sameInstance() {
-        Tutorial sameTutorial = new Tutorial(TUT_NAME, TUTORIAL_CLASS);
+        Tutorial sameTutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
         assertTrue(sameTutorial.equals(sameTutorial));
     }
 
     @Test
     public void checkEquals_differentInstance() {
-        Tutorial tutorial = new Tutorial(TUT_NAME, TUTORIAL_CLASS);
-        Tutorial otherTutorial = new Tutorial(TUT_NAME, TUTORIAL_CLASS);
+        Tutorial tutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        Tutorial otherTutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
         assertTrue(tutorial.equals(otherTutorial));
     }
 
     @Test
     public void checkEquals_differentObjects() {
-        Tutorial tutorial = new Tutorial(TUT_NAME, TUTORIAL_CLASS);
+        Tutorial tutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
         Object notATut = new Object();
         assertFalse(tutorial.equals(notATut));
     }
@@ -162,7 +162,7 @@ public class TutorialTest {
     @Test
     public void setAttendance_success() {
         Student aliceCopy = new StudentBuilder(ALICE).build();
-        Tutorial tutorial = new Tutorial(TUT_NAME, TUTORIAL_CLASS);
+        Tutorial tutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
         tutorial.add(aliceCopy);
         Date date = new Date();
         StudentId aliceId = aliceCopy.getStudentId();
@@ -173,7 +173,7 @@ public class TutorialTest {
     @Test
     public void setAttendance_studentNotInTut_false() {
         Student aliceCopy = new StudentBuilder(ALICE).build();
-        Tutorial tutorial = new Tutorial(TUT_NAME, TUTORIAL_CLASS);
+        Tutorial tutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
         Date date = new Date();
         StudentId aliceId = aliceCopy.getStudentId();
         boolean result = tutorial.setAttendance(date, aliceId);
@@ -183,7 +183,7 @@ public class TutorialTest {
     @Test
     public void setAttendance_nullDate_throwsNullPointerException() {
         Student aliceCopy = new StudentBuilder(ALICE).build();
-        Tutorial tutorial = new Tutorial(TUT_NAME, TUTORIAL_CLASS);
+        Tutorial tutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
         tutorial.add(aliceCopy);
         StudentId aliceId = aliceCopy.getStudentId();
         assertThrows(NullPointerException.class, () -> tutorial.setAttendance(null, aliceId));
@@ -191,7 +191,7 @@ public class TutorialTest {
 
     @Test
     public void setAttendance_nullStudentId_throwsNullPointerException() {
-        Tutorial tutorial = new Tutorial(TUT_NAME, TUTORIAL_CLASS);
+        Tutorial tutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
         Date date = new Date();
         assertThrows(NullPointerException.class, () -> tutorial.setAttendance(date, null));
     }

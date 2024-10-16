@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.model.tut.TutName;
 import seedu.address.model.tut.Tutorial;
 import seedu.address.model.tut.TutorialList;
 
@@ -49,10 +50,11 @@ public class JsonTutorialStorageTest {
         JsonTutorialStorage jsonTutorialStorage = new JsonTutorialStorage(filePath);
 
         // Step 1: Create a tutorial sample
-        Tutorial tutorialSample = new Tutorial(TUT_NAME, TUTORIAL_CLASS);
+        Tutorial tutorialSample = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
         ArrayList<Tutorial> tutorials = new ArrayList<>();
         tutorials.add(tutorialSample);
         TutorialList originalTutorials = new TutorialList(tutorials);
+
 
         // Step 2: Save the tutorial sample to the file
         jsonTutorialStorage.saveTutorials(originalTutorials, filePath);

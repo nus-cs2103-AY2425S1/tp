@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.student.TutorialClass;
+import seedu.address.model.tut.TutName;
 import seedu.address.model.tut.Tutorial;
 import seedu.address.model.tut.TutorialList;
 
@@ -9,9 +10,9 @@ import seedu.address.model.tut.TutorialList;
  */
 public class TypicalTutorials {
 
-    public static final Tutorial TUTORIAL1 = new Tutorial("TutorialOne", new TutorialClass("1000"));
-    public static final Tutorial TUTORIAL2 = new Tutorial("TutorialTwo", new TutorialClass("1001"));
-    public static final Tutorial TUTORIAL3 = new Tutorial("TutorialThree", new TutorialClass("1002"));
+    public static final Tutorial TUTORIAL1 = new Tutorial(new TutName("TutorialOne"), new TutorialClass("1000"));
+    public static final Tutorial TUTORIAL2 = new Tutorial(new TutName("TutorialTwo"), new TutorialClass("1001"));
+    public static final Tutorial TUTORIAL3 = new Tutorial(new TutName("TutorialThree"), new TutorialClass("1002"));
 
     /**
      * Returns an {@code TutorialList} with typical tutorials.

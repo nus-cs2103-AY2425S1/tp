@@ -17,10 +17,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.student.TutorialClass;
+import seedu.address.model.tut.TutName;
 import seedu.address.model.tut.Tutorial;
-
-
-
 
 public class DeleteTutorialCommandTest {
 
@@ -46,7 +44,7 @@ public class DeleteTutorialCommandTest {
 
     @Test
     public void execute_invalidTutId_success() {
-        Tutorial tutorial = new Tutorial("tut", new TutorialClass("5000"));
+        Tutorial tutorial = new Tutorial(new TutName("tut"), new TutorialClass("5000"));
         DeleteTutorialCommand deleteTutorialCommand = new DeleteTutorialCommand(tutorial);
         assertCommandFailure(deleteTutorialCommand, model, DeleteTutorialCommand.MESSAGE_TUTORIAL_NOT_FOUND);
     }

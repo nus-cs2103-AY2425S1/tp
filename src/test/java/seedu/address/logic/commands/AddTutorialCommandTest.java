@@ -33,6 +33,7 @@ import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tutorial;
 import seedu.address.model.tut.TutorialList;
 
+
 public class AddTutorialCommandTest {
 
     @Test

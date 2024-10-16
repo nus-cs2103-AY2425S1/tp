@@ -13,6 +13,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.tut.TutName;
 import seedu.address.model.tut.Tutorial;
 
 /**
@@ -21,7 +22,7 @@ import seedu.address.model.tut.Tutorial;
 public class JsonAdaptedTutorialTest {
 
     private static final String INVALID_TUT_NAME = "";
-    private static final String VALID_TUT_NAME = TUTORIAL_SAMPLE.getTutName();
+    private static final String VALID_TUT_NAME = TUTORIAL_SAMPLE.getTutName().tutName;
     private static final String VALID_TUTORIAL_CLASS = TUTORIAL_SAMPLE.getTutorialClass().toString();
 
     private static final JsonAdaptedStudent VALID_STUDENT = new JsonAdaptedStudent(ALICE);
@@ -30,7 +31,7 @@ public class JsonAdaptedTutorialTest {
     @Test
     public void toModelType_validTutDetails_returnsTut() throws Exception {
         // Using TUT_SAMPLE from TutUtil
-        Tutorial tutorial = new Tutorial(TUT_NAME, TUTORIAL_CLASS);
+        Tutorial tutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
         JsonAdaptedTut tut = new JsonAdaptedTut(tutorial);
         System.out.println(tut.toModelType());
         System.out.println(tutorial);
@@ -41,7 +42,7 @@ public class JsonAdaptedTutorialTest {
     public void toModelType_invalidTutName_throwsIllegalValueException() {
         // Creating a JsonAdaptedTut with invalid tutorial name
         JsonAdaptedTut tut = new JsonAdaptedTut(
-                INVALID_TUT_NAME, TUTORIAL_SAMPLE.getTutorialClass(),
+                INVALID_TUT_NAME, TUTORIAL_SAMPLE.getTutorialClass().value,
                 List.of(VALID_STUDENT),
                 List.of(VALID_TUT_DATE)
         );
@@ -53,7 +54,7 @@ public class JsonAdaptedTutorialTest {
     public void toModelType_nullTutName_throwsIllegalValueException() {
         // Creating a JsonAdaptedTut with null tutorial name
         JsonAdaptedTut tut = new JsonAdaptedTut(
-                null, TUTORIAL_SAMPLE.getTutorialClass(),
+                null, TUTORIAL_SAMPLE.getTutorialClass().value,
                 List.of(VALID_STUDENT),
                 List.of(VALID_TUT_DATE)
         );
@@ -69,7 +70,7 @@ public class JsonAdaptedTutorialTest {
                 List.of(VALID_STUDENT),
                 List.of(VALID_TUT_DATE)
         );
-        String expectedMessage = String.format(JsonAdaptedTut.MISSING_FIELD_MESSAGE_FORMAT, "tutorialClassName");
+        String expectedMessage = String.format(JsonAdaptedTut.MISSING_FIELD_MESSAGE_FORMAT, "tutorialClass");
         assertThrows(IllegalValueException.class, expectedMessage, tut::toModelType);
     }
 }

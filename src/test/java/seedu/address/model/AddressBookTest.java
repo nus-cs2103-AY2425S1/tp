@@ -111,6 +111,7 @@ public class AddressBookTest {
     }
     @Test
     public void getTutorialList_addStudent() {
+<<<<<<< HEAD
         List<Tutorial> expectedTutorial = new ArrayList<>();
         Tutorial tutorialSample2 = new Tutorial(TUT_NAME, TUTORIAL_CLASS);
         TUTORIAL_SAMPLE.add(ALICE);
@@ -118,12 +119,22 @@ public class AddressBookTest {
         expectedTutorial.add(TUTORIAL_SAMPLE);
         addressBook.addTutorial(tutorialSample2);
         List<Tutorial> actualTutorial = addressBook.getTutorials();
+=======
+        List<Tut> expectedTutorial = new ArrayList<>();
+        Tut tutSample2 = new Tut(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        TUT_SAMPLE.add(ALICE);
+        tutSample2.add(ALICE);
+        expectedTutorial.add(TUT_SAMPLE);
+        addressBook.addTutorial(tutSample2);
+        List<Tut> actualTutorial = addressBook.getTutorials();
+>>>>>>> 04c7c729727982716375d9db0e0bbe8847aebe3f
         assertTrue(actualTutorial.equals(expectedTutorial));
     }
     @Test
     public void getAddressBook_addStudent() {
         addressBook.resetData(getTypicalAddressBook());
         AddressBook addressBookSample = getTypicalAddressBook();
+<<<<<<< HEAD
         List<Tutorial> expectedTutorial = new ArrayList<>();
         Tutorial tutorialSample2 = new Tutorial(TUT_NAME, TUTORIAL_CLASS);
         TUTORIAL_SAMPLE.add(ALICE);
@@ -131,6 +142,15 @@ public class AddressBookTest {
         expectedTutorial.add(TUTORIAL_SAMPLE);
         addressBook.addTutorial(tutorialSample2);
         addressBookSample.addTutorial(tutorialSample2);
+=======
+        List<Tut> expectedTutorial = new ArrayList<>();
+        Tut tutSample2 = new Tut(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        TUT_SAMPLE.add(ALICE);
+        tutSample2.add(ALICE);
+        expectedTutorial.add(TUT_SAMPLE);
+        addressBook.addTutorial(tutSample2);
+        addressBookSample.addTutorial(tutSample2);
+>>>>>>> 04c7c729727982716375d9db0e0bbe8847aebe3f
         assertTrue(addressBook.equals(addressBookSample));
     }
 
@@ -160,7 +180,11 @@ public class AddressBookTest {
         addressBook.addStudent(ALICE);
 
         // Create a new tutorial not in the address book
+<<<<<<< HEAD
         Tutorial nonExistentTutorial = new Tutorial(TUT_NAME, TUTORIAL_CLASS);
+=======
+        Tut nonExistentTutorial = new Tut(new TutName(TUT_NAME), TUTORIAL_CLASS);
+>>>>>>> 04c7c729727982716375d9db0e0bbe8847aebe3f
 
         // Expect TutNoFoundException when trying to assign ALICE to a non-existent tutorial
         assertThrows(TutNoFoundException.class, () -> addressBook.assignStudent(ALICE, nonExistentTutorial));

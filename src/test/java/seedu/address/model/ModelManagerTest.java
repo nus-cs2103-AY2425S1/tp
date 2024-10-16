@@ -18,6 +18,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.TutorialClass;
+import seedu.address.model.tut.TutName;
 import seedu.address.model.tut.Tutorial;
 import seedu.address.model.tut.TutorialList;
 import seedu.address.testutil.AddressBookBuilder;
@@ -94,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void hasTutorial_tutorialInModel_returnsTrue() {
-        Tutorial tutorial = new Tutorial("Tut", new TutorialClass("1000"));
+        Tutorial tutorial = new Tutorial(new TutName("Tut"), new TutorialClass("1000"));
         modelManager.addTutorial(tutorial);
         assertTrue(modelManager.hasTutorial(tutorial));
     }

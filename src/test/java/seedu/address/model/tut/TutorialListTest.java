@@ -28,8 +28,8 @@ public class TutorialListTest {
     public void constructor_constructTutorialListSuccess() {
         TutorialClass tutorialClass1 = new TutorialClass("1000");
         TutorialClass tutorialClass2 = new TutorialClass("2000");
-        Tutorial tutorial1 = new Tutorial("Tut", tutorialClass1);
-        Tutorial tutorial2 = new Tutorial("Tut1", tutorialClass2);
+        Tutorial tutorial1 = new Tutorial(new TutName("Tut"), tutorialClass1);
+        Tutorial tutorial2 = new Tutorial(new TutName("Tut1"), tutorialClass2);
         ArrayList<Tutorial> tutorials = new ArrayList<>();
         tutorials.add(tutorial1);
         tutorials.add(tutorial2);

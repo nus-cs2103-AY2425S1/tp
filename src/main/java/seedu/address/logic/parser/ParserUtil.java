@@ -16,6 +16,7 @@ import seedu.address.model.student.Name;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.TutDate;
+import seedu.address.model.tut.TutName;
 import seedu.address.model.tut.Tutorial;
 
 /**
@@ -61,13 +62,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tutName} is invalid.
      */
-    public static Name parseTutName(String tutName) throws ParseException {
+    public static TutName parseTutName(String tutName) throws ParseException {
         requireNonNull(tutName);
         String trimmedName = tutName.trim();
-        if (!Name.isValidName(trimmedName)) {
+        if (!TutName.isValidTutName(trimmedName)) {
             throw new ParseException(Tutorial.MESSAGE_NAME_CONSTRAINTS);
         }
-        return new Name(trimmedName);
+        return new TutName(trimmedName);
     }
 
 
