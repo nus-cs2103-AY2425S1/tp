@@ -101,7 +101,7 @@ public class TaskListTest {
         tasks2.add(MARKING_TASK);
         tl2.setTasks(tasks2);
 
-        assertEquals(tl1.toDescription(), tl1.toDescription());
+        assertEquals(tl1.toDescription(), tl2.toDescription());
     }
 
     @Test
