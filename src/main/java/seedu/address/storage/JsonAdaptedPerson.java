@@ -14,7 +14,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.ClassId;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Fees;
-import seedu.address.model.person.MonthsPaid;
+import seedu.address.model.person.MonthPaid;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -33,8 +33,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String fees;
     private final String classId;
-    private final String monthsPaid;
-
+    private final List<JsonAdaptedMonthPaid> monthsPaid = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -47,7 +46,7 @@ class JsonAdaptedPerson {
             @JsonProperty("address") String address,
             @JsonProperty("fees") String fees,
             @JsonProperty("classId") String classId,
-            @JsonProperty("monthsPaid") String monthsPaid,
+            @JsonProperty("monthsPaid") List<JsonAdaptedMonthPaid> monthsPaid,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
@@ -57,8 +56,10 @@ class JsonAdaptedPerson {
         // TODO - confirm if this is the implementation that we want
         this.fees = fees != null ? fees : "";
         this.classId = classId != null ? classId : "";
-        this.monthsPaid = monthsPaid != null ? monthsPaid : "";
 
+        if (monthsPaid != null) {
+            this.monthsPaid.addAll(monthsPaid);
+        }
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -74,7 +75,9 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         fees = source.getFees().value;
         classId = source.getClassId().value;
-        monthsPaid = source.getMonthsPaid().toString();
+        monthsPaid.addAll(source.getMonthsPaid().stream()
+                .map(JsonAdaptedMonthPaid::new)
+                .collect(Collectors.toList()));
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -86,11 +89,6 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
-
         // Check name
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -139,16 +137,24 @@ class JsonAdaptedPerson {
         }
         final ClassId modelClassId = new ClassId(classId);
 
-        // Check monthsPaid
-        if (!MonthsPaid.isValidMonthsPaid(monthsPaid)) {
-            throw new IllegalValueException(MonthsPaid.MESSAGE_CONSTRAINTS);
+        // Check and create monthsPaid
+        final List<MonthPaid> personMonthsPaid = new ArrayList<>();
+        for (JsonAdaptedMonthPaid monthPaid : monthsPaid) {
+            if (!MonthPaid.isValidMonthPaid(monthPaid.getMonthPaidValue())) { // TODO weak slap?
+                throw new IllegalValueException(MonthPaid.MESSAGE_CONSTRAINTS);
+            }
+            personMonthsPaid.add(monthPaid.toModelType());
         }
-        final MonthsPaid modelmonthsPaid = new MonthsPaid(monthsPaid);
+        final Set<MonthPaid> modelMonthsPaid = new HashSet<>(personMonthsPaid);
 
         // Create tags
+        final List<Tag> personTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tags) {
+            personTags.add(tag.toModelType());
+        }
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelFees, modelClassId, modelmonthsPaid,
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelFees, modelClassId, modelMonthsPaid,
                 modelTags);
     }
 

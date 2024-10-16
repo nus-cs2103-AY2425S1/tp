@@ -63,7 +63,10 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         fees.setText(String.valueOf(person.getFees().value));
         classId.setText(String.valueOf(person.getClassId().value));
-        monthsPaid.setText(String.valueOf(person.getMonthsPaid().value));
+        monthsPaid.setText(person.getMonthsPaid().stream()
+                .map(monthPaid -> monthPaid.value)
+                .reduce((curr, next) -> curr + " " + next)
+                .orElse("(empty)"));
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

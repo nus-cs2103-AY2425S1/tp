@@ -22,19 +22,16 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final Address address;
-
     private final Fees fees;
-
     private final ClassId classId;
-
-    private final MonthsPaid monthsPaid;
+    private final Set<MonthPaid> monthsPaid = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Fees fees, ClassId classId,
-                  MonthsPaid monthsPaid, Set<Tag> tags) {
+                  Set<MonthPaid> monthsPaid, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, fees, classId, monthsPaid, tags);
         this.name = name;
         this.phone = phone;
@@ -42,7 +39,7 @@ public class Person {
         this.address = address;
         this.fees = fees;
         this.classId = classId;
-        this.monthsPaid = monthsPaid;
+        this.monthsPaid.addAll(monthsPaid);
         this.tags.addAll(tags);
     }
 
@@ -70,8 +67,12 @@ public class Person {
         return classId;
     }
 
-    public MonthsPaid getMonthsPaid() {
-        return monthsPaid;
+    /**
+     * Returns an immutable monthPaid set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<MonthPaid> getMonthsPaid() {
+        return Collections.unmodifiableSet(monthsPaid);
     }
 
     /**
