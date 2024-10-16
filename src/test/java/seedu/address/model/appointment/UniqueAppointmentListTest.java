@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalPersons.ALICE_P;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -24,10 +26,10 @@ public class UniqueAppointmentListTest {
     @BeforeEach
     void setUp() {
         uniqueAppointmentList = new UniqueAppointmentList();
-        appointment1 = new Appointment(new AppointmentType("Checkup"), LocalDateTime.of(2024, 1, 1, 10, 0), 1,
-                new Sickness("Cold"), new Medicine("Aspirin"));
-        appointment2 = new Appointment(new AppointmentType("Followup"), LocalDateTime.of(2024, 1, 2, 11, 0), 2,
-                new Sickness("Flu"), new Medicine("Tamiflu"));
+        appointment1 = new Appointment(new AppointmentType("Checkup"), LocalDateTime.of(2024, 1, 1, 10, 0),
+                ALICE_P, new Sickness("Cold"), new Medicine("Aspirin"));
+        appointment2 = new Appointment(new AppointmentType("Followup"), LocalDateTime.of(2024, 1, 2, 11, 0),
+                BOB, new Sickness("Flu"), new Medicine("Tamiflu"));
     }
 
     @Test
@@ -48,7 +50,7 @@ public class UniqueAppointmentListTest {
     public void setAppointment_existingAppointment_updatesSuccessfully() {
         uniqueAppointmentList.add(appointment1);
         Appointment editedAppointment = new Appointment(new AppointmentType("Checkup"),
-                LocalDateTime.of(2024, 1, 1, 10, 0), 1,
+                LocalDateTime.of(2024, 1, 1, 10, 0), ALICE_P,
                 new Sickness("Fever"), new Medicine("Paracetamol"));
         uniqueAppointmentList.setAppointment(appointment1, editedAppointment);
         assertTrue(uniqueAppointmentList.contains(editedAppointment));

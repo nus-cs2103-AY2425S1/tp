@@ -10,10 +10,18 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static seedu.address.testutil.TypicalPersons.ALICE_P;
+import static seedu.address.testutil.TypicalPersons.BOB;
+
+import seedu.address.model.person.Person;
+
+
 public class AppointmentTest {
     private Appointment appointment1;
     private Appointment appointment2;
     private Appointment appointment3;
+    private Person person1;
+    private Person person2;
     private LocalDateTime dateTime1;
     private LocalDateTime dateTime2;
 
@@ -22,12 +30,20 @@ public class AppointmentTest {
         dateTime1 = LocalDateTime.of(2024, 1, 1, 10, 0);
         dateTime2 = LocalDateTime.of(2024, 1, 1, 11, 0);
 
-        appointment1 = new Appointment(new AppointmentType("Checkup"), dateTime1, 1,
-                new Sickness("Cold"), new Medicine("Aspirin"));
-        appointment2 = new Appointment(new AppointmentType("Checkup"), dateTime1, 1,
-                new Sickness("Cold"), new Medicine("Aspirin"));
-        appointment3 = new Appointment(new AppointmentType("Followup"), dateTime2, 2,
-                new Sickness("Flu"), new Medicine("Tamiflu"));
+        person1 = ALICE_P;
+        person2 = BOB;
+
+        appointment1 = new Appointment(new AppointmentType("Checkup"), dateTime1,
+                person1, new Sickness("Cold"), new Medicine("Aspirin"));
+        appointment2 = new Appointment(new AppointmentType("Checkup"), dateTime1,
+                person1, new Sickness("Cold"), new Medicine("Aspirin"));
+        appointment3 = new Appointment(new AppointmentType("Followup"), dateTime2,
+                person2, new Sickness("Flu"), new Medicine("Tamiflu"));
+
+
+        System.out.println(appointment1);
+        System.out.println(appointment1);
+        System.out.println(appointment1);
     }
 
     @Test
@@ -39,10 +55,10 @@ public class AppointmentTest {
 
 
     @Test
-    public void getPersonId_multipleAppointments_returnsCorrectIds() {
-        assertEquals(1, appointment1.getPersonId());
-        assertEquals(1, appointment2.getPersonId());
-        assertEquals(2, appointment3.getPersonId());
+    public void getPerson_multipleAppointments_returnsCorrectPersons() {
+        assertEquals(person1, appointment1.getPerson());
+        assertEquals(person1, appointment2.getPerson());
+        assertEquals(person2, appointment3.getPerson());
     }
 
 

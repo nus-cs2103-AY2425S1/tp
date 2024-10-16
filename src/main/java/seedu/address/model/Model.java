@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -67,6 +68,11 @@ public interface Model {
      * Returns true if a person descriptor with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(PersonDescriptor personDescriptor);
+
+    /**
+     * Returns the person with the corresponding personId in the addressBook.
+     */
+    Optional<Person> findPerson(int personId);
 
     /**
      * Deletes the given person.

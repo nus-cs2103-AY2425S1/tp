@@ -49,7 +49,7 @@ public abstract class AddCommand extends Command {
     /*
      * Adds the entity to the model.
      */
-    protected abstract void addEntity(Model model);
+    protected abstract void addEntity(Model model) throws CommandException;
 
     /*
      * Returns success message to display upon adding entity.

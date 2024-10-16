@@ -123,7 +123,7 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public int addPerson(PersonDescriptor person) {
+        public Person addPerson(PersonDescriptor person) {
             throw new AssertionError("This method should not be called.");
         }
 

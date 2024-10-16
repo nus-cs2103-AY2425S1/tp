@@ -72,8 +72,6 @@ public class Messages {
     public static String formatAppointment(AppointmentDescriptor appointment) {
         final StringBuilder builder = new StringBuilder();
         builder.append(appointment.getAppointmentType())
-                .append("; Id: ")
-                .append(appointment.getPersonId())
                 .append("; Date and Time")
                 .append(appointment.getAppointmentDateTime())
                 .append("; Sickness: ")

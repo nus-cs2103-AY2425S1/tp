@@ -21,7 +21,7 @@ public class AppointmentBuilder {
 
     private AppointmentType appointmentType;
     private LocalDateTime appointmentDateTime;
-    private int personId;
+    private Person person;
     private Medicine medicine;
     private Sickness sickness;
 
@@ -31,7 +31,7 @@ public class AppointmentBuilder {
     public AppointmentBuilder() {
         appointmentType = new AppointmentType(DEFAULT_APPOINTMENT_TYPE);
         appointmentDateTime = DEFAULT_APPOINTMENT_DATE_TIME;
-        personId = DEFAULT_PERSON_ID;
+        person = DEFAULT_PERSON_ID;
         medicine = new Medicine(DEFAULT_MEDICINE);
         sickness = new Sickness(DEFAULT_SICKNESS);
     }
@@ -42,7 +42,7 @@ public class AppointmentBuilder {
     public AppointmentBuilder(Appointment appointmentToCopy) {
         appointmentType = appointmentToCopy.getAppointmentType();
         appointmentDateTime = appointmentToCopy.getAppointmentDateTime();
-        personId = appointmentToCopy.getPersonId();
+        personId = appointmentToCopy.getPerson();
         medicine = appointmentToCopy.getMedicine();
         sickness = appointmentToCopy.getSickness();
     }

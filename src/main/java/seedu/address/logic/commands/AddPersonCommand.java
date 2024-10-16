@@ -54,7 +54,7 @@ public class AddPersonCommand extends AddCommand {
 
     @Override
     protected void addEntity(Model model) {
-        personId = model.addPerson(toAdd);
+        personId = model.addPerson(toAdd).getPersonId();
     }
 
     @Override

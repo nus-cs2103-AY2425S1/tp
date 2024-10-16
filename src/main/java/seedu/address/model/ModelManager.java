@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -129,6 +130,11 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+    }
+
+    @Override
+    public Optional<Person> findPerson(int personId) {
+        return addressBook.findPerson(personId);
     }
 
     @Override

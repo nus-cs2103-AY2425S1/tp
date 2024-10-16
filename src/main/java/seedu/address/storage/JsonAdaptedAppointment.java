@@ -103,7 +103,7 @@ public class JsonAdaptedAppointment {
         final int modelPersonId = personId;
 
         final Optional<Person> modelPersonOptional = addressBook.findPerson(modelPersonId);
-        if (modelPersonOptional == null) {
+        if (!modelPersonOptional.isPresent()) {
             throw new IllegalValueException(String.format(PERSON_CHECK_MESSAGE_FORMAT));
         }
         Person modelPerson = modelPersonOptional.get();

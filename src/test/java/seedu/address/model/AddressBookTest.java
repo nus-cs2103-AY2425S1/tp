@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -107,7 +108,14 @@ public class AddressBookTest {
         }
 
         @Override
-        public int getCounter() {
+        public Optional<Person> findPerson(int personId) {
+            return persons.stream()
+                          .filter(person -> person.getPersonId() == personId)
+                          .findFirst();
+        }
+
+        @Override
+        public int getNextPersonId() {
             return persons.size();
         }
     }
