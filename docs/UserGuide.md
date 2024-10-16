@@ -149,14 +149,17 @@ Examples:
 ### Getting that parameter of all these people: `get` 
 Gets the specified parameter of the filtered people from SocialBook.
 
-Format: `get PARAMETER`
+Format: `get PARAMETERS`
 
-* Gets the specified parameter for each of the people in the filtered list.
-* The parameter input only includes those that are already defined by SocialBook like NAME, PHONE, EMAIL, ADDRESS.
+* Gets the specified parameters for each of the people in the filtered list.
+* The accepted parameter inputs only includes those that are already defined by SocialBook like n/, p/, e/, a/.
+* All inputted parameters must be valid for the details to be displayed. 
+* Executing the same parameter multiple times in the same command will still only return one set of that detail.
 
 Examples:
-* `list` followed by `get p` gets the phone number of all the people in SocialBook.
-* `find p/HIGH` followed by `get e` gets the email of all the high priority people.
+* `list` followed by `get p/ e/` gets the phone numbers and emails of the people in SocialBook.
+* `list` followed by `get p/ p/` gets only one set of the phone numbers of the people in SocialBook.
+* `find p/HIGH` followed by `get n/ a/` gets the names and addresses of the high priority people.
 
 ### Clearing all entries : `clear`
 

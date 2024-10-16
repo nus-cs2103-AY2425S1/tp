@@ -16,13 +16,16 @@ public class GetCommandParser implements Parser<GetCommand> {
      */
     public GetCommand parse(String args) throws ParseException {
         try {
-            String trimmedArgs = args.trim();
-            if (!trimmedArgs.matches("[a-zA-Z]")) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetCommand.MESSAGE_USAGE));
+            String[] parameters = args.trim().split(" ");
+            int size = parameters.length;
+            for (int i = 0; i < size; i++) {
+                String trimmedParam = parameters[i].trim();
+                if (!trimmedParam.matches("^[a-zA-Z]+/$")) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetCommand.MESSAGE_USAGE));
+                }
             }
-
-            return new GetCommand(trimmedArgs);
+            return new GetCommand(parameters);
 
         } catch (ParseException pe) {
             throw new ParseException(
