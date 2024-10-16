@@ -2,8 +2,12 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.student.TutorialGroup;
@@ -95,7 +99,8 @@ public class JsonAdaptedStudent {
         final Address modelAddress = new Address(address); //to be used later
 
         if (tutorialGroup == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TutorialGroup.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    TutorialGroup.class.getSimpleName()));
         }
         if (!TutorialGroup.isValidTutorialGroup(tutorialGroup)) {
             throw new IllegalValueException(TutorialGroup.MESSAGE_CONSTRAINTS);
@@ -103,7 +108,8 @@ public class JsonAdaptedStudent {
         final TutorialGroup modelTutorialGroup = new TutorialGroup(tutorialGroup);
 
         if (studentNumber == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentNumber.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    StudentNumber.class.getSimpleName()));
         }
 
         if (!StudentNumber.isValidStudentNumber(studentNumber)) {

@@ -12,7 +12,11 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyAddressBook;
-public class JsonStudentAddressBookStorage implements AddressBookStorage{
+
+/**
+ * A class to access AddressBook data stored as a json file on the hard disk.
+ */
+public class JsonStudentAddressBookStorage implements AddressBookStorage {
     private static final Logger logger = LogsCenter.getLogger(JsonStudentAddressBookStorage.class);
     private Path filePath;
     public JsonStudentAddressBookStorage(Path filePath) {
@@ -22,12 +26,20 @@ public class JsonStudentAddressBookStorage implements AddressBookStorage{
         return filePath;
     }
 
+
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
         return readAddressBook(filePath);
     }
 
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException{
+    /**
+     * Similar to {@link #readAddressBook()}.
+     * @param filePath location of the data. Cannot be null.
+     * @return Optional.empty if the file does not exist.
+     * @throws DataLoadingException if loading the data from storage failed.
+     */
+
+    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
         Optional<JsonSerializableStudentAddressBook> jsonAddressBook =
                 JsonUtil.readJsonFile(filePath, JsonSerializableStudentAddressBook.class);
@@ -42,11 +54,20 @@ public class JsonStudentAddressBookStorage implements AddressBookStorage{
         }
     }
 
+    /**
+     * Saves the given address book to the specified file path.
+     * @param addressBook cannot be null.
+     * @throws IOException if there was an error writing to the file.
+     */
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
         saveAddressBook(addressBook, filePath);
     }
 
+    /**
+     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}.
+     * @param filePath location of the data. Cannot be null.
+     */
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
