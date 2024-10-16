@@ -26,7 +26,8 @@ import seedu.address.model.person.exceptions.MeetingNotFoundException;
  */
 public class UniqueMeetingList implements Iterable<Meeting> {
     private final ObservableList<Meeting> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Meeting> internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Meeting> internalUnmodifiableList = FXCollections
+            .unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent meeting as the given argument.
