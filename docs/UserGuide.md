@@ -96,18 +96,18 @@ Format: `list`
 
 Edits an existing supplier in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [a/ADDRESS] [t/TAG]…​`
+Format: `edit NAME [n/NEW_NAME] [p/PHONE] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the supplier at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the supplier with the specified `NAME`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the supplier will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* You can remove all the supplier’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567` Edits the phone number of the 1st person to be `91234567`.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the supplier (with name `John Doe`) to be `91234567` and `johndoe@example.com` respectively.
+*  `edit Bety n/Betsy Crower t/` Edits the name of `Bety` to be `Betsy Crower` and clears all existing tags.
 
 ### Locating suppliers by name: `find`
 
@@ -203,7 +203,7 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete NAME`<br> e.g., `delete Amy`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee`
+**Edit** | `edit NAME [n/NEW_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit James n/James Lee`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
