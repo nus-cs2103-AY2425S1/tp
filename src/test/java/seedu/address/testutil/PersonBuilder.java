@@ -68,10 +68,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code RentalInformation} of the {@code Client} that we are building.
      */
-    public PersonBuilder withRentalInformation(RentalInformation rentalInformation) {
-        ArrayList<RentalInformation> newList = new ArrayList<>();
-        newList.add(rentalInformation);
-        this.rentalInformationList = newList;
+    public PersonBuilder withRentalInformations(RentalInformation... rentalInformation) {
+        this.rentalInformationList = List.of(rentalInformation);
         return this;
     }
 
