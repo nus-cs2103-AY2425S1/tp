@@ -29,7 +29,6 @@ public class LinkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_CONCERT + "1";
 
     public static final String MESSAGE_LINK_PERSON_SUCCESS = "Linked Person: %1$s to Concert: %2$s";
-    public static final String MESSAGE_NOT_LINKED = "One person and concert to link must be provided.";
 
     private final Index indexP;
     private final Index indexC;
@@ -56,7 +55,7 @@ public class LinkCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        if (indexP.getZeroBased() >= lastShownConcertList.size()) {
+        if (indexC.getZeroBased() >= lastShownConcertList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX);
         }
 
