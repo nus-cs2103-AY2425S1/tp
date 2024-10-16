@@ -25,7 +25,7 @@ public class Student {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-    private final Optional<GroupName> groupName;
+    private Optional<GroupName> groupName;
 
     /**
      * Every field must be present and not null.
@@ -117,6 +117,10 @@ public class Student {
             && email.equals(otherStudent.email)
             && tags.equals(otherStudent.tags)
             && studentNumber.equals(otherStudent.studentNumber);
+    }
+
+    public void setStudentGroup(GroupName groupName) {
+        this.groupName = Optional.<GroupName>of(groupName);
     }
 
     @Override

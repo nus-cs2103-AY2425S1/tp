@@ -141,6 +141,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code student} and {@code group} must exist in the address book.
      */
     public void addStudentToGroup(Student student, Group group) {
+        student.setStudentGroup(group.getGroupName());
         group.add(student);
     }
 
