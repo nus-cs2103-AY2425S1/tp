@@ -37,6 +37,7 @@ import seedu.address.ui.UiManager;
 public class MainApp extends Application {
 
     public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-w12-2.github.io/tp/UserGuide.html";
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
