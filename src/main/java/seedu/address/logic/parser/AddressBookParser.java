@@ -22,6 +22,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindMedConCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListPrioCommand;
 import seedu.address.logic.commands.PriorityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -100,6 +101,9 @@ public class AddressBookParser {
 
         case AddAllergyCommand.COMMAND_WORD:
             return new AddAllergyCommandParser().parse(arguments);
+
+        case ListPrioCommand.COMMAND_WORD:
+            return new ListPrioCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
