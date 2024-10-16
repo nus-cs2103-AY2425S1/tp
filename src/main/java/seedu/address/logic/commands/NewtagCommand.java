@@ -28,12 +28,12 @@ public class NewtagCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireAllNonNull(model);
-        boolean success = model.addTag(tag);
-        if (!success) {
+        boolean isSucessful = model.addTag(tag);
+        if (!isSucessful) {
             return new CommandResult(MESSAGE_DUPLICATE);
         }
-        String successMsg = MESSAGE_SUCCESS + " " + tag + "\n";
+        String successMessage = MESSAGE_SUCCESS + " " + tag + "\n";
         String currentTags = "Your tags: " + model.getTagList();
-        return new CommandResult(successMsg + currentTags);
+        return new CommandResult(successMessage + currentTags);
     }
 }
