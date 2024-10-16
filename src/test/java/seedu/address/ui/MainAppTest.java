@@ -1,8 +1,8 @@
 package seedu.address.ui;
 
+import static org.hamcrest.core.StringContains.containsString;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
-import static org.hamcrest.core.StringContains.containsString;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,15 +21,15 @@ import seedu.address.testutil.PersonBuilder;
 
 public class MainAppTest extends ApplicationTest {
 
-    String name = PersonBuilder.DEFAULT_NAME;
-    String phone = PersonBuilder.DEFAULT_PHONE;
-    String email = PersonBuilder.DEFAULT_EMAIL;
-    String address = PersonBuilder.DEFAULT_ADDRESS;
-    String schedule = PersonBuilder.DEFAULT_SCHEDULE;
-    String subject = PersonBuilder.DEFAULT_SUBJECT;
-    String fee = PersonBuilder.DEFAULT_FEE;
-    String paid = PersonBuilder.DEFAULT_PAID;
-    String owedAmount = PersonBuilder.DEFAULT_OWED_AMOUNT;
+    private final String name = PersonBuilder.DEFAULT_NAME;
+    private final String phone = PersonBuilder.DEFAULT_PHONE;
+    private final String email = PersonBuilder.DEFAULT_EMAIL;
+    private final String address = PersonBuilder.DEFAULT_ADDRESS;
+    private final String schedule = PersonBuilder.DEFAULT_SCHEDULE;
+    private final String subject = PersonBuilder.DEFAULT_SUBJECT;
+    private final String fee = PersonBuilder.DEFAULT_FEE;
+    private final String paid = PersonBuilder.DEFAULT_PAID;
+    private final String owedAmount = PersonBuilder.DEFAULT_OWED_AMOUNT;
 
     @BeforeAll
     public static void setup() throws Exception {
