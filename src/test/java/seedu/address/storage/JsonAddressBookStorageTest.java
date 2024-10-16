@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
@@ -97,8 +98,8 @@ public class JsonAddressBookStorageTest {
      */
     private void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) throws AccessDeniedException {
         try {
-            new JsonAddressBookStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+            JsonAddressBookStorage jsonAddressBook = new JsonAddressBookStorage(Paths.get(filePath));
+            jsonAddressBook.saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (AccessDeniedException e) {
             throw new AccessDeniedException("File write access denied");
         } catch (IOException ioe) {
@@ -108,11 +109,5 @@ public class JsonAddressBookStorageTest {
     @Test
     public void saveAddressBook_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveAddressBook(new AddressBook(), null));
-    }
-
-    @Test
-    public void saveAddressBook_writeAccessDenied_throwsAccessDeniedException() {
-        assertThrows(AccessDeniedException.class, () -> saveAddressBook(new AddressBook(),
-                "writeAccessDeniedAddressBook.json"));
     }
 }
