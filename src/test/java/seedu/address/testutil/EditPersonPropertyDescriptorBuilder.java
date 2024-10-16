@@ -86,7 +86,7 @@ public class EditPersonPropertyDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code buyingProperties} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code buyingProperties} of the {@code EditPersonPropertyDescriptor} that we are building.
      */
     public EditPersonPropertyDescriptorBuilder withPropertyToBuy(Property propertyToBuy) {
         List<Property> propertyToBuyList = new ArrayList<>();
@@ -96,7 +96,7 @@ public class EditPersonPropertyDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code sellingProperties} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code sellingProperties} of the {@code EditPersonPropertyDescriptor} that we are building.
      */
     public EditPersonPropertyDescriptorBuilder withPropertyToSell(Property propertyToSell) {
         List<Property> propertyToSellList = new ArrayList<>();

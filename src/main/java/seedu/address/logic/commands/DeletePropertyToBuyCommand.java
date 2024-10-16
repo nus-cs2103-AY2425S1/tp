@@ -39,6 +39,7 @@ public class DeletePropertyToBuyCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
 
+
     private final Index personIndex;
     private final Index propertyIndex;
     private EditPersonPropertyDescriptor editPersonPropertyDescriptor;
@@ -49,7 +50,7 @@ public class DeletePropertyToBuyCommand extends Command {
      * @param editPersonPropertyDescriptor details to edit the person and his/her property with
      */
     public DeletePropertyToBuyCommand(Index personIndex, Index propertyIndex,
-                                      EditPersonPropertyDescriptor editPersonPropertyDescriptor) {
+            EditPersonPropertyDescriptor editPersonPropertyDescriptor) {
         requireNonNull(personIndex);
         requireNonNull(propertyIndex);
         requireNonNull(editPersonPropertyDescriptor);
@@ -71,6 +72,20 @@ public class DeletePropertyToBuyCommand extends Command {
         Person personToEdit = lastShownList.get(personIndex.getZeroBased());
 
         editPersonPropertyDescriptor.setBuyingProperties(personToEdit.getListOfBuyingProperties());
+        if (editPersonPropertyDescriptor.getBuyingProperties().get() == null) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX);
+        }
+
+        if (personToEdit.getListOfBuyingProperties().isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_NO_PROPERTIES_TO_DELETE);
+        }
+
+
+        if (propertyIndex.getZeroBased() >= personToEdit.getListOfBuyingProperties().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX);
+        }
+
+
         editPersonPropertyDescriptor.deleteBuyingProperties(propertyIndex);
 
         Person editedPerson = createEditedPerson(personToEdit, editPersonPropertyDescriptor);

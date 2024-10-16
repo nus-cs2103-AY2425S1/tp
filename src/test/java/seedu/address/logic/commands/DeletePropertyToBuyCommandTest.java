@@ -3,30 +3,31 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.BUY_DESC_JACK;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.BUY_DESC_JACK;
+import static seedu.address.logic.commands.CommandTestUtil.BUY_DESC_KATE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PROPERTY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PROPERTY;
-import static seedu.address.testutil.TypicalPersons.*;
+import static seedu.address.testutil.TypicalPersons.JACK;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeletePropertyToBuyCommand.EditPersonPropertyDescriptor;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EditPersonPropertyDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalPersons;
@@ -36,7 +37,7 @@ public class DeletePropertyToBuyCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+    public void execute_deletePropertyToBuyFromPerson_success() {
         Person editedPerson = new PersonBuilder(JACK).build();
         EditPersonPropertyDescriptor descriptor = new EditPersonPropertyDescriptorBuilder(editedPerson).build();
         Index jackIndex = TypicalPersons.getTypicalPersonIndex(JACK);
@@ -51,6 +52,30 @@ public class DeletePropertyToBuyCommandTest {
         expectedModel.setPerson(model.getFilteredPersonList().get(jackIndexInFilteredList), editedPerson);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_noPropertyToDelete_failure() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        Person firstPerson = model.getFilteredPersonList().get(0);
+        Index invalidPropertyIndex = Index.fromOneBased(1);
+
+        DeletePropertyToBuyCommand command = new DeletePropertyToBuyCommand(INDEX_FIRST_PERSON, invalidPropertyIndex,
+                new EditPersonPropertyDescriptorBuilder().withName(firstPerson.getName().fullName).build());
+
+        assertCommandFailure(command, model, Messages.MESSAGE_NO_PROPERTIES_TO_DELETE);
+    }
+
+    @Test
+    public void execute_propertyIndexOutOfBounds_failure() {
+        Index jackIndex = TypicalPersons.getTypicalPersonIndex(JACK);
+        Person jack = model.getFilteredPersonList().get(jackIndex.getZeroBased());
+        Index invalidPropertyIndex = Index.fromOneBased(1000);
+
+        DeletePropertyToBuyCommand command = new DeletePropertyToBuyCommand(jackIndex, invalidPropertyIndex,
+                new EditPersonPropertyDescriptorBuilder().withName(jack.getName().fullName).build());
+
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX);
     }
 
     @Test
@@ -102,9 +127,13 @@ public class DeletePropertyToBuyCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new DeletePropertyToBuyCommand(INDEX_SECOND_PERSON, INDEX_FIRST_PROPERTY, BUY_DESC_JACK)));
+        assertFalse(standardCommand.equals(new DeletePropertyToBuyCommand(INDEX_SECOND_PERSON, INDEX_FIRST_PROPERTY,
+                BUY_DESC_JACK)));
 
         // different descriptor -> returns false
+        assertFalse(standardCommand.equals(new DeletePropertyToBuyCommand(INDEX_FIRST_PERSON, INDEX_FIRST_PROPERTY,
+                BUY_DESC_KATE)));
+
     }
 
     @Test
