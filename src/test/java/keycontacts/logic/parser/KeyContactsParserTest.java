@@ -26,9 +26,9 @@ import keycontacts.logic.commands.FindCommand;
 import keycontacts.logic.commands.HelpCommand;
 import keycontacts.logic.commands.ListCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
+import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.NameContainsKeywordsPredicate;
 import keycontacts.model.student.Student;
-import keycontacts.model.util.SampleDataUtil;
 import keycontacts.testutil.EditStudentDescriptorBuilder;
 import keycontacts.testutil.StudentBuilder;
 import keycontacts.testutil.StudentUtil;
@@ -104,7 +104,7 @@ public class KeyContactsParserTest {
 
         AssignPiecesCommand expectedCommand = new AssignPiecesCommand(
                 index,
-                SampleDataUtil.getPianoPieceSet(pianoPieces));
+                PianoPiece.getPianoPieceSet(pianoPieces));
         assertEquals(expectedCommand, command);
     }
 
