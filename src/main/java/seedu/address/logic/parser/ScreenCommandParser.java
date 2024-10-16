@@ -20,15 +20,15 @@ public class ScreenCommandParser implements Parser<ScreenCommand> {
     public ScreenCommand parse(String args) throws ParseException {
         String[] splitArgs = args.trim().split("\\s+");
 
-        if (args.length() < 1) {
+        if (splitArgs.length < 1) {
             throw new ParseException(ScreenCommand.MESSAGE_USAGE);
-        } else if (splitArgs.length < 2) {
-            throw new ParseException(MESSAGE_MISSING_INDEX);
         }
-
         String entityType = splitArgs[0];
+        if (splitArgs.length < 2) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScreenCommand.MESSAGE_USAGE));
+        }
         String indexString = splitArgs[1];
-
         Index index;
 
         try {
