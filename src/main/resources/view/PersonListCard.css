@@ -1,14 +1,16 @@
 .tutorial-label {
-    -fx-pref-width: 50px;
+    -fx-pref-width: 36px;
+    -fx-pref-height: 36px;
     -fx-alignment: center;
     -fx-padding: 5px;
-    -fx-border-color: white;
+    -fx-border-color: black;
     -fx-border-width: 2px;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
-    -fx-background-color: #8c2029;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-background-color: #e03841;
+    -fx-font-weight: bold;
 }
 
 .tutorial-attended {
-    -fx-background-color: #206e35;
+    -fx-background-color: #32cf39;
 }
