@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.EmployeeCommand;
+import seedu.address.logic.commands.PotentialCommand;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,16 +19,16 @@ import seedu.address.model.person.Person;
 public class PersonUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an employee command string for adding the {@code person}.
      */
     public static String getEmployeeCommand(Person person) {
-        return EmployeeCommand.COMMAND_WORD + " " + getPersonDetails(person);
+        return EmployeeCommand.COMMAND_WORD + " " + getEmployeeDetails(person);
     }
 
     /**
      * Returns the part of command string for the given {@code person}'s details.
      */
-    public static String getPersonDetails(Person person) {
+    public static String getEmployeeDetails(Person person) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
@@ -36,6 +37,27 @@ public class PersonUtil {
         sb.append(PREFIX_DEPARTMENT + person.getDepartment().value + " ");
         sb.append(PREFIX_ROLE + person.getRole().value + " ");
         sb.append(PREFIX_CONTRACT_END_DATE + person.getContractEndDate().getValue() + " ");
+        return sb.toString();
+    }
+
+    /**
+     * Returns a potential command string for adding the {@code person}.
+     */
+    public static String getPotentialCommand(Person person) {
+        return PotentialCommand.COMMAND_WORD + " " + getPotentialDetails(person);
+    }
+
+    /**
+     * Returns the part of command string for the given {@code person}'s details.
+     */
+    public static String getPotentialDetails(Person person) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(PREFIX_NAME + person.getName().fullName + " ");
+        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
+        sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
+        sb.append(PREFIX_DEPARTMENT + person.getDepartment().value + " ");
+        sb.append(PREFIX_ROLE + person.getRole().value + " ");
         return sb.toString();
     }
 

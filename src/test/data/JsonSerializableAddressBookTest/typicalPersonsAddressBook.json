@@ -107,7 +107,7 @@
     "department": "IT",
     "role": "SWE",
     "contractEndDate": "2024-10-09",
-    "isEmployee": false
+    "isEmployee": true
   }, {
     "name" : "Kevin Lee",
     "phone" : "87654321",
@@ -116,7 +116,7 @@
     "department": "IT",
     "role": "SWE",
     "contractEndDate": "2024-10-09",
-    "isEmployee": false
+    "isEmployee": true
   }, {
     "name" : "Lily B",
     "phone" : "12348765",
@@ -125,6 +125,6 @@
     "department": "IT",
     "role": "SWE",
     "contractEndDate": "2024-10-09",
-    "isEmployee": false
+    "isEmployee": true
   } ]
 }
