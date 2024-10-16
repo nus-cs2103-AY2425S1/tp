@@ -4,7 +4,12 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "friends" ]
+    "tags": [ "friends" ],
+    "orderList" : [ {
+      "item" : "Abacus",
+      "count" : "2",
+      "date" : "10-10-2025"
+    } ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
