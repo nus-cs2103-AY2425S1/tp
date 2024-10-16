@@ -23,17 +23,20 @@ public class GroupCommand extends Command {
             + "Example: " + COMMAND_WORD + " g/StudyGroup1 s/Benjamin s/Candice\n"
             + "Example: " + COMMAND_WORD + " g/TeamA s/Martin s/Candice";
 
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Not implemented";
-    public static final String MESSAGE_ARGUMENTS = "Group Name: %s, Students: %s";
-    private String groupName;
-    private List<String> students;
+    public static final String MESSAGE_NO_STUDENTS_FOUND = "No matching students found.";
+
+    public static final String MESSAGE_SUCCESS = "Group %s created with %d students";
+
+    public static final String MESSAGE_DUPLICATE_GROUP = "Group name already taken!!";
+    private final String groupName;
+    private final List<String> students;
 
     /**
      * Creates a GroupCommand to group the specified students under the given group
      * name.
      *
      * @param groupName The name of the group.
-     * @param students  The list of student names to be grouped.
+     * @param students  The list of students to be grouped.
      * @throws NullPointerException if {@code groupName} or {@code students} is
      *                              null.
      */
@@ -45,14 +48,20 @@ public class GroupCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        // check if group already exists
+        if (model.hasGroupName(new Group(groupName, List.of()))) {
+            throw new CommandException(MESSAGE_DUPLICATE_GROUP);
+        }
+
         // Get the persons that have those names
         List<Person> allPersons = model.getFilteredPersonList();
         List<Person> groupMembers = allPersons.stream()
-                .filter(person -> students.contains(person.getName().fullName))
+                .filter(person -> students.contains(person
+                        .getName().fullName))
                 .toList();
 
         if (groupMembers.isEmpty()) {
-            throw new CommandException("No matching students found.");
+            throw new CommandException(MESSAGE_NO_STUDENTS_FOUND);
         }
         // Append to a group object
         Group group = new Group(groupName, groupMembers);
@@ -60,7 +69,7 @@ public class GroupCommand extends Command {
         // Add the group object to the model
         model.addGroup(group);
 
-        return new CommandResult(String.format("Group %s created with %d students", groupName, groupMembers.size()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, groupMembers.size()));
     }
 
     @Override

@@ -20,6 +20,9 @@ public class Group {
      * @throws NullPointerException if {@code groupName} or {@code members} is null.
      */
     public Group(String groupName, List<Person> members) {
+        if (groupName == null || members == null) {
+            throw new NullPointerException();
+        }
         this.groupName = new GroupName(groupName);
         this.members = members;
     }
