@@ -131,7 +131,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Locating persons by name: `findtag`
+### Locating persons by tag: `findtag`
 
 Finds persons whose tags contain any of the given keywords.
 
