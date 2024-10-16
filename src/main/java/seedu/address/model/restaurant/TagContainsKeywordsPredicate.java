@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.restaurant;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -6,31 +6,34 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
+
+
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Restaurant}'s {@code Name} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Person> {
+public class TagContainsKeywordsPredicate implements Predicate<Restaurant> {
     private final List<String> keywords;
 
-    public NameContainsKeywordsPredicate(List<String> keywords) {
+    public TagContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
     @Override
-    public boolean test(Person person) {
+    public boolean test(Restaurant restaurant) {
+
+
+        if (keywords == null || keywords.isEmpty()) {
+            return false;
+        }
+
         String filterBy = keywords.get(0);
 
-        return switch (filterBy) {
-        case ("name") -> keywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
-        case ("tag") -> keywords.stream()
-                    .anyMatch(keyword -> person.getTags().stream()
+        return keywords.stream()
+                    .anyMatch(keyword -> restaurant.getTags().stream()
                            .anyMatch(tag -> {
                                String cleanTag = tag.toString().replaceAll("[\\[\\]]", "");
                                return StringUtil.containsWordIgnoreCase(cleanTag, keyword);
                            }));
-        default -> false;
-        };
     }
 
     @Override
@@ -40,11 +43,11 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof TagContainsKeywordsPredicate)) {
             return false;
         }
 
-        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
+        TagContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (TagContainsKeywordsPredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 
