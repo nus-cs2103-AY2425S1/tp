@@ -3,6 +3,9 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Represents a Person's telegram username in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTelegram(String)}
@@ -10,13 +13,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Telegram {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Telegram usernames can take any values, and it should not have spaces";
+            "Telegram handle must not contain whitespaces, and cannot be empty";
 
     /*
-     * The username cannot have any spaces
+     * The telegram handle cannot have any whitespaces or be empty
      */
-    // TODO: Java whitespace matching is a mess, currently validation regex does not really work
-    public static final String VALIDATION_REGEX = "^$|\\s";
+        public static final String VALIDATION_REGEX = "^$|\\s+";
 
     public final String value;
 
@@ -35,9 +37,9 @@ public class Telegram {
      * Returns true if a given string is a valid telegram username.
      */
     public static boolean isValidTelegram(String test) {
-        // CHANGE TO REGEX
-        return !test.contains(" ") && !test.isEmpty();
-        // return !test.matches(VALIDATION_REGEX);
+        Pattern pattern = Pattern.compile(VALIDATION_REGEX);
+        Matcher matcher = pattern.matcher(test);
+        return !matcher.find();
     }
 
     @Override
@@ -57,7 +59,7 @@ public class Telegram {
         }
 
         Telegram otherTelegram = (Telegram) other;
-        return value.equals(otherTelegram.value);
+        return value.equalsIgnoreCase(otherTelegram.value);
     }
 
     @Override
