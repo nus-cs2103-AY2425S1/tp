@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.company.Address;
+import seedu.address.model.company.CareerPageUrl;
 import seedu.address.model.company.Company;
 import seedu.address.model.company.Email;
 import seedu.address.model.company.Name;
@@ -19,12 +20,14 @@ public class CompanyBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_URL = "careers.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private CareerPageUrl careerPageUrl;
     private Set<Tag> tags;
 
     /**
@@ -35,6 +38,7 @@ public class CompanyBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        careerPageUrl = new CareerPageUrl(DEFAULT_URL);
         tags = new HashSet<>();
     }
 
@@ -46,6 +50,7 @@ public class CompanyBuilder {
         phone = companyToCopy.getPhone();
         email = companyToCopy.getEmail();
         address = companyToCopy.getAddress();
+        careerPageUrl = companyToCopy.getCareerPageUrl();
         tags = new HashSet<>(companyToCopy.getTags());
     }
 
@@ -91,7 +96,7 @@ public class CompanyBuilder {
     }
 
     public Company build() {
-        return new Company(name, phone, email, address, tags);
+        return new Company(name, phone, email, address, careerPageUrl, tags);
     }
 
 }

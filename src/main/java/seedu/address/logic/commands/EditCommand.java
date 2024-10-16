@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CAREER_PAGE_URL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -22,6 +23,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.company.Address;
+import seedu.address.model.company.CareerPageUrl;
 import seedu.address.model.company.Company;
 import seedu.address.model.company.Email;
 import seedu.address.model.company.Name;
@@ -43,6 +45,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_CAREER_PAGE_URL + "CAREER PAGE URL] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -99,9 +102,11 @@ public class EditCommand extends Command {
         Phone updatedPhone = editCompanyDescriptor.getPhone().orElse(companyToEdit.getPhone());
         Email updatedEmail = editCompanyDescriptor.getEmail().orElse(companyToEdit.getEmail());
         Address updatedAddress = editCompanyDescriptor.getAddress().orElse(companyToEdit.getAddress());
+        CareerPageUrl updatedCareerPageUrl = editCompanyDescriptor.getCareerPageUrl()
+                .orElse(companyToEdit.getCareerPageUrl());
         Set<Tag> updatedTags = editCompanyDescriptor.getTags().orElse(companyToEdit.getTags());
 
-        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCareerPageUrl, updatedTags);
     }
 
     @Override
@@ -138,6 +143,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private CareerPageUrl careerPageUrl;
         private Set<Tag> tags;
 
         public EditCompanyDescriptor() {
@@ -152,6 +158,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setCareerPageUrl(toCopy.careerPageUrl);
             setTags(toCopy.tags);
         }
 
@@ -194,6 +201,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setCareerPageUrl(CareerPageUrl url) {
+            this.careerPageUrl = url;
+        }
+
+        public Optional<CareerPageUrl> getCareerPageUrl() {
+            return Optional.ofNullable(careerPageUrl);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -228,6 +243,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditCompanyDescriptor.phone)
                     && Objects.equals(email, otherEditCompanyDescriptor.email)
                     && Objects.equals(address, otherEditCompanyDescriptor.address)
+                    && Objects.equals(careerPageUrl, otherEditCompanyDescriptor.careerPageUrl)
                     && Objects.equals(tags, otherEditCompanyDescriptor.tags);
         }
 
@@ -238,6 +254,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("career page url", careerPageUrl)
                     .add("tags", tags)
                     .toString();
         }
