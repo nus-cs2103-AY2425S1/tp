@@ -93,12 +93,6 @@ public class ParserUtil {
     }
 
 
-    public static Remark parseRemark(String remark) {
-        requireNonNull(remark);
-        String trimmedRemark = remark.trim();
-        return new Remark(trimmedRemark);
-    }
-
 
 
     /**
