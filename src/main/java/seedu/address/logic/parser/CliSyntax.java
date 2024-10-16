@@ -13,5 +13,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_GAME = new Prefix("g/");
     public static final Prefix PREFIX_USERNAME = new Prefix("u/");
+    public static final Prefix PREFIX_PREFERREDTIME = new Prefix("pt/");
 
 }
