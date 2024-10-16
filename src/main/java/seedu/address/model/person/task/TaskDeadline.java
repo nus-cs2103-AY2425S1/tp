@@ -64,6 +64,10 @@ public class TaskDeadline {
         return taskDeadline.format(formatter);
     }
 
+    public String toDescription() {
+        return taskDeadline.format(DateTimeFormatter.ofPattern("d MMM uuuu"));
+    }
+
     public int compareTo(TaskDeadline other) {
         return taskDeadline.compareTo(other.taskDeadline);
     }

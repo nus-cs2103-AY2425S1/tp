@@ -48,6 +48,10 @@ public class Task {
                 .toString();
     }
 
+    public String toDescription() {
+        return taskDescription + " by " + taskDeadline.toDescription();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

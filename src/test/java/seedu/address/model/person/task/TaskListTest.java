@@ -88,6 +88,23 @@ public class TaskListTest {
     }
 
     @Test
+    public void setTasks_sameTaskDescriptions_showsSameDescription() {
+        TaskList tl1 = new TaskList();
+        List<Task> tasks = new ArrayList<>();
+        tasks.add(GRADING_TASK);
+        tasks.add(MARKING_TASK);
+        tl1.setTasks(tasks);
+
+        TaskList tl2 = new TaskList();
+        List<Task> tasks2 = new ArrayList<>();
+        tasks2.add(GRADING_TASK);
+        tasks2.add(MARKING_TASK);
+        tl2.setTasks(tasks2);
+
+        assertEquals(tl1.toDescription(), tl2.toDescription());
+    }
+
+    @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
                 -> taskList.asUnmodifiableObservableList().remove(0));

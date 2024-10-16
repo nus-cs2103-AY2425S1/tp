@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.ui.UiState;
 
 /**
  * The API of the Model component.
@@ -87,8 +88,14 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+     * Returns the UI state of the AddressBook.
+     */
+    UiState getUiState();
+
+    /**
      * Returns the person with the given {@code Name} from the address book.
      * If no such person exists, returns null.
      */
     Person getPersonByName(Name name);
+
 }

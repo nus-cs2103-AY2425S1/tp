@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -20,7 +21,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ViewTasksCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -41,7 +44,9 @@ public class LogicManagerTest {
     public Path temporaryFolder;
 
     private Model model = new ModelManager();
+    private Model expectedModel;
     private Logic logic;
+    private Logic expectedLogic;
 
     @BeforeEach
     public void setUp() {
@@ -49,7 +54,11 @@ public class LogicManagerTest {
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        expectedModel = new ModelManager(model.getAddressBook(), model.getUserPrefs());
         logic = new LogicManager(model, storage);
+        expectedLogic = new LogicManager(expectedModel, new StorageManager(
+                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json")),
+                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"))));
     }
 
     @Test
@@ -80,6 +89,20 @@ public class LogicManagerTest {
     public void execute_storageThrowsAdException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
                 LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
+    }
+
+    @Test
+    public void execute_sameCommandTypes_returnsSameUiState() throws CommandException {
+        new AddCommand(AMY).execute(expectedModel);
+        new HelpCommand().execute(model);
+        assertEquals(expectedLogic.getUiState(), logic.getUiState());
+    }
+
+    @Test
+    public void execute_differentCommandTypes_returnsDifferentUiState() throws CommandException {
+        new AddCommand(AMY).execute(expectedModel);
+        new ViewTasksCommand().execute(model);
+        assertNotEquals(expectedLogic.getUiState(), logic.getUiState());
     }
 
     @Test
