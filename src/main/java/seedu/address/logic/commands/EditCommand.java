@@ -25,7 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Ic;
-import seedu.address.model.person.IdMatchesPredicate;
+import seedu.address.model.person.IcMatchesPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -78,7 +78,7 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         FilteredList<Person> filteredPersonList = new FilteredList<>(model.getFilteredPersonList());
-        filteredPersonList.setPredicate(new IdMatchesPredicate(nric));
+        filteredPersonList.setPredicate(new IcMatchesPredicate(nric));
 
         if (filteredPersonList.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NRIC);

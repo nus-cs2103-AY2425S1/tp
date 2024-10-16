@@ -20,7 +20,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Ic;
-import seedu.address.model.person.IdMatchesPredicate;
+import seedu.address.model.person.IcMatchesPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -145,7 +145,7 @@ public class CommandTestUtil {
      * {@code model}'s address book.
      */
     public static void showPersonWithId(Model model, Ic targetId) {
-        model.updateFilteredPersonList(new IdMatchesPredicate(targetId));
+        model.updateFilteredPersonList(new IcMatchesPredicate(targetId));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
@@ -155,7 +155,7 @@ public class CommandTestUtil {
      * {@code model}'s address book.
      */
     public static void showPersonWithIc(Model model, Ic targetIc) {
-        model.updateFilteredPersonList(new IdMatchesPredicate(targetIc));
+        model.updateFilteredPersonList(new IcMatchesPredicate(targetIc));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
