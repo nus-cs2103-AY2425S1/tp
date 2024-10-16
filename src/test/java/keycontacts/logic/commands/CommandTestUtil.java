@@ -6,6 +6,7 @@ import static keycontacts.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADE_LEVEL;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_PIECE_NAME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static keycontacts.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -50,6 +51,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String GRADE_LEVEL_DESC_AMY = " " + PREFIX_GRADE_LEVEL + VALID_GRADE_LEVEL_AMY;
     public static final String GRADE_LEVEL_DESC_BOB = " " + PREFIX_GRADE_LEVEL + VALID_GRADE_LEVEL_BOB;
+    public static final String PIANO_PIECE_DESC_BEETHOVEN = " " + PREFIX_PIECE_NAME + VALID_PIANO_PIECE_BEETHOVEN;
+    public static final String PIANO_PIECE_DESC_PACHELBEL = " " + PREFIX_PIECE_NAME + VALID_PIANO_PIECE_PACHELBEL;
     public static final String VALID_DAY_DESC = " " + PREFIX_DAY + VALID_DAY;
     public static final String VALID_START_TIME_DESC = " " + PREFIX_START_TIME + VALID_START_TIME;
     public static final String VALID_END_TIME_DESC = " " + PREFIX_END_TIME + VALID_END_TIME;
@@ -62,6 +65,7 @@ public class CommandTestUtil {
     public static final String INVALID_DAY_DESC = " " + PREFIX_DAY + "day"; // not a day of the week
     public static final String INVALID_START_TIME_DESC = " " + PREFIX_START_TIME + "10am"; // not in 24 hour format
     public static final String INVALID_END_TIME_DESC = " " + PREFIX_END_TIME + "10pm"; // not in 24 hour format
+    public static final String INVALID_PIANO_PIECE_DESC = " " + PREFIX_PIECE_NAME + " ";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
