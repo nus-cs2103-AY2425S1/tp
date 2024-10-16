@@ -1,11 +1,11 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents the date a person was last seen in the address book
@@ -14,15 +14,23 @@ public class LastSeen {
 
     public static final String MESSAGE_CONSTRAINTS = "Date should be in the format DD-MM-YYYY";
 
-    public LocalDate value;
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public final LocalDate value;
 
+    /**
+     * Constructs a {@code lastSeen}.
+     *
+     * @param lastSeen A valid date.
+     */
     public LastSeen(String lastSeen) {
         requireNonNull(lastSeen);
         checkArgument(isValidDate(lastSeen), MESSAGE_CONSTRAINTS);
         this.value = LocalDate.parse(lastSeen, formatter);
     }
 
+    /**
+     * Returns true if a given string is a valid date.
+     */
     public static boolean isValidDate(String test) {
         try {
             LocalDate.parse(test, formatter);
