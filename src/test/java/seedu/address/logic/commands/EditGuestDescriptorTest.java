@@ -58,7 +58,7 @@ public class EditGuestDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different rsvp -> returns false
-        editedAmy = new EditGuestDescriptorBuilder(DESC_AMY).withAddress(VALID_RSVP_DECLINED).build();
+        editedAmy = new EditGuestDescriptorBuilder(DESC_AMY).withRsvp(VALID_RSVP_DECLINED).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 

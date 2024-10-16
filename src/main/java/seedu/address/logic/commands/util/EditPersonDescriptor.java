@@ -18,7 +18,7 @@ import seedu.address.model.tag.Tag;
  * Stores the details to edit the person with. Each non-empty field value will replace the
  * corresponding field value of the person.
  */
-public class EditPersonDescriptor {
+public abstract class EditPersonDescriptor {
     private Name name;
     private Phone phone;
     private Email email;
