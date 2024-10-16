@@ -24,6 +24,8 @@ import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Room;
 import hallpointer.address.model.member.Telegram;
+import hallpointer.address.model.point.Point;
+import hallpointer.address.model.session.Session;
 import hallpointer.address.model.tag.Tag;
 
 /**
@@ -99,8 +101,10 @@ public class UpdateMemberCommand extends Command {
         Telegram updatedTelegram = updateMemberDescriptor.getTelegram().orElse(memberToUpdate.getTelegram());
         Room updatedRoom = updateMemberDescriptor.getRoom().orElse(memberToUpdate.getRoom());
         Set<Tag> updatedTags = updateMemberDescriptor.getTags().orElse(memberToUpdate.getTags());
+        Point updatedPoints = updateMemberDescriptor.getTotalPoints().orElse(memberToUpdate.getTotalPoints());
+        Set<Session> updatedSessions = updateMemberDescriptor.getSessions().orElse(memberToUpdate.getSessions());
 
-        return new Member(updatedName, updatedTelegram, updatedRoom, updatedTags);
+        return new Member(updatedName, updatedTelegram, updatedRoom, updatedTags, updatedPoints, updatedSessions);
     }
 
     @Override
@@ -135,6 +139,8 @@ public class UpdateMemberCommand extends Command {
         private Telegram telegram;
         private Room room;
         private Set<Tag> tags;
+        private Point totalPoints;
+        private List<Session> sessions;
 
         public UpdateMemberDescriptor() {}
 
@@ -147,6 +153,8 @@ public class UpdateMemberCommand extends Command {
             setTelegram(toCopy.telegram);
             setRoom(toCopy.room);
             setTags(toCopy.tags);
+            setTotalPoints(toCopy.totalPoints);
+            setSessions(toCopy.sessions);
         }
 
         /**
@@ -197,6 +205,23 @@ public class UpdateMemberCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setTotalPoints(Point totalPoints) {
+            this.totalPoints = totalPoints;
+        }
+
+        public Optional<Point> getTotalPoints() {
+            return Optional.ofNullable(totalPoints);
+        }
+
+        public void setSessions(List<Session> sessions) {
+            this.sessions = sessions;
+        }
+
+        public Optional<Set<Session>> getSessions() {
+            return (sessions != null)
+                ? Optional.of(Collections.unmodifiableSet(new HashSet<>(sessions))) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -212,7 +237,9 @@ public class UpdateMemberCommand extends Command {
             return Objects.equals(name, otherUpdateMemberDescriptor.name)
                     && Objects.equals(telegram, otherUpdateMemberDescriptor.telegram)
                     && Objects.equals(room, otherUpdateMemberDescriptor.room)
-                    && Objects.equals(tags, otherUpdateMemberDescriptor.tags);
+                    && Objects.equals(tags, otherUpdateMemberDescriptor.tags)
+                    && Objects.equals(totalPoints, otherUpdateMemberDescriptor.totalPoints)
+                    && Objects.equals(sessions, otherUpdateMemberDescriptor.sessions);
         }
 
         @Override
@@ -222,6 +249,8 @@ public class UpdateMemberCommand extends Command {
                     .add("telegram", telegram)
                     .add("room", room)
                     .add("tags", tags)
+                    .add("totalPoints", totalPoints)
+                    .add("sessions", sessions)
                     .toString();
         }
     }
