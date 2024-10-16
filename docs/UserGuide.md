@@ -243,5 +243,6 @@ the data of your previous AddressBook home folder.
  **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           
  **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            
  **List**         | `list`                                                                                                                                                                
- **List Lessons** | `lesson list`                                                                                                                                                         
+ **List Lessons** | `lesson list`  
+ **Delete Lessons** | `lesson delete INDEX` <br> e.g., `lesson delete 1`
  **Help**         | `help`                                                                                                                                                                
