@@ -48,7 +48,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Label priority;
+    private FlowPane priority;
     @FXML
     private FlowPane appointments;
     @FXML
@@ -68,7 +68,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        priority.setText(person.getPriority().priority);
+        applyPriorityBackground(priority, person.getPriority().priority);
         addLabelsToFlowPane(person.getMedCons(), medCons);
         addLabelsToFlowPane(person.getTags(), tags);
         addLabelsToFlowPane(person.getAppointments(), appointments);
@@ -80,4 +80,35 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(item -> flowPane.getChildren().add(new Label(item.toString())));
     }
 
+    // Apply background color styles based on the priority value
+    private void applyPriorityBackground(FlowPane flowPane, String priorityValue) {
+        // Set up the label for priority
+        Label priorityLabel = new Label(person.getPriority().priority);
+        priorityLabel.getStyleClass().add("priority-label");
+        // Remove any existing priority styles
+        priority.getStyleClass().removeAll("priority-high-bg", "priority-medium-bg",
+                "priority-low-bg", "priority-none-bg");
+
+        // Add the new label with the corresponding background style
+        switch (priorityValue) {
+        case "HIGH":
+            priorityLabel.getStyleClass().add("priority-high-bg");
+            break;
+        case "MEDIUM":
+            priorityLabel.getStyleClass().add("priority-medium-bg");
+            break;
+        case "LOW":
+            priorityLabel.getStyleClass().add("priority-low-bg");
+            break;
+        case "NONE":
+            priorityLabel.getStyleClass().add("priority-none-bg");
+            break;
+        default:
+            break;
+        }
+
+        // Add the label to the FlowPane
+        priority.getChildren().add(priorityLabel);
+
+    }
 }
