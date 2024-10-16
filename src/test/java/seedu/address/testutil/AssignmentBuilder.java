@@ -4,6 +4,9 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.student.Student;
 
+/**
+ * A utility class to help build Assignment objects for testing purposes.
+ */
 public class AssignmentBuilder {
 
     public static final Student DEFAULT_STUDENT = new StudentBuilder().build();
@@ -18,6 +21,9 @@ public class AssignmentBuilder {
     private int score;
     private boolean hasSubmitted;
 
+    /**
+     * Creates an AssignmentBuilder with default values for the Assignment.
+     */
     public AssignmentBuilder() {
         student = DEFAULT_STUDENT;
         assignmentName = new AssignmentName(DEFAULT_ASSIGNMENT_NAME);
@@ -26,6 +32,11 @@ public class AssignmentBuilder {
         hasSubmitted = DEFAULT_SUBMISSION_STATUS;
     }
 
+    /**
+     * Creates an AssignmentBuilder with values copied from the specified Assignment.
+     *
+     * @param assignmentToCopy the Assignment to copy values from
+     */
     public AssignmentBuilder(Assignment assignmentToCopy) {
         student = assignmentToCopy.getStudent();
         assignmentName = new AssignmentName(assignmentToCopy.getName());
