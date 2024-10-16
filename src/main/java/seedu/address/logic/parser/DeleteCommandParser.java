@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.DEFAULT_DELIMITER;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -28,16 +27,12 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, DEFAULT_DELIMITER);
 
-        if (argMultimap.getPreamble().isEmpty()) {
+        List<String> indicesList = ArgumentTokenizer.tokenizeWithDefault(args);
+        if (indicesList.isEmpty() || indicesList.stream().allMatch(String::isEmpty)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
-        List<String> indicesListWithoutFirst = argMultimap.getAllValues(DEFAULT_DELIMITER);
-        String firstIndexString = argMultimap.getPreamble();
-        List<String> indicesList = joinIndices(indicesListWithoutFirst, firstIndexString);
-        assert !indicesList.isEmpty() : "List of indices here should at least have an item";
 
         try {
             Set<Index> indices;
