@@ -37,6 +37,14 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns the number of same persons as the given argument.
+     */
+    public int countSamePerson(Person toCheck) {
+        requireNonNull(toCheck);
+        return (int) internalList.stream().filter(toCheck::isSamePerson).count();
+    }
+
+    /**
      * Returns true if the list contains an person with an equivalent phone number as the given argument.
      */
     public boolean containsPhone(Person toCheck) {

@@ -66,7 +66,7 @@ public class TelegramUsername {
 
         seedu.address.model.person.TelegramUsername otherUsername = (seedu.address.model.person.TelegramUsername) other;
         if (telegramUsername == null) {
-            return otherUsername.telegramUsername == null;  // return True if both are null
+            return otherUsername.telegramUsername == null; // return True if both are null
         }
         return telegramUsername.equalsIgnoreCase(otherUsername.telegramUsername);
     }
