@@ -55,7 +55,8 @@ public class Person implements Comparable<Person> {
     }
 
     /**
-     * Returns true if both persons have the same phone number or email.
+     * Returns true if both persons have the same phone number or email or telegram handle.
+     * If either one or both has no telegram handle, then ignore telegram handle.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -63,9 +64,20 @@ public class Person implements Comparable<Person> {
             return true;
         }
 
-        return otherPerson != null
-                && (otherPerson.getPhone().equals(getPhone())
-                || otherPerson.getEmail().equals(getEmail()));
+        if (otherPerson == null) {
+            return false;
+        }
+
+        // If either party has no telegram username, then just check for uniqueness in phone and email
+        if (!getTelegramUsername().hasUsername() || !otherPerson.getTelegramUsername().hasUsername()) {
+            return otherPerson.getPhone().equals(getPhone())
+                    || otherPerson.getEmail().equals(getEmail());
+        }
+
+        // Otherwise, check that phone, email and telegram username are all unique
+        return otherPerson.getPhone().equals(getPhone())
+                || otherPerson.getEmail().equals(getEmail())
+                || otherPerson.getTelegramUsername().equals(getTelegramUsername());
     }
 
     /**
@@ -126,6 +138,7 @@ public class Person implements Comparable<Person> {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("telegram", telegramUsername)
                 .toString();
     }
 

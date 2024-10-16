@@ -15,7 +15,7 @@ public class TelegramUsername {
      * The first character of the address must be an alphabet.
      * "_____" or "12345" are invalid usernames.
      */
-    public static final String VALIDATION_REGEX = "^[a-zA-Z][a-zA-Z0-9_]{4,31}$";
+    private static final String VALIDATION_REGEX = "^[a-zA-Z][a-zA-Z0-9_]{4,31}$";
 
     // the only situation where the telegram username is null is when user did not input telegram tag
     public final String telegramUsername;
@@ -30,6 +30,15 @@ public class TelegramUsername {
             checkArgument(isValidUsername(username), MESSAGE_CONSTRAINTS);
         }
         telegramUsername = username;
+    }
+
+    /**
+     * Checks whether there is a telegram username.
+     *
+     * @return {@code true} if there is a telegram username, {@code false} if empty.
+     */
+    public boolean hasUsername() {
+        return telegramUsername != null;
     }
 
     /**
