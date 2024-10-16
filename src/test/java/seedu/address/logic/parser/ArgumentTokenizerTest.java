@@ -131,8 +131,8 @@ public class ArgumentTokenizerTest {
     public void tokenize_multipleArgumentsWithSemicolons() {
         // check if semicolon works as expected
         // input parsed, regardless of space before or after semicolons
-        String argsString = "SomePreambleString -t dashT-Value ; words after semicolon trimmed -t" +
-                " another dashT value;no space before and after semicolon;";
+        String argsString = "SomePreambleString -t dashT-Value ; words after semicolon trimmed -t"
+                + " another dashT value;no space before and after semicolon;";
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, dashT, semicolon);
         assertPreamblePresent(argMultimap, "SomePreambleString");
         assertArgumentPresent(argMultimap, dashT, "dashT-Value", "another dashT value");
