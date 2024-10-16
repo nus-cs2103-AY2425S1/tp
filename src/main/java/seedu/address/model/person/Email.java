@@ -9,11 +9,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Email {
 
+    public static final String MESSAGE_CONSTRAINTS = "Invalid email format. "
+            + "Please ensure your email includes a valid domain "
+            + "(e.g., name@example.com)";
     private static final String SPECIAL_CHARACTERS = "+_.-";
-    public static final String MESSAGE_CONSTRAINTS = "Invalid email format. Emails must follow : local-part@domain";
     private static final String ALPHANUMERIC = "[a-zA-Z0-9]";
-    private static final String LOCAL_PART_REGEX = ALPHANUMERIC + "([a-zA-Z0-9" + SPECIAL_CHARACTERS + "])*";
-    private static final String DOMAIN_PART_REGEX = ALPHANUMERIC + "([a-zA-Z0-9-])*";
+    private static final String LOCAL_PART_REGEX = ALPHANUMERIC
+            + "([a-zA-Z0-9" + SPECIAL_CHARACTERS + "]*[a-zA-Z0-9])?";
+    private static final String DOMAIN_PART_REGEX = ALPHANUMERIC + "([a-zA-Z0-9-]*[a-zA-Z0-9])?";
     private static final String DOMAIN_REGEX = DOMAIN_PART_REGEX + "(\\." + DOMAIN_PART_REGEX + ")*\\.[a-zA-Z]{2,}$";
     public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
 
@@ -26,8 +29,9 @@ public class Email {
      */
     public Email(String email) {
         requireNonNull(email);
-        checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-        value = email;
+        String trimmedEmail = email.trim();
+        checkArgument(isValidEmail(trimmedEmail), MESSAGE_CONSTRAINTS);
+        value = trimmedEmail;
     }
 
     /**
@@ -54,7 +58,7 @@ public class Email {
         }
 
         Email otherEmail = (Email) other;
-        return value.equals(otherEmail.value);
+        return this.value.equals(otherEmail.value);
     }
 
     @Override
