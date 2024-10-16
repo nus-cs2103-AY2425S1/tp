@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -18,6 +20,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -26,6 +30,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static ResultDisplay resultDisplay;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -34,7 +39,6 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
     @FXML
@@ -68,6 +72,23 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+    }
+
+    /**
+     * Displays a message if there is a data loading error.
+     *
+     * @param model the model that is used
+     */
+    public static CommandResult displayDataLoadErrorMessage(Model model) {
+        requireNonNull(model);
+        CommandResult commandResult = new CommandResult("");
+
+        if (model.getAddressBook().equals(new AddressBook())) {
+            commandResult = new CommandResult("Unable to load contacts due to unexpected data loading error!");
+        }
+        resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+        return commandResult;
     }
 
     public Stage getPrimaryStage() {

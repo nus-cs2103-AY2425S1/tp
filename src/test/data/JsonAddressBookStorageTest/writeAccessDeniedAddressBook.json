@@ -1,0 +1,17 @@
+{
+  "persons" : [ {
+    "name" : "alice goh",
+    "email" : "alice@gmail.com",
+    "gender" : "F",
+    "age" : "19",
+    "tags" : [ "1b" ],
+    "detail" : ""
+  }, {
+    "name" : "max tan",
+    "email" : "max@gmail.com",
+    "gender" : "M",
+    "age" : "21",
+    "tags" : [ "1a" ],
+    "detail" : ""
+  } ]
+}
