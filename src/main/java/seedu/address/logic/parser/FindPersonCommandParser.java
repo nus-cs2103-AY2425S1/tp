@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.commons.Name;
 import seedu.address.model.commons.NameContainsKeywordsPredicate;
 import seedu.address.model.commons.RoleContainsKeywordPredicate;
 import seedu.address.model.person.Person;
@@ -19,7 +20,7 @@ import seedu.address.model.person.Person;
 public class FindPersonCommandParser implements Parser<FindPersonCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindPersonCommand
+     * Parses the given {@code String} of arguments in the context of the FindPersonCommand.
      * and returns a FindPersonCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
@@ -40,8 +41,12 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
 
         String[] nameKeywords = null;
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            String names = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).toString();
-            nameKeywords = names.split("\\s+");
+            nameKeywords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
+            for (String name : nameKeywords) {
+                if (!Name.isValidName(name)) {
+                    throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+                }
+            }
         }
 
         String role = null;
