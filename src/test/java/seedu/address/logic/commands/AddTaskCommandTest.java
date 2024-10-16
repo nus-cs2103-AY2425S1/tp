@@ -45,7 +45,6 @@ public class AddTaskCommandTest {
         Model copiedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         Task validTask = new TaskBuilder().build();
-        Name validName = person.getName();
 
         // Create a copy of the person and add the task
         Person copiedPerson = new PersonBuilder(person).build();
@@ -70,6 +69,18 @@ public class AddTaskCommandTest {
 
         assertThrows(CommandException.class,
                 AddTaskCommand.MESSAGE_DUPLICATE_TASK, () -> addTaskCommand.execute(expectedModel));
+    }
+
+    @Test
+    public void execute_invalidName_throwsCommandException() {
+        // Get an existing person with the default task
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Task validTask = new TaskBuilder().build();
+        Name validName = new Name("Darren Watkins Junior");
+        AddTaskCommand addTaskCommand = new AddTaskCommand(validName, validTask);
+
+        assertThrows(CommandException.class,
+                AddTaskCommand.MESSAGE_PERSON_NOT_FOUND, () -> addTaskCommand.execute(expectedModel));
     }
 
     @Test
