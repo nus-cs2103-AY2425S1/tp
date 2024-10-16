@@ -101,6 +101,16 @@ public interface Model {
     void assignVendorToEvent(Vendor vendor, Event event);
 
     /**
+     * Returns list of associated vendors to an event.
+     */
+    ObservableList<Vendor> getAssociatedVendors(Event event);
+
+    /**
+     * Returns list of associated events to a vendor.
+     */
+    ObservableList<Event> getAssociatedEvents(Vendor vendor);
+
+    /**
      * Returns the current selected vendor.
      */
     ObservableObjectValue<Vendor> getViewedVendor();
