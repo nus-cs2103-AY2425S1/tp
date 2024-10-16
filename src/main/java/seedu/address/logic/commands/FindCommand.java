@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.owner.OwnerNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -15,23 +16,51 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds owners or pets in the address book whose "
+            + "relevant fields contain the specified keywords (case-insensitive) and displays them as a list with "
+            + "index numbers.\n"
+            + "To find owners: find owner KEYWORD [MORE_KEYWORDS]...\n"
+            + "To find pets: find pet KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: find owner bobby, find pet golden retriever";
+
 
     private final NameContainsKeywordsPredicate predicate;
+    private final OwnerNameContainsKeywordsPredicate ownerPredicate;
+
+    /* field for PetContainsKeywordsPredicate */
+    private final boolean isOwnerSearch; // indicates if second word of argument is OWNER or PET
 
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
+        ownerPredicate = null;
+        isOwnerSearch = false;
     }
+
+    /**
+     * Constructor for finding owners.
+     * @param ownerPredicate Owner predicate.
+     */
+    public FindCommand(OwnerNameContainsKeywordsPredicate ownerPredicate) {
+        predicate = null;
+        this.ownerPredicate = ownerPredicate;
+        isOwnerSearch = true;
+    }
+
+    /* Constructor for finding pets here */
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        if (isOwnerSearch) {
+            model.updateFilteredOwnerList(ownerPredicate);
+            return new CommandResult(
+                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredOwnerList().size()));
+        } else {
+            /* PET search here */
+            model.updateFilteredPersonList(predicate);
+            return new CommandResult(
+                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        }
     }
 
     @Override
