@@ -13,7 +13,7 @@ public class StudentId {
     public static final String MESSAGE_CONSTRAINTS =
             "StudentId should only contain numbers, and it should be exactly 8 digits long";
     public static final String VALIDATION_REGEX = "\\d{8}";
-    public final String studentId;
+    public final String value;
 
     /**
      * Constructs a {@code StudentId}.
@@ -23,7 +23,7 @@ public class StudentId {
     public StudentId(String studentId) {
         requireNonNull(studentId);
         checkArgument(isValidStudentId(studentId), MESSAGE_CONSTRAINTS);
-        this.studentId = studentId;
+        this.value = studentId;
     }
 
     /**
@@ -35,7 +35,7 @@ public class StudentId {
 
     @Override
     public String toString() {
-        return studentId;
+        return value;
     }
 
     @Override
@@ -50,12 +50,12 @@ public class StudentId {
         }
 
         StudentId otherStudentId = (StudentId) other;
-        return studentId.equals(otherStudentId.studentId);
+        return value.equals(otherStudentId.value);
     }
 
     @Override
     public int hashCode() {
-        return studentId.hashCode();
+        return value.hashCode();
     }
 
 }

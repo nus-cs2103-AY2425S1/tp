@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -12,7 +11,6 @@ import java.util.List;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Grade;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
@@ -20,39 +18,34 @@ import seedu.address.model.person.StudentId;
 /**
  * Assigns a course-specific grade to a student.
  */
-public class GradeCommand extends Command {
+public class ModuleCommand extends Command {
 
-    public static final String COMMAND_WORD = "grade";
+    public static final String COMMAND_WORD = "module";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a course-specific grade to a student. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a module to a student. "
             + "Parameters: "
             + PREFIX_STUDENTID + "ID "
             + PREFIX_MODULE + "MODULE "
-            + PREFIX_GRADE + "GRADE "
             + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_STUDENTID + "12345678 "
-            + PREFIX_MODULE + "CS2103T "
-            + PREFIX_GRADE + "A+ ";
+            + PREFIX_MODULE + "CS2103T ";
 
-    public static final String MESSAGE_SUCCESS = "New grade added for %1$s";
+    public static final String MESSAGE_SUCCESS = "New module added for Student %1$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "This person does not exist in the address book";
-    public static final String MESSAGE_MODULE_NOT_FOUND = "The student does not take the module %1$s";
+    public static final String MESSAGE_DUPLICATE_MODULE = "The module %1$s already exists for this student";
 
     private final Module module;
     private final StudentId studentId;
-    private final Grade grade;
 
     /**
-     * Creates a GradeCommand to assign a grade to the specified {@code Module}
+     * Creates a ModuleCommand to add the specified {@code Module}
      */
-    public GradeCommand(StudentId studentId, Module module, Grade grade) {
+    public ModuleCommand(StudentId studentId, Module module) {
         requireNonNull(studentId);
         requireNonNull(module);
-        requireNonNull(grade);
         this.module = module;
         this.studentId = studentId;
-        this.grade = grade;
     }
 
     @Override
@@ -75,14 +68,14 @@ public class GradeCommand extends Command {
         }
 
         ArrayList<Module> modules = person.getModules();
-        if (!modules.contains(module)) {
-            throw new CommandException(String.format(MESSAGE_MODULE_NOT_FOUND, module.value));
+        if (modules.contains(module)) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_MODULE, module.value));
         }
 
-        Person updatedPerson = person.setModuleGrade(module, grade);
+        Person updatedPerson = person.addModule(module);
         model.setPerson(person, updatedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, module));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, studentId));
     }
 
     @Override
@@ -92,20 +85,19 @@ public class GradeCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof GradeCommand)) {
+        if (!(other instanceof ModuleCommand)) {
             return false;
         }
 
-        GradeCommand otherGradeCommand = (GradeCommand) other;
-        return module.equals(otherGradeCommand.module);
+        ModuleCommand otherModuleCommand = (ModuleCommand) other;
+        return module.equals(otherModuleCommand.module);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("studentId", studentId)
-                .add("module", module)
-                .add("toAdd", grade)
+                .add("toAdd", module)
                 .toString();
     }
 }
