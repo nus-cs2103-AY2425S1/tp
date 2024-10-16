@@ -31,6 +31,6 @@ public class CommitteeMember extends Role {
 
     @Override
     public String toString() {
-        return "[" + roleName + " - " + branch + " " + PositionString.getPositionString(position) + "]";
+        return "[" + getRoleName() + " - " + branch + " " + PositionString.getPositionString(position) + "]";
     }
 }

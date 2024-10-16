@@ -30,14 +30,14 @@ public class PersonUtil {
      */
     public static String getPersonDetails(Person person) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        person.getEvents().stream().forEach(
-                e -> sb.append(PREFIX_EVENT + e.value + " ")
+        sb.append(PREFIX_NAME).append(person.getName().fullName).append(" ");
+        sb.append(PREFIX_PHONE).append(person.getPhone().value).append(" ");
+        sb.append(PREFIX_EMAIL).append(person.getEmail().value).append(" ");
+        person.getEvents().forEach(
+                e -> sb.append(PREFIX_EVENT).append(e.value).append(" ")
         );
-        person.getRoles().stream().forEach(
-            s -> sb.append(PREFIX_ROLE + s.roleName + " ")
+        person.getRoles().forEach(
+            s -> sb.append(PREFIX_ROLE).append(s.getRoleName()).append(" ")
         );
         return sb.toString();
     }
@@ -65,7 +65,7 @@ public class PersonUtil {
             if (roles.isEmpty()) {
                 sb.append(PREFIX_ROLE);
             } else {
-                roles.forEach(s -> sb.append(PREFIX_ROLE).append(s.roleName).append(" "));
+                roles.forEach(s -> sb.append(PREFIX_ROLE).append(s.getRoleName()).append(" "));
             }
         }
 

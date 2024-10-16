@@ -25,6 +25,6 @@ public class Athlete extends Role {
 
     @Override
     public String toString() {
-        return "[" + roleName + " - " + faculty + " " + SportString.getSportString(sport) + "]";
+        return "[" + getRoleName() + " - " + faculty + " " + SportString.getSportString(sport) + "]";
     }
 }

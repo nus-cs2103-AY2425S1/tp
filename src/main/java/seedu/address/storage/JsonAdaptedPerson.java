@@ -56,7 +56,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         events.addAll(source.getEvents().stream()
                 .map(JsonAdaptedEvent::new)
-                .toList();
+                .toList());
         roles.addAll(source.getRoles().stream()
                 .map(JsonAdaptedRole::new)
                 .toList());
@@ -105,7 +105,7 @@ class JsonAdaptedPerson {
         final Set<Event> modelEvents = new HashSet<>(eventList);
         final Set<Role> modelRoles = new HashSet<>(personRoles);
 
-        return new Person(modelName, modelPhone, modelEmail, modelRoles);
+        return new Person(modelName, modelPhone, modelEmail, modelEvents, modelRoles);
     }
 
 }

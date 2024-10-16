@@ -7,7 +7,6 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -89,7 +88,7 @@ public class JsonAdaptedPersonTest {
         List<JsonAdaptedRole> invalidRoles = new ArrayList<>(VALID_ROLES);
         invalidRoles.add(new JsonAdaptedRole(INVALID_ROLE));
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, invalidRoles);
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_EVENTS, invalidRoles);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 

@@ -13,7 +13,7 @@ public class Role {
                                                      + "punctuation characters if necessary.";
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9- ]+$";
 
-    public String roleName;
+    private String roleName;
 
     /**
      * Constructs a {@code Role}.
@@ -31,6 +31,14 @@ public class Role {
      */
     public static boolean isValidRoleName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     @Override
