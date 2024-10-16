@@ -7,12 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.restaurant.Restaurant;
 
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class PersonCard extends UiPart<Region> {
+public class RestaurantCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
@@ -26,7 +26,7 @@ public class PersonCard extends UiPart<Region> {
      * <a href="https://github.com/se-edu/addressbook-level4/issues/336">The
      * issue on AddressBook level 4</a>
      */
-    public final Person person;
+    public final Restaurant restaurant;
 
     @FXML
     private HBox cardPane;
@@ -50,18 +50,18 @@ public class PersonCard extends UiPart<Region> {
      * Creates a {@code PersonCode} with the given {@code Person} and index to
      * display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public RestaurantCard(Restaurant restaurant, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.restaurant = restaurant;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTagsWithoutPrice().stream()
+        name.setText(restaurant.getName().fullName);
+        phone.setText(restaurant.getPhone().value);
+        address.setText(restaurant.getAddress().value);
+        email.setText(restaurant.getEmail().value);
+        restaurant.getTagsWithoutPrice().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        person.getPriceTags().stream()
+        restaurant.getPriceTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> prices.getChildren().add(new Label(tag.tagName)));
     }

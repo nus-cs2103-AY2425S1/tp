@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.restaurant;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -11,10 +11,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Restaurant in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Restaurant {
 
     // Identity fields
     private final Name name;
@@ -29,7 +29,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Restaurant(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -104,21 +104,21 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both restaurants have the same name.
+     * This defines a weaker notion of equality between two restaurants.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameRestaurant(Restaurant otherRestaurant) {
+        if (otherRestaurant == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherRestaurant != null
+                && otherRestaurant.getName().equals(getName());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both restaurants have the same identity and data fields.
+     * This defines a stronger notion of equality between two restaurants.
      */
     @Override
     public boolean equals(Object other) {
@@ -127,16 +127,16 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Restaurant)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+        Restaurant otherRestaurant = (Restaurant) other;
+        return name.equals(otherRestaurant.name)
+                && phone.equals(otherRestaurant.phone)
+                && email.equals(otherRestaurant.email)
+                && address.equals(otherRestaurant.address)
+                && tags.equals(otherRestaurant.tags);
     }
 
     @Override
