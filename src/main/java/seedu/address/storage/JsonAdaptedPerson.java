@@ -18,7 +18,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Json-friendly version of {@link Person}.
  */
 class JsonAdaptedPerson {
 
@@ -49,7 +49,7 @@ class JsonAdaptedPerson {
         }
     }
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Person} into this class for Json use.
      */
     public JsonAdaptedPerson(Person source) {
         personId = source.getPersonId();
@@ -73,7 +73,7 @@ class JsonAdaptedPerson {
         }
     }
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Json-friendly adapted person object into the model's {@code Person} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
