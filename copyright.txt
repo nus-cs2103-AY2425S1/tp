@@ -8,4 +8,4 @@ Copyright by Jan Jan Kovařík - http://glyphicons.com/
 - edit.png
 
 Copyright by Favicon.io
-- EduLog.png
+- Edulog.png
