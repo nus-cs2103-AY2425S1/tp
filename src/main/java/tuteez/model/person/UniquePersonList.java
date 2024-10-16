@@ -79,6 +79,18 @@ public class UniquePersonList implements Iterable<Person> {
         }
     }
 
+    /**
+     * Displays the details of the specified person.
+     * The person must exist in the list and should be displayed on the right-hand panel of the UI.
+     *
+     * @param toDisplay The person whose details are to be displayed.
+     */
+    public void display(Person toDisplay) {
+        requireNonNull(toDisplay);
+        // Do nothing right now, could interact with the UI component in the future.
+    }
+
+
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

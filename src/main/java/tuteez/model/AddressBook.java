@@ -96,6 +96,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Displays {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void displayPerson(Person key) {
+        persons.display(key);
+    }
+
+    /**
      * Finds and returns the {@code person} from this {@code AddressBook} with the specified {@code Name}.
      * {@code Name} must exist in the address book.
      */
