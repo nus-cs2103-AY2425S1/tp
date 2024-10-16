@@ -7,11 +7,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.function.Predicate;
 
-import javafx.collections.transformation.FilteredList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -297,8 +294,6 @@ public class DeleteStudentFromGroupCommandTest {
     }
 
     private class ModelStubDeleteStudentFromGroup extends ModelStub {
-        private final Group group = validGroup;
-        private final Student student = validStudent;
         private final ArrayList<Group> groups = new ArrayList<Group>();
         private final ArrayList<Student> students = new ArrayList<Student>();
 
