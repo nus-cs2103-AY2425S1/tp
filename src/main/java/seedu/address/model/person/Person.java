@@ -95,6 +95,11 @@ public class Person {
         return new Person(name, phone, email, address, tags, gradeList, newAttendanceList);
     }
 
+    public Person removeAttendance(LocalDateTime date) {
+        AttendanceList newAttendanceList = attendanceList.removeAttendance(date);
+        return new Person(name, phone, email, address, tags, gradeList, newAttendanceList);
+    }
+
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
