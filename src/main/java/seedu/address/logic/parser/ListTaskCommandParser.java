@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ListTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 
 /**
@@ -27,8 +26,7 @@ public class ListTaskCommandParser implements Parser<ListTaskCommand> {
         if (arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME) && argMultimap.getPreamble().isEmpty()) {
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_GROUP_NAME);
             GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
-            Group group = new Group(groupName);
-            return new ListTaskCommand(group);
+            return new ListTaskCommand(groupName);
         } else if (args.trim().equals("")) {
             return new ListTaskCommand();
         } else {

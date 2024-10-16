@@ -220,6 +220,7 @@ public class ModelManager implements Model {
         requireNonNull(groupToBeDeleted);
         addressBook.removeGroup(groupToBeDeleted);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Student List Accessors =============================================================

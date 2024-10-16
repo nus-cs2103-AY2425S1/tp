@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
@@ -27,6 +29,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String studentNumber;
+    private final String groupName;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given student details.
@@ -35,13 +38,15 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name,
                              @JsonProperty("email") String email,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("student number") String studentNumber) {
+                             @JsonProperty("student number") String studentNumber,
+                             @JsonProperty("group") String groupName) {
         this.name = name;
         this.email = email;
         if (tags != null) {
             this.tags.addAll(tags);
         }
         this.studentNumber = studentNumber;
+        this.groupName = groupName;
     }
 
     /**
@@ -54,6 +59,7 @@ class JsonAdaptedPerson {
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList()));
         studentNumber = source.getStudentNumber().value;
+        groupName = source.getGroupName().isEmpty() ? "!" : source.getGroupName().get().toString();
     }
 
     /**
@@ -66,6 +72,7 @@ class JsonAdaptedPerson {
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
+        final Set<Tag> modelTags = new HashSet<>(personTags);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -85,14 +92,31 @@ class JsonAdaptedPerson {
 
         if (studentNumber == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    StudentNumber.class.getSimpleName()));
+                StudentNumber.class.getSimpleName()));
         }
         if (!StudentNumber.isValidStudentNumber(studentNumber)) {
             throw new IllegalValueException(StudentNumber.MESSAGE_CONSTRAINTS);
         }
         final StudentNumber modelStudentNumber = new StudentNumber(studentNumber);
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Student(modelName, modelEmail, modelTags, modelStudentNumber);
+
+        if (groupName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                GroupName.class.getSimpleName()));
+        }
+
+        // guard clause?
+        // if groupName stored in JSON is "!" that means the student is not in a group
+        if (groupName.equals("!")) {
+            // create Student without Group
+            return new Student(modelName, modelEmail, modelTags, modelStudentNumber);
+        }
+
+        if (!GroupName.isValidName(groupName)) {
+            throw new IllegalValueException(GroupName.MESSAGE_CONSTRAINTS);
+        }
+
+        final GroupName modelGroupName = new GroupName(groupName);
+        return new Student(modelName, modelEmail, modelTags, modelStudentNumber, Optional.of(modelGroupName));
     }
 
 }

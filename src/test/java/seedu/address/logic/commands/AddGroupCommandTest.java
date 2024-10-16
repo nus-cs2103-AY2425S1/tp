@@ -42,8 +42,9 @@ public class AddGroupCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingGroupAdded modelStub = new ModelStubAcceptingGroupAdded();
+      
         Student validStudent = new PersonBuilder().build();
-        Group validGroup = new Group(VALID_GROUPNAME, new HashSet<>(),new HashSet<>());
+        Group validGroup = new Group(VALID_GROUPNAME, new HashSet<>(), new HashSet<>());
 
         CommandResult commandResult = new AddGroupCommand(validGroup).execute(modelStub);
 
@@ -191,7 +192,7 @@ public class AddGroupCommandTest {
 
         @Override
         public boolean hasTask(Task task) {
-            return false;
+            throw new AssertionError("This method should not be called");
         }
 
         @Override
@@ -286,6 +287,16 @@ public class AddGroupCommandTest {
 
         @Override
         public void addTask(Task task) {
+            throw new AssertionError("This method should not be called");
+        }
+      
+        @Override
+        public void deleteTaskFromGroup(Task task, Group group) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void deleteTask(Task task) {
             throw new AssertionError("This method should not be called");
         }
     }
