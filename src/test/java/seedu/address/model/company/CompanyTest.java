@@ -53,7 +53,8 @@ public class CompanyTest {
         assertFalse(NUS.equals(differentNameCompany));
 
         // different address -> returns false
-        Company differentAddressCompany = new CompanyBuilder().withAddress("20 Clementi Ave 1, Singapore 129957").build();
+        Company differentAddressCompany = new CompanyBuilder()
+                .withAddress("20 Clementi Ave 1, Singapore 129957").build();
         assertFalse(NUS.equals(differentAddressCompany));
 
         // different billing date -> returns false
