@@ -29,7 +29,7 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Department department, Role role,
                   ContractEndDate contractEndDate, boolean isEmployee) {
-        requireAllNonNull(name, phone, email, address, department, role, contractEndDate);
+        requireAllNonNull(name, phone, email, address, department, role, contractEndDate, isEmployee);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -117,14 +117,16 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && department.equals(otherPerson.department)
                 && role.equals(otherPerson.role)
-                && contractEndDate.equals(otherPerson.contractEndDate)
-                && isEmployee == otherPerson.isEmployee();
+                && isEmployee == otherPerson.isEmployee()
+                && (contractEndDate.equals(otherPerson.contractEndDate) || !isEmployee);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, department, role, contractEndDate);
+        return isEmployee
+                ? Objects.hash(name, phone, email, address, department, role, contractEndDate, isEmployee)
+                : Objects.hash(name, phone, email, address, department, role, isEmployee);
     }
 
     @Override
@@ -135,7 +137,8 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("department", department)
-                .add("role", role);
+                .add("role", role)
+                .add("employee", isEmployee);
         if (isEmployee()) {
             return builder.add("contractEndDate", contractEndDate).toString();
         }

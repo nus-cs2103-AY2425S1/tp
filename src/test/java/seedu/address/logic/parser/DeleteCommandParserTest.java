@@ -1,13 +1,17 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_TYPE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteEmployeeCommand;
+import seedu.address.logic.commands.DeletePotentialCommand;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -21,12 +25,30 @@ public class DeleteCommandParserTest {
     private DeleteCommandParser parser = new DeleteCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+    public void parse_validArgsPotential_returnsDeleteCommand() {
+        assertParseSuccess(parser, "ph 1", new DeletePotentialCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, "ph 1 ", new DeletePotentialCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, " ph 1", new DeletePotentialCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, " ph 1 ", new DeletePotentialCommand(INDEX_FIRST_PERSON));
+    }
+
+    @Test
+    public void parse_validArgsEmployee_returnsDeleteCommand() {
+        assertParseSuccess(parser, "e 11", new DeleteEmployeeCommand(Index.fromOneBased(11)));
+        assertParseSuccess(parser, "e 11 ", new DeleteEmployeeCommand(Index.fromOneBased(11)));
+        assertParseSuccess(parser, " e 11", new DeleteEmployeeCommand(Index.fromOneBased(11)));
+        assertParseSuccess(parser, " e 11 ", new DeleteEmployeeCommand(Index.fromOneBased(11)));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a a", String.format(ParserUtil.MESSAGE_INVALID_INDEX));
+        assertParseFailure(parser, "a 1", String.format(MESSAGE_INVALID_PERSON_DISPLAYED_TYPE));
+        assertParseFailure(parser, "e", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "e e", String.format(ParserUtil.MESSAGE_INVALID_INDEX));
+        assertParseFailure(parser, "e 1 e", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "e  1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 }
