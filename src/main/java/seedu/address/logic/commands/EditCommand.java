@@ -40,7 +40,7 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD+ ": Edits the details of the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -209,8 +209,8 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code publicAddresses} is null.
          */
         public Optional<Map<Network, Set<PublicAddress>>> getPublicAddresses() {
-            return (publicAddresses != null) ?
-                    Optional.of(Collections.unmodifiableMap(publicAddresses)) : Optional.empty();
+            return (publicAddresses != null)
+                    ? Optional.of(Collections.unmodifiableMap(publicAddresses)) : Optional.empty();
         }
 
         /**

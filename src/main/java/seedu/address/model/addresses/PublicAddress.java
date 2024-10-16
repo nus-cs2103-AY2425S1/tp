@@ -1,8 +1,8 @@
 package seedu.address.model.addresses;
 
-import java.util.Objects;
-
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.Objects;
 
 /**
  * Represents a public address in the address book.
@@ -11,7 +11,8 @@ public abstract class PublicAddress {
 
     public static final String DEFAULT_TAG = "default"; // TODO: Remove once placeholder is no longer needed
 
-    public static final String MESSAGE_CONSTRAINTS = "Public Addresses can take any values, and it should not be blank"; // TODO: Update constraints
+    public static final String MESSAGE_CONSTRAINTS =
+            "Public Addresses can take any values, and it should not be blank"; // TODO: Update constraints
 
     /*
      * The first character of the address must not be a whitespace,
@@ -46,7 +47,7 @@ public abstract class PublicAddress {
     /**
      * Returns true if a given string is a valid public address tag.
      */
-    public static boolean isValidPATag(String test) {
+    public static boolean isValidPublicAddressTag(String test) {
         return test.matches(VALIDATION_PAT_REGEX);
     }
 

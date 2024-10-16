@@ -115,18 +115,18 @@ public class ParserUtil {
         }
 
         String trimmedPaTag = paTag.trim();
-        if (!PublicAddress.isValidPATag(paTag)) {
+        if (!PublicAddress.isValidPublicAddressTag(paTag)) {
             throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
         }
 
         switch(network) {
-            case "BTC":
-                if (!BtcAddress.isValidPublicAddress(trimmedPublicAddress)) {
-                    throw new ParseException(BtcAddress.MESSAGE_CONSTRAINTS);
-                }
-                return new BtcAddress(trimmedPublicAddress, trimmedPaTag);
-            default:
-                throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
+        case "BTC":
+            if (!BtcAddress.isValidPublicAddress(trimmedPublicAddress)) {
+                throw new ParseException(BtcAddress.MESSAGE_CONSTRAINTS);
+            }
+            return new BtcAddress(trimmedPublicAddress, trimmedPaTag);
+        default:
+            throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
         }
     }
 
@@ -151,7 +151,7 @@ public class ParserUtil {
 
             PublicAddress parsedPublicAddress = parsePublicAddress(address, PublicAddress.DEFAULT_TAG, network);
 
-            Network parsedNetwork = switch(network) {  // TODO: Implement more networks
+            Network parsedNetwork = switch(network) { // TODO: Implement more networks
             case "BTC" -> Network.BTC;
             default -> throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
             };
