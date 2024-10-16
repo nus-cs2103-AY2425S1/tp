@@ -203,21 +203,26 @@ edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 100000000
 This feature allows users to search for customers by specific details such as name, address, email, phone number, job title, or remarks. 
 
 **How to Use It:**  
-To perform a search, use the `filter` command followed by a flag (indicating the field you want to search) and the corresponding search term. Searches are **case-insensitive** and use **substring-matching**. See [substring-matching](#substring-matching) to learn more. 
+To perform a search, use the `filter` command followed by one or more flags (indicating the fields to search) and the corresponding search terms. 
+ Searches are **case-insensitive** and use [**substring-matching**](#substring-matching).
 
 - **Command Format:** 
-```
-filter <FLAG>/ <SEARCH TERM>
-```
+  ```
+  filter <FLAG>/ <SEARCH TERM> [<ADDITIONAL_FLAGS>/ <SEARCH TERM>]
+  ```
 - **Examples:** 
   - Filter customers by name: 
-  ```
-  filter n/ TAN LESHEW
-  ```
+    ```
+    filter n/ TAN LESHEW
+    ```
   - Filter customers by job:
-  ```
-  e.g. filter j/ doctor
-  ```
+    ```
+    filter j/ doctor
+    ```
+  - Filter customers by name, job and remark:
+    ```
+    filter n/ Gordon Moore j/ doctor r/ award winner
+    ```
 
 #### Parameters
 | Parameter   | Expected Format                                                                                              | Explanation                                                                                     |
@@ -235,30 +240,27 @@ filter <FLAG>/ <SEARCH TERM>
 
 #### Substring Matching:
 - Substring matching is used for searches, meaning that the search term must match a part of the field in the same order as it appears in the customer record.
-- For instance, if a customer’s name is "John Lee", the search term "John", "Lee", or "John Lee" will match, but "Lee John" will not.
-
+- For instance, if a customer’s name is `Gordon Moore`, the search term `Gordon`, `Moore`, or `Gordon Moore` will match, but `Moore Gordon` will not.
 
 #### What to Expect
 - **If Successful:**
   - Message: "Here are all the customers that match your search: (List of customers)."
 - **If Unsuccessful (No Matches Found):**
   - Message: "No customers match your search criteria."
-- **If Multiple Filters Are Used:**
-  - Message: "Using multiple filters is not supported yet. Please use only one filter."
 - **If There is an Error:** 
   - No Valid Flags Used:
     - Message:
     
-      "filter: Searches for all customers whose specified field contains the given
-    substring (case-insensitive) and displays the results in a numbered list.
+      "filter: Searches for all customers whose specified field contains the given substring (case-insensitive) and displays the results in a numbered list.
     
       Parameters: `<FLAG>/ <SEARCH TERM>`
       
       Flags: `n/` (name), `p/` (phone), `e/` (email), `a/` (address), `j/` (job), `r/` (remarks)
       
-      Example: `filter n/ Alice`
-    
-      This will find all customers whose names contain 'Alice'."
+      Example: `filter n/ Alice p/ 91112222`
+
+      This will find all customers whose names contain 'Alice' and has phone number '91112222'."
+
   - If Search Term Fails to Meet Requirement (i.e. Phone Number longer than 8 digits):
     - The system will display usage hints specific to the first invalid search term.
 
