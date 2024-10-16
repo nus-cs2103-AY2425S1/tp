@@ -96,7 +96,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the address book, automatically sorted by their priority from HIGH to LOW.
 
 Format: `list`
 
