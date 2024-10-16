@@ -113,7 +113,7 @@ Format: `assign INDEX pn/PIECE_NAME...`
 *  Existing values will remain unchanged
 
 Examples:
-*  `assign 1 pn/Etude pn/Moonlight Sonata` Adds `Etude` and `Moonlight Sonata` to the 1st person's piano pieces.
+*  `assign 1 pn/Etude pn/Moonlight Sonata` Adds `Etude` and `Moonlight Sonata` to the 1st student's piano pieces.
 
 ### Scheduling a regular lesson : `schedule`
 
