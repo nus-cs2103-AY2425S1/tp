@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Transaction;
 
 /**
  * Container for user visible messages.
@@ -49,5 +50,23 @@ public class Messages {
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
+
+    /**
+     * Formats the {@code transaction} for display to the user.
+     */
+    public static String format(Transaction transaction) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(transaction.getDescription())
+                .append("; Amount: ")
+                .append(transaction.getAmount())
+                .append("; Other party: ")
+                .append(transaction.getOtherParty())
+                .append("; Date: ")
+                .append(transaction.getDate());
+
+        return builder.toString();
+    }
+
+
 
 }
