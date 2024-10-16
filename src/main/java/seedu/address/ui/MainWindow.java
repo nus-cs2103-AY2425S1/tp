@@ -195,6 +195,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             String personName = commandResult.getPersonName();
+            personListPanel = new PersonListPanel(logic.getFilteredPersonList());
 
             if (commandResult.getFeedbackToUser().contains(String.format(MESSAGE_SHOW_HISTORY_SUCCESS, personName))) {
                 switchMainPanel(personListPanel, callHistoryPanel);
