@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -18,15 +19,18 @@ public class VendorListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(VendorListPanel.class);
 
     @FXML
+    private Label header;
+    @FXML
     private ListView<Vendor> vendorListView;
 
     /**
      * Creates a {@code VendorListPanel} with the given {@code ObservableList}.
      */
-    public VendorListPanel(ObservableList<Vendor> vendorList) {
+    public VendorListPanel(ObservableList<Vendor> vendorList, String headerText) {
         super(FXML);
         vendorListView.setItems(vendorList);
         vendorListView.setCellFactory(listView -> new VendorListViewCell());
+        header.setText(headerText);
     }
 
     /**

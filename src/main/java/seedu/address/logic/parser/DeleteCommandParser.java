@@ -16,10 +16,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class DeleteCommandParser implements Parser<DeleteCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the
-     * DeleteCommand
-     * and returns a DeleteCommand object for execution.
-     *
+     * Parses the given {@code String} of arguments in the context of the DeleteCommand and returns a DeleteCommand
+     * object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
@@ -42,10 +40,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     }
 
     /**
-     * Parses the given {@code String} of arguments in the context of the
-     * DeleteVendorCommand
-     * and returns a DeleteVendorCommand object for execution.
-     *
+     * Parses the given {@code String} of arguments in the context of the DeleteVendorCommand and returns a
+     * DeleteVendorCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     private DeleteVendorCommand parseVendorDelete(ArgumentMultimap argMultimap) throws ParseException {
@@ -53,16 +49,14 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_VENDOR).get());
             return new DeleteVendorCommand(index);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteVendorCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteVendorCommand.MESSAGE_USAGE),
+                    pe);
         }
     }
 
     /**
-     * Parses the given {@code String} of arguments in the context of the
-     * DeleteEventCommand
-     * and returns a DeleteEventCommand object for execution.
-     *
+     * Parses the given {@code String} of arguments in the context of the DeleteEventCommand and returns a
+     * DeleteEventCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     private DeleteEventCommand parseEventDelete(ArgumentMultimap argMultimap) throws ParseException {
@@ -70,8 +64,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_EVENT).get());
             return new DeleteEventCommand(index);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteEventCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteEventCommand.MESSAGE_USAGE),
+                    pe);
         }
     }
 

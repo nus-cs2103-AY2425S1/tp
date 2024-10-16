@@ -3,10 +3,14 @@ package seedu.address.model;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
+import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
+import seedu.address.ui.UiState;
 
 /**
  * The API of the Model component.
@@ -57,28 +61,24 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a vendor with the same identity as {@code vendor} exists in
-     * the address book.
+     * Returns true if a vendor with the same identity as {@code vendor} exists in the address book.
      */
     boolean hasVendor(Vendor vendor);
 
     /**
-     * Deletes the given vendor.
-     * The vendor must exist in the address book.
+     * Deletes the given vendor. The vendor must exist in the address book.
      */
     void deleteVendor(Vendor target);
 
     /**
-     * Adds the given vendor.
-     * {@code vendor} must not already exist in the address book.
+     * Adds the given vendor. {@code vendor} must not already exist in the address book.
      */
     void addVendor(Vendor vendor);
 
     /**
-     * Replaces the given vendor {@code target} with {@code editedVendor}.
-     * {@code target} must exist in the address book.
-     * The vendor identity of {@code editedVendor} must not be the same as another
-     * existing vendor in the address book.
+     * Replaces the given vendor {@code target} with {@code editedVendor}. {@code target} must exist in the address
+     * book. The vendor identity of {@code editedVendor} must not be the same as another existing vendor in the address
+     * book.
      */
     void setVendor(Vendor target, Vendor editedVendor);
 
@@ -86,9 +86,7 @@ public interface Model {
     ObservableList<Vendor> getFilteredVendorList();
 
     /**
-     * Updates the filter of the filtered vendor list to filter by the given
-     * {@code predicate}.
-     *
+     * Updates the filter of the filtered vendor list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredVendorList(Predicate<Vendor> predicate);
@@ -98,20 +96,48 @@ public interface Model {
     void unassignVendorFromEvent(Vendor vendor, Event event);
 
     /**
-     * Returns true if an event with the same identity as {@code event} exists in
-     * the address book.
+     * Returns true if the given {@code vendor} is already assigned to the given {@code event}. {@code vendor} and
+     * {@code event} must exist in the address book.
+     */
+    boolean isVendorAssignedToEvent(Vendor vendor, Event event);
+
+    /**
+     * Assigns the given vendor to the given event.
+     */
+    void assignVendorToEvent(Vendor vendor, Event event);
+
+    /**
+     * Returns list of associated vendors to an event.
+     */
+    ObservableList<Vendor> getAssociatedVendors(Event event);
+
+    /**
+     * Returns list of associated events to a vendor.
+     */
+    ObservableList<Event> getAssociatedEvents(Vendor vendor);
+
+    /**
+     * Returns the current selected vendor.
+     */
+    ObservableObjectValue<Vendor> getViewedVendor();
+
+    /**
+     * Sets the selected vendor.
+     */
+    void viewVendor(Vendor vendor);
+
+    /*
+     * Returns true if an event with the same identity as {@code event} exists in the address book.
      */
     boolean hasEvent(Event event);
 
     /**
-     * Deletes the given event.
-     * The event must exist in the address book.
+     * Deletes the given event. The event must exist in the address book.
      */
     void deleteEvent(Event target);
 
     /**
-     * Adds the given event.
-     * {@code event} must not already exist in the address book.
+     * Adds the given event. {@code event} must not already exist in the address book.
      */
     void addEvent(Event event);
 
@@ -119,10 +145,35 @@ public interface Model {
     ObservableList<Event> getFilteredEventList();
 
     /**
-     * Updates the filter of the filtered event list to filter by the given
-     * {@code predicate}.
-     *
+     * Updates the filter of the filtered event list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
+
+    /**
+     * Returns the current selected event.
+     */
+    ObservableObjectValue<Event> getViewedEvent();
+
+    /**
+     * Sets the selected Event.
+     */
+    void viewEvent(Event event);
+
+    /**
+     * Returns the current UI state.
+     * @return {@code UiState} observable object.
+     */
+    public ObservableObjectValue<UiState> getUiState();
+
+    /**
+     * Sets the current UI state.
+     * @param uiState {@code UiState} object.
+     */
+    public void setUiState(UiState uiState);
+
+    /**
+     * Returns an unmodifiable view of the associations set.
+     */
+    public ObservableSet<Pair<Vendor, Event>> getAssociations();
 }

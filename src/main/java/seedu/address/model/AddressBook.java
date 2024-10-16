@@ -1,11 +1,17 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
+import javafx.util.Pair;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
@@ -20,6 +26,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueVendorList vendors;
     private final UniqueEventList events;
+    private final ObservableSet<Pair<Vendor, Event>> associations;
+    // private final ObservableSet<Pair<Vendor, Event>> associations;
 
     /*
      * The 'unusual' code block below is a non-static initialization block,
@@ -33,6 +41,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         vendors = new UniqueVendorList();
+        associations = FXCollections.observableSet(new HashSet<>());
         events = new UniqueEventList();
     }
 
@@ -115,12 +124,57 @@ public class AddressBook implements ReadOnlyAddressBook {
         vendors.remove(key);
     }
 
-    boolean isVendorAssignedToEvent(Vendor vendor, Event event) {
-        return false; // TODO implement this
+    //// assign operations
+
+    /**
+     * Returns true if the given {@code vendor} is already assigned to the given
+     * {@code event}.
+     * {@code vendor} and {@code event} must exist in the address book.
+     */
+    public boolean isVendorAssignedToEvent(Vendor vendor, Event event) {
+        requireAllNonNull(vendor, event);
+        Pair<Vendor, Event> pair = new Pair<>(vendor, event);
+        return associations.contains(pair);
+    }
+
+    /**
+     * Assigns the given {@code vendor} in the list to {@code event}.
+     * {@code vendor} and {@code event} must exist in the address book.
+     */
+    public void assignVendorToEvent(Vendor vendor, Event event) {
+        requireAllNonNull(vendor, event);
+        Pair<Vendor, Event> pair = new Pair<>(vendor, event);
+        associations.add(pair);
     }
 
     void unassignVendorFromEvent(Vendor vendor, Event event) {
         // TODO implement this
+    }
+
+    /**
+     * Returns list of associated vendors to an event.
+     */
+    public ObservableList<Vendor> getAssociatedVendors(Event event) {
+        requireNonNull(event);
+        List<Vendor> vendorsList = associations.stream()
+                .filter(pair -> pair.getValue().equals(event))
+                .map(Pair::getKey)
+                .collect(Collectors.toList());
+
+        return FXCollections.observableArrayList(vendorsList);
+    }
+
+    /**
+     * Returns list of associated events to a vendor.
+     */
+    public ObservableList<Event> getAssociatedEvents(Vendor vendor) {
+        requireNonNull(vendor);
+        List<Event> eventsList = associations.stream()
+                .filter(pair -> pair.getKey().equals(vendor))
+                .map(Pair::getValue)
+                .collect(Collectors.toList());
+
+        return FXCollections.observableArrayList(eventsList);
     }
 
     //// event-level operations
@@ -170,6 +224,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Event> getEventList() {
         return events.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableSet<Pair<Vendor, Event>> getAssociations() {
+        return associations;
     }
 
     @Override

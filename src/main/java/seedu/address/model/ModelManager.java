@@ -7,12 +7,18 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import javafx.collections.transformation.FilteredList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
+import seedu.address.ui.UiState;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -23,7 +29,11 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Vendor> filteredVendors;
+    private final ObjectProperty<Vendor> selectedVendor;
     private final FilteredList<Event> filteredEvents;
+    private final ObjectProperty<Event> selectedEvent;
+    private final ObservableSet<Pair<Vendor, Event>> associations;
+    private final ObjectProperty<UiState> currentUiState;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,14 +47,17 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredVendors = new FilteredList<>(this.addressBook.getVendorList());
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
+        associations = this.addressBook.getAssociations();
+        selectedVendor = new SimpleObjectProperty<>(null);
+        selectedEvent = new SimpleObjectProperty<>(null);
+        currentUiState = new SimpleObjectProperty<>(UiState.DEFAULT);
     }
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
 
-    // =========== UserPrefs
-    // ==================================================================================
+    // =========== UserPrefs ==================================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -79,8 +92,7 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    // =========== AddressBook
-    // ================================================================================
+    // =========== AddressBook ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -133,12 +145,42 @@ public class ModelManager implements Model {
         updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
-    // =========== Filtered Vendor List Accessors
-    // =============================================================
+    // =========== Assigning vendors and events =============================================================
+    
+    @Override
+    public boolean isVendorAssignedToEvent(Vendor vendor, Event event) {
+        requireAllNonNull(vendor, event);
+        return addressBook.isVendorAssignedToEvent(vendor, event);
+    }
+
+    @Override
+    public void assignVendorToEvent(Vendor vendor, Event event) {
+        requireAllNonNull(vendor, event);
+        addressBook.assignVendorToEvent(vendor, event);
+    }
+
+    @Override
+    public void unassignVendorFromEvent(Vendor vendor, Event event) {
+        requireAllNonNull(vendor, event);
+        addressBook.unassignVendorFromEvent(vendor, event);
+    }
+
+    @Override
+    public ObservableList<Event> getAssociatedEvents(Vendor vendor) {
+        requireNonNull(vendor);
+        return addressBook.getAssociatedEvents(vendor);
+    }
+
+    @Override
+    public ObservableList<Vendor> getAssociatedVendors(Event event) {
+        requireNonNull(event);
+        return addressBook.getAssociatedVendors(event);
+    }
+
+    // =========== Filtered Vendor List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Vendor} backed by the
-     * internal list of
+     * Returns an unmodifiable view of the list of {@code Vendor} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
@@ -152,24 +194,10 @@ public class ModelManager implements Model {
         filteredVendors.setPredicate(predicate);
     }
 
-    @Override
-    public boolean isVendorAssignedToEvent(Vendor vendor, Event event) {
-        requireAllNonNull(vendor, event);
-        return addressBook.isVendorAssignedToEvent(vendor, event);
-    }
-
-    @Override
-    public void unassignVendorFromEvent(Vendor vendor, Event event) {
-        requireAllNonNull(vendor, event);
-        addressBook.unassignVendorFromEvent(vendor, event);
-    }
-
-    // =========== Filtered Event List Accessors
-    // =============================================================
+    // =========== Filtered Event List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Event} backed by the
-     * internal list of
+     * Returns an unmodifiable view of the list of {@code Event} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
@@ -195,10 +223,53 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
+        return addressBook.equals(otherModelManager.addressBook) && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredVendors.equals(otherModelManager.filteredVendors)
                 && filteredEvents.equals(otherModelManager.filteredEvents);
+    }
+
+    // =========== Viewed Vendor Accessors =============================================================
+
+    @Override
+    public ObservableObjectValue<Vendor> getViewedVendor() {
+        return selectedVendor;
+    }
+
+    @Override
+    public void viewVendor(Vendor vendor) {
+        requireNonNull(vendor);
+        selectedVendor.setValue(vendor);
+    }
+
+    // =========== Viewed Events Accessors =============================================================
+
+    @Override
+    public ObservableObjectValue<Event> getViewedEvent() {
+        return selectedEvent;
+    }
+
+    @Override
+    public void viewEvent(Event event) {
+        requireNonNull(event);
+        selectedEvent.setValue(event);
+    }
+
+    // =========== UI State Accessors =============================================================
+    @Override
+    public ObservableObjectValue<UiState> getUiState() {
+        return currentUiState;
+    }
+
+    @Override
+    public void setUiState(UiState uiState) {
+        requireNonNull(uiState);
+        currentUiState.setValue(uiState);
+    }
+
+    // =========== Association Accessors =============================================================
+    @Override
+    public ObservableSet<Pair<Vendor, Event>> getAssociations() {
+        return associations;
     }
 
 }

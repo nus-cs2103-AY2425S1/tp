@@ -14,7 +14,10 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -25,6 +28,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.testutil.VendorBuilder;
+import seedu.address.ui.UiState;
 
 public class CreateVendorCommandTest {
 
@@ -51,8 +55,8 @@ public class CreateVendorCommandTest {
         CreateVendorCommand addCommand = new CreateVendorCommand(validVendor);
         ModelStub modelStub = new ModelStubWithVendor(validVendor);
 
-        assertThrows(CommandException.class, CreateVendorCommand.MESSAGE_DUPLICATE_VENDOR,
-                () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, CreateVendorCommand.MESSAGE_DUPLICATE_VENDOR, ()
+             -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -181,6 +185,16 @@ public class CreateVendorCommandTest {
         }
 
         @Override
+        public ObservableObjectValue<Vendor> getViewedVendor() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void viewVendor(Vendor vendor) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredEventList(Predicate<Event> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -191,7 +205,47 @@ public class CreateVendorCommandTest {
         }
 
         @Override
+        public void assignVendorToEvent(Vendor vendor, Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+	
+        @Override
         public void unassignVendorFromEvent(Vendor vendor, Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Vendor> getAssociatedVendors(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Event> getAssociatedEvents(Vendor vendor) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableObjectValue<Event> getViewedEvent() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void viewEvent(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableObjectValue<UiState> getUiState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setUiState(UiState uiState) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableSet<Pair<Vendor, Event>> getAssociations() {
             throw new AssertionError("This method should not be called.");
         }
     }

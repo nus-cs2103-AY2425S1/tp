@@ -14,4 +14,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_DATE = new Prefix("on/");
     public static final Prefix PREFIX_VENDOR = new Prefix("v/");
     public static final Prefix PREFIX_EVENT = new Prefix("e/");
+
 }

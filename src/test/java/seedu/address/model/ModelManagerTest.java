@@ -14,17 +14,30 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.SetChangeListener;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
 import seedu.address.model.vendor.NameContainsKeywordsPredicate;
+import seedu.address.model.vendor.Vendor;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.TypicalEvents;
+import seedu.address.testutil.TypicalVendors;
+import seedu.address.testutil.VendorBuilder;
+import seedu.address.ui.UiState;
 
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
     private final Event testEvent = new Event(new Name("Test Event"), new Date("2024-10-11"));
+    private final Event anotherEvent = new EventBuilder().withName("Another Event").build();
 
     @Test
     public void constructor() {
@@ -119,6 +132,107 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getUiState_setNewUiState_updateSuccessful() {
+        ObjectProperty<UiState> observedState = new SimpleObjectProperty<>();
+        modelManager.getUiState().addListener((observable, oldValue, newValue) -> {
+            observedState.set(newValue);
+        });
+
+        modelManager.setUiState(UiState.EVENT_DETAILS);
+        assertEquals(UiState.EVENT_DETAILS, observedState.get());
+
+        modelManager.setUiState(UiState.VENDOR_DETAILS);
+        assertEquals(UiState.VENDOR_DETAILS, observedState.get());
+    }
+
+    @Test
+    public void getViewedEvent_setNewEvent_updateSuccessful() {
+        ObjectProperty<Event> observedState = new SimpleObjectProperty<>();
+        modelManager.getViewedEvent().addListener((observable, oldValue, newValue) -> {
+            observedState.set(newValue);
+        });
+
+        Event event1 = new EventBuilder().withName("Event 1").build();
+        Event event2 = new EventBuilder().withName("Event 2").build();
+
+        modelManager.viewEvent(event1);
+        assertEquals(event1, observedState.get());
+
+        modelManager.viewEvent(event2);
+        assertEquals(event2, observedState.get());
+    }
+
+    @Test
+    public void getViewedVendor_setNewVendor_updateSuccessful() {
+        ObjectProperty<Vendor> observedState = new SimpleObjectProperty<>();
+        modelManager.getViewedVendor().addListener((observable, oldValue, newValue) -> {
+            observedState.set(newValue);
+        });
+
+        Vendor vendor1 = new VendorBuilder().withName("Vendor 1").withPhone("123123").withDescription("Vendor 1")
+                .build();
+        Vendor vendor2 = new VendorBuilder().withName("Vendor 2").withPhone("321321").withDescription("Vendor 2")
+                .build();
+
+        modelManager.viewVendor(vendor1);
+        assertEquals(vendor1, observedState.get());
+
+        modelManager.viewVendor(vendor2);
+        assertEquals(vendor2, observedState.get());
+    }
+
+    @Test
+    public void getAssociatedVendors_noAssociations_returnsEmptyList() {
+        ObservableList<Vendor> associatedVendors = modelManager.getAssociatedVendors(testEvent);
+        assertEquals(FXCollections.observableArrayList(), associatedVendors);
+    }
+
+    @Test
+    public void getAssociatedVendors_withAssociations_returnsCorrectVendors() {
+        modelManager.addVendor(ALICE);
+        modelManager.addVendor(BENSON);
+        modelManager.addEvent(testEvent);
+        modelManager.assignVendorToEvent(ALICE, testEvent);
+        modelManager.assignVendorToEvent(BENSON, testEvent);
+
+        ObservableList<Vendor> associatedVendors = modelManager.getAssociatedVendors(testEvent);
+        ObservableList<Vendor> expectedVendors = FXCollections.observableArrayList(BENSON, ALICE);
+
+        assertEquals(expectedVendors, associatedVendors);
+    }
+
+    @Test
+    public void getAssociatedEvents_noAssociations_returnsEmptyList() {
+        ObservableList<Event> associatedEvents = modelManager.getAssociatedEvents(ALICE);
+        assertEquals(FXCollections.observableArrayList(), associatedEvents);
+    }
+
+    @Test
+    public void getAssociatedEvents_withAssociations_returnsCorrectEvents() {
+        modelManager.addVendor(ALICE);
+        modelManager.addEvent(testEvent);
+        modelManager.addEvent(anotherEvent);
+        modelManager.assignVendorToEvent(ALICE, testEvent);
+        modelManager.assignVendorToEvent(ALICE, anotherEvent);
+
+        ObservableList<Event> associatedEvents = modelManager.getAssociatedEvents(ALICE);
+        ObservableList<Event> expectedEvents = FXCollections.observableArrayList(anotherEvent, testEvent);
+
+        assertEquals(expectedEvents, associatedEvents);
+    }
+
+    @Test
+    public void getAssociation_newAssociation_updateSuccessful() {
+        ObjectProperty<Pair<Vendor, Event>> observedState = new SimpleObjectProperty<>();
+        modelManager.getAssociations().addListener((SetChangeListener.Change<? extends Pair<Vendor, Event>> change) -> {
+            observedState.set(change.getElementAdded());
+        });
+
+        modelManager.assignVendorToEvent(TypicalVendors.AMY, TypicalEvents.BIRTHDAY);
+        assertEquals(observedState.get(), new Pair<>(TypicalVendors.AMY, TypicalEvents.BIRTHDAY));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withVendor(ALICE).withVendor(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
@@ -155,3 +269,4 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
 }
+

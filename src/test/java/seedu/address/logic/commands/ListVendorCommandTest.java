@@ -13,9 +13,9 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for ListVendorCommand.
  */
-public class ListCommandTest {
+public class ListVendorCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -27,13 +27,15 @@ public class ListCommandTest {
     }
 
     @Test
-    public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_MULTIVIEW_SUCCESS, expectedModel);
+    public void execute_eventListIsNotFiltered_showsSameList() {
+        assertCommandSuccess(new ListVendorCommand(), model,
+                ListVendorCommand.MESSAGE_LIST_VENDOR_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showVendorAtIndex(model, INDEX_FIRST_VENDOR);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_MULTIVIEW_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListVendorCommand(), model,
+                ListVendorCommand.MESSAGE_LIST_VENDOR_SUCCESS, expectedModel);
     }
 }
