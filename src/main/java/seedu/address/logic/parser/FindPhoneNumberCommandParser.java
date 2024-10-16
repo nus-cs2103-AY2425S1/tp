@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PHONE_NUMBER_KEYWORDS;
 
 import java.util.Arrays;
 
@@ -26,7 +27,11 @@ public class FindPhoneNumberCommandParser implements Parser<FindPhoneNumberComma
         }
 
         String[] phoneNumberKeywords = trimmedArgs.split("\\s+");
-
+        for (String keyword : phoneNumberKeywords) {
+            if (!keyword.matches("\\d+")) {
+                throw new ParseException(MESSAGE_INVALID_PHONE_NUMBER_KEYWORDS);
+            }
+        }
         return new FindPhoneNumberCommand(new PhoneNumberContainsKeywordPredicate(Arrays.asList(phoneNumberKeywords)));
     }
 

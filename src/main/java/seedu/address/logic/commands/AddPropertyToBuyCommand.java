@@ -26,7 +26,7 @@ public class AddPropertyToBuyCommand extends Command {
             + " for this specific person. "
             + "Parameters: INDEX (Must be a positive integer)"
             + PREFIX_HOUSING_TYPE + "[HOUSING_TYPE]"
-            + PREFIX_BUYING_PRICE + "[SELLING_PRICE]"
+            + PREFIX_BUYING_PRICE + "[BUYING_PRICE]"
             + PREFIX_POSTAL_CODE + "[POSTAL_CODE]"
             + PREFIX_UNIT_NUMBER + "[UNIT_NUMBER]"
             + PREFIX_TAG + "[TAG]...\n"
@@ -36,7 +36,7 @@ public class AddPropertyToBuyCommand extends Command {
             + PREFIX_BUYING_PRICE + "1650000 "
             + PREFIX_POSTAL_CODE + "567510 "
             + PREFIX_UNIT_NUMBER + "10-65 "
-            + PREFIX_TAG + "Extremely spacious "
+            + PREFIX_TAG + "Extremely spacious"
             + PREFIX_TAG + "Near MRT";
 
     public static final String MESSAGE_SUCCESS = "New property added: %1$s";

@@ -6,7 +6,7 @@
 
 # NUStates User Guide
 
-NUStates is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) for Real Estate Agents to organize and categorize client and seller contacts, schedule appointments, contact clients about new property listings that match their client's preferences, and be notified to contact clients on key dates or at regular intervals.
+NUStates is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) for Real Estate Agents to organize and categorize client and seller contacts, manage property listings, and easily search through client information. With NUStates, agents can add and categorize clients, list properties for sale or purchase,and find contacts by name or phone number.
 
 It has the benefits of a Graphical User Interface (GUI). If you can type fast, NUStates can get your contact management tasks done faster than traditional GUI apps.
 
@@ -19,11 +19,11 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/nus-cs2103-AY2425S1/forum/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F10-3/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar nustates.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -33,7 +33,9 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
    * `list` : Lists all contacts.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
+   
+   * `addBuy 1 ht/c bp/1650000 pc/567510 un/10-65 t/Extremely spacious t/Near MRT` : Adds a property of type `Condo` to the Address Book for the contact at index 1. 
+   
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
    * `clear` : Deletes all contacts.
@@ -92,9 +94,39 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+### Adding a property to buy: `addBuy`
+
+Adds a property which has to be bought to the address book. The property is associated to a contact in the Address Book. 
+
+Format: `addBuy INDEX_NUMBER ht/HOUSING TYPE bp/BUYING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​`
+
+<box type="tip" seamless>
+
+**Tip:** A property can have any number of tags (including 0)
+</box>
+
+Examples:
+* `addBuy 1 ht/c bp/1650000 pc/189651 un/5-10`
+* `addBuy 5 ht/h bp/735000 pc/138600 un/30-05 t/Extremely spacious/Near MRT`
+
+### Adding a property to buy: `addSell`
+
+Adds a property which has to be sold to the address book. The property is associated to a contact in the Address Book.
+
+Format: `addSell INDEX_NUMBER ht/HOUSING TYPE sp/SELLING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​`
+
+<box type="tip" seamless>
+
+**Tip:** A property can have any number of tags (including 0)
+</box>
+
+Examples:
+* `addSell 1 ht/c sp/1650000 pc/189651 un/5-10`
+* `addSell 5 ht/h sp/735000 pc/138600 un/30-05 t/Extremely spacious/Near MRT`
+
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons along with the properties associated with them in the address book.
 
 Format: `list`
 
@@ -115,11 +147,11 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by name: `findn`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `findn KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -129,9 +161,27 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `findn John` returns `john` and `John Doe`
+* `findn alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'findn alex david'](images/findAlexDavidResult.png)
+
+### Locating persons by phone number: `findp`
+
+Finds persons whose phone number contain any of the given keywords.
+
+Format: `findp KEYWORD [MORE_KEYWORDS]`
+
+* The KEYWORD can only be numeric values
+* The order of the keywords does not matter. e.g. `86796692 98765432` will match `98765432 86796692`
+* Only the phone number is searched.
+* Only full phone numbers will be matched e.g. `867966` will not match `86796692`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. ` 87438807 99272758` will return `Alex Yeah`, `Bernice Yu`
+
+Examples:
+* `findp 87438807` returns `Alex Yeah`
+* `findp 87438807 99272758` returns `Alex Yeoh`, `Bernice Yu`<br>
+  ![result for 'findp 87438807 99272758'](images/find87438807_99272758Result.png)
 
 ### Deleting a person : `delete`
 
@@ -199,6 +249,7 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**addBuy** | `addBuy INDEX_NUMBER ht/HOUSING TYPE bp/BUYING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​` <br> e.g., 
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
