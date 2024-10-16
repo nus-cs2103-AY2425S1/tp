@@ -14,7 +14,7 @@ import tutorease.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-
+    Predicate<Lesson> PREDICATE_SHOW_ALL_LESSONS = unused -> true;
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -88,31 +88,56 @@ public interface Model {
 
     /**
      * Returns the lesson schedule.
+     *
+     * @return The lesson schedule.
      */
     LessonSchedule getLessonSchedule();
 
+    ObservableList<Lesson> getFilteredLessonList();
+
+    void updateFilteredLessonList(Predicate<Lesson> predicate);
+
     /**
      * Adds the given lesson.
+     *
+     * @param lesson The lesson to add.
      */
     void addLesson(Lesson lesson);
 
     /**
      * Returns true if a lesson with the same identity as {@code lesson} overlaps in the lesson schedule.
+     *
+     * @param lesson The lesson we are looking for in the lesson schedule.
+     * @return A boolean indicating if the lesson is in the lessons schedule.
      */
     boolean hasLessons(Lesson lesson);
 
     /**
      * Deletes the lesson at the given index.
+     *
+     * @param index The index of the lesson to delete.
      */
     void deleteLesson(int index);
 
     /**
      * Returns lesson at the specified index.
+     *
+     * @param index The index of the lesson to get.
+     * @return The lesson at the specified index.
      */
     Lesson getLesson(int index);
 
     /**
      * Returns size of lesson schedule.
+     *
+     * @return The size of the lesson schedule
      */
     int getLessonScheduleSize();
+
+    /**
+     * Deletes all the lessons of a particular student
+     *
+     * @param student The student whose lessons we are deleting
+     */
+    void deleteStudentLesson(Person student);
 }

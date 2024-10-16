@@ -1,6 +1,7 @@
 package tutorease.address.model.lesson;
 
 import static java.util.Objects.requireNonNull;
+import static tutorease.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
@@ -103,11 +104,21 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * @throws NullPointerException If {@code lessons} is null.
      * @throws OverlappingLessonException If any lessons in the list overlap with each other.
      */
-    public void setLessons(List<Lesson> lessons) {
+    public void setLessons(UniqueLessonList lessons) {
         requireNonNull(lessons);
+        internalList.setAll(lessons.internalList);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setLessons(List<Lesson> lessons) {
+        requireAllNonNull(lessons);
         if (!lessonsAreUnique(lessons)) {
             throw new OverlappingLessonException();
         }
+
         internalList.setAll(lessons);
     }
 

@@ -13,7 +13,7 @@ import tutorease.address.model.Model;
 import tutorease.address.model.ModelManager;
 import tutorease.address.model.UserPrefs;
 import tutorease.address.model.person.Person;
-import tutorease.address.testutil.PersonBuilder;
+import tutorease.address.testutil.StudentBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddContactCommand}.
@@ -29,7 +29,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new StudentBuilder().build();
 
         Model expectedModel = new ModelManager(model.getTutorEase(), new UserPrefs(), model.getLessonSchedule());
         expectedModel.addPerson(validPerson);

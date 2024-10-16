@@ -24,6 +24,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final LessonSchedule lessonSchedule;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Lesson> filteredLesson;
 
     /**
      * Initializes a ModelManager with the given tutorEase and userPrefs.
@@ -38,6 +39,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         this.lessonSchedule = new LessonSchedule(lessonSchedule);
         filteredPersons = new FilteredList<>(this.tutorEase.getPersonList());
+        filteredLesson = new FilteredList<>(this.lessonSchedule.getLessonList());
     }
 
     public ModelManager() {
@@ -156,9 +158,25 @@ public class ModelManager implements Model {
         return lessonSchedule;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Lesson} backed by the internal list of
+     * {@code versionedTutorEase}
+     */
+    @Override
+    public ObservableList<Lesson> getFilteredLessonList() {
+        return filteredLesson;
+    }
+
+    @Override
+    public void updateFilteredLessonList(Predicate<Lesson> predicate) {
+        requireNonNull(predicate);
+        filteredLesson.setPredicate(predicate);
+    }
+
     @Override
     public void addLesson(Lesson lesson) {
         lessonSchedule.addLesson(lesson);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     @Override
@@ -180,5 +198,18 @@ public class ModelManager implements Model {
     @Override
     public int getLessonScheduleSize() {
         return lessonSchedule.getSize();
+    }
+
+    @Override
+    public void deleteStudentLesson(Person student) {
+        int currentIndex = 0;
+        while (currentIndex < this.getLessonScheduleSize()) {
+            Lesson lesson = this.getLesson(currentIndex);
+            if (student.equals(lesson.getStudent())) {
+                this.deleteLesson(currentIndex);
+            } else {
+                currentIndex++;
+            }
+        }
     }
 }
