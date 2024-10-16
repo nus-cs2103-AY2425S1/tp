@@ -68,7 +68,7 @@ public class CompanyCard extends UiPart<Region> {
         StringBuilder builder = new StringBuilder("Applications: ");
 
         if (applications.isEmpty()) {
-            return builder.append("None").toString();
+            return builder.append("CLOSED").toString();
         }
 
         for (int i = 0; i < applications.size(); i++) {
