@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DateOfLastVisit;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -21,23 +22,24 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), Optional.of(new Email("alexyeoh@example.com")),
-                    Optional.of(new Address("Blk 30 Geylang Street 29, #06-40")), getTagSet("friends")),
+                    Optional.of(new Address("Blk 30 Geylang Street 29, #06-40")), getTagSet("friends"),
+                    new DateOfLastVisit("01-01-2024")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), Optional.of(new Email("berniceyu@example.com")),
                     Optional.of(new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18")),
-                    getTagSet("colleagues", "friends")),
+                    getTagSet("colleagues", "friends"), new DateOfLastVisit("02-02-2024")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"),
                     Optional.of(new Email("charlotte@example.com")),
                     Optional.of(new Address("Blk 11 Ang Mo Kio Street 74, #11-04")),
-                    getTagSet("neighbours")),
+                    getTagSet("neighbours"), new DateOfLastVisit("03-03-2024")),
             new Person(new Name("David Li"), new Phone("91031282"), Optional.of(new Email("lidavid@example.com")),
                 Optional.of(new Address("Blk 436 Serangoon Gardens Street 26, #16-43")),
-                getTagSet("family")),
+                getTagSet("family"), new DateOfLastVisit("04-04-2024")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), Optional.of(new Email("irfan@example.com")),
                 Optional.of(new Address("Blk 47 Tampines Street 20, #17-35")),
-                getTagSet("classmates")),
+                getTagSet("classmates"), new DateOfLastVisit("05-05-2024")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), Optional.of(new Email("royb@example.com")),
                 Optional.of(new Address("Blk 45 Aljunied Street 85, #11-31")),
-                getTagSet("colleagues"))
+                getTagSet("colleagues"), new DateOfLastVisit("06-06-2024"))
         };
     }
 

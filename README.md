@@ -6,7 +6,7 @@
 * This is **an address book for social workers**.<br>
   Example usages:
   * as an easy way to locate/contact families.
-  * keep track of how long it has been since their last visit. 
+  * keep track of how long it has been since their last visit.
 
 * The project simulates an ongoing software project for a desktop application (called _SocialBook_) used for managing contact details.
 

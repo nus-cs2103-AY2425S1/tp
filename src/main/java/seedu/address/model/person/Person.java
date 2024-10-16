@@ -25,17 +25,20 @@ public class Person {
     private final Optional<Address> address;
     private final Optional<Email> email;
     private final Set<Tag> tags = new HashSet<>();
+    private final DateOfLastVisit dateOfLastVisit;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Optional<Email> email, Optional<Address> address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Optional<Email> email, Optional<Address> address,
+                  Set<Tag> tags, DateOfLastVisit dateOfLastVisit) {
+        requireAllNonNull(name, phone, email, address, tags, dateOfLastVisit);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.dateOfLastVisit = dateOfLastVisit;
     }
 
     public Name getName() {
@@ -68,6 +71,10 @@ public class Person {
         return address;
     }
 
+    public DateOfLastVisit getDateOfLastVisit() {
+        return dateOfLastVisit;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -86,7 +93,8 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone());
     }
 
     /**
@@ -109,13 +117,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && dateOfLastVisit.equals(otherPerson.dateOfLastVisit);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, dateOfLastVisit);
     }
 
     @Override
@@ -126,6 +135,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("dateOfLastVisit", dateOfLastVisit)
                 .toString();
     }
 
