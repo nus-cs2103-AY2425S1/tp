@@ -2,11 +2,14 @@ package seedu.address.logic.commands;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Meeting;
 
 /**
  * Adds a new schedule to the specified person in the address book.
@@ -34,9 +37,9 @@ public class AddScheduleCommand extends Command {
      * The schedule includes an event name, date, and time.
      *
      * @param contactIndex The index of the person in the filtered person list.
-     * @param name The name or description of the event.
-     * @param date The date of the event in LocalDate format.
-     * @param time The time of the event in LocalTime format.
+     * @param name         The name or description of the event.
+     * @param date         The date of the event in LocalDate format.
+     * @param time         The time of the event in LocalTime format.
      */
     public AddScheduleCommand(int contactIndex, String name, LocalDate date, LocalTime time) {
         this.contactIndex = contactIndex;
@@ -48,19 +51,17 @@ public class AddScheduleCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
+        ArrayList<Person> personInvolved = new ArrayList<>();
 
         if (contactIndex < 0 || contactIndex >= lastShownList.size()) {
             throw new CommandException("The contact index provided is invalid.");
         }
 
-        Person person = lastShownList.get(contactIndex);
+        //Supposed to do in Parser Class for Add Schedule but Down here 1st
+        Meeting recordMeeting = new Meeting((Arrays.asList(contactIndex)), name, date, time);
 
-        // Check for duplicate schedule or time conflict here (to be implemented)
-        // Example: if (model.hasScheduleConflict(person, date, time))
-        // { throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE); }
-
-        // Add the schedule to the model (to be implemented)
-        // Example: model.addSchedule(person, name, date, time);
+        // Check for duplicate schedule or time conflict here already, just click in hopefully works
+        model.addMeeting(recordMeeting);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, name + " on " + date + " at " + time));
     }

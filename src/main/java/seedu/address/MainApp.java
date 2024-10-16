@@ -19,12 +19,15 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.ReadOnlyScheduleList;
+import seedu.address.model.ScheduleList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonScheduleStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.ScheduleStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -58,11 +61,12 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        ScheduleStorage scheduleStorage = new JsonScheduleStorage(config.getScheduleStorageFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, scheduleStorage);
 
-        model = initModelManager(storage, userPrefs);
+        model = initModelManager(storage, userPrefs, scheduleStorage);
 
-        logic = new LogicManager(model, storage);
+        logic = new LogicManager(model, storage, scheduleStorage);
 
         ui = new UiManager(logic);
     }
@@ -72,25 +76,33 @@ public class MainApp extends Application {
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+    private Model initModelManager(Storage storage, UserPrefs userPrefs, ScheduleStorage scheduleStorage) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
+        Optional<ReadOnlyScheduleList> scheduleListOptional;
         ReadOnlyAddressBook initialData;
+        ReadOnlyScheduleList initialScheduleList;
         try {
             addressBookOptional = storage.readAddressBook();
+            scheduleListOptional = scheduleStorage.readScheduleList();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
+            if (!scheduleListOptional.isPresent()) {
+                logger.info("Creating a new data file " + scheduleStorage.getScheduleListFilePath());
+            }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialScheduleList = scheduleListOptional.orElse(new ScheduleList());
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
+            initialScheduleList = new ScheduleList();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs, initialScheduleList);
     }
 
     private void initLogging(Config config) {
