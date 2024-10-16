@@ -42,6 +42,7 @@ public class AddTaskCommandTest {
         // Get an existing person from the typical address book
         Person person = model.getAddressBook().getPersonList().get(0);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model copiedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         Task validTask = new TaskBuilder().build();
         Name validName = person.getName();
 
@@ -55,25 +56,20 @@ public class AddTaskCommandTest {
         String expectedMessage = String.format(AddTaskCommand.MESSAGE_SUCCESS,
                 validTask.getTaskDescription(), validName, validTask.getTaskDeadline());
 
-        assertCommandSuccess(addTaskCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(addTaskCommand, copiedModel, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_duplicateTask_throwsCommandException() {
-        // Get an existing person from the typical address book
-        Person person = model.getAddressBook().getPersonList().get(0);
+        // Get an existing person with the default task
+        Person person = model.getAddressBook().getPersonList().get(1);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         Task validTask = new TaskBuilder().build();
         Name validName = person.getName();
         AddTaskCommand addTaskCommand = new AddTaskCommand(validName, validTask);
 
-        PersonBuilder copiedPerson = new PersonBuilder(person);
-        Person updatedPerson = copiedPerson.build();
-        updatedPerson.getTaskList().add(validTask);
-
-        model.setPerson(person, updatedPerson);
-
         assertThrows(CommandException.class,
-                AddTaskCommand.MESSAGE_DUPLICATE_TASK, () -> addTaskCommand.execute(model));
+                AddTaskCommand.MESSAGE_DUPLICATE_TASK, () -> addTaskCommand.execute(expectedModel));
     }
 
     @Test
