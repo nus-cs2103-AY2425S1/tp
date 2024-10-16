@@ -23,12 +23,10 @@ public class SampleDataUtil {
             new Person(new Name("Alex Yeoh"), new TelegramHandle("87438807"), new Email("alexyeoh@example.com"),
                     new StudentStatus("undergraduate 1"),
                     getRoleSet("President"), new Nickname("")),
-                // add n/Alex Yeoh th/87438807 e/alexyeoh@example.com s/undergraduate 1 r/President
             new Person(new Name("Bernice Yu"), new TelegramHandle("99272758"), new Email("berniceyu@example.com"),
                     new StudentStatus("undergraduate 3"),
                     getRoleSet("President", "Admin"), new Nickname("<nn space>")),
-                // add n/Bernice Yu th/99272758 e/berniceyu@example.com s/undergraduate 3 r/President r/Admin nn/<nn space>
-                new Person(new Name("Charlotte Oliveiro"), new TelegramHandle("93210283"),
+            new Person(new Name("Charlotte Oliveiro"), new TelegramHandle("93210283"),
                     new Email("charlotte@example.com"),
                     new StudentStatus("masters"),
                     getRoleSet("Marketing"), new Nickname("")),
