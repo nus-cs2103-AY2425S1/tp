@@ -15,8 +15,13 @@ public class ListCommandParserTest {
     private ListCommandParser parser = new ListCommandParser();
 
     @Test
-    public void parse_validArgs_returnsListCommand() {
+    public void parse_noArgs_returnsListCommand() {
         assertParseSuccess(parser, "", new ListCommand());
+    }
+
+    @Test
+    public void parse_validArgs_returnsListCommand() {
+        assertParseSuccess(parser, " v/ e/", new ListCommand());
     }
 
     @Test
@@ -31,16 +36,16 @@ public class ListCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        // multiple prefixes
-        assertParseFailure(parser, " v/ e/",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
-
         // trailing inputs
         assertParseFailure(parser, " ev",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
 
         // leading inputs
         assertParseFailure(parser, " ev v/",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+
+        // duplicated prefixes
+        assertParseFailure(parser, " v/ v/",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
     }
 }

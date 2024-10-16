@@ -22,19 +22,23 @@ public class ListCommandParser implements Parser<ListCommand> {
     public ListCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_VENDOR, PREFIX_EVENT);
 
-        if (args.isEmpty()) {
-            return new ListCommand();
-        }
-
-        if (!(argMultimap.exactlyOnePrefixPresent(PREFIX_VENDOR, PREFIX_EVENT))
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_VENDOR, PREFIX_EVENT);
+        try {
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_VENDOR, PREFIX_EVENT);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+        }
 
         final boolean isEventList = argMultimap.getValue(PREFIX_EVENT).isPresent();
-        if (isEventList) {
+        final boolean isVendorList = argMultimap.getValue(PREFIX_VENDOR).isPresent();
+
+        if (args.isEmpty()
+                || (isVendorList && isEventList)) {
+            return new ListCommand();
+        } else if (isEventList) {
             return new ListEventCommand();
         } else {
             return new ListVendorCommand();
