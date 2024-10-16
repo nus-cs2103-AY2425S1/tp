@@ -28,7 +28,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
 
-    private final AddressBook addressBook = new AddressBook<InternshipApplication>();
+    private final AddressBook<InternshipApplication> addressBook = new AddressBook<InternshipApplication>();
 
     @Test
     public void constructor() {
@@ -42,7 +42,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
+        AddressBook<InternshipApplication> newData = getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -74,10 +74,10 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasItem_itemWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasItem_itemWithSameIdentityFieldsInAddressBook_returnsFalse() {
         addressBook.addItem(APPLE);
         InternshipApplication editedApple = new InternshipApplicationBuilder(APPLE).withRole(VALID_ROLE_BOFA).build();
-        assertTrue(addressBook.hasItem(editedApple));
+        assertFalse(addressBook.hasItem(editedApple));
     }
 
     @Test
@@ -87,14 +87,14 @@ public class AddressBookTest {
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{applications=" + addressBook.getList() + "}";
+        String expected = AddressBook.class.getCanonicalName() + "{items=" + addressBook.getList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class AddressBookStub implements ReadOnlyAddressBook<InternshipApplication> {
         private final ObservableList<InternshipApplication> applications = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<InternshipApplication> applications) {
