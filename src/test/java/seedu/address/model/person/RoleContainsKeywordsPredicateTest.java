@@ -8,8 +8,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import javax.management.relation.Role;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
@@ -44,7 +42,8 @@ public class RoleContainsKeywordsPredicateTest {
     @Test
     public void test_roleContainsKeywords_returnsTrue() {
         // One keyword
-        RoleContainsKeywordsPredicate predicate = new RoleContainsKeywordsPredicate(Collections.singletonList("member"));
+        RoleContainsKeywordsPredicate predicate = new RoleContainsKeywordsPredicate(Collections
+                .singletonList("member"));
         assertTrue(predicate.test(new PersonBuilder().withTags("member", "exco").build()));
 
         // Multiple keywords
