@@ -85,6 +85,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             AppointmentDescriptor appointment = new AppointmentDescriptor(
                     appointmentType, appointmentDateTime, personId, sickness, medicine);
+
             return new AddAppointmentCommand(appointment);
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
