@@ -36,8 +36,12 @@ public class FindCommandParser implements Parser<FindCommand> {
         } else if (typeOfPerson.equals(FindPotentialCommand.ARGUMENT_WORD)) {
             return new FindPotentialCommand(new NameContainsKeywordsPredicate(Arrays.asList(
                     Arrays.copyOfRange(nameKeywords, 1, nameKeywords.length))));
+        } else if (typeOfPerson.equals(FindCommand.ARGUMENT_WORD)) {
+            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(
+                    Arrays.copyOfRange(nameKeywords, 1, nameKeywords.length))));
         } else {
-            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
     }
 
