@@ -77,6 +77,7 @@ Format: `help`
 Adds a person to the address book.
 
 Format: `add id/EMPLOYEE_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​`
+* Skills and tags must be alphanumeric and cannot contain spaces.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0) and any number of skills (including 0)
@@ -107,6 +108,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [s/SKILL
     specifying any tags after it.
 * You can remove all the person’s skills by typing `s/` without
     specifying any skills after it.
+* Skills and tags must be alphanumeric and cannot contain spaces.
 * You cannot edit a person's employee id. More specifically, you are not allowed to specify `id/EMPLOYEEID` in the `edit` command.
 
 Examples:
