@@ -107,7 +107,13 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
-    private static Faculty parseFaculty(String faculty) throws ParseException {
+    /**
+     * Parses a {@code String faculty} into a {@code Faculty}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code faculty} is invalid.
+     */
+    public static Faculty parseFaculty(String faculty) throws ParseException {
         return switch(faculty.toUpperCase()) {
         case "BIZ" -> Faculty.BIZ;
         case "CDE" -> Faculty.CDE;
@@ -123,7 +129,13 @@ public class ParserUtil {
         };
     }
 
-    private static Sport parseSport(String sport) throws ParseException {
+    /**
+     * Parses a {@code String sport} into a {@code Sport}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sport} is invalid.
+     */
+    public static Sport parseSport(String sport) throws ParseException {
         return switch(sport.toUpperCase()) {
         case "BADMINTON" -> Sport.BADMINTON;
         case "BASKETBALL MEN" -> Sport.BASKETBALL_M;
@@ -159,7 +171,13 @@ public class ParserUtil {
         };
     }
 
-    private static Branch parseBranch(String branch) throws ParseException {
+    /**
+     * Parses a {@code String branch} into a {@code Branch}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code branch} is invalid.
+     */
+    public static Branch parseBranch(String branch) throws ParseException {
         return switch (branch.toUpperCase()) {
         case "MARKETING" -> Branch.MARKETING;
         case "PUBLICITY" -> Branch.PUBLICITY;
@@ -168,7 +186,13 @@ public class ParserUtil {
         };
     }
 
-    private static Position parsePosition(String position) throws ParseException {
+    /**
+     * Parses a {@code String position} into a {@code Position}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code position} is invalid.
+     */
+    public static Position parsePosition(String position) throws ParseException {
         return switch (position.toUpperCase()) {
         case "PROJECT DIRECTOR" -> Position.PROJECT_DIRECTOR;
         case "VICE PROJECT DIRECTOR" -> Position.VICE_PROJECT_DIRECTOR;
@@ -179,7 +203,13 @@ public class ParserUtil {
         };
     }
 
-    private static VolunteerRole parseVolunteer(String volunteer) throws ParseException {
+    /**
+     * Parses a {@code String volunteer} into a {@code VolunteerRole}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code volunteer} is invalid.
+     */
+    public static VolunteerRole parseVolunteer(String volunteer) throws ParseException {
         return switch(volunteer.toUpperCase()) {
         case "PHOTOGRAPHER" -> VolunteerRole.PHOTOGRAPHER;
         case "EMCEE" -> VolunteerRole.EMCEE;
@@ -219,11 +249,6 @@ public class ParserUtil {
                 yield new FacultySportCommitteeMember(faculty, position);
             }
             yield new CommitteeMember(branch, position);
-        }
-        case "faculty sports" -> {
-            Faculty faculty = parseFaculty(tagSplit[1]);
-            Position position = parsePosition(tagSplit[2]);
-            yield new FacultySportCommitteeMember(faculty, position);
         }
         case "sponsor" -> new Sponsor(tagSplit[1]);
         case "volunteer" -> {

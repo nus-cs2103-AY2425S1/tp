@@ -20,12 +20,4 @@ public class CommitteeMember extends Role {
         this.branch = branch;
         this.position = position;
     }
-
-    public Branch getBranch() {
-        return branch;
-    }
-
-    public Position getPosition() {
-        return position;
-    }
 }

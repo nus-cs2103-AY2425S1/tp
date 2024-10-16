@@ -13,7 +13,7 @@ public class PositionString {
         case VICE_PROJECT_DIRECTOR -> "Vice Project Director";
         case SPORTS_DIRECTOR -> "Sports Director";
         case VICE_SPORTS_DIRECTOR -> "Vice Sports Director";
-        case MEMBER -> "";
+        case MEMBER -> "Member";
         };
     }
 }
