@@ -45,7 +45,7 @@
 
 .background {
     -fx-background-color: derive(#004aad, 20%);
-    background-color: #004aad; /* Used in the default.html file */
+    background-color: #e5eaf2; /* Used in the default.html file */
 }
 
 
