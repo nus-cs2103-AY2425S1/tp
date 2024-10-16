@@ -153,13 +153,13 @@ Examples:
 
 Adds a class to an existing student's record.
 
-Format: `addc IC_NUMBER CLASS_NAME`
+Format: `addc IC_NUMBER SUBJECT`
 
 * `IC_NUMBER` is compulsory and should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
-* `CLASS_NAME` should be a combination of Subject and Number (e.g., Science1).
+* `SUBJECT` is compulsory, and can add multiple subjects (e.g. Science).
 
 Examples:
-* `addc 12345 Science1`
+* `addc S1234567A Science`
 
 ### Sorting students : `sort`
 
@@ -232,15 +232,6 @@ message explaining what's wrong.
 2. **Use Your Backup**: This is where your backup copy comes in handy. You can replace the problematic
 file with your backup to get back on track.
 
-## Moving to a New Computer?
-
-Taking AcademyAssist with you is easy:
-
-1. Install AcademyAssist on your new computer.
-2. Find your data file on the old computer (we'll show you where in the program).
-3. Copy this file to the same location on your new computer.
-4. Start AcademyAssist, and all your information will be there!
-
 Remember, AcademyAssist is here to make managing student information easy and stress-free. 
 If you ever have questions about your data, just ask - we're always happy to help!
 
@@ -257,15 +248,15 @@ the data of your previous AcademyAssist folder.
 
 ## Command summary
 
-| Action | Format, Examples                                                                                                                                                     |
-|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action | Format, Examples                                                                                                                                                    |
+|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER s/SUBJECT` <br> e.g., `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T384859A s/Science` |
-| **Delete** | `delete IC_NUMBER`<br> e.g., `delete S1234567A`                                                                                                                      |
-| **Edit** | `edit IC_NUMBER FIELD/NEW_VALUE`<br> e.g.,`edit S1234567A a/New_Address`                                                                                             |
-| **View** | `view`                                                                                                                                                               |
-| **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John Jane`                                                                                                            |
-| **Add Class** | `addc IC_NUMBER CLASS_NAME`<br> e.g., `addc 12345 Science1`                                                                                                          |
-| **Sort** | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                               |
-| **Clear** | `clear`                                                                                                                                                              |
-| **Help** | `help`                                                                                                                                                               |
-| **Exit** | `exit`                                                                                                                                                               |
+| **Delete** | `delete IC_NUMBER`<br> e.g., `delete S1234567A`                                                                                                                     |
+| **Edit** | `edit IC_NUMBER FIELD/NEW_VALUE`<br> e.g.,`edit S1234567A a/New_Address`                                                                                            |
+| **View** | `view`                                                                                                                                                              |
+| **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John Jane`                                                                                                           |
+| **Add Class** | `addc IC_NUMBER SUBJECT`<br> e.g., `addc S1234567A Science`                                                                                                         |
+| **Sort** | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                              |
+| **Clear** | `clear`                                                                                                                                                             |
+| **Help** | `help`                                                                                                                                                              |
+| **Exit** | `exit`                                                                                                                                                              |
