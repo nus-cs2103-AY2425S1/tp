@@ -44,7 +44,6 @@ public class Date {
     // TODO: fix date occurrences in storage data before return false for errors.
     public static boolean isValidDate(String test) {
 
-
         for (DateTimeFormatter formatter : formatters) {
             try {
                 LocalDate.parse(test, formatter);
@@ -62,7 +61,7 @@ public class Date {
      * @param date The date string to parse.
      * @return The parsed LocalDate.
      */
-    private LocalDate parseDate(String date) {
+    public static LocalDate parseDate(String date) {
         for (DateTimeFormatter formatter : formatters) {
             try {
                 return LocalDate.parse(date, formatter);

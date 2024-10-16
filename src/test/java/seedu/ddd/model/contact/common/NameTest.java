@@ -1,4 +1,4 @@
-package seedu.ddd.model.contact;
+package seedu.ddd.model.contact.common;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -6,7 +6,6 @@ import static seedu.ddd.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ddd.model.contact.common.Name;
 
 public class NameTest {
 
