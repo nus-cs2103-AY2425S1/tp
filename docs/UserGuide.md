@@ -98,15 +98,15 @@ Edits an existing supplier in the address book.
 
 Format: `edit NAME [n/NAME] [p/PHONE] [a/ADDRESS] [t/TAG]...`
 
-* Edits the person with the specified `NAME`.
+* Edits the supplier with the specified `NAME`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the supplier will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* You can remove all the supplier’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person with name `John Doe` to be `91234567` and `johndoe@example.com` respectively.
+*  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the supplier (with name `John Doe`) to be `91234567` and `johndoe@example.com` respectively.
 *  `edit Bety n/Betsy Crower t/` Edits the name of `Bety` to be `Betsy Crower` and clears all existing tags.
 
 ### Locating suppliers by name: `find`
