@@ -5,6 +5,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
 
+/**
+ * A utility class to help with building Student objects.
+ */
 public class StudentBuilder extends PersonBuilder {
 
     public static final String DEFAULT_PARENT_NAME = "Test parent";
@@ -15,6 +18,9 @@ public class StudentBuilder extends PersonBuilder {
     private Phone parentPhone;
     private Email parentEmail;
 
+    /**
+     * Creates a {@code StudentBuilder} with the default details.
+     */
     public StudentBuilder() {
         super();
         parentName = new Name(DEFAULT_PARENT_NAME);
@@ -22,6 +28,9 @@ public class StudentBuilder extends PersonBuilder {
         parentEmail = new Email(DEFAULT_PARENT_EMAIL);
     }
 
+    /**
+     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     */
     public StudentBuilder(Student studentToCopy) {
         super(studentToCopy);
         parentName = studentToCopy.getParentName();
