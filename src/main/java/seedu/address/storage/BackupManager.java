@@ -22,13 +22,17 @@ public class BackupManager {
 
     private static final Logger logger = LogsCenter.getLogger(BackupManager.class);
 
-    private static final String BACKUP_PREFIX = "addressbook-backup-";
+    private static final String BACKUP_PREFIX = "clinicbuddy-backup-";
     private static final String BACKUP_EXTENSION = ".json";
 
     private static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss-SSS");
     private static final int MAX_BACKUPS = 10;
+    private static final long MIN_BACKUP_INTERVAL_MS = 3000; // 3 seconds debounce to prevent multiple backups
+
     private final Path backupDirectory;
+    private long lastBackupTime = 0; // Stores the last backup time to avoid multiple backups
+    private final Object backupLock = new Object(); // Lock object to synchronize backup operations
 
     /**
      * Constructs a {@code BackupManager} with the specified backup directory.
@@ -50,6 +54,25 @@ public class BackupManager {
     }
 
     /**
+     * Triggers a backup operation, ensuring that no duplicate backups are created in a short time.
+     */
+    public void triggerBackup(Path filePath) throws IOException {
+        synchronized (backupLock) {
+            long currentTime = System.currentTimeMillis();
+
+            // Ensure no duplicate backups are created within MIN_BACKUP_INTERVAL_MS
+            if (currentTime - lastBackupTime < MIN_BACKUP_INTERVAL_MS) {
+                logger.info("Backup skipped due to debounce mechanism.");
+                return;
+            }
+
+            // Set the last backup time and proceed with the backup
+            lastBackupTime = currentTime;
+            saveBackup(filePath);
+        }
+    }
+
+    /**
      * Saves a backup of the provided file to the backup directory.
      */
     public void saveBackup(Path filePath) throws IOException {
@@ -61,6 +84,7 @@ public class BackupManager {
         String backupFileName = String.format("%s%s%s", BACKUP_PREFIX, timestamp, BACKUP_EXTENSION);
         Path backupPath = backupDirectory.resolve(backupFileName);
 
+        // Ensure consistent new line at the end of the content
         String content = Files.readString(filePath, StandardCharsets.UTF_8);
         if (!content.endsWith(System.lineSeparator())) {
             content += System.lineSeparator();

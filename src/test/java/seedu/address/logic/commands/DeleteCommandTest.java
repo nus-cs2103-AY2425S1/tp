@@ -56,7 +56,7 @@ public class DeleteCommandTest {
      * Tests the successful deletion of a person given a valid index.
      */
     @Test
-    public void execute_validNricUnfilteredList_success() {
+    public void execute_validNricUnfilteredList_success() throws IOException {
 
         // Assume the NRIC to delete is "S1234567A"
         String nricInput = "S1234567Z";
@@ -104,7 +104,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_validNricFilteredList_success() {
+    public void execute_validNricFilteredList_success() throws IOException {
 
         // Show a filtered list of persons, with the first person being shown
         showPersonAtIndex(model, INDEX_FIRST_PERSON);

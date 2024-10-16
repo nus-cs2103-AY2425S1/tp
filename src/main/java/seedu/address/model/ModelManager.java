@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
@@ -18,6 +18,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.storage.BackupManager;
 import seedu.address.storage.Storage;
 
 
@@ -28,15 +29,11 @@ public class ModelManager implements Model {
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss-SSS");
-    private static final long MIN_BACKUP_INTERVAL_MS = 1000; // 1 second debounce
-
-
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final Storage storage;
+    private final BackupManager backupManager; // Add this if not already present
     private final FilteredList<Person> filteredPersons;
-    private long lastBackupTime = 0; // Store the last backup timestamp
-    private String lastBackupHash = ""; // Store the hash of the last backed-up content
 
     /**
      * Initializes a ModelManager with the given address book, user preferences, and storage.
@@ -45,7 +42,9 @@ public class ModelManager implements Model {
      * @param userPrefs   The user preferences to initialize the model with.
      * @param storage     The storage to be used by the model for backup and restore operations.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, Storage storage) {
+    public ModelManager(ReadOnlyAddressBook addressBook,
+                        ReadOnlyUserPrefs userPrefs,
+                        Storage storage) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(userPrefs);
 
@@ -56,10 +55,11 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.storage = storage;
+        this.backupManager = new BackupManager(Paths.get("backups"));
         this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
-    public ModelManager() {
+    public ModelManager() throws IOException {
         this(new AddressBook(), new UserPrefs(), null);
     }
 
@@ -137,6 +137,32 @@ public class ModelManager implements Model {
         triggerBackup(); // Trigger backup after editing
     }
 
+    @Override
+    public void backupData(String filePath) throws IOException {
+        if (storage == null) {
+            throw new IOException("Storage is not initialized!");
+        }
+
+        // If filePath is null, provide a default backup path
+        if (filePath == null) {
+            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss-SSS"));
+            filePath = String.format("backups/clinicbuddy-backup-%s.json", timestamp);
+        }
+
+        logger.info("Manual backup triggered to path: " + filePath);
+        storage.saveAddressBook(getAddressBook(), Paths.get(filePath));
+    }
+
+    // Automatically trigger backup after operations
+    private void triggerBackup() {
+        try {
+            logger.info("Automatic backup triggered.");
+            backupManager.triggerBackup(storage.getAddressBookFilePath());
+        } catch (IOException e) {
+            logger.warning("Backup failed: " + e.getMessage());
+        }
+    }
+
     // ============ Filtered Person List Accessors =======================================================
 
     @Override
@@ -151,58 +177,6 @@ public class ModelManager implements Model {
     }
 
     // ============ Backup and Restore Methods ===========================================================
-
-    /**
-     * Backs up the AddressBook data to a timestamped backup file.
-     */
-    private void triggerBackup() {
-        long currentTime = System.currentTimeMillis();
-        if (currentTime - lastBackupTime < MIN_BACKUP_INTERVAL_MS) {
-            return; // Skip backup if triggered too soon
-        }
-
-        String currentHash = computeAddressBookHash();
-        if (currentHash.equals(lastBackupHash)) {
-            logger.info("No changes detected. Skipping backup.");
-            return; // Skip backup if the content hasn't changed
-        }
-
-        lastBackupTime = currentTime;
-        lastBackupHash = currentHash;
-
-        try {
-            backupData(null); // Use default path for backup
-        } catch (IOException e) {
-            logger.warning("Failed to create backup: " + e.getMessage());
-        }
-    }
-
-    /**
-     * Backs up the AddressBook data to the specified file path or default path.
-     *
-     * @param filePath The file path to save the backup, or null to use the default path.
-     * @throws IOException If there is an error during the backup process.
-     */
-    @Override
-    public void backupData(String filePath) throws IOException {
-        if (storage == null) {
-            throw new IOException("Storage is not initialized!");
-        }
-
-        // Use the default backups directory if no path is provided
-        String backupDir = "backups";
-        Files.createDirectories(Path.of(backupDir)); // Ensure the directory exists
-
-        // Generate a timestamp-based filename for the backup
-        String timestamp = LocalDateTime.now().format(FORMATTER);
-        String backupPath = backupDir + "/addressbook-backup-" + timestamp + ".json";
-
-        logger.info("Backing up data to: " + backupPath);
-        storage.saveAddressBook(getAddressBook(), Path.of(backupPath));
-
-        // Clean old backups, retaining only the latest 10 backups
-        cleanOldBackups(10);
-    }
 
     /**
      * Computes a hash of the current AddressBook data to detect changes.

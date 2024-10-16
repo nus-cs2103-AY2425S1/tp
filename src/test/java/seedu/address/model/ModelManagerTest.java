@@ -143,7 +143,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void equals_differentAddressBook_returnsFalse() {
+    public void equals_differentAddressBook_returnsFalse() throws IOException {
         ModelManager differentModel = new ModelManager(new AddressBook(), userPrefs, storage);
         differentModel.addPerson(ALICE); // Modify to ensure difference
         assertFalse(modelManager.equals(differentModel),
@@ -151,7 +151,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void equals_identicalModelManager_returnsTrue() {
+    public void equals_identicalModelManager_returnsTrue() throws IOException {
         ModelManager identicalModel = new ModelManager(new AddressBook(), userPrefs, storage);
         assertTrue(modelManager.equals(identicalModel), "Comparing with an identical ModelManager should return true.");
     }
@@ -173,7 +173,7 @@ public class ModelManagerTest {
         assertFalse(backupFiles.isEmpty(), "No backup files found, but one was expected.");
 
         // Verify the backup file follows the correct format
-        String expectedPrefix = "addressbook-backup-";
+        String expectedPrefix = "clinicbuddy-backup-"; // Update the prefix to match what your BackupManager is using
         boolean validBackupExists = backupFiles.stream()
                 .anyMatch(file -> {
                     String filename = file.getFileName().toString();
@@ -221,7 +221,7 @@ public class ModelManagerTest {
      * Tests the constructor that initializes ModelManager with null storage.
      */
     @Test
-    public void constructor_nullStorage_success() {
+    public void constructor_nullStorage_success() throws IOException {
         ModelManager modelManagerWithoutStorage = new ModelManager(new AddressBook(), new UserPrefs(), null);
         assertNotNull(modelManagerWithoutStorage,
                 "ModelManager should be created successfully even with null storage.");
@@ -231,7 +231,7 @@ public class ModelManagerTest {
      * Tests the backupData method when storage is null.
      */
     @Test
-    public void backupData_nullStorage_throwsIoException() {
+    public void backupData_nullStorage_throwsIoException() throws IOException {
         // Create a ModelManager without a storage instance
         ModelManager modelManagerWithoutStorage = new ModelManager(new AddressBook(), new UserPrefs(), null);
 
@@ -243,14 +243,15 @@ public class ModelManagerTest {
 
     @Test
     public void backupData_withValidStorageAndFilePath_success() throws IOException {
-        modelManager.backupData(null); // Manually triggering the backup.
+        // Ensure modelManager is initialized with valid storage
+        modelManager.backupData("backups/clinicbuddy-backup-somepath.json");
 
         // Ensure backup exists in the backup folder
         Path backupDir = Path.of("backups");
 
         try (Stream<Path> backups = Files.list(backupDir)) {
             boolean backupExists = backups.anyMatch(path ->
-                    path.getFileName().toString().startsWith("addressbook-backup-")
+                    path.getFileName().toString().startsWith("clinicbuddy-backup-")
                             && path.toString().endsWith(".json")
             );
             assertTrue(backupExists, "Backup file should be created successfully.");
@@ -258,7 +259,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void cleanOldBackups_nullStorage_throwsIoException() {
+    public void cleanOldBackups_nullStorage_throwsIoException() throws IOException {
         ModelManager modelWithoutStorage = new ModelManager(new AddressBook(), new UserPrefs(), null);
 
         assertThrows(IOException.class, () -> modelWithoutStorage.cleanOldBackups(5),
@@ -266,7 +267,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void cleanOldBackups_storageNotInitialized_throwsIoException() {
+    public void cleanOldBackups_storageNotInitialized_throwsIoException() throws IOException {
         ModelManager modelWithoutStorage = new ModelManager(new AddressBook(), new UserPrefs(), null);
         IOException exception = assertThrows(IOException.class, (
                 ) -> modelWithoutStorage.cleanOldBackups(5),

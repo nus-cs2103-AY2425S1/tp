@@ -46,7 +46,7 @@ public class BackupCommand extends Command {
         try {
             // Format the current date and time for the filename
             String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss-SSS"));
-            String backupPath = String.format("backups/addressbook-backup-%s.json", timestamp);
+            String backupPath = String.format("backups/clinicbuddy-backup-%s.json", timestamp);
 
             logger.info("Starting backup to path: " + backupPath);
             model.backupData(backupPath); // Use String path here

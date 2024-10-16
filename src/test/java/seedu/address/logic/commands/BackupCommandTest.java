@@ -54,7 +54,7 @@ public class BackupCommandTest {
     }
 
     @Test
-    public void executeBackupCommand_ioException_throwsCommandException() {
+    public void executeBackupCommand_ioException_throwsCommandException() throws IOException {
         Storage storageStub = createStorageStubForIoException();
         Model modelWithFailingStorage = new ModelManager(getTypicalAddressBook(), new UserPrefs(), storageStub);
 
@@ -125,7 +125,7 @@ public class BackupCommandTest {
         // Execute the command
         String timestampPattern = "\\d{4}-\\d{2}-\\d{2}_\\d{2}-\\d{2}-\\d{2}-\\d{3}";
         String expectedMessagePattern = String.format(
-                "Backup successful at backups/addressbook-backup-%s.json", timestampPattern
+                "Backup successful at backups/clinicbuddy-backup-%s.json", timestampPattern
         );
 
         // Use regex to match the actual message
@@ -136,7 +136,7 @@ public class BackupCommandTest {
         // Verify that the backup file was created
         try (Stream<Path> backups = Files.list(Path.of("backups"))) {
             boolean backupExists = backups.anyMatch(path ->
-                    path.getFileName().toString().matches("addressbook-backup-" + timestampPattern + "\\.json")
+                    path.getFileName().toString().matches("clinicbuddy-backup-" + timestampPattern + "\\.json")
             );
             assertTrue(backupExists, "Backup file should have been created with the correct format.");
         }

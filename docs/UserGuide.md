@@ -3,10 +3,12 @@ layout: page
 title: User Guide
 ---
 
-ClinicBuddy aims to enhance the patient management process for small clinics, creating a platform to track patient information such as their treatment, contact information, visit records and future appointments while still having the benefits of a Graphical User Interface (GUI).
+ClinicBuddy aims to enhance the patient management process for small clinics, creating a platform to track patient
+information such as their treatment, contact information, visit records and future appointments while still having the
+benefits of a Graphical User Interface (GUI).
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -18,24 +20,27 @@ ClinicBuddy aims to enhance the patient management process for small clinics, cr
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar`
+   command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+   open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe`
+      to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
-   
-   * `backup` : Creates a backup of the current patient records.
+    * `exit` : Exits the app.
+
+    * `backup` : Creates a backup of the current patient records.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -59,10 +64,13 @@ ClinicBuddy aims to enhance the patient management process for small clinics, cr
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
+  ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
+  as space characters surrounding line-breaks may be omitted when copied over to the application.
+
 </div>
 
 ### Viewing help : `help`
@@ -72,7 +80,6 @@ Shows a message explaning how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
 
 ### Adding a person: `add`
 
@@ -85,6 +92,7 @@ A person can have any number of tags (including 0)
 </div>
 
 Examples:
+
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
@@ -100,16 +108,19 @@ Edits an existing person in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+  The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+  specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567`
+  and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons by name: `find`
 
@@ -125,6 +136,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
+
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
@@ -140,6 +152,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
+
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
@@ -157,11 +170,13 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to
+save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
+welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -169,14 +184,19 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 </div>
 
 ### Backup the records : `backup`
-The `backup` feature ensures your data is safe by **automatically creating backups** whenever patient records are modified. Backups are stored in the `backups` folder located in the root directory of the application.
-In addition to automatic backups, the system also provides a **manual backup option** for users who want more control over their data management.
+
+The `backup` feature ensures your data is safe by **automatically creating backups** whenever patient records are
+modified. Backups are stored in the `backups` folder located in the root directory of the application.
+In addition to automatic backups, the system also provides a **manual backup option** for users who want more control
+over their data management.
 
 Format: `backup`
 
 #### **How Backups works:**
+
 1. **Automatic Backups:**
-    - Each time the patient records are modified (e.g., adding, editing, or deleting a record), the system **automatically creates a backup**.
+    - Each time the patient records are modified (e.g., adding, editing, or deleting a record), the system *
+      *automatically creates a backup**.
     - These backups are stored in:
       ```
       [Application Directory]/backups/
@@ -185,34 +205,37 @@ Format: `backup`
       ```
       addressbook-backup-[timestamp].json
       ```
-    - Example: 
+    - Example:
       ```
       addressbook-backup-2024-10-16_00-00-38-083.json
       ```
-    - The program retains **only the 10 most recent backups** to manage storage effectively. Older backups are automatically deleted when the limit is exceeded.
+    - The program retains **only the 10 most recent backups** to manage storage effectively. Older backups are
+      automatically deleted when the limit is exceeded.
 2. **Manual Backups:**
-   - In addition to automatic backups, you can **manually trigger a backup** using the `backup` command anytime.
-   - Command Format:
-     ```
-     backup
-     ```
-   - **Storage Location:**  
-     Manual backups are saved in the same directory:
-     ```
-     [Application Directory]/backups/
-     ```
-   - **Naming Format:**  
-     The manual backup will follow the same naming convention as automatic backups:
-     ```
-     addressbook-backup-[timestamp].json
-     ```
-#### **Accessing Backup Files:**
-   1. Navigate to the backup directory:
+    - In addition to automatic backups, you can **manually trigger a backup** using the `backup` command anytime.
+    - Command Format:
+      ```
+      backup
+      ```
+    - **Storage Location:**  
+      Manual backups are saved in the same directory:
       ```
       [Application Directory]/backups/
       ```
-   2. Identify the backup files using their **timestamp-based naming convention**.
-   3. **Move or copy** the files if needed for external storage or manual restoration.
+    - **Naming Format:**  
+      The manual backup will follow the same naming convention as automatic backups:
+      ```
+      addressbook-backup-[timestamp].json
+      ```
+
+#### **Accessing Backup Files:**
+
+1. Navigate to the backup directory:
+   ```
+   [Application Directory]/backups/
+   ```
+2. Identify the backup files using their **timestamp-based naming convention**.
+3. **Move or copy** the files if needed for external storage or manual restoration.
 
 ⚠ While the system handles automatic backups, manual backups provide additional flexibility and control when needed.
 
@@ -227,36 +250,44 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
+the data of your previous AddressBook home folder.
 
 **Q**: Why Use Manual Backups?<br>
 **A**:
+
 - **Extra Control:** Save your data at any moment, even without making changes.
 - **Checkpointing:** Use manual backups before importing new data or making major changes.
 - **Peace of Mind:** Ensure you have a backup exactly when you need it.
 
 **Q**: Can I Save Backups to a Custom Path?<br>
-**A**: Currently, **manual backups are saved to the default path** (`/backups` folder). There is no option to specify a **custom path** within the application. However, you can **move the backup files** manually from the `/backups` folder to any desired location if needed.
+**A**: Currently, **manual backups are saved to the default path** (`/backups` folder). There is no option to specify a
+**custom path** within the application. However, you can **move the backup files** manually from the `/backups` folder
+to any desired location if needed.
 
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only
+   the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the
+   application before running the application again.
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard
+   shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy
+   is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
-| **Backup**    | `backup` <br> e.g., `backup` creates a new backup of the patient records. |
+ Action     | Format, Examples                                                                                                                                                      
+------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` 
+ **Clear**  | `clear`                                                                                                                                                               
+ **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   
+ **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           
+ **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            
+ **List**   | `list`                                                                                                                                                                
+ **Help**   | `help`                                                                                                                                                                
+| **Backup** | `backup` <br> e.g., `backup` creates a new backup of the patient records.                                                                                             |
