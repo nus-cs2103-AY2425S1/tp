@@ -15,7 +15,7 @@ import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Person;
 
 /**
- * Changes the remark of an existing person in the address book.
+ * Changes the emergency contact of an existing person in the address book.
  */
 public class EmergencyContactCommand extends Command {
 
@@ -39,7 +39,7 @@ public class EmergencyContactCommand extends Command {
     private final EmergencyContact emergencyContact;
 
     /**
-     * @param index of the person in the filtered person list to edit the emergency contact details
+     * @param index of the person in the filtered person list to add the emergency contact details
      * @param emergencyContact of the person to be updated to
      */
     public EmergencyContactCommand(Index index, EmergencyContact emergencyContact) {
@@ -68,13 +68,11 @@ public class EmergencyContactCommand extends Command {
     }
 
     /**
-     * Generates a command execution success message based on whether the emergency contact is added to or removed from
+     * Generates a command execution success message based on whether the emergency contact is added
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !emergencyContact.contactName.isEmpty()
-                ? MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS : MESSAGE_DELETE_EMERGENCY_CONTACT_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS, personToEdit);
     }
 
     private String generateEmergencyContactExistsMessage(Person personToEdit) {
