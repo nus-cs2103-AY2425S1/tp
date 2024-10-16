@@ -17,7 +17,7 @@ public class Grade {
         "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "D+", "D", "F"
     };
 
-    public final String grade;
+    public final String value;
 
     /**
      * Constructs an {@code Grade}.
@@ -27,7 +27,7 @@ public class Grade {
     public Grade(String grade) {
         requireNonNull(grade);
         checkArgument(isValidGrade(grade), MESSAGE_CONSTRAINTS);
-        this.grade = grade.toUpperCase(); // Store as uppercase
+        this.value = grade.toUpperCase(); // Store as uppercase
     }
 
     /**
@@ -45,7 +45,7 @@ public class Grade {
 
     @Override
     public String toString() {
-        return grade;
+        return value;
     }
 
     @Override
@@ -60,11 +60,11 @@ public class Grade {
         }
 
         Grade otherGrade = (Grade) other;
-        return grade.equals(otherGrade.grade);
+        return value.equals(otherGrade.value);
     }
 
     @Override
     public int hashCode() {
-        return grade.hashCode();
+        return value.hashCode();
     }
 }

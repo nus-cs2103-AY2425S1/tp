@@ -25,7 +25,7 @@ public class Person {
     private final Address address;
     private final Course course;
     private final Tag tag;
-    private final ArrayList<Module> moduleGrades = new ArrayList<>();
+    private final ArrayList<Module> modules;
 
     /**
      * Every field must be present and not null.
@@ -40,6 +40,23 @@ public class Person {
         this.address = address;
         this.course = course;
         this.tag = tag;
+        this.modules = new ArrayList<>();
+    }
+
+    /**
+     * Facilitates creating new Person object with module list.
+     */
+    public Person(StudentId studentId, Name name, Phone phone, Email email, Address address, Course course,
+                  Tag tag, ArrayList<Module> modules) {
+        requireAllNonNull(studentId, name, phone, email, address, course, tag);
+        this.studentId = studentId;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.course = course;
+        this.tag = tag;
+        this.modules = modules;
     }
 
     public StudentId getStudentId() {
@@ -67,34 +84,51 @@ public class Person {
     }
 
     /**
-     * Sets the module grades to the provided map.
+     * Sets the module to the provided list.
      *
-     * @param newModuleGrades A map of Module and Grade pairs to set.
+     * @param newModules A list of modules to set.
      */
-    public void setModuleGrades(ArrayList<Module> newModuleGrades) {
-        moduleGrades.clear();
-        moduleGrades.addAll(newModuleGrades);
+    public void setModules(ArrayList<Module> newModules) {
+        modules.clear();
+        modules.addAll(newModules);
     }
 
     /**
-     * Adds a module grade. If the module already exists, it updates the grade.
+     * Returns a new Person object with the module added.
      *
-     * @param module The module for which to add or update the grade.
+     * @param module The module to add.
+     */
+    public Person addModule(Module module) {
+        requireNonNull(module, "Module cannot be null");
+
+        ArrayList<Module> updatedModules = new ArrayList<>(modules);
+        updatedModules.add(module);
+        return new Person(studentId, name, phone, email, address, course, tag, updatedModules);
+    }
+
+    /**
+     * Returns a new Person object with the module grade set.
+     *
+     * @param module The module for which to update the grade.
      * @param grade The grade to associate with the module.
      */
-    public void addModuleGrade(Module module, Grade grade) {
+    public Person setModuleGrade(Module module, Grade grade) {
         requireNonNull(module, "Module cannot be null");
         requireNonNull(grade, "Grade cannot be null");
+
+        ArrayList<Module> updatedModules = new ArrayList<>(modules);
         module.setGrade(grade);
-        moduleGrades.add(module);
+        int index = modules.indexOf(module);
+        updatedModules.set(index, module);
+        return new Person(studentId, name, phone, email, address, course, tag, updatedModules);
     }
 
     /**
      * Returns an immutable course grades map, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public ArrayList<Module> getModuleGrades() {
-        return moduleGrades;
+    public ArrayList<Module> getModules() {
+        return modules;
     }
 
     /**
@@ -141,13 +175,13 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && course.equals(otherPerson.course)
                 && tag.equals(otherPerson.tag)
-                && moduleGrades.equals(otherPerson.moduleGrades);
+                && modules.equals(otherPerson.modules);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(studentId, name, phone, email, address, course, tag, moduleGrades);
+        return Objects.hash(studentId, name, phone, email, address, course, tag, modules);
     }
 
     @Override
@@ -160,6 +194,7 @@ public class Person {
                 .add("address", address)
                 .add("course", course)
                 .add("tag", tag)
+                .add("modules", modules)
                 .toString();
     }
 

@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 
@@ -17,15 +17,20 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
+import seedu.address.logic.commands.GradeCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ModuleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.CourseContainsKeywordsPredicate;
+import seedu.address.model.person.Grade;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.ModuleContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -63,9 +68,10 @@ public class AddressBookParserTest {
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        StudentId studentId = person.getStudentId();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + studentId + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(studentId, descriptor), command);
     }
 
     @Test
@@ -110,6 +116,27 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_module() throws Exception {
+        StudentId validStudentId = new StudentId(CommandTestUtil.VALID_STUDENTID_BOB);
+        Module validModule = new Module(CommandTestUtil.VALID_MODULE_BOB);
+        ModuleCommand command = (ModuleCommand) parser.parseCommand(
+                ModuleCommand.COMMAND_WORD + " " + PREFIX_STUDENTID + validStudentId + " "
+                        + PREFIX_MODULE + validModule.value);
+        assertEquals(new ModuleCommand(validStudentId, validModule), command);
+    }
+
+    @Test
+    public void parseCommand_grade() throws Exception {
+        StudentId validStudentId = new StudentId(CommandTestUtil.VALID_STUDENTID_BOB);
+        Module validModule = new Module(CommandTestUtil.VALID_MODULE_BOB);
+        Grade validGrade = new Grade(CommandTestUtil.VALID_GRADE_BOB);
+        GradeCommand command = (GradeCommand) parser.parseCommand(
+                GradeCommand.COMMAND_WORD + " " + PREFIX_STUDENTID + validStudentId + " "
+                        + PREFIX_MODULE + validModule.value + " " + PREFIX_GRADE + validGrade);
+        assertEquals(new GradeCommand(validStudentId, validModule, validGrade), command);
     }
 
     @Test

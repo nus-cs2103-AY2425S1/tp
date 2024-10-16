@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
@@ -42,6 +44,10 @@ public class CommandTestUtil {
     public static final String VALID_COURSE_BOB = "Physics";
     public static final String VALID_TAG_TUTOR = "Tutor";
     public static final String VALID_TAG_STUDENT = "Student";
+    public static final String VALID_MODULE_AMY = "CS2103T";
+    public static final String VALID_GRADE_AMY = "A";
+    public static final String VALID_MODULE_BOB = "CS2100";
+    public static final String VALID_GRADE_BOB = "B+";
 
     public static final String STUDENTID_DESC_AMY = " " + PREFIX_STUDENTID + VALID_STUDENTID_AMY;
     public static final String STUDENTID_DESC_BOB = " " + PREFIX_STUDENTID + VALID_STUDENTID_BOB;
@@ -57,6 +63,10 @@ public class CommandTestUtil {
     public static final String COURSE_DESC_BOB = " " + PREFIX_COURSE + VALID_COURSE_BOB;
     public static final String TAG_DESC_STUDENT = " " + PREFIX_TAG + VALID_TAG_STUDENT;
     public static final String TAG_DESC_TUTOR = " " + PREFIX_TAG + VALID_TAG_TUTOR;
+    public static final String MODULE_DESC_AMY = " " + PREFIX_MODULE + VALID_MODULE_AMY;
+    public static final String MODULE_DESC_BOB = " " + PREFIX_MODULE + VALID_MODULE_BOB;
+    public static final String GRADE_DESC_AMY = " " + PREFIX_GRADE + VALID_GRADE_AMY;
+    public static final String GRADE_DESC_BOB = " " + PREFIX_GRADE + VALID_GRADE_BOB;
 
     public static final String INVALID_STUDENTID_DESC = " " + PREFIX_STUDENTID
             + "@1234567"; // '@' not allowed in studentIds
@@ -66,6 +76,8 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_COURSE_DESC = " " + PREFIX_COURSE + "2 Science"; // '2' not allowed in courses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_MODULE_DESC = " " + PREFIX_MODULE + "CS 2103T"; // ' ' not allowed in modules
+    public static final String INVALID_GRADE_DESC = " " + PREFIX_GRADE + "E"; // 'E' not allowed in grades
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

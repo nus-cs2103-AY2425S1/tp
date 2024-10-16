@@ -1,43 +1,40 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.GradeCommand;
+import seedu.address.logic.commands.ModuleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Grade;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.StudentId;
 
 /**
- * Parses input arguments and creates a new GradeCommand object
+ * Parses input arguments and creates a new ModuleCommand object
  */
-public class GradeCommandParser implements Parser<GradeCommand> {
+public class ModuleCommandParser implements Parser<ModuleCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the GradeCommand
-     * and returns a GradeCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ModuleCommand
+     * and returns a ModuleCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public GradeCommand parse(String args) throws ParseException {
+    public ModuleCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_STUDENTID, PREFIX_MODULE, PREFIX_GRADE);
+                ArgumentTokenizer.tokenize(args, PREFIX_STUDENTID, PREFIX_MODULE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_STUDENTID, PREFIX_MODULE, PREFIX_GRADE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_STUDENTID, PREFIX_MODULE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GradeCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENTID, PREFIX_MODULE, PREFIX_GRADE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENTID, PREFIX_MODULE);
         StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENTID).get());
-        Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
         Module module = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
 
-        return new GradeCommand(studentId, module, grade);
+        return new ModuleCommand(studentId, module);
     }
 
     /**
