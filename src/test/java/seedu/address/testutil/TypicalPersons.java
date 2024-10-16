@@ -42,11 +42,11 @@ public class TypicalPersons {
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94822442")
             .withEmail("anna@example.com").withTelegram("georgeBest").build();
     public static final Person JAVIER = new PersonBuilder().withName("Javier Tan").withPhone("93453421")
-            .withEmail("javier@gmail.com").withTelegram("javierTan").withTags("friend").build();
+            .withEmail("javier@gmail.com").withTelegram("javierTan").withRoles("friend").build();
     public static final Person KELLY = new PersonBuilder().withName("Kelly Lim").withPhone("89453765")
-            .withEmail("kelly@gmail.com").withTelegram("kellyLim").withTags("relative").build();
+            .withEmail("kelly@gmail.com").withTelegram("kellyLim").withRoles("relative").build();
     public static final Person LENOR = new PersonBuilder().withName("Lenor Kim").withPhone("90784567")
-            .withEmail("lenor@gmail.com").withTelegram("lenor").withTags("relative", "friend").build();
+            .withEmail("lenor@gmail.com").withTelegram("lenor").withRoles("relative", "friend").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("84824242")
