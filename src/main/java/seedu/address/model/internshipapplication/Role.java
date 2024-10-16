@@ -6,8 +6,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import seedu.address.logic.validator.RoleValidator;
 
 /**
- * Represents an Internship's role in the internship book.
- * Guarantees: immutable; the role is valid as declared in {@link #validate(String)}.
+ * Represents an Internship's role in the internship application.
+ * Guarantees: immutable; the role is valid as declared in {@link RoleValidator#validate(String)}.
  */
 public class Role {
 
@@ -16,10 +16,10 @@ public class Role {
                     + "and should not start nor end with spaces or special characters.";
 
     /*
-     * Roles should start with an alphanumeric character, and can contain single spaces between words.
-     * No leading/trailing spaces or special characters, and no multiple consecutive spaces are allowed.
+     * The role should start with an alphanumeric character and may contain single spaces between words.
+     * No leading or trailing spaces or special characters are allowed, and no multiple consecutive spaces are allowed.
      */
-    public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum} ]*(?: [\\p{Alnum} ]+)*$";
+    public static final String VALIDATION_REGEX = "[ A-Za-z0-9_&/]*";
 
     private final String value;
 
@@ -37,9 +37,9 @@ public class Role {
     }
 
     /**
-     * Returns the string representation of this role.
+     * Returns the string representation of the role.
      *
-     * @return the role as a string.
+     * @return The role as a string.
      */
     public String getValue() {
         return this.value;
@@ -48,7 +48,7 @@ public class Role {
     /**
      * Returns a string representation of the role.
      *
-     * @return the role as a string.
+     * @return The role as a string.
      */
     @Override
     public String toString() {
@@ -58,8 +58,8 @@ public class Role {
     /**
      * Compares this role to another object.
      *
-     * @param other the object to compare.
-     * @return true if the object is an instance of {@code Role} and has the same value, false otherwise.
+     * @param other The object to compare with.
+     * @return True if the other object is an instance of {@code Role} and has the same value, false otherwise.
      */
     @Override
     public boolean equals(Object other) {
@@ -78,7 +78,7 @@ public class Role {
     /**
      * Returns the hash code of the role.
      *
-     * @return the hash code of the role value.
+     * @return The hash code of the role value.
      */
     @Override
     public int hashCode() {

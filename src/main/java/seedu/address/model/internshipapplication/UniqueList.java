@@ -13,15 +13,14 @@ import seedu.address.model.internshipapplication.exceptions.DuplicateInternshipE
 import seedu.address.model.internshipapplication.exceptions.InternshipNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * to ensure that the person with exactly the same fields will be removed.
+ * A list that enforces uniqueness between its elements and does not allow nulls.
+ * An element is considered unique by using {@code HireMeComparable#isSame(Object)}.
+ * As such, adding and updating of elements uses {@code HireMeComparable#isSame(Object)}
+ * for equality to ensure that the element being added or updated is unique in terms of identity in the {@code UniqueList}.
+ * However, the removal of an element uses {@code Object#equals(Object)} to ensure that
+ * the element with exactly the same fields will be removed.
  *
- * Supports a minimal set of list operations.
- *
- * @see Person#isSamePerson(Person)
+ * @param <T> the type of elements stored in the list, which must implement {@code HireMeComparable}.
  */
 public class UniqueList<T extends HireMeComparable<T>> implements Iterable<T> {
 
@@ -30,7 +29,10 @@ public class UniqueList<T extends HireMeComparable<T>> implements Iterable<T> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an element equivalent to the given argument.
+     *
+     * @param toCheck The element to check for existence.
+     * @return True if the list contains the element, false otherwise.
      */
     public boolean contains(T toCheck) {
         requireNonNull(toCheck);
@@ -38,8 +40,11 @@ public class UniqueList<T extends HireMeComparable<T>> implements Iterable<T> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds an element to the list.
+     * The element must not already exist in the list.
+     *
+     * @param toAdd The element to add.
+     * @throws DuplicateInternshipException if the element already exists in the list.
      */
     public void add(T toAdd) {
         requireNonNull(toAdd);
@@ -50,9 +55,14 @@ public class UniqueList<T extends HireMeComparable<T>> implements Iterable<T> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * Replaces the element {@code target} in the list with {@code edited}.
+     * {@code target} must exist in the list, and the {@code edited} element
+     * must not be the same as another existing element in the list.
+     *
+     * @param target The element to replace.
+     * @param edited The edited element to replace with.
+     * @throws InternshipNotFoundException if {@code target} does not exist in the list.
+     * @throws DuplicateInternshipException if {@code edited} is the same as another existing element in the list.
      */
     public void setItem(T target, T edited) {
         requireAllNonNull(target, edited);
@@ -70,8 +80,11 @@ public class UniqueList<T extends HireMeComparable<T>> implements Iterable<T> {
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent element from the list.
+     * The element must exist in the list.
+     *
+     * @param toRemove The element to remove.
+     * @throws InternshipNotFoundException if the element does not exist in the list.
      */
     public void remove(T toRemove) {
         requireNonNull(toRemove);
@@ -81,25 +94,35 @@ public class UniqueList<T extends HireMeComparable<T>> implements Iterable<T> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code replacement}.
+     * The {@code replacement} list must not contain duplicate elements.
+     *
+     * @param replacement The new list to replace the existing contents.
      */
     public void setItems(UniqueList<T> replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
+    /**
+     * Replaces the contents of this list with {@code items}.
+     * The {@code items} list must not contain duplicate elements.
+     *
+     * @param items The new list to replace the existing contents.
+     * @throws DuplicateInternshipException if the {@code items} list contains duplicates.
+     */
     public void setItems(List<T> items) {
         requireAllNonNull(items);
         if (!areUnique(items)) {
             throw new DuplicateInternshipException();
         }
-
         internalList.setAll(items);
     }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
+     *
+     * @return The unmodifiable list.
      */
     public ObservableList<T> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
@@ -116,12 +139,11 @@ public class UniqueList<T extends HireMeComparable<T>> implements Iterable<T> {
             return true;
         }
 
-        // instanceof handles nulls
-        if (!(other instanceof UniqueList<?> otherUniquePersonList)) {
+        if (!(other instanceof UniqueList<?> otherUniqueList)) {
             return false;
         }
 
-        return internalList.equals(otherUniquePersonList.internalList);
+        return internalList.equals(otherUniqueList.internalList);
     }
 
     @Override
@@ -135,12 +157,15 @@ public class UniqueList<T extends HireMeComparable<T>> implements Iterable<T> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code items} contains only unique elements.
+     *
+     * @param items The list to check for uniqueness.
+     * @return True if all elements are unique, false otherwise.
      */
-    private boolean areUnique(List<T> persons) {
-        for (int i = 0; i < persons.size() - 1; i++) {
-            for (int j = i + 1; j < persons.size(); j++) {
-                if (persons.get(i).isSame(persons.get(j))) {
+    private boolean areUnique(List<T> items) {
+        for (int i = 0; i < items.size() - 1; i++) {
+            for (int j = i + 1; j < items.size(); j++) {
+                if (items.get(i).isSame(items.get(j))) {
                     return false;
                 }
             }

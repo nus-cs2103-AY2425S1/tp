@@ -16,10 +16,10 @@ public class Company {
     private final Name name;
 
     /**
-     * Constructs a {@code Company} with a valid email and name.
+     * Constructs a {@code Company} object.
      *
      * @param email A valid email.
-     * @param name  A valid name.
+     * @param name A valid name.
      * @throws NullPointerException if the {@code email} or {@code name} is null.
      * @throws IllegalArgumentException if the {@code email} or {@code name} do not satisfy their constraints.
      */
@@ -35,7 +35,7 @@ public class Company {
     /**
      * Returns the company's email.
      *
-     * @return the email object.
+     * @return The email of the company.
      */
     public Email getEmail() {
         return email;
@@ -44,25 +44,25 @@ public class Company {
     /**
      * Returns the company's name.
      *
-     * @return the name object.
+     * @return The name of the company.
      */
     public Name getName() {
         return name;
     }
 
     /**
-     * Returns the company's name value.
+     * Returns the string value of the company's name.
      *
-     * @return the value of the name object.
+     * @return The string representation of the company's name.
      */
     public String getNameValue() {
         return name.getValue();
     }
 
     /**
-     * Returns the string representation of the company.
+     * Returns a string representation of the company, including its name and email.
      *
-     * @return a string that represents the company, including its email and name.
+     * @return A formatted string representing the company.
      */
     @Override
     public String toString() {
@@ -70,10 +70,10 @@ public class Company {
     }
 
     /**
-     * Compares this company to another object.
+     * Checks whether this company is equal to another object.
      *
-     * @param other the object to compare.
-     * @return true if the object is an instance of {@code Company} and has the same email and name, false otherwise.
+     * @param other The object to compare with.
+     * @return True if the other object is a {@code Company} with the same email and name, false otherwise.
      */
     @Override
     public boolean equals(Object other) {
@@ -92,7 +92,7 @@ public class Company {
     /**
      * Returns the hash code of the company.
      *
-     * @return the hash code of the email and name combined.
+     * @return The combined hash code of the company's email and name.
      */
     @Override
     public int hashCode() {

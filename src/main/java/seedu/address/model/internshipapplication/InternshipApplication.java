@@ -8,8 +8,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.HireMeComparable;
 
 /**
- * Represents an Internship in the network book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents an InternshipApplication in the system.
+ * Guarantees: details are present and not null, field values are validated, and the object is immutable.
  */
 public class InternshipApplication implements HireMeComparable<InternshipApplication> {
 
@@ -19,8 +19,13 @@ public class InternshipApplication implements HireMeComparable<InternshipApplica
     private final Role role;
 
     /**
-     * Constructs an {@code Internship} with a company, date of application, and role.
-     * Company, date of application, and role must be present and not null.
+     * Constructs an {@code InternshipApplication} with the specified company, date of application, and role.
+     * All fields must be present and not null.
+     *
+     * @param company The company offering the internship.
+     * @param dateOfApplication The date of application for the internship.
+     * @param role The role applied for in the internship.
+     * @throws NullPointerException if any of the provided arguments are null.
      */
     public InternshipApplication(Company company, Date dateOfApplication, Role role) {
         requireNonNull(company);
@@ -32,53 +37,56 @@ public class InternshipApplication implements HireMeComparable<InternshipApplica
     }
 
     /**
-     * Returns the company.
+     * Returns the company associated with the internship application.
      *
-     * @return the company object.
+     * @return The company object.
      */
     public Company getCompany() {
         return company;
     }
 
     /**
-     * Returns the company name.
+     * Returns the name of the company.
      *
-     * @return the company name object.
+     * @return The name object of the company.
      */
     public Name getCompanyName() {
         return company.getName();
     }
 
     /**
-     * Returns the company name value.
+     * Returns the string value of the company's name.
      *
-     * @return the company name string.
+     * @return The company name as a string.
      */
     public String getCompanyNameValue() {
         return company.getNameValue();
     }
 
     /**
-     * Returns the date of application.
+     * Returns the date of application for the internship.
      *
-     * @return the date of application.
+     * @return The date of application.
      */
     public Date getDateOfApplication() {
         return dateOfApplication;
     }
 
     /**
-     * Returns the role.
+     * Returns the role applied for in the internship.
      *
-     * @return the role object.
+     * @return The role object.
      */
     public Role getRole() {
         return role;
     }
 
     /**
-     * Returns true if both internships have the same company, date of application, and role.
-     * This defines a weaker notion of equality between two internships.
+     * Returns true if both internship applications have the same company, date of application, and role.
+     * Defines a weaker notion of equality between two internship applications.
+     *
+     * @param otherInternship The other internship application to compare.
+     * @return True if the specified internship application is the same as the current one, false otherwise.
      */
     @Override
     public boolean isSame(InternshipApplication otherInternship) {
@@ -93,8 +101,11 @@ public class InternshipApplication implements HireMeComparable<InternshipApplica
     }
 
     /**
-     * Returns true if both internships have the same identity and data fields.
-     * This defines a stronger notion of equality between two internships.
+     * Returns true if both internship applications have the same identity and data fields.
+     * Defines a stronger notion of equality between two internship applications.
+     *
+     * @param other The other object to compare.
+     * @return True if the specified object is equal to the current internship application, false otherwise.
      */
     @Override
     public boolean equals(Object other) {
@@ -112,15 +123,20 @@ public class InternshipApplication implements HireMeComparable<InternshipApplica
                 && role.equals(otherInternship.role);
     }
 
+    /**
+     * Returns the hash code of the internship application based on the company, date of application, and role.
+     *
+     * @return The hash code of the internship application.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(company, dateOfApplication, role);
     }
 
     /**
-     * Returns a string representation of the internship, including conditional checks for null or empty fields.
+     * Returns a string representation of the internship application, including conditional checks for null fields.
      *
-     * @return a string representing the internship.
+     * @return A formatted string representing the internship application.
      */
     @Override
     public String toString() {

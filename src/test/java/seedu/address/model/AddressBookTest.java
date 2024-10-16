@@ -28,7 +28,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
 
-    private final AddressBook addressBook = new AddressBook<InternshipApplication>();
+    private final AddressBook<InternshipApplication> addressBook = new AddressBook<>();
 
     @Test
     public void constructor() {
@@ -95,7 +95,7 @@ public class AddressBookTest {
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class AddressBookStub implements ReadOnlyAddressBook<InternshipApplication> {
         private final ObservableList<InternshipApplication> applications = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<InternshipApplication> applications) {

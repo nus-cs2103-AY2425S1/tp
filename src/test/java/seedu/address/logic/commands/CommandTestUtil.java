@@ -98,17 +98,18 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_APPLE;
-    public static final EditCommand.EditPersonDescriptor DESC_BOFA;
-
-    static {
-        DESC_APPLE = new EditPersonDescriptorBuilder().withName(VALID_COMPANY_NAME_APPLE)
-                .withPhone(VALID_DATE_APPLE).withEmail(VALID_COMPANY_EMAIL_APPLE).withAddress(VALID_ROLE_APPLE)
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOFA = new EditPersonDescriptorBuilder().withName(VALID_COMPANY_NAME_BOFA)
-                .withPhone(VALID_DATE_BOFA).withEmail(VALID_COMPANY_EMAIL_BOFA).withAddress(VALID_ROLE_BOFA)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-    }
+//    Todo when EDIT feature implemented
+//    public static final EditCommand.EditPersonDescriptor DESC_APPLE;
+//    public static final EditCommand.EditPersonDescriptor DESC_BOFA;
+//
+//    static {
+//        DESC_APPLE = new EditPersonDescriptorBuilder().withName(VALID_COMPANY_NAME_APPLE)
+//                .withPhone(VALID_DATE_APPLE).withEmail(VALID_COMPANY_EMAIL_APPLE).withAddress(VALID_ROLE_APPLE)
+//                .withTags(VALID_TAG_FRIEND).build();
+//        DESC_BOFA = new EditPersonDescriptorBuilder().withName(VALID_COMPANY_NAME_BOFA)
+//                .withPhone(VALID_DATE_BOFA).withEmail(VALID_COMPANY_EMAIL_BOFA).withAddress(VALID_ROLE_BOFA)
+//                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+//    }
 
     /**
      * Executes the given {@code command}, confirms that <br>
@@ -145,7 +146,7 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command<InternshipApplication> command, Model<InternshipApplication> actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook<InternshipApplication>(actualModel.getAddressBook());
+        AddressBook<InternshipApplication> expectedAddressBook = new AddressBook<>(actualModel.getAddressBook());
         List<InternshipApplication> expectedFilteredList = new ArrayList<>(actualModel.getFilteredList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));

@@ -4,10 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_NAME_YAHOO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_YAHOO;
 import static seedu.address.testutil.TypicalInternshipApplications.GOOGLE;
 import static seedu.address.testutil.TypicalInternshipApplications.YAHOO;
 
@@ -46,9 +45,10 @@ public class UniqueListTest {
         InternshipApplication editedGoogle = new InternshipApplicationBuilder(GOOGLE)
                 .withName(VALID_COMPANY_NAME_YAHOO)
                 .withDate(VALID_DATE_YAHOO)
+                .withRole(VALID_ROLE_YAHOO)
                 .build();
 
-        assertTrue(uniqueList.contains(editedGoogle));
+        assertFalse(uniqueList.contains(editedGoogle));
     }
 
     @Test
