@@ -16,16 +16,35 @@ public class TelegramUsername {
 
     public static final String VALIDATION_REGEX = "^[a-zA-Z][a-zA-Z0-9_]{4,31}$";
 
-    public final String telegramHandle;
+    public final String telegramUsername;
 
     /**
      * Constructs a {@code TelegramUsername}.
+     * Private constructor to enforce the use of the static factory method.
      * @param username A valid telegram handle.
      */
-    public TelegramUsername(String username) {
+    private TelegramUsername(String username) {
+        this.telegramUsername = username;
+    }
+
+    /**
+     * Factory method to create a TelegramUsername object with a valid telegram handle.
+     * @param username A valid telegram handle.
+     * @return A TelegramUsername instance.
+     */
+    public static TelegramUsername of(String username) {
         requireNonNull(username);
         checkArgument(isValidTelegramHandle(username), MESSAGE_CONSTRAINTS);
-        this.telegramHandle = username;
+        return new TelegramUsername(username.toLowerCase());
+    }
+
+    /**
+     * Factory method to create a TelegramUsername object with an empty username.
+     * This is used to represent the optional nature of the telegram handle.
+     * @return A TelegramUsername instance with no username.
+     */
+    public static TelegramUsername empty() {
+        return new TelegramUsername(null);
     }
 
     /**
@@ -36,16 +55,12 @@ public class TelegramUsername {
         return test.matches(VALIDATION_REGEX);
     }
 
-    /**
-     * Returns the telegram handle in lowercase.
-     */
-    public String toLowerCaseUsername() {
-        return telegramHandle.toLowerCase();
-    }
-
     @Override
     public String toString() {
-        return toLowerCaseUsername();
+        if (telegramUsername == null) {
+            return "";
+        }
+        return telegramUsername;
     }
 
     @Override
@@ -59,12 +74,12 @@ public class TelegramUsername {
         }
 
         TelegramUsername otherTeleHandle = (TelegramUsername) other;
-        return this.toLowerCaseUsername().equalsIgnoreCase(otherTeleHandle.toLowerCaseUsername());
+        return this.telegramUsername.equals(otherTeleHandle.telegramUsername);
     }
 
     @Override
     public int hashCode() {
-        return toLowerCaseUsername().hashCode();
+        return telegramUsername == null ? 0 : telegramUsername.hashCode();
     }
 
 }

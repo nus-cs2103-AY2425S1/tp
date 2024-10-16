@@ -10,14 +10,14 @@ import org.junit.jupiter.api.Test;
 public class TelegramUsernameTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new TelegramUsername(null));
+    public void ofFactoryMethod_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> TelegramUsername.of(null));
     }
 
     @Test
-    public void constructor_invalidUsername_throwsIllegalArgumentException() {
+    public void ofFactoryMethod_invalidUsername_throwsIllegalArgumentException() {
         String invalidUsername = "john wick$";
-        assertThrows(IllegalArgumentException.class, () -> new TelegramUsername(invalidUsername));
+        assertThrows(IllegalArgumentException.class, () -> TelegramUsername.of(invalidUsername));
     }
 
     @Test
@@ -49,10 +49,10 @@ public class TelegramUsernameTest {
 
     @Test
     public void equals() {
-        TelegramUsername user1 = new TelegramUsername("johnwick");
-        TelegramUsername user2 = new TelegramUsername("johnwick");
-        TelegramUsername user3 = new TelegramUsername("john_wick");
-        TelegramUsername user4 = new TelegramUsername("JohnWick");
+        TelegramUsername user1 = TelegramUsername.of("johnwick");
+        TelegramUsername user2 = TelegramUsername.of("johnwick");
+        TelegramUsername user3 = TelegramUsername.of("john_wick");
+        TelegramUsername user4 = TelegramUsername.of("JohnWick");
 
         // same object -> returns true
         assertTrue(user1.equals(user1));
@@ -76,22 +76,22 @@ public class TelegramUsernameTest {
     @Test
     public void toString_validUsername_returnsUsername() {
         String username = "johnwick";
-        TelegramUsername user = new TelegramUsername(username);
+        TelegramUsername user = TelegramUsername.of(username);
         assertTrue(user.toString().equals(username));
     }
 
     @Test
     public void hashCode_sameUsername_sameHashCode() {
         String username = "johnwick";
-        TelegramUsername user1 = new TelegramUsername(username);
-        TelegramUsername user2 = new TelegramUsername(username);
+        TelegramUsername user1 = TelegramUsername.of(username);
+        TelegramUsername user2 = TelegramUsername.of(username);
         assertEquals(user1.hashCode(), user2.hashCode());
     }
 
     @Test
     public void hashCode_differentUsername_differentHashCode() {
-        TelegramUsername user1 = new TelegramUsername("johnwick");
-        TelegramUsername user2 = new TelegramUsername("john_wick");
+        TelegramUsername user1 = TelegramUsername.of("johnwick");
+        TelegramUsername user2 = TelegramUsername.of("john_wick");
         assertFalse(user1.hashCode() == user2.hashCode());
     }
 }

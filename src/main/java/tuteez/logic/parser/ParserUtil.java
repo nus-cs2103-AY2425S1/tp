@@ -13,6 +13,7 @@ import tuteez.model.person.Address;
 import tuteez.model.person.Email;
 import tuteez.model.person.Name;
 import tuteez.model.person.Phone;
+import tuteez.model.person.TelegramUsername;
 import tuteez.model.tag.Tag;
 
 /**
@@ -120,5 +121,23 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses the input {@code String username} into a {@code TelegramUsername}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param username the input telegram username, which can be null to represent an optional username.
+     * @throws ParseException if the given {@code telegramUsername} is invalid.
+     */
+    public static TelegramUsername parseTelegramUsername(String username) throws ParseException {
+        if (username == null) {
+            return TelegramUsername.empty();
+        }
+        String trimmedUsername = username.trim();
+        if (!TelegramUsername.isValidTelegramHandle(trimmedUsername)) {
+            throw new ParseException(TelegramUsername.MESSAGE_CONSTRAINTS);
+        }
+        return TelegramUsername.of(trimmedUsername);
     }
 }
