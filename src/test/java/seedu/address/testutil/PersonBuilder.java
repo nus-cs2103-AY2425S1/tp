@@ -18,11 +18,13 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final boolean DEFAULT_RSVP = false;
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private boolean rsvp;
     private Set<Tag> tags;
 
     /**
@@ -77,8 +79,17 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     *
+     * Sets the {@code Rsvp} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRsvp(boolean rsvp) {
+        this.rsvp = rsvp;
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, tags);
+        return new Person(name, phone, email, rsvp, tags);
     }
 
 }

@@ -50,7 +50,7 @@ public class Person {
         return email;
     }
 
-    public boolean isRsvp() {
+    public boolean getRsvp() {
         return isRsvp;
     }
 
