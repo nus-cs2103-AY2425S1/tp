@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -96,4 +97,8 @@ public interface Model {
      * Returns true if an assignment with the name is present.
      */
     boolean hasAssignment(String name);
+
+    float maxScore(String assignment);
+    String getAssignmentName(String name);
+    boolean hasName(Name name);
 }

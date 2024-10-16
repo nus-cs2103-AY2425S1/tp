@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -121,6 +122,21 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         AddressBook otherAddressBook = (AddressBook) other;
         return persons.equals(otherAddressBook.persons);
+    }
+
+    /**
+     * Checks if name is in address book, ignoring casing
+     *
+     * @param name the name
+     * @return the boolean
+     */
+    public boolean hasName(Name name) {
+        for (Person x : persons) {
+            if (x.getName().equalIgnoreCase(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

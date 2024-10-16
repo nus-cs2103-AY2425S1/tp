@@ -28,7 +28,7 @@ class JsonSerializablePredefinedAssignmentData {
     public PredefinedAssignmentsData toModelType() throws IllegalValueException {
         PredefinedAssignmentsData predefinedAssignmentsData = new PredefinedAssignmentsData();
         for (JsonAdaptedPredefinedAssignment jsonAdaptedPredefinedAssignment : assignments) {
-            if (predefinedAssignmentsData.hasPerson(jsonAdaptedPredefinedAssignment.getName())) {
+            if (predefinedAssignmentsData.hasAssignment(jsonAdaptedPredefinedAssignment.getName())) {
                 throw new IllegalValueException(DUPLICATE_PREDEFINED_ASSIGNMENT);
             }
             predefinedAssignmentsData.addPredefinedAssignment(jsonAdaptedPredefinedAssignment.toModelType());

@@ -8,8 +8,12 @@ public record PredefinedAssignment(String name, Float maxScore) {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof PredefinedAssignment other) {
-            return name.equals(other.name) && maxScore.equals(other.maxScore());
+            return name.equalsIgnoreCase(other.name) && maxScore.equals(other.maxScore());
         }
         return false;
+    }
+
+    public float getMaxScore() {
+        return maxScore;
     }
 }
