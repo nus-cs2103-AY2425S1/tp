@@ -11,13 +11,13 @@
 }
 
 .priority-low-bg {
-    -fx-background-color: pink !important;
+    -fx-background-color: green !important;
     -fx-padding: 5;
     -fx-background-radius: 5;
 }
 
 .priority-none-bg {
-    -fx-background-color: green !important;
+    -fx-background-color: white !important;
     -fx-padding: 5;
     -fx-background-radius: 5;
 }
