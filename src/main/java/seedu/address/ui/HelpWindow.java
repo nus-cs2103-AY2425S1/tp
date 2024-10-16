@@ -25,9 +25,9 @@ public class HelpWindow extends UiPart<Stage> {
 
                 Format: delete (e or ph) INDEX
 
-                Purpose: Deletes the entry in the employee or potential hire
-                list at index. Index refers to the index number shown in the
-                displayed list.
+                Purpose: Deletes the entry of the index in the current
+                list that is being displayed. The 2nd parameter (e or ph)
+                must correspond to the type of entry in the index.
 
                 Example: delete e 1
              """;
@@ -42,7 +42,7 @@ public class HelpWindow extends UiPart<Stage> {
 
                 Example: employee n/John Doe p/81234567 e/johndoe@gmail.com
                 a/21 Lower Kent Ridge Rd d/Department of informatics
-                r/Head of Informatics ced/01-01-2021
+                r/Head of Informatics ced/2021-01-21
              """;
 
     public static final String EXIT_COMMAND =
@@ -58,7 +58,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String FIND_COMMAND =
             """
 
-                Format: find (/e or /ph) KEYWORD(S)
+                Format: find (e or ph or all) KEYWORD(S)
 
                 Purpose: Displays a list of entries that contains the keyword(s)
                 in the corresponding employee and/or potential hire list.
@@ -79,12 +79,12 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String LIST_COMMAND =
             """
 
-                Format: list (/e or /ph)
+                Format: list (e or ph or all)
 
                 Purpose: Displays a list of entries with their information in
                 the corresponding employee and/or potential hire list.
 
-                Example: list /e
+                Example: list e
              """;
 
     public static final String POTENTIAL_COMMAND =
