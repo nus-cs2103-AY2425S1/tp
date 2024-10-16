@@ -3,21 +3,21 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_BOFA;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_APPLE;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOFA;
+import static seedu.address.logic.commands.CommandTestUtil.COMPANY_EMAIL_DESC_APPLE;
+import static seedu.address.logic.commands.CommandTestUtil.COMPANY_EMAIL_DESC_BOFA;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_APPLE;
+import static seedu.address.logic.commands.CommandTestUtil.COMPANY_NAME_DESC_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_BOFA;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_APPLE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_APPLE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_APPLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_EMAIL_APPLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_NAME_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOFA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
@@ -57,7 +57,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_NAME_APPLE, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_COMPANY_NAME_APPLE, MESSAGE_INVALID_FORMAT);
 
         // no field specified
         assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
@@ -69,10 +69,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_APPLE, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + COMPANY_NAME_DESC_APPLE, MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_APPLE, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + COMPANY_NAME_DESC_APPLE, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -90,7 +90,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + INVALID_DATE_DESC + EMAIL_DESC_APPLE, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_DATE_DESC + COMPANY_EMAIL_DESC_APPLE, Phone.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
@@ -107,10 +107,10 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + DATE_DESC_BOFA + TAG_DESC_HUSBAND
-                + EMAIL_DESC_APPLE + ROLE_DESC_APPLE + NAME_DESC_APPLE + TAG_DESC_FRIEND;
+                + COMPANY_EMAIL_DESC_APPLE + ROLE_DESC_APPLE + COMPANY_NAME_DESC_APPLE + TAG_DESC_FRIEND;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_APPLE)
-                .withPhone(VALID_DATE_BOFA).withEmail(VALID_EMAIL_APPLE).withAddress(VALID_ROLE_APPLE)
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_COMPANY_NAME_APPLE)
+                .withPhone(VALID_DATE_BOFA).withEmail(VALID_COMPANY_EMAIL_APPLE).withAddress(VALID_ROLE_APPLE)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -120,10 +120,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + DATE_DESC_BOFA + EMAIL_DESC_APPLE;
+        String userInput = targetIndex.getOneBased() + DATE_DESC_BOFA + COMPANY_EMAIL_DESC_APPLE;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_DATE_BOFA)
-                .withEmail(VALID_EMAIL_APPLE).build();
+                .withEmail(VALID_COMPANY_EMAIL_APPLE).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -133,8 +133,8 @@ public class EditCommandParserTest {
     public void parse_oneFieldSpecified_success() {
         // name
         Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + NAME_DESC_APPLE;
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_APPLE).build();
+        String userInput = targetIndex.getOneBased() + COMPANY_NAME_DESC_APPLE;
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_COMPANY_NAME_APPLE).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -145,8 +145,8 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
-        userInput = targetIndex.getOneBased() + EMAIL_DESC_APPLE;
-        descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_APPLE).build();
+        userInput = targetIndex.getOneBased() + COMPANY_EMAIL_DESC_APPLE;
+        descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_COMPANY_EMAIL_APPLE).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -180,9 +180,9 @@ public class EditCommandParserTest {
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATE));
 
         // mulltiple valid fields repeated
-        userInput = targetIndex.getOneBased() + DATE_DESC_APPLE + ROLE_DESC_APPLE + EMAIL_DESC_APPLE
-                + TAG_DESC_FRIEND + DATE_DESC_APPLE + ROLE_DESC_APPLE + EMAIL_DESC_APPLE + TAG_DESC_FRIEND
-                + DATE_DESC_BOFA + ROLE_DESC_BOFA + EMAIL_DESC_BOFA + TAG_DESC_HUSBAND;
+        userInput = targetIndex.getOneBased() + DATE_DESC_APPLE + ROLE_DESC_APPLE + COMPANY_EMAIL_DESC_APPLE
+                + TAG_DESC_FRIEND + DATE_DESC_APPLE + ROLE_DESC_APPLE + COMPANY_EMAIL_DESC_APPLE + TAG_DESC_FRIEND
+                + DATE_DESC_BOFA + ROLE_DESC_BOFA + COMPANY_EMAIL_DESC_BOFA + TAG_DESC_HUSBAND;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATE, PREFIX_EMAIL, PREFIX_ROLE));

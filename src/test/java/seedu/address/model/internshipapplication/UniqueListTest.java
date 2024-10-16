@@ -3,11 +3,15 @@ package seedu.address.model.internshipapplication;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOFA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalInternshipApplications.AIRBNB;
-import static seedu.address.testutil.TypicalInternshipApplications.BYTEDANCE;
+
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_NAME_YAHOO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_YAHOO;
+import static seedu.address.testutil.TypicalInternshipApplications.GOOGLE;
+import static seedu.address.testutil.TypicalInternshipApplications.YAHOO;
+
+
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,149 +22,152 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.internshipapplication.exceptions.DuplicatePersonException;
 import seedu.address.model.internshipapplication.exceptions.PersonNotFoundException;
 import seedu.address.testutil.InternshipApplicationBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 public class UniqueListTest {
-
-    private final UniqueList<InternshipApplication> uniqueList = new UniqueList<>();
+    private final UniqueList uniqueList = new UniqueList();
 
     @Test
-    public void contains_nullPerson_throwsNullPointerException() {
+    public void contains_nullInternship_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueList.contains(null));
     }
 
     @Test
-    public void contains_personNotInList_returnsFalse() {
-        assertFalse(uniqueList.contains(AIRBNB));
+    public void contains_internshipNotInList_returnsFalse() {
+        assertFalse(uniqueList.contains(GOOGLE));
     }
 
     @Test
-    public void contains_personInList_returnsTrue() {
-        uniqueList.add(AIRBNB);
-        assertTrue(uniqueList.contains(AIRBNB));
+    public void contains_internshipInList_returnsTrue() {
+        uniqueList.add(GOOGLE);
+        assertTrue(uniqueList.contains(GOOGLE));
     }
 
     @Test
-    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
-        uniqueList.add(AIRBNB);
-        InternshipApplication editedAirbnb = new InternshipApplicationBuilder(AIRBNB).withRole(VALID_ROLE_BOFA)
-                .build();
-        assertTrue(uniqueList.contains(editedAirbnb));
+    public void contains_internshipWithSameIdentityFieldsInList_returnsTrue() {
+        uniqueList.add(GOOGLE);
+        InternshipApplication editedGoogle = new InternshipApplicationBuilder(GOOGLE)
+                                                .withName(VALID_COMPANY_NAME_YAHOO)
+                                                .withDate(VALID_DATE_YAHOO)
+                                                .build();
+
+        assertTrue(uniqueList.contains(editedGoogle));
     }
 
     @Test
-    public void add_nullPerson_throwsNullPointerException() {
+    public void add_nullInternship_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueList.add(null));
     }
 
     @Test
-    public void add_duplicatePerson_throwsDuplicatePersonException() {
-        uniqueList.add(AIRBNB);
-        assertThrows(DuplicatePersonException.class, () -> uniqueList.add(AIRBNB));
+    public void add_duplicateInternship_throwsDuplicatePersonException() {
+        uniqueList.add(GOOGLE);
+        assertThrows(DuplicatePersonException.class, () -> uniqueList.add(GOOGLE));
     }
 
     @Test
-    public void setPerson_nullTargetPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueList.setItem(null, AIRBNB));
+    public void setItem_nullTargetInternship_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueList.setItem(null, GOOGLE));
     }
 
     @Test
-    public void setPerson_nullEditedPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueList.setItem(AIRBNB, null));
+    public void setItem_nullEditedInternship_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueList.setItem(GOOGLE, null));
     }
 
     @Test
-    public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniqueList.setItem(AIRBNB, AIRBNB));
+    public void setItem_targetInternshipNotInList_throwsPersonNotFoundException() {
+        assertThrows(PersonNotFoundException.class, () -> uniqueList.setItem(GOOGLE, GOOGLE));
     }
 
     @Test
-    public void setPerson_editedPersonIsSamePerson_success() {
-        uniqueList.add(AIRBNB);
-        uniqueList.setItem(AIRBNB, AIRBNB);
-        UniqueList<InternshipApplication> expectedUniqueList = new UniqueList<InternshipApplication>();
-        expectedUniqueList.add(AIRBNB);
+    public void setItem_editedInternshipIsSameInternship_success() {
+        uniqueList.add(GOOGLE);
+        uniqueList.setItem(GOOGLE, GOOGLE);
+        UniqueList expectedUniqueList = new UniqueList();
+        expectedUniqueList.add(GOOGLE);
         assertEquals(expectedUniqueList, uniqueList);
     }
 
     @Test
-    public void setPerson_editedPersonHasSameIdentity_success() {
-        uniqueList.add(AIRBNB);
-        InternshipApplication editedAirbnb = new InternshipApplicationBuilder(AIRBNB).withRole(VALID_ROLE_BOFA)
+    public void setItem_editedInternshipHasSameIdentity_success() {
+        uniqueList.add(GOOGLE);
+        InternshipApplication editedGoogle = new InternshipApplicationBuilder(GOOGLE)
+                .withName(VALID_COMPANY_NAME_YAHOO)
+                .withDate(VALID_DATE_YAHOO)
                 .build();
-        uniqueList.setItem(AIRBNB, editedAirbnb);
-        UniqueList<InternshipApplication> expectedUniqueList = new UniqueList<InternshipApplication>();
-        expectedUniqueList.add(editedAirbnb);
+        uniqueList.setItem(GOOGLE, editedGoogle);
+        UniqueList expectedUniqueList = new UniqueList();
+        expectedUniqueList.add(editedGoogle);
         assertEquals(expectedUniqueList, uniqueList);
     }
 
     @Test
-    public void setPerson_editedPersonHasDifferentIdentity_success() {
-        uniqueList.add(AIRBNB);
-        uniqueList.setItem(AIRBNB, BYTEDANCE);
-        UniqueList<InternshipApplication> expectedUniqueList = new UniqueList<InternshipApplication>();
-        expectedUniqueList.add(BYTEDANCE);
+    public void setItem_editedInternshipHasDifferentIdentity_success() {
+        uniqueList.add(GOOGLE);
+        uniqueList.setItem(GOOGLE, YAHOO);
+        UniqueList expectedUniqueList = new UniqueList();
+        expectedUniqueList.add(YAHOO);
         assertEquals(expectedUniqueList, uniqueList);
     }
 
     @Test
-    public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
-        uniqueList.add(AIRBNB);
-        uniqueList.add(BYTEDANCE);
-        assertThrows(DuplicatePersonException.class, () -> uniqueList.setItem(AIRBNB, BYTEDANCE));
+    public void setItem_editedInternshipHasNonUniqueIdentity_throwsDuplicateInternshipException() {
+        uniqueList.add(GOOGLE);
+        uniqueList.add(YAHOO);
+        assertThrows(DuplicatePersonException.class, () -> uniqueList.setItem(GOOGLE, YAHOO));
     }
 
     @Test
-    public void remove_nullPerson_throwsNullPointerException() {
+    public void remove_nullInternship_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueList.remove(null));
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniqueList.remove(AIRBNB));
+    public void remove_internshipDoesNotExist_throwsPersonNotFoundException() {
+        assertThrows(PersonNotFoundException.class, () -> uniqueList.remove(GOOGLE));
     }
 
     @Test
-    public void remove_existingPerson_removesPerson() {
-        uniqueList.add(AIRBNB);
-        uniqueList.remove(AIRBNB);
-        UniqueList<InternshipApplication> expectedUniqueList = new UniqueList<InternshipApplication>();
+    public void remove_existingInternship_removesInternship() {
+        uniqueList.add(GOOGLE);
+        uniqueList.remove(GOOGLE);
+        UniqueList expectedUniqueList = new UniqueList();
         assertEquals(expectedUniqueList, uniqueList);
     }
 
     @Test
-    public void setPersons_nullUniqueList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueList.setItems((List<InternshipApplication>) null));
+    public void setItems_nullUniqueList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueList.setItems((UniqueList) null));
     }
 
     @Test
-    public void setPersons_uniqueList_replacesOwnListWithProvidedUniqueList() {
-        uniqueList.add(AIRBNB);
-        UniqueList<InternshipApplication> expectedUniqueList = new UniqueList<InternshipApplication>();
-        expectedUniqueList.add(BYTEDANCE);
+    public void setItems_uniqueList_replacesOwnListWithProvidedUniqueList() {
+        uniqueList.add(GOOGLE);
+        UniqueList expectedUniqueList = new UniqueList();
+        expectedUniqueList.add(YAHOO);
         uniqueList.setItems(expectedUniqueList);
         assertEquals(expectedUniqueList, uniqueList);
     }
 
     @Test
-    public void setPersons_nullList_throwsNullPointerException() {
+    public void setItems_nullList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueList.setItems((List<InternshipApplication>) null));
     }
 
     @Test
-    public void setPersons_list_replacesOwnListWithProvidedList() {
-        uniqueList.add(AIRBNB);
-        List<InternshipApplication> personList = Collections.singletonList(BYTEDANCE);
+    public void setItems_list_replacesOwnListWithProvidedList() {
+        uniqueList.add(GOOGLE);
+        List<InternshipApplication> personList = Collections.singletonList(YAHOO);
         uniqueList.setItems(personList);
-        UniqueList<InternshipApplication> expectedUniqueList = new UniqueList<InternshipApplication>();
-        expectedUniqueList.add(BYTEDANCE);
+        UniqueList expectedUniqueList = new UniqueList();
+        expectedUniqueList.add(YAHOO);
         assertEquals(expectedUniqueList, uniqueList);
     }
 
     @Test
-    public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
-        List<InternshipApplication> listWithDuplicatePersons = Arrays.asList(AIRBNB, AIRBNB);
-        assertThrows(DuplicatePersonException.class, () -> uniqueList.setItems(listWithDuplicatePersons));
+    public void setItems_listWithDuplicateInternships_throwsDuplicateInternshipException() {
+        List<InternshipApplication> listWithDuplicateInternships = Arrays.asList(GOOGLE, GOOGLE);
+        assertThrows(DuplicatePersonException.class, () -> uniqueList.setItems(listWithDuplicateInternships));
     }
 
     @Test
