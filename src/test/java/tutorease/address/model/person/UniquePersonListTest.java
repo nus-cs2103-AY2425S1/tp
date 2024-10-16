@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static tutorease.address.testutil.Assert.assertThrows;
-import static tutorease.address.testutil.TypicalPersons.ALICE;
-import static tutorease.address.testutil.TypicalPersons.BOB;
+import static tutorease.address.testutil.TypicalStudents.ALICE;
+import static tutorease.address.testutil.TypicalStudents.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
