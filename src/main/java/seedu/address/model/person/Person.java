@@ -132,6 +132,9 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("classId", classId)
+                .add("fees", fees)
+                .add("monthsPaid", monthsPaid)
                 .add("tags", tags)
                 .toString();
     }
