@@ -115,21 +115,24 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds contacts whose names or/and phone numbers or/and address contain any of the given field keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find n/NAMEKEYWORDS p/PHONEKEYWORDS a/ADDRESSKEYWORDS`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans` or `wall Street` will match `Wall Street`
+* At least one field MUST be specified  
+   e.g. `find n/Hans` or `find p/12345678` or `find a/wall street` will work  
+   e.g. `find Hans` or `find wall street` or `find` will fail
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Partial words will be matched e.g. `Han` will match `Hans`
+* Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* If more than one fields are specified, contacts will be matched by multiple fields (i.e. `AND` search).
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png) 
 
 ### Deleting a person : `delete`
 
