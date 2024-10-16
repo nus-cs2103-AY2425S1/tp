@@ -140,6 +140,23 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Filter persons by tag: `filter`
+
+Filters the list of contacts and displays those with the provided tag.
+
+Format: `filter [t/TAG]`
+
+* The filter is case-sensitive.
+* Only exact matches of tags will be considered.
+* The tag provided must only contain alphanumeric characters
+* If the provided tag does not match any contact, an empty list will be shown.
+
+Examples:
+* `filter t/friends` will filter for contacts with the tag `friends`<br>
+  ![result for 'filter_friends'](images/filterFriendsResult.png)
+* `filter t/bestFriends` will display an empty list if there are no contacts with tag `bestFriends`<br>
+  ![result for 'filter bestFriends'](images/filterBestFriendsResult.png)
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -153,6 +170,20 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Sort persons by name: `sort`
+
+Sorts and displays the list of persons by name in either ascending or descending alphabetical order
+
+Format: `sort [ORDER]`
+
+* `[ORDER]` can be either "asc" / "ascending" or "desc" / "descending" (case-insensitive)
+* If no order is provided, persons will be sorted in ascending order by default
+
+Examples:
+* `sort` will sort by persons names alphabetically in ascending order
+* `sort ascending` will sort by persons names alphabetically in ascending order
+* `sort descending` will sort by persons names alphabetically in descending order
 
 ### Clearing all entries : `clear`
 
@@ -210,3 +241,4 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Sort** | `sort [ORDER]`<br> e.g., `sort asc`

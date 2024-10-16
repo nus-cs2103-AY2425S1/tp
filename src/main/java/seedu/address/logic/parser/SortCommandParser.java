@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.SortCommand.ASCENDING;
+import static seedu.address.logic.commands.SortCommand.DESCENDING;
 
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -17,15 +19,20 @@ public class SortCommandParser implements Parser<SortCommand> {
     public SortCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
-            trimmedArgs = "asc";
+            trimmedArgs = ASCENDING;
         }
-        if (!(trimmedArgs.equalsIgnoreCase("asc") || trimmedArgs.equalsIgnoreCase("desc")
-                || trimmedArgs.equalsIgnoreCase("ascending") || trimmedArgs.equalsIgnoreCase("descending"))) {
+        String trimmedArgsLowerCase = trimmedArgs.toLowerCase();
+        if (trimmedArgsLowerCase.equals("ascending")) {
+            trimmedArgsLowerCase = ASCENDING;
+        }
+        if (trimmedArgsLowerCase.equals("descending")) {
+            trimmedArgsLowerCase = DESCENDING;
+        }
+        if (!(trimmedArgsLowerCase.equals(ASCENDING) || trimmedArgsLowerCase.equals(DESCENDING))) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
-
-        return new SortCommand(trimmedArgs);
+        return new SortCommand(trimmedArgsLowerCase);
     }
 
 }
