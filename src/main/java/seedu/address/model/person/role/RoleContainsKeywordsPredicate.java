@@ -22,7 +22,7 @@ public class RoleContainsKeywordsPredicate implements Predicate<Person> {
         // check if any role contains keyword
         return keywords.stream()
                 .anyMatch(keywords -> StringUtil.containsWordIgnoreCase(person.getRoles().stream()
-                                .map(role -> role.roleName).reduce("", (x, y) -> x + " " + y), keywords));
+                                .map(role -> role.getRoleName()).reduce("", (x, y) -> x + " " + y), keywords));
     }
 
     @Override

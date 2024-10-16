@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -34,6 +35,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
+        descriptor.setEvents(person.getEvents());
         descriptor.setRoles(person.getRoles());
     }
 
@@ -62,12 +64,22 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Role>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
     public EditPersonDescriptorBuilder withRoles(String... roles) {
         Set<Role> roleSet = Stream.of(roles).map(Role::new).collect(Collectors.toSet());
         descriptor.setRoles(roleSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code events} into a {@code Set<Event>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withEvents(String... events) {
+        Set<Event> eventSet = Stream.of(events).map(Event::new).collect(Collectors.toSet());
+        descriptor.setEvents(eventSet);
         return this;
     }
 

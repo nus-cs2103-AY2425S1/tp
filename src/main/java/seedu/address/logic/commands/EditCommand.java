@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -20,6 +21,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -34,16 +36,17 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-                                               + "by the index number used in the displayed person list. "
-                                               + "Existing values will be overwritten by the input values.\n"
-                                               + "Parameters: INDEX (must be a positive integer) "
-                                               + "[" + PREFIX_NAME + "NAME] "
-                                               + "[" + PREFIX_PHONE + "PHONE] "
-                                               + "[" + PREFIX_EMAIL + "EMAIL] "
-                                               + "[" + PREFIX_ROLE + "ROLE]...\n"
-                                               + "Example: " + COMMAND_WORD + " 1 "
-                                               + PREFIX_PHONE + "91234567 "
-                                               + PREFIX_EMAIL + "johndoe@example.com";
+            + "by the index number used in the displayed person list. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_EVENT + "EVENTS] "
+            + "[" + PREFIX_ROLE + "ROLE]...\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -95,9 +98,10 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Set<Event> updatedEvents = editPersonDescriptor.getEvents().orElse(personToEdit.getEvents());
         Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(personToEdit.getRoles());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedRoles);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedEvents, updatedRoles);
     }
 
     @Override
@@ -131,6 +135,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private Set<Event> events;
         private Set<Role> roles;
 
         public EditPersonDescriptor() {}
@@ -143,6 +148,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setEvents(toCopy.events);
             setRoles(toCopy.roles);
         }
 
@@ -150,7 +156,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, roles);
+            return CollectionUtil.isAnyNonNull(name, phone, email, events, roles);
         }
 
         public void setName(Name name) {
@@ -175,6 +181,14 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public void setEvents(Set<Event> events) {
+            this.events = (events != null) ? new HashSet<>(events) : null;
+        }
+
+        public Optional<Set<Event>> getEvents() {
+            return (events != null) ? Optional.of(Collections.unmodifiableSet(events)) : Optional.empty();
         }
 
         /**
@@ -208,6 +222,7 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
+                    && Objects.equals(events, otherEditPersonDescriptor.events)
                     && Objects.equals(roles, otherEditPersonDescriptor.roles);
         }
 
@@ -217,6 +232,7 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
+                    .add("events", events)
                     .add("roles", roles)
                     .toString();
         }

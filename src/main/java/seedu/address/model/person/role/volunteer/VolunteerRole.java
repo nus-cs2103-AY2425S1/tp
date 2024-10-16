@@ -1,5 +1,8 @@
 package seedu.address.model.person.role.volunteer;
 
+/**
+ * Represents a Volunteer role type in the address book.
+ */
 public enum VolunteerRole {
     PHOTOGRAPHER,
     EMCEE,

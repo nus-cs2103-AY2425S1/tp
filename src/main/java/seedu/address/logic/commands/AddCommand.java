@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -20,17 +21,19 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
-                                               + "Parameters: "
-                                               + PREFIX_NAME + "NAME "
-                                               + PREFIX_PHONE + "PHONE "
-                                               + PREFIX_EMAIL + "EMAIL "
-                                               + "[" + PREFIX_ROLE + "ROLE]...\n"
-                                               + "Example: " + COMMAND_WORD + " "
-                                               + PREFIX_NAME + "John Doe "
-                                               + PREFIX_PHONE + "98765432 "
-                                               + PREFIX_EMAIL + "johnd@example.com "
-                                               + PREFIX_ROLE + "friends "
-                                               + PREFIX_ROLE + "owesMoney";
+            + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_EVENT + "EVENTS "
+            + "[" + PREFIX_ROLE + "ROLE]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_PHONE + "98765432 "
+            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_EVENT + "IFG"
+            + PREFIX_ROLE + "friends "
+            + PREFIX_ROLE + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

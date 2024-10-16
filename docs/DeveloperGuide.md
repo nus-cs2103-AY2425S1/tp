@@ -263,7 +263,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-Sports Event (e.g. IFG) Organisers that need to manage and contact: 
+Sports Event (e.g. IFG) Organisers that need to manage and contact:
 - Audience
 - Athletes
 - Committee Members
@@ -273,15 +273,15 @@ and more.
 
 This person prefers CLI over GUI and has many event participants to keep track of.
 
-**Value proposition**: 
+**Value proposition**:
 
 All event organizers will be able to:
-- View what kind of participant each contact is in the application is 
+- View what kind of participant each contact is in the application is
 without having to dig through paperwork / NUSync.
-- View how participants are grouped by membership (e.g. faculty sports team) 
+- View how participants are grouped by membership (e.g. faculty sports team)
 without having to dig through paperwork / NUSync.
-- Track the particular participant’s involvement in the event’s sub-events 
-(e.g. IFG has multiple sub-events that stakeholders can take part in) 
+- Track the particular participant’s involvement in the event’s sub-events
+(e.g. IFG has multiple sub-events that stakeholders can take part in)
 without having to dig through paperwork / NUSync.
 
 
@@ -289,36 +289,36 @@ without having to dig through paperwork / NUSync.
 
 Priorities: High (must have) - `HIGH`, Medium (nice to have) - `MED`, Low (unlikely to have) - `LOW`
 
-| Priority | As a …​         | I want to …​                                                                      | So that I can…​                                                        |
-|----------|-----------------|-----------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| `HIGH`   | first-time user | view a brief tutorial on using CLI commands                                       | understand the basic functions and navigation of the app               |
-| `HIGH`   | first-time user | see a list of available commands and their descriptions                           | familiarize myself with the list of commands and app functions         |
-| `HIGH`   | first-time user | add a new participant                                                             | start building my participant list from scratch                        |
-| `HIGH`   | first-time user | view a summary of all participants grouped by their sport categories              | get an overview of participant distribution                            |
-| `HIGH`   | first-time user | search for participants by name or ID                                             | locate details of persons without having to go through the entire list |
-| `HIGH`   | first-time user | view a list of participants for a specific sub-event                              | understand how participants are scheduled and grouped                  |
-| `HIGH`   | first-time user | save the current participant list and details to a file                           | back up my participant records and access them later                   |
-| `HIGH`   | familiar user   | update a participant's details                                                    | keep participant records current and accurate                          |
-| `HIGH`   | familiar user   | assign participants to specific sub-events                                        | track their involvement and ensure proper scheduling                   |
-| `HIGH`   | familiar user   | group participants by their faculty membership                                    | manage and organize participants according to faculty membership       |
-| `HIGH`   | familiar user   | delete a participant                                                              | remove outdated or incorrect participant records                       |
-| `MED`    | first-time user | view detailed information about a participant on a separate tab from main search  | ensure I have accurate and complete information on a participant       |
-| `MED`    | first-time user | view a sample event schedule with participants' relevant details shown            | understand how to manage and track participants' involvement           |
-| `MED`    | first-time user | access help documentation directly from the CLI                                   | get assistance with using various features of the application          |
-| `MED`    | familiar user   | search for participants based on multiple criteria                                | find specific groups of participants efficiently                       |
-| `MED`    | familiar user   | view a summary of a participant’s involvement in past sub-events                  | understand their history and performance in previous events            |
-| `MED`    | familiar user   | import participant details from a CSV file                                        | quickly add multiple participants                                      |
-| `MED`    | expert user     | create custom participant fields specific to different types of events            | tailor the application to various event requirements                   |
-| `MED`    | expert user     | customize CLI command shortcuts and aliases for frequently used actions           | enhance productivity and streamline workflows                          |
-| `MED`    | expert user     | use advanced search filters to find participants                                  | find participants based on specific information with precision         |
-| `MED`    | familiar user   | export participant details to a CSV file                                          | share participant records with others                                  |
-| `LOW`    | familiar user   | view a report of participants based on their sport category or faculty membership | understand how participants are distributed                            |
-| `LOW`    | familiar user   | view edit history of participant details                                          | track updates and maintain data integrity                              |
-| `LOW`    | expert user     | bulk import participant details from multiple CSV files                           | treamline data entry for large-scale events                            |
-| `LOW`    | expert user     | set up automated notifications for participants based on their roles              | keep them informed without manual follow-up                            |
-| `LOW`    | expert user     | bulk update participant details or sub-event assignments                          | efficiently manage changes for large numbers of participants           |
-| `LOW`    | expert user     | generate complex, customized reports combining multiple data points               | gain detailed insights into event management                           |
-| `LOW`    | expert user     | schedule regular backups of participant database                                  | ensure data is protected and recoverable in case of issues             |
+| Priority | As a …​         | I want to …​                                                                      | So that I can…​                                                             |
+|----------|-----------------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| `HIGH`   | first-time user | view a brief tutorial on using CLI commands                                       | understand the basic functions and navigation of the app                    |
+| `HIGH`   | first-time user | see a list of available commands and their descriptions                           | familiarize myself with the list of commands and app functions              |
+| `HIGH`   | first-time user | add a new participant                                                             | start building my participant list from scratch                             |
+| `HIGH`   | first-time user | view a summary of all participants grouped by their sport categories              | get an overview of participant distribution                                 |
+| `HIGH`   | first-time user | search for participants by name, phone number or email                            | locate details of participants without having to go through the entire list |
+| `HIGH`   | first-time user | view a list of participants for a specific sub-event                              | understand how participants are scheduled and grouped                       |
+| `HIGH`   | first-time user | save the current participant list and details to a file                           | back up my participant records and access them later                        |
+| `HIGH`   | familiar user   | update a participant's details                                                    | keep participant records current and accurate                               |
+| `HIGH`   | familiar user   | assign participants to specific sub-events                                        | track their involvement and ensure proper scheduling                        |
+| `HIGH`   | familiar user   | group participants by their faculty membership                                    | manage and organize participants according to faculty membership            |
+| `HIGH`   | familiar user   | delete a participant                                                              | remove outdated or incorrect participant records                            |
+| `MED`    | first-time user | view detailed information about a participant on a separate tab from main search  | ensure I have accurate and complete information on a participant            |
+| `MED`    | first-time user | view a sample event schedule with participants' relevant details shown            | understand how to manage and track participants' involvement                |
+| `MED`    | first-time user | access help documentation directly from the CLI                                   | get assistance with using various features of the application               |
+| `MED`    | familiar user   | search for participants based on multiple criteria                                | find specific groups of participants efficiently                            |
+| `MED`    | familiar user   | view a summary of a participant’s involvement in past sub-events                  | understand their history and performance in previous events                 |
+| `MED`    | familiar user   | import participant details from a CSV file                                        | quickly add multiple participants                                           |
+| `MED`    | expert user     | create custom participant fields specific to different types of events            | tailor the application to various event requirements                        |
+| `MED`    | expert user     | customize CLI command shortcuts and aliases for frequently used actions           | enhance productivity and streamline workflows                               |
+| `MED`    | expert user     | use advanced search filters to find participants                                  | find participants based on specific information with precision              |
+| `MED`    | familiar user   | export participant details to a CSV file                                          | share participant records with others                                       |
+| `LOW`    | familiar user   | view a report of participants based on their sport category or faculty membership | understand how participants are distributed                                 |
+| `LOW`    | familiar user   | view edit history of participant details                                          | track updates and maintain data integrity                                   |
+| `LOW`    | expert user     | bulk import participant details from multiple CSV files                           | treamline data entry for large-scale events                                 |
+| `LOW`    | expert user     | set up automated notifications for participants based on their roles              | keep them informed without manual follow-up                                 |
+| `LOW`    | expert user     | bulk update participant details or sub-event assignments                          | efficiently manage changes for large numbers of participants                |
+| `LOW`    | expert user     | generate complex, customized reports combining multiple data points               | gain detailed insights into event management                                |
+| `LOW`    | expert user     | schedule regular backups of participant database                                  | ensure data is protected and recoverable in case of issues                  |
 
 
 ### Use cases
@@ -477,33 +477,33 @@ Use case resumes from step 2.
 ### Non-Functional Requirements
 
 #### 1. Additional Requirements
-1.1. The system should work on any **mainstream OS** as long as it has **Java 17** or above installed.  
-1.2. The system should be able to hold up to **1,000 persons** without noticeable sluggishness in performance for typical usage.  
+1.1. The system should work on any **mainstream OS** as long as it has **Java 17** or above installed.
+1.2. The system should be able to hold up to **1,000 persons** without noticeable sluggishness in performance for typical usage.
 1.3. A user with **above average typing speed** for regular English text (i.e. not code, not system admin commands) should be able to accomplish most tasks faster using commands than using the mouse.
 
 #### 2. Performance
-2.1. The system should respond within **2 seconds** after the user types in a command.  
+2.1. The system should respond within **2 seconds** after the user types in a command.
 2.2. The system should start up within **5 seconds**.
 
 #### 3. Scalability
-3.1. The system should be able to handle up to **10,000+ users** without degradation in performance.  
-3.2. An event should be able to handle **1,000+ participants**.  
+3.1. The system should be able to handle up to **10,000+ users** without degradation in performance.
+3.2. An event should be able to handle **1,000+ participants**.
 3.3. A participant should be able to keep track of **10+ events** at once.
 
 #### 4. Portability
-4.1. The system should run on **all OS systems** (e.g. Windows, Mac, Linux).  
+4.1. The system should run on **all OS systems** (e.g. Windows, Mac, Linux).
 4.2. The system should work on both **32-bit and 64-bit environments**.
 
 #### 5. Security
 5.1. Sensitive data should be **safely encrypted**.
 
 #### 6. Maintainability
-6.1. Codebase should be easy to maintain and follow **industry-standard design practices**.  
-6.2. **Coupling** should be reduced to allow for easier testing of features.  
+6.1. Codebase should be easy to maintain and follow **industry-standard design practices**.
+6.2. **Coupling** should be reduced to allow for easier testing of features.
 6.3. Codebase should aim for **high cohesion** to increase the understandability of individual components.
 
 #### 7. Usability
-7.1. The system should be **easy-to-use** for a novice, who does not have a lot of experience using CLI-based apps.  
+7.1. The system should be **easy-to-use** for a novice, who does not have a lot of experience using CLI-based apps.
 7.2. The system should offer a **user-friendly** and **intuitive CLI syntax**, minimizing the learning curve for new users.
 
 #### 8. Process

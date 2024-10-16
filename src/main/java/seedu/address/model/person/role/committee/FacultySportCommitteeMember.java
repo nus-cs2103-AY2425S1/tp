@@ -17,11 +17,11 @@ public class FacultySportCommitteeMember extends CommitteeMember {
     public FacultySportCommitteeMember(Faculty faculty, Position position) {
         super(Branch.SPORTS, position);
         this.faculty = faculty;
-        this.roleName += " - " + faculty;
+        setRoleName(getRoleName() + " - " + faculty);
     }
 
     @Override
     public String toString() {
-        return "[" + roleName + " - " + getBranch() + " " + PositionString.getPositionString(getPosition()) + "]";
+        return "[" + getRoleName() + " - " + getBranch() + " " + PositionString.getPositionString(getPosition()) + "]";
     }
 }

@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -14,14 +15,15 @@ import seedu.address.model.util.SampleDataUtil;
  * A utility class to help with building Person objects.
  */
 public class PersonBuilder {
-
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_EVENT = "IFG";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private Set<Event> events;
     private Set<Role> roles;
 
     /**
@@ -31,6 +33,8 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        events = new HashSet<>();
+        events.add(new Event(DEFAULT_EVENT));
         roles = new HashSet<>();
     }
 
@@ -41,6 +45,7 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
+        events = new HashSet<>(personToCopy.getEvents());
         roles = new HashSet<>(personToCopy.getRoles());
     }
 
@@ -61,6 +66,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withEvents(String ... events) {
+        this.events = SampleDataUtil.getEventSet(events);
+        return this;
+    }
+
+    /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
@@ -77,7 +90,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, roles);
+        return new Person(name, phone, email, events, roles);
     }
 
 }

@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -16,6 +17,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.role.Role;
 
 /**
@@ -31,7 +33,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_EVENT, PREFIX_ROLE);
 
         Index index;
 
@@ -54,6 +56,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
+        parseEventsForEdit(argMultimap.getAllValues(PREFIX_EVENT)).ifPresent(editPersonDescriptor::setEvents);
         parseRolesForEdit(argMultimap.getAllValues(PREFIX_ROLE)).ifPresent(editPersonDescriptor::setRoles);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
@@ -78,4 +81,13 @@ public class EditCommandParser implements Parser<EditCommand> {
         return Optional.of(ParserUtil.parseRoles(roleSet));
     }
 
+    private Optional<Set<Event>> parseEventsForEdit(Collection<String> events) throws ParseException {
+        assert events != null;
+
+        if (events.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> eventSet = events.size() == 1 && events.contains("") ? Collections.emptySet() : events;
+        return Optional.of(ParserUtil.parseEvents(eventSet));
+    }
 }

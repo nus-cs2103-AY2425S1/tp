@@ -9,17 +9,18 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.role.Faculty;
-import seedu.address.model.person.role.committee.Position;
 import seedu.address.model.person.role.Role;
 import seedu.address.model.person.role.athlete.Athlete;
 import seedu.address.model.person.role.athlete.Sport;
 import seedu.address.model.person.role.committee.Branch;
 import seedu.address.model.person.role.committee.CommitteeMember;
 import seedu.address.model.person.role.committee.FacultySportCommitteeMember;
+import seedu.address.model.person.role.committee.Position;
 import seedu.address.model.person.role.sponsor.Sponsor;
 import seedu.address.model.person.role.volunteer.Volunteer;
 import seedu.address.model.person.role.volunteer.VolunteerRole;
@@ -72,6 +73,21 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
+    }
+
+    /**
+     * Parses a {@code String event} into a {@code Event}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Event} is invalid.
+     */
+    public static Event parseEvent(String event) throws ParseException {
+        requireNonNull(event);
+        String trimmedEvent = event.trim();
+        if (!Event.isValidEvent(trimmedEvent)) {
+            throw new ParseException(Event.MESSAGE_CONSTRAINTS);
+        }
+        return new Event(trimmedEvent);
     }
 
     /**
@@ -223,4 +239,18 @@ public class ParserUtil {
         }
         return roleSet;
     }
+
+    /**
+     * Parses {@code Collection<String> events} into a {@code Set<Event>}.
+     */
+
+    public static Set<Event> parseEvents(Collection<String> events) throws ParseException {
+        requireNonNull(events);
+        final Set<Event> eventSet = new HashSet<>();
+        for (String eventName: events) {
+            eventSet.add(parseEvent(eventName));
+        }
+        return eventSet;
+    }
+
 }
