@@ -6,6 +6,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ListClaimsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses the given {@code String} of arguments in the context of the ListClaimsCommand
+ * and returns a ListClaimsCommand object for execution.
+ * @throws ParseException if the user input does not conform the expected format
+ */
 public class ListClaimsCommandParser implements Parser<ListClaimsCommand> {
 
     /**
