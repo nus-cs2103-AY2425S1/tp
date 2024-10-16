@@ -1,7 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CAREER_PAGE_URL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 
 import java.util.Collections;
@@ -17,7 +22,12 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.company.*;
+import seedu.address.model.company.Address;
+import seedu.address.model.company.CareerPageUrl;
+import seedu.address.model.company.Company;
+import seedu.address.model.company.Email;
+import seedu.address.model.company.Name;
+import seedu.address.model.company.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -92,7 +102,8 @@ public class EditCommand extends Command {
         Phone updatedPhone = editCompanyDescriptor.getPhone().orElse(companyToEdit.getPhone());
         Email updatedEmail = editCompanyDescriptor.getEmail().orElse(companyToEdit.getEmail());
         Address updatedAddress = editCompanyDescriptor.getAddress().orElse(companyToEdit.getAddress());
-        CareerPageUrl updatedCareerPageUrl = editCompanyDescriptor.getCareerPageUrl().orElse(companyToEdit.getCareerPageUrl());
+        CareerPageUrl updatedCareerPageUrl = editCompanyDescriptor.getCareerPageUrl()
+                .orElse(companyToEdit.getCareerPageUrl());
         Set<Tag> updatedTags = editCompanyDescriptor.getTags().orElse(companyToEdit.getTags());
 
         return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCareerPageUrl, updatedTags);
