@@ -19,7 +19,6 @@ import hallpointer.address.logic.commands.FindMemberCommand;
 import hallpointer.address.logic.commands.HelpCommand;
 import hallpointer.address.logic.commands.ListMembersCommand;
 import hallpointer.address.logic.commands.UpdateMemberCommand;
-import hallpointer.address.logic.commands.UpdateSessionCommand;
 import hallpointer.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -67,9 +66,6 @@ public class AddressBookParser {
 
         case AddSessionCommand.COMMAND_WORD:
             return new AddSessionCommandParser().parse(arguments);
-
-        case UpdateSessionCommand.COMMAND_WORD:
-            return new UpdateSessionCommandParser().parse(arguments);
 
         case DeleteSessionCommand.COMMAND_WORD:
             return new DeleteSessionCommandParser().parse(arguments);

@@ -217,7 +217,7 @@ class AddSessionCommandTest {
     /**
      * A Model stub that always accept the member being added.
      */
-    private class ModelStubAcceptingSessionAdded extends AddMemberCommandTest.ModelStub {
+    private class ModelStubAcceptingSessionAdded extends AddSessionCommandTest.ModelStub {
         final ArrayList<Member> membersAdded = new ArrayList<>();
 
         @Override
