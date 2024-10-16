@@ -4,7 +4,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BIRTHDAY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_WEDDING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BIRTHDAY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_WEDDING;
-import static seedu.address.testutil.TypicalVendors.getTypicalVendors;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,7 +11,6 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.event.Event;
-import seedu.address.model.vendor.Vendor;
 
 /**
  * A utility class containing a list of {@code Event} objects to be used in
