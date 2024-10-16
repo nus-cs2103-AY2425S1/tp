@@ -33,7 +33,7 @@ public class ListLogsCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         //TODO: Handle behaviour later
-        //model.updateFilteredPersonList(this.identityNumber);
+        //model.updateFilteredLogsList(this.identityNumber);
         return new CommandResult(MESSAGE_SUCCESS + this.identityNumber.toString());
     }
 
