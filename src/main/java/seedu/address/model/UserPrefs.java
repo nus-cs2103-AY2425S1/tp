@@ -38,6 +38,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setAppointmentBookFilePath(newUserPrefs.getAppointmentBookFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -54,7 +55,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     }
 
     public Path getAppointmentBookFilePath() {
-        return appointmentBookFilePath; }
+        return appointmentBookFilePath; 
+    }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
@@ -92,7 +94,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal address book data data file location : " + addressBookFilePath);
+        sb.append("\nLocal address book data file location : " + addressBookFilePath);
         sb.append("\nLocal appointment book data file location : " + appointmentBookFilePath);
         return sb.toString();
     }

@@ -14,4 +14,8 @@ public interface ReadOnlyAppointmentBook {
      */
     ObservableList<Appointment> getAppointmentList();
 
+    /**
+     * Returns the next appointment ID
+     */
+    int getNextAppointmentId();
 }

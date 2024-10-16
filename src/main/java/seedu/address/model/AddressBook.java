@@ -16,7 +16,7 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private int counter;
+    private int nextPersonId;
     private final UniquePersonList persons;
 
     /*
@@ -31,7 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public AddressBook() {
-        counter = 0;
+        nextPersonId = 0;
     }
 
     /**
@@ -42,12 +42,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         resetData(toBeCopied);
     }
 
-    public int getCounter() {
-        return counter;
+    public int getNextPersonId() {
+        return nextPersonId;
     }
 
-    public void setCounter(int counter) {
-        this.counter = counter;
+    public void setNextPersonId(int personId) {
+        this.nextPersonId = personId;
     }
 
     //// list overwrite operations
@@ -66,7 +66,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setCounter(newData.getCounter());
+        setNextPersonId(newData.getNextPersonId());
         setPersons(newData.getPersonList());
     }
 
@@ -93,18 +93,19 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
-        ++counter;
+    public void addPerson(Person person) {
+        persons.add(person);
+        ++nextPersonId;
     }
 
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
-    public int addPerson(PersonDescriptor p) {
-        persons.add(new Person(counter, p));
-        return ++counter;
+    public int addPerson(PersonDescriptor personDescriptor) {
+        requireNonNull(personDescriptor);
+        persons.add(new Person(nextPersonId, personDescriptor));
+        return ++nextPersonId;
     }
 
     /**

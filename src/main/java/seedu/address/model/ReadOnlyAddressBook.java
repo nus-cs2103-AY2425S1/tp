@@ -15,7 +15,7 @@ public interface ReadOnlyAddressBook {
     ObservableList<Person> getPersonList();
 
     /**
-     * Returns the current counter
+     * Returns the next person ID
      */
-    int getCounter();
+    int getNextPersonId();
 }
