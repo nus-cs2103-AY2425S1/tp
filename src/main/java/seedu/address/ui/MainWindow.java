@@ -5,8 +5,8 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -124,7 +124,7 @@ public class MainWindow extends UiPart<Stage> {
 
         splitPane = new SplitPane();
         splitPane.getItems().addAll(personListPanel.getRoot(), scrollableContactDisplay);
-        splitPane.setDividerPositions(0.7);
+        splitPane.setDividerPositions(0.6);
 
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(splitPane);
@@ -170,6 +170,7 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             helpWindow.focus();
         }
+        contactDisplay.showHelpDisplay();
     }
 
     void show() {
