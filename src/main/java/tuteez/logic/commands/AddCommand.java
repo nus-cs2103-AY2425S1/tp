@@ -37,7 +37,7 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TELEGRAM + "johndoe123 "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney"
+            + PREFIX_TAG + "owesMoney "
             + PREFIX_TAG + "Physics "
             + PREFIX_TAG + "Secondary 4 "
             + PREFIX_LESSON + "monday 0900-1100 "
