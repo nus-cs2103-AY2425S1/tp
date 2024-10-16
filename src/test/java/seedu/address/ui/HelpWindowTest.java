@@ -83,10 +83,8 @@ public class HelpWindowTest {
 
     @BeforeEach
     public void setUp() {
-        // Mock the HelpWindow
         helpWindow = mock(HelpWindow.class);
 
-        // Define the expected behavior of the mocked methods
         Color expectedColor = Color.rgb(173, 216, 230);
         when(helpWindow.getHyperlinkTextFill()).thenReturn(expectedColor);
         when(helpWindow.isHyperlinkTextUnderlined()).thenReturn(true);
@@ -96,7 +94,6 @@ public class HelpWindowTest {
     public void testHyperlinkTextProperties() {
         assertNotNull(helpWindow);
 
-        // Use the mocked methods to verify
         assertEquals(Color.rgb(173, 216, 230), helpWindow.getHyperlinkTextFill());
         assertTrue(helpWindow.isHyperlinkTextUnderlined());
     }
@@ -105,7 +102,6 @@ public class HelpWindowTest {
     public void testOpenUserGuide() throws Exception {
         MouseEvent event = mock(MouseEvent.class);
 
-        // Assuming openUserGuide does not depend on actual UI behavior in the mock
         assertDoesNotThrow(() -> helpWindow.openUserGuide(event));
     }
 }
