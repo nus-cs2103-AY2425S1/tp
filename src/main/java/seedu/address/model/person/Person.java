@@ -90,11 +90,24 @@ public class Person {
     }
 
 
+    /**
+     * Sets the attendance for a specific date and returns a new Person object with the updated attendance list.
+     *
+     * @param date The date for which the attendance is to be set.
+     * @param attendance The attendance status to be set for the specified date.
+     * @return A new Person object with the updated attendance list.
+     */
     public Person setAttendance(LocalDateTime date, Attendance attendance) {
         AttendanceList newAttendanceList = attendanceList.setAttendance(date, attendance);
         return new Person(name, phone, email, address, tags, gradeList, newAttendanceList);
     }
 
+    /**
+     * Removes the attendance record for the specified date from the person's attendance list.
+     *
+     * @param date The date of the attendance record to be removed.
+     * @return A new Person object with the updated attendance list.
+     */
     public Person removeAttendance(LocalDateTime date) {
         AttendanceList newAttendanceList = attendanceList.removeAttendance(date);
         return new Person(name, phone, email, address, tags, gradeList, newAttendanceList);
