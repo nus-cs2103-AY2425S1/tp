@@ -33,7 +33,6 @@
                 </Label>
                 <Label fx:id="name" styleClass="cell_big_label" text="Name: $first" />
             </HBox>
-            <FlowPane fx:id="tags" />
             <HBox>
                 <Label text="Tut Group: " styleClass="cell_small_label" />
                 <Label fx:id="tutorialGroup" styleClass="cell_small_label" text="Tut Group: $tutorialGroup" />
@@ -45,6 +44,10 @@
             <HBox>
                 <Label text="Student Number: " styleClass="cell_small_label" />
                 <Label fx:id="studentNumber" styleClass="cell_small_label" text="Student Number: $studentNumber" />
+            </HBox>
+            <HBox>
+                <Label text="Assignment: " styleClass="cell_small_label" />
+                <FlowPane fx:id="assignments" HBox.hgrow="ALWAYS"/>
             </HBox>
         </VBox>
       <rowConstraints>
