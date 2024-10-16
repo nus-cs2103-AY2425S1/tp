@@ -112,8 +112,6 @@ Edits an existing client in Clientele+.
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
 
-<div markdown="block" class="alert alert-info">
-
 ****
 * `NAME` Acceptable values are same as in add command
 * `PHONE_NUMBER` Acceptable values are same as in add command
