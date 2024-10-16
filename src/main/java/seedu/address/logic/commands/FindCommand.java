@@ -36,7 +36,7 @@ public class FindCommand extends Command {
      */
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
-        ownerPredicate = null;
+        this.ownerPredicate = null;
         isOwnerSearch = false;
     }
 
@@ -79,7 +79,12 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+
+        if (isOwnerSearch) {
+            return ownerPredicate.equals(otherFindCommand.ownerPredicate);
+        } else {
+            return (predicate.equals(otherFindCommand.predicate));
+        }
     }
 
     @Override

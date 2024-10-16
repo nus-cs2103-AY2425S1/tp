@@ -40,8 +40,8 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         case "owner":
             return new FindCommand(new OwnerNameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        case "pet":
-            return null; /* pet find command here */
+        /* case "pet":
+            return (pet find command here) */
         default:
             // consider removing next 2 lines when PawPatrol is fully functional?
             String[] nameKeywords = trimmedArgs.split("\\s+");
