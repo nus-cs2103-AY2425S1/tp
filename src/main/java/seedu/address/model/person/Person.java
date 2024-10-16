@@ -34,6 +34,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.price = new Price(0.0);
     }
 
     public Name getName() {
@@ -72,6 +73,34 @@ public class Person {
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
     }
+
+    /**
+     * Returns a Price object based on the string value of the priceString.
+     * @param priceString the string representation of the price
+     * @return a Price object with the parsed value
+     * @throws IllegalArgumentException if the input is invalid
+     */
+    public static Price fromString(String priceString) {
+        // Check if the input is null or empty
+        if (priceString == null || priceString.isEmpty()) {
+            throw new IllegalArgumentException("Price string cannot be null or empty");
+        }
+
+        try {
+            // Remove leading and trailing whitespaces
+            String cleanedString = priceString.trim();
+            
+            // Convert the cleaned string to a numeric value
+            double value = Double.parseDouble(cleanedString);
+            
+            // Return a new Price object with the parsed value
+            return new Price(value);
+        } catch (NumberFormatException e) {
+            // Handle cases where the string cannot be converted to a valid number
+            throw new IllegalArgumentException("Invalid price format: " + priceString, e);
+        }
+    }
+
 
     /**
      * Returns true if both persons have the same identity and data fields.
