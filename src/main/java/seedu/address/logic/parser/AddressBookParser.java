@@ -40,7 +40,6 @@ public class AddressBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
-        System.out.println("here");
         if (userInput.trim().length() >= 2 &&
                 userInput.trim().substring(userInput.trim().length()-2).equals(
                 PREFIX_TAG.getPrefix().trim()) && userInput.trim().length() < userInput.length()) {

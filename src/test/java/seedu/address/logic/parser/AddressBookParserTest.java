@@ -42,6 +42,14 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_add_remark() throws Exception {
+        AddCommand command = (AddCommand) parser.parseCommand(
+                ":add -n yay -p 09873 -e ayyy@g.com -l yayyyy -t 123 -r why"
+        );
+        System.out.println(command.toString());
+    }
+
+    @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);

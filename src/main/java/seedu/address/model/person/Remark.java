@@ -9,6 +9,8 @@ import static java.util.Objects.requireNonNull;
 public class Remark {
     public final String value;
 
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+
     /**
      * Constructs a {@code Remark}.
      *
@@ -17,6 +19,10 @@ public class Remark {
     public Remark(String remark) {
         requireNonNull(remark);
         value = remark;
+    }
+
+    public static boolean isValidRemark(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
