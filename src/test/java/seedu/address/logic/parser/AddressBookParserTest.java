@@ -6,6 +6,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.SortCommand.ASCENDING;
 import static seedu.address.logic.commands.SortCommand.DESCENDING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEWTAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OLDTAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -26,6 +28,7 @@ import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RenameTagCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -114,11 +117,21 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
+
+    @Test
+    public void parseCommand_renameTag() throws Exception {
+        RenameTagCommand command = (RenameTagCommand) parser.parseCommand(
+                RenameTagCommand.COMMAND_WORD + " " + PREFIX_OLDTAG + "friends" + " " + PREFIX_NEWTAG
+                        + "enemies");
+        assertEquals(new RenameTagCommand("friends", "enemies"), command);
+    }
 }
+
+

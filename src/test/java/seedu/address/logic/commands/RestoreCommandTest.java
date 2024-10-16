@@ -147,6 +147,11 @@ public class RestoreCommandTest {
         public void sortFilteredPersonList(String order) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ObservableList<Person> getPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     private class ModelStubWithDeletedPerson extends ModelStub {
