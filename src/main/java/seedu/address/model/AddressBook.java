@@ -115,7 +115,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         List<Policy> allPolicies = new ArrayList<>();
         for (Person person : persons) {
             PolicySet pset = person.getPolicySet();
-            allPolicies.addAll(pset.getAllPolicies());
+            allPolicies.addAll(pset);
         }
         return FXCollections.observableList(allPolicies);
     }
