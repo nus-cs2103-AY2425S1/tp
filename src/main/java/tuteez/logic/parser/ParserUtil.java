@@ -142,7 +142,8 @@ public class ParserUtil {
         return TelegramUsername.of(trimmedUsername);
     }
 
-    /** Parses a {@code String lesson} into a {@code Lesson}.
+    /**
+     * Parses a {@code String lesson} into a {@code Lesson}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.
