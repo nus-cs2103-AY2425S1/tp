@@ -1,18 +1,16 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
+
+import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.owner.OwnerNameContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindCommand extends Command {
+public abstract class FindCommand<T> extends Command {
 
     public static final String COMMAND_WORD = "find";
 
@@ -24,44 +22,18 @@ public class FindCommand extends Command {
             + "Example: find owner bobby, find pet golden retriever";
 
 
-    private final NameContainsKeywordsPredicate predicate;
-    private final OwnerNameContainsKeywordsPredicate ownerPredicate;
-
-    /* field for PetContainsKeywordsPredicate */
-    private final boolean isOwnerSearch; // indicates if second word of argument is OWNER or PET
-
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
-        ownerPredicate = null;
-        isOwnerSearch = false;
-    }
+    protected final Predicate<T> predicate;
 
     /**
-     * Constructor for finding owners.
-     * @param ownerPredicate Owner predicate.
+     * Constructor for finding any entitty.
+     * @param predicate Predicate for entity.
      */
-    public FindCommand(OwnerNameContainsKeywordsPredicate ownerPredicate) {
-        predicate = null;
-        this.ownerPredicate = ownerPredicate;
-        isOwnerSearch = true;
+    public FindCommand(Predicate<T> predicate) {
+        this.predicate = predicate;
     }
-
-    /* Constructor for finding pets here */
 
     @Override
-    public CommandResult execute(Model model) {
-        requireNonNull(model);
-        if (isOwnerSearch) {
-            model.updateFilteredOwnerList(ownerPredicate);
-            return new CommandResult(
-                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredOwnerList().size()));
-        } else {
-            /* PET search here */
-            model.updateFilteredPersonList(predicate);
-            return new CommandResult(
-                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
-        }
-    }
+    public abstract CommandResult execute(Model model);
 
     @Override
     public boolean equals(Object other) {
@@ -70,11 +42,11 @@ public class FindCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof FindCommand) ) {
             return false;
         }
 
-        FindCommand otherFindCommand = (FindCommand) other;
+        FindCommand<?> otherFindCommand = (FindCommand<?>) other;
         return predicate.equals(otherFindCommand.predicate);
     }
 
