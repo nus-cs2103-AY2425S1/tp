@@ -73,7 +73,7 @@ public class Company {
     }
 
     public List<Application> getApplications() {
-        return  Collections.unmodifiableList(applications);
+        return Collections.unmodifiableList(applications);
     }
 
     /**
