@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_OWNERS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
@@ -14,7 +15,6 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -98,7 +98,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noOwnerFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         OwnerNameContainsKeywordsPredicate predicate = prepareOwnerPredicate(" ");
         FindOwnerCommand command = new FindOwnerCommand(predicate);
         expectedOwnerModel.updateFilteredOwnerList(predicate);
@@ -118,7 +118,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleOwnersFound() {
-        String expectedOwnerMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedOwnerMessage = String.format(MESSAGE_OWNERS_LISTED_OVERVIEW, 3);
         OwnerNameContainsKeywordsPredicate ownerPredicate = prepareOwnerPredicate("Kurz Elle Kunz");
         FindOwnerCommand commandOwner = new FindOwnerCommand(ownerPredicate);
         expectedOwnerModel.updateFilteredOwnerList(ownerPredicate);

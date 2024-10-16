@@ -7,11 +7,21 @@ import seedu.address.model.Model;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.PetNameContainsKeywordsPredicate;
 
+/**
+ * Finds and lists all pets in the address book whose name contains any of the argument keywords.
+ */
 public class FindPetCommand extends FindCommand<Pet> {
+    /**
+     * Constructs a {@code FindPetCommand} with the specified {@code PetNameContainsKeywordsPredicate}.
+     */
     public FindPetCommand(PetNameContainsKeywordsPredicate predicate) {
         super(predicate);
     }
 
+    /**
+     * Executes the find pet command.
+     * @param model {@code Model} which the command should operate on.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

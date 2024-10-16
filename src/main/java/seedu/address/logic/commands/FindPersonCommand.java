@@ -7,11 +7,21 @@ import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
+/**
+ * Finds and lists all persons in the address book whose name contains any of the argument keywords.
+ */
 public class FindPersonCommand extends FindCommand<Person> {
+    /**
+     * Constructs a {@code FindPersonCommand} with the specified {@code NameContainsKeywordsPredicate}.
+     */
     public FindPersonCommand(NameContainsKeywordsPredicate predicate) {
         super(predicate);
     }
 
+    /**
+     * Executes the find person command.
+     * @param model {@code Model} which the command should operate on.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

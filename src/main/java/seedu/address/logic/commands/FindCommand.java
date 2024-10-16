@@ -41,7 +41,7 @@ public abstract class FindCommand<T> extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand) ) {
+        if (!(other instanceof FindCommand)) {
             return false;
         }
 

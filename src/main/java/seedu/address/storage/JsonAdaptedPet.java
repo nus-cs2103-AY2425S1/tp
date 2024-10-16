@@ -7,7 +7,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.pet.*;
+import seedu.address.model.pet.Age;
+import seedu.address.model.pet.Breed;
+import seedu.address.model.pet.Name;
+import seedu.address.model.pet.Pet;
+import seedu.address.model.pet.Sex;
+import seedu.address.model.pet.Species;
 import seedu.address.model.tag.Tag;
 
 /**
