@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyAppointmentBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentDescriptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonDescriptor;
 import seedu.address.testutil.PersonBuilder;
@@ -168,6 +170,16 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public Path getAppointmentBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAppointmentBookFilePath(Path appointmentBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAppointmentBook(ReadOnlyAppointmentBook appointmentBook) {
             throw new AssertionError("This method should not be called.");
         }
@@ -183,12 +195,22 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public boolean hasAppointment(AppointmentDescriptor appointmentDescriptor) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<Person> findPerson(int personId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteAppointment(Appointment target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addAppointment(Appointment appointment) {
+        public Appointment addAppointment(Person person, AppointmentDescriptor appointmentDescriptor) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -239,12 +261,12 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public int addPerson(PersonDescriptor person) {
+        public Person addPerson(PersonDescriptor person) {
             requireNonNull(person);
             personsAdded.add(person);
 
             // Todo: implement proper test stub
-            return 0;
+            return new Person(0, person);
         }
 
         @Override

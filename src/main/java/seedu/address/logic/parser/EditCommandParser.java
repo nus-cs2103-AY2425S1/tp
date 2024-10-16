@@ -45,6 +45,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         String entityType = splitArgs[0];
         String indexString = splitArgs[1];
 
+        System.out.println(entityType == PERSON_ENTITY_STRING);
+
         switch (entityType) {
         case PERSON_ENTITY_STRING:
             ArgumentMultimap argMultimap =

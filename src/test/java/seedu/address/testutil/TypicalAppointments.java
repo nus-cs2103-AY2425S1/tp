@@ -6,6 +6,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICINE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICINE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SICKNESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SICKNESS_BOB;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -30,14 +33,14 @@ public class TypicalAppointments {
     public static final LocalDateTime DEFAULT_DATE_TIME_7 = LocalDateTime.of(2024, 10, 30, 15, 45);
 
     public static final Appointment APPOINTMENT_1 = new AppointmentBuilder()
-        .withAppointmentType("Health Checkup").withPersonId(1)
+        .withAppointmentType("Health Checkup").withPerson(BOB)
         .withSickness("Flu")
         .withMedicine("Panadol")
         .withDateTime(DEFAULT_DATE_TIME_1)
         .build();
 
     public static final Appointment APPOINTMENT_2 = new AppointmentBuilder()
-        .withAppointmentType("Dental Checkup").withPersonId(2)
+        .withAppointmentType("Dental Checkup").withPerson(AMY)
         .withSickness("Toothache")
         .withMedicine("Ibuprofen")
         .withDateTime(DEFAULT_DATE_TIME_2)
@@ -45,35 +48,35 @@ public class TypicalAppointments {
 
     public static final Appointment APPOINTMENT_3 = new AppointmentBuilder()
         .withAppointmentType("Eye Exam")
-        .withPersonId(3)
+        .withPerson(BOB)
         .withSickness("Eye Strain")
         .withMedicine("Eye Drops")
         .withDateTime(DEFAULT_DATE_TIME_3)
         .build();
 
     public static final Appointment APPOINTMENT_4 = new AppointmentBuilder()
-        .withAppointmentType("Physical Therapy").withPersonId(4)
+        .withAppointmentType("Physical Therapy").withPerson(AMY)
         .withSickness("Back Pain")
         .withMedicine("Paracetamol")
         .withDateTime(DEFAULT_DATE_TIME_4)
         .build();
 
     public static final Appointment APPOINTMENT_5 = new AppointmentBuilder()
-        .withAppointmentType("Vaccination").withPersonId(5)
+        .withAppointmentType("Vaccination").withPerson(BOB)
         .withSickness("None")
         .withMedicine("Vaccine")
         .withDateTime(DEFAULT_DATE_TIME_5)
         .build();
 
     public static final Appointment APPOINTMENT_6 = new AppointmentBuilder()
-        .withAppointmentType("Routine Checkup").withPersonId(6)
+        .withAppointmentType("Routine Checkup").withPerson(AMY)
         .withSickness("None")
         .withMedicine("None")
         .withDateTime(DEFAULT_DATE_TIME_6)
         .build();
 
     public static final Appointment APPOINTMENT_7 = new AppointmentBuilder()
-        .withAppointmentType("Consultation").withPersonId(7)
+        .withAppointmentType("Consultation").withPerson(BOB)
         .withSickness("Headache")
         .withMedicine("Aspirin")
         .withDateTime(DEFAULT_DATE_TIME_7)
@@ -81,14 +84,14 @@ public class TypicalAppointments {
 
     // Manually added
     public static final Appointment APPOINTMENT_8 = new AppointmentBuilder()
-        .withAppointmentType("Emergency Room").withPersonId(8)
+        .withAppointmentType("Emergency Room").withPerson(AMY)
         .withSickness("Injury")
         .withMedicine("Morphine")
         .withDateTime(DEFAULT_DATE_TIME_4)
         .build();
 
     public static final Appointment APPOINTMENT_9 = new AppointmentBuilder()
-        .withAppointmentType("Surgery Consultation").withPersonId(9)
+        .withAppointmentType("Surgery Consultation").withPerson(BOB)
         .withSickness("Pre-Surgery")
         .withMedicine("Pre-Meds")
         .withDateTime(DEFAULT_DATE_TIME_5)
