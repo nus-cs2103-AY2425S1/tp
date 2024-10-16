@@ -82,15 +82,13 @@ public class Assignment {
 
     @Override
     public String toString() {
-        return assignmentName.toString();
-        // This String is causing some issues with the UI for some reason, perhaps you might need
-        // return new ToStringBuilder(this)
-        //         .add("name", assignmentName)
-        //         .add("deadline", deadline)
-        //         .add("submission status", submissionStatus)
-        //         .add("grading status", gradingStatus)
-        //         .add("grade", grade)
-        //         .toString();
+        return new ToStringBuilder(this)
+                 .add("name", assignmentName)
+                 .add("deadline", deadline)
+                 .add("submission status", submissionStatus)
+                 .add("grading status", gradingStatus)
+                 .add("grade", grade)
+                 .toString();
     }
 
     @Override
