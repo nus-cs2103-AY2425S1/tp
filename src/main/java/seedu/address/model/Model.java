@@ -95,7 +95,7 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Returns an unmodifiable view of the filtered transaction list
+     * Returns an unmodifiable view of the filtered transaction list.
      */
     ObservableList<Transaction> getFilteredTransactionList();
     /**
@@ -103,7 +103,7 @@ public interface Model {
      *
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredTransactionList(Predicate<Transaction> predicate);
+    void updateTransactionListPredicate(Predicate<Transaction> predicate);
     /**
      * Specifies if transaction view or person view is used.
      */
@@ -113,9 +113,6 @@ public interface Model {
      * Determines if transaction view or person view is used.
      */
     boolean getViewTransactions();
-
-    /** Returns an unmodifiable view of the transaction list */
-    ObservableList<Transaction> getTransactionList();
 
     /**
      * Updates the transaction list to contain the specified transactions.

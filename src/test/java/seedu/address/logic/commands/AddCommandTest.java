@@ -161,30 +161,25 @@ public class AddCommandTest {
         }
 
         @Override
-<<<<<<< HEAD
         public ObservableList<Transaction> getFilteredTransactionList() {
-=======
-        public void updateTransactionList(List<Transaction> transactions) {
->>>>>>> a50674f2051ad04c1e08bcd7e00732b1089113f3
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-<<<<<<< HEAD
-        public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
-=======
+        public void updateTransactionListPredicate(Predicate<Transaction> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void updateTransactionList(List<Transaction> transactions) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public void setViewTransactions(boolean isViewTransaction) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean getViewTransactions() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Transaction> getTransactionList() {
->>>>>>> a50674f2051ad04c1e08bcd7e00732b1089113f3
             throw new AssertionError("This method should not be called.");
         }
     }
