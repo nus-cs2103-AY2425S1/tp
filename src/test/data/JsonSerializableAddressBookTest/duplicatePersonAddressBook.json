@@ -4,11 +4,13 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "friends" ]
+    "tags": [ "friends" ],
+    "moduleRoleMap" : {}
   }, {
     "name": "Alice Yeo",
     "phone": "94351253",
     "email": "alice@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "moduleRoleMap" : {}
   } ]
 }

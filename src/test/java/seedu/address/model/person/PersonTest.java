@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.ANDY;
 import static seedu.address.testutil.TypicalPersons.BETTY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -21,9 +22,31 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.testutil.Assert;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
+
+    @Test
+    public void testPersonConstructorWithModuleRoleMap() {
+        Person andy = new PersonBuilder(ANDY).build();
+
+        Person person = new Person(ANDY.getName(), ANDY.getPhone(), ANDY.getEmail(), ANDY.getAddress(),
+                ANDY.getTags(), ANDY.getModuleRoleMap());
+        assertNotNull(person, "The person object should not be null");
+        assertEquals(andy, person);
+    }
+
+    @Test
+    public void testPersonConstructorWithoutModuleRoleMap() {
+        Person betty = new PersonBuilder(BETTY).build();
+
+        Person person = new Person(BETTY.getName(), BETTY.getPhone(), BETTY.getEmail(),
+                Optional.empty(), BETTY.getTags());
+
+        assertNotNull(person, "The person object should not be null");
+        assertEquals(betty, person);
+    }
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
@@ -119,7 +142,8 @@ public class PersonTest {
                 + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail()
                 + ", address=" + ALICE.getAddress().map(Objects ::toString).orElse(null)
-                + ", tags=" + ALICE.getTags() + "}";
+                + ", tags=" + ALICE.getTags()
+                + ", roles=" + ALICE.getModuleRoleMap() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
