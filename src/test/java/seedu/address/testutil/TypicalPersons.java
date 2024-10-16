@@ -20,12 +20,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CLIVE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DOMINIC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_ERIC;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FLORIST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NEIGHBOR;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PHOTOGRAPHER;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_WEDDING_AMY;
+import static seedu.address.testutil.TypicalTags.FLORIST;
+import static seedu.address.testutil.TypicalTags.PHOTOGRAPHER;
+import static seedu.address.testutil.TypicalWeddings.AMY_WEDDING;
+import static seedu.address.testutil.TypicalWeddings.BOB_WEDDING;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,10 +34,6 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagName;
-import seedu.address.model.wedding.Wedding;
-import seedu.address.model.wedding.WeddingName;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -46,7 +43,8 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
-            .withTags("friends").build();
+            .withTags("friends")
+            .withWeddings("Amy's Wedding").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
@@ -83,13 +81,6 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_ERIC).withAddress(VALID_ADDRESS_ERIC).withTags(VALID_TAG_NEIGHBOR)
             .build();
 
-    // Manually added Tags
-    public static final Tag FLORIST = new Tag(new TagName(VALID_TAG_FLORIST));
-    public static final Tag PHOTOGRAPHER = new Tag(new TagName(VALID_TAG_PHOTOGRAPHER));
-    public static final Wedding AMY_WEDDING = new Wedding(new WeddingName(VALID_WEDDING_AMY));
-
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
-
     private TypicalPersons() {} // prevents instantiation
 
     /**
@@ -97,11 +88,14 @@ public class TypicalPersons {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
+        ab.addTag(FLORIST);
+        ab.addTag(PHOTOGRAPHER);
+        ab.addWedding(AMY_WEDDING);
+        ab.addWedding(BOB_WEDDING);
+
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
-        ab.addTag(FLORIST);
-        ab.addTag(PHOTOGRAPHER);
         return ab;
     }
 

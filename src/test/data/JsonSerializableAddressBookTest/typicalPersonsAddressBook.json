@@ -5,7 +5,8 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "tags" : [ "friends" ],
+    "weddings": ["Amy's Wedding"]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
