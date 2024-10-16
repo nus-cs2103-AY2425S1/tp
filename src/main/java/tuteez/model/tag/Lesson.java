@@ -1,12 +1,12 @@
 package tuteez.model.tag;
-
+import static java.util.Objects.requireNonNull;
+import static tuteez.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.HashSet;
 
-import static java.util.Objects.requireNonNull;
-import static tuteez.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Lesson in the address book.
@@ -14,21 +14,31 @@ import static tuteez.commons.util.AppUtil.checkArgument;
  */
 public class Lesson {
     public static final String MESSAGE_CONSTRAINTS =
-            "Days should be one of the following: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday (case insensitive). "
+            "Days should be one of the following: "
+            + "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday (case insensitive). "
             + "Lesson time should be in the format HHMM-HHMM (24-hour format). "
             + "Start time must be before end time.";
+
+    public static final String INCORRECT_LESSON_FORMAT =
+            "Lesson input must contain a day and a time range separated by a space.";
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
     private static final String VALID_TIME_RANGE_REGEX = "([01]?[0-9]|2[0-3])[0-5][0-9]-([01]?[0-9]|2[0-3])[0-5][0-9]";
+    private static final HashSet<Lesson> lessonSet = new HashSet<>();
     public final String day;
     public final String timeRange;
+
 
     /**
      * Constructs a {@code Lesson}.
      *
-     * @param day A valid day.
-     * @param timeRange A valid lesson time range (HHMM-HHMM).
+     * @param lesson A valid lesson string containing day and time range.
      */
-    public Lesson(String day, String timeRange) {
+    public Lesson(String lesson) {
+        requireNonNull(lesson);
+        String[] parts = lesson.split(" ", 2);
+        checkArgument(parts.length == 2, INCORRECT_LESSON_FORMAT);
+        String day = parts[0];
+        String timeRange = parts[1];
         requireNonNull(day);
         requireNonNull(timeRange);
         checkArgument(isValidLesson(day, timeRange), MESSAGE_CONSTRAINTS);
@@ -63,6 +73,16 @@ public class Lesson {
         }
 
         return false;
+    }
+
+    /**
+     * Checks if the given lesson is a duplicate by checking the HashSet.
+     *
+     * @param lesson The lesson to check for duplication.
+     * @return true if the lesson is a duplicate, false otherwise.
+     */
+    public static boolean isDuplicateLesson(Lesson lesson) {
+        return lessonSet.contains(lesson);
     }
     @Override
     public boolean equals(Object other) {
