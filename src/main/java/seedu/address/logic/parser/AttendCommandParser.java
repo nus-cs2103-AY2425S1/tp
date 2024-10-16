@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCEDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALCLASS;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.stream.Stream;
 
@@ -37,8 +38,17 @@ public class AttendCommandParser implements Parser<AttendCommand> {
         StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENTID).get());
         TutorialClass tutorialClass = ParserUtil.parseTutorialClass(argMultimap.getValue(PREFIX_TUTORIALCLASS).get());
         Date tutDate = argMultimap.getValue(PREFIX_ATTENDANCEDATE).isPresent()
-                ? ParserUtil.parseDate(argMultimap.getValue(PREFIX_ATTENDANCEDATE).get()) : new Date();
+                ? ParserUtil.parseDate(argMultimap.getValue(PREFIX_ATTENDANCEDATE).get()) : getTodayDateWithoutTime();
         return new AttendCommand(studentId, tutorialClass, tutDate);
+    }
+
+    private static Date getTodayDateWithoutTime() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTime();
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
