@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertAddTaskCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -48,18 +48,15 @@ public class AddTaskCommandTest {
         Name validName = person.getName();
 
         // Create a copy of the person and add the task
+        Person copiedPerson = new PersonBuilder(person).build();
         Person updatedPerson = new PersonBuilder(person).build(); // Create a deep copy
         updatedPerson.getTaskList().add(validTask); // Modify the deep copy
 
         // Update the person in expectedModel
         expectedModel.setPerson(person, updatedPerson);
 
-        AddTaskCommand addTaskCommand = new AddTaskCommand(validName, validTask);
-        String expectedMessage = String.format(AddTaskCommand.MESSAGE_SUCCESS,
-                validTask.getTaskDescription(), validName, validTask.getTaskDeadline());
-
         // Ensure that the original person in copiedModel is not modified
-        assertCommandSuccess(addTaskCommand, copiedModel, expectedMessage, expectedModel);
+        assertAddTaskCommandSuccess(expectedModel, copiedModel, copiedPerson, validTask);
     }
 
     @Test
