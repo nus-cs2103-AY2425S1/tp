@@ -49,7 +49,8 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         emergencyContact = new EmergencyContact(new Name(DEFAULT_ECNAME),
                 new Phone(DEFAULT_ECPHONE), new Relationship(DEFAULT_ECRS));
-        doctor = new Doctor(new DoctorName(DEFAULT_DOC_NAME), new Phone(DEFAULT_DOC_PHONE), new Email(DEFAULT_DOC_EMAIL));
+        doctor = new Doctor(new DoctorName(DEFAULT_DOC_NAME), new Phone(DEFAULT_DOC_PHONE),
+                    new Email(DEFAULT_DOC_EMAIL));
         tags = new HashSet<>();
     }
 
