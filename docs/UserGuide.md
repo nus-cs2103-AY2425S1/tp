@@ -83,7 +83,7 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 * Names cannot be more than 100 characters long.
 * Phone numbers must be exactly 8 digits.
-* Tags must be created before they can be assigned to a person.
+* Tags must be created before they can be assigned to a person. Refer to [newtag](#creating-a-new-tag-newtag) on how to create a tag.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
@@ -226,10 +226,14 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, t/Groom's Friends`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
 **List** | `list`
+**Newtag** | `newtag TAG_NAME` <br> e.g. `newtag Bride's Family`
+**Tag** | `tag INDEX t/TAG` <br> e.g. `tag 2 t/Groom's Friends`
+**Untag** | `untag INDEX t/TAG` <br> e.g. `untag 1 t/Bride's Family`
 **Help** | `help`
+
