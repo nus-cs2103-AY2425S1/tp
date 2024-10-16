@@ -245,7 +245,7 @@ public class LogicManagerTest {
 
         // Triggers the saveAddressBook method by executing an add command
         String abAddCommand = AddCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY
-                + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY;
+                + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY + CommandTestUtil.REMARK_DESC_AMY;
         // Triggers the saveTransactionBook method by executing a list command (simpler)
         String tbListCommand = spleetwaise.transaction.logic.commands.ListCommand.COMMAND_WORD;
 
@@ -256,6 +256,7 @@ public class LogicManagerTest {
         expectedAddressBookModel.addPerson(expectedPerson);
 
         spleetwaise.transaction.model.Model expectedTransactionModel = new spleetwaise.transaction.model.ModelManager();
+
 
         assertCommandFailure(abAddCommand, CommandException.class, expectedMessage, expectedAddressBookModel,
                 expectedTransactionModel

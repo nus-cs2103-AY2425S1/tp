@@ -6,6 +6,7 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
+    "remark" : "alice is poor",
     "tags" : [ "friends" ]
   }, {
     "id" : "3929a136-823a-4806-af62-e96b241167b5",
@@ -13,6 +14,7 @@
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
+    "remark" : "benson is rich",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "id" : "60196500-3d01-4e6c-81de-44ab6fc9e7e5",
@@ -20,6 +22,7 @@
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
+    "remark" : "",
     "tags" : [ ]
   }, {
     "id" : "b89d7c94-9823-4b6a-ae46-b7c55ee41727",
@@ -27,6 +30,7 @@
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
+    "remark" : "DANIEL IS IN DEBT",
     "tags" : [ "friends" ]
   }, {
     "id" : "42984eac-421f-4966-994d-6f360d7d2882",
@@ -34,6 +38,7 @@
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
+    "remark" : "",
     "tags" : [ ]
   }, {
     "id" : "c5a93d37-44fd-4f4d-964b-6f85c715d6e3",
@@ -41,6 +46,7 @@
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
+    "remark" : "",
     "tags" : [ ]
   }, {
     "id" : "c5a93d37-44fd-4f4d-964b-6f85c715djf93",
@@ -48,6 +54,7 @@
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
+    "remark" : "",
     "tags" : [ ]
   } ]
 }

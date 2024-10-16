@@ -20,6 +20,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Remark remark;
 
     // Data fields
     private final Address address;
@@ -28,18 +29,19 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(String id, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(name, phone, email, address, tags);
+    public Person(String id, Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
+        CollectionUtil.requireAllNonNull(name, phone, email, address, remark, tags);
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.remark = remark;
         this.tags.addAll(tags);
     }
 
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(IdUtil.getId(), name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
+        this(IdUtil.getId(), name, phone, email, address, remark, tags);
     }
 
     public String getId() {
@@ -62,6 +64,10 @@ public class Person {
         return address;
     }
 
+    public Remark getRemark() {
+        return remark;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException} if modification is attempted.
      */
@@ -70,8 +76,8 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name and phone number. This defines a notion of
-     * equality between two persons based on their identity.
+     * Returns true if both persons have the same name and phone number. This defines a notion of equality between two
+     * persons based on their identity.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -109,6 +115,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && remark.equals(otherPerson.remark)
                 && tags.equals(otherPerson.tags);
     }
 
@@ -124,6 +131,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("remark", remark)
                 .add("tags", tags)
                 .toString();
     }
