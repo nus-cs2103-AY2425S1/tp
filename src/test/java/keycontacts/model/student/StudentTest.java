@@ -17,7 +17,6 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import keycontacts.model.pianopiece.PianoPiece;
-import keycontacts.model.util.SampleDataUtil;
 import keycontacts.testutil.StudentBuilder;
 
 public class StudentTest {
@@ -106,7 +105,7 @@ public class StudentTest {
     public void withAddedPianoPieces() {
         Student student = new StudentBuilder(ALICE).withPianoPieces().build();
 
-        Set<PianoPiece> pianoPieces = SampleDataUtil
+        Set<PianoPiece> pianoPieces = PianoPiece
                 .getPianoPieceSet("Für Elise", "Moonlight Sonata", "Franz Liszt – Liebestraum No. 3");
         Student updatedStudent = student.withAddedPianoPieces(pianoPieces);
         assertEquals(pianoPieces, updatedStudent.getPianoPieces());
