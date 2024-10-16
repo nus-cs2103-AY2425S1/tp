@@ -90,6 +90,12 @@ public interface Model {
     void setPerson(Student target, Student editedStudent);
 
     /**
+     * Replaces the given task {@code target} with {@code editedTask}.
+     * {@code target} must exist in the address book.
+     */
+    void setTask(Task target, Task editedTask);
+
+    /**
      * Returns true if a group with the same identity as {@code group} exists in the address book.
      */
     boolean hasGroup(Group group);

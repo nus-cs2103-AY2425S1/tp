@@ -245,6 +245,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         group.deleteTask(task);
     }
 
+    public void setTask(Task target, Task editedTask) {
+        requireNonNull(editedTask);
+
+        tasks.setTask(target, editedTask);
+    }
+
     //// util methods
 
     @Override
