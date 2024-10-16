@@ -19,11 +19,14 @@ public class ListCommandParser implements Parser<ListCommand> {
      */
     public ListCommand parse(String args) throws ParseException {
         if (args == null || args.isEmpty()) {
-            return new ListCommand();
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
         args = args.trim();
         args = args.split(" ", 2)[0];
-        if (args.equals(ListEmployeeCommand.ARGUMENT_WORD)) {
+        if (args.equals(ListCommand.ARGUMENT_WORD)) {
+            return new ListCommand();
+        } else if (args.equals(ListEmployeeCommand.ARGUMENT_WORD)) {
             return new ListEmployeeCommand();
         } else if (args.equals(ListPotentialCommand.ARGUMENT_WORD)) {
             return new ListPotentialCommand();

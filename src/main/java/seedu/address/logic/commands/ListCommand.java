@@ -12,8 +12,10 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
+    public static final String ARGUMENT_WORD = "all";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists the contents of StaffSync.\n"
-            + "Parameters: e/ph (can be left empty to list all)\n"
+            + "Parameters: e/ph/all\n"
             + "Example: " + COMMAND_WORD + " e";
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
