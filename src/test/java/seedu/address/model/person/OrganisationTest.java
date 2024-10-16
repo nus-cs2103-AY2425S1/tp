@@ -31,8 +31,8 @@ public class OrganisationTest {
         // valid addresses
         assertTrue(Organisation.isValidOrganisation("National University of Singapore"));
         assertTrue(Organisation.isValidOrganisation("-")); // one character
-        assertTrue(Organisation.isValidOrganisation("The Agency for Science, Technology and Research (A*STAR) – " +
-                "Institute of Microelectronics")); // long address
+        assertTrue(Organisation.isValidOrganisation("The Agency for Science, Technology and Research (A*STAR) – "
+                + "Institute of Microelectronics")); // long address
     }
 
     @Test
