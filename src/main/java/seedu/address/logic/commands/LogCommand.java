@@ -16,7 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.History;
 import seedu.address.model.person.Person;
 /**
- * Add a history entry to a person
+ * Add a history entry to an existing person
  */
 public class LogCommand extends Command {
     public static final String COMMAND_WORD = "log";
@@ -34,7 +34,7 @@ public class LogCommand extends Command {
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Date: %2$s, Message: %3$s";
     public static final String MESSAGE_ADD_HISTORY_SUCCESS = "Added history to Person: %1$s";
     private final Index index;
-    private LocalDate date = null;
+    private final LocalDate date;
     private final String message;
 
     /**

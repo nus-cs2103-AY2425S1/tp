@@ -93,7 +93,7 @@ public class HistoryTest {
         History sameHistory = new History(sameHistoryMap, LocalDate.of(2024, 1, 1));
 
         // Even though the content is the same, they are different instances, so should return false
-        assertNotEquals(history, sameHistory);
+        assertEquals(history, sameHistory);
     }
 
 

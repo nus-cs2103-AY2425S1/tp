@@ -1,14 +1,18 @@
 package seedu.address.model.person;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
 
+
 /**
  * Represents the date of creation for an entity.
  * Encapsulates a {@code LocalDate} to provide additional functionality for managing the creation date.
+ * Guarantees: immutable; must be in the format {@code yyyy-MM-dd}.
  */
 public class DateOfCreation {
 
@@ -61,7 +65,7 @@ public class DateOfCreation {
         try {
             return new DateOfCreation(LocalDate.parse(date));
         } catch (DateTimeException e) {
-            throw new IllegalValueException("Invalid date format!");
+            throw new IllegalValueException(MESSAGE_INVALID_DATE_FORMAT);
         }
     }
 

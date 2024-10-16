@@ -44,7 +44,7 @@ public class Person {
     }
 
     /**
-     * Every field must be present and not null. with non-empty remark and existing history
+     * Every field must be present and not null. With non-empty remark and existing history
      */
     public Person(Name name, Phone phone, Email email, Address address,
                   Remark remark, Set<Tag> tags, DateOfCreation dateOfCreation, History history) {

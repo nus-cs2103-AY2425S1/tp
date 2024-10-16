@@ -38,7 +38,7 @@ public class ActivityTest {
         LocalDate date = LocalDate.of(2024, 10, 12);
 
         // Expect IllegalArgumentException when the message is null
-        assertThrows(IllegalArgumentException.class, () -> Activity.of(date, null));
+        assertThrows(NullPointerException.class, () -> Activity.of(date, null));
     }
 
     @Test

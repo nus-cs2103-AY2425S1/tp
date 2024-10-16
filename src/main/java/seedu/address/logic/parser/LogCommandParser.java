@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOG;
 
@@ -10,15 +11,13 @@ import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.LogCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new LogCommand object.
+ * Parses input arguments and creates a new LogCommand object
  */
 public class LogCommandParser implements Parser<LogCommand> {
-
     /**
      * Parses the given {@code String} of arguments in the context of the LogCommand
      * and returns a LogCommand object for execution.
@@ -33,18 +32,18 @@ public class LogCommandParser implements Parser<LogCommand> {
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LogCommand.MESSAGE_USAGE), ive);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LogCommand.MESSAGE_USAGE), pe);
         }
 
         // Parse date (if provided)
         Optional<String> dateString = argMultimap.getValue(PREFIX_DATE);
-        LocalDate date = null;
+        Optional<LocalDate> date = Optional.empty();
         if (dateString.isPresent()) {
             try {
-                date = ParserUtil.parseDate(dateString.get());
+                date = Optional.of(ParserUtil.parseDate(dateString.get()));
             } catch (DateTimeParseException dtpe) {
-                throw new ParseException("Invalid date format! Please use yyyy-mm-dd.");
+                throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
             }
         }
 
@@ -52,12 +51,9 @@ public class LogCommandParser implements Parser<LogCommand> {
         String logMessage = argMultimap.getValue(PREFIX_LOG).orElseThrow(() ->
                 new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LogCommand.MESSAGE_USAGE)));
 
-        // If date is null, use today's date as default
-        if (date == null) {
-            return new LogCommand(index, logMessage);
-        }
+        // Use today's date if no date was provided
+        LocalDate finalDate = date.orElse(LocalDate.now());
 
-
-        return new LogCommand(index, date, logMessage);
+        return new LogCommand(index, finalDate, logMessage);
     }
 }

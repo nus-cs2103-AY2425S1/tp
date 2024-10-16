@@ -1,17 +1,20 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDate;
 
 /**
  * The {@code Activity} class represents an activity that occurred on a specific date.
  * Each activity consists of a date and a descriptive message.
+ * Guarantees: immutable;
  */
 public class Activity {
     // The date when the activity occurred
-    private LocalDate date;
+    private final LocalDate date;
 
     // The message describing the activity
-    private String message;
+    private final String message;
 
     /**
      * Constructs an {@code Activity} object with the specified date and message.
@@ -35,12 +38,9 @@ public class Activity {
      * @throws IllegalArgumentException if the date or message is null.
      */
     public static Activity of(LocalDate date, String message) {
-        // Ensure the date and message are not null
-        if (date == null) {
-            throw new IllegalArgumentException("Date cannot be null.");
-        }
-        if (message == null || message.trim().isEmpty()) {
-            throw new IllegalArgumentException("Message cannot be null or empty.");
+        requireNonNull(date, message);
+        if (message.trim().isEmpty()) {
+            throw new IllegalArgumentException("Message cannot be empty.");
         }
         return new Activity(date, message);
     }

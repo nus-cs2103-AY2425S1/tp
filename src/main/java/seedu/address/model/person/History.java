@@ -1,5 +1,9 @@
 package seedu.address.model.person;
 
+import static seedu.address.logic.Messages.MESSAGE_ACTIVITY_LIST_NOT_INITIALIZED;
+import static seedu.address.logic.Messages.MESSAGE_BEFORE_DATE_OF_CREATION;
+import static seedu.address.logic.Messages.MESSAGE_NO_ENTRY_ON_DATE;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -40,19 +44,6 @@ public class History {
     }
 
     /**
-     * Adds an activity message for the current date (today).
-     * If there is no entry for today's date, it initializes the entry before adding the activity.
-     *
-     * @param message The activity message to be added for today.
-     */
-    public void addActivityToday(String message) {
-        if (!this.history.containsKey(LocalDate.now())) {
-            this.history.put(LocalDate.now(), new ArrayList<>());
-        }
-        this.history.get(LocalDate.now()).add(message);
-    }
-
-    /**
      * Adds an activity message for a specified date.
      * If there is no entry for the specified date, it initializes the entry before adding the activity.
      *
@@ -61,8 +52,8 @@ public class History {
      */
     public void addActivity(LocalDate date, String message) throws IllegalArgumentException {
         if (!this.dateOfCreation.isAfter(date)) {
-            throw new IllegalArgumentException(date
-                    + " is before the date of creation of this log " + this.dateOfCreation + "!");
+            throw new IllegalArgumentException(String.format(MESSAGE_BEFORE_DATE_OF_CREATION,
+                    date, this.dateOfCreation));
         }
         if (!this.history.containsKey(date)) {
             this.history.put(date, new ArrayList<>());
@@ -86,8 +77,8 @@ public class History {
     public static History addActivity(History originalHistory, LocalDate date, String message) {
         // Check if the date is valid based on the date of creation.
         if (!originalHistory.dateOfCreation.isAfter(date)) {
-            throw new IllegalArgumentException(date
-                    + " is before the date of creation of this log " + originalHistory.dateOfCreation + "!");
+            throw new IllegalArgumentException(String.format(MESSAGE_BEFORE_DATE_OF_CREATION,
+                    date, originalHistory.dateOfCreation));
         }
 
         // Create a copy of the history map to ensure immutability of the original
@@ -111,8 +102,8 @@ public class History {
      */
     public List<Activity> getActivitiesOnDay(LocalDate date) throws RuntimeException {
         if (!this.dateOfCreation.isAfter(date)) {
-            throw new DateTimeException(date
-                    + " is before the date of creation of this log " + this.dateOfCreation + "!");
+            throw new DateTimeException(String.format(MESSAGE_BEFORE_DATE_OF_CREATION, date,
+                    this.dateOfCreation));
         }
         try {
             ArrayList<String> listOfActivitiesMessage = this.history.get(date);
@@ -120,9 +111,9 @@ public class History {
                     .map(s -> Activity.of(date, s))
                     .collect(Collectors.toList());
         } catch (NoSuchElementException e1) {
-            throw new NoSuchElementException(date + " has no entry");
+            throw new NoSuchElementException(String.format(MESSAGE_NO_ENTRY_ON_DATE, date));
         } catch (NullPointerException e2) {
-            throw new NullPointerException("Activity list not initialized!");
+            throw new NullPointerException(MESSAGE_ACTIVITY_LIST_NOT_INITIALIZED);
         }
     }
 
@@ -157,8 +148,22 @@ public class History {
     }
     @Override
     public boolean equals(Object other) {
-        // Check if this is the same object reference as the other
-        return this == other;
+        // Check if this is the same object reference
+        if (this == other) {
+            return true;
+        }
+
+        // Check if the other object is an instance of History
+        if (!(other instanceof History)) {
+            return false;
+        }
+
+        // Typecast other object to History and compare the fields
+        History otherHistory = (History) other;
+
+        // Compare dateOfCreation and history fields for equality
+        return this.dateOfCreation.equals(otherHistory.dateOfCreation)
+                && this.history.equals(otherHistory.history);
     }
     @Override
     public String toString() {
