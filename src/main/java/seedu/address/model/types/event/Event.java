@@ -10,8 +10,8 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.types.common.Address;
+import seedu.address.model.types.common.DateTime;
 import seedu.address.model.types.common.Name;
-import seedu.address.model.types.common.Time;
 
 /**
  * Represents an Event in the address book.
@@ -21,7 +21,7 @@ public class Event {
 
     // Identity fields
     private final Name name;
-    private final Time time;
+    private final DateTime startTime;
     private final Address location;
 
     // Data fields
@@ -30,10 +30,10 @@ public class Event {
     /**
      * Every field must be present and not null.
      */
-    public Event(Name name, Time time, Address location, Set<Tag> tags) {
-        requireAllNonNull(name, time, location, tags);
+    public Event(Name name, DateTime startTime, Address location, Set<Tag> tags) {
+        requireAllNonNull(name, startTime, location, tags);
         this.name = name;
-        this.time = time;
+        this.startTime = startTime;
         this.location = location;
         this.tags.addAll(tags);
     }
@@ -42,8 +42,8 @@ public class Event {
         return name;
     }
 
-    public Time getTime() {
-        return time;
+    public DateTime getStartTime() {
+        return startTime;
     }
 
     public Address getLocation() {
@@ -88,7 +88,7 @@ public class Event {
 
         Event otherEvent = (Event) other;
         return name.equals(otherEvent.name)
-                && time.equals(otherEvent.time)
+                && startTime.equals(otherEvent.startTime)
                 && location.equals(otherEvent.location)
                 && tags.equals(otherEvent.tags);
     }
@@ -96,14 +96,14 @@ public class Event {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, time, location, tags);
+        return Objects.hash(name, startTime, location, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("time", time)
+                .add("startTime", startTime)
                 .add("location", location)
                 .add("tags", tags)
                 .toString();

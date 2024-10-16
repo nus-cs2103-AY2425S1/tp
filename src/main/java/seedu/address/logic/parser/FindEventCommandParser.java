@@ -18,7 +18,7 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
      * and returns a FindCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public FindEventCommand parse(String args) throws ParseException {
+    public FindEventCommand parse(ModelType modelType, String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
