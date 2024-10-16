@@ -2,8 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import seedu.address.model.Model;
@@ -14,13 +19,29 @@ import seedu.address.model.person.Person;
  */
 public class ListAppointmentsCommand extends Command {
 
-    public static final String COMMAND_WORD = "list-appointments";
+    public static final String COMMAND_WORD = "appointment-list";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists all upcoming appointments in the address book.\n"
-            + "Example: " + COMMAND_WORD;
+            + "Parameters: [DATE] [TIME]\n"
+            + "DATE: Optional date filter in the format YYYY-MM-DD\n"
+            + "TIME: Optional time filter in the format HH:mm\n"
+            + "Example: " + COMMAND_WORD + " 2024-10-15 14:30";
 
     public static final String MESSAGE_SUCCESS = "Listed %d upcoming appointments";
+
+    private final Optional<LocalDate> dateFilter;
+    private final Optional<LocalTime> timeFilter;
+
+    /**
+     * All fields are optional
+     * @param dateFilter
+     * @param timeFilter
+     */
+    public ListAppointmentsCommand(Optional<LocalDate> dateFilter, Optional<LocalTime> timeFilter) {
+        this.dateFilter = dateFilter;
+        this.timeFilter = timeFilter;
+    }
 
     /**
      * Executes the command and returns the result message.
@@ -34,12 +55,14 @@ public class ListAppointmentsCommand extends Command {
         List<Person> personList = model.getFilteredPersonList();
 
         LocalDateTime now = LocalDateTime.now();
-        List<Person> upcomingAppointments = personList.stream()
-                .filter(person -> person.hasUpcomingAppointment(now))
+        Optional<LocalTime> effectiveTimeFilter = dateFilter.isPresent() ? timeFilter : Optional.empty();
+
+        List<Person> filteredAppointments = personList.stream()
+                .filter(person -> person.hasAppointment(now, dateFilter, effectiveTimeFilter))
                 .collect(Collectors.toList());
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, upcomingAppointments.size())
-                + "\n" + formatAppointments(upcomingAppointments));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, filteredAppointments.size())
+                + "\n" + formatAppointments(filteredAppointments));
     }
 
     /**
@@ -49,8 +72,14 @@ public class ListAppointmentsCommand extends Command {
      * @return A formatted string containing the names and schedules of persons with upcoming appointments.
      */
     private String formatAppointments(List<Person> appointments) {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
+
         return appointments.stream()
-                .map(person -> String.format("%s: %s", person.getName(), person.getSchedule()))
+                .map(person -> {
+                    LocalDateTime dateTime = LocalDateTime.parse(person.getSchedule().dateTime, inputFormatter);
+                    return String.format("%s: %s", person.getName(), dateTime.format(outputFormatter));
+                })
                 .collect(Collectors.joining("\n"));
     }
 
@@ -59,11 +88,16 @@ public class ListAppointmentsCommand extends Command {
         if (other == this) {
             return true;
         }
-        return other instanceof ListAppointmentsCommand;
+        if (!(other instanceof ListAppointmentsCommand)) {
+            return false;
+        }
+        ListAppointmentsCommand otherCommand = (ListAppointmentsCommand) other;
+        return Objects.equals(dateFilter, otherCommand.dateFilter)
+                && Objects.equals(timeFilter , otherCommand.timeFilter);
     }
 
     @Override
     public int hashCode() {
-        return ListAppointmentsCommand.class.hashCode();
+        return Objects.hash(dateFilter, timeFilter);
     }
 }

@@ -12,8 +12,11 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -97,24 +100,41 @@ public class PersonTest {
     }
 
     @Test
-    public void hasUpcomingAppointment() {
-        LocalDateTime now = LocalDateTime.now();
+    public void hasAppointment() {
+        LocalDateTime now = LocalDateTime.of(2024, 10, 15, 10, 0);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
         // Person with future appointment
         Person personWithFutureAppointment = new PersonBuilder()
-                .withSchedule(now.plusDays(1).format(formatter), "").build();
-        assertTrue(personWithFutureAppointment.hasUpcomingAppointment(now));
+                .withSchedule("2024-10-16 1400", "").build();
 
         // Person with past appointment
         Person personWithPastAppointment = new PersonBuilder()
-                .withSchedule(now.minusDays(1).format(formatter), "").build();
-        assertFalse(personWithPastAppointment.hasUpcomingAppointment(now));
+                .withSchedule("2024-10-14 1400", "").build();
 
-        // Person with no appointment
-        Person personWithNoAppointment = new PersonBuilder()
-                .withSchedule("", "").build();
-        assertFalse(personWithNoAppointment.hasUpcomingAppointment(now));
+        // Test without filters
+        assertTrue(personWithFutureAppointment.hasAppointment(now, Optional.empty(), Optional.empty()));
+        assertFalse(personWithPastAppointment.hasAppointment(now, Optional.empty(), Optional.empty()));
+
+        // Test with date filter
+        assertTrue(personWithFutureAppointment.hasAppointment(now,
+                Optional.of(LocalDate.of(2024, 10, 16)), Optional.empty()));
+        assertFalse(personWithFutureAppointment.hasAppointment(now,
+                Optional.of(LocalDate.of(2024, 10, 17)), Optional.empty()));
+
+        // Test with date and time filters
+        assertTrue(personWithFutureAppointment.hasAppointment(now,
+                Optional.of(LocalDate.of(2024, 10, 16)), Optional.of(LocalTime.of(14, 0))));
+        assertFalse(personWithFutureAppointment.hasAppointment(now,
+                Optional.of(LocalDate.of(2024, 10, 16)), Optional.of(LocalTime.of(15, 0))));
+
+        // Test with time filter but no date filter (should ignore time filter)
+        assertTrue(personWithFutureAppointment.hasAppointment(now,
+                Optional.empty(), Optional.of(LocalTime.of(15, 0))));
+
+        // Test with date filter not matching and time filter matching (should return false)
+        assertFalse(personWithFutureAppointment.hasAppointment(now,
+                Optional.of(LocalDate.of(2024, 10, 17)), Optional.of(LocalTime.of(14, 0))));
     }
 
     @Test

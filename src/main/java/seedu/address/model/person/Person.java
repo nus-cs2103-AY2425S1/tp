@@ -2,11 +2,14 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -88,18 +91,41 @@ public class Person {
     }
 
     /**
-     * Returns true if the person has an upcoming appointment after the given datetime.
+     * Returns true if the person has an appointment that matches the given filters.
      *
      * @param now The current datetime to compare against.
-     * @return true if the person has an upcoming appointment, false otherwise.
+     * @param dateFilter Optional date filter.
+     * @param timeFilter Optional time filter.
+     * @return true if the person has a matching appointment, false otherwise.
      */
-    public boolean hasUpcomingAppointment(LocalDateTime now) {
+    public boolean hasAppointment(LocalDateTime now, Optional<LocalDate> dateFilter, Optional<LocalTime> timeFilter) {
         if (schedule == null || schedule.dateTime.isEmpty()) {
             return false;
         }
+
         LocalDateTime appointmentDateTime = LocalDateTime.parse(schedule.dateTime,
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-        return appointmentDateTime.isAfter(now);
+
+        // Check if the appointment is in the future
+        if (appointmentDateTime.isBefore(now)) {
+            return false;
+        }
+
+        // Apply date filter if present
+        if (dateFilter.isPresent()) {
+            if (!appointmentDateTime.toLocalDate().equals(dateFilter.get())) {
+                return false;
+            }
+            // Only apply time filter if date filter is present
+            if (timeFilter.isPresent() && !appointmentDateTime.toLocalTime().equals(timeFilter.get())) {
+                return false;
+            }
+        } else if (timeFilter.isPresent()) {
+            // If time filter is present but date filter is not, ignore the time filter
+            return true;
+        }
+
+        return true;
     }
 
     /**

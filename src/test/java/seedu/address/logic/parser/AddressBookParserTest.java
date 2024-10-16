@@ -7,8 +7,11 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -107,7 +110,22 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_listAppointments() throws Exception {
+        // Test without parameters
         assertTrue(parser.parseCommand(ListAppointmentsCommand.COMMAND_WORD) instanceof ListAppointmentsCommand);
+
+        // Test with date parameter
+        ListAppointmentsCommand dateCommand = (ListAppointmentsCommand) parser.parseCommand(
+                ListAppointmentsCommand.COMMAND_WORD + " 2024-10-15");
+        assertEquals(new ListAppointmentsCommand(Optional.of(LocalDate.of(2024, 10, 15)),
+                Optional.empty()), dateCommand);
+
+        // Test with date and time parameters
+        ListAppointmentsCommand dateTimeCommand = (ListAppointmentsCommand) parser.parseCommand(
+                ListAppointmentsCommand.COMMAND_WORD + " 2024-10-15 14:30");
+        assertEquals(new ListAppointmentsCommand(
+                        Optional.of(LocalDate.of(2024, 10, 15)),
+                        Optional.of(LocalTime.of(14, 30))),
+                dateTimeCommand);
     }
 
     @Test
@@ -130,6 +148,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
+                parser.parseCommand("unknownCommand"));
     }
 }
