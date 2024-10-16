@@ -92,4 +92,9 @@ public class ArgumentMultimap {
     public Set<Prefix> getPrefixes() {
         return argMultimap.keySet();
     }
+
+    @Override
+    public String toString() {
+        return argMultimap.toString();
+    }
 }

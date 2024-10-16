@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.Prefix;
 
@@ -38,10 +37,10 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
                 result = keywords.stream()
                         .anyMatch(keyword -> person.hasTag(keyword));
                 break;
+
+            default:
+                break;
             }
-            //return keywords.stream()
-            //        .anyMatch(keyword -> person.getName().fullName.toLowerCase()
-            //                .contains(keyword.toLowerCase()));
             if (result) {
                 break;
             }
@@ -60,12 +59,13 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
             return false;
         }
 
-        FieldContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (FieldContainsKeywordsPredicate) other;
+        FieldContainsKeywordsPredicate otherNameContainsKeywordsPredicate =
+                (FieldContainsKeywordsPredicate) other;
         return argMultimap.equals(otherNameContainsKeywordsPredicate.argMultimap);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keywords", argMultimap).toString();
+        return argMultimap.toString();
     }
 }
