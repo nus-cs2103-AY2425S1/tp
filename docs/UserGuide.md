@@ -28,11 +28,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list_members` : Lists all contacts.
 
-   * `add n/John Doe tg/98765432 r/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add_member n/John Doe r/4/3/301 t/johndoe123 tag/logistics` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete_member 3` : Deletes the 3rd contact shown in the current list.
 
    * `clear` : Deletes all contacts.
 
@@ -49,7 +49,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add_member n/NAME`, `NAME` is a parameter which can be used as `add_member n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -75,11 +75,11 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a member: `add`
+### Adding a member: `add_member`
 
 Adds a member to the address book.
 
-Format: `add n/NAME tg/TELEGRAM r/ROOM [t/TAG]…​`
+Format: `add_member n/NAME r/BLOCK/FLOOR/ROOM_NUMBER t/TELEGRAM_HANDLE [tag/TAG]…​​`
 
 <box type="tip" seamless>
 
@@ -87,20 +87,20 @@ Format: `add n/NAME tg/TELEGRAM r/ROOM [t/TAG]…​`
 </box>
 
 Examples:
-* `add n/John Doe tg/98765432 r/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend r/Newgate Prison tg/1234567 t/criminal`
+* `add_member n/John Doe r/4/3/301 t/johndoe123`
+* `add_member n/Betsy Crowe r/2/5/120 t/betsy_crowe tag/logistics`
 
-### Listing all members : `list`
+### Listing all members : ` list_members`
 
 Shows a list of all members in the address book.
 
-Format: `list`
+Format: `list_members `
 
-### Editing a member : `edit`
+### Editing a member : `update_member`
 
 Edits an existing member in the address book.
 
-Format: `edit INDEX [n/NAME] [tg/TELEGRAM] [r/ROOM] [t/TAG]…​`
+Format: `update_member INDEX [n/NAME] [r/BLOCK/FLOOR/ROOM_NUMBER] [t/TELEGRAM_HANDLE] [tag/TAG]…​​`
 
 * Edits the member at the specified `INDEX`. The index refers to the index number shown in the displayed member list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -110,7 +110,7 @@ Format: `edit INDEX [n/NAME] [tg/TELEGRAM] [r/ROOM] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 tg/91234567 n/Johnson Doe` Edits the telegram and name of the 1st member to be `91234567` and `Johnson Doe` respectively.
+*  `update_member 1 t/johndoe123_updated n/Johnson Doe` Edits the telegram and name of the 1st member to be `johndoe123_updated` and `Johnson Doe` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd member to be `Betsy Crower` and clears all existing tags.
 
 ### Locating members by name: `find`
