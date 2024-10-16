@@ -94,6 +94,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasDuplicateFields(Person person) {
+        requireNonNull(person);
+        return addressBook.hasDuplicateFields(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }

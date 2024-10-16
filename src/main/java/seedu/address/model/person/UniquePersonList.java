@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.exceptions.DuplicateFieldException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -37,6 +38,14 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains any equivalent fields as the given argument.
+     */
+    public boolean containsFields(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::hasSameFields);
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
@@ -50,8 +59,9 @@ public class UniquePersonList implements Iterable<Person> {
 
     /**
      * Replaces the person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the list.
+     * {@code target} must exist in the list. The person identity meaning the name.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The fields of the {@code editedPerson} must also not be in conflict with other persons in the list.
      */
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
@@ -63,6 +73,10 @@ public class UniquePersonList implements Iterable<Person> {
 
         if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
             throw new DuplicatePersonException();
+        }
+
+        if (!target.isSamePerson(editedPerson) && containsFields(editedPerson)) {
+            throw new DuplicateFieldException();
         }
 
         internalList.set(index, editedPerson);
