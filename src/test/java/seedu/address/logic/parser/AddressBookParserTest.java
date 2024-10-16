@@ -12,7 +12,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIM
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEL_APPT_AMY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
@@ -84,11 +83,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addAllergy() throws Exception {
-        Person person = new PersonBuilder().withNric(VALID_NRIC_AMY).build();
-        AddAllergyCommand command = (AddAllergyCommand) parser.parseCommand(
-                AddAllergyCommand.COMMAND_WORD + " " + PREFIX_NRIC + NRIC_DESC_AMY
-                        + " " + PREFIX_ALLERGY + "Insulin");
-        Set<Allergy> allergies = new HashSet<>();
+        String commandInput = AddAllergyCommand.COMMAND_WORD + " " + NRIC_DESC_AMY
+                + " " + PREFIX_ALLERGY + "Insulin";
+        AddAllergyCommand command = (AddAllergyCommand) parser.parseCommand(commandInput);
+        Set<Allergy> allergies = new HashSet<Allergy>();
         allergies.add(new Allergy("Insulin"));
         assertEquals(new AddAllergyCommand(new Nric(VALID_NRIC_AMY), allergies), command);
     }
