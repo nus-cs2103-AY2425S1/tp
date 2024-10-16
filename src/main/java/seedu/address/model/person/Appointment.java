@@ -4,19 +4,17 @@ import java.util.Objects;
 
 /**
  * A class meant to group all relevant details of an appointment together.
- *
- * @param <Id> A generic type representing the ID type.
  */
-public class Appointment<Id> {
+public class Appointment {
     private Id patientId;
     private Id doctorId;
     private String remarks;
 
     /**
-     * Creates an appointment instance associated with the specified patient, doctor with the given remarks.
+     * Creates an appointment instance associated with the specified patient, doctor, and remarks.
      *
-     * @param patientId Id of patient.
-     * @param doctorId Id of doctor.
+     * @param patientId Id of the patient.
+     * @param doctorId Id of the doctor.
      * @param remarks Remarks given by the doctor for the appointment or patient.
      */
     public Appointment(Id patientId, Id doctorId, String remarks) {
@@ -46,12 +44,11 @@ public class Appointment<Id> {
             return false;
         }
 
-        Appointment<?> appointment = (Appointment<?>) o; // Typecast to Appointment
+        Appointment appointment = (Appointment) o;
 
-        // Compare key and value
-        return Objects.equals(patientId, appointment.patientId)
-                && Objects.equals(doctorId, appointment.doctorId)
-                && Objects.equals(remarks, appointment.remarks);
+        return Objects.equals(patientId, appointment.patientId) &&
+                Objects.equals(doctorId, appointment.doctorId) &&
+                Objects.equals(remarks, appointment.remarks);
     }
 
     @Override
@@ -65,3 +62,5 @@ public class Appointment<Id> {
                 + "Remarks: " + getRemarks();
     }
 }
+
+
