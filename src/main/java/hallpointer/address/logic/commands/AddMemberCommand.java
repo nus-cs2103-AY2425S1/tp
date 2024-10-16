@@ -30,7 +30,7 @@ public class AddMemberCommand extends Command {
         + PREFIX_TELEGRAM + "johndoe123 "
         + PREFIX_TAG + "logistics";
 
-    public static final String MESSAGE_SUCCESS = "Member %1$s with room %2$s and Telegram handle %3$s "
+    public static final String MESSAGE_SUCCESS = "Member %1$s with room %2$s and Telegram username %3$s "
         + "added successfully.";
     public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the CCA system.";
 

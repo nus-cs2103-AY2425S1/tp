@@ -22,7 +22,7 @@ import hallpointer.address.model.session.SessionName;
 /**
  * Edits the details of an existing session in the address book.
  */
-public class EditSessionCommand extends Command {
+public class UpdateSessionCommand extends Command {
     public static final String COMMAND_WORD = "edit_session";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the session identified "
@@ -48,7 +48,7 @@ public class EditSessionCommand extends Command {
      * @param index of the session in the filtered session list to edit
      * @param editSessionDescriptor details to edit the session with
      */
-    public EditSessionCommand(Index index, EditSessionDescriptor editSessionDescriptor) {
+    public UpdateSessionCommand(Index index, EditSessionDescriptor editSessionDescriptor) {
         requireNonNull(index);
         requireNonNull(editSessionDescriptor);
 
@@ -96,13 +96,13 @@ public class EditSessionCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof EditSessionCommand)) {
+        if (!(other instanceof UpdateSessionCommand)) {
             return false;
         }
 
-        EditSessionCommand otherEditSessionCommand = (EditSessionCommand) other;
-        return index.equals(otherEditSessionCommand.index)
-                && editSessionDescriptor.equals(otherEditSessionCommand.editSessionDescriptor);
+        UpdateSessionCommand otherUpdateSessionCommand = (UpdateSessionCommand) other;
+        return index.equals(otherUpdateSessionCommand.index)
+                && editSessionDescriptor.equals(otherUpdateSessionCommand.editSessionDescriptor);
     }
 
     @Override

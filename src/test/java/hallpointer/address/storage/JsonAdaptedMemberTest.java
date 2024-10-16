@@ -19,7 +19,7 @@ import hallpointer.address.model.member.Telegram;
 public class JsonAdaptedMemberTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_TELEGRAM = "+651234";
-    private static final String INVALID_ROOM = " ";
+    private static final String INVALID_ROOM = " 222";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = BENSON.getName().toString();
@@ -66,7 +66,7 @@ public class JsonAdaptedMemberTest {
     }
 
     @Test
-    public void toModelType_invalidAddress_throwsIllegalValueException() {
+    public void toModelType_invalidRoom_throwsIllegalValueException() {
         JsonAdaptedMember member =
                 new JsonAdaptedMember(VALID_NAME, VALID_TELEGRAM, INVALID_ROOM, VALID_TAGS);
         String expectedMessage = Room.MESSAGE_CONSTRAINTS;
@@ -74,7 +74,7 @@ public class JsonAdaptedMemberTest {
     }
 
     @Test
-    public void toModelType_nullAddress_throwsIllegalValueException() {
+    public void toModelType_nullRoom_throwsIllegalValueException() {
         JsonAdaptedMember member = new JsonAdaptedMember(VALID_NAME, VALID_TELEGRAM, null, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Room.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, member::toModelType);

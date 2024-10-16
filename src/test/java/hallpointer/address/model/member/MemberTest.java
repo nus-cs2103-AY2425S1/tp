@@ -76,7 +76,7 @@ public class MemberTest {
         editedAlice = new MemberBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different address -> returns false
+        // different room -> returns false
         editedAlice = new MemberBuilder(ALICE).withRoom(VALID_ROOM_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
