@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_VENDORS;
 
 import seedu.address.model.Model;
@@ -29,6 +30,7 @@ public class ListCommand extends Command {
         requireNonNull(model);
         model.setUiState(UiState.DEFAULT);
         model.updateFilteredVendorList(PREDICATE_SHOW_ALL_VENDORS);
+        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         return new CommandResult(MESSAGE_MULTIVIEW_SUCCESS);
     }
 
