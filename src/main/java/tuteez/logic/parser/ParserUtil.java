@@ -14,6 +14,7 @@ import tuteez.model.person.Email;
 import tuteez.model.person.Name;
 import tuteez.model.person.Phone;
 import tuteez.model.person.TelegramUsername;
+import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
 
 /**
@@ -139,5 +140,31 @@ public class ParserUtil {
             throw new ParseException(TelegramUsername.MESSAGE_CONSTRAINTS);
         }
         return TelegramUsername.of(trimmedUsername);
+    }
+
+    /** Parses a {@code String lesson} into a {@code Lesson}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static Lesson parseLesson(String lesson) throws ParseException {
+        requireNonNull(lesson);
+        String trimmedLesson = lesson.trim();
+        if (!Lesson.isValidLesson(trimmedLesson)) {
+            throw new ParseException(Lesson.MESSAGE_CONSTRAINTS);
+        }
+        return new Lesson(trimmedLesson);
+    }
+
+    /**
+     * Parses {@code Collection<String> lessons} into a {@code Set<Lesson>}.
+     */
+    public static Set<Lesson> parseLessons(Collection<String> lessons) throws ParseException {
+        requireNonNull(lessons);
+        final Set<Lesson> lessonSet = new HashSet<>();
+        for (String lesson : lessons) {
+            lessonSet.add(parseLesson(lesson));
+        }
+        return lessonSet;
     }
 }

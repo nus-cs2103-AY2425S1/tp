@@ -13,7 +13,8 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "telegramUsername" : "benson_meier",
-    "tags" : [ "owesMoney", "friends" ]
+    "tags" : [ "owesMoney", "friends" ],
+    "lessons" : [ "monday 0900-1000" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",

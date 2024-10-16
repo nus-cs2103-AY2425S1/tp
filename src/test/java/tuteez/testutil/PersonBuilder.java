@@ -9,6 +9,7 @@ import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
 import tuteez.model.person.TelegramUsername;
+import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
 import tuteez.model.util.SampleDataUtil;
 
@@ -30,6 +31,8 @@ public class PersonBuilder {
     private TelegramUsername telegramUsername;
     private Set<Tag> tags;
 
+    private Set<Lesson> lessons;
+
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
@@ -40,6 +43,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         telegramUsername = TelegramUsername.of(DEFAULT_TELEGRAM);
         tags = new HashSet<>();
+        lessons = new HashSet<>();
     }
 
     /**
@@ -52,6 +56,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         telegramUsername = personToCopy.getTelegramUsername();
         tags = new HashSet<>(personToCopy.getTags());
+        lessons = new HashSet<>(personToCopy.getLessons());
     }
 
     /**
@@ -67,6 +72,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code lessons} into a {@code Set<Lesson>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withLessons(String ... lessons) {
+        this.lessons = SampleDataUtil.getLessonSet(lessons);
         return this;
     }
 
@@ -107,7 +120,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, telegramUsername, tags);
+        return new Person(name, phone, email, address, telegramUsername, tags, lessons);
     }
 
 }

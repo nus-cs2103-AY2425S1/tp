@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import tuteez.commons.util.ToStringBuilder;
+import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
 
 /**
@@ -25,18 +26,22 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Lesson> lessons = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, TelegramUsername teleHandle, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, TelegramUsername teleHandle, Set<Tag> tags,
+                  Set<Lesson> lessons) {
+        requireAllNonNull(name, phone, email, address, teleHandle, tags, lessons);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
         this.telegramUsername = teleHandle;
+        this.lessons.addAll(lessons);
     }
 
     public Name getName() {
@@ -65,6 +70,14 @@ public class Person {
 
     public TelegramUsername getTelegramUsername() {
         return telegramUsername;
+    }
+
+    /**
+     * Returns an immutable lesson set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Lesson> getLessons() {
+        return Collections.unmodifiableSet(lessons);
     }
 
     /**
@@ -101,13 +114,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && telegramUsername.equals(otherPerson.telegramUsername);
+                && telegramUsername.equals(otherPerson.telegramUsername)
+                && lessons.equals(otherPerson.lessons);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, telegramUsername, tags);
+        return Objects.hash(name, phone, email, address, telegramUsername, tags, lessons);
     }
 
     @Override
@@ -119,6 +133,7 @@ public class Person {
                 .add("address", address)
                 .add("telegramUsername", telegramUsername)
                 .add("tags", tags)
+                .add("lessons", lessons)
                 .toString();
     }
 

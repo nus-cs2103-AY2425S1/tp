@@ -11,7 +11,11 @@ import tuteez.model.person.Email;
 import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
+<<<<<<< HEAD
 import tuteez.model.person.TelegramUsername;
+=======
+import tuteez.model.person.lesson.Lesson;
+>>>>>>> upstream/master
 import tuteez.model.tag.Tag;
 
 /**
@@ -21,6 +25,7 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+<<<<<<< HEAD
                 new Address("Blk 30 Geylang Street 29, #06-40"), TelegramUsername.of("alex_yeoh"),
                 getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
@@ -38,6 +43,25 @@ public class SampleDataUtil {
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"), TelegramUsername.of("roy_balakrishnan"),
                 getTagSet("colleagues"))
+=======
+                new Address("Blk 30 Geylang Street 29, #06-40"),
+                getTagSet("Chemistry"), getLessonSet("monday 0900-1000")),
+            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
+                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                getTagSet("Physics", "Sec 4"), getLessonSet("tuesday 1000-1100")),
+            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
+                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                getTagSet("Primary 6"), getLessonSet("wednesday 1000-1200")),
+            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
+                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                getTagSet("JC math"), getLessonSet("friday 1000-1100")),
+            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
+                new Address("Blk 47 Tampines Street 20, #17-35"),
+                getTagSet("Uni math"), getLessonSet("saturday 0900-1100")),
+            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
+                new Address("Blk 45 Aljunied Street 85, #11-31"),
+                getTagSet("secondary science"), getLessonSet("sunday 0900-1100"))
+>>>>>>> upstream/master
         };
     }
 
@@ -55,6 +79,15 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a Lesson set containing the list of strings given.
+     */
+    public static Set<Lesson> getLessonSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Lesson::new)
                 .collect(Collectors.toSet());
     }
 
