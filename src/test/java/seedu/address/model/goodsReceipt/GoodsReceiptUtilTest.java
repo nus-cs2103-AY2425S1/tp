@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.goods.Goods;
 import seedu.address.model.person.Name;
 import seedu.address.testutil.GoodsReceiptTestUtil;
 
@@ -27,19 +26,19 @@ public class GoodsReceiptUtilTest {
     public void filterGoodsBySuppliers_noValidSupplier() {
         List<GoodsReceipt> filteredList =
                 GoodsReceiptUtil.filterGoodsReceiptsBySuppliers(new Name("No Such Person"), GOODS_LIST);
-        assertTrue(filteredList.isEmpty());
+        assertTrue(filteredList.size() == 0);
     }
 
     @Test
     public void sumQuantityBySuppliers_success() {
         int total = GoodsReceiptUtil.sumQuantityBySuppliers(new Name("Alex Yeoh"), GOODS_LIST);
-        assertEquals(11, total);
+        assertTrue(total == 11);
     }
 
     @Test
     public void sumQuantityBySuppliers_noValidSupplier() {
         int total = GoodsReceiptUtil.sumQuantityBySuppliers(new Name("No Such Person"), GOODS_LIST);
-        assertEquals(0, total);
+        assertTrue(total == 0);
     }
 
     @Test

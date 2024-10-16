@@ -5,12 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.goodsReceipt.Date;
-import seedu.address.model.person.Name;
-
 public class GoodsTest {
-    private static final String DATETIME_VALID = "2024-10-10 12:00";
-    private static final String DATETIME_INVALID = "2024-12-12 12:00";
 
     @Test
     public void constructor_null_throwsNullPointerException() {
