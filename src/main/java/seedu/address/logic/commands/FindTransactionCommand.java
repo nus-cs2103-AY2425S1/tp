@@ -8,7 +8,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.IsSelectedPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Transaction;
 import seedu.address.model.person.TransactionContainsKeywordsPredicate;
@@ -48,7 +47,6 @@ public class FindTransactionCommand extends Command {
         }
         Person targetPerson = lastShownList.get(personIndex.getZeroBased());
         List<Transaction> targetTransactions = targetPerson.getTransactions();
-        model.updateFilteredPersonList(new IsSelectedPredicate(model, personIndex));
         model.setViewTransactions(true);
         model.updateTransactionList(targetTransactions);
         model.updateTransactionListPredicate(predicate);
@@ -69,6 +67,7 @@ public class FindTransactionCommand extends Command {
         }
 
         FindTransactionCommand otherFindTransactionCommand = (FindTransactionCommand) other;
-        return predicate.equals(otherFindTransactionCommand.predicate);
+        return personIndex.equals(otherFindTransactionCommand.personIndex)
+                && predicate.equals(otherFindTransactionCommand.predicate);
     }
 }

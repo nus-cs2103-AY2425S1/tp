@@ -23,7 +23,6 @@ public class ListTransactionCommandTest {
     public void execute_listAllTransactions_success() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ListTransactionCommand(INDEX_FIRST_PERSON), model,
                 String.format(ListTransactionCommand.MESSAGE_SUCCESS,
                         Messages.format(expectedModel.getFilteredPersonList().get(0))),
