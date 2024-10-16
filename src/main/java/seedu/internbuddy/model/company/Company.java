@@ -2,7 +2,6 @@ package seedu.internbuddy.model.company;
 
 import static seedu.internbuddy.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -11,10 +10,7 @@ import java.util.Set;
 
 import seedu.internbuddy.commons.util.ToStringBuilder;
 import seedu.internbuddy.model.application.Application;
-<<<<<<< HEAD
-=======
 import seedu.internbuddy.model.name.Name;
->>>>>>> 8ce56d129d6c593599337e6f86afb427804a5541
 import seedu.internbuddy.model.tag.Tag;
 
 /**
@@ -33,7 +29,6 @@ public class Company {
     private Status status;
     private final List<Application> applications;
     private final Set<Tag> tags = new HashSet<>();
-    private final ArrayList<Application> applications = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -86,7 +81,7 @@ public class Company {
      * Adds a new application to the company
      */
     public void addApplication(Application application) {
-        this.status = Status.applied();
+        this.status = status.applied();
         this.applications.add(application);
     }
 

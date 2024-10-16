@@ -160,6 +160,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setStatus(toCopy.status);
         }
 
         /**
@@ -242,7 +243,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditCompanyDescriptor.phone)
                     && Objects.equals(email, otherEditCompanyDescriptor.email)
                     && Objects.equals(address, otherEditCompanyDescriptor.address)
-                    && Objects.equals(tags, otherEditCompanyDescriptor.tags);
+                    && Objects.equals(tags, otherEditCompanyDescriptor.tags)
+                    && Objects.equals(status, otherEditCompanyDescriptor.status);
         }
 
         @Override

@@ -28,16 +28,20 @@ public class SampleDataUtil {
             new Company(new Name("Google"), new Phone("6502530000"), new Email("contact@google.com"),
                     new Address("1600 Amphitheatre Parkway, Mountain View, CA 94043"),
                     getTagSet("tech", "search"), new Status("APPLIED"),
-                    getApplicationList(createApplication("SWE Intern", "APPLIED"),
-                            createApplication("QA Engineer", "INTERVIEWED"))),
+                    getApplicationList(createApplication("SWE Intern",
+                                    "Requires ReactJS and Express JS", "APPLIED"),
+                            createApplication("QA Engineer", "Requires Java",
+                                    "INTERVIEWED"))),
             new Company(new Name("Microsoft"), new Phone("4258828080"), new Email("contact@microsoft.com"),
                     new Address("One Microsoft Way, Redmond, WA 98052"),
                     getTagSet("tech", "software"), new Status("APPLIED"),
-                    getApplicationList(createApplication("AI Engineer", "OA"))),
+                    getApplicationList(createApplication("AI Engineer",
+                            "Requires Python", "OA"))),
             new Company(new Name("Apple"), new Phone("4089961010"), new Email("contact@apple.com"),
                 new Address("One Apple Park Way, Cupertino, CA 95014"),
                 getTagSet("tech", "hardware"), new Status("APPLIED"),
-                    getApplicationList(createApplication("UI/UX Developer", "REJECTED"))),
+                    getApplicationList(createApplication("UI/UX Developer", "Requires Figma",
+                            "REJECTED"))),
             new Company(new Name("Amazon"), new Phone("2062661000"), new Email("contact@amazon.com"),
                     new Address("410 Terry Ave N, Seattle, WA 98109"),
                     getTagSet("ecommerce", "cloud"), new Status("INTERESTED"), new ArrayList<>()),
@@ -70,8 +74,8 @@ public class SampleDataUtil {
     /**
      * Returns an application with a given description and status
      */
-    public static Application createApplication(String description, String appStatus) {
-        return new Application(new Description(description), new AppStatus(appStatus));
+    public static Application createApplication(String name, String description, String appStatus) {
+        return new Application(new Name(name), new Description(description), new AppStatus(appStatus));
     }
 
     /**

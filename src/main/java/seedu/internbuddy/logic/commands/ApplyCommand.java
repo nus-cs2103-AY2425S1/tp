@@ -54,8 +54,8 @@ public class ApplyCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
         }
 
-        Company companyToEdit = lastShownList.get(index.getZeroBased());
-        companyToEdit.addApplication(toAdd);
+        Company company = lastShownList.get(index.getZeroBased());
+        company.addApplication(toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
