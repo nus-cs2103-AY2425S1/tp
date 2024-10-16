@@ -7,36 +7,53 @@ import java.util.Optional;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyScheduleList;
 
+/**
+ * Represents a storage for {@link seedu.address.model.ScheduleList}.
+ * This interface defines the operations for reading from and writing to
+ * the schedule storage file.
+ */
 public interface ScheduleStorage {
-    
+
     /**
-     * Returns the file path of the data file.
+     * Returns the file path of the schedule list data file.
+     *
+     * @return The {@code Path} of the schedule list data file.
      */
     Path getScheduleListFilePath();
-    
+
     /**
-     * Returns Schedule data as a {@link ReadOnlyScheduleList}.
-     * Returns {@code Optional.empty()} if storage file is not found.
+     * Reads and returns the schedule data as a {@link ReadOnlyScheduleList}.
+     * If the storage file is not found, it returns {@code Optional.empty()}.
      *
-     * @throws DataLoadingException if loading the data from storage failed.
+     * @return An {@code Optional<ReadOnlyScheduleList>} representing the schedule list.
+     * @throws DataLoadingException If there is an issue loading the data from storage.
      */
     Optional<ReadOnlyScheduleList> readScheduleList() throws DataLoadingException;
-    
+
     /**
-     * @see #getScheduleListFilePath()
+     * Reads and returns the schedule data from the specified file path.
+     * Returns {@code Optional.empty()} if the storage file is not found.
+     *
+     * @param filePath The path to the schedule data file. Cannot be null.
+     * @return An {@code Optional<ReadOnlyScheduleList>} representing the schedule list.
+     * @throws DataLoadingException If there is an issue loading the data from storage.
      */
     Optional<ReadOnlyScheduleList> readScheduleList(Path filePath) throws DataLoadingException;
-    
+
     /**
-     * Saves the given {@link ReadOnlyScheduleList to the storage.
-     * @param scheduleList cannot be null.
-     * @throws IOException if there was any problem writing to the file.
+     * Saves the given {@link ReadOnlyScheduleList} to the storage.
+     *
+     * @param scheduleList The schedule list to save. Cannot be null.
+     * @throws IOException If there is an issue writing to the file.
      */
     void saveScheduleList(ReadOnlyScheduleList scheduleList) throws IOException;
-    
+
     /**
-     * @see #saveScheduleList(ReadOnlyScheduleList)
+     * Saves the given {@link ReadOnlyScheduleList} to the storage at the specified file path.
+     *
+     * @param scheduleList The schedule list to save. Cannot be null.
+     * @param filePath     The path to the schedule data file. Cannot be null.
+     * @throws IOException If there is an issue writing to the file.
      */
     void saveScheduleList(ReadOnlyScheduleList scheduleList, Path filePath) throws IOException;
-    
 }
