@@ -103,17 +103,6 @@ class JsonAdaptedPerson {
         }
         final Telegram modelTelegram = new Telegram(telegram);
 
-        /*
-        if (roles.size() == 0) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
-        }
-        if (roles.stream().map(jsonRole -> new Role(jsonRole.getTagName())).anyMatch(role -> !Role.isValidRole(role.toString()))) {
-            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
-        }
-        final List<Role> modelRoles = personRoles.stream().map(tag -> new Role(tag.tagName)).collect(Collectors.toList());
-
-         */
-
         final Set<Tag> modelTags = new HashSet<>(personRoles);
 
         return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelTags);

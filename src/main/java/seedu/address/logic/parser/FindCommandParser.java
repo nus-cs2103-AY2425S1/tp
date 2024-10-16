@@ -4,7 +4,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
