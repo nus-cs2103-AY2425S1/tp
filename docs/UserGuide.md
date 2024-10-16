@@ -103,9 +103,21 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GRADE_LEVEL]`
 Examples:
 *  `edit 1 n/Jane Doe p/91234567` Edits the name and phone number of the 1st student to be `Jane Doe` and `91234567` respectively.
 
+### Assigning piano pieces to a student: `assign`
+
+Assigns piano pieces to a student in the student directory.
+
+Format: `assign INDEX pn/PIECE_NAME...`
+
+* Assigns piano pieces to the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+*  Existing values will remain unchanged
+
+Examples:
+*  `assign 1 pn/Etude pn/Moonlight Sonata` Adds `Etude` and `Moonlight Sonata` to the 1st person's piano pieces.
+
 ### Scheduling a regular lesson : `schedule`
 
-Schedules a regular lesson for the specified student in the student directory. 
+Schedules a regular lesson for the specified student in the student directory.
 
 Format: `schedule INDEX d/DAY st/START_TIME et/END_TIME`
 
@@ -116,7 +128,7 @@ Format: `schedule INDEX d/DAY st/START_TIME et/END_TIME`
 
 Example:
 * `schedule 1 d/Tuesday st/16:00 et/18:00` Schedules a regular lesson on Tuesday, 4-6pm for the 1st student.
-
+* 
 ### Locating students by name: `find`
 
 Finds students whose names contain any of the given keywords.
@@ -204,6 +216,7 @@ Action     | Format, Examples
 **Add**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 g/LCM 1`
 **List**   | `list`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee p/81234567`
+**Assign** | `assign INDEX pn/PIECE_NAME...`<br> e.g,`assign 1 pn/Moonlight Sonata pn/Canon in D`
 **Schedule** | `schedule INDEX d/DAY st/START_TIME et/END_TIME`<br> e.g.,`schedule 1 d/Monday st/12:00 et/14:00`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
