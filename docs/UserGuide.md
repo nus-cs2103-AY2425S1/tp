@@ -267,15 +267,15 @@ the data of your previous AcademyAssist folder.
 
 ## Command summary
 
-| Action | Format, Examples                                                                                                                                                     |
-|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER s/SUBJECT` <br> e.g., `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T384859A s/Science` |
-| **Delete** | `delete IC_NUMBER`<br> e.g., `delete S1234567A`                                                                                                                      |
-| **Edit** | `edit IC_NUMBER FIELD/NEW_VALUE`<br> e.g.,`edit S1234567A a/New_Address`                                                                                             |
-| **View** | `view`                                                                                                                                                               |
-| **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John Jane`                                                                                                            |
-| **Add Class** | `addc i/IC_NUMBER s/SUBJECT`<br> e.g., `addc S1234567A Science`                                                                                                      |
-| **Sort** | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                               |
-| **Clear** | `clear`                                                                                                                                                              |
-| **Help** | `help`                                                                                                                                                               |
-| **Exit** | `exit`                                                                                                                                                               |
+| Action | Format, Examples                                                                                                                                                           |
+|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER s/SUBJECT t/TAG` <br> e.g., `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T384859A s/Science` |
+| **Delete** | `delete IC_NUMBER`<br> e.g., `delete S1234567A`                                                                                                                            |
+| **Edit** | `edit IC_NUMBER FIELD/NEW_VALUE`<br> e.g.,`edit S1234567A a/New_Address`                                                                                                   |
+| **View** | `view`                                                                                                                                                                     |
+| **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John Jane`                                                                                                                  |
+| **Add Class** | `addc i/IC_NUMBER s/SUBJECT`<br> e.g., `addc S1234567A Science`                                                                                                            |
+| **Sort** | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                                     |
+| **Clear** | `clear`                                                                                                                                                                    |
+| **Help** | `help`                                                                                                                                                                     |
+| **Exit** | `exit`                                                                                                                                                                     |
