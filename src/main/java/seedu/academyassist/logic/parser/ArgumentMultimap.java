@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import seedu.academyassist.logic.parser.exceptions.ParseException;
 import seedu.academyassist.logic.Messages;
+import seedu.academyassist.logic.parser.exceptions.ParseException;
 
 /**
  * Stores mapping of prefixes to their respective arguments.

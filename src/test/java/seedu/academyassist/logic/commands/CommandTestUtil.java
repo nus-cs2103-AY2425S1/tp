@@ -17,7 +17,7 @@ import java.util.List;
 
 import seedu.academyassist.commons.core.index.Index;
 import seedu.academyassist.logic.commands.exceptions.CommandException;
-import seedu.academyassist.model.AddressBook;
+import seedu.academyassist.model.AcademyAssist;
 import seedu.academyassist.model.Model;
 import seedu.academyassist.model.person.Ic;
 import seedu.academyassist.model.person.IcMatchesPredicate;

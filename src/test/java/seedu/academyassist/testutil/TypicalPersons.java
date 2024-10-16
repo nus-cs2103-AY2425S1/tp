@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.academyassist.model.AddressBook;
+import seedu.academyassist.model.AcademyAssist;
 import seedu.academyassist.model.person.Person;
 
 /**
