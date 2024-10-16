@@ -9,14 +9,16 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
 
-<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-          minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@DarkTheme.css" />
-        <URL value="@Extensions.css" />
+        <URL value="@CommandText.css" />
+        <URL value="@Menu.css" />
+            <URL value="@Extensions.css" />
+            <URL value="@ResultDisplay.css" />
       </stylesheets>
 
       <VBox>
@@ -29,26 +31,25 @@
           </Menu>
         </MenuBar>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+        <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
+        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="130.0" minHeight="100" prefHeight="130.0" prefWidth="408.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
 
-        <SplitPane VBox.vgrow="ALWAYS" styleClass="pane-with-border">
-          <VBox fx:id="guestList" styleClass="pane-with-border" minWidth="200" prefWidth="200" VBox.vgrow="ALWAYS">
-            <StackPane fx:id="guestListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+        <SplitPane dividerPositions="0.5" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+          <VBox fx:id="guestList" minWidth="200" prefWidth="200" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+            <StackPane fx:id="guestListPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
 
-          <VBox fx:id="vendorList" styleClass="pane-with-border" minWidth="200" prefWidth="200" VBox.vgrow="ALWAYS">
-            <StackPane fx:id="vendorListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          <VBox fx:id="vendorList" minWidth="200" prefWidth="200" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+            <StackPane fx:id="vendorListPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
         </SplitPane>
 
