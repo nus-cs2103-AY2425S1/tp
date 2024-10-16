@@ -103,7 +103,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `PROpertyParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
@@ -115,7 +115,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `PROpertyParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `PROpertyParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -131,7 +131,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `PROperty`, which `Person` references. This allows `PROperty` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -146,7 +146,7 @@ The `Model` component,
 The `Storage` component,
 
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from both `PROpertyStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -163,37 +163,37 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedPROperty`. It extends `PROperty` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedPROperty#commit()` — Saves the current address book state in its history.
+* `VersionedPROperty#undo()` — Restores the previous address book state from its history.
+* `VersionedPROperty#redo()` — Restores a previously undone address book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitPROperty()`, `Model#undoPROperty()` and `Model#redoPROperty()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedPROperty` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitPROperty()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitPROperty()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitPROperty()`, so the address book state will not be saved into the `addressBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoPROperty()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial PROperty state, then there are no previous PROperty states to restore. The `undo` command uses `Model#canUndoPROperty()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -210,17 +210,17 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoPROperty()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone PROperty states to restore. The `redo` command uses `Model#canRedoPROperty()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitPROperty()`, `Model#undoPROperty()` or `Model#redoPROperty()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitPROperty()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -340,7 +340,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `PROperty` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Add a person**
 
@@ -348,11 +348,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to add a new person by providing the person's details.
 
-2. AddressBook validates the input details.
+2. PROperty validates the input details.
 
-3. AddressBook adds the person to the contact list.
+3. PROperty adds the person to the contact list.
 
-4. AddressBook displays a confirmation that the person has been added.
+4. PROperty displays a confirmation that the person has been added.
    
    Use case ends.
 
@@ -360,15 +360,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. The input details are invalid or incomplete.
   
-  - 2a1. AddressBook shows an error message indicating the invalid fields.
+  - 2a1. PROperty shows an error message indicating the invalid fields.
   
-  - 2a2. AddressBook prompts the user to re-enter the details.
+  - 2a2. PROperty prompts the user to re-enter the details.
     
     Use case resumes at step 1.
 
 - 2b. A person with the same details already exists.
   
-  - 2b1. AddressBook informs the user that the person already exists.
+  - 2b1. PROperty informs the user that the person already exists.
     
     Use case ends.
 
@@ -380,15 +380,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to edit details of a specific person.
 
-2. AddressBook displays the current details of the person.
+2. PROperty displays the current details of the person.
 
 3. User updates the desired fields.
 
-4. AddressBook validates the new details.
+4. PROperty validates the new details.
 
-5. AddressBook saves the updated details.
+5. PROperty saves the updated details.
 
-6. AddressBook confirms that the person's details have been updated.
+6. PROperty confirms that the person's details have been updated.
    
    Use case ends.
 
@@ -396,33 +396,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. The specified person does not exist.
   
-  - 1a1. AddressBook shows an error message.
+  - 1a1. PROperty shows an error message.
     
     Use case ends.
 
 - 4a. The new details are invalid.
   
-  - 4a1. AddressBook shows an error message indicating the invalid fields.
+  - 4a1. PROperty shows an error message indicating the invalid fields.
   
-  - 4a2. AddressBook prompts the user to re-enter the details.
+  - 4a2. PROperty prompts the user to re-enter the details.
     
     Use case resumes at step 3.
 
 ---
 
-**Use case: Add remarks/notes to a person**
+**Use case: Add remarks to a person**
 
 **MSS**
 
-1. User selects a person to add a remark/note.
+1. User selects a person to add a remark.
 
-2. AddressBook displays an input field for the remark/note.
+2. PROperty displays an input field for the remark.
 
-3. User enters the remark/note.
+3. User enters the remark.
 
-4. AddressBook saves the remark/note to the person's details.
+4. PROperty saves the remark to the person's details.
 
-5. AddressBook confirms that the remark/note has been added.
+5. PROperty confirms that the remark has been added.
    
    Use case ends.
 
@@ -430,17 +430,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. The specified person does not exist.
   
-  - 1a1. AddressBook shows an error message.
+  - 1a1. PROperty shows an error message.
     
     Use case ends.
 
-- 3a. The remark/note is empty or exceeds character limits.
+- 3a. The remark is empty.
   
-  - 3a1. AddressBook shows an error message.
-  
-  - 3a2. AddressBook prompts the user to re-enter the remark/note.
-    
-    Use case resumes at step 2.
+  - 3a1. PROperty removes the remark from the specified person.
+
 
 ---
 
@@ -450,9 +447,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to search for persons using one or more tags.
 
-2. AddressBook filters the contact list based on the specified tags.
+2. PROperty filters the contact list based on the specified tags.
 
-3. AddressBook displays a list of persons matching the tags.
+3. PROperty displays a list of persons matching the tags.
    
    Use case ends.
 
@@ -460,13 +457,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. No tags are specified.
   
-  - 1a1. AddressBook shows an error message prompting for at least one tag.
+  - 1a1. PROperty shows an error message prompting for at least one tag.
     
     Use case resumes at step 1.
 
 - 2a. No persons match the specified tags.
   
-  - 2a1. AddressBook informs the user that no matches were found.
+  - 2a1. PROperty informs the user that no matches were found.
     
     Use case ends.
 
@@ -478,13 +475,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to view all existing tags.
 
-2. AddressBook displays a list of all tags.
+2. PROperty displays a list of all tags.
 
 3. User selects an option to add, edit, or delete tags.
 
-4. AddressBook performs the selected action.
+4. PROperty performs the selected action.
 
-5. AddressBook confirms that the tags have been updated.
+5. PROperty confirms that the tags have been updated.
    
    Use case ends.
 
@@ -494,7 +491,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
   - 3a1. User provides the tag name and optional color.
   
-  - 3a2. AddressBook adds the new tag.
+  - 3a2. PROperty adds the new tag.
     
     Use case resumes at step 5.
 
@@ -504,7 +501,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
   - 3b2. User updates the tag's name or color.
   
-  - 3b3. AddressBook saves the changes.
+  - 3b3. PROperty saves the changes.
     
     Use case resumes at step 5.
 
@@ -512,13 +509,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
   - 3c1. User selects the tag to delete.
   
-  - 3c2. AddressBook removes the tag from all associated contacts.
+  - 3c2. PROperty removes the tag from all associated contacts.
     
     Use case resumes at step 5.
 
 - 3d. The tag name provided already exists (for add/edit).
   
-  - 3d1. AddressBook shows an error message.
+  - 3d1. PROperty shows an error message.
     
     Use case resumes at step 3.
 
@@ -530,13 +527,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User selects a contact to set a reminder for.
 
-2. AddressBook prompts the user to enter reminder details (date, time, message).
+2. PROperty prompts the user to enter reminder details (date, time, message).
 
 3. User enters the reminder details.
 
-4. AddressBook saves the reminder linked to the contact.
+4. PROperty saves the reminder linked to the contact.
 
-5. AddressBook confirms that the reminder has been set.
+5. PROperty confirms that the reminder has been set.
    
    Use case ends.
 
@@ -544,15 +541,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. The specified contact does not exist.
   
-  - 1a1. AddressBook shows an error message.
+  - 1a1. PROperty shows an error message.
     
     Use case ends.
 
 - 3a. The reminder details are incomplete or invalid.
   
-  - 3a1. AddressBook shows an error message indicating the issue.
+  - 3a1. PROperty shows an error message indicating the issue.
   
-  - 3a2. AddressBook prompts the user to re-enter the reminder details.
+  - 3a2. PROperty prompts the user to re-enter the reminder details.
     
     Use case resumes at step 2.
 
@@ -564,9 +561,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to view upcoming reminders/events.
 
-2. AddressBook retrieves reminders/events sorted by date and time.
+2. PROperty retrieves reminders/events sorted by date and time.
 
-3. AddressBook displays the list of upcoming reminders/events.
+3. PROperty displays the list of upcoming reminders/events.
    
    Use case ends.
 
@@ -574,7 +571,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. There are no upcoming reminders/events.
   
-  - 2a1. AddressBook informs the user that there are no upcoming reminders/events.
+  - 2a1. PROperty informs the user that there are no upcoming reminders/events.
     
     Use case ends.
 
@@ -586,9 +583,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to undo the last action.
 
-2. AddressBook reverses the last action performed.
+2. PROperty reverses the last action performed.
 
-3. AddressBook confirms that the action has been undone.
+3. PROperty confirms that the action has been undone.
    
    Use case ends.
 
@@ -596,13 +593,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. There is no action to undo.
   
-  - 1a1. AddressBook informs the user that there is nothing to undo.
+  - 1a1. PROperty informs the user that there is nothing to undo.
     
     Use case ends.
 
 - 2a. The last action cannot be undone (e.g., permanent changes).
   
-  - 2a1. AddressBook informs the user that the action cannot be undone.
+  - 2a1. PROperty informs the user that the action cannot be undone.
     
     Use case ends.
 
@@ -614,7 +611,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to view usage instructions.
 
-2. AddressBook displays the help guide with a list of available commands and features.
+2. PROperty displays the help guide with a list of available commands and features.
    
    Use case ends.
 
@@ -622,7 +619,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. The help guide fails to load.
   
-  - 2a1. AddressBook shows an error message.
+  - 2a1. PROperty shows an error message.
     
     Use case ends.
 
@@ -634,11 +631,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User begins typing a command.
 
-2. AddressBook suggests possible commands based on the input.
+2. PROperty suggests possible commands based on the input.
 
 3. User selects a suggested command or continues typing.
 
-4. AddressBook auto-completes the command.
+4. PROperty auto-completes the command.
    
    Use case ends.
 
@@ -646,13 +643,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. No commands match the input.
   
-  - 2a1. AddressBook does not provide suggestions.
+  - 2a1. PROperty does not provide suggestions.
     
     Use case ends.
 
 - 3a. User does not select a suggestion and enters an invalid command.
   
-  - 3a1. AddressBook shows an error message.
+  - 3a1. PROperty shows an error message.
     
     Use case ends.
 
@@ -664,11 +661,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User types a command with attributes.
 
-2. AddressBook highlights different parts of the command (e.g., commands, attributes, values) in different colors.
+2. PROperty highlights different parts of the command (e.g., commands, attributes, values) in different colors.
 
-3. If there's a syntax error, AddressBook underlines or marks the error.
+3. If there's a syntax error, PROperty underlines or marks the error.
 
-4. AddressBook provides real-time feedback to the user.
+4. PROperty provides real-time feedback to the user.
    
    Use case ends.
 
@@ -676,7 +673,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 3a. The command has multiple errors.
   
-  - 3a1. AddressBook highlights all errors.
+  - 3a1. PROperty highlights all errors.
     
     Use case ends.
 
@@ -688,9 +685,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User executes a command.
 
-2. AddressBook detects an error in the command.
+2. PROperty detects an error in the command.
 
-3. AddressBook displays an error message clearly indicating the cause.
+3. PROperty displays an error message clearly indicating the cause.
 
 4. User reviews the error message and corrects the command.
    
@@ -702,7 +699,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
   - 3a1. User requests more details.
   
-  - 3a2. AddressBook provides additional information about the error.
+  - 3a2. PROperty provides additional information about the error.
     
     Use case resumes at step 4.
 
@@ -714,9 +711,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to sort contacts by a specific attribute (e.g., name, date added, tag).
 
-2. AddressBook sorts the contact list based on the selected attribute.
+2. PROperty sorts the contact list based on the selected attribute.
 
-3. AddressBook displays the sorted list.
+3. PROperty displays the sorted list.
    
    Use case ends.
 
@@ -724,7 +721,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. The specified attribute is invalid.
   
-  - 1a1. AddressBook shows an error message.
+  - 1a1. PROperty shows an error message.
     
     Use case ends.
 
@@ -736,11 +733,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to view search history.
 
-2. AddressBook displays a list of recent searches.
+2. PROperty displays a list of recent searches.
 
 3. User selects a previous search to reuse.
 
-4. AddressBook performs the search and displays the results.
+4. PROperty performs the search and displays the results.
    
    Use case ends.
 
@@ -748,7 +745,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. There is no search history.
   
-  - 2a1. AddressBook informs the user that there is no search history.
+  - 2a1. PROperty informs the user that there is no search history.
     
     Use case ends.
 
@@ -760,13 +757,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User selects a tag to customize.
 
-2. AddressBook prompts the user to choose a color.
+2. PROperty prompts the user to choose a color.
 
 3. User selects a color for the tag.
 
-4. AddressBook updates the tag with the chosen color.
+4. PROperty updates the tag with the chosen color.
 
-5. AddressBook confirms that the tag has been updated.
+5. PROperty confirms that the tag has been updated.
    
    Use case ends.
 
@@ -774,7 +771,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. The color selected is already in use by another tag.
   
-  - 2a1. AddressBook warns the user about the duplicate color.
+  - 2a1. PROperty warns the user about the duplicate color.
   
   - 2a2. User chooses to proceed or select a different color.
     
@@ -788,9 +785,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests suggestions for types of tags.
 
-2. AddressBook analyzes existing contacts and interactions.
+2. PROperty analyzes existing contacts and interactions.
 
-3. AddressBook provides a list of suggested tags.
+3. PROperty provides a list of suggested tags.
 
 4. User reviews and applies relevant tags to contacts.
    
@@ -798,9 +795,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 2a. AddressBook lacks sufficient data to provide suggestions.
+- 2a. PROperty lacks sufficient data to provide suggestions.
   
-  - 2a1. AddressBook informs the user and suggests manual tag creation.
+  - 2a1. PROperty informs the user and suggests manual tag creation.
     
     Use case ends.
 
@@ -812,7 +809,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. New user requests to view a guide on application features.
 
-2. AddressBook displays a comprehensive guide detailing all features and how to use them.
+2. PROperty displays a comprehensive guide detailing all features and how to use them.
    
    Use case ends.
 
@@ -820,7 +817,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. The guide fails to load or is unavailable.
   
-  - 2a1. AddressBook shows an error message.
+  - 2a1. PROperty shows an error message.
     
     Use case ends.
 
@@ -832,7 +829,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User navigates through the application's feature tour.
 
-2. AddressBook guides the user step-by-step through each feature.
+2. PROperty guides the user step-by-step through each feature.
 
 3. User interacts with the features as they are presented.
    
@@ -842,13 +839,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. User opts to skip the feature tour.
   
-  - 1a1. AddressBook exits the tour.
+  - 1a1. PROperty exits the tour.
     
     Use case ends.
 
 - 3a. User encounters an issue during the tour.
   
-  - 3a1. AddressBook provides troubleshooting tips.
+  - 3a1. PROperty provides troubleshooting tips.
     
     Use case resumes at step 2.
 
@@ -860,11 +857,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to search for contacts using multiple tags.
 
-2. AddressBook filters contacts that match all specified tags.
+2. PROperty filters contacts that match all specified tags.
 
 3. User requests to sort the filtered contacts by a chosen attribute.
 
-4. AddressBook sorts and displays the contacts.
+4. PROperty sorts and displays the contacts.
    
    Use case ends.
 
@@ -872,13 +869,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. No contacts match all the specified tags.
   
-  - 2a1. AddressBook informs the user that no contacts were found.
+  - 2a1. PROperty informs the user that no contacts were found.
     
     Use case ends.
 
 - 3a. The sorting attribute is invalid.
   
-  - 3a1. AddressBook shows an error message.
+  - 3a1. PROperty shows an error message.
     
     Use case ends.
 
@@ -892,7 +889,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 2. User presses the TAB key.
 
-3. AddressBook auto-completes or suggests possible commands/attributes.
+3. PROperty auto-completes or suggests possible commands/attributes.
 
 4. User selects a suggestion or continues typing.
    
@@ -902,7 +899,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. Multiple suggestions are available.
   
-  - 2a1. AddressBook displays a list of suggestions.
+  - 2a1. PROperty displays a list of suggestions.
   
   - 2a2. User selects from the list.
     
@@ -910,7 +907,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2b. No suggestions are available.
   
-  - 2b1. AddressBook does not auto-complete.
+  - 2b1. PROperty does not auto-complete.
     
     Use case ends.
 
@@ -922,11 +919,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User initiates a command that requires multiple attributes.
 
-2. AddressBook displays placeholders or prompts for each required attribute.
+2. PROperty displays placeholders or prompts for each required attribute.
 
 3. User fills in the attributes as guided.
 
-4. AddressBook executes the command with the provided attributes.
+4. PROperty executes the command with the provided attributes.
    
    Use case ends.
 
@@ -934,13 +931,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. User skips an attribute.
   
-  - 2a1. AddressBook prompts the user to fill in the missing attribute.
+  - 2a1. PROperty prompts the user to fill in the missing attribute.
     
     Use case resumes at step 3.
 
 - 3a. An attribute value is invalid.
   
-  - 3a1. AddressBook shows an error message indicating the invalid attribute.
+  - 3a1. PROperty shows an error message indicating the invalid attribute.
   
   - 3a2. User corrects the attribute.
     
@@ -954,7 +951,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User types a command with attributes in the command box.
 
-2. AddressBook highlights each attribute and its value in different colors.
+2. PROperty highlights each attribute and its value in different colors.
 
 3. User easily identifies each part of the command.
    
@@ -976,9 +973,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User executes a command.
 
-2. AddressBook detects an error.
+2. PROperty detects an error.
 
-3. AddressBook displays the error message prominently and clearly.
+3. PROperty displays the error message prominently and clearly.
 
 4. User reads the error message and takes corrective action.
    
@@ -988,7 +985,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 3a. Error message overlaps with other interface elements.
   
-  - 3a1. AddressBook adjusts the layout to ensure visibility.
+  - 3a1. PROperty adjusts the layout to ensure visibility.
     
     Use case resumes at step 3.
 
@@ -1002,7 +999,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 2. User tags them with a special tag (e.g., "Favorite").
 
-3. AddressBook adjusts the contact list to display tagged contacts at the top.
+3. PROperty adjusts the contact list to display tagged contacts at the top.
    
    Use case ends.
 
@@ -1010,7 +1007,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. User wants to prioritize multiple tags.
   
-  - 2a1. AddressBook allows setting priority levels for tags.
+  - 2a1. PROperty allows setting priority levels for tags.
     
     Use case resumes at step 3.
 
@@ -1032,13 +1029,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. User attempts to create a duplicate tag.
   
-  - 1a1. AddressBook informs the user and prevents duplication.
+  - 1a1. PROperty informs the user and prevents duplication.
     
     Use case resumes at step 1.
 
 - 2a. User wants to assign a contact to multiple groups.
   
-  - 2a1. AddressBook allows multiple tags per contact.
+  - 2a1. PROperty allows multiple tags per contact.
     
     Use case resumes at step 3.
 
@@ -1050,11 +1047,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User adds appointments linked to contacts or tags.
 
-2. AddressBook saves the appointments with dates and times.
+2. PROperty saves the appointments with dates and times.
 
 3. User requests to view upcoming events.
 
-4. AddressBook displays events in chronological order.
+4. PROperty displays events in chronological order.
    
    Use case ends.
 
@@ -1062,13 +1059,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. Event details are incomplete.
   
-  - 1a1. AddressBook prompts the user to complete all required fields.
+  - 1a1. PROperty prompts the user to complete all required fields.
     
     Use case resumes at step 1.
 
 - 3a. No upcoming events are scheduled.
   
-  - 3a1. AddressBook informs the user.
+  - 3a1. PROperty informs the user.
     
     Use case ends.
 
@@ -1080,9 +1077,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User types a partial command.
 
-2. AddressBook searches for commands matching the input.
+2. PROperty searches for commands matching the input.
 
-3. AddressBook suggests possible commands.
+3. PROperty suggests possible commands.
 
 4. User selects a command from the suggestions.
    
@@ -1092,7 +1089,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. No commands match the partial input.
   
-  - 2a1. AddressBook informs the user and suggests using the help guide.
+  - 2a1. PROperty informs the user and suggests using the help guide.
     
     Use case ends.
 
@@ -1106,7 +1103,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 2. User presses TAB key.
 
-3. AddressBook suggests existing values that match the input.
+3. PROperty suggests existing values that match the input.
 
 4. User selects a value from the suggestions.
    
@@ -1116,7 +1113,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 3a. No values match the input.
   
-  - 3a1. AddressBook does not provide suggestions.
+  - 3a1. PROperty does not provide suggestions.
     
     Use case ends.
 
@@ -1128,11 +1125,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User accesses the search history feature.
 
-2. AddressBook displays a list of recent searches.
+2. PROperty displays a list of recent searches.
 
 3. User selects a previous search.
 
-4. AddressBook executes the search and displays results.
+4. PROperty executes the search and displays results.
    
    Use case ends.
 
@@ -1140,7 +1137,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. Search history is empty.
   
-  - 2a1. AddressBook informs the user.
+  - 2a1. PROperty informs the user.
     
     Use case ends.
 
@@ -1152,13 +1149,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User selects a contact to modify tags.
 
-2. AddressBook displays current tags associated with the contact.
+2. PROperty displays current tags associated with the contact.
 
 3. User deselects or removes unwanted tags.
 
-4. AddressBook updates the contact's tag list.
+4. PROperty updates the contact's tag list.
 
-5. AddressBook confirms that the tags have been updated.
+5. PROperty confirms that the tags have been updated.
    
    Use case ends.
 
@@ -1166,7 +1163,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. Contact has no tags.
   
-  - 2a1. AddressBook informs the user.
+  - 2a1. PROperty informs the user.
     
     Use case ends.
 
@@ -1178,11 +1175,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User starts typing a command that accepts multiple attributes.
 
-2. AddressBook displays a dynamic template showing all possible attributes.
+2. PROperty displays a dynamic template showing all possible attributes.
 
 3. User fills in the attributes as needed.
 
-4. AddressBook validates and executes the command.
+4. PROperty validates and executes the command.
    
    Use case ends.
 
@@ -1190,13 +1187,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 3a. User skips optional attributes.
   
-  - 3a1. AddressBook proceeds with the provided attributes.
+  - 3a1. PROperty proceeds with the provided attributes.
     
     Use case resumes at step 4.
 
 - 4a. Required attributes are missing.
   
-  - 4a1. AddressBook shows an error message.
+  - 4a1. PROperty shows an error message.
   
   - 4a2. User adds the missing attributes.
     
@@ -1210,11 +1207,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User sets a reminder or schedules an event linked to a contact.
 
-2. AddressBook saves the reminder/event details.
+2. PROperty saves the reminder/event details.
 
 3. User requests to view upcoming reminders/events.
 
-4. AddressBook displays a chronological list.
+4. PROperty displays a chronological list.
    
    Use case ends.
 
@@ -1222,7 +1219,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. Reminder/event details are invalid.
   
-  - 2a1. AddressBook shows an error message.
+  - 2a1. PROperty shows an error message.
   
   - 2a2. User corrects the details.
     
@@ -1230,7 +1227,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 3a. No upcoming reminders/events.
   
-  - 3a1. AddressBook informs the user.
+  - 3a1. PROperty informs the user.
     
     Use case ends.
 
@@ -1265,7 +1262,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **Attribute Placeholder**: A prompt or template shown in the command box that indicates where the user should input specific information in a command.
 
-- **Contact**: An entry in the AddressBook representing a person, including their personal and professional information.
+- **Contact**: An entry in the PROperty representing a person, including their personal and professional information.
 
 - **Reminder/Event List**: A chronological list displaying upcoming reminders or events set by the user.
 
