@@ -79,7 +79,7 @@ public class Status {
             return true;
         }
 
-        if (!(other instanceof seedu.address.model.assignment.Status)) {
+        if (!(other instanceof Status)) {
             return false;
         }
 
