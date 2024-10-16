@@ -11,12 +11,8 @@ import java.time.format.DateTimeParseException;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ScheduleCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Meeting;
-import seedu.address.model.person.Person;
 
 /**
  * Parses input arguments and creates a new AddCommand object
