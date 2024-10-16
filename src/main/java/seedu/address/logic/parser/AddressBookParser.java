@@ -81,6 +81,7 @@ public class AddressBookParser {
             return new DeleteCommandParser().parse(arguments);
 
         case DeleteTaskCommand.COMMAND_WORD:
+            model.getUiState().setState(UiState.State.Details);
             return new DeleteTaskCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
@@ -112,6 +113,7 @@ public class AddressBookParser {
             return new TagCommandParser().parse(arguments);
 
         case AddTaskCommand.COMMAND_WORD:
+            model.getUiState().setState(UiState.State.Details);
             return new AddTaskCommandParser().parse(arguments);
 
         case ViewTasksCommand.COMMAND_WORD:
