@@ -46,12 +46,13 @@ public class Messages {
         addAddress(builder, person);
         addTags(builder, person);
         addDateOfLastVisit(builder, person);
+        
         return builder.toString();
     }
 
     private static void addDateOfLastVisit(StringBuilder sb, Person person) {
-        sb.append(person.getDateOfLastVisit())
-                .append("; Last visit: ");
+        sb.append("; Last visit: ")
+                .append(person.getDateOfLastVisit());
     }
 
     private static void addEmail(StringBuilder sb, Person person) {
