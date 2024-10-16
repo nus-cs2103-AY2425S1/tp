@@ -16,7 +16,7 @@ public class ModuleContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return person.getModuleGrades().stream()
+        return person.getModules().stream()
                 .anyMatch(module -> module.toString().toLowerCase().contains(keyword.toLowerCase()));
     }
 
