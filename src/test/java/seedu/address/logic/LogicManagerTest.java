@@ -12,8 +12,6 @@ import static seedu.address.testutil.TypicalStudents.AMY;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,7 +28,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.Student;
-import seedu.address.model.tut.Tut;
+import seedu.address.model.tut.TutorialList;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonAssignmentStorage;
 import seedu.address.storage.JsonTutorialStorage;
@@ -133,7 +131,7 @@ public class LogicManagerTest {
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
-                new AssignmentList(), new ArrayList<>());
+                new AssignmentList(), new TutorialList());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -205,7 +203,7 @@ public class LogicManagerTest {
         // Override the tutorial storage to throw the IOException when saving tutorials
         JsonTutorialStorage tutorialStorage = new JsonTutorialStorage(tempTutorialFilePath) {
             @Override
-            public void saveTutorials(List<Tut> tutorialList, Path filePath) throws IOException {
+            public void saveTutorials(TutorialList tutorialList, Path filePath) throws IOException {
                 throw dummyIoException;
             }
         };

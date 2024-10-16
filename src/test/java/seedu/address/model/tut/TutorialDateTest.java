@@ -17,7 +17,7 @@ import seedu.address.model.student.StudentId;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.TypicalStudents;
 
-public class TutDateTest {
+public class TutorialDateTest {
     private TutDate tutDate;
     private Student studentAlice;
 

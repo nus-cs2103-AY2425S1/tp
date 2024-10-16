@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.student.TutorialClass;
+import seedu.address.model.tut.Tutorial;
 
 /**
  * Deletes a tutorial class identified using it's tutorial id from the tutorial class list.
@@ -20,26 +20,26 @@ public class DeleteTutorialCommand extends Command {
             + " Parameters: TUTORIAL ID\n"
             + "Example: " + COMMAND_WORD + " 1001";
 
-    public static final String MESSAGE_DELETE_TUTORIAL_SUCCESS = "Deleted Tutorial with Tutorial ID: %1$s";
+    public static final String MESSAGE_DELETE_TUTORIAL_SUCCESS = "Deleted Tutorial: %1$s";
     public static final String MESSAGE_TUTORIAL_NOT_FOUND = "This tutorial class doesn't exist!";
 
-    private final TutorialClass tutorialClass;
+    private final Tutorial tutorial;
 
-    public DeleteTutorialCommand(TutorialClass tutorialClass) {
-        this.tutorialClass = tutorialClass;
+    public DeleteTutorialCommand(Tutorial tutorial) {
+        this.tutorial = tutorial;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasTutorialClass(tutorialClass)) {
+        if (!model.hasTutorial(tutorial)) {
             throw new CommandException(MESSAGE_TUTORIAL_NOT_FOUND);
         }
 
-        model.deleteTutorial(tutorialClass);
+        model.deleteTutorial(tutorial);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_TUTORIAL_SUCCESS, tutorialClass.toString()));
+        return new CommandResult(String.format(MESSAGE_DELETE_TUTORIAL_SUCCESS, tutorial.toString()));
     }
 
     @Override
@@ -54,13 +54,13 @@ public class DeleteTutorialCommand extends Command {
         }
 
         DeleteTutorialCommand otherDeleteCommand = (DeleteTutorialCommand) other;
-        return tutorialClass.equals(otherDeleteCommand.tutorialClass);
+        return tutorial.equals(otherDeleteCommand.tutorial);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("tutorial", tutorialClass)
+                .add("tutorial", tutorial)
                 .toString();
     }
 

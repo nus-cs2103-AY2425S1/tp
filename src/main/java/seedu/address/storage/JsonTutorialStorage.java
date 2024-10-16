@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,7 +11,7 @@ import java.util.stream.Collectors;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.tut.Tut;
+import seedu.address.model.tut.TutorialList;
 
 /**
  * A class to access Tutorial data stored as a JSON file on the hard disk.
@@ -30,12 +29,12 @@ public class JsonTutorialStorage implements TutorialStorage {
     }
 
     @Override
-    public Optional<List<Tut>> readTutorials() throws DataLoadingException {
+    public Optional<TutorialList> readTutorials() throws DataLoadingException {
         return readTutorials(filePath);
     }
 
     @Override
-    public Optional<List<Tut>> readTutorials(Path filePath) throws DataLoadingException {
+    public Optional<TutorialList> readTutorials(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
 
         Optional<JsonAdaptedTut[]> jsonAdaptedTutorials = JsonUtil.readJsonFile(filePath, JsonAdaptedTut[].class);
@@ -44,9 +43,9 @@ public class JsonTutorialStorage implements TutorialStorage {
         }
 
         try {
-            List<Tut> tutorials = new ArrayList<>();
+            TutorialList tutorials = new TutorialList();
             for (JsonAdaptedTut jsonAdaptedTut : jsonAdaptedTutorials.get()) {
-                tutorials.add(jsonAdaptedTut.toModelType());
+                tutorials.addTutorial(jsonAdaptedTut.toModelType());
             }
             return Optional.of(tutorials);
         } catch (IllegalValueException ive) {
@@ -55,16 +54,16 @@ public class JsonTutorialStorage implements TutorialStorage {
     }
 
     @Override
-    public void saveTutorials(List<Tut> tutorialList) throws IOException {
+    public void saveTutorials(TutorialList tutorialList) throws IOException {
         saveTutorials(tutorialList, filePath);
     }
 
     @Override
-    public void saveTutorials(List<Tut> tutorialList, Path filePath) throws IOException {
+    public void saveTutorials(TutorialList tutorialList, Path filePath) throws IOException {
         requireNonNull(tutorialList);
         requireNonNull(filePath);
 
-        List<JsonAdaptedTut> jsonAdaptedTutList = tutorialList.stream()
+        List<JsonAdaptedTut> jsonAdaptedTutList = tutorialList.getTutorials().stream()
                 .map(JsonAdaptedTut::new)
                 .collect(Collectors.toList());
 

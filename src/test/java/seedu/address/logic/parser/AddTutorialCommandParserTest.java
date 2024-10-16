@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddTutCommand;
 //import seedu.address.model.student.TutorialClass;
-import seedu.address.model.tut.Tut;
+import seedu.address.model.tut.Tutorial;
 
-public class AddTutCommandParserTest {
+public class AddTutorialCommandParserTest {
 
     private final AddTutCommandParser parser = new AddTutCommandParser();
     /*
@@ -51,9 +51,9 @@ public class AddTutCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid tutorial name
-        assertParseFailure(parser, INVALID_TUT_NAME_DESC + TUT_ID_DESC, Tut.MESSAGE_NAME_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_TUT_NAME_DESC + TUT_ID_DESC, Tutorial.MESSAGE_NAME_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_TUT_NAME_DESC + INVALID_TUT_ID_DESC, Tut.MESSAGE_NAME_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_TUT_NAME_DESC + INVALID_TUT_ID_DESC, Tutorial.MESSAGE_NAME_CONSTRAINTS);
     }
 }

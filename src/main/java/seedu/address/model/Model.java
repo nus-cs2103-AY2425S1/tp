@@ -2,7 +2,6 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.Date;
-import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -13,7 +12,8 @@ import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
-import seedu.address.model.tut.Tut;
+import seedu.address.model.tut.Tutorial;
+import seedu.address.model.tut.TutorialList;
 
 /**
  * The API of the Model component.
@@ -96,12 +96,12 @@ public interface Model {
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
 
-    boolean hasTutorial(Tut tutorial);
-    void addTutorial(Tut toAdd);
+    boolean hasTutorial(Tutorial tutorial);
+    void addTutorial(Tutorial toAdd);
     /**
      * Returns the List of Tut
      */
-    List<Tut> getTutorialList();
+    TutorialList getTutorialList();
 
     /** Returns the AssignmentList */
     AssignmentList getAssignmentList();
@@ -154,14 +154,9 @@ public interface Model {
      * Delete the specified tutorial class.
      * The tutorial class must exist in the tutorial list.
      *
-     * @param tutorialClass The tutorial class to be deleted.
+     * @param tutorial The tutorial class to be deleted.
      */
-    void deleteTutorial(TutorialClass tutorialClass);
-
-    /**
-     * Returns true if a tutorial class exists in the tutorial list.
-     */
-    boolean hasTutorialClass(TutorialClass tutorialClass);
+    void deleteTutorial(Tutorial tutorial);
 
     /**
      * Returns true if a student with the specified studentId exists.

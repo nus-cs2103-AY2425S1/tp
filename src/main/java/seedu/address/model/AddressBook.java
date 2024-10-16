@@ -2,18 +2,13 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
-import seedu.address.model.student.TutorialClass;
 import seedu.address.model.student.UniqueStudentList;
-import seedu.address.model.student.exceptions.StudentNotFoundException;
-import seedu.address.model.tut.Tut;
-import seedu.address.model.tut.exceptions.TutNoFoundException;
 
 /**
  * Wraps all data at the address-book level
@@ -22,8 +17,6 @@ import seedu.address.model.tut.exceptions.TutNoFoundException;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueStudentList students;
-
-    private final List<Tut> tutorials;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -34,7 +27,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         students = new UniqueStudentList();
-        tutorials = new ArrayList<>();
     }
 
     public AddressBook() {}
@@ -141,8 +133,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return students.equals(otherAddressBook.students)
-                && tutorials.equals(otherAddressBook.tutorials);
+        return students.equals(otherAddressBook.students);
     }
 
     @Override
@@ -150,57 +141,4 @@ public class AddressBook implements ReadOnlyAddressBook {
         return students.hashCode();
     }
 
-    public void addTutorial(Tut tutorial) {
-        this.tutorials.add(tutorial);
-    }
-
-    public List<Tut> getTutorials() {
-        return this.tutorials;
-    }
-
-    /**
-     * Checks if tutorial exists in book
-     * @param tutorial
-     * @return boolean representing whether tutorial exists in book
-     */
-    public boolean hasTutorial(Tut tutorial) {
-        requireNonNull(tutorial);
-        return tutorials.contains(tutorial);
-    }
-
-    /**
-     * Assigns student to tutorial
-     *
-     */
-    public void assignStudent(Student key, Tut tutKey) {
-        if (!hasStudent(key)) {
-            throw new StudentNotFoundException();
-        }
-        if (!hasTutorial(tutKey)) {
-            throw new TutNoFoundException();
-        }
-        tutKey.add(key);
-    }
-
-    /**
-     * Removes {@code tutorial} from this {@code AddressBook}.
-     * {@code tutorial} must exist in the address book.
-     *
-     * @param tutorialClass The tutorial class to be deleted.
-     */
-    public void deleteTutorial(TutorialClass tutorialClass) {
-        requireNonNull(tutorialClass);
-        this.tutorials.removeIf(id -> id.getTutorialClass().equals(tutorialClass));
-    }
-
-    /**
-     * Check if tutorial class exist in tutorial list.
-     *
-     * @param tutorialClass The tutorial class to be checked.
-     * @return True if tutorial class exist.
-     */
-    public boolean hasTutorialClass(TutorialClass tutorialClass) {
-        requireNonNull(tutorialClass);
-        return tutorials.stream().anyMatch(x -> x.getTutorialClass().equals(tutorialClass));
-    }
 }

@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.AssignmentList;
-import seedu.address.model.tut.Tut;
+import seedu.address.model.tut.TutorialList;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonAssignmentStorage;
 import seedu.address.storage.JsonTutorialStorage;
@@ -57,7 +55,7 @@ public class MainAppTest {
         UserPrefs userPrefs = new UserPrefs();
         AddressBook addressBook = new AddressBook();
         AssignmentList assignmentList = new AssignmentList();
-        List<Tut> tutorialList = new ArrayList<>();
+        TutorialList tutorialList = new TutorialList();
 
         model = new ModelManager(addressBook, userPrefs, assignmentList, tutorialList);
     }

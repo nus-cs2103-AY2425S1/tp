@@ -4,9 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalAssignments.getTypicalAssignmentList;
-
-import java.util.ArrayList;
+import static seedu.address.testutil.TypicalTutorials.TUTORIAL1;
+import static seedu.address.testutil.TypicalTutorials.TUTORIAL2;
+import static seedu.address.testutil.TypicalTutorials.getTypicalTutorialList;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,58 +17,50 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.student.TutorialClass;
-import seedu.address.model.tut.Tut;
+import seedu.address.model.tut.Tutorial;
+
+
 
 
 public class DeleteTutorialCommandTest {
-    private static final Tut TUTORIAL_1 =
-            new Tut("TutorialThree", new TutorialClass("1000"));
-
-    private static final Tut TUTORIAL_2 =
-            new Tut("TutorialTwo", new TutorialClass("1001"));
-
-    private static final Tut TUTORIAL_3 =
-            new Tut("TutorialOne", new TutorialClass("1002"));
-
-    private static final TutorialClass TUTORIAL_CLASS = new TutorialClass("1000");
 
     private final AddressBook addressBook = new AddressBook();
 
-    private Model model = new ModelManager(addressBook, new UserPrefs(), getTypicalAssignmentList(), new ArrayList<>());
+    private Model model = new ModelManager(addressBook, new UserPrefs(),
+            getTypicalAssignmentList(), getTypicalTutorialList());
 
 
     @Test
     public void execute_validTutorialId_success() {
+        Tutorial tutorial = model.getTutorialList().getTutorials().get(0);
+        DeleteTutorialCommand deleteTutorialCommand = new DeleteTutorialCommand(tutorial);
+        String expectedMessage = String.format(DeleteTutorialCommand.MESSAGE_DELETE_TUTORIAL_SUCCESS,
+                tutorial.toString());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
+                getTypicalAssignmentList(), getTypicalTutorialList());
+        expectedModel.deleteTutorial(tutorial);
 
-        addressBook.addTutorial(TUTORIAL_1);
-        addressBook.addTutorial(TUTORIAL_2);
-        addressBook.addTutorial(TUTORIAL_3);
-
-        assertTrue(addressBook.hasTutorial(TUTORIAL_1));
-        addressBook.deleteTutorial(TUTORIAL_CLASS);
-        assertFalse(addressBook.hasTutorial(TUTORIAL_1));
-        assertTrue(addressBook.hasTutorial(TUTORIAL_2));
-        assertTrue(addressBook.hasTutorial(TUTORIAL_3));
+        assertCommandSuccess(deleteTutorialCommand, model, expectedMessage, expectedModel);
 
     }
 
     @Test
     public void execute_invalidTutId_success() {
-        TutorialClass tutorialClass = new TutorialClass("1000");
-        DeleteTutorialCommand deleteTutorialCommand = new DeleteTutorialCommand(tutorialClass);
+        Tutorial tutorial = new Tutorial("tut", new TutorialClass("5000"));
+        DeleteTutorialCommand deleteTutorialCommand = new DeleteTutorialCommand(tutorial);
         assertCommandFailure(deleteTutorialCommand, model, DeleteTutorialCommand.MESSAGE_TUTORIAL_NOT_FOUND);
     }
 
     @Test
     public void equals() {
-        DeleteTutorialCommand deleteFirstCommand = new DeleteTutorialCommand(TUTORIAL_CLASS);
-        DeleteTutorialCommand deleteSecondCommand = new DeleteTutorialCommand(new TutorialClass("2000"));
+        DeleteTutorialCommand deleteFirstCommand = new DeleteTutorialCommand(TUTORIAL1);
+        DeleteTutorialCommand deleteSecondCommand = new DeleteTutorialCommand(TUTORIAL2);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteTutorialCommand deleteFirstCommandCopy = new DeleteTutorialCommand(TUTORIAL_CLASS);
+        DeleteTutorialCommand deleteFirstCommandCopy = new DeleteTutorialCommand(TUTORIAL1);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -81,9 +75,8 @@ public class DeleteTutorialCommandTest {
 
     @Test
     public void toStringMethod() {
-        TutorialClass tutorialClass = TUTORIAL_CLASS;
-        DeleteTutorialCommand deleteTutorialCommand = new DeleteTutorialCommand(tutorialClass);
-        String expected = DeleteTutorialCommand.class.getCanonicalName() + "{tutorial=" + tutorialClass + "}";
+        DeleteTutorialCommand deleteTutorialCommand = new DeleteTutorialCommand(TUTORIAL1);
+        String expected = DeleteTutorialCommand.class.getCanonicalName() + "{tutorial=" + TUTORIAL1 + "}";
         assertEquals(expected, deleteTutorialCommand.toString());
     }
 }

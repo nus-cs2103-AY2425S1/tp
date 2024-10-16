@@ -11,7 +11,6 @@ import static seedu.address.testutil.TypicalAssignments.getTypicalAssignmentList
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,13 +18,15 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.tut.TutorialList;
+
 /**
  * Contains unit tests for {@code DeleteAssignmentCommand}.
  */
 public class DeleteAssignmentCommandTest {
     //TODO: Add a new sample ArrayList
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
-            getTypicalAssignmentList(), new ArrayList<>());
+            getTypicalAssignmentList(), new TutorialList());
 
     @Test
     public void execute_validTitle_success() {
@@ -34,7 +35,7 @@ public class DeleteAssignmentCommandTest {
         String expectedMessage = String.format(DeleteAssignmentCommand.MESSAGE_DELETE_ASSIGNMENT_SUCCESS,
                 assignment.toString());
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
-                getTypicalAssignmentList(), new ArrayList<>());
+                getTypicalAssignmentList(), new TutorialList());
         expectedModel.deleteAssignment(assignment);
 
         assertCommandSuccess(deleteAssignmentCommand, model, expectedMessage, expectedModel);

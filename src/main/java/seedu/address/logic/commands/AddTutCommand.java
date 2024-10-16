@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUT_NAME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.tut.Tut;
+import seedu.address.model.tut.Tutorial;
 
 /**
  * Adds a tutorial to the address book.
@@ -24,12 +24,12 @@ public class AddTutCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TUT_NAME + "CS1010 "
             + PREFIX_TUT_ID + "1011";
-    private final Tut toAdd;
+    private final Tutorial toAdd;
 
     /**
      * Creates an AddTutCommand to add the specified {@code Tut}
      */
-    public AddTutCommand(Tut tutorial) {
+    public AddTutCommand(Tutorial tutorial) {
         requireNonNull(tutorial);
         toAdd = tutorial;
     }

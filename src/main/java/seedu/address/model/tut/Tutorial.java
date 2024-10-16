@@ -18,7 +18,7 @@ import seedu.address.model.tut.exceptions.TutDateNotFoundException;
  * Represents a Tutorial in the address book.
  * Guarantees: details are present and not null
  */
-public class Tut {
+public class Tutorial {
 
     // Constraints messages for name and ID
     public static final String MESSAGE_NAME_CONSTRAINTS = "Tutorial names should only contain alphanumeric"
@@ -40,7 +40,7 @@ public class Tut {
      *
      * @param tutName A valid tutorial name.
      */
-    public Tut(String tutName, TutorialClass tutorialClass) {
+    public Tutorial(String tutName, TutorialClass tutorialClass) {
         requireNonNull(tutorialClass);
         requireNonNull(tutName);
         checkArgument(isValidName(tutName), MESSAGE_NAME_CONSTRAINTS);
@@ -52,7 +52,7 @@ public class Tut {
      *
      * @param tutName A valid tutorial name.
      */
-    public Tut(String tutName, String tutClass) {
+    public Tutorial(String tutName, String tutClass) {
         requireNonNull(tutClass);
         requireNonNull(tutName);
         checkArgument(isValidName(tutName), MESSAGE_NAME_CONSTRAINTS);
@@ -177,15 +177,12 @@ public class Tut {
             return true;
         }
 
-        if (!(other instanceof Tut)) {
+        if (!(other instanceof Tutorial)) {
             return false;
         }
 
-        Tut otherTutorial = (Tut) other;
-        return tutorialClass.equals(otherTutorial.tutorialClass)
-                && tutDates.equals(otherTutorial.tutDates)
-                && tutName.equals(otherTutorial.tutName)
-                && students.equals(otherTutorial.students);
+        Tutorial otherTutorial = (Tutorial) other;
+        return tutorialClass.equals(otherTutorial.tutorialClass);
     }
 
     @Override
