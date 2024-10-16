@@ -14,6 +14,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PriorityLevel;
 import seedu.address.model.task.Task;
 
 /**
@@ -195,6 +196,15 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    @Override
+    public void resetPersonPriority(Person target) {
+        requireNonNull(target);
+        Person resetPerson = new Person(target.getName(), target.getPhone(), target.getEmail(),
+                target.getAddress(), target.getEmergencyContact(), target.getTags(),
+                new PriorityLevel(3));
+        setPerson(target, resetPerson);
     }
 
 }
