@@ -23,7 +23,7 @@ import seedu.address.logic.commands.findcommand.FindEmailCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.EmailContainsKeywordsPredicate;
 
 public class FindEmailCommandTest {
 

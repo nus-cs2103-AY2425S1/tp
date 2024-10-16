@@ -22,7 +22,7 @@ import seedu.address.logic.commands.findcommand.FindCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.AddressContainsKeywordsPredicate;
 
 public class FindAddressCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());

@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.person.keywordspredicate;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class TagContainsKeywordsPredicate extends TraitContainsKeywordsPredicate
     @Override
     public boolean test(Tag tag) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(tag.getTagName().toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsPartialWordIgnoreCase(tag.getTagName().toString(), keyword));
     }
 
     @Override

@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.PhoneContainsKeywordsPredicate;
 /**
  * Finds and lists all persons in address book whose phone number contains any of the argument keywords.
  * Keyword matching allows partial matching.

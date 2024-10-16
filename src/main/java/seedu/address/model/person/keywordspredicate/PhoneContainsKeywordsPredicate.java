@@ -1,8 +1,9 @@
-package seedu.address.model.person;
+package seedu.address.model.person.keywordspredicate;
 
 import java.util.List;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.person.Person;
 
 /**
  * Tests that a {@code Person}'s {@code Phone} matches any of the keywords given.

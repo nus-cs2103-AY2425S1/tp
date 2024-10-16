@@ -2,10 +2,9 @@ package seedu.address.logic.commands.findcommand;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.TagContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose tag contains any of the argument keywords.
@@ -13,13 +12,8 @@ import seedu.address.model.person.TagContainsKeywordsPredicate;
  */
 public class FindTagCommand extends FindCommand {
 
-    public static final String COMMAND_WORD = "filter";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose tags contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " florist";
-
+    public static final String MESSAGE_FIND_TAG_PERSON_SUCCESS = "Search for tag containing \"%s\" was successful. "
+            + " Showing results:";
 
     public FindTagCommand(TagContainsKeywordsPredicate predicate) {
         super(predicate);
@@ -29,8 +23,12 @@ public class FindTagCommand extends FindCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonListByTag((TagContainsKeywordsPredicate) predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+
+        if (!model.getFilteredPersonList().isEmpty()) {
+            return new CommandResult(String.format(MESSAGE_FIND_TAG_PERSON_SUCCESS, predicate.getDisplayString()));
+        } else {
+            return new CommandResult(MESSAGE_FIND_PERSON_UNSUCCESSFUL);
+        }
     }
 
     @Override

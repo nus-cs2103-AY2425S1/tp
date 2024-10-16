@@ -18,11 +18,11 @@ import seedu.address.logic.commands.findcommand.FindNameCommand;
 import seedu.address.logic.commands.findcommand.FindPhoneCommand;
 import seedu.address.logic.commands.findcommand.FindTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.AddressContainsKeywordsPredicate;
-import seedu.address.model.person.EmailContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.PhoneContainsKeywordsPredicate;
-import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.NameContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.TagContainsKeywordsPredicate;
 
 
 /**
