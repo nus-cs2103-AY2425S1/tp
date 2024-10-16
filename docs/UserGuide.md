@@ -93,6 +93,20 @@ Shows a list of all beneficiaries in the case management system.
 
 Format: `list`
 
+### Viewing a client's details: `view`
+
+View the details of the specified client in the case management system.
+
+Format: `view INDEX`
+
+* Opens up record of the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `view 2` opens up the record of the 2nd client in the case management system.
+* `find Betsy` followed by `delete 1` opens up the record of the 1st client in the results of the `find` command.
+
 ### Editing a client : `edit`
 
 Edits an existing client in the case management system.
@@ -200,4 +214,5 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
+**View** | `view INDEX` <br> e.g., `delete 3`
 **Help** | `help`
