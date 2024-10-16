@@ -145,6 +145,10 @@ public class ParserUtil {
             String[] addressArgs = trimmedPublicAddress.split(delimiter);
             assert addressArgs.length == 2 : "Public address should have a network and an address";
 
+            if(addressArgs.length != 2){
+                throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
+            }
+
             String network = addressArgs[0];
             String address = addressArgs[1];
             // TODO: END of tokenizer
