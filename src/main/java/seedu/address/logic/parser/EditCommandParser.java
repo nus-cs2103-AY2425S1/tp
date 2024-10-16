@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NICKNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
@@ -16,6 +17,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tag.Nickname;
 import seedu.address.model.tag.Role;
 
 /**
@@ -32,7 +34,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TELEGRAM_HANDLE, PREFIX_EMAIL,
-                        PREFIX_STUDENT_STATUS, PREFIX_ROLE);
+                        PREFIX_STUDENT_STATUS, PREFIX_ROLE, PREFIX_NICKNAME);
 
         Index index;
 
@@ -43,7 +45,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TELEGRAM_HANDLE,
-                PREFIX_EMAIL, PREFIX_STUDENT_STATUS);
+                PREFIX_EMAIL, PREFIX_STUDENT_STATUS, PREFIX_NICKNAME);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -61,6 +63,12 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setStudentStatus(
                     ParserUtil.parseStudentStatus(argMultimap.getValue(PREFIX_STUDENT_STATUS).get()));
         }
+        if (argMultimap.getValue(PREFIX_NICKNAME).isPresent()) {
+            editPersonDescriptor.setNickname(
+                    ParserUtil.parseNickname(argMultimap.getValue(PREFIX_NICKNAME).get()));
+        }
+        //         parseNicknameForEdit(argMultimap.getValue(
+        //         PREFIX_NICKNAME).get()).ifPresent(editPersonDescriptor::setNickname);
         parseRolesForEdit(argMultimap.getAllValues(PREFIX_ROLE)).ifPresent(editPersonDescriptor::setRoles);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
@@ -82,6 +90,16 @@ public class EditCommandParser implements Parser<EditCommand> {
             return Optional.empty();
         }
         return Optional.of(ParserUtil.parseRoles(roles));
+    }
+
+    /**
+     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
+     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Tag>} containing zero tags.
+     */
+    private Optional<Nickname> parseNicknameForEdit(String nickname) throws ParseException {
+        assert nickname != null;
+        return Optional.of(ParserUtil.parseNickname(nickname));
     }
 
 }

@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NICKNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
@@ -44,7 +45,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TELEGRAM_HANDLE + "telegramHandle] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_STUDENT_STATUS + "STUDENT_STATUS] "
-            + "[" + PREFIX_ROLE + "ROLE]...\n"
+            + "[" + PREFIX_ROLE + "ROLE]"
+            + "[" + PREFIX_NICKNAME + "NICKNAME]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TELEGRAM_HANDLE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -163,7 +165,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, telegramHandle, email, studentStatus, roles);
+            return CollectionUtil.isAnyNonNull(name, telegramHandle, email, studentStatus, roles, nickname);
         }
 
         public void setName(Name name) {

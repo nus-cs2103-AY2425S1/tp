@@ -10,6 +10,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentStatus;
 import seedu.address.model.person.TelegramHandle;
+import seedu.address.model.tag.Nickname;
 import seedu.address.model.tag.Role;
 
 
@@ -38,6 +39,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setStudentStatus(person.getStudentStatus());
         descriptor.setRoles(person.getRoles());
+        descriptor.setNickname(person.getNickname());
     }
 
     /**
@@ -79,6 +81,15 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withRoles(String... roles) {
         Set<Role> roleSet = Stream.of(roles).map(Role::new).collect(Collectors.toSet());
         descriptor.setRoles(roleSet);
+        return this;
+    }
+
+
+    /**
+     * Sets the {@code Nickname} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withNickname(String nickname) {
+        descriptor.setNickname(new Nickname(nickname));
         return this;
     }
 
