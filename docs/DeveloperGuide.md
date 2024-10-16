@@ -273,7 +273,7 @@ Home-based healthcare providers who
 * Are based in Singapore
 
 
-**Value proposition**: Our patient management system empowers home-based healthcare providers to efficiently retrieve and analyze patient information, enabling them to provide personalized care and see their schedule for the day.
+**Value proposition**: Our patient management system empowers home-based healthcare providers to efficiently retrieve and prioritise patient information, enabling them to provide personalized care and see their schedule for the day.
 
 
 ### User stories
