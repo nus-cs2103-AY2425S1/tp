@@ -11,9 +11,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.eventCommands.AddEventCommand;
-import seedu.address.logic.commands.personCommands.AddCommand;
-import seedu.address.logic.commands.personCommands.Command;
+import seedu.address.logic.commands.eventcommands.AddEventCommand;
+import seedu.address.logic.commands.personcommands.AddCommand;
+import seedu.address.logic.commands.personcommands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.types.common.Address;

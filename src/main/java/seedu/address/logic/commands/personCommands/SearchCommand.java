@@ -1,11 +1,11 @@
-package seedu.address.logic.commands.personCommands;
+package seedu.address.logic.commands.personcommands;
 
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.types.common.TagContainsKeywordsPredicate;
+import seedu.address.model.types.common.PersonTagContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book who has a tag with a name containing any of the argument keywords.
@@ -17,11 +17,11 @@ public class SearchCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches all people who have tags containing any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Example: " + COMMAND_WORD + " friends work";
 
-    private final TagContainsKeywordsPredicate predicate;
+    private final PersonTagContainsKeywordsPredicate predicate;
 
-    public SearchCommand(TagContainsKeywordsPredicate predicate) {
+    public SearchCommand(PersonTagContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 

@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.eventcommands;
 
 import static java.util.Objects.requireNonNull;
 
@@ -7,24 +7,23 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.personcommands.Command;
 import seedu.address.logic.commands.personcommands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.types.common.EventNameContainsKeywordsPredicate;
+import seedu.address.model.types.common.EventTagContainsKeywordsPredicate;
 
 /**
- * Finds and lists all events in address book whose name contains any of the argument keywords.
+ * Finds and lists all events in address book who has a tag with a name containing any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindEventCommand extends Command {
+public class SearchEventCommand extends Command {
+    public static final String COMMAND_WORD = "search";
 
-    public static final String COMMAND_WORD = "find";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events whose titles contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches all events who have tags containing any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " party sentosa";
+            + "Example: " + COMMAND_WORD + " friends work";
 
-    private final EventNameContainsKeywordsPredicate predicate;
+    private final EventTagContainsKeywordsPredicate predicate;
 
-    public FindEventCommand(EventNameContainsKeywordsPredicate predicate) {
+    public SearchEventCommand(EventTagContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -43,12 +42,12 @@ public class FindEventCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindEventCommand)) {
+        if (!(other instanceof SearchEventCommand)) {
             return false;
         }
 
-        FindEventCommand otherFindEventCommand = (FindEventCommand) other;
-        return predicate.equals(otherFindEventCommand.predicate);
+        SearchEventCommand otherSearchCommand = (SearchEventCommand) other;
+        return predicate.equals(otherSearchCommand.predicate);
     }
 
     @Override
