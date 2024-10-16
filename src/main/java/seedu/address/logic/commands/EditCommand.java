@@ -97,10 +97,8 @@ public class EditCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Optional<Email> updatedEmail = Optional.of(editPersonDescriptor.getEmail()
-                .orElse(personToEdit.getEmail().get()));
-        Optional<Address> updatedAddress = Optional.of(editPersonDescriptor.getAddress()
-                .orElse(personToEdit.getAddress().get()));
+        Optional<Email> updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Optional<Address> updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
@@ -182,16 +180,16 @@ public class EditCommand extends Command {
             this.email = email;
         }
 
-        public Optional<Email> getEmail() {
-            return email;
+        public Optional<Optional<Email>> getEmail() {
+            return Optional.ofNullable(email);
         }
 
         public void setAddress(Optional<Address> address) {
             this.address = address;
         }
 
-        public Optional<Address> getAddress() {
-            return address;
+        public Optional<Optional<Address>> getAddress() {
+            return Optional.ofNullable(address);
         }
 
         /**
