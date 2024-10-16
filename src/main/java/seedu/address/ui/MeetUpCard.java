@@ -1,12 +1,9 @@
 package seedu.address.ui;
 
-import java.util.logging.Logger;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.meetup.MeetUp;
 
 /**
@@ -16,7 +13,6 @@ public class MeetUpCard extends UiPart<Region> {
 
     private static final String FXML = "MeetUpListCard.fxml";
     public final MeetUp meetUp;
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -25,7 +21,6 @@ public class MeetUpCard extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
     @FXML
     private HBox meetUpCardPane;
     @FXML
@@ -50,6 +45,5 @@ public class MeetUpCard extends UiPart<Region> {
         info.setText(meetUp.getInfo().toString());
         from.setText(meetUp.getFrom().toString());
         to.setText(meetUp.getTo().toString());
-        logger.info("making meetup card");
     }
 }

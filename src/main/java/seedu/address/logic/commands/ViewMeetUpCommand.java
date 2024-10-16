@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MEETUPS;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.Model;
 
 /**
@@ -13,6 +16,8 @@ public class ViewMeetUpCommand extends Command {
     public static final String COMMAND_WORD = "viewMeetUp";
 
     public static final String MESSAGE_SUCCESS = "Viewing all meet ups";
+
+    private final Logger logger = LogsCenter.getLogger(ViewMeetUpCommand.class);
 
 
     @Override
