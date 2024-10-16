@@ -69,13 +69,13 @@ public class ModelManager implements Model {
 
     @Override
     public Path getAcademyAssistFilePath() {
-        return userPrefs.getAddressBookFilePath();
+        return userPrefs.getAcademyAssistFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setAcademyAssistFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        userPrefs.setAcademyAssistFilePath(addressBookFilePath);
     }
 
     //=========== AddressBook ================================================================================

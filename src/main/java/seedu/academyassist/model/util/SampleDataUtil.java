@@ -4,14 +4,14 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.academyassist.model.person.Name;
-import seedu.academyassist.model.person.Phone;
-import seedu.academyassist.model.AddressBook;
+import seedu.academyassist.model.AcademyAssist;
 import seedu.academyassist.model.ReadOnlyAcademyAssist;
 import seedu.academyassist.model.person.Address;
 import seedu.academyassist.model.person.Email;
 import seedu.academyassist.model.person.Ic;
+import seedu.academyassist.model.person.Name;
 import seedu.academyassist.model.person.Person;
+import seedu.academyassist.model.person.Phone;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.tag.Tag;
 
@@ -42,12 +42,12 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAcademyAssist getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyAcademyAssist getSampleAcademyAssist() {
+        AcademyAssist sampleAa = new AcademyAssist();
         for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+            sampleAa.addPerson(samplePerson);
         }
-        return sampleAb;
+        return sampleAa;
     }
 
     /**

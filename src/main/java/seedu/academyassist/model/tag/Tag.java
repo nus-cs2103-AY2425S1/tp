@@ -1,12 +1,11 @@
 package seedu.academyassist.model.tag;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.academyassist.commons.util.AppUtil.checkArgument;
 
 import seedu.academyassist.commons.util.AppUtil;
 
 /**
- * Represents a Tag in the address book.
+ * Represents a Tag in the management system.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {

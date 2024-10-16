@@ -1,7 +1,6 @@
 package seedu.academyassist.model.sort;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.academyassist.commons.util.AppUtil.checkArgument;
 
 import seedu.academyassist.commons.util.AppUtil;
 

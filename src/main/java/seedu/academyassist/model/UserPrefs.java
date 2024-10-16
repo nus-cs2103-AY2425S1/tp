@@ -14,7 +14,7 @@ import seedu.academyassist.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path academyAssistFilePath = Paths.get("data" , "academyassist.json");
     private boolean isFirstTime = true;
 
     /**
@@ -36,7 +36,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
-        setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setAcademyAssistFilePath(newUserPrefs.getAcademyAssistFilePath());
         setIsFirstTime(newUserPrefs.isFirstTime());
     }
 
@@ -58,13 +58,13 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
-    public Path getAddressBookFilePath() {
-        return addressBookFilePath;
+    public Path getAcademyAssistFilePath() {
+        return academyAssistFilePath;
     }
 
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        this.addressBookFilePath = addressBookFilePath;
+    public void setAcademyAssistFilePath(Path academyAssistFilePath) {
+        requireNonNull(academyAssistFilePath);
+        this.academyAssistFilePath = academyAssistFilePath;
     }
 
     @Override
@@ -80,20 +80,20 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath)
+                && academyAssistFilePath.equals(otherUserPrefs.academyAssistFilePath)
                 && isFirstTime == otherUserPrefs.isFirstTime;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath, isFirstTime);
+        return Objects.hash(guiSettings, academyAssistFilePath, isFirstTime);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("\nLocal data file location : " + academyAssistFilePath);
         sb.append("\nIs first time : " + isFirstTime);
         return sb.toString();
     }

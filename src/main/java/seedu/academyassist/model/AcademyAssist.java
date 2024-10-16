@@ -8,14 +8,14 @@ import javafx.collections.ObservableList;
 import seedu.academyassist.commons.util.ToStringBuilder;
 import seedu.academyassist.model.person.Ic;
 import seedu.academyassist.model.person.Person;
-import seedu.academyassist.model.person.UniquePersonList;
 import seedu.academyassist.model.person.Subject;
+import seedu.academyassist.model.person.UniquePersonList;
 
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAcademyAssist {
+public class AcademyAssist implements ReadOnlyAcademyAssist {
 
     private final UniquePersonList persons;
 
@@ -30,12 +30,12 @@ public class AddressBook implements ReadOnlyAcademyAssist {
         persons = new UniquePersonList();
     }
 
-    public AddressBook() {}
+    public AcademyAssist() {}
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAcademyAssist toBeCopied) {
+    public AcademyAssist(ReadOnlyAcademyAssist toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -160,11 +160,11 @@ public class AddressBook implements ReadOnlyAcademyAssist {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof AcademyAssist)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
+        AcademyAssist otherAddressBook = (AcademyAssist) other;
         return persons.equals(otherAddressBook.persons);
     }
 

@@ -37,30 +37,31 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' Academy Assist file path.
      */
     Path getAcademyAssistFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' Academy Assist book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setAcademyAssistFilePath(Path academyAssistFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces Academy Assist data with the data in {@code academyassist}.
      */
-    void setAddressBook(ReadOnlyAcademyAssist addressBook);
+    void setAcademyAssist(ReadOnlyAcademyAssist academyAssist);
 
-    /** Returns the AddressBook */
+    /** Returns the Academy Assist */
     ReadOnlyAcademyAssist getAcademyAssist();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the Academy Assist management
+     * system.
      */
     boolean hasPerson(Person person);
 
     /**
-     * Returns true if a person with this {@code ic} exists in the address book.
+     * Returns true if a person with this {@code ic} exists in the Academy Assist management system.
      */
     boolean hasPersonWithIc(Ic ic);
 
@@ -70,26 +71,27 @@ public interface Model {
     boolean personDuplicateClass(Subject subject, Person student);
 
     /**
-     * Adds {@code subject} to {@code person} in address book
+     * Adds {@code subject} to {@code person} in Academy Assist management system.
      */
     void addSubjectToPerson(Subject subject, Person person);
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in the academy assist management system.
      */
     void deletePerson(Person target);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in the academy assist management system.
      */
     void addPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in the academy assist management system.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the
+     * academy assist management system.
      */
     void setPerson(Person target, Person editedPerson);
 
@@ -103,17 +105,19 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Sorts the address book managed by model, based on alphabetical order of names of persons inside it.
+     * Sorts the academy assist management system book managed by model, based on alphabetical order of names of
+     * persons inside it.
      */
     void sortAcademyAssistByName();
 
     /**
-     * Sorts the address book managed by model, based on alphabetical order of classes of persons inside it.
+     * Sorts the academy assist management system managed by model, based on alphabetical order of classes of
+     * persons inside it.
      */
     void sortAcademyAssistByClass();
 
     /**
-     * Returns person from address book with given ic.
+     * Returns person from academy assist management system with given ic.
      */
     Person getPersonWithIc(Ic ic);
 

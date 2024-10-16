@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.academyassist.model.person.Person;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of academy assist
  */
 public interface ReadOnlyAcademyAssist {
 
