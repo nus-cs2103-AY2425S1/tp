@@ -145,7 +145,7 @@ public class ParserUtil {
      * Parses {@code String date} into a {@code ConcertDate}. Leadibg and trailing whitespaces will
      * be trimmed.
      */
-    public static ConcertDate parsDate(String date) throws ParseException {
+    public static ConcertDate parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
         if (!ConcertDate.isValidDate(trimmedDate, INPUT_DATE_FORMATTER)) {

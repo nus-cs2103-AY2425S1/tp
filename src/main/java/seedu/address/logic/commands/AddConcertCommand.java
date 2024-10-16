@@ -19,11 +19,14 @@ public class AddConcertCommand extends Command {
     public static final String COMMAND_WORD = "addc";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a concert to the address book. " + "Parameters: " + PREFIX_NAME + "NAME "
-            + PREFIX_ADDRESS + "ADDRESS " + PREFIX_DATE + "DATE" + "\n" + "Example: " + COMMAND_WORD
-            + " " + PREFIX_NAME + "Coachella " + PREFIX_ADDRESS
-            + "81800 51st Ave, Indio, Southern California, United States " + PREFIX_DATE
-            + "2024-12-20 1010";
+            + ": Adds a concert to the address book. " + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_DATE + "DATE" + "\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "Coachella "
+            + PREFIX_ADDRESS + "81800 51st Ave, Indio, Southern California, United States "
+            + PREFIX_DATE + "2024-12-20 1010";
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET =
             "Add concert command not implemented yet";

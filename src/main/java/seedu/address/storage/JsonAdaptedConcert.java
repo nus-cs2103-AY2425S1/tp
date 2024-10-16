@@ -13,7 +13,7 @@ import seedu.address.model.concert.Concert;
 import seedu.address.model.concert.ConcertDate;
 
 /**
- * Jackson-friendly version of {@link concert}
+ * Jackson-friendly version of {@link Concert}
  */
 public class JsonAdaptedConcert {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
@@ -79,7 +79,7 @@ public class JsonAdaptedConcert {
         if (!ConcertDate.isValidDate(date, OUTPUT_DATE_FORMATTER)) {
             throw new IllegalValueException(ConcertDate.MESSAGE_CONSTRAINTS);
         }
-        // date is D MMM YYYY HHmm reverse the processdata when adding from json
+        // date is D MMM YYYY HHmm reverse the processDate when adding from json
         String formattedDate = ConcertDate.processDate(date, OUTPUT_DATE_FORMATTER,
                 INPUT_DATE_FORMATTER);
         final ConcertDate modelDate = new ConcertDate(formattedDate);

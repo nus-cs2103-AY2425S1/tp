@@ -52,14 +52,14 @@ public class Messages {
     }
 
     /**
-     * Formates the {@code Concert} for display to the user.
+     * Formats the {@code Concert} for display to the user.
      */
     public static String format(Concert concert) {
         final StringBuilder builder = new StringBuilder();
         builder.append(concert.getName())
                .append("; Address: ")
                .append(concert.getAddress())
-               .append("; Date")
+               .append("; Date: ")
                .append(concert.getDate());
         return builder.toString();
     }

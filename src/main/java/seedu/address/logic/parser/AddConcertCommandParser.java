@@ -39,7 +39,7 @@ public class AddConcertCommandParser implements Parser<AddConcertCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_DATE);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        ConcertDate date = ParserUtil.parsDate(argMultimap.getValue(PREFIX_DATE).get());
+        ConcertDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
 
         Concert concert = new Concert(name, address, date);
 

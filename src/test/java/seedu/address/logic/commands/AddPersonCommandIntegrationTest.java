@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ * Contains integration tests (interaction with the Model) for {@code AddPersonCommand}.
  */
 public class AddPersonCommandIntegrationTest {
 

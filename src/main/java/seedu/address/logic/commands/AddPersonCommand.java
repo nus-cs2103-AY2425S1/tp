@@ -22,12 +22,21 @@ public class AddPersonCommand extends Command {
     public static final String COMMAND_WORD = "addp";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a person to the address book. " + "Parameters: " + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE " + PREFIX_EMAIL + "EMAIL " + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_ROLE + "ROLE " + "[" + PREFIX_TAG + "TAG]...\n" + "Example: " + COMMAND_WORD
-            + " " + PREFIX_NAME + "John Doe " + PREFIX_PHONE + "98765432 " + PREFIX_EMAIL
-            + "johnd@example.com " + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 " + PREFIX_ROLE
-            + "organiser " + PREFIX_TAG + "friends " + PREFIX_TAG + "owesMoney";
+            + ": Adds a person to the address book. " + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_ROLE + "ROLE "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_PHONE + "98765432 "
+            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_ROLE + "organiser "
+            + PREFIX_TAG + "friends "
+            + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON =
@@ -36,7 +45,7 @@ public class AddPersonCommand extends Command {
     private final Person toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddPersonCommand to add the specified {@code Person}
      */
     public AddPersonCommand(Person person) {
         requireNonNull(person);
