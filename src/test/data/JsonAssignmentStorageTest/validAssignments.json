@@ -1,0 +1,19 @@
+{
+  "assignments": [
+    {
+      "title": "Math Assignment",
+      "dueDate": "2024-10-31T23:59",
+      "indexToStatusMap": {
+        "1": true,
+        "2": false
+      }
+    },
+    {
+      "title": "Science Project",
+      "dueDate": "2024-11-15T17:00",
+      "indexToStatusMap": {
+        "3": false
+      }
+    }
+  ]
+}

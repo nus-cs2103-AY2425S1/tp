@@ -60,4 +60,16 @@ public class JsonAdaptedAssignment {
 
         return new Assignment(title, parsedDueDate, indexToStatusMap);
     }
+
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public HashMap<Integer, Boolean> getIndexToStatusMap() {
+        return indexToStatusMap;
+    }
+
+    public String getTitle() {
+        return title;
+    }
 }

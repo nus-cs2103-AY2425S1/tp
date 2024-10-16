@@ -17,13 +17,13 @@ import seedu.address.model.tut.TutorialList;
 @JsonRootName(value = "tutorials")
 class JsonSerializableTutorialList {
 
-    private final List<JsonAdaptedTut> tutorials = new ArrayList<>();
+    private final List<JsonAdaptedTutorial> tutorials = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableTutorialList} with the given tutorials.
      */
     @JsonCreator
-    public JsonSerializableTutorialList(@JsonProperty("tutorials") List<JsonAdaptedTut> tutorials) {
+    public JsonSerializableTutorialList(@JsonProperty("tutorials") List<JsonAdaptedTutorial> tutorials) {
         this.tutorials.addAll(tutorials);
     }
 
@@ -34,7 +34,7 @@ class JsonSerializableTutorialList {
      */
     public JsonSerializableTutorialList(TutorialList source) {
         tutorials.addAll(source.getTutorials().stream()
-                .map(JsonAdaptedTut::new)
+                .map(JsonAdaptedTutorial::new)
                 .toList());
     }
 
@@ -45,10 +45,14 @@ class JsonSerializableTutorialList {
      */
     public TutorialList toModelType() throws IllegalValueException {
         TutorialList tutorialList = new TutorialList();
-        for (JsonAdaptedTut jsonAdaptedTut : tutorials) {
+        for (JsonAdaptedTutorial jsonAdaptedTut : tutorials) {
             Tutorial tutorial = jsonAdaptedTut.toModelType();
             tutorialList.addTutorial(tutorial);
         }
         return tutorialList;
+    }
+
+    public List<JsonAdaptedTutorial> getTutorials() {
+        return tutorials;
     }
 }

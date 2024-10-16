@@ -2,7 +2,6 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,7 +16,7 @@ import seedu.address.model.tut.Tutorial;
 /**
  * Jackson-friendly version of {@link Tutorial}.
  */
-public class JsonAdaptedTut {
+public class JsonAdaptedTutorial {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Tutorial's %s field is missing!";
 
     private final String tutName;
@@ -29,7 +28,7 @@ public class JsonAdaptedTut {
      * Constructs a {@code JsonAdaptedTut} with the given tutorial details.
      */
     @JsonCreator
-    public JsonAdaptedTut(
+    public JsonAdaptedTutorial(
             @JsonProperty("tutName") String tutName,
             @JsonProperty("tutorialClassName") String tutorialClass,
             @JsonProperty("students") List<JsonAdaptedStudent> students,
@@ -48,15 +47,15 @@ public class JsonAdaptedTut {
      * Converts a given {@code Tut} into this class for Jackson use.
      */
 
-    public JsonAdaptedTut(Tutorial source) {
+    public JsonAdaptedTutorial(Tutorial source) {
         this.tutName = source.getTutName().tutName;
         this.tutorialClass = source.getTutorialClass().value;
         this.students.addAll(source.getStudents().stream()
                 .map(JsonAdaptedStudent::new)
-                .collect(Collectors.toList()));
+                .toList());
         this.tutDates.addAll(source.getTutDates().stream()
                 .map(JsonAdaptedTutDate::new)
-                .collect(Collectors.toList()));
+                .toList());
     }
 
     /**
