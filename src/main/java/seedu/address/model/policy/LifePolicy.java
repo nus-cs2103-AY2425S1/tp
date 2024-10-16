@@ -14,6 +14,11 @@ public class LifePolicy extends Policy {
         super(DEFAULT_PREMIUM_AMOUNT, DEFAULT_COVERAGE_AMOUNT);
     }
 
+    public LifePolicy(double premiumAmount, double coverageAmount) {
+        super(premiumAmount, coverageAmount);
+    }
+
+
     @Override
     public PolicyType getType() {
         return PolicyType.LIFE;

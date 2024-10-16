@@ -14,6 +14,10 @@ public class HealthPolicy extends Policy {
         super(DEFAULT_PREMIUM_AMOUNT, DEFAULT_COVERAGE_AMOUNT);
     }
 
+    public HealthPolicy(double premiumAmount, double coverageAmount) {
+        super(premiumAmount, coverageAmount);
+    }
+
     @Override
     public PolicyType getType() {
         return PolicyType.HEALTH;
