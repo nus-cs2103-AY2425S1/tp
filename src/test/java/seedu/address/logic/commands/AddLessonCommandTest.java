@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,6 +20,7 @@ public class AddLessonCommandTest {
     private Model model;
     private Lesson validLesson;
 
+    @BeforeEach
     public void setUp() {
         model = new ModelManager();
         validLesson = new Lesson("Math", DayOfWeek.MONDAY, LocalTime.of(12, 0), LocalTime.of(13, 0));
@@ -26,7 +28,6 @@ public class AddLessonCommandTest {
 
     @Test
     public void addValidLesson() throws CommandException {
-        setUp();
         AddLessonCommand command = new AddLessonCommand(validLesson);
         CommandResult result = command.execute(model);
         assertEquals(result.getFeedbackToUser(),
@@ -36,7 +37,6 @@ public class AddLessonCommandTest {
 
     @Test
     public void addDuplicateLesson() throws CommandException {
-        setUp();
         model.addLesson(validLesson);
 
         // note that the lesson only has identical descriptions as the validLesson
