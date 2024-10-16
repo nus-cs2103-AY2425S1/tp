@@ -3,13 +3,11 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_BOFA;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_EMAIL_DESC_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_EMAIL_DESC_BOFA;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_COMPANY_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_NAME_DESC_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_NAME_DESC_BOFA;
@@ -83,7 +81,7 @@ public class AddCommandParserTest {
         // invalid value followed by valid value
 
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedInternshipApplicationString,
+        assertParseFailure(parser, INVALID_COMPANY_NAME_DESC + validExpectedInternshipApplicationString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
@@ -101,7 +99,7 @@ public class AddCommandParserTest {
         // valid value followed by invalid value
 
         // invalid name
-        assertParseFailure(parser, validExpectedInternshipApplicationString + INVALID_NAME_DESC,
+        assertParseFailure(parser, validExpectedInternshipApplicationString + INVALID_COMPANY_NAME_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
@@ -121,7 +119,7 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         InternshipApplication expectedApplication = new InternshipApplicationBuilder(APPLE).build();
-        assertParseSuccess(parser, COMPANY_NAME_DESC_APPLE + ROLE_DESC_APPLE + EMAIL_DESC_AMY + DATE_DESC_APPLE,
+        assertParseSuccess(parser, COMPANY_NAME_DESC_APPLE + ROLE_DESC_APPLE + COMPANY_EMAIL_DESC_APPLE + DATE_DESC_APPLE,
                 new AddCommand(expectedApplication));
     }
 
@@ -153,7 +151,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + ROLE_DESC_BOFA
+        assertParseFailure(parser, INVALID_COMPANY_NAME_DESC + ROLE_DESC_BOFA
                 + COMPANY_EMAIL_DESC_BOFA + DATE_DESC_BOFA, Name.MESSAGE_CONSTRAINTS);
 
         // invalid role
@@ -166,10 +164,10 @@ public class AddCommandParserTest {
 
         // invalid date
         assertParseFailure(parser, COMPANY_NAME_DESC_BOFA + ROLE_DESC_BOFA
-                + COMPANY_EMAIL_DESC_BOFA + DATE_DESC_BOFA, Date.MESSAGE_CONSTRAINTS);
+                + COMPANY_EMAIL_DESC_BOFA + INVALID_DATE_DESC, Date.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + ROLE_DESC_BOFA + COMPANY_EMAIL_DESC_BOFA + INVALID_ADDRESS_DESC,
+        assertParseFailure(parser, INVALID_COMPANY_NAME_DESC + ROLE_DESC_BOFA + INVALID_EMAIL_DESC + DATE_DESC_BOFA,
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble

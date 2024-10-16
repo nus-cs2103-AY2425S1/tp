@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.validator.DateValidator;
 import seedu.address.model.internshipapplication.InternshipApplication;
 import seedu.address.model.internshipapplication.Person;
 import seedu.address.model.tag.Tag;
@@ -33,7 +34,7 @@ public class InternshipApplicationUtil {
         sb.append(PREFIX_NAME + application.getCompany().getName().getValue() + " ");
         sb.append(PREFIX_ROLE + application.getRole().getValue() + " ");
         sb.append(PREFIX_EMAIL + application.getCompany().getEmail().getValue() + " ");
-        sb.append(PREFIX_DATE + application.getDateOfApplication().getValue().toString() + " ");
+        sb.append(PREFIX_DATE + application.getDateOfApplication().getValue().format(DateValidator.FORMATTER) + " ");
 
         return sb.toString();
     }
