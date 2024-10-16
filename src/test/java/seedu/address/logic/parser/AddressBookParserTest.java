@@ -4,14 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,14 +22,16 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.GradeCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ModuleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.CourseContainsKeywordsPredicate;
 import seedu.address.model.person.Grade;
 import seedu.address.model.person.Module;
+import seedu.address.model.person.ModuleContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
@@ -79,12 +81,30 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    public void parseCommand_filterByName() throws Exception {
+        String nameKeywords = "Alice Bob";
+        FilterCommand command = (FilterCommand) parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " " + PREFIX_NAME + nameKeywords);
+        assertEquals(new FilterCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"))), command);
     }
+
+    @Test
+    public void parseCommand_filterByModule() throws Exception {
+        String moduleKeyword = "CS2103T";
+        FilterCommand command = (FilterCommand) parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " " + PREFIX_MODULE + moduleKeyword);
+        assertEquals(new FilterCommand(new ModuleContainsKeywordsPredicate(moduleKeyword)), command);
+    }
+
+    @Test
+    public void parseCommand_filterByCourse() throws Exception {
+        String courseKeywords = "Computer Science";
+        FilterCommand command = (FilterCommand) parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " " + PREFIX_COURSE + courseKeywords);
+        assertEquals(new FilterCommand(
+                new CourseContainsKeywordsPredicate(Arrays.asList("Computer", "Science"))), command);
+    }
+
 
     @Test
     public void parseCommand_help() throws Exception {
