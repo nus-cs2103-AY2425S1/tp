@@ -25,10 +25,10 @@ import seedu.address.model.person.PersonDescriptor;
 public class JsonAppointmentBookStorageTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAppointmentBookStorageTest");
-    private final ReadOnlyAddressBook addressBookStub = new AddressBookStub(new ArrayList<>(){});
 
     @TempDir
     public Path testFolder;
+    private final ReadOnlyAddressBook addressBookStub = new AddressBookStub(new ArrayList<>(){});
 
     @Test
     public void readAppointmentBook_nullFilePath_throwsNullPointerException() {

@@ -10,13 +10,13 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.appointment.Appointment;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonDescriptor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonDescriptor;
 
 class JsonAdaptedAppointmentTest {
     private static final String VALID_APPOINTMENT_TYPE = "Consultation";
@@ -35,8 +35,8 @@ class JsonAdaptedAppointmentTest {
 
     @Test
     void toModelType_validAppointmentDetails_returnsAppointment() throws Exception {
-        JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(
-                1, VALID_APPOINTMENT_TYPE, VALID_APPOINTMENT_DATE_TIME, VALID_PERSON_ID, VALID_SICKNESS, VALID_MEDICINE);
+        JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(1, VALID_APPOINTMENT_TYPE,
+                VALID_APPOINTMENT_DATE_TIME, VALID_PERSON_ID, VALID_SICKNESS, VALID_MEDICINE);
         Appointment modelAppointment = appointment.toModelType(addressBookStub);
 
         assertEquals(VALID_APPOINTMENT_TYPE, modelAppointment.getAppointmentType().value);
@@ -55,8 +55,8 @@ class JsonAdaptedAppointmentTest {
 
     @Test
     void toModelType_invalidAppointmentType_throwsIllegalValueException() {
-        JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(
-                1, INVALID_APPOINTMENT_TYPE, VALID_APPOINTMENT_DATE_TIME, VALID_PERSON_ID, VALID_SICKNESS, VALID_MEDICINE);
+        JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(1, INVALID_APPOINTMENT_TYPE,
+                VALID_APPOINTMENT_DATE_TIME, VALID_PERSON_ID, VALID_SICKNESS, VALID_MEDICINE);
         assertThrows(IllegalValueException.class, () -> appointment.toModelType(addressBookStub));
     }
 
@@ -83,8 +83,8 @@ class JsonAdaptedAppointmentTest {
 
     @Test
     void toModelType_invalidPersonId_throwsIllegalValueException() {
-        JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(
-                1, VALID_APPOINTMENT_TYPE, VALID_APPOINTMENT_DATE_TIME, INVALID_PERSON_ID, VALID_SICKNESS, VALID_MEDICINE);
+        JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(1, VALID_APPOINTMENT_TYPE,
+                VALID_APPOINTMENT_DATE_TIME, INVALID_PERSON_ID, VALID_SICKNESS, VALID_MEDICINE);
         assertThrows(IllegalValueException.class, () -> appointment.toModelType(addressBookStub));
     }
 
@@ -97,8 +97,8 @@ class JsonAdaptedAppointmentTest {
 
     @Test
     void toModelType_invalidSickness_throwsIllegalValueException() {
-        JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(
-                1, VALID_APPOINTMENT_TYPE, VALID_APPOINTMENT_DATE_TIME, VALID_PERSON_ID, INVALID_SICKNESS, VALID_MEDICINE);
+        JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(1, VALID_APPOINTMENT_TYPE,
+                VALID_APPOINTMENT_DATE_TIME, VALID_PERSON_ID, INVALID_SICKNESS, VALID_MEDICINE);
         assertThrows(IllegalValueException.class, () -> appointment.toModelType(addressBookStub));
     }
 
@@ -111,8 +111,8 @@ class JsonAdaptedAppointmentTest {
 
     @Test
     void toModelType_invalidMedicine_throwsIllegalValueException() {
-        JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(
-                1, VALID_APPOINTMENT_TYPE, VALID_APPOINTMENT_DATE_TIME, VALID_PERSON_ID, VALID_SICKNESS, INVALID_MEDICINE);
+        JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(1, VALID_APPOINTMENT_TYPE,
+                VALID_APPOINTMENT_DATE_TIME, VALID_PERSON_ID, VALID_SICKNESS, INVALID_MEDICINE);
         assertThrows(IllegalValueException.class, () -> appointment.toModelType(addressBookStub));
     }
 

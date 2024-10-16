@@ -55,8 +55,9 @@ public class JsonSerializableAppointmentBookTest {
     void toModelType_duplicateAppointments_throwsIllegalValueException() throws Exception {
         JsonSerializableAppointmentBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_APPOINTMENT_FILE,
                 JsonSerializableAppointmentBook.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableAppointmentBook.MESSAGE_DUPLICATE_APPOINTMENT,
-                () -> dataFromFile.toModelType(addressBookStub));
+        assertThrows(IllegalValueException.class,
+                JsonSerializableAppointmentBook.MESSAGE_DUPLICATE_APPOINTMENT, () -> dataFromFile
+                        .toModelType(addressBookStub));
     }
 
     @Test

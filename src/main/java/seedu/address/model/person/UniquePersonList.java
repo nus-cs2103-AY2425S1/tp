@@ -106,6 +106,9 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
+    /**
+     * Finds the person with corresponding person ID, if exists.
+     */
     public Optional<Person> findPerson(int personId) {
         return internalList.stream()
                 .filter(person -> person.getPersonId() == personId)

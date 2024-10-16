@@ -38,8 +38,10 @@ public class AddAppointmentCommand extends AddCommand {
             + PREFIX_MEDICINE + "Paracetamol";
 
     public static final String MESSAGE_SUCCESS = "New appointment added: %1$s";
-    public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in the appointment book";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "This person ID does not belong to anyone in the address book";
+    public static final String MESSAGE_DUPLICATE_APPOINTMENT =
+            "This appointment already exists in the appointment book";
+    public static final String MESSAGE_PERSON_NOT_FOUND =
+            "This person ID does not belong to anyone in the address book";
 
     private final AppointmentDescriptor toAdd;
     private final int personId;

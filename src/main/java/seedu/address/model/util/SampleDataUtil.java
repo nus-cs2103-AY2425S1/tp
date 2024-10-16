@@ -68,7 +68,7 @@ public class SampleDataUtil {
                     10, 23, 18, 45), new Sickness("Asthma"),
                     new Medicine("Inhaler")),
             new AppointmentDescriptor(new AppointmentType("Check-up"), LocalDateTime.of(2024,
-                    10, 25, 11, 15),new Sickness("Hypertension"),
+                    10, 25, 11, 15), new Sickness("Hypertension"),
                     new Medicine("Beta-blocker")),
             new AppointmentDescriptor(new AppointmentType("Consultation"), LocalDateTime.of(2024,
                     10, 28, 16, 30), new Sickness("Migraine"),
@@ -88,10 +88,10 @@ public class SampleDataUtil {
         return sampleAb;
     }
 
-    //This appointment book should only be created if the sample address book was created. 
+    //This appointment book should only be created if the sample address book was created.
     public static ReadOnlyAppointmentBook getSampleAppointmentBook(ReadOnlyAddressBook sampleaAddressBook) {
         PersonDescriptor[] samplePersons = getSamplePersons();
-        AppointmentDescriptor[] sampleAppointments =  getSampleAppointments();
+        AppointmentDescriptor[] sampleAppointments = getSampleAppointments();
         AddressBook sampleAb = new AddressBook();
         AppointmentBook sampleAppb = new AppointmentBook();
         for (int i = 0; i < samplePersons.length; i++) {

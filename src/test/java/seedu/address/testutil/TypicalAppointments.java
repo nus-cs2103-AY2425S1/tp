@@ -6,7 +6,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICINE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICINE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SICKNESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SICKNESS_BOB;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 

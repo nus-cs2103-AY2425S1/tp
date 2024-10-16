@@ -90,7 +90,7 @@ public class StorageManager implements Storage {
     public Optional<ReadOnlyAppointmentBook> readAppointmentBook(
             ReadOnlyAddressBook addressBook) throws DataLoadingException {
         return readAppointmentBook(
-                appointmentBookStorage.getAppointmentBookFilePath(), 
+                appointmentBookStorage.getAppointmentBookFilePath(),
                 addressBook
         );
     }

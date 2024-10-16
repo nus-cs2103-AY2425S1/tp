@@ -55,7 +55,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     }
 
     public Path getAppointmentBookFilePath() {
-        return appointmentBookFilePath; 
+        return appointmentBookFilePath;
     }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {

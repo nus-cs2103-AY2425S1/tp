@@ -64,6 +64,9 @@ public class Appointment {
         this.appointmentId = appointmentId;
     }
 
+    /**
+     * Creates an appointment object using person and appointmentDescriptor.
+     */
     public Appointment(int appointmentId, Person person, AppointmentDescriptor appointmentDescriptor) {
         requireAllNonNull(appointmentId, appointmentDescriptor, person);
         this.appointmentId = appointmentId;
