@@ -11,9 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RENT_DUE_DATE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -24,10 +22,11 @@ import seedu.address.model.client.Client;
 import seedu.address.model.rentalinformation.RentalInformation;
 
 /**
- * Adds a client to the address book.
+ * Adds a rental information (for a client) to the address book.
  */
 public class AddRentalCommand extends Command {
     public static final String COMMAND_WORD = "radd";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a rental information to a client. "
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_ADDRESS + "ADDRESS "
@@ -54,7 +53,7 @@ public class AddRentalCommand extends Command {
     private final RentalInformation toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Client}
+     * Creates an AddRentalCommand to add the specified {@code RentalInformation} (for a {@code Client})
      */
     public AddRentalCommand(Index index, RentalInformation rentalInformation) {
         requireNonNull(index);

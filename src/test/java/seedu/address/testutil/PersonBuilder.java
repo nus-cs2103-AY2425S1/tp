@@ -1,13 +1,15 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
-import seedu.address.model.rentalinformation.Address;
+import seedu.address.model.rentalinformation.RentalInformation;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -15,17 +17,15 @@ import seedu.address.model.util.SampleDataUtil;
  * A utility class to help with building Client objects.
  */
 public class PersonBuilder {
-
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
     private Email email;
-//    private Address address;
     private Set<Tag> tags;
+    private List<RentalInformation> rentalInformationList;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -34,8 +34,8 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-//        address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        rentalInformationList = new ArrayList<>();
     }
 
     /**
@@ -45,8 +45,8 @@ public class PersonBuilder {
         name = clientToCopy.getName();
         phone = clientToCopy.getPhone();
         email = clientToCopy.getEmail();
-//        address = clientToCopy.getAddress();
         tags = new HashSet<>(clientToCopy.getTags());
+        rentalInformationList = new ArrayList<>(clientToCopy.getRentalInformation());
     }
 
     /**
@@ -65,13 +65,15 @@ public class PersonBuilder {
         return this;
     }
 
-//    /**
-//     * Sets the {@code Address} of the {@code Client} that we are building.
-//     */
-//    public PersonBuilder withAddress(String address) {
-//        this.address = new Address(address);
-//        return this;
-//    }
+    /**
+     * Sets the {@code RentalInformation} of the {@code Client} that we are building.
+     */
+    public PersonBuilder withRentalInformation(RentalInformation rentalInformation) {
+        ArrayList<RentalInformation> newList = new ArrayList<>();
+        newList.add(rentalInformation);
+        this.rentalInformationList = newList;
+        return this;
+    }
 
     /**
      * Sets the {@code Phone} of the {@code Client} that we are building.
@@ -90,9 +92,6 @@ public class PersonBuilder {
     }
 
     public Client build() {
-//        return new Client(name, phone, email, address, tags);
-        return new Client(name, phone, email, tags);
-
+        return new Client(name, phone, email, tags, rentalInformationList);
     }
-
 }

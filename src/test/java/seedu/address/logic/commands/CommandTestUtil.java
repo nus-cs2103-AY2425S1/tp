@@ -3,9 +3,16 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 //import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_LIST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPOSIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTHLY_RENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RENTAL_END_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RENTAL_START_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RENT_DUE_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -20,6 +27,7 @@ import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditRentalDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -60,20 +68,76 @@ public class CommandTestUtil {
     public static final EditClientCommand.EditPersonDescriptor DESC_AMY;
     public static final EditClientCommand.EditPersonDescriptor DESC_BOB;
 
+    public static final String VALID_ADDRESS_ONE = "Ave 2 Yishun";
+    public static final String VALID_RENTAL_START_DATE_ONE = "01/01/2024";
+    public static final String VALID_RENTAL_END_DATE_ONE = "30/06/2024";
+    public static final String VALID_RENT_DUE_DATE_ONE = "20";
+    public static final String VALID_MONTHLY_RENT_ONE = "3300";
+    public static final String VALID_DEPOSIT_ONE = "9900";
+    public static final String VALID_CUSTOMER_LIST_ONE = "Shaco";
+
+    public static final String VALID_ADDRESS_TWO = "Ave 10 Kent Ridge";
+    public static final String VALID_RENTAL_START_DATE_TWO = "01/06/2024";
+    public static final String VALID_RENTAL_END_DATE_TWO = "30/09/2024";
+    public static final String VALID_RENT_DUE_DATE_TWO = "25";
+    public static final String VALID_MONTHLY_RENT_TWO = "4500";
+    public static final String VALID_DEPOSIT_TWO = "13500";
+    public static final String VALID_CUSTOMER_LIST_TWO = "Ben";
+
+    public static final String INVALID_ADDRESS = "";
+    public static final String INVALID_RENTAL_START_DATE = "1/1/2024";
+    public static final String INVALID_RENTAL_END_DATE = "33/12/2024";
+    public static final String INVALID_RENT_DUE_DATE = "40";
+    public static final String INVALID_MONTHLY_RENT = "3300.1";
+    public static final String INVALID_DEPOSIT = "-1000";
+    public static final String INVALID_CUSTOMER_LIST = "James;;Adam";
+
+    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS + INVALID_ADDRESS;
+    public static final String INVALID_RENTAL_START_DATE_DESC = " " + PREFIX_RENTAL_START_DATE
+            + INVALID_RENTAL_START_DATE;
+    public static final String INVALID_RENTAL_END_DATE_DESC = " " + PREFIX_RENTAL_END_DATE + INVALID_RENTAL_END_DATE;
+    public static final String INVALID_RENT_DUE_DATE_DESC = " " + PREFIX_RENT_DUE_DATE + INVALID_RENT_DUE_DATE;
+    public static final String INVALID_MONTHLY_RENT_DESC = " " + PREFIX_MONTHLY_RENT + INVALID_MONTHLY_RENT;
+    public static final String INVALID_DEPOSIT_DESC = " " + PREFIX_DEPOSIT + INVALID_DEPOSIT;
+    public static final String INVALID_CUSTOMER_LIST_DESC = " " + PREFIX_CUSTOMER_LIST + INVALID_CUSTOMER_LIST;
+
+    public static final String ADDRESS_DESC_ONE = " " + PREFIX_ADDRESS + VALID_ADDRESS_ONE;
+    public static final String RENTAL_START_DATE_DESC_ONE = " " + PREFIX_RENTAL_START_DATE
+            + VALID_RENTAL_START_DATE_ONE;
+    public static final String RENTAL_END_DATE_DESC_ONE = " " + PREFIX_RENTAL_END_DATE + VALID_RENTAL_END_DATE_ONE;
+    public static final String RENT_DUE_DATE_DESC_ONE = " " + PREFIX_RENT_DUE_DATE + VALID_RENT_DUE_DATE_ONE;
+    public static final String MONTHLY_RENT_DESC_ONE = " " + PREFIX_MONTHLY_RENT + VALID_MONTHLY_RENT_ONE;
+    public static final String DEPOSIT_DESC_ONE = " " + PREFIX_DEPOSIT + VALID_DEPOSIT_ONE;
+    public static final String CUSTOMER_LIST_DESC_ONE = " " + PREFIX_CUSTOMER_LIST + VALID_CUSTOMER_LIST_ONE;
+
+    public static final String ADDRESS_DESC_TWO = " " + PREFIX_ADDRESS + VALID_ADDRESS_TWO;
+    public static final String RENTAL_START_DATE_DESC_TWO = " " + PREFIX_RENTAL_START_DATE
+            + VALID_RENTAL_START_DATE_TWO;
+    public static final String RENTAL_END_DATE_DESC_TWO = " " + PREFIX_RENTAL_END_DATE + VALID_RENTAL_END_DATE_TWO;
+    public static final String RENT_DUE_DATE_DESC_TWO = " " + PREFIX_RENT_DUE_DATE + VALID_RENT_DUE_DATE_TWO;
+    public static final String MONTHLY_RENT_DESC_TWO = " " + PREFIX_MONTHLY_RENT + VALID_MONTHLY_RENT_TWO;
+    public static final String DEPOSIT_DESC_TWO = " " + PREFIX_DEPOSIT + VALID_DEPOSIT_TWO;
+    public static final String CUSTOMER_LIST_DESC_TWO = " " + PREFIX_CUSTOMER_LIST + VALID_CUSTOMER_LIST_TWO;
+
+
+    public static final EditRentalCommand.EditRentalDescriptor DESC_RENTAL_ONE;
+    public static final EditRentalCommand.EditRentalDescriptor DESC_RENTAL_TWO;
+
     static {
-//        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-//                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-//                .withTags(VALID_TAG_FRIEND).build();
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
-//        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-//                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-//                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-
+        DESC_RENTAL_ONE = new EditRentalDescriptorBuilder().withAddress(VALID_ADDRESS_ONE)
+                .withRentalStartDate(VALID_RENTAL_START_DATE_ONE).withRentalEndDate(VALID_RENTAL_END_DATE_ONE)
+                .withRentDueDate(VALID_RENT_DUE_DATE_ONE).withMonthlyRent(VALID_MONTHLY_RENT_ONE)
+                .withDeposit(VALID_DEPOSIT_ONE).withCustomerList(VALID_CUSTOMER_LIST_ONE).build();
+        DESC_RENTAL_TWO = new EditRentalDescriptorBuilder().withAddress(VALID_ADDRESS_TWO)
+                .withRentalStartDate(VALID_RENTAL_START_DATE_TWO).withRentalEndDate(VALID_RENTAL_END_DATE_TWO)
+                .withRentDueDate(VALID_RENT_DUE_DATE_TWO).withMonthlyRent(VALID_MONTHLY_RENT_TWO)
+                .withDeposit(VALID_DEPOSIT_TWO).withCustomerList(VALID_CUSTOMER_LIST_TWO).build();
     }
 
     /**

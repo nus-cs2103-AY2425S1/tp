@@ -77,6 +77,10 @@ public interface Model {
      */
     void setPerson(Client target, Client editedClient);
 
+    /**
+     * Returns true if a rental information with the same details as {@code rentalInformation} exists
+     * for the specified client in the address book.
+     */
     boolean hasRentalInformation(Client client, RentalInformation rentalInformation);
 
     /** Returns an unmodifiable view of the filtered client list */
