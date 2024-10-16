@@ -3,6 +3,8 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -16,7 +18,7 @@ class JsonAdaptedPolicyTest {
 
     @Test
     public void testToModelType_validLifePolicy() throws Exception {
-        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(300.0, 3000.0, "LIFE");
+        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(300.0, 3000.0, "LIFE", "11/25/2024");
         Policy modelPolicy = policy.toModelType();
         assertEquals(LifePolicy.class, modelPolicy.getClass());
         assertEquals(300.0, modelPolicy.getPremiumAmount());
@@ -24,7 +26,7 @@ class JsonAdaptedPolicyTest {
     }
     @Test
     public void testToModelType_validHealthPolicy() throws Exception {
-        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(400.0, 4000.0, "HEALTH");
+        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(400.0, 4000.0, "HEALTH", "11/25/2024");
         Policy modelPolicy = policy.toModelType();
         assertEquals(HealthPolicy.class, modelPolicy.getClass());
         assertEquals(400.0, modelPolicy.getPremiumAmount());
@@ -34,7 +36,7 @@ class JsonAdaptedPolicyTest {
     @Test
     public void testToModelType_validEducationPolicy() throws Exception {
         JsonAdaptedPolicy policy = new JsonAdaptedPolicy(
-                new EducationPolicy(500.0, 5000.0));
+                new EducationPolicy(500.0, 5000.0, LocalDate.of(2025, 12, 31)));
         Policy modelPolicy = policy.toModelType();
         assertEquals(EducationPolicy.class, modelPolicy.getClass());
         assertEquals(500.0, modelPolicy.getPremiumAmount());
@@ -42,7 +44,7 @@ class JsonAdaptedPolicyTest {
     }
     @Test
     public void testToModelType_invalidPolicy_throwsIllegalValueException() {
-        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(400.0, 4000.0, "FOO");
+        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(400.0, 4000.0, "FOO", "11/25/2024");
         assertThrows(IllegalValueException.class, policy::toModelType);
     }
 

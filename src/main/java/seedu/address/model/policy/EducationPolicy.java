@@ -3,8 +3,6 @@ package seedu.address.model.policy;
 import java.time.LocalDate;
 import java.time.Period;
 
-import seedu.address.model.person.Person;
-
 /**
  * A Policy of type Education.
  */
@@ -26,16 +24,11 @@ public class EducationPolicy extends Policy {
      * @param premiumAmount the price of the policy, paid per month.
      * @param coverageAmount the maximum amount that can be claimed under this policy.
      * @param expiryDate the date of Policy's expiry.
-     * @param insuree the policy insuree.
      * @throws IllegalArgumentException if the premiumAmount or coverageAmount is negative.
      * @throws NullPointerException if the given expiryDate or insuree is null.
      */
-    public EducationPolicy(double premiumAmount, double coverageAmount, LocalDate expiryDate, Person insuree) {
-        super(premiumAmount, coverageAmount, expiryDate, insuree);
-    }
-
-    public EducationPolicy(double premiumAmount, double coverageAmount) {
-        super(premiumAmount, coverageAmount);
+    public EducationPolicy(double premiumAmount, double coverageAmount, LocalDate expiryDate) {
+        super(premiumAmount, coverageAmount, expiryDate);
     }
 
     @Override
