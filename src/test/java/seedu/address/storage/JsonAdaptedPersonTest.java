@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 
@@ -19,6 +20,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_AGE = "159";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
@@ -74,6 +76,13 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_EMAIL, VALID_GENDER, VALID_AGE, invalidTags, VALID_DETAIL);
         assertThrows(IllegalValueException.class, person::toModelType);
+    }
+    @Test
+    public void toModelType_invalidAge_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_EMAIL, VALID_GENDER, INVALID_AGE, VALID_TAGS, VALID_DETAIL);
+        String expectedMessage = Age.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
 }
