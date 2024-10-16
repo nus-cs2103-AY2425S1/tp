@@ -4,20 +4,17 @@ import java.util.Objects;
 
 /**
  * A class meant to group all relevant details of an appointment together.
- * @param <Id>
- * @param <Id>
- * @param <String>
  */
-public class Appointment<Id, String> {
+public class Appointment {
     private Id patientId;
     private Id doctorId;
     private String remarks;
 
     /**
-     * Creates an appointment instance associated with the specified patient, doctor with the given remarks.
+     * Creates an appointment instance associated with the specified patient, doctor, and remarks.
      *
-     * @param patientId Id of patient.
-     * @param doctorId Id of doctor.
+     * @param patientId Id of the patient.
+     * @param doctorId Id of the doctor.
      * @param remarks Remarks given by the doctor for the appointment or patient.
      */
     public Appointment(Id patientId, Id doctorId, String remarks) {
@@ -47,11 +44,23 @@ public class Appointment<Id, String> {
             return false;
         }
 
-        Appointment<?, ?> appointment = (Appointment<?, ?>) o; // Typecast to Appointment
+        Appointment appointment = (Appointment) o;
 
-        // Compare key and value
         return Objects.equals(patientId, appointment.patientId)
                 && Objects.equals(doctorId, appointment.doctorId)
                 && Objects.equals(remarks, appointment.remarks);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(patientId, doctorId, remarks);
+    }
+
+    @Override
+    public String toString() {
+        return "Appointment: " + getPatientId() + " (patient id) with " + getDoctorId() + " (doctor id). "
+                + "Remarks: " + getRemarks();
+    }
 }
+
+
