@@ -1,5 +1,6 @@
 package seedu.address.model.client.insurance.claim;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -106,9 +107,9 @@ public class Claim {
     @Override
     public String toString() {
         if (this.isOpen) {
-            return "[open] " + this.claimId + " $" + this.claimAmount;
+            return "[open] " + this.claimId + " " + Messages.formatClaimAmount(this.claimAmount);
         } else {
-            return "[closed] " + this.claimId + " $" + this.claimAmount;
+            return "[closed] " + this.claimId + " " + Messages.formatClaimAmount(this.claimAmount);
         }
     }
 }

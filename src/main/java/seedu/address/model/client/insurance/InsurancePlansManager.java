@@ -238,6 +238,7 @@ public class InsurancePlansManager {
                                 .append(". ")
                                 .append(c.toString())
                                 .append("\n");
+                        listIndex++;
                     }
                 }
             }
