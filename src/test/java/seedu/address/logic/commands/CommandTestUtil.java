@@ -64,7 +64,7 @@ public class CommandTestUtil {
             + "lead to unexpected insights"
             + "transforming ordinary thoughts into extraordinary"
             + "ideas that inspire change and growth"
-            + "blah blah blah"; //
+            + "blah blah blah blah blah blah blah blah blah blah blag"; //
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
