@@ -90,7 +90,7 @@ public class TagCommand extends Command {
         }
 
         TagCommand otherTagCommand = (TagCommand) other;
-        return targetIndex.equals(otherTagCommand.targetIndex);
+        return targetIndex.equals(otherTagCommand.targetIndex) && tag.equals(otherTagCommand.tag);
     }
 
     @Override
