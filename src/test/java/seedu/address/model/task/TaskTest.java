@@ -55,6 +55,7 @@ public class TaskTest {
         String expected = Task.class.getCanonicalName()
                 + "{patient=" + task.getPatient()
                 + ", description=" + task.getDescription()
+                + ", status=" + task.getStatusString()
                 + "}";
         assertEquals(expected, task.toString());
     }
