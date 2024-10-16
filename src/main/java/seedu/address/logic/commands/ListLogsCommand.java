@@ -24,12 +24,10 @@ public class ListLogsCommand extends Command {
      * Creates a ListLogsCommand to list the logs of the specified person
      */
     public ListLogsCommand(IdentityNumber id) {
-        try {
-            this.identityNumber = new IdentityNumber(id);
-        } catch (IllegalArgumentException e) {
-            //TODO: handle exception later
-            throw new IllegalArgumentException("Invalid NRIC");
+        if (id == null) {
+            throw new IllegalArgumentException("Invalid Identity Number");
         }
+        this.identityNumber = id;  // Directly assign the identityNumber
     }
 
     @Override
