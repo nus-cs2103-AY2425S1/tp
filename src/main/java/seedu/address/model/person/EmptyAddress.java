@@ -6,9 +6,9 @@ package seedu.address.model.person;
  */
 class EmptyAddress extends Address {
 
-    private static final EmptyAddress emptyAddress = new EmptyAddress();
-
     public static final String INTERNAL_REPRESENTATION = "<REPRESENTATION FOR EMPTY ADDRESS>";
+
+    private static final EmptyAddress emptyAddress = new EmptyAddress();
 
     private EmptyAddress() {
         super();
