@@ -13,12 +13,15 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 <br>
 
 # Table of Contents
-### [1. Installation and Quick Start](#installation-and-quick-start)
-### [2. Commands](#commands)
-### [3. Commands Summary](#command-summary)
-### [4. Features](#features)
-### [5. FAQ](#faq)
-### [6. Known Issues](#known-issues)
+<br>
+
+>### [1. Installation and Quick Start](#installation-and-quick-start)
+>### [2. Commands](#commands)
+>### [3. Commands Summary](#command-summary)
+>### [4. Features](#features)
+>### [5. FAQ](#faq)
+>### [6. Known Issues](#known-issues)
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 <br>
@@ -85,8 +88,9 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 ></box>
 
 
+<br>
 <details>
-  <summary>&nbsp&nbsp<h3>Viewing help: <code>help</code></h3></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;margin:auto;">Viewing help: <code>help</code></strong></summary>
 
   >Displays a help window containing the list of commands, its purpose and the format
   >
@@ -96,8 +100,9 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 </details>
 
 
+<br>
 <details>
-  <summary>&nbsp&nbsp<h3>Adding an employee: <code>employee</code></h3></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;margin:auto;">Adding an employee: <code>employee</code></strong></summary>
   
   >Adds an employee to StaffSync.
   >
@@ -113,8 +118,9 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 </details>
 
 
+<br>
 <details>
-  <summary>&nbsp&nbsp<h3>Adding a potential hire: <code>potential</code></h3></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;margin:auto;">Adding a potential hire: <code>potential</code></strong></summary>
   
   >Adds a potential hire to StaffSync.
   >
@@ -129,16 +135,18 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
   >* `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
 </details>
 
+<br>
 <details>
-  <summary>&nbsp&nbsp<h3>Clearing all entries: <code>clear</code></h3></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;margin:auto;">Clearing all entries: <code>clear</code></strong></summary>
   
   >Clears all entries from StaffSync.
   >
   >Format: `clear`
 </details>
 
+<br>
 <details>
-  <summary>&nbsp&nbsp<h3>Deleting a person: <code>delete</code></h3></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;margin:auto;">Deleting a person: <code>delete</code></strong></summary>
   
   >Deletes the specified person from StaffSync.
   >
@@ -154,8 +162,9 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
   >* `find e Betsy` followed by `delete e 1` deletes the 1st employee in the results of the `find` command.
 </details>
 
+<br>
 <details>
-  <summary>&nbsp&nbsp<h3>Editing a person: <code>edit</code></h3></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;margin:auto;">Editing a person: <code>edit</code></strong></summary>
   
   >Edits an existing person in the StaffSync.
   >
@@ -170,16 +179,18 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
   >*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 </details>
 
+<br>
 <details>
-  <summary>&nbsp&nbsp<h3>Exiting the program: <code>exit</code></h3></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;margin:auto;">Exiting the program: <code>exit</code></strong></summary>
   
   >Exits the program.
   >
   >Format: `exit`
 </details>
 
+<br>
 <details>
-  <summary>&nbsp&nbsp<h3>Locating persons by name: <code>find</code></h3></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;margin:auto;">Locating persons by name: <code>find</code></strong></summary>
   
   >Finds the employee/potential hire whose names contain any of the given keywords.
   >
@@ -199,8 +210,9 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
   >  ![result for 'find alex david'](images/findAlexDavidResult.png)
 </details>
 
+<br>
 <details>
-  <summary>&nbsp&nbsp<h3>Listing all persons: <code>list</code></h3></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;margin:auto;">Listing all persons: <code>list</code></strong></summary>
   
   >Shows a list of all persons in StaffSync.
   >
