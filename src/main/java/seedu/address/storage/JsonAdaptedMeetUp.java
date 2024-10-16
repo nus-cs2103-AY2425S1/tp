@@ -14,7 +14,6 @@ import seedu.address.model.meetup.To;
  * Jackson-friendly version of {@link MeetUp}.
  */
 class JsonAdaptedMeetUp {
-
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Meet up's %s field is missing!";
 
     private final String name;

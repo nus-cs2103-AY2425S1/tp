@@ -15,7 +15,7 @@ import seedu.address.model.meetup.MeetUp;
  */
 public class MeetUpListPanel extends UiPart<Region> {
     private static final String FXML = "MeetUpListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(MeetUpListPanel.class);
 
     @FXML
     private ListView<MeetUp> meetUpListView;
@@ -25,6 +25,7 @@ public class MeetUpListPanel extends UiPart<Region> {
      */
     public MeetUpListPanel(ObservableList<MeetUp> meetUpList) {
         super(FXML);
+        logger.info(meetUpList.toString());
         meetUpListView.setItems(meetUpList);
         meetUpListView.setCellFactory(listView -> new MeetUpListViewCell());
     }
@@ -38,9 +39,11 @@ public class MeetUpListPanel extends UiPart<Region> {
             super.updateItem(meetUp, empty);
 
             if (empty || meetUp == null) {
+                logger.info("graphic or text is null");
                 setGraphic(null);
                 setText(null);
             } else {
+                logger.info("making new card");
                 setGraphic(new MeetUpCard(meetUp, getIndex() + 1).getRoot());
             }
         }
