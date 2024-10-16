@@ -51,6 +51,20 @@ public class GoodsReceipt {
 
     /**
      * Constructs a {@code GoodsReceipt}.
+     * For use in Csv files. Empty constructor is required for CsvBeanReader.
+     */
+    public GoodsReceipt() {
+        this.goods = null;
+        this.supplierName = null;
+        this.procurementDate = null;
+        this.arrivalDate = null;
+        this.isDelivered = false;
+        this.quantity = 0;
+        this.price = 0.0;
+    }
+
+    /**
+     * Constructs a {@code GoodsReceipt}.
      *
      * @param goods The goods associated with this receipt.
      * @param supplierName The name of the supplier.
