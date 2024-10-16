@@ -37,6 +37,12 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
    
    * `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 d/23-04-1987 g/M` : Adds a patient named John Doe to the Address Book.
 
+   * `find John` : Finds contacts whose names contain the keyword `John`.
+
+   * `find-doctor John` : Finds doctors whose names contain the keyword `John`.
+
+   * `find-patient John` : Finds patients whose names contain the keyword `John`.
+
    * `delete 3` : Deletes the 3rd contact shown in the current list.
    
    * `clear` : Deletes all contacts.
