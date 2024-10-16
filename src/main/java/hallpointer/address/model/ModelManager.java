@@ -19,7 +19,6 @@ import javafx.collections.transformation.FilteredList;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private static final Predicate<Member> PREDICATE_SHOW_ALL_SESSIONS = unused -> true;
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
