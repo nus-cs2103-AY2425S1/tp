@@ -3,6 +3,8 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.model.tut.Tut;
+
 /**
  * Represents a Student's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
@@ -33,10 +35,10 @@ public class Name {
      */
     public Name(String name) {
         requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidName(name) || Tut.isValidName(name),
+                MESSAGE_CONSTRAINTS);
         fullName = name;
     }
-
     /**
      * Returns true if a given string is a valid name.
      */

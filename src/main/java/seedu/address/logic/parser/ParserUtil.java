@@ -64,7 +64,7 @@ public class ParserUtil {
     public static Name parseTutName(String tutName) throws ParseException {
         requireNonNull(tutName);
         String trimmedName = tutName.trim();
-        if (!Name.isValidName(trimmedName)) {
+        if (!Tut.isValidName(trimmedName)) {
             throw new ParseException(Tut.MESSAGE_NAME_CONSTRAINTS);
         }
         return new Name(trimmedName);
