@@ -4,7 +4,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Locale;
 
-
 /**
  * Represents a Tag with a difficulty level.
  * This tag is used to categorize items by difficulty,
@@ -12,13 +11,14 @@ import java.util.Locale;
  */
 public class DifficultyTag extends Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Difficulty level needs to be a number";
+    public static final String MESSAGE_CONSTRAINTS = "Difficulty level needs to be either Low, Medium or High";
 
     private String difficultyLevel;
+
     /**
      * Constructs a {@code Tag}.
      *
-     * @param tagName A valid tag name.
+     * @param tagName         A valid tag name.
      * @param difficultyLevel A difficultyLevel of either "low", "medium" or "high".
      */
     public DifficultyTag(String tagName, String difficultyLevel) {
