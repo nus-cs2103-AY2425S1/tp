@@ -131,7 +131,7 @@ public class OrderList {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < customerOrders.size(); i++) {
             Order order = customerOrders.get(i);
-            sb.append(String.format("Order %d", i + 1));
+            sb.append(String.format("Order %d:", i + 1));
             sb.append("\n");
             sb.append(order.viewOrder());
             sb.append("\n");

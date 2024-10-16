@@ -22,7 +22,7 @@ public class DeleteCustomerOrderCommand extends Command {
             + "Parameters: PHONE_NUMBER\n"
             + "Example: " + COMMAND_WORD + " 87654321";
 
-    public static final String MESSAGE_ADD_CUSTOMER_ORDER_SUCCESS = "Customer order deleted.\n\n%1$s";
+    public static final String MESSAGE_DELETE_CUSTOMER_ORDER_SUCCESS = "Customer order deleted.\n\n%1$s";
 
     private final String phoneNumber;
 
@@ -39,7 +39,7 @@ public class DeleteCustomerOrderCommand extends Command {
 
         orderList.removeCustomerOrder(phoneNumber);
 
-        return new CommandResult(String.format(MESSAGE_ADD_CUSTOMER_ORDER_SUCCESS, orderList.viewCustomerOrders()));
+        return new CommandResult(String.format(MESSAGE_DELETE_CUSTOMER_ORDER_SUCCESS, orderList.viewCustomerOrders()));
     }
 
 
