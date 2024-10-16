@@ -256,7 +256,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete NAME`<br> e.g., `delete John Doe`
 **Schedule** | `schedule NAME d/DATE_AND_TIME [note/NOTES]`
-**Appointment List** | `appointment-delete NAME`<br> e.g., `appointment-delete John Doe`
+**Appointment Delete** | `appointment-delete NAME`<br> e.g., `appointment-delete John Doe`
 **Reminder** | `reminder NAME r/REMINDER_TIME`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find [KEYWORD] [MORE_KEYWORDS] / [p/PHONE]`<br> e.g., `find James Jake` `find 8357 2348`
