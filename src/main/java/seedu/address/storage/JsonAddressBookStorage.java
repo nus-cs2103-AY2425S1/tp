@@ -14,6 +14,7 @@ import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.HireMeComparable;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.internshipapplication.InternshipApplication;
 
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
@@ -35,7 +36,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
     //To-do: edit this readAddressBook() to read data from data file for HireMe
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
+    public Optional<ReadOnlyAddressBook<InternshipApplication>> readAddressBook() throws DataLoadingException {
         return readAddressBook(filePath);
     }
 
@@ -45,7 +46,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyAddressBook<InternshipApplication>> readAddressBook(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(

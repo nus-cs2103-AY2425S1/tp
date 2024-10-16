@@ -6,7 +6,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class NameOldTest {
+import seedu.address.logic.validator.NameValidator;
+
+public class NameTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -22,20 +24,20 @@ public class NameOldTest {
     @Test
     public void validate() {
         // null name
-        assertThrows(NullPointerException.class, () -> Name.validate(null));
+        assertThrows(NullPointerException.class, () -> NameValidator.of().validate(null));
 
         // invalid name
-        assertFalse(Name.validate("")); // empty string
-        assertFalse(Name.validate(" ")); // spaces only
-        assertFalse(Name.validate("^")); // only non-alphanumeric characters
-        assertFalse(Name.validate("peter*")); // contains non-alphanumeric characters
+        assertFalse(NameValidator.of().validate("")); // empty string
+        assertFalse(NameValidator.of().validate(" ")); // spaces only
+        assertFalse(NameValidator.of().validate("^")); // only non-alphanumeric characters
+        assertFalse(NameValidator.of().validate("peter*")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(Name.validate("peter jack")); // alphabets only
-        assertTrue(Name.validate("12345")); // numbers only
-        assertTrue(Name.validate("peter the 2nd")); // alphanumeric characters
-        assertTrue(Name.validate("Capital Tan")); // with capital letters
-        assertTrue(Name.validate("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(NameValidator.of().validate("peter jack")); // alphabets only
+        assertTrue(NameValidator.of().validate("12345")); // numbers only
+        assertTrue(NameValidator.of().validate("peter the 2nd")); // alphanumeric characters
+        assertTrue(NameValidator.of().validate("Capital Tan")); // with capital letters
+        assertTrue(NameValidator.of().validate("David Roger Jackson Ray Jr 2nd")); // long names
     }
 
     @Test
