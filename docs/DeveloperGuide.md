@@ -413,7 +413,7 @@ For all use cases below, the **System** is the `SeeRee 2.0` and the **Actor** is
 
     - 1a1. System shows an error message
 
-        Use case resume from step 1. 
+        Use case resume from step 1.
 
 <u>**Use Case: UC3 - View schedule**</u>
 
@@ -453,7 +453,7 @@ For all use cases below, the **System** is the `SeeRee 2.0` and the **Actor** is
 - 2a. System is unable to find any user with that name.
 
     - 2a1. System notifies the user it is unable to find any user with that name.
-    
+
         Use case ends.
 
 <u>**Use Case: UC5 - Editing an existing schedule**</u>
