@@ -16,6 +16,9 @@ import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.rentalinformation.RentalInformation;
 
+/**
+ * Deletes a rental information from a client identified using it's displayed index from the address book.
+ */
 public class DeleteRentalCommand extends Command {
     public static final String COMMAND_WORD = "rdelete";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the specified rental information "
@@ -31,6 +34,10 @@ public class DeleteRentalCommand extends Command {
     private final Index clientIndex;
     private final Index rentalIndex;
 
+    /**
+     * Creates a DeleteRentalCommand to delete the rental information identified by {@code rentalIndex} from the
+     * client identified by {@code clientIndex}.
+     */
     public DeleteRentalCommand(Index clientIndex, Index rentalIndex) {
         this.clientIndex = clientIndex;
         this.rentalIndex = rentalIndex;
@@ -55,6 +62,7 @@ public class DeleteRentalCommand extends Command {
         RentalInformation targetRental = rentalInformationList.remove(rentalIndex.getZeroBased());
         Client updatedClient = new Client(targetClient.getName(), targetClient.getPhone(), targetClient.getEmail(),
                 targetClient.getTags(), rentalInformationList);
+
         // TODO: update the rental information list in Model, waiting for implementation from "rview".
         model.setPerson(targetClient, updatedClient);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

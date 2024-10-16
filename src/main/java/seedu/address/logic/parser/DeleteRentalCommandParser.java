@@ -8,7 +8,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteRentalCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new DeleteRentalCommand object
+ */
 public class DeleteRentalCommandParser implements Parser<DeleteRentalCommand> {
+
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteRentalCommand
      * and returns a DeleteRentalCommand object for execution.
