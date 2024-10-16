@@ -24,14 +24,19 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        switch (this.field) {
-        case "name":
-            return keywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().toString(), keyword));
-
-        default:
-            return false;
-        }
+        return switch (this.field) {
+        case "name" -> keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().toString(), keyword));
+        case "id" -> keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getId().toString(), keyword));
+        case "ward" -> keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getWard().toString(), keyword));
+        case "diagnosis" -> keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getDiagnosis().toString(), keyword));
+        case "medication" -> keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getMedication().toString(), keyword));
+        default -> false;
+        };
     }
 
     @Override
@@ -46,12 +51,14 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         FieldContainsKeywordsPredicate otherFieldContainsKeywordsPredicate = (FieldContainsKeywordsPredicate) other;
-        return keywords.equals(otherFieldContainsKeywordsPredicate.keywords);
+        return keywords.equals(otherFieldContainsKeywordsPredicate.keywords)
+                && field.equals(otherFieldContainsKeywordsPredicate.field);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keywords", keywords)
-                .add("field", field).toString();
+        return new ToStringBuilder(this).add("field", field)
+                .add("keywords", keywords)
+                .toString();
     }
 }

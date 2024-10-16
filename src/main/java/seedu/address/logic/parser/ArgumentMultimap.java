@@ -75,4 +75,11 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     * Returns the number of unique prefixes found.
+     */
+    public int numberOfUniquePrefixes() {
+        return this.argMultimap.size();
+    }
 }
