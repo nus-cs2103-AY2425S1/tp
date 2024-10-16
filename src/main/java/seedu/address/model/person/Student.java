@@ -20,6 +20,13 @@ public class Student extends Person {
         this.parentEmail = parentEmail;
     }
 
+    public Student(Person person, Name parentName, Phone parentPhone, Email parentEmail) {
+        super(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), person.getTags());
+        this.parentName = parentName;
+        this.parentPhone = parentPhone;
+        this.parentEmail = parentEmail;
+    }
+
     public Name getParentName() {
         return parentName;
     }
@@ -61,9 +68,9 @@ public class Student extends Person {
                 .add("phone", this.getPhone())
                 .add("email", this.getEmail())
                 .add("address", this.getAddress())
-                .add("parentName", this.getParentName())
-                .add("parentPhone", this.getParentPhone())
-                .add("parentEmail", this.getParentEmail())
+                .add("parent name", this.getParentName())
+                .add("parent phone", this.getParentPhone())
+                .add("parent email", this.getParentEmail())
                 .add("tags", this.getTags())
                 .toString();
     }
