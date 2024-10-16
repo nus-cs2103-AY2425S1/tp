@@ -1,9 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -17,7 +16,7 @@ public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
-    public static final String MESSAGE_SUCCESS = "Contact Info:\n";
+    public static final String MESSAGE_SUCCESS = "Viewing contact now...";
 
     public static final String MESSAGE_NO_SUCH_TELEGRAM =
             "There is no one in your address book with the telegram handle: @";
@@ -38,6 +37,7 @@ public class ViewCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> lastShownList = model.getFilteredPersonList();
         List<Person> p = lastShownList.stream().filter(person ->
                 person.getTelegram().value.toLowerCase().equals(this.tele)).toList();
@@ -45,19 +45,7 @@ public class ViewCommand extends Command {
             throw new CommandException(MESSAGE_NO_SUCH_TELEGRAM + this.tele);
         }
         Person person = p.get(0);
-        return new CommandResult(MESSAGE_SUCCESS + generateContactInformation(person));
+        return new CommandResult(MESSAGE_SUCCESS, true, person);
     }
 
-    /**
-     * Formulates a message that displays all information of the specified contact
-     * @param p Person to which all their contact information is to be displayed
-     * @return String message which contains all the information of the specified contact
-     */
-    public String generateContactInformation(Person p) {
-        Field[] fields = Person.class.getDeclaredFields();
-        StringBuilder contactInfo = new StringBuilder("");
-        Arrays.stream(fields).forEach(field -> contactInfo.append(field.getName().toUpperCase()
-                        + ": " + p.getString(field.getType()) + "\n"));
-        return contactInfo.toString();
-    }
 }
