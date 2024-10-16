@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TutUtil.TUTORIAL_CLASS;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BENSON;
+import static seedu.address.testutil.TypicalTutorials.TUTORIAL2;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,6 +23,7 @@ import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.TutName;
 import seedu.address.model.tut.Tutorial;
 import seedu.address.model.tut.TutorialList;
+import seedu.address.model.tut.exceptions.TutNoFoundException;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -103,6 +106,25 @@ public class ModelManagerTest {
     @Test
     public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredStudentList().remove(0));
+    }
+
+    @Test
+    public void hasTutorial_byTutorialClass_returnsTrue() {
+        Tutorial tutorial = new Tutorial(new TutName("Tut"), new TutorialClass("1000"));
+        modelManager.addTutorial(tutorial);
+        assertTrue(modelManager.hasTutorial(new TutorialClass("1000")));
+    }
+
+    @Test
+    public void assignTutorial_success() {
+        modelManager.addTutorial(TUTORIAL2);
+        modelManager.assignStudent(ALICE, TUTORIAL_CLASS);
+        assertTrue(modelManager.hasTutorial(TUTORIAL_CLASS));
+    }
+
+    @Test
+    public void assignTutorial_fail() {
+        assertThrows(TutNoFoundException.class, () -> modelManager.assignStudent(ALICE, TUTORIAL_CLASS));
     }
 
     @Test

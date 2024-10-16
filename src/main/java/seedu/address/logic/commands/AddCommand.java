@@ -10,6 +10,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.TutorialClass;
 
 /**
  * Adds a student to the address book.
@@ -31,20 +32,25 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
     public static final String MESSAGE_DUPLICATE_STUDENTID = "This student ID already exists in the address book: ";
+    public static final String MESSAGE_TUTORIAL_NOT_FOUND = "The tutorial ID provided doesn't exist! \nTutorial ID: ";
 
     private final Student toAdd;
+    private final TutorialClass tutorialClass;
 
     /**
      * Creates an AddCommand to add the specified {@code Student}
      */
-    public AddCommand(Student student) {
+    public AddCommand(Student student, TutorialClass tutorialClass) {
         requireNonNull(student);
         toAdd = student;
+        this.tutorialClass = tutorialClass;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        System.out.println("TUT " + tutorialClass);
+        System.out.println("STU " + toAdd);
 
         if (model.hasStudent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
@@ -54,6 +60,11 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENTID + toAdd.getStudentId());
         }
 
+        if (!model.hasTutorial(tutorialClass)) {
+            throw new CommandException(MESSAGE_TUTORIAL_NOT_FOUND + tutorialClass);
+        }
+
+        model.assignStudent(toAdd, tutorialClass);
         model.addStudent(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }

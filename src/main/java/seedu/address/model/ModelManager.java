@@ -20,6 +20,7 @@ import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tutorial;
 import seedu.address.model.tut.TutorialList;
+import seedu.address.model.tut.exceptions.TutNoFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -144,6 +145,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasTutorial(TutorialClass tutorialClass) {
+        requireNonNull(tutorialClass);
+        return tutorials.hasTutorial(tutorialClass);
+    }
+
+    @Override
     public boolean setStudentAttendance(StudentId target, TutorialClass tut, Date date) {
         boolean isSuccess = tutorials.getTutorials().stream()
                 .filter(s -> s.getTutorialClass().equals(tut))
@@ -160,6 +167,15 @@ public class ModelManager implements Model {
         tutorials.deleteTutorial(tutorial);
     }
 
+    @Override
+    public void assignStudent(Student student, TutorialClass tutorialClass) {
+        requireNonNull(student);
+        requireNonNull(tutorialClass);
+        if (!tutorials.hasTutorial(tutorialClass)) {
+            throw new TutNoFoundException();
+        }
+        tutorials.assignStudent(student, tutorialClass);
+    }
 
     //=========== Assignment ================================================================================
 

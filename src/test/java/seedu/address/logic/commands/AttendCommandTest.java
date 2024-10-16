@@ -181,6 +181,11 @@ public class AttendCommandTest {
         }
 
         @Override
+        public boolean hasTutorial(TutorialClass tutorialClass) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addTutorial(Tutorial tutorial) {
             throw new AssertionError("This method should not be called.");
         }
@@ -227,6 +232,11 @@ public class AttendCommandTest {
 
         @Override
         public boolean hasStudentWithId(StudentId studentId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void assignStudent(Student student, TutorialClass tutorialClass) {
             throw new AssertionError("This method should not be called.");
         }
 

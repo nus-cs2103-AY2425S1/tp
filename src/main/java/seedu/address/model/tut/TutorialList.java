@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 
+import seedu.address.model.student.Student;
+import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.exceptions.DuplicateTutorialException;
 import seedu.address.model.tut.exceptions.TutNoFoundException;
 
@@ -54,6 +56,17 @@ public class TutorialList {
         return this.tutorials.contains(tutorial);
     }
 
+    /**
+     * Check if the list contains a specified tutorial class.
+     *
+     * @param tutorialClass The tutorial class to check for
+     * @return True if list contains he tutorial, false otherwise.
+     */
+    public boolean hasTutorial(TutorialClass tutorialClass) {
+        Tutorial tutorial = new Tutorial(new TutName("ran"), tutorialClass);
+        return this.tutorials.stream().anyMatch(x -> x.equals(tutorial));
+    }
+
     public ArrayList<Tutorial> getTutorials() {
         return this.tutorials;
     }
@@ -71,6 +84,20 @@ public class TutorialList {
         }
         this.tutorials.remove(tutorial);
     }
+
+    /**
+     * Assign student to the tutorial class.
+     *
+     * @param student Student to be assigned
+     * @param tutorialClass Target tutorial
+     */
+    public void assignStudent(Student student, TutorialClass tutorialClass) {
+        Tutorial ran = new Tutorial(new TutName("ran"), tutorialClass);
+        tutorials.stream()
+                .filter(t -> t.equals(ran))
+                .forEach(t -> t.assignStudent(student));
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
