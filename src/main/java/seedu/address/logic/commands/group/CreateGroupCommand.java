@@ -27,7 +27,7 @@ public class CreateGroupCommand extends Command {
             + "Parameters: "
             + PREFIX_GROUP_NAME + "GROUP_NAME "
             + PREFIX_MEMBERS + " INDEX [MORE_INDICES...]\n"
-            + "Example: " + COMMAND_WORD + "g/blood drive m/ 1 4 6";
+            + "Example: " + COMMAND_WORD + " g/blood drive m/ 1 4 6";
 
     public static final String MESSAGE_CREATE_GROUP_SUCCESS = "Created group %s\n";
 

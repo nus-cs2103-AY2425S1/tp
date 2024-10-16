@@ -179,6 +179,12 @@ public class AddCommandTest {
         public void clearPersonSort() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void filterByGroup(String groupName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
