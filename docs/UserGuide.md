@@ -77,9 +77,11 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the address book. (labels do not need to be in order, NICKNAME is optional)
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE…​`
+Format: 
+* `add n/NAME th/TELEGRAM_HANDLE e/EMAIL s/STUDENT_STATUS r/ROLE nn/NICKNAME`
+* `add n/NAME th/TELEGRAM_HANDLE e/EMAIL s/STUDENT_STATUS r/ROLE`
 
 <box type="tip" seamless>
 
@@ -94,8 +96,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE…​`
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/Admin`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 r/President r/Admin`
+* `add n/John Doe th/johndoe e/johnd@example.com s/undergraduate 3 r/Admin r/President nn/altName`
+* `add n/Betsy Crowe th/betsycrowe e/betsycrowe@example.com s/masters r/President r/Admin`
 
 ### Listing all persons : `list`
 
