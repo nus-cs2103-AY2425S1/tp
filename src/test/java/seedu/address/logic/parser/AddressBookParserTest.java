@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.SortCommand.ASCENDING;
+import static seedu.address.logic.commands.SortCommand.DESCENDING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEWTAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OLDTAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -27,6 +29,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RenameTagCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -90,6 +93,16 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_sort() throws Exception {
+        SortCommand ascCommand = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " " + ASCENDING);
+        assertEquals(new SortCommand(ASCENDING), ascCommand);
+        SortCommand descCommand = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " " + DESCENDING);
+        assertEquals(new SortCommand(DESCENDING), descCommand);
+    }
+
+    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
@@ -104,7 +117,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test
@@ -120,3 +133,5 @@ public class AddressBookParserTest {
         assertEquals(new RenameTagCommand("friends", "enemies"), command);
     }
 }
+
+

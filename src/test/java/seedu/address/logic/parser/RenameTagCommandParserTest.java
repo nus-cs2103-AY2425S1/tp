@@ -34,6 +34,8 @@ public class RenameTagCommandParserTest {
 
         // missing old tag
         assertParseFailure(parser, TAG_NEW_TAG, expectedMessage);
+
+        assertParseFailure(parser, "", expectedMessage);
     }
 
     @Test
