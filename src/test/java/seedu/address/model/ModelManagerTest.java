@@ -14,12 +14,18 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
 import seedu.address.model.vendor.NameContainsKeywordsPredicate;
+import seedu.address.model.vendor.Vendor;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.VendorBuilder;
+import seedu.address.ui.UiState;
 
 public class ModelManagerTest {
 
@@ -116,6 +122,56 @@ public class ModelManagerTest {
     @Test
     public void getFilteredEventList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEventList().remove(0));
+    }
+
+    @Test
+    public void getUiState_setNewUiState_updateSuccessful() {
+        ObjectProperty<UiState> observedState = new SimpleObjectProperty<>();
+        modelManager.getUiState().addListener((observable, oldValue, newValue) -> {
+            observedState.set(newValue);
+        });
+
+        modelManager.setUiState(UiState.EVENT_DETAILS);
+        assertEquals(UiState.EVENT_DETAILS, observedState.get());
+
+        modelManager.setUiState(UiState.VENDOR_DETAILS);
+        assertEquals(UiState.VENDOR_DETAILS, observedState.get());
+    }
+
+    @Test
+    public void getViewedEvent_setNewEvent_updateSuccessful() {
+        ObjectProperty<Event> observedState = new SimpleObjectProperty<>();
+        modelManager.getViewedEvent().addListener((observable, oldValue, newValue) -> {
+            observedState.set(newValue);
+        });
+
+        Event event1 = new EventBuilder().withName("Event 1").build();
+        Event event2 = new EventBuilder().withName("Event 2").build();
+
+        modelManager.viewEvent(event1);
+        assertEquals(event1, observedState.get());
+
+        modelManager.viewEvent(event2);
+        assertEquals(event2, observedState.get());
+    }
+
+    @Test
+    public void getViewedVendor_setNewVendor_updateSuccessful() {
+        ObjectProperty<Vendor> observedState = new SimpleObjectProperty<>();
+        modelManager.getViewedVendor().addListener((observable, oldValue, newValue) -> {
+            observedState.set(newValue);
+        });
+
+        Vendor vendor1 = new VendorBuilder().withName("Vendor 1").withPhone("123123").withDescription("Vendor 1")
+                .build();
+        Vendor vendor2 = new VendorBuilder().withName("Vendor 2").withPhone("321321").withDescription("Vendor 2")
+                .build();
+
+        modelManager.viewVendor(vendor1);
+        assertEquals(vendor1, observedState.get());
+
+        modelManager.viewVendor(vendor2);
+        assertEquals(vendor2, observedState.get());
     }
 
     @Test
