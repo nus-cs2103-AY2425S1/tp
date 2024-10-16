@@ -350,3 +350,12 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#role {
+    -fx-text-fill: white;
+    -fx-background-color: #FFC857;
+    -fx-padding: 0 3 0 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}

@@ -93,4 +93,8 @@ public class Volunteer extends Person {
                 .add("hours", hours)
                 .toString();
     }
+
+    public Role getRole() {
+        return Role.VOLUNTEER;
+    }
 }

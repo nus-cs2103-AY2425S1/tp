@@ -24,10 +24,10 @@ public class Hours {
      *
      * @param hours A valid non-negative integer representing the number of hours.
      */
-    public Hours(Integer hours) {
+    public Hours(String hours) {
         requireNonNull(hours);
-        checkArgument(isValidHours(hours.toString()), MESSAGE_CONSTRAINTS);
-        this.hours = hours;
+        checkArgument(isValidHours(hours), MESSAGE_CONSTRAINTS);
+        this.hours = Integer.parseInt(hours);
     }
 
     /**
@@ -58,5 +58,10 @@ public class Hours {
     @Override
     public int hashCode() {
         return hours.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return hours.toString();
     }
 }

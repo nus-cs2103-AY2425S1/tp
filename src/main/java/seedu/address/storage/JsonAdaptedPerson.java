@@ -11,11 +11,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Date;
+import seedu.address.model.person.DonatedAmount;
+import seedu.address.model.person.Donor;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Hours;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Partner;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Volunteer;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -29,18 +36,26 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String hours;
+    private final String donatedAmount;
+    private final String partnershipEndDate;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("hours") String hours,
+                             @JsonProperty("donatedAmount") String donatedAmount,
+                             @JsonProperty("partnershipEndDate") String partnershipEndDate) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.hours = hours;
+        this.donatedAmount = donatedAmount;
+        this.partnershipEndDate = partnershipEndDate;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -57,6 +72,23 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        if (source instanceof Volunteer) {
+            hours = ((Volunteer) source).getHours().toString();
+            donatedAmount = null;
+            partnershipEndDate = null;
+        } else if (source instanceof Donor) {
+            hours = null;
+            donatedAmount = ((Donor) source).getDonatedAmount().toString();
+            partnershipEndDate = null;
+        } else if (source instanceof Partner) {
+            hours = null;
+            donatedAmount = null;
+            partnershipEndDate = ((Partner) source).getEndDate().toString();
+        } else {
+            hours = null;
+            donatedAmount = null;
+            partnershipEndDate = null;
+        }
     }
 
     /**
@@ -103,7 +135,28 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        if (hours != null) {
+            if (!Hours.isValidHours(hours)) {
+                throw new IllegalValueException(Hours.MESSAGE_CONSTRAINTS);
+            }
+            final Hours modelHours = new Hours(hours);
+            return new Volunteer(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelHours);
+        } else if (donatedAmount != null) {
+            if (!DonatedAmount.isValidAmount(donatedAmount)) {
+                throw new IllegalValueException(DonatedAmount.MESSAGE_CONSTRAINTS);
+            }
+            final DonatedAmount modelDonatedAmount = new DonatedAmount(donatedAmount);
+            return new Donor(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelDonatedAmount);
+        } else if (partnershipEndDate != null) {
+            if (!Date.isValidDate(partnershipEndDate)) {
+                throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
+            }
+            final Date modelPartnershipEndDate = new Date(partnershipEndDate);
+            return new Partner(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelPartnershipEndDate);
+        } else {
+            throw new IllegalValueException("Person type information missing. Unable to determine role.");
+        }
     }
 
 }
