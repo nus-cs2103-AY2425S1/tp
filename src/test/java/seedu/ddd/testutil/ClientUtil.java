@@ -9,7 +9,7 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import seedu.ddd.logic.commands.AddContactCommand;
+import seedu.ddd.logic.commands.AddCommand;
 import seedu.ddd.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.tag.Tag;
@@ -23,7 +23,7 @@ public class ClientUtil {
      * Returns an add command string for adding the {@code client}.
      */
     public static String getAddContactCommand(Client client) {
-        return AddContactCommand.COMMAND_WORD + " client " + getClientDetails(client);
+        return AddCommand.COMMAND_WORD + " client " + getClientDetails(client);
     }
 
     /**
