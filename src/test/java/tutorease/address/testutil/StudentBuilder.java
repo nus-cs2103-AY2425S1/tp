@@ -14,7 +14,7 @@ import tutorease.address.model.tag.Tag;
 import tutorease.address.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Student objects.
  */
 public class StudentBuilder {
 

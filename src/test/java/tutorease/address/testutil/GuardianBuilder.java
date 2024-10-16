@@ -1,12 +1,21 @@
 package tutorease.address.testutil;
 
-import tutorease.address.model.person.*;
-import tutorease.address.model.tag.Tag;
-import tutorease.address.model.util.SampleDataUtil;
-
 import java.util.HashSet;
 import java.util.Set;
 
+import tutorease.address.model.person.Address;
+import tutorease.address.model.person.Email;
+import tutorease.address.model.person.Guardian;
+import tutorease.address.model.person.Name;
+import tutorease.address.model.person.Person;
+import tutorease.address.model.person.Phone;
+import tutorease.address.model.person.Role;
+import tutorease.address.model.tag.Tag;
+import tutorease.address.model.util.SampleDataUtil;
+
+/**
+ * A utility class to help with building Guardian objects.
+ */
 public class GuardianBuilder {
     public static final String DEFAULT_NAME = "Bobby Macaroni";
     public static final String DEFAULT_PHONE = "85355255";

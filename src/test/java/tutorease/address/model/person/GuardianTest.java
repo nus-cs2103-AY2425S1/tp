@@ -1,13 +1,25 @@
 package tutorease.address.model.person;
 
-import org.junit.jupiter.api.Test;
-import tutorease.address.testutil.GuardianBuilder;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static tutorease.address.logic.commands.CommandTestUtil.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_ADDRESS_CHICK;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_ADDRESS_MEG;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_EMAIL_CHICK;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_EMAIL_MEG;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_NAME_CHICK;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_NAME_MEG;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_PHONE_CHICK;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_PHONE_MEG;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_TAG_MENTOR;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_TAG_SUPPORTIVE;
 import static tutorease.address.testutil.Assert.assertThrows;
-import static tutorease.address.testutil.TypicalGuardians.MEG;
 import static tutorease.address.testutil.TypicalGuardians.CHICK;
+import static tutorease.address.testutil.TypicalGuardians.MEG;
+
+import org.junit.jupiter.api.Test;
+
+import tutorease.address.testutil.GuardianBuilder;
 
 public class GuardianTest {
     @Test
