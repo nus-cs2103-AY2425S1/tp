@@ -50,6 +50,9 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code event} for display to the user.
+     */
     public static String format(Event event) {
         final StringBuilder builder = new StringBuilder();
         builder.append(event.getName())
@@ -58,7 +61,7 @@ public class Messages {
                 .append("; location: ")
                 .append(event.getLocation())
                 .append("; Tags: ");
-                event.getTags().forEach(builder::append);
+        event.getTags().forEach(builder::append);
         return builder.toString();
     }
 

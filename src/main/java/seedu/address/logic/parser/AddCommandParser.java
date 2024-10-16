@@ -52,6 +52,11 @@ public class AddCommandParser implements Parser<Command> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    /**
+     * Parses the given {@code String} of the arguments in the context of the AddCommand
+     * and returns an addCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public AddCommand parseForPerson(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
@@ -73,6 +78,11 @@ public class AddCommandParser implements Parser<Command> {
         return new AddCommand(person);
     }
 
+    /**
+     * Parses the given {@code String} of the arguments in the context of the AddEventCommand
+     * and returns an addCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public AddEventCommand parseForEvent(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_START_TIME, PREFIX_TAG);

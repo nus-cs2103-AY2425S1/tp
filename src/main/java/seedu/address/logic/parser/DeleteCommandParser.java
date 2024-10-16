@@ -16,8 +16,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class DeleteCommandParser implements Parser<Command> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns a DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the Command
+     * and returns a Command object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parse(ModelType modelType, String args) throws ParseException {
@@ -28,6 +28,11 @@ public class DeleteCommandParser implements Parser<Command> {
         }
     }
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the DeleteCommand
+     * and returns a DeleteCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public DeleteCommand parseForPerson(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
@@ -38,12 +43,17 @@ public class DeleteCommandParser implements Parser<Command> {
         }
     }
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the DeleteEventCommand
+     * and returns a DeleteEventCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public DeleteEventCommand parseForEvent(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
             return new DeleteEventCommand(index);
         } catch (ParseException pe) {
-            throw new ParseException (
+            throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteEventCommand.MESSAGE_USAGE), pe);
         }
     }

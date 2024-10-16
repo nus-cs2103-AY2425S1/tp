@@ -10,8 +10,8 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.types.common.Address;
-import seedu.address.model.types.common.Name;
 import seedu.address.model.types.common.DateTime;
+import seedu.address.model.types.common.Name;
 
 /**
  * Represents an Event in the address book.

@@ -1,27 +1,55 @@
 package seedu.address.logic.parser;
 
+/**
+ * Represents the different model types in the application, with a shorthand for each type.
+ * It supports PERSON and EVENT models.
+ */
 public enum ModelType {
+    /**
+     * Represents a person model with shorthand "p".
+     */
     PERSON("p"),
+
+    /**
+     * Represents an event model with shorthand "e".
+     */
     EVENT("e");
 
     private final String shorthand;
 
+    /**
+     * Constructs a ModelType with the given shorthand.
+     *
+     * @param shorthand The shorthand string representing the model type.
+     */
     ModelType(String shorthand) {
         this.shorthand = shorthand;
     }
 
+    /**
+     * Returns the shorthand representation of the model type.
+     *
+     * @return A string representing the shorthand for the model type.
+     */
     public String getShorthand() {
         return shorthand;
     }
 
+    /**
+     * Returns the corresponding ModelType for a given shorthand string.
+     *
+     * @param shorthand The shorthand string representing a model type.
+     * @return The ModelType associated with the given shorthand.
+     * @throws IllegalArgumentException if the shorthand does not match any known model types.
+     */
     public static ModelType fromShorthand(String shorthand) throws IllegalArgumentException {
         switch (shorthand) {
-            case "p":
-                return PERSON;
-            case "e":
-                return EVENT;
-            default:
-                throw new IllegalArgumentException("Unknown model type shorthand: " + shorthand);
+        case "p":
+            return PERSON;
+        case "e":
+            return EVENT;
+        default:
+            throw new IllegalArgumentException("Unknown model type shorthand: " + shorthand);
         }
     }
 }

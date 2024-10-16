@@ -28,7 +28,9 @@ public class AddressBookParser {
     /**
      * Used for initial separation of command word and args.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s+(?<modelType>\\S)\\s+(?<arguments>.+)");
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile(
+        "(?<commandWord>\\S+)\\s+(?<modelType>\\S)\\s+(?<arguments>.+)"
+    );
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     /**

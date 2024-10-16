@@ -9,13 +9,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class DateTime {
 
-    public static final String MESSAGE_CONSTRAINTS = "DateTime should be in the format YYYY-MM-DD HH:mm (24-hour format) "
-        + "and must be valid.";
+    public static final String MESSAGE_CONSTRAINTS = "DateTime should be in the format YYYY-MM-DD HH:mm "
+        + "(24-hour format) and must be valid.";
     /*
      * The date must follow the format YYYY-MM-DD (ISO standard date format), and the time must follow
      * the 24-hour format (HH:mm), where hours are between 00 and 23 and minutes are between 00 and 59.
      */
-    public static final String VALIDATION_REGEX = "\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01]) ([01][0-9]|2[0-3]):[0-5][0-9]";
+    public static final String VALIDATION_REGEX = "\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])" 
+        + " ([01][0-9]|2[0-3]):[0-5][0-9]";
 
     public final String value;
 
