@@ -35,7 +35,7 @@ public class ModelManager implements Model {
             ReadOnlyAppointmentBook appointmentBook,
             ReadOnlyUserPrefs userPrefs) {
 
-        // requireAllNonNull(addressBook, appointmentBook, userPrefs);
+        requireAllNonNull(addressBook, appointmentBook, userPrefs);
 
         logger.fine("Initializing with address book: "
                 + addressBook
@@ -45,15 +45,10 @@ public class ModelManager implements Model {
                 + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        // Todo:
-        this.appointmentBook = null;
-        // this.appointmentBook = new AppointmentBook(appointmentBook);
+        this.appointmentBook = new AppointmentBook(appointmentBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-
-        // Todo:
-        filteredAppointments = null;
-        // filteredAppointments = new FilteredList<>(this.appointmentBook.getAppointmentList());
+        filteredAppointments = new FilteredList<>(this.appointmentBook.getAppointmentList());
     }
 
     public ModelManager() {
