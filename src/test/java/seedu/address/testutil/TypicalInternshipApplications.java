@@ -27,31 +27,31 @@ public class TypicalInternshipApplications {
     public static final InternshipApplication BYTEDANCE = new InternshipApplicationBuilder().withName("ByteDance")
             .withEmail("bytedance@example.com")
             .withRole("Frontend Developer Intern")
-            .withDate("02/02/24")
+            .withDate("01/01/24")
             .build();
     public static final InternshipApplication CITIBANK = new InternshipApplicationBuilder().withName("Citibank")
             .withEmail("citibank@example.com")
             .withRole("Backend Developer Intern")
-            .withDate("03/03/24")
+            .withDate("01/01/24")
             .build();
     public static final InternshipApplication DELL = new InternshipApplicationBuilder().withName("Dell")
             .withEmail("dell@example.com")
             .withRole("Computer Engineer Intern")
-            .withDate("04/04/24")
+            .withDate("01/01/24")
             .build();
     public static final InternshipApplication EY = new InternshipApplicationBuilder().withName("Ernest & Young")
             .withEmail("ey@example.com")
             .withRole("Fintech Intern")
-            .withDate("05/05/24")
+            .withDate("01/01/24")
             .build();
     public static final InternshipApplication FIGMA = new InternshipApplicationBuilder().withName("Figma")
             .withEmail("figma@example.com")
             .withRole("UI/UX Intern")
-            .withDate("06/06/24")
+            .withDate("01/01/24")
             .build();
     public static final InternshipApplication GOOGLE = new InternshipApplicationBuilder().withName("Google")
             .withEmail("google@gmail.com")
-            .withDate("04/09/98")
+            .withDate("01/01/24")
             .withRole("SWE")
             .build();
 
@@ -64,12 +64,12 @@ public class TypicalInternshipApplications {
     public static final InternshipApplication IDA = new InternshipApplicationBuilder().withName("Ida Company")
             .withEmail("ida@example.com")
             .withRole("Ida Intern")
-            .withDate("02/02/24")
+            .withDate("01/01/24")
             .build();
 
     public static final InternshipApplication YAHOO = new InternshipApplicationBuilder().withName("Yahoo")
             .withEmail("yahoo@yahoo.com")
-            .withDate("01/01/94")
+            .withDate("01/01/24")
             .withRole("Clerk")
             .build();
 

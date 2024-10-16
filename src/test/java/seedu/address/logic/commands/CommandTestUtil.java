@@ -29,18 +29,18 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 public class CommandTestUtil {
     public static final String VALID_COMPANY_NAME_GOOGLE = "Google";
     public static final String VALID_EMAIL_GOOGLE = "google@gmail.com";
-    public static final String VALID_DATE_GOOGLE = "04/09/98";
+    public static final String VALID_DATE_GOOGLE = "01/01/24";
     public static final String VALID_ROLE_GOOGLE = "SWE";
 
     public static final String VALID_COMPANY_NAME_YAHOO = "Yahoo";
     public static final String VALID_EMAIL_YAHOO = "yahoo@yahoo.com";
-    public static final String VALID_DATE_YAHOO = "01/01/94";
+    public static final String VALID_DATE_YAHOO = "01/01/24";
     public static final String VALID_ROLE_YAHOO = "Clerk";
 
     public static final String VALID_COMPANY_NAME_APPLE = "Apple";
     public static final String VALID_COMPANY_NAME_BOFA = "BOFA";
     public static final String VALID_DATE_APPLE = "01/01/24";
-    public static final String VALID_DATE_BOFA = "02/02/24";
+    public static final String VALID_DATE_BOFA = "01/01/24";
     public static final String VALID_COMPANY_EMAIL_APPLE = "apple@example.com";
     public static final String VALID_COMPANY_EMAIL_BOFA = "bofa@example.com";
     public static final String VALID_ROLE_APPLE = "Software Engineer Intern";
@@ -59,7 +59,7 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_COMPANY_NAME_DESC = " " + PREFIX_NAME + "Google!"; // '&' not allowed in names
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "911a"; // 'a' not allowed in dates
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bofa!yahoo"; // missing '@' symbol
     public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE; // empty string not allowed for role

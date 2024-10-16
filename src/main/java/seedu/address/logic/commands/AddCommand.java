@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -21,15 +21,15 @@ public class AddCommand extends Command<InternshipApplication> {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an internship application to the address book. "
             + "Parameters: "
-            + PREFIX_COMPANY + "COMPANY "
+            + PREFIX_NAME + "COMPANY "
             + PREFIX_ROLE + "ROLE "
             + PREFIX_EMAIL + "COMPANY_EMAIL "
             + PREFIX_DATE + "DATE_OF_APPLICATION\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_COMPANY + "ABC Company "
+            + PREFIX_NAME + "ABC Company "
             + PREFIX_ROLE + "Software Engineer Intern "
             + PREFIX_EMAIL + "abc_company@example.com "
-            + PREFIX_DATE + "16/09/24";
+            + PREFIX_DATE + "01/01/24";
 
     public static final String MESSAGE_SUCCESS = "New internship application added: %1$s";
     public static final String MESSAGE_DUPLICATE_APPLICATION =
