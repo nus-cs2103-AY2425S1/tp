@@ -90,7 +90,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
 <br>
 <details>
-  <summary>&nbsp&nbsp<strong style="font-size:1.25em;margin:auto;">Viewing help: <code>help</code></strong></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Viewing help: <code>help</code></strong></summary>
 
   >Displays a help window containing the list of commands, its purpose and the format
   >
@@ -102,7 +102,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
 <br>
 <details>
-  <summary>&nbsp&nbsp<strong style="font-size:1.25em;margin:auto;">Adding an employee: <code>employee</code></strong></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Adding an employee: <code>employee</code></strong></summary>
   
   >Adds an employee to StaffSync.
   >
@@ -120,7 +120,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
 <br>
 <details>
-  <summary>&nbsp&nbsp<strong style="font-size:1.25em;margin:auto;">Adding a potential hire: <code>potential</code></strong></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Adding a potential hire: <code>potential</code></strong></summary>
   
   >Adds a potential hire to StaffSync.
   >
@@ -137,7 +137,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
 <br>
 <details>
-  <summary>&nbsp&nbsp<strong style="font-size:1.25em;margin:auto;">Clearing all entries: <code>clear</code></strong></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Clearing all entries: <code>clear</code></strong></summary>
   
   >Clears all entries from StaffSync.
   >
@@ -146,7 +146,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
 <br>
 <details>
-  <summary>&nbsp&nbsp<strong style="font-size:1.25em;margin:auto;">Deleting a person: <code>delete</code></strong></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Deleting a person: <code>delete</code></strong></summary>
   
   >Deletes the specified person from StaffSync.
   >
@@ -164,7 +164,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
 <br>
 <details>
-  <summary>&nbsp&nbsp<strong style="font-size:1.25em;margin:auto;">Editing a person: <code>edit</code></strong></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Editing a person: <code>edit</code></strong></summary>
   
   >Edits an existing person in the StaffSync.
   >
@@ -181,7 +181,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
 <br>
 <details>
-  <summary>&nbsp&nbsp<strong style="font-size:1.25em;margin:auto;">Exiting the program: <code>exit</code></strong></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Exiting the program: <code>exit</code></strong></summary>
   
   >Exits the program.
   >
@@ -190,7 +190,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
 <br>
 <details>
-  <summary>&nbsp&nbsp<strong style="font-size:1.25em;margin:auto;">Locating persons by name: <code>find</code></strong></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Locating persons by name: <code>find</code></strong></summary>
   
   >Finds the employee/potential hire whose names contain any of the given keywords.
   >
@@ -212,7 +212,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
 <br>
 <details>
-  <summary>&nbsp&nbsp<strong style="font-size:1.25em;margin:auto;">Listing all persons: <code>list</code></strong></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Listing all persons: <code>list</code></strong></summary>
   
   >Shows a list of all persons in StaffSync.
   >
