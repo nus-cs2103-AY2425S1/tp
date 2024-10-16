@@ -9,13 +9,14 @@ import tutorease.address.model.person.Name;
 import tutorease.address.model.person.Person;
 import tutorease.address.model.person.Phone;
 import tutorease.address.model.person.Role;
+import tutorease.address.model.person.Student;
 import tutorease.address.model.tag.Tag;
 import tutorease.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
  */
-public class PersonBuilder {
+public class StudentBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
@@ -33,7 +34,7 @@ public class PersonBuilder {
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
-    public PersonBuilder() {
+    public StudentBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -45,7 +46,7 @@ public class PersonBuilder {
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
-    public PersonBuilder(Person personToCopy) {
+    public StudentBuilder(Person personToCopy) {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
@@ -57,7 +58,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Name} of the {@code Person} that we are building.
      */
-    public PersonBuilder withName(String name) {
+    public StudentBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
@@ -65,7 +66,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Role} of the {@code Person} that we are building.
      */
-    public PersonBuilder withRole(String role) {
+    public StudentBuilder withRole(String role) {
         this.role = new Role(role);
         return this;
     }
@@ -73,7 +74,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public StudentBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -81,7 +82,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Address} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
+    public StudentBuilder withAddress(String address) {
         this.address = new Address(address);
         return this;
     }
@@ -89,7 +90,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
+    public StudentBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
         return this;
     }
@@ -97,13 +98,13 @@ public class PersonBuilder {
     /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
-    public PersonBuilder withEmail(String email) {
+    public StudentBuilder withEmail(String email) {
         this.email = new Email(email);
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, role, tags);
+    public Student build() {
+        return new Student(name, phone, email, address, role, tags);
     }
 
 }

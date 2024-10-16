@@ -16,6 +16,7 @@ import tutorease.address.model.person.Name;
 import tutorease.address.model.person.Person;
 import tutorease.address.model.person.Phone;
 import tutorease.address.model.person.Role;
+import tutorease.address.model.person.Student;
 import tutorease.address.model.tag.Tag;
 
 /**
@@ -112,7 +113,7 @@ class JsonAdaptedPerson {
         final Role modelRole = new Role(role);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelTags);
+        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelTags);
     }
 
 }
