@@ -180,9 +180,8 @@ public class AddCommandTest {
 
         @Override
         public void deleteGroup(Group group) {
-             throw new AssertionError("This method should not be called.");
+            throw new AssertionError("This method should not be called.");
         }
-      
         @Override
         public boolean hasGroupName(Group group) {
             throw new AssertionError("This method should not be called.");
