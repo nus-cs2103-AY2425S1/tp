@@ -68,17 +68,20 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Optional<Address>}.
+     * Parses a {@code Optional<String> address} into an {@code Optional<Address>}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
-    public static Optional<Address> parseAddress(String address) throws ParseException {
+    public static Optional<Address> parseAddress(Optional<String> address) throws ParseException {
         requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (address.isBlank()) {
+
+        if (address.isEmpty()) {
+            // if an address prefix was never entered by the user
             return Optional.empty();
         }
+
+        String trimmedAddress = address.get().trim();
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
@@ -86,17 +89,19 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Optional<Email>}.
+     * Parses a {@code Optional<String> email} into an {@code Optional<Email>}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Optional<Email> parseEmail(String email) throws ParseException {
+    public static Optional<Email> parseEmail(Optional<String> email) throws ParseException {
         requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (trimmedEmail.isBlank()) {
+
+        if (email.isEmpty()) {
+            // if an email prefix was never entered by the user
             return Optional.empty();
         }
+        String trimmedEmail = email.get().trim();
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }

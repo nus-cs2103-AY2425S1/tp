@@ -46,8 +46,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_ADDRESS, PREFIX_DATEOFLASTVISIT);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Optional<Email> email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).orElse(""));
-        Optional<Address> address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(""));
+        Optional<Email> email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL));
+        Optional<Address> address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         DateOfLastVisit dateOfLastVisit = ParserUtil
                 .parseDateOfLastVisit(argMultimap.getValue(PREFIX_DATEOFLASTVISIT).get());
