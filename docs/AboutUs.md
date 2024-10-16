@@ -17,8 +17,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/runus01)]
 [[portfolio](team/runus01.md)]
 
-* Role: Tester and Pet Manager
-* Responsibilities: Ensures proper and timely testing of the software while managing the project's pet-related features.
+- Role: Tester and Pet Manager
+- Responsibilities: Ensures proper and timely testing of the software while managing the project's pet-related features.
 
 ### Clarissa
 
@@ -27,8 +27,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/clarissatjx)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: In charge of Search
+- Role: Team Lead
+- Responsibilities: In charge of Search
 
 ### David Goh
 
@@ -36,8 +36,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](https://github.com/daivdgohzk)] [[portfolio](team/johndoe.md)]
 
-* Role: Documentation and Code Quality
-* Responsibilities: Co-incharge of Pet Owner
+- Role: Documentation and Code Quality
+- Responsibilities: Co-incharge of Pet Owner
 
 ### Jonathan Loh
 
@@ -46,8 +46,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/jloh02)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Integration
-* Responsibilities: In Charge of Pet Owner
+- Role: Integration
+- Responsibilities: In Charge of Pet Owner
 
 ### Jordan Chan
 
@@ -56,7 +56,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/naythee169)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Deliverables & Deadlines, Scheduling & Tracking
-* Responsibilities: 
-* - Ensure project deliverables are done on time and in the right format.
-* - In charge of defining, assigning and tracking project tasks
+- Role: Deliverables & Deadlines, Scheduling & Tracking
+- Responsibilities:
+- - Ensure project deliverables are done on time and in the right format.
+- - In charge of defining, assigning and tracking project tasks
