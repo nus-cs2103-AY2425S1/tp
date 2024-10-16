@@ -143,6 +143,7 @@ Finds persons whose names contain any of the given keywords.
 Format: `filter t/TAG [t/MORE_TAG]...`
 
 * The search is case-sensitive. e.g `friends` will not match `Friends`
+* At least one tag must be provided.
 * The order of the keywords does not matter. e.g. `t/friends t/family` will match `t/family t/friends`
 * Only the tags is searched.
 * Only full tag name will be matched e.g. `friend` will not match `friends`
