@@ -156,6 +156,22 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                         + DATEOFLASTVISIT_DESC_AMY,
                 new AddCommand(expectedPerson));
+
+        // no email provided
+        Person expectedPersonWithoutEmail = new PersonBuilder(BOB).withEmail().withTags().build();
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB
+                + DATEOFLASTVISIT_DESC_BOB, new AddCommand(expectedPersonWithoutEmail));
+
+        // no address provided
+        Person expectedPersonWithoutAddress = new PersonBuilder(BOB).withAddress().withTags().build();
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + DATEOFLASTVISIT_DESC_BOB, new AddCommand(expectedPersonWithoutAddress));
+
+        // no email or address provided
+        Person expectedPersonWithoutAddressOrEmail = new PersonBuilder(BOB)
+                .withAddress().withEmail().withTags().build();
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + DATEOFLASTVISIT_DESC_BOB,
+                new AddCommand(expectedPersonWithoutAddressOrEmail));
     }
 
     @Test
@@ -168,14 +184,6 @@ public class AddCommandParserTest {
 
         // missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + DATEOFLASTVISIT_DESC_BOB, expectedMessage);
-
-        // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
-                        + DATEOFLASTVISIT_DESC_BOB, expectedMessage);
-
-        // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
                         + DATEOFLASTVISIT_DESC_BOB, expectedMessage);
 
         // missing dateOfLastVisit prefix

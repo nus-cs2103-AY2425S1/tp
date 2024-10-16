@@ -80,6 +80,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Address} of the {@code Person} that we are building to {@code Optional.empty}.
+     */
+    public PersonBuilder withAddress() {
+        this.address = Optional.empty();
+        return this;
+    }
+
+    /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
@@ -92,6 +100,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withEmail(String email) {
         this.email = Optional.of(new Email(email));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building to {@code Optional.empty}.
+     */
+    public PersonBuilder withEmail() {
+        this.email = Optional.empty();
         return this;
     }
 
