@@ -273,28 +273,29 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​               | I want to …​ | So that I can…​         |
-|----------|-----------------------| - |-------------------------|
-| `* * *`  | Tourist               | find the best local delicacies | clear my itinerary       |
-| `* * *`  | Muslim                | find and filter down eateries that are halal and within my location | enjoy delicious food that is within my dietary restrictions |
-| `* * *`  | Person with Allergies  | find eateries that meet my restrictions | not worry about searching far and wide for every meal |
-| `* * *`  | Hungry person with cravings | find restaurants with the cuisine I'm craving for | fulfill my cravings      |
-| `* * *`  | Foodie                | review restaurant ratings and reviews | make an informed decision based on other diners' experiences |
-| `* *`    | Frequent Traveler      | find reliable and high-quality restaurants in new cities | enjoy great meals without extensive research |
-| `* *`    | thrifty individual     | find the cheapest food | survive the day          |
-| `* *`    | Deal Seeker           | find discounts and special offers at nearby restaurants | enjoy eating out without overspending |
-| `* *`    | Health-Conscious Diner | find restaurants that serve nutritious and diet-specific meals | maintain my healthy lifestyle while dining out |
-| `* *`    | Pet lover             | find restaurants that allow and accommodate for pets | enjoy my meal with my furry companion |
-| `*`      | Person with Disabilities | find accessible restaurants with features like ramps | dine out comfortably and independently |
-| `*`      | Crippled Person       | find a wheelchair-friendly restaurant | eat like a normal person |
-| `*`      | Office Worker         | plan what to eat given my 1hr lunch | fit lunch into my busy schedule |
-| `*`      | Food Connoisseur      | save my favorite restaurants | quickly access them later |
-| `*`      | Influencer            | find an atas restaurant | post them on Instagram   |
-| `*`      | introvert             | filter eateries based on delivery options | find places that offer food delivery and enjoy meals at home |
-| `*`      | Food Journalist       | discover restaurants to try and write opinion pieces | write engaging blogs to recommend to others |
-| `*`      | Carouser              | find the bars that offer happy hours | drink riotously          |
-| `*`      | Chef                  | eat at my competitors' restaurants | compare the quality of my food against theirs |
-| `*`      | Student               | find student deals for food | know places to eat that are affordable for me |
+| Priority | As a …​                     | I want to …​                                                        | So that I can…​                                              |
+|----------|-----------------------------|---------------------------------------------------------------------|--------------------------------------------------------------|
+| `* * *`  | Tourist                     | find the best local delicacies                                      | clear my itinerary                                           |
+| `* * *`  | Muslim                      | find and filter down eateries that are halal and within my location | enjoy delicious food that is within my dietary restrictions  |
+| `* * *`  | Person with Allergies       | find eateries that meet my restrictions                             | not worry about searching far and wide for every meal        |
+| `* * *`  | Hungry person with cravings | find restaurants with the cuisine I'm craving for                   | fulfill my cravings                                          |
+| `* * *`  | Newbie                      | read up on how the app works                                        | start using the app                                          |
+| `* * *`  | Foodie                      | review restaurant ratings and reviews                               | make an informed decision based on other diners' experiences |
+| `* *`    | Frequent Traveler           | find reliable and high-quality restaurants in new cities            | enjoy great meals without extensive research                 |
+| `* *`    | thrifty individual          | find the cheapest food                                              | survive the day                                              |
+| `* *`    | Deal Seeker                 | find discounts and special offers at nearby restaurants             | enjoy eating out without overspending                        |
+| `* *`    | Health-Conscious Diner      | find restaurants that serve nutritious and diet-specific meals      | maintain my healthy lifestyle while dining out               |
+| `* *`    | Pet lover                   | find restaurants that allow and accommodate for pets                | enjoy my meal with my furry companion                        |
+| `*`      | Person with Disabilities    | find accessible restaurants with features like ramps                | dine out comfortably and independently                       |
+| `*`      | Crippled Person             | find a wheelchair-friendly restaurant                               | eat like a normal person                                     |
+| `*`      | Office Worker               | plan what to eat given my 1hr lunch                                 | fit lunch into my busy schedule                              |
+| `*`      | Food Connoisseur            | save my favorite restaurants                                        | quickly access them later                                    |
+| `*`      | Influencer                  | find an atas restaurant                                             | post them on Instagram                                       |
+| `*`      | introvert                   | filter eateries based on delivery options                           | find places that offer food delivery and enjoy meals at home |
+| `*`      | Food Journalist             | discover restaurants to try and write opinion pieces                | write engaging blogs to recommend to others                  |
+| `*`      | Carouser                    | find the bars that offer happy hours                                | drink riotously                                              |
+| `*`      | Chef                        | eat at my competitors' restaurants                                  | compare the quality of my food against theirs                |
+| `*`      | Student                     | find student deals for food                                         | know places to eat that are affordable for me                |
 
 ### Use cases
 
@@ -430,6 +431,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b3. User identifies the index of the right vendor to be updated
     * Steps 3b1-3b3 are repeated until user identifies the right vendor
     * Use case resumes at step 4.
+
+**Use Case:** UC7 - Getting Help
+**Actor:** User  
+**MSS:**
+1. User opens the application.
+2. User enters a command for help
+3. GAB displays a window with a list of commands for the user 
+4. Use case ends.
+
 
 ### Non-Functional Requirements
 
