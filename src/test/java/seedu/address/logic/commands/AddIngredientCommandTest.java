@@ -43,7 +43,7 @@ public class AddIngredientCommandTest {
 
         // Set up the expected model to reflect the final state
         Model expectedModel = new ModelManager();
-        expectedModel.getIngredientCatalogue().addIngredient(expectedIngredient);  // Manually add the ingredient
+        expectedModel.addIngredient(expectedIngredient);  // Manually add the ingredient
 
         // Execute the command and verify success
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -51,9 +51,13 @@ public class AddIngredientCommandTest {
 
     @Test
     public void execute_duplicateIngredient_throwsCommandException() {
+        // Use the model's IngredientCatalogue to get the next available ID
+        IngredientCatalogue catalogue = model.getIngredientCatalogue();
+        int nextProductId = catalogue.getNextProductId();  // Ensure consistent product ID
+
         // Add the ingredient to the model to simulate an existing ingredient
-        Ingredient expectedIngredient = new Ingredient(7, INGREDIENT_NAME, INGREDIENT_COST);
-        model.getIngredientCatalogue().addIngredient(expectedIngredient);
+        Ingredient expectedIngredient = new Ingredient(nextProductId, INGREDIENT_NAME, INGREDIENT_COST);
+        model.addIngredient(expectedIngredient);
 
         // Create the AddIngredientCommand with the same ingredient
         AddIngredientCommand command = new AddIngredientCommand(INGREDIENT_NAME, INGREDIENT_COST);
