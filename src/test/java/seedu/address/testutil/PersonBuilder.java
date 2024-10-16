@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
@@ -14,7 +15,6 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
-import seedu.address.model.allergy.Allergy;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -98,7 +98,7 @@ public class PersonBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withAllergies(String ... tags) {
-        this.tags = SampleDataUtil.getAllergySet(tags);
+        this.tags = SampleDataUtil.getAllergiesSet(tags);
         return this;
     }
 

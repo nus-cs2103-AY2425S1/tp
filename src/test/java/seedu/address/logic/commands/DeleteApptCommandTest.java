@@ -65,6 +65,7 @@ public class DeleteApptCommandTest {
                                                    .withGender(targetPerson.getGender().value)
                                                    .withPhone(targetPerson.getPhone().value)
                                                    .withDateOfBirth(targetPerson.getDateOfBirth().value)
+                                                   .withPriority(targetPerson.getPriority().getPriority())
                                                    .withAllergies(targetPerson.getAllergies()
                                                                          .stream()
                                                                          .map(x -> x.allergyName)
