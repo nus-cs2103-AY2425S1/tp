@@ -153,6 +153,12 @@ Exits the program.
 
 Format: `exit`
 
+### Quick reference help: `help`
+
+Shows commands in a help menu for quick reference during use of PROperty.
+
+Format: `help`
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
