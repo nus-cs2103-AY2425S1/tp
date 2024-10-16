@@ -196,6 +196,13 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Displays a confirmation dialog with the specified message.
+     * The dialog prompts the user to confirm an action by typing "y".
+     *
+     * @param message The message to display in the confirmation dialog.
+     * @return {@code true} if the user types "y" to confirm, {@code false} otherwise.
+     */
     public static boolean showConfirmationDialog(String message) {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Confirmation");
