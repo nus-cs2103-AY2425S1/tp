@@ -100,6 +100,7 @@ public class ClientHubParserTest {
         assertEquals(new FindPhoneCommand(new PhoneBeginsWithKeywordPredicate(keyword)), command);
     }
 
+    @Test
     public void parseCommand_findAddress() throws Exception {
         List<String> keywords = Arrays.asList("Tampines", "Street", "1");
         FindAddressCommand command = (FindAddressCommand) parser.parseCommand(
