@@ -21,6 +21,7 @@ public class Messages {
                 "This student does not exist. Create a student first before updating";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
