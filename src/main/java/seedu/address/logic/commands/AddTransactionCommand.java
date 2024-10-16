@@ -63,7 +63,7 @@ public class AddTransactionCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        List<Transaction> transactions = new ArrayList<>();
+        List<Transaction> transactions = personToEdit.getTransactions();
         transactions.add(toAdd);
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getCompany(), personToEdit.getPhone(),
                 personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getTags(), transactions);
