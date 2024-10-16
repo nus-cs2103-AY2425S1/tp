@@ -81,10 +81,7 @@ Allows the user to add a new client with details about payment status, client st
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ 
 [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
 
-<div markdown="block" class="alert alert-info">
-
-:information_source: Notes about the `add` Command.
-
+****
 * Clients with the **same** `NAME`, `EMAIL` and `PHONE NUMBER` are considered duplicates and will not be added
 * A person can have any number of tags (including 0)
 * `NAME` must be **alphanumeric**, may contain **spaces** and **dashes**, and should not be blank.
@@ -95,7 +92,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 * `PAYMENT STATUS` Acceptable values are `paid`, `unpaid`, `p`, `u`, `0` for **paid**, `1` for **unpaid**. Case insensitive.
 * `CLIENT STATUS`  Acceptable values are `active`, `unresponsive`, `potential`, `old`. Case sensitive.
 * `PROJECT STATUS` Acceptable values are `in progress`, `completed`. Case insensitive.
-</div>
+****
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
@@ -117,7 +114,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: Notes about the `edit` Command.
+****
 * `NAME` Acceptable values are same as in add command
 * `PHONE_NUMBER` Acceptable values are same as in add command
 * `EMAIL` Acceptable values are same as in add command
@@ -130,7 +127,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
-</div>
+****
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
