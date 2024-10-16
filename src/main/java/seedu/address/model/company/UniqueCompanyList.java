@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.company.exceptions.DuplicateCompanyException;
 import seedu.address.model.company.exceptions.CompanyNotFoundException;
+import seedu.address.model.company.exceptions.DuplicateCompanyException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not

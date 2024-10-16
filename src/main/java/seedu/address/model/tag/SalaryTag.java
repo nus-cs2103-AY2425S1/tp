@@ -1,6 +1,7 @@
 package seedu.address.model.tag;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
+//commented to pass checkstyle
+// import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Tag with a salary level.

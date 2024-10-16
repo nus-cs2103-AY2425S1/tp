@@ -6,8 +6,11 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.company.*;
+import seedu.address.model.company.Address;
 import seedu.address.model.company.Company;
+import seedu.address.model.company.Email;
+import seedu.address.model.company.Name;
+import seedu.address.model.company.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -16,24 +19,24 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Company[] getSampleCompanies() {
         return new Company[] {
-                new Company(new Name("Google"), new Phone("00000001"), new Email("google@example.com"),
-                        new Address("Blk 30 Geylang Street 29, #06-40"),
-                        getTagSet("bigTech")),
-                new Company(new Name("Grab"), new Phone("00000002"), new Email("grab@example.com"),
-                        new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                        getTagSet("bigTech", "transport")),
-                new Company(new Name("Shopee"), new Phone("00000003"), new Email("shopee@example.com"),
-                        new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                        getTagSet("shopping")),
-                new Company(new Name("Meta"), new Phone("00000004"), new Email("meta@example.com"),
-                        new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                        getTagSet("bigTech")),
-                new Company(new Name("Apple"), new Phone("00000005"), new Email("apple@example.com"),
-                        new Address("Blk 47 Tampines Street 20, #17-35"),
-                        getTagSet("iphone")),
-                new Company(new Name("ByteDance"), new Phone("00000006"), new Email("bytedance@example.com"),
-                        new Address("Blk 45 Aljunied Street 85, #11-31"),
-                        getTagSet("douyin"))
+            new Company(new Name("Google"), new Phone("00000001"), new Email("google@example.com"),
+                    new Address("Blk 30 Geylang Street 29, #06-40"),
+                    getTagSet("bigTech")),
+            new Company(new Name("Grab"), new Phone("00000002"), new Email("grab@example.com"),
+                    new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                    getTagSet("bigTech", "transport")),
+            new Company(new Name("Shopee"), new Phone("00000003"), new Email("shopee@example.com"),
+                    new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                    getTagSet("shopping")),
+            new Company(new Name("Meta"), new Phone("00000004"), new Email("meta@example.com"),
+                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                    getTagSet("bigTech")),
+            new Company(new Name("Apple"), new Phone("00000005"), new Email("apple@example.com"),
+                    new Address("Blk 47 Tampines Street 20, #17-35"),
+                    getTagSet("iphone")),
+            new Company(new Name("ByteDance"), new Phone("00000006"), new Email("bytedance@example.com"),
+                    new Address("Blk 45 Aljunied Street 85, #11-31"),
+                    getTagSet("douyin"))
         };
     }
 
