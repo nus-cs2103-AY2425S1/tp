@@ -6,19 +6,22 @@
 
 # StaffSync User Guide
 
-StaffSync is a **desktop app for managing potential hires and employees, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+StaffSync is a **desktop app for managing potential hires and employees, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast,  StaffSync can get your contact management tasks done faster than traditional GUI apps.
 
 <br>
 <br>
 <br>
 
 # Table of Contents
-### [1. Installation and Quick Start](#installation-and-quick-start)
-### [2. Commands](#commands)
-### [3. Commands Summary](#command-summary)
-### [4. Features](#features)
-### [5. FAQ](#faq)
-### [6. Known Issues](#known-issues)
+<br>
+
+>### [1. Installation and Quick Start](#installation-and-quick-start)
+>### [2. Commands](#commands)
+>### [3. Commands Summary](#command-summary)
+>### [4. Features](#features)
+>### [5. FAQ](#faq)
+>### [6. Known Issues](#known-issues)
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 <br>
@@ -45,9 +48,9 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
    * `list ph` : Lists all potential hires.
 
-   * `employee n/John Doe p/81234567 e/pohjunkang@gmail.com a/21 Lower Kent Ridge Rd d/Department of communications and informatics r/Head of communications and Informatics ced/01-01-2021` : Adds an employee named `John Doe` to StaffSync.
+   * `employee n/John Doe p/81234567 e/pohjunkang@gmail.com a/21 Lower Kent Ridge Rd d/Department of communications and informatics r/Head of communications and Informatics ced/2021-01-01` : Adds an employee named `John Doe` to StaffSync.
 
-   * `delete ph 1` : Deletes the 1st potential hire shown in the current list.
+   * `delete ph 1` : Deletes the 1st person shown if they are a potential hire.
 
    * `clear` : Deletes all contacts.
 
@@ -65,7 +68,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 <box type="info" seamless>
 
 >**Notes about the command format:**<br>
->
+> 
 >* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
 >  e.g. in `employee n/NAME`, `NAME` is a parameter which can be used as `employee n/John Doe`.
 >
@@ -85,8 +88,9 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 ></box>
 
 
+<br>
 <details>
-  <summary>&nbsp&nbsp<h3>Viewing help: <code>help</code></h3></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Viewing help: <code>help</code></strong></summary>
 
   >Displays a help window containing the list of commands, its purpose and the format
   >
@@ -96,8 +100,9 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 </details>
 
 
+<br>
 <details>
-  <summary>&nbsp&nbsp<h3>Adding an employee: <code>employee</code></h3></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Adding an employee: <code>employee</code></strong></summary>
   
   >Adds an employee to StaffSync.
   >
@@ -109,12 +114,13 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
   ></box>
   >
   >Examples:
-  >* `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/01-01-2021`
+  >* `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/2021-01-01`
 </details>
 
 
+<br>
 <details>
-  <summary>&nbsp&nbsp<h3>Adding a potential hire: <code>potential</code></h3></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Adding a potential hire: <code>potential</code></strong></summary>
   
   >Adds a potential hire to StaffSync.
   >
@@ -129,18 +135,20 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
   >* `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
 </details>
 
+<br>
 <details>
-  <summary>&nbsp&nbsp<h3>Clearing all entries: <code>clear</code></h3></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Clearing all entries: <code>clear</code></strong></summary>
   
-  >Clears all entries from the address book.
+  >Clears all entries from StaffSync.
   >
   >Format: `clear`
 </details>
 
+<br>
 <details>
-  <summary>&nbsp&nbsp<h3>Deleting a person: <code>delete</code></h3></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Deleting a person: <code>delete</code></strong></summary>
   
-  >Deletes the specified person from the address book.
+  >Deletes the specified person from StaffSync.
   >
   >Format: `delete ph INDEX` or `delete e INDEX` *(Note the `ph` or `e` parameter. `ph` refers to potential hires and `e` refers to employees)*
   >
@@ -154,10 +162,11 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
   >* `find e Betsy` followed by `delete e 1` deletes the 1st employee in the results of the `find` command.
 </details>
 
+<br>
 <details>
-  <summary>&nbsp&nbsp<h3>Editing a person: <code>edit</code></h3></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">[WIP] Editing a person: <code>edit</code></strong></summary>
   
-  >Edits an existing person in the address book.
+  >Edits an existing person in the StaffSync.
   >
   >Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
   >
@@ -170,16 +179,18 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
   >*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 </details>
 
+<br>
 <details>
-  <summary>&nbsp&nbsp<h3>Exiting the program: <code>exit</code></h3></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Exiting the program: <code>exit</code></strong></summary>
   
   >Exits the program.
   >
   >Format: `exit`
 </details>
 
+<br>
 <details>
-  <summary>&nbsp&nbsp<h3>Locating persons by name: <code>find</code></h3></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Locating persons by name: <code>find</code></strong></summary>
   
   >Finds the employee/potential hire whose names contain any of the given keywords.
   >
@@ -199,12 +210,14 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
   >  ![result for 'find alex david'](images/findAlexDavidResult.png)
 </details>
 
+<br>
 <details>
-  <summary>&nbsp&nbsp<h3>Listing all persons: <code>list</code></h3></summary>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Listing all persons: <code>list</code></strong></summary>
   
-  >Shows a list of all persons in the address book.
+  >Shows a list of all persons in StaffSync.
   >
-  >Format: `list`
+  >Format: `list all` or `list ph` or `list e` *(Note the `ph` or `e` parameter. `ph` refers to potential hires and `e` refers to employees)*
+  >* Lists type of persons based on the parameter given.
 </details>
 
 <br>
@@ -213,17 +226,17 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
 # Commands Summary
 
-Action     | Format                                                                                | Examples
------------|---------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------
-**Help**   | `help`                                                                                |
-**Clear**  | `clear`                                                                               | 
-**Delete** | `delete e INDEX` <br> `delete ph INDEX`                                               | `delete e 3`<br> `delete ph 1`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`                | `edit 2 n/James Lee e/jameslee@example.com`
-**Employee**| `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE​` | `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/01-01-2021`
-**Exit**   | `exit`                                                                                | 
-**Find**   | `find /all [KEYWORDS]` <br> `find /e [KEYWORDS]` <br> `find /ph [KEYWORDS]`           | `find /all Jake` <br> `find /e Jake` <br> `find /ph Jake`
-**List**   | `list`                                                                                | 
-**Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​`              | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
+Action     | Format                                                                                        | Examples
+-----------|-----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------
+**Help**   | `help`                                                                                        |
+**Clear**  | `clear`                                                                                       | 
+**Delete** | `delete e INDEX` <br> `delete ph INDEX`                                                       | `delete e 3`<br> `delete ph 1`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`                                  | `edit 2 n/James Lee e/jameslee@example.com`
+**Employee**| `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE​` | `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/2021-01-01`
+**Exit**   | `exit`                                                                                        | 
+**Find**   | `find all [KEYWORDS]` <br> `find e [KEYWORDS]` <br> `find ph [KEYWORDS]`                      | `find all Jake` <br> `find e Jake` <br> `find ph Jake`
+**List**   | `list all` <br> `list e` <br> `list ph`                                                                                    | 
+**Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​`                      | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -235,19 +248,19 @@ Action     | Format                                                             
 
 ### **Saving the data**
 
->AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+>StaffSync data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 <br>
 
 ### **Editing the data file**
 
->AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+>StaffSync data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 >
 ><box type="warning" seamless>
 >
 >**Caution:**
->If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+>If your changes to the data file makes its format invalid, StaffSync will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the StaffSync to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 ></box>
 
 <br>
@@ -264,7 +277,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 # FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous StaffSync home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -276,5 +289,6 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **If you try to stretch the Help Window horizontally**, you will not be able to change the width of the Help Window as it is fixed at a certain width 
 
 --------------------------------------------------------------------------------------------------------------------
