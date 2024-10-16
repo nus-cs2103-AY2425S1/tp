@@ -40,9 +40,6 @@ public class FindCommandParserTest {
 
         // Multiple whitespaces between successive prefixes
         assertParseSuccess(parser, " n/ \n Alice \n \t n/ Bob  \t", expectedFindCommand);
-
-        // Multiple names specified using one prefix
-        assertParseSuccess(parser, " n/Alice | Bob", expectedFindCommand);
     }
 
     @Test
@@ -53,16 +50,6 @@ public class FindCommandParserTest {
 
         // Blank input
         assertParseFailure(parser, " n/",
-                String.format(Name.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE));
-
-        // Blank name when using | symbol
-        assertParseFailure(parser, " n/ | ",
-                String.format(Name.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE));
-
-        assertParseFailure(parser, " n/Alex | ",
-                String.format(Name.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE));
-
-        assertParseFailure(parser, " n/ | Alex ",
                 String.format(Name.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE));
     }
 
@@ -76,25 +63,12 @@ public class FindCommandParserTest {
 
         // Multiple whitespaces between successive prefixes
         assertParseSuccess(parser, " a/ \n Clementi \n  \t   a/ Serangoon \n  \t", expectedFindCommand);
-
-        // Multiple addresses specified using one prefix
-        assertParseSuccess(parser, " a/Clementi | Serangoon", expectedFindCommand);
     }
 
     @Test
     public void parse_invalidArgsForAddress_failure() {
         // Blank input
         assertParseFailure(parser, " a/",
-                String.format(Address.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE));
-
-        // Blank address when using | symbol
-        assertParseFailure(parser, " a/ | ",
-                String.format(Address.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE));
-
-        assertParseFailure(parser, " a/Serangoon | ",
-                String.format(Address.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE));
-
-        assertParseFailure(parser, " a/ | Serangoon ",
                 String.format(Address.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE));
     }
 
@@ -113,13 +87,10 @@ public class FindCommandParserTest {
         FindCommand expectedFindCommand = new FindCommand(names, addresses, priorities);
 
         // No leading and trailing whitespaces
-        assertParseSuccess(parser, " pri/HIGH MEDIUM", expectedFindCommand);
-
-        // Multiple whitespaces between given priorities
-        assertParseSuccess(parser, " pri/ \n \t HIGH \t \t \n MEDIUM \n \t", expectedFindCommand);
-
-        // Multiple use of priority prefix allowed
         assertParseSuccess(parser, " pri/HIGH pri/MEDIUM", expectedFindCommand);
+
+        // Whitespaces included
+        assertParseSuccess(parser, " pri/ \n \t HIGH \t \n pri/ \n \t \t MEDIUM \n", expectedFindCommand);
     }
 
     @Test

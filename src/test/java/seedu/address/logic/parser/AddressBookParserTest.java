@@ -74,14 +74,16 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> nameKeywords = Arrays.asList("foo", "bar", "baz");
+        List<String> nameKeywords = Arrays.asList("foo", "bar");
         List<String> addressKeywords = Arrays.asList("clementi", "tampines");
         List<String> priorities = Arrays.asList("high", "medium");
 
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + PREFIX_NAME + String.join("|", nameKeywords)
-                        + " " + PREFIX_ADDRESS + String.join("|", addressKeywords)
-                        + " " + PREFIX_PRIORITY + String.join(" ", priorities));
+                FindCommand.COMMAND_WORD + " " + PREFIX_NAME + nameKeywords.get(0) + " "
+                        + PREFIX_NAME + nameKeywords.get(1) + " " + PREFIX_ADDRESS + addressKeywords.get(0) + " "
+                        + PREFIX_ADDRESS + addressKeywords.get(1) + " " + PREFIX_PRIORITY + priorities.get(0) + " "
+                        + PREFIX_PRIORITY + priorities.get(1));
+
         assertEquals(new FindCommand(nameKeywords, addressKeywords, priorities), command);
     }
 
