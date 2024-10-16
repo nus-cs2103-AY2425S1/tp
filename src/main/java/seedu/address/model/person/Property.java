@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 
+
 /**
  * Represents a Property in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
