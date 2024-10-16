@@ -60,4 +60,19 @@ public class LinkCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(patient), Messages.format(caregiver)));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof LinkCommand)) {
+            return false;
+        }
+
+        LinkCommand otherLinkCommand = (LinkCommand) other;
+        return patientNric.equals(otherLinkCommand.patientNric)
+                && caregiverNric.equals(otherLinkCommand.caregiverNric);
+    }
+
 }
