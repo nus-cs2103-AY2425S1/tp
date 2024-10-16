@@ -44,8 +44,8 @@ public class GroupTaskCard extends UiPart<Region> {
         String taskList = "";
         int count = 1;
         for (Task task : group.getTasks()) {
-            taskList += ("" + count + ". " + task.getTaskName() + " [" + task.getDeadline() + "] " +
-                    "[" + task.getStatus() + "]");
+            taskList += ("" + count + ". " + task.getTaskName() + " [" + task.getDeadline() + "] "
+                + "[" + task.getStatus() + "]");
             taskList += "\n";
             count++;
         }

@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
-import java.util.Optional;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -56,10 +55,10 @@ public class PersonCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         email.setText(student.getEmail().value);
         studentNumber.setText(student.getStudentNumber().value);
-        if (student.getGroup().equals(Optional.empty())) {
+        if (student.getGroupName().isEmpty()) {
             group.setText("Not in group yet.");
         } else {
-            group.setText(student.getGroup().toString());
+            group.setText(student.getGroupName().get().toString());
         }
         student.getTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))

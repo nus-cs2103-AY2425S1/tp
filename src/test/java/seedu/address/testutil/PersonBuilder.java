@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -26,7 +25,7 @@ public class PersonBuilder {
     private Email email;
     private Set<Tag> tags;
     private StudentNumber studentNumber;
-    private Optional<Group> group;
+    private Optional<GroupName> groupName;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,7 +35,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         tags = new HashSet<>();
         studentNumber = new StudentNumber(DEFAULT_STUDENT_NUMBER);
-        group = Optional.empty();
+        groupName = Optional.empty();
     }
 
     /**
@@ -47,7 +46,7 @@ public class PersonBuilder {
         email = studentToCopy.getEmail();
         tags = new HashSet<>(studentToCopy.getTags());
         studentNumber = studentToCopy.getStudentNumber();
-        group = studentToCopy.getGroup();
+        groupName = studentToCopy.getGroupName();
     }
 
     /**
@@ -71,8 +70,7 @@ public class PersonBuilder {
      */
     public PersonBuilder withGroup(String group) {
         GroupName groupName = new GroupName(group);
-        Group newGroup = new Group(groupName);
-        this.group = Optional.of(newGroup);
+        this.groupName = Optional.of(groupName);
         return this;
     }
 
@@ -98,8 +96,8 @@ public class PersonBuilder {
      * @returns A Student.
      */
     public Student build() {
-        return group.isPresent()
-                ? new Student(name, email, tags, studentNumber, group) : new Student(name, email, tags, studentNumber);
+        return groupName.isPresent()
+            ? new Student(name, email, tags, studentNumber, groupName) : new Student(name, email, tags, studentNumber);
     }
 
 }
