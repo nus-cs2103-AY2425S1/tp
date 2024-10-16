@@ -102,10 +102,12 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
-    public int addPerson(PersonDescriptor personDescriptor) {
+    public Person addPerson(PersonDescriptor personDescriptor) {
         requireNonNull(personDescriptor);
-        persons.add(new Person(nextPersonId, personDescriptor));
-        return ++nextPersonId;
+        Person person = new Person(nextPersonId, personDescriptor);
+        persons.add(person);
+        ++nextPersonId;
+        return person;
     }
 
     /**

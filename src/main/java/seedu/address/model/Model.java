@@ -78,7 +78,7 @@ public interface Model {
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
-    int addPerson(PersonDescriptor personDescriptor);
+    Person addPerson(PersonDescriptor personDescriptor);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -136,7 +136,7 @@ public interface Model {
      * Adds the given appointment.
      * {@code appointment} must not already exist in the appointment book.
      */
-    int addAppointment(AppointmentDescriptor appointmentDescriptor);
+    Appointment addAppointment(Person person, AppointmentDescriptor appointmentDescriptor);
 
     /**
      * Replaces the given appointment {@code target} with {@code editedAppointment}.

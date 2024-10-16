@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDescriptor;
 import seedu.address.model.appointment.UniqueAppointmentList;
+import seedu.address.model.person.Person;
 
 /**
  * Wraps all data at the appointment-book level
@@ -101,10 +103,12 @@ public class AppointmentBook implements ReadOnlyAppointmentBook {
      * Adds an appointment to the appointment book.
      * The appointment must not already exist in the appointment book.
      */
-    public int addAppointment(AppointmentDescriptor appointmentDescriptor) {
-        requireNonNull(appointmentDescriptor);
-        appointments.add(new Appointment(nextAppointmentId, appointmentDescriptor));
-        return ++nextAppointmentId
+    public Appointment addAppointment(Person person, AppointmentDescriptor appointmentDescriptor) {
+        requireAllNonNull(person, appointmentDescriptor);
+        Appointment appointment = new Appointment(nextAppointmentId, person, appointmentDescriptor);
+        appointments.add(appointment);
+        ++nextAppointmentId;
+        return appointment;
     }
 
     /**

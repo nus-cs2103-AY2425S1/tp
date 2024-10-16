@@ -132,10 +132,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public int addPerson(PersonDescriptor person) {
-        int id = addressBook.addPerson(person);
+    public Person addPerson(PersonDescriptor personDescriptor) {
+        Person person = addressBook.addPerson(personDescriptor);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return id;
+        return person;
     }
 
     @Override
@@ -192,10 +192,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public int addAppointment(AppointmentDescriptor appointment) {
-        int id = appointmentBook.addAppointment(appointment);
+    public Appointment addAppointment(Person person, AppointmentDescriptor appointmentDescriptor) {
+        Appointment appointment = appointmentBook.addAppointment(person, appointmentDescriptor);
         updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
-        return id;
+        return appointment;
     }
 
     @Override
