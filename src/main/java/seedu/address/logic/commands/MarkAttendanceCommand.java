@@ -1,5 +1,9 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRESENT;
+
 import java.time.LocalDate;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -7,6 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.student.Attendance;
 import seedu.address.model.student.Student;
+
 
 
 /**
@@ -17,10 +22,15 @@ public class MarkAttendanceCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of a student for a specific date.\n"
-            + "Parameters: NAME DATE STATUS (status must be either 'present' or 'absent')\n"
+            + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_DATE + "DATE "
+            + PREFIX_PRESENT + "STATUS : Present or Absent (Case Insensitive)\n"
             + "Example: "
-            + COMMAND_WORD
-            + " John Doe 2023-10-09 present";
+            + COMMAND_WORD + " "
+            + PREFIX_NAME + " John Doe "
+            + PREFIX_DATE + "2019-10-09 "
+            + PREFIX_PRESENT + " present";
 
     public static final String MESSAGE_SUCCESS = "Attendance marked: %1$s is %2$s on %3$s";
 
