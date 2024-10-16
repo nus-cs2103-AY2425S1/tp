@@ -14,7 +14,7 @@ import seedu.address.model.person.Name;
 /**
  * Parses input arguments and creates a new TagCommand object
  */
-public class TagCommandParser {
+public class TagCommandParser implements Parser<TagCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the TagCommand
