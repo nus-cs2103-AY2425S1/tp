@@ -42,6 +42,46 @@ public class SortCommandTest {
     }
 
     @Test
+    public void execute_sortByAppointmentDateAsc_success() {
+        SortCommand sortCommand = new SortCommand("appointment_date", "asc");
+        Comparator<Person> comparator = Person.getAppointmentDateComparator();
+        expectedModel.sortPersonList(comparator);
+
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "appointment_date", "asc");
+        assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_sortByAppointmentDateDesc_success() {
+        SortCommand sortCommand = new SortCommand("appointment_date", "desc");
+        Comparator<Person> comparator = Person.getAppointmentDateComparator().reversed();
+        expectedModel.sortPersonList(comparator);
+
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "appointment_date", "desc");
+        assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_sortByBirthdayAsc_success() {
+        SortCommand sortCommand = new SortCommand("birthday", "asc");
+        Comparator<Person> comparator = Person.getBirthdayComparator();
+        expectedModel.sortPersonList(comparator);
+
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "birthday", "asc");
+        assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_sortByBirthdayDesc_success() {
+        SortCommand sortCommand = new SortCommand("birthday", "desc");
+        Comparator<Person> comparator = Person.getBirthdayComparator().reversed();
+        expectedModel.sortPersonList(comparator);
+
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "birthday", "desc");
+        assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_invalidParameter_throwsCommandException() {
         SortCommand sortCommand = new SortCommand("invalid", "asc");
         assertCommandFailure(sortCommand, model, SortCommand.MESSAGE_INVALID_PARAMETER);
