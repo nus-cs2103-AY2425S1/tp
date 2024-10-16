@@ -19,7 +19,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new EditClientCommand object
+ * Parses input arguments and creates a new EditClientCommand object.
  */
 public class EditClientCommandParser implements Parser<EditClientCommand> {
     /**

@@ -32,7 +32,6 @@ import seedu.address.model.tag.Tag;
  * Edits the details of an existing client in the address book.
  */
 public class EditClientCommand extends Command {
-
     public static final String COMMAND_WORD = "cedit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the client identified "
@@ -46,7 +45,6 @@ public class EditClientCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
-
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Client: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This client already exists in the address book.";
@@ -56,8 +54,8 @@ public class EditClientCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index                of the client in the filtered client list to edit
-     * @param editPersonDescriptor details to edit the client with
+     * @param index of the client in the filtered client list to edit.
+     * @param editPersonDescriptor details to edit the client with.
      */
     public EditClientCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
@@ -207,7 +205,9 @@ public class EditClientCommand extends Command {
         }
 
         public void setRentalInformationList(Set<RentalInformation> rentalInformationList) {
-            this.rentalInformationList = (rentalInformationList != null) ? new ArrayList<>(rentalInformationList) : null;
+            this.rentalInformationList = (rentalInformationList != null)
+                    ? new ArrayList<>(rentalInformationList)
+                    : null;
         }
 
         /**
