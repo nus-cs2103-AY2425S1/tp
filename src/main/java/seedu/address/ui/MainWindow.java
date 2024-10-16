@@ -79,24 +79,24 @@ public class MainWindow extends UiPart<Stage> {
 
         logic.getUiState().addListener((observable, oldValue, newValue) -> {
             switch (newValue) {
-                case DEFAULT:
-                    setDefaultView();
-                    break;
-                case VENDOR_DETAILS:
-                    setVendorDetailsView();
-                    break;
-                case EVENT_DETAILS:
-                    setEventDetailsView();
-                    break;
-                case VENDOR_LIST:
-                    setVendorList();
-                    break;
-                case EVENT_LIST:
-                    setEventList();
-                    break;
-                default:
-                    singleView();
-                    break;
+            case DEFAULT:
+                setDefaultView();
+                break;
+            case VENDOR_DETAILS:
+                setVendorDetailsView();
+                break;
+            case EVENT_DETAILS:
+                setEventDetailsView();
+                break;
+            case VENDOR_LIST:
+                setVendorList();
+                break;
+            case EVENT_LIST:
+                setEventList();
+                break;
+            default:
+                singleView();
+                break;
             }
         });
     }
