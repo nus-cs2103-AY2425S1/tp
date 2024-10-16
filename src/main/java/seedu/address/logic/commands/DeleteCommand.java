@@ -29,8 +29,8 @@ public class DeleteCommand extends Command {
             + "[" + PREFIX_NAME + "NAME]"
             + " or "
             + "[" + PREFIX_ID + "ID] \n"
-            + "Examples: " + COMMAND_WORD + " " + PREFIX_ID + "1 \n"
-            + "                "
+            + "Examples: " + COMMAND_WORD + " " + PREFIX_ID + "1 "
+            + "or"
             + COMMAND_WORD + " " + PREFIX_NAME + "John Doe";
 
     public static final String MESSAGE_DELETE_BY_ID = "Please delete by ID using id/";
