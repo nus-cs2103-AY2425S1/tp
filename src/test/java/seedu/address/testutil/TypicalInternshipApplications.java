@@ -95,6 +95,6 @@ public class TypicalInternshipApplications {
     }
 
     public static List<InternshipApplication> getTypicalInternshipApplications() {
-        return new ArrayList<>(Arrays.asList(APPLE, BOFA, CITIBANK, DELL, EY, FIGMA, GOOGLE, YAHOO));
+        return new ArrayList<>(Arrays.asList(APPLE, BOFA, CITIBANK, DELL, EY, FIGMA, YAHOO));
     }
 }

@@ -19,7 +19,7 @@ public class Role {
      * Roles should start with an alphanumeric character, and can contain single spaces between words.
      * No leading/trailing spaces or special characters, and no multiple consecutive spaces are allowed.
      */
-    public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum} ]*(?: [\\p{Alnum} ]+)*$";
+    public static final String VALIDATION_REGEX = "[ A-Za-z0-9_&/]*";
 
     private final String value;
 

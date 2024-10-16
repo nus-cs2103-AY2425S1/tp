@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalInternshipApplications.APPLE;
+import static seedu.address.testutil.TypicalInternshipApplications.YAHOO;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
@@ -24,6 +26,8 @@ import seedu.address.model.internshipapplication.NameContainsKeywordsPredicate;
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
+
+// Todo add more test cases to deal with prefix predicates
 public class FindCommandTest {
     private Model<InternshipApplication> model =
             new ModelManager<InternshipApplication>(getTypicalAddressBook(), new UserPrefs());
@@ -69,12 +73,12 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Apple Yahoo");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredList());
+        assertEquals(Arrays.asList(APPLE, YAHOO), model.getFilteredList());
     }
 
     @Test
