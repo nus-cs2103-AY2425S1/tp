@@ -96,7 +96,7 @@ public class EditCommand extends Command {
 
                 if (checkForClashingLesson(newLesson)) {
                     throw new CommandException(MESSAGE_DUPLICATE_LESSON);
-//                    return new CommandResult(MESSAGE_DUPLICATE_LESSON, false, false, false);
+                    //return new CommandResult(MESSAGE_DUPLICATE_LESSON, false, false, false);
                 }
             }
         }
