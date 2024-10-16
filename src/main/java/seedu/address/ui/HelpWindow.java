@@ -158,7 +158,6 @@ public class HelpWindow extends UiPart<Stage> {
     public void focus() {
         getRoot().requestFocus();
     }
-
     /**
      * Returns the fill color of the hyperlink text.
      *
@@ -167,7 +166,6 @@ public class HelpWindow extends UiPart<Stage> {
     public Color getHyperlinkTextFill() {
         return (Color) hyperlinkText.getFill();
     }
-
     /**
      * Checks if the hyperlink text is underlined.
      *
@@ -176,4 +174,5 @@ public class HelpWindow extends UiPart<Stage> {
     public boolean isHyperlinkTextUnderlined() {
         return hyperlinkText.isUnderline();
     }
+
 }
