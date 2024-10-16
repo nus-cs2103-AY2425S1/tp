@@ -48,7 +48,7 @@ public class ViewStudentCommand extends Command {
         Student studentToDisplay = lastShownList.get(targetIndex.getZeroBased());
 
         return new CommandResult(String.format(MESSAGE_VIEW_STUDENT_SUCCESS, targetIndex.getZeroBased() + 1),
-                false, false, studentToDisplay, targetIndex.getZeroBased());
+                studentToDisplay, targetIndex.getZeroBased());
     }
 
     @Override
