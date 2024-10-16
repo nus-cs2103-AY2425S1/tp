@@ -2,7 +2,7 @@ package seedu.address.model;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.owner.Owner;
-import seedu.address.model.pet.*;
+import seedu.address.model.pet.Pet;
 import seedu.address.model.person.Person;
 
 /**
@@ -21,12 +21,9 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate owners.
      */
     ObservableList<Owner> getOwnerList();
-
-
     /**
      * Returns an unmodifiable view of the pets list.
      * This list will not contain any duplicate pets.
      */
     ObservableList<Pet> getPetList();
-
 }

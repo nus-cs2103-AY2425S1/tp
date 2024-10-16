@@ -89,6 +89,7 @@ public class AddressBookTest {
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList()
                 + ", owners=" + addressBook.getOwnerList() + ", pets=" + addressBook.getPetList() + "}";
+            + ", owners=" + addressBook.getOwnerList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
@@ -99,7 +100,6 @@ public class AddressBookTest {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Owner> owners = FXCollections.observableArrayList();
         private final ObservableList<Pet> pets = FXCollections.observableArrayList();
-
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
@@ -113,7 +113,6 @@ public class AddressBookTest {
         public ObservableList<Owner> getOwnerList() {
             return owners;
         }
-
         @Override
         public ObservableList<Pet> getPetList() {
             return pets;

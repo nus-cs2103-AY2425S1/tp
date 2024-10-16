@@ -159,7 +159,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         owners.remove(key);
     }
 
-
     //// pet-level operations
 
     /**
@@ -196,7 +195,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removePet(Pet key) {
         pets.remove(key);
     }
-
     //// util methods
 
     @Override
@@ -204,6 +202,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return new ToStringBuilder(this)
             .add("persons", persons)
             .add("owners", owners).add("pets", pets)
+            .add("owners", owners)
             .toString();
     }
 
@@ -234,8 +233,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
+
         return persons.equals(otherAddressBook.persons) && owners.equals(otherAddressBook.owners)
                 && pets.equals(otherAddressBook.pets);
+        return persons.equals(otherAddressBook.persons) && owners.equals(otherAddressBook.owners);
     }
 
     @Override
