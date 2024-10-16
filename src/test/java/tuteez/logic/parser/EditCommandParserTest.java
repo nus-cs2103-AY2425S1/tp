@@ -46,6 +46,7 @@ import tuteez.model.person.Address;
 import tuteez.model.person.Email;
 import tuteez.model.person.Name;
 import tuteez.model.person.Phone;
+import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
 import tuteez.testutil.EditPersonDescriptorBuilder;
 
@@ -104,6 +105,11 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
 
+        // while parsing {@code PREFIX_LESSON} alone will reset the tags of the {@code Person} being edited,
+        // parsing it together with a valid tag will result in error
+        assertParseFailure(parser, "1" + LESSON_DESC_MON + LESSON_EMPTY, Lesson.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + LESSON_EMPTY + LESSON_DESC_MON, Lesson.MESSAGE_CONSTRAINTS);
+
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
                 Name.MESSAGE_CONSTRAINTS);
@@ -126,10 +132,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY + LESSON_DESC_MON;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_AMY).build();
+                .withEmail(VALID_EMAIL_AMY).withLessons(VALID_LESSON_DAY_AND_TME).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -187,14 +193,14 @@ public class EditCommandParserTest {
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid followed by valid
-        userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + INVALID_PHONE_DESC;
+        userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + INVALID_PHONE_DESC + INVALID_LESSON_DESC;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // mulltiple valid fields repeated
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
                 + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
-                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
+                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND + LESSON_DESC_MON;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
