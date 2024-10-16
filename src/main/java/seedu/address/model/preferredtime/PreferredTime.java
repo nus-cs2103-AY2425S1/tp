@@ -7,11 +7,12 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; is valid as declared in {@link #isValidPreferredTime(String)}
  */
 public class PreferredTime {
+
     public static final String MESSAGE_CONSTRAINTS =
             "PreferredTime should consists of Day and Time in the format 'Day HHmm'. ";
 
     // TODO: change the REGEX
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+    public static final String VALIDATION_REGEX = "^\\S+ \\d{4}$";
     public final String preferredTime;
 
     // TODO: need to change to Day and Time separately in the future

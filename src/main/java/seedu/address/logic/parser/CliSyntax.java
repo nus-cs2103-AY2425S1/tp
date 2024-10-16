@@ -15,4 +15,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_THEME = new Prefix("c/");
     public static final Prefix PREFIX_FONTSIZE = new Prefix("fs/");
 
+    // TODO: add Prefix Prefixed PreferredTime, likely to be "pt/"
+
 }
