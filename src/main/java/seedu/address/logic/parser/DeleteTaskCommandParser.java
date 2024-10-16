@@ -11,6 +11,9 @@ import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
+/**
+ * Parses input arguments and creates a new {@code DeleteTaskCommand} object
+ */
 public class DeleteTaskCommandParser implements Parser<DeleteTaskCommand> {
 
     /**
