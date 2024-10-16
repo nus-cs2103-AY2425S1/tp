@@ -31,6 +31,8 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final String EDIT_COMMAND = "edit\n";
 
+    private static final String GET_COMMAND = "get PARAMETERS\n";
+
     private static final String FIND_COMMAND = "find\n";
 
     private static final String LIST_COMMAND = "list\n";
@@ -40,7 +42,7 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String HELP_COMMAND = "help\n";
 
     private static final String[] COMMANDS = {ADD_COMMAND, CLEAR_COMMAND, DELETE_COMMAND, EDIT_COMMAND,
-        FIND_COMMAND, LIST_COMMAND, STATISTICS_COMMAND, HELP_COMMAND};
+        FIND_COMMAND, GET_COMMAND, LIST_COMMAND, STATISTICS_COMMAND, HELP_COMMAND};
 
     @FXML
     private Button copyButton;
@@ -62,7 +64,6 @@ public class HelpWindow extends UiPart<Stage> {
         helpMessageBuilder.append(HELP_MESSAGE);
         helpMessage.setText(helpMessageBuilder.toString());
     }
-
     /**
      * Creates a new HelpWindow.
      */
