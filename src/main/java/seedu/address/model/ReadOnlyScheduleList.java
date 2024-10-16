@@ -1,8 +1,11 @@
 package seedu.address.model;
 
-import seedu.address.model.schedule.Meeting;
 import javafx.collections.ObservableList;
+import seedu.address.model.schedule.Meeting;
 
+/**
+ * Unmodifiable view of a schedule list.
+ */
 public interface ReadOnlyScheduleList {
     /**
      * Returns an unmodifiable view of the persons list.
