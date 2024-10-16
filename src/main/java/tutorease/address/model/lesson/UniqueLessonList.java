@@ -61,7 +61,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
      *
      * @param index The index of the lesson to be removed.
      * @throws LessonIndexOutOfRange If the index is invalid (less than 0 or greater than the size of the
-     * list).
+     *     list).
      */
     public void remove(int index) {
         if (!isValidIndex(index)) {
