@@ -14,15 +14,15 @@ BizBook (BB) is a **desktop app for managing contacts, optimized for use via a C
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    - `list` : Lists all contacts.
@@ -35,7 +35,7 @@ BizBook (BB) is a **desktop app for managing contacts, optimized for use via a C
 
    - `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 ---
 
@@ -147,6 +147,25 @@ Examples:
 - `list` followed by `delete 2` deletes the 2nd person in the address book.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding Notes to an existing contact: `addnotes`
+
+Adds a note to a person in the address book.
+
+Format: `addnotes INDEX n/[NOTES]`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person can have any number of notes (including 0)
+</div>
+
+- Add note to the person at the specified `INDEX`.
+- The index refers to the index number shown in the displayed person list.
+- The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+- `addnotes 1 n/Supplier 1`
+- `addnotes 2 n/Supplier 2`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -208,12 +227,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                      |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                               |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **List**   | `list`                                                                                                                                                                |
-| **Help**   | `help`                                                                                                                                                                |
+| Action       | Format, Examples                                                                                                                                                      |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **List**     | `list`                                                                                                                                                                |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Addnotes** | `addnotes INDEX n/[NOTE]` <br> e.g. `addnotes 1 n/Customer 1`                                                                                                         |
+| **View**     | `view INDEX` <br> e.g. `view 1`                                                                                                                                        |
+| **Clear**    | `clear`                                                                                                                                                               |
+| **Help**     | `help`                                                                                                                                                                |
