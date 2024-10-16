@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
@@ -74,7 +73,7 @@ public class AddTaskToGroupCommand extends Command {
             model.addTask(task);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, task.getTaskName().toString(),
-                Messages.format(group)));
+                group.getGroupName().fullName));
     }
 
     @Override

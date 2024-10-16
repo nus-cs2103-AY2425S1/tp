@@ -102,6 +102,31 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public String getMostRecentGroupTaskDisplay() {
+        return userPrefs.getMostRecentGroupTaskDisplay();
+    }
+
+    @Override
+    public void setMostRecentGroupTaskDisplay() {
+        String stringToUpdate = userPrefs.getMostRecentGroupTaskDisplay();
+        if (!stringToUpdate.equals("")) {
+            updateFilteredGroupList(x -> x.getGroupName().fullName.equals(stringToUpdate));
+        } else {
+            updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        }
+    }
+
+    @Override
+    public void setMostRecentGroupTaskDisplay(String string) {
+        userPrefs.setMostRecentGroupTaskDisplay(string);
+        if (!string.equals("")) {
+            updateFilteredGroupList(x -> x.getGroupName().fullName.equals(string));
+        } else {
+            updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        }
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
     }

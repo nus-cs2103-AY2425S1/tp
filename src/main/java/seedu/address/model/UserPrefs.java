@@ -18,6 +18,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private static final State GROUP_STATE = new State("Groups");
     private static final State GROUP_TASK_STATE = new State("GroupTask");
     private static final State TASK_STATE = new State("Tasks");
+    private String mostRecentGroupTaskDisplay = "";
     private State guiState = GROUP_STATE;
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
@@ -70,11 +71,20 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setMostRecentGroupTaskDisplay(newUserPrefs.getMostRecentGroupTaskDisplay());
         this.guiState = newUserPrefs.getState();
     }
 
     public GuiSettings getGuiSettings() {
         return guiSettings;
+    }
+
+    public String getMostRecentGroupTaskDisplay() {
+        return this.mostRecentGroupTaskDisplay;
+    }
+
+    public void setMostRecentGroupTaskDisplay(String groupName) {
+        this.mostRecentGroupTaskDisplay = groupName;
     }
 
     public void setGuiSettings(GuiSettings guiSettings) {

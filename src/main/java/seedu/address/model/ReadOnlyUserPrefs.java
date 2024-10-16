@@ -14,6 +14,8 @@ public interface ReadOnlyUserPrefs {
 
     Path getAddressBookFilePath();
 
+    String getMostRecentGroupTaskDisplay();
+
     State getState();
 
 }

@@ -230,7 +230,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a task with the same identity as {@code task} exists in the address book.
+     * Checks if the specified task currently exists.
+     * @param task  The task in particular.
+     * @return      Returns true if a task with the same identity as {@code task} exists in the address book.
      */
     public boolean hasTask(Task task) {
         requireNonNull(task);
