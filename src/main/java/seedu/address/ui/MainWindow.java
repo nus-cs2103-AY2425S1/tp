@@ -8,6 +8,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -18,8 +19,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * The Main Window. Provides the basic application layout containing
- * a menu bar and space where other JavaFX elements can be placed.
+ * The Main Window. Provides the basic application layout containing a menu bar and space where other JavaFX elements
+ * can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
 
@@ -32,6 +33,10 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private VendorListPanel vendorListPanel;
+    // TODO: Update once eventListPanel is implemented
+    private VendorListPanel eventListPanel;
+    private VendorDetailsPanel vendorDetailsPanel;
+    private EventDetailsPanel eventDetailsPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +47,13 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane vendorListPanelPlaceholder;
+    private GridPane panelsHolder;
+
+    @FXML
+    private StackPane leftPanelPlaceholder;
+
+    @FXML
+    private StackPane rightPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -66,6 +77,23 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        logic.getUiState().addListener((observable, oldValue, newValue) -> {
+            switch (newValue) {
+            case DEFAULT:
+                setDefaultView();
+                break;
+            case VENDOR_DETAILS:
+                setVendorDetailsView();
+                break;
+            case EVENT_DETAILS:
+                setEventDetailsView();
+                break;
+            default:
+                singleView();
+                break;
+            }
+        });
     }
 
     public Stage getPrimaryStage() {
@@ -85,18 +113,12 @@ public class MainWindow extends UiPart<Stage> {
 
         /*
          * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666
-         * is fixed in later version of SDK.
-         *
-         * According to the bug report, TextInputControl (TextField, TextArea) will
-         * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
-         *
-         * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
+         * https://bugs.openjdk.java.net/browse/JDK-8131666 is fixed in later version of SDK. According to the bug
+         * report, TextInputControl (TextField, TextArea) will consume function-key events. Because CommandBox contains
+         * a TextField, and ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will not work when the
+         * focus is in them because the key event is consumed by the TextInputControl(s). For now, we add following
+         * event filter to capture such key events and open help window purposely so to support accelerators even when
+         * focus is in CommandBox or ResultDisplay.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
@@ -110,8 +132,17 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        vendorListPanel = new VendorListPanel(logic.getFilteredVendorList());
-        vendorListPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
+        splitView();
+
+        eventDetailsPanel = new EventDetailsPanel(logic.getViewedEvent(), logic.getFilteredVendorList());
+        vendorDetailsPanel = new VendorDetailsPanel(logic.getViewedVendor(), logic.getFilteredVendorList());
+
+        vendorListPanel = new VendorListPanel(logic.getFilteredVendorList(), "Vendors List");
+        leftPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
+
+        // TODO: Update once eventListPanel is created
+        eventListPanel = new VendorListPanel(logic.getFilteredVendorList(), "Events List");
+        rightPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -121,6 +152,57 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Set main window to display two panels.
+     */
+    void splitView() {
+        panelsHolder.getColumnConstraints().get(1).setPercentWidth(50);
+        panelsHolder.getColumnConstraints().get(1).setMaxWidth(Double.MAX_VALUE);
+    }
+
+    /**
+     * Set main window to display only one panel.
+     */
+    void singleView() {
+        panelsHolder.getColumnConstraints().get(1).setPercentWidth(0);
+        panelsHolder.getColumnConstraints().get(1).setMaxWidth(0);
+    }
+
+    /**
+     * Set main window to display default view.
+     */
+    void setDefaultView() {
+        splitView();
+        rightPanelPlaceholder.getChildren().clear();
+        rightPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+        leftPanelPlaceholder.getChildren().clear();
+        leftPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
+    }
+
+    /**
+     * Set main window to display vendor details.
+     */
+    void setVendorDetailsView() {
+        splitView();
+        rightPanelPlaceholder.getChildren().clear();
+        rightPanelPlaceholder.getChildren().add(vendorDetailsPanel.getRoot());
+        leftPanelPlaceholder.getChildren().clear();
+        leftPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
+    }
+
+    /**
+     * Set main window to display event details.
+     */
+    void setEventDetailsView() {
+        splitView();
+        rightPanelPlaceholder.getChildren().clear();
+        rightPanelPlaceholder.getChildren().add(eventDetailsPanel.getRoot());
+        leftPanelPlaceholder.getChildren().clear();
+
+        // TODO: Update once eventListPanel is created
+        leftPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
     }
 
     /**
@@ -169,7 +251,6 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Executes the command and returns the result.
-     *
      * @see seedu.address.logic.Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
