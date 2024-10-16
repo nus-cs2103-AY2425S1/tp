@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
@@ -35,7 +37,7 @@ public class Student extends Person {
     // Identity fields
     private final TutorialGroup tutorialGroup;
     private final StudentNumber studentNumber;
-    private final ArrayList<Assignment> assignments = new ArrayList<>();
+    private final ObservableList<Assignment> assignments = FXCollections.observableArrayList();
 
     /**
      * Every field must be present and not null.
@@ -53,6 +55,10 @@ public class Student extends Person {
 
     public StudentNumber getStudentNumber() {
         return studentNumber;
+    }
+
+    public ObservableList<Assignment> getAssignments() {
+        return assignments;
     }
 
     /**
