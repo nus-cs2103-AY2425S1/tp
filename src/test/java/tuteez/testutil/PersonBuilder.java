@@ -8,7 +8,7 @@ import tuteez.model.person.Email;
 import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
-import tuteez.model.tag.Lesson;
+import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
 import tuteez.model.util.SampleDataUtil;
 

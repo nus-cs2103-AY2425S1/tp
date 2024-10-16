@@ -1,4 +1,4 @@
-package tuteez.model.tag;
+package tuteez.model.person.lesson;
 import static java.util.Objects.requireNonNull;
 import static tuteez.commons.util.AppUtil.checkArgument;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;

@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import tuteez.commons.util.ToStringBuilder;
-import tuteez.model.tag.Lesson;
+import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
 
 /**

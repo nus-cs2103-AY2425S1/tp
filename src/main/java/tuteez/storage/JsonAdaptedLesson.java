@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import tuteez.commons.exceptions.IllegalValueException;
-import tuteez.model.tag.Lesson;
+import tuteez.model.person.lesson.Lesson;
 
 /**
  * Jackson-friendly version of {@link Lesson}.

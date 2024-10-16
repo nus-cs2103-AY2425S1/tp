@@ -1,8 +1,9 @@
-package tuteez.model.tag;
+package tuteez.model.person.lesson;
+
+import static tuteez.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import static tuteez.testutil.Assert.assertThrows;
 
 public class LessonTest {
     @Test

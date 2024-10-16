@@ -1,4 +1,4 @@
-package tuteez.model.tag;
+package tuteez.model.person.lesson;
 
 /**
  * Enum to represent the days of the week.
