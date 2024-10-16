@@ -59,19 +59,19 @@ public class MessageTest {
         assertEquals(expectedMessage, actualMessage);
     }
 
-        @Test
-        public void testFormatDeliveryList() {
-            Delivery delivery1 = new DeliveryBuilder(APPLES).build();
-            Delivery delivery2 = new DeliveryBuilder(ORANGES).build();
+    @Test
+    public void testFormatDeliveryList() {
+        Delivery delivery1 = new DeliveryBuilder(APPLES).build();
+        Delivery delivery2 = new DeliveryBuilder(ORANGES).build();
 
-            List<Delivery> deliveryList = Arrays.asList(delivery1, delivery2);
+        List<Delivery> deliveryList = Arrays.asList(delivery1, delivery2);
 
-            String expectedMessage = "\nItem: apples; 123, Jurong West Ave 6, #08-111, S120300; Cost: $100; "
-                    + "ETA: 2024-12-31; Date Ordered: 2024-10-16; Time Ordered: 00:00"
-                    + "\nItem: oranges; 123, Jurong West Ave 6, #08-111, S120300; "
-                    + "Cost: $120; ETA: 2024-11-23; Date Ordered: 2024-10-17; Time Ordered: 00:10";
-            String actualMessage = Messages.formatDeliveryList(deliveryList);
+        String expectedMessage = "\nItem: apples; 123, Jurong West Ave 6, #08-111, S120300; Cost: $100; "
+                + "ETA: 2024-12-31; Date Ordered: 2024-10-16; Time Ordered: 00:00"
+                + "\nItem: oranges; 123, Jurong West Ave 6, #08-111, S120300; "
+                + "Cost: $120; ETA: 2024-11-23; Date Ordered: 2024-10-17; Time Ordered: 00:10";
+        String actualMessage = Messages.formatDeliveryList(deliveryList);
 
-            assertEquals(expectedMessage, actualMessage);
-        }
+        assertEquals(expectedMessage, actualMessage);
+    }
 }

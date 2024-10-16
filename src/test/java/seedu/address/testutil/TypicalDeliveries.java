@@ -2,7 +2,6 @@ package seedu.address.testutil;
 
 
 import seedu.address.model.delivery.Delivery;
-import seedu.address.model.delivery.DeliveryList;
 
 /**
  * A utility class containing a list of {@code Delivery} objects to be used in tests.
