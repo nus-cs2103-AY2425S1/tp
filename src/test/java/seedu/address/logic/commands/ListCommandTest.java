@@ -5,6 +5,8 @@ import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,8 +25,10 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new AssignmentList());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new AssignmentList());
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+                new AssignmentList(), new ArrayList<>());
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
+                new AssignmentList(), new ArrayList<>());
     }
 
     @Test

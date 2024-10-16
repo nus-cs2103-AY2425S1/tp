@@ -3,6 +3,9 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents a Tutorial class ID in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTutorialClass(String)}
@@ -20,11 +23,15 @@ public class TutorialClass {
      *
      * @param tutorialClass A valid tutorial class code.
      */
-    public TutorialClass(String tutorialClass) {
+    @JsonCreator
+    public TutorialClass(@JsonProperty("tutorialClass") String tutorialClass) {
         requireNonNull(tutorialClass);
         checkArgument(isValidTutorialClass(tutorialClass), MESSAGE_CONSTRAINTS);
         this.value = tutorialClass;
     }
+
+
+
 
     /**
      * Returns true if a given string is a valid tutorial class code.

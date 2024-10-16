@@ -22,8 +22,8 @@ public class AddTutCommand extends Command {
             + PREFIX_TUT_NAME + "TUTORIAL_NAME "
             + PREFIX_TUT_ID + "TUTORIAL_ID\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TUT_NAME + "CS1010 Tutorial "
-            + PREFIX_TUT_ID + "101";
+            + PREFIX_TUT_NAME + "CS1010 "
+            + PREFIX_TUT_ID + "1011";
     private final Tut toAdd;
 
     /**
