@@ -16,17 +16,18 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
+import seedu.address.model.tut.TutName;
 
 
 public class DeleteTutorialCommandTest {
     private static final Tut TUTORIAL_1 =
-            new Tut("TutorialThree", new TutorialClass("1000"));
+            new Tut(new TutName("TutorialThree"), new TutorialClass("1000"));
 
     private static final Tut TUTORIAL_2 =
-            new Tut("TutorialTwo", new TutorialClass("1001"));
+            new Tut(new TutName("TutorialTwo"), new TutorialClass("1001"));
 
     private static final Tut TUTORIAL_3 =
-            new Tut("TutorialOne", new TutorialClass("1002"));
+            new Tut(new TutName("TutorialOne"), new TutorialClass("1002"));
 
     private static final TutorialClass TUTORIAL_CLASS = new TutorialClass("1000");
 

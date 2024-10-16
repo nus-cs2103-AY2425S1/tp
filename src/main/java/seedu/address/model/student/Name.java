@@ -12,17 +12,16 @@ public class Name {
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
 
-    /*
+    /**
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    /*
+    /**
      * Only allow letters and spaces
      */
     public static final String VALIDATION_REGEX_INTEGER = "^[a-zA-Z\\s]+$";
-
 
     public final String fullName;
 
@@ -43,7 +42,6 @@ public class Name {
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX) && test.matches(VALIDATION_REGEX_INTEGER);
     }
-
 
     @Override
     public String toString() {

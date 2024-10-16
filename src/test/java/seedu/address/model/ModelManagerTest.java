@@ -21,6 +21,7 @@ import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tut.Tut;
+import seedu.address.model.tut.TutName;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -95,7 +96,7 @@ public class ModelManagerTest {
 
     @Test
     public void hasTutorial_tutorialInAddressBook_returnsTrue() {
-        Tut tut = new Tut("Tut", new TutorialClass("1000"));
+        Tut tut = new Tut(new TutName("Tut"), new TutorialClass("1000"));
         modelManager.addTutorial(tut);
         assertTrue(modelManager.hasTutorial(tut));
     }

@@ -26,6 +26,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
 import seedu.address.model.tut.Tut;
+import seedu.address.model.tut.TutName;
 import seedu.address.model.tut.exceptions.TutNoFoundException;
 import seedu.address.testutil.StudentBuilder;
 
@@ -118,7 +119,7 @@ public class AddressBookTest {
     @Test
     public void getTutorialList_addStudent() {
         List<Tut> expectedTutorial = new ArrayList<>();
-        Tut tutSample2 = new Tut(TUT_NAME, TUTORIAL_CLASS);
+        Tut tutSample2 = new Tut(new TutName(TUT_NAME), TUTORIAL_CLASS);
         TUT_SAMPLE.add(ALICE);
         tutSample2.add(ALICE);
         expectedTutorial.add(TUT_SAMPLE);
@@ -131,7 +132,7 @@ public class AddressBookTest {
         addressBook.resetData(getTypicalAddressBook());
         AddressBook addressBookSample = getTypicalAddressBook();
         List<Tut> expectedTutorial = new ArrayList<>();
-        Tut tutSample2 = new Tut(TUT_NAME, TUTORIAL_CLASS);
+        Tut tutSample2 = new Tut(new TutName(TUT_NAME), TUTORIAL_CLASS);
         TUT_SAMPLE.add(ALICE);
         tutSample2.add(ALICE);
         expectedTutorial.add(TUT_SAMPLE);
@@ -165,7 +166,7 @@ public class AddressBookTest {
         addressBook.addStudent(ALICE);
 
         // Create a new tutorial not in the address book
-        Tut nonExistentTutorial = new Tut(TUT_NAME, TUTORIAL_CLASS);
+        Tut nonExistentTutorial = new Tut(new TutName(TUT_NAME), TUTORIAL_CLASS);
 
         // Expect TutNoFoundException when trying to assign ALICE to a non-existent tutorial
         assertThrows(TutNoFoundException.class, () -> addressBook.assignStudent(ALICE, nonExistentTutorial));
