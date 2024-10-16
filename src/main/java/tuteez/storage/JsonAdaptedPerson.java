@@ -15,11 +15,8 @@ import tuteez.model.person.Email;
 import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
-<<<<<<< HEAD
 import tuteez.model.person.TelegramUsername;
-=======
 import tuteez.model.person.lesson.Lesson;
->>>>>>> upstream/master
 import tuteez.model.tag.Tag;
 
 /**

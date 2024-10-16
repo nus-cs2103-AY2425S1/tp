@@ -27,11 +27,8 @@ import tuteez.model.person.Email;
 import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
-<<<<<<< HEAD
 import tuteez.model.person.TelegramUsername;
-=======
 import tuteez.model.person.lesson.Lesson;
->>>>>>> upstream/master
 import tuteez.model.tag.Tag;
 
 /**
@@ -112,11 +109,9 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Lesson> updatedLessons = editPersonDescriptor.getLessons().orElse(personToEdit.getLessons());
 
-<<<<<<< HEAD
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTelegramUser, updatedTags);
-=======
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedLessons);
->>>>>>> upstream/master
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTelegramUser, updatedTags,
+                updatedLessons);
     }
 
     @Override
@@ -153,11 +148,9 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
-<<<<<<< HEAD
         private TelegramUsername telegramUsername;
-=======
         private Set<Lesson> lessons;
->>>>>>> upstream/master
+
 
         public EditPersonDescriptor() {}
 
