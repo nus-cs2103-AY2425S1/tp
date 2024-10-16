@@ -1,0 +1,12 @@
+{
+  "properties": [
+    {
+      "address": "123 Main St",
+      "price": 500000.00
+    },
+    {
+      "address": "123 Main St",
+      "price": 600000.00
+    }
+  ]
+}

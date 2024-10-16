@@ -1,0 +1,25 @@
+{
+  "_comment": "PropertyBook save file which contains typical Property values",
+  "properties": [
+    {
+      "address": "123 Main St",
+      "price": 500000.00
+    },
+    {
+      "address": "456 Side St",
+      "price": 300000.00
+    },
+    {
+      "address": "789 High St",
+      "price": 750000.00
+    },
+    {
+      "address": "101 Low St",
+      "price": 150000.00
+    },
+    {
+      "address": "2020 Elm St",
+      "price": 450000.00
+    }
+  ]
+}
