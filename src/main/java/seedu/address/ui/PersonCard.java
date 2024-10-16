@@ -45,6 +45,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane prices;
 
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to
      * display.
