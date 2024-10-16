@@ -29,7 +29,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final String EDIT_COMMAND = "edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…\u200B\n";
 
-    private static final String FIND_COMMAND = "find KEYWORD [MORE_KEYWORDS]\n";
+    private static final String FIND_COMMAND = "find [n/StartOfName] [a/PartOfAddress] [pri/PRIORITY]\n";
 
     private static final String DELETE_COMMAND = "delete INDEXES\n";
 
