@@ -1,10 +1,13 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ASSIGNMENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 
 import java.util.ArrayList;
 
@@ -71,4 +74,39 @@ public class MarkAssignmentCommandTest {
         String expectedMessage = Messages.MESSAGE_INVALID_ASSIGNMENT_INDEX;
         assertCommandFailure(markAssignmentCommand, model, expectedMessage);
     }
+
+    @Test
+    public void equals() {
+        MarkAssignmentCommand markFirstCommand = new MarkAssignmentCommand(INDEX_FIRST_STUDENT,
+                INDEX_FIRST_ASSIGNMENT);
+        MarkAssignmentCommand markSecondCommand = new MarkAssignmentCommand(INDEX_SECOND_STUDENT,
+                INDEX_FIRST_ASSIGNMENT);
+
+        // same object -> returns true
+        assertTrue(markFirstCommand.equals(markFirstCommand));
+
+        // same values -> returns true
+        MarkAssignmentCommand markFirstCommandCopy = new MarkAssignmentCommand(INDEX_FIRST_STUDENT,
+                INDEX_FIRST_ASSIGNMENT);
+        assertTrue(markFirstCommand.equals(markFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(markFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(markFirstCommand.equals(null));
+
+        // different student -> returns false
+        assertFalse(markFirstCommand.equals(markSecondCommand));
+    }
+
+    @Test
+    public void toStringMethod() {
+        MarkAssignmentCommand markAssignmentCommand = new MarkAssignmentCommand(INDEX_FIRST_STUDENT,
+                INDEX_FIRST_ASSIGNMENT);
+        String expected = MarkAssignmentCommand.class.getCanonicalName() + "{studentIndex=" + INDEX_FIRST_STUDENT
+                + ", assignmentIndex=" + INDEX_FIRST_ASSIGNMENT + "}";
+        assertEquals(expected, markAssignmentCommand.toString());
+    }
+
 }
