@@ -56,8 +56,8 @@ your wedding contact management tasks done faster than traditional GUI apps.
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG1 TAG2 ...]…​` can be ignored (i.e. 0 tags), `t/friend` (i.e. 1 tags), `t/friend family` (i.e. 2 tags) etc.
+* Items with `...` after them can be used multiple times including zero times.<br>
+  e.g. `t/TAG1 TAG2 ...` can be ignored (i.e. 0 tags), `t/friend` (i.e. 1 tags), `t/friend family` (i.e. 2 tags) etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -125,7 +125,7 @@ Examples:
 
 Untags a specific contact in the address book.
 
-Format: `untag INDEX t/TAG1 [TAG2...]` or `untag INDEX t/all`
+Format: `untag INDEX t/TAG1 TAG2 ...` or `untag INDEX t/all`
 
 * Untags the contact at the specified `INDEX`. The index refers to the index number shown next to a contact's name in the displayed contact list. The index **must be a positive integer** 1, 2, 3, ...
 * If the user only wants to remove specific tags from the contact, at least one tag to remove must be specified.
@@ -142,7 +142,7 @@ Examples:
 
 Finds contacts whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD1 KEYWORD2 ...`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -162,7 +162,7 @@ Examples:
 
 Filters contacts who are tagged with all of the given tags.
 
-Format: `filter t/TAG [MORE_TAGS]`
+Format: `filter t/TAG1 TAG2 ...`
 
 
 * Contacts matching all tags will be returned (i.e. `AND` search).
@@ -252,11 +252,12 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Help**   | `help`
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend colleague`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG1 TAG2 ...]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend colleague`
 **List**   | `list`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Untag**  | `untag INDEX t/TAG1 [TAG2...]` or `untag INDEX t/all` <br> e.g., `untag 1 t/friends buddies`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Untag**  | `untag INDEX t/TAG1 TAG2 ...` or `untag INDEX t/all` <br> e.g., `untag 1 t/friends buddies`
+**Find**   | `find KEYWORD1 KEYWORD2 ...`<br> e.g., `find James Jake`
+**Filter** | `filter INDEX t/TAG1 TAG2 ...` <br> e.g., `filter 2 t/friends colleagues`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Clear**  | `clear`
 **Exit**   | `exit`
