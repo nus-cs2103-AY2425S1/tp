@@ -30,8 +30,8 @@ public class Person {
     private Allergy allergy;
     private BloodType bloodType;
     private HealthCondition healthCondition;
-    private HealthRecord pastHealthRecord;
-    private Note additionalNote;
+    private HealthRecord healthRecord;
+    private Note note;
     private Name nokName;
     private Phone nokPhone;
     private final Set<HealthService> healthServices = new HashSet<>();
@@ -62,9 +62,10 @@ public class Person {
      * Only Name, NRIC, Sex, BirthDate, HealthServices field need to be present.
      * The other fields can be null
      */
-    public Person(Name name, Nric nric, Birthdate birthdate, Sex sex, Set<HealthService> healthServices, Phone phone, Email email, Address address, Allergy allergy, BloodType bloodType,
-        HealthCondition healthCondition, HealthRecord healthRecord, Note note, Name nokName, Phone nokPhone) {
-        requireAllNonNull(name, phone, email);
+    public Person(Name name, Nric nric, Birthdate birthdate, Sex sex, Set<HealthService> healthServices, Phone phone,
+                  Email email, Address address, Allergy allergy, BloodType bloodType, HealthCondition healthCondition,
+                  HealthRecord healthRecord, Note note, Name nokName, Phone nokPhone) {
+        requireAllNonNull(name, nric, birthdate, sex, healthServices, phone, email);
         this.name = name;
         this.nric = nric;
         this.birthdate = birthdate;
@@ -76,8 +77,8 @@ public class Person {
         this.allergy = allergy;
         this.bloodType = bloodType;
         this.healthCondition = healthCondition;
-        this.pastHealthRecord = healthRecord;
-        this.additionalNote = note;
+        this.healthRecord = healthRecord;
+        this.note = note;
         this.nokName = nokName;
         this.nokPhone = nokPhone;
     }
@@ -126,12 +127,16 @@ public class Person {
         return healthCondition;
     }
 
-    public Note getAdditionalNote() {
-        return additionalNote;
+    public Note getNote() {
+        return note;
     }
 
-    public HealthRecord getPastHealthRecord() {
-        return pastHealthRecord;
+    public HealthRecord getHealthRecord() {
+        return healthRecord;
+    }
+
+    public Address getAddress() {
+        return address;
     }
 
     /**
