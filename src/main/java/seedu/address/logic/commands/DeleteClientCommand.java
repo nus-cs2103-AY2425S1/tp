@@ -16,10 +16,11 @@ import seedu.address.model.client.Client;
  */
 public class DeleteClientCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "cdelete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the client identified by the index number used in the displayed client list.\n"
+            + ": Deletes the client identified by the index number used in the displayed client list "
+            + "and all related rental information.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
