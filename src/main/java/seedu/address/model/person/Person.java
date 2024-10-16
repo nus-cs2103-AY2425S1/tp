@@ -27,6 +27,9 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Game> games = new HashSet<>();
 
+    // TODO: update the preferredTime field
+    // TODO: update the constructors and some other methods
+
     /**
      * Every field must be present and not null.
      */

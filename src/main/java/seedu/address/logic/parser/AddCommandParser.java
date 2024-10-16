@@ -49,6 +49,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Game> gameList = ParserUtil.parseGames(argMultimap.getAllValues(PREFIX_GAME));
 
+        // TODO: use get a Set<PreferredTime> with the help of ParserUtil
+        // TODO: update the Person construction
+
         Person person = new Person(name, phone, email, address, tagList, gameList);
 
         return new AddCommand(person);

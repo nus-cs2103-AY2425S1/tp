@@ -27,9 +27,11 @@ public class UiCommand extends Command {
     public static final String MESSAGE_INVALID_FONTSIZE = "Invalid fontsize. "
             + "Please provide a positive integer between … and …,"
             + " or choose a string from “small”, “medium” and “large”.";
+    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Ui command is not implemente yet.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        return new CommandResult("This is UI command.");
+        throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
+        // return new CommandResult("This is UI command.");
     }
 }
