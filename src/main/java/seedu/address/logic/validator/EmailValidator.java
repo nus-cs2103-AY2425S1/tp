@@ -20,6 +20,6 @@ public class EmailValidator extends Validator<String> {
     private EmailValidator() {}
     @Override
     public boolean validate(String input) {
-        return input.matches(VALIDATION_REGEX);
+        return !input.trim().isEmpty() && input.matches(VALIDATION_REGEX);
     }
 }
