@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
             + " or "
             + "[" + PREFIX_ID + "ID] \n"
             + "Examples: " + COMMAND_WORD + " " + PREFIX_ID + "1 "
-            + "or"
+            + "or "
             + COMMAND_WORD + " " + PREFIX_NAME + "John Doe";
 
     public static final String MESSAGE_DELETE_BY_ID = "Please delete by ID using id/";
