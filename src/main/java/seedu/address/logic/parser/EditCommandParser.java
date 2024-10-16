@@ -37,7 +37,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_PUBLIC_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_PUBLIC_ADDRESS, PREFIX_TAG);
 
         Index index;
 
@@ -64,7 +65,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
 
-        parsePublicAddressesForEdit(argMultimap.getAllValues(PREFIX_PUBLIC_ADDRESS)).ifPresent(editPersonDescriptor::setPublicAddresses);
+        parsePublicAddressesForEdit(argMultimap.getAllValues(PREFIX_PUBLIC_ADDRESS))
+                .ifPresent(editPersonDescriptor::setPublicAddresses);
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
@@ -75,17 +77,20 @@ public class EditCommandParser implements Parser<EditCommand> {
         return new EditCommand(index, editPersonDescriptor);
     }
     /**
-     * Parses {@code Collection<String> publicAddresses} into a {@code Map<Network, Set<PublicAddress>>} if {@code publicAddresses} is non-empty.
+     * Parses {@code Collection<String> publicAddresses} into a {@code Map<Network, Set<PublicAddress>>}
+     * if {@code publicAddresses} is non-empty.
      * If {@code publicAddresses} contain only one element which is an empty string, it will be parsed into a
      * {@code Map<Network, Set<PublicAddress>>} containing zero networks.
      */
-    private Optional<Map<Network, Set<PublicAddress>>> parsePublicAddressesForEdit(Collection<String> publicAddresses) throws ParseException {
+    private Optional<Map<Network, Set<PublicAddress>>> parsePublicAddressesForEdit(Collection<String> publicAddresses)
+            throws ParseException {
         assert publicAddresses != null;
 
         if (publicAddresses.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = publicAddresses.size() == 1 && publicAddresses.contains("") ? Collections.emptySet() : publicAddresses;
+        Collection<String> tagSet = publicAddresses.size() == 1 && publicAddresses.contains("") ? Collections.emptySet()
+                : publicAddresses;
         return Optional.of(ParserUtil.parsePublicAddresses(tagSet));
     }
 

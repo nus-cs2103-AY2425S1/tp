@@ -104,7 +104,8 @@ public class ParserUtil {
     /**
      * Parses a {@code String publicAddress} into a {@code PublicAddress}.
      */
-    public static PublicAddress parsePublicAddress(String publicAddress, String paTag, String network) throws ParseException {
+    public static PublicAddress parsePublicAddress(String publicAddress, String paTag, String network)
+            throws ParseException {
         requireNonNull(publicAddress);
         requireNonNull(paTag);
 
@@ -132,15 +133,16 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> publicAddresses} into a {@code Map<Network, Set<PublicAddress>>}.
      */
-    public static Map<Network, Set<PublicAddress>> parsePublicAddresses(Collection<String> publicAddresses) throws ParseException {
+    public static Map<Network, Set<PublicAddress>> parsePublicAddresses(Collection<String> publicAddresses)
+            throws ParseException {
         requireNonNull(publicAddresses);
         final Map<Network, Set<PublicAddress>> publicAddressesMap = new HashMap<>();
         for (String publicAddress : publicAddresses) {
 
             // TODO: Implement tokenizer in a separate file
-            final String DELIM = ">";
+            String delimiter = ">";
             String trimmedPublicAddress = publicAddress.trim();
-            String[] addressArgs = trimmedPublicAddress.split(DELIM);
+            String[] addressArgs = trimmedPublicAddress.split(delimiter);
             assert addressArgs.length == 2 : "Public address should have a network and an address";
 
             String network = addressArgs[0];
@@ -150,8 +152,8 @@ public class ParserUtil {
             PublicAddress parsedPublicAddress = parsePublicAddress(address, PublicAddress.DEFAULT_TAG, network);
 
             Network parsedNetwork = switch(network) {  // TODO: Implement more networks
-                case "BTC" -> Network.BTC;
-                default -> throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
+            case "BTC" -> Network.BTC;
+            default -> throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
             };
 
             if (!publicAddressesMap.containsKey(parsedNetwork)) {

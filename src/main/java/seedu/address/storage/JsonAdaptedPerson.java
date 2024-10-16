@@ -105,7 +105,8 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Map<Network, Set<PublicAddress>> modelPublicAddresses = new HashMap<>();  // TODO: Implement modelPublicAddresses
+        final Map<Network, Set<PublicAddress>> modelPublicAddresses
+                = new HashMap<>();// TODO: Implement modelPublicAddresses
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPublicAddresses, modelTags);
     }
