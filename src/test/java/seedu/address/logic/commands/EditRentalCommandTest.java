@@ -120,30 +120,7 @@ public class EditRentalCommandTest {
         assertCommandSuccess(editRentalCommand, model, expectedMessage, expectedModel);
     }
 
-//    @Test
-//    public void execute_duplicatePersonUnfilteredList_failure() {
-//        Client firstClient = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-//        RentalInformation firstRentalInformationOfFirstClient = firstClient.getRentalInformation().get(0);
-//
-//        EditRentalDescriptor descriptor = new EditRentalDescriptorBuilder(firstRentalInformationOfFirstClient)
-//        .build();
-//        EditRentalCommand editRentalCommand = new EditRentalCommand(INDEX_FIRST_PERSON, INDEX_FIRST_RENTAL,
-//        descriptor);
-//
-//        assertCommandFailure(editRentalCommand, model, MESSAGE_DUPLICATE_RENTAL_INFORMATION);
-//    }
-
-//    @Test
-//    public void execute_duplicatePersonFilteredList_failure() {
-//        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-//
-//        // edit client in filtered list into a duplicate in address book
-//        Client clientInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-//        EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_PERSON,
-//                new EditPersonDescriptorBuilder(clientInList).build());
-//
-//        assertCommandFailure(editClientCommand, model, EditClientCommand.MESSAGE_DUPLICATE_PERSON);
-//    }
+    //TODO: execute_duplicatePersonUnfilteredList_failure() and execute_duplicatePersonFilteredList_failure()
 
     @Test
     public void execute_invalidRentalIndexUnfilteredList_failure() {
