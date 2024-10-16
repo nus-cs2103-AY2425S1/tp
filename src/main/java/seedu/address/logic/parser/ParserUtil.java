@@ -62,11 +62,16 @@ public class ParserUtil {
      * @throws ParseException if the given {@code phone} is invalid.
      */
     public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
+//        requireNonNull(phone);
         String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
+        if (!Phone.isValidPhoneForEdit(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
+
+        if (trimmedPhone.isEmpty()) {
+            return new Phone();
+        }
+
         return new Phone(trimmedPhone);
     }
 
@@ -167,11 +172,15 @@ public class ParserUtil {
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
         String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
+        if (!Email.isValidEmailForEdit(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
+
+        if (trimmedEmail.isEmpty()) {
+            return new Email();
+        }
+
         return new Email(trimmedEmail);
     }
 

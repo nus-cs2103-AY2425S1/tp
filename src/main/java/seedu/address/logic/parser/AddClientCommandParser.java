@@ -31,18 +31,30 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
+                || !(arePrefixesPresent(argMultimap, PREFIX_PHONE) || arePrefixesPresent(argMultimap, PREFIX_EMAIL))
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClientCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Client client = null;
 
-        Client client = new Client(name, phone, email, tagList);
+        if (isPhonePresent(argMultimap, PREFIX_PHONE) && isEmailPresent(argMultimap, PREFIX_EMAIL)) {
+            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+            Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+            client = new Client(name, phone, email, tagList);
+        } else if (isPhonePresent(argMultimap, PREFIX_PHONE)) {
+            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+            Email email = new Email();
+            client = new Client(name, phone, email, tagList);
+        } else if (isEmailPresent(argMultimap, PREFIX_EMAIL)) {
+            Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+            Phone phone = new Phone();
+            client = new Client(name, phone, email, tagList);
+        }
 
         return new AddClientCommand(client);
     }
@@ -53,6 +65,14 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    private boolean isPhonePresent(ArgumentMultimap argumentMultimap, Prefix prefix) {
+        return argumentMultimap.getValue(prefix).isPresent();
+    }
+
+    private boolean isEmailPresent(ArgumentMultimap argumentMultimap, Prefix prefix) {
+        return argumentMultimap.getValue(prefix).isPresent();
     }
 
 }

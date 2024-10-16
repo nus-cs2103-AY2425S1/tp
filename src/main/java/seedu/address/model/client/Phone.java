@@ -13,7 +13,13 @@ public class Phone {
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain numbers, and it should be at least 3 digits long";
     public static final String VALIDATION_REGEX = "\\d{3,}";
+    public static final String EMPTY_REGEX = "^$";
+
     public final String value;
+
+    public Phone() {
+        value = null;
+    }
 
     /**
      * Constructs a {@code Phone}.
@@ -33,6 +39,10 @@ public class Phone {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public static boolean isValidPhoneForEdit(String test) {
+        return test.matches(VALIDATION_REGEX) || test.matches(EMPTY_REGEX);
+    }
+
     @Override
     public String toString() {
         return value;
@@ -50,6 +60,9 @@ public class Phone {
         }
 
         Phone otherPhone = (Phone) other;
+        if (value == null && otherPhone.value == null) {
+            return true;
+        }
         return value.equals(otherPhone.value);
     }
 

@@ -28,6 +28,7 @@ public class TypicalPersons {
     public static final Client BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
+
     public static final Client CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").build();
     public static final Client DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
@@ -38,7 +39,6 @@ public class TypicalPersons {
             .withEmail("lydia@example.com").build();
     public static final Client GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").build();
-
     public static final Client ALICE_WITH_RENTAL = new PersonBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com")
             .withPhone("94351253")
@@ -63,6 +63,13 @@ public class TypicalPersons {
     public static final Client BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
+    public static final Client CHARLIE = new PersonBuilder().withName(VALID_NAME_CHARLIE).withPhone(VALID_PHONE_CHARLIE)
+            .withEmail(VALID_EMAIL_CHARLIE)
+            .build();
+    public static final Client DENVER = new PersonBuilder().withName(VALID_NAME_DENVER).withPhone(VALID_PHONE_DENVER)
+            .withEmail(VALID_EMAIL_DENVER)
+            .build();
+
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

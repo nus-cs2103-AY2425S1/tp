@@ -33,7 +33,7 @@ public class RentalUtil {
     /**
      * Converts a {@link LocalDate} to a formatted string.
      *
-     * @param date The {@link LocalDate} to be converted.
+     * @param date   The {@link LocalDate} to be converted.
      * @param format The pattern to be applied, following the rules of {@link DateTimeFormatter}.
      * @return a formatted string representation of the {@link LocalDate}.
      */
@@ -66,7 +66,7 @@ public class RentalUtil {
      * @param firstList  the first {@code CustomerList} to compare.
      * @param secondList the second {@code CustomerList} to compare.
      * @return {@code true} if both customer lists contain the same set of customers,
-     *         {@code false} otherwise.
+     * {@code false} otherwise.
      */
     public static boolean isCustomerListSame(CustomerList firstList, CustomerList secondList) {
         requireNonNull(firstList);

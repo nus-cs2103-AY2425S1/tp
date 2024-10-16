@@ -79,7 +79,11 @@ public class PersonBuilder {
      * Sets the {@code Phone} of the {@code Client} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+        if (phone.isEmpty()) {
+            this.phone = new Phone();
+        } else {
+            this.phone = new Phone(phone);
+        }
         return this;
     }
 
@@ -87,7 +91,11 @@ public class PersonBuilder {
      * Sets the {@code Email} of the {@code Client} that we are building.
      */
     public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
+        if (email.isEmpty()) {
+            this.email = new Email();
+        } else {
+            this.email = new Email(email);
+        }
         return this;
     }
 
