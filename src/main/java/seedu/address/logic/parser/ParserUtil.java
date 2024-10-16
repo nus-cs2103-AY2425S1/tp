@@ -167,11 +167,10 @@ public class ParserUtil {
         requireNonNull(argument);
         String trimmedArgument = argument.trim();
 
-        if (trimmedArgument.equalsIgnoreCase("delete")) {
+        if (trimmedArgument.equalsIgnoreCase("deletelevel")) {
             return new PriorityLevel(3); // default priority level upon deletion
         }
 
-        // If the argument is not "deletelevel", we throw a ParseException
         throw new ParseException("Invalid argument for deleting priority level. Expected 'deletelevel'.");
     }
 
