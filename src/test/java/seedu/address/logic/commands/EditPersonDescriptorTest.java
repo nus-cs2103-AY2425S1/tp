@@ -5,11 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
@@ -48,24 +47,20 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-//        // different address -> returns false
-//        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
-//        assertFalse(DESC_AMY.equals(editedAmy));
-
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withRoles(VALID_ROLE_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
-//    @Test
-//    public void toStringMethod() {
-//        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-//        String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
-//                + editPersonDescriptor.getName().orElse(null) + ", phone="
-//                + editPersonDescriptor.getPhone().orElse(null) + ", email="
-//                + editPersonDescriptor.getEmail().orElse(null) + ", address="
-//                + editPersonDescriptor.getAddress().orElse(null) + ", tags="
-//                + editPersonDescriptor.getTags().orElse(null) + "}";
-//        assertEquals(expected, editPersonDescriptor.toString());
-//    }
+    @Test
+    public void toStringMethod() {
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
+                          + editPersonDescriptor.getName().orElse(null) + ", phone="
+                          + editPersonDescriptor.getPhone().orElse(null) + ", email="
+                          + editPersonDescriptor.getEmail().orElse(null) + ", roles="
+                          + editPersonDescriptor.getEvents().orElse(null) + ", events="
+                          + editPersonDescriptor.getRoles().orElse(null) + "}";
+        assertEquals(expected, editPersonDescriptor.toString());
+    }
 }

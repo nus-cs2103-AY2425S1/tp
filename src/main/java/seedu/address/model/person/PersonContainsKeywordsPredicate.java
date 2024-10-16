@@ -31,11 +31,10 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonContainsKeywordsPredicate)) {
+        if (!(other instanceof PersonContainsKeywordsPredicate otherPersonContainsKeywordsPredicate)) {
             return false;
         }
 
-        PersonContainsKeywordsPredicate otherPersonContainsKeywordsPredicate = (PersonContainsKeywordsPredicate) other;
         return keywords.equals(otherPersonContainsKeywordsPredicate.keywords);
     }
 

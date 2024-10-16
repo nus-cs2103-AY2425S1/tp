@@ -13,7 +13,17 @@ import seedu.address.model.event.Event;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.role.Faculty;
+import seedu.address.model.person.role.committee.Position;
+import seedu.address.model.person.role.Role;
+import seedu.address.model.person.role.athlete.Athlete;
+import seedu.address.model.person.role.athlete.Sport;
+import seedu.address.model.person.role.committee.Branch;
+import seedu.address.model.person.role.committee.CommitteeMember;
+import seedu.address.model.person.role.committee.FacultySportCommitteeMember;
+import seedu.address.model.person.role.sponsor.Sponsor;
+import seedu.address.model.person.role.volunteer.Volunteer;
+import seedu.address.model.person.role.volunteer.VolunteerRole;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -95,31 +105,139 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
-    /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code tag} is invalid.
-     */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-        }
-        return new Tag(trimmedTag);
+    private static Faculty parseFaculty(String faculty) throws ParseException {
+        return switch(faculty.toUpperCase()) {
+        case "BIZ" -> Faculty.BIZ;
+        case "CDE" -> Faculty.CDE;
+        case "COM" -> Faculty.COM;
+        case "DEN" -> Faculty.DEN;
+        case "FASS" -> Faculty.FASS;
+        case "LAW" -> Faculty.LAW;
+        case "MED" -> Faculty.MED;
+        case "NUSC" -> Faculty.NUSC;
+        case "SCI" -> Faculty.SCI;
+        case "YNC" -> Faculty.YNC;
+        default -> throw new ParseException("Invalid faculty: " + faculty);
+        };
+    }
+
+    private static Sport parseSport(String sport) throws ParseException {
+        return switch(sport.toUpperCase()) {
+        case "BADMINTON" -> Sport.BADMINTON;
+        case "BASKETBALL MEN" -> Sport.BASKETBALL_M;
+        case "BASKETBALL WOMEN" -> Sport.BASKETBALL_W;
+        case "BOULDERING MEN" -> Sport.BOULDERING_M;
+        case "BOULDERING WOMEN" -> Sport.BOULDERING_W;
+        case "CHESS" -> Sport.CHESS;
+        case "CONTACT BRIDGE" -> Sport.CONTACT_BRIDGE;
+        case "DODGEBALL" -> Sport.DODGEBALL;
+        case "FLOORBALL MEN" -> Sport.FLOORBALL_M;
+        case "FLOORBALL WOMEN" -> Sport.FLOORBALL_W;
+        case "HANDBALL MEN" -> Sport.HANDBALL_M;
+        case "HANDBALL WOMEN" -> Sport.HANDBALL_W;
+        case "LEAGUE OF LEGENDS" -> Sport.LEAGUE_OF_LEGENDS;
+        case "NETBALL" -> Sport.NETBALL;
+        case "REVERSI" -> Sport.REVERSI;
+        case "SOCCER MEN" -> Sport.SOCCER_M;
+        case "SOCCER WOMEN" -> Sport.SOCCER_W;
+        case "SQUASH" -> Sport.SQUASH;
+        case "SWIMMING MEN" -> Sport.SWIMMING_M;
+        case "SWIMMING WOMEN" -> Sport.SWIMMING_W;
+        case "TABLE TENNIS" -> Sport.TABLE_TENNIS;
+        case "TCHOUKBALL" -> Sport.TCHOUKBALL;
+        case "TENNIS" -> Sport.TENNIS;
+        case "TOUCH RUGBY" -> Sport.TOUCH_RUGBY;
+        case "TRACK MEN" -> Sport.TRACK_M;
+        case "TRACK WOMEN" -> Sport.TRACK_W;
+        case "ULTIMATE FRISBEE" -> Sport.ULTIMATE_FRISBEE;
+        case "VALORANT" -> Sport.VALORANT;
+        case "VOLLEYBALL MEN" -> Sport.VOLLEYBALL_M;
+        case "VOLLEYBALL WOMEN" -> Sport.VOLLEYBALL_W;
+        default -> throw new ParseException("Invalid sport: " + sport);
+        };
+    }
+
+    private static Branch parseBranch(String branch) throws ParseException {
+        return switch (branch.toUpperCase()) {
+        case "MARKETING" -> Branch.MARKETING;
+        case "PUBLICITY" -> Branch.PUBLICITY;
+        case "SPORTS" -> Branch.SPORTS;
+        default -> throw new ParseException("Unexpected branch: " + branch);
+        };
+    }
+
+    private static Position parsePosition(String position) throws ParseException {
+        return switch (position.toUpperCase()) {
+        case "PROJECT DIRECTOR" -> Position.PROJECT_DIRECTOR;
+        case "VICE PROJECT DIRECTOR" -> Position.VICE_PROJECT_DIRECTOR;
+        case "SPORTS DIRECTOR" -> Position.SPORTS_DIRECTOR;
+        case "VICE SPORTS DIRECTOR" -> Position.VICE_SPORTS_DIRECTOR;
+        case "MEMBER" -> Position.MEMBER;
+        default -> throw new ParseException("Unexpected position: " + position);
+        };
+    }
+
+    private static VolunteerRole parseVolunteer(String volunteer) throws ParseException {
+        return switch(volunteer.toUpperCase()) {
+        case "PHOTOGRAPHER" -> VolunteerRole.PHOTOGRAPHER;
+        case "EMCEE" -> VolunteerRole.EMCEE;
+        case "USHER" -> VolunteerRole.USHER;
+        case "LOGISTICS" -> VolunteerRole.LOGISTICS;
+        case "FIRST AID" -> VolunteerRole.FIRST_AID;
+        case "BOOTH MANNER" -> VolunteerRole.BOOTH_MANNER;
+        default -> throw new ParseException("Unexpected volunteer role: " + volunteer);
+        };
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses a {@code String role} into a {@code Role}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code role} is invalid.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Role parseRole(String role) throws ParseException {
+        requireNonNull(role);
+        String trimmedRole = role.trim();
+        if (!Role.isValidRoleName(trimmedRole)) {
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
-        return tagSet;
+        String[] tagSplit = trimmedRole.split(" - ");
+        String roleType = tagSplit[0];
+        return switch (roleType.toLowerCase()) {
+        case "athlete" -> {
+            Faculty faculty = parseFaculty(tagSplit[1]);
+            Sport sport = parseSport(tagSplit[2]);
+            yield new Athlete(faculty, sport);
+        }
+        case "committee" -> {
+            Branch branch = parseBranch(tagSplit[1]);
+            Position position = parsePosition(tagSplit[2]);
+            yield new CommitteeMember(branch, position);
+        }
+        case "faculty sports" -> {
+            Faculty faculty = parseFaculty(tagSplit[1]);
+            Position position = parsePosition(tagSplit[2]);
+            yield new FacultySportCommitteeMember(faculty, position);
+        }
+        case "sponsor" -> new Sponsor(tagSplit[1]);
+        case "volunteer" -> {
+            VolunteerRole volunteerRole = parseVolunteer(tagSplit[1]);
+            yield new Volunteer(volunteerRole);
+        }
+        default -> new Role(trimmedRole);
+        };
+    }
+
+    /**
+     * Parses {@code Collection<String> roles} into a {@code Set<Role>}.
+     */
+    public static Set<Role> parseRoles(Collection<String> roles) throws ParseException {
+        requireNonNull(roles);
+        final Set<Role> roleSet = new HashSet<>();
+        for (String roleName : roles) {
+            roleSet.add(parseRole(roleName));
+        }
+        return roleSet;
     }
 
     /**

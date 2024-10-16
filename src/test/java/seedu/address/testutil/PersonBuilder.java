@@ -8,7 +8,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.role.Role;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -18,12 +18,13 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_EVENT = "IFG";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Set<Event> events;
-    private Set<Tag> tags;
+    private Set<Role> roles;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -33,7 +34,8 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         events = new HashSet<>();
-        tags = new HashSet<>();
+        events.add(new Event(DEFAULT_EVENT));
+        roles = new HashSet<>();
     }
 
     /**
@@ -44,7 +46,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         events = new HashSet<>(personToCopy.getEvents());
-        tags = new HashSet<>(personToCopy.getTags());
+        roles = new HashSet<>(personToCopy.getRoles());
     }
 
     /**
@@ -56,10 +58,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withRoles(String ... roles) {
+        this.roles = SampleDataUtil.getRoleSet(roles);
         return this;
     }
 
@@ -70,7 +72,6 @@ public class PersonBuilder {
         this.events = SampleDataUtil.getEventSet(events);
         return this;
     }
-
 
     /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
@@ -89,7 +90,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, events, tags);
+        return new Person(name, phone, email, events, roles);
     }
 
 }

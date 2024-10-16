@@ -39,7 +39,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane events;
     @FXML
-    private FlowPane tags;
+    private FlowPane roles;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -54,8 +54,8 @@ public class PersonCard extends UiPart<Region> {
         person.getEvents().stream()
                 .sorted(Comparator.comparing(event -> event.value))
                 .forEach(event -> events.getChildren().add(new Label(event.value)));
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getRoles().stream()
+                .sorted(Comparator.comparing(role -> role.roleName))
+                .forEach(role -> roles.getChildren().add(new Label(role.roleName + ", ")));
     }
 }

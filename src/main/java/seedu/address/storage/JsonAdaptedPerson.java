@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.role.Role;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -28,7 +27,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final List<JsonAdaptedEvent> events = new ArrayList<>();
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedRole> roles = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,15 +35,15 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("events") List<JsonAdaptedEvent> events,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("roles") List<JsonAdaptedRole> roles) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         if (events != null) {
             this.events.addAll(events);
         }
-        if (tags != null) {
-            this.tags.addAll(tags);
+        if (roles != null) {
+            this.roles.addAll(roles);
         }
     }
 
@@ -57,10 +56,10 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         events.addAll(source.getEvents().stream()
                 .map(JsonAdaptedEvent::new)
-                .collect(Collectors.toList()));
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+                .toList();
+        roles.addAll(source.getRoles().stream()
+                .map(JsonAdaptedRole::new)
+                .toList());
     }
 
     /**
@@ -69,9 +68,9 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+        final List<Role> personRoles = new ArrayList<>();
+        for (JsonAdaptedRole role : roles) {
+            personRoles.add(role.toModelType());
         }
 
         final List<Event> eventList = new ArrayList<>();
@@ -103,9 +102,10 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
         final Set<Event> modelEvents = new HashSet<>(eventList);
-        return new Person(modelName, modelPhone, modelEmail, modelEvents, modelTags);
+        final Set<Role> modelRoles = new HashSet<>(personRoles);
+
+        return new Person(modelName, modelPhone, modelEmail, modelRoles);
     }
 
 }
