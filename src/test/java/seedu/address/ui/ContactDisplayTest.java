@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.util.WaitForAsyncUtils;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -37,6 +38,7 @@ public class ContactDisplayTest extends ApplicationTest {
         categoryLabel = (Label) contactDisplay.getRoot().lookup("#categoryLabel");
         addressLabel = (Label) contactDisplay.getRoot().lookup("#addressLabel");
         tags = (FlowPane) contactDisplay.getRoot().lookup("#tags");
+        WaitForAsyncUtils.waitForFxEvents();
     }
 
     @Test
