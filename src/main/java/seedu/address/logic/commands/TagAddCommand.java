@@ -127,6 +127,7 @@ public class TagAddCommand extends Command {
      * original Person.
      * Matching tags are added to a separate set that keeps track of duplicate tags.
      * Unique tags are added to a separate list of tags.
+     *
      * @param person EditedPerson from the execute method above.
      * @return A set of tags that contains distinct tags from both existing tags and
      *     those inputted by the user.
