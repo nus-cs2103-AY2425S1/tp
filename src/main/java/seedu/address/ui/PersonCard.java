@@ -35,11 +35,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Label company;
     @FXML
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane products;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -50,10 +52,13 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
+        company.setText(person.getCompany().value);
         email.setText(person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getProducts().stream()
+                .sorted(Comparator.comparing(product -> product.productName))
+                .forEach(product -> products.getChildren().add(new Label(product.productName)));
     }
 }
