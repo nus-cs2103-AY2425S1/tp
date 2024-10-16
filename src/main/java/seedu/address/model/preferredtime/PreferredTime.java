@@ -17,8 +17,8 @@ public class PreferredTime {
     public final String preferredTime;
 
     // TODO: need to change to Day and Time separately in the future
-    public final String day;
-    public final String time;
+    public final Day day;
+    public final Time time;
 
 
     // TODO: constructor
@@ -31,8 +31,8 @@ public class PreferredTime {
     public PreferredTime(String preferredTime, String day, String time) {
         requireNonNull(day, time);
         this.preferredTime = preferredTime;
-        this.day = day;
-        this.time = time;
+        this.day = new Day(day);
+        this.time = new Time(time);
     }
 
     /**
@@ -54,13 +54,19 @@ public class PreferredTime {
         }
 
         PreferredTime otherPreferredTime = (PreferredTime) other;
-        return preferredTime.equals(otherPreferredTime.preferredTime);
+        return day.equals(otherPreferredTime.day) && time.equals(otherPreferredTime.time);
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return preferredTime.hashCode();
     }
 
-
+    // TODO: toString
+    /**
+     * Format state as text for viewing.
+     */
+    public String toString() {
+        return '[' + day.toString() + ' ' + time.toString() + ']';
+    }
 }
