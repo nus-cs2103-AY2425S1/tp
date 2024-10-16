@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONCERT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.AddConcertCommand;
 import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteConcertCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -61,10 +63,17 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
+    public void parseCommand_deletePerson() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(DeleteCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_deleteConcert() throws Exception {
+        DeleteConcertCommand command = (DeleteConcertCommand) parser.parseCommand(
+                DeleteConcertCommand.COMMAND_WORD + " " + INDEX_FIRST_CONCERT.getOneBased());
+        assertEquals(new DeleteConcertCommand(INDEX_FIRST_CONCERT), command);
     }
 
     @Test
@@ -86,10 +95,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        String userInput = FindPersonCommand.COMMAND_WORD + " "
-                + PREFIX_NAME + keywords.stream().collect(Collectors.joining(" "));
-        FindPersonCommand command = (FindPersonCommand) parser.parseCommand(
-                userInput);
+        String userInput = FindPersonCommand.COMMAND_WORD + " " + PREFIX_NAME + keywords.stream()
+                .collect(Collectors.joining(" "));
+        FindPersonCommand command = (FindPersonCommand) parser.parseCommand(userInput);
         assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
