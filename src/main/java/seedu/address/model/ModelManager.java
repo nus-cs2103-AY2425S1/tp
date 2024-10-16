@@ -131,6 +131,7 @@ public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
 
     @Override
     public boolean equals(Object other) {
+
         if (other == this) {
             return true;
         }
