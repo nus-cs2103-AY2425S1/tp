@@ -7,10 +7,10 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Tests that a {@code Person}'s {@code Ic} matches the given NRIC.
  */
-public class IdMatchesPredicate implements Predicate<Person> {
+public class IcMatchesPredicate implements Predicate<Person> {
     private final Ic nric;
 
-    public IdMatchesPredicate(Ic nric) {
+    public IcMatchesPredicate(Ic nric) {
         this.nric = nric;
     }
 
@@ -26,11 +26,11 @@ public class IdMatchesPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof IdMatchesPredicate otherIdMatchesPredicate)) {
+        if (!(other instanceof IcMatchesPredicate otherIcMatchesPredicate)) {
             return false;
         }
 
-        return this.nric.equals(otherIdMatchesPredicate.nric);
+        return this.nric.equals(otherIcMatchesPredicate.nric);
     }
 
     @Override
