@@ -33,7 +33,7 @@ public class AddAssignmentCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Jane Doe "
             + PREFIX_ASSIGNMENT + "Math Quiz "
-            + PREFIX_DEADLINE + "9/10/2024 "
+            + PREFIX_DEADLINE + "2024-10-09 "
             + PREFIX_STATUS + "N "
             + PREFIX_STATUS + "N "
             + PREFIX_GRADE + "NULL ";
