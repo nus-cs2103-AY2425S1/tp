@@ -70,7 +70,6 @@ public class PersonCard extends UiPart<Region> {
                         sellingIndex[0]++; // Increment the index
                     });
         }
-
         // Process buying properties, with null check
         if (person.getListOfBuyingProperties() != null) {
             int[] buyingIndex = {1}; // Using an array to maintain a mutable index
