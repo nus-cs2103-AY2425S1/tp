@@ -9,7 +9,7 @@ import seedu.address.model.person.task.TaskList;
  * A utility class to help with building TaskList objects.
  */
 public class TaskListBuilder {
-    public TaskList taskList;
+    private final TaskList taskList;
 
     /**
      * Creates a {@code TaskListBuilder} with no tasks as default
@@ -34,6 +34,10 @@ public class TaskListBuilder {
         taskList.setTasks(Arrays.stream(tasks).toList());
     }
 
+    /**
+     * Creates a new deep copy of TaskList
+     * @return new deep copy of {@code TaskList}
+     */
     public TaskList build() {
         TaskList result = new TaskList();
         Iterable<Task> tasks = taskList;
@@ -41,4 +45,3 @@ public class TaskListBuilder {
         return result;
     }
 }
-
