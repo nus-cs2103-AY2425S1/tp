@@ -134,6 +134,11 @@ public class ParserUtil {
     public static PriorityLevel parsePriorityLevel(String priorityLevel) throws ParseException {
         requireNonNull(priorityLevel);
         String trimmedPriorityLevel = priorityLevel.trim();
+
+        if (trimmedPriorityLevel.isEmpty() || trimmedPriorityLevel.equalsIgnoreCase("delete")) {
+            return new PriorityLevel(3); // default level if none provided or "delete" keyword used
+        }
+
         if (trimmedPriorityLevel.isEmpty()) {
             return new PriorityLevel(3); // default level if none provided
         }
