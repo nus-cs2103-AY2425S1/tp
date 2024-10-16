@@ -100,7 +100,8 @@ public class EditCommand extends Command {
         Nric updatedNric = editPersonDescriptor.getNric().orElse(personToEdit.getNric());
         Sex updatedSex = editPersonDescriptor.getSex().orElse(personToEdit.getSex());
         Birthdate updatedBirthDate = editPersonDescriptor.getBirthDate().orElse(personToEdit.getBirthdate());
-        Set<HealthService> updatedHealthServices = editPersonDescriptor.getHealthServices().orElse(personToEdit.getHealthServices());
+        Set<HealthService> updatedHealthServices = editPersonDescriptor.getHealthServices()
+                .orElse(personToEdit.getHealthServices());
 
         return new Person(updatedName, updatedNric, updatedBirthDate, updatedSex, updatedHealthServices);
     }
@@ -208,7 +209,8 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<HealthService>> getHealthServices() {
-            return (healthServices != null) ? Optional.of(Collections.unmodifiableSet(healthServices)) : Optional.empty();
+            return (healthServices != null) ? Optional.of(Collections.unmodifiableSet(healthServices))
+                    : Optional.empty();
         }
 
         @Override
