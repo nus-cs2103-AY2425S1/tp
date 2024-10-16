@@ -9,9 +9,8 @@ import spleetwaise.address.commons.util.AppUtil;
  * {@link #isValidRemark(String)}
  */
 public class Remark {
-    // Regex pattern to validate that the remark contains only alphanumeric characters and spaces, and does not start
-    // with a space. The regex match a string that starts with an alphanumeric character and is followed by zero or
-    // more alphanumeric characters or spaces
+    // Regex pattern to validate that the remark contains only [TBC]
+    // TODO: Update the regex pattern to match the requirements of the remark field
     public static final String VALIDATION_REGEX = "^[\\p{L}\\p{N}\\p{P}\\p{S}\\p{Zs}\\t]*$";
     public static final String MESSAGE_CONSTRAINTS = "Remarks should only contain alphanumeric characters and spaces";
     public final String value;
