@@ -27,7 +27,7 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private Map<Network, Set<PublicAddress>> publicAddresses = new HashMap<>();
+    private Map<Network, Set<PublicAddress>> publicAddresses;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -40,7 +40,7 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.publicAddresses = publicAddresses;
+        this.publicAddresses = new HashMap<>(publicAddresses);
         this.tags.addAll(tags);
     }
 
@@ -65,8 +65,7 @@ public class Person {
     }
 
     public void setPublicAddressesByNetwork(Network network, HashSet<PublicAddress> addresses) {
-        //TODO Temporary Fix on unknown issue
-        this.publicAddresses = new HashMap<>();
+        this.publicAddresses.put(network,addresses);
     }
 
 
