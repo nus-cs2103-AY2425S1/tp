@@ -3,7 +3,6 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
@@ -20,13 +19,11 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_GENDER = "female";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_MODULE = "CS2103T";
 
     private Name name;
     private Phone phone;
     private Gender gender;
-    private Address address;
     private Module module;
     private Set<Tag> tags;
 
@@ -37,7 +34,6 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         gender = new Gender(DEFAULT_GENDER);
-        address = new Address(DEFAULT_ADDRESS);
         module = new Module(DEFAULT_MODULE);
         tags = new HashSet<>();
     }
@@ -49,7 +45,6 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         gender = personToCopy.getGender();
-        address = personToCopy.getAddress();
         module = personToCopy.getModule();
         tags = new HashSet<>(personToCopy.getTags());
     }
@@ -67,14 +62,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
         return this;
     }
 
@@ -103,7 +90,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, gender, address, module, tags);
+        return new Person(name, phone, gender, module, tags);
     }
 
 }

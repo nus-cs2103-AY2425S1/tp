@@ -22,18 +22,16 @@ public class Person {
     private final Gender gender;
 
     // Data fields
-    private final Address address;
     private final Module module;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Gender gender, Address address, Module module, Set<Tag> tags) {
-        requireAllNonNull(name, phone, gender, address, module, tags);
+    public Person(Name name, Phone phone, Gender gender, Module module, Set<Tag> tags) {
+        requireAllNonNull(name, phone, gender, module, tags);
         this.name = name;
         this.phone = phone;
-        this.address = address;
         this.module = module;
         this.tags.addAll(tags);
         this.gender = gender;
@@ -49,10 +47,6 @@ public class Person {
 
     public Gender getGender() {
         return gender;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     public Module getModule() {
@@ -98,7 +92,6 @@ public class Person {
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
-                && address.equals(otherPerson.address)
                 && module.equals(otherPerson.module)
                 && tags.equals(otherPerson.tags);
     }
@@ -106,7 +99,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, address, module, tags);
+        return Objects.hash(name, phone, module, tags);
     }
 
     @Override
@@ -115,7 +108,6 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("gender", gender)
-                .add("address", address)
                 .add("module", module)
                 .add("tags", tags)
                 .toString();
