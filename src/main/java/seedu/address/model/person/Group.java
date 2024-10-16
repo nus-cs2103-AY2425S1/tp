@@ -41,4 +41,13 @@ public class Group extends UniquePersonList {
         requireNonNull(group);
         return name.equals(group.name);
     }
+
+    /**
+     * Returns true if this group contains {@code person}. Checks for equality via {@code Person::equals}.
+     * @see Person
+     */
+    public boolean containsPerson(Person person) {
+        requireNonNull(person);
+        return internalList.stream().anyMatch(person::equals);
+    }
 }
