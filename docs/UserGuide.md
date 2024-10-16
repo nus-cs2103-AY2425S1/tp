@@ -127,6 +127,23 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Filter persons by tag: `filter`
+
+Filters the list of contacts and displays those with the provided tag.
+
+Format: `filter [t/TAG]`
+
+* The filter is case-sensitive.
+* Only exact matches of tags will be considered.
+* The tag provided must only contain alphanumeric characters
+* If the provided tag does not match any contact, an empty list will be shown.
+
+Examples:
+* `filter t/friends` will filter for contacts with the tag `friends`<br>
+  ![result for 'filter_friends'](images/filterFriendsResult.png)
+* `filter t/bestFriends` will display an empty list if there are no contacts with tag `bestFriends`<br>
+  ![result for 'filter bestFriends'](images/filterBestFriendsResult.png)
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
