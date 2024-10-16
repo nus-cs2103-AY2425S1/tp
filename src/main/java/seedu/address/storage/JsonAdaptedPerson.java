@@ -1,14 +1,18 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -101,8 +105,9 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final Map<Network, Set<PublicAddress>> modelPublicAddresses = new HashMap<>();  // TODO: Implement modelPublicAddresses
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPublicAddresses, modelTags);
     }
 
 }

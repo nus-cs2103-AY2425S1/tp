@@ -3,12 +3,17 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.addresses.BtcAddress;
+import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -94,6 +99,67 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String publicAddress} into a {@code PublicAddress}.
+     */
+    public static PublicAddress parsePublicAddress(String publicAddress, String paTag, String network) throws ParseException {
+        requireNonNull(publicAddress);
+        requireNonNull(paTag);
+
+        String trimmedPublicAddress = publicAddress.trim();
+        if (!PublicAddress.isValidPublicAddress(trimmedPublicAddress)) {
+            throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
+        }
+
+        String trimmedPaTag = paTag.trim();
+        if (!PublicAddress.isValidPATag(paTag)) {
+            throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
+        }
+
+        switch(network) {
+            case "BTC":
+                if (!BtcAddress.isValidPublicAddress(trimmedPublicAddress)) {
+                    throw new ParseException(BtcAddress.MESSAGE_CONSTRAINTS);
+                }
+                return new BtcAddress(trimmedPublicAddress, trimmedPaTag);
+            default:
+                throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses {@code Collection<String> publicAddresses} into a {@code Map<Network, Set<PublicAddress>>}.
+     */
+    public static Map<Network, Set<PublicAddress>> parsePublicAddresses(Collection<String> publicAddresses) throws ParseException {
+        requireNonNull(publicAddresses);
+        final Map<Network, Set<PublicAddress>> publicAddressesMap = new HashMap<>();
+        for (String publicAddress : publicAddresses) {
+
+            // TODO: Implement tokenizer in a separate file
+            final String DELIM = ">";
+            String trimmedPublicAddress = publicAddress.trim();
+            String[] addressArgs = trimmedPublicAddress.split(DELIM);
+            assert addressArgs.length == 2 : "Public address should have a network and an address";
+
+            String network = addressArgs[0];
+            String address = addressArgs[1];
+            // TODO: END of tokenizer
+
+            PublicAddress parsedPublicAddress = parsePublicAddress(address, PublicAddress.DEFAULT_TAG, network);
+
+            Network parsedNetwork = switch(network) {  // TODO: Implement more networks
+                case "BTC" -> Network.BTC;
+                default -> throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
+            };
+
+            if (!publicAddressesMap.containsKey(parsedNetwork)) {
+                publicAddressesMap.put(parsedNetwork, new HashSet<>());
+            }
+            publicAddressesMap.get(parsedNetwork).add(parsedPublicAddress);
+        }
+        return publicAddressesMap;
     }
 
     /**
