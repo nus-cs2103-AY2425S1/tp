@@ -3,8 +3,11 @@ package seedu.address.model.meetup;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  * Represents a meetup's ending time in the address book.
@@ -66,5 +69,12 @@ public class From {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    /**
+     * Getter method for LocalDateTime value.
+     */
+    public LocalDateTime getDateTime() {
+        return value;
     }
 }
