@@ -11,6 +11,9 @@ public class PersonCardField extends HBox {
     private Label field;
     private Label value;
 
+    /**
+     * Creates a template {@code PersonCardField} to display.
+     */
     public PersonCardField() {
         super(5);
         field = new Label();
@@ -21,6 +24,11 @@ public class PersonCardField extends HBox {
         getChildren().addAll(field, value);
     }
 
+    /**
+     * Updates the {@code Label} {@code field} and {@code value} with the corresponding strings.
+     * @param fieldText The String to be updated into field.
+     * @param valueText The String to be updated in value.
+     */
     public void setText(String fieldText, String valueText) {
         this.field.setText(fieldText);
         this.value.setText(valueText);
