@@ -60,11 +60,9 @@ public class TagCommand extends Command {
 
         Person personToTag = lastShownList.get(targetIndex.getZeroBased());
 
-        /*
         if (!model.hasTag(tag)) {
-            throw new CommandException(MESSAGE_TAG_NOT_CREATED);
+            throw new CommandException(tag + " " + MESSAGE_TAG_NOT_CREATED);
         }
-        */
 
         if (personToTag.getTags().contains(tag)) {
             throw new CommandException(MESSAGE_DUPLICATE_TAG);
@@ -92,7 +90,7 @@ public class TagCommand extends Command {
         }
 
         TagCommand otherTagCommand = (TagCommand) other;
-        return targetIndex.equals(otherTagCommand.targetIndex);
+        return targetIndex.equals(otherTagCommand.targetIndex) && tag.equals(otherTagCommand.tag);
     }
 
     @Override
