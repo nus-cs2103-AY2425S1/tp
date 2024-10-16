@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import hallpointer.address.commons.core.GuiSettings;
 import hallpointer.address.logic.commands.exceptions.CommandException;
+import hallpointer.address.logic.Messages;
 import hallpointer.address.model.AddressBook;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.ReadOnlyAddressBook;
@@ -99,62 +100,62 @@ public class AddMemberCommandTest {
     private class ModelStub implements Model {
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(Messages.MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(Messages.MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(Messages.MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(Messages.MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public Path getAddressBookFilePath() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(Messages.MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(Messages.MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public void addMember(Member member) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(Messages.MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(Messages.MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(Messages.MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public boolean hasMember(Member member) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(Messages.MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public void deleteMember(Member target) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(Messages.MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public void setMember(Member target, Member editedMember) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(Messages.MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         /**
@@ -162,36 +163,36 @@ public class AddMemberCommandTest {
          */
         @Override
         public void addSession(Session session) {
-            throw new AssertionError("This method should not be called");
+            throw new AssertionError(Messages.MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public ObservableList<Member> getFilteredMemberList() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(Messages.MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public void updateFilteredMemberList(Predicate<Member> predicate) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(Messages.MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
         @Override
         public boolean hasSession(Session session) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(Messages.MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public void deleteSession(Session sessionToDelete) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(Messages.MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public void setSession(Session target, Session editedSession) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(Messages.MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public List<Session> getSessionList() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(Messages.MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
     }
 

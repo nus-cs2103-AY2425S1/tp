@@ -12,7 +12,7 @@ activate logic
 logic -> abp ++: parseCommand(commandText)
 create ecp
 abp -> ecp
-abp -> ecp ++: parse(arguments)
+abp -> ecp ++: parse(arguments)git checkout main
 create ec
 ecp -> ec ++: index, updateMemberDescriptor
 ec --> ecp --
