@@ -14,6 +14,9 @@ import seedu.address.logic.commands.EditGameCommand;
 import seedu.address.logic.commands.EditGameCommand.EditGameDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new EditGameCommand object.
+ */
 public class EditGameCommandParser implements Parser<EditGameCommand> {
 
     @Override
