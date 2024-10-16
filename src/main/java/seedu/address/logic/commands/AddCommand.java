@@ -19,9 +19,11 @@ import seedu.address.model.person.Person;
  */
 public class AddCommand extends Command {
 
-    public static final String COMMAND_WORD = ":add";
+    public static final String SHORT_COMMAND_WORD = ":a";
+    public static final String LONG_COMMAND_WORD = ":add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = SHORT_COMMAND_WORD + " or " + LONG_COMMAND_WORD
+    + ": Adds a person to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -29,14 +31,23 @@ public class AddCommand extends Command {
             + PREFIX_LOCATION + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + PREFIX_REMARK + "REMARK\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + SHORT_COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney"
-            + PREFIX_REMARK + "Likes to swim";
+            + PREFIX_REMARK + "Likes to swim"
+            + "\nExample 2: " + LONG_COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_PHONE + "98765432 "
+            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_TAG + "friends "
+            + PREFIX_TAG + "owesMoney"
+            + PREFIX_REMARK + "Likes to swim"
+            ;
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
