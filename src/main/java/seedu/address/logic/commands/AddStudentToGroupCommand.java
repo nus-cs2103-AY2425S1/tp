@@ -10,8 +10,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
+import seedu.address.model.student.exceptions.PersonNotFoundException;
 
 /**
  * Adds a student to a group.
@@ -32,6 +34,11 @@ public class AddStudentToGroupCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_STUDENT_IN_GROUP = "This student is already in the group";
 
+    public static final String MESSAGE_NO_SUCH_STUDENT = "Student does not exist!";
+
+    public static final String MESSAGE_NO_SUCH_GROUP = "Group does not exist!";
+
+
     private final StudentNumber toAdd;
 
     private final GroupName toAddInto;
@@ -50,8 +57,18 @@ public class AddStudentToGroupCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Student student = model.getPersonByNumber(toAdd);
-        Group group = model.getGroupByName(toAddInto);
+        Student student;
+        Group group;
+        try {
+            group = model.getGroupByName(toAddInto);
+        } catch (GroupNotFoundException e) {
+            throw new CommandException(MESSAGE_NO_SUCH_GROUP);
+        }
+        try {
+            student = model.getPersonByNumber(toAdd);
+        } catch (PersonNotFoundException e) {
+            throw new CommandException(MESSAGE_NO_SUCH_STUDENT);
+        }
 
         if (model.hasPersonInGroup(student, group)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT_IN_GROUP);

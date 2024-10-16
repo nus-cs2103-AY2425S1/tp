@@ -44,6 +44,12 @@ public interface Model {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
+    String getMostRecentGroupTaskDisplay();
+
+    void setMostRecentGroupTaskDisplay();
+
+    void setMostRecentGroupTaskDisplay(String string);
+
     /**
      * Returns the user prefs' address book file path.
      */
@@ -128,7 +134,7 @@ public interface Model {
     boolean hasTaskInGroup(Task task, Group group);
 
     /**
-     * Returns true if a task with the same identity as {@code task} exists in the in the model
+     * Returns true if a task with the same identity as {@code task} exists in the model
      */
     boolean hasTask(Task task);
 
@@ -186,9 +192,22 @@ public interface Model {
 
     void deleteStudentFromGroup(Group group, Student student);
 
+    /**
+     * Deletes specified group.
+     */
     void deleteGroup(Group groupToBeDeleted);
 
+    /**
+     * Adds a {@code Task} to {@code Group} specified.
+     *
+     * @param task  to be added.
+     * @param group that task is to be added to.
+     */
     void addTaskToGroup(Task task, Group group);
 
     void addTask(Task task);
+
+    void deleteTaskFromGroup(Task task, Group group);
+
+    void deleteTask(Task task);
 }

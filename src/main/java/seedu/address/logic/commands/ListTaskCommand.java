@@ -8,7 +8,7 @@ import java.util.Optional;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 
 /**
  * Adds a group to the address book.
@@ -28,34 +28,37 @@ public class ListTaskCommand extends Command {
     public static final String MESSAGE_SUCCESS_ALL_TASKS = "Listed all tasks available";
     public static final String GROUP_NOT_FOUND = "Group not found!";
 
-    private final Optional<Group> groupOptional;
+    private final Optional<GroupName> groupNameOptional;
 
     /**
      * Creates an ListTaskCommand to add the specified {@code Task}
      */
-    public ListTaskCommand(Group group) {
-        this.groupOptional = Optional.<Group>of(group);
+    public ListTaskCommand(GroupName groupName) {
+        this.groupNameOptional = Optional.<GroupName>of(groupName);
     }
 
     /**
      * Creates an ListTaskCommand to add the specified {@code Task}
      */
     public ListTaskCommand() {
-        this.groupOptional = Optional.empty();
+        this.groupNameOptional = Optional.empty();
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        if (groupOptional.isPresent() && !model.containsGroupName(groupOptional.get().getGroupName())) {
+        if (groupNameOptional.isPresent() && !model.containsGroupName(groupNameOptional.get())) {
             throw new CommandException(GROUP_NOT_FOUND);
         }
-        if (groupOptional.isPresent()) {
+        if (groupNameOptional.isPresent()) {
             requireNonNull(model);
             model.updateFilteredGroupList(x -> x.getGroupName().equals(groupOptional.get().getGroupName()));
+            model.setMostRecentGroupTaskDisplay(groupOptional.get().getGroupName().fullName);
+            model.updateFilteredGroupList(x -> x.getGroupName().equals(groupNameOptional.get()));
             model.setStateGroupTask();
             return new CommandResult(MESSAGE_SUCCESS, LIST_GROUP_TASK_MARKER);
         }
         model.setStateTasks();
+        model.setMostRecentGroupTaskDisplay("");
         return new CommandResult(MESSAGE_SUCCESS_ALL_TASKS, LIST_TASK_MARKER);
     }
 

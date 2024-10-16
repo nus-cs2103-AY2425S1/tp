@@ -126,6 +126,7 @@ public class MainWindow extends UiPart<Stage> {
             informationListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
         } else if (this.logic.getState().equals(DEFAULT_GROUP_TASK)) {
             informationListPanelPlaceholder.getChildren().add(groupTaskPanel.getRoot());
+            logic.setMostRecentGroupTaskDisplay();
         } else if (this.logic.getState().equals(DEFAULT_GROUP)) {
             informationListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
         } else {
@@ -178,6 +179,7 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+
         helpWindow.hide();
         primaryStage.hide();
     }
@@ -221,6 +223,10 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             fillInnerParts();
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (!logic.getMostRecentGroupTaskDisplay().equals("")) {
+
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

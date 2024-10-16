@@ -102,6 +102,31 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public String getMostRecentGroupTaskDisplay() {
+        return userPrefs.getMostRecentGroupTaskDisplay();
+    }
+
+    @Override
+    public void setMostRecentGroupTaskDisplay() {
+        String stringToUpdate = userPrefs.getMostRecentGroupTaskDisplay();
+        if (!stringToUpdate.equals("")) {
+            updateFilteredGroupList(x -> x.getGroupName().fullName.equals(stringToUpdate));
+        } else {
+            updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        }
+    }
+
+    @Override
+    public void setMostRecentGroupTaskDisplay(String string) {
+        userPrefs.setMostRecentGroupTaskDisplay(string);
+        if (!string.equals("")) {
+            updateFilteredGroupList(x -> x.getGroupName().fullName.equals(string));
+        } else {
+            updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        }
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
     }
@@ -220,6 +245,7 @@ public class ModelManager implements Model {
         requireNonNull(groupToBeDeleted);
         addressBook.removeGroup(groupToBeDeleted);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Student List Accessors =============================================================
@@ -287,14 +313,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addTaskToGroup(Task task, Group group){
+    public void addTaskToGroup(Task task, Group group) {
         requireAllNonNull(task, group);
         addressBook.addTaskToGroup(task, group);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
     @Override
-    public void addTask(Task task){
+    public void addTask(Task task) {
         requireNonNull(task);
         addressBook.addTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
@@ -305,4 +331,18 @@ public class ModelManager implements Model {
         return addressBook.hasTask(task);
     }
 
+    @Override
+    public void deleteTask(Task task) {
+        requireNonNull(task);
+        addressBook.deleteTask(task);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+
+    @Override
+    public void deleteTaskFromGroup(Task task, Group group) {
+        requireNonNull(task);
+        requireNonNull(group);
+        addressBook.deleteTaskFromGroup(task, group);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
 }
