@@ -102,7 +102,6 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Telegram.MESSAGE_CONSTRAINTS);
         }
         final Telegram modelTelegram = new Telegram(telegram);
-
         final Set<Role> modelRoles = new HashSet<>(personRoles);
         return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelRoles);
     }

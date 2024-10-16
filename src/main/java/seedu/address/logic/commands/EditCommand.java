@@ -34,6 +34,7 @@ import seedu.address.model.role.Role;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_ALIAS = "e";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
@@ -119,7 +120,6 @@ public class EditCommand extends Command {
         return index.equals(otherEditCommand.index)
                 && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -191,6 +191,17 @@ public class EditCommand extends Command {
         public Optional<Telegram> getTelegram() {
             return Optional.ofNullable(telegram);
         }
+
+        /*
+        public void setRoles(List<Role> roles) {
+            this.roles = roles;
+        }
+
+        public Optional<List<Role>> getRoles() {
+            return Optional.ofNullable(roles);
+        }
+
+         */
 
         /**
          * Sets {@code roles} to this object's {@code roles}.
