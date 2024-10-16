@@ -17,6 +17,8 @@ public class Task {
 
     private final String description;
 
+    private boolean isComplete;
+
     /**
      * Every field must be present and not null.
      */
@@ -24,6 +26,7 @@ public class Task {
         requireAllNonNull(patient, description);
         this.patient = patient;
         this.description = description;
+        this.isComplete = false;
     }
 
     public Person getPatient() {
@@ -32,6 +35,18 @@ public class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    public boolean getStatus() {
+        return this.isComplete;
+    }
+
+    public void markTaskComplete() {
+        this.isComplete = true;
+    }
+
+    public void markTaskIncomplete() {
+        this.isComplete = false;
     }
 
     @Override
