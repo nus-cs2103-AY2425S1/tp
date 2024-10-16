@@ -23,7 +23,7 @@ public class LastSeen {
         this.value = LocalDate.parse(lastSeen, formatter);
     }
 
-    private static boolean isValidDate(String test) {
+    public static boolean isValidDate(String test) {
         try {
             LocalDate.parse(test, formatter);
             return true;
