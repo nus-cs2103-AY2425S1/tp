@@ -51,7 +51,31 @@
     "property" : {
       "postalCode" : "123456",
       "unitNumber" : "10-01",
-      "price" : "1.5M",
+      "price" : "1500000",
+      "tags" : [ ]
+    }
+  }, {
+    "name" : "Jack Soh",
+    "phone" : "33333333",
+    "email" : "jack@example.com",
+    "address" : "Block 101, Jacky Street 2",
+    "tags" : ["friend"],
+    "property" : {
+      "postalCode" : "212121",
+      "unitNumber" : "22-22",
+      "price" : "2100000",
+      "tags" : [ ]
+    }
+  }, {
+    "name" : "Kate Teh",
+    "phone" : "44444444",
+    "email" : "kate@example.com",
+    "address" : "Hillview Katy Heights, Block 200",
+    "tags" : ["friend"],
+    "property" : {
+      "postalCode" : "582091",
+      "unitNumber" : "04-12",
+      "price" : "1400000",
       "tags" : [ ]
     }
   } ]
