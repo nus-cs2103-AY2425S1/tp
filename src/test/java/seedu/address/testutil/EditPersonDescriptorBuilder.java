@@ -113,7 +113,7 @@ public class EditPersonDescriptorBuilder {
      * Parses the {@code policyArgs} into a {@code Map<Index, Policy>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withPolicies(String... policyArgs) throws ParseException{
+    public EditPersonDescriptorBuilder withPolicies(String... policyArgs) throws ParseException {
         Map<Index, Policy> policyArgsMap = ParserUtil.parsePolicies(List.of(policyArgs));
         descriptor.setPolicies(policyArgsMap);
         return this;
