@@ -29,10 +29,7 @@ public class ContactTypePredicate implements Predicate<Person> {
      */
     @Override
     public boolean test(Person person) {
-        // getContactType() to be implemented on next iteration
-        // to add getContactType() method to the Person class and edit Person class fields
-        // return person.getContactType().equals(contactType);
-        return true;
+        return person.getContactType().equals(contactType);
     }
 
     @Override
