@@ -25,6 +25,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Project> filteredProjects;
+    private final FilteredList<Assignment> filteredAssignments;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -38,7 +39,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredProjects = new FilteredList<>(this.addressBook.getProjectList());
-
+        filteredAssignments = new FilteredList<>(this.addressBook.getAssignmentList());
     }
 
     public ModelManager() {
@@ -187,6 +188,23 @@ public class ModelManager implements Model {
     public void updateFilteredProjectList(Predicate<Project> predicate) {
         requireNonNull(predicate);
         filteredProjects.setPredicate(predicate);
+    }
+
+    //=========== Filtered Assignment List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Assignment} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Assignment> getFilteredAssignmentList() {
+        return filteredAssignments;
+    }
+
+    @Override
+    public void updateFilteredAssignmentList(Predicate<Assignment> predicate) {
+        requireNonNull(predicate);
+        filteredAssignments.setPredicate(predicate);
     }
 
     @Override

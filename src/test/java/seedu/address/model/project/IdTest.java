@@ -14,23 +14,23 @@ public class IdTest {
     }
 
     @Test
-    public void constructor_invalidName_throwsIllegalArgumentException() {
+    public void constructor_invalidId_throwsIllegalArgumentException() {
         String invalidId = "";
         assertThrows(IllegalArgumentException.class, () -> new Id(invalidId));
     }
 
     @Test
     public void isValidId() {
-        // null name
+        // null id
         assertThrows(NullPointerException.class, () -> Id.isValidId(null));
 
-        // invalid name
+        // invalid id
         assertFalse(Id.isValidId("")); // empty string
         assertFalse(Id.isValidId(" ")); // spaces only
         assertFalse(Id.isValidId("^")); // only non-alphanumeric characters
         assertFalse(Id.isValidId("5252*")); // contains non-alphanumeric characters
 
-        // valid name
+        // valid id
         assertTrue(Id.isValidId("abac gjku")); // alphabets only
         assertTrue(Id.isValidId("12345")); // numbers only
         assertTrue(Id.isValidId("kk12658j")); // alphanumeric characters
