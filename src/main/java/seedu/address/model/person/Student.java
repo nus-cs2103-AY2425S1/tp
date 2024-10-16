@@ -61,7 +61,7 @@ public class Student extends Person {
 
         Student otherStudent = (Student) other;
         return super.equals(otherStudent) && parentName.equals(otherStudent.parentName)
-                &&parentPhone.equals(otherStudent.parentPhone) && parentEmail.equals(otherStudent.parentEmail);
+                && parentPhone.equals(otherStudent.parentPhone) && parentEmail.equals(otherStudent.parentEmail);
     }
 
     @Override

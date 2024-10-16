@@ -44,15 +44,6 @@ class JsonAdaptedPerson {
         }
     }
 
-    @JsonCreator
-    public static JsonAdaptedPerson of(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
-            @JsonProperty("parentEmail") String parentEmail, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
-        //TODO: Add check to check if contact is a student
-        return new JsonAdaptedStudent(name, phone, email, address, parentName, parentPhone, parentEmail, tags);
-    }
-
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
@@ -62,6 +53,15 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
+    }
+
+    @JsonCreator
+    public static JsonAdaptedPerson of(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+            @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
+            @JsonProperty("parentEmail") String parentEmail, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+        //TODO: Add check to check if contact is a student
+        return new JsonAdaptedStudent(name, phone, email, address, parentName, parentPhone, parentEmail, tags);
     }
 
     public static JsonAdaptedPerson of(Person source) {
