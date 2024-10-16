@@ -19,10 +19,12 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) or find all persons whose phone number contain any of "
             + "the specified phone number and displays them as a list with index numbers.\n"
-            + "Parameters: [KEYWORD] [MORE_KEYWORDS] [num/ PHONE] (either keyword or phone number must be present\n"
+            + "Parameters: [KEYWORD] [MORE_KEYWORDS] [p/ PHONE] (either keyword or phone number must be present\n"
             + "Example: " + COMMAND_WORD + " alice bob\n"
-            + "Example: " + COMMAND_WORD + " num/12345678";
-
+            + "Example: " + COMMAND_WORD + " p/12345678";
+    public static final String NUM_USAGE = COMMAND_WORD + " p/ [PHONE] \n"
+            + "Phone number requires a non-empty number input\n"
+            + "Example: " + COMMAND_WORD + " p/12345678";
     private final NameContainsKeywordsPredicate namePredicate;
     private final TelContainsNumberPredicate numberPredicate;
 

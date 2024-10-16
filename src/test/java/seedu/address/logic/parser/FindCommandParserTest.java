@@ -31,4 +31,14 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
     }
 
+    @Test
+    public void parse_emptyPhone_throwsParseException() {
+        assertParseFailure(parser, "find p/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.NUM_USAGE));
+    }
+
+    @Test
+    public void parse_nonNumberPhone_throwsParseException() {
+        assertParseFailure(parser, "find p/haha", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.NUM_USAGE));
+    }
+
 }
