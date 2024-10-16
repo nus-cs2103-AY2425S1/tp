@@ -39,7 +39,7 @@ public class FindCommand extends Command {
         }
 
         return new CommandResult(
-                String.format("Found %d companies.", filteredCompanies.size())
+                String.format("Found %d companies!", filteredCompanies.size())
                         + "\n" + filteredCompanies.toString());
     }
 
