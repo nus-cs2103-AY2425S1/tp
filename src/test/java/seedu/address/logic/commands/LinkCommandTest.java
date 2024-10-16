@@ -1,9 +1,13 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONCERT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CONCERT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -60,5 +64,39 @@ public class LinkCommandTest {
 
         assertThrows(CommandException.class, () -> linkCommand.execute(modelStub),
                 Messages.MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals() {
+        final LinkCommand standardCommand = new LinkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_CONCERT);
+
+        // same values -> returns true
+        LinkCommand commandWithSameValues = new LinkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_CONCERT);
+        assertTrue(standardCommand.equals(commandWithSameValues));
+
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
+
+        // different types -> returns false
+        assertFalse(standardCommand.equals(new ClearCommand()));
+
+        // different person index -> returns false
+        assertFalse(standardCommand.equals(new LinkCommand(INDEX_SECOND_PERSON, INDEX_FIRST_CONCERT)));
+
+        // different concert index -> returns false
+        assertFalse(standardCommand.equals(new LinkCommand(INDEX_FIRST_PERSON, INDEX_SECOND_CONCERT)));
+    }
+
+    @Test
+    public void toStringMethod() {
+        Index indexP = Index.fromOneBased(1);
+        Index indexC = Index.fromOneBased(2);
+        LinkCommand linkCommand = new LinkCommand(indexP, indexC);
+        String expected = LinkCommand.class.getCanonicalName() + "{indexP=" + indexP + ", indexC="
+                + indexC + "}";
+        assertEquals(expected, linkCommand.toString());
     }
 }
