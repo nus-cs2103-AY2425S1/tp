@@ -118,4 +118,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTaskList(Predicate<Task> predicate);
+
+    /**
+     * Resets the priority level of the specified person to the default level.
+     * @param target The person whose priority level is to be reset.
+     */
+    void resetPersonPriority(Person target);
 }
