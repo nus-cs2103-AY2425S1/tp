@@ -34,7 +34,7 @@ public class ConcertContactTest {
     }
 
     @Test
-    void toStringTest(){
+    void toStringTest() {
         //checks output of toString method in Concert Contact class
         ConcertContact contactTest1 = new ConcertContact(ALICE, COACHELLA);
         String expectedString = ALICE.getName() + " is a " + ALICE.getRole() + " for " + COACHELLA.getName();
