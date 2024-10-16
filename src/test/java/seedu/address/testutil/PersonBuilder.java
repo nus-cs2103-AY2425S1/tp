@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,7 +12,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.task.Task;
-import seedu.address.model.person.task.TaskList;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -35,7 +33,7 @@ public class PersonBuilder {
     private Note note;
     private Set<Subject> subjects;
     private Level level;
-    private TaskList taskList;
+    private TaskListBuilder taskList;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -48,7 +46,7 @@ public class PersonBuilder {
         note = new Note(DEFAULT_NOTE);
         subjects = new HashSet<>();
         level = new Level(DEFAULT_LEVEL);
-        taskList = new TaskList();
+        taskList = new TaskListBuilder();
     }
 
     /**
@@ -62,7 +60,7 @@ public class PersonBuilder {
         note = personToCopy.getNote();
         subjects = new HashSet<>(personToCopy.getSubjects());
         level = personToCopy.getLevel();
-        taskList = personToCopy.getTaskList();
+        taskList = new TaskListBuilder(personToCopy.getTaskList());
     }
 
     /**
@@ -125,13 +123,12 @@ public class PersonBuilder {
      * Sets the {@code TaskList} of the {@code Person} that we are building.
      */
     public PersonBuilder withTaskList(Task ... tasks) {
-        this.taskList = new TaskList();
-        this.taskList.setTasks(Arrays.stream(tasks).toList());
+        this.taskList.withTasks(tasks);
         return this;
     }
 
     public Person build() {
-        return new Person(name, phone, emergencyContact, address, note, subjects, level, taskList);
+        return new Person(name, phone, emergencyContact, address, note, subjects, level, taskList.build());
     }
 
 }
