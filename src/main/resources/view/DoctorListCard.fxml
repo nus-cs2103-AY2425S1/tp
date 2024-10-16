@@ -25,6 +25,7 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
+                <Label fx:id="doctorFlag" styleClass="cell_doctor_flag_label" text="\$doctorFlag" />
                 <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
             </HBox>
             <FlowPane fx:id="tags" />
