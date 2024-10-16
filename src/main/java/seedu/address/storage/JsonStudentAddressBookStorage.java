@@ -12,10 +12,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyAddressBook;
-public class JsonStudentAddressBook implements  AddressBookStorage{
-    private static final Logger logger = LogsCenter.getLogger(JsonStudentAddressBook.class);
+public class JsonStudentAddressBookStorage implements AddressBookStorage{
+    private static final Logger logger = LogsCenter.getLogger(JsonStudentAddressBookStorage.class);
     private Path filePath;
-    public JsonStudentAddressBook(Path filePath) {
+    public JsonStudentAddressBookStorage(Path filePath) {
         this.filePath = filePath;
     }
     public Path getAddressBookFilePath() {
@@ -29,7 +29,8 @@ public class JsonStudentAddressBook implements  AddressBookStorage{
 
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException{
         requireNonNull(filePath);
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(filePath, JsonSerializableAddressBook.class);
+        Optional<JsonSerializableStudentAddressBook> jsonAddressBook =
+                JsonUtil.readJsonFile(filePath, JsonSerializableStudentAddressBook.class);
         if (!jsonAddressBook.isPresent()) {
             return Optional.empty();
         }
@@ -50,7 +51,7 @@ public class JsonStudentAddressBook implements  AddressBookStorage{
         requireNonNull(addressBook);
         requireNonNull(filePath);
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableStudentAddressBook(addressBook), filePath);
     }
 
 }
