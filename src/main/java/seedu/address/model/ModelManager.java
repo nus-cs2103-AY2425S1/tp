@@ -113,6 +113,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void resetDisplayLists() {
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+        updateFilteredVolunteerList(PREDICATE_SHOW_ALL_VOLUNTEERS);
+    }
+
+    @Override
     public void addVolunteer(Volunteer volunteer) {
         addressBook.addVolunteer(volunteer);
         updateFilteredVolunteerList(PREDICATE_SHOW_ALL_VOLUNTEERS);

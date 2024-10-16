@@ -76,6 +76,8 @@ public interface Model {
      */
     void deleteEvent(Event event);
 
+    void resetDisplayLists();
+
     /**
      * Adds the given volunteer.
      * {@code volunteer} must not already exist in the address book.

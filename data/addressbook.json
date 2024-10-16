@@ -1,86 +1,74 @@
 {
-  "volunteers": [
-    {
-      "name": "Alice Wong",
-      "phone": "91234567",
-      "email": "alicewong@example.com",
-      "availableDate": "2023-05-10",
-      "startTimeAvailability": "09:00",
-      "endTimeAvailability": "18:00"
-    },
-    {
-      "name": "Bob Tan",
-      "phone": "98765432",
-      "email": "bobtan@example.com",
-      "availableDate": "2023-06-15",
-      "startTimeAvailability": "10:00",
-      "endTimeAvailability": "16:00"
-    },
-    {
-      "name": "Cathy Lee",
-      "phone": "92345678",
-      "email": "cathylee@example.com",
-      "availableDate": "2023-07-20",
-      "startTimeAvailability": "13:00",
-      "endTimeAvailability": "20:00"
-    },
-    {
-      "name": "David Ng",
-      "phone": "93456789",
-      "email": "davidng@example.com",
-      "availableDate": "2023-08-12",
-      "startTimeAvailability": "08:00",
-      "endTimeAvailability": "12:00"
-    },
-    {
-      "name": "Emily Lim",
-      "phone": "94567890",
-      "email": "emilylim@example.com",
-      "availableDate": "2023-09-01",
-      "startTimeAvailability": "14:00",
-      "endTimeAvailability": "17:00"
-    }
-  ],
-  "events": [
-    {
-      "eventName": "Beach Cleanup",
-      "date": "2023-10-15",
-      "startTime": "08:00",
-      "endTime": "12:00",
-      "location": "East Coast Park",
-      "description": "Annual beach cleaning event"
-    },
-    {
-      "eventName": "Charity Run",
-      "date": "2023-11-05",
-      "startTime": "06:00",
-      "endTime": "11:00",
-      "location": "Marina Bay",
-      "description": "5km run to raise funds for charity"
-    },
-    {
-      "eventName": "Food Donation Drive",
-      "date": "2023-12-12",
-      "startTime": "10:00",
-      "endTime": "15:00",
-      "location": "City Hall",
-      "description": ""
-    },
-    {
-      "eventName": "Tree Planting",
-      "date": "2024-01-25",
-      "startTime": "09:00",
-      "endTime": "13:00",
-      "location": "Bishan Park",
-      "description": "Tree planting event to promote sustainability"
-    },
-    {
-      "eventName": "Blood Donation Drive",
-      "date": "2024-02-14",
-      "startTime": "08:30",
-      "endTime": "16:00",
-      "location": "Red Cross Center",
-      "description": "Organizing a blood donation drive"
-    }
-  ]
+  "volunteers" : [ {
+    "name" : "Alice Wong",
+    "phone" : "91234567",
+    "email" : "alicewong@example.com",
+    "availableDate" : "2023-05-10",
+    "startTimeAvailability" : "09:00",
+    "endTimeAvailability" : "18:00"
+  }, {
+    "name" : "Bob Tan",
+    "phone" : "98765432",
+    "email" : "bobtan@example.com",
+    "availableDate" : "2023-06-15",
+    "startTimeAvailability" : "10:00",
+    "endTimeAvailability" : "16:00"
+  }, {
+    "name" : "Cathy Lee",
+    "phone" : "92345678",
+    "email" : "cathylee@example.com",
+    "availableDate" : "2023-07-20",
+    "startTimeAvailability" : "13:00",
+    "endTimeAvailability" : "20:00"
+  }, {
+    "name" : "David Ng",
+    "phone" : "93456789",
+    "email" : "davidng@example.com",
+    "availableDate" : "2023-08-12",
+    "startTimeAvailability" : "08:00",
+    "endTimeAvailability" : "12:00"
+  }, {
+    "name" : "Emily Lim",
+    "phone" : "94567890",
+    "email" : "emilylim@example.com",
+    "availableDate" : "2023-09-01",
+    "startTimeAvailability" : "14:00",
+    "endTimeAvailability" : "17:00"
+  } ],
+  "events" : [ {
+    "eventName" : "Beach Cleanup",
+    "date" : "2023-10-15",
+    "startTime" : "08:00",
+    "endTime" : "12:00",
+    "location" : "East Coast Park",
+    "description" : "Annual beach cleaning event"
+  }, {
+    "eventName" : "Charity Run",
+    "date" : "2023-11-05",
+    "startTime" : "06:00",
+    "endTime" : "11:00",
+    "location" : "Marina Bay",
+    "description" : "5km run to raise funds for charity"
+  }, {
+    "eventName" : "Food Donation Drive",
+    "date" : "2023-12-12",
+    "startTime" : "10:00",
+    "endTime" : "15:00",
+    "location" : "City Hall",
+    "description" : ""
+  }, {
+    "eventName" : "Tree Planting",
+    "date" : "2024-01-25",
+    "startTime" : "09:00",
+    "endTime" : "13:00",
+    "location" : "Bishan Park",
+    "description" : "Tree planting event to promote sustainability"
+  }, {
+    "eventName" : "Blood Donation Drive",
+    "date" : "2024-02-14",
+    "startTime" : "08:30",
+    "endTime" : "16:00",
+    "location" : "Red Cross Center",
+    "description" : "Organizing a blood donation drive"
+  } ]
 }
