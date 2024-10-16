@@ -17,13 +17,14 @@ import seedu.address.logic.commands.EditRentalCommand.EditRentalDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new EditClientCommand object
+ * Parses input arguments and creates a new EditRentalCommandParser object.
  */
 public class EditRentalCommandParser implements Parser<EditRentalCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the EditClientCommand
-     * and returns an EditClientCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * Parses the given {@code String} of arguments in the context of the EditRentalCommandParser
+     * and returns an EditRentalCommandParser object for execution.
+     *
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public EditRentalCommand parse(String args) throws ParseException {
         requireNonNull(args);

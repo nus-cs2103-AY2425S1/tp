@@ -7,7 +7,7 @@
 # TrueRental Developer Guide
 
 <!-- * Table of Contents -->
-<page-nav-print />
+<a id="table-of-contents"/><page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -103,7 +103,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a client).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a [_client_](#glossary-client)).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -176,11 +176,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th client in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th [_client_](#glossary-client) in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new client. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new [_client_](#glossary-client). The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -190,7 +190,7 @@ Step 3. The user executes `add n/David …​` to add a new client. The `add` co
 
 </box>
 
-Step 4. The user now decides that adding the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the [_client_](#glossary-client) was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -246,7 +246,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the [_client_](#glossary-client) being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -274,38 +274,38 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* are letting agents
-* has a need to manage a significant number of client's personal and rental information
+* are [_letting agents_](#glossary-letting-agent)
+* has a need to manage a significant number of [_client_](#glossary-client)'s personal and [_rental information_](#glossary-rental-information)
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage many client's personal and rental information, such as name, phone number, address, rental start date, rental end date, monthly rent amount, etc.
+**Value proposition**: manage many [_client_](#glossary-client)'s personal and [_rental information_](#glossary-rental-information), such as name, phone number, address, rental start date, rental end date, monthly rent amount, etc.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                 | I can …​                                  | So that I can…​                                                        |
-|----------|----------------------------|----------------------------------------------|---------------------------------------------------------------------------|
-| `* * *`  | user                       | save a client's personal information         | contact them easily                                                       |
-| `* * *`  | user                       | save a client's rental information           | view their respective properties                                          |
-| `* * *`  | user                       | edit a client's personal information         | modify their personal details                                             |
-| `* * *`  | user                       | edit a client's rental information           | modify their property's rental information                                |
-| `* * * ` | user                       | delete a client's personal information       | clear my application when he/she is no longer my client                   |
-| `* * *`  | user                       | delete a client's rental information         | clear my application when the property is not owned by my client anymore  |
-| `* * *`  | user                       | find a client's personal information         | find the client easily                                                    |
-| `* * *`  | user                       | find a client's rental information           | find the client's property easily                                         |
-| `* *`    | user                       | colour code a client                         | differentiate more important clients                                      |
-| `* *`    | user                       | attach files to a client                     | attach important contracts to the respective clients                      |
-| `* *`    | user                       | assign tags to clients                       | differentiate clients by any interesting factors                          |
-| `* *`    | user                       | autofill CLI commands                        | easily assess the command line without typing the command again           |
-| `* *`    | user                       | export all client's personal information     | save it somewhere else                                                    |
-| `* *`    | user                       | export a specific client's rental information | save it somewhere else                                                    |
-| `*`      | user                       | send emails to a client                      | schedule meetings with them                                               |
-| `*`      | user                       | set reminders for a client                   | remember my schedule with individual client                               |
-| `*`      | user                       | lock my application                          | protect my data                                                           |
+| Priority | As a …​                 | I can …​                                       | So that I can…​                                                         |
+|----------|----------------------------|---------------------------------------------------|----------------------------------------------------------------------------|
+| `* * *`  | user                       | save a _client_'s personal information            | contact them easily                                                        |
+| `* * *`  | user                       | save a _client_'s _rental information_            | view their respective properties                                           |
+| `* * *`  | user                       | edit a _client_'s personal information            | modify their personal details                                              |
+| `* * *`  | user                       | edit a _client_'s _rental information_            | modify their property's _rental information_                               |
+| `* * * ` | user                       | delete a _client_'s personal information          | clear my application when he/she is no longer my _client_                  |
+| `* * *`  | user                       | delete a _client_'s _rental information_          | clear my application when the property is not owned by my _client_ anymore |
+| `* * *`  | user                       | find a _client_'s personal information            | find the _client_ easily                                                   |
+| `* * *`  | user                       | find a _client_'s _rental information_            | find the _client_'s property easily                                        |
+| `* *`    | user                       | colour code a _client_                            | differentiate more important _clients_                                     |
+| `* *`    | user                       | attach files to a _client_                        | attach important contracts to the respective _clients_                     |
+| `* *`    | user                       | assign tags to _clients_                          | differentiate _clients_ by any interesting factors                         |
+| `* *`    | user                       | autofill CLI commands                             | easily assess the command line without typing the command again            |
+| `* *`    | user                       | export all _client_'s personal information        | save it somewhere else                                                     |
+| `* *`    | user                       | export a specific _client_'s _rental information_ | save it somewhere else                                                     |
+| `*`      | user                       | send emails to a _client_                         | schedule meetings with them                                                |
+| `*`      | user                       | set reminders for a _client_                      | remember my schedule with individual _client_                              |
+| `*`      | user                       | lock my application                               | protect my data                                                            |
 
 *{More to be added}*
 
@@ -313,14 +313,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TrueRental` system and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a client**
+**Use case: Add a [_client_](#glossary-client)**
 
 **MSS**
 
-1.  User chooses to add a client
-2.  User enters client's information
+1.  User chooses to add a _client_
+2.  User enters _client_'s information
 3.  System validates user input
-4.  System adds new client information
+4.  System adds new _client_ information
 5.  System notifies user upon successful add operation
 
     Use case ends.
@@ -335,19 +335,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case continues from step 3.
 
-* 3b. System detects error in client's information
+* 3b. System detects error in _client_'s information
 
-    * 3b1. System prompts error for invalid client's information
-    * 3b2. User enters new client's information
-    * Steps 3b1-3b2 are repeated until client's information is valid
+    * 3b1. System prompts error for invalid _client_'s information
+    * 3b2. User enters new _client_'s information
+    * Steps 3b1-3b2 are repeated until _client_'s information is valid
 
     Use case continues from step 3.
 
-* 3c. System detects duplicated client's information
+* 3c. System detects duplicated _client_'s information
 
-    * 3c1. System prompts error for duplicated client's information
-    * 3c2. User enters new non-duplicated client's information
-    * Steps 3c1-3c2 are repeated until client's information is valid
+    * 3c1. System prompts error for duplicated _client_'s information
+    * 3c2. User enters new non-duplicated _client_'s information
+    * Steps 3c1-3c2 are repeated until _client_'s information is valid
 
     Use case continues from step 4.
 
@@ -355,15 +355,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Add a client's rental information**
+**Use case: Add a [_client_](#glossary-client)'s [_rental information_](#glossary-rental-information)**
 
 **MSS**
 
-1.  User chooses to add rental information
-2.  User selects client
-3.  User enters client's rental information
+1.  User chooses to add _rental information_
+2.  User selects _client_
+3.  User enters _client_'s _rental information_
 4.  System validates user input
-5.  System updates new client information
+5.  System updates new _client_ information
 6.  System notifies user upon successful add operation
 
     Use case ends.
@@ -378,27 +378,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case continues from step 4.
 
-* 4b. System detects error for invalid client
+* 4b. System detects error for invalid _client_
 
-    * 4b1. System prompts error for invalid client
-    * 4b2. User selects new client
-    * Steps 4b1-4b2 are repeated until selected client is valid
-
-    Use case continues from step 4.
-
-* 4c. System detects error in client's rental information
-
-    * 4c1. System prompts error for invalid client's rental information
-    * 4c2. User enters new client's rental information
-    * Steps 4c1-4c2 are repeated until client's rental information is valid
+    * 4b1. System prompts error for invalid _client_
+    * 4b2. User selects new _client_
+    * Steps 4b1-4b2 are repeated until selected _client_ is valid
 
     Use case continues from step 4.
 
-* 4d. System detects duplicated client's rental information
+* 4c. System detects error in _client_'s _rental information_
 
-    * 4d1. System prompts error for duplicated client's rental information
-    * 4d2. User enters new non-duplicated client's rental information
-    * Steps 4d1-4d2 are repeated until client's rental information is valid
+    * 4c1. System prompts error for invalid _client_'s _rental information_
+    * 4c2. User enters new _client_'s _rental information_
+    * Steps 4c1-4c2 are repeated until _client_'s _rental information_ is valid
+
+    Use case continues from step 4.
+
+* 4d. System detects duplicated _client_'s _rental information_
+
+    * 4d1. System prompts error for duplicated _client_'s _rental information_
+    * 4d2. User enters new non-duplicated _client_'s _rental information_
+    * Steps 4d1-4d2 are repeated until _client_'s _rental information_ is valid
 
     Use case continues from step 5.
 
@@ -406,14 +406,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Find a client**
+**Use case: Find a [_client_](#glossary-client)**
 
 **MSS**
 
-1.  User chooses to find a client
+1.  User chooses to find a _client_
 2.  User enters keyword
 3.  System validates user input
-4.  System filters list of client based on keyword
+4.  System filters list of _client_ based on keyword
 
     Use case ends.
 
@@ -443,14 +443,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Edit a client's information**
+**Use case: Edit a [_client_](#glossary-client)'s information**
 
 **MSS**
 
-1.  User chooses to edit a client's information.
-2.  User enters the client information that he / she wants to update.
+1.  User chooses to edit a _client_'s information.
+2.  User enters the _client_ information that he / she wants to update.
 3.  System validates user input.
-4.  System updates the client's information as requested.
+4.  System updates the _client_'s information as requested.
 5.  System notifies user for successful modification.
 
     Use case ends.
@@ -463,34 +463,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a2. User enters new instruction.
     * Steps 3a1-3a2 are repeated until the instruction is valid.
 
-  Use case resumes from step 3.
+    Use case resumes from step 3.
 
-* 3b. System detects error for invalid client information.
+* 3b. System detects error for invalid _client_ information.
 
-    * 3b1. System prompts error for invalid client information.
-    * 3b2. User enters new client information.
-    * Steps 3b1-3b2 are repeated until the client information is valid.
+    * 3b1. System prompts error for invalid _client_ information.
+    * 3b2. User enters new _client_ information.
+    * Steps 3b1-3b2 are repeated until the _client_ information is valid.
 
-  Use case resumes from step 3.
+    Use case resumes from step 3.
 
-* 4a. System fails to update the client's information.
+* 4a. System fails to update the _client_'s information.
 
     * 4a1. System prompts user that edit has failed.
 
-  Use case resumes from step 1 or user choose not to proceed and use case ends.
+    Use case resumes from step 1 or user choose not to proceed and use case ends.
 
 * *a. At any time, User chooses not to proceed with the operation.
 
-  Use case ends.
+    Use case ends.
 
-**Use case: Edit a client's rental information**
+**Use case: Edit a [_client_](#glossary-client)'s [_rental information_](#glossary-rental-information)**
 
 **MSS**
 
-1.  User chooses to edit a client's rental information.
-2.  User enters the rental information that he / she wants to update.
+1.  User chooses to edit a _client_'s _rental information_.
+2.  User enters the _rental information_ that he / she wants to update.
 3.  System validates user input.
-4.  System updates the client's rental information as requested.
+4.  System updates the _client_'s _rental information_ as requested.
 5.  System notifies user for successful modification.
 
     Use case ends.
@@ -503,36 +503,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a2. User enters new instruction.
     * Steps 3a1-3a2 are repeated until the instruction is valid.
 
-  Use case resumes from step 3.
+    Use case resumes from step 3.
 
-* 3b. System detects error for invalid rental information.
+* 3b. System detects error for invalid _rental information_.
 
-    * 3b1. System prompts error for invalid rental information.
-    * 3b2. User enters new rental information.
-    * Steps 3b1-3b2 are repeated until the rental information is valid.
+    * 3b1. System prompts error for invalid _rental information_.
+    * 3b2. User enters new _rental information_.
+    * Steps 3b1-3b2 are repeated until the _rental information_ is valid.
+  
+    Use case resumes from step 3.
 
-  Use case resumes from step 3.
+* 4a. System fails to update the _client_'s _rental information_.
 
-* 4a. System fails to update the client's rental information.
+    * 4a1. System prompts user that edit has failed.
 
-    * 3a1. System prompts user that edit has failed.
-
-  Use case resumes from step 1 or user choose not to proceed and use case ends.
+    Use case resumes from step 1 or user choose not to proceed and use case ends.
 
 * *a. At any time, User chooses not to proceed with the operation.
 
-  Use case ends.
+    Use case ends.
 
 
-**Use case: Delete a client**
+**Use case: Delete a [_client_](#glossary-client)**
 
 **MSS**
 
-1.  User chooses to delete a client and all related rental information
-2.  User types in a command consisting the index of the client
+1.  User chooses to delete a _client_ and all related _rental information_
+2.  User types in a command consisting the index of the _client_
 3.  System prompts the user for confirmation
 4.  User confirms the deletion
-5.  System deletes that client and all related rental information
+5.  System deletes that _client_ and all related _rental information_
 
     Use case ends.
 
@@ -551,15 +551,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 
-**Use case: Delete a rental information from a client**
+**Use case: Delete a [_rental information_](#glossary-rental-information) from a [_client_](#glossary-client)**
 
 **MSS**
 
-1.  User chooses to delete a specific rental information from a client
-2.  User types in a command consisting the index of the client and rental information
+1.  User chooses to delete a specific _rental information_ from a _client_
+2.  User types in a command consisting the index of the _client_ and _rental information_
 3.  System prompts the user for confirmation
 4.  User confirms the deletion
-5.  System deletes that rental information
+5.  System deletes that _rental information_
 
     Use case ends.
 
@@ -582,8 +582,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
+1.  Should work on any [_mainstream OS_](#glossary-mainstream-os) as long as it has Java `17` or above installed.
+2.  Should be able to hold up to 1000 [_clients_](#glossary-client) without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  A user should be able to see clearly with reasonably large texts.
 5.  The user interface should be simple, functional, and visually inoffensive to the majority of users.
@@ -594,15 +594,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **User**: A letting agent that is using TrueRental to manage the contact information of their clients
-* **Client**: An individual that is renting a property from a letting agent
-* **Letting agent**: An individual that facilitates a property rental agreement
-* **System**: TrueRental desktop application
-* **Client's information**: A client's information containing name, phone number and email, not meant to be shared with others.
-* **Client's rental information**: A client's rental information containing address, rental start date, rental end date, rent due date, monthly rent amount, deposit amount, tenant list, not meant to be shared with others.
-* **MSS**: Main Success Scenario.
+* <a id="glossary-mainstream-os"/>**Mainstream OS**: Windows, Linux, Unix, MacOS
+* <a id="glossary-private-contact-detail"/>**Private contact detail**: A contact detail that is not meant to be shared with others
+* <a id="glossary-user"/>**User**: A letting agent that is using TrueRental to manage the contact information of their clients
+* <a id="glossary-client"/>**Client**: An individual that is renting a property from a letting agent
+* <a id="glossary-letting-agent"/>**Letting agent**: An individual that facilitates a property rental agreement
+* <a id="glossary-system"/>**System**: TrueRental desktop application
+* <a id="glossary-clients-information"/>**Client's information**: A client's information containing name, phone number and email, not meant to be shared with others.
+* <a id="glossary-rental-information"/>**Client's rental information**: A client's rental information containing address, rental start date, rental end date, rent due date, monthly rent amount, deposit amount, tenant list, not meant to be shared with others.
+* <a id="glossary-mss"/>**MSS**: Main Success Scenario.
+
+[Back to top](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -633,17 +636,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a client
+### Deleting a [_client_](#glossary-client)
 
-1. Deleting a client while all clients are being shown
+1. Deleting a _client_ while all _clients_ are being shown
 
-   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+   1. Prerequisites: List all _clients_ using the `list` command. Multiple _clients_ in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No _client_ is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.

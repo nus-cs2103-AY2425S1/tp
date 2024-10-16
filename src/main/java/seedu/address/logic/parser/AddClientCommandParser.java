@@ -75,5 +75,4 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
     private boolean isEmailPresent(ArgumentMultimap argumentMultimap, Prefix prefix) {
         return argumentMultimap.getValue(prefix).isPresent();
     }
-
 }

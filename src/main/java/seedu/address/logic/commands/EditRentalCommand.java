@@ -74,8 +74,9 @@ public class EditRentalCommand extends Command {
     private final EditRentalDescriptor editRentalDescriptor;
 
     /**
-     * @param clientIndex of the client in the filtered client list to edit
-     * @param editRentalDescriptor details to edit the client with
+     * @param clientIndex Index of the client in the filtered client list to edit.
+     * @param rentalIndex Index of the rental information for the client specified by clientIndex.
+     * @param editRentalDescriptor details to edit the rental information with.
      */
     public EditRentalCommand(Index clientIndex, Index rentalIndex, EditRentalDescriptor editRentalDescriptor) {
         requireNonNull(clientIndex);
@@ -117,7 +118,7 @@ public class EditRentalCommand extends Command {
 
     /**
      * Creates and returns a {@code Client} with the details of {@code clientToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * edited with {@code editRentalDescriptor}.
      */
     private static Client createEditedPerson(Index index, Client clientToEdit,
                                              EditRentalDescriptor editRentalDescriptor) {
@@ -155,13 +156,13 @@ public class EditRentalCommand extends Command {
         return new ToStringBuilder(this)
                 .add("client index", clientIndex)
                 .add("rental index", rentalIndex)
-                .add("editPersonDescriptor", editRentalDescriptor)
+                .add("editRentalDescriptor", editRentalDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to edit the client with. Each non-empty field value will replace the
-     * corresponding field value of the client.
+     * Stores the details to edit the rental information with. Each non-empty field value will replace the
+     * corresponding field value of the rental information.
      */
     public static class EditRentalDescriptor {
         private Address address;
@@ -176,7 +177,6 @@ public class EditRentalCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
         public EditRentalDescriptor(EditRentalDescriptor toCopy) {
             setAddress(toCopy.address);
@@ -197,18 +197,17 @@ public class EditRentalCommand extends Command {
         }
 
         /**
-         * Edits the rental information at the given index in the given list
-         * with the given {@code EditRentalDescriptor}.
-         * Returns the updated list of rental information.
+         * Updates the list of rental information by replacing an existing rental
+         * entry with the edited version specified by {@code EditRentalDescriptor}.
          *
-         * @param index index of the rental information to edit
-         * @param currentList list of rental information
-         * @param editRentalDescriptor descriptor to edit the rental information with
-         * @return updated list, with the edited rental information
+         * @param index Index of the rental information to be updated in the current list.
+         * @param currentList The current list of rental information to be updated.
+         * @param editRentalDescriptor Contains the new details for the rental information to be updated.
+         * @return A new list of rental information with the specified entry updated (if any).
          */
-        public static List<RentalInformation> updateRentalInformation(Index index,
-                                                                      List<RentalInformation> currentList,
-                                                                      EditRentalDescriptor editRentalDescriptor) {
+        public static List<RentalInformation> updateRentalInformationList(Index index,
+                                                                         List<RentalInformation> currentList,
+                                                                         EditRentalDescriptor editRentalDescriptor) {
             List<RentalInformation> newList = new ArrayList<>(currentList);
             RentalInformation targetRentalInformation = newList.get(index.getZeroBased());
             RentalInformation editRentalInformation = editRentalDescriptor.getRentalInformationEquivalent(
@@ -221,12 +220,20 @@ public class EditRentalCommand extends Command {
             return newList;
         }
 
+        /**
+         * Creates a {@code RentalInformation} object that is equivalent to the target
+         * rental information, but with updated fields that are present in this descriptor.
+         *
+         * @param targetRentalInformation The target rental information to be updated (if any).
+         * @return A new {@code RentalInformation} object with updated values based on this
+         *         descriptor, retaining values from the target if no updates present in this descriptor.
+         */
         private RentalInformation getRentalInformationEquivalent(RentalInformation targetRentalInformation) {
             Address updatedAddress = this.getAddress().orElse(targetRentalInformation.getAddress());
-            RentalDate updatedRentalStartDate = this.getRentalEndDate().orElse(
-                    targetRentalInformation.getRentalEndDate());
-            RentalDate updatedRentalEndDate = this.getRentalStartDate().orElse(
+            RentalDate updatedRentalStartDate = this.getRentalStartDate().orElse(
                     targetRentalInformation.getRentalStartDate());
+            RentalDate updatedRentalEndDate = this.getRentalEndDate().orElse(
+                    targetRentalInformation.getRentalEndDate());
             RentDueDate updatedRentDueDate = this.getRentDueDate().orElse(targetRentalInformation.getRentDueDate());
             MonthlyRent updatedMonthlyRent = this.getMonthlyRent().orElse(targetRentalInformation.getMonthlyRent());
             Deposit updatedDeposit = this.getDeposit().orElse(targetRentalInformation.getDeposit());
