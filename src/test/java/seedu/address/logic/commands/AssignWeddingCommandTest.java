@@ -91,4 +91,19 @@ public class AssignWeddingCommandTest {
         AssignWeddingCommand command2 = new AssignWeddingCommand(INDEX_SECOND_PERSON, weddingsToRemove2);
         assertFalse(command1.equals(command2));
     }
+
+    @Test
+    public void forceAssignWedding_success() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Wedding unseenWedding = new Wedding(new WeddingName("UNKNOWN WEDDING"));
+        HashSet<Wedding> weddingsToAdd = new HashSet<>(Arrays.asList(unseenWedding));
+        AssignWeddingCommand assignWeddingCommand = new AssignWeddingCommand(
+                INDEX_FIRST_PERSON, weddingsToAdd, true);
+        String expectedMessage = String.format(
+                Messages.MESSAGE_ADD_WEDDING_SUCCESS,
+                unseenWedding.getWeddingName().toString(),
+                personToEdit.getName().toString());
+        CommandTestUtil.assertCommandSuccess(assignWeddingCommand, model, expectedMessage, model);
+
+    }
 }
