@@ -6,8 +6,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.supplier.Supplier;
-import seedu.address.model.supplier.SupplierStatus;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.SupplierStatus;
 
 
 /**
@@ -42,18 +42,17 @@ public class MarkSupplierCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);
         }
 
-        Supplier supplierToMark = model.getFilteredSupplierList().get(targetIndex.getZeroBased());
-        Supplier markedSupplier = new Supplier(
+        Person supplierToMark = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        Person markedSupplier = new Person(
                 supplierToMark.getName(),
                 supplierToMark.getPhone(),
                 supplierToMark.getEmail(),
-                supplierToMark.getCompany(),
-                supplierToMark.getProduct(),
-                status
-        );
+                supplierToMark.getAddress(),
+                supplierToMark.getTags(),
+                supplierToMark.getStatus());
 
-        model.setSupplier(supplierToMark, markedSupplier);
-        model.updateFilteredSupplierList(Model.PREDICATE_SHOW_ALL_SUPPLIERS);
+        model.setPerson(supplierToMark, markedSupplier);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_MARK_SUPPLIER_SUCCESS, supplierToMark, status));
     }
 

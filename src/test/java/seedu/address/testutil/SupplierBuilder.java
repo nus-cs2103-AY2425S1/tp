@@ -6,7 +6,7 @@ import seedu.address.model.supplier.Supplier;
 import seedu.address.model.supplier.SupplierContact;
 import seedu.address.model.supplier.SupplierEmail;
 import seedu.address.model.supplier.SupplierName;
-import seedu.address.model.supplier.SupplierStatus;
+import seedu.address.model.person.SupplierStatus;
 
 /**
  * A utility class to help with building Supplier objects.

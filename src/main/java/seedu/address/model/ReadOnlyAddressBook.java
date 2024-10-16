@@ -17,6 +17,5 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
     ObservableList<Delivery> getDeliveryList();
-    ObservableList<Supplier> getSupplierList();
-    ObservableList<Product> getProductList();
+
 }

@@ -1,4 +1,4 @@
-package seedu.address.model.supplier;
+package seedu.address.model.person;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 

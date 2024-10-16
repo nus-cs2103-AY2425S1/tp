@@ -16,7 +16,6 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Delivery> PREDICATE_SHOW_ALL_DELIVERIES = unused -> true;
-    Predicate<Supplier> PREDICATE_SHOW_ALL_SUPPLIERS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -124,30 +123,4 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredDeliveryList(Predicate<Delivery> predicate);
-
-
-    /**
-     * Deletes the given supplier.
-     * The supplier must exist in the address book.
-     * @param target
-     */
-    void deleteSupplier(Supplier target);
-
-    /**
-     * Replace the given supplier {@code target} with {@code updatedSupplier}.
-     * {@code target} must exist in the address book.
-     * The supplier identity of {@code updatedSupplier} must not be the same as
-     * another existing supplier in the address book.
-     */
-    void setSupplier(Supplier target, Supplier updatedSupplier);
-
-    /**
-     * Updates the filter of the filtered supplier list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredSupplierList(Predicate<Supplier> predicate);
-    /**
-     * Returns an unmodifiable view of the filtered supplier list
-     */
-    ObservableList<Supplier> getFilteredSupplierList();
 }

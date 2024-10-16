@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.supplier.Supplier;
-import seedu.address.model.supplier.SupplierStatus;
+import seedu.address.model.person.SupplierStatus;
 import seedu.address.testutil.TypicalSuppliers;
 
 
