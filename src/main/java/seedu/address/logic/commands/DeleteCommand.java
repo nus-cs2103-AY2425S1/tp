@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
             + "This will delete the person identified by the index number used in the displayed person list.\n";
 
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "You have deleted a person: %1$s";
 
     private final Index targetIndex;
 
@@ -38,18 +38,22 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (lastShownList.size() == 0) {
-            throw new CommandException(Messages.MESSAGE_DELETE_EMPTY_LIST);
+        assert lastShownList != null;
+
+        // validation check on list and index
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_DELETE_EMPTY_ERROR);
         }
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_DELETE_UPPERBOUND_LIST);
-        }
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_DELETE_UPPERBOUND_ERROR);
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        assert personToDelete != null;
+
         model.deletePerson(personToDelete);
+
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
