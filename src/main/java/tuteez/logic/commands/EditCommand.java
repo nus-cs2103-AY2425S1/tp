@@ -1,6 +1,7 @@
 package tuteez.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tuteez.logic.commands.AddCommand.MESSAGE_DUPLICATE_LESSON;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tuteez.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
@@ -24,10 +25,10 @@ import tuteez.logic.commands.exceptions.CommandException;
 import tuteez.model.Model;
 import tuteez.model.person.Address;
 import tuteez.model.person.Email;
-import tuteez.model.person.lesson.Lesson;
 import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
+import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
 
 /**
@@ -54,8 +55,6 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This time slot is already taken by another student" +
-            " please retype command";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
