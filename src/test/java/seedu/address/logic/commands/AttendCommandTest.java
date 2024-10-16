@@ -122,7 +122,7 @@ public class AttendCommandTest {
 
         // Act
         String expectedString = "Student: " + studentId + "\n"
-                + "Date: " + date.toString() + "\n"
+                + "Date: " + sdf.format(date) + "\n"
                 + "Tutorial ID: " + tutorialClass;
 
         // Assert

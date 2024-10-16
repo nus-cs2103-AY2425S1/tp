@@ -1,11 +1,13 @@
 package seedu.address.ui;
 
 
+import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.student.Student;
+import seedu.address.model.tut.TutDate;
 
 /**
  * A UI component that displays information of a {@code Student}.
@@ -47,6 +49,20 @@ public class StudentCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         studentId.setText(student.getStudentId().value);
         tutorialClass.setText(student.getTutorialClass().value);
+        attendance.setText(student.getPresentDates().toString());
+
+        // Listen for changes in the presentDates property
+        student.presentDatesProperty().addListener((observable, oldValue, newValue) -> {
+            updateAttendanceLabel();
+        });
+
+        // Listen for changes in the dates set within presentDates
+        student.getPresentDates().getDates().addListener((SetChangeListener<TutDate>) change -> {
+            updateAttendanceLabel();
+        });
+    }
+
+    private void updateAttendanceLabel() {
         attendance.setText(student.getPresentDates().toString());
     }
 }

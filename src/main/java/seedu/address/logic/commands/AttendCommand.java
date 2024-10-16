@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCEDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALCLASS;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -66,7 +67,8 @@ public class AttendCommand extends Command {
 
     @Override
     public String toString() {
-        return "Student: " + studentId.toString() + "\n" + "Date: " + tutDate.toString() + "\n"
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        return "Student: " + studentId.toString() + "\n" + "Date: " + sdf.format(tutDate) + "\n"
                 + "Tutorial ID: " + tutorialClass.toString();
     }
 

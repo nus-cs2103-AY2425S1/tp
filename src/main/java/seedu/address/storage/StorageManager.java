@@ -22,7 +22,7 @@ public class StorageManager implements Storage {
     private final AddressBookStorage addressBookStorage;
     private final UserPrefsStorage userPrefsStorage;
     private final TutorialStorage tutorialStorage;
-    private AssignmentStorage assignmentStorage;
+    private final AssignmentStorage assignmentStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage}, {@code UserPrefStorage}

@@ -2,12 +2,12 @@ package seedu.address.model.student;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableSet;
 import seedu.address.model.tut.TutDate;
+
 /**
  * A class representing a collection of {@link TutDate} objects.
  * Provides methods to add dates, retrieve an unmodifiable list of dates, and to compare
@@ -15,16 +15,16 @@ import seedu.address.model.tut.TutDate;
  */
 public class PresentDates {
 
-    private final Set<TutDate> dates;
+    private final ObservableSet<TutDate> dates;
 
     /**
-     * Constructs a {@code PresentDates} object with an initial list of {@link TutDate} objects.
+     * Constructs a {@code PresentDates} object with an initial set of {@link TutDate} objects.
      *
-     * @param dates An {@link ArrayList} of {@link TutDate} objects.
+     * @param dates A {@link Set} of {@link TutDate} objects.
      */
     public PresentDates(Set<TutDate> dates) {
         requireNonNull(dates);
-        this.dates = dates;
+        this.dates = FXCollections.observableSet(dates);
     }
 
     /**
@@ -38,17 +38,21 @@ public class PresentDates {
     }
 
     /**
-     * Returns an unmodifiable list of {@link TutDate} objects in the collection.
+     * Returns an unmodifiable observable set of {@link TutDate} objects in the collection.
      *
-     * @return A {@link List} of {@link TutDate} objects.
+     * @return An unmodifiable {@link ObservableSet} of {@link TutDate} objects.
      */
-    public Set<TutDate> getList() {
-        return Collections.unmodifiableSet(dates);
+    public ObservableSet<TutDate> getList() {
+        return FXCollections.unmodifiableObservableSet(dates);
     }
 
     public void setAttendance(TutDate tutDate) {
         requireNonNull(tutDate);
         dates.add(tutDate);
+    }
+
+    public ObservableSet<TutDate> getDates() {
+        return dates;
     }
 
     /**

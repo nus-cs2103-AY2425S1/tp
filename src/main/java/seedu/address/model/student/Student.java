@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tut.TutDate;
@@ -23,7 +25,7 @@ public class Student {
     private final StudentId studentId;
     private final TutorialClass tutorialClass;
     private final Set<Tag> tags = new HashSet<>();
-    private final PresentDates presentDates;
+    private final ObjectProperty<PresentDates> presentDates;
 
     /**
      * Every field must be present and not null.
@@ -32,7 +34,8 @@ public class Student {
         requireAllNonNull(name, studentId, tutorialClass);
         this.name = name;
         this.tags.addAll(tags);
-        this.presentDates = presentDates != null ? presentDates : new PresentDates(new HashSet<>());
+        this.presentDates = new
+                SimpleObjectProperty<>(presentDates != null ? presentDates : new PresentDates(new HashSet<>()));
         this.studentId = studentId;
         this.tutorialClass = tutorialClass;
     }
@@ -41,7 +44,7 @@ public class Student {
         return name;
     }
     public PresentDates getPresentDates() {
-        return presentDates;
+        return presentDates.get();
     }
 
     public StudentId getStudentId() {
@@ -66,7 +69,7 @@ public class Student {
     }
 
     public void setAttendance(TutDate tutDate) {
-        presentDates.setAttendance(tutDate);
+        presentDates.get().setAttendance(tutDate);
     }
     /**
      * Returns true if both students have the same student id.
@@ -117,4 +120,7 @@ public class Student {
                 .toString();
     }
 
+    public ObjectProperty<PresentDates> presentDatesProperty() {
+        return presentDates;
+    }
 }
