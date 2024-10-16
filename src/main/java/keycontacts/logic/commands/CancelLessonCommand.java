@@ -44,6 +44,7 @@ public class CancelLessonCommand extends Command {
     public CancelLessonCommand(Date date, Time startTime, Index index) {
         requireNonNull(date);
         requireNonNull(startTime);
+        requireNonNull(index);
 
         this.date = date;
         this.startTime = startTime;
@@ -97,6 +98,7 @@ public class CancelLessonCommand extends Command {
         return new ToStringBuilder(this)
                 .add("date", date)
                 .add("startTime", startTime)
+                .add("index", index)
                 .toString();
     }
 

@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import keycontacts.logic.parser.exceptions.ParseException;
+import keycontacts.model.lesson.Day;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
@@ -110,6 +111,21 @@ public class ParserUtilTest {
         String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
         Address expectedAddress = new Address(VALID_ADDRESS);
         assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
+    }
+
+    @Test
+    public void parseDay_validDay_success() throws ParseException {
+        assertEquals(new Day("Sunday"), ParserUtil.parseDay("Sunday"));
+    }
+
+    @Test
+    public void parseDay_validDayWithSpaces_success() throws ParseException {
+        assertEquals(new Day("Sunday"), ParserUtil.parseDay("    Sunday    "));
+    }
+
+    @Test
+    public void parseDay_invalidDay_failure() throws ParseException {
+        assertThrows(ParseException.class, Day.MESSAGE_CONSTRAINTS, () -> ParserUtil.parseDay("hello"));
     }
 
 }

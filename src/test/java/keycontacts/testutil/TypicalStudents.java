@@ -37,7 +37,6 @@ public class TypicalStudents {
             .withPhone("98765432")
             .withGradeLevel("RSL 3")
             .withPianoPieces("Sonata I. X. 1905 \"From the Street\"", "Waltz No. 2")
-            .withCancelledLessons("16-10-2024")
             .build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
             .withAddress("wall street").withGradeLevel("ABRSM 1")

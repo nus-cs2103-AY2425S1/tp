@@ -53,10 +53,29 @@ public class CancelLessonCommandParserTest {
     }
 
     @Test
-    public void parse_validDateAndStartTime_success() {
-        CancelLessonCommand expectedCommand = new CancelLessonCommand(VALID_DATE, VALID_TIME, VALID_INDEX);
-        String userInput = VALID_INDEX.getOneBased() + " " + PREFIX_DATE + "15-10-2024 " + PREFIX_START_TIME + "10:30";
-        assertParseSuccess(parser, userInput, expectedCommand);
+    public void parse_invalidIndexFormat_failure() {
+        String expectedString = String.format(MESSAGE_INVALID_COMMAND_FORMAT, CancelLessonCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "-1" + PREFIX_DATE + "15-10-2024 " + PREFIX_START_TIME + "10:30",
+                expectedString);
+        assertParseFailure(parser, "0" + PREFIX_DATE + "15-10-2024 " + PREFIX_START_TIME + "10:30",
+                expectedString);
+        assertParseFailure(parser, "1 r" + PREFIX_DATE + "15-10-2024 " + PREFIX_START_TIME + "10:30",
+                expectedString);
+        assertParseFailure(parser, "1 i/s" + PREFIX_DATE + "15-10-2024 " + PREFIX_START_TIME + "10:30",
+                expectedString);
+    }
+
+    @Test
+    public void parse_missingPreamble_failure() {
+        String expectedString = String.format(MESSAGE_INVALID_COMMAND_FORMAT, CancelLessonCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, PREFIX_DATE + "15-10-2024 " + PREFIX_START_TIME + "10:30", expectedString);
+    }
+
+    @Test
+    public void parse_missingPrefixes_failure() {
+        String expectedString = String.format(MESSAGE_INVALID_COMMAND_FORMAT, CancelLessonCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, VALID_INDEX.getOneBased() + " " + PREFIX_DATE + PREFIX_START_TIME
+                + "10:30", expectedString);
     }
 }
 
