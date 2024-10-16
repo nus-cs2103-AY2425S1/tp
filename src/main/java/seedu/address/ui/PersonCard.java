@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
 /**
@@ -30,21 +31,17 @@ public class PersonCard extends UiPart<Region> {
     private Label name;
     @FXML
     private Label id;
-    @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
-    private Label job;
-    @FXML
-    private Label email;
-    @FXML
-    private Label income;
+    private PersonCardField phone = new PersonCardField();
+    private PersonCardField address = new PersonCardField();
+    private PersonCardField job = new PersonCardField();
+    private PersonCardField email = new PersonCardField();
+    private PersonCardField income = new PersonCardField();
     @FXML
     private Label remark;
     @FXML
     private FlowPane tags;
-
+    @FXML
+    private VBox cardFields;
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -52,30 +49,36 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
+        createFields();
+        createTier();
+    }
+    private void createFields() {
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        job.setText(person.getJob().value);
-        income.setText(person.getIncome().toString());
+        phone.setText("Phone:", person.getPhone().value);
+        address.setText("Address:", person.getAddress().value);
+        email.setText("Email:", person.getEmail().value);
+        job.setText("Job:", person.getJob().value);
+        income.setText("Income:", person.getIncome().toString());
         remark.setText(person.getRemark().value);
+        cardFields.getChildren().addAll(phone, address, email, job, income);
+    }
 
+    private void createTier() {
         // Create a label for the tier tag
         Label tierLabel = new Label(person.getTier().tagName.toString());
 
         // Apply a different style class based on the tier value
         String tier = person.getTier().tagName.toString().toUpperCase();
         switch (tier) {
-        case "GOLD" -> tierLabel.getStyleClass().add("gold-tier");
-        case "SILVER" -> tierLabel.getStyleClass().add("silver-tier");
-        case "BRONZE" -> tierLabel.getStyleClass().add("bronze-tier");
-        case "REJECT" -> tierLabel.getStyleClass().add("reject-tier");
-        default -> tierLabel = null;
+            case "GOLD" -> tierLabel.getStyleClass().add("gold-tier");
+            case "SILVER" -> tierLabel.getStyleClass().add("silver-tier");
+            case "BRONZE" -> tierLabel.getStyleClass().add("bronze-tier");
+            case "REJECT" -> tierLabel.getStyleClass().add("reject-tier");
+            default -> tierLabel = null;
         }
         if (tierLabel != null) {
             // Add the label to the FlowPane
             tags.getChildren().add(tierLabel);
         }
     }
-
 }
