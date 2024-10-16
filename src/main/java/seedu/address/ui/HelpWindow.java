@@ -40,8 +40,9 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String HELP_FINDTAG_COMMAND = "Findtag Command\n"
             + "- Format: findtag TAG [MORE_TAGS]\n"
             + "- Example: findtag HDB Condo\n"
-            + "- Items in the [square brackets] are optional.";
-    private static final String HELP_REMARK_COMMAND = "remark Command\n"
+            + "- Tags are case insensitive.\n"
+            + "- Items in the [square brackets] are optional. Persons with at least one matching tag will be returned.";
+    private static final String HELP_REMARK_COMMAND = "Remark Command\n"
             + "- Format: remark INDEX r/[REMARKS]\n"
             + "- Example: remark 1 r/Prefers high rise apartments\n"
             + "- Items in the [square brackets] are optional.\n"

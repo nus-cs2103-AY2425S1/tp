@@ -126,6 +126,21 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Locating persons by tag: `findtag`
+
+Finds persons whose tags contain any of the given words.
+
+Format: `findtag TAG [MORE_TAGS]`
+
+- The search is case-insensitive. e.g., `HDB` will match `hdb`.
+- The order of the tags does not matter.
+- Persons with at least one matching tag will be returned (i.e., an `OR` search).
+
+Examples:
+
+- `findtag HDB` returns persons tagged with `HDB`.
+- `findtag HDB colleague` returns persons tagged with either `HDB` or `colleague`.
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -227,6 +242,7 @@ _Details coming soon ..._
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                               |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARKS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                        |
+| **Findtag**| `findtag TAG [MORE_TAGS]`<br> e.g., `findtag friend colleague`                                                                                                                    |
 | **List**   | `list`                                                                                                                                                                            |
 | **Help**   | `help`                                                                                                                                                                            |
 | **Remark** | `remark INDEX r/[REMARKS]`                                                                                                                                                        |
