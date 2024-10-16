@@ -34,8 +34,8 @@ public class FindTransactionCommandParser implements Parser<FindTransactionComma
             // remove the first item (index)
             transactionKeywords = Arrays.copyOfRange(transactionKeywords, 1, transactionKeywords.length);
         } catch (ParseException e) {
-            // if index is not provided, default to first index
-            index = Index.fromOneBased(1);
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTransactionCommand.MESSAGE_USAGE));
         }
         return new FindTransactionCommand(index,
                 new TransactionContainsKeywordsPredicate(Arrays.asList(transactionKeywords)));

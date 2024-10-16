@@ -21,10 +21,11 @@ public class FindTransactionCommand extends Command {
     public static final String COMMAND_WORD = "findt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds all transactions whose descriptions contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " food transport";
+            + ": Finds all transactions of the person of specific index whose descriptions contain any of "
+            + "the keywords. (case-insensitive)\n"
+            + "ONLY use this command when you are viewing the person list.\n"
+            + "Parameters: PERSON_INDEX KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " 1 food transport";
 
     private final Index personIndex;
     private final TransactionContainsKeywordsPredicate predicate;
