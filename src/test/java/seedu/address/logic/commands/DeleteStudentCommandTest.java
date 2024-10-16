@@ -21,7 +21,6 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.StudentNumber;
 import seedu.address.testutil.StudentBuilder;
 
 public class DeleteStudentCommandTest {
