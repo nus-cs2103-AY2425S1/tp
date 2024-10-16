@@ -39,7 +39,8 @@ public class TelegramHandleTest {
         assertFalse(TelegramHandle.isValidTelegramHandle("@@peterjack")); // double '@' symbol
         assertFalse(TelegramHandle.isValidTelegramHandle("@peter@jack")); // '@' symbol in telegram handle
         assertFalse(TelegramHandle.isValidTelegramHandle("@pete")); // telegram handle has less than five chars
-        assertFalse(TelegramHandle.isValidTelegramHandle("@peterjackpeterjackpeterjack123456789")); // telegram handle has more than 32 chars
+        assertFalse(TelegramHandle.isValidTelegramHandle(
+                "@peterjackpeterjackpeterjack123456789")); // telegram handle has more than 32 chars
 
         // valid telegram handle
         assertTrue(TelegramHandle.isValidTelegramHandle("@peter_jack")); // underscore in telegram handle
