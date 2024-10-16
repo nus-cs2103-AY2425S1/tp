@@ -65,10 +65,10 @@ public class DeleteApptCommandTest {
                                                    .withGender(targetPerson.getGender().value)
                                                    .withPhone(targetPerson.getPhone().value)
                                                    .withDateOfBirth(targetPerson.getDateOfBirth().value)
-                                                   .withPriority(targetPerson.getPriority().priority)
-                                                   .withTags(targetPerson.getTags()
+                                                   .withPriority(targetPerson.getPriority().getPriority())
+                                                   .withAllergies(targetPerson.getAllergies()
                                                                          .stream()
-                                                                         .map(x -> x.tagName)
+                                                                         .map(x -> x.allergyName)
                                                                          .toArray(String[]::new))
                                                    .withAppointments(newApptSet)
                                                    .build();

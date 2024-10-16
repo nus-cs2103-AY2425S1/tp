@@ -12,8 +12,6 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Priority;
 
-
-
 /**
  * Command to assign or update the priority of a patient in the address book.
  */
@@ -65,7 +63,7 @@ public class PriorityCommand extends Command {
                 Person editedPerson = new Person(
                         person.getName(), person.getPhone(), person.getEmail(),
                         person.getNric(), person.getAddress(), person.getDateOfBirth(),
-                        person.getGender(), person.getTags(), priority, person.getAppointments(),
+                        person.getGender(), person.getAllergies(), priority, person.getAppointments(),
                         person.getMedCons());
                 model.setPerson(person, editedPerson);
                 model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);

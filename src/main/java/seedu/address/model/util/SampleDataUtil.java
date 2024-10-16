@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
@@ -19,7 +20,6 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -35,7 +35,7 @@ public class SampleDataUtil {
                        new Address("Blk 30 Geylang Street 29,#06-40"),
                        new DateOfBirth("1990-01-01"),
                        new Gender("M"),
-                       getTagSet("friends"),
+                       getAllergiesSet("Peanuts"),
                        new Priority(),
                        getAppointmentSet("Dental:2024-12-25:1235-1300"),
                        getMedConSet("tooth decay")
@@ -47,7 +47,7 @@ public class SampleDataUtil {
                        new Address("Blk 30 Lorong 3 Serangoon Gardens,#07-18"),
                        new DateOfBirth("1990-01-01"),
                        new Gender("M"),
-                       getTagSet("colleagues", "friends"),
+                       getAllergiesSet("Peanuts", "Pollen"),
                        new Priority(),
                        getAppointmentSet("Orthopedic:2024-12-01:1200-1300", "Physio:2024-12-01:1500-1600"),
                     getMedConSet("arthritis", "scoliosis")
@@ -59,7 +59,7 @@ public class SampleDataUtil {
                        new Address("Blk 11 Ang Mo Kio Street 74,#11-04"),
                        new DateOfBirth("1990-01-01"),
                        new Gender("M"),
-                       getTagSet("neighbours"),
+                       getAllergiesSet("Peanuts"),
                        new Priority(),
                        Collections.emptySet(),
                        getMedConSet("skill issue")
@@ -71,7 +71,7 @@ public class SampleDataUtil {
                        new Address("Blk 436 Serangoon Gardens Street 26,#16-43"),
                        new DateOfBirth("1990-01-01"),
                        new Gender("M"),
-                       getTagSet("family"),
+                       getAllergiesSet("Peanuts"),
                        new Priority(),
                        getAppointmentSet("OT:2025-01-12:1000-1300",
                                          "PT:2025-02-02:1200-1300",
@@ -85,7 +85,7 @@ public class SampleDataUtil {
                        new Address("Blk 47 Tampines Street 20,#17-35"),
                        new DateOfBirth("1990-01-01"),
                        new Gender("M"),
-                       getTagSet("classmates"),
+                       getAllergiesSet("Pollen"),
                        new Priority(),
                        getAppointmentSet("Dental:2024-10-25:1235-1300"),
                        getMedConSet("cavity")
@@ -97,7 +97,7 @@ public class SampleDataUtil {
                        new Address("Blk 47 Tampines Street 20,#17-35"),
                        new DateOfBirth("1990-01-01"),
                        new Gender("M"),
-                       getTagSet("colleagues"),
+                       getAllergiesSet("Pollen"),
                        new Priority(),
                        Collections.emptySet(),
                        Collections.emptySet()
@@ -114,10 +114,10 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns an allergy set containing the list of strings given.
      */
-    public static Set<Tag> getTagSet(String... strings) {
-        Set<Tag> collect = Arrays.stream(strings).map(Tag::new).collect(Collectors.toSet());
+    public static Set<Allergy> getAllergiesSet(String... strings) {
+        Set<Allergy> collect = Arrays.stream(strings).map(Allergy::new).collect(Collectors.toSet());
         return collect;
     }
 
@@ -130,7 +130,7 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns an allergy set containing the list of strings given.
      */
     public static Set<Appointment> getAppointmentSet(String... strings) {
         return Arrays.stream(strings)

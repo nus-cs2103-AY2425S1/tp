@@ -65,9 +65,11 @@ public class AddApptCommandTest {
                                                   .withGender(targetPerson.getGender().value)
                                                   .withPhone(targetPerson.getPhone().value)
                                                   .withDateOfBirth(targetPerson.getDateOfBirth().value)
-                                                  .withPriority(targetPerson.getPriority().priority)
-                                                  .withTags(targetPerson.getTags().stream().map(x -> x.tagName)
-                                                                        .toArray(String[]::new))
+                                                  .withPriority(targetPerson.getPriority().getPriority())
+                                                  .withAllergies(targetPerson.getAllergies()
+                                                          .stream()
+                                                          .map(x -> x.allergyName)
+                                                          .toArray(String[]::new))
                                                   .withAppointments(currentSerializedAppointmentLists
                                                                             .toArray(String[]::new))
                                                   .build();

@@ -60,8 +60,8 @@ public class Messages {
         builder.append("\nAppointments: ");
         appendWithComma(builder, person.getAppointments());
 
-        builder.append("\nTags: ");
-        appendWithComma(builder, person.getTags());
+        builder.append("\nAllergies: ");
+        appendWithComma(builder, person.getAllergies());
 
         return builder.toString();
     }
