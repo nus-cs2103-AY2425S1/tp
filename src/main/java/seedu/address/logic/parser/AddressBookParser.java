@@ -22,7 +22,6 @@ import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.commands.ViewTasksCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.storage.Storage;
 import seedu.address.ui.UiState;
 
 /**

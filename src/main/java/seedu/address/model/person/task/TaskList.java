@@ -74,7 +74,7 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Converts task list into something Jackson can use
+     * Converts task list into something Jackson can use.
      */
     public List<JsonAdaptedTask> getjsonAdaptedTaskList() {
         return tasks.stream().map(JsonAdaptedTask::new).toList();
@@ -115,6 +115,9 @@ public class TaskList implements Iterable<Task> {
         return String.join("\n", result);
     }
 
+    /**
+     * Returns description of tasks to be displayed to user.
+     */
     public String toDescription() {
         List<String> result = new ArrayList<>();
 

@@ -1,10 +1,13 @@
 package seedu.address.ui;
 
 /**
- * Stores the current state of the UI.
+ * Stores the current state of the UI display.
  */
 public class UiState {
 
+    /**
+     * States of UI display.
+     */
     public enum State {
         Details, Tasks
     }

@@ -49,7 +49,7 @@ public class Task {
     }
 
     public String toDescription() {
-        return taskDescription + " by "+ taskDeadline.toDescription();
+        return taskDescription + " by " + taskDeadline.toDescription();
     }
 
     @Override
