@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private PiChartWindow piChartWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +67,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+
     }
 
     public Stage getPrimaryStage() {
@@ -147,6 +150,17 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    @FXML
+    public void handlePieChart() {
+        piChartWindow = new PiChartWindow();
+        piChartWindow.show();
+    }
+
+
+
+
+
+
     void show() {
         primaryStage.show();
     }
@@ -185,6 +199,14 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+
+            if (commandResult.isShowPieChart()) {
+                handlePieChart();
+            }
+
+
+
+
 
             return commandResult;
         } catch (CommandException | ParseException e) {
