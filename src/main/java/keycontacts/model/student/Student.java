@@ -208,7 +208,7 @@ public class Student {
      * Returns true if the {@code date} and {@code startTime} of {@code regularLesson} match the parameters.
      */
     public boolean matchesLesson(Date date, Time startTime) {
-        return this.getRegularLesson()
+        return this.getRegularLessonOptional()
                 .map(lesson -> lesson.isOnDayAndTime(date.convertToDay(), startTime))
                 .orElse(false);
     }

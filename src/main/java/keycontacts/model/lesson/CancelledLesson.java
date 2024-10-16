@@ -45,6 +45,11 @@ public class CancelledLesson {
     }
 
     @Override
+    public int hashCode() {
+        return lessonDate.hashCode();
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("lessonDate", lessonDate)

@@ -38,6 +38,11 @@ public class Date implements Comparable<Date> {
     }
 
     @Override
+    public int hashCode() {
+        return date.toString().hashCode();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

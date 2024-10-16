@@ -67,7 +67,7 @@ public class CancelLessonCommand extends Command {
         boolean matchesLesson = studentToUpdate.matchesLesson(date, startTime);
 
         if (matchesLesson) {
-            lessonToCancel = studentToUpdate.getRegularLesson().get();
+            lessonToCancel = studentToUpdate.getRegularLesson();
         } else {
             throw new CommandException(String.format(MESSAGE_LESSON_NOT_FOUND, Messages.format(studentToUpdate)));
         }

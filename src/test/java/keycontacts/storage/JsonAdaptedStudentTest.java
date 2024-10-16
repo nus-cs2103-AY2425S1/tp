@@ -88,7 +88,6 @@ public class JsonAdaptedStudentTest {
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, INVALID_ADDRESS, VALID_GRADE_LEVEL, VALID_PIANO_PIECES,
                         EMPTY_REGULAR_LESSON, VALID_CANCELLED_LESSONS);
-                        VALID_REGULAR_LESSON);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }

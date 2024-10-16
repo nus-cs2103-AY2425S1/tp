@@ -78,4 +78,14 @@ public class RegularLessonTest {
         assertEquals(Objects.hash(regularLesson.getLessonDay(), regularLesson.getStartTime(),
                         regularLesson.getEndTime()), regularLesson.hashCode());
     }
+
+    @Test
+    public void isOnDayAndTimeMethod() {
+        RegularLesson regularLesson = ALICE.getRegularLesson();
+        Day lessonDay = new Day("Monday");
+        Time lessonTime = new Time("12:00");
+        assertTrue(regularLesson.isOnDayAndTime(lessonDay, lessonTime));
+        assertFalse(regularLesson.isOnDayAndTime(lessonDay, new Time("09:00")));
+        assertFalse(regularLesson.isOnDayAndTime(new Day("Sunday"), lessonTime));
+    }
 }

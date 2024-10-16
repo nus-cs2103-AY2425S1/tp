@@ -4,7 +4,9 @@ import static keycontacts.testutil.Assert.assertThrows;
 import static keycontacts.testutil.TypicalStudents.ALICE;
 import static keycontacts.testutil.TypicalStudents.getTypicalStudentDirectory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,8 +17,10 @@ import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
 import keycontacts.model.ModelManager;
 import keycontacts.model.UserPrefs;
+import keycontacts.model.lesson.CancelledLesson;
 import keycontacts.model.lesson.Date;
 import keycontacts.model.lesson.Time;
+import keycontacts.model.student.Student;
 
 public class CancelLessonCommandTest {
 
@@ -45,7 +49,7 @@ public class CancelLessonCommandTest {
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
-                new CancelLessonCommand(VALID_INDEX, VALID_DATE, VALID_START_TIME));
+                new CancelLessonCommand(null, VALID_DATE, VALID_START_TIME));
     }
 
     @Test
@@ -67,9 +71,23 @@ public class CancelLessonCommandTest {
     }
 
     @Test
+    public void execute_validInputs_success() throws CommandException {
+        Date lessonDate = new Date("14-10-2024");
+        Time lessonTime = new Time("12:00");
+        CancelLessonCommand command = new CancelLessonCommand(VALID_INDEX, lessonDate, lessonTime);
+        Student studentToUpdate = model.getFilteredStudentList().get(VALID_INDEX.getZeroBased());
+        CancelledLesson cancelledLesson = new CancelledLesson(lessonDate);
+        Student expectedUpdatedStudent = studentToUpdate.withAddedCancelledLesson(cancelledLesson);
+        CommandResult result = command.execute(model);
+        String expectedMessage = String.format(CancelLessonCommand.MESSAGE_SUCCESS,
+                Messages.format(studentToUpdate.getRegularLesson()), Messages.format(expectedUpdatedStudent));
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+    }
+
+    @Test
     public void equals() {
-        CancelLessonCommand command1 = new CancelLessonCommand(VALID_INDEX, VALID_DATE, VALID_START_TIME);
-        CancelLessonCommand command2 = new CancelLessonCommand(VALID_INDEX, VALID_DATE, VALID_START_TIME);
+        CancelLessonCommand command = new CancelLessonCommand(VALID_INDEX, VALID_DATE, VALID_START_TIME);
+        CancelLessonCommand commandDuplicate = new CancelLessonCommand(VALID_INDEX, VALID_DATE, VALID_START_TIME);
         CancelLessonCommand differentDateAndTimeCommand =
                 new CancelLessonCommand(VALID_INDEX, new Date("01-01-2023"), new Time("14:00"));
         CancelLessonCommand differentTimeCommand =
@@ -77,13 +95,12 @@ public class CancelLessonCommandTest {
         CancelLessonCommand differentDateCommand =
                 new CancelLessonCommand(VALID_INDEX, new Date("01-01-2023"), new Time("12:00"));
 
-        assertEquals(command1, command1);
-        assertEquals(command1, command2);
-        assertEquals(command2, command1);
-        assertNotEquals(command1, differentDateAndTimeCommand);
-        assertNotEquals(command1, differentTimeCommand);
-        assertNotEquals(command1, differentDateCommand);
-        assertNotEquals(command1, null);
+        assertTrue(command.equals(command)); // same object
+        assertTrue(command.equals(commandDuplicate)); // different object
+        assertFalse(command.equals(differentDateAndTimeCommand)); // different values
+        assertFalse(command.equals(differentTimeCommand)); // different time
+        assertFalse(command.equals(differentDateCommand)); // different date
+        assertFalse(command.equals(null)); // null
     }
 
     @Test
