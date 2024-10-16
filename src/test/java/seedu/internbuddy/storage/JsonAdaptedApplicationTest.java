@@ -10,8 +10,10 @@ import org.junit.jupiter.api.Test;
 import seedu.internbuddy.commons.exceptions.IllegalValueException;
 import seedu.internbuddy.model.application.AppStatus;
 import seedu.internbuddy.model.application.Description;
+import seedu.internbuddy.model.name.Name;
 
 public class JsonAdaptedApplicationTest {
+    private static final String INVALID_NAME = "";
     private static final String INVALID_DESCRIPTION = " ";
     private static final String INVALID_STATUS = "applying";
     private static final String VALID_NAME = SWE_APPLICATION.getName().fullName;
@@ -22,6 +24,20 @@ public class JsonAdaptedApplicationTest {
     public void toModelType_validApplicationDetails_returnsApplications() throws Exception {
         JsonAdaptedApplication application = new JsonAdaptedApplication(VALID_NAME, VALID_DESCRIPTION, VALID_STATUS);
         assertEquals(SWE_APPLICATION, application.toModelType());
+    }
+
+    @Test
+    public void toModelType_nullName_throwsIllegalValueException() {
+        JsonAdaptedApplication application = new JsonAdaptedApplication(null, VALID_DESCRIPTION, VALID_STATUS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, application::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidName_throwsIllegalValueException() {
+        JsonAdaptedApplication application = new JsonAdaptedApplication(INVALID_NAME, VALID_DESCRIPTION, VALID_STATUS);
+        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, application::toModelType);
     }
 
     @Test
