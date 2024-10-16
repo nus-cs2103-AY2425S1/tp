@@ -186,12 +186,22 @@ public class CreateEventCommandTest {
         }
 
         @Override
+        public boolean isVendorAssignedToEvent(Vendor vendor, Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void assignVendorToEvent(Vendor vendor, Event event) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean isVendorAssignedToEvent(Vendor vendor, Event event) {
+        public ObservableList<Vendor> getAssociatedVendors(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Event> getAssociatedEvents(Vendor vendor) {
             throw new AssertionError("This method should not be called.");
         }
 

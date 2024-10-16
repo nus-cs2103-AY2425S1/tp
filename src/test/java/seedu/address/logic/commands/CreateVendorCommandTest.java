@@ -208,6 +208,16 @@ public class CreateVendorCommandTest {
         }
 
         @Override
+        public ObservableList<Vendor> getAssociatedVendors(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Event> getAssociatedEvents(Vendor vendor) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableObjectValue<Event> getViewedEvent() {
             throw new AssertionError("This method should not be called.");
         }
