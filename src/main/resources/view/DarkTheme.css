@@ -345,6 +345,8 @@
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 3;
+    -fx-margin-top: 10px;
+    -fx-padding: 5 0 5 0;
 }
 
 #tags .label {
@@ -353,5 +355,20 @@
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-font-size: 12;
+}
+
+#lessons {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+    -fx-margin-top: 10px;
+}
+
+#lessons .label {
+    -fx-text-fill: white;
+    -fx-background-color: #88c1d0;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 12;
 }

@@ -10,7 +10,7 @@ import java.util.HashSet;
 
 /**
  * Represents a Lesson in the address book.
- * Guarantees: immutable; day and time are valid as declared in {@link #isValidLesson(String, String)}
+ * Guarantees: immutable; day and time are valid as declared in {@link #isValidLesson(String)}
  */
 public class Lesson {
     public static final String MESSAGE_CONSTRAINTS =
@@ -24,8 +24,7 @@ public class Lesson {
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
     private static final String VALID_TIME_RANGE_REGEX = "([01]?[0-9]|2[0-3])[0-5][0-9]-([01]?[0-9]|2[0-3])[0-5][0-9]";
     private static final HashSet<Lesson> lessonSet = new HashSet<>();
-    public final String day;
-    public final String timeRange;
+    public final String dayAndTime;
 
 
     /**
@@ -37,42 +36,67 @@ public class Lesson {
         requireNonNull(lesson);
         String[] parts = lesson.split(" ", 2);
         checkArgument(parts.length == 2, INCORRECT_LESSON_FORMAT);
-        String day = parts[0];
-        String timeRange = parts[1];
-        requireNonNull(day);
-        requireNonNull(timeRange);
-        checkArgument(isValidLesson(day, timeRange), MESSAGE_CONSTRAINTS);
-
-        this.day = day;
-        this.timeRange = timeRange;
+        checkArgument(isValidLesson(lesson), MESSAGE_CONSTRAINTS);
+        this.dayAndTime = lesson;
     }
 
     /**
-     * Returns true if the given day and lesson time are valid, and the start time is before the end time.
+     * Validates if the day provided is valid (i.e., part of the defined Days enum).
      *
-     * @param day The string representing the day.
-     * @param timeRange The string representing the time range in HHMM-HHMM format.
-     * @return true if both the day and lesson time are valid, and the start time is before the end time.
+     * @param day The day to check.
+     * @return true if the day is valid.
      */
-    public static boolean isValidLesson(String day, String timeRange) {
-        // Check if the day is valid
-        boolean isValidDay = Arrays.stream(Day.values())
+    private static boolean isValidDay(String day) {
+        return Arrays.stream(Day.values())
                 .anyMatch(d -> d.name().equalsIgnoreCase(day));
+    }
 
-        // Check if the time range matches the format HHMM-HHMM
-        boolean isValidTimeRange = timeRange.matches(VALID_TIME_RANGE_REGEX);
+    /**
+     * Validates the time range format (should be HHMM-HHMM 24-hour format).
+     *
+     * @param timeRange The time range to validate.
+     * @return true if the time range is valid.
+     */
+    private static boolean isValidTimeRange(String timeRange) {
+        return timeRange.matches(VALID_TIME_RANGE_REGEX);
+    }
 
-        // If the time range is valid, further check if start time is before end time
-        if (isValidTimeRange) {
+    /**
+     * Validates if the start time is before the end time.
+     *
+     * @param timeRange The time range to check.
+     * @return true if the start time is before the end time.
+     */
+    private static boolean isValidTimeOrder(String timeRange) {
+        if (isValidTimeRange(timeRange)) {
             String[] times = timeRange.split("-");
             LocalTime startTime = LocalTime.parse(times[0], TIME_FORMATTER);
             LocalTime endTime = LocalTime.parse(times[1], TIME_FORMATTER);
-            boolean isValidTimeOrder = startTime.isBefore(endTime);
-
-            return isValidDay && isValidTimeOrder;
+            return startTime.isBefore(endTime);
         }
-
         return false;
+    }
+
+
+    /**
+     * Validates if the given lesson string is valid.
+     * The lesson should consist of a day and a time range separated by a space.
+     * The day must be one of the valid days of the week (case-insensitive),
+     * and the time range must follow the HHMM-HHMM 24-hour format with the start time
+     * being before the end time.
+     *
+     * @param lesson The string representing the lesson, consisting of a day and a time range.
+     * @return true if the lesson is valid in terms of day, time range format, and time order;
+     *          false otherwise.
+     */
+    public static boolean isValidLesson(String lesson) {
+        String[] parts = lesson.split(" ", 2);
+        if (parts.length != 2) {
+            return false;
+        }
+        String day = parts[0];
+        String timeRange = parts[1];
+        return isValidDay(day) && isValidTimeRange(timeRange) && isValidTimeOrder(timeRange);
     }
 
     /**
@@ -113,18 +137,18 @@ public class Lesson {
         }
 
         Lesson otherLesson = (Lesson) other;
-        return day.equals(otherLesson.day) && timeRange.equals(otherLesson.timeRange);
+        return dayAndTime.equals(((Lesson) other).dayAndTime);
     }
 
     @Override
     public int hashCode() {
-        return day.hashCode() + timeRange.hashCode();
+        return dayAndTime.hashCode();
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + day + ' ' + timeRange + ']';
+        return '[' + dayAndTime + ']';
     }
 }

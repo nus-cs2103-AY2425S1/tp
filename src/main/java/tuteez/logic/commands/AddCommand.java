@@ -3,6 +3,7 @@ package tuteez.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tuteez.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
 import static tuteez.logic.parser.CliSyntax.PREFIX_NAME;
 import static tuteez.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
@@ -33,7 +34,9 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "Physics "
-            + PREFIX_TAG + "Secondary 4";
+            + PREFIX_TAG + "Secondary 4 "
+            + PREFIX_LESSON + "monday 0900-1100 "
+            + PREFIX_LESSON + "saturday 0800-1000";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book";
