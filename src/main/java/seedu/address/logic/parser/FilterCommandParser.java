@@ -12,6 +12,9 @@ import seedu.address.model.person.TagContainsKeywordsPredicate;
  * Parses input arguments and creates a new FilterCommand object
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
+
+    private static final Prefix TAG_PREFIX = CliSyntax.PREFIX_TAG;
+
     /**
      * Parses the given {@code String} of arguments in the context of the FilterCommand
      * and returns a FilterCommand object for execution.
@@ -24,7 +27,16 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-        String[] tagKeywords = trimmedArgs.split("\\s+");
+        // Extract the string value from the Prefix object
+        String[] tagKeywords = Arrays.stream(trimmedArgs.split("\\s+"))
+                .filter(arg -> arg.startsWith(TAG_PREFIX.getPrefix()))
+                .map(arg -> arg.substring(TAG_PREFIX.getPrefix().length()))
+                .toArray(String[]::new);
+
+        if (tagKeywords.length == 0) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
 
         return new FilterCommand(new TagContainsKeywordsPredicate(Arrays.asList(tagKeywords)));
     }

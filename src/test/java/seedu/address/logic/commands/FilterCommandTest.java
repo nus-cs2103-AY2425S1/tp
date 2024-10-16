@@ -55,7 +55,7 @@ public class FilterCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        TagContainsKeywordsPredicate predicate = preparePredicate(" ");
+        TagContainsKeywordsPredicate predicate = preparePredicate("t/ ");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -64,18 +64,19 @@ public class FilterCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        TagContainsKeywordsPredicate predicate = preparePredicate("friends family gym");
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 5);
+        TagContainsKeywordsPredicate predicate = preparePredicate("friends gym colleague");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(3, model.getFilteredPersonList().size());
+        assertEquals(5, model.getFilteredPersonList().size());
     }
 
     /**
      * Parses {@code userInput} into a {@code TagContainsKeywordsPredicate}.
      */
     private TagContainsKeywordsPredicate preparePredicate(String userInput) {
+        System.out.println(Arrays.asList(userInput.split("\\s+")));
         return new TagContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }

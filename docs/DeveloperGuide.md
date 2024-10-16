@@ -371,7 +371,7 @@ Priorities:
 
 1. Wedding Organizer requests to filter contacts by specific tag(s).
 2. Bridal Boss prompts for the tag(s) to filter by.
-3. Wedding Organizer enters the desired tag(s) (e.g., "Florist", "Wedding A").
+3. Wedding Organizer enters the desired tag(s), prefixed with t/ (e.g., "t/Florist", "t/Wedding A").
 4. Bridal Boss displays a list of contacts that match the specified tag(s).
 
    Use case ends.
