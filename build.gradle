@@ -51,7 +51,6 @@ allTests.dependsOn guiTests
 allTests.dependsOn nonGuiTests
 
 test {
-//    useJUnitPlatform()
     systemProperty 'testfx.setup.timeout', '60000'
 
     jacoco {
@@ -85,8 +84,6 @@ test {
             test.exclude 'spleetwaise/transaction/ui/**'
         }
     }
-
-//    finalizedBy jacocoTestReport
 }
 
 task headless {

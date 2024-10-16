@@ -53,8 +53,6 @@ public class TestFxAppSetup {
             FxToolkit.hideStage();
         } catch (TimeoutException e) {
             throw new AssertionError("Application takes too long to setup.", e);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to setup spec", e);
         }
     }
 
