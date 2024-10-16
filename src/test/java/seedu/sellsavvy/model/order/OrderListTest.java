@@ -6,6 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_BOTTLE;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
 import static seedu.sellsavvy.testutil.TypicalOrders.ATLAS;
+import static seedu.sellsavvy.testutil.TypicalOrders.BOTTLE;
+
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -44,6 +48,30 @@ public class OrderListTest {
     }
 
     @Test
+    public void setPerson_nullTargetOrder_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> orderList.setOrder(null, ATLAS));
+    }
+
+    @Test
+    public void setPerson_nullEditedOrder_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> orderList.setOrder(ATLAS, null));
+    }
+
+    @Test
+    public void setPerson_targetOrderNotInList_throwsOrderNotFoundException() {
+        assertThrows(OrderNotFoundException.class, () -> orderList.setOrder(ATLAS, ATLAS));
+    }
+
+    @Test
+    public void setPerson_validEditedOrder_success() {
+        orderList.add(ATLAS);
+        orderList.setOrder(ATLAS, ATLAS);
+        OrderList expectedOrderList = new OrderList();
+        expectedOrderList.add(ATLAS);
+        assertEquals(expectedOrderList, orderList);
+    }
+
+    @Test
     public void remove_nullOrder_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> orderList.remove(null));
     }
@@ -58,6 +86,35 @@ public class OrderListTest {
         orderList.add(ATLAS);
         orderList.remove(ATLAS);
         OrderList expectedOrderList = new OrderList();
+        assertEquals(expectedOrderList, orderList);
+    }
+
+    @Test
+    public void setPerson_nullOrderList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> orderList.setOrders((OrderList) null));
+    }
+
+    @Test
+    public void setPerson_validOrderList_success() {
+        orderList.add(ATLAS);
+        OrderList expectedOrderList = new OrderList();
+        expectedOrderList.add(BOTTLE);
+        orderList.setOrders(expectedOrderList);
+        assertEquals(expectedOrderList, orderList);
+    }
+
+    @Test
+    public void setPerson_nullList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> orderList.setOrders((List<Order>) null));
+    }
+
+    @Test
+    public void setPerson_validList_success() {
+        orderList.add(ATLAS);
+        List<Order> orders = Collections.singletonList(BOTTLE);
+        orderList.setOrders(orders);
+        OrderList expectedOrderList = new OrderList();
+        expectedOrderList.add(BOTTLE);
         assertEquals(expectedOrderList, orderList);
     }
 

@@ -22,6 +22,9 @@ class JsonAdaptedOrder {
 
     /**
      * Constructs a {@code JsonAdaptedOrder} with the given order details.
+     * @param item represents the item to be delivered in the order.
+     * @param count represents the item quantity requested in the order.
+     * @param date represents the delivery date of the order.
      */
     @JsonCreator
     public JsonAdaptedOrder(@JsonProperty("item") String item, @JsonProperty("count") String count,

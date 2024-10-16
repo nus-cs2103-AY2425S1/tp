@@ -1,6 +1,7 @@
 package seedu.sellsavvy.model.order;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.sellsavvy.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
@@ -27,19 +28,32 @@ public class OrderList implements Iterable<Order> {
         return internalList.stream().anyMatch(toCheck::isSameOrder);
     }
 
-    //TODO:
     /**
      * Replaces the first instance of an equivalent order {@code target} in the list with {@code editedOrder}.
      * {@code target} must exist in the list.
      */
-    public void setOrder(Order target, Order editedOrder) {}
+    public void setOrder(Order target, Order editedOrder) {
+        requireAllNonNull(target, editedOrder);
 
-    //TODO:
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new OrderNotFoundException();
+        }
+
+        internalList.set(index, editedOrder);
+    }
+
     /**
      * Replaces the contents of this list with {@code orders}.
      */
-    public void setOrders(List<Order> orders) {}
-    public void setOrders(OrderList replacement) {}
+    public void setOrders(List<Order> orders) {
+        requireAllNonNull(orders);
+        internalList.setAll(orders);
+    }
+    public void setOrders(OrderList replacement) {
+        requireAllNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
 
     /**
      * Adds an order to the list.
