@@ -68,8 +68,7 @@ public class TagCommand extends Command {
 
         Optional<Person> optionalPersonToTag = lastShownList.stream()
                 .filter(x -> x.getName()
-                .equals(nameToTag)).findFirst();
-
+                    .equals(nameToTag)).findFirst();
 
         Person personToTag;
         if (optionalPersonToTag.isPresent()) {
@@ -125,6 +124,5 @@ public class TagCommand extends Command {
                 .add("subjects", tagsToAdd.getSubjects())
                 .toString();
     }
-
 
 }

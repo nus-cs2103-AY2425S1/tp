@@ -36,7 +36,6 @@ public class TagCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new TagCommand(null, null));
@@ -95,7 +94,6 @@ public class TagCommandTest {
         expectedModel.setPerson(lastPerson, taggedPerson);
 
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
-
     }
 
     @Test
@@ -170,8 +168,6 @@ public class TagCommandTest {
                         TagCommand.class.getCanonicalName(), name, VALID_LEVEL_P3, VALID_SUBJECT_MATH);
 
         assertEquals(expected, tagCommand.toString());
-
-
     }
 
 }
