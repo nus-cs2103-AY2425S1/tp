@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.restaurant;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -6,34 +6,22 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
-
-
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
-public class TagContainsKeywordsPredicate implements Predicate<Person> {
+public class NameContainsKeywordsPredicate implements Predicate<Restaurant> {
     private final List<String> keywords;
 
-    public TagContainsKeywordsPredicate(List<String> keywords) {
+    public NameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
     @Override
-    public boolean test(Person person) {
-
-
-        if (keywords == null || keywords.isEmpty()) {
-            return false;
-        }
-
+    public boolean test(Restaurant restaurant) {
         String filterBy = keywords.get(0);
 
         return keywords.stream()
-                    .anyMatch(keyword -> person.getTags().stream()
-                           .anyMatch(tag -> {
-                               String cleanTag = tag.toString().replaceAll("[\\[\\]]", "");
-                               return StringUtil.containsWordIgnoreCase(cleanTag, keyword);
-                           }));
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(restaurant.getName().fullName, keyword));
     }
 
     @Override
@@ -43,11 +31,11 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TagContainsKeywordsPredicate)) {
+        if (!(other instanceof NameContainsKeywordsPredicate)) {
             return false;
         }
 
-        TagContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (TagContainsKeywordsPredicate) other;
+        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 

@@ -102,7 +102,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a restaurant).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -173,11 +173,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th restaurant in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new restaurant. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -185,7 +185,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the restaurant was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -234,7 +234,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the restaurant being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -278,7 +278,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Tourist                     | find the best local delicacies                                      | clear my itinerary                                           |
 | `* * *`  | Muslim                      | find and filter down eateries that are halal and within my location | enjoy delicious food that is within my dietary restrictions  |
 | `* * *`  | Person with Allergies       | find eateries that meet my restrictions                             | not worry about searching far and wide for every meal        |
-| `* * *`  | Hungry person with cravings | find restaurants with the cuisine I'm craving for                   | fulfill my cravings                                          |
+| `* * *`  | Hungry restaurant with cravings | find restaurants with the cuisine I'm craving for                   | fulfill my cravings                                          |
 | `* * *`  | Newbie                      | read up on how the app works                                        | start using the app                                          |
 | `* * *`  | Foodie                      | review restaurant ratings and reviews                               | make an informed decision based on other diners' experiences |
 | `* *`    | Frequent Traveler           | find reliable and high-quality restaurants in new cities            | enjoy great meals without extensive research                 |
@@ -287,7 +287,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Health-Conscious Diner      | find restaurants that serve nutritious and diet-specific meals      | maintain my healthy lifestyle while dining out               |
 | `* *`    | Pet lover                   | find restaurants that allow and accommodate for pets                | enjoy my meal with my furry companion                        |
 | `*`      | Person with Disabilities    | find accessible restaurants with features like ramps                | dine out comfortably and independently                       |
-| `*`      | Crippled Person             | find a wheelchair-friendly restaurant                               | eat like a normal person                                     |
+| `*`      | Crippled Person             | find a wheelchair-friendly restaurant                               | eat like a normal restaurant                                     |
 | `*`      | Office Worker               | plan what to eat given my 1hr lunch                                 | fit lunch into my busy schedule                              |
 | `*`      | Food Connoisseur            | save my favorite restaurants                                        | quickly access them later                                    |
 | `*`      | Influencer                  | find an atas restaurant                                             | post them on Instagram                                       |
@@ -436,8 +436,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor:** User  
 **MSS:**
 1. User opens the application.
-2. User enters a command for help
-3. GAB displays a window with a list of commands for the user 
+2. User enters a command for help.
+3. GAB displays a window with a link to the user guide. 
 4. Use case ends.
 
 
@@ -466,13 +466,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   A shop, typically a restaurant, that is listed on the app.
 
 * **Affordable Price ($)**:  
-  Expected price per meal per person to be \( x <= \$10 \). This is a subjective estimate based on human input.
+  Expected price per meal per restaurant to be \( x <= \$10 \). This is a subjective estimate based on human input.
 
 * **Moderate Price ($$)**:  
-  Expected price per meal per person to be \( \$10 < x <= \$20 \). This is a subjective estimate based on human input.
+  Expected price per meal per restaurant to be \( \$10 < x <= \$20 \). This is a subjective estimate based on human input.
 
 * **Premium Price ($$$)**:  
-  Expected price per meal per person to be \( x > \$20 \). This is a subjective estimate based on human input.
+  Expected price per meal per restaurant to be \( x > \$20 \). This is a subjective estimate based on human input.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -502,17 +502,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a restaurant
 
-1. Deleting a person while all persons are being shown
+1. Deleting a restaurant while all restaurants are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all restaurants using the `list` command. Multiple restaurants in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No restaurant is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
