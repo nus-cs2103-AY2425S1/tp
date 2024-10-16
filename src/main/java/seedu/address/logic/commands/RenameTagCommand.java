@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -47,10 +48,10 @@ public class RenameTagCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        ObservableList<Person> persons = model.getFilteredPersonList();
+        ObservableList<Person> persons = model.getPersonList();
         boolean found = false;
-        for (int j = 0; j < persons.size(); j++) {
-            Person currPerson = persons.get(j);
+        for (int i = 0; i < persons.size(); i++) {
+            Person currPerson = persons.get(i);
             Set<Tag> tags = currPerson.getTags();
             Iterator<Tag> iterator = tags.iterator();
             while (iterator.hasNext()) {
