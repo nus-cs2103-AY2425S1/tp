@@ -1,11 +1,6 @@
 package seedu.address.model.goods;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.storage.CsvConverters.GoodsNameConverter;
-
-import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.CsvCustomBindByName;
-
 
 /**
  * Represents goods.
@@ -16,10 +11,7 @@ public class Goods {
     public static final String MESSAGE_CONSTRAINTS = "Product quantity cannot be negative or 0!";
     public static final String VALIDATION_REGEX = "/^[\\w\\-\\s]+$/";
 
-    @CsvCustomBindByName(column = "Goods Name", converter = GoodsNameConverter.class, required = true)
     private final GoodsName goodsName;
-
-    @CsvBindByName(column = "Category", required = true)
     private final GoodsCategories category;
 
     /**
@@ -50,5 +42,14 @@ public class Goods {
     @Override
     public String toString() {
         return String.format("%s", this.goodsName);
+    }
+
+    /**
+     * Converts good to be written in a CSV file.
+     *
+     * @return goods name with category
+     */
+    public String convertToCsvWrite() {
+        return goodsName + "," + category;
     }
 }

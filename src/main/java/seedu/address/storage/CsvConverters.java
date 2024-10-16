@@ -2,6 +2,8 @@ package seedu.address.storage;
 
 import com.opencsv.bean.AbstractBeanField;
 
+import seedu.address.model.goods.Goods;
+import seedu.address.model.goods.GoodsCategories;
 import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsReceipt.Date;
 import seedu.address.model.person.Name;
@@ -23,22 +25,31 @@ public class CsvConverters {
     }
 
     /**
-     * Custom converter for GoodsName type for Goods.
-     */
-    public static class GoodsNameConverter extends AbstractBeanField<GoodsName, String> {
-        @Override
-        protected Object convert(String value) {
-            return new GoodsName(value);
-        }
-    }
-
-    /**
      * Custom converter for Name type for Person.
      */
     public static class PersonNameConverter extends AbstractBeanField<Name, String> {
         @Override
         protected Object convert(String value) {
             return new Name(value);
+        }
+    }
+
+    /**
+     * Custom converter for Goods type for GoodsReceipt.
+     */
+    public static class GoodsConverter extends AbstractBeanField<Goods, String> {
+        @Override
+        protected Object convert(String value) {
+            String[] goodsDetails = value.split(",", 2);
+            GoodsName goodsName = new GoodsName(goodsDetails[0]);
+            GoodsCategories category = GoodsCategories.valueOf(goodsDetails[1]);
+            return new Goods(goodsName, category);
+        }
+
+        @Override
+        protected String convertToWrite(Object value) {
+            Goods goods = (Goods) value;
+            return goods.convertToCsvWrite();
         }
     }
 }

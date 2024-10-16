@@ -3,6 +3,7 @@ package seedu.address.model.goodsReceipt;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.storage.CsvConverters.GoodsConverter;
 import static seedu.address.storage.CsvConverters.GoodsDateConverter;
 import static seedu.address.storage.CsvConverters.PersonNameConverter;
 
@@ -23,7 +24,7 @@ import seedu.address.model.person.Name;
  */
 public class GoodsReceipt {
 
-
+    @CsvCustomBindByName(column = "Goods", converter = GoodsConverter.class, required = true)
     private final Goods goods;
 
     @CsvCustomBindByName(column = "Supplier Name", converter = PersonNameConverter.class, required = true)
