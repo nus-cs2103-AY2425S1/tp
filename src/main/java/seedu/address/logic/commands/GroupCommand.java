@@ -37,7 +37,7 @@ public class GroupCommand extends Command {
      * @throws NullPointerException if {@code groupName} or {@code students} is
      *                              null.
      */
-    public GroupCommand(String groupName, List<String> students) {
+    public GroupCommand(String groupName, List<String> students) throws NullPointerException {
         requireAllNonNull(groupName, students);
         this.groupName = groupName;
         this.students = students;

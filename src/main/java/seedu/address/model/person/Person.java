@@ -112,18 +112,4 @@ public class Person {
                 .toString();
     }
 
-    // Other attributes and methods
-
-    public Set<Group> getGroups() {
-        return groups;
-    }
-
-    public void addGroup(Group group) {
-        groups.add(group);
-    }
-
-    public void removeGroup(Group group) {
-        groups.remove(group);
-    }
-
 }
