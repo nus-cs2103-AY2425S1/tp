@@ -150,4 +150,8 @@ public class ParserUtil {
         }
         return gameMap;
     }
+
+
+    // TODO: parsePreferredTime and parsePreferredTimes
+
 }
