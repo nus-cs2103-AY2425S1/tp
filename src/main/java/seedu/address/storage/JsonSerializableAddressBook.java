@@ -2,7 +2,6 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
 
 /**
@@ -20,15 +20,19 @@ import seedu.address.model.vendor.Vendor;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_VENDOR = "Vendors list contains duplicate vendor(s).";
+    public static final String MESSAGE_DUPLICATE_EVENT = "Event list contains duplicate event(s).";
 
     private final List<JsonAdaptedVendor> vendors = new ArrayList<>();
+    private final List<JsonAdaptedEvent> events = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given vendors.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("vendors") List<JsonAdaptedVendor> vendors) {
+    public JsonSerializableAddressBook(@JsonProperty("vendors") List<JsonAdaptedVendor> vendors,
+                                       @JsonProperty("events") List<JsonAdaptedEvent> events) {
         this.vendors.addAll(vendors);
+        this.events.addAll(events);
     }
 
     /**
@@ -37,7 +41,8 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        vendors.addAll(source.getVendorList().stream().map(JsonAdaptedVendor::new).collect(Collectors.toList()));
+        vendors.addAll(source.getVendorList().stream().map(JsonAdaptedVendor::new).toList());
+        events.addAll(source.getEventList().stream().map(JsonAdaptedEvent::new).toList());
     }
 
     /**
@@ -53,6 +58,14 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_VENDOR);
             }
             addressBook.addVendor(vendor);
+        }
+
+        for (JsonAdaptedEvent jsonAdaptedEvent : events) {
+            Event event = jsonAdaptedEvent.toModelType();
+            if (addressBook.hasEvent(event)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
+            }
+            addressBook.addEvent(event);
         }
         return addressBook;
     }

@@ -18,7 +18,7 @@ import seedu.address.testutil.VendorBuilder;
  * Contains integration tests (interaction with the Model) for
  * {@code AddCommand}.
  */
-public class AddCommandIntegrationTest {
+public class CreateVendorCommandIntegrationTest {
 
     private Model model;
 

@@ -26,7 +26,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.testutil.VendorBuilder;
 
-public class AddCommandTest {
+public class CreateVendorCommandTest {
 
     @Test
     public void constructor_nullVendor_throwsNullPointerException() {
@@ -87,7 +87,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that has all the methods failing.
      */
     private class ModelStub implements Model {
         @Override
