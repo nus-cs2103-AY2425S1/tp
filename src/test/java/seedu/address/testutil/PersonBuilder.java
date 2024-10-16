@@ -29,7 +29,6 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_PRIORITY = "NONE";
 
     private Name name;
     private Nric nric;
@@ -55,7 +54,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        priority = new Priority(DEFAULT_PRIORITY);
+        priority = new Priority();
         appointments = new HashSet<>();
         medCons = new HashSet<>();
     }
