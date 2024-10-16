@@ -543,6 +543,56 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `potential n/John Doe2 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
        Expected: John Doe2 should be added as he has a different name
 
+### Listing the contents of StaffSync
+
+1. Listing all persons
+
+   1. Prerequisites: StaffSync is not empty. Persons have been added using either `employee` or `potential`.
+
+   2. Test case: `list all` <br>
+      Expected: All persons in the application are listed regardless of if they are employees or potential hires.
+
+   3. Test case: `list` <br>
+      Expected: No change to the current list. Error details shown in the status message.
+
+   4. Test case `list all asdfg` <br>
+      Expected: All persons in the application are listed regardless of if they are employees or potential hires.
+
+   5. Test case `list asdfg` <br>
+      Expected: No change to the current displayed list. Error details shown in the status message.
+
+2. Listing all employees
+
+   1. Prerequisites: StaffSync is not empty. Employees have been added using `employee`.
+
+   2. Test case: `list e` <br>
+      Expected: All employees in the application are listed.
+
+   3. Test case: `list` <br>
+      Expected: No change to the current list. Error details shown in the status message.
+
+   4. Test case `list e asdfg` <br>
+      Expected: All employees in the application are listed.
+
+   5. Test case `list asdfg` <br>
+      Expected: No change to the current displayed list. Error details shown in the status message.
+
+2. Listing all potential hires
+
+   1. Prerequisites: StaffSync is not empty. Potential hires have been added using `potential`.
+
+   2. Test case: `list ph` <br>
+      Expected: All potential hires in the application are listed.
+
+   3. Test case: `list` <br>
+      Expected: No change to the current list. Error details shown in the status message.
+
+   4. Test case `list ph asdfg` <br>
+      Expected: All potential hires in the application are listed.
+
+   5. Test case `list asdfg` <br>
+      Expected: No change to the current displayed list. Error details shown in the status message.
+
 ### Deleting a person
 
 1. Deleting a person while all potential hires/employees are being shown

@@ -216,7 +216,8 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
   
   >Shows a list of all persons in StaffSync.
   >
-  >Format: `list`
+  >Format: `list all` or `list ph` or `list e` *(Note the `ph` or `e` parameter. `ph` refers to potential hires and `e` refers to employees)*
+  >* Lists type of persons based on the parameter given.
 </details>
 
 <br>
@@ -234,7 +235,7 @@ Action     | Format                                                             
 **Employee**| `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE​` | `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/2021-01-01`
 **Exit**   | `exit`                                                                                        | 
 **Find**   | `find all [KEYWORDS]` <br> `find e [KEYWORDS]` <br> `find ph [KEYWORDS]`                      | `find all Jake` <br> `find e Jake` <br> `find ph Jake`
-**List**   | `list all`                                                                                    | 
+**List**   | `list all` <br> `list e` <br> `list ph`                                                                                    | 
 **Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​`                      | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
 
 --------------------------------------------------------------------------------------------------------------------
