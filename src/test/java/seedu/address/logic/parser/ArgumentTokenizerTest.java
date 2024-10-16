@@ -64,6 +64,20 @@ public class ArgumentTokenizerTest {
     }
 
     @Test
+    public void tokenize_noArguments() {
+        String argsString = "  Some preamble string ";
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash);
+        assertPreamblePresent(argMultimap, "Some preamble string");
+    }
+
+    @Test
+    public void tokenize_argument() {
+        String argsString = "  Some preamble string p/ Argument value ";
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash);
+        assertPreamblePresent(argMultimap, "Some preamble string");
+        assertArgumentPresent(argMultimap, pSlash, "Argument value");
+    }
+    @Test
     public void tokenize_oneArgument() {
         // Preamble present
         String argsString = "  Some preamble string p/ Argument value ";

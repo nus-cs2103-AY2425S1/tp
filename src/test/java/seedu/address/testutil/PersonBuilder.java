@@ -1,11 +1,17 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TelegramUsername;
+import seedu.address.model.role.Role;
+import seedu.address.model.util.SampleDataUtil;
+
 
 /**
  * A utility class to help with building Person objects.
@@ -24,6 +30,9 @@ public class PersonBuilder {
     private Address address;
     private TelegramUsername telegramUsername;
 
+    private Set<Role> roles;
+
+
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
@@ -33,6 +42,9 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         telegramUsername = new TelegramUsername(DEFAULT_TELEGRAM_USERNAME);
+
+        roles = new HashSet<>();
+
     }
 
     /**
@@ -44,6 +56,8 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         telegramUsername = personToCopy.getTelegramUsername();
+        roles = new HashSet<>(personToCopy.getRoles());
+
     }
 
     /**
@@ -79,6 +93,32 @@ public class PersonBuilder {
         return this;
     }
 
+
+    //    public PersonBuilder withRoles(String ... roles) {
+    //        Set<Role> newRoles = new HashSet<>();
+    //        for (String role : roles) {
+    //            try {
+    //                Role nextRole = RoleHandler.getRole(role);
+    //                newRoles.add(nextRole);
+    //                this.roles = newRoles;
+    //            } catch (InvalidRoleException e) {
+    //                //TODO: Handle this exception
+    //                continue;
+    //            }
+    //        }
+    //
+    //        return this;
+    //    }
+
+    /**
+     * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withRoles(String ... roles) {
+        this.roles = SampleDataUtil.getRoleSet(roles);
+        return this;
+    }
+
+
     /**
      * Sets the {@code TelegramUsername} of the {@code Person} being built.
      *
@@ -90,8 +130,27 @@ public class PersonBuilder {
         return this;
     }
 
+
+
+    //    public Person build() {
+    //        Role[] roleArray = roles.toArray(new Role[0]);
+    //
+    //        return new Person(name, phone, email, address, tags, telegramUsername, roleArray);
+    //    }
+
+    //    public PersonBuilder withRoles(String ... roles) {
+    //        this.roles = SampleDataUtil.getRoleSet(roles);
+    //        return this;
+    //    }
+
+    /**
+     * Builds a {@code Person} object with the given parameters.
+     *
+     * @return The {@code Person} object with the given parameters.
+     */
     public Person build() {
-        return new Person(name, phone, email, address, telegramUsername);
+        return new Person(name, phone, email, address, telegramUsername, roles);
+
     }
 
 }

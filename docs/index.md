@@ -8,7 +8,7 @@ title: PlanPal
 
 ![Ui](images/Ui.png)
 
-* **PlanPal** is an address book designed for student event planners at NUS who need to manage contacts (e.g., attendees, vendors, sponsors, and volunteers) for their events. 
+* **PlanPal** is an address book designed for student event planners at NUS who need to manage contacts (e.g., attendees, vendors, sponsors, and volunteers) for their events.
 * PlanPal offers a centralized platform to organize, track, and access contact information, ensuring efficient coordination and smooth communication throughout the event planning process.
 * While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 

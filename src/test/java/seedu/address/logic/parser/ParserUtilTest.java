@@ -1,9 +1,15 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +32,9 @@ public class ParserUtilTest {
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_ROLE = "vendor";
+
+    private static final String VALID_ROLE_1 = "vendor";
+    private static final String VALID_ROLE_2 = "sponsor";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -155,15 +163,40 @@ public class ParserUtilTest {
     @Test
     public void parseRole_validValueWithoutWhitespace_returnsEmail() throws Exception {
         RoleHandler roleHandler = new RoleHandler();
-        Role expectedRole = roleHandler.getRole(VALID_ROLE);
-        assertEquals(expectedRole, ParserUtil.parseRole(VALID_ROLE));
+
+        Role expectedRole = roleHandler.getRole(VALID_ROLE_1);
+        assertEquals(expectedRole, ParserUtil.parseRole(VALID_ROLE_1));
     }
 
     @Test
     public void parseRole_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
-        String roleWithWhitespace = WHITESPACE + VALID_ROLE + WHITESPACE;
+        String roleWithWhitespace = WHITESPACE + VALID_ROLE_1 + WHITESPACE;
         RoleHandler roleHandler = new RoleHandler();
-        Role expectedRole = roleHandler.getRole(roleWithWhitespace);
+        Role expectedRole = RoleHandler.getRole(roleWithWhitespace);
         assertEquals(expectedRole, ParserUtil.parseRole(roleWithWhitespace));
+    }
+
+    @Test
+    public void parseRoles_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRoles(null));
+    }
+
+    @Test
+    public void parseRoles_collectionWithInvalidRoles_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRoles(Arrays.asList(VALID_ROLE_1, INVALID_ROLE)));
+    }
+    @Test
+    public void parseRoles_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseRoles(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseRoles_collectionWithValidTags_returnsTagSet() throws Exception {
+        Set<Role> actualRoleSet = ParserUtil.parseRoles(Arrays.asList(VALID_ROLE_1, VALID_ROLE_2));
+        RoleHandler roleHandler = new RoleHandler();
+        Set<Role> expectedRoleSet = new HashSet<Role>(Arrays.asList(roleHandler.getRole(VALID_ROLE_1),
+                roleHandler.getRole(VALID_ROLE_2)));
+
+        assertEquals(expectedRoleSet, actualRoleSet);
     }
 }

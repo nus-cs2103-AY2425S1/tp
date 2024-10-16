@@ -16,11 +16,14 @@ import seedu.address.model.person.Person;
  * Represents a Role in the address book.
  */
 public abstract class Role {
-    public static final String MESSAGE_CONSTRAINTS = "Roles should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Roles should be one of the following:"
+            + "\n" + Attendee.ROLE_WORD
+            + "\n" + Sponsor.ROLE_WORD
+            + "\n" + Vendor.ROLE_WORD
+            + "\n" + Volunteer.ROLE_WORD;
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     private final HashSet<Person> personList = new HashSet<>();
-
 
     private final String roleName;
 
@@ -34,7 +37,6 @@ public abstract class Role {
         checkArgument(isValidRoleName(roleName), MESSAGE_CONSTRAINTS);
         this.roleName = roleName;
     }
-
 
 
     /**
@@ -110,7 +112,20 @@ public abstract class Role {
         return this.personList;
     }
 
+    /**
+     * Checks if a person is tagged under the role
+     * @param person the person to check
+     * @return true if person is tagged under the role
+     */
     public boolean isTagged(Person person) {
         return this.personList.contains(person);
+    }
+
+    /**
+     * Returns the role name
+     * @return Role name
+     */
+    public String getRoleName() {
+        return roleName;
     }
 }
