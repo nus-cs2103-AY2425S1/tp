@@ -24,9 +24,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
-
         String tele = argMultiMap.getValue(PREFIX_TELEGRAM).get();
-        // ERROR! 'tele' here gives an empty string ""...
         return new ViewCommand(tele);
     }
 
