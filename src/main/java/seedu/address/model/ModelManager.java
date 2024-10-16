@@ -146,7 +146,7 @@ public class ModelManager implements Model {
     }
 
     // =========== Assigning vendors and events =============================================================
-    
+
     @Override
     public boolean isVendorAssignedToEvent(Vendor vendor, Event event) {
         requireAllNonNull(vendor, event);

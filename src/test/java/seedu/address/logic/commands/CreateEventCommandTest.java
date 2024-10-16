@@ -38,8 +38,8 @@ public class CreateEventCommandTest {
 
     @Test
     public void execute_eventAcceptedByModel_addSuccessful() throws Exception {
-        CreateEventCommandTest.ModelStubAcceptingEventAdded modelStub = new CreateEventCommandTest
-            .ModelStubAcceptingEventAdded();
+        CreateEventCommandTest.ModelStubAcceptingEventAdded modelStub = new
+            CreateEventCommandTest.ModelStubAcceptingEventAdded();
         Event validEvent = new EventBuilder().build();
 
         CommandResult commandResult = new CreateEventCommand(validEvent).execute(modelStub);
@@ -56,7 +56,7 @@ public class CreateEventCommandTest {
         CreateEventCommandTest.ModelStub modelStub = new CreateEventCommandTest.ModelStubWithEvent(validEvent);
 
         assertThrows(CommandException.class, CreateEventCommand.MESSAGE_DUPLICATE_EVENT, ()
-             -> createEventCommand.execute(modelStub));
+            -> createEventCommand.execute(modelStub));
     }
 
     @Test
@@ -192,7 +192,7 @@ public class CreateEventCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-	@Override
+        @Override
         public void assignVendorToEvent(Vendor vendor, Event event) {
             throw new AssertionError("This method should not be called.");
         }
