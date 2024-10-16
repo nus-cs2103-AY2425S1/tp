@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.game.Game;
 import seedu.address.model.person.Person;
 
 /**
@@ -47,6 +48,19 @@ public class Messages {
         person.getTags().forEach(builder::append);
         builder.append("; Games: ");
         person.getGames().keySet().forEach(builder::append);
+        return builder.toString();
+    }
+
+    public static String format(Game game) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(game.getGameName())
+                .append("; Username: ")
+                .append(game.getUsername())
+                .append("; Skill Level: ")
+                .append(game.getSkillLevel())
+                .append("; Role: ")
+                .append(game.getRole());
+
         return builder.toString();
     }
 
