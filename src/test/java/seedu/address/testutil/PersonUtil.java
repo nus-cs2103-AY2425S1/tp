@@ -55,7 +55,7 @@ public class PersonUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.get().value).append(" "));
         descriptor.getDateOfLastVisit().ifPresent(date ->
                 sb.append(PREFIX_DATEOFLASTVISIT).append(date.value).append(" "));
-        
+
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
