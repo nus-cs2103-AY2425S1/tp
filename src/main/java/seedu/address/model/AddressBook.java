@@ -203,7 +203,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return new ToStringBuilder(this)
             .add("persons", persons)
             .add("owners", owners).add("pets", pets)
-            .add("owners", owners)
             .toString();
     }
 
@@ -237,7 +236,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         return persons.equals(otherAddressBook.persons) && owners.equals(otherAddressBook.owners)
                 && pets.equals(otherAddressBook.pets);
-        return persons.equals(otherAddressBook.persons) && owners.equals(otherAddressBook.owners);
     }
 
     @Override
