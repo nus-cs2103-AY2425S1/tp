@@ -16,7 +16,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class DeleteVendorCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "delete_vendor";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
@@ -24,7 +24,6 @@ public class DeleteVendorCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-
 
     private final Index targetIndex;
 
