@@ -130,7 +130,7 @@ public class PolicySet implements Set<Policy> {
         requireClassPolicyType(obj);
 
         PolicyType policyType = (PolicyType) obj;
-        return policies[hash(policyType)] == null;
+        return policies[hash(policyType)] != null;
     }
 
     /**
@@ -321,13 +321,6 @@ public class PolicySet implements Set<Policy> {
         }
 
         PolicySet otherPolicySet = (PolicySet) other;
-        for (int i = 0; i < size; i++) {
-            assert i < policies.length : "Index exceeds the array length";
-            if ((policies[i] == null && otherPolicySet.policies[i] != null)
-                    || (policies[i] != null && !policies[i].equals(otherPolicySet.policies[i]))) {
-                return false;
-            }
-        }
-        return true;
+        return Arrays.equals(policies, otherPolicySet.policies);
     }
 }
