@@ -53,8 +53,7 @@ public class ModelManager implements Model {
         this(new AddressBook(), new UserPrefs());
     }
 
-    // =========== UserPrefs
-    // ==================================================================================
+    // =========== UserPrefs ==================================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -89,8 +88,7 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    // =========== AddressBook
-    // ================================================================================
+    // =========== AddressBook ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -126,8 +124,7 @@ public class ModelManager implements Model {
         addressBook.setVendor(target, editedVendor);
     }
 
-    // =========== Filtered Vendor List Accessors
-    // =============================================================
+    // =========== Filtered Vendor List Accessors =============================================================
     @Override
     public boolean hasEvent(Event event) {
         requireNonNull(event);
@@ -145,8 +142,7 @@ public class ModelManager implements Model {
         updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
-    // =========== Filtered Vendor List Accessors
-    // =============================================================
+    // =========== Filtered Vendor List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Vendor} backed by the internal list of
@@ -163,8 +159,7 @@ public class ModelManager implements Model {
         filteredVendors.setPredicate(predicate);
     }
 
-    // =========== Filtered Event List Accessors
-    // =============================================================
+    // =========== Filtered Event List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Event} backed by the internal list of
@@ -198,8 +193,7 @@ public class ModelManager implements Model {
                 && filteredEvents.equals(otherModelManager.filteredEvents);
     }
 
-    // =========== Viewed Vendor Accessors
-    // =============================================================
+    // =========== Viewed Vendor Accessors =============================================================
 
     @Override
     public ObservableObjectValue<Vendor> getViewedVendor() {
@@ -212,8 +206,7 @@ public class ModelManager implements Model {
         selectedVendor.setValue(vendor);
     }
 
-    // =========== Viewed Events Accessors
-    // =============================================================
+    // =========== Viewed Events Accessors =============================================================
 
     @Override
     public ObservableObjectValue<Event> getViewedEvent() {
@@ -226,8 +219,7 @@ public class ModelManager implements Model {
         selectedEvent.setValue(event);
     }
 
-    // =========== UI State Accessors
-    // =============================================================
+    // =========== UI State Accessors =============================================================
     @Override
     public ObservableObjectValue<UiState> getUiState() {
         return currentUiState;

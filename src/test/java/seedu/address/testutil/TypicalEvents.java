@@ -47,7 +47,7 @@ public class TypicalEvents {
     } // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical events and vendors.
+     * Returns an {@code AddressBook} with all the typical events.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
