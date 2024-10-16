@@ -133,8 +133,8 @@ Format: `find [n/StartOfName] [a/PartOfAddress] [pri/PRIORITY]`
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
-* `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/alex n/david pri/high` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/newFindAlexDavidResult.png)
 
 ### Deleting people : `delete`
 
