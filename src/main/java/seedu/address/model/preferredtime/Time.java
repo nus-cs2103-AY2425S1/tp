@@ -18,6 +18,6 @@ public class Time {
      * Returns true if a given string is a valid Time.
      */
     public static boolean isValidTime(String test) {
-        return true;
+        return test.matches(VALIDATION_REGEX);
     }
 }

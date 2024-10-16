@@ -18,6 +18,6 @@ public class Day {
      * Returns true if a given string is a valid Day.
      */
     public static boolean isValidDay(String test) {
-        return true;
+        return test.matches(VALIDATION_REGEX);
     }
 }
