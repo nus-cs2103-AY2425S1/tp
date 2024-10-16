@@ -6,6 +6,10 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.product.Ingredient;
+import seedu.address.model.product.IngredientCatalogue;
+import seedu.address.model.product.Pastry;
+import seedu.address.model.product.PastryCatalogue;
 
 /**
  * The API of the Model component.
@@ -25,22 +29,22 @@ public interface Model {
     ReadOnlyUserPrefs getUserPrefs();
 
     /**
-     * Returns the user prefs' GUI settings.
+     * Returns the user prefs GUI settings.
      */
     GuiSettings getGuiSettings();
 
     /**
-     * Sets the user prefs' GUI settings.
+     * Sets the user prefs GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs address book file path.
      */
     Path getAddressBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
 
@@ -84,4 +88,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    void addPastry(Pastry expectedPastry);
+
+    PastryCatalogue getPastryCatalogue();
+
+    void addIngredient(Ingredient expectedIngredient);
+
+    IngredientCatalogue getIngredientCatalogue();
 }
