@@ -2,6 +2,7 @@ package careconnect.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -157,6 +158,10 @@ public class UniquePersonList implements Iterable<Person> {
      * Sorts the list by name lexicographically.
      */
     private void sortListLexographically() {
-        this.internalList.sort((p1, p2) -> p1.getName().toString().compareTo(p2.getName().toString()));
+        int numOfContacts = this.internalList.size();
+        this.internalList.sort(Comparator.comparing(p -> p.getName().toString()));
+
+        // Ensure that the number of contacts remains the same after sorting
+        assert(this.internalList.size() == numOfContacts);
     }
 }
