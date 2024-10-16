@@ -27,10 +27,24 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
+   * `list-doctor` : Lists all doctors.
+   
+   * `list-patient` : Lists all patients.
+
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `add-doctor n/Dr. John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 s/Orthopedics` : Adds a doctor named Dr. John Doe to the Address Book.
+   
+   * `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 d/23-04-1987 g/M` : Adds a patient named John Doe to the Address Book.
 
+   * `find John` : Finds contacts whose names contain the keyword `John`.
+
+   * `find-doctor John` : Finds doctors whose names contain the keyword `John`.
+
+   * `find-patient John` : Finds patients whose names contain the keyword `John`.
+
+   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
@@ -86,11 +100,44 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+### Adding a doctor: `add-doctor`
+
+Adds a doctor to the address book.
+
+Format: `add-doctor n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SPECIALTY [t/TAG]…​`
+
+**Examples:**
+* `add-doctor n/Dr. John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 s/Orthopedics`
+* `add-doctor n/Dr. Jane Doe p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 s/Cardiology t/colleague`
+
+### Adding a patient: `add-patient`
+
+Adds a patient to the address book.
+
+Format: `add-patient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE_OF_BIRTH g/GENDER [t/TAG]…​`
+
+**Examples:**
+* `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 d/23-04-1987 g/M`
+* `add-patient n/Jane Doe p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 d/01-05-1990 g/F t/friend`
+
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
+
+### Listing all doctors: `list-doctor`
+
+Shows a list of all doctors in the address book.
+
+Format: `list-doctor`
+
+### Listing all patients: `list-patient`
+
+Shows a list of all patients in the address book.
+
+Format: `list-patient`
 
 ### Editing a person : `edit`
 
@@ -126,6 +173,26 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Locating doctors by name: `find-doctor`
+
+Finds doctors whose names contain any of the given keywords.
+
+Format: `find-doctor KEYWORD [MORE_KEYWORDS]`
+
+**Examples:**
+* `find-doctor John` returns `John Doe`.
+* `find-doctor alex david` returns `Alex Yeoh`, `David Li`.
+
+### Locating patients by name: `find-patient`
+
+Finds patients whose names contain any of the given keywords.
+
+Format: `find-patient KEYWORD [MORE_KEYWORDS]`
+
+**Examples:**
+* `find-patient John` returns `John Doe`.
+* `find-patient alex david` returns `Alex Yeoh`, `David Li`.
 
 ### Deleting a person : `delete`
 
