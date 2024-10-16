@@ -65,8 +65,8 @@ public class Person {
     }
 
     public void setPublicAddressesByNetwork(Network network, HashSet<PublicAddress> addresses) {
-        if(publicAddresses.containsKey(network)){
-            this.publicAddresses.put(network,addresses);
+        if (publicAddresses.containsKey(network)) {
+            this.publicAddresses.put(network, addresses);
         }
     }
 

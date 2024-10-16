@@ -46,10 +46,10 @@ public class Messages {
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         builder.append("; Public Addresses: ");
-        person.getPublicAddresses().forEach(
-                ((network, publicAddresses) -> publicAddresses.forEach(address ->{
-                        builder.append(network).append(": ").append(address).append("; ");
-                }))
+        person.getPublicAddresses().forEach(((
+            network, publicAddresses) -> publicAddresses.forEach(address -> {
+                builder.append(network).append(": ").append(address).append("; ");
+            }))
         );
         return builder.toString();
     }

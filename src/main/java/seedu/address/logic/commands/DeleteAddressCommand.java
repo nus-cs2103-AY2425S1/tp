@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -36,6 +35,12 @@ public class DeleteAddressCommand extends Command {
     private final Index targetIndex;
     private final Network targetAddressnetwork;
 
+    /**
+     * Takes in a target index and deletes all the addresses related to the network
+     *
+     * @param targetIndex
+     * @param network
+     */
     public DeleteAddressCommand(Index targetIndex, Network network) {
         this.targetIndex = targetIndex;
         this.targetAddressnetwork = network;
@@ -55,7 +60,7 @@ public class DeleteAddressCommand extends Command {
         // TODO Implement deleting by individual address
         // Currently deleting all in the network
         Set<PublicAddress> addresses = personToDelete.getPublicAddressesByNetwork(targetAddressnetwork);
-        personToDelete.setPublicAddressesByNetwork(targetAddressnetwork,new HashSet<PublicAddress>());
+        personToDelete.setPublicAddressesByNetwork(targetAddressnetwork, new HashSet<PublicAddress>());
 
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }

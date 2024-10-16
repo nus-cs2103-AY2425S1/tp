@@ -62,7 +62,7 @@ public abstract class PublicAddress {
      * @param network A string representation of the network
      * @return Network A enum of the network
      */
-    public static Network isValidNetworkName(String network){
+    public static Network isValidNetworkName(String network) {
         return Network.valueOf(network);
     }
     @Override

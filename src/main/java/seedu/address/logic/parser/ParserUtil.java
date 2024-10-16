@@ -145,7 +145,7 @@ public class ParserUtil {
             String[] addressArgs = trimmedPublicAddress.split(delimiter);
             assert addressArgs.length == 2 : "Public address should have a network and an address";
 
-            if(addressArgs.length != 2){
+            if (addressArgs.length != 2) {
                 throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
             }
 
@@ -206,8 +206,7 @@ public class ParserUtil {
         String trimmedNetwork = network.trim();
         try {
             return Network.valueOf(trimmedNetwork);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
     }
