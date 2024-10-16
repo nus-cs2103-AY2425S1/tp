@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.IdentityNumber;
 import seedu.address.model.person.Person;
 
 /**
@@ -126,6 +127,18 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    /**
+     * Updates the filter of the logs list to filter by the given {@code identityNumber}.
+     *
+     * @param identityNumber
+     */
+    @Override
+    public void updateFilteredLogsListById(IdentityNumber identityNumber) {
+        requireNonNull(identityNumber);
+        Predicate<Person> predicate = person -> person.getIdentityNumber().equals(identityNumber);
+        updateFilteredPersonList(predicate);
     }
 
     @Override

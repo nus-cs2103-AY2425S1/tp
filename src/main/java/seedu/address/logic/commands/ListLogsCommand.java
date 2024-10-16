@@ -4,6 +4,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.IdentityNumber;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Lists all persons in the address book to the user.
  */
@@ -38,8 +40,9 @@ public class ListLogsCommand extends Command {
 
         //TODO: Handle behaviour later
         //requireNonNull(model);
-        //model.updateFilteredPersonList(nric);
-        //return new CommandResult("The NRIC you inputted is: " + nric);
+        // Temporary stub
+        //model.updateFilteredLogsListById(this.identityNumber);
+        //return new CommandResult("The NRIC you inputted is: " + "nric");
     }
 
     @Override

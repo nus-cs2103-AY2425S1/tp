@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.IdentityNumber;
+
 
 /**
  * The API of the Model component.
@@ -85,4 +87,9 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    /**
+     * Updates the filter of the logs list to filter by the given {@code identityNumber}.
+     * @param identityNumber
+     */
+    void updateFilteredLogsListById(IdentityNumber identityNumber);
 }
