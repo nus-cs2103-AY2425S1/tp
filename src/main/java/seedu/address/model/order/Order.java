@@ -1,6 +1,6 @@
 package seedu.address.model.order;
 
-import seedu.address.model.person.Phone;
+import seedu.address.model.product.Product;
 
 import java.time.LocalDateTime;
 import java.util.List;
