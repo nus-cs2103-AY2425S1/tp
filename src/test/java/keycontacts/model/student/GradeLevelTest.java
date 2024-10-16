@@ -53,5 +53,8 @@ public class GradeLevelTest {
 
         // different values -> returns false
         assertFalse(gradeLevel.equals(new GradeLevel("Trinity 1")));
+
+        // same exam board, different grade -> returns false
+        assertFalse(gradeLevel.equals(new GradeLevel("ABRSM 2")));
     }
 }
