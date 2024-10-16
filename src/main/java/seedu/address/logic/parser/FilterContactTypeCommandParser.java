@@ -5,6 +5,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContactType;
 import seedu.address.model.person.ContactTypePredicate;
 
+/**
+ * Parses input arguments to create a new {@code FilterContactTypeCommand} object.
+ * This parser is used to handle user input and filter contacts based on their contact type.
+ */
 public class FilterContactTypeCommandParser implements Parser<FilterContactTypeCommand> {
 
     /**

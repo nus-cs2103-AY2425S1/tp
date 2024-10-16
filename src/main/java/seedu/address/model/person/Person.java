@@ -31,7 +31,8 @@ public class Person {
      * Every field must be present and not null.
      */
 
-    public Person(ContactType contactType, Name name, Phone phone, Email email, TelegramHandle telegramHandle, Set<Tag> tags) {
+    public Person(ContactType contactType, Name name, Phone phone, Email email, TelegramHandle telegramHandle,
+                  Set<Tag> tags) {
         requireAllNonNull(contactType, name, phone, email, tags);
         this.contactType = contactType;
         this.name = name;
