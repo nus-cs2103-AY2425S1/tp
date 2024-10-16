@@ -1,10 +1,8 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalTags.VALID_TAG_BRIDES_FRIEND;
-import static seedu.address.testutil.TypicalTags.VALID_TAG_BRIDES_FRIEND_WITH_SPACES;
 
 import org.junit.jupiter.api.Test;
 
