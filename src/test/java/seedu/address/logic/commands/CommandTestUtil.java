@@ -19,6 +19,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.person.Ic;
+import seedu.address.model.person.IdMatchesPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -134,6 +136,26 @@ public class CommandTestUtil {
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the person at the given {@code targetId} in the
+     * {@code model}'s address book.
+     */
+    public static void showPersonWithId(Model model, Ic targetId) {
+        model.updateFilteredPersonList(new IdMatchesPredicate(targetId));
+
+        assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the person with the given {@code targetIc} in the
+     * {@code model}'s address book.
+     */
+    public static void showPersonWithIc(Model model, Ic targetIc) {
+        model.updateFilteredPersonList(new IdMatchesPredicate(targetIc));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
