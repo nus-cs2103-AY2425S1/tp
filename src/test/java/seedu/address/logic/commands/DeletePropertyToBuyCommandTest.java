@@ -3,17 +3,15 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.logic.commands.CommandTestUtil.BUY_DESC_JACK;
 import static seedu.address.logic.commands.CommandTestUtil.BUY_DESC_KATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PROPERTY;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PROPERTY;
 import static seedu.address.testutil.TypicalPersons.JACK;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -100,7 +98,7 @@ public class DeletePropertyToBuyCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        DeletePropertyToBuyCommand command = new DeletePropertyToBuyCommand(outOfBoundIndex,INDEX_FIRST_PROPERTY,
+        DeletePropertyToBuyCommand command = new DeletePropertyToBuyCommand(outOfBoundIndex, INDEX_FIRST_PROPERTY,
                 new EditPersonPropertyDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -141,9 +139,10 @@ public class DeletePropertyToBuyCommandTest {
         Index personIndex = INDEX_SECOND_PERSON;
         Index propertyIndex = INDEX_SECOND_PROPERTY;
         EditPersonPropertyDescriptor editPersonPropertyDescriptor = new EditPersonPropertyDescriptor();
-        DeletePropertyToBuyCommand command = new DeletePropertyToBuyCommand(personIndex, propertyIndex, editPersonPropertyDescriptor);
-        String expected = DeletePropertyToBuyCommand.class.getCanonicalName() + "{personIndex=" + personIndex + ", propertyIndex=" + propertyIndex + ", editPersonDescriptor="
-                + editPersonPropertyDescriptor + "}";
+        DeletePropertyToBuyCommand command = new DeletePropertyToBuyCommand(personIndex, propertyIndex,
+                editPersonPropertyDescriptor);
+        String expected = DeletePropertyToBuyCommand.class.getCanonicalName() + "{personIndex=" + personIndex
+                + ", propertyIndex=" + propertyIndex + ", editPersonDescriptor=" + editPersonPropertyDescriptor + "}";
         assertEquals(expected, command.toString());
     }
 }

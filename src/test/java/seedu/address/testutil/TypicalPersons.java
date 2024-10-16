@@ -17,10 +17,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_JACK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_KATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTY_TO_BUY_JACK;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTY_TO_SELL_JACK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTY_TO_BUY_KATE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTY_TO_SELL_JACK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTY_TO_SELL_KATE;
-
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 

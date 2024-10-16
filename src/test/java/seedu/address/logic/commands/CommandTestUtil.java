@@ -25,10 +25,11 @@ import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Property;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.EditPersonPropertyDescriptorBuilder;
 import seedu.address.testutil.CondoToBuyBuilder;
 import seedu.address.testutil.CondoToSellBuilder;
+import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditPersonPropertyDescriptorBuilder;
+
 
 
 /**
@@ -109,7 +110,7 @@ public class CommandTestUtil {
     public static final String SELLING_PRICE_DESC_KATE = " " + PREFIX_SELLING_PRICE + VALID_SELLING_PRICE_2100000;
     public static final String POSTAL_CODE_DESC_567510 = " " + PREFIX_POSTAL_CODE + VALID_POSTAL_CODE_567510;
     public static final String POSTAL_CODE_DESC_582090 = " " + PREFIX_POSTAL_CODE + VALID_POSTAL_CODE_582090;
-    public static final String POSTAL_CODE_DESC_KATE= " " + PREFIX_POSTAL_CODE + VALID_POSTAL_CODE_582091;
+    public static final String POSTAL_CODE_DESC_KATE = " " + PREFIX_POSTAL_CODE + VALID_POSTAL_CODE_582091;
     public static final String UNIT_NUMBER_DESC_10_65 = " " + PREFIX_UNIT_NUMBER + VALID_UNIT_NUMBER_10_65;
     public static final String UNIT_NUMBER_DESC_03_11 = " " + PREFIX_UNIT_NUMBER + VALID_UNIT_NUMBER_03_11;
     public static final String UNIT_NUMBER_DESC_KATE = " " + PREFIX_UNIT_NUMBER + VALID_UNIT_NUMBER_04_12;

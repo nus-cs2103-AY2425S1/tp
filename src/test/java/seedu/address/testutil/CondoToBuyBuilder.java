@@ -10,6 +10,9 @@ import seedu.address.model.person.UnitNumber;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
+/**
+ * A utility class to help with building Condo objects
+ */
 public class CondoToBuyBuilder {
     public static final String DEFAULT_POSTAL_CODE = "212121";
     public static final String DEFAULT_UNIT_NUMBER = "22-22";
