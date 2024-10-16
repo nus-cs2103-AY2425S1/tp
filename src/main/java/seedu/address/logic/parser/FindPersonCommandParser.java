@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindPersonCommand;
@@ -13,6 +14,7 @@ import seedu.address.model.commons.Name;
 import seedu.address.model.commons.NameContainsKeywordsPredicate;
 import seedu.address.model.commons.RoleContainsKeywordPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Role;
 
 /**
  * Parses input arguments and creates a new FindPersonCommand object
@@ -33,37 +35,39 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ROLE);
 
-        if (!(argMultimap.getValue(PREFIX_NAME).isPresent()) && !(argMultimap.getValue(PREFIX_ROLE).isPresent())) {
+        if (argMultimap.getValue(PREFIX_NAME).isEmpty() && argMultimap.getValue(PREFIX_ROLE).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ROLE);
 
-        String[] nameKeywords = null;
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            nameKeywords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
-            for (String name : nameKeywords) {
-                if (!Name.isValidName(name)) {
-                    throw new ParseException(Name.MESSAGE_CONSTRAINTS);
-                }
-            }
+        Optional<String[]> nameKeywords = argMultimap.getValue(PREFIX_NAME).map(arg-> arg.split("\\s+"));
+        Optional<Boolean> isValidNamesArg = nameKeywords.map(names -> Arrays.stream(names).allMatch(Name::isValidName));
+        if (!isValidNamesArg.orElse(true)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
 
-        String role = null;
-        if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
-            role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get()).toString();
+        Optional<String> role = argMultimap.getValue(PREFIX_ROLE);
+        Optional<Boolean> isValidRoleArg = role.map(Role::isValidRole);
+        if (!isValidRoleArg.orElse(true)) {
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
 
-        Predicate<Person> predicate = null;
-        if (nameKeywords != null && nameKeywords.length > 0 && role != null) {
-            predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords))
-                    .and(new RoleContainsKeywordPredicate(role));
-        } else if (nameKeywords != null && nameKeywords.length > 0) {
-            predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
-        } else if (role != null) {
-            predicate = new RoleContainsKeywordPredicate(role);
-        }
+        Predicate<Person> predicate = getPersonPredicate(nameKeywords, role);
 
         return new FindPersonCommand(predicate);
+    }
+
+    private Predicate<Person> getPersonPredicate(Optional<String[]> nameKeywords, Optional<String> role) {
+        Predicate<Person> predicate = null;
+        if (nameKeywords.isPresent() && nameKeywords.get().length > 0 && role.isPresent()) {
+            predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords.get()))
+                    .and(new RoleContainsKeywordPredicate(role.get()));
+        } else if (nameKeywords.isPresent() && nameKeywords.get().length > 0) {
+            predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords.get()));
+        } else if (role.isPresent()) {
+            predicate = new RoleContainsKeywordPredicate(role.get());
+        }
+        return predicate;
     }
 }
