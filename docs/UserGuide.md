@@ -37,7 +37,7 @@ your contact management tasks done faster than traditional GUI apps.
 
    * `appointment-delete John Doe` : Deletes a scheduled appointment for John Doe.
 
-   * `appoointment-list` : Lists all scheduled appointments.
+   * `appointment-list` : Lists all scheduled appointments.
 
    * `reminder John Doe r/1 hour` : Sets a reminder for John Doe 1 hour before his scheduled appointment.
 
