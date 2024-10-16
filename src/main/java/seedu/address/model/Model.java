@@ -112,4 +112,9 @@ public interface Model {
      * Clears any sorting applied to the person list.
      */
     void clearPersonSort();
+
+    /**
+     * Filters for persons in the group with name {@code groupName}.
+     */
+    void filterByGroup(String groupName);
 }

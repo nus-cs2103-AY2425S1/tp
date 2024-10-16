@@ -67,4 +67,19 @@ public class GroupList {
         Group toRemove = new Group(groupName);
         remove(toRemove);
     }
+
+    /**
+     * Returns the group in the list which has name matching {@code groupName}.
+     * @throws GroupNotFoundException If no such group exists.
+     */
+    public Group get(String groupName) throws GroupNotFoundException {
+        requireNonNull(groupName);
+        Group toFind = new Group(groupName);
+        for (Group group : groups) {
+            if (group.sameName(toFind)) {
+                return group;
+            }
+        }
+        throw new GroupNotFoundException();
+    }
 }
