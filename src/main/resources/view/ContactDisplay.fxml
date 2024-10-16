@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.fxml.FXML?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import seedu.address.model.person.Person?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" 
+      spacing="10" style="-fx-padding: 10; -fx-background-color: #B5D4F5; -fx-border-color: #ccc;">
+    
+    <Label fx:id="nameLabel" text="Name:" style="-fx-font-weight: bold; -fx-font-size: 14px;" />
+    <Label fx:id="categoryLabel" text="Category:" style="-fx-font-size: 14px;" />
+    <Label fx:id="phoneLabel" text="Phone:" style="-fx-font-size: 14px;" />
+    <Label fx:id="emailLabel" text="Email:" style="-fx-font-size: 14px;" />
+    <Label fx:id="addressLabel" text="Address:" style="-fx-font-size: 14px;" />
+    <FlowPane fx:id="tags" />
+</VBox>
