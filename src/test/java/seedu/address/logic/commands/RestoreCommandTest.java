@@ -39,16 +39,16 @@ public class RestoreCommandTest {
         modelStub.addPerson(validPerson);
         RestoreCommand restoreCommand = new RestoreCommand();
 
-        assertThrows(CommandException.class, RestoreCommand.MESSAGE_DUPLICATE_PERSON,
-                () -> restoreCommand.execute(modelStub));
+        assertThrows(CommandException.class, RestoreCommand.MESSAGE_DUPLICATE_PERSON, () ->
+                restoreCommand.execute(modelStub));
     }
 
     @Test
     public void execute_noDeletedPersonToRestore_throwsCommandException() {
         ModelStubWithoutDeletedPerson modelStub = new ModelStubWithoutDeletedPerson();
         RestoreCommand restoreCommand = new RestoreCommand();
-        assertThrows(CommandException.class, RestoreCommand.MESSAGE_NOTHING_TO_RESTORE,
-                () -> restoreCommand.execute(modelStub));
+        assertThrows(CommandException.class, RestoreCommand.MESSAGE_NOTHING_TO_RESTORE, () ->
+                restoreCommand.execute(modelStub));
     }
 
 
