@@ -572,6 +572,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `delete ph 1`<br>
       Expected: No potential hires/employees are deleted. The error message will show that there are no potential hires/employees to delete.
 
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
