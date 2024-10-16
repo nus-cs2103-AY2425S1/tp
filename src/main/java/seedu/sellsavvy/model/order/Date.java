@@ -23,7 +23,7 @@ public class Date {
     private static final String REGEX_DAY = "(0[1-9]|[12][0-9]|3[01])";
     private static final String REGEX_MONTH = "(0[1-9]|1[0-2])";
     private static final String REGEX_YEAR = "(20[0-9]{2}|2100)";
-    public static final String REGEX_DATE = "^" + REGEX_DAY + "-" + REGEX_MONTH + "-" + REGEX_YEAR + "$";
+    private static final String REGEX_DATE = "^" + REGEX_DAY + "-" + REGEX_MONTH + "-" + REGEX_YEAR + "$";
     public final String value;
 
     /**

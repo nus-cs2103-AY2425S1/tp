@@ -145,6 +145,22 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding an order under a Person : `addOrder`
+
+Adds an order under a specified person from the address book.
+
+Format: `addOrder INDEX i/ITEM d/DATE [c/QUANTITY]`
+
+* List all orders of the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index and quantity **must be a positive integer** 1, 2, 3, …​
+* Date must follow the following format: `DD-MM-YYYY`
+* If the quantity is not provided, the quantity will be set to a default value of **1**.
+
+Examples:
+* `addOrder 2 i/Lamp d/20-11-2024 c/3` 
+* `addOrder 1 i/Books d/02-03-2026` Adds the order with item `Books` with quantity of **1** and delivery date `02-03-2026`
+
 ### Listing all orders under a Person : `listOrder`
 
 List all orders of a specified person from the address book.
@@ -216,5 +232,6 @@ Action                | Format, Examples
 **Edit a person**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find person(s)**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List all persons**  | `list`
+**Add an order**      | `addOrder INDEX i/ITEM d/DATE [c/QUANTITY]` <br> e.g., `addOrder 2 i/Lamp d/20-11-2024 c/3`
 **List all orders**   | `listOrder INDEX`<br> e.g., `listOrder 3`
 **Help**              | `help`

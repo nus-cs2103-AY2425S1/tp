@@ -11,7 +11,7 @@ public class Count {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Item count should be a positive integer";
-    public static final String VALIDATION_REGEX = "^[1-9]\\d*$";
+    private static final String VALIDATION_REGEX = "^[1-9]\\d*$";
     public final String value;
 
     /**
