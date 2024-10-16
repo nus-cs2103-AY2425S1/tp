@@ -36,7 +36,7 @@ public class PersonBuilder {
     private Set<HealthService> healthServices;
 
     //TODO to add default values for the rest of the fields, and add with___ methods for all fields
-    
+
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
