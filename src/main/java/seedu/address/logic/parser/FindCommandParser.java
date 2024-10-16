@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
+import java.util.List;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindEmployeeCommand;
@@ -29,16 +30,16 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
         String typeOfPerson = nameKeywords[0];
-
-        if (typeOfPerson.equals(FindEmployeeCommand.ARGUMENT_WORD)) {
-            return new FindEmployeeCommand(new NameContainsKeywordsPredicate(Arrays.asList(
-                    Arrays.copyOfRange(nameKeywords, 1, nameKeywords.length))));
+        List<String> keywords = Arrays.asList(Arrays.copyOfRange(nameKeywords, 1, nameKeywords.length));
+        if (keywords.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        } else if (typeOfPerson.equals(FindEmployeeCommand.ARGUMENT_WORD)) {
+            return new FindEmployeeCommand(new NameContainsKeywordsPredicate(keywords));
         } else if (typeOfPerson.equals(FindPotentialCommand.ARGUMENT_WORD)) {
-            return new FindPotentialCommand(new NameContainsKeywordsPredicate(Arrays.asList(
-                    Arrays.copyOfRange(nameKeywords, 1, nameKeywords.length))));
+            return new FindPotentialCommand(new NameContainsKeywordsPredicate(keywords));
         } else if (typeOfPerson.equals(FindCommand.ARGUMENT_WORD)) {
-            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(
-                    Arrays.copyOfRange(nameKeywords, 1, nameKeywords.length))));
+            return new FindCommand(new NameContainsKeywordsPredicate(keywords));
         } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
