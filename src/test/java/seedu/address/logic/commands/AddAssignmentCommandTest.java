@@ -1,13 +1,20 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ASSIGNMENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -31,15 +38,22 @@ public class AddAssignmentCommandTest {
 
     @Test
     public void execute_assignmentAcceptedByModel_addSuccessful() throws Exception {
-        Student studentToAssignAssignmentTo = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        Assignment assignmentToAdd = new AssignmentBuilder(studentToAssignAssignmentTo).build();
         AddAssignmentCommand.AssignmentDescriptor toAddDescriptor =
-                new AddAssignmentCommand.AssignmentDescriptor(AssignmentBuilder.DEFAULT_MAXSCORE,
-                        new AssignmentName(AssignmentBuilder.DEFAULT_ASSIGNMENTNAME));
-        CommandResult commandResult = new AddAssignmentCommand(INDEX_FIRST_STUDENT, toAddDescriptor).execute(model);
+                new AddAssignmentCommand.AssignmentDescriptor(AssignmentBuilder.DEFAULT_MAX_SCORE,
+                        new AssignmentName(AssignmentBuilder.DEFAULT_ASSIGNMENT_NAME));
+        AddAssignmentCommand addAssignmentCommand = new AddAssignmentCommand(INDEX_FIRST_STUDENT, toAddDescriptor);
+        CommandResult commandResult = addAssignmentCommand.execute(model);
 
-        assertEquals(String.format(AddAssignmentCommand.MESSAGE_SUCCESS, Messages.format(assignmentToAdd)),
-                commandResult.getFeedbackToUser());
-        // To add more here
+        Student studentToAssignAssignmentTo = model.getFilteredStudentList().get(0);
+        Assignment expectedAssignment = new AssignmentBuilder().withStudent(studentToAssignAssignmentTo).build();
+        studentToAssignAssignmentTo = studentToAssignAssignmentTo.addAssignment(expectedAssignment);
+        expectedAssignment = studentToAssignAssignmentTo.getAssignmentList().get(0);
+        String expectedMessage = String.format(AddAssignmentCommand.MESSAGE_SUCCESS,
+                Messages.format(expectedAssignment));
+
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
+        // Fails because of bug
+        assertEquals(expectedAssignment, commandResult.getStudent().getAssignmentList()
+                .get(0));
     }
 }
