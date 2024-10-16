@@ -17,8 +17,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.product.Product;
 import seedu.address.model.person.SupplierStatus;
+import seedu.address.model.product.Product;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -136,7 +136,7 @@ public class ParserUtil {
      */
     public static SupplierStatus parseSupplierStatus(String statusString) throws ParseException {
         try {
-            return new SupplierStatus(statusString);
+            return new SupplierStatus(statusString.trim());
         } catch (IllegalArgumentException e) {
             throw new ParseException(SupplierStatus.MESSAGE_CONSTRAINTS);
         }

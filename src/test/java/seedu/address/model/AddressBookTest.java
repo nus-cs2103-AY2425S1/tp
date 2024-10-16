@@ -22,8 +22,6 @@ import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.product.Product;
-import seedu.address.model.supplier.Supplier;
 import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -110,8 +108,6 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Delivery> deliveries = FXCollections.observableArrayList();
-        private final ObservableList<Supplier> suppliers = FXCollections.observableArrayList();
-        private final ObservableList<Product> products = FXCollections.observableArrayList();
 
 
         public static AddressBookStub withPersons(Collection<Person> persons) {
@@ -125,27 +121,16 @@ public class AddressBookTest {
             stub.deliveries.setAll(deliveries);
             return stub;
         }
-        public static AddressBookStub withSuppliers(Collection<Supplier> suppliers) {
-            AddressBookStub stub = new AddressBookStub();
-            stub.suppliers.setAll(suppliers);
-            return stub;
-        }
+
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
         }
         @Override
-        public ObservableList<Product> getProductList() {
-            return products;
-        }
-        @Override
         public ObservableList<Delivery> getDeliveryList() {
             return deliveries;
         }
-        @Override
-        public ObservableList<Supplier> getSupplierList() {
-            return suppliers;
-        }
+
     }
 
 }

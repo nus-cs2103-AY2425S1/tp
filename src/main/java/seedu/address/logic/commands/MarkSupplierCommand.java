@@ -38,7 +38,7 @@ public class MarkSupplierCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (targetIndex.getZeroBased() >= model.getFilteredSupplierList().size()) {
+        if (targetIndex.getZeroBased() >= model.getFilteredPersonList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);
         }
 
@@ -60,6 +60,7 @@ public class MarkSupplierCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof MarkSupplierCommand // instanceof handles nulls
-                && targetIndex.equals(((MarkSupplierCommand) other).targetIndex)); // state check
+                && targetIndex.equals(((MarkSupplierCommand) other).targetIndex)
+                && status.equals(((MarkSupplierCommand) other).status)); // state check
     }
 }

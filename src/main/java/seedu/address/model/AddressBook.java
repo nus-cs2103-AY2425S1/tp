@@ -10,7 +10,6 @@ import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.UniqueDeliveryList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.supplier.Supplier;
 
 /**
  * Wraps all data at the address-book level
@@ -59,13 +58,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setDeliveries(List<Delivery> deliveries) {
         this.deliveries.setDeliveries(deliveries);
-    }
-    /**
-     * Replaces the contents of the supplier list with {@code suppliers}.
-     * {@code suppliers} must not contain duplicate suppliers.
-     */
-    public void setSuppliers(List<Supplier> suppliers) {
-        this.suppliers.setSuppliers(suppliers);
     }
 
     /**

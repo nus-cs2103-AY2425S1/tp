@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class SupplierStatus {
     public static final String MESSAGE_CONSTRAINTS = "Status should be either active or inactive";
-    public static final String VALIDATION_REGEX = "active|inactive";
+    public static final String VALIDATION_REGEX = "^$|active|inactive";
     public final String status;
 
     /**
@@ -17,8 +17,8 @@ public class SupplierStatus {
      * @param status A valid status.
      */
     public SupplierStatus(String status) {
-        checkArgument(isValidStatus(status), MESSAGE_CONSTRAINTS);
-        this.status = status;
+        checkArgument(isValidStatus(status.trim()), MESSAGE_CONSTRAINTS);
+        this.status = status.trim();
     }
 
     public static boolean isValidStatus(String test) {
