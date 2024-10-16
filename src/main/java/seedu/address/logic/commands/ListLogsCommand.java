@@ -27,7 +27,7 @@ public class ListLogsCommand extends Command {
         if (id == null) {
             throw new IllegalArgumentException("Invalid Identity Number");
         }
-        this.identityNumber = id;  // Directly assign the identityNumber
+        this.identityNumber = id; // Directly assign the identityNumber
     }
 
     @Override

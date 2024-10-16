@@ -18,13 +18,16 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform to the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_IDENTITY_NUMBER); // Use the identity number prefix
+        // Use the identity number prefix to tokenize the arguments
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_IDENTITY_NUMBER);
 
         if (!argMultimap.getValue(PREFIX_IDENTITY_NUMBER).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
-        IdentityNumber identityNumber = ParserUtil.parseIdentityNumber(argMultimap.getValue(PREFIX_IDENTITY_NUMBER).get()); // Use IdentityNumber class
+        // Use IdentityNumber class to parse the identity number
+        IdentityNumber identityNumber = ParserUtil.parseIdentityNumber(
+                argMultimap.getValue(PREFIX_IDENTITY_NUMBER).get());
 
         return new DeleteCommand(identityNumber);
     }
