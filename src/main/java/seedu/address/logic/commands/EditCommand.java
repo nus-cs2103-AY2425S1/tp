@@ -235,7 +235,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("telegram", telegram)
-                    .add("role", roles)
+                    .add("roles", roles)
                     .toString();
         }
     }

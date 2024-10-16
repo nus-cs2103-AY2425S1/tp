@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Role {
 
-    public static final String MESSAGE_CONSTRAINTS = "Role names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Role length should be between 1 to 30 characters";
+    public static final String VALIDATION_REGEX = "^(?!\\s)(?=.{1,30}$)[a-zA-Z0-9]+(?<!\\s)$";
 
     public final String roleName;
 
@@ -26,7 +26,7 @@ public class Role {
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid role name.
      */
     public static boolean isValidRoleName(String test) {
         return test.matches(VALIDATION_REGEX);
