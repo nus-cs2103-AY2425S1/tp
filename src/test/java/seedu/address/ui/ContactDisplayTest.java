@@ -24,6 +24,7 @@ public class ContactDisplayTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) {
+        System.setProperty("java.awt.headless", "true");
         contactDisplay = new ContactDisplay();
         Scene scene = new Scene(contactDisplay.getRoot());
         stage.setScene(scene);
