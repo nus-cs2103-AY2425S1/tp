@@ -190,4 +190,22 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String tag} into a {@code Tag}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static Network parseNetwork(String network) throws ParseException {
+        requireNonNull(network);
+        String trimmedNetwork = network.trim();
+        try {
+            return Network.valueOf(trimmedNetwork);
+        }
+        catch(IllegalArgumentException e){
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
+    }
+
 }

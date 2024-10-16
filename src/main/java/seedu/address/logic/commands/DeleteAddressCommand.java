@@ -1,15 +1,19 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
+import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.person.Person;
 
 /**
@@ -17,22 +21,23 @@ import seedu.address.model.person.Person;
  * used in the displayed person list and their crypto network.
  */
 public class DeleteAddressCommand extends Command {
-    public static final Prefix PREFIX_NETWORK = new Prefix("c/"); //#TODO: Placeholder
     public static final String COMMAND_WORD = "dela"; // short for delete address
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person's public address identified by the index number "
             + "used in the displayed person list and their crypto network.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + PREFIX_NETWORK + "Network"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_NETWORK + "BTC";
+            + PREFIX_PUBLIC_ADDRESS + "Network"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_PUBLIC_ADDRESS + "BTC";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person's Address: %1$s";
 
     private final Index targetIndex;
+    private final Network targetAddressnetwork;
 
-    public DeleteAddressCommand(Index targetIndex) {
+    public DeleteAddressCommand(Index targetIndex, Network network) {
         this.targetIndex = targetIndex;
+        this.targetAddressnetwork = network;
     }
 
     @Override
@@ -45,7 +50,13 @@ public class DeleteAddressCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
+
+        // TODO Implement deleting by individual address
+        // Currently deleting all in the network
+        Map<Network, Set<PublicAddress>> addresses = personToDelete.getPublicAddresses();
+        addresses.remove(targetAddressnetwork);
+        personToDelete.setPublicAddresses(addresses);
+
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 

@@ -64,9 +64,26 @@ public class Person {
         return publicAddresses.getOrDefault(network, new HashSet<>());
     }
 
+    /**
+     * Gets the current Public address map
+     * Should be replaced with a better method in the future
+     *
+     * @return publicAddresses
+     */
     public Map<Network, Set<PublicAddress>> getPublicAddresses() {
         return Collections.unmodifiableMap(publicAddresses);
     }
+
+    /**
+     * Sets the Public address to a new one
+     * Should be replaced with a better method in the future
+     *
+     * @param addresses
+     */
+    public void setPublicAddresses(Map<Network, Set<PublicAddress>> addresses) {
+        this.publicAddresses = addresses;
+    }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
