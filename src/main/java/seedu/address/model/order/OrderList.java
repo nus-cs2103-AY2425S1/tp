@@ -3,48 +3,113 @@ package seedu.address.model.order;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderList<T extends Order> {
-    private final List<T> orders;
+/**
+ * Class to manage a list of orders, including both supply and customer orders.
+ */
+public class OrderList {
+    private List<SupplyOrder> supplyOrders;
+    private List<CustomerOrder> customerOrders;
 
+    /**
+     * Constructor for OrderList.
+     * Initializes the lists of supply and customer orders.
+     */
     public OrderList() {
-        this.orders = new ArrayList<>();
+        this.supplyOrders = new ArrayList<>();
+        this.customerOrders = new ArrayList<>();
     }
 
-    // Add an order
-    public void addOrder(T order) {
-        orders.add(order);
+    /**
+     * Adds a supply order to the list.
+     *
+     * @param supplyOrder The supply order to be added.
+     */
+    public void addSupplyOrder(SupplyOrder supplyOrder) {
+        supplyOrders.add(supplyOrder);
     }
 
-    // Remove an order
-    public boolean removeOrder(T order) {
-        return orders.remove(order);
+    /**
+     * Adds a customer order to the list.
+     *
+     * @param customerOrder The customer order to be added.
+     */
+    public void addCustomerOrder(CustomerOrder customerOrder) {
+        customerOrders.add(customerOrder);
     }
 
-    // Get all orders
-    public List<T> getAllOrders() {
-        return new ArrayList<>(orders);  // Return a copy to protect encapsulation
+    /**
+     * Retrieves all supply orders.
+     *
+     * @return A list of all supply orders.
+     */
+    public List<SupplyOrder> getSupplyOrders() {
+        return new ArrayList<>(supplyOrders);  // Return a copy of the list to avoid modification
     }
 
-    // Count total orders
-    public int getOrderCount() {
-        return orders.size();
+    /**
+     * Retrieves all customer orders.
+     *
+     * @return A list of all customer orders.
+     */
+    public List<CustomerOrder> getCustomerOrders() {
+        return new ArrayList<>(customerOrders);  // Return a copy of the list to avoid modification
     }
 
-    // Find orders by status (e.g., "Pending", "Completed")
-    public List<T> findOrdersByStatus(String status) {
-        List<T> filteredOrders = new ArrayList<>();
-        for (T order : orders) {
-            if (order.getStatus().equalsIgnoreCase(status)) {
-                filteredOrders.add(order);
+    /**
+     * Finds a supply order by the customer's phone number.
+     *
+     * @param phoneNumber The phone number of the customer.
+     * @return The supply order associated with the given phone number, or null if not found.
+     */
+    public SupplyOrder findSupplyOrderByPhoneNumber(String phoneNumber) {
+        for (SupplyOrder order : supplyOrders) {
+            if (order.getPhoneNumber().equals(phoneNumber)) {
+                return order;
             }
         }
-        return filteredOrders;
+        return null;  // Return null if not found
+    }
+
+    /**
+     * Finds a customer order by the customer's phone number.
+     *
+     * @param phoneNumber The phone number of the customer.
+     * @return The customer order associated with the given phone number, or null if not found.
+     */
+    public CustomerOrder findCustomerOrderByPhoneNumber(String phoneNumber) {
+        for (CustomerOrder order : customerOrders) {
+            if (order.getPhoneNumber().equals(phoneNumber)) {
+                return order;
+            }
+        }
+        return null;  // Return null if not found
+    }
+
+    /**
+     * Removes a supply order by the customer's phone number.
+     *
+     * @param phoneNumber The phone number of the customer.
+     * @return True if the order was successfully removed, false otherwise.
+     */
+    public boolean removeSupplyOrder(String phoneNumber) {
+        return supplyOrders.removeIf(order -> order.getPhoneNumber().equals(phoneNumber));
+    }
+
+    /**
+     * Removes a customer order by the customer's phone number.
+     *
+     * @param phoneNumber The phone number of the customer.
+     * @return True if the order was successfully removed, false otherwise.
+     */
+    public boolean removeCustomerOrder(String phoneNumber) {
+        return customerOrders.removeIf(order -> order.getPhoneNumber().equals(phoneNumber));
     }
 
     @Override
     public String toString() {
         return "OrderList{" +
-                "orders=" + orders +
+                "supplyOrders=" + supplyOrders +
+                ", customerOrders=" + customerOrders +
                 '}';
     }
 }
