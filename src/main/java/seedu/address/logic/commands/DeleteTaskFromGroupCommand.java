@@ -64,7 +64,7 @@ public class DeleteTaskFromGroupCommand extends Command {
         }
 
         model.deleteTaskFromGroup(task, group);
-        model.deleteTask(task);
+        model.decreaseGroupWithTask(task);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(task), Messages.format(group)));
     }

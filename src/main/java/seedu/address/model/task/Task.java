@@ -1,6 +1,7 @@
 package seedu.address.model.task;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.commons.util.ToStringBuilder;
 
@@ -13,6 +14,7 @@ public class Task {
     private final TaskName name;
     private final Deadline deadline;
     private final Status status;
+    private int groupsWithTask = 1;
 
     /**
      * Every field must be present and not null.
@@ -26,10 +28,11 @@ public class Task {
     /**
      * Every field must be present and not null.
      */
-    public Task(TaskName name, Deadline deadline, Status status) {
+    public Task(TaskName name, Deadline deadline, Status status, int groupsWithTask) {
         this.name = name;
         this.deadline = deadline;
         this.status = status;
+        this.groupsWithTask = groupsWithTask;
     }
 
     public TaskName getTaskName() {
@@ -44,6 +47,10 @@ public class Task {
         return status;
     }
 
+    public int getGroupsWithTask() {
+        return groupsWithTask;
+    }
+
     /**
      * Returns true if both Tasks have the same name and data fields.
      * This defines a weaker notion of equality between two tasks.
@@ -55,8 +62,15 @@ public class Task {
 
         return otherTask != null
             && otherTask.getTaskName().toString().equalsIgnoreCase(getTaskName().toString())
-            && otherTask.getDeadline().equals(getDeadline())
-            && otherTask.getStatus() == getStatus();
+            && otherTask.getDeadline().equals(getDeadline());
+    }
+
+    public void increaseGroupWithTask() {
+        this.groupsWithTask++;
+    }
+
+    public void decreaseGroupWithTask() {
+        this.groupsWithTask--;
     }
 
     /**
@@ -74,8 +88,7 @@ public class Task {
             return false;
         }
         return name.equals(otherTask.getTaskName())
-            && deadline.equals(otherTask.getDeadline())
-            && status.equals(otherTask.getStatus());
+            && deadline.equals(otherTask.getDeadline());
     }
 
     @Override

@@ -352,4 +352,14 @@ public class ModelManager implements Model {
         addressBook.deleteTaskFromGroup(task, group);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
+
+    @Override
+    public void increaseGroupWithTask(Task task) {
+        addressBook.incrementTask(task);
+    }
+
+    @Override
+    public void decreaseGroupWithTask(Task task) {
+        addressBook.decrementTask(task);
+    }
 }
