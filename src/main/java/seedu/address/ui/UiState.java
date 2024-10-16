@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import seedu.address.logic.commands.NoteCommand;
-
 /**
  * Stores the current state of the UI display.
  */

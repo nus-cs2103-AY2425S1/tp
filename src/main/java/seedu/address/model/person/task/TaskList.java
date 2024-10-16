@@ -147,7 +147,7 @@ public class TaskList implements Iterable<Task> {
 
         return String.join("\n", result);
     }
-  
+
     /**
      * Creates and returns a copy of the current TaskList.
      * This performs a deep copy of the tasks.
