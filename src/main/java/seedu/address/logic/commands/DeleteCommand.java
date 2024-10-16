@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -33,7 +34,11 @@ public class DeleteCommand extends Command {
             + "                      "
             + COMMAND_WORD + " " + PREFIX_NAME + "John Doe";
 
+    public static final String MESSAGE_DELETE_BY_ID = "Please delete by ID using id/";
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_MULTIPLE_MATCHES = "Multiple persons found with the name";
+    public static final String MESSAGE_NAME_NOT_FOUND = "No person with that name found.";
+    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     private final Index targetIndex;
     private final Name targetName;
@@ -55,13 +60,30 @@ public class DeleteCommand extends Command {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
-
             Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
             model.deletePerson(personToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
         } else {
-            Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+            List<Person> matchingPersons = model.getFilteredPersonList().stream()
+                    .filter(person -> person.getName().equals(targetName))
+                    .toList();
+
+            if (matchingPersons.isEmpty()) {
+                throw new CommandException(MESSAGE_NAME_NOT_FOUND);
+            } else if (matchingPersons.size() == 1) {
+                Person personToDelete = matchingPersons.get(0);
+                model.deletePerson(personToDelete);
+                return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+            } else {
+                StringBuilder message = new StringBuilder(MESSAGE_MULTIPLE_MATCHES)
+                        .append(" '")
+                        .append(targetName)
+                        .append("'. ")
+                        .append(MESSAGE_DELETE_BY_ID)
+                        .append('\n');
+                model.updateFilteredPersonList(person -> person.getName().equals(targetName));
+                return new CommandResult(message.toString());
+            }
         }
     }
 
