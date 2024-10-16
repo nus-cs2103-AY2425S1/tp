@@ -36,6 +36,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of vendors */
     ObservableList<Vendor> getFilteredVendorList();
 
+    /** Returns an unmodifiable view of the filtered list of events */
+    ObservableList<Event> getFilteredEventList();
+
     /** Returns a view of the current selected vendor */
     ObservableObjectValue<Vendor> getViewedVendor();
 
