@@ -113,9 +113,19 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Age updatedAge = editPersonDescriptor.getAge().orElse(personToEdit.getAge());
         Sex updatedSex = editPersonDescriptor.getSex().orElse(personToEdit.getSex());
-        Set<Appointment> updatedAppointment = editPersonDescriptor.getAppointments()
-                .orElse(personToEdit.getAppointment());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+
+        Set<Appointment> updatedAppointment = new HashSet<>(editPersonDescriptor.getAppointments()
+                .orElse(personToEdit.getAppointment()));
+
+        if (!updatedAppointment.isEmpty()) {
+            updatedAppointment.addAll(personToEdit.getAppointment());
+        }
+
+        Set<Tag> updatedTags = new HashSet<>(editPersonDescriptor.getTags().orElse(personToEdit.getTags()));
+
+        if (!updatedTags.isEmpty()) {
+            updatedTags.addAll(personToEdit.getTags());
+        }
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
                           updatedAge, updatedSex, updatedAppointment, updatedTags);
