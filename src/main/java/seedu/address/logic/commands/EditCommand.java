@@ -100,6 +100,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Telegram updatedAddress = editPersonDescriptor.getTelegram().orElse(personToEdit.getTelegram());
+        List<Tag> updatedRole = editPersonDescriptor.getTags().orElse(personToEdit.getTags()).stream().toList();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
@@ -120,7 +121,6 @@ public class EditCommand extends Command {
         return index.equals(otherEditCommand.index)
                 && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -138,6 +138,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Telegram telegram;
+        // private List<Role> roles;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -151,6 +152,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setTelegram(toCopy.telegram);
+            // setRoles(toCopy.roles);
             setTags(toCopy.tags);
         }
 
@@ -192,6 +194,17 @@ public class EditCommand extends Command {
         public Optional<Telegram> getTelegram() {
             return Optional.ofNullable(telegram);
         }
+
+        /*
+        public void setRoles(List<Role> roles) {
+            this.roles = roles;
+        }
+
+        public Optional<List<Role>> getRoles() {
+            return Optional.ofNullable(roles);
+        }
+
+         */
 
         /**
          * Sets {@code tags} to this object's {@code tags}.

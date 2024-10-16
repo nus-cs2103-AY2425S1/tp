@@ -23,6 +23,7 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final Telegram telegram;
+
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
 

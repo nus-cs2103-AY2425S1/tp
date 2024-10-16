@@ -104,6 +104,7 @@ class JsonAdaptedPerson {
         final Telegram modelTelegram = new Telegram(telegram);
 
         final Set<Tag> modelTags = new HashSet<>(personRoles);
+
         return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelTags);
     }
 
