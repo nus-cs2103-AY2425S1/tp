@@ -19,9 +19,4 @@ public class FacultySportCommitteeMember extends CommitteeMember {
         this.faculty = faculty;
         setRoleName(getRoleName() + " - " + faculty);
     }
-
-    @Override
-    public String toString() {
-        return "[" + getRoleName() + " - " + getBranch() + " " + PositionString.getPositionString(getPosition()) + "]";
-    }
 }

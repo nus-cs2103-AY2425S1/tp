@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_ATHLETE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -33,7 +33,7 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withRoles(VALID_ROLE_HUSBAND).build();
+                .withRoles(VALID_ROLE_ATHLETE).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -81,7 +81,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different roles -> returns false
-        editedAlice = new PersonBuilder(ALICE).withRoles(VALID_ROLE_HUSBAND).build();
+        editedAlice = new PersonBuilder(ALICE).withRoles(VALID_ROLE_ATHLETE).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 

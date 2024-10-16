@@ -12,7 +12,7 @@ public class Volunteer extends Role {
      * Creates a Volunteer object with the given {@link VolunteerRole}.
      */
     public Volunteer(VolunteerRole volunteerRole) {
-        super("Volunteer - " + volunteerRole);
+        super("Volunteer - " + VolunteerRoleString.getVolunteerRoleString(volunteerRole));
         this.volunteerRole = volunteerRole;
     }
 }

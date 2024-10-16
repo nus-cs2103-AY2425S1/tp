@@ -9,10 +9,10 @@ public class PositionString {
     public static String getPositionString(Position position) {
         requireNonNull(position);
         return switch (position) {
-        case PROJECT_DIRECTOR -> "PD";
-        case VICE_PROJECT_DIRECTOR -> "VPD";
-        case SPORTS_DIRECTOR -> "SD";
-        case VICE_SPORTS_DIRECTOR -> "VSD";
+        case PROJECT_DIRECTOR -> "Project Director";
+        case VICE_PROJECT_DIRECTOR -> "Vice Project Director";
+        case SPORTS_DIRECTOR -> "Sports Director";
+        case VICE_SPORTS_DIRECTOR -> "Vice Sports Director";
         case MEMBER -> "";
         };
     }

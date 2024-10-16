@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -206,12 +208,16 @@ public class ParserUtil {
         return switch (roleType.toLowerCase()) {
         case "athlete" -> {
             Faculty faculty = parseFaculty(tagSplit[1]);
-            Sport sport = parseSport(tagSplit[2]);
-            yield new Athlete(faculty, sport);
+            List<Sport> sports = Arrays.stream(tagSplit[2].split(", ")).map(ParserUtil::parseSport).toList();
+            yield new Athlete(faculty, sports);
         }
         case "committee" -> {
             Branch branch = parseBranch(tagSplit[1]);
             Position position = parsePosition(tagSplit[2]);
+            if (branch.equals(Branch.SPORTS) && !tagSplit[3].isEmpty()) {
+                Faculty faculty = parseFaculty(tagSplit[3]);
+                yield new FacultySportCommitteeMember(faculty, position);
+            }
             yield new CommitteeMember(branch, position);
         }
         case "faculty sports" -> {
