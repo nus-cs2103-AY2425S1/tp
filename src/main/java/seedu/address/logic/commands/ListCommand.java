@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_VENDORS;
 
 import seedu.address.model.Model;
+import seedu.address.ui.UiState;
 
 /**
  * Displays multiview of vendor and event lists to the user.
@@ -26,6 +27,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        model.setUiState(UiState.DEFAULT);
         model.updateFilteredVendorList(PREDICATE_SHOW_ALL_VENDORS);
         return new CommandResult(MESSAGE_MULTIVIEW_SUCCESS);
     }

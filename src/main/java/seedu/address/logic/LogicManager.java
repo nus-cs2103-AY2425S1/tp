@@ -5,6 +5,7 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -15,8 +16,10 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.storage.Storage;
+import seedu.address.ui.UiState;
 
 /**
  * The main LogicManager of the app.
@@ -24,8 +27,8 @@ import seedu.address.storage.Storage;
 public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_FORMAT = "Could not save data due to the following error: %s";
 
-    public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
-            "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
+    public static final String FILE_OPS_PERMISSION_ERROR_FORMAT = "Could not save data to file %s due to insufficient"
+            + " permissions to write to the file or the folder.";
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
@@ -69,6 +72,21 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Vendor> getFilteredVendorList() {
         return model.getFilteredVendorList();
+    }
+
+    @Override
+    public ObservableObjectValue<Vendor> getViewedVendor() {
+        return model.getViewedVendor();
+    }
+
+    @Override
+    public ObservableObjectValue<Event> getViewedEvent() {
+        return model.getViewedEvent();
+    }
+
+    @Override
+    public ObservableObjectValue<UiState> getUiState() {
+        return model.getUiState();
     }
 
     @Override
