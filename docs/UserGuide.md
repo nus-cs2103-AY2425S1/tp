@@ -132,11 +132,11 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Marking Attendance: `attend`
+### Marking Attendance: `markattend`
 
 Marks the attendance of the specified person from the address book.
 
-Format: `attend INDEX`
+Format: `markattend INDEX`
 
 * Marks the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
