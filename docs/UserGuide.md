@@ -127,6 +127,22 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Locating persons by phone number: `fp`
+
+Finds persons whose phone number begins with the given keyword.
+
+Format: `fp KEYWORD`
+
+* Only numbers are allowed.
+* Only the phone number is searched.
+* Only numbers that begin with keyword will be matched e.g. `8765432` will not match `98765432`
+
+Examples:
+* `fp 9` returns every contact that has phone number beginning with `9`
+* `fp 9123` returns every contact that has phone number beginning with `9123`
+* `fp 98765432` returns every contact that has phone number `98765432`
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
