@@ -9,10 +9,10 @@ import careconnect.commons.util.ToStringBuilder;
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Person> {
+public class NameOrAddressContainsKeywordPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
-    public NameContainsKeywordsPredicate(List<String> keywords) {
+    public NameOrAddressContainsKeywordPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -25,23 +25,30 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         return (keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsPartialWordIgnoreCase(person.getName().fullName, keyword))
+                || keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsPartialWordIgnoreCase(person.getAddress().toString(), keyword))
+                || keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsPartialWordIgnoreCase(person.getEmail().toString(), keyword))
             );
     }
 
     @Override
     public boolean equals(Object other) {
-        System.out.println("Hello NameContainsKeywordsPrecdicate");
         if (other == this) {
             return true;
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof NameOrAddressContainsKeywordPredicate)) {
             return false;
         }
 
-        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
+        NameOrAddressContainsKeywordPredicate otherNameContainsKeywordsPredicate = (NameOrAddressContainsKeywordPredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+    }
+
+    public List<String> getKeywords() {
+        return keywords;
     }
 
     @Override

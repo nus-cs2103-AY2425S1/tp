@@ -6,6 +6,7 @@ import careconnect.logic.Messages;
 import careconnect.logic.commands.FindCommand;
 import careconnect.logic.parser.exceptions.ParseException;
 import careconnect.model.person.NameContainsKeywordsPredicate;
+import careconnect.model.person.NameOrAddressContainsKeywordPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -30,7 +31,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FindCommand(new NameOrAddressContainsKeywordPredicate(Arrays.asList(nameKeywords)));
     }
 
 }
