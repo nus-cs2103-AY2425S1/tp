@@ -62,12 +62,14 @@ public class AddContactCommandParser implements Parser<AddCommand> {
             throw new ParseException(AddCommand.MESSAGE_USAGE);
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_SERVICE)
+        if ((!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_SERVICE)
+                || !argMultimap.getPreamble().isEmpty())
                 && contactType == VENDOR) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddCommand.VENDOR_MESSAGE_USAGE));
-        } else if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS,
+        } else if ((!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS,
                 PREFIX_PHONE, PREFIX_EMAIL, PREFIX_DATE)
+                || !argMultimap.getPreamble().isEmpty())
                 && contactType == CLIENT) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddCommand.CLIENT_MESSAGE_USAGE));

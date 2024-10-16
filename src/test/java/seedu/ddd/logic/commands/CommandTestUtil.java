@@ -20,6 +20,7 @@ import seedu.ddd.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.ddd.logic.commands.EditCommand.EditVendorDescriptor;
 import seedu.ddd.logic.commands.exceptions.CommandException;
+import seedu.ddd.logic.parser.CliFlags;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.contact.common.Contact;
@@ -50,6 +51,8 @@ public class CommandTestUtil {
     public static final String VALID_ID_AMY = "123";
     public static final String VALID_ID_BOB = "456";
 
+    public static final String CLIENT_FLAG = " " + CliFlags.FLAG_CLIENT.getPrefix();
+    public static final String VENDOR_FLAG = " " + CliFlags.FLAG_VENDOR.getPrefix();
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -67,6 +70,9 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE
+            + "2024/10/16"; // yyyy/MM/dd not allowed for dates
+    public static final String INVALID_SERVICE_DESC = " " + PREFIX_SERVICE + "@Cleaning"; // '@' not allowed in services
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
