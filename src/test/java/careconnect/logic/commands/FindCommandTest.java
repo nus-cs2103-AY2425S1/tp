@@ -19,7 +19,6 @@ import org.junit.jupiter.api.Test;
 import careconnect.model.Model;
 import careconnect.model.ModelManager;
 import careconnect.model.UserPrefs;
-import careconnect.model.person.NameContainsKeywordsPredicate;
 import careconnect.model.person.NameOrAddressContainsKeywordPredicate;
 
 /**
