@@ -116,11 +116,14 @@ Renames an existing tag in the address book.
 Format: `renameTag [ot/OLDTAG] [nt/NEWTAG]`
 
 * Renames the tags called `OLDTAG` to `NEWTAG`.
-* Every contact with the tag `OLDTAG` will be edited.
+* Contacts with the tag `OLDTAG` will now have `NEWTAG`, with `OLDTAG` removed
+* If `OLDTAG` is not an existing tag, `[OLDTAG] tag is not found` will be returned.
 
 Examples:
-*  `renameTag ot/manager nt/boss` Renames the tag `manager` to be `boss`.
+*  `renameTag ot/manager nt/boss` Renames the tag `colleagues` to be `boss`.
+![result for 'rename tag1'](images/renameTagResult1.png)
 *  `renameTag ot/friends nt/enemies` Edits the tag `friends` to be `enemies`.
+![result for 'rename tag2'](images/renameTagResult2.png)
 
 ### Locating persons by name: `find`
 
