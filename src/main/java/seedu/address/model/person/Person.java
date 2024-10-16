@@ -29,8 +29,8 @@ public class Person {
     private final Set<Role> roles = new HashSet<>();
 
     // Dependents
-    private final Set<Person> caregivers = new HashSet<>();
-    private final Set<Person> patients = new HashSet<>();
+    private final Set<Nric> caregivers = new HashSet<>();
+    private final Set<Nric> patients = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -51,7 +51,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Nric nric, Phone phone, Email email, Address address,
-            Set<Tag> tags, Set<Role> roles, Set<Person> caregivers, Set<Person> patients) {
+            Set<Tag> tags, Set<Role> roles, Set<Nric> caregivers, Set<Nric> patients) {
         requireAllNonNull(name, nric, phone, email, address, tags, roles);
         this.name = name;
         this.nric = nric;
@@ -99,19 +99,19 @@ public class Person {
         return address;
     }
 
-    public boolean hasCaregiver(Person caregiver) {
+    public boolean hasCaregiver(Nric caregiver) {
         return caregivers.contains(caregiver);
     }
 
-    public boolean hasPatient(Person patient) {
+    public boolean hasPatient(Nric patient) {
         return patients.contains(patient);
     }
 
-    public void addCaregiver(Person caregiver) {
+    public void addCaregiver(Nric caregiver) {
         caregivers.add(caregiver);
     }
 
-    public void addPatient(Person patient) {
+    public void addPatient(Nric patient) {
         patients.add(patient);
     }
 
@@ -120,7 +120,7 @@ public class Person {
      *
      * @param caregiver The caregiver to be removed.
      */
-    public void removeCaregiver(Person caregiver) {
+    public void removeCaregiver(Nric caregiver) {
         if (this.hasCaregiver(caregiver)) {
             caregivers.remove(caregiver);
         }
@@ -132,7 +132,7 @@ public class Person {
      *
      * @param patient The patient to be removed.
      */
-    public void removePatient(Person patient) {
+    public void removePatient(Nric patient) {
         if (this.hasPatient(patient)) {
             patients.remove(patient);
         }
@@ -161,7 +161,7 @@ public class Person {
      * {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Person> getCaregivers() {
+    public Set<Nric> getCaregivers() {
         return Collections.unmodifiableSet(caregivers);
     }
 
@@ -170,7 +170,7 @@ public class Person {
      * {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Person> getPatients() {
+    public Set<Nric> getPatients() {
         return Collections.unmodifiableSet(patients);
     }
 

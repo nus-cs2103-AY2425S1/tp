@@ -118,7 +118,9 @@ public class UniquePersonList implements Iterable<Person> {
      * @return
      */
     public boolean hasLink(Person patient, Person caregiver) {
-        return patient.hasCaregiver(caregiver) && caregiver.hasPatient(patient);
+        return patient == caregiver
+                || patient.hasPatient(caregiver.getNric()) && caregiver.hasCaregiver(patient.getNric())
+                || patient.hasCaregiver(caregiver.getNric()) && caregiver.hasPatient(patient.getNric());
     }
 
     /**
@@ -127,8 +129,8 @@ public class UniquePersonList implements Iterable<Person> {
      * @param caregiver
      */
     public void addLink(Person patient, Person caregiver) {
-        patient.addCaregiver(caregiver);
-        caregiver.addPatient(patient);
+        patient.addCaregiver(caregiver.getNric());
+        caregiver.addPatient(patient.getNric());
     }
 
     /**
@@ -137,8 +139,8 @@ public class UniquePersonList implements Iterable<Person> {
      * @param caregiver
      */
     public void deleteLink(Person patient, Person caregiver) {
-        patient.removeCaregiver(caregiver);
-        caregiver.removePatient(patient);
+        patient.removeCaregiver(caregiver.getNric());
+        caregiver.removePatient(patient.getNric());
     }
 
     /**

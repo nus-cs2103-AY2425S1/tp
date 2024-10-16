@@ -33,8 +33,8 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedRole> roles = new ArrayList<>();
     private final String nric;
-    private final List<JsonAdaptedPerson> caregivers = new ArrayList<>();
-    private final List<JsonAdaptedPerson> patients = new ArrayList<>();
+    private final List<Nric> caregivers = new ArrayList<>();
+    private final List<Nric> patients = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -44,8 +44,8 @@ class JsonAdaptedPerson {
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
             @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("roles") List<JsonAdaptedRole> roles,
-            @JsonProperty("caregivers") List<JsonAdaptedPerson> caregivers,
-            @JsonProperty("patients") List<JsonAdaptedPerson> patients) {
+            @JsonProperty("caregivers") List<Nric> caregivers,
+            @JsonProperty("patients") List<Nric> patients) {
         this.name = name;
         this.nric = nric;
         this.phone = phone;
@@ -77,8 +77,8 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
         roles.addAll(source.getRoles().stream().map(JsonAdaptedRole::new).collect(Collectors.toList()));
-        patients.addAll(source.getPatients().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
-        caregivers.addAll(source.getCaregivers().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        patients.addAll(source.getPatients());
+        caregivers.addAll(source.getCaregivers());
     }
 
     /**
@@ -139,20 +139,16 @@ class JsonAdaptedPerson {
             roleList.add(role.toModelType());
         }
 
-        final List<Person> caregiversList = new ArrayList<>();
-        for (JsonAdaptedPerson person : caregivers) {
-            caregiversList.add(person.toModelType());
-        }
+        final Set<Nric> caregiverNrics = caregivers.stream()
+                .collect(Collectors.toSet());
 
-        final List<Person> patientsList = new ArrayList<>();
-        for (JsonAdaptedPerson person : patients) {
-            patientsList.add(person.toModelType());
-        }
+        final Set<Nric> patientNrics = patients.stream()
+                .collect(Collectors.toSet());
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Set<Role> modelRoles = new HashSet<>(roleList);
-        final Set<Person> modelCaregivers = new HashSet<>(caregiversList);
-        final Set<Person> modelPatients = new HashSet<>(patientsList);
+        final Set<Nric> modelCaregivers = new HashSet<>(caregiverNrics);
+        final Set<Nric> modelPatients = new HashSet<>(patientNrics);
         return new Person(modelName, modelNric, modelPhone, modelEmail, modelAddress, modelTags, modelRoles,
                 modelCaregivers, modelPatients);
     }

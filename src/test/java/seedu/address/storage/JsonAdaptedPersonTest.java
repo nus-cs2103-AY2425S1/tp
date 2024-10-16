@@ -39,13 +39,9 @@ public class JsonAdaptedPersonTest {
             .map(JsonAdaptedRole::new)
             .collect(Collectors.toList());
 
-    private static final List<JsonAdaptedPerson> VALID_CAREGIVERS = BENSON.getCaregivers().stream()
-            .map(JsonAdaptedPerson::new)
-            .collect(Collectors.toList());
+    private static final List<Nric> VALID_CAREGIVERS = BENSON.getCaregivers().stream().collect(Collectors.toList());
 
-    private static final List<JsonAdaptedPerson> VALID_PATIENTS = BENSON.getPatients().stream()
-            .map(JsonAdaptedPerson::new)
-            .collect(Collectors.toList());
+    private static final List<Nric> VALID_PATIENTS = BENSON.getPatients().stream().collect(Collectors.toList());
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
