@@ -27,6 +27,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ViewEventCommand;
+import seedu.address.logic.commands.ViewVendorCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
@@ -51,8 +53,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_createEvent() throws Exception {
         Event partyEvent = new Event(new Name("Party"), new Date("2024-10-10"));
-        CreateEventCommand command = (CreateEventCommand) parser
-                .parseCommand("create_event n/Party on/2024-10-10");
+        CreateEventCommand command = (CreateEventCommand) parser.parseCommand("create_event n/Party on/2024-10-10");
         assertEquals(new CreateEventCommand(partyEvent), command);
     }
 
@@ -64,18 +65,30 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_deleteVendor() throws Exception {
-        DeleteVendorCommand command = (DeleteVendorCommand) parser
-                .parseCommand(
-                        DeleteVendorCommand.COMMAND_WORD + " " + PREFIX_VENDOR + INDEX_FIRST_VENDOR.getOneBased());
+        DeleteVendorCommand command = (DeleteVendorCommand) parser.parseCommand(
+                DeleteVendorCommand.COMMAND_WORD + " " + PREFIX_VENDOR + INDEX_FIRST_VENDOR.getOneBased());
         assertEquals(new DeleteVendorCommand(INDEX_FIRST_VENDOR), command);
     }
 
     @Test
     public void parseCommand_deleteEvent() throws Exception {
         DeleteEventCommand command = (DeleteEventCommand) parser
-                .parseCommand(
-                        DeleteEventCommand.COMMAND_WORD + " " + PREFIX_EVENT + INDEX_FIRST_EVENT.getOneBased());
+                .parseCommand(DeleteEventCommand.COMMAND_WORD + " " + PREFIX_EVENT + INDEX_FIRST_EVENT.getOneBased());
         assertEquals(new DeleteEventCommand(INDEX_FIRST_EVENT), command);
+    }
+
+    @Test
+    public void parseCommand_viewEvent() throws Exception {
+        ViewEventCommand command = (ViewEventCommand) parser
+                .parseCommand(ViewEventCommand.COMMAND_WORD + " " + PREFIX_EVENT + INDEX_FIRST_EVENT.getOneBased());
+        assertEquals(new ViewEventCommand(INDEX_FIRST_EVENT), command);
+    }
+
+    @Test
+    public void parseCommand_viewVendor() throws Exception {
+        ViewVendorCommand command = (ViewVendorCommand) parser
+                .parseCommand(ViewVendorCommand.COMMAND_WORD + " " + PREFIX_VENDOR + INDEX_FIRST_EVENT.getOneBased());
+        assertEquals(new ViewVendorCommand(INDEX_FIRST_EVENT), command);
     }
 
     @Test
@@ -115,8 +128,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE),
+                () -> parser.parseCommand(""));
     }
 
     @Test
