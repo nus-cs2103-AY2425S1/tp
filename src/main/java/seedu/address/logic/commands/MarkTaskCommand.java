@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class MarkTaskCommand extends Command {
             + PREFIX_GROUP_NAME + "Team 5 "
             + PREFIX_INDEX + "2";
 
-    public static final String MESSAGE_SUCCESS = "Changed the status of task: %1$s to %2$s";
+    public static final String MESSAGE_SUCCESS = "Changed the status of task: %1$s";
     public static final String GROUP_NOT_FOUND = "Group not found";
 
     private final Index index;
@@ -55,19 +54,18 @@ public class MarkTaskCommand extends Command {
             throw new CommandException(GROUP_NOT_FOUND);
         }
 
-        model.updateFilteredGroupList(x -> x.getGroupName().equals(toMarkFrom));
         List<Task> lastShownList = model.getFilteredTaskList();
 
+        // the index here refers to the index in the list of all tasks from all groups
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Task taskToMark = lastShownList.get(index.getZeroBased());
-        Status changedStatus = taskToMark.getStatus() == Status.PENDING ? Status.COMPLETED : Status.PENDING;
+        Status changedStatus = taskToMark.getStatus().equals(Status.PENDING) ? Status.COMPLETED : Status.PENDING;
         Task markedTask = new Task(taskToMark.getTaskName(), taskToMark.getDeadline(), changedStatus);
 
         model.setTask(taskToMark, markedTask);
-        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(markedTask), changedStatus));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(markedTask)));
     }
 
     @Override

@@ -52,6 +52,7 @@ public class DeleteTaskFromGroupCommand extends Command {
 
         List<Task> lastShownList = model.getFilteredTaskList();
 
+        // the index here refers to the index in the list of all tasks from all groups
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
