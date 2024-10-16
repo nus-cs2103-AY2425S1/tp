@@ -1,7 +1,11 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditMeetUpCommand;
-import seedu.address.model.meetup.*;
+import seedu.address.model.meetup.From;
+import seedu.address.model.meetup.Info;
+import seedu.address.model.meetup.MeetUp;
+import seedu.address.model.meetup.Name;
+import seedu.address.model.meetup.To;
 
 /**
  * A utility class to help with building EditMeetUpDescriptor objects.
