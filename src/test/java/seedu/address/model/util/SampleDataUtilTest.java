@@ -4,12 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 import java.util.Set;
+import org.junit.jupiter.api.Test;
 import seedu.address.model.product.Product;
 import seedu.address.model.supplier.Supplier;
 import seedu.address.model.tag.Tag;
-
-import org.junit.jupiter.api.Test;
-
 
 public class SampleDataUtilTest {
 
