@@ -45,6 +45,11 @@ public interface Logic {
     GuiSettings getGuiSettings();
 
     /**
+     * Returns the person who will be focused on.
+     */
+    Person getFocusedPerson();
+
+    /**
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);

@@ -21,7 +21,7 @@ public class PersonListPanel extends UiPart<Region> {
     @FXML
     private ListView<Person> personListView;
 
-    private MainWindow mainWindow;
+    private ContactDetails contactDetails;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
@@ -35,24 +35,29 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.setOnMouseClicked(this::handleListViewClick);
     }
 
-
-    public void setMainWindow(MainWindow mainWindow) {
-        this.mainWindow = mainWindow;
+    /**
+     * Sets the contactDetails panel.
+     *
+     * @param contactDetails The contactDetails object to be stored.
+     */
+    public void setContactDetailsPanel(ContactDetails contactDetails) {
+        this.contactDetails = contactDetails;
 
         // Logging here to verify the setter works
-        logger.info("MainWindow reference: " + this.mainWindow);
+        logger.finer("ContactDetails reference: " + this.contactDetails);
     }
+
     /**
      * When user clicks on a person, the details plane changes.
      */
     private void handleListViewClick(MouseEvent event) {
         // Get the index of the clicked item
         int index = personListView.getSelectionModel().getSelectedIndex();
-        Person selectedItem = personListView.getSelectionModel().getSelectedItem();
+        Person selectedPerson = personListView.getSelectionModel().getSelectedItem();
 
         if (index != -1) {
-            mainWindow.setPersonDetails(selectedItem);
-            logger.info("Clicked on person: " + selectedItem + " at index " + index);
+            contactDetails.setPerson(selectedPerson);
+            logger.info("Clicked on person: " + selectedPerson + " at index " + index);
         } else {
             logger.info("Clicked on an empty area of the ListView");
         }

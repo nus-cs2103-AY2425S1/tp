@@ -82,6 +82,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public Person getFocusedPerson() {
+        return model.getFocusedPerson();
+    }
+
+    @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
     }

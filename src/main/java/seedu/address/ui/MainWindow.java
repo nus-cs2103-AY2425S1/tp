@@ -16,7 +16,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -35,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ContactDetails contactDetailsPanel;
     private SearchBox searchBox;
 
     @FXML
@@ -56,7 +56,8 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private StackPane personDetailsCardPlaceholder;
+    private StackPane contactDetailsPanelPlaceholder;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -118,8 +119,12 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+
+        contactDetailsPanel = new ContactDetails(logic.getFocusedPerson());
+        contactDetailsPanelPlaceholder.getChildren().add(contactDetailsPanel.getRoot());
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanel.setMainWindow(this);
+        personListPanel.setContactDetailsPanel(contactDetailsPanel);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -134,17 +139,7 @@ public class MainWindow extends UiPart<Stage> {
         searchBox = new SearchBox(this::executeFindCommand);
         searchBoxPlaceholder.getChildren().add(searchBox.getRoot());
     }
-    /**
-     * Updates the Detail plane with the currently selected person.
-     */
-    public void setPersonDetails(Person person) {
-        PersonDetails personDetails = new PersonDetails();
-        personDetails.updatePersonDetails(person);
 
-        // Clear the existing view in the StackPane and set the new PersonDetails
-        personDetailsCardPlaceholder.getChildren().clear();
-        personDetailsCardPlaceholder.getChildren().add(personDetails.getRoot());
-    }
     /**
      * Sets the default size based on {@code guiSettings}.
      */
@@ -155,6 +150,13 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+    }
+
+    /**
+     * Updates the contact details panel for the seleted contact.
+     */
+    public void handlePanelUpdate() {
+        contactDetailsPanel.setPerson(logic.getFocusedPerson());
     }
 
     /**
@@ -196,8 +198,8 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isClearDetailsPanel()) {
-                personDetailsCardPlaceholder.getChildren().clear();
+            if (commandResult.isUpdatePanel()) {
+                handlePanelUpdate();
             }
 
             if (commandResult.isShowHelp()) {
