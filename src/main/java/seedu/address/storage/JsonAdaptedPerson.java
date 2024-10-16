@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
@@ -28,7 +27,6 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String gender;
-    private final String address;
     private final String module;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -37,12 +35,11 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("gender") String gender, @JsonProperty("address") String address,
-                             @JsonProperty("module") String module, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("gender") String gender, @JsonProperty("module") String module,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.gender = gender;
-        this.address = address;
         this.module = module;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -56,7 +53,6 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         gender = source.getGender().gender;
-        address = source.getAddress().value;
         module = source.getModule().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -98,14 +94,6 @@ class JsonAdaptedPerson {
         }
         final Gender modelGender = new Gender(gender);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
-
         if (module == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Module.class.getSimpleName()));
         }
@@ -115,7 +103,7 @@ class JsonAdaptedPerson {
         final Module modelModule = new Module(module);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelGender, modelAddress, modelModule, modelTags);
+        return new Person(modelName, modelPhone, modelGender, modelModule, modelTags);
     }
 
 }
