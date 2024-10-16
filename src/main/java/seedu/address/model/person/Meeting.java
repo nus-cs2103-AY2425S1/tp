@@ -75,7 +75,7 @@ public class Meeting {
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "h:mm a, d MMMM yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a, d MMMM yyyy");
         return "from " + formatter.format(startTime) + " to " + formatter.format(endTime) + " at " + location;
     }
 
