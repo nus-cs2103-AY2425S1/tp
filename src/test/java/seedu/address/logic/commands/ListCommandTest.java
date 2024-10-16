@@ -4,16 +4,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.model.Model.COMPARATOR_SORT_BY_NAME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.parser.SortOption;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -41,15 +48,24 @@ public class ListCommandTest {
     }
 
     @Test
-    public void execute_withSortOption_showsNotImplementedMessage() {
-        // Create a SortOption instance with "alphabet"
-        SortOption sortOption = new SortOption("alphabet");
+    public void execute_validSortOption_success() {
+        SortOption sortOption = new SortOption(SortOption.SORT_NAME);
+        ListCommand listCommand = new ListCommand(sortOption);
 
-        // Create a ListCommand with the SortOption
-        ListCommand listCommandWithSort = new ListCommand(sortOption);
+        // Prepare the expected sorted list
+        List<Person> expectedSortedList = new ArrayList<>(model.getAddressBook().getPersonList());
+        expectedSortedList.sort(COMPARATOR_SORT_BY_NAME);
 
-        // The expected outcome should be the "Sorting not yet implemented" message
-        assertCommandSuccess(listCommandWithSort, model, ListCommand.MESSAGE_SORT_NOT_IMPLEMENTED, expectedModel);
+        // Update expectedModel to match the sorted state
+        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updatePersonListSort(COMPARATOR_SORT_BY_NAME);
+
+        assertCommandSuccess(listCommand, model,
+                String.format(ListCommand.MESSAGE_SORT_SUCCESS, sortOption), expectedModel);
+
+        // Check if list is sorted correctly
+        ObservableList<Person> actualList = model.getPersonList();
+        assertEquals(expectedSortedList, new ArrayList<>(actualList));
     }
 
     @Test
@@ -60,8 +76,8 @@ public class ListCommandTest {
         assertEquals(listCommand1, listCommand2);
 
         // ListCommand with the same sortOption should be equal
-        SortOption sortOption1 = new SortOption("alphabet");
-        SortOption sortOption2 = new SortOption("alphabet");
+        SortOption sortOption1 = new SortOption("name");
+        SortOption sortOption2 = new SortOption("name");
         ListCommand listCommandWithSort1 = new ListCommand(sortOption1);
         ListCommand listCommandWithSort2 = new ListCommand(sortOption2);
         assertEquals(listCommandWithSort1, listCommandWithSort2);

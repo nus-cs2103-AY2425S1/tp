@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -150,7 +151,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Person> getPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -165,7 +166,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updatePersonListSort(Comparator<Person> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void removeGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearPersonSort() {
             throw new AssertionError("This method should not be called.");
         }
     }

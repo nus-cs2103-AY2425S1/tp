@@ -10,11 +10,11 @@ import java.util.List;
  * Contains valid sorting options for the list command.
  */
 public class SortOption {
-    public static final String SORT_ALPHABETICAL = "alphabet";
+    public static final String SORT_NAME = "name";
     // Add more sorting options if needed
 
     public static final List<String> VALID_SORT_OPTIONS = Arrays.asList(
-            SORT_ALPHABETICAL
+            SORT_NAME
             // Add other sorting options here
     );
 
