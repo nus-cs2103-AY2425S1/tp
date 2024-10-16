@@ -81,14 +81,16 @@ Format: `help`
 Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
-
+* Names cannot be more than 100 characters long.
+* Phone numbers must be exactly 8 digits.
+* Tags must be created before they can be assigned to a person.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com t/Groom's Friend`
+* `add n/Betsy Crowe t/Bride's Family e/betsycrowe@example.com p/12345678`
 
 ### Listing all persons : `list`
 
@@ -96,16 +98,46 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+### Creating a new tag: `newtag`
+
+Creates a new tag.
+
+Format: `newtag TAG_NAME`
+* Tag name cannot be more than 50 characters long.
+
+Examples:
+* `newtag Bride's Family`
+
+### Tagging a person: `tag`
+
+Tags a person with the given tag.
+
+Format: `tag INDEX t/TAG`
+* Tag must already exist before tagging it to a person.
+
+Examples:
+* `tag 1 t/Bride's Family` Adds the tag "Bride's Family" to the 1st person in the list.
+
+### Removing a tag from a person: `untag`
+
+Removes a tag from a person.
+
+Format: `untag INDEX t/TAG`
+* A person must already have the tag for it to be removed.
+
+Examples:
+* `untag 2 t/Groom's Friends`
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
@@ -119,7 +151,7 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
