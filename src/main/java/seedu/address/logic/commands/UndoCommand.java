@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.model.Model;
 
 
-
 /**
  * Represents an Undo command that reverses the last modification made to the address book.
  * This command can be used to restore the previous state of the address book after an edit,
@@ -15,12 +14,17 @@ public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
     public static final String MESSAGE_SUCCESS = "Address book has undone previous command!";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "Done";
+    public static final String MESSAGE_FAILURE = "Address book failed to be undone. Please try again later.";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        //TODO: Implement undo command
-        //model.undoCommand();
-        return new CommandResult(MESSAGE_SUCCESS);
+        if (model.canUndoAddressBook()) {
+            model.undoAddressBook();
+            return new CommandResult(MESSAGE_SUCCESS);
+        } else {
+            return new CommandResult(MESSAGE_FAILURE);
+        }
     }
 }
