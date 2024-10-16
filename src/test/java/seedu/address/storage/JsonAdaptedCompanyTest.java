@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedCompany.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalCompanies.BENSON;
+import static seedu.address.testutil.TypicalCompanies.META;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,18 +24,18 @@ public class JsonAdaptedCompanyTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
-    private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_PHONE = BENSON.getPhone().toString();
-    private static final String VALID_EMAIL = BENSON.getEmail().toString();
-    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+    private static final String VALID_NAME = META.getName().toString();
+    private static final String VALID_PHONE = META.getPhone().toString();
+    private static final String VALID_EMAIL = META.getEmail().toString();
+    private static final String VALID_ADDRESS = META.getAddress().toString();
+    private static final List<JsonAdaptedTag> VALID_TAGS = META.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
 
     @Test
     public void toModelType_validCompanyDetails_returnsCompany() throws Exception {
-        JsonAdaptedCompany company = new JsonAdaptedCompany(BENSON);
-        assertEquals(BENSON, company.toModelType());
+        JsonAdaptedCompany company = new JsonAdaptedCompany(META);
+        assertEquals(META, company.toModelType());
     }
 
     @Test

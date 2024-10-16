@@ -1,14 +1,14 @@
 {
   "companies": [ {
-    "name": "Alice Pauline",
+    "name": "Google",
     "phone": "94351253",
-    "email": "alice@example.com",
+    "email": "goolge@google.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "friends" ]
+    "tags": [ "bigTech" ]
   }, {
-    "name": "Alice Pauline",
+    "name": "Google",
     "phone": "94351253",
-    "email": "pauline@example.com",
+    "email": "google@example.com",
     "address": "4th street"
   } ]
 }

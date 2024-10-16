@@ -1,15 +1,15 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_TESLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_MICROSOFT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_TESLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_MICROSOFT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TESLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_MICROSOFT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_TESLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_MICROSOFT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_COMPANY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BIGTECH;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,24 +24,24 @@ import seedu.address.model.company.Company;
  */
 public class TypicalCompanies {
 
-        public static final Company ALICE = new CompanyBuilder().withName("Alice Pauline")
-                        .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-                        .withPhone("94351253")
-                        .withTags("friends").build();
-        public static final Company BENSON = new CompanyBuilder().withName("Benson Meier")
+        public static final Company GOOGLE = new CompanyBuilder().withName("Google")
+                        .withAddress("123, Jurong West Ave 6, #08-111").withEmail("google@example.com")
+                        .withPhone("00000001")
+                        .withTags("google").build();
+        public static final Company META = new CompanyBuilder().withName("Meta")
                         .withAddress("311, Clementi Ave 2, #02-25")
-                        .withEmail("johnd@example.com").withPhone("98765432")
-                        .withTags("owesMoney", "friends").build();
-        public static final Company CARL = new CompanyBuilder().withName("Carl Kurz").withPhone("95352563")
-                        .withEmail("heinz@example.com").withAddress("wall street").build();
-        public static final Company DANIEL = new CompanyBuilder().withName("Daniel Meier").withPhone("87652533")
-                        .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
-        public static final Company ELLE = new CompanyBuilder().withName("Elle Meyer").withPhone("9482224")
-                        .withEmail("werner@example.com").withAddress("michegan ave").build();
-        public static final Company FIONA = new CompanyBuilder().withName("Fiona Kunz").withPhone("9482427")
-                        .withEmail("lydia@example.com").withAddress("little tokyo").build();
-        public static final Company GEORGE = new CompanyBuilder().withName("George Best").withPhone("9482442")
-                        .withEmail("anna@example.com").withAddress("4th street").build();
+                        .withEmail("meta@example.com").withPhone("00000002")
+                        .withTags("bigTech", "facebook").build();
+        public static final Company GRAB = new CompanyBuilder().withName("Grab").withPhone("00000003")
+                        .withEmail("grab@example.com").withAddress("wall street").build();
+        public static final Company SHOPEE = new CompanyBuilder().withName("Shopee").withPhone("00000004")
+                        .withEmail("shopee@example.com").withAddress("10th street").withTags("bigTech").build();
+        public static final Company APPLE = new CompanyBuilder().withName("Apple").withPhone("00000005")
+                        .withEmail("apple@example.com").withAddress("michegan ave").build();
+        public static final Company BYTEDANCE = new CompanyBuilder().withName("ByteDance").withPhone("00000006")
+                        .withEmail("bytedance@example.com").withAddress("little tokyo").build();
+        public static final Company AMAZON = new CompanyBuilder().withName("Amazon").withPhone("00000007")
+                        .withEmail("amazon@example.com").withAddress("4th street").build();
 
         // Manually added
         public static final Company HOON = new CompanyBuilder().withName("Hoon Meier").withPhone("8482424")
@@ -50,11 +50,11 @@ public class TypicalCompanies {
                         .withEmail("hans@example.com").withAddress("chicago ave").build();
 
         // Manually added - Company's details found in {@code CommandTestUtil}
-        public static final Company AMY = new CompanyBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-                        .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
-        public static final Company BOB = new CompanyBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                        .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                        .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+        public static final Company TESLA = new CompanyBuilder().withName(VALID_NAME_TESLA).withPhone(VALID_PHONE_TESLA)
+                        .withEmail(VALID_EMAIL_TESLA).withAddress(VALID_ADDRESS_TESLA).withTags(VALID_TAG_COMPANY).build();
+        public static final Company MICROSOFT = new CompanyBuilder().withName(VALID_NAME_MICROSOFT).withPhone(VALID_PHONE_MICROSOFT)
+                        .withEmail(VALID_EMAIL_MICROSOFT).withAddress(VALID_ADDRESS_MICROSOFT)
+                        .withTags(VALID_TAG_BIGTECH, VALID_TAG_COMPANY)
                         .build();
 
         public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
@@ -74,6 +74,6 @@ public class TypicalCompanies {
         }
 
         public static List<Company> getTypicalPersons() {
-                return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+                return new ArrayList<>(Arrays.asList(GOOGLE, META, GRAB, SHOPEE, APPLE, BYTEDANCE, AMAZON));
         }
 }

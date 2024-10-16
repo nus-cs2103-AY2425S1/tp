@@ -1,0 +1,46 @@
+{
+  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "companies" : [ {
+    "name" : "Google",
+    "phone" : "00000001",
+    "email" : "google@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "tags" : [ "google" ]
+  }, {
+    "name" : "Meta",
+    "phone" : "00000002",
+    "email" : "meta@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "tags" : [ "bigTech", "facebook" ]
+  }, {
+    "name" : "Grab",
+    "phone" : "00000003",
+    "email" : "grab@example.com",
+    "address" : "wall street",
+    "tags" : [ ]
+  }, {
+    "name" : "Shopee",
+    "phone" : "00000004",
+    "email" : "shopee@example.com",
+    "address" : "10th street",
+    "tags" : [ "bigTech" ]
+  }, {
+    "name" : "Apple",
+    "phone" : "00000005",
+    "email" : "apple@example.com",
+    "address" : "michegan ave",
+    "tags" : [ ]
+  }, {
+    "name" : "ByteDance",
+    "phone" : "00000006",
+    "email" : "bytedance@example.com",
+    "address" : "little tokyo",
+    "tags" : [ ]
+  }, {
+    "name" : "Amazon",
+    "phone" : "00000007",
+    "email" : "amazon@example.com",
+    "address" : "4th street",
+    "tags" : [ ]
+  } ]
+}
