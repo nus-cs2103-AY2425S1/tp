@@ -26,6 +26,9 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_CLIENT_TYPE = "#A";
+    private static final String INVALID_DESC = "Exploring the depths of knowledge can lead to unexpected insights,"
+            + "transforming ordinary thoughts into extraordinary ideas that inspire change and growth."
+            + "blah blah blah";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +36,7 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_CLIENT_TYPE_1 = "A";
     private static final String VALID_CLIENT_TYPE_2 = "B";
+    private static final String VALID_DESC = "A type";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -44,7 +48,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -197,4 +201,15 @@ public class ParserUtilTest {
 
         assertEquals(expectedClientTypeSet, actualClientTypeSet);
     }
+
+    @Test
+    public void parseDescription_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDescription((String) null));
+    }
+
+    @Test
+    public void parseDescription_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDescription(INVALID_DESC));
+    }
+
 }

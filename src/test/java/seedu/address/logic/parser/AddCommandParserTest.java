@@ -45,6 +45,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.clienttype.ClientType;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -213,6 +214,8 @@ public class AddCommandParserTest {
                 + DESCRIPTION_DESC_A, ClientType.MESSAGE_CONSTRAINTS);
 
         // invalid description
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + CLIENT_TYPE_DESC_B + CLIENT_TYPE_DESC_A + INVALID_DESCRIPTION_DESC, Description.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
