@@ -1,4 +1,5 @@
 ---
+## Quick start
   layout: default.md
   title: "User Guide"
   pageNav: 3
@@ -22,7 +23,6 @@ InvenTrack simulates an ongoing software project for a desktop application dedic
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -121,6 +121,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * You can remove all the supplier’s tags by typing `t/` without
     specifying any tags after it.
 
+
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st supplier to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd supplier to be `Betsy Crower` and clears all existing tags.
@@ -144,7 +145,6 @@ Examples:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a supplier : `delete`
-
 Deletes the specified supplier from the address book.
 
 Format: `delete INDEX`
@@ -168,6 +168,12 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
+
+### Adding a product : `ADD_PRODUCT`
+
+Add a product.
+
+Format: `ADD_PRODUCT [n/NAME] [st/STOCK_LEVEL] [su/SUPPLIER_NAME] [t/TAG]…`
 
 ### Saving the data
 
