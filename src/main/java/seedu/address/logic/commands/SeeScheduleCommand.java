@@ -1,9 +1,13 @@
 package seedu.address.logic.commands;
 
-import java.time.LocalDate;
+import static java.util.Objects.requireNonNull;
 
+import java.util.function.Predicate;
+
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.schedule.Meeting;
 
 /**
  * Represents a command to view the schedule for a specific week starting from a given date.
@@ -17,14 +21,18 @@ public class SeeScheduleCommand extends Command {
 
     public static final String MESSAGE_INVALID_DATE = "Date must be in the format DD-MM-YYYY.";
 
-    private final LocalDate date;
+    private final Predicate<Meeting> predicate;
 
-    public SeeScheduleCommand(LocalDate date) {
-        this.date = date;
+    public SeeScheduleCommand(Predicate<Meeting> predicate) {
+        this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        return null;
+        requireNonNull(model);
+
+        model.changeWeeklySchedule(predicate);
+        return new CommandResult(
+                String.format(Messages.MESSAGE_SCHEDULE_LISTED_OVERVIEW, "temp", "temp"));
     }
 }

@@ -24,6 +24,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final ScheduleList scheduleList;
+    private final FilteredList<Meeting> weeklySchedule;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,6 +43,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.scheduleList = new ScheduleList(scheduleList);
+        weeklySchedule = new FilteredList<>(this.scheduleList.getMeetingList());
     }
 
     /**
@@ -60,6 +62,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.scheduleList = new ScheduleList();
+        weeklySchedule = new FilteredList<>(this.scheduleList.getMeetingList());
     }
 
 
@@ -145,7 +148,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-
     public ReadOnlyScheduleList getScheduleList() {
         return scheduleList;
     }
@@ -201,6 +203,18 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    //=========== Weekly Meeting List Accessors =============================================================
+    @Override
+    public ObservableList<Meeting> getWeeklySchedule() {
+        return weeklySchedule;
+    }
+
+    @Override
+    public void changeWeeklySchedule(Predicate<Meeting> predicate) {
+        requireNonNull(predicate);
+        weeklySchedule.setPredicate(predicate);
     }
 
 }
