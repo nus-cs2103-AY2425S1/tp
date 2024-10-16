@@ -6,7 +6,7 @@ title: User Guide
 Clientele+ seamlessly combines client contacts, payment tracking and more in one efficient package, tailored specifically for freelance software developers.
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -71,7 +71,6 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-
 ### Add Client Details: `add`
 
 Allows the user to add a new client with details about payment status, client status, and project status.
@@ -79,16 +78,16 @@ Allows the user to add a new client with details about payment status, client st
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ 
 [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
 
->* Clients with the **same** `NAME`, `EMAIL` and `PHONE NUMBER` are considered duplicates and will not be added
->* A person can have any number of tags (including 0)
->* `NAME` must be **alphanumeric**, may contain **spaces** and **dashes**, and should not be blank.
->* `NAME` is case-insensitive. `John Doe` and `joHN dOE` are considered same clients, but name is stored in the same case as the input (so `John Doe` is stored as `John Doe` and `JOHN Doe` is stored as `JOHN Doe`
->* `NAME` must not exist in Clientele+ already.
->* `PHONE_NUMBER` should be **Numeric** digits,may include “-” or spaces. Example: `555-1234` or `555 1234`.
->* `EMAIL`  Standard email format “user@example.com”
->* `PAYMENT STATUS` Acceptable values are `paid`, `unpaid`, `p`, `u`, `0` for **paid**, `1` for **unpaid**. Case insensitive.
->* `CLIENT STATUS`  Acceptable values are `active`, `unresponsive`, `potential`, `old`. Case sensitive.
->* `PROJECT STATUS` Acceptable values are `in progress`, `completed`. Case insensitive.
+* Clients with the **same** `NAME`, `EMAIL` and `PHONE NUMBER` are considered duplicates and will not be added
+* A person can have any number of tags (including 0)
+* `NAME` must be **alphanumeric**, may contain **spaces** and **dashes**, and should not be blank.
+* `NAME` is case-insensitive. `John Doe` and `joHN dOE` are considered same clients, but name is stored in the same case as the input (so `John Doe` is stored as `John Doe` and `JOHN Doe` is stored as `JOHN Doe`
+* `NAME` must not exist in Clientele+ already.
+* `PHONE_NUMBER` should be **Numeric** digits,may include “-” or spaces. Example: `555-1234` or `555 1234`.
+* `EMAIL`  Standard email format “user@example.com”
+* `PAYMENT STATUS` Acceptable values are `paid`, `unpaid`, `p`, `u`, `0` for **paid**, `1` for **unpaid**. Case insensitive.
+* `CLIENT STATUS`  Acceptable values are `active`, `unresponsive`, `potential`, `old`. Case sensitive.
+* `PROJECT STATUS` Acceptable values are `in progress`, `completed`. Case insensitive.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
@@ -108,17 +107,17 @@ Allows updating of various statuses of an existing client.
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
 
->* `NAME` Acceptable values are same as in add command
->* `PHONE_NUMBER` Acceptable values are same as in add command
->* `EMAIL` Acceptable values are same as in add command
->* `PAYMENT STATUS` Acceptable values are same as in add command
->* `CLIENT STATUS` Acceptable values are same as in add command
->* `PROJECT STATUS` Acceptable values are same as in add command
->* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
->* At least one of the optional fields must be provided.
->* Existing values will be updated to the input values.
->* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
->* You can remove all the person’s tags by typing `t/` without
+* `NAME` Acceptable values are same as in add command
+* `PHONE_NUMBER` Acceptable values are same as in add command
+* `EMAIL` Acceptable values are same as in add command
+* `PAYMENT STATUS` Acceptable values are same as in add command
+* `CLIENT STATUS` Acceptable values are same as in add command
+* `PROJECT STATUS` Acceptable values are same as in add command
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
 
 Examples:
@@ -132,11 +131,11 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
->* The search is case-insensitive. e.g `hans` will match `Hans`
->* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
->* Only the name is searched.
->* Only full words will be matched e.g. `Han` will not match `Hans`
->* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -151,10 +150,10 @@ Deletes the specified person from Clientele+.
 
 Format: `delete [n/NAME] [id/ID]`
 
->* Deletes clients identified by the specified `ID` or `NAME`.
->* `NAME` Acceptable values are same as in add command
->* `ID` refers to the index number shown in the displayed person list.
->* `ID` **must be a positive integer** 1, 2, 3, …​
+* Deletes clients identified by the specified `ID` or `NAME`.
+* `NAME` Acceptable values are same as in add command
+* `ID` refers to the index number shown in the displayed person list.
+* `ID` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `delete n/John` deletes clients with the name `John`.
