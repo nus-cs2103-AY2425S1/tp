@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -87,6 +89,18 @@ public class Person {
         } else {
             return "";
         }
+    }
+
+    /**
+     * Formulates a message that displays all information of the specified contact
+     * @return String message which contains all the information of the specified contact
+     */
+    public String generateContactInformation() {
+        Field[] fields = Person.class.getDeclaredFields();
+        StringBuilder contactInfo = new StringBuilder("");
+        Arrays.stream(fields).forEach(field -> contactInfo.append(field.getName().toUpperCase()
+                + ": " + this.getString(field.getType()) + "\n"));
+        return contactInfo.toString();
     }
 
     /**
