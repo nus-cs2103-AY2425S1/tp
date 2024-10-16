@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RENTAL_INDEX;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -22,7 +24,7 @@ public class DeleteRentalCommand extends Command {
             + PREFIX_CLIENT_INDEX + "CLIENT_INDEX (must be a positive integer) "
             + PREFIX_RENTAL_INDEX + "RENTAL_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_CLIENT_INDEX + "1"
+            + PREFIX_CLIENT_INDEX + "1 "
             + PREFIX_RENTAL_INDEX + "3";
     public static final String MESSAGE_DELETE_RENTAL_SUCCESS = "Deleted Rental Information: %1$s";
 
@@ -44,14 +46,19 @@ public class DeleteRentalCommand extends Command {
         }
 
         Client targetClient = lastShownList.get(clientIndex.getZeroBased());
-        List<RentalInformation> rentalInformationList = targetClient.getRentalInformation();
+        List<RentalInformation> rentalInformationList = new ArrayList<>(targetClient.getRentalInformation());
 
         if (rentalIndex.getZeroBased() >= rentalInformationList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_RENTAL_DISPLAYED_INDEX);
         }
 
-        RentalInformation targetRental = targetClient.removeRentalInformation(rentalIndex.getZeroBased());
+        RentalInformation targetRental = rentalInformationList.remove(rentalIndex.getZeroBased());
+        Client updatedClient = new Client(targetClient.getName(), targetClient.getPhone(), targetClient.getEmail(),
+                targetClient.getTags(), rentalInformationList);
         // TODO: update the rental information list in Model, waiting for implementation from "rview".
+        model.setPerson(targetClient, updatedClient);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         return new CommandResult(String.format(MESSAGE_DELETE_RENTAL_SUCCESS,
                 Messages.formatRentalInformation(targetRental)));
     }

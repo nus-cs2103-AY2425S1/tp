@@ -67,16 +67,6 @@ public class Client {
     }
 
     /**
-     * Removes the {@code RentalInformation} at the specified index from this {@code Client}.
-     *
-     * @param index the index of the {@code RentalInformation} in this client's list of rental information
-     * @return the removed {@code RentalInformation}
-     */
-    public RentalInformation removeRentalInformation(int index) {
-        return rentalInformationList.remove(index);
-    }
-
-    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
