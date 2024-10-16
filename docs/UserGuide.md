@@ -51,8 +51,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-  [//]: # (Temporarily removed as there is no optional parameter.)
-  [//]: # (* Items in square brackets are optional.<br> e.g `n/NAME [r/ROLE]` can be used as `n/John Doe t/friend` or as `n/John Doe`.)
+* Items in square brackets are optional.<br>
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used from one to multiple times.<br>
   e.g. `[r/ROLE]…​` can be used twice as `r/External r/Marketing` etc.
@@ -160,7 +160,8 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find alex` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+  ![result for 'delete 1 after finding alex'](images/deleteAlexYeohResult.png)
 
 ### Clearing all entries : `clear`
 
@@ -213,7 +214,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Admin t/President`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Admin t/President`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [nn/NICKNAME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
