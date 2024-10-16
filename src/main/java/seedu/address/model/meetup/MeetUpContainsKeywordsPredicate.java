@@ -1,12 +1,13 @@
 package seedu.address.model.meetup;
 
-import seedu.address.commons.util.StringUtil;
-import seedu.address.commons.util.ToStringBuilder;
-
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.function.Predicate;
+
+import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.util.ToStringBuilder;
+
 
 /**
  * Tests that a {@code Meetup}'s {@code dateTime} range contains the given date.
