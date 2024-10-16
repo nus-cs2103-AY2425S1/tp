@@ -6,7 +6,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -82,6 +81,11 @@ public class UniquePersonList implements Iterable<Person> {
         }
     }
 
+    /**
+     * Returns a Person object using the name of the person.
+     * @param toFind
+     * @return
+     */
     public static Person findPerson(String toFind) {
         Name name = new Name(toFind);
         for (int i = 0; i < internalList.size(); i++) {
@@ -89,7 +93,8 @@ public class UniquePersonList implements Iterable<Person> {
                 return internalList.get(i);
             }
         }
-        return new Person(new Name("addName"), new Phone("addNumber"), new Email("addEmail"), new Address("addAddress"), new HashSet<Tag>());
+        return new Person(new Name("addName"), new Phone("addNumber"),
+                new Email("addEmail"), new Address("addAddress"), new HashSet<Tag>());
 
     }
 

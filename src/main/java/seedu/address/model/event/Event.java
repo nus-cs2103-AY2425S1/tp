@@ -45,8 +45,22 @@ public class Event {
 
     @Override
     public boolean equals(Object other) {
-        return false; //To implement
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Event)) {
+            return false;
+        }
+
+        Event otherEvent = (Event) other;
+        return name.equals(otherEvent.name)
+                && time.equals(otherEvent.time)
+                && venue.equals(otherEvent.venue)
+                && celebrity.equals(otherEvent.celebrity);
     }
+
 
     /**
      * Returns true if both events have the same identity and data fields.

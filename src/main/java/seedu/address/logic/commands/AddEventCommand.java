@@ -20,14 +20,15 @@ public class AddEventCommand extends AddCommand {
 
     public static final String COMMAND_FIELD = "event";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " "
+            + COMMAND_FIELD + ": Adds an event to the address book. "
             + "Parameters: "
             + PREFIX_EVENT_NAME + "NAME "
             + PREFIX_EVENT_TIME + "TIME "
             + PREFIX_EVENT_VENUE + "VENUE "
             + PREFIX_EVENT_CELEBRITY + "CELEBRITY "
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_EVENT_NAME + "Oscars"
+            + "Example: " + COMMAND_WORD + " " + COMMAND_FIELD + " "
+            + PREFIX_EVENT_NAME + "Oscars "
             + PREFIX_EVENT_TIME + "Sep 22 2024 1800 to 2200 "
             + PREFIX_EVENT_VENUE + "Hollywood "
             + PREFIX_EVENT_CELEBRITY + "Sydney Sweeney ";
