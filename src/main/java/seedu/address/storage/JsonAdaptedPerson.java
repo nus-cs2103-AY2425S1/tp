@@ -52,10 +52,8 @@ class JsonAdaptedPerson {
         this.phone = phone;
         this.email = email;
         this.address = address;
-
-        // TODO - confirm if this is the implementation that we want
-        this.fees = fees != null ? fees : "";
-        this.classId = classId != null ? classId : "";
+        this.fees = fees;
+        this.classId = classId;
 
         if (monthsPaid != null) {
             this.monthsPaid.addAll(monthsPaid);
@@ -124,14 +122,18 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
-
         // Check fees
+        if (fees == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Fees.class.getSimpleName()));
+        }
         if (!Fees.isValidFees(fees)) {
             throw new IllegalValueException(Fees.MESSAGE_CONSTRAINTS);
         }
         final Fees modelFees = new Fees(fees);
-
-        // Check classId
+        //check classId
+        if (classId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ClassId.class.getSimpleName()));
+        }
         if (!ClassId.isValidClassId(classId)) {
             throw new IllegalValueException(ClassId.MESSAGE_CONSTRAINTS);
         }

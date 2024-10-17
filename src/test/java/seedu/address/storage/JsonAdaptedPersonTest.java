@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -132,15 +131,12 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_nullFees_success() {
+    public void toModelType_nullFees_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, null, VALID_CLASS_ID,
                         VALID_MONTHS_PAID, VALID_TAGS);
-        try {
-            assert person.toModelType().getFees().value.isEmpty();
-        } catch (Exception e) {
-            fail();
-        }
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Fees.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
@@ -153,15 +149,12 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_nullClassId_success() {
+    public void toModelType_nullClassId_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_FEES, null,
                         VALID_MONTHS_PAID, VALID_TAGS);
-        try {
-            assert person.toModelType().getClassId().value.isEmpty();
-        } catch (Exception e) {
-            fail();
-        }
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ClassId.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
