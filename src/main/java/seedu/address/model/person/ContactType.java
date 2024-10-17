@@ -9,8 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class ContactType {
 
-    public static final String MESSAGE_CONSTRAINTS = "ContactType must either be \"Work\" or \"Personal\", "
-            + "or it can be blank";
+    public static final String MESSAGE_CONSTRAINTS = "ContactType must either be \"Work\" or \"Personal\"";
 
     /*
      * The first character of the address must not be a whitespace,
