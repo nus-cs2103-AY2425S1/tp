@@ -1,10 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_TAG;
 
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -19,8 +22,13 @@ public class RetrievePublicAddressCommand extends Command {
 
     public static final String COMMAND_WORD = "retrievePublicAddress";
 
-    // TODO: Add
-    public static final String MESSAGE_USAGE = "";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Retrieves public addresses of a contact.\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_PUBLIC_ADDRESS + "NETWORK "
+            + "[" + PREFIX_PUBLIC_ADDRESS_TAG + "WALLET NAME]\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_PUBLIC_ADDRESS + "BTC "
+            + PREFIX_PUBLIC_ADDRESS_TAG + "MyWallet";
 
     public static final String MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS =
             "Retrieved %1$d %2$s public addresses for %3$s:\n%4$s";
@@ -68,13 +76,40 @@ public class RetrievePublicAddressCommand extends Command {
         List<PublicAddress> desiredPublicAddresses = desiredPerson.getPublicAddressesByNetwork(network)
                 .stream()
                 .filter(publicAddress -> publicAddress.tag.toLowerCase().contains(walletName.toLowerCase()))
+                .sorted((a, b) -> a.tag.compareToIgnoreCase(b.tag))
                 .toList();
 
         return new CommandResult(String.format(MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
                 desiredPublicAddresses.size(),
                 network,
                 desiredPerson.getName(),
-                Messages.format(desiredPublicAddresses)));
+                desiredPublicAddresses.isEmpty() ? "-" : Messages.format(desiredPublicAddresses)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof RetrievePublicAddressCommand)) {
+            return false;
+        }
+
+        RetrievePublicAddressCommand otherCommand = (RetrievePublicAddressCommand) other;
+        return index.equals(otherCommand.index)
+                && network.equals(otherCommand.network)
+                && walletName.equals(otherCommand.walletName);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("index", index)
+                .add("network", network)
+                .add("walletName", walletName)
+                .toString();
     }
 
 }

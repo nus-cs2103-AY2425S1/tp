@@ -46,4 +46,5 @@ public class RetrievePublicAddressCommandParser implements Parser<RetrievePublic
                 .map(walletName -> new RetrievePublicAddressCommand(index, network, walletName))
                 .orElseGet(() -> new RetrievePublicAddressCommand(index, network));
     }
+
 }
