@@ -32,7 +32,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_validIndexUnfilteredOwnerList_success() {
         Owner ownerToDelete = model.getFilteredOwnerList().get(INDEX_FIRST_OWNER.getZeroBased());
-        DeleteOwnerCommand deleteOwnerCommand = new DeleteOwnerCommand(INDEX_FIRST_PERSON);
+        DeleteOwnerCommand deleteOwnerCommand = new DeleteOwnerCommand(INDEX_FIRST_OWNER);
 
         String expectedMessage = String.format(DeleteOwnerCommand.MESSAGE_DELETE_OWNER_SUCCESS,
                 Messages.format(ownerToDelete));
@@ -48,7 +48,7 @@ public class DeleteCommandTest {
         Pet petToDelete = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
         DeletePetCommand deletePetCommand = new DeletePetCommand(INDEX_FIRST_PET);
 
-        String expectedMessage = String.format(DeleteOwnerCommand.MESSAGE_DELETE_OWNER_SUCCESS,
+        String expectedMessage = String.format(DeletePetCommand.MESSAGE_DELETE_PET_SUCCESS,
                 Messages.format(petToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -62,7 +62,7 @@ public class DeleteCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOwnerList().size() + 1);
         DeleteOwnerCommand deleteOwnerCommand = new DeleteOwnerCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteOwnerCommand, model, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
+        assertCommandFailure(deleteOwnerCommand, model, Messages.MESSAGE_INVALID_OWNER_DISPLAYED_INDEX);
     }
 
     @Test
