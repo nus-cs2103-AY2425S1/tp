@@ -161,6 +161,11 @@ public class ModelManager implements Model {
         updateFilteredPersonList(predicate);
     }
 
+    /**
+     * Updates logs list to show logs identified by the given {@code identityNumber}.
+     *
+     * @param identityNumber
+     */
     public void updateFilteredLogListById(IdentityNumber identityNumber) {
         requireNonNull(identityNumber);
 

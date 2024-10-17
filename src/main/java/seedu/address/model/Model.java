@@ -97,7 +97,8 @@ public interface Model {
      */
     void updateFilteredPersonListById(IdentityNumber identityNumber);
 
-    void updateFilteredLogList(Predicate<Log> predicate);
-
     void updateFilteredLogListById(IdentityNumber identityNumber);
+
+    // DO NOT USE, added by ZR to prepare for future abstraction
+    void updateFilteredLogList(Predicate<Log> predicate);
 }
