@@ -9,7 +9,7 @@ import static java.util.Objects.requireNonNull;
 public class Wedding {
     public static final String MESSAGE_CONSTRAINTS =
             "Wedding names should only contain alphanumeric characters, spaces or apostrophes, "
-                    + "and they should not be blank.";
+                    + "and they should not be blank. Wedding names are case sensitive.";
 
     /**
      * Validation regex checks that first character of the wedding name must not be a whitespace,

@@ -21,10 +21,10 @@ import seedu.address.model.wedding.Wedding;
 public class UnassignWeddingCommand extends Command {
     public static final String COMMAND_WORD = "unassign-wedding";
 
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes one or multiple weddings from the person identified "
             + "by the index number used in the last person listing.\n"
+            + "Wedding names are case sensitive.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "w/[WEDDING]... (can specify multiple weddings)\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -69,6 +69,10 @@ public class UnassignWeddingCommand extends Command {
         Set<Wedding> updatedWeddings = new HashSet<>(personToEdit.getWeddings());
 
         if (personToEdit.getWeddings().isEmpty()) {
+            throw new CommandException(MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
+        }
+
+        if (weddingsToRemove.isEmpty()) {
             throw new CommandException(MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
         }
 

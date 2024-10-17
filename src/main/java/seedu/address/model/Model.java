@@ -124,7 +124,7 @@ public interface Model {
     void deleteTag(Tag toDelete);
 
     /**
-     * Returns true if a tag with the same name as {@code toAdd} exists in the Wedlinker.
+     * Returns true if a wedding with the same name as {@code toAdd} exists in the Wedlinker.
      * @param toAdd A {@code Wedding} object, will be checked to see if the model already has this.
      * @return A boolean, true if the Wedlinker already contains the {@code Wedding}, false if it does not.
      */

@@ -70,6 +70,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    /**
+     * Replaces the contents of the wedding list with {@code weddings}.
+     * {@code weddings} must not contain duplicate tags.
+     */
+    public void setWeddings(List<Wedding> weddings) {
+        this.weddings.setWeddings(weddings);
+    }
+
     //// person-level operations
 
     /**
@@ -127,14 +135,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the tag list with {@code tags}.
-     * {@code tags} must not contain duplicate tags.
-     */
-    public void setTags(List<Tag> tags) {
-        this.tags.setTags(tags);
-    }
-
-    /**
      * Adds a wedding to the Wedlinker
      * The wedding must not already exist in the Wedlinker
      * @param wedding A {@code Wedding} object to be added.
@@ -152,14 +152,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedWedding);
 
         weddings.setWedding(target, editedWedding);
-    }
-
-    /**
-     * Replaces the contents of the wedding list with {@code weddings}.
-     * {@code weddings} must not contain duplicate weddings.
-     */
-    public void setWeddings(List<Wedding> weddings) {
-        this.weddings.setWeddings(weddings);
     }
 
     /**
@@ -181,12 +173,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given tag {@code target} in the list with {@code editedTag}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedTag} must not be the same as another existing tag in the address book.
+     * The tag identity of {@code editedTag} must not be the same as another existing tag in the address book.
      */
     public void setTag(Tag target, Tag editedTag) {
         requireNonNull(editedTag);
 
         tags.setTag(target, editedTag);
+    }
+
+    /**
+     * Replaces the contents of the tag list with {@code tags}.
+     * {@code tags} must not contain duplicate tags.
+     */
+    public void setTags(List<Tag> tags) {
+        this.tags.setTags(tags);
     }
 
     /**

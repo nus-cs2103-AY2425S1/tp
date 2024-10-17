@@ -19,6 +19,7 @@ public class DeleteWeddingCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the wedding identified by the wedding name.\n"
+            + "Wedding names are case sensitive.\n"
             + "Parameters: WEDDING_NAME (must exist in the Wedlinker)\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_WEDDING + " Timothy's Wedding";
