@@ -200,22 +200,100 @@ public class History {
      * @return A list of appointments on the specified day.
      * @throws AppNotFoundException if no appointments are found for the specified date.
      */
-    public ArrayList<Appointment> getAppointmentsForDay(LocalDate date, Id patientId, Id doctorId)
+    public String getPatientAppointmentsForDay(LocalDate date, Id patientId, Id doctorId)
             throws AppNotFoundException {
-        ArrayList<Appointment> appointmentsForDay = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
         for (LocalDateTime appointmentDateTime : appointments) {
             Appointment appointment = appointmentDatabase.get(appointmentDateTime);
             if (appointmentDateTime.toLocalDate().equals(date)
                     && appointment.getPatientId().equals(patientId)
                     && appointment.getDoctorId().equals(doctorId)) {
-                appointmentsForDay.add(appointment);
+                sb.append(formatAppointment(appointmentDateTime, appointment));
             }
         }
-        if (appointmentsForDay.isEmpty()) {
+        if (sb.isEmpty()) {
             throw new AppNotFoundException("No appointments found for the specified date.");
         }
-        return appointmentsForDay;
+        return sb.toString();
     }
+
+    /**
+     * Retrieves all appointments for a specific patient within the past 'n' days.
+     *
+     * @param days The number of recent days to search for appointments.
+     * @param patientId The ID of the patient whose appointments to retrieve.
+     * @return A string containing all appointments formatted for the specified patient within the last 'n' days.
+     * @throws AppNotFoundException if no appointments are found within the specified time period.
+     */
+    public String getPatientAppointmentsForRecentDays(int days, Id patientId)
+            throws AppNotFoundException {
+        ArrayList<Appointment> appointmentsForRecentDays = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        LocalDate currentDate = LocalDate.now();
+        LocalDate startDate = currentDate.minusDays(days);
+
+        // Iterate through the patient's specific appointments and filter for recent 'n' days
+        for (LocalDateTime appointmentDateTime : appointments) { // appointments is the patient's list
+            Appointment appointment = appointmentDatabase.get(appointmentDateTime);
+            LocalDate appointmentDate = appointmentDateTime.toLocalDate();
+
+            if (!appointmentDate.isBefore(startDate) && !appointmentDate.isAfter(currentDate)
+                    && appointment.getPatientId().equals(patientId)) {
+                sb.append(formatAppointment(appointmentDateTime, appointment));
+            }
+        }
+
+        // If no appointments are found, throw an exception
+        if (sb.isEmpty()) {
+            throw new AppNotFoundException("No appointments found for the recent " + days + " days.");
+        }
+
+        // Return the formatted string of appointments
+        return sb.toString();
+    }
+
+    /**
+     * Retrieves all appointments for a specific doctor within the past 'n' days.
+     *
+     * @param days The number of recent days to search for appointments.
+     * @param doctorId The ID of the doctor whose appointments to retrieve.
+     * @return A string containing all appointments formatted for the specified doctor within the last 'n' days.
+     * @throws AppNotFoundException if no appointments are found within the specified time period.
+     */
+    public String getDoctorAppointmentsForRecentDays(int days, Id doctorId)
+            throws AppNotFoundException {
+        StringBuilder sb = new StringBuilder();
+
+        // Get the most recent date from the appointment database
+        if (appointmentDatabase.isEmpty()) {
+            throw new AppNotFoundException("No appointments found in the database.");
+        }
+
+        // Find the most recent appointment date
+        LocalDateTime mostRecentDateTime = appointmentDatabase.lastKey();
+        LocalDate mostRecentDate = mostRecentDateTime.toLocalDate();
+        LocalDate startDate = mostRecentDate.minusDays(days);
+
+        // Filter appointments within the last 'n' days for the given doctor
+        for (Map.Entry<LocalDateTime, Appointment> entry : appointmentDatabase.entrySet()) {
+            Appointment appointment = entry.getValue();
+            LocalDate appointmentDate = entry.getKey().toLocalDate();
+
+            if (!appointmentDate.isBefore(startDate) && !appointmentDate.isAfter(mostRecentDate)
+                    && appointment.getDoctorId().equals(doctorId)) {
+                sb.append(formatAppointment(entry.getKey(), appointment));
+            }
+        }
+
+        // If no appointments are found, throw an exception
+        if (sb.isEmpty()) {
+            throw new AppNotFoundException("No appointments found for the recent " + days + " days.");
+        }
+
+        // Return the formatted string of appointments
+        return sb.toString();
+    }
+
 
     /**
      * Formats the appointment details for display.
