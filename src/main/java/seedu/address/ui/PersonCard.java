@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -47,13 +45,26 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+
+        // Check the tags for "student" or "teacher"
+        if (person.getTags().stream().anyMatch(tag -> tag.tagName.equals("student"))) {
+            cardPane.setStyle("-fx-background-color: #349beb;"); // Inline style for student
+            System.out.println("student");
+        } else if (person.getTags().stream().anyMatch(tag -> tag.tagName.equals("teacher"))) {
+            cardPane.setStyle("-fx-background-color: #269e2e;"); // Inline style for teacher
+            System.out.println("teacher");
+        } else {
+            // Optional: Set default style for other persons without "student" or "teacher" tags
+            cardPane.setStyle("-fx-background-color: #494a46;"); // Default style
+            System.out.println("default");
+        }
+
+        // Set other UI components
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
+
 }

@@ -18,7 +18,7 @@ public class StudentTest {
         assertEquals(new Email("amy@gmail.com"), student.getEmail());
         assertEquals(new Address("123, Jurong West Ave 6, #08-111"), student.getAddress());
         assertEquals(new Subject("Mathematics"), student.getSubject());
-        assertEquals(0, student.getTags().size());
+        assertEquals(1, student.getTags().size());
         assertEquals(0, student.getClasses().size());
     }
 
@@ -38,7 +38,7 @@ public class StudentTest {
         assertEquals(new Email("john@example.com"), student.getEmail());
         assertEquals(new Address("456, Clementi Ave 3, #12-34"), student.getAddress());
         assertEquals(new Subject("Physics"), student.getSubject());
-        assertEquals(2, student.getTags().size());
+        assertEquals(3, student.getTags().size());
         assertEquals(2, student.getClasses().size());
     }
 

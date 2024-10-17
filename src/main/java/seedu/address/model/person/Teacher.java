@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -32,7 +33,7 @@ public class Teacher extends Person {
      */
     public Teacher(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags,
                    Subject subject, Set<String> classes) {
-        super(name, phone, email, address, tags);
+        super(name, phone, email, address, addTeacherTag(tags));
         Objects.requireNonNull(gender, "Gender cannot be null");
         this.gender = gender;
         Objects.requireNonNull(subject, "Subject cannot be null");
@@ -43,6 +44,12 @@ public class Teacher extends Person {
 
     public Gender getGender() {
         return this.gender;
+    }
+
+    private static Set<Tag> addTeacherTag(Set<Tag> tags) {
+        Set<Tag> modifiedTags = new HashSet<>(tags);
+        modifiedTags.add(new Tag("teacher"));
+        return modifiedTags;
     }
 
     public Subject getSubject() {
