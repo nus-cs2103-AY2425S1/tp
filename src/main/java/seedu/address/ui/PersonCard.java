@@ -60,7 +60,7 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(module -> module.module))
                 .forEach(module -> modules.getChildren().add(new Label(module.module)));
         gender.textFillProperty().bind(
-                Bindings.when(gender.textProperty().isEqualTo("male ♂"))
+                Bindings.when(gender.textProperty().isEqualTo("♂"))
                         .then(Color.LIGHTBLUE)
                         .otherwise(Color.PINK));
     }
