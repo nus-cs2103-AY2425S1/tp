@@ -12,7 +12,8 @@ public class Phone {
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain numbers, and it should be at least 3 digits long";
     public static final String VALIDATION_REGEX = "\\d{3,}";
-    public final String value;
+    public static final Phone NO_PHONE = new Phone();
+    private final String value;
 
     /**
      * Constructs a {@code Phone}.
@@ -25,6 +26,10 @@ public class Phone {
         value = phone;
     }
 
+    private Phone() {
+        value = null;
+    }
+
     /**
      * Returns true if a given string is a valid phone number.
      */
@@ -32,9 +37,23 @@ public class Phone {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns the value (non-null).
+     */
+    public String getValue() {
+        return value != null ? value : "No Phone Number";
+    }
+
+    /**
+     * Returns the actual value (nullable).
+     */
+    public String getTrueValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
-        return value;
+        return getValue();
     }
 
     @Override
