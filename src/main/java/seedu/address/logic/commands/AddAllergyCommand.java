@@ -30,7 +30,7 @@ public class AddAllergyCommand extends Command {
             + PREFIX_ALLERGY + "Pollen "
             + PREFIX_ALLERGY + "Peanut";
 
-    public static final String MESSAGE_SUCCESS = "New allergy added: %1$s";
+    public static final String MESSAGE_SUCCESS = "Added allergy: %1$s to Nric: %2$s";
     public static final String MESSAGE_DUPLICATE_ALLERGY = "This allergy already exists in the address book: %1$s";
     public static final String MESSAGE_CONSTRAINT = "Allergy should be alphanumeric "
             + "and not exceed 30 characters long. \n%1$s";
@@ -68,7 +68,7 @@ public class AddAllergyCommand extends Command {
                         person.getMedCons());
                 model.setPerson(person, editedPerson);
                 model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-                return new CommandResult(String.format(MESSAGE_SUCCESS, allergies));
+                return new CommandResult(String.format(MESSAGE_SUCCESS, allergies, nric));
             }
         }
         throw new CommandException(PATIENT_DOES_NOT_EXIST);
