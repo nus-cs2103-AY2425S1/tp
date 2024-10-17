@@ -103,6 +103,11 @@ public interface Model {
     void assignVendorToEvent(Vendor vendor, Event event);
 
     /**
+     * Unassigns the given vendor from the given event.
+     */
+    void unassignVendorFromEvent(Vendor vendor, Event event);
+
+    /**
      * Returns list of associated vendors to an event.
      */
     ObservableList<Vendor> getAssociatedVendors(Event event);

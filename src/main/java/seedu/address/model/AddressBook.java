@@ -140,6 +140,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Unassigns the given {@code vendor} in the list from {@code event}.
+     * {@code vendor} and {@code event} must exist in the address book.
+     */
+    void unassignVendorFromEvent(Vendor vendor, Event event) {
+        requireAllNonNull(vendor, event);
+        Pair<Vendor, Event> pair = new Pair<>(vendor, event);
+        associations.remove(pair);
+    }
+
+    /**
      * Returns list of associated vendors to an event.
      */
     public ObservableList<Vendor> getAssociatedVendors(Event event) {
@@ -238,4 +248,3 @@ public class AddressBook implements ReadOnlyAddressBook {
         return Objects.hash(vendors.hashCode(), events.hashCode());
     }
 }
-
