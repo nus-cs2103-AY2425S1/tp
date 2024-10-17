@@ -1,7 +1,8 @@
 package seedu.address.ui;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class FormatSuggestionTest {
 
@@ -21,7 +22,7 @@ public class FormatSuggestionTest {
     }
 
     @Test
-    public void testGetRemainingFormat_AddCommand() {
+    public void testGetRemainingFormat_addCommand() {
         FormatSuggestion addSuggestion = new FormatSuggestion(
                 "add",
                 "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]",
@@ -42,7 +43,7 @@ public class FormatSuggestionTest {
     }
 
     @Test
-    public void testGetRemainingFormat_EditCommand() {
+    public void testGetRemainingFormat_editCommand() {
         FormatSuggestion editSuggestion = new FormatSuggestion(
                 "edit",
                 "edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]",
@@ -63,7 +64,7 @@ public class FormatSuggestionTest {
     }
 
     @Test
-    public void testGetRemainingFormat_DeleteCommand() {
+    public void testGetRemainingFormat_deleteCommand() {
         FormatSuggestion deleteSuggestion = new FormatSuggestion(
                 "delete",
                 "delete INDEX",
@@ -78,7 +79,7 @@ public class FormatSuggestionTest {
     }
 
     @Test
-    public void testGetRemainingFormat_EdgeCases() {
+    public void testGetRemainingFormat_edgeCases() {
         FormatSuggestion addSuggestion = new FormatSuggestion(
                 "add",
                 "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]",
@@ -101,7 +102,7 @@ public class FormatSuggestionTest {
     }
 
     @Test
-    public void testGetRemainingFormat_InvalidInputs() {
+    public void testGetRemainingFormat_invalidInputs() {
         FormatSuggestion editSuggestion = new FormatSuggestion(
                 "edit",
                 "edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]",

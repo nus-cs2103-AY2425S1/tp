@@ -35,7 +35,7 @@ public class CommandBox extends UiPart<Region> {
         // Add listeners for real-time command detection and caret position
         commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             setStyleToDefault();
-            recommendations.checkAllCommands(commandTextField, suggestionTextField);
+            suggestionTextField.setText(recommendations.checkAllCommands(commandTextField.getText()));
         });
     }
 
@@ -54,7 +54,8 @@ public class CommandBox extends UiPart<Region> {
 
         // Get the parent StackPane
         if (commandTextField.getParent() != null) {
-            ((StackPane) commandTextField.getParent()).getChildren().remove(commandTextField);
+            StackPane parent = (StackPane) commandTextField.getParent();
+            parent.getChildren().remove(commandTextField);
         }
 
         // Add both text fields to the placeholder with suggestion behind
