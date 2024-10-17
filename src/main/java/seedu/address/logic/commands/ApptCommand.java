@@ -10,7 +10,7 @@ import java.util.Optional;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Appt;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
@@ -23,22 +23,21 @@ public class ApptCommand extends Command {
     public static final String MESSAGE_APPT_ADDED_SUCCESS = "Appointment added successfully";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person not found";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the appointment date of the person identified "
-            + "by the name in the last person listing. "
-            + "Existing appointment will be overwritten by the input.\n"
-            + "appt dt/YYYY-MM-DDTHH:MM n/NAME\n";
+        + ": Adds an appointment to the patient with the given NRIC. "
+        + "Format: appt dt/YYYY-MM-DDTHH:MM /iNRIC)\n"
+        + "Example: " + COMMAND_WORD + " dt/2022-12-31T14:00 i/S1234567A";
 
     private final LocalDateTime dateTime;
-    private final Name name;
+    private final Nric nric;
 
     /**
      * @param dateTime of the appointment
      * @param name of the person
      */
-    public ApptCommand(LocalDateTime dateTime, Name name) {
-        requireAllNonNull(dateTime, name);
+    public ApptCommand(LocalDateTime dateTime, Nric nric) {
+        requireAllNonNull(dateTime, nric);
         this.dateTime = dateTime;
-        this.name = name;
+        this.nric = nric;
     }
 
     /**
@@ -54,7 +53,7 @@ public class ApptCommand extends Command {
 
         // Find the person with the given name
         Optional<Person> optionalPerson = lastShownList.stream()
-            .filter(person -> person.getName().equals(name))
+            .filter(person -> person.getNric().equals(nric))
             .findFirst();
 
         if (!optionalPerson.isPresent()) {
@@ -81,7 +80,7 @@ public class ApptCommand extends Command {
         }
 
         ApptCommand e = (ApptCommand) other;
-        return name.equals(e.name)
+        return nric.equals(e.nric)
                 && dateTime.equals(e.dateTime);
     }
 

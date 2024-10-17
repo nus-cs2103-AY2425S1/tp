@@ -31,6 +31,7 @@
       <Label fx:id="nric" styleClass="cell_small_label" text="\$nric" />
       <Label fx:id="sex" styleClass="cell_small_label" text="\$sex" />
       <Label fx:id="birthDate" styleClass="cell_small_label" text="\$birthDate" />
+      <Label fx:id="appointmentDateTime" styleClass="cell_small_label" text="\$apptDateTime" />
     </VBox>
   </GridPane>
 </HBox>

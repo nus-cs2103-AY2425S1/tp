@@ -78,7 +78,7 @@ public class TypicalPersons {
 
     public static final Person JAKE = new PersonBuilder().withName("Jake Tio").withPhone("9982131")
             .withEmail("jakers@example.com").withAddress("nus drive")
-            .withHealthServices("BloodTest").with.build();
+            .withHealthServices("BloodTest").build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

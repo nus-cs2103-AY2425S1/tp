@@ -16,6 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Allergy;
+import seedu.address.model.person.Appt;
 import seedu.address.model.person.Birthdate;
 import seedu.address.model.person.BloodType;
 import seedu.address.model.person.Email;
@@ -326,5 +327,34 @@ public class ParserUtil {
             return null;
         }
         return parsePhone(phone);
+    }
+
+    /**
+     * Parses a {@code String date} into an {@code Appt}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static Appt parseSingleAppt(LocalDateTime dateTime) {
+        requireNonNull(dateTime);
+        return new Appt(dateTime);
+    }
+
+    /**
+     * Parses {@code Collection<String> dates} into a {@code List<Appt>}.
+     */
+    public static List<Appt> parseAppts(Collection<String> dates) throws ParseException {
+        requireNonNull(dates);
+        final List<Appt> apptList = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        for (String date : dates) {
+            String trimmedDate = date.trim();
+            if (!Appt.isValidAppt(trimmedDate)) {
+                throw new ParseException(Appt.MESSAGE_CONSTRAINTS);
+            }
+            LocalDateTime trimmedDateTime = LocalDateTime.parse(trimmedDate, formatter);
+            apptList.add(parseSingleAppt(trimmedDateTime));
+        }
+        return apptList;
     }
 }

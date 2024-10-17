@@ -3,15 +3,14 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-//import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.ApptCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 
 /**
  * Parses input arguments and creates a new ApptCommand object
@@ -28,8 +27,7 @@ public class ApptCommandParser implements Parser<ApptCommand> {
      */
     public ApptCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-            PREFIX_DATETIME, PREFIX_NAME);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATETIME, PREFIX_NRIC);
 
         LocalDateTime dateTime;
         try {
@@ -40,8 +38,8 @@ public class ApptCommandParser implements Parser<ApptCommand> {
                 ApptCommand.MESSAGE_USAGE), e);
         }
 
-        Name name = new Name(argMultimap.getValue(PREFIX_NAME).get());
+        Nric nric = new Nric(argMultimap.getValue(PREFIX_NRIC).get());
 
-        return new ApptCommand(dateTime, name);
+        return new ApptCommand(dateTime, nric);
     }
 }

@@ -1,8 +1,6 @@
 package seedu.address.model.util;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,8 +18,6 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static final Appt EMPTY_APPT = new Appt(LocalDateTime.of(2020, 12, 25, 12, 0));
-    public static final List<Appt> EMPTY_APPT_LIST = Arrays.asList(EMPTY_APPT);
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Nric("T0123456A"), new Birthdate("2001-05-30"),

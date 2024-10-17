@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Allergy;
+import seedu.address.model.person.Appt;
 import seedu.address.model.person.Birthdate;
 import seedu.address.model.person.BloodType;
 import seedu.address.model.person.Email;
@@ -47,18 +48,19 @@ class JsonAdaptedPerson {
     private final String nokName;
     private final String nokPhone;
     private final List<JsonAdaptedHealthService> healthServices = new ArrayList<>();
+    private final List<JsonAdaptedAppt> appts = new ArrayList<>();
 
 
-//    /**
-//     * Constructs a {@code JsonAdaptedPerson} with only name, NRIC, sex, birthdate and health service details.
-//     */
-//    @JsonCreator
-//    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("NRIC") String nric,
-//                             @JsonProperty("Sex") String sex, @JsonProperty("Birth Date") String birthDate,
-//                             @JsonProperty("healthServices") List<JsonAdaptedHealthService> healthServices) {
-//        this(name, nric, sex, birthDate, healthServices, null, null, null, null,
-//                null, null, null, null, null, null);
-//    }
+    //    /**
+    //     * Constructs a {@code JsonAdaptedPerson} with only name, NRIC, sex, birthdate and health service details.
+    //     */
+    //    @JsonCreator
+    //    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("NRIC") String nric,
+    //                             @JsonProperty("Sex") String sex, @JsonProperty("Birth Date") String birthDate,
+    //                             @JsonProperty("healthServices") List<JsonAdaptedHealthService> healthServices) {
+    //        this(name, nric, sex, birthDate, healthServices, null, null, null, null,
+    //                null, null, null, null, null, null);
+    //    }
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -71,7 +73,8 @@ class JsonAdaptedPerson {
             @JsonProperty("address") String address, @JsonProperty("allergy") String allergy,
             @JsonProperty("bloodType") String bloodType, @JsonProperty("healthRisk") String healthRisk,
             @JsonProperty("healthRecord") String healthRecord, @JsonProperty("note") String note,
-            @JsonProperty("nokName") String nokName, @JsonProperty("nokPhone") String nokPhone) {
+            @JsonProperty("nokName") String nokName, @JsonProperty("nokPhone") String nokPhone,
+            @JsonProperty("appts") List<JsonAdaptedAppt> appts) {
         this.name = name;
         this.nric = nric;
         this.sex = sex;
@@ -89,6 +92,9 @@ class JsonAdaptedPerson {
         this.note = note;
         this.nokName = nokName;
         this.nokPhone = nokPhone;
+        if (appts != null) {
+            this.appts.addAll(appts);
+        }
     }
 
     /**
@@ -112,6 +118,9 @@ class JsonAdaptedPerson {
         note = source.getNote() == null ? "" : source.getNote().value;
         nokName = source.getNokName() == null ? "" : source.getNokName().fullName;
         nokPhone = source.getNokPhone() == null ? "" : source.getNokPhone().value;
+        appts.addAll(source.getAppts().stream()
+                .map(JsonAdaptedAppt::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -218,10 +227,21 @@ class JsonAdaptedPerson {
         }
         final Name modelNokName = nokName.isEmpty() ? null : new Name(nokName);
 
+        if (appts == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Appt.class.getSimpleName()));
+        }
+        final List<Appt> modelAppts = new ArrayList<>();
+        if (appts != null) {
+            for (JsonAdaptedAppt appt : appts) {
+                modelAppts.add(appt.toModelType());
+            }
+        }
+
         final Set<HealthService> modelHealthServices = new HashSet<>(personHealthServices);
         return new Person(modelName, modelNric, modelBirthDate, modelSex, modelHealthServices, modelPhone, modelEmail,
                 modelAddress, modelAllergy, modelBloodType, modelHealthRisk, modelHealthRecord, modelNote,
-                modelNokName, modelNokPhone);
+                modelNokName, modelNokPhone, modelAppts);
     }
 
 }
