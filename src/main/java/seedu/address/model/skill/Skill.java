@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Skill {
 
-    public static final String MESSAGE_CONSTRAINTS = "Skill should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Skills should be alphanumeric and cannot contain spaces";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String skill;

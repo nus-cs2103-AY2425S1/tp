@@ -76,6 +76,7 @@ Format: `help`
 Adds a person to the address book.
 
 Format: `add id/EMPLOYEE_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​`
+* Skills and tags must be alphanumeric and cannot contain spaces.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0) and any number of skills (including 0)
