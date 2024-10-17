@@ -1,0 +1,18 @@
+{
+  "persons" : [ {
+    "name" : "Alice Pauline",
+    "studentClass" : "4A",
+    "phone" : "94351253",
+    "tags" : [ "friends" ]
+  }, {
+    "name" : "Benson Meier",
+    "studentClass" : "6B",
+    "phone" : "98765432",
+    "tags" : [ "owesMoney", "friends" ]
+  }, {
+    "name" : "Carl Kurz",
+    "studentClass" : "4A",
+    "phone" : "95352563",
+    "tags" : [ ]
+  } ]
+}
