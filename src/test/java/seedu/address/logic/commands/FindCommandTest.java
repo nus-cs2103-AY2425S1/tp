@@ -27,6 +27,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.PostalContainsKeywordsPredicate;
+
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -105,7 +107,7 @@ public class FindCommandTest {
     @Test
     public void execute_nameAndPhoneSearch_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        Predicate<Person> predicate = preparePredicate("Alice 98765432"); //ALICE by name,BENSON by number
+        Predicate<Person> predicate = preparePredicate("Alice 98765432"); //ALICE by name, BENSON by number
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -123,8 +125,35 @@ public class FindCommandTest {
     public void execute_nullPhonePredicate_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new FindCommand(null));
     }
+    @Test
+    public void execute_partialPostalCodeSearch_onePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        Predicate<Person> predicate = preparePredicate("S888"); // Partial postal code for Alice
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.singletonList(ALICE), model.getFilteredPersonList());
+    }
 
+    @Test
+    public void execute_partialPostalCodeSearch_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        Predicate<Person> predicate = preparePredicate("S8"); // Partial postal code matches ALICE and BENSON
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredPersonList());
+    }
 
+    @Test
+    public void execute_nameAndPartialPostalCodeSearch_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        Predicate<Person> predicate = preparePredicate("Alice S812"); // Alice by name, Benson by partial postal code
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredPersonList());
+    }
     private Predicate<Person> preparePredicate(String userInput) {
         String[] keywords = userInput.split("\\s+");
 
@@ -133,7 +162,11 @@ public class FindCommandTest {
                 .collect(Collectors.toList());
 
         List<String> nameKeywords = Arrays.stream(keywords)
-                .filter(keyword -> !isNumeric(keyword))
+                .filter(keyword -> !isNumeric(keyword) && !isPostalCode(keyword))
+                .collect(Collectors.toList());
+
+        List<String> postalCodeKeywords = Arrays.stream(keywords)
+                .filter(this::isPostalCode)
                 .collect(Collectors.toList());
 
         Predicate<Person> namePredicate = nameKeywords.isEmpty()
@@ -144,10 +177,18 @@ public class FindCommandTest {
                 ? person -> false
                 : new PhoneContainsKeywordsPredicate(phoneKeywords);
 
-        return namePredicate.or(phonePredicate);
+        Predicate<Person> postalPredicate = postalCodeKeywords.isEmpty()
+                ? person -> false
+                : new PostalContainsKeywordsPredicate(postalCodeKeywords);
+
+        return namePredicate.or(phonePredicate).or(postalPredicate);
     }
 
     private boolean isNumeric(String str) {
         return str.matches("\\d+");
+    }
+
+    private boolean isPostalCode(String str) {
+        return str.matches("^S\\d{1,6}$"); // partial or full postal codes in SXXXXXX
     }
 }

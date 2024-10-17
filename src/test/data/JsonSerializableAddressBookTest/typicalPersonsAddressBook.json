@@ -4,14 +4,14 @@
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
+    "address" : "123, Jurong West Ave 6, #08-111 S888123",
     "postalCode": "123456",
     "tags" : [ "Vegan" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
+    "address" : "311, Clementi Ave 2, #02-25 S812300",
     "postalCode": "123456",
     "tags" : [ "Vegetarian", "Gluten Free" ]
   }, {
@@ -40,14 +40,14 @@
     "phone" : "94824422",
     "email" : "lydia@example.com",
     "address" : "little tokyo #12-345",
-    "postalCode": "123456",
+    "postalCode" : "123456",
     "tags" : [ ]
   }, {
     "name" : "George Best",
     "phone" : "94824422",
     "email" : "anna@example.com",
     "address" : "4th street #12-345",
-    "postalCode": "123456",
+    "postalCode" : "123456",
     "tags" : [ ]
   } ],
   "orders": []
