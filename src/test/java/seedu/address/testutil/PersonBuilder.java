@@ -1,11 +1,13 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AttendanceList;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Grade;
 import seedu.address.model.person.GradeList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -94,6 +96,21 @@ public class PersonBuilder {
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code GradeList} of the {@code Person} that we are building.
+     * This method allows adding a list of grades to the person's grade list.
+     *
+     * @param grades A list of grades to be added to the person's {@code GradeList}.
+     * @return The {@code PersonBuilder} object, for method chaining.
+     */
+    public PersonBuilder withGrades(List<Grade> grades) {
+        this.gradeList = new GradeList();
+        for (Grade grade : grades) {
+            this.gradeList.addGrade(grade);
+        }
         return this;
     }
 

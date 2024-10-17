@@ -9,6 +9,9 @@ import java.util.List;
  * Represents a list of grades for a student in the address book.
  */
 public class GradeList {
+    private static final String NOT_ALL_WEIGHTAGE = "\nDo note not all weightage has been accounted for."
+            + "\nPercentage of tests done: ";
+    private static final float FULL_WEIGHTAGE = 1.0f;
     private final List<Grade> grades;
 
     /**
@@ -52,10 +55,20 @@ public class GradeList {
      *
      * @param testName The name of the test for which the grade should be removed.
      */
-    private void removeGrade(String testName) {
+    public void removeGrade(String testName) {
         requireNonNull(testName);
         grades.removeIf(grade -> grade.getTestName().equalsIgnoreCase(testName));
     }
+
+    /**
+     * Retrieves the list of grades in this {@code GradeList}.
+     *
+     * @return A list of {@code Grade} objects representing all the grades in the grade list.
+     */
+    public List<Grade> getList() {
+        return new ArrayList<>(grades); // Returning a copy to prevent external modification
+    }
+
 
     /**
      * Returns true if there is a grade recorded for the specified test.
@@ -68,8 +81,46 @@ public class GradeList {
         return getGrade(testName) != null;
     }
 
+    /**
+     * Calculates the overall grade summary based on the weightage and scores of all grades.
+     *
+     * @return A summary string containing the overall score and information on weightage completeness.
+     */
+    public String getOverallGrade() {
+        float totalScore = 0;
+        float totalWeightage = 0;
+
+        for (Grade g: grades) {
+            float currentWeightage = g.getWeightage();
+            totalWeightage += currentWeightage / 100;
+            totalScore += g.getScore() * currentWeightage / 100;
+        }
+
+        String summary = "Overall score: " + totalScore;
+
+        if (totalWeightage < FULL_WEIGHTAGE) {
+            summary += NOT_ALL_WEIGHTAGE + totalWeightage + "%";
+        }
+
+        return summary;
+    }
+
+    // TODO: Check if total weightage has crossed 100%
+
+    /**
+     * Returns true if the grade list is empty.
+     *
+     * @return true if there are no grades in the list, false otherwise.
+     */
+    public boolean isEmpty() {
+        return grades.isEmpty();
+    }
+
     @Override
     public String toString() {
+        if (grades.isEmpty()) {
+            return "No grades available";
+        }
         StringBuilder result = new StringBuilder();
         for (Grade grade : grades) {
             result.append(grade.toString()).append("\n");
