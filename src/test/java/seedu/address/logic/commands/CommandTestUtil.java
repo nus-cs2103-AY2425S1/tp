@@ -27,8 +27,11 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final String VALID_NAME_ALICE = "Alice Pauline";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_NAME_DANIEL = "Daniel Meier";
+    public static final String VALID_NAME_FIONA = "Fiona Kunz";
     public static final String VALID_NAME_GEORGE = "George Best";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
@@ -40,6 +43,7 @@ public class CommandTestUtil {
     public static final String VALID_JOB_BOB = "Photographer";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend 25";
+    public static final String VALID_TAG_FRIENDS = "friends";
     public static final String VALID_TAG_AMY = "Jane and Tom 230412";
     public static final String VALID_TAG_BOB = "Jim and Joe 240101";
 
@@ -55,6 +59,8 @@ public class CommandTestUtil {
     public static final String JOB_DESC_BOB = " " + PREFIX_JOB + VALID_JOB_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+
+    public static final String INVALID_NAME = "Android";
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
