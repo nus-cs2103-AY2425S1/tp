@@ -160,7 +160,7 @@ public class ParserUtil {
         return new EmergencyContactName(trimmedEcName);
     }
 
-     /**
+    /**
      * Parses a {@code String emergencyPhone} into a {@code EmergencyPhone}.
      * Leading and trailing whitespaces will be trimmed.
      *
