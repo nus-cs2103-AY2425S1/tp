@@ -26,7 +26,9 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new CompoundedPredicate(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")), new OrgContainsKeywordsPredicate(Arrays.asList(""))));
+                new FindCommand(new CompoundedPredicate(
+                        new NameContainsKeywordsPredicate(
+                                Arrays.asList("Alice", "Bob")), new OrgContainsKeywordsPredicate(Arrays.asList(""))));
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
