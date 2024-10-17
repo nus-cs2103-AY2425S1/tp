@@ -40,7 +40,7 @@ public class SampleDataUtil {
             new Company(new Name("Apple"), new Phone("4089961010"), new Email("contact@apple.com"),
                 new Address("One Apple Park Way, Cupertino, CA 95014"),
                 getTagSet("tech", "hardware"), new Status("APPLIED"),
-                    getApplicationList(createApplication("UI/UX Developer", "Requires Figma",
+                    getApplicationList(createApplication("UI UX Developer", "Requires Figma",
                             "REJECTED"))),
             new Company(new Name("Amazon"), new Phone("2062661000"), new Email("contact@amazon.com"),
                     new Address("410 Terry Ave N, Seattle, WA 98109"),
