@@ -1,5 +1,3 @@
-package seedu.address.logic.commands;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -16,6 +14,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -33,12 +32,18 @@ public class ImportCommandTest {
     private static final String VALID_PERSON_ENTRY = "\"John Doe\",\"98765432\",\"johnd@example.com\","
             + "\"311, Clementi Ave 2, #02-25\",\"friends\"";
     private static final String INVALID_PERSON_ENTRY = "\"John Doe\",\"98765432\""; // Incomplete person entry
+    private static final String EMPTY_CSV_FILE = ""; // Empty file content
+    private static final String MULTIPLE_PERSON_ENTRIES = "\"Jane Doe\",\"91234567\",\"jane@example.com\","
+            + "\"123, Main St\",\"family\"\n"
+            + "\"John Smith\",\"87654321\",\"john@example.com\",\"456, Secondary St\",\"coworkers\"";
     private static final String TEST_DIRECTORY = "./data";
 
     private Model model;
     private Model expectedModel;
     private Path validFilePath;
     private Path invalidFilePath;
+    private Path emptyFilePath;
+    private Path multipleFilePath;
     private Path nonExistentFilePath;
 
     @BeforeEach
@@ -46,9 +51,11 @@ public class ImportCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        // Create paths for valid and invalid CSV files
+        // Create paths for valid, invalid, empty, and multiple CSV files
         validFilePath = Paths.get(TEST_DIRECTORY, "ValidImportContacts.csv");
         invalidFilePath = Paths.get(TEST_DIRECTORY, "InvalidImportContacts.csv");
+        emptyFilePath = Paths.get(TEST_DIRECTORY, "EmptyImportContacts.csv");
+        multipleFilePath = Paths.get(TEST_DIRECTORY, "MultipleImportContacts.csv");
         nonExistentFilePath = Paths.get(TEST_DIRECTORY, "NonExistentFile.csv");
 
         // Ensure the directory exists
@@ -67,6 +74,18 @@ public class ImportCommandTest {
             writer.newLine();
             writer.write(INVALID_PERSON_ENTRY);
         }
+
+        // Create an empty CSV file
+        try (BufferedWriter writer = Files.newBufferedWriter(emptyFilePath)) {
+            writer.write(VALID_CSV_HEADERS); // Only headers, no entries
+        }
+
+        // Create a CSV file with multiple valid entries
+        try (BufferedWriter writer = Files.newBufferedWriter(multipleFilePath)) {
+            writer.write(VALID_CSV_HEADERS);
+            writer.newLine();
+            writer.write(MULTIPLE_PERSON_ENTRIES);
+        }
     }
 
     @AfterEach
@@ -77,6 +96,12 @@ public class ImportCommandTest {
         }
         if (Files.exists(invalidFilePath)) {
             Files.delete(invalidFilePath);
+        }
+        if (Files.exists(emptyFilePath)) {
+            Files.delete(emptyFilePath);
+        }
+        if (Files.exists(multipleFilePath)) {
+            Files.delete(multipleFilePath);
         }
     }
 
@@ -115,5 +140,44 @@ public class ImportCommandTest {
         // Ensure success of import
         assertCommandSuccess(importCommand, model,
                 String.format(ImportCommand.MESSAGE_SUCCESS, "ValidImportContacts.csv"), expectedModel);
+    }
+
+    @Test
+    public void execute_emptyFile_throwsCommandException() {
+        ImportCommand importCommand = new ImportCommand("EmptyImportContacts.csv");
+        try {
+            importCommand.execute(model);
+        } catch (CommandException e) {
+            assertTrue(e.getMessage().contains(ImportCommand.MESSAGE_INCORRECT_FILE_FORMAT));
+        }
+    }
+
+    @Test
+    public void execute_multipleValidEntries_importSuccess() throws CommandException {
+        ImportCommand importCommand = new ImportCommand("MultipleImportContacts.csv");
+        Name name1 = new Name("Jane Doe");
+        Phone phone1 = new Phone("91234567");
+        Email email1 = new Email("jane@example.com");
+        Address address1 = new Address("123, Main St");
+        Tag tag1 = new Tag("family");
+        Set<Tag> tagSet1 = new HashSet<>();
+        tagSet1.add(tag1);
+        Person person1 = new Person(name1, phone1, email1, address1, tagSet1);
+
+        Name name2 = new Name("John Smith");
+        Phone phone2 = new Phone("87654321");
+        Email email2 = new Email("john@example.com");
+        Address address2 = new Address("456, Secondary St");
+        Tag tag2 = new Tag("coworkers");
+        Set<Tag> tagSet2 = new HashSet<>();
+        tagSet2.add(tag2);
+        Person person2 = new Person(name2, phone2, email2, address2, tagSet2);
+
+        expectedModel.addPerson(person1);
+        expectedModel.addPerson(person2);
+
+        // Ensure success of import
+        assertCommandSuccess(importCommand, model,
+                String.format(ImportCommand.MESSAGE_SUCCESS, "MultipleImportContacts.csv"), expectedModel);
     }
 }
