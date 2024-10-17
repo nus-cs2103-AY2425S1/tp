@@ -19,12 +19,12 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NewtagCommand;
+import seedu.address.logic.commands.NotRsvpListCommand;
 import seedu.address.logic.commands.RsvpCommand;
+import seedu.address.logic.commands.RsvpListCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UnRsvpCommand;
 import seedu.address.logic.commands.UntagCommand;
-import seedu.address.logic.commands.RsvpListCommand;
-import seedu.address.logic.commands.NotRsvpListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 

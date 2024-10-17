@@ -1,13 +1,16 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.function.Predicate;
+
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.RsvpedPredicate;
 
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Lists all persons in the address book who have not yet RSVPed to the user.
+ */
 public class NotRsvpListCommand extends Command {
 
     public static final String COMMAND_WORD = "notrsvplist";
