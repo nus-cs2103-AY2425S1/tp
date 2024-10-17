@@ -12,6 +12,17 @@ public class Attendance {
     private final boolean hasAttended;
 
     /**
+     * Represents an Attendance record for a person.
+     * Each Attendance object stores whether the person has attended and the date of
+     * attendance.
+     *
+     * @param hasAttended A Boolean indicating if the person has attended.
+     */
+    public Attendance(boolean hasAttended) {
+        this.hasAttended = hasAttended;
+    }
+
+    /**
      * Converts a {@code String attendance} to an {@code Attendance} object.
      *
      * @param attendance A valid string that represents attendance.
@@ -26,17 +37,6 @@ public class Attendance {
      */
     public static boolean isValidAttendance(String test) {
         return test.equals("Attended") || test.equals("Absent");
-    }
-
-    /**
-     * Represents an Attendance record for a person.
-     * Each Attendance object stores whether the person has attended and the date of
-     * attendance.
-     *
-     * @param hasAttended A Boolean indicating if the person has attended.
-     */
-    public Attendance(boolean hasAttended) {
-        this.hasAttended = hasAttended;
     }
 
     public boolean hasAttended() {

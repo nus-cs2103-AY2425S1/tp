@@ -37,7 +37,8 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE, PREFIX_ATTENDANCE);
         if (!argMultimap.getValue(PREFIX_DATE).isPresent() || !argMultimap.getValue(PREFIX_ATTENDANCE).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MarkAttendanceCommand.MESSAGE_USAGE));
         }
         LocalDateTime date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Attendance attendance = ParserUtil.parseAttendance(argMultimap.getValue(PREFIX_ATTENDANCE).get());

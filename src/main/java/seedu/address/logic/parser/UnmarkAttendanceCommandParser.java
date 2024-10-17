@@ -35,7 +35,8 @@ public class UnmarkAttendanceCommandParser implements Parser<UnmarkAttendanceCom
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE);
         if (!argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkAttendanceCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    UnmarkAttendanceCommand.MESSAGE_USAGE));
         }
         LocalDateTime date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
 
