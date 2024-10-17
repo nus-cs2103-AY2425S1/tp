@@ -30,7 +30,6 @@ import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.internbuddy.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.internbuddy.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.internbuddy.testutil.TypicalCompanies.GOOGLE;
@@ -95,8 +94,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser,
                 validExpectedcompaniestring + PHONE_DESC_GOOGLE + EMAIL_DESC_GOOGLE + NAME_DESC_GOOGLE
                         + ADDRESS_DESC_GOOGLE + validExpectedcompaniestring,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE,
-                        PREFIX_STATUS));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE));
 
         // invalid value followed by valid value
 
@@ -137,8 +135,9 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
+        // todo: add test for the other optional fields
         // zero tags
-        Company expectedcompany = new CompanyBuilder(GOOGLE).withTags().build();
+        Company expectedcompany = new CompanyBuilder(GOOGLE).withTags().withApplications().build();
         assertParseSuccess(parser, NAME_DESC_GOOGLE + PHONE_DESC_GOOGLE + EMAIL_DESC_GOOGLE
                         + ADDRESS_DESC_GOOGLE + STATUS_DESC_GOOGLE,
                 new AddCommand(expectedcompany));
@@ -153,19 +152,9 @@ public class AddCommandParserTest {
                         + ADDRESS_DESC_MICROSOFT,
                 expectedMessage);
 
-        // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_MICROSOFT + VALID_PHONE_MICROSOFT + EMAIL_DESC_MICROSOFT
-                        + ADDRESS_DESC_MICROSOFT,
-                expectedMessage);
-
         // missing email prefix
         assertParseFailure(parser, NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT + VALID_EMAIL_MICROSOFT
                         + ADDRESS_DESC_MICROSOFT,
-                expectedMessage);
-
-        // missing address prefix
-        assertParseFailure(parser, NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT
-                        + VALID_ADDRESS_MICROSOFT,
                 expectedMessage);
 
         // all prefixes missing

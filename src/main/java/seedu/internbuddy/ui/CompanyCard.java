@@ -14,7 +14,7 @@ import seedu.internbuddy.model.company.Company;
  */
 public class CompanyCard extends UiPart<Region> {
 
-    private static final String FXML = "companyListCard.fxml";
+    private static final String FXML = "CompanyListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

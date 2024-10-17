@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.internbuddy.commons.exceptions.IllegalValueException;
+import seedu.internbuddy.model.application.Application;
 import seedu.internbuddy.model.company.Address;
 import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
@@ -30,15 +31,17 @@ public class JsonAdaptedCompany {
     private final String address;
     private final String status;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedApplication> applications = new ArrayList<>();
 
     /**
      * Constructs a {@link JsonAdaptedCompany} with the given company details.
      */
     @JsonCreator
     public JsonAdaptedCompany(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("status") String status) {
+                 @JsonProperty("email") String email, @JsonProperty("address") String address,
+                 @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                 @JsonProperty("status") String status,
+                 @JsonProperty("applications") List<JsonAdaptedApplication> applications) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -46,6 +49,9 @@ public class JsonAdaptedCompany {
         this.status = status;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (applications != null) {
+            this.applications.addAll(applications);
         }
     }
 
@@ -61,6 +67,9 @@ public class JsonAdaptedCompany {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        applications.addAll(source.getApplications().stream()
+                .map(JsonAdaptedApplication::new)
+                .toList());
     }
 
     /**
@@ -72,6 +81,11 @@ public class JsonAdaptedCompany {
         final List<Tag> companyTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             companyTags.add(tag.toModelType());
+        }
+
+        final List<Application> modelApplications = new ArrayList<>();
+        for (JsonAdaptedApplication application : applications) {
+            modelApplications.add(application.toModelType());
         }
 
         if (name == null) {
@@ -113,7 +127,7 @@ public class JsonAdaptedCompany {
 
         final Set<Tag> modelTags = new HashSet<>(companyTags);
 
-        return new Company(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelStatus);
+        return new Company(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelStatus, modelApplications);
     }
 
 }

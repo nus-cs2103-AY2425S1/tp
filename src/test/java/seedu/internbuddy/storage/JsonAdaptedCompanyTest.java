@@ -34,9 +34,12 @@ public class JsonAdaptedCompanyTest {
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
     private static final String VALID_STATUS = AMAZON.getStatus().toString();
+    private static final List<JsonAdaptedApplication> VALID_APPLICATIONS = AMAZON.getApplications().stream()
+            .map(JsonAdaptedApplication::new)
+            .toList();
 
     @Test
-    public void toModelType_validcompanyDetails_returnscompany() throws Exception {
+    public void toModelType_validCompanyDetails_returnsCompany() throws Exception {
         JsonAdaptedCompany company = new JsonAdaptedCompany(AMAZON);
         assertEquals(AMAZON, company.toModelType());
     }
@@ -44,7 +47,8 @@ public class JsonAdaptedCompanyTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedCompany company =
-                new JsonAdaptedCompany(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_STATUS);
+                new JsonAdaptedCompany(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_STATUS,
+                        VALID_APPLICATIONS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, company::toModelType);
     }
@@ -52,7 +56,7 @@ public class JsonAdaptedCompanyTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedCompany company = new JsonAdaptedCompany(null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_TAGS, VALID_STATUS);
+                VALID_TAGS, VALID_STATUS, VALID_APPLICATIONS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, company::toModelType);
     }
@@ -60,7 +64,8 @@ public class JsonAdaptedCompanyTest {
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedCompany company =
-                new JsonAdaptedCompany(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_STATUS);
+                new JsonAdaptedCompany(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_STATUS,
+                        VALID_APPLICATIONS);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, company::toModelType);
     }
@@ -68,7 +73,7 @@ public class JsonAdaptedCompanyTest {
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedCompany company = new JsonAdaptedCompany(VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS,
-                VALID_TAGS, VALID_STATUS);
+                VALID_TAGS, VALID_STATUS, VALID_APPLICATIONS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, company::toModelType);
     }
@@ -76,7 +81,8 @@ public class JsonAdaptedCompanyTest {
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedCompany company =
-                new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_STATUS);
+                new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_STATUS,
+                        VALID_APPLICATIONS);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, company::toModelType);
     }
@@ -84,7 +90,7 @@ public class JsonAdaptedCompanyTest {
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
         JsonAdaptedCompany company = new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, null, VALID_ADDRESS,
-                VALID_TAGS, VALID_STATUS);
+                VALID_TAGS, VALID_STATUS, VALID_APPLICATIONS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, company::toModelType);
     }
@@ -92,7 +98,7 @@ public class JsonAdaptedCompanyTest {
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
         JsonAdaptedCompany company = new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, null,
-                VALID_TAGS, VALID_STATUS);
+                VALID_TAGS, VALID_STATUS, VALID_APPLICATIONS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, company::toModelType);
     }
@@ -100,7 +106,8 @@ public class JsonAdaptedCompanyTest {
     @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         JsonAdaptedCompany company =
-                new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS, VALID_TAGS, VALID_STATUS);
+                new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS, VALID_TAGS, VALID_STATUS,
+                        VALID_APPLICATIONS);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, company::toModelType);
     }
@@ -108,7 +115,7 @@ public class JsonAdaptedCompanyTest {
     @Test
     public void toModelType_nullStatus_throwsIllegalValueException() {
         JsonAdaptedCompany company = new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_TAGS, null);
+                VALID_TAGS, null, VALID_APPLICATIONS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, company::toModelType);
     }
@@ -118,7 +125,8 @@ public class JsonAdaptedCompanyTest {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedCompany company =
-                new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidTags, VALID_STATUS);
+                new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidTags, VALID_STATUS,
+                        VALID_APPLICATIONS);
         assertThrows(IllegalValueException.class, company::toModelType);
     }
 
@@ -126,7 +134,7 @@ public class JsonAdaptedCompanyTest {
     public void toModelType_invalidStatus_throwsIllegalValueException() {
         JsonAdaptedCompany company =
                 new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS, VALID_TAGS,
-                        INVALID_STATUS);
+                        INVALID_STATUS, VALID_APPLICATIONS);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, company::toModelType);
     }

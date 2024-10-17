@@ -1,8 +1,11 @@
 package seedu.internbuddy.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import seedu.internbuddy.model.application.Application;
 import seedu.internbuddy.model.company.Address;
 import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
@@ -27,8 +30,9 @@ public class CompanyBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tag> tags;
     private Status status;
+    private Set<Tag> tags;
+    private List<Application> applications;
 
     /**
      * Creates a {@code companyBuilder} with the default details.
@@ -38,8 +42,10 @@ public class CompanyBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        status = new Status(DEFAULT_STATUS);
         tags = new HashSet<>();
         status = new Status(DEFAULT_STATUS);
+        applications = new ArrayList<>();
     }
 
     /**
@@ -52,6 +58,7 @@ public class CompanyBuilder {
         address = companyToCopy.getAddress();
         tags = new HashSet<>(companyToCopy.getTags());
         status = companyToCopy.getStatus();
+        applications = companyToCopy.getApplications();
     }
 
     /**
@@ -67,6 +74,15 @@ public class CompanyBuilder {
      */
     public CompanyBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code applications} into a {@code List<Application>} and set it to the {@code company}
+     * that we are building.
+     */
+    public CompanyBuilder withApplications(Application... applications) {
+        this.applications = SampleDataUtil.getApplicationList(applications);
         return this;
     }
 
@@ -103,7 +119,6 @@ public class CompanyBuilder {
     }
 
     public Company build() {
-        return new Company(name, phone, email, address, tags, status);
+        return new Company(name, phone, email, address, tags, status, applications);
     }
-
 }
