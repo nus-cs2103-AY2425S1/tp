@@ -2,8 +2,10 @@ package seedu.address.model.person;
 
 import java.util.Collections;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Represents a Property in the address book.
@@ -21,7 +23,10 @@ public abstract class Property {
     /**
      * Constructs a {@code Property}.
      *
-     * @param postalCode A valid property name.
+     * @param postalCode A valid Property postalCode.
+     * @param unitNumber A valid unit number.
+     * @param price A valid price.
+     * @param tags A set of tags associated to the Property
      */
     public Property(PostalCode postalCode, UnitNumber unitNumber, Price price, Set<Tag> tags) {
         this.postalCode = postalCode;
@@ -30,14 +35,29 @@ public abstract class Property {
         this.tags = tags;
     }
 
+    /**
+     * Returns the postal code associated with this property
+     *
+     * @return the {@code PostalCode} of this property
+     */
     public PostalCode getPostalCode() {
         return postalCode;
     }
 
+    /**
+     * Returns the unit number associated with this property
+     *
+     * @return the {@code UnitNumber} of this property
+     */
     public UnitNumber getUnitNumber() {
         return unitNumber;
     }
 
+    /**
+     * Returns the price associated with this property
+     *
+     * @return the {@code Price} of this property
+     */
     public Price getPrice() {
         return price;
     }
@@ -87,6 +107,14 @@ public abstract class Property {
      * Format state as text for viewing.
      */
     public String toString() {
-        return "[" + postalCode + "]" + " Unit Number: " + unitNumber;
+        String formattedTags = tags.stream()
+                .map(Tag::toString) // Convert each Tag object to its String representation
+                .collect(Collectors.joining(", ")); // Join with a comma and space
+        return "Postal Code: " + postalCode + "; " + " Unit Number: " + unitNumber + "; " + " Price: " + price
+                + "; Tags: " + formattedTags;
     }
+    /*public String toString() {
+        return "[" + postalCode + "]" + " Unit Number: " + unitNumber;
+    }*/
+
 }

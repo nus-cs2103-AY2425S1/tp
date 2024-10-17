@@ -13,9 +13,9 @@ public class Bto extends Property {
     public static final String MESSAGE_CONSTRAINTS = "BTO names should be alphanumeric";
 
     /**
-     * Constructs a {@code BTO}.
+     * Constructs a {@code Bto}.
      *
-     * @param postalCode A valid BTO postalCode.
+     * @param postalCode A valid Bto postalCode.
      * @param unitNumber A valid unit number.
      * @param price A valid price.
      */
@@ -36,6 +36,6 @@ public class Bto extends Property {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Bto " + super.toString();
     }
 }

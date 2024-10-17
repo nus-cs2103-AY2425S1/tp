@@ -12,6 +12,11 @@ import seedu.address.commons.util.ToStringBuilder;
 public class NameContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
+    /**
+     * Constructs a NameContainsKeywordsPredicate to filter names based on the provided keywords.
+     *
+     * @param keywords the list of keywords to match against names
+     */
     public NameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }

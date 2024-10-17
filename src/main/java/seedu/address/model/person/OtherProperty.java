@@ -12,6 +12,14 @@ public class OtherProperty extends Property {
 
     public static final String MESSAGE_CONSTRAINTS = "Other Property names should be alphanumeric";
 
+
+    /**
+     * Constructs a {@code OtherProperty}.
+     *
+     * @param postalCode A valid OtherProperty postalCode.
+     * @param unitNumber A valid unit number.
+     * @param price A valid price.
+     */
     public OtherProperty(PostalCode postalCode, UnitNumber unitNumber, Price price, Set<Tag> tags) {
         super(postalCode, unitNumber, price, tags);
     }
@@ -32,6 +40,6 @@ public class OtherProperty extends Property {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "OtherProperty " + super.toString();
     }
 }

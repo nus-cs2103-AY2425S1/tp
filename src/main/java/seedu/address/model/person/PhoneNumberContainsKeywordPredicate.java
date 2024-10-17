@@ -7,11 +7,16 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Phone} matches any of the keywords given.
  */
 public class PhoneNumberContainsKeywordPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
+    /**
+     * Constructs a PhoneNumberContainsKeywordsPredicate to filter phone numbers based on the provided keywords.
+     *
+     * @param keywords the list of keywords to match against phone numbers
+     */
     public PhoneNumberContainsKeywordPredicate(List<String> keywords) {
         this.keywords = keywords;
     }

@@ -10,11 +10,22 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.testutil.TypicalProperties.PROPERTY_A;
+import static seedu.address.testutil.TypicalProperties.PROPERTY_B;
+import static seedu.address.testutil.TypicalProperties.PROPERTY_C;
+import static seedu.address.testutil.TypicalProperties.PROPERTY_D;
+import static seedu.address.testutil.TypicalProperties.PROPERTY_E;
+import static seedu.address.testutil.TypicalProperties.PROPERTY_F;
+import static seedu.address.testutil.TypicalProperties.PROPERTY_G;
+import static seedu.address.testutil.TypicalProperties.PROPERTY_H;
+import static seedu.address.testutil.TypicalProperties.PROPERTY_I;
+import static seedu.address.testutil.TypicalProperties.PROPERTY_J;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 
@@ -26,15 +37,36 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
-            .withTags("friends").build();
+            .withTags("friends")
+            .withBuyProperty(PROPERTY_I)
+            .withSellProperty(PROPERTY_J)
+            .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
+    public static final Person BILL = new PersonBuilder().withName("Bill Meier")
+            .withAddress("311, Clementi Ave 2, #02-25")
+            .withEmail("johnd@example.com").withPhone("98765444")
+            .withTags("owesMoney", "friends")
+            .withBuyProperty(PROPERTY_A)
+            .withBuyProperty(PROPERTY_B)
+            .withSellProperty(PROPERTY_C)
+            .withSellProperty(PROPERTY_D).build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();
+    public static final Person CARRINE = new PersonBuilder().withName("Carrine Kurz").withPhone("95352544")
+            .withEmail("heinz@example.com").withAddress("wall street")
+            .withBuyProperty(PROPERTY_C)
+            .withBuyProperty(PROPERTY_D).build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
+    public static final Person DANIELLE = new PersonBuilder().withName("Danielle Meier").withPhone("87652534")
+            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
+            .withSellProperty(PROPERTY_E)
+            .withSellProperty(PROPERTY_F)
+            .withSellProperty(PROPERTY_G)
+            .withBuyProperty(PROPERTY_H).build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
@@ -43,7 +75,7 @@ public class TypicalPersons {
             .withEmail("anna@example.com").withAddress("4th street").build();
     public static final Person HENRY = new PersonBuilder().withName("Henry Meier").withPhone("8482424")
             .withEmail("henry@example.com").withAddress("kent ridge")
-            .withBuyProperty(new PropertyBuilder().build()).build();
+            .withBuyProperty(new PropertyToBuyBuilder().build()).build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
@@ -75,5 +107,14 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, HENRY));
+    }
+
+    /**
+     * Returns the {@code Index} of the specified Person.
+     */
+    public static Index getTypicalPersonIndex(Person person) {
+        int index = getTypicalPersons().indexOf(person);
+        assert index != -1;
+        return Index.fromZeroBased(index);
     }
 }
