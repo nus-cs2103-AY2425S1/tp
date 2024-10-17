@@ -3,15 +3,10 @@ package hallpointer.address.logic.parser;
 import static hallpointer.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_MEMBER;
-import static hallpointer.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_POINTS;
-import static hallpointer.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
-import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import hallpointer.address.commons.core.index.Index;
