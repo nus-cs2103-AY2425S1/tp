@@ -251,15 +251,15 @@ the data of your previous AddressBook home folder.
 
 ## Command summary
 
- Action           | Format, Examples                                                                                                                                                      
-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
- **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` 
- **Add Lesson**   | `lesson add  sid/STUDENTID d/STARTDATE li/LOCATIONINDEX h/DURATION` <br> e.g., `lesson add sid/1 d/15-10-2024 23:47 li/1 h/1`                                         
- **Clear**        | `clear`                                                                                                                                                               
- **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   
- **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           
- **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            
- **List**         | `list`                                                                                                                                                                
- **List Lessons** | `lesson list`  
- **Delete Lessons** | `lesson delete INDEX` <br> e.g., `lesson delete 1`
- **Help**         | `help`                                                                                                                                                                
+ Action             | Format, Examples                                                                                                                                                      
+--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` 
+ **Clear**          | `clear`                                                                                                                                                               
+ **Delete**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   
+ **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           
+ **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            
+ **List**           | `list`                                                                                                                                                                
+ **Add Lesson**     | `lesson add  sid/STUDENTID d/STARTDATE li/LOCATIONINDEX h/DURATION` <br> e.g., `lesson add sid/1 d/15-10-2024 23:47 li/1 h/1`                                         
+ **List Lessons**   | `lesson list`                                                                                                                                                         
+ **Delete Lessons** | `lesson delete INDEX` <br> e.g., `lesson delete 1`                                                                                                                    
+ **Help**           | `help`                                                                                                                                                                
