@@ -84,7 +84,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandResult commandResult = new CommandResult("");
 
         if (model.getAddressBook().equals(new AddressBook())) {
-            commandResult = new CommandResult("Unable to load contacts due to unexpected data loading error!");
+            commandResult = new CommandResult("Unable to load contacts due to unexpected data loading error");
         }
         resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
