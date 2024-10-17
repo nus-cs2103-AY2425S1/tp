@@ -15,9 +15,9 @@ import seedu.ddd.commons.util.AppUtil;
 public class Date {
     public static final String MESSAGE_CONSTRAINTS =
             "Dates should be in the format of either of the following:\n"
-                    + "1.yyyy-MM-dd\n"
-                    + "2.MM/dd/yyyy\n"
-                    + "3.d MMM yyyy";
+                    + "1. yyyy-MM-dd\n"
+                    + "2. MM/dd/yyyy\n"
+                    + "3. d MMM yyyy";
     public static final DateTimeFormatter VALID_DATE_FORMAT1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public static final DateTimeFormatter VALID_DATE_FORMAT2 = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     public static final DateTimeFormatter VALID_DATE_FORMAT3 = DateTimeFormatter.ofPattern("d MMM yyyy");
@@ -26,6 +26,7 @@ public class Date {
         VALID_DATE_FORMAT2,
         VALID_DATE_FORMAT3
     };
+
     public final LocalDate date;
     /**
      * Constructs a {@code Date}.
@@ -43,7 +44,6 @@ public class Date {
      */
     // TODO: fix date occurrences in storage data before return false for errors.
     public static boolean isValidDate(String test) {
-
         for (DateTimeFormatter formatter : formatters) {
             try {
                 LocalDate.parse(test, formatter);

@@ -46,9 +46,14 @@ abstract class JsonAdaptedContact {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedContact(@JsonProperty("id") int id, @JsonProperty("name") String name,
-        @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-        @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedContact(
+        @JsonProperty("name") String name,
+        @JsonProperty("phone") String phone,
+        @JsonProperty("email") String email,
+        @JsonProperty("address") String address,
+        @JsonProperty("tags") List<JsonAdaptedTag> tags,
+        @JsonProperty("id") int id
+    ) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -115,11 +120,17 @@ abstract class JsonAdaptedContact {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
+        if (!Id.isValidId(id)) {
+            throw new IllegalValueException(Id.MESSAGE_CONSTRAINTS);
+        }
         final Id modelId = new Id(id);
 
         return createContact(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelId);
     }
+
     public abstract Contact createContact(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Id id)
             throws IllegalValueException;
 }
