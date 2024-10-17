@@ -7,6 +7,7 @@
     "parentName": "Test parent",
     "parentPhone": "91234567",
     "parentEmail": "testparent@example.com",
+    "grade": "0",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
@@ -15,6 +16,7 @@
     "parentName": "Test parent",
     "parentPhone": "91234567",
     "parentEmail": "testparent@example.com",
+    "grade": "0",
     "address": "4th street"
   } ]
 }

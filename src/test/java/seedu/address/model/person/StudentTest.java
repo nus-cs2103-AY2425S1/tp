@@ -95,7 +95,8 @@ public class StudentTest {
         String expected = Student.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
                 + ", parent name=" + ALICE.getParentName() + ", parent phone=" + ALICE.getParentPhone()
-                + ", parent email=" + ALICE.getParentEmail() + ", tags=" + ALICE.getTags() + "}";
+                + ", parent email=" + ALICE.getParentEmail() + ", grade=" + ALICE.getGrade()
+                + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

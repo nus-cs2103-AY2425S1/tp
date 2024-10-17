@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
+import seedu.address.model.tag.Grade;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,6 +27,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     private final String parentName;
     private final String parentPhone;
     private final String parentEmail;
+    private final String grade;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given details.
@@ -34,11 +36,13 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
-            @JsonProperty("parentEmail") String parentEmail, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("parentEmail") String parentEmail, @JsonProperty("grade") String grade,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         super(name, phone, email, address, tags);
         this.parentName = parentName;
         this.parentEmail = parentEmail;
         this.parentPhone = parentPhone;
+        this.grade = grade;
     }
 
     /**
@@ -49,6 +53,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         parentName = source.getParentName() == null ? null : source.getParentName().fullName;
         parentPhone = source.getParentPhone() == null ? null : source.getParentPhone().value;
         parentEmail = source.getParentEmail() == null ? null : source.getParentEmail().value;
+        grade = source.getGrade() == null ? null : source.getGrade().gradeIndex;
     }
 
     @Override
@@ -121,8 +126,16 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
             modelParentEmail = new Email(parentEmail);
         }
 
+        Grade modelGrade = null;
+        if (grade != null) {
+            if (!Grade.isValidGradeName(grade)) {
+                throw new IllegalValueException(Grade.MESSAGE_CONSTRAINTS);
+            }
+            modelGrade = new Grade("0");
+        }
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Student(modelName, modelPhone, modelEmail, modelAddress, modelParentName, modelParentPhone,
-                modelParentEmail, modelTags);
+                modelParentEmail, modelGrade, modelTags);
     }
 }

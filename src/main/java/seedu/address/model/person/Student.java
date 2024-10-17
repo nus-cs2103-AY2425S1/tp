@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Grade;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -14,26 +15,29 @@ public class Student extends Person {
     private final Name parentName;
     private final Phone parentPhone;
     private final Email parentEmail;
+    private final Grade grade;
 
     /**
      * Constructs a {@code Student} with the given details.
      */
     public Student(Name name, Phone phone, Email email, Address address, Name parentName, Phone parentPhone,
-            Email parentEmail, Set<Tag> tags) {
+            Email parentEmail, Grade grade, Set<Tag> tags) {
         super(name, phone, email, address, tags);
         this.parentName = parentName;
         this.parentPhone = parentPhone;
         this.parentEmail = parentEmail;
+        this.grade = grade;
     }
 
     /**
      * Constructs a {@code Student} with the given {@code Person} as a base.
      */
-    public Student(Person person, Name parentName, Phone parentPhone, Email parentEmail) {
+    public Student(Person person, Name parentName, Phone parentPhone, Email parentEmail, Grade grade) {
         super(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), person.getTags());
         this.parentName = parentName;
         this.parentPhone = parentPhone;
         this.parentEmail = parentEmail;
+        this.grade = grade;
     }
 
     public Name getParentName() {
@@ -46,6 +50,10 @@ public class Student extends Person {
 
     public Email getParentEmail() {
         return parentEmail;
+    }
+
+    public Grade getGrade() {
+        return grade;
     }
 
     @Override
@@ -61,13 +69,14 @@ public class Student extends Person {
 
         Student otherStudent = (Student) other;
         return super.equals(otherStudent) && parentName.equals(otherStudent.parentName)
-                && parentPhone.equals(otherStudent.parentPhone) && parentEmail.equals(otherStudent.parentEmail);
+                && parentPhone.equals(otherStudent.parentPhone) && parentEmail.equals(otherStudent.parentEmail)
+                && grade.equals(otherStudent.grade);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(),
-                this.getParentName(), this.getParentPhone(), this.getParentEmail(), this.getTags());
+                this.getParentName(), this.getParentPhone(), this.getParentEmail(), this.getGrade(), this.getTags());
     }
 
     @Override
@@ -80,6 +89,7 @@ public class Student extends Person {
                 .add("parent name", this.getParentName())
                 .add("parent phone", this.getParentPhone())
                 .add("parent email", this.getParentEmail())
+                .add("grade", this.getGrade())
                 .add("tags", this.getTags())
                 .toString();
     }
@@ -100,6 +110,8 @@ public class Student extends Person {
                 .append(getParentPhone())
                 .append("; Parent Email: ")
                 .append(getParentEmail())
+                .append("; Grade: ")
+                .append(getGrade())
                 .append("; Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

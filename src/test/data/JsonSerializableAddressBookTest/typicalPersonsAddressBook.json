@@ -8,6 +8,7 @@
     "parentName": "Test parent",
     "parentPhone": "91234567",
     "parentEmail": "testparent@example.com",
+    "grade": "0",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -17,6 +18,7 @@
     "parentName": "Test parent",
     "parentPhone": "91234567",
     "parentEmail": "testparent@example.com",
+    "grade": "0",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -26,6 +28,7 @@
     "parentName": "Test parent",
     "parentPhone": "91234567",
     "parentEmail": "testparent@example.com",
+    "grade": "0",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -35,6 +38,7 @@
     "parentName": "Test parent",
     "parentPhone": "91234567",
     "parentEmail": "testparent@example.com",
+    "grade": "0",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -44,6 +48,7 @@
     "parentName": "Test parent",
     "parentPhone": "91234567",
     "parentEmail": "testparent@example.com",
+    "grade": "0",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -53,6 +58,7 @@
     "parentName": "Test parent",
     "parentPhone": "91234567",
     "parentEmail": "testparent@example.com",
+    "grade": "0",
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -62,6 +68,7 @@
     "parentName": "Test parent",
     "parentPhone": "91234567",
     "parentEmail": "testparent@example.com",
+    "grade": "0",
     "tags" : [ ]
   } ]
 }

@@ -11,19 +11,19 @@ import seedu.address.model.tag.exceptions.InvalidGradeIndexException;
  * Guarantees: immutable; name is valid as declared in {@link #isValidGradeName(String)}
  */
 public class Grade {
-    public static final String MESSAGE_CONSTRAINTS = "Grade index should be numeric";
+    public static final String MESSAGE_CONSTRAINTS = "Grade index should be numeric and between 0 to 5";
     public static final String VALIDATION_REGEX = "\\d+";
-    public final String gradeName;
+    public final String gradeIndex;
 
     /**
      * Constructs a {@code Grade}.
      *
-     * @param gradeIndex A valid Grade index.
+     * @param gradeIndex A valid Grade Index.
      */
     public Grade(String gradeIndex) {
         requireNonNull(gradeIndex);
         checkArgument(isValidGradeName(gradeIndex), MESSAGE_CONSTRAINTS);
-        gradeName = convertIndexToName(gradeIndex);
+        this.gradeIndex = gradeIndex;
     }
 
     /**
@@ -34,12 +34,20 @@ public class Grade {
             return false;
         }
         int testInt = parseInt(test);
-        return testInt >= 1 && testInt <= 4;
+        return testInt >= 0 && testInt <= 4;
     }
 
-    private String convertIndexToName(String index) {
+    /**
+     * Converts grade index into name.
+     *
+     * @return A name representing the grade index.
+     */
+    public String gradeIndexToName() {
         String name = "";
-        switch (parseInt(index)) {
+        switch (parseInt(gradeIndex)) {
+        case 0:
+            name = "Unknown";
+            break;
         case 1:
             name = "Excellent";
             break;
@@ -69,19 +77,19 @@ public class Grade {
             return false;
         }
 
-        return gradeName.equals(otherGrade.gradeName);
+        return gradeIndex.equals(otherGrade.gradeIndex);
     }
 
     @Override
     public int hashCode() {
-        return gradeName.hashCode();
+        return gradeIndex.hashCode();
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + gradeName + ']';
+        return '[' + gradeIndex + ']';
     }
 
 }

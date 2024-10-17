@@ -17,12 +17,16 @@ public class StudentCard extends PersonCard {
     private Label parentPhone;
     @FXML
     private Label parentEmail;
+    @FXML
+    private Label grade;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
     public StudentCard(Student person, int displayedIndex) {
         super(STUDENT, person, displayedIndex);
+        grade.setText(person.getGrade().gradeIndexToName());
+        changeGradeStyle(person);
         parentName.setText("");
         parentPhone.setText("");
         parentEmail.setText("");
@@ -30,6 +34,27 @@ public class StudentCard extends PersonCard {
             parentName.setText(person.getParentName().fullName);
             parentPhone.setText(person.getParentPhone().value);
             parentEmail.setText(person.getParentEmail().value);
+        }
+    }
+
+    private void changeGradeStyle(Student person) {
+        grade.getStyleClass().add("grade-label");
+        switch (person.getGrade().gradeIndex) {
+        case "1":
+            grade.getStyleClass().add("excellent");
+            break;
+        case "2":
+            grade.getStyleClass().add("good");
+            break;
+        case "3":
+            grade.getStyleClass().add("satisfactory");
+            break;
+        case "4":
+            grade.getStyleClass().add("failing");
+            break;
+        default:
+            // Don't change anything
+            break;
         }
     }
 

@@ -4,6 +4,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
+import seedu.address.model.tag.Grade;
 
 /**
  * A utility class to help with building Student objects.
@@ -13,10 +14,12 @@ public class StudentBuilder extends PersonBuilder {
     public static final String DEFAULT_PARENT_NAME = "Test parent";
     public static final String DEFAULT_PARENT_PHONE = "91234567";
     public static final String DEFAULT_PARENT_EMAIL = "testparent@example.com";
+    public static final String DEFAULT_GRADE = "0";
 
     private Name parentName;
     private Phone parentPhone;
     private Email parentEmail;
+    private Grade grade;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -26,6 +29,7 @@ public class StudentBuilder extends PersonBuilder {
         parentName = new Name(DEFAULT_PARENT_NAME);
         parentPhone = new Phone(DEFAULT_PARENT_PHONE);
         parentEmail = new Email(DEFAULT_PARENT_EMAIL);
+        grade = new Grade(DEFAULT_GRADE);
     }
 
     /**
@@ -36,6 +40,7 @@ public class StudentBuilder extends PersonBuilder {
         parentName = studentToCopy.getParentName();
         parentEmail = studentToCopy.getParentEmail();
         parentPhone = studentToCopy.getParentPhone();
+        grade = studentToCopy.getGrade();
     }
 
     /**
@@ -59,6 +64,14 @@ public class StudentBuilder extends PersonBuilder {
      */
     public StudentBuilder withParentEmail(String parentEmail) {
         this.parentEmail = new Email(parentEmail);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Grade} of the {@code Person} that we are building.
+     */
+    public StudentBuilder withGrade(String gradeIndex) {
+        this.grade = new Grade(gradeIndex);
         return this;
     }
 
@@ -93,7 +106,7 @@ public class StudentBuilder extends PersonBuilder {
     }
 
     public Student build() {
-        return new Student(super.build(), parentName, parentPhone, parentEmail);
+        return new Student(super.build(), parentName, parentPhone, parentEmail, grade);
     }
 
 }
