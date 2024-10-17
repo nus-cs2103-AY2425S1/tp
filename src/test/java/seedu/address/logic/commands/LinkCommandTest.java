@@ -18,6 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.concert.Concert;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.Assert;
 import seedu.address.testutil.ConcertBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -64,6 +65,22 @@ public class LinkCommandTest {
 
         assertThrows(CommandException.class, () -> linkCommand.execute(modelStub),
                 Messages.MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_duplicatePerson_throwsCommandException() throws CommandException {
+        Model modelStub = new ModelManager();
+        Person personToLink = new PersonBuilder().build();
+        Concert concertToLink = new ConcertBuilder().build();
+        modelStub.addPerson(personToLink);
+        modelStub.addConcert(concertToLink);
+
+        LinkCommand linkCommand = new LinkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_CONCERT);
+
+        linkCommand.execute(modelStub);
+
+        Assert.assertThrows(CommandException.class, LinkCommand.MESSAGE_DUPLICATE_CONCERTCONTACT, ()
+                -> linkCommand.execute(modelStub));
     }
 
     @Test
