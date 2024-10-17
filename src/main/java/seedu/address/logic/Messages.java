@@ -39,9 +39,8 @@ public class Messages {
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
-                .append("; Phone: ")
-                .append(person.getPhone());
+        addName(builder, person);
+        addPhone(builder, person);
         addEmail(builder, person);
         addAddress(builder, person);
         addTags(builder, person);
@@ -50,9 +49,16 @@ public class Messages {
         return builder.toString();
     }
 
+    private static void addName(StringBuilder sb, Person person) {
+        sb.append(person.getName());
+    }
+
+    private static void addPhone(StringBuilder sb, Person person) {
+        sb.append("; Phone: ").append(person.getPhone());
+    }
+
     private static void addDateOfLastVisit(StringBuilder sb, Person person) {
-        sb.append("; Last visit: ")
-                .append(person.getDateOfLastVisit());
+        sb.append("; Last visit: ").append(person.getDateOfLastVisit());
     }
 
     private static void addEmail(StringBuilder sb, Person person) {
