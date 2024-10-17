@@ -30,7 +30,7 @@ public class Person {
     private final Map<String, Game> games = new HashMap<>();
 
     // TODO: update the preferredTime field
-    // TODO: update the constructors and some other methods
+    // TODO: update the constructors and some other method
 
     /**
      * Every field must be present and not null.
