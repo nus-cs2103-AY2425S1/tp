@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.address.commons.core.Pair;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteOwnerCommand;
+import seedu.address.logic.commands.DeletePetCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -21,7 +22,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         try {
             Pair p = ParserUtil.parseIndexAndType(args);
             if (p.second().equals("p")) {
-                return new DeleteOwnerCommand(p.first());
+                return new DeletePetCommand(p.first());
             } else {
                 return new DeleteOwnerCommand(p.first());
             }

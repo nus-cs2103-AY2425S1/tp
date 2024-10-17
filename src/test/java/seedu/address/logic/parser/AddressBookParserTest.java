@@ -74,9 +74,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_deletePet() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " p" + INDEX_FIRST_PET.getOneBased());
-        assertEquals(new DeletePetCommand(INDEX_FIRST_PERSON), command);
+        DeletePetCommand command = (DeletePetCommand) parser.parseCommand(
+                DeletePetCommand.COMMAND_WORD + " p" + INDEX_FIRST_PET.getOneBased());
+        assertEquals(new DeletePetCommand(INDEX_FIRST_PET), command);
     }
 
     @Test
