@@ -35,7 +35,7 @@ public class GradeTest {
     @Test
     public void equals() {
         Grade firstGrade = new Grade("Midterm", 86.4F, 25.0F);
-        Grade secondGrade = new Grade("FInal", 86.4F, 25.0F);
+        Grade secondGrade = new Grade("Final", 86.4F, 25.0F);
         Grade thirdGrade = new Grade("Midterm", 86.5F, 25.0F);
         Grade fourthGrade = new Grade("Midterm", 86.4F, 25.1F);
         Grade fifthGrade = new Grade("Midterm", 86.4F, 25.0F);
@@ -61,7 +61,7 @@ public class GradeTest {
 
     @Test
     public void toStringMethod() {
-        String expected = "Midterm: 86.4%";
+        String expected = "Midterm: 86.4% (Weightage: 25.0%)";
         assertEquals(expected, new Grade("Midterm", 86.4F, 25.0F).toString());
     }
 }
