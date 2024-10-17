@@ -24,7 +24,13 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Property;
+import seedu.address.testutil.CondoToBuyBuilder;
+import seedu.address.testutil.CondoToSellBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditPersonPropertyDescriptorBuilder;
+
+
 
 /**
  * Contains helper methods for testing commands.
@@ -33,50 +39,87 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_NAME_JACK = "Jack Soh";
+    public static final String VALID_NAME_KATE = "Kate Teh";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_PHONE_JACK = "33333333";
+    public static final String VALID_PHONE_KATE = "44444444";
+
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
+    public static final String VALID_EMAIL_JACK = "jack@example.com";
+    public static final String VALID_EMAIL_KATE = "kate@example.com";
+
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_ADDRESS_JACK = "Block 101, Jacky Street 2";
+    public static final String VALID_ADDRESS_KATE = "Hillview Katy Heights, Block 200";
+
+
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_HOUSING_TYPE_HDB = "h";
     public static final String VALID_HOUSING_TYPE_CONDO = "c";
     public static final String VALID_BUYING_PRICE_1650000 = "1650000";
     public static final String VALID_BUYING_PRICE_1900000 = "1900000";
+    public static final String VALID_BUYING_PRICE_1400000 = "1400000";
+
     public static final String VALID_SELLING_PRICE_1500000 = "1500000";
     public static final String VALID_SELLING_PRICE_2000000 = "2000000";
+    public static final String VALID_SELLING_PRICE_2100000 = "2100000";
     public static final String VALID_POSTAL_CODE_567510 = "567510";
     public static final String VALID_POSTAL_CODE_582090 = "582090";
+    public static final String VALID_POSTAL_CODE_582091 = "582091";
     public static final String VALID_UNIT_NUMBER_10_65 = "10-65";
     public static final String VALID_UNIT_NUMBER_03_11 = "03-11";
+    public static final String VALID_UNIT_NUMBER_04_12 = "04-12";
     public static final String VALID_TAG_SPACIOUS = "spacious";
     public static final String VALID_TAG_NEAR_MRT = "near MRT";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String NAME_DESC_JACK = " " + PREFIX_NAME + VALID_NAME_JACK;
+    public static final String NAME_DESC_KATE = " " + PREFIX_NAME + VALID_NAME_KATE;
+
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
+    public static final String PHONE_DESC_JACK = " " + PREFIX_PHONE + VALID_PHONE_JACK;
+
+    public static final String PHONE_DESC_KATE = " " + PREFIX_PHONE + VALID_PHONE_KATE;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String EMAIL_DESC_JACK = " " + PREFIX_EMAIL + VALID_EMAIL_JACK;
+
+    public static final String EMAIL_DESC_KATE = " " + PREFIX_EMAIL + VALID_EMAIL_KATE;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+    public static final String ADDRESS_DESC_JACK = " " + PREFIX_ADDRESS + VALID_ADDRESS_JACK;
+    public static final String ADDRESS_DESC_KATE = " " + PREFIX_ADDRESS + VALID_ADDRESS_KATE;
+
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String HOUSING_TYPE_DESC_HDB = " " + PREFIX_HOUSING_TYPE + VALID_HOUSING_TYPE_HDB;
     public static final String HOUSING_TYPE_DESC_CONDO = " " + PREFIX_HOUSING_TYPE + VALID_HOUSING_TYPE_CONDO;
     public static final String BUYING_PRICE_DESC_1650000 = " " + PREFIX_BUYING_PRICE + VALID_BUYING_PRICE_1650000;
     public static final String BUYING_PRICE_DESC_1900000 = " " + PREFIX_BUYING_PRICE + VALID_BUYING_PRICE_1900000;
+    public static final String BUYING_PRICE_DESC_KATE = " " + PREFIX_BUYING_PRICE + VALID_BUYING_PRICE_1400000;
     public static final String SELLING_PRICE_DESC_1500000 = " " + PREFIX_SELLING_PRICE + VALID_SELLING_PRICE_1500000;
     public static final String SELLING_PRICE_DESC_2000000 = " " + PREFIX_SELLING_PRICE + VALID_SELLING_PRICE_2000000;
+
+    public static final String SELLING_PRICE_DESC_KATE = " " + PREFIX_SELLING_PRICE + VALID_SELLING_PRICE_2100000;
     public static final String POSTAL_CODE_DESC_567510 = " " + PREFIX_POSTAL_CODE + VALID_POSTAL_CODE_567510;
     public static final String POSTAL_CODE_DESC_582090 = " " + PREFIX_POSTAL_CODE + VALID_POSTAL_CODE_582090;
+    public static final String POSTAL_CODE_DESC_KATE = " " + PREFIX_POSTAL_CODE + VALID_POSTAL_CODE_582091;
     public static final String UNIT_NUMBER_DESC_10_65 = " " + PREFIX_UNIT_NUMBER + VALID_UNIT_NUMBER_10_65;
     public static final String UNIT_NUMBER_DESC_03_11 = " " + PREFIX_UNIT_NUMBER + VALID_UNIT_NUMBER_03_11;
+    public static final String UNIT_NUMBER_DESC_KATE = " " + PREFIX_UNIT_NUMBER + VALID_UNIT_NUMBER_04_12;
     public static final String TAG_DESC_SPACIOUS = " " + PREFIX_TAG + VALID_TAG_SPACIOUS;
     public static final String TAG_DESC_NEAR_MRT = " " + PREFIX_TAG + VALID_TAG_NEAR_MRT;
-
+    public static final String BUYING_PROPERTIES_INDEX_1 = "1";
+    public static final String BUYING_PROPERTIES_INDEX_2 = "2";
+    public static final String SELLING_PROPERTIES_INDEX_1 = "1";
+    public static final String SELLING_PROPERTIES_INDEX_2 = "2";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -93,12 +136,23 @@ public class CommandTestUtil {
     public static final String INVALID_UNIT_NUMBER_DESC =
             " " + PREFIX_UNIT_NUMBER + "10-65-01"; // '01' not allowed in unit number
 
+    public static final Property VALID_PROPERTY_TO_BUY_JACK = new CondoToBuyBuilder().build();
+    public static final Property VALID_PROPERTY_TO_SELL_JACK = new CondoToSellBuilder().build();
+    public static final Property VALID_PROPERTY_TO_BUY_KATE = new CondoToBuyBuilder()
+            .withPostalCode(POSTAL_CODE_DESC_KATE)
+            .withUnitNumber(UNIT_NUMBER_DESC_KATE)
+            .withPrice(BUYING_PRICE_DESC_KATE)
+            .build();
+    public static final Property VALID_PROPERTY_TO_SELL_KATE = new CondoToSellBuilder().build();
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
     public static final String PREAMBLE_INDEX = "1";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final DeletePropertyToBuyCommand.EditPersonPropertyDescriptor BUY_DESC_JACK;
+    public static final DeletePropertyToBuyCommand.EditPersonPropertyDescriptor BUY_DESC_KATE;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -107,6 +161,12 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        BUY_DESC_JACK = new EditPersonPropertyDescriptorBuilder().withName(VALID_NAME_JACK)
+                .withPhone(VALID_PHONE_JACK).withEmail(VALID_EMAIL_JACK).withAddress(VALID_ADDRESS_JACK)
+                .withTags(VALID_TAG_FRIEND).build();
+        BUY_DESC_KATE = new EditPersonPropertyDescriptorBuilder().withName(VALID_NAME_KATE)
+                .withPhone(VALID_PHONE_KATE).withEmail(VALID_EMAIL_KATE).withAddress(VALID_ADDRESS_KATE)
+                .withTags(VALID_TAG_FRIEND).build();
     }
 
     /**
@@ -145,6 +205,8 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+
+        CommandResult result = null;
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
