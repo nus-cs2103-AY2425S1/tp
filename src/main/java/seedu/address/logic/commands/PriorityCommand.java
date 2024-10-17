@@ -5,14 +5,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.util.List;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Priority;
-
-
 
 /**
  * Command to assign or update the priority of a patient in the address book.
@@ -30,10 +27,10 @@ public class PriorityCommand extends Command {
             + PREFIX_NRIC + "T0123456F "
             + "!/HIGH";
 
-    public static final String PRIORITY_ASSIGN_SUCCESS = "Assigned priority to Person: %1$s";
+    public static final String PRIORITY_ASSIGN_SUCCESS = "Assigned priority to Nric: %1$s";
     public static final String PATIENT_DOES_NOT_EXIST = "Patient does not exist in contact list";
-    public static final String PRIORITY_SET_TO_NONE_SUCCESS = "Priority has been removed from Person: %1$s";
-
+    public static final String PRIORITY_SET_TO_NONE_SUCCESS = "Priority has been removed from Nric: %1$s";
+    public static final String MULTIPLE_PARAMETER = "Please input only 1 of each parameter";
     private final Priority priority;
     private final Nric nric;
 
@@ -65,7 +62,7 @@ public class PriorityCommand extends Command {
                 Person editedPerson = new Person(
                         person.getName(), person.getPhone(), person.getEmail(),
                         person.getNric(), person.getAddress(), person.getDateOfBirth(),
-                        person.getGender(), person.getTags(), priority, person.getAppointments(),
+                        person.getGender(), person.getAllergies(), priority, person.getAppointments(),
                         person.getMedCons());
                 model.setPerson(person, editedPerson);
                 model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
@@ -83,7 +80,7 @@ public class PriorityCommand extends Command {
      */
     private String generateSuccessMessage(Person editedPerson) {
         String message = !priority.isEmpty() ? PRIORITY_ASSIGN_SUCCESS : PRIORITY_SET_TO_NONE_SUCCESS;
-        return String.format(message, Messages.format(editedPerson));
+        return String.format(message, editedPerson.getNric().value);
     }
 
     /**

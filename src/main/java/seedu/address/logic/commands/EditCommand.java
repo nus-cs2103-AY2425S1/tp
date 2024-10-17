@@ -2,13 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -24,6 +24,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
@@ -36,7 +37,6 @@ import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -55,7 +55,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_ALLERGY + "ALLERGY]...\n"
             + "Example: " + COMMAND_WORD + " S1234567A "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -114,7 +114,7 @@ public class EditCommand extends Command {
         DateOfBirth updatedDateOfBirth = editPersonDescriptor.getDateOfBirth().orElse(personToEdit.getDateOfBirth());
         Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
         Nric updatedNric = editPersonDescriptor.getNric().orElse(personToEdit.getNric());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Allergy> updatedTags = editPersonDescriptor.getAllergies().orElse(personToEdit.getAllergies());
         Priority updatedPriority = personToEdit.getPriority();
         Set<Appointment> updatedAppointments = editPersonDescriptor.getAppointments()
                                                                    .orElse(personToEdit.getAppointments());
@@ -161,7 +161,7 @@ public class EditCommand extends Command {
         private DateOfBirth dateOfBirth;
         private Gender gender;
         private Nric nric;
-        private Set<Tag> tags;
+        private Set<Allergy> allergies;
         private Set<Appointment> appointments;
         private Set<MedCon> medCons;
 
@@ -169,7 +169,7 @@ public class EditCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} and {@code appointments} is used internally.
+         * A defensive copy of {@code allergies} and {@code appointments} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
@@ -179,7 +179,7 @@ public class EditCommand extends Command {
             setGender(toCopy.gender);
             setDateOfBirth(toCopy.dateOfBirth);
             setNric(toCopy.nric);
-            setTags(toCopy.tags);
+            setAllergies(toCopy.allergies);
             setAppointments(toCopy.appointments);
             setMedCons(toCopy.medCons);
         }
@@ -188,7 +188,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, dateOfBirth, nric, gender, tags,
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, dateOfBirth, nric, gender, allergies,
                                                appointments, medCons);
         }
 
@@ -266,11 +266,11 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code allergies} to this object's {@code allergies}.
+         * A defensive copy of {@code allergies} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setAllergies(Set<Allergy> allergies) {
+            this.allergies = (allergies != null) ? new HashSet<>(allergies) : null;
         }
 
         /**
@@ -282,12 +282,12 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable allergy set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code allergies} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Allergy>> getAllergies() {
+            return (allergies != null) ? Optional.of(Collections.unmodifiableSet(allergies)) : Optional.empty();
         }
 
         /**
@@ -318,7 +318,7 @@ public class EditCommand extends Command {
                     && Objects.equals(gender, otherEditPersonDescriptor.gender)
                     && Objects.equals(dateOfBirth, otherEditPersonDescriptor.dateOfBirth)
                     && Objects.equals(nric, otherEditPersonDescriptor.nric)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(allergies, otherEditPersonDescriptor.allergies)
                     && Objects.equals(appointments, otherEditPersonDescriptor.appointments);
         }
 
@@ -332,7 +332,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("tags", tags)
+                    .add("allergies", allergies)
                     .add("appointments", appointments)
                     .toString();
         }

@@ -8,8 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -28,7 +28,7 @@ public class Person {
     private final DateOfBirth dateOfBirth;
     private final Gender gender;
     private final Priority priority;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Allergy> allergies = new HashSet<>();
     private final Set<Appointment> appointments = new HashSet<>();
     private final Set<MedCon> medCons = new HashSet<>();
 
@@ -36,8 +36,9 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Nric nric, Address address, DateOfBirth dateOfBirth,
-                  Gender gender, Set<Tag> tags, Priority priority, Set<Appointment> appointments, Set<MedCon> medCons) {
-        requireAllNonNull(name, phone, email, nric, address, dateOfBirth, gender, tags, priority, appointments,
+                  Gender gender, Set<Allergy> allergies, Priority priority,
+                  Set<Appointment> appointments, Set<MedCon> medCons) {
+        requireAllNonNull(name, phone, email, nric, address, dateOfBirth, gender, allergies, priority, appointments,
                 medCons);
         this.name = name;
         this.phone = phone;
@@ -46,7 +47,7 @@ public class Person {
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
-        this.tags.addAll(tags);
+        this.allergies.addAll(allergies);
         this.priority = priority;
         this.appointments.addAll(appointments);
         this.medCons.addAll(medCons);
@@ -84,11 +85,11 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable allergy set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Allergy> getAllergies() {
+        return Collections.unmodifiableSet(allergies);
     }
 
     /**
@@ -143,7 +144,7 @@ public class Person {
                 && dateOfBirth.equals(otherPerson.dateOfBirth)
                 && gender.equals(otherPerson.gender)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags)
+                && allergies.equals(otherPerson.allergies)
                 && appointments.equals(otherPerson.appointments)
                 && medCons.equals(otherPerson.medCons)
                 && priority.equals(otherPerson.priority);
@@ -152,7 +153,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, nric, dateOfBirth, gender, address, tags, priority, appointments,
+        return Objects.hash(name, phone, email, nric, dateOfBirth, gender, address, allergies, priority, appointments,
                 medCons);
     }
 
@@ -166,7 +167,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
+                .add("allergies", allergies)
                 .add("priority", priority)
                 .add("appointments", appointments)
                 .add("medical conditions", medCons)

@@ -16,6 +16,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AppointmentExistsPredicate;
@@ -29,7 +30,6 @@ import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
-import seedu.address.model.tag.Tag;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -99,7 +99,7 @@ public class DeleteApptCommand extends Command {
         Gender updatedGender = personToEdit.getGender();
         Nric updatedNric = personToEdit.getNric();
         Priority updatedPriority = personToEdit.getPriority();
-        Set<Tag> updatedTags = personToEdit.getTags();
+        Set<Allergy> updatedAllergies = personToEdit.getAllergies();
         Set<MedCon> updatedMedCons = personToEdit.getMedCons();
 
 
@@ -110,7 +110,7 @@ public class DeleteApptCommand extends Command {
         Set<Appointment> newAppointments = new HashSet<>(newAppointmentsMutable);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNric, updatedAddress, updatedDateOfBirth,
-                          updatedGender, updatedTags, updatedPriority, newAppointments, updatedMedCons);
+                          updatedGender, updatedAllergies, updatedPriority, newAppointments, updatedMedCons);
     }
 
     @Override

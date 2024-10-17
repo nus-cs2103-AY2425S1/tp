@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.DateUtil;
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
@@ -22,7 +23,6 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
-import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -39,7 +39,7 @@ class JsonAdaptedPerson {
     private final String gender;
     private final String nric;
     private final List<JsonAdaptedMedCon> medCons = new ArrayList<>();
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedAllergy> allergies = new ArrayList<>();
     private final String priority;
     private final List<JsonAdaptedAppointment> appointments = new ArrayList<>();
 
@@ -52,7 +52,7 @@ class JsonAdaptedPerson {
             @JsonProperty("dateOfBirth") String dateOfBirth,
             @JsonProperty("gender") String gender,
             @JsonProperty("nric") String nric,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("allergies") List<JsonAdaptedAllergy> allergies,
             @JsonProperty("priority") String priority,
             @JsonProperty("appointments") List<JsonAdaptedAppointment> appointments,
             @JsonProperty("medCons") List<JsonAdaptedMedCon> medCons) {
@@ -67,8 +67,8 @@ class JsonAdaptedPerson {
         if (medCons != null) {
             this.medCons.addAll(medCons);
         }
-        if (tags != null) {
-            this.tags.addAll(tags);
+        if (allergies != null) {
+            this.allergies.addAll(allergies);
         }
         if (appointments != null) {
             this.appointments.addAll(appointments);
@@ -87,9 +87,9 @@ class JsonAdaptedPerson {
         gender = source.getGender().value;
         nric = source.getNric().value;
 
-        // Use helper function to convert and sort medical conditions, tags, and appointments
+        // Use helper function to convert and sort medical conditions, allergies, and appointments
         medCons.addAll(convertToSortedList(source.getMedCons(), JsonAdaptedMedCon::new));
-        tags.addAll(convertToSortedList(source.getTags(), JsonAdaptedTag::new));
+        allergies.addAll(convertToSortedList(source.getAllergies(), JsonAdaptedAllergy::new));
         appointments.addAll(convertToSortedList(source.getAppointments(), JsonAdaptedAppointment::new));
 
         priority = source.getPriority().priority;
@@ -117,7 +117,7 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Allergy> personAllergies = new ArrayList<>();
         final List<Appointment> personAppointments = new ArrayList<>();
         final List<MedCon> personMedCons = new ArrayList<>();
 
@@ -125,8 +125,8 @@ class JsonAdaptedPerson {
             personAppointments.add(appointment.toModelType());
         }
 
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+        for (JsonAdaptedAllergy allergy : allergies) {
+            personAllergies.add(allergy.toModelType());
         }
 
         for (JsonAdaptedMedCon medCon : medCons) {
@@ -193,7 +193,7 @@ class JsonAdaptedPerson {
         }
         final Nric modelNric = new Nric(nric);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Allergy> modelAllergies = new HashSet<>(personAllergies);
 
         if (priority == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -206,7 +206,7 @@ class JsonAdaptedPerson {
         final Set<MedCon> modelMedCons = new HashSet<>(personMedCons);
 
         return new Person(modelName, modelPhone, modelEmail, modelNric, modelAddress, modelDateOfBirth,
-                modelGender, modelTags, modelPriority, modelAppointments, modelMedCons);
+                modelGender, modelAllergies, modelPriority, modelAppointments, modelMedCons);
 
     }
 

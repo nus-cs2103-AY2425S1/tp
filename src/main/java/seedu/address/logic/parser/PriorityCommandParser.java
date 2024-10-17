@@ -29,12 +29,11 @@ public class PriorityCommandParser implements Parser<PriorityCommand> {
         String trimmedArgs = args.trim();
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_NRIC, PREFIX_PRIORITY);
-
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NRIC, PREFIX_PRIORITY);
         if (!argMultimap.getValue(PREFIX_NRIC).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     PriorityCommand.MESSAGE_USAGE));
         }
-
         if (!argMultimap.getValue(PREFIX_PRIORITY).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     PriorityCommand.MESSAGE_USAGE));

@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.allergy.Allergy;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
@@ -14,7 +15,6 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -29,6 +29,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_PRIORITY = "NONE";
 
     private Name name;
     private Nric nric;
@@ -37,7 +38,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tag> tags;
+    private Set<Allergy> tags;
     private Priority priority;
     private Set<Appointment> appointments;
     private Set<MedCon> medCons;
@@ -54,7 +55,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        priority = new Priority();
+        priority = new Priority(DEFAULT_PRIORITY);
         appointments = new HashSet<>();
         medCons = new HashSet<>();
     }
@@ -70,7 +71,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+        tags = new HashSet<>(personToCopy.getAllergies());
         priority = personToCopy.getPriority();
         appointments = new HashSet<>(personToCopy.getAppointments());
         medCons = new HashSet<>(personToCopy.getMedCons());
@@ -96,8 +97,8 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withAllergies(String ... tags) {
+        this.tags = SampleDataUtil.getAllergiesSet(tags);
         return this;
     }
 

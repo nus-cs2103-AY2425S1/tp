@@ -28,8 +28,8 @@ public class AddApptCommandParser implements Parser<AddApptCommand> {
      */
     public AddApptCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_DATE,
-                                                                  PREFIX_TIMEPERIOD);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_DATE, PREFIX_TIMEPERIOD);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NRIC, PREFIX_DATE, PREFIX_TIMEPERIOD);
 
         String patientNricValue;
         String newApptName;

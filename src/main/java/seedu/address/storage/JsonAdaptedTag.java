@@ -4,45 +4,45 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.allergy.Allergy;
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * Jackson-friendly version of {@link Allergy}.
  */
-class JsonAdaptedTag {
+class JsonAdaptedAllergy {
 
-    private final String tagName;
+    private final String allergyName;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedAllergy} with the given {@code allergyName}.
      */
     @JsonCreator
-    public JsonAdaptedTag(String tagName) {
-        this.tagName = tagName;
+    public JsonAdaptedAllergy(String allergyName) {
+        this.allergyName = allergyName;
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code Allergy} into this class for Jackson use.
      */
-    public JsonAdaptedTag(Tag source) {
-        tagName = source.tagName;
+    public JsonAdaptedAllergy(Allergy source) {
+        allergyName = source.allergyName;
     }
 
     @JsonValue
-    public String getTagName() {
-        return tagName;
+    public String getAllergyName() {
+        return allergyName;
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted allergy object into the model's {@code Allergy} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted allergy.
      */
-    public Tag toModelType() throws IllegalValueException {
-        if (!Tag.isValidTagName(tagName)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+    public Allergy toModelType() throws IllegalValueException {
+        if (!Allergy.isValidAllergyName(allergyName)) {
+            throw new IllegalValueException(Allergy.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(tagName);
+        return new Allergy(allergyName);
     }
 
 }
