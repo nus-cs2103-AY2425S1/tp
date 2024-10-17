@@ -25,15 +25,15 @@ public class Autocompleter {
         requireNonNull(options);
         String ret = "";
         for (String option : options) {
-            if(option.startsWith(prefix)) {
-                if(ret.isEmpty()) {
+            if (option.startsWith(prefix)) {
+                if (ret.isEmpty()) {
                     ret = option;
-                } else if(option.compareTo(ret) < 0) {
+                } else if (option.compareTo(ret) < 0) {
                     ret = option; // lexical priority
                 }
             }
         }
-        if(ret.isEmpty()) {
+        if (ret.isEmpty()) {
             throw new AutocompleteException(String.format(MESSAGE_NO_AUTOCOMPLETE_OPTIONS, prefix));
         }
         return ret;

@@ -1,14 +1,15 @@
 package careconnect.logic.autocompleter;
 
+import static careconnect.logic.Messages.MESSAGE_NO_AUTOCOMPLETE_OPTIONS;
 import static careconnect.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import careconnect.logic.autocompleter.exceptions.AutocompleteException;
-import careconnect.logic.commands.AddCommand;
 import org.junit.jupiter.api.Test;
+
+import careconnect.logic.autocompleter.exceptions.AutocompleteException;
 
 public class AutocompleterTest {
 
@@ -17,8 +18,8 @@ public class AutocompleterTest {
         Autocompleter autocompleter = new Autocompleter();
         String prefix = "a";
         List<String> list = new ArrayList<>();
-        assertThrows(AutocompleteException.class, () -> autocompleter.autocompleteWithLexicalPriority(
-                prefix, list));
+        assertThrows(AutocompleteException.class, String.format(MESSAGE_NO_AUTOCOMPLETE_OPTIONS, prefix), ()
+                -> autocompleter.autocompleteWithLexicalPriority(prefix, list));
     }
 
     @Test

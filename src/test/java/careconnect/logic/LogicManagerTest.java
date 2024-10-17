@@ -9,11 +9,11 @@ import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 
-import careconnect.logic.autocompleter.exceptions.AutocompleteException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import careconnect.logic.autocompleter.exceptions.AutocompleteException;
 import careconnect.logic.commands.AddCommand;
 import careconnect.logic.commands.CommandResult;
 import careconnect.logic.commands.CommandTestUtil;
@@ -65,8 +65,10 @@ public class LogicManagerTest {
 
     @Test
     public void autocompleteCommand_noAvailableOptions_throwsAutocompleteException() {
-        assertAutocompleteException("findd", MESSAGE_NO_AUTOCOMPLETE_OPTIONS);
-        assertAutocompleteException("xs", MESSAGE_NO_AUTOCOMPLETE_OPTIONS);
+        assertAutocompleteException("findd", String.format(
+                MESSAGE_NO_AUTOCOMPLETE_OPTIONS, "findd"));
+        assertAutocompleteException("xs", String.format(MESSAGE_NO_AUTOCOMPLETE_OPTIONS,
+                "xs"));
     }
 
     @Test
@@ -137,7 +139,8 @@ public class LogicManagerTest {
      * message is correct.
      */
     private void assertAutocompleteException(String inputCommand, String expectedMessage) {
-        Assert.assertThrows(AutocompleteException.class, expectedMessage, () -> logic.autocompleteCommand(inputCommand));
+        Assert.assertThrows(AutocompleteException.class, expectedMessage, () -> logic.autocompleteCommand(
+                inputCommand));
     }
 
     /**

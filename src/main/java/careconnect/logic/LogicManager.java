@@ -1,8 +1,5 @@
 package careconnect.logic;
 
-import static careconnect.logic.Messages.MESSAGE_NO_AUTOCOMPLETE_OPTIONS;
-import static java.util.Objects.requireNonNull;
-
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
