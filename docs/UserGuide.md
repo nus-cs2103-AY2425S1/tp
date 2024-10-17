@@ -138,6 +138,18 @@ Example:
 * `rsvp 2` marks the 2nd person as RSVPed.
 * `unrsvp 1` marks the 1st person as not yet RSVPed.
 
+### Listing all persons who have RSVPed: `rsvplist`
+
+Shows a list of all persons in the address book who have already RSVPed.
+
+Format: `rsvplist`
+
+### Listing all persons who have not yet RSVPed: `notrsvplist`
+
+Shows a list of all persons in the address book who have not yet RSVPed.
+
+Format: `rsvplist`
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
@@ -247,5 +259,7 @@ Action | Format, Examples
 **Untag** | `untag INDEX t/TAG` <br> e.g. `untag 1 t/Bride's Side`
 **RSVP** | `rsvp INDEX`
 **UnRSVP** | `unrsvp INDEX`
+**RSVPList** | `rsvplist`
+**NotRSVPList** | `notrsvplist`
 **Help** | `help`
 
