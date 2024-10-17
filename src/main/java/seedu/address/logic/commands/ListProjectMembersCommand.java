@@ -10,6 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentProjectPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.ui.DisplayType;
 
 /**
  * Lists all members of a specified project in the address book.
@@ -49,13 +50,13 @@ public class ListProjectMembersCommand extends Command {
         model.updateFilteredPersonList(projectMembers::contains);
 
         return new CommandResult(
-                String.format(Messages.MESSAGE_PROJECT_MEMBERS_LISTED, projectMembers.size()));
+                String.format(Messages.MESSAGE_PROJECT_MEMBERS_LISTED, projectMembers.size()), DisplayType.PERSON_LIST);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof ListProjectMembersCommand
-                && predicate.equals(((ListProjectMembersCommand) other).predicate));
+                        && predicate.equals(((ListProjectMembersCommand) other).predicate));
     }
 }
