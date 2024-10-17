@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
+
 /**
  * An UI component that displays information of a {@code Person}.
  */
@@ -38,6 +39,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label isRsvp;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -52,5 +55,12 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        isRsvp.setText(person.getRsvpStatusCard());
+        isRsvp.backgroundProperty().addListener((observable, oldValue, newValue) -> {
+            if (!person.getRsvp()) {
+
+                isRsvp.setStyle("-fx-background-color: #eba250; -fx-background-radius: 2");
+            }
+        });
     }
 }

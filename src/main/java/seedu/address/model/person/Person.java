@@ -16,6 +16,10 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
+    // Strings for UI
+    private static final String NOT_YET_RSVPED_STATUS = "Pending RSVP";
+    private static final String RSVPED_STATUS = "RSVPed";
+
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -25,9 +29,7 @@ public class Person {
     private final boolean isRsvp;
     private final Set<Tag> tags = new HashSet<>();
 
-    // Strings for UI
-    private static final String RSVPED_STATUS = "RSVPed";
-    private static final String NOT_YET_RSVPED_STATUS = "Pending RSVP";
+
 
     /**
      * Every field must be present and not null.
