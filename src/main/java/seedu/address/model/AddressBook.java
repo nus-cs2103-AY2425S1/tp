@@ -8,17 +8,21 @@ import java.util.Objects;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.concert.Concert;
+import seedu.address.model.concert.ConcertContact;
+import seedu.address.model.concert.UniqueConcertContactList;
 import seedu.address.model.concert.UniqueConcertList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
 /**
- * Wraps all data at the address-book level Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the address-book level Duplicates are not allowed
+ * (by .isSamePerson, isSameConcert, isSameConcertContact comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueConcertList concerts;
+    private final UniqueConcertContactList concertContacts;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid
@@ -30,6 +34,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         concerts = new UniqueConcertList();
+        concertContacts = new UniqueConcertContactList();
     }
 
     public AddressBook() {}
@@ -53,11 +58,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the concert list with {@code concerts}. {@code concert} ,ust not
+     * Replaces the contents of the concert list with {@code concerts}. {@code concert} must not
      * contain duplicate concerts.
      */
     public void setConcerts(List<Concert> concerts) {
         this.concerts.setConcerts(concerts);
+    }
+
+    /**
+     * Replaces the contents of the concertContact list with {@code concertContacts}. {@code concertContacts} must not
+     * contain duplicate concertContacts.
+     */
+    public void setConcertContacts(List<ConcertContact> concertContacts) {
+        this.concertContacts.setConcertContacts(concertContacts);
     }
 
     /**
@@ -68,6 +81,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setConcerts(newData.getConcertList());
+        setConcertContacts(newData.getConcertContactList());
     }
 
     //// concert-level operations
@@ -103,6 +117,63 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedConcert);
 
         concerts.setConcert(target, editedConcert);
+    }
+
+    //// concertContact-level operations
+    /**
+     * Returns true if a concertContact with the same identity as {@code concertContact} exists.
+     *
+     * @param concertContact concertContact to check
+     * @return true if address-book contains concertContact
+     */
+    public boolean hasConcertContact(ConcertContact concertContact) {
+        requireNonNull(concertContact);
+        return concertContacts.contains(concertContact);
+    }
+
+    /**
+     * Adds a concertContact.
+     *
+     * @param concertContact concertContact to add
+     */
+    public void addConcertContact(ConcertContact concertContact) {
+        concertContacts.add(concertContact);
+    }
+
+    /**
+     * Replaces the given concertContact {@code target} in the list with {@code editedConcertContact}.
+     * {@code target} must exist in the address book. The concertContact identity of {@code editedConcertContact}
+     * must not be the same as another existing concertContact in the address book.
+     *
+     * @param target concertContact to replace
+     * @param editedConcertContact concertContact that replaces existing one
+     */
+    public void setConcertContact(ConcertContact target, ConcertContact editedConcertContact) {
+        requireNonNull(editedConcertContact);
+
+        concertContacts.setConcertContact(target, editedConcertContact);
+    }
+
+    /**
+     * Removes the concertContact associated to {@code concertKey} and {@code personKey}
+     * from this {@code AddressBook}. {@code concertContact} must exist in the address book.
+     */
+    public void removeConcertContact(Person personKey, Concert concertKey) {
+        concertContacts.remove(personKey, concertKey);
+    }
+
+    /**
+     * Removes all concertContacts associated to {@code concertKey} from this {@code AddressBook}.
+     */
+    public void removeConcertContact(Concert concertKey) {
+        concertContacts.remove(concertKey);
+    }
+
+    /**
+     * Removes all concertContacts associated to {@code personKey} from this {@code AddressBook}.
+     */
+    public void removeConcertContact(Person personKey) {
+        concertContacts.remove(personKey);
     }
 
     //// person-level operations
@@ -165,6 +236,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Concert> getConcertList() {
         return concerts.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<ConcertContact> getConcertContactList() {
+        return concertContacts.asUnmodifiableObservableList();
     }
 
     @Override
