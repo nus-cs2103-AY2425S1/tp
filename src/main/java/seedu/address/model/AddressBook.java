@@ -101,6 +101,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    // group methods
+
     /**
      * Adds {@code group} to the groups in this {@code AddressBook}.
      */
@@ -113,6 +115,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeGroup(Group group) throws GroupNotFoundException {
         groups.remove(group);
+    }
+
+    public Group getGroup(String groupName) throws GroupNotFoundException {
+        return groups.get(groupName);
     }
 
     //// util methods

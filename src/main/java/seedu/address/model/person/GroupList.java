@@ -69,6 +69,31 @@ public class GroupList {
     }
 
     /**
+     * Removes the group from the list which has the specified name.
+     * @throws GroupNotFoundException If a group with the name does not exist.
+     */
+    public void remove(String groupName) throws GroupNotFoundException {
+        requireNonNull(groupName);
+        Group toRemove = new Group(groupName);
+        remove(toRemove);
+    }
+
+    /**
+     * Returns the group in the list which has name matching {@code groupName}.
+     * @throws GroupNotFoundException If no such group exists.
+     */
+    public Group get(String groupName) throws GroupNotFoundException {
+        requireNonNull(groupName);
+        Group toFind = new Group(groupName);
+        for (Group group : groups) {
+            if (group.sameName(toFind)) {
+                return group;
+            }
+        }
+        throw new GroupNotFoundException();
+    }
+
+    /**
      * Returns this list as a list of {@code JsonAdaptedGroup}s suitable for storage.
      */
     public List<JsonAdaptedGroup> toJson() {

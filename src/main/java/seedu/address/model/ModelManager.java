@@ -15,6 +15,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Group;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.GroupNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -123,8 +124,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void removeGroup(Group group) {
-        requireNonNull(group);
+    public void removeGroup(String groupName) {
+        requireNonNull(groupName);
+        Group group = new Group(groupName);
         addressBook.removeGroup(group);
     }
 
@@ -151,6 +153,14 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Group Accessors ===========================================================================
+
+    @Override
+    public void filterByGroup(String groupName) throws GroupNotFoundException {
+        Group group = addressBook.getGroup(groupName);
+        updateFilteredPersonList(group::containsExact);
     }
 
     //=========== Sorted Person List Accessors =============================================================
