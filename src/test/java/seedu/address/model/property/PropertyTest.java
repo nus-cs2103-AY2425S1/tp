@@ -136,11 +136,7 @@ class PropertyTest {
                 "123 Main St",
                 "Central Town",
                 "Apartment",
-                0.0,  // Edge case for size
-                0,     // Edge case for bedrooms
-                0,     // Edge case for bathrooms
-                0.0,   // Edge case for price
-                Optional.empty() // No remark
+                0.0, 0, 0, 0.0, Optional.empty()
         );
 
         assertEquals(0.0, property.getSize());
@@ -152,30 +148,36 @@ class PropertyTest {
 
     @Test
     void testHashCodeConsistency() {
-        Property property1 = new Property("123 Main St", "Central Town", "Apartment", 85.5, 3, 2, 500000.0, Optional.of("Great view"));
-        Property property2 = new Property("123 Main St", "Central Town", "Apartment", 85.5, 3, 2, 500000.0, Optional.of("Great view"));
+        Property property1 = new Property("123 Main St", "Central Town",
+                "Apartment", 85.5, 3, 2, 500000.0, Optional.of("Great view"));
+        Property property2 = new Property("123 Main St", "Central Town",
+                "Apartment", 85.5, 3, 2, 500000.0, Optional.of("Great view"));
 
         assertEquals(property1.hashCode(), property2.hashCode());
     }
 
     @Test
     void testEqualsNullComparison() {
-        Property property = new Property("123 Main St", "Central Town", "Apartment", 85.5, 3, 2, 500000.0, Optional.of("Great view"));
+        Property property = new Property("123 Main St", "Central Town",
+                "Apartment", 85.5, 3, 2, 500000.0, Optional.of("Great view"));
 
         assertNotEquals(property, null);
     }
 
     @Test
     void testEqualsDifferentClass() {
-        Property property = new Property("123 Main St", "Central Town", "Apartment", 85.5, 3, 2, 500000.0, Optional.of("Great view"));
+        Property property = new Property("123 Main St", "Central Town",
+                "Apartment", 85.5, 3, 2, 500000.0, Optional.of("Great view"));
 
         assertNotEquals(property, "Not a Property");
     }
 
     @Test
     void testPropertyWithDifferentRemarks() {
-        Property property1 = new Property("123 Main St", "Central Town", "Apartment", 85.5, 3, 2, 500000.0, Optional.of("Great view"));
-        Property property2 = new Property("123 Main St", "Central Town", "Apartment", 85.5, 3, 2, 500000.0, Optional.of("No view"));
+        Property property1 = new Property("123 Main St", "Central Town",
+                "Apartment", 85.5, 3, 2, 500000.0, Optional.of("Great view"));
+        Property property2 = new Property("123 Main St", "Central Town",
+                "Apartment", 85.5, 3, 2, 500000.0, Optional.of("No view"));
 
         assertNotEquals(property1, property2);
     }
