@@ -71,7 +71,8 @@ public class AddFCommandParser implements Parser<AddFCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(""));
         Allergy allergy = ParserUtil.parseAllergy(argMultimap.getValue(PREFIX_ALLERGY).orElse(""));
         BloodType bloodType = ParserUtil.parseBloodType(argMultimap.getValue(PREFIX_BLOODTYPE).orElse(""));
-        HealthRecord healthRecord = ParserUtil.parseHealthRecord(argMultimap.getValue(PREFIX_HEALTHRECORD).orElse(""));
+        HealthRecord healthRecord = ParserUtil.parseHealthRecord(
+                argMultimap.getValue(PREFIX_HEALTHRECORD).orElse(""));
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).orElse(""));
         HealthRisk healthRIsk = ParserUtil.parseHealthRisk(
                 argMultimap.getValue(PREFIX_HEALTHRISK).orElse(""));
