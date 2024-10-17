@@ -2,8 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -15,6 +18,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Information;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.product.Ingredient;
+import seedu.address.model.product.Ingredients;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -80,6 +85,31 @@ public class ParserUtil {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
+    }
+    /**
+     * Parses a {@code String ingredientsSuppliedString} into an {@code Ingredients} object.
+     * Splits the string by commas and trims whitespaces.
+     *
+     * @throws ParseException if the given {@code ingredientsSuppliedString} is invalid.
+     */
+    public static Ingredients parseIngredients(String ingredientsSuppliedString) throws ParseException {
+        requireNonNull(ingredientsSuppliedString);
+        String trimmedIngredients = ingredientsSuppliedString.trim();
+
+        if (trimmedIngredients.isEmpty()) {
+            throw new ParseException("Ingredients supplied cannot be empty.");
+        }
+
+        List<String> ingredientNames = Arrays.asList(trimmedIngredients.split("\\s*,\\s*"));
+        List<Ingredient> ingredientList = new ArrayList<>();
+
+        int ingredientId = 1;  // For now, we use hardcoded IDs.
+        for (String ingredientName : ingredientNames) {
+            Ingredient ingredient = new Ingredient(ingredientId++, ingredientName, 0.0); // Assuming cost is 0 for MVP
+            ingredientList.add(ingredient);
+        }
+
+        return new Ingredients(ingredientList);
     }
 
     /**
