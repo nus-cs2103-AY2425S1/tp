@@ -86,8 +86,7 @@ public class JsonAdaptedAssignmentTest {
                 VALID_EMPLOYEE_ID);
         AddressBook addressBook = new AddressBook();
         assertThrows(IllegalValueException.class,
-                MISSING_PROJECT_ID_MESSAGE,
-                () -> assignment.toModelType(addressBook));
+                MISSING_PROJECT_ID_MESSAGE, () -> assignment.toModelType(addressBook));
     }
 
     @Test
