@@ -95,6 +95,9 @@ public class AddressBookParser {
         case PriorityCommand.COMMAND_WORD:
             return new PriorityCommandParser().parse(arguments);
 
+        case MarkTaskCommand.COMMAND_WORD:
+            return new MarkTaskCommandParser().parse(arguments);
+
         case DeletePriorityCommand.COMMAND_WORD:
             return new DeletePriorityCommandParser().parse(arguments);
 

@@ -1,9 +1,14 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -15,9 +20,9 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
-
+    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-f15-1.github.io/tp/UserGuide.html";
+    public static final String HELP_MESSAGE = "Refer to the user guide:";
+    private static final String HELP_COMMAND = getAllCommands();
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
@@ -27,21 +32,41 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label helpMessage;
 
+    @FXML
+    private Label helpCommands;
+
+    @FXML
+    private Hyperlink userGuideLink;
+
     /**
-     * Creates a new HelpWindow.
+     * Creates a new HelpWindow. The HelpWindow will be set at
+     * foreground of the MainWindow until closed.
      *
      * @param root Stage to use as the root of the HelpWindow.
      */
-    public HelpWindow(Stage root) {
+    public HelpWindow(Stage root, Stage mainStage) {
         super(FXML, root);
+        root.setAlwaysOnTop(true);
+
         helpMessage.setText(HELP_MESSAGE);
+        helpCommands.setText(HELP_COMMAND);
+
+        userGuideLink.setOnAction(event -> openUserGuide());
+
+        mainStage.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+            if (isNowFocused) {
+                root.setAlwaysOnTop(true);
+            } else {
+                root.setAlwaysOnTop(false);
+            }
+        });
     }
 
     /**
      * Creates a new HelpWindow.
      */
-    public HelpWindow() {
-        this(new Stage());
+    public HelpWindow(Stage mainStage) {
+        this(new Stage(), mainStage);
     }
 
     /**
@@ -87,6 +112,35 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
+    }
+
+    /**
+     * Returns the list of all commands.
+     */
+    public static String getAllCommands() {
+        return "Here are the list of commands available:\n"
+                + "1. add\n"
+                + "2. delete\n"
+                + "3. addtask\n"
+                + "4. deletetask\n"
+                + "5. emergency\n"
+                + "6. priority\n"
+                + "7. list\n"
+                + "8. help\n"
+                + "9. exit\n"
+                + "10. find\n"
+                + "11. clear\n";
+    }
+
+    /**
+     * Opens the user guide in the default browser.
+     */
+    private void openUserGuide() {
+        try {
+            Desktop.getDesktop().browse(new URI(USERGUIDE_URL));
+        } catch (IOException | URISyntaxException e) {
+            logger.warning("Failed to open user guide: " + e.getMessage());
+        }
     }
 
     /**
