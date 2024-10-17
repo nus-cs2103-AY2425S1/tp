@@ -2,40 +2,67 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.Map;
+import java.util.TreeMap;
+
+import seedu.address.model.person.exceptions.AttendanceNotFoundException;
 
 /**
  * Represents a Student's Attendance.
  */
 public class AttendanceList {
-    private List<Attendance> attendanceList;
+    private final Map<LocalDateTime, Attendance> attendanceList;
 
     /**
-     * Initializes an empty attendance list.
+     * Initializes an empty immutable attendance list.
      */
     public AttendanceList() {
-        this.attendanceList = new ArrayList<Attendance>();
+        this.attendanceList = Collections.unmodifiableMap(new TreeMap<>());
     }
 
     /**
-     * Adds an attendance record to the attendance list.
-     *
-     * @param attendance The attendance record to be added. Must not be null.
+     * Initializes an populated immutable attendance list.
      */
-    public void addAttendance(Attendance attendance) {
+    public AttendanceList(Map<LocalDateTime, Attendance> attendanceList) {
+        this.attendanceList = Collections.unmodifiableMap(attendanceList);
+    }
+
+    /**
+     * Sets the attendance for a specific date.
+     * If an attendance record already exists for the given date, it will be
+     * replaced with the new attendance.
+     *
+     * @param date       The date for which the attendance is to be set.
+     * @param attendance The attendance to be set for the specified date.
+     * @return A new AttendanceList with the updated attendance record.
+     */
+    public AttendanceList setAttendance(LocalDateTime date, Attendance attendance) {
+        requireNonNull(date);
         requireNonNull(attendance);
-        attendanceList.add(attendance);
+        Map<LocalDateTime, Attendance> newAttendanceList = new TreeMap<>(attendanceList);
+        newAttendanceList.merge(date, attendance, (oldAttendance, newAttendance) -> newAttendance);
+        return new AttendanceList(newAttendanceList);
     }
 
     /**
-     * Removes the specified attendance from the attendance list.
+     * Removes the attendance record for the specified date.
      *
-     * @param index The index of the attendance record to be removed.
+     * @param date The date of the attendance record to be removed.
+     * @return A new AttendanceList with the specified attendance record removed.
+     * @throws AttendanceNotFoundException If the attendance record for the specified
+     *                                  date does not exist.
      */
-    public void removeAttendance(int index) {
-        // TODO: handle error for invalid index
-        attendanceList.remove(index);
+    public AttendanceList removeAttendance(LocalDateTime date) {
+        requireNonNull(date);
+        if (!attendanceList.containsKey(date)) {
+            throw new AttendanceNotFoundException();
+        }
+        Map<LocalDateTime, Attendance> newAttendanceList = new TreeMap<>(attendanceList);
+        newAttendanceList.remove(date);
+        return new AttendanceList(attendanceList);
     }
 
     @Override
@@ -54,10 +81,12 @@ public class AttendanceList {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Attendance attendance : attendanceList) {
+        attendanceList.forEach((date, attendance) -> {
+            sb.append(DateTimeFormatter.ofPattern("DD/MM/yyyy HH:mm").format(date));
+            sb.append(" ");
             sb.append(attendance.toString());
             sb.append("\n");
-        }
+        });
         return sb.toString();
     }
 
