@@ -108,8 +108,8 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Fees updatedFees = personToEdit.getFees();
-        ClassId updatedClassId = personToEdit.getClassId();
+        Fees updatedFees = editPersonDescriptor.getFees().orElse(personToEdit.getFees());
+        ClassId updatedClassId = editPersonDescriptor.getClassId().orElse(personToEdit.getClassId());
         MonthsPaid updatedMonthsPaid = personToEdit.getMonthsPaid();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
@@ -257,6 +257,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(fees, otherEditPersonDescriptor.fees)
+                    && Objects.equals(classId, otherEditPersonDescriptor.classId)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 

@@ -141,6 +141,8 @@ public class ModelManager implements Model {
             return false;
         }
         ModelManager otherModelManager = (ModelManager) other;
+        System.out.println(otherModelManager.addressBook);
+        System.out.println(this.addressBook);
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
