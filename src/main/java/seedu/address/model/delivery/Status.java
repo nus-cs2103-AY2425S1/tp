@@ -28,6 +28,7 @@ public class Status {
      */
     public Status(String status) {
         requireNonNull(status);
+        status = status.toLowerCase().replace("_", " ");
         checkArgument(isValidStatus(status), MESSAGE_CONSTRAINTS);
         switch(status) {
         case "not delivered":
@@ -57,7 +58,7 @@ public class Status {
      * @return Value as a string
      */
     public String getValue() {
-        return String.valueOf(value);
+        return String.valueOf(value).toLowerCase().replace("_", " ");
     }
 
     @Override
