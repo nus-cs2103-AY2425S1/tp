@@ -111,7 +111,8 @@ public class PersonTest {
                 + ALICE.getAddress() + ", priority="
                 + ALICE.getPriority() + ", remark="
                 + ALICE.getRemark() + ", dateOfBirth="
-                + ALICE.getDateOfBirth() + ", tags="
+                + ALICE.getDateOfBirth() + ", income="
+                + ALICE.getIncome() + ", tags="
                 + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }

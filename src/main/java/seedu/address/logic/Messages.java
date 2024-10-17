@@ -46,6 +46,8 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Date of birth: ")
                 .append(person.getDateOfBirth())
+                .append("; Income: ")
+                .append(person.getIncome())
                 .append("; Priority: ")
                 .append(person.getPriority());
 

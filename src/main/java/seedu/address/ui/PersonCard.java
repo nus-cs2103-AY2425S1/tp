@@ -47,6 +47,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label dateOfBirth;
     @FXML
+    private Label householdIncome;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -78,6 +80,8 @@ public class PersonCard extends UiPart<Region> {
                         getPersonAge(person)
                 )
         );
+
+        householdIncome.setText(String.format("[Household Income] %s", person.getIncome()));
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

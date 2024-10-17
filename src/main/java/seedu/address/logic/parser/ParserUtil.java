@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Date;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
@@ -115,7 +116,6 @@ public class ParserUtil {
         }
     }
 
-
     /**
      * Parses a {@code String date} into a {@code Date}.
      * Leading and trailing whitespaces will be trimmed.
@@ -141,6 +141,18 @@ public class ParserUtil {
     public static Remark parseRemark(String remark) {
         requireNonNull(remark);
         return new Remark(remark.trim());
+    }
+
+    /**
+     * Parses a {@code String income} into a {@code Income}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code income} is invalid.
+     */
+    public static Income parseIncome(String income) throws ParseException {
+        requireNonNull(income);
+        String trimmedIncome = income.trim();
+        return new Income(trimmedIncome);
     }
 
     /**

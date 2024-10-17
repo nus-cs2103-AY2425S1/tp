@@ -26,13 +26,14 @@ public class Person {
     private final Priority priority;
     private final Remark remark;
     private final DateOfBirth dateOfBirth;
+    private final Income income;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address,
-                  Priority priority, Remark remark, DateOfBirth dateOfBirth, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Priority priority,
+                  Remark remark, DateOfBirth dateOfBirth, Income income, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, dateOfBirth, tags);
         this.name = name;
         this.phone = phone;
@@ -41,6 +42,7 @@ public class Person {
         this.priority = priority;
         this.remark = remark;
         this.dateOfBirth = dateOfBirth;
+        this.income = income;
         this.tags.addAll(tags);
     }
 
@@ -70,6 +72,10 @@ public class Person {
 
     public DateOfBirth getDateOfBirth() {
         return dateOfBirth;
+    }
+
+    public Income getIncome() {
+        return income;
     }
 
     /**
@@ -116,6 +122,7 @@ public class Person {
                 && priority.equals(otherPerson.priority)
                 && remark.equals(otherPerson.remark)
                 && dateOfBirth.equals(otherPerson.dateOfBirth)
+                && income.equals(otherPerson.income)
                 && tags.equals(otherPerson.tags);
     }
 
@@ -135,6 +142,7 @@ public class Person {
                 .add("priority", priority)
                 .add("remark", remark)
                 .add("dateOfBirth", dateOfBirth)
+                .add("income", income)
                 .add("tags", tags)
                 .toString();
     }
