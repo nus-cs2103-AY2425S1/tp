@@ -115,7 +115,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
-        lessonListPanel = new LessonListPanel(logic.getLessonList());  // fill lessonListPanel object w list of lessons
+        lessonListPanel = new LessonListPanel(logic.getLessonList()); //fill lessonListPanel object w list of lessons
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
         calendarPanelPlaceholder.getChildren().add(lessonListPanel.getRoot()); //fill calendarPanel w list of lessons
 

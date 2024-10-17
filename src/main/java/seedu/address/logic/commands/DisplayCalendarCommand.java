@@ -1,10 +1,9 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import seedu.address.model.Model;
 
 /**
  * Lists all students in the address book to the user.
