@@ -34,9 +34,7 @@
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <HBox spacing="20">
-        <Label fx:id="rate" styleClass="cell_small_label" text="\$rate" />
-        <Label fx:id="paid" styleClass="cell_small_label" text="\$paid" />
-        <Label fx:id="owedAmount" styleClass="cell_small_label" text="\$owedAmount" />
+        <Label fx:id="rateAndPaidAndOwedAmount" styleClass="cell_small_label" text="\$rateAndPaidAndOwedAmount" />
       </HBox>
     </VBox>
   </GridPane>
