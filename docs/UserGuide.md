@@ -31,7 +31,7 @@ their contacts into 'work' contacts and 'personal' contacts to better manage the
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe h/@johndoe p/99887766 e/johndoe@gmail.com` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe h/@johndoe p/99887766 e/johndoe@gmail.com ct/work` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -80,7 +80,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME h/TELEGRAM_HANDLE p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
+Format: `add n/NAME h/TELEGRAM_HANDLE p/PHONE_NUMBER e/EMAIL ct/CONTACT_TYPE [t/TAG]…​`
 
 <box type="tip" seamless>
 
@@ -88,8 +88,8 @@ Format: `add n/NAME h/TELEGRAM_HANDLE p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 </box>
 
 Examples:
-* `add n/John Doe h/@johndoe p/9988 7766 e/johndoh@gmail.com t/friend`
-* `add n/Betsy Crowe t/friend h/@betsy_c p/87452451 e/betsyc@gmail.com t/criminal`
+* `add n/John Doe h/@johndoe p/9988 7766 e/johndoh@gmail.com ct/work t/friend`
+* `add n/Betsy Crowe t/friend h/@betsy_c p/87452451 e/betsyc@gmail.com ct/personal t/criminal`
 
 ### Listing all persons : `list`
 
@@ -199,7 +199,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME t/TELEGRAM_HANDLE p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho h/@james_ho p/22224444 e/jamesho@example.com t/friend t/colleague`
+**Add**    | `add n/NAME t/TELEGRAM_HANDLE p/PHONE_NUMBER e/EMAIL ct/CONTACT_TYPE [t/TAG]…​` <br> e.g., `add n/James Ho h/@james_ho p/22224444 e/jamesho@example.com ct/work t/friend t/colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee h/@jamesss e/jameslee@example.com`
