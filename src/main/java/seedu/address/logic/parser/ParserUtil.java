@@ -119,7 +119,7 @@ public class ParserUtil {
             throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
         }
 
-        switch(network) {
+        switch (network) {
         case "BTC":
             if (!BtcAddress.isValidPublicAddress(trimmedPublicAddress)) {
                 throw new ParseException(BtcAddress.MESSAGE_CONSTRAINTS);
