@@ -187,7 +187,8 @@ public class ParserUtil {
      * Parses the given {@code String} representing a file name.
      *
      * This method trims any leading or trailing spaces from the file name and checks if the file name is valid.
-     * A file name is considered invalid if it is empty. If the file name is invalid, a {@code ParseException} is thrown.
+     * A file name is considered invalid if it is empty.
+     * If the file name is invalid, a {@code ParseException} is thrown.
      *
      * @param fileName The file name to be parsed and validated.
      * @return The trimmed file name if it is valid.
