@@ -8,16 +8,16 @@ import org.junit.jupiter.api.Test;
 
 public class ModuleRolePairTest {
 
-    private final ModuleCode DEFAULT_MODULE_CODE = new ModuleCode("CS1101S");
-    private final RoleType DEFAULT_ROLE_TYPE = RoleType.STUDENT;
+    private static final ModuleCode DEFAULT_MODULE_CODE = new ModuleCode("CS1101S");
+    private static final RoleType DEFAULT_ROLE_TYPE = RoleType.STUDENT;
 
     @Test
-    public void constructor_null_moduleCode_throwsNullPointerException() {
+    public void constructor_nullModuleCode_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new ModuleRolePair(null, DEFAULT_ROLE_TYPE));
     }
 
     @Test
-    public void constructor_null_roleType_throwsNullPointerException() {
+    public void constructor_nullRoleType_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new ModuleRolePair(DEFAULT_MODULE_CODE, null));
     }
 

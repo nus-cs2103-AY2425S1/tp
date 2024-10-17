@@ -104,7 +104,8 @@ public class EditCommand extends Command {
 
         // Editing modules not supported
         ModuleRoleMap updatedModuleRoleMap = personToEdit.getModuleRoleMap();
-        return new Person(updatedName, updatedPhone, updatedEmail, Optional.ofNullable(updatedAddress), updatedTags, updatedModuleRoleMap);
+        return new Person(updatedName, updatedPhone, updatedEmail, Optional.ofNullable(updatedAddress),
+                updatedTags, updatedModuleRoleMap);
     }
 
     @Override

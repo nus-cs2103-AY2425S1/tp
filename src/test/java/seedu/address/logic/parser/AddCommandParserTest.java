@@ -68,7 +68,9 @@ public class AddCommandParserTest {
 
 
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
+        Person expectedPersonMultipleTags = new PersonBuilder(BOB)
+            .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
+
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND
                 + TAG_DESC_FRIEND + MODULE_ROLE_DESC, new AddCommand(expectedPersonMultipleTags));
@@ -159,24 +161,24 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + MODULE_ROLE_DESC,
-                expectedMessage);
+        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + MODULE_ROLE_DESC, expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + MODULE_ROLE_DESC,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + MODULE_ROLE_DESC, expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB + MODULE_ROLE_DESC,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
+                + MODULE_ROLE_DESC, expectedMessage);
 
         // missing module role prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB + VALID_MODULE_ROLE,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
+                + VALID_MODULE_ROLE, expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB + MODULE_ROLE_DESC,
-                expectedMessage);
+        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
+                + MODULE_ROLE_DESC, expectedMessage);
     }
 
     @Test
@@ -203,11 +205,13 @@ public class AddCommandParserTest {
 
         // invalid module code in module-role pair
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + VALID_TAG_FRIEND + INVALID_MODULE_ROLE_DESC_MODULE_CODE, ModuleCode.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_HUSBAND + VALID_TAG_FRIEND + INVALID_MODULE_ROLE_DESC_MODULE_CODE,
+                ModuleCode.MESSAGE_CONSTRAINTS);
 
         // invalid role type in module-role pair
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + VALID_TAG_FRIEND + INVALID_MODULE_ROLE_DESC_ROLE_TYPE, ModuleRoleMap.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_HUSBAND + VALID_TAG_FRIEND + INVALID_MODULE_ROLE_DESC_ROLE_TYPE,
+                ModuleRoleMap.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
