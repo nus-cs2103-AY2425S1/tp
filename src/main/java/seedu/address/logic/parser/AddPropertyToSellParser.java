@@ -87,7 +87,8 @@ public class AddPropertyToSellParser implements Parser<AddPropertyToSellCommand>
      * {@code Apartment}, {@code Bto}, or {@code OtherProperty} depending on
      * provided {@code HousingType}
      *
-     * @param housingType the type of housing, used to determine the specific subclass of {@code Property} to instantiate
+     * @param housingType the type of housing,
+     *                    used to determine the specific subclass of {@code Property} to instantiate
      * @param sellingPrice the price at which the property is being sold
      * @param postalCode the postal code of the property
      * @param unitNumber the unit number of the property

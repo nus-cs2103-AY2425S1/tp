@@ -46,7 +46,8 @@ public class AddPropertyToBuyCommand extends Command {
     private final Index index;
     private final Property propertyToBuyToBeAdded;
 
-    /**  Creates an AddPropertyToBuyCommand to add the specified {@code Property}
+    /**
+     *  Creates an AddPropertyToBuyCommand to add the specified {@code Property}
      * to the list of properties to buy for the contact at the specified {@code Index}.
      *
      * @param personIndex of the person in the filtered person list to edit

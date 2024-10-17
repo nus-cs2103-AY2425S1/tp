@@ -23,7 +23,8 @@ public class FindPhoneNumberCommand extends Command {
     private final PhoneNumberContainsKeywordPredicate predicate;
 
     /**
-     * Creates an FindPhoneNumberCommand to find names matching the specified {@code PhoneNumberContainsKeywordPredicate}
+     * Creates an FindPhoneNumberCommand to find names
+     * matching the specified {@code PhoneNumberContainsKeywordPredicate}
      *
      * @param predicate the predicate used to filter names based on given keywords
      */

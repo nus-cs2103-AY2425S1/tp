@@ -45,7 +45,8 @@ public class AddPropertyToSellCommand extends Command {
     private final Property propertyToSellToBeAdded;
     private final Index personIndex;
 
-    /**  Creates an AddPropertyToSellCommand to add the specified {@code Property}
+    /**
+     * Creates an AddPropertyToSellCommand to add the specified {@code Property}
      * to the list of properties to sell for the contact at the specified {@code Index}.
      *
      * @param personIndex of the person in the filtered person list to edit
