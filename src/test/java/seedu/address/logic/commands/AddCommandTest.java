@@ -24,6 +24,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.goodsReceipt.GoodsReceipt;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -169,6 +170,23 @@ public class AddCommandTest {
         public List<Person> getPersonList() {
             return List.of();
         }
+
+        @Override
+        public void setGoods(List<GoodsReceipt> goodsReceiptList) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<GoodsReceipt> getGoods() {
+            return List.of();
+        }
+
+        @Override
+        public void addGoods(GoodsReceipt goodsReceipt) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
     }
 
     /**

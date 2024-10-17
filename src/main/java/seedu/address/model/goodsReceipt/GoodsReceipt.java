@@ -3,8 +3,16 @@ package seedu.address.model.goodsReceipt;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.storage.CsvConverters.GoodsConverter;
+import static seedu.address.storage.CsvConverters.GoodsDateConverter;
+import static seedu.address.storage.CsvConverters.PersonNameConverter;
 
 import java.time.LocalDateTime;
+
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvCustomBindByName;
+import com.opencsv.bean.CsvDate;
+import com.opencsv.bean.CsvNumber;
 
 import seedu.address.model.goods.Goods;
 import seedu.address.model.person.Name;
@@ -16,13 +24,44 @@ import seedu.address.model.person.Name;
  */
 public class GoodsReceipt {
 
+    @CsvCustomBindByName(column = "Goods", converter = GoodsConverter.class, required = true)
     private final Goods goods;
+
+    @CsvCustomBindByName(column = "Supplier Name", converter = PersonNameConverter.class, required = true)
     private final Name supplierName;
+
+    @CsvCustomBindByName(column = "Procurement Date", converter = GoodsDateConverter.class, required = true)
+    @CsvDate(value = "yyyy-MM-dd HH:mm")
     private final Date procurementDate;
+
+    @CsvCustomBindByName(column = "Arrival Date", converter = GoodsDateConverter.class, required = true)
+    @CsvDate(value = "yyyy-MM-dd HH:mm")
     private final Date arrivalDate;
+
+    @CsvBindByName(column = "Is Delivered", required = true)
     private final boolean isDelivered;
+
+    @CsvBindByName(column = "Quantity", required = true)
+    @CsvNumber(value = "#")
     private final int quantity;
+
+    @CsvBindByName(column = "Price", required = true)
+    @CsvNumber(value = "0.00")
     private final double price;
+
+    /**
+     * Constructs a {@code GoodsReceipt}.
+     * For use in Csv files. Empty constructor is required for CsvBeanReader.
+     */
+    public GoodsReceipt() {
+        this.goods = null;
+        this.supplierName = null;
+        this.procurementDate = null;
+        this.arrivalDate = null;
+        this.isDelivered = false;
+        this.quantity = 0;
+        this.price = 0.0;
+    }
 
     /**
      * Constructs a {@code GoodsReceipt}.

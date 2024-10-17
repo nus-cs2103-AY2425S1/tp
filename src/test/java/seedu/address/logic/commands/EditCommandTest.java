@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalGoods.getTypicalGoodsReceipts;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ import seedu.address.model.tag.Tag;
 public class EditCommandTest {
 
     private Model getDefaultModel() {
-        return new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        return new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalGoodsReceipts());
     }
 
     @Test

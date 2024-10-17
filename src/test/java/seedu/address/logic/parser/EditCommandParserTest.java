@@ -27,6 +27,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalGoods.getTypicalGoodsReceipts;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Optional;
@@ -55,7 +56,7 @@ public class EditCommandParserTest {
     private EditCommandParser parser = new EditCommandParser();
 
     private Model getDefaultModel() {
-        return new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        return new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalGoodsReceipts());
     }
 
     @Test

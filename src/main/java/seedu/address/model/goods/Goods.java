@@ -2,7 +2,6 @@ package seedu.address.model.goods;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-
 /**
  * Represents goods.
  * Garauntees: Immutable; name is valid as declared in {@link #isValidGoodsName(String)};
@@ -13,9 +12,7 @@ public class Goods {
     public static final String VALIDATION_REGEX = "/^[\\w\\-\\s]+$/";
 
     private final GoodsName goodsName;
-
     private final GoodsCategories category;
-
 
     /**
      * Constructs a {@Code Goods}.
@@ -45,5 +42,14 @@ public class Goods {
     @Override
     public String toString() {
         return String.format("%s", this.goodsName);
+    }
+
+    /**
+     * Converts good to be written in a CSV file.
+     *
+     * @return goods name with category
+     */
+    public String convertToCsvWrite() {
+        return goodsName + "," + category;
     }
 }
