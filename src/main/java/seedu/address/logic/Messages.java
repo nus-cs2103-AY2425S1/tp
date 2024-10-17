@@ -47,6 +47,8 @@ public class Messages {
                 .append(person.getLastSeen())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        builder.append("; Priority: ")
+               .append(person.getPriority());
         return builder.toString();
     }
 

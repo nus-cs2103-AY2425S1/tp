@@ -9,8 +9,10 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LastSeen;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Organisation;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,8 +39,10 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setOrganisation(person.getOrganisation());
         descriptor.setLastSeen(person.getLastSeen());
         descriptor.setTags(person.getTags());
+        descriptor.setPriority(person.getPriority());
     }
 
     /**
@@ -80,6 +84,13 @@ public class EditPersonDescriptorBuilder {
         descriptor.setLastSeen(new LastSeen(lastSeen));
         return this;
     }
+    /**
+     * Sets the {@code Organisation} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withOrganisation(String organisation) {
+        descriptor.setOrganisation(new Organisation(organisation));
+        return this;
+    }
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
@@ -88,6 +99,14 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Priority} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withPriority(String priority) {
+        descriptor.setPriority(new Priority(priority));
         return this;
     }
 

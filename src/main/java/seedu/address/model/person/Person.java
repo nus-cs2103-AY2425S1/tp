@@ -24,19 +24,26 @@ public class Person {
     // Data fields
     private final Address address;
     private final LastSeen lastSeen;
+    private final Organisation organisation;
     private final Set<Tag> tags = new HashSet<>();
+    private final Priority priority;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, LastSeen lastSeen, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, lastSeen, tags);
+
+    public Person(Name name, Phone phone, Email email, Address address, Organisation organisation,
+                LastSeen lastSeen, Set<Tag> tags, Priority priority) {
+        requireAllNonNull(name, phone, email, address, tags, organisation, lastSeen);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.organisation = organisation;
         this.lastSeen = lastSeen;
         this.tags.addAll(tags);
+        this.priority = priority;
     }
 
     public Name getName() {
@@ -54,8 +61,17 @@ public class Person {
     public Address getAddress() {
         return address;
     }
+
+    public Organisation getOrganisation() {
+        return organisation;
+    }
+
     public LastSeen getLastSeen() {
         return lastSeen;
+    }
+
+    public Priority getPriority() {
+        return priority;
     }
 
     /**
@@ -99,14 +115,16 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && organisation.equals(otherPerson.organisation)
                 && lastSeen.equals(otherPerson.lastSeen)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && priority.equals(otherPerson.priority);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, lastSeen, tags);
+        return Objects.hash(name, phone, email, address, organisation, lastSeen, tags, priority);
     }
 
     @Override
@@ -116,8 +134,10 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("organisation", organisation)
                 .add("last seen", lastSeen)
                 .add("tags", tags)
+                .add("priority", priority)
                 .toString();
     }
 

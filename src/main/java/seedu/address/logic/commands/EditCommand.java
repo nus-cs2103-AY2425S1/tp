@@ -5,7 +5,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_SEEN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ORGANISATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -26,8 +28,10 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LastSeen;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Organisation;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -45,8 +49,10 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_ORGANISATION + "ORGANISATION] "
             + "[" + PREFIX_LAST_SEEN + "LAST SEEN]"
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_PRIORITY + "PRIORITY]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -102,10 +108,14 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Organisation updatedOrganisation = editPersonDescriptor.getOrganisation()
+                .orElse(personToEdit.getOrganisation());
         LastSeen updatedLastSeen = editPersonDescriptor.getLastSeen().orElse(personToEdit.getLastSeen());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority());
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedOrganisation,
+                updatedLastSeen, updatedTags, updatedPriority);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedLastSeen, updatedTags);
     }
 
     @Override
@@ -141,8 +151,10 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Organisation organisation;
         private LastSeen lastSeen;
         private Set<Tag> tags;
+        private Priority priority;
 
         public EditPersonDescriptor() {}
 
@@ -155,15 +167,17 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setOrganisation(toCopy.organisation);
             setLastSeen(toCopy.lastSeen);
             setTags(toCopy.tags);
+            setPriority(toCopy.priority);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, lastSeen, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, organisation, lastSeen, tags, priority);
         }
 
         public void setName(Name name) {
@@ -197,11 +211,25 @@ public class EditCommand extends Command {
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
+
+        public void setOrganisation(Organisation organisation) {
+            this.organisation = organisation;
+        }
+        public Optional<Organisation> getOrganisation() {
+            return Optional.ofNullable(organisation);
+        }
         public void setLastSeen(LastSeen lastSeen) {
             this.lastSeen = lastSeen;
         }
         public Optional<LastSeen> getLastSeen() {
             return Optional.ofNullable(lastSeen);
+        }
+        public void setPriority(Priority priority) {
+            this.priority = priority;
+        }
+
+        public Optional<Priority> getPriority() {
+            return Optional.ofNullable(priority);
         }
 
         /**
@@ -237,8 +265,11 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(organisation, otherEditPersonDescriptor.organisation)
                     && Objects.equals(lastSeen, otherEditPersonDescriptor.lastSeen)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(priority, otherEditPersonDescriptor.priority);
+
         }
 
         @Override
@@ -248,8 +279,10 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("organisation", organisation)
                     .add("last seen", lastSeen)
                     .add("tags", tags)
+                    .add("priority", priority)
                     .toString();
         }
     }
