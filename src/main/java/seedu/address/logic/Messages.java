@@ -48,8 +48,8 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
-        builder.append(person.getDateOfLastVisit())
-                .append("; Last visit: ");
+        builder.append("; Last visit: ")
+                .append(person.getDateOfLastVisit());
         return builder.toString();
     }
 
