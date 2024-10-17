@@ -104,9 +104,9 @@ public class PersonTest {
     public void toStringMethod() {
         // Update to include university, major, interest, and experience
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
-                + ", university=" + ALICE.getUniversity() + ", major=" + ALICE.getMajor() + ", interest="
-                + ALICE.getInterest() + ", workExp=" + ALICE.getWorkExp() + "}";
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", workExp=" + ALICE.getWorkExp()
+                +", tags=" + ALICE.getTags() + ", university=" + ALICE.getUniversity() + ", major=" + ALICE.getMajor() + ", interest="
+                + ALICE.getInterest() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
