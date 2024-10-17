@@ -51,7 +51,7 @@ public class UpdateCommandTest {
     @Test
 
     public void execute_allFieldsSpecified_success1() {
-      
+
         Person editedPerson = new PersonBuilder().withNric("S1234567Z").build();
         UpdateCommand.UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder(editedPerson).build();
         UpdateCommand updateCommand = new UpdateCommand(editedPerson.getNric(), descriptor);

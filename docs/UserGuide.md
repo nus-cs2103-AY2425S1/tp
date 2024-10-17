@@ -20,7 +20,8 @@ benefits of a Graphical User Interface (GUI).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tp.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tp.jar` command to run
+   the application.<br>
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -31,19 +32,20 @@ benefits of a Graphical User Interface (GUI).
 
     * `list` : Lists all contacts.
 
-   * `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 t/Patient` : Adds a patient named `John Doe` to ClinicBuddy.
+    * `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 t/Patient` :
+      Adds a patient named `John Doe` to ClinicBuddy.
 
-   * `delete S1234567Z` : Deletes the patient with the NRIC 'S1234567Z' in the current list.
+    * `delete S1234567Z` : Deletes the patient with the NRIC 'S1234567Z' in the current list.
 
     * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
-   
-   * `backup` : Creates a backup of the current patient records.
-    
-   * `find S1234567Z` : Finds the patient that has the NRIC
-   
-   * `find John` : Finds the patient named 'John'
+    * `exit` : Exits the app.
+
+    * `backup` : Creates a backup of the current patient records.
+
+    * `find S1234567Z` : Finds the patient that has the NRIC
+
+    * `find John` : Finds the patient named 'John'
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -129,20 +131,22 @@ Examples:
 
 `find` allows you to find patient records by NRIC or name.
 
-
 #### Finding a single record by its NRIC
+
 Format: `find NRIC`
+
 * The search is case-insensitive. e.g `s1234567z` will match `S1234567Z`
 * The NRIC must start with 'S', 'T', 'F','G' or 'M', have 7 digits, and end with a letter.
-* In a single command, only one record with the given NRIC can be found. e.g. `find S1234567Z T7654321Z` does not work as it 
-attempts to find 2 records containing the given NRICs.
+* In a single command, only one record with the given NRIC can be found. e.g. `find S1234567Z T7654321Z` does not work
+  as it
+  attempts to find 2 records containing the given NRICs.
 * Only full NRICs will be matched e.g. `S12345` will not match `S1234567Z`
 
 Example:
+
 * `find S1234567Z` returns the patient record whose NRIC is `S1234567Z`
 
   ![result for 'find S1234567Z'](./images/findS1234567Zresult.png)
-
 
 #### Finding multiple records by their names
 
@@ -171,7 +175,7 @@ Format: `delete NRIC`
 
 * Deletes the person that has the specified `NRIC`.
 * The NRIC refers to the NRIC shown in the displayed person list.
-* The NRIC **must start with 'S', 'T', 'F','G' or 'M', have 7 digits, and end with a letter.** 
+* The NRIC **must start with 'S', 'T', 'F','G' or 'M', have 7 digits, and end with a letter.**
 
 Examples:
 
@@ -303,14 +307,14 @@ to any desired location if needed.
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 t/Patient`
-**Clear** | `clear`
-**Delete** | `delete NRIC`<br> e.g., `delete S1234567Z`
-**Edit** | `edit INDEX [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
-| **Backup**    | `backup` <br> e.g., `backup` creates a new backup of the patient records. |
+ Action     | Format, Examples                                                                                                                                 
+------------|--------------------------------------------------------------------------------------------------------------------------------------------------
+ **Add**    | `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 t/Patient`                                     
+ **Clear**  | `clear`                                                                                                                                          
+ **Delete** | `delete NRIC`<br> e.g., `delete S1234567Z`                                                                                                       
+ **Edit**   | `edit INDEX [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` 
+ **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                       
+ **List**   | `list`                                                                                                                                           
+ **Help**   | `help`                                                                                                                                           
+| **Backup** | `backup` <br> e.g., `backup` creates a new backup of the patient records.                                                                        |
 
