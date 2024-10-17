@@ -281,6 +281,7 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **After a property is added** it is not instantly reflected on the Ui. It is reflected on the Ui after a delay. To resolve this,can either wait for a bit or scroll the screen up and down or click on the contact you added the property to.
 4. **Bug in edit command**, the edit command overwrites the property list and deletes them when a person is edited/modified.
+5. **Same Property to Sell** can be tagged to various contacts
 
 --------------------------------------------------------------------------------------------------------------------
 
