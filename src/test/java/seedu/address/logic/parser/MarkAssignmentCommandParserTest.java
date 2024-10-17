@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.*;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.MarkAssignmentCommand;
 
 public class MarkAssignmentCommandParserTest {
@@ -49,17 +50,19 @@ public class MarkAssignmentCommandParserTest {
     @Test
     public void parse_duplicatePrefixes_throwsParseException() {
         // Duplicate student prefix
-        String userInput = " " + PREFIX_STUDENT_INDEX + INDEX_FIRST_STUDENT.getOneBased() + " " +
+        String duplicateStudentInput = " " + PREFIX_STUDENT_INDEX + INDEX_FIRST_STUDENT.getOneBased() + " " +
                 PREFIX_STUDENT_INDEX + INDEX_SECOND_STUDENT + " " + PREFIX_ASSIGNMENT_INDEX + INDEX_FIRST_ASSIGNMENT;
-        assertParseFailure(parser, userInput,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAssignmentCommand.MESSAGE_USAGE));
+        Prefix[] duplicatedStudentPrefixes = { PREFIX_STUDENT_INDEX };
+        assertParseFailure(parser, duplicateStudentInput,
+                Messages.getErrorMessageForDuplicatePrefixes(duplicatedStudentPrefixes));
 
         // Duplicate assignment prefix
         String duplicateAssignmentInput = " " + PREFIX_STUDENT_INDEX + INDEX_FIRST_STUDENT.getOneBased() + " " +
                 PREFIX_ASSIGNMENT_INDEX + INDEX_FIRST_ASSIGNMENT + " " +
                 PREFIX_ASSIGNMENT_INDEX + INDEX_SECOND_ASSIGNMENT;
+        Prefix[] duplicatedAssignmentPrefixes = { PREFIX_ASSIGNMENT_INDEX };
         assertParseFailure(parser, duplicateAssignmentInput,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAssignmentCommand.MESSAGE_USAGE));
+                Messages.getErrorMessageForDuplicatePrefixes(duplicatedAssignmentPrefixes));
     }
 
     @Test

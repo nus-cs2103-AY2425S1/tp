@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
-import static seedu.address.logic.parser.ParserUtil.arePrefixesDuplicated;
 import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.address.commons.core.index.Index;
@@ -25,9 +24,6 @@ public class MarkAssignmentCommandParser implements Parser<MarkAssignmentCommand
         ArgumentMultimap argumentMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_INDEX, PREFIX_ASSIGNMENT_INDEX);
         if (!arePrefixesPresent(argumentMultimap, PREFIX_STUDENT_INDEX, PREFIX_ASSIGNMENT_INDEX)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MarkAssignmentCommand.MESSAGE_USAGE));
-        } else if (arePrefixesDuplicated(argumentMultimap, PREFIX_STUDENT_INDEX, PREFIX_ASSIGNMENT_INDEX)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MarkAssignmentCommand.MESSAGE_USAGE));
         }
