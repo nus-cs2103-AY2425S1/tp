@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -72,6 +73,18 @@ public class AddressContainsKeywordsPredicateTest {
         predicate = new AddressContainsKeywordsPredicate(Arrays.asList("Alice", "alice@email.com", "1234"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345678")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
+    }
+
+    @Test
+    public void test_personHasNoAddress_returnsFalse() {
+        AddressContainsKeywordsPredicate predicateWithoutKeywords =
+                new AddressContainsKeywordsPredicate(Collections.emptyList());
+
+        assertFalse(predicateWithoutKeywords.test(new PersonBuilder(ALICE).withAddress().build()));
+
+        AddressContainsKeywordsPredicate predicateWithKeyword =
+                new AddressContainsKeywordsPredicate(Arrays.asList("Blk"));
+        assertFalse(predicateWithKeyword.test(new PersonBuilder(ALICE).withAddress().build()));
     }
 
     @Test

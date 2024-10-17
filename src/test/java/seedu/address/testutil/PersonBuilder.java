@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
@@ -25,8 +26,8 @@ public class PersonBuilder {
 
     private Name name;
     private Phone phone;
-    private Email email;
-    private Address address;
+    private Optional<Email> email;
+    private Optional<Address> address;
     private Set<Tag> tags;
     private DateOfLastVisit dateOfLastVisit;
 
@@ -36,8 +37,8 @@ public class PersonBuilder {
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
+        email = Optional.of(new Email(DEFAULT_EMAIL));
+        address = Optional.of(new Address(DEFAULT_ADDRESS));
         tags = new HashSet<>();
         dateOfLastVisit = new DateOfLastVisit(DEFAULT_DATEOFLASTVISIT);
     }
@@ -74,7 +75,15 @@ public class PersonBuilder {
      * Sets the {@code Address} of the {@code Person} that we are building.
      */
     public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
+        this.address = Optional.of(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Address} of the {@code Person} that we are building to {@code Optional.empty}.
+     */
+    public PersonBuilder withAddress() {
+        this.address = Optional.empty();
         return this;
     }
 
@@ -90,7 +99,15 @@ public class PersonBuilder {
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
+        this.email = Optional.of(new Email(email));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building to {@code Optional.empty}.
+     */
+    public PersonBuilder withEmail() {
+        this.email = Optional.empty();
         return this;
     }
 

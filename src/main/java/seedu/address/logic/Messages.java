@@ -39,18 +39,45 @@ public class Messages {
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
-                .append("; Phone: ")
-                .append(person.getPhone())
-                .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
-        builder.append("; Last visit: ")
-                .append(person.getDateOfLastVisit());
+        addName(builder, person);
+        addPhone(builder, person);
+        addEmail(builder, person);
+        addAddress(builder, person);
+        addTags(builder, person);
+        addDateOfLastVisit(builder, person);
+
         return builder.toString();
+    }
+
+    private static void addName(StringBuilder sb, Person person) {
+        sb.append(person.getName());
+    }
+
+    private static void addPhone(StringBuilder sb, Person person) {
+        sb.append("; Phone: ").append(person.getPhone());
+    }
+
+    private static void addDateOfLastVisit(StringBuilder sb, Person person) {
+        sb.append("; Last visit: ").append(person.getDateOfLastVisit());
+    }
+
+    private static void addEmail(StringBuilder sb, Person person) {
+        if (!person.hasEmail()) {
+            return;
+        }
+        sb.append("; Email: ").append(person.getEmail().get());
+    }
+
+    private static void addAddress(StringBuilder sb, Person person) {
+        if (!person.hasAddress()) {
+            return;
+        }
+        sb.append("; Address: ").append(person.getAddress().get());
+    }
+
+    private static void addTags(StringBuilder sb, Person person) {
+        sb.append("; Tags: ");
+        person.getTags().forEach(sb::append);
     }
 
 }
