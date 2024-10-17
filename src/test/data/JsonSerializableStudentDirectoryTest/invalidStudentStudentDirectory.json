@@ -6,6 +6,7 @@
     "gradeLevel": "ABRSM 1",
     "pianoPieces": [],
     "regularLesson": null,
-    "cancelledLessons": [ ]
+    "cancelledLessons": [ ],
+    "makeupLessons": [ ]
   } ]
 }

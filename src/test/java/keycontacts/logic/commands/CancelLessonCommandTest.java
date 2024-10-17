@@ -75,7 +75,7 @@ public class CancelLessonCommandTest {
 
     @Test
     public void execute_validInputs_success() {
-        Date aliceDate = new Date("14-10-2024");
+        Date aliceDate = new Date("14-10-2024"); // this must be on the same day as Alice's regular lesson
         Time aliceTime = new Time("12:00");
         CancelLessonCommand command = new CancelLessonCommand(INDEX_FIRST_STUDENT, aliceDate, aliceTime);
         Student studentToUpdate = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
@@ -86,7 +86,7 @@ public class CancelLessonCommandTest {
         expectedModel.setStudent(model.getFilteredStudentList().get(0), expectedUpdatedStudent);
 
         CommandResult commandResult = new CommandResult(String.format(CancelLessonCommand.MESSAGE_SUCCESS,
-                aliceDate, aliceTime, Messages.format(expectedUpdatedStudent)));
+                aliceDate.toDisplay(), aliceTime, Messages.format(expectedUpdatedStudent)));
 
         assertCommandSuccess(command, model, commandResult, expectedModel);
     }

@@ -6,7 +6,8 @@
     "gradeLevel": "ABRSM 1",
     "pianoPieces": [],
     "regularLesson": null,
-    "cancelledLessons": [ ]
+    "cancelledLessons": [ ],
+    "makeupLessons": [ ]
   }, {
     "name": "Student With Invalid Phone Field",
     "phone": "948asdf2424",
@@ -14,6 +15,7 @@
     "gradeLevel": "ABRSM 3",
     "pianoPieces": [],
     "regularLesson": null,
-    "cancelledLessons": [ ]
+    "cancelledLessons": [ ],
+    "makeupLessons": [ ]
   } ]
 }

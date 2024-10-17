@@ -14,6 +14,7 @@ public class Date implements Comparable<Date> {
 
     public static final String MESSAGE_CONSTRAINTS = "Date should be in DD-MM-YYYY format";
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public static final DateTimeFormatter DATE_TIME_FORMATTER_DISPLAY = DateTimeFormatter.ofPattern("MMM dd, yyyy");
     public static final String VALIDATION_REGEX = "^(0[1-9]|[12]\\d|3[01])-(0[1-9]|1[0-2])-\\d{4}$";
     private final LocalDate date;
 
@@ -32,13 +33,20 @@ public class Date implements Comparable<Date> {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public LocalDate getLocalDate() {
+    public LocalDate getDate() {
         return date;
     }
 
     @Override
     public String toString() {
         return date.format(DATE_TIME_FORMATTER);
+    }
+
+    /**
+     * Returns the date in a user-friendly display format.
+     */
+    public String toDisplay() {
+        return date.format(DATE_TIME_FORMATTER_DISPLAY);
     }
 
     @Override

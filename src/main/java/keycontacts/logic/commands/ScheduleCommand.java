@@ -36,7 +36,7 @@ public class ScheduleCommand extends Command {
             + PREFIX_START_TIME + "16:00 "
             + PREFIX_END_TIME + "18:00";
 
-    public static final String MESSAGE_SCHEDULE_LESSON_SUCCESS = "Scheduled lesson for student: %1$s";
+    public static final String MESSAGE_SCHEDULE_LESSON_SUCCESS = "Scheduled lesson at %1$s for student: %2$s";
     public static final String MESSAGE_LESSON_UNCHANGED = "Lesson for the student is already at that time!";
     public static final String MESSAGE_LESSON_CLASH = "There is a clashing lesson at that time!";
 
@@ -68,7 +68,8 @@ public class ScheduleCommand extends Command {
         }
         model.setStudent(studentToUpdate, updatedStudent);
 
-        return new CommandResult(String.format(MESSAGE_SCHEDULE_LESSON_SUCCESS, Messages.format(studentToUpdate)));
+        return new CommandResult(String.format(MESSAGE_SCHEDULE_LESSON_SUCCESS, regularLesson.toDisplay(),
+                Messages.format(studentToUpdate)));
     }
 
     @Override
