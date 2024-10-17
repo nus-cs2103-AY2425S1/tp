@@ -21,12 +21,26 @@ public class DeleteCommandParserTest {
     private DeleteCommandParser parser = new DeleteCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
+    public void parse_validIndexArgs_returnsDeleteCommand() {
+        // Test for deletion using a valid index
         assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    public void parse_validNameArgs_returnsDeleteCommand() {
+        // Test for deletion using a valid name
+        assertParseSuccess(parser, "John Doe", new DeleteCommand("John Doe"));
+    }
+
+    @Test
+    public void parse_emptyNameArgs_throwsParseException() {
+        // Test for an empty string (invalid name input)
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_whitespaceNameArgs_throwsParseException() {
+        // Test for whitespace-only string (invalid name input)
+        assertParseFailure(parser, "   ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 }

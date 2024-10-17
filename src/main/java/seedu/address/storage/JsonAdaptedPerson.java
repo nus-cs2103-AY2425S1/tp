@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -28,7 +29,9 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String comment;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final boolean isVip;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,14 +39,25 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("comment") String comment, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("isVip") boolean isVip) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.comment = comment;
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.isVip = isVip;
+    }
+
+    /**
+     * Constructs a {@code JsonAdaptedPerson} with the given person details, treating isVip as false.
+     */
+    public JsonAdaptedPerson(String name, String phone, String email, String address,
+            String comment, List<JsonAdaptedTag> tags) {
+        this(name, phone, email, address, comment, tags, false);
     }
 
     /**
@@ -54,9 +68,11 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        comment = source.getComment().fullComment;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        isVip = source.isVip();
     }
 
     /**
@@ -100,10 +116,14 @@ class JsonAdaptedPerson {
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
+        if (comment == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Comment.class.getSimpleName()));
+        }
         final Address modelAddress = new Address(address);
-
+        final Comment modelComment = new Comment("");
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelComment, modelTags, isVip);
     }
 
 }
