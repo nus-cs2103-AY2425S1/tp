@@ -12,6 +12,7 @@ import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CreatePatientCommand;
 import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -92,6 +93,9 @@ public class AddressBookParser {
 
         case ViewHistoryCommand.COMMAND_WORD:
             return new ViewHistoryCommandParser().parse(arguments);
+
+        case CreatePatientCommand.COMMAND_WORD:
+            return new CreatePatientCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
