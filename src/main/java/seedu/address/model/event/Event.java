@@ -106,9 +106,9 @@ public class Event {
         // Check if the volunteer exists in the list
         if (volunteers.contains(removedVolunteer)) {
             volunteers.remove(removedVolunteer);
-            return true;  // Return true if successfully removed
+            return true;
         } else {
-            return false;  // Return false if the volunteer was not found
+            return false;
         }
     }
 

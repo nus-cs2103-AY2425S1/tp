@@ -1,10 +1,12 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_VOLUNTEER_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_VOLUNTEER_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.UNASSIGN_EVENT_PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.UNASSIGN_VOLUNTEER_PREFIX_NAME;
+
+import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -12,8 +14,10 @@ import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.volunteer.Volunteer;
 
-import java.util.List;
-
+/**
+ * Unassigns a volunteer from an event.
+ * This command unassigns a volunteer from an event in the system using their respective indices.
+ */
 public class UnassignCommand extends Command {
 
     public static final String COMMAND_WORD = "unassign";
@@ -26,10 +30,17 @@ public class UnassignCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + UNASSIGN_VOLUNTEER_PREFIX_NAME + "2 "
             + UNASSIGN_EVENT_PREFIX_NAME + "3 ";
-    // Example usage: unassign v/1 e/1
+    // Example usage: unassign v/1 e/2
+
     private final Index volunteerIndex;
     private final Index eventIndex;
 
+    /**
+     * Creates an UnassignCommand to unassign a volunteer from an event.
+     *
+     * @param volunteerIndex The index of the volunteer in the currently displayed list.
+     * @param eventIndex The index of the event in the currently displayed list.
+     */
     public UnassignCommand(Index volunteerIndex, Index eventIndex) {
         requireAllNonNull(volunteerIndex, eventIndex);
         this.volunteerIndex = volunteerIndex;
