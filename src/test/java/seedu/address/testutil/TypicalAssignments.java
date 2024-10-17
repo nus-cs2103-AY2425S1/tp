@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalProjects.ALPHA;
 import static seedu.address.testutil.TypicalProjects.BETA;
 
@@ -23,6 +24,10 @@ public class TypicalAssignments {
     public static final Assignment BENSON_BETA = new AssignmentBuilder().withAssignmentId("2")
             .withProjectId(BETA.getId().toString())
             .withEmployeeId(BENSON.getEmployeeId().toString()).build();
+    public static final Assignment BOB_BETA = new AssignmentBuilder().withAssignmentId("2")
+            .withProjectId(BETA.getId().toString())
+            .withEmployeeId(BOB.getEmployeeId().toString()).build();
+
 
     private TypicalAssignments() {
     } // prevents instantiation
