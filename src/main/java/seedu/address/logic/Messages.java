@@ -1,10 +1,12 @@
 package seedu.address.logic;
 
+import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.person.Person;
 
 /**
@@ -45,7 +47,22 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        builder.append("; Public Addresses: ");
+        person.getPublicAddresses().forEach(((
+            network, publicAddresses) -> publicAddresses.forEach(address -> {
+                builder.append(network).append(": ").append(address).append("; ");
+            }))
+        );
         return builder.toString();
+    }
+
+    /**
+     * Formats the {@code publicAddresses} for display to the user.
+     */
+    public static String format(Collection<PublicAddress> publicAddresses) {
+        return publicAddresses.stream()
+                .map(PublicAddress::toString)
+                .collect(Collectors.joining("\n"));
     }
 
 }

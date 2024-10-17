@@ -3,12 +3,17 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.addresses.BtcAddress;
+import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -97,6 +102,73 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String publicAddress} into a {@code PublicAddress}.
+     */
+    public static PublicAddress parsePublicAddress(String publicAddress, String paLabel, String network)
+            throws ParseException {
+        requireNonNull(publicAddress);
+        requireNonNull(paLabel);
+
+        String trimmedPublicAddress = publicAddress.trim();
+        if (!PublicAddress.isValidPublicAddress(trimmedPublicAddress)) {
+            throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
+        }
+
+        String trimmedPaLabel = paLabel.trim();
+        if (!PublicAddress.isValidPublicAddressLabel(paLabel)) {
+            throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
+        }
+
+        switch (network) {
+        case "BTC":
+            if (!BtcAddress.isValidPublicAddress(trimmedPublicAddress)) {
+                throw new ParseException(BtcAddress.MESSAGE_CONSTRAINTS);
+            }
+            return new BtcAddress(trimmedPublicAddress, trimmedPaLabel);
+        default:
+            throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses {@code Collection<String> publicAddresses} into a {@code Map<Network, Set<PublicAddress>>}.
+     */
+    public static Map<Network, Set<PublicAddress>> parsePublicAddresses(Collection<String> publicAddresses)
+            throws ParseException {
+        requireNonNull(publicAddresses);
+        Map<Network, Set<PublicAddress>> publicAddressesMap = new HashMap<>();
+        for (String publicAddress : publicAddresses) {
+
+            // TODO: Implement tokenizer in a separate file
+            String delimiter = ">";
+            String trimmedPublicAddress = publicAddress.trim();
+            String[] addressArgs = trimmedPublicAddress.split(delimiter);
+            assert addressArgs.length == 2 : "Public address should have a network and an address";
+
+            if (addressArgs.length != 2) {
+                throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
+            }
+
+            String network = addressArgs[0];
+            String address = addressArgs[1];
+            // TODO: END of tokenizer
+
+            PublicAddress parsedPublicAddress = parsePublicAddress(address, PublicAddress.DEFAULT_LABEL, network);
+
+            Network parsedNetwork = switch(network) { // TODO: Implement more networks
+            case "BTC" -> Network.BTC;
+            default -> throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
+            };
+
+            if (!publicAddressesMap.containsKey(parsedNetwork)) {
+                publicAddressesMap.put(parsedNetwork, new HashSet<>());
+            }
+            publicAddressesMap.get(parsedNetwork).add(parsedPublicAddress);
+        }
+        return publicAddressesMap;
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -122,4 +194,21 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String network} into a {@code Network}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code network} is invalid.
+     */
+    public static Network parseNetwork(String network) throws ParseException {
+        requireNonNull(network);
+        String trimmedNetwork = network.trim();
+        try {
+            return Network.valueOf(trimmedNetwork);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Network.MESSAGE_CONSTRAINTS);
+        }
+    }
+
 }
