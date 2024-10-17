@@ -194,18 +194,30 @@ public class ModelManager implements Model {
         return filteredPets;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Owner} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
     @Override
     public void updateFilteredOwnerList(Predicate<Owner> predicate) {
         requireNonNull(predicate);
         filteredOwners.setPredicate(predicate);
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Pet} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
     @Override
     public void updateFilteredPetList(Predicate<Pet> predicate) {
         requireNonNull(predicate);
