@@ -154,6 +154,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         concertContacts.setConcertContact(target, editedConcertContact);
     }
 
+    /**
+     * Removes {@code key} from this {@code AddressBook}. {@code key} must exist in the address
+     * book.
+     */
+    public void removeConcertContact(ConcertContact key) {
+        concertContacts.remove(key);
+    }
+
     //// person-level operations
 
     /**

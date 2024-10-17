@@ -132,6 +132,16 @@ public class ModelUtil {
         }
 
         @Override
+        public void deleteConcertContact(ConcertContact target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setConcertContact(ConcertContact target, ConcertContact editedConcertContact) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredConcertContactList(Predicate<ConcertContact> concertContact) {
             throw new AssertionError("This method should not be called.");
         }

@@ -85,6 +85,11 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Deletes the given concertContact. The concertContact must exist in the address book.
+     */
+    void deleteConcertContact(ConcertContact target);
+
+    /**
      * Adds the given person. {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
@@ -105,6 +110,13 @@ public interface Model {
      * another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /**
+     * Replaces the given concertContact {@code target} with {@code editedConcertContact}. {@code target} must exist
+     * in the address book. The concertContact identity of {@code editedConcertContact} must not be the same as
+     * another existing concertContact in the address book.
+     */
+    void setConcertContact(ConcertContact target, ConcertContact editedConcertContact);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

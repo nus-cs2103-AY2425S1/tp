@@ -106,26 +106,19 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addConcert(Concert concert) {
-        addressBook.addConcert(concert);
-        updateFilteredConcertList(PREDICATE_SHOW_ALL_CONCERTS);
-    }
-
-    @Override
     public boolean hasConcertContact(ConcertContact concertContact) {
         requireNonNull(concertContact);
         return addressBook.hasConcertContact(concertContact);
     }
 
     @Override
-    public void addConcertContact(ConcertContact concertContact) {
-        addressBook.addConcertContact(concertContact);
-        updateFilteredConcertContactList(PREDICATE_SHOW_ALL_CONCERT_CONTACTS);
+    public void deletePerson(Person target) {
+        addressBook.removePerson(target);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteConcertContact(ConcertContact target) {
+        addressBook.removeConcertContact(target);
     }
 
     @Override
@@ -135,10 +128,29 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addConcert(Concert concert) {
+        addressBook.addConcert(concert);
+        updateFilteredConcertList(PREDICATE_SHOW_ALL_CONCERTS);
+    }
+
+    @Override
+    public void addConcertContact(ConcertContact concertContact) {
+        addressBook.addConcertContact(concertContact);
+        updateFilteredConcertContactList(PREDICATE_SHOW_ALL_CONCERT_CONTACTS);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void setConcertContact(ConcertContact target, ConcertContact editedConcertContact) {
+        requireAllNonNull(target, editedConcertContact);
+
+        addressBook.setConcertContact(target, editedConcertContact);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -194,8 +206,10 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook) && userPrefs.equals(
-                otherModelManager.userPrefs) && filteredPersons.equals(
-                        otherModelManager.filteredPersons);
+        return addressBook.equals(otherModelManager.addressBook)
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredConcerts.equals(otherModelManager.filteredConcerts)
+                && filteredConcertContacts.equals(otherModelManager.filteredConcertContacts);
     }
 }
