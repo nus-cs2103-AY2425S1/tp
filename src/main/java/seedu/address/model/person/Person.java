@@ -3,11 +3,11 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.TreeMap;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.game.Game;
@@ -27,7 +27,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Map<String, Game> games = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    private final Map<String, Game> games = new HashMap<>();
 
     // TODO: update the preferredTime field
     // TODO: update the constructors and some other methods
