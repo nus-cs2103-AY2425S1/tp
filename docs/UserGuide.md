@@ -199,7 +199,33 @@ Format: `priority /id INDEX /level PRIORITY_LEVEL`
 * The priority level **must be a positive integer** and only from **1, 2, 3**
 
 Examples:
-* `priotity /id 1 /level 2` adds priority level `2` to 1st index in person list.
+* `priority /id 1 /level 2` adds priority level `2` to 1st index in person list.
+
+### Deleting priority level : `deletelevel`
+
+Delete a priority level to a person in the address book, resetting it to the default value **3**.
+
+Format: `deletelevel INDEX`
+
+* Delete the current priority level at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `deletelevel 1` deletes priority level of the 1st index in person list.
+
+### Mark Task : `marktask`
+
+Marks a task at a specific index.
+
+Format: `marktask INDEX`
+
+* Marks a task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed Task list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `marktask 1` marks a task of the 1st index in task list.
 
 ### Clearing all entries : `clear`
 
@@ -253,14 +279,16 @@ _Details coming soon ..._
 | Action                | Format, Examples                                                                                                                                                      |
 |-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add Priority**      | `priority /id INDEX /level PRIORITY_LEVEL` <br> e.g., `priority /id 1 /level 2`                                                                                       |
 | **Add Task**          | `addtask INDEX d/TASK_DESCRIPTION` <br> e.g., `addtask 1 d/Eat paracetamol 1000mg`                                                                                    |
 | **Clear**             | `clear`                                                                                                                                                               |
 | **Delete**            | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Delete Priority**   | `deletelevel INDEX` <br> e.g., `deletelevel 1`                                                                                                                        |
 | **Delete Task**       | `deletetask INDEX`<br> e.g., `deletetask 3`                                                                                                                           |
 | **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
 | **Emergency Contact** | `emergency INDEX n/EMERGENCY_CONTACT_NAME p/EMERGENCY_CONTACT_NUMBER`<br> e.g., `emergency 3 n/Tom Tan p/97151717`                                                    |
 | **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
 | **List**              | `list`                                                                                                                                                                |
-| **Priority**          | `priority /id INDEX /level PRIORITY_LEVEL` <br> e.g., `priority /id 1 /level 2`                                                                                       |
+| **Mark Task**         | `marktask INDEX`<br> e.g., `marktask 1`                                                                                                                               |
 | **Help**              | `help`                                                                                                                                                                |
 
