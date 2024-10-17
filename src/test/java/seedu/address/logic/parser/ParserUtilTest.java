@@ -18,6 +18,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TelegramUsername;
 import seedu.address.model.role.Role;
 import seedu.address.model.role.RoleHandler;
 
@@ -26,12 +27,14 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_TELE = "a";
     private static final String INVALID_ROLE = "owner";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_TELE = "rachel";
 
     private static final String VALID_ROLE_1 = "vendor";
     private static final String VALID_ROLE_2 = "sponsor";
@@ -148,6 +151,54 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseTeleOnAdd_nullTelegramUsername() throws ParseException {
+        TelegramUsername expectedTelegramUsername = new TelegramUsername(null);
+        assertEquals(expectedTelegramUsername, ParserUtil.parseTeleOnAdd(null));
+    }
+
+    @Test
+    public void parseTeleOnAdd_invalidTelegramUsername_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTeleOnAdd(INVALID_TELE));
+    }
+
+    @Test
+    public void parseTeleOnAdd_validValueWithWhitespace_returnsTrimmedTele() throws ParseException {
+        String teleWithWhitespace = WHITESPACE + VALID_TELE + WHITESPACE;
+        TelegramUsername expectedTelegramUsername = new TelegramUsername(VALID_TELE);
+        assertEquals(expectedTelegramUsername, ParserUtil.parseTeleOnAdd(teleWithWhitespace));
+    }
+
+    @Test
+    public void parseTeleOnAdd_validValueWithoutWhitespace_returnsTele() throws Exception {
+        TelegramUsername expectedTelegramUsername = new TelegramUsername(VALID_TELE);
+        assertEquals(expectedTelegramUsername, ParserUtil.parseTeleOnAdd(VALID_TELE));
+    }
+
+    @Test
+    public void parseTeleOnEdit_emptyTelegramUsername_removesTele() throws ParseException {
+        TelegramUsername expectedTelegramUsername = new TelegramUsername(null);
+        assertEquals(expectedTelegramUsername, ParserUtil.parseTeleOnEdit(""));
+    }
+
+    @Test
+    public void parseTeleOnEdit_invalidTelegramUsername_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTeleOnEdit(INVALID_TELE));
+    }
+
+    @Test
+    public void parseTeleOnEdit_validValueWithWhitespace_returnsTrimmedTele() throws ParseException {
+        String teleWithWhitespace = WHITESPACE + VALID_TELE + WHITESPACE;
+        TelegramUsername expectedTelegramUsername = new TelegramUsername(VALID_TELE);
+        assertEquals(expectedTelegramUsername, ParserUtil.parseTeleOnEdit(teleWithWhitespace));
+    }
+
+    @Test
+    public void parseTeleOnEdit_validValueWithoutWhitespace_returnsTele() throws Exception {
+        TelegramUsername expectedTelegramUsername = new TelegramUsername(VALID_TELE);
+        assertEquals(expectedTelegramUsername, ParserUtil.parseTeleOnEdit(VALID_TELE));
     }
 
     @Test
