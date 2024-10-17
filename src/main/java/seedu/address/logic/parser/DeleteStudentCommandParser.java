@@ -6,7 +6,10 @@ import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
-public class DeleteStudentCommandParser implements Parser<DeleteStudentCommand>{
+/**
+ * Parses input arguments and creates a new DeleteStudentCommand object
+ */
+public class DeleteStudentCommandParser implements Parser<DeleteStudentCommand> {
     @Override
     public DeleteStudentCommand parse(String userInput) throws ParseException {
         String trimmedArgs = userInput.trim();
