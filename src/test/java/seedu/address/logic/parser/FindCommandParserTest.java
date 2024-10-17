@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.PersonContainsKeywordsPredicate;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
@@ -45,6 +46,18 @@ public class FindCommandParserTest {
     @Test
     public void parse_incompleteArgs_throwsParseException() {
         assertParseFailure(parser, " n/  ", FindCommand.MESSAGE_INCOMPLETE);
+    }
+
+    @Test
+    public void parse_invalidNameWithSpecialCharacter_throwsParseException() {
+        assertParseFailure(parser, " n/jo$n do3", Name.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_validName_returnsFindCommand() {
+        FindCommand expectedFindCommand =
+                new FindCommand(new PersonContainsKeywordsPredicate("john do3", null, null, null, null, null, null));
+        assertParseSuccess(parser, " n/john do3", expectedFindCommand);
     }
 
     @Test
