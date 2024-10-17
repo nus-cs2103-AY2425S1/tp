@@ -42,17 +42,20 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
                         PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_WORKEXP, PREFIX_TAG, PREFIX_INTEREST, PREFIX_UNIVERSITY, PREFIX_MAJOR);
-        
+
+        // Verify no duplicate prefixes for critical fields
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_WORKEXP,
+                PREFIX_UNIVERSITY, PREFIX_MAJOR, PREFIX_INTEREST);
+
+
         // Check if required prefixes are present
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_UNIVERSITY, PREFIX_MAJOR) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
-      
-        // Verify no duplicate prefixes for critical fields
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_WORKEXP, 
-                                                PREFIX_UNIVERSITY, PREFIX_MAJOR, PREFIX_INTEREST);
-      
+
+
+
         // If adding an interest with an index, handle separately
         if (arePrefixesPresent(argMultimap, PREFIX_INTEREST) && !argMultimap.getPreamble().isEmpty()) {
             String[] splitArgs = args.trim().split("\\s+");
@@ -73,6 +76,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             University university = ParserUtil.parseUniversity(argMultimap.getValue(PREFIX_UNIVERSITY).get());
             Major major = ParserUtil.parseMajor(argMultimap.getValue(PREFIX_MAJOR).get());
             Person person = new Person(name, phone, email, address, workExp, tagList, university, major, new Interest(""));
+
             return new AddCommand(person);
         }
     }
