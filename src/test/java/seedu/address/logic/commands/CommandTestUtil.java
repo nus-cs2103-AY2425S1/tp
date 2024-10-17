@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_LIST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPOSIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_KEYWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTHLY_RENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -32,15 +33,17 @@ import seedu.address.testutil.EditRentalDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
-
+    public static final String VALID_NAME_ALICE = "Alice";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_NAME_CHARLIE = "Charlie Diu";
     public static final String VALID_NAME_DENVER = "Denver Eng";
+    public static final String VALID_PHONE_ALICE = "98761111";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_PHONE_CHARLIE = "91231231";
     public static final String VALID_PHONE_DENVER = "";
+    public static final String VALID_EMAIL_ALICE = "alice@example.com";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_EMAIL_CHARLIE = "";
@@ -49,7 +52,9 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_EMPTY_PHONE = "";
     public static final String VALID_EMPTY_EMAIL = "";
-
+    public static final String KEYWORD_NAME_DESC_ALICE = " " + PREFIX_KEYWORD + VALID_NAME_ALICE;
+    public static final String KEYWORD_PHONE_DESC_ALICE = " " + PREFIX_KEYWORD + VALID_PHONE_ALICE;
+    public static final String KEYWORD_EMAIL_DESC_ALICE = " " + PREFIX_KEYWORD + VALID_EMAIL_ALICE;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
 

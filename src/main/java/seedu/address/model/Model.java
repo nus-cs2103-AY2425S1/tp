@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Predicate;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
@@ -102,11 +103,10 @@ public interface Model {
      */
     void updateVisibleRentalInformationList(List<RentalInformation> rentalInformationList);
 
-    /**
-     * Returns the last client viewed by the {@code rview} command, whose list of rental information is currently
-     * displayed in the UI.
-     * Returns {@code null} if no client has been viewed or the last viewed client has been deleted.
-     */
+    /** Returns the last viewed client as ObjectProperty */
+    ObjectProperty<Client> getLastViewedClientAsObjectProperty();
+
+    /** Returns the last viewed client as Client */
     Client getLastViewedClient();
 
     /**
