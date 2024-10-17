@@ -47,7 +47,7 @@ public class Person {
     }
 
     /**
-     * For creating a new person. Every field but contact date must be present and not null.
+     * For creating a new person. Every field but contact record must be present and not null.
      */
     public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
             CallFrequency callFrequency) {
