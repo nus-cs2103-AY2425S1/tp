@@ -24,7 +24,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
                         || StringUtil.containsSubstringIgnoreCase(person.getPhone().value, keyword)
                         || StringUtil.containsSubstringIgnoreCase(person.getEmail().value, keyword)
                         || StringUtil.containsSubstringIgnoreCase(person.getEvents().stream().map(Event::toString)
-                        .reduce("", (x,y) -> x + " " + y), keyword)));
+                        .reduce("", (x, y) -> x + " " + y), keyword)));
     }
 
     @Override

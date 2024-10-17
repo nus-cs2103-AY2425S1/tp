@@ -41,11 +41,10 @@ public class Event {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Event)) {
+        if (!(other instanceof Event otherEvent)) {
             return false;
         }
 
-        Event otherEvent = (Event) other;
         return value.equals(otherEvent.value);
     }
 
