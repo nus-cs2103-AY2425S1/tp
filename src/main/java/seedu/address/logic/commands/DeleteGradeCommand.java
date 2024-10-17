@@ -36,6 +36,8 @@ public class DeleteGradeCommand extends Command {
      * @param testIndex Index of the test whose grade is to be deleted.
      */
     public DeleteGradeCommand(Index index, Index testIndex) {
+        requireNonNull(index);
+        requireNonNull(testIndex);
         this.index = index;
         this.testIndex = testIndex;
     }

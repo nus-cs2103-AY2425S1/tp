@@ -193,4 +193,24 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    void parseFloat_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFloat("Alice"));
+    }
+
+    @Test
+    void parseFloat_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseFloat(null));
+    }
+
+    @Test
+    void parseFloat_validValueWithWhitespace_returnsFloat() throws ParseException {
+        assertEquals(ParserUtil.parseFloat(" 77.5 "), 77.5F);
+    }
+
+    @Test
+    void parseFloat_validValueWithoutWhitespace_returnsFloat() throws ParseException {
+        assertEquals(ParserUtil.parseFloat("77.5"), 77.5F);
+    }
 }
