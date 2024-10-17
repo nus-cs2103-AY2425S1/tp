@@ -508,7 +508,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: UC9 - Find contacts by tag**
 
+**MSS**
+
+1.  User requests to find person with tag
+2.  GOATS outputs list of all contacts with matching tag
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given command is invalid.
+
+    * 1a1. GOATS shows an error message.
+
+      Use case ends.
+
+  1b. User does not enter a tag.
+
+    * 1b1. GOATS shows an error message.
+
+      Use case ends.
+
+* 2a. There is no matching name in list of contacts.
+
+    * 2a1. GOATS shows an empty list.
+
+      Use case ends.
+* 
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -534,7 +562,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Command**: A command is a specific instruction that you give to `GOATS` to perform a certain action, like adding a new participant to the list. Commands will be the primary way that you will interact with `GOATS`.
 * **Parameter**: Parameters are pieces of data that must be passed to certain commands to tell `GOATS` which actions to perform. For example, the done command requires a single integer as a parameter so that it knows which event to mark as done.
 * **Prefix**: Prefixes are unique identifiers in front of parameters so that `GOATS` understands what kind of values they are. For example, the prefix "n/" lets `GOATS` know that a name is expected to follow behind it, while the prefix "d/" lets `GOATS` know that a date is expected.
-* **Guardian**: A person that is responsible for a Student.
+* **Parent**: A person that is responsible for a Student.
 * **Student**: A person studying under `user`
 
 --------------------------------------------------------------------------------------------------------------------
