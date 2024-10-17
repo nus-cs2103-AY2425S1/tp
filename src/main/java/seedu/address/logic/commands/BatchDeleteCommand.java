@@ -19,7 +19,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
  */
 public class BatchDeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete-batch";
+    public static final String COMMAND_WORD = "batch-delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Delete all person with specified tag"
@@ -28,7 +28,7 @@ public class BatchDeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "TAG...";
 
-    public static final String MESSAGE_BATCH_DELETE_EACH_PERSON_SUCCESS = "Deleted: %1$s";
+    public static final String MESSAGE_BATCH_DELETE_EACH_PERSON_SUCCESS = "Deleted: %1$s\n";
 
     private final Set<Tag> tags;
 
@@ -47,17 +47,22 @@ public class BatchDeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredPersonList(predicate);
         List<Person> lastShownList = model.getFilteredPersonList();
 
 
         StringBuilder feedbackToUser = new StringBuilder();
-        for (Person person : lastShownList) {
+
+        Person personToDelete;
+        int size = lastShownList.size();
+        for (int i = 0; i < size; i++) {
+            personToDelete = lastShownList.get(0);
             feedbackToUser.append(String
                     .format(MESSAGE_BATCH_DELETE_EACH_PERSON_SUCCESS,
-                            Messages.format(person))
+                            Messages.format(personToDelete))
             );
-            model.deletePerson(person);
+            model.deletePerson(personToDelete);
         }
 
         return new CommandResult(feedbackToUser.toString());
