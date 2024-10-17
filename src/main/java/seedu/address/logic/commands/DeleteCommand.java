@@ -44,56 +44,117 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        //Want to arrange the indexList as descending order
+        // Sort the indexList in descending order
         indexList.sort(Comparator.comparing(Index::getZeroBased).reversed());
 
         if (!AddressBookParser.getInspect()) {
-            requireNonNull(model);
-            List<Person> lastShownList = model.getFilteredPersonList();
-            List<Person> personToDeleteList = new ArrayList<>();
-
-            boolean duplicate = hasDuplicates(indexList);
-
-            for (Index targetIndex : indexList) {
-                if (targetIndex.getZeroBased() >= lastShownList.size() || duplicate) {
-                    throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-                }
-
-                Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-                personToDeleteList.add(personToDelete);
-                model.deletePerson(personToDelete);
-            }
-            // Create a copy of the personToDeleteList and reverse it
-            List<Person> reversedPersonToDeleteList = new ArrayList<>(personToDeleteList);
-            Collections.reverse(reversedPersonToDeleteList);
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
-                    Messages.formatPersonList(reversedPersonToDeleteList)));
+            return handlePersonDeletion(model);
         } else {
-            requireNonNull(model);
-            Person inspectedPerson = InspectWindow.getInspectedPerson();
-            int deliveryListSize = inspectedPerson.getDeliveryList().size();
-            List<Delivery> deliveryToDeleteList = new ArrayList<>();
-
-            boolean duplicate = hasDuplicates(indexList);
-
-            for (Index targetIndex : indexList) {
-                if (targetIndex.getZeroBased() >= deliveryListSize || duplicate) {
-                    throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
-                }
-
-                Delivery deliveryToDelete = inspectedPerson.getDeliveryList().get(targetIndex.getZeroBased());
-                deliveryToDeleteList.add(deliveryToDelete);
-                inspectedPerson.deleteDelivery(targetIndex);
-            }
-            // Create a copy of the personToDeleteList and reverse it
-            List<Delivery> reversedDeliveryToDeleteList = new ArrayList<>(deliveryToDeleteList);
-            Collections.reverse(reversedDeliveryToDeleteList);
-            return new CommandResult(String.format(
-                    MESSAGE_DELETE_DELIVERY_SUCCESS,
-                    inspectedPerson.getName(),
-                    Messages.formatDeliveryList(reversedDeliveryToDeleteList)),
-                    DeliveryAction.DELETE);
+            return handleDeliveryDeletion(model);
         }
+    }
+
+    /**
+     * Handles the deletion of persons from the model based on the provided indexList.
+     *
+     * @param model The model containing the filtered person list.
+     * @return A CommandResult containing a success message with details of the deleted persons.
+     * @throws CommandException if any index in the indexList is out of bounds or if duplicates are found.
+     */
+    private CommandResult handlePersonDeletion(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+        validateIndexes(lastShownList.size(), indexList);
+
+        List<Person> personToDeleteList = deletePersons(model, lastShownList);
+
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.formatPersonList(reverseList(personToDeleteList))));
+    }
+
+    /**
+     * Handles the deletion of deliveries from the inspected person's delivery list based on the indexList.
+     *
+     * @param model The model containing the inspected person.
+     * @return A CommandResult containing a success message with details of the deleted deliveries.
+     * @throws CommandException if any index in the indexList is out of bounds or if duplicates are found.
+     */
+    private CommandResult handleDeliveryDeletion(Model model) throws CommandException {
+        requireNonNull(model);
+        Person inspectedPerson = InspectWindow.getInspectedPerson();
+        List<Delivery> deliveryList = inspectedPerson.getDeliveryList();
+        validateIndexes(deliveryList.size(), indexList);
+
+        List<Delivery> deliveryToDeleteList = deleteDeliveries(inspectedPerson, deliveryList);
+
+        return new CommandResult(String.format(
+                MESSAGE_DELETE_DELIVERY_SUCCESS,
+                inspectedPerson.getName(),
+                Messages.formatDeliveryList(reverseList(deliveryToDeleteList))),
+                DeliveryAction.DELETE);
+    }
+
+    /**
+     * Validates the indexes in the indexList to ensure none are out of bounds or duplicates.
+     *
+     * @param listSize The size of the list from which items are to be deleted.
+     * @param indexList The list of indexes to be validated.
+     * @throws CommandException if any index is out of bounds or if duplicates are found.
+     */
+    private void validateIndexes(int listSize, List<Index> indexList) throws CommandException {
+        boolean duplicate = hasDuplicates(indexList);
+        for (Index targetIndex : indexList) {
+            if (targetIndex.getZeroBased() >= listSize || duplicate) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+        }
+    }
+
+    /**
+     * Deletes persons from the model based on the provided indexList.
+     *
+     * @param model The model containing the filtered person list.
+     * @param lastShownList The list of persons to delete from.
+     * @return A list of persons that were deleted.
+     */
+    private List<Person> deletePersons(Model model, List<Person> lastShownList) {
+        List<Person> personToDeleteList = new ArrayList<>();
+        for (Index targetIndex : indexList) {
+            Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+            personToDeleteList.add(personToDelete);
+            model.deletePerson(personToDelete);
+        }
+        return personToDeleteList;
+    }
+
+    /**
+     * Deletes deliveries from the inspected person's delivery list based on the provided indexList.
+     *
+     * @param inspectedPerson The person whose deliveries are to be deleted.
+     * @param deliveryList The list of deliveries to delete from.
+     * @return A list of deliveries that were deleted.
+     */
+    private List<Delivery> deleteDeliveries(Person inspectedPerson, List<Delivery> deliveryList) {
+        List<Delivery> deliveryToDeleteList = new ArrayList<>();
+        for (Index targetIndex : indexList) {
+            Delivery deliveryToDelete = deliveryList.get(targetIndex.getZeroBased());
+            deliveryToDeleteList.add(deliveryToDelete);
+            inspectedPerson.deleteDelivery(targetIndex);
+        }
+        return deliveryToDeleteList;
+    }
+
+    /**
+     * Reverses the order of the provided list.
+     *
+     * @param <T> The type of the elements in the list.
+     * @param list The list to be reversed.
+     * @return A reversed copy of the provided list.
+     */
+    private <T> List<T> reverseList(List<T> list) {
+        List<T> reversedList = new ArrayList<>(list);
+        Collections.reverse(reversedList);
+        return reversedList;
     }
 
     /**

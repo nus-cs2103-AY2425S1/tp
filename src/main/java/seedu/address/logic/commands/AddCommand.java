@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ETA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.logging.Logger;
@@ -49,12 +50,14 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_ETA + "ETA "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_COST + "COST\n"
+            + PREFIX_COST + "COST "
+            + PREFIX_STATUS + "STATUS\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Monitor "
             + PREFIX_ETA + "2020-02-02 "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25, S120300 "
-            + PREFIX_COST + "$100 ";
+            + PREFIX_COST + "$100 "
+            + PREFIX_STATUS + "not delivered ";
 
     public static final String MESSAGE_SUCCESS_PERSON = "New person added: %1$s";
     public static final String MESSAGE_SUCCESS_DELIVERY = "New delivery added to: ";
