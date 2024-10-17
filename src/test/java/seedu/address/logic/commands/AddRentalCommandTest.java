@@ -188,6 +188,16 @@ public class AddRentalCommandTest {
         public void updateVisibleRentalInformationList(List<RentalInformation> rentalInformationList) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Client getLastViewedClient() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLastViewedClient(Client client) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -196,6 +206,7 @@ public class AddRentalCommandTest {
     private class ModelStubAcceptingRentalInformationAdded extends ModelStub {
         final ArrayList<Client> originalList = new ArrayList<>(List.of(new PersonBuilder().build()));
         final FilteredList<Client> filteredList = new FilteredList<>(FXCollections.observableList(originalList));
+        private Client lastViewedClient = null;
 
         @Override
         public boolean hasPerson(Client client) {
@@ -238,6 +249,16 @@ public class AddRentalCommandTest {
         @Override
         public void updateFilteredPersonList(Predicate<Client> predicate) {
             filteredList.setPredicate(predicate);
+        }
+
+        @Override
+        public Client getLastViewedClient() {
+            return lastViewedClient;
+        }
+
+        @Override
+        public void setLastViewedClient(Client client) {
+            lastViewedClient = client;
         }
     }
 
