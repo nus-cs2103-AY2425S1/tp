@@ -23,19 +23,19 @@ public class HelpCommandTest {
         assertCommandSuccess(new HelpCommand(AddCommand.MESSAGE_USAGE),
                 model, expectedCommandResultAdd, expectedModel);
 
-        CommandResult expectedCommandResultClear = new CommandResult(AddCommand.MESSAGE_USAGE,
+        CommandResult expectedCommandResultClear = new CommandResult(ClearCommand.MESSAGE_USAGE,
                 false, false);
-        assertCommandSuccess(new HelpCommand(AddCommand.MESSAGE_USAGE),
+        assertCommandSuccess(new HelpCommand(ClearCommand.MESSAGE_USAGE),
                 model, expectedCommandResultClear, expectedModel);
 
-        CommandResult expectedCommandResultDelete = new CommandResult(AddCommand.MESSAGE_USAGE,
+        CommandResult expectedCommandResultDelete = new CommandResult(DeleteCommand.MESSAGE_USAGE,
                 false, false);
-        assertCommandSuccess(new HelpCommand(AddCommand.MESSAGE_USAGE),
+        assertCommandSuccess(new HelpCommand(DeleteCommand.MESSAGE_USAGE),
                 model, expectedCommandResultDelete, expectedModel);
 
-        CommandResult expectedCommandResultEdit = new CommandResult(AddCommand.MESSAGE_USAGE,
+        CommandResult expectedCommandResultEdit = new CommandResult(EditCommand.MESSAGE_USAGE,
                 false, false);
-        assertCommandSuccess(new HelpCommand(AddCommand.MESSAGE_USAGE),
+        assertCommandSuccess(new HelpCommand(EditCommand.MESSAGE_USAGE),
                 model, expectedCommandResultEdit, expectedModel);
     }
 
