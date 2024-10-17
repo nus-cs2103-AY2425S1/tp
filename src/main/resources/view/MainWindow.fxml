@@ -12,7 +12,7 @@
 <?import javafx.stage.Stage?>
 
 <?import javafx.scene.layout.HBox?>
-<fx:root minHeight="600" minWidth="800" onCloseRequest="#handleExit" title="Address App" type="javafx.stage.Stage"
+<fx:root minHeight="600" minWidth="800" onCloseRequest="#handleExit" title="Tutorease" type="javafx.stage.Stage"
          xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/address_book_32.png"/>
