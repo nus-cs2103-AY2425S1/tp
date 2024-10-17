@@ -39,6 +39,7 @@ import seedu.address.model.person.Subject;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD_RANDOM_CASE = "EdiT";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
@@ -50,9 +51,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_SCHEDULE + "SCHEDULE] "
             + "[" + PREFIX_SUBJECT + "SUBJECT] "
-            + "[" + PREFIX_RATE + "FEE] "
+            + "[" + PREFIX_RATE + "RATE] "
             + "[" + PREFIX_PAID + "PAID] "
-            + "[" + PREFIX_OWED_AMOUNT + "OWED] "
+            + "[" + PREFIX_OWED_AMOUNT + "OWED] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
@@ -64,6 +65,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -98,7 +100,17 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        long clashes = model.checkClashes(editedPerson);
+        List<Person> clashingPersons = model.getClashingPersons(editedPerson);
+        if (clashes == 0) {
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        } else {
+            return new CommandResult(
+                    String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson))
+                    + Messages.getWarningMessageForClashes(clashes, clashingPersons)
+            );
+        }
+
     }
 
     /**

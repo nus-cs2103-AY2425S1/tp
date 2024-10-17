@@ -21,6 +21,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.IncomeCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -41,15 +42,35 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_addRandomCase() throws Exception {
+        Person person = new PersonBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommandRandomCase(person));
+        assertEquals(new AddCommand(person), command);
+    }
+
+    @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
     @Test
+    public void parseCommand_clearRandomCase() throws Exception {
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD_RANDOM_CASE) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD_RANDOM_CASE + " 3") instanceof ClearCommand);
+    }
+
+    @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_deleteRandomCase() throws Exception {
+        DeleteCommand command = (DeleteCommand) parser.parseCommand(
+                DeleteCommand.COMMAND_WORD_RANDOM_CASE + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
 
@@ -63,9 +84,24 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_editRandomCase() throws Exception {
+        Person person = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD_RANDOM_CASE + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+    }
+
+    @Test
+    public void parseCommand_exitRandomCase() throws Exception {
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD_RANDOM_CASE) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD_RANDOM_CASE + " 3") instanceof ExitCommand);
     }
 
     @Test
@@ -77,15 +113,48 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_findRandomCase() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindCommand command = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD_RANDOM_CASE + " "
+                        + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
     }
 
     @Test
+    public void parseCommand_helpRandomCase() throws Exception {
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD_RANDOM_CASE) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD_RANDOM_CASE + " 3") instanceof HelpCommand);
+    }
+
+    @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_listRandomCase() throws Exception {
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD_RANDOM_CASE) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD_RANDOM_CASE + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_income() throws Exception {
+        assertTrue(parser.parseCommand(IncomeCommand.COMMAND_WORD) instanceof IncomeCommand);
+        assertTrue(parser.parseCommand(IncomeCommand.COMMAND_WORD + " 3") instanceof IncomeCommand);
+    }
+
+    @Test
+    public void parseCommand_incomeRandomCase() throws Exception {
+        assertTrue(parser.parseCommand(IncomeCommand.COMMAND_WORD_RANDOM_CASE) instanceof IncomeCommand);
+        assertTrue(parser.parseCommand(IncomeCommand.COMMAND_WORD_RANDOM_CASE + " 3") instanceof IncomeCommand);
     }
 
     @Test

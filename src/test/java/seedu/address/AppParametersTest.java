@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashMap;
@@ -68,6 +69,20 @@ public class AppParametersTest {
         assertFalse(appParameters.equals(otherAppParameters));
     }
 
+    @Test
+    public void hashCodeTest() {
+        // same values -> returns same hashcode
+        AppParameters appParameters = new AppParameters();
+        AppParameters sameAppParameters = new AppParameters();
+
+        Path configPath = Paths.get("config.json");
+
+        appParameters.setConfigPath(configPath);
+        sameAppParameters.setConfigPath(configPath);
+
+        assertEquals(appParameters.hashCode(), sameAppParameters.hashCode());
+    }
+
     private static class ParametersStub extends Application.Parameters {
         private Map<String, String> namedParameters = new HashMap<>();
 
@@ -86,4 +101,6 @@ public class AppParametersTest {
             return Collections.unmodifiableMap(namedParameters);
         }
     }
+
+
 }

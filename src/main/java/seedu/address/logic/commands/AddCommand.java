@@ -11,6 +11,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
+import java.util.List;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -23,6 +25,7 @@ import seedu.address.model.person.Person;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD_RANDOM_CASE = "AdD";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
@@ -32,9 +35,9 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_SCHEDULE + "SCHEDULE "
             + PREFIX_SUBJECT + "SUBJECT "
-            + PREFIX_RATE + "FEE "
+            + PREFIX_RATE + "RATE "
             + "[" + PREFIX_PAID + "PAID] "
-            + "[" + PREFIX_OWED_AMOUNT + "OWED] "
+            + "[" + PREFIX_OWED_AMOUNT + "OWED] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -68,7 +71,18 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+
+        long clashes = model.checkClashes(toAdd);
+        List<Person> clashingPersons = model.getClashingPersons(toAdd);
+        if (clashes == 0) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        } else {
+            return new CommandResult(
+                    String.format(MESSAGE_SUCCESS, Messages.format(toAdd))
+                    + Messages.getWarningMessageForClashes(clashes, clashingPersons)
+            );
+        }
+
     }
 
     @Override
