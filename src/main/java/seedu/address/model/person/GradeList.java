@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -18,7 +19,11 @@ public class GradeList {
      * Constructs an empty {@code GradeList}.
      */
     public GradeList() {
-        grades = new ArrayList<>();
+        grades = Collections.unmodifiableList(new ArrayList<>());
+    }
+
+    public GradeList(List<Grade> grades) {
+        this.grades = Collections.unmodifiableList(grades);
     }
 
     /**
@@ -27,10 +32,16 @@ public class GradeList {
      *
      * @param grade The grade to be recorded.
      */
-    public void addGrade(Grade grade) {
+    public GradeList addGrade(Grade grade) {
         requireNonNull(grade, "Grade cannot be null");
-        removeGrade(grade.getTestName()); // Remove any existing grade for the test (to allow updating)
-        grades.add(grade);
+
+        GradeList removedGradeList = removeGrade(grade.getTestName());
+
+        List<Grade> removedGrades = new ArrayList<>(removedGradeList.getList());
+
+        removedGrades.add(grade);
+
+        return new GradeList(removedGrades);
     }
 
     /**
@@ -55,9 +66,11 @@ public class GradeList {
      *
      * @param testName The name of the test for which the grade should be removed.
      */
-    public void removeGrade(String testName) {
+    public GradeList removeGrade(String testName) {
         requireNonNull(testName);
-        grades.removeIf(grade -> grade.getTestName().equalsIgnoreCase(testName));
+        List<Grade> newList = new ArrayList<>(grades);
+        newList.removeIf(grade -> grade.getTestName().equalsIgnoreCase(testName));
+        return new GradeList(newList);
     }
 
     /**
@@ -90,7 +103,7 @@ public class GradeList {
         float totalScore = 0;
         float totalWeightage = 0;
 
-        for (Grade g: grades) {
+        for (Grade g : grades) {
             float currentWeightage = g.getWeightage();
             totalWeightage += currentWeightage / 100;
             totalScore += g.getScore() * currentWeightage / 100;
