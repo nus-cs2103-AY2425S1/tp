@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.sellsavvy.logic.commands.generalcommands.ClearCommand;
 import seedu.sellsavvy.logic.commands.generalcommands.ExitCommand;
 import seedu.sellsavvy.logic.commands.generalcommands.HelpCommand;
+import seedu.sellsavvy.logic.commands.ordercommands.AddOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.ListOrderCommand;
 import seedu.sellsavvy.logic.commands.personcommands.AddPersonCommand;
 import seedu.sellsavvy.logic.commands.personcommands.DeletePersonCommand;
@@ -24,11 +25,15 @@ import seedu.sellsavvy.logic.commands.personcommands.EditPersonCommand.EditPerso
 import seedu.sellsavvy.logic.commands.personcommands.FindPersonCommand;
 import seedu.sellsavvy.logic.commands.personcommands.ListPersonCommand;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
+import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.person.NameContainsKeywordsPredicate;
 import seedu.sellsavvy.model.person.Person;
 import seedu.sellsavvy.testutil.EditPersonDescriptorBuilder;
+import seedu.sellsavvy.testutil.OrderBuilder;
+import seedu.sellsavvy.testutil.OrderUtil;
 import seedu.sellsavvy.testutil.PersonBuilder;
 import seedu.sellsavvy.testutil.PersonUtil;
+
 
 public class AddressBookParserTest {
 
@@ -87,6 +92,14 @@ public class AddressBookParserTest {
     public void parseCommand_listPerson() throws Exception {
         assertTrue(parser.parseCommand(ListPersonCommand.COMMAND_WORD) instanceof ListPersonCommand);
         assertTrue(parser.parseCommand(ListPersonCommand.COMMAND_WORD + " 3") instanceof ListPersonCommand);
+    }
+
+    @Test
+    public void parseCommand_addOrder() throws Exception {
+        Order order = new OrderBuilder().build();
+        String commandString = OrderUtil.getAddOrderCommand(INDEX_FIRST_PERSON, order);
+        AddOrderCommand command = (AddOrderCommand) parser.parseCommand(commandString);
+        assertEquals(new AddOrderCommand(INDEX_FIRST_PERSON, order), command);
     }
 
     @Test
