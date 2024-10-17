@@ -114,4 +114,18 @@ public interface Model {
      */
     void updateFilteredEventList(Predicate<Event> predicate);
 
+    /**
+     * Retrieves a volunteer by their unique ID.
+     * @param volunteerId The ID of the volunteer to retrieve.
+     * @return The volunteer with the matching ID, or null if not found.
+     */
+    Volunteer getVolunteer(int volunteerId);
+
+    /**
+     * Retrieves an event by its unique ID.
+     * @param eventId The ID of the event to retrieve.
+     * @return The event with the matching ID, or null if not found.
+     */
+    Event getEvent(int eventId);
+
 }
