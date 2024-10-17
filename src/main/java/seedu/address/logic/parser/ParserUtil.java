@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -110,6 +111,31 @@ public class ParserUtil {
         }
         return time;
     }
+
+    /**
+     * Parses a {@code String date} into a {@code LocalDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid or not in the expected format.
+     */
+    public static LocalDate parseDayDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        LocalDate parsedDate;
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try {
+            parsedDate = LocalDate.parse(trimmedDate, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid date format, please use yyyy-MM-dd.");
+        }
+
+        if (currentDate.isAfter(parsedDate)) {
+            throw new ParseException("Invalid date entered. The date can't be in the past!");
+        }
+        return parsedDate;
+    }
+
 
     /**
      * Parses a {@code String phone} into a {@code Phone}.
