@@ -163,12 +163,4 @@ public class ParserUtil {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
-
-    /**
-     * Returns true if any of the prefixes contains duplicate values in the given
-     * {@code ArgumentMultimap}.
-     */
-    public static boolean arePrefixesDuplicated(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getAllValues(prefix).size() > 1);
-    }
 }
