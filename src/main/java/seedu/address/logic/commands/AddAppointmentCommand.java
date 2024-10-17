@@ -69,6 +69,7 @@ public class AddAppointmentCommand extends Command {
         if (!isPatientFree) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
         }
+
         return new CommandResult(MESSAGE_ADD_APPOINTMENT_SUCCESS);
     }
 }
