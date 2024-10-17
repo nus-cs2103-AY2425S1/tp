@@ -27,7 +27,7 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private Map<Network, Set<PublicAddress>> publicAddresses = new HashMap<>();
+    private Map<Network, Set<PublicAddress>> publicAddresses;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -40,6 +40,7 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.publicAddresses = new HashMap<>(publicAddresses);
         publicAddresses.forEach((network, addresses) -> this.publicAddresses.put(network, new HashSet<>(addresses)));
         this.tags.addAll(tags);
     }
@@ -61,9 +62,22 @@ public class Person {
     }
 
     public Set<PublicAddress> getPublicAddressesByNetwork(Network network) {
-        return publicAddresses.getOrDefault(network, new HashSet<>());
+        return Collections.unmodifiableSet(publicAddresses.getOrDefault(network, new HashSet<>()));
     }
 
+    public void setPublicAddressesByNetwork(Network network, HashSet<PublicAddress> addresses) {
+        if (publicAddresses.containsKey(network)) {
+            this.publicAddresses.put(network, new HashSet<>(addresses));
+        }
+    }
+
+
+    /**
+     * Gets the current Public address map
+     * Should be replaced with a better method in the future
+     *
+     * @return publicAddresses
+     */
     public Map<Network, Set<PublicAddress>> getPublicAddresses() {
         return Collections.unmodifiableMap(publicAddresses);
     }

@@ -136,7 +136,7 @@ public class ParserUtil {
     public static Map<Network, Set<PublicAddress>> parsePublicAddresses(Collection<String> publicAddresses)
             throws ParseException {
         requireNonNull(publicAddresses);
-        final Map<Network, Set<PublicAddress>> publicAddressesMap = new HashMap<>();
+        Map<Network, Set<PublicAddress>> publicAddressesMap = new HashMap<>();
         for (String publicAddress : publicAddresses) {
 
             // TODO: Implement tokenizer in a separate file
@@ -144,6 +144,10 @@ public class ParserUtil {
             String trimmedPublicAddress = publicAddress.trim();
             String[] addressArgs = trimmedPublicAddress.split(delimiter);
             assert addressArgs.length == 2 : "Public address should have a network and an address";
+
+            if (addressArgs.length != 2) {
+                throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
+            }
 
             String network = addressArgs[0];
             String address = addressArgs[1];
@@ -190,4 +194,21 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String network} into a {@code Network}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code network} is invalid.
+     */
+    public static Network parseNetwork(String network) throws ParseException {
+        requireNonNull(network);
+        String trimmedNetwork = network.trim();
+        try {
+            return Network.valueOf(trimmedNetwork);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
+    }
+
 }
