@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 
 import java.time.LocalDateTime;
 
@@ -23,7 +25,7 @@ public class ViewHistoryCommand extends Command {
             + "by the patient ID. "
             + "Parameters: PATIENT_ID (must be a valid ID) "
             + "LOCAL_DATETIME \n"
-            + "Example: " + COMMAND_WORD + " P1234567A 2023-09-25T10:15";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "01" + PREFIX_DATE + "2023-09-25 10:15";
 
     public static final String MESSAGE_VIEW_HISTORY_SUCCESS = "Viewed history for Patient: %1$s on %2$s";
     public static final String MESSAGE_NO_HISTORY_FOUND = "No history found for Patient: %1$s on %2$s";

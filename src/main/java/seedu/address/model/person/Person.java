@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
@@ -87,6 +88,15 @@ public class Person implements Appointmentable {
             return appointment.toString(); // Assuming the Appointment class has a toString() method for formatting
         } catch (AppNotFoundException e) {
             return "No appointment found for the given date, patient, and doctor.";
+        }
+    }
+
+    public String getOneDayDoctorAppointment(LocalDate date, Id doctorId) {
+        try {
+            String appointments = history.getDoctorAppointmentsForDay(date, doctorId);
+            return appointments; // Assuming the Appointment class has a toString() method for formatting
+        } catch (AppNotFoundException e) {
+            return "No appointment found for the given date and doctor.";
         }
     }
 
