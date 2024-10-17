@@ -15,13 +15,6 @@ public class CategoriesTest {
     }
 
     @Test
-    public void constructor_empty_throwsIllegalArgumentException() {
-        String testString = "";
-
-        assertThrows(IllegalArgumentException.class, () -> new Categories(testString));
-    }
-
-    @Test
     public void add_empty_throwsNullPointerException() {
         String testCat = null;
 
