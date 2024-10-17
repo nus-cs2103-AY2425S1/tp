@@ -7,6 +7,8 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Person;
 
+import java.util.Comparator;
+
 /**
  * A Detail Panel that displays individual person details in the UI.
  * This class is responsible for handling the display of personal information such as name, email, phone number, etc.
@@ -41,7 +43,11 @@ public class DetailPanel extends UiPart<Region> implements SelectionListener {
     @FXML
     private Label major;
     @FXML
-    private FlowPane tags;
+    private Label tagStart;
+    @FXML
+    private FlowPane tagDetails;
+    @FXML
+    private Label meetings;
 
     // add meetings later
 
@@ -70,6 +76,14 @@ public class DetailPanel extends UiPart<Region> implements SelectionListener {
         email.setText("Email\t: " + person.getEmail().value);
         role.setText("Role\t\t: " + person.getRole());
         major.setText("Major\t: " + getMajorFullName(person.getMajor()));
+        tagStart.setText("Tags\t\t: ");
+        tagDetails.getChildren().clear(); // necessary to clear existing tags, cus flowpane keeps memory
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tagDetails.getChildren().add(new Label(tag.tagName)));
+
+        meetings.setText("Meetings\t:\n" + "(coming in v1.4)");
+        // when it's ready, put person.getMeetings()
     }
 
     /**

@@ -1,7 +1,3 @@
-.background {
-    -fx-background-color: derive(#47382f, 20%);
-    background-color: #47382f; /* Used in the default.html file */
-}
 
 .label {
     -fx-font-size: 11pt;
@@ -36,31 +32,6 @@
     -fx-max-height: 0;
 }
 
-.table-view {
-    -fx-base: #47382f;
-    -fx-control-inner-background: #47382f;
-    -fx-background-color: #47382f;
-    -fx-table-cell-border-color: transparent;
-    -fx-table-header-border-color: transparent;
-    -fx-padding: 5;
-}
-
-.table-view .column-header-background {
-    -fx-background-color: transparent;
-}
-
-.table-view .column-header, .table-view .filler {
-    -fx-size: 35;
-    -fx-border-width: 0 0 1 0;
-    -fx-background-color: transparent;
-    -fx-border-color:
-        transparent
-        transparent
-        derive(-fx-base, 80%)
-        transparent;
-    -fx-border-insets: 0 10 1 0;
-}
-
 .table-view .column-header .label {
     -fx-font-size: 20pt;
     -fx-font-family: "Segoe UI Light";
@@ -72,27 +43,33 @@
     -fx-background-color: -fx-focus-color;
 }
 
-.split-pane:horizontal .split-pane-divider {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    -fx-border-color: transparent transparent transparent #47382f;
-}
+/*.split-pane:horizontal .split-pane-divider {*/
+/*    -fx-background-color: derive(#1d1d1d, 20%);*/
+/*    -fx-border-color: transparent transparent transparent #eae5e2;*/
+/*}*/
 
-.split-pane {
-    -fx-border-radius: 1;
-    -fx-border-width: 1;
-    -fx-background-color: derive(#47382f, 20%);
-}
+/*.split-pane {*/
+/*    -fx-border-radius: 1;*/
+/*    -fx-border-width: 1;*/
+/*    -fx-background-color: #eae5e2;*/
+/*}*/
 
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
+    -fx-border-width: 0;
+    -fx-background-color: #935f43; /* This must be the same as A */
+}
+
+.list-cell:empty {
+    -fx-background-color: #935f43; /* A */
+    -fx-border-width: 0;
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
-    -fx-background-color: #935f43;
     -fx-border-width: 0 0 0 0;
 }
 
@@ -101,22 +78,17 @@
 }
 
 .list-cell:filled {
-
+    -fx-background-color: #6c4835;
     -fx-border-color: #b39c85;
     -fx-border-width: 0 0 1px 0;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #c6876f;
-}
-
-.list-cell:filled:selected #cardPane {
-    -fx-border-color: black;
-    -fx-border-width: 0;
+    -fx-background-color: #5c4536;
 }
 
 .list-cell .label {
-    -fx-text-fill: white;
+    -fx-text-fill: white; /* changes all label colors in the personCard */
 }
 
 .cell_big_label {
@@ -146,18 +118,18 @@
     -fx-padding: 1 2 0 2;
 }
 
-.stack-pane {
-     -fx-background-color: derive(#47382f, 20%);
-}
+/*.stack-pane {*/
+/*     -fx-background-color: red;*/
+/*}*/
 
 .pane-with-border {
-    -fx-background-color: derive(#47382f, 20%);
-    -fx-border-color: derive(#47382f, 10%);
-    -fx-border-top-width: 1px;
+    -fx-background-color: #42352c;
+    -fx-border-color: transparent; /* color of the lines between each panel */
+    -fx-border-width: 0.5;
 }
 
 .status-bar {
-    -fx-background-color: derive(#47382f, 30%);
+    -fx-background-color: #42352c;
 }
 
 .result-display {
@@ -174,48 +146,39 @@
     -fx-pref-height: 30px;
 }
 
-.status-bar-with-border {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 25%);
-    -fx-border-width: 1px;
-}
-
-.status-bar-with-border .label {
-    -fx-text-fill: white;
-}
 
 .grid-pane {
-    -fx-background-color: derive(#47382f, 30%);
-    -fx-border-color: derive(#47382f, 30%);
+    -fx-background-color: #42352c;
+    -fx-border-color: #42352c;
     -fx-border-width: 1px;
 }
 
 .grid-pane .stack-pane {
-    -fx-background-color: derive(#47382f, 30%);
+    -fx-background-color: #42352c;
 }
 
 .context-menu {
-    -fx-background-color: derive(#47382f, 50%);
+    -fx-background-color: #42352c;
 }
 
 .menu-bar {
-    -fx-background-color: derive(#47382f, 20%);
+    -fx-background-color: #42352c;
 }
 
 .menu-bar .menu:hover {
-    -fx-background-color: derive(#47382f, 30%);
+    -fx-background-color: #42352c;
 }
 
 .menu-bar .menu-item {
-    -fx-background-color: derive(#47382f, 30%);
+    -fx-background-color: #42352c;
 }
 
 .menu-bar .menu-item:hover {
-    -fx-background-color: derive(#47382f, 30%);
+    -fx-background-color: #42352c;
 }
 
 .menu-bar .menu .menu-item:hover {
-    -fx-background-color: derive(#47382f, 30%);
+    -fx-background-color: #42352c;
 }
 
 /*.menu-bar .menu:focused .menu-item:focused,*/
@@ -231,7 +194,7 @@
 }
 
 .menu .left-container {
-    -fx-background-color: #47382f;
+    -fx-background-color: #42352c;
 }
 
 /*
@@ -252,7 +215,7 @@
 }
 
 .button:hover {
-    -fx-background-color: #47382f;
+    -fx-background-color: #42352c;
 }
 
 .button:pressed, .button:default:hover:pressed {
@@ -280,15 +243,15 @@
 }
 
 .button:default:hover {
-    -fx-background-color: derive(#47382f, 30%);
+    -fx-background-color: #42352c;
 }
 
 .dialog-pane {
-    -fx-background-color: #47382f;
+    -fx-background-color: #42352c;
 }
 
 .dialog-pane > *.button-bar > *.container {
-    -fx-background-color: #47382f;
+    -fx-background-color: #42352c;
 }
 
 .dialog-pane > *.label.content {
@@ -297,16 +260,16 @@
     -fx-text-fill: white;
 }
 
-.dialog-pane:header *.header-panel {
-    -fx-background-color: derive(#1d1d1d, 25%);
-}
+/*.dialog-pane:header *.header-panel {*/
+/*    -fx-background-color: derive(#1d1d1d, 25%);*/
+/*}*/
 
-.dialog-pane:header *.header-panel *.label {
-    -fx-font-size: 18px;
-    -fx-font-style: italic;
-    -fx-fill: white;
-    -fx-text-fill: white;
-}
+/*.dialog-pane:header *.header-panel *.label {*/
+/*    -fx-font-size: 18px;*/
+/*    -fx-font-style: italic;*/
+/*    -fx-fill: white;*/
+/*    -fx-text-fill: white;*/
+/*}*/
 
 .scroll-bar {
     -fx-background-color: derive(#1d1d1d, 20%);
@@ -347,13 +310,20 @@
 #commandTextField {
     -fx-background-color: white;
     -fx-background-insets: 0;
-    -fx-border-color: #47382f #47382f #ffffff #47382f;
+    -fx-border-color: #42352c #42352c #ffffff #42352c;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-border-radius: 1;
     -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 13pt;
+    /*-fx-font-size: 50pt;*/
     -fx-text-fill: black;
+}
+
+#commandTextArea {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-border-color: #42352c #42352c #ffffff #42352c;
+    -fx-font-size: 11pt;
 }
 
 #detailPanel {
@@ -376,7 +346,7 @@
     -fx-background-color: transparent; /* Optional: makes the scrollbar background transparent */
 }
 .scroll-bar:vertical .thumb {
-    -fx-background-color: brown; /* Sets the vertical scrollbar thumb to brown */
+    -fx-background-color: #9a6447; /* Sets the vertical scrollbar thumb to brown */
 }
 
 #tags {
@@ -387,7 +357,22 @@
 
 #tags .label {
     -fx-text-fill: white;
-    -fx-background-color: #47382f;
+    -fx-background-color: #42352c;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-font-size: 11;
+}
+
+#tagDetails {
+    -fx-padding: 0 0 0 0;
+    -fx-hgap: 2;
+    -fx-vgap: 3;
+}
+
+#tagDetails .label {
+    -fx-text-fill: white;
+    -fx-background-color: #42352c;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 3;
     -fx-background-radius: 3;

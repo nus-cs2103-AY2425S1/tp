@@ -15,7 +15,12 @@
         <Label fx:id="email" />
         <Label fx:id="role" />
         <Label fx:id="major" />
-        <FlowPane fx:id="tags" />
+        <HBox alignment="CENTER_LEFT" >
+            <Label fx:id="tagStart" minWidth="73" />
+            <!-- MUST KEEP minWidth ABOVE TO 73 -->
+            <FlowPane fx:id="tagDetails" />
+        </HBox>
+        <Label fx:id="meetings" wrapText="true"/>
     </VBox>
 
 </StackPane>
