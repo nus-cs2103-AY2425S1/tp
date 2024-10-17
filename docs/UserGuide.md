@@ -125,16 +125,19 @@ Finds persons whose attributes contain any of the given keywords.
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
+* Keywords are matched against Name, Phone, Address, Email, Birthday, Tag
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched. 
-* Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Partial matches of a keyword will also be returned. e.g. ``9123`` will return person
+with the phone number ``91234567`` 
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find serangoon` returns ``Bernice Yu``, ``David Li``
+![result for 'find serangoon'](images/findSerangoonResult.png)
 
 ### Deleting a person : `delete`
 
