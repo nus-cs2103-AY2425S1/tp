@@ -25,7 +25,7 @@ public class CommandTablePanel extends UiPart<Region> {
      * Fills up the table with the commands.
      */
     private void initializeTable() {
-
+        logger.fine("Showing a few command format of the application.");
     }
 
 }
