@@ -105,6 +105,19 @@ public class EventTest {
         }
     }
 
+    @Test
+    public void removePerson() {
+        try {
+            Event event = new Event("Event1");
+            Person person = new PersonBuilder().withRoles("attendee").build();
+            event.addPerson(person, "attendee");
+            event.removePerson(person, "attendee");
+            Set<Person> attendees = new HashSet<>();
+            assertEquals(attendees, event.getAttendees());
+        } catch (Exception e) {
+            assert false;
+        }
+    }
 
 
 }
