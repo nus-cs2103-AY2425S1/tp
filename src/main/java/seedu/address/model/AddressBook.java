@@ -150,20 +150,16 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        if (students.isEmpty()) {
-            return new ToStringBuilder(this)
-                    .add("persons", persons)
-                    .toString();
+
+        ToStringBuilder sb = new ToStringBuilder(this);
+
+        if (!persons.isEmpty()) {
+            sb.add("persons", persons);
         }
-        if (persons.isEmpty()) {
-            return new ToStringBuilder(this)
-                    .add("students", students)
-                    .toString();
+        if (!students.isEmpty()) {
+            sb.add("students", students);
         }
-        return new ToStringBuilder(this)
-                .add("persons", persons)
-                .add("students", students)
-                .toString();
+        return sb.toString();
     }
 
     @Override
