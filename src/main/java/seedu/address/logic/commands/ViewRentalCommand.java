@@ -43,8 +43,9 @@ public class ViewRentalCommand extends Command {
         List<RentalInformation> rentalInformationListOfClient = clientToViewRentalInformation.getRentalInformation();
         model.updateVisibleRentalInformationList(rentalInformationListOfClient);
 
-        // TODO: Update the placeholder message passed into CommandResult with a proper message
-        return new CommandResult("WIP: The 'rview' command was called.");
+        return new CommandResult(
+                String.format(Messages.MESSAGE_RENTAL_INFORMATION_LISTED_OVERVIEW,
+                        rentalInformationListOfClient.size()));
     }
 
     @Override
