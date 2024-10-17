@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import careconnect.commons.core.GuiSettings;
 import careconnect.commons.core.LogsCenter;
-import careconnect.commons.exceptions.IllegalValueException;
 import careconnect.logic.Logic;
 import careconnect.logic.autocompleter.exceptions.AutocompleteException;
 import careconnect.logic.commands.CommandResult;

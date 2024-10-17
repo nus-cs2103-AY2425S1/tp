@@ -1,11 +1,9 @@
 package careconnect.ui;
 
-import careconnect.commons.exceptions.IllegalValueException;
 import careconnect.logic.Logic;
 import careconnect.logic.autocompleter.exceptions.AutocompleteException;
 import careconnect.logic.commands.CommandResult;
 import careconnect.logic.commands.exceptions.CommandException;
-import careconnect.logic.parser.AddressBookParser;
 import careconnect.logic.parser.exceptions.ParseException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
