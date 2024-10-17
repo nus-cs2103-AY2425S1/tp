@@ -12,11 +12,14 @@ public class AddressContainsKeywordsPredicate implements Predicate<Person> {
     private final String keywords;
 
     public AddressContainsKeywordsPredicate(String keywords) {
-        this.keywords = keywords;
+        this.keywords = keywords.trim();
     }
 
     @Override
     public boolean test(Person person) {
+        if (keywords.isEmpty()) {
+            return false;
+        }
         // Check if any of the keywords match any part of the address
         return person.getAddress().value.toLowerCase().contains(keywords.toLowerCase());
     }
