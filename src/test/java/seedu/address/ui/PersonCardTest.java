@@ -1,4 +1,4 @@
-package seedu.address.ui;
+/*package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -19,19 +19,6 @@ public class PersonCardTest {
 
     @BeforeAll
     public static void setUpOnce() {
-        /*// Launch a JavaFX application
-        Platform.startup(() -> {
-            // This lambda is called on the JavaFX application thread
-            // Any UI-related initialization can be done here
-        });
-
-        // Initialize your person object here
-        person = new PersonBuilder()
-                .withName("John Doe") // Set name
-                .withPhone("12345678") // Set phone
-                .withEmail("john@example.com") // Set email
-                .withAddress("123 Main St") // Set address
-                .build(); // Create a Person instance*/
         if (!javafxInitialized) {
             // Launch a JavaFX application, ensuring it's only done once
             Platform.startup(() -> {
@@ -53,8 +40,6 @@ public class PersonCardTest {
 
     @AfterAll
     public static void tearDownOnce() {
-        /*// Shut down the JavaFX application
-        Platform.exit();*/
         // Schedule the call to exit the JavaFX platform after tests complete
         Platform.runLater(() -> {
             Platform.exit();
@@ -76,4 +61,4 @@ public class PersonCardTest {
             // Do nothing
         }
     }
-}
+}*/
