@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.product.Product;
+import seedu.address.model.product.ProductName;
+import seedu.address.model.supplier.Name;
 import seedu.address.model.supplier.Supplier;
 
 /**
@@ -69,6 +71,12 @@ public interface Model {
     void deleteSupplier(Supplier target);
 
     /**
+     * Deletes the given product.
+     * The product must exist in the address book.
+     */
+    void deleteProduct(Product target);
+
+    /**
      * Adds the given supplier.
      * {@code supplier} must not already exist in the address book.
      */
@@ -106,5 +114,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredProductList(Predicate<Product> predicate);
+
+    Product findProductByName(ProductName productName);
+
+    Supplier findSupplier(Name supplierName);
 }
 

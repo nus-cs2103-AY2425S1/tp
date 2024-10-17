@@ -29,6 +29,22 @@ public class UniqueProductList implements Iterable<Product> {
     private final ObservableList<Product> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+
+    /**
+     * Finds and returns the product with the specified {@code ProductName}.
+     * Returns null if the product is not found.
+     */
+    public Product findByName(ProductName productName) {
+        requireNonNull(productName);
+        for (Product product : internalList) {
+            if (product.getName().equals(productName)) {
+                return product;
+            }
+        }
+        return null;
+    }
+
+
     /**
      * Returns true if the list contains an equivalent product as the given argument.
      */
