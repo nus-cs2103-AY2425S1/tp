@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalParams.PARAMS_ARRAY_ALL;
 import static seedu.address.testutil.TypicalParams.PARAMS_ARRAY_FIRST;
 import static seedu.address.testutil.TypicalParams.PARAMS_ARRAY_SECOND;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook2;
@@ -36,21 +37,33 @@ public class GetCommandTest {
 
     @Test
     public void execute_validParamsUnfilteredList_success() {
-        GetCommand getCommand = new GetCommand(PARAMS_ARRAY_FIRST);
+        GetCommand getCommand = new GetCommand(PARAMS_ARRAY_ALL);
         ObservableList<Person> personList = expectedModel.getAddressBook().getPersonList();
-        String numbers = "";
+        String names = "";
+        String phoneNumbers = "";
         String emails = "";
+        String addresses = "";
         for (int i = 0; i < personList.size() - 1; i++) {
-            numbers += personList.get(i).getPhone() + "," + "\n";
+            names += personList.get(i).getName() + "," + "\n";
         }
-        numbers += personList.get(personList.size() - 1).getPhone() + "\n\n";
+        names += personList.get(personList.size() - 1).getName() + "\n\n";
+        for (int i = 0; i < personList.size() - 1; i++) {
+            phoneNumbers += personList.get(i).getPhone() + "," + "\n";
+        }
+        phoneNumbers += personList.get(personList.size() - 1).getPhone() + "\n\n";
         for (int i = 0; i < personList.size() - 1; i++) {
             emails += personList.get(i).getEmail() + "," + "\n";
         }
         emails += personList.get(personList.size() - 1).getEmail() + "\n\n";
+        for (int i = 0; i < personList.size() - 1; i++) {
+            addresses += personList.get(i).getAddress() + "," + "\n";
+        }
+        addresses += personList.get(personList.size() - 1).getAddress() + "\n\n";
         String expectedMessage = String.format(GetCommand.MESSAGE_GET_PARAMETER_SUCCESS,
-                "PHONE NUMBER", numbers) + String.format(GetCommand.MESSAGE_GET_PARAMETER_SUCCESS,
-                "EMAIL", emails);
+                "NAME", names)
+                + String.format(GetCommand.MESSAGE_GET_PARAMETER_SUCCESS, "PHONE NUMBER", phoneNumbers)
+                + String.format(GetCommand.MESSAGE_GET_PARAMETER_SUCCESS, "EMAIL", emails)
+                + String.format(GetCommand.MESSAGE_GET_PARAMETER_SUCCESS, "ADDRESS", addresses);
 
         assertCommandSuccess(getCommand, model, expectedMessage, expectedModel);
     }
@@ -103,7 +116,7 @@ public class GetCommandTest {
         // null -> returns false
         assertFalse(getFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different parameter list -> returns false
         assertFalse(getFirstCommand.equals(getSecondCommand));
     }
 }

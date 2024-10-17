@@ -7,4 +7,6 @@ package seedu.address.testutil;
 public class TypicalParams {
     public static final String[] PARAMS_ARRAY_FIRST = {"p/", "e/"};
     public static final String[] PARAMS_ARRAY_SECOND = {"n/", "a/"};
+
+    public static final String[] PARAMS_ARRAY_ALL = {"n/", "p/", "e/", "a/"};
 }
