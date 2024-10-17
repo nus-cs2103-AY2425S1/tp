@@ -121,7 +121,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* The name and company are searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
@@ -173,6 +173,31 @@ Format: `listt INDEX`
 Examples:
 * `list` followed by `listt 1` lists transactions for the 1st person in the address book.
 * `find Betsy` followed by `listt 1` lists the transactions for the 1st person in the results of the `find` command.
+
+### Finding transactions by description: `findt`
+
+Finds transactions of a given person whose descriptions contain any of the given keywords.
+
+This command should only be used when the **person** list is displayed.
+
+Format: `findt INDEX KEYWORD [MORE_KEYWORDS]`
+
+`INDEX`:
+* Only search for transactions of the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index must be a positive integer 1, 2, 3, …​
+
+`KEYWORD`:
+* The search is case-insensitive. e.g. `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the description is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `findt 1 materials invest` returns `Invest` and `Buy raw materials`.
+![result for 'findt 1 materials invest'](images/findt.png)
 
 ### Clearing all entries : `clear`
 
