@@ -84,6 +84,21 @@ public class Person {
     }
 
     /**
+     * Returns a new Person with the added subject.
+     * The original person is not modified (immutability is preserved).
+     */
+    public Person addSubject(Subject subjectToAdd) {
+        requireAllNonNull(subjectToAdd);
+
+        // Create a new set of subjects by copying the existing subjects and adding the new one
+        Set<Subject> updatedSubjects = new HashSet<>(this.subjects);
+        updatedSubjects.add(subjectToAdd);
+
+        // Return a new Person object with the updated subjects
+        return new Person(this.name, this.phone, this.email, this.address, this.ic, updatedSubjects, this.tags);
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */

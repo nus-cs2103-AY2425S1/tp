@@ -36,7 +36,12 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         //sort the contact book
-        model.sortAddressBook();
+        if (sortParam.toString().equals("name")) {
+            model.sortAddressBookByName();
+        } else if (sortParam.toString().equals("class")) {
+            model.sortAddressBookByClass();
+        }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, sortParam.toString()));
 
     }

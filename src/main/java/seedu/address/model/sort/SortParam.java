@@ -25,10 +25,10 @@ public class SortParam {
     public SortParam(String sortParamString) {
         requireNonNull(sortParamString);
         checkArgument(isValidSortParam(sortParamString), MESSAGE_CONSTRAINTS);
-        if (sortParamString == "name") {
+        if (sortParamString.equals("name")) {
             System.out.println("name");
             this.field = SortField.NAME;
-        } else if (sortParamString == "class") {
+        } else if (sortParamString.equals("class")) {
             System.out.println("class");
             this.field = SortField.CLASS;
         }
