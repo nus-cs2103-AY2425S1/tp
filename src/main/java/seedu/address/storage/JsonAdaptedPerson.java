@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,8 @@ import seedu.address.model.person.Hours;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Tutee;
+import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,6 +42,8 @@ public class JsonAdaptedPerson {
     private String hours;
     @CsvCustomBindByName(converter = JsonAdaptedTagConverter.class)
     private List<JsonAdaptedTag> tags = new ArrayList<>();
+    @CsvBindByName()
+    private String role;
 
     public JsonAdaptedPerson() {}
 
@@ -47,9 +52,9 @@ public class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("hours") String hours,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("hours") String hours,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("role") String role) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -58,6 +63,8 @@ public class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        // TODO IMPLEMENT A BETTER ROLE, FOR NOW THIS WILL PLACEHOLDER
+        this.role = role;
     }
 
     /**
@@ -72,6 +79,7 @@ public class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        role = (source instanceof Tutor) ? "Tutor" : "Tutee";
     }
 
     public String getName() {
@@ -122,15 +130,31 @@ public class JsonAdaptedPerson {
         this.tags = tags;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        String name = this.getName();
+        String phone = this.getPhone();
+        String email = this.getEmail();
+        String address = this.getAddress();
+        String hours = this.getHours();
+        List<JsonAdaptedTag> tags = this.getTags();
+        String role = this.getRole();
+
+        final List<Tag> tuteeTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+            tuteeTags.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -173,8 +197,13 @@ public class JsonAdaptedPerson {
         }
         final Hours modelHours = new Hours(hours);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags);
+        final Set<Tag> modelTags = new HashSet<>(tuteeTags);
+        if (Objects.equals(role, "Tutor")) {
+            return new Tutor(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags);
+        } else {
+            return new Tutee(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags);
+        }
+
     }
 
 }

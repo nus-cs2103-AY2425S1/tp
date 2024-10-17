@@ -26,6 +26,10 @@ public class Hours {
         value = phone;
     }
 
+    public int getHoursInt() {
+        return Integer.parseInt(value);
+    }
+
     /**
      * Returns true if a given string is a valid number of hours.
      */

@@ -12,16 +12,16 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Tutor;
 
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class AddTutorCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "addTutor";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tutor to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -36,17 +36,17 @@ public class AddCommand extends Command {
             + PREFIX_HOURS + "6 ";
 
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New tutor added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This tutor already exists in the address book";
 
-    private final Person toAdd;
+    private final Tutor toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddTutorCommand(Tutor tutor) {
+        requireNonNull(tutor);
+        toAdd = tutor;
     }
 
     @Override
@@ -69,18 +69,18 @@ public class AddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddTutorCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
+        AddTutorCommand otherAddCommand = (AddTutorCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
+                .add("toAddTutor", toAdd)
                 .toString();
     }
 }

@@ -21,10 +21,10 @@ import seedu.address.model.Model;
  */
 public class CsvImport {
     private static final String INCORRECT_HEADERS = "Your file is missing or has extra headers. "
-            + "Please use the following headers: name,phone,email,address,hours,tags ";
+            + "Please use the following headers: name,phone,email,address,hours,tags,role ";
     private static final String INCORRECT_ROWS = "Some rows have an incorrect number of entries. "
             + "The expected number of entries is %d. The rows that failed are: %s";
-    private static final int HEADER_COUNT = 6;
+    private static final int HEADER_COUNT = 7;
     private final String importFilePath;
     private final ArrayList<Integer> failed;
 
@@ -99,6 +99,7 @@ public class CsvImport {
         expectedHeaders.add("address");
         expectedHeaders.add("hours");
         expectedHeaders.add("tags");
+        expectedHeaders.add("role");
 
         try {
             ArrayList<String> actualHeaders = new ArrayList<>(List.of(csvReader.peek()));
