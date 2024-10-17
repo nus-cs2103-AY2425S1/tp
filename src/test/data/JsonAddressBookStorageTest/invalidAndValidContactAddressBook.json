@@ -15,7 +15,7 @@
     "email" : "contact@abccatering.com",
     "address" : "Blk 123 Bukit Merah St 7",
     "tags" : [ "vegetarian", "budget" ],
-    "service" : "abc",
+    "date" : "2000-01-01",
     "id" : 1
   }],
   "nextId" : 0

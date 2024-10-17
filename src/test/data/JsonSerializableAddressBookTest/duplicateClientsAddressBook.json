@@ -16,7 +16,7 @@
     "address" : "Blk 123 Bukit Merah St 7",
     "date" : "2000-01-01",
     "tags" : [ "vegetarian", "budget" ],
-    "id" : 0
+    "id" : 1
   } ],
-  "nextId" : 0
+  "nextId" : 2
 }
