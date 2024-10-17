@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
-
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -36,13 +35,15 @@ public class DeleteStudentCommandTest {
         ModelStubWithNoStudent modelStub = new ModelStubWithNoStudent();
         DeleteStudentCommand command = new DeleteStudentCommand(new Name("John Tan"));
 
-        assertThrows(CommandException.class, "This student is not in your student list: John Tan", () -> command.execute(modelStub));
+        assertThrows(CommandException.class, "This student is not in your student list: John Tan",
+                () -> command.execute(modelStub));
     }
 
     @Test
     public void execute_studentDelete_success() throws Exception {
         Student validStudent = new StudentBuilder().withName("John Ng").build();
-        DeleteStudentCommandTest.ModelStubWithStudent modelStub = new DeleteStudentCommandTest.ModelStubWithStudent(validStudent);
+        DeleteStudentCommandTest.ModelStubWithStudent modelStub =
+                new DeleteStudentCommandTest.ModelStubWithStudent(validStudent);
         modelStub.addStudent(validStudent);
 
         DeleteStudentCommand command = new DeleteStudentCommand(new Name("John Ng"));
