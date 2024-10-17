@@ -119,7 +119,7 @@ public class ParserUtil {
             throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
         }
 
-        switch(network) {
+        switch (network) {
         case "BTC":
             if (!BtcAddress.isValidPublicAddress(trimmedPublicAddress)) {
                 throw new ParseException(BtcAddress.MESSAGE_CONSTRAINTS);
@@ -207,7 +207,7 @@ public class ParserUtil {
         try {
             return Network.valueOf(trimmedNetwork);
         } catch (IllegalArgumentException e) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Network.MESSAGE_CONSTRAINTS);
         }
     }
 

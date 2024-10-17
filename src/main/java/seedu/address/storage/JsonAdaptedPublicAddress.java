@@ -9,7 +9,7 @@ import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.addresses.PublicAddressFactory;
 
 /**
- * Jackson-friendly version of {@link PublicAddress}
+ * Jackson-friendly version of {@link PublicAddress}.
  */
 class JsonAdaptedPublicAddress {
 

@@ -17,6 +17,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.addresses.BtcAddress;
+import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,8 +25,10 @@ import seedu.address.model.person.Person;
  */
 public class TypicalPersons {
 
-    public static final String FAKE_BTC_DAILY_ADDRESS = "14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
-    public static final String FAKE_BTC_SPECIAL_ADDRESS = "24qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
+    public static final PublicAddress FAKE_BTC_DAILY_ADDRESS =
+            new BtcAddress("14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd", "Daily wallet");
+    public static final PublicAddress FAKE_BTC_SPECIAL_ADDRESS =
+            new BtcAddress("24qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd", "Special wallet");
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
@@ -34,8 +37,7 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withPublicAddresses(new BtcAddress(FAKE_BTC_DAILY_ADDRESS, "Daily wallet"),
-                    new BtcAddress(FAKE_BTC_SPECIAL_ADDRESS, "Special wallet"))
+            .withPublicAddresses(FAKE_BTC_DAILY_ADDRESS, FAKE_BTC_SPECIAL_ADDRESS)
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();
@@ -53,6 +55,9 @@ public class TypicalPersons {
             .withEmail("stefan@example.com").withAddress("little india").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
+    public static final Person JOE = new PersonBuilder().withName("Joe Mama").withPhone("87654321")
+            .withEmail("joe@example.com").withAddress("kent ridge")
+            .withPublicAddresses(FAKE_BTC_DAILY_ADDRESS, FAKE_BTC_SPECIAL_ADDRESS).build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
