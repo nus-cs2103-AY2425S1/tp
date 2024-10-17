@@ -1,5 +1,8 @@
 package seedu.address.logic.validator;
 
+/**
+ * Represents a Validator that is able to valid whether user input is in the correct format
+ */
 public abstract class Validator<T> {
 
     /**

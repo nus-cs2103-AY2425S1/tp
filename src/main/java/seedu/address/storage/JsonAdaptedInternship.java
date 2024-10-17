@@ -31,12 +31,13 @@ class JsonAdaptedInternship {
      * Constructs a {@code JsonAdaptedPerson} with the given internship application details.
      */
     @JsonCreator
-    public JsonAdaptedInternship(@JsonProperty("companyName") String companyName, @JsonProperty("companyEmail") String companyEmail,
-            @JsonProperty("role") String role, @JsonProperty("date") String date ) {
+    public JsonAdaptedInternship(@JsonProperty("companyName") String companyName,
+                                 @JsonProperty("companyEmail") String companyEmail,
+            @JsonProperty("role") String role, @JsonProperty("date") String date) {
         this.companyName = companyName;
         this.companyEmail = companyEmail;
         this.role = role;
-    //  this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yy"));
+        //  this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yy"));
         this.dateString = date;
     }
 
@@ -51,7 +52,8 @@ class JsonAdaptedInternship {
     }
 
     /**
-     * Converts this Jackson-friendly adapted internship application object into the model's {@code InternshipApplication} object.
+     * Converts this Jackson-friendly adapted internship application object into the model's
+     * {@code InternshipApplication} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted internship application.
      */
@@ -84,7 +86,7 @@ class JsonAdaptedInternship {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
 
-        if(!DateValidator.of().validate(dateString)) {
+        if (!DateValidator.of().validate(dateString)) {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
 

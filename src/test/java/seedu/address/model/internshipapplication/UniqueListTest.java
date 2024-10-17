@@ -3,10 +3,10 @@ package seedu.address.model.internshipapplication;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_NAME_YAHOO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_YAHOO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_YAHOO;
 import static seedu.address.testutil.Assert.assertThrows;
-
 import static seedu.address.testutil.TypicalInternshipApplications.GOOGLE;
 import static seedu.address.testutil.TypicalInternshipApplications.YAHOO;
 

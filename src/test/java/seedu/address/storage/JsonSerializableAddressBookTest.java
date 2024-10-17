@@ -13,21 +13,25 @@ import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.internshipapplication.InternshipApplication;
 import seedu.address.testutil.TypicalInternshipApplications;
-import seedu.address.testutil.TypicalPersons;
 
 public class JsonSerializableAddressBookTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableAddressBookTest");
-    private static final Path TYPICAL_INTERNSHIPS_FILE = TEST_DATA_FOLDER.resolve("typicalInternshipsAddressBook.json");
-    private static final Path INVALID_INTERNSHIP_FILE = TEST_DATA_FOLDER.resolve("invalidInternshipAddressBook.json");
-    private static final Path DUPLICATE_INTERNSHIP_FILE = TEST_DATA_FOLDER.resolve("duplicateInternshipAddressBook.json");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data",
+            "JsonSerializableAddressBookTest");
+    private static final Path TYPICAL_INTERNSHIPS_FILE = TEST_DATA_FOLDER
+            .resolve("typicalInternshipsAddressBook.json");
+    private static final Path INVALID_INTERNSHIP_FILE = TEST_DATA_FOLDER
+            .resolve("invalidInternshipAddressBook.json");
+    private static final Path DUPLICATE_INTERNSHIP_FILE = TEST_DATA_FOLDER
+            .resolve("duplicateInternshipAddressBook.json");
 
     @Test
     public void toModelType_typicalInternshipsFile_success() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_INTERNSHIPS_FILE,
                 JsonSerializableAddressBook.class).get();
         AddressBook<InternshipApplication> addressBookFromFile = dataFromFile.toModelType();
-        AddressBook<InternshipApplication> typicalPersonsAddressBook = TypicalInternshipApplications.getTypicalAddressBook();
+        AddressBook<InternshipApplication> typicalPersonsAddressBook = TypicalInternshipApplications
+                .getTypicalAddressBook();
         assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
 

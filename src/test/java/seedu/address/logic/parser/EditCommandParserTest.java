@@ -134,7 +134,8 @@
 //        // name
 //        Index targetIndex = INDEX_THIRD_PERSON;
 //        String userInput = targetIndex.getOneBased() + COMPANY_NAME_DESC_APPLE;
-//        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_COMPANY_NAME_APPLE).build();
+//        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_COMPANY_NAME_APPLE)
+//        .build();
 //        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 //        assertParseSuccess(parser, userInput, expectedCommand);
 //

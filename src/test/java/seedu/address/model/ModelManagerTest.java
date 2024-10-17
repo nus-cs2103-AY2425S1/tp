@@ -94,13 +94,14 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook<InternshipApplication> addressBook = new AddressBookBuilder().withApplication(GOOGLE).withApplication(YAHOO).build();
+        AddressBook<InternshipApplication> addressBook = new AddressBookBuilder().withApplication(GOOGLE)
+                .withApplication(YAHOO).build();
         AddressBook<InternshipApplication> differentAddressBook = new AddressBook<>();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
         modelManager = new ModelManager<InternshipApplication>(addressBook, userPrefs);
-        ModelManager<InternshipApplication> modelManagerCopy = new ModelManager<InternshipApplication>(addressBook, userPrefs);
+        ModelManager<InternshipApplication> modelManagerCopy = new ModelManager<>(addressBook, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -115,11 +116,11 @@ public class ModelManagerTest {
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager<>(differentAddressBook, userPrefs)));
 
-// Todo once FILTER feature is implemented
-//        // different filteredList -> returns false
-//        String[] keywords = GOOGLE.getCompany().getName().getValue().split("\\s+");
-//        modelManager.updateFilteredList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-//        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        // Todo once FILTER feature is implemented
+        //        // different filteredList -> returns false
+        //        String[] keywords = GOOGLE.getCompany().getName().getValue().split("\\s+");
+        //        modelManager.updateFilteredList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        //        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredList(PREDICATE_SHOW_ALL);

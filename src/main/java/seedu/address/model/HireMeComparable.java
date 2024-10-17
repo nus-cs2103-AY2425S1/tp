@@ -1,5 +1,8 @@
 package seedu.address.model;
 
+/**
+ * Has the ability to compare whether two objects are the same
+ */
 public interface HireMeComparable<T> {
 
     /**
