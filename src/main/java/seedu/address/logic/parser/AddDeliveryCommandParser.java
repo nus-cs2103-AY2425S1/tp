@@ -41,14 +41,14 @@ public class AddDeliveryCommandParser implements Parser<AddDeliveryCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATETIME, PREFIX_SUPPLIER_INDEX,
                 PREFIX_PRODUCT, PREFIX_QUANTITY, PREFIX_COST);
-        DateTime deliveryDateDateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
+        DateTime deliveryDateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
         //Pending update from supplier side for name
         //Pending confirmation of use of supplierIndex
         SupplierIndex supplierIndex = ParserUtil.parseSupplierIndex(argMultimap.getValue(PREFIX_SUPPLIER_INDEX).get());
         Product product = ParserUtil.parseProduct(argMultimap.getValue(PREFIX_PRODUCT).get());
         Quantity quantity = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
         Cost cost = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get());
-        Delivery delivery = new Delivery(product, null, Status.PENDING, deliveryDateDateTime, cost, quantity,
+        Delivery delivery = new Delivery(product, null, Status.PENDING, deliveryDateTime, cost, quantity,
                 supplierIndex);
         return new AddDeliveryCommand(delivery);
     }

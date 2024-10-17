@@ -17,7 +17,7 @@ public class Delivery {
     private final Product product;
     private Person sender; // CHANGE TO SUPPLIER LATER ON
     private Status status;
-    private final DateTime deliveryTime;
+    private final DateTime deliveryDateTime;
     private final Cost cost;
     private final Quantity quantity;
     private final SupplierIndex supplierIndex;
@@ -31,7 +31,7 @@ public class Delivery {
         this.product = product;
         this.sender = sender;
         this.status = status;
-        this.deliveryTime = deliveryDateTime;
+        this.deliveryDateTime = deliveryDateTime;
         this.cost = cost;
         this.quantity = quantity;
         //might need to change this
@@ -57,7 +57,7 @@ public class Delivery {
         this.product = product;
         this.sender = sender;
         this.status = status;
-        this.deliveryTime = deliveryDateTime;
+        this.deliveryDateTime = deliveryDateTime;
         this.cost = cost;
         this.quantity = quantity;
         this.supplierIndex = supplierIndex;
@@ -79,7 +79,7 @@ public class Delivery {
     }
 
     public DateTime getDeliveryDate() {
-        return this.deliveryTime;
+        return this.deliveryDateTime;
     }
 
     public Cost getDeliveryCost() {
@@ -130,7 +130,7 @@ public class Delivery {
                              : this.sender.equals(otherDelivery.sender);
         return product.equals(otherDelivery.product)
                 && status.equals(otherDelivery.status)
-                && deliveryTime.equals(otherDelivery.deliveryTime)
+                && deliveryDateTime.equals(otherDelivery.deliveryDateTime)
                 && cost.equals(otherDelivery.cost)
                 && quantity.equals(otherDelivery.quantity)
                 && isSameSender;
@@ -138,7 +138,7 @@ public class Delivery {
 
     @Override
     public int hashCode() {
-        return Objects.hash(product, sender, status, deliveryTime, cost, quantity);
+        return Objects.hash(product, sender, status, deliveryDateTime, cost, quantity);
     }
 
     @Override
@@ -147,7 +147,7 @@ public class Delivery {
                 .add("product", product)
                 .add("sender", sender)
                 .add("status", status)
-                .add("deliveryDate", deliveryTime)
+                .add("deliveryDate", deliveryDateTime)
                 .add("cost", cost)
                 .add("quantity", quantity)
                 .toString();

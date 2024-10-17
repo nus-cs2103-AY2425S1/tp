@@ -29,8 +29,9 @@
         </Label>
         <Label fx:id="name" text="\$name" styleClass="cell_big_label" >
         <HBox.margin>
-          <Insets bottom="2.5" left="2.5" right="2.5" top="2.5" />
+          <Insets bottom="2.5" left="2.5" right="20" top="2.5" />
         </HBox.margin></Label>
+        <Label fx:id="status" styleClass="cell_small_label" text="\$status" />
       </HBox>
 
       <FlowPane fx:id="products" />
@@ -65,7 +66,6 @@
       </HBox>
 
       <FlowPane fx:id="tags" />
-      <Label fx:id="status" styleClass="cell_small_label" text="\$status" />
     </VBox>
   </GridPane>
 </HBox>
