@@ -2,12 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -30,8 +28,6 @@ public class AddTeacherCommand extends Command {
         + PREFIX_PHONE + "PHONE "
         + PREFIX_EMAIL + "EMAIL "
         + PREFIX_ADDRESS + "ADDRESS "
-        + PREFIX_SUBJECT + "SUBJECT "
-        + PREFIX_CLASSES + "CLASSES "
         + "[" + PREFIX_TAG + "TAG]...\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_NAME + "John Doe "
@@ -39,9 +35,8 @@ public class AddTeacherCommand extends Command {
         + PREFIX_PHONE + "98765432 "
         + PREFIX_EMAIL + "johnd@example.com "
         + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-        + PREFIX_SUBJECT + "Physics "
-        + PREFIX_CLASSES + "7A,7B "
-        + PREFIX_TAG + "hardworking";
+        + PREFIX_TAG + "math "
+        + PREFIX_TAG + "science";
 
     public static final String MESSAGE_SUCCESS = "New teacher added: %1$s";
     public static final String MESSAGE_DUPLICATE_TEACHER = "This teacher already exists in the address book";
