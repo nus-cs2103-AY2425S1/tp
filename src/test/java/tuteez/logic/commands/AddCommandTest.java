@@ -10,6 +10,8 @@ import static tuteez.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -24,6 +26,7 @@ import tuteez.model.ReadOnlyAddressBook;
 import tuteez.model.ReadOnlyUserPrefs;
 import tuteez.model.person.Name;
 import tuteez.model.person.Person;
+import tuteez.model.person.lesson.Lesson;
 import tuteez.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -46,12 +49,40 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_personAddedWithLesson_correctlyPopulatesLessonSet() throws CommandException {
+        Person alice = new PersonBuilder().withName("Alice")
+                .withLessons("friday 1800-2000", "thursday 1500-1630").build();
+        ModelStub modelStub = new ModelStubAcceptingPersonAdded();
+        AddCommand addAliceCommand = new AddCommand(alice);
+        addAliceCommand.execute(modelStub);
+        Lesson l1 = new Lesson("friday 1800-2000");
+        Lesson l2 = new Lesson("thursday 1500-1630");
+        HashSet<Lesson> expectedSet = new HashSet<>();
+        expectedSet.add(l1);
+        expectedSet.add(l2);
+        assertTrue(Lesson.containsAll(expectedSet));
+    }
+
+    @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicateLesson_throwsCommandException() throws CommandException {
+        Lesson.clearLessonSet();
+        Person alice = new PersonBuilder().withName("Alice").withLessons("friday 1800-2000").build();
+        Person bob = new PersonBuilder().withName("bob").withLessons("friday 1800-2000").build();
+        ModelStub modelStub = new ModelStubAcceptingPersonAdded();
+        AddCommand addAliceCommand = new AddCommand(alice);
+        AddCommand addBobCommand = new AddCommand(bob);
+        addAliceCommand.execute(modelStub);
+        assertThrows(CommandException.class, () -> addBobCommand.execute(modelStub));
+        Lesson.clearLessonSet();
     }
 
     @Test
@@ -84,6 +115,7 @@ public class AddCommandTest {
         String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
         assertEquals(expected, addCommand.toString());
     }
+
 
     /**
      * A default model stub that have all of the methods failing.
@@ -204,6 +236,26 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+    }
+
+    private static class LessonStub {
+        private static final HashSet<LessonStub> lessonSet = new HashSet<>();
+
+        public LessonStub(String lesson) {
+            requireNonNull(lesson);
+        }
+
+        /**
+         * Helper method to clear the lessonSet before every test
+         * Not available in {@code Lesson} class
+         */
+        public static void clearLessonSet() {
+            lessonSet.clear();
+        }
+
+        public static void addAllLesson(Set<LessonStub> newLessons) {
+            lessonSet.addAll(newLessons);
         }
     }
 

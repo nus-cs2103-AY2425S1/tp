@@ -145,6 +145,18 @@ public class Lesson {
     public static boolean isDuplicateLesson(Lesson lesson) {
         return lessonSet.contains(lesson);
     }
+
+    public static boolean containsAll(HashSet<Lesson> lessonsToCompare) {
+        return Lesson.lessonSet.containsAll(lessonsToCompare);
+    }
+
+    /**
+     * This method is used only for testing. Should not be used elsewhere
+     */
+    public static void clearLessonSet() {
+        Lesson.lessonSet.clear();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
