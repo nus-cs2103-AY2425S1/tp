@@ -11,7 +11,7 @@ public class CourseTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Course(null,null));
+        assertThrows(NullPointerException.class, () -> new Course(null, null));
     }
 
     @Test
@@ -50,14 +50,14 @@ public class CourseTest {
         assertFalse(Course.isValidCourseName("CS")); // contains no digits after uppercase alphabetical characters
         assertFalse(Course.isValidCourseName("CS110")); // not enough digits
         assertFalse(Course.isValidCourseName("CS1101SS")); // contains extra alphabetical characters at the end
-        
+
         // valid course codes
         assertTrue(Course.isValidCourseName("CS1101S"));
         assertTrue(Course.isValidCourseName("BT1152"));
         assertTrue(Course.isValidCourseName("ST2334"));
         assertTrue(Course.isValidCourseName("PL9087"));
     }
-    
+
     @Test
     public void isValidCourseName() {
         // null course name

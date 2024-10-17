@@ -38,7 +38,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
     }
-    
+
     public MatriculationNumber getMatricNumber() {
         return matricNumber;
     }
