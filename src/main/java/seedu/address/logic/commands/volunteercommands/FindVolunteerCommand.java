@@ -1,10 +1,11 @@
 package seedu.address.logic.commands.volunteercommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_VOLUNTEERS;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.function.Predicate;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -21,12 +22,12 @@ public class FindVolunteerCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds volunteers whose names start with the specified prefix (case-insensitive).\n"
             + "Parameters: PREFIX (must be a non-empty string)\n"
-            + "Example: " + COMMAND_WORD + " volunteerprefix";
+            + "Example: " + COMMAND_WORD + " volunteerSearchString";
 
     public static final String MESSAGE_VOLUNTEER_FOUND = "Found %d volunteer(s) starting with '%s':";
     public static final String MESSAGE_VOLUNTEER_NOT_FOUND = "No volunteers found starting with '%s'.";
 
-    private final String prefix;
+    private final String searchString;
 
     /**
      * Constructs a FindVolunteerCommand that searches for volunteers starting with the given prefix.
@@ -35,25 +36,29 @@ public class FindVolunteerCommand extends Command {
      */
     public FindVolunteerCommand(String prefix) {
         requireNonNull(prefix);
-        this.prefix = prefix.trim();
+        this.searchString = prefix.trim();
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Volunteer> lastShownList = model.getFilteredVolunteerList();
 
-        // Find volunteers whose names start with the given prefix, ignoring case
-        List<Volunteer> matchingVolunteers = lastShownList.stream()
-                .filter(volunteer -> volunteer.getName().toString().toLowerCase().startsWith(prefix.toLowerCase()))
-                .collect(Collectors.toList());
-
-        if (matchingVolunteers.isEmpty()) {
-            return new CommandResult(String.format(MESSAGE_VOLUNTEER_NOT_FOUND, prefix));
+        if (searchString.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_VOLUNTEER_NOT_FOUND, searchString));
         }
 
-        String resultMessage = String.format(MESSAGE_VOLUNTEER_FOUND, matchingVolunteers.size(), prefix);
-        for (Volunteer volunteer : matchingVolunteers) {
+        Predicate<Volunteer> volunteerContainsSearchString = volunteer ->
+                volunteer.getName().toString().toLowerCase().contains(searchString.toLowerCase());
+        model.updateFilteredVolunteerList(volunteerContainsSearchString);
+
+        ObservableList<Volunteer> filteredVolunteers = model.getFilteredVolunteerList();
+        if (filteredVolunteers.isEmpty()) {
+            model.updateFilteredVolunteerList(PREDICATE_SHOW_ALL_VOLUNTEERS);
+            return new CommandResult(String.format(MESSAGE_VOLUNTEER_NOT_FOUND, searchString));
+        }
+
+        String resultMessage = String.format(MESSAGE_VOLUNTEER_FOUND, filteredVolunteers.size(), searchString);
+        for (Volunteer volunteer : filteredVolunteers) {
             resultMessage += "\n" + volunteer.getName().toString();
         }
 
@@ -71,11 +76,11 @@ public class FindVolunteerCommand extends Command {
         }
 
         FindVolunteerCommand otherFindCommand = (FindVolunteerCommand) other;
-        return prefix.equals(otherFindCommand.prefix);
+        return searchString.equals(otherFindCommand.searchString);
     }
 
     @Override
     public String toString() {
-        return "FindVolunteerCommand[prefix=" + prefix + "]";
+        return "FindVolunteerCommand[searchString=" + searchString + "]";
     }
 }

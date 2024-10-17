@@ -1,10 +1,11 @@
 package seedu.address.logic.commands.eventcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.function.Predicate;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -21,39 +22,43 @@ public class FindEventCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds events whose names start with the specified prefix (case-insensitive).\n"
             + "Parameters: PREFIX (must be a non-empty string)\n"
-            + "Example: " + COMMAND_WORD + " eventprefix";
+            + "Example: " + COMMAND_WORD + " eventSearchString";
 
     public static final String MESSAGE_EVENT_FOUND = "Found %d event(s) starting with '%s':";
     public static final String MESSAGE_EVENT_NOT_FOUND = "No events found starting with '%s'.";
 
-    private final String prefix;
+    private final String searchString;
 
     /**
-     * Constructs a FindEventCommand that searches for events starting with the given prefix.
+     * Constructs a FindEventCommand that searches for events containing the given string.
      *
-     * @param prefix The prefix to search for.
+     * @param searchString The string to search for.
      */
-    public FindEventCommand(String prefix) {
-        requireNonNull(prefix);
-        this.prefix = prefix.trim();
+    public FindEventCommand(String searchString) {
+        requireNonNull(searchString);
+        this.searchString = searchString.trim();
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Event> lastShownList = model.getFilteredEventList();
 
-        // Find events whose names start with the given prefix, ignoring case
-        List<Event> matchingEvents = lastShownList.stream()
-                .filter(event -> event.getName().toString().toLowerCase().startsWith(prefix.toLowerCase()))
-                .collect(Collectors.toList());
-
-        if (matchingEvents.isEmpty()) {
-            return new CommandResult(String.format(MESSAGE_EVENT_NOT_FOUND, prefix));
+        if (searchString.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_EVENT_NOT_FOUND, searchString));
         }
 
-        String resultMessage = String.format(MESSAGE_EVENT_FOUND, matchingEvents.size(), prefix);
-        for (Event event : matchingEvents) {
+        Predicate<Event> eventContainsSearchString = event ->
+                event.getName().toString().toLowerCase().contains(searchString.toLowerCase());
+        model.updateFilteredEventList(eventContainsSearchString);
+
+        ObservableList<Event> filteredEvents = model.getFilteredEventList();
+        if (filteredEvents.isEmpty()) {
+            model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+            return new CommandResult(String.format(MESSAGE_EVENT_NOT_FOUND, searchString));
+        }
+
+        String resultMessage = String.format(MESSAGE_EVENT_FOUND, filteredEvents.size(), searchString);
+        for (Event event : filteredEvents) {
             resultMessage += "\n" + event.getName().toString();
         }
 
@@ -71,11 +76,11 @@ public class FindEventCommand extends Command {
         }
 
         FindEventCommand otherFindCommand = (FindEventCommand) other;
-        return prefix.equals(otherFindCommand.prefix);
+        return searchString.equals(otherFindCommand.searchString);
     }
 
     @Override
     public String toString() {
-        return "FindEventCommand[prefix=" + prefix + "]";
+        return "FindEventCommand[searchString=" + searchString + "]";
     }
 }
