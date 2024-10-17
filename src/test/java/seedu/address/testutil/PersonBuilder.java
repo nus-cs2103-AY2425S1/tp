@@ -4,8 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
@@ -104,6 +106,13 @@ public class PersonBuilder {
 
     public Person build() {
         return new Person(name, phone, email, address, remark, tags);
+    }
+    public Patient buildPatient() {
+        return new Patient(name, phone, email, address, remark, tags);
+    }
+
+    public Doctor buildDoctor() {
+        return new Doctor(name, phone, email, address, remark, tags);
     }
 
 }
