@@ -99,6 +99,11 @@ public interface Model {
      */
     void removeLesson(Lesson lesson);
 
+    /**
+     * Returns true if a lesson with a given timeslot can be added in the calendar without exceeding the count limit.
+     */
+    boolean checkTimeslot(Lesson lesson);
+
 
 
     /** Returns an unmodifiable view of the filtered student list */

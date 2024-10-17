@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.calendar.EdulogCalendar;
 import seedu.address.model.calendar.Lesson;
 
 /**
@@ -17,6 +18,8 @@ import seedu.address.model.calendar.Lesson;
 public class AddLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "addc";
+    public static final String OVERLOAD_IDENTICAL_TIMING =
+            "There are already " + EdulogCalendar.MAX_IDENTICAL_TIMING + " lessons with the same start and end time.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the calendar. "
             + "Parameters: "
@@ -49,6 +52,10 @@ public class AddLessonCommand extends Command {
 
         if (model.hasLesson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
+        }
+
+        if (!model.checkTimeslot(toAdd)) {
+            throw new CommandException(OVERLOAD_IDENTICAL_TIMING);
         }
 
         model.addLesson(toAdd);
