@@ -6,7 +6,7 @@
     "availableDate" : "2023-05-10",
     "startTimeAvailability" : "09:00",
     "endTimeAvailability" : "18:00",
-    "involvedIn" : [ "Charity Run", "Food Donation Drive" ]
+    "involvedIn" : [ "Beach Cleanup", "Charity Run", "Food Donation Drive" ]
   }, {
     "name" : "Bob Tan",
     "phone" : "98765432",
@@ -14,7 +14,7 @@
     "availableDate" : "2023-06-15",
     "startTimeAvailability" : "10:00",
     "endTimeAvailability" : "16:00",
-    "involvedIn" : [ ]
+    "involvedIn" : [ "Beach Cleanup" ]
   }, {
     "name" : "Cathy Lee",
     "phone" : "92345678",
@@ -22,7 +22,7 @@
     "availableDate" : "2023-07-20",
     "startTimeAvailability" : "13:00",
     "endTimeAvailability" : "20:00",
-    "involvedIn" : [ "Food Donation Drive" ]
+    "involvedIn" : [ ]
   }, {
     "name" : "David Ng",
     "phone" : "93456789",
@@ -63,7 +63,7 @@
     "endTime" : "12:00",
     "location" : "East Coast Park",
     "description" : "Annual beach cleaning event",
-    "volunteers" : [ ]
+    "volunteers" : [ "Alice Wong", "Bob Tan" ]
   }, {
     "eventName" : "Charity Run",
     "date" : "2023-11-05",
@@ -79,7 +79,7 @@
     "endTime" : "15:00",
     "location" : "City Hall",
     "description" : "",
-    "volunteers" : [ "Alice Wong", "Cathy Lee" ]
+    "volunteers" : [ "Alice Wong" ]
   }, {
     "eventName" : "Tree Planting",
     "date" : "2024-01-25",
