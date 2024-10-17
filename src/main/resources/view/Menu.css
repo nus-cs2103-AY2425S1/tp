@@ -1,0 +1,31 @@
+.menu-bar {
+    -fx-background-color: #F0A89F;
+}
+
+.context-menu {
+    -fx-background-color: #F0A89F;
+    -fx-background-insets: 0 3 0 3;
+    -fx-padding: 0 2 0 0;
+}
+
+.menu-bar .label, .menu-item .label {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Inter";
+    -fx-text-fill: black;
+    -fx-opacity: 0.9;
+    -fx-padding: 0 2 0 2;
+}
+
+.menu, .menu-item {
+    -fx-background-color: #F0A89F;
+}
+
+.menu:hover, .menu-item:hover {
+    -fx-background-color: #FAE4E1;
+}
+
+
+
+
+
+

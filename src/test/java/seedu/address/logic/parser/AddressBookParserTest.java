@@ -13,31 +13,46 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddGuestCommand;
+import seedu.address.logic.commands.AddVendorCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.DeleteGuestCommand;
+import seedu.address.logic.commands.DeleteVendorCommand;
+import seedu.address.logic.commands.EditGuestCommand;
+import seedu.address.logic.commands.EditVendorCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.util.EditGuestDescriptor;
+import seedu.address.logic.commands.util.EditVendorDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Guest;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.model.person.Vendor;
+import seedu.address.testutil.EditGuestDescriptorBuilder;
+import seedu.address.testutil.EditVendorDescriptorBuilder;
+import seedu.address.testutil.GuestBuilder;
+import seedu.address.testutil.GuestUtil;
+import seedu.address.testutil.VendorBuilder;
+import seedu.address.testutil.VendorUtil;
 
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+    public void parseCommand_add_guest() throws Exception {
+        Guest guest = new GuestBuilder().build();
+        AddGuestCommand command = (AddGuestCommand) parser.parseCommand(GuestUtil.getAddGuestCommand(guest));
+        assertEquals(new AddGuestCommand(guest), command);
+    }
+
+    @Test
+    public void parseCommand_add_vendor() throws Exception {
+        Vendor vendor = new VendorBuilder().build();
+        AddVendorCommand command = (AddVendorCommand) parser.parseCommand(VendorUtil.getAddVendorCommand(vendor));
+        assertEquals(new AddVendorCommand(vendor), command);
     }
 
     @Test
@@ -47,19 +62,36 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    public void parseCommand_deleteGuest() throws Exception {
+        DeleteGuestCommand command = (DeleteGuestCommand) parser.parseCommand(
+                DeleteGuestCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteGuestCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    public void parseCommand_deleteVendor() throws Exception {
+        DeleteVendorCommand command = (DeleteVendorCommand) parser.parseCommand(
+                DeleteVendorCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteVendorCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_editGuest() throws Exception {
+        Guest guest = new GuestBuilder().build();
+        EditGuestDescriptor descriptor = new EditGuestDescriptorBuilder(guest).build();
+        EditGuestCommand command = (EditGuestCommand) parser.parseCommand(EditGuestCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + GuestUtil.getEditGuestDescriptorDetails(descriptor));
+        assertEquals(new EditGuestCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_editVendor() throws Exception {
+        Vendor vendor = new VendorBuilder().build();
+        EditVendorDescriptor descriptor = new EditVendorDescriptorBuilder(vendor).build();
+        EditVendorCommand command = (EditVendorCommand) parser.parseCommand(
+                EditVendorCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + VendorUtil.getEditVendorDescriptorDetails(descriptor));
+        assertEquals(new EditVendorCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test

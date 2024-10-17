@@ -7,7 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import seedu.address.model.person.Guest;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Vendor;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -28,6 +31,8 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private HBox cardPane;
+    @FXML
+    private VBox cardPaneContents;
     @FXML
     private Label name;
     @FXML
@@ -52,6 +57,17 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+
+        Label extraLabel;
+        if (person instanceof Guest g) {
+            extraLabel = new Label("RSVP: " + g.getRsvp().value);
+        } else {
+            Vendor v = (Vendor) person;
+            extraLabel = new Label("Company: " + v.getCompany().value);
+        }
+        extraLabel.getStyleClass().add("cell_small_label");
+        cardPaneContents.getChildren().add(extraLabel);
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
