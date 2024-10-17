@@ -111,7 +111,7 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names contain any of the given keywords. If no exact match is found, the address book displays the names in decreasing order of similarity to search term.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -121,11 +121,13 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Partial words will be matched e.g. `Han` will match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* If no exact match is found, the address book displays the names in decreasing order of similarity to search term.
 
 Examples:
 * `find John` returns `john`, `John Doe`, and `Johnny`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find Ifan` sorts other names by decreasing similarity to `Ifan` (e.g. Irfan, Isolde, Ayush, ...)
 
 ### Deleting a person : `delete`
 
