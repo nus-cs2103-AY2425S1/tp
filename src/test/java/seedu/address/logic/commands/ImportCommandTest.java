@@ -250,4 +250,18 @@ public class ImportCommandTest {
             assertTrue(e.getMessage().contains(ImportCommand.MESSAGE_INCORRECT_FILE_FORMAT));
         }
     }
+
+    @Test
+    public void equals() {
+        ImportCommand expectedImportCommand = new ImportCommand("contacts.csv");
+        ImportCommand importCommand = new ImportCommand("contacts.csv");
+        assertTrue(expectedImportCommand.equals(importCommand));
+    }
+
+    @Test
+    public void not_equals() {
+        ImportCommand expectedImportCommand = new ImportCommand("contact.csv");
+        ImportCommand importCommand = new ImportCommand("contacts.csv");
+        assertTrue(!expectedImportCommand.equals(importCommand));
+    }
 }
