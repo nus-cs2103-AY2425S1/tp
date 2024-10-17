@@ -33,22 +33,22 @@ public class AssignCommandParser {
         // Ensure no duplicate prefixes are provided
         argMultimap.verifyNoDuplicatePrefixesFor(ASSIGN_VOLUNTEER_PREFIX_NAME, ASSIGN_EVENT_PREFIX_NAME);
 
-        Index volunteerId;
-        Index eventId;
+        Index volunteerIndex;
+        Index eventIndex;
 
         try {
-            volunteerId = VolunteerParserUtil.parseIndex(argMultimap.getValue(ASSIGN_VOLUNTEER_PREFIX_NAME)
+            volunteerIndex = VolunteerParserUtil.parseIndex(argMultimap.getValue(ASSIGN_VOLUNTEER_PREFIX_NAME)
                     .orElseThrow(() -> new ParseException("Volunteer ID is required.")
             ));
 
-            eventId = EventParserUtil.parseIndex(argMultimap.getValue(ASSIGN_EVENT_PREFIX_NAME)
+            eventIndex = EventParserUtil.parseIndex(argMultimap.getValue(ASSIGN_EVENT_PREFIX_NAME)
                     .orElseThrow(() -> new ParseException("Event ID is required.")
             ));
         } catch (NumberFormatException e) {
             throw new ParseException("Index must be a positive integer.");
         }
 
-        return new AssignCommand(volunteerId, eventId);
+        return new AssignCommand(volunteerIndex, eventIndex);
     }
 
     /**
