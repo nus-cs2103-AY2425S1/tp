@@ -28,50 +28,50 @@ public class TypicalLessons {
             MATH_LESSON = new LessonBuilder()
                     .withName(ALICE)
                     .withLocationIndex("1")
-                    .withStartDateTime("2024-10-20T10:00:00")
-                    .withEndDateTime("2024-10-20T11:00:00")
+                    .withStartDateTime("20-10-2024 10:00")
+                    .withEndDateTime("20-10-2024 10:00")
                     .build();
 
             SCIENCE_LESSON = new LessonBuilder()
                     .withName(ALICE)
                     .withLocationIndex("2")
-                    .withStartDateTime("2024-10-20T12:00:00")
-                    .withEndDateTime("2024-10-20T13:00:00")
+                    .withStartDateTime("20-10-2024 12:00")
+                    .withEndDateTime("20-10-2024 13:00")
                     .build();
 
             ENGLISH_LESSON = new LessonBuilder()
                     .withName(BOB)
                     .withLocationIndex("1")
-                    .withStartDateTime("2024-10-21T09:00:00")
-                    .withEndDateTime("2024-10-21T10:00:00")
+                    .withStartDateTime("21-10-2024 09:00")
+                    .withEndDateTime("21-10-2024 09:00")
                     .build();
 
             HISTORY_LESSON = new LessonBuilder()
                     .withName(ALICE)
                     .withLocationIndex("2")
-                    .withStartDateTime("2024-10-21T11:00:00")
-                    .withEndDateTime("2024-10-21T12:00:00")
+                    .withStartDateTime("21-10-2024 11:00")
+                    .withEndDateTime("21-10-2024 12:00")
                     .build();
 
             GEOGRAPHY_LESSON = new LessonBuilder()
                     .withName(ALICE)
                     .withLocationIndex("1")
-                    .withStartDateTime("2024-10-22T14:00:00")
-                    .withEndDateTime("2024-10-22T15:00:00")
+                    .withStartDateTime("15-10-2024 10:00")
+                    .withEndDateTime("15-10-2024 11:00")
                     .build();
 
             ART_LESSON = new LessonBuilder()
                     .withName(BOB)
                     .withLocationIndex("2")
-                    .withStartDateTime("2024-10-22T16:00:00")
-                    .withEndDateTime("2024-10-22T17:00:00")
+                    .withStartDateTime("22-10-2024 16:00")
+                    .withEndDateTime("22-10-2024 17:00")
                     .build();
 
             MUSIC_LESSON = new LessonBuilder()
                     .withName(BOB)
                     .withLocationIndex("1")
-                    .withStartDateTime("2024-10-23T15:00:00")
-                    .withEndDateTime("2024-10-23T16:00:00")
+                    .withStartDateTime("23-10-2024 15:00")
+                    .withEndDateTime("23-10-2024 16:00")
                     .build();
         } catch (ParseException e) {
             throw new RuntimeException("Failed to create typical lessons.", e);
