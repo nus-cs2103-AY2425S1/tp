@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.image.ImageView?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="Ward Watch App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
@@ -31,6 +32,12 @@
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
         </MenuBar>
+
+        <StackPane VBox.vgrow="NEVER" fx:id="bannerPlaceholder" styleClass="pane-with-border">
+          <ImageView fx:id="imageView" fitWidth="300" fitHeight="100" preserveRatio="true">
+            <Image url="@/images/wardwatch_banner.png"/>
+          </ImageView>
+        </StackPane>
 
         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
           <padding>
