@@ -19,4 +19,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_CUSTOMER_LIST = new Prefix("cl/");
     public static final Prefix PREFIX_CLIENT_INDEX = new Prefix("c/");
     public static final Prefix PREFIX_RENTAL_INDEX = new Prefix("r/");
+    public static final Prefix PREFIX_KEYWORD = new Prefix("k/");
 }

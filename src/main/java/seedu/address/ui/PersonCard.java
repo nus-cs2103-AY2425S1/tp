@@ -51,9 +51,9 @@ public class PersonCard extends UiPart<Region> {
         name.setText(client.getName().fullName);
         phone.setText(client.getPhone().value);
         email.setText(client.getEmail().value);
-        client.getRentalInformation().stream()
-                .sorted(Comparator.comparing(info -> info.getRentalStartDate().rentalDate))
-                .forEach(info -> rentalInformationList.getChildren().add(new Label(info.getString())));
+//        client.getRentalInformation().stream()
+//                .sorted(Comparator.comparing(info -> info.getRentalStartDate().rentalDate))
+//                .forEach(info -> rentalInformationList.getChildren().add(new Label(info.getString())));
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
