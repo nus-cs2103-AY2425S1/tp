@@ -78,7 +78,7 @@ Should the browser fail to launch, displays a message explaining how to access t
 Format: `help`
 
 
-### Adding a volunteer: `???`
+### Adding a volunteer: `v/ new`
 
 Adds a volunteer to the database.
 
@@ -88,7 +88,7 @@ Examples:
 * `???`
 * `???`
 
-### Adding an event: `???`
+### Adding an event: `e/ new`
 
 Adds an event to the database.
 
@@ -120,7 +120,7 @@ Examples:
 
 [//]: # (* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.)
 
-### Deleting an event : `???`
+### Deleting an event : `/e del `
 
 Deletes the specified event from the database.
 
@@ -136,18 +136,18 @@ Examples:
 
 [//]: # (* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.)
 
-### Adding a volunteer to an event's list of participants `???`
+### Adding a volunteer to an event's list of participants `assign`
 
-Adds a volunteer with the specified `ID` to the list of participants of the event with the specified `ID`.
+Adds a volunteer with the specified `VOLUNTEER_ID` to the list of participants of the event with the specified `EVENT_ID`.
 
-Format: `???`
+Format: `assign v/ VOLUNTEER_ID e/ EVENT_ID`
 
 * The index refers to the id number (shown in brackets) in the displayed volunteer and event lists.
 * The id **must be a non-negative integer** 0, 1, 2, …​
 
 ### Removing a volunteer from an event's list of participants `???`
 
-Removes a volunteer with the specified `ID` to the list of participants of the event with the specified `ID`.
+Removes a volunteer with the specified `VOLUNTEER_ID` to the list of participants of the event with the specified `EVENT_ID`.
 
 Format: `???`
 
@@ -198,14 +198,14 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ## Command summary
 
-| Action                             | Format, Examples |
-|------------------------------------|------------------|
-| **Add Volunteer**                  | `???`            |
-| **Delete Volunteer**               | `???`            |
-| **Add Event**                      | `???`            |
-| **Delete Event**                   | `???`            |
-| **Add Volunteer to Event**         | `???`            |
-| **Remove Volunteer from Event**    | `???`            |
-| **List all Volunteers and Events** | `reset`          |
-| **Export database to csv file**    | `export`         |
-| **Help**                           | `help`           |
+| Action                             | Format, Examples                                             |
+|------------------------------------|--------------------------------------------------------------|
+| **Add Volunteer**                  | `v/ new ???`                                                 |
+| **Delete Volunteer**               | `???`                                                        |
+| **Add Event**                      | `e/ new ???`                                                 |
+| **Delete Event**                   | `???`                                                        |
+| **Add Volunteer to Event**         | `assign v/ VOLUNTEER_ID e/ EVENT_ID` `e.g. assign v/ 1 e/ 2` |
+| **Remove Volunteer from Event**    | `???`                                                        |
+| **List all Volunteers and Events** | `reset`                                                      |
+| **Export database to csv file**    | `export`                                                     |
+| **Help**                           | `help`                                                       |
