@@ -8,8 +8,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.PhoneNumberContainsKeywordPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case-insensitive.
+ * Finds and lists all persons in address book whose phone-number contains any of the argument keywords.
+ * Keyword matching is based solely on values.
  */
 public class FindPhoneNumberCommand extends Command {
 
@@ -22,6 +22,11 @@ public class FindPhoneNumberCommand extends Command {
 
     private final PhoneNumberContainsKeywordPredicate predicate;
 
+    /**
+     * Creates an FindPhoneNumberCommand to find names matching the specified {@code PhoneNumberContainsKeywordPredicate}
+     *
+     * @param predicate the predicate used to filter names based on given keywords
+     */
     public FindPhoneNumberCommand(PhoneNumberContainsKeywordPredicate predicate) {
         this.predicate = predicate;
     }

@@ -12,6 +12,13 @@ public class Condo extends Property {
 
     public static final String MESSAGE_CONSTRAINTS = "Condo names should be alphanumeric";
 
+    /**
+     * Constructs a {@code Condo}.
+     *
+     * @param postalCode A valid Condo postalCode.
+     * @param unitNumber A valid unit number.
+     * @param price A valid price.
+     */
     public Condo(PostalCode postalCode, UnitNumber unitNumber, Price price, Set<Tag> tags) {
         super(postalCode, unitNumber, price, tags);
     }
