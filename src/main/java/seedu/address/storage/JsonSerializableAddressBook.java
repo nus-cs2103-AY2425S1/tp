@@ -22,7 +22,9 @@ import seedu.address.model.pet.Pet;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
-    public static final String MESSAGE_DUPLICATE_OWNER = "Owner list contains duplicate owner(s).";
+
+    public static final String MESSAGE_DUPLICATE_OWNER = "Owners list contains duplicate owner(s).";
+
     public static final String MESSAGE_DUPLICATE_PET = "Pets list contains duplicate pet(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
@@ -34,11 +36,17 @@ class JsonSerializableAddressBook {
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                       @JsonProperty("owners") List<JsonAdaptedOwner> owners,
-                                       @JsonProperty("pets") List<JsonAdaptedPet> pets) {
-        this.persons.addAll(persons);
-        this.owners.addAll(owners);
-        this.pets.addAll(pets);
+                                       @JsonProperty("pets") List<JsonAdaptedPet> pets,
+                                       @JsonProperty("owners") List<JsonAdaptedOwner> owners) {
+        if (persons != null) {
+            this.persons.addAll(persons);
+        }
+        if (pets != null) {
+            this.pets.addAll(pets);
+        }
+        if (owners != null) {
+            this.owners.addAll(owners);
+        }
     }
 
     /**
@@ -50,6 +58,7 @@ class JsonSerializableAddressBook {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         owners.addAll(source.getOwnerList().stream().map(JsonAdaptedOwner::new).collect(Collectors.toList()));
         pets.addAll(source.getPetList().stream().map(JsonAdaptedPet::new).collect(Collectors.toList()));
+        owners.addAll(source.getOwnerList().stream().map(JsonAdaptedOwner::new).collect(Collectors.toList()));
     }
 
     /**
@@ -66,6 +75,14 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
+        for (JsonAdaptedOwner jsonAdaptedOwner : owners) {
+            Owner owner = jsonAdaptedOwner.toModelType();
+            if (addressBook.hasOwner(owner)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_OWNER);
+            }
+            addressBook.addOwner(owner);
+        }
+
         for (JsonAdaptedOwner jsonAdaptedOwner : owners) {
             Owner owner = jsonAdaptedOwner.toModelType();
             if (addressBook.hasOwner(owner)) {

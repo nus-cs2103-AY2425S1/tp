@@ -10,6 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
+import seedu.address.model.pet.Pet;
 
 /**
  * Panel containing two lists: one for owners and one for pets.
@@ -22,19 +23,19 @@ public class PersonListPanel extends UiPart<Region> {
     private ListView<Owner> ownerListView;
 
     @FXML
-    private ListView<Person> petListView;
+    private ListView<Pet> petListView;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList, ObservableList<Owner> ownerList) {
+    public PersonListPanel(ObservableList<Owner> ownerList, ObservableList<Pet> petList) {
         super(FXML);
         ownerListView.setItems(ownerList);
         ownerListView.setCellFactory(listView -> new OwnerListViewCell());
 
         // Temporarily using ownerList for both, but you can modify this once the petList is implemented
-        petListView.setItems(personList); // Replace with petList later
-        petListView.setCellFactory(listView -> new PersonListViewCell());
+        petListView.setItems(petList); // Replace with petList later
+        petListView.setCellFactory(listView -> new PetListViewCell());
     }
 
     /**
@@ -71,5 +72,20 @@ public class PersonListPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code Pet} using a {@code PetCard}.
+     */
+    class PetListViewCell extends ListCell<Pet> {
+        @Override
+        protected void updateItem(Pet pet, boolean empty) {
+            super.updateItem(pet, empty);
 
+            if (empty || pet == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new PetCard(pet, getIndex() + 1).getRoot());
+            }
+        }
+    }
 }
