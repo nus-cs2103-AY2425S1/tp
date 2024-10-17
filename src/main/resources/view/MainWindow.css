@@ -30,7 +30,7 @@
 }
 
 .split-pane {
-    -fx-background-color: transparent, derive(#982B1C, 80%), transparent, derive(#982B1C, 80%);
+    -fx-background-color: #F0A89F;
     -fx-background-radius: 10;
     -fx-background-insets: 10;
     -fx-border-color: derive(#800000, 20%);
@@ -64,19 +64,6 @@
     -fx-text-fill: white;
 }
 
-.scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
-}
-
-.scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
-    -fx-background-insets: 3;
-}
-
-.scroll-bar .increment-button, .scroll-bar .decrement-button {
-    -fx-background-color: transparent;
-    -fx-padding: 0 0 0 0;
-}
 
 .scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
     -fx-shape: " ";
@@ -87,5 +74,18 @@
 }
 
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
-    -fx-padding: 8 1 8 1;
+    -fx-padding: 1 8 1 8;
+}
+
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 0;
+}
+
+.scroll-bar {
+    -fx-background-color: #CAC6C5;
+}
+
+#commandBoxPlaceholder {
+    -fx-background-color: transparent;
 }
