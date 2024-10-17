@@ -1,6 +1,7 @@
 package seedu.address.model.assignment;
 
 import java.util.function.Predicate;
+
 import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectName;
 

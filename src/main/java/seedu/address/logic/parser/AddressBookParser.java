@@ -24,8 +24,6 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListAssignmentsCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListProjectCommand;
-
-
 import seedu.address.logic.commands.ListProjectMembersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
