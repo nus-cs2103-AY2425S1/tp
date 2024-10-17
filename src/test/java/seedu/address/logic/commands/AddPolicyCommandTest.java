@@ -25,13 +25,14 @@ import seedu.address.logic.Messages;
 import seedu.address.model.person.Person;
 
 public class AddPolicyCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
     private final LifePolicy life = new LifePolicy();
     private final HealthPolicy health = new HealthPolicy();
     private final EducationPolicy education = new EducationPolicy();
 
     @Test
     public void constructor_nullInputs_throwsNullPointerException() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs()); // Reinitialize model
         final PolicySet policies = new PolicySet();
         assertThrows(NullPointerException.class, () -> new AddPolicyCommand(null, policies));
         assertThrows(NullPointerException.class, () -> new AddPolicyCommand(INDEX_FIRST_PERSON, null));
@@ -39,6 +40,7 @@ public class AddPolicyCommandTest {
 
     @Test
     public void execute_throwsException() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs()); // Reinitialize model
         final PolicySet policies = new PolicySet();
         policies.add(health);
 
@@ -48,6 +50,7 @@ public class AddPolicyCommandTest {
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs()); // Reinitialize model
         final PolicySet policies = new PolicySet();
         policies.add(life);  // Add a policy to the set
 
@@ -60,20 +63,29 @@ public class AddPolicyCommandTest {
 
     @Test
     public void execute_addMultiplePolicies_success() throws Exception {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs()); // Reinitialize model
         final PolicySet policies = new PolicySet();
         policies.add(life);
         policies.add(health);
 
         AddPolicyCommand addPolicyCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, policies);
 
+        Person personToAddPolicy = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
         String expectedMessage = String.format(AddPolicyCommand.POLICY_ADD_PERSON_SUCCESS,
-                model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
+                String.format("%s; Phone: %s; Email: %s; Address: %s; Tags: %s",
+                        personToAddPolicy.getName(),
+                        personToAddPolicy.getPhone(),
+                        personToAddPolicy.getEmail(),
+                        personToAddPolicy.getAddress(),
+                        personToAddPolicy.getTags()));
 
         assertCommandSuccess(addPolicyCommand, model, expectedMessage, model);
     }
 
     @Test
     public void execute_duplicatePolicy_throwsCommandException() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs()); // Reinitialize model
         final PolicySet policies = new PolicySet();
         policies.add(life);  // Add the same policy twice to simulate a duplicate
         policies.add(life);
@@ -85,6 +97,7 @@ public class AddPolicyCommandTest {
 
     @Test
     public void execute_emptyPolicySet_success() throws Exception {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs()); // Reinitialize model
         final PolicySet policies = new PolicySet();  // Empty set
 
         AddPolicyCommand addPolicyCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, policies);

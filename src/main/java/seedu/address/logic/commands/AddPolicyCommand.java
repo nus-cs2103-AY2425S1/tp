@@ -39,9 +39,8 @@ public class AddPolicyCommand extends Command {
      * @param policies the set of policies to be added.
      */
     public AddPolicyCommand(Index index, PolicySet policies) {
-        requireNonNull(index);
-        requireNonNull(policies);
-
+        requireNonNull(index, "Index cannot be null.");
+        requireNonNull(policies, "Policies cannot be null.");
         this.index = index;
         this.policies = policies;
     }
@@ -52,7 +51,7 @@ public class AddPolicyCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= model.getFilteredPersonList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -82,15 +81,17 @@ public class AddPolicyCommand extends Command {
      * @throws CommandException if there are duplicate policies.
      */
     private PolicySet updatePolicies(PolicySet policiesToAdd, PolicySet existingPolicies) throws CommandException {
+        PolicySet updatedPolicies = new PolicySet(); // Create a new instance
+        updatedPolicies.addAll(existingPolicies);
         for (Policy policy : policiesToAdd) {
-            if (existingPolicies.contains(policy.getType())) { // Checking for duplicates
+            if (updatedPolicies.contains(policy.getType())) {
                 throw new CommandException(MESSAGE_DUPLICATES);
             }
-            existingPolicies.add(policy);
+            updatedPolicies.add(policy);
         }
-
-        return existingPolicies;
+        return updatedPolicies; // Return the new instance
     }
+
 
     @Override
     public boolean equals(Object other) {
