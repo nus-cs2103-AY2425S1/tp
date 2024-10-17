@@ -84,7 +84,7 @@ public class ContactDisplay extends UiPart<Region> {
      */
     public void updateContactDetails(Person person) {
         nameLabel.setText("Name: " + person.getName().fullName);
-        categoryLabel.setText("Category: " + person.getCategory());
+        categoryLabel.setText("Category: " + person.getCategoryDisplayName());
         phoneLabel.setText("Phone: " + person.getPhone().value);
         emailLabel.setText("Email: " + person.getEmail().value);
         addressLabel.setText("Address: " + person.getAddress().value);
