@@ -135,6 +135,9 @@
 
 .stack-pane {
      -fx-background-color: derive(#ffffff, 20%);
+     -fx-border-color: black;
+     -fx-border-width: 0.5;
+     -fx-border-style: solid;
 }
 
 .pane-with-border {
