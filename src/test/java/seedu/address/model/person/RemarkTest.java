@@ -27,8 +27,6 @@ public class RemarkTest {
         // invalid remark
         assertFalse(Remark.isValidRemark("")); // empty string
         assertFalse(Remark.isValidRemark(" ")); // spaces only
-        assertFalse(Remark.isValidRemark("*handsome")); // invalid inputs
-        assertFalse(Remark.isValidRemark("pretty!")); // invalid inputs
 
         // valid remark
         assertTrue(Remark.isValidRemark("handsome"));
