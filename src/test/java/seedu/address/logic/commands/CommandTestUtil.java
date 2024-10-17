@@ -21,8 +21,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.owner.Owner;
+import seedu.address.model.owner.OwnerNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.pet.Pet;
+import seedu.address.model.pet.PetNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -145,6 +149,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -159,4 +164,31 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the owner at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showOwnerAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredOwnerList().size());
+
+        Owner owner = model.getFilteredOwnerList().get(targetIndex.getZeroBased());
+        final String[] splitName = owner.getName().fullName.split("\\s+");
+        model.updateFilteredOwnerList(new OwnerNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredOwnerList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the pet at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showPetAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredPetList().size());
+
+        Pet pet = model.getFilteredPetList().get(targetIndex.getZeroBased());
+        final String[] splitName = pet.getName().name.split("\\s+");
+        model.updateFilteredPetList(new PetNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredPetList().size());
+    }
 }

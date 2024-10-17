@@ -5,7 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Pattern;
 
+import seedu.address.commons.core.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -25,6 +27,39 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+
+    // Pattern to match strings of the form "p" followed by an integer with up to 3 digits.
+    private static final Pattern PX_PATTERN = Pattern.compile("^p\\d{1,3}$");
+
+    /**
+     * Checks if a given string is of the form "px", where "x" is an integer of up to 3 digits.
+     *
+     * @param input The string to check.
+     * @return {@code true} if the string is of the form "px", {@code false} otherwise.
+     */
+
+    public static boolean isValidInput(String input) {
+        // The pattern matches 'p' or 'o' followed by an integer (1 to 3 digits)
+        String pattern1 = "^p\\d{1,3}$";
+        String pattern2 = "^o\\d{1,3}$";
+        return input.matches(pattern1) || input.matches(pattern2);
+    }
+
+    /**
+     * Parses {@code oneBasedIndexAndType} into a {@code pair containing an index and string} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static Pair parseIndexAndType(String oneBasedIndexAndType) throws ParseException {
+        String trimmedIndex = oneBasedIndexAndType.trim();
+        if (!isValidInput(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        Pair res = new Pair(Index.fromOneBased(Integer.parseInt(Character.toString(trimmedIndex.charAt(1)))),
+                Character.toString(trimmedIndex.charAt(0)));
+        return res;
+        //return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
