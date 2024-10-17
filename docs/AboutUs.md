@@ -17,6 +17,7 @@ You can reach us at the email `e1155908@u.nus.edu.sg`
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
+* Responsibilities: Developing
 
 ### Harith Nurhisham
 
