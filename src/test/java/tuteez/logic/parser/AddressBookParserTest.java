@@ -6,6 +6,7 @@ import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static tuteez.testutil.Assert.assertThrows;
 import static tuteez.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static tuteez.testutil.TypicalIndexes.INDEX_FIRST_REMARK;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,17 +15,21 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import tuteez.logic.commands.AddCommand;
+import tuteez.logic.commands.AddRemarkCommand;
 import tuteez.logic.commands.ClearCommand;
 import tuteez.logic.commands.DeleteCommand;
+import tuteez.logic.commands.DeleteRemarkCommand;
 import tuteez.logic.commands.EditCommand;
 import tuteez.logic.commands.EditCommand.EditPersonDescriptor;
 import tuteez.logic.commands.ExitCommand;
 import tuteez.logic.commands.FindCommand;
 import tuteez.logic.commands.HelpCommand;
 import tuteez.logic.commands.ListCommand;
+import tuteez.logic.commands.RemarkCommand;
 import tuteez.logic.parser.exceptions.ParseException;
 import tuteez.model.person.NameContainsKeywordsPredicate;
 import tuteez.model.person.Person;
+import tuteez.model.remark.Remark;
 import tuteez.testutil.EditPersonDescriptorBuilder;
 import tuteez.testutil.PersonBuilder;
 import tuteez.testutil.PersonUtil;
@@ -60,6 +65,38 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_addRemark() throws Exception {
+        AddRemarkCommand command = (AddRemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + AddRemarkCommand.ADD_REMARK_PARAM + " " + "remark");
+        assertEquals(new AddRemarkCommand(INDEX_FIRST_PERSON, new Remark("remark")), command);
+    }
+
+    @Test
+    public void parseCommand_deleteRemark() throws Exception {
+        DeleteRemarkCommand command = (DeleteRemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + DeleteRemarkCommand.DELETE_REMARK_PARAM + " 1");
+        assertEquals(new DeleteRemarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_REMARK), command);
+    }
+
+    @Test
+    public void parseCommand_invalidRemarkCommand() {
+        assertThrows(ParseException.class, () -> parser.parseCommand(
+                RemarkCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " -x Some remark"));
+    }
+
+    @Test
+    public void parseCommand_remarkWithoutIndex() {
+        assertThrows(ParseException.class, () -> parser.parseCommand(
+                RemarkCommand.COMMAND_WORD + " -a Some remark"));
+    }
+
+    @Test
+    public void parseCommand_remarkWithInvalidIndex() {
+        assertThrows(ParseException.class, () -> parser.parseCommand(
+                RemarkCommand.COMMAND_WORD + " -1 -a Some remark"));
     }
 
     @Test

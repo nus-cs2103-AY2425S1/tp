@@ -1,5 +1,6 @@
 package tuteez.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,6 +9,7 @@ import tuteez.model.person.Email;
 import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
+import tuteez.model.remark.RemarkList;
 import tuteez.model.tag.Tag;
 import tuteez.model.util.SampleDataUtil;
 
@@ -26,6 +28,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private RemarkList remarkList;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +39,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        remarkList = new RemarkList();
     }
 
     /**
@@ -47,6 +51,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        remarkList = new RemarkList(new ArrayList<>(personToCopy.getRemarkList().getRemarks()));
     }
 
     /**
@@ -89,8 +94,15 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags);
+    /**
+     * Sets the {@code RemarkList} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRemarks(RemarkList remarkList) {
+        this.remarkList = new RemarkList(new ArrayList<>(remarkList.getRemarks()));
+        return this;
     }
 
+    public Person build() {
+        return new Person(name, phone, email, address, tags, remarkList);
+    }
 }

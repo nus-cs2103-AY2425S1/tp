@@ -3,6 +3,7 @@ package tuteez.logic.commands;
 import java.util.ArrayList;
 
 import tuteez.commons.core.index.Index;
+import tuteez.logic.Messages;
 import tuteez.logic.commands.exceptions.CommandException;
 import tuteez.model.Model;
 import tuteez.model.person.Person;
@@ -39,11 +40,32 @@ public class DeleteRemarkCommand extends RemarkCommand {
                 remarkIndex.getOneBased(), personIndex.getOneBased()));
     }
 
-    private Person deleteRemarkFromPerson(Person person) {
+    private Person deleteRemarkFromPerson(Person person) throws CommandException {
         RemarkList updatedRemarkList = new RemarkList(new ArrayList<>(person.getRemarkList().getRemarks()));
+
+        if (remarkIndex.getZeroBased() < 0 || remarkIndex.getZeroBased() >= updatedRemarkList.getSize()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_REMARK_INDEX);
+        }
+
         updatedRemarkList.deleteRemark(remarkIndex.getZeroBased());
 
         return new Person(person.getName(), person.getPhone(), person.getEmail(),
                 person.getAddress(), person.getTags(), updatedRemarkList);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DeleteRemarkCommand)) {
+            return false;
+        }
+
+        DeleteRemarkCommand otherDeleteRemarkCommand = (DeleteRemarkCommand) other;
+        return remarkIndex.equals(otherDeleteRemarkCommand.remarkIndex)
+                && personIndex.equals(otherDeleteRemarkCommand.personIndex);
     }
 }

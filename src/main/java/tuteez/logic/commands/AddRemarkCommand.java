@@ -13,6 +13,7 @@ import tuteez.model.remark.RemarkList;
  * Adds a remark to the specified person.
  */
 public class AddRemarkCommand extends RemarkCommand {
+    public static final String ADD_REMARK_PARAM = "-a";
 
     private final Remark remarkToAdd;
 
@@ -44,5 +45,22 @@ public class AddRemarkCommand extends RemarkCommand {
         updatedRemarkList.addRemark(remarkToAdd);
         return new Person(person.getName(), person.getPhone(), person.getEmail(),
                 person.getAddress(), person.getTags(), updatedRemarkList);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+
+        // instanceof handles nulls
+        if (!(other instanceof AddRemarkCommand)) {
+            return false;
+        }
+
+        AddRemarkCommand otherAddRemarkCommand = (AddRemarkCommand) other;
+        return remarkToAdd.equals(otherAddRemarkCommand.remarkToAdd)
+                && personIndex.equals(otherAddRemarkCommand.personIndex);
     }
 }

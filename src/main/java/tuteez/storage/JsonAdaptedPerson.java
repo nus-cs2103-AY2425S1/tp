@@ -110,7 +110,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        final RemarkList modelRemarkList = remarkList.toModelType();
+        final RemarkList modelRemarkList = remarkList == null ? new RemarkList() : remarkList.toModelType();
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelRemarkList);
     }
