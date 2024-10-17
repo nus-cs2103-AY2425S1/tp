@@ -19,7 +19,7 @@ title: AcademyAssist User Guide
    * [Finding a student](#finding-a-student--find)
    * [Sorting students](#sorting-students--sort)
    * [Clearing all entries](#clearing-all-entries--clear)
-   * [Viewing help](#viewing-help--help)
+   * [Getting help](#getting-help--help)
    * [Exiting the program](#exiting-the-program--exit)
 
 4. [Data Management](#data-management-in-academyassist)
@@ -47,13 +47,13 @@ Let's embark on this journey to simpler, faster, and more effective student mana
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
-   1. Open a terminal window, and navigate to the root of your project folder.
+   1. Open a terminal window, and go to the main folder where all your project files are stored.
    2. Run the `java -version` command to confirm the terminal is using Java 17.
    3. If Java version is not Java 17, download it [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 
 2. Download the latest `AcademyAssist.jar` file from the official website.
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AcademyAssist.
+3. Move the file to the folder you want to use as the _home folder_ for your AcademyAssist.
 
 4. Double-click the file to start the app.
 
@@ -148,7 +148,7 @@ Format: `view`
 
 Finds students whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find NAME [MORE_NAMES]`
 
 * The search is case-insensitive.
 * Only the name is searched.
@@ -196,7 +196,7 @@ Format: `clear`
 
 ![Clear Success Message](/images/clear.png)
 
-### Viewing help : `help`
+### Getting help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -238,7 +238,7 @@ Your information is important, so here are some tips to keep it secure:
 why not copy your AcademyAssist file to a USB drive or cloud storage?
 
 2. **Be Careful with Editing**: While it's possible to open and edit the data file directly, we don't recommend 
-it unless you're very comfortable with computers. It's safer to make changes through the AcademyAssist program.
+it unless you're an expert in CLI applications. It's safer to make changes through the AcademyAssist program.
 
 
 ### What If Something Goes Wrong?
@@ -273,7 +273,7 @@ the data of your previous AcademyAssist folder.
 | **Delete** | `delete IC_NUMBER`<br> e.g., `delete S1234567A`                                                                                                                            |
 | **Edit** | `edit IC_NUMBER FIELD/NEW_VALUE`<br> e.g.,`edit S1234567A a/New_Address`                                                                                                   |
 | **View** | `view`                                                                                                                                                                     |
-| **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John Jane`                                                                                                                  |
+| **Find** | `find NAME [MORE_NAMES]`<br> e.g., `find John Jane`                                                                                                                        |
 | **Add Class** | `addc i/IC_NUMBER s/SUBJECT`<br> e.g., `addc S1234567A Science`                                                                                                            |
 | **Sort** | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                                     |
 | **Clear** | `clear`                                                                                                                                                                    |
