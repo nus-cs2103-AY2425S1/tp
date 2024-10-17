@@ -59,9 +59,9 @@ public class PersonTest {
 
     @Test
     public void putOrderTest() {
-        Order cake = Order.of("Cake");
-        Order pizza = Order.of("Pizza");
-        Order noodle = Order.of("Noodle");
+        Order cake = new Order("Cake");
+        Order pizza = new Order("Pizza");
+        Order noodle = new Order("Noodle");
 
         Person p = new PersonBuilder().build();
         p.putOrder(cake);
@@ -89,15 +89,15 @@ public class PersonTest {
     @Test
     public void personBuilderWithOrderFrequencyTest() {
         HashMap<Order, Integer> orders = new HashMap<>();
-        orders.put(Order.of("cake"), 10);
+        orders.put(new Order("cake"), 10);
         Person p = new PersonBuilder().withOrderFrequency(orders).build();
     }
 
     @Test
     public void removeOrderTest() {
-        Order cake = Order.of("Cake");
-        Order pizza = Order.of("Pizza");
-        Order noodle = Order.of("Noodle");
+        Order cake = new Order("Cake");
+        Order pizza = new Order("Pizza");
+        Order noodle = new Order("Noodle");
 
         Person p = new PersonBuilder().build();
         p.putOrder(cake);
@@ -117,8 +117,8 @@ public class PersonTest {
 
     @Test
     public void compareToTest() {
-        Order cake = Order.of("Cake");
-        Order pizza = Order.of("Pizza");
+        Order cake = new Order("Cake");
+        Order pizza = new Order("Pizza");
 
         Person p1 = new PersonBuilder().build();
         Person p2 = new PersonBuilder().build();
@@ -158,8 +158,8 @@ public class PersonTest {
     public void compareToTest2() {
         ArrayList<Person> list = new ArrayList<>();
         ArrayList<Person> expected = new ArrayList<>();
-        Order cake = Order.of("Cake");
-        Order pizza = Order.of("Pizza");
+        Order cake = new Order("Cake");
+        Order pizza = new Order("Pizza");
 
         Person p1 = new PersonBuilder().build();
         Person p2 = new PersonBuilder().build();
@@ -180,8 +180,8 @@ public class PersonTest {
     public void hashCodeTest() {
         // This hashCode test is not complete, this only test orderFrequency
 
-        Order cake = Order.of("Cake");
-        Order pizza = Order.of("Pizza");
+        Order cake = new Order("Cake");
+        Order pizza = new Order("Pizza");
 
         Person p1 = new PersonBuilder().build();
         Person p2 = new PersonBuilder().build();

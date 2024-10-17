@@ -11,12 +11,15 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.AddressBook;
+import seedu.address.model.order.Order;
 import seedu.address.testutil.TypicalPersons;
 
 public class JsonSerializableAddressBookTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableAddressBookTest");
     private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsAddressBook.json");
+    private static final Path TYPICAL_PERSONS_WITH_ORDERS_FILE =
+            TEST_DATA_FOLDER.resolve("typicalPersonsWithOrdersAddressBook.json");
     private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonAddressBook.json");
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.json");
 
@@ -42,6 +45,17 @@ public class JsonSerializableAddressBookTest {
                 JsonSerializableAddressBook.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_PERSON,
                 dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_typicalPersonsFileWithOrder_success() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_WITH_ORDERS_FILE,
+                JsonSerializableAddressBook.class).get();
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+        AddressBook typicalPersonsWithOrdersAddressBook = TypicalPersons.getTypicalAddressBook();
+        typicalPersonsWithOrdersAddressBook.addOrder(new Order("cake"));
+        typicalPersonsWithOrdersAddressBook.addOrder(new Order("pizza"));
+        assertEquals(addressBookFromFile, typicalPersonsWithOrdersAddressBook);
     }
 
 }

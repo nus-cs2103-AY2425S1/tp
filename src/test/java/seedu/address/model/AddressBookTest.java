@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -65,6 +66,11 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasOrder_orderNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasOrder(new Order("cake")));
+    }
+
+    @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
         assertTrue(addressBook.hasPerson(ALICE));
@@ -103,6 +109,12 @@ public class AddressBookTest {
         public ObservableList<Person> getPersonList() {
             return persons;
         }
+
+        @Override
+        public ObservableList<Order> getOrderList() {
+            throw new UnsupportedOperationException("This method is not implemented yet.");
+        }
+
     }
 
 }

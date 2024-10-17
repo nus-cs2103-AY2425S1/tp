@@ -5,5 +5,8 @@
     "email": "invalid@email!3e",
     "address": "4th street",
     "postalCode": "123456"
+  } ],
+  "orders": [ {
+    "name": "test"
   } ]
 }

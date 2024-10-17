@@ -50,5 +50,9 @@
     "postalCode": "123456",
     "tags" : [ ]
   } ],
-  "orders": []
+  "orders": [{
+    "name": "cake"
+  }, {
+    "name": "pizza"
+  }]
 }

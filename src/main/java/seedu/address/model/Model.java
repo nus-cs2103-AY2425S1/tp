@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 
 /**
@@ -84,4 +85,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    void removeOrder(Order order);
+
+    void addOrder(Order order);
+
+    boolean hasOrder(Order order);
+
+    ObservableList<Order> getOrderList();
 }
