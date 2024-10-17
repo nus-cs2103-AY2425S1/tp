@@ -1,8 +1,9 @@
 package seedu.address.model.person;
 
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.ToStringBuilder;
 
-import java.util.function.Predicate;
 
 /**
  * Tests that a {@code Person}'s {@code Phone} matches the phone number given.

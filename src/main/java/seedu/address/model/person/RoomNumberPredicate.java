@@ -1,8 +1,10 @@
 package seedu.address.model.person;
 
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.ToStringBuilder;
 
-import java.util.function.Predicate;
+
 
 /**
  * A predicate class that tests whether a Person's room number matches a given room number.
