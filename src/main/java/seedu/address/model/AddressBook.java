@@ -141,9 +141,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code student} and {@code group} must exist in the address book.
      */
     public void addStudentToGroup(Student student, Group group) {
-        requireNonNull(group);
         requireNonNull(student);
-        // temp fix - to be removed when we change to store just student number
+        requireNonNull(group);
         group.add(student.setStudentGroup(group.getGroupName()));
         students.setPerson(student, student.setStudentGroup(group.getGroupName()));
     }
@@ -285,10 +284,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         group.deleteTask(task);
     }
 
-    public void setTask(Task target, Task editedTask) {
+    public void setTask(Task target, Task editedTask, Group group) {
+        requireNonNull(target);
         requireNonNull(editedTask);
-
+        requireNonNull(group);
         tasks.setTask(target, editedTask);
+        group.setTask(target, editedTask);
     }
 
     //// util methods

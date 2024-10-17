@@ -124,7 +124,7 @@ public class DeleteStudentFromGroupCommandTest {
 
         @Override
         public void setMostRecentGroupTaskDisplay(String string) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -168,7 +168,7 @@ public class DeleteStudentFromGroupCommandTest {
         }
 
         @Override
-        public void setTask(Task target, Task editedTask) {
+        public void setTask(Task target, Task editedTask, Group group) {
             throw new AssertionError("This method should not be called.");
         }
 

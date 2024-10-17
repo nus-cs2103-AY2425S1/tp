@@ -1,5 +1,6 @@
 {
   "persons" : [ ],
+  "tasks" : [ ],
   "groups" : [ {
     "students" : [ ],
     "tasks" : [ ],

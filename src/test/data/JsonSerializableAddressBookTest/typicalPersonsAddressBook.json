@@ -4,44 +4,44 @@
     "name" : "Alice Pauline",
     "email" : "alice@u.nus.edu",
     "tags" : [ "friends" ],
-    "studentNumber" : "A0111111J",
-    "groupName" : "!"
+    "student number" : "A0111111J",
+    "group" : "Team 1"
   }, {
     "name" : "Benson Meier",
     "email" : "johnd@u.nus.edu",
     "tags" : [ "owesMoney", "friends" ],
-    "studentNumber" : "A0222222H",
-    "groupName" : "!"
+    "student number" : "A0222222H",
+    "group" : "Team 2"
   }, {
     "name" : "Carl Kurz",
     "email" : "heinz@u.nus.edu",
     "tags" : [ ],
-    "studentNumber" : "A0333333M",
-    "groupName" : "!"
+    "student number" : "A0333333M",
+    "group" : "Team 3"
   }, {
     "name" : "Daniel Meier",
     "email" : "cornelia@u.nus.edu",
     "tags" : [ "friends" ],
-    "studentNumber" : "A0444444N",
-    "groupName" : "!"
+    "student number" : "A0444444N",
+    "group" : "Team 2"
   }, {
     "name" : "Elle Meyer",
     "email" : "werner@u.nus.edu",
     "tags" : [ ],
-    "studentNumber" : "A0555555H",
-    "groupName" : "!"
+    "student number" : "A0555555H",
+    "group" : "Team 1"
   }, {
     "name" : "Fiona Kunz",
     "email" : "lydia@u.nus.edu",
     "tags" : [ ],
-    "studentNumber" : "A0666666J",
-    "groupName" : "!"
+    "student number" : "A0666666J",
+    "group" : "Team 2"
   }, {
     "name" : "George Best",
     "email" : "anna@u.nus.edu",
     "tags" : [ ],
-    "studentNumber" : "A0888888M",
-    "groupName" : "!"
+    "student number" : "A0888888M",
+    "group" : "Team 1"
   } ],
   "groups" : [ ],
   "tasks" : [ ]

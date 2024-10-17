@@ -1,7 +1,9 @@
 {
   "persons": [ {
     "name": "Hans Muster",
-    "email": "invalid@email!3e"
+    "email": "invalid@email!3e",
+    "student number": "A0123456Z",
+    "group": "Team 1"
   } ],
   "groups" : [ ],
   "tasks" : [ ]

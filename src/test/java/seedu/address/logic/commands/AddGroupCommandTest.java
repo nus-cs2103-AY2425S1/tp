@@ -186,7 +186,7 @@ public class AddGroupCommandTest {
         }
 
         @Override
-        public void setTask(Task target, Task editedTask) {
+        public void setTask(Task target, Task editedTask, Group group) {
             throw new AssertionError("This method should not be called.");
         }
 

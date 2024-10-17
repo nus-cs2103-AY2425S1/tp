@@ -11,6 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.task.Status;
 import seedu.address.model.task.Task;
@@ -29,7 +30,7 @@ public class MarkTaskCommand extends Command {
             + PREFIX_GROUP_NAME + "Team 5 "
             + PREFIX_INDEX + "2";
 
-    public static final String MESSAGE_SUCCESS = "Changed the status of task: %1$s";
+    public static final String MESSAGE_SUCCESS = "Changed the status of task: %1$s to %2$s";
     public static final String GROUP_NOT_FOUND = "Group not found";
 
     private final Index index;
@@ -54,19 +55,18 @@ public class MarkTaskCommand extends Command {
             throw new CommandException(GROUP_NOT_FOUND);
         }
 
-        List<Task> lastShownList = model.getFilteredTaskList();
+        Group group = model.getGroupByName(toMarkFrom);
+        List<Task> lastShownList = group.getTasks().stream().toList();
 
-        // the index here refers to the index in the list of all tasks from all groups
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Task taskToMark = lastShownList.get(index.getZeroBased());
         Status changedStatus = taskToMark.getStatus().equals(Status.PENDING) ? Status.COMPLETED : Status.PENDING;
-        Task markedTask = new Task(taskToMark.getTaskName(), taskToMark.getDeadline(), changedStatus,
-                taskToMark.getGroupsWithTask());
+        Task editedTask = new Task(taskToMark.getTaskName(), taskToMark.getDeadline(), changedStatus);
 
-        model.setTask(taskToMark, markedTask);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(markedTask)));
+        model.setTask(taskToMark, editedTask, group);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(taskToMark), changedStatus));
     }
 
     @Override
