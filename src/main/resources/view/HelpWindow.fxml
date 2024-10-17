@@ -25,7 +25,7 @@
         </HBox>
 
         <VBox alignment="CENTER">
-          <Label fx:id="helpKeywords"/>
+          <Label fx:id="helpKeywords" wrapText="true"/>
         </VBox>
 
         <opaqueInsets>

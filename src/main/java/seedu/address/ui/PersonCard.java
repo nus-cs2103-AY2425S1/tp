@@ -52,7 +52,6 @@ public class PersonCard extends UiPart<Region> {
         nric.setText(person.getNric().value);
         sex.setText(person.getSex().value);
         birthDate.setText(person.getBirthdate().value);
-        System.out.println(person.getHealthServices());
         person.getHealthServices().stream()
                 .sorted(Comparator.comparing(healthservice -> healthservice.healthServiceName))
                 .forEach(healthservice -> healthServices.getChildren().add(new Label(healthservice.healthServiceName)));
