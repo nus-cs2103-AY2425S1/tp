@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.concert.Concert;
+import seedu.address.model.concert.ConcertContact;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,18 +25,23 @@ class JsonSerializableAddressBook {
             "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_CONCERT =
             "Concerts list contains duplicate concert(s).";
+    public static final String MESSAGE_DUPLICATE_CONCERT_CONTACT =
+            "ConcertContacts list contains duplicate association(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedConcert> concerts = new ArrayList<>();
+    private final List<JsonAdaptedConcertContact> concertContacts = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-            @JsonProperty("concerts") List<JsonAdaptedConcert> concerts) {
+            @JsonProperty("concerts") List<JsonAdaptedConcert> concerts,
+            @JsonProperty("concertContacts") List<JsonAdaptedConcertContact> concertContacts) {
         this.persons.addAll(persons);
         this.concerts.addAll(concerts);
+        this.concertContacts.addAll(concertContacts);
     }
 
     /**
@@ -49,6 +55,8 @@ class JsonSerializableAddressBook {
                 Collectors.toList()));
         concerts.addAll(source.getConcertList().stream().map(JsonAdaptedConcert::new).collect(
                 Collectors.toList()));
+        concertContacts.addAll(source.getConcertContactList().stream().map(
+                JsonAdaptedConcertContact::new).collect(Collectors.toList()));
     }
 
     /**
@@ -71,6 +79,13 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CONCERT);
             }
             addressBook.addConcert(concert);
+        }
+        for (JsonAdaptedConcertContact jsonAdaptedConcertContact : concertContacts) {
+            ConcertContact concertContact = jsonAdaptedConcertContact.toModelType();
+            if (addressBook.hasConcertContact(concertContact)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_CONCERT_CONTACT);
+            }
+            addressBook.addConcertContact(concertContact);
         }
         return addressBook;
     }
