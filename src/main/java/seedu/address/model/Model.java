@@ -17,6 +17,8 @@ public interface Model {
 
     Predicate<Owner> PREDICATE_SHOW_ALL_OWNERS = unused -> true;
 
+    Predicate<Pet> PREDICATE_SHOW_ALL_PETS = unused -> true;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -129,4 +131,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredOwnerList(Predicate<Owner> predicate);
+
+    void updateFilteredPetList(Predicate<Pet> predicate);
 }

@@ -66,4 +66,19 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code owner} for display to the user.
+     */
+    public static String format(Pet pet) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(pet.getName())
+                .append("; Phone: ")
+                .append(pet.getPhone())
+                .append("; Email: ")
+                .append(pet.getEmail())
+                .append("; Address: ")
+                .append(pet.getAddress());
+        return builder.toString();
+    }
+
 }

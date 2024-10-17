@@ -26,6 +26,8 @@ public class ModelManager implements Model {
 
     private final FilteredList<Owner> filteredOwners;
 
+    private final FilteredList<Pet> filteredPetss;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -114,6 +116,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deletePet(Pet target) {
+        addressBook.removePet(target);
+    }
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -157,6 +164,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Owner> getFilteredOwnerList() {
         return filteredOwners;
+    }
+
+    @Override
+    public ObservableList<Pet> getFilteredPetList() {
+        return filteredPets;
     }
 
     @Override

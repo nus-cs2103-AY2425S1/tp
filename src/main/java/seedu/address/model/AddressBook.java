@@ -20,6 +20,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniquePersonList persons;
     private final UniqueOwnerList owners;
 
+    private final UniquePetList pets;
+
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -145,6 +147,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeOwner(Owner key) {
         owners.remove(key);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removePet(Pet key) {
+        pets.remove(key);
     }
 
 
