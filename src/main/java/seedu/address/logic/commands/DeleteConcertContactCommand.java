@@ -23,7 +23,7 @@ public class DeleteConcertContactCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
             + "Parameters: PERSONINDEX (must be a positive integer) "
-            + PREFIX_CONCERT +"CONCERTINDEX (must be a positive integer)\n"
+            + PREFIX_CONCERT + "CONCERTINDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_CONCERT + "2";
 
     public static final String MESSAGE_DELETE_CONCERT_CONTACT_SUCCESS = "Deleted Person: %1$s from Concert: %1$s";
