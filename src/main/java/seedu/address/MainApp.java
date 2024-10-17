@@ -38,7 +38,6 @@ import seedu.address.ui.UiManager;
 public class MainApp extends Application {
 
     public static final Version VERSION = new Version(0, 2, 2, true);
-
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
@@ -57,9 +56,12 @@ public class MainApp extends Application {
         initLogging(config);
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
+
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
+
         AddressBookStorage<InternshipApplication> addressBookStorage =
                 new JsonAddressBookStorage(userPrefs.getHireMeFilePath());
+
         storage = new StorageManager<>(addressBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
