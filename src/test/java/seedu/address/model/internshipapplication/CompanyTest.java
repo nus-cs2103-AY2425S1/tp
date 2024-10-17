@@ -31,28 +31,28 @@ public class CompanyTest {
 
     @Test
     public void equals() {
-        Company Google = GOOGLE.getCompany();
-        Company Yahoo = YAHOO.getCompany();
+        Company google = GOOGLE.getCompany();
+        Company yahoo = YAHOO.getCompany();
 
         // same values -> returns true
-        assertTrue(Google.equals(Google));
+        assertTrue(google.equals(google));
 
         // null -> returns false
-        assertFalse(Google.equals(null));
+        assertFalse(google.equals(null));
 
         // different type -> returns false
-        assertFalse(Google.equals(5));
+        assertFalse(google.equals(5));
 
         // different person -> returns false
-        assertFalse(Google.equals(Yahoo));
+        assertFalse(google.equals(yahoo));
     }
 
     @Test
     public void toStringMethod() {
-        Company Google = GOOGLE.getCompany();
-        String expected = "Company: " + Google.getName()
-                + ", Email: " + Google.getEmail();
-        assertEquals(expected, Google.toString());
+        Company google = GOOGLE.getCompany();
+        String expected = "Company: " + google.getName()
+                + ", Email: " + google.getEmail();
+        assertEquals(expected, google.toString());
     }
 
 }
