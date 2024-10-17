@@ -274,17 +274,17 @@ Furthermore, certain edits can cause ConcertPhonebook to behave in unexpected wa
 
 ## Command summary
 
-| Action                 | Format, Examples                                                                                                                                                             |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **List**               | `list`                                                                                                                                                                       |
-| **Add Person**         | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]…​` <br> e.g., `add n/Alex Yeoh p/22224444 e/alexyeoh@example.com a/123, Clementi Rd, 1234665 r/Artist t/friend` |
-| **Add Concert**        | `addc n/CONCERTNAME a/ADDRESS d/DATE `<br> e.g. `addc n/Coachella a/81800 51st Ave, Indio, Southern California, United States d/2024-12-20 1010`                             |
-| **Add ConcertContact** | `addcc INDEX c/CONCERT_INDEX`                                                                                                                                                |
-| **Delete Person**      | `deletep INDEX`<br> e.g., `deletep 3`                                                                                                                                        |
-| **Delete Concert**     | `deletep INDEX`<br> e.g., `deletec 3`                                                                                                                                        |
-| **Delete Concert**     | `deletecc PERSON_INDEX c/CONCERT_INDEX`<br> e.g., `deletecc 3 c/3`                                                                                                           |
-| **Clear**              | `clear`                                                                                                                                                                      |
-| **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                  |
-| **Find Person**        | `findp [n/NAME_KEYWORDS] [r/ROLE]`<br> e.g., `find n/James Jake r/organiser`                                                                                                 |
-| **Find Concert**       | `findc [n/NAME_KEYWORDS]`<br> e.g., `find n/Coachella Glastonbury`                                                                                                           |
-| **Help**               | `help`                                                                                                                                                                       |
+| Action                    | Format, Examples                                                                                                                                                             |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **List**                  | `list`                                                                                                                                                                       |
+| **Add Person**            | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]…​` <br> e.g., `add n/Alex Yeoh p/22224444 e/alexyeoh@example.com a/123, Clementi Rd, 1234665 r/Artist t/friend` |
+| **Add Concert**           | `addc n/CONCERTNAME a/ADDRESS d/DATE `<br> e.g. `addc n/Coachella a/81800 51st Ave, Indio, Southern California, United States d/2024-12-20 1010`                             |
+| **Add ConcertContact**    | `addcc INDEX c/CONCERT_INDEX`                                                                                                                                                |
+| **Delete Person**         | `deletep INDEX`<br> e.g., `deletep 3`                                                                                                                                        |
+| **Delete Concert**        | `deletep INDEX`<br> e.g., `deletec 3`                                                                                                                                        |
+| **Delete ConcertContact** | `deletecc PERSON_INDEX c/CONCERT_INDEX`<br> e.g., `deletecc 3 c/3`                                                                                                           |
+| **Clear**                 | `clear`                                                                                                                                                                      |
+| **Edit**                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                  |
+| **Find Person**           | `findp [n/NAME_KEYWORDS] [r/ROLE]`<br> e.g., `find n/James Jake r/organiser`                                                                                                 |
+| **Find Concert**          | `findc [n/NAME_KEYWORDS]`<br> e.g., `find n/Coachella Glastonbury`                                                                                                           |
+| **Help**                  | `help`                                                                                                                                                                       |
