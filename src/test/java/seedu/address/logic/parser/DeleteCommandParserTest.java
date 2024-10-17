@@ -8,6 +8,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteOwnerCommand;
+import seedu.address.logic.commands.DeletePetCommand;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -21,12 +23,17 @@ public class DeleteCommandParserTest {
     private DeleteCommandParser parser = new DeleteCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+    public void parse_validArgs_returnsDeleteOwnerCommand() {
+        assertParseSuccess(parser, "1", new DeleteOwnerCommand(INDEX_FIRST_PERSON));
+    }
+
+    @Test
+    public void parse_validArgs_returnsPetCommand() {
+        assertParseSuccess(parser, "1", new DeletePetCommand(INDEX_FIRST_PERSON));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.getMessageUsage()));
     }
 }
