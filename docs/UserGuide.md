@@ -109,7 +109,7 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the address book by searching for their index.
 
 Format: `edit INDEX [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [t/TAG]…​`
 
@@ -126,6 +126,26 @@ Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567`
   and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+### Updating a person : `update`
+
+Updates an existing person in the address book by searching for their Name or NRIC.
+
+Format: `update NAME [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [t/TAG]…​ `<p>
+OR `update NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [t/TAG]…​`</p>
+
+* Edits the person at the specified `NAME` or `NRIC`. The name and nric refers to the name and nric shown in the displayed person list respectively.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person’s tags by typing `t/` without
+  specifying any tags after it.
+
+Examples:
+
+* `edit S1234567Z p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person whose NRIC is 'S1234567Z' to be `91234567`
+  and `johndoe@example.com` respectively.
+* `edit Betsy n/Betsy Crower t/` Edits the name of the person named 'Betsy' to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons: `find`
 
@@ -313,6 +333,7 @@ to any desired location if needed.
  **Clear**  | `clear`                                                                                                                                          
  **Delete** | `delete NRIC`<br> e.g., `delete S1234567Z`                                                                                                       
  **Edit**   | `edit INDEX [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` 
+ **Update**   | `edit NAME/NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` 
  **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                       
  **List**   | `list`                                                                                                                                           
  **Help**   | `help`                                                                                                                                           
