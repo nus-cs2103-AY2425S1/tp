@@ -50,7 +50,7 @@ public class DeleteStudentCommandTest {
 
         CommandResult result = command.execute(modelStub);
 
-        assertEquals(String.format(DeleteStudentCommand.MESSAGE_DELETE_STUDENT_SUCCESS, validStudent.getName()),
+        assertEquals(String.format(DeleteStudentCommand.MESSAGE_DELETE_STUDENT_SUCCESS + validStudent.getName()),
                 result.getFeedbackToUser());
     }
 
