@@ -2,10 +2,10 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -31,13 +31,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label patientId;
+    @FXML
     private Label ward;
     @FXML
     private Label diagnosis;
     @FXML
     private Label medication;
-    @FXML
-    private FlowPane tags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -45,7 +45,12 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+        id.setText(displayedIndex + ". ");
         name.setText(person.getName().value);
+        patientId.setText(person.getId().value);
+        ward.setText(person.getWard().value);
+        diagnosis.setText(person.getDiagnosis().value);
+        medication.setText(person.getMedication().value);
         /*
         id.setText(displayedIndex + ". ");
         phone.setText(person.getPhone().value);
