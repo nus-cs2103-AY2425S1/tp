@@ -8,8 +8,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Hours;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person; // TODO REMOVE THIS WHOLE CLASS SOON
-import seedu.address.model.person.Tutor;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
