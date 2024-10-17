@@ -22,7 +22,7 @@ import seedu.address.testutil.Assert;
 import seedu.address.testutil.ConcertBuilder;
 import seedu.address.testutil.PersonBuilder;
 
-public class LinkCommandTest {
+public class AddConcertContactCommandTest {
     private static final Index INDEX_INVALID_PERSON = Index.fromOneBased(999);
     private static final Index INDEX_INVALID_CONCERT = Index.fromOneBased(999);
 
@@ -34,11 +34,12 @@ public class LinkCommandTest {
         modelStub.addPerson(personToLink);
         modelStub.addConcert(concertToLink);
 
-        LinkCommand linkCommand = new LinkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_CONCERT);
+        AddConcertContactCommand addConcertContactCommand = new AddConcertContactCommand(INDEX_FIRST_PERSON,
+                INDEX_FIRST_CONCERT);
 
-        CommandResult commandResult = linkCommand.execute(modelStub);
+        CommandResult commandResult = addConcertContactCommand.execute(modelStub);
 
-        String expectedMessage = String.format(LinkCommand.MESSAGE_LINK_PERSON_SUCCESS,
+        String expectedMessage = String.format(AddConcertContactCommand.MESSAGE_LINK_PERSON_SUCCESS,
                 Messages.format(personToLink), Messages.format(concertToLink));
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());
     }
@@ -49,9 +50,10 @@ public class LinkCommandTest {
         Concert concertToLink = new ConcertBuilder().build();
         modelStub.addConcert(concertToLink);
 
-        LinkCommand linkCommand = new LinkCommand(INDEX_INVALID_PERSON, INDEX_FIRST_CONCERT);
+        AddConcertContactCommand addConcertContactCommand = new AddConcertContactCommand(INDEX_INVALID_PERSON,
+                INDEX_FIRST_CONCERT);
 
-        assertThrows(CommandException.class, () -> linkCommand.execute(modelStub),
+        assertThrows(CommandException.class, () -> addConcertContactCommand.execute(modelStub),
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
@@ -61,9 +63,10 @@ public class LinkCommandTest {
         Person personToLink = new PersonBuilder().build();
         modelStub.addPerson(personToLink);
 
-        LinkCommand linkCommand = new LinkCommand(INDEX_FIRST_PERSON, INDEX_INVALID_CONCERT);
+        AddConcertContactCommand addConcertContactCommand = new AddConcertContactCommand(INDEX_FIRST_PERSON,
+                INDEX_INVALID_CONCERT);
 
-        assertThrows(CommandException.class, () -> linkCommand.execute(modelStub),
+        assertThrows(CommandException.class, () -> addConcertContactCommand.execute(modelStub),
                 Messages.MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX);
     }
 
@@ -75,20 +78,23 @@ public class LinkCommandTest {
         modelStub.addPerson(personToLink);
         modelStub.addConcert(concertToLink);
 
-        LinkCommand linkCommand = new LinkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_CONCERT);
+        AddConcertContactCommand addConcertContactCommand = new AddConcertContactCommand(INDEX_FIRST_PERSON,
+                INDEX_FIRST_CONCERT);
 
-        linkCommand.execute(modelStub);
+        addConcertContactCommand.execute(modelStub);
 
-        Assert.assertThrows(CommandException.class, LinkCommand.MESSAGE_DUPLICATE_CONCERTCONTACT, ()
-                -> linkCommand.execute(modelStub));
+        Assert.assertThrows(CommandException.class, AddConcertContactCommand.MESSAGE_DUPLICATE_CONCERTCONTACT, ()
+                -> addConcertContactCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        final LinkCommand standardCommand = new LinkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_CONCERT);
+        final AddConcertContactCommand standardCommand = new AddConcertContactCommand(INDEX_FIRST_PERSON,
+                INDEX_FIRST_CONCERT);
 
         // same values -> returns true
-        LinkCommand commandWithSameValues = new LinkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_CONCERT);
+        AddConcertContactCommand commandWithSameValues = new AddConcertContactCommand(INDEX_FIRST_PERSON,
+                INDEX_FIRST_CONCERT);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -101,19 +107,19 @@ public class LinkCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different person index -> returns false
-        assertFalse(standardCommand.equals(new LinkCommand(INDEX_SECOND_PERSON, INDEX_FIRST_CONCERT)));
+        assertFalse(standardCommand.equals(new AddConcertContactCommand(INDEX_SECOND_PERSON, INDEX_FIRST_CONCERT)));
 
         // different concert index -> returns false
-        assertFalse(standardCommand.equals(new LinkCommand(INDEX_FIRST_PERSON, INDEX_SECOND_CONCERT)));
+        assertFalse(standardCommand.equals(new AddConcertContactCommand(INDEX_FIRST_PERSON, INDEX_SECOND_CONCERT)));
     }
 
     @Test
     public void toStringMethod() {
         Index indexP = Index.fromOneBased(1);
         Index indexC = Index.fromOneBased(2);
-        LinkCommand linkCommand = new LinkCommand(indexP, indexC);
-        String expected = LinkCommand.class.getCanonicalName() + "{indexP=" + indexP + ", indexC="
+        AddConcertContactCommand addConcertContactCommand = new AddConcertContactCommand(indexP, indexC);
+        String expected = AddConcertContactCommand.class.getCanonicalName() + "{indexP=" + indexP + ", indexC="
                 + indexC + "}";
-        assertEquals(expected, linkCommand.toString());
+        assertEquals(expected, addConcertContactCommand.toString());
     }
 }
