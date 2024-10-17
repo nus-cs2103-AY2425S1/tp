@@ -26,6 +26,7 @@ public class ModelManager implements Model {
 
     private final EdulogCalendar edulogCalendar;
     private final FilteredList<Student> filteredStudents;
+    private final FilteredList<Lesson> lessons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -40,7 +41,10 @@ public class ModelManager implements Model {
         // Simple version - do without a persistent calendar first.
         // TODO: Persistent storage for MVP release.
         this.edulogCalendar = new EdulogCalendar();
+
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
+        lessons = new FilteredList<>(this.edulogCalendar.getLessons());
+
     }
 
     public ModelManager() {
@@ -159,6 +163,15 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Student> getFilteredStudentList() {
         return filteredStudents;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Lesson} backed by the internal list of
+     * {@code ?? - fill}
+     */
+    @Override
+    public ObservableList<Lesson> getLessonList() {
+        return lessons;
     }
 
     @Override
