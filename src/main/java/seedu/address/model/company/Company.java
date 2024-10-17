@@ -63,6 +63,17 @@ public class Company {
         return careerPageUrl;
     }
 
+    public boolean getIsBookmark() {
+        return isBookmark;
+    }
+
+    /**
+     * Set the isBookmark field to the specified boolean value.
+     */
+    public void setBookmark(boolean value) {
+        this.isBookmark = value;
+    }
+
     /**
      * Returns an immutable tag set, which throws
      * {@code UnsupportedOperationException}
