@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# Clientell User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Clientell is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Clientell can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -273,5 +273,6 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake Microsoft`
 **List**   | `list`
 **Add Transaction** | `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE` <br> e.g., `addt 1 d/buy raw materials amt/-100 o/Company ABC dt/16-10-2024` 
+**Delete Transaction** | `delelet INDEX` <br> e..g., `deletet 1`
 **List Transactions** | `listt INDEX`<br> e.g., `listt 2`
 **Help**   | `help`
