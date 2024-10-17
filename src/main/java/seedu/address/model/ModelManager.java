@@ -18,7 +18,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonAttendance;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.StudentNumber;
 
 /**
  * Represents the in-memory model of the address book data.
