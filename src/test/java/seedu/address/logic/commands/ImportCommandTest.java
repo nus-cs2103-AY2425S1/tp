@@ -36,7 +36,8 @@ public class ImportCommandTest {
     private static final String MULTIPLE_PERSON_ENTRIES = "\"Jane Doe\",\"91234567\",\"jane@example.com\","
             + "\"123, Main St\",\"family\"\n"
             + "\"John Smith\",\"87654321\",\"john@example.com\",\"456, Secondary St\",\"coworkers\"";
-    private static final String INVALID_PARSE_LINE_FILE = "./data/InvalidParseLineEntry.csv";
+    private static final String INVALID_PARSE_LINE_FILE = "./data/InvalidParseLineEntry.csv"; // Invalid parse line file
+    private static final String INVALID_NAME_FILE = "./data/InvalidNameEntry.csv"; // New invalid name entry file
     private static final String TEST_DIRECTORY = "./data";
 
     private Model model;
@@ -45,7 +46,8 @@ public class ImportCommandTest {
     private Path invalidFilePath;
     private Path emptyFilePath;
     private Path multipleFilePath;
-    private Path invalidParseLineFilePath; // New path for invalid parse line file
+    private Path invalidParseLineFilePath; // Invalid parse line file
+    private Path invalidNameFilePath; // New path for invalid name entry file
     private Path nonExistentFilePath;
 
     @BeforeEach
@@ -53,12 +55,13 @@ public class ImportCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        // Create paths for valid, invalid, empty, multiple, and parse line error CSV files
+        // Create paths for valid, invalid, empty, multiple, parse line error, and invalid name files
         validFilePath = Paths.get(TEST_DIRECTORY, "ValidImportContacts.csv");
         invalidFilePath = Paths.get(TEST_DIRECTORY, "InvalidImportContacts.csv");
         emptyFilePath = Paths.get(TEST_DIRECTORY, "EmptyImportContacts.csv");
         multipleFilePath = Paths.get(TEST_DIRECTORY, "MultipleImportContacts.csv");
-        invalidParseLineFilePath = Paths.get(TEST_DIRECTORY, "InvalidParseLineEntry.csv");
+        invalidParseLineFilePath = Paths.get(TEST_DIRECTORY, "InvalidParseLineEntry.csv"); // Invalid parse line file
+        invalidNameFilePath = Paths.get(TEST_DIRECTORY, "InvalidNameEntry.csv"); // New invalid name entry file
         nonExistentFilePath = Paths.get(TEST_DIRECTORY, "NonExistentFile.csv");
 
         // Ensure the directory exists
@@ -91,12 +94,18 @@ public class ImportCommandTest {
         }
 
         // Create an invalid CSV file entry that will cause parseLine to throw an error
-        // For example, this entry has too many fields
         try (BufferedWriter writer = Files.newBufferedWriter(invalidParseLineFilePath)) {
             writer.write(VALID_CSV_HEADERS);
             writer.newLine();
             writer.write("\"John Doe\",\"98765432\",\"johnd@example.com\","
                     + "\"311, Clementi Ave 2, #02-25\",\"friends\",\"ExtraField\"");
+        }
+
+        // Create a CSV file with an invalid name entry (e.g., empty name or special characters)
+        try (BufferedWriter writer = Files.newBufferedWriter(invalidNameFilePath)) {
+            writer.write(VALID_CSV_HEADERS);
+            writer.newLine();
+            writer.write("\".\",\"98765432\",\"johnd@example.com\",\"311, Clementi Ave 2, #02-25\",\"friends\"");
         }
     }
 
@@ -117,6 +126,9 @@ public class ImportCommandTest {
         }
         if (Files.exists(invalidParseLineFilePath)) {
             Files.delete(invalidParseLineFilePath); // Clean up invalid parse line file
+        }
+        if (Files.exists(invalidNameFilePath)) {
+            Files.delete(invalidNameFilePath); // Clean up invalid name file
         }
     }
 
@@ -199,6 +211,16 @@ public class ImportCommandTest {
     @Test
     public void execute_invalidParseLineEntry_throwsCommandException() {
         ImportCommand importCommand = new ImportCommand("InvalidParseLineEntry.csv");
+        try {
+            importCommand.execute(model);
+        } catch (CommandException e) {
+            assertTrue(e.getMessage().contains(ImportCommand.MESSAGE_INCORRECT_FILE_FORMAT));
+        }
+    }
+
+    @Test
+    public void execute_invalidNameEntry_throwsCommandException() {
+        ImportCommand importCommand = new ImportCommand("InvalidNameEntry.csv");
         try {
             importCommand.execute(model);
         } catch (CommandException e) {
