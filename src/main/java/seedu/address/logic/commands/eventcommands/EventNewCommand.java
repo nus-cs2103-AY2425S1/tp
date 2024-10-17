@@ -18,8 +18,8 @@ import seedu.address.model.event.Event;
 /**
  * Adds an event to the calendar.
  */
-public class EventAddCommand extends Command {
-    public static final String COMMAND_WORD = "add";
+public class EventNewCommand extends Command {
+    public static final String COMMAND_WORD = "new";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the calander. "
             + "Parameters: "
             + EVENT_PREFIX_NAME + "NAME "
@@ -44,7 +44,7 @@ public class EventAddCommand extends Command {
      *
      * @param event The event to be added.
      */
-    public EventAddCommand(Event event) {
+    public EventNewCommand(Event event) {
         requireNonNull(event);
         toAdd = event;
     }
