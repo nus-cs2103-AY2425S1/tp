@@ -25,23 +25,18 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final boolean isVip;
+    private final Comment comment;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(name, phone, email, address, tags, false);
-    }
-
-    /**
-     * Every field must be present and not null.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, boolean isVip) {
+    public Person(Name name, Phone phone, Email email, Address address, Comment comment, Set<Tag> tags, boolean isVip) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.comment = comment;
         this.tags.addAll(tags);
         this.isVip = isVip;
     }
@@ -60,6 +55,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Comment getComment() {
+        return comment;
     }
 
     /**
@@ -124,6 +123,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("comment", comment)
                 .add("tags", tags)
                 .add("isVip", isVip)
                 .toString();

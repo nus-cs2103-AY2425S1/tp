@@ -9,9 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Comment {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "comments should only contain alphanumeric characters and spaces, and it should not be blank";
-
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+            "comments can be any input including special characters or only spaces";
+    public static final String VALIDATION_REGEX = ".*";
     public final String fullComment;
 
     /**
@@ -44,12 +43,12 @@ public class Comment {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof Comment)) {
             return false;
         }
 
-        Name otherName = (Name) other;
-        return fullComment.equals(otherName.fullName);
+        Comment otherComment = (Comment) other;
+        return otherComment.fullComment.equals(fullComment);
     }
 
     @Override
