@@ -26,7 +26,7 @@ import seedu.address.model.tag.Tag;
  */
 public class UniquePersonList implements Iterable<Person> {
 
-    private static final ObservableList<Person> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
@@ -86,16 +86,14 @@ public class UniquePersonList implements Iterable<Person> {
      * @param toFind
      * @return
      */
-    public static Person findPerson(String toFind) {
+    public Person findPerson(String toFind) throws PersonNotFoundException {
         Name name = new Name(toFind);
         for (int i = 0; i < internalList.size(); i++) {
             if (internalList.get(i).getName().equals(name)) {
                 return internalList.get(i);
             }
         }
-        return new Person(new Name("addName"), new Phone("addNumber"),
-                new Email("addEmail"), new Address("addAddress"), new HashSet<Tag>());
-
+        throw new PersonNotFoundException();
     }
 
     public void setPersons(UniquePersonList replacement) {
