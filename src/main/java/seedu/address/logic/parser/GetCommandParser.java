@@ -2,8 +2,11 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.Arrays;
+
 import seedu.address.logic.commands.GetCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+
 
 /**
  * Parses input arguments and creates a new GetCommand object
@@ -25,7 +28,10 @@ public class GetCommandParser implements Parser<GetCommand> {
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetCommand.MESSAGE_USAGE));
                 }
             }
-            return new GetCommand(parameters);
+            String[] uniqueParams = Arrays.stream(parameters)
+                    .distinct()
+                    .toArray(String[]::new);
+            return new GetCommand(uniqueParams);
 
         } catch (ParseException pe) {
             throw new ParseException(

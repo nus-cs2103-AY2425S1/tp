@@ -47,65 +47,41 @@ public class GetCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
         int size = lastShownList.size();
         String resultString = "";
-        /*
-        runBefore is an array that contains the boolean for whether each parameter
-        that can be a valid input has already been added to the details
-        */
-        boolean[] runBefore = new boolean[4];
-        for (int i = 0; i < runBefore.length; i++) {
-            runBefore[i] = false;
-        }
 
         for (int i = 0; i < parameters.length; i++) {
             String s = "";
             switch (parameters[i]) {
 
             case "e/":
-                if (runBefore[0]) {
-                    break;
-                }
                 for (int j = 0; j < size - 1; j++) {
                     s += lastShownList.get(j).getEmail() + ",\n";
                 }
                 s += lastShownList.get(size - 1).getEmail() + "\n";
                 resultString += String.format(MESSAGE_GET_PARAMETER_SUCCESS, "EMAIL", s) + "\n";
-                runBefore[0] = true;
                 break;
 
             case "p/":
-                if (runBefore[1]) {
-                    break;
-                }
                 for (int j = 0; j < size - 1; j++) {
                     s += lastShownList.get(j).getPhone() + ",\n";
                 }
                 s += lastShownList.get(size - 1).getPhone() + "\n";
                 resultString += String.format(MESSAGE_GET_PARAMETER_SUCCESS, "PHONE NUMBER", s) + "\n";
-                runBefore[1] = true;
                 break;
 
             case "n/":
-                if (runBefore[2]) {
-                    break;
-                }
                 for (int j = 0; j < size - 1; j++) {
                     s += lastShownList.get(j).getName() + ",\n";
                 }
                 s += lastShownList.get(size - 1).getName() + "\n";
                 resultString += String.format(MESSAGE_GET_PARAMETER_SUCCESS, "NAME", s) + "\n";
-                runBefore[2] = true;
                 break;
 
             case "a/":
-                if (runBefore[3]) {
-                    break;
-                }
                 for (int j = 0; j < size - 1; j++) {
                     s += lastShownList.get(j).getAddress() + ",\n";
                 }
                 s += lastShownList.get(size - 1).getAddress() + "\n";
                 resultString += String.format(MESSAGE_GET_PARAMETER_SUCCESS, "ADDRESS", s) + "\n";
-                runBefore[3] = true;
                 break;
 
             default:
