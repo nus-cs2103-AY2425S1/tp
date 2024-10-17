@@ -59,7 +59,13 @@ public class Log {
         return appointmentDate.toString() + "|" + entry;
     }
 
-    // Static method to parse from storage string
+    /**
+     * Converts a storage string into a {@code Log} object.
+     *
+     * @param storageString the string to convert, formatted as "datePart|descriptionPart"
+     * @return a {@code Log} object
+     * @throws IllegalArgumentException if the format is invalid
+     */
     public static Log fromStorageString(String storageString) {
         String[] parts = storageString.split("\\|");
 
