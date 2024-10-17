@@ -7,6 +7,7 @@ import seedu.internbuddy.commons.exceptions.IllegalValueException;
 import seedu.internbuddy.model.application.AppStatus;
 import seedu.internbuddy.model.application.Application;
 import seedu.internbuddy.model.application.Description;
+import seedu.internbuddy.model.name.Name;
 
 /**
  * Jackson-friendly version of {@link Application}.
@@ -14,25 +15,28 @@ import seedu.internbuddy.model.application.Description;
 public class JsonAdaptedApplication {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Application's %s field is missing!";
 
+    private final String name;
     private final String description;
-    private final String status;
+    private final String appStatus;
 
     /**
      * Constructs a {@code JsonAdaptedApplication} with the given {@code description} and {@code status}.
      */
     @JsonCreator
-    public JsonAdaptedApplication(@JsonProperty("description") String description,
-          @JsonProperty("status") String status) {
+    public JsonAdaptedApplication(@JsonProperty("name") String name, @JsonProperty("description") String description,
+          @JsonProperty("status") String appStatus) {
+        this.name = name;
         this.description = description;
-        this.status = status;
+        this.appStatus = appStatus;
     }
 
     /**
      * Converts a given {@link Application} into this class for Jackson use.
      */
     public JsonAdaptedApplication(Application source) {
+        name = source.getName().fullName;
         description = source.getDescription().fullDescription;
-        status = source.getStatus().value;
+        appStatus = source.getAppStatus().value;
     }
 
     /**
@@ -41,6 +45,15 @@ public class JsonAdaptedApplication {
      * @throws IllegalValueException if there were any data constraints violated in the adapted Application
      */
     public Application toModelType() throws IllegalValueException {
+        if (name == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Name.class.getSimpleName()));
+        }
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        final Name modelName = new Name(name);
+
         if (description == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Description.class.getSimpleName()));
@@ -50,15 +63,15 @@ public class JsonAdaptedApplication {
         }
         final Description modelDescription = new Description(description);
 
-        if (status == null) {
+        if (appStatus == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     AppStatus.class.getSimpleName()));
         }
-        if (!AppStatus.isValidStatus(status)) {
+        if (!AppStatus.isValidStatus(appStatus)) {
             throw new IllegalValueException(AppStatus.MESSAGE_CONSTRAINTS);
         }
-        final AppStatus modelAppStatus = new AppStatus(status);
+        final AppStatus modelAppStatus = new AppStatus(appStatus);
 
-        return new Application(modelDescription, modelAppStatus);
+        return new Application(modelName, modelDescription, modelAppStatus);
     }
 }

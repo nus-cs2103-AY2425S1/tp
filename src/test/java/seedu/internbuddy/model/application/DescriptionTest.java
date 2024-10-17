@@ -23,9 +23,9 @@ public class DescriptionTest {
         assertFalse(Description.isValidDescription(" ")); // spaces only
 
         //valid descriptions
-        assertTrue(Description.isValidDescription("INTERESTED"));
-        assertTrue(Description.isValidDescription("APPLIED"));
-        assertTrue(Description.isValidDescription("CLOSED"));
+        assertTrue(Description.isValidDescription("Requires: ReactJS and ExpressJS"));
+        assertTrue(Description.isValidDescription("Requires: Python"));
+        assertTrue(Description.isValidDescription("Requires: Figma"));
     }
 
     @Test

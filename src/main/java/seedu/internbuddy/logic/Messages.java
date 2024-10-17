@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.internbuddy.logic.parser.Prefix;
+import seedu.internbuddy.model.application.Application;
 import seedu.internbuddy.model.company.Company;
 
 /**
@@ -15,6 +16,8 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX = "The company index provided is invalid";
+    public static final String MESSAGE_INVALID_APPLICATION_DISPLAYED_INDEX =
+        "The application index provided is invalid";
     public static final String MESSAGE_COMPANIES_LISTED_OVERVIEW = "%1$d companies listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
@@ -48,6 +51,17 @@ public class Messages {
                 .append("; Tags: ");
         company.getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    /**
+     * Formats the {@code application} for display to the user.
+     */
+    public static String format(Application application) {
+        return application.getName()
+                + "; Description: "
+                + application.getDescription()
+                + "; App Status: "
+                + application.getAppStatus();
     }
 
 }

@@ -32,7 +32,7 @@ public class TypicalCompanies {
     public static final Company AMAZON = new CompanyBuilder().withName("Amazon").withPhone("2062661000")
             .withEmail("contact@amazon.com").withAddress("410 Terry Ave N, Seattle, WA")
             .withTags("ecommerce", "cloud")
-            .withStatus("APPLIED")
+            .withStatus("INTERESTED")
             .withApplications(SWE_APPLICATION, DS_APPLICATION)
             .build();
     public static final Company FACEBOOK = new CompanyBuilder().withName("Facebook").withPhone("6505434800")
