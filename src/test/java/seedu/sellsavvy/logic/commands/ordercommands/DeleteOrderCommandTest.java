@@ -5,8 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.assertCommandSuccess;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND_ORDER;
+import static seedu.sellsavvy.testutil.TypicalIndexes.*;
 import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -35,22 +34,26 @@ public class DeleteOrderCommandTest {
 
     @Test
     public void execute_validIndexOrderList_success() {
-        Order order = model.getSelectedPerson().get().getOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
+        Model expectedModel = model.createCopy();
+        Person person = model.getFilteredPersonList().get(3);
+        model.updateSelectedPerson(person);
+        expectedModel.updateSelectedPerson(person);
+
+        Order order = person.getOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
         DeleteOrderCommand deleteOrderCommand = new DeleteOrderCommand(INDEX_FIRST_ORDER);
-
         String expectedMessage = String.format(DeleteOrderCommand.MESSAGE_DELETE_ORDER_SUCCESS,
-                order.getItem());
+                Messages.format(order));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.getSelectedPerson().get().getOrderList().remove(INDEX_FIRST_ORDER);
+        expectedModel.getFilteredPersonList().get(3).getOrderList().remove(INDEX_FIRST_ORDER);
 
         assertCommandSuccess(deleteOrderCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexOrderList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(
-                model.getSelectedPerson().get().getOrderList().size() + 1);
+        Person person = model.getFilteredPersonList().get(3);
+        model.updateSelectedPerson(person);
+        Index outOfBoundIndex = Index.fromOneBased(person.getOrderList().size() + 1);
         DeleteOrderCommand deleteOrderCommand = new DeleteOrderCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteOrderCommand, model, Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);

@@ -23,7 +23,7 @@ public class DeleteOrderCommandParser implements Parser<DeleteOrderCommand> {
             return new DeleteOrderCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteOrderCommand.MESSAGE_USAGE), pe);
         }
     }
 }
