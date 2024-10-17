@@ -44,7 +44,7 @@ public class ViewHistoryCommand extends Command {
     /**
      * @param patientId of the patient to view the history of
      */
-    public ViewHistoryCommand(Id patientId, Id doctorId) {
+    public ViewHistoryCommand(Id patientId) {
         requireNonNull(patientId); // Only patientId is mandatory
         this.patientId = patientId;
         this.dateTime = null; // Handle the case when dateTime is not provided

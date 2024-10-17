@@ -43,9 +43,8 @@ public class ViewHistoryCommandParser implements Parser<ViewHistoryCommand> {
                     ViewHistoryCommand.MESSAGE_USAGE));
         }
 
-        // Parse the patient ID from the /id prefix
+        // Parse the patient ID
         Id patientId;
-        Id doctorId;
         try {
             patientId = ParserUtil.parsePatientId(argumentMultimap.getAllValues(PREFIX_ID).get(0));
         } catch (InvalidIdException e) {
