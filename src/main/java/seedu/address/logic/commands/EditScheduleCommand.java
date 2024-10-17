@@ -26,8 +26,8 @@ public class EditScheduleCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the event identified by the index number used in the displayed schedule list.\n"
-            + "Parameters: c/INDEX [n/NAME] [d/DATE] [t/TIME]\n" // Update the usage message
-            + "Example: " + COMMAND_WORD + " c/1 n/Team Meeting d/11-10-2024 t/1500";
+            + "Parameters: INDEX c/CONTACT_INDEX [n/NAME] [d/DATE] [t/TIME]\n" // Update the usage message
+            + "Example: " + COMMAND_WORD + " 1 c/1 n/Team Meeting d/11-10-2024 t/1500";
 
     public static final String MESSAGE_EDIT_SCHEDULE_SUCCESS = "Edited Event: %1$s on %2$s %3$s";
     public static final String MESSAGE_INVALID_SCHEDULE_INDEX = "The schedule index provided is invalid.";
