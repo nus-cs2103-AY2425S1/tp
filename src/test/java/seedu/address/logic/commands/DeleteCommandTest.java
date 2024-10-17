@@ -14,7 +14,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
@@ -28,7 +28,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_validNameUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(personToDelete.getName());
+        DeleteCommand deleteCommand = new DeleteCommand(personToDelete.getNric());
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -41,24 +41,24 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidNameUnfilteredList_throwsCommandException() {
-        Name invalidName = new Name("Invalid Name");
-        DeleteCommand deleteCommand = new DeleteCommand(invalidName);
+        Nric invalidNric = new Nric("S12345678A");
+        DeleteCommand deleteCommand = new DeleteCommand(invalidNric);
 
-        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_PERSON_NOT_FOUND, invalidName));
+        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_PERSON_NOT_FOUND, invalidNric));
     }
 
     @Test
     public void equals() {
-        Name firstName = new Name("Alice");
-        Name secondName = new Name("Bob");
-        DeleteCommand deleteFirstCommand = new DeleteCommand(firstName);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(secondName);
+        Nric firstNric = new Nric("S1234567A");
+        Nric secondNric = new Nric("S1234567B");
+        DeleteCommand deleteFirstCommand = new DeleteCommand(firstNric);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(secondNric);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(firstName);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(firstNric);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -73,9 +73,9 @@ public class DeleteCommandTest {
 
     @Test
     public void toStringMethod() {
-        Name targetName = new Name("Alice");
-        DeleteCommand deleteCommand = new DeleteCommand(targetName);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetName=" + targetName + "}";
+        Nric targetNric = new Nric("S1234567A");
+        DeleteCommand deleteCommand = new DeleteCommand(targetNric);
+        String expected = DeleteCommand.class.getCanonicalName() + "{targetNric=" + targetNric + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 }

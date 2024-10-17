@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
@@ -74,6 +75,8 @@ public class HelpKeywordWindow extends UiPart<Stage> {
         case "delete":
             setTextDeleteCommand();
             break;
+        default:
+            break;
         }
     }
 
@@ -99,7 +102,8 @@ public class HelpKeywordWindow extends UiPart<Stage> {
                         + "a/[ADDRESS] b/[BLOOD TYPE] nokn/[NEXT-OF-KIN NAME] nokp/[NEXT-OF-KIN PHONE NO.] "
                         + "al/[ALLERGIES] rl/[HEALTH RISK LEVEL] hr/[PAST HEALTH RECORDS] no/[ADDITIONAL NOTES]");
         exampleHeader.setText("Example:");
-        example.setText("addf n/Abraham Tan i/S9758366N s/M d/1997-10-27 h/Blood Test p/87596666 e/abrahamtan@gmail.com "
+        example.setText("addf n/Abraham Tan i/S9758366N s/M d/1997-10-27 h/Blood Test p/87596666 "
+                + "e/abrahamtan@gmail.com "
                 + "a/Blk 123, NUS Road, S123123 b/A+ nokn/Lincoln Tan nokp/91234567 al/nuts, shellfish rl/HIGH "
                 + "hr/Diabetes no/Patient needs extra care");
     }

@@ -48,18 +48,30 @@ class JsonAdaptedPerson {
     private final String nokPhone;
     private final List<JsonAdaptedHealthService> healthServices = new ArrayList<>();
 
+
+    /**
+     * Constructs a {@code JsonAdaptedPerson} with only name, NRIC, sex, birthdate and health service details.
+     */
+    @JsonCreator
+    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("NRIC") String nric,
+                             @JsonProperty("Sex") String sex, @JsonProperty("Birth Date") String birthDate,
+                             @JsonProperty("healthServices") List<JsonAdaptedHealthService> healthServices) {
+        this(name, nric, sex, birthDate, healthServices, null, null, null, null,
+                null, null, null, null, null, null);
+    }
+
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("NRIC") String nric,
             @JsonProperty("Sex") String sex, @JsonProperty("Birth Date") String birthDate,
-            @JsonProperty("tags") List<JsonAdaptedHealthService> healthServices, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("allergy") String allergy, @JsonProperty("bloodType") String bloodType,
-            @JsonProperty("healthRisk") String healthRisk, @JsonProperty("healthRecord") String healthRecord,
-            @JsonProperty("note") String note, @JsonProperty("nokName") String nokName,
-            @JsonProperty("nokPhone") String nokPhone) {
+            @JsonProperty("healthServices") List<JsonAdaptedHealthService> healthServices,
+            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+            @JsonProperty("address") String address, @JsonProperty("allergy") String allergy,
+            @JsonProperty("bloodType") String bloodType, @JsonProperty("healthRisk") String healthRisk,
+            @JsonProperty("healthRecord") String healthRecord, @JsonProperty("note") String note,
+            @JsonProperty("nokName") String nokName, @JsonProperty("nokPhone") String nokPhone) {
         this.name = name;
         this.nric = nric;
         this.sex = sex;
