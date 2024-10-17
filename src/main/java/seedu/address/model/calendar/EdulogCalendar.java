@@ -1,5 +1,8 @@
 package seedu.address.model.calendar;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,10 +11,14 @@ import java.util.List;
  */
 public class EdulogCalendar {
     public static final int MAX_IDENTICAL_TIMING = 2;
-    private List<Lesson> lessons;
+    private ObservableList<Lesson> lessons;
 
     public EdulogCalendar() {
-        lessons = new ArrayList<>();
+        lessons = FXCollections.observableArrayList();
+    }
+
+    public ObservableList<Lesson> getLessons() {
+        return lessons;
     }
 
     /**
