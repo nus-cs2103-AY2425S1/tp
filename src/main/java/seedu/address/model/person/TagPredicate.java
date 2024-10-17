@@ -6,19 +6,19 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Person}'s {@code JobCode} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Tag} matches any of the given keywords.
  */
-public class JobCodeContainsKeywordsPredicate implements Predicate<Person> {
+public class TagPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
-    public JobCodeContainsKeywordsPredicate(List<String> keywords) {
+    public TagPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getJobCode().value, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getTag().tagName, keyword));
     }
 
     @Override
@@ -26,10 +26,11 @@ public class JobCodeContainsKeywordsPredicate implements Predicate<Person> {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof JobCodeContainsKeywordsPredicate)) {
+        if (!(other instanceof TagPredicate)) {
             return false;
         }
-        JobCodeContainsKeywordsPredicate otherPredicate = (JobCodeContainsKeywordsPredicate) other;
+        TagPredicate otherPredicate = (TagPredicate) other;
         return keywords.equals(otherPredicate.keywords);
     }
 }
+

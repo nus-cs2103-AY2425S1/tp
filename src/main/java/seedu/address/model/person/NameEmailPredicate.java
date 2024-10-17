@@ -23,7 +23,7 @@ public class NameEmailPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         return person.getName().fullName.equalsIgnoreCase(name)
-                && person.getEmail().value.equals(email);
+                && person.getEmail().value.equalsIgnoreCase(email);
     }
 
     @Override
@@ -35,8 +35,8 @@ public class NameEmailPredicate implements Predicate<Person> {
             return false;
         }
         NameEmailPredicate otherPredicate = (NameEmailPredicate) other;
-        return name.equals(otherPredicate.name)
-                && email.equals(otherPredicate.email);
+        return name.equalsIgnoreCase(otherPredicate.name)
+                && email.equalsIgnoreCase(otherPredicate.email);
     }
 }
 
