@@ -46,10 +46,10 @@ public class EditGameCommandParser implements Parser<EditGameCommand> {
             editGameDescriptor.setUsername(ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME).get()));
         }
         if (argMultimap.getValue(PREFIX_SKILLLEVEL).isPresent()) {
-            editGameDescriptor.setSkillLevel(ParserUtil.parseSkillLevel(argMultimap.getValue(PREFIX_EMAIL).get()));
+            editGameDescriptor.setSkillLevel(ParserUtil.parseSkillLevel(argMultimap.getValue(PREFIX_SKILLLEVEL).get()));
         }
         if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
-            editGameDescriptor.setRole(ParserUtil.parseRole(argMultimap.getValue(PREFIX_ADDRESS).get()));
+            editGameDescriptor.setRole(ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get()));
         }
 
         if (!editGameDescriptor.isAnyFieldEdited()) {
