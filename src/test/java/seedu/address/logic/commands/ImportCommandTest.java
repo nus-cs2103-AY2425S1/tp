@@ -38,6 +38,7 @@ public class ImportCommandTest {
             + "\"John Smith\",\"87654321\",\"john@example.com\",\"456, Secondary St\",\"coworkers\"";
     private static final String INVALID_PARSE_LINE_FILE = "./data/InvalidParseLineEntry.csv"; // Invalid parse line file
     private static final String INVALID_NAME_FILE = "./data/InvalidNameEntry.csv"; // New invalid name entry file
+    private static final String MALFORMED_CSV_FILE = "./data/MalformedLineEntry.csv"; // Malformed line entry file
     private static final String TEST_DIRECTORY = "./data";
 
     private Model model;
@@ -48,6 +49,7 @@ public class ImportCommandTest {
     private Path multipleFilePath;
     private Path invalidParseLineFilePath; // Invalid parse line file
     private Path invalidNameFilePath; // New path for invalid name entry file
+    private Path malformedFilePath; // Malformed line entry file
     private Path nonExistentFilePath;
 
     @BeforeEach
@@ -55,13 +57,14 @@ public class ImportCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        // Create paths for valid, invalid, empty, multiple, parse line error, and invalid name files
+        // Create paths for valid, invalid, empty, multiple, parse line error, invalid name, and malformed files
         validFilePath = Paths.get(TEST_DIRECTORY, "ValidImportContacts.csv");
         invalidFilePath = Paths.get(TEST_DIRECTORY, "InvalidImportContacts.csv");
         emptyFilePath = Paths.get(TEST_DIRECTORY, "EmptyImportContacts.csv");
         multipleFilePath = Paths.get(TEST_DIRECTORY, "MultipleImportContacts.csv");
-        invalidParseLineFilePath = Paths.get(TEST_DIRECTORY, "InvalidParseLineEntry.csv"); // Invalid parse line file
-        invalidNameFilePath = Paths.get(TEST_DIRECTORY, "InvalidNameEntry.csv"); // New invalid name entry file
+        invalidParseLineFilePath = Paths.get(TEST_DIRECTORY, "InvalidParseLineEntry.csv");
+        invalidNameFilePath = Paths.get(TEST_DIRECTORY, "InvalidNameEntry.csv");
+        malformedFilePath = Paths.get(TEST_DIRECTORY, "MalformedLineEntry.csv");
         nonExistentFilePath = Paths.get(TEST_DIRECTORY, "NonExistentFile.csv");
 
         // Ensure the directory exists
@@ -101,11 +104,18 @@ public class ImportCommandTest {
                     + "\"311, Clementi Ave 2, #02-25\",\"friends\",\"ExtraField\"");
         }
 
-        // Create a CSV file with an invalid name entry (e.g., empty name or special characters)
+        // Create a CSV file with an invalid name entry (e.g., empty name)
         try (BufferedWriter writer = Files.newBufferedWriter(invalidNameFilePath)) {
             writer.write(VALID_CSV_HEADERS);
             writer.newLine();
-            writer.write("\".\",\"98765432\",\"johnd@example.com\",\"311, Clementi Ave 2, #02-25\",\"friends\"");
+            writer.write("\"\",\"98765432\",\"johnd@example.com\",\"311, Clementi Ave 2, #02-25\",\"friends\"");
+        }
+
+        // Create a malformed CSV file entry that will cause trimLine to throw an error
+        try (BufferedWriter writer = Files.newBufferedWriter(malformedFilePath)) {
+            writer.write(VALID_CSV_HEADERS);
+            writer.newLine();
+            writer.write("."); // Missing name and phone number
         }
     }
 
@@ -129,6 +139,9 @@ public class ImportCommandTest {
         }
         if (Files.exists(invalidNameFilePath)) {
             Files.delete(invalidNameFilePath); // Clean up invalid name file
+        }
+        if (Files.exists(malformedFilePath)) {
+            Files.delete(malformedFilePath); // Clean up malformed line file
         }
     }
 
@@ -221,6 +234,16 @@ public class ImportCommandTest {
     @Test
     public void execute_invalidNameEntry_throwsCommandException() {
         ImportCommand importCommand = new ImportCommand("InvalidNameEntry.csv");
+        try {
+            importCommand.execute(model);
+        } catch (CommandException e) {
+            assertTrue(e.getMessage().contains(ImportCommand.MESSAGE_INCORRECT_FILE_FORMAT));
+        }
+    }
+
+    @Test
+    public void execute_malformedLineEntry_throwsCommandException() {
+        ImportCommand importCommand = new ImportCommand("MalformedLineEntry.csv");
         try {
             importCommand.execute(model);
         } catch (CommandException e) {
