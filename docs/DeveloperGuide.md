@@ -334,6 +334,7 @@ to record their students with their details, and access relevant information eas
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​  | I want to …​                                                               | So that I can…​                                                                                                |
+
 |---------|----------|----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
 | `* * *` | educator | add a new student                                                          | include all students I have currently in my app                                                                |
 | `* * *` | educator | delete a student                                                           | keep my database of students concise with only currently relevant students                                     |
@@ -346,6 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`     | educator | delete groups                                                              | correct mistakes by deleting group                                                                             |
 | `*`     | educator | import and export student data from other systems                          | streamline data management and avoid manual entry, ensuring compatibility with school databases or grade books |
 | `*`     | educator | use security measures for student data                                     | protect sensitive information and control access to parental data                                              |
+
 
 ### Use cases
 

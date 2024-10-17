@@ -58,9 +58,28 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public Person setTags(Set<Tag> newTags) {
-        return new Person(this.name, this.studentClass, this.phone, newTags);
+    /**
+     * Returns a new Person object with a new set of tags
+     * with new tags added.
+     */
+    public Person addTags(Set<Tag> newTags) {
+        this.tags.addAll(newTags);
+        return new Person(this.name, this.studentClass, this.phone, this.tags);
     }
+
+    /**
+     * Returns a new Person object with a new set of tags
+     * with specified tags deleted.
+     */
+    public Person deleteTags(Set<Tag> tagsToBeDeleted) {
+        this.tags.removeAll(tagsToBeDeleted);
+        return new Person(this.name, this.studentClass, this.phone, this.tags);
+    }
+
+    public boolean tagExists(Set<Tag> tags) {
+        return this.tags.containsAll(tags);
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.

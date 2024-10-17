@@ -129,6 +129,19 @@ Examples:
 
 * `find /group Study Group returns all members of the group Study Group.`
 
+### Adding a tag : `tag`
+
+Adds a tag to a specified person.
+
+Format: `tag INDEX t/TAG`
+
+### Deleting a tag : `untag`
+
+Deletes a tag of a specified person.
+
+Format: `untag INDEX t/TAG`
+
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
