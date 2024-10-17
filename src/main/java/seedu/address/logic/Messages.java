@@ -19,6 +19,7 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format! Please use yyyy-mm-dd.";
+    public static final String MESSAGE_REMARK_PERSON_SUCCESS = "";
     public static final String MESSAGE_BEFORE_DATE_OF_CREATION =
             "%1$s is before the date of creation of this log %2$s!";
     public static final String MESSAGE_NO_ENTRY_ON_DATE = "%1$s has no entry!";
