@@ -252,6 +252,11 @@ public class AddRentalCommandTest {
         }
 
         @Override
+        public void updateVisibleRentalInformationList(List<RentalInformation> rentalInformationList) {
+            // do nothing as UI related
+        }
+
+        @Override
         public Client getLastViewedClient() {
             return lastViewedClient;
         }

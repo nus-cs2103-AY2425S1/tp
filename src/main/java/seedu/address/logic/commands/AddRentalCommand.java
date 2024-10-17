@@ -86,6 +86,7 @@ public class AddRentalCommand extends Command {
 
         model.setPerson(clientToEdit, updatedClient);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateVisibleRentalInformationList(updatedRentalInformationList);
 
         model.setLastViewedClient(updatedClient);
 
