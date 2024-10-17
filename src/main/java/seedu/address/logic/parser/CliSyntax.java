@@ -17,4 +17,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_POLICY_NAME = new Prefix("pon/");
     public static final Prefix PREFIX_POLICY_START_DATE = new Prefix("pos/");
     public static final Prefix PREFIX_POLICY_END_DATE = new Prefix("poe/");
+    public static final Prefix PREFIX_NEXT_PAYMENT_DATE = new Prefix("paydate/");
+    public static final Prefix PREFIX_PAYMENT_AMOUNT = new Prefix("amt/");
+
+
+
 }

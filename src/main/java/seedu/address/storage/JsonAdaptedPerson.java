@@ -30,6 +30,8 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String appointment;
+    private final String birthday;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -37,12 +39,16 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("appointment") String appointment,
+                             @JsonProperty("birthday") String birthday,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.birthday = birthday;
+        this.appointment = appointment;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -56,6 +62,8 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        birthday = source.getBirthday().value;
+        appointment = source.getAppointment().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -106,10 +114,26 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        //placeholder
-        final Appointment appointment = new Appointment("2022-12-12 12:00");
-        final Birthday birthday = new Birthday("1990-10-10");
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, appointment, birthday);
-    }
+        if (appointment == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Appointment.class.getSimpleName()));
+        }
+        if (!Appointment.isValidAppointment(appointment)) {
+            throw new IllegalValueException(String.format(Appointment.MESSAGE_CONSTRAINTS));
+        }
+        final Appointment modelAppointment = new Appointment(appointment);
 
+        if (birthday == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Birthday.class.getSimpleName()));
+        }
+
+        if (!Birthday.isValidBirthday(birthday)) {
+            throw new IllegalValueException(String.format(Birthday.MESSAGE_CONSTRAINTS));
+        }
+
+        final Birthday modelBirthday = new Birthday(birthday);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelAppointment, modelBirthday);
+    }
 }

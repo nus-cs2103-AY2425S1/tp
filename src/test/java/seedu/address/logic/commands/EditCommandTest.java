@@ -8,6 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INSURANCE_PAYMENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_NAME_LIFE;
@@ -98,9 +100,9 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
+        Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_AMY).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
@@ -161,7 +163,7 @@ public class EditCommandTest {
     public void editPolicies_invalidOutOfBoundIndex_throwsCommandException() {
         Person personToEdit = new PersonBuilder().build();
         Index outOfBoundIndex = Index.fromOneBased(1);
-        Policy validPolicy = new Policy(VALID_POLICY_NAME_LIFE, VALID_DATE_1, VALID_DATE_2);
+        Policy validPolicy = new Policy(VALID_POLICY_NAME_LIFE, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
 
         Map<Index, Policy> policyMap = new HashMap<>();
         policyMap.put(outOfBoundIndex, validPolicy);
@@ -172,9 +174,9 @@ public class EditCommandTest {
     @Test
     public void editPolicies_validPolicyMap_returnsPolicyList() throws CommandException {
         Person personToEdit = new PersonBuilder().build();
-        Policy oldPolicy = new Policy(VALID_NAME_BOB, VALID_DATE_1, VALID_DATE_2);
+        Policy oldPolicy = new Policy(VALID_NAME_BOB, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
         personToEdit.setPolicies(List.of(oldPolicy));
-        Policy validPolicy = new Policy(VALID_POLICY_NAME_LIFE, VALID_DATE_1, VALID_DATE_2);
+        Policy validPolicy = new Policy(VALID_POLICY_NAME_LIFE, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
 
         Index validIndex = Index.fromOneBased(1);
 
