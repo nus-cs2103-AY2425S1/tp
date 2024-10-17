@@ -38,7 +38,7 @@ public class Person {
      * New fields for university, major, interest, and experience are added.
      * Interest and experience are initialized to empty strings.
      */
-    public Person(Name name, Phone phone, Email email, Address address,WorkExp workExp, Set<Tag> tags,
+    public Person(Name name, Phone phone, Email email, Address address, WorkExp workExp, Set<Tag> tags,
                   University university, Major major, Interest interest) {
         requireAllNonNull(name, phone, email, address, tags, university, major);
 
@@ -91,7 +91,9 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public WorkExp getWorkExp() { return workExp; }
+    public WorkExp getWorkExp() {
+        return workExp;
+    }
 
     /**
      * Returns true if both persons have the same name.

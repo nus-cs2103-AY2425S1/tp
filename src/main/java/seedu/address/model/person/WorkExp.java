@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -10,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class WorkExp {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Work experience should follow the format: Role,Company,Year. Role and Company should contain only alphanumeric characters, "
-                    + "spaces, or commas. Year should be a 4-digit number.";
+            "Work experience should follow the format: Role,Company,Year. Role and Company should contain only "
+                    + "alphanumeric characters, spaces, or commas. Year should be a 4-digit number.";
 
     /*
      * The format must follow: Role,Company,Year where each part must not be blank.

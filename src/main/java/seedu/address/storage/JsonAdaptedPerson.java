@@ -17,8 +17,8 @@ import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.WorkExp;
 import seedu.address.model.person.University;
+import seedu.address.model.person.WorkExp;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -45,7 +45,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("workExp") String workExp, 
+                             @JsonProperty("workExp") String workExp,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("university") String university,
                              @JsonProperty("major") String major, @JsonProperty("interest") String interest) {
         this.name = name;

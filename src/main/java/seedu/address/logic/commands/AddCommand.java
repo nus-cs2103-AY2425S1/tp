@@ -8,8 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_WORKEXP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIVERSITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WORKEXP;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -87,8 +87,8 @@ public class AddCommand extends Command {
             Person personToEdit = lastShownList.get(index.getZeroBased());
             Person editedPerson = new Person(
                     personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                    personToEdit.getAddress(), personToEdit.getWorkExp(), personToEdit.getTags(), personToEdit.getUniversity(),
-                    personToEdit.getMajor(), new Interest(interest));
+                    personToEdit.getAddress(), personToEdit.getWorkExp(), personToEdit.getTags(),
+                    personToEdit.getUniversity(), personToEdit.getMajor(), new Interest(interest));
 
             model.setPerson(personToEdit, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
