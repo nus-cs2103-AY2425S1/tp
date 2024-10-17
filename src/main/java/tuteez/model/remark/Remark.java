@@ -1,12 +1,15 @@
 package tuteez.model.remark;
 
 import static java.util.Objects.requireNonNull;
+import static tuteez.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Remark in the address book.
  */
 public class Remark {
     public static final String MESSAGE_CONSTRAINTS = "Remarks can take any remarks, and it should not be blank";
+
+    private static final String VALIDATION_REGEX = ".+";
 
     private final String remark;
 
@@ -17,7 +20,17 @@ public class Remark {
      */
     public Remark(String remark) {
         requireNonNull(remark);
+        checkArgument(isValidRemark(remark), MESSAGE_CONSTRAINTS);
         this.remark = remark;
+    }
+
+    /**
+     * Returns true if a given string is a valid telegram handle.
+     *
+     * @param test the string to test
+     */
+    public static boolean isValidRemark(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
