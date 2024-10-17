@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is always valid
  */
 public class Remark {
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Remark should not be blank";
     public static final String VALIDATION_REGEX = "[^\\s].*";
     public final String value;
 
