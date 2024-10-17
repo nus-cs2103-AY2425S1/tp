@@ -21,10 +21,12 @@ import seedu.address.logic.commands.AddConcertContactCommand;
 import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteConcertCommand;
+import seedu.address.logic.commands.DeleteConcertContactCommand;
 import seedu.address.logic.commands.DeletePersonCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindConcertCommand;
 import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -97,6 +99,14 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_deleteConcertContact() throws Exception {
+        DeleteConcertContactCommand command = (DeleteConcertContactCommand) parser.parseCommand(
+                DeleteConcertContactCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_CONCERT + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteConcertContactCommand(INDEX_FIRST_PERSON, INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
@@ -108,7 +118,17 @@ public class AddressBookParserTest {
         String userInput = FindPersonCommand.COMMAND_WORD + " " + PREFIX_NAME + keywords.stream()
                 .collect(Collectors.joining(" "));
         FindPersonCommand command = (FindPersonCommand) parser.parseCommand(userInput);
-        assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate<>(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findConcert() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        String userInput = FindConcertCommand.COMMAND_WORD + " "
+                + PREFIX_NAME + keywords.stream().collect(Collectors.joining(" "));
+        FindConcertCommand command = (FindConcertCommand) parser.parseCommand(
+                userInput);
+        assertEquals(new FindConcertCommand(new NameContainsKeywordsPredicate<>(keywords)), command);
     }
 
     @Test
@@ -134,5 +154,5 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand(
                 "unknownCommand"));
     }
-}
 
+}

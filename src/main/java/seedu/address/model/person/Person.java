@@ -10,13 +10,14 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.commons.Address;
 import seedu.address.model.commons.Name;
+import seedu.address.model.commons.NamedObject;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Person implements NamedObject {
 
     // Identity fields
     private final Name name;
@@ -41,6 +42,7 @@ public class Person {
         this.tags.addAll(tags);
     }
 
+    @Override
     public Name getName() {
         return name;
     }
