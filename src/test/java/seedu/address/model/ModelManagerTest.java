@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +20,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -90,6 +93,28 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void addTagTest() {
+        Person expectedPerson = new PersonBuilder().withTags("tag").build();
+        Person actualPerson = new PersonBuilder().build();
+        modelManager.addPerson(actualPerson);
+        Tag tag = new Tag("tag");
+        Set<Tag> tags = Set.of(tag);
+        modelManager.addTag(actualPerson, tags);
+        assertEquals(expectedPerson, actualPerson);
+    }
+
+    @Test
+    public void deleteTagTest() {
+        Person actualPerson = new PersonBuilder().withTags("tag").build();
+        Person expectedPerson = new PersonBuilder().build();
+        modelManager.addPerson(actualPerson);
+        Tag tag = new Tag("tag");
+        Set<Tag> tags = Set.of(tag);
+        modelManager.deleteTag(actualPerson, tags);
+        assertEquals(expectedPerson, actualPerson);
     }
 
     @Test
