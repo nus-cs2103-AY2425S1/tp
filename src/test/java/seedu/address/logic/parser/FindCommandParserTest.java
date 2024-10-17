@@ -49,21 +49,21 @@ public class FindCommandParserTest {
     @Test
     public void parse_emptyNameKeyword_throwsParseException() {
         // Test where the name field is empty
-        String userInput = " n/  r/Developer";  // n/ contains only whitespace
+        String userInput = " n/  r/Developer"; // n/ contains only whitespace
         assertThrows(ParseException.class, () -> parser.parse(userInput));
     }
 
     @Test
     public void parse_emptyRoleKeyword_throwsParseException() {
         // Test where the role field is empty
-        String userInput = " n/John Doe r/ ";  // r/ contains only whitespace
+        String userInput = " n/John Doe r/ "; // r/ contains only whitespace
         assertThrows(ParseException.class, () -> parser.parse(userInput));
     }
 
     @Test
     public void parse_emptyNameAndRoleKeywords_throwsParseException() {
         // Test where both name and role fields are empty
-        String userInput = " n/  r/ ";  // both contain only whitespace
+        String userInput = " n/  r/ "; // both contain only whitespace
         assertThrows(ParseException.class, () -> parser.parse(userInput));
     }
 
