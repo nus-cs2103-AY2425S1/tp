@@ -8,6 +8,7 @@
     "priority" : "MEDIUM",
     "remark" : "She likes pygmy hippos.",
     "dateOfBirth": "10 Jun 1999",
+    "appointment" : null,
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -17,6 +18,11 @@
     "priority" : "HIGH",
     "remark" : "Promises to pay back next week.",
     "dateOfBirth": "29 Jan 1999",
+    "appointment" : {
+      "date" : "2024-10-20",
+      "startTime" : "14:00",
+      "endTime" : "16:00"
+    },
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -26,6 +32,7 @@
     "priority" : "LOW",
     "remark" : "",
     "dateOfBirth": "1 Jan 2000",
+    "appointment" : null,
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -35,6 +42,7 @@
     "priority" : "LOW",
     "remark" : "",
     "dateOfBirth": "1 Jan 1990",
+    "appointment" : null,
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -44,6 +52,7 @@
     "priority" : "LOW",
     "remark" : "",
     "dateOfBirth": "1 May 2000",
+    "appointment" : null,
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -53,6 +62,7 @@
     "priority" : "LOW",
     "remark" : "",
     "dateOfBirth": "31 May 2000",
+    "appointment" : null,
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -62,6 +72,7 @@
     "priority" : "LOW",
     "remark" : "",
     "dateOfBirth": "25 Dec 2010",
+    "appointment" : null,
     "tags" : [ ]
   } ]
 }

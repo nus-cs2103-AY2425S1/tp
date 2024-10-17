@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -101,6 +104,36 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateOfBirth} is invalid.
+     */
+    public static DateOfBirth parseDateOfBirth(String dateOfBirth) throws ParseException {
+        requireNonNull(dateOfBirth);
+        String trimmedDate = dateOfBirth.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new DateOfBirth(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String income} into a {@code Income}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code income} is invalid.
+     */
+    public static Income parseIncome(String income) throws ParseException {
+        requireNonNull(income);
+        String trimmedIncome = income.trim();
+        if (!Income.isValidIncome(trimmedIncome)) {
+            throw new ParseException(Income.MESSAGE_CONSTRAINTS);
+        }
+        return new Income(trimmedIncome);
+    }
+
+    /**
      * Parses a {@code String priority} into a {@code Priority}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -108,30 +141,11 @@ public class ParserUtil {
      */
     public static Priority parsePriority(String priority) throws ParseException {
         requireNonNull(priority);
-        String trimmedPriority = priority.trim().toUpperCase();
         try {
-            return Priority.valueOf(trimmedPriority);
+            return Priority.valueOf(priority.trim().toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
         }
-    }
-
-    /**
-     * Parses a {@code String date} into a {@code Date}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code date} is invalid.
-     */
-    public static DateOfBirth parseDateOfBirth(String dateOfBirth) throws ParseException {
-        requireNonNull(dateOfBirth);
-
-        String trimmedDate = dateOfBirth.trim();
-
-        if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
-        }
-
-        return new DateOfBirth(trimmedDate);
     }
 
     /**
@@ -144,15 +158,33 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String income} into a {@code Income}.
+     * Parses a {@code String date} into a {@code LocalDate}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code income} is invalid.
+     * @throws ParseException if the given {@code date} is invalid.
      */
-    public static Income parseIncome(String income) throws ParseException {
-        requireNonNull(income);
-        String trimmedIncome = income.trim();
-        return new Income(trimmedIncome);
+    public static LocalDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        try {
+            return LocalDate.parse(date.trim());
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Dates should be in yyyy-MM-dd format");
+        }
+    }
+
+    /**
+     * Parses a {@code String time} into a {@code LocalTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static LocalTime parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        try {
+            return LocalTime.parse(time.trim());
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Times should be in HH:mm format");
+        }
     }
 
     /**

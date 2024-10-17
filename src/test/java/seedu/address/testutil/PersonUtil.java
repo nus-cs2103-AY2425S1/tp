@@ -33,14 +33,15 @@ public class PersonUtil {
      */
     public static String getPersonDetails(Person person) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        sb.append(PREFIX_REMARK + person.getRemark().value + " ");
-        sb.append(PREFIX_DATE_OF_BIRTH + person.getDateOfBirth().getValue() + " ");
+        sb.append(PREFIX_NAME).append(person.getName().fullName).append(" ");
+        sb.append(PREFIX_PHONE).append(person.getPhone().value).append(" ");
+        sb.append(PREFIX_EMAIL).append(person.getEmail().value).append(" ");
+        sb.append(PREFIX_ADDRESS).append(person.getAddress().value).append(" ");
+        sb.append(PREFIX_PRIORITY).append(person.getPriority()).append(" ");
+        sb.append(PREFIX_REMARK).append(person.getRemark().value).append(" ");
+        sb.append(PREFIX_DATE_OF_BIRTH).append(person.getDateOfBirth().getValue()).append(" ");
         person.getTags().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+            s -> sb.append(PREFIX_TAG).append(s.tagName).append(" ")
         );
         return sb.toString();
     }
