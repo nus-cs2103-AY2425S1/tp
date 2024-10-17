@@ -127,7 +127,7 @@ public class AddressBookParserTest {
         DeletePropertyToBuyCommand expectedCommand = new DeletePropertyToBuyCommand(personIndex,
                 propertyIndex, descriptor);
         DeletePropertyToBuyCommand command =
-                (DeletePropertyToBuyCommand) parser.parseCommand("dellBuy 1 1");
+                (DeletePropertyToBuyCommand) parser.parseCommand("delBuy 1 1");
 
         assertEquals(expectedCommand, command);
     }

@@ -30,7 +30,7 @@ import seedu.address.model.tag.Tag;
  */
 public class DeletePropertyToBuyCommand extends Command {
 
-    public static final String COMMAND_WORD = "dellBuy";
+    public static final String COMMAND_WORD = "delBuy";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the property of the specified person "
             + "using the index number used in the displayed person list and "
