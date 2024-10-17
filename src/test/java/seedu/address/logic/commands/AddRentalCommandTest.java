@@ -44,7 +44,7 @@ public class AddRentalCommandTest {
     public void execute_rentalInformationAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingRentalInformationAdded modelStub = new ModelStubAcceptingRentalInformationAdded();
         RentalInformation validRentalInformation = new RentalInformationBuilder().build();
-        Client validClient = new PersonBuilder().withRentalInformations(validRentalInformation).build();
+        Client validClient = new PersonBuilder().withRentalInformation(validRentalInformation).build();
 
         CommandResult commandResult = new AddRentalCommand(INDEX_FIRST_PERSON,
                 validRentalInformation).execute(modelStub);
@@ -59,7 +59,7 @@ public class AddRentalCommandTest {
         ModelStubAcceptingRentalInformationAdded modelStub = new ModelStubAcceptingRentalInformationAdded();
         RentalInformation validRentalInformation = new RentalInformationBuilder().build();
         Client validClient = new PersonBuilder().build();
-        Client validClientWithRentalInformation = new PersonBuilder().withRentalInformations(validRentalInformation)
+        Client validClientWithRentalInformation = new PersonBuilder().withRentalInformation(validRentalInformation)
                 .build();
         AddRentalCommand addRentalCommand = new AddRentalCommand(INDEX_FIRST_PERSON, validRentalInformation);
 

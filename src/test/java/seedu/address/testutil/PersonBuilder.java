@@ -68,7 +68,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code RentalInformation} of the {@code Client} that we are building.
      */
-    public PersonBuilder withRentalInformations(RentalInformation... rentalInformation) {
+    public PersonBuilder withRentalInformation(RentalInformation... rentalInformation) {
         this.rentalInformationList = List.of(rentalInformation);
         return this;
     }

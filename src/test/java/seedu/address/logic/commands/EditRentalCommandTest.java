@@ -48,7 +48,7 @@ public class EditRentalCommandTest {
                 Messages.formatRentalInformation(editedRentalInformation));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        Client editedClient = new PersonBuilder(ALICE_WITH_RENTAL).withRentalInformations(editedRentalInformation)
+        Client editedClient = new PersonBuilder(ALICE_WITH_RENTAL).withRentalInformation(editedRentalInformation)
                 .build();
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedClient);
 
@@ -65,7 +65,7 @@ public class EditRentalCommandTest {
         RentalInformation editedRentalInformation = new RentalInformationBuilder(firstRentalInformationOfLastClient)
                 .withAddress(VALID_ADDRESS_ONE).withMonthlyRent(VALID_MONTHLY_RENT_ONE).build();
         Client editedClient = personInList
-                .withRentalInformations(editedRentalInformation, lastClient.getRentalInformation().get(1))
+                .withRentalInformation(editedRentalInformation, lastClient.getRentalInformation().get(1))
                 .build();
 
         EditRentalDescriptor descriptor = new EditRentalDescriptorBuilder().withAddress(VALID_ADDRESS_ONE)
@@ -108,7 +108,7 @@ public class EditRentalCommandTest {
         RentalInformation editeRentalInformation =
                 new RentalInformationBuilder(firstRentalInformationOfClientInFilteredList)
                         .withAddress(VALID_ADDRESS_ONE).build();
-        Client editedClient = new PersonBuilder(clientInFilteredList).withRentalInformations(editeRentalInformation)
+        Client editedClient = new PersonBuilder(clientInFilteredList).withRentalInformation(editeRentalInformation)
                 .build();
         EditRentalCommand editRentalCommand = new EditRentalCommand(INDEX_FIRST_PERSON, INDEX_FIRST_RENTAL,
                 new EditRentalDescriptorBuilder().withAddress(VALID_ADDRESS_ONE).build());

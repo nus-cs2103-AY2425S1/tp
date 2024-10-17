@@ -41,7 +41,7 @@ public class DeleteRentalCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Client editedClient = new PersonBuilder(secondClient)
-                .withRentalInformations(secondClient.getRentalInformation().get(INDEX_SECOND_RENTAL.getZeroBased()))
+                .withRentalInformation(secondClient.getRentalInformation().get(INDEX_SECOND_RENTAL.getZeroBased()))
                 .build();
         expectedModel.setPerson(secondClient, editedClient);
 
@@ -77,7 +77,7 @@ public class DeleteRentalCommandTest {
                 Messages.formatRentalInformation(rentalToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        Client editedClient = new PersonBuilder(firstClient).withRentalInformations().build();
+        Client editedClient = new PersonBuilder(firstClient).withRentalInformation().build();
         expectedModel.setPerson(firstClient, editedClient);
 
         assertCommandSuccess(deleteRentalCommand, model, expectedMessage, expectedModel);
