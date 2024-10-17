@@ -69,7 +69,7 @@ public class RemarkCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = MESSAGE_ADD_REMARK_SUCCESS ;
+        String message = MESSAGE_ADD_REMARK_SUCCESS;
         return String.format(message, Messages.format(personToEdit));
     }
 
