@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.EDIT_POLICY_LIFE_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INSURANCE_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_START_DATE;
@@ -263,7 +264,7 @@ public class ParserUtilTest {
                 + PREFIX_POLICY_START_DATE + VALID_DATE_1 + " "
                 + PREFIX_POLICY_END_DATE + VALID_DATE_2;
 
-        Policy expectedPolicy = new Policy(VALID_POLICY_NAME, VALID_DATE_1, VALID_DATE_2);
+        Policy expectedPolicy = new Policy(VALID_POLICY_NAME, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
 
         assertEquals(expectedPolicy, ParserUtil.parsePolicy(validPolicyArgument));
     }
@@ -291,11 +292,11 @@ public class ParserUtilTest {
     public void parsePolicies_validArgument_returnIndexPolicyMap() throws ParseException {
         String validPolicyArgument = "1 " + PREFIX_POLICY_NAME + VALID_POLICY_NAME + " "
                 + PREFIX_POLICY_START_DATE + VALID_DATE_1 + " "
-                + PREFIX_POLICY_END_DATE + VALID_DATE_2;
+                + PREFIX_POLICY_END_DATE + VALID_DATE_2 + VALID_INSURANCE_PAYMENT;
 
         Collection<String> policies = List.of(validPolicyArgument);
 
-        Policy expectedPolicy = new Policy(VALID_POLICY_NAME, VALID_DATE_1, VALID_DATE_2);
+        Policy expectedPolicy = new Policy(VALID_POLICY_NAME, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
         Index expectedIndex = Index.fromOneBased(1);
 
         Map<Index, Policy> policyMap = ParserUtil.parsePolicies(policies);
