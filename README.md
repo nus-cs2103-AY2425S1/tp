@@ -1,18 +1,4 @@
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-F11-2/tp/actions)
-<style>
-  a {
-    color: white;
-    text-decoration:none;
-  }
-
-  a:hover {
-    color: green;
-    transition-duration:0.25s;
-    text-decoration:none;
-  }
-</style>
-
-
 <!-- Project Title -->
 <div align="center">
   <h1 style="font-weight:800;font-size:70px;">CCAConnect</h1>
