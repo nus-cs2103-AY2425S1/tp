@@ -282,6 +282,7 @@ Furthermore, certain edits can cause ConcertPhonebook to behave in unexpected wa
 | **Add ConcertContact** | `addcc INDEX c/CONCERT_INDEX`                                                                                                                                                |
 | **Delete Person**      | `deletep INDEX`<br> e.g., `deletep 3`                                                                                                                                        |
 | **Delete Concert**     | `deletep INDEX`<br> e.g., `deletec 3`                                                                                                                                        |
+| **Delete Concert**     | `deletecc PERSON_INDEX c/CONCERT_INDEX`<br> e.g., `deletecc 3 c/3`                                                                                                           |
 | **Clear**              | `clear`                                                                                                                                                                      |
 | **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                  |
 | **Find Person**        | `findp [n/NAME_KEYWORDS] [r/ROLE]`<br> e.g., `find n/James Jake r/organiser`                                                                                                 |
