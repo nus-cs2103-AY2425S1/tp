@@ -308,10 +308,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | supervisor | view a volunteer's total volunteer hours                       | track their productivity and contributions over time                       |
 | `* * *`  | supervisor | interact with the application's GUI easily                     | enjoy the application and use it intuitively                               |
 | `* * *`  | supervisor | find a volunteer by name                                       | locate details of volunteers without going through the entire list         |
+| `* * *`  | supervisor | view a volunteer's total hours in graphs or charts             | easily analyze volunteer engagement and allocate resources efficiently     |
 | `* *`    | supervisor | view the availability of volunteers                            | schedule site visits that matches their availability                       |
 | `* *`    | supervisor | add the available timeslots of volunteers                      | allow site visits to be arranged                                           |
 | `* *`    | supervisor | update the available timeslots of volunteers                   | ensure volunteers can conduct site visits as scheduled                     |
-| `* *`    | supervisor | view a volunteer's total hours in graphs or charts             | easily analyze volunteer engagement and allocate resources efficiently     |
 | `* *`    | supervisor | view volunteer visit frequency by location in graphs or charts | identify the most and least visited sites and adjust resources accordingly |
 | `*`      | supervisor | sort volunteers in different orders                            | locate a volunteer easily                                                  |
 | `*`      | supervisor | filter the volunteers by certain categories                    | locate a volunteer easily                                                  |
