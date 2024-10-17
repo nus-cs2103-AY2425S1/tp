@@ -9,7 +9,6 @@ public enum CommandKeywords {
     edit,
     exit,
     find,
-    help,
     list;
 
     public static boolean isValidCommandKeyword(String keyword) {
