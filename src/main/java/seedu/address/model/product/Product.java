@@ -2,10 +2,13 @@ package seedu.address.model.product;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.supplier.Name;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Product in the address book.
@@ -20,12 +23,27 @@ public class Product {
     private int minStockLevel;
     private int maxStockLevel;
 
+    private final Set<Tag> tags = new HashSet<>(); // TODO: Implement storage of tags
+
     /**
      * Every field must be present and not null.
      */
     public Product(seedu.address.model.product.ProductName name) {
         requireAllNonNull(name);
         this.name = name;
+        this.tags.addAll(tags);
+        this.stockLevel = 0;
+        this.minStockLevel = Integer.MAX_VALUE;
+        this.maxStockLevel = 0;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Product(seedu.address.model.product.ProductName name, Set<Tag> tags) {
+        requireAllNonNull(name, tags);
+        this.name = name;
+        this.tags.addAll(tags);
         this.stockLevel = 0;
         this.minStockLevel = Integer.MAX_VALUE;
         this.maxStockLevel = 0;

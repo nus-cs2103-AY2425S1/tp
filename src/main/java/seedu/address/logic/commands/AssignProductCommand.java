@@ -82,6 +82,8 @@ public class AssignProductCommand extends Command {
                 updatedProductList
         );
 
+        productToAssign.setSupplierName(supplierName);
+
         model.setSupplier(supplierToAssign, updatedSupplier);
         model.updateFilteredSupplierList(PREDICATE_SHOW_ALL_SUPPLIERS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, productToAssign.getName(), supplierToAssign.getName()));
