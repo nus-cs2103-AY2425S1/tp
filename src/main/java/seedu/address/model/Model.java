@@ -18,6 +18,8 @@ public interface Model {
 
     Predicate<Owner> PREDICATE_SHOW_ALL_OWNERS = unused -> true;
 
+    Predicate<Pet> PREDICATE_SHOW_ALL_PETS = unused -> true;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -66,6 +68,11 @@ public interface Model {
      */
     boolean hasOwner(Owner owner);
 
+    /***
+     * Returns true if a pet with the same identity as {@code pet} exists in the address book.
+     */
+    boolean hasPet(Pet pet);
+
     /**
      * Deletes the given person.
      * The person must exist in the address book.
@@ -77,6 +84,12 @@ public interface Model {
      * The owner must exist in the address book.
      */
     void deleteOwner(Owner target);
+
+    /**
+     * Deletes the given pet.
+     * The pet must exist in the address book.
+     */
+    void deletePet(Pet target);
 
     /**
      * Adds the given person.
@@ -91,6 +104,12 @@ public interface Model {
     void addOwner(Owner owner);
 
     /**
+     * Adds the given pet.
+     * {@code pet} must not already exist in the address book.
+     */
+    void addPet(Pet pet);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -103,6 +122,13 @@ public interface Model {
      * The person identity of {@code editedOwner} must not be the same as another existing owner in the address book.
      */
     void setOwner(Owner target, Owner editedOwner);
+
+    /**
+     * Replaces the given pet {@code target} with {@code editedPet}.
+     * {@code target} must exist in the address book.
+     * The pet identity of {@code editedPet} must not be the same as another existing pet in the address book.
+     */
+    void setPet(Pet target, Pet editedPet);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
@@ -124,7 +150,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredOwnerList(Predicate<Owner> predicate);
-
 
     /**
      * Updates the filter of the filtered pet list to filter by the given {@code predicate}.

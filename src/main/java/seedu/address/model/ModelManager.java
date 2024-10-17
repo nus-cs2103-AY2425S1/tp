@@ -106,6 +106,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasPet(Pet pet) {
+        requireNonNull(pet);
+        return addressBook.hasPet(pet);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -113,6 +119,11 @@ public class ModelManager implements Model {
     @Override
     public void deleteOwner(Owner target) {
         addressBook.removeOwner(target);
+    }
+
+    @Override
+    public void deletePet(Pet target) {
+        addressBook.removePet(target);
     }
 
     @Override
@@ -128,6 +139,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addPet(Pet pet) {
+        addressBook.addPet(pet);
+        updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
@@ -139,6 +156,13 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedOwner);
 
         addressBook.setOwner(target, editedOwner);
+    }
+
+    @Override
+    public void setPet(Pet target, Pet editedPet) {
+        requireAllNonNull(target, editedPet);
+
+        addressBook.setPet(target, editedPet);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -170,18 +194,30 @@ public class ModelManager implements Model {
         return filteredPets;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Owner} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
     @Override
     public void updateFilteredOwnerList(Predicate<Owner> predicate) {
         requireNonNull(predicate);
         filteredOwners.setPredicate(predicate);
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Pet} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
     @Override
     public void updateFilteredPetList(Predicate<Pet> predicate) {
         requireNonNull(predicate);
@@ -204,11 +240,8 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
-                && filteredOwners.equals(otherModelManager.filteredOwners);
-
-        /* return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredOwners.equals(otherModelManager.filteredOwners); */
+                && filteredOwners.equals(otherModelManager.filteredOwners)
+                && filteredPets.equals(otherModelManager.filteredPets);
     }
 
 }
