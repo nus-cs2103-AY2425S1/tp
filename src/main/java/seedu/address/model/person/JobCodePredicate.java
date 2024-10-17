@@ -9,13 +9,13 @@ public class JobCodePredicate implements Predicate<Person> {
     private final String jobCode;
 
     public JobCodePredicate(String jobCode) {
-        this.jobCode = jobCode.toLowerCase(); // Make comparison case-insensitive
+        this.jobCode = jobCode;
     }
 
     @Override
     public boolean test(Person person) {
-        // Compare job code exactly (case-insensitive)
-        return person.getJobCode().value.equalsIgnoreCase(jobCode);
+        // Compare job code exactly (case-sensitive)
+        return person.getJobCode().value.equals(jobCode);
     }
 
     @Override

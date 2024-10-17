@@ -54,7 +54,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             return new FindCommand(new JobCodePredicate(jobCode));
         } else if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
             // Tag search
-            String tag = argMultimap.getValue(PREFIX_TAG).get();
+            String tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get()).tagCode;
             return new FindCommand(new TagPredicate(Arrays.asList(tag)));
         } else if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             // Name search
