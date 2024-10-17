@@ -67,7 +67,8 @@ public class CommentTest {
         Person receiver = new Person(new MatriculationNumber("A0277101P"), new Name("Bob"), new Phone("9876543210"),
                 new Email("bob@example.com"), new Address("321 Avenue"), new HashSet<>());
         Comment comment1 = new Comment(commenter, receiver, "Great job!");
-        Person commenter2 = new Person(new MatriculationNumber("A0377101P"), new Name("Charlie"), new Phone("1112223334"),
+        Person commenter2 = new Person(new MatriculationNumber("A0377101P"),
+                new Name("Charlie"), new Phone("1112223334"),
                 new Email("charlie@example.com"), new Address("456 Lane"), new HashSet<>());
         Person receiver2 = new Person(new MatriculationNumber("A0477101P"), new Name("Dave"), new Phone("4445556667"),
                 new Email("dave@example.com"), new Address("789 Boulevard"), new HashSet<>());
