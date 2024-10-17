@@ -16,7 +16,7 @@ import seedu.address.model.concert.ConcertDate;
  * Jackson-friendly version of {@link Concert}
  */
 public class JsonAdaptedConcert {
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Concert's %s field is missing!";
 
     private final String name;
     private final String address;
@@ -44,7 +44,7 @@ public class JsonAdaptedConcert {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Concert} object.
+     * Converts this Jackson-friendly adapted concert object into the model's {@code Concert} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted
      *         concert.
