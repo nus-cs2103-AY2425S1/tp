@@ -66,7 +66,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'data_coNdUctorS.jar'
 }
 
 defaultTasks 'clean', 'test'
