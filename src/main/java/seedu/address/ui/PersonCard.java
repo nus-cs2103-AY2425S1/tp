@@ -63,7 +63,7 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         subjectAndSchedule.setText(person.getSubject().toString() + ": " + person.getSchedule().toString());
         rateAndPaidAndOwedAmount.setText("Rate: $" + person.getRate().toString() + "/h, "
-        + "Paid: $" + person.getPaid().toString() + ", " + "Owed: $" + person.getOwedAmount().toString());
+            + "Paid: $" + person.getPaid().toString() + ", " + "Owed: $" + person.getOwedAmount().toString());
 
         // This is the code to show blue tags. I will comment it out instead of deleting it.
         /*
