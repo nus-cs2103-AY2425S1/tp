@@ -29,6 +29,8 @@
             </HBox>
             <!-- Patient Name -->
             <Label fx:id="patient" styleClass="cell_small_label" />
+            <!-- Task Status -->
+            <Label fx:id="status" styleClass="cell_small_label" />
         </VBox>
     </GridPane>
 </HBox>

@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
@@ -17,6 +18,8 @@ public class Task {
 
     private final String description;
 
+    private final SimpleBooleanProperty isComplete;
+
     /**
      * Every field must be present and not null.
      */
@@ -24,6 +27,17 @@ public class Task {
         requireAllNonNull(patient, description);
         this.patient = patient;
         this.description = description;
+        this.isComplete = new SimpleBooleanProperty(false);
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Task(Person patient, String description, boolean isComplete) {
+        requireAllNonNull(patient, description, isComplete);
+        this.patient = patient;
+        this.description = description;
+        this.isComplete = new SimpleBooleanProperty(isComplete);
     }
 
     public Person getPatient() {
@@ -32,6 +46,22 @@ public class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    public boolean getStatus() {
+        return this.isComplete.getValue();
+    }
+
+    public SimpleBooleanProperty isCompleteProperty() {
+        return isComplete;
+    }
+
+    public String getStatusString() {
+        return this.getStatus() ? "Complete" : "Incomplete";
+    }
+
+    public void markTaskComplete() {
+        this.isComplete.set(true);
     }
 
     @Override
@@ -61,6 +91,7 @@ public class Task {
         return new ToStringBuilder(this)
                 .add("patient", patient)
                 .add("description", description)
+                .add("status", getStatusString())
                 .toString();
     }
 
