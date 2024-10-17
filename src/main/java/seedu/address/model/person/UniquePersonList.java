@@ -43,6 +43,12 @@ public class UniquePersonList implements Iterable<Person> {
         // Assuming Person has a getName() method
         internalList.sort(Comparator.comparing(Person::getFullName).reversed());
     }
+    /**
+     * Sorts the list in ascending order of total tag weights.
+     */
+    public void setGrouping(int... tagIndex) {
+        internalList.sort(Comparator.comparing(person -> person.getWeight(tagIndex)));
+    }
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
