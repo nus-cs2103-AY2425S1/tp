@@ -4,7 +4,7 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":EduLogParser" as EduLogParser LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
 end box
 
@@ -14,23 +14,23 @@ end box
 [-> LogicManager : execute(undo)
 activate LogicManager
 
-LogicManager -> EduLogParser : parseCommand(undo)
-activate EduLogParser
+LogicManager -> AddressBookParser : parseCommand(undo)
+activate AddressBookParser
 
 create UndoCommand
-EduLogParser -> UndoCommand
+AddressBookParser -> UndoCommand
 activate UndoCommand
 
-UndoCommand --> EduLogParser
+UndoCommand --> AddressBookParser
 deactivate UndoCommand
 
-EduLogParser --> LogicManager : u
-deactivate EduLogParser
+AddressBookParser --> LogicManager : u
+deactivate AddressBookParser
 
 LogicManager -> UndoCommand : execute()
 activate UndoCommand
 
-UndoCommand -> Model : undoEduLog()
+UndoCommand -> Model : undoAddressBook()
 activate Model
 
 Model --> UndoCommand
