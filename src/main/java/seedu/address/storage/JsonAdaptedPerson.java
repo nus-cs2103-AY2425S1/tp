@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AttendanceList;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Grade;
 import seedu.address.model.person.GradeList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -64,8 +65,8 @@ class JsonAdaptedPerson {
                             .map(JsonAdaptedTag::new)
                             .collect(Collectors.toList()));
         grades.addAll(source.getGradeList().getList().stream() // Convert GradeList to JSON
-                .map(JsonAdaptedGrade::new)
-                .collect(Collectors.toList()));
+                              .map(JsonAdaptedGrade::new)
+                              .collect(Collectors.toList()));
     }
 
     /**
@@ -113,10 +114,11 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        final GradeList modelGradeList = new GradeList();
+        final List<Grade> convertedGrades = new ArrayList<>();
         for (JsonAdaptedGrade grade : grades) {
-            modelGradeList.addGrade(grade.toModelType());
+            convertedGrades.add(grade.toModelType());
         }
+        final GradeList modelGradeList = new GradeList(convertedGrades);
 
         // TODO: Store attendanceList properly
         final AttendanceList modelAttendancelist = new AttendanceList();

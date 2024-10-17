@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
@@ -73,6 +74,36 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Add grade to gradeList
+     *
+     * @param grade New grade to be added
+     * @return new immutable Person
+     */
+    public Person addGrade(Grade grade) {
+        requireAllNonNull(grade);
+
+        GradeList newGradeList = this.gradeList.addGrade(grade);
+
+        return new Person(this.name, this.phone, this.email, this.address, this.tags, newGradeList,
+                          this.attendanceList);
+    }
+
+    /**
+     * Remove grade from gradeList based on index.
+     *
+     * @param index The index to remove the grade.
+     * @return new immutable Person
+     */
+    public Person removeGrade(Index index) {
+        requireAllNonNull(index);
+
+        GradeList newGradelist = this.gradeList.removeGrade(index);
+
+        return new Person(this.name, this.phone, this.email, this.address, this.tags, newGradelist,
+                          this.attendanceList);
     }
 
     /**
