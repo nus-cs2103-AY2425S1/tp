@@ -1,5 +1,6 @@
 package keycontacts.logic.commands;
 
+import static keycontacts.logic.commands.CommandTestUtil.assertCommandFailure;
 import static keycontacts.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static keycontacts.testutil.Assert.assertThrows;
 import static keycontacts.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
@@ -15,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 import keycontacts.commons.core.index.Index;
 import keycontacts.logic.Messages;
-import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
 import keycontacts.model.ModelManager;
 import keycontacts.model.StudentDirectory;
@@ -25,8 +25,11 @@ import keycontacts.model.student.Student;
 import keycontacts.testutil.RegularLessonBuilder;
 
 public class ScheduleCommandTest {
-    private Model model = new ModelManager(getTypicalStudentDirectory(), new UserPrefs());
-    private RegularLesson regularLesson = new RegularLessonBuilder().build();
+    private final Model model = new ModelManager(getTypicalStudentDirectory(), new UserPrefs());
+    private final RegularLesson regularLesson = new RegularLessonBuilder(ALICE.getRegularLesson()).build();
+    private final String updatedEndTime = regularLesson.getEndTime().getTime().plusMinutes(1).toString();
+    private final RegularLesson updatedRegularLesson =
+            new RegularLessonBuilder(regularLesson).withEndTime(updatedEndTime).build();
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
@@ -39,10 +42,10 @@ public class ScheduleCommandTest {
 
     @Test
     public void execute_validIndexAndRegularLesson_success() throws Exception {
-        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_STUDENT, regularLesson);
+        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_STUDENT, updatedRegularLesson);
 
         Student studentToSchedule = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        Student scheduledStudent = studentToSchedule.withRegularLesson(regularLesson);
+        Student scheduledStudent = studentToSchedule.withRegularLesson(updatedRegularLesson);
 
         String expectedMessage = String.format(ScheduleCommand.MESSAGE_SCHEDULE_LESSON_SUCCESS,
                 Messages.format(studentToSchedule));
@@ -56,21 +59,18 @@ public class ScheduleCommandTest {
     @Test
     public void execute_indexOutOfBounds_failure() {
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
-        ScheduleCommand command = new ScheduleCommand(outOfBoundsIndex, regularLesson);
+        ScheduleCommand scheduleCommand = new ScheduleCommand(outOfBoundsIndex, updatedRegularLesson);
 
-        assertThrows(CommandException.class,
-                Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, () -> command.execute(model));
+        assertCommandFailure(scheduleCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_lessonUnchanged_throwsCommandException() throws Exception {
         Student studentToSchedule = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
 
-        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_STUDENT,
-                studentToSchedule.getRegularLesson());
+        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_STUDENT, regularLesson);
 
-        assertThrows(CommandException.class,
-                ScheduleCommand.MESSAGE_LESSON_UNCHANGED, () -> scheduleCommand.execute(model));
+        assertCommandFailure(scheduleCommand, model, ScheduleCommand.MESSAGE_LESSON_UNCHANGED);
     }
 
     @Test

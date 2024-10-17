@@ -32,14 +32,20 @@ public class RegularLessonTest {
 
     @Test
     public void equals() {
-        RegularLesson regularLesson1 = new RegularLessonBuilder().build();
-        RegularLesson regularLesson1Duplicate = new RegularLessonBuilder().build();
+        RegularLesson regularLesson1 = new RegularLessonBuilder(ALICE.getRegularLesson()).build();
+        RegularLesson regularLesson1Duplicate = new RegularLessonBuilder(ALICE.getRegularLesson()).build();
+        String oneDayAfterDay = regularLesson1.getLessonDay().getDay().plus(1).toString();
+        String oneMinuteBeforeStartTime = regularLesson1.getStartTime().getTime().plusMinutes(-1).toString();
+        String oneMinuteAfterEndTime = regularLesson1.getEndTime().getTime().plusMinutes(1).toString();
         // different start time
-        RegularLesson regularLesson2 = new RegularLessonBuilder().withStartTime("15:00").build();;
+        RegularLesson regularLesson2 = new RegularLessonBuilder(ALICE.getRegularLesson())
+                .withStartTime(oneMinuteBeforeStartTime).build();
         // different end time
-        RegularLesson regularLesson3 = new RegularLessonBuilder().withEndTime("19:00").build();
+        RegularLesson regularLesson3 = new RegularLessonBuilder(ALICE.getRegularLesson())
+                .withEndTime(oneMinuteAfterEndTime).build();;
         // different day
-        RegularLesson regularLesson4 = new RegularLessonBuilder().withLessonDay("Tuesday").build();
+        RegularLesson regularLesson4 = new RegularLessonBuilder(ALICE.getRegularLesson())
+                .withLessonDay(oneDayAfterDay).build();;
 
         assertFalse(regularLesson1.equals(regularLesson2));
         assertFalse(regularLesson2.equals(regularLesson1));

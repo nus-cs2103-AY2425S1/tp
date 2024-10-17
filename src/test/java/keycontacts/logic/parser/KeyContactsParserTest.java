@@ -5,6 +5,7 @@ import static keycontacts.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PIECE_NAME;
 import static keycontacts.testutil.Assert.assertThrows;
 import static keycontacts.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static keycontacts.testutil.TypicalStudents.ALICE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -113,7 +114,7 @@ public class KeyContactsParserTest {
 
     @Test
     public void parseCommand_schedule() throws Exception {
-        RegularLesson regularLesson = new RegularLessonBuilder().build();
+        RegularLesson regularLesson = new RegularLessonBuilder(ALICE.getRegularLesson()).build();
         ScheduleCommand command = (ScheduleCommand) parser.parseCommand(
                 ScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased() + " "
                         + StudentUtil.getRegularLessonDetails(regularLesson));

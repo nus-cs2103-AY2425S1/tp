@@ -62,7 +62,10 @@ public class Day {
         return test.matches(VALIDATION_REGEX);
     }
 
-
+    public DayOfWeek getDay() {
+        return day;
+    }
+    
     @Override
     public String toString() {
         return day.toString();
