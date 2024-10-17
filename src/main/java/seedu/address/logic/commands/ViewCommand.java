@@ -36,10 +36,18 @@ public class ViewCommand extends Command {
 
     private final Predicate<Person> combinedPredicate;
 
+
+    /**
+     * @param combinedPredicate the search condition for personlist update
+     */
     public ViewCommand(Predicate<Person> combinedPredicate) {
         this.combinedPredicate = combinedPredicate;
     }
 
+    /**
+     * @param model
+     * @return a string denote success
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
