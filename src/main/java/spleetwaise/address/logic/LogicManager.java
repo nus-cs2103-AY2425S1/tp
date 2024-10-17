@@ -20,8 +20,8 @@ import spleetwaise.address.storage.Storage;
 import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
 import spleetwaise.transaction.logic.parser.ParserUtil;
 import spleetwaise.transaction.logic.parser.TransactionParser;
-import spleetwaise.transaction.storage.StorageUtil;
 import spleetwaise.transaction.model.transaction.Transaction;
+import spleetwaise.transaction.storage.StorageUtil;
 
 /**
  * The main LogicManager of the app.

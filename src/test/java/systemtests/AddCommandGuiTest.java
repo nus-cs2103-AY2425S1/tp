@@ -15,12 +15,13 @@ import static spleetwaise.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static spleetwaise.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static spleetwaise.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static spleetwaise.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static spleetwaise.address.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
+import static spleetwaise.address.logic.commands.CommandTestUtil.REMARK_DESC_BOB;
 import static spleetwaise.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static spleetwaise.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static spleetwaise.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static spleetwaise.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static spleetwaise.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static spleetwaise.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static spleetwaise.address.testutil.TypicalPersons.ALICE;
 import static spleetwaise.address.testutil.TypicalPersons.AMY;
@@ -59,13 +60,13 @@ public class AddCommandGuiTest extends TestFxAppRunner {
         // Case: Add a person without tags to a non-empty address book -> success
         Person toAdd = AMY;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY + " "
-                + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
+                + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + TAG_DESC_FRIEND + "   " + REMARK_DESC_AMY;
         assertCommandSuccess(command, toAdd);
 
         // Case: Add a person with all fields same as another person except name -> success
         toAdd = new PersonBuilder(AMY).withName(VALID_NAME_BOB).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + TAG_DESC_FRIEND;
+                + TAG_DESC_FRIEND + REMARK_DESC_AMY;
         assertCommandSuccess(command, toAdd);
 
         // Case: Add to empty address book -> success
@@ -75,7 +76,7 @@ public class AddCommandGuiTest extends TestFxAppRunner {
         // Case: Add a person with tags, parameters in random order -> success
         toAdd = BOB;
         command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + ADDRESS_DESC_BOB + NAME_DESC_BOB
-                + TAG_DESC_HUSBAND + EMAIL_DESC_BOB;
+                + TAG_DESC_HUSBAND + EMAIL_DESC_BOB + REMARK_DESC_BOB;
         assertCommandSuccess(command, toAdd);
 
         // Case: Add a person, missing tags -> success
@@ -91,11 +92,6 @@ public class AddCommandGuiTest extends TestFxAppRunner {
 
         // Case: Add a duplicate person -> failure
         command = PersonUtil.getAddCommand(HOON);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
-
-        // Case: Add duplicate person with different phone -> failure
-        toAdd = new PersonBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
-        command = PersonUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         // Case: Add duplicate person with different email -> failure

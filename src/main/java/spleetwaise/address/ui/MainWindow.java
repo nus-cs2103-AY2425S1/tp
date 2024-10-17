@@ -21,8 +21,8 @@ import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
 import spleetwaise.transaction.ui.TransactionListPanel;
 
 /**
- * The Main Window. Provides the basic application layout containing
- * a menu bar and space where other JavaFX elements can be placed.
+ * The Main Window. Provides the basic application layout containing a menu bar and space where other JavaFX elements
+ * can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
 
@@ -30,6 +30,7 @@ public class MainWindow extends UiPart<Stage> {
     private static final double MIN_WIDTH_FOR_SPLIT = 800;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+    private String currCommand = "list";
 
     private final Stage primaryStage;
     private final Logic logic;
@@ -139,26 +140,45 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Checks if the command is related to transactions.
+     *
+     * @param command The command to check.
+     * @return True if the command is 'addTxn' or 'listTxn', false otherwise.
+     */
+    private boolean isTransactionCommand(String command) {
+        return command.equals("addTxn") || command.equals("listTxn");
+    }
+
+    /**
      * Adjusts the visibility of the panes based on window width.
      */
     private void adjustPaneVisibility(double width) {
         if (width < MIN_WIDTH_FOR_SPLIT) {
-            // Hide the rightPane and replace personList with transactionList in leftPane
-            mainSplitPane.getItems().remove(rightPane);
-            // TODO: if the command is transaction related, and replace personList with transactionList
-            // if (!leftPane.getChildren().contains(transactionListPanelPlaceholder)) {
-            //    leftPane.getChildren().remove(personListPanelPlaceholder);
-            //    leftPane.getChildren().add(transactionListPanelPlaceholder);
-            //}
+            hideRightPane();
+            setLeftPaneContent(isTransactionCommand(currCommand));
         } else {
-            // Show both personList and transactionList in the split pane
-            if (!mainSplitPane.getItems().contains(rightPane)) {
-                mainSplitPane.getItems().add(rightPane); // Add the rightPane if not already in the SplitPane
-            }
-            if (!leftPane.getChildren().contains(personListPanelPlaceholder)) {
-                leftPane.getChildren().remove(transactionListPanelPlaceholder);
-                leftPane.getChildren().add(personListPanelPlaceholder);
-            }
+            showBothPanes();
+        }
+    }
+
+    private void hideRightPane() {
+        mainSplitPane.getItems().remove(rightPane);
+    }
+
+    private void showBothPanes() {
+        if (!mainSplitPane.getItems().contains(rightPane)) {
+            mainSplitPane.getItems().add(rightPane);
+        }
+        setLeftPaneContent(false); // Always show personListPanel when both panes are visible
+    }
+
+    private void setLeftPaneContent(boolean showTransactionList) {
+        StackPane newPane = showTransactionList ? transactionListPanelPlaceholder : personListPanelPlaceholder;
+        StackPane oldPane = showTransactionList ? personListPanelPlaceholder : transactionListPanelPlaceholder;
+
+        if (!leftPane.getChildren().contains(newPane)) {
+            leftPane.getChildren().remove(oldPane);
+            leftPane.getChildren().add(newPane);
         }
     }
 
@@ -216,8 +236,9 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings =
-            new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(), (int) primaryStage.getX(),
-                (int) primaryStage.getY());
+                new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(), (int) primaryStage.getX(),
+                        (int) primaryStage.getY()
+                );
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -234,9 +255,11 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws SpleetWaiseCommandException, ParseException {
         try {
+            currCommand = commandText.trim().split("\\s+")[0];
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            adjustPaneVisibility(primaryStage.getWidth());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
