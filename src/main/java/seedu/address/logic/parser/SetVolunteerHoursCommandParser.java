@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SetVolunteerHoursCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Hours;
 
 /**
  * Parses input arguments and creates a new SetVolunteerHoursCommand object
@@ -34,10 +33,13 @@ public class SetVolunteerHoursCommandParser implements Parser<SetVolunteerHoursC
 
         if (argMultimap.getValue(PREFIX_HOURS).isPresent()) {
             String hoursAsString = argMultimap.getValue(PREFIX_HOURS).get();
-            if (!Hours.isValidHours(hoursAsString)) {
-                throw new ParseException(Hours.MESSAGE_CONSTRAINTS);
+            int hoursAsInt;
+            try {
+                hoursAsInt = Integer.parseInt(hoursAsString);
+            } catch (NumberFormatException nfe) {
+                throw new ParseException(SetVolunteerHoursCommand.MESSAGE_NOT_EDITED);
             }
-            return new SetVolunteerHoursCommand(index, hoursAsString);
+            return new SetVolunteerHoursCommand(index, hoursAsInt);
         }
 
         throw new ParseException(SetVolunteerHoursCommand.MESSAGE_NOT_EDITED);
