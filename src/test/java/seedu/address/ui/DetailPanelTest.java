@@ -2,11 +2,12 @@ package seedu.address.ui;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
 
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
+
+import org.junit.jupiter.api.Test;
+import org.testfx.framework.junit5.ApplicationTest;
 
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
@@ -28,7 +29,7 @@ public class DetailPanelTest extends ApplicationTest {
                 .build();
 
         detailPanel = new DetailPanel();
-        detailPanel.setPerson(examplePerson, 0);  // Simulate setting a person in the UI
+        detailPanel.setPerson(examplePerson, 0); // Simulate setting a person in the UI
 
         scene = new Scene(detailPanel.getRoot(), 800, 600);
         stage.setScene(scene);
@@ -43,6 +44,6 @@ public class DetailPanelTest extends ApplicationTest {
         verifyThat("#email", hasText("Email: john@example.com"));
         verifyThat("#address", hasText("Address: 123 Main Street"));
         verifyThat("#role", hasText("Role: brUdder"));
-        verifyThat("#major", hasText("Major: Computer Science"));  // Assuming the conversion to full name works
+        verifyThat("#major", hasText("Major: Computer Science")); // Assuming the conversion to full name works
     }
 }
