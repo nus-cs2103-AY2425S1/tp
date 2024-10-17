@@ -47,7 +47,7 @@
                 <Insets top="5" right="10" bottom="5" left="10" />
               </padding>
             </StackPane>
-            <StackPane fx:id="resultDisplayPlaceholder" VBox.vgrow="NEVER" minHeight="100" prefHeight="100" maxHeight="100">
+            <StackPane fx:id="resultDisplayPlaceholder" VBox.vgrow="NEVER" minHeight="100" prefHeight="150" maxHeight="150">
               <padding>
                 <Insets top="5" right="10" bottom="5" left="10" />
               </padding>

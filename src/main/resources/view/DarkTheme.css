@@ -86,21 +86,19 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: #9a6447;
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
-    -fx-background-color: #9a6447;
+    -fx-background-color: #935f43;
     -fx-border-width: 0 0 0 0;
-    -fx-border-color: #b47454;
 }
 
-/*.list-cell:filled:even {*/
-/*    -fx-background-color: #3c3e3f;*/
-/*}*/
+.list-cell:filled:even {
+    -fx-background-color: #80553d;
+}
 
 .list-cell:filled {
 
@@ -109,7 +107,7 @@
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #b47454;
+    -fx-background-color: #c6876f;
 }
 
 .list-cell:filled:selected #cardPane {
@@ -132,10 +130,12 @@
 }
 
 .role-label {
-    -fx-background-color: #be9c85;
-    -fx-padding: 0 4 0 4;
+    -fx-background-color: #FF9494;
+    -fx-padding: 1 6 1 6;
     -fx-border-radius: 5;
     -fx-background-radius: 10;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 15px;
 }
 
 .major-label {
@@ -357,22 +357,26 @@
 }
 
 #detailPanel {
-    -fx-padding: 15 20 15 20;
+    -fx-padding: 10 20 15 20;
     -fx-background-color: #9a6447;
 }
+
 
 #detailPanelVBox .label {
     -fx-text-fill: white;
 }
 
-
-#filterField, #personListPanel, #personWebpage {
-    -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
-}
-
 #resultDisplay .content {
     -fx-background-color: transparent, #9a6447, transparent, #9a6447;
     -fx-background-radius: 0;
+}
+/* TODO */
+
+.scroll-bar {
+    -fx-background-color: transparent; /* Optional: makes the scrollbar background transparent */
+}
+.scroll-bar:vertical .thumb {
+    -fx-background-color: brown; /* Sets the vertical scrollbar thumb to brown */
 }
 
 #tags {
