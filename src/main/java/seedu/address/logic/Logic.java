@@ -34,7 +34,7 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Client> getFilteredPersonList();
 
-    /** Returns a list of the visible rental information. */
+    /** Returns an unmodifiable view of the visible rental information. */
     ObservableList<RentalInformation> getVisibleRentalInformationList();
 
     /**
