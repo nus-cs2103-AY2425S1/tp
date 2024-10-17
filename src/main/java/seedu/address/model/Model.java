@@ -1,10 +1,12 @@
 package seedu.address.model;
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.product.Product;
+import seedu.address.model.product.ProductNameContainsKeywordsPredicate;
 import seedu.address.model.supplier.Supplier;
 
 /**
@@ -91,9 +93,18 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered supplier list */
     ObservableList<Supplier> getFilteredSupplierList();
 
+    /** Returns an unmodifiable view of the filtered supplier list */
+    ObservableList<Product> getFilteredProductList();
+
     /**
      * Updates the filter of the filtered supplier list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredSupplierList(Predicate<Supplier> predicate);
+
+    /**
+     * Updates the filter of the filtered product list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredProductList(Predicate<Product> predicate);
 }

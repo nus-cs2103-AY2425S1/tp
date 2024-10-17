@@ -23,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Supplier> filteredSuppliers;
+    private final FilteredList<Product> filteredProducts;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredSuppliers = new FilteredList<>(this.addressBook.getSupplierList());
+        filteredProducts = new FilteredList<>(this.addressBook.getProductList());
     }
 
     public ModelManager() {
@@ -131,9 +133,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Product> getFilteredProductList() {
+        return filteredProducts;
+    }
+
+    @Override
     public void updateFilteredSupplierList(Predicate<Supplier> predicate) {
         requireNonNull(predicate);
         filteredSuppliers.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredProductList(Predicate<Product> predicate) {
+        requireNonNull(predicate);
+        filteredProducts.setPredicate(predicate);
     }
 
     @Override
