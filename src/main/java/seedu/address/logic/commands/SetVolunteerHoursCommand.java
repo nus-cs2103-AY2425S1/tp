@@ -65,9 +65,7 @@ public class SetVolunteerHoursCommand extends Command {
         if (!(personToEdit instanceof Volunteer)) {
             throw new CommandException(MESSAGE_INVALID_COMMAND_FOR_PERSON_TYPE);
         }
-
-        Hours newHoursAsHours = new Hours(newHours);
-        Volunteer editedVolunteer = createUpdatedHoursVolunteer(personToEdit, newHoursAsHours);
+        Volunteer editedVolunteer = createUpdatedHoursVolunteer(personToEdit, new Hours(newHours));
         model.setPerson(personToEdit, editedVolunteer);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 

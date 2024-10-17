@@ -112,6 +112,6 @@ public class Volunteer extends Person implements Comparable<Volunteer> {
     }
 
     public Role getRole() {
-        return Role.VOLUNTEER;
+        return Role.DONOR;
     }
 }

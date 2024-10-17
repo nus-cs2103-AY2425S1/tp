@@ -21,13 +21,13 @@ public class SearchCommand extends Command {
             + ": Searches all persons whose names or tags contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "At least one of the following parameters must be provided.\n"
-            + "Parameters: " + "PREFIX/ KEYWORD [ANOTHER_PREFIX/ KEYWORD] \n"
+            + "Parameters: " + "PREFIX/ KEYWORD [MORE_PREFIX/ KEYWORD...] \n"
             + "You can search by name, tag, or both."
             + " If both are provided, only persons matching both criteria will be shown.\n"
-            + "Example 1: " + COMMAND_WORD + " n/alice\n"
-            + "Example 2: " + COMMAND_WORD + " t/friend\n"
-            + "Example 3: " + COMMAND_WORD + " n/alice t/friend\n"
-            + "Example 4: " + COMMAND_WORD + " t/friend n/alice";
+            + "Example 1: " + COMMAND_WORD + " n/ alice\n"
+            + "Example 2: " + COMMAND_WORD + " t/ friend\n"
+            + "Example 3: " + COMMAND_WORD + " n/ alice t/ friend\n"
+            + "Example 4: " + COMMAND_WORD + " t/ friend n/ alice";
 
     private final Predicate<Person> predicate;
 

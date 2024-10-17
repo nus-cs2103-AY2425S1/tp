@@ -122,23 +122,28 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Searching persons by field: `search`
 
-Finds persons whose names contain any of the given keywords.
+Search persons whose fields match the keywords given.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `search PREFIX/ KEYWORD [MORE_PREFIX/ KEYWORD ...]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
+* Search will only be done for the fields indicated by the provided prefixes
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The order of the prefixes provided does not matter. e.g. `search n/ alex t/ friends` will return the same result as `search t/ friends n/ alex`
+* Only full words will be matched e.g. `friend` will not match `friends`
+* Persons matching at least one keyword will be returned (i.e. `OR` search)
+* For searches with multiple prefixes, only persons matching all keywords corresponding to the prefixes will be returned
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+Examples: <br>
+1. **Person A:** `name`: John Doe `tag`: colleague <br>
+2. **Person B:** `name`: Alex Yeoh `tag`: friends <br>
+3. **Person C:** `name`: David Li `tag`: friends
+* `search n/ john` returns persons with the name `john` like `John Doe`
+* `search t/ friends` returns all persons tagged as friends, like `Alex Yeoh`, `David Li`
+* `search n/ Alex t/ friends` returns all persons with name matching `Alex` and tag matching `friends` like `Alex Yeoh` <br>
+    ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
 

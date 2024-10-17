@@ -79,4 +79,3 @@ public class Date {
         return date.format(FORMATTER);
     }
 }
-
