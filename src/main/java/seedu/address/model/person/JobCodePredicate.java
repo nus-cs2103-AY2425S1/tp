@@ -14,8 +14,8 @@ public class JobCodePredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        // Compare job code exactly (case-insensitive)
-        return person.getJobCode().value.equalsIgnoreCase(jobCode);
+        // Compare job code exactly (case-sensitive)
+        return person.getJobCode().value.equals(jobCode);
     }
 
     @Override
