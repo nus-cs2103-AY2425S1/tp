@@ -40,7 +40,7 @@ public class RemarkList {
      *
      * @param index The specified index of the remark to be deleted.
      */
-    public void removeRemark(int index) {
+    public void deleteRemark(int index) {
         remarks.remove(index);
     }
 

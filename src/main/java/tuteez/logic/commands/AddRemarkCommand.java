@@ -17,13 +17,13 @@ public class AddRemarkCommand extends RemarkCommand {
     private final Remark remarkToAdd;
 
     /**
-     * Adds the specified Remark to the person {@code index} of the displayed list.
+     * Adds the specified Remark to the person {@code personIndex} of the displayed list.
      *
-     * @param index The index of the person in the displayed list to add the remark to.
+     * @param personIndex The personIndex of the person in the displayed list to add the remark to.
      * @param remarkToAdd Remark to be added.
      */
-    public AddRemarkCommand(Index index, Remark remarkToAdd) {
-        super(index);
+    public AddRemarkCommand(Index personIndex, Remark remarkToAdd) {
+        super(personIndex);
         this.remarkToAdd = remarkToAdd;
     }
 
@@ -36,7 +36,7 @@ public class AddRemarkCommand extends RemarkCommand {
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format("Added remark to Person %1$s: %2$s",
-                index.getOneBased(), remarkToAdd.toString()));
+                personIndex.getOneBased(), remarkToAdd.toString()));
     }
 
     private Person addRemarkToPerson(Person person) {

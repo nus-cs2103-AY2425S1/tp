@@ -6,6 +6,7 @@ import static tuteez.logic.parser.CliSyntax.PREFIX_DELETE_REMARK;
 
 import tuteez.commons.core.index.Index;
 import tuteez.logic.commands.AddRemarkCommand;
+import tuteez.logic.commands.DeleteRemarkCommand;
 import tuteez.logic.commands.RemarkCommand;
 import tuteez.logic.parser.exceptions.ParseException;
 import tuteez.model.remark.Remark;
@@ -24,20 +25,21 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
     public RemarkCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ADD_REMARK, PREFIX_DELETE_REMARK);
 
-        Index index;
+        Index personIndex;
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            personIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE), pe);
         }
 
         if (argMultimap.getValue(PREFIX_ADD_REMARK).isPresent()) {
             String remarkString = argMultimap.getValue(PREFIX_ADD_REMARK).get();
-            return new AddRemarkCommand(index, new Remark(remarkString));
+            return new AddRemarkCommand(personIndex, new Remark(remarkString));
         }
 
         if (argMultimap.getValue(PREFIX_DELETE_REMARK).isPresent()) {
-            // TO DO: add delete remark logic
+            Index remarkIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_DELETE_REMARK).get());
+            return new DeleteRemarkCommand(personIndex, remarkIndex);
         }
 
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE));

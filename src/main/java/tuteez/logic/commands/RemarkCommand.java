@@ -18,27 +18,27 @@ public abstract class RemarkCommand extends Command {
     public static final String COMMAND_WORD = "remark";
     public static final String MESSAGE_USAGE = "placeholder";
 
-    protected final Index index;
+    protected final Index personIndex;
 
     /**
      * Creates a RemarkCommand with the specified {@code index}.
      *
-     * @param index of the person in the filtered person list to apply command
+     * @param personIndex Index of the person in the filtered person list to apply command
      */
-    public RemarkCommand(Index index) {
-        requireNonNull(index);
+    public RemarkCommand(Index personIndex) {
+        requireNonNull(personIndex);
 
-        this.index = index;
+        this.personIndex = personIndex;
     }
 
     protected Person getPersonFromModel(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (personIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        return lastShownList.get(index.getZeroBased());
+        return lastShownList.get(personIndex.getZeroBased());
     }
 
     @Override
