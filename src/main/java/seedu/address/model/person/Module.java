@@ -16,7 +16,7 @@ public class Module {
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
-    public final String value;
+    public final String module;
 
     /**
      * Constructs an {@code Module}.
@@ -26,7 +26,7 @@ public class Module {
     public Module(String module) {
         requireNonNull(module);
         checkArgument(isValidModule(module), MESSAGE_CONSTRAINTS);
-        value = module;
+        this.module = module;
     }
 
     /**
@@ -38,7 +38,7 @@ public class Module {
 
     @Override
     public String toString() {
-        return value;
+        return module;
     }
 
     @Override
@@ -53,11 +53,11 @@ public class Module {
         }
 
         Module otherModule = (Module) other;
-        return value.equals(otherModule.value);
+        return module.equals(otherModule.module);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return module.hashCode();
     }
 }
