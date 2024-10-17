@@ -84,7 +84,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses the given {@code String telegramUsername} and returns a {@code TelegramUsername} object.
+     * Parses the given {@code String telegramUsername} on add command and returns a {@code TelegramUsername} object.
      * Leading and trailing spaces will be trimmed.
      *
      * @param telegramUsername The username string to be parsed. Can be {@code null}.
@@ -92,9 +92,30 @@ public class ParserUtil {
      * @throws ParseException if the provided {@code telegramUsername} is invalid according to the
      *         {@code TelegramUsername#isValidUsername(String)} method.
      */
-    public static TelegramUsername parseTele(String telegramUsername) throws ParseException {
+    public static TelegramUsername parseTeleOnAdd(String telegramUsername) throws ParseException {
         if (telegramUsername == null) {
             return new TelegramUsername(telegramUsername);
+        }
+        String trimmedTelegramUsername = telegramUsername.trim();
+        if (!TelegramUsername.isValidUsername(trimmedTelegramUsername)) {
+            throw new ParseException(TelegramUsername.MESSAGE_CONSTRAINTS);
+        }
+        return new TelegramUsername(trimmedTelegramUsername);
+    }
+
+    /**
+     * Parses the given {@code String telegramUsername} on edit command and returns a {@code TelegramUsername} object.
+     * Leading and trailing spaces will be trimmed. Difference between this parse and the one for add command is that
+     * this parse method allows removal of telegram username when user input empty input.
+     *
+     * @param telegramUsername The username string to be parsed
+     * @return A {@code TelegramUsername} object with the trimmed username.
+     * @throws ParseException if the provided {@code telegramUsername} is invalid according to the
+     *         {@code TelegramUsername#isValidUsername(String)} method.
+     */
+    public static TelegramUsername parseTeleOnEdit(String telegramUsername) throws ParseException {
+        if (telegramUsername.isEmpty()) {
+            return new TelegramUsername(null);
         }
         String trimmedTelegramUsername = telegramUsername.trim();
         if (!TelegramUsername.isValidUsername(trimmedTelegramUsername)) {

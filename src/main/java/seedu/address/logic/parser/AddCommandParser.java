@@ -49,7 +49,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         TelegramUsername telegramUsername = ParserUtil
-                .parseTele(argMultimap.getValue(PREFIX_TELEGRAM).orElse(null)); // null to represent input absent
+                .parseTeleOnAdd(argMultimap.getValue(PREFIX_TELEGRAM).orElse(null)); // null to represent input absent
 
         //Set <Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
 

@@ -39,7 +39,6 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_TELEGRAM, PREFIX_ROLE);
 
-
         Index index;
 
         try {
@@ -66,10 +65,9 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_TELEGRAM).isPresent()) {
-            editPersonDescriptor.setTelegramUsername(ParserUtil.parseTele(argMultimap.getValue(PREFIX_TELEGRAM)
-                    .orElse(null)));
+            editPersonDescriptor.setTelegramUsername(ParserUtil.parseTeleOnEdit(argMultimap.getValue(PREFIX_TELEGRAM)
+                    .get()));
         }
-
 
         parseRolesForEdit(argMultimap.getAllValues(PREFIX_ROLE)).ifPresent(editPersonDescriptor::setRoles);
         if (!editPersonDescriptor.isAnyFieldEdited()) {
