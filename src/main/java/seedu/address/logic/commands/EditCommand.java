@@ -8,12 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -99,9 +96,9 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         JobCode updatedJobCode = editPersonDescriptor.getJobCode().orElse(personToEdit.getJobCode());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Tag updatedTag = editPersonDescriptor.getTag().orElse(personToEdit.getTag());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedJobCode, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedJobCode, updatedTag);
     }
 
     @Override
@@ -137,7 +134,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private JobCode jobCode;
-        private Set<Tag> tags;
+        private Tag tag;
 
         public EditPersonDescriptor() {}
 
@@ -150,14 +147,14 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setJobCode(toCopy.jobCode);
-            setTags(toCopy.tags);
+            setTag(toCopy.tag);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, jobCode, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, jobCode, tag);
         }
 
         public void setName(Name name) {
@@ -192,21 +189,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(jobCode);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setTag(Tag tag) {
+            this.tag = tag;
         }
 
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Tag> getTag() {
+            return Optional.ofNullable(tag);
         }
 
         @Override
@@ -225,7 +213,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(jobCode, otherEditPersonDescriptor.jobCode)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tag, otherEditPersonDescriptor.tag);
         }
 
         @Override
@@ -235,7 +223,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("job code", jobCode)
-                    .add("tags", tags)
+                    .add("tag", tag)
                     .toString();
         }
     }
