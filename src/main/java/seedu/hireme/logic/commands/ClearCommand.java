@@ -11,7 +11,7 @@ import seedu.hireme.model.internshipapplication.InternshipApplication;
  */
 public class ClearCommand extends Command<InternshipApplication> {
 
-    public static final String COMMAND_WORD = "/c";
+    public static final String COMMAND_WORD = "/clear";
     public static final String MESSAGE_SUCCESS = "HireMe has been cleared!";
 
 

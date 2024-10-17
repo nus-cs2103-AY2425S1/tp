@@ -4,11 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.hireme.commons.util.AppUtil.checkArgument;
 
 import seedu.hireme.logic.validator.NameValidator;
-import seedu.hireme.commons.util.AppUtil;
 
 /**
  * Represents a Company's name in the internship book.
- * Guarantees: immutable; the name is valid as declared in {@link #validate(String)}.
  */
 public class Name {
 
@@ -26,8 +24,8 @@ public class Name {
      */
     public Name(String name) {
         requireNonNull(name);
-        AppUtil.checkArgument(NameValidator.of().validate(name), MESSAGE_CONSTRAINTS);
-        this.value = name;
+        checkArgument(NameValidator.of().validate(name), MESSAGE_CONSTRAINTS);
+        this.value = name.trim();
     }
 
     /**
@@ -67,7 +65,7 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return value.equals(otherName.value);
+        return value.equalsIgnoreCase(otherName.value);
     }
 
     /**

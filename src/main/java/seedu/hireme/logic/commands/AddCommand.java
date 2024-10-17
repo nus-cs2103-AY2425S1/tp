@@ -13,7 +13,7 @@ import seedu.hireme.model.Model;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 /**
- * Adds a person to the address book.
+ * Adds an internship application to the address book.
  */
 public class AddCommand extends Command<InternshipApplication> {
 
@@ -38,7 +38,7 @@ public class AddCommand extends Command<InternshipApplication> {
     private final InternshipApplication toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code InternshipApplication}
      */
     public AddCommand(InternshipApplication internship) {
         requireNonNull(internship);

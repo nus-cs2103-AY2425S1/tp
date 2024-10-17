@@ -1,11 +1,10 @@
 package seedu.hireme.model.internshipapplication;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.hireme.commons.util.AppUtil.checkArgument;
 
+import seedu.hireme.commons.util.AppUtil;
 import seedu.hireme.logic.validator.EmailValidator;
 import seedu.hireme.logic.validator.NameValidator;
-import seedu.hireme.commons.util.AppUtil;
 
 /**
  * Represents a Company in the internship book.

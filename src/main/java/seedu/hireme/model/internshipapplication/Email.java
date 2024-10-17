@@ -4,11 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.hireme.commons.util.AppUtil.checkArgument;
 
 import seedu.hireme.logic.validator.EmailValidator;
-import seedu.hireme.commons.util.AppUtil;
 
 /**
  * Represents a Company's email in the internship book.
- * Guarantees: immutable; the email is valid as declared in {@link EmailValidator#validate(String)}.
  */
 public class Email {
 
@@ -36,8 +34,8 @@ public class Email {
      */
     public Email(String email) {
         requireNonNull(email);
-        AppUtil.checkArgument(EmailValidator.of().validate(email), MESSAGE_CONSTRAINTS);
-        this.value = email;
+        checkArgument(EmailValidator.of().validate(email), MESSAGE_CONSTRAINTS);
+        this.value = email.trim();
     }
 
     /**

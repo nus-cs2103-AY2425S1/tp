@@ -8,8 +8,8 @@ import seedu.hireme.logic.commands.CommandResult;
 import seedu.hireme.logic.commands.exceptions.CommandException;
 import seedu.hireme.logic.parser.exceptions.ParseException;
 import seedu.hireme.model.HireMeComparable;
-import seedu.hireme.model.ReadOnlyAddressBook;
 import seedu.hireme.model.Model;
+import seedu.hireme.model.ReadOnlyAddressBook;
 
 /**
  * API of the Logic component
@@ -31,7 +31,7 @@ public interface Logic<T extends HireMeComparable<T>> {
      */
     ReadOnlyAddressBook<T> getAddressBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /** Returns an unmodifiable view of the filtered list of internship applications */
     ObservableList<T> getFilteredList();
 
     /**

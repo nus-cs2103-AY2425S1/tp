@@ -13,15 +13,15 @@ import seedu.hireme.logic.commands.CommandResult;
 import seedu.hireme.logic.commands.exceptions.CommandException;
 import seedu.hireme.logic.parser.AddressBookParser;
 import seedu.hireme.logic.parser.exceptions.ParseException;
-import seedu.hireme.model.HireMeComparable;
 import seedu.hireme.model.Model;
 import seedu.hireme.model.ReadOnlyAddressBook;
+import seedu.hireme.model.internshipapplication.InternshipApplication;
 import seedu.hireme.storage.Storage;
 
 /**
  * The main LogicManager of the app.
  */
-public class LogicManager<T extends HireMeComparable<T>> implements Logic<T> {
+public class LogicManager implements Logic<InternshipApplication> {
     public static final String FILE_OPS_ERROR_FORMAT = "Could not save data due to the following error: %s";
 
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
@@ -29,14 +29,14 @@ public class LogicManager<T extends HireMeComparable<T>> implements Logic<T> {
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
-    private final Model<T> model;
-    private final Storage<T> storage;
+    private final Model<InternshipApplication> model;
+    private final Storage<InternshipApplication> storage;
     private final AddressBookParser addressBookParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
-    public LogicManager(Model<T> model, Storage<T> storage) {
+    public LogicManager(Model<InternshipApplication> model, Storage<InternshipApplication> storage) {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
@@ -47,7 +47,7 @@ public class LogicManager<T extends HireMeComparable<T>> implements Logic<T> {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command<T> command = addressBookParser.parseCommand(commandText);
+        Command<InternshipApplication> command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
@@ -62,12 +62,12 @@ public class LogicManager<T extends HireMeComparable<T>> implements Logic<T> {
     }
 
     @Override
-    public ReadOnlyAddressBook<T> getAddressBook() {
+    public ReadOnlyAddressBook<InternshipApplication> getAddressBook() {
         return model.getAddressBook();
     }
 
     @Override
-    public ObservableList<T> getFilteredList() {
+    public ObservableList<InternshipApplication> getFilteredList() {
         return model.getFilteredList();
     }
 

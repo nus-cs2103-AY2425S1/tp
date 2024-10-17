@@ -53,34 +53,34 @@ public interface Model<T> {
     ReadOnlyAddressBook<T> getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if an item with the same identity as {@code item} exists in the address book.
      */
     boolean hasItem(T item);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given item.
+     * The item must exist in the address book.
      */
     void deleteItem(T target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given item.
+     * {@code item} must not already exist in the address book.
      */
     void addItem(T item);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given item {@code target} with {@code edited}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The item identity of {@code edited} must not be the same as another existing item in the address book.
      */
     void setItem(T target, T edited);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /** Returns an unmodifiable view of the filtered list */
     ObservableList<T> getFilteredList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredList(Predicate<T> predicate);

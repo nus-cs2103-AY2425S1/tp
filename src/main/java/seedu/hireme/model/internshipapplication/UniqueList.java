@@ -1,17 +1,16 @@
 package seedu.hireme.model.internshipapplication;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.hireme.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.hireme.commons.util.CollectionUtil;
 import seedu.hireme.model.HireMeComparable;
 import seedu.hireme.model.internshipapplication.exceptions.DuplicateInternshipException;
 import seedu.hireme.model.internshipapplication.exceptions.InternshipNotFoundException;
-import seedu.hireme.commons.util.CollectionUtil;
 
 /**
  * A list that enforces uniqueness between its elements and does not allow nulls.

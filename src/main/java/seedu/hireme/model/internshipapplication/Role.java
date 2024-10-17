@@ -4,11 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.hireme.commons.util.AppUtil.checkArgument;
 
 import seedu.hireme.logic.validator.RoleValidator;
-import seedu.hireme.commons.util.AppUtil;
 
 /**
  * Represents an Internship's role in the internship application.
- * Guarantees: immutable; the role is valid as declared in {@link RoleValidator#validate(String)}.
  */
 public class Role {
 
@@ -33,8 +31,8 @@ public class Role {
      */
     public Role(String role) {
         requireNonNull(role);
-        AppUtil.checkArgument(RoleValidator.of().validate(role), MESSAGE_CONSTRAINTS);
-        this.value = role;
+        checkArgument(RoleValidator.of().validate(role), MESSAGE_CONSTRAINTS);
+        this.value = role.trim();
     }
 
     /**

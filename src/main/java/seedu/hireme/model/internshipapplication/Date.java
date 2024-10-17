@@ -1,13 +1,12 @@
 package seedu.hireme.model.internshipapplication;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.hireme.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import seedu.hireme.logic.validator.DateValidator;
 import seedu.hireme.commons.util.AppUtil;
+import seedu.hireme.logic.validator.DateValidator;
 
 /**
  * Represents a Date in the internship book.

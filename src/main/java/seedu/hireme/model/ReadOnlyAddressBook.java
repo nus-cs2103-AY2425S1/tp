@@ -8,8 +8,8 @@ import javafx.collections.ObservableList;
 public interface ReadOnlyAddressBook<T> {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the list.
+     * This list will not contain any duplicate items.
      */
     ObservableList<T> getList();
 
