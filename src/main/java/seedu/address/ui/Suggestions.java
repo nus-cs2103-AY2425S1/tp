@@ -4,7 +4,7 @@ import javafx.scene.control.TextField;
 
 public class Suggestions {
 
-    public void checkAllCommands(TextField inputTextField, TextField suggestionTextField, String currentText) {
+    public void checkAllCommands(TextField inputTextField, TextField suggestionTextField) {
         String enteredText = inputTextField.getText();
 
         for (Commands command : Commands.values()) {

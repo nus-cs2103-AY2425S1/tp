@@ -16,14 +16,8 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
-
-    private static final String ADD_COMMAND = "add";
-    private static final String ADD_COMMAND_FORMAT = "n/Betsy t/friend e/betsycrowe@example.com " +
-            "a/Newgate Prison p/1234567 t/criminal";
-    private static final String[] formatPrefixes = {"n/", "p/", "e/", "a/", "t/"};
     private final CommandExecutor commandExecutor;
     private TextField suggestionTextField;
-    private FormatSuggestion recomm;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -41,7 +35,7 @@ public class CommandBox extends UiPart<Region> {
         // Add listeners for real-time command detection and caret position
         commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             setStyleToDefault();
-            recommendations.checkAllCommands(commandTextField, suggestionTextField, newValue);
+            recommendations.checkAllCommands(commandTextField, suggestionTextField);
         });
     }
 
