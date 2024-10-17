@@ -10,6 +10,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Date;
+import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -31,6 +33,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String priority;
     private final String remark;
+    private final String dateOfBirth;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -44,6 +47,7 @@ class JsonAdaptedPerson {
             @JsonProperty("address") String address,
             @JsonProperty("priority") String priority,
             @JsonProperty("remark") String remark,
+            @JsonProperty("dateOfBirth") String dateOfBirth,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
@@ -51,6 +55,7 @@ class JsonAdaptedPerson {
         this.address = address;
         this.priority = priority;
         this.remark = remark;
+        this.dateOfBirth = dateOfBirth;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -66,6 +71,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         priority = source.getPriority().name();
         remark = source.getRemark().value;
+        dateOfBirth = source.getDateOfBirth().getValue();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .toList());
@@ -127,8 +133,18 @@ class JsonAdaptedPerson {
         }
 
         final Remark modelRemark = new Remark(remark == null ? "" : remark);
+
+        if (dateOfBirth == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
+        }
+        if (!Date.isValidDate(dateOfBirth)) {
+            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
+        }
+        final DateOfBirth modelDateOfBirth = new DateOfBirth(dateOfBirth);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPriority, modelRemark, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPriority, modelRemark,
+                modelDateOfBirth, modelTags);
     }
 
 }
