@@ -17,12 +17,14 @@ public class FieldContainsKeywordsPredicateTest {
     @Test
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
-        List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
+        List<String> secondPredicateKeywordList = Arrays.asList("second", "third");
 
         FieldContainsKeywordsPredicate firstPredicate = new FieldContainsKeywordsPredicate(firstPredicateKeywordList,
                 "name");
         FieldContainsKeywordsPredicate secondPredicate = new FieldContainsKeywordsPredicate(secondPredicateKeywordList,
                 "name");
+        FieldContainsKeywordsPredicate thirdPredicate = new FieldContainsKeywordsPredicate(firstPredicateKeywordList,
+                "id");
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
@@ -38,8 +40,11 @@ public class FieldContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
+        // different keywords but same field -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
+
+        // same keywords but different fields -> returns false
+        assertFalse(firstPredicate.equals(thirdPredicate));
     }
 
     @Test
@@ -70,10 +75,8 @@ public class FieldContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withName("Clarence").build()));
 
         // Keywords match other field(s)
-        /* to implement once other fields are implemented
         predicate = new FieldContainsKeywordsPredicate(Arrays.asList("D7"), "Name");
-        assertFalse(predicate.test(new PersonBuilder().withId("P1").withWard("D7").build()));
-        */
+        assertFalse(predicate.test(new PersonBuilder().withId("P12345").withWard("D7").build()));
 
         // Unknown field
         predicate = new FieldContainsKeywordsPredicate(Arrays.asList("Amy", "Ben"), "random");
@@ -83,10 +86,10 @@ public class FieldContainsKeywordsPredicateTest {
     @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
-        FieldContainsKeywordsPredicate predicate = new FieldContainsKeywordsPredicate(keywords, "name");
+        FieldContainsKeywordsPredicate namePredicate = new FieldContainsKeywordsPredicate(keywords, "name");
 
-        String expected = FieldContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords
-                + ", field=" + "name" + "}";
-        assertEquals(expected, predicate.toString());
+        String expected = FieldContainsKeywordsPredicate.class.getCanonicalName() + "{field=" + "name" + ", keywords="
+                + keywords + "}";
+        assertEquals(expected, namePredicate.toString());
     }
 }
