@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
@@ -31,7 +32,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, GradeList gradeList,
-            AttendanceList attendanceList) {
+                  AttendanceList attendanceList) {
         requireAllNonNull(name, phone, email, address, tags, gradeList, attendanceList);
         this.name = name;
         this.phone = phone;
@@ -75,6 +76,12 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Person removeGrade(Index index) {
+        GradeList newGradelist = this.gradeList.removeGrade(index);
+
+        return new Person(this.name, this.phone, this.email, this.address, this.tags, newGradelist, this.attendanceList);
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -85,7 +92,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+            && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -105,12 +112,12 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags)
-                && gradeList.equals(otherPerson.gradeList)
-                && attendanceList.equals(otherPerson.attendanceList);
+            && phone.equals(otherPerson.phone)
+            && email.equals(otherPerson.email)
+            && address.equals(otherPerson.address)
+            && tags.equals(otherPerson.tags)
+            && gradeList.equals(otherPerson.gradeList)
+            && attendanceList.equals(otherPerson.attendanceList);
     }
 
     @Override
@@ -122,14 +129,14 @@ public class Person {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
-                .add("gradeList", gradeList)
-                .add("attendanceList", attendanceList)
-                .toString();
+            .add("name", name)
+            .add("phone", phone)
+            .add("email", email)
+            .add("address", address)
+            .add("tags", tags)
+            .add("gradeList", gradeList)
+            .add("attendanceList", attendanceList)
+            .toString();
     }
 
 }

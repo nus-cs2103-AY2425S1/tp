@@ -19,26 +19,26 @@ public class DeleteGradeCommand extends Command {
     public static final String COMMAND_WORD = "deleteGrade";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a grade of the person identified by the "
-            + "index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "TEST_NAME\n"
-            + "Example: " + COMMAND_WORD + " 1 Midterm";
+        + "index number used in the displayed person list.\n"
+        + "Parameters: INDEX (must be a positive integer) "
+        + "TEST_NAME\n"
+        + "Example: " + COMMAND_WORD + " 1 Midterm";
 
     public static final String MESSAGE_DELETE_GRADE_SUCCESS = "Deleted grade from %1$s: %2$s";
     public static final String MESSAGE_GRADE_NOT_FOUND = "Grade for test '%1$s' not found.";
 
     private final Index index;
-    private final String testName;
+    private final Index testIndex;
 
     /**
      * Creates a DeleteGradeCommand to remove the specified grade from a person.
      *
-     * @param index Index of the person in the filtered person list.
-     * @param testName Name of the test whose grade is to be deleted.
+     * @param index     Index of the person in the filtered person list.
+     * @param testIndex Index of the test whose grade is to be deleted.
      */
-    public DeleteGradeCommand(Index index, String testName) {
+    public DeleteGradeCommand(Index index, Index testIndex) {
         this.index = index;
-        this.testName = testName;
+        this.testIndex = testIndex;
     }
 
     @Override
@@ -50,17 +50,17 @@ public class DeleteGradeCommand extends Command {
             throw new CommandException("The person index provided is invalid.");
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        GradeList gradeList = personToEdit.getGradeList();
 
-        if (!gradeList.hasGrade(testName)) {
-            throw new CommandException(String.format(MESSAGE_GRADE_NOT_FOUND, testName));
+        final Person personToEdit = lastShownList.get(index.getZeroBased());
+        if (!personToEdit.getGradeList().checkIndexBounds(index)) {
+            throw new CommandException(String.format(MESSAGE_GRADE_NOT_FOUND, testIndex));
         }
 
-        gradeList.removeGrade(testName);
+        final Person editedPerson = personToEdit.removeGrade(testIndex);
+        model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_GRADE_SUCCESS, personToEdit.getName(), testName));
+        return new CommandResult(String.format(MESSAGE_DELETE_GRADE_SUCCESS, personToEdit.getName(), testIndex));
     }
 
     @Override
@@ -74,7 +74,7 @@ public class DeleteGradeCommand extends Command {
         }
 
         DeleteGradeCommand otherCommand = (DeleteGradeCommand) other;
-        return index.equals(otherCommand.index) && testName.equals(otherCommand.testName);
+        return index.equals(otherCommand.index) && testIndex.equals(otherCommand.testIndex);
     }
 }
 

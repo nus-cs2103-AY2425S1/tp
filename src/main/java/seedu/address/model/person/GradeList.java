@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import seedu.address.commons.core.index.Index;
+
 /**
  * Represents a list of grades for a student in the address book.
  */
 public class GradeList {
     private static final String NOT_ALL_WEIGHTAGE = "\nDo note not all weightage has been accounted for."
-            + "\nPercentage of tests done: ";
+        + "\nPercentage of tests done: ";
     private static final float FULL_WEIGHTAGE = 1.0f;
     private final List<Grade> grades;
 
@@ -35,41 +37,36 @@ public class GradeList {
     public GradeList addGrade(Grade grade) {
         requireNonNull(grade, "Grade cannot be null");
 
-        GradeList removedGradeList = removeGrade(grade.getTestName());
+        List<Grade> newGrades = new ArrayList<>(this.grades);
 
-        List<Grade> removedGrades = new ArrayList<>(removedGradeList.getList());
+        newGrades.add(grade);
 
-        removedGrades.add(grade);
-
-        return new GradeList(removedGrades);
+        return new GradeList(newGrades);
     }
 
     /**
      * Retrieves the grade for a specific test.
      * Returns the {@code Grade} object if found, or null if no grade is recorded for the test.
      *
-     * @param testName The name of the test.
+     * @param index The name of the test.
      * @return The {@code Grade} object for the test, or null if no grade is found.
      */
-    public Grade getGrade(String testName) {
-        requireNonNull(testName);
-        for (Grade grade : grades) {
-            if (grade.getTestName().equalsIgnoreCase(testName)) {
-                return grade;
-            }
-        }
-        return null;
+    public Grade getGrade(Index index) {
+        requireNonNull(index);
+        return grades.get(index.getZeroBased());
     }
 
     /**
      * Removes the grade for a specific test, if it exists.
      *
-     * @param testName The name of the test for which the grade should be removed.
+     * @param index The index of the test for which the grade should be removed.
      */
-    public GradeList removeGrade(String testName) {
-        requireNonNull(testName);
+    public GradeList removeGrade(Index index) {
+        requireNonNull(index);
         List<Grade> newList = new ArrayList<>(grades);
-        newList.removeIf(grade -> grade.getTestName().equalsIgnoreCase(testName));
+
+        newList.remove(index.getZeroBased());
+
         return new GradeList(newList);
     }
 
@@ -84,14 +81,13 @@ public class GradeList {
 
 
     /**
-     * Returns true if there is a grade recorded for the specified test.
+     * Returns true if index passed is out of bounds
      *
-     * @param testName The name of the test.
-     * @return True if the grade exists for the test, false otherwise.
+     * @param index The index in question
+     * @return True if the index is in bounds, false otherwise.
      */
-    public boolean hasGrade(String testName) {
-        requireNonNull(testName);
-        return getGrade(testName) != null;
+    public boolean checkIndexBounds(Index index) {
+        return index.getZeroBased() < getList().size();
     }
 
     /**
