@@ -13,8 +13,8 @@ import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.WorkExp;
 import seedu.address.model.person.University;
+import seedu.address.model.person.WorkExp;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,7 +30,7 @@ public class SampleDataUtil {
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new WorkExp("Engineer,Microsoft,2023"),
                 getTagSet("colleagues", "friends"), new University("NTU"), new Major("Engineering"), new Interest("")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),  new WorkExp("Manager,Amazon,2024"),
+                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new WorkExp("Manager,Amazon,2024"),
                 getTagSet("neighbours"), new University("SMU"), new Major("Accounting"), new Interest("")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new WorkExp("Director,Google,2023"),

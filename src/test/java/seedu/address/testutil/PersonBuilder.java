@@ -10,8 +10,8 @@ import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.WorkExp;
 import seedu.address.model.person.University;
+import seedu.address.model.person.WorkExp;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -113,9 +113,8 @@ public class PersonBuilder {
      */
     public PersonBuilder withWorkExp(String workExp) {
         this.workExp = new WorkExp(workExp);
-        return this; 
+        return this;
     }
-  
     /**
      * Sets the {@code University} of the {@code Person} that we are building.
      */
@@ -131,10 +130,17 @@ public class PersonBuilder {
         this.major = new Major(major);
         return this;
     }
-
+    /**
+     * Builds and returns a {@code Person} object with the attributes that have been set for this {@code PersonBuilder}.
+     *
+     * <p>Any fields that are not set will be initialized with their default values.
+     * For example, if an {@code Interest} is not provided, the {@code Person} object will be created with an empty
+     * interest string.</p>
+     *
+     * @return A {@code Person} object with the current attributes of the {@code PersonBuilder}.
+     */
     public Person build() {
         return new Person(name, phone, email, address, workExp, tags, university, major, new Interest(""));
-
     }
 
 }

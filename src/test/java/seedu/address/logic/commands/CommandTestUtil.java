@@ -4,13 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTEREST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_WORKEXP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIVERSITY;
-
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WORKEXP;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -71,12 +71,14 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_WORKEXP_DESC = " " + PREFIX_WORKEXP + "Intern,Google,23"; // year should be 4 digits
+    public static final String INVALID_WORKEXP_DESC = " " + PREFIX_WORKEXP + "Intern,Google,23";
+    // year should be 4 digits
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_UNIVERSITY_DESC = " " + PREFIX_UNIVERSITY + "NTU%";
     // '%' not allowed in university
     public static final String INVALID_MAJOR_DESC = " " + PREFIX_MAJOR + "Eng#ineering*";
     // numbers not allowed in major
+    public static final String INVALID_INTEREST_DESC = " " + PREFIX_INTEREST + "Sw!mming";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -86,11 +88,12 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withWorkExp(VALID_WORKEXP_AMY)
-                .withUniversity(VALID_UNIVERSITY_AMY).withMajor(VALID_MAJOR_AMY).withTags(VALID_TAG_FRIEND).build();
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withWorkExp(VALID_WORKEXP_AMY).withUniversity(VALID_UNIVERSITY_AMY).withMajor(VALID_MAJOR_AMY)
+                .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withWorkExp(VALID_WORKEXP_BOB)
-                .withUniversity(VALID_UNIVERSITY_BOB).withMajor(VALID_MAJOR_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withWorkExp(VALID_WORKEXP_BOB).withUniversity(VALID_UNIVERSITY_BOB).withMajor(VALID_MAJOR_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     }

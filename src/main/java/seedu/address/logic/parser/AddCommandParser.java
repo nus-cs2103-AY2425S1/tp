@@ -8,8 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_WORKEXP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIVERSITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WORKEXP;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -24,8 +24,8 @@ import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.WorkExp;
 import seedu.address.model.person.University;
+import seedu.address.model.person.WorkExp;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -41,20 +41,18 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_WORKEXP, PREFIX_TAG, PREFIX_INTEREST, PREFIX_UNIVERSITY, PREFIX_MAJOR);
+                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_WORKEXP, PREFIX_TAG, PREFIX_INTEREST,
+                        PREFIX_UNIVERSITY, PREFIX_MAJOR);
 
         // Verify no duplicate prefixes for critical fields
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_WORKEXP,
-                PREFIX_UNIVERSITY, PREFIX_MAJOR, PREFIX_INTEREST);
-
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_WORKEXP, PREFIX_UNIVERSITY, PREFIX_MAJOR, PREFIX_INTEREST);
 
         // Check if required prefixes are present
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_UNIVERSITY, PREFIX_MAJOR) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
-
-
 
         // If adding an interest with an index, handle separately
         if (arePrefixesPresent(argMultimap, PREFIX_INTEREST) && !argMultimap.getPreamble().isEmpty()) {
@@ -75,7 +73,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             // Parsing new fields
             University university = ParserUtil.parseUniversity(argMultimap.getValue(PREFIX_UNIVERSITY).get());
             Major major = ParserUtil.parseMajor(argMultimap.getValue(PREFIX_MAJOR).get());
-            Person person = new Person(name, phone, email, address, workExp, tagList, university, major, new Interest(""));
+            Person person = new Person(name, phone, email, address, workExp, tagList, university, major,
+                    new Interest(""));
 
             return new AddCommand(person);
         }
