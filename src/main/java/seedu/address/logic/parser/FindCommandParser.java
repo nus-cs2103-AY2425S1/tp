@@ -8,8 +8,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.goods.CategoryPredicate;
 import seedu.address.model.goods.GoodsCategories;
+import seedu.address.model.goodsReceipt.CategoryPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -31,7 +31,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         } else if (arePrefixesPresent(argMultimap, PREFIX_CATEGORY)) {
             GoodsCategories category = ParserUtil.parseGoodsCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
-            return new FindCommand(new CategoryPredicate(category));
+            // TODO: Fix this implementation
+            return new FindCommand(null);
         } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));

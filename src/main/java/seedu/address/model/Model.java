@@ -116,4 +116,9 @@ public interface Model {
      * {@code goodsReceipt} must not already exist in the address book.
      */
     void addGoods(GoodsReceipt goodsReceipt);
+
+    /**
+     * Filters a list of goods by the given {@code predicate}.
+     */
+    public List<GoodsReceipt> getFilteredGoods(Predicate<GoodsReceipt> predicate);
 }

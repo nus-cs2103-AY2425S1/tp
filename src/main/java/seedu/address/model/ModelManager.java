@@ -180,4 +180,9 @@ public class ModelManager implements Model {
     public void addGoods(GoodsReceipt goodsReceipt) {
         goodsList.add(goodsReceipt);
     }
+
+    @Override
+    public List<GoodsReceipt> getFilteredGoods(Predicate<GoodsReceipt> predicate) {
+        return this.goodsList.stream().filter(predicate).toList();
+    }
 }
