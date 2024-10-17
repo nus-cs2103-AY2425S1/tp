@@ -1,10 +1,13 @@
 {
   "persons": [ ],
+  "tasks" : [ ],
   "groups" : [ {
     "students" : [ ],
-    "groupName" : "Team4"
+    "groupName" : "Team4",
+    "tasks" : [ ]
   }, {
     "students" : [ ],
-    "groupName" : "Team4"
+    "groupName" : "Team4",
+    "tasks" : [ ]
   } ]
 }

@@ -131,6 +131,21 @@ public class AddGroupCommandTest {
         }
 
         @Override
+        public String getMostRecentGroupTaskDisplay() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setMostRecentGroupTaskDisplay() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setMostRecentGroupTaskDisplay(String string) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Path getAddressBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
@@ -167,6 +182,11 @@ public class AddGroupCommandTest {
 
         @Override
         public void setPerson(Student target, Student editedStudent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTask(Task target, Task editedTask, Group group) {
             throw new AssertionError("This method should not be called.");
         }
 
