@@ -33,11 +33,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddDeliveryCommand;
-import seedu.address.model.delivery.Cost;
-import seedu.address.model.delivery.Delivery;
-import seedu.address.model.delivery.Quantity;
-import seedu.address.model.delivery.SupplierIndex;
-import seedu.address.model.delivery.Time;
+import seedu.address.model.delivery.*;
+import seedu.address.model.delivery.DateTime;
 import seedu.address.model.product.Product;
 import seedu.address.testutil.TypicalDeliveriesWithoutSender;
 
@@ -93,7 +90,7 @@ public class AddDeliveryCommandParserTest {
         // invalid date
         assertParseFailure(parser, INVALID_DATE_APPLE + SUPPLIER_INDEX_DESC_APPLE
                 + PRODUCT_DESC_APPLE + QUANTITY_DESC_APPLE + COST_DESC_APPLE,
-                Time.MESSAGE_CONSTRAINTS);
+                DateTime.MESSAGE_CONSTRAINTS);
 
         // negative Supplier index
         assertParseFailure(parser, TIME_DESC_APPLE + INVALID_SUPPLIER_INDEX_APPLE_NEGATIVE
@@ -153,7 +150,7 @@ public class AddDeliveryCommandParserTest {
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_DATE_APPLE + SUPPLIER_INDEX_DESC_APPLE
                 + PRODUCT_DESC_APPLE + INVALID_QUANTITY_APPLE_NAN + COST_DESC_APPLE,
-                Time.MESSAGE_CONSTRAINTS);
+                DateTime.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + TIME_DESC_APPLE + SUPPLIER_INDEX_DESC_APPLE

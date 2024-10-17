@@ -15,9 +15,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Cost;
+import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Quantity;
 import seedu.address.model.delivery.SupplierIndex;
-import seedu.address.model.delivery.Time;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -64,14 +64,14 @@ public class ParserUtilTest {
     }
     @Test
     public void parseDateTime_validValueWithoutWhitespace_returnsTime() throws Exception {
-        Time expectedTime = new Time(VALID_TIME);
-        assertEquals(expectedTime, ParserUtil.parseDateTime(VALID_TIME));
+        DateTime expectedDateTime = new DateTime(VALID_TIME);
+        assertEquals(expectedDateTime, ParserUtil.parseDateTime(VALID_TIME));
     }
     @Test
     public void parseDateTime_validValueWithWhitespace_returnsTrimmedTime() throws Exception {
         String timeWithWhitespace = WHITESPACE + VALID_TIME + WHITESPACE;
-        Time expectedTime = new Time(VALID_TIME);
-        assertEquals(expectedTime, ParserUtil.parseDateTime(timeWithWhitespace));
+        DateTime expectedDateTime = new DateTime(VALID_TIME);
+        assertEquals(expectedDateTime, ParserUtil.parseDateTime(timeWithWhitespace));
     }
     @Test
     public void parseSupplierIndex_null_throwsNullPointerException() {

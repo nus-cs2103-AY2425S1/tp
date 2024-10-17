@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.delivery.Cost;
+import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Quantity;
 import seedu.address.model.delivery.Status;
-import seedu.address.model.delivery.Time;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
 
@@ -56,7 +56,7 @@ public class JsonAdaptedDeliveryTest {
     public void toModelType_invalidTime_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_PRODUCT, Status.PENDING.toString(), INVALID_TIME,
                 VALID_COST, VALID_QUANITY, VALID_SENDER);
-        String expectedMessage = Time.MESSAGE_CONSTRAINTS;
+        String expectedMessage = DateTime.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
 
@@ -64,7 +64,7 @@ public class JsonAdaptedDeliveryTest {
     public void toModelType_nullTime_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_PRODUCT, Status.PENDING.toString(), null,
                 VALID_COST, VALID_QUANITY, VALID_SENDER);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
 

@@ -17,7 +17,7 @@ public class Delivery {
     private final Product product;
     private Person sender; // CHANGE TO SUPPLIER LATER ON
     private Status status;
-    private final Time deliveryTime;
+    private final DateTime deliveryTime;
     private final Cost cost;
     private final Quantity quantity;
     private final SupplierIndex supplierIndex;
@@ -25,12 +25,12 @@ public class Delivery {
     /**
      * Every field must be present and not null.
      */
-    public Delivery(Product product, Person sender, Status status, Time deliveryTime, Cost cost, Quantity quantity) {
-        requireAllNonNull(product, sender, status, deliveryTime, cost, quantity);
+    public Delivery(Product product, Person sender, Status status, DateTime deliveryDateTime, Cost cost, Quantity quantity) {
+        requireAllNonNull(product, sender, status, deliveryDateTime, cost, quantity);
         this.product = product;
         this.sender = sender;
         this.status = status;
-        this.deliveryTime = deliveryTime;
+        this.deliveryTime = deliveryDateTime;
         this.cost = cost;
         this.quantity = quantity;
         //might need to change this
@@ -45,18 +45,18 @@ public class Delivery {
      * @param product Product being delivered.
      * @param sender Supplier object in charge of delivery
      * @param status Status of delivery which is set to Status.PENDING initially.
-     * @param deliveryTime Represents a LocalDateTime object with Date and time of delivery.
+     * @param deliveryDateTime Represents a LocalDateTime object with Date and time of delivery.
      * @param cost Cost of delivery.
      * @param quantity Quantity of product to be delivered.
      * @param supplierIndex Index of supplier inside the UniqueDeliveryList.
      */
-    public Delivery(Product product, Person sender, Status status, Time deliveryTime, Cost cost,
+    public Delivery(Product product, Person sender, Status status, DateTime deliveryDateTime, Cost cost,
                     Quantity quantity, SupplierIndex supplierIndex) {
-        requireAllNonNull(product, status, deliveryTime, cost, quantity, supplierIndex);
+        requireAllNonNull(product, status, deliveryDateTime, cost, quantity, supplierIndex);
         this.product = product;
         this.sender = sender;
         this.status = status;
-        this.deliveryTime = deliveryTime;
+        this.deliveryTime = deliveryDateTime;
         this.cost = cost;
         this.quantity = quantity;
         this.supplierIndex = supplierIndex;
@@ -77,7 +77,7 @@ public class Delivery {
         return this.status;
     }
 
-    public Time getDeliveryDate() {
+    public DateTime getDeliveryDate() {
         return this.deliveryTime;
     }
 

@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRODUCT_RICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalDeliveries.APPLE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -21,6 +22,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Status;
+import seedu.address.model.delivery.exceptions.DuplicateDeliveryException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.DeliveryBuilder;
@@ -56,6 +58,16 @@ public class AddressBookTest {
         AddressBookStub newData = AddressBookStub.withPersons(newPersons);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+    }
+
+    @Test
+    public void resetData_withDuplicateDelivery_throwsDuplicateDeliveryException() {
+        // Two deliveries with the same identity fields
+        Delivery editedApple = new DeliveryBuilder(APPLE).build();
+        List<Delivery> newDeliveries = Arrays.asList(editedApple, APPLE);
+        AddressBookStub newData = AddressBookStub.withDeliveries(newDeliveries);
+
+        assertThrows(DuplicateDeliveryException.class, () -> addressBook.resetData(newData));
     }
 
     @Test

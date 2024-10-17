@@ -172,7 +172,7 @@ These operations are exposed in the `Model` interface as `Model#commitAddressBoo
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first dateTime. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
@@ -425,12 +425,12 @@ ___
 **Actor**: Grocer
 
 **Main Success Scenario (MSS)**:
-1. User chooses to add a new delivery by entering the details for the new delivery (date and time, supplier index, product name, quantity, cost).
+1. User chooses to add a new delivery by entering the details for the new delivery (date and dateTime, supplier index, product name, quantity, cost).
 2. VV adds the delivery entry to the list and displays the updated list of deliveries.  
    Use case ends.
 
 **Extensions**:
-- **1a.** VV detects that the date or time format is invalid.
+- **1a.** VV detects that the date or dateTime format is invalid.
     - **1a1.** VV displays an error message.  
       Use case ends.
 
@@ -450,7 +450,7 @@ ___
       Use case ends.
 
 
-- **1e.** VV detects a duplicate delivery (matching date, time, supplier index, and product name).
+- **1e.** VV detects a duplicate delivery (matching date, dateTime, supplier index, and product name).
     - **1e1.** VV displays an error message.  
       Use case ends.
 
@@ -545,7 +545,7 @@ Testability Requirements
 
 ### Glossary
 
-* **Breadth-first Incremental Manner**: An approach to software development where features are implemented across the entire scope of the project in shallow layers, gradually adding depth and complexity over time. This method ensures that all major components of the system are developed in parallel, allowing for early integration and testing of the overall system structure.
+* **Breadth-first Incremental Manner**: An approach to software development where features are implemented across the entire scope of the project in shallow layers, gradually adding depth and complexity over dateTime. This method ensures that all major components of the system are developed in parallel, allowing for early integration and testing of the overall system structure.
 * **CLI (Command-Line Interface)**: A text-based interface where users interact with the system by typing commands, as opposed to using a graphical interface with mouse clicks.
 * **CRUD Operations**: Refers to Create, Read, Update, and Delete operations. In this system, CRUD applies to managing supplier contacts and delivery information.
 * **DBMS (Database Management System)**: A software system that enables users to define, create, maintain and control access to a database. It provides an organised way of managing, storing, and retrieving vast amounts of data.
