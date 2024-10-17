@@ -114,9 +114,6 @@ public class EditCommand extends Command {
         TelegramUsername updatedTeleUsername = editPersonDescriptor.getTelegramUsername()
                 .orElse(personToEdit.getTelegramUsername());
 
-        //Role[] updatedRoles = (editPersonDescriptor.getRoles().orElse(personToEdit.getRoles())).toArray(new Role[0]);
-
-
         Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(personToEdit.getRoles());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,

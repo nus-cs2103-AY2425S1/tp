@@ -52,8 +52,9 @@ public class Messages {
     }
 
     private static void appendTelegramUsernameToMsg(Person person, StringBuilder builder) {
+        builder.append("; Telegram username: ");
         if (person.getTelegramUsername().toString() != null) {
-            builder.append("; Telegram username: ").append(person.getTelegramUsername());
+            builder.append(person.getTelegramUsername());
         }
     }
 
