@@ -74,7 +74,7 @@ public class CompanyCard extends UiPart<Region> {
         List<Application> applications = company.getApplications();
         application.setText(applications.isEmpty() ? "Applications: CLOSED"
                     : "Applications: " + IntStream.range(0, applications.size())
-                        .mapToObj(i -> String.format("%d. %s (%s)",
+                        .mapToObj(i -> String.format("\n\t%d. %s (%s)",
                                 i + 1,
                                 applications.get(i).getName(),
                                 applications.get(i).getAppStatus()))
