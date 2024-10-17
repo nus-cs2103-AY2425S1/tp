@@ -90,7 +90,7 @@ public class ExportCommandTest {
 
     /**
      * Requires the file to be unreadable. Thus, must be set unreadable locally.
-     * Use terminal command `chmod 000 <file>` to set file to unreadable.
+     * Use terminal command `chmod 000' to set file to unreadable.
      * @throws IOException
      */
     @Test
