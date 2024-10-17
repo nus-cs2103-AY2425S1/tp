@@ -59,7 +59,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_invalidDelete() throws Exception {
         String invalidName = "Invalid Name";
-        assertThrows(ParseException.class, String.format(Messages.MESSAGE_PERSON_NOT_FOUND, new Name(invalidName)), () ->
+        assertThrows(ParseException.class, String.format(Messages.MESSAGE_PERSON_NOT_FOUND,
+                new Name(invalidName)), () ->
                 parser.parseCommand(DeleteCommand.COMMAND_WORD + " " + invalidName));
     }
 

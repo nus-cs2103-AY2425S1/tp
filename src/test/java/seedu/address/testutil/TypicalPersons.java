@@ -63,6 +63,10 @@ public class TypicalPersons {
             .withSex(VALID_SEX_BOB).withBirthdate(VALID_BIRTHDATE_BOB)
             .withHealthServices("General Checkup").build();
 
+    public static final Person JAKE = new PersonBuilder().withName("Jake Tio").withPhone("9982131")
+            .withEmail("jakers@example.com").withAddress("nus drive")
+            .withHealthServices("BloodTest").with.build();
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
