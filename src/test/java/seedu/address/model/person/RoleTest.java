@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -21,7 +22,7 @@ public class RoleTest {
     }
 
     @Test
-    public void isValidRole() {
+    public void testIsValidRole() {
         // null role
         assertThrows(NullPointerException.class, () -> Role.isValidRole(null));
 
@@ -29,6 +30,8 @@ public class RoleTest {
         assertFalse(Role.isValidRole("")); // empty string
         assertFalse(Role.isValidRole("12345")); // numbers
         assertFalse(Role.isValidRole("inval")); // incomplete role
+        assertFalse(Role.isValidRole("  brUdder"));
+        assertFalse(Role.isValidRole("mUdder  "));
 
         // valid roles
         assertTrue(Role.isValidRole("brUdder"));
@@ -36,7 +39,7 @@ public class RoleTest {
     }
 
     @Test
-    public void equals() {
+    public void testEquals() {
         Role role = new Role("brUdder");
 
         // same values -> returns true
@@ -70,6 +73,6 @@ public class RoleTest {
         Role role2 = new Role("brUdder");
 
         // different values -> different hashcode
-        assertFalse(role1.hashCode() == role2.hashCode());
+        assertNotEquals(role1.hashCode(), role2.hashCode());
     }
 }

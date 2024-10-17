@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -21,7 +22,7 @@ public class MajorTest {
     }
 
     @Test
-    public void isValidMajor() {
+    public void testIsValidMajor() {
         // null major
         assertThrows(NullPointerException.class, () -> Major.isValidMajor(null));
 
@@ -29,6 +30,8 @@ public class MajorTest {
         assertFalse(Major.isValidMajor("")); // empty string
         assertFalse(Major.isValidMajor("12345")); // numbers
         assertFalse(Major.isValidMajor("ce")); // incomplete major
+        assertFalse(Major.isValidMajor(" cs"));
+        assertFalse(Major.isValidMajor("cs   "));
 
         // valid majors
         assertTrue(Major.isValidMajor("cs"));
@@ -37,7 +40,7 @@ public class MajorTest {
     }
 
     @Test
-    public void equals() {
+    public void testEquals() {
         Major major = new Major("cs");
 
         // same values -> returns true
@@ -71,7 +74,7 @@ public class MajorTest {
         Major major2 = new Major("bza");
 
         // different values -> different hashcode
-        assertFalse(major1.hashCode() == major2.hashCode());
+        assertNotEquals(major1.hashCode(), major2.hashCode());
     }
 }
 
