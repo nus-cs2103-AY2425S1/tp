@@ -12,6 +12,13 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 
+/**
+ * Controller for the person details window.
+ * This window allows users to view and edit the details of a selected person.
+ * It provides editable text fields for the person's name, email, phone number, and address,
+ * along with "Save" and "Cancel" buttons to handle user actions.
+ */
+
 public class PersonDetailsWindow extends UiPart<Stage> {
 
     private static final String FXML = "PersonDetailsWindow.fxml";
@@ -46,7 +53,7 @@ public class PersonDetailsWindow extends UiPart<Stage> {
     /**
      * Create a new PersonDetailsWindow。
      *
-     * @param logic for execute instructions
+     * @param logic to execute instructions
      */
     public PersonDetailsWindow(Logic logic) {
         this(new Stage(), logic);
