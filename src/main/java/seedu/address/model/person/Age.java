@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's Age in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAge(String)}
  */
-public class    Age {
+public class Age {
     public static final String MESSAGE_CONSTRAINTS =
            "Age should only contain numbers and should be between 1 to 3 digits long inclusive";
 
