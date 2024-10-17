@@ -15,8 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
 
-import java.sql.SQLOutput;
-
 public class PersonTest {
 
     @Test
