@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -20,10 +19,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 public class ViewCommandParser implements Parser<ViewCommand> {
 
     private static final Prefix PREFIX_NAME = new Prefix("n/");
-    private static final Prefix PREFIX_CONTACT_NUMBER = new Prefix("c/");
+    private static final Prefix PREFIX_CONTACT_NUMBER = new Prefix("p/");
     private static final Prefix PREFIX_ROOM_NUMBER = new Prefix("r/");
-
-    private static final Prefix PREFIX_PHONE = new Prefix("p/");
 
     @Override
     public ViewCommand parse(String args) throws ParseException {
