@@ -157,6 +157,12 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Populating with dummy data
+
+Adds dummy data to the social book.
+
+Format: `seed`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -174,6 +180,8 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 <box type="warning" seamless>
 
 **Caution:**
+If a person's data values are changed to an invalid format, Socialbook will discard that particular person's data while keeping the rest. However, if your changes to the data file makes the file format invalid, SocialBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the SocialBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 If your changes to the data values are invalid format, SocialBook will discard that particular person's data while keeping the rest. However, if your changes to the data file makes the file format invalid, SocialBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
@@ -209,3 +217,4 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
+**Seed**   | `seed`
