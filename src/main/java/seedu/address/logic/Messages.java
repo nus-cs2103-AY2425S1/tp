@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 
 /**
  * Container for user visible messages.
@@ -16,7 +17,9 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_PROJECT_DISPLAYED_INDEX = "The project index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_PROJECTS_LISTED_OVERVIEW = "%1$d projects listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
@@ -50,6 +53,18 @@ public class Messages {
         person.getTags().forEach(builder::append);
         builder.append("; Skills: ");
         person.getSkills().forEach(builder::append);
+
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code project} for display to the user.
+     */
+    public static Object format(Project project) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(project.getName())
+                .append("; Project ID: ")
+                .append(project.getId());
 
         return builder.toString();
     }

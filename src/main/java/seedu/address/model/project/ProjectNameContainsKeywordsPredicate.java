@@ -9,10 +9,10 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Tests that a {@code Project}'s {@code Name} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Project> {
+public class ProjectNameContainsKeywordsPredicate implements Predicate<Project> {
     private final List<String> keywords;
 
-    public NameContainsKeywordsPredicate(List<String> keywords) {
+    public ProjectNameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -29,12 +29,13 @@ public class NameContainsKeywordsPredicate implements Predicate<Project> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof ProjectNameContainsKeywordsPredicate)) {
             return false;
         }
 
-        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        ProjectNameContainsKeywordsPredicate otherProjectNameContainsKeywordsPredicate =
+                (ProjectNameContainsKeywordsPredicate) other;
+        return keywords.equals(otherProjectNameContainsKeywordsPredicate.keywords);
     }
 
     @Override

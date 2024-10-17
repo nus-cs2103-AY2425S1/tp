@@ -6,18 +6,18 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 
 /**
- * Clears the address book of all persons.
+ * Clears the address book of all projects.
  */
-public class ClearCommand extends Command {
+public class ClearProjectCommand extends Command {
 
-    public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book persons have been cleared!";
+    public static final String COMMAND_WORD = "clearproject";
+    public static final String MESSAGE_SUCCESS = "Address book projects have been cleared!";
 
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBookPerson(new AddressBook());
+        model.setAddressBookProject(new AddressBook());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

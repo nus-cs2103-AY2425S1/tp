@@ -2,7 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -17,8 +17,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.project.Id;
-import seedu.address.model.project.Name;
 import seedu.address.model.project.Project;
 
 /**
@@ -122,10 +120,8 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         topPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        // TODO: Fix logic.getFilteredProjectList() return empty ObservableArray bug
-        //projectListPanel = new ProjectListPanel(logic.getFilteredProjectList());
-        projectListPanel = new ProjectListPanel(FXCollections
-                .observableArrayList(new Project(new Name("Project Alpha"), new Id("A1234567"))));
+        ObservableList<Project> filteredProjectList = logic.getFilteredProjectList();
+        projectListPanel = new ProjectListPanel(filteredProjectList);
         projectListPanelPlaceholder.getChildren().add(projectListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
