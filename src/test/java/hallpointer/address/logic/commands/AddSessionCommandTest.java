@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -27,10 +26,8 @@ import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.UniqueMemberList;
 import hallpointer.address.model.session.Session;
 import hallpointer.address.model.session.SessionName;
-import hallpointer.address.model.session.UniqueSessionList;
 import hallpointer.address.testutil.MemberBuilder;
 import hallpointer.address.testutil.SessionBuilder;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 class AddSessionCommandTest {
