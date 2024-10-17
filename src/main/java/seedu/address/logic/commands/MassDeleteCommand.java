@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -32,11 +31,25 @@ public class MassDeleteCommand extends Command {
     private final List<Index> targetIndices;
     private final List<String> invalidInputs;
 
+    /**
+     * Constructs a {@code MassDeleteCommand} with the specified target indices and invalid inputs.
+     *
+     * @param targetIndices List of indices representing the persons to be deleted.
+     * @param invalidInputs List of inputs that could not be parsed as valid indices.
+     */
     public MassDeleteCommand(List<Index> targetIndices, List<String> invalidInputs) {
         this.targetIndices = targetIndices;
         this.invalidInputs = invalidInputs;
     }
 
+    /**
+     * Executes the mass delete command, deleting the persons identified by the target indices
+     * from the address book.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return Feedback message of the operation result for display.
+     * @throws CommandException If no valid indices are provided or an error occurs during deletion.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -72,6 +85,12 @@ public class MassDeleteCommand extends Command {
         return new CommandResult(resultMessage.toString());
     }
 
+    /**
+     * Checks if another object is equal to this MassDeleteCommand.
+     *
+     * @param other The object to compare with.
+     * @return True if the other object is equal to this command, otherwise false.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -87,6 +106,11 @@ public class MassDeleteCommand extends Command {
                 && invalidInputs.equals(otherMassDeleteCommand.invalidInputs);
     }
 
+    /**
+     * Returns a string representation of this MassDeleteCommand.
+     *
+     * @return A string representation of the command.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)
