@@ -28,8 +28,8 @@ public class FindCommandParserTest {
         FindCommand expectedFindCommand =
                 new FindCommand(new CompoundedPredicate(
                         new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")),
-                        new OrgContainsKeywordsPredicate(Arrays.asList(""))));
-        assertParseSuccess(parser, "n/Alice Bob", expectedFindCommand);
+                        new OrgContainsKeywordsPredicate(Arrays.asList("NUS"))));
+        assertParseSuccess(parser, "n/Alice Bob o/NUS", expectedFindCommand);
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n n/ Alice \n \t Bob  \t", expectedFindCommand);
