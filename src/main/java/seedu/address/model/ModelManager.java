@@ -11,6 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Id;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 
 /**
@@ -120,6 +123,35 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
+    }
+
+    @Override
+    public ObservableList<Person> getFilteredPersonById(Id id) {
+        return filteredPersons.filtered(person -> person.getId().getIdValue() == id.getIdValue());
+    }
+
+    @Override
+    public Patient getFilteredPatientById(ObservableList<Person> allPersons, Id id) {
+        Patient patient = null;
+        for (Person person : allPersons) {
+            if (Patient.class.isAssignableFrom(person.getId().getRole())) {
+                patient = (Patient) person;
+                break;
+            }
+        }
+        return patient;
+    }
+
+    @Override
+    public Doctor getFilteredDoctorById(ObservableList<Person> allPersons, Id id) {
+        Doctor doctor = null;
+        for (Person person : allPersons) {
+            if (Doctor.class.isAssignableFrom(person.getId().getRole())) {
+                doctor = (Doctor) person;
+                break;
+            }
+        }
+        return doctor;
     }
 
     @Override
