@@ -1,13 +1,14 @@
 package tahub.contacts.model.course;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
+import tahub.contacts.model.course.exceptions.AttendanceOperationException;
 
 @DisplayName("Attendance")
 public class AttendanceTest {
@@ -97,6 +98,52 @@ public class AttendanceTest {
         assertEquals(a.getAttendanceTotalCount(), 13);
     }
 
+    // removal tests
+    @Test
+    @DisplayName("Returns correct empty list after clearing an empty attendance list")
+    public void clear_emptyList_emptyList() {
+        Attendance a = new Attendance(EMPTY_ATTENDANCE_LIST);
+        a.clear();
+        assertEquals(a.getAttendanceAttendedCount(), 0);
+        assertEquals(a.getAttendanceTotalCount(), 0);
+    }
+
+    @Test
+    @DisplayName("Returns correct empty list after clearing a sample attendance list")
+    public void clear_sampleList_emptyList() {
+        Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
+        a.clear();
+        assertEquals(a.getAttendanceAttendedCount(), 0);
+        assertEquals(a.getAttendanceTotalCount(), 0);
+    }
+
+    @Test
+    @DisplayName("Returns correct values after removing the last session successively")
+    public void removeLastMultiple_nonzeroList_correctValues() throws AttendanceOperationException  {
+        Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
+        a.removeLast(); // remove attended session
+        a.removeLast(); // remove absent session
+        a.removeLast(); // remove attended session
+        assertEquals(a.getAttendanceAttendedCount(), 1);
+        assertEquals(a.getAttendanceTotalCount(), 2);
+    }
+
+    @Test
+    @DisplayName("Returns correct values after removing the last session once")
+    public void removeLast_nonzeroList_correctValues() throws AttendanceOperationException  {
+        Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
+        a.removeLast(); // remove attended session
+        assertEquals(a.getAttendanceAttendedCount(), 2);
+        assertEquals(a.getAttendanceTotalCount(), 4);
+    }
+
+    @Test
+    @DisplayName("Throws correct exception after removing the last session from an empty list")
+    public void removeLast_emptyList_throwsException()  {
+        Attendance a = new Attendance(EMPTY_ATTENDANCE_LIST);
+        assertThrows(AttendanceOperationException.class, a::removeLast);
+    }
+
     // equals tests
     @Nested
     @DisplayName("Equals")
@@ -170,6 +217,7 @@ public class AttendanceTest {
 
     // Hashcode
     @Test
+    @DisplayName("same attendance list has same hashcode")
     public void hashCode_sameAttendanceList_sameHashCode() {
         Attendance a1 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
         Attendance a2 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);

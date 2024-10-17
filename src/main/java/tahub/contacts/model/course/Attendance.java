@@ -3,6 +3,8 @@ package tahub.contacts.model.course;
 import java.util.ArrayList;
 import java.util.List;
 
+import tahub.contacts.model.course.exceptions.AttendanceOperationException;
+
 /**
  * Represents the attendance of a student in the address book.
  */
@@ -40,6 +42,28 @@ public class Attendance {
     }
 
     /**
+     * Removes the last session marked in this {@link Attendance} object.
+     *
+     * @throws AttendanceOperationException If this {@link Attendance} has no sessions - i.e. trying to remove the last
+     * session when there are no sessions to remove.
+     */
+    public void removeLast() throws AttendanceOperationException {
+        if (attendanceList.isEmpty()) {
+            throw new AttendanceOperationException("No attendance sessions to remove.");
+        }
+
+        int lastIndex = attendanceList.size() - 1;
+        attendanceList.remove(lastIndex);
+    }
+
+    /**
+     * Clears all sessions from this {@link Attendance} object, i.e. resets it.
+     */
+    public void clear() {
+        attendanceList.clear();
+    }
+
+    /**
      * Gets the total number of attended sessions in this `Attendance` object.
      *
      * @return Number of attended sessions.
@@ -57,6 +81,13 @@ public class Attendance {
         return attendanceList.size();
     }
 
+    /**
+     * Checks whether this {@link Attendance} is equal to another {@link Attendance} object.
+     *
+     * @param other Object to be compared against.
+     * @return {@code true} if the other object is another {@link Attendance} object with the same
+     * {@code attendanceList}.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
