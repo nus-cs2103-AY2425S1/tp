@@ -21,6 +21,7 @@ class JsonAdaptedTask {
     private final String taskName;
     private final String deadline;
     private final String status;
+    private final String groupsWithTask;
 
     /**
      * Constructs a {@code JsonAdaptedGroup} with the given student details.
@@ -28,10 +29,12 @@ class JsonAdaptedTask {
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("taskname") String taskName,
                             @JsonProperty("deadline") String deadline,
-                            @JsonProperty("status") String status) {
+                            @JsonProperty("status") String status,
+                            @JsonProperty("groupswithtask") String groupsWithTask) {
         this.taskName = taskName;
         this.deadline = deadline;
         this.status = status;
+        this.groupsWithTask = groupsWithTask;
     }
 
     /**
@@ -41,6 +44,7 @@ class JsonAdaptedTask {
         taskName = source.getTaskName().toString();
         deadline = source.getDeadline().deadlineInInputFormat();
         status = source.getStatus().toString();
+        groupsWithTask = source.getGroupsWithTask() + "";
     }
 
     /**
@@ -74,7 +78,14 @@ class JsonAdaptedTask {
 
         final Status modelStatus = Status.valueOf(status);
 
-        return new Task(modelTaskName, modelDeadline, modelStatus);
+        if (groupsWithTask == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    "groupsWithTask"));
+        }
+
+        final int modelGroupsWithTask = Integer.parseInt(groupsWithTask);
+
+        return new Task(modelTaskName, modelDeadline, modelStatus, modelGroupsWithTask);
     }
 
 }

@@ -61,6 +61,7 @@ public class DeleteGroupCommand extends Command {
             }
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         }
+        groupToBeDeleted.getTasks().forEach(x -> model.decreaseGroupWithTask(x));
         model.deleteGroup(groupToBeDeleted);
         return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, Messages.format(groupToBeDeleted),
             studentsAffected));

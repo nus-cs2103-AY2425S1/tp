@@ -126,6 +126,10 @@ public class Student {
             && studentNumber.equals(otherStudent.studentNumber);
     }
 
+    public Student setStudentGroup(GroupName groupName) {
+        return new Student(name, email, tags, studentNumber, Optional.<GroupName>of(groupName));
+    }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
