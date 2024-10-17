@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.person.Person;
 
 import static seedu.address.model.addresses.Network.BTC;
