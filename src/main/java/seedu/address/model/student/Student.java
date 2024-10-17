@@ -10,7 +10,9 @@ import java.util.Map;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentQuery;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -122,5 +124,22 @@ public class Student extends Person {
     public void addAssignment(Assignment assignment) {
         requireAllNonNull(assignment);
         assignments.add(assignment);
+    }
+
+    /**
+     * Deletes the first assignment matching the given assignment query.
+     *
+     * @param assignmentQuery A valid assignment query.
+     * @return the deleted assignment
+     */
+    public Assignment deleteAssignment(AssignmentQuery assignmentQuery) throws CommandException {
+        requireAllNonNull(assignmentQuery);
+        for (Assignment assignment : assignments) {
+            if (assignmentQuery.match(assignment)) {
+                assignments.remove(assignment);
+                return assignment;
+            }
+        }
+        return null;
     }
 }

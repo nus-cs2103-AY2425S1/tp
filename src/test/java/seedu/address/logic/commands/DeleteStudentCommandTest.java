@@ -148,6 +148,10 @@ public class DeleteStudentCommandTest {
         }
 
         @Override
+        public void deleteStudent(Student target) {
+        }
+
+        @Override
         public ObservableList<Student> getFilteredStudentList() {
             throw new AssertionError("This method should not be called.");
         }

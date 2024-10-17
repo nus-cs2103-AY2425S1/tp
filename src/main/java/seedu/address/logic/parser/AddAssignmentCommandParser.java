@@ -24,9 +24,6 @@ import seedu.address.model.person.Name;
  */
 public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> {
 
-    public static final String MESSAGE_EXPECTED_AT_MOST_TWO = "Provide at most 2 status\n"
-            + AddAssignmentCommand.MESSAGE_USAGE;
-
     public static final String MESSAGE_EXPECTED_GRADE = "Expected a grade if grading has already been done\n"
             + AddAssignmentCommand.MESSAGE_USAGE;
 
@@ -42,30 +39,18 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAssignmentCommand.MESSAGE_USAGE));
         }
+
+        // Initializing compulsory fields
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Deadline deadline = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE).get());
         AssignmentName assignmentName = ParserUtil.parseAssignmentName(
                 argMultimap.getValue(PREFIX_ASSIGNMENT).get());
-        List<Status> statusList = ParserUtil.parseStatuses(argMultimap.getAllValues(PREFIX_STATUS));
 
-        Status submissionStatus;
-        Status gradingStatus;
-        switch (statusList.size()) {
-        case 2:
-            submissionStatus = statusList.get(0);
-            gradingStatus = statusList.get(1);
-            break;
-        case 1:
-            submissionStatus = statusList.get(0);
-            gradingStatus = Status.getDefault();
-            break;
-        case 0:
-            submissionStatus = Status.getDefault();
-            gradingStatus = Status.getDefault();
-            break;
-        default:
-            throw new ParseException(MESSAGE_EXPECTED_AT_MOST_TWO);
-        }
+        // Initializing non-compulsory fields
+        List<Status> statusList = ParserUtil.parseStatuses(argMultimap.getAllValues(PREFIX_STATUS), 2);
+        Status submissionStatus = statusList.get(0);
+        Status gradingStatus = statusList.get(1);
+
         Grade grade;
         if (gradingStatus.isGraded()) {
             grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE)
@@ -74,6 +59,7 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
         } else {
             grade = Grade.getDefault();
         }
+
         return new AddAssignmentCommand(name,
                 new Assignment(assignmentName, deadline, submissionStatus, gradingStatus, grade));
     }
