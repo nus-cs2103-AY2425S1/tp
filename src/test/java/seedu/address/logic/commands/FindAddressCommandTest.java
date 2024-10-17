@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalClientHub;
@@ -30,9 +29,9 @@ public class FindAddressCommandTest {
     @Test
     public void equals() {
         AddressContainsKeywordsPredicate firstPredicate =
-                new AddressContainsKeywordsPredicate(Collections.singletonList("first"));
+                new AddressContainsKeywordsPredicate("first");
         AddressContainsKeywordsPredicate secondPredicate =
-                new AddressContainsKeywordsPredicate(Collections.singletonList("second"));
+                new AddressContainsKeywordsPredicate("second");
 
         FindAddressCommand findFirstAddressCommand = new FindAddressCommand(firstPredicate);
         FindAddressCommand findSecondAddressCommand = new FindAddressCommand(secondPredicate);
@@ -66,17 +65,17 @@ public class FindAddressCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         AddressContainsKeywordsPredicate predicate = prepareAddressPredicate("th street");
         FindAddressCommand command = new FindAddressCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, DANIEL, GEORGE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(DANIEL, GEORGE), model.getFilteredPersonList());
     }
 
     @Test
     public void toStringMethod() {
-        AddressContainsKeywordsPredicate predicate = new AddressContainsKeywordsPredicate(Arrays.asList("Tampines"));
+        AddressContainsKeywordsPredicate predicate = new AddressContainsKeywordsPredicate("Tampines");
         FindAddressCommand findAddressCommand = new FindAddressCommand(predicate);
         String expected = FindAddressCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findAddressCommand.toString());
@@ -86,7 +85,7 @@ public class FindAddressCommandTest {
      * Parses {@code userInput} into a {@code AddressContainsKeywordsPredicate}.
      */
     private AddressContainsKeywordsPredicate prepareAddressPredicate(String userInput) {
-        return new AddressContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+        return new AddressContainsKeywordsPredicate(userInput);
     }
 }
 

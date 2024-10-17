@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -10,17 +9,19 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class AddressContainsKeywordsPredicate implements Predicate<Person> {
 
-    private final List<String> keywords;
+    private final String keywords;
 
-    public AddressContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+    public AddressContainsKeywordsPredicate(String keywords) {
+        this.keywords = keywords.trim();
     }
 
     @Override
     public boolean test(Person person) {
+        if (keywords.isEmpty()) {
+            return false;
+        }
         // Check if any of the keywords match any part of the address
-        return keywords.stream()
-                .anyMatch(keywords -> person.getAddress().value.toLowerCase().contains(keywords.toLowerCase()));
+        return person.getAddress().value.toLowerCase().contains(keywords.toLowerCase());
     }
 
     @Override

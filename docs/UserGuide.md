@@ -168,21 +168,18 @@ Result for `fp 9234`:
   ![result for 'find 9234'](images/find9234Result.png)
 
 
-### Locating persons by address: `fa`
+### Locating persons by address : `fa`
 
 Finds persons whose address matches any part of the given keyword(s).
 
 Format `fa KEYWORD(s)`
 
 * The search is case-insensitive. e.g `tampines` will match `Tampines`
-* The order of the keywords does not matter. e.g. `Street 45` will match `45 Street`
 * Only the address of the contact is searched.
 * Persons with address with any matching substring to the keyword will be returned.
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
 
 Examples:
 * `fa Blk` returns `Blk 45` and `Blk 35`
-* `fa blk street` returns `Tampines Street 1` and `Blk 35 Ang Mo Kio`
 * `fa tampines` returns `Blk 47 Tampines Street 20`
 
 Result for `fa tampines`:

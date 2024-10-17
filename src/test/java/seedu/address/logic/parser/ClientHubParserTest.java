@@ -104,9 +104,9 @@ public class ClientHubParserTest {
 
     @Test
     public void parseCommand_findAddress() throws Exception {
-        List<String> keywords = Arrays.asList("Tampines", "Street", "1");
+        String keywords = "Tampines";
         FindAddressCommand command = (FindAddressCommand) parser.parseCommand(
-                FindAddressCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                FindAddressCommand.COMMAND_WORD + " " + keywords);
         assertEquals(new FindAddressCommand(new AddressContainsKeywordsPredicate(keywords)), command);
     }
 
