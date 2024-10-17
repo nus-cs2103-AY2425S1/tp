@@ -13,7 +13,7 @@ public class TierStartsWithSubstringPredicate implements Predicate<Person> {
     protected final String substring;
 
     public TierStartsWithSubstringPredicate(String substring) {
-        this.substring = substring;
+        this.substring = substring.toUpperCase();
     }
 
     @Override
@@ -38,6 +38,6 @@ public class TierStartsWithSubstringPredicate implements Predicate<Person> {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("substring", substring.toUpperCase()).toString();
+        return new ToStringBuilder(this).add("substring", substring).toString();
     }
 }
