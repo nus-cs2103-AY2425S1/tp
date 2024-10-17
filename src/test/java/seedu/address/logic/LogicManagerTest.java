@@ -3,14 +3,12 @@ package seedu.address.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_EMAIL_DESC_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_NAME_DESC_APPLE;
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_APPLE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalInternshipApplications.APPLE;
-import static seedu.address.testutil.TypicalInternshipApplications.GOOGLE;
-
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -50,7 +48,8 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager<InternshipApplication> storage = new StorageManager<InternshipApplication>(addressBookStorage, userPrefsStorage);
+        StorageManager<InternshipApplication> storage = new StorageManager<InternshipApplication>(addressBookStorage,
+                userPrefsStorage);
         logic = new LogicManager<InternshipApplication>(model, storage);
     }
 
@@ -162,7 +161,7 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager<InternshipApplication> storage = new StorageManager<InternshipApplication>(addressBookStorage, userPrefsStorage);
+        StorageManager<InternshipApplication> storage = new StorageManager<>(addressBookStorage, userPrefsStorage);
 
         logic = new LogicManager<InternshipApplication>(model, storage);
 

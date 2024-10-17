@@ -61,7 +61,7 @@ public class EmailTest {
         assertTrue(EmailValidator.of().validate("PeterJack-1190@example.com")); // hyphen in local part
         assertTrue(EmailValidator.of().validate("a@g.bc")); // minimal
         assertTrue(EmailValidator.of().validate("123@145.67")); // numeric local part and domain name
-        assertTrue(EmailValidator.of().validate("a1+be.d@example1.com")); // mixture of alphanumeric and special characters
+        assertTrue(EmailValidator.of().validate("a1+be.d@example1.com")); // mix of alphanumeric and special char
         assertTrue(EmailValidator.of().validate("peter_jack@very-very-very-long-example.com")); // long domain name
         assertTrue(EmailValidator.of().validate("if.you.dream.it_you.can.do.it@example.com")); // long local part
         assertTrue(EmailValidator.of().validate("e1234567@u.nus.edu")); // more than one period in domain

@@ -1,23 +1,23 @@
 package seedu.address.storage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.storage.JsonAdaptedInternship.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalInternshipApplications.GOOGLE;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.internshipapplication.Date;
 import seedu.address.model.internshipapplication.Email;
 import seedu.address.model.internshipapplication.Name;
 import seedu.address.model.internshipapplication.Role;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.storage.JsonAdaptedInternship.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalInternshipApplications.GOOGLE;
-
 public class JsonAdaptedInternshipTest {
     private static final String INVALID_COMPANY_NAME = "G@@GLE";
     private static final String INVALID_COMPANY_EMAIL = "google.com";
     private static final String INVALID_ROLE = " ";
     private static final String INVALID_DATESTRING = "4 Sep 1998";
-
     private static final String VALID_COMPANY_NAME = GOOGLE.getCompany().getName().toString();
     private static final String VALID_COMPANY_EMAIL = GOOGLE.getCompany().getEmail().toString();
     private static final String VALID_ROLE = GOOGLE.getRole().toString();

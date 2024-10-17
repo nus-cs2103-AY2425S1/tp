@@ -15,7 +15,10 @@ import seedu.address.logic.validator.DateValidator;
 import seedu.address.logic.validator.EmailValidator;
 import seedu.address.logic.validator.NameValidator;
 import seedu.address.logic.validator.RoleValidator;
-import seedu.address.model.internshipapplication.*;
+import seedu.address.model.internshipapplication.Date;
+import seedu.address.model.internshipapplication.Email;
+import seedu.address.model.internshipapplication.Name;
+import seedu.address.model.internshipapplication.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -53,52 +56,34 @@ public class ParserUtil {
         return new Name(trimmedName);
     }
 
-    public static Role parseRole(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!RoleValidator.of().validate(trimmedName)) {
+    /**
+     * Parses a {@code String role} into a {@code Role}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code role} is invalid.
+     */
+    public static Role parseRole(String role) throws ParseException {
+        requireNonNull(role);
+        String trimmedRole = role.trim();
+        if (!RoleValidator.of().validate(trimmedRole)) {
             throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
-        return new Role(trimmedName);
+        return new Role(trimmedRole);
     }
 
-    public static Date parseDate(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!DateValidator.of().validate(trimmedName)) {
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Date} is invalid.
+     */
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!DateValidator.of().validate(trimmedDate)) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
-        return new Date(LocalDate.parse(trimmedName, DateTimeFormatter.ofPattern("dd/MM/yy")));
-    }
-
-    /**
-     * Parses a {@code String phone} into a {@code Phone}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code phone} is invalid.
-     */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        return new Phone(trimmedPhone);
-    }
-
-    /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
+        return new Date(LocalDate.parse(trimmedDate, DateTimeFormatter.ofPattern("dd/MM/yy")));
     }
 
     /**

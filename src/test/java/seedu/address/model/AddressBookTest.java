@@ -3,12 +3,9 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOFA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalInternshipApplications.APPLE;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalInternshipApplications.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -21,10 +18,8 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.internshipapplication.InternshipApplication;
-import seedu.address.model.internshipapplication.Person;
 import seedu.address.model.internshipapplication.exceptions.DuplicateInternshipException;
 import seedu.address.testutil.InternshipApplicationBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
 

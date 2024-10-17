@@ -16,7 +16,8 @@ import seedu.address.model.internshipapplication.exceptions.InternshipNotFoundEx
  * A list that enforces uniqueness between its elements and does not allow nulls.
  * An element is considered unique by using {@code HireMeComparable#isSame(Object)}.
  * As such, adding and updating of elements uses {@code HireMeComparable#isSame(Object)}
- * for equality to ensure that the element being added or updated is unique in terms of identity in the {@code UniqueList}.
+ * for equality to ensure that the element being added or updated is unique in terms of identity in
+ * the {@code UniqueList}.
  * However, the removal of an element uses {@code Object#equals(Object)} to ensure that
  * the element with exactly the same fields will be removed.
  *

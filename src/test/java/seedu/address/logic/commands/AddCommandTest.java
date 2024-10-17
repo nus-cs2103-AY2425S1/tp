@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalInternshipApplications.GOOGLE;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -24,9 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.internshipapplication.InternshipApplication;
-import seedu.address.model.internshipapplication.Person;
 import seedu.address.testutil.InternshipApplicationBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
 
@@ -53,7 +50,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validApplication);
         ModelStub modelStub = new ModelStubWithInternshipApplication(validApplication);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_APPLICATION, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_APPLICATION, () -> addCommand
+                .execute(modelStub));
     }
 
     @Test

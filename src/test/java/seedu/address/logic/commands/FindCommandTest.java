@@ -7,9 +7,6 @@ import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalInternshipApplications.APPLE;
 import static seedu.address.testutil.TypicalInternshipApplications.YAHOO;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalInternshipApplications.getTypicalAddressBook;
 
 import java.util.Arrays;

@@ -7,6 +7,9 @@ import seedu.address.model.internshipapplication.InternshipApplication;
 import seedu.address.model.internshipapplication.Name;
 import seedu.address.model.internshipapplication.Role;
 
+/**
+ * A utility class to help with building InternshipApplication objects.
+ */
 public class InternshipApplicationBuilder {
 
     public static final String DEFAULT_COMPANY_NAME = "Google";
