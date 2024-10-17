@@ -51,25 +51,25 @@ public class AddPolicyCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        // Validate the index
+
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        // Add policies to the person, checking for duplicates
+
         PolicySet editedPolicySet = addPoliciesToPerson(policies, personToEdit.getPolicySet());
 
-        // Create a new person with the updated policy set
+
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), editedPolicySet);
 
-        // Update the model with the edited person
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        // Return success message
+
         return new CommandResult(String.format(POLICY_ADD_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
@@ -82,18 +82,14 @@ public class AddPolicyCommand extends Command {
      * @throws CommandException if there are duplicate policies.
      */
     private PolicySet addPoliciesToPerson(PolicySet policiesToAdd, PolicySet existingPolicies) throws CommandException {
-        PolicySet updatedPolicySet = new PolicySet();
-        updatedPolicySet.addAll(existingPolicies);
-
-        // Check for duplicates and add new policies
         for (Policy policy : policiesToAdd) {
-            if (existingPolicies.contains(policy)) { // Checking for duplicates
+            if (existingPolicies.contains(policy.getType())) { // Checking for duplicates
                 throw new CommandException(MESSAGE_DUPLICATES);
             }
-            updatedPolicySet.add(policy);
+            existingPolicies.add(policy);
         }
 
-        return updatedPolicySet;
+        return existingPolicies;
     }
 
     @Override
