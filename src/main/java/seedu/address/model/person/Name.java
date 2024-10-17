@@ -28,7 +28,7 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        fullName = formatName(name);
     }
 
     /**
@@ -37,6 +37,42 @@ public class Name {
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
+    private static String formatName(String name) {
+        String[] words = name.toLowerCase().split("\\s+");
+        return formatWords(words);
+    }
+
+    /**
+     * Formats an array of words by capitalizing the first letter of each word
+     * and joining them into a single string.
+     *
+     * @param words Array of words to be formatted.
+     * @return A formatted string with each word capitalized.
+     */
+    private static String formatWords(String[] words) {
+        StringBuilder formattedWords = new StringBuilder();
+
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                formattedWords.append(capitalizeWord(word)).append(" ");
+            }
+        }
+
+        return formattedWords.toString().trim();
+    }
+
+    /**
+     * Capitalizes the first letter of the word.
+     *
+     * @param word The word to be formatted.
+     * @return Word with the first letter capitalized.
+     */
+    private static String capitalizeWord(String word) {
+        return Character.toUpperCase(word.charAt(0)) + word.substring(1);
+    }
+
+
 
 
     @Override
