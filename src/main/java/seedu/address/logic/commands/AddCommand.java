@@ -87,7 +87,7 @@ public class AddCommand extends Command {
             Person personToEdit = lastShownList.get(index.getZeroBased());
             Person editedPerson = new Person(
                     personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                    personToEdit.getAddress(), personToEdit.getTags(), personToEdit.getUniversity(),
+                    personToEdit.getAddress(), personToEdit.getWorkExp(), personToEdit.getTags(), personToEdit.getUniversity(),
                     personToEdit.getMajor(), new Interest(interest));
 
             model.setPerson(personToEdit, editedPerson);
