@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
@@ -25,12 +26,16 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     public static final String DEFAULT_REMARK = "";
+    public static final int DEFAULT_PATIENT_ID = 1234;
+    public static final int DEFAULT_DOCTOR_ID = 5678;
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Remark remark;
     private Set<Tag> tags;
+
+    private Id id;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -54,6 +59,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
+        id = personToCopy.getId();
     }
 
     /**
@@ -112,6 +118,22 @@ public class PersonBuilder {
     }
 
     public Doctor buildDoctor() {
+        return new Doctor(name, phone, email, address, remark, tags);
+    }
+
+    /**
+     * builds a patient class
+     */
+    public Patient buildPatient() {
+        id = new Id(Patient.class);
+        return new Patient(name, phone, email, address, remark, tags);
+    }
+
+    /**
+     * builds a doctor class
+     */
+    public Doctor buildDoctor() {
+        id = new Id(Doctor.class);
         return new Doctor(name, phone, email, address, remark, tags);
     }
 
