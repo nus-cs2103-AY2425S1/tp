@@ -5,9 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showEventAtIndex;
-import static seedu.address.testutil.TypicalEvents.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_VENDOR;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
+import static seedu.address.testutil.TypicalVendorsEventsCombined.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
+import seedu.address.model.vendor.Vendor;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -76,6 +78,20 @@ public class DeleteEventCommandTest {
         DeleteEventCommand deleteCommand = new DeleteEventCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_associatedEvent_throwsCommandException() {
+        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        Vendor vendorToAssign = model.getFilteredVendorList().get(INDEX_FIRST_VENDOR.getZeroBased());
+        model.assignVendorToEvent(vendorToAssign, eventToDelete);
+        DeleteEventCommand deleteCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
+
+        String expectedMessage = String.format(
+            DeleteEventCommand.MESSAGE_DELETE_EVENT_FAILED_DUE_TO_EXISTING_ASSOCIATIONS,
+                Messages.format(eventToDelete));
+
+        assertCommandFailure(deleteCommand, model, expectedMessage);
     }
 
     @Test
