@@ -65,6 +65,8 @@ public class PersonCard extends UiPart<Region> {
         email = new Label(person.getEmail().value);
         email.getStyleClass().add("cell_small_label");
         vBox.getChildren().add(email);
+
+        // Add tags
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
