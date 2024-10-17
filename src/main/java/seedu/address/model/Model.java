@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.calendar.EdulogCalendar;
 import seedu.address.model.calendar.Lesson;
 import seedu.address.model.student.Student;
 
@@ -104,10 +105,18 @@ public interface Model {
      */
     boolean checkTimeslot(Lesson lesson);
 
+    /**
+     * Returns edulog calendar.
+     */
+    EdulogCalendar getEdulogCalendar();
+
 
 
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
+
+    /** Returns an unmodifiable view of the filtered student list */
+    ObservableList<Lesson> getLessonList();
 
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.
