@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.allergy.Allergy;
@@ -52,8 +51,8 @@ public class AddAllergyCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Person person = model.fetchPersonIfPresent(new NricMatchesPredicate(nric)).orElseThrow(
-                () -> new CommandException(PATIENT_DOES_NOT_EXIST));
+        Person person = model.fetchPersonIfPresent(new NricMatchesPredicate(nric))
+                .orElseThrow(() -> new CommandException(PATIENT_DOES_NOT_EXIST));
 
         if (person.getNric().equals(this.nric)) {
             Set<Allergy> updatedAllergiesSet = new HashSet<>(person.getAllergies());
