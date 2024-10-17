@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.areOfSameSize;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -163,5 +164,14 @@ public class ModuleRoleMap {
      */
     public HashMap<ModuleCode, RoleType> getRoles() {
         return this.roles;
+    }
+
+    /**
+     * Returns a list of strings representing module role pairs for the GUI.
+     */
+    public List<ModuleRolePair> getData() {
+        return roles.entrySet().stream()
+                .map(entry -> new ModuleRolePair(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
     }
 }

@@ -48,6 +48,11 @@ public class Messages {
                 .append(person.getAddress().map(Object::toString).orElse("")));
         builder.append("; Tags: ");
         person.getTags().forEach(builder :: append);
+
+        builder.append("; Modules: ");
+        String moduleRoleMapData = person.getModuleRoleMap().getData().stream().map(Object::toString).collect(Collectors.joining(", "));
+        builder.append(moduleRoleMapData);
+
         return builder.toString();
     }
 
