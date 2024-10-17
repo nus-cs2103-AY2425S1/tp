@@ -31,7 +31,7 @@ public class EventListPanel extends UiPart<Region> {
         eventListView.setCellFactory(listView -> new EventListViewCell());
         eventListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                eventDetailView.setEvent(newValue);
+                eventDetailView.update(newValue);
             }
         });
     }

@@ -12,7 +12,7 @@ import seedu.address.model.event.Event;
  * A UI component that displays detailed information about an {@code Event}.
  * This panel updates dynamically when a new {@code Event} is provided.
  */
-public class EventDetailView extends UiPart<Region> {
+public class EventDetailView extends UiPart<Region> implements DetailView<Event> {
     private static final String FXML = "EventDetailView.fxml";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d, yyyy");
 
@@ -34,7 +34,8 @@ public class EventDetailView extends UiPart<Region> {
      *
      * @param event The event whose details are to be displayed.
      */
-    public void setEvent(Event event) {
+    @Override
+    public void update(Event event) {
         title.setText(event.getEventName());
         date.setText(event.getDate().format(DATE_FORMATTER));
         attendees.getChildren().clear();
