@@ -18,6 +18,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SeeAllScheduleCommand;
 import seedu.address.logic.commands.SeeScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -83,6 +84,10 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case SeeScheduleCommand.COMMAND_WORD:
+            return new SeeScheduleCommandParser().parse(arguments);
+
+        case SeeAllScheduleCommand.COMMAND_WORD:
+            return new SeeAllScheduleCommand();
 
 
         default:
