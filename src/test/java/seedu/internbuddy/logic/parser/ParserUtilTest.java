@@ -80,8 +80,9 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parsePhone_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
+    public void parsePhone_null_returnsNoPhone() throws Exception {
+        Phone expectedPhone = Phone.NO_PHONE;
+        assertEquals(expectedPhone, ParserUtil.parsePhone((String) null));
     }
 
     @Test
@@ -103,8 +104,9 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+    public void parseAddress_null_returnsNoAddress() throws Exception {
+        Address expectedAddress = Address.NO_ADDRESS;
+        assertEquals(expectedAddress, ParserUtil.parseAddress((String) null));
     }
 
     @Test
