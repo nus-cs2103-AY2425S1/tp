@@ -15,13 +15,13 @@ import seedu.address.model.Model;
 import seedu.address.model.types.event.Event;
 
 /**
- * Adds a event to the address book.
+ * Adds an event to the address book.
  */
 public class AddEventCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a event to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_ADDRESS + "ADDRESS "

@@ -132,11 +132,10 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        NavBar navBar = new NavBar(this::handleNav);
+        navBar = new NavBar(this::handleNav);
         navBarPlaceholder.getChildren().add(navBar.getRoot());
 
         // Default view shows the contacts list
-        navBar.pressContactsButton();
         displayContactsList();
     }
 
@@ -150,11 +149,14 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void displayContactsList() {
+        navBar.setActiveButton(navBar.getContactsButton());
+        eventListPanelPlaceholder.getChildren().clear();
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().setAll(personListPanel.getRoot());
     }
 
     private void displayEventsList() {
+        navBar.setActiveButton(navBar.getEventsButton());
         personListPanelPlaceholder.getChildren().clear();
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
         eventListPanelPlaceholder.getChildren().setAll(eventListPanel.getRoot());

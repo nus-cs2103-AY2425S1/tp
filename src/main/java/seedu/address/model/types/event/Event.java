@@ -21,8 +21,8 @@ public class Event {
 
     // Identity fields
     private final Name name;
-    private final DateTime startTime;
     private final Address location;
+    private final DateTime startTime;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
@@ -30,25 +30,26 @@ public class Event {
     /**
      * Every field must be present and not null.
      */
-    public Event(Name name, DateTime startTime, Address location, Set<Tag> tags) {
-        requireAllNonNull(name, startTime, location, tags);
+    public Event(Name name, Address location, DateTime startTime, Set<Tag> tags) {
+        requireAllNonNull(name, location, startTime, tags);
         this.name = name;
-        this.startTime = startTime;
         this.location = location;
+        this.startTime = startTime;
         this.tags.addAll(tags);
     }
 
     public Name getName() {
         return name;
     }
+    public Address getLocation() {
+        return location;
+    }
+
 
     public DateTime getStartTime() {
         return startTime;
     }
 
-    public Address getLocation() {
-        return location;
-    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -88,23 +89,23 @@ public class Event {
 
         Event otherEvent = (Event) other;
         return name.equals(otherEvent.name)
-                && startTime.equals(otherEvent.startTime)
                 && location.equals(otherEvent.location)
+                && startTime.equals(otherEvent.startTime)
                 && tags.equals(otherEvent.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, startTime, location, tags);
+        return Objects.hash(name, location, startTime, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("startTime", startTime)
                 .add("location", location)
+                .add("startTime", startTime)
                 .add("tags", tags)
                 .toString();
     }

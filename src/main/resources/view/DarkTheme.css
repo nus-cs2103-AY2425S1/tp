@@ -375,7 +375,8 @@
     -fx-text-fill: #ffffff;
 }
 
-.nav-bar .button:focused {
+
+.nav-bar .button.active {
     -fx-border-color: white;
     -fx-border-width: 1;
     -fx-border-style: solid;

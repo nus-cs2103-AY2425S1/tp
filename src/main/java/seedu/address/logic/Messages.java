@@ -57,10 +57,10 @@ public class Messages {
     public static String format(Event event) {
         final StringBuilder builder = new StringBuilder();
         builder.append(event.getName())
-                .append("; startTime: ")
-                .append(event.getStartTime())
-                .append("; location: ")
+                .append("; Location: ")
                 .append(event.getLocation())
+                .append("; StartTime: ")
+                .append(event.getStartTime())
                 .append("; Tags: ");
         event.getTags().forEach(builder::append);
         return builder.toString();

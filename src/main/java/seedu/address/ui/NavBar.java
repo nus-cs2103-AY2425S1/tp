@@ -33,12 +33,37 @@ public class NavBar extends UiPart<HBox> {
     }
 
     private void initializeButtons() {
-        contactsButton.setOnAction(event -> navHandler.handleNav("Contacts"));
-        eventsButton.setOnAction(event -> navHandler.handleNav("Events"));
+        contactsButton.setOnAction(event -> {
+            navHandler.handleNav("Contacts");
+            setActiveButton(contactsButton);
+        });
+
+        eventsButton.setOnAction(event -> {
+            navHandler.handleNav("Events");
+            setActiveButton(eventsButton);
+        });
     }
 
-    public void pressContactsButton() {
-        contactsButton.requestFocus();
+    public void setActiveButton(Button activeButton) {
+        if (activeButton != contactsButton) {
+            contactsButton.getStyleClass().remove("active");
+        } else {
+            contactsButton.getStyleClass().add("active");
+        }
+
+        if (activeButton != eventsButton) {
+            eventsButton.getStyleClass().remove("active");
+        } else {
+            eventsButton.getStyleClass().add("active");
+        }
+    }
+
+    public Button getContactsButton() {
+        return contactsButton;
+    }
+
+    public Button getEventsButton() {
+        return eventsButton;
     }
 
     /**
