@@ -45,7 +45,7 @@ public class Attendance {
      * Removes the last session marked in this {@link Attendance} object.
      *
      * @throws AttendanceOperationException If this {@link Attendance} has no sessions - i.e. trying to remove the last
-     * session when there are no sessions to remove.
+     *      session when there are no sessions to remove.
      */
     public void removeLast() throws AttendanceOperationException {
         if (attendanceList.isEmpty()) {
@@ -86,7 +86,7 @@ public class Attendance {
      *
      * @param other Object to be compared against.
      * @return {@code true} if the other object is another {@link Attendance} object with the same
-     * {@code attendanceList}.
+     *      {@code attendanceList}.
      */
     @Override
     public boolean equals(Object other) {

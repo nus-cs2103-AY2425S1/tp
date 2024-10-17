@@ -1,6 +1,8 @@
 package tahub.contacts.model.course;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static tahub.contacts.testutil.Assert.assertThrows;
 
 import java.util.List;
 
@@ -119,7 +121,7 @@ public class AttendanceTest {
 
     @Test
     @DisplayName("Returns correct values after removing the last session successively")
-    public void removeLastMultiple_nonzeroList_correctValues() throws AttendanceOperationException  {
+    public void removeLastMultiple_nonzeroList_correctValues() throws AttendanceOperationException {
         Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
         a.removeLast(); // remove attended session
         a.removeLast(); // remove absent session
@@ -130,7 +132,7 @@ public class AttendanceTest {
 
     @Test
     @DisplayName("Returns correct values after removing the last session once")
-    public void removeLast_nonzeroList_correctValues() throws AttendanceOperationException  {
+    public void removeLast_nonzeroList_correctValues() throws AttendanceOperationException {
         Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
         a.removeLast(); // remove attended session
         assertEquals(a.getAttendanceAttendedCount(), 2);
@@ -139,7 +141,7 @@ public class AttendanceTest {
 
     @Test
     @DisplayName("Throws correct exception after removing the last session from an empty list")
-    public void removeLast_emptyList_throwsException()  {
+    public void removeLast_emptyList_throwsException() {
         Attendance a = new Attendance(EMPTY_ATTENDANCE_LIST);
         assertThrows(AttendanceOperationException.class, a::removeLast);
     }
