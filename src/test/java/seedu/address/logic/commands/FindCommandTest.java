@@ -19,7 +19,6 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.parser.FindCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -41,18 +40,22 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate secondNamePredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        OrgContainsKeywordsPredicate firstOrgPredicate = new OrgContainsKeywordsPredicate(Collections.singletonList("NUS"));
-        OrgContainsKeywordsPredicate secondOrgPredicate = new OrgContainsKeywordsPredicate(Collections.singletonList("NTU"));;
+        OrgContainsKeywordsPredicate firstOrgPredicate = new OrgContainsKeywordsPredicate(
+                Collections.singletonList("NUS"));
+        OrgContainsKeywordsPredicate secondOrgPredicate = new OrgContainsKeywordsPredicate(
+                Collections.singletonList("NTU"));;
 
         FindCommand findFirstCommand = new FindCommand(new CompoundedPredicate(firstNamePredicate, firstOrgPredicate));
-        FindCommand findSecondCommand = new FindCommand(new CompoundedPredicate(secondNamePredicate, secondOrgPredicate));
+        FindCommand findSecondCommand = new FindCommand(
+                new CompoundedPredicate(secondNamePredicate, secondOrgPredicate));
         FindCommand findThirdCommand = new FindCommand(new CompoundedPredicate(firstNamePredicate, secondOrgPredicate));
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(new CompoundedPredicate(firstNamePredicate, firstOrgPredicate));
+        FindCommand findFirstCommandCopy = new FindCommand(
+                new CompoundedPredicate(firstNamePredicate, firstOrgPredicate));
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -69,7 +72,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_AllPersonsFound() {
+    public void execute_zeroKeywords_allPersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
         CompoundedPredicate predicate = preparePredicate(new String[]{" "}, new String[]{" "});
         FindCommand command = new FindCommand(predicate);
@@ -88,14 +91,6 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }
 
-//    @Test
-//    public void toStringMethod() {
-//        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
-//        FindCommand findCommand = new FindCommand(predicate);
-//        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-//        assertEquals(expected, findCommand.toString());
-//    }
-
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
@@ -104,3 +99,11 @@ public class FindCommandTest {
                 new OrgContainsKeywordsPredicate(Arrays.asList(orgInputs)));
     }
 }
+
+//    @Test
+//    public void toStringMethod() {
+//        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
+//        FindCommand findCommand = new FindCommand(predicate);
+//        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+//        assertEquals(expected, findCommand.toString());
+//    }
