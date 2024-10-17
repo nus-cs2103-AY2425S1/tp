@@ -18,10 +18,12 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds all persons whose names or phone numbers contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]... or [p/PHONE [MORE_PHONE_NUMBERS]...]\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie or " + COMMAND_WORD + " 8123 4567";
+            + ": Finds all persons whose names, phone numbers or postal codes "
+            + "contain any of the specified keywords (case-insensitive) and "
+            + "displays them as a list with index numbers.\n"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]... \n"
+            + "Example: " + COMMAND_WORD + " alice bob S123456 8123 \n"
+            + "Note: find by postal code should start with 'S'";
 
     private final Predicate<Person> predicate;
 
