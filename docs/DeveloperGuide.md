@@ -371,8 +371,8 @@ Use case ends.
 
 ## UC3: Add student
 
-**System**: EduLog  
-**Actor**: Teacher  
+**System**: EduLog
+**Actor**: Teacher 
 **Postcondition**: A student, with at least a name, is successfully enrolled in at least one class
 
 **MSS:**
@@ -386,28 +386,28 @@ Use case ends.
 
 ### **Extension:**
 
-- **2a. Teacher wants to abort the ‘add student’ process**  
+- **2a. Teacher wants to abort the ‘add student’ process**
   Teacher can clear fields and exit the procedure.
 
-- **4a. Student with the same name already exists**  
+- **4a. Student with the same name already exists**
   System alerts the teacher that the student exists and displays their details.
 
-- **4b. Invalid student details**  
+- **4b. Invalid student details**
   System alerts the teacher and prompts them to correct the invalid information.
 
-- **4c. Subject does not exist**  
+- **4c. Subject does not exist**
   System prompts the teacher to first create the tag using <u>UC7: Create a Subject</u>.
 
-- **4d. Class does not exist**  
+- **4d. Class does not exist**
   System prompts the teacher to first create the class using <u>UC1: Add a Class</u>.
 
-- **4e. Tag does not exist**  
+- **4e. Tag does not exist**
   System prompts the teacher to first create the tag using <u>UC5: Create a Tag</u>.
 
 ## UC4: Edit student
 
-**System**: EduLog  
-**Actor**: Teacher  
+**System**: EduLog
+**Actor**: Teacher 
 
 **MSS:**
 1. Teacher initiates the process to edit an existing student in EduLog.
@@ -418,27 +418,27 @@ Use case ends.
 Use case ends.
 
 ### **Extension:**
-- **2a. Teacher wants to abort the ‘edit student’ process:**  
+- **2a. Teacher wants to abort the ‘edit student’ process:**
   Teacher can clear fields and exit the procedure.
 
-- **4a. Student with new name already exists**  
+- **4a. Student with new name already exists**
   System alerts the teacher that the student exists and displays their details.
 
-- **4b. Invalid student details (see features):**  
+- **4b. Invalid student details (see features):**
   System alerts the teacher and prompts them to correct the invalid information.
 
-- **4c. Subject does not exist**  
+- **4c. Subject does not exist**
   System prompts the teacher to first create the tag using <u>UC7: Create a Subject</u>.
 
-- **4d. Class does not exist**  
+- **4d. Class does not exist**
   System prompts the teacher to first create the class using <u>UC1: Add a Class</u>.
 
-- **4e. Tag does not exist**  
+- **4e. Tag does not exist**
   System prompts the teacher to first create the tag using <u>UC5: Create a Tag</u>.
 
 ## UC5: Create Tag
 
-**System**: EduLog  
+**System**: EduLog
 **Actor**: Teacher
 
 **MSS:**
@@ -450,19 +450,19 @@ Use case ends.
 Use case ends.
 
 ### **Extension:**
-- **2a. Teacher wants to abort the ‘create tag’ process:**  
+- **2a. Teacher wants to abort the ‘create tag’ process:**
   Teacher clears the fields and exits the procedure without saving any data.
 
-- **3a. Tag with the same name already exists**  
+- **3a. Tag with the same name already exists**
   System alerts the teacher that the tag exists and no new tag is created.
 
-- **3b. Invalid tag details:**  
-  System alerts the teacher if any of the entered details are invalid.  
+- **3b. Invalid tag details:**
+  System alerts the teacher if any of the entered details are invalid.
   System prompts the teacher to correct the information before proceeding.
 
 ## UC6: Edit tag
 
-**System**: EduLog  
+**System**: EduLog
 **Actor**: Teacher
 
 **MSS:**
@@ -474,20 +474,20 @@ Use case ends.
 Use case ends.
 
 ### **Extension:**
-- **2a. Teacher wants to abort the ‘edit tag’ process:**  
+- **2a. Teacher wants to abort the ‘edit tag’ process:**
   Teacher clears the fields and exits the procedure without saving any data.
 
-- **3a. Tag with new name already exists**  
+- **3a. Tag with new name already exists**
   System alerts the teacher that the tag exists.  
   System requests to add another name.
 
-- **3b. Invalid tag details (see features):**  
+- **3b. Invalid tag details (see features):**
   System alerts the teacher if any of the entered details are invalid.  
   System prompts the teacher to correct the information before proceeding.
 
 ## UC7: Delete tag
 
-**System**: EduLog  
+**System**: EduLog
 **Actor**: Teacher
 
 **MSS:**
@@ -499,15 +499,15 @@ Use case ends.
 
 ### **Extension:**
 
-- **1a. Tag does not exist**  
+- **1a. Tag does not exist**
   System alerts the teacher that the tag does not exist and cannot be deleted.
 
-- **2a. Teacher wants to abort the ‘delete tag’ process:**  
+- **2a. Teacher wants to abort the ‘delete tag’ process:**
   Teacher cancels the operation and exits the procedure without deleting the tag.
 
 ## UC8: View students (Nikhil)
 
-**System:** EduLog  
+**System:** EduLog
 **Actor:** Teacher  
 **Precondition:** The teacher is logged into the app.
 
@@ -531,17 +531,17 @@ Use case resumes from Step 2.
 
 ## UC9: Remove student (Nikhil)
 
-**System:** EduLog  
-**Actor:** Teacher  
-**Precondition:** The teacher is logged into the app, the student is present in the list of students enrolled under the teacher.  
+**System:** EduLog
+**Actor:** Teacher
+**Precondition:** The teacher is logged into the app, the student is present in the list of students enrolled under the teacher.
 **Postcondition:** The student is removed from the teacher’s list of students.
 
 **MSS:**
 
-1. Teacher views the students enrolled under him/her through U1. View Students  
-2. Teacher selects a student to delete.  
-3. Teacher requests to delete the student.  
-4. System confirms that the student has been removed.  
+1. Teacher views the students enrolled under him/her through U1. View Students
+2. Teacher selects a student to delete.
+3. Teacher requests to delete the student.
+4. System confirms that the student has been removed.
    Teacher repeats steps 3-5 for any remaining students they wish to remove.
    Use case ends.
 
