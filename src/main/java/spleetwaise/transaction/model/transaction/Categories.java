@@ -53,6 +53,11 @@ public class Categories {
         return catSet.remove(cat);
     }
 
+    /**
+     * Check if a category is within categories
+     *
+     * @param cat The category to be checked
+     */
     public boolean contains(String cat) {
         requireNonNull(cat);
         return catSet.contains(cat);
