@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.concert.Concert;
+import seedu.address.model.concert.ConcertContact;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,5 +21,11 @@ public interface ReadOnlyAddressBook {
      * concerts.
      */
     ObservableList<Concert> getConcertList();
+
+    /**
+     * Returns an unmodifiable view of the concertContact list. This list will not contain any duplicate
+     * concertContacts.
+     */
+    ObservableList<ConcertContact> getConcertContactList();
 
 }
