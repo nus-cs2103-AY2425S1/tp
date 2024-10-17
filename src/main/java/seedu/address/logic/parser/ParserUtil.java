@@ -150,7 +150,7 @@ public class ParserUtil {
         try {
             return LocalTime.parse(time.trim());
         } catch (DateTimeParseException e) {
-            throw new ParseException("Time should be in HH:mm format");
+            throw new ParseException("Times should be in HH:mm format");
         }
     }
 

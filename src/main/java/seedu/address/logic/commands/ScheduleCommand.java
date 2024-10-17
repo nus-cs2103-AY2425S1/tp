@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import javafx.util.Pair;
@@ -37,6 +39,7 @@ public class ScheduleCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Appointment scheduled with %s on %s from %s to %s.";
     public static final String MESSAGE_INVALID_APPOINTMENT_TIME = "Appointment start time must be before end time";
+    public static final String MESSAGE_INVALID_APPOINTMENT_DATE = "Appointment must be scheduled in the future";
     public static final String MESSAGE_CONFLICTING_APPOINTMENTS = "Conflicting appointments found:\n%s";
 
     private final Index index;
@@ -59,8 +62,14 @@ public class ScheduleCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        if (!appointment.startTime().isBefore(appointment.endTime())) {
+        if (!appointment.startTime().isBefore(appointment.endTime())) { // start time >= end time
             throw new CommandException(MESSAGE_INVALID_APPOINTMENT_TIME);
+        }
+
+        if (appointment.date().isBefore(LocalDate.now()) // date < current date
+                || appointment.date().equals(LocalDate.now()) // date == current date
+                && !appointment.startTime().isAfter(LocalTime.now())) { // start time <= current time
+            throw new CommandException(MESSAGE_INVALID_APPOINTMENT_DATE);
         }
 
         Person person = lastShownList.get(index.getZeroBased());

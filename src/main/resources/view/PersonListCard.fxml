@@ -18,7 +18,6 @@
       <padding>
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
-      <Label fx:id="appointment" styleClass="cell_big_label" text="\$appointment" />
       <HBox spacing="0.5" alignment="CENTER_LEFT">
         <Label fx:id="id" styleClass="cell_big_label">
           <minWidth>
@@ -38,6 +37,13 @@
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
+    </VBox>
+    <VBox alignment="TOP_RIGHT" minHeight="105" GridPane.columnIndex="1">
+      <padding>
+        <Insets top="10" right="15" bottom="5" left="5" />
+      </padding>
+      <Label fx:id="date" styleClass="cell_big_label" />
+      <Label fx:id="time" styleClass="cell_big_label" />
     </VBox>
   </GridPane>
 </HBox>

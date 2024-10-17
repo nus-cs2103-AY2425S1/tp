@@ -30,8 +30,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label appointment;
-    @FXML
     private Label id;
     @FXML
     private Label name;
@@ -48,6 +46,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+    @FXML
+    private Label date;
+    @FXML
+    private Label time;
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -59,13 +62,6 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-
-        Appointment appt = person.getAppointment();
-        if (appt == null) {
-            appointment.setManaged(false);
-        } else {
-            appointment.setText(appt.toString());
-        }
 
         priority.getStyleClass().add(switch (person.getPriority()) {
         case HIGH -> "priority-high";
@@ -79,6 +75,14 @@ public class PersonCard extends UiPart<Region> {
             remark.setManaged(false);
         } else {
             remark.setText(value);
+        }
+
+        Appointment appointment = person.getAppointment();
+        if (appointment != null) {
+            date.setText(appointment.getFormattedDate());
+            time.setText("%s – %s".formatted(
+                    appointment.getFormattedStartTime(),
+                    appointment.getFormattedEndTime()));
         }
 
         person.getTags().stream()
