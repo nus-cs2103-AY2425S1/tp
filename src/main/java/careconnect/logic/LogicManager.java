@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 
 import careconnect.commons.core.GuiSettings;
 import careconnect.commons.core.LogsCenter;
+import careconnect.logic.autocompleter.Autocompleter;
+import careconnect.logic.autocompleter.exceptions.AutocompleteException;
 import careconnect.logic.commands.AddCommand;
 import careconnect.logic.commands.ClearCommand;
 import careconnect.logic.commands.Command;
@@ -47,6 +49,7 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
+    private final Autocompleter autocompleter;
     private final ArrayList<String> commandsList = new ArrayList<>(Arrays.asList(
             AddCommand.COMMAND_WORD,
             ClearCommand.COMMAND_WORD,
@@ -66,6 +69,7 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
+        autocompleter = new Autocompleter();
     }
 
     @Override
@@ -94,22 +98,8 @@ public class LogicManager implements Logic {
      * lexicographical order.
      */
     @Override
-    public String autocompleteCommand(String commandText) throws CommandException {
-        requireNonNull(commandText);
-        String ret = "";
-        for (String command : commandsList) {
-            if(command.startsWith(commandText)) {
-                if(ret.isEmpty()) {
-                    ret = command;
-                } else if(command.compareTo(ret) < 0) {
-                    ret = command;
-                }
-            }
-        }
-        if(ret.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_NO_AUTOCOMPLETE_OPTIONS, commandText));
-        }
-        return ret;
+    public String autocompleteCommand(String commandText) throws AutocompleteException {
+        return autocompleter.autocompleteWithLexicalPriority(commandText, commandsList);
     }
 
     @Override

@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import careconnect.commons.core.GuiSettings;
 import careconnect.commons.core.LogsCenter;
 import careconnect.logic.Logic;
+import careconnect.logic.autocompleter.exceptions.AutocompleteException;
 import careconnect.logic.commands.CommandResult;
 import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.logic.parser.exceptions.ParseException;
@@ -224,12 +225,12 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see Logic#autocompleteCommand(String)
      */
-    private String autocompleteCommand(String commandText) throws CommandException {
+    private String autocompleteCommand(String commandText) throws AutocompleteException {
         try {
             String autocompletedCommand = logic.autocompleteCommand(commandText);
             logger.info("Autocompleted Command: " + autocompletedCommand);
             return autocompletedCommand;
-        } catch (CommandException e) {
+        } catch (AutocompleteException e) {
             logger.info("An error occurred while autocompleting command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;

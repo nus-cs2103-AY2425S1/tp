@@ -1,6 +1,7 @@
 package careconnect.ui;
 
 import careconnect.logic.Logic;
+import careconnect.logic.autocompleter.exceptions.AutocompleteException;
 import careconnect.logic.commands.CommandResult;
 import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.logic.parser.AddressBookParser;
@@ -64,7 +65,7 @@ public class CommandBox extends UiPart<Region> {
             String autocompletedCommandWithSpace = autocompletedCommand + " ";
             commandTextField.setText(autocompletedCommandWithSpace);
             commandTextField.positionCaret(commandTextField.getText().length());
-        } catch (CommandException e) {
+        } catch (AutocompleteException e) {
             setStyleToIndicateCommandFailure();
         }
 
@@ -155,7 +156,7 @@ public class CommandBox extends UiPart<Region> {
          *
          * @see Logic#autocompleteCommand(String)
          */
-        String autocompleteCommand(String commandText) throws CommandException;
+        String autocompleteCommand(String commandText) throws AutocompleteException;
     }
 
 }

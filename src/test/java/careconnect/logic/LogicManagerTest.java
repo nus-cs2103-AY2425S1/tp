@@ -1,6 +1,7 @@
 package careconnect.logic;
 
 import static careconnect.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static careconnect.logic.Messages.MESSAGE_NO_AUTOCOMPLETE_OPTIONS;
 import static careconnect.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 
+import careconnect.logic.autocompleter.exceptions.AutocompleteException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -62,6 +64,18 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void autocompleteCommand_noAvailableOptions_throwsAutocompleteException() {
+        assertAutocompleteException("findd", MESSAGE_NO_AUTOCOMPLETE_OPTIONS);
+        assertAutocompleteException("xs", MESSAGE_NO_AUTOCOMPLETE_OPTIONS);
+    }
+
+    @Test
+    public void autocompleteCommand_availableOptions_success() throws Exception {
+        assertAutocompleteSuccess("fi", "find");
+        assertAutocompleteSuccess("ad", "add");
+    }
+
+    @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
@@ -99,11 +113,31 @@ public class LogicManagerTest {
     }
 
     /**
+     * Autocompletes the input command and confirms that
+     * - no exceptions are thrown
+     * - the autocompleted suggestion is equal to {@code expectedSuggestion}
+     * @see #assertAutocompleteException(String, String)
+     */
+    private void assertAutocompleteSuccess(String inputCommand,
+            String expectedSuggestion) throws AutocompleteException {
+        assertEquals(expectedSuggestion, logic.autocompleteCommand(inputCommand));
+
+    }
+
+    /**
      * Executes the command, confirms that a ParseException is thrown and that the result message is correct.
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertParseException(String inputCommand, String expectedMessage) {
         assertCommandFailure(inputCommand, ParseException.class, expectedMessage);
+    }
+
+    /**
+     * Autocompletes the input command, confirms that a AutocompleteException is thrown and that the result
+     * message is correct.
+     */
+    private void assertAutocompleteException(String inputCommand, String expectedMessage) {
+        Assert.assertThrows(AutocompleteException.class, expectedMessage, () -> logic.autocompleteCommand(inputCommand));
     }
 
     /**
