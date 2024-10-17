@@ -1,6 +1,9 @@
 package seedu.address.model.listing;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
+
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -11,9 +14,8 @@ public class Listing {
     private final Location location;
     private final Address address;
     private final Person seller;
-//    private final Set<Person> buyers;
+    private final Set<Person> buyers;
 
-    // Constructor to initialize all fields
     public Listing(Address address, Price price, Size size, Location location, Person seller) {
         Objects.requireNonNull(price);
         Objects.requireNonNull(size);
@@ -26,7 +28,7 @@ public class Listing {
         this.location = location;
         this.address = address;
         this.seller = seller;
-//        this.buyers = new HashSet<>(); // Initialize as empty buyers set
+        this.buyers = new HashSet<>();
     }
 
     public Price getPrice() {
@@ -49,19 +51,19 @@ public class Listing {
         return seller;
     }
 
-    //public Set<Person> getBuyers() {
-    //  return buyers;
-    //}
-    //
-    //// Method to add a buyer
-    //public void addBuyer(Person buyer) {
-    //  buyers.add(buyer);
-    //}
-    //
-    //// Method to remove a buyer
-    //public void removeBuyer(Person buyer) {
-    //  buyers.remove(buyer);
-    //}
+    public Set<Person> getBuyers() {
+      return Collections.unmodifiableSet(buyers);
+    }
+
+    public boolean isSameListing(Listing otherListing) {
+        if (this == otherListing) {
+            return true;
+        }
+
+        return otherListing != null
+                && otherListing.address == this.address
+                && otherListing.seller == this.seller;
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -79,12 +81,17 @@ public class Listing {
 
     @Override
     public int hashCode() {
-        return Objects.hash(price, size, location, address, seller);
+        return Objects.hash(address, size, location, seller);
     }
 
     @Override
     public String toString() {
-        return String.format("Listing at %s: %s, %s m², %s, Seller: %s",
-                address, price, size.getSize(), location, seller.getName());
+        return new ToStringBuilder(this)
+                .add("address", address)
+                .add("size", size)
+                .add("location", location)
+                .add("seller", seller)
+                //.add("buyers", )
+                .toString();
     }
 }
