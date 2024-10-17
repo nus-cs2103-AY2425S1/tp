@@ -1,8 +1,7 @@
 package seedu.address.model;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
