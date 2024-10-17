@@ -254,4 +254,5 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Restore** | `restore`
 **Sort** | `sort [ORDER]`<br> e.g., `sort asc`
