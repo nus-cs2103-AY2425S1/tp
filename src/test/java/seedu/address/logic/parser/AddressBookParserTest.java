@@ -19,7 +19,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddConcertCommand;
 import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteConcertCommand;
+import seedu.address.logic.commands.DeletePersonCommand;
 import seedu.address.logic.commands.DeleteConcertContactCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -65,10 +66,17 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(DeleteCommand.COMMAND_WORD + " "
+    public void parseCommand_deletePerson() throws Exception {
+        DeletePersonCommand command = (DeletePersonCommand) parser.parseCommand(DeletePersonCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        assertEquals(new DeletePersonCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_deleteConcert() throws Exception {
+        DeleteConcertCommand command = (DeleteConcertCommand) parser.parseCommand(
+                DeleteConcertCommand.COMMAND_WORD + " " + INDEX_FIRST_CONCERT.getOneBased());
+        assertEquals(new DeleteConcertCommand(INDEX_FIRST_CONCERT), command);
     }
 
     @Test
@@ -105,10 +113,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        String userInput = FindPersonCommand.COMMAND_WORD + " "
-                + PREFIX_NAME + keywords.stream().collect(Collectors.joining(" "));
-        FindPersonCommand command = (FindPersonCommand) parser.parseCommand(
-                userInput);
+        String userInput = FindPersonCommand.COMMAND_WORD + " " + PREFIX_NAME + keywords.stream()
+                .collect(Collectors.joining(" "));
+        FindPersonCommand command = (FindPersonCommand) parser.parseCommand(userInput);
         assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 

@@ -162,5 +162,4 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredConcertList().size());
     }
-
 }
