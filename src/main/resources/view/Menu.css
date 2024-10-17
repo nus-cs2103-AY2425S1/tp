@@ -1,39 +1,31 @@
 .menu-bar {
-    -fx-background-color: derive(#800000, 20%);
-}
-
-.menu-bar .label {
-    -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: #F2E8C6;
-    -fx-opacity: 0.9;
-}
-
-.menu {
-    -fx-background-color: derive(#800000, 20%);
-}
-
-.menu:hover {
-    -fx-background-color: #DAD4B5;
-}
-
-.menu:hover > .label {
-    -fx-text-fill: derive(#800000, 50%);
-}
-
-.menu-item {
-    -fx-background-color: derive(#800000, 20%);
-}
-
-.menu-item:hover {
-    -fx-background-color: #DAD4B5;
-}
-
-.menu-item:hover .label {
-    -fx-text-fill: derive(#800000, 50%);
+    -fx-background-color: #F0A89F;
 }
 
 .context-menu {
-    -fx-background-color: derive(#800000, 50%);
+    -fx-background-color: #F0A89F;
+    -fx-background-insets: 0 3 0 3;
+    -fx-padding: 0 2 0 0;
 }
+
+.menu-bar .label, .menu-item .label {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Inter";
+    -fx-text-fill: black;
+    -fx-opacity: 0.9;
+    -fx-padding: 0 2 0 2;
+}
+
+.menu, .menu-item {
+    -fx-background-color: #F0A89F;
+}
+
+.menu:hover, .menu-item:hover {
+    -fx-background-color: #FAE4E1;
+}
+
+
+
+
+
 
