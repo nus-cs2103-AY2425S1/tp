@@ -6,8 +6,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.order.CustomerOrder;
-import seedu.address.model.order.OrderList;
-import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -18,7 +16,7 @@ public class Customer extends Person {
 
     private final String orderHistory;
     private final String favoriteItems;
-    private List<CustomerOrder> openCustomerOrders; //stores a list of open/unfulfilled customer orders
+    private final List<CustomerOrder> openCustomerOrders; // stores a list of open/unfulfilled customer orders
 
     /**
      * Every field must be present and not null.
@@ -38,6 +36,18 @@ public class Customer extends Person {
 
     public String getFavoriteItems() {
         return favoriteItems;
+    }
+
+    public List<CustomerOrder> getOpenCustomerOrders() {
+        return openCustomerOrders;
+    }
+
+    public void addCustomerOrder(CustomerOrder customerOrder) {
+        openCustomerOrders.add(customerOrder);
+    }
+
+    public void removeCustomerOrder(CustomerOrder customerOrder) {
+        openCustomerOrders.remove(customerOrder);
     }
 
     @Override
@@ -71,3 +81,4 @@ public class Customer extends Person {
         return builder.toString();
     }
 }
+
