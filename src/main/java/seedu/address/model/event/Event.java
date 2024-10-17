@@ -73,14 +73,7 @@ public class Event {
     public Set<Person> getAttendees() {
         return new HashSet<>(attendees);
     }
-    /**
-     * Returns a ArrayList of Person with attendee roles, sorted by name.
-     */
-    public List<Person> getSortedAttendees() {
-        List<Person> sortedAttendees = new ArrayList<>(attendees);
-        Collections.sort(sortedAttendees);
-        return sortedAttendees;
-    }
+
 
     /**
      * Returns an immutable Person set with Vendor Roles, which throws {@code UnsupportedOperationException}
@@ -90,14 +83,7 @@ public class Event {
         return new HashSet<>(vendors);
     }
 
-    /**
-     * Returns a ArrayList of Person with Vendor roles, sorted by name.
-     */
-    public List<Person> getSortedVendors() {
-        List<Person> sortedVendors = new ArrayList<>(vendors);
-        Collections.sort(sortedVendors);
-        return sortedVendors;
-    }
+
 
     /**
      * Returns an immutable Person set with Sponsor Roles, which throws {@code UnsupportedOperationException}
@@ -107,14 +93,7 @@ public class Event {
         return new HashSet<>(sponsors);
     }
 
-    /**
-     * Returns a ArrayList of Person with Sponsor roles, sorted by name.
-     */
-    public List<Person> getSortedSponsors() {
-        List<Person> sortedSponsors = new ArrayList<>(sponsors);
-        Collections.sort(sortedSponsors);
-        return sortedSponsors;
-    }
+
 
     /**
      * Returns an immutable Person set with Volunteer Roles, which throws {@code UnsupportedOperationException}
@@ -124,14 +103,6 @@ public class Event {
         return new HashSet<>(volunteers);
     }
 
-    /**
-     * Returns a ArrayList of Person with Volunteer roles, sorted by name.
-     */
-    public List<Person> getSortedVolunteers() {
-        List<Person> sortedVolunteers = new ArrayList<>(volunteers);
-        Collections.sort(sortedVolunteers);
-        return sortedVolunteers;
-    }
 
 
     /**
@@ -146,22 +117,27 @@ public class Event {
             if (!person.hasRole(personRole)) {
                 throw new IllegalValueException("Person does not have the role " + role);
             }
+            Set<Person> roleSet;
             switch (personRole.getRoleName()) {
             case "attendee":
-                attendees.add(person);
+                roleSet = attendees;
                 break;
             case "vendor":
-                vendors.add(person);
+                roleSet = vendors;
                 break;
             case "sponsor":
-                sponsors.add(person);
+                roleSet = sponsors;
                 break;
             case "volunteer":
-                volunteers.add(person);
+                roleSet = volunteers;
                 break;
             default:
                 throw new InvalidRoleException();
             }
+            if (roleSet.contains(person)) {
+                throw new IllegalValueException("Person already has role in event: " + this.name);
+            }
+            roleSet.add(person);
         } catch (InvalidRoleException e) {
             throw new IllegalValueException(e.getMessage());
         }
