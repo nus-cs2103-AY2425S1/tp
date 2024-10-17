@@ -94,26 +94,47 @@ class JsonAdaptedPerson {
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(email)) {
+
+        Email modelEmail;
+
+        if (email.isEmpty()) {
+            modelEmail = new Email();
+        } else if (Email.isValidEmail(email)) {
+            modelEmail = new Email(email);
+        } else {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
 
         if (major == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Major.class.getSimpleName()));
         }
-        if (!Major.isValidMajor(major)) {
+
+        Major modelMajor;
+
+        if (major.isEmpty()) {
+            modelMajor = new Major();
+        } else if (Major.isValidMajor(major)) {
+            modelMajor = new Major(major);
+        } else {
             throw new IllegalValueException(Major.MESSAGE_CONSTRAINTS);
         }
-        final Major modelAddress = new Major(major);
 
-        if (!Year.isValidYear(year)) {
+        if (year == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Year.class.getSimpleName()));
+        }
+
+        Year modelYear;
+
+        if (year.isEmpty()) {
+            modelYear = new Year();
+        } else if (Year.isValidYear(year)) {
+            modelYear = new Year(year);
+        } else {
             throw new IllegalValueException(Year.MESSAGE_CONSTRAINTS);
         }
-        final Year modelYear = new Year(year);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelStudentId, modelEmail, modelAddress, modelTags, modelYear);
+        return new Person(modelName, modelStudentId, modelEmail, modelMajor, modelTags, modelYear);
     }
 
 }

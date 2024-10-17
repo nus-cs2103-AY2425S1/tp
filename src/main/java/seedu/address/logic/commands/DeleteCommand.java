@@ -18,12 +18,14 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_USAGE =
+            "Hi it looks like your trying to use the delete command, but your not formatting it quite right!\n"
+            + "Ensure the Parameter: INDEX (must be a positive integer, no decimals!)\n"
+            + "For Example: " + COMMAND_WORD + " 1\n"
+            + "This will delete the person identified by the index number used in the displayed person list.\n";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "You have deleted a person: %1$s";
 
     private final Index targetIndex;
 
@@ -36,12 +38,22 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
+        assert lastShownList != null;
+
+        // validation check on list and index
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_DELETE_EMPTY_ERROR);
+        }
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_DELETE_UPPERBOUND_ERROR);
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        assert personToDelete != null;
+
         model.deletePerson(personToDelete);
+
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 

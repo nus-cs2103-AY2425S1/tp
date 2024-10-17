@@ -293,96 +293,96 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the System is Teacher's Pet (TP) and the Actor is the Teaching Assistant (TA), unless specified otherwise)
 
 
-**Use Case: UC1 - Add a Student**  
+**Use Case: UC1 - Add a Student**
 
-**MSS:**  
+**MSS:**
 
 1. TA enters student details
-2. TP shows the new student record  
+2. TP shows the new student record
 Use case ends.
 
-**Extensions:**  
+**Extensions:**
 
-- 1a. TA does not enter enough data for TP to add a student  
-  - 1a1. TP informs TA of the missing data required  
+- 1a. TA does not enter enough data for TP to add a student
+  - 1a1. TP informs TA of the missing data required
     Use case resumes from step 1.
 
 
 - 1b. TP detects that data is entered in an incorrect format
-  - 1b1. TP informs TA of the correct format  
+  - 1b1. TP informs TA of the correct format
   Use case resumes from step 1.
 
-    
-**Use Case: UC2 - Delete student**  
+
+**Use Case: UC2 - Delete student**
 Preconditions: There is some student data available
 
-**MSS:**  
+**MSS:**
 
 1. TA <ins> views students (UC3 or UC4) <ins/>
 2. TP shows all students based on specified view
 3. TA deletes students
-4. TP shows new list with the student deleted  
+4. TP shows new list with the student deleted
 Use case ends.
 
 **Extensions:**
 
 - 3a. TA does not enter enough information for TP to delete a student
-  - 3a1. TP informs TA of the missing data required  
+  - 3a1. TP informs TA of the missing data required
 Use case resumes from step 1.
-  
+
 
 - 3b. TP detects that data is entered in an incorrect format
-  - 3b1. TP informs TA of the correct format  
+  - 3b1. TP informs TA of the correct format
   Use case resumes from step 1.
 
 
-**Use Case: UC3 - List student**  
+**Use Case: UC3 - List student**
 Preconditions: Installed the application
 
 **MSS:**
 
 1. TA requests a list of students
-2. TP shows a list of all student data  
+2. TP shows a list of all student data
 Use case ends.
 
 **Extensions:**
 
 - 2a. There is no student data found in the list
-  - 2a1. TP shows an empty list of students  
+  - 2a1. TP shows an empty list of students
   Use case ends.
 
 
-**Use Case: UC4 - Find Student**  
+**Use Case: UC4 - Find Student**
 
 **MSS:**
 
 1. TA enters the find command with at least one valid search parameter (e.g., /n <Name>, /id <Student ID>).
 2. Teacher’s Pet (TP) validates the input parameters.
 3. TP searches the student database for records matching all the specified criteria.
-4. TP displays a list of students matching the search criteria.  
+4. TP displays a list of students matching the search criteria.
 Use case ends.
 
 **Extensions:**
 
 - 1a. TA does not provide any search parameters.
-  - 1a1. TP displays an error message: "At least one search parameter must be provided."  
+  - 1a1. TP displays an error message: "At least one search parameter must be provided."
   Use case resumes at step 1.
-  
+
 
 - 2a. TA provides search parameters in a wrong format
-  - 2a1. TP displays an error message and informs TA of the correct format  
+  - 2a1. TP displays an error message and informs TA of the correct format
   Use case resumes at step 1.
 
 
 - 4a. No students match the criteria.
-  - 4a1. TP displays a message:"No students found matching the criteria."  
+  - 4a1. TP displays a message:"No students found matching the criteria."
   Use case ends.
 
 ## Non-functional requirements
 
 1. The system shall be capable of handling an increase in users (up to 10,000) without requiring a complete redesign.
-2. The system works on Linux, Mac and Windows. 
-3. The system shall support at least 100 concurrent users without degradation in performance. 
+2. The system works on Linux, Mac and Windows.
+3. The system shall support at least 100 concurrent users without degradation in performance.
 4. The system shall respond to user queries within 2 seconds under normal load conditions.
 
 ## Glossary

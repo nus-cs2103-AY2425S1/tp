@@ -14,9 +14,9 @@ public class MajorTest {
     }
 
     @Test
-    public void constructor_invalidAddress_throwsIllegalArgumentException() {
-        String invalidAddress = "";
-        assertThrows(IllegalArgumentException.class, () -> new Major(invalidAddress));
+    public void constructor_invalidMajor_throwsIllegalArgumentException() {
+        String invalidMajor = "";
+        assertThrows(IllegalArgumentException.class, () -> new Major(invalidMajor));
     }
 
     @Test

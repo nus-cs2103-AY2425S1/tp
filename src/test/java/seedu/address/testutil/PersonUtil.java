@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NETID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import java.util.Set;
 
@@ -32,8 +33,9 @@ public class PersonUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
         sb.append(PREFIX_STUDENTID + person.getStudentId().value + " ");
-        sb.append(PREFIX_NETID + person.getEmail().value + " ");
+        sb.append(PREFIX_NETID + person.getEmail().value.substring(0, 8) + " ");
         sb.append(PREFIX_MAJOR + person.getMajor().value + " ");
+        sb.append(PREFIX_YEAR + person.getYear().value + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );

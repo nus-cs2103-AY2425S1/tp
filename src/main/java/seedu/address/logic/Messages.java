@@ -15,9 +15,21 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_DELETE_UPPERBOUND_ERROR = "Sorry but the index was too large "
+                + "compared to your list size!";
+    public static final String MESSAGE_DELETE_EMPTY_ERROR = "Sorry but you cannot delete from an empty list.";
+
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_DUPLICATE_PREFIX = "Duplicate prefix '%1$s' found. Please provide each parameter"
+            + " only once.";
+    public static final String MESSAGE_NAME_CANNOT_BE_EMPTY = "Name cannot be empty.";
+    public static final String MESSAGE_INVALID_CHARACTER_IN_NAME = "Invalid character '/' in name.";
+    public static final String MESSAGE_INVALID_STUDENT_ID_FORMAT = "Invalid Student ID format. It should be 9"
+            + " characters with letters at the start and end, and digits in between (e.g., 'A1234567E').";
+    public static final String MESSAGE_NO_STUDENTS_FOUND = "No students found matching the criteria.";
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -39,14 +51,38 @@ public class Messages {
         builder.append(person.getName())
                 .append("; Student ID: ")
                 .append(person.getStudentId())
-                .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Major: ")
-                .append(person.getMajor())
-                .append("; Year: ")
-                .append(person.getYear());
+                .append(formatOptionalFields(person));
 
         return builder.toString();
     }
+
+    /**
+     * Formats the optional fields for {@code person} for display to the user.
+     */
+    private static String formatOptionalFields(Person person) {
+        final StringBuilder builder = new StringBuilder();
+        boolean emailIsEmpty = person.getEmail().value.isEmpty();
+        boolean majorIsEmpty = person.getMajor().value.isEmpty();
+        boolean yearIsEmpty = person.getYear().value.isEmpty();
+
+        if (!emailIsEmpty) {
+            builder.append("; Email: ")
+                    .append(person.getEmail());
+        }
+
+        if (!majorIsEmpty) {
+            builder.append("; Major: ")
+                    .append(person.getMajor());
+        }
+
+        if (!yearIsEmpty) {
+            builder.append("; Year: ")
+                    .append(person.getYear());
+        }
+
+        return builder.toString();
+    }
+
+
 
 }
