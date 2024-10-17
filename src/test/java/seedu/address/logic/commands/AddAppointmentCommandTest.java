@@ -45,8 +45,8 @@ public class AddAppointmentCommandTest {
         assertEquals(AddAppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS,
                 commandResult.getFeedbackToUser());
         String expectedAppointments = "All appointments for you in the database:\n"
-                + "Appointment on 2024-12-31T12:00: Doctor ID = Id{id=4, role=Doctor}, "
-                + "Patient ID = Id{id=4, role=Patient}"
+                + "Appointment on 2024-12-31T12:00: Doctor ID = Id{id=2, role=Doctor}, "
+                + "Patient ID = Id{id=2, role=Patient}"
                 + "\n";
         assertEquals(expectedAppointments, validDoctor.getAllAppointments());
     }
