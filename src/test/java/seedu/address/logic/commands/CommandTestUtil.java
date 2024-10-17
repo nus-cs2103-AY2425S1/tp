@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -10,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,6 +39,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_REMARK_AMY = "";
     public static final String VALID_REMARK_BOB = "";
+    public static final String VALID_BIRTHDAY_AMY = "2000-03-15";
+    public static final String VALID_BIRTHDAY_BOB = "1999-01-27";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -50,6 +54,10 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
+    public static final String BIRTHDAY_DESC_AMY = " " + PREFIX_BIRTHDAY + VALID_BIRTHDAY_AMY;
+    public static final String BIRTHDAY_DESC_BOB = " " + PREFIX_BIRTHDAY + VALID_BIRTHDAY_BOB;
+
+
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String VALID_REMARK_ALICE = "like apples";
@@ -65,6 +73,12 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_DATE_DESC = " " + PREFIX_BIRTHDAY + "2002-02-30"; // empty string not allowed
+    // for birthdays
+    public static final String INVALID_DATE_AGAIN_DESC = " " + PREFIX_BIRTHDAY + "2024-13-01";
+    public static final String INVALID_BIRTHDAY_EARLY_DESC = " " + PREFIX_BIRTHDAY + "1908-04-22";
+    public static final String INVALID_BIRTHDAY_LATE_DESC = " " + PREFIX_BIRTHDAY + LocalDate.now()
+            .plusDays(1).toString();
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
