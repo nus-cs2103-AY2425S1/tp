@@ -16,14 +16,14 @@ public class IncomeComparisonPredicateTest {
         IncomeComparisonOperator operatorEqual = new IncomeComparisonOperator("=");
         IncomeComparisonOperator operatorGreater = new IncomeComparisonOperator(">");
 
-        IncomeComparisonPredicate firstPredicate = new IncomeComparisonPredicate(5000, operatorEqual);
-        IncomeComparisonPredicate secondPredicate = new IncomeComparisonPredicate(10000, operatorGreater);
+        IncomeComparisonPredicate firstPredicate = new IncomeComparisonPredicate(operatorEqual, 5000);
+        IncomeComparisonPredicate secondPredicate = new IncomeComparisonPredicate(operatorGreater, 10000);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        IncomeComparisonPredicate firstPredicateCopy = new IncomeComparisonPredicate(5000, operatorEqual);
+        IncomeComparisonPredicate firstPredicateCopy = new IncomeComparisonPredicate(operatorEqual, 5000);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -38,40 +38,40 @@ public class IncomeComparisonPredicateTest {
 
     @Test
     public void test_incomeEqualComparison_returnsTrue() {
-        IncomeComparisonPredicate predicate = new IncomeComparisonPredicate(5000, new IncomeComparisonOperator("="));
+        IncomeComparisonPredicate predicate = new IncomeComparisonPredicate(new IncomeComparisonOperator("="), 5000);
         assertTrue(predicate.test(new PersonBuilder().withIncome(5000).build()));
     }
 
     @Test
     public void test_incomeEqualComparison_returnsFalse() {
-        IncomeComparisonPredicate predicate = new IncomeComparisonPredicate(5000, new IncomeComparisonOperator("="));
+        IncomeComparisonPredicate predicate = new IncomeComparisonPredicate(new IncomeComparisonOperator("="), 5000);
         assertFalse(predicate.test(new PersonBuilder().withIncome(6000).build()));
         assertFalse(predicate.test(new PersonBuilder().withIncome(4000).build()));
     }
 
     @Test
     public void test_incomeGreaterThanComparison_returnsTrue() {
-        IncomeComparisonPredicate predicate = new IncomeComparisonPredicate(5000, new IncomeComparisonOperator(">"));
+        IncomeComparisonPredicate predicate = new IncomeComparisonPredicate(new IncomeComparisonOperator(">"), 5000);
         assertTrue(predicate.test(new PersonBuilder().withIncome(6000).build()));
     }
 
     @Test
     public void test_incomeGreaterThanComparison_returnsFalse() {
-        IncomeComparisonPredicate predicate = new IncomeComparisonPredicate(5000, new IncomeComparisonOperator(">"));
+        IncomeComparisonPredicate predicate = new IncomeComparisonPredicate(new IncomeComparisonOperator(">"), 5000);
         assertFalse(predicate.test(new PersonBuilder().withIncome(4000).build()));
         assertFalse(predicate.test(new PersonBuilder().withIncome(5000).build()));
     }
 
     @Test
     public void test_incomeLessThanComparison_returnsTrue() {
-        IncomeComparisonPredicate predicate = new IncomeComparisonPredicate(5000, new IncomeComparisonOperator("<"));
+        IncomeComparisonPredicate predicate = new IncomeComparisonPredicate(new IncomeComparisonOperator("<"), 5000);
         assertTrue(predicate.test(new PersonBuilder().withIncome(4000).build()));
     }
 
     @Test
     public void test_incomeLessThanComparison_returnsFalse() {
         // Income is not less than the threshold
-        IncomeComparisonPredicate predicate = new IncomeComparisonPredicate(5000, new IncomeComparisonOperator("<"));
+        IncomeComparisonPredicate predicate = new IncomeComparisonPredicate(new IncomeComparisonOperator("<"), 5000);
         assertFalse(predicate.test(new PersonBuilder().withIncome(6000).build()));
         assertFalse(predicate.test(new PersonBuilder().withIncome(5000).build()));
     }
@@ -79,7 +79,7 @@ public class IncomeComparisonPredicateTest {
     @Test
     public void toStringMethod() {
         IncomeComparisonOperator operator = new IncomeComparisonOperator("=");
-        IncomeComparisonPredicate predicate = new IncomeComparisonPredicate(5000, operator);
+        IncomeComparisonPredicate predicate = new IncomeComparisonPredicate(operator, 5000);
 
         String expected = IncomeComparisonPredicate.class.getCanonicalName()
                 + "{incomeThreshold=5000, incomeComparisonOperator==}";
