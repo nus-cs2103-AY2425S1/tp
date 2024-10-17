@@ -13,6 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -83,14 +84,28 @@ public class ParserUtil {
         }
         return new Address(trimmedAddress);
     }
+
     /**
      * Parses a {@code String address} into an {@code Remark}.
      * Leading and trailing whitespaces will be trimmed.
      */
     public static Remark parseRemark(String remark) {
         requireNonNull(remark);
-        String trimmedAddress = remark.trim();
-        return new Remark(trimmedAddress);
+        String trimmedRemark = remark.trim();
+        return new Remark(trimmedRemark);
+    }
+
+    /**
+     * Parses a {@code String address} into an {@code Birthday}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Birthday parseBirthday(String birthday) throws ParseException {
+        requireNonNull(birthday);
+        String trimmedBirthday = birthday.trim();
+        if (!Birthday.isValidBirthday(trimmedBirthday)) {
+            throw new ParseException(Birthday.MESSAGE_CONSTRAINTS);
+        }
+        return new Birthday(trimmedBirthday);
     }
 
     /**

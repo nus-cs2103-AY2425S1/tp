@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.DateOfCreation;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.History;
@@ -26,14 +27,16 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_REMARK = "";
     public static final DateOfCreation DEFAULT_DATE_OF_CREATION = new DateOfCreation(LocalDate.now());
+    public static final String DEFAULT_BIRTHDAY = "2001-01-01";
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tag> tags;
     private Remark remark;
     private DateOfCreation dateOfCreation;
     private History history;
+    private Birthday birthday;
+    private Set<Tag> tags;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -43,10 +46,11 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
         remark = Remark.EMPTY_REMARK;
         dateOfCreation = DEFAULT_DATE_OF_CREATION;
         history = new History(dateOfCreation.getDateOfCreation());
+        birthday = new Birthday(DEFAULT_BIRTHDAY);
+        tags = new HashSet<>();
     }
 
     /**
@@ -57,10 +61,11 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
         remark = personToCopy.getRemark();
         dateOfCreation = personToCopy.getDateOfCreation();
         history = personToCopy.getHistory();
+        birthday = personToCopy.getBirthday();
+        tags = new HashSet<>(personToCopy.getTags());
     }
 
     /**
@@ -129,8 +134,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Birthday} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withBirthday(String birthday) {
+        this.birthday = new Birthday(birthday);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, remark, tags, dateOfCreation, history);
+        return new Person(name, phone, email, address, remark, birthday, tags, dateOfCreation, history);
     }
 
 }
