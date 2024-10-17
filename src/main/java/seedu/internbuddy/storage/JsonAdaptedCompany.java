@@ -60,9 +60,9 @@ public class JsonAdaptedCompany {
      */
     public JsonAdaptedCompany(Company source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
+        phone = source.getPhone().value.orElse(null);
         email = source.getEmail().value;
-        address = source.getAddress().value;
+        address = source.getAddress().value.orElse(null);
         status = source.getStatus().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -96,13 +96,14 @@ public class JsonAdaptedCompany {
         }
         final Name modelName = new Name(name);
 
+        final Phone modelPhone;
         if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(phone)) {
+            modelPhone = Phone.NO_PHONE;
+        } else if (!Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        } else {
+            modelPhone = new Phone(phone);
         }
-        final Phone modelPhone = new Phone(phone);
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
@@ -112,13 +113,14 @@ public class JsonAdaptedCompany {
         }
         final Email modelEmail = new Email(email);
 
+        final Address modelAddress;
         if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
+            modelAddress = Address.NO_ADDRESS;
+        } else if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        } else {
+            modelAddress = new Address(address);
         }
-        final Address modelAddress = new Address(address);
 
         if (status == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
