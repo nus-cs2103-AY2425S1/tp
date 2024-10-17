@@ -1,5 +1,11 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -7,12 +13,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonContainsTagsPredicate;
 import seedu.address.model.tag.Tag;
-
-import java.util.List;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 /**
  * Delete all person with specified tags from the address book.
@@ -37,9 +37,11 @@ public class BatchDeleteCommand extends Command {
     /**
      * Initializes command to batch delete all person with tags from the address book.
      *
-     * @param tags Tags of a person.
+     * @param tags Tags belonging to a person.
      */
     public BatchDeleteCommand(Set<Tag> tags, PersonContainsTagsPredicate predicate) {
+        requireNonNull(tags);
+        requireNonNull(predicate);
         this.tags = tags;
         this.predicate = predicate;
     }
@@ -87,6 +89,7 @@ public class BatchDeleteCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("tags", tags)
+                .add("predicate", predicate)
                 .toString();
     }
 }

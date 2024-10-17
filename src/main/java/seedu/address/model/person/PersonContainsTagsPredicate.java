@@ -1,11 +1,14 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
-
 import java.util.Set;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Tag;
+
+/**
+ * Tests that a {@code Person}'s {@code Tag} contains all the given tags.
+ */
 public class PersonContainsTagsPredicate implements Predicate<Person> {
     private final Set<Tag> tags;
 
