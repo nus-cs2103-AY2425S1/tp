@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
-import seedu.address.model.calendar.*;
-
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+
+import seedu.address.model.calendar.Lesson;
 
 /**
  * A utility class to help with building Student objects.
@@ -13,28 +13,25 @@ public class LessonBuilder {
     public static final String DEFAULT_DESCRIPTION = "Sec 4 Math";
     public static final DayOfWeek DEFAULT_START_DAY = DayOfWeek.MONDAY;
     public static final LocalTime DEFAULT_START_TIME = LocalTime.of(9, 30);
-    public static final LocalTime DEFAULT_END_TIME = LocalTime.of(11, 30);;
-    private String description;  //TODO: change to type Description
-    private DayOfWeek startDay;   //TODO: change to type StartDay
-    private LocalTime startTime;  //TODO: change to type StartTime
-    private LocalTime endTime;      //TODO: change to type endTime
+    public static final LocalTime DEFAULT_END_TIME = LocalTime.of(11, 30);
+    private String description; //TODO: change to type Description
+    private DayOfWeek startDay; //TODO: change to type StartDay
+    private LocalTime startTime; //TODO: change to type StartTime
+    private LocalTime endTime; //TODO: change to type endTime
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
+     * once the todos above are done we can rewrite this as
+     *         description = new Description(DEFAULT_DESCRIPTION);
+     *         startDay = new StartDay(DEFAULT_START_DAY);
+     *         startTime = new StartTime(DEFAULT_START_TIME);
+     *         endTime = new EndTime(DEFAULT_END_TIME);
      */
     public LessonBuilder() {
         description = DEFAULT_DESCRIPTION;
         startDay = DEFAULT_START_DAY;
         startTime = DEFAULT_START_TIME;
         endTime = DEFAULT_END_TIME;
-
-        /**
-         * once the todos above are done we can rewrite this as
-         *         description = new Description(DEFAULT_DESCRIPTION);
-         *         startDay = new StartDay(DEFAULT_START_DAY);
-         *         startTime = new StartTime(DEFAULT_START_TIME);
-         *         endTime = new EndTime(DEFAULT_END_TIME);
-         */
     }
 
     /**
