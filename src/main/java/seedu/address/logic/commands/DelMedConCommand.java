@@ -4,13 +4,13 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.MedCon;
 import seedu.address.model.person.Nric;
+import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -49,32 +49,30 @@ public class DelMedConCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        Person person = model.fetchPersonIfPresent(new NricMatchesPredicate(nric))
+                .orElseThrow(() -> new CommandException(PATIENT_DOES_NOT_EXIST));
 
-        for (Person person : lastShownList) {
-            if (person.getNric().equals(this.nric)) {
-                Set<MedCon> updatedMedConSet = new HashSet<>(person.getMedCons());
+        if (person.getNric().equals(this.nric)) {
+            Set<MedCon> updatedMedConSet = new HashSet<>(person.getMedCons());
 
-                // check if the medical conditions to delete exist in the current set
-                for (MedCon medCon : medCons) {
-                    if (!updatedMedConSet.remove(medCon)) {
-                        throw new CommandException(String.format(MESSAGE_MEDCON_NOT_FOUND, medCon.value));
-                    }
+            // check if the medical conditions to delete exist in the current set
+            for (MedCon medCon : medCons) {
+                if (!updatedMedConSet.remove(medCon)) {
+                    throw new CommandException(String.format(MESSAGE_MEDCON_NOT_FOUND, medCon.value));
                 }
-
-                // create an edited person with the updated medical conditions
-                Person editedPerson = new Person(
-                        person.getName(), person.getPhone(), person.getEmail(),
-                        person.getNric(), person.getAddress(), person.getDateOfBirth(),
-                        person.getGender(), person.getAllergies(), person.getPriority(), person.getAppointments(),
-                        updatedMedConSet);
-
-                model.setPerson(person, editedPerson);
-                model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-                return new CommandResult(generateSuccessMessage(editedPerson));
             }
-        }
 
+            // create an edited person with the updated medical conditions
+            Person editedPerson = new Person(
+                    person.getName(), person.getPhone(), person.getEmail(),
+                    person.getNric(), person.getAddress(), person.getDateOfBirth(),
+                    person.getGender(), person.getAllergies(), person.getPriority(), person.getAppointments(),
+                    updatedMedConSet);
+
+            model.setPerson(person, editedPerson);
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(generateSuccessMessage(editedPerson));
+        }
         throw new CommandException(PATIENT_DOES_NOT_EXIST);
     }
 
