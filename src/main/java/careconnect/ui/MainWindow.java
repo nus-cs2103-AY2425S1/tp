@@ -135,7 +135,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, this::autocompleteCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -214,6 +214,23 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
+            resultDisplay.setFeedbackToUser(e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Autocompletes the command and returns the suggestion.
+     *
+     * @see Logic#autocompleteCommand(String)
+     */
+    private String autocompleteCommand(String commandText) throws CommandException {
+        try {
+            String autocompletedCommand = logic.autocompleteCommand(commandText);
+            logger.info("Autocompleted Command: " + autocompletedCommand);
+            return autocompletedCommand;
+        } catch (CommandException e) {
+            logger.info("An error occurred while autocompleting command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }

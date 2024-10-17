@@ -26,6 +26,15 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
+     * Provides an autocomplete suggestion based on the given command text
+     * @param commandText The partial command or input text for which to generate an autocomplete suggestion.
+     *                    Must not be {@code null} or empty.
+     * @return A string containing the most relevant autocomplete suggestion based on the given input.
+     * @throws CommandException If no valid autocomplete suggestion can be generated or if the input is invalid.
+     */
+    String autocompleteCommand(String commandText) throws CommandException;
+
+    /**
      * Returns the AddressBook.
      *
      * @see Model#getAddressBook()
