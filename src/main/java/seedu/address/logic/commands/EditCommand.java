@@ -109,7 +109,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Fees updatedFees = editPersonDescriptor.getFees().orElse(personToEdit.getFees());
-        ClassId updatedClassId = editPersonDescriptor.getClassId().orElse(personToEdit.getClassId()); 
+        ClassId updatedClassId = editPersonDescriptor.getClassId().orElse(personToEdit.getClassId());
         Set<MonthPaid> updatedMonthPaid = personToEdit.getMonthsPaid();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 

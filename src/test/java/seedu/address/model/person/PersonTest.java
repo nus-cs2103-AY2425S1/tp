@@ -101,7 +101,6 @@ public class PersonTest {
                 + ", fees=" + ALICE.getFees()
                 + ", monthsPaid=" + ALICE.getMonthsPaid()
                 + ", tags=" + ALICE.getTags() + "}";
-      
         assertEquals(expected, ALICE.toString());
     }
 }
