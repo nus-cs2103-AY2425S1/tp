@@ -38,7 +38,6 @@ public class ViewTuteeChartCommand extends Command {
         Arrays.sort(fullListArray, Comparator.comparing(Person -> Person.getHours().getHoursInt()));
         Tutee[] tuteeArray = Arrays.stream(fullListArray).filter(person -> person instanceof Tutee)
                 .map(person -> (Tutee) person).toArray(Tutee[]::new);
-        System.out.println(tuteeArray[0]);
         return new CommandResult(MESSAGE_SUCCESS, false, false,
                 true, tuteeArray);
     }
