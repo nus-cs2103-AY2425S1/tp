@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
 
+import java.sql.SQLOutput;
+
 public class PersonTest {
 
     @Test
@@ -88,7 +90,9 @@ public class PersonTest {
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", rsvp=" + ALICE.getRsvp() + ", tags=" + ALICE.getTags() + "}";
+                + ", email=" + ALICE.getEmail() + ", isRsvp=" + ALICE.getRsvp() + ", tags=" + ALICE.getTags() + "}";
+        System.out.println(ALICE.toString());
+        System.out.println(expected);
         assertEquals(expected, ALICE.toString());
     }
 }
