@@ -22,13 +22,25 @@ public class FilterCommandParserTest {
     }
 
     @Test
+    public void parse_missingTagPrefix_throwsParseException() {
+        assertParseFailure(parser, "friends family", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FilterCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_justPrefix_throwsParseException() {
+        assertParseFailure(parser, "t/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FilterCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_validArgs_returnsFilterCommand() {
         // no leading and trailing whitespaces
         FilterCommand expectedFilterCommand =
                 new FilterCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends", "family")));
-        assertParseSuccess(parser, "friends family", expectedFilterCommand);
+        assertParseSuccess(parser, "t/friends t/family", expectedFilterCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n friends \n \t family  \t", expectedFilterCommand);
+        assertParseSuccess(parser, " \n t/friends \n \t t/family  \t", expectedFilterCommand);
     }
 }
