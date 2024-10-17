@@ -24,7 +24,7 @@ public class DeletePropertyCommand extends Command {
             + "Parameters: CLIENT_NAME (case-insensitive)\n"
             + "Example: " + COMMAND_WORD + " n/Tan Wen Xuan";
 
-    public static final String MESSAGE_DELETE_PROPERTY_SUCCESS = "Sucessfully deleted property from %1$s";
+    public static final String MESSAGE_DELETE_PROPERTY_SUCCESS = "Successfully deleted property from %1$s";
 
     private final Name targetName;
 

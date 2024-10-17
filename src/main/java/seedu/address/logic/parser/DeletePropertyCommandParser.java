@@ -40,7 +40,7 @@ public class DeletePropertyCommandParser implements Parser<DeletePropertyCommand
         }
 
         try {
-            // Parse the name and return the DeleteClientProfileCommand
+            // Parse the name and return the DeletePropertyCommand
             Name name = ParserUtil.parseName(nameString);
             return new DeletePropertyCommand(name);
         } catch (ParseException pe) {
