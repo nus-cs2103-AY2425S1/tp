@@ -14,5 +14,5 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 * The project simulates an address book in the form of a desktop application ued for managing contact details.
   * It is **written in OOP fashion**. It provides a **reasonably well-written** code base.
   * It is **well-designed and documented**.
-* It is named `Murphy's List` (`ML` for short) because it was named after the medical prodigy `Sean Murphy` from the popular show `The Good Doctor` 
+* It is named `Murphy's List` (`ML` for short) because it was named after the medical prodigy `Sean Murphy` from the popular show `The Good Doctor`
 * For the detailed documentation of this project, see our **[Developer Guide](https://github.com/AY2425S1-CS2103T-W11-1a/tp/blob/master/docs/DeveloperGuide.md)**.

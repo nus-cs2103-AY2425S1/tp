@@ -26,11 +26,20 @@ public class Person {
     private final Address address;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
+    private Appointment appointment; // New appointment field
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Nric nric, Address address, Remark remark, Set<Tag> tags) {
+    public Person(
+            Name name,
+            Phone phone,
+            Email email,
+            Nric nric,
+            Address address,
+            Remark remark,
+            Set<Tag> tags,
+            Appointment appointment) {
         requireAllNonNull(name, phone, email, nric, address, tags);
         this.name = name;
         this.phone = phone;
@@ -39,6 +48,7 @@ public class Person {
         this.address = address;
         this.remark = remark;
         this.tags.addAll(tags);
+        this.appointment = appointment; // Appointment field initialized
     }
 
     public Name getName() {
@@ -59,6 +69,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
     }
 
     public Remark getRemark() {
@@ -107,13 +125,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && nric.equals(otherPerson.nric)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && Objects.equals(appointment, otherPerson.appointment); // Include appointment in equality check
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, nric, address, tags);
+        return Objects.hash(name, phone, email, nric, address, tags, appointment); // Include appointment in hashCode
     }
 
     @Override
@@ -126,7 +145,7 @@ public class Person {
                 .add("address", address)
                 .add("remark", remark)
                 .add("tags", tags)
+                .add("appointment", appointment) // Include appointment in toString
                 .toString();
     }
-
 }
