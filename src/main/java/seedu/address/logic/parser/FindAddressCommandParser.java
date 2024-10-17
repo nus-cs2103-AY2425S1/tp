@@ -19,14 +19,12 @@ public class FindAddressCommandParser implements Parser<FindAddressCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindAddressCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        String addressKeywords = args.trim();
+        if (addressKeywords.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindAddressCommand.MESSAGE_USAGE));
         }
 
-        String[] addressKeywords = trimmedArgs.split("\\s+");
-
-        return new FindAddressCommand(new AddressContainsKeywordsPredicate(Arrays.asList(addressKeywords)));
+        return new FindAddressCommand(new AddressContainsKeywordsPredicate(addressKeywords));
     }
 }
