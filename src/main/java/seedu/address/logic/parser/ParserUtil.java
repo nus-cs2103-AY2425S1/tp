@@ -2,16 +2,23 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.InvalidIdException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -21,6 +28,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_PATIENT_ID = "The patient id you have keyed in is invalid";
+    public static final String MESSAGE_INVALID_DOCTOR_ID = "The doctor id you have keyed in is invalid";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -36,6 +45,34 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code id} into an {@code Id} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws InvalidIdException if the specified patient id is invalid.
+     */
+    public static Id parsePatientId(String id) throws InvalidIdException {
+        String trimmedId = id.trim();
+        Patient patientWithId = Patient.getPatientWithId(trimmedId);
+        if (patientWithId == null) {
+            throw new InvalidIdException(MESSAGE_INVALID_PATIENT_ID);
+        }
+        return patientWithId.getId();
+    }
+
+    /**
+     * Parses {@code id} into an {@code Id} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws InvalidIdException if the specified doctor id is invalid.
+     */
+    public static Id parseDoctorId(String id) throws InvalidIdException {
+        String trimmedId = id.trim();
+        Doctor doctorWithId = Doctor.getDoctorWithId(trimmedId);
+        if (doctorWithId == null) {
+            throw new InvalidIdException(MESSAGE_INVALID_DOCTOR_ID);
+        }
+        return doctorWithId.getId();
+    }
+
+    /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -48,6 +85,30 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid or not in the expected format.
+     */
+    public static LocalDateTime parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        LocalDateTime time;
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        try {
+            time = LocalDateTime.parse(trimmedDate, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid date-time format, please use yyyy-MM-dd HH:mm.");
+        }
+
+        if (currentDateTime.isAfter(time)) {
+            throw new ParseException("Invalid time entered. The date and time can't be in the past!");
+        }
+        return time;
     }
 
     /**

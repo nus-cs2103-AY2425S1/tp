@@ -22,6 +22,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Id;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -150,6 +153,21 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonById(Id id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Patient getFilteredPatientById(ObservableList<Person> allPersons, Id id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Doctor getFilteredDoctorById(ObservableList<Person> allPersons, Id id) {
             throw new AssertionError("This method should not be called.");
         }
 
