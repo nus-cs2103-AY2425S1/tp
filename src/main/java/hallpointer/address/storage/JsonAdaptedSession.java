@@ -31,7 +31,7 @@ public class JsonAdaptedSession {
                               @JsonProperty("points") String points,
                               @JsonProperty("date") String date) {
         this.sessionName = sessionName;
-        this.points = points;
+        this.points = points.substring(0, points.indexOf(" points")).trim();
         this.date = date;
     }
 
