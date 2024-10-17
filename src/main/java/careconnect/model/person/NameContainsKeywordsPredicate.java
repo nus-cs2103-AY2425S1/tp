@@ -16,10 +16,16 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         this.keywords = keywords;
     }
 
+    /**
+     * condition that seach keyword is tested against
+     * @param person the input argument
+     * @return a boolean indicating if the test is passed
+     */
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsPartialWordIgnoreCase(person.getName().fullName, keyword));
+        return (keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsPartialWordIgnoreCase(person.getName().fullName, keyword))
+            );
     }
 
     @Override

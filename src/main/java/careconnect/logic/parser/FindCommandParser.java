@@ -1,11 +1,13 @@
 package careconnect.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Arrays;
 
 import careconnect.logic.Messages;
 import careconnect.logic.commands.FindCommand;
 import careconnect.logic.parser.exceptions.ParseException;
-import careconnect.model.person.NameContainsKeywordsPredicate;
+import careconnect.model.person.NameAndAddressContainsKeywordPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -20,6 +22,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
+        requireNonNull(args);
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -27,10 +30,31 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(
                     String.format(Messages.MESSAGE_TOO_SHORT_SEARCH, FindCommand.MESSAGE_USAGE));
         }
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ADDRESS);
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        String[] nameKeywords = {};
+        String[] addressKeywords = {};
+        if (!argMultimap.getValue(CliSyntax.PREFIX_NAME).isPresent()
+                && !argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).isPresent()) {
+            throw new ParseException(
+                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE)
+                );
+        }
+        if (argMultimap.getValue(CliSyntax.PREFIX_NAME).isPresent()) {
+            String nameString = argMultimap.getValue(CliSyntax.PREFIX_NAME).get();
+            nameKeywords = nameString.split("\\s+");
+        }
+        if (argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).isPresent()) {
+            String addressString = argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).get();
+            addressKeywords = addressString.split("\\s+");
+        }
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+
+        return new FindCommand(
+                new NameAndAddressContainsKeywordPredicate(Arrays.asList(nameKeywords), Arrays.asList(addressKeywords))
+                );
     }
 
 }
