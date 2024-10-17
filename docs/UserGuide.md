@@ -109,23 +109,26 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Finding persons by name or student ID: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons matching the specified criteria.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/ NAME_KEYWORDS] [id/ STUDENT_IDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is case-insensitive. e.g., `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g., `Hans Bo` will match `Bo Hans`.
+* Only full words will be matched for names. e.g., `Han` will not match `Hans`.
+* Student IDs must match exactly.
+* At least one of the optional prefixes must be provided.
+* Persons matching any of the criteria will be returned (i.e., `OR` search).
+  e.g., `find n/ Hans Bo id/ A1234567E` will return persons whose names contain `Hans` or `Bo`, or whose student ID is `A1234567E`.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/ John` returns persons with names containing `John`.
+* `find id/ A1234567E A2345678B` returns persons with student IDs `A1234567E` or `A2345678B`.
+* `find n/ alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find n/ alex david'](images/findAlexDavidResult.png)
+* `find n/ Alice id/ A1234567E` returns persons whose name contains `Alice` or whose student ID is `A1234567E`.
 
 ### Deleting a person : `delete`
 
