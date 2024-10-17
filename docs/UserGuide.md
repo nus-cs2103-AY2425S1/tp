@@ -109,11 +109,11 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons or groups by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons or groups whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]` or `find /g KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -127,6 +127,8 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+* `find /group Study Group returns all members of the group Study Group.`
+
 ### Adding a tag : `tag`
 
 Adds a tag to a specified person.
@@ -138,6 +140,7 @@ Format: `tag INDEX t/TAG`
 Deletes a tag of a specified person.
 
 Format: `untag INDEX t/TAG`
+
 
 ### Deleting a person : `delete`
 
@@ -152,6 +155,18 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Deleting a group : `deleteGroup`
+
+Deletes the specified Group from the address book.
+
+Format: `deleteGroup GROUPNAME`
+
+* Deletes the group given the specific `GROUPNAME`.
+* The group name refers to the name shown in the group list.
+
+Examples:
+* `groups` followed by `deleteGroup StudyGroup 1` deletes StudyGroup1
 
 ### Clearing all entries : `clear`
 

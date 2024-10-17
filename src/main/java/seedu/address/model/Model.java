@@ -117,6 +117,8 @@ public interface Model {
      */
     void addGroup(Group group);
 
+    void deleteGroup(Group groupToDelete);
+
     String groupsString();
 
     boolean hasGroupName(Group group);

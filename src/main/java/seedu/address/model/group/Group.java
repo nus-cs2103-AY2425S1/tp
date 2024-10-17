@@ -1,5 +1,7 @@
 package seedu.address.model.group;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -20,9 +22,10 @@ public class Group {
      * @throws NullPointerException if {@code groupName} or {@code members} is null.
      */
     public Group(String groupName, List<Person> members) {
-        if (groupName == null || members == null) {
-            throw new NullPointerException();
-        }
+
+        requireNonNull(groupName);
+        requireNonNull(members);
+
         this.groupName = new GroupName(groupName);
         this.members = members;
     }
@@ -57,5 +60,25 @@ public class Group {
             memberString.add(person.getName().fullName);
         }
         return String.format("[Group: %s, Members: %s]", groupName, memberString);
+    }
+
+    @Override
+    public boolean equals(Object other) throws ClassCastException {
+
+        requireNonNull(other);
+        // Check if the object is the same reference
+        if (this == other) {
+            return true;
+        }
+
+        // Check if the object is an instance of Group
+        if (!(other instanceof Group)) {
+            throw new ClassCastException();
+        }
+
+        // Cast the other object to Group and compare fields
+        Group otherGroup = (Group) other;
+        return this.groupName.equals(otherGroup.groupName)
+                && this.members.equals(otherGroup.members);
     }
 }
