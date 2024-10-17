@@ -50,8 +50,10 @@ public class ListExpiringPoliciesCommandTest {
 
         ListExpiringPoliciesCommand command = new ListExpiringPoliciesCommand();
         String expectedMessage = "The following policies are near expiry:\n\n"
-                + "Insuree phone: 94351253\nPolicy Type: Health\n"
-                + "Premium Amount: 250.00\nCoverage Amount: 15000.00\nExpiry Date: " + formattedExpiryDate + "\n\n";
+                + "Insuree name: Alice Pauline   |   "
+                + "Insuree phone: 94351253\nPolicy Type: Health   |   "
+                + "Premium Amount: 250.00\nCoverage Amount: 15000.00   |   Expiry Date: "
+                + formattedExpiryDate + "\n\n";
 
         assertCommandSuccess(command, modelWithExpiringPolicies, expectedMessage, modelWithExpiringPolicies);
     }
