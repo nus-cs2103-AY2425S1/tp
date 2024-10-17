@@ -8,6 +8,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,41 +23,57 @@ public class ExportCommandTest {
 
     private Model model;
     private Model expectedModel;
+    private Path filePath;
 
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        filePath = ExportCommand.FILE_PATH; // Use the Path from ExportCommand
     }
 
     @Test
-    public void execute_fileDoesNotExist_success() {
-        String path = ExportCommand.PATH;
-        File file = new File(path);
-        if (file.exists()) {
-            file.delete();
+    public void execute_fileDoesNotExist_success() throws IOException {
+        // Ensure the directory exists for the test
+        Files.createDirectories(filePath.getParent());
+        // Delete the file if it already exists before the test
+        if (Files.exists(filePath)) {
+            Files.delete(filePath);
         }
         assertCommandSuccess(new ExportCommand(), model, ExportCommand.MESSAGE_SUCCESS, expectedModel);
-        assertTrue(file.exists());
+        assertTrue(Files.exists(filePath));
     }
 
     @Test
     public void execute_typicalAddressBook_success() throws IOException {
-        String path = ExportCommand.PATH;
+        // Ensure the directory exists for the test
+        Files.createDirectories(filePath.getParent());
         assertCommandSuccess(new ExportCommand(), model, ExportCommand.MESSAGE_SUCCESS, expectedModel);
-        File exportedContacts = new File(path);
-        File expectedExportedContacts = new File("./src/test/data/CsvTest/ExpectedExportedContacts.csv");
 
-        String line;
-        String expectedLine;
-        FileReader fr1 = new FileReader(exportedContacts);
-        FileReader fr2 = new FileReader(expectedExportedContacts);
-        BufferedReader br1 = new BufferedReader(fr1);
-        BufferedReader br2 = new BufferedReader(fr2);
-        while ((expectedLine = br2.readLine()) != null) {
-            System.out.println(expectedLine);
-            line = br1.readLine();
-            assertTrue(line.equals(expectedLine));
+        // Verify the content of the exported CSV
+        Path expectedExportedContacts = Paths.get("./src/test/data/CsvTest/ExpectedExportedContacts.csv");
+
+        try (BufferedReader br1 = new BufferedReader(new FileReader(filePath.toFile()));
+             BufferedReader br2 = new BufferedReader(new FileReader(expectedExportedContacts.toFile()))) {
+
+            String line;
+            String expectedLine;
+
+            // Check if the expected file has all the lines
+            while ((expectedLine = br2.readLine()) != null) {
+                line = br1.readLine();
+                assertTrue(line != null && line.equals(expectedLine), "Mismatch at line: " + expectedLine);
+            }
+            // Ensure there are no extra lines in the exported file
+            assertTrue(br1.readLine() == null, "Exported file has extra lines.");
+        }
+    }
+
+    @Test
+    public void cleanup() throws IOException {
+        // Clean up the generated file after tests
+        if (Files.exists(filePath)) {
+            Files.delete(filePath);
         }
     }
 }
