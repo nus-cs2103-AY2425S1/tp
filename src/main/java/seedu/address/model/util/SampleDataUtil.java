@@ -13,11 +13,11 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
-
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
@@ -59,11 +59,11 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a set of class names containing the list of strings given.
+     * Returns a class set containing the list of strings given.
      */
     public static Set<String> getClassSet(String... strings) {
         return Arrays.stream(strings)
-                .collect(Collectors.toSet());
+            .map(String::trim)
+            .collect(Collectors.toSet());
     }
-
 }
