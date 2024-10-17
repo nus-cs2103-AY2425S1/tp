@@ -1,7 +1,7 @@
 ---
   layout: default.md
-  title: "User Guide"
-  pageNav: 3
+    title: "User Guide"
+    pageNav: 3
 ---
 
 # Talency User Guide
@@ -30,15 +30,15 @@ The codebase of Talency originates from AddressBook Level 3 (AB3) developed by C
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe p/98765432 e/johnd@example.com j/SWE123 t/A` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -52,13 +52,10 @@ The codebase of Talency originates from AddressBook Level 3 (AB3) developed by C
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
+    e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
+    e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -66,7 +63,7 @@ The codebase of Talency originates from AddressBook Level 3 (AB3) developed by C
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+  </box>
 
 ### Viewing help : `help`
 
@@ -81,11 +78,11 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL j/JOB_CODE_APPLIED_FOR [t/TAG]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL j/JOB_CODE_APPLIED_FOR t/TAG`
 
 <box type="tip" seamless>
 
-**Tip:** Only one interview stage tag will be attached to a contact at any point of time. 
+**Tip:** Only one interview stage tag will be attached to a contact at any point of time.
 
 Please refer to this table
 for list of valid tags:
@@ -102,75 +99,63 @@ for list of valid tags:
 
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com j/XYZ1010, t/N`
+* `add n/John Doe p/98765432 e/johnd@example.com j/XYZ1010 t/N`
 * `add n/Betsy Crowe t/BP e/betsycrowe@example.com j/AB1301 p/1234567`
 
 ### Listing persons based on attribute : `list`
 
 Shows a list of all persons or selected persons with certain attributes.
 
-Format: 
+Format:
 
 `list`
-`list j/JOB_APPLIED_FOR`
-`list t/TAG`
 
 * `list` shows the list of all persons in the address book.
-* `list j/JOB_APPLIED_FOR` filters the persons based on job code they appled for.
-* `list t/TAG` filters the persons based on their interview stage tag.
 
 Examples:
 * `list`
-* `list j/XYZ1234`
-* `list t/TP`
-* 
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE_APPLIED_FOR] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE_APPLIED_FOR] [t/TAG]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
+* At least one of the optional fields must be updated.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons 
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find FULL_NAME`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The order of the words matter. e.g. `Hans Bo` will only match `Hans Bo` and not `Bo Hans`
+* Only the name is searched.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find John Doe Mary Jane` returns `` and `John Doe Mary Jane`
+* `find alex yeoh` returns `Alex Yeoh`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
 
-Format: 
+Format:
 `delete INDEX`
 `delete n/NAME`
 `delete n/NAME n/PHONE_NUMBER`
 `delete n/NAME n/EMAIL`
 
 
-* Deletes the person at the specified `INDEX`, with a specified full name `NAME`, `NAME` and `PHONE_NUMBER`, or `NAME` 
+* Deletes the person at the specified `INDEX`, with a specified full name `NAME`, `NAME` and `PHONE_NUMBER`, or `NAME`
 * and `EMAIL`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -179,7 +164,7 @@ Format:
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `delete n/Betsy` will delete contact with the full name Betsy. 
+* `delete n/Betsy` will delete contact with the full name Betsy.
 * If there are two John Doe, one with `p/8834156` and another with `p/3810349`, type command
 * `delete n/John Doe p/8834156` to delete the former.
 
