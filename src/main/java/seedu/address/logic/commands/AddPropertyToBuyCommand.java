@@ -76,7 +76,7 @@ public class AddPropertyToBuyCommand extends Command {
         }
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, propertyToBuyToBeAdded));
     }
 
     @Override
