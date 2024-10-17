@@ -151,9 +151,10 @@ Delete all contacts from cher with contains **all** the specified tags.
 
 Format: `batch-delete t/TAG [t/TAG]...`
 
-![Batch delete example](images/ForBatchDeleteExample.png)
+
 
 Examples:
+![Batch delete example data](images/ForBatchDeleteExampleData.png)
 * `batch-delete t/friends` will delete both `Alex Yeoh` and `Bernice Yu`.
 * `batch-delete t/friends t/colleagues` will delete only `Bernice Yu`.
 

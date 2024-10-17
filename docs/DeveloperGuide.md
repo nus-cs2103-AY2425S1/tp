@@ -394,7 +394,8 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 **MSS**
 1. User enters a command to delete all contacts with specific tags.
 2. Cher will remove all contacts containing specified tags.
-3. Cher will show the contacts that have been removed.
+3. Cher will show the contacts that have been removed.<br>
+   Use case ends.
 
 **Extensions**
 * 1a. Cher detects error in user input.
