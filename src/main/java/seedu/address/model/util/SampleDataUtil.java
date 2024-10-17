@@ -44,22 +44,6 @@ public class SampleDataUtil {
         };
     }
 
-    public static Teacher[] getSampleTeachers() {
-        return new Teacher[] {
-            new Teacher(new Name("Alice Pauline"), new Gender("female"), new Phone("85355255"),
-                new Email("alice@example.com"), new Address("123, Jurong West Ave 6, #08-111"),
-                getTagSet("friends"), new Subject("Mathematics"), getClassSet("Class 1, Class 2")),
-
-            new Teacher(new Name("Bob Tan"), new Gender("male"), new Phone("91234567"),
-                new Email("bob@example.com"), new Address("456, Clementi Ave 3, #12-34"),
-                getTagSet("colleagues"), new Subject("Science"), getClassSet("Class 3, Class 4")),
-
-            new Teacher(new Name("Charlie Lim"), new Gender("male"), new Phone("98765432"),
-                new Email("charlie@example.com"), new Address("789, Bukit Timah Rd, #05-67"),
-                getTagSet("neighbours"), new Subject("History"), getClassSet("Class 5, Class 6"))
-        };
-    }
-
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
