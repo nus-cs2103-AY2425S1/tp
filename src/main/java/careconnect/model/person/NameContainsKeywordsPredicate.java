@@ -19,7 +19,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
     /**
      * condition that seach keyword is tested against
      * @param person the input argument
-     * @return
+     * @return a boolean indicating if the test is passed
      */
     @Override
     public boolean test(Person person) {
