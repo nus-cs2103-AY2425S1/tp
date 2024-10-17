@@ -59,19 +59,19 @@ public class PersonCard extends UiPart<Region> {
     private Label createTagLabel(Tag tag) {
         Label label = new Label(tag.toString());
         if (tag.tagCode.equalsIgnoreCase("N")) {
-            label.setStyle("-fx-background-color: #ff6666;"); // Red
+            label.setStyle("-fx-background-color: #bababa;"); // Red
         } else if (tag.tagCode.equalsIgnoreCase("TP")) {
-            label.setStyle("-fx-background-color: #66ccff;"); // Blue
+            label.setStyle("-fx-background-color: #ffd295;"); // Blue
         } else if (tag.tagCode.equalsIgnoreCase("TC")) {
-            label.setStyle("-fx-background-color: #ffcc66;"); // Orange
+            label.setStyle("-fx-background-color: #85e0ff;"); // Orange
         } else if (tag.tagCode.equalsIgnoreCase("BP")) {
-            label.setStyle("-fx-background-color: #ffcc66;"); // Orange
+            label.setStyle("-fx-background-color: #f6b1ff;"); // Orange
         } else if (tag.tagCode.equalsIgnoreCase("BC")) {
-            label.setStyle("-fx-background-color: #ffcc66;"); // Orange
+            label.setStyle("-fx-background-color: #bd9cff;"); // Orange
         } else if (tag.tagCode.equalsIgnoreCase("R")) {
-            label.setStyle("-fx-background-color: #ffcc66;"); // Orange
+            label.setStyle("-fx-background-color: #ff5858;"); // Orange
         } else {
-            label.setStyle("-fx-background-color: #cccccc;"); // Default gray
+            label.setStyle("-fx-background-color: #6fffb1;"); // Default gray
         }
         return label;
     }

@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
             + "Parameters:\nINDEX (must be a positive integer) OR "
             + "n/NAME OR "
-            + "n/NAME e/EMAIl"
+            + "n/NAME e/EMAIL OR "
             + "n/NAME p/PHONE\n"
             + "Example:\n" + COMMAND_WORD + " 1 OR "
             + COMMAND_WORD + " n/John Doe OR "
