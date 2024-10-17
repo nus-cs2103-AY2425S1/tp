@@ -1,17 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Meeting;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
@@ -41,16 +39,10 @@ public class DeleteScheduleCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
-        //Change to schedule
-        //Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         Meeting meetingToDelete = lastShownList.get(targetIndex.getZeroBased());
 
-        //Change to schedule model - Delete specified event at the given schedule
-        //model.deletePerson(personToDelete);
         model.deleteMeeting(meetingToDelete);
 
-        //Need to add format for schedule
-        //Replace constant with Messages.format(Schedule) once done
         return new CommandResult(String.format(MESSAGE_DELETE_SCHEDULE_SUCCESS,
                 meetingToDelete.getMeetingName(), meetingToDelete.getMeetingDate().toString(),
                 meetingToDelete.getMeetingTime().toString()));
