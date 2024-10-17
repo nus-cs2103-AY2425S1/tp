@@ -282,7 +282,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * has a need to generate and visualize reports (e.g., volunteer hours, visit frequency) in a simple and efficient way
 
 **Value proposition**: Manage volunteering _tutor_ and _tutee_ records, site visits, and scheduling faster than a typical 
-    mouse/GUI-driven app, while efficiently tracking and enhancing volunteer engagement.
+mouse/GUI-driven app, while efficiently tracking and enhancing volunteer engagement.
 
 
 ### User stories
