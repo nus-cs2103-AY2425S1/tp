@@ -10,9 +10,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.core.dateformatter.DateFormatter;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.policy.EducationPolicy;
-import seedu.address.model.policy.HealthPolicy;
-import seedu.address.model.policy.LifePolicy;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyType;
 
@@ -66,20 +63,11 @@ class JsonAdaptedPolicy {
             throw new IllegalValueException(Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
         }
 
-        try {
-            switch (modelPolicyType) {
-            case LIFE:
-                return new LifePolicy(premiumAmount, coverageAmount, expiryDate);
-            case HEALTH:
-                return new HealthPolicy(premiumAmount, coverageAmount, expiryDate);
-            case EDUCATION:
-                return new EducationPolicy(premiumAmount, coverageAmount, expiryDate);
-            default:
-                throw new RuntimeException("Policy type " + modelPolicyType + " is not accounted for.");
-            }
-        } catch (IllegalArgumentException e) {
+        if (premiumAmount < 0 || coverageAmount < 0) {
             throw new IllegalValueException(Policy.AMOUNT_MESSAGE_CONSTRAINTS);
         }
+
+        return Policy.makePolicy(modelPolicyType, premiumAmount, coverageAmount, expiryDate);
     }
 
 }

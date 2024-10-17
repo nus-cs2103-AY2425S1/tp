@@ -1,6 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_COVERAGE_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_EXPIRY_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_PREMIUM_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -24,13 +29,18 @@ public class AddPolicyCommand extends Command {
             + ": Add the specified policy to the person identified "
             + "by the index number used in the last person listing. \n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "pt/[POLICY_TYPE]\n"
+            + PREFIX_POLICY_TYPE + "POLICY_TYPE "
+            + "[" + PREFIX_POLICY_PREMIUM_AMOUNT + "PREMIUM_AMOUNT] "
+            + "[" + PREFIX_POLICY_COVERAGE_AMOUNT + "COVERAGE_AMOUNT] "
+            + "[" + PREFIX_POLICY_EXPIRY_DATE + "EXPIRY_DATE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "pt/life";
-    public static final String POLICY_ADD_PERSON_SUCCESS = "Added Policy: %1$s";
+            + PREFIX_POLICY_TYPE + "life "
+            + PREFIX_POLICY_COVERAGE_AMOUNT + "4000.00 "
+            + PREFIX_POLICY_EXPIRY_DATE + "12/23/2024";
+    public static final String POLICY_ADD_PERSON_SUCCESS = "Added Policy:\n\n%1$s";
 
     private final Index index;
-    private final PolicySet policies;
+    private final Policy policy;
 
     /**
      * Creates an AddPolicyCommand to add the specified {@code PolicySet} to the client.
@@ -38,11 +48,10 @@ public class AddPolicyCommand extends Command {
      * @param index of the client in the filtered client list to add policy.
      * @param policies the set of policies to be added.
      */
-    public AddPolicyCommand(Index index, PolicySet policies) {
-        requireNonNull(index, "Index cannot be null.");
-        requireNonNull(policies, "Policies cannot be null.");
+    public AddPolicyCommand(Index index, Policy policy) {
+        requireAllNonNull(index, policy);
         this.index = index;
-        this.policies = policies;
+        this.policy = policy;
     }
 
     @Override
@@ -50,48 +59,25 @@ public class AddPolicyCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-
         if (index.getZeroBased() >= model.getFilteredPersonList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        PolicySet personPolicies = personToEdit.getPolicySet();
 
-
-        PolicySet editedPolicySet = updatePolicies(policies, personToEdit.getPolicySet());
-
+        if (!personPolicies.add(policy)) {
+            throw new CommandException(MESSAGE_DUPLICATES);
+        }
 
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), editedPolicySet);
-
+                personToEdit.getAddress(), personToEdit.getTags(), personPolicies);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-
-        return new CommandResult(String.format(POLICY_ADD_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(POLICY_ADD_PERSON_SUCCESS, policy.toString()));
     }
-
-    /**
-     * Adds policies to the person's policy set. Throws a CommandException if any of the policies already exist.
-     *
-     * @param policiesToAdd The set of policies to add.
-     * @param existingPolicies The person's current policy set.
-     * @return A new PolicySet with the added policies.
-     * @throws CommandException if there are duplicate policies.
-     */
-    private PolicySet updatePolicies(PolicySet policiesToAdd, PolicySet existingPolicies) throws CommandException {
-        PolicySet updatedPolicies = new PolicySet(); // Create a new instance
-        updatedPolicies.addAll(existingPolicies);
-        for (Policy policy : policiesToAdd) {
-            if (updatedPolicies.contains(policy.getType())) {
-                throw new CommandException(MESSAGE_DUPLICATES);
-            }
-            updatedPolicies.add(policy);
-        }
-        return updatedPolicies;
-    }
-
 
     @Override
     public boolean equals(Object other) {
@@ -106,6 +92,6 @@ public class AddPolicyCommand extends Command {
 
         AddPolicyCommand apc = (AddPolicyCommand) other;
         return index.equals(apc.index)
-                && policies.equals(apc.policies);
+                && policy.equals(apc.policy);
     }
 }

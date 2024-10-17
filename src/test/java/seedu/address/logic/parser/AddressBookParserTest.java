@@ -118,9 +118,8 @@ public class AddressBookParserTest {
         AddPolicyCommand command = (AddPolicyCommand) parser.parseCommand(
                 AddPolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
                 + " pt/life");
-        PolicySet policies = new PolicySet();
-        policies.add(new LifePolicy());
-        assertEquals(new AddPolicyCommand(INDEX_FIRST_PERSON, policies), command);
+        LifePolicy life = new LifePolicy();
+        assertEquals(new AddPolicyCommand(INDEX_FIRST_PERSON, life), command);
     }
     @Test
     public void parseCommand_updatePolicy() throws Exception {
@@ -130,7 +129,6 @@ public class AddressBookParserTest {
                 UpdatePolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
                         + " " + PREFIX_POLICY_TYPE + "life");
         PolicySet policies = new PolicySet();
-        policies.add(new LifePolicy());
         assertEquals(new UpdatePolicyCommand(INDEX_FIRST_PERSON, policies), command);
     }
     @Test

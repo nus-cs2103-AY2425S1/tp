@@ -35,7 +35,7 @@ public class UpdatePolicyCommandParser implements Parser<UpdatePolicyCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdatePolicyCommand.MESSAGE_USAGE), ive);
         }
 
-        PolicySet policySet = ParserUtil.parsePolicies(argMultimap.getAllValues(PREFIX_POLICY_TYPE));
-        return new UpdatePolicyCommand(index, policySet);
+        // TODO: Add logic
+        return new UpdatePolicyCommand(index, new PolicySet());
     }
 }

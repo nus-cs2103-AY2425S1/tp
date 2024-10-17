@@ -29,6 +29,28 @@ public class PolicyTest {
     }
 
     @Test
+    public void makePolicy_returnCorrectPolicy() {
+        final double premiumAmount = 400.0;
+        final double coverageAmount = 4000.0;
+        final LocalDate expiryDate = LocalDate.now();
+
+        // return LifePolicy
+        Policy expected = new LifePolicy(premiumAmount, coverageAmount, expiryDate);
+        Policy actual = Policy.makePolicy(PolicyType.LIFE, premiumAmount, coverageAmount, expiryDate);
+        assertEquals(expected, actual);
+
+        // return HealthPolicy
+        expected = new HealthPolicy(premiumAmount, coverageAmount, expiryDate);
+        actual = Policy.makePolicy(PolicyType.HEALTH, premiumAmount, coverageAmount, expiryDate);
+        assertEquals(expected, actual);
+
+        // return EducationPolicy
+        expected = new EducationPolicy(premiumAmount, coverageAmount, expiryDate);
+        actual = Policy.makePolicy(PolicyType.EDUCATION, premiumAmount, coverageAmount, expiryDate);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void getters_returnCorrectValues() {
         final double premiumAmount = 100;
         final double coverageAmount = 200;
