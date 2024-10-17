@@ -25,7 +25,7 @@ public class DeleteEventCommand extends DeleteCommand {
             + "Example: " + COMMAND_WORD + " " + PREFIX_EVENT + "1";
 
     public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted Event: %1$s";
-    public static final String MESSAGE_DELETE_EVENT_ASSOCIATED_FAILURE =
+    public static final String MESSAGE_DELETE_EVENT_FAILED_DUE_TO_EXISTING_ASSOCIATIONS =
         "Deletion failed as vendors are assigned to Event: %1$s";
 
     /**
@@ -53,7 +53,7 @@ public class DeleteEventCommand extends DeleteCommand {
         try {
             model.deleteEvent(eventToDelete);
         } catch (AssociationDeleteException ae) {
-            throw new CommandException(String.format(MESSAGE_DELETE_EVENT_ASSOCIATED_FAILURE,
+            throw new CommandException(String.format(MESSAGE_DELETE_EVENT_FAILED_DUE_TO_EXISTING_ASSOCIATIONS,
                 Messages.format(eventToDelete)));
         }
 

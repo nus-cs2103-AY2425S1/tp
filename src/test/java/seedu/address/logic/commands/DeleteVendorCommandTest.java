@@ -88,7 +88,7 @@ public class DeleteVendorCommandTest {
 
         DeleteVendorCommand deleteCommand = new DeleteVendorCommand(INDEX_FIRST_VENDOR);
 
-        String expectedMessage = String.format(DeleteVendorCommand.MESSAGE_DELETE_VENDOR_ASSOCIATED_FAILURE,
+        String expectedMessage = String.format(DeleteVendorCommand.DELETE_VENDOR_FAILED_DUE_TO_EXISTING_ASSOCIATIONS,
                 Messages.format(vendorToDelete));
 
         assertCommandFailure(deleteCommand, model, expectedMessage);

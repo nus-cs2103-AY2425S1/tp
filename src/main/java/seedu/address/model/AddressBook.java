@@ -113,10 +113,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
-     * @throws VendorDeleteException if the vendor is not deletable (e.g. it is associated with an event)
+     * @throws AssociationDeleteException if the vendor is not deletable (e.g. it is associated with an event)
      */
     public void removeVendor(Vendor key) throws AssociationDeleteException {
-        if (getAssociatedEvents(key).size() > 0) {
+        final boolean isVendorAssignedToAnyEvent = getAssociatedEvents(key).size() > 0;
+        if (isVendorAssignedToAnyEvent) {
             throw new AssociationDeleteException();
         }
         vendors.remove(key);
@@ -203,10 +204,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
-     * @throws EventDeleteException if the event is not deletable (e.g. it is associated with a vendor)
+     * @throws AssociationDeleteException if the event is not deletable (e.g. it is associated with a vendor)
      */
     public void removeEvent(Event key) throws AssociationDeleteException {
-        if (getAssociatedVendors(key).size() > 0) {
+        final boolean isEventAssignedToAnyVendor = getAssociatedVendors(key).size() > 0;
+        if (isEventAssignedToAnyVendor) {
             throw new AssociationDeleteException();
         }
         events.remove(key);

@@ -87,7 +87,8 @@ public class DeleteEventCommandTest {
         model.assignVendorToEvent(vendorToAssign, eventToDelete);
         DeleteEventCommand deleteCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
 
-        String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_ASSOCIATED_FAILURE,
+        String expectedMessage = String.format(
+            DeleteEventCommand.MESSAGE_DELETE_EVENT_FAILED_DUE_TO_EXISTING_ASSOCIATIONS,
                 Messages.format(eventToDelete));
 
         assertCommandFailure(deleteCommand, model, expectedMessage);
