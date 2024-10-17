@@ -46,6 +46,7 @@ public class Patient extends Person {
      * @param patientId The Id object of the patient to search for.
      * @return The Patient object if found, or null if no matching patient is found.
      */
+
     public static Patient getPatientWithId(Id patientId) {
         ArrayList<Patient> allPatients = getPatients();
         for (Patient patient : allPatients) {
@@ -53,7 +54,7 @@ public class Patient extends Person {
                 return patient;
             }
         }
-        return null; // Return null if no matching patient is found
+        return null;
     }
 
     /**

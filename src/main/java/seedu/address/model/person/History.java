@@ -67,6 +67,24 @@ public class History {
     }
 
     /**
+     * Retrieves a formatted string of all appointments in the database.
+     * The string includes details of each appointment such as the date and
+     * any associated information stored in the Appointment object.
+     *
+     * @return A string representation of all appointments in the database.
+     */
+    public static String getHistoryDataBase() {
+        StringBuilder sb = new StringBuilder("All appointments in the database:\n");
+        for (Map.Entry<LocalDateTime, Appointment> entry : appointmentDatabase.entrySet()) {
+            LocalDateTime date = entry.getKey();
+            Appointment appointment = entry.getValue();
+            sb.append(formatAppointment(date, appointment)).append("\n");
+        }
+        return sb.toString();
+    }
+
+
+    /**
      * Adds a new appointment to the shared appointment database and the patient's history.
      *
      * @param date The date and time of the appointment.
@@ -138,18 +156,16 @@ public class History {
      *
      * @param date The date and time of the appointment.
      * @param patientId The ID of the patient.
-     * @param doctorId The ID of the doctor.
      * @return The appointment details.
      * @throws AppNotFoundException if no appointment is found for the given patient and doctor.
      */
-    public Appointment getOneAppointmentDetail(LocalDateTime date, Id patientId, Id doctorId)
+    public Appointment getOneAppointmentDetail(LocalDateTime date, Id patientId)
             throws AppNotFoundException {
         if (!appointments.contains(date)) {
             throw new AppNotFoundException("No appointment found in this patient's history for the given date.");
         }
         Appointment appointment = appointmentDatabase.get(date);
-        if (appointment == null || !appointment.getPatientId().equals(patientId)
-                || !appointment.getDoctorId().equals(doctorId)) {
+        if (appointment == null || !appointment.getPatientId().equals(patientId)) {
             throw new AppNotFoundException("No such appointment found for the given patient and doctor.");
         }
         return appointment;
@@ -310,15 +326,18 @@ public class History {
     /**
      * Returns a string representation of all appointments in the database.
      *
-     * @return A string listing all appointments.
+     * @return A string listing all appointments for the patient.
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("All appointments in the database:\n");
-        for (Map.Entry<LocalDateTime, Appointment> entry : appointmentDatabase.entrySet()) {
-            LocalDateTime date = entry.getKey();
-            Appointment appointment = entry.getValue();
-            sb.append(formatAppointment(date, appointment)).append("\n");
+        StringBuilder sb = new StringBuilder("Appointments for this patient:\n");
+
+        // Iterate over the list of appointments for this specific patient
+        for (LocalDateTime date : appointments) {
+            Appointment appointment = appointmentDatabase.get(date);
+            if (appointment != null) {
+                sb.append(formatAppointment(date, appointment)).append("\n");
+            }
         }
         return sb.toString();
     }
