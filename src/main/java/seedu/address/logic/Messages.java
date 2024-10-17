@@ -19,6 +19,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_ID = "Invalid Id entered! Check the id that you have entered!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_GET_ID = "The id of the person that you are finding is: %1$d";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
