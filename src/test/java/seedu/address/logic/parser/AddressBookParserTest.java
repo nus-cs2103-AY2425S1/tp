@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddConcertCommand;
+import seedu.address.logic.commands.AddConcertContactCommand;
 import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteConcertCommand;
@@ -26,7 +27,6 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.commons.NameContainsKeywordsPredicate;
@@ -90,9 +90,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_link() throws Exception {
-        LinkCommand command = (LinkCommand) parser.parseCommand(LinkCommand.COMMAND_WORD + " "
+        AddConcertContactCommand command = (AddConcertContactCommand) parser
+                .parseCommand(AddConcertContactCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_CONCERT + INDEX_FIRST_CONCERT.getOneBased());
-        assertEquals(new LinkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_CONCERT), command);
+        assertEquals(new AddConcertContactCommand(INDEX_FIRST_PERSON, INDEX_FIRST_CONCERT), command);
     }
 
     @Test

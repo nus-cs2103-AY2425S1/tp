@@ -17,9 +17,9 @@ import seedu.address.model.person.Person;
 /**
  * Links an existing person in the address book to an existing Concert
  */
-public class LinkCommand extends Command {
+public class AddConcertContactCommand extends Command {
 
-    public static final String COMMAND_WORD = "link";
+    public static final String COMMAND_WORD = "addcc";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": links the person identified "
             + "by the index number used in the displayed person list to the concert identified by the"
@@ -29,6 +29,8 @@ public class LinkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_CONCERT + "1";
 
     public static final String MESSAGE_LINK_PERSON_SUCCESS = "Linked Person: %1$s to Concert: %2$s";
+    public static final String MESSAGE_DUPLICATE_CONCERTCONTACT =
+            "This ConcertContact already exists in the address book";
 
     private final Index indexP;
     private final Index indexC;
@@ -37,7 +39,7 @@ public class LinkCommand extends Command {
      * @param index1 of the person in the person list to link
      * @param index2 of the concert in the concert list
      */
-    public LinkCommand(Index index1, Index index2) {
+    public AddConcertContactCommand(Index index1, Index index2) {
         requireNonNull(index1);
         requireNonNull(index2);
 
@@ -64,6 +66,11 @@ public class LinkCommand extends Command {
 
         ConcertContact linkedPerson = new ConcertContact(personToLink, concert);
 
+        if (model.hasConcertContact(linkedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CONCERTCONTACT);
+        }
+
+        model.addConcertContact(linkedPerson);
         return new CommandResult(String.format(MESSAGE_LINK_PERSON_SUCCESS, Messages.format(personToLink),
                 Messages.format(concert)));
     }
@@ -75,13 +82,13 @@ public class LinkCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof LinkCommand)) {
+        if (!(other instanceof AddConcertContactCommand)) {
             return false;
         }
 
-        LinkCommand otherLinkCommand = (LinkCommand) other;
-        return indexP.equals(otherLinkCommand.indexP)
-                && indexC.equals(otherLinkCommand.indexC);
+        AddConcertContactCommand otherAddConcertContactCommand = (AddConcertContactCommand) other;
+        return indexP.equals(otherAddConcertContactCommand.indexP)
+                && indexC.equals(otherAddConcertContactCommand.indexC);
     }
 
     @Override
