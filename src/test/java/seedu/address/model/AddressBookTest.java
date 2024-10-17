@@ -7,9 +7,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.FLORIST;
-import static seedu.address.testutil.TypicalPersons.WEDDING_ONE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTags.FLORIST;
+import static seedu.address.testutil.TypicalWeddings.AMY_WEDDING;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -54,7 +54,7 @@ public class AddressBookTest {
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         List<Tag> tags = Arrays.asList(FLORIST);
-        List<Wedding> weddings = Arrays.asList(WEDDING_ONE);
+        List<Wedding> weddings = Arrays.asList(AMY_WEDDING);
         AddressBookStub newData = new AddressBookStub(newPersons, tags, weddings);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));

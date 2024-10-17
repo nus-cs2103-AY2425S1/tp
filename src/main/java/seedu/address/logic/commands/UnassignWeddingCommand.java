@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_REMOVE_WEDDING_SUCCESS;
 import static seedu.address.logic.Messages.MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT;
 
 import java.util.HashSet;
@@ -19,7 +20,6 @@ import seedu.address.model.wedding.Wedding;
  */
 public class UnassignWeddingCommand extends Command {
     public static final String COMMAND_WORD = "unassign-wedding";
-    public static final String MESSAGE_REMOVE_WEDDING_SUCCESS = "Removed wedding(s) %1$s from %2$s.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes one or multiple weddings from the person identified "
@@ -69,10 +69,6 @@ public class UnassignWeddingCommand extends Command {
         Set<Wedding> updatedWeddings = new HashSet<>(personToEdit.getWeddings());
 
         if (personToEdit.getWeddings().isEmpty()) {
-            throw new CommandException(MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
-        }
-
-        if (weddingsToRemove.isEmpty()) {
             throw new CommandException(MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
         }
 
