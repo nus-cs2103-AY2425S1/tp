@@ -35,7 +35,7 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ATTENDANCE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE, PREFIX_ATTENDANCE);
         if (!argMultimap.getValue(PREFIX_DATE).isPresent() || !argMultimap.getValue(PREFIX_ATTENDANCE).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE));
         }
