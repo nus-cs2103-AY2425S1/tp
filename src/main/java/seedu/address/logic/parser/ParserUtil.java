@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_POLICY_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_PAYMENT_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_START_DATE;
@@ -187,23 +189,27 @@ public class ParserUtil {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(trimmedPolicy, PREFIX_POLICY_NAME, PREFIX_POLICY_START_DATE,
-                        PREFIX_POLICY_END_DATE);
+                        PREFIX_POLICY_END_DATE, PREFIX_NEXT_PAYMENT_DATE, PREFIX_PAYMENT_AMOUNT);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_POLICY_NAME, PREFIX_POLICY_START_DATE, PREFIX_POLICY_END_DATE)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_POLICY_NAME, PREFIX_POLICY_START_DATE,
+                PREFIX_POLICY_END_DATE, PREFIX_NEXT_PAYMENT_DATE, PREFIX_PAYMENT_AMOUNT)) {
             throw new ParseException(String.format(MESSAGE_INVALID_POLICY_FORMAT));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POLICY_NAME, PREFIX_POLICY_START_DATE,
-                PREFIX_POLICY_END_DATE);
+                PREFIX_POLICY_END_DATE, PREFIX_NEXT_PAYMENT_DATE, PREFIX_PAYMENT_AMOUNT);
 
         String nameString = argMultimap.getValue(PREFIX_POLICY_NAME).get();
         String startDateString = argMultimap.getValue(PREFIX_POLICY_START_DATE).get();
         String endDateString = argMultimap.getValue(PREFIX_POLICY_END_DATE).get();
+        String paydateString = argMultimap.getValue(PREFIX_NEXT_PAYMENT_DATE).get();
+        String paymentAmount = argMultimap.getValue(PREFIX_PAYMENT_AMOUNT).get();
+        String insurancePayment = paydateString + " " + paymentAmount;
 
-        if (!Policy.isValidPolicy(nameString, startDateString, endDateString)) {
+        if (!Policy.isValidPolicy(nameString, startDateString, endDateString, insurancePayment)) {
             throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
         }
-        return new Policy(nameString, startDateString, endDateString);
+        return new Policy(nameString, startDateString, endDateString, insurancePayment);
     }
 
     /**

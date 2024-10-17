@@ -19,6 +19,7 @@ public class Policy {
     private final String policyName;
     private final LocalDate startDate;
     private final LocalDate endDate;
+    private final Payment payment;
 
     /**
      * Constructs a {@code Policy}.
@@ -27,12 +28,12 @@ public class Policy {
      * @param startDateStr Start date of the policy.
      * @param endDateStr End date of the policy.
      */
-    public Policy(String policyName, String startDateStr, String endDateStr) {
-        checkArgument(isValidPolicy(policyName, startDateStr, endDateStr), MESSAGE_CONSTRAINTS);
-
+    public Policy(String policyName, String startDateStr, String endDateStr, String insurancePayment) {
+        checkArgument(isValidPolicy(policyName, startDateStr, endDateStr, insurancePayment), MESSAGE_CONSTRAINTS);
         this.policyName = policyName.trim();
         this.startDate = parseDate(startDateStr);
         this.endDate = parseDate(endDateStr);
+        this.payment = new Payment(insurancePayment);
     }
 
     /**
@@ -48,10 +49,12 @@ public class Policy {
     /**
      * Returns true if the given policy details are valid.
      */
-    public static boolean isValidPolicy(String policyName, String startDateStr, String endDateStr) {
+    public static boolean isValidPolicy(String policyName, String startDateStr, String endDateStr,
+                                        String payment) {
         requireNonNull(policyName);
         requireNonNull(startDateStr);
         requireNonNull(endDateStr);
+        requireNonNull(payment);
 
         // Check policyName is non-empty
         if (policyName.trim().isEmpty()) {
@@ -63,16 +66,27 @@ public class Policy {
             LocalDate startDate = LocalDate.parse(startDateStr, DATE_FORMATTER);
             LocalDate endDate = LocalDate.parse(endDateStr, DATE_FORMATTER);
 
-            return !endDate.isBefore(startDate);
+            if (endDate.isBefore(startDate) || !Payment.isValidInsurancePayment(payment)) {
+                return false;
+            }
+            return true;
+
         } catch (DateTimeParseException e) {
             return false;
         }
+
+    }
+
+    public String getPolicyName() {
+        return policyName;
     }
 
     @Override
     public int hashCode() {
-        return policyName.hashCode() + startDate.hashCode() + endDate.hashCode();
+        return policyName.hashCode() + startDate.hashCode()
+                + endDate.hashCode() + payment.hashCode();
     }
+
 
     @Override
     public boolean equals(Object other) {
@@ -80,11 +94,12 @@ public class Policy {
                 || (other instanceof Policy
                 && policyName.equals(((Policy) other).policyName)
                 && startDate.equals(((Policy) other).startDate)
-                && endDate.equals(((Policy) other).endDate));
+                && endDate.equals(((Policy) other).endDate)
+                && payment.equals(((Policy) other).payment));
     }
 
     @Override
     public String toString() {
-        return policyName + " (" + startDate + " to " + endDate + ")";
+        return policyName + " (" + startDate + " to " + endDate + ")\nInsurance Payment: " + payment.toString();
     }
 }

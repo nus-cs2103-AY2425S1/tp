@@ -72,6 +72,33 @@ public class Person {
         return birthday;
     }
 
+    /**
+     * Assigns a policy to the list of policies.
+     *
+     * @param policy the policy to be assigned
+     * @return true if the policy was successfully added, false if the policy already exists
+     */
+    public boolean assignPolicy(Policy policy) {
+        if (policies.contains(policy)) {
+            return false;
+        }
+        policies.add(policy);
+        return true;
+    }
+
+    /**
+     * Returns a string representation of all assigned policies.
+     *
+     * @return a string containing the details of each policy, separated by new lines
+     */
+    public String getPoliciesString() {
+        StringBuilder sb = new StringBuilder();
+        for (Policy policy : policies) {
+            sb.append(policy.toString()).append("\n");
+        }
+        return sb.toString();
+    }
+
 
 
     /**
@@ -79,6 +106,20 @@ public class Person {
      */
     public static Comparator<Person> getNameComparator() {
         return Comparator.comparing(person -> person.getName().fullName.toLowerCase());
+    }
+
+    /**
+     * Returns a comparator that compares persons by appointment date in chronological order.
+     */
+    public static Comparator<Person> getAppointmentDateComparator() {
+        return Comparator.comparing(person -> person.getAppointment().value);
+    }
+
+    /**
+     * Returns a comparator that compares persons by birthday in chronological order.
+     */
+    public static Comparator<Person> getBirthdayComparator() {
+        return Comparator.comparing(person -> person.getBirthday().value);
     }
 
     /**
@@ -142,14 +183,13 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && birthday.equals(otherPerson.birthday)
-                && policies.equals(otherPerson.policies);
+                && birthday.equals(otherPerson.birthday);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, birthday, appointment, policies);
+        return Objects.hash(name, phone, email, address, tags, birthday, appointment);
     }
 
     @Override
