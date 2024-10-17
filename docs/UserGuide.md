@@ -137,7 +137,7 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]
 >
 > **Input**: `edit 2 n/Betsy Crower`
 >
-> **Output**:  
+> **Output**:
 
 #### Failed Execution
 

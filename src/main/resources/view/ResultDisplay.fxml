@@ -25,4 +25,5 @@
                -fx-border-radius: 8;
                -fx-padding: 12;"
           styleClass="result-display" />
+
 </StackPane>
