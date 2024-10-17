@@ -63,13 +63,13 @@ public class AddressBookParserTest {
     }
 
     // will add back in v1.4
-    //    @Test
-    //    public void parseCommand_find() throws Exception {
-    //        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-    //        FindCommand command = (FindCommand) parser.parseCommand(
-    //                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-    //        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
-    //    }
+//    @Test
+//    public void parseCommand_find() throws Exception {
+//        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+//        FindCommand command = (FindCommand) parser.parseCommand(
+//                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+//        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+//    }
 
     @Test
     public void parseCommand_help() throws Exception {
