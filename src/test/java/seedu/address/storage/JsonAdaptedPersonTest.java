@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -17,7 +16,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.ClassId;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Fees;
-import seedu.address.model.person.MonthsPaid;
+import seedu.address.model.person.MonthPaid;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 
@@ -29,7 +28,6 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_CLASS_ID = "-1";
     private static final String INVALID_FEES = "-300";
-    private static final String INVALID_MONTHS_PAID = "123";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -37,7 +35,9 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final String VALID_CLASS_ID = BENSON.getClassId().toString();
     private static final String VALID_FEES = BENSON.getFees().toString();
-    private static final String VALID_MONTHS_PAID = BENSON.getMonthsPaid().toString();
+    private static final List<JsonAdaptedMonthPaid> VALID_MONTHS_PAID = BENSON.getMonthsPaid().stream()
+            .map(JsonAdaptedMonthPaid::new)
+            .collect(Collectors.toList());
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
@@ -131,15 +131,12 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_nullFees_success() {
+    public void toModelType_nullFees_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, null, VALID_CLASS_ID,
                         VALID_MONTHS_PAID, VALID_TAGS);
-        try {
-            assert person.toModelType().getFees().value.isEmpty();
-        } catch (Exception e) {
-            fail();
-        }
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Fees.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
@@ -152,15 +149,12 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_nullClassId_success() {
+    public void toModelType_nullClassId_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_FEES, null,
                         VALID_MONTHS_PAID, VALID_TAGS);
-        try {
-            assert person.toModelType().getClassId().value.isEmpty();
-        } catch (Exception e) {
-            fail();
-        }
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ClassId.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
@@ -171,25 +165,23 @@ public class JsonAdaptedPersonTest {
         String expectedMessage = ClassId.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
-
     @Test
-    public void toModelType_nullMonthsPaid_success() {
+    public void toModelType_invalidTags_throwsIllegalVsdfalueException() {
+        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
+        invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_FEES, VALID_CLASS_ID,
-                        null, VALID_TAGS);
-        try {
-            assert person.toModelType().getMonthsPaid().value.isEmpty();
-        } catch (Exception e) {
-            fail();
-        }
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_FEES,
+                        VALID_CLASS_ID, VALID_MONTHS_PAID, invalidTags);
+        assertThrows(IllegalValueException.class, person::toModelType);
     }
-
     @Test
     public void toModelType_invalidMonthsPaid_throwsIllegalValueException() {
+        List<JsonAdaptedMonthPaid> invalidMonthsPaid =
+                List.of(new JsonAdaptedMonthPaid("123"));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_FEES, VALID_CLASS_ID,
-                        INVALID_MONTHS_PAID, VALID_TAGS);
-        String expectedMessage = MonthsPaid.MESSAGE_CONSTRAINTS;
+                        invalidMonthsPaid, VALID_TAGS);
+        String expectedMessage = MonthPaid.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

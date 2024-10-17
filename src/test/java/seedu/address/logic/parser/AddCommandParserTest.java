@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
@@ -176,6 +178,25 @@ public class AddCommandParserTest {
                         + FEES_DESC_AMY + CLASSID_DESC_AMY,
                 new AddCommand(expectedPerson));
     }
+
+    @Test
+    public void equals_sameObject_returnsTrue() {
+        assertTrue(parser.equals(parser));
+    }
+
+    @Test
+    public void equals_differentObjectSameType_returnsTrue() {
+        AddCommandParser anotherParser = new AddCommandParser();
+        assertTrue(parser.equals(anotherParser));
+    }
+
+    @Test
+    public void equals_notSameTypeOfObject_returnsFalse() {
+        PersonBuilder personBuilder = new PersonBuilder();
+        assertFalse(parser.equals(personBuilder));
+    }
+
+
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {

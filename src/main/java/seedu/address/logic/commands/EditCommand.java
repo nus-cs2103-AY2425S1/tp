@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FEES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTHSPAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -28,7 +27,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.ClassId;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Fees;
-import seedu.address.model.person.MonthsPaid;
+import seedu.address.model.person.MonthPaid;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -41,6 +40,8 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
+    // TODO: usage message includes the 2 fields, but edit command does not support the 3 fields right now
+    // (except for monthspaid)
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
@@ -51,7 +52,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_FEES + "FEES] "
             + "[" + PREFIX_CLASSID + "CLASSID] "
-            + "[" + PREFIX_MONTHSPAID + "MONTHSPAID] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -108,13 +108,13 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Fees updatedFees = personToEdit.getFees();
-        ClassId updatedClassId = personToEdit.getClassId();
-        MonthsPaid updatedMonthsPaid = personToEdit.getMonthsPaid();
+        Fees updatedFees = editPersonDescriptor.getFees().orElse(personToEdit.getFees());
+        ClassId updatedClassId = editPersonDescriptor.getClassId().orElse(personToEdit.getClassId());
+        Set<MonthPaid> updatedMonthPaid = personToEdit.getMonthsPaid();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedFees, updatedClassId,
-                updatedMonthsPaid, updatedTags);
+                updatedMonthPaid, updatedTags);
     }
 
     @Override
@@ -257,6 +257,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(fees, otherEditPersonDescriptor.fees)
+                    && Objects.equals(classId, otherEditPersonDescriptor.classId)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
