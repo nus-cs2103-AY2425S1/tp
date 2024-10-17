@@ -21,7 +21,7 @@ import seedu.address.model.tag.Tag;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
-
+    public static final String MESSAGE_DUPLICATE_TAG = "Tags list contains duplicate tag(s)";
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -31,7 +31,9 @@ class JsonSerializableAddressBook {
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
                                        @JsonProperty("tags") List<JsonAdaptedTag> tags) {
-        this.persons.addAll(persons);
+        if (persons != null) {
+            this.persons.addAll(persons);
+        }
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -64,6 +66,9 @@ class JsonSerializableAddressBook {
 
         for (JsonAdaptedTag jsonAdaptedTag : tags) {
             Tag tag = jsonAdaptedTag.toModelType();
+            if (addressBook.hasTag(tag)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TAG);
+            }
             addressBook.addTag(tag);
         }
 
