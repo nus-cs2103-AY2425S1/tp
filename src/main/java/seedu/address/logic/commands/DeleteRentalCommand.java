@@ -66,7 +66,6 @@ public class DeleteRentalCommand extends Command {
         model.setPerson(targetClient, updatedClient);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateVisibleRentalInformationList(rentalInformationList);
-
         model.setLastViewedClient(updatedClient);
 
         return new CommandResult(String.format(MESSAGE_DELETE_RENTAL_SUCCESS,
