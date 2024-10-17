@@ -58,6 +58,11 @@ class AddInsuranceCommandTest {
         assertCommandSuccess(addInsuranceCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * Tests the scenario of adding multiple insurance plans to a client.
+     * This test verifies that after adding an insurance plan to a client, a different insurance plan can be added to
+     * the same client successfully. This test ensures that a client can own multiple insurance plans.
+     */
     @Test
     public void execute_multipleInsurancePlans_success() throws Exception {
         // ELLE (fifth client) does not have any insurance plans
