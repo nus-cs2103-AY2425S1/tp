@@ -32,8 +32,9 @@ public class AddCarCommand extends Command {
             + PREFIX_MAKE + "Toyota "
             + PREFIX_MODEL + "Corolla ";
 
-    public static final String MESSAGE_CAR_ALREADY_PRESENT = "This person already has a car.";
+    public static final String MESSAGE_USER_ALREADY_HAS_CAR = "This person already has a car.";
     public static final String MESSAGE_ADD_CAR_SUCCESS = "Car successfully added: %s";
+    public static final String MESSAGE_SAME_CAR_ALREADY_EXISTS = "This car already exists in the address book"
 
     private final Index index;
     private final Car carToAdd;
@@ -61,7 +62,12 @@ public class AddCarCommand extends Command {
         Person personToAddCarTo = lastShownList.get(index.getZeroBased());
 
         if (personToAddCarTo.getCar() != null) {
-            throw new CommandException(MESSAGE_CAR_ALREADY_PRESENT);
+            throw new CommandException(MESSAGE_USER_ALREADY_HAS_CAR);
+        }
+
+        // Check whether the car is already present
+        if (model.hasCar(carToAdd)) {
+            throw new CommandException(MESSAGE_SAME_CAR_ALREADY_EXISTS);
         }
 
         // As Person is immutable, we must create a new Person object.
