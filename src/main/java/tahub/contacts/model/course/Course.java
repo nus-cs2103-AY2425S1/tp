@@ -3,6 +3,8 @@ package tahub.contacts.model.course;
 import static tahub.contacts.commons.util.AppUtil.checkArgument;
 import static tahub.contacts.commons.util.CollectionUtil.requireAllNonNull;
 
+import tahub.contacts.model.person.Person;
+
 /**
  * Represents a Course in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidCourseName(String)}
@@ -33,6 +35,17 @@ public class Course {
         checkArgument(isValidCourseName(courseName), COURSE_NAME_MESSAGE_CONSTRAINTS);
         this.courseCode = courseCode;
         this.courseName = courseName;
+    }
+
+    /**
+     * Returns true if both courses have the same name or course code.
+     * This defines a weaker notion of equality between two courses.
+     */
+    public boolean isConflictCourse(Course otherCourse) {
+        if (this.equals(otherCourse)) {
+            return true;
+        }
+        return courseCode.equals(otherCourse.courseCode) || courseName.equals(otherCourse.courseName);
     }
 
     /**
