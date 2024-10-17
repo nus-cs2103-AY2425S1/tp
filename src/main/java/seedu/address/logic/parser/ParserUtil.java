@@ -153,7 +153,7 @@ public class ParserUtil {
         } else if (lowerCaseTrimmedPolicy.equals(education)) {
             return new EducationPolicy();
         } else {
-            throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
         }
     }
 
@@ -170,7 +170,7 @@ public class ParserUtil {
     public static Set<PolicyType> parsePolicyTypes(List<String> policies) throws ParseException {
         requireNonNull(policies);
         if (policies.isEmpty()) {
-            throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
         }
 
         String life = PolicyType.LIFE.toString().toLowerCase();
@@ -187,7 +187,7 @@ public class ParserUtil {
             } else if (lowerCaseTrimmedPolicy.equals(education)) {
                 policyTypes.add(PolicyType.EDUCATION);
             } else {
-                throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
+                throw new ParseException(Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
             }
         }
         return Collections.unmodifiableSet(policyTypes);

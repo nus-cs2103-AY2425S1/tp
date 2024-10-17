@@ -95,10 +95,10 @@ public class PersonBuilder {
         return this;
     }
     /**
-     * Sets the {@code Policy} of the {@code Person} that we are building.
+     * Parses the {@code policies} into a {@code PolicySet} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withPolicies(PolicySet policies) {
-        this.policies = policies;
+    public PersonBuilder withPolicies(Policy... policies) {
+        this.policies = SampleDataUtil.getPolicySet(policies);
         return this;
     }
     /**

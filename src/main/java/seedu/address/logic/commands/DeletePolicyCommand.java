@@ -29,7 +29,7 @@ public class DeletePolicyCommand extends Command {
             + "pt/[POLICY_TYPE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "pt/life";
-    public static final String POLICY_DELETE_PERSON_SUCCESS = "Deleted Policy: %1$s";
+    public static final String POLICY_DELETE_PERSON_SUCCESS = "Policies Left: %1$s";
     private final Index index;
     private final Set<PolicyType> policyTypes;
 
@@ -64,7 +64,7 @@ public class DeletePolicyCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(POLICY_DELETE_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(POLICY_DELETE_PERSON_SUCCESS, Messages.formatPolicies(editedPolicy)));
     }
 
     private PolicySet editPolicy(Set<PolicyType> policyTypes, PolicySet policySet) throws CommandException {

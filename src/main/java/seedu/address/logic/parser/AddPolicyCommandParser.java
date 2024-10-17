@@ -17,20 +17,21 @@ import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
 
 /**
- * Parses input arguments and creates a new AddPolicyCommand object
+ * Parses input arguments and creates a new AddPolicyCommand object.
  */
 public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the {@code AddPolicyCommand}
-     * and returns a {@code AddPolicyCommand} object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * and returns an {@code AddPolicyCommand} object for execution.
+     *
+     * @throws ParseException if the user input does not conform to the expected format.
      */
     public AddPolicyCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_POLICY_TYPE,
                 PREFIX_POLICY_PREMIUM_AMOUNT, PREFIX_POLICY_COVERAGE_AMOUNT, PREFIX_POLICY_EXPIRY_DATE);
 
-        if (!(argMultimap.getValue(PREFIX_POLICY_TYPE).isPresent())
-                || argMultimap.getPreamble().isEmpty()) {
+        // Ensure there is at least one policy and that the preamble is not empty
+        if (!(argMultimap.getValue(PREFIX_POLICY_TYPE).isPresent()) || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommand.MESSAGE_USAGE));
         }
 
@@ -39,10 +40,11 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
 
         Index index;
         try {
+            // Parse the preamble as the index of the person
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommand.MESSAGE_USAGE), ive);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddPolicyCommand.MESSAGE_USAGE), ive);
         }
 
         assert argMultimap.getValue(PREFIX_POLICY_TYPE).isPresent() : "Expected value for 'pt/' but none found.";
