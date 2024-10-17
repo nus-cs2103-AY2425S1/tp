@@ -95,6 +95,11 @@ public class ArchivedPersonList implements Iterable<Person> {
         return archivedList.hashCode();
     }
 
+    @Override
+    public String toString() {
+        return archivedList.toString();
+    }
+
     /**
      * Returns true if {@code persons} contains only unique persons.
      */
