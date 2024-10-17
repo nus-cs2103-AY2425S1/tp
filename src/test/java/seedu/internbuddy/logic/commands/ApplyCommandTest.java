@@ -23,6 +23,13 @@ public class ApplyCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
+    public void execute_validIndex_success() throws Exception {
+        Application validApplication = new ApplicationBuilder().build();
+        ApplyCommand applyCommand = new ApplyCommand(INDEX_FIRST_COMPANY, validApplication);
+        CommandResult result = applyCommand.execute(model);
+        assertEquals(String.format(ApplyCommand.MESSAGE_SUCCESS, validApplication), result.getFeedbackToUser());
+    }
+    @Test
     public void execute_invalidIndex_throwsCommandException() {
         Application validApplication = new ApplicationBuilder().build();
         ApplyCommand applyCommand = new ApplyCommand(Index.fromOneBased(999), validApplication);

@@ -45,7 +45,7 @@ public class ApplyCommandParser implements Parser<ApplyCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         AppStatus appStatus = ParserUtil.parseAppStatus(argMultimap.getValue(PREFIX_APPSTATUS)
-                .orElseGet(() -> "APPLIED"));
+                .orElse("APPLIED"));
 
         Application application = new Application(name, description, appStatus);
 

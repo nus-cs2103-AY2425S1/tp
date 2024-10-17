@@ -26,7 +26,7 @@ public class Company {
 
     // Data fields
     private final Address address;
-    private Status status;
+    private final Status status;
     private final List<Application> applications;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -75,14 +75,6 @@ public class Company {
 
     public List<Application> getApplications() {
         return Collections.unmodifiableList(applications);
-    }
-
-    /**
-     * Adds a new application to the company
-     */
-    public void addApplication(Application application) {
-        this.status = status.applied();
-        this.applications.add(application);
     }
 
     /**

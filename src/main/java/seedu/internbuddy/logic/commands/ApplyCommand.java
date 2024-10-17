@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,6 +15,7 @@ import seedu.internbuddy.logic.commands.exceptions.CommandException;
 import seedu.internbuddy.model.Model;
 import seedu.internbuddy.model.application.Application;
 import seedu.internbuddy.model.company.Company;
+import seedu.internbuddy.model.company.Status;
 
 /**
  * Adds an application to a company in the address book.
@@ -54,8 +56,13 @@ public class ApplyCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
         }
 
-        Company company = lastShownList.get(index.getZeroBased());
-        company.addApplication(toAdd);
+        Company companyToEdit = lastShownList.get(index.getZeroBased());
+        List<Application> editedApplications = new ArrayList<>(companyToEdit.getApplications());
+        editedApplications.add(toAdd);
+
+        Company editedCompany = new Company(companyToEdit.getName(), companyToEdit.getPhone(), companyToEdit.getEmail(),
+                companyToEdit.getAddress(), companyToEdit.getTags(), new Status("APPLIED"), editedApplications);
+        model.setCompany(companyToEdit, editedCompany);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }

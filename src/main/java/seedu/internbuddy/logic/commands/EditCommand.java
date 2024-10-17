@@ -105,11 +105,11 @@ public class EditCommand extends Command {
         Address updatedAddress = editCompanyDescriptor.getAddress().orElse(companyToEdit.getAddress());
         Set<Tag> updatedTags = editCompanyDescriptor.getTags().orElse(companyToEdit.getTags());
         Status updatedStatus = editCompanyDescriptor.getStatus().orElse(companyToEdit.getStatus());
-        List<Application> applications = companyToEdit.getApplications();
-
+        List<Application> updatedApplications = editCompanyDescriptor.getApplications()
+                .orElse(companyToEdit.getApplications());
 
         return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedStatus, applications);
+                updatedStatus, updatedApplications);
     }
 
     @Override
@@ -147,6 +147,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Status status;
+        private List<Application> applications;
 
         public EditCompanyDescriptor() {}
 
@@ -161,6 +162,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setStatus(toCopy.status);
+            setApplications(toCopy.applications);
         }
 
         /**
@@ -216,6 +218,14 @@ public class EditCommand extends Command {
 
         public Optional<Status> getStatus() {
             return Optional.ofNullable(status);
+        }
+
+        public void setApplications(List<Application> applications) {
+            this.applications = applications;
+        }
+
+        public Optional<List<Application>> getApplications() {
+            return Optional.ofNullable(applications);
         }
 
         /**
