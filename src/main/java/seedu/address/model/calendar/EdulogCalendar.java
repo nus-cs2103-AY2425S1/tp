@@ -7,6 +7,7 @@ import java.util.List;
  * Calendar class
  */
 public class EdulogCalendar {
+    public static final int MAX_IDENTICAL_TIMING = 2;
     private List<Lesson> lessons;
 
     public EdulogCalendar() {
@@ -35,6 +36,17 @@ public class EdulogCalendar {
                       .filter(lesson -> lesson.isDescription(description))
                       .findFirst()
                       .orElse(null);
+    }
+
+    /**
+     * Returns true if a lesson with a given timeslot can be added in the calendar without exceeding the count limit.
+     */
+    public boolean checkTimeslot(Lesson lesson) {
+        return lessons.stream()
+                      .filter(l -> l.getStartDay().equals(lesson.getStartDay()))
+                      .filter(l -> l.getStartTime().equals(lesson.getStartTime()))
+                      .filter(l -> l.getEndTime().equals(lesson.getEndTime()))
+                      .count() < MAX_IDENTICAL_TIMING;
     }
 
     /**

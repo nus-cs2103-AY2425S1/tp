@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.calendar.EdulogCalendar;
 import seedu.address.model.calendar.Lesson;
 
 public class AddLessonCommandTest {
@@ -44,5 +45,24 @@ public class AddLessonCommandTest {
         AddLessonCommand command = new AddLessonCommand(duplicateLesson);
 
         assertCommandFailure(command, model, AddLessonCommand.MESSAGE_DUPLICATE_LESSON);
+    }
+
+    @Test
+    public void execute_overloadIdenticalTimingLesson_throwsCommandException() throws CommandException {
+        DayOfWeek day = DayOfWeek.MONDAY;
+        LocalTime startTime = LocalTime.of(12, 0);
+        LocalTime endTime = LocalTime.of(14, 0);
+
+        for (int i = 0; i < EdulogCalendar.MAX_IDENTICAL_TIMING; i++) {
+            Lesson lesson = new Lesson("Math" + i, day, startTime, endTime);
+            AddLessonCommand command = new AddLessonCommand(lesson);
+            CommandResult result = command.execute(model);
+            assertEquals(result.getFeedbackToUser(),
+                    String.format(AddLessonCommand.MESSAGE_SUCCESS, lesson));
+        }
+
+        Lesson lesson = new Lesson("Math" + EdulogCalendar.MAX_IDENTICAL_TIMING, day, startTime, endTime);
+        AddLessonCommand command = new AddLessonCommand(lesson);
+        assertCommandFailure(command, model, AddLessonCommand.OVERLOAD_IDENTICAL_TIMING);
     }
 }
