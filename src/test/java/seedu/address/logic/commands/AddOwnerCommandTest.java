@@ -132,6 +132,11 @@ public class AddOwnerCommandTest {
         }
 
         @Override
+        public void addPet(Pet pet) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -152,6 +157,11 @@ public class AddOwnerCommandTest {
         }
 
         @Override
+        public boolean hasPet(Pet pet) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -162,12 +172,22 @@ public class AddOwnerCommandTest {
         }
 
         @Override
+        public void deletePet(Pet target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setOwner(Owner target, Owner editedOwner) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPet(Pet target, Pet editedPet) {
             throw new AssertionError("This method should not be called.");
         }
 
