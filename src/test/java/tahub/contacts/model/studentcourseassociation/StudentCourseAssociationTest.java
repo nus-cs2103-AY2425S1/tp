@@ -26,7 +26,7 @@ public class StudentCourseAssociationTest {
     void testStudentCourseAssociation_Tutorial_AaronTanTuckChoy() {
         Set<Tag> tags = new HashSet<>();
         MatriculationNumber matricNumber = new MatriculationNumber("A1234567Z");
-        Person student = new Person(matricNumber, new Name("Aaron Tan Tuck Choy"), new Phone("12345678"), 
+        Person student = new Person(matricNumber, new Name("Aaron Tan Tuck Choy"), new Phone("12345678"),
                                     new Email("aaron_tan@example.com"), new Address("Kent Ridge"), tags);
         Course course = new Course("CS1101S", "Programming Methodology");
         Tutorial tutorial = new Tutorial("T01", course);
@@ -43,7 +43,7 @@ public class StudentCourseAssociationTest {
     void testStudentCourseAssociation_Tutorial_TerenceSimTjark() {
         Set<Tag> tags = new HashSet<>();
         MatriculationNumber matricNumber = new MatriculationNumber("A7654321M");
-        Person student = new Person(matricNumber, new Name("Terence Sim Tjark"), new Phone("88776655"), 
+        Person student = new Person(matricNumber, new Name("Terence Sim Tjark"), new Phone("88776655"),
                                     new Email("terence_sim@example.com"), new Address("Kent Ridge"), tags);
         Course course = new Course("CS2030", "Programming Methodology 2");
         Tutorial tutorial = new Tutorial("T02", course);
@@ -60,7 +60,7 @@ public class StudentCourseAssociationTest {
     void testStudentCourseAssociation_Tutorial_BenLeong() {
         Set<Tag> tags = new HashSet<>();
         MatriculationNumber matricNumber = new MatriculationNumber("A8090506Q");
-        Person student = new Person(matricNumber, new Name("Ben Leong"), new Phone("99887766"), 
+        Person student = new Person(matricNumber, new Name("Ben Leong"), new Phone("99887766"),
                                     new Email("ben_leong@example.com"), new Address("Kent Ridge"), tags);
         Course course = new Course("CS3230", "Design and Analysis of Algorithms");
         Tutorial tutorial = new Tutorial("T03", course);
@@ -77,7 +77,7 @@ public class StudentCourseAssociationTest {
     void testStudentCourseAssociation_Recitation_ColinTan() {
         Set<Tag> tags = new HashSet<>();
         MatriculationNumber matricNumber = new MatriculationNumber("A5394067G");
-        Person student = new Person(matricNumber, new Name("Colin Tan"), new Phone("66778899"), 
+        Person student = new Person(matricNumber, new Name("Colin Tan"), new Phone("66778899"),
                                     new Email("colin_tan@example.com"), new Address("Kent Ridge"), tags);
         Course course = new Course("CS2020", "Data Structures and Algorithms Accelerated");
         Recitation recitation = new Recitation("R01", course);
@@ -111,7 +111,7 @@ public class StudentCourseAssociationTest {
     void testStudentCourseAssociation_Recitation_StanleyHalim() {
         Set<Tag> tags = new HashSet<>();
         MatriculationNumber matricNumber = new MatriculationNumber("A7755331U");
-        Person student = new Person(matricNumber, new Name("Stanley Halim"), new Phone("33558899"), 
+        Person student = new Person(matricNumber, new Name("Stanley Halim"), new Phone("33558899"),
                                     new Email("stanley_halim@example.com"), new Address("Kent Ridge"), tags);
         Course course = new Course("CS1010", "Programming Methodology");
         Recitation recitation = new Recitation("R03", course);
@@ -128,13 +128,13 @@ public class StudentCourseAssociationTest {
     void testEquals_SameStudents_And_SameCourses_And_SameCourseClass() {
         Set<Tag> tags = new HashSet<>();
         MatriculationNumber matricNumber = new MatriculationNumber("A9999999C");
-        Person student = new Person(matricNumber, new Name("James Tan"), new Phone("99999999"), 
+        Person student = new Person(matricNumber, new Name("James Tan"), new Phone("99999999"),
                                     new Email("james_tan@example.com"), new Address("999 Boulevard"), tags);
         Course course = new Course("CS3231", "Software Engineering");
         Tutorial tutorial = new Tutorial("T04", course);
         GradingSystem grades = new GradingSystem();
         StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course, grades, tutorial);
-        Person otherStudent = new Person(matricNumber, new Name("James Tan"), new Phone("99999999"), 
+        Person otherStudent = new Person(matricNumber, new Name("James Tan"), new Phone("99999999"),
                                     new Email("james_tan@example.com"), new Address("999 Boulevard"), tags);
         Course otherCourse = new Course("CS3231", "Software Engineering");
         Tutorial otherTutorial = new Tutorial("T04", otherCourse);
@@ -147,7 +147,7 @@ public class StudentCourseAssociationTest {
     void testEquals_SameStudents_And_SameCourses_But_DifferentCourseClass() {
         Set<Tag> tags = new HashSet<>();
         MatriculationNumber matricNumber = new MatriculationNumber("A9999999C");
-        Person student = new Person(matricNumber, new Name("James Tan"), new Phone("99999999"), 
+        Person student = new Person(matricNumber, new Name("James Tan"), new Phone("99999999"),
                                     new Email("james_tan@example.com"), new Address("999 Boulevard"), tags);
         Course course = new Course("CS3231", "Software Engineering");
         Tutorial tutorial = new Tutorial("T04", course);
@@ -162,14 +162,14 @@ public class StudentCourseAssociationTest {
     void testEquals_DifferentStudents_And_SameCourses_And_SameCourseClass() {
         Set<Tag> tags = new HashSet<>();
         MatriculationNumber matricNumber = new MatriculationNumber("A9999999C");
-        Person student = new Person(matricNumber, new Name("James Tan"), new Phone("99999999"), 
+        Person student = new Person(matricNumber, new Name("James Tan"), new Phone("99999999"),
                                     new Email("james_tan@example.com"), new Address("999 Boulevard"), tags);
         Course course = new Course("CS3231", "Software Engineering");
         Tutorial tutorial = new Tutorial("T04", course);
         GradingSystem grades = new GradingSystem();
         StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course, grades, tutorial);
         MatriculationNumber differentMatricNumber = new MatriculationNumber("A8888888B");
-        Person differentStudent = new Person(differentMatricNumber, new Name("Johnny Tan"), new Phone("88888888"), 
+        Person differentStudent = new Person(differentMatricNumber, new Name("Johnny Tan"), new Phone("88888888"),
                                     new Email("johnny_tan@example.com"), new Address("888 Boulevard"), tags);
         StudentCourseAssociation sca4 = new StudentCourseAssociation(differentStudent, course, grades, tutorial);
         assertFalse(sca1.equals(sca4));
