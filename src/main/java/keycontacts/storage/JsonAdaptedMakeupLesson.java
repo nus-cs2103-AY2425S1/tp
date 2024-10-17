@@ -2,6 +2,9 @@ package keycontacts.storage;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import keycontacts.commons.exceptions.IllegalValueException;
 import keycontacts.model.lesson.Lesson;
 import keycontacts.model.lesson.MakeupLesson;
@@ -11,32 +14,25 @@ import keycontacts.model.lesson.Time;
  * Jackson-friendly version of {@link MakeupLesson}.
  */
 public class JsonAdaptedMakeupLesson {
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Makeup lesson's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Makeup lesson's %s field is missing or empty!";
 
     private final String lessonDate;
     private final String startTime;
     private final String endTime;
 
     /**
-     * Constructs a {@code JsonAdaptedMakeupLesson} with no arguments. This is used by Jackson to create a new
-     * {@code JsonAdaptedMakeupLesson} object.
-     */
-    public JsonAdaptedMakeupLesson() {
-        this.lessonDate = "";
-        this.startTime = "";
-        this.endTime = "";
-    }
-
-    /**
      * Constructs a {@code JsonAdaptedMakeupLesson} with the given makeup lesson
      * details.
      */
-    public JsonAdaptedMakeupLesson(String lessonDate, String startTime, String endTime) {
+    @JsonCreator
+    public JsonAdaptedMakeupLesson(
+            @JsonProperty("lessonDate") String lessonDate,
+            @JsonProperty("startTime") String startTime,
+            @JsonProperty("endTime") String endTime) {
         this.lessonDate = lessonDate;
         this.startTime = startTime;
         this.endTime = endTime;
     }
-
     /**
      * Converts a given {@code MakeupLesson} into this class for Jackson use.
      */
@@ -54,7 +50,7 @@ public class JsonAdaptedMakeupLesson {
      *                               the adapted makeup lesson.
      */
     public MakeupLesson toModelType() throws IllegalValueException {
-        if (lessonDate == null) {
+        if (lessonDate == null || lessonDate.trim().isEmpty()) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     LocalDate.class.getSimpleName()));
         }

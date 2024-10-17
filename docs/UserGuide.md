@@ -154,8 +154,7 @@ Schedules a makeup lesson for the specified student in the student directory.
 Format: `makeup INDEX dt/DATE st/START_TIME et/END_TIME`
 
 * Schedules the makeup lesson for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-* If the student already has an existing makeup lesson, it will be overwritten by the new makeup lesson given.
-* `DATE` must be in the format `YYYY-MM-DD`.
+* `DATE` must be in the format `DD-MM-YYYY`.
 * `START_TIME` and `END_TIME` must be in 24-hour format, and `START_TIME` must be before `END_TIME`
 
 Examples:

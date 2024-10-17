@@ -44,7 +44,9 @@ public class MakeupLesson extends Lesson {
         }
 
         MakeupLesson otherLesson = (MakeupLesson) other;
-        return super.equals(otherLesson) && lessonDate.equals(otherLesson.lessonDate);
+        return lessonDate.equals(otherLesson.lessonDate)
+                && getStartTime().equals(otherLesson.getStartTime())
+                && getEndTime().equals(otherLesson.getEndTime());
     }
 
     @Override

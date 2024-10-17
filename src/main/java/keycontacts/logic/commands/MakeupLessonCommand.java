@@ -1,6 +1,7 @@
 package keycontacts.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_DATE;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
@@ -45,6 +46,7 @@ public class MakeupLessonCommand extends Command {
      * @param endTime   of the makeup lesson
      */
     public MakeupLessonCommand(Index targetIndex, MakeupLesson makeupLesson) {
+        requireAllNonNull(targetIndex, makeupLesson);
         this.targetIndex = targetIndex;
         this.makeupLesson = makeupLesson;
     }
