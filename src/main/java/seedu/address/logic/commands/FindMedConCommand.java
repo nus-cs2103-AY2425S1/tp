@@ -15,7 +15,7 @@ import seedu.address.model.person.MedConContainsKeywordsPredicate;
 public class FindMedConCommand extends Command {
     public static final String COMMAND_WORD = "findMedCon";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all patients with medical conditions that"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all patients with medical conditions that "
             + "contains the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: "
             + "KEYWORD [MORE KEYWORDS]\n"
