@@ -51,11 +51,4 @@ public class CommentTest {
         // null -> returns false
         assertFalse(comment.equals(null));
     }
-
-        // different types -> returns false
-        assertFalse(comment.equals(5.0f));
-
-        // different values -> returns false
-        assertFalse(comment.equals(new Comment("Other Valid Comment")));
-    }
 }
