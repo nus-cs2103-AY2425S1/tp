@@ -11,6 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.task.Status;
 import seedu.address.model.task.Task;
@@ -54,9 +55,9 @@ public class MarkTaskCommand extends Command {
             throw new CommandException(GROUP_NOT_FOUND);
         }
 
-        List<Task> lastShownList = model.getFilteredTaskList();
+        Group group = model.getGroupByName(toMarkFrom);
+        List<Task> lastShownList = group.getTasks().stream().toList();
 
-        // the index here refers to the index in the list of all tasks from all groups
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }

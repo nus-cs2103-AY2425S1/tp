@@ -50,18 +50,13 @@ public class DeleteTaskFromGroupCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Task> lastShownList = model.getFilteredTaskList();
+        Group group = model.getGroupByName(toDeleteFrom);
+        List<Task> lastShownList = group.getTasks().stream().toList();
 
-        // the index here refers to the index in the list of all tasks from all groups
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
         Task task = lastShownList.get(index.getZeroBased());
-        Group group = model.getGroupByName(toDeleteFrom);
-
-        if (!model.hasTaskInGroup(task, group)) {
-            throw new CommandException(MESSAGE_TASK_NOT_IN_GROUP);
-        }
 
         model.deleteTaskFromGroup(task, group);
         model.deleteTask(task);
