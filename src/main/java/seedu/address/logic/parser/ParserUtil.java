@@ -196,10 +196,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String network} into a {@code Network}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code network} is invalid.
      */
     public static Network parseNetwork(String network) throws ParseException {
         requireNonNull(network);

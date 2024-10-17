@@ -61,12 +61,12 @@ public class Person {
     }
 
     public Set<PublicAddress> getPublicAddressesByNetwork(Network network) {
-        return publicAddresses.getOrDefault(network, new HashSet<>());
+        return Collections.unmodifiableSet(publicAddresses.getOrDefault(network, new HashSet<>()));
     }
 
     public void setPublicAddressesByNetwork(Network network, HashSet<PublicAddress> addresses) {
         if (publicAddresses.containsKey(network)) {
-            this.publicAddresses.put(network, addresses);
+            this.publicAddresses.put(network, new HashSet<>(addresses));
         }
     }
 
@@ -78,17 +78,7 @@ public class Person {
      * @return publicAddresses
      */
     public Map<Network, Set<PublicAddress>> getPublicAddresses() {
-        return this.publicAddresses;
-    }
-
-    /**
-     * Sets the Public address to a new one
-     * Should be replaced with a better method in the future
-     *
-     * @param addresses
-     */
-    public void setPublicAddresses(Map<Network, Set<PublicAddress>> addresses) {
-        this.publicAddresses = addresses;
+        return Collections.unmodifiableMap(publicAddresses);
     }
 
 

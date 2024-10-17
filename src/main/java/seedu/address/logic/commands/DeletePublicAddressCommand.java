@@ -20,7 +20,7 @@ import seedu.address.model.person.Person;
  * Deletes the person's public address identified by the index number
  * used in the displayed person list and their crypto network.
  */
-public class DeleteAddressCommand extends Command {
+public class DeletePublicAddressCommand extends Command {
     public static final String COMMAND_WORD = "dela"; // short for delete address
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -41,7 +41,7 @@ public class DeleteAddressCommand extends Command {
      * @param targetIndex
      * @param network
      */
-    public DeleteAddressCommand(Index targetIndex, Network network) {
+    public DeletePublicAddressCommand(Index targetIndex, Network network) {
         this.targetIndex = targetIndex;
         this.targetAddressnetwork = network;
     }
@@ -72,7 +72,7 @@ public class DeleteAddressCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteAddressCommand otherDeleteCommand)) {
+        if (!(other instanceof DeletePublicAddressCommand otherDeleteCommand)) {
             return false;
         }
 
