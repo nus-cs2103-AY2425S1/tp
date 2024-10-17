@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.EMPLOYEE_ID_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -161,6 +162,14 @@ public class EditCommandParserTest {
         descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_editEmployeeId_failure() {
+        // employee id
+        Index targetIndex = INDEX_THIRD_PERSON;
+        String userInput = targetIndex.getOneBased() + EMPLOYEE_ID_DESC_AMY;
+        assertParseFailure(parser, userInput, EditCommand.MESSAGE_EDIT_EMPLOYEE_ID);
     }
 
     @Test
