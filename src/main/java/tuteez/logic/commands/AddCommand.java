@@ -7,6 +7,7 @@ import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
 import static tuteez.logic.parser.CliSyntax.PREFIX_NAME;
 import static tuteez.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
+import static tuteez.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import tuteez.commons.util.ToStringBuilder;
 import tuteez.logic.Messages;
@@ -27,12 +28,16 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_TELEGRAM + "TELEGRAM USERNAME"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_TELEGRAM + "johndoe123 "
+            + PREFIX_TAG + "friends "
+            + PREFIX_TAG + "owesMoney "
             + PREFIX_TAG + "Physics "
             + PREFIX_TAG + "Secondary 4 "
             + PREFIX_LESSON + "monday 0900-1100 "

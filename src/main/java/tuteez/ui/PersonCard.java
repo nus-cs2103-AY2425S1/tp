@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import tuteez.model.person.Person;
+import tuteez.model.person.TelegramUsername;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -35,6 +36,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
+    private Label telegram;
+    @FXML
     private Label address;
     @FXML
     private Label email;
@@ -52,6 +55,7 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
+        setTelegramUsernameText(person);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         person.getTags().stream()
@@ -59,5 +63,15 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         person.getLessons().stream()
                 .forEach(lesson -> lessons.getChildren().add(new Label(lesson.dayAndTime)));
+    }
+
+    private void setTelegramUsernameText(Person person) {
+        TelegramUsername username = person.getTelegramUsername();
+        if (username != null && username.telegramUsername != null && !username.telegramUsername.isEmpty()) {
+            telegram.setText("@" + username.telegramUsername);
+            telegram.setVisible(true);
+        } else {
+            telegram.setVisible(false);
+        }
     }
 }
