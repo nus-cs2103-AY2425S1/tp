@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContactName;
 import seedu.address.model.person.EmergencyPhone;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -27,6 +28,7 @@ public class PersonBuilder {
     public static final String DEFAULT_REGISTER_NUMBER = "1";
     public static final String DEFAULT_SEX = "F";
     public static final String DEFAULT_STUDENT_CLASS = "1A";
+    public static final String DEFAULT_EMERGENCY_CONTACT_NAME = "Joe Hardy";
     public static final String DEFAULT_EMERGENCY_PHONE = "";
 
     private Name name;
@@ -36,6 +38,7 @@ public class PersonBuilder {
     private RegisterNumber registerNumber;
     private Sex sex;
     private StudentClass studentClass;
+    private EmergencyContactName ecName = new EmergencyContactName("Joe Hardy");
     private EmergencyPhone emergencyPhone;
     private Set<Tag> tags;
 
@@ -50,6 +53,7 @@ public class PersonBuilder {
         registerNumber = new RegisterNumber(DEFAULT_REGISTER_NUMBER);
         sex = new Sex(DEFAULT_SEX);
         studentClass = new StudentClass(DEFAULT_STUDENT_CLASS);
+        ecName = new EmergencyContactName(DEFAULT_EMERGENCY_CONTACT_NAME);
         emergencyPhone = new EmergencyPhone(DEFAULT_EMERGENCY_PHONE);
         tags = new HashSet<>();
     }
@@ -65,6 +69,7 @@ public class PersonBuilder {
         registerNumber = personToCopy.getRegisterNumber();
         sex = personToCopy.getSex();
         studentClass = personToCopy.getStudentClass();
+        ecName = personToCopy.getEmergencyContactName();
         emergencyPhone = personToCopy.getEmergencyPhone();
         tags = new HashSet<>(personToCopy.getTags());
     }
@@ -134,6 +139,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code ecName} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEmergencyContactName(String ecName) {
+        this.ecName = new EmergencyContactName(ecName);
+        return this;
+    }
+
+    /**
      * Sets the {@code EmergencyPhone} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmergencyPhone(String emergencyPhone) {
@@ -145,8 +158,7 @@ public class PersonBuilder {
      * Builds a new Person with all the required attributes.
      */
     public Person build() {
-        return new Person(name, phone, email, address, registerNumber, sex, studentClass,
-                emergencyPhone, tags);
+        return new Person(name, phone, email, address, registerNumber, sex, studentClass, ecName, emergencyPhone, tags);
     }
 
 }

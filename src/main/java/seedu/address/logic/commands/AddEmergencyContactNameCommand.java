@@ -1,10 +1,17 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.List;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.EmergencyContactName;
+import seedu.address.model.person.Person;
 
 /**
  * Adds an emergency contact name to an existing person in the address book.
@@ -13,34 +20,55 @@ public class AddEmergencyContactNameCommand extends Command {
     public static final String COMMAND_WORD = "addEmergencyContactName";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an emergency contact name to the student "
-            + "identified by the name. "
-            + "Parameters: n/NAME e/EMERGENCY_CONTACT\n"
-            + "Example: " + COMMAND_WORD + " n/Henry e/John Doe";
+            + "identified by the index.\n"
+            + "Parameters: [INDEX] en/EMERGENCY_CONTACT\n"
+            + "Example: " + COMMAND_WORD + " 1 en/John Doe";
 
-    public static final String MESSAGE_ADD_CONTACT_SUCCESS = "Added emergency contact's name for Student: %1$s";
-    public static final String MESSAGE_DELETE_CONTACT_SUCCESS = "Removed emergency contact's name from Student: %1$s";
+    public static final String MESSAGE_ADD_ECNAME_SUCCESS = "Added emergency contact's name for Person: %1$s";
+    public static final String MESSAGE_DELETE_ECNAME_SUCCESS = "Removed emergency contact's name from Person: %1$s";
 
-    public static final String MESSAGE_STUDENT_NOT_FOUND = "The student with name '%1$s' could not be found.";
-    public static final String MESSAGE_ARGUMENTS = "Name: %1$s, ECName: %2$s";
+    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, ECName: %2$s";
 
-    private final Name name;
-    private final Name emergencyContactName;
+    private final Index index;
+    private final EmergencyContactName ecName;
 
     /**
-     * @param name of the student in the filtered list
-     * @param eCName to be added
+     * @param index of the student in the filtered list
+     * @param ecName to be added
      */
-    public AddEmergencyContactNameCommand(Name name, Name eCName) {
-        requireAllNonNull(name, eCName);
+    public AddEmergencyContactNameCommand(Index index, EmergencyContactName ecName) {
+        requireAllNonNull(index, ecName);
 
-        this.name = name;
-        this.emergencyContactName = eCName;
+        this.index = index;
+        this.ecName = ecName;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        // Placeholder - Update with actual logic
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, name, emergencyContactName));
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), personToEdit.getRegisterNumber(), personToEdit.getSex(),
+                personToEdit.getStudentClass(), ecName, personToEdit.getEmergencyPhone(), personToEdit.getTags());
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(generateSuccessMessage(editedPerson));
+    }
+
+    /**
+     * Generates a command execution success message based on whether the emergency contact name is added to or
+     * removed from
+     * {@code personToEdit}.
+     */
+    private String generateSuccessMessage(Person personToEdit) {
+        String message = !ecName.fullName.isEmpty() ? MESSAGE_ADD_ECNAME_SUCCESS
+                : MESSAGE_DELETE_ECNAME_SUCCESS;
+        return String.format(message, personToEdit);
     }
 
     @Override
@@ -54,8 +82,8 @@ public class AddEmergencyContactNameCommand extends Command {
         }
 
         AddEmergencyContactNameCommand e = (AddEmergencyContactNameCommand) other;
-        return name.equals(e.name)
-                && emergencyContactName.equals(e.emergencyContactName);
+        return index.equals(e.index)
+                && ecName.equals(e.ecName);
     }
 }
 

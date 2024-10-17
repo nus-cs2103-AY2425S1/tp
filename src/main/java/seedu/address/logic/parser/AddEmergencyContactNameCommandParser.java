@@ -3,12 +3,12 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddEmergencyContactNameCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.EmergencyContactName;
 
 /**
  * Parses input arguments and creates a new {@code AddEmergencyContactNameCommand} object
@@ -22,24 +22,25 @@ public class AddEmergencyContactNameCommandParser implements Parser<AddEmergency
      */
     public AddEmergencyContactNameCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ECNAME);
-        if (!argMultimap.getValue(PREFIX_NAME).isPresent() || !argMultimap.getValue(PREFIX_ECNAME).isPresent()) {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ECNAME);
+        if (!argMultimap.getValue(PREFIX_ECNAME).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddEmergencyContactNameCommand.MESSAGE_USAGE));
         }
 
-        Name name;
-        Name eCName;
+        Index index;
+        EmergencyContactName ecName;
         try {
-            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            eCName = ParserUtil.parseName(argMultimap.getValue(PREFIX_ECNAME).get());
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            ecName = (EmergencyContactName) ParserUtil.parseEmergencyContactName(
+                    argMultimap.getValue(PREFIX_ECNAME).get());
 
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddEmergencyContactNameCommand.MESSAGE_USAGE), ive);
         }
 
-        return new AddEmergencyContactNameCommand(name, eCName);
+        return new AddEmergencyContactNameCommand(index, ecName);
     }
 
 }

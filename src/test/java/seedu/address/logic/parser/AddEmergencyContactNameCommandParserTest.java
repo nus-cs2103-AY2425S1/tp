@@ -2,14 +2,15 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddEmergencyContactNameCommand;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.EmergencyContactName;
 
 
 public class AddEmergencyContactNameCommandParserTest {
@@ -22,9 +23,11 @@ public class AddEmergencyContactNameCommandParserTest {
     @Test
     public void parse_paramsPresent_success() {
         // all fields provided
-        String userInput = " " + PREFIX_NAME + validName + " " + PREFIX_ECNAME + validEmergencyContactName;
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_ECNAME + validEmergencyContactName;
         AddEmergencyContactNameCommand expectedCommand =
-                new AddEmergencyContactNameCommand(new Name(validName), new Name(validEmergencyContactName));
+                new AddEmergencyContactNameCommand(INDEX_FIRST_PERSON,
+                        new EmergencyContactName(validEmergencyContactName));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -33,12 +36,13 @@ public class AddEmergencyContactNameCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddEmergencyContactNameCommand.MESSAGE_USAGE);
 
-        // no name
-        String userInput = " " + PREFIX_ECNAME + validEmergencyContactName;
+        // no index
+        String userInput = AddEmergencyContactNameCommand.COMMAND_WORD + " " + PREFIX_ECNAME
+                + validEmergencyContactName;
         assertParseFailure(parser, userInput, expectedMessage);
 
-        // no ECName
-        userInput = " " + PREFIX_NAME + validName;
+        // no parameters
+        userInput = AddEmergencyContactNameCommand.COMMAND_WORD;
         assertParseFailure(parser, userInput, expectedMessage);
     }
 }

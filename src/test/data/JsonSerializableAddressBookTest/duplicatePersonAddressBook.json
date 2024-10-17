@@ -7,6 +7,7 @@
     "register number": "1",
     "sex": "F",
     "class": "1A",
+    "emergency contact name": "",
     "emergency phone": "",
     "tags": [ "friends" ]
   }, {
@@ -16,7 +17,8 @@
     "address": "4th street",
     "register number": "1",
     "sex": "F",
-	"class": "1A",
+    "class": "1A",
+    "emergency contact name": "",
     "emergency phone": ""
   } ]
 }
