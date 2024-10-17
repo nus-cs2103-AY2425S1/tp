@@ -69,7 +69,7 @@ public class LogicManager implements Logic {
                 storage.saveAddressBook(model.getAddressBook());
             } catch (AccessDeniedException ade) {
                 throw new CommandException(FILE_OPS_PERMISSION_ERROR_FORMAT, ade);
-            }catch (IOException ioe) {
+            } catch (IOException ioe) {
                 throw new CommandException(FILE_OPS_ERROR_FORMAT, ioe);
             }
         }

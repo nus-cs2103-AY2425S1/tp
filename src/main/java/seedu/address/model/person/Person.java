@@ -7,8 +7,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.management.relation.Role;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
