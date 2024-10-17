@@ -34,6 +34,8 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
 
    * `delete 3` : Deletes the 3rd patient shown in the current list.
 
+   * `find w/ B1` : Finds all patients with ward B1. 
+
    * `clear` : Deletes all patients.
 
    * `exit` : Exits the app.
@@ -113,21 +115,24 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Searching patients by field: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds patients whose specified field contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find FIELD/ KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* Able to search any field, but only one field at a time.
+* To specify the field, use the first letter of the desired field (lowercased) followed by a `/`.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
+* `find n/ John` returns `john` and `John Doe`
+* `find w/ B1` returns all patients in ward B1
+* `find i/ Dave` returns an empty list
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
@@ -200,6 +205,6 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find**   | `find FIELD/ KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/ James Jake`
 **List**   | `list`
 **Help**   | `help`
