@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_REMOVE_WEDDING_SUCCESS;
 import static seedu.address.logic.Messages.MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
 import java.util.HashSet;
 import java.util.List;
@@ -26,9 +27,9 @@ public class UnassignWeddingCommand extends Command {
             + "by the index number used in the last person listing.\n"
             + "Wedding names are case sensitive.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "w/[WEDDING]... (can specify multiple weddings)\n"
+            + PREFIX_WEDDING + "WEDDING... (can specify multiple weddings)\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "w/Craig's Wedding w/Wedding April 2025.";
+            + PREFIX_WEDDING + "Craig's Wedding " + PREFIX_WEDDING + "Wedding April 2025.";
 
     private final Index index;
     private final HashSet<Wedding> weddingsToRemove;
