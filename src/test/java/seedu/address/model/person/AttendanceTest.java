@@ -32,6 +32,6 @@ public class AttendanceTest {
         assertTrue(attendance.toString().equals("Attended"));
 
         attendance = new Attendance(false);
-        assertTrue(attendance.toString().equals("01/01/2024 12:00 Absent"));
+        assertTrue(attendance.toString().equals("Absent"));
     }
 }

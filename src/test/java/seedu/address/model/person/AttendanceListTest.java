@@ -13,7 +13,7 @@ import seedu.address.model.person.exceptions.AttendanceNotFoundException;
 public class AttendanceListTest {
 
     @Test
-    public void addAttendance_nullAttendance_throwsNullPointerException() {
+    public void setAttendance_nullAttendance_throwsNullPointerException() {
         AttendanceList attendanceList = new AttendanceList();
         assertThrows(NullPointerException.class, () -> attendanceList.setAttendance(null, new Attendance(true)));
         assertThrows(NullPointerException.class, () ->
@@ -22,7 +22,7 @@ public class AttendanceListTest {
     }
 
     @Test
-    public void addAttendance_duplicateAttendance_replacesAttendance() {
+    public void setAttendance_duplicateAttendance_replacesAttendance() {
         AttendanceList list = new AttendanceList();
         list = list.setAttendance(LocalDateTime.of(2024, 1, 1, 12, 0), new Attendance(true));
         list = list.setAttendance(LocalDateTime.of(2024, 1, 1, 12, 0), new Attendance(false));

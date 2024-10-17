@@ -41,6 +41,7 @@ public class AttendanceList {
      */
     public AttendanceList setAttendance(LocalDateTime date, Attendance attendance) {
         requireNonNull(date);
+        requireNonNull(attendance);
         Map<LocalDateTime, Attendance> newAttendanceList = new TreeMap<>(attendanceList);
         newAttendanceList.merge(date, attendance, (oldAttendance, newAttendance) -> newAttendance);
         return new AttendanceList(newAttendanceList);
@@ -55,6 +56,7 @@ public class AttendanceList {
      *                                  date does not exist.
      */
     public AttendanceList removeAttendance(LocalDateTime date) {
+        requireNonNull(date);
         if (!attendanceList.containsKey(date)) {
             throw new AttendanceNotFoundException();
         }
