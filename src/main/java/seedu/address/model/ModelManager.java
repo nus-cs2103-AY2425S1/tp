@@ -11,6 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.order.CustomerOrder;
+import seedu.address.model.order.OrderList;
+import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;
@@ -28,6 +31,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final PastryCatalogue pastryCatalogue = new PastryCatalogue();
     private final IngredientCatalogue ingredientCatalogue = new IngredientCatalogue();
+    private final OrderList orderList = new OrderList();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -129,6 +133,21 @@ public class ModelManager implements Model {
     @Override
     public IngredientCatalogue getIngredientCatalogue() {
         return ingredientCatalogue;
+    }
+
+    @Override
+    public void addCustomerOrder(CustomerOrder customerOrder) {
+        orderList.addCustomerOrder(customerOrder);
+    }
+
+    @Override
+    public void addSupplyOrder(SupplyOrder supplyOrder) {
+        orderList.addSupplyOrder(supplyOrder);
+    }
+
+    @Override
+    public OrderList getOrderList() {
+        return orderList;
     }
 
     @Override
