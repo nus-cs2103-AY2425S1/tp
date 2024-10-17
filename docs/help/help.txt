@@ -1,1 +1,24 @@
-This help page is currently a WIP.
+This tool allows you to keep a list of events and manage your time effectively.
+
+These are the available commands:
+
+help - Display this help page.
+usage: help
+
+add - Add a person to the list.
+usage: add n/<name> p/<phone number> e/<email> s/<subevent>
+
+clear - Delete all entries in the list.
+usage: clear
+
+filter - Show all entries containing a specified keyword. The keyword is case-insensitive.
+usage: filter <keyword>
+
+list - List all entries.
+usage: list
+
+edit - Update the information in an entry.
+edit <id> n/<name> p/<phone number> e/<email> t/<subevent>
+
+delete - Delete an entry with the given ID.
+usage: delete <id>
