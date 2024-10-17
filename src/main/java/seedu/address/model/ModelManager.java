@@ -122,7 +122,7 @@ public class ModelManager implements Model {
         addressBook.setStudent(target, editedStudent);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== EdulogCalendar ================================================================================
 
     @Override
     public boolean hasLesson(Lesson lesson) {
@@ -152,6 +152,10 @@ public class ModelManager implements Model {
     public void removeLesson(Lesson lesson) {
         requireNonNull(lesson);
         edulogCalendar.removeLesson(lesson);
+    }
+
+    public EdulogCalendar getEdulogCalendar() {
+        return edulogCalendar;
     }
 
     //=========== Filtered Student List Accessors =============================================================

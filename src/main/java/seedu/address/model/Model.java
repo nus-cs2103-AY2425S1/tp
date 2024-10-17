@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.calendar.EdulogCalendar;
 import seedu.address.model.calendar.Lesson;
 import seedu.address.model.student.Student;
 
@@ -103,6 +104,11 @@ public interface Model {
      * Returns true if a lesson with a given timeslot can be added in the calendar without exceeding the count limit.
      */
     boolean checkTimeslot(Lesson lesson);
+
+    /**
+     * Returns edulog calendar.
+     */
+    EdulogCalendar getEdulogCalendar();
 
 
 
