@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeoutException;
@@ -12,7 +11,6 @@ import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
@@ -38,11 +36,9 @@ public class PersonCardUiTest extends ApplicationTest {
     private Person samplePerson;
 
     @BeforeEach
-    public void setUp(@TempDir Path tempDir) throws TimeoutException {
+    public void setUp() throws TimeoutException {
         FxToolkit.registerPrimaryStage();
-        FxToolkit.setupApplication(() ->
-            new MainApp(tempDir.resolve("ui_data.json"))
-        );
+        FxToolkit.setupApplication(MainApp::new);
         FxToolkit.showStage();
         WaitForAsyncUtils.waitForFxEvents(20); // Wait for JavaFX to complete rendering
     }
