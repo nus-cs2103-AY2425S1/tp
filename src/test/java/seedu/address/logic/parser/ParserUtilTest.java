@@ -9,6 +9,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -298,6 +300,47 @@ public class ParserUtilTest {
     public void parseModuleRolePair_missingRoleType_throwsParseException() throws Exception {
         assertThrows(ParseException.class, ModuleRoleMap.MESSAGE_CONSTRAINTS, () -> {
             ParserUtil.parseModuleRolePair(INVALID_MODULE_ROLE_PAIR_MISSING_ROLE_TYPE);
+        });
+    }
+
+    @Test
+    public void parseModuleRolePairs_singleModuleRolePair_returnsModuleRoleMap() throws Exception {
+        HashMap<ModuleCode, RoleType> hashMap = new HashMap<>();
+        hashMap.put(new ModuleCode("CS1101S"), RoleType.STUDENT);
+        ModuleRoleMap expected = new ModuleRoleMap(hashMap);
+
+        List<String> input = Arrays.asList("CS1101S-student");
+        ModuleRoleMap result = ParserUtil.parseModuleRolePairs(input);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void parseModuleRolePairs_multipleModuleRolePairs_returnsModuleRoleMap() throws Exception {
+        HashMap<ModuleCode, RoleType> hashMap = new HashMap<>();
+        hashMap.put(new ModuleCode("CS1101S"), RoleType.STUDENT);
+        hashMap.put(new ModuleCode("MA1521"), RoleType.STUDENT);
+        ModuleRoleMap expected = new ModuleRoleMap(hashMap);
+
+        List<String> input = Arrays.asList("CS1101S-student", "MA1521-student");
+        ModuleRoleMap result = ParserUtil.parseModuleRolePairs(input);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void parseModuleRolePairs_duplicateModuleCodeDifferentRoles_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, ModuleRoleMap.MESSAGE_SINGLE_ROLE_PER_MODULE_CONSTRAINTS, () -> {
+            List<String> input = Arrays.asList("CS1101S-student", "CS1101S-prof");
+            ModuleRoleMap result = ParserUtil.parseModuleRolePairs(input);
+        });
+    }
+
+    @Test
+    public void parseModuleRolePairs_duplicateModuleCodeSameRoles_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, ModuleRoleMap.MESSAGE_SINGLE_ROLE_PER_MODULE_CONSTRAINTS, () -> {
+            List<String> input = Arrays.asList("CS1101S-student", "CS1101S-student");
+            ModuleRoleMap result = ParserUtil.parseModuleRolePairs(input);
         });
     }
 }
