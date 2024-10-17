@@ -49,7 +49,7 @@ public class UniqueAppointmentListTest {
     @Test
     public void setAppointment_existingAppointment_updatesSuccessfully() {
         uniqueAppointmentList.add(appointment1);
-        Appointment editedAppointment = new Appointment(new AppointmentType("Checkup"),
+        Appointment editedAppointment = new Appointment(new AppointmentType("Followup"),
                 LocalDateTime.of(2024, 1, 1, 10, 0), ALICE_P,
                 new Sickness("Fever"), new Medicine("Paracetamol"));
         uniqueAppointmentList.setAppointment(appointment1, editedAppointment);

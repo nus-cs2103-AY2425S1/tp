@@ -30,7 +30,7 @@ public class AppointmentListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Appointment} 
+     * Custom {@code ListCell} that displays the graphics of a {@code Appointment}
      * using a {@code AppointmentCard}.
      */
     class AppointmentListViewCell extends ListCell<Appointment> {
@@ -46,5 +46,4 @@ public class AppointmentListPanel extends UiPart<Region> {
             }
         }
     }
-
 }

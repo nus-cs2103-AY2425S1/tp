@@ -40,16 +40,17 @@ public class EditPersonCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, PERSON_ENTITY_STRING + "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, PERSON_ENTITY_STRING + "-5" + NAME_DESC_AMY,
+            Index.MESSAGE_CONSTRAINTS);
 
         // zero index
-        assertParseFailure(parser, PERSON_ENTITY_STRING + "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, PERSON_ENTITY_STRING + "0" + NAME_DESC_AMY, Index.MESSAGE_CONSTRAINTS);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, PERSON_ENTITY_STRING + "1 some random string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, PERSON_ENTITY_STRING + "1 some random string", EditCommand.MESSAGE_NOT_EDITED);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, PERSON_ENTITY_STRING + "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, PERSON_ENTITY_STRING + "1 i/ string", EditCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test

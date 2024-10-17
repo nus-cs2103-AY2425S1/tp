@@ -246,6 +246,12 @@ public class AddPersonCommandTest {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
+
+        @Override
+        public boolean hasPerson(PersonDescriptor person) {
+            requireNonNull(person);
+            return this.person.isSamePerson(person);
+        }
     }
 
     /**
@@ -256,6 +262,12 @@ public class AddPersonCommandTest {
 
         @Override
         public boolean hasPerson(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSamePerson);
+        }
+
+        @Override
+        public boolean hasPerson(PersonDescriptor person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSamePerson);
         }
