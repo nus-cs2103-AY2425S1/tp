@@ -29,9 +29,9 @@ public class Person {
     private Address address;
     private Allergy allergy;
     private BloodType bloodType;
-    private HealthCondition healthCondition;
-    private HealthRecord pastHealthRecord;
-    private Note additionalNote;
+    private HealthRisk healthRisk;
+    private HealthRecord healthRecord;
+    private Note note;
     private Name nokName;
     private Phone nokPhone;
     private final Set<HealthService> healthServices = new HashSet<>();
@@ -56,17 +56,24 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.healthServices.addAll(healthServices);
-
+        this.address = null;
+        this.allergy = null;
+        this.bloodType = null;
+        this.healthRisk = null;
+        this.healthRecord = null;
+        this.note = null;
+        this.nokName = null;
+        this.nokPhone = null;
     }
 
     /**
      * Only Name, NRIC, Sex, BirthDate, HealthServices field need to be present.
      * The other fields can be null
      */
-    public Person(Name name, Nric nric, Birthdate birthdate, Sex sex, Set<HealthService> healthServices,
-                  Phone phone, Email email, Address address, Allergy allergy, BloodType bloodType,
-        HealthCondition healthCondition, HealthRecord healthRecord, Note note, Name nokName, Phone nokPhone) {
-        requireAllNonNull(name, phone, email);
+    public Person(Name name, Nric nric, Birthdate birthdate, Sex sex, Set<HealthService> healthServices, Phone phone,
+                  Email email, Address address, Allergy allergy, BloodType bloodType, HealthRisk healthRisk,
+                  HealthRecord healthRecord, Note note, Name nokName, Phone nokPhone) {
+        requireAllNonNull(name, nric, birthdate, sex, healthServices, phone, email);
         this.name = name;
         this.nric = nric;
         this.birthdate = birthdate;
@@ -77,9 +84,9 @@ public class Person {
         this.address = address;
         this.allergy = allergy;
         this.bloodType = bloodType;
-        this.healthCondition = healthCondition;
-        this.pastHealthRecord = healthRecord;
-        this.additionalNote = note;
+        this.healthRisk = healthRisk;
+        this.healthRecord = healthRecord;
+        this.note = note;
         this.nokName = nokName;
         this.nokPhone = nokPhone;
     }
@@ -116,7 +123,7 @@ public class Person {
         return nokPhone;
     }
 
-    public Allergy getAllergies() {
+    public Allergy getAllergy() {
         return allergy;
     }
 
@@ -124,16 +131,16 @@ public class Person {
         return bloodType;
     }
 
-    public HealthCondition getHealthCondition() {
-        return healthCondition;
+    public HealthRisk getHealthRisk() {
+        return healthRisk;
     }
 
-    public Note getAdditionalNote() {
-        return additionalNote;
+    public Note getNote() {
+        return note;
     }
 
-    public HealthRecord getPastHealthRecord() {
-        return pastHealthRecord;
+    public HealthRecord getHealthRecord() {
+        return healthRecord;
     }
 
     public Address getAddress() {
