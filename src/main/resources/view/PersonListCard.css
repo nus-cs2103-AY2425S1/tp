@@ -20,6 +20,10 @@
     -fx-font-size: 12pt;
     -fx-text-fill: #D9B08C; /* Beige */
 }
+#id {
+    -fx-text-fill: #D9B08C;
+}
+
 #name {
     -fx-text-fill: #D9B08C;
 }
