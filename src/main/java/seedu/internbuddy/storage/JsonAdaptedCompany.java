@@ -60,9 +60,9 @@ public class JsonAdaptedCompany {
      */
     public JsonAdaptedCompany(Company source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value.orElse(null);
+        phone = source.getPhone().getTrueValue();
         email = source.getEmail().value;
-        address = source.getAddress().value.orElse(null);
+        address = source.getAddress().getTrueValue();
         status = source.getStatus().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)

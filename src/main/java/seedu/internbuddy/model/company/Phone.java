@@ -3,8 +3,6 @@ package seedu.internbuddy.model.company;
 import static java.util.Objects.requireNonNull;
 import static seedu.internbuddy.commons.util.AppUtil.checkArgument;
 
-import java.util.Optional;
-
 /**
  * Represents a company's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
@@ -15,7 +13,7 @@ public class Phone {
             "Phone numbers should only contain numbers, and it should be at least 3 digits long";
     public static final String VALIDATION_REGEX = "\\d{3,}";
     public static final Phone NO_PHONE = new Phone();
-    public final Optional<String> value;
+    private final String value;
 
     /**
      * Constructs a {@code Phone}.
@@ -25,11 +23,11 @@ public class Phone {
     public Phone(String phone) {
         requireNonNull(phone);
         checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
-        value = Optional.of(phone);
+        value = phone;
     }
 
     private Phone() {
-        value = Optional.empty();
+        value = null;
     }
 
     /**
@@ -39,8 +37,18 @@ public class Phone {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns the value (non-null).
+     */
     public String getValue() {
-        return value.orElse("No Phone Number");
+        return value != null ? value : "No Phone Number";
+    }
+
+    /**
+     * Returns the actual value (nullable).
+     */
+    public String getTrueValue() {
+        return value;
     }
 
     @Override

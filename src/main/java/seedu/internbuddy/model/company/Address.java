@@ -3,8 +3,6 @@ package seedu.internbuddy.model.company;
 import static java.util.Objects.requireNonNull;
 import static seedu.internbuddy.commons.util.AppUtil.checkArgument;
 
-import java.util.Optional;
-
 /**
  * Represents a Company's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
@@ -20,10 +18,10 @@ public class Address {
     public static final String VALIDATION_REGEX = "[^\\s].*";
     public static final Address NO_ADDRESS = new Address();
 
-    public final Optional<String> value;
+    private final String value;
 
     private Address() {
-        value = Optional.empty();
+        value = null;
     }
 
     /**
@@ -34,7 +32,7 @@ public class Address {
     public Address(String address) {
         requireNonNull(address);
         checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
-        value = Optional.of(address);
+        value = address;
     }
 
     /**
@@ -44,8 +42,18 @@ public class Address {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns the value (non-null).
+     */
     public String getValue() {
-        return value.orElse("No Address");
+        return value != null ? value : "No Address";
+    }
+
+    /**
+     * Returns the actual value (nullable).
+     */
+    public String getTrueValue() {
+        return value;
     }
 
     @Override
