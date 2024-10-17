@@ -39,7 +39,7 @@ public class DeleteTransactionCommandTest {
                 personToDeleteFrom.getPhone(), personToDeleteFrom.getEmail(), personToDeleteFrom.getAddress(),
                 personToDeleteFrom.getTags(), expectedTransactions);
         String expectedMessage = String.format(DeleteTransactionCommand.MESSAGE_DELETE_TRANSACTION_SUCCESS,
-                deletedTransaction.toString(), Messages.format(editedPerson));
+                Messages.format(deletedTransaction), Messages.format(editedPerson));
         expectedModel.setPerson(personToDeleteFrom, editedPerson);
 
         DeleteTransactionCommand deleteTransactionCommand = new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION);
