@@ -63,6 +63,18 @@ public class MemberTest {
     }
 
     @Test
+    public void addSession_nullSession_throwsNullPointerException() {
+        Member member = new MemberBuilder(ALICE).build();
+        assertThrows(NullPointerException.class, () -> member.addSession(null));
+    }
+
+    @Test
+    public void removeSession_nullSession_throwsNullPointerException() {
+        Member member = new MemberBuilder(ALICE).build();
+        assertThrows(NullPointerException.class, () -> member.removeSession(null));
+    }
+
+    @Test
     public void addSession_validSession_increasesSessions() {
         Member member = new MemberBuilder(ALICE).build();
         Session newSession = new Session(new SessionName(VALID_NAME_BOB),
@@ -78,21 +90,9 @@ public class MemberTest {
         Session newSession = new Session(new SessionName(VALID_NAME_BOB),
                 new SessionDate("10 Nov 2025"), new Point("10"));
         member.addSession(newSession);
-        member.removeSession(newSession);
+        member.removeSession(newSession.getSessionName());
         assertFalse(member.getSessions().contains(newSession));
         assertEquals(new Point("0"), member.getTotalPoints());
-    }
-
-    @Test
-    public void addSession_nullSession_throwsNullPointerException() {
-        Member member = new MemberBuilder(ALICE).build();
-        assertThrows(NullPointerException.class, () -> member.addSession(null));
-    }
-
-    @Test
-    public void removeSession_nullSession_throwsNullPointerException() {
-        Member member = new MemberBuilder(ALICE).build();
-        assertThrows(NullPointerException.class, () -> member.removeSession(null));
     }
 
     @Test

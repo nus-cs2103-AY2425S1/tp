@@ -11,6 +11,7 @@ import hallpointer.address.commons.core.GuiSettings;
 import hallpointer.address.commons.core.LogsCenter;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.session.Session;
+import hallpointer.address.model.session.SessionName;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
@@ -100,6 +101,21 @@ public class ModelManager implements Model {
     @Override
     public void deleteMember(Member target) {
         addressBook.removeMember(target);
+    }
+
+    /**
+     * Deletes the given session from the given member.
+     * The member must exist in the address book and the
+     * session must exist in the member.
+     *
+     * @param target
+     * @param sessionName
+     */
+    @Override
+    public void deleteSession(Member target, SessionName sessionName) {
+        requireNonNull(target);
+        requireNonNull(sessionName);
+        target.removeSession(sessionName);
     }
 
     @Override

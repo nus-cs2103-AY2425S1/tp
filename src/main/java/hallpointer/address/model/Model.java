@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import hallpointer.address.commons.core.GuiSettings;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.session.Session;
+import hallpointer.address.model.session.SessionName;
 import javafx.collections.ObservableList;
 
 /**
@@ -73,6 +74,13 @@ public interface Model {
      * The member must exist in the address book.
      */
     void deleteMember(Member target);
+
+    /**
+     * Deletes the given session from the given member.
+     * The member must exist in the address book and the
+     * session must exist in the member.
+     */
+    void deleteSession(Member target, SessionName sessionName);
 
     /**
      * Adds the given member.

@@ -26,6 +26,7 @@ import hallpointer.address.model.ReadOnlyUserPrefs;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.UniqueMemberList;
 import hallpointer.address.model.session.Session;
+import hallpointer.address.model.session.SessionName;
 import hallpointer.address.model.session.UniqueSessionList;
 import hallpointer.address.testutil.MemberBuilder;
 import hallpointer.address.testutil.SessionBuilder;
@@ -198,6 +199,13 @@ class AddSessionCommandTest {
         @Override
         public void deleteSession(Session sessionToDelete) {
             throw new AssertionError("This method should not be called.");
+        }
+
+
+        @Override
+        public void deleteSession(Member target, SessionName sessionName) {
+            throw new AssertionError("This method should not be called.");
+
         }
 
         @Override
