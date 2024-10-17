@@ -1,0 +1,56 @@
+@startuml
+title AddSessionCommand Class Diagram
+
+class Command {
+    {abstract} +execute(Model model): CommandResult
+}
+
+class AddSessionCommand {
+    +COMMAND_WORD: String
+    +MESSAGE_USAGE: String
+    +MESSAGE_SUCCESS: String
+    +MESSAGE_DUPLICATE_SESSION: String
+    +MESSAGE_INVALID_INDEX: String
+    -toAdd: Session
+    -memberIndexes: List<Index>
+    +AddSessionCommand(Session, List<Index>)
+    +execute(Model model): CommandResult
+    +equals(Object): boolean
+    +toString(): String
+}
+
+class Model {
+    +hasSession(Session): boolean
+    +addSession(Session): void
+    +getFilteredMemberList(): List<Member>
+}
+
+class Session {
+    +getSessionName(): String
+    +getDate(): String
+    +getPoints(): Points
+}
+
+class Member {
+    +addSession(Session): void
+}
+
+class Index {
+    +getZeroBased(): int
+}
+
+class CommandResult {
+}
+
+class CommandException {
+}
+
+AddSessionCommand --> Command : extends
+AddSessionCommand --> Model : uses
+AddSessionCommand --> Session : has
+AddSessionCommand --> Index : has
+AddSessionCommand --> CommandResult : returns
+AddSessionCommand --> CommandException : throws
+Model --> Member : returns List of
+Member --> Session : uses
+@enduml
