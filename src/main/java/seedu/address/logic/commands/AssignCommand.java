@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.ASSIGN_EVENT_PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.ASSIGN_VOLUNTEER_PREFIX_NAME;
 
@@ -38,15 +38,14 @@ public class AssignCommand extends Command {
      * @param volunteerId The volunteer to be added. Must not be null.
      */
     public AssignCommand(int volunteerId, int eventId) {
-        requireNonNull(volunteerId);
-        requireNonNull(eventId);
+        requireAllNonNull(volunteerId, eventId);
         this.volunteerId = volunteerId;
         this.eventId = eventId;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+        requireAllNonNull(model);
 
         System.out.println("We are assigning volunteer " + this.volunteerId + " to event " + this.eventId);
 
