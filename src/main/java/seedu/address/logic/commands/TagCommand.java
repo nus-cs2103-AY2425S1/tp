@@ -6,16 +6,22 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,21 +34,20 @@ public class TagCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": adds a tag to person identified "
             + "by full name. "
             + "New tags will be added to existing tags.\n"
-            + "Example: " + COMMAND_WORD + PREFIX_NAME + "Alex Yeoh "
-            + PREFIX_TAG + "food vendor";
+            + "Example: " + COMMAND_WORD + PREFIX_NAME
+            + "Alex Yeoh " + PREFIX_TAG + "food vendor";
 
     public static final String MESSAGE_TAG_PERSON_SUCCESS = "Tagged Person: %1$s";
     public static final String MESSAGE_NO_NEW_TAG = "At least one tag must be provided.";
     public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists for %1$s.";
-    public static final String MESSAGE_UNSPECIFIED_NAME = "Please specific the full name of person to tag.";
-
+    // public static final String MESSAGE_UNSPECIFIED_NAME = "Please specific the full name of person to tag.";
 
 
     private final Name name;
     private final TagPersonDescriptor tagPersonDescriptor;
 
     /**
-     * @param name of the person in the filtered person list to tag
+     * @param name                of the person in the filtered person list to tag
      * @param tagPersonDescriptor details to tag the person with
      */
     public TagCommand(Name name, TagPersonDescriptor tagPersonDescriptor) {
@@ -59,13 +64,15 @@ public class TagCommand extends Command {
 
         // checks if multiple persons contain same keyword in name
         // displays those persons
-//        String[] nameKeywords = new String[] {this.name.fullName}
-//
-//        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
-//        model.updateFilteredPersonList(predicate);
-//        if (model.getFilteredPersonList().size() > 1) {
-//            return new CommandResult(MESSAGE_UNSPECIFIED_NAME);
-//        }
+        /*
+        String[] nameKeywords = new String[] {this.name.fullName}
+
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
+        model.updateFilteredPersonList(predicate);
+        if (model.getFilteredPersonList().size() > 1) {
+            return new CommandResult(MESSAGE_UNSPECIFIED_NAME);
+        }
+        */
 
         // finds person to tag
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -85,7 +92,8 @@ public class TagCommand extends Command {
         Set<Tag> currentTags = personToTag.getTags();
         for (Tag newTag : tagPersonDescriptor.getTags().orElse(Set.of())) {
             if (currentTags.contains(newTag)) {
-                throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, String.format(MESSAGE_DUPLICATE_TAG, personToTag.getName())));
+                throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        String.format(MESSAGE_DUPLICATE_TAG, personToTag.getName())));
             }
         }
 
@@ -107,7 +115,7 @@ public class TagCommand extends Command {
         Email updatedEmail = tagPersonDescriptor.getEmail().orElse(personToTag.getEmail());
         Address updatedAddress = tagPersonDescriptor.getAddress().orElse(personToTag.getAddress());
         Set<Tag> updatedTags = new HashSet<>(personToTag.getTags());
-        tagPersonDescriptor.getTags().ifPresent(updatedTags::addAll);  // Add tags if present
+        tagPersonDescriptor.getTags().ifPresent(updatedTags::addAll); // Add tags if present
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
@@ -124,16 +132,13 @@ public class TagCommand extends Command {
         }
 
         TagCommand otherTagCommand = (TagCommand) other;
-        return name.equals(otherTagCommand.name)
-                && tagPersonDescriptor.equals(otherTagCommand.tagPersonDescriptor);
+        return name.equals(otherTagCommand.name) && tagPersonDescriptor.equals(otherTagCommand.tagPersonDescriptor);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("tagPersonDescriptor", tagPersonDescriptor)
-                .toString();
+        return new ToStringBuilder(this).add("name", name)
+                .add("tagPersonDescriptor", tagPersonDescriptor).toString();
     }
 
     /**
@@ -147,7 +152,8 @@ public class TagCommand extends Command {
         private Address address;
         private Set<Tag> tags;
 
-        public TagPersonDescriptor() {}
+        public TagPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
