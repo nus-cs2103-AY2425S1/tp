@@ -41,7 +41,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
         // Figure out why this is not possible
-        //descriptor.setWeddings(person.getWeddings());
+        descriptor.setWeddings(person.getWeddings());
     }
 
     /**
