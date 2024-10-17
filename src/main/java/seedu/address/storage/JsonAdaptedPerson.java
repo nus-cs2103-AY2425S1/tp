@@ -54,7 +54,6 @@ class JsonAdaptedPerson {
         this.address = address;
         this.fees = fees;
         this.classId = classId;
-        this.monthsPaid = monthsPaid != null ? monthsPaid : "";
 
         if (monthsPaid != null) {
             this.monthsPaid.addAll(monthsPaid);
