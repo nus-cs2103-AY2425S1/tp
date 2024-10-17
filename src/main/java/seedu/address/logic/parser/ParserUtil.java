@@ -19,6 +19,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.preferredtime.PreferredTime;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -202,6 +203,31 @@ public class ParserUtil {
     }
 
 
-    // TODO: parsePreferredTime and parsePreferredTimes
+    /**
+     * Parses a {@code String preferredTime} into a {@code PreferredTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code preferredTime} is invalid.
+     */
+    public static PreferredTime parsePreferredTime(String preferredTime) throws ParseException {
+        requireNonNull(preferredTime);
+        String trimmedPreferredTime = preferredTime.trim();
+        if (!PreferredTime.isValidPreferredTime(trimmedPreferredTime)) {
+            throw new ParseException(PreferredTime.MESSAGE_CONSTRAINTS);
+        }
+        return new PreferredTime(trimmedPreferredTime);
+    }
+
+    /**
+     * Parses {@code Collection<String> preferredTimes} into a {@code Set<PreferredTime>}.
+     */
+    public static Set<PreferredTime> parsePreferredTimes(Collection<String> preferredTimes) throws ParseException {
+        requireNonNull(preferredTimes);
+        final Set<PreferredTime> preferredTimeSet = new HashSet<>();
+        for (String preferredTime : preferredTimes) {
+            preferredTimeSet.add(parsePreferredTime(preferredTime));
+        }
+        return preferredTimeSet;
+    }
 
 }

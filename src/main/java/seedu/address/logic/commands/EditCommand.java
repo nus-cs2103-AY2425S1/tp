@@ -30,6 +30,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.preferredtime.PreferredTime;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -106,8 +107,11 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Map<String, Game> updatedGames = editPersonDescriptor.getGames().orElse(personToEdit.getGames());
+        Set<PreferredTime> updatedPreferredTimes =
+                editPersonDescriptor.getPreferredTimes().orElse(personToEdit.getPreferredTimes());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedGames);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedGames, updatedPreferredTimes);
     }
 
     @Override
@@ -145,6 +149,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Map<String, Game> games;
+        private Set<PreferredTime> preferredTimes;
 
 
         public EditPersonDescriptor() {}
@@ -160,6 +165,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setGames(toCopy.games);
+            setPreferredTimes(toCopy.preferredTimes);
         }
 
         /**
@@ -234,6 +240,26 @@ public class EditCommand extends Command {
         public Optional<Map<String, Game>> getGames() {
             return (games != null) ? Optional.of(Collections.unmodifiableMap(games)) : Optional.empty();
         }
+
+        /**
+         * Sets {@code preferredTimes} to this object's {@code preferredTimes}.
+         * A defensive copy of {@code preferredTimes} is used internally.
+         */
+        public void setPreferredTimes(Set<PreferredTime> preferredTimes) {
+            this.preferredTimes = (preferredTimes != null) ? new HashSet<>(preferredTimes) : null;
+        }
+
+        /**
+         * Returns an unmodifiable preferredTime set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code preferredTimes} is null.
+         */
+        public Optional<Set<PreferredTime>> getPreferredTimes() {
+            return (preferredTimes != null)
+                    ? Optional.of(Collections.unmodifiableSet(preferredTimes))
+                    : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {

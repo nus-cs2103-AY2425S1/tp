@@ -18,6 +18,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.preferredtime.PreferredTime;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,6 +34,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedGame> games = new ArrayList<>();
+    private final List<JsonAdaptedPreferredTime> preferredTimes = new ArrayList<>();
 
 
     /**
@@ -42,7 +44,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("games") List<JsonAdaptedGame> games) {
+            @JsonProperty("games") List<JsonAdaptedGame> games,
+            @JsonProperty("preferred times") List<JsonAdaptedPreferredTime> preferredTimes) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -52,6 +55,9 @@ class JsonAdaptedPerson {
         }
         if (games != null) {
             this.games.addAll(games);
+        }
+        if (preferredTimes != null) {
+            this.preferredTimes.addAll(preferredTimes);
         }
     }
 
@@ -69,6 +75,9 @@ class JsonAdaptedPerson {
         games.addAll(source.getGames().values().stream()
                 .map(JsonAdaptedGame::new)
                 .collect(Collectors.toList()));
+        preferredTimes.addAll(source.getPreferredTimes().stream()
+                .map(JsonAdaptedPreferredTime::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -84,6 +93,10 @@ class JsonAdaptedPerson {
         final Map<String, Game> personGames = new HashMap<>();
         for (JsonAdaptedGame game : games) {
             personGames.put(game.getGameName(), game.toModelType());
+        }
+        final List<PreferredTime> personPreferredTimes = new ArrayList<>();
+        for (JsonAdaptedPreferredTime preferredTime: preferredTimes) {
+            personPreferredTimes.add(preferredTime.toModelType());
         }
 
         if (name == null) {
@@ -120,8 +133,9 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Map<String, Game> modelGames = new HashMap<>(personGames);
+        final Set<PreferredTime> modelPreferredTimes = new HashSet<>(personPreferredTimes);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelGames);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelGames, modelPreferredTimes);
     }
 
 }

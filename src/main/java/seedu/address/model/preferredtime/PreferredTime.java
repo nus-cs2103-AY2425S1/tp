@@ -17,14 +17,13 @@ public class PreferredTime {
             "PreferredTime should consists of Day and Time in the format 'Day HHmm'.\n"
             + "There should be exactly one space in between";
     public static final String VALIDATION_REGEX = "(\\p{L}+)\\s(\\d{4})$";
-    private static final Pattern VALIDATED_PATTERN = Pattern.compile(VALIDATION_REGEX);
+    public static final Pattern VALIDATED_PATTERN = Pattern.compile(VALIDATION_REGEX);
 
     public final String preferredTime;
     public final Day day;
     public final Time time;
 
 
-    // TODO: constructor
     /**
      * Constructs a {@code PreferredTime}.
      *

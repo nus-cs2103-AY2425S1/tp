@@ -41,6 +41,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
         descriptor.setGames(person.getGames());
+        descriptor.setPreferredTimes(person.getPreferredTimes());
     }
 
     /**

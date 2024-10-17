@@ -11,6 +11,7 @@ import java.util.TreeMap;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.game.Game;
+import seedu.address.model.preferredtime.PreferredTime;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,21 +29,21 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Map<String, Game> games = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-
-    // TODO: update the preferredTime field
-    // TODO: update the constructors and some other method
+    private final Set<PreferredTime> preferredTimes = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Map<String, Game> games) {
-        requireAllNonNull(name, phone, email, address, tags, games);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  Map<String, Game> games, Set<PreferredTime> preferredTimes) {
+        requireAllNonNull(name, phone, email, address, tags, games, preferredTimes);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
         this.games.putAll(games);
+        this.preferredTimes.addAll(preferredTimes);
     }
 
     public Name getName() {
@@ -76,6 +77,15 @@ public class Person {
     public Map<String, Game> getGames() {
         return games;
     }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<PreferredTime> getPreferredTimes() {
+        return Collections.unmodifiableSet(preferredTimes);
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -110,14 +120,15 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && games.equals(otherPerson.games);
+                && games.equals(otherPerson.games)
+                && preferredTimes.equals(otherPerson.preferredTimes);
 
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, games);
+        return Objects.hash(name, phone, email, address, tags, games, preferredTimes);
     }
 
     @Override
@@ -129,6 +140,7 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .add("games", games)
+                .add("preferred times", preferredTimes)
                 .toString();
     }
 
