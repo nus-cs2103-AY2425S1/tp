@@ -47,6 +47,10 @@ public class GetCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
         int size = lastShownList.size();
         String resultString = "";
+        /*
+        runBefore is an array that contains the boolean for whether each parameter
+        that can be a valid input has already been added to the details
+        */
         boolean[] runBefore = new boolean[4];
         for (int i = 0; i < runBefore.length; i++) {
             runBefore[i] = false;

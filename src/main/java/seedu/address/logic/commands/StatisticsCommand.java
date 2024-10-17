@@ -54,23 +54,22 @@ public class StatisticsCommand extends Command {
 
             case HIGH:
                 highPriority++;
-                allStats[1] = String.format("Number Of HIGH Priority People: %s", highPriority);
                 break;
-
             case MEDIUM:
                 mediumPriority++;
-                allStats[2] = String.format("Number Of MEDIUM Priority People: %s", mediumPriority);
                 break;
 
             case LOW:
                 lowPriority++;
-                allStats[3] = String.format("Number Of LOW Priority People: %s", lowPriority);
                 break;
 
             default:
                 throw new CommandException(MESSAGE_LACK_PRIORITY);
             }
         }
+        allStats[1] = String.format("Number Of HIGH Priority People: %s", highPriority);
+        allStats[2] = String.format("Number Of MEDIUM Priority People: %s", mediumPriority);
+        allStats[3] = String.format("Number Of LOW Priority People: %s", lowPriority);
         for (int i = 0; i < allStats.length; i++) {
             s += allStats[i] + "\n";
         }
