@@ -428,6 +428,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Singapore Standard Time**: Singapore time, which is 8 hours ahead of Coordinated Universal Time (UTC + 08:00)
 * **Hard disk**: data storage device in laptops and computers.
 * **.JSON file**: JavaScript Object Notation, stores and transports data using a human-readable text format.
+* **SocialBook**: SocialBook is an address book hence SocialBook and AddressBook are interchangable. SocialBook is used to reference the product while AddressBook refers to the Class object in source code.
 
 --------------------------------------------------------------------------------------------------------------------
 
