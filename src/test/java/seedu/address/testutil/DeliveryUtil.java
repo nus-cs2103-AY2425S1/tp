@@ -18,7 +18,7 @@ public class DeliveryUtil {
      * Returns an add command string for adding the {@code person}.
      */
     public static String getDeliveryCommand(Delivery delivery) {
-        return AddDeliveryCommand.COMMAND_WORD + " " + getDeliveryDetails(delivery);
+        return AddDeliveryCommand.COMMAND_WORD + " -d " + getDeliveryDetails(delivery);
     }
 
     /**
