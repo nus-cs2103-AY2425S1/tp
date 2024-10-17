@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -79,7 +78,6 @@ public class ExportCommandTest {
                     assertEquals(testStuds[i][j], columns[j]);
                 }
             }
-
             // Clean up the exported file
             Files.deleteIfExists(exportFilePath);
         } catch (IOException e) {
@@ -90,8 +88,6 @@ public class ExportCommandTest {
 
     @Test
     void executeBasic() throws CommandException {
-        Path importPath = projectRootPath.resolve("src").resolve("test").resolve("data")
-                .resolve("JsonExportTest").resolve("typicalPersonsAddressBook.json");
         ExportCommand exportCommand = new ExportCommand();
         CommandResult commandResult = exportCommand.execute(model);
         // Verify the export is successful
