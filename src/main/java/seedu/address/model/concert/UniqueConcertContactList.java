@@ -43,6 +43,15 @@ public class UniqueConcertContactList implements Iterable<ConcertContact> {
     }
 
     /**
+     * Returns true if the list contains an equivalent concertContact matching
+     * the given Person and Concert.
+     */
+    public boolean contains(Person personToDelete, Concert concertToEdit) {
+        requireAllNonNull(personToDelete, concertToEdit);
+        return internalList.stream().anyMatch(cc -> cc.isAssociated(personToDelete) && cc.isAssociated(concertToEdit));
+    }
+
+    /**
      * Adds a concertContact to the list. The concertContact must not already
      * exist in the list.
      */

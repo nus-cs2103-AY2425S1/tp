@@ -80,6 +80,16 @@ public interface Model {
     boolean hasConcertContact(ConcertContact concertContact);
 
     /**
+     * Checks whether a concertContact with the same person and concert as {@code person}  and {@code concert} exists
+     * in the concertContact phonebook.
+     *
+     * @param person person to check for
+     * @param concert concert to check for
+     * @return true if address-book contains concertContact
+     */
+    boolean hasConcertContact(Person person, Concert concert);
+
+    /**
      * Deletes the given person. The person must exist in the address book.
      */
     void deletePerson(Person target);

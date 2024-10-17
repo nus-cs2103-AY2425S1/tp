@@ -11,6 +11,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.concert.Concert;
+import seedu.address.model.concert.ConcertContact;
 import seedu.address.model.person.Person;
 
 /**
@@ -55,6 +56,10 @@ public class DeleteConcertContactCommand extends Command {
 
         Concert concertToEdit = lastShownConcertList.get(concertIndex.getZeroBased());
         Person personToDelete = lastShownPersonList.get(personIndex.getZeroBased());
+
+        if (!model.hasConcertContact(personToDelete, concertToEdit)) {
+            throw new CommandException(Messages.MESSAGE_INVALID_CONCERT_CONTACT);
+        }
 
         model.deleteConcertContact(personToDelete, concertToEdit);
         return new CommandResult(String.format(MESSAGE_DELETE_CONCERT_CONTACT_SUCCESS,
