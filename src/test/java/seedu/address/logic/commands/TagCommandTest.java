@@ -50,7 +50,7 @@ public class TagCommandTest {
         Set<Tag> updatedTags = new HashSet<>(personToTag.getTags());
         updatedTags.add(validTag);
 
-        Person updatedPerson = new Person(personToTag.getName(), personToTag.getPhone(), personToTag.getEmail(), 
+        Person updatedPerson = new Person(personToTag.getName(), personToTag.getPhone(), personToTag.getEmail(),
                                           false, updatedTags);
         expectedModel.setPerson(personToTag, updatedPerson);
         expectedModel.addTag(validTag);
@@ -67,7 +67,7 @@ public class TagCommandTest {
 
         Set<Tag> newTags = new HashSet<>(originalPerson.getTags());
         newTags.add(existingTag);
-        Person personToTag = new Person(originalPerson.getName(), originalPerson.getPhone(), originalPerson.getEmail(), 
+        Person personToTag = new Person(originalPerson.getName(), originalPerson.getPhone(), originalPerson.getEmail(),
                                         false, newTags);
 
         model.setPerson(originalPerson, personToTag);
