@@ -8,7 +8,7 @@ HireMe is a **desktop app for managing internship applications, optimized for us
 
 1. Ensure you have Java `17` or above installed on your computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W09-3/tp/releases/tag/v1.3).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your HireMe.
 
@@ -61,10 +61,6 @@ Format: `/help`
 Adds an internship application to HireMe.
 
 Format: `/a n/COMPANY_NAME r/ROLE e/EMAIL d/DATE`
-
-<box type="tip" seamless>
-
-</box>
 
 Examples:
 * `/a n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24`
