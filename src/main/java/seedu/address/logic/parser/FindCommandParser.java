@@ -25,12 +25,23 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ROLE);
 
-        if (!areSomePrefixesPresent(argumentMultimap, PREFIX_NAME, PREFIX_ROLE)) {
+        if (!areSomePrefixesPresent(argumentMultimap, PREFIX_NAME, PREFIX_ROLE)
+                || !argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
         List<String> nameKeywords = argumentMultimap.getAllValues(PREFIX_NAME);
         List<String> roleKeywords = argumentMultimap.getAllValues(PREFIX_ROLE);
+
+        boolean hasEmptyInput = nameKeywords.stream().anyMatch(str -> str.trim().isEmpty())
+                || roleKeywords.stream().anyMatch(str -> str.trim().isEmpty());
+
+        if (hasEmptyInput) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        nameKeywords = nameKeywords.stream().map(String::trim).toList();
+        roleKeywords = roleKeywords.stream().map(String::trim).toList();
 
         return new FindCommand(new NameContainsKeywordsPredicate(nameKeywords),
                 new RoleContainsKeywordsPredicate(roleKeywords));
