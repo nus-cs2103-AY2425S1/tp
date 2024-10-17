@@ -49,7 +49,7 @@ public class WithdrawCommand extends Command {
         }
 
         Company companyToEdit = lastShownList.get(companyIndex.getZeroBased());
-        ArrayList<Application> applicationList = (ArrayList<Application>) companyToEdit.getApplications();
+        List<Application> applicationList = new ArrayList<>(companyToEdit.getApplications());
 
         if (applicationIndex.getZeroBased() >= applicationList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_APPLICATION_DISPLAYED_INDEX);
