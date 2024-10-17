@@ -48,8 +48,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("register number") String registerNumber, @JsonProperty("sex") String sex,
-            @JsonProperty("class") String studentClass, @JsonProperty("emergency contact name") String ecName, @JsonProperty("emergency phone") String emergencyPhone,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("class") String studentClass, @JsonProperty("emergency contact name") String ecName,
+            @JsonProperty("emergency phone") String emergencyPhone, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
 
         this.name = name;
         this.phone = phone;
@@ -160,7 +160,7 @@ class JsonAdaptedPerson {
         if (!EmergencyContactName.isValidEmergencyContactName(ecName)) {
             throw new IllegalValueException(EmergencyContactName.MESSAGE_CONSTRAINTS);
         }
-        final EmergencyContactName emergencyContactName = new EmergencyContactName(ecName);
+        final EmergencyContactName modelEmergencyContactName = new EmergencyContactName(ecName);
 
         if (emergencyPhone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -173,7 +173,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRegisterNumber, modelSex,
-                modelStudentClass, modelEmergencyPhone, modelTags);
+                modelStudentClass, modelEmergencyContactName, modelEmergencyPhone, modelTags);
 
     }
 
