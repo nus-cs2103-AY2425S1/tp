@@ -337,7 +337,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 **Extensions**
-* 1a. To be implemented
+* 3a. User closes Authentication screen
+  * 3a 1. HR Helper closes.
+  * 3a 2. Use case ends.
+* 3b. Username/Password is empty
+  * 3b 1. HRHelper prompts HR staff to enter username/password
+  * 3b 2. HR staff keys in Username and Password 
+  * 3b 3. Correct Username and Password is entered, use case resumes from step 4
+* 3c. Username and Password do not match
+  * 3c 1. HRHelper requests for Username or Password again
+  * 3c 2. Correct Username and Password is entered, use case resumes from step 4
 
 **Use case: Add a person**
 
