@@ -18,7 +18,7 @@ public class UpdateCommand extends Command {
     public static final String COMMAND_WORD = "update";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates an event in the address book. "
-            + "Parameters: "
+            + "Parameters (index is one-based): "
             + PREFIX_INDEX + "EVENT INDEX "
             + PREFIX_NAME + "NEW EVENT NAME "
             + PREFIX_DATE + "NEW DATE (yyyy-mm-dd) \n"
