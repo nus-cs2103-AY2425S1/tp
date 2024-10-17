@@ -27,24 +27,19 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
 
-        List<String> indicesList = List.of(argMultimap.getPreamble().split(","));
-
-        if (argMultimap.getPreamble().isEmpty()) {
+        List<String> indicesList = ArgumentTokenizer.tokenizeWithDefault(args);
+        if (indicesList.isEmpty() || indicesList.stream().allMatch(String::isEmpty)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
+
 
         try {
             Set<Index> indices;
             Optional<Set<Index>> optionalIndices = parseIndicesForDelete(indicesList);
-            if (optionalIndices.isPresent() && !optionalIndices.get().isEmpty()) {
-                indices = optionalIndices.get();
-                return new DeleteCommand(indices);
-            } else {
-                throw new ParseException(MESSAGE_EMPTY_INDEX);
-            }
-
+            assert optionalIndices.isPresent() : "Optional set of indices should not be empty or return null";
+            indices = optionalIndices.get();
+            return new DeleteCommand(indices);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
         }
@@ -64,6 +59,18 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         }
         Collection<String> indicesSet = indices.size() == 1 && indices.contains("") ? Collections.emptySet() : indices;
         return Optional.of(ParserUtil.parseIndices(indicesSet));
+    }
+
+
+    /**
+     * Appends the preamble of the parse result to the list.
+     * @param indicesWithoutFirst collection of Strings representing indices, excluding the first index.
+     * @param first The String representation of the first index
+     * @return A List which contains String representation of the indices.
+     */
+    private List<String> joinIndices(List<String> indicesWithoutFirst, String first) {
+        indicesWithoutFirst.add(first);
+        return indicesWithoutFirst;
     }
 
 }
