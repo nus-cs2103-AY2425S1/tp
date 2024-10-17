@@ -16,6 +16,7 @@ public interface Model {
      * {@code Predicate} that always evaluate to true
      */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Meeting> PREDICATE_SHOW_ALL_MEETINGS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -92,6 +93,10 @@ public interface Model {
     void setMeeting(Meeting target, Meeting editedMeeting);
 
     boolean hasMeeting(Meeting meeting);
+
+    ObservableList<Meeting> getWeeklySchedule();
+
+    void changeWeeklySchedule(Predicate<Meeting> predicate);
 
     /**
      * Returns an unmodifiable view of the filtered person list
