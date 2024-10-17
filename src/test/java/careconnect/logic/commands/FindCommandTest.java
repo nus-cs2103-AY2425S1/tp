@@ -90,6 +90,16 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_nameAndAddressKeywords_onePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        NameAndAddressContainsKeywordPredicate predicate = preparePredicate("Alice", "jurong");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE), model.getFilteredPersonList());
+    }
+
+    @Test
     public void toStringMethod() {
         NameAndAddressContainsKeywordPredicate predicate =
                 new NameAndAddressContainsKeywordPredicate(Arrays.asList("keyword"), Arrays.asList("keyword 2"));
