@@ -20,7 +20,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_ORDER_DISPLAYED_INDEX = "The order index provided is invalid";
-    public static final String MESSAGE_ORDERLIST_DOES_NOT_EXIST = "This person does not have any orders";
+    public static final String MESSAGE_ORDERLIST_DOES_NOT_EXIST =
+            "No orders displayed in displayed list. Please use listOrder show a person's order list";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
