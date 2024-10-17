@@ -168,10 +168,10 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseIncome_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
+    public void parseIncome_validValueWithWhitespace_returnsTrimmedIncome() throws Exception {
         String incomeWithWhitespace = WHITESPACE + VALID_INCOME + WHITESPACE;
         Income expectedIncome = new Income(Integer.parseInt(VALID_INCOME));
-        assertEquals(expectedIncome, ParserUtil.parseEmail(incomeWithWhitespace));
+        assertEquals(expectedIncome, ParserUtil.parseIncome(incomeWithWhitespace));
     }
 
     @Test
