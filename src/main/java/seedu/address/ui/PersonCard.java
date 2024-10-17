@@ -46,6 +46,8 @@ public class PersonCard extends UiPart<Region> {
     private Label priority;
     @FXML
     private Label organisation;
+    @FXML
+    private Label remark;
 
 
     /**
@@ -65,5 +67,6 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         priority.setText(person.getPriority().toString());
+        remark.setText(person.getRemark().value);
     }
 }

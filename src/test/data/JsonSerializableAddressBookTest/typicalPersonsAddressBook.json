@@ -8,7 +8,8 @@
     "organisation": "National University of Singapore",
     "lastSeen" : "02-09-2024",
     "tags" : [ "friends" ],
-    "priority" : "low"
+    "priority" : "low",
+    "remark" : "likes apple"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -17,7 +18,8 @@
     "organisation": "National University of Singapore",
     "lastSeen" : "17-11-2024",
     "tags" : [ "owesMoney", "friends" ],
-    "priority" : "medium"
+    "priority" : "medium",
+    "remark" : "likes apple"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -26,7 +28,8 @@
     "organisation": "National University of Singapore",
     "lastSeen" : "05-09-2022",
     "tags" : [ ],
-    "priority" : "low"
+    "priority" : "low",
+    "remark" : "handsome"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -35,7 +38,8 @@
     "organisation": "National University of Singapore",
     "lastSeen" : "04-04-2023",
     "tags" : [ "friends" ],
-    "priority" : "low"
+    "priority" : "low",
+    "remark" : "handsome"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -44,7 +48,8 @@
     "organisation": "National University of Singapore",
     "lastSeen" : "06-06-2024",
     "tags" : [ ],
-    "priority" : "low"
+    "priority" : "low",
+    "remark" : "plays basketball"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -53,7 +58,8 @@
     "organisation": "National University of Singapore",
     "lastSeen" : "03-07-2024",
     "tags" : [ ],
-    "priority" : "low"
+    "priority" : "low",
+    "remark" : "pretty"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
@@ -62,6 +68,7 @@
     "organisation": "National University of Singapore",
     "lastSeen" : "01-09-2024",
     "tags" : [ ],
-    "priority" : "low"
+    "priority" : "low",
+    "remark" : "pretty"
   } ]
 }

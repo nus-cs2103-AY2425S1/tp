@@ -27,13 +27,14 @@ public class Person {
     private final Organisation organisation;
     private final Set<Tag> tags = new HashSet<>();
     private final Priority priority;
+    private final Remark remark;
 
     /**
      * Every field must be present and not null.
      */
 
     public Person(Name name, Phone phone, Email email, Address address, Organisation organisation,
-                LastSeen lastSeen, Set<Tag> tags, Priority priority) {
+                LastSeen lastSeen, Set<Tag> tags, Priority priority, Remark remark) {
         requireAllNonNull(name, phone, email, address, tags, organisation, lastSeen);
 
         this.name = name;
@@ -44,10 +45,15 @@ public class Person {
         this.lastSeen = lastSeen;
         this.tags.addAll(tags);
         this.priority = priority;
+        this.remark = remark;
     }
 
     public Name getName() {
         return name;
+    }
+
+    public Remark getRemark() {
+        return remark;
     }
 
     public Phone getPhone() {
@@ -124,7 +130,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, organisation, lastSeen, tags, priority);
+        return Objects.hash(name, phone, email, address, organisation, lastSeen, tags, priority, remark);
     }
 
     @Override
@@ -138,6 +144,7 @@ public class Person {
                 .add("last seen", lastSeen)
                 .add("tags", tags)
                 .add("priority", priority)
+                .add("remark", remark)
                 .toString();
     }
 

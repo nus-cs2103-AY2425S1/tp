@@ -34,6 +34,7 @@
       <Label fx:id="priority" styleClass="cell_small_label" text="\$priority" />
       <Label fx:id="organisation" styleClass="cell_small_label" text="\$organisation" />
       <Label fx:id="lastSeen" styleClass="cell_small_label" text="\$lastSeen" />
+      <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
     </VBox>
   </GridPane>
 </HBox>

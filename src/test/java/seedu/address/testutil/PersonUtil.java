@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORGANISATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -50,6 +51,7 @@ public class PersonUtil {
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         sb.append(PREFIX_PRIORITY + person.getPriority().toString() + " ");
+        sb.append(PREFIX_REMARK + person.getRemark().toString() + " ");
         return sb.toString();
     }
 
@@ -67,6 +69,8 @@ public class PersonUtil {
         descriptor.getLastSeen().ifPresent(lastSeen -> sb.append(PREFIX_LAST_SEEN)
                 .append(lastSeen.toString()).append(" "));
         descriptor.getPriority().ifPresent(priority -> sb.append(PREFIX_PRIORITY).append(priority)
+                .append(" "));
+        descriptor.getRemark().ifPresent(remark -> sb.append(PREFIX_REMARK).append(remark)
                 .append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();

@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORGANISATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -32,6 +33,7 @@ import seedu.address.model.person.Organisation;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -51,8 +53,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_ORGANISATION + "ORGANISATION] "
             + "[" + PREFIX_LAST_SEEN + "LAST SEEN]"
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "[" + PREFIX_PRIORITY + "PRIORITY]...\n"
+            + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_PRIORITY + "PRIORITY] "
+            + "[" + PREFIX_REMARK + "REMARK]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -113,9 +116,9 @@ public class EditCommand extends Command {
         LastSeen updatedLastSeen = editPersonDescriptor.getLastSeen().orElse(personToEdit.getLastSeen());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority());
+        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedOrganisation,
-                updatedLastSeen, updatedTags, updatedPriority);
-
+                updatedLastSeen, updatedTags, updatedPriority, updatedRemark);
     }
 
     @Override
@@ -155,6 +158,7 @@ public class EditCommand extends Command {
         private LastSeen lastSeen;
         private Set<Tag> tags;
         private Priority priority;
+        private Remark remark;
 
         public EditPersonDescriptor() {}
 
@@ -171,13 +175,15 @@ public class EditCommand extends Command {
             setLastSeen(toCopy.lastSeen);
             setTags(toCopy.tags);
             setPriority(toCopy.priority);
+            setRemark(toCopy.remark);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, organisation, lastSeen, tags, priority);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address,
+                    organisation, lastSeen, tags, priority, remark);
         }
 
         public void setName(Name name) {
@@ -232,6 +238,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(priority);
         }
 
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -283,6 +297,7 @@ public class EditCommand extends Command {
                     .add("last seen", lastSeen)
                     .add("tags", tags)
                     .add("priority", priority)
+                    .add("remark", remark)
                     .toString();
         }
     }
