@@ -172,6 +172,20 @@ Examples:
 * `list` followed by `listt 1` lists transactions for the 1st person in the address book.
 * `find Betsy` followed by `listt 1` lists the transactions for the 1st person in the results of the `find` command.
 
+### Deleting Transactions for a specified person: `deletet`
+
+Format: `deletet INDEX`
+
+* Deletes the transactions at the specified `INDEX` for the first person on the current list.
+* The index refers to the index number of the transaction.
+* This command is intended to be used in conjunction with listt
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listt 1` followed by `deletet 1` deletes the first transaction for the 1st person in the address book.
+* `find Betsy` followed by `deletet 1` deletes the first transaction for the 1st person 
+in the results of the `find` command.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
