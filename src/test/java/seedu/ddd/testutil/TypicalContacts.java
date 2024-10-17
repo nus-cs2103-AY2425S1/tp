@@ -25,13 +25,13 @@ import seedu.ddd.model.contact.vendor.Vendor;
  * A utility class containing a list of {@code Contact} objects to be used in tests.
  */
 public class TypicalContacts {
-
     public static final Client ALICE = new ClientBuilder()
             .withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111")
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends")
+            .withDate("2000-01-01")
             .withId(1)
             .build();
     public static final Vendor BENSON = new VendorBuilder()
@@ -48,6 +48,7 @@ public class TypicalContacts {
             .withPhone("95352563")
             .withEmail("heinz@example.com")
             .withAddress("wall street")
+            .withDate("01/01/2000")
             .withId(3)
             .build();
     public static final Vendor DANIEL = new VendorBuilder()
@@ -64,6 +65,7 @@ public class TypicalContacts {
             .withPhone("9482224")
             .withEmail("werner@example.com")
             .withAddress("michegan ave")
+            .withDate("01 Jan 2000")
             .withId(5)
             .build();
     public static final Client FIONA = new ClientBuilder()
@@ -71,6 +73,7 @@ public class TypicalContacts {
             .withPhone("9482427")
             .withEmail("lydia@example.com")
             .withAddress("little tokyo")
+            .withDate("31 Dec 2000")
             .withId(6)
             .build();
     public static final Vendor GEORGE = new VendorBuilder()
@@ -78,6 +81,7 @@ public class TypicalContacts {
             .withPhone("9482442")
             .withEmail("anna@example.com")
             .withAddress("4th street")
+            .withService("catering")
             .withId(7)
             .build();
 
