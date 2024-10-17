@@ -27,7 +27,7 @@ public class ApplyCommandParser implements Parser<ApplyCommand> {
      */
     public ApplyCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_APPSTATUS);
 
         Index index;
 
