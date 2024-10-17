@@ -26,7 +26,7 @@ public class TagCommand extends Command {
             + ": Tags the person identified by the index number used in the displayed person list "
                 + "with a predefined tag. \n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG] (must be defined using 'newtag' command first\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "bride's side";
 
