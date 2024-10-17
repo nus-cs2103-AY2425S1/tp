@@ -13,8 +13,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.person.Remark;
+import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -125,7 +125,6 @@ public class ParserUtil {
     /**
      * Parses a {@code String priority} into a {@code Priority}.
      * Leading and trailing whitespaces will be trimmed.
-     nigellqx marked this conversation as resolved.
      *
      * @throws ParseException if the given {@code priority} is invalid.
      */

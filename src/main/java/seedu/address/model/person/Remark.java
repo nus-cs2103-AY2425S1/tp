@@ -11,6 +11,11 @@ public class Remark {
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
     public final String value;
+
+    /**
+     * Constructor for remark
+     * @param remark input remark
+     */
     public Remark(String remark) {
         requireNonNull(remark);
         checkArgument(isValidRemark(remark), MESSAGE_CONSTRAINTS);
