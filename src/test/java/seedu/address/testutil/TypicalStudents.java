@@ -76,6 +76,9 @@ public class TypicalStudents {
 
     private TypicalStudents() {} // prevents instantiation
 
+    /**
+     * Returns an {@code AddressBook} with all the typical students.
+     */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         for (Student student : getTypicalStudents()) {
@@ -85,6 +88,6 @@ public class TypicalStudents {
     }
 
     public static List<Student> getTypicalStudents() {
-        return new ArrayList<>(Arrays.asList(HUGH, DIDDY, ALICE));
+        return new ArrayList<>(Arrays.asList(DIDDY, HUGH, ALICE));
     }
 }
