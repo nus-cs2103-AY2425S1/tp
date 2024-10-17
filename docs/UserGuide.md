@@ -127,16 +127,16 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]
 #### Successful Execution
 **Example 1**
 > **Use Case**: Editing phone number and email address of the 1st person in the list to be `91234567` and `johndoe@example.com` respectively.
-> 
+>
 > **Input**:  `edit 1 p/91234567 e/johndoe@example.com`
 >
-> **Output**: 
+> **Output**:
 
-**Example 2** 
+**Example 2**
 > **Use Case**: Editing the name of the 2nd person in the list to be `Betsy Crower`.
-> 
+>
 > **Input**: `edit 2 n/Betsy Crower`
-> 
+>
 > **Output**:  
 
 #### Failed Execution
@@ -160,25 +160,25 @@ find KEYWORD [MORE_KEYWORDS]
 #### Successful Execution
 **Example 1**
 > **Use Case**: Finding all clients with `John` in their names.
-> 
+>
 > **Input**: `find John`
-> 
-> **Output**: 
+>
+> **Output**:
 
 **Example 2**
 > **Use Case**: Finding all clients with `Alex` *OR* `David` in their names.
-> 
+>
 > **Input**: `find alex david`
-> 
+>
 > **Output**: 2 persons listed!
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 #### Failed Execution
 **Example 1**
 > **User Error**: Attempting to find a user that does not exist.
-> 
+>
 > **Input**: `find BabyLockEmDoors`
-> 
+>
 > **Output**:
 
 ### Deleting a person : `delete`
@@ -195,17 +195,17 @@ delete n/NAME
 #### Successful Execution
 **Example**
 > **Use Case**: Deleting `John Doe` from the address book.
-> 
+>
 > **Input**: `delete n/John Doe`
-> 
+>
 > **Output**:
 
 #### Failed Execution
 **Example**
 > **User Error**: Attempting to delete someone that does not exist.
-> 
+>
 > **Input**:
-> 
+>
 > **Output**:
 
 ### Clearing all entries : `clear`
