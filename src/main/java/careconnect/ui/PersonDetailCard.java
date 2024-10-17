@@ -1,7 +1,10 @@
 package careconnect.ui;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Comparator;
-import java.util.function.Consumer;
 
 import careconnect.model.person.Person;
 import javafx.fxml.FXML;
@@ -11,11 +14,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays detailed information of a {@code Person} in the right pane of the window.
  */
-public class PersonCard extends UiPart<Region> {
+public class PersonDetailCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "PersonDetailCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -28,15 +31,15 @@ public class PersonCard extends UiPart<Region> {
     public final Person person;
 
     @FXML
-    private HBox cardPane;
+    private HBox personDetailCardPane;
     @FXML
     private Label name;
-    @FXML
-    private Label id;
     @FXML
     private Label phone;
     @FXML
     private Label address;
+    @FXML
+    private Label addressLink;
     @FXML
     private Label email;
     @FXML
@@ -45,21 +48,25 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex, Consumer<Integer> showSelectedPerson) {
+    public PersonDetailCard(Person person) {
         super(FXML);
         this.person = person;
-        id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
+        addressLink.setOnMouseClicked(e -> {
+            try {
+                String q = person.getAddress().value.replaceAll(" ", "+");
+                URI link = new URI("https://www.google.com/maps/place/" + q);
+                Desktop.getDesktop().browse(link);
+            } catch (URISyntaxException | IOException ex) {
+                // TODO: handle this properly. we should show a ui to inform the user that something has gone wrong
+                throw new RuntimeException(ex);
+            }
+        });
         email.setText(person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-
-        // Attach event listener
-        cardPane.setOnMousePressed(e -> {
-            showSelectedPerson.accept(displayedIndex - 1); // Because the list is 0-indexed
-        });
     }
 }
