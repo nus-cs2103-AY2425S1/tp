@@ -35,7 +35,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "   Format: delete IC_NUMBER\n\n"
             + "7. sort: arranges the list of students based on a specified field\n"
             + "   Format: sort s/FIELD\n\n"
-            + "8. clear: Clears all entries from the address book\n"
+            + "8. clear: Clears all entries from the management system\n"
             + "   Format: clear\n\n"
             + "9. exit: Exits the program\n"
             + "   Format: exit\n\n"
