@@ -132,18 +132,24 @@ Examples:
 
 Finds persons 
 
-Format: `find FULL_NAME`
+Format: 
+`find n/FULL_NAME`
+`find j/JOB_CODE_APPLIED_FOR`
+`find t/TAG`
+`find n/FULL_NAME p/PHONE_NUMBER`
+`find n/FULL_NAME e/EMAIL`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* The search for name is case-insensitive. e.g `hans` will match `Hans`
 * The order of the words matter. e.g. `Hans Bo` will only match `Hans Bo` and not `Bo Hans`
-* Only the name is searched.
+* Job code is case-sensitive.
+* Tag is case-insensitive.
+* Email is case-insensitive.
+* Only full words will be matched e.g. `Han` will not match `Hans`
 
 Examples:
-* `find John Doe Mary Jane` returns `` and `John Doe Mary Jane`
-* `find alex yeoh` returns `Alex Yeoh`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
+* `find n/alex yeoh` returns `Alex Yeoh`
+* `find t/TP` returns the list of contacts with TP tag <br>
+  ![result for 'findTp'](images/findTp.png)
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -151,8 +157,8 @@ Deletes the specified person from the address book.
 Format:
 `delete INDEX`
 `delete n/NAME`
-`delete n/NAME n/PHONE_NUMBER`
-`delete n/NAME n/EMAIL`
+`delete n/NAME p/PHONE_NUMBER`
+`delete n/NAME e/EMAIL`
 
 
 * Deletes the person at the specified `INDEX`, with a specified full name `NAME`, `NAME` and `PHONE_NUMBER`, or `NAME` and `EMAIL`
@@ -162,7 +168,7 @@ Format:
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 * `delete n/Betsy` will delete contact with the full name Betsy.
 * If there are two John Doe, one with `p/8834156` and another with `p/3810349`, type command`delete n/John Doe p/8834156` to delete the former.
 
@@ -184,16 +190,16 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Talency data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, Talency will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the Talency to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
+### Archiving data files `[coming in the future]`
 
 _Details coming soon ..._
 
@@ -202,13 +208,14 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Talency home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the appli
+2. cation to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -217,10 +224,10 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL j/JOB_CODE_APPLIED_FOR t/TAG` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com j/CS2103 t/R`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Delete** | `delete INDEX` e.g. `delete 3`<br>`delete n/NAME` e.g. `delete n/Alex Yeoh`<br> `delete n/NAME e/EMAIL` e.g. `delete n/Alex Yeoh e/alexyeoh@gmail.com` <br> `delete n/NAME p/PHONE` e.g. `delete n/Alex Yeoh p/88306733`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**   | `find n/FULL_NAME` `find j/JOB_CODE_APPLIED_FOR` `find t/TAG` `find n/FULL_NAME p/PHONE_NUMBER` `find n/FULL_NAME e/EMAIL`
 **List**   | `list`
 **Help**   | `help`
