@@ -83,12 +83,12 @@ public class Assignment {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", assignmentName)
-                .add("deadline", deadline)
-                .add("submission status", submissionStatus)
-                .add("grading status", gradingStatus)
-                .add("grade", grade)
-                .toString();
+                 .add("name", assignmentName)
+                 .add("deadline", deadline)
+                 .add("submission status", submissionStatus)
+                 .add("grading status", gradingStatus)
+                 .add("grade", grade)
+                 .toString();
     }
 
     @Override
