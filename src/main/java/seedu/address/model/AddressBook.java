@@ -30,8 +30,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
         groups = new GroupList();
+        persons = new UniquePersonList();
     }
 
     public AddressBook() {}
@@ -61,6 +61,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        groups.set(newData.getGroupList());
     }
 
     //// person-level operations
@@ -100,6 +101,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    // group methods
+
     /**
      * Adds {@code group} to the groups in this {@code AddressBook}.
      */
@@ -112,6 +115,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeGroup(Group group) throws GroupNotFoundException {
         groups.remove(group);
+    }
+
+    public Group getGroup(String groupName) throws GroupNotFoundException {
+        return groups.get(groupName);
     }
 
     //// util methods
@@ -129,6 +136,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public GroupList getGroupList() {
+        return groups;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -140,7 +152,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons) && groups.equals(otherAddressBook.groups);
     }
 
     @Override

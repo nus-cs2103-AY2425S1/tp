@@ -22,12 +22,12 @@ import seedu.address.model.person.exceptions.DuplicateGroupException;
 public class CreateGroupCommand extends Command {
     public static final String COMMAND_WORD = "createGroup";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new group of specified name, with"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new group of specified name, with "
             + "the specified persons (referenced by index of current list) inside.\n"
             + "Parameters: "
             + PREFIX_GROUP_NAME + "GROUP_NAME "
             + PREFIX_MEMBERS + " INDEX [MORE_INDICES...]\n"
-            + "Example: " + COMMAND_WORD + "g/blood drive m/ 1 4 6";
+            + "Example: " + COMMAND_WORD + " g/blood drive m/ 1 4 6";
 
     public static final String MESSAGE_CREATE_GROUP_SUCCESS = "Created group %s\n";
 
