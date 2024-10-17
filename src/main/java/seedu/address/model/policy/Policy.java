@@ -1,14 +1,12 @@
 package seedu.address.model.policy;
 
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.dateformatter.DateFormatter.MM_DD_YYYY_FORMATTER;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Objects;
-
-import seedu.address.model.person.Person;
 
 /**
  * An abstract class to capture all type of policies.
@@ -18,7 +16,6 @@ public abstract class Policy {
             + getValidPolicyTypesAsString() + ".";
     public static final String AMOUNT_MESSAGE_CONSTRAINTS = "Premium amount and coverage amount must be non negative.";
 
-    private Person insuree;
     private double premiumAmount;
     private double coverageAmount;
     private LocalDate expiryDate;
@@ -39,26 +36,6 @@ public abstract class Policy {
         this.premiumAmount = premiumAmount;
         this.coverageAmount = coverageAmount;
         this.expiryDate = expiryDate;
-    }
-
-    /**
-     * Constructor for a new Policy with the insuree specified.
-     *
-     * @param premiumAmount the price of the policy, paid per month.
-     * @param coverageAmount the maximum amount that can be claimed under this policy.
-     * @param expiryDate the date of Policy's expiry.
-     * @param insuree the policy insuree.
-     * @throws IllegalArgumentException if the premiumAmount or coverageAmount is negative.
-     * @throws NullPointerException if the given expiryDate or insuree is null.
-     */
-    public Policy(double premiumAmount, double coverageAmount, LocalDate expiryDate, Person insuree) {
-        requireAllNonNegative(premiumAmount, coverageAmount);
-        requireAllNonNull(expiryDate, insuree);
-
-        this.premiumAmount = premiumAmount;
-        this.coverageAmount = coverageAmount;
-        this.expiryDate = expiryDate;
-        this.insuree = insuree;
     }
 
     /**
@@ -116,15 +93,6 @@ public abstract class Policy {
     }
 
     /**
-     * Return this policy's insuree.
-     *
-     * @return this policy's insuree.
-     */
-    public Person getInsuree() {
-        return insuree;
-    }
-
-    /**
      * Change this policy's premium amount to the specified value, which cannot be negative.
      *
      * @param premiumAmount the new price of the policy, paid per month.
@@ -158,17 +126,6 @@ public abstract class Policy {
     }
 
     /**
-     * Change this policy's insuree to the specified insuree, which cannot be null.
-     *
-     * @param insuree the new insuree of this policy.
-     * @throws NullPointerException if the given insuree is null.
-     */
-    public void setInsuree(Person insuree) {
-        requireNonNull(insuree);
-        this.insuree = insuree;
-    }
-
-    /**
      * Return whether this Policy is expired by comparing it with the date today.
      *
      * @return true if this Policy is expired.
@@ -195,9 +152,7 @@ public abstract class Policy {
         }
 
         Policy p = (Policy) other;
-        boolean sameInsuree = insuree == null ? p.insuree == null : insuree.equals(p.insuree);
-        return sameInsuree
-                && premiumAmount == p.premiumAmount
+        return premiumAmount == p.premiumAmount
                 && coverageAmount == p.coverageAmount
                 && expiryDate.equals(p.expiryDate);
     }
@@ -205,7 +160,7 @@ public abstract class Policy {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(insuree, premiumAmount, coverageAmount, expiryDate);
+        return Objects.hash(premiumAmount, coverageAmount, expiryDate);
     }
 
     /**

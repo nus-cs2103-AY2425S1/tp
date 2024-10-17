@@ -35,6 +35,7 @@ class JsonAdaptedPolicy {
         this.coverageAmount = coverageAmount;
         this.expiryDate = expiryDate;
     }
+
     /**
      * Converts a given {@code Policy} into this class for Jackson use.
      */
@@ -44,20 +45,21 @@ class JsonAdaptedPolicy {
         this.coverageAmount = source.getCoverageAmount();
         this.expiryDate = source.getExpiryDate().format(MM_DD_YYYY_FORMATTER);
     }
+
     /**
      * Converts this Jackson-friendly adapted policy object into the model's {@code Policy} object.
      *
      * @throws IllegalArgumentException if there were any data constraints violated.
      */
     public Policy toModelType() throws IllegalValueException {
-        LocalDate expiryDate;
+        final LocalDate expiryDate;
         try {
             expiryDate = LocalDate.parse(this.expiryDate, MM_DD_YYYY_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new IllegalValueException(DateFormatter.MM_DD_YYYY_MESSAGE_CONSTRAINTS);
         }
 
-        PolicyType modelPolicyType;
+        final PolicyType modelPolicyType;
         try {
             modelPolicyType = PolicyType.valueOf(policyType.toUpperCase());
         } catch (IllegalArgumentException e) {
