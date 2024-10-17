@@ -26,6 +26,7 @@ public class PersonListPanel extends UiPart<Region> {
     public PersonListPanel(ObservableList<Person> personList) {
         super(FXML);
         personListView.setItems(personList);
+        // cell factory creates new ListCell objects for each item in the ListView.
         personListView.setCellFactory(listView -> new PersonListViewCell());
     }
 
@@ -45,5 +46,4 @@ public class PersonListPanel extends UiPart<Region> {
             }
         }
     }
-
 }

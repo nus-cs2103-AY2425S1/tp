@@ -75,4 +75,14 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     * Checks if prefix is present, used specifically for find command
+     * where not all prefixes have to be present.
+     * @param prefix Prefix of argument
+     * @return true if prefix is present in argMultimap, false otherwise
+     */
+    public boolean isPresent(Prefix prefix) {
+        return argMultimap.containsKey(prefix);
+    }
 }
