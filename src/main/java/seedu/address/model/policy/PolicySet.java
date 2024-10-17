@@ -116,11 +116,11 @@ public class PolicySet implements Set<Policy> {
     /**
      * Throws an exception if {@code obj} is not an instance of {@code PolicyType}.
      * Return whether this set contains a {@code Policy} associated with the specified {@code PolicyType}
-     * as indicated by calling {@code obj::getType}.
+     * as indicated by typecasting {@code (PolicyType) obj}.
      *
      * @param obj whose presence in this set is to be tested.
      * @return true if this set contains a {@code Policy} associated with the specified {@code PolicyType}
-     *         as indicated by calling {@code obj::getType}.
+     *         as indicated by typecasting {@code (PolicyType) obj}.
      * @throws NullPointerException when {@code obj} is null.
      * @throws ClassCastException when {@code obj} is not an instance of {@code PolicyType}.
      */
@@ -130,7 +130,7 @@ public class PolicySet implements Set<Policy> {
         requireClassPolicyType(obj);
 
         PolicyType policyType = (PolicyType) obj;
-        return policies[hash(policyType)] == null;
+        return policies[hash(policyType)] != null;
     }
 
     /**
@@ -182,12 +182,12 @@ public class PolicySet implements Set<Policy> {
     /**
      * Throws an exception if {@code obj} is not an instance of {@code PolicyType}.
      * Removes the {@code Policy} associated with the {@code PolicyType} as indicated
-     * by calling {@code obj::getType}.
+     * by typecasting {@code (PolicyType) obj}.
      * Return whether this set has been changed as a result of the call.
      *
      * @param obj whose associated {@code Policy} is to be removed.
      * @return true if this set had a {@code Policy} associated with the {@code PolicyType}
-     *         as indicated by calling {@code obj::getType}.
+     *         as indicated by typecasting {@code (PolicyType) obj}.
      * @throws NullPointerException when {@code obj} is null.
      * @throws ClassCastException when {@code obj} is not an instance of {@code PolicyType}.
      */
@@ -321,13 +321,6 @@ public class PolicySet implements Set<Policy> {
         }
 
         PolicySet otherPolicySet = (PolicySet) other;
-        for (int i = 0; i < size; i++) {
-            assert i < policies.length : "Index exceeds the array length";
-            if ((policies[i] == null && otherPolicySet.policies[i] != null)
-                    || (policies[i] != null && !policies[i].equals(otherPolicySet.policies[i]))) {
-                return false;
-            }
-        }
-        return true;
+        return Arrays.equals(policies, otherPolicySet.policies);
     }
 }
