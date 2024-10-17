@@ -80,7 +80,6 @@ public class PersonBuilder {
     }
 
     /**
-     *
      * Sets the {@code Rsvp} of the {@code Person} that we are building.
      */
     public PersonBuilder withRsvp(boolean rsvp) {

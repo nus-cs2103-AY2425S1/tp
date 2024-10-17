@@ -48,9 +48,8 @@ public class RsvpCommandTest {
     public void execute_invalidIndex_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         RsvpCommand rsvpCommand = new RsvpCommand(outOfBoundIndex);
-
-        assertCommandFailure(rsvpCommand, model, String.format(RsvpCommand.MESSAGE_INVALID_INDEX +
-                model.getFilteredPersonList().size() + ")"));
+        assertCommandFailure(rsvpCommand, model, String.format(RsvpCommand.MESSAGE_INVALID_INDEX
+                + model.getFilteredPersonList().size() + ")"));
     }
 
     @Test
