@@ -16,7 +16,12 @@ import tuteez.model.person.Person;
 public abstract class RemarkCommand extends Command {
 
     public static final String COMMAND_WORD = "remark";
-    public static final String MESSAGE_USAGE = "placeholder";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds or deletes a remark for the student identified by the index number in the displayed student list."
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[-a ADD_REMARK] | [-d DELETE_REMARK_INDEX]\n"
+            + "Example to add remark: " + COMMAND_WORD + " 1 -a This is a new remark\n"
+            + "Example to delete remark: " + COMMAND_WORD + " 1 -d 2";
 
     protected final Index personIndex;
 
