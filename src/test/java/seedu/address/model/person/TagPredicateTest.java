@@ -14,19 +14,19 @@ public class TagPredicateTest {
     @Test
     public void test_tagMatches_returnsTrue() {
         TagPredicate predicate = new TagPredicate(Arrays.asList("TP"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("TP").build()));
+        assertTrue(predicate.test(new PersonBuilder().withTag("TP").build()));
     }
 
     @Test
     public void test_tagDoesNotMatch_returnsFalse() {
         TagPredicate predicate = new TagPredicate(Arrays.asList("TP"));
-        assertFalse(predicate.test(new PersonBuilder().withTags("N").build()));
+        assertFalse(predicate.test(new PersonBuilder().withTag("N").build()));
     }
 
     @Test
     public void test_tagDifferentCase_returnsTrue() {
         TagPredicate predicate = new TagPredicate(Arrays.asList("tp"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("TP").build()));
+        assertTrue(predicate.test(new PersonBuilder().withTag("TP").build()));
     }
 }
 

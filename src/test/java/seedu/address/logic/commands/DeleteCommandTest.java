@@ -195,7 +195,7 @@ public class DeleteCommandTest {
                 .withEmail("testduplicate@gmail.com").withJobCode("123ABC").build();
         model.addPerson(duplicatePerson);
         DeleteCommand deleteCommand = new DeleteCommand(new Name("Carl Kurz"));
-        String expectedMessage = "Multiple contacts with the same full name found. Please specify more using"
+        String expectedMessage = "Multiple contacts with the same full name found. Please specify more using "
                 + "this format:\n" + "delete" + " n/NAME e/EMAIL OR "
                 + "delete" + " n/NAME p/PHONE";
         assertCommandFailure(deleteCommand, model, expectedMessage);
