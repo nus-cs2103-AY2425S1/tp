@@ -51,11 +51,16 @@ public class DelMedConCommandParser implements Parser<DelMedConCommand> {
         // Parse all MedCon values and add them to a set
         Set<MedCon> medCons = new HashSet<>();
         for (String medConStr : argMultimap.getAllValues(PREFIX_MEDCON)) {
-            if (medConStr.length() > 45) {
+            if (medConStr.isEmpty()) {
+                logger.warning("Medical condition is empty.");
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        DelMedConCommand.MESSAGE_USAGE));
+            } else if (medConStr.length() > 45) {
                 logger.warning("Medical condition exceeds character limit: " + medConStr);
                 throw new ParseException(MESSAGE_CONSTRAINTS_LENGTH);
+            } else {
+                medCons.add(new MedCon(medConStr));
             }
-            medCons.add(new MedCon(medConStr));
         }
 
         return new DelMedConCommand(nric, medCons);

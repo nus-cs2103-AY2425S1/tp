@@ -45,10 +45,14 @@ public class AddMedConCommandParser implements Parser<AddMedConCommand> {
         // Parse all MedCon values and add them to a set
         Set<MedCon> medCons = new HashSet<>();
         for (String medConStr : argMultimap.getAllValues(PREFIX_MEDCON)) {
-            if (medConStr.length() > 45) {
+            if (medConStr.isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddMedConCommand.MESSAGE_USAGE));
+            } else if (medConStr.length() > 45) {
                 throw new ParseException(MESSAGE_CONSTRAINTS_LENGTH);
+            } else {
+                medCons.add(new MedCon(medConStr));
             }
-            medCons.add(new MedCon(medConStr));
         }
 
         return new AddMedConCommand(nric, medCons);
