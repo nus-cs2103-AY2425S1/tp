@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -45,5 +46,35 @@ public class ViewCommand extends Command {
         model.updateFilteredPersonList(combinedPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+    }
+
+    /**
+     * @param other
+     * @return a boolean indicate if they are equal
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (!(other instanceof ViewCommand)) {
+            return false;
+        }
+
+        ViewCommand otherViewCommand = (ViewCommand) other;
+        // Compare the combinedPredicate using reference equality or a custom method
+        // if you have a better way to compare the logic encapsulated by the predicates.
+        return combinedPredicate.equals(otherViewCommand.combinedPredicate);
+    }
+
+    /**
+     * @return a string represents viewCommand
+     */
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("view predicate", combinedPredicate)
+                .toString();
     }
 }
