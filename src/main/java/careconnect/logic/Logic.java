@@ -35,6 +35,14 @@ public interface Logic {
     String autocompleteCommand(String commandText) throws AutocompleteException;
 
     /**
+     * Checks if given string is valid syntax
+     *
+     * @param syntax The syntax to check
+     * @return true if given string is valid syntax; else false
+     */
+    boolean validateSyntax(String syntax);
+
+    /**
      * Returns the AddressBook.
      *
      * @see Model#getAddressBook()

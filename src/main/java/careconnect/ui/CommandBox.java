@@ -1,5 +1,6 @@
 package careconnect.ui;
 
+import careconnect.commons.exceptions.IllegalValueException;
 import careconnect.logic.Logic;
 import careconnect.logic.autocompleter.exceptions.AutocompleteException;
 import careconnect.logic.commands.CommandResult;
@@ -22,7 +23,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
-    private final AddressBookParser parser;
+    private final SyntaxValidator syntaxValidator;
     private final CommandAutocompleter commandAutocompleter;
 
     @FXML
@@ -31,13 +32,14 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
-    public CommandBox(CommandExecutor commandExecutor, CommandAutocompleter commandAutocompleter) {
+    public CommandBox(CommandExecutor commandExecutor, CommandAutocompleter commandAutocompleter,
+                      SyntaxValidator syntaxValidator) {
         super(FXML);
         this.commandExecutor = commandExecutor;
         this.commandAutocompleter = commandAutocompleter;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
-        this.parser = new AddressBookParser();
+        this.syntaxValidator = syntaxValidator;
     }
 
     /**
@@ -100,14 +102,12 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
 
-        try {
-            parser.parseCommand(commandText);
-
+        if (syntaxValidator.validateSyntax(commandText)) {
             // Sets style back to default if command is valid
             this.setStyleToDefault();
             assert(!(this.commandTextField.getStyleClass()
                             .contains(ERROR_STYLE_CLASS)));
-        } catch (ParseException e) {
+        } else {
             setStyleToIndicateCommandFailure();
         }
     }
@@ -157,6 +157,19 @@ public class CommandBox extends UiPart<Region> {
          * @see Logic#autocompleteCommand(String)
          */
         String autocompleteCommand(String commandText) throws AutocompleteException;
+    }
+
+    /**
+     * Represents a function that can validate syntax
+     */
+    @FunctionalInterface
+    public interface SyntaxValidator {
+        /**
+         * Checks if the string provided is valid syntax
+         *
+         * @see Logic#validateSyntax(String)
+         */
+        boolean validateSyntax(String syntax);
     }
 
 }

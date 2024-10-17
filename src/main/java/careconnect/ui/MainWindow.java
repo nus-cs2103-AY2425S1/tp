@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import careconnect.commons.core.GuiSettings;
 import careconnect.commons.core.LogsCenter;
+import careconnect.commons.exceptions.IllegalValueException;
 import careconnect.logic.Logic;
 import careconnect.logic.autocompleter.exceptions.AutocompleteException;
 import careconnect.logic.commands.CommandResult;
@@ -136,7 +137,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand, this::autocompleteCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, this::autocompleteCommand, this::validateSyntax);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -236,4 +237,15 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+    /**
+     * Checks if given string is valid syntax
+     *
+     * @see Logic#validateSyntax(String)
+     */
+    private boolean validateSyntax(String syntax) {
+        boolean isValidSyntax = logic.validateSyntax(syntax);
+        logger.info("isValidSyntax: " + isValidSyntax);
+        return isValidSyntax;
+    }
+
 }

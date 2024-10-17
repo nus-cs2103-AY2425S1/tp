@@ -100,6 +100,19 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public boolean validateSyntax(String syntax) {
+        if (commandsList.contains(syntax)) {
+            return true;
+        }
+        try {
+            addressBookParser.parseCommand(syntax);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
+    @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();
     }
