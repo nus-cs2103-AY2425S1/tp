@@ -213,7 +213,7 @@ Format: `delSell INDEX_PERSON INDEX_PROPERTY`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2 1` deletes the 1st selling property under 2nd person in the address book.
+* `list` followed by `delSell 2 1` deletes the 1st selling property under 2nd person in the address book.
 
 ### Deleting a property to be bought : `delSell`
 
@@ -226,7 +226,7 @@ Format: `delBuy INDEX_PERSON INDEX_PROPERTY`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2 1` deletes the 1st buying property under 2nd person in the address book.
+* `list` followed by `delBuy 2 1` deletes the 1st buying property under 2nd person in the address book.
 
 
 ### Clearing all entries : `clear`
@@ -292,8 +292,8 @@ Action     | Format, Examples
 **Add Property** | `addSell INDEX_NUMBER ht/HOUSING TYPE sp/SELLING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​` <br> e.g., `addSell 5 ht/h sp/735000 pc/138600 un/30-05 t/Extremely spacious/Near MRT`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Delete Property** | `delSell INDEX_PERSON INDEX_PROPERTY`<br> e.g., `delete 3 2`
-**Delete Property** | `delBuy INDEX_PERSON INDEX_PROPERTY`<br> e.g., `delete 3 2`
+**Delete Property** | `delSell INDEX_PERSON INDEX_PROPERTY`<br> e.g., `delSell 3 2`
+**Delete Property** | `delBuy INDEX_PERSON INDEX_PROPERTY`<br> e.g., `delBuy 3 2`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find Name**   | `findn KEYWORD [MORE_KEYWORDS]`<br> e.g., `findn James Jake`
 **Find Phone Number**   | `findp KEYWORD [MORE_KEYWORDS]`<br> e.g., `findn 98272758 85495438`
