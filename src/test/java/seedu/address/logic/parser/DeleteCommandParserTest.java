@@ -48,8 +48,6 @@ public class DeleteCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
-
-
     @Test
     public void parse_invalidArgsNotNum_throwsParseException() {
         assertParseFailure(parser, "a",
@@ -86,5 +84,16 @@ public class DeleteCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
+    @Test
+    public void parse_invalidArgsSomeEmptyString_throwsParseException() {
+        assertParseFailure(parser, DEFAULT_DELIMITER + "3" + DEFAULT_DELIMITER,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidArgsSpaces_throwsParseException() {
+        assertParseFailure(parser, " " + DEFAULT_DELIMITER + " ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
 
 }
