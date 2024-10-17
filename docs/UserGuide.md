@@ -102,6 +102,7 @@ A person is considered a duplicate if another person in the address book has the
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/CS1101S`. John is a CS1101S student.
+  ![result for adding John Doe](images/addJohnDoeResult.png)
 * `add n/Jane Doe p/81234567 e/janed@example.com r/CS1101S-TA r/CS2040S`. Jane is a CS1101S tutor and a CS2040S student.
 
 ### Listing all persons : `list`
