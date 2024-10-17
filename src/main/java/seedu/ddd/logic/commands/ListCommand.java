@@ -3,7 +3,6 @@ package seedu.ddd.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.ddd.logic.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_CLIENT;
 
 import java.util.function.Predicate;
 
