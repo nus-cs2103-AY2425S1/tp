@@ -3,11 +3,12 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
-import java.util.List;
+import java.util.Optional;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Nric;
+import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Priority;
 
@@ -30,7 +31,6 @@ public class PriorityCommand extends Command {
     public static final String PRIORITY_ASSIGN_SUCCESS = "Assigned priority to Nric: %1$s";
     public static final String PATIENT_DOES_NOT_EXIST = "Patient does not exist in contact list";
     public static final String PRIORITY_SET_TO_NONE_SUCCESS = "Priority has been removed from Nric: %1$s";
-    public static final String MULTIPLE_PARAMETER = "Please input only 1 of each parameter";
     private final Priority priority;
     private final Nric nric;
 
@@ -48,28 +48,34 @@ public class PriorityCommand extends Command {
     }
 
     /**
-     * Executes the command to Add or update the priority of the specified person in the model.
+     * Executes the command and updates the priority of the specified person in the model.
+     * If the person is found in the address book, their priority will be updated and the filtered
+     * list of persons will be refreshed. If the person does not exist, a {@code CommandException}
+     * will be thrown.
      *
-     * @param model The model to update the person's priority in.
-     * @return The result of the command execution.
-     * @throws CommandException If the patient does not exist in the contact list.
+     * @param model The {@code Model} which contains the list of persons and is
+     *              responsible for handling data operations.
+     * @return A {@code CommandResult} containing the success message after updating the person's priority.
+     * @throws CommandException If the person with the specified NRIC does not exist in the address book.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
-        for (Person person : lastShownList) {
-            if (person.getNric().equals(this.nric)) {
-                Person editedPerson = new Person(
-                        person.getName(), person.getPhone(), person.getEmail(),
-                        person.getNric(), person.getAddress(), person.getDateOfBirth(),
-                        person.getGender(), person.getAllergies(), priority, person.getAppointments(),
-                        person.getMedCons());
-                model.setPerson(person, editedPerson);
-                model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-                return new CommandResult(generateSuccessMessage(editedPerson));
-            }
+        NricMatchesPredicate nricPredicate = new NricMatchesPredicate(this.nric);
+        Optional<Person> personOptional = model.fetchPersonIfPresent(nricPredicate);
+
+        if (personOptional.isPresent()) {
+            Person person = personOptional.get();
+            Person editedPerson = new Person(
+                    person.getName(), person.getPhone(), person.getEmail(),
+                    person.getNric(), person.getAddress(), person.getDateOfBirth(),
+                    person.getGender(), person.getAllergies(), priority, person.getAppointments(),
+                    person.getMedCons());
+            model.setPerson(person, editedPerson);
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(generateSuccessMessage(editedPerson));
+        } else {
+            throw new CommandException(PATIENT_DOES_NOT_EXIST);
         }
-        throw new CommandException(PATIENT_DOES_NOT_EXIST);
     }
 
     /**
