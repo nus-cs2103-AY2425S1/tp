@@ -30,7 +30,7 @@ public class DeleteLessonCommandTest {
     }
 
     @Test
-    public void deleteNonExistentLesson() {
+    public void deleteNonExistentLesson_throwsException() {
         Lesson lesson = new Lesson("Math", DayOfWeek.MONDAY, LocalTime.of(12, 0), LocalTime.of(13, 0));
         Model model = new ModelManager();
         model.addLesson(lesson);
