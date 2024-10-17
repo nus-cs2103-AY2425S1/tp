@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import keycontacts.commons.exceptions.IllegalValueException;
 import keycontacts.model.lesson.CancelledLesson;
+import keycontacts.model.lesson.MakeupLesson;
 import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Address;
@@ -22,7 +23,7 @@ import keycontacts.model.student.Student;
 /**
  * Jackson-friendly version of {@link Student}.
  */
-class JsonAdaptedStudent {
+public class JsonAdaptedStudent {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Student's %s field is missing!";
 
@@ -31,6 +32,7 @@ class JsonAdaptedStudent {
     private final String address;
     private final String gradeLevel;
     private final List<JsonAdaptedPianoPiece> pianoPieces = new ArrayList<>();
+    private final List<JsonAdaptedMakeupLesson> makeupLessons = new ArrayList<>();
     private final JsonAdaptedRegularLesson regularLesson;
     private final List<JsonAdaptedCancelledLesson> cancelledLessons = new ArrayList<>();
 
@@ -39,10 +41,11 @@ class JsonAdaptedStudent {
      */
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                              @JsonProperty("address") String address, @JsonProperty("gradeLevel") String gradeLevel,
-                              @JsonProperty("pianoPieces") List<JsonAdaptedPianoPiece> pianoPieces,
-                              @JsonProperty("regularLesson") JsonAdaptedRegularLesson regularLesson,
-                              @JsonProperty("cancelledLessons") List<JsonAdaptedCancelledLesson> cancelledLessons) {
+            @JsonProperty("address") String address, @JsonProperty("gradeLevel") String gradeLevel,
+            @JsonProperty("pianoPieces") List<JsonAdaptedPianoPiece> pianoPieces,
+            @JsonProperty("regularLesson") JsonAdaptedRegularLesson regularLesson,
+            @JsonProperty("cancelledLessons") List<JsonAdaptedCancelledLesson> cancelledLessons,
+            @JsonProperty("makeupLessons") List<JsonAdaptedMakeupLesson> makeupLessons) {
         this.name = name;
         this.phone = phone;
         this.address = address;
@@ -53,6 +56,9 @@ class JsonAdaptedStudent {
         this.regularLesson = regularLesson;
         if (cancelledLessons != null) {
             this.cancelledLessons.addAll(cancelledLessons);
+        }
+        if (makeupLessons != null) {
+            this.makeupLessons.addAll(makeupLessons);
         }
     }
 
@@ -71,12 +77,17 @@ class JsonAdaptedStudent {
         cancelledLessons.addAll(source.getCancelledLessons().stream()
                 .map(JsonAdaptedCancelledLesson::new)
                 .collect(Collectors.toList()));
+        makeupLessons.addAll(source.getMakeupLessons().stream()
+                .map(JsonAdaptedMakeupLesson::new)
+                .collect(Collectors.toList()));
     }
 
     /**
-     * Converts this Jackson-friendly adapted student object into the model's {@code Student} object.
+     * Converts this Jackson-friendly adapted student object into the model's
+     * {@code Student} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted student.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted student.
      */
     public Student toModelType() throws IllegalValueException {
         final List<PianoPiece> studentPianoPieces = new ArrayList<>();
@@ -87,6 +98,11 @@ class JsonAdaptedStudent {
         final List<CancelledLesson> studentCancelledLessons = new ArrayList<>();
         for (JsonAdaptedCancelledLesson cancelledLesson : cancelledLessons) {
             studentCancelledLessons.add(cancelledLesson.toModelType());
+        }
+
+        final List<MakeupLesson> studentMakeupLessons = new ArrayList<>();
+        for (JsonAdaptedMakeupLesson makeupLesson : makeupLessons) {
+            studentMakeupLessons.add(makeupLesson.toModelType());
         }
 
         if (name == null) {
@@ -130,11 +146,12 @@ class JsonAdaptedStudent {
         } else {
             modelRegularLesson = null;
         }
+        final Set<MakeupLesson> modelMakeupLessons = new HashSet<>(studentMakeupLessons);
 
         final Set<CancelledLesson> modelCancelledLessons = new HashSet<>(studentCancelledLessons);
 
-        return new Student(modelName, modelPhone, modelAddress, modelGradeLevel, modelPianoPieces, modelRegularLesson,
-                modelCancelledLessons);
+        return new Student(modelName, modelPhone, modelAddress, modelGradeLevel, modelPianoPieces,
+                modelRegularLesson, modelCancelledLessons, modelMakeupLessons);
     }
 
 }

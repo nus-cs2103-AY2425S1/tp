@@ -32,6 +32,10 @@ public class Date implements Comparable<Date> {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public LocalDate getLocalDate() {
+        return date;
+    }
+
     @Override
     public String toString() {
         return date.format(DATE_TIME_FORMATTER);

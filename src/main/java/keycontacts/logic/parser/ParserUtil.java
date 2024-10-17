@@ -158,7 +158,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String date} into a {@code LocalDate}.
+     * Parses {@code String date} into a {@code Date}.
      */
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);

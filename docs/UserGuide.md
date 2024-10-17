@@ -160,6 +160,19 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Scheduling a makeup lesson : `makeup`
+
+Schedules a makeup lesson for the specified student in the student directory.
+
+Format: `makeup INDEX dt/DATE st/START_TIME et/END_TIME`
+
+* Schedules the makeup lesson for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* `DATE` must be in the format `DD-MM-YYYY`.
+* `START_TIME` and `END_TIME` must be in 24-hour format, and `START_TIME` must be before `END_TIME`
+
+Examples:
+* `makeup 1 dt/25-12-2022 st/12:00 et/14:00` Schedules a makeup lesson on 25th December 2022, 12-2pm for the 1st student.
+
 ### Deleting a student : `delete`
 
 Deletes the specified student from the student directory.
@@ -232,6 +245,7 @@ Action     | Format, Examples
 **Assign** | `assign INDEX pn/PIECE_NAME...`<br> e.g,`assign 1 pn/Moonlight Sonata pn/Canon in D`
 **Schedule** | `schedule INDEX d/DAY st/START_TIME et/END_TIME`<br> e.g.,`schedule 1 d/Monday st/12:00 et/14:00`
 **Cancel** |  `cancel INDEX dt/DATE st/START_TIME` <br> e.g., `cancel 1 dt/14-10-2024 st/12:00`
+**Makeup** | `makeup INDEX dt/DATE st/START_TIME et/END_TIME`<br> e.g.,`makeup 1 d/25-12-2022 st/12:00 et/14:00`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Clear**  | `clear`

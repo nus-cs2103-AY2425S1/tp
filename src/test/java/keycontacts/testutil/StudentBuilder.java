@@ -1,10 +1,12 @@
 package keycontacts.testutil;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 import keycontacts.model.lesson.CancelledLesson;
 import keycontacts.model.lesson.Day;
+import keycontacts.model.lesson.MakeupLesson;
 import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.lesson.Time;
 import keycontacts.model.pianopiece.PianoPiece;
@@ -24,6 +26,7 @@ public class StudentBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_GRADE_LEVEL = "ABRSM 3";
     public static final RegularLesson DEFAULT_REGULAR_LESSON = null;
+    public static final Set<MakeupLesson> DEFAULT_MAKEUP_LESSONS = new HashSet<>();
 
     private Name name;
     private Phone phone;
@@ -32,6 +35,7 @@ public class StudentBuilder {
     private Set<PianoPiece> pianoPieces;
     private RegularLesson regularLesson;
     private Set<CancelledLesson> cancelledLessons;
+    private Set<MakeupLesson> makeupLessons;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -44,6 +48,7 @@ public class StudentBuilder {
         pianoPieces = new HashSet<>();
         regularLesson = DEFAULT_REGULAR_LESSON;
         cancelledLessons = new HashSet<>();
+        makeupLessons = DEFAULT_MAKEUP_LESSONS;
     }
 
     /**
@@ -57,6 +62,7 @@ public class StudentBuilder {
         pianoPieces = new HashSet<>(studentToCopy.getPianoPieces());
         regularLesson = studentToCopy.getRegularLesson();
         cancelledLessons = new HashSet<>(studentToCopy.getCancelledLessons());
+        makeupLessons = new HashSet<>(studentToCopy.getMakeupLessons());
     }
 
     /**
@@ -95,7 +101,7 @@ public class StudentBuilder {
      * Parses the {@code pianoPieces} into a {@code Set<PianoPiece>}
      * and set it to the {@code Student} that we are building.
      */
-    public StudentBuilder withPianoPieces(String ... pianoPieces) {
+    public StudentBuilder withPianoPieces(String... pianoPieces) {
         this.pianoPieces = PianoPiece.getPianoPieceSet(pianoPieces);
         return this;
     }
@@ -117,8 +123,21 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code makeupLessons} into a {@code Set<MakeupLesson>}
+     */
+    public StudentBuilder withMakeupLessons(MakeupLesson... lessons) {
+        this.makeupLessons = (lessons != null) ? new HashSet<>(Arrays.asList(lessons)) : new HashSet<>();
+        return this;
+    }
+
+    /**
+     * Builds the student.
+     */
+
     public Student build() {
-        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson, cancelledLessons);
+        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson,
+            cancelledLessons, makeupLessons);
     }
 
 }
