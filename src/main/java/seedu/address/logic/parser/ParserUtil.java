@@ -10,9 +10,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Cost;
+import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Quantity;
 import seedu.address.model.delivery.SupplierIndex;
-import seedu.address.model.delivery.Time;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
@@ -190,13 +190,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code dd-MM-yyyy HH:mm} is invalid.
      */
-    public static Time parseDateTime(String dateTime) throws ParseException {
+    public static DateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
-        if (!Time.isValidTime(trimmedDateTime)) {
-            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
+        if (!DateTime.isValidTime(trimmedDateTime)) {
+            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
         }
-        return new Time(trimmedDateTime);
+        return new DateTime(trimmedDateTime);
     }
 
     /**

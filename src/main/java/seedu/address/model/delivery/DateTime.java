@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
 /**
  * Represents the date and time of a delivery in the application.
  */
-public class Time {
+public class DateTime {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Time should be in the format dd-MM-yyyy HH:mm and must not be blank.";
@@ -25,7 +25,7 @@ public class Time {
      *
      * @param time A valid time following the format of dd-MM-yyyy HH:mm.
      */
-    public Time(String time) {
+    public DateTime(String time) {
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
         this.time = parseTime(time.trim());
@@ -57,18 +57,23 @@ public class Time {
         return time.format(FORMATTER_TIME);
     }
 
+
+    public String displayFormater() {
+        return time.format(DateTimeFormatter.ofPattern("d MMMM yyyy h:mm a"));
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
-        if (!(other instanceof Time)) {
+        if (!(other instanceof DateTime)) {
             return false;
         }
 
-        Time otherTime = (Time) other;
-        return time.equals(otherTime.time);
+        DateTime otherDateTime = (DateTime) other;
+        return time.equals(otherDateTime.time);
     }
 
     @Override

@@ -33,6 +33,7 @@ public class DeliveryListPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Delivery} using a {@code DeliveryCard}.
      */
     static class DeliveryListViewCell extends ListCell<Delivery> {
+
         @Override
         protected void updateItem(Delivery delivery, boolean empty) {
             super.updateItem(delivery, empty);
