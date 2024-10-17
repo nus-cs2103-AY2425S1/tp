@@ -141,7 +141,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code student} and {@code group} must exist in the address book.
      */
     public void addStudentToGroup(Student student, Group group) {
+        requireNonNull(group);
+        requireNonNull(student);
         group.add(student);
+        students.setPerson(student, student.setStudentGroup(group.getGroupName()));
     }
 
     /**
@@ -157,6 +160,40 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addTask(Task task) {
         tasks.add(task);
+    }
+
+    /**
+     * Increases the number of groups with the particular task by 1.
+     * @param task  The task in question.
+     */
+    public void incrementTask(Task task) {
+        tasks.forEach(x -> {
+            if (x.isSameTask(x)) {
+                x.increaseGroupWithTask();
+            }
+        });
+    }
+
+    /**
+     * Decreases the number of groups with the particular task by 1.
+     * @param task  The task in question.
+     */
+    public void decrementTask(Task task) {
+        tasks.forEach(x -> {
+            if (x.isSameTask(x)) {
+                x.decreaseGroupWithTask();
+            }
+        });
+
+        Task toDelete = null;
+        for (Task t: tasks) {
+            if (t.getGroupsWithTask() == 0) {
+                toDelete = t;
+            }
+        }
+        if (toDelete != null) {
+            tasks.remove(toDelete);
+        }
     }
 
     public Student getStudentByNumber(StudentNumber studentNumber) {

@@ -216,4 +216,8 @@ public interface Model {
     void deleteTaskFromGroup(Task task, Group group);
 
     void deleteTask(Task task);
+
+    void increaseGroupWithTask(Task task);
+
+    void decreaseGroupWithTask(Task task);
 }
