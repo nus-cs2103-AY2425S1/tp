@@ -123,5 +123,4 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
         }
     }
-
 }
