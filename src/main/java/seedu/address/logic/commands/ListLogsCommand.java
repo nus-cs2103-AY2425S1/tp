@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.IdentityNumber;
@@ -29,13 +31,11 @@ public class ListLogsCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException("ListLogsCommand not implemented yet");
-
         //TODO: Handle behaviour later
-        //requireNonNull(model);
+        requireNonNull(model);
         // Temporary stub
-        //model.updateFilteredLogsListById(this.identityNumber);
-        //return new CommandResult("The NRIC you inputted is: " + "nric");
+        model.updateFilteredLogsListById(this.identityNumber);
+        return new CommandResult("The NRIC you inputted is: " + this.identityNumber.toString());
     }
 
     @Override
