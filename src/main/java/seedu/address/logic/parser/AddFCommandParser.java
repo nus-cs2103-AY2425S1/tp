@@ -64,7 +64,8 @@ public class AddFCommandParser implements Parser<AddFCommand> {
         Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
         Sex sex = ParserUtil.parseSex(argMultimap.getValue(PREFIX_SEX).get());
         Birthdate birthDate = ParserUtil.parseBirthDate(argMultimap.getValue(PREFIX_BIRTHDATE).get());
-        Set<HealthService> healthServicesList = ParserUtil.parseHealthServices(argMultimap.getAllValues(PREFIX_HEALTHSERVICE));
+        Set<HealthService> healthServicesList = ParserUtil.parseHealthServices(
+                argMultimap.getAllValues(PREFIX_HEALTHSERVICE));
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(""));

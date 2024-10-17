@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Objects;
@@ -22,6 +23,7 @@ public class HealthRisk {
      * @param healthRisk A valid health condition (LOW, MEDIUM , HIGH).
      */
     public HealthRisk(String healthRisk) {
+        requireNonNull(healthRisk);
         checkArgument(isValidHealthRisk(healthRisk.toUpperCase()), MESSAGE_CONSTRAINTS);
         value = healthRisk.toUpperCase();
     }

@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -18,6 +19,7 @@ public class Note {
      * @param note A valid note about patient.
      */
     public Note(String note) {
+        requireNonNull(note);
         checkArgument(isValidNote(note), MESSAGE_CONSTRAINTS);
         value = note;
     }
