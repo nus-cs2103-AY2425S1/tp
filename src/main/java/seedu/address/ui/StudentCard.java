@@ -54,6 +54,7 @@ public class StudentCard extends UiPart<Region> {
         contactNumber.setText(student.getPhone().value);
         tutorialGroup.setText(student.getTutorialGroup().value);
         studentNumber.setText(student.getStudentNumber().value);
+
         student.getAssignments().forEach(assignment ->
                 assignments.getChildren().add(new Label(assignment.getAssignmentName().toString())));
 
