@@ -139,6 +139,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean checkTimeslot(Lesson lesson) {
+        requireNonNull(lesson);
+        return edulogCalendar.checkTimeslot(lesson);
+    }
+
+    @Override
     public void removeLesson(Lesson lesson) {
         requireNonNull(lesson);
         edulogCalendar.removeLesson(lesson);
