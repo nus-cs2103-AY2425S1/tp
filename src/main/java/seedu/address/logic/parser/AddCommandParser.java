@@ -18,6 +18,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmergencyContactName;
+import seedu.address.model.person.EmergencyPhone;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -60,9 +61,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         StudentClass studentClass = ParserUtil.parseStudentClass(argMultimap.getValue(PREFIX_STUDENT_CLASS).get());
         EmergencyContactName ecName = new EmergencyContactName("");
         //Adding a student does not allow ECName to be added right away
+        EmergencyPhone emergencyPhone = new EmergencyPhone("");
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, registerNumber, sex, studentClass, ecName, tagList);
+        Person person = new Person(name, phone, email, address, registerNumber, sex, studentClass, ecName, emergencyPhone, tagList);
 
         return new AddCommand(person);
     }

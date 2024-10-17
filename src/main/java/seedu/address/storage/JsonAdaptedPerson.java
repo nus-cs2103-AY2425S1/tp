@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmergencyContactName;
+import seedu.address.model.person.EmergencyPhone;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -36,6 +37,8 @@ class JsonAdaptedPerson {
     private final String sex;
     private final String studentClass;
     private final String ecName;
+    private final String emergencyPhone;
+
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -43,11 +46,11 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("register number") String registerNumber, @JsonProperty("sex") String sex,
-                             @JsonProperty("class") String studentClass,
-                             @JsonProperty("emergency contact name") String ecName,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("register number") String registerNumber, @JsonProperty("sex") String sex,
+            @JsonProperty("class") String studentClass, @JsonProperty("emergency contact name") String ecName, @JsonProperty("emergency phone") String emergencyPhone,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -56,6 +59,7 @@ class JsonAdaptedPerson {
         this.sex = sex;
         this.studentClass = studentClass;
         this.ecName = ecName;
+        this.emergencyPhone = emergencyPhone;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -73,6 +77,7 @@ class JsonAdaptedPerson {
         sex = source.getSex().value;
         studentClass = source.getStudentClass().value;
         ecName = source.getEmergencyContactName().fullName;
+        emergencyPhone = source.getEmergencyPhone().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -147,6 +152,7 @@ class JsonAdaptedPerson {
         }
         final StudentClass modelStudentClass = new StudentClass(studentClass);
 
+
         if (ecName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     EmergencyContactName.class.getSimpleName()));
@@ -156,9 +162,19 @@ class JsonAdaptedPerson {
         }
         final EmergencyContactName emergencyContactName = new EmergencyContactName(ecName);
 
+        if (emergencyPhone == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    EmergencyPhone.class.getSimpleName()));
+        }
+        if (!EmergencyPhone.isValidEmergencyPhone(emergencyPhone)) {
+            throw new IllegalValueException(EmergencyPhone.MESSAGE_CONSTRAINTS);
+        }
+        final EmergencyPhone modelEmergencyPhone = new EmergencyPhone(emergencyPhone);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRegisterNumber, modelSex,
-                modelStudentClass, emergencyContactName, modelTags);
+                modelStudentClass, modelEmergencyPhone, modelTags);
+
     }
 
 }

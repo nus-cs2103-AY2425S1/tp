@@ -8,6 +8,7 @@
     "sex": "F",
     "class": "1A",
     "emergency contact name": "",
+    "emergency phone": "",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
@@ -16,7 +17,8 @@
     "address": "4th street",
     "register number": "1",
     "sex": "F",
+    "class": "1A",
     "emergency contact name": "",
-    "class": "1A"
+    "emergency phone": ""
   } ]
 }

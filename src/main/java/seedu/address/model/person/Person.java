@@ -27,6 +27,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final EmergencyContactName ecName;
+    private final EmergencyPhone emergencyPhone;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -34,7 +35,8 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, RegisterNumber registerNumber, Sex sex,
             StudentClass studentClass, EmergencyContactName ecName, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, registerNumber, sex, studentClass, ecName, tags);
+        requireAllNonNull(name, phone, email, address, registerNumber, sex, studentClass, ecName, emergencyPhone, tags);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -43,6 +45,7 @@ public class Person {
         this.sex = sex;
         this.studentClass = studentClass;
         this.ecName = ecName;
+        this.emergencyPhone = emergencyPhone;
         this.tags.addAll(tags);
     }
 
@@ -75,6 +78,10 @@ public class Person {
     }
     public EmergencyContactName getEmergencyContactName() {
         return ecName;
+    }
+
+    public EmergencyPhone getEmergencyPhone() {
+        return emergencyPhone;
     }
 
     /**
@@ -121,13 +128,14 @@ public class Person {
                 && registerNumber.equals(otherPerson.registerNumber)
                 && sex.equals(otherPerson.sex)
                 && studentClass.equals(otherPerson.studentClass)
+                && emergencyPhone.equals(otherPerson.emergencyPhone)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, registerNumber, sex, studentClass, tags);
+        return Objects.hash(name, phone, email, address, registerNumber, sex, studentClass, emergencyPhone, tags);
     }
 
     @Override
@@ -141,6 +149,7 @@ public class Person {
                 .add("sex", sex)
                 .add("class", studentClass)
                 .add("emergency contact name", ecName)
+                .add("emergency phone", emergencyPhone)
                 .add("tags", tags)
                 .toString();
     }
