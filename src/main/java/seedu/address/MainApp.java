@@ -2,7 +2,7 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -105,11 +105,11 @@ public class MainApp extends Application {
                         + " populated with no Goods.");
             }
             // TODO: Add Sample Data for Goods
-            initialGoodsData = goodsReceiptList.orElseGet(LinkedList::new);
+            initialGoodsData = goodsReceiptList.orElseGet(ArrayList::new);
         } catch (DataLoadingException e) {
             logger.warning("Creating a new data file " + storage.getGoodsFilePath()
                     + " populated with no Goods.");
-            initialGoodsData = new LinkedList<>();
+            initialGoodsData = new ArrayList<>();
         }
 
         return new ModelManager(initialData, userPrefs, initialGoodsData);

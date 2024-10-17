@@ -10,8 +10,8 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 
 import org.junit.jupiter.api.Test;
 
@@ -100,7 +100,7 @@ public class ModelManagerTest {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
-        LinkedList<GoodsReceipt> goodsReceiptList = new LinkedList<>();
+        ArrayList<GoodsReceipt> goodsReceiptList = new ArrayList<>();
 
         // same values -> returns true
         modelManager = new ModelManager(addressBook, userPrefs, goodsReceiptList);
