@@ -20,17 +20,17 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Gender("female"),
-                    new Module("MA1522"), getTagSet("friends")),
+                    getModuleSet("MA1522"), getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Gender("male"),
-                   new Module("CS1101"), getTagSet("colleagues", "friends")),
+                   getModuleSet("CS1101"), getTagSet("colleagues", "friends")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Gender("male"),
-                    new Module("LS1301"), getTagSet("neighbours")),
+                    getModuleSet("LS1301"), getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Gender("female"),
-                    new Module("EL1101"), getTagSet("family")),
+                    getModuleSet("EL1101"), getTagSet("family")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Gender("male"),
-                    new Module("EL1101"), getTagSet("classmates")),
+                    getModuleSet("EL1101"), getTagSet("classmates")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Gender("male"),
-                    new Module("MA1522"), getTagSet("colleagues"))
+                    getModuleSet("MA1522"), getTagSet("colleagues"))
         };
     }
 
@@ -48,6 +48,15 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a module set containing the list of strings given.
+     */
+    public static Set<Module> getModuleSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Module::new)
                 .collect(Collectors.toSet());
     }
 
