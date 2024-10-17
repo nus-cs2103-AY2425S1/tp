@@ -1,4 +1,4 @@
-package spleetwaise.address.ui;
+package systemtests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -26,6 +26,7 @@ import spleetwaise.address.model.AddressBook;
 import spleetwaise.address.model.Model;
 import spleetwaise.address.testutil.TestUtil;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.address.ui.CommandBox;
 
 /**
  * This class serves as a base class for tests that require the use of the application's GUI and TestFx setup.

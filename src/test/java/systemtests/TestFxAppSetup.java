@@ -1,4 +1,4 @@
-package spleetwaise.address.ui;
+package systemtests;
 
 import java.nio.file.Path;
 import java.util.concurrent.TimeoutException;

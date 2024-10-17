@@ -1,4 +1,4 @@
-package spleetwaise.address.ui;
+package systemtests;
 
 import java.io.IOException;
 import java.nio.file.Path;

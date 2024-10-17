@@ -1,4 +1,4 @@
-package spleetwaise.address.ui;
+package systemtests;
 
 import static spleetwaise.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static spleetwaise.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
