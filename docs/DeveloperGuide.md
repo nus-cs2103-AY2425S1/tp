@@ -273,7 +273,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Keep track of who has and has not been contacted recently
 * Sort clients based on various categories
 * Filter for clients by above categories
-* 
+*
 
 
 ### User stories
@@ -333,12 +333,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. AddressBook requests for confirmation to add new contact.
         * 1a1a1. User confirms.
         * 1a1a2. AddressBook adds the new contact and displays a confirmation message.
-      
+
           Use case ends.
-      
+
         * 1a1b1. User declines.
         * 1a1b2. AddressBook displays a confirmation message.
-      
+
           Use case ends.
 
 **Use case: Find a contact**
@@ -391,11 +391,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. AddressBook shows an error message.
 
       Use case ends.
-  
+
 * 2a. User declines.
 
-    * AddressBook shows a confirmation meesage.
-  
+    * AddressBook shows a confirmation message.
+
       Use case ends.
 
 *{More to be added}*
