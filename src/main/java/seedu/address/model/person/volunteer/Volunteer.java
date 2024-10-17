@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.person.volunteer;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -6,6 +6,12 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Hours;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 
@@ -109,9 +115,5 @@ public class Volunteer extends Person implements Comparable<Volunteer> {
                 .add("tags", tags)
                 .add("hours", hours)
                 .toString();
-    }
-
-    public Role getRole() {
-        return Role.VOLUNTEER;
     }
 }

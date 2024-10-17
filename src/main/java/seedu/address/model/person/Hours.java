@@ -24,10 +24,10 @@ public class Hours implements Comparable<Hours> {
      *
      * @param hours A valid non-negative integer representing the number of hours.
      */
-    public Hours(String hours) {
+    public Hours(Integer hours) {
         requireNonNull(hours);
-        checkArgument(isValidHours(hours), MESSAGE_CONSTRAINTS);
-        this.hours = Integer.parseInt(hours);
+        checkArgument(isValidHours(hours.toString()), MESSAGE_CONSTRAINTS);
+        this.hours = hours;
     }
 
     /**

@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Volunteer;
+import seedu.address.model.person.volunteer.Volunteer;
 
 /**
  * Container for user visible messages.

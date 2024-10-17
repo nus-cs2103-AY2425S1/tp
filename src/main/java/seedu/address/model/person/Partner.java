@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
 
@@ -15,7 +16,8 @@ import seedu.address.model.tag.Tag;
  */
 public class Partner extends Person {
 
-    private final Date partnershipEndDate;
+    private final LocalDate partnershipEndDate;
+
     /**
      * Constructs a {@code Partner}.
      *
@@ -26,13 +28,13 @@ public class Partner extends Person {
      * @param tags Tags associated with the partner.
      * @param partnershipEndDate Date when the partnership with the partner will end.
      */
-    public Partner(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Date partnershipEndDate) {
+    public Partner(Name name, Phone phone, Email email, Address address, Set<Tag> tags, LocalDate partnershipEndDate) {
         super(name, phone, email, address, tags);
         requireAllNonNull(partnershipEndDate);
         this.partnershipEndDate = partnershipEndDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return partnershipEndDate;
     }
 
@@ -88,9 +90,5 @@ public class Partner extends Person {
                 .add("tags", tags)
                 .add("hours", partnershipEndDate)
                 .toString();
-    }
-
-    public Role getRole() {
-        return Role.PARTNER;
     }
 }
