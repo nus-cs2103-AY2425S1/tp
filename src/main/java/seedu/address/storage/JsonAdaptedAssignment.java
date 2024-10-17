@@ -46,31 +46,11 @@ public class JsonAdaptedAssignment {
                 .orElse("NULL");
     }
 
-    @JsonProperty("assignmentName")
-    public String getAssignmentName() {
-        return assignmentName;
-    }
-
-    @JsonProperty("deadline")
-    public String getDeadline() {
-        return deadline;
-    }
-
-    @JsonProperty("submissionStatus")
-    public String getSubmissionStatus() {
-        return submissionStatus;
-    }
-
-    @JsonProperty("gradingStatus")
-    public String getGradingStatus() {
-        return gradingStatus;
-    }
-
-    @JsonProperty("grade")
-    public String getGrade() {
-        return grade;
-    }
-
+    /**
+     * Converts this Jackson-friendly adapted assignment object into the model's {@code Assignment} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted assignment.
+     */
 
     public Assignment toModelType() throws IllegalValueException {
         if (assignmentName == null)  {
