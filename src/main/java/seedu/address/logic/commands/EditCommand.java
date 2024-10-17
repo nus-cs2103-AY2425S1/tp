@@ -26,6 +26,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.company.Company;
+import seedu.address.model.person.student.Student;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -96,13 +98,36 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        String updatedCategory = personToEdit.getCategory();
+        String updatedCategory = personToEdit.getCategoryDisplayName();
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedCategory, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        // Handle specific subclass properties
+        if (personToEdit instanceof Student) {
+            Student studentToEdit = (Student) personToEdit;
+            return new Student(
+                    updatedName,
+                    studentToEdit.getStudentID(),
+                    updatedPhone,
+                    updatedEmail,
+                    updatedAddress,
+                    updatedTags
+            );
+        } else if (personToEdit instanceof Company) {
+            Company companyToEdit = (Company) personToEdit;
+            return new Company(
+                    updatedName,
+                    companyToEdit.getIndustry(),
+                    updatedPhone,
+                    updatedEmail,
+                    updatedAddress,
+                    updatedTags
+            );
+        }
+
+        throw new IllegalArgumentException("Unsupported person type");
     }
 
     @Override
@@ -243,7 +268,6 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
-                    .add("category", category)
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)

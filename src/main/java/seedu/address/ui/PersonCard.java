@@ -28,8 +28,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label category;
-    @FXML
     private Label id;
 
     /**
@@ -40,6 +38,5 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        category.setText(person.getCategory());
     }
 }

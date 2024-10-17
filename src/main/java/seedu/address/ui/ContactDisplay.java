@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -13,8 +14,35 @@ import seedu.address.model.person.Person;
  * A UI component that displays detailed information of a selected contact.
  */
 public class ContactDisplay extends UiPart<Region> {
+    @FXML
+    public static final String CONDENSED_HELP_MESSAGE = "Adding a contact : student OR company\n"
+            + "Adds either a student or a company to the address book.\n"
+            + "\n" + "Format: student n/NAME s/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…\u200B"
+            + "\n" + "Format: company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…\u200B" + "\n---\n"
+            + "Listing all persons : list\n"
+            + "Shows a list of all persons in the address book.\n"
+            + "\n" + "Format: list\n---\n"
+            + "Editing a person : edit\n"
+            + "Edits an existing person in the address book.\n" + "\n"
+            + "Format: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…\u200B \n---\n"
+            + "Locating persons by name : find\n"
+            + "Finds persons whose names contain any of the given keywords.\n"
+            + "\n" + "Format: find KEYWORD [MORE_KEYWORDS]\n---\n"
+            + "Filtering contacts by tags : filtertag\n"
+            + "Finds contacts whose tags are the same as the specified keyword.\n"
+            + "\n" + "Format: filtertag KEYWORD\n---\n"
+            + "Track contacts by category : track\n"
+            + "Tracks and lists all contacts who are in the category of the specified keywords.\n"
+            + "\n" + "Format: track CATEGORY\n---\n"
+            + "Deleting a contact : delete\n"
+            + "Deletes the specified person from the address book.\n"
+            + "\n" + "Format: delete INDEX\n---\n"
+            + "Clearing all entries : clear\n"
+            + "Clears all entries from the address book.\n"
+            + "\n" + "Format: clear\n---\n"
+            + "Exiting the program : exit\n"
+            + "Exits the program.\n" + "\n" + "Format: exit\n";
     private static final String FXML = "ContactDisplay.fxml";
-
     @FXML
     private VBox cardPane;
     @FXML
@@ -31,13 +59,22 @@ public class ContactDisplay extends UiPart<Region> {
     private Label tagLabel;
     @FXML
     private FlowPane tags;
+    @FXML
+    private ScrollPane scrollPane;
 
     /**
      * Constructs a ContactDisplay with default placeholder labels.
      */
-
     public ContactDisplay() {
         super(FXML);
+    }
+
+    /**
+     * initializes the nameLabel with the help message.
+     */
+    @FXML
+    private void initialize() {
+        nameLabel.setText(CONDENSED_HELP_MESSAGE);
     }
 
     /**
@@ -47,7 +84,7 @@ public class ContactDisplay extends UiPart<Region> {
      */
     public void updateContactDetails(Person person) {
         nameLabel.setText("Name: " + person.getName().fullName);
-        categoryLabel.setText("Category: " + person.getCategory());
+        categoryLabel.setText("Category: " + person.getCategoryDisplayName());
         phoneLabel.setText("Phone: " + person.getPhone().value);
         emailLabel.setText("Email: " + person.getEmail().value);
         addressLabel.setText("Address: " + person.getAddress().value);
@@ -68,5 +105,25 @@ public class ContactDisplay extends UiPart<Region> {
         addressLabel.setText("Address:");
         tags.getChildren().clear();
     }
+
+    /**
+     * Shows the condensed help message over the contact display.
+     */
+    public void showHelpDisplay() {
+        nameLabel.setText(CONDENSED_HELP_MESSAGE);
+        phoneLabel.setText(null);
+        emailLabel.setText(null);
+        addressLabel.setText(null);
+        categoryLabel.setText(null);
+        tags.getChildren().clear();
+    }
+
+    /**
+     * Returns the scrollPane.
+     */
+    public ScrollPane getScrollPane() {
+        return scrollPane;
+    }
+
 }
 
