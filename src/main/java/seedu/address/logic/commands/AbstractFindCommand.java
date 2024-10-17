@@ -8,25 +8,24 @@ import seedu.address.model.Model;
 import seedu.address.model.person.ContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case-insensitive.
+ * Abstract Find command to house the other find command classes.
  */
 public abstract class AbstractFindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
     public static final String NAME_COMMAND_WORD = " n/";
     public static final String EMAIL_COMMAND_WORD = " e/";
-    public static final String CONTACT_COMMAND_WORD = " c/";
+    public static final String PHONE_COMMAND_WORD = " p/";
     public static final String TAG_COMMAND_WORD = " t/";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names, contacts, emails "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names, phone numbers, emails "
             + "or tags contain any of the specified keywords (case-insensitive) and displays"
             + "them as a list with indices.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example:\n"
             + COMMAND_WORD + NAME_COMMAND_WORD + "alice bob charlie\n"
             + COMMAND_WORD + EMAIL_COMMAND_WORD + "bob@gmail.com\n"
-            + COMMAND_WORD + CONTACT_COMMAND_WORD + "12345678\n"
+            + COMMAND_WORD + PHONE_COMMAND_WORD + "12345678\n"
             + COMMAND_WORD + TAG_COMMAND_WORD + "CS2100_classmate\n";
 
     private final ContainsKeywordsPredicate predicate;
