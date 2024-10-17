@@ -6,7 +6,7 @@ header_pages:
   - DeveloperGuide.md
   - AboutUs.md
 
-markdown: kramdown
+markdown: GFM
 
 repository: "AgentAssist"
 github_icon: "images/github-icon.png"
