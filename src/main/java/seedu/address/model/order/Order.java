@@ -3,6 +3,7 @@ package seedu.address.model.order;
 import seedu.address.model.product.Product;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -82,7 +83,7 @@ public abstract class Order {
         }
 
         return "Phone Number: " + phoneNumber + "\n" +
-                "Order Date: " + orderDate + "\n" +
+                "Order Date: " + orderDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "\n" +
                 "Items: \n" + sb.toString();
     }
 }
