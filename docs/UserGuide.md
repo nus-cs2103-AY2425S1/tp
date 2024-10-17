@@ -144,6 +144,16 @@ Examples:
 * `filterp true`
 * `filterp false`
 
+### Marking Attendance: `markattend`
+
+Marks the attendance of the specified person from the address book.
+
+Format: `markattend INDEX`
+
+* Marks the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
