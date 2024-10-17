@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -25,9 +26,11 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Remark remark;
+    private final DateOfCreation dateOfCreation;
+    private final History history;
     private final Birthday birthday;
     /**
-     * Every field must be present and not null.
+     * Every field must be present and not null. Used for new person creation
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -38,10 +41,11 @@ public class Person {
         this.remark = Remark.EMPTY_REMARK;
         this.birthday = Birthday.EMPTY_BIRTHDAY;
         this.tags.addAll(tags);
+        this.dateOfCreation = new DateOfCreation(LocalDate.now());
+        this.history = new History(dateOfCreation.getDateOfCreation());
     }
-
     /**
-     * Every field must be present and not null. with non-empty remark
+     * Every field must be present and not null. with non-empty remark and non-empty birthday
      */
     public Person(Name name, Phone phone, Email email, Address address, Remark remark,
                   Set<Tag> tags) {
@@ -52,6 +56,42 @@ public class Person {
         this.address = address;
         this.remark = remark;
         this.birthday = Birthday.EMPTY_BIRTHDAY;
+        this.tags.addAll(tags);
+        this.dateOfCreation = new DateOfCreation(LocalDate.now());
+        this.history = new History(dateOfCreation.getDateOfCreation());
+    }
+
+    /**
+     * Every field must be present and not null. With non-empty remark and existing history
+     */
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Remark remark, Set<Tag> tags, DateOfCreation dateOfCreation, History history) {
+        requireAllNonNull(name, phone, email, address, tags, remark, dateOfCreation, history);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.remark = remark;
+        this.birthday = Birthday.EMPTY_BIRTHDAY;
+        this.dateOfCreation = dateOfCreation;
+        this.history = history;
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Every field must be present and not null. with non-empty remark and non-empty birthday
+     */
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Remark remark, Birthday birthday, Set<Tag> tags, DateOfCreation dateOfCreation, History history) {
+        requireAllNonNull(name, phone, email, address, tags, remark, dateOfCreation, history);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.remark = remark;
+        this.birthday = birthday;
+        this.dateOfCreation = dateOfCreation;
+        this.history = history;
         this.tags.addAll(tags);
     }
 
@@ -68,6 +108,8 @@ public class Person {
         this.remark = remark;
         this.birthday = birthday;
         this.tags.addAll(tags);
+        this.dateOfCreation = new DateOfCreation(LocalDate.now());
+        this.history = new History(dateOfCreation.getDateOfCreation());
     }
 
     public Name getName() {
@@ -101,6 +143,12 @@ public class Person {
     public Remark getRemark() {
         return this.remark;
     }
+    public DateOfCreation getDateOfCreation() {
+        return this.dateOfCreation;
+    }
+    public History getHistory() {
+        return this.history;
+    }
 
     public Birthday getBirthday() {
         return birthday;
@@ -117,6 +165,7 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+        //TODO modify logic to check duplicates, distinguish persons by phone number.
     }
 
     /**
@@ -130,18 +179,17 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Person otherPerson)) {
             return false;
         }
-
-        Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && tags.equals(otherPerson.tags)
                 && remark.equals(otherPerson.remark)
-                && birthday.equals(otherPerson.birthday)
-                && tags.equals(otherPerson.tags);
+                && dateOfCreation.equals(otherPerson.dateOfCreation)
+                && birthday.equals(otherPerson.birthday);
     }
 
     @Override
@@ -160,6 +208,8 @@ public class Person {
                 .add("tags", tags)
                 .add("remark", remark)
                 .add("birthday", birthday)
+                .add("dateOfCreation", dateOfCreation)
+                .add("history", history)
                 .toString();
     }
 

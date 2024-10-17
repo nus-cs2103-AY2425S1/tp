@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -7,7 +8,9 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
+import seedu.address.model.person.DateOfCreation;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.History;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -38,7 +41,10 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setBirthday(person.getBirthday());
         descriptor.setTags(person.getTags());
+        descriptor.setDateOfCreation(person.getDateOfCreation());
+        descriptor.setHistory(person.getHistory());
     }
 
     /**
@@ -97,6 +103,24 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code date} into a {@code DateOfCreation} and set it to the {@code EditPersonDescriptor}
+     *      * that we are building.
+     * */
+    public EditPersonDescriptorBuilder withDateOfCreation(String date) {
+        descriptor.setDateOfCreation(new DateOfCreation(LocalDate.parse(date)));
+        return this;
+    }
+
+    /**
+     * Parses the {@code history} into a {@code History} and set it to the {@code EditPersonDescriptor}
+     *      * that we are building.
+     * */
+    public EditPersonDescriptorBuilder withDate(History history) {
+        descriptor.setHistory(history);
         return this;
     }
 

@@ -31,7 +31,7 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class BirthdayCommandTest {
 
-    private static final String BIRTHDAY_STUB = "2023-12-12";
+    private static final String BIRTHDAY_STUB = "2001-01-01";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -42,11 +42,13 @@ public class BirthdayCommandTest {
         BirthdayCommand birthdayCommand = new BirthdayCommand(INDEX_FIRST_PERSON,
                 new Birthday(editedPerson.getBirthday().toString())
         );
-
         String expectedMessage = String.format(BirthdayCommand.MESSAGE_ADD_BIRTHDAY_SUCCESS,
                 Messages.format(editedPerson));
+        System.out.println(Messages.format(editedPerson));
+        System.out.println(expectedMessage);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
+
         assertCommandSuccess(birthdayCommand, model, expectedMessage, expectedModel);
     }
 
