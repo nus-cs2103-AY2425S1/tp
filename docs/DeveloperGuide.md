@@ -393,7 +393,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to list clients.
 2.  User selects a client to assign a policy.
 3.  AgentConnect assigns the policy to the client.
-4.  AgentConnect shows updated client information.  
+4.  AgentConnect shows updated client information. 
 Use case ends.
 
 **Extensions**
@@ -435,7 +435,7 @@ Use case ends.
 
 1.  User requests to list clients.
 2.  User requests to view a specific client’s birthday.
-3.  AgentConnect retrieves and displays the client’s birthday.  
+3.  AgentConnect retrieves and displays the client’s birthday.
 Use case ends.
 
 **Extensions**
@@ -455,7 +455,7 @@ Use case ends.
 
 1.  User requests to list clients.
 2.  User requests to view a client's payment date.
-3.  AgentConnect retrieves and display the next payment date.  
+3.  AgentConnect retrieves and display the next payment date.
 Use case ends.
 
 **Extensions**
