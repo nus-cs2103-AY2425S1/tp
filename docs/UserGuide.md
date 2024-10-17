@@ -2,17 +2,33 @@
 layout: page
 title: User Guide
 ---
+![Banner](images/AgentAssistBanner.png) 
+## AgentAssist
+**Transform Your Credit Card Sales with AgentAssist** — the definitive desktop tool for bank agents. Merging the swift efficiency of a Command Line Interface (CLI) with the intuitive accessibility of a Graphical User Interface (GUI), AgentAssist propels your credit card sales into the fast lane. Tailored for the agile bank agent, this application lets you manage contact databases, track sales progress, and execute transactions with unprecedented speed. Maximize your productivity, minimize your response time, and amplify your sales performance. With AgentAssist, you're not just keeping up with the competitive world of credit card sales — _you're setting the pace_.
 
-AgentAssist is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AgentAssist can get your sales tasks done faster than traditional GUI apps.
+---
 
-* Table of Contents
-  {:toc}
+## Table of Contents
+
+1. [Quick Start](#quick-start)
+2. [Using AgentAssist](#using-agentassist)
+3. [Features Overview](#features-overview)
+    - [Save Current Data](#save-current-data)
+    - [Add New Customer](#add-new-customer)
+    - [Remove Old Customer](#remove-old-customer)
+    - [Edit Existing Customer](#edit-existing-customer)
+    - [Find a Customer by Details](#find-a-customer-by-details)
+    - [Help](#help)
+    - [Exit](#exit)
+4. [FAQ](#faq)
+5. [Known Issues](#known-issues)
+6. [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick start {#quick-start}
 
-### 1. Install Java
+### 1. Install Java 
 
 Make sure you have **Java 17 or above** installed on your computer. You may skip this step if you already have it installed.
 
@@ -48,28 +64,48 @@ Type the following command: **`java -jar agentassist.jar`** and press **Enter**.
 * A window similar to the below image should appear in a few seconds. You will see a graphical user interface with sample contact information already added.<br>
   ![Ui](images/Ui.png)
 
-### 6. Using AgentAssist
+---
 
-In the application window, you will see a **command box**. This is where you type commands to manage your contacts.
+## Using AgentAssist {#using-agentassist}
 
-* Type a command in the command box and press **Enter** to make the app do something.
-* Typing `help` and pressing Enter will open the help window.
+AgentAssist's command box is your portal to managing contacts efficiently. Here’s how you can use it to streamline your tasks:
 
-Here are some example commands you can try:
+* To get started, simply type a command into the command box and hit **Enter**.
 
-* `list` : Lists all contacts.
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-* `delete 3` : Deletes the 3rd contact shown in the current list.
-* `clear` : Deletes all contacts.
-* `exit` : Exits the app.
+Some initial commands to try:
 
-Refer to the [Features](#features) section for details of each command.
+
+- **Viewing Contacts**
+  * `list`: This command displays all contacts currently in your database, making it easy to browse through entries.
+
+- **Adding a New Contact**
+  * `add n/Jane Doe p/87654321 e/jane@example.com a/123 Jane Road j/doctor i/120000`: Adds Jane Doe to your database with detailed contact info, occupation, and income.
+
+- **Editing a Contact**
+  * `edit 1 p/12345678`: Updates the phone number of the first contact in your list to `12345678`.
+  * `edit 4 rn/Updated remarks here`: Replaces the remarks of the fourth contact with "Updated remarks here".
+
+- **Removing a Contact**
+  * `delete 3`: Removes the third contact from your list. Ensure you have the correct index to avoid deleting the wrong entry.
+
+- **Searching for a Contact**
+  * `filter n/Jane`: Finds all contacts named Jane in your database. It’s a powerful tool for quickly locating entries.
+
+- **Getting Help**
+  * `help`: Opens a help dialog that provides a summary of all available commands and their usage.
+
+
+**Pro Tip:** Experiment with combining commands like `filter` followed by `edit` or `delete` to manage your contacts more effectively. For example, use `filter j/doctor` to display all doctors, then `edit 2 a/321 New Address` to update the address for the second listed doctor.
+
+The GUI will dynamically update to show the results of your commands, making it easy to see the impact of your actions in real time.
+
+Refer to the [Features](#features-overview) section for more detailed instructions on each command.
 
 ---
 
-## Features Overview
+## Features Overview {#features-overview}
 
-### Feature 1: Ability to Save Current Data
+### Feature 1: Ability to Save Current Data {#save-current-data}
 
 **Purpose:**  
 This feature ensures that any details you add to the app are saved automatically. When you close and reopen the app, all your data will still be there.
@@ -86,58 +122,64 @@ This feature ensures that any details you add to the app are saved automatically
 
 ---
 
-### Feature 2: Add New Customer
+### Feature 2: Add New Customer {#add-new-customer}
 
 **Purpose:**  
-This feature allows you to enter and save detailed records for new customers.Each customer's record includes their name, contact number, email, occupation, and income. You can also enter the optional fields for credit card tier and remark here. Otherwise, new users are assigned a default value of "N.A".
+This feature allows you to enter and save detailed records for new customers. Each customer's record includes their name, contact number, email, occupation, and income. You can also enter the optional fields for credit card tier and remark here. Otherwise, new users are assigned a default value of "N.A".
 
 **How to Use It:**
-- **Command Format:**
-```
-add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TIER>] [rn/ <REMARK>]
- ```
-- **Example:**
-```
-add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999
-add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold rn/ got anger issue
-```
+  - **Command Format:**
+    ```
+    add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TIER>] [rn/ <REMARK>]
+    ```
+  - **Examples:**
+    - Add new customer, basic convention: 
+    ```
+    add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999
+    ```
+    - Add new customer with tier and remark:
+    ```
+    add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold rn/ got anger issue
+    ```
+    
 
 #### Parameters {#add-command-parameters}
 | Parameter | Expected Format                                  | Explanation                                                                                                       |
-|-----------|--------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| NAME      | Alphanumeric, case insensitive                   | Accepts all names without case sensitivity. Names will be displayed in block letters for clarity and consistency. |
-| PHONE     | 8-digit number, starts with 8 or 9               | Ensures the contact number is valid in Singapore.                                                                 |
-| EMAIL     | Must include "@" and domain, case insensitive    | Verifies that the email address is in a standard format.                                                          |
-| ADDRESS   | Any text, case insensitive                       | Accepts all addresses without case sensitivity. Addresses can have numbers and symbol alike /.                    |
-| JOB       | Any text, case insensitive                       | Accepts all job titles without case sensitivity.                                                                  |
-| INCOME    | Non-negative integers                            | Only positive numbers or zero are valid for income fields.                                                        |
-| TIER      | [optional] String (gold, silver, bronze, reject) | Defines the specific credit card tier to be assigned or updated.                                                  |
-| REMARK    | [optional] Any string                            | Notes are case-insensitive and can include any textual information.                                               |
+|----------|--------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| NAME     | Alphanumeric, case insensitive                   | Accepts all names without case sensitivity. Names will be displayed in block letters for clarity and consistency. |
+| PHONE    | 8-digit number, starts with 8 or 9               | Ensures the contact number is valid in Singapore.                                                                 |
+| EMAIL    | Must include "@" and domain, case insensitive    | Verifies that the email address is in a standard format.                                                          |
+| ADDRESS  | Any text, case insensitive                       | Accepts all addresses without case sensitivity. Addresses can have numbers and symbol alike /.                    |
+| JOB      | Any text, case insensitive                       | Accepts all job titles without case sensitivity.                                                                  |
+| INCOME   | Non-negative integers                            | Only positive numbers or zero are valid for income fields.                                                        |
+| TIER     | [optional] String (gold, silver, bronze, reject) | Defines the specific credit card tier to be assigned or updated.                                                  |
+| REMARK   | [optional] Any string                            | Notes are case-insensitive and can include any textual information.                                               |
 
 #### What to Expect
-- **If Successful:** You'll see a message: "New person added: `<NAME>`; Phone: `<PHONE>`; Email: `<EMAIL>`; Address: `<ADDRESS>`; Job: `<JOB>`;  Income: `<INCOME>`; Tier: `<TIER>`; Remark: `<REMARK>`". It's noted that if "Tier" and "Remark" are not added, they will be defined as "N/A."
+- **If Successful:** 
+  - Message: "New person added: `<NAME>`; Phone: `<PHONE>`; Email: `<EMAIL>`; Address: `<ADDRESS>`; Job: `<JOB>`;  Income: `<INCOME>`; Tier: `<TIER>`; Remark: `<REMARK>`". It's noted that if "Tier" and "Remark" are not added, they will be defined as "N/A."
 - **If There is an Error:**
-  - "Please verify that your input is in the correct format. Include the following details: n/ `<NAME>` p/ `<PHONE>` e/ `<EMAIL>` a/ `<ADDRESS>` j/ `<JOBNAME>` i/ `<INCOME>` [t/ `<TIER>`] [rn/ `<REMARK>`]."
+  - Message: "Please verify that your input is in the correct format. Include the following details: n/ `<NAME>` p/ `<PHONE>` e/ `<EMAIL>` a/ `<ADDRESS>` j/ `<JOBNAME>` i/ `<INCOME>` [t/ `<TIER>`] [rn/ `<REMARK>`]."
 
 **Handling Duplicates:**  
 If a customer with the same name, email, job, and income is already saved, you'll get a message: "This customer is already saved as a contact."
 
 ---
 
-### Feature 3: Remove Old Customer
+### Feature 3: Remove Old Customer {#remove-old-customer}
 
 **Purpose:**  
 This feature allows you to remove records of customers who are no longer using your credit card services.
 
 **How to Use It:**
 - **Command Format:**
-```
-del <INDEX>
-```
+  ```
+  delete <INDEX>
+  ```
 - **Example:**
-```
-del 69
-```
+  ```
+  delete 69
+  ```
 
 #### Parameters
 | Parameter | Expected Format               | Explanation                                                                                                                                 |
@@ -145,9 +187,10 @@ del 69
 | INDEX     | Integer (1 to the last INDEX) | The INDEX must be a valid integer within the registered range (either the original list or any filtered list after using `filter` command). |
 
 #### What to Expect
-- **If Successful:** You'll see a message: "Customer `<INDEX>` has been deleted."
+- **If Successful:** 
+  - Message: "Customer `<INDEX>` has been deleted."
 - **If There is an Error:**
-  - Invalid index: "No customer with `<INDEX>` exists. Please recheck the index."
+  - Invalid index error message: "No customer with `<INDEX>` exists. Please recheck the index."
 
 **Handling Duplicates:**  
 Since customer INDEX are unique identifiers:
@@ -156,48 +199,64 @@ Since customer INDEX are unique identifiers:
 
 ---
 
-### Feature 4: Edit the existing customer
+### Feature 4: Edit the existing customer {#edit-existing-customer}
 
 **Purpose:**  
-This feature enables users to update the details of an existing customer, apart from the remark as of v1.1, in the database. It is designed to accommodate changes in a customer’s information such as contact details, address, job information, or any other relevant data.
+This feature allows users to update the details of an existing customer in the database. All customer information can be modified, including contact details, address, job information, and other relevant data. Additionally, users can either append to or replace existing remarks and adjust the customer's tier status.
 
 **How to Use It:**
 - **Command Format:**
-```
-edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TIER>] [rn/ <NEW REMARK>] [ra/ 
-<REMARK TO BE APPENDED ONTO EXISTING ONE>]
-```
+  ```
+  edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TIER>] [rn/ <NEW REMARK>] [ra/ 
+  <REMARK TO BE APPENDED ONTO EXISTING ONE>]
+  ```
 **Note that `rn/` and `ra/` cannot be used at the same time.**
-- **Examples:**
-```
-edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000 ra/ Specialist in eye care
-
-```
+  - **Examples:**
+    - Edit only 1 specific field:
+    ```
+    edit 69 a/ Ridge View Residential College
+    ```
+    ```
+    edit 69 t/ gold
+    ```
+    - Edit multiple fields at the same time:
+    ```
+    edit 69 p/ 99887766 e/ mrtan_newemail@ntu.sg j/ unemployed i/ 0 t/ reject
+    ```
+    - Append new remark onto existing one:
+    ```
+    edit 69 ra/ just know his dad is mr moore
+    ```
+    - Replace all remark(s) with a new remark:
+    ```
+    edit 69 rn/ ran out of money
+    ```
 
 #### Parameters
-| Parameter | Expected Format                                  | Explanation                                                                                                                                 |
-|-----------|--------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| INDEX     | Integer (1 to the last INDEX)                    | The index must be a valid integer within the registered range (either the original list or any filtered list after using `filter` command). |
-| NAME      | Alphanumeric, capitalized                        | Names are in block letters for clarity and consistency.                                                                                     |
-| PHONE     | 8-digit number, starts with 8 or 9               | Ensures the contact number is valid in Singapore.                                                                                           |
-| EMAIL     | Must include "@" and domain, case insensitive    | Verifies that the email address is in a standard format.                                                                                    |
-| ADDRESS   | Any text, case insensitive                       | Accepts all addresses without case sensitivity. Addresses can have numbers and symbol alike /.                                              |
-| JOB       | Any text, case insensitive                       | Accepts all job titles without case sensitivity.                                                                                            |
-| INCOME    | Non-negative integers                            | Only positive numbers or zero are valid for income fields.                                                                                  |
-| TIER      | [optional] String (gold, silver, bronze, reject) | Defines the specific credit card tier to be assigned or updated.                                                                            |
+| Parameter | Expected Format                                       | Explanation                                                                                                                                 |
+|--------|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| INDEX  | Integer (1 to the last INDEX)                         | The index must be a valid integer within the registered range (either the original list or any filtered list after using `filter` command). |
+| NAME   | Alphanumeric, capitalized                             | Names are in block letters for clarity and consistency.                                                                                     |
+| PHONE  | 8-digit number, starts with 8 or 9                    | Ensures the contact number is valid in Singapore.                                                                                           |
+| EMAIL  | Must include "@" and domain, case insensitive         | Verifies that the email address is in a standard format.                                                                                    |
+| ADDRESS | Any text, case insensitive                            | Accepts all addresses without case sensitivity. Addresses can have numbers and symbol alike /.                                              |
+| JOB    | Any text, case insensitive                            | Accepts all job titles without case sensitivity.                                                                                            |
+| INCOME | Non-negative integers                                 | Only positive numbers or zero are valid for income fields.                                                                                  |
+| TIER   | [optional] String (gold, silver, bronze, reject)      | Defines the specific credit card tier to be assigned or updated.                                                                            |
+| REMARK    | [optional] Any string                                 | For both `rn/` and `ra/`, remarks are case-insensitive and can include any textual information.                                               |
 
 #### What to Expect
 - **If Successful:**
   - Message: "Customer `<INDEX>` has been updated successfully."
 - **If There is an Error:**
-  - "Failed to update customer `<INDEX>`. Please verify that your input matches the expected formats and all fields are correct."
+  - Message: "Failed to update customer `<INDEX>`."
 
 **Handling Duplicates:**
 - No two customers can have the same index due to the uniqueness constraint on customer index.
 
 ---
 
-### Feature 5: Find a Customer by Details
+### Feature 5: Find a Customer by Details {#find-a-customer-by-details}
 
 **Purpose:**  
 This feature allows users to search for customers by specific details such as name, address, email, phone number, job title, or remarks. 
@@ -208,7 +267,7 @@ To perform a search, use the `filter` command followed by one or more flags (ind
 
 - **Command Format:** 
   ```
-  filter <FLAG>/ <SEARCH TERM> [<ADDITIONAL_FLAGS>/ <SEARCH TERM>]
+  filter <FLAG>/ <SEARCH TERM> [<ADDITIONAL FLAGS>/ <SEARCH TERM>]
   ```
 - **Examples:** 
   - Filter customers by name: 
@@ -266,53 +325,20 @@ To perform a search, use the `filter` command followed by one or more flags (ind
 
 ---
 
-### Feature 6: Save Remarks About Customers
+### Feature 6: Help {#help}
 
 **Purpose:**  
-Allows users to save specific notes or remarks about a customer, which can be viewed later to recall notable details.
+This feature provides users with quick access to the command summary and the user guide for the application, helping them understand how to use various features effectively.
 
 **How to Use It:**
 - **Command Format:**
-```
-remark <INDEX> r/ <REMARK>
-```
+  ```
+  help
+  ```
 - **Example:**
-```
-remark 55 r/ He is a problematic customer.
-```
-
-#### Parameters
-| Parameter | Expected Format               | Explanation                                                                                                                                 |
-|-----------|-------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| INDEX     | Integer (1 to the last INDEX) | The index must be a valid integer within the registered range (either the original list or any filtered list after using `filter` command). |
-| REMARK    | Any string                    | Remarks are case-insensitive and can include any textual information.                                                                       |
-
-#### What to Expect
-- **If Successful:**
-  - Message: "Remark has been added to Customer `<INDEX>`."
-- **If There is an Error:**
-  - Invalid index: "No customer with `<INDEX>` exists. Please input a valid index."
-
-**Handling Duplicates:**
-- Although customer index should be unique, in the rare case where duplicates are detected, the following error message will be shown:
-  - "Sorry, it appears that multiple customers with index: `<INDEX>` exist. Please use the delete command to remove the duplicated customer index."
-
----
-
-### Feature 7: Help
-
-**Purpose:**  
-This feature provides users with quick access to the user guide for the application, helping them understand how to use various features effectively.
-
-**How to Use It:**
-- **Command Format:**
-```
-help
-```
-- **Example:**
-```
-help
-```
+  ```
+  help
+  ```
 
 #### Parameters
 - **Flag:** N/A
@@ -321,26 +347,26 @@ help
 #### What to Expect
 - **If Successful:**
   - No immediate message is displayed in the command interface.
-  - Opens up a dialog box that provides a link to the user guide markdown file, allowing users to easily access detailed instructions and information.
+  - Opens up a dialog box that provides command summary table with command format and basic example, together with the hyperlink to the user guide markdown file, allowing users to easily access detailed instructions and information.
 
 **Handling Duplicates:**
 - N/A as this command does not involve processing or displaying data that could involve duplicates.
 
 ---
-### Feature 8: Exit
+### Feature 7: Exit {#exit}
 
 **Purpose:**  
 Allows users to exit the application through a simple command, eliminating the need to use the window's close button or external controls.
 
 **How to Use It:**
 - **Command Format:**
-```
-exit
-```
+  ```
+  exit
+  ```
 - **Example:**
-```
-exit
-```
+  ```
+  exit
+  ```
 
 #### Parameters
 - **Flag:** N/A
@@ -356,33 +382,38 @@ exit
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## FAQ {#faq}
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.<br>
+
 **Q**: How do I change the remarks or credit card tier of an existing customer?<br>
 **A**: Use the [`edit`](#feature-4-edit-the-existing-customer) command, and specify the corresponding `t/` and or `rn/` or `ra/` flag to change these two fields.<br>
+
 **Q**: Why am I getting an error when trying to edit the remark of an existing customer?<br>
-**A**: Besides making sure that the command syntax is correct, please note that the `rn/` and `ra/` flags cannot be used together, as `rn/` is used to provide a new remark that will override any existing remark. Whilst, `ra/` will append a given remark to any existing remark. 
+**A**: Besides making sure that the command syntax is correct, please note that the `rn/` and `ra/` flags cannot be used together, as `rn/` is used to provide a new remark that will override any existing remark. Whilst, `ra/` will append a given remark to any existing remark.
+
+**Q**: What do the different tier colors represent in the UI?  
+**A**: Each credit card tier is visually distinguished in the UI: Gold is marked with a gold banner, Silver with a silver banner, Bronze with a bronze banner, and Reject with a red banner. This makes it easy to see at a glance the tier of each customer.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known issues {#known-issues}
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command Summary
+## Command Summary {#command-summary}
 
-| Action                           | Command Format                                                                                                                                                 | Example                                                                                                        |
-|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| **Save Data Automatically**      | *Automatic*                                                                                                                                                    | *No command required*                                                                                          |
-| **Add New Customer**             | `add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TIER>] [rn/ <REMARK>]`                                                             | `add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold rn/ got anger issue`         |
-| **Remove Old Customer**          | `del <INDEX>`                                                                                                                                                  | `del 69`                                                                                                       |
-| **Edit Existing Customer**       | `edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TIER>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED ONTO EXISTING ONE]` | `edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000 ra/ Specialist in eye care` |
-| **Find a Customer by Details**   | `filter <FLAG>/ <FLAG FIELD>`                                                                                                                                  | `filter n/ TAN LESHEW`                                                                                         |
-| **Save Remarks About Customers** | `remark <INDEX> r/ <REMARK>`                                                                                                                                   | `remark 55 r/ He is a problematic customer.`                                                                   |
-| **Help**                         | `help`                                                                                                                                                         | `help`                                                                                                         |
-| **Exit**                         | `exit`                                                                                                                                                         | `exit`                                                                                                         |
+| Action                           | Command Format                                                                                                                                                | Example                                                                                                        |
+|----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| **Save Data Automatically**      | *Automatic*                                                                                                                                                   | *No command required*                                                                                          |
+| **Add New Customer**             | `add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TIER>] [rn/ <REMARK>]`                                                            | `add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold rn/ got anger issue`         |
+| **Remove Old Customer**          | `delete <INDEX>`                                                                                                                                              | `delete 69`                                                                                                     |
+| **Edit Existing Customer**       | `edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TIER>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED ONTO EXISTING ONE]`| `edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000 ra/ Specialist in eye care`  |
+| **Find a Customer by Details**   | `filter <FLAG>/ <FLAG FIELD>`                                                                                                                                 | `filter n/ TAN LESHEW`                                                                                         |
+| **Help**                         | `help`                                                                                                                                                        | `help`                                                                                                         |
+| **Exit**                         | `exit`                                                                                                                                                        | `exit`                                                                                                         |
