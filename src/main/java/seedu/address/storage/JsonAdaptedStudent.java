@@ -1,9 +1,14 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -22,9 +27,10 @@ public class JsonAdaptedStudent {
     private final String phone;
     private final String email;
     private final String address;
-
     private final String studentNumber;
     private final String tutorialGroup;
+
+    private final List<JsonAdaptedAssignment> assignments = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -32,14 +38,18 @@ public class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
-                              @JsonProperty("studentId") String studentNumber,
-                              @JsonProperty("tutorialGroup") String tutorialGroup) {
+                              @JsonProperty("tutorialGroup") String tutorialGroup,
+                              @JsonProperty("studentNumber") String studentNumber,
+                              @JsonProperty("assignments") List<JsonAdaptedAssignment> assignments) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.studentNumber = studentNumber;
         this.tutorialGroup = tutorialGroup;
+        this.studentNumber = studentNumber;
+        if (assignments != null) {
+            this.assignments.addAll(assignments);
+        }
     }
 
     /**
@@ -52,6 +62,9 @@ public class JsonAdaptedStudent {
         address = source.getAddress().value;
         studentNumber = source.getStudentNumber().value;
         tutorialGroup = source.getTutorialGroup().value;
+        assignments.addAll(source.getAssignments().stream()
+                .map(JsonAdaptedAssignment::new)
+                .collect(Collectors.toList()));
     }
 
 
@@ -117,8 +130,15 @@ public class JsonAdaptedStudent {
         }
         final StudentNumber modelStudentNumber = new StudentNumber(studentNumber);
 
+        Student student = new Student(modelName, modelPhone, modelTutorialGroup, modelStudentNumber);
 
-        return new Student(modelName, modelPhone, modelTutorialGroup, modelStudentNumber);
+        for (JsonAdaptedAssignment assignment : assignments) {
+            Assignment modelAssignment = assignment.toModelType();
+            student.addAssignment(modelAssignment);
+        }
+
+
+        return student;
 
 
     }
