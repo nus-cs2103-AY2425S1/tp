@@ -61,6 +61,13 @@ public class DeleteOrderCommandTest {
     }
 
     @Test
+    public void execute_nullOrderList_throwsCommandException() {
+        DeleteOrderCommand deleteOrderCommand = new DeleteOrderCommand(INDEX_FIRST_ORDER);
+
+        assertCommandFailure(deleteOrderCommand, model, Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST);
+    }
+
+    @Test
     public void equals() {
         DeleteOrderCommand deleteFirstCommand = new DeleteOrderCommand(INDEX_FIRST_ORDER);
         DeleteOrderCommand deleteSecondCommand = new DeleteOrderCommand(INDEX_SECOND_ORDER);

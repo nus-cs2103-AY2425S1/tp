@@ -188,7 +188,7 @@ Format: `deleteOrder ORDER_INDEX`
 * The index and quantity **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `deleteOrder 1` deletes the order with index 1 from the selected user.
+* `deleteOrder 1` deletes the order with index 1 from the selected person.
 * `listOrder 1` followed by `deleteOrder 2` selects the 1st person in the address book and deletes the 2nd order under the 1st person.
 
 ### Clearing all entries : `clear`
