@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.logic.Messages;
@@ -90,6 +91,21 @@ public class GetCommand extends Command {
         }
 
         return new CommandResult(resultString);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof GetCommand)) {
+            return false;
+        }
+
+        GetCommand otherGetCommand = (GetCommand) other;
+        return Arrays.equals(parameters, otherGetCommand.parameters);
     }
 
 }

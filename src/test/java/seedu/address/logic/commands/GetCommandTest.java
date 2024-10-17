@@ -68,12 +68,12 @@ public class GetCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         ObservableList<Person> curr = model.getFilteredPersonList();
-        GetCommand getCommand = new GetCommand(PARAMS_ARRAY_FIRST);
+        GetCommand getCommand = new GetCommand(PARAMS_ARRAY_SECOND);
 
         String expectedMessage = String.format(GetCommand.MESSAGE_GET_PARAMETER_SUCCESS,
-                "PHONE NUMBER", curr.get(0).getPhone()) + "\n\n"
+                "NAME", curr.get(0).getName()) + "\n\n"
                 + String.format(GetCommand.MESSAGE_GET_PARAMETER_SUCCESS,
-                "EMAIL", curr.get(0).getEmail()) + "\n\n";
+                "ADDRESS", curr.get(0).getAddress()) + "\n\n";
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
         assertCommandSuccess(getCommand, model, expectedMessage, expectedModel);
     }
