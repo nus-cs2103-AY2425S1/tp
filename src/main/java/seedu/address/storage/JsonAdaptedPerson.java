@@ -7,7 +7,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -161,7 +160,7 @@ class JsonAdaptedPerson {
         final Hours modelHours = new Hours(hours);
 
         final Set<Tag> modelTags = new HashSet<>(tuteeTags);
-        if (Objects.equals(role,"Tutor")) {
+        if (Objects.equals(role, "Tutor")) {
             return new Tutor(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags);
         } else {
             return new Tutee(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags);
