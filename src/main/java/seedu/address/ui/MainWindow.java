@@ -2,7 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -120,8 +120,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         topPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        ObservableList<Project> filteredProjectList = logic.getFilteredProjectList();
-        projectListPanel = new ProjectListPanel(filteredProjectList);
+        projectListPanel = new ProjectListPanel(logic.getFilteredProjectList());
         projectListPanelPlaceholder.getChildren().add(projectListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

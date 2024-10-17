@@ -30,6 +30,8 @@ public class ProjectCard extends UiPart<Region> {
     private Label name;
     @FXML
     private Label id;
+    @FXML
+    private Label projectId;
 
     /**
      * Creates a {@code ProjectCode} with the given {@code Project} and index to display.
@@ -39,5 +41,6 @@ public class ProjectCard extends UiPart<Region> {
         this.project = project;
         this.id.setText(displayedIndex + ". ");
         name.setText(project.getName().fullName);
+        projectId.setText("id: " + project.getId().fullId);
     }
 }
