@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 public enum CommandKeywords {
     add,
+    addf,
     edit,
     delete,
     clear,
