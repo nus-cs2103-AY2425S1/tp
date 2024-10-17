@@ -127,8 +127,9 @@
 
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 16px;
+    -fx-font-size: 20px;
     -fx-text-fill: #010504;
+    -fx-font-weight: bold;
 }
 
 .cell_small_label {
@@ -313,8 +314,9 @@
 }
 
 #cardPane {
-    -fx-background-color: transparent;
-    -fx-border-width: 0;
+    -fx-background-color: #334155;
+    -fx-border-width: 0.5;
+    -fx-border-color: black;
 }
 
 #commandTypeLabel {
@@ -371,11 +373,11 @@
 
 #personListLabel {
     -fx-background-color: #0F172A;
-    -fx-padding: 5;
+    -fx-padding: 20;
 }
 
 #personListLabel .label {
     -fx-text-fill: #E0F2FE;
-    -fx-font-size: 30px;
+    -fx-font-size: 20px;
     -fx-font-weight: bold;
 }
