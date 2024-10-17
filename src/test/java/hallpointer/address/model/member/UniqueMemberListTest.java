@@ -5,6 +5,7 @@ import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBA
 import static hallpointer.address.testutil.Assert.assertThrows;
 import static hallpointer.address.testutil.TypicalMembers.ALICE;
 import static hallpointer.address.testutil.TypicalMembers.BOB;
+import static hallpointer.address.testutil.TypicalMembers.CARL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,7 +18,9 @@ import org.junit.jupiter.api.Test;
 
 import hallpointer.address.model.member.exceptions.DuplicateMemberException;
 import hallpointer.address.model.member.exceptions.MemberNotFoundException;
+import hallpointer.address.model.session.UniqueSessionList;
 import hallpointer.address.testutil.MemberBuilder;
+import javafx.collections.ObservableList;
 
 public class UniqueMemberListTest {
 
@@ -166,6 +169,45 @@ public class UniqueMemberListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueMemberList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void equals() {
+        uniqueMemberList.add(ALICE);
+        uniqueMemberList.add(BOB);
+
+        // same values -> returns true
+        UniqueMemberList differentUniqueMemberList = new UniqueMemberList();
+        differentUniqueMemberList.add(ALICE);
+        differentUniqueMemberList.add(BOB);
+        assertTrue(uniqueMemberList.equals(differentUniqueMemberList));
+
+        // same object -> returns true
+        assertTrue(uniqueMemberList.equals(uniqueMemberList));
+
+        // null -> returns false
+        assertFalse(uniqueMemberList.equals(null));
+
+        // different type -> returns false
+        assertFalse(uniqueMemberList.equals(0.9));
+
+        // different member -> returns false
+        differentUniqueMemberList = new UniqueMemberList();
+        differentUniqueMemberList.add(ALICE);
+        differentUniqueMemberList.add(CARL);
+        assertFalse(uniqueMemberList.equals(differentUniqueMemberList));
+
+        // different order -> returns false
+        differentUniqueMemberList = new UniqueMemberList();
+        differentUniqueMemberList.add(BOB);
+        differentUniqueMemberList.add(ALICE);
+        assertFalse(uniqueMemberList.equals(differentUniqueMemberList));
+
+        // same member different details -> returns false
+        differentUniqueMemberList = new UniqueMemberList();
+        differentUniqueMemberList.add(new MemberBuilder(ALICE).withRoom("1/1/1").build());
+        differentUniqueMemberList.add(BOB);
+        assertFalse(uniqueMemberList.equals(differentUniqueMemberList));
     }
 
     @Test

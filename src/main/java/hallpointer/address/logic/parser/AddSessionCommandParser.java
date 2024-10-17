@@ -3,10 +3,14 @@ package hallpointer.address.logic.parser;
 import static hallpointer.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_MEMBER;
+import static hallpointer.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_POINTS;
+import static hallpointer.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
+import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -37,19 +41,12 @@ public class AddSessionCommandParser implements Parser<AddSessionCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSessionCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SESSION_NAME, PREFIX_DATE, PREFIX_POINTS);
         SessionName name = ParserUtil.parseSessionName(argMultimap.getValue(PREFIX_SESSION_NAME).get());
         SessionDate date = ParserUtil.parseSessionDate(argMultimap.getValue(PREFIX_DATE).get());
         Point points = ParserUtil.parsePoints(argMultimap.getValue(PREFIX_POINTS).get());
-        List<Index> memberIndexes = argMultimap.getAllValues(PREFIX_MEMBER).stream()
-                .map(value -> {
-                    try {
-                        return ParserUtil.parseIndex(value);
-                    } catch (ParseException e) {
-                        throw new IllegalArgumentException("Invalid member index: " + value);
-                    }
-                })
-                .collect(Collectors.toList());
-
+        // No indices error is already handled by the nature of parseIndices
+        Set<Index> memberIndexes = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_MEMBER));
 
         Session session = new Session(name, date, points);
 

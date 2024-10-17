@@ -8,6 +8,7 @@ import static hallpointer.address.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 
 import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.commons.util.ToStringBuilder;
@@ -38,18 +39,18 @@ public class AddSessionCommand extends Command {
             + "added successfully with %4$d member attending.";
     public static final String MESSAGE_DUPLICATE_SESSION = "Error: Session already exists.";
     public static final String MESSAGE_INVALID_INDEX = "Error: Invalid index specified.";
-
     private final Session toAdd;
     private final List<Index> memberIndexes;
 
     /**
      * Creates an AddSessionCommand to add the specified {@code Session}
      */
-    public AddSessionCommand(Session session, List<Index> memberIndexes) {
+    public AddSessionCommand(Session session, Set<Index> memberIndexes) {
         requireNonNull(session);
         requireNonNull(memberIndexes);
+
         toAdd = session;
-        this.memberIndexes = memberIndexes;
+        this.memberIndexes = memberIndexes.stream().toList();
     }
 
     @Override
@@ -90,7 +91,8 @@ public class AddSessionCommand extends Command {
         }
 
         AddSessionCommand otherAddSessionCommand = (AddSessionCommand) other;
-        return toAdd.equals(otherAddSessionCommand.toAdd);
+        return toAdd.equals(otherAddSessionCommand.toAdd)
+                && memberIndexes.equals(otherAddSessionCommand.memberIndexes);
     }
 
     @Override
