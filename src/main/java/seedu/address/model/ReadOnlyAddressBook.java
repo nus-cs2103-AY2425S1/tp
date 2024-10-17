@@ -27,4 +27,10 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate associations.
      */
     ObservableList<Association> getAssociationList();
+
+    /**
+     * Returns an unmodifiable view of the associations set.
+     */
+    ObservableSet<Pair<Vendor, Event>> getAssociations();
+
 }

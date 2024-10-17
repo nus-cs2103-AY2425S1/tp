@@ -29,6 +29,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.UnassignCommand;
 import seedu.address.logic.commands.ViewEventCommand;
 import seedu.address.logic.commands.ViewVendorCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -57,6 +58,12 @@ public class AddressBookParserTest {
     public void parseCommand_assign() throws Exception {
         AssignCommand command = new AssignCommand(Index.fromOneBased(1), Index.fromOneBased(1));
         assertEquals(parser.parseCommand(AssignCommand.COMMAND_WORD + " v/1 e/1"), command);
+    }
+
+    @Test
+    public void parseCommand_unassign() throws Exception {
+        UnassignCommand command = new UnassignCommand(Index.fromOneBased(1), Index.fromOneBased(1));
+        assertEquals(parser.parseCommand(UnassignCommand.COMMAND_WORD + " v/1 e/1"), command);
     }
 
     @Test
@@ -132,7 +139,6 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
     @Test

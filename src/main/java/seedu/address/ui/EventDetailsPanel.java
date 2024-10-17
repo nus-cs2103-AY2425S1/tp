@@ -3,12 +3,16 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.beans.value.ObservableObjectValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
+import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.util.Pair;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
@@ -32,15 +36,26 @@ public class EventDetailsPanel extends UiPart<Region> {
     @FXML
     private StackPane detailsChildrenPlaceholder;
 
+    private ObservableList<Vendor> assignedVendors;
+
     /**
      * Creates a {@code VendorListPanel} with the given {@code ObservableList}.
      */
-    public EventDetailsPanel(ObservableObjectValue<Event> event, ObservableList<Vendor> assignedVendors) {
+    public EventDetailsPanel(ObservableObjectValue<Event> event, ObservableSet<Pair<Vendor, Event>> associations) {
         super(FXML);
+
+        assignedVendors = FXCollections.observableArrayList();
 
         event.addListener((observable, oldValue, newValue) -> {
             showEventDetails();
             setEvent(newValue);
+
+            // Update assignedVendors when event is changed
+            updateAssignedVendors(associations);
+        });
+
+        associations.addListener((SetChangeListener.Change<? extends Pair<Vendor, Event>> change) -> {
+            updateAssignedVendors(associations);
         });
 
         VendorListPanel vendorListPanel = new VendorListPanel(assignedVendors, "Assigned Vendors");
@@ -57,6 +72,12 @@ public class EventDetailsPanel extends UiPart<Region> {
     private void showEventDetails() {
         detailsHolder.setVisible(true);
         noEventMsg.setVisible(false);
+    }
+
+    private void updateAssignedVendors(ObservableSet<Pair<Vendor, Event>> associations) {
+        assignedVendors.clear();
+        assignedVendors
+                .addAll(associations.stream().filter(pair -> pair.getValue().equals(event)).map(Pair::getKey).toList());
     }
 
 }

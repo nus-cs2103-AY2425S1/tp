@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
@@ -90,8 +92,8 @@ public interface Model {
     void updateFilteredVendorList(Predicate<Vendor> predicate);
 
     /**
-     * Returns true if the given {@code vendor} is already assigned to the given {@code event}.
-     * {@code vendor} and {@code event} must exist in the address book.
+     * Returns true if the given {@code vendor} is already assigned to the given {@code event}. {@code vendor} and
+     * {@code event} must exist in the address book.
      */
     boolean isVendorAssignedToEvent(Vendor vendor, Event event);
 
@@ -99,6 +101,21 @@ public interface Model {
      * Assigns the given vendor to the given event.
      */
     void assignVendorToEvent(Vendor vendor, Event event);
+
+    /**
+     * Unassigns the given vendor from the given event.
+     */
+    void unassignVendorFromEvent(Vendor vendor, Event event);
+
+    /**
+     * Returns list of associated vendors to an event.
+     */
+    ObservableList<Vendor> getAssociatedVendors(Event event);
+
+    /**
+     * Returns list of associated events to a vendor.
+     */
+    ObservableList<Event> getAssociatedEvents(Vendor vendor);
 
     /**
      * Returns the current selected vendor.
@@ -155,5 +172,9 @@ public interface Model {
      * @param uiState {@code UiState} object.
      */
     public void setUiState(UiState uiState);
-}
 
+    /**
+     * Returns an unmodifiable view of the associations set.
+     */
+    public ObservableSet<Pair<Vendor, Event>> getAssociations();
+}

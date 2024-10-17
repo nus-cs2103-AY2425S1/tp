@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -74,5 +76,22 @@ class AssignCommandTest {
         // Verify that an exception is thrown when the vendor is already assigned
         CommandException exception = assertThrows(CommandException.class, () -> assignCommand.execute(model));
         assertEquals(Messages.MESSAGE_VENDOR_ALREADY_ASSIGNED, exception.getMessage());
+    }
+
+    @Test
+    public void equals() {
+        AssignCommand assignCommand = new AssignCommand(Index.fromOneBased(1), Index.fromOneBased(1));
+
+        // Same object -> returns true
+        assertTrue(assignCommand.equals(assignCommand));
+
+        // Same values -> returns true
+        assertTrue(assignCommand.equals(new AssignCommand(Index.fromOneBased(1), Index.fromOneBased(1))));
+
+        // Different vendor index -> returns false
+        assertFalse(assignCommand.equals(new AssignCommand(Index.fromOneBased(2), Index.fromOneBased(1))));
+
+        // Different event index -> returns false
+        assertFalse(assignCommand.equals(new AssignCommand(Index.fromOneBased(1), Index.fromOneBased(2))));
     }
 }

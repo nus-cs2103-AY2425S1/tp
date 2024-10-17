@@ -5,8 +5,13 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
+import javafx.util.Pair;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.association.Association;
 import seedu.address.model.association.UniqueAssociationList;
@@ -146,6 +151,42 @@ public class AddressBook implements ReadOnlyAddressBook {
         // Create the association and add to associations
         Association association = new Association(vendorId, eventId);
         associations.add(association);
+    }
+
+    /**
+     * Unassigns the given {@code vendor} in the list from {@code event}.
+     * {@code vendor} and {@code event} must exist in the address book.
+     */
+    void unassignVendorFromEvent(Vendor vendor, Event event) {
+        requireAllNonNull(vendor, event);
+        Pair<Vendor, Event> pair = new Pair<>(vendor, event);
+        associations.remove(pair);
+    }
+
+    /**
+     * Returns list of associated vendors to an event.
+     */
+    public ObservableList<Vendor> getAssociatedVendors(Event event) {
+        requireNonNull(event);
+        List<Vendor> vendorsList = associations.stream()
+                .filter(pair -> pair.getValue().equals(event))
+                .map(Pair::getKey)
+                .collect(Collectors.toList());
+
+        return FXCollections.observableArrayList(vendorsList);
+    }
+
+    /**
+     * Returns list of associated events to a vendor.
+     */
+    public ObservableList<Event> getAssociatedEvents(Vendor vendor) {
+        requireNonNull(vendor);
+        List<Event> eventsList = associations.stream()
+                .filter(pair -> pair.getKey().equals(vendor))
+                .map(Pair::getValue)
+                .collect(Collectors.toList());
+
+        return FXCollections.observableArrayList(eventsList);
     }
 
     //// event-level operations

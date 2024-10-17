@@ -16,6 +16,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -208,6 +210,21 @@ public class CreateVendorCommandTest {
         }
 
         @Override
+        public void unassignVendorFromEvent(Vendor vendor, Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Vendor> getAssociatedVendors(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Event> getAssociatedEvents(Vendor vendor) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableObjectValue<Event> getViewedEvent() {
             throw new AssertionError("This method should not be called.");
         }
@@ -224,6 +241,11 @@ public class CreateVendorCommandTest {
 
         @Override
         public void setUiState(UiState uiState) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableSet<Pair<Vendor, Event>> getAssociations() {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -4,6 +4,8 @@ import java.nio.file.Path;
 
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -36,6 +38,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of vendors */
     ObservableList<Vendor> getFilteredVendorList();
 
+    /** Returns an unmodifiable view of the filtered list of events */
+    ObservableList<Event> getFilteredEventList();
+
     /** Returns a view of the current selected vendor */
     ObservableObjectValue<Vendor> getViewedVendor();
 
@@ -44,6 +49,9 @@ public interface Logic {
 
     /** Returns the current state of the UI */
     ObservableObjectValue<UiState> getUiState();
+
+    /** Returns a view of the associations */
+    ObservableSet<Pair<Vendor, Event>> getAssociations();
 
     /**
      * Returns the user prefs' address book file path.
