@@ -7,31 +7,31 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
+
 /**
- * Enable rsvp toggling for guests
+ * Creates an UnRsvpCommand to toggle rsvp status
  */
-public class RsvpCommand extends Command {
-    public static final String RSVP_COMMAND_WORD = "rsvp";
-
-    public static final String MESSAGE_RSVP_SUCCESS = "Guest RSVP'ed: ";
-
-    public static final String MESSAGE_USAGE = "Toggle RSVP for a guest\n";
+public class UnRsvpCommand extends Command {
+    public static final String UNRSVP_COMMAND_WORD = "unrsvp";
+    public static final String MESSAGE_UNRSVP_SUCCESS = "Guest unRSVP'ed: ";
+    public static final String MESSAGE_USAGE = "Untoggle RSVP for a guest\n";
     public static final String MESSAGE_INVALID_INDEX = "ERROR: Please enter a valid index (from 1 to ";
     private final Index index;
 
     /**
-     * Creates a RsvpCommand to toggle rsvp status
+     * Creates a UnRsvpCommand to toggle rsvp status
      * @param index
      */
-    public RsvpCommand(Index index) {
+    public UnRsvpCommand(Index index) {
         this.index = index;
     }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // Check if index is valid
         int listSize = model.getFilteredPersonList().size();
+        // Check if index is valid
         if (index.getZeroBased() >= listSize) {
             throw new CommandException(String.format(MESSAGE_INVALID_INDEX + listSize + ")"));
         }
@@ -41,13 +41,13 @@ public class RsvpCommand extends Command {
                 personToRsvp.getName(),
                 personToRsvp.getPhone(),
                 personToRsvp.getEmail(),
-                true,
+                false,
                 personToRsvp.getTags()
 
         );
 
         model.setPerson(personToRsvp, updatedPerson);
-        String message = MESSAGE_RSVP_SUCCESS;
+        String message = MESSAGE_UNRSVP_SUCCESS;
         return new CommandResult(String.format(message + updatedPerson.getName().fullName));
     }
 }
