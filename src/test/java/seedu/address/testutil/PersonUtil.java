@@ -50,7 +50,7 @@ public class PersonUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getStudentId().ifPresent(phone -> sb.append(PREFIX_STUDENTID).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_NETID).append(email.value).append(" "));
-        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_MAJOR).append(address.value).append(" "));
+        descriptor.getMajor().ifPresent(address -> sb.append(PREFIX_MAJOR).append(address.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
