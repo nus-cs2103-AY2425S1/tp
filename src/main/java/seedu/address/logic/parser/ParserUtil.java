@@ -152,7 +152,12 @@ public class ParserUtil {
     public static Income parseIncome(String income) throws ParseException {
         requireNonNull(income);
         String trimmedIncome = income.trim();
-        return new Income(trimmedIncome);
+        try {
+            double parsedIncome = Double.parseDouble(trimmedIncome);
+            return new Income(parsedIncome);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Income.MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**

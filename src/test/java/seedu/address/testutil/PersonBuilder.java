@@ -26,7 +26,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_PRIORITY = "LOW";
     public static final String DEFAULT_REMARK = "";
-    public static final String DEFAULT_INCOME = "0";
+    public static final double DEFAULT_INCOME = 0;
     public static final String DEFAULT_DATE_OF_BIRTH = "1 Jan 2000";
 
     private Name name;
@@ -128,7 +128,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code income} of the {@code Person} that we are building.
      */
-    public PersonBuilder withIncome(String income) {
+    public PersonBuilder withIncome(double income) {
         this.income = new Income(income);
         return this;
     }

@@ -15,6 +15,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
@@ -28,7 +29,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_TAG = "#friend";
     // December is not a valid input, use Dec or dec instead
     private static final String INVALID_DATE_OF_BIRTH = "31 December 2022";
-    private static final String INVALID_INCOME = "-1929";
+    private static final double INVALID_INCOME = -1929;
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -36,7 +37,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final String VALID_PRIORITY = BENSON.getPriority().toString();
     private static final String VALID_REMARK = BENSON.getRemark().toString();
-    private static final String VALID_INCOME = BENSON.getIncome().toString();
+    private static final double VALID_INCOME = BENSON.getIncome().getValue();
     private static final String VALID_DATE_OF_BIRTH = BENSON.getDateOfBirth().getValue();
 
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
@@ -145,6 +146,15 @@ public class JsonAdaptedPersonTest {
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_PRIORITY, VALID_REMARK, INVALID_DATE_OF_BIRTH, VALID_INCOME, VALID_TAGS);
         String expectedMessage = Date.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidIncome_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_PRIORITY, VALID_REMARK, VALID_DATE_OF_BIRTH, INVALID_INCOME, VALID_TAGS);
+        String expectedMessage = Income.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
