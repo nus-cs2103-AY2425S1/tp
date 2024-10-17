@@ -115,7 +115,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             predicates.add(new RemarkContainsSubstringPredicate(substring));
         }
         if (argMultimap.getValue(PREFIX_TIER).isPresent()) {
-            String substring = ParserUtil.parseTier(argMultimap.getValue(PREFIX_TIER).get()).tagName.name();
+            String substring = argMultimap.getValue(PREFIX_TIER).get();
             predicates.add(new TierStartsWithSubstringPredicate(substring));
         }
         return predicates;
