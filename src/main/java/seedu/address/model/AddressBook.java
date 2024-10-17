@@ -8,9 +8,11 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.UniqueAssignmentList;
+import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.project.Project;
+import seedu.address.model.project.ProjectId;
 import seedu.address.model.project.UniqueProjectList;
 
 /**
@@ -116,6 +118,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person with the same {@code employeeId} exists in
+     * the address book.
+     */
+    public boolean hasEmployeeId(EmployeeId employeeId) {
+        requireNonNull(employeeId);
+        return persons.containsId(employeeId);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
@@ -142,7 +153,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-
     //// project-level operations
 
     /**
@@ -151,6 +161,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasProject(Project project) {
         requireNonNull(project);
         return projects.contains(project);
+    }
+
+    /**
+     * Returns true if a project with the same {@code projectId} exists in
+     * the address book.
+     */
+    public boolean hasProjectId(ProjectId projectId) {
+        requireNonNull(projectId);
+        return projects.containsId(projectId);
     }
 
     /**

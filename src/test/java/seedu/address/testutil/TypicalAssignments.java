@@ -13,13 +13,16 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.assignment.Assignment;
 
 /**
- * A utility class containing a list of {@code Assignment} objects to be used in tests.
+ * A utility class containing a list of {@code Assignment} objects to be used in
+ * tests.
  */
 public class TypicalAssignments {
-    public static final Assignment ALICE_ALPHA = new AssignmentBuilder().withAssignmentId("1").withProject(ALPHA)
-            .withPerson(ALICE).build();
-    public static final Assignment BENSON_BETA = new AssignmentBuilder().withAssignmentId("2").withProject(BETA)
-            .withPerson(BENSON).build();
+    public static final Assignment ALICE_ALPHA = new AssignmentBuilder().withAssignmentId("1")
+            .withProjectId(ALPHA.getId().toString())
+            .withEmployeeId(ALICE.getEmployeeId().toString()).build();
+    public static final Assignment BENSON_BETA = new AssignmentBuilder().withAssignmentId("2")
+            .withProjectId(BETA.getId().toString())
+            .withEmployeeId(BENSON.getEmployeeId().toString()).build();
 
     private TypicalAssignments() {
     } // prevents instantiation

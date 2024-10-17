@@ -2,7 +2,6 @@ package seedu.address.model.assignment;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.ALICE_ALPHA;
 import static seedu.address.testutil.TypicalAssignments.BENSON_BETA;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -13,12 +12,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.AssignmentBuilder;
 
 public class AssignmentTest {
-
-    @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Assignment assignment = new AssignmentBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> assignment.getPerson().getTags().remove(0));
-    }
 
     @Test
     public void isSameAssignment() {
@@ -56,11 +49,11 @@ public class AssignmentTest {
         assertFalse(ALICE_ALPHA.equals(editedAlice));
 
         // different project -> returns false
-        editedAlice = new AssignmentBuilder(ALICE_ALPHA).withProject(BETA).build();
+        editedAlice = new AssignmentBuilder(ALICE_ALPHA).withProjectId(BETA.getId().toString()).build();
         assertFalse(ALICE_ALPHA.equals(editedAlice));
 
         // different person -> returns false
-        editedAlice = new AssignmentBuilder(ALICE_ALPHA).withPerson(BENSON).build();
+        editedAlice = new AssignmentBuilder(ALICE_ALPHA).withEmployeeId(BENSON.getEmployeeId().toString()).build();
         assertFalse(ALICE_ALPHA.equals(editedAlice));
     }
 }
