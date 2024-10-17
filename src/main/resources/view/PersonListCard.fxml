@@ -31,6 +31,15 @@
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+
+      <!-- Added Label for Selling Properties -->
+      <Label text="Selling Properties:" styleClass="cell_small_label"/>
+      <FlowPane fx:id="sellingProperties"/>
+
+      <!-- Added Label for Buying Properties -->
+      <Label text="Buying Properties:" styleClass="cell_small_label"/>
+      <FlowPane fx:id="buyingProperties"/>
+
     </VBox>
   </GridPane>
 </HBox>
