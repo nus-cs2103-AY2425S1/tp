@@ -2,8 +2,15 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.commands.CommandTestUtil.EDIT_POLICY_LIFE_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INSURANCE_AMOUNT_DUE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INSURANCE_PAYMENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INSURANCE_PAYMENT_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_PAYMENT_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_END_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_START_DATE;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
