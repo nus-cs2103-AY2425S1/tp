@@ -23,6 +23,7 @@ public class AddLogCommandParser implements Parser<AddLogCommand> {
 
         // Manually checking if required prefixes are present
         if (argMultimap.getValue(PREFIX_IDENTITY_NUMBER).isEmpty() || argMultimap.getValue(PREFIX_LOG).isEmpty()) {
+            System.out.println("failhere");
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLogCommand.MESSAGE_USAGE));
         }
