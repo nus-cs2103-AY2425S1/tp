@@ -36,4 +36,13 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, "all \n Alice \n \t Bob  \t", expectedFindCommand);
     }
 
+    @Test
+    public void parse_empty_keywords() {
+        assertParseFailure(parser, "all", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+
+        assertParseFailure(parser, "eph", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+
+        assertParseFailure(parser, "e", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
 }
