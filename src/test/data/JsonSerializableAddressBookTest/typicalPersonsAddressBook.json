@@ -9,7 +9,7 @@
       "tags": [
         "friends"
       ],
-      "moduleRoleMap": {}
+      "moduleRoleMap": {"CS1101S" : "STUDENT"}
     },
     {
       "name": "Benson Meier",
@@ -28,7 +28,7 @@
       "email": "heinz@example.com",
       "address": "wall street",
       "tags": [],
-      "moduleRoleMap": {}
+      "moduleRoleMap": {"CS1101S" : "STUDENT"}
     },
     {
       "name": "Daniel Meier",
@@ -38,7 +38,7 @@
       "tags": [
         "friends"
       ],
-      "moduleRoleMap": {}
+      "moduleRoleMap": {"CS1101S" : "STUDENT"}
     },
     {
       "name": "Elle Meyer",
@@ -46,7 +46,7 @@
       "email": "werner@example.com",
       "address": "michegan ave",
       "tags": [],
-      "moduleRoleMap": {}
+      "moduleRoleMap": {"CS1101S" : "STUDENT"}
     },
     {
       "name": "Fiona Kunz",
@@ -54,7 +54,7 @@
       "email": "lydia@example.com",
       "address": "little tokyo",
       "tags": [],
-      "moduleRoleMap": {}
+      "moduleRoleMap": {"CS1101S" : "STUDENT"}
     },
     {
       "name": "George Best",
@@ -62,7 +62,7 @@
       "email": "anna@example.com",
       "address": null,
       "tags": [],
-      "moduleRoleMap": {}
+      "moduleRoleMap": {"CS1101S" : "STUDENT"}
     }
   ]
 }
