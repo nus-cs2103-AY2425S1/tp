@@ -17,12 +17,12 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Property;
-import seedu.address.testutil.PropertyBuilder;
+import seedu.address.testutil.PropertyToBuyBuilder;
 
 public class AddPropertyToSellCommandTest {
     private final Index index = Index.fromZeroBased(7);
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final Property property = new PropertyBuilder().build();
+    private final Property property = new PropertyToBuyBuilder().build();
     private final Index indexWithProperty = Index.fromZeroBased(7);
     private final Index indexWithoutProperty = Index.fromZeroBased(0);
     private final Index invalidIndex = Index.fromZeroBased(1000);
@@ -76,7 +76,7 @@ public class AddPropertyToSellCommandTest {
         assertFalse(addPropertyToSellCommand.equals(null));
 
         // different property -> returns false
-        Property differentProperty = new PropertyBuilder().withPostalCode("654321").build();
+        Property differentProperty = new PropertyToBuyBuilder().withPostalCode("654321").build();
         AddPropertyToSellCommand addDifferentPropertyCommand = new AddPropertyToSellCommand(index, differentProperty);
         assertFalse(addPropertyToSellCommand.equals(addDifferentPropertyCommand));
     }
