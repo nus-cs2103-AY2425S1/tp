@@ -294,6 +294,20 @@ public class History {
         return sb.toString();
     }
 
+    /**
+     * Removes all appointments from a patient's history.
+     *
+     * @param patientId The ID of the patient that is removed.
+     */
+    public static void deletePatientsAppointments(Id patientId) {
+        Patient patient = Patient.getPatientWithId(patientId);
+        for (LocalDateTime date : patient.getHistory().appointments) {
+            Appointment appointment = appointmentDatabase.get(date);
+            if (appointment.getPatientId().equals(patientId)) {
+                appointmentDatabase.remove(date);
+            }
+        }
+    }
 
     /**
      * Formats the appointment details for display.
