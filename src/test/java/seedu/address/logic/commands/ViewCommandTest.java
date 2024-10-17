@@ -34,6 +34,7 @@ class ViewCommandTest {
     void testEquals() {
         ViewCommand viewCommand = new ViewCommand(VIEW_STUB);
         //same object -> true
+
         assertTrue(viewCommand.equals(new ViewCommand(VIEW_STUB)));
         assertTrue(viewCommand.equals(viewCommand));
         // null -> return false
