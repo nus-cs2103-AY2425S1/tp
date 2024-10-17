@@ -101,4 +101,13 @@ public interface Model {
      * @throws NullPointerException if {@code rentalInformation} is null.
      */
     void updateVisibleRentalInformationList(List<RentalInformation> rentalInformationList);
+
+    // TODO: the methods below are temporary to fix the ui bug, change the implementation in milestone 1.4
+    /**
+     * Returns the last client viewed by the {@code rview} command, whose list of rental information is currently
+     * displayed in the ui.
+     */
+    Client getLastViewedClient();
+
+    void setLastViewedClient(Client client);
 }
