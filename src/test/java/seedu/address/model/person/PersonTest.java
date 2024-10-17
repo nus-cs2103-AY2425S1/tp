@@ -86,6 +86,17 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withJob(VALID_JOB_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        // different tier -> returns true
+        editedAlice = new PersonBuilder(ALICE).withTier("Silver").build();
+        assertTrue(ALICE.equals(editedAlice));
+
+        // different income -> returns true
+        editedAlice = new PersonBuilder(ALICE).withIncome(0).build();
+        assertTrue(ALICE.equals(editedAlice));
+
+        // different remark -> returns true
+        editedAlice = new PersonBuilder(ALICE).withRemark("Different Remark").build();
+        assertTrue(ALICE.equals(editedAlice));
     }
 
     @Test
