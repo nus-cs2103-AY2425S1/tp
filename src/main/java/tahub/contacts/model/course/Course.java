@@ -3,8 +3,6 @@ package tahub.contacts.model.course;
 import static tahub.contacts.commons.util.AppUtil.checkArgument;
 import static tahub.contacts.commons.util.CollectionUtil.requireAllNonNull;
 
-import tahub.contacts.model.person.Person;
-
 /**
  * Represents a Course in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidCourseName(String)}

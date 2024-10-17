@@ -13,7 +13,7 @@ import tahub.contacts.model.course.exceptions.DuplicateCourseException;
 
 /**
  * A list of courses that enforces uniqueness between its elements and does not allow nulls.
- * A course is considered unique by comparing using {@code Course#isConflictCourse(Course)}. As such, adding and updating of
+ * A course is considered unique by comparing using {@code Course#isConflictCourse(Course)}. So, adding and updating of
  * courses uses Course#isConflictCourse(Course) for equality so as to ensure that the course being added or updated is
  * unique in terms of identity in the UniqueCourseList. However, the removal of a course uses Course#equals(Object) so
  * as to ensure that the course with exactly the same fields will be removed.
