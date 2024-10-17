@@ -25,19 +25,19 @@ public class DeleteConcertContactCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1" + PREFIX_CONCERT + INDEX_FIRST_CONCERT.getOneBased(),
+        assertParseSuccess(parser, "1 " + PREFIX_CONCERT + INDEX_FIRST_CONCERT.getOneBased(),
                 new DeleteConcertContactCommand(INDEX_FIRST_PERSON, INDEX_FIRST_CONCERT));
     }
 
     @Test
     public void parse_invalidPersonArg_throwsParseException() {
-        assertParseFailure(parser, "a" + PREFIX_CONCERT + INDEX_FIRST_CONCERT.getOneBased(),
+        assertParseFailure(parser, "a " + PREFIX_CONCERT + INDEX_FIRST_CONCERT.getOneBased(),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteConcertContactCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidConcertArg_throwsParseException() {
-        assertParseFailure(parser, "1" + PREFIX_CONCERT + "a",
+        assertParseFailure(parser, "1 " + PREFIX_CONCERT + "a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteConcertContactCommand.MESSAGE_USAGE));
     }
 }

@@ -20,6 +20,7 @@ import seedu.address.logic.commands.AddConcertCommand;
 import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteConcertContactCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -85,6 +86,14 @@ public class AddressBookParserTest {
         LinkCommand command = (LinkCommand) parser.parseCommand(LinkCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_CONCERT + INDEX_FIRST_CONCERT.getOneBased());
         assertEquals(new LinkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_CONCERT), command);
+    }
+
+    @Test
+    public void parseCommand_deleteConcertContact() throws Exception {
+        DeleteConcertContactCommand command = (DeleteConcertContactCommand) parser.parseCommand(
+                DeleteConcertContactCommand.COMMAND_WORD + " "  + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_CONCERT + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteConcertContactCommand(INDEX_FIRST_PERSON, INDEX_FIRST_PERSON), command);
     }
 
     @Test
