@@ -172,6 +172,10 @@ public class ParserUtil {
         RoleType roleType;
 
         if (onlyModuleCodePresent) {
+            if (!ModuleCode.isValidModuleCode(trimmed)) {
+                throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
+            }
+
             moduleCode = new ModuleCode(trimmed);
             roleType = RoleType.STUDENT;
         } else {
@@ -179,6 +183,10 @@ public class ParserUtil {
             String[] parsed = trimmed.split("-", 2);
             if (parsed.length != 2) {
                 throw new ParseException(ModuleRoleMap.MESSAGE_CONSTRAINTS);
+            }
+
+            if (!ModuleCode.isValidModuleCode(parsed[0])) {
+                throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
             }
 
             moduleCode = new ModuleCode(parsed[0]);
