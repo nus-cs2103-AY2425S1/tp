@@ -44,6 +44,7 @@ public class ImportCommandTest {
     private Path invalidFilePath;
     private Path emptyFilePath;
     private Path multipleFilePath;
+    private Path invalidTrimFilePath; // New path for invalid trim file
     private Path nonExistentFilePath;
 
     @BeforeEach
@@ -51,11 +52,12 @@ public class ImportCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        // Create paths for valid, invalid, empty, and multiple CSV files
+        // Create paths for valid, invalid, empty, multiple, and trim error CSV files
         validFilePath = Paths.get(TEST_DIRECTORY, "ValidImportContacts.csv");
         invalidFilePath = Paths.get(TEST_DIRECTORY, "InvalidImportContacts.csv");
         emptyFilePath = Paths.get(TEST_DIRECTORY, "EmptyImportContacts.csv");
         multipleFilePath = Paths.get(TEST_DIRECTORY, "MultipleImportContacts.csv");
+        invalidTrimFilePath = Paths.get(TEST_DIRECTORY, "InvalidTrimLineEntry.csv"); // New invalid trim file path
         nonExistentFilePath = Paths.get(TEST_DIRECTORY, "NonExistentFile.csv");
 
         // Ensure the directory exists
@@ -86,6 +88,13 @@ public class ImportCommandTest {
             writer.newLine();
             writer.write(MULTIPLE_PERSON_ENTRIES);
         }
+
+        // Create an invalid CSV file entry that will cause trimLine to throw an error
+        try (BufferedWriter writer = Files.newBufferedWriter(invalidTrimFilePath)) {
+            writer.write(VALID_CSV_HEADERS);
+            writer.newLine();
+            writer.write("\"\""); // Empty entry that will cause trimLine to fail
+        }
     }
 
     @AfterEach
@@ -102,6 +111,9 @@ public class ImportCommandTest {
         }
         if (Files.exists(multipleFilePath)) {
             Files.delete(multipleFilePath);
+        }
+        if (Files.exists(invalidTrimFilePath)) { // Clean up invalid trim file
+            Files.delete(invalidTrimFilePath);
         }
     }
 
@@ -179,5 +191,15 @@ public class ImportCommandTest {
         // Ensure success of import
         assertCommandSuccess(importCommand, model,
                 String.format(ImportCommand.MESSAGE_SUCCESS, "MultipleImportContacts.csv"), expectedModel);
+    }
+
+    @Test
+    public void execute_invalidTrimLineEntry_throwsCommandException() {
+        ImportCommand importCommand = new ImportCommand("InvalidTrimLineEntry.csv");
+        try {
+            importCommand.execute(model);
+        } catch (CommandException e) {
+            assertTrue(e.getMessage().contains(ImportCommand.MESSAGE_INCORRECT_FILE_FORMAT));
+        }
     }
 }
