@@ -16,7 +16,9 @@ public class Course {
     public static final String COURSE_NAME_MESSAGE_CONSTRAINTS = "Course name should be alphanumeric";
     // One or more uppercase letters, followed by 4 digits, and an optional uppercase letter
     public static final String COURSE_CODE_VALIDATION_REGEX = "^[A-Z]+\\d{4}[A-Z]?$";
-    public static final String COURSE_NAME_VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String COURSE_NAME_VALIDATION_REGEX = "^(?=.*\\p{Alnum})[\\p{Alnum} ]+$";
+
+
     public final String courseCode;
     public final String courseName;
 
