@@ -1,17 +1,20 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.exceptions.InvalidIdException;
-import seedu.address.logic.commands.DeletePatientCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Id;
-
-import java.util.stream.Stream;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 
+import java.util.stream.Stream;
+
+import seedu.address.commons.exceptions.InvalidIdException;
+import seedu.address.logic.commands.DeletePatientCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Id;
+
+/**
+ * Parses input arguments and creates a new DeletePatientCommand object
+ */
 public class DeletePatientCommandParser implements Parser<DeletePatientCommand> {
 
     /**
