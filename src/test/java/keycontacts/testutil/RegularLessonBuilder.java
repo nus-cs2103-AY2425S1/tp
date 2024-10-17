@@ -8,23 +8,9 @@ import keycontacts.model.lesson.Time;
  * A utility class to help with building RegularLesson objects.
  */
 public class RegularLessonBuilder {
-
-    public static final String DEFAULT_LESSON_DAY = "Monday";
-    public static final String DEFAULT_START_TIME = "16:00";
-    public static final String DEFAULT_END_TIME = "18:00";
-
     private Day lessonDay;
     private Time startTime;
     private Time endTime;
-
-    /**
-     * Creates a {@code RegularLessonBuilder} with the default details.
-     */
-    public RegularLessonBuilder() {
-        lessonDay = new Day(DEFAULT_LESSON_DAY);
-        startTime = new Time(DEFAULT_START_TIME);
-        endTime = new Time(DEFAULT_END_TIME);
-    }
 
     /**
      * Initializes the RegularLessonBuilder with the data of {@code regularLessonToCopy}.
