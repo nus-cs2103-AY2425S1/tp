@@ -80,17 +80,6 @@ public class PersonBuilder {
     }
 
     /**
-     * Use {@code DEFAULT_MODULE_CODE} and {@code DEFAULT_ROLE_TYPE} to construct a default {@code ModuleRoleMap}
-     * for the {@code Person} that we are building.
-     */
-    public PersonBuilder withDefaultModuleRoleMap() {
-        HashMap<ModuleCode, RoleType> moduleRoleMap = new HashMap<>();
-        moduleRoleMap.put(DEFAULT_MODULE_CODE, DEFAULT_ROLE_TYPE);
-        this.moduleRoleMap = new ModuleRoleMap(moduleRoleMap);
-        return this;
-    }
-
-    /**
      * Parses the {@code ModuleRoleMap} into a {@code ModuleRoleMap} and set it to the {@code Person}
      * that we are building.
      */
