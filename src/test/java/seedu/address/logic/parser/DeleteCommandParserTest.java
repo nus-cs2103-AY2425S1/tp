@@ -51,26 +51,40 @@ public class DeleteCommandParserTest {
 
 
     @Test
-    public void parse_invalidArgsNoTag_throwsParseException() {
+    public void parse_invalidArgsNotNum_throwsParseException() {
         assertParseFailure(parser, "a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_someValidSomeInvalidArgsNoTag_throwsParseException() {
+    public void parse_someValidSomeInvalidArgsNotNum_throwsParseException() {
         assertParseFailure(parser, "1" + DEFAULT_DELIMITER + " a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_invalidArgsNoNum_throwsParseException() {
+    public void parse_invalidArgsOnlyDelimiter_throwsParseException() {
         assertParseFailure(parser, DEFAULT_DELIMITER.toString(),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_invalidArgsSomeNoNum_throwsParseException() {
-        assertParseFailure(parser, DEFAULT_DELIMITER + " 1" + DEFAULT_DELIMITER,
+    public void parse_invalidArgsEmptyString_throwsParseException() {
+        assertParseFailure(parser, "",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_invalidArgsOneEmptyString_throwsParseException() {
+        assertParseFailure(parser, "2 " + DEFAULT_DELIMITER + " 1" + DEFAULT_DELIMITER,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidArgsAllEmptyString_throwsParseException() {
+        assertParseFailure(parser, "" + DEFAULT_DELIMITER  + DEFAULT_DELIMITER,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+
 }
