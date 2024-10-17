@@ -183,6 +183,7 @@ This feature allows you to remove records of customers who are no longer using y
   ```
 
 #### Parameters
+
 | Parameter | Expected Format               | Explanation                                                                                                                                 |
 
 |-----------|-------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
@@ -235,6 +236,7 @@ This feature allows users to update the details of an existing customer in the d
     ```
 
 #### Parameters
+
 | Parameter | Expected Format                                  | Explanation                                                                                                                                 |
 
 |-----------|--------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
@@ -287,6 +289,7 @@ To perform a search, use the `filter` command followed by one or more flags (ind
     ```
 
 #### Parameters
+
 | Parameter   | Expected Format                                                                                              | Explanation                                                                                     |
 
 |-------------|--------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
