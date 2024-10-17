@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.processing.RoundEnvironment;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -140,7 +141,7 @@ public class ParserUtil {
         if (!Game.isValidGameName(trimmedGame)) {
             throw new ParseException(Game.MESSAGE_CONSTRAINTS);
         }
-        return new Game(trimmedGame);
+        return new Game(trimmedGame, new Username("tbc"), new SkillLevel("tbc"), new Role("tbc"));
     }
 
     /**
