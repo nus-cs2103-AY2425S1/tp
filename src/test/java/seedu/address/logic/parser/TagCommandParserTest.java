@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -36,23 +37,16 @@ public class TagCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         // Invalid index (non-numeric)
-        assertParseFailure(parser, "a t/colleague", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                TagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a t/colleague", MESSAGE_INVALID_INDEX);
+
+        // Index missing
+        assertParseFailure(parser, "t/colleague t/gym", MESSAGE_INVALID_INDEX);
 
         // Missing tags (no tags specified)
         assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 TagCommand.MESSAGE_USAGE));
 
-        // Index missing
-        assertParseFailure(parser, "t/colleague t/gym", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                TagCommand.MESSAGE_USAGE));
-
-        // Invalid tag (contains non-alphanumeric or space characters)
-        // assertParseFailure(parser, "1 t/work_colleague t/gym", TagName.MESSAGE_CONSTRAINTS);
-
-        // Invalid tag (blank)
-        // assertParseFailure(parser, "1 t/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-        // TagCommand.MESSAGE_USAGE));
-
+        // Tag descriptions contain non-alphanumeric or space characters
+        assertParseFailure(parser, "1 t/colleague_", TagName.MESSAGE_CONSTRAINTS);
     }
 }
