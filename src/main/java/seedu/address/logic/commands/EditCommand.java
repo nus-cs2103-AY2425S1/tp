@@ -26,6 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -109,10 +110,11 @@ public class EditCommand extends Command {
         Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority());
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         DateOfBirth updatedDateOfBirth = editPersonDescriptor.getDateOfBirth().orElse(personToEdit.getDateOfBirth());
+        Income updatedIncome = editPersonDescriptor.getIncome().orElse(personToEdit.getIncome());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedPriority, updatedRemark, updatedDateOfBirth, updatedTags);
+                updatedPriority, updatedRemark, updatedDateOfBirth, updatedIncome, updatedTags);
     }
 
     @Override
@@ -151,6 +153,7 @@ public class EditCommand extends Command {
         private Priority priority;
         private Remark remark;
         private DateOfBirth dateOfBirth;
+        private Income income;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -231,6 +234,14 @@ public class EditCommand extends Command {
 
         public Optional<DateOfBirth> getDateOfBirth() {
             return Optional.ofNullable(dateOfBirth);
+        }
+
+        public void setIncome(Income income) {
+            this.income = income;
+        }
+
+        public Optional<Income> getIncome() {
+            return Optional.ofNullable(income);
         }
 
         /**

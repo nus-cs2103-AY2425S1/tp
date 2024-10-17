@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Date;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -34,6 +35,7 @@ class JsonAdaptedPerson {
     private final String priority;
     private final String remark;
     private final String dateOfBirth;
+    private final String income;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -48,6 +50,7 @@ class JsonAdaptedPerson {
             @JsonProperty("priority") String priority,
             @JsonProperty("remark") String remark,
             @JsonProperty("dateOfBirth") String dateOfBirth,
+            @JsonProperty("income") String income,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
@@ -56,6 +59,7 @@ class JsonAdaptedPerson {
         this.priority = priority;
         this.remark = remark;
         this.dateOfBirth = dateOfBirth;
+        this.income = income;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -72,6 +76,7 @@ class JsonAdaptedPerson {
         priority = source.getPriority().name();
         remark = source.getRemark().value;
         dateOfBirth = source.getDateOfBirth().getValue();
+        income = source.getIncome().getValue();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .toList());
@@ -142,9 +147,11 @@ class JsonAdaptedPerson {
         }
         final DateOfBirth modelDateOfBirth = new DateOfBirth(dateOfBirth);
 
+        final Income modelIncome = new Income(income == null ? Income.EMPTY_VALUE_STRING : income);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPriority, modelRemark,
-                modelDateOfBirth, modelTags);
+                modelDateOfBirth, modelIncome, modelTags);
     }
 
 }

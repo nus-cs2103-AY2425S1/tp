@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_OF_BIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
@@ -18,6 +19,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -39,7 +41,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
                         args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_PRIORITY, PREFIX_REMARK, PREFIX_DATE_OF_BIRTH, PREFIX_TAG);
+                        PREFIX_PRIORITY, PREFIX_REMARK, PREFIX_DATE_OF_BIRTH, PREFIX_INCOME, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_DATE_OF_BIRTH)
@@ -57,9 +59,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Priority priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).orElse("LOW"));
         Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
         DateOfBirth dateOfBirth = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DATE_OF_BIRTH).get());
+        Income income = ParserUtil.parseIncome(argMultimap.getValue(PREFIX_INCOME).orElse(Income.EMPTY_VALUE_STRING));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, priority, remark, dateOfBirth, tagList);
+        Person person = new Person(name, phone, email, address, priority, remark, dateOfBirth, income, tagList);
 
         return new AddCommand(person);
     }
