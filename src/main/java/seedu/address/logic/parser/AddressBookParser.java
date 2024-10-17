@@ -91,7 +91,7 @@ public class AddressBookParser {
             return new AddStudentCommandParser().parse(arguments);
 
         case DeleteStudentCommand.COMMAND_WORD:
-            return new AddStudentCommandParser().parse(arguments);
+            return new DeleteStudentCommandParser().parse(arguments);
 
         case MarkAttendanceCommand.COMMAND_WORD:
             return new MarkAttendanceCommandParser().parse(arguments);
