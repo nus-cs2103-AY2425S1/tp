@@ -1,20 +1,17 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.client.Client;
+import seedu.address.model.rentalinformation.RentalInformation;
 
 /**
  * A UI component that displays information of a {@code RentalInformation}.
  */
 public class RentalInformationCard extends UiPart<Region> {
 
-    private static final String FXML = "RentalInformationListCard.fxml";
+    private static final String FXML = "RentalInformationCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -24,35 +21,40 @@ public class RentalInformationCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Client client;
+    public final RentalInformation rentalInformation;
 
     @javafx.fxml.FXML
     private HBox cardPane;
     @FXML
-    private Label name;
-    @FXML
     private Label id;
-    @FXML
-    private Label phone;
     @FXML
     private Label address;
     @FXML
-    private Label email;
+    private Label rentalStartDate;
     @FXML
-    private FlowPane tags;
+    private Label rentalEndDate;
+    @FXML
+    private Label rentDueDate;
+    @FXML
+    private Label monthlyRent;
+    @FXML
+    private Label deposit;
+    @FXML
+    private Label customerList;
 
     /**
      * Creates a {@code RentalInformationCard} with the given {@code RentalInformation} and index to display.
      */
-    public RentalInformationCard(Client client, int displayedIndex) {
+    public RentalInformationCard(RentalInformation rentalInformation, int displayedIndex) {
         super(FXML);
-        this.client = client;
+        this.rentalInformation = rentalInformation;
         id.setText(displayedIndex + ". ");
-        name.setText(client.getName().fullName);
-        phone.setText(client.getPhone().value);
-        email.setText(client.getEmail().value);
-        client.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        address.setText(rentalInformation.getAddress().toString());
+        rentalStartDate.setText("Rental Start Date: " + rentalInformation.getRentalStartDate().toString());
+        rentalEndDate.setText("Rental End Date: " + rentalInformation.getRentalEndDate().toString());
+        rentDueDate.setText("Rental Monthly Payment Date: " + rentalInformation.getRentDueDate().toString());
+        monthlyRent.setText("Monthly Rent Amount: " + rentalInformation.getMonthlyRent().toString());
+        deposit.setText("Deposit Amount: " + rentalInformation.getDeposit().toString());
+        customerList.setText("Customers: " + rentalInformation.getCustomerList().toString());
     }
 }

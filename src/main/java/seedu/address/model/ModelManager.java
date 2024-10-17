@@ -4,9 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -23,6 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
+    private final ObservableList<RentalInformation> visibleRentalInformationList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredClients = new FilteredList<>(this.addressBook.getPersonList());
+        visibleRentalInformationList = FXCollections.observableArrayList();
     }
 
     public ModelManager() {
@@ -135,6 +139,18 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Client> predicate) {
         requireNonNull(predicate);
         filteredClients.setPredicate(predicate);
+    }
+
+    //=========== Visible Rental Information =================================================================
+    @Override
+    public ObservableList<RentalInformation> getVisibleRentalInformationList() {
+        return visibleRentalInformationList;
+    }
+
+    @Override
+    public void updateVisibleRentalInformationList(List<RentalInformation> rentalInformationList) {
+        requireNonNull(rentalInformationList);
+        visibleRentalInformationList.setAll(rentalInformationList);
     }
 
     @Override

@@ -10,6 +10,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.model.rentalinformation.RentalInformation;
 
 /**
  * Views the rental information for a client identified using its displayed index from the address book.
@@ -39,10 +40,12 @@ public class ViewRentalCommand extends Command {
         }
 
         Client clientToViewRentalInformation = lastShownList.get(targetIndex.getZeroBased());
-        // TODO: Decide if the model needs to be modified and, if so, implement the methods required
-        // model.doSomething(clientToViewRentalInformation); // Modify the model if needed
-        // TODO: Update the placeholder message passed into CommandResult with a proper message
-        return new CommandResult("WIP: The 'rview' command was called.");
+        List<RentalInformation> rentalInformationListOfClient = clientToViewRentalInformation.getRentalInformation();
+        model.updateVisibleRentalInformationList(rentalInformationListOfClient);
+
+        return new CommandResult(
+                String.format(Messages.MESSAGE_RENTAL_INFORMATION_LISTED_OVERVIEW,
+                        rentalInformationListOfClient.size()));
     }
 
     @Override
