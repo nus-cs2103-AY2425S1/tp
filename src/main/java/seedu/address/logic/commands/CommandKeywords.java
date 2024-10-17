@@ -12,7 +12,6 @@ public enum CommandKeywords {
     edit,
     exit,
     find,
-    help,
     list;
 
     /**
