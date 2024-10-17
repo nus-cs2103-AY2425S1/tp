@@ -13,7 +13,7 @@
       xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <StackPane styleClass="sidebar-pane">
     <HBox>
-      <Label styleClass="sidebar-title" text="${'Dream Day\nDesigner'}" />
+      <Label styleClass="sidebar-title" text="${'Dream\nDay\nDesigner'}" />
     </HBox>
   </StackPane>
   <StackPane styleClass="sidebar-pane">

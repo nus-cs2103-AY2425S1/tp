@@ -23,23 +23,25 @@ public class ClientCard extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
     public final Client client;
 
     @FXML
-    private HBox cardPane;
-    @FXML
-    private Label id;
-    @FXML
     private Label name;
+    
     @FXML
     private Label phone;
+    
     @FXML
     private Label email;
+    
     @FXML
     private Label address;
+    
     @FXML
     private FlowPane tags;
+
+    @FXML
+    private Label id;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -47,11 +49,13 @@ public class ClientCard extends UiPart<Region> {
     public ClientCard(Client client, int displayedIndex) {
         super(FXML);
         this.client = client;
-        id.setText(displayedIndex + ". ");
-        name.setText(String.format("%s (Client) #%d", client.getName().fullName, client.getId().id));
-        phone.setText(client.getPhone().value);
-        email.setText(client.getEmail().value);
-        address.setText(client.getAddress().value);
+
+        name.setText(String.format("%s. %s", displayedIndex, client.getName().fullName));
+        id.setText(String.format("Client: #%d", client.getId().id));
+        
+        phone.setText(String.format("📞 Phone Number: %s", client.getPhone()));
+        email.setText(String.format("📫 Email: %s", client.getEmail()));
+        address.setText(String.format("🏠 Address: %s", client.getAddress()));
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

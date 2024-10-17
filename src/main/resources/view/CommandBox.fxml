@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.StackPane?>
 
@@ -7,6 +8,6 @@
            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <TextField fx:id="commandTextField" styleClass="command-text-field"
              maxHeight="60" minHeight="40"
-             onAction="#handleCommandEntered" promptText="What would you like to do?"/>
+             onAction="#handleCommandEntered" promptText="What would you like to do?" />
 </StackPane>
 
