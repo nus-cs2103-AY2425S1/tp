@@ -102,6 +102,20 @@ Shows a list of all clients in the address book.
 
 Format: `list`
 
+### Listing rental information of a client : `rview`
+
+Shows a list of all rental information related to a specific client in the address book.
+
+Format: `rview INDEX`
+
+* Lists all rental information related to the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `rview 1` <br>
+![result for 'rview 1'](images/rview1Result.png)
+
 ### Editing a client : `edit`
 
 Edits an existing client in the address book.
