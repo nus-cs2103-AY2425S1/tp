@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# CFG User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CFG can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,15 +17,15 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -38,7 +38,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -160,6 +160,37 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Creating a group : `createGroup`
+
+Creates a new group with people as members.
+
+Format: `createGroup g/GROUP_NAME m/[INDICES]`
+
+* Creates a new group with name `GROUP_NAME`.
+* Adds the persons at the specified `INDICES` to the group. 
+  Indices refer to the index numbers shown in the displayed person list.
+  There must be at least one index provided, and indices should be separated by a space.
+* There cannot be two groups with the same name. If a group
+  with the given `GROUP_NAME` currently exists, the command will fail.
+
+### Viewing a group's members: `viewGroup`
+
+Views members of a group.
+
+Format: `viewGroup g/GROUP_NAME`
+
+* Members of group named `GROUP_NAME` are displayed in the GUI list.
+* Group named `GROUP_NAME` must exist.
+
+### Deleting a group: `deleteGroup`
+
+Deletes a group.
+
+Format: `deleteGroup g/GROUP_NAME`
+
+* Deletes group named `GROUP_NAME`
+* Group named `GROUP_NAME` must exist.
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -212,3 +243,6 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
+**Create Group** | `createGroup g/GROUP_NAME m/[INDICES]`
+**View Group**   | `viewGroup g/GROUP_NAME`
+**Delete Group** | `deleteGroup g/GROUP_NAME`
