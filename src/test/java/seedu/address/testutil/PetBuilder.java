@@ -105,5 +105,4 @@ public class PetBuilder {
     public Pet build() {
         return new Pet(name, species, breed, age, sex, tags);
     }
-
 }

@@ -119,5 +119,4 @@ public class Pet {
                 .add("sex", sex)
                 .toString();
     }
-
 }
