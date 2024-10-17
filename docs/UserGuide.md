@@ -149,9 +149,9 @@ Alternative Format: `delete NAME`
 
 Delete all contacts from cher with contains **all** the specified tags.
 
-Format: `batch-delete [t/TAG]...`
+Format: `batch-delete t/TAG [t/TAG]...`
 
-![Batch delete example](images/BatchDeleteExample.png)
+![Batch delete example](images/ForBatchDeleteExample.png)
 
 Examples:
 * `batch-delete t/friends` will delete both `Alex Yeoh` and `Bernice Yu`.
@@ -209,7 +209,7 @@ Action | Format, Examples
 **Add** | `add n/NAME r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho r/student p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Secondary 1`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Batch-Delete**| `batch-delete [t/TAG]...`<br> e.g. `batch-delete t/friends t/colleagues t/owesmoney t/...`
+**Batch-Delete**| `batch-delete t/TAG [t/TAG]...`<br> e.g. `batch-delete t/friends t/colleagues t/owesmoney t/...`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
