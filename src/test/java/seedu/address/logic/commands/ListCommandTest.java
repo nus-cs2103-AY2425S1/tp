@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -10,6 +11,7 @@ import java.util.Comparator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -74,5 +76,24 @@ public class ListCommandTest {
             Comparator.comparing((Person person) -> person.getEmail().value).reversed()
         );
         assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_listWithReversePrefix_success() {
+        ListCommand listCommand = new ListCommand(null, true);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_listWithInvalidSortField_throwsCommandException() {
+        ListCommand listCommand = new ListCommand("invalid", false);
+        assertThrows(CommandException.class, () -> listCommand.execute(model));
+    }
+
+    @Test
+    public void execute_listWithInvalidSortFieldAndReverse_throwsCommandException() {
+        ListCommand listCommand = new ListCommand("invalid", true);
+        assertThrows(CommandException.class, () -> listCommand.execute(model));
     }
 }
