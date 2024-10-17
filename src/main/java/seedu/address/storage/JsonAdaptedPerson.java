@@ -15,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.SupplierStatus;
 import seedu.address.model.product.Product;
 import seedu.address.model.tag.Tag;
 
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String company;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedProduct> products = new ArrayList<>();
+    private final String status;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -39,11 +41,13 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("company") String company,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("products") List<JsonAdaptedProduct> products) {
+            @JsonProperty("products") List<JsonAdaptedProduct> products,
+            @JsonProperty("status") String status) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.company = company;
+        this.status = status;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -60,6 +64,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         company = source.getCompany().value;
+        status = source.getStatus().status;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -118,7 +123,15 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Set<Product> modelProducts = new HashSet<>(personProducts);
 
-        return new Person(modelName, modelPhone, modelEmail, modelCompany, modelTags, modelProducts);
+        if (status == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    SupplierStatus.class.getSimpleName()));
+        }
+        if (!SupplierStatus.isValidStatus(status)) {
+            throw new IllegalValueException(SupplierStatus.MESSAGE_CONSTRAINTS);
+        }
+        final SupplierStatus modelStatus = new SupplierStatus(status);
+        return new Person(modelName, modelPhone, modelEmail, modelCompany, modelTags, modelProducts, modelStatus);
     }
 
 }

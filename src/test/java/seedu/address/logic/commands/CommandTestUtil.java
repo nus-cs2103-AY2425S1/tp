@@ -39,6 +39,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_COMPANY_AMY = "companyA";
     public static final String VALID_COMPANY_BOB = "companyB";
+    public static final String VALID_STATUS_AMY = "active";
+    public static final String VALID_STATUS_BOB = "inactive";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_PRODUCT_BREAD = "bread";

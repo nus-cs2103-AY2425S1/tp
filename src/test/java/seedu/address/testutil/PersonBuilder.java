@@ -8,6 +8,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.SupplierStatus;
 import seedu.address.model.product.Product;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -21,6 +22,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_COMPANY = "company A";
+    public static final String DEFAULT_STATUS = "active";
 
     private Name name;
     private Phone phone;
@@ -28,6 +30,7 @@ public class PersonBuilder {
     private Company company;
     private Set<Tag> tags;
     private Set<Product> products;
+    private SupplierStatus status;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -39,6 +42,7 @@ public class PersonBuilder {
         company = new Company(DEFAULT_COMPANY);
         tags = new HashSet<>();
         products = new HashSet<>();
+        status = new SupplierStatus(DEFAULT_STATUS);
     }
 
     /**
@@ -51,6 +55,7 @@ public class PersonBuilder {
         company = personToCopy.getCompany();
         tags = new HashSet<>(personToCopy.getTags());
         products = new HashSet<>(personToCopy.getProducts());
+        status = personToCopy.getStatus();
     }
 
     /**
@@ -100,9 +105,16 @@ public class PersonBuilder {
         this.email = new Email(email);
         return this;
     }
+    /**
+     * Sets the {@code SupplierStatus} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withStatus(String status) {
+        this.status = new SupplierStatus(status);
+        return this;
+    }
 
     public Person build() {
-        return new Person(name, phone, email, company, tags, products);
+        return new Person(name, phone, email, company, tags, products, status);
     }
 
 }

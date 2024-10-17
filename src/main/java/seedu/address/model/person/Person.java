@@ -26,11 +26,13 @@ public class Person {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Product> products = new HashSet<>();
+    private final SupplierStatus status;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Company company, Set<Tag> tags, Set<Product> products) {
+    public Person(Name name, Phone phone, Email email, Company company, Set<Tag> tags,
+                  Set<Product> products, SupplierStatus status) {
         requireAllNonNull(name, phone, email, company, tags, products);
         this.name = name;
         this.phone = phone;
@@ -38,6 +40,7 @@ public class Person {
         this.company = company;
         this.tags.addAll(tags);
         this.products.addAll(products);
+        this.status = status;
     }
 
     public Name getName() {
@@ -62,6 +65,12 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+    /**
+     * Returns the status of the supplier.
+     */
+    public SupplierStatus getStatus() {
+        return status;
     }
 
     /**
@@ -124,6 +133,7 @@ public class Person {
                 .add("company", company)
                 .add("tags", tags)
                 .add("products", products)
+                .add("status", status)
                 .toString();
     }
 

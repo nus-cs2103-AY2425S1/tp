@@ -18,7 +18,7 @@ public class DeliveryUtil {
      * Returns an add command string for adding the {@code person}.
      */
     public static String getDeliveryCommand(Delivery delivery) {
-        return AddDeliveryCommand.COMMAND_WORD + " " + getDeliveryDetails(delivery);
+        return AddDeliveryCommand.COMMAND_WORD + " -d " + getDeliveryDetails(delivery);
     }
 
     /**
@@ -34,7 +34,6 @@ public class DeliveryUtil {
         sb.append(PREFIX_PRODUCT + " " + delivery.getDeliveryProduct().toString() + " ");
         sb.append(PREFIX_QUANTITY + " " + delivery.getDeliveryQuantity() + " ");
         sb.append(PREFIX_COST + " " + delivery.getDeliveryCost());
-        System.out.println(sb.toString());
         return sb.toString();
     }
 }
