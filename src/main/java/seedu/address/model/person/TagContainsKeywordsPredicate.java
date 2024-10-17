@@ -5,6 +5,9 @@ import seedu.address.model.tag.Tag;
 
 import java.util.function.Predicate;
 
+/**
+ * Tests that a {@code Person} is tagged with the corresponding tag.
+ */
 public class TagContainsKeywordsPredicate implements Predicate<Person> {
     private final String tag;
 
