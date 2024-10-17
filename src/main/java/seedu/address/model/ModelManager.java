@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.assignment.PredefinedAssignmentsData;
 import seedu.address.model.assignment.ReadOnlyPredefinedAssignmentsData;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -154,6 +155,18 @@ public class ModelManager implements Model {
     //=========== Predefined assignments accessors =============================================================
 
     public boolean hasAssignment(String name) {
-        return predefinedAssignmentsData.hasPerson(name);
+        return predefinedAssignmentsData.hasAssignment(name);
+    }
+
+    public float maxScore(String assignment) {
+        return predefinedAssignmentsData.maxScore(assignment);
+    }
+
+    public String getAssignmentName(String name) {
+        return predefinedAssignmentsData.getAssignmentName(name);
+    }
+
+    public boolean hasName(Name name) {
+        return addressBook.hasName(name);
     }
 }

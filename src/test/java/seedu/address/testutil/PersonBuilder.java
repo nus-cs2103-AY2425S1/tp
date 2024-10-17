@@ -25,7 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_TELEGRAM = "@viswa";
     public static final String DEFAULT_GITHUB = "Amy";
-    public static final String DEFAULT_ASSIGNMENT_NAME = "Ex01";
+    public static final String DEFAULT_ASSIGNMENT_NAME = "ex01";
     public static final Float DEFAULT_ASSIGNMENT_SCORE = 0f;
 
     private Name name;

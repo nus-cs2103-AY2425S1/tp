@@ -62,6 +62,7 @@ public class CommandTestUtil {
     public static final String ASSIGNMENT_DESC_ONE = " " + PREFIX_ASSIGNMENT + VALID_ASSIGNMENT_ONE;
     public static final String SCORE_DESC = " " + PREFIX_SCORE + VALID_SCORE;
 
+
     public static final String GITHUB_DESC_AMY = " " + PREFIX_GITHUB + VALID_GITHUB_AMY;
     public static final String GITHUB_DESC_BOB = " " + PREFIX_GITHUB + VALID_GITHUB_BOB;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -69,6 +70,11 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_ASSIGNMENT_ONE = " "
+        + PREFIX_ASSIGNMENT + "Ex1000"; //assignment that will not be in database
+
+    public static final float INVALID_SCORE_BELOW_ZERO = -1f; //score that is <0
+    public static final float INVALID_SCORE_ABOVE = 10000f; //score that is <0
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
