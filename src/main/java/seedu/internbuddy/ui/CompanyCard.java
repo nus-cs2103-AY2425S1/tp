@@ -68,7 +68,7 @@ public class CompanyCard extends UiPart<Region> {
             status.setStyle("-fx-background-color: #db0303;");
         }
 
-        /* phone number and address are optional */
+        /* setting optional fields: phone and address */
         setOptionals();
 
         List<Application> applications = company.getApplications();
@@ -86,18 +86,17 @@ public class CompanyCard extends UiPart<Region> {
     }
 
     private void setOptionals() {
-        // to be changed when optional classes get implemented
-        boolean hasPhoneNumber = !company.getPhone().value.equals("000");
-        boolean hasAddress = !company.getAddress().value.equals("No Address");
+        boolean hasPhoneNumber = !company.getPhone().getValue().equals("No Phone Number");
+        boolean hasAddress = !company.getAddress().getValue().equals("No Address");
 
         if (hasPhoneNumber) {
-            phone.setText(company.getPhone().value);
+            phone.setText(company.getPhone().getValue());
         } else {
             phone.setManaged(false);
             phone.setVisible(false);
         }
         if (hasAddress) {
-            address.setText(company.getAddress().value);
+            address.setText(company.getAddress().getValue());
         } else {
             address.setManaged(false);
             address.setVisible(false);

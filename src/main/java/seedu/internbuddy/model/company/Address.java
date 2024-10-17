@@ -16,8 +16,13 @@ public class Address {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final Address NO_ADDRESS = new Address();
 
-    public final String value;
+    private final String value;
+
+    private Address() {
+        value = null;
+    }
 
     /**
      * Constructs an {@code Address}.
@@ -37,9 +42,23 @@ public class Address {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns the value (non-null).
+     */
+    public String getValue() {
+        return value != null ? value : "No Address";
+    }
+
+    /**
+     * Returns the actual value (nullable).
+     */
+    public String getTrueValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
-        return value;
+        return getValue();
     }
 
     @Override
