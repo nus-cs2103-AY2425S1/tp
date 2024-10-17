@@ -22,7 +22,7 @@ import seedu.address.model.person.Role;
 public class FindPersonCommandParser implements Parser<FindPersonCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindPersonCommand.
+     * Parses the given {@code String} of arguments in the context of the FindPersonCommand
      * and returns a FindPersonCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
@@ -61,10 +61,10 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
     private Predicate<Person> getPersonPredicate(Optional<String[]> nameKeywords, Optional<String> role) {
         Predicate<Person> predicate = null;
         if (nameKeywords.isPresent() && nameKeywords.get().length > 0 && role.isPresent()) {
-            predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords.get()))
+            predicate = new NameContainsKeywordsPredicate<Person>(Arrays.asList(nameKeywords.get()))
                     .and(new RoleContainsKeywordPredicate(role.get()));
         } else if (nameKeywords.isPresent() && nameKeywords.get().length > 0) {
-            predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords.get()));
+            predicate = new NameContainsKeywordsPredicate<>(Arrays.asList(nameKeywords.get()));
         } else if (role.isPresent()) {
             predicate = new RoleContainsKeywordPredicate(role.get());
         }
