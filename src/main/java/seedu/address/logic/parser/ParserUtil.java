@@ -184,6 +184,26 @@ public class ParserUtil {
     }
 
     /**
+     * Parses the given {@code String} representing a file name.
+     *
+     * This method trims any leading or trailing spaces from the file name and checks if the file name is valid.
+     * A file name is considered invalid if it is empty.
+     * If the file name is invalid, a {@code ParseException} is thrown.
+     *
+     * @param fileName The file name to be parsed and validated.
+     * @return The trimmed file name if it is valid.
+     * @throws ParseException if the file name is empty or invalid.
+     */
+    public static String parseFileName(String fileName) throws ParseException {
+        requireNonNull(fileName);
+        String trimmedFileName = fileName.trim();
+        if (fileName.isEmpty()) {
+            throw new ParseException(null);
+        }
+        return trimmedFileName;
+    }
+
+    /**
      * Parses a String containing the field to search and keywords,
      * into a String representing the field to search.
      */

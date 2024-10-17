@@ -26,6 +26,7 @@ public class ExportCommand extends Command {
 
     // Use Paths to handle file paths across different environments
     public static final Path FILE_PATH = Paths.get(DEFAULT_DIRECTORY, FILE_NAME);
+    public static final String PATH = "./data/ExportedContacts.csv";
 
     @Override
     public CommandResult execute(Model model) {
