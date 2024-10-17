@@ -1,21 +1,17 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_KEYWORD;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddClientCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.EmailContainsKeywordsPredicate;
-import seedu.address.model.client.Name;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.client.PhoneContainsKeywordsPredicate;
 
@@ -34,7 +30,8 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        //TODO: Now can only recognise ONE FULL keyword, FUTURE implement MULTIPLE keyword + substring of NAME/PHONE/EMAIL can also find
+        //TODO: Now can only recognise ONE FULL keyword, FUTURE implement MULTIPLE keyword
+        // + substring of NAME/PHONE/EMAIL can also find
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_KEYWORD);
 
@@ -76,7 +73,6 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
     private boolean isKeywordPresent(ArgumentMultimap argumentMultimap, Prefix prefix) {
-        System.out.println("IS KEYWORD PRESENT? : " + argumentMultimap.getValue(prefix).isPresent());
         return argumentMultimap.getValue(prefix).isPresent();
     }
 
