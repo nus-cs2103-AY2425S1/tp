@@ -22,6 +22,11 @@ public class FindTagCommand extends Command {
             + "specified tag names (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: TAG [MORE_TAGS]...\n"
             + "Example: " + COMMAND_WORD + " friend family colleague";
+    public static final String HELP_FINDTAG_COMMAND = "Findtag Command\n"
+            + "- Format: findtag TAG [MORE_TAGS]\n"
+            + "- Example: findtag HDB Condo\n"
+            + "- Tags are case insensitive.\n"
+            + "- Items in the [square brackets] are optional. Persons with at least one matching tag will be returned.";
 
     //@@author tayxuenye-reused
     //Suggested by ChatGPT as a way of checking whether tag exists in the Person
