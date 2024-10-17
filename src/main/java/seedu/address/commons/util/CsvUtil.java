@@ -20,13 +20,14 @@ public class CsvUtil {
     public static String convertObservableListToCsv(ObservableList<Person> personList) {
         StringBuilder csvBuilder = new StringBuilder();
 
-        csvBuilder.append("Name,Phone,Email,Address,Tags\n");
+        csvBuilder.append("Name,Phone,Email,Address,Postal Code,Tags\n");
 
         for (Person person : personList) {
             String name = escapeSpecialCharacters(String.valueOf(person.getName()));
             String phone = escapeSpecialCharacters(String.valueOf(person.getPhone()));
             String email = escapeSpecialCharacters(String.valueOf(person.getEmail()));
             String address = escapeSpecialCharacters(String.valueOf(person.getAddress()));
+            String postalCode = escapeSpecialCharacters(String.valueOf(person.getPostalCode()));
 
             Set<Tag> tags = person.getTags();
             String tagsString = tags.stream()
@@ -37,6 +38,7 @@ public class CsvUtil {
             csvBuilder.append(phone).append(",");
             csvBuilder.append(email).append(",");
             csvBuilder.append(address).append(",");
+            csvBuilder.append(postalCode).append(",");
             csvBuilder.append(tagsString).append("\n");
         }
 

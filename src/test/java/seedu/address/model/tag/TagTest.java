@@ -33,6 +33,13 @@ public class TagTest {
     }
 
     @Test
+    public void testGetTagName() {
+        Tag tag = new Tag("exampleTag");
+        String result = tag.getTagName();
+        assertEquals("exampleTag", result);
+    }
+
+    @Test
     public void equalsSuccess() {
         //testing shortcut
         assertTrue(new Tag("Vegan").equals(new Tag("v")));
