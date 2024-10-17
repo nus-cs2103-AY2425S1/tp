@@ -23,7 +23,7 @@ import seedu.address.model.person.Person;
  */
 public class ModelUtil {
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all methods failing.
      */
     public class ModelStub implements Model {
         @Override
@@ -82,6 +82,21 @@ public class ModelUtil {
         }
 
         @Override
+        public void deleteConcertContact(Person targetPerson, Concert targetConcert) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteConcertContact(Concert targetConcert) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteConcertContact(Person targetPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
@@ -128,11 +143,6 @@ public class ModelUtil {
 
         @Override
         public boolean hasConcertContact(ConcertContact concertContact) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteConcertContact(ConcertContact target) {
             throw new AssertionError("This method should not be called.");
         }
 

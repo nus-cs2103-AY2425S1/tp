@@ -85,9 +85,20 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
-     * Deletes the given concertContact. The concertContact must exist in the address book.
+     * Deletes the concertConcert associated to the given concert and person.
+     * The concertContact must exist in the address book.
      */
-    void deleteConcertContact(ConcertContact target);
+    void deleteConcertContact(Person targetPerson, Concert targetConcert);
+
+    /**
+     * Deletes all concertContacts associated to the given concert.
+     */
+    void deleteConcertContact(Concert targetConcert);
+
+    /**
+     * Deletes all concertContacts associated to the given person.
+     */
+    void deleteConcertContact(Person targetPerson);
 
     /**
      * Adds the given person. {@code person} must not already exist in the address book.

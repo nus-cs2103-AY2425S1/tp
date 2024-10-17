@@ -9,31 +9,33 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.concert.exceptions.ConcertContactNotFoundException;
-import seedu.address.model.concert.exceptions.ConcertNotFoundException;
 import seedu.address.model.concert.exceptions.DuplicateConcertContactException;
-import seedu.address.model.concert.exceptions.DuplicateConcertException;
+import seedu.address.model.person.Person;
 
 /**
- * A list of concertContacts that enforces uniqueness between its elements and does not allow nulls. A
- * concertContact is considered unique by comparing using {@code ConcertContact#isSameConcertContact(ConcertContact)}.
- * As such, adding and updating of concerts uses ConcertContact#isSameConcertConcert(ConcertContact) for equality
- * to ensure that the concertContact being added or updated is unique in terms of identity in the
- * UniqueConcertContactList.
- * However, the removal of a concertContact uses ConcertContact#equals(Object) to ensure that the concertContact
- * with exactly the same fields will be removed. In this case the equals and isSameConcertContact return
- * the same value.
+ * A list of concertContacts that enforces uniqueness between its elements and
+ * does not allow nulls. A concertContact is considered unique by comparing
+ * using {@code ConcertContact#isSameConcertContact(ConcertContact)}. As such,
+ * adding and updating of concerts uses
+ * ConcertContact#isSameConcertConcert(ConcertContact) for equality to ensure
+ * that the concertContact being added or updated is unique in terms of identity
+ * in the UniqueConcertContactList. However, the removal of a concertContact
+ * uses ConcertContact#equals(Object) to ensure that the concertContact with
+ * exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
  * @see ConcertContact#isSameConcertContact(ConcertContact)
  */
 public class UniqueConcertContactList implements Iterable<ConcertContact> {
+
     private final ObservableList<ConcertContact> internalList = FXCollections.observableArrayList();
     private final ObservableList<ConcertContact> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent concertContact as the given argument.
+     * Returns true if the list contains an equivalent concertContact as the
+     * given argument.
      */
     public boolean contains(ConcertContact toCheck) {
         requireNonNull(toCheck);
@@ -41,7 +43,8 @@ public class UniqueConcertContactList implements Iterable<ConcertContact> {
     }
 
     /**
-     * Adds a concertContact to the list. The concertContact must not already exist in the list.
+     * Adds a concertContact to the list. The concertContact must not already
+     * exist in the list.
      */
     public void add(ConcertContact toAdd) {
         requireNonNull(toAdd);
@@ -52,38 +55,57 @@ public class UniqueConcertContactList implements Iterable<ConcertContact> {
     }
 
     /**
-     * Replaces the concertContact {@code target} in the list with {@code editedConcertContact}. {@code target}
-     * must exist in the list. The concertContact identity of {@code editedConcertContact} must not be the same as
-     * another existing concertContact in the list.
+     * Replaces the concertContact {@code target} in the list with
+     * {@code editedConcertContact}. {@code target} must exist in the list. The
+     * concertContact identity of {@code editedConcertContact} must not be the
+     * same as another existing concertContact in the list.
      */
     public void setConcertContact(ConcertContact target, ConcertContact editedConcertContact) {
         requireAllNonNull(target, editedConcertContact);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new ConcertNotFoundException();
+            throw new ConcertContactNotFoundException();
         }
 
         if (!target.isSameConcertContact(editedConcertContact) && contains(editedConcertContact)) {
-            throw new DuplicateConcertException();
+            throw new DuplicateConcertContactException();
         }
 
         internalList.set(index, editedConcertContact);
     }
 
     /**
-     * Removes the equivalent concertContact from the list. The concertContact must exist in the list.
+     * Removes the concertContact associated to the {@code concertToRemove} and {@code personToRemove} from the list.
+     * The concertContact must exist in the list.
      */
-    public void remove(ConcertContact toRemove) {
-        requireNonNull(toRemove);
+    public void remove(Person personToRemove, Concert concertToRemove) {
+        requireAllNonNull(personToRemove, concertToRemove);
+        ConcertContact toRemove = new ConcertContact(personToRemove, concertToRemove);
         if (!internalList.remove(toRemove)) {
             throw new ConcertContactNotFoundException();
         }
     }
 
     /**
-     * Replaces the contents of this list with {@code replacement}. {@code replacement} must not contain
-     * duplicate concertContacts.
+     * Removes all concertContacts associated to the {@code personToRemove} from the list.
+     */
+    public void remove(Person personToRemove) {
+        requireAllNonNull(personToRemove);
+        internalList.removeIf(concertContact -> concertContact.isAssociated(personToRemove));
+    }
+
+    /**
+     * Removes all concertContacts associated to the {@code concertToRemove} from the list.
+     */
+    public void remove(Concert concertToRemove) {
+        requireAllNonNull(concertToRemove);
+        internalList.removeIf(concertContact -> concertContact.isAssociated(concertToRemove));
+    }
+
+    /**
+     * Replaces the contents of this list with {@code replacement}.
+     * {@code replacement} must not contain duplicate concertContacts.
      */
     public void setConcertContacts(UniqueConcertContactList replacement) {
         requireNonNull(replacement);
@@ -91,8 +113,8 @@ public class UniqueConcertContactList implements Iterable<ConcertContact> {
     }
 
     /**
-     * Replaces the contents of this list with {@code concertContacts}. {@code concertContacts} must not contain
-     * duplicate concerts.
+     * Replaces the contents of this list with {@code concertContacts}.
+     * {@code concertContacts} must not contain duplicate concerts.
      */
     public void setConcertContacts(List<ConcertContact> concertContacts) {
         requireAllNonNull(concertContacts);

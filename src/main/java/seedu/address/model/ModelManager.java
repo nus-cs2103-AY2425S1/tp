@@ -116,8 +116,17 @@ public class ModelManager implements Model {
         addressBook.removePerson(target);
     }
 
+    public void deleteConcertContact(Person targetPerson, Concert targetConcert) {
+        addressBook.removeConcertContact(targetPerson, targetConcert);
+    }
+
     @Override
-    public void deleteConcertContact(ConcertContact target) {
+    public void deleteConcertContact(Concert target) {
+        addressBook.removeConcertContact(target);
+    }
+
+    @Override
+    public void deleteConcertContact(Person target) {
         addressBook.removeConcertContact(target);
     }
 
