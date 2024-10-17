@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +20,6 @@ import careconnect.model.Model;
 import careconnect.model.ModelManager;
 import careconnect.model.UserPrefs;
 import careconnect.model.person.NameAndAddressContainsKeywordPredicate;
-import careconnect.model.person.NameOrAddressContainsKeywordPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.

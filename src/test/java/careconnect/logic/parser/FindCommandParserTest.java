@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import careconnect.logic.commands.FindCommand;
 import careconnect.model.person.NameAndAddressContainsKeywordPredicate;
-import careconnect.model.person.NameOrAddressContainsKeywordPredicate;
 
 public class FindCommandParserTest {
 

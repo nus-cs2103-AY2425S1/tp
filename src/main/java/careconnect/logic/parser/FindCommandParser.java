@@ -3,7 +3,6 @@ package careconnect.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Arrays;
-import java.util.List;
 
 import careconnect.logic.Messages;
 import careconnect.logic.commands.FindCommand;
