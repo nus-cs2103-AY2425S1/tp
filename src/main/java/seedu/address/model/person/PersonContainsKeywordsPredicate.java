@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -22,16 +20,16 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Tests that a {@code Person} matches any of the keywords given.
  */
 public class PersonContainsKeywordsPredicate implements Predicate<Person> {
-    private boolean isClearAll = false;
+    private boolean isSearchQueryEmpty = false;
 
     // Identity fields
-    private final List<String> nameKeywords = new ArrayList<>();
-    private final List<String> phoneKeywords = new ArrayList<>();
-    private final List<String> emailKeywords = new ArrayList<>();
+    private final NameContainsKeywordsPredicate namePredicate;
+    private final PhoneContainsKeywordsPredicate phonePredicate;
+    private final EmailContainsKeywordsPredicate emailPredicate;
 
-    // Data fields
-    private final List<String> addressKeywords = new ArrayList<>();
-    private final List<String> tagsKeywords = new ArrayList<>();
+    // Data predicates
+    private final AddressContainsKeywordsPredicate addressPredicate;
+    private final TagContainsKeywordsPredicate tagsPredicate;
 
     // TODO: Missing keywords lists for subject and classes
 
@@ -43,9 +41,21 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
      */
     public PersonContainsKeywordsPredicate(List<String> searchQuery) throws ParseException {
         if (searchQuery.get(0).isEmpty()) {
-            isClearAll = true;
+            isSearchQueryEmpty = true;
+            namePredicate = new NameContainsKeywordsPredicate(new ArrayList<>());
+            phonePredicate = new PhoneContainsKeywordsPredicate(new ArrayList<>());
+            emailPredicate = new EmailContainsKeywordsPredicate(new ArrayList<>());
+            addressPredicate = new AddressContainsKeywordsPredicate(new ArrayList<>());
+            tagsPredicate = new TagContainsKeywordsPredicate(new ArrayList<>());
             return;
         }
+
+        // Initialize keyword lists
+        List<String> nameKeywords = new ArrayList<>();
+        List<String> phoneKeywords = new ArrayList<>();
+        List<String> emailKeywords = new ArrayList<>();
+        List<String> addressKeywords = new ArrayList<>();
+        List<String> tagsKeywords = new ArrayList<>();
 
         Map<Prefix, List<String>> keywordMap = new HashMap<>();
         keywordMap.put(PREFIX_NAME, nameKeywords);
@@ -62,33 +72,47 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
             } else if (currentList != null) {
                 currentList.add(keyword);
             } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE));
+                throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
             }
         }
+
+        namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
+        phonePredicate = new PhoneContainsKeywordsPredicate(phoneKeywords);
+        emailPredicate = new EmailContainsKeywordsPredicate(emailKeywords);
+        addressPredicate = new AddressContainsKeywordsPredicate(addressKeywords);
+        tagsPredicate = new TagContainsKeywordsPredicate(tagsKeywords);
     }
 
     @Override
     public boolean test(Person person) {
-        if (isClearAll) {
+        if (isSearchQueryEmpty) {
             return true;
         }
 
-        boolean hasMatchingName = nameKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
-
-        boolean hasMatchingPhone = phoneKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getPhone().value, keyword));
-
-        boolean hasMatchingEmail = emailKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getEmail().value, keyword));
-
-        boolean hasMatchingAddress = addressKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getAddress().value, keyword));
-
-        boolean hasMatchingTags = tagsKeywords.stream()
-                .anyMatch(keyword -> person.getTags().stream()
-                        .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)));
+        boolean hasMatchingName = namePredicate.test(person);
+        boolean hasMatchingPhone = phonePredicate.test(person);
+        boolean hasMatchingEmail = emailPredicate.test(person);
+        boolean hasMatchingAddress = addressPredicate.test(person);
+        boolean hasMatchingTags = tagsPredicate.test(person);
 
         return hasMatchingName || hasMatchingPhone || hasMatchingEmail || hasMatchingAddress || hasMatchingTags;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof PersonContainsKeywordsPredicate)) {
+            return false;
+        }
+
+        PersonContainsKeywordsPredicate otherPersonContainsKeywordPredicate = (PersonContainsKeywordsPredicate) other;
+        return namePredicate.equals(otherPersonContainsKeywordPredicate.namePredicate)
+                && phonePredicate.equals(otherPersonContainsKeywordPredicate.phonePredicate)
+                && emailPredicate.equals(otherPersonContainsKeywordPredicate.emailPredicate)
+                && addressPredicate.equals(otherPersonContainsKeywordPredicate.addressPredicate)
+                && tagsPredicate.equals(otherPersonContainsKeywordPredicate.tagsPredicate);
     }
 }

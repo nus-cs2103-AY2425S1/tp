@@ -4,11 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.PersonContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
@@ -17,13 +17,14 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose tags contain any of "
             + "the specified tags and keywords (case-insensitive)\n"
             + "Parameters: /TAG KEYWORD [/MORE_TAGS MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " /class 7A alice bob charlie";
+            + "Example: " + COMMAND_WORD + " /name John";
 
     public static final String MESSAGE_SUCCESS = "Found the required people!";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final PersonContainsKeywordsPredicate predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    // TODO : Add functionality so that we can group multiple tags at once
+    public FindCommand(PersonContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
