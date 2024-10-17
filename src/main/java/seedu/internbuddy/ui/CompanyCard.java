@@ -72,7 +72,7 @@ public class CompanyCard extends UiPart<Region> {
         }
 
         for (int i = 0; i < applications.size(); i++) {
-            builder.append(i).append(". ").append(applications.get(i).toString());
+            builder.append(i + 1).append(". ").append(applications.get(i).toString());
             if (i != applications.size() - 1) {
                 builder.append(", ");
             }
