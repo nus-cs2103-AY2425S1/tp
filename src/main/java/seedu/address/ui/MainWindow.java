@@ -144,6 +144,9 @@ public class MainWindow extends UiPart<Stage> {
 
         // Default view shows the contacts list
         displayContactsList();
+
+        // Explicitly remove focus from the command box to ensure it does not start focused
+        primaryStage.getScene().getRoot().requestFocus();
     }
 
 
@@ -157,28 +160,22 @@ public class MainWindow extends UiPart<Stage> {
 
     private void displayContactsList() {
         navBar.setActiveButton(navBar.getContactsButton());
-        //eventListPanelPlaceholder.getChildren().clear();
+
         personList.setVisible(true);
         personList.setManaged(true);
+
         eventList.setVisible(false);
         eventList.setManaged(false);
-
-        //personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        //personListPanelPlaceholder.getChildren().setAll(personListPanel.getRoot());
     }
 
     private void displayEventsList() {
         navBar.setActiveButton(navBar.getEventsButton());
-        //personListPanelPlaceholder.getChildren().clear();
 
         eventList.setVisible(true);
         eventList.setManaged(true);
+
         personList.setVisible(false);
         personList.setManaged(false);
-
-        //eventListPanel = new EventListPanel(logic.getFilteredEventList());
-        //eventListPanelPlaceholder.getChildren().setAll(eventListPanel.getRoot());
-
     }
 
     /**
