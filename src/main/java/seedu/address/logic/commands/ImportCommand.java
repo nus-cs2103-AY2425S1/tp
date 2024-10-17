@@ -1,13 +1,7 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
-import seedu.address.model.person.*;
-import seedu.address.model.tag.Tag;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,10 +10,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
+
 /**
- * The ImportCommand class is responsible for importing contacts from a CSV file into the address book.
+ * The {@code ImportCommand} class is responsible for importing contacts from a CSV file into the address book.
+ * It reads the CSV file, validates its format, and adds the contacts to the model.
  */
 public class ImportCommand extends Command {
+
     public static final String COMMAND_WORD = "import";
     public static final String MESSAGE_SUCCESS = "The contacts from %s have been successfully imported";
     public static final String MESSAGE_USAGE = "Usage: import [filename]";
@@ -32,11 +39,23 @@ public class ImportCommand extends Command {
     private final String fileName;
     private final Path filePath;
 
+    /**
+     * Constructs an {@code ImportCommand} with the specified file name.
+     *
+     * @param fileName The name of the CSV file to import.
+     */
     public ImportCommand(String fileName) {
         this.fileName = fileName;
         this.filePath = Paths.get(DEFAULT_DIRECTORY, fileName);
     }
 
+    /**
+     * Executes the import command, reading contacts from a CSV file and adding them to the model.
+     *
+     * @param model The {@code Model} which the command should operate on.
+     * @return A {@code CommandResult} containing the result of the command.
+     * @throws CommandException If there is an error during the import process.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         // Ensure the file exists
@@ -63,9 +82,9 @@ public class ImportCommand extends Command {
     /**
      * Checks if the CSV file format is correct by validating the column headers.
      *
-     * @param filePath the path to the CSV file
-     * @return true if the format is correct, false otherwise
-     * @throws CommandException if there's an issue reading the file
+     * @param filePath The path to the CSV file.
+     * @return True if the format is correct, false otherwise.
+     * @throws CommandException If there is an issue reading the file.
      */
     private boolean checkCsvFileFormat(Path filePath) throws CommandException {
         try (BufferedReader br = Files.newBufferedReader(filePath)) {
@@ -79,9 +98,9 @@ public class ImportCommand extends Command {
     /**
      * Reads the list of persons from the CSV file.
      *
-     * @param filePath the path to the CSV file
-     * @return the list of persons
-     * @throws CommandException if there's an issue reading or parsing the file
+     * @param filePath The path to the CSV file.
+     * @return The list of persons.
+     * @throws CommandException If there is an issue reading or parsing the file.
      */
     private List<Person> getPersonList(Path filePath) throws CommandException {
         List<Person> personList = new ArrayList<>();
@@ -105,9 +124,9 @@ public class ImportCommand extends Command {
     /**
      * Trims a line from the CSV file to remove extra characters like surrounding quotes.
      *
-     * @param line the line to trim
-     * @return the trimmed line
-     * @throws CommandException if the line format is incorrect
+     * @param line The line to trim.
+     * @return The trimmed line.
+     * @throws CommandException If the line format is incorrect.
      */
     private String trimLine(String line) throws CommandException {
         try {
@@ -118,11 +137,11 @@ public class ImportCommand extends Command {
     }
 
     /**
-     * Parses a line from the CSV file into a Person object.
+     * Parses a line from the CSV file into a {@code Person} object.
      *
-     * @param line the line to parse
-     * @return the Person object
-     * @throws CommandException if the line format is incorrect
+     * @param line The line to parse.
+     * @return The {@code Person} object.
+     * @throws CommandException If the line format is incorrect.
      */
     private Person parseLine(String line) throws CommandException {
         String[] arr = line.split("\",\"");
