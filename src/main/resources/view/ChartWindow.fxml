@@ -8,10 +8,10 @@
           AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <BarChart fx:id="barChart" VBox.vgrow="ALWAYS">
             <xAxis>
-                <CategoryAxis label="Category"/>
+                <CategoryAxis label="Tutee names"/>
             </xAxis>
             <yAxis>
-                <NumberAxis label="Value"/>
+                <NumberAxis label="Hours tutored per tutee"/>
             </yAxis>
         </BarChart>
 

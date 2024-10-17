@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Tutee;
 
 /**
  * View the chart of tutees in increasing order.
@@ -32,9 +33,12 @@ public class ViewTuteeChartCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        ObservableList<Person> tuteeList = model.getFilteredPersonList();
-        Person[] tuteeArray = tuteeList.toArray(new Person[0]);
-        Arrays.sort(tuteeArray, Comparator.comparing(Person -> Person.getHours().getHoursInt()));
+        ObservableList<Person> fullList = model.getFilteredPersonList();
+        Person[] fullListArray = fullList.toArray(new Person[0]);
+        Arrays.sort(fullListArray, Comparator.comparing(Person -> Person.getHours().getHoursInt()));
+        Tutee[] tuteeArray = Arrays.stream(fullListArray).filter(person -> person instanceof Tutee)
+                .map(person -> (Tutee) person).toArray(Tutee[]::new);
+        System.out.println(tuteeArray[0]);
         return new CommandResult(MESSAGE_SUCCESS, false, false,
                 true, tuteeArray);
     }
