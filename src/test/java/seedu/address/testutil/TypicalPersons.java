@@ -33,18 +33,21 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253").withRegisterNumber("3").withSex("F").withStudentClass("1A").withEmergencyContactName("Joe Hardy").withEmergencyPhone("")
+            .withPhone("94351253").withRegisterNumber("3").withSex("F").withStudentClass("1A")
+            .withEmergencyContactName("Joe Hardy").withEmergencyPhone("")
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432").withRegisterNumber("4").withSex("M")
-            .withStudentClass("2B").withEmergencyContactName("John Boone").withEmergencyPhone("").withTags("owesMoney", "friends").build();
+            .withStudentClass("2B").withEmergencyContactName("John Boone").withEmergencyPhone("")
+            .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withRegisterNumber("5").withSex("M")
             .withStudentClass("3C").withEmergencyContactName("").withEmergencyPhone("").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withRegisterNumber("6").withSex("M")
-            .withStudentClass("4D").withEmergencyContactName("").withEmergencyPhone("").withTags("friends").build();
+            .withStudentClass("4D").withEmergencyContactName("").withEmergencyPhone("")
+            .withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").withRegisterNumber("7").withSex("F")
             .withStudentClass("3E").withEmergencyContactName("").withEmergencyPhone("").build();
