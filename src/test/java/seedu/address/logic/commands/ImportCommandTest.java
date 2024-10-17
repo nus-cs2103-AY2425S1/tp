@@ -36,7 +36,7 @@ public class ImportCommandTest {
     private static final String MULTIPLE_PERSON_ENTRIES = "\"Jane Doe\",\"91234567\",\"jane@example.com\","
             + "\"123, Main St\",\"family\"\n"
             + "\"John Smith\",\"87654321\",\"john@example.com\",\"456, Secondary St\",\"coworkers\"";
-    private static final String INVALID_PARSE_LINE_FILE = "./data/InvalidParseLineEntry.csv"; // New invalid parse line file path
+    private static final String INVALID_PARSE_LINE_FILE = "./data/InvalidParseLineEntry.csv";
     private static final String TEST_DIRECTORY = "./data";
 
     private Model model;
@@ -58,7 +58,7 @@ public class ImportCommandTest {
         invalidFilePath = Paths.get(TEST_DIRECTORY, "InvalidImportContacts.csv");
         emptyFilePath = Paths.get(TEST_DIRECTORY, "EmptyImportContacts.csv");
         multipleFilePath = Paths.get(TEST_DIRECTORY, "MultipleImportContacts.csv");
-        invalidParseLineFilePath = Paths.get(TEST_DIRECTORY, "InvalidParseLineEntry.csv"); // New invalid parse line file path
+        invalidParseLineFilePath = Paths.get(TEST_DIRECTORY, "InvalidParseLineEntry.csv");
         nonExistentFilePath = Paths.get(TEST_DIRECTORY, "NonExistentFile.csv");
 
         // Ensure the directory exists
@@ -95,7 +95,8 @@ public class ImportCommandTest {
         try (BufferedWriter writer = Files.newBufferedWriter(invalidParseLineFilePath)) {
             writer.write(VALID_CSV_HEADERS);
             writer.newLine();
-            writer.write("\"John Doe\",\"98765432\",\"johnd@example.com\",\"311, Clementi Ave 2, #02-25\",\"friends\",\"ExtraField\""); // Extra field
+            writer.write("\"John Doe\",\"98765432\",\"johnd@example.com\","
+                    + "\"311, Clementi Ave 2, #02-25\",\"friends\",\"ExtraField\"");
         }
     }
 
