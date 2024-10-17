@@ -14,13 +14,13 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
- * Command to assign a medical condition to a patient in the address book.
+ * Command to unassign one or more medical conditions from a patient in the address book.
  */
-public class AddMedConCommand extends Command {
+public class DelMedConCommand extends Command {
 
-    public static final String COMMAND_WORD = "addMedCon";
+    public static final String COMMAND_WORD = "delMedCon";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns "
             + "one or more medical conditions to a patient in the address book.\n"
             + "Parameters: "
             + PREFIX_NRIC + "NRIC "
@@ -29,18 +29,18 @@ public class AddMedConCommand extends Command {
             + PREFIX_NRIC + "T0123456F "
             + "c/Diabetes c/Hypertension";
 
-    public static final String MESSAGE_ADD_MEDCON_SUCCESS = "Added medical condition: %1$s to Person: %2$s";
+    public static final String MESSAGE_DELETE_MEDCON_SUCCESS = "Removed medical condition: %1$s from Person: %2$s";
     public static final String PATIENT_DOES_NOT_EXIST = "Patient does not exist in contact list";
-    public static final String MESSAGE_DUPLICATE_MEDCON = "Condition already assigned: %1$s";
+    public static final String MESSAGE_MEDCON_NOT_FOUND = "Condition not found: %1$s";
 
     private final Nric nric;
     private final Set<MedCon> medCons;
 
     /**
-     * @param nric of the patient to assign the medical conditions to
-     * @param medCons set of medical conditions to be assigned.
+     * @param nric of the patient to unassign the medical conditions from.
+     * @param medCons set of medical conditions to be removed.
      */
-    public AddMedConCommand(Nric nric, Set<MedCon> medCons) {
+    public DelMedConCommand(Nric nric, Set<MedCon> medCons) {
         requireAllNonNull(nric, medCons);
 
         this.nric = nric;
@@ -50,30 +50,36 @@ public class AddMedConCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
+
         for (Person person : lastShownList) {
             if (person.getNric().equals(this.nric)) {
                 Set<MedCon> updatedMedConSet = new HashSet<>(person.getMedCons());
-                // check for duplicates
+
+                // check if the medical conditions to delete exist in the current set
                 for (MedCon medCon : medCons) {
-                    if (!updatedMedConSet.add(medCon)) {
-                        throw new CommandException(String.format(MESSAGE_DUPLICATE_MEDCON, medCon.value));
+                    if (!updatedMedConSet.remove(medCon)) {
+                        throw new CommandException(String.format(MESSAGE_MEDCON_NOT_FOUND, medCon.value));
                     }
                 }
+
+                // create an edited person with the updated medical conditions
                 Person editedPerson = new Person(
                         person.getName(), person.getPhone(), person.getEmail(),
                         person.getNric(), person.getAddress(), person.getDateOfBirth(),
                         person.getGender(), person.getAllergies(), person.getPriority(), person.getAppointments(),
                         updatedMedConSet);
+
                 model.setPerson(person, editedPerson);
                 model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
                 return new CommandResult(generateSuccessMessage(editedPerson));
             }
         }
+
         throw new CommandException(PATIENT_DOES_NOT_EXIST);
     }
 
     /**
-     * Generates a command execution success message based on the added medical conditions.
+     * Generates a command execution success message based on the removed medical conditions.
      */
     private String generateSuccessMessage(Person personToEdit) {
         StringBuilder medConsString = new StringBuilder();
@@ -86,7 +92,8 @@ public class AddMedConCommand extends Command {
 
         String resultMedCon = '[' + medConsString.toString() + ']';
 
-        return String.format(MESSAGE_ADD_MEDCON_SUCCESS, resultMedCon, personToEdit.getName().fullName);
+        return String.format(MESSAGE_DELETE_MEDCON_SUCCESS, resultMedCon, personToEdit.getName().fullName);
+
     }
 
     @Override
@@ -96,11 +103,11 @@ public class AddMedConCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddMedConCommand)) {
+        if (!(other instanceof DelMedConCommand)) {
             return false;
         }
 
-        AddMedConCommand c = (AddMedConCommand) other;
+        DelMedConCommand c = (DelMedConCommand) other;
         return nric.equals(c.nric)
                 && medCons.equals(c.medCons);
     }

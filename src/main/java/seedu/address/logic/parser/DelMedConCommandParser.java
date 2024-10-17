@@ -8,31 +8,37 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
-import seedu.address.logic.commands.AddMedConCommand;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.DelMedConCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.MedCon;
 import seedu.address.model.person.Nric;
 
 /**
- * Parses user input for the {@link AddMedConCommand} and creates a new instance of it.
+ * Parses user input for the {@link DelMedConCommand} and creates a new instance of it.
  */
-public class AddMedConCommandParser implements Parser<AddMedConCommand> {
+public class DelMedConCommandParser implements Parser<DelMedConCommand> {
+
+    private static final Logger logger = LogsCenter.getLogger(DelMedConCommandParser.class);
+
     /**
-     * Parses the given arguments string and creates a {@link AddMedConCommand} object.
+     * Parses the given arguments string and creates a {@link DelMedConCommand} object.
      *
      * @param args the arguments string containing user input.
-     * @return A {@link AddMedConCommand} object containing the parsed NRIC and set of medical conditions.
+     * @return A {@link DelMedConCommand} object containing the parsed NRIC and set of medical conditions.
      * @throws ParseException if the user input does not conform to the expected format or
      *         if the NRIC is not provided.
      */
-    public AddMedConCommand parse(String args) throws ParseException {
+    public DelMedConCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_MEDCON);
 
         // Check if NRIC is provided
         if (!argMultimap.getValue(PREFIX_NRIC).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMedConCommand.MESSAGE_USAGE));
+            logger.warning("NRIC not provided in DelMedConCommand arguments.");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelMedConCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NRIC);
@@ -45,12 +51,12 @@ public class AddMedConCommandParser implements Parser<AddMedConCommand> {
         Set<MedCon> medCons = new HashSet<>();
         for (String medConStr : argMultimap.getAllValues(PREFIX_MEDCON)) {
             if (medConStr.length() > 45) {
+                logger.warning("Medical condition exceeds character limit: " + medConStr);
                 throw new ParseException(MESSAGE_CONSTRAINTS_LENGTH);
             }
             medCons.add(new MedCon(medConStr));
         }
 
-        return new AddMedConCommand(nric, medCons);
-
+        return new DelMedConCommand(nric, medCons);
     }
 }
