@@ -38,9 +38,20 @@ public class MassDeleteCommandParserTest {
         List<String> singleInvalidInput = Collections.singletonList("a");
         MassDeleteCommand mixedInputCommand = new MassDeleteCommand(expectedIndices, singleInvalidInput);
         assertParseSuccess(parser, "1 a 3", mixedInputCommand);
+    }
 
+    @Test
+    public void parse_emptyInput_throwsParseException() {
         // Test with empty input
         assertParseFailure(parser, "",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MassDeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_negativeIndex_treatedAsInvalidInput() {
+        // Test with negative index
+        List<String> expectedInvalidInputs = Collections.singletonList("-1");
+        MassDeleteCommand expectedCommand = new MassDeleteCommand(Collections.emptyList(), expectedInvalidInputs);
+        assertParseSuccess(parser, "-1", expectedCommand);
     }
 }
