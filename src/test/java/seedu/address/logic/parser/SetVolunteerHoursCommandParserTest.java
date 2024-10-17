@@ -55,8 +55,7 @@ public class SetVolunteerHoursCommandParserTest {
     public void parse_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_HOURS + VALID_HOURS_AMY;
-        SetVolunteerHoursCommand expectedCommand = new SetVolunteerHoursCommand(targetIndex,
-                Integer.parseInt(VALID_HOURS_AMY));
+        SetVolunteerHoursCommand expectedCommand = new SetVolunteerHoursCommand(targetIndex, VALID_HOURS_AMY);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

@@ -52,8 +52,9 @@ public class PersonFactory {
         } else if (partnershipEndDate != null) {
             return new Partner(name, phone, email, address, tags, partnershipEndDate);
         } else {
-            throw new IllegalArgumentException("At least one role-specific attribute (hours, donatedAmount, "
-                    + "or partnershipEndDate) must be provided.");
+            return new Person(name, phone, email, address, tags);
+            //throw new IllegalArgumentException("At least one role-specific attribute (hours, donatedAmount, "
+            //        + "or partnershipEndDate) must be provided.");
         }
     }
     /**
