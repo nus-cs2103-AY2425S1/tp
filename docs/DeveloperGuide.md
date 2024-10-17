@@ -274,14 +274,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* Wedding planners who aim to organise weddings
-* has a need to manage a significant number of contacts
-* need to categorize all stakeholders in a wedding
-* can type fast
-* prefers typing to mouse interactions
+* Wedding planners who organise multiple weddings concurrently
+* has a need to manage a significant number of contacts with various roles
+* need to categorise all stakeholders in a wedding efficiently
+* can type fast and prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Manage contacts of all stakeholders of a wedding with ease and convenience
+**Value proposition**: Manage contacts of all stakeholders of multiple weddings with ease and convenience
 
 
 ### User stories
@@ -292,8 +291,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |----------|-----------------|------------------------------------------------------------------------|------------------------------------------------------------------------------|
 | `* * *`  | Wedding Planner | Add contact details                                                    | I can find contacts easily                                                   |
 | `* * *`  | Wedding Planner | Delete contacts                                                        | I can keep information organized.                                            |
-| `* * *`  | Wedding Planner | View the calendar easily                                               | I can be aware of when the events are                                        |
+| `* * *`  | Wedding Planner | List my contacts easily                                                | I can be view my clients and wedding vendors                                 |
+| `* * *`  | Wedding Planner | Tag my contacts to a wedding                                           | I can be categories relevant stakeholders of a wedding together              |
 | `* *`    | Wedding Planner | Filter based on location                                               | Depending on the wedding venue, which is more suitable                       |
+| `* *`    | Wedding Planner | List the weddings I am planning                                        | I can access relevant information about particular wedding easily            |
 | `* *`    | Wedding Planner | Edit contact details                                                   | I can keep information as up-to-date and accurate as possible.               |
 | `* *`    | Wedding Planner | Search for contacts by name, tags, or number                           | I can quickly find the contact I need                                        |
 | `* *`    | Wedding Planner | Mark guests as attending or not attending                              | I can provide accurate headcounts to vendors                                 |
