@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -56,6 +57,20 @@ public interface Model {
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
+
+    /**
+     * Checks for number of persons with schedule clashes with {@code person}.
+     * @param person The person whose schedule is to be checked against others for clashes.
+     * @return Number of persons with schedule clashes.
+     */
+    public long checkClashes(Person person);
+
+    /**
+     * Retrieves a list of persons with whom {@code person} has schedule clashes.
+     * @param person The person whose schedule is to be checked against others for clashes.
+     * @return List of persons who have schedule conflicts with the given person.
+     */
+    public List<Person> getClashingPersons(Person person);
 
     /**
      * Deletes the given person.

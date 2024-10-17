@@ -7,7 +7,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.HOON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -44,6 +46,40 @@ public class UniquePersonListTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
                 .build();
         assertTrue(uniquePersonList.contains(editedAlice));
+    }
+
+    @Test
+    public void countClashes_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.countClash(null));
+    }
+    @Test
+    public void countClash_noClashes_returnsZero() {
+        uniquePersonList.add(ALICE);
+        assertEquals(uniquePersonList.countClash(BOB), 0);
+    }
+
+    @Test
+    public void countClash_someClashes_returnsCorrectCount() {
+        uniquePersonList.add(ALICE);
+        assertEquals(uniquePersonList.countClash(HOON), 1);
+    }
+
+    @Test
+    public void getClashingPersons_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.getClashes(null));
+    }
+    @Test
+    public void getClashes_noClashes_returnsEmptyList() {
+        uniquePersonList.add(ALICE);
+        assertEquals(uniquePersonList.getClashes(BOB), new ArrayList<>());
+    }
+
+    @Test
+    public void getClashes_someClashes_returnsCorrectList() {
+        uniquePersonList.add(ALICE);
+        ArrayList<Person> testList = new ArrayList<>();
+        testList.add(ALICE);
+        assertEquals(uniquePersonList.getClashes(HOON), testList);
     }
 
     @Test

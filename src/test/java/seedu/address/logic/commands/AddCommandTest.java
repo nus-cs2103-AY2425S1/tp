@@ -6,10 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.HOON;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -52,6 +54,21 @@ public class AddCommandTest {
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
     }
+
+    @Test
+    public void execute_personWithClashes_returnsClashingMessage() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        modelStub.addPerson(ALICE); // Add a person that causes a clash
+
+        CommandResult commandResult = new AddCommand(HOON).execute(modelStub);
+
+        assertTrue(commandResult.getFeedbackToUser().contains(
+                String.format(
+                        Messages.MESSAGE_HAS_CLASHES,
+                        1,
+                        "Name: " + ALICE.getName() + " | Schedule: " + ALICE.getSchedule() + "\n")));
+    }
+
 
     @Test
     public void equals() {
@@ -139,6 +156,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public long checkClashes(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Person> getClashingPersons(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -193,6 +220,19 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+            System.out.println("added");
+        }
+
+        @Override
+        public long checkClashes(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().filter(person::isClash).count();
+        }
+
+        @Override
+        public List<Person> getClashingPersons(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().filter(person::isClash).toList();
         }
 
         @Override

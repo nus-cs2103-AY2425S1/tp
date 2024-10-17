@@ -59,11 +59,11 @@ public class TypicalPersons {
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("84820424")
-            .withEmail("stefan@example.com").withAddress("little india")
-            .withSchedule("Sunday-1800-1900").withRate("200").withPaid("8000").withOwedAmount("1000").build();
+            .withEmail("stefan@example.com").withAddress("little india").withSchedule("Sunday-1800-1900")
+            .withSubject("Science").withRate("200").withPaid("8000").withOwedAmount("1000").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("84820131")
-            .withEmail("hans@example.com").withAddress("chicago ave")
-            .withSchedule("Monday-1800-1900").withRate("450").withPaid("900").withOwedAmount("900").build();
+            .withEmail("hans@example.com").withAddress("chicago ave").withSchedule("Monday-1800-1900")
+            .withSubject("Economics").withRate("450").withPaid("900").withOwedAmount("900").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
