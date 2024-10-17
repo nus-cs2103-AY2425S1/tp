@@ -153,8 +153,8 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
             setComment(toCopy.comment);
+            setTags(toCopy.tags);
         }
 
         /**
@@ -247,6 +247,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("comment", comment)
                     .add("tags", tags)
                     .toString();
         }
