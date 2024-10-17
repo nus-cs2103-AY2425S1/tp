@@ -26,6 +26,9 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
+    public static final ModuleCode DEFAULT_MODULE_CODE = new ModuleCode("CS1101S");
+    public static final RoleType DEFAULT_ROLE_TYPE = RoleType.STUDENT;
+
     private Name name;
     private Phone phone;
     private Email email;
@@ -70,6 +73,17 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Use {@code DEFAULT_MODULE_CODE} and {@code DEFAULT_ROLE_TYPE} to construct a default {@code ModuleRoleMap}
+     * for the {@code Person} that we are building.
+     */
+    public PersonBuilder withDefaultModuleRoleMap() {
+        HashMap<ModuleCode, RoleType> moduleRoleMap = new HashMap<>();
+        moduleRoleMap.put(DEFAULT_MODULE_CODE, DEFAULT_ROLE_TYPE);
+        this.moduleRoleMap = new ModuleRoleMap(moduleRoleMap);
         return this;
     }
 
