@@ -1,11 +1,11 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.findcommand;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.FindCommand.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
-import static seedu.address.logic.commands.FindPhoneCommand.MESSAGE_FIND_PHONE_PERSON_SUCCESS;
+import static seedu.address.logic.commands.findcommand.FindCommand.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
+import static seedu.address.logic.commands.findcommand.FindPhoneCommand.MESSAGE_FIND_PHONE_PERSON_SUCCESS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.PhoneContainsKeywordsPredicate;
 
 public class FindPhoneCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());

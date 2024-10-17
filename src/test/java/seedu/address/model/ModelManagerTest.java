@@ -16,7 +16,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagName;
 import seedu.address.testutil.AddressBookBuilder;
