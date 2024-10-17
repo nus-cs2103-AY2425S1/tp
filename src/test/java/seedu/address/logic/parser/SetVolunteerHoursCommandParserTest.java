@@ -1,9 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.HOURS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOURS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOURS_AMY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -14,11 +15,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SetVolunteerHoursCommand;
 
 public class SetVolunteerHoursCommandParserTest {
-    private final SetVolunteerHoursCommandParser parser = new SetVolunteerHoursCommandParser();
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetVolunteerHoursCommand.MESSAGE_USAGE);
 
+    private final SetVolunteerHoursCommandParser parser = new SetVolunteerHoursCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
