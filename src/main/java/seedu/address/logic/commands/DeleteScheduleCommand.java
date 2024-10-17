@@ -6,6 +6,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Meeting;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class DeleteScheduleCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_SCHEDULE_SUCCESS = "Deleted Event: %1$s";
+    public static final String MESSAGE_DELETE_SCHEDULE_SUCCESS = "Deleted Event: %1$s on %2$s %3$s";
 
     private final Index targetIndex;
 
@@ -33,10 +34,8 @@ public class DeleteScheduleCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        //Replace with schedule model
         requireNonNull(model);
-        //Replace to List<Schedule>
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Meeting> lastShownList = model.getWeeklySchedule();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
@@ -44,13 +43,17 @@ public class DeleteScheduleCommand extends Command {
 
         //Change to schedule
         //Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Meeting meetingToDelete = lastShownList.get(targetIndex.getZeroBased());
 
         //Change to schedule model - Delete specified event at the given schedule
         //model.deletePerson(personToDelete);
+        model.deleteMeeting(meetingToDelete);
 
         //Need to add format for schedule
         //Replace constant with Messages.format(Schedule) once done
-        return new CommandResult(String.format(MESSAGE_DELETE_SCHEDULE_SUCCESS, "TEMP STRING REPRESENTING EVENT"));
+        return new CommandResult(String.format(MESSAGE_DELETE_SCHEDULE_SUCCESS,
+                meetingToDelete.getMeetingName(), meetingToDelete.getMeetingDate().toString(),
+                meetingToDelete.getMeetingTime().toString()));
     }
 
     @Override
