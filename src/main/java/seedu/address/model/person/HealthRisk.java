@@ -5,10 +5,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.Objects;
 
 /**
- * Represents a Patient's health condition in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidHealthCondition(String)}
+ * Represents a Patient's health risk in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidHealthRisk (String)}
  */
-public class HealthCondition {
+public class HealthRisk {
     public static final String MESSAGE_CONSTRAINTS = "Health condition should be categorized as either"
             + " 'HIGH', 'MEDIUM', or 'LOW.'";
 
@@ -17,19 +17,19 @@ public class HealthCondition {
     public final String value;
 
     /**
-     * Constructs an {@code HealthCondition}.
+     * Constructs an {@code HealthRisk}.
      *
-     * @param healthCondition A valid health condition (LOW, MEDIUM , HIGH).
+     * @param healthRisk A valid health condition (LOW, MEDIUM , HIGH).
      */
-    public HealthCondition(String healthCondition) {
-        checkArgument(isValidHealthCondition(healthCondition.toUpperCase()), MESSAGE_CONSTRAINTS);
-        value = healthCondition.toUpperCase();
+    public HealthRisk(String healthRisk) {
+        checkArgument(isValidHealthRisk(healthRisk.toUpperCase()), MESSAGE_CONSTRAINTS);
+        value = healthRisk.toUpperCase();
     }
 
     /**
      * Returns true if a given string is a valid health condition.
      */
-    public static boolean isValidHealthCondition(String test) {
+    public static boolean isValidHealthRisk(String test) {
         return Objects.equals(test, Priority.LOW.name())
                 || Objects.equals(test, Priority.MEDIUM.name())
                 || Objects.equals(test, Priority.HIGH.name());
@@ -47,12 +47,12 @@ public class HealthCondition {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof HealthCondition)) {
+        if (!(other instanceof HealthRisk)) {
             return false;
         }
 
-        HealthCondition otherHealthCondition = (HealthCondition) other;
-        return value.equals(otherHealthCondition.value);
+        HealthRisk otherHealthRisk = (HealthRisk) other;
+        return value.equals(otherHealthRisk.value);
     }
 
     @Override

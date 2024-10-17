@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHCONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRECORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRISK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKNAME;
@@ -44,7 +44,7 @@ public class AddFCommand extends Command {
             + "[" + PREFIX_NOKNAME + "NEXT-OF-KIN NAME] "
             + "[" + PREFIX_NOKPHONE + "NEXT-OF-KIN PHONE] "
             + "[" + PREFIX_ALLERGY + "ALLERGY] "
-            + "[" + PREFIX_HEALTHCONDITION + "HEALTH CONDITION] "
+            + "[" + PREFIX_HEALTHRISK + "HEALTH CONDITION] "
             + "[" + PREFIX_HEALTHRECORD + "PAST HEALTH RECORD] "
             + "[" + PREFIX_NOTE + "ADDITIONAL NOTES]\n"
             + "Example: " + COMMAND_WORD + " "
@@ -61,7 +61,7 @@ public class AddFCommand extends Command {
             + PREFIX_NOKNAME + "Jack Doe "
             + PREFIX_NOKPHONE + "91234567 "
             + PREFIX_ALLERGY + "nuts, shellfish "
-            + PREFIX_HEALTHCONDITION + "HIGH "
+            + PREFIX_HEALTHRISK + "HIGH "
             + PREFIX_HEALTHRECORD + "Diabetes "
             + PREFIX_NOTE + "Patient needs extra care";
 

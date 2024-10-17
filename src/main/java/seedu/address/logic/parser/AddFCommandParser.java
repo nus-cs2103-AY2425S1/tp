@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHCONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRECORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRISK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKNAME;
@@ -28,8 +28,8 @@ import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Birthdate;
 import seedu.address.model.person.BloodType;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.HealthCondition;
 import seedu.address.model.person.HealthRecord;
+import seedu.address.model.person.HealthRisk;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Nric;
@@ -51,7 +51,7 @@ public class AddFCommandParser implements Parser<AddFCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX,
                 PREFIX_BIRTHDATE, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_HEALTHSERVICE, PREFIX_ADDRESS, PREFIX_ALLERGY,
                 PREFIX_BLOODTYPE, PREFIX_HEALTHRECORD, PREFIX_NOTE, PREFIX_NOKNAME, PREFIX_NOKPHONE,
-                PREFIX_HEALTHCONDITION);
+                PREFIX_HEALTHRISK);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX, PREFIX_BIRTHDATE, PREFIX_EMAIL,
                 PREFIX_PHONE, PREFIX_HEALTHSERVICE)
@@ -72,13 +72,13 @@ public class AddFCommandParser implements Parser<AddFCommand> {
         BloodType bloodType = ParserUtil.parseBloodType(argMultimap.getValue(PREFIX_BLOODTYPE).orElse(""));
         HealthRecord healthRecord = ParserUtil.parseHealthRecord(argMultimap.getValue(PREFIX_HEALTHRECORD).orElse(""));
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).orElse(""));
-        HealthCondition healthCondition = ParserUtil.parseHealthCondition(
-                argMultimap.getValue(PREFIX_HEALTHCONDITION).orElse(""));
+        HealthRisk healthRIsk = ParserUtil.parseHealthRisk(
+                argMultimap.getValue(PREFIX_HEALTHRISK).orElse(""));
         Name nokName = ParserUtil.parseNokName(argMultimap.getValue(PREFIX_NOKNAME).orElse(""));
         Phone nokPhone = ParserUtil.parseNokPhone(argMultimap.getValue(PREFIX_NOKPHONE).orElse(""));
 
         Person person = new Person(name, nric, birthDate, sex, healthServicesList, phone, email, address, allergy,
-                bloodType, healthCondition, healthRecord, note, nokName, nokPhone);
+                bloodType, healthRIsk, healthRecord, note, nokName, nokPhone);
 
         return new AddFCommand(person);
     }

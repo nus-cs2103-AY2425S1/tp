@@ -22,6 +22,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_NOTE = new Prefix("no/");
     public static final Prefix PREFIX_NOKNAME = new Prefix("nokn/");
     public static final Prefix PREFIX_NOKPHONE = new Prefix("nokp/");
-    public static final Prefix PREFIX_HEALTHCONDITION = new Prefix("hc/");
+    public static final Prefix PREFIX_HEALTHRISK = new Prefix("rl/");
 
 }
