@@ -93,7 +93,7 @@ public class ParserUtil {
         if (!LastSeen.isValidDate(trimmedLastSeen)) {
             throw new ParseException(LastSeen.MESSAGE_CONSTRAINTS);
         }
-        return new LastSeen(lastSeen);
+        return new LastSeen(trimmedLastSeen);
     }
 
     /**
