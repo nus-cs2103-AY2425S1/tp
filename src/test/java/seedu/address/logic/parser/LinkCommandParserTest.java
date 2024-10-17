@@ -1,7 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONCERT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONCERT;
@@ -11,6 +13,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.LinkCommand;
 
 public class LinkCommandParserTest {
@@ -65,6 +68,15 @@ public class LinkCommandParserTest {
         // not integer
         assertParseFailure(parser, INDEX_FIRST_PERSON + " " + PREFIX_CONCERT + "a",
                 MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_repeatedPrefix_failure() {
+        String invalidString = INDEX_FIRST_PERSON + " " + PREFIX_CONCERT + INDEX_FIRST_CONCERT
+                + " " + PREFIX_CONCERT + INDEX_SECOND_PERSON;
+
+        assertParseFailure(parser, invalidString, Messages
+                .getErrorMessageForDuplicatePrefixes(PREFIX_CONCERT));
     }
 
     @Test
