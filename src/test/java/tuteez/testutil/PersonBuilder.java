@@ -1,5 +1,6 @@
 package tuteez.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
 import tuteez.model.person.TelegramUsername;
 import tuteez.model.person.lesson.Lesson;
+import tuteez.model.remark.RemarkList;
 import tuteez.model.tag.Tag;
 import tuteez.model.util.SampleDataUtil;
 
@@ -30,8 +32,8 @@ public class PersonBuilder {
     private Address address;
     private TelegramUsername telegramUsername;
     private Set<Tag> tags;
-
     private Set<Lesson> lessons;
+    private RemarkList remarkList;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -44,6 +46,7 @@ public class PersonBuilder {
         telegramUsername = TelegramUsername.of(DEFAULT_TELEGRAM);
         tags = new HashSet<>();
         lessons = new HashSet<>();
+        remarkList = new RemarkList();
     }
 
     /**
@@ -56,6 +59,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         telegramUsername = personToCopy.getTelegramUsername();
         tags = new HashSet<>(personToCopy.getTags());
+        remarkList = new RemarkList(new ArrayList<>(personToCopy.getRemarkList().getRemarks()));
         lessons = new HashSet<>(personToCopy.getLessons());
     }
 
@@ -119,8 +123,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code RemarkList} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRemarks(RemarkList remarkList) {
+        this.remarkList = new RemarkList(new ArrayList<>(remarkList.getRemarks()));
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, telegramUsername, tags, lessons);
+        return new Person(name, phone, email, address, telegramUsername, tags, lessons, remarkList);
     }
 
 }

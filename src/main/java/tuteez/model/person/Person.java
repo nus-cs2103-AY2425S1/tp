@@ -9,6 +9,7 @@ import java.util.Set;
 
 import tuteez.commons.util.ToStringBuilder;
 import tuteez.model.person.lesson.Lesson;
+import tuteez.model.remark.RemarkList;
 import tuteez.model.tag.Tag;
 
 /**
@@ -27,6 +28,7 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Lesson> lessons = new HashSet<>();
+    private final RemarkList remarkList;
 
     /**
      * Every field must be present and not null.
@@ -40,6 +42,23 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.remarkList = new RemarkList();
+        this.telegramUsername = teleHandle;
+        this.lessons.addAll(lessons);
+    }
+
+    /**
+     * Returns a person object.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, TelegramUsername teleHandle, Set<Tag> tags,
+                  Set<Lesson> lessons, RemarkList remarkList) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.remarkList = remarkList;
         this.telegramUsername = teleHandle;
         this.lessons.addAll(lessons);
     }
@@ -58,6 +77,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public RemarkList getRemarkList() {
+        return this.remarkList;
     }
 
     /**
