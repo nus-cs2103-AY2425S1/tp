@@ -168,7 +168,7 @@ public class DeleteCommand extends Command {
             throw new CommandException("No matching contacts found.");
         }
         if (listForFilter.size() > 1) {
-            throw new CommandException("Multiple contacts with the same full name found. Please specify more using"
+            throw new CommandException("Multiple contacts with the same full name found. Please specify more using "
                     + "this format:\n" + COMMAND_WORD + " n/NAME e/EMAIL OR "
                     + COMMAND_WORD + " n/NAME p/PHONE");
         }
