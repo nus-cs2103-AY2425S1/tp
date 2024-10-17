@@ -50,7 +50,8 @@ public class DeleteRemarkCommand extends RemarkCommand {
         updatedRemarkList.deleteRemark(remarkIndex.getZeroBased());
 
         return new Person(person.getName(), person.getPhone(), person.getEmail(),
-                person.getAddress(), person.getTags(), updatedRemarkList);
+                person.getAddress(), person.getTelegramUsername(),
+                person.getTags(), person.getLessons(), updatedRemarkList);
     }
 
     @Override

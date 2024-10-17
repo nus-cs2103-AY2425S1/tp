@@ -44,7 +44,8 @@ public class AddRemarkCommand extends RemarkCommand {
         RemarkList updatedRemarkList = new RemarkList(new ArrayList<>(person.getRemarkList().getRemarks()));
         updatedRemarkList.addRemark(remarkToAdd);
         return new Person(person.getName(), person.getPhone(), person.getEmail(),
-                person.getAddress(), person.getTags(), updatedRemarkList);
+                person.getAddress(), person.getTelegramUsername(),
+                person.getTags(), person.getLessons(), updatedRemarkList);
     }
 
     @Override
