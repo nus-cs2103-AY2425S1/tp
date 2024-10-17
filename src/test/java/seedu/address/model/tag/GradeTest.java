@@ -7,8 +7,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.Name;
-
 public class GradeTest {
 
     @Test
@@ -18,7 +16,7 @@ public class GradeTest {
 
     @Test
     public void constructor_invalidGradeIndex_throwsIllegalArgumentException() {
-        String invalidGradeIndex = "";
+        String invalidGradeIndex = "5";
         assertThrows(IllegalArgumentException.class, () -> new Grade(invalidGradeIndex));
     }
 
@@ -51,7 +49,7 @@ public class GradeTest {
         assertFalse(grade.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(grade.equals(new Name("3")));
+        assertFalse(grade.equals(new Grade("3")));
     }
 
     @Test
