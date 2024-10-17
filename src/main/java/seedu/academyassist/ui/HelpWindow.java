@@ -30,7 +30,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "4. find: Find students whose names contain any of the given keywords\n"
             + "   Format: find NAMES [MORE_NAMES]\n\n"
             + "5. addc: Adds a class to an existing student's record\n"
-            + "   Format: addc i/IC_NUMBER s/SUBJECT"
+            + "   Format: addc i/IC_NUMBER s/SUBJECT\n\n"
             + "6. delete: Deletes the specified student\n"
             + "   Format: delete IC_NUMBER\n\n"
             + "7. sort: arranges the list of students based on a specified field\n"
