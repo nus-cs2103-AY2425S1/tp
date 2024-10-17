@@ -3,7 +3,6 @@ layout: page
 title: AcademyAssist User Guide
 
 ---
-# AcademyAssist User Guide
 
 ## Table of Contents
 
