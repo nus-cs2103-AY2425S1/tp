@@ -16,6 +16,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleCode;
+import seedu.address.model.person.ModuleRolePair;
+import seedu.address.model.person.ModuleRoleMap;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RoleType;
@@ -41,6 +44,12 @@ public class ParserUtilTest {
     private static final String VALID_ROLETYPE_KEYWORD_4 = "Tutor";
     private static final String VALID_ROLETYPE_KEYWORD_5 = "Professor";
     private static final String VALID_ROLETYPE_KEYWORD_6 = "Prof";
+
+    private static final String INVALID_MODULE_ROLE_PAIR_INVALID_MODULE_CODE = "1234-student";
+    private static final String INVALID_MODULE_ROLE_PAIR_INVALID_ROLE_TYPE = "CS1101S-role";
+    private static final String INVALID_MODULE_ROLE_PAIR_MISSING_ROLE_TYPE = "CS1101S-";
+    private static final String VALID_MODULE_ROLE_PAIR = "CS1101S-student";
+    private static final String VALID_MODULE_ROLE_PAIR_ONLY_MODULE_CODE = "CS1101S";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -254,6 +263,41 @@ public class ParserUtilTest {
     public void parseRoleType_validProfKeyword2_throwsParseException() {
         assertThrows(ParseException.class, () -> {
             ParserUtil.parseRoleType(INVALID_ROLETYPE_KEYWORD);
+        });
+    }
+
+    @Test
+    public void parseModuleRolePair_validInput_returnsModuleRolePair() throws Exception {
+        ModuleRolePair result = ParserUtil.parseModuleRolePair(VALID_MODULE_ROLE_PAIR);
+        ModuleRolePair expected = new ModuleRolePair(new ModuleCode("CS1101S"), RoleType.STUDENT);
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void parseModuleRolePair_onlyModuleCodeImpliesStudent_returnsModuleRolePair() throws Exception {
+        ModuleRolePair result = ParserUtil.parseModuleRolePair(VALID_MODULE_ROLE_PAIR_ONLY_MODULE_CODE);
+        ModuleRolePair expected = new ModuleRolePair(new ModuleCode("CS1101S"), RoleType.STUDENT);
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void parseModuleRolePair_invalidModuleCode_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, ModuleCode.MESSAGE_CONSTRAINTS, () -> {
+            ParserUtil.parseModuleRolePair(INVALID_MODULE_ROLE_PAIR_INVALID_MODULE_CODE);
+        });
+    }
+
+    @Test
+    public void parseModuleRolePair_invalidRoleType_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, ModuleRoleMap.MESSAGE_CONSTRAINTS, () -> {
+            ParserUtil.parseModuleRolePair(INVALID_MODULE_ROLE_PAIR_INVALID_ROLE_TYPE);
+        });
+    }
+
+    @Test
+    public void parseModuleRolePair_missingRoleType_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, ModuleRoleMap.MESSAGE_CONSTRAINTS, () -> {
+            ParserUtil.parseModuleRolePair(INVALID_MODULE_ROLE_PAIR_MISSING_ROLE_TYPE);
         });
     }
 }

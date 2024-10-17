@@ -180,7 +180,7 @@ public class ParserUtil {
             roleType = RoleType.STUDENT;
         } else {
             // Verify able to split by -
-            String[] parsed = trimmed.split("-", 2);
+            String[] parsed = trimmed.split("-");
             if (parsed.length != 2) {
                 throw new ParseException(ModuleRoleMap.MESSAGE_CONSTRAINTS);
             }
