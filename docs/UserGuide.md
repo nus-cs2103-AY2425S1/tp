@@ -17,7 +17,7 @@ Dream Day Designer (DDD) is a **desktop app for wedding planners to keep track o
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F13-3/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your DDD.
 
@@ -28,11 +28,13 @@ Dream Day Designer (DDD) is a **desktop app for wedding planners to keep track o
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `view` : Lists all contacts.
+   * `list -c` : Lists all clients.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to DDD.
+   * `add -c n/Jane Doe p/91234567 e/jane.doe@example.com a/Blk 231 Sembawang St 4 d/2024-12-15 t/budget t/pets` : Adds a client named `Jane Doe` to DDD.
+   
+   * `add -v n/ABC Catering p/98765432 e/contact@abccatering.com a/Blk 123 Bukit Merah St 7 s/catering t/vegetarian t/budget` : Adds a vendor named `ABC Catering` to DDD.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 2` : Deletes the 2nd contact shown in the current list.
 
    * `clear` : Deletes all contacts.
 
@@ -49,15 +51,21 @@ Dream Day Designer (DDD) is a **desktop app for wedding planners to keep track o
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `view /tag [TAG]`, `TAG` is a parameter which can be used as `view /tag `.
+  e.g. in `list n/NAME`, `NAME` is a parameter which can be used as `list n/NAME`.
+
+* `-CONTACT_FLAG` can be either `-v` or `-c` for commands allowing specifying of contact type.
+  e.g. in `list -CONTACT_FLAG`, `-CONTACT_FLAG` can allow for filtering all vendors with `-v` or clients with `-c`.
+
+* `WEDDING_DATE` parameter will only accept the following date formats: `MM/dd/yyyy`, `yyyy-MM-dd` `d MMM yyyy`
+  e.g. `MM/dd/yyyy`: 10/13/2024m; `yyyy-MM-dd`: 2024-10-13; `d MMM yyyy`: 13 Oct 2024
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `/tag [TAG]…​` can be used as ` ` (i.e. 0 times), `/tag catering`, `/tag budget conscious /tag small scale` etc.
+  e.g. `t/TAG…​` can be used as ` ` (i.e. 0 times), `t/vegetarian`, `t/budget conscious t/small scale` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `/name [NAME] /hp [PHONE_NUMBER]`, `/hp [PHONE_NUMBER] /name [NAME]` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -77,55 +85,47 @@ Add new contact (client or vendor) to contact list.
 
 Format:
 
-`add vendor /name [NAME] /hp [PHONE_NUMBER] /email [EMAIL] /address [ADDRESS] /service [SERVICE_TYPE] /tag [TAG]…​`
+`add -CONTACT_FLAG n/NAME p/PHONE e/EMAIL a/ADDRESS s/SERVICE (only if adding vendor) d/WEDDING_DATE (only if adding client) [t/TAG]...`
 
-`add client /name [NAME] /hp [PHONE_NUMBER] /email [EMAIL] /address [ADDRESS] /date [WEDDING_DATE] /tag [TAG]…​`
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0)
 </box>
 
 Examples:
-* `add vendor /name ABC Catering /hp 98765432 /email contact@abccatering.com /address Blk 123 Bukit Merah St 7 /service Catering`
-* `add client /name Jane Doe /hp 91234567 /email jane.doe@example.com /address Blk 231 Sembawang St 4 /date 2024-12-15`
+* `add -v n/ABC Catering p/98765432 e/contact@abccatering.com a/Blk 123 Bukit Merah St 7 s/catering t/vegetarian t/budget`
+* `add -c n/Jane Doe p/91234567 e/jane.doe@example.com a/Blk 231 Sembawang St 4 d/2024-12-15 t/budget t/pets`
 
-### Listing all persons : `view`
+### Locating contacts by field: `list`
 
-Shows a list of all contacts in DDD, sorted alphabetically.
+View all contacts based on field input.
 
-Format: `view`
+Format:
+`list -CONTACT_FLAG n/[NAME] id/[CONTACT_ID]`
 
-### Locating contacts by tag: `view /tag`
+* The `-CONTACT_FLAG` is optional. Both vendors and clients will be listed if not specified.
+* Both the `n/[NAME]` and `id/[CONTACT_ID]` are optional. Leaving both out will list all.
+* The name keyword search is case-sensitive. e.g `hans` will not match `Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Contacts matching all fields keyword will be returned (i.e. `AND` search).
 
-View all contacts based on tags.
+Example: `list -c n/Alice`
 
-Format: `view /tag [TAG]`
+* Lists all clients with the name field 'Alice'.
 
-* Only one tag name can be specified each time. 
-* If more than one word is entered, the entire phrase will be treated as one tag.
-* Casing does not matter. e.g. `Vendor` will match `vendor`
-* Only full words will be matched e.g. `Clients` will not match `Client`
+### Deleting a person : `delete`
 
-Examples:
-* `view /tag Catering` returns all contacts that have the tag `Catering` or `catering`
-  ![result for 'view /tag Catering'](images/view-tag-example.png)
+Deletes the specified person from the address book.
 
-### Deleting a contact : `delete`
+Format: `delete INDEX`
 
-Deletes an existing contact (client or vendor) from the contact list using the contact's unique contact ID.
-
-Format: 
-`delete vendor /id [CONTACT_ID]` 
-
-`delete client /id [CONTACTID]`
-
-
-* Deletes the contact of the specific type with the specified `contact ID`.
-* The contact ID is **guaranteed to be a positive integer** 1, 2, 3, …​
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `delete vendor /id 123`
-* `delete client /id 456`
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list -c n/Jane` followed by `delete 1` deletes the 1st person in the results of the `list` command.
 
 ### Clearing all entries : `clear`
 
@@ -139,20 +139,6 @@ Exits the program.
 
 Format: `exit`
 
-### Saving the data
-
-DDD data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-If you want to save the data to somewhere else or rename it into a new file, you can also save the data by using the `save` command.
-
-Format: `save /dir [DIRECTORY] /name [NAME_OF_JSON_FILE]`
-
-Examples:
-* `save /dir . /name contacts`
-* `save /dir ../data/ /name food_provider`
-* `save /dir ~/Desktop/ /name all_names`
-
-
 ### Editing the data file
 
 DDD data are saved automatically as a JSON file `[JAR file location]/data/ddd.json`. Advanced users are welcome to update data directly by editing that data file.
@@ -163,10 +149,6 @@ DDD data are saved automatically as a JSON file `[JAR file location]/data/ddd.js
 If your changes to the data file makes its format invalid, DDD will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -186,14 +168,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action                    | Format, Examples                                                                                                                                                                                                                                                     |
-|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Create Vendor Contact** | `add vendor /name [NAME] /hp [PHONE_NUMBER] /email [EMAIL] /address [ADDRESS] /service [SERVICE_TYPE] /tag [TAG]…​` <br> e.g., `add vendor /name ABC Catering /hp 98765432 /email contact@abccatering.com /address Blk 123 Bukit Merah St 7 /service Catering`       |
-| **Create Client Contact** | `add client /name [NAME] /hp [phone number] /hp [PHONE_NUMBER] /email [EMAIL] /address [ADDRESS] /date [WEDDING_DATE] /tag [TAG]…​` <br> e.g., `add client /name Jane Doe /hp 91234567 /email jane.doe@example.com /address Blk 231 Sembawang St 4 /date 2024-12-15` |
-| **Clear**                 | `clear`                                                                                                                                                                                                                                                              |
-| **Delete Vendor Contact** | `delete vendor /id [CONTACT_ID]`<br> e.g., `delete vendor /id 123`                                                                                                                                                                                                   |
-| **Delete Client Contact** | `delete client /id [CONTACT_ID]`<br> e.g., `delete client /id 456`                                                                                                                                                                                                   |
-| **View**                  | `view /tag [TAG]`<br> e.g., `view /tag entertaining`                                                                                                                                                                                                                 |
-| **View All**              | `view`                                                                                                                                                                                                                                                               |
-| **Save**                  | `save /dir [DIRECTORY] /name [NAME_OF_JSON_FILE]`<br> e.g., `save /dir ~/Desktop/ /name all_names`                                                                                                                                                                   |
-| **Help**                  | `help`                                                                                                                                                                                                                                                               |
+| Action                    | Format, Examples                                                                                                                                                                                   |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Create Client Contact** | `add -c n/NAME p/PHONE e/EMAIL a/ADDRESS d/WEDDING_DATE [t/TAG]...` <br> e.g., `add -c n/Jane Doe p/91234567 e/jane.doe@example.com a/Blk 231 Sembawang St 4 d/2024-12-15 t/budget t/pets`         |
+| **Create Vendor Contact** | `add -v n/NAME p/PHONE e/EMAIL a/ADDRESS s/SERVICE [t/TAG]...` <br> e.g., `add -v n/ABC Catering p/98765432 e/contact@abccatering.com a/Blk 123 Bukit Merah St 7 s/catering t/vegetarian t/budget` |
+| **Clear**                 | `clear`                                                                                                                                                                                            |
+| **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                |
+| **List**                  | `list -CONTACT_FLAG n/[NAME] id/[CONTACT_ID]` <br> e.g., `list -c n/Jane`                                                                                                                          |
+| **List All**              | `list`                                                                                                                                                                                             |
+| **Help**                  | `help`                                                                                                                                                                                             |
