@@ -7,8 +7,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 public class IncomeTest {
     @Test
     public void constructor_invalidIncome_throwsIllegalArgumentException() {

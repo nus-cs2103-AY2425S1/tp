@@ -51,9 +51,9 @@ public class Income {
     }
 
     /**
-     * Returns true if a given string is a valid income.
-     * @param test A double to be tested
-     * @return {@code true} if the string is valid, {@code false} otherwise
+     * Returns true if a given value is a valid income.
+     * @param test A double value to be tested
+     * @return {@code true} if the value is valid, {@code false} otherwise
      */
     public static boolean isValidIncome(double test) {
         return test >= 0;
