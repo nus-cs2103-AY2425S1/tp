@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# GOATS User Guide
 
 AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
@@ -89,6 +89,23 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
+### Assigning grade to students: `grade`
+
+Assign grade to students in the address book.
+
+Format: `grade INDEX g/GRADE_INDEX`
+
+* The grade index ranges from 0 to 5
+* 0: `Unknown`
+* 1: `Excellent`
+* 2: `Good`
+* 3: `Satisfactory`
+* 4: `Failing`
+
+Examples:
+* `grade 1 g/1` changes grade of first person on list to `Excellent`
+* `grade 2 g/4` changes grade of second person on list to `Failing`
 
 ### Listing all persons : `list`
 
@@ -216,6 +233,7 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Grade**  | `grade INDEX g/GRADE_INDEX` <br> e.g., `grade 1 g/1`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
