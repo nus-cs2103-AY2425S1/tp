@@ -15,14 +15,16 @@ import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
 
 /**
- * Deletes an order under a specified person.
+ * Deletes an order identified using it's displayed index from the displayed order list of a specified person.
  */
 public class DeleteOrderCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteOrder";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an order under the specified person. "
-            + "Parameters: INDEX (must be a positive integer) "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes an order identified by the index number "
+            + "in the displayed order list of a the specified person. "
+            + "Parameters: ORDER INDEX (must be a positive integer) "
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_ORDER_SUCCESS = "Deleted Order: %1$s";
@@ -30,7 +32,7 @@ public class DeleteOrderCommand extends Command {
     private final Index index;
 
     /**
-     * Creates an DeleteOrderCommand to delete the specified {@param index of the order to be deleted}
+     * Creates a DeleteOrderCommand to delete the specified {@param index of the order to be deleted}
      */
     public DeleteOrderCommand(Index index) {
         requireAllNonNull(index);
