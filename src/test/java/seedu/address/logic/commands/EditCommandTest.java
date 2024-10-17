@@ -109,6 +109,17 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_duplicatePhoneUnfilteredList_failure() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
+        descriptor.setPhone(secondPerson.getPhone());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PHONE);
+    }
+
+    @Test
     public void execute_duplicateNameFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
@@ -118,6 +129,20 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder(personInList).build());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_NAME);
+    }
+
+    @Test
+    public void execute_duplicatePhoneFilteredList_failure() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        // edit person in filtered list to have the same phone number as another person in address book
+        Person firstPerson = model.getAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
+        descriptor.setPhone(personInList.getPhone());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PHONE);
     }
 
     @Test

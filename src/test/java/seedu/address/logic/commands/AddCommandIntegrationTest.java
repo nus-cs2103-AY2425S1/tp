@@ -45,4 +45,16 @@ public class AddCommandIntegrationTest {
                 AddCommand.MESSAGE_DUPLICATE_NAME);
     }
 
+    @Test
+    public void execute_duplicatePhone_throwsCommandException() {
+        Person personInList = model.getAddressBook().getPersonList().get(0);
+        Person alice = new PersonBuilder()
+                .withName("Alice")
+                .withPhone(personInList.getPhone().toString())
+                .build();
+
+        assertCommandFailure(new AddCommand(alice), model,
+                AddCommand.MESSAGE_DUPLICATE_PHONE);
+    }
+
 }
