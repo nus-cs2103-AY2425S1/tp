@@ -49,7 +49,7 @@ public class Messages {
         builder.append("; Tags: ");
         person.getTags().forEach(builder :: append);
 
-        builder.append("; Modules: ");
+        builder.append("; Roles: ");
         String moduleRoleMapData = person.getModuleRoleMap().getData().stream().map(Object::toString).collect(Collectors.joining(", "));
         builder.append(moduleRoleMapData);
 

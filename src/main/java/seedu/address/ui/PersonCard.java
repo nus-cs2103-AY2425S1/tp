@@ -44,7 +44,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private FlowPane modules;
+    private FlowPane roles;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -74,6 +74,6 @@ public class PersonCard extends UiPart<Region> {
         // Add module role pairs
         person.getModuleRoleMap().getData().stream()
                 .sorted(Comparator.comparing(moduleRolePair -> moduleRolePair.moduleCode.toString()))
-                .forEach(moduleRolePair -> modules.getChildren().add(new Label(moduleRolePair.toString())));
+                .forEach(moduleRolePair -> roles.getChildren().add(new Label(moduleRolePair.toString())));
     }
 }
