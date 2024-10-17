@@ -1,7 +1,7 @@
 package seedu.address.model.concert.exceptions;
 
 /**
- * Signals that the operation will result in duplicate Connerts (Concerts are considered duplicates
+ * Signals that the operation will result in duplicate Concerts (Concerts are considered duplicates
  * if they have the same identity)
  */
 public class DuplicateConcertException extends RuntimeException {

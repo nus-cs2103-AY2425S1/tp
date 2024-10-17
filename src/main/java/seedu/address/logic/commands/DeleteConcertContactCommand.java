@@ -79,8 +79,8 @@ public class DeleteConcertContactCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("indexP", concertIndex)
-                .add("indexC", personIndex)
+                .add("indexP", personIndex)
+                .add("indexC", concertIndex)
                 .toString();
     }
 }
