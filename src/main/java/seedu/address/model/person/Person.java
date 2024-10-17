@@ -28,7 +28,7 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
-    private final List<Transaction> transactions = new ArrayList<>();
+    private final List<Transaction> transactions;
 
     /**
      * Every field must be present and not null.
@@ -41,6 +41,21 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.transactions = new ArrayList<>();
+    }
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Company company, Phone phone, Email email, Address address, Set<Tag> tags,
+                  List<Transaction> transactions) {
+        requireAllNonNull(name, phone, email, address, tags, transactions);
+        this.name = name;
+        this.company = company;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.transactions = transactions;
     }
 
     public Name getName() {

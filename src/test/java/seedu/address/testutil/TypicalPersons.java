@@ -28,13 +28,14 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline").withCompany("Apple Inc.")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
-            .withTags("friends").build();
+            .withTags("friends").withTransactions(PersonBuilder.DEFAULT_TRANSACTION_1).build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withCompany("Bapple Co.")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends").withTransactions(PersonBuilder.DEFAULT_TRANSACTION_2).build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withCompany("Capple Co.")
-            .withPhone("95352563").withEmail("heinz@example.com").withAddress("wall street").build();
+            .withPhone("95352563").withEmail("heinz@example.com").withAddress("wall street")
+            .withTransactions(PersonBuilder.DEFAULT_TRANSACTION_1, PersonBuilder.DEFAULT_TRANSACTION_2).build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withCompany("Dapple Co.")
             .withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
