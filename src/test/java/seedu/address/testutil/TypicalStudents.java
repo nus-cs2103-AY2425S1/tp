@@ -88,6 +88,6 @@ public class TypicalStudents {
     }
 
     public static List<Student> getTypicalStudents() {
-        return new ArrayList<>(Arrays.asList(DIDDY, HUGH, ALICE));
+        return new ArrayList<>(Arrays.asList(DIDDY, HUGH));
     }
 }
