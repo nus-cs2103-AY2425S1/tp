@@ -161,4 +161,19 @@ public class ImportCommand extends Command {
             throw new CommandException(MESSAGE_INCORRECT_FILE_FORMAT);
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ImportCommand)) {
+            return false;
+        }
+
+        ImportCommand otherImportCommand = (ImportCommand) other;
+        return filePath.equals(otherImportCommand.filePath);
+    }
 }
