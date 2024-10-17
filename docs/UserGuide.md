@@ -118,6 +118,12 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower f/100` Edits the name of the 2nd person to be `Betsy Crower` and edits the fee to $100/h.
 
+### Showing income data: `income`
+
+Shows the total amount of tuition fee you have received from the students and the amount that hasn't been paid.
+
+Format: `income`
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
