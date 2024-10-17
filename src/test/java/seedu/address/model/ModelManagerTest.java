@@ -167,4 +167,41 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
+
+    @Test
+    public void resetPersonPriority_validPerson_priorityLevelReset() {
+        modelManager.addPerson(ALICE);
+
+        // Ensure initial priority level is set correctly
+        assertEquals(3, ALICE.getPriorityLevel().getValue());
+
+        // Reset the priority level
+        modelManager.resetPersonPriority(ALICE);
+
+        // Check that the priority level is reset to default (3)
+        assertEquals(3, ALICE.getPriorityLevel().getValue());
+    }
+
+    @Test
+    public void resetPersonPriority_afterReset_priorityLevelIsThree() {
+        modelManager.addPerson(ALICE);
+
+        // Reset priority level
+        modelManager.resetPersonPriority(ALICE);
+
+        // Verify the priority level has been reset to 3
+        assertEquals(3, ALICE.getPriorityLevel().getValue());
+    }
+
+    @Test
+    public void resetPersonPriority_multipleResets_priorityLevelRemainsThree() {
+        modelManager.addPerson(ALICE);
+
+        // Reset priority level multiple times
+        modelManager.resetPersonPriority(ALICE);
+        modelManager.resetPersonPriority(ALICE);
+
+        // Verify the priority level remains 3 after multiple resets
+        assertEquals(3, ALICE.getPriorityLevel().getValue());
+    }
 }
