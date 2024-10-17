@@ -11,9 +11,13 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
-public class ViewWindow extends UiPart<Stage>{
-    private final Logger logger = LogsCenter.getLogger(getClass());
+/**
+ * Represents a view window in the user interface.
+ * This window is used to display detailed information about a person.
+ */
+public class ViewWindow extends UiPart<Stage> {
     private static final String FXML = "ViewWindow.fxml";
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     @FXML
     private StackPane feedbackDisplayPlaceholder;
@@ -49,10 +53,18 @@ public class ViewWindow extends UiPart<Stage>{
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
+    /**
+     * Creates a new ViewWindow with the given feedback display text and person.
+     * @param feedbackDisplayText The text to display in the feedback label.
+     * @param person The person whose details to display.
+     */
     public ViewWindow(String feedbackDisplayText, Person person) {
         this(new Stage(), feedbackDisplayText, person);
     }
 
+    /**
+     * Shows the view window.
+     */
     public void show() {
         logger.fine("Showing view page on a patient.");
         getRoot().show();
