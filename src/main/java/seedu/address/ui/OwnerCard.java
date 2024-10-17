@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.owner.Owner;
 
 /**
- * A UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Owner}.
  */
 public class OwnerCard extends UiPart<Region> {
 
@@ -37,7 +37,7 @@ public class OwnerCard extends UiPart<Region> {
     private Label email;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code OwnerCode} with the given {@code Owner} and index to display.
      */
     public OwnerCard(Owner owner, int displayedIndex) {
         super(FXML);

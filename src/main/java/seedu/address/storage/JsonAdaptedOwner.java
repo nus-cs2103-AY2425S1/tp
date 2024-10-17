@@ -28,6 +28,7 @@ class JsonAdaptedOwner {
     @JsonCreator
     public JsonAdaptedOwner(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                             @JsonProperty("email") String email, @JsonProperty("address") String address) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -35,7 +36,7 @@ class JsonAdaptedOwner {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Owner} into this class for Jackson use.
      */
     public JsonAdaptedOwner(Owner source) {
         name = source.getName().fullName;
@@ -45,9 +46,9 @@ class JsonAdaptedOwner {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted person object into the model's {@code Owner} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted owner.
      */
     public Owner toModelType() throws IllegalValueException {
         if (name == null) {

@@ -19,24 +19,24 @@ import seedu.address.model.pet.Pet;
  */
 public class AddPetCommand extends Command {
 
-    public static final String COMMAND_WORD = "add pet";
+    public static final String COMMAND_WORD = "pet";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a pet to the address book. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_SPECIES + "SPECIES "
-            + PREFIX_BREED + "BREED "
-            + PREFIX_AGE + "AGE "
-            + PREFIX_SEX + "SEX "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Fluffy "
-            + PREFIX_SPECIES + "Dog "
-            + PREFIX_BREED + "Golden Retriever "
-            + PREFIX_AGE + "5 "
-            + PREFIX_SEX + "F "
-            + PREFIX_TAG + "playful "
-            + PREFIX_TAG + "cute";
+        + "Parameters: "
+        + PREFIX_NAME + "NAME "
+        + PREFIX_SPECIES + "SPECIES "
+        + PREFIX_BREED + "BREED "
+        + PREFIX_AGE + "AGE "
+        + PREFIX_SEX + "SEX "
+        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_NAME + "Fluffy "
+        + PREFIX_SPECIES + "Dog "
+        + PREFIX_BREED + "Golden Retriever "
+        + PREFIX_AGE + "5 "
+        + PREFIX_SEX + "F "
+        + PREFIX_TAG + "playful "
+        + PREFIX_TAG + "cute";
 
     public static final String MESSAGE_SUCCESS = "New pet added: %1$s";
     public static final String MESSAGE_DUPLICATE_PET = "This pet already exists in the address book";
@@ -81,7 +81,7 @@ public class AddPetCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .toString();
+            .add("toAdd", toAdd)
+            .toString();
     }
 }

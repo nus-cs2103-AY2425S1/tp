@@ -28,13 +28,13 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_PET = "Pets list contains duplicate pet(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
-
+    private final List<JsonAdaptedOwner> owners = new ArrayList<>();
     private final List<JsonAdaptedPet> pets = new ArrayList<>();
 
     private final List<JsonAdaptedOwner> owners = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons and pets.
+     * Constructs a {@code JsonSerializableAddressBook} with the given owners and pets.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
@@ -58,6 +58,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        owners.addAll(source.getOwnerList().stream().map(JsonAdaptedOwner::new).collect(Collectors.toList()));
         pets.addAll(source.getPetList().stream().map(JsonAdaptedPet::new).collect(Collectors.toList()));
         owners.addAll(source.getOwnerList().stream().map(JsonAdaptedOwner::new).collect(Collectors.toList()));
     }
@@ -75,6 +76,13 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
+        }
+        for (JsonAdaptedOwner jsonAdaptedOwner : owners) {
+            Owner owner = jsonAdaptedOwner.toModelType();
+            if (addressBook.hasOwner(owner)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_OWNER);
+            }
+            addressBook.addOwner(owner);
         }
 
         for (JsonAdaptedOwner jsonAdaptedOwner : owners) {
