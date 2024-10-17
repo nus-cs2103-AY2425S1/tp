@@ -101,6 +101,11 @@ public interface Model {
     void deleteConcertContact(Person targetPerson);
 
     /**
+     * Deletes the given person. The person must exist in the address book.
+     */
+    void deleteConcert(Concert target);
+
+    /**
      * Adds the given person. {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
