@@ -97,6 +97,22 @@ public class Event {
     }
 
     /**
+     * Removes a volunteer from the event.
+     *
+     * @param removedVolunteer The name of the volunteer to remove.
+     * @return True if the volunteer was removed, false if they weren't found.
+     */
+    public boolean removeVolunteer(String removedVolunteer) {
+        // Check if the volunteer exists in the list
+        if (volunteers.contains(removedVolunteer)) {
+            volunteers.remove(removedVolunteer);
+            return true;  // Return true if successfully removed
+        } else {
+            return false;  // Return false if the volunteer was not found
+        }
+    }
+
+    /**
      * Returns true if both events have the same name.
      * This defines a weaker notion of equality between two events.
      */

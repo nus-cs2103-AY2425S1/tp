@@ -136,6 +136,21 @@ public class Volunteer {
     }
 
     /**
+     * Removes the specified event from the list of events the volunteer is involved in.
+     *
+     * @param removedEvent The name of the event to be removed.
+     * @return True if the event was successfully removed, false if the event was not found in the list.
+     */
+    public boolean removeEvent(String removedEvent) {
+        if (involvedIn.contains(removedEvent)) {
+            involvedIn.remove(removedEvent);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Returns the list of events the volunteer is involved in as an unmodifiable list.
      *
      * @return An unmodifiable ObservableList of events.
