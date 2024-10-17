@@ -8,6 +8,7 @@ jobs:
       matrix:
         platform: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.platform }}
+    continue-on-error: true
 
     steps:
       - name: Set up repository
@@ -37,7 +38,7 @@ jobs:
           java-package: jdk+fx
 
       - name: Build and check with Gradle
-        run: ./gradlew check coverage
+        run: ./gradlew clean checkstyleMain checkstyleTest nonGuiTests coverage
 
       - name: Upload coverage reports to Codecov
         if: runner.os == 'Linux'

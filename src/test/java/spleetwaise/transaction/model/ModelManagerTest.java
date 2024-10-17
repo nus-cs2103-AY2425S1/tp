@@ -106,6 +106,21 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasTransaction_contains_returnsTrue() {
+        ModelManager manager = new ModelManager();
+        manager.addTransaction(testTxn);
+
+        assertTrue(manager.hasTransaction(testTxn));
+    }
+
+    @Test
+    public void hasTransaction_doNotContain_returnsFalse() {
+        ModelManager manager = new ModelManager();
+
+        assertFalse(manager.hasTransaction(testTxn));
+    }
+
+    @Test
     public void getFilteredTransactionList_noPredicate_shouldEqual() {
         ModelManager manager = new ModelManager();
         manager.addTransaction(testTxn);

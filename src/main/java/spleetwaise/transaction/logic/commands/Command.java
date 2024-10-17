@@ -1,7 +1,7 @@
 package spleetwaise.transaction.logic.commands;
 
 import spleetwaise.address.logic.commands.CommandResult;
-import spleetwaise.address.logic.commands.exceptions.CommandException;
+import spleetwaise.transaction.logic.commands.exceptions.CommandException;
 import spleetwaise.transaction.model.Model;
 
 /**

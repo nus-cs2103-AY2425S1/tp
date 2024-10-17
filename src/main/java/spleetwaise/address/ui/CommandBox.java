@@ -6,8 +6,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import spleetwaise.address.logic.Logic;
 import spleetwaise.address.logic.commands.CommandResult;
-import spleetwaise.address.logic.commands.exceptions.CommandException;
 import spleetwaise.address.logic.parser.exceptions.ParseException;
+import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -19,8 +19,7 @@ public class CommandBox extends UiPart<Region> {
 
     private final CommandExecutor commandExecutor;
 
-    @FXML
-    private TextField commandTextField;
+    @FXML private TextField commandTextField;
 
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
@@ -36,7 +35,7 @@ public class CommandBox extends UiPart<Region> {
      * Handles the Enter button pressed event.
      */
     @FXML
-    private void handleCommandEntered() {
+    private void handleCommandEntered() throws SpleetWaiseCommandException, ParseException {
         String commandText = commandTextField.getText();
         if (commandText.equals("")) {
             return;
@@ -45,7 +44,7 @@ public class CommandBox extends UiPart<Region> {
         try {
             commandExecutor.execute(commandText);
             commandTextField.setText("");
-        } catch (CommandException | ParseException e) {
+        } catch (SpleetWaiseCommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
     }
@@ -80,7 +79,7 @@ public class CommandBox extends UiPart<Region> {
          *
          * @see Logic#execute(String)
          */
-        CommandResult execute(String commandText) throws CommandException, ParseException;
+        CommandResult execute(String commandText) throws SpleetWaiseCommandException, ParseException;
     }
 
 }

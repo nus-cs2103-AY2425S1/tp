@@ -10,6 +10,7 @@ import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.address.model.Model;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.person.Person;
+import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
@@ -23,7 +24,7 @@ public interface Logic {
      * @throws CommandException If an error occurs during command execution.
      * @throws ParseException If an error occurs during parsing.
      */
-    CommandResult execute(String commandText) throws CommandException, ParseException;
+    CommandResult execute(String commandText) throws SpleetWaiseCommandException, ParseException;
 
     /**
      * Returns the AddressBook.

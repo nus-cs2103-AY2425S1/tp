@@ -1,9 +1,8 @@
 package spleetwaise.transaction.model.transaction;
 
-import java.util.UUID;
-
 import spleetwaise.address.commons.util.CollectionUtil;
 import spleetwaise.address.model.person.Person;
+import spleetwaise.commons.IdUtil;
 
 /**
  * Represents a Transaction in the transaction book.
@@ -21,13 +20,13 @@ public class Transaction {
      * Represents a Transaction in the transaction book.
      *
      * @param person The person involved in this transaction.
-     * @param amount The amount involved in this transcation.
+     * @param amount The amount involved in this transaction.
      * @param description The description of the transaction.
      * @param date The date the transaction has taken place.
      */
     public Transaction(Person person, Amount amount, Description description, Date date) {
         CollectionUtil.requireAllNonNull(person, amount, description, date);
-        this.id = UUID.randomUUID().toString();
+        this.id = IdUtil.getId();
         this.person = person;
         this.amount = amount;
         this.description = description;

@@ -17,12 +17,8 @@ public class ModelManager implements Model {
 
     private static final Logger logger = LogsCenter.getLogger(spleetwaise.address.model.ModelManager.class);
 
-    /** {@code Predicate} that always evaluate to true */
-    private static final Predicate<Transaction> PREDICATE_SHOW_ALL_TXNS = unused -> true;
-
     private final TransactionBook transactionBook;
     private final FilteredList<Transaction> filteredTransactions;
-
 
     /**
      * Initializes a ModelManager with the given transactionBook.
@@ -32,12 +28,29 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing Transaction Model...");
 
-        this.transactionBook = transactionBook;
+        this.transactionBook = new TransactionBook(transactionBook);
+        filteredTransactions = new FilteredList<>(this.transactionBook.getTransactionList());
+    }
+
+    /**
+     * Initializes a ModelManager with the readonly transactionBook.
+     */
+    public ModelManager(ReadOnlyTransactionBook transactionBook) {
+        requireNonNull(transactionBook);
+
+        logger.fine("Initializing Transaction Model...");
+
+        this.transactionBook = new TransactionBook(transactionBook);
         filteredTransactions = new FilteredList<>(this.transactionBook.getTransactionList());
     }
 
     public ModelManager() {
         this(new TransactionBook());
+    }
+
+    @Override
+    public ReadOnlyTransactionBook getTransactionBook() {
+        return transactionBook;
     }
 
     @Override
@@ -47,14 +60,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ReadOnlyTransactionBook getTransactionBook() {
-        return transactionBook;
-    }
-
-    @Override
     public void addTransaction(Transaction transaction) {
         transactionBook.addTransaction(transaction);
         updateFilteredTransactionList(PREDICATE_SHOW_ALL_TXNS);
+    }
+
+    @Override
+    public boolean hasTransaction(Transaction transaction) {
+        requireNonNull(transaction);
+        return transactionBook.containsTransaction(transaction);
     }
 
     @Override
