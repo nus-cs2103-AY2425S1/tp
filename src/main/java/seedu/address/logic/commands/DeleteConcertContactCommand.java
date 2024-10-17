@@ -1,8 +1,7 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CONCERT;
-
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONCERT;
 
 import java.util.List;
 
@@ -32,6 +31,9 @@ public class DeleteConcertContactCommand extends Command {
     private final Index concertIndex;
     private final Index personIndex;
 
+    /**
+     * Creates a DeleteConcertContactCommand to delete the specified {@code Person} from the specifed {@code Concert}.
+     */
     public DeleteConcertContactCommand(Index personIndex, Index concertIndex) {
         this.personIndex = personIndex;
         this.concertIndex = concertIndex;

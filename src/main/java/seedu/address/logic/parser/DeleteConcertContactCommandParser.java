@@ -31,7 +31,8 @@ public class DeleteConcertContactCommandParser implements Parser<DeleteConcertCo
             }
             indexC = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CONCERT).get());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteConcertContactCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteConcertContactCommand.MESSAGE_USAGE), pe);
         }
 
         return new DeleteConcertContactCommand(indexP, indexC);
