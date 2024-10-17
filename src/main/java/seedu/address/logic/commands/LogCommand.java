@@ -72,7 +72,8 @@ public class LogCommand extends Command {
         History editedHistory = History.addActivity(personToEdit.getHistory(), date, message);
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getTags(),
+                personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getBirthday(),
+                personToEdit.getTags(),
                 personToEdit.getDateOfCreation(),
                 editedHistory);
 

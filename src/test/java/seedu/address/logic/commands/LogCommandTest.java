@@ -32,7 +32,6 @@ public class LogCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test
     public void execute_addLogUnfilteredList_success() {
-        System.out.println(model.getAddressBook());
         LocalDate logDate = LocalDate.now();
         String logMessage = VALID_LOG_MESSAGE;
         LogCommand logCommand = new LogCommand(INDEX_FIRST_PERSON, logDate, logMessage);
@@ -43,7 +42,6 @@ public class LogCommandTest {
         String expectedMessage = String.format(Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
-        System.out.println(expectedModel.getAddressBook());
         assertCommandSuccess(logCommand, model, expectedMessage, expectedModel);
     }
 
