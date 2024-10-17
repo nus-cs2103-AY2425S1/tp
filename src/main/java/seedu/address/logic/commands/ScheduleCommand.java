@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -15,8 +16,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Person;
 
-
-
 /**
  * Schedules a meeting with another person from the address book.
  */
@@ -25,7 +24,7 @@ public class ScheduleCommand extends Command {
     public static final String COMMAND_WORD = "schedule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedules a meeting with another "
-            + "person from the address book. "
+            + "person from the address book.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_LOCATION + "LOCATION "
             + PREFIX_START_TIME + "START_TIME "
@@ -37,19 +36,27 @@ public class ScheduleCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New meeting with %1$s added: %2$s";
 
-    private final Meeting toAdd;
     private final Index index;
+    private final LocalDateTime startTime;
+    private final LocalDateTime endTime;
+    private final String location;
+
+    private Meeting toAdd;
 
     /**
      * Creates a ScheduleCommand to add the specified {@code Meeting}
      * @param index of the person in the filtered person list to schedule a meeting with
      */
-    public ScheduleCommand(Index index, Meeting meeting) {
+    public ScheduleCommand(Index index, LocalDateTime startTime, LocalDateTime endTime, String location) {
         requireNonNull(index);
-        requireNonNull(meeting);
+        requireNonNull(startTime);
+        requireNonNull(endTime);
+        requireNonNull(location);
 
         this.index = index;
-        this.toAdd = meeting;
+        this.location = location;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     @Override
@@ -63,7 +70,10 @@ public class ScheduleCommand extends Command {
 
         Person personToScheduleMeetingWith = lastShownList.get(index.getZeroBased());
 
+        toAdd = new Meeting(personToScheduleMeetingWith.getName(), startTime, endTime, location);
+
         model.addMeeting(personToScheduleMeetingWith, toAdd);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, personToScheduleMeetingWith.getName(),
                 Messages.format(toAdd)));
     }
