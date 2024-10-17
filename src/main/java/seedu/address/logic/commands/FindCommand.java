@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.DEFAULT_DELIMITER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -20,8 +23,9 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Parameters: KEYWORD PARAMETERS [;PARAMETERS...] [MORE_KEYWORDS_WITH_PARAMETERS]...\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice" + DEFAULT_DELIMITER + "bob"
+            + PREFIX_COURSE + "CS2100" + DEFAULT_DELIMITER + "CS2040";
 
     /** Raw unmodified list of predicates for use in equality checking */
     private final List<? extends Predicate<? super Student>> predicates;
