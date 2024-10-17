@@ -1,18 +1,24 @@
-/*
-:root {
-    --background-color: #1a1a1a;
-    --text-color: #FFD700;
-    --dark-gray: #4d4d4d;
-    --hover-bg-color: rgba(255, 215, 0, 0.4);
-    --border-radius: 12px;
-    --font-family-regular: 'Raleway', sans-serif;
-    --font-family-header: 'Lora', serif;
-    --transition-speed: 0.3s;
-    --shadow-effect: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.7));
-    --hover-shadow: drop-shadow(4px 4px 10px rgba(255, 215, 0, 0.7));
-    --focused-border: 3px solid rgba(255, 215, 0, 0.8);
+.root {
+    /* Base colors */
+    -fx-base-background: #1a1a1a;
+    -fx-accent-color: #FFD700;
+    -fx-dark-gray: #4d4d4d;
+    -fx-light-gray: #333333;
+    -fx-hover-bg: rgba(255, 215, 0, 0.4);
+
+    /* Typography */
+    -fx-font-family: 'Raleway', sans-serif;
+    -fx-header-font-family: 'Lora', serif;
+    -fx-base-font-size: 18pt;
+    -fx-header-font-size: 42pt;
+
+    /* Layout */
+    -fx-border-radius: 12px;
+    -fx-padding-base: 12px;
+
+    /* Effects */
+    -fx-transition-duration: 0.3s;
 }
-*/
 
 .background {
     -fx-background-color: #1a1a1a;

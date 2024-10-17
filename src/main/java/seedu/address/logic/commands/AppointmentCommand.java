@@ -32,7 +32,7 @@ public class AppointmentCommand extends Command {
             + PREFIX_FROM + " [FROM] "
             + PREFIX_TO + " [TO]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "date/ 20/12/2024 fr/ 0800 to/ 1000";
+            + "d/ 20/12/2024 fr/ 0800 to/ 1000";
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "New appointment added: %1$s";
     public static final String MESSAGE_UPDATE_APPOINTMENT_SUCCESS = "Updated appointment from Person: %1$s";
@@ -80,7 +80,7 @@ public class AppointmentCommand extends Command {
         String message = !personToEdit.getAppointment().isEmpty()
                 ? MESSAGE_ADD_APPOINTMENT_SUCCESS
                 : MESSAGE_UPDATE_APPOINTMENT_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(message, Messages.format(personToEdit));
     }
 
     @Override
