@@ -12,8 +12,10 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GetCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.StatisticsCommand;
 
 
 public class HelpCommandParserTest {
@@ -29,9 +31,10 @@ public class HelpCommandParserTest {
         assertParseSuccess(parser, "edit", new HelpCommand(EditCommand.MESSAGE_USAGE));
         assertParseSuccess(parser, "exit", new HelpCommand(ExitCommand.MESSAGE_USAGE));
         assertParseSuccess(parser, "find", new HelpCommand(FindCommand.MESSAGE_USAGE));
+        assertParseSuccess(parser, "get", new HelpCommand(GetCommand.MESSAGE_USAGE));
         assertParseSuccess(parser, "help", new HelpCommand(HelpCommand.MESSAGE_USAGE));
         assertParseSuccess(parser, "list", new HelpCommand(ListCommand.MESSAGE_USAGE));
-
+        assertParseSuccess(parser, "statistics", new HelpCommand(StatisticsCommand.MESSAGE_USAGE));
         // multiple whitespaces
         assertParseSuccess(parser, "   add   ", new HelpCommand(AddCommand.MESSAGE_USAGE));
     }
