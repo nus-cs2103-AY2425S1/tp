@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import java.util.stream.Collectors;
+
+import javafx.beans.binding.Bindings;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -12,14 +16,6 @@ import seedu.address.model.event.Event;
 public class EventCard extends UiPart<Region> {
 
     private static final String FXML = "EventListCard.fxml";
-
-    /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
-     * As a consequence, UI elements' variable names cannot be set to such keywords
-     * or an exception will be thrown by JavaFX during runtime.
-     *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
-     */
 
     public final Event event;
 
@@ -37,19 +33,39 @@ public class EventCard extends UiPart<Region> {
     private Label time;
     @FXML
     private Label description;
-
+    @FXML
+    private Label volunteers;
 
     /**
-     * Creates a {@code EventCode} with the given {@code Event} and index to display.
+     * Creates a {@code EventCard} with the given {@code Event} and index to display.
      */
     public EventCard(Event event, int displayedIndex) {
         super(FXML);
         this.event = event;
+
         id.setText(displayedIndex + ". ");
         name.setText(event.getName().toString() + " (#" + event.getId() + ")");
         date.setText(event.getDate().toString());
         time.setText(event.getStartTime() + " - " + event.getEndTime());
         loc.setText(event.getLocation().toString());
         description.setText(event.getDescription().toString());
+
+        volunteers.textProperty().bind(
+                Bindings.createStringBinding(() -> "Volunteers: " + getVolunteersAsString(event.getVolunteers()),
+                        event.getVolunteers() // ObservableList to monitor changes
+                )
+        );
+    }
+
+    /**
+     * Converts the list of volunteers to a single string.
+     *
+     * @param volunteers The list of volunteers.
+     * @return A string representation of the volunteers.
+     */
+    public String getVolunteersAsString(ObservableList<String> volunteers) {
+        return volunteers.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(", "));
     }
 }
