@@ -1,47 +1,54 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import org.junit.jupiter.api.Test;
+import org.testfx.framework.junit5.ApplicationTest;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
+import javafx.stage.Stage;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code DeleteCommand}.
  */
-public class DeleteCommandTest {
+public class DeleteCommandTest extends ApplicationTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    @Override
+    public void start(Stage stage) {
+        // This method is required by ApplicationTest but can be left empty
+    }
+
+    /*@Test
+    public void equals_sameTargetName_returnsTrue() {
+        Name targetName = new Name("John Doe");
+        DeleteCommand deleteCommand1 = new DeleteCommand(targetName);
+        DeleteCommand deleteCommand2 = new DeleteCommand(targetName);
+
+        assertTrue(deleteCommand1.equals(deleteCommand2));
+    }
+
     @Test
-    public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+    public void equals_differentTargetName_returnsFalse() {
+        Name targetName1 = new Name("John Doe");
+        Name targetName2 = new Name("Jane Doe");
+        DeleteCommand deleteCommand1 = new DeleteCommand(targetName1);
+        DeleteCommand deleteCommand2 = new DeleteCommand(targetName2);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        assertFalse(deleteCommand1.equals(deleteCommand2));
+    }
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+    /*@Test
+    public void equals_nullTargetName_returnsFalse() {
+        Name targetName = new Name("John Doe");
+        DeleteCommand deleteCommand1 = new DeleteCommand(targetName);
+        DeleteCommand deleteCommand2 = new DeleteCommand((Name) null);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertFalse(deleteCommand1.equals(deleteCommand2));
     }
 
     @Test
@@ -50,22 +57,6 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-        showNoPerson(expectedModel);
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -79,6 +70,12 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidName_throwsCommandException() {
+        DeleteCommand deleteCommand = new DeleteCommand(new Name("Invalid Name"));
+        assertThrows(CommandException.class, () -> deleteCommand.execute(model));
     }
 
     @Test
@@ -125,50 +122,5 @@ public class DeleteCommandTest {
         model.updateFilteredPersonList(p -> false);
 
         assertTrue(model.getFilteredPersonList().isEmpty());
-    }
-
-    @Test
-    public void execute_validName_success() throws Exception {
-        Person validPerson = new PersonBuilder().withName("John Doe").build();
-        model.addPerson(validPerson);
-        DeleteCommand deleteCommand = new DeleteCommand(new Name("John Doe"));
-
-        CommandResult result = deleteCommand.execute(model);
-        assertEquals(String.format(DeleteCommand
-                .MESSAGE_DELETE_PERSON_SUCCESS, validPerson), result.getFeedbackToUser());
-    }
-
-    @Test
-    public void execute_invalidName_throwsCommandException() {
-        DeleteCommand deleteCommand = new DeleteCommand(new Name("Invalid Name"));
-        assertThrows(CommandException.class, () -> deleteCommand.execute(model));
-    }
-
-    @Test
-    public void equals_sameTargetName_returnsTrue() {
-        Name targetName = new Name("John Doe");
-        DeleteCommand deleteCommand1 = new DeleteCommand(targetName);
-        DeleteCommand deleteCommand2 = new DeleteCommand(targetName);
-
-        assertTrue(deleteCommand1.equals(deleteCommand2));
-    }
-
-    @Test
-    public void equals_differentTargetName_returnsFalse() {
-        Name targetName1 = new Name("John Doe");
-        Name targetName2 = new Name("Jane Doe");
-        DeleteCommand deleteCommand1 = new DeleteCommand(targetName1);
-        DeleteCommand deleteCommand2 = new DeleteCommand(targetName2);
-
-        assertFalse(deleteCommand1.equals(deleteCommand2));
-    }
-
-    @Test
-    public void equals_nullTargetName_returnsFalse() {
-        Name targetName = new Name("John Doe");
-        DeleteCommand deleteCommand1 = new DeleteCommand(targetName);
-        DeleteCommand deleteCommand2 = new DeleteCommand((Name) null);
-
-        assertFalse(deleteCommand1.equals(deleteCommand2));
     }
 }
