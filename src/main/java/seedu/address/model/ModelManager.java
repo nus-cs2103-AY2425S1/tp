@@ -191,10 +191,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setMeetUp(MeetUp target, MeetUp edittedMeetUp) {
-        requireAllNonNull(target, edittedMeetUp);
+    public void setMeetUp(MeetUp target, MeetUp editedMeetUp) {
+        requireAllNonNull(target, editedMeetUp);
 
-        meetUpList.setMeetUp(target, edittedMeetUp);
+        meetUpList.setMeetUp(target, editedMeetUp);
     }
 
     //=========== Filtered MeetUp List Accessors =============================================================
