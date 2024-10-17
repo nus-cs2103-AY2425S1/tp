@@ -2,6 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OTHER_PARTY;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -18,43 +23,33 @@ import seedu.address.model.person.Transaction;
 public class AddTransactionCommand extends Command {
 
     public static final String COMMAND_WORD = "addt";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": adds a transaction to selected person.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a transaction to selected person. "
             + "Parameters: "
-            + "INDEX (must be a positive integer)"
-            + "d/" + "DESCRIPTION"
-            + "amt/" + "AMOUNT"
-            + "o/" + "OTHER PARTY"
-            + "dt/" + "DATE\n"
+            + "INDEX (must be a positive integer) "
+            + PREFIX_DESCRIPTION + "DESCRIPTION "
+            + PREFIX_AMOUNT + "AMOUNT "
+            + PREFIX_OTHER_PARTY + "OTHER PARTY "
+            + PREFIX_DATE + "DATE\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "d/" + "buy raw materials"
-            + "amt/" + "-100"
-            + "o/" + "Company XYZ"
-            + "dt" + "10/10/2024";
+            + PREFIX_DESCRIPTION + "buy raw materials "
+            + PREFIX_AMOUNT + "-100 "
+            + PREFIX_OTHER_PARTY + "Company XYZ "
+            + PREFIX_DATE + "10-10-2024";
 
-    public static final String MESSAGE_SUCCESS = "New transaction added: %1$s";
+    public static final String MESSAGE_ADD_TRANSACTION_SUCCESS = "Added new transaction %1$s\nto %2$s";
 
     private final Index index;
-    private final String description;
-    private final int amount;
-    private final String otherParty;
-    private final String date;
+    private final Transaction toAdd;
 
     /**
      * @param index index of person to add transactions to
-     * @param description description of transaction
-     * @param amount amount of money earned or spent
-     * @param otherParty name of the other party involved in transaction
-     * @param date date of transaction
+     * @param transaction transaction to add
      */
-    public AddTransactionCommand(Index index, String description, int amount,
-                                 String otherParty, String date) {
-        requireAllNonNull(index, description, amount, otherParty, date);
+    public AddTransactionCommand(Index index, Transaction transaction) {
+        requireAllNonNull(index, transaction);
 
         this.index = index;
-        this.description = description;
-        this.amount = amount;
-        this.otherParty = otherParty;
-        this.date = date;
+        toAdd = transaction;
     }
 
     @Override
@@ -66,10 +61,17 @@ public class AddTransactionCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person selected = lastShownList.get(index.getZeroBased());
-        Transaction toAdd = new Transaction(description, amount, otherParty, date);
-        selected.getTransactions().add(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(selected)));
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        List<Transaction> transactions = personToEdit.getTransactions();
+        transactions.add(toAdd);
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getCompany(), personToEdit.getPhone(),
+                personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getTags(), transactions);
+
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        return new CommandResult(String.format(MESSAGE_ADD_TRANSACTION_SUCCESS, Messages.format(toAdd),
+                Messages.format(editedPerson)));
     }
 
     @Override
@@ -83,11 +85,7 @@ public class AddTransactionCommand extends Command {
         }
 
         AddTransactionCommand otherCommand = (AddTransactionCommand) other;
-        return index.equals(otherCommand.index)
-                && description.equals(otherCommand.description)
-                && amount == otherCommand.amount
-                && otherParty.equals(otherCommand.otherParty)
-                && date.equals(otherCommand.otherParty);
+        return index.equals(otherCommand.index) && toAdd.equals(otherCommand.toAdd);
     }
 
 }

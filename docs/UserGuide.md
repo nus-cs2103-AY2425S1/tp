@@ -145,6 +145,33 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding a Transaction to a specified person: `addt`
+
+Format: `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE`
+
+* Adds a transaction to the person at the specified `INDEX`
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `addt 1 d/buy raw materials amt/-100 o/Company ABC dt/16-10-2024`
+* `list` followed by `addt 1 d/buy raw materials amt/-100 o/Company ABC dt/16-10-2024` 
+adds the transaction to the 1st person in the address book.
+* `find Betsy` followed by `addt 1 d/sell raw materials amt/200 o/Company XYZ dt/01-09-2024` 
+adds the transaction to the 1st person in the results of the `find` command.
+
+### Listing Transactions for a specified person: `listt`
+
+Format: `listt INDEX`
+
+* Lists the transactions for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `listt 1` lists transactions for the 1st person in the address book.
+* `find Betsy` followed by `listt 1` lists the transactions for the 1st person in the results of the `find` command.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -202,4 +229,6 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
+**Add Transaction** | `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE` <br> e.g., `addt 1 d/buy raw materials amt/-100 o/Company ABC dt/16-10-2024` 
+**List Transactions** | `listt INDEX`<br> e.g., `listt 2`
 **Help**   | `help`
