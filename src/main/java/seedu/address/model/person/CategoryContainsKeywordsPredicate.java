@@ -18,10 +18,10 @@ public class CategoryContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         // Check if category is null before trying to compare
-        if (person.getCategory() == null) {
+        if (person.getCategoryDisplayName() == null) {
             return false; // If the category is null, it does not match the keyword
         }
-        return StringUtil.containsWordIgnoreCase(person.getCategory(), keyword);
+        return StringUtil.containsWordIgnoreCase(person.getCategoryDisplayName(), keyword);
     }
 
     @Override
