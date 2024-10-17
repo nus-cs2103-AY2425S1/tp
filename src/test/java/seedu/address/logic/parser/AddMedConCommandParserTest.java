@@ -82,6 +82,10 @@ public class AddMedConCommandParserTest {
         // NRIC parameter missing
         assertParseFailure(parser, MEDCON_DESC_AMY, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddMedConCommand.MESSAGE_USAGE));
+
+        // MedCon parameter missing
+        assertParseFailure(parser, NRIC_DESC_AMY, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                                                  AddMedConCommand.MESSAGE_USAGE));
     }
 
 
