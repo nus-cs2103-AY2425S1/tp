@@ -10,13 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.StringUtil;
 
 /**
  * Controller for a help page
  */
 public class HelpWindow extends UiPart<Stage> {
-    public static final String EXTRA_HELP_MESSAGE = "\nFor more information, refer to the user guide: ";
-
     private static final String HELP_PATH = "docs/help/help.txt";
     private static final String FXML = "HelpWindow.fxml";
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
@@ -35,6 +34,7 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(loadHelpMessage());
+        copyButton.setOnAction(event -> copyUrl());
     }
 
     /**
@@ -48,18 +48,22 @@ public class HelpWindow extends UiPart<Stage> {
      * Reads the help message from a file.
      */
     private String loadHelpMessage() {
-        String helpMessage = "";
+        StringBuilder helpMessage = new StringBuilder();
         try {
             BufferedReader br = new BufferedReader(new FileReader(HELP_PATH));
             String line;
             while ((line = br.readLine()) != null) {
-                helpMessage += line + "\n";
+                helpMessage.append(line).append("\n");
             }
         } catch (IOException e) {
             System.out.println("Error! Could not retrieve help message from file.");
-            return "Failed to load help message." + EXTRA_HELP_MESSAGE;
+            return "Failed to load help message.";
         }
-        return helpMessage + EXTRA_HELP_MESSAGE;
+        return helpMessage.toString();
+    }
+
+    private void copyUrl() {
+        StringUtil.copyToClipboard("https://ay2425s1-cs2103t-w14-4.github.io/tp/UserGuide.html");
     }
 
     /**
