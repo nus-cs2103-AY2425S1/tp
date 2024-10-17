@@ -15,7 +15,6 @@ import seedu.address.model.person.TagContainsKeywordsPredicate;
 public class FindTagCommand extends Command {
 
     public static final String COMMAND_WORD = "findtag";
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Findtag command not implemented yet";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose tags contain any of "
             + "the specified keywords and displays them as a list with index numbers.\n"
