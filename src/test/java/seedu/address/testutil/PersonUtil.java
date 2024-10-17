@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
@@ -36,6 +37,9 @@ public class PersonUtil {
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
         sb.append(PREFIX_COURSE + person.getCourse().course + " ");
         sb.append(PREFIX_TAG + person.getTag().toString() + " ");
+        person.getModules().forEach(module -> {
+            sb.append(PREFIX_MODULE + module.value + " ");
+        });
         return sb.toString();
     }
 
@@ -52,6 +56,10 @@ public class PersonUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getCourse().ifPresent(course -> sb.append(PREFIX_COURSE).append(course.course).append(" "));
         descriptor.getTag().ifPresent(tag -> sb.append(PREFIX_TAG).append(tag.role).append(" "));
+        descriptor.getModules().ifPresent(modules -> modules.forEach(
+                                                module -> {
+                                                    sb.append(PREFIX_MODULE).append(module.value).append(" ");
+                                                }));
 
         return sb.toString();
     }

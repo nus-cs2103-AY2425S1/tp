@@ -26,7 +26,7 @@ public class Person {
     private final Address address;
     private final Course course;
     private final Tag tag;
-    private final ArrayList<Module> modules;
+    private ArrayList<Module> modules = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -41,7 +41,6 @@ public class Person {
         this.address = address;
         this.course = course;
         this.tag = tag;
-        this.modules = new ArrayList<>();
     }
 
     /**
@@ -129,7 +128,7 @@ public class Person {
      * if modification is attempted.
      */
     public ArrayList<Module> getModules() {
-        return modules;
+        return new ArrayList<>(modules);
     }
 
     /**

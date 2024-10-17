@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -22,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -103,8 +105,11 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse());
         Tag updatedTag = editPersonDescriptor.getTag().orElse(personToEdit.getTag());
-        return new Person(updatedStudentId, updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedCourse, updatedTag);
+        ArrayList<Module> updatedModules = editPersonDescriptor.getModules().orElse(personToEdit.getModules());
+
+        Person editedPerson = new Person(updatedStudentId, updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedCourse, updatedTag, updatedModules);
+        return editedPerson;
     }
 
     @Override
@@ -143,6 +148,7 @@ public class EditCommand extends Command {
         private Address address;
         private Course course;
         private Tag tag;
+        private ArrayList<Module> modules;
 
         public EditPersonDescriptor() {}
 
@@ -158,13 +164,14 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setCourse(toCopy.course);
             setTag(toCopy.tag);
+            setModules(toCopy.modules);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(studentId, name, phone, email, address, course, tag);
+            return CollectionUtil.isAnyNonNull(studentId, name, phone, email, address, course, tag, modules);
         }
 
         public void setStudentId(StudentId studentId) {
@@ -232,6 +239,17 @@ public class EditCommand extends Command {
             return Optional.ofNullable(tag);
         }
 
+        public void setModules(ArrayList<Module> modules) {
+            this.modules = (modules != null) ? new ArrayList<>(modules) : null;
+        }
+        public Optional<ArrayList<Module>> getModules() {
+            return (modules != null) ? Optional.of(modules) : Optional.empty();
+        }
+
+        public void addModule(Module module) {
+            this.modules.add(module);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -250,7 +268,8 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(course, otherEditPersonDescriptor.course)
-                    && Objects.equals(tag, otherEditPersonDescriptor.tag);
+                    && Objects.equals(tag, otherEditPersonDescriptor.tag)
+                    && Objects.equals(modules, otherEditPersonDescriptor.modules);
         }
 
         @Override
@@ -263,6 +282,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("course", course)
                     .add("tags", tag)
+                    .add("modules", modules)
                     .toString();
         }
     }

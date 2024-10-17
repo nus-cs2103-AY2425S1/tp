@@ -48,7 +48,6 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         course = new Course(DEFAULT_COURSE);
         tag = new Tag(DEFAULT_TAG);
-        modules = new ArrayList<>();
     }
 
     /**
@@ -126,6 +125,9 @@ public class PersonBuilder {
      */
     public PersonBuilder addUngradedModule(String module) {
         Module personModule = new Module(module);
+        if (this.modules == null) {
+            this.modules = new ArrayList<>();
+        }
         this.modules.add(personModule);
         return this;
     }
@@ -137,7 +139,19 @@ public class PersonBuilder {
         Module personModule = new Module(module);
         Grade moduleGrade = new Grade(grade);
         personModule.setGrade(moduleGrade);
+        if (this.modules == null) {
+            this.modules = new ArrayList<>();
+        }
         this.modules.add(personModule);
+        return this;
+    }
+
+    /**
+     * Empties the {@code ArrayList<Module>} of the {@code Person} that we are building
+     * for testing utility purposes.
+     */
+    public PersonBuilder emptyModuleList() {
+        this.modules = new ArrayList<>();
         return this;
     }
 
@@ -146,7 +160,9 @@ public class PersonBuilder {
      */
     public Person build() {
         Person p = new Person(studentId, name, phone, email, address, course, tag);
-        p.setModules(modules);
+        if (modules != null && !modules.isEmpty()) {
+            p.setModules(modules);
+        }
         return p;
     }
 }

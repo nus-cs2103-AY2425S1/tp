@@ -1,9 +1,13 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
+
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Grade;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -37,6 +41,12 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setCourse(person.getCourse());
         descriptor.setTag(person.getTag());
+        descriptor.setModules(person.getModules());
+    }
+
+    public EditPersonDescriptorBuilder setEmptyModuleList() {
+        descriptor.setModules(null);
+        return this;
     }
 
     /**
@@ -95,6 +105,33 @@ public class EditPersonDescriptorBuilder {
         descriptor.setTag(new Tag(tag));
         return this;
     }
+    /**
+     * Parses the ungraded {@code module} into a {@code ArrayList<Module>} and
+     * set it to the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder addUngradedModule(String module) {
+        Module personModule = new Module(module);
+        if (descriptor.getModules().isEmpty()) {
+            descriptor.setModules(new ArrayList<>());
+        }
+        descriptor.addModule(personModule);
+        return this;
+    }
+    /**
+     * Parses the graded {@code module} into a {@code ArrayList<Module>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder addGradedModule(String module, String grade) {
+        Module personModule = new Module(module);
+        Grade moduleGrade = new Grade(grade);
+        personModule.setGrade(moduleGrade);
+        if (descriptor.getModules().isEmpty()) {
+            descriptor.setModules(new ArrayList<>());
+        }
+        descriptor.addModule(personModule);
+        return this;
+    }
+
 
     public EditPersonDescriptor build() {
         return descriptor;
