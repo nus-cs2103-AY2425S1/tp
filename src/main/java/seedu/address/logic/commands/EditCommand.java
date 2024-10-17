@@ -100,8 +100,8 @@ public class EditCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Optional<Email> updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Optional<Address> updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         DateOfLastVisit dateOfLastVisit = editPersonDescriptor.getDateOfLastVisit()
                 .orElse(personToEdit.getDateOfLastVisit());
@@ -140,8 +140,8 @@ public class EditCommand extends Command {
     public static class EditPersonDescriptor {
         private Name name;
         private Phone phone;
-        private Email email;
-        private Address address;
+        private Optional<Email> email;
+        private Optional<Address> address;
         private Set<Tag> tags;
         private DateOfLastVisit dateOfLastVisit;
 
@@ -183,19 +183,19 @@ public class EditCommand extends Command {
             return Optional.ofNullable(phone);
         }
 
-        public void setEmail(Email email) {
+        public void setEmail(Optional<Email> email) {
             this.email = email;
         }
 
-        public Optional<Email> getEmail() {
+        public Optional<Optional<Email>> getEmail() {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
+        public void setAddress(Optional<Address> address) {
             this.address = address;
         }
 
-        public Optional<Address> getAddress() {
+        public Optional<Optional<Address>> getAddress() {
             return Optional.ofNullable(address);
         }
 

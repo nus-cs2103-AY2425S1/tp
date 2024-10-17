@@ -16,7 +16,9 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfLastVisit;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.testutil.PersonBuilder;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "     \t   "; // entirely whitespace
@@ -29,8 +31,9 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_SPECIAL_CHARACTER_NAME = "Jane-Mary Sue/anne";
     private static final String VALID_PHONE = BENSON.getPhone().toString();
-    private static final String VALID_EMAIL = BENSON.getEmail().toString();
-    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
+    private static final String VALID_EMAIL = BENSON.getEmail().get().toString();
+    private static final String VALID_ADDRESS = BENSON.getAddress().get().toString();
+    private static final String VALID_EMPTY_FIELD = "";
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
@@ -98,6 +101,17 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
+    public void toModelType_noEmail_returnsPerson() throws Exception {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMPTY_FIELD,
+                VALID_ADDRESS, VALID_TAGS, VALID_DATEOFLASTVISIT);
+        String[] validTagsInString = VALID_TAGS.stream().map(tag -> tag.getTagName()).toArray(String[]::new);
+        Person expectedPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
+                .withEmail().withAddress(VALID_ADDRESS).withTags(validTagsInString)
+                .withDateOfLastVisit(VALID_DATEOFLASTVISIT).build();
+        assertEquals(expectedPerson, person.toModelType());
+    }
+
+    @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
@@ -112,6 +126,17 @@ public class JsonAdaptedPersonTest {
                 null, VALID_TAGS, VALID_DATEOFLASTVISIT);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_noAddress_returnsPerson() throws Exception {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_EMPTY_FIELD, VALID_TAGS, VALID_DATEOFLASTVISIT);
+        String[] validTagsInString = VALID_TAGS.stream().map(tag -> tag.getTagName()).toArray(String[]::new);
+        Person expectedPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
+                .withEmail(VALID_EMAIL).withAddress().withTags(validTagsInString)
+                .withDateOfLastVisit(VALID_DATEOFLASTVISIT).build();
+        assertEquals(expectedPerson, person.toModelType());
     }
 
     @Test
@@ -139,5 +164,16 @@ public class JsonAdaptedPersonTest {
                 VALID_ADDRESS, VALID_TAGS, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DateOfLastVisit.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_noAddressNoEmail_returnsPerson() throws Exception {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMPTY_FIELD,
+                VALID_EMPTY_FIELD, VALID_TAGS, VALID_DATEOFLASTVISIT);
+        String[] validTagsInString = VALID_TAGS.stream().map(tag -> tag.getTagName()).toArray(String[]::new);
+        Person expectedPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
+                .withEmail().withAddress().withTags(validTagsInString)
+                .withDateOfLastVisit(VALID_DATEOFLASTVISIT).build();
+        assertEquals(expectedPerson, person.toModelType());
     }
 }

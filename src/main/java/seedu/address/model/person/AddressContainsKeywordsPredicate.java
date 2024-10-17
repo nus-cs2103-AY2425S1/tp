@@ -17,9 +17,14 @@ public class AddressContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+        // Returns false if the person does not have an address.
+        if (!person.hasAddress()) {
+            return false;
+        }
+
         // Checks if the string i.e (address) contains a keyword, allowing partial matching of address via find command
         return keywords.stream()
-                .anyMatch(keyword -> person.getAddress().value.toLowerCase().contains(keyword.toLowerCase()));
+                .anyMatch(keyword -> person.getAddress().get().value.toLowerCase().contains(keyword.toLowerCase()));
     }
 
     @Override

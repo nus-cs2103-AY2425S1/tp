@@ -25,8 +25,8 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]... "
             + PREFIX_DATEOFLASTVISIT + "DATEOFLASTVISIT \n"
             + "Example: " + COMMAND_WORD + " "
@@ -38,7 +38,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney "
             + PREFIX_DATEOFLASTVISIT + "01-03-2024";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_SUCCESS = "Person successfully added. New person: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
