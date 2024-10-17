@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -65,8 +66,14 @@ public class BackupManagerTest {
     }
 
     @Test
-    public void cleanOldBackups_throwsExceptionForInvalidMaxBackups() {
-        assertThrows(IllegalArgumentException.class, () -> backupManager.cleanOldBackups(0));
+    public void cleanOldBackups_throwsExceptionForInvalidMaxBackups() throws IOException {
+        try {
+            backupManager.cleanOldBackups(0); // Should trigger IllegalArgumentException
+            fail("Expected IllegalArgumentException to be thrown for maxBackups < 1.");
+        } catch (IllegalArgumentException e) {
+            assertEquals("maxBackups must be at least 1.", e.getMessage(),
+                    "The exception message should match the expected message.");
+        }
     }
 
     @Test

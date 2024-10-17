@@ -108,7 +108,11 @@ public class StorageManagerTest {
 
     @Test
     public void cleanOldBackups_invalidMaxBackups_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> storageManager.cleanOldBackups(0),
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, (
+                ) -> storageManager.cleanOldBackups(0),
                 "Expected IllegalArgumentException for maxBackups < 1.");
+
+        assertEquals("maxBackups must be at least 1.", exception.getMessage());
     }
+
 }

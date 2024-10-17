@@ -97,9 +97,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_backup() throws Exception {
-        String backupPath = "/path/to/backup.json";
-        BackupCommand command = (BackupCommand) parser.parseCommand(BackupCommand.COMMAND_WORD + " " + backupPath);
-        assertEquals(new BackupCommand(backupPath), command);
+        BackupCommand command = (BackupCommand) parser.parseCommand(BackupCommand.COMMAND_WORD + " ");
+        assertEquals(new BackupCommand(), command);
     }
 
     @Test

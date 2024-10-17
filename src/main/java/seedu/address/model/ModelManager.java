@@ -5,7 +5,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Optional;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,9 +15,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.person.Person;
+import seedu.address.storage.BackupManager;
 import seedu.address.storage.Storage;
+
 
 /**
  * Represents the in-memory model of the address book data.
@@ -23,10 +26,11 @@ import seedu.address.storage.Storage;
 public class ModelManager implements Model {
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss-SSS");
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final Storage storage;
+    private final BackupManager backupManager; // Add this if not already present
     private final FilteredList<Person> filteredPersons;
 
     /**
@@ -34,9 +38,11 @@ public class ModelManager implements Model {
      *
      * @param addressBook The address book data to initialize the model with.
      * @param userPrefs   The user preferences to initialize the model with.
-     * @param storage     The storage to be used by the model, for backup and restore operations.
+     * @param storage     The storage to be used by the model for backup and restore operations.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, Storage storage) {
+    public ModelManager(ReadOnlyAddressBook addressBook,
+                        ReadOnlyUserPrefs userPrefs,
+                        Storage storage) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(userPrefs);
 
@@ -46,11 +52,12 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.storage = storage; // Storage instance to handle backup and restore.
+        this.storage = storage;
+        this.backupManager = new BackupManager(Paths.get("backups"));
         this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
-    public ModelManager() {
+    public ModelManager() throws IOException {
         this(new AddressBook(), new UserPrefs(), null);
     }
 
@@ -94,6 +101,7 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
+        triggerBackup(); // Trigger backup after setting new data
     }
 
     @Override
@@ -110,18 +118,47 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        triggerBackup(); // Trigger backup after deletion
     }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        triggerBackup(); // Trigger backup after addition
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
+        triggerBackup(); // Trigger backup after editing
+    }
+
+    @Override
+    public void backupData(String filePath) throws IOException {
+        if (storage == null) {
+            throw new IOException("Storage is not initialized!");
+        }
+
+        // If filePath is null, provide a default backup path
+        if (filePath == null) {
+            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss-SSS"));
+            filePath = String.format("backups/clinicbuddy-backup-%s.json", timestamp);
+        }
+
+        logger.info("Manual backup triggered to path: " + filePath);
+        storage.saveAddressBook(getAddressBook(), Paths.get(filePath));
+    }
+
+    // Automatically trigger backup after operations
+    protected void triggerBackup() {
+        try {
+            logger.info("Automatic backup triggered.");
+            backupManager.triggerBackup(storage.getAddressBookFilePath());
+        } catch (IOException e) {
+            logger.warning("Backup failed: " + e.getMessage());
+        }
     }
 
     // ============ Filtered Person List Accessors =======================================================
@@ -140,55 +177,7 @@ public class ModelManager implements Model {
     // ============ Backup and Restore Methods ===========================================================
 
     /**
-     * Backs up the AddressBook data to the specified file path.
-     *
-     * @param filePath The file path to save the backup.
-     * @throws IOException If there is an error during the backup process.
-     */
-    @Override
-    public void backupData(String filePath) throws IOException {
-        requireNonNull(filePath);
-        if (storage != null) {
-            logger.info("Backing up data to: " + filePath);
-            storage.saveAddressBook(this.getAddressBook(), Path.of(filePath));
-
-            // Clean old backups, retaining only the most recent 5 backups
-            storage.cleanOldBackups(5);
-        } else {
-            throw new IOException("Storage is not initialized!");
-        }
-    }
-
-    /**
-     * Restores the AddressBook from the most recent backup, if available.
-     *
-     * @return True if the restore was successful, false otherwise.
-     * @throws IOException If there is an error during the restore process.
-     */
-    public boolean restoreFromBackup() throws IOException {
-        if (storage != null) {
-            Optional<Path> restoredPath = storage.restoreBackup();
-            if (restoredPath.isPresent()) {
-                try {
-                    logger.info("Restored AddressBook from backup: " + restoredPath.get());
-                    setAddressBook(storage.readAddressBook(restoredPath.get()).orElse(new AddressBook()));
-                    return true;
-                } catch (DataLoadingException e) {
-                    logger.warning("Failed to load data from backup: " + e.getMessage());
-                    throw new IOException("Error loading backup data", e);
-                }
-            } else {
-                logger.warning("No backup found to restore.");
-                return false;
-            }
-        } else {
-            throw new IOException("Storage is not initialized!");
-        }
-    }
-
-
-    /**
-     * Cleans up old backups, retaining only the most recent `maxBackups`.
+     * Cleans up old backups, retaining only the latest `maxBackups`.
      *
      * @param maxBackups The number of backups to retain.
      * @throws IOException If there is an error during cleanup.

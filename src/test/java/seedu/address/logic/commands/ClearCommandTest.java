@@ -40,7 +40,7 @@ public class ClearCommandTest {
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
     }
 
-    private Model createModelWithAddressBook(AddressBook addressBook) {
+    private Model createModelWithAddressBook(AddressBook addressBook) throws IOException {
         return new ModelManager(addressBook, new UserPrefs(), storage);
     }
 
@@ -48,7 +48,7 @@ public class ClearCommandTest {
      * Tests the successful execution of clearing an empty address book.
      */
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyAddressBook_success() throws IOException {
         Model model = createModelWithAddressBook(new AddressBook());
         Model expectedModel = createModelWithAddressBook(new AddressBook());
 
@@ -59,7 +59,7 @@ public class ClearCommandTest {
      * Tests the successful execution of clearing a non-empty address book.
      */
     @Test
-    public void execute_nonEmptyAddressBook_success() {
+    public void execute_nonEmptyAddressBook_success() throws IOException {
         Model model = createModelWithAddressBook(getTypicalAddressBook());
         Model expectedModel = createModelWithAddressBook(getTypicalAddressBook());
         expectedModel.setAddressBook(new AddressBook());
