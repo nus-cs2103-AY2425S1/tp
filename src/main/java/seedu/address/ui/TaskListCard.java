@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringBinding;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
@@ -35,8 +37,9 @@ public class TaskListCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescription());
         patient.setText(task.getPatient().getName().fullName);
-        status.textProperty().bind(task.isCompleteProperty().asString().map(
-                isComplete -> task.getStatusString()
-        ));
+        StringBinding statusBinding = Bindings.createStringBinding(() ->
+                task.getStatusString(), task.isCompleteProperty());
+
+        status.textProperty().bind(statusBinding);
     }
 }
