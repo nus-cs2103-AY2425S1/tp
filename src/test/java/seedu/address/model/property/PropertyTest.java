@@ -129,4 +129,73 @@ class PropertyTest {
                         + "size=85.50, bedrooms=3, bathrooms=2, price=500000.00, remark=No remark]",
                 property.toString());
     }
+
+    @Test
+    void testPropertyCreationWithEdgeValues() {
+        Property property = new Property(
+                "123 Main St",
+                "Central Town",
+                "Apartment",
+                0.0,  // Edge case for size
+                0,     // Edge case for bedrooms
+                0,     // Edge case for bathrooms
+                0.0,   // Edge case for price
+                Optional.empty() // No remark
+        );
+
+        assertEquals(0.0, property.getSize());
+        assertEquals(0, property.getNumberOfBedrooms());
+        assertEquals(0, property.getNumberOfBathrooms());
+        assertEquals(0.0, property.getPrice());
+        assertEquals(Optional.empty(), property.getRemark());
+    }
+
+    @Test
+    void testHashCodeConsistency() {
+        Property property1 = new Property("123 Main St", "Central Town", "Apartment", 85.5, 3, 2, 500000.0, Optional.of("Great view"));
+        Property property2 = new Property("123 Main St", "Central Town", "Apartment", 85.5, 3, 2, 500000.0, Optional.of("Great view"));
+
+        assertEquals(property1.hashCode(), property2.hashCode());
+    }
+
+    @Test
+    void testEqualsNullComparison() {
+        Property property = new Property("123 Main St", "Central Town", "Apartment", 85.5, 3, 2, 500000.0, Optional.of("Great view"));
+
+        assertNotEquals(property, null);
+    }
+
+    @Test
+    void testEqualsDifferentClass() {
+        Property property = new Property("123 Main St", "Central Town", "Apartment", 85.5, 3, 2, 500000.0, Optional.of("Great view"));
+
+        assertNotEquals(property, "Not a Property");
+    }
+
+    @Test
+    void testPropertyWithDifferentRemarks() {
+        Property property1 = new Property("123 Main St", "Central Town", "Apartment", 85.5, 3, 2, 500000.0, Optional.of("Great view"));
+        Property property2 = new Property("123 Main St", "Central Town", "Apartment", 85.5, 3, 2, 500000.0, Optional.of("No view"));
+
+        assertNotEquals(property1, property2);
+    }
+
+    @Test
+    void testToStringWithEmptyRemark() {
+        Property property = new Property(
+                "123 Main St",
+                "Central Town",
+                "Apartment",
+                85.5,
+                3,
+                2,
+                500000.0,
+                Optional.empty()
+        );
+
+        String expected = "Property[address=123 Main St, town=Central Town, type=Apartment, "
+                + "size=85.50, bedrooms=3, bathrooms=2, price=500000.00, remark=No remark]";
+
+        assertEquals(expected, property.toString());
+    }
 }
