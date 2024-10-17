@@ -2,19 +2,23 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Appt;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.person.Appt;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -123,17 +127,32 @@ public class ParserUtil {
         return tagSet;
     }
 
-    /*
+    /**
      * Parses a {@code String date} into an {@code Appt}.
      * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the given {@code date} is invalid.
      */
-    public static Appt parseAppt(String date) throws ParseException {
-        requireNonNull(date);
-        String trimmedDate = date.trim();
-        if (!Appt.isValidAppt(trimmedDate)) {
-            throw new ParseException(Appt.MESSAGE_CONSTRAINTS);
+    public static Appt parseSingleAppt(LocalDateTime dateTime) {
+        requireNonNull(dateTime);
+        return new Appt(dateTime);
+    }
+
+    /**
+     * Parses {@code Collection<String> dates} into a {@code List<Appt>}.
+     */
+    public static List<Appt> parseAppts(Collection<String> dates) throws ParseException {
+        requireNonNull(dates);
+        final List<Appt> apptList = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        for (String date : dates) {
+            String trimmedDate = date.trim();
+            if (!Appt.isValidAppt(trimmedDate)) {
+                throw new ParseException(Appt.MESSAGE_CONSTRAINTS);
+            }
+            LocalDateTime trimmedDateTime = LocalDateTime.parse(trimmedDate, formatter);
+            apptList.add(parseSingleAppt(trimmedDateTime));
         }
-        return new Appt(trimmedDate);
+        return apptList;
     }
 }

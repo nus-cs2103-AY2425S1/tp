@@ -1,36 +1,48 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a Person's appointment date in the address book.
  * Guarantees: immutable; is always valid
  */
 public class Appt {
     public static final String MESSAGE_CONSTRAINTS = null;
-    public final String date;
+    private final LocalDateTime dateTime;
 
-    public Appt(String date) {
-        requireNonNull(date);
-        this.date = date;
+    /**
+     * Constructs a {@code Appt}.
+     * @param dateTime A valid appointment date.
+     */
+    public Appt(LocalDateTime dateTime) {
+        requireNonNull(dateTime);
+        this.dateTime = dateTime;
     }
 
-    @Override
-    public String toString() {
-        return date;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Appt // instanceof handles nulls
-                && date.equals(((Appt) other).date)); // state check
+                && dateTime.equals(((Appt) other).dateTime)); // state check
     }
     @Override
     public int hashCode() {
-        return date.hashCode();
+        return dateTime.hashCode();
     }
 
     public static boolean isValidAppt(String trimmedDate) {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 }
