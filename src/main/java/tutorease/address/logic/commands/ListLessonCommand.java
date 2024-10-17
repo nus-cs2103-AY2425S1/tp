@@ -12,9 +12,14 @@ import tutorease.address.model.Model;
 public class ListLessonCommand extends Command {
     public static final String COMMAND_WORD = "list";
     public static final String MESSAGE_SUCCESS = "Listed all lessons";
+    public static final String MESSAGE_NO_LESSONS_FOUND = "No lessons have been created:).";
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (model.getFilteredLessonList().isEmpty()) {
+            return new CommandResult(MESSAGE_NO_LESSONS_FOUND); // No lessons found
+        }
         model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
