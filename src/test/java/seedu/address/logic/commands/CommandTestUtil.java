@@ -40,6 +40,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_POLICY_TYPE_HEALTH = "health";
     public static final String VALID_POLICY_TYPE_EDUCATION = "education";
+    public static final String VALID_POLICY_TYPE_LIFE = "life";
 
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -54,6 +55,7 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String POLICY_TYPE_DESC_HEALTH = " " + PREFIX_POLICY_TYPE + VALID_POLICY_TYPE_HEALTH;
     public static final String POLICY_TYPE_DESC_EDUCATION = " " + PREFIX_POLICY_TYPE + VALID_POLICY_TYPE_EDUCATION;
+    public static final String POLICY_TYPE_DESC_LIFE = " " + PREFIX_POLICY_TYPE + VALID_POLICY_TYPE_LIFE;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
