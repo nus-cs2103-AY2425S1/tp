@@ -243,3 +243,6 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
+**Create Group** | `createGroup g/GROUP_NAME m/[INDICES]`
+**View Group**   | `viewGroup g/GROUP_NAME`
+**Delete Group** | `deleteGroup g/GROUP_NAME`
