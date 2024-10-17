@@ -54,7 +54,8 @@ public class UnassignProductCommandTest {
                 new ProductName(VALID_PRODUCT_APPLE_PIE),
                 new Name("Nonexistent Supplier"));
 
-        assertCommandFailure(unassignProductCommand, model, String.format(UnassignProductCommand.MESSAGE_SUPPLIER_NOT_FOUND,
+        assertCommandFailure(unassignProductCommand, model, String.format(UnassignProductCommand
+                        .MESSAGE_SUPPLIER_NOT_FOUND,
                 "Nonexistent Supplier"));
     }
 
@@ -67,7 +68,8 @@ public class UnassignProductCommandTest {
                 new ProductName("Nonexistent Product"),
                 new Name(VALID_NAME_AMY));
 
-        assertCommandFailure(unassignProductCommand, model, String.format(UnassignProductCommand.MESSAGE_PRODUCT_NOT_FOUND,
+        assertCommandFailure(unassignProductCommand, model, String.format(UnassignProductCommand
+                        .MESSAGE_PRODUCT_NOT_FOUND,
                 "Nonexistent Product"));
     }
 
