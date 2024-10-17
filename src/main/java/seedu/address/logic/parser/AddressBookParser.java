@@ -91,11 +91,32 @@ public class AddressBookParser {
         case AddIngredientCommand.COMMAND_WORD:
             return new AddIngredientCommandParser().parse(arguments);
 
+        case AddCustomerOrderCommand.COMMAND_WORD:
+            return new AddCustomerOrderCommandParser().parse(arguments);
+
+        case AddSupplyOrderCommand.COMMAND_WORD:
+            return new AddSupplyOrderCommandParser().parse(arguments);
+
+        case DeleteCustomerOrderCommand.COMMAND_WORD:
+            return new DeleteCustomerOrderCommandParser().parse(arguments);
+
+        case DeleteSupplyOrderCommand.COMMAND_WORD:
+            return new DeleteSupplyOrderCommandParser().parse(arguments);
+
         case RemoveIngredientCommand.COMMAND_WORD:
             return new RemoveIngredientCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case ViewIngredientCatalogueCommand.COMMAND_WORD:
+            return new ViewIngredientCatalogueCommand();
+
+        case ViewOrderListCommand.COMMAND_WORD:
+            return new ViewOrderListCommand();
+
+        case ViewPastryCatalogueCommand.COMMAND_WORD:
+            return new ViewPastryCatalogueCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

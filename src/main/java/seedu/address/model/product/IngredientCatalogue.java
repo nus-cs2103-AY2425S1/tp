@@ -21,7 +21,6 @@ public class IngredientCatalogue extends Catalogue {
 
     public IngredientCatalogue() {
         addDefaultProducts();
-        super.nextProductId += 6;
     }
 
     @Override
@@ -58,4 +57,5 @@ public class IngredientCatalogue extends Catalogue {
         }
         return ingredient;
     }
+
 }

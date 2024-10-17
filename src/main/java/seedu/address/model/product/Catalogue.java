@@ -54,4 +54,14 @@ public abstract class Catalogue {
         productCatalogue.put(newId, product);  // Add product with new ID
         System.out.println("ID of " + product.getName() + " changed from " + oldId + "to ID: " + newId);  // ID changed successfully
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<Integer, Product> entry : productCatalogue.entrySet()) {
+            sb.append(entry.getValue().toString());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }
