@@ -1,36 +1,29 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.TypicalPersons.*;
-
-import java.time.LocalDateTime;
-import java.util.Set;
-import java.util.TreeMap;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.DRALICE;
+import static seedu.address.testutil.TypicalPersons.DRBENSON;
+import static seedu.address.testutil.TypicalPersons.DRELLE;
+import static seedu.address.testutil.TypicalPersons.PATIENTALICE;
+import static seedu.address.testutil.TypicalPersons.PATIENTBENSON;
+import static seedu.address.testutil.TypicalPersons.PATIENTCARL;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.address.model.tag.Tag;
 
 public class AppointmentTest {
 
     private Appointment appointment;
     private Doctor doctor;
-    private Doctor doctor2;
     private Patient patient;
-    private Patient patient2;
-    private LocalDateTime appointmentDate;
-    private History history;
 
     @BeforeEach
     public void setUp() {
-        // Intialise static database
-        history = new History();
-
         patient = PATIENTALICE;
         doctor = DRBENSON;
-
-        // Initialize the appointment date/time
-        appointmentDate = LocalDateTime.of(2024, 10, 18, 10, 30);
 
         // Create an Appointment object
         appointment = new Appointment(patient.getId(), doctor.getId(), "Monthly check-up");
@@ -46,20 +39,20 @@ public class AppointmentTest {
 
     @Test
     public void constructor_nullDoctor_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> new Appointment(patient.getId(),null,"Monthly check-up"));
+        assertThrows(NullPointerException.class, () ->
+                new Appointment(patient.getId(), null, "Monthly check-up"));
     }
 
     @Test
     public void constructor_nullPatient_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> new Appointment(null, doctor.getId(), "Monthly check-up"));
+        assertThrows(NullPointerException.class, () ->
+                new Appointment(null, doctor.getId(), "Monthly check-up"));
     }
 
     @Test
     public void constructor_nullDate_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> new Appointment(doctor.getId(), patient.getId(), null));
+        assertThrows(NullPointerException.class, () ->
+                new Appointment(doctor.getId(), patient.getId(), null));
     }
 
     @Test
@@ -101,7 +94,7 @@ public class AppointmentTest {
 
     @Test
     public void toAString() {
-        assertEquals(appointment.toString(),"Appointment: " + appointment.getPatientId()
+        assertEquals(appointment.toString(), "Appointment: " + appointment.getPatientId()
                 + " (patient id) with " + appointment.getDoctorId() + " (doctor id). "
                 + "Remarks: " + appointment.getRemarks());
     }

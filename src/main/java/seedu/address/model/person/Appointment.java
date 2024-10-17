@@ -1,8 +1,8 @@
 package seedu.address.model.person;
 
-import java.util.Objects;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Objects;
 
 /**
  * A class meant to group all relevant details of an appointment together.
