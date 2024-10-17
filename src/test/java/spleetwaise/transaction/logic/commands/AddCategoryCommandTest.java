@@ -13,7 +13,6 @@ import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.transaction.logic.commands.exceptions.CommandException;
 import spleetwaise.transaction.model.ModelManager;
 import spleetwaise.transaction.model.transaction.Amount;
-import spleetwaise.transaction.model.transaction.Categories;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Transaction;

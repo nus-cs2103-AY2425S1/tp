@@ -37,6 +37,15 @@ public class Transaction {
         this.date = date;
     }
 
+    /**
+     * Represents a Transaction in the transaction book.
+     *
+     * @param person      The person involved in this transaction.
+     * @param amount      The amount involved in this transaction.
+     * @param description The description of the transaction.
+     * @param date        The date the transaction has taken place.
+     * @param cats        The categories the transaction has.
+     */
     public Transaction(Person person, Amount amount, Description description, Date date, Categories cats) {
         this(IdUtil.getId(), person, amount, description, date);
         this.cats = cats;
