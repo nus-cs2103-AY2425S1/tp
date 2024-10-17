@@ -40,15 +40,13 @@ public class Patient extends Person {
         return patients;
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Retrieves a patient by their Id object.
      *
      * @param patientId The Id object of the patient to search for.
      * @return The Patient object if found, or null if no matching patient is found.
      */
->>>>>>> master
+
     public static Patient getPatientWithId(Id patientId) {
         ArrayList<Patient> allPatients = getPatients();
         for (Patient patient : allPatients) {
@@ -56,14 +54,9 @@ public class Patient extends Person {
                 return patient;
             }
         }
-<<<<<<< HEAD
         return null;
     }
-
-=======
-        return null; // Return null if no matching patient is found
-    }
-
+    
     /**
      * Retrieves a patient by their ID as a String.
      *
@@ -79,5 +72,4 @@ public class Patient extends Person {
         }
         return null; // Return null if no matching patient is found
     }
->>>>>>> master
 }
