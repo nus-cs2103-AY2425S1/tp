@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ORGANISATION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PRIORITY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_REMARK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.LAST_SEEN_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.LAST_SEEN_DESC_BOB;
@@ -60,8 +61,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Organisation;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.Priority;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
@@ -89,7 +91,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB 
+                + ADDRESS_DESC_BOB + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB
                 + TAG_DESC_FRIEND + PRIORITY_DESC_LOW + REMARK_DESC_HANDSOME;
 
         // multiple names
@@ -115,7 +117,7 @@ public class AddCommandParserTest {
         // multiple last seen
         assertParseFailure(parser, LAST_SEEN_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LAST_SEEN));
-      
+
         // multiple remarks
         assertParseFailure(parser, REMARK_DESC_PRETTY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_REMARK));
@@ -148,7 +150,7 @@ public class AddCommandParserTest {
         // invalid organisation
         assertParseFailure(parser, INVALID_ORGANISATION_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ORGANISATION));
-      
+
         // invalid remark
         assertParseFailure(parser, INVALID_REMARK_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_REMARK));
@@ -174,7 +176,7 @@ public class AddCommandParserTest {
         // invalid organisation
         assertParseFailure(parser, validExpectedPersonString + INVALID_ORGANISATION_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ORGANISATION));
-      
+
         // invalid remark
         assertParseFailure(parser, validExpectedPersonString + INVALID_REMARK_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_REMARK));
@@ -255,7 +257,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB + VALID_TAG_HUSBAND + VALID_TAG_FRIEND
                 + INVALID_PRIORITY_DESC + REMARK_DESC_HANDSOME, Priority.MESSAGE_CONSTRAINTS);
-      
+
         //invalid remark
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB + VALID_TAG_HUSBAND + VALID_TAG_FRIEND

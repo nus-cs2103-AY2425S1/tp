@@ -236,7 +236,7 @@ public class EditCommand extends Command {
         public Optional<Priority> getPriority() {
             return Optional.ofNullable(priority);
         }
-        
+
         public void setRemark(Remark remark) {
             this.remark = remark;
         }
@@ -294,7 +294,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("organisation", organisation)
                     .add("last seen", lastSeen)
-                    .add("tags", tags) 
+                    .add("tags", tags)
                     .add("priority", priority)
                     .add("remark", remark)
                     .toString();

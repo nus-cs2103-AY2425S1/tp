@@ -76,11 +76,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_PRIORITY).isPresent()) {
             editPersonDescriptor.setPriority(ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get()));
         }
-          
+
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
             editPersonDescriptor.setRemark(ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get()));
-        } 
-        
+        }
+
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }

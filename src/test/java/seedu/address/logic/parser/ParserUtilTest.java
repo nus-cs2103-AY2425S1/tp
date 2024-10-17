@@ -221,7 +221,8 @@ public class ParserUtilTest {
         String priorityWithWhitespace = WHITESPACE + VALID_PRIORITY + WHITESPACE;
         Priority expectedPriority = new Priority(VALID_PRIORITY);
         assertEquals(expectedPriority, ParserUtil.parsePriority(priorityWithWhitespace));
-      
+    }
+
     @Test
     public void parseRemark_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseRemark((String) null));

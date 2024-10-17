@@ -111,7 +111,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPriority(new Priority(priority));
         return this;
     }
-      
+
     /**
      * Sets the {@code Remark} of the {@code EditPersonDescriptor} that we are building.
      */
