@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PHONE_NUMBER_KEYWORDS;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -19,6 +20,12 @@ public class FindPhoneNumberCommandParserTest {
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPhoneNumberCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_characterArgs_throwsParseException() {
+        assertParseFailure(parser, "not a number",
+                String.format(MESSAGE_INVALID_PHONE_NUMBER_KEYWORDS, FindPhoneNumberCommand.MESSAGE_USAGE));
     }
 
     @Test
