@@ -34,7 +34,9 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("matriculationNumber") String matriculationNumber, @JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedPerson(@JsonProperty("matriculationNumber") String matriculationNumber,
+                             @JsonProperty("name") String name,
+                             @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.matriculationNumber = matriculationNumber;
@@ -73,7 +75,8 @@ class JsonAdaptedPerson {
         }
 
         if (matriculationNumber == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, MatriculationNumber.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    MatriculationNumber.class.getSimpleName()));
         }
         if (!MatriculationNumber.isValidMatriculationNumber(matriculationNumber)) {
             throw new IllegalValueException(MatriculationNumber.MESSAGE_CONSTRAINTS);

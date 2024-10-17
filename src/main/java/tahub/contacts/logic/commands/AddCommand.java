@@ -1,9 +1,9 @@
 package tahub.contacts.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_MATRICULATION_NUMBER;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_MATRICULATION_NUMBER;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_TAG;

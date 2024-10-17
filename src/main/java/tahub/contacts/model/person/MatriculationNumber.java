@@ -3,9 +3,14 @@ package tahub.contacts.model.person;
 import static java.util.Objects.requireNonNull;
 import static tahub.contacts.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Person's matriculation number in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidMatriculationNumber(String)}
+ */
 public class MatriculationNumber {
 
-    public static final String MESSAGE_CONSTRAINTS = "Matriculation number should be of the format A<7 digits><Uppercase alphabetical character>, e.g., A1234567Z";
+    public static final String MESSAGE_CONSTRAINTS = "Matriculation number should be of the "
+            + "format A<7 digits><Uppercase alphabetical character>, e.g., A1234567Z";
     public static final String VALIDATION_REGEX = "^A\\d{7}[A-Z]$"; // A followed by 7 digits and an uppercase letter
 
     public final String value;

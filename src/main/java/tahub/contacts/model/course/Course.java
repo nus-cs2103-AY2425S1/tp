@@ -1,6 +1,5 @@
 package tahub.contacts.model.course;
 
-import static java.util.Objects.requireNonNull;
 import static tahub.contacts.commons.util.AppUtil.checkArgument;
 import static tahub.contacts.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -11,9 +10,12 @@ import static tahub.contacts.commons.util.CollectionUtil.requireAllNonNull;
 public class Course {
 
     public static final String COURSE_CODE_MESSAGE_CONSTRAINTS =
-            "Course code should start with one or more uppercase alphabets, followed by exactly 4 digits, and optionally end with an uppercase alphabet. e.g., CS2101 or CS1101S.";
+            "Course code should start with one or more uppercase alphabets, "
+                    + "followed by exactly 4 digits, and optionally end with an uppercase "
+                    + "alphabet. e.g., CS2101 or CS1101S.";
     public static final String COURSE_NAME_MESSAGE_CONSTRAINTS = "Course name should be alphanumeric";
-    public static final String COURSE_CODE_VALIDATION_REGEX = "^[A-Z]+\\d{4}[A-Z]?$"; // One or more uppercase letters, followed by 4 digits, and an optional uppercase letter
+    // One or more uppercase letters, followed by 4 digits, and an optional uppercase letter
+    public static final String COURSE_CODE_VALIDATION_REGEX = "^[A-Z]+\\d{4}[A-Z]?$";
     public static final String COURSE_NAME_VALIDATION_REGEX = "\\p{Alnum}+";
     public final String courseCode;
     public final String courseName;

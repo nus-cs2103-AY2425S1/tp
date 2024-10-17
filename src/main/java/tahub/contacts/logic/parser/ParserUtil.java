@@ -1,9 +1,11 @@
 package tahub.contacts.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
 import tahub.contacts.commons.core.index.Index;
 import tahub.contacts.commons.util.StringUtil;
 import tahub.contacts.logic.parser.exceptions.ParseException;
