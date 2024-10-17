@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.IdentityNumber;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -23,6 +24,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        if (IdentityNumber.isValidIdentityNumber(trimmedArgs)) {
+            //TODO: Implement FindCommand with the identity number.
+            // FindCommand with the identity number.
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");

@@ -38,8 +38,9 @@ public class ListLogsCommand extends Command {
 
         //TODO: Handle behaviour later
         //requireNonNull(model);
-        //model.updateFilteredPersonList(nric);
-        //return new CommandResult("The NRIC you inputted is: " + nric);
+        // Temporary stub
+        //model.updateFilteredLogsListById(this.identityNumber);
+        //return new CommandResult("The NRIC you inputted is: " + "nric");
     }
 
     @Override
