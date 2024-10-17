@@ -168,7 +168,7 @@ Format: `clear`
 
 ### Populating with dummy data
 
-Adds dummy data to the social book.
+Adds dummy data to the address book.
 
 Format: `seed`
 
