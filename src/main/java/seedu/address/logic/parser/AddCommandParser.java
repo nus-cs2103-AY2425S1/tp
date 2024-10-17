@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -16,7 +17,9 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
+import seedu.address.model.person.DateOfCreation;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.History;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -52,9 +55,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
         Birthday birthday = ParserUtil.parseBirthday(argMultimap.getValue(PREFIX_BIRTHDAY).orElse(""));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-        Person person = new Person(name, phone, email, address, remark, birthday, tagList);
-
+        DateOfCreation dateOfCreation = new DateOfCreation(LocalDate.now());
+        History history = History.addActivity(new History(dateOfCreation.getDateOfCreation()),
+                dateOfCreation.getDateOfCreation(), "Created");
+        Person person = new Person(name, phone, email, address, remark, birthday, tagList, dateOfCreation, history);
         return new AddCommand(person);
     }
 

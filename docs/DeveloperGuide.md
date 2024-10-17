@@ -627,16 +627,16 @@ display relevant contacts based on the input.
 
 ### **Error Scenarios:**
 
-- **Invalid Characters in Name:**  
-  Example: `search John123`  
+- **Invalid Characters in Name:**
+  Example: `search John123`
   `Error: Name must contain only alphabetic characters, spaces, hyphens, or apostrophes.`
 
-- **No Matching Contacts:**  
-  Example: `search Zyx`  
+- **No Matching Contacts:**
+  Example: `search Zyx`
   `Error: No contacts found for "Zyx".`
 
-- **Empty Search Input:**  
-  Example: `search` (with no name provided)  
+- **Empty Search Input:**
+  Example: `search` (with no name provided)
   `Error: No name provided. Please enter a name to search.`
 
 ---
@@ -648,7 +648,7 @@ To allow users to sort their contact list in alphabetical order (A-Z or Z-A) bas
 
 #### **Command Format:**
 
-`sort <order>`  
+`sort <order>`
 *Default: Ascending order*
 
 **Example Commands:**
@@ -708,12 +708,12 @@ To allow users to sort their contact list in alphabetical order (A-Z or Z-A) bas
 
 ### **Error Scenarios:**
 
-- **Invalid Sorting Order:**  
-  Example: `sort ascending`  
+- **Invalid Sorting Order:**
+  Example: `sort ascending`
   `Error: Invalid sorting order. Use 'asc' for ascending or 'desc' for descending.`
 
-- **Missing Sorting Order:**  
-  Example: `sort`  
+- **Missing Sorting Order:**
+  Example: `sort`
   `Error: No sorting order provided. Please specify 'asc' or 'desc'.`
 
 ---
@@ -782,16 +782,16 @@ details associated with that contact.
 
 ### **Error Scenarios:**
 
-- **Invalid ContactID:**  
-  Example: `view abc`  
+- **Invalid ContactID:**
+  Example: `view abc`
   `Error: Invalid ContactID. Please provide a valid numeric identifier.`
 
-- **Non-existent Contact:**  
-  Example: `view 9999` (assuming 9999 does not exist)  
+- **Non-existent Contact:**
+  Example: `view 9999` (assuming 9999 does not exist)
   `Error: Contact not found. Please check the ContactID and try again.`
 
-- **Missing ContactID:**  
-  Example: `view`  
+- **Missing ContactID:**
+  Example: `view`
   `Error: No ContactID provided. Please specify a valid ContactID to view details.`
 
 ### 5. **Feature: Support for Multiple Phone Numbers and Email Addresses for Each Contact**
@@ -936,16 +936,16 @@ reversed.
 
 ### **Error Scenarios:**
 
-- **Invalid ContactID:**  
-  Example: `undo abc`  
+- **Invalid ContactID:**
+  Example: `undo abc`
   `Error: Invalid ContactID. Please provide a valid numeric identifier.`
 
-- **No Recently Deleted Contact:**  
-  Example: `undo 9999` (assuming 9999 is not in the recent deletion history)  
+- **No Recently Deleted Contact:**
+  Example: `undo 9999` (assuming 9999 is not in the recent deletion history)
   `Error: No recently deleted contact found with ID 9999.`
 
-- **Undo Operation Not Possible:**  
-  Example: `undo 123` (if the grace period has expired or the contact is no longer recoverable)  
+- **Undo Operation Not Possible:**
+  Example: `undo 123` (if the grace period has expired or the contact is no longer recoverable)
   `Error: Cannot undo deletion. The grace period has expired or the contact does not exist.`
 
 ---
@@ -1010,10 +1010,10 @@ duplicate entries.
 
 ### **Error Scenarios:**
 
-- **Duplicate Contact Detected:**  
+- **Duplicate Contact Detected:**
   Example:
   ```
-  add /name John Smith /phone +123456789 /email john.smith@email.com  
+  add /name John Smith /phone +123456789 /email john.smith@email.com
   Error: A contact with this name, phone number, or email address already exists. Please provide unique details.
   ```
 
@@ -1083,16 +1083,16 @@ retrieval of important or frequently contacted individuals.
 
 ### **Error Scenarios:**
 
-- **Invalid ContactID:**  
-  Example: `favorite abc`  
+- **Invalid ContactID:**
+  Example: `favorite abc`
   `Error: Invalid ContactID. Please provide a valid numeric identifier.`
 
-- **Contact Not Found:**  
-  Example: `favorite 9999` (assuming 9999 does not exist)  
+- **Contact Not Found:**
+  Example: `favorite 9999` (assuming 9999 does not exist)
   `Error: Contact not found. Please check the ContactID and try again.`
 
-- **Already a Favorite:**  
-  Example: `favorite 123` (if contact 123 is already marked as a favorite)  
+- **Already a Favorite:**
+  Example: `favorite 123` (if contact 123 is already marked as a favorite)
   `Error: Contact is already marked as a favorite.`
 
 ---
@@ -1178,16 +1178,16 @@ review their communication history.
 
 ### **Error Scenarios:**
 
-- **Invalid ContactID:**  
-  Example: `log abc /interaction "Called on 2024-09-15"`  
+- **Invalid ContactID:**
+  Example: `log abc /interaction "Called on 2024-09-15"`
   `Error: Invalid ContactID. Please provide a valid numeric identifier.`
 
-- **Contact Not Found:**  
-  Example: `log 9999 /interaction "Meeting on 2024-09-16"`  
+- **Contact Not Found:**
+  Example: `log 9999 /interaction "Meeting on 2024-09-16"`
   `Error: Contact not found. Please check the ContactID and try again.`
 
-- **Missing Interaction Details:**  
-  Example: `log 123`  
+- **Missing Interaction Details:**
+  Example: `log 123`
   `Error: Interaction details are required. Please provide a description of the interaction.`
 
 ---
@@ -1273,20 +1273,20 @@ special occasions.
 
 ### **Error Scenarios:**
 
-- **Invalid ContactID:**  
-  Example: `birthday abc /date 2000-09-15`  
+- **Invalid ContactID:**
+  Example: `birthday abc /date 2000-09-15`
   `Error: Invalid ContactID. Please provide a valid numeric identifier.`
 
-- **Contact Not Found:**  
-  Example: `birthday 9999 /date 2000-09-16`  
+- **Contact Not Found:**
+  Example: `birthday 9999 /date 2000-09-16`
   `Error: Contact not found. Please check the ContactID and try again.`
 
-- **Missing Birthday Date:**  
-  Example: `birthday 123`  
+- **Missing Birthday Date:**
+  Example: `birthday 123`
   `Error: Birthday date is required. Please provide one in the format yyyy-mm-dd or mm-dd.`
 
-- **Incorrect Birthday Format:**  
-  Example: `birthday 123 /date 2012.31.12`  
+- **Incorrect Birthday Format:**
+  Example: `birthday 123 /date 2012.31.12`
   `Error: Command format is incorrect. Please look at the User Guide for the appropriate format.`
 
 ---
@@ -1348,8 +1348,8 @@ accidental deletion of the entire address book.
 
 ### **Error Scenarios:**
 
-- **Invalid Response:**  
-  Example: User enters `maybe` instead of `Y` or `N`  
+- **Invalid Response:**
+  Example: User enters `maybe` instead of `Y` or `N`
   `Error: Please respond with Y (Yes) or N (No).`
 
 ---
@@ -1415,9 +1415,9 @@ worth," "first-time buyer," etc., for better organization and personalization of
 
 ### **Error Scenarios:**
 
-- **Duplicate Tag Creation:**  
-  Example: User tries to create a tag that already exists:  
-  `ct hnw`  
+- **Duplicate Tag Creation:**
+  Example: User tries to create a tag that already exists:
+  `ct hnw`
   `Error: The tag already exists.`
 
 ---
@@ -1485,7 +1485,7 @@ net worth") or removing those tags as needed.
 
 #### **Success:**
 
-- Message: `Tag <TagName> added for contact <ContactID>.`  
+- Message: `Tag <TagName> added for contact <ContactID>.`
   Or: `Tag <TagName> removed from contact <ContactID>.`
 - GUI Change: The contact's tag list is updated accordingly.
 
@@ -1503,12 +1503,12 @@ net worth") or removing those tags as needed.
   Example: `t abc hnw`
   `Error: Invalid ContactID. Please provide a valid numeric identifier.`
 
-- **Contact Not Found:**  
-  Example: `t 9999 hnw` (assuming 9999 does not exist)  
+- **Contact Not Found:**
+  Example: `t 9999 hnw` (assuming 9999 does not exist)
   `Error: Contact not found. Please check the ContactID and try again.`
 
-- **Missing Tag:**  
-  Example: `t 42`  
+- **Missing Tag:**
+  Example: `t 42`
   `Error: Tag name is required. Please provide one from the pre-existing list.`
 
 ---
@@ -1539,9 +1539,9 @@ To allow users to view all pre-existing tags that can be applied to contacts.
 
 #### **Success:**
 
-- Message: `The following tags are in your list:`  
-  `hnw`  
-  `ftb`  
+- Message: `The following tags are in your list:`
+  `hnw`
+  `ftb`
   `mi`
 - If no tags exist: `There are no tags in your list at the moment.`
 
@@ -1553,8 +1553,8 @@ To allow users to view all pre-existing tags that can be applied to contacts.
 
 ### **Error Scenarios:**
 
-- **Invalid Command:**  
-  Example: `Lt` (incorrect capitalization)  
+- **Invalid Command:**
+  Example: `Lt` (incorrect capitalization)
   `Error: Invalid Command entered. Please provide a valid command.`
 
 ---
@@ -1622,12 +1622,12 @@ retrieval of client information based on various criteria.
 
 ### **Error Scenarios:**
 
-- **Invalid Command:**  
-  Example: `Find`  
+- **Invalid Command:**
+  Example: `Find`
   `Error: Invalid command entered. Please provide a valid command.`
 
-- **Invalid Search Parameter:**  
-  Example: `N/`  
+- **Invalid Search Parameter:**
+  Example: `N/`
   `Error: Invalid search parameter entered. Please ensure that the search parameters match the syntax requirements.`
 
 ---
