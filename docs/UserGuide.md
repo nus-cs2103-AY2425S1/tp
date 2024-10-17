@@ -94,7 +94,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Adding a transcation: `addTxn`
+### Adding a transaction: `addTxn`
 
 Adds a transaction to the transaction book.
 
@@ -116,6 +116,12 @@ Examples:
 Shows a list of all persons in the address book.
 
 Format: `list`
+
+### Listing all transactions : `listTxn`
+
+Shows a list of all transactions in the transaction book.
+
+Format: `listTxn`
 
 ### Editing a person : `edit`
 
