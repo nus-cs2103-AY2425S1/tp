@@ -62,6 +62,26 @@ public class PersonCard extends UiPart<Region> {
         person.getProducts().stream()
                 .sorted(Comparator.comparing(product -> product.productName))
                 .forEach(product -> products.getChildren().add(new Label(product.productName)));
-        status.setText(person.getStatus().status);
+        setStatusStyle(person.getStatus().status);
+        status.setText(person.getStatus().status.toUpperCase());
+    }
+
+    private void setStatusStyle(String currentStatus) {
+        this.status.getStyleClass().clear();
+
+        switch (currentStatus) {
+        case "active":
+            status.getStyleClass().add("status-success");
+            status.getStyleClass().add("cell_small_label");
+            break;
+        case "inactive":
+            status.getStyleClass().add("status-error");
+            status.getStyleClass().add("cell_small_label");
+            break;
+        default:
+            status.getStyleClass().add("status-default");
+            status.getStyleClass().add("cell_small_label");
+            break;
+        }
     }
 }
