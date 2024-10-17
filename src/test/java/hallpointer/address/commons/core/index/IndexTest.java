@@ -40,10 +40,12 @@ public class IndexTest {
     @Test
     public void equals() {
         final Index fifthMemberIndex = Index.fromOneBased(5);
+        final Index firstMemberIndex = Index.fromZeroBased(0);
 
         // same values -> returns true
         assertTrue(fifthMemberIndex.equals(Index.fromOneBased(5)));
         assertTrue(fifthMemberIndex.equals(Index.fromZeroBased(4)));
+        assertTrue(firstMemberIndex.equals(Index.fromOneBased(1)));
 
         // same object -> returns true
         assertTrue(fifthMemberIndex.equals(fifthMemberIndex));

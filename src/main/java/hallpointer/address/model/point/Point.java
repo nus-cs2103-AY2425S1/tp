@@ -5,19 +5,21 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * Represents points earned by a member.
- * Guarantees: immutable; points are valid as declared in {@link #isValidPoints(int)}
+ * Guarantees: immutable; points are valid as declared in {@link #isValidPoints(String)}
  */
 public class Point {
 
     public static final String MESSAGE_CONSTRAINTS = "Points must be a non-negative integer.";
-    public final int points;
+
+    public static final String VALIDATION_REGEX = "^\\d+$";
+    public final String points;
 
     /**
      * Constructs a {@code Point}.
      *
      * @param points A valid points value.
      */
-    public Point(int points) {
+    public Point(String points) {
         requireNonNull(points);
         checkArgument(isValidPoints(points), MESSAGE_CONSTRAINTS);
         this.points = points;
@@ -26,22 +28,27 @@ public class Point {
     /**
      * Returns true if the given points value is valid.
      */
-    public static boolean isValidPoints(int test) {
-        return test >= 0; // Points must be non-negative
+    public static boolean isValidPoints(String test) {
+        try {
+            int dummy = Integer.parseInt(test);
+            return test.matches(VALIDATION_REGEX); // Points must be non-negative
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     /**
      * Takes in a Point object and returns a new Point object with the points added.
      */
     public Point add(Point other) {
-        return new Point(points + other.points);
+        return new Point(Integer.toString(getValue() + other.getValue()));
     }
 
     /**
      * Takes in a Point object and returns a new Point object with the points subtracted.
      */
     public Point subtract(Point other) {
-        return new Point(points - other.points);
+        return new Point(Integer.toString(getValue() - other.getValue()));
     }
 
     @Override
@@ -55,16 +62,16 @@ public class Point {
         }
 
         Point otherPoint = (Point) other;
-        return points == otherPoint.points;
+        return points.equals(otherPoint.points);
     }
 
     @Override
     public int hashCode() {
-        return Integer.hashCode(points);
+        return points.hashCode();
     }
 
     public int getValue() {
-        return points;
+        return Integer.parseInt(points);
     }
 
     /**

@@ -1,5 +1,7 @@
 package hallpointer.address.storage;
 
+import static hallpointer.address.storage.JsonAdaptedMember.MISSING_FIELD_MESSAGE_FORMAT;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,7 +16,7 @@ import hallpointer.address.model.session.SessionName;
  */
 public class JsonAdaptedSession {
     private final String sessionName;
-    private final int points;
+    private final String points;
     private final String date;
 
     /**
@@ -26,7 +28,7 @@ public class JsonAdaptedSession {
      */
     @JsonCreator
     public JsonAdaptedSession(@JsonProperty("sessionName") String sessionName,
-                              @JsonProperty("points") int points,
+                              @JsonProperty("points") String points,
                               @JsonProperty("date") String date) {
         this.sessionName = sessionName;
         this.points = points;
@@ -40,7 +42,7 @@ public class JsonAdaptedSession {
      */
     public JsonAdaptedSession(Session source) {
         sessionName = source.getSessionName().toString();
-        points = source.getPoints().getValue();
+        points = source.getPoints().toString();
         date = source.getDate().toString();
     }
 
@@ -51,6 +53,34 @@ public class JsonAdaptedSession {
      * @throws IllegalValueException If any data constraints are violated in the adapted session.
      */
     public Session toModelType() throws IllegalValueException {
-        return new Session(new SessionName(sessionName), new SessionDate(date), new Point(points));
+        if (sessionName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    SessionName.class.getSimpleName()));
+        }
+        if (!SessionName.isValidSessionName(sessionName)) {
+            throw new IllegalValueException(SessionName.MESSAGE_CONSTRAINTS);
+        }
+        final SessionName modelName = new SessionName(sessionName);
+
+        if (date == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    SessionDate.class.getSimpleName()));
+        }
+        if (!SessionDate.isValidDate(date)) {
+            throw new IllegalValueException(SessionDate.MESSAGE_CONSTRAINTS);
+        }
+        final SessionDate modelDate = new SessionDate(date);
+
+        if (points == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Point.class.getSimpleName()));
+        }
+        if (!Point.isValidPoints(points)) {
+            throw new IllegalValueException(Point.MESSAGE_CONSTRAINTS);
+        }
+        final Point modelPoints = new Point(points);
+
+        Session session = new Session(modelName, modelDate, modelPoints);
+
+        return session;
     }
 }

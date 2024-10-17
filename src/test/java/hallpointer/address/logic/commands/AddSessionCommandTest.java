@@ -1,32 +1,56 @@
 package hallpointer.address.logic.commands;
 
 import static hallpointer.address.testutil.Assert.assertThrows;
+import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
+import static hallpointer.address.testutil.TypicalSessions.ATTENDANCE;
 import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import hallpointer.address.commons.core.GuiSettings;
+import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.model.AddressBook;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.ReadOnlyAddressBook;
 import hallpointer.address.model.ReadOnlyUserPrefs;
 import hallpointer.address.model.member.Member;
+import hallpointer.address.model.point.Point;
 import hallpointer.address.model.session.Session;
+import hallpointer.address.model.session.SessionDate;
+import hallpointer.address.model.session.SessionName;
+import hallpointer.address.testutil.MemberBuilder;
+import hallpointer.address.testutil.SessionBuilder;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 
 class AddSessionCommandTest {
 
     @Test
     public void constructor_nullSession_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddSessionCommand(null, null));
+        Session session = new SessionBuilder(ATTENDANCE).build();
+        Set<Index> indices = new HashSet<Index>();
+        indices.add(INDEX_FIRST_MEMBER);
 
-        //assertThrows(NullPointerException.class, () -> new AddSessionCommand(, null));
-        //assertThrows(NullPointerException.class, () -> new AddSessionCommand(null, null));
+        assertThrows(NullPointerException.class, () -> new AddSessionCommand(null, indices));
+        assertThrows(NullPointerException.class, () -> new AddSessionCommand(session, null));
+        assertThrows(NullPointerException.class, () -> new AddSessionCommand(null, null));
+    }
+
+    @Test
+    public void constructor_emptyIndexList() {
+        Session session = new SessionBuilder(ATTENDANCE).build();
+        Set<Index> indices = new HashSet<>();
+
     }
 
     /*@Test
@@ -34,7 +58,7 @@ class AddSessionCommandTest {
         ModelStubAcceptingSessionAdded modelStub = new ModelStubAcceptingSessionAdded();
         Member validMember = new MemberBuilder().build();
 
-        CommandResult commandResult = new AddMemberCommand(validMember).execute(modelStub);
+        CommandResult commandResult = new AddSessionCommand(validMember).execute(modelStub);
 
         assertEquals(
                 String.format(
@@ -153,9 +177,6 @@ class AddSessionCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        /**
-         * @param session
-         */
         @Override
         public void addSession(Session session) {
             throw new AssertionError("This method should not be called");
@@ -194,7 +215,7 @@ class AddSessionCommandTest {
     /**
      * A Model stub that contains a single member.
      */
-    private class ModelStubWithMember extends AddSessionCommandTest.ModelStub {
+    private class ModelStubWithMember extends ModelStub {
         private final Member member;
 
         ModelStubWithMember(Member member) {
@@ -210,21 +231,21 @@ class AddSessionCommandTest {
     }
 
     /**
-     * A Model stub that always accept the member being added.
+     * A Model stub that always accept the session being added.
      */
-    private class ModelStubAcceptingSessionAdded extends AddSessionCommandTest.ModelStub {
-        final ArrayList<Member> membersAdded = new ArrayList<>();
+    private class ModelStubAcceptingSessionAdded extends ModelStub {
+        final ArrayList<Session> sessionAdded = new ArrayList<>();
 
         @Override
-        public boolean hasMember(Member member) {
-            requireNonNull(member);
-            return membersAdded.stream().anyMatch(member::isSameMember);
+        public boolean hasSession(Session session) {
+            requireNonNull(session);
+            return sessionAdded.stream().anyMatch(session::isSameSession);
         }
 
         @Override
-        public void addMember(Member member) {
-            requireNonNull(member);
-            membersAdded.add(member);
+        public void addSession(Session session) {
+            requireNonNull(session);
+            sessionAdded.add(session);
         }
 
         @Override
