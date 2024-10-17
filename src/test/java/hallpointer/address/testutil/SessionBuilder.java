@@ -11,7 +11,7 @@ import hallpointer.address.model.session.SessionName;
 public class SessionBuilder {
     public static final String DEFAULT_SESSION_NAME = "Swimming Lesson";
     public static final String DEFAULT_DATE = "10 Oct 2023";
-    public static final int DEFAULT_POINTS = 3;
+    public static final String DEFAULT_POINTS = "3";
 
     private SessionName sessionName;
     private SessionDate date;
@@ -52,9 +52,9 @@ public class SessionBuilder {
     }
 
     /**
-     * Sets the {@code Telegram} of the {@code Member} that we are building.
+     * Sets the {@code Point} of the {@code Session} that we are building.
      */
-    public SessionBuilder withPoints(int points) {
+    public SessionBuilder withPoints(String points) {
         this.points = new Point(points);
         return this;
     }

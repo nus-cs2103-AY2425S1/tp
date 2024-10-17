@@ -1,21 +1,17 @@
 package hallpointer.address.logic.parser;
 
 import static hallpointer.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static hallpointer.address.logic.parser.CliSyntax.*;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_MEMBER;
-
-import hallpointer.address.commons.core.index.Index;
-import hallpointer.address.logic.commands.AddSessionCommand;
-import hallpointer.address.logic.commands.DeleteSessionCommand;
-import hallpointer.address.logic.parser.exceptions.ParseException;
-import hallpointer.address.model.point.Point;
-import hallpointer.address.model.session.Session;
-import hallpointer.address.model.session.SessionDate;
-import hallpointer.address.model.session.SessionName;
+import static hallpointer.address.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import hallpointer.address.commons.core.index.Index;
+import hallpointer.address.logic.commands.DeleteSessionCommand;
+import hallpointer.address.logic.parser.exceptions.ParseException;
+import hallpointer.address.model.session.SessionName;
 
 /**
  * Parses input arguments and creates a new DeleteSessionCommand object
@@ -44,7 +40,7 @@ public class DeleteSessionCommandParser implements Parser<DeleteSessionCommand> 
                     }
                 })
                 .collect(Collectors.toList());
-            return new DeleteSessionCommand(name, memberIndexes);
+        return new DeleteSessionCommand(name, memberIndexes);
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

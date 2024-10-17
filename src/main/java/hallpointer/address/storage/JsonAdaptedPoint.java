@@ -11,7 +11,7 @@ import hallpointer.address.model.point.Point;
  */
 public class JsonAdaptedPoint {
 
-    private final int points;
+    private final String points;
 
     /**
      * Constructs a {@code JsonAdaptedPoint} with the given points.
@@ -19,7 +19,7 @@ public class JsonAdaptedPoint {
      * @param points The integer value representing the points.
      */
     @JsonCreator
-    public JsonAdaptedPoint(@JsonProperty("points") int points) {
+    public JsonAdaptedPoint(@JsonProperty("points") String points) {
         this.points = points;
     }
 
@@ -29,7 +29,7 @@ public class JsonAdaptedPoint {
      * @param source The Point object to be converted into a {@code JsonAdaptedPoint}.
      */
     public JsonAdaptedPoint(Point source) {
-        this.points = source.getValue();
+        this.points = source.toString();
     }
 
     /**
@@ -39,8 +39,8 @@ public class JsonAdaptedPoint {
      * @throws IllegalValueException If any data constraints are violated in the adapted point.
      */
     public Point toModelType() throws IllegalValueException {
-        if (points < 0) {
-            throw new IllegalValueException("Points cannot be negative.");
+        if (!Point.isValidPoints(points)) {
+            throw new IllegalValueException(Point.MESSAGE_CONSTRAINTS);
         }
         return new Point(points);
     }

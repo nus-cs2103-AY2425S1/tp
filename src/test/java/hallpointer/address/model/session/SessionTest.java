@@ -16,14 +16,15 @@ public class SessionTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        // Check if constructor throws NullPointerException for null arguments
         SessionName validSessionName = new SessionName("Valid Session");
         SessionDate validDate = new SessionDate("24 Sep 2024");
-        Point validPoints = new Point(10);
+        Point validPoints = new Point("10");
 
         assertThrows(NullPointerException.class, () -> new Session(null, validDate, validPoints));
         assertThrows(NullPointerException.class, () -> new Session(validSessionName, null, validPoints));
         assertThrows(NullPointerException.class, () -> new Session(validSessionName, validDate, null));
+        assertThrows(NullPointerException.class, () -> new Session(null, null, null));
+
     }
 
     @Test
@@ -71,19 +72,15 @@ public class SessionTest {
         assertFalse(MEETING.equals(editedSession));
 
         // different points -> returns false
-        editedSession = new SessionBuilder(MEETING).withPoints(3).build();
+        editedSession = new SessionBuilder(MEETING).withPoints("0").build();
         assertFalse(MEETING.equals(editedSession));
     }
 
     @Test
-    public void hashCodeConsistency() {
-        SessionName sessionName = new SessionName("Session 1");
-        SessionDate date = new SessionDate("24 Sep 2024");
-        Point points = new Point(10);
+    public void hashCode_remainsConsistentAcrossCalls() {
+        Session session = new SessionBuilder(MEETING).build();
 
-        Session session = new Session(sessionName, date, points);
-
-        // Ensure that hash code remains consistent for the same object
+        // Ensure that hash code remains consistent for the same object across calls
         int initialHashCode = session.hashCode();
         assertTrue(initialHashCode == session.hashCode());
     }

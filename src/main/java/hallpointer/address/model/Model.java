@@ -20,6 +20,11 @@ public interface Model {
     Predicate<Member> PREDICATE_SHOW_ALL_MEMBERS = unused -> true;
 
     /**
+     * {@code Predicate} that always evaluate to false
+     */
+    Predicate<Member> PREDICATE_SHOW_NO_MEMBERS = unused -> false;
+
+    /**
      * Returns the user prefs.
      */
     ReadOnlyUserPrefs getUserPrefs();
@@ -77,6 +82,8 @@ public interface Model {
      */
     void deleteSession(Member target, SessionName sessionName);
 
+    void deleteSession(Session sessionToDelete);
+
     /**
      * Adds the given member.
      * {@code member} must not already exist in the address book.
@@ -110,8 +117,6 @@ public interface Model {
      * {@code session} must not already exist in the address book.
      */
     void addSession(Session session);
-
-    void deleteSession(Session sessionToDelete);
 
     void setSession(Session target, Session editedSession);
 

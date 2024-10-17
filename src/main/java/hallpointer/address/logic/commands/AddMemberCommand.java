@@ -54,7 +54,7 @@ public class AddMemberCommand extends Command {
         // Add member to the model
         model.addMember(toAdd);
 
-        // Format the success message with the member's name, room number, and Telegram handle
+        // Format the success message with the member's name, room number, and Telegram username
         return new CommandResult(
             String.format(
                 MESSAGE_SUCCESS,

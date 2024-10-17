@@ -5,10 +5,12 @@ import static hallpointer.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_POINTS;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
 import static hallpointer.address.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
+import static hallpointer.address.model.Model.PREDICATE_SHOW_NO_MEMBERS;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.commons.util.ToStringBuilder;
@@ -36,22 +38,22 @@ public class AddSessionCommand extends Command {
             + PREFIX_POINTS + "2 "
             + PREFIX_MEMBER + "1";
 
-    public static final String MESSAGE_SUCCESS = "Session %1$s on %2$s for %3$d points "
+    public static final String MESSAGE_SUCCESS = "Session %1$s on %2$s for %3$s points "
             + "added successfully with %4$d member attending.";
     public static final String MESSAGE_DUPLICATE_SESSION = "Error: Session already exists.";
     public static final String MESSAGE_INVALID_INDEX = "Error: Invalid index specified.";
-
     private final Session toAdd;
     private final List<Index> memberIndexes;
 
     /**
      * Creates an AddSessionCommand to add the specified {@code Session}
      */
-    public AddSessionCommand(Session session, List<Index> memberIndexes) {
+    public AddSessionCommand(Session session, Set<Index> memberIndexes) {
         requireNonNull(session);
         requireNonNull(memberIndexes);
+
         toAdd = session;
-        this.memberIndexes = memberIndexes;
+        this.memberIndexes = memberIndexes.stream().toList();
     }
 
     @Override
@@ -72,17 +74,16 @@ public class AddSessionCommand extends Command {
         }
         for (Member member : memberToUpdate) {
             member.addSession(toAdd);
-            model.setMember(member, member);
         }
 
+        // Hack to force refresh without focus being needed, since model.setMember doesn't quite work here
+        model.updateFilteredMemberList(PREDICATE_SHOW_NO_MEMBERS);
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
-        return new CommandResult(
-                String.format(
-                        MESSAGE_SUCCESS,
-                        toAdd.getSessionName().toString(),
-                        toAdd.getDate().toString(),
-                        toAdd.getPoints().getValue(),
-                        memberIndexes.size()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                toAdd.getSessionName().sessionName,
+                toAdd.getDate().fullDate,
+                toAdd.getPoints().points,
+                memberIndexes.size()));
     }
 
     @Override
@@ -96,7 +97,8 @@ public class AddSessionCommand extends Command {
         }
 
         AddSessionCommand otherAddSessionCommand = (AddSessionCommand) other;
-        return toAdd.equals(otherAddSessionCommand.toAdd);
+        return toAdd.equals(otherAddSessionCommand.toAdd)
+                && memberIndexes.equals(otherAddSessionCommand.memberIndexes);
     }
 
     @Override

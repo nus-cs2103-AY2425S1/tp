@@ -1,5 +1,7 @@
 package hallpointer.address.commons.core.index;
 
+import java.util.Objects;
+
 import hallpointer.address.commons.util.ToStringBuilder;
 
 /**
@@ -60,6 +62,11 @@ public class Index {
 
         Index otherIndex = (Index) other;
         return zeroBasedIndex == otherIndex.zeroBasedIndex;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(zeroBasedIndex);
     }
 
     @Override

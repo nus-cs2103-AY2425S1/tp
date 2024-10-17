@@ -78,7 +78,7 @@ public class Session {
 
     @Override
     public int hashCode() {
-        return Objects.hash(sessionName, points);
+        return Objects.hash(sessionName, date, points);
     }
 
     @Override
