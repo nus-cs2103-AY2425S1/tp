@@ -29,6 +29,7 @@ public class PersonBuilder {
     private Address address;
     private Comment comment;
     private Set<Tag> tags;
+    private boolean isVip;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +41,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         comment = new Comment(DEFAULT_COMMENT);
         tags = new HashSet<>();
+        isVip = false;
     }
 
     /**
@@ -52,6 +54,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         comment = personToCopy.getComment();
         tags = new HashSet<>(personToCopy.getTags());
+        isVip = personToCopy.isVip();
     }
 
     /**
@@ -95,6 +98,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code isVip} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withVipState(boolean isVip) {
+        this.isVip = isVip;
+        return this;
+    }
+
+    /**
      * Sets the {@code Comment} of the {@code Person} that we are building.
      */
     public PersonBuilder withComment(String comment) {
@@ -103,7 +114,6 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, comment, tags);
+        return new Person(name, phone, email, address, comment, tags, isVip);
     }
-
 }
