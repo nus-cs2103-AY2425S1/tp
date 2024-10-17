@@ -71,4 +71,23 @@ public class ScreenJobCommand extends ScreenCommand {
         // Return a predicate that checks if the person's role matches the job's name
         return person -> jobName.contains(person.getRole().value.toLowerCase());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof ScreenJobCommand)) {
+            return false;
+        }
+
+        // Compare by the index of both objects
+        ScreenJobCommand otherCommand = (ScreenJobCommand) other;
+        return targetIndex.equals(otherCommand.targetIndex);
+    }
+
+    @Override
+    public int hashCode() {
+        return targetIndex.hashCode();
+    }
 }
