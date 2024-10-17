@@ -11,7 +11,6 @@ import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_TAG_TECH;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.showCompanyAtIndex;
-import static seedu.internbuddy.testutil.TypicalCompanies.MICROSOFT;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_SECOND_COMPANY;
