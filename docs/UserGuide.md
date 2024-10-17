@@ -170,7 +170,7 @@ Examples:
 * `find e Sentosa Party` returns `Sentosa Vacation`, `Beach Party`<br>
   ![result for 'find alex david'](images/findBeachTimeResult.png)
 
-### Locating persons by tag: `search`
+### Locating persons by tag: `search p`
 
 Finds persons whose tags contain any of the given keywords.
 
@@ -184,9 +184,9 @@ Format: `search KEYWORD [MORE_KEYWORDS]`
   e.g. `Work Friends` will return persons with tags `Hobby Friends`, `Work Partners`
 
 Examples:
-* `search Friends` returns persons with tag name `Friends` and `Work Friends`
-* `search Work Friends` returns persons with tag name `Gaming Friends`, `Work Supplier`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `search p Friends` returns persons with tags named `Friends`
+* `search p Work Friends` returns persons with tags named `Friends` or `Work`<br>
+  ![result for 'search Work Friends'](images/searchWorkFriendsResult.png)
 
 ### Deleting a person : `delete p`
 
@@ -200,6 +200,8 @@ Format: `delete p INDEX`
 
 Examples:
 * `list` followed by `delete p 2` deletes the 2nd person in the address book.
+  ![result for 'delete p 2'](images/deletePersonBefore.png)
+  ![result for 'delete p 2'](images/deletePersonAfter.png)
 * `find p Betsy` followed by `delete p 1` deletes the 1st person in the results of the `find` command.
 
 ### Deleting an event : `delete e`
@@ -214,6 +216,8 @@ Format: `delete e INDEX`
 
 Examples:
 * `list` followed by `delete e 2` deletes the 2nd event in the address book.
+    ![result for 'delete p 2'](images/deleteEventBefore.png)
+    ![result for 'delete p 2'](images/deleteEventAfter.png)
 * `find e Party` followed by `delete e 1` deletes the 1st event in the results of the `find` command.
 
 ### Clearing all entries : `clear`
