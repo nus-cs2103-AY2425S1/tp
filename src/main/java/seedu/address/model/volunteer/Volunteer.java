@@ -46,7 +46,9 @@ public class Volunteer {
         this.endTimeAvailability = endTimeAvailability;
     }
 
-    public int getId() { return id; }
+    public int getId() {
+        return id;
+    }
 
     public Name getName() {
         return name;

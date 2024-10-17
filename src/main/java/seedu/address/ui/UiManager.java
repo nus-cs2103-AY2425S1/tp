@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -25,14 +24,12 @@ public class UiManager implements Ui {
 
     private Logic logic;
     private MainWindow mainWindow;
-    private HostServices hostServices;
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
      */
-    public UiManager(Logic logic, HostServices hostServices) {
+    public UiManager(Logic logic) {
         this.logic = logic;
-        this.hostServices = hostServices;
     }
 
     @Override
@@ -43,7 +40,7 @@ public class UiManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, logic, hostServices);
+            mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 

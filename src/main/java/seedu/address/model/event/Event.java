@@ -63,7 +63,9 @@ public class Event {
         this.description = new Description();
     }
 
-    public int getId() { return id; }
+    public int getId() {
+        return id;
+    }
 
     public EventName getName() {
         return eventName;

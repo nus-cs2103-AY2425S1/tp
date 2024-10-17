@@ -6,8 +6,10 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
+import seedu.address.commons.core.HostServiceManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataLoadingException;
@@ -40,6 +42,7 @@ public class MainApp extends Application {
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-w12-2.github.io/tp/UserGuide.html";
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
+    private static HostServices hostServices;
 
     protected Ui ui;
     protected Logic logic;
@@ -65,7 +68,9 @@ public class MainApp extends Application {
 
         logic = new LogicManager(model, storage);
 
-        ui = new UiManager(logic, getHostServices());
+        ui = new UiManager(logic);
+
+        HostServiceManager.setHostServices(getHostServices());
     }
 
     /**

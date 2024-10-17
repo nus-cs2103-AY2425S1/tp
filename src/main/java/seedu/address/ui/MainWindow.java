@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -14,6 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.HostServiceManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
@@ -38,7 +38,6 @@ public class MainWindow extends UiPart<Stage> {
     private VolunteerListPanel volunteerListPanel;
     private ResultDisplay resultDisplay;
     private EventListPanel eventListPanel;
-    private HostServices hostServices;
 
 
     @FXML
@@ -59,7 +58,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic, HostServices hostServices) {
+    public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
 
         primaryStage.setTitle("VolunSync");
@@ -67,7 +66,6 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
-        this.hostServices = hostServices;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -157,10 +155,10 @@ public class MainWindow extends UiPart<Stage> {
         // in the project.
         // source:
         // https://forums.oracle.com/ords/apexds/post/opening-an-external-web-browser-from-a-javafx-application-4429
-        hostServices.showDocument(MainApp.USERGUIDE_URL);
+        HostServiceManager.getHostServices().showDocument(MainApp.USERGUIDE_URL);
         //@@ author
 
-        logger.fine("Showing help page about the application.");
+        logger.fine("Showing user guide of VolunSync.");
     }
 
     void show() {
