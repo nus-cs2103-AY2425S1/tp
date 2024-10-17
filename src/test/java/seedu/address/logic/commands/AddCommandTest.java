@@ -160,7 +160,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addMeeting(Meeting meeting) {
+        public void addMeeting(Person target, Meeting meeting) {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -130,8 +130,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addMeeting(Meeting meeting) {
-        addressBook.addMeeting(meeting);
+    public void addMeeting(Person target, Meeting meeting) {
+        addressBook.addMeeting(target, meeting);
     }
 
     @Override
