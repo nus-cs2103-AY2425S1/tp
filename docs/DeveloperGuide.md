@@ -459,7 +459,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a person or persons
 
 1. Deleting a person while all persons are being shown
 
@@ -486,6 +486,19 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
+
+3. Deleting persons while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `delete 1 2`<br>
+       Expected: First and second contact are deleted from the list. Names of the deleted contacts are shown in the status message. Timestamp in the status bar is updated.
+
+    1. Test case: `delete x y`<br> (where x,y are greater than the number of listed persons)
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
+    1. Test case: `delete 0 1`<br> 
+       Expected: First contact is deleted from the list. Name of the deleted contact and invalidity of the index 0 is shown in the status message. Timestamp in the status bar is updated.
 
 ### Saving data
 
