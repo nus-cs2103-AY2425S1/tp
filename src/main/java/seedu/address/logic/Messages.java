@@ -27,7 +27,6 @@ public class Messages {
             + " characters with letters at the start and end, and digits in between (e.g., 'A1234567E').";
     public static final String MESSAGE_NO_STUDENTS_FOUND = "No students found matching the criteria.";
 
-
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
