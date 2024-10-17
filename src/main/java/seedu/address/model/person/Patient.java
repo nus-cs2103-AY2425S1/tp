@@ -56,7 +56,7 @@ public class Patient extends Person {
         }
         return null;
     }
-    
+
     /**
      * Retrieves a patient by their ID as a String.
      *

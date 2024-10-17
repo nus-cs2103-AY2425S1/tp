@@ -12,12 +12,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_REMARK = new Prefix("r/");
-<<<<<<< HEAD
-=======
-
     public static final Prefix PREFIX_DATE = new Prefix("x/");
 
     public static final Prefix PREFIX_ID = new Prefix("z/");
-
->>>>>>> master
+    
 }
