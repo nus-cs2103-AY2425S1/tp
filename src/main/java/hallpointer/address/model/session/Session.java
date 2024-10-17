@@ -72,8 +72,8 @@ public class Session {
 
         Session otherSession = (Session) other;
         return sessionName.equals(otherSession.sessionName)
-                && date == otherSession.date
-                && points == otherSession.points;
+                && date.equals(otherSession.date)
+                && points.equals(otherSession.points);
     }
 
     @Override
