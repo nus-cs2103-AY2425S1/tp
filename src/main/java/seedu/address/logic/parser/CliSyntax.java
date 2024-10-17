@@ -16,4 +16,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_ROLE = new Prefix("r/");
     public static final Prefix PREFIX_DONATED_AMOUNT = new Prefix("d/");
     public static final Prefix PREFIX_PARTNERSHIP_END_DATE = new Prefix("ped/");
+    public static final Prefix PREFIX_GROUP_NAME = new Prefix("g/");
+    public static final Prefix PREFIX_MEMBERS = new Prefix("m/");
 }

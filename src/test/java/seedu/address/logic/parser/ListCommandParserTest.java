@@ -20,14 +20,14 @@ public class ListCommandParserTest {
 
     @Test
     public void parse_validSortOption_returnsListCommand() {
-        SortOption sortOption = new SortOption("alphabet");
-        assertParseSuccess(parser, " s/alphabet", new ListCommand(sortOption));
+        SortOption sortOption = new SortOption("name");
+        assertParseSuccess(parser, " s/name", new ListCommand(sortOption));
     }
 
     @Test
     public void parse_multipleValidSortOptions_throwsParseException() {
         String expectedMessage = Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SORT);
-        assertParseFailure(parser, " s/alphabet s/age", expectedMessage);
+        assertParseFailure(parser, " s/name s/age", expectedMessage);
     }
 
     @Test
@@ -37,7 +37,6 @@ public class ListCommandParserTest {
 
     @Test
     public void parse_invalidSortOption_throwsParseException() {
-        SortOption sortOption = new SortOption("alphabet");
-        assertParseFailure(parser, " s/name", SortOption.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " s/Invalid", SortOption.MESSAGE_CONSTRAINTS);
     }
 }
