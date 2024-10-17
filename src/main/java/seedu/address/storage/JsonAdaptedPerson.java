@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.model.person.Birthday.EMPTY_BIRTHDAY;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.DateOfCreation;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.History;
@@ -33,11 +36,11 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String remark;
     private final String dateOfCreation;
     private final List<JsonAdaptedHistoryEntry> historyEntries = new ArrayList<>();
-
+    private final String birthday;
+    private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -45,7 +48,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("remark") String remark, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("remark") String remark, @JsonProperty("birthday") String birthday,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("dateOfCreation") String dateOfCreation,
                              @JsonProperty("history") List<JsonAdaptedHistoryEntry> historyEntries) {
         this.name = name;
@@ -54,6 +58,7 @@ class JsonAdaptedPerson {
         this.address = address;
         this.remark = remark;
         this.dateOfCreation = dateOfCreation;
+        this.birthday = birthday;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -70,10 +75,11 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        remark = source.getRemark().value;
+        birthday = source.getBirthday().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        remark = source.getRemark().value;
         dateOfCreation = source.getDateOfCreation().toString();
         historyEntries.addAll(source.getHistory().getHistoryEntries().entrySet().stream()
                 .map(entry -> new JsonAdaptedHistoryEntry(entry.getKey(), entry.getValue()))
@@ -123,7 +129,6 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
@@ -142,8 +147,18 @@ class JsonAdaptedPerson {
         }
         final DateOfCreation modalDateOfCreation = new DateOfCreation(LocalDate.parse(dateOfCreation));
         final History modelHistory = History.fromJsonEntries(modalDateOfCreation, historyEntries);
+        if (birthday == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Birthday.class.getSimpleName()));
+        }
+        if (!Birthday.isValidBirthday(birthday)) {
+            throw new IllegalValueException(Birthday.MESSAGE_CONSTRAINTS);
+        }
+        final Birthday modelBirthday = birthday.isEmpty() ? EMPTY_BIRTHDAY : new Birthday(birthday);
+
+        final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress,
-                modelRemark, modelTags, modalDateOfCreation, modelHistory);
+                modelRemark, modelBirthday, modelTags, modalDateOfCreation, modelHistory);
     }
 
 }

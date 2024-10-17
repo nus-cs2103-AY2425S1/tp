@@ -21,7 +21,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.History;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -31,21 +30,20 @@ import seedu.address.testutil.PersonBuilder;
 public class LogCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
     @Test
     public void execute_addLogUnfilteredList_success() {
+        System.out.println(model.getAddressBook());
         LocalDate logDate = LocalDate.now();
         String logMessage = VALID_LOG_MESSAGE;
         LogCommand logCommand = new LogCommand(INDEX_FIRST_PERSON, logDate, logMessage);
 
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        History updatedHistory = History.addActivity(personToEdit.getHistory(), logDate, logMessage);
         Person editedPerson = new PersonBuilder(personToEdit).withHistory(logDate, logMessage).build();
 
         String expectedMessage = String.format(Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
-
+        System.out.println(expectedModel.getAddressBook());
         assertCommandSuccess(logCommand, model, expectedMessage, expectedModel);
     }
 
@@ -58,7 +56,6 @@ public class LogCommandTest {
         LogCommand logCommand = new LogCommand(INDEX_FIRST_PERSON, logDate, logMessage);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        History updatedHistory = History.addActivity(personInFilteredList.getHistory(), logDate, logMessage);
         Person editedPerson = new PersonBuilder(personInFilteredList).withHistory(logDate, logMessage).build();
 
         String expectedMessage = String.format(Messages.format(editedPerson));

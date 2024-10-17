@@ -6,6 +6,7 @@
       "email": "alice@example.com",
       "address": "123, Jurong West Ave 6, #08-111",
       "remark": "",
+      "birthday": "2001-01-01",
       "tags": ["friends"],
       "dateOfCreation": "2024-01-12",
       "history": [
@@ -29,6 +30,7 @@
       "email": "pauline@example.com",
       "address": "4th street",
       "remark": "",
+      "birthday": "2008-08-08",
       "tags": [],
       "dateOfCreation": "2024-01-12",
       "history": [

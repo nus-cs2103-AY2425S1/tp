@@ -28,6 +28,7 @@ public class Person {
     private final Remark remark;
     private final DateOfCreation dateOfCreation;
     private final History history;
+    private final Birthday birthday;
     /**
      * Every field must be present and not null. Used for new person creation
      */
@@ -38,6 +39,23 @@ public class Person {
         this.email = email;
         this.address = address;
         this.remark = Remark.EMPTY_REMARK;
+        this.birthday = Birthday.EMPTY_BIRTHDAY;
+        this.tags.addAll(tags);
+        this.dateOfCreation = new DateOfCreation(LocalDate.now());
+        this.history = new History(dateOfCreation.getDateOfCreation());
+    }
+    /**
+     * Every field must be present and not null. with non-empty remark and non-empty birthday
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Remark remark,
+                  Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.remark = remark;
+        this.birthday = Birthday.EMPTY_BIRTHDAY;
         this.tags.addAll(tags);
         this.dateOfCreation = new DateOfCreation(LocalDate.now());
         this.history = new History(dateOfCreation.getDateOfCreation());
@@ -54,9 +72,44 @@ public class Person {
         this.email = email;
         this.address = address;
         this.remark = remark;
-        this.tags.addAll(tags);
+        this.birthday = Birthday.EMPTY_BIRTHDAY;
         this.dateOfCreation = dateOfCreation;
         this.history = history;
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Every field must be present and not null. with non-empty remark and non-empty birthday
+     */
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Remark remark, Birthday birthday, Set<Tag> tags, DateOfCreation dateOfCreation, History history) {
+        requireAllNonNull(name, phone, email, address, tags, remark, dateOfCreation, history);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.remark = remark;
+        this.birthday = birthday;
+        this.dateOfCreation = dateOfCreation;
+        this.history = history;
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Every field must be present and not null. with non-empty remark and non-empty birthday
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Birthday birthday,
+                  Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.remark = remark;
+        this.birthday = birthday;
+        this.tags.addAll(tags);
+        this.dateOfCreation = new DateOfCreation(LocalDate.now());
+        this.history = new History(dateOfCreation.getDateOfCreation());
     }
 
     public Name getName() {
@@ -97,6 +150,10 @@ public class Person {
         return this.history;
     }
 
+    public Birthday getBirthday() {
+        return birthday;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -131,7 +188,8 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
                 && remark.equals(otherPerson.remark)
-                && dateOfCreation.equals(otherPerson.dateOfCreation);
+                && dateOfCreation.equals(otherPerson.dateOfCreation)
+                && birthday.equals(otherPerson.birthday);
     }
 
     @Override
@@ -149,6 +207,7 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .add("remark", remark)
+                .add("birthday", birthday)
                 .add("dateOfCreation", dateOfCreation)
                 .add("history", history)
                 .toString();
