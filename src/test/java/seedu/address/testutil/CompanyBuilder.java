@@ -94,6 +94,13 @@ public class CompanyBuilder {
         this.email = new Email(email);
         return this;
     }
+    /**
+     * Sets the {@code CareerPageUrl} of the {@code Company} that we are building.
+     */
+    public CompanyBuilder withCareerPageUrl(String careerPageUrl) {
+        this.careerPageUrl = new CareerPageUrl(careerPageUrl);
+        return this;
+    }
 
     public Company build() {
         return new Company(name, phone, email, address, careerPageUrl, tags);

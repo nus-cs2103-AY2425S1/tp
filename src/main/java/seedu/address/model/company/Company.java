@@ -122,7 +122,7 @@ public class Company {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("career page url", careerPageUrl)
+                .add("url", careerPageUrl)
                 .add("tags", tags)
                 .toString();
     }

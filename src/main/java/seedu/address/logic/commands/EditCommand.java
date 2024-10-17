@@ -59,7 +59,7 @@ public class EditCommand extends Command {
     private final EditCompanyDescriptor editCompanyDescriptor;
 
     /**
-     * @param index                of the company in the filtered company list to edit
+     * @param index                 of the company in the filtered company list to edit
      * @param editCompanyDescriptor details to edit the company with
      */
     public EditCommand(Index index, EditCompanyDescriptor editCompanyDescriptor) {
@@ -166,7 +166,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, careerPageUrl, tags);
         }
 
         public void setName(Name name) {
@@ -233,30 +233,29 @@ public class EditCommand extends Command {
                 return true;
             }
 
-            // instanceof handles nulls
             if (!(other instanceof EditCompanyDescriptor)) {
                 return false;
             }
 
-            EditCompanyDescriptor otherEditCompanyDescriptor = (EditCompanyDescriptor) other;
-            return Objects.equals(name, otherEditCompanyDescriptor.name)
-                    && Objects.equals(phone, otherEditCompanyDescriptor.phone)
-                    && Objects.equals(email, otherEditCompanyDescriptor.email)
-                    && Objects.equals(address, otherEditCompanyDescriptor.address)
-                    && Objects.equals(careerPageUrl, otherEditCompanyDescriptor.careerPageUrl)
-                    && Objects.equals(tags, otherEditCompanyDescriptor.tags);
+            EditCompanyDescriptor otherDescriptor = (EditCompanyDescriptor) other;
+            return Objects.equals(getName(), otherDescriptor.getName())
+                    && Objects.equals(getPhone(), otherDescriptor.getPhone())
+                    && Objects.equals(getEmail(), otherDescriptor.getEmail())
+                    && Objects.equals(getAddress(), otherDescriptor.getAddress())
+                    && Objects.equals(getCareerPageUrl(), otherDescriptor.getCareerPageUrl())
+                    && Objects.equals(getTags(), otherDescriptor.getTags());
         }
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("career page url", careerPageUrl)
-                    .add("tags", tags)
-                    .toString();
+            return "EditCompanyDescriptor{"
+                    + "name=" + name
+                    + ", phone=" + phone
+                    + ", email=" + email
+                    + ", address=" + address
+                    + ", careerPageUrl=" + careerPageUrl
+                    + ", tags=" + tags
+                    + '}';
         }
     }
 }
