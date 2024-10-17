@@ -3,6 +3,7 @@ package careconnect.ui;
 import careconnect.logic.Logic;
 import careconnect.logic.commands.CommandResult;
 import careconnect.logic.commands.exceptions.CommandException;
+import careconnect.logic.parser.AddressBookParser;
 import careconnect.logic.parser.exceptions.ParseException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final AddressBookParser parser;
     private final CommandAutocompleter commandAutocompleter;
 
     @FXML
@@ -34,6 +36,7 @@ public class CommandBox extends UiPart<Region> {
         this.commandAutocompleter = commandAutocompleter;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        this.parser = new AddressBookParser();
     }
 
     /**
@@ -87,6 +90,28 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
+     * Validates command typed on every key press.
+     */
+    @FXML
+    private void handleCommandTyped() {
+        String commandText = commandTextField.getText();
+        if (commandText.equals("")) {
+            return;
+        }
+
+        try {
+            parser.parseCommand(commandText);
+
+            // Sets style back to default if command is valid
+            this.setStyleToDefault();
+            assert(!(this.commandTextField.getStyleClass()
+                            .contains(ERROR_STYLE_CLASS)));
+        } catch (ParseException e) {
+            setStyleToIndicateCommandFailure();
+        }
+    }
+
+    /**
      * Sets the command box style to use the default style.
      */
     private void setStyleToDefault() {
@@ -94,7 +119,7 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Sets the command box style to indicate a failed command.
+     * Sets the command box style to indicate a incorrect / failed command.
      */
     private void setStyleToIndicateCommandFailure() {
         ObservableList<String> styleClass = commandTextField.getStyleClass();
@@ -104,6 +129,7 @@ public class CommandBox extends UiPart<Region> {
         }
 
         styleClass.add(ERROR_STYLE_CLASS);
+        assert(styleClass.contains(ERROR_STYLE_CLASS));
     }
 
     /**
