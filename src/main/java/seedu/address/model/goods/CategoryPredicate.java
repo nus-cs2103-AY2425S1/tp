@@ -4,6 +4,10 @@ import java.util.function.Predicate;
 
 import seedu.address.model.person.Person;
 
+
+/**
+ * Tests that a {@code Person}'s {@code Goods}' {@code Category} matches the category given.
+ */
 public class CategoryPredicate implements Predicate<Person> {
     private final GoodsCategories category;
 
