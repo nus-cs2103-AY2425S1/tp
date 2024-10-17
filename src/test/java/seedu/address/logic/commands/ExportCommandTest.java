@@ -7,6 +7,17 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.ExportCommand.SUCCESS_MESSAGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -15,26 +26,13 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-
 public class ExportCommandTest {
-    private Model model;
-    private Model expectedModel;
-
     @TempDir
     // We need to save any temporary files created during tests to a temporary directory.
     // This directory will be deleted after the tests have finished running.
     Path tempDir;
+    private Model expectedModel;
+    private Model model;
 
     @BeforeEach
     public void setUp() {
@@ -72,9 +70,9 @@ public class ExportCommandTest {
 
     @Test
     public void readAndParseJson() throws IOException {
-        String jsonContent = "{\"persons\":" +
-                "[{\"name\":\"Tan Ah Kow\",\"phone\":\"98765432\"}," +
-                "{\"name\":\"Chua Ah Lian\",\"phone\":\"87654321\"}]}";
+        String jsonContent = "{\"persons\":"
+                + "[{\"name\":\"Tan Ah Kow\",\"phone\":\"98765432\"},"
+                + "{\"name\":\"Chua Ah Lian\",\"phone\":\"87654321\"}]}";
         Path jsonPath = tempDir.resolve("test.json");
         Files.write(jsonPath, jsonContent.getBytes());
         List<Map<String, String>> result = ExportCommand.readAndParseJson(jsonPath.toString());
