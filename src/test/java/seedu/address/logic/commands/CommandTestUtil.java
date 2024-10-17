@@ -19,8 +19,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.log.AppointmentDate;
-import seedu.address.model.log.Log;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -43,8 +41,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
-    public static final Log VALID_LOG_FIRST_VISIT = new Log(new AppointmentDate("20 Jan 2024"), "First visit");
-    public static final Log VALID_LOG_SECOND_VISIT = new Log(new AppointmentDate("25 Oct 2024"), "Second visit");
+    public static final String VALID_LOG_FIRST_VISIT = "20 Jan 2024|First visit";
+    public static final String VALID_LOG_SECOND_VISIT = "25 Oct 2024|Second visit";
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String IDENTITY_NUMBER_DESC_AMY = " " + PREFIX_IDENTITY_NUMBER + VALID_IDENTITY_NUMBER_AMY;

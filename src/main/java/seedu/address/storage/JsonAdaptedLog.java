@@ -1,10 +1,6 @@
 package seedu.address.storage;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.log.AppointmentDate;
@@ -37,17 +33,28 @@ class JsonAdaptedLog {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted log.
      */
-    public Log toModelType() {
-        if (storageEntry == null || !storageEntry.contains("|")) {
-            throw new IllegalArgumentException("Invalid log entry format.");
-        }
-        String[] parts = storageEntry.split("\\|");
-        if (parts.length != 2) {
-            throw new IllegalArgumentException("Log entry must contain date and details separated by '|'.");
-        }
-        AppointmentDate appointmentDate = new AppointmentDate(parts[0]); // Parse the date from the first part
-        String details = parts[1];
+    public Log toModelType() throws IllegalValueException {
+        String[] logParts = storageEntry.split("\\|", 2);
 
-        return new Log(appointmentDate, details); // Assuming details validation is handled in Log
+        if (logParts.length < 2) {
+            throw new IllegalValueException("Log format is invalid: " + storageEntry);
+        }
+
+        AppointmentDate appointmentDate;
+        String details = logParts[1].trim();
+
+        try {
+            appointmentDate = new AppointmentDate(logParts[0].trim());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(AppointmentDate.MESSAGE_CONSTRAINTS);
+        }
+
+        // Check if details are empty
+        if (details.isEmpty()) {
+            throw new IllegalValueException("Log description cannot be empty.");
+        }
+
+        // Return a new Log object
+        return new Log(appointmentDate, details);
     }
 }

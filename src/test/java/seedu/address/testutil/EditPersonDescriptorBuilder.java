@@ -98,11 +98,25 @@ public class EditPersonDescriptorBuilder {
      * Parses the {@code logs} into a {@code Set<Log>} and sets it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withLogs(Log... logs) {
-        Set<Log> logSet = Stream.of(logs).collect(Collectors.toSet());
+    public EditPersonDescriptorBuilder withLogs(String... logs) {
+        Set<Log> logSet = Stream.of(logs)
+                .map(log -> {
+                    String[] logParts = log.split("\\|", 2);
+                    if (logParts.length != 2) {
+                        throw new IllegalArgumentException("Log format is invalid: " + log);
+                    }
+                    String dateStr = logParts[0].trim();
+                    String details = logParts[1].trim();
+
+                    AppointmentDate appointmentDate = new AppointmentDate(dateStr);
+
+                    return new Log(appointmentDate, details);
+                })
+                .collect(Collectors.toSet());
         descriptor.setLogs(logSet);
         return this;
     }
+
 
     public EditPersonDescriptor build() {
         return descriptor;

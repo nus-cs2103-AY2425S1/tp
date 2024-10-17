@@ -13,6 +13,7 @@ import static java.util.Objects.requireNonNull;
 public class AppointmentDate {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
+    public static final String MESSAGE_CONSTRAINTS = "Invalid date format! Please use 'dd MMM yyyy'.";
     private final LocalDate date;
 
     /**
@@ -34,7 +35,7 @@ public class AppointmentDate {
         try {
             this.date = LocalDate.parse(dateString, FORMATTER);
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Invalid date format! Please use 'dd MMM yyyy'.", e);
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS, e);
         }
     }
 
