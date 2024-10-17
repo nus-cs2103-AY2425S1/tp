@@ -135,17 +135,19 @@ Examples:
 
 Deletes the specified student from TAHub.
 
-Format: `delete INDEX...`
+Format: `delete INDEX[;INDEX]...`
 
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
+
 * Can delete multiple students at once by separating indices with semicolons (;).
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in TAHub.
 * `list` followed by `delete 2;3` deletes the 2nd and 3rd student in TAHub.
 * `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+
 
 ### Clearing all entries : `clear`
 

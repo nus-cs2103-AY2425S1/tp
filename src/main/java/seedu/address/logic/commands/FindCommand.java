@@ -2,10 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.Student;
 
 /**
  * Finds and lists all students in address book whose name contains any of the argument keywords.
@@ -20,16 +23,49 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final NameContainsKeywordsPredicate predicate;
+    /** Raw unmodified list of predicates for use in equality checking */
+    private final List<? extends Predicate<? super Student>> predicates;
+    /** Protected for usage in testcases */
+    private final Predicate<Student> combinedPredicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
+    /**
+     * Creates a FindCommand given a single predicate.
+     *
+     * @param predicate Predicate.
+     */
+    public FindCommand(Predicate<Student> predicate) {
+        this.predicates = List.of(predicate);
+        this.combinedPredicate = predicate;
+    }
+
+    /**
+     * Creates a FindCommand given a list of predicates.
+     *
+     * @param predicates List of predicates.
+     */
+    public FindCommand(List<? extends Predicate<? super Student>> predicates) {
+        this.predicates = predicates;
+        this.combinedPredicate = combinePredicates(predicates);
+    }
+
+    public Predicate<Student> getPredicate() {
+        return student -> combinedPredicate.test(student);
+    }
+
+    /**
+     * Returns a predicate made by chaining together the given predicates.
+     *
+     * @param predicates List of predicates.
+     * @return Combined predicate.
+     */
+    private Predicate<Student> combinePredicates(List<? extends Predicate<? super Student>> predicates) {
+        return student -> predicates.stream().allMatch(p -> p.test(student));
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredStudentList(predicate);
+        model.updateFilteredStudentList(combinedPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, model.getFilteredStudentList().size()));
     }
@@ -46,13 +82,13 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        return predicates.equals(otherFindCommand.predicates);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
+                .add("predicates", predicates)
                 .toString();
     }
 }
