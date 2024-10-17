@@ -77,4 +77,13 @@ public class TagCommandTest {
         String expectedMessage = "Each person can only have up to 6 tags!";
         assertCommandFailure(command, model, expectedMessage);
     }
+
+    @Test
+    public void execute_duplicateTagsUnfilteredList_failure() {
+        Index index = INDEX_FIRST_PERSON;
+        Set<Tag> tagSet = SampleDataUtil.getTagSet("friends"); //friends tag already exists in first person
+        TagCommand command = new TagCommand(index, tagSet);
+        String expectedMessage = "Person already has that Tag!";
+        assertCommandFailure(command, model, expectedMessage);
+    }
 }
