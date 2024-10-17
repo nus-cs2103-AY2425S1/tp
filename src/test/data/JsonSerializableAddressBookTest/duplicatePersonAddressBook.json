@@ -4,6 +4,7 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
+    "organisation": "National University of Singapore",
     "tags": [ "friends" ],
     "priority" : "low"
   }, {
@@ -11,6 +12,7 @@
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "4th street",
+    "organisation": "National University of Singapore",
     "priority" : "low"
   } ]
 }

@@ -23,18 +23,22 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Organisation organisation;
     private final Set<Tag> tags = new HashSet<>();
     private Priority priority;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Priority priority) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Organisation organisation, Set<Tag> tags,
+                  Priority priority) {
+        requireAllNonNull(name, phone, email, address, tags, organisation);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.organisation = organisation;
         this.tags.addAll(tags);
         this.priority = priority;
     }
@@ -53,6 +57,9 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+    public Organisation getOrganisation() {
+        return organisation;
     }
 
     public Priority getPriority() {
@@ -100,6 +107,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && organisation.equals(otherPerson.organisation)
                 && tags.equals(otherPerson.tags)
                 && priority.equals(otherPerson.priority);
     }
@@ -107,7 +115,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, priority);
+        return Objects.hash(name, phone, email, address, organisation, tags, priority);
     }
 
     @Override
@@ -117,6 +125,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("organisation", organisation)
                 .add("tags", tags)
                 .add("priority", priority)
                 .toString();
