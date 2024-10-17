@@ -19,14 +19,17 @@ public class DetailContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        DetailContainsKeywordsPredicate firstPredicate = new DetailContainsKeywordsPredicate(firstPredicateKeywordList);
-        DetailContainsKeywordsPredicate secondPredicate = new DetailContainsKeywordsPredicate(secondPredicateKeywordList);
+        DetailContainsKeywordsPredicate firstPredicate =
+                new DetailContainsKeywordsPredicate(firstPredicateKeywordList);
+        DetailContainsKeywordsPredicate secondPredicate =
+                new DetailContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        DetailContainsKeywordsPredicate firstPredicateCopy = new DetailContainsKeywordsPredicate(firstPredicateKeywordList);
+        DetailContainsKeywordsPredicate firstPredicateCopy =
+                new DetailContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -42,7 +45,8 @@ public class DetailContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        DetailContainsKeywordsPredicate predicate = new DetailContainsKeywordsPredicate(Collections.singletonList("Alice"));
+        DetailContainsKeywordsPredicate predicate =
+                new DetailContainsKeywordsPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords

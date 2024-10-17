@@ -22,7 +22,7 @@ public class DetailContainsKeywordsPredicate implements Predicate<Person> {
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
         Boolean tagMatched = person.getTags().stream()
                 .anyMatch(tag -> keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)));
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)));
 
         return nameMatched || tagMatched;
     }
