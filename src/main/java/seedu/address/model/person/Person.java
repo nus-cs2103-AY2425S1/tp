@@ -184,7 +184,7 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return !this.isSamePerson(otherPerson);
+        return this.isSamePerson(otherPerson);
     }
 
     @Override

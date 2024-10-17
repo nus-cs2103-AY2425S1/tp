@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 public class HealthService {
 
     public static final String MESSAGE_CONSTRAINTS = "Health Service names should be alphanumeric";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String healthServiceName;
 
@@ -26,7 +27,7 @@ public class HealthService {
      * Returns true if a given string is a valid Health Service name.
      */
     public static boolean isValidHealthserviceName(String test) {
-        return true;
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

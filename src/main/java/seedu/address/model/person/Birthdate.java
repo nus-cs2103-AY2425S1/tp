@@ -2,6 +2,11 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+
 
 /**
  * Represents a Person's BirthDate in the address book.
@@ -10,7 +15,7 @@ import static java.util.Objects.requireNonNull;
 public class Birthdate {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Birth Date should follow the format YYYY/MM/DD";
+            "Birth Date should follow the format YYYY-MM-DD and should not be after today's date";
 
     public final String value;
 
@@ -28,7 +33,13 @@ public class Birthdate {
      * Returns if a given string is a valid nric.
      */
     public static boolean isValidBirthdate(String test) {
-        return true;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try {
+            LocalDate date = LocalDate.parse(test, formatter);
+            return !date.isAfter(LocalDate.now());
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     @Override

@@ -10,7 +10,11 @@ import static java.util.Objects.requireNonNull;
 public class Nric {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "NRIC should be 9 digit alphanumeric sequence with an alphabet at the start and at the end";
+            "NRIC should be 9 digit uppercased sequence with an alphabet at the start and at the end.\n"
+        + "Starting character should either be an uppercased \"S\", \"T\", \"F\", \"G\" or \"M\".\n"
+        + "Followed by 7 digits and ending with an uppercased alphabet.";
+
+    public static final String VALIDATION_REGEX = "^[STFGM][0-9]{7}[A-Z]$";
 
     public final String value;
 
@@ -28,7 +32,7 @@ public class Nric {
      * Returns if a given string is a valid nric.
      */
     public static boolean isValidNric(String test) {
-        return true;
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
