@@ -11,7 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -60,8 +59,6 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String PRODUCT_DESC_BREAD = " " + PREFIX_PRODUCT + VALID_PRODUCT_BREAD;
     public static final String PRODUCT_DESC_RICE = " " + PREFIX_PRODUCT + VALID_PRODUCT_RICE;
-    public static final String STATUS_DESC_ACTIVE = " " + PREFIX_SUPPLIER_STATUS + VALID_STATUS_AMY;
-    public static final String STATUS_DESC_INACTIVE = " " + PREFIX_SUPPLIER_STATUS + VALID_STATUS_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -70,7 +67,6 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_PRODUCT_DESC = " " + PREFIX_PRODUCT + "rice^"; // '^' not allowed in products
     // only 'active' and 'inactive' allowed
-    public static final String INVALID_STATUS_DESC = " " + PREFIX_SUPPLIER_STATUS + "acti";
 
     public static final String VALID_DATE_APPLE = " 10-10-2024 16:00";
     public static final String VALID_SUPPLIER_INDEX_APPLE = " 1";
