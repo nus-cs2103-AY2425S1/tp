@@ -42,4 +42,9 @@ public abstract class Product {
     public String toString() {
         return String.format("Product ID: %d, Name: %s, Cost: $%.2f", productId, name, cost);
     }
+
+    public String viewProduct() {
+        return String.format("%s. Cost: $%.2f", name, cost);
+    }
+
 }
