@@ -33,6 +33,7 @@ public class DeleteAppointmentCommand extends Command {
             + PREFIX_ID + "5678";
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Successfully "
             + "deleted appointment to a patient";
+    public static final String MESSAGE_DELETE_APPOINTMENT_FAIL = "The appointment doesn't exist!";
     private final Id patientId;
     private final Id doctorId;
     private final LocalDateTime appointmentTime;
@@ -51,8 +52,11 @@ public class DeleteAppointmentCommand extends Command {
         ObservableList<Person> allPersons = model.getFilteredPersonList();
         Patient patientToAddAppointment = model.getFilteredPatientById(allPersons, patientId);
         Doctor doctorToAddAppointment = model.getFilteredDoctorById(allPersons, doctorId);
-        patientToAddAppointment.deleteAppointment(appointmentTime, patientToAddAppointment.getId(),
+        boolean isDeleteSuccessful = patientToAddAppointment.deleteAppointment(appointmentTime, patientToAddAppointment.getId(),
                 doctorToAddAppointment.getId());
+        if (!isDeleteSuccessful) {
+            throw new CommandException(MESSAGE_DELETE_APPOINTMENT_FAIL);
+        }
         doctorToAddAppointment.deleteAppointment(appointmentTime, patientToAddAppointment.getId(),
                 doctorToAddAppointment.getId());
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
