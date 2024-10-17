@@ -28,5 +28,8 @@ public class CliSyntax {
     public static final Prefix VOLUNTEER_PREFIX_START_TIME = new Prefix("s/");
     public static final Prefix VOLUNTEER_PREFIX_END_TIME = new Prefix("e/");
 
+    /* Prefix meant for assigning */
+    public static final Prefix ASSIGN_VOLUNTEER_PREFIX_NAME = new Prefix("v/");
+    public static final Prefix ASSIGN_EVENT_PREFIX_NAME = new Prefix("e/");
 
 }
