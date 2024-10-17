@@ -13,13 +13,13 @@ import seedu.address.testutil.PersonBuilder;
 public class IncomeCommandTest {
     private final Model model = new ModelManager();
     @Test
-    public void execute_emptyAddressBook_noPaidAmount_noOwedAmount() {
+    public void execute_emptyAddressBook_noPaidAmountNoOwedAmount() {
         CommandResult commandResult = new IncomeCommand().execute(model);
         assertEquals(commandResult.getFeedbackToUser(), "Total Paid: 0.0   Total Owed: 0.0");
     }
 
     @Test
-    public void execute_addPerson_showUpdated_paidAndOwed() {
+    public void execute_addPerson_showUpdatedPaidAndOwed() {
         Person validPerson = new PersonBuilder().build();
         model.addPerson(validPerson);
         CommandResult commandResult = new IncomeCommand().execute(model);
