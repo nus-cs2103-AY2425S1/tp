@@ -159,7 +159,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setTag(Person target, Set<Tag> tags) {
+        public void addTag(Person target, Set<Tag> tags) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTag(Person target, Set<Tag> tags) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -178,6 +183,10 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void deleteGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public boolean hasGroupName(Group group) {
             throw new AssertionError("This method should not be called.");

@@ -92,8 +92,17 @@ public class FindCommand extends Command {
             return false;
         }
 
-        FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        FindCommand otherCommand = (FindCommand) other;
+        // Check for both predicate and groupPredicate
+        if (this.predicate != null) {
+            return this.predicate.equals(otherCommand.predicate);
+        }
+
+        if (this.groupPredicate != null) {
+            return this.groupPredicate.equals(otherCommand.groupPredicate);
+        }
+
+        return false;
     }
 
     @Override

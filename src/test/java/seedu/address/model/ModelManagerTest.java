@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +20,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -93,6 +96,28 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void addTagTest() {
+        Person expectedPerson = new PersonBuilder().withTags("tag").build();
+        Person actualPerson = new PersonBuilder().build();
+        modelManager.addPerson(actualPerson);
+        Tag tag = new Tag("tag");
+        Set<Tag> tags = Set.of(tag);
+        modelManager.addTag(actualPerson, tags);
+        assertEquals(expectedPerson, actualPerson);
+    }
+
+    @Test
+    public void deleteTagTest() {
+        Person actualPerson = new PersonBuilder().withTags("tag").build();
+        Person expectedPerson = new PersonBuilder().build();
+        modelManager.addPerson(actualPerson);
+        Tag tag = new Tag("tag");
+        Set<Tag> tags = Set.of(tag);
+        modelManager.deleteTag(actualPerson, tags);
+        assertEquals(expectedPerson, actualPerson);
+    }
+
+    @Test
     public void addGroup_validGroup_addsGroup() {
         Group group = new Group("group A", List.of(new PersonBuilder().build()));
         modelManager.addGroup(group);
@@ -144,6 +169,7 @@ public class ModelManagerTest {
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
+
 
     @Test
     public void equals() {

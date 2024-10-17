@@ -85,7 +85,18 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    void setTag(Person target, Set<Tag> tags);
+    /**
+     * Adds the tags to the specified person.
+     * {@code person} must already exist in the address book.
+     */
+    void addTag(Person target, Set<Tag> tags);
+
+    /**
+     * Deletes the tags of the specified person.
+     * {@code person} must already exist in the address book.
+     * {@code tags} must already exist for the person.
+     */
+    void deleteTag(Person target, Set<Tag> tags);
 
     /**
      * Returns an unmodifiable view of the filtered person list
@@ -105,6 +116,8 @@ public interface Model {
      * @throws NullPointerException if {@code group} is null.
      */
     void addGroup(Group group);
+
+    void deleteGroup(Group groupToDelete);
 
     String groupsString();
 

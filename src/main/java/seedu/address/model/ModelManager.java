@@ -121,8 +121,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setTag(Person target, Set<Tag> tags) {
-        Person updatedPerson = target.setTags(tags);
+    public void addTag(Person target, Set<Tag> newTags) {
+        Person updatedPerson = target.addTags(newTags);
+        setPerson(target, updatedPerson);
+    }
+
+    @Override
+    public void deleteTag(Person target, Set<Tag> tagsToDelete) {
+        Person updatedPerson = target.deleteTags(tagsToDelete);
         setPerson(target, updatedPerson);
     }
 
@@ -156,6 +162,24 @@ public class ModelManager implements Model {
     @Override
     public void addGroup(Group group) {
         groups.add(group);
+    }
+
+    /**
+     * Deletes the specified group from the list of groups.
+     *
+     * @param groupToDelete The group to be deleted.
+     * @throws NullPointerException if {@code groupToDelete} is null.
+     * @throws IllegalArgumentException if the group does not exist in the list.
+     */
+    @Override
+    public void deleteGroup(Group groupToDelete) {
+        requireNonNull(groupToDelete);
+
+        boolean isRemoved = groups.remove(groupToDelete);
+
+        if (!isRemoved) {
+            throw new IllegalArgumentException("Group not found: " + groupToDelete.getGroupName());
+        }
     }
 
     /**

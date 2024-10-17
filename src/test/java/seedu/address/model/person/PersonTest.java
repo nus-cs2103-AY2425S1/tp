@@ -11,8 +11,11 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -85,6 +88,26 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void addTags() {
+        Person expectedPerson = new PersonBuilder().withTags("tag").build();
+        Person actualPerson = new PersonBuilder().build();
+        Tag tag = new Tag("tag");
+        Set<Tag> tags = Set.of(tag);
+        actualPerson.addTags(tags);
+        assertEquals(expectedPerson, actualPerson);
+    }
+
+    @Test
+    public void deleteTags() {
+        Person actualPerson = new PersonBuilder().withTags("tag").build();
+        Person expectedPerson = new PersonBuilder().build();
+        Tag tag = new Tag("tag");
+        Set<Tag> tags = Set.of(tag);
+        actualPerson.deleteTags(tags);
+        assertEquals(expectedPerson, actualPerson);
     }
 
     @Test
