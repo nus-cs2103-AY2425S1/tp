@@ -101,6 +101,9 @@ public class AddressBookParser {
         case DeletePriorityCommand.COMMAND_WORD:
             return new DeletePriorityCommandParser().parse(arguments);
 
+        case MarkTaskCommand.COMMAND_WORD:
+            return new MarkTaskCommandParser().parse(arguments);
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
