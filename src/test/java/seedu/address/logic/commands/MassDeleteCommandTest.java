@@ -93,8 +93,8 @@ public class MassDeleteCommandTest {
     public void toStringMethod() {
         List<Index> targetIndices = Arrays.asList(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON);
         MassDeleteCommand massDeleteCommand = new MassDeleteCommand(targetIndices, Collections.emptyList());
-        String expected = MassDeleteCommand.class.getCanonicalName() +
-                "{targetIndices=" + targetIndices + ", invalidInputs=[]}";
+        String expected = MassDeleteCommand.class.getCanonicalName()
+                + "{targetIndices=" + targetIndices + ", invalidInputs=[]}";
         assertEquals(expected, massDeleteCommand.toString());
     }
 

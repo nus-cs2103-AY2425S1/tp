@@ -29,15 +29,15 @@ public class MassDeleteCommandParserTest {
     @Test
     public void parse_invalidArgs_returnsMassDeleteCommandWithInvalidInputs() {
         // Test with non-numeric input that should result in a command with invalid inputs
-        List<String> expectedInvalidInputsForABC = Arrays.asList("a", "b", "c");
-        MassDeleteCommand expectedCommandForABC = new MassDeleteCommand(Collections.emptyList(), expectedInvalidInputsForABC);
-        assertParseSuccess(parser, "a b c", expectedCommandForABC);
+        List<String> expectedInvalidInputs = Arrays.asList("a", "b", "c");
+        MassDeleteCommand expectedCommand = new MassDeleteCommand(Collections.emptyList(), expectedInvalidInputs);
+        assertParseSuccess(parser, "a b c", expectedCommand);
 
         // Test with mixed valid and invalid input
         List<Index> expectedIndices = Arrays.asList(INDEX_FIRST_PERSON, INDEX_THIRD_PERSON);
-        List<String> expectedInvalidInputs = Collections.singletonList("a");
-        MassDeleteCommand expectedCommand = new MassDeleteCommand(expectedIndices, expectedInvalidInputs);
-        assertParseSuccess(parser, "1 a 3", expectedCommand);
+        List<String> singleInvalidInput = Collections.singletonList("a");
+        MassDeleteCommand mixedInputCommand = new MassDeleteCommand(expectedIndices, singleInvalidInput);
+        assertParseSuccess(parser, "1 a 3", mixedInputCommand);
 
         // Test with empty input
         assertParseFailure(parser, "",
