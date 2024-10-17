@@ -14,7 +14,8 @@ import java.util.Objects;
 public abstract class Policy {
     public static final String POLICY_TYPE_MESSAGE_CONSTRAINTS = "Policy can only be "
             + getValidPolicyTypesAsString() + ".";
-    public static final String AMOUNT_MESSAGE_CONSTRAINTS = "Premium amount and coverage amount must be non negative.";
+    public static final String AMOUNT_MESSAGE_CONSTRAINTS = "Premium amount and coverage amount must be "
+            + "non-negative numerals.";
 
     private double premiumAmount;
     private double coverageAmount;

@@ -78,7 +78,7 @@ public class AddPolicyCommandParserTest {
     public void parse_validIndexAndInvalidPolicyType_failure() {
         // Valid index but invalid policy type
         assertParseFailure(parser, INDEX_SECOND_PERSON.getOneBased() + INVALID_POLICY_TYPE_DESC,
-                Policy.MESSAGE_CONSTRAINTS);
+                Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
     }
 
     @Test
