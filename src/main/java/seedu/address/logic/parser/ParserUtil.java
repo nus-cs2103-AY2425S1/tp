@@ -207,7 +207,7 @@ public class ParserUtil {
         try {
             return Network.valueOf(trimmedNetwork);
         } catch (IllegalArgumentException e) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Network.MESSAGE_CONSTRAINTS);
         }
     }
 

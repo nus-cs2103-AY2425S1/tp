@@ -67,7 +67,7 @@ public abstract class PublicAddress {
     }
     @Override
     public String toString() {
-        return address;
+        return tag + ": " + address;
     }
 
     @Override
