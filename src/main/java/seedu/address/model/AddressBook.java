@@ -68,6 +68,26 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Checks for number of persons with schedule clashes with {@code person}.
+     * @param person The person whose schedule is to be checked against others for clashes.
+     * @return Number of persons with schedule clashes.
+     */
+    public long countClashes(Person person) {
+        requireNonNull(person);
+        return persons.countClash(person);
+    }
+
+    /**
+     * Retrieves a list of persons with whom {@code person} has schedule clashes.
+     * @param person The person whose schedule is to be checked against others for clashes.
+     * @return List of persons who have schedule conflicts with the given person.
+     */
+    public List<Person> getClashingPersons(Person person) {
+        requireNonNull(person);
+        return persons.getClashes(person);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
