@@ -31,7 +31,7 @@ their contacts into 'work' contacts and 'personal' contacts to better manage the
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe h/@johndoe c/work` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe h/@johndoe p/99887766 e/johndoe@gmail.com` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -88,8 +88,8 @@ Format: `add n/NAME h/TELEGRAM_HANDLE p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 </box>
 
 Examples:
-* `add n/John Doe h/@johndoe c/work`
-* `add n/Betsy Crowe t/friend h/@betsy_c c/personal t/criminal`
+* `add n/John Doe h/@johndoe p/9988 7766 e/johndoh@gmail.com t/friend`
+* `add n/Betsy Crowe t/friend h/@betsy_c p/87452451 e/betsyc@gmail.com t/criminal`
 
 ### Listing all persons : `list`
 
