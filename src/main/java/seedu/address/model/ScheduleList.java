@@ -58,12 +58,17 @@ public class ScheduleList implements ReadOnlyScheduleList {
     /**
      * Returns true if a meeting with the same details as {@code meeting} exists in the schedule list.
      *
-     * @param meeting The meeting to check.
+     * @param newMeeting The meeting to check.
      * @return True if the meeting exists, false otherwise.
      */
-    public boolean hasMeeting(Meeting meeting) {
-        requireNonNull(meeting);
-        return meetings.contains(meeting);
+    public boolean hasMeeting(Meeting newMeeting) {
+        // Iterate over the unmodifiable list of meetings
+        for (Meeting existingMeeting : meetings.asUnmodifiableObservableList()) {
+            if (newMeeting.hasConflictMeeting(existingMeeting)) {
+                return true;  // Conflict detected
+            }
+        }
+        return false;  // No conflict
     }
 
     /**

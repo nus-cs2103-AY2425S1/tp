@@ -91,6 +91,8 @@ public interface Model {
 
     void setMeeting(Meeting target, Meeting editedMeeting);
 
+    boolean hasMeeting(Meeting meeting);
+
     /**
      * Returns an unmodifiable view of the filtered person list
      */

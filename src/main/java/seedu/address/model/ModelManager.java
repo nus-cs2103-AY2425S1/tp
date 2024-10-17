@@ -168,6 +168,17 @@ public class ModelManager implements Model {
         scheduleList.setMeeting(target, editedMeeting);
     }
 
+    /**
+     * Returns true if the given meeting conflicts with any existing meetings in the schedule list.
+     *
+     * @param newMeeting The meeting to check for conflicts.
+     * @return True if a conflict exists, false otherwise.
+     */
+    @Override
+    public boolean hasMeeting(Meeting newMeeting) {
+        return scheduleList.hasMeeting(newMeeting);
+    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 

@@ -51,17 +51,24 @@ public class AddScheduleCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
-        ArrayList<Person> personInvolved = new ArrayList<>();
 
         if (contactIndex < 0 || contactIndex >= lastShownList.size()) {
             throw new CommandException("The contact index provided is invalid.");
         }
 
-        //Supposed to do in Parser Class for Add Schedule but Down here 1st
-        Meeting recordMeeting = new Meeting((Arrays.asList(contactIndex)), name, date, time);
+        // Retrieve the person involved
+        Person person = lastShownList.get(contactIndex);
 
-        // Check for duplicate schedule or time conflict here already, just click in hopefully works
-        model.addMeeting(recordMeeting);
+        // Create the new meeting
+        Meeting newMeeting = new Meeting(Arrays.asList(contactIndex), name, date, time);
+
+        // Check for duplicate schedule or conflict
+        if (model.hasMeeting(newMeeting)) {
+            throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
+        }
+
+        // Add the meeting to the model if no conflict
+        model.addMeeting(newMeeting);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, name + " on " + date + " at " + time));
     }
