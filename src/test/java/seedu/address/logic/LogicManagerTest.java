@@ -1,10 +1,12 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_INPUT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
@@ -25,6 +27,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -56,13 +59,12 @@ public class LogicManagerTest {
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
-    /*
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Name invalidName = new Name("aaaaaaaaaaaaaaa");
+        String deleteCommand = "delete " + PREFIX_NAME + invalidName;
+        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_INPUT);
     }
-     */
 
     @Test
     public void execute_listCommandWhenClientsExist_success() throws Exception {
@@ -73,7 +75,7 @@ public class LogicManagerTest {
 
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
     }
-
+  
     @Test
     public void execute_listCommandWhenNoClients_throwsCommandException() {
         model = new ModelManager();
@@ -86,8 +88,7 @@ public class LogicManagerTest {
 
         assertCommandException(listCommand, ListCommand.MESSAGE_NO_CLIENT_IN_LIST);
     }
-
-
+  
     /*
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
@@ -100,12 +101,12 @@ public class LogicManagerTest {
         assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
                 LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
     }
-    */
 
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
+    */
 
     /**
      * Executes the command and confirms that
@@ -185,8 +186,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddClientProfile.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY;
-        //  + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+        String addCommand = AddClientProfile.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY;
+
         Person expectedPerson = new PersonBuilder(AMY).build();
         // .withTags()
         ModelManager expectedModel = new ModelManager();
