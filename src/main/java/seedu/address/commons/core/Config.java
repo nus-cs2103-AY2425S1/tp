@@ -17,6 +17,7 @@ public class Config {
     // Config values customizable through config file
     private Level logLevel = Level.INFO;
     private Path userPrefsFilePath = Paths.get("preferences.json");
+    private Path scheduleStorageFilePath = Paths.get("schedule.json");
 
     public Level getLogLevel() {
         return logLevel;
@@ -28,6 +29,9 @@ public class Config {
 
     public Path getUserPrefsFilePath() {
         return userPrefsFilePath;
+    }
+    public Path getScheduleStorageFilePath() {
+        return scheduleStorageFilePath;
     }
 
     public void setUserPrefsFilePath(Path userPrefsFilePath) {
