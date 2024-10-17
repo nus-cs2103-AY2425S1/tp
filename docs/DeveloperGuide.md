@@ -383,24 +383,36 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 * 1a. Cher detects error in user input.
     - 1a1. Cher shows correct input format. <br>
       Use case ends.
-  
+
 #### Use case: UC4 - Save to disk
 **MSS**
 1. Cher opens a local file.
 2. Cher saves contacts in memory into local file. <br>
    Use case ends.
 
+#### Use case: UC5 - Batch delete
+**MSS**
+1. User enters a command to delete all contacts with specific tags.
+2. Cher will remove all contacts containing specified tags.
+3. Cher will show the contacts that have been removed.<br>
+   Use case ends.
+
+**Extensions**
+* 1a. Cher detects error in user input.
+    - 1a1. Cher shows correct input format. <br>
+      Use case ends.
+
 ### Non-Functional Requirements
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed (>50 words per minute) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The user interface should be intuitive for users with minimal technical expertise.
-5.  Commands should be intuitive and simple. 
-6.  Command structures should be logical, consistent and memorable. 
+5.  Commands should be intuitive and simple.
+6.  Command structures should be logical, consistent and memorable.
 7.  All texts should be of appropriate size and easily-readable for users of all ages.
-8.  The color scheme of the user interface should be high-contrast to accomodate for users of all accessibility levels. 
+8.  The color scheme of the user interface should be high-contrast to accomodate for users of all accessibility levels.
 9.  Invalid inputs should be handled gracefully, and the user should be informed clearly of their mistake.
-10.  The user should be promptly informed of the outcome of their action (sucess/failure) via the feedback box. 
+10.  The user should be promptly informed of the outcome of their action (sucess/failure) via the feedback box.
 
 
 *{More to be added}*

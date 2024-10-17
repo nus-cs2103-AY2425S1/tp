@@ -142,8 +142,36 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the Cher.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-Alternative Format: `delete NAME`
-* If there are duplicates, a list of relavant entries will be shown. 
+Format: `delete PHONE_NUMBER
+
+* Deletes the person with the specified `PHONE_NUMBER`
+* The phone number **must be present in the list of contacts**
+
+Examples:
+* `list` followed by `delete 98765432` deletes the person with the phone number 98765432 in the address book.
+
+Format: `delete PARTIAL_NAME`
+
+* Deletes the person with name matching the specified `PARTIAL_NAME`
+* The partial name **must match at least oner person's name**
+* If multiple persons matching the partial name are found, a list of the matching persons is displayed
+
+Examples:
+* `list` followed by `delete John` deletes the person with the name John in the address book.
+* If multiple persons have the name John, a list of these persons is displayed to the user
+
+### Deleting in a batch : `batch-delete`
+
+Delete all contacts from cher with contains **all** the specified tags.
+
+Format: `batch-delete t/TAG [t/TAG]...`
+
+
+
+Examples:
+![Batch delete example data](images/ForBatchDeleteExampleData.png)
+* `batch-delete t/friends` will delete both `Alex Yeoh` and `Bernice Yu`.
+* `batch-delete t/friends t/colleagues` will delete only `Bernice Yu`.
 
 ### Clearing all entries : `clear`
 
@@ -197,6 +225,7 @@ Action | Format, Examples
 **Add** | `add n/NAME r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho r/student p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Secondary 1`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Batch-Delete**| `batch-delete t/TAG [t/TAG]...`<br> e.g. `batch-delete t/friends t/colleagues t/owesmoney t/...`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
