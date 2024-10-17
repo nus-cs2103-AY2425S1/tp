@@ -2,14 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -18,75 +13,45 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
+public class RestoreCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
-    }
-
-    @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+    public void execute_personHasBeenDeleted_restoreSuccessful() throws Exception {
         Person validPerson = new PersonBuilder().build();
+        ModelStubWithDeletedPerson modelStub = new ModelStubWithDeletedPerson(validPerson);
+        CommandResult commandResult = new RestoreCommand().execute(modelStub);
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
-
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(RestoreCommand.MESSAGE_RESTORE_PERSON_SUCCESS, Messages.format(validPerson)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(validPerson, modelStub.addedPerson);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+        ModelStubWithDeletedPerson modelStub = new ModelStubWithDeletedPerson(validPerson);
+        modelStub.addPerson(validPerson);
+        RestoreCommand restoreCommand = new RestoreCommand();
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, RestoreCommand.MESSAGE_DUPLICATE_PERSON, () ->
+                restoreCommand.execute(modelStub));
     }
 
     @Test
-    public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
-
-        // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
-
-        // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
-
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+    public void execute_noDeletedPersonToRestore_throwsCommandException() {
+        ModelStubWithoutDeletedPerson modelStub = new ModelStubWithoutDeletedPerson();
+        RestoreCommand restoreCommand = new RestoreCommand();
+        assertThrows(CommandException.class, RestoreCommand.MESSAGE_NOTHING_TO_RESTORE, () ->
+                restoreCommand.execute(modelStub));
     }
 
-    @Test
-    public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
-    }
 
-    /**
-     * A default model stub that have all of the methods failing.
-     */
     private class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -122,6 +87,7 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public void savePersonToDelete(Person person) {
             throw new AssertionError("This method should not be called.");
@@ -131,10 +97,12 @@ public class AddCommandTest {
         public boolean checkRestorable() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public void makeNotRestorable() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public Person getLastDeletedPerson() {
             throw new AssertionError("This method should not be called.");
@@ -184,50 +152,82 @@ public class AddCommandTest {
         public ObservableList<Person> getPersonList() {
             throw new AssertionError("This method should not be called.");
         }
-
-
     }
 
-    /**
-     * A Model stub that contains a single person.
-     */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithDeletedPerson extends ModelStub {
+        private final Person deletedPerson;
+        private boolean restorable = true;
+        private Person addedPerson;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithDeletedPerson(Person deletedPerson) {
+            requireNonNull(deletedPerson);
+            this.deletedPerson = deletedPerson;
+        }
+
+        @Override
+        public boolean checkRestorable() {
+            return restorable;
+        }
+
+        @Override
+        public void makeNotRestorable() {
+            restorable = false;
+        }
+
+        @Override
+        public Person getLastDeletedPerson() {
+            return deletedPerson;
         }
 
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
-            return this.person.isSamePerson(person);
-        }
-    }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+            return person.isSamePerson(addedPerson);
         }
 
         @Override
         public void addPerson(Person person) {
             requireNonNull(person);
-            personsAdded.add(person);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+            addedPerson = person;
         }
     }
 
+    private class ModelStubWithoutDeletedPerson extends ModelStub {
+        private Person deletedPerson;
+        private boolean restorable = false;
+        private Person addedPerson;
+
+        ModelStubWithoutDeletedPerson() {
+        }
+
+        @Override
+        public boolean checkRestorable() {
+            return restorable;
+        }
+
+        @Override
+        public void makeNotRestorable() {
+            restorable = false;
+        }
+
+        @Override
+        public Person getLastDeletedPerson() {
+            return deletedPerson;
+        }
+
+        @Override
+        public boolean hasPerson(Person person) {
+            requireNonNull(person);
+            return person.isSamePerson(addedPerson);
+        }
+
+        @Override
+        public void addPerson(Person person) {
+            requireNonNull(person);
+            addedPerson = person;
+        }
+
+    }
 }
+
+
