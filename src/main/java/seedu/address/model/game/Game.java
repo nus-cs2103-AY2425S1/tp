@@ -28,30 +28,30 @@ public class Game {
      * Constructs a {@code Game}.
      *
      * @param gameName A valid Game name.
-     * @param username (Optional) A username.
-     * @param skillLevel (Optional) A skill level.
-     * @param role (Optional) A role.
+     * @param username A username.
+     * @param skillLevel A skill level.
+     * @param role A role.
      */
-    public Game(String gameName, String username, String skillLevel, String role) {
+    public Game(String gameName, Username username, SkillLevel skillLevel, Role role) {
         requireNonNull(gameName);
         checkArgument(isValidGameName(gameName), MESSAGE_CONSTRAINTS);
         this.gameName = gameName;
-        this.username = username != null ? new Username(username) : null;
-        this.skillLevel = skillLevel != null ? new SkillLevel(skillLevel) : null;
-        this.role = role != null ? new Role(role) : null;
+        this.username = username;
+        this.skillLevel = skillLevel;
+        this.role = role;
     }
 
-    // Overloaded constructors for convenience
+    /**
+     * Alternate constructor
+     * @param gameName the name of the game.
+     */
     public Game(String gameName) {
-        this(gameName, null, null, null);
-    }
-
-    public Game(String gameName, String username) {
-        this(gameName, username, null, null);
-    }
-
-    public Game(String gameName, String username, String skillLevel) {
-        this(gameName, username, skillLevel, null);
+        requireNonNull(gameName);
+        checkArgument(isValidGameName(gameName), MESSAGE_CONSTRAINTS);
+        this.gameName = gameName;
+        this.username = null;
+        this.skillLevel = null;
+        this.role = null;
     }
 
     /**
@@ -61,6 +61,38 @@ public class Game {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public String getGameName() {
+        return this.gameName;
+    }
+
+    public Username getUsername() {
+        return this.username;
+    }
+
+    public SkillLevel getSkillLevel() {
+        return this.skillLevel;
+    }
+
+    public Role getRole() {
+        return this.role;
+    }
+
+    /**
+     * Returns true if both games have the same name.
+     * This defines a weaker notion of equality between two game objects.
+     */
+    public boolean isSameGame(Game otherGame) {
+        if (otherGame == this) {
+            return true;
+        }
+
+        return otherGame != null && otherGame.getGameName().equals(this.gameName);
+    }
+
+    /**
+     * Returns true if both games have the same identity and data fields.
+     * This defines a stronger notion of equality between two game objects.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
