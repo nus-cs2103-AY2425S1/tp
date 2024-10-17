@@ -14,7 +14,9 @@ import seedu.address.model.person.Person;
  * An abstract class to capture all type of policies.
  */
 public abstract class Policy {
-    public static final String MESSAGE_CONSTRAINTS = "Policy can only be " + getValidPolicyTypesAsString() + ".";
+    public static final String POLICY_TYPE_MESSAGE_CONSTRAINTS = "Policy can only be "
+            + getValidPolicyTypesAsString() + ".";
+    public static final String AMOUNT_MESSAGE_CONSTRAINTS = "Premium amount and coverage amount must be non negative.";
 
     private Person insuree;
     private double premiumAmount;

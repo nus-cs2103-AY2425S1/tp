@@ -52,6 +52,6 @@ public class UpdatePolicyCommandParserTest {
 
         // invalid policy type
         assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + INVALID_POLICY_TYPE_DESC,
-                Policy.MESSAGE_CONSTRAINTS);
+                Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
     }
 }

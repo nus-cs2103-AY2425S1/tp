@@ -20,7 +20,6 @@ import seedu.address.model.policy.PolicyType;
 
 public class DeletePolicyCommandParserTest {
     private final DeletePolicyCommandParser parser = new DeletePolicyCommandParser();
-    private final HealthPolicy health = new HealthPolicy();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -58,6 +57,6 @@ public class DeletePolicyCommandParserTest {
 
         // invalid policy type
         assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + INVALID_POLICY_TYPE_DESC,
-                Policy.MESSAGE_CONSTRAINTS);
+                Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
     }
 }
