@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -22,8 +22,8 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        Name validName = new Name("Alice");
-        assertParseSuccess(parser, "Alice", new DeleteCommand(validName));
+        Nric validNric = new Nric("S1234567A");
+        assertParseSuccess(parser, "S1234567A", new DeleteCommand(validNric));
     }
 
     @Test

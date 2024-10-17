@@ -8,7 +8,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
@@ -19,16 +19,16 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the name used in the displayed person list.\n"
-            + "Parameters: NAME (must be a valid name)\n"
-            + "Example: " + COMMAND_WORD + " John Doe";
+            + ": Deletes the person identified by the NRIC used in the displayed person list.\n"
+            + "Parameters: NRIC (must be a valid NRIC)\n"
+            + "Example: " + COMMAND_WORD + " S1234567A";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
-    private final Name targetName;
+    private final Nric targetNric;
 
-    public DeleteCommand(Name targetName) {
-        this.targetName = targetName;
+    public DeleteCommand(Nric targetNric) {
+        this.targetNric = targetNric;
     }
 
     @Override
@@ -37,12 +37,12 @@ public class DeleteCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         Person personToDelete = lastShownList.stream()
-            .filter(person -> person.getName().fullName.equals(targetName.fullName))
+            .filter(person -> person.getNric().equals(targetNric))
             .findFirst()
             .orElse(null);
 
         if (personToDelete == null) {
-            throw new CommandException(String.format(Messages.MESSAGE_PERSON_NOT_FOUND, targetName));
+            throw new CommandException(String.format(Messages.MESSAGE_PERSON_NOT_FOUND, targetNric));
         }
 
         model.deletePerson(personToDelete);
@@ -61,13 +61,13 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetName.equals(otherDeleteCommand.targetName);
+        return targetNric.equals(otherDeleteCommand.targetNric);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetName", targetName)
+                .add("targetNric", targetNric)
                 .toString();
     }
 }

@@ -74,6 +74,8 @@ public class HelpKeywordWindow extends UiPart<Stage> {
         case "delete":
             setTextDeleteCommand();
             break;
+        default:
+            break;
         }
     }
 
