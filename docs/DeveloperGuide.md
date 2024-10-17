@@ -144,8 +144,8 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both address book data, user preference and schedule data in JSON format, and read them back into corresponding objects.
+* inherits from `ScheduleStorage`, `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -511,7 +511,8 @@ For all use cases below, the **System** is the `SeeRee 2.0` and the **Actor** is
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Schedule**: A user-defined event that includes information such as a name, date, time, and associated contacts. Can be edited, added, or deleted.
+* **Meeting**: A user-defined event that includes information such as a name, date, time, and associated contacts. Can be edited, added, or deleted.
+* **Schedule**: A collection of events (meetings) associated with a user’s contacts. The schedule can be viewed, modified, and checked for conflicts.
 * **Contact**: An individual or entity that is linked to a schedule. Contacts can be added or removed from schedules via commands.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -568,3 +569,31 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Adding a Schedule
+
+1. Test case: add-schedule c/1 n/Team Meeting d/x t/1400
+
+    1. Expected: Date must be in the format DD-MM-YYYY.
+
+2. Test case: add-schedule c/1 n/Team Meeting d/11-10-2024 t/
+
+    1. Expected: Time must be in the format HHmm (24-hour).
+
+3. Test case: add-schedule c/1 n/Team Meeting d/11-10-2024 t/1400
+
+    1. Expected: New schedule added: Team Meeting on 2024-10-11 at 14:00
+
+4. Test case: add-schedule c/1 n/Team Meeting d/10-10-2024 t/1400 (duplicated command)
+
+    1. Expected: This schedule conflicts with an existing schedule.
+
+### View schedule
+
+1. Test case: see d/
+
+    1. Expected: Invalid command format! see: See your schedule for the week. Parameters: d/ Example: see d/10-10-2024
+
+2. Test case: see d/11-10-2024
+
+    1. Expected: Sun 06-10-2024 to Sat 12-10-2024 schedule listed!
