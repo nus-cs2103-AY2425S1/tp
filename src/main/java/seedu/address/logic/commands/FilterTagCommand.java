@@ -4,12 +4,13 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
+
 import static java.util.Objects.requireNonNull;
 
 /**
  * Filters the address book for persons who have the corresponding tag
  */
-public class FilterTagCommand extends FilterCommand{
+public class FilterTagCommand extends FilterCommand {
     private final TagContainsKeywordsPredicate predicate;
 
     /**
