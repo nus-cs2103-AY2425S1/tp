@@ -183,13 +183,14 @@ public class Student {
                 && address.equals(otherStudent.address)
                 && gradeLevel.equals(otherStudent.gradeLevel)
                 && pianoPieces.equals(otherStudent.pianoPieces)
-                && getRegularLessonOptional().equals(otherStudent.getRegularLessonOptional());
+                && getRegularLessonOptional().equals(otherStudent.getRegularLessonOptional())
+                && getCancelledLessons().equals(otherStudent.getCancelledLessons());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, address, gradeLevel, pianoPieces, regularLesson);
+        return Objects.hash(name, phone, address, gradeLevel, pianoPieces, regularLesson, cancelledLessons);
     }
 
     @Override
@@ -201,6 +202,7 @@ public class Student {
                 .add("gradeLevel", gradeLevel)
                 .add("pianoPieces", pianoPieces)
                 .add("regularLesson", regularLesson)
+                .add("cancelledLessons", cancelledLessons)
                 .toString();
     }
 

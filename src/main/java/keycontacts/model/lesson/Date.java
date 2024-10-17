@@ -39,7 +39,7 @@ public class Date implements Comparable<Date> {
 
     @Override
     public int hashCode() {
-        return date.toString().hashCode();
+        return date.hashCode();
     }
 
     @Override

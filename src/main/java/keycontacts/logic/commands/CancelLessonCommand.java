@@ -1,6 +1,7 @@
 package keycontacts.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_DATE;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
 
@@ -13,7 +14,6 @@ import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
 import keycontacts.model.lesson.CancelledLesson;
 import keycontacts.model.lesson.Date;
-import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.lesson.Time;
 import keycontacts.model.student.Student;
 
@@ -24,14 +24,14 @@ public class CancelLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "cancel";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Cancels the lesson identified by the date and start time.\n"
+            + ": Cancels the lesson for a student identified by the date and start time.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DATE + "DATE "
             + PREFIX_START_TIME + "START_TIME\n"
-            + "Example: " + COMMAND_WORD + PREFIX_DATE + "06-07-2022 " + PREFIX_START_TIME + "12:00";
-    public static final String MESSAGE_SUCCESS = "Cancelled lesson on %1s$ for student: %2s$";
+            + "Example: " + COMMAND_WORD + PREFIX_DATE + " 06-07-2022 " + PREFIX_START_TIME + "12:00";
+    public static final String MESSAGE_SUCCESS = "Cancelled lesson at %1$s and %2$s for student: %3$s";
     public static final String MESSAGE_LESSON_NOT_FOUND = "No lesson with the "
-            + "specified parameters found for student %1s$. "
+            + "specified parameters found for student %1$s.\n"
             + "Check if you inputted the right timing and student!";
     private final Date date;
     private final Time startTime;
@@ -43,9 +43,7 @@ public class CancelLessonCommand extends Command {
      * @param startTime Start time of the lesson to be cancelled
      */
     public CancelLessonCommand(Index index, Date date, Time startTime) {
-        requireNonNull(index);
-        requireNonNull(date);
-        requireNonNull(startTime);
+        requireAllNonNull(index, date, startTime);
 
         this.index = index;
         this.date = date;
@@ -56,7 +54,6 @@ public class CancelLessonCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        RegularLesson lessonToCancel = null;
         List<Student> lastShownList = model.getFilteredStudentList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -64,11 +61,9 @@ public class CancelLessonCommand extends Command {
         }
 
         Student studentToUpdate = lastShownList.get(index.getZeroBased());
-        boolean matchesLesson = studentToUpdate.matchesLesson(date, startTime);
+        studentToUpdate.matchesLesson(date, startTime);
 
-        if (matchesLesson) {
-            lessonToCancel = studentToUpdate.getRegularLesson();
-        } else {
+        if (!studentToUpdate.matchesLesson(date, startTime)) {
             throw new CommandException(String.format(MESSAGE_LESSON_NOT_FOUND, Messages.format(studentToUpdate)));
         }
 
@@ -76,7 +71,7 @@ public class CancelLessonCommand extends Command {
         Student updatedStudent = studentToUpdate.withAddedCancelledLesson(cancelledLesson);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS,
-                Messages.format(lessonToCancel), Messages.format(updatedStudent)));
+                date, startTime, Messages.format(updatedStudent)));
     }
 
     @Override

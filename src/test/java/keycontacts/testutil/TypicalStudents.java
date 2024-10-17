@@ -31,7 +31,7 @@ public class TypicalStudents {
             .withGradeLevel("ABRSM 2")
             .withPianoPieces("Etude")
             .withRegularLesson("Monday", "12:00", "14:00")
-            .withCancelledLessons("01-10-2024")
+            .withCancelledLessons("14-10-2024")
             .build();
     public static final Student BENSON = new StudentBuilder()
             .withName("Benson Meier")

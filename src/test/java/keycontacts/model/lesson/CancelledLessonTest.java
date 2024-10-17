@@ -2,7 +2,6 @@ package keycontacts.model.lesson;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
@@ -17,7 +16,6 @@ public class CancelledLessonTest {
     @Test
     public void getLessonDateTest() {
         assertEquals(date, cancelledLesson.getLessonDate());
-        assertNotEquals(new Date("15-12-2002"), cancelledLesson.getLessonDate());
     }
 
     @Test

@@ -15,7 +15,7 @@ public class JsonAdaptedCancelledLesson {
     private final String cancelledLessonDate;
 
     /**
-     * Constructs a {@code JsonAdaptedCancelledLesson} with the given {@code cancelledLessonName}.
+     * Constructs a {@code JsonAdaptedCancelledLesson} with the given {@code cancelledLessonDate}.
      */
     @JsonCreator
     public JsonAdaptedCancelledLesson(String cancelledLessonDate) {
