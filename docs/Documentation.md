@@ -15,7 +15,6 @@
 * Follow the [**_Google developer documentation style guide_**](https://developers.google.com/style).
 * Also relevant is the [_se-edu/guides **Markdown coding standard**_](https://se-education.org/guides/conventions/markdown.html).
 
-
 **Converting to PDF**
 
 * See the guide [_se-edu/guides **Saving web documents as PDF files**_](https://se-education.org/guides/tutorials/savingPdf.html).
