@@ -18,6 +18,7 @@ import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.SupplierStatus;
 import seedu.address.model.product.Product;
 import seedu.address.model.tag.Tag;
 
@@ -156,6 +157,19 @@ public class ParserUtil {
             throw new ParseException(Product.MESSAGE_CONSTRAINTS);
         }
         return new Product(trimmedProductName);
+    }
+    /**
+     * Parses a {@code String statusString} into a {@code SupplierStatus}.
+     * Leading and trailing whitespaces
+     * will be trimmed.
+     * @throws ParseException if the given {@code statusString} is invalid.
+     */
+    public static SupplierStatus parseSupplierStatus(String statusString) throws ParseException {
+        try {
+            return new SupplierStatus(statusString.trim());
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(SupplierStatus.MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**

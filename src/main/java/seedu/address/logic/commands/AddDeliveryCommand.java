@@ -21,7 +21,7 @@ import seedu.address.model.person.Person;
  * Adds a delivery to the address book.
  */
 public class AddDeliveryCommand extends Command {
-    public static final String COMMAND_WORD = "add -d";
+    public static final String COMMAND_WORD = "add";
 
     //to change later
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a delivery to the address book. "

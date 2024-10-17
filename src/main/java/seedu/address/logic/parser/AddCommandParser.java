@@ -18,6 +18,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.SupplierStatus;
 import seedu.address.model.product.Product;
 import seedu.address.model.tag.Tag;
 
@@ -47,8 +48,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Product> productList = ParserUtil.parseProducts(argMultimap.getAllValues(PREFIX_PRODUCT));
+        SupplierStatus status = new SupplierStatus("");
 
-        Person person = new Person(name, phone, email, company, tagList, productList);
+        Person person = new Person(name, phone, email, company, tagList, productList, status);
 
         return new AddCommand(person);
     }

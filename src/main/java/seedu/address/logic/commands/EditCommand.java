@@ -27,6 +27,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.SupplierStatus;
 import seedu.address.model.product.Product;
 import seedu.address.model.tag.Tag;
 
@@ -104,8 +105,10 @@ public class EditCommand extends Command {
         Company updatedCompany = editPersonDescriptor.getCompany().orElse(personToEdit.getCompany());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Product> updatedProducts = editPersonDescriptor.getProducts().orElse(personToEdit.getProducts());
+        SupplierStatus supplierStatus = personToEdit.getStatus();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedCompany, updatedTags, updatedProducts);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedCompany, updatedTags,
+                updatedProducts, supplierStatus);
     }
 
     @Override
