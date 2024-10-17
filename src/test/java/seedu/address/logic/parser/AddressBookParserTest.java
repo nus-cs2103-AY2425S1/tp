@@ -4,14 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RENTAL_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RENTAL;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddClientCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteClientCommand;
+import seedu.address.logic.commands.DeleteRentalCommand;
 import seedu.address.logic.commands.EditClientCommand;
 import seedu.address.logic.commands.EditClientCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -45,6 +49,15 @@ public class AddressBookParserTest {
         DeleteClientCommand command = (DeleteClientCommand) parser.parseCommand(
                 DeleteClientCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteClientCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_rdelete() throws Exception {
+        String userInput = DeleteRentalCommand.COMMAND_WORD + " "
+                + PREFIX_CLIENT_INDEX + INDEX_FIRST_PERSON.getOneBased() + " "
+                + PREFIX_RENTAL_INDEX + INDEX_FIRST_RENTAL.getOneBased();
+        DeleteRentalCommand command = (DeleteRentalCommand) parser.parseCommand(userInput);
+        assertEquals(new DeleteRentalCommand(INDEX_FIRST_PERSON, INDEX_FIRST_RENTAL), command);
     }
 
     @Test

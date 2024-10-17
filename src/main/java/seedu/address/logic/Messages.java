@@ -83,7 +83,6 @@ public class Messages {
                 .append(rentalInformation.getDeposit())
                 .append("; Customer List: ")
                 .append(rentalInformation.getCustomerList());
-        // client.getTags().forEach(builder::append);
         return builder.toString();
     }
 

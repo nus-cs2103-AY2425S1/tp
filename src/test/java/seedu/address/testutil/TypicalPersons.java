@@ -48,13 +48,17 @@ public class TypicalPersons {
     public static final Client ALICE_WITH_RENTAL = new PersonBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com")
             .withPhone("94351253")
-            .withRentalInformation(new RentalInformation("BLK 10 Ang Mo Kio", "01/01/2024", "31/12/2024",
+            .withRentalInformation(
+                    new RentalInformation("BLK 10 Ang Mo Kio", "01/01/2024", "31/12/2024",
                     "10", "3000", "9000", "David"))
             .withTags("friends").build();
     public static final Client BENSON_WITH_RENTAL = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withRentalInformation(new RentalInformation("BLK 20 Bishan", "01/01/2024", "31/12/2024",
-                    "15", "2900", "5800", "Carl"))
+            .withRentalInformation(
+                    new RentalInformation("BLK 20 Bishan", "01/01/2024", "31/12/2024",
+                    "15", "2900", "5800", "Carl"),
+                    new RentalInformation("BLK 1 Bishan", "01/01/2024", "31/12/2024",
+                            "15", "2700", "8100", "Steven;David"))
             .withTags("owesMoney", "friends").build();
 
     // Manually added

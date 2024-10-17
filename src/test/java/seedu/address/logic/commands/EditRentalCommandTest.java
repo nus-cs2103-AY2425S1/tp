@@ -64,7 +64,9 @@ public class EditRentalCommandTest {
         PersonBuilder personInList = new PersonBuilder(lastClient);
         RentalInformation editedRentalInformation = new RentalInformationBuilder(firstRentalInformationOfLastClient)
                 .withAddress(VALID_ADDRESS_ONE).withMonthlyRent(VALID_MONTHLY_RENT_ONE).build();
-        Client editedClient = personInList.withRentalInformation(editedRentalInformation).build();
+        Client editedClient = personInList
+                .withRentalInformation(editedRentalInformation, lastClient.getRentalInformation().get(1))
+                .build();
 
         EditRentalDescriptor descriptor = new EditRentalDescriptorBuilder().withAddress(VALID_ADDRESS_ONE)
                 .withMonthlyRent(VALID_MONTHLY_RENT_ONE).build();
