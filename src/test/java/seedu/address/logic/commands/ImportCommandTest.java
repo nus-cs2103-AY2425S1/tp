@@ -93,7 +93,7 @@ public class ImportCommandTest {
         try (BufferedWriter writer = Files.newBufferedWriter(invalidTrimFilePath)) {
             writer.write(VALID_CSV_HEADERS);
             writer.newLine();
-            writer.write("\"\""); // Empty entry that will cause trimLine to fail
+            writer.write("\""); // Empty entry that will cause trimLine to fail
         }
     }
 
