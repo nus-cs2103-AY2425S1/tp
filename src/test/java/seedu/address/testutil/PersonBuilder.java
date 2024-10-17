@@ -27,7 +27,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ECNAME = "Sarah Lim";
     public static final String DEFAULT_ECPHONE = "98761234";
     public static final String DEFAULT_ECRS = "Parent";
-    public static final String DEFAULT_DOC_NAME = "Dr. John Doe";
+    public static final String DEFAULT_DOC_NAME = "John Doe";
     public static final String DEFAULT_DOC_PHONE = "98927134";
     public static final String DEFAULT_DOC_EMAIL = "johndoe@gmail.com";
 
@@ -143,6 +143,22 @@ public class PersonBuilder {
      */
     public PersonBuilder withDoctorName(String doctorName) {
         this.doctor = new Doctor(new DoctorName(doctorName), doctor.getPhone(), doctor.getEmail());
+        return this;
+    }
+
+    /**
+     * Sets the {@code Doctor Phone} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDoctorPhone(String doctorPhone) {
+        this.doctor = new Doctor(doctor.getName(), new Phone(doctorPhone), doctor.getEmail());
+        return this;
+    }
+
+    /**
+     * Sets the {@code Doctor Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDoctorEmail(String doctorEmail) {
+        this.doctor = new Doctor(doctor.getName(), doctor.getPhone(), new Email(doctorEmail));
         return this;
     }
 

@@ -33,6 +33,9 @@ public class DoctorName extends Name {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /*
+     * Returns the name of the doctor, with the "Dr " prefix.
+     */
     public String getDoctorName() {
         return doctorName;
     }

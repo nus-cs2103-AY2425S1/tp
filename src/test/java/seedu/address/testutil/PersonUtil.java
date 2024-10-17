@@ -1,6 +1,9 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_PHONE;
@@ -41,6 +44,9 @@ public class PersonUtil {
         sb.append(PREFIX_EMERGENCY_CONTACT_PHONE + person.getEmergencyContact().getPhone().value + " ");
         sb.append(PREFIX_EMERGENCY_CONTACT_RELATIONSHIP
                 + person.getEmergencyContact().getRelationship().relationship + " ");
+        sb.append(PREFIX_DOC_NAME + person.getDoctor().getName().fullName + " ");
+        sb.append(PREFIX_DOC_PHONE + person.getDoctor().getPhone().value + " ");
+        sb.append(PREFIX_DOC_EMAIL + person.getDoctor().getEmail().value + " ");
 
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
@@ -64,6 +70,12 @@ public class PersonUtil {
         descriptor.getEmergencyContactRelationship().ifPresent(emergencyContactRelationship ->
                 sb.append(PREFIX_EMERGENCY_CONTACT_RELATIONSHIP)
                         .append(emergencyContactRelationship.relationship).append(" "));
+        descriptor.getDoctorName().ifPresent(doctorName ->
+                sb.append(PREFIX_DOC_NAME).append(doctorName.fullName).append(" "));
+        descriptor.getDoctorPhone().ifPresent(doctorPhone ->
+                sb.append(PREFIX_DOC_PHONE).append(doctorPhone.value).append(" "));
+        descriptor.getDoctorEmail().ifPresent(doctorEmail ->
+                sb.append(PREFIX_DOC_EMAIL).append(doctorEmail.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

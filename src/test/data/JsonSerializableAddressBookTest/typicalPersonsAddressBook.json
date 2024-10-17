@@ -10,6 +10,11 @@
       "ecPhone" : "98761234",
       "ecRelationship" : "Parent"
     },
+    "doctor": {
+      "doctorName": "Tan Wei Ming",
+      "doctorPhone": "82345678",
+      "doctorEmail": "tanweiming@gmail.com"
+    },
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -20,6 +25,11 @@
       "ecName" : "Kevin Goh",
       "ecPhone" : "98764123",
       "ecRelationship" : "Husband"
+    },
+    "doctor": {
+      "doctorName": "Koh Jia Jia",
+      "doctorPhone": "81818211",
+      "doctorEmail": "jjkoh@hotmail.com"
     },
     "tags" : [ "owesMoney", "friends" ]
   }, {
@@ -32,6 +42,11 @@
       "ecPhone" : "98764123",
       "ecRelationship" : "Husband"
     },
+    "doctor": {
+      "doctorName": "Ben Po",
+      "doctorPhone": "61231231",
+      "doctorEmail": "benpo@gmail.com"
+    },
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -42,6 +57,11 @@
       "ecName" : "Haziq Bin Abudllah",
       "ecPhone" : "98763412",
       "ecRelationship" : "Brother"
+    },
+    "doctor": {
+      "doctorName": "Sebastian Sim",
+      "doctorPhone": "62353535",
+      "doctorEmail": "sebsim@hotmail.com"
     },
     "tags" : [ "friends" ]
   }, {
@@ -54,6 +74,11 @@
       "ecPhone" : "98762341",
       "ecRelationship" : "Cousin"
     },
+    "doctor": {
+      "doctorName": "Wong See Toh",
+      "doctorPhone": "88338483",
+      "doctorEmail": "wongst@hotmail.com"
+    },
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -65,6 +90,11 @@
       "ecPhone" : "98761243",
       "ecRelationship" : "Grandmother"
     },
+    "doctor": {
+      "doctorName": "Bing Qi Ling",
+      "doctorPhone": "81818211",
+      "doctorEmail": "bingqiling@hotmail.com"
+    },
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -75,6 +105,11 @@
       "ecName" : "Anjali Devi",
       "ecPhone" : "98763124",
       "ecRelationship" : "Daughter"
+    },
+    "doctor": {
+      "doctorName": "Peh Boon Hao",
+      "doctorPhone": "96161616",
+      "doctorEmail": "boonhao@hotmail.com"
     },
     "tags" : [ ]
   } ]
