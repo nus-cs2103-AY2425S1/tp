@@ -22,9 +22,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.CompositePredicate;
-import seedu.address.model.person.EmailMatchesPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneMatchesPredicate;
@@ -78,7 +76,8 @@ public class FindCommandTest {
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
 
-        NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(Collections.singletonList("!@#$%^&*()"));
+        NameContainsKeywordsPredicate namePredicate =
+            new NameContainsKeywordsPredicate(Collections.singletonList("!@#$%^&*()"));
         List<Predicate<Person>> predicatesList = new ArrayList<>();
         predicatesList.add(namePredicate);
         CompositePredicate compositePredicate = new CompositePredicate(predicatesList);
@@ -111,7 +110,8 @@ public class FindCommandTest {
     public void execute_singlePredicate_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
 
-        NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(Arrays.asList("Kurz", "Elle", "Kunz"));
+        NameContainsKeywordsPredicate namePredicate =
+            new NameContainsKeywordsPredicate(Arrays.asList("Kurz", "Elle", "Kunz"));
 
         List<Predicate<Person>> predicatesList = new ArrayList<>();
         predicatesList.add(namePredicate);
