@@ -4,11 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -22,6 +26,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Property;
+import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -37,7 +42,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
               + "[" + PREFIX_EMAIL + "EMAIL] "
-            //  + "[" + PREFIX_TAG + "TAG]...\n"
+              + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_EMAIL + "johndoe@example.com"
             + PREFIX_PHONE + "91234567 ";
@@ -96,8 +101,8 @@ public class EditCommand extends Command {
         Property updatedProperty = personToEdit.getProperty();
         // edit command does not allow editing appointments
         Appointment updatedAppointment = personToEdit.getAppointment();
-        //  Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags())
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAppointment, updatedProperty);
+        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedTags, updatedAppointment, updatedProperty);
     }
 
     @Override
@@ -132,7 +137,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        //  private Set<Tag> tags;
+        private Set<Tag> tags;
 
 
         public EditPersonDescriptor() {}
@@ -145,7 +150,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            //  setTags(toCopy.tags);
+            setTags(toCopy.tags);
         }
 
         /**
@@ -179,12 +184,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        //  public void setTags(Set<Tag> tags) {
-        //      this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        //  }
-        //  public Optional<Set<Tag>> getTags() {
-        //      return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        //  }
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+        public Optional<Set<Tag>> getTags() {
+            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
 
         @Override
         public boolean equals(Object other) {

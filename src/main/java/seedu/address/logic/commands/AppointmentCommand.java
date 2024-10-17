@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
@@ -46,6 +47,8 @@ public class AppointmentCommand extends Command {
      * @param appointment The new appointment to be added or updated.
      */
     public AppointmentCommand(Index index, Appointment appointment) {
+        requireNonNull(index);
+        requireNonNull(appointment);
         this.index = index;
         this.appointment = appointment;
     }
@@ -64,7 +67,7 @@ public class AppointmentCommand extends Command {
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(),
-                 personToEdit.getEmail(), appointment, personToEdit.getProperty());
+                 personToEdit.getEmail(), personToEdit.getTags(), appointment, personToEdit.getProperty());
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));

@@ -46,9 +46,16 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
 
+    private final Path customStoragePath;
+
+    public MainApp(Path customStoragePath) {
+        this.customStoragePath = customStoragePath;
+    }
+
+
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing EZSTATES ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());

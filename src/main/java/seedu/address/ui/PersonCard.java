@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -57,8 +59,37 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         appointment.setText(person.getAppointment().toString());
         property.setText(person.getProperty().toString());
-        //  person.getTags().stream()
-        //          .sorted(Comparator.comparing(tag -> tag.tagName))
-        //          .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    // Getter methods for private fields
+    public Label getId() {
+        return id;
+    }
+
+    public Label getName() {
+        return name;
+    }
+
+    public Label getPhone() {
+        return phone;
+    }
+
+    public Label getEmail() {
+        return email;
+    }
+
+    public FlowPane getTags() {
+        return tags;
+    }
+
+    public Label getAppointment() {
+        return appointment;
+    }
+
+    public Label getProperty() {
+        return property;
     }
 }

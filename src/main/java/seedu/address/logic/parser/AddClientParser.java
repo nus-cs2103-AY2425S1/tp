@@ -4,7 +4,9 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddClientProfile;
@@ -18,6 +20,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Property;
+import seedu.address.model.tag.Tag;
 
 
 /**
@@ -47,10 +50,10 @@ public class AddClientParser implements Parser<AddClientProfile> {
         Property property = new Property("");
         //  add command does not allow adding appointment straight away
         Appointment appointment = new Appointment(new Date(""), new From(""), new To(""));
-        //  Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Person person = new Person(name, phone, email, appointment, property);
+        Person person = new Person(name, phone, email, tagList, appointment, property);
 
 
         return new AddClientProfile(person);

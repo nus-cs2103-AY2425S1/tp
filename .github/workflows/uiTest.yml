@@ -1,4 +1,4 @@
-name: Java CI
+name: Java Ui Test
 
 on: [push, pull_request]
 
@@ -21,11 +21,6 @@ jobs:
       - name: Merge to master
         run: git checkout --progress --force ${{ github.sha }}
 
-      - name: Run repository-wide tests
-        if: runner.os == 'Linux'
-        working-directory:  ${{ github.workspace }}/.github
-        run: ./run-checks.sh
-
       - name: Validate Gradle Wrapper
         uses: gradle/actions/wrapper-validation@v3
 
@@ -39,8 +34,13 @@ jobs:
       - name: Build and check with Gradle
         run: ./gradlew check coverage
 
-      - name: Upload coverage reports to Codecov
-        if: runner.os == 'Windows' || runner.os == 'macOS'
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Run unit tests
+        run: ./gradlew test
+
+      - name: Run UI Unit tests on Windows
+        if: runner.os == 'Windows'
+        run: ./gradlew uiTest
+
+      - name: Run UI Unit tests on MacOS
+        if: runner.os == 'MacOS'
+        run: ./gradlew uiTest
