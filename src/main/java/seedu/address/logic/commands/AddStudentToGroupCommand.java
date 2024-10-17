@@ -38,6 +38,8 @@ public class AddStudentToGroupCommand extends Command {
 
     public static final String MESSAGE_NO_SUCH_GROUP = "Group does not exist!";
 
+    public static final String MESSAGE_STUDENT_IN_GROUP_ALREADY = "This student already belongs to a group!";
+
 
     private final StudentNumber toAdd;
 
@@ -72,6 +74,10 @@ public class AddStudentToGroupCommand extends Command {
 
         if (model.hasPersonInGroup(student, group)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT_IN_GROUP);
+        }
+
+        if (student.getGroupName().isPresent()) {
+            throw new CommandException(MESSAGE_STUDENT_IN_GROUP_ALREADY);
         }
 
         model.addPersonToGroup(student, group);

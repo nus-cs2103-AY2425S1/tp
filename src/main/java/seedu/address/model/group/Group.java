@@ -86,6 +86,11 @@ public class Group {
         tasks.remove(task);
     }
 
+    public void setTask(Task target, Task editedTask) {
+        deleteTask(target);
+        addTask(editedTask);
+    }
+
     public void delete(Student student) {
         students.remove(student);
     }

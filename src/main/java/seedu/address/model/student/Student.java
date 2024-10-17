@@ -91,10 +91,17 @@ public class Student {
     }
 
     /**
-     * Returns a copy of student which has no group
+     * Returns a copy of student which has no group.
      */
     public Student removeGroup() {
         return new Student(name, email, tags, studentNumber, Optional.empty());
+    }
+
+    /**
+     * Returns a copy of student which has {@code groupName}.
+     */
+    public Student addGroup(GroupName groupName) {
+        return new Student(name, email, tags, studentNumber, Optional.of(groupName));
     }
 
     /**
@@ -117,6 +124,10 @@ public class Student {
             && email.equals(otherStudent.email)
             && tags.equals(otherStudent.tags)
             && studentNumber.equals(otherStudent.studentNumber);
+    }
+
+    public Student setStudentGroup(GroupName groupName) {
+        return new Student(name, email, tags, studentNumber, Optional.<GroupName>of(groupName));
     }
 
     @Override

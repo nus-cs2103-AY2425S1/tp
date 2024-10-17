@@ -3,12 +3,14 @@
     "name": "Alice Pauline",
     "email": "alice@u.nus.edu",
     "tags": [ "friends" ],
-    "student number" : "A0111111J"
+    "student number" : "A0111111J",
+    "group": "Team 1"
   }, {
     "name": "Alice Pauline",
     "email": "pauline@u.nus.edu",
     "student number" : "A0111111J",
-    "email": "pauline@u.nus.edu"
+    "group": "Team 1"
   } ],
-  "groups" : [ ]
+  "groups" : [ ],
+  "tasks" : [ ]
 }

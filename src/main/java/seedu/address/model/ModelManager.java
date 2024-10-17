@@ -175,9 +175,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setTask(Task target, Task editedTask) {
-        requireAllNonNull(target, editedTask);
-        addressBook.setTask(target, editedTask);
+    public void setTask(Task target, Task editedTask, Group group) {
+        requireAllNonNull(target, editedTask, group);
+        addressBook.setTask(target, editedTask, group);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
@@ -351,5 +351,15 @@ public class ModelManager implements Model {
         requireNonNull(group);
         addressBook.deleteTaskFromGroup(task, group);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+
+    @Override
+    public void increaseGroupWithTask(Task task) {
+        addressBook.incrementTask(task);
+    }
+
+    @Override
+    public void decreaseGroupWithTask(Task task) {
+        addressBook.decrementTask(task);
     }
 }

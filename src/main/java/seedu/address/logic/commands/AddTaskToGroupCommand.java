@@ -71,7 +71,10 @@ public class AddTaskToGroupCommand extends Command {
         model.addTaskToGroup(task, group);
         if (!model.hasTask(task)) {
             model.addTask(task);
+        } else {
+            model.increaseGroupWithTask(task);
         }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, task.getTaskName().toString(),
                 group.getGroupName().fullName));
     }
