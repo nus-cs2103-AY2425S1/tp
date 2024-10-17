@@ -62,10 +62,6 @@ Adds an internship application to HireMe.
 
 Format: `/a n/COMPANY_NAME r/ROLE e/EMAIL d/DATE`
 
-<box type="tip" seamless>
-
-</box>
-
 Examples:
 * `/a n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24`
 * `/a n/Facebook r/Data Scientist Intern t/high_priority e/fb@example.com d/21/10/24`
