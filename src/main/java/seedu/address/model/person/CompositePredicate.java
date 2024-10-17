@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 /**
  * Represents a composite predicate that combines multiple predicates into one.
+ * Uses OR logic between different predicates.
  */
 public class CompositePredicate implements Predicate<Person> {
     private final List<Predicate<Person>> predicates;
@@ -20,7 +21,7 @@ public class CompositePredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return predicates.stream().allMatch(predicate -> predicate.test(person));
+        return predicates.stream().anyMatch(predicate -> predicate.test(person));
     }
 
     @Override
