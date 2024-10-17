@@ -125,9 +125,9 @@ Examples:
 
 Finds contacts whose names or/and phone numbers or/and address contain any of the given field keywords.
 
-Format: `find n/NAMEKEYWORDS p/PHONEKEYWORDS a/ADDRESSKEYWORDS`
+Format: `find [n/NAMEKEYWORDS] [p/PHONEKEYWORDS] [a/ADDRESSKEYWORDS]`
 
-**NOTE:** At least one field MUST be specified  
+**NOTE:** At least one field MUST be provided  
   e.g. `find n/Hans` or `find p/12345678` or `find a/wall street` will work  
   e.g. `find Hans` or `find wall street` or `find` will fail
 * The search is case-insensitive. e.g `hans` will match `Hans` or `wall Street` will match `Wall Street`
@@ -223,7 +223,7 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find n/NAMEKEYWORD p/PHONEKEYWORD a/ADDRESSKEYWORD`<br> e.g., `find n/James Jake a/clementi street_woodlands`
+**Find**   | `find [n/NAMEKEYWORD] [p/PHONEKEYWORD] [a/ADDRESSKEYWORD]`<br> e.g., `find n/James Jake a/clementi street_woodlands`
 **List**   | `list`
 **Help**   | `help`
 **Seed**   | `seed`
