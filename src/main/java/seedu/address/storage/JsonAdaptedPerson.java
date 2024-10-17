@@ -108,7 +108,7 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         if (moduleRoleMap == null) {
-            throw new IllegalValueException((ModuleRoleMap.MESSAGE_CONSTRAINTS));
+            throw new IllegalValueException(ModuleRoleMap.MESSAGE_CONSTRAINTS);
         }
 
         final ModuleRoleMap modelModuleRoleMap = moduleRoleMap.toModelType();
