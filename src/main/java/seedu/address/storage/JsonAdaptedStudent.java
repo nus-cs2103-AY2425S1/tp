@@ -40,15 +40,15 @@ public class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
-                              @JsonProperty("studentNumber") String studentNumber,
                               @JsonProperty("tutorialGroup") String tutorialGroup,
+                              @JsonProperty("studentNumber") String studentNumber,
                               @JsonProperty("assignments") List<JsonAdaptedAssignment> assignments) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.studentNumber = studentNumber;
         this.tutorialGroup = tutorialGroup;
+        this.studentNumber = studentNumber;
         if (assignments != null) {
             this.assignments.addAll(assignments);
         }
