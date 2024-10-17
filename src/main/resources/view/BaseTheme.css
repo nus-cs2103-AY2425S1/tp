@@ -525,3 +525,36 @@
 #personDetailView .grid-content-status-reject {
     -fx-background-color: #FFE3DE;
 }
+
+
+#eventDetailView {
+    -fx-border-color: black;  /* Set border color to black */
+    -fx-border-width: 1px;    /* Set border width */
+    -fx-border-radius: 10px;  /* Set rounded corners */
+    -fx-padding: 35;          /* Add padding around the event detail section */
+    -fx-spacing: 35px;        /* Add spacing between elements */
+}
+
+#eventDetailView .detail-header {
+    -fx-font-size: 30pt;      /* Large font size for the event title */
+    -fx-font-family: "Poppins";  /* Font family */
+    -fx-text-fill: black;     /* Text color */
+}
+
+#eventDetailView .detail-contents {
+    -fx-font-size: 12pt;      /* Smaller font size for the details */
+    -fx-font-family: "Poppins Regular";  /* Regular font for details */
+    -fx-text-fill: black;     /* Text color */
+}
+
+
+#eventDetailView .detail-subheader {
+    -fx-font-size: 20pt;
+    -fx-font-family: "Poppins";
+    -fx-text-fill: black;
+}
+
+.attendee-label {
+    -fx-padding: 5px 0; /* Add vertical space between attendee names */
+    -fx-text-fill: black;
+}
