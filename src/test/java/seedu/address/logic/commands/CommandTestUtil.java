@@ -113,8 +113,8 @@ public class CommandTestUtil {
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * Updates {@code model}'s person filtered list to show only the person at the
+     * given {@code targetIndex} in the {@code model}'s address book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
@@ -127,8 +127,8 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the company at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * Updates {@code model}'s company filtered list to show only the company at the
+     * given {@code targetIndex} in the {@code model}'s address book.
      */
     public static void showCompanyAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredCompanyList().size());
