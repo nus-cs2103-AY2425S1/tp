@@ -8,8 +8,8 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.commons.exceptions.AssociationDeleteException;
 import seedu.address.model.Model;
+import seedu.address.model.commons.exceptions.AssociationDeleteException;
 import seedu.address.model.event.Event;
 
 /**
@@ -53,7 +53,8 @@ public class DeleteEventCommand extends DeleteCommand {
         try {
             model.deleteEvent(eventToDelete);
         } catch (AssociationDeleteException ae) {
-            return new CommandResult(String.format(MESSAGE_DELETE_EVENT_ASSOCIATED_FAILURE, Messages.format(eventToDelete)));
+            return new CommandResult(String.format(MESSAGE_DELETE_EVENT_ASSOCIATED_FAILURE,
+                Messages.format(eventToDelete)));
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, Messages.format(eventToDelete)));

@@ -8,8 +8,8 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.commons.exceptions.AssociationDeleteException;
 import seedu.address.model.Model;
+import seedu.address.model.commons.exceptions.AssociationDeleteException;
 import seedu.address.model.vendor.Vendor;
 
 /**
@@ -53,7 +53,8 @@ public class DeleteVendorCommand extends DeleteCommand {
         try {
             model.deleteVendor(vendorToDelete);
         } catch (AssociationDeleteException ae) {
-            return new CommandResult(String.format(MESSAGE_DELETE_VENDOR_ASSOCIATED_FAILURE, Messages.format(vendorToDelete)));
+            return new CommandResult(String.format(MESSAGE_DELETE_VENDOR_ASSOCIATED_FAILURE,
+                Messages.format(vendorToDelete)));
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_VENDOR_SUCCESS, Messages.format(vendorToDelete)));
