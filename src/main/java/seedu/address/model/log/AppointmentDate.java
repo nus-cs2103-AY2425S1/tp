@@ -2,7 +2,10 @@ package seedu.address.model.log;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Represents an appointment date in the log.
@@ -18,16 +21,21 @@ public class AppointmentDate {
      * @param date A valid LocalDate.
      */
     public AppointmentDate(LocalDate date) {
+        requireNonNull(date);
         this.date = date;
     }
 
     /**
      * Constructs an {@code AppointmentDate} by parsing a date string.
      *
-     * @param dateString A valid date string in the format of 'yyyy-MM-dd'.
+     * @param dateString A valid date string in the format of "dd MMM yyyy".
      */
     public AppointmentDate(String dateString) {
-        this.date = LocalDate.parse(dateString);
+        try {
+            this.date = LocalDate.parse(dateString, FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Invalid date format! Please use 'dd MMM yyyy'.", e);
+        }
     }
 
     /**
@@ -38,7 +46,7 @@ public class AppointmentDate {
     }
 
     /**
-     * Returns the appointment date as a formatted string in 'MMM dd yyyy'.
+     * Returns the appointment date as a formatted string in 'dd MMM yyyy'.
      */
     @Override
     public String toString() {

@@ -48,8 +48,30 @@ public class Log {
     /**
      * Returns the appointmentDate of the session.
      */
-    public String getAppointmentDate() {
-        return appointmentDate.toString();
+    public AppointmentDate getAppointmentDate() {
+        return appointmentDate;
+    }
+
+    /**
+     * Return to string in the format "date|description" for JsonStorage
+     */
+    public String toStorageString() {
+        return appointmentDate.toString() + "|" + entry;
+    }
+
+    // Static method to parse from storage string
+    public static Log fromStorageString(String storageString) {
+        String[] parts = storageString.split("\\|");
+
+        if (parts.length != 2) {
+            throw new IllegalArgumentException("Invalid log format: " + storageString);
+        }
+
+        String datePart = parts[0].trim();
+        String descriptionPart = parts[1].trim();
+
+        AppointmentDate appointmentDate = new AppointmentDate(datePart);
+        return new Log(appointmentDate, descriptionPart);
     }
 
     /**

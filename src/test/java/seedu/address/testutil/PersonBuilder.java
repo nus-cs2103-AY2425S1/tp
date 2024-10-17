@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -84,8 +85,8 @@ public class PersonBuilder {
     /**
      * Parses the {@code logs} into a {@code Set<Log>} and sets it to the {@code Person} that we are building.
      */
-    public PersonBuilder withLogs(String... logs) {
-        this.logs = SampleDataUtil.getLogSet(logs);
+    public PersonBuilder withLogs(Log... logs) {
+        this.logs = new HashSet<>(Arrays.asList(logs));
         return this;
     }
 

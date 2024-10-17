@@ -17,52 +17,37 @@ class JsonAdaptedLog {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Log's %s field is missing!";
 
-    private final String entry;
-    private final String appointmentDate; // Store the date as a string
+    private final String storageEntry;
 
     /**
      * Constructs a {@code JsonAdaptedLog} with the given log details.
      */
     @JsonCreator
-    public JsonAdaptedLog(@JsonProperty("entry") String entry,
-        @JsonProperty("appointmentDate") String appointmentDate) {
-        this.entry = entry;
-        this.appointmentDate = appointmentDate;
+    public JsonAdaptedLog(String storageEntry) {
+        this.storageEntry = storageEntry;
+    }
+
+
+    public JsonAdaptedLog(Log log) {
+        this.storageEntry = log.getAppointmentDate() + "|" + log.getEntry(); // Formatting as "date|entry"
     }
 
     /**
-     * Converts a given {@code Log} into this class for Jackson use.
-     */
-    public JsonAdaptedLog(Log source) {
-        entry = source.getEntry();
-        // Convert AppointmentDate to string
-        appointmentDate = source.getAppointmentDate(); // Assuming getAppointmentDate() returns the formatted string
-    }
-
-    /**
-     * Converts this Jackson-friendly adapted log object into the model's {@code Log} object.
+     * Converts this Jackson-friendly adapted log object into the model's Log object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted log.
      */
-    public Log toModelType() throws IllegalValueException {
-        if (entry == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "entry"));
+    public Log toModelType() {
+        if (storageEntry == null || !storageEntry.contains("|")) {
+            throw new IllegalArgumentException("Invalid log entry format.");
         }
-
-        if (!Log.isValidEntry(entry)) {
-            throw new IllegalValueException(Log.MESSAGE_CONSTRAINTS);
+        String[] parts = storageEntry.split("\\|");
+        if (parts.length != 2) {
+            throw new IllegalArgumentException("Log entry must contain date and details separated by '|'.");
         }
+        AppointmentDate appointmentDate = new AppointmentDate(parts[0]); // Parse the date from the first part
+        String details = parts[1];
 
-        // Parse the appointment date from the string
-        LocalDate parsedDate;
-        try {
-            parsedDate = LocalDate.parse(appointmentDate, DateTimeFormatter.ofPattern("dd MMM yyyy"));
-        } catch (Exception e) {
-            throw new IllegalValueException("Invalid date format for appointment date!");
-        }
-
-        AppointmentDate modelAppointmentDate = new AppointmentDate(parsedDate);
-
-        return new Log(modelAppointmentDate, entry);
+        return new Log(appointmentDate, details); // Assuming details validation is handled in Log
     }
 }

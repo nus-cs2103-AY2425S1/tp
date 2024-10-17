@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -70,12 +71,14 @@ public class SampleDataUtil {
         return Arrays.stream(logs)
                 .map(log -> {
                     String[] logParts = log.split("\\|", 2);
+                    // Check if the logParts array has at least 2 elements
+                    if (logParts.length < 2) {
+                        throw new IllegalArgumentException("Log format is invalid: " + log);
+                    }
                     AppointmentDate appointmentDate = new AppointmentDate(logParts[0].trim());
                     String details = logParts[1].trim();
                     return new Log(appointmentDate, details);
                 })
                 .collect(Collectors.toSet());
     }
-
-
 }

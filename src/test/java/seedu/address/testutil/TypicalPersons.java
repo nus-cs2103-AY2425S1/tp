@@ -20,6 +20,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.log.AppointmentDate;
+import seedu.address.model.log.Log;
 import seedu.address.model.person.Person;
 
 /**
