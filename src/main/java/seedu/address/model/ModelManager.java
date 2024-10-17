@@ -24,7 +24,6 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-
     private final FilteredList<Owner> filteredOwners;
     private final FilteredList<Pet> filteredPets;
 
@@ -178,12 +177,21 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Owner} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
     public ObservableList<Owner> getFilteredOwnerList() {
         return filteredOwners;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Pet} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Pet> getFilteredPetList() {
+        return filteredPets;
     }
 
     @Override
@@ -203,9 +211,9 @@ public class ModelManager implements Model {
         filteredOwners.setPredicate(predicate);
     }
 
-    @Override
-    public void updateFilteredPetList(Predicate<seedu.address.model.pet.Pet> predicate) {
-
+    public void updateFilteredPetList(Predicate<Pet> predicate) {
+        requireNonNull(predicate);
+        filteredPets.setPredicate(predicate);
     }
 
     @Override

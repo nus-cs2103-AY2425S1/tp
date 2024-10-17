@@ -117,5 +117,4 @@ class JsonAdaptedPet {
         final Set<Tag> modelTags = new HashSet<>(petTags);
         return new Pet(modelName, modelSpecies, modelBreed, modelAge, modelSex, modelTags);
     }
-
 }
