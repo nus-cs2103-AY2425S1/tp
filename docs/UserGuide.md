@@ -271,6 +271,7 @@ Action     | Format, Examples
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG1 TAG2 ...]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend colleague`
 **List**   | `list`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Tag**    | `tag INDEX t/TAG1 TAG2 ...` <br> e.g., `tag 1 t/photographer`
 **Untag**  | `untag INDEX t/TAG1 TAG2 ...` or `untag INDEX t/all` <br> e.g., `untag 1 t/friends buddies`
 **Find**   | `find KEYWORD1 KEYWORD2 ...`<br> e.g., `find James Jake`
 **Filter** | `filter INDEX t/TAG1 TAG2 ...` <br> e.g., `filter 2 t/friends colleagues`
