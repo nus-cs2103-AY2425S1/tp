@@ -5,13 +5,13 @@ import java.util.Objects;
 /**
  * Represents a Person's months paid in the address book.
  */
-public class MonthsPaid {
-    public static final String MESSAGE_CONSTRAINTS = "MonthsPaid should take a string with the pattern"
+public class MonthPaid {
+    public static final String MESSAGE_CONSTRAINTS = "MonthPaid should take a string with the pattern"
             + " YYYY-MM, where one or of such patterns can be included if separated by a space.";
     public static final String SPLIT_VALIDATION_REGEX = "^[0-9]{4}-[0-9]{2}$";
     public final String value;
 
-    public MonthsPaid(String monthsPaid) {
+    public MonthPaid(String monthsPaid) {
         this.value = monthsPaid;
     }
 
@@ -23,16 +23,8 @@ public class MonthsPaid {
     /**
      * Returns true if a given string is a valid monthsPaid.
      */
-    public static boolean isValidMonthsPaid(String monthsPaid) {
-        if (monthsPaid.isEmpty()) {
-            return true;
-        }
-        for (String i : monthsPaid.split(" ")) {
-            if (!i.matches(SPLIT_VALIDATION_REGEX)) {
-                return false;
-            }
-        }
-        return true;
+    public static boolean isValidMonthPaid(String monthPaid) {
+        return monthPaid.matches(SPLIT_VALIDATION_REGEX);
     }
 
     @Override
@@ -42,11 +34,11 @@ public class MonthsPaid {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MonthsPaid otherMonthsPaid)) {
+        if (!(other instanceof MonthPaid otherMonthPaid)) {
             return false;
         }
 
-        return Objects.equals(value, otherMonthsPaid.value);
+        return Objects.equals(value, otherMonthPaid.value);
     }
 
     @Override
