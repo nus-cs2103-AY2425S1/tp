@@ -8,6 +8,7 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.commons.exceptions.AssociationDeleteException;
 import seedu.address.model.Model;
 import seedu.address.model.vendor.Vendor;
 
@@ -24,6 +25,8 @@ public class DeleteVendorCommand extends DeleteCommand {
             + "Example: " + COMMAND_WORD + " " + PREFIX_VENDOR + "1";
 
     public static final String MESSAGE_DELETE_VENDOR_SUCCESS = "Deleted Vendor: %1$s";
+    public static final String MESSAGE_DELETE_VENDOR_ASSOCIATED_FAILURE =
+        "Deletion failed as Vendor: %1$s is assigned to event(s)";
 
     /**
      * Creates a DeleteVendorCommand to delete the vendor at the specified
@@ -46,7 +49,13 @@ public class DeleteVendorCommand extends DeleteCommand {
         }
 
         Vendor vendorToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteVendor(vendorToDelete);
+
+        try {
+            model.deleteVendor(vendorToDelete);
+        } catch (AssociationDeleteException ae) {
+            return new CommandResult(String.format(MESSAGE_DELETE_VENDOR_ASSOCIATED_FAILURE, Messages.format(vendorToDelete)));
+        }
+
         return new CommandResult(String.format(MESSAGE_DELETE_VENDOR_SUCCESS, Messages.format(vendorToDelete)));
     }
 
