@@ -187,6 +187,20 @@ Format: `emergency INDEX n/EMERGENCY_CONTACT_NAME p/EMERGENCY_CONTACT_NUMBER`
 Examples:
 * `emergency 1 n/tom tan p/91237171` adds an emergency contact `tom tan` with contact number `91237171` to 1st index in person list.
 
+### Adding priority level : `priority`
+
+Adds an priority level to a person in the address book.
+
+Format: `priority /id INDEX /level PRIORITY_LEVEL`
+
+* Adds a priority level at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The priority level **must be a positive integer** and only from **1, 2, 3**
+
+Examples:
+* `priotity /id 1 /level 2` adds priority level `2` to 1st index in person list.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -236,12 +250,17 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+| Action                | Format, Examples                                                                                                                                                      |
+|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add Task**          | `addtask INDEX d/TASK_DESCRIPTION` <br> e.g., `addtask 1 d/Eat paracetamol 1000mg`                                                                                    |
+| **Clear**             | `clear`                                                                                                                                                               |
+| **Delete**            | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Delete Task**       | `deletetask INDEX`<br> e.g., `deletetask 3`                                                                                                                           |
+| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Emergency Contact** | `emergency INDEX n/EMERGENCY_CONTACT_NAME p/EMERGENCY_CONTACT_NUMBER`<br> e.g., `emergency 3 n/Tom Tan p/97151717`                                                    |
+| **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **List**              | `list`                                                                                                                                                                |
+| **Priority**          | `priority /id INDEX /level PRIORITY_LEVEL` <br> e.g., `priority /id 1 /level 2`                                                                                       |
+| **Help**              | `help`                                                                                                                                                                |
+
