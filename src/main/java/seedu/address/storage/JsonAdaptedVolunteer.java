@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -34,7 +33,8 @@ class JsonAdaptedVolunteer {
      */
     @JsonCreator
     public JsonAdaptedVolunteer(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                                @JsonProperty("email") String email, @JsonProperty("availableDate") String availableDate,
+                                @JsonProperty("email") String email,
+                                @JsonProperty("availableDate") String availableDate,
                                 @JsonProperty("startTimeAvailability") String startTime,
                                 @JsonProperty("endTimeAvailability") String endTime,
                                 @JsonProperty("involvedIn") List<String> involvedIn) {

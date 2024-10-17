@@ -14,7 +14,7 @@ import seedu.address.commons.util.ToStringBuilder;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Event {
-    private static int NEXT_ID = 0;
+    private static int nextId = 0;
 
     // Identity fields
     private final int id;
@@ -32,8 +32,8 @@ public class Event {
     public Event(EventName eventName, Location location, Date date,
                  Time startTime, Time endTime, Description description, List<String> volunteers) {
         requireAllNonNull(eventName, location, date, startTime, endTime, description, volunteers);
-        this.id = NEXT_ID;
-        NEXT_ID++;
+        this.id = nextId;
+        nextId++;
 
         this.eventName = eventName;
         this.location = location;
@@ -48,7 +48,8 @@ public class Event {
      * Constructs an {@code Event} object with the specified event name, location, date, start time, and end time.
      * Uses an empty description and volunteer list by default.
      */
-    public Event(EventName eventName, Location location, Date date, Time startTime, Time endTime, Description description) {
+    public Event(EventName eventName, Location location, Date date, Time startTime, Time endTime,
+                 Description description) {
         this(eventName, location, date, startTime, endTime, description, FXCollections.observableArrayList());
     }
 
@@ -60,7 +61,9 @@ public class Event {
         this(eventName, location, date, startTime, endTime, new Description(), FXCollections.observableArrayList());
     }
 
-    public int getId() { return id; }
+    public int getId() {
+        return id;
+    }
 
     public EventName getName() {
         return eventName;
@@ -85,7 +88,9 @@ public class Event {
     public Description getDescription() {
         return description;
     }
-    public ObservableList<String> getVolunteers() {return volunteers; }
+    public ObservableList<String> getVolunteers() {
+        return volunteers;
+    }
 
     public void addVolunteer(String newVolunteer) {
         volunteers.add(newVolunteer);

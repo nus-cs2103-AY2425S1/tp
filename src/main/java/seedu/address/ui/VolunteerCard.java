@@ -3,12 +3,11 @@ package seedu.address.ui;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.beans.binding.Bindings;
-import seedu.address.model.event.Event;
 import seedu.address.model.volunteer.Volunteer;
 
 /**
@@ -54,8 +53,7 @@ public class VolunteerCard extends UiPart<Region> {
 
         // Bind the "involvedIn" label to update automatically when events change.
         involvedIn.textProperty().bind(
-                Bindings.createStringBinding(
-                        () -> "Events: " + getEventsAsString(volunteer.getEvents()),
+                Bindings.createStringBinding(() -> "Events: " + getEventsAsString(volunteer.getEvents()),
                         volunteer.getEvents() // ObservableList to monitor changes
                 )
         );

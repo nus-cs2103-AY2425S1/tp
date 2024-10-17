@@ -7,17 +7,13 @@ import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.event.Description;
-import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
-import seedu.address.model.event.Location;
 
 /**
  * Represents a Volunteer in the system.
  */
 public class Volunteer {
 
-    private static int NEXT_ID = 0;
+    private static int nextId = 0;
 
     // Identity fields
     private final int id;
@@ -45,7 +41,7 @@ public class Volunteer {
                      Time startTimeAvailability, Time endTimeAvailability, List<String> involvedIn) {
         requireAllNonNull(name, phone, email, availableDate, startTimeAvailability, endTimeAvailability);
 
-        this.id = NEXT_ID++;
+        this.id = nextId++;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -60,10 +56,13 @@ public class Volunteer {
      */
     public Volunteer(Name name, Phone phone, Email email, Date availableDate,
                  Time startTimeAvailability, Time endTimeAvailability) {
-        this(name, phone, email, availableDate, startTimeAvailability, endTimeAvailability, FXCollections.observableArrayList());
+        this(name, phone, email, availableDate, startTimeAvailability, endTimeAvailability,
+                FXCollections.observableArrayList());
     }
 
-    public int getId() { return id; }
+    public int getId() {
+        return id;
+    }
 
     public Name getName() {
         return name;

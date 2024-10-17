@@ -124,7 +124,8 @@ class JsonAdaptedEvent {
 
         final ObservableList<String> modelVolunteers = FXCollections.observableArrayList(volunteers);
 
-        return new Event(modelEventName, modelLocation, modelDate, modelStartTime, modelEndTime, modelDescription, modelVolunteers);
+        return new Event(modelEventName, modelLocation, modelDate, modelStartTime, modelEndTime,
+                modelDescription, modelVolunteers);
     }
 
 }

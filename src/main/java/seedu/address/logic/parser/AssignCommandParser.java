@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.ASSIGN_VOLUNTEER_PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.ASSIGN_EVENT_PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.ASSIGN_VOLUNTEER_PREFIX_NAME;
 
 import java.util.stream.Stream;
 
@@ -36,12 +36,12 @@ public class AssignCommandParser {
         int eventId;
 
         try {
-            volunteerId = Integer.parseInt(argMultimap.getValue(ASSIGN_VOLUNTEER_PREFIX_NAME).orElseThrow(
-                    () -> new ParseException("Volunteer ID is required.")
+            volunteerId = Integer.parseInt(argMultimap.getValue(ASSIGN_VOLUNTEER_PREFIX_NAME)
+                    .orElseThrow(() -> new ParseException("Volunteer ID is required.")
             ));
 
-            eventId = Integer.parseInt(argMultimap.getValue(ASSIGN_EVENT_PREFIX_NAME).orElseThrow(
-                    () -> new ParseException("Event ID is required.")
+            eventId = Integer.parseInt(argMultimap.getValue(ASSIGN_EVENT_PREFIX_NAME)
+                    .orElseThrow(() -> new ParseException("Event ID is required.")
             ));
         } catch (NumberFormatException e) {
             throw new ParseException("ID must be a valid integer.");

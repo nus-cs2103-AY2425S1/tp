@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.event.Event;
-import seedu.address.model.volunteer.Volunteer;
 
 /**
  * A UI component that displays information of a {@code Event}.
@@ -52,8 +51,7 @@ public class EventCard extends UiPart<Region> {
         description.setText(event.getDescription().toString());
 
         volunteers.textProperty().bind(
-                Bindings.createStringBinding(
-                        () -> "Volunteers: " + getVolunteersAsString(event.getVolunteers()),
+                Bindings.createStringBinding(() -> "Volunteers: " + getVolunteersAsString(event.getVolunteers()),
                         event.getVolunteers() // ObservableList to monitor changes
                 )
         );
