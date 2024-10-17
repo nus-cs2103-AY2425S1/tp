@@ -7,6 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYEE_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_ID;
 
+import java.util.List;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -14,6 +16,8 @@ import seedu.address.model.Model;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentId;
 import seedu.address.model.person.EmployeeId;
+import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectId;
 
 /**
@@ -58,8 +62,8 @@ public class AssignCommand extends Command {
     public AssignCommand(Assignment assignment) {
         requireNonNull(assignment);
         this.assignmentId = assignment.getAssignmentId();
-        this.projectId = assignment.getProjectId();
-        this.employeeId = assignment.getEmployeeId();
+        this.projectId = assignment.getProject().getId();
+        this.employeeId = assignment.getPerson().getEmployeeId();
     }
 
     @Override
@@ -72,7 +76,13 @@ public class AssignCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Assignment toAssign = new Assignment(assignmentId, projectId, employeeId);
+        List<Person> personList = model.getPersonList();
+        Person person = personList.stream().filter(p -> p.getEmployeeId().equals(employeeId)).findFirst().get();
+
+        List<Project> projectList = model.getProjectList();
+        Project project = projectList.stream().filter(p -> p.getId().equals(projectId)).findFirst().get();
+
+        Assignment toAssign = new Assignment(assignmentId, project, person);
 
         if (model.hasAssignment(toAssign)) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);

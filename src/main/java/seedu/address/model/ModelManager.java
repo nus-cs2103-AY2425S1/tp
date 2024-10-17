@@ -137,6 +137,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Person> getPersonList() {
+        return this.addressBook.getPersonList();
+    }
+
+    @Override
     public boolean hasProject(Project project) {
         requireNonNull(project);
         return addressBook.hasProject(project);
@@ -164,6 +169,11 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedProject);
 
         addressBook.setProject(target, editedProject);
+    }
+
+    @Override
+    public ObservableList<Project> getProjectList() {
+        return this.addressBook.getProjectList();
     }
 
     @Override
