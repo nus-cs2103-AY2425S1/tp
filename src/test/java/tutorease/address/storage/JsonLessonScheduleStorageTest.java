@@ -3,7 +3,7 @@ package tutorease.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static tutorease.address.testutil.Assert.assertThrows;
-import static tutorease.address.testutil.TypicalPersons.getTypicalTutorEase;
+import static tutorease.address.testutil.TypicalStudents.getTypicalTutorEase;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
