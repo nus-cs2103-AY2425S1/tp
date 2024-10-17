@@ -56,5 +56,6 @@
     "major" : "bza",
     "address" : "4th street",
     "tags" : [ ]
-  } ]
+  } ],
+  "meetings" : []
 }
