@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -67,8 +68,8 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         // For each course string (this could be a CSV or a single course)
         for (String courseString : courses) {
-            // Split by commas to support CSV input within a single `c/` prefix
-            String[] splitCourses = courseString.split(",");
+
+            List<String> splitCourses = ArgumentTokenizer.tokenizeWithDefault(courseString);
             // Add each course after trimming whitespace
             for (String course : splitCourses) {
                 parsedCourses.add(course.trim());
