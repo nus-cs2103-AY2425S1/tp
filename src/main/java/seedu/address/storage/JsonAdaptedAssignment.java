@@ -43,7 +43,7 @@ public class JsonAdaptedAssignment {
         gradingStatus = source.getGradingStatus().status.toString();
         grade = source.getGrade().grade
                 .map(x -> x.toString())
-                .orElse("NA");
+                .orElse("NULL");
     }
 
     @JsonProperty("assignmentName")

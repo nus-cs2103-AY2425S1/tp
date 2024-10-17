@@ -135,7 +135,8 @@ public class JsonAdaptedStudent {
         Student student = new Student(modelName, modelPhone, modelTutorialGroup, modelStudentNumber);
 
         for (JsonAdaptedAssignment assignment : assignments) {
-            student.addAssignment(assignment.toModelType());
+            Assignment modelAssignment = assignment.toModelType();
+            student.addAssignment(modelAssignment);
         }
 
 
