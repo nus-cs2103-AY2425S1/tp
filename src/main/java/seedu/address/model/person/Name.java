@@ -9,14 +9,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, "
+    public static final String MESSAGE_CONSTRAINTS = "Names should only contain alphanumeric characters and spaces, "
             + "and it should include given name and surname";
 
     /*
      * The first character of the address must not be a whitespace, otherwise " " (a
-     * blank string) becomes a valid input. The name needs to contain two words, for
-     * first and last name.
+     * blank string) becomes a valid input. The name must contain at least two
+     * words, for first and last name.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}]+ [\\p{Alnum}][\\p{Alnum} ]*";
 
