@@ -155,8 +155,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find Inc` returns `inc` and `Apple Inc`
-* `find Apple Inc` returns `Apple Inc`, `Amazon Inc`<br>
-  ![result for 'find apple google'](images/findAlexDavidResult.png)
+* `find Apple Inc` returns `Apple Inc`, `Facebook Inc`<br>
+  ![result for 'find apple google'](images/findAppleFacebookResult.png)
 
 ### Deleting a company : `delete`
 
