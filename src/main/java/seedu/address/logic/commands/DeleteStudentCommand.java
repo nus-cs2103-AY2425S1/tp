@@ -51,7 +51,7 @@ public class DeleteStudentCommand extends Command {
         }
 
         model.deleteStudent(studentToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, name));
+        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS) + studentToDelete.getName());
     }
 
     /**
