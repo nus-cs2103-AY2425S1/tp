@@ -9,8 +9,10 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <GridPane HBox.hgrow="ALWAYS">
+  <GridPane HBox.hgrow="ALWAYS" >
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
     </columnConstraints>
@@ -25,12 +27,43 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$name" styleClass="cell_big_label" />
+        <Label fx:id="name" text="\$name" styleClass="cell_big_label" >
+        <HBox.margin>
+          <Insets bottom="2.5" left="2.5" right="2.5" top="2.5" />
+        </HBox.margin></Label>
       </HBox>
+
       <FlowPane fx:id="products" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="company" styleClass="cell_small_label" text="\$company" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <ImageView fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true">
+          <Image url="@/images/phone.png"/>
+        </ImageView>
+        <Label fx:id="phone" styleClass="cell_small_label" text="$phone" >
+        <HBox.margin>
+          <Insets bottom="2.5" left="2.5" right="2.5" top="2.5" />
+        </HBox.margin></Label>
+      </HBox>
+
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <ImageView fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true">
+          <Image url="@/images/address.png"/>
+        </ImageView>
+        <Label fx:id="company" styleClass="cell_small_label" text="\$company">
+        <HBox.margin>
+          <Insets bottom="2.5" left="2.5" right="2.5" top="2.5" />
+        </HBox.margin></Label>
+      </HBox>
+
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <ImageView fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true">
+          <Image url="@/images/email.png"/>
+        </ImageView>
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" >
+        <HBox.margin>
+          <Insets bottom="2.5" left="2.5" right="2.5" top="2.5" />
+        </HBox.margin></Label>
+      </HBox>
+
       <FlowPane fx:id="tags" />
       <Label fx:id="status" styleClass="cell_small_label" text="\$status" />
     </VBox>

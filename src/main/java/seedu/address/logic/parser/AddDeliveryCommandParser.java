@@ -12,11 +12,11 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddDeliveryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Cost;
+import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Quantity;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.SupplierIndex;
-import seedu.address.model.delivery.Time;
 import seedu.address.model.product.Product;
 
 /**
@@ -41,14 +41,14 @@ public class AddDeliveryCommandParser implements Parser<AddDeliveryCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATETIME, PREFIX_SUPPLIER_INDEX,
                 PREFIX_PRODUCT, PREFIX_QUANTITY, PREFIX_COST);
-        Time deliveryDateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
+        DateTime deliveryDateDateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
         //Pending update from supplier side for name
         //Pending confirmation of use of supplierIndex
         SupplierIndex supplierIndex = ParserUtil.parseSupplierIndex(argMultimap.getValue(PREFIX_SUPPLIER_INDEX).get());
         Product product = ParserUtil.parseProduct(argMultimap.getValue(PREFIX_PRODUCT).get());
         Quantity quantity = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
         Cost cost = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get());
-        Delivery delivery = new Delivery(product, null, Status.PENDING, deliveryDateTime, cost, quantity,
+        Delivery delivery = new Delivery(product, null, Status.PENDING, deliveryDateDateTime, cost, quantity,
                 supplierIndex);
         return new AddDeliveryCommand(delivery);
     }
