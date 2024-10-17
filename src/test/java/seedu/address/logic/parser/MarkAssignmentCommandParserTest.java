@@ -1,0 +1,85 @@
+package seedu.address.logic.parser;
+
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalIndexes.*;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.MarkAssignmentCommand;
+
+public class MarkAssignmentCommandParserTest {
+
+    private final MarkAssignmentCommandParser parser = new MarkAssignmentCommandParser();
+
+    @Test
+    public void parse_validArgs_returnsMarkAssignmentCommand() {
+        String userInput = " " + PREFIX_STUDENT_INDEX + INDEX_FIRST_STUDENT.getOneBased() + " " +
+                PREFIX_ASSIGNMENT_INDEX + INDEX_FIRST_ASSIGNMENT.getOneBased();
+        assertParseSuccess(parser, userInput, new MarkAssignmentCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_ASSIGNMENT));
+    }
+
+    @Test
+    public void parse_invalidArgs_throwsParseException() {
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                MarkAssignmentCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_missingPrefixes_throwsParseException() {
+        // Missing both prefixes
+        String userInput = "1 1";
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                MarkAssignmentCommand.MESSAGE_USAGE));
+
+        // Missing student prefix
+        userInput = "1 " + PREFIX_ASSIGNMENT_INDEX + "1";
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                MarkAssignmentCommand.MESSAGE_USAGE));
+
+        // Missing assignment prefix
+        userInput = PREFIX_STUDENT_INDEX + "1";
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                MarkAssignmentCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_duplicatePrefixes_throwsParseException() {
+        // Duplicate student prefix
+        String userInput = " " + PREFIX_STUDENT_INDEX + INDEX_FIRST_STUDENT.getOneBased() + " " +
+                PREFIX_STUDENT_INDEX + INDEX_SECOND_STUDENT + " " + PREFIX_ASSIGNMENT_INDEX + INDEX_FIRST_ASSIGNMENT;
+        assertParseFailure(parser, userInput,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAssignmentCommand.MESSAGE_USAGE));
+
+        // Duplicate assignment prefix
+        String duplicateAssignmentInput = " " + PREFIX_STUDENT_INDEX + INDEX_FIRST_STUDENT.getOneBased() + " " +
+                PREFIX_ASSIGNMENT_INDEX + INDEX_FIRST_ASSIGNMENT + " " +
+                PREFIX_ASSIGNMENT_INDEX + INDEX_SECOND_ASSIGNMENT;
+        assertParseFailure(parser, duplicateAssignmentInput,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAssignmentCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_nonNumericIndexes_throwsParseException() {
+        // Non-numeric student index
+        String userInput = PREFIX_STUDENT_INDEX + "a " + PREFIX_ASSIGNMENT_INDEX + "1";
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                MarkAssignmentCommand.MESSAGE_USAGE));
+
+        // Non-numeric assignment index
+        userInput = PREFIX_STUDENT_INDEX + "1 " + PREFIX_ASSIGNMENT_INDEX + "b";
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                MarkAssignmentCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyInput_throwsParseException() {
+        // Empty input
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                MarkAssignmentCommand.MESSAGE_USAGE));
+    }
+
+}
