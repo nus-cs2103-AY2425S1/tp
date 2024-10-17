@@ -6,8 +6,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.order.CustomerOrder;
-import seedu.address.model.order.OrderList;
-import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -16,28 +14,33 @@ import seedu.address.model.tag.Tag;
  */
 public class Customer extends Person {
 
-    private final String orderHistory;
-    private final String favoriteItems;
-    private List<CustomerOrder> openCustomerOrders; //stores a list of open/unfulfilled customer orders
+    private final List<CustomerOrder> openCustomerOrders; // stores a list of open/unfulfilled customer orders
+    private final Information information; // stores additional information about the customer
 
     /**
      * Every field must be present and not null.
      */
     public Customer(Name name, Phone phone, Email email, Address address,
-                    DietaryPreference preference, Remark remark, Set<Tag> tags,
-                    String orderHistory, String favoriteItems) {
+                    DietaryPreference preference, Information information, Remark remark, Set<Tag> tags) {
         super(name, phone, email, address, preference, remark, tags);
-        this.orderHistory = orderHistory;
-        this.favoriteItems = favoriteItems;
+        this.information = information;
         this.openCustomerOrders = new ArrayList<>();
     }
 
-    public String getOrderHistory() {
-        return orderHistory;
+    public List<CustomerOrder> getOpenCustomerOrders() {
+        return openCustomerOrders;
     }
 
-    public String getFavoriteItems() {
-        return favoriteItems;
+    public void addCustomerOrder(CustomerOrder customerOrder) {
+        openCustomerOrders.add(customerOrder);
+    }
+
+    public void removeCustomerOrder(CustomerOrder customerOrder) {
+        openCustomerOrders.remove(customerOrder);
+    }
+
+    public Information getInformation() {
+        return information;
     }
 
     @Override
@@ -52,22 +55,21 @@ public class Customer extends Person {
 
         Customer otherCustomer = (Customer) other;
         return super.equals(otherCustomer)
-                && otherCustomer.getOrderHistory().equals(getOrderHistory())
-                && otherCustomer.getFavoriteItems().equals(getFavoriteItems());
+                && otherCustomer.getInformation().equals(getInformation());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), orderHistory, favoriteItems);
+        return Objects.hash(super.hashCode(), information);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder(super.toString());
-        builder.append(" Order History: ")
-                .append(getOrderHistory())
-                .append(" Favorite Items: ")
-                .append(getFavoriteItems());
+        builder.append(" Information: ")
+                .append(getInformation());
         return builder.toString();
     }
 }
+
+
