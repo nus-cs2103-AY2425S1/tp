@@ -21,7 +21,11 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.policy.*;
+import seedu.address.model.policy.EducationPolicy;
+import seedu.address.model.policy.HealthPolicy;
+import seedu.address.model.policy.LifePolicy;
+import seedu.address.model.policy.PolicySet;
+import seedu.address.model.policy.PolicyType;
 import seedu.address.testutil.PersonBuilder;
 
 

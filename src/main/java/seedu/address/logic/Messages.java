@@ -48,9 +48,10 @@ public class Messages {
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
-
+    /**
+     * Formats the {@code policy} for display to the user.
+     */
     public static String formatPolicies(PolicySet policies) {
-
         return policies.toString();
     }
 
