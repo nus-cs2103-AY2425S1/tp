@@ -7,12 +7,13 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.commons.Address;
 import seedu.address.model.commons.Name;
+import seedu.address.model.commons.NamedObject;
 
 /**
  * Represents a Concert in the address book. Guarantees: details are present and not null, field
  * values are validated, immutable.
  */
-public class Concert {
+public class Concert implements NamedObject {
     // Identity fields
     private final Name name;
     private final Address address;
@@ -28,6 +29,7 @@ public class Concert {
         this.concertDate = concertDate;
     }
 
+    @Override
     public Name getName() {
         return name;
     }

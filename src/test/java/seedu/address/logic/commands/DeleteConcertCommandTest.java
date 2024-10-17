@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showConcertAtIndex;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBookConcerts;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONCERT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CONCERT;
 
@@ -24,7 +24,7 @@ import seedu.address.model.concert.Concert;
  * {@code DeleteConcertCommand}.
  */
 public class DeleteConcertCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBookConcerts(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -43,7 +43,7 @@ public class DeleteConcertCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredConcertList().size() + 1);
         DeleteConcertCommand deleteCommand = new DeleteConcertCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX);
@@ -73,7 +73,7 @@ public class DeleteConcertCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_CONCERT;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getConcertList().size());
 
         DeleteConcertCommand deleteCommand = new DeleteConcertCommand(outOfBoundIndex);
 
