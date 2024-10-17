@@ -47,10 +47,10 @@ public class FindCommandParserTest {
                         Arrays.asList("91234567", "995")));
 
         // no leading and trailing whitespaces
-        assertParseSuccess(parser, "c/ 91234567 995", expectedFindCommand);
+        assertParseSuccess(parser, "p/ 91234567 995", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "c/ \n 91234567 \n \t 995  \t", expectedFindCommand);
+        assertParseSuccess(parser, "p/ \n 91234567 \n \t 995  \t", expectedFindCommand);
     }
 
     @Test

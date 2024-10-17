@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
@@ -22,7 +23,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindByContactCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindByPhoneCommand}.
  */
 public class FindByPhoneCommandTest {
     private final Model expectedModel = new ModelManager(getTypicalCampusConnect(), new UserPrefs());
@@ -75,16 +76,17 @@ public class FindByPhoneCommandTest {
         assertEquals(Arrays.asList(ELLE, FIONA, GEORGE), model.getFilteredPersonList());
     }
 
-    // Commented out because expectedModel does not contain contact numbers
-    //    @Test
-    //    public void execute_multipleKeywords_multiplePersonsFound() {
-    //        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-    //        ContactContainsKeywordsPredicate predicate = preparePredicate("999");
-    //        FindByContactCommand command = new FindByContactCommand(predicate);
-    //        expectedModel.updateFilteredPersonList(predicate);
-    //        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-    //        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
-    //    }
+    @Test
+    public void execute_multipleKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
+        PhoneContainsKeywordsPredicate predicate = preparePredicate("9482 563");
+        FindByPhoneCommand command = new FindByPhoneCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        System.out.println(command);
+        System.out.println(expectedModel.getFilteredPersonList().toString());
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
+    }
 
     @Test
     public void toStringMethod() {
