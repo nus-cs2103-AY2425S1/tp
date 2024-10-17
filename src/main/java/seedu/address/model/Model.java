@@ -85,4 +85,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredRestaurantList(Predicate<Restaurant> predicate);
+
+    /**
+     * Favourite the given restaurant.
+     * The restaurant must exist in the address book.
+     */
+    void favouriteRestaurant(Restaurant target);
 }
