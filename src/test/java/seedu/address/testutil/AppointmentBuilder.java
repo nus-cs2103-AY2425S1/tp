@@ -1,11 +1,14 @@
 package seedu.address.testutil;
 
+import static seedu.address.testutil.TypicalPersons.ALICE_P;
+
 import java.time.LocalDateTime;
 
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentType;
 import seedu.address.model.appointment.Medicine;
 import seedu.address.model.appointment.Sickness;
+import seedu.address.model.person.Person;
 
 /**
  * A utility class to help with building Appointment objects.
@@ -15,13 +18,13 @@ public class AppointmentBuilder {
     public static final String DEFAULT_APPOINTMENT_TYPE = "Health Checkup";
     public static final LocalDateTime DEFAULT_APPOINTMENT_DATE_TIME =
         LocalDateTime.of(2024, 10, 15, 10, 30);
-    public static final int DEFAULT_PERSON_ID = 1;
+    public static final Person DEFAULT_PERSON = ALICE_P;
     public static final String DEFAULT_MEDICINE = "Panadol";
     public static final String DEFAULT_SICKNESS = "Flu";
 
     private AppointmentType appointmentType;
     private LocalDateTime appointmentDateTime;
-    private int personId;
+    private Person person;
     private Medicine medicine;
     private Sickness sickness;
 
@@ -31,7 +34,7 @@ public class AppointmentBuilder {
     public AppointmentBuilder() {
         appointmentType = new AppointmentType(DEFAULT_APPOINTMENT_TYPE);
         appointmentDateTime = DEFAULT_APPOINTMENT_DATE_TIME;
-        personId = DEFAULT_PERSON_ID;
+        person = DEFAULT_PERSON;
         medicine = new Medicine(DEFAULT_MEDICINE);
         sickness = new Sickness(DEFAULT_SICKNESS);
     }
@@ -42,7 +45,7 @@ public class AppointmentBuilder {
     public AppointmentBuilder(Appointment appointmentToCopy) {
         appointmentType = appointmentToCopy.getAppointmentType();
         appointmentDateTime = appointmentToCopy.getAppointmentDateTime();
-        personId = appointmentToCopy.getPersonId();
+        person = appointmentToCopy.getPerson();
         medicine = appointmentToCopy.getMedicine();
         sickness = appointmentToCopy.getSickness();
     }
@@ -56,10 +59,10 @@ public class AppointmentBuilder {
     }
 
     /**
-     * Sets the {@code personId} of the {@code Appointment} that we are building.
+     * Sets the {@code person} of the {@code Appointment} that we are building.
      */
-    public AppointmentBuilder withPersonId(int personId) {
-        this.personId = personId;
+    public AppointmentBuilder withPerson(Person person) {
+        this.person = person;
         return this;
     }
 
@@ -91,7 +94,7 @@ public class AppointmentBuilder {
      * Builds the {@code Appointment} object.
      */
     public Appointment build() {
-        return new Appointment(appointmentType, appointmentDateTime, personId, sickness, medicine);
+        return new Appointment(appointmentType, appointmentDateTime, person, sickness, medicine);
     }
 
 }

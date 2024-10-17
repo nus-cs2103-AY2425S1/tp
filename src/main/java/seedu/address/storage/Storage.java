@@ -34,7 +34,8 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, Appointme
     Path getAppointmentBookFilePath();
 
     @Override
-    Optional<ReadOnlyAppointmentBook> readAppointmentBook() throws DataLoadingException;
+    Optional<ReadOnlyAppointmentBook> readAppointmentBook(
+            ReadOnlyAddressBook addressBook) throws DataLoadingException;
 
     @Override
     void saveAppointmentBook(ReadOnlyAppointmentBook appointmentBook) throws IOException;

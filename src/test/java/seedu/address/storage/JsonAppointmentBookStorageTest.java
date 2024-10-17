@@ -6,14 +6,21 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.AppointmentBook;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyAppointmentBook;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonDescriptor;
 
 public class JsonAppointmentBookStorageTest {
 
@@ -21,6 +28,7 @@ public class JsonAppointmentBookStorageTest {
 
     @TempDir
     public Path testFolder;
+    private final ReadOnlyAddressBook addressBookStub = new AddressBookStub(new ArrayList<>(){});
 
     @Test
     public void readAppointmentBook_nullFilePath_throwsNullPointerException() {
@@ -29,7 +37,7 @@ public class JsonAppointmentBookStorageTest {
 
     private Optional<ReadOnlyAppointmentBook> readAppointmentBook(String filePath) throws Exception {
         return new JsonAppointmentBookStorage(Paths.get(filePath))
-                .readAppointmentBook(addToTestDataPathIfNotNull(filePath));
+                .readAppointmentBook(addToTestDataPathIfNotNull(filePath), addressBookStub);
     }
 
     private Path addToTestDataPathIfNotNull(String filePath) {
@@ -78,5 +86,33 @@ public class JsonAppointmentBookStorageTest {
     @Test
     public void saveAppointmentBook_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveAppointmentBook(new AppointmentBook(), null));
+    }
+
+    /**
+     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     */
+    private static class AddressBookStub implements ReadOnlyAddressBook {
+        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+
+        AddressBookStub(Collection<PersonDescriptor> persons) {
+            this.persons.setAll(persons.stream().map(p -> new Person(0, p)).toList());
+        }
+
+        @Override
+        public ObservableList<Person> getPersonList() {
+            return persons;
+        }
+
+        @Override
+        public Optional<Person> findPerson(int personId) {
+            return persons.stream()
+                          .filter(person -> person.getPersonId() == personId)
+                          .findFirst();
+        }
+
+        @Override
+        public int getNextPersonId() {
+            return persons.size();
+        }
     }
 }

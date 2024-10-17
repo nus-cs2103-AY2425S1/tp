@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -42,7 +43,7 @@ public class ModelManager implements Model {
                 + addressBook
                 + ", with appointment book: "
                 + appointmentBook
-                + " and user prefs "
+                + " and user prefs: "
                 + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
@@ -91,6 +92,17 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public Path getAppointmentBookFilePath() {
+        return userPrefs.getAppointmentBookFilePath();
+    }
+
+    @Override
+    public void setAppointmentBookFilePath(Path appointmentBookFilePath) {
+        requireNonNull(appointmentBookFilePath);
+        userPrefs.setAppointmentBookFilePath(appointmentBookFilePath);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -121,10 +133,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public int addPerson(PersonDescriptor person) {
-        int id = addressBook.addPerson(person);
+    public Optional<Person> findPerson(int personId) {
+        return addressBook.findPerson(personId);
+    }
+
+    @Override
+    public Person addPerson(PersonDescriptor personDescriptor) {
+        Person person = addressBook.addPerson(personDescriptor);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return id;
+        return person;
     }
 
     @Override
@@ -132,42 +149,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
-    }
-
-    //=========== AppointmentBook ============================================================================
-
-    @Override
-    public void setAppointmentBook(ReadOnlyAppointmentBook appointmentBook) {
-        this.appointmentBook.resetData(appointmentBook);
-    }
-
-    @Override
-    public ReadOnlyAppointmentBook getAppointmentBook() {
-        return appointmentBook;
-    }
-
-    @Override
-    public boolean hasAppointment(AppointmentDescriptor appointment) {
-        requireNonNull(appointment);
-        return appointmentBook.hasAppointment(appointment);
-    }
-
-    @Override
-    public void deleteAppointment(Appointment target) {
-        appointmentBook.removeAppointment(target);
-    }
-
-    @Override
-    public void addAppointment(AppointmentDescriptor appointment) {
-        appointmentBook.addAppointment(appointment);
-        updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
-    }
-
-    @Override
-    public void setAppointment(Appointment target, Appointment editedAppointment) {
-        requireAllNonNull(target, editedAppointment);
-
-        appointmentBook.setAppointment(target, editedAppointment);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -185,6 +166,49 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== AppointmentBook ============================================================================
+
+    @Override
+    public void setAppointmentBook(ReadOnlyAppointmentBook appointmentBook) {
+        this.appointmentBook.resetData(appointmentBook);
+    }
+
+    @Override
+    public ReadOnlyAppointmentBook getAppointmentBook() {
+        return appointmentBook;
+    }
+
+    @Override
+    public boolean hasAppointment(Appointment appointment) {
+        requireNonNull(appointment);
+        return appointmentBook.hasAppointment(appointment);
+    }
+
+    @Override
+    public boolean hasAppointment(AppointmentDescriptor appointmentDescriptor) {
+        requireNonNull(appointmentDescriptor);
+        return appointmentBook.hasAppointment(appointmentDescriptor);
+    }
+
+    @Override
+    public void deleteAppointment(Appointment target) {
+        appointmentBook.removeAppointment(target);
+    }
+
+    @Override
+    public Appointment addAppointment(Person person, AppointmentDescriptor appointmentDescriptor) {
+        Appointment appointment = appointmentBook.addAppointment(person, appointmentDescriptor);
+        updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+        return appointment;
+    }
+
+    @Override
+    public void setAppointment(Appointment target, Appointment editedAppointment) {
+        requireAllNonNull(target, editedAppointment);
+
+        appointmentBook.setAppointment(target, editedAppointment);
     }
 
     //=========== Filtered Appointment List Accessors =========================================================

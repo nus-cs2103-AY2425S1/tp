@@ -98,12 +98,14 @@ public class MainApp extends Application {
             initialPersonsData = new AddressBook();
         }
         try {
-            appointmentBookOptional = storage.readAppointmentBook();
+            appointmentBookOptional = storage.readAppointmentBook(initialPersonsData);
             if (!appointmentBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAppointmentBookFilePath()
                         + " populated with a sample AppointmentBook.");
+                initialAppointmentData = SampleDataUtil.getSampleAppointmentBook(initialPersonsData);
+            } else {
+                initialAppointmentData = appointmentBookOptional.get();
             }
-            initialAppointmentData = appointmentBookOptional.orElseGet(SampleDataUtil::getSampleAppointmentBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAppointmentBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AppointmentBook.");

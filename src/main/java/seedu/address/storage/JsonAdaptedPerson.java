@@ -61,17 +61,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
     }
-    /**
-     * Checks if a given string is a positive int value
-     */
-    public static boolean isPositiveInteger(String str) {
-        try {
-            int number = Integer.parseInt(str);
-            return number >= 0;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
+
     /**
      * Converts this Json-friendly adapted person object into the model's {@code Person} object.
      *
