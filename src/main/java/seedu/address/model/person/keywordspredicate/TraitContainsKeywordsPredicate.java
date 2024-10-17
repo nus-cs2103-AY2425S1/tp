@@ -18,18 +18,7 @@ public abstract class TraitContainsKeywordsPredicate<T> implements Predicate<T> 
     public abstract boolean test(T t);
 
     @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof TraitContainsKeywordsPredicate<?> otherNameContainsKeywordsPredicate)) {
-            return false;
-        }
-
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
-    }
+    public abstract boolean equals(Object other);
 
     @Override
     public String toString() {

@@ -23,8 +23,6 @@ public abstract class FindCommand extends Command {
             + "Parameters: PREFIX/ KEYWORDS [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + " alice charlie";
 
-    public static final String MESSAGE_FIND_PERSON_SUCCESS = "Search for \"%s\" was successful. Showing results:";
-
     public static final String MESSAGE_FIND_PERSON_UNSUCCESSFUL = "No contacts found.";
 
     protected final TraitContainsKeywordsPredicate<?> predicate;
@@ -37,18 +35,7 @@ public abstract class FindCommand extends Command {
     public abstract CommandResult execute(Model model);
 
     @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof FindCommand otherFindCommand)) {
-            return false;
-        }
-
-        return predicate.equals(otherFindCommand.predicate);
-    }
+    public abstract boolean equals(Object other);
 
     @Override
     public String toString() {

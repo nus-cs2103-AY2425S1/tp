@@ -23,14 +23,14 @@ public class TagContainsKeywordsPredicateTest {
         assertEquals(firstPredicate, firstPredicate);
 
         // Test null -> returns false
-        assertNotEquals(null, firstPredicate);
+        assertFalse(firstPredicate.equals(null));
 
         // Test different types -> returns false
         assertNotEquals(5, firstPredicate);
 
         // Test different predicates -> returns false
         TagContainsKeywordsPredicate secondPredicate =
-                new TagContainsKeywordsPredicate(Collections.singletonList("rural"));
+                new TagContainsKeywordsPredicate(Collections.singletonList("venue"));
         assertNotEquals(firstPredicate, secondPredicate);
 
         // Test same predicate with same keyword -> returns true
