@@ -46,4 +46,33 @@ public class JsonAdaptedLogTest {
         String logString = LOG.toStorageString();
         assertEquals(STORAGE_STRING, logString);
     }
+
+    @Test
+    public void toModelType_missingEntry_throwsIllegalValueException() {
+        JsonAdaptedLog jsonAdaptedLog = new JsonAdaptedLog(APPOINTMENT_DATE.toString(), null);
+        assertThrows(IllegalValueException.class, jsonAdaptedLog::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidEntry_throwsIllegalValueException() {
+        String invalidEntry = ""; // Assuming empty string is invalid
+        JsonAdaptedLog jsonAdaptedLog = new JsonAdaptedLog(APPOINTMENT_DATE.toString(), invalidEntry);
+        assertThrows(IllegalValueException.class, jsonAdaptedLog::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidDateFormat_throwsIllegalValueException() {
+        String invalidDate = "2024-10-19"; // Wrong date format
+        JsonAdaptedLog jsonAdaptedLog = new JsonAdaptedLog(invalidDate, ENTRY);
+        assertThrows(IllegalValueException.class, jsonAdaptedLog::toModelType);
+    }
+
+    @Test
+    public void toModelType_validDateString_convertsCorrectly() throws IllegalValueException {
+        String validDate = "19 Oct 2024";
+        JsonAdaptedLog jsonAdaptedLog = new JsonAdaptedLog(validDate, ENTRY);
+        Log parsedLog = jsonAdaptedLog.toModelType();
+        assertEquals(APPOINTMENT_DATE, parsedLog.getAppointmentDate());
+        assertEquals(ENTRY, parsedLog.getEntry());
+    }
 }

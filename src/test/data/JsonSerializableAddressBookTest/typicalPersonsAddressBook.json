@@ -15,7 +15,12 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ],
-    "logs": [ "19 Oct 2024|Doctor's Appointment" ]
+    "logs": [
+      {
+        "appointmentDate" : "19 Oct 2024",
+        "entry" : "Doctor's Appointment"
+      }
+    ]
   }, {
     "name" : "Carl Kurz",
     "identityNumber" : "S9844952C",

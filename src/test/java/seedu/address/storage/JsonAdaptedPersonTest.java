@@ -21,7 +21,8 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_LOG = "19 OCT 2024"; // missing description
+    private static final String INVALID_LOG_DATE = "19-10-2024"; // INCORRECT FORMAT dd MMM yyyy
+    private static final String INVALID_LOG_ENTRY = " ";
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_IDENTITY_NUMBER = BENSON.getIdentityNumber().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -140,7 +141,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidLog_throwsIllegalValueException() {
         List<JsonAdaptedLog> invalidLogs = new ArrayList<>(VALID_LOGS);
-        invalidLogs.add(new JsonAdaptedLog(INVALID_LOG)); // This should now throw IllegalValueException
+        invalidLogs.add(new JsonAdaptedLog(INVALID_LOG_DATE, INVALID_LOG_ENTRY));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_IDENTITY_NUMBER, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_TAGS, invalidLogs);
