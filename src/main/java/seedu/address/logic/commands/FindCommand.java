@@ -2,25 +2,29 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.logic.Messages;
-import seedu.address.model.Model;
-import seedu.address.model.company.NameCompanyMatchesPredicate;
-
 import java.util.List;
+
+import seedu.address.model.Model;
+import seedu.address.model.company.NameContainsKeywordsPredicate;
+
+/**
+ * Finds an existing company in the address book.
+ */
 
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds companies by company name, tag, or contact number."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds companies by company name, tag,"
+            + " or contact number."
             + "\nParameters: find [/c <Company name>] or [/t <Tag name>] or [/num <Contact number>]"
             + "\nExample: " + COMMAND_WORD + " /c Google"
             + "\nExample: " + COMMAND_WORD + " /t Tech"
             + "\nExample: " + COMMAND_WORD + " /num 12345678";
 
-    private final CompanyMatchesPredicate predicate;
+    private final NameContainsKeywordsPredicate predicate;
 
-    public FindCommand(CompanyMatchesPredicate predicate) {
+    public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -35,7 +39,7 @@ public class FindCommand extends Command {
         }
 
         return new CommandResult(
-                String.format("Found %d companies.", filteredCompanies.size())
+                String.format("Found %d companies!", filteredCompanies.size())
                         + "\n" + filteredCompanies.toString());
     }
 
@@ -45,6 +49,7 @@ public class FindCommand extends Command {
             return true;
         }
 
+        // instanceof handles nulls
         if (!(other instanceof FindCommand)) {
             return false;
         }

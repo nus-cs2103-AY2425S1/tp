@@ -1,14 +1,15 @@
 package seedu.address.model.company;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Tag;
+
 
 /**
  * Represents a Company in the address book.
@@ -21,6 +22,7 @@ public class Company {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final CareerPageUrl careerPageUrl;
     private boolean isBookmark;
 
     // Data fields
@@ -30,12 +32,13 @@ public class Company {
     /**
      * Every field must be present and not null.
      */
-    public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Company(Name name, Phone phone, Email email, Address address, CareerPageUrl careerPageUrl, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.careerPageUrl = careerPageUrl;
         this.tags.addAll(tags);
         this.isBookmark = false;
     }
@@ -56,6 +59,10 @@ public class Company {
         return address;
     }
 
+    public CareerPageUrl getCareerPageUrl() {
+        return careerPageUrl;
+    }
+
     /**
      * Returns an immutable tag set, which throws
      * {@code UnsupportedOperationException}
@@ -66,8 +73,8 @@ public class Company {
     }
 
     /**
-     * Returns true if both company have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both companies have the same name.
+     * This defines a weaker notion of equality between two companies.
      */
     public boolean isSameCompany(Company otherCompany) {
         if (otherCompany == this) {
@@ -80,7 +87,7 @@ public class Company {
 
     /**
      * Returns true if both companies have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * This defines a stronger notion of equality between two companies.
      */
     @Override
     public boolean equals(Object other) {
@@ -89,7 +96,7 @@ public class Company {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Company)) {
             return false;
         }
 
@@ -98,13 +105,14 @@ public class Company {
                 && phone.equals(otherCompany.phone)
                 && email.equals(otherCompany.email)
                 && address.equals(otherCompany.address)
+                && careerPageUrl.equals(otherCompany.careerPageUrl)
                 && tags.equals(otherCompany.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, careerPageUrl, tags);
     }
 
     @Override
@@ -114,6 +122,7 @@ public class Company {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("career page url", careerPageUrl)
                 .add("tags", tags)
                 .toString();
     }
