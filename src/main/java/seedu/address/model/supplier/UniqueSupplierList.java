@@ -38,6 +38,20 @@ public class UniqueSupplierList implements Iterable<Supplier> {
     }
 
     /**
+     * Finds and returns the supplier with the specified {@code Name}.
+     * Returns null if the supplier is not found.
+     */
+    public Supplier findByName(Name supplierName) {
+        requireNonNull(supplierName);
+        for (Supplier supplier : internalList) {
+            if (supplier.getName().equals(supplierName)) {
+                return supplier;
+            }
+        }
+        return null; // Or throw an exception if preferred
+    }
+
+    /**
      * Adds a supplier to the list.
      * The supplier must not already exist in the list.
      */

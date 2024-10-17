@@ -8,7 +8,9 @@ import java.util.Objects;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.product.Product;
+import seedu.address.model.product.ProductName;
 import seedu.address.model.product.UniqueProductList;
+import seedu.address.model.supplier.Name;
 import seedu.address.model.supplier.Supplier;
 import seedu.address.model.supplier.UniqueSupplierList;
 
@@ -148,6 +150,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         products.remove(key);
     }
 
+    public Product findProductByName(ProductName name) {
+        return products.findByName(name);
+    }
+
     //// util methods
 
     @Override
@@ -186,5 +192,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return Objects.hash(suppliers, products);
+    }
+
+    public Supplier findSupplier(Name supplierName) {
+        return suppliers.findByName(supplierName);
     }
 }
