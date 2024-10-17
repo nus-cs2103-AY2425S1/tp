@@ -2,14 +2,21 @@ package seedu.address.model.person;
 
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
+/**
+ * Combines NameContainsKeywordsPredicate and OrgContainsKeywordsPredicate
+ */
 public class CompoundedPredicate implements Predicate<Person> {
 
     private final NameContainsKeywordsPredicate namePredicate;
     private final OrgContainsKeywordsPredicate orgPredicate;
 
+    /**
+     * Initialises the predictaes
+     * @param namePredicate - NameContainsKeywordsPredicat
+     * @param orgPredicate - OrgContainsKeywordsPredicate
+     */
     public CompoundedPredicate(NameContainsKeywordsPredicate namePredicate, OrgContainsKeywordsPredicate orgPredicate) {
         this.namePredicate = namePredicate;
         this.orgPredicate = orgPredicate;
@@ -31,7 +38,8 @@ public class CompoundedPredicate implements Predicate<Person> {
         }
 
         CompoundedPredicate otherCompoundedPredicate = (CompoundedPredicate) other;
-        return orgPredicate.equals(otherCompoundedPredicate.orgPredicate) && namePredicate.equals(otherCompoundedPredicate.namePredicate);
+        return orgPredicate.equals(otherCompoundedPredicate.orgPredicate)
+                && namePredicate.equals(otherCompoundedPredicate.namePredicate);
     }
 
     @Override

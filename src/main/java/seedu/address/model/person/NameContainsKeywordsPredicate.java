@@ -13,6 +13,10 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
     private final Boolean returnAllTrue;
 
+    /**
+     * Initialises keywords and if it is empty then ensure predicate always returns true
+     * @param keywords
+     */
     public NameContainsKeywordsPredicate(List<String> keywords) {
 
         this.keywords = keywords;

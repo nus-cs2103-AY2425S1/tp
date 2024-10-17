@@ -6,11 +6,18 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
+/**
+ * Tests that a {@code Person}'s {@code Organization} matches any of the keywords given.
+ */
 public class OrgContainsKeywordsPredicate implements Predicate<Person> {
 
     private final List<String> keywords;
     private final Boolean returnAllTrue;
 
+    /**
+     * Initialises keywords and if it is empty then ensure predicate always returns true
+     * @param keywords
+     */
     public OrgContainsKeywordsPredicate(List<String> keywords) {
 
         this.keywords = keywords;
