@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
@@ -129,6 +130,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasConcertContact(ConcertContact concertContact) {
         requireNonNull(concertContact);
         return concertContacts.contains(concertContact);
+    }
+
+    /**
+     * Returns true if a concertContact with the same person and concert as {@code person}  and {@code concert} exists.
+     *
+     * @param person person to check for
+     * @param concert concert to check for
+     * @return true if address-book contains concertContact
+     */
+    public boolean hasConcertContact(Person person, Concert concert) {
+        requireAllNonNull(person, concert);
+        return concertContacts.contains(person, concert);
     }
 
     /**

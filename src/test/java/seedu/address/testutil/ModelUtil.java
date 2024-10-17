@@ -152,6 +152,11 @@ public class ModelUtil {
         }
 
         @Override
+        public boolean hasConcertContact(Person person, Concert concert) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setConcertContact(ConcertContact target, ConcertContact editedConcertContact) {
             throw new AssertionError("This method should not be called.");
         }

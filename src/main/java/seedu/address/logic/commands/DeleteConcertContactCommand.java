@@ -56,6 +56,10 @@ public class DeleteConcertContactCommand extends Command {
         Concert concertToEdit = lastShownConcertList.get(concertIndex.getZeroBased());
         Person personToDelete = lastShownPersonList.get(personIndex.getZeroBased());
 
+        if (!model.hasConcertContact(personToDelete, concertToEdit)) {
+            throw new CommandException(Messages.MESSAGE_INVALID_CONCERT_CONTACT);
+        }
+
         model.deleteConcertContact(personToDelete, concertToEdit);
         return new CommandResult(String.format(MESSAGE_DELETE_CONCERT_CONTACT_SUCCESS,
                 Messages.format(personToDelete), Messages.format(concertToEdit)));

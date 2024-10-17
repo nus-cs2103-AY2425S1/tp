@@ -112,6 +112,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasConcertContact(Person person, Concert concert) {
+        requireAllNonNull(person, concert);
+        return addressBook.hasConcertContact(person, concert);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
