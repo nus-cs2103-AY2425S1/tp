@@ -22,6 +22,7 @@ import seedu.edulog.model.EduLog;
 import seedu.edulog.model.Model;
 import seedu.edulog.model.ReadOnlyEduLog;
 import seedu.edulog.model.ReadOnlyUserPrefs;
+import seedu.edulog.model.calendar.EdulogCalendar;
 import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.model.student.Student;
 import seedu.edulog.testutil.StudentBuilder;
@@ -41,7 +42,7 @@ public class AddCommandTest {
         CommandResult commandResult = new AddCommand(validStudent).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validStudent)),
-                commandResult.getFeedbackToUser());
+            commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validStudent), modelStub.studentsAdded);
     }
 
@@ -115,7 +116,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setEduLogFilePath(Path eduLogFilePath) {
+        public void setEduLogFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -173,9 +174,17 @@ public class AddCommandTest {
         public boolean checkTimeslot(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
-
+        @Override
+        public ObservableList<Lesson> getLessonList() {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public ObservableList<Student> getFilteredStudentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public EdulogCalendar getEdulogCalendar() {
             throw new AssertionError("This method should not be called.");
         }
 
