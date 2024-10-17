@@ -1,7 +1,7 @@
 package seedu.address.ui;
 
 import java.time.LocalDate;
-import java.time.Year;
+import java.time.Period;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -86,6 +86,7 @@ public class PersonCard extends UiPart<Region> {
 
     private static int getPersonAge(Person person) {
         LocalDate date = person.getDateOfBirth().toLocalDate();
-        return Year.now().getValue() - date.getYear();
+        LocalDate now = LocalDate.now();
+        return Period.between(date, now).getYears();
     }
 }

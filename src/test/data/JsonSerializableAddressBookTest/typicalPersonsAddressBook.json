@@ -7,7 +7,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "priority" : "MEDIUM",
     "remark" : "She likes pygmy hippos.",
-    "dateOfBirth": "1 Jan 2000",
+    "dateOfBirth": "10 Jun 1999",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -16,7 +16,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "priority" : "HIGH",
     "remark" : "Promises to pay back next week.",
-    "dateOfBirth": "1 Jan 2000",
+    "dateOfBirth": "29 Jan 1999",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -34,7 +34,7 @@
     "address" : "10th street",
     "priority" : "LOW",
     "remark" : "",
-    "dateOfBirth": "1 Jan 2000",
+    "dateOfBirth": "1 Jan 1990",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -43,7 +43,7 @@
     "address" : "michegan ave",
     "priority" : "LOW",
     "remark" : "",
-    "dateOfBirth": "1 Jan 2000",
+    "dateOfBirth": "1 May 2000",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -52,7 +52,7 @@
     "address" : "little tokyo",
     "priority" : "LOW",
     "remark" : "",
-    "dateOfBirth": "1 Jan 2000",
+    "dateOfBirth": "31 May 2000",
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -61,7 +61,7 @@
     "address" : "4th street",
     "priority" : "LOW",
     "remark" : "",
-    "dateOfBirth": "1 Jan 2000",
+    "dateOfBirth": "25 Dec 2010",
     "tags" : [ ]
   } ]
 }

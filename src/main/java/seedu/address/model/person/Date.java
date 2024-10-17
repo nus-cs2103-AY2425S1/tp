@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
  */
 public abstract class Date {
 
-    public static final String DATE_FORMAT_STRING = "d MMM uuuu";
+    public static final String DATE_FORMAT_STRING = "d MMM yyyy";
 
     public static final String MESSAGE_CONSTRAINTS =
             String.format("Date should follow %s format, where %s is a valid date (e.g. 31 dec 2019, 1 Dec 1999)",
