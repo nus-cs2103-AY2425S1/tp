@@ -66,7 +66,6 @@ public class PersonCard extends UiPart<Region> {
 
     // Getter methods for private fields
     public Label getId() {
-        System.out.println("WTF KNN");
         return id;
     }
 

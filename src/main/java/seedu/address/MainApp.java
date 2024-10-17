@@ -52,10 +52,6 @@ public class MainApp extends Application {
         this.customStoragePath = customStoragePath;
     }
 
-    public MainApp() {
-        this(null);
-    }
-
 
     @Override
     public void init() throws Exception {
