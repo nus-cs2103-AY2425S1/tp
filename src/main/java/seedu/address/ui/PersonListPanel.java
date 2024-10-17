@@ -33,8 +33,7 @@ public class PersonListPanel extends UiPart<Region> {
         ownerListView.setItems(ownerList);
         ownerListView.setCellFactory(listView -> new OwnerListViewCell());
 
-        // Temporarily using ownerList for both, but you can modify this once the petList is implemented
-        petListView.setItems(petList); // Replace with petList later
+        petListView.setItems(petList);
         petListView.setCellFactory(listView -> new PetListViewCell());
     }
 
