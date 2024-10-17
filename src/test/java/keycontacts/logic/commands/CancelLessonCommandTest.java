@@ -2,6 +2,7 @@ package keycontacts.logic.commands;
 
 import static keycontacts.logic.commands.CommandTestUtil.VALID_DATE;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_START_TIME;
+import static keycontacts.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static keycontacts.testutil.Assert.assertThrows;
 import static keycontacts.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static keycontacts.testutil.TypicalStudents.ALICE;
@@ -18,6 +19,7 @@ import keycontacts.logic.Messages;
 import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
 import keycontacts.model.ModelManager;
+import keycontacts.model.StudentDirectory;
 import keycontacts.model.UserPrefs;
 import keycontacts.model.lesson.CancelledLesson;
 import keycontacts.model.lesson.Date;
@@ -72,18 +74,23 @@ public class CancelLessonCommandTest {
     }
 
     @Test
-    public void execute_validInputs_success() throws CommandException {
+    public void execute_validInputs_success() {
         Date aliceDate = new Date("14-10-2024");
         Time aliceTime = new Time("12:00");
         CancelLessonCommand command = new CancelLessonCommand(INDEX_FIRST_STUDENT, aliceDate, aliceTime);
         Student studentToUpdate = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         CancelledLesson cancelledLesson = new CancelledLesson(aliceDate);
         Student expectedUpdatedStudent = studentToUpdate.withAddedCancelledLesson(cancelledLesson);
-        CommandResult result = command.execute(model);
-        String expectedMessage = String.format(CancelLessonCommand.MESSAGE_SUCCESS,
-                aliceDate, aliceTime, Messages.format(expectedUpdatedStudent));
-        assertEquals(expectedMessage, result.getFeedbackToUser());
+
+        Model expectedModel = new ModelManager(new StudentDirectory(model.getStudentDirectory()), new UserPrefs());
+        expectedModel.setStudent(model.getFilteredStudentList().get(0), expectedUpdatedStudent);
+
+        CommandResult commandResult = new CommandResult(String.format(CancelLessonCommand.MESSAGE_SUCCESS,
+                aliceDate, aliceTime, Messages.format(expectedUpdatedStudent)));
+
+        assertCommandSuccess(command, model, commandResult, expectedModel);
     }
+
 
     @Test
     public void equals() {
