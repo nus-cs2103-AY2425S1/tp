@@ -8,6 +8,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.sellsavvy.commons.core.index.Index;
+import seedu.sellsavvy.model.order.exceptions.OrderNotFoundException;
 
 /**
  * A list of orders made by a specific Person that does not allow nulls.
@@ -55,6 +56,9 @@ public class OrderList implements Iterable<Order> {
      */
     public void remove(Index index) {
         requireNonNull(index);
+        if (index.getZeroBased() >= this.size()) {
+            throw new OrderNotFoundException();
+        }
         internalList.remove(index.getZeroBased());
     }
 
