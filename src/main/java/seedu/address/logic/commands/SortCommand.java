@@ -49,6 +49,12 @@ public class SortCommand extends Command {
         case "name":
             comparator = Person.getNameComparator();
             break;
+        case "appointment_date":
+            comparator = Person.getAppointmentDateComparator();
+            break;
+        case "birthday":
+            comparator = Person.getBirthdayComparator();
+            break;
         default:
             throw new CommandException(MESSAGE_INVALID_PARAMETER);
         }
