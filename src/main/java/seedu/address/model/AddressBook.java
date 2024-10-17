@@ -143,7 +143,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addStudentToGroup(Student student, Group group) {
         requireNonNull(group);
         requireNonNull(student);
-        group.add(student);
+        // temp fix - to be removed when we change to store just student number
+        group.add(student.setStudentGroup(group.getGroupName()));
         students.setPerson(student, student.setStudentGroup(group.getGroupName()));
     }
 
