@@ -118,25 +118,22 @@ public class HelpWindow extends UiPart<Stage> {
                         "No command required"),
                 new CommandSummary(
                         "Add New Customer",
-                        "add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> "
-                                + "j/ <JOB> i/ <INCOME> [t/ <TAG>] [rn/ <REMARK>]",
-                        "add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor "
-                                + "i/ 99999 t/ gold rn/ got anger issue"),
+                        "add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> "
+                                + "[t/ <TIER>] [rn/ <REMARK>]",
+                        "add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 "
+                                + "t/ gold rn/ got anger issue"),
                 new CommandSummary("Remove Old Customer",
-                        "del <INDEX>",
-                        "del 69"),
+                        "delete <INDEX>",
+                        "delete 69"),
                 new CommandSummary("Edit Existing Customer",
-                        "edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> "
-                                + "j/ <JOB> i/ <INCOME> [t/ <TAG>] "
+                        "edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> "
+                                + "[t/ <TIER>] "
                                 + "[rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED ONTO EXISTING ONE>]",
-                        "edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor "
-                                + "i/ 1000000000 ra/ Specialist in eye care"),
+                        "edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000"
+                                + "ra/ Specialist in eye care"),
                 new CommandSummary("Find a Customer by Details",
                         "filter <FLAG>/ <FLAG FIELD>",
                         "filter n/ TAN LESHEW"),
-                new CommandSummary("Save Remarks About Customers",
-                        "remark <INDEX> r/ <REMARK>",
-                        "remark 55 r/ He is a problematic customer."),
                 new CommandSummary("Help",
                         "help",
                         "help"),
