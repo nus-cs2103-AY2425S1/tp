@@ -141,6 +141,15 @@ public class EventTest {
     }
 
     @Test
+    public void addPerson_invalidRole() {
+        Event event = new Event("Event1");
+        Person person = new PersonBuilder().withRoles("attendee").build();
+        assertThrows(IllegalValueException.class, () -> event.addPerson(person, "invalidRole"));
+    }
+
+
+
+    @Test
     public void removePerson() {
         try {
             Event event = new Event("Event1");
@@ -149,6 +158,32 @@ public class EventTest {
             event.removePerson(person, "attendee");
             Set<Person> attendees = new HashSet<>();
             assertEquals(attendees, event.getAttendees());
+        } catch (Exception e) {
+            assert false;
+        }
+    }
+
+    @Test
+    public void removePerson_vendor() {
+        try {
+            Event event = new Event("Event1");
+            Person person = new PersonBuilder().withRoles("vendor").build();
+            event.addPerson(person, "vendor");
+            event.removePerson(person, "vendor");
+            Set<Person> vendors = new HashSet<>();
+            assertEquals(vendors, event.getVendors());
+        } catch (Exception e) {
+            assert false;
+        }
+    }
+
+    @Test
+    public void removePerson_sponsor_notInRole() {
+        try {
+            Event event = new Event("Event1");
+            Person person = new PersonBuilder().withRoles("sponsor", "attendee").build();
+            event.addPerson(person, "attendee");
+            assertThrows(IllegalArgumentException.class, () -> event.removePerson(person, "sponsor"));
         } catch (Exception e) {
             assert false;
         }
