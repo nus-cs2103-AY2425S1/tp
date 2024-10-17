@@ -15,9 +15,25 @@ public class SortCommandParserTest {
     private final SortCommandParser parser = new SortCommandParser();
 
     @Test
-    public void parse_validArgs_returnsSortCommand() throws Exception {
+    public void parse_validArgsName_returnsSortCommand() throws Exception {
         SortCommand command = parser.parse("name");
-        Comparator<Person> expectedComparator = Comparator.comparing(Person::getNameString);
+        Comparator<? extends Person> expectedComparator = Comparator.comparing(Person::getNameString);
+        SortCommand expectedCommand = new SortCommand(expectedComparator);
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parse_validArgsSubject_returnsSortCommand() throws Exception {
+        SortCommand command = parser.parse("subject");
+        Comparator<? extends Person> expectedComparator = Comparator.comparing(Person::getSubjectString);
+        SortCommand expectedCommand = new SortCommand(expectedComparator);
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parse_validArgsClasses_returnsSortCommand() throws Exception {
+        SortCommand command = parser.parse("classes");
+        Comparator<? extends Person> expectedComparator = Comparator.comparing(Person::getClassesString);
         SortCommand expectedCommand = new SortCommand(expectedComparator);
         assertEquals(expectedCommand, command);
     }

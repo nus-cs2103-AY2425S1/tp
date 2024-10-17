@@ -45,7 +45,6 @@ public class SortCommand extends Command {
         if (!(other instanceof SortCommand)) {
             return false;
         }
-        SortCommand otherCommand = (SortCommand) other;
         return true;
     }
 

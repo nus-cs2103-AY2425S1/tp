@@ -43,6 +43,16 @@ public class Student extends Person {
     }
 
     @Override
+    public String getSubjectString() {
+        return subject.toString();
+    }
+
+    @Override
+    public String getClassesString() {
+        return String.join(", ", classes);
+    }
+
+    @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("Student: ")
