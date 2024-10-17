@@ -30,7 +30,8 @@ public class TeacherTest {
         assertEquals(1, teacher.getTags().size());
         assertEquals(1, teacher.getClasses().size());
         assertEquals("seedu.address.model.person.Teacher{name=John Doe, gender=male, phone=12345678, "
-                + "email=johndoe@hotmail.com, address=123 Main St, tags=[[Friends]], subject=Math, classes=[1A]}", teacher.toString());
+                + "email=johndoe@hotmail.com, address=123 Main St, tags=[[Friends]], subject=Math, classes=[1A]}",
+                teacher.toString());
     }
 
     @Test
