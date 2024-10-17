@@ -1,12 +1,5 @@
 package seedu.address.storage;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.assignment.AssignmentId;
-import seedu.address.model.person.EmployeeId;
-import seedu.address.model.project.ProjectId;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedAssignment.MISSING_ASSIGNMENT_ID_MESSAGE;
 import static seedu.address.storage.JsonAdaptedAssignment.MISSING_PERSON_ID_MESSAGE;
@@ -17,6 +10,15 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.ALICE_ALPHA;
 import static seedu.address.testutil.TypicalProjects.ALPHA;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.AddressBook;
+import seedu.address.model.assignment.AssignmentId;
+import seedu.address.model.person.EmployeeId;
+import seedu.address.model.project.ProjectId;
+
 
 public class JsonAdaptedAssignmentTest {
     private static final String INVALID_PROJECT_ID = "+651234";
@@ -29,7 +31,9 @@ public class JsonAdaptedAssignmentTest {
 
     @Test
     public void toModelType_validProjectIdAndValidEmployeeId_returnsProject() throws Exception {
-        JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(VALID_ASSIGNMENT_ID, VALID_PROJECT_ID, VALID_EMPLOYEE_ID);
+        JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(VALID_ASSIGNMENT_ID,
+                VALID_PROJECT_ID,
+                VALID_EMPLOYEE_ID);
         AddressBook addressBook = new AddressBook();
         addressBook.addPerson(ALICE);
         addressBook.addProject(ALPHA);
@@ -47,7 +51,9 @@ public class JsonAdaptedAssignmentTest {
 
     @Test
     public void toModelType_invalidProjectId_throwsIllegalValueException() {
-        JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(VALID_ASSIGNMENT_ID, INVALID_PROJECT_ID, VALID_EMPLOYEE_ID);
+        JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(VALID_ASSIGNMENT_ID,
+                INVALID_PROJECT_ID,
+                VALID_EMPLOYEE_ID);
         String expectedMessage = ProjectId.MESSAGE_CONSTRAINTS;
         AddressBook addressBook = new AddressBook();
         assertThrows(IllegalValueException.class, expectedMessage, () -> assignment.toModelType(addressBook));
@@ -55,7 +61,9 @@ public class JsonAdaptedAssignmentTest {
 
     @Test
     public void toModelType_invalidEmployeeId_throwsIllegalValueException() {
-        JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(VALID_ASSIGNMENT_ID, VALID_PROJECT_ID, INVALID_EMPLOYEE_ID);
+        JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(VALID_ASSIGNMENT_ID,
+                VALID_PROJECT_ID,
+                INVALID_EMPLOYEE_ID);
         String expectedMessage = EmployeeId.MESSAGE_CONSTRAINTS;
         AddressBook addressBook = new AddressBook();
         assertThrows(IllegalValueException.class, expectedMessage, () -> assignment.toModelType(addressBook));
@@ -63,7 +71,9 @@ public class JsonAdaptedAssignmentTest {
 
     @Test
     public void toModelType_invalidAssignmentId_throwsIllegalValueException() {
-        JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(INVALID_ASSIGNMENT_ID, VALID_PROJECT_ID, VALID_EMPLOYEE_ID);
+        JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(INVALID_ASSIGNMENT_ID,
+                VALID_PROJECT_ID,
+                VALID_EMPLOYEE_ID);
         String expectedMessage = AssignmentId.MESSAGE_CONSTRAINTS;
         AddressBook addressBook = new AddressBook();
         assertThrows(IllegalValueException.class, expectedMessage, () -> assignment.toModelType(addressBook));
@@ -71,36 +81,46 @@ public class JsonAdaptedAssignmentTest {
 
     @Test
     public void toModelType_nullProjectId_throwsIllegalValueException() {
-        JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(VALID_ASSIGNMENT_ID, null, VALID_EMPLOYEE_ID);
+        JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(VALID_ASSIGNMENT_ID,
+                null,
+                VALID_EMPLOYEE_ID);
         AddressBook addressBook = new AddressBook();
         assertThrows(IllegalValueException.class, MISSING_PROJECT_ID_MESSAGE, () -> assignment.toModelType(addressBook));
     }
 
     @Test
     public void toModelType_nullEmployeeId_throwsIllegalValueException() {
-        JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(VALID_ASSIGNMENT_ID, VALID_PROJECT_ID, null);
+        JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(VALID_ASSIGNMENT_ID,
+                VALID_PROJECT_ID,
+                null);
         AddressBook addressBook = new AddressBook();
         assertThrows(IllegalValueException.class, MISSING_PERSON_ID_MESSAGE, () -> assignment.toModelType(addressBook));
     }
 
     @Test
     public void toModelType_nullAssignmentId_throwsIllegalValueException() {
-        JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(null, VALID_PROJECT_ID, VALID_EMPLOYEE_ID);
+        JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(null,
+                VALID_PROJECT_ID,
+                VALID_EMPLOYEE_ID);
         AddressBook addressBook = new AddressBook();
         assertThrows(IllegalValueException.class, MISSING_ASSIGNMENT_ID_MESSAGE, () -> assignment.toModelType(addressBook));
     }
 
     @Test
-    public void toModelType_ProjectNotFound_throwsIllegalValueException() throws Exception {
-        JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(VALID_ASSIGNMENT_ID, VALID_PROJECT_ID, VALID_EMPLOYEE_ID);
+    public void toModelType_projectNotFound_throwsIllegalValueException() throws Exception {
+        JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(VALID_ASSIGNMENT_ID,
+                VALID_PROJECT_ID,
+                VALID_EMPLOYEE_ID);
         AddressBook addressBook = new AddressBook();
         addressBook.addPerson(ALICE);
         assertThrows(IllegalValueException.class, PROJECT_NOT_FOUND_MESSAGE, () -> assignment.toModelType(addressBook));
     }
 
     @Test
-    public void toModelType_PersonNotFound_throwsIllegalValueException() throws Exception {
-        JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(VALID_ASSIGNMENT_ID, VALID_PROJECT_ID, VALID_EMPLOYEE_ID);
+    public void toModelType_personNotFound_throwsIllegalValueException() throws Exception {
+        JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(VALID_ASSIGNMENT_ID,
+                VALID_PROJECT_ID,
+                VALID_EMPLOYEE_ID);
         AddressBook addressBook = new AddressBook();
         addressBook.addProject(ALPHA);
         assertThrows(IllegalValueException.class, PERSON_NOT_FOUND_MESSAGE, () -> assignment.toModelType(addressBook));
