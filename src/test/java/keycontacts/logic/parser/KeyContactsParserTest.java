@@ -33,7 +33,6 @@ import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.NameContainsKeywordsPredicate;
 import keycontacts.model.student.Student;
 import keycontacts.testutil.EditStudentDescriptorBuilder;
-import keycontacts.testutil.RegularLessonBuilder;
 import keycontacts.testutil.StudentBuilder;
 import keycontacts.testutil.StudentUtil;
 
@@ -114,7 +113,7 @@ public class KeyContactsParserTest {
 
     @Test
     public void parseCommand_schedule() throws Exception {
-        RegularLesson regularLesson = new RegularLessonBuilder(ALICE.getRegularLesson()).build();
+        RegularLesson regularLesson = ALICE.getRegularLesson();
         ScheduleCommand command = (ScheduleCommand) parser.parseCommand(
                 ScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased() + " "
                         + StudentUtil.getRegularLessonDetails(regularLesson));

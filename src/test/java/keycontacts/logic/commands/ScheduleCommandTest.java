@@ -26,7 +26,7 @@ import keycontacts.testutil.RegularLessonBuilder;
 
 public class ScheduleCommandTest {
     private final Model model = new ModelManager(getTypicalStudentDirectory(), new UserPrefs());
-    private final RegularLesson regularLesson = new RegularLessonBuilder(ALICE.getRegularLesson()).build();
+    private final RegularLesson regularLesson = ALICE.getRegularLesson();
     private final String updatedEndTime = regularLesson.getEndTime().getTime().plusMinutes(1).toString();
     private final RegularLesson updatedRegularLesson =
             new RegularLessonBuilder(regularLesson).withEndTime(updatedEndTime).build();
