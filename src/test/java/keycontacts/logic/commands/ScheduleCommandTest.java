@@ -49,7 +49,7 @@ public class ScheduleCommandTest {
         Student scheduledStudent = studentToSchedule.withRegularLesson(updatedRegularLesson);
 
         String expectedMessage = String.format(ScheduleCommand.MESSAGE_SCHEDULE_LESSON_SUCCESS,
-                Messages.format(studentToSchedule));
+                updatedRegularLesson.toDisplay(), Messages.format(studentToSchedule));
 
         Model expectedModel = new ModelManager(new StudentDirectory(model.getStudentDirectory()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), scheduledStudent);

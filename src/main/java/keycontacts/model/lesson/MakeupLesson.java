@@ -62,7 +62,7 @@ public class MakeupLesson extends Lesson {
 
     @Override
     public String toDisplay() {
-        return lessonDate.toString() + " " + super.toDisplay();
+        return lessonDate.toDisplay() + ", " + super.toDisplay();
     }
 
     /**

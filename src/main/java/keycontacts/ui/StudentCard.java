@@ -108,11 +108,9 @@ public class StudentCard extends UiPart<Region> {
 
         return IntStream.range(0, sortedLessons.size())
                 .mapToObj(i -> String.format(
-                        "%d. %s, Time: %s - %s",
+                        "%d. %s",
                         i + 1,
-                        sortedLessons.get(i).getLessonDate().toDisplay(),
-                        sortedLessons.get(i).getStartTime(),
-                        sortedLessons.get(i).getEndTime()))
+                        sortedLessons.get(i).toDisplay()))
                 .collect(Collectors.joining("\n", "Makeup Lessons:\n", ""));
     }
 }
