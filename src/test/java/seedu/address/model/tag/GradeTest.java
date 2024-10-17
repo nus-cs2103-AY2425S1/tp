@@ -16,7 +16,7 @@ public class GradeTest {
 
     @Test
     public void constructor_invalidGradeIndex_throwsIllegalArgumentException() {
-        String invalidGradeIndex = "5";
+        String invalidGradeIndex = "";
         assertThrows(IllegalArgumentException.class, () -> new Grade(invalidGradeIndex));
     }
 
@@ -28,8 +28,14 @@ public class GradeTest {
 
     @Test
     public void isValidGradeName() {
-        // null tag name
+        // null grade index
         assertThrows(NullPointerException.class, () -> Grade.isValidGradeName(null));
+
+        // grade index too small
+        assertFalse(Grade.isValidGradeName("0"));
+
+        // grade index too big
+        assertFalse(Grade.isValidGradeName("5"));
     }
 
     @Test
