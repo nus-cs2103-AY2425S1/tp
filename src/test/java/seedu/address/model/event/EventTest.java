@@ -28,6 +28,28 @@ public class EventTest {
     }
 
     @Test
+    public void equals_sameEventDifferentConstructor() {
+        Event event1 = new Event("Event1");
+        Event event2 = new Event("Event1", new HashSet<>(), new HashSet<>(), new HashSet<>(), new HashSet<>());
+        assertEquals(event1, event2);
+    }
+
+    @Test
+    public void equals_sameEventDifferentConstructorEmptySet() {
+        Set<Person> attendees = new HashSet<>();
+        attendees.add(new PersonBuilder().withRoles("attendee").build());
+        Set<Person> vendors = new HashSet<>();
+        vendors.add(new PersonBuilder().withRoles("vendor").build());
+        Set<Person> sponsors = new HashSet<>();
+        sponsors.add(new PersonBuilder().withRoles("sponsor").build());
+        Set<Person> volunteers = new HashSet<>();
+        volunteers.add(new PersonBuilder().withRoles("volunteer").build());
+        Event event1 = new Event("Event1", attendees, vendors, sponsors, volunteers);
+        Event event2 = new Event("Event1", attendees, vendors, sponsors, volunteers);
+        assertEquals(event1, event2);
+    }
+
+    @Test
     public void equals_differentEvent() {
         Event event1 = new Event("Event1");
         Event event2 = new Event("Event2");
@@ -92,6 +114,19 @@ public class EventTest {
         }
     }
 
+    @Test
+    public void addVolunteer() {
+        try {
+            Event event = new Event("Event1");
+            Person person = new PersonBuilder().withRoles("volunteer").build();
+            event.addPerson(person, "volunteer");
+            Set<Person> volunteers = new HashSet<>();
+            volunteers.add(person);
+            assertEquals(volunteers, event.getVolunteers());
+        } catch (Exception e) {
+            assert false;
+        }
+    }
     @Test
     public void addVolunteer_alreadyInRole() {
         try {
