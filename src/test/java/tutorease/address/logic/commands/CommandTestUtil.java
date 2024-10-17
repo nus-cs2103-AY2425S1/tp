@@ -67,16 +67,23 @@ public class CommandTestUtil {
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String NAME_DESC_MEG = " " + PREFIX_NAME + VALID_NAME_MEG;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
+    public static final String PHONE_DESC_MEG = " " + PREFIX_PHONE + VALID_PHONE_MEG;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String EMAIL_DESC_MEG = " " + PREFIX_EMAIL + VALID_EMAIL_MEG;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
+    public static final String ADDRESS_DESC_MEG = " " + PREFIX_ADDRESS + VALID_ADDRESS_MEG;
     public static final String ROLE_DESC_AMY = " " + PREFIX_ROLE + VALID_ROLE_AMY;
     public static final String ROLE_DESC_BOB = " " + PREFIX_ROLE + VALID_ROLE_BOB;
+    public static final String ROLE_DESC_MEG = " " + PREFIX_ROLE + VALID_ROLE_MEG;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_SUPPORTIVE = " " + PREFIX_TAG + VALID_TAG_SUPPORTIVE;
+    public static final String TAG_DESC_MENTOR = " " + PREFIX_TAG + VALID_TAG_MENTOR;
     public static final String STUDENT_ID_DESC = " " + PREFIX_STUDENT_ID + VALID_STUDENT_ID;
     public static final String LOCATION_INDEX_DESC = " " + PREFIX_LOCATION_INDEX + VALID_LOCATION_INDEX;
     public static final String START_DATE_TIME_DESC = " " + PREFIX_START_DATE + VALID_START_DATE;
