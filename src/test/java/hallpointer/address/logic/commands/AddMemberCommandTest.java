@@ -16,6 +16,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import hallpointer.address.commons.core.GuiSettings;
+import hallpointer.address.logic.Messages;
 import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.model.AddressBook;
 import hallpointer.address.model.Model;
@@ -160,7 +161,7 @@ public class AddMemberCommandTest {
 
         @Override
         public void addSession(Session session) {
-            throw new AssertionError("This method should not be called");
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
