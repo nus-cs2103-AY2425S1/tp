@@ -7,13 +7,12 @@ import static seedu.address.logic.commands.CommandTestUtil.WEDDING_DESC_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TestWeddings.VALID_WEDDING;
+import static seedu.address.testutil.TypicalWeddings.AMY_WEDDING;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteWeddingCommand;
-import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingName;
 
 public class DeleteWeddingCommandParserTest {
@@ -21,9 +20,8 @@ public class DeleteWeddingCommandParserTest {
 
     @Test
     public void parse_validWedding_success() {
-        Wedding expectedWedding = VALID_WEDDING;
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + WEDDING_DESC_AMY,
-                new DeleteWeddingCommand(expectedWedding));
+                new DeleteWeddingCommand(AMY_WEDDING));
     }
 
     @Test

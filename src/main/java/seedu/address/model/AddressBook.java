@@ -71,14 +71,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the tag list with {@code tags}.
-     * {@code tags} must not contain duplicate tags.
-     */
-    public void setTags(List<Tag> tags) {
-        this.tags.setTags(tags);
-    }
-
-    /**
      * Replaces the contents of the wedding list with {@code weddings}.
      * {@code weddings} must not contain duplicate tags.
      */
@@ -187,6 +179,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedTag);
 
         tags.setTag(target, editedTag);
+    }
+
+    /**
+     * Replaces the contents of the tag list with {@code tags}.
+     * {@code tags} must not contain duplicate tags.
+     */
+    public void setTags(List<Tag> tags) {
+        this.tags.setTags(tags);
     }
 
     /**
