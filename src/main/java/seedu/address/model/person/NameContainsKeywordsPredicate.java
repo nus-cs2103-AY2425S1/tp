@@ -11,14 +11,17 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class NameContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
+    private final Boolean returnAllTrue;
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
+
         this.keywords = keywords;
+        this.returnAllTrue = keywords.size() == 1 && keywords.get(0).trim().isEmpty();
     }
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
+        return returnAllTrue || keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
     }
 

@@ -3,11 +3,12 @@ package seedu.address.model.person;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.util.ToStringBuilder;
 
 public class CompoundedPredicate implements Predicate<Person> {
 
-    NameContainsKeywordsPredicate namePredicate;
-    OrgContainsKeywordsPredicate orgPredicate;
+    private final NameContainsKeywordsPredicate namePredicate;
+    private final OrgContainsKeywordsPredicate orgPredicate;
 
     public CompoundedPredicate(NameContainsKeywordsPredicate namePredicate, OrgContainsKeywordsPredicate orgPredicate) {
         this.namePredicate = namePredicate;
@@ -15,6 +16,27 @@ public class CompoundedPredicate implements Predicate<Person> {
     }
     @Override
     public boolean test(Person person) {
-        return namePredicate.test(person) || orgPredicate.test(person);
+        return namePredicate.test(person) && orgPredicate.test(person);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof CompoundedPredicate)) {
+            return false;
+        }
+
+        CompoundedPredicate otherCompoundedPredicate = (CompoundedPredicate) other;
+        return orgPredicate.equals(otherCompoundedPredicate.orgPredicate) && namePredicate.equals(otherCompoundedPredicate.namePredicate);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).add("name keywords", namePredicate.toString()).add("org keywords",
+                orgPredicate.toString()).toString();
     }
 }

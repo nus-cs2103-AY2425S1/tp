@@ -9,15 +9,18 @@ import seedu.address.commons.util.ToStringBuilder;
 public class OrgContainsKeywordsPredicate implements Predicate<Person> {
 
     private final List<String> keywords;
+    private final Boolean returnAllTrue;
 
     public OrgContainsKeywordsPredicate(List<String> keywords) {
+
         this.keywords = keywords;
+        this.returnAllTrue = keywords.size() == 1 && keywords.get(0).trim().isEmpty();
     }
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getOrg(), keyword));
+        return returnAllTrue || keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getOrganisation().toString(), keyword));
     }
 
     @Override
