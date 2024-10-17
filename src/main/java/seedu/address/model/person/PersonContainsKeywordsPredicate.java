@@ -42,17 +42,17 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return (name == null || StringUtil.containsWordIgnoreCase(person.getName().fullName, name))
-                && (phone == null || StringUtil.containsWordIgnoreCase(person.getPhone().value, phone))
-                && (email == null || StringUtil.containsWordIgnoreCase(person.getEmail().value, email))
-                && (role == null || StringUtil.containsWordIgnoreCase(person.getRole().toString(), role))
-                && (major == null || StringUtil.containsWordIgnoreCase(person.getMajor().toString(), major))
-                && (address == null || StringUtil.containsWordIgnoreCase(person.getAddress().value, address))
+        return (name == null || StringUtil.containsPartialWordIgnoreCase(person.getName().fullName, name))
+                && (phone == null || StringUtil.containsPartialWordIgnoreCase(person.getPhone().value, phone))
+                && (email == null || StringUtil.containsPartialWordIgnoreCase(person.getEmail().value, email))
+                && (role == null || StringUtil.containsPartialWordIgnoreCase(person.getRole().toString(), role))
+                && (major == null || StringUtil.containsPartialWordIgnoreCase(person.getMajor().toString(), major))
+                && (address == null || StringUtil.containsPartialWordIgnoreCase(person.getAddress().value, address))
                 && (tags == null
                 || tags.isEmpty()
                 || tags.stream().allMatch(tag -> person
                 .getTags().stream()
-                .anyMatch(personTag -> StringUtil.containsWordIgnoreCase(personTag.tagName, tag))));
+                .anyMatch(personTag -> StringUtil.containsPartialWordIgnoreCase(personTag.tagName, tag))));
     }
 
     @Override
