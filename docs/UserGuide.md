@@ -111,6 +111,34 @@ Examples:
 *  `edit n/John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be `91234567` and `johndoe@example.com` respectively.
 *  `edit n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+### Tagging A Contact : `tag-add` / `tag-delete`
+
+## Adding Tag(s) to A Contact
+Add tag(s) to an existing person in the address book.
+
+Format: `tag-add n/NAME t/TAG...`
+
+* Tags the person at with the specified `NAME`.
+* Existing values will be updated together with the input values.
+
+Examples:
+*  `tag-add n/John Doe t/Adam and Eve 12 June t/Adam and Steve 16 June` Adds the tags `Adam and Eve 12 June` 
+and `Adam and Steve 16 June` to John Doe.
+*  `tag-add n/Betsy Crower t/Wedding at Park Gala` Adds the tag `Wedding at Park Gala` to Betsy Crower.
+
+## Deleting Tag(s) from A Contact
+Delete tag(s) from an existing person in the address book.
+
+Format: `tag-delete n/NAME t/TAG...`
+
+* Deletes tag(s) from the person at with the specified `NAME`.
+* Existing values that match input values will be deleted.
+
+Examples:
+*  `tag-delete n/John Doe t/Adam and Eve 12 June t/Adam and Steve 16 June` Deletes the tags `Adam and Eve 12 June` 
+and `Adam and Steve 16 June` from John Doe.
+*  `tag-delete n/Betsy Crower t/Wedding at Park Gala` Deletes the tag `Wedding at Park Gala` from Betsy Crower.
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -195,10 +223,12 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer t/Wedding 1`
-**Clear**  | `clear`
-**Delete** | `delete n/NAME` followed by `delete-y` or `delete-n`<br> e.g., `delete n/John Doe` followed by `delete-y`
-**Edit**   | `edit n/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit n/John n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+**Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer t/Wedding 1`
+**Clear**         | `clear`
+**Delete**        | `delete n/NAME` followed by `delete-y` or `delete-n`<br> e.g., `delete n/John Doe` followed by `delete-y`
+**Edit**          | `edit n/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit n/John n/James Lee e/jameslee@example.com`
+**Adding Tags**   | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/wedding at Tanglin`
+**Deleting Tags** | `tag-delete n/NAME t/TAG...` <br> e.g., `tag-delete n/John Doe t/wedding at Tanglin`
+**Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List**          | `list`
+**Help**          | `help`
