@@ -8,8 +8,8 @@ import static seedu.address.storage.JsonAdaptedAssignment.PERSON_NOT_FOUND_MESSA
 import static seedu.address.storage.JsonAdaptedAssignment.PROJECT_NOT_FOUND_MESSAGE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.ALICE_ALPHA;
-import static seedu.address.testutil.TypicalProjects.ALPHA;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalProjects.ALPHA;
 
 import org.junit.jupiter.api.Test;
 
@@ -85,7 +85,9 @@ public class JsonAdaptedAssignmentTest {
                 null,
                 VALID_EMPLOYEE_ID);
         AddressBook addressBook = new AddressBook();
-        assertThrows(IllegalValueException.class, MISSING_PROJECT_ID_MESSAGE, () -> assignment.toModelType(addressBook));
+        assertThrows(IllegalValueException.class,
+                MISSING_PROJECT_ID_MESSAGE,
+                () -> assignment.toModelType(addressBook));
     }
 
     @Test
@@ -103,7 +105,9 @@ public class JsonAdaptedAssignmentTest {
                 VALID_PROJECT_ID,
                 VALID_EMPLOYEE_ID);
         AddressBook addressBook = new AddressBook();
-        assertThrows(IllegalValueException.class, MISSING_ASSIGNMENT_ID_MESSAGE, () -> assignment.toModelType(addressBook));
+        assertThrows(IllegalValueException.class,
+                MISSING_ASSIGNMENT_ID_MESSAGE,
+                () -> assignment.toModelType(addressBook));
     }
 
     @Test
