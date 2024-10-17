@@ -88,53 +88,90 @@ public class ModelManagerTest {
         assertTrue(modelManager.hasPerson(ALICE));
     }
 
+    // ============ Undo and Redo Methods ================================================================
     @Test
-    public void undoAddressBook_success() {
-        // Setup initial state and add a person
+    public void undoAddressBook_personSuccessfullyRemovedAfterUndo() {
         modelManager.addPerson(BENSON);
         modelManager.saveAddressBook();
 
-        // Verify BENSON is in the address book
         assertTrue(modelManager.hasPerson(BENSON), "BENSON should be present in the address book after adding.");
 
-        // Perform undo operation
         modelManager.undoAddressBook();
 
-        // BENSON should no longer be in the address book after undo
         assertFalse(modelManager.hasPerson(BENSON), "BENSON should not be in the address book after undo.");
     }
 
     @Test
-    public void canUndoAddressBook_noSavedState_returnsFalse() {
-        // Check that undo is not possible without any prior state changes
-        assertFalse(modelManager.canUndoAddressBook());
-    }
-
-
-    @Test
-    public void undoAddressBook_noUndoableState_failure() {
-        // Check that undo is not possible without any prior state changes
-        assertFalse(modelManager.canUndoAddressBook());
+    public void canUndoAddressBook_noSavedState_undoNotPossible() {
+        assertFalse(modelManager.canUndoAddressBook(), "Undo should not be possible when no state has been saved.");
     }
 
     @Test
-    public void canUndoAddressBook_stateSaved_success() {
-        // Add a person and save the state
+    public void undoAddressBook_noUndoableState_undoFails() {
+        assertFalse(modelManager.canUndoAddressBook(), "Undo should fail when no undoable state exists.");
+    }
+
+    @Test
+    public void canUndoAddressBook_savedStateExists_undoPossible() {
         modelManager.addPerson(BENSON);
         modelManager.saveAddressBook();
 
-        // Check that undo is now possible
-        assertTrue(modelManager.canUndoAddressBook());
+        assertTrue(modelManager.canUndoAddressBook(), "Undo should be possible after saving a state.");
     }
 
     @Test
-    public void saveAddressBook_success() {
-        // Setup initial state and add a person
+    public void redoAddressBook_personSuccessfullyRestoredAfterRedo() {
         modelManager.addPerson(BENSON);
         modelManager.saveAddressBook();
 
-        // After saving, undo should be possible
-        assertTrue(modelManager.canUndoAddressBook());
+        modelManager.undoAddressBook();
+
+        assertFalse(modelManager.hasPerson(BENSON), "BENSON should not be in the address book after undo.");
+
+        modelManager.redoAddressBook();
+
+        assertTrue(modelManager.hasPerson(BENSON), "BENSON should be back in the address book after redo.");
+    }
+
+    @Test
+    public void canRedoAddressBook_noSavedState_redoNotPossible() {
+        assertFalse(modelManager.canRedoAddressBook(), "Redo should not be possible when no state has been saved.");
+    }
+
+    @Test
+    public void redoAddressBook_noRedoableState_redoFails() {
+        assertFalse(modelManager.canRedoAddressBook(), "Redo should not be possible without first performing an undo.");
+    }
+
+    @Test
+    public void canRedoAddressBook_savedStateExists_redoPossible() {
+        modelManager.addPerson(BENSON);
+        modelManager.saveAddressBook();
+
+        modelManager.undoAddressBook();
+
+        assertTrue(modelManager.canRedoAddressBook(), "Redo should be possible after performing an undo.");
+    }
+
+    @Test
+    public void saveAddressBook_newStateAfterUndo_redoNotPossible() {
+        modelManager.addPerson(BENSON);
+        modelManager.saveAddressBook();
+
+        modelManager.undoAddressBook();
+
+        modelManager.addPerson(ALICE);
+        modelManager.saveAddressBook();
+
+        assertFalse(modelManager.canRedoAddressBook(), "Redo should not be possible after making new changes.");
+    }
+
+    @Test
+    public void saveAddressBook_stateSaved_undoPossible() {
+        modelManager.addPerson(BENSON);
+        modelManager.saveAddressBook();
+
+        assertTrue(modelManager.canUndoAddressBook(), "Undo should be possible after saving the state.");
     }
 
     //=========== Filtered Person List Accessors Tests =============================================================
