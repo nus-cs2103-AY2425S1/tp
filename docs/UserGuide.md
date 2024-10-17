@@ -144,8 +144,8 @@ This feature allows you to enter and save detailed records for new customers. Ea
     
 
 #### Parameters {#add-command-parameters}
-| Parameter | Expected Format                                  | Explanation                                                                                                       |
 
+| Parameter | Expected Format                                  | Explanation                                                                                                       |
 |-----------|--------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
 | NAME      | Alphanumeric, case insensitive                   | Accepts all names without case sensitivity. Names will be displayed in block letters for clarity and consistency. |
 | PHONE     | 8-digit number, starts with 8 or 9               | Ensures the contact number is valid in Singapore.                                                                 |
@@ -185,7 +185,6 @@ This feature allows you to remove records of customers who are no longer using y
 #### Parameters
 
 | Parameter | Expected Format               | Explanation                                                                                                                                 |
-
 |-----------|-------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | INDEX     | Integer (1 to the last INDEX) | The INDEX must be a valid integer within the registered range (either the original list or any filtered list after using `filter` command). |
 
@@ -238,7 +237,6 @@ This feature allows users to update the details of an existing customer in the d
 #### Parameters
 
 | Parameter | Expected Format                                  | Explanation                                                                                                                                 |
-
 |-----------|--------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | INDEX     | Integer (1 to the last INDEX)                    | The index must be a valid integer within the registered range (either the original list or any filtered list after using `filter` command). |
 | NAME      | Alphanumeric, capitalized                        | Names are in block letters for clarity and consistency.                                                                                     |
@@ -291,7 +289,6 @@ To perform a search, use the `filter` command followed by one or more flags (ind
 #### Parameters
 
 | Parameter   | Expected Format                                                                                              | Explanation                                                                                     |
-
 |-------------|--------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
 | FLAG        | Refer to the list of supported flags detailed below.                                                         | Identifies the field to search (e.g., `n/` for name, `j/` for job).                             |                                                                          |
 | SEARCH TERM | Refer to the syntax constraints in the [parameter subsection of the `add` command](#add-command-parameters). | The value to search for in the specified field (e.g., "doctor" for job, "TAN LESHEW" for name). |
