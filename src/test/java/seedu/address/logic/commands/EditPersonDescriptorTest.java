@@ -46,7 +46,7 @@ public class EditPersonDescriptorTest {
 
         // different age -> returns false
 
-        // different tags -> returns false
+        // different study groups -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withStudyGroups(VALID_TAG_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
@@ -56,8 +56,8 @@ public class EditPersonDescriptorTest {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
                 + editPersonDescriptor.getName().orElse(null) + ", email="
-                + editPersonDescriptor.getEmail().orElse(null) + ", tags="
-                + editPersonDescriptor.getStudyGroups().orElse(null) + "}";
+                + editPersonDescriptor.getEmail().orElse(null) + ", study groups="
+                + editPersonDescriptor.getStudyGroupTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

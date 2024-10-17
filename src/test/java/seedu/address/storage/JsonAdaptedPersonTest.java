@@ -27,7 +27,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_GENDER = BENSON.getGender().toString();
     private static final String VALID_AGE = BENSON.getAge().toString();
     private static final String VALID_DETAIL = BENSON.getDetail().toString();
-    private static final List<JsonAdaptedStudyGroupTag> VALID_TAGS = BENSON.getStudyGroups().stream()
+    private static final List<JsonAdaptedStudyGroupTag> VALID_TAGS = BENSON.getStudyGroupTags().stream()
             .map(JsonAdaptedStudyGroupTag::new)
             .collect(Collectors.toList());
 

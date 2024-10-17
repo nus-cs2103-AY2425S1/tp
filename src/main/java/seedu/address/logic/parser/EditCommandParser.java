@@ -61,7 +61,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_AGE).isPresent()) {
             editPersonDescriptor.setAge(ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get()));
         }
-        parseStudyGroupsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setStudyGroups);
+        parseStudyGroupsForEdit(argMultimap.getAllValues(PREFIX_TAG))
+                .ifPresent(editPersonDescriptor::setStudyGroupTags);
         if (argMultimap.getValue(PREFIX_DETAIL).isPresent()) {
             editPersonDescriptor.setDetail(ParserUtil.parseDetail(argMultimap.getValue(PREFIX_DETAIL).get()));
         }
@@ -75,9 +76,10 @@ public class EditCommandParser implements Parser<EditCommand> {
 
     /**
      * Parses {@code Collection<String> studyGroups} into a
-     * {@code Set<StudyGroupTag>} if {@code tags} is non-empty. If {@code tags}
-     * contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<StudyGroupTag>} containing zero tags.
+     * {@code Set<StudyGroupTag>} if {@code studyGroups} is non-empty. If
+     * {@code studyGroups} contain only one element which is an empty string, it
+     * will be parsed into a {@code Set<StudyGroupTag>} containing zero study
+     * groups.
      */
     private Optional<Set<StudyGroupTag>> parseStudyGroupsForEdit(Collection<String> studyGroups) throws ParseException {
         assert studyGroups != null;

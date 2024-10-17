@@ -50,7 +50,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         gender = personToCopy.getGender();
         age = personToCopy.getAge();
-        studyGroups = new HashSet<>(personToCopy.getStudyGroups());
+        studyGroups = new HashSet<>(personToCopy.getStudyGroupTags());
         detail = personToCopy.getDetail();
     }
 

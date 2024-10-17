@@ -10,6 +10,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class StudyGroupTag {
 
     public static final String MESSAGE_CONSTRAINTS = "Study group names should be alphanumeric";
+
+    /*
+     * The study group name must be alphanumeric.
+     */
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String studyGroupName;

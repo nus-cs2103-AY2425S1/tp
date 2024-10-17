@@ -63,7 +63,7 @@ public class Person {
      * Returns an immutable study group set, which throws
      * {@code UnsupportedOperationException} if modification is attempted.
      */
-    public Set<StudyGroupTag> getStudyGroups() {
+    public Set<StudyGroupTag> getStudyGroupTags() {
         return Collections.unmodifiableSet(studyGroups);
     }
 
@@ -119,7 +119,7 @@ public class Person {
                 .add("gender", gender)
                 .add("age", age)
                 .add("detail", detail)
-                .add("tags", studyGroups)
+                .add("study groups", studyGroups)
                 .toString();
     }
 

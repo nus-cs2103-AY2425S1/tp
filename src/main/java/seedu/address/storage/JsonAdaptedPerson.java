@@ -33,18 +33,19 @@ class JsonAdaptedPerson {
     private final String detail;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedStudyGroupTag} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("email") String email,
             @JsonProperty("gender") String gender, @JsonProperty("age") String age,
-            @JsonProperty("tags") List<JsonAdaptedStudyGroupTag> tags, @JsonProperty("detail") String detail) {
+            @JsonProperty("study groups") List<JsonAdaptedStudyGroupTag> studyGroups,
+            @JsonProperty("detail") String detail) {
         this.name = name;
         this.email = email;
         this.gender = gender;
         this.age = age;
-        if (tags != null) {
-            this.studyGroups.addAll(tags);
+        if (studyGroups != null) {
+            this.studyGroups.addAll(studyGroups);
         }
         this.detail = detail;
     }
@@ -57,7 +58,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         gender = source.getGender().value;
         age = source.getAge().value;
-        studyGroups.addAll(source.getStudyGroups().stream()
+        studyGroups.addAll(source.getStudyGroupTags().stream()
                 .map(JsonAdaptedStudyGroupTag::new)
                 .collect(Collectors.toList()));
         detail = source.getDetail().value;

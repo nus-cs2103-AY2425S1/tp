@@ -22,7 +22,7 @@ public class PersonTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getStudyGroups().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> person.getStudyGroupTags().remove(0));
     }
 
     @Test
@@ -81,7 +81,7 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withAge(VALID_AGE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
+        // different study groups -> returns false
         editedAlice = new PersonBuilder(ALICE).withStudyGroups(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
@@ -90,7 +90,7 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", email="
                 + ALICE.getEmail() + ", gender=" + ALICE.getGender() + ", age=" + ALICE.getAge() + ", detail="
-                + ALICE.getDetail() + ", tags=" + ALICE.getStudyGroups() + "}";
+                + ALICE.getDetail() + ", study groups=" + ALICE.getStudyGroupTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

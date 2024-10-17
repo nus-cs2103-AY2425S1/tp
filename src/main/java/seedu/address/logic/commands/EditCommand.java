@@ -101,8 +101,8 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
         Age updatedAge = editPersonDescriptor.getAge().orElse(personToEdit.getAge());
-        Set<StudyGroupTag> updatedStudyGroups = editPersonDescriptor.getStudyGroups()
-                .orElse(personToEdit.getStudyGroups());
+        Set<StudyGroupTag> updatedStudyGroups = editPersonDescriptor.getStudyGroupTags()
+                .orElse(personToEdit.getStudyGroupTags());
         Detail updatedDetail = editPersonDescriptor.getDetail().orElse(personToEdit.getDetail());
 
         return new Person(updatedName, updatedEmail, updatedGender, updatedAge, updatedStudyGroups, updatedDetail);
@@ -148,7 +148,7 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Copy constructor. A defensive copy of {@code tags} is used internally.
+         * Copy constructor. A defensive copy of {@code studyGroups} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
@@ -156,7 +156,7 @@ public class EditCommand extends Command {
             setGender(toCopy.gender);
             setAge(toCopy.age);
             setDetail(toCopy.detail);
-            setStudyGroups(toCopy.studyGroups);
+            setStudyGroupTags(toCopy.studyGroups);
         }
 
         /**
@@ -210,16 +210,16 @@ public class EditCommand extends Command {
          * Sets {@code studyGroups} to this object's {@code studyGroups}. A defensive
          * copy of {@code studyGroups} is used internally.
          */
-        public void setStudyGroups(Set<StudyGroupTag> studyGroups) {
+        public void setStudyGroupTags(Set<StudyGroupTag> studyGroups) {
             this.studyGroups = (studyGroups != null) ? new HashSet<>(studyGroups) : null;
         }
 
         /**
          * Returns an unmodifiable tag set, which throws
          * {@code UnsupportedOperationException} if modification is attempted. Returns
-         * {@code Optional#empty()} if {@code tags} is null.
+         * {@code Optional#empty()} if {@code studyGroups} is null.
          */
-        public Optional<Set<StudyGroupTag>> getStudyGroups() {
+        public Optional<Set<StudyGroupTag>> getStudyGroupTags() {
             return (studyGroups != null) ? Optional.of(Collections.unmodifiableSet(studyGroups)) : Optional.empty();
         }
 
@@ -245,7 +245,7 @@ public class EditCommand extends Command {
             return new ToStringBuilder(this)
                     .add("name", name)
                     .add("email", email)
-                    .add("tags", studyGroups)
+                    .add("study groups", studyGroups)
                     .toString();
         }
     }

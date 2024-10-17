@@ -46,7 +46,7 @@ public class Messages {
                 .append("; Details: ")
                 .append(person.getDetail())
                 .append("; Study Groups: ");
-        person.getStudyGroups().forEach(builder::append);
+        person.getStudyGroupTags().forEach(builder::append);
         return builder.toString();
     }
 

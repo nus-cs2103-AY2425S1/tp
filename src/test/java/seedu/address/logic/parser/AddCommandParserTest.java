@@ -56,7 +56,7 @@ public class AddCommandParserTest {
                 + GENDER_DESC_BOB + AGE_DESC_BOB + TAG_DESC_FRIEND + DETAIL_DESC_BOB,
                 new AddCommand(expectedPerson));
 
-        // multiple tags - all accepted
+        // multiple study groups - all accepted
         Person expectedPersonMultipleStudyGroups = new PersonBuilder(BOB)
                 .withStudyGroups(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
@@ -125,7 +125,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_tagFieldsMissing_success() {
-        // zero tags
+        // zero study group
         Person expectedPerson = new PersonBuilder(AMY).withStudyGroups().withDetail("detail").build();
         assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY
                 + GENDER_DESC_AMY + AGE_DESC_AMY + DETAIL_DESC_AMY,

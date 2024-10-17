@@ -36,7 +36,7 @@ public class PersonUtil {
         sb.append(PREFIX_GENDER + person.getGender().value + " ");
         sb.append(PREFIX_AGE + person.getAge().value + " ");
         sb.append(PREFIX_DETAIL + person.getDetail().value + " ");
-        person.getStudyGroups().stream().forEach(
+        person.getStudyGroupTags().stream().forEach(
                 s -> sb.append(PREFIX_TAG + s.studyGroupName + " "));
         return sb.toString();
     }
@@ -52,12 +52,12 @@ public class PersonUtil {
         descriptor.getGender().ifPresent(gender -> sb.append(PREFIX_GENDER).append(gender.value).append(" "));
         descriptor.getAge().ifPresent(age -> sb.append(PREFIX_AGE).append(age.value).append(" "));
         descriptor.getDetail().ifPresent(detail -> sb.append(PREFIX_DETAIL).append(detail.value).append(" "));
-        if (descriptor.getStudyGroups().isPresent()) {
-            Set<StudyGroupTag> tags = descriptor.getStudyGroups().get();
-            if (tags.isEmpty()) {
+        if (descriptor.getStudyGroupTags().isPresent()) {
+            Set<StudyGroupTag> studyGroups = descriptor.getStudyGroupTags().get();
+            if (studyGroups.isEmpty()) {
                 sb.append(PREFIX_TAG);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.studyGroupName).append(" "));
+                studyGroups.forEach(s -> sb.append(PREFIX_TAG).append(s.studyGroupName).append(" "));
             }
         }
         return sb.toString();
