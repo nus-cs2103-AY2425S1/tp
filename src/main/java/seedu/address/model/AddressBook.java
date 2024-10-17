@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.util.Pair;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.commons.exceptions.AssociationDeleteException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.vendor.UniqueVendorList;
@@ -112,8 +113,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
+     * @throws VendorDeleteException if the vendor is not deletable (e.g. it is associated with an event)
      */
-    public void removeVendor(Vendor key) {
+    public void removeVendor(Vendor key) throws AssociationDeleteException {
+        if (getAssociatedEvents(key).size() > 0) {
+            throw new AssociationDeleteException();
+        }
         vendors.remove(key);
     }
 
@@ -188,8 +193,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
+     * @throws EventDeleteException if the event is not deletable (e.g. it is associated with a vendor)
      */
-    public void removeEvent(Event key) {
+    public void removeEvent(Event key) throws AssociationDeleteException {
+        if (getAssociatedVendors(key).size() > 0) {
+            throw new AssociationDeleteException();
+        }
         events.remove(key);
     }
 
@@ -238,4 +247,3 @@ public class AddressBook implements ReadOnlyAddressBook {
         return Objects.hash(vendors.hashCode(), events.hashCode());
     }
 }
-
