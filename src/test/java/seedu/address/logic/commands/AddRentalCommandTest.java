@@ -191,7 +191,12 @@ public class AddRentalCommandTest {
         }
 
         @Override
-        public ObjectProperty<Client> getLastViewedClient() {
+        public ObjectProperty<Client> getLastViewedClientAsObjectProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Client getLastViewedClient() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -257,7 +262,12 @@ public class AddRentalCommandTest {
         }
 
         @Override
-        public ObjectProperty<Client> getLastViewedClient() {
+        public Client getLastViewedClient() {
+            // object returned is not used
+            return null;
+        }
+
+        public ObjectProperty<Client> getLastViewedClientAsObjectProperty() {
             // object returned is not used
             return null;
         }

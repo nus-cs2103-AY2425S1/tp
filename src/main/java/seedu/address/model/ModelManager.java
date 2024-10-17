@@ -157,8 +157,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObjectProperty<Client> getLastViewedClient() {
+    public ObjectProperty<Client> getLastViewedClientAsObjectProperty() {
         return lastViewedClient;
+    }
+
+    @Override
+    public Client getLastViewedClient() {
+        return lastViewedClient.get();
     }
 
     @Override

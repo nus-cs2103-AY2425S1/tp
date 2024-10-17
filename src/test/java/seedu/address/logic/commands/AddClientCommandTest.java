@@ -178,7 +178,11 @@ public class AddClientCommandTest {
         }
 
         @Override
-        public ObjectProperty<Client> getLastViewedClient() {
+        public ObjectProperty<Client> getLastViewedClientAsObjectProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public Client getLastViewedClient() {
             throw new AssertionError("This method should not be called.");
         }
 

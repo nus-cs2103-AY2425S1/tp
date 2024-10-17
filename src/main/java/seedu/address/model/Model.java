@@ -103,12 +103,11 @@ public interface Model {
      */
     void updateVisibleRentalInformationList(List<RentalInformation> rentalInformationList);
 
-    /**
-     * Returns the last client viewed by the {@code rview} command, whose list of rental information is currently
-     * displayed in the UI.
-     * Returns {@code null} if no client has been viewed or the last viewed client has been deleted.
-     */
-    ObjectProperty<Client> getLastViewedClient();
+    /** Returns the last viewed client as ObjectProperty */
+    ObjectProperty<Client> getLastViewedClientAsObjectProperty();
+
+    /** Returns the last viewed client as Client */
+    Client getLastViewedClient();
 
     /**
      * Sets the last viewed client of this model.

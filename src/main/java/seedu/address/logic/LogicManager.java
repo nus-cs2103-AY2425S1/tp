@@ -95,6 +95,6 @@ public class LogicManager implements Logic {
 
     @Override
     public ObjectProperty<Client> getVisibleClient() {
-        return model.getLastViewedClient();
+        return model.getLastViewedClientAsObjectProperty();
     }
 }
