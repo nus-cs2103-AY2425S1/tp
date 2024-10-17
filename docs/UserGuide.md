@@ -128,7 +128,20 @@ Format: `schedule INDEX d/DAY st/START_TIME et/END_TIME`
 
 Example:
 * `schedule 1 d/Tuesday st/16:00 et/18:00` Schedules a regular lesson on Tuesday, 4-6pm for the 1st student.
-* 
+
+### Cancelling a regular lesson : `cancel`
+
+Cancels a regular lesson at a specific date for the specified student in the student directory.
+
+Format: `cancel INDEX dt/DATE st/START_TIME`
+
+* Cancels a regular lesson for the student at the specified `INDEX`. The index refers to the index number showin in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* `DATE` must be written in the format `DD-MM-YYYY` for the command to parse the input properly.
+* `DATE` must fall on the student's regular lesson `DAY`, and `START_TIME` must match the student's lesson `START_TIME`.
+
+Example:
+* `cancel 1 dt/15-10-2024 st/16:00` Cancels a regular lesson on 15-10-2024 (which is a Tuesday), starting at 4pm for the 1st student.
+
 ### Locating students by name: `find`
 
 Finds students whose names contain any of the given keywords.
@@ -218,6 +231,7 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee p/81234567`
 **Assign** | `assign INDEX pn/PIECE_NAME...`<br> e.g,`assign 1 pn/Moonlight Sonata pn/Canon in D`
 **Schedule** | `schedule INDEX d/DAY st/START_TIME et/END_TIME`<br> e.g.,`schedule 1 d/Monday st/12:00 et/14:00`
+**Cancel** |  `cancel INDEX dt/DATE st/START_TIME` <br> e.g., `cancel 1 dt/14-10-2024 st/12:00`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Clear**  | `clear`

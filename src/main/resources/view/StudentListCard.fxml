@@ -29,6 +29,7 @@
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="gradeLevel" styleClass="cell_small_label" text="\$gradeLevel" />
       <Label fx:id="regularLesson" styleClass="cell_small_label" text="\$regularLesson" />
+      <Label fx:id="cancelledLessons" styleClass="cell_small_label" text="\$cancelledLessons" />
       <Label fx:id="pianoPieces" styleClass="cell_small_label" text="\$pianoPieces" />
     </VBox>
   </GridPane>

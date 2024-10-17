@@ -10,7 +10,10 @@ import java.util.Set;
 
 import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.logic.commands.EditCommand.EditStudentDescriptor;
+import keycontacts.model.lesson.CancelledLesson;
+import keycontacts.model.lesson.Date;
 import keycontacts.model.lesson.RegularLesson;
+import keycontacts.model.lesson.Time;
 import keycontacts.model.pianopiece.PianoPiece;
 
 /**
@@ -28,6 +31,7 @@ public class Student {
     // Associations
     private final Set<PianoPiece> pianoPieces = new HashSet<>();
     private final RegularLesson regularLesson;
+    private final Set<CancelledLesson> cancelledLessons = new HashSet<>();
 
     /**
      * Constructor for a new student. Uses default associations.
@@ -47,7 +51,7 @@ public class Student {
      * present and not null.
      */
     public Student(Name name, Phone phone, Address address, GradeLevel gradeLevel,
-                   Set<PianoPiece> pianoPieces, RegularLesson regularLesson) {
+                   Set<PianoPiece> pianoPieces, RegularLesson regularLesson, Set<CancelledLesson> cancelledLessons) {
         requireAllNonNull(name, phone, address, gradeLevel, pianoPieces);
         this.name = name;
         this.phone = phone;
@@ -55,6 +59,7 @@ public class Student {
         this.gradeLevel = gradeLevel;
         this.pianoPieces.addAll(pianoPieces);
         this.regularLesson = regularLesson;
+        this.cancelledLessons.addAll(cancelledLessons);
     }
 
     public Name getName() {
@@ -93,6 +98,14 @@ public class Student {
     }
 
     /**
+     * Returns an immutable cancelled lesson set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<CancelledLesson> getCancelledLessons() {
+        return Collections.unmodifiableSet(cancelledLessons);
+    }
+
+    /**
      * Returns string representation of the {@code regularLesson}
      */
     public String getRegularLessonString() {
@@ -115,14 +128,15 @@ public class Student {
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(phone);
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(address);
         GradeLevel updatedGradeLevel = editStudentDescriptor.getGradeLevel().orElse(this.gradeLevel);
-        return new Student(updatedName, updatedPhone, updatedAddress, updatedGradeLevel, pianoPieces, regularLesson);
+        return new Student(updatedName, updatedPhone, updatedAddress, updatedGradeLevel, pianoPieces, regularLesson,
+                cancelledLessons);
     }
 
     /**
      * Creates and returns a new {@code Student} with the updated {@code regularLesson}.
      */
     public Student withRegularLesson(RegularLesson regularLesson) {
-        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson);
+        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson, cancelledLessons);
     }
 
     /**
@@ -132,7 +146,7 @@ public class Student {
         Set<PianoPiece> updatedPianoPieces = new HashSet<>(pianoPieces);
         updatedPianoPieces.addAll(addedPianoPieces);
 
-        return new Student(name, phone, address, gradeLevel, updatedPianoPieces, regularLesson);
+        return new Student(name, phone, address, gradeLevel, updatedPianoPieces, regularLesson, cancelledLessons);
     }
 
     /**
@@ -169,13 +183,14 @@ public class Student {
                 && address.equals(otherStudent.address)
                 && gradeLevel.equals(otherStudent.gradeLevel)
                 && pianoPieces.equals(otherStudent.pianoPieces)
-                && getRegularLessonOptional().equals(otherStudent.getRegularLessonOptional());
+                && getRegularLessonOptional().equals(otherStudent.getRegularLessonOptional())
+                && getCancelledLessons().equals(otherStudent.getCancelledLessons());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, address, gradeLevel, pianoPieces, regularLesson);
+        return Objects.hash(name, phone, address, gradeLevel, pianoPieces, regularLesson, cancelledLessons);
     }
 
     @Override
@@ -187,7 +202,26 @@ public class Student {
                 .add("gradeLevel", gradeLevel)
                 .add("pianoPieces", pianoPieces)
                 .add("regularLesson", regularLesson)
+                .add("cancelledLessons", cancelledLessons)
                 .toString();
+    }
+
+    /**
+     * Returns true if the {@code date} and {@code startTime} of {@code regularLesson} match the parameters.
+     */
+    public boolean matchesLesson(Date date, Time startTime) {
+        return this.getRegularLessonOptional()
+                .map(lesson -> lesson.isOnDayAndTime(date.convertToDay(), startTime))
+                .orElse(false);
+    }
+
+    /**
+     * Returns a new student with an additional {@code CancelledLesson}.
+     */
+    public Student withAddedCancelledLesson(CancelledLesson cancelledLesson) {
+        Set<CancelledLesson> updatedCancelledLessons = new HashSet<>(cancelledLessons);
+        updatedCancelledLessons.add(cancelledLesson);
+        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson, updatedCancelledLessons);
     }
 
 }

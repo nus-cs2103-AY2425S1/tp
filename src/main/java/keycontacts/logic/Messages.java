@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import keycontacts.logic.parser.Prefix;
+import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.student.Student;
 
 /**
@@ -53,6 +54,17 @@ public class Messages {
     public static <T> String format(Collection<T> t) {
         final StringBuilder builder = new StringBuilder();
         t.forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats a {@code RegularLesson} for display to the user.
+     */
+    public static String format(RegularLesson regularLesson) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(regularLesson.getLessonDay())
+                .append("; Lesson time: ")
+                .append(regularLesson.getStartTime());
         return builder.toString();
     }
 }

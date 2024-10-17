@@ -1,5 +1,7 @@
 package keycontacts.logic.parser;
 
+import static keycontacts.logic.commands.CommandTestUtil.INVALID_DATE;
+import static keycontacts.logic.commands.CommandTestUtil.VALID_DATE;
 import static keycontacts.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static keycontacts.testutil.Assert.assertThrows;
 import static keycontacts.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
@@ -8,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import keycontacts.logic.parser.exceptions.ParseException;
+import keycontacts.model.lesson.Date;
 import keycontacts.model.lesson.Day;
 import keycontacts.model.lesson.Time;
 import keycontacts.model.student.Address;
@@ -163,4 +166,16 @@ public class ParserUtilTest {
         Time expectedTime = new Time(VALID_TIME);
         assertEquals(expectedTime, ParserUtil.parseTime(timeWithWhitespace));
     }
+    @Test
+    public void parseDate_validDate_success() throws ParseException {
+        assertEquals(new Date(VALID_DATE), ParserUtil.parseDate(VALID_DATE));
+    }
+    @Test
+    public void parseDate_validDateWithSpaces_success() throws ParseException {
+        assertEquals(new Date(VALID_DATE), ParserUtil.parseDate(WHITESPACE + VALID_DATE + WHITESPACE));
+    }
+    public void parseDate_invalidDate_failure() throws ParseException {
+        assertThrows(ParseException.class, Date.MESSAGE_CONSTRAINTS, () -> ParserUtil.parseDate(INVALID_DATE));
+    }
+
 }
