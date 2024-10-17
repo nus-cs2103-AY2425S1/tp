@@ -25,22 +25,33 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
         String[] argParts = trimmedArgs.split("\\s+");
 
         // Check if the input has exactly 3 parts: INDEX, a/DATE, TIME
-        if (argParts.length < 3 || !argParts[1].startsWith(APPOINTMENT_PREFIX)) {
+        if (argParts.length != 3 || !argParts[1].startsWith(APPOINTMENT_PREFIX)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
         }
 
-        // Argument parts validation
-        String dayString = argParts[1].substring(2, 12);
+        String dayString;
+        String dayPart;
+        String monthPart;
+        String yearPart;
+
+        try {
+            // Argument parts validation
+            dayString = argParts[1].substring(2, 12);
+
+            // Extract day, month, and year
+            dayPart = dayString.substring(0, 2);
+            monthPart = dayString.substring(3, 5);
+            yearPart = dayString.substring(6, 10);
+
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
+        }
+
 
         // Check if the string is in the correct format (with '-' at the right positions)
         if (!dayString.substring(2, 3).equals("-") || !dayString.substring(5, 6).equals("-")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
         }
-
-        // Extract day, month, and year
-        String dayPart = dayString.substring(0, 2);
-        String monthPart = dayString.substring(3, 5);
-        String yearPart = dayString.substring(6, 10);
 
         int day;
         int month;
@@ -59,9 +70,19 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
         }
 
         // Time validation
-        String timeString = argParts[2];
-        String hourPart = timeString.substring(0, 2);
-        String minutePart = timeString.substring(3, 5);
+        String timeString;
+        String hourPart;
+        String minutePart;
+
+        try {
+            timeString = argParts[2];
+            hourPart = timeString.substring(0, 2);
+            minutePart = timeString.substring(3, 5);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
+        }
+
         if (!timeString.substring(2, 3).equals(":")) {
             throw new ParseException("Invalid time format. Please use HH:MM.");
         }
