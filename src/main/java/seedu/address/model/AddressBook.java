@@ -66,7 +66,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the concertContact list with {@code concertContacts}. {@code concertContac} must not
+     * Replaces the contents of the concertContact list with {@code concertContacts}. {@code concertContacts} must not
      * contain duplicate concertContacts.
      */
     public void setConcertContacts(List<ConcertContact> concertContacts) {
