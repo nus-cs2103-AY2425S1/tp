@@ -39,7 +39,7 @@ public class PersonUtil {
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         person.getModuleRoleMap().getData().stream().forEach(
-            s -> sb.append(PREFIX_MODULE + s.moduleCode.toString() + "-" + s.roleType.toString() + " ")
+            s -> sb.append(PREFIX_MODULE + s.toString() + " ")
         );
         return sb.toString();
     }
