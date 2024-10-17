@@ -94,6 +94,7 @@ public class CommandTestUtil {
                 .withAddress(VALID_ADDRESS_AMY)
                 .withCourse(VALID_COURSE_AMY)
                 .withTag(VALID_TAG_STUDENT)
+                .addGradedModule(VALID_MODULE_AMY, VALID_GRADE_AMY)
                 .build();
         DESC_BOB = new EditPersonDescriptorBuilder()
                 .withStudentId(VALID_STUDENTID_BOB)
@@ -103,6 +104,7 @@ public class CommandTestUtil {
                 .withAddress(VALID_ADDRESS_BOB)
                 .withCourse(VALID_COURSE_BOB)
                 .withTag(VALID_TAG_STUDENT)
+                .addGradedModule(VALID_MODULE_BOB, VALID_GRADE_BOB)
                 .build();
     }
 

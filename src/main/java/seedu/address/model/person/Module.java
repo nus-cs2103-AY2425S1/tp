@@ -42,6 +42,9 @@ public class Module {
     public void setGrade(Grade grade) {
         this.grade = grade;
     }
+    public Grade getGrade() {
+        return this.grade;
+    }
 
     @Override
     public String toString() {

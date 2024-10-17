@@ -7,7 +7,14 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "course": "Math",
-    "tag" : "Student"
+    "tag" : "Student",
+    "modules" : [ {
+      "module" : "MA1100",
+      "grade" : "A"
+    }, {
+      "module" : "MA2202",
+      "grade" : null
+    } ]
   }, {
     "studentId": "19191919",
     "name" : "Benson Meier",
@@ -15,7 +22,11 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "course": "Medicine",
-    "tag" : "Student"
+    "tag" : "Student",
+    "modules" : [ {
+      "module" : "GEC1044",
+      "grade" : null
+    } ]
   }, {
     "studentId": "21212121",
     "name" : "Carl Kurz",
@@ -31,7 +42,14 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "course": "Dentistry",
-    "tag" : "Student"
+    "tag" : "Student",
+    "modules" : [ {
+      "module" : "DI5100",
+      "grade" : null
+    }, {
+      "module" : "DI5200",
+      "grade" : null
+    } ]
   }, {
     "studentId": "25252525",
     "name" : "Elle Meyer",
@@ -39,7 +57,14 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "course": "biomedical engineering",
-    "tag" : "Student"
+    "tag" : "Student",
+    "modules" : [ {
+      "module" : "BN1111",
+      "grade" : "D"
+    }, {
+      "module" : "BN2102",
+      "grade" : "C+"
+    } ]
   }, {
     "studentId": "98989898",
     "name" : "Fiona Kunz",
@@ -55,6 +80,13 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "course": "Dentistry",
-    "tag" : "Student"
+    "tag" : "Student",
+    "modules" : [ {
+      "module" : "DI5100",
+      "grade" : null
+    }, {
+      "module" : "DI5200",
+      "grade" : null
+    } ]
   } ]
 }

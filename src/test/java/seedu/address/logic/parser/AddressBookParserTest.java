@@ -67,10 +67,13 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).setEmptyModuleList().build();
         StudentId studentId = person.getStudentId();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + studentId + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+
+        EditCommand expected = new EditCommand(studentId, descriptor);
+
         assertEquals(new EditCommand(studentId, descriptor), command);
     }
 
