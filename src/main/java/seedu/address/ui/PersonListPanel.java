@@ -48,10 +48,20 @@ public class PersonListPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Attaches a {@code SelectionListener} to the entire list's members.
+     * @see PersonListPanel#setupSelectionModel() for details of what this listener does.
+     * @param listener a {@code SelectionListener} object/instance.
+     */
     public void setSelectionListener(SelectionListener listener) {
         this.listener = listener;
     }
 
+    /**
+     * Implements the logic that the {@code PersonListPanel} members' listener will have.
+     * The logic here is to call the DetailPanel's {@code onPersonSelected} method to display the selected contact's
+     * details on the DetailPanel.
+     */
     private void setupSelectionModel() {
         personListView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null && listener != null) {

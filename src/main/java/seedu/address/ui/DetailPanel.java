@@ -49,8 +49,6 @@ public class DetailPanel extends UiPart<Region> implements SelectionListener {
     @FXML
     private Label meetings;
 
-    // add meetings later
-
     private Person person;
     private int displayedIndex;
 
