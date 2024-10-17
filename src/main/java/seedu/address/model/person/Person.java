@@ -169,14 +169,13 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && birthday.equals(otherPerson.birthday)
-                && policies.equals(otherPerson.policies);
+                && birthday.equals(otherPerson.birthday);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, birthday, appointment, policies);
+        return Objects.hash(name, phone, email, address, tags, birthday, appointment);
     }
 
     @Override
