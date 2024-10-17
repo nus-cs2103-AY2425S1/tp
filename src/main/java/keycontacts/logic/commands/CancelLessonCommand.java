@@ -69,6 +69,7 @@ public class CancelLessonCommand extends Command {
 
         CancelledLesson cancelledLesson = new CancelledLesson(date);
         Student updatedStudent = studentToUpdate.withAddedCancelledLesson(cancelledLesson);
+        model.setStudent(studentToUpdate, updatedStudent);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 date, startTime, Messages.format(updatedStudent)));
