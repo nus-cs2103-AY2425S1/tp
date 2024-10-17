@@ -266,56 +266,55 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-- international or exchange student joining NUS
+- NUS club administrator responsible for managing contacts
 - prefer desktop apps over other types
 - can type fast
 - prefers typing to mouse interactions
 - is reasonably comfortable using CLI apps
 
-**Value proposition**: helps international students manage important contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Helps NUS club administrators manage and track different categories of contacts (e.g., students, companies) faster than a typical mouse/GUI-driven app.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                              | I want to …​                                                                               | So that I can…​                                                                          |
-| -------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
-| `* * *`  | new user                                             | see usage instructions                                                                     | refer to instructions when I forget how to use the App                                   |
-| `* * *`  | user                                                 | add new contacts                                                                           |                                                                                          |
-| `* * *`  | user                                                 | view all contacts                                                                          | see all my contacts saved in one screen                                                  |
-| `* * *`  | user                                                 | delete a contact                                                                           | remove entries that I no longer need                                                     |
-| `* *`    | potential user                                       | see the app populated with sample data                                                     | easily try and see how the app will look like when it is in use                          |
-| `* *`    | new user ready to use the app                        | remove all current data                                                                    | remove all sample data I used when exploring the app                                     |
-| `* *`    | familiar user of the app                             | save the contacts under a favourites tab                                                   | easily access the contacts that I frequently use                                         |
-| `* *`    | familiar user of the app                             | tag certain contacts                                                                       | remember where I know the contacts from                                                  |
-| `* *`    | new user who is from a different country             | change the language of the app                                                             | better use the app in my first language                                                  |
-| `* *`    | new user who is an exchange student                  | learn how to use the app quickly                                                           | use the app frequently during my 6 months in NUS                                         |
-| `* *`    | new user who is unfamiliar with English              | use shortcut commands instead of the full name of the commands                             | make minimal spelling mistakes when I am entering the commands                           |
-| `* *`    | familiar user of the app                             | filter contacts by tag                                                                     | easier find my contacts who belong to the same group                                     |
-| `* *`    | familiar user of the app                             | search contacts by name                                                                    | easily find the contact person instead of scrolling                                      |
-| `* *`    | first-time user                                      | see some sample contacts (local emergency etc)                                             | I do not need to manually search for those contacts that are useful in urgent situations |
-| `* *`    | student with frequent changes in schedule            | mark contacts as "high priority" or "low priority"                                         | focus on the most relevant people when my schedule is tight                              |
-| `* *`    | international student unfamiliar with the local area | access a pre-populated list of essential services (e.g., embassy, health services, police) | quickly contact these services in case of an emergency                                   |
-| `* *`    | user                                                 | edit my contacts                                                                           | amend mistakes/update new info on my contacts                                            |
-| `*`      | new user who is unfamiliar with English              | have suggestions on commands to enter                                                      | enter the right commands if I am unsure on how to spell certain words                    |
-| `*`      | familiar user of the app                             | choose country codes for different countries                                               | easier categorise and save different numbers from my diverse base of contacts            |
-| `*`      | familiar user of the app                             | mass add a large list of contacts                                                          | avoid from entering repetitive commands                                                  |
-| `*`      | impatient user                                       | experience reasonable response time while up to 1000 concurrent users are using it         | use the app even when the traffic is at the maximum expected level                       |
-| `*`      | busy user                                            | quickly import contacts from other platforms (e.g., phone, social media, email)            | avoid manually inputting every new contact into UniNet                                   |
+| Priority | As a …​                                      | I want to …​                                                                       | So that I can…​                                                                    |
+| -------- |----------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
+| `* * *`  | new user                                     | see usage instructions                                                             | refer to instructions when I forget how to use the App                             |
+| `* * *`  | user                                         | add new contacts                                                                   | manage contact information quickly                                                 |
+| `* * *`  | user                                         | view all contacts                                                                  | see all my contacts saved in one screen                                            |
+| `* * *`  | user                                         | delete a contact                                                                   | remove entries that I no longer need                                               |
+| `* *`    | user                                         | edit existing contacts                                                             | amend mistakes/update new info on my contacts                                      |
+| `* *`    | potential user                               | see the app populated with sample data                                             | easily try and see how the app will look like when it is in use                    |
+| `* *`    | new user ready to use the app                | remove all current data                                                            | remove all sample data I used when exploring the app                               |
+| `* *`    | admin user                                   | track contacts by category (e.g., students, companies)                             | quickly retrieve specific groups of contacts (e.g., all students or all companies) |
+| `* *`    | admin user                                   | filter contacts by tag (e.g., "sponsor", "member")                                 | find contacts associated with specific events or groups                            |
+| `* *`    | familiar user of the app                     | save the contacts under a favourites tab                                           | easily access the contacts that I frequently use                                   |
+| `* *`    | familiar user of the app                     | tag certain contacts                                                               | remember where I know the contacts from                                            |
+| `* *`    | new user                                     | learn how to use the app quickly                                                   | use the app frequently with other club admins                                      |
+| `* *`    | impatient user                               | use shortcut commands instead of the full name of the commands                     | make minimal spelling mistakes when I am entering the commands                     |
+| `* *`    | familiar user of the app                     | search contacts by name                                                            | easily find the contact person instead of scrolling                                |
+| `* *`    | admin user with frequent changes in schedule | mark contacts as "high priority" or "low priority"                                 | focus on the most relevant people when my schedule is tight                        |
+| `*`      | new user who is unfamiliar with English      | have suggestions on commands to enter                                              | enter the right commands if I am unsure on how to spell certain words              |
+| `*`      | familiar user of the app                     | mass add a large list of contacts                                                  | avoid from entering repetitive commands                                            |
+| `*`      | impatient user                               | experience reasonable response time while up to 1000 concurrent users are using it | use the app even when the traffic is at the maximum expected level                 |
+| `*`      | impatient user                               | manage up to 1000 contacts with fast response time                                 | ensure smooth usage even when managing a large contact list                        |
+| `*`      | busy user                                    | quickly import contacts from other platforms (e.g., phone, social media, email)    | avoid manually inputting every new contact into AdmiNUS                            |
+| `*`      | busy admin user                              | easily export the contact list                                                     | share or back up the contact list for other admin team members or departments      |
 
 _{More to be added}_
 
 ### Use cases
 
-(For all use cases below, the **System** is the `UniNet` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AdmiNUS` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case 1: Add a contact**
 
 **MSS**
 
 1. User requests to add a new contact
-2. User enters the required information (name and phone number) and optional information (email and tag)
-3. UniNet adds the contact and displays a success message
+2. User enters the required information (name, id, phone number, email, and address) and optional information (tag)
+3. AdmiNUS adds the contact and displays a success message
 
    Use case ends.
 
@@ -323,12 +322,14 @@ _{More to be added}_
 
 - 2a. The given arguments are invalid.
 
-  - 2a1. UniNet shows an error message for the specific invalid field.
+  - 2a1. AdmiNUS shows an error message for the specific invalid field.
+    
     Use case resumes at step 2.
 
 - 3a. Contact with the same phone number already exists.
 
-  - 3a1. UniNet shows an error message about duplicate contact.
+  - 3a1. AdmiNUS shows an error message about duplicate contact.
+    
     Use case resumes at step 2.
 
 **Use case 2: Delete a contact**
@@ -336,9 +337,9 @@ _{More to be added}_
 **MSS**
 
 1.  User requests to list contacts
-2.  UniNet shows a list of contacts
+2.  AdmiNUS shows a list of contacts
 3.  User requests to delete a specific contact in the list
-4.  UniNet deletes the contact
+4.  AdmiNUS deletes the contact
 
     Use case ends.
 
@@ -350,7 +351,7 @@ _{More to be added}_
 
 - 3a. The given index is invalid.
 
-  - 3a1. UniNet shows an error message.
+  - 3a1. AdmiNUS shows an error message.
 
     Use case resumes at step 2.
 
@@ -358,16 +359,28 @@ _{More to be added}_
 
 **MSS**
 
-1. User requests to list contacts
-2. UniNet shows a list of contacts
-3. User requests to delete a specific contact in the list (Use case 2)
-4. UniNet deletes the contact
-5. User requests to add a new contact (Use case 1)
-6. User enters the required information for the updated contact (name and phone number) and optional information (email and tag)
-7. UniNet adds the contact and displays a success message
+1. User requests to list contacts. 
+2. AdmiNUS shows a list of contacts. 
+3. User selects a contact to edit. 
+4. User enters updated contact information. 
+5. AdmiNUS updates the contact and displays a success message.
+
+    Use case ends.
+
+**Use case 4: Filter contacts by category or tag**
+
+**MSS**
+
+1. User requests to filter contacts by category (e.g., student, company) or tag (eg. "group A")
+2. The system filters and displays the list of contacts belonging to the specified category or tag
 
    Use case ends.
 
+**Extensions**
+- 2a. No contacts match the specified category. 
+  - 2a1. AdmiNUS displays an error message and an empty list. 
+    
+    Use case ends.
 ---
 
 ### Non-Functional Requirements
@@ -404,14 +417,14 @@ _{More to be added}_
 
 ### Glossary
 
+- **NUS Admin**: An NUS club admin user responsible for managing contacts of students, companies, etc.
 - **Mainstream OS**: Refers to commonly used operating systems, including Windows, macOS, and Linux distributions.
-- **Task**: A unit of work or activity managed by the Vinegar Task Manager, which can be a Todo, Deadline, or Event.
-- **Todo**: A basic task without any specific time constraints.
-- **Deadline**: A task that needs to be completed by a specific date or time.
-- **Event**: A task that occurs within a specific time frame, with a defined start and end time.
+- **Category**: A label that represents the type of contact (e.g., student, company) used for filtering and sorting contacts.
+- **Tag**: A keyword or label associated with a contact that allows for easy grouping and filtering.
 - **Command**: A user input string that triggers a specific action within the Vinegar application.
 - **User Interface (UI)**: The part of the application that users interact with, which includes graphical components like command boxes and task lists.
 - **CLI (Command Line Interface)**: A text-based user interface through which users interact with the application by typing commands.
+- **Profile Card**: A GUI feature that displays detailed information about a contact.
 - **Scalability**: The capacity of the system to handle increasing amounts of data or user load without performance degradation.
 - **JavaFX**: A software platform used for creating and delivering desktop applications with graphical user interfaces in Java.
 - **Data Persistence**: The characteristic of data that outlives the execution of the process that created it, usually achieved through saving data to a file or database.
