@@ -24,10 +24,17 @@ public class SearchAppointmentCommand extends Command {
             + "Example: " + COMMAND_WORD + " 2023-12-31 14:30";
 
     public static final String MESSAGE_SUCCESS = "Listed all clients with appointments on %s";
-    public static final String MESSAGE_INVALID_DATE_FORMAT = "The date format is invalid. Please use yyyy-MM-dd HH:mm format.";
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "The date format is invalid. " +
+            "Please use yyyy-MM-dd HH:mm format.";
 
     private final String dateTime;
 
+    /**
+     * Creates a {@code SearchAppointmentCommand} to search for clients with appointments on the specified {@code dateTime}.
+     *
+     * @param dateTime The date and time in string format used to search for client appointments.
+     * @throws CommandException if the {@code dateTime} format is invalid.
+     */
     public SearchAppointmentCommand(String dateTime) throws CommandException {
         requireNonNull(dateTime);
         if (!isValidDateTime(dateTime)) {

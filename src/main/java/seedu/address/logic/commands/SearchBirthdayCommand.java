@@ -24,10 +24,17 @@ public class SearchBirthdayCommand extends Command {
             + "Example: " + COMMAND_WORD + " 2000-04-25";
 
     public static final String MESSAGE_SUCCESS = "Listed all clients with birthdays on %s";
-    public static final String MESSAGE_INVALID_DATE_FORMAT = "The date format is invalid. Please use yyyy-MM-dd format.";
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "The date format is invalid. " +
+            "Please use yyyy-MM-dd format.";
 
     private final String date;
 
+    /**
+     * Creates a {@code SearchBirthdayCommand} to search for clients with the specified birthday {@code date}.
+     *
+     * @param date The date in string format used to search for client birthdays.
+     * @throws CommandException if the {@code date} format is invalid.
+     */
     public SearchBirthdayCommand(String date) throws CommandException {
         requireNonNull(date);
         if (!isValidDate(date)) {
