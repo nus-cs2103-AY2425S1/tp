@@ -209,7 +209,7 @@ public class EditCommandTest {
 
     @Test
     public void executeMethodCheckDuplicate1() {
-        Model testModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model testModel = new ModelManager(getTypicalCampusConnect(), new UserPrefs());
         Index index = Index.fromOneBased(4);
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         editPersonDescriptor.setName(new Name("Alice Pauline"));
@@ -225,7 +225,7 @@ public class EditCommandTest {
 
     @Test
     public void executeMethodCheckDuplicate2() {
-        Model testModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model testModel = new ModelManager(getTypicalCampusConnect(), new UserPrefs());
         Index index = Index.fromOneBased(1);
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         editPersonDescriptor.setName(new Name("Alice Pauline"));
