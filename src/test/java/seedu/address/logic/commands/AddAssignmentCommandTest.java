@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAssignments.TUTORIAL_HOMEWORK;
+import static seedu.address.testutil.TypicalAssignments.MATH_ASSIGNMENT_SUBMITTED;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalStudents.HUGH;
 
@@ -26,13 +26,13 @@ public class AddAssignmentCommandTest {
     public void execute_newAssignment_success() {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Student hughCopy = new StudentBuilder(HUGH).build();
-        hughCopy.addAssignment(TUTORIAL_HOMEWORK);
+        hughCopy.addAssignment(MATH_ASSIGNMENT_SUBMITTED);
         expectedModel.addStudent(hughCopy);
 
         model.addStudent(HUGH);
-        assertCommandSuccess(new AddAssignmentCommand(HUGH.getName(), TUTORIAL_HOMEWORK), model,
+        assertCommandSuccess(new AddAssignmentCommand(HUGH.getName(), MATH_ASSIGNMENT_SUBMITTED), model,
                 String.format(AddAssignmentCommand.MESSAGE_SUCCESS,
-                        TUTORIAL_HOMEWORK.getAssignmentName(), HUGH.getName()),
+                        MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), HUGH.getName()),
                 expectedModel);
     }
 }
