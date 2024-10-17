@@ -18,7 +18,7 @@ import seedu.address.model.person.PersonDescriptor;
 public class AddPersonCommand extends AddCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + "person"
-        + ": Adds a person to the address book. "
+        + ": Adds a person to the address book. \n"
         + "Parameters: "
         + PREFIX_NAME + "NAME "
         + PREFIX_PHONE + "PHONE "
@@ -54,7 +54,7 @@ public class AddPersonCommand extends AddCommand {
 
     @Override
     protected void addEntity(Model model) {
-        personId = model.addPerson(toAdd);
+        personId = model.addPerson(toAdd).getPersonId();
     }
 
     @Override

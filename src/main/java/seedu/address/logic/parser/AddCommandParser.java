@@ -83,10 +83,10 @@ public class AddCommandParser implements Parser<AddCommand> {
             Sickness sickness = ParserUtil.parseSickness(argMultimap.getValue(PREFIX_SICKNESS).get());
             Medicine medicine = ParserUtil.parseMedicine(argMultimap.getValue(PREFIX_MEDICINE).get());
 
-            AppointmentDescriptor appointment = new AppointmentDescriptor(
-                    appointmentType, appointmentDateTime, personId, sickness, medicine);
+            AppointmentDescriptor appointmentDescriptor = new AppointmentDescriptor(
+                    appointmentType, appointmentDateTime, sickness, medicine);
 
-            return new AddAppointmentCommand(appointment);
+            return new AddAppointmentCommand(appointmentDescriptor, personId);
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }

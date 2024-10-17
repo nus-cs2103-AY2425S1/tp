@@ -14,8 +14,10 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
+    // Identity fields
     private final int personId;
 
+    // Data fields
     private final PersonDescriptor personDescriptor;
 
     /**
@@ -51,6 +53,7 @@ public class Person {
      * @param personDescriptor
      */
     public Person(int personId, PersonDescriptor personDescriptor) {
+        requireAllNonNull(personId, personDescriptor);
         this.personId = personId;
         this.personDescriptor = personDescriptor;
     }

@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyAppointmentBook;
 
 /**
@@ -31,8 +32,9 @@ public class JsonAppointmentBookStorage implements AppointmentBookStorage {
     }
 
     @Override
-    public Optional<ReadOnlyAppointmentBook> readAppointmentBook() throws DataLoadingException {
-        return readAppointmentBook(filePath);
+    public Optional<ReadOnlyAppointmentBook> readAppointmentBook(
+            ReadOnlyAddressBook addressBook) throws DataLoadingException {
+        return readAppointmentBook(filePath, addressBook);
     }
 
     /**
@@ -41,7 +43,9 @@ public class JsonAppointmentBookStorage implements AppointmentBookStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    public Optional<ReadOnlyAppointmentBook> readAppointmentBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyAppointmentBook> readAppointmentBook(
+            Path filePath,
+            ReadOnlyAddressBook addressBook) throws DataLoadingException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableAppointmentBook> jsonAppointmentBook = JsonUtil.readJsonFile(
@@ -51,7 +55,7 @@ public class JsonAppointmentBookStorage implements AppointmentBookStorage {
         }
 
         try {
-            return Optional.of(jsonAppointmentBook.get().toModelType());
+            return Optional.of(jsonAppointmentBook.get().toModelType(addressBook));
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataLoadingException(ive);

@@ -16,12 +16,9 @@ import seedu.address.model.tag.Tag;
  */
 public class PersonDescriptor {
 
-    // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
-
-    // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 

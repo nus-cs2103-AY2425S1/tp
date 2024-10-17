@@ -12,12 +12,14 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyAppointmentBook;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentDescriptor;
 import seedu.address.model.appointment.AppointmentType;
 import seedu.address.model.appointment.Medicine;
 import seedu.address.model.appointment.Sickness;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonDescriptor;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -54,25 +56,25 @@ public class SampleDataUtil {
         };
     }
 
-    public static Appointment[] getSampleAppointments() {
-        return new Appointment[]{
-            new Appointment(new AppointmentType("Consultation"), LocalDateTime.of(2024,
-                    10, 20, 9, 30), 1, new Sickness("Flu"),
+    public static AppointmentDescriptor[] getSampleAppointments() {
+        return new AppointmentDescriptor[]{
+            new AppointmentDescriptor(new AppointmentType("Consultation"), LocalDateTime.of(2024,
+                    10, 20, 9, 30), new Sickness("Flu"),
                     new Medicine("Antiviral")),
-            new Appointment(new AppointmentType("Follow-up"), LocalDateTime.of(2024,
-                    10, 22, 14, 0), 2, new Sickness("Diabetes"),
+            new AppointmentDescriptor(new AppointmentType("Follow-up"), LocalDateTime.of(2024,
+                    10, 22, 14, 0), new Sickness("Diabetes"),
                     new Medicine("Insulin")),
-            new Appointment(new AppointmentType("Emergency"), LocalDateTime.of(2024,
-                    10, 23, 18, 45), 3, new Sickness("Asthma"),
+            new AppointmentDescriptor(new AppointmentType("Emergency"), LocalDateTime.of(2024,
+                    10, 23, 18, 45), new Sickness("Asthma"),
                     new Medicine("Inhaler")),
-            new Appointment(new AppointmentType("Check-up"), LocalDateTime.of(2024,
-                    10, 25, 11, 15), 4, new Sickness("Hypertension"),
+            new AppointmentDescriptor(new AppointmentType("Check-up"), LocalDateTime.of(2024,
+                    10, 25, 11, 15), new Sickness("Hypertension"),
                     new Medicine("Beta-blocker")),
-            new Appointment(new AppointmentType("Consultation"), LocalDateTime.of(2024,
-                    10, 28, 16, 30), 5, new Sickness("Migraine"),
+            new AppointmentDescriptor(new AppointmentType("Consultation"), LocalDateTime.of(2024,
+                    10, 28, 16, 30), new Sickness("Migraine"),
                     new Medicine("Pain reliever")),
-            new Appointment(new AppointmentType("Vaccination"), LocalDateTime.of(2024,
-                    11, 1, 10, 0), 6, new Sickness("Preventative Care"),
+            new AppointmentDescriptor(new AppointmentType("Vaccination"), LocalDateTime.of(2024,
+                    11, 1, 10, 0), new Sickness("Preventative Care"),
                     new Medicine("Vaccine"))
         };
     }
@@ -80,17 +82,22 @@ public class SampleDataUtil {
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (PersonDescriptor samplePerson : getSamplePersons()) {
-            int id = sampleAb.addPerson(samplePerson);
-            logger.finer("Added: " + id);
+            Person person = sampleAb.addPerson(samplePerson);
+            logger.finer("Added: " + person.getPersonId());
         }
         return sampleAb;
     }
 
-    public static ReadOnlyAppointmentBook getSampleAppointmentBook() {
+    //This appointment book should only be created if the sample address book was created.
+    public static ReadOnlyAppointmentBook getSampleAppointmentBook(ReadOnlyAddressBook sampleaAddressBook) {
+        PersonDescriptor[] samplePersons = getSamplePersons();
+        AppointmentDescriptor[] sampleAppointments = getSampleAppointments();
+        AddressBook sampleAb = new AddressBook();
         AppointmentBook sampleAppb = new AppointmentBook();
-        for (Appointment sampleAppointment : getSampleAppointments()) {
-            String app = sampleAppb.addAppointment(sampleAppointment);
-            logger.finer("Added: " + app);
+        for (int i = 0; i < samplePersons.length; i++) {
+            Person person = sampleAb.addPerson(samplePersons[i]);
+            Appointment appointment = sampleAppb.addAppointment(person, sampleAppointments[i]);
+            logger.finer("Added: " + appointment.getAppointmentId());
         }
         return sampleAppb;
     }

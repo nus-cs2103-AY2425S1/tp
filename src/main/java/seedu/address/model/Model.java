@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -38,6 +39,8 @@ public interface Model {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
+    //=========== AddressBook ================================================================================
+
     /**
      * Returns the user prefs' address book file path.
      */
@@ -62,9 +65,14 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person descriptor with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(PersonDescriptor personDescriptor);
+
+    /**
+     * Returns the person with the corresponding personId in the addressBook.
+     */
+    Optional<Person> findPerson(int personId);
 
     /**
      * Deletes the given person.
@@ -76,7 +84,7 @@ public interface Model {
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
-    int addPerson(PersonDescriptor personDescriptor);
+    Person addPerson(PersonDescriptor personDescriptor);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -94,6 +102,18 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    //=========== AppointmentBook ==============================================================================
+
+    /**
+     * Returns the user prefs' appointment book file path.
+     */
+    Path getAppointmentBookFilePath();
+
+    /**
+     * Sets the user prefs' appointment book file path.
+     */
+    void setAppointmentBookFilePath(Path appointmentBookFilePath);
+
     /**
      * Replaces appointment book data with the data in {@code appointmentBook}.
      */
@@ -103,7 +123,12 @@ public interface Model {
     ReadOnlyAppointmentBook getAppointmentBook();
 
     /**
-     * Returns true if an appointment with the same identity as {@code appointment} exists in the appointment book.
+     * Returns true if an appointment with the same identity as {@code appointment} exists in the appt book.
+     */
+    boolean hasAppointment(Appointment appointment);
+
+    /**
+     * Returns true if an appointment descriptor with the same identity as {@code appointment} exists in the appt book.
      */
     boolean hasAppointment(AppointmentDescriptor appointmentDescriptor);
 
@@ -117,7 +142,7 @@ public interface Model {
      * Adds the given appointment.
      * {@code appointment} must not already exist in the appointment book.
      */
-    void addAppointment(AppointmentDescriptor appointmentDescriptor);
+    Appointment addAppointment(Person person, AppointmentDescriptor appointmentDescriptor);
 
     /**
      * Replaces the given appointment {@code target} with {@code editedAppointment}.

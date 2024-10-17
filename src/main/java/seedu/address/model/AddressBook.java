@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -16,7 +17,7 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private int counter;
+    private int nextPersonId;
     private final UniquePersonList persons;
 
     /*
@@ -31,7 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public AddressBook() {
-        counter = 0;
+        nextPersonId = 0;
     }
 
     /**
@@ -42,12 +43,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         resetData(toBeCopied);
     }
 
-    public int getCounter() {
-        return counter;
+    public int getNextPersonId() {
+        return nextPersonId;
     }
 
-    public void setCounter(int counter) {
-        this.counter = counter;
+    public void setNextPersonId(int personId) {
+        this.nextPersonId = personId;
     }
 
     //// list overwrite operations
@@ -66,7 +67,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setCounter(newData.getCounter());
+        setNextPersonId(newData.getNextPersonId());
         setPersons(newData.getPersonList());
     }
 
@@ -93,18 +94,21 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
-        ++counter;
+    public void addPerson(Person person) {
+        persons.add(person);
+        ++nextPersonId;
     }
 
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
-    public int addPerson(PersonDescriptor p) {
-        persons.add(new Person(counter, p));
-        return ++counter;
+    public Person addPerson(PersonDescriptor personDescriptor) {
+        requireNonNull(personDescriptor);
+        Person person = new Person(nextPersonId, personDescriptor);
+        persons.add(person);
+        ++nextPersonId;
+        return person;
     }
 
     /**
@@ -124,6 +128,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    public Optional<Person> findPerson(int personId) {
+        return persons.findPerson(personId);
     }
 
     //// util methods

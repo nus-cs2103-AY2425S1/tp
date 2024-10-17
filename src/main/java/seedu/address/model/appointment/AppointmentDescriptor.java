@@ -12,11 +12,9 @@ import seedu.address.commons.util.ToStringBuilder;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class AppointmentDescriptor {
+
     private final AppointmentType appointmentType;
     private final LocalDateTime appointmentDateTime;
-    private final int personId;
-
-    // Data fields
     private final Sickness sickness;
     private final Medicine medicine;
 
@@ -26,19 +24,13 @@ public class AppointmentDescriptor {
     public AppointmentDescriptor(
             AppointmentType appointmentType,
             LocalDateTime appointmentDateTime,
-            int personId,
             Sickness sickness,
             Medicine medicine) {
-        requireAllNonNull(appointmentType, personId, sickness, medicine);
+        requireAllNonNull(appointmentType, appointmentDateTime, sickness, medicine);
         this.appointmentType = appointmentType;
         this.appointmentDateTime = appointmentDateTime;
-        this.personId = personId;
         this.sickness = sickness;
         this.medicine = medicine;
-    }
-
-    public int getPersonId() {
-        return personId;
     }
 
     public AppointmentType getAppointmentType() {
@@ -58,7 +50,7 @@ public class AppointmentDescriptor {
     }
 
     /**
-     * Returns true if both appointments have the same personId and appointmentDateTime.
+     * Returns true if both appointments have the same appointmentDateTime and appointmentType.
      * This defines a weaker notion of equality between two appointments.
      */
     public boolean isSameAppointment(AppointmentDescriptor otherAppointment) {
@@ -67,17 +59,17 @@ public class AppointmentDescriptor {
         }
 
         return otherAppointment != null
-                && otherAppointment.getPersonId() == getPersonId()
-                && otherAppointment.getAppointmentDateTime().equals(getAppointmentDateTime());
+                && otherAppointment.getAppointmentDateTime().equals(getAppointmentDateTime())
+                && otherAppointment.getAppointmentType().equals(getAppointmentType());
     }
 
     /**
-     * Returns true if both appointments have the same name.
+     * Returns true if both appointments have the same appointmentDateTime and appointmentType.
      * This defines a weaker notion of equality between two appointments.
      */
     public boolean isSameAppointment(Appointment otherAppointment) {
         return otherAppointment != null
-                && otherAppointment.getPersonId() == getPersonId()
+                && otherAppointment.getAppointmentDateTime().equals(getAppointmentDateTime())
                 && otherAppointment.getAppointmentDateTime().equals(getAppointmentDateTime());
     }
 
@@ -95,7 +87,6 @@ public class AppointmentDescriptor {
         AppointmentDescriptor otherAppointment = (AppointmentDescriptor) other;
         return appointmentType.equals(otherAppointment.getAppointmentType())
                 && appointmentDateTime.equals(otherAppointment.getAppointmentDateTime())
-                && personId == otherAppointment.getPersonId()
                 && sickness.equals(otherAppointment.getSickness())
                 && medicine.equals(otherAppointment.getMedicine());
     }
@@ -103,16 +94,15 @@ public class AppointmentDescriptor {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(appointmentType, appointmentDateTime, personId, sickness, medicine);
+        return Objects.hash(appointmentType, appointmentDateTime, sickness, medicine);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("Appointment Type", appointmentType)
-                .add("Appointment Date-Time", appointmentDateTime)
-                .add("Person Id", personId)
-                .add("Sickness", sickness)
+                .add("appointment type", appointmentType)
+                .add("appointment datetime", appointmentDateTime)
+                .add("sickness", sickness)
                 .add("medicine", medicine)
                 .toString();
     }
