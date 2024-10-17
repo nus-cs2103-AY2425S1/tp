@@ -10,15 +10,15 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeletePropertyToSellCommand;
-import seedu.address.logic.commands.DeletePropertyToSellCommand.EditPersonPropertyToSellDescriptor;
-import seedu.address.testutil.EditPersonPropertyToSellDescriptorBuilder;
+import seedu.address.logic.commands.DeletePropertyToBuyCommand;
+import seedu.address.logic.commands.DeletePropertyToBuyCommand.EditPersonPropertyToBuyDescriptor;
+import seedu.address.testutil.EditPersonPropertyToBuyDescriptorBuilder;
 
 
-public class DeletePropertyToSellCommandParserTest {
+public class DeletePropertyToBuyCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePropertyToSellCommand.MESSAGE_USAGE);
-    private DeletePropertyToSellCommandParser parser = new DeletePropertyToSellCommandParser();
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePropertyToBuyCommand.MESSAGE_USAGE);
+    private DeletePropertyToBuyCommandParser parser = new DeletePropertyToBuyCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -50,8 +50,8 @@ public class DeletePropertyToSellCommandParserTest {
         Index targetPropertyIndex = INDEX_FIRST_PROPERTY;
         String userInput = targetPersonIndex.getOneBased() + "       " + targetPropertyIndex.getOneBased();
 
-        EditPersonPropertyToSellDescriptor descriptor = new EditPersonPropertyToSellDescriptorBuilder().build();
-        DeletePropertyToSellCommand expectedCommand = new DeletePropertyToSellCommand(targetPersonIndex,
+        EditPersonPropertyToBuyDescriptor descriptor = new EditPersonPropertyToBuyDescriptorBuilder().build();
+        DeletePropertyToBuyCommand expectedCommand = new DeletePropertyToBuyCommand(targetPersonIndex,
                 targetPropertyIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -63,8 +63,8 @@ public class DeletePropertyToSellCommandParserTest {
         Index targetPropertyIndex = INDEX_FIRST_PROPERTY;
         String userInput = targetPersonIndex.getOneBased() + " " + targetPropertyIndex.getOneBased();
 
-        EditPersonPropertyToSellDescriptor descriptor = new EditPersonPropertyToSellDescriptorBuilder().build();
-        DeletePropertyToSellCommand expectedCommand = new DeletePropertyToSellCommand(targetPersonIndex,
+        EditPersonPropertyToBuyDescriptor descriptor = new EditPersonPropertyToBuyDescriptorBuilder().build();
+        DeletePropertyToBuyCommand expectedCommand = new DeletePropertyToBuyCommand(targetPersonIndex,
                 targetPropertyIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

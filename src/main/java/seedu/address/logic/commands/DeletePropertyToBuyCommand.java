@@ -28,41 +28,41 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class DeletePropertyToSellCommand extends Command {
+public class DeletePropertyToBuyCommand extends Command {
 
-    public static final String COMMAND_WORD = "delSell";
+    public static final String COMMAND_WORD = "delBuy";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the property of the specified person "
             + "using the index number used in the displayed person list and "
-            + "the index number used int he displayed property-to-sell list.\n"
+            + "the index number used int he displayed property-to-buy list.\n"
             + "Existing properties, other than the one being deleted, will remain.\n"
             + "Parameters: PERSON_INDEX (must be a positive integer) PROPERTY_TO_BUY_INDEX (must be a positive integer)"
             + "Example: " + COMMAND_WORD + " 1 " + "2\n"
-            + "This means that we want to delete the 2nd property the 1st person wants to sell.";
+            + "This means that we want to delete the 2nd property the 1st person wants to buy.";
 
-    public static final String MESSAGE_PERSON_PROPERTY_SUCCESS = "Deleted Selling Property: %1$s";
+    public static final String MESSAGE_PERSON_PROPERTY_SUCCESS = "Deleted Buying Property: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
 
 
     private final Index personIndex;
     private final Index propertyIndex;
-    private EditPersonPropertyToSellDescriptor editPersonPropertyDescriptor;
+    private EditPersonPropertyToBuyDescriptor editPersonPropertyDescriptor;
 
     /**
      * @param personIndex of the person in the filtered person list to edit.
      * @param propertyIndex of the property belonging to the person in the filtered person list to edit.
      * @param editPersonPropertyDescriptor details to edit the person and his/her property with
      */
-    public DeletePropertyToSellCommand(Index personIndex, Index propertyIndex,
-                                       EditPersonPropertyToSellDescriptor editPersonPropertyDescriptor) {
+    public DeletePropertyToBuyCommand(Index personIndex, Index propertyIndex,
+                                      EditPersonPropertyToBuyDescriptor editPersonPropertyDescriptor) {
         requireNonNull(personIndex);
         requireNonNull(propertyIndex);
         requireNonNull(editPersonPropertyDescriptor);
 
         this.personIndex = personIndex;
         this.propertyIndex = propertyIndex;
-        this.editPersonPropertyDescriptor = new EditPersonPropertyToSellDescriptor(editPersonPropertyDescriptor);
+        this.editPersonPropertyDescriptor = new EditPersonPropertyToBuyDescriptor(editPersonPropertyDescriptor);
     }
 
     @Override
@@ -76,21 +76,21 @@ public class DeletePropertyToSellCommand extends Command {
 
         Person personToEdit = lastShownList.get(personIndex.getZeroBased());
 
-        editPersonPropertyDescriptor.setSellingProperties(personToEdit.getListOfSellingProperties());
+        editPersonPropertyDescriptor.setBuyingProperties(personToEdit.getListOfBuyingProperties());
 
-        if (editPersonPropertyDescriptor.getSellingProperties().get() == null) {
+        if (editPersonPropertyDescriptor.getBuyingProperties().get() == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX);
         }
 
-        if (personToEdit.getListOfSellingProperties().isEmpty()) {
+        if (personToEdit.getListOfBuyingProperties().isEmpty()) {
             throw new CommandException(Messages.MESSAGE_NO_PROPERTIES_TO_DELETE);
         }
 
-        if (propertyIndex.getZeroBased() >= personToEdit.getListOfSellingProperties().size()) {
+        if (propertyIndex.getZeroBased() >= personToEdit.getListOfBuyingProperties().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX);
         }
 
-        editPersonPropertyDescriptor.deleteSellingProperties(propertyIndex);
+        editPersonPropertyDescriptor.deleteBuyingProperties(propertyIndex);
 
         Person editedPerson = createEditedPerson(personToEdit, editPersonPropertyDescriptor);
 
@@ -109,7 +109,7 @@ public class DeletePropertyToSellCommand extends Command {
      * edited with {@code editPersonDescriptor}.
      */
     private static Person createEditedPerson(Person personToEdit,
-                                             EditPersonPropertyToSellDescriptor editPersonDescriptor) {
+                                             EditPersonPropertyToBuyDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -133,11 +133,11 @@ public class DeletePropertyToSellCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeletePropertyToSellCommand)) {
+        if (!(other instanceof DeletePropertyToBuyCommand)) {
             return false;
         }
 
-        DeletePropertyToSellCommand otherEditCommand = (DeletePropertyToSellCommand) other;
+        DeletePropertyToBuyCommand otherEditCommand = (DeletePropertyToBuyCommand) other;
         return personIndex.equals(otherEditCommand.personIndex)
                 && propertyIndex.equals(otherEditCommand.propertyIndex)
                 && editPersonPropertyDescriptor.equals(otherEditCommand.editPersonPropertyDescriptor);
@@ -156,7 +156,7 @@ public class DeletePropertyToSellCommand extends Command {
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
      */
-    public static class EditPersonPropertyToSellDescriptor {
+    public static class EditPersonPropertyToBuyDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
@@ -165,13 +165,13 @@ public class DeletePropertyToSellCommand extends Command {
         private List<Property> sellingProperties;
         private List<Property> buyingProperties;
 
-        public EditPersonPropertyToSellDescriptor() {}
+        public EditPersonPropertyToBuyDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonPropertyToSellDescriptor(EditPersonPropertyToSellDescriptor toCopy) {
+        public EditPersonPropertyToBuyDescriptor(EditPersonPropertyToBuyDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -254,20 +254,11 @@ public class DeletePropertyToSellCommand extends Command {
         }
 
         /**
-         * Removes the {@code buyiingProperty} specified by the propertyIndex
+         * Removes the property specified by the propertyIndex
          */
         public void deleteBuyingProperties(Index propertyIndex) {
             if (buyingProperties.size() > 0) {
                 buyingProperties.remove(propertyIndex.getZeroBased());
-            }
-        }
-
-        /**
-         * Removes the {@code sellingProperty} specified by the propertyIndex
-         */
-        public void deleteSellingProperties(Index propertyIndex) {
-            if (sellingProperties.size() > 0) {
-                sellingProperties.remove(propertyIndex.getZeroBased());
             }
         }
 
@@ -278,11 +269,11 @@ public class DeletePropertyToSellCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonPropertyToSellDescriptor)) {
+            if (!(other instanceof EditPersonPropertyToBuyDescriptor)) {
                 return false;
             }
 
-            EditPersonPropertyToSellDescriptor otherEditPersonDescriptor = (EditPersonPropertyToSellDescriptor) other;
+            EditPersonPropertyToBuyDescriptor otherEditPersonDescriptor = (EditPersonPropertyToBuyDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
@@ -306,3 +297,4 @@ public class DeletePropertyToSellCommand extends Command {
         }
     }
 }
+

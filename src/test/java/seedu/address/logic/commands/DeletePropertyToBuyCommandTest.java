@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_EVE;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_FOXY;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_CLIF;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_DAN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -20,30 +20,30 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.DeletePropertyToSellCommand.EditPersonPropertyToSellDescriptor;
+import seedu.address.logic.commands.DeletePropertyToBuyCommand.EditPersonPropertyToBuyDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonPropertyToSellDescriptorBuilder;
+import seedu.address.testutil.EditPersonPropertyToBuyDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalPersons;
 
-public class DeletePropertyToSellCommandTest {
+public class DeletePropertyToBuyCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_deletePropertyToSellFromPerson_success() {
+    public void execute_deletePropertyToBuyFromPerson_success() {
         Person editedPerson = new PersonBuilder(ALICE).build();
-        EditPersonPropertyToSellDescriptor descriptor =
-                new EditPersonPropertyToSellDescriptorBuilder(editedPerson).build();
+        EditPersonPropertyToBuyDescriptor descriptor =
+                new EditPersonPropertyToBuyDescriptorBuilder(editedPerson).build();
         Index index = TypicalPersons.getTypicalPersonIndex(ALICE);
-        editedPerson.deleteSellProperty(index);
-        DeletePropertyToSellCommand command = new DeletePropertyToSellCommand(index, INDEX_FIRST_PROPERTY, descriptor);
+        editedPerson.deleteBuyProperty(index);
+        DeletePropertyToBuyCommand command = new DeletePropertyToBuyCommand(index, INDEX_FIRST_PROPERTY, descriptor);
 
-        String expectedMessage = String.format(DeletePropertyToSellCommand.MESSAGE_PERSON_PROPERTY_SUCCESS,
+        String expectedMessage = String.format(DeletePropertyToBuyCommand.MESSAGE_PERSON_PROPERTY_SUCCESS,
                 Messages.formatProperties(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -55,12 +55,12 @@ public class DeletePropertyToSellCommandTest {
 
     @Test
     public void execute_propertyIndexOutOfBounds_failure() {
-        Index index = TypicalPersons.getTypicalPersonIndex(ALICE);
-        Person person = model.getFilteredPersonList().get(index.getZeroBased());
+        Index jackIndex = TypicalPersons.getTypicalPersonIndex(ALICE);
+        Person jack = model.getFilteredPersonList().get(jackIndex.getZeroBased());
         Index invalidPropertyIndex = Index.fromOneBased(1000);
 
-        DeletePropertyToSellCommand command = new DeletePropertyToSellCommand(index, invalidPropertyIndex,
-                new EditPersonPropertyToSellDescriptorBuilder().withName(person.getName().fullName).build());
+        DeletePropertyToBuyCommand command = new DeletePropertyToBuyCommand(jackIndex, invalidPropertyIndex,
+                new EditPersonPropertyToBuyDescriptorBuilder().withName(jack.getName().fullName).build());
 
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX);
     }
@@ -68,9 +68,9 @@ public class DeletePropertyToSellCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        EditPersonPropertyToSellDescriptor descriptor = new EditPersonPropertyToSellDescriptorBuilder()
+        EditPersonPropertyToBuyDescriptor descriptor = new EditPersonPropertyToBuyDescriptorBuilder()
                 .withName(VALID_NAME_BOB).build();
-        DeletePropertyToSellCommand editCommand = new DeletePropertyToSellCommand(outOfBoundIndex,
+        DeletePropertyToBuyCommand editCommand = new DeletePropertyToBuyCommand(outOfBoundIndex,
                 INDEX_FIRST_PROPERTY, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -87,20 +87,20 @@ public class DeletePropertyToSellCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        DeletePropertyToSellCommand command = new DeletePropertyToSellCommand(outOfBoundIndex, INDEX_FIRST_PROPERTY,
-                new EditPersonPropertyToSellDescriptorBuilder().withName(VALID_NAME_BOB).build());
+        DeletePropertyToBuyCommand command = new DeletePropertyToBuyCommand(outOfBoundIndex, INDEX_FIRST_PROPERTY,
+                new EditPersonPropertyToBuyDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final DeletePropertyToSellCommand standardCommand = new DeletePropertyToSellCommand(INDEX_FIRST_PERSON,
-                INDEX_FIRST_PROPERTY, DESC_EVE);
+        final DeletePropertyToBuyCommand standardCommand = new DeletePropertyToBuyCommand(INDEX_FIRST_PERSON,
+                INDEX_FIRST_PROPERTY, DESC_CLIF);
 
         // same values -> returns true
-        EditPersonPropertyToSellDescriptor copyDescriptor = new EditPersonPropertyToSellDescriptor(DESC_EVE);
-        DeletePropertyToSellCommand commandWithSameValues = new DeletePropertyToSellCommand(INDEX_FIRST_PERSON,
+        EditPersonPropertyToBuyDescriptor copyDescriptor = new EditPersonPropertyToBuyDescriptor(DESC_CLIF);
+        DeletePropertyToBuyCommand commandWithSameValues = new DeletePropertyToBuyCommand(INDEX_FIRST_PERSON,
                 INDEX_FIRST_PROPERTY, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -114,12 +114,12 @@ public class DeletePropertyToSellCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new DeletePropertyToSellCommand(INDEX_SECOND_PERSON, INDEX_FIRST_PROPERTY,
-                DESC_EVE)));
+        assertFalse(standardCommand.equals(new DeletePropertyToBuyCommand(INDEX_SECOND_PERSON, INDEX_FIRST_PROPERTY,
+                DESC_CLIF)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new DeletePropertyToSellCommand(INDEX_FIRST_PERSON, INDEX_FIRST_PROPERTY,
-                DESC_FOXY)));
+        assertFalse(standardCommand.equals(new DeletePropertyToBuyCommand(INDEX_FIRST_PERSON, INDEX_FIRST_PROPERTY,
+                DESC_DAN)));
 
     }
 
@@ -127,10 +127,10 @@ public class DeletePropertyToSellCommandTest {
     public void toStringMethod() {
         Index personIndex = INDEX_SECOND_PERSON;
         Index propertyIndex = INDEX_SECOND_PROPERTY;
-        EditPersonPropertyToSellDescriptor editPersonPropertyDescriptor = new EditPersonPropertyToSellDescriptor();
-        DeletePropertyToSellCommand command = new DeletePropertyToSellCommand(personIndex, propertyIndex,
+        EditPersonPropertyToBuyDescriptor editPersonPropertyDescriptor = new EditPersonPropertyToBuyDescriptor();
+        DeletePropertyToBuyCommand command = new DeletePropertyToBuyCommand(personIndex, propertyIndex,
                 editPersonPropertyDescriptor);
-        String expected = DeletePropertyToSellCommand.class.getCanonicalName() + "{personIndex=" + personIndex
+        String expected = DeletePropertyToBuyCommand.class.getCanonicalName() + "{personIndex=" + personIndex
                 + ", propertyIndex=" + propertyIndex + ", editPersonDescriptor=" + editPersonPropertyDescriptor + "}";
         assertEquals(expected, command.toString());
     }

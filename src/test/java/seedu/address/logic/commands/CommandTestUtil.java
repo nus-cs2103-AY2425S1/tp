@@ -25,7 +25,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.EditPersonPropertyDescriptorBuilder;
+import seedu.address.testutil.EditPersonPropertyToBuyDescriptorBuilder;
+import seedu.address.testutil.EditPersonPropertyToSellDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -36,18 +37,26 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_NAME_JACK = "Clif Soh";
     public static final String VALID_NAME_KATE = "Dan Teh";
+    public static final String VALID_NAME_EVE = "Eve Lee";
+    public static final String VALID_NAME_FOXY = "Foxy Woxy";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_PHONE_JACK = "33333333";
     public static final String VALID_PHONE_KATE = "44444444";
+    public static final String VALID_PHONE_EVE = "55555555";
+    public static final String VALID_PHONE_FOXY = "66666666";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_EMAIL_JACK = "clif@example.com";
     public static final String VALID_EMAIL_KATE = "dan@example.com";
+    public static final String VALID_EMAIL_EVE = "eve@example.com";
+    public static final String VALID_EMAIL_FOXY = "foxy@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_ADDRESS_JACK = "Block 101, Jacky Street 2";
     public static final String VALID_ADDRESS_KATE = "Hillview Katy Heights, Block 200";
+    public static final String VALID_ADDRESS_EVE = "Block 312, Eve Street 2";
+    public static final String VALID_ADDRESS_FOXY = "Block 123, Foxy Street 4";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_HOUSING_TYPE_HDB = "h";
@@ -108,8 +117,11 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
-    public static final DeletePropertyToSellCommand.EditPersonPropertyDescriptor DESC_CLIF;
-    public static final DeletePropertyToSellCommand.EditPersonPropertyDescriptor DESC_DAN;
+    public static final DeletePropertyToBuyCommand.EditPersonPropertyToBuyDescriptor DESC_CLIF;
+    public static final DeletePropertyToBuyCommand.EditPersonPropertyToBuyDescriptor DESC_DAN;
+    public static final DeletePropertyToSellCommand.EditPersonPropertyToSellDescriptor DESC_EVE;
+    public static final DeletePropertyToSellCommand.EditPersonPropertyToSellDescriptor DESC_FOXY;
+
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -118,11 +130,17 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-        DESC_CLIF = new EditPersonPropertyDescriptorBuilder().withName(VALID_NAME_JACK)
+        DESC_CLIF = new EditPersonPropertyToBuyDescriptorBuilder().withName(VALID_NAME_JACK)
                 .withPhone(VALID_PHONE_JACK).withEmail(VALID_EMAIL_JACK).withAddress(VALID_ADDRESS_JACK)
                 .withTags(VALID_TAG_FRIEND).build();
-        DESC_DAN = new EditPersonPropertyDescriptorBuilder().withName(VALID_NAME_KATE)
+        DESC_DAN = new EditPersonPropertyToBuyDescriptorBuilder().withName(VALID_NAME_KATE)
                 .withPhone(VALID_PHONE_KATE).withEmail(VALID_EMAIL_KATE).withAddress(VALID_ADDRESS_KATE)
+                .withTags(VALID_TAG_FRIEND).build();
+        DESC_EVE = new EditPersonPropertyToSellDescriptorBuilder().withName(VALID_NAME_EVE)
+                .withPhone(VALID_PHONE_EVE).withEmail(VALID_EMAIL_EVE).withAddress(VALID_ADDRESS_EVE)
+                .withTags(VALID_TAG_FRIEND).build();
+        DESC_FOXY = new EditPersonPropertyToSellDescriptorBuilder().withName(VALID_NAME_FOXY)
+                .withPhone(VALID_PHONE_FOXY).withEmail(VALID_EMAIL_FOXY).withAddress(VALID_ADDRESS_FOXY)
                 .withTags(VALID_TAG_FRIEND).build();
     }
 
