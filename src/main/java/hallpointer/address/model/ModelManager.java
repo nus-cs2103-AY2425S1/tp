@@ -113,6 +113,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedMember);
         addressBook.setMember(target, editedMember);
     }
+
     //=========== Filtered Member List Accessors =============================================================
 
     /**
