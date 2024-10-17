@@ -18,7 +18,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-4. To open the application, 
+4. To open the application,
 
     * Open a command terminal
     * `cd` into the folder you put the jar file in
@@ -53,7 +53,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/Bride's Side` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -89,8 +89,8 @@ A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com t/Groom's Friend`
-* `add n/Betsy Crowe t/Bride's Family e/betsycrowe@example.com p/12345678`
+* `add n/John Doe p/98765432 e/johnd@example.com t/Groom's Side`
+* `add n/Betsy Crowe t/Bride's Side e/betsycrowe@example.com p/12345678`
 
 ### Listing all persons : `list`
 
@@ -106,7 +106,7 @@ Format: `newtag TAG_NAME`
 * Tag name cannot be more than 50 characters long.
 
 Examples:
-* `newtag Bride's Family`
+* `newtag Bride's Side`
 
 ### Tagging a person: `tag`
 
@@ -116,7 +116,7 @@ Format: `tag INDEX t/TAG`
 * Tag must already exist before tagging it to a person.
 
 Examples:
-* `tag 1 t/Bride's Family` Adds the tag "Bride's Family" to the 1st person in the list.
+* `tag 1 t/Bride's Side` Adds the tag "Bride's Side" to the 1st person in the list.
 
 ### Removing a tag from a person: `untag`
 
@@ -126,7 +126,7 @@ Format: `untag INDEX t/TAG`
 * A person must already have the tag for it to be removed.
 
 Examples:
-* `untag 2 t/Groom's Friends`
+* `untag 2 t/Groom's Side`
 
 ### Setting RSVP status for a guest : `rsvp` and `unrsvp`
 
@@ -236,15 +236,15 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, t/Groom's Friends`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, t/Groom's Side`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
 **List** | `list`
-**Newtag** | `newtag TAG_NAME` <br> e.g. `newtag Bride's Family`
-**Tag** | `tag INDEX t/TAG` <br> e.g. `tag 2 t/Groom's Friends`
-**Untag** | `untag INDEX t/TAG` <br> e.g. `untag 1 t/Bride's Family`
+**Newtag** | `newtag TAG_NAME` <br> e.g. `newtag Bride's Side`
+**Tag** | `tag INDEX t/TAG` <br> e.g. `tag 2 t/Groom's Side`
+**Untag** | `untag INDEX t/TAG` <br> e.g. `untag 1 t/Bride's Side`
 **RSVP** | `rsvp INDEX`
 **UnRSVP** | `unrsvp INDEX`
 **Help** | `help`
