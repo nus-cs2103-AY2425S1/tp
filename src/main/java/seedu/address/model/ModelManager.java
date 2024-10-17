@@ -26,6 +26,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
     private final ObservableList<RentalInformation> visibleRentalInformationList;
+    private Client lastViewedClient = null;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -151,6 +152,16 @@ public class ModelManager implements Model {
     public void updateVisibleRentalInformationList(List<RentalInformation> rentalInformationList) {
         requireNonNull(rentalInformationList);
         visibleRentalInformationList.setAll(rentalInformationList);
+    }
+
+    @Override
+    public Client getLastViewedClient() {
+        return lastViewedClient;
+    }
+
+    @Override
+    public void setLastViewedClient(Client client) {
+        this.lastViewedClient = client;
     }
 
     @Override

@@ -175,6 +175,16 @@ public class AddClientCommandTest {
         public void updateVisibleRentalInformationList(List<RentalInformation> rentalInformationList) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Client getLastViewedClient() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLastViewedClient(Client client) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
