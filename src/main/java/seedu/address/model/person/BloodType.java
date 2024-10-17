@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -18,6 +19,7 @@ public class BloodType {
      * @param bloodType A valid blood type.
      */
     public BloodType(String bloodType) {
+        requireNonNull(bloodType);
         checkArgument(isValidBloodType(bloodType), MESSAGE_CONSTRAINTS);
         value = bloodType;
     }

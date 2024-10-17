@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -18,6 +19,7 @@ public class HealthRecord {
      * @param healthRecords Valid past health record.
      */
     public HealthRecord(String healthRecords) {
+        requireNonNull(healthRecords);
         checkArgument(isValidHealthRecord(healthRecords), MESSAGE_CONSTRAINTS);
         value = healthRecords;
     }

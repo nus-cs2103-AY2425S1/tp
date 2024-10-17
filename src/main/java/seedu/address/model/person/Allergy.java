@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 
@@ -16,11 +17,12 @@ public class Allergy {
     /**
      * Constructs an {@code Allergies}.
      *
-     * @param allergies A valid allergies.
+     * @param allergy A valid allergies.
      */
-    public Allergy(String allergies) {
-        checkArgument(isValidAllergy(allergies), MESSAGE_CONSTRAINTS);
-        value = allergies;
+    public Allergy(String allergy) {
+        requireNonNull(allergy);
+        checkArgument(isValidAllergy(allergy), MESSAGE_CONSTRAINTS);
+        value = allergy;
     }
 
     /**
