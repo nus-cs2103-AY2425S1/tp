@@ -59,8 +59,28 @@ public class AddCarCommandTest {
         ModelStubWithPerson modelStub = new ModelStubWithPerson(personWithCar);
 
         assertThrows(CommandException.class,
-                AddCarCommand.MESSAGE_CAR_ALREADY_PRESENT, () -> addCarCommand.execute(modelStub));
+                AddCarCommand.MESSAGE_USER_ALREADY_HAS_CAR, () -> addCarCommand.execute(modelStub));
     }
+
+    @Test
+    public void execute_carAlreadyExists_throwsCommandException() {
+        // Create a person without a car
+        Person validPerson = new PersonBuilder().build();
+
+        // Create a car and add it to the model stub
+        Car existingCar = new Car(new Vrn("SGX1234B"), new Vin("KMHGH4JH3EU073801"),
+                new CarMake("Toyota"), new CarModel("Corolla"));
+
+        // Stub model that contains the person and already has the car
+        ModelStubWithPersonAndCar modelStub = new ModelStubWithPersonAndCar(validPerson, existingCar);
+
+        // Attempt to add the same car to the same person
+        AddCarCommand addCarCommand = new AddCarCommand(Index.fromOneBased(1), existingCar);
+
+        assertThrows(CommandException.class,
+                AddCarCommand.MESSAGE_SAME_CAR_ALREADY_EXISTS, () -> addCarCommand.execute(modelStub));
+    }
+
 
     /**
      * A default model stub that has all of its unused methods returning an error.
@@ -206,6 +226,37 @@ public class AddCarCommandTest {
             }
 
             personsAdded.set(index, editedPerson);
+        }
+    }
+
+    /**
+     * A Model stub that contains a single person and a single car.
+     */
+    private class ModelStubWithPersonAndCar extends AddCarCommandTest.ModelStub {
+        private final Person person;
+        private final Car car;
+
+        ModelStubWithPersonAndCar(Person person, Car car) {
+            requireNonNull(person);
+            requireNonNull(car);
+            this.person = person;
+            this.car = car;
+        }
+
+        @Override
+        public boolean hasCar(Car car) {
+            requireNonNull(car);
+            return this.car.isSameCar(car);
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return javafx.collections.FXCollections.observableArrayList(person);
+        }
+
+        @Override
+        public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
         }
     }
 }
