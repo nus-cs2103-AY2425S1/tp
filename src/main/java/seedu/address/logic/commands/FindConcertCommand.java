@@ -12,7 +12,7 @@ import seedu.address.model.commons.NameContainsKeywordsPredicate;
 import seedu.address.model.concert.Concert;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all concerts in address book whose name contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
 public class FindConcertCommand extends Command {
