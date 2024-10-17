@@ -25,6 +25,7 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
+    private static final String EMPTY_COMMENT = "";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -46,7 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Comment comment = new Comment("");
+        Comment comment = ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT).orElse(EMPTY_COMMENT));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, address, comment, tagList);
