@@ -13,7 +13,9 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is an extension of [_AddressBook-Level3 by se-edu_](https://se-education.org/addressbook-level3/).
+
+Libraries used include: [_JavaFX_](https://openjfx.io/), [_Jackson_](https://github.com/FasterXML/jackson), [_JUnit5_](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -251,10 +253,63 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### \[Proposed\] Data Archiving
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Proposed Implementation
 
+The data archiving feature allows users to archive older address book entries, such as contacts or other information, that are no longer actively used but should still be stored for record-keeping purposes. The archived data will be stored separately from the main active address book, ensuring a cleaner and more efficient main application state while still retaining access to archived information when needed.
+
+To implement this, the following changes and components are proposed:
+
+1. **Archive Mechanism**:
+    - A new class called `ArchivedAddressBook` will be introduced to handle archived entries.
+    - The `ArchivedAddressBook` will extend the base `AddressBook` class but will be optimized to manage entries that are less frequently accessed or modified.
+    - `VersionedAddressBook` will also maintain a history for the `ArchivedAddressBook`, allowing undo/redo of archive operations.
+
+2. **Operations**:
+    - `Model#archivePerson(Person person)`: Archives a person by moving the person entry from the active `AddressBook` to the `ArchivedAddressBook`.
+    - `Model#restorePerson(Person person)`: Restores a person from the `ArchivedAddressBook` back to the active `AddressBook`.
+    - `Model#getArchivedPersons()`: Retrieves a list of all archived persons for display or further actions.
+    - These operations will also be added to the command logic so that the user can archive and restore entries using new commands, e.g., `archive 5` (to archive the 5th person in the list).
+
+3. **Storage**:
+    - The `JsonAddressBookStorage` class will be modified to support saving and loading both active and archived data separately. The archived data will be stored in a separate JSON file (`archivedAddressBook.json`), keeping it distinct from the main address book data.
+    - When the application starts, both the main and archived address books will be loaded into the system, and changes to either will be saved independently.
+
+4. **User Interface**:
+    - A new tab or section in the UI will be added to display archived entries separately from the main list.
+    - Users will be able to toggle between viewing the active address book and the archived address book.
+    - Archived entries will have limited actions available, such as restoring or permanently deleting them.
+
+#### Example Usage Scenario
+
+1. The user decides to archive an old contact, `John Doe`, by executing the command `archive 3`. This will call `Model#archivePerson()`, moving `John Doe` from the active address book to the archived one and committing the state.
+
+2. The user later views the archived entries via a command like `show archived`. The application displays a list of archived entries.
+
+3. If the user wishes to bring back a previously archived contact, they can use the command `restore 2` while viewing the archived list. This restores the contact to the active address book and updates the state history.
+
+4. If the user clears the active address book, archived entries remain unaffected. This separation ensures that old data is kept while maintaining the flexibility to manage current information.
+
+#### Design Considerations
+
+**Aspect**: How data is stored and managed.
+- **Alternative 1 (Current Choice)**: Store archived data in a separate file (`archivedAddressBook.json`).
+    - **Pros**: Keeps the main address book file smaller, improving performance when accessing active data.
+    - **Cons**: Requires additional storage logic and structure.
+- **Alternative 2**: Store archived data in the same file with an "archived" flag.
+    - **Pros**: Simplifies storage management as only one file is used.
+    - **Cons**: Increases file size and complexity when accessing or updating active entries, as all entries (active and archived) are mixed together.
+
+**Aspect**: User access to archived data.
+- **Alternative 1 (Current Choice)**: A separate tab for archived data.
+    - **Pros**: Clear separation in the UI, reducing confusion for users.
+    - **Cons**: Requires additional UI components and logic.
+- **Alternative 2**: Filter archived entries within the main view.
+    - **Pros**: Easier to implement with existing UI.
+    - **Cons**: Could clutter the main view and make it harder to manage active entries.
+
+This design ensures that the application efficiently manages both current and archived data, aligning with user needs for flexibility and simplicity.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -282,7 +337,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Value proposition**: 
 
 * manage contacts more quickly than a typical mouse/GUI driven app
-* managing contacts specifically for gaming
+* enable gamers to track the games played by friends and find people to game with more easily
 
 
 ### User stories
@@ -381,7 +436,50 @@ Use case ends.
 
       Use case ends.
 
+#### Use Case: UC5 - List All Contacts
+**MSS**
+1. User requests to list all contacts.
+2. GamerBook displays all contacts in the system.
+   Use case ends.
 
+**Extensions**
+* 1a. User tries to list contacts when none exist.
+    * 1a1. GamerBook notifies the user that no contacts are available.
+
+      Use case ends.
+
+#### Use Case: UC6 - Edit a Game Details
+**MSS**
+1. User requests to edit a game's details (username, rank, skill level).
+2. GamerBook updates the game's details accordingly.
+   Use case ends.
+
+**Extensions**
+* 1a. User tries to edit a game that does not exist.
+    * 1b1. GamerBook notifies the user that the game could not be found.
+
+      Use case ends.
+
+#### Use Case: UC7 - Find Contacts by Game
+**MSS**
+1. User requests to find contacts associated with a specific game.
+2. GamerBook shows a list of contacts that match the specified game.
+   Use case ends.
+
+**Extensions**
+* 1a. User enters a game that does not exist in GamerBook.
+    * 1a1. GamerBook notifies the user that no contacts were found for the specified game.
+
+      Use case ends.
+* 1b. User enters a partial game name.
+    * 1b1. GamerBook returns all contacts that match the partial game name.
+
+      Use case ends.
+* 1c. User enters an invalid or misspelled game name.
+    * 1c1. GamerBook notifies the user that no contacts were found for the specified game.
+
+      Use case ends.
+  
 <!-- 
 TEMPLATE FOR ADDING USE CASE
 
@@ -406,27 +504,29 @@ Use case ends.
 
 ### Non-Functional Requirements
 #### Compatibility
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 
 #### Performance
-1. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
    (eg. addition, deletion, and search operations)
 
 #### Usability
-1. The application should provide clear and concise error messages and usage instructions to assist the user in operating the system effectively.
+The application should provide clear and concise error messages and usage instructions to assist the user in operating the system effectively.
 
 #### Efficiency
-1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 #### Security
-1. The application should ensure that user data is securely stored and that sensitive information (like social media links) is not exposed unintentionally.
+The application should ensure that user data is securely stored and that sensitive information (like social media links) is not exposed unintentionally.
 
 #### Data Integrity
-1. The application should implement mechanisms to prevent data corruption and ensure that contacts are not lost during operations.
+The application should implement mechanisms to prevent data corruption and ensure that contacts are not lost during operations.
 
 #### Scalability
-1. The system should be designed to accommodate future enhancements, such as additional fields for contacts or new functionalities without requiring significant rework.
+The system should be designed to accommodate future enhancements, such as additional fields for contacts or new functionalities without requiring significant rework.
 
+#### Accessibility
+The user interface should be intuitive, user-friendly, and support accessibility features to cater to users with diverse needs and abilities.
 <!--
 *{More to be added}*
 -->
