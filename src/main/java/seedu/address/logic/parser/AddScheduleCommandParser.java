@@ -33,17 +33,27 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
         try {
             Index contactIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CONTACT).get());
             String name = argMultimap.getValue(PREFIX_NAME).get().trim();
-            LocalDate date = LocalDate.parse(argMultimap.getValue(PREFIX_DATE).get(),
-                    DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-            LocalTime time = LocalTime.parse(argMultimap.getValue(PREFIX_TIME).get(),
-                    DateTimeFormatter.ofPattern("HHmm"));
+
+            // Parse and validate the date
+            LocalDate date;
+            try {
+                date = LocalDate.parse(argMultimap.getValue(PREFIX_DATE).get(),
+                        DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            } catch (DateTimeParseException dtpe) {
+                throw new ParseException(AddScheduleCommand.MESSAGE_INVALID_DATE);
+            }
+
+            // Parse and validate the time
+            LocalTime time;
+            try {
+                time = LocalTime.parse(argMultimap.getValue(PREFIX_TIME).get(),
+                        DateTimeFormatter.ofPattern("HHmm"));
+            } catch (DateTimeParseException dtpe) {
+                throw new ParseException(AddScheduleCommand.MESSAGE_INVALID_TIME);
+            }
 
             // Convert contactIndex to its zero-based integer value if needed.
             return new AddScheduleCommand(contactIndex.getZeroBased(), name, date, time);
-        } catch (DateTimeParseException dtpe) {
-            throw new ParseException(AddScheduleCommand.MESSAGE_INVALID_DATE);
-        } catch (NumberFormatException nfe) {
-            throw new ParseException(AddScheduleCommand.MESSAGE_INVALID_TIME);
         } catch (Exception e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScheduleCommand.MESSAGE_USAGE));
         }
