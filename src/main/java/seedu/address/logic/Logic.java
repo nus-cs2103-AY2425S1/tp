@@ -45,11 +45,6 @@ public interface Logic {
     ObservableList<Pet> getFilteredPetList();
 
     /**
-     * Returns an unmodifiable view of the filtered list of persons
-     */
-    ObservableList<Pet> getFilteredPetList();
-
-    /**
      * Returns the user prefs' address book file path.
      */
     Path getAddressBookFilePath();
