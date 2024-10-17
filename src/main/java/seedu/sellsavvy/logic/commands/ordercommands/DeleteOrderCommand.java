@@ -2,6 +2,7 @@ package seedu.sellsavvy.logic.commands.ordercommands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.sellsavvy.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.sellsavvy.logic.Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST;
 
 import javafx.collections.ObservableList;
 import seedu.sellsavvy.commons.core.index.Index;
@@ -13,6 +14,7 @@ import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
+import seedu.sellsavvy.model.person.Person;
 
 /**
  * Deletes an order identified using it's displayed index from the displayed order list of a specified person.
@@ -24,7 +26,7 @@ public class DeleteOrderCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes an order identified by the index number "
             + "in the displayed order list of a the specified person. "
-            + "Parameters: ORDER INDEX (must be a positive integer) "
+            + "Parameters: ORDER_INDEX (must be a positive integer) "
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_ORDER_SUCCESS = "Deleted Order: %1$s";
@@ -42,9 +44,12 @@ public class DeleteOrderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        ObservableList<Order> unmodifiableOrderList =
-                model.getSelectedPerson().get().getOrderUnmodifiableObservableList();
-        OrderList orderList = model.getSelectedPerson().get().getOrderList();
+        Person selectedPerson = model.getSelectedPerson().get();
+        if (selectedPerson == null) {
+            throw new CommandException(MESSAGE_ORDERLIST_DOES_NOT_EXIST);
+        }
+        ObservableList<Order> unmodifiableOrderList = selectedPerson.getOrderUnmodifiableObservableList();
+        OrderList orderList = selectedPerson.getOrderList();
 
         if (index.getZeroBased() >= orderList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);

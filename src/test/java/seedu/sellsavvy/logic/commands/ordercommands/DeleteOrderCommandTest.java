@@ -3,8 +3,8 @@ package seedu.sellsavvy.logic.commands.ordercommands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.assertCommandFailure;
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.assertCommandSuccess;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND_ORDER;
 import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
@@ -84,7 +84,7 @@ public class DeleteOrderCommandTest {
 
     @Test
     public void toStringMethod() {
-        Index targetIndex = Index.fromOneBased(1);
+        Index targetIndex = INDEX_FIRST_ORDER;
         DeleteOrderCommand deleteOrderCommand = new DeleteOrderCommand(targetIndex);
         String expected = DeleteOrderCommand.class.getCanonicalName() + "{index=" + targetIndex + "}";
         assertEquals(expected, deleteOrderCommand.toString());

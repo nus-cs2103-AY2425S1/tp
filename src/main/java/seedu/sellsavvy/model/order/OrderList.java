@@ -66,8 +66,8 @@ public class OrderList implements Iterable<Order> {
     }
 
     /**
-     * Removes the first instance of an equivalent order from the list.
-     * The order must exist in the list.
+     * Removes the order of the corresponding index from the list.
+     * The index of order must exist in the list.
      */
     public void remove(Index index) {
         requireNonNull(index);

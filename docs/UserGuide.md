@@ -176,6 +176,20 @@ Examples:
 * `list` followed by `listOrder 2` lists all orders of the 2nd person in the address book.
 * `find Betsy` followed by `listOrder 1` lists all orders of the 1st person from the list of persons found with "Betsy".
 
+### Deleting an order under a Person : `deleteOrder`
+
+Deletes a specified order under a selected person from the address book.
+
+Format: `deleteOrder INDEX`
+
+* Deletes an order under the selected person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index and quantity **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `deleteOrder 1` deletes the order with index 1 from the selected user.
+* `listOrder 1` followed by `deleteOrder 2` selects the 1st person in the address book and deletes the 2nd order under the 1st person.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
