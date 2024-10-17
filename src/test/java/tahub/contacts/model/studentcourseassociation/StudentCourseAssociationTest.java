@@ -11,7 +11,7 @@ import tahub.contacts.model.course.Course;
 import tahub.contacts.model.courseclass.tutorial.Tutorial;
 import tahub.contacts.model.courseclass.recitation.Recitation;
 import tahub.contacts.model.person.MatriculationNumber;
-import tahub.contacts.model.Tag;
+import tahub.contacts.model.tag.Tag;
 
 import java.util.HashSet;
 import java.util.Set;
