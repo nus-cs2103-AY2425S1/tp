@@ -17,6 +17,7 @@ import tahub.contacts.model.tag.Tag;
 public class Person {
 
     // Identity fields
+    private final MatriculationNumber matricNumber;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -28,13 +29,19 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(MatriculationNumber matricNumber, Name name, Phone phone,
+                  Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(matricNumber, name, phone, email, address, tags);
+        this.matricNumber = matricNumber;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+    }
+
+    public MatriculationNumber getMatricNumber() {
+        return matricNumber;
     }
 
     public Name getName() {
@@ -90,7 +97,8 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
+        return matricNumber.equals(otherPerson.matricNumber)
+                && name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
@@ -100,12 +108,13 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(matricNumber, name, phone, email, address, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("matricNumber", matricNumber)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
@@ -113,5 +122,4 @@ public class Person {
                 .add("tags", tags)
                 .toString();
     }
-
 }

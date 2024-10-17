@@ -3,6 +3,7 @@ package tahub.contacts.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_MATRICULATION_NUMBER;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_TAG;
@@ -22,6 +23,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
+            + PREFIX_MATRICULATION_NUMBER + "MATRICULATION NUMBER"
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "

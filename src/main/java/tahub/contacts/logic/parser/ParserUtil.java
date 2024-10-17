@@ -11,6 +11,7 @@ import tahub.contacts.commons.util.StringUtil;
 import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.person.Address;
 import tahub.contacts.model.person.Email;
+import tahub.contacts.model.person.MatriculationNumber;
 import tahub.contacts.model.person.Name;
 import tahub.contacts.model.person.Phone;
 import tahub.contacts.model.tag.Tag;
@@ -19,7 +20,6 @@ import tahub.contacts.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
@@ -33,6 +33,21 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a {@code String matricNumber} into a {@code MatriculationNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code matricNumber} is invalid.
+     */
+    public static MatriculationNumber parseMatriculationNumber(String matricNumber) throws ParseException {
+        requireNonNull(matricNumber);
+        String trimmedMatricNumber = matricNumber.trim();
+        if (!MatriculationNumber.isValidMatriculationNumber(trimmedMatricNumber)) {
+            throw new ParseException(MatriculationNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new MatriculationNumber(trimmedMatricNumber);
     }
 
     /**
