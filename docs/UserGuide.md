@@ -39,8 +39,8 @@ Financial Assurance Revolutionary Telemarketer (FART) is a **desktop app for man
    * `paid 3` : Marks the 3rd contact shown in the current list as paid.
 
    * `clear` : Deletes all contacts.
-   
-   * `find john`  : Displays all contacts with keyword(s) matching "john" 
+
+   * `find john`  : Displays all contacts with keyword(s) matching "john"
 
    * `exit` : Exits the app.
 
@@ -130,7 +130,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * Partial matches of a keyword will also be returned. e.g. ``9123`` will return person
-with the phone number ``91234567`` 
+with the phone number ``91234567``
 
 Examples:
 * `find John` returns `john` and `John Doe`
@@ -153,8 +153,8 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the FART book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-**Note:** As a `delete` command cannot be undone, the FART Book will first prompt you to confirm that the 
-contact that you want to delete is correct. If you select `Cancel`, the deletion will be aborted.
+**Note:** As a `delete` command cannot be undone, the FART Book will first prompt you to confirm that the
+ contact that you want to delete is correct. If you select `Cancel`, the deletion will be aborted.
 ### Clearing all entries : `clear`
 
 Clears all entries from the FART book.
