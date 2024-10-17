@@ -5,19 +5,13 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
-
-import java.util.HashSet;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.commons.exceptions.InvalidIdException;
 import seedu.address.logic.commands.AddNotesCommand;
-import seedu.address.logic.commands.CreatePatientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Id;
-import seedu.address.model.person.Patient;
-import seedu.address.model.person.Remark;
-import seedu.address.model.tag.Tag;
+
 
 /**
  * Parses input arguments and adds notes to a Patient.
