@@ -31,6 +31,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label patientId;
+    @FXML
     private Label ward;
     @FXML
     private Label diagnosis;
@@ -43,8 +45,9 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+        id.setText(displayedIndex + ". ");
         name.setText(person.getName().value);
-        id.setText(person.getId().value);
+        patientId.setText(person.getId().value);
         ward.setText(person.getWard().value);
         diagnosis.setText(person.getDiagnosis().value);
         medication.setText(person.getMedication().value);
