@@ -1,9 +1,5 @@
 package seedu.address.ui;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.matcher.control.ListViewMatchers.hasItems;
-
 import javafx.collections.FXCollections;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
@@ -19,7 +15,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
-import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
 import java.util.HashSet;
