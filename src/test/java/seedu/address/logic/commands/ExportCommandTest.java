@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -85,5 +86,16 @@ public class ExportCommandTest {
             // Handle any IO exception
             e.printStackTrace();
         }
+    }
+
+    @Test
+    void executeBasic() throws CommandException {
+        Path importPath = projectRootPath.resolve("src").resolve("test").resolve("data")
+                .resolve("JsonExportTest").resolve("typicalPersonsAddressBook.json");
+        ExportCommand exportCommand = new ExportCommand();
+        CommandResult commandResult = exportCommand.execute(model);
+        // Verify the export is successful
+        assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS),
+                commandResult.getFeedbackToUser());
     }
 }
