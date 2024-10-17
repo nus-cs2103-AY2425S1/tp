@@ -154,7 +154,6 @@ public class ModelManager implements Model {
         visibleRentalInformationList.setAll(rentalInformationList);
     }
 
-    // TODO: change the implementation of this in milestone 1.4
     @Override
     public Client getLastViewedClient() {
         return lastViewedClient;
