@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.internbuddy.logic.parser.Prefix;
+import seedu.internbuddy.model.application.Application;
 import seedu.internbuddy.model.company.Company;
 
 /**
@@ -48,6 +49,17 @@ public class Messages {
                 .append("; Tags: ");
         company.getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    /**
+     * Formats the {@code application} for display to the user.
+     */
+    public static String format(Application application) {
+        return application.getName()
+                + "; Description: "
+                + application.getDescription()
+                + "; App Status: "
+                + application.getAppStatus();
     }
 
 }

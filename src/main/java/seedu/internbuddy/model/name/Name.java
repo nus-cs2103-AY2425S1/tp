@@ -1,10 +1,10 @@
-package seedu.internbuddy.model.company;
+package seedu.internbuddy.model.name;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.internbuddy.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Company's name in the address book.
+ * Represents a Name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {

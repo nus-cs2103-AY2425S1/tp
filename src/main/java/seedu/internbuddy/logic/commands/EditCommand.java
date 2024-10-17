@@ -26,9 +26,9 @@ import seedu.internbuddy.model.application.Application;
 import seedu.internbuddy.model.company.Address;
 import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
-import seedu.internbuddy.model.company.Name;
 import seedu.internbuddy.model.company.Phone;
 import seedu.internbuddy.model.company.Status;
+import seedu.internbuddy.model.name.Name;
 import seedu.internbuddy.model.tag.Tag;
 
 /**
@@ -105,11 +105,11 @@ public class EditCommand extends Command {
         Address updatedAddress = editCompanyDescriptor.getAddress().orElse(companyToEdit.getAddress());
         Set<Tag> updatedTags = editCompanyDescriptor.getTags().orElse(companyToEdit.getTags());
         Status updatedStatus = editCompanyDescriptor.getStatus().orElse(companyToEdit.getStatus());
-        List<Application> applications = companyToEdit.getApplications();
-
+        List<Application> updatedApplications = editCompanyDescriptor.getApplications()
+                .orElse(companyToEdit.getApplications());
 
         return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedStatus, applications);
+                updatedStatus, updatedApplications);
     }
 
     @Override
@@ -147,6 +147,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Status status;
+        private List<Application> applications;
 
         public EditCompanyDescriptor() {}
 
@@ -160,6 +161,8 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setStatus(toCopy.status);
+            setApplications(toCopy.applications);
         }
 
         /**
@@ -217,6 +220,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(status);
         }
 
+        public void setApplications(List<Application> applications) {
+            this.applications = applications;
+        }
+
+        public Optional<List<Application>> getApplications() {
+            return Optional.ofNullable(applications);
+        }
+
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
@@ -242,7 +253,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditCompanyDescriptor.phone)
                     && Objects.equals(email, otherEditCompanyDescriptor.email)
                     && Objects.equals(address, otherEditCompanyDescriptor.address)
-                    && Objects.equals(tags, otherEditCompanyDescriptor.tags);
+                    && Objects.equals(tags, otherEditCompanyDescriptor.tags)
+                    && Objects.equals(status, otherEditCompanyDescriptor.status);
         }
 
         @Override
