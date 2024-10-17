@@ -17,6 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -29,6 +30,7 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_DATE_1 = "129 March 00021";
     private static final String INVALID_DATE_2 = "zxcvbn";
+    private static final String INVALID_INCOME = "-21092";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -38,6 +40,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_DATE_1 = "1 Jun 2022";
     private static final String VALID_DATE_2 = "31 Jul 1954";
+    private static final String VALID_INCOME = "9212.2329";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -223,4 +226,28 @@ public class ParserUtilTest {
         assertEquals(new DateOfBirth(VALID_DATE_2),
                 ParserUtil.parseDateOfBirth(WHITESPACE + VALID_DATE_2 + WHITESPACE));
     }
+
+    @Test
+    public void parseIncome_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseIncome(null));
+    }
+
+    @Test
+    public void parseIncome_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIncome(INVALID_INCOME));
+    }
+
+    @Test
+    public void parseIncome_validValueWithoutWhitespace_returnsIncome() throws Exception {
+        assertEquals(new Income(Double.parseDouble(VALID_INCOME)),
+                ParserUtil.parseIncome(VALID_INCOME));
+    }
+
+    @Test
+    public void parseIncome_validValueWithWhitespace_returnsIncome() throws Exception {
+        assertEquals(new Income(Double.parseDouble(VALID_INCOME)),
+                ParserUtil.parseIncome(WHITESPACE + VALID_INCOME + WHITESPACE));
+    }
+
+
 }
