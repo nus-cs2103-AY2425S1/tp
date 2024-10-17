@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_TRANSACTIONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -64,6 +65,7 @@ public class FindTransactionCommandTest {
         String expectedMessage = String.format(MESSAGE_TRANSACTIONS_LISTED_OVERVIEW, 0, Messages.format(CARL));
         TransactionContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindTransactionCommand command = new FindTransactionCommand(Index.fromOneBased(3), predicate);
+        showPersonAtIndex(expectedModel, Index.fromOneBased(3));
         expectedModel.updateTransactionList(CARL.getTransactions());
         expectedModel.updateTransactionListPredicate(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -76,6 +78,7 @@ public class FindTransactionCommandTest {
         String expectedMessage = String.format(MESSAGE_TRANSACTIONS_LISTED_OVERVIEW, 2, Messages.format(CARL));
         TransactionContainsKeywordsPredicate predicate = preparePredicate("raw materials invest");
         FindTransactionCommand command = new FindTransactionCommand(Index.fromOneBased(3), predicate);
+        showPersonAtIndex(expectedModel, Index.fromOneBased(3));
         expectedModel.updateTransactionList(CARL.getTransactions());
         expectedModel.updateTransactionListPredicate(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

@@ -9,6 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.IsSelectedPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Transaction;
 import seedu.address.model.person.TransactionContainsKeywordsPredicate;
@@ -24,7 +25,7 @@ public class FindTransactionCommand extends Command {
             + ": Finds all transactions of the person of specific index whose descriptions contain any of "
             + "the keywords. (case-insensitive)\n"
             + "ONLY use this command when you are viewing the person list.\n"
-            + "Parameters: PERSON_INDEX KEYWORD [MORE_KEYWORDS]...\n"
+            + "Parameters: PERSON_INDEX (positive integer) KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " 1 food transport";
 
     private final Index personIndex;
@@ -48,6 +49,7 @@ public class FindTransactionCommand extends Command {
         }
         Person targetPerson = lastShownList.get(personIndex.getZeroBased());
         List<Transaction> targetTransactions = targetPerson.getTransactions();
+        model.updateFilteredPersonList(new IsSelectedPredicate(model, personIndex));
         model.setViewTransactions(true);
         model.updateTransactionList(targetTransactions);
         model.updateTransactionListPredicate(predicate);
