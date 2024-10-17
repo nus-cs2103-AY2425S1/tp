@@ -5,6 +5,7 @@
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "organisation": "National University of Singapore",
+    "lastSeen" : "02-09-2024",
     "tags": [ "friends" ],
     "priority" : "low"
   }, {
@@ -13,6 +14,7 @@
     "email": "pauline@example.com",
     "address": "4th street",
     "organisation": "National University of Singapore",
+    "lastSeen" : "02-09-2024",
     "priority" : "low"
   } ]
 }

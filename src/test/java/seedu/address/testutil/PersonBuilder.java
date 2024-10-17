@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LastSeen;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Organisation;
 import seedu.address.model.person.Person;
@@ -24,12 +25,14 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_PRIORITY = "low";
     public static final String DEFAULT_ORGANISATION = "NUS";
+    public static final String DEFAULT_LAST_SEEN = "01-01-2024";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Organisation organisation;
+    private LastSeen lastSeen;
     private Set<Tag> tags;
     private Priority priority;
 
@@ -42,6 +45,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         organisation = new Organisation(DEFAULT_ORGANISATION);
+        lastSeen = new LastSeen(DEFAULT_LAST_SEEN);
         tags = new HashSet<>();
         priority = new Priority(DEFAULT_PRIORITY);
     }
@@ -55,6 +59,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         organisation = personToCopy.getOrganisation();
+        lastSeen = personToCopy.getLastSeen();
         tags = new HashSet<>(personToCopy.getTags());
         priority = personToCopy.getPriority();
     }
@@ -114,8 +119,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code LastSeen} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLastSeen(String lastSeen) {
+        this.lastSeen = new LastSeen(lastSeen);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, organisation, tags, priority);
+        return new Person(name, phone, email, address, organisation, lastSeen, tags, priority);
     }
 
 }

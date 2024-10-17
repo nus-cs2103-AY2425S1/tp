@@ -7,10 +7,13 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LAST_SEEN_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ORGANISATION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.LAST_SEEN_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.LAST_SEEN_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ORGANISATION_DESC_AMY;
@@ -31,6 +34,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_SEEN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORGANISATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -45,6 +49,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LastSeen;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Organisation;
 import seedu.address.model.person.Person;
@@ -62,23 +67,22 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ORGANISATION_DESC_BOB + TAG_DESC_FRIEND + PRIORITY_DESC_LOW,
+                + ADDRESS_DESC_BOB + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB + TAG_DESC_FRIEND + PRIORITY_DESC_LOW,
                 new AddCommand(expectedPerson));
-
-
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                                             .withPriority(VALID_PRIORITY_LOW).build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                           + ORGANISATION_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + PRIORITY_DESC_LOW,
+                           + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB + TAG_DESC_HUSBAND
+                        + TAG_DESC_FRIEND + PRIORITY_DESC_LOW,
                            new AddCommand(expectedPersonMultipleTags));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ORGANISATION_DESC_BOB + TAG_DESC_FRIEND + PRIORITY_DESC_LOW;
+                + ADDRESS_DESC_BOB + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB + TAG_DESC_FRIEND + PRIORITY_DESC_LOW;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -100,12 +104,16 @@ public class AddCommandParserTest {
         assertParseFailure(parser, ORGANISATION_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ORGANISATION));
 
+        // multiple last seen
+        assertParseFailure(parser, LAST_SEEN_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LAST_SEEN));
+
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
-                        + ORGANISATION_DESC_AMY + validExpectedPersonString,
+                        + ORGANISATION_DESC_AMY + LAST_SEEN_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL,
-                        PREFIX_ORGANISATION, PREFIX_PHONE));
+                        PREFIX_ORGANISATION, PREFIX_LAST_SEEN, PREFIX_PHONE));
 
         // invalid value followed by valid value
 
@@ -157,7 +165,8 @@ public class AddCommandParserTest {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                           + ORGANISATION_DESC_AMY + PRIORITY_DESC_LOW, new AddCommand(expectedPerson));
+                           + ORGANISATION_DESC_AMY + LAST_SEEN_DESC_AMY + PRIORITY_DESC_LOW,
+                new AddCommand(expectedPerson));
     }
 
     @Test
@@ -189,44 +198,52 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + ORGANISATION_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + PRIORITY_DESC_LOW,
+                + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + PRIORITY_DESC_LOW,
                 Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + ORGANISATION_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + PRIORITY_DESC_LOW,
+                + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + PRIORITY_DESC_LOW,
                 Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + ORGANISATION_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + PRIORITY_DESC_LOW,
+                + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + PRIORITY_DESC_LOW,
                 Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + ORGANISATION_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + PRIORITY_DESC_LOW,
+                + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + PRIORITY_DESC_LOW,
                 Address.MESSAGE_CONSTRAINTS);
 
         // invalid organisation
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_ORGANISATION_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + PRIORITY_DESC_LOW,
-                Organisation.MESSAGE_CONSTRAINTS);
+                + INVALID_ORGANISATION_DESC + LAST_SEEN_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                + PRIORITY_DESC_LOW, Organisation.MESSAGE_CONSTRAINTS);
+
+        // invalid lastSeen
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + ORGANISATION_DESC_BOB + INVALID_LAST_SEEN_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                + PRIORITY_DESC_LOW, LastSeen.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + ORGANISATION_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+                + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND,
+                Tag.MESSAGE_CONSTRAINTS);
 
         //invalid priority
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + ORGANISATION_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+                + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND,
+                Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + ORGANISATION_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+                + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB + TAG_DESC_HUSBAND, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ORGANISATION_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + PRIORITY_DESC_LOW,
+                + ADDRESS_DESC_BOB + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                + PRIORITY_DESC_LOW,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

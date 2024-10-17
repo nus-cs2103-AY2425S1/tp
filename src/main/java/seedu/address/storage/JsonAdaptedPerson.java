@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LastSeen;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Organisation;
 import seedu.address.model.person.Person;
@@ -31,8 +32,8 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String organisation;
+    private final String lastSeen;
     private final String priority;
-
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -41,13 +42,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("organisation") String organisation, @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("priority") String priority) {
+            @JsonProperty("organisation") String organisation, @JsonProperty("lastSeen") String lastSeen,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("priority") String priority) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.organisation = organisation;
+        this.lastSeen = lastSeen;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -63,6 +65,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         organisation = source.getOrganisation().value;
+        lastSeen = source.getLastSeen().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -111,6 +114,10 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
+        if (!LastSeen.isValidDate(lastSeen)) {
+            throw new IllegalValueException(LastSeen.MESSAGE_CONSTRAINTS);
+        }
+        final LastSeen modelLastSeen = new LastSeen(lastSeen);
 
         if (priority == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -131,7 +138,8 @@ class JsonAdaptedPerson {
         final Organisation modelOrganisation = new Organisation(organisation);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelOrganisation, modelTags, modelPriority);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelOrganisation,
+                modelLastSeen, modelTags, modelPriority);
     }
 
 }

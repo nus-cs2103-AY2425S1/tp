@@ -6,6 +6,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "organisation": "National University of Singapore",
+    "lastSeen" : "02-09-2024",
     "tags" : [ "friends" ],
     "priority" : "low"
   }, {
@@ -14,6 +15,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "organisation": "National University of Singapore",
+    "lastSeen" : "17-11-2024",
     "tags" : [ "owesMoney", "friends" ],
     "priority" : "medium"
   }, {
@@ -22,6 +24,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "organisation": "National University of Singapore",
+    "lastSeen" : "05-09-2022",
     "tags" : [ ],
     "priority" : "low"
   }, {
@@ -30,6 +33,7 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "organisation": "National University of Singapore",
+    "lastSeen" : "04-04-2023",
     "tags" : [ "friends" ],
     "priority" : "low"
   }, {
@@ -38,6 +42,7 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "organisation": "National University of Singapore",
+    "lastSeen" : "06-06-2024",
     "tags" : [ ],
     "priority" : "low"
   }, {
@@ -46,6 +51,7 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "organisation": "National University of Singapore",
+    "lastSeen" : "03-07-2024",
     "tags" : [ ],
     "priority" : "low"
   }, {
@@ -54,6 +60,7 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "organisation": "National University of Singapore",
+    "lastSeen" : "01-09-2024",
     "tags" : [ ],
     "priority" : "low"
   } ]
