@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DoctorName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -40,6 +41,9 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmergencyContactName(person.getEmergencyContact().getName());
         descriptor.setEmergencyContactPhone(person.getEmergencyContact().getPhone());
         descriptor.setEmergencyContactRelationship(person.getEmergencyContact().getRelationship());
+        descriptor.setDoctorName(person.getDoctor().getName());
+        descriptor.setDoctorPhone(person.getDoctor().getPhone());
+        descriptor.setDoctorEmail(person.getDoctor().getEmail());
         descriptor.setTags(person.getTags());
     }
 
@@ -96,6 +100,30 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withEmergencyContactRelationship(String relationship) {
         descriptor.setEmergencyContactRelationship(new Relationship(relationship));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Doctor Name} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withDoctorName(String name) {
+        descriptor.setDoctorName(new DoctorName(name));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Doctor Phone} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withDoctorPhone(String phone) {
+        descriptor.setDoctorPhone(new Phone(phone));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Doctor Email} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withDoctorEmail(String email) {
+        descriptor.setDoctorEmail(new Email(email));
         return this;
     }
 

@@ -9,6 +9,11 @@
       "ecPhone" : "98764123",
       "ecRelationship" : "Husband"
     },
+    "doctor": {
+      "doctorName": "Tan Wei Ming",
+      "doctorPhone": "82345678",
+      "doctorEmail": "tanweiming@gmail.com"
+    },
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
@@ -18,6 +23,11 @@
       "ecName" : "Kevin Goh",
       "ecPhone" : "98764123",
       "ecRelationship" : "Husband"
+    },
+    "doctor": {
+      "doctorName": "Tan Wei Ming",
+      "doctorPhone": "82345678",
+      "doctorEmail": "tanweiming@gmail.com"
     },
     "address": "4th street"
   } ]
