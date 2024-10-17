@@ -38,9 +38,10 @@ public class DeleteConcertCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX);
         }
-        // TODO: delete association if any
+
         Concert concertToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteConcert(concertToDelete);
+        model.deleteConcertContact(concertToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_CONCERT_SUCCESS, Messages.format(concertToDelete)));
     }
 
