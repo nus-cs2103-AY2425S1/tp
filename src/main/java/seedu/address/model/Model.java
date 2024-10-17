@@ -74,6 +74,12 @@ public interface Model {
     void addPerson(Person person);
 
     /**
+     * Finds a person using person name
+     * @param name
+     */
+    Person findPerson(String name);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
