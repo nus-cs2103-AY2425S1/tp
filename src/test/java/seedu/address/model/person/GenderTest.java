@@ -1,7 +1,11 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.person.Gender.FEMALE_SYMBOL;
+import static seedu.address.model.person.Gender.MALE_SYMBOL;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -32,6 +36,20 @@ public class GenderTest {
         // valid phone numbers
         assertTrue(Gender.isValidGender("male")); // male gender
         assertTrue(Gender.isValidGender("female")); // female gender
+    }
+
+    @Test
+    public void getGenderWithSymbol() {
+        Gender gender = new Gender("male");
+        assertEquals("male" + MALE_SYMBOL, gender.getGenderWithSymbol());
+        assertNotEquals("male" + FEMALE_SYMBOL, gender.getGenderWithSymbol());
+        assertNotEquals("female" + FEMALE_SYMBOL, gender.getGenderWithSymbol());
+        assertNotEquals("male", gender.getGenderWithSymbol());
+        gender = new Gender("female");
+        assertEquals("female" + FEMALE_SYMBOL, gender.getGenderWithSymbol());
+        assertNotEquals("male" + FEMALE_SYMBOL, gender.getGenderWithSymbol());
+        assertNotEquals("female" + MALE_SYMBOL, gender.getGenderWithSymbol());
+        assertNotEquals("female", gender.getGenderWithSymbol());
     }
 
     @Test

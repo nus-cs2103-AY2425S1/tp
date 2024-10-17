@@ -39,8 +39,6 @@ public class Messages {
         builder.append(person.getName())
                 .append("; Phone: ")
                 .append(person.getPhone())
-                .append("; Address: ")
-                .append(person.getAddress())
                 .append("; Module: ")
                 .append(person.getModule())
                 .append("; Tags: ");
