@@ -29,4 +29,11 @@ public class SeedCommandTest {
         assertCommandSuccess(new SeedCommand(), model, SeedCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
+    @Test
+    public void execute_nonEmptySocialBook_showPopulatedSocialBook() {
+        model.addPerson(SampleDataUtil.getSamplePersons()[0]);
+        model.addPerson(SampleDataUtil.getSamplePersons()[1]);
+        model.addPerson(SampleDataUtil.getSamplePersons()[2]);
+        assertCommandSuccess(new SeedCommand(), model, SeedCommand.MESSAGE_SUCCESS, expectedModel);
+    }
 }
