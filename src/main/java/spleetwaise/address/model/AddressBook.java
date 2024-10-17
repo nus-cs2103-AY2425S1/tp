@@ -3,6 +3,7 @@ package spleetwaise.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import spleetwaise.address.commons.util.ToStringBuilder;
@@ -59,12 +60,24 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// person-level operations
 
+    public Optional<Person> getPersonById(String id) {
+        requireNonNull(id);
+        return persons.getPersonById(id);
+    }
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return persons.contains(person);
+    }
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    public boolean hasPersonById(Person person) {
+        requireNonNull(person);
+        return persons.containsSameId(person);
     }
 
     /**

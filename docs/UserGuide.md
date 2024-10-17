@@ -8,7 +8,7 @@ CLI) while still having the benefits of a Graphical User Interface (GUI). If you
 management tasks done faster than traditional GUI apps.
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -94,6 +94,23 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+### Adding a transcation: `addTxn`
+
+Adds a transaction to the transaction book.
+
+Format: `addTxn p/PHONE_NUMBER amount/AMOUNT desc/TEST [date/DATE]`
+* The `PHONE_NUMBER` refers to the phone number associated to the person had a transaction with.
+* The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` can be added as prefix to indicate negative 
+amount.
+* The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
+
+:bulb: **Tip:** If the transaction happened on the current day, the date parameter can be omitted.
+
+Examples:
+
+* `addTxn p/98765432 amt/12.3 desc/John paid me for dinner`
+* `addTxn p/98765432 amt/-12.3 desc/John owed me date/10102024`
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
@@ -138,6 +155,22 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Adding Remarks for a person : `remark`
+
+Add remarks for the specified person from the address book.
+
+Format: `remark INDEX r/REMARK`
+
+* Add remarks for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+* `list` followed by `remark 2 r/remark for person 2` adds remarks for the 2nd person in the address book.
+* `find Betsy` followed by `remark 1 r/remark for betsy` adds remarks for the 1st person in the results of the `find`
+  command.
 
 ### Deleting a person : `delete`
 
@@ -214,22 +247,23 @@ the data of your previous AddressBook home folder.
 
 ## Command Summary for Address Book
 
-| Action     | Format, Examples                                                                                                                                                      |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                               |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **List**   | `list`                                                                                                                                                                |
-| **Help**   | `help`                                                                                                                                                                |
+| Action     | Format, Examples                                                                                                                                                                                                           |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/James is poor af, do not loan him money t/friend t/colleague` |
+| **Clear**  | `clear`                                                                                                                                                                                                                    |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                        |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                     |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                 |
+| **List**   | `list`                                                                                                                                                                                                                     |
+| **REMARK** | `remark INDEX r/REMARK`                                                                                                                                                                                                    |
+| **Help**   | `help`                                                                                                                                                                                                                     |
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command Summary for Transactions
 
-| Action    | Format, Examples                                                                                                                                                                 |
-|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**   | `add p/PHONE_NUMBER amt/AMOUNT desc/DESCRIPTION date/DATE` <br> e.g., `addTxn p/99999999 amt/-9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024` |
-| **List**  | `listTxn`                                                                                                                                                                        |
-| **Clear** | `clearTxn`                                                                                                                                                                       |
+| Action    | Format, Examples                                                                                                                                                                   |
+|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**   | `add p/PHONE_NUMBER amt/AMOUNT desc/DESCRIPTION [date/DATE]` <br> e.g., `addTxn p/99999999 amt/-9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024` |
+| **List**  | `listTxn`                                                                                                                                                                          |
+| **Clear** | `clearTxn`                                                                                                                                                                         |
