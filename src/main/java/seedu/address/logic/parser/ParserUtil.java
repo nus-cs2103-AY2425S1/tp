@@ -157,24 +157,4 @@ public class ParserUtil {
         }
         return tagSet;
     }
-
-    /**
-     * Parses a {@code String classes} into a {@code Set<String>}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code classes} is invalid.
-     */
-    public static Set<String> parseClasses(String classes) throws ParseException {
-        requireNonNull(classes);
-        String trimmedClasses = classes.trim();
-        if (trimmedClasses.isEmpty()) {
-            throw new ParseException("Classes cannot be empty.");
-        }
-        String[] classArray = trimmedClasses.split(",");
-        Set<String> classSet = new HashSet<>();
-        for (String className : classArray) {
-            classSet.add(className.trim());
-        }
-        return classSet;
-    }
 }
