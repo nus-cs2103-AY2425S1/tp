@@ -45,6 +45,8 @@ public class CompanyCard extends UiPart<Region> {
     @FXML
     private Label application;
     @FXML
+    private Label status;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -56,6 +58,15 @@ public class CompanyCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(company.getName().fullName);
         email.setText(company.getEmail().value);
+        status.setText(company.getStatus().value);
+
+        if ("INTERESTED".equals(status.getText())) {
+            status.setStyle("-fx-background-color: purple;");
+        } else if ("APPLIED".equals(status.getText())) {
+            status.setStyle("-fx-background-color: green;");
+        } else if ("CLOSED".equals(status.getText())) {
+            status.setStyle("-fx-background-color: #db0303;");
+        }
 
         /* phone number and address are optional */
         setOptionals();
@@ -66,6 +77,8 @@ public class CompanyCard extends UiPart<Region> {
                 : "Applications: " + IntStream.range(0, applications.size())
                     .mapToObj(i -> (i + 1) + ". " + applications.get(i))
                     .collect(Collectors.joining(", ")));
+
+        tags.getChildren().add(status);
 
         company.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
