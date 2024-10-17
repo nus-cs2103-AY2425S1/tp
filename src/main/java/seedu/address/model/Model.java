@@ -93,6 +93,10 @@ public interface Model {
 
     boolean hasMeeting(Meeting meeting);
 
+    ObservableList<Meeting> getWeeklySchedule();
+
+    void changeWeeklySchedule(Predicate<Meeting> predicate);
+
     /**
      * Returns an unmodifiable view of the filtered person list
      */

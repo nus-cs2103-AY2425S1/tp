@@ -65,10 +65,10 @@ public class ScheduleList implements ReadOnlyScheduleList {
         // Iterate over the unmodifiable list of meetings
         for (Meeting existingMeeting : meetings.asUnmodifiableObservableList()) {
             if (newMeeting.hasConflictMeeting(existingMeeting)) {
-                return true;  // Conflict detected
+                return true; // Conflict detected
             }
         }
-        return false;  // No conflict
+        return false; // No conflict
     }
 
     /**
