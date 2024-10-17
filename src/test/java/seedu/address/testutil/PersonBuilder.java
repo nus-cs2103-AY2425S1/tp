@@ -45,7 +45,10 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = Optional.of(new Address(DEFAULT_ADDRESS));
         tags = new HashSet<>();
-        moduleRoleMap = new ModuleRoleMap(new HashMap<ModuleCode, RoleType>());
+
+        HashMap<ModuleCode, RoleType> hashMap = new HashMap<>();
+        hashMap.put(DEFAULT_MODULE_CODE, DEFAULT_ROLE_TYPE);
+        moduleRoleMap = new ModuleRoleMap(hashMap);
     }
 
     /**
