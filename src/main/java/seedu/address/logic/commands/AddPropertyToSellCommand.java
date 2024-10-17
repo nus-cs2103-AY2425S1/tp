@@ -37,8 +37,6 @@ public class AddPropertyToSellCommand extends Command {
             + PREFIX_UNIT_NUMBER + "10-65 "
             + PREFIX_TAG + "Extremely spacious "
             + PREFIX_TAG + "Near MRT";
-
-    public static final String MESSAGE_NOT_IMPLEMENTED = "This command (addSell) is not implemented yet";
     public static final String MESSAGE_SUCCESS = "New property added: %1$s";
     public static final String MESSAGE_DUPLICATE_PROPERTY = "This property already exists "
             + "in the list of properties to sell";
