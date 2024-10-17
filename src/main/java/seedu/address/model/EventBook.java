@@ -73,11 +73,23 @@ public class EventBook implements ReadOnlyEventBook {
         events.remove(key);
     }
 
+    /**
+     * Updates the event at {@code oldEventIndex} to {@code newEvent}.
+     */
+    public void updateEvent(Event newEvent, int oldEventIndex) {
+        events.set(oldEventIndex, newEvent);
+    }
+
     //// util methods
 
     @Override
     public ObservableList<Event> getEventList() {
         return unmodifiableEvents;
+    }
+
+    @Override
+    public int getEventListLength() {
+        return events.size();
     }
 
     @Override

@@ -13,4 +13,5 @@ public interface ReadOnlyEventBook {
      * This list will not contain any duplicate events.
      */
     ObservableList<Event> getEventList();
+    int getEventListLength();
 }
