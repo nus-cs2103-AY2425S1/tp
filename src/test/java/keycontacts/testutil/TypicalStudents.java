@@ -9,12 +9,12 @@ import static keycontacts.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import keycontacts.model.StudentDirectory;
+import keycontacts.model.lesson.Date;
 import keycontacts.model.lesson.MakeupLesson;
 import keycontacts.model.lesson.Time;
 import keycontacts.model.student.Student;
@@ -25,19 +25,19 @@ import keycontacts.model.student.Student;
 public class TypicalStudents {
 
     public static final MakeupLesson MAKEUP_LESSON_1 =
-            new MakeupLesson(LocalDate.of(2021, 9, 30), new Time("12:00"), new Time("14:00"));
+            new MakeupLesson(new Date("30-09-2021"), new Time("12:00"), new Time("14:00"));
     public static final MakeupLesson MAKEUP_LESSON_2 =
-            new MakeupLesson(LocalDate.of(2021, 10, 1), new Time("12:00"), new Time("14:00"));
+            new MakeupLesson(new Date("01-10-2021"), new Time("12:00"), new Time("14:00"));
     public static final MakeupLesson MAKEUP_LESSON_3 =
-            new MakeupLesson(LocalDate.of(2021, 10, 2), new Time("18:00"), new Time("19:00"));
+            new MakeupLesson(new Date("02-10-2021"), new Time("18:00"), new Time("19:00"));
     public static final MakeupLesson MAKEUP_LESSON_4 =
-            new MakeupLesson(LocalDate.of(2021, 10, 3), new Time("09:00"), new Time("10:00"));
+            new MakeupLesson(new Date("03-10-2021"), new Time("09:00"), new Time("10:00"));
     public static final MakeupLesson MAKEUP_LESSON_5 =
-            new MakeupLesson(LocalDate.of(2021, 10, 4), new Time("11:00"), new Time("12:00"));
+            new MakeupLesson(new Date("04-10-2021"), new Time("11:00"), new Time("12:00"));
     public static final MakeupLesson MAKEUP_LESSON_6 =
-            new MakeupLesson(LocalDate.of(2021, 10, 5), new Time("20:00"), new Time("21:00"));
+            new MakeupLesson(new Date("05-10-2021"), new Time("20:00"), new Time("21:00"));
     public static final MakeupLesson MAKEUP_LESSON_7 =
-            new MakeupLesson(LocalDate.of(2021, 10, 6), new Time("15:00"), new Time("17:00"));
+            new MakeupLesson(new Date("06-10-2021"), new Time("15:00"), new Time("17:00"));
 
     /**
      * When editing any entry below, take note to change typicalStudentsStudentDirectory.json
@@ -49,6 +49,7 @@ public class TypicalStudents {
             .withGradeLevel("ABRSM 2")
             .withPianoPieces("Etude")
             .withRegularLesson("Monday", "12:00", "14:00")
+            .withCancelledLessons("14-10-2024")
             .withMakeupLessons(MAKEUP_LESSON_1, MAKEUP_LESSON_2)
             .build();
     public static final Student BENSON = new StudentBuilder()
@@ -58,6 +59,7 @@ public class TypicalStudents {
             .withGradeLevel("RSL 3")
             .withPianoPieces("Sonata I. X. 1905 \"From the Street\"", "Waltz No. 2")
             .withRegularLesson("Tuesday", "13:00", "15:00")
+            .withCancelledLessons("15-10-2024")
             .withMakeupLessons(MAKEUP_LESSON_2)
             .build();
     public static final Student CARL = new StudentBuilder()

@@ -5,14 +5,14 @@ import static keycontacts.logic.parser.CliSyntax.PREFIX_DATE;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
 
-import java.time.LocalDate;
-
 import keycontacts.commons.core.index.Index;
 import keycontacts.logic.commands.MakeupLessonCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
+import keycontacts.model.lesson.Date;
 import keycontacts.model.lesson.Lesson;
 import keycontacts.model.lesson.MakeupLesson;
 import keycontacts.model.lesson.Time;
+
 
 /**
  * Parses input arguments and creates a new MakeupCommand object
@@ -40,7 +40,7 @@ public class MakeupCommandParser implements Parser<MakeupLessonCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE, PREFIX_START_TIME, PREFIX_END_TIME);
-        LocalDate lessonDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        Date lessonDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Time startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
         Time endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
 

@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import keycontacts.model.lesson.CancelledLesson;
 import keycontacts.model.lesson.MakeupLesson;
 import keycontacts.model.student.Student;
 
@@ -48,6 +49,8 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label regularLesson;
     @FXML
+    private Label cancelledLessons;
+    @FXML
     private Label pianoPieces;
     @FXML
     private Label makeupLessons;
@@ -64,6 +67,10 @@ public class StudentCard extends UiPart<Region> {
         phone.setText(student.getPhone().value);
         address.setText(student.getAddress().value);
         gradeLevel.setText(student.getGradeLevel().value);
+        cancelledLessons.setText(student.getCancelledLessons().stream()
+                .sorted(Comparator.comparing(CancelledLesson::getLessonDate))
+                .map(cancelledLesson -> cancelledLesson.getLessonDate().toString())
+                .collect(Collectors.joining(", ")));
         regularLesson.setText(student.getRegularLessonDisplay());
         pianoPieces.setText(student.getPianoPieces().stream()
                 .sorted(Comparator.comparing(pianoPiece -> pianoPiece.pianoPieceName))
@@ -89,7 +96,7 @@ public class StudentCard extends UiPart<Region> {
                 .mapToObj(i -> String.format(
                         "%d. Date: %s, Time: %s - %s",
                         i + 1,
-                        sortedLessons.get(i).getLessonDate().format(formatter),
+                        sortedLessons.get(i).getLessonDate().getLocalDate().format(formatter),
                         sortedLessons.get(i).getStartTime(),
                         sortedLessons.get(i).getEndTime()))
                 .collect(Collectors.joining("\n", "Makeup Lessons:\n", ""));

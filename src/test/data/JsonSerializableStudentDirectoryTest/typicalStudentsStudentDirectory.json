@@ -11,12 +11,13 @@
       "startTime": "12:00",
       "endTime": "14:00"
     },
+    "cancelledLessons": [ "14-10-2024" ],
     "makeupLessons": [{
-      "lessonDate": "2021-09-30",
+      "lessonDate": "30-09-2021",
       "startTime": "12:00",
       "endTime": "14:00"
     }, {
-      "lessonDate": "2021-10-01",
+      "lessonDate": "01-10-2021",
       "startTime": "12:00",
       "endTime": "14:00"
     }]
@@ -31,8 +32,9 @@
       "startTime": "13:00",
       "endTime": "15:00"
     },
+    "cancelledLessons": [ "15-10-2024" ],
     "makeupLessons": [{
-      "lessonDate": "2021-10-01",
+      "lessonDate": "01-10-2021",
       "startTime": "12:00",
       "endTime": "14:00"
     }]
@@ -47,8 +49,9 @@
       "startTime": "18:00",
       "endTime": "19:00"
     },
+    "cancelledLessons": [ ],
     "makeupLessons": [{
-      "lessonDate": "2021-10-02",
+      "lessonDate": "02-10-2021",
       "startTime": "18:00",
       "endTime": "19:00"
     }]
@@ -63,8 +66,9 @@
       "startTime": "09:00",
       "endTime": "10:00"
     },
+    "cancelledLessons": [ ],
     "makeupLessons": [{
-      "lessonDate": "2021-10-03",
+      "lessonDate": "03-10-2021",
       "startTime": "09:00",
       "endTime": "10:00"
     }]
@@ -79,8 +83,9 @@
       "startTime": "11:00",
       "endTime": "12:00"
     },
+    "cancelledLessons": [ ],
     "makeupLessons": [{
-      "lessonDate": "2021-10-04",
+      "lessonDate": "04-10-2021",
       "startTime": "11:00",
       "endTime": "12:00"
     }]
@@ -95,8 +100,9 @@
       "startTime": "20:00",
       "endTime": "21:00"
     },
+    "cancelledLessons": [ ],
     "makeupLessons": [{
-      "lessonDate": "2021-10-05",
+      "lessonDate": "05-10-2021",
       "startTime": "20:00",
       "endTime": "21:00"
     }]
@@ -111,8 +117,9 @@
       "startTime": "15:00",
       "endTime": "17:00"
     },
+    "cancelledLessons": [ ],
     "makeupLessons": [{
-      "lessonDate": "2021-10-06",
+      "lessonDate": "06-10-2021",
       "startTime": "15:00",
       "endTime": "17:00"
     }]

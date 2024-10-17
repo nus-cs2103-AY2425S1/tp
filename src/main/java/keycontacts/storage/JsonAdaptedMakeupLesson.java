@@ -1,11 +1,10 @@
 package keycontacts.storage;
 
-import java.time.LocalDate;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import keycontacts.commons.exceptions.IllegalValueException;
+import keycontacts.model.lesson.Date;
 import keycontacts.model.lesson.Lesson;
 import keycontacts.model.lesson.MakeupLesson;
 import keycontacts.model.lesson.Time;
@@ -52,15 +51,12 @@ public class JsonAdaptedMakeupLesson {
     public MakeupLesson toModelType() throws IllegalValueException {
         if (lessonDate == null || lessonDate.trim().isEmpty()) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    LocalDate.class.getSimpleName()));
+                    Date.class.getSimpleName()));
         }
-        // Check if the date is valid by using LocalDate.parse
-        try {
-            LocalDate.parse(lessonDate);
-        } catch (IllegalArgumentException e) {
+        if (!Date.isValidDate(lessonDate)) {
             throw new IllegalValueException(Lesson.MESSAGE_CONSTRAINTS);
         }
-        final LocalDate modelLessonDate = LocalDate.parse(lessonDate);
+        final Date modelLessonDate = new Date(lessonDate);
 
         if (startTime == null || endTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));

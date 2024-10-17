@@ -10,8 +10,11 @@ import java.util.Set;
 
 import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.logic.commands.EditCommand.EditStudentDescriptor;
+import keycontacts.model.lesson.CancelledLesson;
+import keycontacts.model.lesson.Date;
 import keycontacts.model.lesson.MakeupLesson;
 import keycontacts.model.lesson.RegularLesson;
+import keycontacts.model.lesson.Time;
 import keycontacts.model.pianopiece.PianoPiece;
 
 /**
@@ -29,6 +32,7 @@ public class Student {
     // Associations
     private final Set<PianoPiece> pianoPieces = new HashSet<>();
     private final RegularLesson regularLesson;
+    private final Set<CancelledLesson> cancelledLessons = new HashSet<>();
     private final Set<MakeupLesson> makeupLessons = new HashSet<>();
 
     /**
@@ -49,7 +53,8 @@ public class Student {
      * present and not null.
      */
     public Student(Name name, Phone phone, Address address, GradeLevel gradeLevel,
-                   Set<PianoPiece> pianoPieces, RegularLesson regularLesson, Set<MakeupLesson> makeupLessons) {
+                   Set<PianoPiece> pianoPieces, RegularLesson regularLesson, Set<CancelledLesson> cancelledLessons,
+                   Set<MakeupLesson> makeupLessons) {
         requireAllNonNull(name, phone, address, gradeLevel, pianoPieces);
         this.name = name;
         this.phone = phone;
@@ -57,6 +62,7 @@ public class Student {
         this.gradeLevel = gradeLevel;
         this.pianoPieces.addAll(pianoPieces);
         this.regularLesson = regularLesson;
+        this.cancelledLessons.addAll(cancelledLessons);
         this.makeupLessons.addAll(makeupLessons);
     }
 
@@ -95,6 +101,14 @@ public class Student {
         return Optional.ofNullable(regularLesson);
     }
 
+    /**
+     * Returns an immutable cancelled lesson set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<CancelledLesson> getCancelledLessons() {
+        return Collections.unmodifiableSet(cancelledLessons);
+    }
+
     public Set<MakeupLesson> getMakeupLessons() {
         return Collections.unmodifiableSet(makeupLessons);
     }
@@ -123,14 +137,16 @@ public class Student {
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(address);
         GradeLevel updatedGradeLevel = editStudentDescriptor.getGradeLevel().orElse(this.gradeLevel);
         return new Student(updatedName, updatedPhone, updatedAddress, updatedGradeLevel,
-            pianoPieces, regularLesson, makeupLessons);
+            pianoPieces, regularLesson,
+                cancelledLessons, makeupLessons);
     }
 
     /**
      * Creates and returns a new {@code Student} with the updated {@code regularLesson}.
      */
     public Student withRegularLesson(RegularLesson regularLesson) {
-        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson, makeupLessons);
+        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson,
+            cancelledLessons, makeupLessons);
     }
 
     /**
@@ -140,7 +156,8 @@ public class Student {
         Set<PianoPiece> updatedPianoPieces = new HashSet<>(pianoPieces);
         updatedPianoPieces.addAll(addedPianoPieces);
 
-        return new Student(name, phone, address, gradeLevel, updatedPianoPieces, regularLesson, makeupLessons);
+        return new Student(name, phone, address, gradeLevel, updatedPianoPieces, regularLesson,
+            cancelledLessons, makeupLessons);
     }
 
     /**
@@ -150,7 +167,8 @@ public class Student {
         Set<MakeupLesson> updatedMakeupLessons = new HashSet<>(makeupLessons);
         updatedMakeupLessons.add(makeupLesson);
 
-        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson, updatedMakeupLessons);
+        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson,
+            cancelledLessons, updatedMakeupLessons);
     }
 
     /**
@@ -188,13 +206,15 @@ public class Student {
                 && gradeLevel.equals(otherStudent.gradeLevel)
                 && pianoPieces.equals(otherStudent.pianoPieces)
                 && getRegularLessonOptional().equals(otherStudent.getRegularLessonOptional())
+                && getCancelledLessons().equals(otherStudent.getCancelledLessons())
                 && makeupLessons.equals(otherStudent.makeupLessons);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, address, gradeLevel, pianoPieces, regularLesson, makeupLessons);
+        return Objects.hash(name, phone, address, gradeLevel, pianoPieces, regularLesson,
+            cancelledLessons, makeupLessons);
     }
 
     @Override
@@ -206,8 +226,28 @@ public class Student {
                 .add("gradeLevel", gradeLevel)
                 .add("pianoPieces", pianoPieces)
                 .add("regularLesson", regularLesson)
+                .add("cancelledLessons", cancelledLessons)
                 .add("makeupLessons", makeupLessons)
                 .toString();
+    }
+
+    /**
+     * Returns true if the {@code date} and {@code startTime} of {@code regularLesson} match the parameters.
+     */
+    public boolean matchesLesson(Date date, Time startTime) {
+        return this.getRegularLessonOptional()
+                .map(lesson -> lesson.isOnDayAndTime(date.convertToDay(), startTime))
+                .orElse(false);
+    }
+
+    /**
+     * Returns a new student with an additional {@code CancelledLesson}.
+     */
+    public Student withAddedCancelledLesson(CancelledLesson cancelledLesson) {
+        Set<CancelledLesson> updatedCancelledLessons = new HashSet<>(cancelledLessons);
+        updatedCancelledLessons.add(cancelledLesson);
+        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson,
+            updatedCancelledLessons, makeupLessons);
     }
 
 }

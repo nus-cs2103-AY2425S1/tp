@@ -9,7 +9,8 @@
       "lessonDay": "MONDAY",
       "startTime": "16:00",
       "endTime": "18:00"
-    }
+    },
+    "cancelledLessons": [ ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -20,6 +21,7 @@
       "lessonDay": "MONDAY",
       "startTime": "16:00",
       "endTime": "18:00"
-    }
+    },
+    "cancelledLessons": [ ]
   } ]
 }

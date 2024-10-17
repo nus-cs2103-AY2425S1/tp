@@ -2,7 +2,6 @@ package keycontacts.model.lesson;
 
 import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 import keycontacts.commons.util.ToStringBuilder;
@@ -12,18 +11,18 @@ import keycontacts.commons.util.ToStringBuilder;
  */
 public class MakeupLesson extends Lesson {
 
-    private final LocalDate lessonDate;
+    private final Date lessonDate;
 
     /**
      * Every field must be present and not null.
      */
-    public MakeupLesson(LocalDate lessonDate, Time startTime, Time endTime) {
+    public MakeupLesson(Date lessonDate, Time startTime, Time endTime) {
         super(startTime, endTime);
         requireAllNonNull(lessonDate);
         this.lessonDate = lessonDate;
     }
 
-    public LocalDate getLessonDate() {
+    public Date getLessonDate() {
         return lessonDate;
     }
 
