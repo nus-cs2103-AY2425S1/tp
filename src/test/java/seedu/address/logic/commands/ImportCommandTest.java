@@ -1,3 +1,4 @@
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -252,14 +253,27 @@ public class ImportCommandTest {
     }
 
     @Test
-    public void equals() {
+    public void equals_differentFiles() {
         ImportCommand expectedImportCommand = new ImportCommand("contacts.csv");
         ImportCommand importCommand = new ImportCommand("contacts.csv");
         assertTrue(expectedImportCommand.equals(importCommand));
     }
 
     @Test
-    public void not_equals() {
+    public void equals_sameFile() {
+        ImportCommand importCommand = new ImportCommand("contacts.csv");
+        assertTrue(importCommand.equals(importCommand));
+    }
+
+    @Test
+    public void notEquals_null() {
+        ImportCommand importCommand = null;
+        ImportCommand expectedImportCommand = new ImportCommand("contacts.csv");
+        assertFalse(expectedImportCommand.equals(importCommand));
+    }
+
+    @Test
+    public void notEquals() {
         ImportCommand expectedImportCommand = new ImportCommand("contact.csv");
         ImportCommand importCommand = new ImportCommand("contacts.csv");
         assertTrue(!expectedImportCommand.equals(importCommand));
