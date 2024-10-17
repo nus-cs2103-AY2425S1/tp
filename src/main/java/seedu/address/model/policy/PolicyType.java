@@ -17,6 +17,15 @@ public enum PolicyType {
         return values();
     }
 
+    public static PolicyType fromString(String type) {
+        for (PolicyType policyType : PolicyType.values()) {
+            if (policyType.name().equalsIgnoreCase(type)) {
+                return policyType;
+            }
+        }
+        throw new IllegalArgumentException("Invalid policy type: " + type);
+    }
+
     @Override
     public String toString() {
         String lowerCaseName = name().toLowerCase();

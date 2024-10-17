@@ -24,17 +24,14 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
+        return other == this // short circuit if same object
+                || (other instanceof NameContainsKeywordsPredicate // instanceof handles nulls
+                && keywords.equals(((NameContainsKeywordsPredicate) other).keywords)); // state check
+    }
 
-        // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
-            return false;
-        }
-
-        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+    @Override
+    public int hashCode() {
+        return keywords.hashCode();
     }
 
     @Override
