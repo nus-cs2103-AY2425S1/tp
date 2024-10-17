@@ -22,9 +22,7 @@ import tahub.contacts.model.tag.Tag;
  * Jackson-friendly version of {@link Person}.
  */
 class JsonAdaptedPerson {
-
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-
     private final String matriculationNumber;
     private final String name;
     private final String phone;
@@ -37,8 +35,8 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("matriculationNumber") String matriculationNumber, @JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.matriculationNumber = matriculationNumber;
         this.name = name;
         this.phone = phone;
@@ -73,7 +71,7 @@ class JsonAdaptedPerson {
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
-        
+
         if (matriculationNumber == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, MatriculationNumber.class.getSimpleName()));
         }
@@ -81,7 +79,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(MatriculationNumber.MESSAGE_CONSTRAINTS);
         }
         final MatriculationNumber modelMatriculationNumber = new MatriculationNumber(matriculationNumber);
-        
+
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -117,5 +115,4 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelMatriculationNumber, modelName, modelPhone, modelEmail, modelAddress, modelTags);
     }
-
 }

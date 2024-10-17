@@ -53,7 +53,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
     }
-    
+
     /**
      * Sets the {@code MatriculationNumber} of the {@code Person} that we are building.
      */
@@ -61,7 +61,7 @@ public class PersonBuilder {
         this.matriculationNumber = new MatriculationNumber(matriculationNumber);
         return this;
     }
-    
+
     /**
      * Sets the {@code Name} of the {@code Person} that we are building.
      */
@@ -73,7 +73,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -105,5 +105,4 @@ public class PersonBuilder {
     public Person build() {
         return new Person(matriculationNumber, name, phone, email, address, tags);
     }
-
 }

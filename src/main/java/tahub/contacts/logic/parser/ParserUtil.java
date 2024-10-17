@@ -1,11 +1,9 @@
 package tahub.contacts.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-
 import tahub.contacts.commons.core.index.Index;
 import tahub.contacts.commons.util.StringUtil;
 import tahub.contacts.logic.parser.exceptions.ParseException;
@@ -20,7 +18,6 @@ import tahub.contacts.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
@@ -50,7 +47,7 @@ public class ParserUtil {
         }
         return new MatriculationNumber(trimmedMatricNumber);
     }
-    
+
     /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
