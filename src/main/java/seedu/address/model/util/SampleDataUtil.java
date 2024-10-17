@@ -54,7 +54,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook()  {
+    public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
@@ -65,7 +65,7 @@ public class SampleDataUtil {
     /**
      * Returns a tag set containing the list of strings given.
      */
-    public static Set<Tag> getTagSet(String... strings){
+    public static Set<Tag> getTagSet(String... strings) {
         try {
             return ParserUtil.parseTags(Arrays.asList(strings));
         } catch (ParseException e) {

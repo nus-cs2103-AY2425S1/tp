@@ -8,16 +8,16 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 /**
- * Parses input for filter and creates an instance of FilterCommand
+ * Parses input for sort and creates an instance of SortCommand
  */
 public class SortCommandParser implements Parser<SortCommand> {
-    //regex to filter the input to extract NAME and/or TAG
-    private static final Pattern SORT_COMMAND_FORMAT = Pattern.compile("(?i)(t/(?<tag>\\S+)){1}\\s+(?<operator>\\S+){1}\\s+(?<value>\\S+){1}");
-    // private static final Pattern SORT_COMMAND_FORMAT = Pattern.compile("(?i)(n/(?<name>\\S+))?\\s*(t/(?<tag>\\S+))?");
+    //regex to filter the input to extract TAG name, comparison operator and TAG value
+    private static final Pattern SORT_COMMAND_FORMAT =
+            Pattern.compile("(?i)(t/(?<tag>\\S+)){1}\\s+(?<operator>\\S+){1}\\s+(?<value>\\S+){1}");
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FilterCommand
-     * and returns a FilterCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SortCommand
+     * and returns a SortCommand object for execution.
      * @throws ParseException if the user input does not conform to the expected format
      */
     public SortCommand parse(String args) throws ParseException {
@@ -29,12 +29,12 @@ public class SortCommandParser implements Parser<SortCommand> {
         }
 
         // Extract the name and tag from the input
-        // String name = matcher.group("name");
         String tag = matcher.group("tag");
         String operator = matcher.group("operator");
         String value = matcher.group("value");
 
-        if ((tag == null || tag.isEmpty()) && (operator == null || operator.isEmpty()) && (value == null || value.isEmpty())) {
+        if ((tag == null || tag.isEmpty())
+                && (operator == null || operator.isEmpty()) && (value == null || value.isEmpty())) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }

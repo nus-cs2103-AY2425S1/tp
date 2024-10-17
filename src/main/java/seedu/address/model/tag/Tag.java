@@ -24,9 +24,15 @@ public class Tag {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
-        this.tagValue  = null;
+        this.tagValue = null;
     }
 
+    /**
+     * Constructs a {@code Tag}.
+     *
+     * @param tagName A valid tag name.
+     * @param tagValue A valid tag value.
+     */
     public Tag(String tagName, String tagValue) {
         requireNonNull(tagName);
         requireNonNull(tagValue);

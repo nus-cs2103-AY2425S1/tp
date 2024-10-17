@@ -29,7 +29,7 @@ public class SortCommand extends Command {
     private final String operator;
 
     /**
-     * Class that handles FilterCommand
+     * Class that handles SortCommand
      */
     public SortCommand(String tagName, String operator, String tagValue) {
         this.tagName = tagName;
@@ -95,7 +95,7 @@ public class SortCommand extends Command {
                 || (tagName != null && tagName.equals(otherCommand.tagName));
 
         boolean isOperatorEqual = (operator == null && otherCommand.operator == null)
-        || (operator != null && operator.equals(otherCommand.operator));
+                || (operator != null && operator.equals(otherCommand.operator));
 
 
         boolean isTagValueEqual = (tagValue == null && otherCommand.tagValue == null)
@@ -114,37 +114,37 @@ public class SortCommand extends Command {
 
     private boolean compare(String operator, Tag tag, String tagValue) {
         return switch (operator) {
-            case "=" -> tag.tagValue.equalsIgnoreCase(tagValue);
-            case "!=" -> !tag.tagValue.equalsIgnoreCase(tagValue);
-            case ">" -> {
-                Double currentTagValue = tryParseDouble(tag.tagValue);
-                Double testTagValue = tryParseDouble(tagValue);
-                yield (currentTagValue != null && testTagValue != null)
-                        ? Double.compare(currentTagValue, testTagValue) > 0
-                        : false;
-            }
-            case "<" -> {
-                Double currentTagValue = tryParseDouble(tag.tagValue);
-                Double testTagValue = tryParseDouble(tagValue);
-                yield (currentTagValue != null && testTagValue != null)
-                        ? Double.compare(currentTagValue, testTagValue) < 0
-                        : false;
-            }
-            case "<=" -> {
-                Double currentTagValue = tryParseDouble(tag.tagValue);
-                Double testTagValue = tryParseDouble(tagValue);
-                yield (currentTagValue != null && testTagValue != null)
-                        ? Double.compare(currentTagValue, testTagValue) <= 0
-                        : false;
-            }
-            case ">=" -> {
-                Double currentTagValue = tryParseDouble(tag.tagValue);
-                Double testTagValue = tryParseDouble(tagValue);
-                yield (currentTagValue != null && testTagValue != null)
-                        ? Double.compare(currentTagValue, testTagValue) >= 0
-                        : false;
-            }
-            default -> throw new IllegalArgumentException("Unknown operator");
+        case "=" -> tag.tagValue.equalsIgnoreCase(tagValue);
+        case "!=" -> !tag.tagValue.equalsIgnoreCase(tagValue);
+        case ">" -> {
+            Double currentTagValue = tryParseDouble(tag.tagValue);
+            Double testTagValue = tryParseDouble(tagValue);
+            yield (currentTagValue != null && testTagValue != null)
+                    ? Double.compare(currentTagValue, testTagValue) > 0
+                    : false;
+        }
+        case "<" -> {
+            Double currentTagValue = tryParseDouble(tag.tagValue);
+            Double testTagValue = tryParseDouble(tagValue);
+            yield (currentTagValue != null && testTagValue != null)
+                    ? Double.compare(currentTagValue, testTagValue) < 0
+                    : false;
+        }
+        case "<=" -> {
+            Double currentTagValue = tryParseDouble(tag.tagValue);
+            Double testTagValue = tryParseDouble(tagValue);
+            yield (currentTagValue != null && testTagValue != null)
+                    ? Double.compare(currentTagValue, testTagValue) <= 0
+                    : false;
+        }
+        case ">=" -> {
+            Double currentTagValue = tryParseDouble(tag.tagValue);
+            Double testTagValue = tryParseDouble(tagValue);
+            yield (currentTagValue != null && testTagValue != null)
+                    ? Double.compare(currentTagValue, testTagValue) >= 0
+                    : false;
+        }
+        default -> throw new IllegalArgumentException("Unknown operator");
 
         };
     }
