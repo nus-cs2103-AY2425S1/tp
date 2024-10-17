@@ -21,7 +21,7 @@ public class ScreenCommandParser implements Parser<ScreenCommand> {
         String[] splitArgs = args.trim().split("\\s+");
         if (splitArgs.length == 1 && splitArgs[0].equals(ScreenJobCommand.ENTITY_WORD)) {
             throw new ParseException(MESSAGE_MISSING_INDEX);
-        } else if (splitArgs.length == 1) {
+        } else if (splitArgs.length == 1 || splitArgs.length >= 3) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScreenCommand.MESSAGE_USAGE));
         }
         String entityType = splitArgs[0];
