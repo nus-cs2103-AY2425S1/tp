@@ -23,8 +23,6 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final Property DEFAULT_BUYING_PROPERTY = new PropertyToBuyBuilder().build();
-    public static final Property DEFAULT_SELLING_PROPERTY = new PropertyToSellBuilder().build();
 
     private Name name;
     private Phone phone;
@@ -43,8 +41,6 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-//         sellingProperties.add(DEFAULT_SELLING_PROPERTY);
-//         buyingProperties.add(DEFAULT_BUYING_PROPERTY);
         buyingProperties = new ArrayList<>();
         sellingProperties = new ArrayList<>();
     }
@@ -106,35 +102,7 @@ public class PersonBuilder {
      * Sets the {@code buyingProperties} of the {@code Person} that we are building.
      */
     public PersonBuilder withBuyProperty(Property property) {
-        List<Property> newPropertyList = new ArrayList<>();
-        newPropertyList.add(property);
-        this.buyingProperties = newPropertyList;
-        return this;
-    }
-
-    /**
-     * Sets the {@code buyingProperties} of the {@code Person} that we are building to an empty ArrayList.
-     */
-    public PersonBuilder withBuyProperty() {
-        this.buyingProperties = new ArrayList<>();
-        return this;
-    }
-
-    /**
-     * Sets the {@code sellingProperties} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withSellProperty(Property property) {
-        List<Property> newPropertyList = new ArrayList<>();
-        newPropertyList.add(property);
-        this.sellingProperties = newPropertyList;
-        return this;
-    }
-
-    /**
-     * Sets the {@code sellingProperties} of the {@code Person} that we are building to an empty ArrayList.
-     */
-    public PersonBuilder withSellProperty() {
-        this.sellingProperties = new ArrayList<>();
+        this.buyingProperties.add(property);
         return this;
     }
 
