@@ -136,7 +136,7 @@ public class Member {
         requireNonNull(sessionName);
         Session target = this.sessions.stream()
                 .filter(object -> object.getSessionName().toString().equals(sessionName.toString()))
-                .findFirst()   // get the first match, wrapped in Optional
+                .findFirst() // get the first match, wrapped in Optional
                 .orElse(null); // return null if no match is found
         if (target == null) {
             throw new IllegalArgumentException("Session not found: " + sessionName);
