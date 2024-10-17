@@ -1,8 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -30,12 +29,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (!name.isEmpty()) {
             String[] nameKeywords = name.split("\\s+");
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-        }
-        else if (arePrefixesPresent(argMultimap, PREFIX_CATEGORY)) {
+        } else if (arePrefixesPresent(argMultimap, PREFIX_CATEGORY)) {
             GoodsCategories category = ParserUtil.parseGoodsCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
             return new FindCommand(new CategoryPredicate(category));
-        }
-        else {
+        } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
