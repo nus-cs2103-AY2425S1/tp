@@ -52,8 +52,8 @@ public class AddressBookParserTest {
     public void parseCommand_delete() throws Exception {
         Person personToDelete = new PersonBuilder().build();
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + personToDelete.getName().fullName);
-        assertEquals(new DeleteCommand(personToDelete.getName()), command);
+                DeleteCommand.COMMAND_WORD + " " + personToDelete.getNric());
+        assertEquals(new DeleteCommand(personToDelete.getNric()), command);
     }
 
     @Test
