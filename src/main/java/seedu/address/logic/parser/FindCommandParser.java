@@ -11,11 +11,12 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.JobCodeContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.FullNameMatchesPredicate;
+import seedu.address.model.person.JobCodePredicate;
 import seedu.address.model.person.NameEmailPredicate;
 import seedu.address.model.person.NamePhonePredicate;
-import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.person.TagPredicate;
+
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -49,16 +50,16 @@ public class FindCommandParser implements Parser<FindCommand> {
             return new FindCommand(new NameEmailPredicate(name, email));
         } else if (argMultimap.getValue(PREFIX_JOBCODE).isPresent()) {
             // Job Code search
-            String jobCode = argMultimap.getValue(PREFIX_JOBCODE).get();
-            return new FindCommand(new JobCodeContainsKeywordsPredicate(Arrays.asList(jobCode)));
+            String jobCode = ParserUtil.parseJobCode(argMultimap.getValue(PREFIX_JOBCODE).get()).value;
+            return new FindCommand(new JobCodePredicate(jobCode));
         } else if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
             // Tag search
             String tag = argMultimap.getValue(PREFIX_TAG).get();
-            return new FindCommand(new TagContainsKeywordsPredicate(Arrays.asList(tag)));
+            return new FindCommand(new TagPredicate(Arrays.asList(tag)));
         } else if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             // Name search
             String name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).fullName;
-            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(name)));
+            return new FindCommand(new FullNameMatchesPredicate(name));
         } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
