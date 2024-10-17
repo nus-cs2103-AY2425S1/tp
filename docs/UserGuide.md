@@ -102,8 +102,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TELEGRAM_USERNAM
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When adding roles, only the following are valid roles: attendee, sponsor, vendor, volunteer
-* You can remove the person’s telegram username by typing `t/` without 
-    specifying any telegram username after it.
 * You can remove all the person’s roles by typing `r/` without
     specifying any role after it.
 
