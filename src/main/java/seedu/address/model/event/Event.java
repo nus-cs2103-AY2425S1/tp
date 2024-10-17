@@ -53,5 +53,4 @@ public class Event {
     public int hashCode() {
         return value.hashCode();
     }
-
 }
