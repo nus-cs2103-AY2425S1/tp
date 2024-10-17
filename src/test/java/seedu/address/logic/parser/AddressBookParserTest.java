@@ -114,15 +114,15 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addEmergencyContactName() throws Exception {
 
-        final String eCName = "Jane Doe";
+        final String ecName = "Jane Doe";
 
         AddEmergencyContactNameCommand expected = new AddEmergencyContactNameCommand(
-                INDEX_FIRST_PERSON, new EmergencyContactName(eCName));
+                INDEX_FIRST_PERSON, new EmergencyContactName(ecName));
 
         AddEmergencyContactNameCommand command = (AddEmergencyContactNameCommand) parser.parseCommand(
                 AddEmergencyContactNameCommand.COMMAND_WORD + " "
                         + INDEX_FIRST_PERSON.getOneBased() + " "
-                        + PREFIX_ECNAME + eCName);
+                        + PREFIX_ECNAME + ecName);
 
         assertEquals(expected, command);
     }

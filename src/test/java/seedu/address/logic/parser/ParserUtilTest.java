@@ -248,9 +248,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseEmergencyContactName_validValueWithWhitespace_returnsTrimmedEcName() throws Exception {
-        String eCNameWithWhitespace = WHITESPACE + VALID_EMERGENCY_CONTACT_NAME + WHITESPACE;
+        String ecNameWithWhitespace = WHITESPACE + VALID_EMERGENCY_CONTACT_NAME + WHITESPACE;
         EmergencyContactName expectedEcName = new EmergencyContactName(VALID_EMERGENCY_CONTACT_NAME);
-        assertEquals(expectedEcName, ParserUtil.parseEmergencyContactName(eCNameWithWhitespace));
+        assertEquals(expectedEcName, ParserUtil.parseEmergencyContactName(ecNameWithWhitespace));
     }
 
     @Test

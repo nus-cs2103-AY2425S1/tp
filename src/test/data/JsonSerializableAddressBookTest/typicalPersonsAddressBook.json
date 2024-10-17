@@ -8,7 +8,6 @@
     "register number" : "3",
     "sex": "F",
     "class": "1A",
-    "emergency contact": "",
     "emergency contact name": "",
     "tags" : [ "friends" ]
   }, {
@@ -19,7 +18,6 @@
     "register number" : "4",
     "sex": "M",
     "class": "2B",
-    "emergency contact": "",
     "emergency contact name": "",
     "tags" : [ "owesMoney", "friends" ]
   }, {
@@ -30,7 +28,6 @@
     "register number" : "5",
     "sex": "M",
     "class": "3C",
-    "emergency contact": "",
     "emergency contact name": "",
     "tags" : [ ]
   }, {
@@ -41,7 +38,6 @@
     "register number" : "6",
     "sex": "M",
     "class": "4D",
-    "emergency contact": "",
     "emergency contact name": "",
     "tags" : [ "friends" ]
   }, {
@@ -52,7 +48,6 @@
     "register number" : "7",
     "sex": "F",
     "class": "3E",
-    "emergency contact": "",
     "emergency contact name": "",
     "tags" : [ ]
   }, {
@@ -63,7 +58,6 @@
     "register number" : "8",
     "sex": "F",
     "class": "2A",
-    "emergency contact": "",
     "emergency contact name": "",
     "tags" : [ ]
   }, {
@@ -74,7 +68,6 @@
     "register number" : "9",
     "sex": "M",
     "class": "1A",
-    "emergency contact": "",
     "emergency contact name": "",
     "tags" : [ ]
   } ]

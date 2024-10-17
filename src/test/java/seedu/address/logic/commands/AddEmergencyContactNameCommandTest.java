@@ -24,14 +24,12 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddEmergencyContactNameCommandTest {
-
-    private static final String ECNAME_stub = "Jack Hardy";
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_addRemarkUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withEmergencyContactName(ECNAME_stub).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withEmergencyContactName(VALID_ECNAME_AMY).build();
         AddEmergencyContactNameCommand ecNameCommand = new AddEmergencyContactNameCommand(INDEX_FIRST_PERSON,
                 new EmergencyContactName(editedPerson.getEmergencyContactName().fullName));
         String expectedMessage = String.format(AddEmergencyContactNameCommand.MESSAGE_ADD_ECNAME_SUCCESS,
@@ -57,7 +55,7 @@ public class AddEmergencyContactNameCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList()
-                .get(INDEX_FIRST_PERSON.getZeroBased())).withEmergencyContactName(ECNAME_stub).build();
+                .get(INDEX_FIRST_PERSON.getZeroBased())).withEmergencyContactName(VALID_ECNAME_AMY).build();
         AddEmergencyContactNameCommand ecNameCommand = new AddEmergencyContactNameCommand(INDEX_FIRST_PERSON,
                 new EmergencyContactName(editedPerson.getEmergencyContactName().fullName));
         String expectedMessage = String.format(AddEmergencyContactNameCommand.MESSAGE_ADD_ECNAME_SUCCESS,

@@ -30,17 +30,17 @@ public class AddEmergencyContactNameCommand extends Command {
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, ECName: %2$s";
 
     private final Index index;
-    private final EmergencyContactName emergencyContactName;
+    private final EmergencyContactName ecName;
 
     /**
      * @param index of the student in the filtered list
-     * @param eCName to be added
+     * @param ecName to be added
      */
-    public AddEmergencyContactNameCommand(Index index, EmergencyContactName eCName) {
-        requireAllNonNull(index, eCName);
+    public AddEmergencyContactNameCommand(Index index, EmergencyContactName ecName) {
+        requireAllNonNull(index, ecName);
 
         this.index = index;
-        this.emergencyContactName = eCName;
+        this.ecName = ecName;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class AddEmergencyContactNameCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getRegisterNumber(), personToEdit.getSex(),
-                personToEdit.getStudentClass(), emergencyContactName, personToEdit.getTags());
+                personToEdit.getStudentClass(), ecName, personToEdit.getTags());
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));
@@ -66,7 +66,7 @@ public class AddEmergencyContactNameCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !emergencyContactName.fullName.isEmpty() ? MESSAGE_ADD_ECNAME_SUCCESS
+        String message = !ecName.fullName.isEmpty() ? MESSAGE_ADD_ECNAME_SUCCESS
                 : MESSAGE_DELETE_ECNAME_SUCCESS;
         return String.format(message, personToEdit);
     }
@@ -83,7 +83,7 @@ public class AddEmergencyContactNameCommand extends Command {
 
         AddEmergencyContactNameCommand e = (AddEmergencyContactNameCommand) other;
         return index.equals(e.index)
-                && emergencyContactName.equals(e.emergencyContactName);
+                && ecName.equals(e.ecName);
     }
 }
 

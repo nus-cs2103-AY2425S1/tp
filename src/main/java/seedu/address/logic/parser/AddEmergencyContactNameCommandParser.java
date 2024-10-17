@@ -29,10 +29,10 @@ public class AddEmergencyContactNameCommandParser implements Parser<AddEmergency
         }
 
         Index index;
-        EmergencyContactName eCName;
+        EmergencyContactName ecName;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            eCName = (EmergencyContactName) ParserUtil.parseEmergencyContactName(
+            ecName = (EmergencyContactName) ParserUtil.parseEmergencyContactName(
                     argMultimap.getValue(PREFIX_ECNAME).get());
 
         } catch (IllegalValueException ive) {
@@ -40,7 +40,7 @@ public class AddEmergencyContactNameCommandParser implements Parser<AddEmergency
                     AddEmergencyContactNameCommand.MESSAGE_USAGE), ive);
         }
 
-        return new AddEmergencyContactNameCommand(index, eCName);
+        return new AddEmergencyContactNameCommand(index, ecName);
     }
 
 }

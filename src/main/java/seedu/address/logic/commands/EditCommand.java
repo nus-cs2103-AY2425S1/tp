@@ -114,11 +114,11 @@ public class EditCommand extends Command {
         Sex updatedSex = editPersonDescriptor.getSex().orElse(personToEdit.getSex());
         StudentClass updatedStudentClass = editPersonDescriptor.getStudentClass()
                 .orElse(personToEdit.getStudentClass());
-        EmergencyContactName ecName = personToEdit.getEmergencyContactName();
+        EmergencyContactName updatedEcName = personToEdit.getEmergencyContactName();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRegisterNumber, updatedSex,
-                updatedStudentClass, ecName, updatedTags);
+                updatedStudentClass, updatedEcName, updatedTags);
     }
 
     @Override
