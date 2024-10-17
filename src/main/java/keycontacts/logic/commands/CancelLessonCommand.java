@@ -32,7 +32,7 @@ public class CancelLessonCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Cancelled lesson at %1$s and %2$s for student: %3$s";
     public static final String MESSAGE_LESSON_NOT_FOUND = "No lesson with the "
             + "specified parameters found for student %1$s.\n"
-            + "Check if you inputted the right date, timing and student!";
+            + "Check if you inputted the right index, date and timing!";
     private final Date date;
     private final Time startTime;
     private final Index index;
