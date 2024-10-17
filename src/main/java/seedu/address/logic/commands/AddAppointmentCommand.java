@@ -38,6 +38,9 @@ public class AddAppointmentCommand extends Command {
             + PREFIX_REMARK + "third physiotherapy session";
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Successfully added appointment to a patient";
+    public static final String MESSAGE_PATIENT_BUSY = "The patient already has another appointment!";
+    public static final String MESSAGE_DOCTOR_BUSY = "The doctor already has another appointment!";
+    public static final String MESSAGE_DUPLICATE_APPOINTMENT = "The appointment already exists!";
     private final Id patientId;
     private final Id doctorId;
     private final LocalDateTime appointmentTime;
@@ -58,10 +61,17 @@ public class AddAppointmentCommand extends Command {
         ObservableList<Person> allPersons = model.getFilteredPersonList();
         Patient patientToAddAppointment = model.getFilteredPatientById(allPersons, patientId);
         Doctor doctorToAddAppointment = model.getFilteredDoctorById(allPersons, doctorId);
-        patientToAddAppointment.addAppointment(appointmentTime, patientToAddAppointment.getId(),
+        boolean isPatientFree = patientToAddAppointment.addAppointment(appointmentTime, patientToAddAppointment.getId(),
                 doctorToAddAppointment.getId(), remarks);
-        doctorToAddAppointment.addAppointment(appointmentTime, patientToAddAppointment.getId(),
+        boolean isDoctorFree = doctorToAddAppointment.addAppointment(appointmentTime, patientToAddAppointment.getId(),
                 doctorToAddAppointment.getId(), remarks);
+        if (!isPatientFree && !isDoctorFree) {
+            throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
+        } else if (!isPatientFree) {
+            throw new CommandException(MESSAGE_PATIENT_BUSY);
+        } else if (!isDoctorFree) {
+            throw new CommandException(MESSAGE_DOCTOR_BUSY);
+        }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_ADD_APPOINTMENT_SUCCESS);
     }
