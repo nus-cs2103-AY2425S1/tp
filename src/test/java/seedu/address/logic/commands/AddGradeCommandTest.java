@@ -8,7 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Grade;
 
 public class AddGradeCommandTest {
-    private static final Index VALID_INDEX = Index.fromOneBased(15);
+    private static final Index VALID_INDEX = Index.fromOneBased(16);
     private static final Grade VALID_GRADE = new Grade("Midterm", 95F, 30F);
 
     @Test

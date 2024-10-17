@@ -9,13 +9,13 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Grade;
 
 public class JsonAdaptedGradeTest {
-    private static final Grade VALID_GRADE = new Grade("Midterm", 75F, 30F);
+    private static final Grade VALID_GRADE = new Grade("Midterm", 76F, 30F);
     private static final String INVALID_NAME = "Midterm@1";
     private static final float INVALID_SCORE = -1F;
     private static final float INVALID_WEIGHTAGE = 101F;
 
     private static final String VALID_NAME = "Midterm";
-    private static final float VALID_SCORE = 75F;
+    private static final float VALID_SCORE = 76F;
     private static final float VALID_WEIGHTAGE = 30F;
 
 

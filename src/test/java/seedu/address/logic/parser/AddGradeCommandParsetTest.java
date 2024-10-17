@@ -36,7 +36,7 @@ public class AddGradeCommandParsetTest {
 
         // Wrong arguments structure
         assertParseFailure(parser, "Adam Midterm 95.6 30", errorMessage);
-        assertParseFailure(parser, "15 Midterm A+ 30", errorMessage);
+        assertParseFailure(parser, "15 Midterm A 30", errorMessage);
         assertParseFailure(parser, "15 Midterm 95.6 FM", errorMessage);
 
         // Too many arguments

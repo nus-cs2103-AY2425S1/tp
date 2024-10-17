@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 
 public class DeleteGradeCommandTest {
-    private static final Index VALID_INDEX = Index.fromOneBased(15);
+    private static final Index VALID_INDEX = Index.fromOneBased(16);
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {

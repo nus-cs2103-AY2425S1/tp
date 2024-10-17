@@ -17,10 +17,10 @@ public class DeleteGradeCommandParserTest {
         DeleteGradeCommand command = new DeleteGradeCommand(Index.fromOneBased(15), Index.fromOneBased(17));
 
         // Trailing whitespaces
-        assertParseSuccess(parser, "15 17  ", command);
+        assertParseSuccess(parser, "15 17 ", command);
 
         // Leading whitespaces
-        assertParseSuccess(parser, "  15 17", command);
+        assertParseSuccess(parser, " 15 17", command);
     }
 
     @Test
