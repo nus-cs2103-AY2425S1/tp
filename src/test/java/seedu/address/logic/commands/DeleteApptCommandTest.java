@@ -74,7 +74,7 @@ public class DeleteApptCommandTest {
                                                    .build();
         expectedModel.setPerson(targetPerson, expectedPerson);
         String expectedMessage = String.format(DeleteApptCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS_2S,
-                                               nric.value, apptToDelete.toString());
+                                               apptToDelete.toString(), nric.value);
         assertCommandSuccess(delApptCommand, model, expectedMessage, expectedModel);
     }
 

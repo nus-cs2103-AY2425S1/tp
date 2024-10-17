@@ -50,7 +50,7 @@ public class DeleteApptCommand extends Command {
             + PREFIX_DATE + "2024-10-24 "
             + PREFIX_TIMEPERIOD + "1235-1400";
 
-    public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS_2S = "Deleted Appointment %s for Patient %s";
+    public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS_2S = "Deleted Appointment \"%s\" for Patient %s";
     public static final String MESSAGE_PERSON_APPT_NOT_FOUND = "There is no appointment with the given date and time "
                                                                + "period for this person!";
     private static final Logger logger = LogsCenter.getLogger(DeleteApptCommand.class);
@@ -86,8 +86,8 @@ public class DeleteApptCommand extends Command {
                     + "appointment: " + targetAppt);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS_2S,
-                                               personToEdit.getNric().value,
-                                               apptToDelete));
+                                               apptToDelete,
+                                               personToEdit.getNric().value));
     }
 
     private Person createEditedPerson(Person personToEdit, Appointment apptToDelete) {
