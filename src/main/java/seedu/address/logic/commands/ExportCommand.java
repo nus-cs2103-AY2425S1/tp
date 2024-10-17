@@ -19,7 +19,7 @@ public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
     public static final String MESSAGE_USAGE = "Contacts have been successfully exported";
     public static final String COLUMN_HEADERS = "Name,Phone Number,Email Address,Address,Tags";
-    public static final String PATH = "./data/addressbook.csv";
+    public static final String PATH = "./data/ExportedContacts.csv";
 
     @Override
     public CommandResult execute(Model model) {

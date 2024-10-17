@@ -180,4 +180,13 @@ public class ParserUtil {
         }
         return new EventDuration(start, end);
     }
+
+    public static String parseFileName(String fileName) throws ParseException {
+        requireNonNull(fileName);
+        String trimmedFileName = fileName.trim();
+        if (fileName.isEmpty()) {
+            throw new ParseException(null);
+        }
+        return trimmedFileName;
+    }
 }

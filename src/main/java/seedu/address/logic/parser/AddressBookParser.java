@@ -88,7 +88,7 @@ public class AddressBookParser {
             return new ExportCommand();
 
         case ImportCommand.COMMAND_WORD:
-            return new ImportCommand();
+            return new ImportCommandParser().parse(arguments);
 
         case AddEventCommand.COMMAND_WORD:
             return new AddEventCommandParser().parse(arguments);

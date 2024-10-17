@@ -122,10 +122,18 @@ public class Person {
      *         name, phone, email, address, and tags.
      */
     public String toCsvFormat() {
+        StringBuilder tagsInCsvFormat = new StringBuilder();
+        for (Tag tag : tags) {
+            tagsInCsvFormat.append(tag.tagName).append(",");
+        }
+        if (tagsInCsvFormat.length() > 0) {
+            tagsInCsvFormat.deleteCharAt(tagsInCsvFormat.length() - 1);
+        }
+
         return "\"" + name + "\","
                 + "\"" + phone + "\","
                 + "\"" + email + "\","
                 + "\"" + address + "\","
-                + "\"" + tags + "\"";
+                + "\"" + tagsInCsvFormat + "\"";
     }
 }
