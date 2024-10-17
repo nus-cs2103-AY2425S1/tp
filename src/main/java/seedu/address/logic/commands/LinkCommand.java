@@ -29,8 +29,6 @@ public class LinkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_CONCERT + "1";
 
     public static final String MESSAGE_LINK_PERSON_SUCCESS = "Linked Person: %1$s to Concert: %2$s";
-    public static final String MESSAGE_DUPLICATE_CONCERTCONTACT =
-            "This ConcertContact already exists in the address book";
 
     private final Index indexP;
     private final Index indexC;
@@ -66,11 +64,6 @@ public class LinkCommand extends Command {
 
         ConcertContact linkedPerson = new ConcertContact(personToLink, concert);
 
-        if (model.hasConcertContact(linkedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_CONCERTCONTACT);
-        }
-
-        model.addConcertContact(linkedPerson);
         return new CommandResult(String.format(MESSAGE_LINK_PERSON_SUCCESS, Messages.format(personToLink),
                 Messages.format(concert)));
     }
