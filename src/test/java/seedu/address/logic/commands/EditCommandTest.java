@@ -24,10 +24,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.CampusConnect;
-
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -141,7 +139,6 @@ public class EditCommandTest {
         Person personInList = model.getCampusConnect().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(personInList).build());
-      
         assertCommandFailureWithoutModel(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
 
     }
