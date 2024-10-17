@@ -131,19 +131,38 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Locating persons by tag: `findtag`
+
+Finds persons whose tags contain any of the given keywords.
+
+Format: `findtag KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `findtag friends` returns `Alex Yeoh` and `Bernice Yu`
+* `findtag friends colleagues` returns `Alex Yeoh`, `Bernice Yu` and `Roy Balakrishnan`<br>
+  ![result for 'find alex david'](images/findTagFriendsColleagues.png)
+
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified people from the address book.
 
-Format: `delete INDEX`
+Format: `delete INDEX [MORE_INDICES]`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person at the specified `INDICES`.
+* The indices refer to the index numbers shown in the displayed person list.
+* The indices **must be positive integer** 1, 2, 3, …​
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2 3 4 5` deletes the 2nd, 3rd, 4th and 5th people in the address book.
 
 ### Clearing all entries : `clear`
 
@@ -201,5 +220,6 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**FindTag**| `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find math science`
 **List**   | `list`
 **Help**   | `help`
