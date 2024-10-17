@@ -17,15 +17,15 @@ public class DeleteStudentCommandParser implements Parser<DeleteStudentCommand> 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentCommand.MESSAGE_USAGE));
         }
 
-        Name name;
+        Name nameToDelete;
 
         try {
-            name = ParserUtil.parseName(trimmedArgs);
+            nameToDelete = ParserUtil.parseName(trimmedArgs);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentCommand.MESSAGE_USAGE), pe);
         }
 
-        return new DeleteStudentCommand(name);
+        return new DeleteStudentCommand(nameToDelete);
     }
 }
