@@ -1,9 +1,11 @@
 package seedu.address.logic.commands;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import seedu.address.model.Model;
@@ -17,40 +19,54 @@ import seedu.address.model.person.Person;
  */
 public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
-    public static final String MESSAGE_USAGE = "Contacts have been successfully exported";
+    public static final String MESSAGE_SUCCESS = "Contacts have been successfully exported";
     public static final String COLUMN_HEADERS = "Name,Phone Number,Email Address,Address,Tags";
-    public static final String PATH = "./data/addressbook.csv";
+    public static final String DEFAULT_DIRECTORY = "./data";
+    public static final String FILE_NAME = "ExportedContacts.csv";
+
+    // Use Paths to handle file paths across different environments
+    public static final Path FILE_PATH = Paths.get(DEFAULT_DIRECTORY, FILE_NAME);
 
     @Override
     public CommandResult execute(Model model) {
         List<Person> personList = model.getPersonList();
         try {
-            File file = createCsvFile();
-            exportContacts(file, personList);
+            createDirectoryIfNotExists();
+            exportContacts(FILE_PATH, personList);
         } catch (IOException e) {
+            // Log a meaningful message or throw the exception to handle it later
+            System.err.println("Error exporting contacts: " + e.getMessage());
             e.printStackTrace();
         }
-        return new CommandResult(MESSAGE_USAGE);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
-    private File createCsvFile() throws IOException {
-        File file = new File(PATH);
-        if (!file.exists()) {
-            file.createNewFile();
+    /**
+     * Ensures the directory for the export file exists. If it doesn't, it is created.
+     */
+    private void createDirectoryIfNotExists() throws IOException {
+        Path directoryPath = FILE_PATH.getParent();
+        if (Files.notExists(directoryPath)) {
+            Files.createDirectories(directoryPath); // Create directory if it doesn't exist
         }
-        return file;
     }
 
-    private void exportContacts(File file, List<Person> personList) throws IOException {
-        FileWriter fw = new FileWriter(file, false);
-        BufferedWriter bw = new BufferedWriter(fw);
-        bw.write(COLUMN_HEADERS);
-        bw.newLine();
-        for (Person person : personList) {
-            bw.write(person.toCsvFormat());
+    /**
+     * Exports the list of persons to the specified CSV file.
+     *
+     * @param filePath  The path to the CSV file.
+     * @param personList The list of persons to export.
+     * @throws IOException If an I/O error occurs.
+     */
+    private void exportContacts(Path filePath, List<Person> personList) throws IOException {
+        // Use try-with-resources to automatically close the writer
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath.toFile(), false))) {
+            bw.write(COLUMN_HEADERS);
             bw.newLine();
+            for (Person person : personList) {
+                bw.write(person.toCsvFormat());
+                bw.newLine();
+            }
         }
-        bw.close();
-        fw.close();
     }
 }
