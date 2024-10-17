@@ -28,7 +28,7 @@ public class ViewStudentCommand extends Command {
     private final Name name;
 
     /**
-     * Creates a ViewCommand to view students with the specified {@code Name}.
+     * Creates a ViewStudentCommand to view students with the specified {@code Name}.
      * @param name Name of student to view.
      */
     public ViewStudentCommand(Name name) {
@@ -61,8 +61,8 @@ public class ViewStudentCommand extends Command {
             return false;
         }
 
-        ViewStudentCommand otherViewCommand = (ViewStudentCommand) other;
-        return name.equals(otherViewCommand.name);
+        ViewStudentCommand otherViewStudentCommand = (ViewStudentCommand) other;
+        return name.equals(otherViewStudentCommand.name);
     }
 
     @Override
