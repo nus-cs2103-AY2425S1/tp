@@ -52,7 +52,8 @@ public class DeleteAppointmentCommand extends Command {
         ObservableList<Person> allPersons = model.getFilteredPersonList();
         Patient patientToAddAppointment = model.getFilteredPatientById(allPersons, patientId);
         Doctor doctorToAddAppointment = model.getFilteredDoctorById(allPersons, doctorId);
-        boolean isDeleteSuccessful = patientToAddAppointment.deleteAppointment(appointmentTime, patientToAddAppointment.getId(),
+        boolean isDeleteSuccessful = patientToAddAppointment.deleteAppointment(appointmentTime,
+                patientToAddAppointment.getId(),
                 doctorToAddAppointment.getId());
         if (!isDeleteSuccessful) {
             throw new CommandException(MESSAGE_DELETE_APPOINTMENT_FAIL);
