@@ -14,6 +14,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -105,7 +106,43 @@ public class ParserUtilTest {
 
     @Test
     public void parseModule_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parsePhone(INVALID_MODULE));
+        assertThrows(ParseException.class, () -> ParserUtil.parseModule(INVALID_MODULE));
+    }
+    @Test
+    public void parseModule_validValueWithoutWhitespace_returnsModule() throws Exception {
+        Module expectedModule = new Module(VALID_MODULE);
+        assertEquals(expectedModule, ParserUtil.parseModule(VALID_MODULE));
+    }
+
+    @Test
+    public void parseModule_validValueWithWhitespace_returnsTrimmedModule() throws Exception {
+        String moduleWithWhitespace = WHITESPACE + VALID_MODULE + WHITESPACE;
+        Module expectedModule = new Module(VALID_MODULE);
+        assertEquals(expectedModule, ParserUtil.parseModule(moduleWithWhitespace));
+    }
+
+    @Test
+    public void parseModules_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseModules(null));
+    }
+
+    @Test
+    public void parseModules_collectionWithInvalidModules_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseModules(Arrays.asList(VALID_MODULE, INVALID_MODULE)));
+    }
+
+    @Test
+    public void parseModules_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseModules(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseModules_collectionWithValidModules_returnsModuleSet() throws Exception {
+        Set<Module> actualModuleSet = ParserUtil.parseModules(Arrays.asList(VALID_MODULE, VALID_MODULE));
+        Set<Module> expectedModuleSet = new HashSet<>(Arrays.asList(new Module(VALID_MODULE),
+                new Module(VALID_MODULE)));
+
+        assertEquals(expectedModuleSet, actualModuleSet);
     }
 
     @Test
