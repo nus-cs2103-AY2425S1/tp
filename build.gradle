@@ -75,6 +75,7 @@ jacocoTestReport {
             fileTree(dir: it, exclude: ['**/*.jar'])
         })
     }
+    executionData(fileTree(dir: "$buildDir/jacoco", includes: ["**/*.exec"]))
     reports {
         html.required = true
         xml.required = true

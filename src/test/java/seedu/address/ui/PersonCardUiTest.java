@@ -4,15 +4,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.TimeoutException;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.util.WaitForAsyncUtils;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
+import seedu.address.MainApp;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
@@ -28,6 +36,21 @@ public class PersonCardUiTest extends ApplicationTest {
 
     private PersonCard personCard;
     private Person samplePerson;
+
+    @BeforeEach
+    public void setUp(@TempDir Path tempDir) throws TimeoutException {
+        FxToolkit.registerPrimaryStage();
+        FxToolkit.setupApplication(() ->
+            new MainApp(tempDir.resolve("ui_data.json"))
+        );
+        FxToolkit.showStage();
+        WaitForAsyncUtils.waitForFxEvents(20); // Wait for JavaFX to complete rendering
+    }
+
+    @AfterEach
+    public void stopApp() throws TimeoutException {
+        FxToolkit.cleanupStages(); // Clean up after tests
+    }
 
     @Override
     public void start(Stage stage) {
