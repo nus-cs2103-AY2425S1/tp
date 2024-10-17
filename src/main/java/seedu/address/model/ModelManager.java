@@ -165,13 +165,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setMeetUp(MeetUp target, MeetUp edittedMeetUp) {
-        return;
+    public void setMeetUp(MeetUp target, MeetUp editedMeetUp) {
+        requireAllNonNull(target, editedMeetUp);
+
+        meetUpList.setMeetUp(target, editedMeetUp);
     }
 
     @Override
     public void deleteMeetUp(MeetUp target) {
-        return;
+        meetUpList.removeMeetUp(target);
     }
 
     @Override
