@@ -113,15 +113,15 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by name or company: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names or companies contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* The name and company are searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
@@ -130,6 +130,8 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find alex creative` returns `Alex Yeoh`, `Charlotte Oliveiro`, whose company matches `creative`<br>
+  ![result for 'find alex creative'](images/findAlexCreativeResult.png)
 
 ### Deleting a person : `delete`
 
@@ -172,19 +174,46 @@ Examples:
 * `list` followed by `listt 1` lists transactions for the 1st person in the address book.
 * `find Betsy` followed by `listt 1` lists the transactions for the 1st person in the results of the `find` command.
 
+
 ### Deleting Transactions for a specified person: `deletet`
 
 Format: `deletet INDEX`
 
-* Deletes the transactions at the specified `INDEX` for the first person on the current list.
+* Deletes the transactions at the specified `INDEX`.
 * The index refers to the index number of the transaction.
 * This command is intended to be used in conjunction with listt
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `listt 1` followed by `deletet 1` deletes the first transaction for the 1st person in the address book.
-* `find Betsy` followed by `deletet 1` deletes the first transaction for the 1st person 
-in the results of the `find` command.
+* `listt 1` followed by `deletet 1` loads the transaction list for the first person, then deletes the first transaction.
+* `findt 1 flowers` followed by `deletet 1` loads the list of transactions containing 'flowers' for the first person, then deletes the first transaction
+in the results of the `findt` command.
+
+### Finding transactions by description: `findt`
+
+Finds transactions of a given person whose descriptions contain any of the given keywords.
+
+This command should only be used when the **person** list is displayed.
+
+Format: `findt INDEX KEYWORD [MORE_KEYWORDS]`
+
+`INDEX`:
+* Only search for transactions of the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index must be a positive integer 1, 2, 3, …​
+
+`KEYWORD`:
+* The search is case-insensitive. e.g. `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the description is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `findt 1 materials invest` returns `Invest` and `Buy raw materials`.
+![result for 'findt 1 materials invest'](images/findt.png)
+
 
 ### Clearing all entries : `clear`
 
@@ -241,7 +270,7 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake Microsoft`
 **List**   | `list`
 **Add Transaction** | `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE` <br> e.g., `addt 1 d/buy raw materials amt/-100 o/Company ABC dt/16-10-2024` 
 **List Transactions** | `listt INDEX`<br> e.g., `listt 2`

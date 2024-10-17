@@ -25,7 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private ObservableList<Transaction> transactions;
+    private FilteredList<Transaction> filteredTransactions;
     private boolean isViewTransactions = false;
 
     /**
@@ -39,7 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        transactions = FXCollections.observableList(List.of());
+        filteredTransactions = new FilteredList<>(FXCollections.observableArrayList());
     }
 
     public ModelManager() {
@@ -135,6 +135,36 @@ public class ModelManager implements Model {
         setViewTransactions(false);
     }
 
+    //=========== Transaction =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Transaction} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Transaction> getFilteredTransactionList() {
+        return filteredTransactions;
+    }
+
+    @Override
+    public void updateTransactionListPredicate(Predicate<Transaction> predicate) {
+        requireNonNull(predicate);
+        filteredTransactions.setPredicate(predicate);
+    }
+
+    @Override
+    public void setViewTransactions(boolean viewTransactions) {
+        this.isViewTransactions = viewTransactions;
+    }
+
+    @Override
+    public boolean getViewTransactions() {
+        return this.isViewTransactions;
+    }
+    @Override
+    public void updateTransactionList(List<Transaction> transactions) {
+        this.filteredTransactions = new FilteredList<>(FXCollections.observableList(transactions));
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -150,26 +180,5 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
-    }
-
-    //=========== Transaction Related Methods =============================================================
-    @Override
-    public void setViewTransactions(boolean viewTransactions) {
-        this.isViewTransactions = viewTransactions;
-    }
-
-    @Override
-    public boolean getViewTransactions() {
-        return this.isViewTransactions;
-    }
-
-    @Override
-    public ObservableList<Transaction> getTransactionList() {
-        return this.transactions;
-    }
-
-    @Override
-    public void updateTransactionList(List<Transaction> transactions) {
-        this.transactions = FXCollections.observableList(transactions);
     }
 }
