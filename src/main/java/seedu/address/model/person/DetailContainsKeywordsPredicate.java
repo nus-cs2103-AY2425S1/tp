@@ -20,10 +20,9 @@ public class DetailContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         Boolean nameMatched = keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
-
         Boolean tagMatched = person.getTags().stream()
                 .anyMatch(tag -> keywords.stream()
-                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)));
 
         return nameMatched || tagMatched;
     }
@@ -35,12 +34,11 @@ public class DetailContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DetailContainsKeywordsPredicate)) {
+        if (!(other instanceof DetailContainsKeywordsPredicate otherPredicate)) {
             return false;
         }
 
-        DetailContainsKeywordsPredicate otherDetailContainsKeywordsPredicate = (DetailContainsKeywordsPredicate) other;
-        return keywords.equals(otherDetailContainsKeywordsPredicate.keywords);
+        return keywords.equals(otherPredicate.keywords);
     }
 
     @Override
