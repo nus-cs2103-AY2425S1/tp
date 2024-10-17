@@ -53,7 +53,7 @@ public class DeleteVendorCommand extends DeleteCommand {
         try {
             model.deleteVendor(vendorToDelete);
         } catch (AssociationDeleteException ae) {
-            return new CommandResult(String.format(MESSAGE_DELETE_VENDOR_ASSOCIATED_FAILURE,
+            throw new CommandException(String.format(MESSAGE_DELETE_VENDOR_ASSOCIATED_FAILURE,
                 Messages.format(vendorToDelete)));
         }
 

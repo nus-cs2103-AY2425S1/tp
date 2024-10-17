@@ -53,7 +53,7 @@ public class DeleteEventCommand extends DeleteCommand {
         try {
             model.deleteEvent(eventToDelete);
         } catch (AssociationDeleteException ae) {
-            return new CommandResult(String.format(MESSAGE_DELETE_EVENT_ASSOCIATED_FAILURE,
+            throw new CommandException(String.format(MESSAGE_DELETE_EVENT_ASSOCIATED_FAILURE,
                 Messages.format(eventToDelete)));
         }
 
