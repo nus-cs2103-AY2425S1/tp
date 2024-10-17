@@ -1,7 +1,7 @@
 package seedu.ddd.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.ddd.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.ddd.logic.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
 //import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_CLIENT;
 //import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
@@ -41,7 +41,8 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredContactList(predicate);
-        return new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredContactList().size()));
+        return new CommandResult(String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW,
+                model.getFilteredContactList().size()));
     }
     @Override
     public boolean equals(Object other) {

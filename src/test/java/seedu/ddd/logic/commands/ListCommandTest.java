@@ -3,7 +3,7 @@ package seedu.ddd.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ddd.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.ddd.logic.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
 import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ddd.testutil.TypicalContacts.CARL;
 import static seedu.ddd.testutil.TypicalContacts.ELLE;
@@ -42,7 +42,7 @@ public class ListCommandTest {
     public void execute_listIsNotFiltered_showsSameList() {
         int size = model.getFilteredContactList().size();
         assertCommandSuccess(new ListCommand(Model.PREDICATE_SHOW_ALL_CONTACTS),
-                model, String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, size), expectedModel);
+                model, String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, size), expectedModel);
     }
 
     @Test
@@ -50,7 +50,15 @@ public class ListCommandTest {
         expectedModel.updateFilteredContactList(new ClientTypePredicate());
         int size = expectedModel.getFilteredContactList().size();
         assertCommandSuccess(new ListCommand(new ClientTypePredicate()),
-                model, String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, size), expectedModel);
+                model, String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, size), expectedModel);
+    }
+
+    @Test
+    public void executeFilterListByVendor() {
+        expectedModel.updateFilteredContactList(new VendorTypePredicate());
+        int size = expectedModel.getFilteredContactList().size();
+        assertCommandSuccess(new ListCommand(new VendorTypePredicate()),
+                model, String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, size), expectedModel);
     }
 
     @Test
@@ -80,8 +88,8 @@ public class ListCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+    public void execute_zeroKeywords_noContactFound() {
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         ListCommand command = new ListCommand(predicate);
         expectedModel.updateFilteredContactList(predicate);
@@ -89,8 +97,8 @@ public class ListCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredContactList());
     }
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+    public void execute_multipleKeywords_multipleContactsFound() {
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         ListCommand command = new ListCommand(predicate);
         expectedModel.updateFilteredContactList(predicate);

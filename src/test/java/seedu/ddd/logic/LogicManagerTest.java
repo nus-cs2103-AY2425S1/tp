@@ -1,8 +1,8 @@
 package seedu.ddd.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.ddd.logic.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX;
-import static seedu.ddd.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.ddd.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.ddd.testutil.Assert.assertThrows;
 
@@ -58,7 +58,7 @@ public class LogicManagerTest {
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
         int size = model.getFilteredContactList().size();
-        assertCommandSuccess(listCommand, String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, size), model);
+        assertCommandSuccess(listCommand, String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, size), model);
     }
 
     // @Test
