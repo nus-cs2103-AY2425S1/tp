@@ -53,4 +53,18 @@ public class DeleteTransactionCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, transactionToRemove.toString(),
                 Messages.format(selected)));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof DeleteTransactionCommand)) {
+            return false;
+        }
+
+        DeleteTransactionCommand otherCommand = (DeleteTransactionCommand) other;
+        return index.equals(otherCommand.index);
+    }
 }
