@@ -51,7 +51,7 @@ public class MarkSupplierCommand extends Command {
                 supplierToMark.getCompany(),
                 supplierToMark.getTags(),
                 supplierToMark.getProducts(),
-                supplierToMark.getStatus());
+                status);
 
         model.setPerson(supplierToMark, markedSupplier);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
