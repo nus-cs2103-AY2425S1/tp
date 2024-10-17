@@ -15,19 +15,12 @@ import seedu.address.model.person.Address;
 public class Delivery {
 
     private final ItemName itemName;
-
     private final Address address;
-
     private final Cost cost;
-
     private final Date date;
-
     private final Time time;
-
     private final Eta eta;
-
     private final Id id;
-
     private Status status;
 
     /**
@@ -132,6 +125,7 @@ public class Delivery {
                 .add("eta", eta)
                 .add("address", address)
                 .add("cost", cost)
+                .add("status", status)
                 .toString();
     }
 

@@ -1,5 +1,8 @@
 package seedu.address.model.delivery;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a delivery's id.
  * Guarantees: is valid as declared in {@link #isValidId(String)}
@@ -26,15 +29,18 @@ public class Id {
      * @param id A string with an integer
      */
     public Id(String id) {
+        requireNonNull(id);
+        checkArgument(isValidId(id), MESSAGE_CONSTRAINTS);
         this.value = id;
         int intId = Integer.parseInt(id);
-        count = Math.max(intId, count);
+        count = Math.max(intId, count) + 1;
     }
 
     /**
      * Returns true if a given string is a valid id.
      */
     public static boolean isValidId(String test) {
+        requireNonNull(test);
         try {
             int intId = Integer.parseInt(test);
         } catch (NumberFormatException e) {
