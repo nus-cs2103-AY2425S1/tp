@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.StackPane?>
 
 <StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <TextField fx:id="commandTextField" onAction="#handleCommandEntered" promptText="Enter command here..."/>
+  <stylesheets>
+    <URL value="@DarkTheme.css" />
+  </stylesheets>
+  <TextArea fx:id="commandTextArea" promptText="Enter command here..." wrapText="true" maxHeight="200"/>
 </StackPane>
 
