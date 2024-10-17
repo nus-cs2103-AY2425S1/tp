@@ -74,4 +74,14 @@ public class PredefinedAssignmentsData implements ReadOnlyPredefinedAssignmentsD
         }
         return null;
     }
+
+    /**
+     * Adds a predefined assignment to predefinedAssignmentArrayList.
+     * @param p The predefined assignment to add.
+     * @return The predefinedAssignmentArrayList.
+     */
+    public ArrayList<PredefinedAssignment> add(PredefinedAssignment p) {
+        predefinedAssignmentArrayList.add(p);
+        return predefinedAssignmentArrayList;
+    }
 }
