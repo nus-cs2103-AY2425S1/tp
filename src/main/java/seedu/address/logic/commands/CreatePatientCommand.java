@@ -15,7 +15,7 @@ import seedu.address.model.person.Patient;
  * Creates a new Patient profile
  */
 public class CreatePatientCommand extends Command {
-    public static final String COMMAND_WORD = "create patient";
+    public static final String COMMAND_WORD = "createPatient";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new patient. "
             + "Parameters: "
