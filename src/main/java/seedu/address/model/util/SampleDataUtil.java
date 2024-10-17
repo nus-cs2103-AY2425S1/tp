@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.event.Event;
@@ -53,13 +54,13 @@ public class SampleDataUtil {
      */
     public static Set<Role> getRoleSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Role::new)
+                .map(ParserUtil::parseRole)
                 .collect(Collectors.toSet());
     }
 
     public static Set<Event> getEventSet(String ... strings) {
         return Arrays.stream(strings)
-                .map(Event::new)
+                .map(ParserUtil::parseEvent)
                 .collect(Collectors.toSet());
     }
 

@@ -3,7 +3,7 @@ package seedu.address.commons.exceptions;
 /**
  * Signals that some given data does not fulfill some constraints.
  */
-public class IllegalValueException extends Exception {
+public class IllegalValueException extends RuntimeException {
     /**
      * @param message should contain relevant information on the failed constraint(s)
      */

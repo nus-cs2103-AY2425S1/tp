@@ -11,7 +11,7 @@ public class Role {
 
     public static final String MESSAGE_CONSTRAINTS = "Roles names should be alphanumeric with "
                                                      + "punctuation characters if necessary.";
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9- ]+$";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]+[a-zA-Z0-9 ,-]*$";
 
     private String roleName;
 

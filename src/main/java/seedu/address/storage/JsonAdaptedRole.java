@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.logic.parser.ParserUtil.parseRole;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -42,7 +44,7 @@ class JsonAdaptedRole {
         if (!Role.isValidRoleName(roleName)) {
             throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
         }
-        return new Role(roleName);
+        return parseRole(roleName);
     }
 
 }
