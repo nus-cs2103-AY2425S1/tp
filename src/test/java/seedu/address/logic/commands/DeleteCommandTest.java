@@ -101,6 +101,82 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void equals_differentPhone_returnsFalse() {
+        // Create two DeleteCommand objects with different phone values
+        DeleteCommand deleteCommand1 = new DeleteCommand(
+                Optional.of("Alice Pauline"),
+                Optional.of("94351253"),
+                Optional.of("alice@example.com")
+        );
+
+        DeleteCommand deleteCommand2 = new DeleteCommand(
+                Optional.of("Alice Pauline"),
+                Optional.of("98765432"),
+                Optional.of("alice@example.com")
+        );
+
+        // Assert that they are not equal
+        assertFalse(deleteCommand1.equals(deleteCommand2));
+    }
+
+    @Test
+    public void equals_differentEmail_returnsFalse() {
+        // Create two DeleteCommand objects with different email values
+        DeleteCommand deleteCommand1 = new DeleteCommand(
+                Optional.of("Alice Pauline"),
+                Optional.of("94351253"),
+                Optional.of("alice@example.com")
+        );
+
+        DeleteCommand deleteCommand2 = new DeleteCommand(
+                Optional.of("Alice Pauline"),
+                Optional.of("94351253"),
+                Optional.of("bob@example.com")
+        );
+
+        // Assert that they are not equal
+        assertFalse(deleteCommand1.equals(deleteCommand2));
+    }
+
+    @Test
+    public void equals_samePhoneAndEmail_returnsTrue() {
+        // Create two DeleteCommand objects with identical values
+        DeleteCommand deleteCommand1 = new DeleteCommand(
+                Optional.of("Alice Pauline"),
+                Optional.of("94351253"),
+                Optional.of("alice@example.com")
+        );
+
+        DeleteCommand deleteCommand2 = new DeleteCommand(
+                Optional.of("Alice Pauline"),
+                Optional.of("94351253"),
+                Optional.of("alice@example.com")
+        );
+
+        // Assert that they are equal
+        assertTrue(deleteCommand1.equals(deleteCommand2));
+    }
+
+    @Test
+    public void equals_bothPhoneAndEmailEmpty_returnsTrue() {
+        // Create two DeleteCommand objects with no phone and email
+        DeleteCommand deleteCommand1 = new DeleteCommand(
+                Optional.of("Alice Pauline"),
+                Optional.empty(),
+                Optional.empty()
+        );
+
+        DeleteCommand deleteCommand2 = new DeleteCommand(
+                Optional.of("Alice Pauline"),
+                Optional.empty(),
+                Optional.empty()
+        );
+
+        // Assert that they are equal
+        assertTrue(deleteCommand1.equals(deleteCommand2));
+    }
+
+    @Test
     public void execute_multipleMatchingPersons_throwsCommandException() {
         // Both ALICE and BENSON have names that match "Alice" (assuming case-insensitive match)
         DeleteCommand deleteCommand = new DeleteCommand(Optional.empty(), Optional.of("94351253"), Optional.empty());
