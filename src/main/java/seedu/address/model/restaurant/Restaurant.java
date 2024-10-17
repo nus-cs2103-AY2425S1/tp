@@ -25,6 +25,7 @@ public class Restaurant {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Price price;
+    private boolean isFavourite;
 
     /**
      * Every field must be present and not null.
@@ -39,6 +40,9 @@ public class Restaurant {
 
         // Price is set to 0.0 for now, will have functionality added in the next milestone
         this.price = new Price(0.0);
+
+        // Default to not favourite
+        this.isFavourite = false;
     }
 
     public Name getName() {
@@ -114,6 +118,14 @@ public class Restaurant {
 
         return otherRestaurant != null
                 && otherRestaurant.getName().equals(getName());
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        this.isFavourite = favourite;
     }
 
     /**
