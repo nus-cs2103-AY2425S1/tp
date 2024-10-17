@@ -3,7 +3,7 @@ package seedu.edulog.testutil;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
-import seedu.address.model.calendar.Lesson;
+import seedu.edulog.model.calendar.Lesson;
 
 /**
  * A utility class to help with building Student objects.

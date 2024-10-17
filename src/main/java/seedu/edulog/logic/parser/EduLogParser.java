@@ -14,6 +14,7 @@ import seedu.edulog.logic.commands.ClearCommand;
 import seedu.edulog.logic.commands.Command;
 import seedu.edulog.logic.commands.DeleteCommand;
 import seedu.edulog.logic.commands.DeleteLessonCommand;
+import seedu.edulog.logic.commands.DisplayCalendarCommand;
 import seedu.edulog.logic.commands.EditCommand;
 import seedu.edulog.logic.commands.ExitCommand;
 import seedu.edulog.logic.commands.FindCommand;
@@ -81,6 +82,9 @@ public class EduLogParser {
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
+
+        case DisplayCalendarCommand.COMMAND_WORD:
+            return new DisplayCalendarCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();

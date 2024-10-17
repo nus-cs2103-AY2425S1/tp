@@ -1,7 +1,7 @@
 package seedu.edulog.testutil;
 
-import seedu.address.model.calendar.EdulogCalendar;
-import seedu.address.model.calendar.Lesson;
+import seedu.edulog.model.calendar.EdulogCalendar;
+import seedu.edulog.model.calendar.Lesson;
 
 /**
  * A utility class to help with building Addressbook objects.
