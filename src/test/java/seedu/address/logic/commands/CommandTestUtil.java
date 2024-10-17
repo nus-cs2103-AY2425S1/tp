@@ -33,7 +33,6 @@ public class CommandTestUtil {
     public static final String VALID_NAME_DANIEL = "Daniel Meier";
     public static final String VALID_NAME_FIONA = "Fiona Kunz";
     public static final String VALID_NAME_GEORGE = "George Best";
-    public static final String VALID_NAME_ALICE = "Alice Pauline";
     public static final String VALID_NAME_BENSON = "Benson Meier";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
