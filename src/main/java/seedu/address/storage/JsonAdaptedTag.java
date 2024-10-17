@@ -11,7 +11,6 @@ import seedu.address.model.tag.TagName;
  * Jackson-friendly version of {@link Tag}.
  */
 class JsonAdaptedTag {
-
     private final String tagName;
 
     /**

@@ -20,11 +20,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CLIVE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DOMINIC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_ERIC;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FLORIST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NEIGHBOR;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PHOTOGRAPHER;
+import static seedu.address.testutil.TypicalTags.FLORIST;
+import static seedu.address.testutil.TypicalTags.PHOTOGRAPHER;
+import static seedu.address.testutil.TypicalWeddings.AMY_WEDDING;
+import static seedu.address.testutil.TypicalWeddings.BOB_WEDDING;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,8 +34,6 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagName;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -47,7 +47,7 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends").withWeddings("Wedding 2", "Carla's Wedding").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
@@ -80,12 +80,6 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_ERIC).withAddress(VALID_ADDRESS_ERIC).withTags(VALID_TAG_NEIGHBOR)
             .build();
 
-    // Manually added Tags
-    public static final Tag FLORIST = new Tag(new TagName(VALID_TAG_FLORIST));
-    public static final Tag PHOTOGRAPHER = new Tag(new TagName(VALID_TAG_PHOTOGRAPHER));
-
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
-
     private TypicalPersons() {} // prevents instantiation
 
     /**
@@ -93,11 +87,14 @@ public class TypicalPersons {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
+        ab.addTag(FLORIST);
+        ab.addTag(PHOTOGRAPHER);
+        ab.addWedding(AMY_WEDDING);
+        ab.addWedding(BOB_WEDDING);
+
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
-        ab.addTag(FLORIST);
-        ab.addTag(PHOTOGRAPHER);
         return ab;
     }
 
