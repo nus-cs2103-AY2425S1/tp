@@ -11,6 +11,18 @@
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
+    "publicAddresses" : {
+      "BTC" : [
+        {
+          "address" : "14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd",
+          "tag" : "Daily wallet"
+        },
+        {
+          "address" : "24qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd",
+          "tag" : "Special wallet"
+        }
+      ]
+    },
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",

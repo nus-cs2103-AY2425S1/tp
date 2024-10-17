@@ -40,7 +40,7 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.publicAddresses = publicAddresses;
+        publicAddresses.forEach((network, addresses) -> this.publicAddresses.put(network, new HashSet<>(addresses)));
         this.tags.addAll(tags);
     }
 
