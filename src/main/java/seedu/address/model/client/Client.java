@@ -85,8 +85,10 @@ public class Client {
 
         return otherClient != null
                 && otherClient.getName().equals(getName());
-//        return ((otherClient != null && (otherClient.getName().equals(getName()) && otherClient.getEmail().equals(getEmail())))
-//                || (otherClient != null && (otherClient.getName().equals(getName()) && otherClient.getPhone().equals(getPhone())))
+//        return ((otherClient != null && (otherClient.getName().equals(getName())
+//        && otherClient.getEmail().equals(getEmail())))
+//                || (otherClient != null && (otherClient.getName().equals(getName())
+//                && otherClient.getPhone().equals(getPhone())))
 //                || (otherClient != null && (otherClient.getName().equals(getName()) &&
 //                otherClient.getEmail().equals(getEmail()) &&
 //                otherClient.getPhone().equals(getPhone()))));

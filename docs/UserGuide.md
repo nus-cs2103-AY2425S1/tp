@@ -81,20 +81,31 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a client: `add`
+### Adding a client: `cadd`
 
 Adds a client to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`
+Note: To add a client, the client must have at least one **phone number** or **email address**.
 
 <box type="tip" seamless>
-
 **Tip:** A client can have any number of tags (including 0)
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `cadd n/John Doe p/98765432 e/johnd@example.com`
+* `cadd n/Betsy Crowe e/betsycrowe@example.com t/criminal t/friend `
+
+### Adding a client: `radd`
+
+Adds a specific client's rental information to the address book.
+
+Format: `radd c/CLIENT_INDEX a/ADDRESS [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [dd/RENT_DUE_DATE] [m/MONTHLY_RENT] [d/DEPOSIT] [cl/CUSTOMER_LIST]`
+
+Examples:
+* `radd c/1 a/65 Anderson Road m/3000 d/0`
+* `radd c/1 a/65 Berkeley Road e/2024-10-31`
+* `radd c/3 a/65 Den Road s/2024-09-01 e/2025-08-30 cl/Steven Lim dd/20 m/2750`
 
 ### Listing all clients : `list`
 
@@ -102,28 +113,46 @@ Shows a list of all clients in the address book.
 
 Format: `list`
 
-### Editing a client : `edit`
+### Editing a client : `cedit`
 
 Edits an existing client in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
+Note: 
+* To edit a client's information, it must have at least **one** of the optional fields.
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
+* You will not be able to remove the name of the client.
+* You will not be able to remove both the phone and email of the client.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
+*  `cedit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
+*  `cedit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
+
+### Editing a client : `redit`
+
+Edits a specific client's rental information in the address book.
+
+Format: `redit c/CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [dd/RENT_DUE_DATE] [m/MONTHLY_RENT] [d/DEPOSIT] [cl/CUSTOMER_LIST]`
+
+Note: 
+* To edit a client's rental information, it must have at least **one** of the optional fields.
+* Edits the client at the specified `CLIENT_INDEX` and 'RENTAL_INDEX'. The `CLIENT_INDEX` refers to the client index number shown in the displayed client list and the `RENTAL_INDEX` refers to the client's rental index number shown in the displayed rental information list. All indexes **must be a positive integer** 1, 2, 3, …​
+* Existing values will be updated to the input values.
+
+Examples:
+*  `redit c/1 r/1 a/65 Anderson Road m/3000 d/0` Edits the first client, first rental information, address, monthly rent, and deposit amount to `Anderson Road` and `3000` respectively.
+*  `redit c/1 r/2 e/2024-10-31` Edits the first client, second rental information, rental end date to `2024-10-31`.
 
 ### Locating clients by name: `find`
 
 Finds clients whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [k/KEYWORD]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
