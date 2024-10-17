@@ -60,8 +60,10 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
             @JsonProperty("parentEmail") String parentEmail, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
-        //TODO: Add check to check if contact is a student
-        return new JsonAdaptedStudent(name, phone, email, address, parentName, parentPhone, parentEmail, tags);
+        if (parentName != null) {
+            return new JsonAdaptedStudent(name, phone, email, address, parentName, parentPhone, parentEmail, tags);
+        }
+        return new JsonAdaptedPerson(name, phone, email, address, tags);
     }
 
     public static JsonAdaptedPerson of(Person source) {
