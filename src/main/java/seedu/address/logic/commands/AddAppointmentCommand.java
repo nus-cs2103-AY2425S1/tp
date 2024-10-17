@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.LocalDateTime;
 
@@ -50,6 +49,9 @@ public class AddAppointmentCommand extends Command {
      * Creates an AddAppointmentCommand to add the specified patient and doctor ids
      */
     public AddAppointmentCommand(LocalDateTime appointmentTime, Id patientId, Id doctorId, String remarks) {
+        requireNonNull(appointmentTime);
+        requireNonNull(patientId);
+        requireNonNull(doctorId);
         this.patientId = patientId;
         this.doctorId = doctorId;
         this.appointmentTime = appointmentTime;
@@ -63,16 +65,10 @@ public class AddAppointmentCommand extends Command {
         Doctor doctorToAddAppointment = model.getFilteredDoctorById(allPersons, doctorId);
         boolean isPatientFree = patientToAddAppointment.addAppointment(appointmentTime, patientToAddAppointment.getId(),
                 doctorToAddAppointment.getId(), remarks);
-        boolean isDoctorFree = doctorToAddAppointment.addAppointment(appointmentTime, patientToAddAppointment.getId(),
-                doctorToAddAppointment.getId(), remarks);
-        if (!isPatientFree && !isDoctorFree) {
+
+        if (!isPatientFree) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
-        } else if (!isPatientFree) {
-            throw new CommandException(MESSAGE_PATIENT_BUSY);
-        } else if (!isDoctorFree) {
-            throw new CommandException(MESSAGE_DOCTOR_BUSY);
         }
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_ADD_APPOINTMENT_SUCCESS);
     }
 }
