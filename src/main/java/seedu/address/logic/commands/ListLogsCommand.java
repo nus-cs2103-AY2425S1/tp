@@ -12,7 +12,7 @@ public class ListLogsCommand extends Command {
     public static final String COMMAND_WORD = "logs";
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d";
-    public static final String MESSAGE_SUCCESS = "Listed all logs";
+    public static final String MESSAGE_SUCCESS = "Listed all logs for: ";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists all logs of a person identified by the NRIC.\n"
@@ -23,13 +23,8 @@ public class ListLogsCommand extends Command {
     /**
      * Creates a ListLogsCommand to list the logs of the specified person
      */
-    public ListLogsCommand(String id) {
-        try {
-            this.identityNumber = new IdentityNumber(id);
-        } catch (IllegalArgumentException e) {
-            //TODO: handle exception later
-            throw new IllegalArgumentException("Invalid NRIC");
-        }
+    public ListLogsCommand(IdentityNumber id) {
+        this.identityNumber = id;
     }
 
     @Override
@@ -53,6 +48,8 @@ public class ListLogsCommand extends Command {
             return false;
         }
         ListLogsCommand e = (ListLogsCommand) other;
+
+        // Since ListLogsCommand relies soley on id, last check to compare only id
         return identityNumber.equals(e.identityNumber);
     }
 }
