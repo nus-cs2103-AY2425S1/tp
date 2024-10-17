@@ -2,6 +2,8 @@ package seedu.internbuddy.ui;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -54,31 +56,20 @@ public class CompanyCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(company.getName().fullName);
         email.setText(company.getEmail().value);
-        application.setText(expandApplications(company.getApplications()));
 
         /* phone number and address are optional */
         setOptionals();
 
+        List<Application> applications = company.getApplications();
+        application.setText(applications.isEmpty()
+                ? "Applications: CLOSED"
+                : "Applications: " + IntStream.range(0, applications.size())
+                    .mapToObj(i -> (i + 1) + ". " + applications.get(i))
+                    .collect(Collectors.joining(", ")));
+
         company.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-    }
-
-    private String expandApplications(List<Application> applications) {
-        StringBuilder builder = new StringBuilder("Applications: ");
-
-        if (applications.isEmpty()) {
-            return builder.append("CLOSED").toString();
-        }
-
-        for (int i = 0; i < applications.size(); i++) {
-            builder.append(i + 1).append(". ").append(applications.get(i).toString());
-            if (i != applications.size() - 1) {
-                builder.append(", ");
-            }
-        }
-
-        return builder.toString();
     }
 
     private void setOptionals() {
