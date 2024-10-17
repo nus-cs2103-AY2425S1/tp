@@ -55,14 +55,11 @@ public class StringUtil {
 
         String preppedSubstring = substring.trim();
         checkArgument(!preppedSubstring.isEmpty(), "Word parameter cannot be empty");
-        checkArgument(preppedSubstring.split("\\s+").length == 1, "Word parameter should be a single word");
 
         String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
-        return Arrays.stream(wordsInPreppedSentence)
-                .map(String::toLowerCase)
-                .anyMatch(word -> word.contains(substring.toLowerCase()));
+        return preppedSentence.toLowerCase().contains(substring.toLowerCase());
+
     }
 
     /**
