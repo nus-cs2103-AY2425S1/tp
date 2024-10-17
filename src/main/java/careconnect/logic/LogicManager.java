@@ -101,6 +101,7 @@ public class LogicManager implements Logic {
 
     @Override
     public boolean validateSyntax(String syntax) {
+        syntax = syntax.trim();
         if (commandsList.contains(syntax)) {
             return true;
         }

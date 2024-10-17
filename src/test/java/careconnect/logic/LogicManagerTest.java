@@ -107,6 +107,9 @@ public class LogicManagerTest {
         assertEquals(true, logic.validateSyntax("add"));
         assertEquals(true, logic.validateSyntax("add n/Betsy Crowe t/friend e/betsycrowe@example.com"
                 + " a/Newgate Prison p/1234567 t/criminal"));
+
+        // extra spaces should not invalidate syntax
+        assertEquals(true, logic.validateSyntax("add "));
     }
 
     /**
