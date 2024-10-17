@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
@@ -31,7 +33,7 @@ public class SampleDataUtil {
                     "bernice_yu"),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                     new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                    getTagSet("neighbours"),
+                    getTagSet("neighbours:5"),
                     "Annual auto insurance premium: $800",
                     "charlotte_o"),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
@@ -64,9 +66,14 @@ public class SampleDataUtil {
      * Returns a tag set containing the list of strings given.
      */
     public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings)
+        try {
+            return ParserUtil.parseTags(Arrays.asList(strings));
+        } catch (ParseException e) {
+            System.err.println(e.getMessage());
+            return Arrays.stream(new String[1])
                 .map(Tag::new)
                 .collect(Collectors.toSet());
+        }
     }
 
 }

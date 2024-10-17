@@ -1,10 +1,13 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -78,9 +81,17 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
-        return this;
+        try {
+            Set<Tag> tagSet = ParserUtil.parseTags(Arrays.asList(tags));
+            descriptor.setTags(tagSet);
+            return this;
+        } catch (ParseException e) {
+            System.err.println(e.getMessage());
+            Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+            descriptor.setTags(tagSet);
+            return this;
+        }
+
     }
 
     /**
