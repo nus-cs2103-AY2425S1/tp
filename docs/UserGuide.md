@@ -17,7 +17,7 @@ InternBuddy is a **desktop app for managing contacts, optimized for use via a  L
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -81,6 +81,8 @@ Adds a company to the address book.
 
 Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [s/STATUS] [t/TAG]…​`
 
+* `STATUS` can only take the values `INTERESTED`, `APPLIED`, `CLOSED` and will be `INTERESTED` if not specified.
+
 <box type="tip" seamless>
 
 **Tip:** A company can have any number of tags (including 0)
@@ -114,6 +116,30 @@ Examples:
 *  `edit 1 p/91234567 e/company@example.com` Edits the phone number and email address of the 1st company to be `91234567` and `company@example.com` respectively.
 *  `edit 2 n/Goggle t/` Edits the name of the 2nd company to be `Goggle` and clears all existing tags.
 
+### Adding application record for a company: `apply`
+
+Adds an internship application record to an existing company in the address book.
+
+Format: `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`
+
+* Adds an application record for the company at the specified `INDEX`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
+* `APPLICATION_STATUS` can only take the values `APPLIED`, `OA`, `INTERVIEWED`, `OFFERED`, `ACCEPTED`, `REJECTED`
+and will take be `APPLIED` if not specified.
+
+<box type="tip" seamless>
+
+**Tip:** Applying to a company automatically changes its `STATUS` to `APPLIED`.
+</box>
+
+### Withdrawing application for a company: `withdraw`
+
+Removes an internship record for an existing company in the address book.
+
+Format: `withdraw INDEX num/APPLICATION_INDEX`
+
+* Removes the application record numbered `APPLICATION_INDEX` for the company at the specified `INDEX`. 
+The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
+
 ### Locating companies by name: `find`
 
 Finds companies whose names contain any of the given keywords.
@@ -130,7 +156,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find Inc` returns `inc` and `Apple Inc`
 * `find Apple Inc` returns `Apple Inc`, `Amazon Inc`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find apple google'](images/findAlexDavidResult.png)
 
 ### Deleting a company : `delete`
 
@@ -195,12 +221,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Google LLC p/22224444 e/careers@google.com a/70 Pasir Panjang Rd, #03-71, 117371 t/tech t/software`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Meta Platforms e/jobs@meta.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`
-**List**   | `list`
-**Help**   | `help`
+| Action       | Format, Examples                                                                                                                                                              |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Google LLC p/22224444 e/careers@google.com a/70 Pasir Panjang Rd, #03-71, 117371 t/tech t/software` |
+| **Clear**    | `clear`                                                                                                                                                                       |
+| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                           |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Meta Platforms e/jobs@meta.com`                                                     |
+| **Apply**    | `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`<br> e.g., `apply 1 n/Software Engineering Intern d/Uses React`                                                     |
+| **Withdraw** | `withdraw INDEX num/APPLICATION_INDEX`<br> e.g., `withdraw 3 num/1`                                                                                                           |
+| **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                     |
+| **List**     | `list`                                                                                                                                                                        |
+| **Help**     | `help`                                                                                                                                                                        |
