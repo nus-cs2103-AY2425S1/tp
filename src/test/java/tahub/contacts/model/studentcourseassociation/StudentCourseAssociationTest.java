@@ -55,7 +55,6 @@ public class StudentCourseAssociationTest {
         assertSame(tutorial, sca.getCourseClass());
         assertSame(grades, sca.getGrades());
     }
-    
     @Test
     void testStudentCourseAssociation_Tutorial_BenLeong() {
         Set<Tag> tags = new HashSet<>();
@@ -72,7 +71,6 @@ public class StudentCourseAssociationTest {
         assertSame(tutorial, sca.getCourseClass());
         assertSame(grades, sca.getGrades());
     }
-    
     @Test
     void testStudentCourseAssociation_Recitation_ColinTan() {
         Set<Tag> tags = new HashSet<>();
