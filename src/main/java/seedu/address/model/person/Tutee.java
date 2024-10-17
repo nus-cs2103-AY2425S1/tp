@@ -20,6 +20,11 @@ public class Tutee extends Person {
     }
 
     @Override
+    public String getRole() {
+        return "Tutee";
+    }
+
+    @Override
     public boolean equals(Object other) {
 
         if (other == this) {

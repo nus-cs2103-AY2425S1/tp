@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.management.relation.Role;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -29,9 +31,9 @@ class JsonAdaptedTutor extends JsonAdaptedPerson {
     public JsonAdaptedTutor(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                             @JsonProperty("email") String email, @JsonProperty("address") String address,
                             @JsonProperty("hours") String hours,
-                            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("role") String role) {
 
-        super(name, phone, email, address, hours, tags);
+        super(name, phone, email, address, hours, tags, role);
     }
 
     /**
@@ -42,9 +44,11 @@ class JsonAdaptedTutor extends JsonAdaptedPerson {
                 source.getAddress().value, source.getHours().value,
                 source.getTags().stream()
                         .map(JsonAdaptedTag::new)
-                        .collect(Collectors.toList())
+                        .collect(Collectors.toList()),
+                "Tutor"
         );
     }
+
 
     /**
      * Converts this Jackson-friendly adapted tutor object into the model's {@code Tutor} object.
@@ -58,6 +62,7 @@ class JsonAdaptedTutor extends JsonAdaptedPerson {
         String address = this.getAddress();
         String hours = this.getHours();
         List<JsonAdaptedTag> tags = this.getTags();
+        String role = this.getRole();
 
         final List<Tag> tutorTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
@@ -105,6 +110,7 @@ class JsonAdaptedTutor extends JsonAdaptedPerson {
         final Hours modelHours = new Hours(hours);
 
         final Set<Tag> modelTags = new HashSet<>(tutorTags);
+
         return new Tutor(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags);
     }
 

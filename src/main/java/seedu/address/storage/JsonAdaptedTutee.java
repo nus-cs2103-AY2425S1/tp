@@ -17,6 +17,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Tutee;
+import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 
 
@@ -35,9 +36,9 @@ class JsonAdaptedTutee extends JsonAdaptedPerson {
     public JsonAdaptedTutee(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("hours") String hours,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("role") String role) {
 
-        super(name, phone, email, address, hours, tags);
+        super(name, phone, email, address, hours, tags, role);
     }
 
     /**
@@ -48,9 +49,12 @@ class JsonAdaptedTutee extends JsonAdaptedPerson {
                 source.getAddress().value, source.getHours().value,
                         source.getTags().stream()
                         .map(JsonAdaptedTag::new)
-                        .collect(Collectors.toList())
+                        .collect(Collectors.toList()),
+                "Tutee"
         );
     }
+
+
 
     /**
      * Converts this Jackson-friendly adapted tutee object into the model's {@code Tutee} object.
