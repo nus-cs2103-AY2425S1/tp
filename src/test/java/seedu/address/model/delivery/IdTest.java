@@ -1,6 +1,5 @@
 package seedu.address.model.delivery;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -33,19 +32,4 @@ public class IdTest {
         assertTrue(Id.isValidId("1"));
         assertTrue(Id.isValidId("99"));
     }
-
-//    @Test
-//    public void constructor_noInput_assignsCorrectId() {
-//        Id zero = new Id();
-//        assertEquals("0", zero.value);
-//
-//        Id one = new Id();
-//        assertEquals("1", one.value);
-//
-//        Id five = new Id("5");
-//        assertEquals("5", five.value);
-//
-//        Id six = new Id();
-//        assertEquals("6", six.value);
-//    }  //to be fixed. currently works when testing individually but when running the entire test suite doesn't work
 }
