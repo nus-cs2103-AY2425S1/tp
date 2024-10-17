@@ -3,7 +3,9 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -153,6 +155,42 @@ public class ParserUtil {
         } else {
             throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
         }
+    }
+
+    /**
+     * Parses a {@code Optional<String>} policy into a {@code PolicyType}.
+     *
+     * @param policies The List of string representing the policy type.
+     *               The policy string will be trimmed and converted to lowercase
+     *               for comparison with predefined {@code PolicyType} values.
+     * @return The {@code PolicyType} corresponding to the given policy string.
+     * @throws ParseException If the given {@code policy} is empty or does not match
+     *                        any valid {@code PolicyType}.
+     */
+    public static Set<PolicyType> parsePolicyTypes(List<String> policies) throws ParseException {
+        requireNonNull(policies);
+        if (policies.isEmpty()) {
+            throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
+        }
+
+        String life = PolicyType.LIFE.toString().toLowerCase();
+        String health = PolicyType.HEALTH.toString().toLowerCase();
+        String education = PolicyType.EDUCATION.toString().toLowerCase();
+
+        final Set<PolicyType> policyTypes = new HashSet<>();
+        for (String policy : policies) {
+            final String lowerCaseTrimmedPolicy = policy.trim().toLowerCase();
+            if (lowerCaseTrimmedPolicy.equals(life)) {
+                policyTypes.add(PolicyType.LIFE);
+            } else if (lowerCaseTrimmedPolicy.equals(health)) {
+                policyTypes.add(PolicyType.HEALTH);
+            } else if (lowerCaseTrimmedPolicy.equals(education)) {
+                policyTypes.add(PolicyType.EDUCATION);
+            } else {
+                throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
+            }
+        }
+        return Collections.unmodifiableSet(policyTypes);
     }
 
     /**
