@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import java.util.Objects;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 /**
  * A class meant to group all relevant details of an appointment together.
  */
@@ -18,6 +20,7 @@ public class Appointment {
      * @param remarks Remarks given by the doctor for the appointment or patient.
      */
     public Appointment(Id patientId, Id doctorId, String remarks) {
+        requireAllNonNull(patientId, doctorId, remarks);
         this.patientId = patientId;
         this.doctorId = doctorId;
         this.remarks = remarks;

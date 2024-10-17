@@ -77,4 +77,5 @@ public class PatientTest {
         Patient foundPatient = Patient.getPatientWithId("Invalid");
         assertNull(foundPatient);
     }
+
 }

@@ -30,6 +30,28 @@ public class Doctor extends Person {
         return Doctor.doctors;
     }
 
+    /**
+     * Retrieves a doctor by their Id object.
+     *
+     * @param id The Id object of the doctor to search for.
+     * @return The Doctor object if found, or null if no matching doctor is found.
+     */
+    public static Doctor getDoctorWithId(Id id) {
+        ArrayList<Doctor> allDoctors = getDoctors();
+        for (Doctor doctor : allDoctors) {
+            if (doctor.getId().equals(id)) {
+                return doctor;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Retrieves a doctor by their Id value.
+     *
+     * @param id The String idValue of the doctor to search for.
+     * @return The Doctor object if found, or null if no matching doctor is found.
+     */
     public static Doctor getDoctorWithId(String id) {
         ArrayList<Doctor> allDoctors = getDoctors();
         for (Doctor doctor : allDoctors) {
