@@ -3,12 +3,14 @@ package seedu.address.logic.validator;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Validates date strings
  */
 public class DateValidator extends Validator<String> {
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy");
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/uu")
+            .withResolverStyle(ResolverStyle.STRICT);
     private static DateValidator instance;
 
     private DateValidator() {}
