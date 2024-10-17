@@ -111,7 +111,7 @@ public class EditCommand extends Command {
                 updatedStatus, applications);
     }
 
-    private static Company setStatusApplied(Company companyToEdit) {
+    public static Company setStatusApplied(Company companyToEdit) {
         Name updatedName = companyToEdit.getName();
         Phone updatedPhone = companyToEdit.getPhone();
         Email updatedEmail = companyToEdit.getEmail();
@@ -124,7 +124,7 @@ public class EditCommand extends Command {
                 updatedStatus, applications);
     }
 
-    private static Company setStatusClosed(Company companyToEdit) {
+    public static Company setStatusClosed(Company companyToEdit) {
         Name updatedName = companyToEdit.getName();
         Phone updatedPhone = companyToEdit.getPhone();
         Email updatedEmail = companyToEdit.getEmail();

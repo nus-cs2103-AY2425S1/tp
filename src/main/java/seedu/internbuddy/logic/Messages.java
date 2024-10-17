@@ -47,8 +47,6 @@ public class Messages {
                 .append(company.getStatus())
                 .append("; Tags: ");
         company.getTags().forEach(builder::append);
-        builder.append("; Status: ")
-                .append(company.getStatus());
         return builder.toString();
     }
 

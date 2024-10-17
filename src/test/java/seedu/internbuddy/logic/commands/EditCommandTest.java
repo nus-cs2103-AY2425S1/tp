@@ -11,6 +11,7 @@ import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_TAG_TECH;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.showCompanyAtIndex;
+import static seedu.internbuddy.testutil.TypicalCompanies.MICROSOFT;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_SECOND_COMPANY;
@@ -148,6 +149,17 @@ public class EditCommandTest {
                 new EditCompanyDescriptorBuilder().withName(VALID_NAME_MICROSOFT).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void test_setCompanyStatus() {
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_COMPANY, new EditCompanyDescriptor());
+        Company companyInList = model.getAddressBook().getCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
+        Company updatedCompany = editCommand.setStatusApplied(companyInList);
+        assertFalse(companyInList.equals(updatedCompany));
+
+        Company updatedCompany2 = editCommand.setStatusClosed(updatedCompany);
+        assertFalse(updatedCompany2.equals(updatedCompany));
     }
 
     @Test
