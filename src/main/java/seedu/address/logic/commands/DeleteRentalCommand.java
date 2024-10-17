@@ -68,6 +68,7 @@ public class DeleteRentalCommand extends Command {
 
         if (targetClient.equals(model.getLastViewedClient())) {
             model.updateVisibleRentalInformationList(rentalInformationList);
+            model.setLastViewedClient(updatedClient);
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_RENTAL_SUCCESS,
