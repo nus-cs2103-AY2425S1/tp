@@ -26,7 +26,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to the address book. "
-            + "Parameters: CONTACT_FLAG (either `-v` or `-c`)"
+            + "Parameters: -CONTACT_FLAG (either `-v` or `-c`)"
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
@@ -52,7 +52,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "pets";
 
     public static final String VENDOR_MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to the address book. "
-            + "Parameters: CONTACT_FLAG (either `-v` or `-c`)"
+            + "Parameters: -CONTACT_FLAG (either `-v` or `-c`)"
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
@@ -70,7 +70,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "budget";
 
     public static final String CLIENT_MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to the address book. "
-            + "Parameters: CONTACT_FLAG (either `-v` or `-c`)"
+            + "Parameters: -CONTACT_FLAG (either `-v` or `-c`)"
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
