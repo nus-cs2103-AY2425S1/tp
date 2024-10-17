@@ -13,7 +13,7 @@ import seedu.address.commons.core.index.Index;
  */
 public class GradeList {
     private static final String NOT_ALL_WEIGHTAGE = "\nDo note not all weightage has been accounted for."
-        + "\nPercentage of tests done: ";
+            + "\nPercentage of tests done: ";
     private static final float FULL_WEIGHTAGE = 1.0f;
     private final List<Grade> grades;
 
@@ -21,7 +21,7 @@ public class GradeList {
      * Constructs an empty {@code GradeList}.
      */
     public GradeList() {
-        grades = Collections.unmodifiableList(new ArrayList<>());
+        this.grades = Collections.unmodifiableList(new ArrayList<>());
     }
 
     public GradeList(List<Grade> grades) {
@@ -53,7 +53,7 @@ public class GradeList {
      */
     public Grade getGrade(Index index) {
         requireNonNull(index);
-        return grades.get(index.getZeroBased());
+        return this.grades.get(index.getZeroBased());
     }
 
     /**
@@ -63,7 +63,7 @@ public class GradeList {
      */
     public GradeList removeGrade(Index index) {
         requireNonNull(index);
-        List<Grade> newList = new ArrayList<>(grades);
+        List<Grade> newList = new ArrayList<>(this.grades);
 
         newList.remove(index.getZeroBased());
 
@@ -76,7 +76,7 @@ public class GradeList {
      * @return A list of {@code Grade} objects representing all the grades in the grade list.
      */
     public List<Grade> getList() {
-        return new ArrayList<>(grades); // Returning a copy to prevent external modification
+        return new ArrayList<>(this.grades); // Returning a copy to prevent external modification
     }
 
 
@@ -99,7 +99,7 @@ public class GradeList {
         float totalScore = 0;
         float totalWeightage = 0;
 
-        for (Grade g : grades) {
+        for (Grade g : this.grades) {
             float currentWeightage = g.getWeightage();
             totalWeightage += currentWeightage / 100;
             totalScore += g.getScore() * currentWeightage / 100;
@@ -127,11 +127,11 @@ public class GradeList {
 
     @Override
     public String toString() {
-        if (grades.isEmpty()) {
+        if (this.grades.isEmpty()) {
             return "No grades available";
         }
         StringBuilder result = new StringBuilder();
-        for (Grade grade : grades) {
+        for (Grade grade : this.grades) {
             result.append(grade.toString()).append("\n");
         }
         return result.toString().trim();
@@ -148,11 +148,11 @@ public class GradeList {
         }
 
         GradeList otherGradeList = (GradeList) other;
-        return grades.equals(otherGradeList.grades);
+        return this.grades.equals(otherGradeList.grades);
     }
 
     @Override
     public int hashCode() {
-        return grades.hashCode();
+        return this.grades.hashCode();
     }
 }
