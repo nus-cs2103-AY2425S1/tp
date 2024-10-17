@@ -8,8 +8,8 @@ import static seedu.address.testutil.TypicalProjects.BETA;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.project.Id;
-import seedu.address.model.project.Name;
+import seedu.address.model.project.ProjectId;
+import seedu.address.model.project.ProjectName;
 
 public class JsonAdaptedProjectTest {
     private static final String INVALID_NAME = "R@chel";
@@ -28,14 +28,14 @@ public class JsonAdaptedProjectTest {
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedProject project =
                 new JsonAdaptedProject(INVALID_NAME, VALID_ID);
-        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
+        String expectedMessage = ProjectName.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, project::toModelType);
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedProject project = new JsonAdaptedProject(null, VALID_ID);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ProjectName.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, project::toModelType);
     }
 
@@ -43,14 +43,14 @@ public class JsonAdaptedProjectTest {
     public void toModelType_invalidId_throwsIllegalValueException() {
         JsonAdaptedProject project =
                 new JsonAdaptedProject(VALID_NAME, INVALID_ID);
-        String expectedMessage = Id.MESSAGE_CONSTRAINTS;
+        String expectedMessage = ProjectId.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, project::toModelType);
     }
 
     @Test
     public void toModelType_nullId_throwsIllegalValueException() {
         JsonAdaptedProject project = new JsonAdaptedProject(VALID_NAME, null);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ProjectId.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, project::toModelType);
     }
 }

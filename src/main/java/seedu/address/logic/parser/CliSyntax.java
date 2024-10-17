@@ -7,6 +7,7 @@ public class CliSyntax {
 
     /* Prefix definitions */
     public static final Prefix PREFIX_EMPLOYEE_ID = new Prefix("id/");
+    public static final Prefix PREFIX_PROJECT_NAME = new Prefix("pn/");
     public static final Prefix PREFIX_PROJECT_ID = new Prefix("pid/");
     public static final Prefix PREFIX_NAME = new Prefix("n/");
     public static final Prefix PREFIX_PHONE = new Prefix("p/");

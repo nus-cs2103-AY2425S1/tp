@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.project.ProjectNameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -151,7 +152,7 @@ public class ModelManagerTest {
         // different filteredProjectList -> returns false
         keywords = ALPHA.getName().fullName.split("\\s+");
         modelManager.updateFilteredProjectList(
-                new seedu.address.model.project.NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+                new ProjectNameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

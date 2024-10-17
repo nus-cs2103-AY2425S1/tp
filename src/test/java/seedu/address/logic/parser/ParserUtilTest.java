@@ -19,6 +19,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.project.ProjectId;
+import seedu.address.model.project.ProjectName;
 import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
@@ -40,6 +42,12 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_SKILL_1 = "programming";
     private static final String VALID_SKILL_2 = "writing";
+
+    private static final String INVALID_PROJECT_ID = "4252@$g";
+    private static final String INVALID_PROJECT_NAME = "Prj R@chel";
+
+    private static final String VALID_PROJECT_ID = "A0276123K";
+    private static final String VALID_PROJECT_NAME = "Project Alpha";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -262,5 +270,44 @@ public class ParserUtilTest {
                 new Skill(VALID_SKILL_2)));
 
         assertEquals(expectedSkillSet, actualSkillSet);
+    }
+
+    @Test
+    public void parseProjectId_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseProjectId((String) null));
+    }
+
+    @Test
+    public void parseProjectId_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseProjectId(INVALID_PROJECT_ID));
+    }
+
+    @Test
+    public void parseProjectId_validValueWithoutWhitespace_returnsProjectId() throws Exception {
+        ProjectId expectedProjectId = new ProjectId(VALID_PROJECT_ID);
+        assertEquals(expectedProjectId, ParserUtil.parseProjectId(VALID_PROJECT_ID));
+    }
+
+    @Test
+    public void parseProjectName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseProjectName((String) null));
+    }
+
+    @Test
+    public void parseProjectName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseProjectName(INVALID_PROJECT_NAME));
+    }
+
+    @Test
+    public void parseProjectName_validValueWithoutWhitespace_returnsProjectName() throws Exception {
+        ProjectName expectedProjectName = new ProjectName(VALID_PROJECT_NAME);
+        assertEquals(expectedProjectName, ParserUtil.parseProjectName(VALID_PROJECT_NAME));
+    }
+
+    @Test
+    public void parseProjectName_validValueWithWhitespace_returnsTrimmedProjectName() throws Exception {
+        String nameWithWhitespace = WHITESPACE + VALID_PROJECT_NAME + WHITESPACE;
+        ProjectName expectedProjectName = new ProjectName(VALID_PROJECT_NAME);
+        assertEquals(expectedProjectName, ParserUtil.parseProjectName(nameWithWhitespace));
     }
 }
