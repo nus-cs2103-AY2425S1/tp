@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_TAG_NOT_FOUND_IN_CONTACT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
 import java.util.List;
@@ -27,9 +28,9 @@ public class UntagCommand extends Command {
             + ": Removes one or multiple tags from the person identified "
             + "by the index number used in the last person listing.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "t/[TAG]... (can specify multiple tags)\n"
+            + PREFIX_TAG + "TAG... (can specify multiple tags)\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "t/florist t/photographer.";
+            + PREFIX_TAG + "florist " + PREFIX_TAG + "photographer.";
 
     private final Index index;
     private final HashSet<Tag> tagsToRemove;

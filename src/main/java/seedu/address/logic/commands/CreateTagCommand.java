@@ -16,11 +16,10 @@ public class CreateTagCommand extends Command {
 
     public static final String COMMAND_WORD = "create-tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a tag in the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a tag in the address book. \n"
             + "Parameters: "
             + PREFIX_TAG + "TAG\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TAG + "florist";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_TAG + "florist";
 
     public static final String MESSAGE_SUCCESS = "New tag added: %1$s";
     public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists in the address book";
