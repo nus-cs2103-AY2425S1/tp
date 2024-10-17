@@ -80,7 +80,7 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD, ListCommand.COMMAND_SHORTHAND:
+        case ListCommand.SHORT_COMMAND_WORD, ListCommand.LONG_COMMAND_WORD:
             return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:
