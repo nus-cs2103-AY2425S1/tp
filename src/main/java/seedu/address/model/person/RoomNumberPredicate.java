@@ -10,7 +10,7 @@ import seedu.address.commons.util.ToStringBuilder;
  * A predicate class that tests whether a Person's room number matches a given room number.
  */
 public class RoomNumberPredicate implements Predicate<Person> {
-    private final String roomNumber;
+    private final RoomNumber roomNumber;
 
 
 
@@ -20,7 +20,7 @@ public class RoomNumberPredicate implements Predicate<Person> {
      * @param roomNumber The room number to compare against Person objects.
      */
     public RoomNumberPredicate(String roomNumber) {
-        this.roomNumber = roomNumber;
+        this.roomNumber = new RoomNumber(roomNumber);
     }
 
 
@@ -33,7 +33,7 @@ public class RoomNumberPredicate implements Predicate<Person> {
      */
     @Override
     public boolean test(Person person) {
-        return person.getRoomNumber().toString().equals(roomNumber);
+        return person.getRoomNumber().equals(roomNumber);
     }
 
 

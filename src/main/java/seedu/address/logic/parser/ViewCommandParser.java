@@ -1,6 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_NUMBER;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -21,9 +24,7 @@ import seedu.address.model.person.RoomNumberPredicate;
  */
 public class ViewCommandParser implements Parser<ViewCommand> {
 
-    private static final Prefix PREFIX_NAME = new Prefix("n/");
-    private static final Prefix PREFIX_CONTACT_NUMBER = new Prefix("p/");
-    private static final Prefix PREFIX_ROOM_NUMBER = new Prefix("r/");
+
 
     /**
      * Parses the provided arguments to create a new ViewCommand object.
@@ -43,14 +44,14 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer
-                .tokenize(args, PREFIX_NAME, PREFIX_CONTACT_NUMBER, PREFIX_ROOM_NUMBER);
+                .tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_ROOM_NUMBER);
 
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
 
         Optional<String> name = parseName(argMultimap.getValue(PREFIX_NAME).orElse(null));
-        Optional<String> contactNumber = parseContactNumber(argMultimap.getValue(PREFIX_CONTACT_NUMBER).orElse(null));
+        Optional<String> contactNumber = parseContactNumber(argMultimap.getValue(PREFIX_PHONE).orElse(null));
         Optional<String> roomNumber = parseRoomNumber(argMultimap.getValue(PREFIX_ROOM_NUMBER).orElse(null));
 
         Predicate<Person> combinedPredicate = p -> true;

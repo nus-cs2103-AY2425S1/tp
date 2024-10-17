@@ -9,7 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
  * Tests that a {@code Person}'s {@code Phone} matches the phone number given.
  */
 public class PhonePredicate implements Predicate<Person> {
-    private final String phoneNumber;
+    private final Phone phoneNumber;
 
 
     /**
@@ -18,7 +18,7 @@ public class PhonePredicate implements Predicate<Person> {
      * @param phoneNumber The phone number to match against Person objects.
      */
     public PhonePredicate(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        this.phoneNumber = new Phone(phoneNumber);
     }
 
     /**
@@ -30,7 +30,7 @@ public class PhonePredicate implements Predicate<Person> {
      */
     @Override
     public boolean test(Person person) {
-        return person.getPhone().equals(new Phone(phoneNumber));
+        return person.getPhone().equals(phoneNumber);
     }
 
     /**

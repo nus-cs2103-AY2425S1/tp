@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_NUMBER;
 
 import java.util.function.Predicate;
 
@@ -23,8 +25,8 @@ public class ViewCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Use either of the parameters below\n "
             + "Parameters: "
             + PREFIX_NAME + "NAME \n"
-            + "p/ " + "CONTACT_NUMBER \n"
-            + "r/ " + "ROOM_NUMBER";
+            + PREFIX_PHONE + "CONTACT_NUMBER \n"
+            + PREFIX_ROOM_NUMBER + "ROOM_NUMBER";
 
     private final Predicate<Person> combinedPredicate;
 
