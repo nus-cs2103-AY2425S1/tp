@@ -16,6 +16,41 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonContainsKeywordsPredicateTest {
+
+    @Test
+    public void equals() throws ParseException {
+        // Same values -> returns true
+        PersonContainsKeywordsPredicate predicateOne = new PersonContainsKeywordsPredicate(Arrays
+                .asList(PREFIX_NAME.getPrefix(), "John"));
+        PersonContainsKeywordsPredicate predicateOneCopy = new PersonContainsKeywordsPredicate(Arrays
+                .asList(PREFIX_NAME.getPrefix(), "John"));
+        assertTrue(predicateOne.equals(predicateOneCopy));
+
+        // Same object -> returns true
+        assertTrue(predicateOne.equals(predicateOne));
+
+        // Null -> returns false
+        assertFalse(predicateOne.equals(null));
+
+        // Different type -> returns false
+        assertFalse(predicateOne.equals(5));
+
+        // Different values -> returns false
+        PersonContainsKeywordsPredicate differentPredicate = new PersonContainsKeywordsPredicate(Arrays
+                .asList(PREFIX_NAME.getPrefix(), "Alice"));
+        assertFalse(predicateOne.equals(differentPredicate));
+
+        // Different fields -> returns false
+        PersonContainsKeywordsPredicate predicateTwo = new PersonContainsKeywordsPredicate(Arrays
+                .asList(PREFIX_PHONE.getPrefix(), "12345678"));
+        assertFalse(predicateOne.equals(predicateTwo));
+
+        // Multiple different fields -> returns false
+        PersonContainsKeywordsPredicate predicateWithMultipleFields = new PersonContainsKeywordsPredicate(Arrays
+                .asList(PREFIX_NAME.getPrefix(), "John", PREFIX_PHONE.getPrefix(), "12345678"));
+        assertFalse(predicateOne.equals(predicateWithMultipleFields));
+    }
+
     @Test
     public void test_personContainsKeywords_returnsTrue() throws ParseException {
         // Name
