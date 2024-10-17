@@ -6,6 +6,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Tag;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -52,6 +53,27 @@ public class PersonCard extends UiPart<Region> {
         jobCode.setText(person.getJobCode().value);
         email.setText(person.getEmail().value);
         //tag.setText(person.getTag().tagName);
-        tagPane.getChildren().add(new Label(person.getTag().tagName));
+        tagPane.getChildren().add(createTagLabel(person.getTag()));
     }
+
+    private Label createTagLabel(Tag tag) {
+        Label label = new Label(tag.toString());
+        if (tag.tagCode.equalsIgnoreCase("N")) {
+            label.setStyle("-fx-background-color: #ff6666;"); // Red
+        } else if (tag.tagCode.equalsIgnoreCase("TP")) {
+            label.setStyle("-fx-background-color: #66ccff;"); // Blue
+        } else if (tag.tagCode.equalsIgnoreCase("TC")) {
+            label.setStyle("-fx-background-color: #ffcc66;"); // Orange
+        } else if (tag.tagCode.equalsIgnoreCase("BP")) {
+            label.setStyle("-fx-background-color: #ffcc66;"); // Orange
+        } else if (tag.tagCode.equalsIgnoreCase("BC")) {
+            label.setStyle("-fx-background-color: #ffcc66;"); // Orange
+        } else if (tag.tagCode.equalsIgnoreCase("R")) {
+            label.setStyle("-fx-background-color: #ffcc66;"); // Orange
+        } else {
+            label.setStyle("-fx-background-color: #cccccc;"); // Default gray
+        }
+        return label;
+    }
+
 }

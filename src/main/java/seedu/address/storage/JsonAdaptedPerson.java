@@ -9,7 +9,7 @@ import seedu.address.model.person.JobCode;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -46,7 +46,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         jobCode = source.getJobCode().value;
-        tag = source.getTag().tagName;
+        tag = source.getTag().tagCode;
     }
 
     /**
@@ -91,7 +91,7 @@ class JsonAdaptedPerson {
         if (tag == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Tag.class.getSimpleName()));
         }
-        if (!Tag.isValidTagName(tag)) {
+        if (!Tag.isValidTagCode(tag)) {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
         final Tag modelTag = new Tag(tag);
