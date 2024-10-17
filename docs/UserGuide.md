@@ -203,7 +203,7 @@ Format: `deletebuyer p/PHONE_NUMBER`
 
 
 Examples:
-* `deletebuyer p/94351253` deletes the buyer with phone number `94351253` from the client book.
+* `deletebuyer p/83456789` deletes the buyer with phone number `94351253` from the client book.
   ![result for 'deletebuyer p/94351253'](images/deletebuyer.png)
 
 ### Deleting a seller : `deleteseller`
@@ -216,7 +216,7 @@ Format: `deleteseller p/PHONE_NUMBER`
 * The `PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’.
 
 Examples:
-* `deleteseller p/98765432` deletes the seller with phone number `98765432` from the client book.
+* `deleteseller p/83456789` deletes the seller with phone number `98765432` from the client book.
 
     ![result for 'deleteseller p/98765432'](images/deleteseller.png)
 
