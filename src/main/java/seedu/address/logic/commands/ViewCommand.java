@@ -25,7 +25,7 @@ public class ViewCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Use either of the parameters below\n "
             + "Parameters: "
             + PREFIX_NAME + "NAME \n"
-            + PREFIX_PHONE + "CONTACT_NUMBER \n"
+            + PREFIX_PHONE + "PHONE \n"
             + PREFIX_ROOM_NUMBER + "ROOM_NUMBER";
 
     private final Predicate<Person> combinedPredicate;
