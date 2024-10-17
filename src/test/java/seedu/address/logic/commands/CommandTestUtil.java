@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYEE_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -84,6 +85,16 @@ public class CommandTestUtil {
     public static final String INVALID_PROJECT_ID_DESC = " " + PREFIX_PROJECT_ID + "James&";
     // '&' not allowed in project id
 
+    public static final String VALID_ASSIGNMENT_ID_ONE = "1";
+    public static final String VALID_ASSIGNMENT_ID_TWO = "2";
+
+    public static final String ASSIGNMENT_ID_DESC_ONE = " " + PREFIX_ASSIGNMENT_ID + VALID_ASSIGNMENT_ID_ONE;
+    public static final String ASSIGNMENT_ID_DESC_TWO = " " + PREFIX_ASSIGNMENT_ID + VALID_ASSIGNMENT_ID_TWO;
+
+    public static final String INVALID_ASSIGNMENT_ID_DESC = " " + PREFIX_ASSIGNMENT_ID + "123B";
+    // 'B' not allowed in assignmentIds
+    public static final String INVALID_EMPLOYEE_ID_DESC = " " + PREFIX_EMPLOYEE_ID + "123B";
+    // 'B' not allowed in employeeIds
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

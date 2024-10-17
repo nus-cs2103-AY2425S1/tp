@@ -93,6 +93,17 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasEmployeeId_employeeIdNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasEmployeeId(ALICE.getEmployeeId()));
+    }
+
+    @Test
+    public void hasEmployeeId_employeeIdInAddressBook_returnsFalse() {
+        modelManager.addPerson(ALICE);
+        assertTrue(modelManager.hasEmployeeId(ALICE.getEmployeeId()));
+    }
+
+    @Test
     public void hasProject_nullProject_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasProject(null));
     }
@@ -106,6 +117,17 @@ public class ModelManagerTest {
     public void hasProject_projectInAddressBook_returnsTrue() {
         modelManager.addProject(ALPHA);
         assertTrue(modelManager.hasProject(ALPHA));
+    }
+
+    @Test
+    public void hasProjectId_projectIdNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasProjectId(ALPHA.getId()));
+    }
+
+    @Test
+    public void hasProjectId_projectIdInAddressBook_returnsFalse() {
+        modelManager.addProject(ALPHA);
+        assertTrue(modelManager.hasProjectId(ALPHA.getId()));
     }
 
     @Test

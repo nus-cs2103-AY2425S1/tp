@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalProjects.ALPHA;
 import static seedu.address.testutil.TypicalProjects.BETA;
 
@@ -13,13 +14,20 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.assignment.Assignment;
 
 /**
- * A utility class containing a list of {@code Assignment} objects to be used in tests.
+ * A utility class containing a list of {@code Assignment} objects to be used in
+ * tests.
  */
 public class TypicalAssignments {
-    public static final Assignment ALICE_ALPHA = new AssignmentBuilder().withAssignmentId("1").withProject(ALPHA)
-            .withPerson(ALICE).build();
-    public static final Assignment BENSON_BETA = new AssignmentBuilder().withAssignmentId("2").withProject(BETA)
-            .withPerson(BENSON).build();
+    public static final Assignment ALICE_ALPHA = new AssignmentBuilder().withAssignmentId("1")
+            .withProjectId(ALPHA.getId().toString())
+            .withEmployeeId(ALICE.getEmployeeId().toString()).build();
+    public static final Assignment BENSON_BETA = new AssignmentBuilder().withAssignmentId("2")
+            .withProjectId(BETA.getId().toString())
+            .withEmployeeId(BENSON.getEmployeeId().toString()).build();
+    public static final Assignment BOB_BETA = new AssignmentBuilder().withAssignmentId("2")
+            .withProjectId(BETA.getId().toString())
+            .withEmployeeId(BOB.getEmployeeId().toString()).build();
+
 
     private TypicalAssignments() {
     } // prevents instantiation

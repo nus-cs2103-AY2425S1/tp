@@ -74,10 +74,12 @@ public class Messages {
      */
     public static String format(Assignment assignment) {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Project:\n")
-                .append(assignment.getProject())
-                .append("\nPerson:\n")
-                .append(assignment.getPerson());
+        builder.append("Assignment Id:\n")
+                .append(assignment.getAssignmentId())
+                .append("\nProject Id:\n")
+                .append(assignment.getProjectId())
+                .append("\nEmployee Id:\n")
+                .append(assignment.getEmployeeId());
         return builder.toString();
     }
 }

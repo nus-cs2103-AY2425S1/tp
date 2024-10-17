@@ -44,8 +44,8 @@ public class JsonAdaptedAssignment {
      */
     public JsonAdaptedAssignment(Assignment source) {
         this.assignmentId = source.getAssignmentId().value;
-        this.projectId = source.getProject().getId().fullId;
-        this.personId = source.getPerson().getEmployeeId().value;
+        this.projectId = source.getProjectId().fullId;
+        this.personId = source.getEmployeeId().value;
     }
 
     /**
@@ -102,7 +102,7 @@ public class JsonAdaptedAssignment {
 
         final AssignmentId modelAssignmentId = new AssignmentId(assignmentId);
 
-        return new Assignment(modelAssignmentId, modelProject, modelPerson);
+        return new Assignment(modelAssignmentId, modelProject.getId(), modelPerson.getEmployeeId());
     }
 
 }

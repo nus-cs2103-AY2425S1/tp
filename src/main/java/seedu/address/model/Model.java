@@ -6,8 +6,10 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
+import seedu.address.model.project.ProjectId;
 
 /**
  * The API of the Model component.
@@ -72,6 +74,12 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with the same {@code employeeId} exists in
+     * the address book.
+     */
+    boolean hasEmployeeId(EmployeeId employeeId);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -91,9 +99,16 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
-     * Returns true if a project with the same identity as {@code project} exists in the address book.
+     * Returns true if a project with the same identity as {@code project} exists in
+     * the address book.
      */
     boolean hasProject(Project project);
+
+    /**
+     * Returns true if a project with the same {@code projectId} exists in
+     * the address book.
+     */
+    boolean hasProjectId(ProjectId projectId);
 
     /**
      * Deletes the given project.
@@ -115,7 +130,8 @@ public interface Model {
     void setProject(Project target, Project editedProject);
 
     /**
-     * Returns true if an assignment with the same identity as {@code assignment} exists in the address book.
+     * Returns true if an assignment with the same identity as {@code assignment}
+     * exists in the address book.
      */
     boolean hasAssignment(Assignment assignment);
 
