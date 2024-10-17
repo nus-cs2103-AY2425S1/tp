@@ -9,16 +9,16 @@ import seedu.address.model.tag.Tag;
  * Tests that a {@code Person} is tagged with the corresponding tag.
  */
 public class TagContainsKeywordsPredicate implements Predicate<Person> {
-    private final String tag;
+    private final Tag tag;
 
-    public TagContainsKeywordsPredicate(String tag) {
+    public TagContainsKeywordsPredicate(Tag tag) {
         this.tag = tag;
     }
 
     @Override
     public boolean test(Person person) {
         for (Tag personTag: person.getTags()) {
-            if (personTag.getTagName().equals(this.tag)) {
+            if (personTag.equals(this.tag)) {
                 return true;
             }
         }
