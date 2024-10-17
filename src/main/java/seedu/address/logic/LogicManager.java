@@ -16,6 +16,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Meeting;
+import seedu.address.storage.ScheduleStorage;
 import seedu.address.storage.Storage;
 
 /**
@@ -32,13 +34,15 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
+    private final ScheduleStorage scheduleStorage;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
-    public LogicManager(Model model, Storage storage) {
+    public LogicManager(Model model, Storage storage, ScheduleStorage scheduleStorage) {
         this.model = model;
         this.storage = storage;
+        this.scheduleStorage = scheduleStorage;
         addressBookParser = new AddressBookParser();
     }
 
@@ -52,6 +56,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getAddressBook());
+            scheduleStorage.saveScheduleList(model.getScheduleList());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -69,6 +74,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ObservableList<Meeting> getWeeklyMeetingList() {
+        return model.getWeeklySchedule();
     }
 
     @Override
