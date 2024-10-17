@@ -1,10 +1,10 @@
 package seedu.address.model.person.predicates;
 
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
-
-import java.util.function.Predicate;
 
 /**
  * Tests that a {@code Person}'s assigned {@code Tier} starts with a specified String.
