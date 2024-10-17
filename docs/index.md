@@ -7,7 +7,7 @@ title: ""
 
 [![Java CI](https://github.com/AY2425S1-CS2103T-T08-1/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-T08-1/tp/actions/workflows/gradle.yml)
 [![MarkBind Action](https://github.com/AY2425S1-CS2103T-T08-1/tp/actions/workflows/docs.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-T08-1/tp/actions/workflows/docs.yml)
-[![Codecov](https://app.codecov.io/gh/AY2425S1-CS2103T-T08-1/tp/settings/badge)](https://app.codecov.io/gh/AY2425S1-CS2103T-T08-1/tp)
+[![codecov](https://codecov.io/github/AY2425S1-CS2103T-T08-1/tp/graph/badge.svg?token=GJFEY8Q088)](https://codecov.io/github/AY2425S1-CS2103T-T08-1/tp)
 
 ![Ui](images/Ui.png)
 

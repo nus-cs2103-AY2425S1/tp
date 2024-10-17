@@ -1,77 +1,142 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_LABEL;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.BTC_DAILY_ADDRESS;
+import static seedu.address.testutil.TypicalPersons.BTC_SPECIAL_ADDRESS;
+import static seedu.address.testutil.TypicalPersons.JOE;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.parser.RetrievePublicAddressCommandParser;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.addresses.Network;
+import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 
 public class RetrievePublicAddressCommandTest {
 
-    private RetrievePublicAddressCommandParser parser = new RetrievePublicAddressCommandParser();
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RetrievePublicAddressCommand.MESSAGE_USAGE));
+    public void execute_validIndexValidNetwork_success() {
+        model.addPerson(JOE);
+
+        RetrievePublicAddressCommand retrieveCommand =
+                new RetrievePublicAddressCommand(Index.fromOneBased(model.getFilteredPersonList().size()), Network.BTC);
+
+        String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
+                2, Network.BTC, JOE.getName(), BTC_DAILY_ADDRESS + "\n" + BTC_SPECIAL_ADDRESS);
+
+        assertCommandSuccess(retrieveCommand, model, expectedMessage, model);
     }
 
     @Test
-    public void parse_missingPrefixPublicAddress_throwsParseException() {
-        assertParseFailure(parser, "1",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RetrievePublicAddressCommand.MESSAGE_USAGE));
+    public void execute_validIndexValidNetworkWithLabel_success() {
+        model.addPerson(JOE);
+
+        RetrievePublicAddressCommand retrieveCommand =
+                new RetrievePublicAddressCommand(Index.fromOneBased(model.getFilteredPersonList().size()), Network.BTC,
+                        BTC_DAILY_ADDRESS.label);
+
+        String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
+                1, Network.BTC, JOE.getName(), BTC_DAILY_ADDRESS);
+
+        assertCommandSuccess(retrieveCommand, model, expectedMessage, model);
     }
 
     @Test
-    public void parse_invalidIndex_throwsParseException() {
-        assertParseFailure(parser, "a " + PREFIX_PUBLIC_ADDRESS + "BTC",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RetrievePublicAddressCommand.MESSAGE_USAGE));
+    public void execute_validIndexValidNetworkEmpty_success() {
+        model.addPerson(JOE);
+
+        RetrievePublicAddressCommand retrieveCommand =
+                new RetrievePublicAddressCommand(Index.fromOneBased(model.getFilteredPersonList().size()), Network.BTC,
+                        "Non-existent");
+
+        String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
+                0, Network.BTC, JOE.getName(), "-");
+
+        assertCommandSuccess(retrieveCommand, model, expectedMessage, model);
     }
 
     @Test
-    public void parse_invalidNetworkWithoutTag_throwsParseException() {
-        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS + "INVALID_NETWORK", Network.MESSAGE_CONSTRAINTS);
+    public void execute_invalidIndex_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        RetrievePublicAddressCommand retrieveCommand = new RetrievePublicAddressCommand(outOfBoundIndex, Network.BTC);
+
+        assertCommandFailure(retrieveCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
-    public void parse_invalidNetworkWithTag_throwsParseException() {
-        assertParseFailure(parser,
-                "1 " + PREFIX_PUBLIC_ADDRESS + "INVALID_NETWORK" + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet",
-                Network.MESSAGE_CONSTRAINTS);
+    public void execute_personWithoutPublicAddresses_returnsEmptyList() {
+        Person personWithoutPublicAddresses = new PersonBuilder().build();
+        model.addPerson(personWithoutPublicAddresses);
+
+        RetrievePublicAddressCommand retrieveCommand =
+                new RetrievePublicAddressCommand(Index.fromOneBased(model.getFilteredPersonList().size()), Network.BTC);
+
+        String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
+                0, Network.BTC, personWithoutPublicAddresses.getName(), "-");
+
+        assertCommandSuccess(retrieveCommand, model, expectedMessage, model);
     }
 
     @Test
-    public void parse_validArgsWithoutTag_returnsRetrievePublicAddressCommand() {
-        Index expectedIndex = Index.fromOneBased(1);
-        Network expectedNetwork = Network.BTC;
-        RetrievePublicAddressCommand expectedCommand = new RetrievePublicAddressCommand(expectedIndex, expectedNetwork);
+    public void equals() {
+        RetrievePublicAddressCommand retrieveFirstCommand =
+                new RetrievePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC);
+        RetrievePublicAddressCommand retrieveSecondCommand =
+                new RetrievePublicAddressCommand(INDEX_SECOND_PERSON, Network.BTC);
 
-        assertParseSuccess(parser, "1 " + PREFIX_PUBLIC_ADDRESS + "BTC", expectedCommand);
+        // same object -> returns true
+        assertTrue(retrieveFirstCommand.equals(retrieveFirstCommand));
+
+        // same values -> returns true
+        RetrievePublicAddressCommand retrieveFirstCommandCopy =
+                new RetrievePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC);
+        assertTrue(retrieveFirstCommand.equals(retrieveFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(retrieveFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(retrieveFirstCommand.equals(null));
+
+        // different index -> returns false
+        assertFalse(retrieveFirstCommand.equals(retrieveSecondCommand));
+
+        // TODO: Re-enable after more networks supported
+        // different network -> returns false
+        // RetrievePublicAddressCommand retrieveFirstCommandEth =
+        //         new RetrievePublicAddressCommand(INDEX_FIRST_PERSON, Network.ETH);
+        // assertFalse(retrieveFirstCommand.equals(retrieveFirstCommandEth));
+
+        // different label -> returns false
+        RetrievePublicAddressCommand retrieveFirstCommandLabelled =
+                new RetrievePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, "different");
+        assertFalse(retrieveFirstCommand.equals(retrieveFirstCommandLabelled));
     }
 
     @Test
-    public void parse_validArgsWithTag_returnsRetrievePublicAddressCommand() {
-        Index expectedIndex = Index.fromOneBased(1);
-        Network expectedNetwork = Network.BTC;
-        String expectedWalletName = "MyWallet";
-        RetrievePublicAddressCommand expectedCommand =
-                new RetrievePublicAddressCommand(expectedIndex, expectedNetwork, expectedWalletName);
-
-        assertParseSuccess(parser, "1 " + PREFIX_PUBLIC_ADDRESS + "BTC " + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet",
-                expectedCommand);
-    }
-
-    @Test
-    public void parse_duplicatePrefixes_throwsParseException() {
-        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS + "BTC " + PREFIX_PUBLIC_ADDRESS + "ETH",
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PUBLIC_ADDRESS));
+    public void toStringMethod() {
+        RetrievePublicAddressCommand retrieveCommand =
+                new RetrievePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, "wallet1");
+        String expected = new ToStringBuilder(retrieveCommand)
+                .add("index", INDEX_FIRST_PERSON)
+                .add("network", Network.BTC)
+                .add("label", "wallet1")
+                .toString();
+        assertEquals(expected, retrieveCommand.toString());
     }
 
 }

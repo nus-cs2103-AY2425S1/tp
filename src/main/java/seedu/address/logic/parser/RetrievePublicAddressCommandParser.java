@@ -43,7 +43,7 @@ public class RetrievePublicAddressCommandParser implements Parser<RetrievePublic
         Network network = ParserUtil.parseNetwork(argMultimap.getValue(PREFIX_PUBLIC_ADDRESS).get());
 
         return argMultimap.getValue(PREFIX_PUBLIC_ADDRESS_LABEL)
-                .map(walletName -> new RetrievePublicAddressCommand(index, network, walletName))
+                .map(label -> new RetrievePublicAddressCommand(index, network, label))
                 .orElseGet(() -> new RetrievePublicAddressCommand(index, network));
     }
 
