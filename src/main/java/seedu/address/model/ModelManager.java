@@ -4,14 +4,17 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Transaction;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +25,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private FilteredList<Transaction> filteredTransactions;
+    private boolean isViewTransactions = false;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredTransactions = new FilteredList<>(FXCollections.observableArrayList());
     }
 
     public ModelManager() {
@@ -126,8 +132,39 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+        setViewTransactions(false);
     }
 
+    //=========== Transaction =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Transaction} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Transaction> getFilteredTransactionList() {
+        return filteredTransactions;
+    }
+
+    @Override
+    public void updateTransactionListPredicate(Predicate<Transaction> predicate) {
+        requireNonNull(predicate);
+        filteredTransactions.setPredicate(predicate);
+    }
+
+    @Override
+    public void setViewTransactions(boolean viewTransactions) {
+        this.isViewTransactions = viewTransactions;
+    }
+
+    @Override
+    public boolean getViewTransactions() {
+        return this.isViewTransactions;
+    }
+    @Override
+    public void updateTransactionList(List<Transaction> transactions) {
+        this.filteredTransactions = new FilteredList<>(FXCollections.observableList(transactions));
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -144,5 +181,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
 }

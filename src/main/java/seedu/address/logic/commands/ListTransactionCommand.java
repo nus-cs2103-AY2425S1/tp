@@ -8,7 +8,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.IsSelectedPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -39,7 +38,8 @@ public class ListTransactionCommand extends Command {
         }
 
         Person selected = lastShownList.get(index.getZeroBased());
-        model.updateFilteredPersonList(new IsSelectedPredicate(model, index));
+        model.setViewTransactions(true);
+        model.updateTransactionList(selected.getTransactions());
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(selected)));
     }
 

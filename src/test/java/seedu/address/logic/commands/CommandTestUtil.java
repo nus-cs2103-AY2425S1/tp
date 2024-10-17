@@ -3,9 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OTHER_PARTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -76,6 +80,17 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
+
+    public static final String VALID_DESCRIPTION = "buy raw materials";
+    public static final int VALID_AMOUNT = -100;
+    public static final String VALID_OTHER_PARTY = "Company ABC";
+    public static final String VALID_DATE = "15-10-2024";
+
+    public static final String VALID_DESCRIPTION_INPUT = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION;
+    public static final String VALID_AMOUNT_INPUT = " " + PREFIX_AMOUNT + VALID_AMOUNT;
+    public static final String VALID_OTHER_PARTY_INPUT = " " + PREFIX_OTHER_PARTY + VALID_OTHER_PARTY;
+    public static final String VALID_DATE_INPUT = " " + PREFIX_DATE + VALID_DATE;
+
 
     /**
      * Executes the given {@code command}, confirms that <br>
