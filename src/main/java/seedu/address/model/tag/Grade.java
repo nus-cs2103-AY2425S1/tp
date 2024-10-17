@@ -23,7 +23,7 @@ public class Grade {
     public Grade(String gradeIndex) {
         requireNonNull(gradeIndex);
         checkArgument(isValidGradeName(gradeIndex), MESSAGE_CONSTRAINTS);
-        gradeName = gradeIndex;
+        gradeName = convertIndexToName(gradeIndex);
     }
 
     /**
