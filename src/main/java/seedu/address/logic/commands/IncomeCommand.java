@@ -13,6 +13,7 @@ import seedu.address.model.person.Person;
  */
 public class IncomeCommand extends Command {
     public static final String COMMAND_WORD = "income";
+    public static final String COMMAND_WORD_RANDOM_CASE = "InCome";
 
     @Override
     public CommandResult execute(Model model) {
