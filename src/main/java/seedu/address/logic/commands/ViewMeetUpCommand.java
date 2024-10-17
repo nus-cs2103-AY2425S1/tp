@@ -13,7 +13,7 @@ import seedu.address.model.Model;
  */
 public class ViewMeetUpCommand extends Command {
 
-    public static final String COMMAND_WORD = "viewMeetUp";
+    public static final String COMMAND_WORD = "viewm";
 
     public static final String MESSAGE_SUCCESS = "Viewing all meet-ups";
 
