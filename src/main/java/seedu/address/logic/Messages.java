@@ -45,6 +45,8 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Client Types: ");
         person.getClientTypes().forEach(builder::append);
+        builder.append("; Description: ")
+                .append(person.getDescription());
         return builder.toString();
     }
 
