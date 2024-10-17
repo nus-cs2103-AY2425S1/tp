@@ -2,8 +2,12 @@ package hallpointer.address.logic.commands;
 
 import static hallpointer.address.testutil.Assert.assertThrows;
 import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
+import static hallpointer.address.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
+import static hallpointer.address.testutil.TypicalMembers.ALICE;
 import static hallpointer.address.testutil.TypicalSessions.ATTENDANCE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -16,6 +20,7 @@ import org.junit.jupiter.api.Test;
 
 import hallpointer.address.commons.core.GuiSettings;
 import hallpointer.address.commons.core.index.Index;
+import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.model.AddressBook;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.ReadOnlyAddressBook;
@@ -65,39 +70,88 @@ class AddSessionCommandTest {
         assertEquals(Collections.unmodifiableSet(resultSessions),
                 modelStub.getFilteredMemberList().get(0).getSessions());
     }
+    @Test
+    public void execute_duplicateSession_throwsCommandException() {
+        Session validSession = new SessionBuilder().build();
+        ModelStubWithMember modelStub = new ModelStubWithMember(new MemberBuilder().withSession(validSession).build());
+        Set<Index> indices = new HashSet<>();
+        indices.add(INDEX_FIRST_MEMBER);
 
-    /*@Test
-    public void execute_duplicateMember_throwsCommandException() {
-        Member validMember = new MemberBuilder().build();
-        AddMemberCommand addMemberCommand = new AddMemberCommand(validMember);
-        AddMemberCommandTest.ModelStub modelStub = new AddMemberCommandTest.ModelStubWithMember(validMember);
+        AddSessionCommand addSessionCommand = new AddSessionCommand(validSession, indices);
 
-        assertThrows(CommandException.class,
-                AddMemberCommand.MESSAGE_DUPLICATE_MEMBER, () -> addMemberCommand.execute(modelStub));
+        assertThrows(CommandException.class, () -> addSessionCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_invalidIndex_throwsCommandException() {
+        ModelStubAcceptingSessionAdded modelStub = new ModelStubAcceptingSessionAdded();
+        Session validSession = new SessionBuilder().build();
+        Set<Index> indices = new HashSet<>();
+        indices.add(Index.fromOneBased(2)); // Invalid index as there is only one member
+
+        AddSessionCommand addSessionCommand = new AddSessionCommand(validSession, indices);
+
+        assertThrows(CommandException.class, () -> addSessionCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_sessionAcceptedByModelMultipleMembers_addSuccessful() throws Exception {
+        ModelStubAcceptingSessionAdded modelStub = new ModelStubAcceptingSessionAdded();
+        Session validSession = new SessionBuilder().build();
+        Set<Index> indices = new HashSet<>();
+        Set<Session> resultSessions = new HashSet<>();
+
+        indices.add(INDEX_FIRST_MEMBER);
+        indices.add(Index.fromOneBased(2));
+        modelStub.addMember(new MemberBuilder().build());
+        modelStub.addMember(new MemberBuilder().withName("Bob").build());
+
+        CommandResult commandResult = new AddSessionCommand(validSession, indices).execute(modelStub);
+
+        assertEquals(
+                String.format(
+                        AddSessionCommand.MESSAGE_SUCCESS,
+                        validSession.getSessionName().sessionName,
+                        validSession.getDate().fullDate,
+                        validSession.getPoints().points,
+                        indices.size()
+                ),
+                commandResult.getFeedbackToUser()
+        );
+        resultSessions.add(validSession);
+        assertEquals(Collections.unmodifiableSet(resultSessions),
+                modelStub.getFilteredMemberList().get(0).getSessions());
+        assertEquals(Collections.unmodifiableSet(resultSessions),
+                modelStub.getFilteredMemberList().get(1).getSessions());
     }
 
     @Test
     public void equals() {
-        Member alice = new MemberBuilder().withName("Alice").build();
-        Member bob = new MemberBuilder().withName("Bob").build();
-        AddMemberCommand addAliceCommand = new AddMemberCommand(alice);
-        AddMemberCommand addBobCommand = new AddMemberCommand(bob);
+        Session session1 = new SessionBuilder().withSessionName("Session1").build();
+        Session session2 = new SessionBuilder().withSessionName("Session2").build();
+        Set<Index> indices1 = new HashSet<>();
+        Set<Index> indices2 = new HashSet<>();
+        indices1.add(INDEX_FIRST_MEMBER);
+        indices2.add(INDEX_SECOND_MEMBER);
+
+        AddSessionCommand addSessionCommand1 = new AddSessionCommand(session1, indices1);
+        AddSessionCommand addSessionCommand2 = new AddSessionCommand(session2, indices2);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addSessionCommand1.equals(addSessionCommand1));
 
         // same values -> returns true
-        AddMemberCommand addAliceCommandCopy = new AddMemberCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddSessionCommand addSessionCommand1Copy = new AddSessionCommand(session1, indices1);
+        assertTrue(addSessionCommand1.equals(addSessionCommand1Copy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addSessionCommand1.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addSessionCommand1.equals(null));
 
-        // different member -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different session -> returns false
+        assertFalse(addSessionCommand1.equals(addSessionCommand2));
     }
 
     @Test
@@ -105,12 +159,13 @@ class AddSessionCommandTest {
         AddMemberCommand addMemberCommand = new AddMemberCommand(ALICE);
         String expected = AddMemberCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
         assertEquals(expected, addMemberCommand.toString());
-    } */
+    }
 
     /**
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+        private final UniqueMemberList members = new UniqueMemberList();
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
@@ -143,7 +198,7 @@ class AddSessionCommandTest {
 
         @Override
         public void addMember(Member member) {
-            throw new AssertionError("This method should not be called.");
+            members.add(member);
         }
 
         @Override
@@ -172,7 +227,7 @@ class AddSessionCommandTest {
         }
         @Override
         public ObservableList<Member> getFilteredMemberList() {
-            throw new AssertionError("This method should not be called.");
+            return members.asUnmodifiableObservableList();
         }
 
         @Override
@@ -198,13 +253,24 @@ class AddSessionCommandTest {
         public ObservableList<Member> getFilteredMemberList() {
             return members.asUnmodifiableObservableList();
         }
-
         @Override
-        public void updateFilteredMemberList(Predicate<Member> predicate) {}
-
+        public void setMember(Member target, Member editedMember) {
+            members.setMember(target, editedMember);
+        }
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+    }
+
+    private class ModelStubWithMember extends ModelStub {
+        final UniqueMemberList members = new UniqueMemberList();
+
+        public ModelStubWithMember(Member member) {
+            members.add(member);
+        }
+        @Override public void addMember(Member member) {
+            members.add(member);
         }
     }
 }

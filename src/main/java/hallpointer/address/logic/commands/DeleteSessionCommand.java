@@ -44,6 +44,8 @@ public class DeleteSessionCommand extends Command {
      * @param sessionName The name of the session to delete.
      */
     public DeleteSessionCommand(SessionName sessionName, List<Index> memberIndexes) {
+        requireNonNull(sessionName);
+        requireNonNull(memberIndexes);
         this.memberIndexes = memberIndexes;
         this.sessionName = sessionName;
     }
