@@ -4,8 +4,6 @@ import static hallpointer.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_POINTS;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
-import static hallpointer.address.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
-import static hallpointer.address.model.Model.PREDICATE_SHOW_NO_MEMBERS;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
@@ -74,11 +72,11 @@ public class AddSessionCommand extends Command {
         }
         for (Member member : memberToUpdate) {
             member.addSession(toAdd);
+            model.setMember(member, member);
         }
 
         // Hack to force refresh without focus being needed, since model.setMember doesn't quite work here
-        model.updateFilteredMemberList(PREDICATE_SHOW_NO_MEMBERS);
-        model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
+        // model.updateFilteredMemberList(PREDICATE_SHOW_NO_MEMBERS);
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 toAdd.getSessionName().sessionName,
                 toAdd.getDate().fullDate,

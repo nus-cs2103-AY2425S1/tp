@@ -7,8 +7,6 @@ import java.util.List;
 import hallpointer.address.commons.util.ToStringBuilder;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.UniqueMemberList;
-import hallpointer.address.model.session.Session;
-import hallpointer.address.model.session.UniqueSessionList;
 import javafx.collections.ObservableList;
 
 /**
@@ -19,8 +17,6 @@ import javafx.collections.ObservableList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueMemberList members;
-    private final UniqueSessionList sessions;
-
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -30,7 +26,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         members = new UniqueMemberList();
-        sessions = new UniqueSessionList();
     }
 
     public AddressBook() {
@@ -53,12 +48,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setMembers(List<Member> members) {
         this.members.setMembers(members);
     }
-
-
-    public void setSessions(List<Session> sessions) {
-        this.sessions.setSessions(sessions);
-    }
-
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -66,7 +55,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setMembers(newData.getMemberList());
-        setSessions(newData.getSessionList());
     }
 
     //// member-level operations
@@ -119,69 +107,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Member> getMemberList() {
         return members.asUnmodifiableObservableList();
     }
-
-
-    //=========== Session ================================================================================
-
-    /**
-     * Checks if the given session exists in the list of sessions.
-     *
-     * @param session The session to check for existence.
-     * @return {@code true} if the session exists in the list, otherwise {@code false}.
-     * @throws NullPointerException If the session is null.
-     */
-    public boolean hasSession(Session session) {
-        requireNonNull(session);
-        return sessions.contains(session);
-    }
-
-    /**
-     * Adds the given session to the address book.
-     * {@code session} must not already exist in the address book.
-     *
-     * @param session The session to add.
-     */
-    public void addSession(Session session) {
-        requireNonNull(session);
-        sessions.add(session);
-    }
-
-    /**
-     * Deletes the given session from the address book.
-     * {@code session} must exist in the address book.
-     *
-     * @param session The session to delete.
-     */
-    public void deleteSession(Session session) {
-        requireNonNull(session);
-        sessions.remove(session);
-    }
-
-    /**
-     * Replaces the given session {@code target} with {@code editedSession}.
-     * {@code target} must exist in the address book.
-     * The session identity of {@code editedSession} must not be the same as another
-     * existing session in the address book.
-     *
-     * @param target        The session to replace.
-     * @param editedSession The new session.
-     */
-    public void setSession(Session target, Session editedSession) {
-        requireNonNull(target);
-        requireNonNull(editedSession);
-        sessions.setSession(target, editedSession);
-    }
-
-    /**
-     * Returns an unmodifiable view of the sessions list.
-     *
-     * @return The unmodifiable list of sessions.
-     */
-    public ObservableList<Session> getSessionList() {
-        return sessions.asUnmodifiableObservableList();
-    }
-
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
