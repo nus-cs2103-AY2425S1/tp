@@ -66,6 +66,7 @@ public class DeleteRentalCommand extends Command {
         // TODO: update the rental information list in Model, waiting for implementation from "rview".
         model.setPerson(targetClient, updatedClient);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateVisibleRentalInformationList(rentalInformationList);
 
         return new CommandResult(String.format(MESSAGE_DELETE_RENTAL_SUCCESS,
                 Messages.formatRentalInformation(targetRental)));
