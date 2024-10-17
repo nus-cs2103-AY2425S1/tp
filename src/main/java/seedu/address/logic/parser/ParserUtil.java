@@ -75,6 +75,25 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String phone} into a {@code Phone}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code phone} is invalid.
+     */
+    public static Phone parsePhoneAdd(String phone) throws ParseException {
+        String trimmedPhone = phone.trim();
+        if (!Phone.isValidPhone(trimmedPhone)) {
+            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        }
+
+        if (trimmedPhone.isEmpty()) {
+            return new Phone();
+        }
+
+        return new Phone(trimmedPhone);
+    }
+
+    /**
      * Parses a {@code String address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -182,6 +201,26 @@ public class ParserUtil {
 
         return new Email(trimmedEmail);
     }
+
+    /**
+     * Parses a {@code String email} into an {@code Email}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static Email parseEmailAdd(String email) throws ParseException {
+        String trimmedEmail = email.trim();
+        if (!Email.isValidEmail(trimmedEmail)) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
+
+        if (trimmedEmail.isEmpty()) {
+            return new Email();
+        }
+
+        return new Email(trimmedEmail);
+    }
+
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.

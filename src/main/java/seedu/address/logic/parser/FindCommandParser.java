@@ -1,12 +1,21 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_KEYWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
+import seedu.address.logic.commands.AddClientCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.EmailContainsKeywordsPredicate;
+import seedu.address.model.client.Name;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.client.PhoneContainsKeywordsPredicate;
 
@@ -15,23 +24,60 @@ import seedu.address.model.client.PhoneContainsKeywordsPredicate;
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
+    private static final String VALIDATION_REGEX = "^.+$";
+    private static final String MESSAGE_CONSTRAINTS =
+            "Keywords should only contain alphanumeric characters and spaces, and it should not be blank";
+
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        //TODO: Now can only recognise ONE FULL keyword, FUTURE implement MULTIPLE keyword + substring of NAME/PHONE/EMAIL can also find
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_KEYWORD);
+
+        if (!isPrefixPresent(argMultimap, PREFIX_KEYWORD)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        //Keep as list now for future keywords
+        List<String> keywordList = new ArrayList<>();
+        //TODO can migrate KEYWORD to another class
+        if (isKeywordPresent(argMultimap, PREFIX_KEYWORD)) {
+            String keyword = argMultimap.getValue(PREFIX_KEYWORD).get();
+            requireNonNull(keyword);
+            String trimmedKeyword = keyword.trim();
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)),
-                new PhoneContainsKeywordsPredicate(Arrays.asList(nameKeywords)),
-                new EmailContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            if (!isValidKeyword(trimmedKeyword)) {
+                throw new ParseException(MESSAGE_CONSTRAINTS);
+            }
+
+            keywordList.add(trimmedKeyword);
+        }
+
+        return new FindCommand(new NameContainsKeywordsPredicate(keywordList),
+                new PhoneContainsKeywordsPredicate(keywordList),
+                new EmailContainsKeywordsPredicate(keywordList));
+    }
+
+    private boolean isValidKeyword(String keyword) {
+        return keyword.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if no prefix contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean isPrefixPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    private boolean isKeywordPresent(ArgumentMultimap argumentMultimap, Prefix prefix) {
+        System.out.println("IS KEYWORD PRESENT? : " + argumentMultimap.getValue(prefix).isPresent());
+        return argumentMultimap.getValue(prefix).isPresent();
     }
 
 }

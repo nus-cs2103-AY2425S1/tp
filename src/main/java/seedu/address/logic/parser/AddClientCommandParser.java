@@ -44,15 +44,15 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
         Client client = null;
 
         if (isPhonePresent(argMultimap, PREFIX_PHONE) && isEmailPresent(argMultimap, PREFIX_EMAIL)) {
-            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-            Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+            Phone phone = ParserUtil.parsePhoneAdd(argMultimap.getValue(PREFIX_PHONE).get());
+            Email email = ParserUtil.parseEmailAdd(argMultimap.getValue(PREFIX_EMAIL).get());
             client = new Client(name, phone, email, tagList);
-        } else if (isPhonePresent(argMultimap, PREFIX_PHONE)) {
-            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        } else if (isPhonePresent(argMultimap, PREFIX_PHONE) && !isEmailPresent(argMultimap, PREFIX_EMAIL)) {
+            Phone phone = ParserUtil.parsePhoneAdd(argMultimap.getValue(PREFIX_PHONE).get());
             Email email = new Email();
             client = new Client(name, phone, email, tagList);
-        } else if (isEmailPresent(argMultimap, PREFIX_EMAIL)) {
-            Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        } else if (!isPhonePresent(argMultimap, PREFIX_PHONE) && isEmailPresent(argMultimap, PREFIX_EMAIL)) {
+            Email email = ParserUtil.parseEmailAdd(argMultimap.getValue(PREFIX_EMAIL).get());
             Phone phone = new Phone();
             client = new Client(name, phone, email, tagList);
         }
