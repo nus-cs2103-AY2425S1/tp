@@ -75,7 +75,9 @@ public class AddressBookParser {
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            // will implement in v1.4
+            //return new FindCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

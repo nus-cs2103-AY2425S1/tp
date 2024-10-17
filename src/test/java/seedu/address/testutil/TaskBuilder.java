@@ -61,6 +61,6 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(taskName, deadline, status);
+        return new Task(taskName, deadline, status, 1);
     }
 }

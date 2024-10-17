@@ -3,5 +3,6 @@
     "name": "Hans Muster",
     "email": "invalid@email!3e"
   } ],
-  "groups" : [ ]
+  "groups" : [ ],
+  "tasks" : [ ]
 }
