@@ -8,11 +8,12 @@ import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.AddressBook;
-import seedu.address.model.internshipapplication.InternshipApplication;
+import seedu.hireme.commons.exceptions.IllegalValueException;
+import seedu.hireme.commons.util.JsonUtil;
+import seedu.hireme.model.AddressBook;
+import seedu.hireme.model.internshipapplication.InternshipApplication;
 import seedu.address.testutil.TypicalInternshipApplications;
+import seedu.hireme.storage.JsonSerializableAddressBook;
 
 public class JsonSerializableAddressBookTest {
 

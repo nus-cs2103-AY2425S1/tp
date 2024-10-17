@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
-import seedu.address.model.internshipapplication.Company;
-import seedu.address.model.internshipapplication.Date;
-import seedu.address.model.internshipapplication.Email;
-import seedu.address.model.internshipapplication.InternshipApplication;
-import seedu.address.model.internshipapplication.Name;
-import seedu.address.model.internshipapplication.Role;
+import seedu.hireme.model.internshipapplication.Company;
+import seedu.hireme.model.internshipapplication.Date;
+import seedu.hireme.model.internshipapplication.Email;
+import seedu.hireme.model.internshipapplication.InternshipApplication;
+import seedu.hireme.model.internshipapplication.Name;
+import seedu.hireme.model.internshipapplication.Role;
 
 /**
  * A utility class to help with building InternshipApplication objects.

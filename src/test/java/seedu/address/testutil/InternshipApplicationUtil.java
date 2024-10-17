@@ -1,13 +1,13 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.hireme.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.hireme.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.hireme.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.hireme.logic.parser.CliSyntax.PREFIX_ROLE;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.validator.DateValidator;
-import seedu.address.model.internshipapplication.InternshipApplication;
+import seedu.hireme.logic.commands.AddCommand;
+import seedu.hireme.logic.validator.DateValidator;
+import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 
 /**

@@ -1,8 +1,8 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_INTERNSHIP_APPLICATION_DISPLAYED_INDEX;
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.hireme.logic.Messages.MESSAGE_INVALID_INTERNSHIP_APPLICATION_DISPLAYED_INDEX;
+import static seedu.hireme.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_EMAIL_DESC_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_NAME_DESC_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_APPLE;
@@ -18,19 +18,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.internshipapplication.InternshipApplication;
-import seedu.address.storage.JsonAddressBookStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.StorageManager;
+import seedu.hireme.logic.Logic;
+import seedu.hireme.logic.LogicManager;
+import seedu.hireme.logic.commands.AddCommand;
+import seedu.hireme.logic.commands.CommandResult;
+import seedu.hireme.logic.commands.ListCommand;
+import seedu.hireme.logic.commands.exceptions.CommandException;
+import seedu.hireme.logic.parser.exceptions.ParseException;
+import seedu.hireme.model.Model;
+import seedu.hireme.model.ModelManager;
+import seedu.hireme.model.ReadOnlyAddressBook;
+import seedu.hireme.model.UserPrefs;
+import seedu.hireme.model.internshipapplication.InternshipApplication;
+import seedu.hireme.storage.JsonAddressBookStorage;
+import seedu.hireme.storage.JsonUserPrefsStorage;
+import seedu.hireme.storage.StorageManager;
 import seedu.address.testutil.InternshipApplicationBuilder;
 
 public class LogicManagerTest {

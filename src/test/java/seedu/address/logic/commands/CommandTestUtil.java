@@ -2,22 +2,24 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.hireme.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.hireme.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.hireme.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.hireme.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.internshipapplication.InternshipApplication;
-import seedu.address.model.internshipapplication.NameContainsKeywordsPredicate;
+import seedu.hireme.commons.core.index.Index;
+import seedu.hireme.logic.commands.Command;
+import seedu.hireme.logic.commands.CommandResult;
+import seedu.hireme.logic.commands.exceptions.CommandException;
+import seedu.hireme.model.AddressBook;
+import seedu.hireme.model.Model;
+import seedu.hireme.model.internshipapplication.InternshipApplication;
+import seedu.hireme.model.internshipapplication.NameContainsKeywordsPredicate;
 
 /**
  * Contains helper methods for testing commands.
@@ -65,7 +67,7 @@ public class CommandTestUtil {
      */
     public static void assertCommandSuccess(Command<InternshipApplication> command, Model<InternshipApplication>
             actualModel, CommandResult expectedCommandResult,
-            Model<InternshipApplication> expectedModel) {
+                                            Model<InternshipApplication> expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);

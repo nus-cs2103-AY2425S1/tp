@@ -16,8 +16,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.internshipapplication.exceptions.DuplicateInternshipException;
-import seedu.address.model.internshipapplication.exceptions.InternshipNotFoundException;
+import seedu.hireme.model.internshipapplication.InternshipApplication;
+import seedu.hireme.model.internshipapplication.UniqueList;
+import seedu.hireme.model.internshipapplication.exceptions.DuplicateInternshipException;
+import seedu.hireme.model.internshipapplication.exceptions.InternshipNotFoundException;
 import seedu.address.testutil.InternshipApplicationBuilder;
 
 public class UniqueListTest {

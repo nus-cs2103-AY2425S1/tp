@@ -6,7 +6,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.validator.EmailValidator;
+import seedu.hireme.logic.validator.EmailValidator;
+import seedu.hireme.model.internshipapplication.Email;
 
 public class EmailTest {
 

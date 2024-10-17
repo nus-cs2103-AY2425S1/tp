@@ -13,6 +13,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 import javafx.application.Application;
+import seedu.hireme.AppParameters;
 
 public class AppParametersTest {
 

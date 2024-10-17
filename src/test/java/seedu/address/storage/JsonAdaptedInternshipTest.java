@@ -1,17 +1,18 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.storage.JsonAdaptedInternship.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.hireme.storage.JsonAdaptedInternship.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalInternshipApplications.GOOGLE;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.internshipapplication.Date;
-import seedu.address.model.internshipapplication.Email;
-import seedu.address.model.internshipapplication.Name;
-import seedu.address.model.internshipapplication.Role;
+import seedu.hireme.commons.exceptions.IllegalValueException;
+import seedu.hireme.model.internshipapplication.Date;
+import seedu.hireme.model.internshipapplication.Email;
+import seedu.hireme.model.internshipapplication.Name;
+import seedu.hireme.model.internshipapplication.Role;
+import seedu.hireme.storage.JsonAdaptedInternship;
 
 public class JsonAdaptedInternshipTest {
     private static final String INVALID_COMPANY_NAME = "G@@GLE";

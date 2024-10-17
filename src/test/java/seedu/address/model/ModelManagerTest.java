@@ -3,7 +3,7 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL;
+import static seedu.hireme.model.Model.PREDICATE_SHOW_ALL;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalInternshipApplications.GOOGLE;
 import static seedu.address.testutil.TypicalInternshipApplications.YAHOO;
@@ -13,8 +13,11 @@ import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.internshipapplication.InternshipApplication;
+import seedu.hireme.commons.core.GuiSettings;
+import seedu.hireme.model.AddressBook;
+import seedu.hireme.model.ModelManager;
+import seedu.hireme.model.UserPrefs;
+import seedu.hireme.model.internshipapplication.InternshipApplication;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {

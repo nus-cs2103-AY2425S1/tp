@@ -4,6 +4,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.hireme.model.tag.Tag;
+
 public class TagTest {
 
     @Test

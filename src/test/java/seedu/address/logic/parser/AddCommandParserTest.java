@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.hireme.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_EMAIL_DESC_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_EMAIL_DESC_BOFA;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_NAME_DESC_APPLE;
@@ -20,23 +20,24 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_NAME_AP
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_NAME_BOFA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOFA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOFA;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.hireme.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.hireme.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.hireme.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.hireme.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalInternshipApplications.APPLE;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.internshipapplication.Date;
-import seedu.address.model.internshipapplication.Email;
-import seedu.address.model.internshipapplication.InternshipApplication;
-import seedu.address.model.internshipapplication.Name;
-import seedu.address.model.internshipapplication.Role;
+import seedu.hireme.logic.Messages;
+import seedu.hireme.logic.commands.AddCommand;
+import seedu.hireme.logic.parser.AddCommandParser;
+import seedu.hireme.model.internshipapplication.Date;
+import seedu.hireme.model.internshipapplication.Email;
+import seedu.hireme.model.internshipapplication.InternshipApplication;
+import seedu.hireme.model.internshipapplication.Name;
+import seedu.hireme.model.internshipapplication.Role;
 import seedu.address.testutil.InternshipApplicationBuilder;
 
 public class AddCommandParserTest {

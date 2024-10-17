@@ -2,9 +2,10 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.internshipapplication.InternshipApplication;
+import seedu.hireme.logic.commands.Command;
+import seedu.hireme.logic.parser.Parser;
+import seedu.hireme.logic.parser.exceptions.ParseException;
+import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 /**
  * Contains helper methods for testing command parsers.

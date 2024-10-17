@@ -12,12 +12,13 @@ import static seedu.address.testutil.TypicalInternshipApplications.getTypicalAdd
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.internshipapplication.InternshipApplication;
+import seedu.hireme.commons.core.index.Index;
+import seedu.hireme.logic.Messages;
+import seedu.hireme.logic.commands.DeleteCommand;
+import seedu.hireme.model.Model;
+import seedu.hireme.model.ModelManager;
+import seedu.hireme.model.UserPrefs;
+import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for

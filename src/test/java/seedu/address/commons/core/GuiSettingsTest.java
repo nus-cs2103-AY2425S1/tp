@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.hireme.commons.core.GuiSettings;
+
 public class GuiSettingsTest {
     @Test
     public void toStringMethod() {

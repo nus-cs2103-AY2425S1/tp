@@ -6,7 +6,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.validator.NameValidator;
+import seedu.hireme.logic.validator.NameValidator;
+import seedu.hireme.model.internshipapplication.Name;
 
 public class NameTest {
 
