@@ -5,8 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILLLEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -73,12 +75,14 @@ public class EditGameCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
-        Game gameToEdit = lastShownList.get(index.getZeroBased()).getGames().get(gameName);
+        Map<String, Game> gameMap = lastShownList.get(index.getZeroBased()).getGames();
+        Game gameToEdit = gameMap.get(gameName);
         if (gameToEdit == null) {
             throw new CommandException("That game doesn't exist for this user...");
         }
         Game editedGame = createEditedGame(gameToEdit, editGameDescriptor);
+        gameMap.put(gameName, editedGame);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_EDIT_GAME_SUCCESS, Messages.format(editedGame)));
     }

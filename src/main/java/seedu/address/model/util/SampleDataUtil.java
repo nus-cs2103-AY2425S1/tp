@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.game.Game;
+import seedu.address.model.game.Role;
+import seedu.address.model.game.SkillLevel;
+import seedu.address.model.game.Username;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -22,10 +25,15 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
+        Game sampleGame = new Game("LoL",
+                new Username("LeagueGamer"), new SkillLevel("bad"), new Role("Support"));
+        HashMap<String, Game> sample = new HashMap<String, Game>();
+        sample.put("LoL", sampleGame);
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends"), getGameMap("LoL")),
+                getTagSet("friends"),
+                    sample),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getTagSet("colleagues", "friends"), getGameMap("LoL")),
