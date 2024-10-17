@@ -1,11 +1,13 @@
 package seedu.address.model.person;
 
-import seedu.address.model.tag.Tag;
 import java.util.Set;
+
+import seedu.address.model.tag.Tag;
+
 
 /**
  * Represents a Tutor in the application.
- * A Tutor is a Person who teaches others and has specific characteristics such as name, phone, email, address, hours, and tags.
+ * A Tutor is a Person who teaches others.
  */
 public class Tutor extends Person {
 
