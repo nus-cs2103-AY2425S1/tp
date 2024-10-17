@@ -26,7 +26,6 @@ public class TeacherBuilder {
     public static final String DEFAULT_SUBJECT = "Mathematics";
     public static final String DEFAULT_CLASSES = "Class 1, Class 2";
 
-
     private Name name;
     private Gender gender;
     private Phone phone;
