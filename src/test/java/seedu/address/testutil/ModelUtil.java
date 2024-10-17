@@ -15,6 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.concert.Concert;
+import seedu.address.model.concert.ConcertContact;
 import seedu.address.model.person.Person;
 
 /**
@@ -114,6 +115,26 @@ public class ModelUtil {
         public void updateFilteredConcertList(Predicate<Concert> concert) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addConcertContact(ConcertContact concertContact) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<ConcertContact> getFilteredConcertContactList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasConcertContact(ConcertContact concertContact) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredConcertContactList(Predicate<ConcertContact> concertContact) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -181,7 +202,7 @@ public class ModelUtil {
     }
 
     /**
-     * A Model stub that always accept the concertbeing added.
+     * A Model stub that always accept the concert being added.
      */
     public class ModelStubAcceptingConcertAdded extends ModelStub {
         private final ArrayList<Concert> concertsAdded = new ArrayList<>();
