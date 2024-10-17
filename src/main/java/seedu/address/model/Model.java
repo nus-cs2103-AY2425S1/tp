@@ -92,7 +92,6 @@ public interface Model {
     //=========== Student ================================================================================
 
 
-
     Student getStudentByName(Name name);
 
     /**
@@ -104,7 +103,6 @@ public interface Model {
      * Deletes the given student.
      * The student must exist in the address book.
      */
-
     void deleteStudent(Student target);
 
     /**
@@ -133,7 +131,6 @@ public interface Model {
      */
 
     void updateFilteredStudentList(Predicate<Student> predicate);
-
 
 
 
