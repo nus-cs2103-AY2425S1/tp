@@ -1,6 +1,5 @@
 package keycontacts.ui;
 
-import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,7 +19,6 @@ import keycontacts.model.student.Student;
 public class StudentCard extends UiPart<Region> {
 
     private static final String FXML = "StudentListCard.fxml";
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved
@@ -67,17 +65,33 @@ public class StudentCard extends UiPart<Region> {
         phone.setText(student.getPhone().value);
         address.setText(student.getAddress().value);
         gradeLevel.setText(student.getGradeLevel().value);
-        cancelledLessons.setText(student.getCancelledLessons().stream()
-                .sorted(Comparator.comparing(CancelledLesson::getLessonDate))
-                .map(cancelledLesson -> cancelledLesson.getLessonDate().toString())
-                .collect(Collectors.joining(", ")));
         regularLesson.setText(student.getRegularLessonDisplay());
         pianoPieces.setText(student.getPianoPieces().stream()
                 .sorted(Comparator.comparing(pianoPiece -> pianoPiece.pianoPieceName))
                 .map(pianoPiece -> pianoPiece.pianoPieceName)
                 .collect(Collectors.joining(", ")));
+        cancelledLessons.setText(formatCancelledLessons(student));
         makeupLessons.setText(formatMakeupLessons(student));
+    }
 
+    /**
+     * Formats the cancelled lessons with index and date.
+     */
+    private String formatCancelledLessons(Student student) {
+        List<CancelledLesson> sortedLessons = student.getCancelledLessons().stream()
+                .sorted(Comparator.comparing(CancelledLesson::getLessonDate))
+                .collect(Collectors.toList());
+
+        if (sortedLessons.isEmpty()) {
+            return "No Cancelled Lessons";
+        }
+
+        return IntStream.range(0, sortedLessons.size())
+                .mapToObj(i -> String.format(
+                        "%d. %s",
+                        i + 1,
+                        sortedLessons.get(i).getLessonDate().toDisplay()))
+                .collect(Collectors.joining("\n", "Cancelled Lessons:\n", ""));
     }
 
     /**
@@ -94,9 +108,9 @@ public class StudentCard extends UiPart<Region> {
 
         return IntStream.range(0, sortedLessons.size())
                 .mapToObj(i -> String.format(
-                        "%d. Date: %s, Time: %s - %s",
+                        "%d. %s, Time: %s - %s",
                         i + 1,
-                        sortedLessons.get(i).getLessonDate().getLocalDate().format(formatter),
+                        sortedLessons.get(i).getLessonDate().toDisplay(),
                         sortedLessons.get(i).getStartTime(),
                         sortedLessons.get(i).getEndTime()))
                 .collect(Collectors.joining("\n", "Makeup Lessons:\n", ""));

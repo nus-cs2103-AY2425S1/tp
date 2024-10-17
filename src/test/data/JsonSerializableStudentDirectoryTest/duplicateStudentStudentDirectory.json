@@ -10,7 +10,8 @@
       "startTime": "16:00",
       "endTime": "18:00"
     },
-    "cancelledLessons": [ ]
+    "cancelledLessons": [ ],
+    "makeupLessons": [ ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -22,6 +23,7 @@
       "startTime": "16:00",
       "endTime": "18:00"
     },
-    "cancelledLessons": [ ]
+    "cancelledLessons": [ ],
+    "makeupLessons": [ ]
   } ]
 }

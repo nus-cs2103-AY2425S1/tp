@@ -55,7 +55,7 @@ public class Student {
     public Student(Name name, Phone phone, Address address, GradeLevel gradeLevel,
                    Set<PianoPiece> pianoPieces, RegularLesson regularLesson, Set<CancelledLesson> cancelledLessons,
                    Set<MakeupLesson> makeupLessons) {
-        requireAllNonNull(name, phone, address, gradeLevel, pianoPieces);
+        requireAllNonNull(name, phone, address, gradeLevel, pianoPieces, cancelledLessons, makeupLessons);
         this.name = name;
         this.phone = phone;
         this.address = address;
@@ -136,17 +136,12 @@ public class Student {
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(phone);
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(address);
         GradeLevel updatedGradeLevel = editStudentDescriptor.getGradeLevel().orElse(this.gradeLevel);
-        return new Student(updatedName, updatedPhone, updatedAddress, updatedGradeLevel,
-            pianoPieces, regularLesson,
-                cancelledLessons, makeupLessons);
-    }
 
-    /**
-     * Creates and returns a new {@code Student} with the updated {@code regularLesson}.
-     */
-    public Student withRegularLesson(RegularLesson regularLesson) {
-        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson,
-            cancelledLessons, makeupLessons);
+        return new Updater().withName(updatedName)
+                .withPhone(updatedPhone)
+                .withAddress(updatedAddress)
+                .withGradeLevel(updatedGradeLevel)
+                .update();
     }
 
     /**
@@ -156,8 +151,25 @@ public class Student {
         Set<PianoPiece> updatedPianoPieces = new HashSet<>(pianoPieces);
         updatedPianoPieces.addAll(addedPianoPieces);
 
-        return new Student(name, phone, address, gradeLevel, updatedPianoPieces, regularLesson,
-            cancelledLessons, makeupLessons);
+        return new Updater().withPianoPieces(updatedPianoPieces).update();
+    }
+
+
+    /**
+     * Creates and returns a new {@code Student} with the updated {@code regularLesson}.
+     */
+    public Student withRegularLesson(RegularLesson regularLesson) {
+        return new Updater().withRegularLesson(regularLesson).update();
+    }
+
+    /**
+     * Returns a new student with an additional {@code CancelledLesson}.
+     */
+    public Student withAddedCancelledLesson(CancelledLesson cancelledLesson) {
+        Set<CancelledLesson> updatedCancelledLessons = new HashSet<>(cancelledLessons);
+        updatedCancelledLessons.add(cancelledLesson);
+
+        return new Updater().withCancelledLessons(updatedCancelledLessons).update();
     }
 
     /**
@@ -167,8 +179,7 @@ public class Student {
         Set<MakeupLesson> updatedMakeupLessons = new HashSet<>(makeupLessons);
         updatedMakeupLessons.add(makeupLesson);
 
-        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson,
-            cancelledLessons, updatedMakeupLessons);
+        return new Updater().withMakeupLessons(updatedMakeupLessons).update();
     }
 
     /**
@@ -206,7 +217,7 @@ public class Student {
                 && gradeLevel.equals(otherStudent.gradeLevel)
                 && pianoPieces.equals(otherStudent.pianoPieces)
                 && getRegularLessonOptional().equals(otherStudent.getRegularLessonOptional())
-                && getCancelledLessons().equals(otherStudent.getCancelledLessons())
+                && cancelledLessons.equals(otherStudent.cancelledLessons)
                 && makeupLessons.equals(otherStudent.makeupLessons);
     }
 
@@ -241,13 +252,62 @@ public class Student {
     }
 
     /**
-     * Returns a new student with an additional {@code CancelledLesson}.
+     *  Inner private class for updating the student object.
+     *  {@code with...} methods in {@code Student} serve as an abstraction over the inner methods.
      */
-    public Student withAddedCancelledLesson(CancelledLesson cancelledLesson) {
-        Set<CancelledLesson> updatedCancelledLessons = new HashSet<>(cancelledLessons);
-        updatedCancelledLessons.add(cancelledLesson);
-        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson,
-            updatedCancelledLessons, makeupLessons);
-    }
+    private class Updater {
+        private Name name = Student.this.name;
+        private Phone phone = Student.this.phone;
+        private Address address = Student.this.address;
+        private GradeLevel gradeLevel = Student.this.gradeLevel;
+        private Set<PianoPiece> pianoPieces = new HashSet<>(Student.this.pianoPieces);
+        private RegularLesson regularLesson = Student.this.regularLesson;
+        private Set<CancelledLesson> cancelledLessons = new HashSet<>(Student.this.cancelledLessons);
+        private Set<MakeupLesson> makeupLessons = new HashSet<>(Student.this.makeupLessons);
 
+        private Updater withName(Name name) {
+            this.name = name;
+            return this;
+        }
+
+        private Updater withPhone(Phone phone) {
+            this.phone = phone;
+            return this;
+        }
+
+        private Updater withAddress(Address address) {
+            this.address = address;
+            return this;
+        }
+
+        private Updater withGradeLevel(GradeLevel gradeLevel) {
+            this.gradeLevel = gradeLevel;
+            return this;
+        }
+
+        private Updater withPianoPieces(Set<PianoPiece> pianoPieces) {
+            this.pianoPieces = pianoPieces;
+            return this;
+        }
+
+        private Updater withRegularLesson(RegularLesson regularLesson) {
+            this.regularLesson = regularLesson;
+            return this;
+        }
+
+        private Updater withCancelledLessons(Set<CancelledLesson> cancelledLessons) {
+            this.cancelledLessons = cancelledLessons;
+            return this;
+        }
+
+        private Updater withMakeupLessons(Set<MakeupLesson> makeupLessons) {
+            this.makeupLessons = makeupLessons;
+            return this;
+        }
+
+        private Student update() {
+            return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson, cancelledLessons,
+                    makeupLessons);
+        }
+    }
 }

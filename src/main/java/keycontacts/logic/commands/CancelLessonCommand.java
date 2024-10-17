@@ -29,7 +29,7 @@ public class CancelLessonCommand extends Command {
             + PREFIX_DATE + "DATE "
             + PREFIX_START_TIME + "START_TIME\n"
             + "Example: " + COMMAND_WORD + PREFIX_DATE + " 06-07-2022 " + PREFIX_START_TIME + "12:00";
-    public static final String MESSAGE_SUCCESS = "Cancelled lesson at %1$s and %2$s for student: %3$s";
+    public static final String MESSAGE_SUCCESS = "Cancelled lesson at %1$s, %2$s for student: %3$s";
     public static final String MESSAGE_LESSON_NOT_FOUND = "No lesson with the "
             + "specified parameters found for student %1$s.\n"
             + "Check if you inputted the right index, date and timing!";
@@ -72,7 +72,7 @@ public class CancelLessonCommand extends Command {
         model.setStudent(studentToUpdate, updatedStudent);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS,
-                date, startTime, Messages.format(updatedStudent)));
+                date.toDisplay(), startTime, Messages.format(updatedStudent)));
     }
 
     @Override

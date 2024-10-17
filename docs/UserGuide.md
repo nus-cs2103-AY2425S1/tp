@@ -142,6 +142,19 @@ Format: `cancel INDEX dt/DATE st/START_TIME`
 Example:
 * `cancel 1 dt/15-10-2024 st/16:00` Cancels a regular lesson on 15-10-2024 (which is a Tuesday), starting at 4pm for the 1st student.
 
+### Scheduling a makeup lesson : `makeup`
+
+Schedules a makeup lesson for the specified student in the student directory.
+
+Format: `makeup INDEX dt/DATE st/START_TIME et/END_TIME`
+
+* Schedules the makeup lesson for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* `DATE` must be in the format `DD-MM-YYYY`.
+* `START_TIME` and `END_TIME` must be in 24-hour format, and `START_TIME` must be before `END_TIME`
+
+Examples:
+* `makeup 1 dt/25-12-2022 st/12:00 et/14:00` Schedules a makeup lesson on 25th December 2022, 12-2pm for the 1st student.
+
 ### Locating students by name: `find`
 
 Finds students whose names contain any of the given keywords.
@@ -159,19 +172,6 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Scheduling a makeup lesson : `makeup`
-
-Schedules a makeup lesson for the specified student in the student directory.
-
-Format: `makeup INDEX dt/DATE st/START_TIME et/END_TIME`
-
-* Schedules the makeup lesson for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-* `DATE` must be in the format `DD-MM-YYYY`.
-* `START_TIME` and `END_TIME` must be in 24-hour format, and `START_TIME` must be before `END_TIME`
-
-Examples:
-* `makeup 1 dt/25-12-2022 st/12:00 et/14:00` Schedules a makeup lesson on 25th December 2022, 12-2pm for the 1st student.
 
 ### Deleting a student : `delete`
 

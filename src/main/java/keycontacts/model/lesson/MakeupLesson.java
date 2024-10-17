@@ -3,6 +3,9 @@ package keycontacts.model.lesson;
 import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import keycontacts.commons.util.ToStringBuilder;
 
@@ -61,4 +64,14 @@ public class MakeupLesson extends Lesson {
     public String toDisplay() {
         return lessonDate.toString() + " " + super.toDisplay();
     }
+
+    /**
+     * Returns a makeup lesson set containing the lists of strings given.
+     */
+    public static Set<MakeupLesson> getMakeupLessonSet(String[] dates, String[] startTimes, String[] endTimes) {
+        return IntStream.range(0, dates.length)
+                .mapToObj(i -> new MakeupLesson(new Date(dates[i]), new Time(startTimes[i]), new Time(endTimes[i])))
+                .collect(Collectors.toSet());
+    }
+
 }
