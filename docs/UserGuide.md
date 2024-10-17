@@ -283,7 +283,7 @@ the data of your previous AddressBook home folder.
 - **Peace of Mind:** Ensure you have a backup exactly when you need it.
 
 **Q**: Can I Save Backups to a Custom Path?<br>
-**A**: Currently, **manual backups are saved to the default path** (`/backups` folder). There is no option to specify a
+**A**: Currently, manual backups are saved to the **default path** (`/backups` folder). There is no option to specify a
 **custom path** within the application. However, you can **move the backup files** manually from the `/backups` folder
 to any desired location if needed.
 
