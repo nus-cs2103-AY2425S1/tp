@@ -291,7 +291,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​    | I want to …​                                                 | So that I can…​                                                                     |
 |----------|------------|--------------------------------------------------------------|-------------------------------------------------------------------------------------|
 | `* * *`  | new user   | see usage instructions                                       | refer to instructions when I forget how to use the HRHelper app.                    |
-| `* * *`  | new user   | create an account using company email                        | my data remains secure and verified.                                                |
+| `* * *`  | HR manager | sign into my account                                         | keep my data secure and verified.                                                   |
 | `* * *`  | HR manager | add new employee profiles                                    | keep the data current.                                                              |
 | `* * *`  | HR manager | delete an employee                                           | remove entries that I no longer need.                                               |
 | `* * *`  | HR manager | find an employee by name                                     | locate details of employee quickly.                                                 |

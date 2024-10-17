@@ -65,6 +65,6 @@ public class Credentials {
             logger.info("user not found");
             return false;
         }
-        return credentials.get(username).equals(password);
+        return credentials.get(username).equals(Hashing.hash(password));
     }
 }
