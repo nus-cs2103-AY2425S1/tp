@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.CONTACTTYPE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.CONTACTTYPE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
@@ -18,8 +20,6 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.TELEHANDLE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TELEHANDLE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.CONTACTTYPE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.CONTACTTYPE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -196,8 +196,8 @@ public class AddCommandParserTest {
                         + TELEHANDLE_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + CommandTestUtil.CONTACTTYPE_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + TELEHANDLE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + CommandTestUtil.CONTACTTYPE_DESC_BOB + NAME_DESC_BOB
+                        + PHONE_DESC_BOB + EMAIL_DESC_BOB + TELEHANDLE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

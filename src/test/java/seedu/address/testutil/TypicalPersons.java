@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACTTYPE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACTTYPE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -11,8 +12,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEHANDLE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEHANDLE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACTTYPE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.CONTACTTYPE_DESC_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
