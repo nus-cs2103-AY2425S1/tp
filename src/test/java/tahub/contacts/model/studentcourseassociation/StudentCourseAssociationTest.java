@@ -31,10 +31,8 @@ public class StudentCourseAssociationTest {
         Course course = new Course("CS1101S", "Programming Methodology");
         Tutorial tutorial = new Tutorial("T01", course);
         GradingSystem grades = new GradingSystem();
-
         StudentCourseAssociation sca = new StudentCourseAssociation(student, course, grades, tutorial);
         assertNotNull(sca);
-
         assertSame(student, sca.getStudent());
         assertSame(course, sca.getCourse());
         assertSame(tutorial, sca.getCourseClass());
@@ -50,10 +48,8 @@ public class StudentCourseAssociationTest {
         Course course = new Course("CS2030", "Programming Methodology 2");
         Tutorial tutorial = new Tutorial("T02", course);
         GradingSystem grades = new GradingSystem();
-
         StudentCourseAssociation sca = new StudentCourseAssociation(student, course, grades, tutorial);
         assertNotNull(sca);
-
         assertSame(student, sca.getStudent());
         assertSame(course, sca.getCourse());
         assertSame(tutorial, sca.getCourseClass());
@@ -69,10 +65,8 @@ public class StudentCourseAssociationTest {
         Course course = new Course("CS3230", "Design and Analysis of Algorithms");
         Tutorial tutorial = new Tutorial("T03", course);
         GradingSystem grades = new GradingSystem();
-
         StudentCourseAssociation sca = new StudentCourseAssociation(student, course, grades, tutorial);
         assertNotNull(sca);
-
         assertSame(student, sca.getStudent());
         assertSame(course, sca.getCourse());
         assertSame(tutorial, sca.getCourseClass());
@@ -88,10 +82,8 @@ public class StudentCourseAssociationTest {
         Course course = new Course("CS2020", "Data Structures and Algorithms Accelerated");
         Recitation recitation = new Recitation("R01", course);
         GradingSystem grades = new GradingSystem();
-
         StudentCourseAssociation sca = new StudentCourseAssociation(student, course, grades, recitation);
         assertNotNull(sca);
-
         assertSame(student, sca.getStudent());
         assertSame(course, sca.getCourse());
         assertSame(recitation, sca.getCourseClass());
@@ -107,10 +99,8 @@ public class StudentCourseAssociationTest {
         Course course = new Course("CS2040", "Data Structures and Algorithms");
         Recitation recitation = new Recitation("R02", course);
         GradingSystem grades = new GradingSystem();
-
         StudentCourseAssociation sca = new StudentCourseAssociation(student, course, grades, recitation);
         assertNotNull(sca);
-
         assertSame(student, sca.getStudent());
         assertSame(course, sca.getCourse());
         assertSame(recitation, sca.getCourseClass());
@@ -126,10 +116,8 @@ public class StudentCourseAssociationTest {
         Course course = new Course("CS1010", "Programming Methodology");
         Recitation recitation = new Recitation("R03", course);
         GradingSystem grades = new GradingSystem();
-
         StudentCourseAssociation sca = new StudentCourseAssociation(student, course, grades, recitation);
         assertNotNull(sca);
-
         assertSame(student, sca.getStudent());
         assertSame(course, sca.getCourse());
         assertSame(recitation, sca.getCourseClass());
@@ -144,17 +132,14 @@ public class StudentCourseAssociationTest {
                                     new Email("james_tan@example.com"), new Address("999 Boulevard"), tags);
         Course course = new Course("CS3231", "Software Engineering");
         Tutorial tutorial = new Tutorial("T04", course);
-
         GradingSystem grades = new GradingSystem();
         StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course, grades, tutorial);
-        
         Person otherStudent = new Person(matricNumber, new Name("James Tan"), new Phone("99999999"), 
                                     new Email("james_tan@example.com"), new Address("999 Boulevard"), tags);
         Course otherCourse = new Course("CS3231", "Software Engineering");
         Tutorial otherTutorial = new Tutorial("T04", otherCourse);
         GradingSystem otherGrades = new GradingSystem();
         StudentCourseAssociation sca2 = new StudentCourseAssociation(otherStudent, otherCourse, otherGrades, otherTutorial);
-        
         assertEquals(sca1, sca2);
     }
 
@@ -166,10 +151,8 @@ public class StudentCourseAssociationTest {
                                     new Email("james_tan@example.com"), new Address("999 Boulevard"), tags);
         Course course = new Course("CS3231", "Software Engineering");
         Tutorial tutorial = new Tutorial("T04", course);
-
         GradingSystem grades = new GradingSystem();
         StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course, grades, tutorial);
-        
         Recitation differentRecitation = new Recitation("R04", course);
         StudentCourseAssociation sca3 = new StudentCourseAssociation(student, course, grades, differentRecitation);
         assertFalse(sca1.equals(sca3));
@@ -183,14 +166,11 @@ public class StudentCourseAssociationTest {
                                     new Email("james_tan@example.com"), new Address("999 Boulevard"), tags);
         Course course = new Course("CS3231", "Software Engineering");
         Tutorial tutorial = new Tutorial("T04", course);
-
         GradingSystem grades = new GradingSystem();
         StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course, grades, tutorial);
-        
         MatriculationNumber differentMatricNumber = new MatriculationNumber("A8888888B");
         Person differentStudent = new Person(differentMatricNumber, new Name("Johnny Tan"), new Phone("88888888"), 
                                     new Email("johnny_tan@example.com"), new Address("888 Boulevard"), tags);
-        
         StudentCourseAssociation sca4 = new StudentCourseAssociation(differentStudent, course, grades, tutorial);
         assertFalse(sca1.equals(sca4));
     }
