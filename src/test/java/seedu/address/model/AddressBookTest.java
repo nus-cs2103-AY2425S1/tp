@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.FLORIST;
+import static seedu.address.testutil.TypicalPersons.WEDDING_ONE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -22,6 +23,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -52,7 +54,8 @@ public class AddressBookTest {
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         List<Tag> tags = Arrays.asList(FLORIST);
-        AddressBookStub newData = new AddressBookStub(newPersons, tags);
+        List<Wedding> weddings = Arrays.asList(WEDDING_ONE);
+        AddressBookStub newData = new AddressBookStub(newPersons, tags, weddings);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -98,10 +101,12 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
+        private final ObservableList<Wedding> weddings = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons, Collection<Tag> tags) {
+        AddressBookStub(Collection<Person> persons, Collection<Tag> tags, Collection<Wedding> weddings) {
             this.persons.setAll(persons);
             this.tags.setAll(tags);
+            this.weddings.setAll(weddings);
         }
 
         @Override
@@ -112,6 +117,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Tag> getTagList() {
             return tags;
+        }
+
+        @Override
+        public ObservableList<Wedding> getWeddingList() {
+            return weddings;
         }
     }
 

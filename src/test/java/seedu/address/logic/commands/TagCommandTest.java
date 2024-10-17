@@ -43,7 +43,8 @@ public class TagCommandTest {
                 personToEdit.getPhone(),
                 personToEdit.getEmail(),
                 personToEdit.getAddress(),
-                updatedTags);
+                updatedTags,
+                personToEdit.getWeddings());
         expectedModel.setPerson(personToEdit, editedPerson);
 
         CommandTestUtil.assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
@@ -57,7 +58,8 @@ public class TagCommandTest {
                 new seedu.address.model.person.Phone("99999999"),
                 new seedu.address.model.person.Email("test@example.com"),
                 new seedu.address.model.person.Address("123, Test Street"),
-                new HashSet<>(Arrays.asList(new Tag(new TagName("family"))))
+                new HashSet<>(Arrays.asList(new Tag(new TagName("family")))),
+                new HashSet<>()
         );
         model.addTag(new Tag(new TagName("family")));
         model.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), personWithTags);
@@ -78,7 +80,8 @@ public class TagCommandTest {
                 personWithTags.getPhone(),
                 personWithTags.getEmail(),
                 personWithTags.getAddress(),
-                updatedTags);
+                updatedTags,
+                personWithTags.getWeddings());
         expectedModel.setPerson(personWithTags, editedPerson);
 
         CommandTestUtil.assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
