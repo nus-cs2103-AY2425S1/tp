@@ -10,6 +10,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.student.exceptions.DuplicatePersonException;
 import seedu.address.model.student.exceptions.PersonNotFoundException;
+import seedu.address.model.task.exceptions.DuplicateTaskException;
+import seedu.address.model.task.exceptions.TaskNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -58,11 +60,11 @@ public class UniqueTaskList implements Iterable<Task> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new TaskNotFoundException();
         }
 
         if (!target.isSameTask(editedTask) && contains(editedTask)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateTaskException();
         }
 
         internalList.set(index, editedTask);
