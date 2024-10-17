@@ -40,7 +40,7 @@ handling administrative tasks.
 similar to a "teacher's pet."
 - We developed this application as we saw a real inefficiency in how TAs were managing their students information,
 with many still relying on pen and paper.
-- TA will solve this inefficiency and improve the quality of life for TAs.
+- TP will solve this inefficiency and improve the quality of life for TAs.
 
 ## Other Details
 * The project builds on an ongoing software project for a desktop application (called _AddressBook_),
