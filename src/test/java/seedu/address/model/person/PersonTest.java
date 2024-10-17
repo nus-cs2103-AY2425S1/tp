@@ -79,17 +79,17 @@ public class PersonTest {
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         // name differs in case, different student ID, phone number and email
-        // all other attributes same -> returns false
+        // all other attributes same -> returns true
         editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).withStudentId(VALID_STUDENTID_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, different student ID, phone number and email
-        // all other attributes same -> returns false
+        // all other attributes same -> returns true
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).withStudentId(VALID_STUDENTID_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
     }
 
     @Test

@@ -55,7 +55,7 @@ public class UnmarkCommand extends Command {
         if (!newTutorials.remove(tutorial)) {
             throw new CommandException(
                     String.format(MESSAGE_UNMARK_UNNECESSARY, tutorial.tutorial, Messages.format(personToEdit)));
-        };
+        }
 
         Person editedPerson = new Person(
                 personToEdit.getName(),
