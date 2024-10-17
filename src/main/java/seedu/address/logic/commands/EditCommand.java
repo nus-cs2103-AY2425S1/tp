@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -29,6 +30,7 @@ import seedu.address.model.person.Hours;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -47,7 +49,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_HOURS + "HOURS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -106,7 +109,8 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Hours updatedHours = editPersonDescriptor.getHours().orElse(personToEdit.getHours());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours, updatedTags);
+        Set<Subject> updatedSubjects = editPersonDescriptor.getSubjects().orElse(personToEdit.getSubjects());
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours, updatedTags, updatedSubjects);
     }
 
     @Override
@@ -145,6 +149,8 @@ public class EditCommand extends Command {
         private Hours hours;
         private Set<Tag> tags;
 
+        private Set<Subject> subjects;
+
         public EditPersonDescriptor() {}
 
         /**
@@ -158,7 +164,11 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setHours(toCopy.hours);
             setTags(toCopy.tags);
+            setSubject(toCopy.subjects);
         }
+
+
+
 
         /**
          * Returns true if at least one field is edited.
@@ -207,6 +217,8 @@ public class EditCommand extends Command {
             return Optional.ofNullable(hours);
         }
 
+
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -254,6 +266,10 @@ public class EditCommand extends Command {
                     .add("hours", hours)
                     .add("tags", tags)
                     .toString();
+        }
+
+        public Optional<Set<Subject>> getSubjects() {
+            return (subjects != null) ? Optional.of(Collections.unmodifiableSet(subjects)) : Optional.empty();
         }
     }
 }

@@ -2,8 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,10 +28,12 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    private Set<Subject> subjects = new HashSet<>();
+
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Hours hours, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Hours hours, Set<Tag> tags, Set<Subject> subjects) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -37,6 +41,7 @@ public class Person {
         this.address = address;
         this.hours = hours;
         this.tags.addAll(tags);
+        this.subjects.addAll(subjects);
     }
 
     public Name getName() {
@@ -119,7 +124,22 @@ public class Person {
                 .add("address", address)
                 .add("hours", hours)
                 .add("tags", tags)
+                .add("subjects", subjects)
                 .toString();
     }
+
+    public void addSubject(Subject subject) {
+        subjects.add(subject);
+    }
+
+    public Set<Subject> getSubjects() {
+        return Collections.unmodifiableSet(subjects);
+    }
+
+    public boolean hasSubject(String subject) {
+        return subjects.stream()
+                .anyMatch(s -> s.subject.equalsIgnoreCase(subject));
+    }
+
 
 }
