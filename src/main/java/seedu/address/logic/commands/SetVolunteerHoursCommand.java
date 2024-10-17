@@ -38,7 +38,6 @@ public class SetVolunteerHoursCommand extends Command {
 
     public static final String MESSAGE_SET_VOLUNTEER_HOURS_SUCCESS = "New hours for: %1$s";
     public static final String MESSAGE_NOT_EDITED = "The new number of hours must be provided.";
-    public static final String MESSAGE_NOT_IMPLEMENTED = "The execute function has not been implemented.";
     private final Index index;
     private final Integer newHours;
 
