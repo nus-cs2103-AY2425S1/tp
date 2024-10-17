@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_NAME;
@@ -82,9 +82,15 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_ECNAME_DESC = " " + PREFIX_EMERGENCY_CONTACT_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_ECPHONE_DESC = " " + PREFIX_EMERGENCY_CONTACT_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_ECRS_DESC = " " + PREFIX_EMERGENCY_CONTACT_RELATIONSHIP + "hubby*"; // '*' not allowed in relationships
+
+    // '&' not allowed in names
+    public static final String INVALID_ECNAME_DESC = " " + PREFIX_EMERGENCY_CONTACT_NAME + "James&";
+
+    // 'a' not allowed in phones
+    public static final String INVALID_ECPHONE_DESC = " " + PREFIX_EMERGENCY_CONTACT_PHONE + "911a";
+
+    // '*' not allowed in relationships
+    public static final String INVALID_ECRS_DESC = " " + PREFIX_EMERGENCY_CONTACT_RELATIONSHIP + "hubby*";
     public static final String INVALID_DOC_EMAIL_DESC = " " + PREFIX_DOC_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_DOC_NAME_DESC = " " + PREFIX_DOC_NAME + "John*"; // '*' not allowed in names
     public static final String INVALID_DOC_PHONE_DESC = " " + PREFIX_DOC_PHONE + "911a"; // 'a' not allowed in phones
@@ -107,7 +113,8 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withEmergencyContactName(VALID_ECNAME_BOB).withEmergencyContactPhone(VALID_ECPHONE_BOB)
                 .withEmergencyContactRelationship(VALID_ECRS_BOB)
-                .withDoctorName(VALID_DOC_NAME_BOB).withDoctorPhone(VALID_DOC_PHONE_BOB).withDoctorEmail(VALID_DOC_EMAIL_BOB)
+                .withDoctorName(VALID_DOC_NAME_BOB).withDoctorPhone(VALID_DOC_PHONE_BOB)
+                .withDoctorEmail(VALID_DOC_EMAIL_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 

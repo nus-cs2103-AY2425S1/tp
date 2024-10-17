@@ -2,12 +2,12 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DOC_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DOC_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DOC_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DOC_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DOC_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DOC_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DOC_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DOC_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ECPHONE_AMY;
@@ -81,12 +81,14 @@ public class TypicalPersons {
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
             .withEcName(VALID_ECNAME_AMY).withEcPhone(VALID_ECPHONE_AMY).withEcRelationship(VALID_ECRS_AMY)
-            .withDoctorName(VALID_DOC_NAME_AMY).withDoctorPhone(VALID_DOC_PHONE_AMY).withDoctorEmail(VALID_DOC_EMAIL_AMY)
+            .withDoctorName(VALID_DOC_NAME_AMY).withDoctorPhone(VALID_DOC_PHONE_AMY)
+            .withDoctorEmail(VALID_DOC_EMAIL_AMY)
             .withTags(VALID_TAG_FRIEND).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
             .withEcName(VALID_ECNAME_BOB).withEcPhone(VALID_ECPHONE_BOB).withEcRelationship(VALID_ECRS_BOB)
-            .withDoctorName(VALID_DOC_NAME_BOB).withDoctorPhone(VALID_DOC_PHONE_BOB).withDoctorEmail(VALID_DOC_EMAIL_BOB)
+            .withDoctorName(VALID_DOC_NAME_BOB).withDoctorPhone(VALID_DOC_PHONE_BOB)
+            .withDoctorEmail(VALID_DOC_EMAIL_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
