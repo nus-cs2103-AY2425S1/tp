@@ -76,6 +76,12 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    /**
+     * Add grade to gradeList
+     *
+     * @param grade New grade to be added
+     * @return new immutable Person
+     */
     public Person addGrade(Grade grade) {
         requireAllNonNull(grade);
 

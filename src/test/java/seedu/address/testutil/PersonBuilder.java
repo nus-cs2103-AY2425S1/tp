@@ -109,7 +109,7 @@ public class PersonBuilder {
     public PersonBuilder withGrades(List<Grade> grades) {
         this.gradeList = new GradeList();
         for (Grade grade : grades) {
-            this.gradeList.addGrade(grade);
+            this.gradeList = this.gradeList.addGrade(grade);
         }
         return this;
     }

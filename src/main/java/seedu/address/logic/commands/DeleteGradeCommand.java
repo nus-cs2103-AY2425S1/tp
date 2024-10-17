@@ -7,7 +7,6 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.GradeList;
 import seedu.address.model.person.Person;
 
 
@@ -19,10 +18,10 @@ public class DeleteGradeCommand extends Command {
     public static final String COMMAND_WORD = "deleteGrade";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a grade of the person identified by the "
-        + "index number used in the displayed person list.\n"
-        + "Parameters: INDEX (must be a positive integer) "
-        + "TEST_NAME\n"
-        + "Example: " + COMMAND_WORD + " 1 Midterm";
+            + "index number used in the displayed person list.\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + "TEST_NAME\n"
+            + "Example: " + COMMAND_WORD + " 1 Midterm";
 
     public static final String MESSAGE_DELETE_GRADE_SUCCESS = "Deleted grade from %1$s: %2$s";
     public static final String MESSAGE_GRADE_NOT_FOUND = "Grade for test '%1$s' not found.";
@@ -33,7 +32,7 @@ public class DeleteGradeCommand extends Command {
     /**
      * Creates a DeleteGradeCommand to remove the specified grade from a person.
      *
-     * @param index     Index of the person in the filtered person list.
+     * @param index Index of the person in the filtered person list.
      * @param testIndex Index of the test whose grade is to be deleted.
      */
     public DeleteGradeCommand(Index index, Index testIndex) {
@@ -60,7 +59,8 @@ public class DeleteGradeCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_GRADE_SUCCESS, personToEdit.getName(), testIndex));
+        return new CommandResult(
+                String.format(MESSAGE_DELETE_GRADE_SUCCESS, personToEdit.getName(), testIndex.getOneBased()));
     }
 
     @Override
