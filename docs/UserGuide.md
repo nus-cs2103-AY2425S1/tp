@@ -70,7 +70,7 @@ The codebase of Talency originates from AddressBook Level 3 (AB3) developed by C
 
 ### Viewing help : `help`
 
-Shows a message explaIning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
