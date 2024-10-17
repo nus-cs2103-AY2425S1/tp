@@ -21,6 +21,7 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_INCOME = "one thousand";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_INCOME_COMPARISON_OPERATOR_1 = "==";
     private static final String INVALID_INCOME_COMPARISON_OPERATOR_2 = "!";
@@ -29,6 +30,7 @@ public class ParserUtilTest {
     private static final String VALID_PHONE = "91234567";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_INCOME = "1000";
     private static final String VALID_TAG_1 = "BRONZE";
     private static final String VALID_TAG_2 = "SILVER";
     private static final String VALID_INCOME_COMPARISON_OPERATOR_EQUAL = ">";
@@ -150,6 +152,29 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseIncome_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseIncome((String) null));
+    }
+
+    @Test
+    public void parseIncome_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIncome(INVALID_INCOME));
+    }
+
+    @Test
+    public void parseIncome_validValueWithoutWhitespace_returnsEmail() throws Exception {
+        Income expectedIncome = new Income(Integer.parseInt(VALID_INCOME));
+        assertEquals(expectedIncome, ParserUtil.parseIncome(VALID_INCOME));
+    }
+
+    @Test
+    public void parseIncome_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
+        String incomeWithWhitespace = WHITESPACE + VALID_INCOME + WHITESPACE;
+        Income expectedIncome = new Income(Integer.parseInt(VALID_INCOME));
+        assertEquals(expectedIncome, ParserUtil.parseEmail(incomeWithWhitespace));
+    }
+
+    @Test
     public void parseTier_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTier(null));
     }
@@ -179,10 +204,10 @@ public class ParserUtilTest {
 
     @Test
     public void parseIncomeComparisonOperator_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class,
-                () -> ParserUtil.parseIncomeComparisonOperator(INVALID_INCOME_COMPARISON_OPERATOR_1));
-        assertThrows(ParseException.class,
-                () -> ParserUtil.parseIncomeComparisonOperator(INVALID_INCOME_COMPARISON_OPERATOR_2));
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseIncomeComparisonOperator(INVALID_INCOME_COMPARISON_OPERATOR_1));
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseIncomeComparisonOperator(INVALID_INCOME_COMPARISON_OPERATOR_2));
     }
 
     @Test
