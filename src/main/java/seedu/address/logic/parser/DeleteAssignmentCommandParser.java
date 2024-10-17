@@ -34,7 +34,7 @@ public class DeleteAssignmentCommandParser implements Parser<DeleteAssignmentCom
                     DeleteAssignmentCommand.MESSAGE_USAGE));
         }
 
-        // nitializing compulsory fields
+        // Initializing compulsory fields
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         AssignmentName queryAssignment = ParserUtil.parseAssignmentName(argMultimap.getValue(PREFIX_ASSIGNMENT).get());
 
