@@ -76,7 +76,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -85,6 +85,7 @@ A person can have any number of tags (including 0)
 Examples:
 * `add n/John Doe, Alexander p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy d/o Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/+651234567 t/criminal`
+* `add n/Mary Jane t/friend p/+651234567`
 
 ### Listing all persons : `list`
 
@@ -111,7 +112,7 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names contain any of the given keywords. If no exact match is found, the address book displays the names in decreasing order of similarity to search term.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -121,28 +122,39 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Partial words will be matched e.g. `Han` will match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* If no exact match is found, the address book displays the names in decreasing order of similarity to search term.
 
 Examples:
 * `find John` returns `john`, `John Doe`, and `Johnny`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find Ifan` sorts other names by decreasing similarity to `Ifan` (e.g. Irfan, Isolde, Ayush, ...)
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the person with the specified `NAME` or the person at the specified `INDEX`
 
-Format: `delete KEYWORD`
+Format: `delete NAME` or `delete INDEX`
 
-* Deletes the person with the specified `KEYWORD`.
-* Only the name is matched.
-* Delete is case-insensitive. e.g `hans` will delete `Hans`
-* If more than one person matches the KEYWORD, 
-  an error message will be displayed indicating that multiple matches were found.
-* Partial words will be deleted e.g. `Han` will delete `Hans` if no other matches
+* For deletion by `NAME`:
+  * Deletes the person with the specified `NAME`.
+  * Only delete if `NAME` is exact match with contact full name.
+  * Delete is case-insensitive. e.g `hans` will delete `Hans`.
+  * If no exact match, list will be filtered based on given `NAME`.
+    AddressBook will then prompt user to use fullname or `INDEX`.
+  * If no exact and partial match,
+    AddressBook will then prompt user to use another `NAME` or `INDEX`.
+  * If more than 1 exact match, list will be filtered based on given `NAME`.
+    AddressBook will then prompt user to use `INDEX` instead.
+
+* For deletion by `INDEX`:
+  * Deletes the person at the specified INDEX.
+  * The index refers to the index number shown in the displayed person list.
+  * The index must be a positive integer 1, 2, 3, …​
 
 Examples:
 * `delete Alice`: Deletes the person named Alice from the address book.
-* `delete Al`: Deletes the person named Alice if it’s the only person matching the partial name "Al".
+* `delete 1`: Deletes the first person in the currently displayed list.
 
 ### Clearing all entries : `clear`
 
@@ -193,7 +205,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
