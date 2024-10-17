@@ -44,12 +44,12 @@ public class Comment {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof Comment)) {
             return false;
         }
 
-        Name otherName = (Name) other;
-        return fullComment.equals(otherName.fullName);
+        Comment otherComment = (Comment) other;
+        return fullComment.equals(otherComment.fullComment);
     }
 
     @Override
