@@ -4,7 +4,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -16,13 +15,14 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
+
     private final CommandExecutor commandExecutor;
-    private TextField suggestionTextField;
+    private final Suggestions suggestions;
 
     @FXML
-    private StackPane commandBoxPlaceholder;
-    @FXML
     private TextField commandTextField;
+    @FXML
+    private TextField suggestionTextField;
 
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
@@ -30,43 +30,24 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
+        this.suggestions = new Suggestions();
         setupTextFields();
-        Suggestions recommendations = new Suggestions();
-        // Add listeners for real-time command detection and caret position
-        commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            setStyleToDefault();
-            suggestionTextField.setText(recommendations.checkAllCommands(commandTextField.getText()));
-        });
     }
 
     private void setupTextFields() {
-        suggestionTextField = new TextField();
         suggestionTextField.setMouseTransparent(true);
         suggestionTextField.setFocusTraversable(false);
 
-        // Set styles to match except for color
-        String commonStyle = "-fx-font-family: 'Arial'; -fx-font-size: 14px; -fx-padding: 5px;";
-        suggestionTextField.setStyle(commonStyle + "-fx-text-fill: #808080;"); // Light gray for suggestion
-        commandTextField.setStyle(commonStyle + "-fx-text-fill: #000000;"); // Black for command
+        // Add listeners for real-time command detection
+        commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            setStyleToDefault();
+            updateSuggestion(newValue);
+        });
+    }
 
-        // Make command text field transparent
-        commandTextField.setStyle(commandTextField.getStyle() + "-fx-background-color: transparent;");
-
-        // Get the parent StackPane
-        if (commandTextField.getParent() != null) {
-            StackPane parent = (StackPane) commandTextField.getParent();
-            parent.getChildren().remove(commandTextField);
-        }
-
-        // Add both text fields to the placeholder with suggestion behind
-        commandBoxPlaceholder.getChildren().clear();
-        commandBoxPlaceholder.getChildren().addAll(suggestionTextField, commandTextField);
-
-        // Set proper size bindings
-        suggestionTextField.prefWidthProperty().bind(commandBoxPlaceholder.widthProperty());
-        suggestionTextField.prefHeightProperty().bind(commandBoxPlaceholder.heightProperty());
-        commandTextField.prefWidthProperty().bind(commandBoxPlaceholder.widthProperty());
-        commandTextField.prefHeightProperty().bind(commandBoxPlaceholder.heightProperty());
+    private void updateSuggestion(String text) {
+        String suggestion = suggestions.checkAllCommands(text);
+        suggestionTextField.setText(suggestion);
     }
 
     /**
@@ -75,14 +56,14 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleCommandEntered() {
         String commandText = commandTextField.getText();
-        if (commandText.equals("")) {
+        if (commandText.isEmpty()) {
             return;
         }
 
         try {
             commandExecutor.execute(commandText);
-            commandTextField.setText("");
-            suggestionTextField.setText("");
+            commandTextField.clear();
+            suggestionTextField.clear();
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
@@ -93,6 +74,7 @@ public class CommandBox extends UiPart<Region> {
      */
     private void setStyleToDefault() {
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+        suggestionTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
     }
 
     /**
@@ -100,12 +82,9 @@ public class CommandBox extends UiPart<Region> {
      */
     private void setStyleToIndicateCommandFailure() {
         ObservableList<String> styleClass = commandTextField.getStyleClass();
-
-        if (styleClass.contains(ERROR_STYLE_CLASS)) {
-            return;
+        if (!styleClass.contains(ERROR_STYLE_CLASS)) {
+            styleClass.add(ERROR_STYLE_CLASS);
         }
-
-        styleClass.add(ERROR_STYLE_CLASS);
     }
 
     /**
@@ -120,5 +99,4 @@ public class CommandBox extends UiPart<Region> {
          */
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
-
 }

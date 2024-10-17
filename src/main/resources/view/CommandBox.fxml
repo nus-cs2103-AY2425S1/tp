@@ -3,7 +3,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane fx:id="commandBoxPlaceholder" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <TextField fx:id="commandTextField" onAction="#handleCommandEntered" promptText="Enter command here..."/>
+<StackPane fx:id="commandBoxPlaceholder" styleClass="stack-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <TextField fx:id="suggestionTextField"
+             styleClass="suggestion-text-field"
+             editable="false" mouseTransparent="true" focusTraversable="false"/>
+  <TextField fx:id="commandTextField"
+             onAction="#handleCommandEntered"
+             promptText="Enter command here..."/>
 </StackPane>
+
 
