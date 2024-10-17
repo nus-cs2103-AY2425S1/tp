@@ -16,7 +16,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -51,15 +50,6 @@ public class AddMedConCommandParserTest {
                 multipleMedConsAmy);
         assertParseSuccess(parser, NRIC_DESC_AMY + MEDCON_DESC_AMY + MEDCON_DESC_BOB,
                 expectedCommandForAmyMultiple);
-
-        // For Amy without MedCon (MedCon is optional)
-        Set<MedCon> noMedCons = Collections.emptySet();
-        AddMedConCommand expectedCommandForAmyNoMedCon = new AddMedConCommand(new Nric(VALID_NRIC_AMY), noMedCons);
-        assertParseSuccess(parser, NRIC_DESC_AMY, expectedCommandForAmyNoMedCon);
-
-        // For Bob without MedCon (MedCon is optional)
-        AddMedConCommand expectedCommandForBobNoMedCon = new AddMedConCommand(new Nric(VALID_NRIC_BOB), noMedCons);
-        assertParseSuccess(parser, NRIC_DESC_BOB, expectedCommandForBobNoMedCon);
     }
 
     @Test
@@ -85,7 +75,7 @@ public class AddMedConCommandParserTest {
 
         // MedCon parameter missing
         assertParseFailure(parser, NRIC_DESC_AMY, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                                                  AddMedConCommand.MESSAGE_USAGE));
+                AddMedConCommand.MESSAGE_USAGE));
     }
 
 

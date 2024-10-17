@@ -6,13 +6,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.allergy.Allergy;
 import seedu.address.model.person.Nric;
+import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -51,27 +51,28 @@ public class AddAllergyCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
-        for (Person person : lastShownList) {
-            if (person.getNric().equals(this.nric)) {
-                Set<Allergy> updatedAllergiesSet = new HashSet<>(person.getAllergies());
-                // check for duplicates
-                for (Allergy allergy : allergies) {
-                    if (!updatedAllergiesSet.add(allergy)) {
-                        throw new CommandException(String.format(MESSAGE_DUPLICATE_ALLERGY, allergy.toString()));
-                    }
+        Person person = model.fetchPersonIfPresent(new NricMatchesPredicate(nric))
+                .orElseThrow(() -> new CommandException(PATIENT_DOES_NOT_EXIST));
+
+        if (person.getNric().equals(this.nric)) {
+            Set<Allergy> updatedAllergiesSet = new HashSet<>(person.getAllergies());
+            // check for duplicates
+            for (Allergy allergy : allergies) {
+                if (!updatedAllergiesSet.add(allergy)) {
+                    throw new CommandException(String.format(MESSAGE_DUPLICATE_ALLERGY, allergy.toString()));
                 }
-                Person editedPerson = new Person(
-                        person.getName(), person.getPhone(), person.getEmail(),
-                        person.getNric(), person.getAddress(), person.getDateOfBirth(),
-                        person.getGender(), updatedAllergiesSet, person.getPriority(), person.getAppointments(),
-                        person.getMedCons());
-                model.setPerson(person, editedPerson);
-                model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-                return new CommandResult(String.format(MESSAGE_SUCCESS, allergies, nric));
             }
+            Person editedPerson = new Person(
+                    person.getName(), person.getPhone(), person.getEmail(),
+                    person.getNric(), person.getAddress(), person.getDateOfBirth(),
+                    person.getGender(), updatedAllergiesSet, person.getPriority(), person.getAppointments(),
+                    person.getMedCons());
+            model.setPerson(person, editedPerson);
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, allergies, nric));
+        } else {
+            throw new CommandException(PATIENT_DOES_NOT_EXIST);
         }
-        throw new CommandException(PATIENT_DOES_NOT_EXIST);
     }
 
     @Override

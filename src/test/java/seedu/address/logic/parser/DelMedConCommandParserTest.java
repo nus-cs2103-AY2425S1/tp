@@ -15,7 +15,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -42,10 +41,6 @@ public class DelMedConCommandParserTest {
         DelMedConCommand expectedCommandForBob = new DelMedConCommand(new Nric(VALID_NRIC_BOB), medConsBob);
         assertParseSuccess(parser, NRIC_DESC_BOB + MEDCON_DESC_BOB, expectedCommandForBob);
 
-        // For Amy without MedCon (MedCon is optional)
-        Set<MedCon> noMedCons = Collections.emptySet();
-        DelMedConCommand expectedCommandForAmyNoMedCon = new DelMedConCommand(new Nric(VALID_NRIC_AMY), noMedCons);
-        assertParseSuccess(parser, NRIC_DESC_AMY, expectedCommandForAmyNoMedCon);
     }
 
     @Test
