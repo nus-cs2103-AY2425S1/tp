@@ -9,7 +9,9 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
+import seedu.address.model.pet.Pet;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -40,31 +42,30 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        /*
-         code for deleting an owner:
-        List<Owner> lastShownList = model.getFilteredOwnerList(); // must add new method to get owner
+        if (type.equals("o")) {
+            List<Owner> lastShownList = model.getFilteredOwnerList(); // must add new method to get owner
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_OWNER_DISPLAYED_INDEX);
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_OWNER_DISPLAYED_INDEX);
+            }
+
+            Owner ownerToDelete = lastShownList.get(targetIndex.getZeroBased());
+            model.deleteOwner(ownerToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_OWNER_SUCCESS, Messages.format(ownerToDelete)));
         }
 
-        Owner ownerToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteOwner(ownerToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_OWNER_SUCCESS, Messages.format(personToDelete)));
-         */
+        else if (type.equals("p")) {
+            List<Pet> lastShownList = model.getFilteredPetList(); // must add new method to get pet
 
-        /*
-        code for deleting a pet
-        List<Pet> lastShownList = model.getFilteredPetList(); // must add new method to get pet
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
+            }
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
+            Pet petToDelete = lastShownList.get(targetIndex.getZeroBased());
+            model.deletePet(petToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_PET_SUCCESS, Messages.format(petToDelete)));
         }
 
-        Pet petToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePet(petToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PET_SUCCESS, Messages.format(personToDelete)));
-         */
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {

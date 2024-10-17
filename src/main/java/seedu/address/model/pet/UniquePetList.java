@@ -45,6 +45,7 @@ public class UniquePetList implements Iterable<Pet> {
         if (contains(toAdd)) {
             throw new DuplicatePetException();
         }
+        System.out.println(toAdd);
         internalList.add(toAdd);
     }
 

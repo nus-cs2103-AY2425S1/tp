@@ -27,8 +27,6 @@ public class ModelManager implements Model {
     private final FilteredList<Owner> filteredOwners;
     private final FilteredList<Pet> filteredPets;
 
-    private final FilteredList<Pet> filteredPetss;
-
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -200,10 +198,6 @@ public class ModelManager implements Model {
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
      */
-    @Override
-    public ObservableList<Pet> getFilteredPetList() {
-        return filteredPets;
-    }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
