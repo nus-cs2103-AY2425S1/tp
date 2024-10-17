@@ -11,10 +11,9 @@ import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a person identified using its tag name in the Wedlinker.
  */
 public class DeleteTagCommand extends Command {
-
     public static final String COMMAND_WORD = "delete-tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD

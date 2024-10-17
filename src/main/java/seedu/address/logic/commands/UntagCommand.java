@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * Removes a tag associated with an existing person in the address book.
+ * Removes a tag associated with an existing person in the Wedlinker.
  */
 public class UntagCommand extends Command {
 
@@ -32,8 +32,6 @@ public class UntagCommand extends Command {
 
     private final Index index;
     private final HashSet<Tag> tagsToRemove;
-
-
 
     /**
      * Constructs an UntagCommand to remove tags from a person.
@@ -58,7 +56,6 @@ public class UntagCommand extends Command {
                 .collect(Collectors.joining(", "));
         return String.format(MESSAGE_REMOVE_TAG_SUCCESS, removedTags, personToEdit.getName().toString());
     }
-
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -89,7 +86,8 @@ public class UntagCommand extends Command {
                 personToEdit.getPhone(),
                 personToEdit.getEmail(),
                 personToEdit.getAddress(),
-                updatedTags);
+                updatedTags,
+                personToEdit.getWeddings());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
