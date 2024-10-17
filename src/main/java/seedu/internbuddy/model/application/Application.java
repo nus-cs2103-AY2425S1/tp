@@ -7,7 +7,7 @@ import java.util.Objects;
 import seedu.internbuddy.model.name.Name;
 
 /**
- * Represents a Application in the address book.
+ * Represents an Application in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Application {

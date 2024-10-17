@@ -6,7 +6,7 @@
 
 # InternBuddy User Guide
 
-InternBuddy is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+InternBuddy is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, InternBuddy can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -155,8 +155,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find Inc` returns `inc` and `Apple Inc`
-* `find Apple Inc` returns `Apple Inc`, `Amazon Inc`<br>
-  ![result for 'find apple google'](images/findAlexDavidResult.png)
+* `find Apple Inc` returns `Apple Inc`, `Facebook Inc`<br>
+  ![result for 'find apple google'](images/findAppleFacebookResult.png)
 
 ### Deleting a company : `delete`
 
