@@ -64,7 +64,7 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD -> new ListCommand();
         case ExitCommand.COMMAND_WORD -> new ExitCommand();
         case HelpCommand.COMMAND_WORD -> new HelpCommand();
-        case SearchPublicAddressCommand.COMMAND_WORD -> new SearchPublicAddressCommand();
+        case SearchPublicAddressCommand.COMMAND_WORD -> new SearchPublicAddressCommandParser().parse(arguments);
         case RetrievePublicAddressCommand.COMMAND_WORD -> new RetrievePublicAddressCommandParser().parse(arguments);
         default -> {
             logger.finer("This user input caused a ParseException: " + userInput);
