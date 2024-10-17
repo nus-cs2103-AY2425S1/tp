@@ -1,13 +1,10 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 /**
  * Represents a Doctor's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class DoctorName {
+public class DoctorName extends Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -18,17 +15,15 @@ public class DoctorName {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String fullName;
-
+    public final String doctorName;
     /**
      * Constructs a {@code DoctorName}.
      *
      * @param name A valid name.
      */
     public DoctorName(String name) {
-        requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        super(name);
+        this.doctorName = "Dr " + name;
     }
 
     /**
@@ -38,6 +33,12 @@ public class DoctorName {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /*
+     * Returns the name of the doctor, with the "Dr " prefix.
+     */
+    public String getDoctorName() {
+        return doctorName;
+    }
 
     @Override
     public String toString() {

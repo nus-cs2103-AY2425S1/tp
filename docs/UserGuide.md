@@ -28,11 +28,13 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
    * `list` : Lists all contacts.
 
      * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 ecname/Charlotte Lim
-     ecphone/81243564 ecrs/Sibling` : Adds a contact named `John Doe` to the Address Book with emergency contact `Charlotte Lim`.
+     ecphone/81243564 ecrs/Sibling dname/Ronald Lee dphone/99441234 demail/ronaldlee@gmail.com` : Adds a contact named `John Doe` to the Address Book with emergency contact `Charlotte Lim` and doctor `Ronald Lee`.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
    * `clear` : Deletes all contacts.
+
+   * `undo` : Undo previous command.
 
    * `exit` : Exits the app.
 
@@ -78,9 +80,9 @@ Format: `help`
 Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE
-ecrs/EMERGENCY CONTACT RELATIONSHIP[t/TAG]…​`
+ecrs/EMERGENCY CONTACT RELATIONSHIP dname/DOCTOR_NAME dphone/DOCTOR_PHONE demail/DOCTOR_EMAIL [t/TAG]…​`
 
-Valid inputs for relationship: `Parent, Mother, Father, Child, Son, Daughter, Sibling, Brother, Sister, Friend, Spouse, 
+Valid inputs for relationship: `Parent, Mother, Father, Child, Son, Daughter, Sibling, Brother, Sister, Friend, Spouse,
 Husband, Wife, Partner, Cousin, Relative, Uncle, Aunt, Grandparent, Grandmother, Grandfather, Grandchild, Grandson, Granddaughter`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -88,8 +90,9 @@ A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 ecname/Charlotte Lim ecphone/94681352 ecrs/daughter`
-* `add n/Betsy Crowe t/friend ecname/Matthew Tan e/betsycrowe@example.com a/Newgate Prison p/1234567 ecrs/son ecphone/94873631 ecname/Bob Builder t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 ecname/Charlotte Lim ecphone/94681352 ecrs/daughter dname/Ronald Lee dphone/99441234 demail/ronaldlee@gmail.com`
+
+* `add n/Betsy Crowe t/friend ecname/Matthew Tan e/betsycrowe@example.com a/Newgate Prison p/1234567 ecrs/son ecphone/94873631 ecname/Bob Builder demail/liampayne@gmail.com dphone/91231231 dname/Liam Payne t/criminal`
 
 ### Listing all persons : `list`
 
@@ -103,7 +106,7 @@ Edits an existing person in the address book.
 
 **You can't edit emergency contacts.**
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [dname/DOCTOR_NAME] [dphone/DOCTOR_PHONE] [demail/DOCTOR_EMAIL] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -114,6 +117,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons by name: `find`
@@ -153,6 +157,41 @@ Examples:
 Clears all entries from the address book.
 
 Format: `clear`
+
+### Undo previous command : `undo`
+Restores the previous state of the address book after any change, such as an addition, edit, or deletion of a person or entry.
+
+Format: `undo`
+
+Success Message:
+If the undo operation is successful, it returns: "Address book has undone previous command!"
+
+Failure Message:
+If there is no action to undo, or if the undo operation fails, it returns: "Address book failed to be undone. Please try again later."
+
+How it works:
+* It checks whether there is an operation in the undo stack (like an add, delete, or edit) that can be undone. This check is done via the model.canUndoAddressBook() method.
+* If there is an undoable operation, it calls the model.undoAddressBook() method to restore the address book's previous state.
+* If there are no operations to undo (i.e., if the user tries to undo without having made any modifications), the command will return the failure message.
+
+
+### Redo previous command : `redo`
+
+Restores the state of the address book after an undo operation has been executed, effectively "redoing" the undone changes, such as an addition, edit, or deletion of a person or entry.
+
+Format: `redo`
+
+Success Message:
+If the redo operation is successful, it returns: "Address book has redone previous undo command!"
+
+Failure Message:
+If there is no action to redo or if the redo operation fails, it returns: "Redo not possible as no actions were undone."
+
+How it works:
+* It checks whether there is an undo operation that can be redone. This check is done via the model.canRedoAddressBook() method.
+* If there is a redoable operation, it calls the model.redoAddressBook() method to restore the address book's previous state (before the undo).
+* If there are no operations to redo (e.g., if the user tries to redo without any undo), the command will return the failure message.
+
 
 ### Exiting the program : `exit`
 
@@ -195,12 +234,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 ecname/Lim Jun Wei t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action     | Format, Examples                                                                                                                                                                                                       |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 ecname/Lim Jun Wei t/friend t/colleague` |
+| **Clear**  | `clear`                                                                                                                                                                                                                |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                    |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                            |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                             |
+| **Undo**   | `undo`                                                                                                                                                                                                                 |
+| **Redo**   | `redo`                                                                                                                                                                                                                 |
+| **List**   | `list`                                                                                                                                                                                                                 |
+| **Help**   | `help`                                                                                                                                                                                                                 |

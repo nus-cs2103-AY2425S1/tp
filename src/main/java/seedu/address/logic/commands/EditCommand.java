@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_PHONE;
@@ -25,6 +28,8 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Doctor;
+import seedu.address.model.person.DoctorName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
@@ -51,6 +56,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMERGENCY_CONTACT_NAME + "EMERGENCY CONTACT NAME] "
             + "[" + PREFIX_EMERGENCY_CONTACT_PHONE + "EMERGENCY CONTACT PHONE] "
             + "[" + PREFIX_EMERGENCY_CONTACT_RELATIONSHIP + "EMERGENCY CONTACT RELATIONSHIP] "
+            + "[" + PREFIX_DOC_NAME + "DOCTOR NAME]"
+            + "[" + PREFIX_DOC_PHONE + "DOCTOR PHONE]"
+            + "[" + PREFIX_DOC_EMAIL + "DOCTOR EMAIL]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -64,7 +72,7 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index                of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
@@ -88,14 +96,15 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         EmergencyContact updatedEmergencyContact =
                 createEditedEmergencyContact(personToEdit.getEmergencyContact(), editPersonDescriptor);
+        Doctor updatedDoctor = createEditedDoctor(personToEdit.getDoctor(), editPersonDescriptor);
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedEmergencyContact, updatedTags);
+                updatedEmergencyContact, updatedDoctor, updatedTags);
     }
 
     private static EmergencyContact createEditedEmergencyContact(EmergencyContact emergencyContactToEdit,
-                                                                 EditPersonDescriptor editPersonDescriptor) {
+            EditPersonDescriptor editPersonDescriptor) {
         assert emergencyContactToEdit != null;
 
         Name updatedName = editPersonDescriptor.getEmergencyContactName().orElse(emergencyContactToEdit.getName());
@@ -105,6 +114,19 @@ public class EditCommand extends Command {
                 .orElse(emergencyContactToEdit.getRelationship());
 
         return new EmergencyContact(updatedName, updatedPhone, updatedRelationship);
+    }
+
+    private static Doctor createEditedDoctor(Doctor doctorToEdit,
+            EditPersonDescriptor editPersonDescriptor) {
+        assert doctorToEdit != null;
+
+        DoctorName updatedName = editPersonDescriptor.getDoctorName().orElse(doctorToEdit.getName());
+        Phone updatedPhone = editPersonDescriptor.getDoctorPhone()
+                .orElse(doctorToEdit.getPhone());
+        Email updatedEmail = editPersonDescriptor.getDoctorEmail()
+                .orElse(doctorToEdit.getEmail());
+
+        return new Doctor(updatedName, updatedPhone, updatedEmail);
     }
 
     @Override
@@ -153,7 +175,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * Stores the details to edit the person with. Each non-empty field value will
+     * replace the
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
@@ -164,9 +187,13 @@ public class EditCommand extends Command {
         private Name emergencyContactName;
         private Phone emergencyContactPhone;
         private Relationship emergencyContactRelationship;
+        private DoctorName doctorName;
+        private Phone doctorPhone;
+        private Email doctorEmail;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -180,6 +207,9 @@ public class EditCommand extends Command {
             setEmergencyContactName(toCopy.emergencyContactName);
             setEmergencyContactPhone(toCopy.emergencyContactPhone);
             setEmergencyContactRelationship(toCopy.emergencyContactRelationship);
+            setDoctorName(toCopy.doctorName);
+            setDoctorPhone(toCopy.doctorPhone);
+            setDoctorEmail(toCopy.doctorEmail);
             setTags(toCopy.tags);
         }
 
@@ -188,12 +218,16 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, emergencyContactName,
-                    emergencyContactPhone, emergencyContactRelationship, tags);
+                    emergencyContactPhone, emergencyContactRelationship, doctorName, doctorPhone, doctorEmail, tags);
         }
 
         public boolean isAnyEmergencyContactFieldEdited() {
             return CollectionUtil.isAnyNonNull(emergencyContactName,
                     emergencyContactPhone, emergencyContactRelationship);
+        }
+
+        public boolean isAnyDoctorFieldEdited() {
+            return CollectionUtil.isAnyNonNull(doctorName, doctorPhone, doctorEmail);
         }
 
         public Optional<Name> getName() {
@@ -252,8 +286,33 @@ public class EditCommand extends Command {
             this.emergencyContactRelationship = emergencyContactRelationship;
         }
 
+        public Optional<DoctorName> getDoctorName() {
+            return Optional.ofNullable(doctorName);
+        }
+
+        public void setDoctorName(DoctorName doctorName) {
+            this.doctorName = doctorName;
+        }
+
+        public Optional<Phone> getDoctorPhone() {
+            return Optional.ofNullable(doctorPhone);
+        }
+
+        public void setDoctorPhone(Phone doctorPhone) {
+            this.doctorPhone = doctorPhone;
+        }
+
+        public Optional<Email> getDoctorEmail() {
+            return Optional.ofNullable(doctorEmail);
+        }
+
+        public void setDoctorEmail(Email doctorEmail) {
+            this.doctorEmail = doctorEmail;
+        }
+
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable tag set, which throws
+         * {@code UnsupportedOperationException}
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
@@ -288,7 +347,10 @@ public class EditCommand extends Command {
                     && Objects.equals(emergencyContactName, otherEditPersonDescriptor.emergencyContactName)
                     && Objects.equals(emergencyContactPhone, otherEditPersonDescriptor.emergencyContactPhone)
                     && Objects.equals(emergencyContactRelationship,
-                    otherEditPersonDescriptor.emergencyContactRelationship)
+                            otherEditPersonDescriptor.emergencyContactRelationship)
+                    && Objects.equals(doctorName, otherEditPersonDescriptor.doctorName)
+                    && Objects.equals(doctorPhone, otherEditPersonDescriptor.doctorPhone)
+                    && Objects.equals(doctorEmail, otherEditPersonDescriptor.doctorEmail)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -302,6 +364,9 @@ public class EditCommand extends Command {
                     .add("emergency contact name", emergencyContactName)
                     .add("emergency contact phone", emergencyContactPhone)
                     .add("emergency contact relationship", emergencyContactRelationship)
+                    .add("doctor name", doctorName)
+                    .add("doctor phone", doctorPhone)
+                    .add("doctor email", doctorEmail)
                     .add("tags", tags)
                     .toString();
         }
