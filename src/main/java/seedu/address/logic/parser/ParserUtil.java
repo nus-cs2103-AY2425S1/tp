@@ -104,18 +104,18 @@ public class ParserUtil {
     /**
      * Parses a {@code String publicAddress} into a {@code PublicAddress}.
      */
-    public static PublicAddress parsePublicAddress(String publicAddress, String paTag, String network)
+    public static PublicAddress parsePublicAddress(String publicAddress, String paLabel, String network)
             throws ParseException {
         requireNonNull(publicAddress);
-        requireNonNull(paTag);
+        requireNonNull(paLabel);
 
         String trimmedPublicAddress = publicAddress.trim();
         if (!PublicAddress.isValidPublicAddress(trimmedPublicAddress)) {
             throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
         }
 
-        String trimmedPaTag = paTag.trim();
-        if (!PublicAddress.isValidPublicAddressTag(paTag)) {
+        String trimmedPaLabel = paLabel.trim();
+        if (!PublicAddress.isValidPublicAddressLabel(paLabel)) {
             throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
         }
 
@@ -124,7 +124,7 @@ public class ParserUtil {
             if (!BtcAddress.isValidPublicAddress(trimmedPublicAddress)) {
                 throw new ParseException(BtcAddress.MESSAGE_CONSTRAINTS);
             }
-            return new BtcAddress(trimmedPublicAddress, trimmedPaTag);
+            return new BtcAddress(trimmedPublicAddress, trimmedPaLabel);
         default:
             throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
         }
@@ -153,7 +153,7 @@ public class ParserUtil {
             String address = addressArgs[1];
             // TODO: END of tokenizer
 
-            PublicAddress parsedPublicAddress = parsePublicAddress(address, PublicAddress.DEFAULT_TAG, network);
+            PublicAddress parsedPublicAddress = parsePublicAddress(address, PublicAddress.DEFAULT_LABEL, network);
 
             Network parsedNetwork = switch(network) { // TODO: Implement more networks
             case "BTC" -> Network.BTC;

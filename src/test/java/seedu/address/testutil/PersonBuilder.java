@@ -65,7 +65,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Parses the {@code publicAddresses} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withPublicAddresses(PublicAddress... publicAddresses) {
         this.publicAddresses = SampleDataUtil.getPublicAddressMap(publicAddresses);

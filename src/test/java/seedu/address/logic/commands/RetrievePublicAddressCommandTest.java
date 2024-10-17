@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_LABEL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -43,7 +43,7 @@ public class RetrievePublicAddressCommandTest {
     @Test
     public void parse_invalidNetworkWithTag_throwsParseException() {
         assertParseFailure(parser,
-                "1 " + PREFIX_PUBLIC_ADDRESS + "INVALID_NETWORK" + PREFIX_PUBLIC_ADDRESS_TAG + "MyWallet",
+                "1 " + PREFIX_PUBLIC_ADDRESS + "INVALID_NETWORK" + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet",
                 Network.MESSAGE_CONSTRAINTS);
     }
 
@@ -64,7 +64,7 @@ public class RetrievePublicAddressCommandTest {
         RetrievePublicAddressCommand expectedCommand =
                 new RetrievePublicAddressCommand(expectedIndex, expectedNetwork, expectedWalletName);
 
-        assertParseSuccess(parser, "1 " + PREFIX_PUBLIC_ADDRESS + "BTC " + PREFIX_PUBLIC_ADDRESS_TAG + "MyWallet",
+        assertParseSuccess(parser, "1 " + PREFIX_PUBLIC_ADDRESS + "BTC " + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet",
                 expectedCommand);
     }
 

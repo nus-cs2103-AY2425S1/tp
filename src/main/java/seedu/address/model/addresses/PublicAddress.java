@@ -9,12 +9,10 @@ import java.util.Objects;
  */
 public abstract class PublicAddress {
 
-    public static final String DEFAULT_TAG = "default"; // TODO: Remove once placeholder is no longer needed
+    public static final String DEFAULT_LABEL = "default"; // TODO: Remove once placeholder is no longer needed
 
     public static final String MESSAGE_CONSTRAINTS =
             "Public Addresses can take any values, and it should not be blank"; // TODO: Update constraints
-
-    public static final String NETWORK_CONSTRAINTS = "Network can only take values we support. For now: BTC";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -24,20 +22,20 @@ public abstract class PublicAddress {
     public static final String VALIDATION_PAT_REGEX = "[^\\s].*"; // TODO: Update regex
 
 
-    public final String address;
+    public final String publicAddress;
 
-    public final String tag;
+    public final String label;
 
     /**
      * Constructs a {@code PublicAddress}
      *
-     * @param address A valid public address
-     * @param tag     An identifier for the PublicAddress
+     * @param publicAddress A valid public address
+     * @param label         An identifier for the PublicAddress
      */
-    public PublicAddress(String address, String tag) {
-        checkArgument(isValidPublicAddress(address), MESSAGE_CONSTRAINTS);
-        this.address = address;
-        this.tag = tag;
+    public PublicAddress(String publicAddress, String label) {
+        checkArgument(isValidPublicAddress(publicAddress), MESSAGE_CONSTRAINTS);
+        this.publicAddress = publicAddress;
+        this.label = label;
     }
 
     /**
@@ -48,9 +46,9 @@ public abstract class PublicAddress {
     }
 
     /**
-     * Returns true if a given string is a valid public address tag.
+     * Returns true if a given string is a valid public address label.
      */
-    public static boolean isValidPublicAddressTag(String test) {
+    public static boolean isValidPublicAddressLabel(String test) {
         return test.matches(VALIDATION_PAT_REGEX);
     }
 
@@ -65,9 +63,10 @@ public abstract class PublicAddress {
     public static Network isValidNetworkName(String network) {
         return Network.valueOf(network);
     }
+
     @Override
     public String toString() {
-        return tag + ": " + address;
+        return label + ": " + publicAddress;
     }
 
     @Override
@@ -82,12 +81,12 @@ public abstract class PublicAddress {
         }
 
         PublicAddress otherPublicAddress = (PublicAddress) other;
-        return address.equals(otherPublicAddress.address) && tag.equals(otherPublicAddress.tag);
+        return publicAddress.equals(otherPublicAddress.publicAddress) && label.equals(otherPublicAddress.label);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(address, tag);
+        return Objects.hash(publicAddress, label);
     }
 
 }
