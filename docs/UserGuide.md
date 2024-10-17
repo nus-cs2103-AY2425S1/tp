@@ -145,6 +145,50 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Viewing a person's details : `view`
+
+Displays the details of a person that might not be shown in their card.
+
+Format: `view INDEX`
+
+* Views the details of the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `view 3` displays the details of the 3rd person in the address book.
+* `find Lisa` followed by `view 1` displays the details of the 1st person in the results of the `find` command.
+
+### Undoing a command : `undo`
+
+Reverses the most recent command executed.
+
+Format: `undo`
+
+* You can only undo commands executed during the current session.
+
+Examples:
+* If you accidentally deleted a person, `undo` will add that person back.
+
+### Redoing a command : `redo`
+
+Reapplies a command that was previously undone.
+
+Format: `redo`
+
+* Redo is only available immediately after an undo.
+
+Examples:
+* If you `undo` the addition of a new tutor by mistake, `redo` will restore that entry.
+
+### Viewing command history : `history`
+
+Provides a list of commands executed, from the most recent to the earliest.
+
+Format: `history`
+
+* History displays only commands executed during the current session.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.

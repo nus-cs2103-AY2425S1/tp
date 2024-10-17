@@ -38,8 +38,8 @@
           </Menu>
         </MenuBar>
 
-        <HBox spacing="10" VBox.vgrow="ALWAYS">
-        <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+        <HBox spacing="10" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+        <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
           <padding>
             <Insets bottom="10" left="10" right="10" top="10" />
           </padding>
@@ -48,13 +48,11 @@
           <!-- Right Panel: Content + Chart -->
           <VBox spacing="10" VBox.vgrow="ALWAYS">
             <!-- Result Display Box -->
-            <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100"
-                       styleClass="pane-with-border" VBox.vgrow="NEVER">
-              <padding>
-                <Insets bottom="5" left="10" right="10" top="5" />
-              </padding>
-            </StackPane>
-
+              <StackPane fx:id="resultDisplayPlaceholder"  styleClass="pane-with-border" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+                  <padding>
+                      <Insets bottom="5" left="10" right="10" top="5" />
+                  </padding>
+              </StackPane>
             <!-- Chart -->
             <StackPane fx:id="chartPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
               <!-- Chart will be added dynamically here -->

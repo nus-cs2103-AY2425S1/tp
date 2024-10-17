@@ -44,6 +44,9 @@ public class LogicManager implements Logic {
         this.storage = storage;
         addressBookParser = new AddressBookParser();
         commandHistory = new CommandHistory();
+
+        // Set addressBookModified to true whenever the models' address book is modified.
+        model.getAddressBook().addListener(observable -> addressBookModified = true);
     }
 
     @Override
