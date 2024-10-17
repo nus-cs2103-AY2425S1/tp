@@ -178,6 +178,16 @@ public class AddRentalCommandTest {
         public void updateFilteredPersonList(Predicate<Client> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ObservableList<RentalInformation> getVisibleRentalInformationList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateVisibleRentalInformationList(List<RentalInformation> rentalInformationList) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
