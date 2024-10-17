@@ -84,8 +84,8 @@ public class AssignWeddingCommand extends Command {
         for (Wedding wedding : weddingsToAdd) {
             if (!model.hasWedding(wedding)) {
                 if (this.force) {
-                    CreateWeddingCommand newWedding = new CreateWeddingCommand(wedding);
-                    newWedding.execute(model);
+                    CreateWeddingCommand newWeddingCommand = new CreateWeddingCommand(wedding);
+                    newWeddingCommand.execute(model);
                 } else {
                     throw new CommandException(
                             MESSAGE_WEDDING_NOT_FOUND + "\n" + MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT);
