@@ -3,8 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Person's meetings in the Meetings field.
@@ -25,15 +25,18 @@ public class Meeting {
     public final String location;
     public final LocalDateTime startTime;
     public final LocalDateTime endTime;
+    public final Name personToMeet;
 
     /**
      * Constructs an {@code Meeting}.
      *
+     * @param person A valid name of a person to meet.
      * @param startTime A valid starting time of the meeting.
      * @param endTime A valid ending time of the meeting.
      * @param location A valid location.
      */
-    public Meeting(LocalDateTime startTime, LocalDateTime endTime, String location) {
+    public Meeting(Name person, LocalDateTime startTime, LocalDateTime endTime, String location) {
+        requireNonNull(person);
         requireNonNull(location);
         requireNonNull(startTime);
         requireNonNull(endTime);
@@ -44,6 +47,8 @@ public class Meeting {
 
         checkArgument(isValidLocation(location), MESSAGE_CONSTRAINTS_LOCATION);
         this.location = location;
+
+        this.personToMeet = person;
     }
 
     public static boolean isValidStartAndEndTime(LocalDateTime start, LocalDateTime end) {
@@ -70,8 +75,8 @@ public class Meeting {
 
     @Override
     public String toString() {
-        SimpleDateFormat formatter = new SimpleDateFormat("h:mm a, d MMMM yyyy");
-        return formatter.format(startTime) + " - " + location;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a, d MMMM yyyy");
+        return "from " + formatter.format(startTime) + " to " + formatter.format(endTime) + " at " + location;
     }
 
     @Override
@@ -86,8 +91,8 @@ public class Meeting {
         }
 
         Meeting otherMeeting = (Meeting) other;
-        return location.equals(otherMeeting.location) && startTime.equals(otherMeeting.startTime)
-                && endTime.equals(otherMeeting.endTime);
+        return personToMeet.equals(otherMeeting.personToMeet) && location.equals(otherMeeting.location)
+                && startTime.equals(otherMeeting.startTime) && endTime.equals(otherMeeting.endTime);
     }
 
     @Override
@@ -105,5 +110,9 @@ public class Meeting {
 
     public LocalDateTime getEndTime() {
         return endTime;
+    }
+
+    public Name getPersonToMeet() {
+        return personToMeet;
     }
 }
