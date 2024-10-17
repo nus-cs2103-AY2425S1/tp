@@ -33,7 +33,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX, PREFIX_BIRTHDATE, PREFIX_HEALTHSERVICE);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX,
+                        PREFIX_BIRTHDATE, PREFIX_HEALTHSERVICE);
 
         Index index;
 
@@ -59,7 +60,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_BIRTHDATE).isPresent()) {
             editPersonDescriptor.setBirthDate(ParserUtil.parseBirthDate(argMultimap.getValue(PREFIX_BIRTHDATE).get()));
         }
-        parseHealthServicesForEdit(argMultimap.getAllValues(PREFIX_HEALTHSERVICE)).ifPresent(editPersonDescriptor::setHealthServices);
+        parseHealthServicesForEdit(argMultimap.getAllValues(PREFIX_HEALTHSERVICE))
+                .ifPresent(editPersonDescriptor::setHealthServices);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -83,13 +85,15 @@ public class EditCommandParser implements Parser<EditCommand> {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
-    private Optional<Set<HealthService>> parseHealthServicesForEdit(Collection<String> healthServices) throws ParseException {
+    private Optional<Set<HealthService>> parseHealthServicesForEdit(Collection<String> healthServices)
+            throws ParseException {
         assert healthServices != null;
 
         if (healthServices.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> healthServicesSet = healthServices.size() == 1 && healthServices.contains("") ? Collections.emptySet() : healthServices;
+        Collection<String> healthServicesSet = healthServices.size() == 1 && healthServices.contains("")
+                ? Collections.emptySet() : healthServices;
         return Optional.of(ParserUtil.parseHealthServices(healthServicesSet));
     }
 
