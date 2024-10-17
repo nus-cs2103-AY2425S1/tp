@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import careconnect.commons.core.GuiSettings;
 import careconnect.commons.core.LogsCenter;
 import careconnect.logic.Logic;
+import careconnect.logic.autocompleter.exceptions.AutocompleteException;
 import careconnect.logic.commands.CommandResult;
 import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.logic.parser.exceptions.ParseException;
@@ -135,7 +136,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, this::autocompleteCommand, this::validateSyntax);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -218,4 +219,32 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
+    /**
+     * Autocompletes the command and returns the suggestion.
+     *
+     * @see Logic#autocompleteCommand(String)
+     */
+    private String autocompleteCommand(String commandText) throws AutocompleteException {
+        try {
+            String autocompletedCommand = logic.autocompleteCommand(commandText);
+            logger.info("Autocompleted Command: " + autocompletedCommand);
+            return autocompletedCommand;
+        } catch (AutocompleteException e) {
+            logger.info("An error occurred while autocompleting command: " + commandText);
+            resultDisplay.setFeedbackToUser(e.getMessage());
+            throw e;
+        }
+    }
+    /**
+     * Checks if given string is valid syntax
+     *
+     * @see Logic#validateSyntax(String)
+     */
+    private boolean validateSyntax(String syntax) {
+        boolean isValidSyntax = logic.validateSyntax(syntax);
+        logger.info("isValidSyntax: " + isValidSyntax);
+        return isValidSyntax;
+    }
+
 }

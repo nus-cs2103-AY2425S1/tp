@@ -3,6 +3,7 @@ package careconnect.logic;
 import java.nio.file.Path;
 
 import careconnect.commons.core.GuiSettings;
+import careconnect.logic.autocompleter.exceptions.AutocompleteException;
 import careconnect.logic.commands.CommandResult;
 import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.logic.parser.exceptions.ParseException;
@@ -24,6 +25,22 @@ public interface Logic {
      * @throws ParseException If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
+
+    /**
+     * Provides an autocomplete suggestion based on the given command text
+     * @param commandText The partial command for which to generate an autocomplete suggestion.
+     * @return A string containing the most relevant autocomplete suggestion based on the given input.
+     * @throws AutocompleteException If no valid autocomplete suggestion can be generated.
+     */
+    String autocompleteCommand(String commandText) throws AutocompleteException;
+
+    /**
+     * Checks if given string is valid syntax
+     *
+     * @param syntax The syntax to check
+     * @return true if given string is valid syntax; else false
+     */
+    boolean validateSyntax(String syntax);
 
     /**
      * Returns the AddressBook.
