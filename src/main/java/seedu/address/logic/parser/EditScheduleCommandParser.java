@@ -32,10 +32,8 @@ public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
 
         // Parse the person index from the 'c/' prefix
         try {
-            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CONTACT)
-                    .orElseThrow(() -> new ParseException(String
-                            .format(MESSAGE_INVALID_COMMAND_FORMAT, EditScheduleCommand.MESSAGE_USAGE))
-                    ));
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            Index contactIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CONTACT).get());
         } catch (ParseException pe) {
             throw new ParseException(String
                     .format(MESSAGE_INVALID_COMMAND_FORMAT, EditScheduleCommand.MESSAGE_USAGE), pe);
@@ -47,6 +45,10 @@ public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
         EditScheduleDescriptor editScheduleDescriptor = new EditScheduleDescriptor();
 
         // Parse and set the new values if present
+        if (argMultimap.getValue(PREFIX_CONTACT).isPresent()) {
+            editScheduleDescriptor.setContactIndex(ParserUtil
+                    .parseIndex(argMultimap.getValue(PREFIX_CONTACT).get()).getZeroBased());
+        }
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editScheduleDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
