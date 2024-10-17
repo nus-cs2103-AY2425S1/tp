@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.model.person.Name;
 
 public class TierTest {
 
@@ -21,7 +20,7 @@ public class TierTest {
     }
 
     @Test
-    public void constructor_emptyTierName_NATierReturned() {
+    public void constructor_emptyTierName_naTierReturned() {
         Tier tier = new Tier("");
         assertTrue(tier.equals(new Tier("NA")));
     }
