@@ -1,24 +1,15 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.InvalidIdException;
-import seedu.address.logic.commands.DeleteAppointmentCommand;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeletePatientCommand;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Id;
 
-import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 
 public class DeletePatientCommandParser implements Parser<DeletePatientCommand> {
