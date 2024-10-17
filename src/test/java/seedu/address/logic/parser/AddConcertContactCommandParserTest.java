@@ -12,13 +12,13 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.LinkCommand;
+import seedu.address.logic.commands.AddConcertContactCommand;
 
-public class LinkCommandParserTest {
+public class AddConcertContactCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddConcertContactCommand.MESSAGE_USAGE);
 
-    private LinkCommandParser parser = new LinkCommandParser();
+    private AddConcertContactCommandParser parser = new AddConcertContactCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -83,7 +83,7 @@ public class LinkCommandParserTest {
         Index concertIndex = INDEX_FIRST_CONCERT;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_CONCERT + concertIndex.getOneBased();
 
-        LinkCommand expectedCommand = new LinkCommand(targetIndex, concertIndex);
+        AddConcertContactCommand expectedCommand = new AddConcertContactCommand(targetIndex, concertIndex);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
