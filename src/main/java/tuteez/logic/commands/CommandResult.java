@@ -1,7 +1,5 @@
 package tuteez.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.Objects;
 
 import tuteez.commons.util.ToStringBuilder;
@@ -23,7 +21,7 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.feedbackToUser = feedbackToUser;
         this.showHelp = showHelp;
         this.exit = exit;
     }
