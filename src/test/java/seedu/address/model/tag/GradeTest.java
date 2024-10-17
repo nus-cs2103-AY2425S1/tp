@@ -32,7 +32,7 @@ public class GradeTest {
         assertThrows(NullPointerException.class, () -> Grade.isValidGradeName(null));
 
         // grade index too small
-        assertFalse(Grade.isValidGradeName("0"));
+        assertFalse(Grade.isValidGradeName("-1"));
 
         // grade index too big
         assertFalse(Grade.isValidGradeName("5"));
@@ -42,7 +42,7 @@ public class GradeTest {
     public void equals() {
         Grade grade = new Grade("2");
 
-        // same values -> returns true
+        // same grade -> returns true
         assertTrue(grade.equals(new Grade("2")));
 
         // same object -> returns true
@@ -54,12 +54,12 @@ public class GradeTest {
         // different types -> returns false
         assertFalse(grade.equals(5.0f));
 
-        // different values -> returns false
+        // different grade -> returns false
         assertFalse(grade.equals(new Grade("3")));
     }
 
     @Test
     public void testToString() {
-        assertEquals("[Failing]", new Grade("4").toString());
+        assertEquals("[4]", new Grade("4").toString());
     }
 }

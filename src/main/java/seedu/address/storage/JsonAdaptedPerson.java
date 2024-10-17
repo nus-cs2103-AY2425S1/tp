@@ -59,9 +59,11 @@ class JsonAdaptedPerson {
     public static JsonAdaptedPerson of(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
-            @JsonProperty("parentEmail") String parentEmail, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("parentEmail") String parentEmail, @JsonProperty("grade") String grade,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         if (parentName != null) {
-            return new JsonAdaptedStudent(name, phone, email, address, parentName, parentPhone, parentEmail, tags);
+            return new JsonAdaptedStudent(name, phone, email, address, parentName, parentPhone, parentEmail,
+                    grade, tags);
         }
         return new JsonAdaptedPerson(name, phone, email, address, tags);
     }
