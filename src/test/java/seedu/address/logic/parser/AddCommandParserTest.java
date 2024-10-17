@@ -182,9 +182,9 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_TELEGRAM_DESC
                 + ROLE_DESC_HUSBAND + ROLE_DESC_FRIEND, Telegram.MESSAGE_CONSTRAINTS);
 
-        // invalid tag
+        // invalid role
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + TELEGRAM_DESC_BOB
-                + INVALID_ROLE_DESC + VALID_ROLE_FRIEND, Role.MESSAGE_CONSTRAINTS);
+                + INVALID_ROLE_DESC, Role.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_TELEGRAM_DESC,

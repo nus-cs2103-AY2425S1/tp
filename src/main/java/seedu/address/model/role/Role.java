@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Role {
 
-    public static final String MESSAGE_CONSTRAINTS = "Role length should be between 1 to 30 characters";
-    public static final String VALIDATION_REGEX = "^(?!\\s)(?=.{1,30}$)[a-zA-Z0-9]+(?<!\\s)$";
+    public static final String MESSAGE_CONSTRAINTS = "Role length should be between 1 to 20 characters";
+    public static final String VALIDATION_REGEX = "^(?!\\s)(?=.{1,20}$).+(?<!\\s)$";
 
     public final String roleName;
 

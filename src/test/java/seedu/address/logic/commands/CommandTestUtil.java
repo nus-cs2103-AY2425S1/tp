@@ -52,7 +52,8 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_TELEGRAM_DESC = " " + PREFIX_TELEGRAM + "bob bob"; // spaces not allowed
-    public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "hubby*"; // '*' not allowed in tags
+    // roles not more than 20 chars
+    public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "aaaaaaaaaaaaaaaaaaaaa";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
