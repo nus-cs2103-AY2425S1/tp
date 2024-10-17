@@ -108,7 +108,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("gender", gender)
-                .add("module", modules)
+                .add("modules", modules)
                 .add("tags", tags)
                 .toString();
     }

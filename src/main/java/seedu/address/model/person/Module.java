@@ -9,12 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Module {
     public static final String MESSAGE_CONSTRAINTS = "Modules can take an values, and it should not be blank";
-
-    /*
-     * The first character of the Module must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String module;
 
@@ -38,7 +33,7 @@ public class Module {
 
     @Override
     public String toString() {
-        return module;
+        return '[' + module + ']';
     }
 
     @Override
