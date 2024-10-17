@@ -16,6 +16,12 @@ public class DeleteRemarkCommand extends RemarkCommand {
 
     private final Index remarkIndex;
 
+    /**
+     * Deletes the specified Remark {@code remarkIndex} to the person {@code personIndex} of the displayed list.
+     *
+     * @param personIndex The personIndex of the person in the displayed list to delete the remark from.
+     * @param remarkIndex Remark to be deleted.
+     */
     public DeleteRemarkCommand(Index personIndex, Index remarkIndex) {
         super(personIndex);
         this.remarkIndex = remarkIndex;
