@@ -7,6 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.game.Game;
+import seedu.address.model.game.Role;
+import seedu.address.model.game.SkillLevel;
+import seedu.address.model.game.Username;
 import seedu.address.model.person.Person;
 
 /**
@@ -43,7 +47,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane games;
 
-
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -60,6 +63,25 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         person.getGames().values().stream()
                 .sorted(Comparator.comparing(game -> game.gameName))
-                .forEach(game -> games.getChildren().add(GameLabelGenerator.gameLabel(game)));
+                .forEach(game -> games.getChildren().add(gameLabel(game)));
     }
+
+    private static Label gameLabel(Game game) {
+        StringBuilder sb = new StringBuilder();
+        Username username = game.getUsername();
+        SkillLevel skillLevel = game.getSkillLevel();
+        Role role = game.getRole();
+        sb.append(game.getGameName()).append("\n");
+        if (username != null) {
+            sb.append("Username: ").append(game.getUsername()).append("\n");
+        }
+        if (skillLevel != null) {
+            sb.append("Skill Lvl: ").append(game.getSkillLevel()).append("\n");
+        }
+        if (role != null) {
+            sb.append("Role: ").append(game.getRole());
+        }
+        return new Label(sb.toString());
+    }
+
 }

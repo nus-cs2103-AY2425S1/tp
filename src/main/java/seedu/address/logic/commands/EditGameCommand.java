@@ -72,16 +72,21 @@ public class EditGameCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
         Map<String, Game> gameMap = lastShownList.get(index.getZeroBased()).getGames();
         Game gameToEdit = gameMap.get(gameName);
         if (gameToEdit == null) {
             throw new CommandException("That game doesn't exist for this user...");
         }
+
         Game editedGame = createEditedGame(gameToEdit, editGameDescriptor);
         gameMap.put(gameName, editedGame);
+        model.setPerson(personToEdit, personToEdit);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_EDIT_GAME_SUCCESS, Messages.format(editedGame)));
