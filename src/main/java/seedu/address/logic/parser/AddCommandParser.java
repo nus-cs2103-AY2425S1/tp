@@ -10,7 +10,12 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.internshipapplication.*;
+import seedu.address.model.internshipapplication.Company;
+import seedu.address.model.internshipapplication.Date;
+import seedu.address.model.internshipapplication.Email;
+import seedu.address.model.internshipapplication.InternshipApplication;
+import seedu.address.model.internshipapplication.Name;
+import seedu.address.model.internshipapplication.Role;
 
 /**
  * Parses input arguments and creates a new AddCommand object

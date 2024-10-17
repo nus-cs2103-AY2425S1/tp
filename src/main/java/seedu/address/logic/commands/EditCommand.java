@@ -20,7 +20,9 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.internshipapplication.*;
+import seedu.address.model.internshipapplication.Email;
+import seedu.address.model.internshipapplication.InternshipApplication;
+import seedu.address.model.internshipapplication.Name;
 import seedu.address.model.tag.Tag;
 
 /**

@@ -7,7 +7,12 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.internshipapplication.*;
+import seedu.address.model.internshipapplication.Company;
+import seedu.address.model.internshipapplication.Date;
+import seedu.address.model.internshipapplication.Email;
+import seedu.address.model.internshipapplication.InternshipApplication;
+import seedu.address.model.internshipapplication.Name;
+import seedu.address.model.internshipapplication.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -15,9 +20,8 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static InternshipApplication[] getSampleInternships() {
-        return new InternshipApplication[] {
-                new InternshipApplication(new Company(
-                        new Email("company1@mail.com"),new Name("Company 1")),
+        return new InternshipApplication[] { new InternshipApplication(new Company(
+                        new Email("company1@mail.com"), new Name("Company 1")),
                         new Date(LocalDate.now()), new Role("role 1"))
         };
     }
