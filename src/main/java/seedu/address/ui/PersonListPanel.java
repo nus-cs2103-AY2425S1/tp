@@ -28,14 +28,12 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Owner> ownerList,
-                           ObservableList<Pet> petList) {
+    public PersonListPanel(ObservableList<Owner> ownerList, ObservableList<Pet> petList) {
         super(FXML);
         ownerListView.setItems(ownerList);
         ownerListView.setCellFactory(listView -> new OwnerListViewCell());
 
-        // Temporarily using ownerList for both, but you can modify this once the petList is implemented
-        petListView.setItems(petList); // Replace with petList later
+        petListView.setItems(petList);
         petListView.setCellFactory(listView -> new PetListViewCell());
     }
 
