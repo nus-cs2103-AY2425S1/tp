@@ -11,7 +11,8 @@ import java.util.Objects;
 public class Log {
 
     public static final String MESSAGE_CONSTRAINTS = "Log entry can take any alphanumeric values, "
-            + "and it should not be blank";
+            + "and it should not be blank, it must be in the format 'dd MMM yyy|details'. "
+            + "e.g. /l 10 May 2024|First Appointment!";
     public static final String VALIDATION_REGEX = ".+";
 
     private final String entry;
