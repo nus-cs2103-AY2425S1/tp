@@ -63,6 +63,21 @@ public class PersonDetailsWindow extends UiPart<Stage> {
     }
 
     /**
+     * Returns true if the Person's detail window is currently being shown.
+     */
+    public boolean isShowing() {
+        return getRoot().isShowing();
+    }
+
+
+    /**
+     * Focuses on the detail window.
+     */
+    public void focus() {
+        getRoot().requestFocus();
+    }
+
+    /**
      * Hides the person details window.
      */
     public void hide() {

@@ -24,9 +24,9 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public PersonListPanel(ObservableList<Person> personList, PersonDetailsWindow personDetailsWindow) {
         super(FXML);
-        personDetailsWindow = new PersonDetailsWindow();
+        this.personDetailsWindow = personDetailsWindow;
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         setEventHandlers();
