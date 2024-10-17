@@ -93,7 +93,7 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Client> predicate);
 
-    /** Returns a list of the visible rental information. */
+    /** Returns an unmodifiable view of the visible rental information list. */
     ObservableList<RentalInformation> getVisibleRentalInformationList();
 
     /**
