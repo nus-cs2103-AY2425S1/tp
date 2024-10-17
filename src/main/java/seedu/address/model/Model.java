@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.concert.Concert;
+import seedu.address.model.concert.ConcertContact;
 import seedu.address.model.person.Person;
 
 /**
@@ -15,6 +16,7 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Concert> PREDICATE_SHOW_ALL_CONCERTS = unused -> true;
+    Predicate<ConcertContact> PREDICATE_SHOW_ALL_CONCERT_CONTACTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -60,7 +62,7 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
-     * Returns true if a concert with the same identity as {@code Concert} exists in the concert
+     * Returns true if a concert with the same identity as {@code concert} exists in the concert
      * phonebook.
      *
      * @param concert
@@ -69,9 +71,39 @@ public interface Model {
     boolean hasConcert(Concert concert);
 
     /**
+     * Checks whether a concertContact with the same identity as {@code concertContact} exists in the concertContact
+     * phonebook.
+     *
+     * @param concertContact ConcertContact to check
+     * @return true if the concertContact exists
+     */
+    boolean hasConcertContact(ConcertContact concertContact);
+
+    /**
      * Deletes the given person. The person must exist in the address book.
      */
     void deletePerson(Person target);
+
+    /**
+     * Deletes the concertConcert associated to the given concert and person.
+     * The concertContact must exist in the address book.
+     */
+    void deleteConcertContact(Person targetPerson, Concert targetConcert);
+
+    /**
+     * Deletes all concertContacts associated to the given concert.
+     */
+    void deleteConcertContact(Concert targetConcert);
+
+    /**
+     * Deletes all concertContacts associated to the given person.
+     */
+    void deleteConcertContact(Person targetPerson);
+
+    /**
+     * Deletes the given person. The person must exist in the address book.
+     */
+    void deleteConcert(Concert target);
 
     /**
      * Adds the given person. {@code person} must not already exist in the address book.
@@ -84,18 +116,32 @@ public interface Model {
     void addConcert(Concert concert);
 
     /**
+     * Adds the given concertContact. {@code concertContact} must not already exist in the concertContact phonebook.
+     */
+    void addConcertContact(ConcertContact concertContact);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}. {@code target} must exist
      * in the address book. The person identity of {@code editedPerson} must not be the same as
      * another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Replaces the given concertContact {@code target} with {@code editedConcertContact}. {@code target} must exist
+     * in the address book. The concertContact identity of {@code editedConcertContact} must not be the same as
+     * another existing concertContact in the address book.
+     */
+    void setConcertContact(ConcertContact target, ConcertContact editedConcertContact);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filetered concert list */
+    /** Returns an unmodifiable view of the filtered concert list */
     ObservableList<Concert> getFilteredConcertList();
 
+    /** Returns an unmodifiable view of the filtered concertContact list */
+    ObservableList<ConcertContact> getFilteredConcertContactList();
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      *
@@ -109,4 +155,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredConcertList(Predicate<Concert> predicate);
+
+    /**
+     * Updates the filter of the filtered concertContact list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredConcertContactList(Predicate<ConcertContact> predicate);
 }
