@@ -1,11 +1,15 @@
 package seedu.address.ui;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.beans.binding.Bindings;
+import seedu.address.model.event.Event;
 import seedu.address.model.volunteer.Volunteer;
-
 
 /**
  * An UI component that displays information of a {@code Volunteer}.
@@ -13,14 +17,6 @@ import seedu.address.model.volunteer.Volunteer;
 public class VolunteerCard extends UiPart<Region> {
 
     private static final String FXML = "VolunteerListCard.fxml";
-
-    /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
-     * As a consequence, UI elements' variable names cannot be set to such keywords
-     * or an exception will be thrown by JavaFX during runtime.
-     *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
-     */
 
     public final Volunteer volunteer;
 
@@ -38,18 +34,42 @@ public class VolunteerCard extends UiPart<Region> {
     private Label date;
     @FXML
     private Label time;
+    @FXML
+    private Label involvedIn;
 
     /**
-     * Creates a {@code VolunteerCode} with the given {@code Volunteer} and index to display.
+     * Creates a {@code VolunteerCard} with the given {@code Volunteer} and index to display.
      */
     public VolunteerCard(Volunteer volunteer, int displayedIndex) {
         super(FXML);
         this.volunteer = volunteer;
+
+        // Set the text values from the volunteer data.
         id.setText(displayedIndex + ". ");
         name.setText(volunteer.getName().fullName + " (#" + volunteer.getId() + ")");
         phone.setText(volunteer.getPhone().value);
         email.setText(volunteer.getEmail().value);
         date.setText(volunteer.getAvailableDate().toString());
         time.setText(volunteer.getStartTimeAvailability() + "-" + volunteer.getEndTimeAvailability());
+
+        // Bind the "involvedIn" label to update automatically when events change.
+        involvedIn.textProperty().bind(
+                Bindings.createStringBinding(
+                        () -> "Events: " + getEventsAsString(volunteer.getEvents()),
+                        volunteer.getEvents() // ObservableList to monitor changes
+                )
+        );
+    }
+
+    /**
+     * Converts the list of events to a single string.
+     *
+     * @param events The list of events.
+     * @return A string representation of the events.
+     */
+    public String getEventsAsString(List<String> events) {
+        return events.stream()
+                .map(event -> event.toString()) // Ensure it’s properly retrieved as a string
+                .collect(Collectors.joining(", "));
     }
 }

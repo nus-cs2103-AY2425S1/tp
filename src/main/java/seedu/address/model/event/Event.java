@@ -2,8 +2,11 @@ package seedu.address.model.event;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.Objects;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -21,13 +24,14 @@ public class Event {
     private final Time startTime;
     private final Time endTime;
     private final Description description;
+    private final ObservableList<String> volunteers;
 
     /**
      * Every field must be present and not null.
      */
     public Event(EventName eventName, Location location, Date date,
-                 Time startTime, Time endTime, Description description) {
-        requireAllNonNull(eventName, location, date, startTime, endTime, description);
+                 Time startTime, Time endTime, Description description, List<String> volunteers) {
+        requireAllNonNull(eventName, location, date, startTime, endTime, description, volunteers);
         this.id = NEXT_ID;
         NEXT_ID++;
 
@@ -37,30 +41,23 @@ public class Event {
         this.startTime = startTime;
         this.endTime = endTime;
         this.description = description;
+        this.volunteers = FXCollections.observableArrayList(volunteers);
     }
 
     /**
      * Constructs an {@code Event} object with the specified event name, location, date, start time, and end time.
-     *
-     * @param eventName The name of the event.
-     * @param location The location of the event.
-     * @param date The date of the event.
-     * @param startTime The start time of the event.
-     * @param endTime The end time of the event.
-     *
-     * @throws NullPointerException if any of the parameters are null.
+     * Uses an empty description and volunteer list by default.
+     */
+    public Event(EventName eventName, Location location, Date date, Time startTime, Time endTime, Description description) {
+        this(eventName, location, date, startTime, endTime, description, FXCollections.observableArrayList());
+    }
+
+    /**
+     * Constructs an {@code Event} object with the specified event name, location, date, start time, and end time.
+     * Uses an empty description and volunteer list by default.
      */
     public Event(EventName eventName, Location location, Date date, Time startTime, Time endTime) {
-        requireAllNonNull(eventName, location, date, startTime, endTime);
-        this.id = NEXT_ID;
-        NEXT_ID++;
-
-        this.eventName = eventName;
-        this.location = location;
-        this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.description = new Description();
+        this(eventName, location, date, startTime, endTime, new Description(), FXCollections.observableArrayList());
     }
 
     public int getId() { return id; }
@@ -87,6 +84,11 @@ public class Event {
 
     public Description getDescription() {
         return description;
+    }
+    public ObservableList<String> getVolunteers() {return volunteers; }
+
+    public void addVolunteer(String newVolunteer) {
+        volunteers.add(newVolunteer);
     }
 
     /**

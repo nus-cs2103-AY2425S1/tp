@@ -131,6 +131,23 @@ public class ModelManager implements Model {
         addressBook.setVolunteer(target, editedVolunteer);
     }
 
+    @Override
+    public Volunteer getVolunteer(int volunteerId) {
+        return filteredVolunteers.stream()
+                .filter(volunteer -> volunteer.getId() == volunteerId)
+                .findFirst()
+                .orElse(null); // Return null if not found
+    }
+
+    @Override
+    public Event getEvent(int eventId) {
+        return filteredEvents.stream()
+                .filter(event -> event.getId() == eventId)
+                .findFirst()
+                .orElse(null); // Return null if not found
+    }
+
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

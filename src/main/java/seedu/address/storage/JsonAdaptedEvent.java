@@ -1,8 +1,13 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Description;
@@ -24,25 +29,26 @@ class JsonAdaptedEvent {
     private final String endTime;
     private final String location;
     private final String description;
+    private final List<String> volunteers;
 
     /**
      * Constructs a {@code JsonAdaptedEvent} with the given event details.
      */
     @JsonCreator
-    public JsonAdaptedEvent(@JsonProperty("eventName") String eventName, @JsonProperty("date") String date,
-                            @JsonProperty("startTime") String startTime, @JsonProperty("endTime") String endTime,
+    public JsonAdaptedEvent(@JsonProperty("eventName") String eventName,
+                            @JsonProperty("date") String date,
+                            @JsonProperty("startTime") String startTime,
+                            @JsonProperty("endTime") String endTime,
                             @JsonProperty("location") String location,
-                            @JsonProperty("description") String description) {
+                            @JsonProperty("description") String description,
+                            @JsonProperty("volunteers") List<String> volunteers) {
         this.eventName = eventName;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.location = location;
-        if (description == null || description.isEmpty()) {
-            this.description = "";
-        } else {
-            this.description = description;
-        }
+        this.description = description != null ? description : "";
+        this.volunteers = volunteers != null ? volunteers : new ArrayList<>();
     }
 
     /**
@@ -55,6 +61,7 @@ class JsonAdaptedEvent {
         this.startTime = source.getStartTime().toString();
         this.endTime = source.getEndTime().toString();
         this.description = source.getDescription().toString();
+        this.volunteers = source.getVolunteers();
     }
 
     /**
@@ -115,7 +122,9 @@ class JsonAdaptedEvent {
         }
         final Description modelDescription = new Description(description);
 
-        return new Event(modelEventName, modelLocation, modelDate, modelStartTime, modelEndTime, modelDescription);
+        final ObservableList<String> modelVolunteers = FXCollections.observableArrayList(volunteers);
+
+        return new Event(modelEventName, modelLocation, modelDate, modelStartTime, modelEndTime, modelDescription, modelVolunteers);
     }
 
 }
