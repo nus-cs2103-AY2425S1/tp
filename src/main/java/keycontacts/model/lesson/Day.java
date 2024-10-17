@@ -65,7 +65,7 @@ public class Day {
     public DayOfWeek getDay() {
         return day;
     }
-    
+
     @Override
     public String toString() {
         return day.toString();
