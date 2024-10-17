@@ -151,6 +151,21 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd client in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
+### Deleting a rental information : `rdelete`
+
+Deletes the specified rental information from the specified client
+
+Format: `rdelete c/CLIENT_INDEX r/RENTAL_INDEX`
+
+* Deletes the rental information at the specified `RENTAL_INDEX` from the client at the specified `CLIENT_INDEX`.
+* `CLIENT_INDEX` refers to the index number shown in the displayed client list.
+* `RENTAL_INDEX` refers to the index number shown in the displayed rental information list when the `rview` command is run. (i.e. `rview CLIENT_INDEX`)
+* `CLIENT_INDEX` and `RENTAL_INDEX` **must be positive integers** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `rdelete c/2 r/1` deletes the 1st rental information from the 2nd client in the address book.
+* `find Betsy` followed by `rdelete c/1 r/2` deletes the 2nd rental information from the 1st client in the results of the `find` command.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
