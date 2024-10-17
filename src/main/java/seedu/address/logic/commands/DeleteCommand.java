@@ -37,7 +37,7 @@ public class DeleteCommand extends Command<InternshipApplication> {
         List<InternshipApplication> lastShownList = model.getFilteredList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INTERNSHIP_APPLICATION_DISPLAYED_INDEX);
         }
 
         InternshipApplication internshipApplicationToDelete = lastShownList.get(targetIndex.getZeroBased());
