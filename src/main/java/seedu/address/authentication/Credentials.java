@@ -10,7 +10,7 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class Credentials {
     private static final Logger logger = LogsCenter.getLogger(Credentials.class);
-//    private final File credentials;
+    // private final File credentials;
     private final String username = "test";
     private final String password = "password1";
 
