@@ -19,14 +19,13 @@ public class StatisticsCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Displays the overall statistics regarding all the people in SocialBook.\n"
             + "Example: " + COMMAND_WORD;
-
     public static final String MESSAGE_DISPLAY_STATISTICS_SUCCESS = "Here are all the statistics:\n%s";
-
     public static final String MESSAGE_DISPLAY_TOTAL_PEOPLE = "Total Number Of People: %s";
     public static final String MESSAGE_DISPLAY_HIGH_PRIORITY = "Number Of HIGH Priority People: %s";
     public static final String MESSAGE_DISPLAY_MEDIUM_PRIORITY = "Number Of MEDIUM Priority People: %s";
     public static final String MESSAGE_DISPLAY_LOW_PRIORITY = "Number Of LOW Priority People: %s";
     public static final String MESSAGE_LACK_PRIORITY = "Each person should have a priority";
+    private String resultMessage;
 
     /**
      * Displays all the overall statistics to be shown.
@@ -73,6 +72,27 @@ public class StatisticsCommand extends Command {
         for (int i = 0; i < allStats.length; i++) {
             s += allStats[i] + "\n";
         }
-        return new CommandResult(String.format(MESSAGE_DISPLAY_STATISTICS_SUCCESS, s));
+        resultMessage = s;
+        return new CommandResult(String.format(MESSAGE_DISPLAY_STATISTICS_SUCCESS, resultMessage));
     }
+
+    public String getResultMessage() {
+        return this.resultMessage;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof StatisticsCommand)) {
+            return false;
+        }
+
+        StatisticsCommand otherStatisticsCommand = (StatisticsCommand) other;
+        return resultMessage.equals(otherStatisticsCommand.getResultMessage());
+    }
+
 }
