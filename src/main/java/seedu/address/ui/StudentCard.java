@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.student.Student;
@@ -23,17 +22,7 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
-    private Label email;
-    @FXML
-    private Label studentID;
-    @FXML
-    private Label type; // Label to indicate type (Student)
-    @FXML
-    private FlowPane tags;
+    private Label category; // Label to indicate type (Student)
 
     /**
      * Creates a {@code StudentCard} with the given {@code Student} and index to display.
@@ -42,15 +31,8 @@ public class StudentCard extends UiPart<Region> {
         super(FXML);
         this.student = student;
 
-        type.setText("Student");
+        category.setText("Student");
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
-        phone.setText(student.getPhone().value);
-        address.setText(student.getAddress().value);
-        email.setText(student.getEmail().value);
-        studentID.setText("Student ID: " + student.getStudentID().value);
-        student.getTags().stream()
-                .sorted((tag1, tag2) -> tag1.tagName.compareTo(tag2.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

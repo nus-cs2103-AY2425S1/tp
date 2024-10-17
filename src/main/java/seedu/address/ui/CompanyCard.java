@@ -1,10 +1,12 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.company.Company;
 
 /**
@@ -13,8 +15,10 @@ import seedu.address.model.person.company.Company;
 public class CompanyCard extends UiPart<Region> {
 
     private static final String FXML = "CompanyCard.fxml";
+    private final Logger logger = LogsCenter.getLogger(CompanyCard.class);
 
-    public final Company company;
+    private Company company;
+    private int displayedIndex;
 
     @FXML
     private HBox cardPane;
@@ -23,17 +27,8 @@ public class CompanyCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
-    private Label email;
-    @FXML
-    private Label industry;
-    @FXML
-    private Label type; // Label to indicate type (Company)
-    @FXML
-    private FlowPane tags;
+    private Label category; // Label to indicate type (Company)
+
 
     /**
      * Creates a {@code CompanyCard} with the given {@code Company} and index to display.
@@ -41,16 +36,23 @@ public class CompanyCard extends UiPart<Region> {
     public CompanyCard(Company company, int displayedIndex) {
         super(FXML);
         this.company = company;
+        this.displayedIndex = displayedIndex;
+        logger.info("Created CompanyCard for: " + company.getName().fullName + " at index: " + displayedIndex);
+    }
 
-        type.setText("Company");
+    @FXML
+    private void initialize() {
+        category.setText("Company");
         id.setText(displayedIndex + ". ");
-        name.setText(company.getName().fullName);
-        phone.setText(company.getPhone().value);
-        address.setText(company.getAddress().value);
-        email.setText(company.getEmail().value);
-        industry.setText("Industry: " + company.getIndustry().value);
-        company.getTags().stream()
-                .sorted((tag1, tag2) -> tag1.tagName.compareTo(tag2.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        if (company != null && company.getName() != null) {
+            name.setText(company.getName().fullName);
+        } else {
+            logger.warning("Company or Company name is null for CompanyCard at index: " + displayedIndex);
+            name.setText("Unknown Company");
+        }
+        logger.info("Created CompanyCard for: "
+            + (company != null ? company.getName().fullName : "null company")
+            + " at index: " + displayedIndex);
+
     }
 }
