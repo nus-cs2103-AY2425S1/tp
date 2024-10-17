@@ -41,11 +41,12 @@ public class AddressBookParser {
      */
     public Command parseCommand(String userInput) throws ParseException {
         if (userInput.trim().length() >= 2
-                && userInput.trim().substring(userInput.trim().length()-2).equals(PREFIX_TAG.getPrefix().trim())
+                && userInput.trim().substring(userInput.trim().length() - 2).equals(PREFIX_TAG.getPrefix().trim())
                 && userInput.trim().length() < userInput.length()) {
             int lastIndex = userInput.lastIndexOf(PREFIX_TAG.getPrefix());
-            userInput = userInput.substring(0, lastIndex + 2) +
-                    userInput.substring(lastIndex + 2).replaceAll("\\s+", " ");
+            userInput = userInput.substring(0, lastIndex + 2)
+                    + userInput.substring(lastIndex + 2)
+                        .replaceAll("\\s+", " ");
         } else {
             userInput = userInput.trim();
         }
