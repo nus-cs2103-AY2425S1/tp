@@ -16,11 +16,12 @@ ConcertAddressBook is a **desktop app** for **Concert Organisers** to manage you
    5. [Adding a ConcertContact](#adding-a-concertcontact-addcc)
    6. [Deleting a person](#deleting-a-person--delete)
    7. [Deleting a concert](#deleting-a-concert--deletec)
-   8. [Clearing All Entries](#clearing-all-entries--clear)
-   9. [Finding a person](#finding-a-person-findp)
-   10. [Finding a concert](#finding-a-concert-findc)
-   11. [Editing a person](#editing-a-person--edit)
-   12. [Exiting programme](#exiting-the-program--exit)
+   8. [Deleting a concertContact](#deleting-a-concertcontact--deletecc)
+   9. [Clearing All Entries](#clearing-all-entries--clear)
+   10. [Finding a person](#finding-a-person-findp)
+   11. [Finding a concert](#finding-a-concert-findc)
+   12. [Editing a person](#editing-a-person--edit)
+   13. [Exiting programme](#exiting-the-program--exit)
 3. [FAQ](#faq)
 4. [Known Issues](#known-issues)
 5. [Command Summary](#command-summary)
@@ -53,6 +54,8 @@ ConcertAddressBook is a **desktop app** for **Concert Organisers** to manage you
    - `deletep 1` : Deletes the 1st person shown in the current person list.
 
    - `deletec 1` : Deletes the 1st concert shown in the current concert list.
+
+   - `deletecc 1 c/1` : Deletes the concertContact between the 1st person and 1st concert shown in the list.
 
    - `clear` : Deletes all contacts.
 
@@ -163,6 +166,16 @@ Format: `deletec INDEX`
 
 - Deletes the concert at the specified `INDEX`.
 - The index refers to the index number shown in the displayed concert list.
+- The index **must be a positive integer** 1, 2, 3, …​
+
+### Deleting a concertContact : `deletecc`
+
+Deletes the specified concertContact from the Concert address book.
+
+Format: `deletecc PERSON_INDEX c/CONCERT_INDEX`
+
+- Deletes the concertContact between the person in the specified `PERSON_INDEX` and the concert in the specified `CONCERT_INDEX`.
+- The index refers to the index number shown in the displayed person / concert list.
 - The index **must be a positive integer** 1, 2, 3, …​
 
 ### Clearing all entries : `clear`
