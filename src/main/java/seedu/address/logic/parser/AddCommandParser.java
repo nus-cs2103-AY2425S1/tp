@@ -34,14 +34,16 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CONTACTTYPE, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_TAG);
+                        PREFIX_TELEHANDLE, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_CONTACTTYPE, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_CONTACTTYPE, PREFIX_NAME, PREFIX_PHONE,
+                PREFIX_EMAIL, PREFIX_TELEHANDLE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_TELEHANDLE, PREFIX_CONTACTTYPE);
         ContactType contactType = ParserUtil.parseContactType(argMultimap.getValue(PREFIX_CONTACTTYPE).get());
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         TelegramHandle telegramHandle = ParserUtil.parseTelegramHandle(argMultimap.getValue(PREFIX_TELEHANDLE).get());

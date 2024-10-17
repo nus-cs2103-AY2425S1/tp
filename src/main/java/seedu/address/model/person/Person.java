@@ -101,7 +101,8 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
+        return contactType.equals(otherPerson.contactType)
+                && name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && telegramHandle.equals(otherPerson.telegramHandle)
@@ -118,6 +119,7 @@ public class Person {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("contactType", contactType)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)

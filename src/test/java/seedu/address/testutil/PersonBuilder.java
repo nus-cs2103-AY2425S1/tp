@@ -102,7 +102,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(contactType, name, phone, email, new TelegramHandle(""), tags);
+        return new Person(contactType, name, phone, email, telegramHandle, tags);
     }
 
 }

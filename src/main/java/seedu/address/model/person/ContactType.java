@@ -27,16 +27,18 @@ public class ContactType {
      */
     public ContactType(String contactType) {
         requireNonNull(contactType);
-        System.out.println("ContactType received: " + contactType); // Add this for debugging
 
         checkArgument(isValidContactType(contactType), MESSAGE_CONSTRAINTS);
-        switch(contactType) {
+
+        switch(contactType.toUpperCase()) {
         case ("WORK"):
             value = ContactTypeEnum.WORK;
             break;
         case("PERSONAL"):
-        default:
             value = ContactTypeEnum.PERSONAL;
+            break;
+        default:
+            throw new IllegalArgumentException("Incorrect contact type given");
         }
 
     }

@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEHANDLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACTTYPE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -34,6 +35,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_TELEHANDLE_AMY = "@amy123";
     public static final String VALID_TELEHANDLE_BOB = "@bob321";
+    public static final String VALID_CONTACTTYPE_AMY = "work";
+    public static final String VALID_CONTACTTYPE_BOB = "personal";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -47,11 +50,15 @@ public class CommandTestUtil {
     public static final String TELEHANDLE_DESC_BOB = " " + PREFIX_TELEHANDLE + VALID_TELEHANDLE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String CONTACTTYPE_DESC_AMY = " " + PREFIX_CONTACTTYPE + VALID_CONTACTTYPE_AMY;
+    public static final String CONTACTTYPE_DESC_BOB = " " + PREFIX_CONTACTTYPE + VALID_CONTACTTYPE_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_TELEHANDLE_DESC = " " + PREFIX_TELEHANDLE + "bob123"; // missing '@' symbol
+    public static final String INVALID_CONTACTTYPE_DESC = " " + PREFIX_CONTACTTYPE + "misc."; // must be work or
+                                                                                              // personal
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
