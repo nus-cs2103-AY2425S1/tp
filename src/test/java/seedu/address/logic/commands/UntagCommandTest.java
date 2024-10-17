@@ -30,7 +30,7 @@ public class UntagCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     /*
-    // this test causes unknown errors that affect another class test.
+    // this test causes errors in another test class when run with gradlew clean build.
     @Test
     public void execute_validIndexAndTags_success() throws CommandException {
 
