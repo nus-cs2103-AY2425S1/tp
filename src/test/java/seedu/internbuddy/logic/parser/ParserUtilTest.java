@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.internbuddy.commons.core.index.Index;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
 import seedu.internbuddy.model.company.Address;
 import seedu.internbuddy.model.company.Email;
@@ -54,6 +55,29 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_COMPANY, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseIndexes_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndexes("1 a"));
+    }
+
+    @Test
+    public void parseIndexes_invalidNumberOfIndexes_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndexes("1"));
+    }
+
+    @Test
+    public void parseIndexes_validInput_success() throws Exception {
+        Index[] expectedIndexes = { Index.fromOneBased(1), Index.fromOneBased(2) };
+
+        // No whitespaces
+        assertEquals(expectedIndexes[0], ParserUtil.parseIndexes(" 1 2 ")[0]);
+        assertEquals(expectedIndexes[1], ParserUtil.parseIndexes(" 1 2 ")[1]);
+
+        // Leading and trailing whitespaces
+        assertEquals(expectedIndexes[0], ParserUtil.parseIndexes("  1 2  ")[0]);
+        assertEquals(expectedIndexes[1], ParserUtil.parseIndexes("  1 2  ")[1]);
     }
 
     @Test
