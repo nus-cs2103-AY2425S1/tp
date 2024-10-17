@@ -19,6 +19,8 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class PreferredTime
+Class Game
 
 Class I #FFFFFF
 }
