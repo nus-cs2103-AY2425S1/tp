@@ -122,18 +122,21 @@ public class TagCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
+        if (this == other) {
+            return true; // Same object reference
         }
 
-        // instanceof handles nulls
         if (!(other instanceof TagCommand)) {
-            return false;
+            return false; // Not the same class
         }
 
         TagCommand otherTagCommand = (TagCommand) other;
-        return name.equals(otherTagCommand.name) && tagPersonDescriptor.equals(otherTagCommand.tagPersonDescriptor);
+
+        // Check equality of the fields
+        return Objects.equals(name, otherTagCommand.name)
+                && Objects.equals(tagPersonDescriptor, otherTagCommand.tagPersonDescriptor);
     }
+
 
     @Override
     public String toString() {
@@ -219,21 +222,17 @@ public class TagCommand extends Command {
 
         @Override
         public boolean equals(Object other) {
-            if (other == this) {
-                return true;
+            if (this == other) {
+                return true; // same object
             }
-
-            // instanceof handles nulls
             if (!(other instanceof TagPersonDescriptor)) {
-                return false;
+                return false; // different type
             }
+            TagPersonDescriptor otherDescriptor = (TagPersonDescriptor) other;
 
-            TagPersonDescriptor otherTagPersonDescriptor = (TagPersonDescriptor) other;
-            return Objects.equals(name, otherTagPersonDescriptor.name)
-                    && Objects.equals(phone, otherTagPersonDescriptor.phone)
-                    && Objects.equals(email, otherTagPersonDescriptor.email)
-                    && Objects.equals(address, otherTagPersonDescriptor.address)
-                    && Objects.equals(tags, otherTagPersonDescriptor.tags);
+            // Ensure all fields (including tags) are compared correctly
+            return Objects.equals(name, otherDescriptor.name)
+                    && Objects.equals(tags, otherDescriptor.tags); // add other fields as necessary
         }
 
         @Override
