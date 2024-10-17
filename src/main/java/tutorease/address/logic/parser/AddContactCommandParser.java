@@ -15,10 +15,12 @@ import tutorease.address.logic.commands.AddContactCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.person.Address;
 import tutorease.address.model.person.Email;
+import tutorease.address.model.person.Guardian;
 import tutorease.address.model.person.Name;
 import tutorease.address.model.person.Person;
 import tutorease.address.model.person.Phone;
 import tutorease.address.model.person.Role;
+import tutorease.address.model.person.Student;
 import tutorease.address.model.tag.Tag;
 
 /**
@@ -32,7 +34,7 @@ public class AddContactCommandParser implements Parser<AddContactCommand> {
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddContactCommand parse(String args) throws ParseException {
+    public AddContactCommand parse(String args) throws ParseException, IllegalArgumentException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_ROLE, PREFIX_TAG);
@@ -50,7 +52,15 @@ public class AddContactCommandParser implements Parser<AddContactCommand> {
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, role, tagList);
+        Person person;
+
+        if (role.getRoleString().equals(Role.STUDENT)) {
+            person = new Student(name, phone, email, address, role, tagList);
+        } else if (role.getRoleString().equals(Role.GUARDIAN)) {
+            person = new Guardian(name, phone, email, address, role, tagList);
+        } else {
+            throw new IllegalArgumentException(Role.MESSAGE_CONSTRAINTS);
+        }
 
         return new AddContactCommand(person);
     }

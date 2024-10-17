@@ -50,12 +50,12 @@ public class StartDateTimeTest {
 
     @Test
     public void isValidStartDateTime() {
-        assertFalse(StartDateTime.isValidStartDateTime(null));
-        assertFalse(StartDateTime.isValidStartDateTime(INVALID_DAY));
-        assertFalse(StartDateTime.isValidStartDateTime(INVALID_MONTH));
-        assertFalse(StartDateTime.isValidStartDateTime(INVALID_YEAR));
-        assertFalse(StartDateTime.isValidStartDateTime(INVALID_HOUR));
-        assertFalse(StartDateTime.isValidStartDateTime(INVALID_MINUTE));
-        assertTrue(StartDateTime.isValidStartDateTime(VALID_START_DATE));
+        assertFalse(StartDateTime.isValidDateTime(null));
+        assertFalse(StartDateTime.isValidDateTime(INVALID_DAY));
+        assertFalse(StartDateTime.isValidDateTime(INVALID_MONTH));
+        assertFalse(StartDateTime.isValidDateTime(INVALID_YEAR));
+        assertFalse(StartDateTime.isValidDateTime(INVALID_HOUR));
+        assertFalse(StartDateTime.isValidDateTime(INVALID_MINUTE));
+        assertTrue(StartDateTime.isValidDateTime(VALID_START_DATE));
     }
 }

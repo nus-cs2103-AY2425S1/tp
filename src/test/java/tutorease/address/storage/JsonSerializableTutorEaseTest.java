@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import tutorease.address.commons.exceptions.IllegalValueException;
 import tutorease.address.commons.util.JsonUtil;
 import tutorease.address.model.TutorEase;
-import tutorease.address.testutil.TypicalPersons;
+import tutorease.address.testutil.TypicalStudents;
 
 public class JsonSerializableTutorEaseTest {
 
@@ -25,7 +25,7 @@ public class JsonSerializableTutorEaseTest {
         JsonSerializableTutorEase dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableTutorEase.class).get();
         TutorEase tutorEaseFromFile = dataFromFile.toModelType();
-        TutorEase typicalPersonsTutorEase = TypicalPersons.getTypicalTutorEase();
+        TutorEase typicalPersonsTutorEase = TypicalStudents.getTypicalTutorEase();
         assertEquals(tutorEaseFromFile, typicalPersonsTutorEase);
     }
 

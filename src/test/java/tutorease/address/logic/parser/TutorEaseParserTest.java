@@ -30,8 +30,8 @@ import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.person.NameContainsKeywordsPredicate;
 import tutorease.address.model.person.Person;
 import tutorease.address.testutil.EditPersonDescriptorBuilder;
-import tutorease.address.testutil.PersonBuilder;
 import tutorease.address.testutil.PersonUtil;
+import tutorease.address.testutil.StudentBuilder;
 
 public class TutorEaseParserTest {
 
@@ -39,7 +39,7 @@ public class TutorEaseParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
+        Person person = new StudentBuilder().build();
         AddContactCommand command = (AddContactCommand) parser.parseCommand(PersonUtil.getAddContactCommand(person));
         assertEquals(new AddContactCommand(person), command);
     }
@@ -52,7 +52,7 @@ public class TutorEaseParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
+        Person person = new StudentBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));

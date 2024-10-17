@@ -26,7 +26,7 @@ public class LessonBuilder {
      * Creates a {@code LessonBuilder} with the default details.
      */
     public LessonBuilder() throws ParseException {
-        student = new PersonBuilder().withName(STUDENT).build();
+        student = new StudentBuilder().withName(STUDENT).build();
         locationIndex = new LocationIndex(VALID_LOCATION_INDEX);
         startDateTime = StartDateTime.createStartDateTime(VALID_START_DATE);
         endDateTime = EndDateTime.createEndDateTime(VALID_END_DATE);

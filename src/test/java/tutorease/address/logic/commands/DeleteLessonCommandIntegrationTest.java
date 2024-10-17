@@ -8,20 +8,19 @@ import static tutorease.address.testutil.TypicalStudents.getTypicalTutorEase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import tutorease.address.commons.core.index.Index;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.Model;
 import tutorease.address.model.ModelManager;
 import tutorease.address.model.UserPrefs;
-import tutorease.address.model.lesson.EndDateTime;
 import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.lesson.LocationIndex;
-import tutorease.address.model.lesson.StartDateTime;
 import tutorease.address.model.lesson.StudentId;
 import tutorease.address.model.person.Person;
 import tutorease.address.testutil.LessonBuilder;
 import tutorease.address.testutil.TypicalStudents;
 
-public class AddLessonCommandIntegrationTest {
+public class DeleteLessonCommandIntegrationTest {
     private Model model;
     private Person validPerson = TypicalStudents.ALICE;
     private StudentId studentId = new StudentId("1");
@@ -29,7 +28,7 @@ public class AddLessonCommandIntegrationTest {
     private String startDateTime = "10-11-2024 02:18";
     private String endDateTime = "10-11-2024 03:18";
 
-    public AddLessonCommandIntegrationTest() throws ParseException {
+    public DeleteLessonCommandIntegrationTest() throws ParseException {
     }
 
     @BeforeEach
@@ -39,7 +38,7 @@ public class AddLessonCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newLesson_success() throws ParseException {
+    public void execute_deleteLesson_success() throws ParseException {
         Model expectedModel = new ModelManager(model.getTutorEase(), new UserPrefs(), model.getLessonSchedule());
         Lesson validLesson = new LessonBuilder().withName(validPerson)
                 .withStartDateTime(startDateTime)
@@ -51,17 +50,27 @@ public class AddLessonCommandIntegrationTest {
                         locationIndex, validLesson.getEndDateTime()), model,
                 String.format(AddLessonCommand.MESSAGE_SUCCESS, validLesson),
                 expectedModel);
+
+        assertCommandSuccess(new DeleteLessonCommand(Index.fromOneBased(1)), model,
+                String.format(DeleteLessonCommand.MESSAGE_SUCCESS, validLesson),
+                expectedModel);
     }
+
     @Test
-    public void execute_duplicateLesson_throwsCommandException() throws ParseException {
-        StartDateTime sdt = StartDateTime.createStartDateTime(startDateTime);
-        EndDateTime edt = EndDateTime.createEndDateTime(startDateTime);
-        Lesson overlap = new LessonBuilder().withName(validPerson)
+    public void execute_invalidIndex_throwsCommandException() throws ParseException {
+        Model expectedModel = new ModelManager(model.getTutorEase(), new UserPrefs(), model.getLessonSchedule());
+        Lesson validLesson = new LessonBuilder().withName(validPerson)
                 .withStartDateTime(startDateTime)
                 .withEndDateTime(endDateTime)
                 .build();
-        model.addLesson(overlap);
-        assertCommandFailure(new AddLessonCommand(studentId, sdt, locationIndex, edt), model,
-                AddLessonCommand.MESSAGE_OVERLAP_LESSON);
+        expectedModel.addLesson(validLesson);
+
+        assertCommandSuccess(new AddLessonCommand(studentId, validLesson.getStartDateTime(),
+                        locationIndex, validLesson.getEndDateTime()), model,
+                String.format(AddLessonCommand.MESSAGE_SUCCESS, validLesson),
+                expectedModel);
+
+        assertCommandFailure(new DeleteLessonCommand(Index.fromOneBased(10)), model,
+                DeleteLessonCommand.MESSAGE_INVALID_INDEX);
     }
 }

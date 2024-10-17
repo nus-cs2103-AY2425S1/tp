@@ -12,10 +12,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import tutorease.address.commons.exceptions.IllegalValueException;
 import tutorease.address.model.person.Address;
 import tutorease.address.model.person.Email;
+import tutorease.address.model.person.Guardian;
 import tutorease.address.model.person.Name;
 import tutorease.address.model.person.Person;
 import tutorease.address.model.person.Phone;
 import tutorease.address.model.person.Role;
+import tutorease.address.model.person.Student;
 import tutorease.address.model.tag.Tag;
 
 /**
@@ -112,7 +114,13 @@ class JsonAdaptedPerson {
         final Role modelRole = new Role(role);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelTags);
-    }
 
+        if (role.equals(Role.STUDENT)) {
+            return new Student(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelTags);
+        } else if (role.equals(Role.GUARDIAN)) {
+            return new Guardian(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelTags);
+        } else {
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
+        }
+    }
 }

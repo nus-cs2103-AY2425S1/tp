@@ -1,7 +1,7 @@
 ---
   layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+    title: "Developer Guide"
+    pageNav: 3
 ---
 
 # TutorEase Developer Guide
@@ -108,23 +108,24 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API
-call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("contact delete 1"
+)` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `contact delete 1`
+Command" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of
+**Note:** The lifeline for `DeleteContactCommandParser` should end at the destroy marker (X) but due to a limitation of
 PlantUML, the lifeline continues till the end of diagram.
 </box>
 
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `TutorEaseParser` object which in turn creates
-   a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
-   is executed by the `LogicManager`.
+   a parser that matches the command (e.g., `DeleteContactCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteContactCommand`)
+   which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take
    several interactions (between the command object and the `Model`) to achieve.
@@ -137,11 +138,11 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 
 * When called upon to parse a user command, the `TutorEaseParser` class creates an `XYZCommandParser` (`XYZ` is a
-  placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
-  the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `TutorEaseParser` returns back as
-  a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
-  interface so that they can be treated similarly where possible e.g, during testing.
+  placeholder for the specific command name e.g., `AddContactCommandParser`) which uses the other classes shown above
+  to parse the user command and create a `XYZCommand` object (e.g., `AddContactCommand`) which the `TutorEaseParser`
+  returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddContactCommandParser`, `DeleteContactCommandParser`, ...) inherit from the
+  `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 
@@ -164,8 +165,8 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`,
-which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `TutorEase`,
+which `Person` references. This allows `TutorEase` to only require one `Tag` object per unique tag, instead of
 each `Person` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
@@ -183,14 +184,14 @@ The `Storage` component,
 
 * can save both address book data and user preference data in JSON format, and read them back into corresponding
   objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
+* inherits from both `TutorEaseStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
   the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.address.commons` package.
+Classes used by multiple components are in the `tutorease.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -220,14 +221,14 @@ initial address book state, and the `currentStatePointer` pointing to that singl
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command
-calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes
-to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
-state.
+Step 2. The user executes `contact delete 5` command to delete the 5th person in the address book. The `contact delete`
+command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `contact delete 5`
+command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly 
+inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also
+Step 3. The user executes `contact add /nDavid …​` to add a new person. The `contact add` command also
 calls `Model#commitAddressBook()`, causing another modified address book state to be saved into
 the `addressBookStateList`.
 
@@ -309,7 +310,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Pros: Will use less memory (e.g. for `contact delete`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -344,13 +345,13 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Our software enhances tutoring efficiency by 
+**Value proposition**: Our software enhances tutoring efficiency by
 
-* simplifying management tasks, 
-* reducing scheduling conflicts, and 
-* providing a clear overview of classes and finances. 
+* simplifying management tasks,
+* reducing scheduling conflicts, and
+* providing a clear overview of classes and finances.
 
-It enables seamless tutor coordination with students and parents, improving communication and organization, 
+It enables seamless tutor coordination with students and parents, improving communication and organization,
 ultimately leading to a more effective and stress-free educational experience.
 
 ### User stories
@@ -393,9 +394,9 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 | Tutor | Keep track of when and how much each student/guardian needs to pay       | Collect my fees timely and accurately                                | 2        |
 | Tutor | Tag students under their guardian                                        | Track total fees to collect                                          | 2        |
 | Tutor | Automatically update the amount of fee I collect after a lesson          | Avoid manually update and track fees                                 | 2        |
-| Tutor | Batch delete all scheduled lessons with a student                        | Remove all students' classes                                          | 2        |
+| Tutor | Batch delete all scheduled lessons with a student                        | Remove all students' classes                                         | 2        |
 
-### (Expert user)
+### Expert user
 
 | As a  | I want to                                                                | So that I can                                                                      | Priority |
 |-------|--------------------------------------------------------------------------|------------------------------------------------------------------------------------|----------|
@@ -417,26 +418,29 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 **Use Case: UC01 - Add student contact**
 
 **MSS**:
+
 1. Tutor keys in required fields to add student contact.
 2. TutorEase adds the student contact.  
    Use case ends.
 
 **Extensions**:
+
 * **1a.** TutorEase detects bad or wrongly formatted inputs.
     * **1a1.** TutorEase prompts Tutor with correct format.
     * **1a2.** Tutor enters new data.  
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
-
 **Use Case: UC02 - Delete student contact**
 
 **MSS**:
+
 1. Tutor keys in required fields to delete student contact.
 2. TutorEase deletes the student contact.  
    Use case ends.
 
 **Extensions**:
+
 * **1a**. TutorEase detects bad or wrongly formatted inputs.
     * **1a1**. TutorEase prompts Tutor with correct format.
     * **1a2**. Tutor enters new data.  
@@ -446,17 +450,18 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 **Use Case: UC03 - List student contacts**
 
 **MSS**:
+
 1. Tutor keys in required fields to list student contacts.
 2. TutorEase lists the student contact.  
    Use case ends.
 
 **Extensions**:
+
 * **1a**. TutorEase detects bad or wrongly formatted inputs.
     * **1a1**. TutorEase prompts Tutor with correct format.
     * **1a2**. Tutor enters new data.  
       Steps 1a1 to 1a2 are repeated until the data entered are correct.              
       Use case resumes from Step 2.
-
 
 **Use Case: UC04 - Add lesson for student**  
 **MSS:**
@@ -470,14 +475,14 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 * **1a**. TutorEase detects bad or wrongly formatted inputs.
     * **1a1**. TutorEase prompts Tutor with correct format.
     * **1a2**. Tutor enters new data.  
-    Steps 1a1 to 1a2 are repeated until the data entered are correct.  
-    Use case resumes from Step 2.
+      Steps 1a1 to 1a2 are repeated until the data entered are correct.  
+      Use case resumes from Step 2.
 
 * **1b**. TutorEase detects that the student does not exist.
     * **1b1**. TutorEase prompts Tutor to key in data for a student that exists.
     * **1b2**. Tutor enters new data.  
-    Steps 1b1 to 1b2 are repeated until the data entered are correct.  
-    Use case resumes from Step 2.
+      Steps 1b1 to 1b2 are repeated until the data entered are correct.  
+      Use case resumes from Step 2.
 
 **Use Case: UC05 - Delete lesson for student**  
 **MSS:**
@@ -515,34 +520,43 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
-
 ### Non-Functional Requirements
 
-1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
+   able to accomplish most of the tasks faster using commands than using the mouse.
 2. Data Requirements:
-   - Size: System must be able to handle at least 1,000 student records, with each containing personal information and lesson schedules.
-   - Volatility: Contact information is not expected to be changed frequently, but lessons schedules may change frequently. System must allow quick updates without issues.
-   - Data persistency: all students and lesson data should be stored and retrievable until entry has been deleted.
+    - Size: System must be able to handle at least 1,000 student records, with each containing personal information and
+      lesson schedules.
+    - Volatility: Contact information is not expected to be changed frequently, but lessons schedules may change
+      frequently. System must allow quick updates without issues.
+    - Data persistency: all students and lesson data should be stored and retrievable until entry has been deleted.
 3. Environment Requirements:
-   - Technical Compatability: System must be compatible with _Mainstream OS_ as long as it has Java `17` or above installed.
-   - Server Requirements: stored locally.
+    - Technical Compatability: System must be compatible with _Mainstream OS_ as long as it has Java `17` or above
+      installed.
+    - Server Requirements: stored locally.
 4. Capacity:
-   - User Capacity: System is designed for local use and therefore for 1 local user.
-   - Data Capacity: as mentioned above within Data Requirements.
+    - User Capacity: System is designed for local use and therefore for 1 local user.
+    - Data Capacity: as mentioned above within Data Requirements.
 5. Documentation:
-   - User Guide: A complete user guide will be provided for tutor, detailing every command and cover common troubleshooting scenarios.
-   - Developer Guide: Comprehensive developer guide will be available, to facilitate future development and maintenance.
+    - User Guide: A complete user guide will be provided for tutor, detailing every command and cover common
+      troubleshooting scenarios.
+    - Developer Guide: Comprehensive developer guide will be available, to facilitate future development and
+      maintenance.
 6. Fault Tolerance:
-   - Error handling: System should handle up to 90% of incorrect inputs (incorrect date formats, missing fields or etc) without crashing and should provide meaningful error messages to guide users to correct the input.
+    - Error handling: System should handle up to 90% of incorrect inputs (incorrect date formats, missing fields or etc)
+      without crashing and should provide meaningful error messages to guide users to correct the input.
 7. Maintability:
-   - System should have modular components that are easily replaceable or upgradable without affecting the application.
+    - System should have modular components that are easily replaceable or upgradable without affecting the application.
 8. Portability:
-   - System must be portable across devices with different operating systems, allowing tutors to install it easily.
+    - System must be portable across devices with different operating systems, allowing tutors to install it easily.
 9. Quality:
-   - Ease of Use: System should be usable by tutors with minimal computer literacy and include intuitive CLI commands and user-friendly prompts.
-   - Testing coverage: Unit tests should cover at least 60% of codebase, ensuring high reliability during future updates.
+    - Ease of Use: System should be usable by tutors with minimal computer literacy and include intuitive CLI commands
+      and user-friendly prompts.
+    - Testing coverage: Unit tests should cover at least 60% of codebase, ensuring high reliability during future
+      updates.
 10. Testability:
-    - Automated Testing: System should support automated unit and integration testing for continuous integration, allowing future updates to be tested without manual intervention.
+    - Automated Testing: System should support automated unit and integration testing for continuous integration,
+      allowing future updates to be tested without manual intervention.
 
 *{More to be added}*
 
@@ -552,7 +566,6 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Pre-U Home Tuition Teacher**: A teacher who offers Primary to Junior College level tuition at the student’s home.
 * **Locale date time format**: The date time format the users’ computer uses.
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -589,14 +602,34 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `contact list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
+    1. Test case: `contact delete 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
        Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
+    1. Test case: `contact delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `contact delete`, `contact delete x`, `...` (where x is larger than the 
+       list size)<br>
+       Expected: Similar to previous.
+
+1. _{ more test cases …​ }_
+
+### Deleting a lesson
+
+1. Deleting a lesson when there are lessons shown in the lesson schedule
+
+    1. Prerequisites: There are multiple lessons in the lesson schedule _{ may change when we can filter
+       lessons}_
+
+    1. Test case: `delete 1`<br>
+       Expected: First lesson is deleted from the lesson schedule. Details of the deleted lesson shown in the
+       status message.
+
+    1. Test case: `delete 0`<br>
+       Expected: No lesson is deleted. Error details shown in the status message.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.

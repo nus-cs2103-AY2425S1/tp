@@ -54,4 +54,9 @@ public class StudentIdTest {
         assertFalse(studentId.equals(5.0f));
         assertFalse(studentId.equals(new StudentId("2")));
     }
+    @Test
+    public void toStringTest() throws ParseException {
+        StudentId studentId = new StudentId("1");
+        assertEquals("1", studentId.toString());
+    }
 }
