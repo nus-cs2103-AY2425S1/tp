@@ -130,6 +130,7 @@ Format: `tag INDEX t/TAG1 TAG2 ...`
 * Tags the contact at the specified `INDEX`. The index refers to the index number shown next to the contact in the contact list. The index **must be a positive integer** 1, 2, 3, ...
 * Tags specified in the command must be alphanumeric, and only one word long.
 * The user can specify multiple tags in the same command by separating the tags with a space.
+* Adding a tag to a contact who already has the tag will show an error message.
 
 Examples:
 * `tag 1 t/photographer` adds the tag 'photographer' to the contact at index 1
