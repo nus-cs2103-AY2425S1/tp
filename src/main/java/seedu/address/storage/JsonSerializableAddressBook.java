@@ -26,7 +26,7 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_CONCERT =
             "Concerts list contains duplicate concert(s).";
     public static final String MESSAGE_DUPLICATE_CONCERT_CONTACT =
-            "ConcertContacts list contsins duplicate assosciation(s).";
+            "ConcertContacts list contains duplicate association(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedConcert> concerts = new ArrayList<>();
