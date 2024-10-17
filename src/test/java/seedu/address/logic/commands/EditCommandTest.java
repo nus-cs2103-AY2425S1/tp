@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -143,6 +144,28 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_editScheduleWithClashes_success() {
+        // Arrange: setup an original person with a specific schedule and other persons with clashing schedules
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withSchedule("Thursday-1800-1900") // Assume this new schedule clashes with others
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        // Act: Execute the edit command
+        CommandResult result = null;
+        try {
+            result = editCommand.execute(model);
+        } catch (CommandException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Assert: Check that the result message contains information about clashes
+        assertTrue(result.getFeedbackToUser().contains("You have")
+                && result.getFeedbackToUser().contains("clashing schedule"));
     }
 
     @Test

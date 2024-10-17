@@ -11,6 +11,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
+import java.util.List;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -69,7 +71,18 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+
+        long clashes = model.checkClashes(toAdd);
+        List<Person> clashingPersons = model.getClashingPersons(toAdd);
+        if (clashes == 0) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        } else {
+            return new CommandResult(
+                    String.format(MESSAGE_SUCCESS, Messages.format(toAdd))
+                    + Messages.getWarningMessageForClashes(clashes, clashingPersons)
+            );
+        }
+
     }
 
     @Override

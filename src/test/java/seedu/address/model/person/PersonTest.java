@@ -53,15 +53,14 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
-        // Note for Yi Fan: when you update the case-insensitive, this should return true
+        // name differs in case, all other attributes same -> returns true
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // name has trailing spaces, all other attributes same -> returns true
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
     }
 
     @Test
@@ -110,12 +109,43 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withRate(VALID_RATE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different schedule -> returns false
-        editedAlice = new PersonBuilder(ALICE).withSchedule(VALID_SCHEDULE_BOB).build();
-
         // different owedAmount -> returns false
         editedAlice = new PersonBuilder(ALICE).withOwedAmount(VALID_OWED_AMOUNT_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
 
+    }
+
+    @Test
+    public void isClash_samePerson_returnsFalse() {
+        Person person = new PersonBuilder().build();
+        assertFalse(person.isClash(person), "A person should not clash with themselves.");
+    }
+
+    @Test
+    public void isClash_nullPerson_returnsFalse() {
+        Person person = new PersonBuilder().build();
+        assertFalse(person.isClash(null), "Clashing with a null person should return false.");
+    }
+
+    @Test
+    public void isClash_noClash_returnsFalse() {
+        Person personA = new PersonBuilder().withSchedule("Monday-0900-1100").build();
+        Person personB = new PersonBuilder().withSchedule("Monday-1200-1300").build();
+        assertFalse(personA.isClash(personB), "Persons should not clash when their schedules do not overlap.");
+    }
+
+    @Test
+    public void isClash_clash_returnsTrue() {
+        Person personA = new PersonBuilder().withSchedule("Monday-0900-1100").build();
+        Person personB = new PersonBuilder().withSchedule("Monday-1000-1200").build();
+        assertTrue(personA.isClash(personB), "Persons should clash when their schedules overlap.");
+    }
+
+    @Test
+    public void isClash_partialOverlap_returnsTrue() {
+        Person personA = new PersonBuilder().withSchedule("Tuesday-1000-1200").build();
+        Person personB = new PersonBuilder().withSchedule("Tuesday-1100-1300").build();
+        assertTrue(personA.isClash(personB), "Persons should clash with partially overlapping schedules.");
     }
 
     @Test

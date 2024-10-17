@@ -92,6 +92,19 @@ public class Person {
     }
 
     /**
+     * Determines whether there is a scheduling conflict between this person and another person.
+     * @param otherPerson The person to compare against for scheduling conflicts.
+     * @return true if there is a clash in schedules with the specified other person.
+     */
+    public boolean isClash(Person otherPerson) {
+        if (otherPerson == this) {
+            return false;
+        }
+
+        return otherPerson != null && getSchedule().isClash(otherPerson.getSchedule());
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
