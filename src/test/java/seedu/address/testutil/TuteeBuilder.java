@@ -7,16 +7,15 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Hours;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person; // TODO REMOVE THIS WHOLE CLASS SOON
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Tutor;
+import seedu.address.model.person.Tutee;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
  */
-public class PersonBuilder {
+public class TuteeBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
@@ -32,9 +31,9 @@ public class PersonBuilder {
     private Set<Tag> tags;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code TuteeBuilder} with the default details.
      */
-    public PersonBuilder() {
+    public TuteeBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -44,67 +43,67 @@ public class PersonBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the TuteeBuilder with the data of {@code tuteeToCopy}.
      */
-    public PersonBuilder(Person personToCopy) {
-        name = personToCopy.getName();
-        phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
-        hours = personToCopy.getHours();
-        tags = new HashSet<>(personToCopy.getTags());
+    public TuteeBuilder(Tutee tuteeToCopy) {
+        name = tuteeToCopy.getName();
+        phone = tuteeToCopy.getPhone();
+        email = tuteeToCopy.getEmail();
+        address = tuteeToCopy.getAddress();
+        hours = tuteeToCopy.getHours();
+        tags = new HashSet<>(tuteeToCopy.getTags());
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code Name} of the {@code Tutee} that we are building.
      */
-    public PersonBuilder withName(String name) {
+    public TuteeBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Tutee} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public TuteeBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code Address} of the {@code Tutee} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
+    public TuteeBuilder withAddress(String address) {
         this.address = new Address(address);
         return this;
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code Phone} of the {@code Tutee} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
+    public TuteeBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
         return this;
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code Email} of the {@code Tutee} that we are building.
      */
-    public PersonBuilder withEmail(String email) {
+    public TuteeBuilder withEmail(String email) {
         this.email = new Email(email);
         return this;
     }
 
     /**
-     * Sets the {@code Hours} of the {@code Person} that we are building.
+     * Sets the {@code Hours} of the {@code Tutee} that we are building.
      */
-    public PersonBuilder withHours(String hours) {
+    public TuteeBuilder withHours(String hours) {
         this.hours = new Hours(hours);
         return this;
     }
-    // TODO DEAD CODE, REMOVE
-    public Person build() {
-        return new Tutor(name, phone, email, address, hours, tags);
+
+    public Tutee build() {
+        return new Tutee(name, phone, email, address, hours, tags);
     }
 
 }

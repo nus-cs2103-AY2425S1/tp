@@ -17,101 +17,56 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Tutee;
-import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Tutee}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedTutee extends JsonAdaptedPerson {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Tutee's %s field is missing!";
 
-    private final String name;
-    private final String phone;
-    private final String email;
-    private final String address;
-    private final String hours;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
-    private final String role;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedTutee} with the given tutee details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("hours") String hours,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("role") String role) {
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.hours = hours;
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
-        // TODO IMPLEMENT A BETTER ROLE, FOR NOW THIS WILL PLACEHOLDER
-        this.role = role;
+    public JsonAdaptedTutee(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("hours") String hours,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+
+        super(name, phone, email, address, hours, tags, "Tutee");
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Tutee} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Person source) {
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
-        hours = source.getHours().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
-        role = (source instanceof Tutor) ? "Tutor" : "Tutee";
+    public JsonAdaptedTutee(Person source) {
+        super(source.getName().fullName, source.getPhone().value, source.getEmail().value,
+                source.getAddress().value, source.getHours().value,
+                        source.getTags().stream()
+                        .map(JsonAdaptedTag::new)
+                        .collect(Collectors.toList()),
+                "Tutee"
+        );
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getHours() {
-        return hours;
-    }
-
-    public List<JsonAdaptedTag> getTags() {
-        return tags;
-    }
-
-    public String getRole() {
-        return role;
-    }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted tutee object into the model's {@code Tutee} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted tutee.
      */
-    public Person toModelType() throws IllegalValueException {
+    public Tutee toModelType() throws IllegalValueException {
         String name = this.getName();
         String phone = this.getPhone();
         String email = this.getEmail();
         String address = this.getAddress();
         String hours = this.getHours();
         List<JsonAdaptedTag> tags = this.getTags();
-        String role = this.getRole();
 
         final List<Tag> tuteeTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
@@ -159,12 +114,7 @@ class JsonAdaptedPerson {
         final Hours modelHours = new Hours(hours);
 
         final Set<Tag> modelTags = new HashSet<>(tuteeTags);
-        if (role == "Tutor") {
-            return new Tutor(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags);
-        } else {
-            return new Tutee(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags);
-        }
-
+        return new Tutee(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags);
     }
 
 }
