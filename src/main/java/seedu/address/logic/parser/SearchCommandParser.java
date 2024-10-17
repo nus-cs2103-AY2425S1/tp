@@ -13,6 +13,7 @@ import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.tag.TagContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new SearchCommand object
@@ -52,6 +53,8 @@ public class SearchCommandParser implements Parser<SearchCommand> {
             return new SearchCommand(new NameContainsKeywordsPredicate(keywords));
         case "Phone":
             return new SearchCommand(new PhoneContainsKeywordsPredicate(keywords));
+        case "Tags":
+            return new SearchCommand(new TagContainsKeywordsPredicate(keywords));
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
         }
