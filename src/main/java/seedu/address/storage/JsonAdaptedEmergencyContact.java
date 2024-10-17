@@ -66,11 +66,11 @@ public class JsonAdaptedEmergencyContact {
             throw new IllegalValueException(String.format(JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT,
                     Relationship.class.getSimpleName()));
         }
-        if (!Relationship.isValidRelationship(ecRelationship)) {
-            throw new IllegalValueException(Relationship.RELATIONSHIP_TYPE_CONSTRAINTS);
-        }
         if (!Relationship.isAlphanumericRelationship(ecRelationship)) {
             throw new IllegalValueException(Relationship.ALPHANUMERIC_CONSTRAINTS);
+        }
+        if (!Relationship.isValidRelationship(ecRelationship)) {
+            throw new IllegalValueException(Relationship.RELATIONSHIP_TYPE_CONSTRAINTS);
         }
         final Relationship modelEcRelationship = new Relationship(ecRelationship);
 

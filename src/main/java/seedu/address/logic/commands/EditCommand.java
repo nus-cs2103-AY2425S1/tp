@@ -221,11 +221,6 @@ public class EditCommand extends Command {
                     emergencyContactPhone, emergencyContactRelationship, doctorName, doctorPhone, doctorEmail, tags);
         }
 
-        public boolean isAnyEmergencyContactFieldEdited() {
-            return CollectionUtil.isAnyNonNull(emergencyContactName,
-                    emergencyContactPhone, emergencyContactRelationship);
-        }
-
         public boolean isAnyDoctorFieldEdited() {
             return CollectionUtil.isAnyNonNull(doctorName, doctorPhone, doctorEmail);
         }
