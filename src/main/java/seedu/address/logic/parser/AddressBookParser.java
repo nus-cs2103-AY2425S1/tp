@@ -13,6 +13,7 @@ import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeletePriorityCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EmergencyContactCommand;
@@ -96,6 +97,9 @@ public class AddressBookParser {
 
         case MarkTaskCommand.COMMAND_WORD:
             return new MarkTaskCommandParser().parse(arguments);
+
+        case DeletePriorityCommand.COMMAND_WORD:
+            return new DeletePriorityCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
