@@ -41,9 +41,6 @@ public class ArgumentTokenizer {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, DEFAULT_DELIMITER);
         ArgumentMultimap map = extractArguments(argsString, positions);
         List<String> items = map.getAllValues(DEFAULT_DELIMITER);
-        if (map.getPreamble().isEmpty()) {
-            return items;
-        }
         items.add(map.getPreamble());
         return items;
 

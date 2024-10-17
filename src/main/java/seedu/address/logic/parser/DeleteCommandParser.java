@@ -18,8 +18,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
 
-    public static final String MESSAGE_EMPTY_INDEX = "Index is not provided.";
-
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
      * and returns a DeleteCommand object for execution.
@@ -29,7 +27,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         requireNonNull(args);
 
         List<String> indicesList = ArgumentTokenizer.tokenizeWithDefault(args);
-        if (indicesList.isEmpty() || indicesList.stream().allMatch(String::isEmpty)) {
+        if (indicesList.isEmpty() || indicesList.stream().anyMatch(String::isEmpty)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
@@ -61,16 +59,5 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         return Optional.of(ParserUtil.parseIndices(indicesSet));
     }
 
-
-    /**
-     * Appends the preamble of the parse result to the list.
-     * @param indicesWithoutFirst collection of Strings representing indices, excluding the first index.
-     * @param first The String representation of the first index
-     * @return A List which contains String representation of the indices.
-     */
-    private List<String> joinIndices(List<String> indicesWithoutFirst, String first) {
-        indicesWithoutFirst.add(first);
-        return indicesWithoutFirst;
-    }
 
 }
