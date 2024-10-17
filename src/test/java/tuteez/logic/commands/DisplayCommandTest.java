@@ -64,10 +64,13 @@ public class DisplayCommandTest {
                 Messages.format(personToDisplay));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+
         expectedModel.displayPerson(personToDisplay);
 
         assertCommandSuccess(displayCommand, model, expectedMessage, expectedModel);
     }
+
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
