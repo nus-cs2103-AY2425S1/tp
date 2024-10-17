@@ -70,7 +70,7 @@ public class AddPetCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddPetCommand)) {
             return false;
         }
 

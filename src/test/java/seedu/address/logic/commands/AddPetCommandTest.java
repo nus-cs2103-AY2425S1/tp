@@ -25,7 +25,6 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
-import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PetBuilder;
 
 public class AddPetCommandTest {
@@ -53,7 +52,8 @@ public class AddPetCommandTest {
         AddPetCommand addPetCommand = new AddPetCommand(validPet);
         PetModelStub petModelStub = new AddPetCommandTest.ModelStubWithPet(validPet);
 
-        assertThrows(CommandException.class, AddPetCommand.MESSAGE_DUPLICATE_PET, () -> addPetCommand.execute(petModelStub));
+        assertThrows(CommandException.class,
+                AddPetCommand.MESSAGE_DUPLICATE_PET, () -> addPetCommand.execute(petModelStub));
     }
 
     @Test
