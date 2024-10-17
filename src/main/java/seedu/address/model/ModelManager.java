@@ -198,17 +198,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Student getStudentByNumber(StudentNumber studentNumber) {
-        for (Student student : getAddressBook().getStudentList()) {
-            if (student.getStudentNumber().equals(studentNumber)) {
-                return student;
-            }
-        }
-        return null; // Return null if no matching student is found
-
-    }
-
-    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
