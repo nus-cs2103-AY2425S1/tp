@@ -1,4 +1,4 @@
-[![CI Status](https://github.com/AY2425S1-CS2103T-W10-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-W08-3/tp/actions)
+[![CI Status](https://github.com/AY2425S1-CS2103T-W10-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-W10-2/tp/actions)
 
 [![Codecov](https://codecov.io/gh/AY2425S1-CS2103T-W10-2/tp/graph/badge.svg?token=134QRO3UI3)](https://codecov.io/gh/AY2425S1-CS2103T-W10-2/tp)
 
