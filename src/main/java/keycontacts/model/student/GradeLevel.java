@@ -18,18 +18,6 @@ public class GradeLevel {
     /**
      * Constructs a {@code GradeLevel}.
      */
-    public GradeLevel(String schoolLevel, int grade) {
-        if (!isValidGradeLevel(schoolLevel + " " + grade)) {
-            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
-        }
-        this.schoolLevel = schoolLevel;
-        this.grade = grade;
-        this.value = schoolLevel + " " + grade;
-    }
-
-    /**
-     * Constructs a {@code GradeLevel}.
-     */
     public GradeLevel(String gradeLevel) {
         if (!isValidGradeLevel(gradeLevel)) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);

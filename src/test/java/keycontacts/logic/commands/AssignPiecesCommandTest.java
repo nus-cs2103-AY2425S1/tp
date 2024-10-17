@@ -2,6 +2,8 @@ package keycontacts.logic.commands;
 
 import static keycontacts.logic.commands.CommandTestUtil.VALID_PIANO_PIECE_BEETHOVEN;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_PIANO_PIECE_PACHELBEL;
+import static keycontacts.logic.commands.CommandTestUtil.assertCommandFailure;
+import static keycontacts.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static keycontacts.testutil.Assert.assertThrows;
 import static keycontacts.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static keycontacts.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
@@ -19,18 +21,19 @@ import org.junit.jupiter.api.Test;
 
 import keycontacts.commons.core.index.Index;
 import keycontacts.logic.Messages;
-import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
 import keycontacts.model.ModelManager;
+import keycontacts.model.StudentDirectory;
 import keycontacts.model.UserPrefs;
 import keycontacts.model.pianopiece.PianoPiece;
+import keycontacts.model.student.Student;
 
 public class AssignPiecesCommandTest {
 
     private final Set<PianoPiece> validPianoPieces = PianoPiece.getPianoPieceSet(VALID_PIANO_PIECE_BEETHOVEN,
             VALID_PIANO_PIECE_PACHELBEL);
 
-    private Model model = new ModelManager(getTypicalStudentDirectory(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalStudentDirectory(), new UserPrefs());
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
@@ -42,22 +45,26 @@ public class AssignPiecesCommandTest {
     }
 
     @Test
-    public void execute_validIndexAndPianoPiece_success() throws Exception {
+    public void execute_validIndexAndPianoPiece_success() {
         AssignPiecesCommand command = new AssignPiecesCommand(INDEX_FIRST_STUDENT, validPianoPieces);
-        CommandResult commandResult = command.execute(model);
+        Student student = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student updatedStudent = student.withAddedPianoPieces(validPianoPieces);
 
-        assertEquals(String.format(AssignPiecesCommand.MESSAGE_SUCCESS,
+        Model expectedModel = new ModelManager(new StudentDirectory(model.getStudentDirectory()), new UserPrefs());
+        expectedModel.setStudent(model.getFilteredStudentList().get(0), updatedStudent);
+
+        CommandResult commandResult = new CommandResult(String.format(AssignPiecesCommand.MESSAGE_SUCCESS,
                 Messages.format(validPianoPieces),
-                Messages.format(model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased()))),
-                commandResult.getFeedbackToUser());
+                Messages.format(student)));
+
+        assertCommandSuccess(command, model, commandResult, expectedModel);
     }
     @Test
     public void execute_indexOutOfBounds_failure() {
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         AssignPiecesCommand command = new AssignPiecesCommand(outOfBoundsIndex, validPianoPieces);
 
-        assertThrows(CommandException.class,
-                Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, () -> command.execute(model));
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
     @Test
     public void execute_duplicatePianoPiece_throwsCommandException() throws Exception {
@@ -67,8 +74,7 @@ public class AssignPiecesCommandTest {
         Set<PianoPiece> firstPianoPiece = validPianoPieces.stream().limit(1).collect(Collectors.toSet());
         AssignPiecesCommand command = new AssignPiecesCommand(INDEX_FIRST_STUDENT, firstPianoPiece);
 
-        assertThrows(CommandException.class,
-                AssignPiecesCommand.MESSAGE_DUPLICATE_PIANO_PIECE, () -> command.execute(model));
+        assertCommandFailure(command, model, AssignPiecesCommand.MESSAGE_DUPLICATE_PIANO_PIECE);
     }
 
     @Test

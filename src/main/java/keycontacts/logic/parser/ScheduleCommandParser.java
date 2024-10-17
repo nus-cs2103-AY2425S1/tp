@@ -16,7 +16,7 @@ import keycontacts.model.lesson.Time;
 /**
  * Parses input arguments and creates a new ScheduleCommand object
  */
-public class ScheduleCommandParser {
+public class ScheduleCommandParser implements Parser<ScheduleCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the ScheduleCommand
      * and returns a ScheduleCommand object for execution.

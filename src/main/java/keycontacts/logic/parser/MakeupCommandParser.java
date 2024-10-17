@@ -15,12 +15,12 @@ import keycontacts.model.lesson.MakeupLesson;
 import keycontacts.model.lesson.Time;
 
 /**
- * Parses input arguments and creates a new ScheduleCommand object
+ * Parses input arguments and creates a new MakeupCommand object
  */
 public class MakeupCommandParser implements Parser<MakeupLessonCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the ScheduleCommand
-     * and returns a ScheduleCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the MakeupCommand
+     * and returns a MakeupCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public MakeupLessonCommand parse(String args) throws ParseException {
@@ -47,9 +47,9 @@ public class MakeupCommandParser implements Parser<MakeupLessonCommand> {
         if (!Lesson.isValidTimePair(startTime, endTime)) {
             throw new ParseException(Lesson.MESSAGE_CONSTRAINTS);
         }
-        MakeupLesson regularLesson = new MakeupLesson(lessonDate, startTime, endTime);
+        MakeupLesson makeupLesson = new MakeupLesson(lessonDate, startTime, endTime);
 
-        return new MakeupLessonCommand(index, regularLesson);
+        return new MakeupLessonCommand(index, makeupLesson);
     }
 
 }

@@ -1,6 +1,7 @@
 package keycontacts.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_DAY;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
@@ -39,14 +40,15 @@ public class ScheduleCommand extends Command {
     public static final String MESSAGE_LESSON_UNCHANGED = "Lesson for the student is already at that time!";
     public static final String MESSAGE_LESSON_CLASH = "There is a clashing lesson at that time!";
 
-    private final Index targetIndex;
+    private final Index index;
     private final RegularLesson regularLesson;
 
     /**
      * Creates a ScheduleCommand to schedule the given {@code regularLesson}
      */
-    public ScheduleCommand(Index targetIndex, RegularLesson regularLesson) {
-        this.targetIndex = targetIndex;
+    public ScheduleCommand(Index index, RegularLesson regularLesson) {
+        requireAllNonNull(index, regularLesson);
+        this.index = index;
         this.regularLesson = regularLesson;
     }
 
@@ -55,11 +57,11 @@ public class ScheduleCommand extends Command {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Student studentToUpdate = lastShownList.get(targetIndex.getZeroBased());
+        Student studentToUpdate = lastShownList.get(index.getZeroBased());
         Student updatedStudent = studentToUpdate.withRegularLesson(regularLesson);
         if (studentToUpdate.equals(updatedStudent)) {
             throw new CommandException(MESSAGE_LESSON_UNCHANGED);
@@ -80,14 +82,14 @@ public class ScheduleCommand extends Command {
             return false;
         }
 
-        return targetIndex.equals(otherScheduleCommand.targetIndex)
+        return index.equals(otherScheduleCommand.index)
                 && regularLesson.equals(otherScheduleCommand.regularLesson);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("index", index)
                 .add("regularLesson", regularLesson)
                 .toString();
     }
