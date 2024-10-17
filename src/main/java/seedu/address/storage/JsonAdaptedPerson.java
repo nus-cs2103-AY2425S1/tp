@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Interest;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String interest;
     private final String workExp;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String university;
@@ -45,11 +47,12 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("workExp") String workExp, 
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("university") String university,
-                             @JsonProperty("major") String major) {
+                             @JsonProperty("major") String major, @JsonProperty("interest") String interest) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.interest = interest;
         this.workExp = workExp;
         this.university = university;
         this.major = major;
@@ -66,6 +69,7 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        interest = source.getInterest().value;
         address = source.getAddress().value;
         workExp = source.getWorkExp().value;
         university = source.getUniversity().value;
@@ -128,8 +132,6 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelWorkExp, modelTags);
-
         // Validation for new fields
         if (university == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -148,7 +150,8 @@ class JsonAdaptedPerson {
         }
         final Major modelMajor = new Major(major);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelWorkExp, modelTags, modelUniversity, modelMajor);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelWorkExp, modelTags, modelUniversity,
+                          modelMajor, new Interest(""));
     }
 
 }

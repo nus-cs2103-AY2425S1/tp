@@ -27,19 +27,20 @@ public class Person {
 
 
     // New fields
+    private final Interest interest;
     private final University university;
     private final Major major;
+    private final Experience experience;
     private final Interest interest;
     private final WorkExp workExp;
-
 
     /**
      * Every field must be present and not null.
      * New fields for university, major, interest, and experience are added.
      * Interest and experience are initialized to empty strings.
      */
-    public Person(Name name, Phone phone, Email email, Address address, WorkExp workExp, Set<Tag> tags, 
-                 University university, Major major) {
+    public Person(Name name, Phone phone, Email email, Address address,WorkExp workExp, Set<Tag> tags,
+                  University university, Major major, Interest interest) {
         requireAllNonNull(name, phone, email, address, tags, university, major);
 
         this.name = name;
@@ -51,6 +52,7 @@ public class Person {
         this.university = university;
         this.major = major;
         // Assign placeholder values for interest and experience
+        this.experience = new Experience("placeholder");
         this.interest = new Interest("placeholder");
     }
 

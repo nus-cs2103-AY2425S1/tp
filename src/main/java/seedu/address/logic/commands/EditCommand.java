@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTEREST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -26,6 +27,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Interest;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -55,7 +57,8 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com"
             + PREFIX_UNIVERSITY + "NUS"
-            + PREFIX_MAJOR + "Computer Science";
+            + PREFIX_MAJOR + "Computer Science"
+            + PREFIX_INTEREST + "Swimming";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -113,8 +116,11 @@ public class EditCommand extends Command {
         // Add the new fields
         University updatedUniversity = editPersonDescriptor.getUniversity().orElse(personToEdit.getUniversity());
         Major updatedMajor = editPersonDescriptor.getMajor().orElse(personToEdit.getMajor());
+        Interest updatedInterest = editPersonDescriptor.getInterest().orElse(personToEdit.getInterest());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedWorkExp, updatedTags, updatedUniversity, updatedMajor);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedWorkExp, updatedTags,
+                updatedUniversity, updatedMajor, updatedInterest);
+
     }
 
     @Override
@@ -152,6 +158,7 @@ public class EditCommand extends Command {
         private Address address;
         private WorkExp workExp;
         private Set<Tag> tags;
+        private Interest interest;
         private University university;
         private Major major;
 
@@ -201,6 +208,14 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public void setInterest(Interest interest) {
+            this.interest = interest;
+        }
+
+        public Optional<Interest> getInterest() {
+            return Optional.ofNullable(interest);
         }
 
         public void setAddress(Address address) {
