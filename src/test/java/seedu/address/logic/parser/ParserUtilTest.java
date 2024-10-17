@@ -249,6 +249,7 @@ public class ParserUtilTest {
 
         assertEquals(expectedEnumValue, actualEnumValue);
     }
+
     @Test
     public void parseRoleType_validProfKeyword2_throwsParseException() {
         assertThrows(ParseException.class, () -> {
