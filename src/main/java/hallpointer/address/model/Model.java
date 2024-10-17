@@ -19,6 +19,11 @@ public interface Model {
     Predicate<Member> PREDICATE_SHOW_ALL_MEMBERS = unused -> true;
 
     /**
+     * {@code Predicate} that always evaluate to false
+     */
+    Predicate<Member> PREDICATE_SHOW_NO_MEMBERS = unused -> false;
+
+    /**
      * Returns the user prefs.
      */
     ReadOnlyUserPrefs getUserPrefs();

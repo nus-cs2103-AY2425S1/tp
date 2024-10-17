@@ -5,6 +5,7 @@ import static hallpointer.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_POINTS;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
 import static hallpointer.address.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
+import static hallpointer.address.model.Model.PREDICATE_SHOW_NO_MEMBERS;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class AddSessionCommand extends Command {
             + PREFIX_POINTS + "2 "
             + PREFIX_MEMBER + "1";
 
-    public static final String MESSAGE_SUCCESS = "Session %1$s on %2$s for %3$d points "
+    public static final String MESSAGE_SUCCESS = "Session %1$s on %2$s for %3$s points "
             + "added successfully with %4$d member attending.";
     public static final String MESSAGE_DUPLICATE_SESSION = "Error: Session already exists.";
     public static final String MESSAGE_INVALID_INDEX = "Error: Invalid index specified.";
@@ -69,14 +70,15 @@ public class AddSessionCommand extends Command {
             }
             Member member = lastShownList.get(index.getZeroBased());
             member.addSession(toAdd);
-            model.setMember(member, member);
         }
 
+        // Hack to force refresh without focus being needed, since model.setMember doesn't quite work here
+        model.updateFilteredMemberList(PREDICATE_SHOW_NO_MEMBERS);
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
         return new CommandResult(String.format(MESSAGE_SUCCESS,
-                toAdd.getSessionName().toString(),
-                toAdd.getDate().toString(),
-                toAdd.getPoints().getValue(),
+                toAdd.getSessionName().sessionName,
+                toAdd.getDate().fullDate,
+                toAdd.getPoints().points,
                 memberIndexes.size()));
     }
 

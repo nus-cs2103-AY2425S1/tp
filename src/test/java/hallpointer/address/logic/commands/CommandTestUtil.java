@@ -9,9 +9,6 @@ import static hallpointer.address.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static hallpointer.address.testutil.Assert.assertThrows;
-import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
-import static hallpointer.address.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
-import static hallpointer.address.testutil.TypicalIndexes.INDEX_THIRD_MEMBER;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

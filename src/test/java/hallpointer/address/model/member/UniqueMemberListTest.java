@@ -18,9 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import hallpointer.address.model.member.exceptions.DuplicateMemberException;
 import hallpointer.address.model.member.exceptions.MemberNotFoundException;
-import hallpointer.address.model.session.UniqueSessionList;
 import hallpointer.address.testutil.MemberBuilder;
-import javafx.collections.ObservableList;
 
 public class UniqueMemberListTest {
 

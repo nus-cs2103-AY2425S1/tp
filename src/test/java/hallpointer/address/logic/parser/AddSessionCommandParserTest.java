@@ -5,35 +5,22 @@ import static hallpointer.address.logic.commands.CommandTestUtil.DATE_DESC_MEETI
 import static hallpointer.address.logic.commands.CommandTestUtil.DATE_DESC_REHEARSAL;
 import static hallpointer.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
 import static hallpointer.address.logic.commands.CommandTestUtil.INVALID_MEMBER_INDEX_DESC;
-import static hallpointer.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static hallpointer.address.logic.commands.CommandTestUtil.INVALID_POINTS_DESC;
-import static hallpointer.address.logic.commands.CommandTestUtil.INVALID_ROOM_DESC;
 import static hallpointer.address.logic.commands.CommandTestUtil.INVALID_SESSION_NAME_DESC;
-import static hallpointer.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static hallpointer.address.logic.commands.CommandTestUtil.INVALID_TELEGRAM_DESC;
 import static hallpointer.address.logic.commands.CommandTestUtil.MEMBER_INDEX_DESC_ONE;
 import static hallpointer.address.logic.commands.CommandTestUtil.MEMBER_INDEX_DESC_THREE;
 import static hallpointer.address.logic.commands.CommandTestUtil.MEMBER_INDEX_DESC_TWO;
-import static hallpointer.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.POINTS_DESC_MEETING;
 import static hallpointer.address.logic.commands.CommandTestUtil.POINTS_DESC_REHEARSAL;
 import static hallpointer.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static hallpointer.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static hallpointer.address.logic.commands.CommandTestUtil.ROOM_DESC_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.SESSION_NAME_DESC_MEETING;
 import static hallpointer.address.logic.commands.CommandTestUtil.SESSION_NAME_DESC_REHEARSAL;
-import static hallpointer.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static hallpointer.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static hallpointer.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_DATE_MEETING;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_MEMBER_INDEX_ONE;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_MEMBER_INDEX_TWO;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_POINTS_MEETING;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ROOM_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_SESSION_NAME_MEETING;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_POINTS;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
@@ -41,7 +28,6 @@ import static hallpointer.address.logic.parser.CommandParserTestUtil.assertParse
 import static hallpointer.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 import static hallpointer.address.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
-import static hallpointer.address.testutil.TypicalIndexes.INDEX_THIRD_MEMBER;
 import static hallpointer.address.testutil.TypicalSessions.REHEARSAL;
 
 import java.util.Arrays;
@@ -157,8 +143,8 @@ public class AddSessionCommandParserTest {
         indexSet = new HashSet<Index>(Arrays.asList(INDEX_FIRST_MEMBER, INDEX_SECOND_MEMBER, INDEX_FIRST_MEMBER));
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + SESSION_NAME_DESC_REHEARSAL
                 + DATE_DESC_REHEARSAL + POINTS_DESC_REHEARSAL
-                + MEMBER_INDEX_DESC_ONE + MEMBER_INDEX_DESC_TWO + MEMBER_INDEX_DESC_ONE
-                , new AddSessionCommand(expectedSession, indexSet));
+                + MEMBER_INDEX_DESC_ONE + MEMBER_INDEX_DESC_TWO + MEMBER_INDEX_DESC_ONE,
+                new AddSessionCommand(expectedSession, indexSet));
     }
 
     @Test
