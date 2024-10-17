@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<StackPane fx:id="placeHolder" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/17"
-    xmlns:fx="http://javafx.com/fxml/1">
-  <TextArea fx:id="resultDisplay" editable="false" styleClass="result-display"/>
+<StackPane
+        fx:id="placeHolder"
+        prefHeight="355.0"
+        prefWidth="693.0"
+        style="-fx-background-color: #121212; -fx-padding: 15; -fx-border-radius: 10;"
+        styleClass="pane-with-border"
+        xmlns="http://javafx.com/javafx/17.0.2-ea"
+        xmlns:fx="http://javafx.com/fxml/1">
+
+  <TextArea
+          fx:id="resultDisplay"
+          editable="false"
+          prefWidth="663.0"
+          wrapText="true"
+          style="-fx-background-color: #1a1a1a;
+               -fx-text-fill: #FFD700;
+               -fx-font-size: 16;
+               -fx-font-family: 'Georgia';
+               -fx-border-color: #1a1a1a;
+               -fx-border-radius: 8;
+               -fx-padding: 12;"
+          styleClass="result-display" />
+
 </StackPane>
