@@ -28,8 +28,6 @@ import seedu.address.model.tag.Tag;
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
-    private static final String PHONE_VALIDATION_REGEX = "\\d{8}";
-
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
