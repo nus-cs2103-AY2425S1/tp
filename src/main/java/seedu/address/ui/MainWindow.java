@@ -134,6 +134,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        personDetailView = new PersonDetailView();
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this::handleSelectedPerson);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
@@ -151,7 +153,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // Displays the first person in the list if exists onto the PersonDetailView
         if (!logic.getFilteredPersonList().isEmpty()) {
-            personDetailView = new PersonDetailView(logic.getFilteredPersonList().get(0));
+            personDetailView.update(logic.getFilteredPersonList().get(0));
             personDetailViewPlaceholder.getChildren().setAll(personDetailView.getRoot());
         }
     }
@@ -163,7 +165,7 @@ public class MainWindow extends UiPart<Stage> {
      * @param person The selected person to display in the detail view.
      */
     private void handleSelectedPerson(Person person) {
-        personDetailView = new PersonDetailView(person);
+        personDetailView.update(person);
         personDetailViewPlaceholder.getChildren().setAll(personDetailView.getRoot());
     }
 
