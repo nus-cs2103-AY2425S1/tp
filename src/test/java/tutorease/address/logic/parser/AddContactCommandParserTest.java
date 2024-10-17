@@ -6,6 +6,7 @@ import static tutorease.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static tutorease.address.logic.commands.CommandTestUtil.ADDRESS_DESC_MEG;
 import static tutorease.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static tutorease.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static tutorease.address.logic.commands.CommandTestUtil.EMAIL_DESC_MEG;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -14,7 +15,6 @@ import static tutorease.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static tutorease.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static tutorease.address.logic.commands.CommandTestUtil.NAME_DESC_MEG;
-import static tutorease.address.logic.commands.CommandTestUtil.EMAIL_DESC_MEG;
 import static tutorease.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static tutorease.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static tutorease.address.logic.commands.CommandTestUtil.PHONE_DESC_MEG;
@@ -51,8 +51,8 @@ import org.junit.jupiter.api.Test;
 import tutorease.address.logic.Messages;
 import tutorease.address.logic.commands.AddContactCommand;
 import tutorease.address.model.person.Address;
-import tutorease.address.model.person.Guardian;
 import tutorease.address.model.person.Email;
+import tutorease.address.model.person.Guardian;
 import tutorease.address.model.person.Name;
 import tutorease.address.model.person.Person;
 import tutorease.address.model.person.Phone;
@@ -89,7 +89,8 @@ public class AddContactCommandParserTest {
 
 
         // multiple tags - all accepted
-        Guardian expectedGuardianMultipleTags = new GuardianBuilder(MEG).withTags(VALID_TAG_MENTOR, VALID_TAG_SUPPORTIVE)
+        Guardian expectedGuardianMultipleTags = new GuardianBuilder(MEG)
+                .withTags(VALID_TAG_MENTOR, VALID_TAG_SUPPORTIVE)
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_MEG + PHONE_DESC_MEG + EMAIL_DESC_MEG + ADDRESS_DESC_MEG
