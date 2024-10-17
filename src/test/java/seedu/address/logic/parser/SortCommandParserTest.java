@@ -3,15 +3,13 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.Comparator;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-import java.util.Comparator;
-
 import seedu.address.model.person.Person;
-
 public class SortCommandParserTest {
 
     private final SortCommandParser parser = new SortCommandParser();
