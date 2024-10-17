@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_CONCERTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBookConcerts;
 import static seedu.address.testutil.TypicalConcerts.COACHELLA;
 import static seedu.address.testutil.TypicalConcerts.GLASTONBURY;
-import static seedu.address.testutil.TypicalConcerts.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,8 +27,8 @@ import seedu.address.model.concert.Concert;
  */
 public class FindConcertCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBookConcerts(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBookConcerts(), new UserPrefs());
 
     @Test
     public void equals() {
