@@ -25,7 +25,7 @@ public class Person {
     private final Address address;
     private final Organisation organisation;
     private final Set<Tag> tags = new HashSet<>();
-    private Priority priority;
+    private final Priority priority;
 
     /**
      * Every field must be present and not null.
