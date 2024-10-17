@@ -4,9 +4,9 @@ title: "User Guide"
 pageNav: 3
 ---
 
-# AB-3 User Guide
+# Bridal Boss User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Bridal Boss is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Bridal Boss can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -137,7 +137,7 @@ View the contact of a specified person from the address book.
 
 Format: `view KEYWORD`
 
-* This command is case-insensitive. e.g `alex` will match `Alex`
+* This command is case-insensitive. e.g `alex tan` will match `Alex Tan`
 * The keyword can be either the full name (consisting multiple words) or partial name (consisting of only one word).
 * Viewing the full name will match the exact name given e.g. `Alex Tan` will only give `Alex Tan`
 * Viewing partial name will find all contacts that has names containing the keyword e.g. `Alex` will give `Alex Tan` and `Alex Yeo`
