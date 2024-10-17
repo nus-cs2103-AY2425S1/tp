@@ -98,7 +98,7 @@ public class ParserUtil {
     public static RentalDate parseRentalDate(String rentalDate) throws ParseException {
         requireNonNull(rentalDate);
         String trimmedRentalDate = rentalDate.trim();
-        if (!RentalDate.isValidRentalDate(trimmedRentalDate)) {
+        if (!RentalDate.isValidRentalDate(trimmedRentalDate) || !RentalDate.isValidDateTime(trimmedRentalDate)) {
             throw new ParseException(RentalDate.MESSAGE_CONSTRAINTS);
         }
         return new RentalDate(trimmedRentalDate);

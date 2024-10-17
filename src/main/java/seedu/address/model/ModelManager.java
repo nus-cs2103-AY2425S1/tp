@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -26,7 +28,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
     private final ObservableList<RentalInformation> visibleRentalInformationList;
-    private Client lastViewedClient = null;
+    private final ObjectProperty<Client> lastViewedClient = new SimpleObjectProperty<>();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -155,13 +157,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Client getLastViewedClient() {
+    public ObjectProperty<Client> getLastViewedClient() {
         return lastViewedClient;
     }
 
     @Override
     public void setLastViewedClient(Client client) {
-        this.lastViewedClient = client;
+        this.lastViewedClient.set(client);
     }
 
     @Override

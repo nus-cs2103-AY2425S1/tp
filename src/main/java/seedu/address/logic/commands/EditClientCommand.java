@@ -89,7 +89,7 @@ public class EditClientCommand extends Command {
         model.setPerson(clientToEdit, editedClient);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        if (clientToEdit.equals(model.getLastViewedClient())) {
+        if (clientToEdit.equals(model.getLastViewedClient().get())) {
             model.setLastViewedClient(editedClient);
         }
 

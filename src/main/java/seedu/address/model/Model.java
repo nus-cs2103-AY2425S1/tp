@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Predicate;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
@@ -107,7 +108,7 @@ public interface Model {
      * displayed in the UI.
      * Returns {@code null} if no client has been viewed or the last viewed client has been deleted.
      */
-    Client getLastViewedClient();
+    ObjectProperty<Client> getLastViewedClient();
 
     /**
      * Sets the last viewed client of this model.

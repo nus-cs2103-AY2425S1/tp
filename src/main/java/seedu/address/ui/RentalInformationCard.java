@@ -41,6 +41,8 @@ public class RentalInformationCard extends UiPart<Region> {
     private Label deposit;
     @FXML
     private Label customerList;
+    @FXML
+    private Label ownerName;
 
     /**
      * Creates a {@code RentalInformationCard} with the given {@code RentalInformation} and index to display.
