@@ -12,8 +12,10 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
+import seedu.address.model.project.ProjectId;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -111,6 +113,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasEmployeeId(EmployeeId employeeId) {
+        requireNonNull(employeeId);
+        return addressBook.hasEmployeeId(employeeId);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -132,6 +140,12 @@ public class ModelManager implements Model {
     public boolean hasProject(Project project) {
         requireNonNull(project);
         return addressBook.hasProject(project);
+    }
+
+    @Override
+    public boolean hasProjectId(ProjectId projectId) {
+        requireNonNull(projectId);
+        return addressBook.hasProjectId(projectId);
     }
 
     @Override

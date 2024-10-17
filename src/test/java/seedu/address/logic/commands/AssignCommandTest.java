@@ -27,8 +27,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
+import seedu.address.model.project.ProjectId;
 import seedu.address.testutil.AssignmentBuilder;
 
 public class AssignCommandTest {
@@ -62,8 +64,10 @@ public class AssignCommandTest {
 
     @Test
     public void equals() {
-        Assignment alphaAlice = new AssignmentBuilder().withProject(ALPHA).withPerson(ALICE).build();
-        Assignment betaBenson = new AssignmentBuilder().withProject(BETA).withPerson(BENSON).build();
+        Assignment alphaAlice = new AssignmentBuilder().withProjectId(ALPHA.getId().toString())
+                .withEmployeeId(ALICE.getEmployeeId().toString()).build();
+        Assignment betaBenson = new AssignmentBuilder().withProjectId(BETA.getId().toString())
+                .withEmployeeId(BENSON.getEmployeeId().toString()).build();
         AssignCommand addAlphaAliceCommand = new AssignCommand(alphaAlice);
         AssignCommand addBetaBensonCommand = new AssignCommand(betaBenson);
 
@@ -87,7 +91,10 @@ public class AssignCommandTest {
     @Test
     public void toStringMethod() {
         AssignCommand assignCommand = new AssignCommand(ALICE_ALPHA);
-        String expected = AssignCommand.class.getCanonicalName() + "{toAssign=" + ALICE_ALPHA + "}";
+        String expected = AssignCommand.class.getCanonicalName() + "{assignmentId="
+                + ALICE_ALPHA.getAssignmentId().toString() + ", projectId=" + ALICE_ALPHA.getProjectId().toString()
+                + ", employeeId=" + ALICE_ALPHA.getEmployeeId().toString() + "}";
+
         assertEquals(expected, assignCommand.toString());
     }
 
@@ -161,6 +168,11 @@ public class AssignCommandTest {
         }
 
         @Override
+        public boolean hasEmployeeId(EmployeeId employeeId) {
+            return true;
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -173,6 +185,11 @@ public class AssignCommandTest {
         @Override
         public boolean hasProject(Project project) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasProjectId(ProjectId projectId) {
+            return true;
         }
 
         @Override

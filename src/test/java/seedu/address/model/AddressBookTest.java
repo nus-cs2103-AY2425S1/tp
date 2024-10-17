@@ -70,14 +70,38 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasEmployeeId_employeeIdNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasEmployeeId(ALICE.getEmployeeId()));
+    }
+
+    @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
         assertTrue(addressBook.hasPerson(ALICE));
     }
 
     @Test
+    public void hasEmployeeId_employeeIdInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        assertTrue(addressBook.hasEmployeeId(ALICE.getEmployeeId()));
+    }
+
+    @Test
+    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(addressBook.hasPerson(editedAlice));
+    }
+
+    @Test
     public void hasProject_projectNotInAddressBook_returnsFalse() {
         assertFalse(addressBook.hasProject(ALPHA));
+    }
+
+    @Test
+    public void hasProjectId_projectIdNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasProjectId(ALPHA.getId()));
     }
 
     @Test
@@ -88,11 +112,10 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+    public void hasProjectId_projectIdInAddressBook_returnsTrue() {
+        addressBook.addProject(ALPHA);
+        addressBook.getProjectList();
+        assertTrue(addressBook.hasProjectId(ALPHA.getId()));
     }
 
     @Test
