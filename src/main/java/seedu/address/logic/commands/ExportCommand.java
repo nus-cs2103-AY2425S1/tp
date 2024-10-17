@@ -2,15 +2,16 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -47,46 +48,41 @@ public class ExportCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         String jsonFilePath = "data/addressbook.json";
-        String csvFilePath = "data/output.csv";
+        String csvFilePath = "data/addressbook.csv";
 
         try {
             List<Map<String, String>> jsonData = readAndParseJson(jsonFilePath);
             Set<String> headers = extractHeaders(jsonData);
             writeCsvFile(jsonData, headers, csvFilePath);
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return new CommandResult(SUCCESS_MESSAGE);
     }
 
-    private static List<Map<String, String>> readAndParseJson(String filePath) throws FileNotFoundException {
+    private static List<Map<String, String>> readAndParseJson(String filePath) throws IOException {
         List<Map<String, String>> jsonData = new ArrayList<>();
-        StringBuilder json = new StringBuilder();
+        String jsonString = new String(Files.readAllBytes(Paths.get(filePath)));
 
-        try (Scanner scanner = new Scanner(new File(filePath))) {
-            while (scanner.hasNextLine()) {
-                json.append(scanner.nextLine());
+        Pattern personPattern = Pattern.compile("\\{([^{}]+)}");
+        Matcher personMatcher = personPattern.matcher(jsonString);
+
+        while (personMatcher.find()) {
+            String personString = personMatcher.group(1);
+            Map<String, String> personData = new LinkedHashMap<>();
+            Pattern kvPattern = Pattern.compile("\"(\\w+)\"\\s*:\\s*\"([^\"]*)\"");
+            Matcher kvMatcher = kvPattern.matcher(personString);
+            while (kvMatcher.find()) {
+                String key = kvMatcher.group(1);
+                String value = kvMatcher.group(2);
+                personData.put(key, value);
+            }
+
+            if (!personData.isEmpty()) {
+                jsonData.add(personData);
             }
         }
 
-        // Regex to match key-value pairs
-        Pattern pattern = Pattern.compile("\"(\\w+)\"\\s*:\\s*\"([^\"]*)\"");
-        Matcher matcher = pattern.matcher(json);
-
-        Map<String, String> currentObject = new LinkedHashMap<>();
-        while (matcher.find()) {
-            String key = matcher.group(1);
-            String value = matcher.group(2);
-
-            if (key.equals("id") && !currentObject.isEmpty()) {
-                jsonData.add(currentObject);
-                currentObject = new LinkedHashMap<>();
-            }
-            currentObject.put(key, value);
-        }
-        if (!currentObject.isEmpty()) {
-            jsonData.add(currentObject);
-        }
         return jsonData;
     }
 
@@ -100,11 +96,8 @@ public class ExportCommand extends Command {
 
     private static void writeCsvFile(List<Map<String, String>> jsonData, Set<String> headers, String csvFilePath)
             throws FileNotFoundException {
-        try (PrintWriter writer = new PrintWriter(new File(csvFilePath))) {
-            // Write headers
+        try (PrintWriter writer = new PrintWriter(csvFilePath)) {
             writer.println(String.join(",", headers));
-
-            // Write data
             for (Map<String, String> row : jsonData) {
                 List<String> rowData = new ArrayList<>();
                 for (String header : headers) {
