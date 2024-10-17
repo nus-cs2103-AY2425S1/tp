@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.DelMedConCommand;
@@ -36,7 +37,7 @@ public class DelMedConCommandParser implements Parser<DelMedConCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_MEDCON);
 
         // Check if NRIC is provided
-        if (!argMultimap.getValue(PREFIX_NRIC).isPresent()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NRIC, PREFIX_MEDCON) || !argMultimap.getPreamble().isEmpty()) {
             logger.warning("NRIC not provided in DelMedConCommand arguments.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelMedConCommand.MESSAGE_USAGE));
         }
@@ -58,5 +59,13 @@ public class DelMedConCommandParser implements Parser<DelMedConCommand> {
         }
 
         return new DelMedConCommand(nric, medCons);
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
