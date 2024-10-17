@@ -2,10 +2,13 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.assignment.*;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentName;
+import seedu.address.model.assignment.Deadline;
+import seedu.address.model.assignment.Grade;
+import seedu.address.model.assignment.Status;
 
 import java.time.LocalDate;
 
@@ -63,22 +66,34 @@ public class JsonAdaptedAssignment {
         final AssignmentName modelAssignmentName = new AssignmentName(assignmentName);
 
         if (deadline == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LocalDate.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Deadline.class.getSimpleName()));
         }
         if (!Deadline.isValidDeadline(deadline)) {
             throw new IllegalValueException(Deadline.MESSAGE_CONSTRAINTS);
         }
         final Deadline modelDeadline = new Deadline(deadline);
 
+        if(submissionStatus == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
+        }
+
         if (!Status.isValidStatus(submissionStatus)) {
             throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
         }
         final Status modelSubmissionStatus = new Status(submissionStatus);
 
+        if(gradingStatus == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
+        }
+
         if (!Status.isValidStatus(gradingStatus)) {
             throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
         }
         final Status modelGradingStatus = new Status(gradingStatus);
+
+        if(grade == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Grade.class.getSimpleName()));
+        }
 
         if (!Grade.isValidGrade(grade)) {
             throw new IllegalValueException(Grade.MESSAGE_CONSTRAINTS);
