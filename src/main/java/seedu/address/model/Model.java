@@ -104,9 +104,13 @@ public interface Model {
 
     /**
      * Returns the last client viewed by the {@code rview} command, whose list of rental information is currently
-     * displayed in the ui.
+     * displayed in the UI.
+     * Returns {@code null} if no client has been viewed or the last viewed client has been deleted.
      */
     Client getLastViewedClient();
 
+    /**
+     * Sets the last viewed client of this model.
+     */
     void setLastViewedClient(Client client);
 }

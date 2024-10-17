@@ -43,6 +43,12 @@ public class DeleteClientCommand extends Command {
 
         Client clientToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(clientToDelete);
+
+        if (clientToDelete.equals(model.getLastViewedClient())) {
+            model.updateVisibleRentalInformationList(List.of());
+            model.setLastViewedClient(null);
+        }
+
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(clientToDelete)));
     }
 
